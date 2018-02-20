@@ -312,23 +312,23 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   if (!empty($id)) {
     $section_tids = taxonomy_get_parents_all($id);
     $section_tids = array_reverse($section_tids);
-    
-    if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
+
+    if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"><span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
     }
     else {
-			$last_section = end($section_tids);
+      $last_section = end($section_tids);
       foreach ($section_tids as $chunks) {
-				if ($last_section->tid == $chunks->tid) {
-						$section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
-            . '<span itemprop="title">' . $chunks->name . '</span></div>';
-				} else {
-						$section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
-            . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
-				}        
+        if ($last_section->tid == $chunks->tid) {
+          $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
+              . '<span itemprop="title">' . $chunks->name . '</span></div>';
+        }
+        else {
+          $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
+              . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+        }
       }
     }
-    
   }
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
     if (empty($isMobile)) {
