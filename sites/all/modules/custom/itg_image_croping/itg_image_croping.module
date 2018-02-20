@@ -1116,6 +1116,13 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     '#value' => ($is_solr == 1) ? $is_solr : '',
     '#attributes' => array('id' => 'is_solr', 'name' => 'is_solr'),
   );
+  
+  // For MOS Image
+  if($content_name == 'bodyeditor') {
+    $image_height = '';
+    $image_width = '';
+  }
+  
   $form['image_original_hight'] = array(
     '#type' => 'hidden',
     '#value' => ($image_height) ? $image_height : '',
@@ -1126,6 +1133,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     '#value' => ($image_width) ? $image_width : '',
     '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
   );
+
   $form['data_field_name'] = array(
     '#type' => 'hidden',
     '#value' => ($field_name) ? $field_name : '',
