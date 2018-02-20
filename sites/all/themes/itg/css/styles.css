@@ -1097,7 +1097,7 @@ header {
 .file-widget span.file-size {
   vertical-align: top; }
 .file-widget .form-submit[value="Remove"] {
-  background: transparent none repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: medium none;
   color: #ee4d4d;
   font-size: 13px;
@@ -6734,7 +6734,7 @@ section.sidebar .block-itg-ads {
     height: 705px;
     overflow: hidden; }
   .auto-layout-page .auto-block-3 .itg-widget-child .droppable {
-    height: 245px;
+    height: 345px;
     overflow: hidden; }
   .auto-layout-page .auto-block-1 .featured-news {
     border: none; }
@@ -6796,7 +6796,7 @@ section.sidebar .block-itg-ads {
     .auto-layout-page .auto-road-trip .trending-videos li .video-none:after {
       background: none; }
     .auto-layout-page .auto-road-trip .trending-videos li.trending-videos-list {
-      padding: 15px 0; }
+      padding: 13px 0; }
   .auto-layout-page .auto_reviews .widget-title {
     margin-bottom: 5px; }
   .auto-layout-page .auto-block_5 a {
@@ -7686,7 +7686,7 @@ section.sidebar .block-itg-ads {
 
 #block-views-event-subsite-speaker-block .views-row,
 #block-views-past-speaker-event-block .views-row {
-  width: 33.33333%;
+  width: 33.3333333333%;
   float: left; }
   #block-views-event-subsite-speaker-block .views-row .view-content,
   #block-views-past-speaker-event-block .views-row .view-content {
@@ -9441,7 +9441,7 @@ section.sidebar .block-itg-ads {
 .election-page .election-graph .col-el-2 {
   width: 50%; }
 .election-page .election-graph .col-el-3 {
-  width: 33.33333%; }
+  width: 33.3333333333%; }
 .election-page .election-graph .col-el-4 {
   width: 25%; }
 .election-page .election-graph .col-el-5 {
@@ -14018,5 +14018,8 @@ ul.pron-cons-img li img {
 .page-signup form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable, .education-layout-page #block-formblock-ask-an-expert .col-md-12.col-sm-6.col-xs-12.form-submit .itg-widget-child.shadow-on .droppable, #block-formblock-ask-an-expert .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-submit .itg-widget-child.shadow-on .droppable, .education-layout-page .col-md-12.col-sm-6.col-xs-12.question-heading .itg-widget-child.shadow-on .droppable {
   height: 314px;
   min-height: initial; }
+
+.auto-layout-page .auto-road-trip .trending-videos li:nth-child(1) {
+  padding-top: 0px; }
 
 /*# sourceMappingURL=styles.css.map */
