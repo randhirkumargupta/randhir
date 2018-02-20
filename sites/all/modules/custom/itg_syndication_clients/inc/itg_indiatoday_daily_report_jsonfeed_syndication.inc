@@ -34,7 +34,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid');
-    print strtr((string) $query, $query->arguments());die();
+    //print strtr((string) $query, $query->arguments());die();
     //$result_vedio = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     // query for story
