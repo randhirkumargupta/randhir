@@ -34,7 +34,8 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid');
-    $result_vedio = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    print strtr((string) $query, $query->arguments());die();
+    //$result_vedio = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     // query for story
     $query = "";
@@ -64,7 +65,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid');
-    $result_story = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    //$result_story = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     // query for gallery
     $query = "";
@@ -94,7 +95,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->condition('n.type', 'photogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid');
-    $result_gallery = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    //$result_gallery = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     $xml = "";
     $xml = '<?xml version="1.0" encoding="UTF-8"?><data>';
