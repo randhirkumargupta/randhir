@@ -349,7 +349,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
         );
         $subsec_options = array('' => '- Select -');
         if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
-            $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type'], $menu_form_id);
+            $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
             $form['container'][$i]['section']['title'] = array(
                 '#type' => 'select',
                 '#title' => '',
@@ -364,7 +364,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#default_value' => $d_row->title,
             );
             if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
-                $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title'], $menu_form_id);
+                $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
             }
         } else {
             $form['container'][$i]['section']['title'] = array(
@@ -578,18 +578,18 @@ function ajax_subsection_callback($form, $form_state) {
  * @param int $term_id
  * @return array
  */
-function _get_section_options($term_id, $menu_form_id) {
+function _get_section_options($term_id, $menu_form_id, $subsec_options) {
     $option_arr = array('' => '- Select -');
     
-       if($term_id == 1206553 || $term_id == '1206553'){
+       if(($term_id == 1206553 || $term_id == '1206553') && $subsec_options ==1){
         //$option_arr = array();
         $option_arr[1206553] = 'Programes';
     }
-    elseif($term_id == 1206552 || $term_id == '1206552'){
+    elseif(($term_id == 1206552 || $term_id == '1206552') && $subsec_options ==1){
         //$option_arr = array();
         $option_arr[1206552] = 'Videos';
     }
-    elseif($term_id == 1208521 || $term_id == '1208521'){
+    elseif(($term_id == 1208521 || $term_id == '1208521') && && $subsec_options ==1){
         //$option_arr = array();
         $option_arr[1208521] = 'Photos';
     }
