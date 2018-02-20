@@ -220,7 +220,7 @@ function story_xml($result = NULL) {
       $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
       $xml .= '</item>';
     }
-    $xml .= '<stories>';
+    $xml .= '</stories>';
   }
   return $xml;
 }
