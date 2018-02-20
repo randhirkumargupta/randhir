@@ -103,8 +103,8 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $xml .= story_xml($result_story);
     $xml .= gallery_xml($result_gallery);
     $xml .= '</data>';
-    //$xml_path = 'public://rss-feeds/xml_data/indiatoday/it/daily_report/';
-    $xml_path = 'public://rss-feeds/xml_data/celtick/it/stories/';
+    $xml_path = 'public://rss-feeds/xml_data/indiatoday/it/daily_report/';
+    //$xml_path = 'public://rss-feeds/xml_data/celtick/it/stories/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
