@@ -14,7 +14,7 @@ function features_for_story_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_story';
-  $strongarm->value = 'edit-menu';
+  $strongarm->value = 'edit-content-theme';
   $export['additional_settings__active_tab_story'] = $strongarm;
 
   $strongarm = new stdClass();
