@@ -806,7 +806,8 @@ background:none;
 .section-pti-feed .view-category-wise-content-list .catagory-listing{border-bottom: 1px dotted #ccc; }
 .section-pti-feed .view-category-wise-content-list .item-list{clear: both;margin-top: 20px;overflow: hidden;}
 
-.magazin-lhs-top .magazin-bottom ul li{float:none !important;}
+.magazin-lhs-top .magazin-bottom ul li{float:none !important; margin-bottom:5px;}
+.magazin-lhs-top .magazin-bottom ul li h3{margin-top:0px;}
 .story-section .social-list li i.fa-comment{padding:10px 0}
 .story-section .social-list li.itg-comment-count i.fa-comment{padding:0}
 .story-section .social-list li:last-child { line-height: inherit;}
