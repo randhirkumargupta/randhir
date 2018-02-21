@@ -179,6 +179,15 @@
               }
               return false;
             });
+            
+            // for bestcollege-survey wise
+            $('.form-item-serverydir-stream select').on('change', function () {
+              var url = $(this).val(); // get selected value
+              if (url && url != '_none') { // require a URL
+                  window.location = url; // redirect
+              }
+              return false;
+            });
 
             // for year
             $(".bestcollege_year_wise").change(function() {
