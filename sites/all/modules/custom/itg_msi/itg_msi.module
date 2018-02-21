@@ -1035,12 +1035,12 @@ function itg_msi_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][2]['value'][':field_data_field_issue_title_field_issue_title_value'] = itg_msi_last_week_issue();
   }
   if ($view->name == 'magazine_top_story' && $view->current_display == 'block') {
-    $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value4'];
+    /*$issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value4'];
     $chk_wid_val = itg_msi_check_magazine_widget($issue_date);
     if (empty($chk_wid_val)) {
       unset($query->where[1]['conditions'][4]);
       unset($query->orderby[0]);
-    }
+    }*/
   }
   elseif ($view->name == 'magazine_top_story' && $view->current_display == 'block_3') {
     $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value2'];
@@ -1051,7 +1051,7 @@ function itg_msi_views_query_alter(&$view, &$query) {
     }
   }
   elseif ($view->name == 'magazine_top_story' && $view->current_display == 'block_1') {
-    $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value2'];
+    /*$issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value2'];
     $chk_wid_val = itg_msi_check_magazine_widget($issue_date);
     if (!empty($chk_wid_val)) {
       unset($query->orderby[1]);
@@ -1059,7 +1059,7 @@ function itg_msi_views_query_alter(&$view, &$query) {
     else {
       unset($query->where[1]['conditions'][4]);
       unset($query->orderby[0]);
-    }
+    }*/
   }
   elseif ($view->name == 'magazine_top_story' && $view->current_display == 'block_2') {
     $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value'];
