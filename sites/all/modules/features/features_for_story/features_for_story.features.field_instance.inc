@@ -3280,7 +3280,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_extra_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (88 x 66)',
+    'description' => 'Image Size (88 x 50)',
     'display' => array(
       'amp' => array(
         'label' => 'above',
@@ -3336,6 +3336,8 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -5169,7 +5171,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (170 x 127)',
+    'description' => 'Image Size (170 x 96)',
     'display' => array(
       'amp' => array(
         'label' => 'above',
@@ -5225,6 +5227,8 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -6929,11 +6933,11 @@ function features_for_story_field_default_field_instances() {
   t('Highlights');
   t('Image');
   t('Image Size (1024 x 1024)');
-  t('Image Size (170 x 127)');
+  t('Image Size (170 x 96)');
   t('Image Size (370 x 208)');
   t('Image Size (483x271)');
   t('Image Size (647 x 363)');
-  t('Image Size (88 x 66)');
+  t('Image Size (88 x 50)');
   t('Issue based story');
   t('Issue date');
   t('Kicker image caption');

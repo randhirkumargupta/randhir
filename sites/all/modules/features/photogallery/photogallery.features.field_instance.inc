@@ -2041,7 +2041,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['node-photogallery-field_story_extra_small_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (88 x 66)',
+    'description' => 'Image Size (88 x 50)',
     'display' => array(
       'amp' => array(
         'label' => 'above',
@@ -2097,6 +2097,7 @@ function photogallery_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
             'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
@@ -2814,7 +2815,7 @@ function photogallery_field_default_field_instances() {
   $field_instances['node-photogallery-field_story_small_image'] = array(
     'bundle' => 'photogallery',
     'deleted' => 0,
-    'description' => 'Image Size (170 x 127)',
+    'description' => 'Image Size (170 x 96)',
     'display' => array(
       'amp' => array(
         'label' => 'above',
@@ -2870,6 +2871,8 @@ function photogallery_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -3608,11 +3611,11 @@ function photogallery_field_default_field_instances() {
   t('Image Caption');
   t('Image Enable');
   t('Image Size (1024x1024)');
-  t('Image Size (170 x 127)');
+  t('Image Size (170 x 96)');
   t('Image Size (370 x 208)');
   t('Image Size (483 x 271)');
   t('Image Size (647 x 363)');
-  t('Image Size (88 x 66)');
+  t('Image Size (88 x 50)');
   t('Image Size (88x66)');
   t('Image Syndication');
   t('Image_id');

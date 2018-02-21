@@ -529,9 +529,12 @@ function itg_workflow_node_access($node, $op, $account) {
 
 
   if (isset($node->workbench_moderation['current']->from_state) && $node->workbench_moderation['current']->from_state == 'draft' && $node->workbench_moderation['current']->state == 'draft' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    if ($node->uid != $user->uid) {
-      return NODE_ACCESS_DENY;
-    }
+    //~ if ($node->uid != $user->uid) {
+      //~ return NODE_ACCESS_DENY;
+    //~ }
+    if (!(array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(ADMINISTRATOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) && ($node->uid != $user->uid)) {
+	  return NODE_ACCESS_DENY;
+	}    
   }
 
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
