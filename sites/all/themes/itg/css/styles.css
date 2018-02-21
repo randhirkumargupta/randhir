@@ -1136,7 +1136,7 @@ header {
 .file-widget span.file-size {
   vertical-align: top; }
 .file-widget .form-submit[value="Remove"] {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  background: transparent none repeat scroll 0 0;
   border: medium none;
   color: #ee4d4d;
   font-size: 13px;
@@ -7744,7 +7744,7 @@ section.sidebar .block-itg-ads {
 
 #block-views-event-subsite-speaker-block .views-row,
 #block-views-past-speaker-event-block .views-row {
-  width: 33.3333333333%;
+  width: 33.33333%;
   float: left; }
   #block-views-event-subsite-speaker-block .views-row .view-content,
   #block-views-past-speaker-event-block .views-row .view-content {
@@ -9499,7 +9499,7 @@ section.sidebar .block-itg-ads {
 .election-page .election-graph .col-el-2 {
   width: 50%; }
 .election-page .election-graph .col-el-3 {
-  width: 33.3333333333%; }
+  width: 33.33333%; }
 .election-page .election-graph .col-el-4 {
   width: 25%; }
 .election-page .election-graph .col-el-5 {
@@ -14088,7 +14088,6 @@ ul.pron-cons-img li img {
 .auto-layout-page .auto-road-trip .trending-videos li:nth-child(1) {
   padding-top: 0px; }
 
-<<<<<<< HEAD
 .front .section-ordering p, .front .trending-videos .trending-videos-list, .front .watch-right-now-video ul li {
   font-family: "OpenSans-Semibold"; }
 
@@ -14099,6 +14098,4 @@ ul.pron-cons-img li img {
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list {
   font-family: "OpenSans-Semibold"; }
 
-=======
->>>>>>> d59380749f1778c58a1e41862feab03536f6f7b6
 /*# sourceMappingURL=styles.css.map */
