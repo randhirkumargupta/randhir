@@ -113,6 +113,13 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_zuppit_latest_story.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['clients/samsung_video_detail/%'] = array(
+    'page callback' => 'client_samsung_video_detail',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_zuppit_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['rss/syndication-article'] = array(
     'page callback' => 'itg_rss_syndication_article',
     'access arguments' => array('access content'),
