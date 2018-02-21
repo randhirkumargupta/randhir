@@ -147,7 +147,7 @@ function client_samsung_video_detail() {
   }
   else {
     $output_array['status_code'] = "0";
-    $output_array['status_message'] = "User Agent is Mismatch";
+    $output_array['status_message'] = "";
   }
   $node = node_load($nid);
   $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
