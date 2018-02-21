@@ -513,7 +513,7 @@
     }
     .view-product .product-wrapper .btn-redeem-points,
     .view-product .product-wrapper .btn-add-cart {
-        font: 600 12px/18px $itg-roboto;
+        font: 600 12px/18px $itg-opensans;
         padding: 5px 5px;
     }
 }
@@ -1177,7 +1177,7 @@
         }
         .select-menu {
             color: #fff;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             width: 95px;
             background: #3c3a3b;
             padding-left: 5px;
@@ -1886,10 +1886,10 @@
         }
     }
     .page-order-confirmation .thankyou-block h2 {
-        font: 500 20px/32px $itg-roboto;
+        font: 500 20px/32px $itg-opensans;
     }
     .page-order-confirmation .order-summary-block h3 {
-        font: 500 18px/28px $itg-roboto;
+        font: 500 18px/28px $itg-opensans;
     }
 }
 
@@ -3115,7 +3115,7 @@
     /*Start Story page css*/
     .story-section {
         h1 {
-            @include font(34px, 42px, 700);
+            @include font(34px, 45px, 700);
         }
         .story-left,
         .story-right {
@@ -3858,7 +3858,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p {
-    font: 400 14px/20px $itg-roboto;
+    font: 400 14px/20px $itg-opensans;
     color: #b4b4b4
 }
 
@@ -3867,7 +3867,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video .view-header h3 {
-    font: 500 14px/35px $itg-roboto;
+    font: 500 14px/35px $itg-opensans;
     margin-bottom: 10px;
     background: #131313;
     height: 35px;
@@ -4066,7 +4066,7 @@
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px $itg-roboto;
+        font: 14px/18px $itg-opensans;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
@@ -4329,7 +4329,7 @@
     text-align: justify;
     font-style: italic;
     color: #8d8d8d;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
 }
 
 .ticket-type-require label:after {
@@ -4448,7 +4448,7 @@
     .personal-list .personal-follow a {
         display: inline-block;
         padding: 10px 20px;
-        font: normal 16px/18px $itg-roboto;
+        font: normal 16px/18px $itg-opensans;
         color: #000;
         position: relative;
         bottom: -1px;
@@ -4552,7 +4552,7 @@
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px $itg-roboto;
+        font: 14px/18px $itg-opensans;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
@@ -4583,7 +4583,7 @@
     }
     #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
         margin: 0 auto;
-        width: 347px;
+        width: 350px;
     }
     #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
     width: 125px;    margin-left:0px;
@@ -4720,7 +4720,7 @@
 	}
 	#block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
 		margin: 0 auto;
-		width: 265px;
+		width: 268px;
 	}
 	#block-itg-layout-manager-header-block .logo {
 		width: 55px;

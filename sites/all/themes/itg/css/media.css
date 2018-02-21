@@ -3,7 +3,11 @@
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
 /*Heading used in Indiatoday site Mobile version*/
-/*Fonts used in Indiatoday site*/
+/*Fonts used in Indiatoday site
+
+$itg-roboto:'Roboto-Regular';
+$itg-robotoslab:'RobotoSlab-Regular';
+ */
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
 /*Border Colors used in Indiatoday site*/
@@ -464,7 +468,7 @@
 
   .view-product .product-wrapper .btn-redeem-points,
   .view-product .product-wrapper .btn-add-cart {
-    font: 600 12px/18px "Roboto-Regular";
+    font: 600 12px/18px "OpenSans-Regular";
     padding: 5px 5px; } }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .sport-home-layout-page .itg-layout-615 .droppable,
@@ -694,7 +698,7 @@
             vertical-align: middle; }
         #block-itg-layout-manager-header-block .navigation .menu li.sponser-link a {
           background: #ffc106;
-          color: #323232; }
+          color: #111; }
     #block-itg-layout-manager-header-block .navigation ul#newlist {
       position: absolute;
       right: 0;
@@ -981,7 +985,7 @@
     height: 60px; }
   #block-itg-menu-manager-third-level-menu .select-menu {
     color: #fff;
-    font-family: "Roboto-Regular";
+    font-family: "OpenSans-Regular";
     width: 95px;
     background: #3c3a3b;
     padding-left: 5px;
@@ -1591,10 +1595,10 @@
     text-align: center; }
 
   .page-order-confirmation .thankyou-block h2 {
-    font: 500 20px/32px "Roboto-Regular"; }
+    font: 500 20px/32px "OpenSans-Regular"; }
 
   .page-order-confirmation .order-summary-block h3 {
-    font: 500 18px/28px "Roboto-Regular"; } }
+    font: 500 18px/28px "OpenSans-Regular"; } }
 @media only screen and (max-width: 767px) {
   /*css start oscar-layout-page */
   .oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
@@ -2597,7 +2601,7 @@
     font-size: 34px;
     font-size: 2.125rem;
     font-weight: 700;
-    line-height: 42px; }
+    line-height: 45px; }
   .story-section .story-left,
   .story-section .story-right {
     float: left; }
@@ -2903,7 +2907,7 @@
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%;
-        font-family: "Roboto-Regular"; }
+        font-family: "OpenSans-Regular"; }
       .view-category-wise-content-list .item-list ul.pager li.pager-item a,
       .view-blog-listing .item-list ul.pager li.pager-item a,
       .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a,
@@ -2914,8 +2918,8 @@
         font-size: 16px;
         font-size: 1rem;
         line-height: 25px;
-        color: #323232;
-        font-family: "Roboto-Regular"; }
+        color: #111;
+        font-family: "OpenSans-Regular"; }
         .view-category-wise-content-list .item-list ul.pager li.pager-item a:hover,
         .view-blog-listing .item-list ul.pager li.pager-item a:hover,
         .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a:hover,
@@ -2936,7 +2940,7 @@
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a,
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a,
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
-        color: #323232;
+        color: #111;
         line-height: 25px; }
       .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last,
       .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first,
@@ -3254,14 +3258,14 @@
   float: right; }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p {
-  font: 400 14px/20px "Roboto-Regular";
+  font: 400 14px/20px "OpenSans-Regular";
   color: #b4b4b4; }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p a {
   color: #b4b4b4; }
 
 #block-views-video-landing-header-block .latest_video .view-header h3 {
-  font: 500 14px/35px "Roboto-Regular";
+  font: 500 14px/35px "OpenSans-Regular";
   margin-bottom: 10px;
   background: #131313;
   height: 35px;
@@ -3439,7 +3443,7 @@
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "Roboto-Regular";
+    font: 14px/18px "OpenSans-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -3639,7 +3643,7 @@
   text-align: justify;
   font-style: italic;
   color: #8d8d8d;
-  font-family: "Roboto-Regular"; }
+  font-family: "OpenSans-Regular"; }
 
 .ticket-type-require label:after {
   content: '*';
@@ -3697,7 +3701,7 @@
   .personal-list .personal-follow a {
     display: inline-block;
     padding: 10px 20px;
-    font: normal 16px/18px "Roboto-Regular";
+    font: normal 16px/18px "OpenSans-Regular";
     color: #000;
     position: relative;
     bottom: -1px; }
@@ -3780,7 +3784,7 @@
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "Roboto-Regular";
+    font: 14px/18px "OpenSans-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -3804,7 +3808,7 @@
 
   #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
     margin: 0 auto;
-    width: 347px; }
+    width: 350px; }
 
   #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
     width: 125px;
@@ -3933,7 +3937,7 @@
 
   #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
     margin: 0 auto;
-    width: 265px; }
+    width: 268px; }
 
   #block-itg-layout-manager-header-block .logo {
     width: 55px;

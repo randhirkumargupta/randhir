@@ -3,7 +3,7 @@
 @import "itg-variables";
 @import "itg-mixins";
 @import "_progressbar";
-@font-face {
+/*@font-face {
     font-family: 'RobotoSlab-Regular';
     src: url('../fonts/RobotoSlab-Regular.eot');
     src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
@@ -19,8 +19,7 @@
     font-style: normal;
 }
 
-
-/*@font-face {
+@font-face {
     font-family: 'Roboto-Medium';
     src: url('../fonts/Roboto-Medium.eot');
     src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
@@ -37,6 +36,50 @@
 }*/
 
 
+@font-face {
+    font-family: 'Merriweather-Bold';
+    src: local('/'), url('../fonts/merriweather-latin-700.woff') format('woff'), url('../fonts/Merriweather-Bold.ttf') format('truetype'), url('../fonts/merriweather-latin-700.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Merriweather-Semibold';
+    src: local('/'), url('../fonts/merriweather-latin-400.woff') format('woff'), url('../fonts/Merriweather-Bold.ttf') format('truetype'), url('../fonts/merriweather-latin-400.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/OpenSans-Regular.eot');
+    src: local('/'), url('../fonts/OpenSans-Regular.woff') format('woff'), url('../fonts/OpenSans-Regular.ttf') format('truetype'), url('../fonts/OpenSans-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('../fonts/OpenSans-Bold.eot');
+    src: local('/'), url('../fonts/OpenSans-Bold.woff') format('woff'), url('../fonts/OpenSans-Bold.ttf') format('truetype'), url('../fonts/OpenSans-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('../fonts/OpenSans-Semibold.eot');
+    src: local('/'), url('../fonts/OpenSans-Semibold.woff') format('woff'), url('../fonts/OpenSans-Semibold.ttf') format('truetype'), url('../fonts/OpenSans-Semibold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+
+
+
 /* Global CSS */
 
 * {
@@ -46,8 +89,8 @@
 }
 
 body {
-    font: 400 14px/18px $itg-robotoslab;
-    color: #333;
+    font: 400 15px/20px $itg-opensans;
+    color: #111;
 }
 
 main {
@@ -58,7 +101,7 @@ h1,
 h2,
 h3,
 h4 {
-    @include itg-font($itg-roboto,
+    @include itg-font($itg-opensans,
     $itg-font-medium);
     word-wrap: break-word;
 }
@@ -68,18 +111,21 @@ button {
 }
 
 h1 {
+    font-family:Merriweather-Bold;
     font-size: $h1-font-size;
     line-height: $h1-line-height;
     font-weight: $itg-font-bold;
 }
 
 h2 {
+    font-family:Merriweather-Bold;
     font-size: $h2-font-size;
     line-height: $h2-line-height;
     font-weight: $itg-font-bold;
 }
 
 h3 {
+    font-family:$itg-opensanssemibold;
     font-size: $h3-font-size;
     line-height: $h3-line-height;
 }
@@ -91,7 +137,7 @@ h4 {
 
 h4.heading {
     color: $heading-blue-color;
-    @include itg-font($itg-roboto,
+    @include itg-font($itg-opensans,
     $itg-font-bold);
     text-transform: uppercase;
     margin-bottom: 15px;
@@ -401,7 +447,7 @@ header {
     }
     a {
         color: #a9a9a9;
-        font-family: $itg-roboto;
+        font-family: $itg-opensanssemibold;
     }
     .header-logo {
         @include pos(relative);
@@ -1437,13 +1483,13 @@ section.sidebar {
 footer {
     margin-top: 40px;
     background: $black-bg;
-    @include itg-font($itg-roboto);
+    @include itg-font($itg-opensans);
     ul {
         @extend .list-none;
     }
     a {
         color: $footer-text-color;
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
     }
     .footer-top {
         .container {
@@ -1538,7 +1584,7 @@ footer {
             }
         }
         h4 {
-            @include itg-font($itg-roboto,
+            @include itg-font($itg-opensans,
             $itg-font-medium);
             color: $white-color;
             text-transform: uppercase;
@@ -1704,7 +1750,7 @@ footer {
     ul {
         @extend .list-none;
     }
-    @include itg-font($itg-roboto);
+    @include itg-font($itg-opensans);
     .big-story-col-1,
     .big-story-col-2 {
         padding: 0 15px;
@@ -2076,7 +2122,7 @@ footer {
         }
     }
     .view-filters {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         color: #b3b3b3;
         margin-bottom: 20px;
     }
@@ -2201,7 +2247,7 @@ footer {
             }
         }
         .other-info {
-            @include itg-font($itg-roboto);
+            @include itg-font($itg-opensans);
             @include font(12px);
             color: #8f8f8f;
             padding-top: 15px;
@@ -2213,7 +2259,7 @@ footer {
         @include pager;
     }
     .attachment {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         border-bottom: 1px solid $border-color;
         .count {
             @include font(19px,
@@ -2318,6 +2364,8 @@ footer {
                     @include font(14px,
                     18px);
                     color: #333;
+                    font-family:$itg-opensanssemibold;
+
                 }
             }
             &:nth-child(2n+1) {
@@ -2415,7 +2463,7 @@ footer {
     .comment-mobile {
         background: #1c1c1c;
         margin:0px -15px 20px;
-        font-family: $itg-roboto;
+        font-family:$itg-opensans;
         text-align: right;
         ul {
             @include display-inline;
@@ -2444,7 +2492,7 @@ footer {
                             margin-top: 0;
                         }
                         span {
-                            font-family: $itg-roboto;
+                            font-family: $itg-opensans;
                         }
                     }
                 }
@@ -2467,7 +2515,7 @@ footer {
     }
     .byline {
         color: #989898;
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         @include font(12px);
         @include clearfix;
         a {
@@ -2583,6 +2631,8 @@ footer {
                 @include font(18px,
                 null,
                 700);
+                color: #bb0a0a;
+                font-family:$itg-opensansbold;
             }
             ul {
                 li {
@@ -2594,7 +2644,7 @@ footer {
                     50%);
                     color: #575757;
                     padding: 5px 0px 5px 12px;
-                    @include font(12px,
+                    @include font(13px,
                     18px);
                     word-wrap: break-word;
                 }
@@ -2608,7 +2658,7 @@ footer {
             .saved-photogallery {
                 background: #fff none repeat scroll 0 0;
                 box-shadow: 0 0 8px #666;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-size: 22px;
                 font-weight: 700;
                 height: 160px;
@@ -2646,7 +2696,7 @@ footer {
                 .photoby-text {
                     color: #aeaeae;
                     @include font(13px);
-                    @include itg-font($itg-roboto);
+                    @include itg-font($itg-opensans);
                     background-color: #222;
                     padding: 3px 10px;
                 }
@@ -2660,8 +2710,8 @@ footer {
         }
         .description {
             padding-top: 25px;
-            @include font(15px,
-            27px);
+            @include font(17px,
+            29px);
             word-wrap: break-word;
             p {
                 padding: 10px 0;
@@ -2687,10 +2737,11 @@ footer {
         .briefcase {
             margin-top: 20px;
             h4 {
-                @include font(16px);
-                color: #323232;
+                @include font(18px);
                 text-transform: uppercase;
                 margin-bottom: 10px;
+                color: #bb0a0a;
+                font-family:$itg-opensansbold;
             }
             ul {
                 li {
@@ -2700,9 +2751,10 @@ footer {
                     0px,
                     $red-color,
                     100%);
-                    @include font(13px);
+                    @include font(14px);
                     margin-bottom: 10px;
                     padding-left: 15px;
+                    line-height: 22px;
                 }
             }
             video {
@@ -2732,7 +2784,7 @@ footer {
                     a {
                         color: #404040;
                         font-size: 11px;
-                        font-family: $itg-roboto;
+                        font-family: $itg-opensans;
                         position: relative;
                         &:before {
                             content: '';
@@ -2810,7 +2862,7 @@ footer {
                     z-index: 1;
                     left: 0;
                     margin-top: -7px;
-                    font-family: $itg-robotoslab;
+                    font-family: $itg-opensans;
                     font-size: 12px;
                     color: #959595;
                     text-transform: uppercase;
@@ -2859,13 +2911,13 @@ footer {
                         background-color: #222;
                         color: #a1a1a1;
                         font-size: 13px;
-                        font-family: $itg-roboto;
+                        font-family:$itg-opensans;
                     }
                 }
                 .photo-description {
                     padding: 10px 0;
                     border-bottom: 1px solid #ddd;
-                    font-family: $itg-roboto;
+                    font-family:$itg-opensans;
                     font-size: 13px;
                     color: #8d8d8d;
                     font-weight: 300;
@@ -2906,7 +2958,7 @@ footer {
                 box-shadow: 2px 2px 0px #aeaeae;
                 text-transform: uppercase;
                 @include font(12px);
-                @include itg-font($itg-robotoslab);
+                @include itg-font($itg-opensans);
                 margin-right: 10px;
                 cursor: pointer;
                 span {
@@ -2939,7 +2991,7 @@ footer {
         }
     }
     .social-list {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         color: #939292;
         @include font(12px);
         border-top: 1px solid $border-color;
@@ -3006,7 +3058,7 @@ footer {
         margin-right: 15px;
         margin-bottom: 5px;
         padding: 13px 10px 13px 15px;
-        font-family: $itg-robotoslab;
+        font-family: $itg-opensans;
         h4 {
             font-family: "Roboto Slab", sans-serif;
             font-size: 20px;
@@ -3043,7 +3095,7 @@ footer {
             text-align: right;
         }
         h2 {
-            font-family: $itg-robotoslab;
+            font-family: $itg-opensans;
             color: #000;
             font-size: 26px;
             &:before,
@@ -3066,7 +3118,7 @@ footer {
         text-align: center;
         padding: 15px 0;
         color: #929292;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         font-size: 16px;
         font-weight: 700;
         #name-dv {
@@ -3178,7 +3230,7 @@ footer {
                     span {
                         display: block;
                         @include font(11px);
-                        font-family: $itg-roboto;
+                        font-family: $itg-opensans;
                     }
                     &.unflag-action {
                         position: relative;
@@ -3262,7 +3314,7 @@ footer {
         }
         .movie-detail {
             div {
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #000;
                 @include clearfix;
                 +div {
@@ -3316,7 +3368,7 @@ footer {
         @include calculate-width(1);
     }
     .byline {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         color: #989898;
         @include font(12px);
         padding-bottom: 10px;
@@ -3349,7 +3401,7 @@ footer {
         .buzz-discription {
             @include font(16px,
             22px);
-            @include itg-font($itg-roboto);
+            @include itg-font($itg-opensans);
             word-wrap: break-word;
         }
         .buzz-img {
@@ -3401,7 +3453,7 @@ footer {
         .photoby {
             background: black;
             color: #aeaeae;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             padding: 5px;
             margin-top: -15px;
         }
@@ -3425,10 +3477,12 @@ footer {
 .related-story-page {
     margin-top: 50px;
     h3 {
-        font-size: 16px;
+        font-size: 18px;
+        color: #bb0a0a;
         text-transform: uppercase;
         font-weight: 700;
         margin-bottom: 5px;
+        font-family:$itg-opensansbold;
     }
     li {
         margin-bottom: 20px;
@@ -3655,7 +3709,7 @@ footer {
     ul {
         @extend .list-none;
     }
-    @include itg-font($itg-roboto);
+    @include itg-font($itg-opensans);
     h1#page-title,
     .container.header-logo {
         @extend .hide;
@@ -3815,7 +3869,7 @@ h1.category-heading {
 .list-grid {
     margin: 20px 0;
     font-size: 18px;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     text-align: right;
     font-weight: 600;
     a {
@@ -3849,19 +3903,19 @@ h1.category-heading {
                 @include font(15px,
                 22px,
                 $itg-font-regular);
-                color: #323232;
+                color: #111;
             }
             p {
-                @include font(14px,
-                19px);
-                color: #696969;
+                @include font(15px,
+                20px);
+                color: #111;
                 display: none;
             }
         }
         span.blog-anchor {
             a {
                 @include font(12px);
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #a00606;
                 line-height: 12px;
                 display: block;
@@ -3940,7 +3994,7 @@ h1.category-heading {
                 @include font(14px,
                 22px);
                 color: #323232;
-                @include itg-font($itg-roboto);
+                @include itg-font($itg-opensans);
             }
         }
     }
@@ -4012,7 +4066,7 @@ h1.category-heading {
         box-shadow: 0px 0px 5px #cecccc;
         @include clearfix;
         padding: 10px;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         overflow: hidden;
     }
     .anchor-left {
@@ -4097,6 +4151,8 @@ h1.category-heading {
         line-height: 22px;
         +.breaking-section {
             border-top: 1px solid $border-color;
+            font-size: 16px;
+            line-height: 27px;
         }
         .breaking-date {
             color: #9f9f9f;
@@ -4297,7 +4353,7 @@ h1.category-heading {
                 border-right: 1px solid #fff;
                 .detail {
                     @include calculate-width(1);
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     .flex-caption {
                         padding: 5px;
                         background: #000;
@@ -4541,7 +4597,7 @@ h1.category-heading {
     .updated-msg {
         @include font(12px);
         color: #8a8a8a;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
     }
     .social-share {
         display: inline-block;
@@ -4584,7 +4640,7 @@ h1.category-heading {
             font-size: 14px;
             margin-top: 10px;
             height: 22px;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             font-weight: 600;
         }
         .error {
@@ -4593,7 +4649,7 @@ h1.category-heading {
         .poll-updated-wrapper {
             font-size: 12px;
             color: #8a8a8a;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
         }
         &.relative-with-img {
             @include float(left);
@@ -4601,7 +4657,7 @@ h1.category-heading {
         }
         label {
             color: #33363b;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             font-size: 14px;
             text-transform: capitalize;
         }
@@ -4675,7 +4731,7 @@ h1.category-heading {
 }
 
 .poll-banner {
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     ul {
         @extend .list-none;
     }
@@ -5021,7 +5077,7 @@ h1.category-heading {
             font-size: 12px;
             color: $white-color;
             margin-top: 10px;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
         }
         .ads {
             width: 300px;
@@ -5114,7 +5170,7 @@ h1.category-heading {
                 margin: 0;
                 padding: 10px 5px 3px;
                 border-bottom: 3px solid transparent;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: 500;
                 color: #969696;
                 &:hover,
@@ -5192,7 +5248,7 @@ h1.category-heading {
                             background-color: rgba(0, 0, 0, .5);
                             color: #fff;
                             font-size: 12px;
-                            font-family: $itg-roboto;
+                            font-family: $itg-opensans;
                             .fa {
                                 font-size: 14px;
                                 margin-right: 5px;
@@ -5365,11 +5421,11 @@ h1.category-heading {
         @extend .list-none;
         li {
             @include display-inline;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             padding-right: 5px;
             color: #a1a1a1;
             a {
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #a1a1a1;
             }
             &:after {
@@ -5400,7 +5456,7 @@ h1.category-heading {
     pic,
     program-right);
     .program-row {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         background-color: #f5f5f5;
         .programe-title {
             @include font(20px,
@@ -5556,7 +5612,7 @@ h1.category-heading {
             @include social-share;
         }
         .other-info {
-            @include itg-font($itg-roboto);
+            @include itg-font($itg-opensans);
             @include font(12px);
             color: #8f8f8f;
             margin-top: 15px;
@@ -5572,7 +5628,7 @@ h1.category-heading {
                 a {
                     @include font(16px);
                     text-transform: uppercase;
-                    @include itg-font($itg-roboto);
+                    @include itg-font($itg-opensans);
                     display: block;
                     height: 50px;
                     padding-top: 8px;
@@ -5593,7 +5649,7 @@ h1.category-heading {
         }
     }
     .attachment {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         .count {
             @include font(19px,
             22px,
@@ -5656,7 +5712,7 @@ h1.category-heading {
                     color: #989898;
                     top: 18px;
                     left: 10px;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     @include font(12px);
                     display: none;
                 }
@@ -5740,7 +5796,7 @@ h1.category-heading {
         background: #f5f5f5;
         padding: 5px 5px;
         font-weight: 700;
-        font-family: $itg-robotoslab;
+        font-family: $itg-opensans;
     }
     @include listing-with-image(detail,
     right,
@@ -5784,7 +5840,7 @@ h1.category-heading {
                 border-left: none;
                 a {
                     display: block;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     color: #808080;
                     &.active,
                     &:hover,
@@ -5831,7 +5887,7 @@ h1.category-heading {
 
 #block-views-latest-issue-magzine-block-1 {
     padding: 50px 0px 20px 0px;
-    font-family: $itg-roboto;
+    font-family:$itg-opensans;
     h2 {
         background: transparent;
         color: #000;
@@ -5906,7 +5962,7 @@ h1.category-heading {
                 padding: 0;
                 font-weight: 600;
                 text-transform: uppercase;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
             }
             h2 {
                 margin-top: 10px;
@@ -5916,7 +5972,7 @@ h1.category-heading {
             @include float(right);
             width: 33.33333%;
             padding: 10px;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             background: $white-color;
             border: 1px solid $border-color;
             .latest-issue {
@@ -6065,7 +6121,7 @@ section.sidebar {
         a {
             color: #eff94e;
             font-size: 12px;
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
         }
         ul {
             @extend .list-none;
@@ -6139,7 +6195,7 @@ section.sidebar {
         padding: 10px;
         a {
             color: #fff;
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
         }
     }
 }
@@ -6226,7 +6282,7 @@ section.sidebar {
         a {
             background: #db0e0f;
             color: #fff;
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
             text-transform: uppercase;
             padding: 10px 15px;
             border-radius: 30px 0px 0px 30px;
@@ -6282,7 +6338,7 @@ section.sidebar {
             null,
             500);
             color: #000;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             text-transform: uppercase;
             margin-top: 5px;
         }
@@ -6429,7 +6485,7 @@ section.sidebar {
                         padding: 13px 10px;
                         font-size: 18px;
                         line-height: 24px;
-                        font-family: $itg-roboto;
+                        font-family: $itg-opensans;
                         font-weight: 500;
                     }
                 }
@@ -6508,7 +6564,7 @@ section.sidebar {
                     background: rgba(0, 0, 0, 0.4);
                     color: $white-color;
                     @include font(12px);
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     padding: 2px 5px;
                     i {
                         @include font(16px);
@@ -6551,7 +6607,7 @@ section.sidebar {
             background: #d6d6d6;
             @include display-inline;
             padding: 5px 10px;
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
             border-radius: 3px;
             margin-bottom: 50px;
         }
@@ -6578,7 +6634,7 @@ section.sidebar {
                 0);
                 background: rgba(0, 0, 0, 0.56);
                 color: #fff;
-                @include itg-font($itg-roboto);
+                @include itg-font($itg-opensans);
                 font-size: 12px;
                 padding: 5px;
                 i {
@@ -6605,7 +6661,7 @@ section.sidebar {
     .auto-block-3 {
         .itg-widget-child {
             .droppable {
-                height: 245px;
+                height: 345px;
                 overflow: hidden;
             }
         }
@@ -6706,7 +6762,7 @@ section.sidebar {
                     }
                 }
                 &.trending-videos-list {
-                    padding: 15px 0;
+                    padding: 13px 0;
                 }
             }
         }
@@ -7294,7 +7350,7 @@ section.sidebar {
                 @include clearfix;
                 font-size: 13px;
                 font-weight: 500;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 margin-top: 15px;
                 margin-bottom: 15px;
                 .section-part {
@@ -7452,7 +7508,7 @@ section.sidebar {
         font-size: 20px;
         border-bottom: 1px solid $border-color;
         text-transform: uppercase;
-        font-family: $itg-robotoslab;
+        font-family:$itg-opensans;
         margin-bottom: 30px;
         padding-bottom: 10px;
         font-weight: 700;
@@ -7479,7 +7535,7 @@ section.sidebar {
     }
     .views-row {
         @include text-align(center);
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         color: #ef2a24;
         font-weight: 700;
         text-transform: uppercase;
@@ -7510,7 +7566,7 @@ section.sidebar {
     h2 {
         font-size: 24px;
         color: #ef3c24;
-        font-family: $itg-robotoslab;
+        font-family:$itg-opensans;
         margin-bottom: 15px;
     }
 }
@@ -7614,7 +7670,7 @@ section.sidebar {
             }
         }
         .date-display-range {
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
             font-weight: 900;
             font-size: 18px;
             margin-bottom: 10px;
@@ -7829,7 +7885,7 @@ section.sidebar {
 #block-itg-event-backend-event-sign-and-win,
 #block-itg-event-backend-event-registration {
     h1 {
-        font-family: $itg-robotoslab;
+        font-family:$itg-opensans;
         font-size: 40px;
         margin-bottom: 40px;
     }
@@ -7907,7 +7963,7 @@ section.sidebar {
             .views-field-field-story-new-title {
                 font-size: 11px;
                 font-weight: 700;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #000;
                 margin-top: 10px;
                 text-transform: uppercase;
@@ -7933,7 +7989,7 @@ section.sidebar {
             li {
                 border-radius: 0;
                 color: #000;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: normal;
                 padding: 15px 10px;
                 span {
@@ -7977,7 +8033,7 @@ section.sidebar {
                     @include calculate-width(1);
                     @include float(none);
                     padding-right: 0;
-                    font-family: $itg-robotoslab;
+                    font-family: $itg-opensans;
                     line-height: initial;
                     .bottom-links {
                         margin-top: 10px;
@@ -7996,7 +8052,7 @@ section.sidebar {
                 }
                 .small-title {
                     color: #ef3c24;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     @include font(13px);
                     margin-bottom: 5px;
                     text-transform: uppercase;
@@ -8365,7 +8421,7 @@ section.sidebar {
             padding: 5px 10px;
             color: #fff;
             font-weight: 500;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             border-radius: 4px;
         }
         #field-erf-registration-fee-add-more-wrapper {
@@ -8389,7 +8445,7 @@ section.sidebar {
         /* padding: 0;
         background: transparent;
         border: none;*/
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         font-size: 12px;
         color: #707070;
         ul {
@@ -8801,7 +8857,7 @@ section.sidebar {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -9175,7 +9231,7 @@ section.sidebar {
 
 .live-scorecard {
     text-align: center;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     padding-bottom: 20px;
     h4 {
         padding: 15px 0 5px 0;
@@ -9288,7 +9344,7 @@ section.sidebar {
                                         line-height: 24px;
                                         font-size: 20px;
                                         font-weight: 700;
-                                        font-family: $itg-roboto;
+                                        font-family: $itg-opensans;
                                         &:hover {
                                             color: #193984;
                                         }
@@ -9481,7 +9537,7 @@ section.sidebar {
                 height: 30px;
                 line-height: 30px;
                 text-transform: uppercase;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: 500;
                 &:hover,
                 &.active {
@@ -9954,7 +10010,7 @@ section.sidebar {
         }
     }
     .key-candidate {
-        font-family: $itg-roboto;
+        font-family:$itg-opensans;
         .most_popular {
             border: none;
         }
@@ -9981,7 +10037,7 @@ section.sidebar {
             }
         }
         .key-candidate-detail {
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             display: none;
             max-height: 282px;
             overflow: auto;
@@ -10138,7 +10194,7 @@ section.sidebar {
         }
         table {
             font-size: 13px;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
@@ -10197,7 +10253,7 @@ section.sidebar {
             tspan {
                 &:nth-child(1) {
                     font-weight: 900;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     font-size: 42px;
                     color: #515151;
                 }
@@ -10253,7 +10309,7 @@ section.sidebar {
             svg {
                 >text {
                     fill: #009ef0 !important;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                 }
             }
         }
@@ -10263,7 +10319,7 @@ section.sidebar {
             margin-top: 50px;
             table {
                 width: 100%;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 th,
                 td {
                     padding: 3px;
@@ -10310,7 +10366,7 @@ div#playerContainer {
                 font-size: 13px;
                 padding: 20px 15px;
                 display: block;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 position: relative;
                 border-bottom: 1px solid #1a1a1a;
                 i {
@@ -10386,10 +10442,11 @@ div#playerContainer {
             a {
                 font-size: 14px;
                 text-transform: uppercase;
-                color: #525252;
+                color: #111;
                 font-weight: 500;
                 height: 22px;
                 line-height: 22px;
+                font-family:$itg-opensanssemibold;
             }
         }
     }
@@ -10467,7 +10524,7 @@ div#playerContainer {
         @include font(12px,
         null,
         500);
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         text-transform: uppercase;
         line-height: 15px;
         display: block;
@@ -10487,7 +10544,7 @@ div#playerContainer {
         .vertical-menu {
             max-width: 58px;
             span {
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: 600;
                 text-transform: uppercase;
                 padding: 5px 5px;
@@ -10658,7 +10715,7 @@ h1.about-us-heading {
 /*css start static feedback form*/
 
 .static-feedback-from {
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     h1 {
         @include font(34px);
         text-transform: capitalize;
@@ -10667,7 +10724,7 @@ h1.about-us-heading {
             color: #7e7e7e;
             float: right;
             font-weight: 500;
-            font-family: $itg-robotoslab;
+            font-family: $itg-opensans;
             text-transform: initial;
             i {
                 color: #e61e1e;
@@ -10678,7 +10735,7 @@ h1.about-us-heading {
     .or-share-detail {
         text-align: center;
         font-size: 16px;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         color: #777777;
         margin: 25px 0;
     }
@@ -10786,7 +10843,7 @@ h1.about-us-heading {
     .view-header {
         font-size: 30px;
         color: #fff;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         background: #353535;
         font-weight: 700;
         height: 50px;
@@ -10948,7 +11005,7 @@ h1.about-us-heading {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -11004,7 +11061,7 @@ h1.about-us-heading {
                 font-size: 12px;
                 color: #6b6b6b;
                 text-transform: uppercase;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: 600;
             }
         }
@@ -11031,7 +11088,7 @@ h1.about-us-heading {
             }
             p {
                 font-size: 12px;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #000;
                 font-weight: 500;
             }
@@ -11267,7 +11324,7 @@ h1.about-us-heading {
 
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"],
 .ask-question-sidebar {
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     border-bottom: 1px solid #ddd;
     @include sidebar-heading;
     ul {
@@ -11385,7 +11442,7 @@ h1.about-us-heading {
             display: inline-block;
             color: #fff;
             text-align: center;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             margin-right: 10px;
             position: absolute;
             top: 20px;
@@ -11501,7 +11558,7 @@ h1.about-us-heading {
             color: #fff;
             margin: 0 -15px;
             border-bottom: 5px solid #fff;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
         }
     }
     .col-list-1 {
@@ -11706,7 +11763,7 @@ h1.about-us-heading {
 #content {
     [id*="ugc-node-form"].ugc-custom-wrapper {
         background: #fff;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         .form-item {
             margin: 0;
             margin-bottom: 10px;
@@ -11830,7 +11887,7 @@ h1.about-us-heading {
 
 .breakingnew-home {
     margin-bottom: 30px;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     @include clearfix;
     @include pos(relative);
     .title {
@@ -12024,7 +12081,7 @@ h1.about-us-heading {
                 text-transform: uppercase;
                 color: #000;
                 font-weight: 600;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 ul {
                     margin-top: 20px;
                     li {
@@ -12034,7 +12091,7 @@ h1.about-us-heading {
                             font-size: 14px;
                             text-transform: capitalize;
                             font-weight: 400;
-                            font-family: $itg-robotoslab;
+                            font-family: $itg-opensans;
                         }
                     }
                     ul {
@@ -12079,7 +12136,7 @@ h1.about-us-heading {
                 background-color: rgba(0, 0, 0, 0.5);
                 color: #fff;
                 font-size: 12px;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 i {
                     font-size: 14px;
                 }
@@ -12330,11 +12387,11 @@ span.smilies-title {
     position: relative;
     z-index: 9998;
     color: #a1a1a1;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     padding-top: 15px;
     a {
         color: #a1a1a1;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         &:hover {
             text-decoration: underline;
         }
@@ -12345,7 +12402,7 @@ span.smilies-title {
         line-height: inherit;
         font-weight: normal;
         display: inline-block;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
     }
     .container {
         div.lft {
@@ -12406,7 +12463,7 @@ span.smilies-title {
     text-transform: capitalize;
     font-size: 18px;
     border-radius: 3px;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     pointer-events: auto;
 }
 
@@ -12536,7 +12593,7 @@ span.smilies-title {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -13250,7 +13307,7 @@ span.close_btt {
         }
     }
     .key-candidate {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         max-height: 282px;
         overflow: auto;
         .most_popular {
@@ -13277,7 +13334,7 @@ span.close_btt {
             }
         }
         .key-candidate-detail {
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             display: none;
             ul {
                 @include clearfix;
@@ -13516,7 +13573,7 @@ span.close_btt {
         padding: 10px 0 10px 45px;
         font-size: 16px;
         font-weight: 300;
-        font-family: $itg-roboto;
+        font-family:$itg-opensans;
         color: #aaa;
         margin: 28px 0;
         .fa {
@@ -13558,7 +13615,7 @@ span.close_btt {
             width: 220px;
             a {
                 color: #ddd;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-size: 12px;
                 &:hover {
                     text-decoration: underline;
@@ -13571,7 +13628,7 @@ span.close_btt {
         margin: 20px 0 0;
         border-top: 1px solid #666;
         color: #666;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         font-size: 12px;
         text-align: center;
     }
@@ -13637,7 +13694,7 @@ span.close_btt {
             a {
                 font-size: 16px;
                 line-height: 28px;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: 500;
                 color: #666;
                 padding-left: 30px;
@@ -13928,7 +13985,7 @@ span.see-picture {
     margin-top: -45px;
     color: #83b1cb;
     text-transform: uppercase;
-    font-family: $itg-roboto;
+    font-family:$itg-opensans;
     font-size: 12px;
     position: relative;
     z-index: 9999;
@@ -13951,7 +14008,7 @@ span.see-picture {
 
 .story-sponsor-powered-text {
     color: #83b1cb;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     font-size: 14px;
 }
 
@@ -13962,7 +14019,7 @@ span.story-sponsor-powered-text::last-word {
 
 .story-sponsor-impact {
     color: #83b1cb;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
@@ -14211,8 +14268,9 @@ span.story-sponsor-powered-text::last-word {
     font-size: 0.8125rem;
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
-    color: #929292;
+    color: #777;
     line-height: 18px;
+    font-family:$itg-opensanssemibold;
 }
 
 #cricketblog .bolg-content .row {
@@ -14252,9 +14310,10 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .live-block h1 {
-    font-weight: 900;
-    color: #000;
-    font-size: 42px;
+    font-weight:700;
+    color: #111;
+    font-size:34px;
+    line-height: 45px;
 }
 
 .live-block h1 span {
@@ -14266,14 +14325,14 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .live-block .bolg-content#bolgcontent p {
-    color: #474747;
-    line-height: 26px;
+    color: #111;
+    line-height: 27px;
 }
 
 .live-block .bolg-content#bolgcontent p span {
     font-weight: 700;
     margin-right: 4px;
-    color: #000;
+    color: #111;
 }
 
 .live-block #cricketblog .bolg-content .para-live-blog {
@@ -14646,7 +14705,7 @@ ul.pron-cons-img li img {
     margin: 0;
     padding: 10px 5px 3px;
     border-bottom: 3px solid transparent;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     font-weight: 500;
     color: #969696;
 }
@@ -14706,7 +14765,7 @@ ul.pron-cons-img li img {
     margin: 0;
     padding: 10px 5px 3px;
     border-bottom: 3px solid transparent;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     font-weight: 500;
     color: #969696;
 }
@@ -14805,7 +14864,7 @@ ul.pron-cons-img li img {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 12px;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
 }
 
 .video-landing-header .upload-date span {
@@ -14856,7 +14915,7 @@ ul.pron-cons-img li img {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 12px;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
 }
 
 #modal-content #reporter-node-form .vertical-tabs {
@@ -14961,4 +15020,7 @@ ul.pron-cons-img li img {
 .front .ad-widget .sidebar-ad .block-itg-ads{margin:0px auto 0;}
 .education-layout-page .widget-title{padding:5px;}
 .education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable {height: 314px; min-height: initial;}
-
+.auto-layout-page .auto-road-trip .trending-videos li:nth-child(1){padding-top:0px;}
+.front .section-ordering p,.front .trending-videos .trending-videos-list,.front .watch-right-now-video ul li{font-family:$itg-opensanssemibold;}
+.front .itg-top-section .home-top-story .data-holder .itg-listing li {padding: 10px;font-family:$itg-opensanssemibold;}
+#block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list{font-family:$itg-opensanssemibold;}
