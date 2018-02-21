@@ -740,14 +740,15 @@ function itg_akamai_exit() {
           drupal_add_http_header('Edge-control', 'no-store');
           drupal_add_http_header('Cache-Control', 'no-store');
         }
-        if (!empty($_SESSION['messages']['error'])) {
+        /* Don't need to show this message to front user:
+         * if (!empty($_SESSION['messages']['error'])) {
           $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
           $key = array_search($msg, $_SESSION['messages']['error']);
 
           if ($key !== FALSE) {
             unset($_SESSION['messages']['status'][$key]);
           }
-        }
+        }*/
       }
     }
   }
