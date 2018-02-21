@@ -11376,7 +11376,7 @@ h1.about-us-heading {
 .magazin-section .lock {
   padding-left: 30px; }
   .magazin-section .lock:before {
-    top: 13px;
+    top: 9px;
     background-size: 70%; }
 .magazin-section p.lock:before {
   top: 6px; }
