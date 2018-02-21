@@ -6605,7 +6605,7 @@ section.sidebar {
     .auto-block-3 {
         .itg-widget-child {
             .droppable {
-                height: 245px;
+                height: 345px;
                 overflow: hidden;
             }
         }
@@ -6706,7 +6706,7 @@ section.sidebar {
                     }
                 }
                 &.trending-videos-list {
-                    padding: 15px 0;
+                    padding: 13px 0;
                 }
             }
         }
@@ -14961,4 +14961,4 @@ ul.pron-cons-img li img {
 .front .ad-widget .sidebar-ad .block-itg-ads{margin:0px auto 0;}
 .education-layout-page .widget-title{padding:5px;}
 .education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable {height: 314px; min-height: initial;}
-
+.auto-layout-page .auto-road-trip .trending-videos li:nth-child(1){padding-top:0px;}
