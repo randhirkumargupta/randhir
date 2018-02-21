@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
 	var ext = fileName.split('.').pop();
 
 	//ga("send","event","video",'playlist-sources-file', playlist[0].sources[0].file);
-	ga("send","event","video",'playlist-sources-extn', ext);
+	//ga("send","event","video",'playlist-sources-extn', ext);
 //	ga("send","event","video",'playlist-sources-type', playlist[0].sources[0].type);
 
 	playerInstance.on('complete', function(e) {
@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
 		}
 	});
 
-	var MaxBitrate=0
+	var MaxBitrate=0;
 
 	/*playerInstance.on('visualQuality', function(e) {
 		ga("send","event","video",'visualQuality-type', e.type);
@@ -124,6 +124,7 @@ jQuery(document).ready(function() {
 		var provider=playerInstance.getProvider();
 		var pv=JSON.stringify(provider);
 		obj = JSON.parse(pv);
+                ga("send","event","video",'playlist-sources-file', playlist[0].sources[0].file);
 	    //ga("send","event","video",'provider',obj.name);
 	}); 
  
