@@ -21,8 +21,11 @@
             print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
           }
           else {
+			  $view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
+			  $section_id = $view[0]->_field_data['nid']['entity']->field_story_category[LANGUAGE_NONE][0]['tid'];
+			  $section_name = get_term_name_from_tid($section_id)->name;
             ?>
-            <span class="web-excl"><?php print t('web exclusive'); ?></span>
+            <span class="web-excl"><?php print t($section_name); ?></span>
             <?php
             print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
           }
@@ -101,7 +104,7 @@
         $all_terms = taxonomy_get_parents_all($parent_key1);
         $number_parent = count($all_terms);
         $section_key = $number_parent - 1;
-        if ($parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
+        if ($parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499') {
           $section_data_final[$parent_key1] = $parent_value1;
         }
       }

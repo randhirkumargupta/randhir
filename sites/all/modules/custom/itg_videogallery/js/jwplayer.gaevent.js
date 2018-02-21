@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
 	var ext = fileName.split('.').pop();
 
 	//ga("send","event","video",'playlist-sources-file', playlist[0].sources[0].file);
-	ga("send","event","video",'playlist-sources-extn', ext);
+	//ga("send","event","video",'playlist-sources-extn', ext);
 //	ga("send","event","video",'playlist-sources-type', playlist[0].sources[0].type);
 
 	playerInstance.on('complete', function(e) {
@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
 		}
 	});
 
-	var MaxBitrate=0
+	var MaxBitrate=0;
 
 	/*playerInstance.on('visualQuality', function(e) {
 		ga("send","event","video",'visualQuality-type', e.type);
@@ -51,7 +51,7 @@ jQuery(document).ready(function() {
 	playerInstance.on('buffer', function(e) { 
 		var state1=e.oldstate;
 		if(state1=="playing") {
-			ga("send","event","video",'buffer-stringify-all', JSON.stringify(e));  
+			//ga("send","event","video",'buffer-stringify-all', JSON.stringify(e));  
 		}
 	});
 
@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
 
 	playerInstance.on('audioTrackChanged',function(e) {
 		var getCurrentAudioTrack=playerInstance.getAudioTracks();
-		ga("send","event","video",'audioTrackChanged', JSON.stringify(getCurrentAudioTrack));
+		//ga("send","event","video",'audioTrackChanged', JSON.stringify(getCurrentAudioTrack));
 	});
 
 	playerInstance.on('adBlock',function(e) {
@@ -80,11 +80,11 @@ jQuery(document).ready(function() {
 	playerInstance.on('ready', function(event) {
 		sharingPlugin = playerInstance.getPlugin('sharing');
 		sharingPlugin.on('open',function () {
-			ga("send","event","video",'sharingPluginopen', true);
+			//ga("send","event","video",'sharingPluginopen', true);
 		});
 
 		sharingPlugin.on('close',function () {
-			ga("send","event","video",'sharingPluginclose', true);
+			//ga("send","event","video",'sharingPluginclose', true);
 		});
 	});
 
@@ -111,7 +111,7 @@ jQuery(document).ready(function() {
 		var v1=JSON.stringify(e);
 		var obj=JSON.parse(v1);
 		var v1=obj.volume;
-		ga("send","event","video",'volume', v1);
+		//ga("send","event","video",'volume', v1);
 	}); 
 	playerInstance.on('fullscreen',function(e) {
 		//ga("send","event","video",'fullscreen', JSON.stringify(e));
@@ -124,6 +124,7 @@ jQuery(document).ready(function() {
 		var provider=playerInstance.getProvider();
 		var pv=JSON.stringify(provider);
 		obj = JSON.parse(pv);
+                ga("send","event","video",'playlist-sources-file', playlist[0].sources[0].file);
 	    //ga("send","event","video",'provider',obj.name);
 	}); 
  
@@ -148,7 +149,7 @@ jQuery(document).ready(function() {
 	});*/
 
 	playerInstance.on('adComplete', function(e) {
-		ga("send","event","video",'adComplete', true);
+		//ga("send","event","video",'adComplete', true);
 		//ga("send","event","video",'adComplete-client', e.client);
 		//ga("send","event","video",'adComplete-creativetype', e.creativetype);
 		//ga("send","event","video",'adComplete-tag', e.tag);
@@ -179,7 +180,7 @@ jQuery(document).ready(function() {
 	var AdPlays = 0;
 	playerInstance.on('adStarted', function(e) {
 		AdPlays++;
-		ga("send","event","video",'adStarted', true);
+		//ga("send","event","video",'adStarted', true);
 		//ga("send","event","video",'adStarted-creativetype', e.creativetype);
 		//ga("send","event","video",'adStarted-tag', e.tag);
 		//ga("send","event","video",'Ad Plays', AdPlays);
@@ -194,14 +195,14 @@ jQuery(document).ready(function() {
 		//ga("send","event","video",'adImpression-adposition', e.adposition);
 		//ga("send","event","video",'adImpression-type', e.type);
 		//ga("send","event","video",'adImpression-adtitle', e.adtitle);
-		ga("send","event","video",'adImpression_vastversion', e.vastversion);  
+		//ga("send","event","video",'adImpression_vastversion', e.vastversion);  
 	});
 
 	playerInstance.on('adPlay', function(e) {
-		ga("send","event","video",'adPlay', "1");
+		//ga("send","event","video",'adPlay', "1");
 		//ga("send","event","video",'adPlay-tag', e.tag);
 		//ga("send","event","video",'adPlay-linear', e.linear);
-		ga("send","event","video",'Ad Title', e.adtitle);//adPlay-adtitle
+		//ga("send","event","video",'Ad Title', e.adtitle);//adPlay-adtitle
 		ga("send","event","video",'adPlay-adsystem', e.adsystem);
 		//ga("send","event","video",'Ad Duration', e.duration);
 		//ga("send","event","video",'Ad Partner Id', e.client);//adPlay-client 

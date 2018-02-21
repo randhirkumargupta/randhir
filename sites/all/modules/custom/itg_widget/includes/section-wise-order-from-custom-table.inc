@@ -14,7 +14,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     if (is_array($info)) {
         $range = 3;
         // set range of data here
-        $rangearray = array('auto-road-trip' => 2,
+        $rangearray = array('auto-road-trip' => 4,
           'auto-tips-and-tricks' => 3,
           'edu-exam' => 4,
           'budget-reactions' => 4,

@@ -148,16 +148,18 @@ jQuery(document).ready(function() {
     
     }); 
     // 
-    /*jQuery('#edit-submit').click(function() {
+    jQuery('#edit-submit').click(function() {
 		var publish_clicked = jQuery( "#edit-submit" ).hasClass( "publish-clicked" );		
 		if(publish_clicked){
 			var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
 			jQuery("#edit-workbench-moderation-state-new").val(story_state);
 		}
 		else{
-			jQuery("#edit-workbench-moderation-state-new").val('draft');
+			if (jQuery("#story_submit_link")[0]){
+				jQuery("#edit-workbench-moderation-state-new").val('draft');
+		    }
 		}
-	}); */                
+	});                 
 });
 
 

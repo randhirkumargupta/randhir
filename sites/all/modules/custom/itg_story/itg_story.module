@@ -579,7 +579,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based) && empty($magazine_kicker)) {
-      form_set_error('field_story_magazine_headline', t("Magazine kicker text is required"));
+      form_set_error('field_story_magazine_headline', t("Magazine headline is required"));
     }
     $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
     if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
@@ -1410,7 +1410,7 @@ function itg_story_dropdown_supplement($issue_date){
   $query->fields('m' , array('entity_id', 'field_issue_supplement_target_id'));
   $query->fields('n' , array('title'));
   $query->fields('ns' , array('title'));
-  $query->condition('n.status' , 1 , '=');
+  //$query->condition('n.status' , 1 , '=');
   $query->condition('n.title' , $issue_date , '=');
   $result = $query->execute();
 
