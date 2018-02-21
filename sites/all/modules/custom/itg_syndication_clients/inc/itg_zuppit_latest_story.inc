@@ -156,7 +156,7 @@ function client_samsung_video_detail() {
     $v_credit = "";
   }
   $video_description = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($node->field_video_kicker['und'][0]['value']));
-  $video_medium_image = completeFilePath($node->field_story_medium_image['und'][0]['fid']);
+  $video_small_image = completeFilePath($node->field_story_small_image['und'][0]['fid']);
   $video_large_image = completeFilePath($node->field_story_large_image['und'][0]['fid']);
 
   $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
@@ -209,7 +209,7 @@ function client_samsung_video_detail() {
   $video_data['video']['v_credit'] = FRONT_URL;
   $video_data['video']['v_byline'] = $byline;
   $video_data['video']['v_desc'] = $video_description;
-  $video_data['video']['v_small_image'] = $video_medium_image;
+  $video_data['video']['v_small_image'] = $video_small_image;
   $video_data['video']['v_large_image'] = $video_large_image;
   $video_data['video']['v_download_url'] = $bitrate_url;
   $video_data['video']['v_updated_datetime'] = $created_date;
