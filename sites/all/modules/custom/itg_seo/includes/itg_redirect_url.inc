@@ -433,6 +433,33 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
+    } else if(!empty($arg[2]) && $arg[2] == 'comparecollege.jsp') { 
+      $year1 = $_GET['year1'];
+      if (!empty($year1)) {
+        $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/compare-college/'. strtolower($_GET['stream']) . "/" . $_GET['year1'] . "-" . $_GET['year2'];
+      } else {
+        $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/compare-college/' . $_GET['year'] . "-" . strtolower($_GET['stream1']) . "-" . strtolower($_GET['stream2']);
+      }
+      drupal_goto($bestclgurl, array(), 301);
+    } else if(!empty($arg[2]) && $arg[2] == 'emerging_colleges_rank.jsp') { 
+      $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/emerging-colleges-rank/'. strtolower($_GET['ST']);
+      drupal_goto($bestclgurl, array(), 301);
+    } else if(!empty($arg[2]) && $arg[2] == 'readyrecnor_directory_list.jsp') { 
+      $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/'. strtolower($_GET['ST']) . "-bestcollege";
+      drupal_goto($bestclgurl, array(), 301);
+    } else if(!empty($arg[2]) && $arg[2] == 'zone-wise-list.jsp') { 
+      $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1]."/zonewiselist-" . strtolower($_GET['ST']);
+      drupal_goto($bestclgurl, array(), 301);
+    } else if(!empty($arg[2]) && $arg[2] == 'ranks.jsp') {
+      if (!empty($_GET['ST'])) {
+        $term_name = "Bestcolleges " . $arg['1'];
+        $term = reset(array_values(taxonomy_get_term_by_name($term_name, 'category_management')));
+        $term_data = reset(taxonomy_get_children($term->tid));
+        if ($term_data->name == strtolower($_GET['ST'])) {
+          $bestclgurl = FRONT_URL.'/'.$arg['0'] . "/" . $arg['1'] . "/ranks/" . $term_data->tid;
+          drupal_goto($bestclgurl, array(), 301);
+        } 
+      }
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
