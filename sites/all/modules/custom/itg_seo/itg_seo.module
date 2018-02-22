@@ -410,7 +410,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
         '#type' => 'html_tag',
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'news_keyword',
+          'name' => 'news_keywords',
           'content' => '',
         ),
         '#weight' => -999,
@@ -424,7 +424,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       '#type' => 'html_tag',
       '#tag' => 'meta',
       '#attributes' => array(
-        'name' => 'news_keyword',
+        'name' => 'news_keywords',
         'content' => $meta_keywords
       ),
     );
@@ -477,7 +477,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
           '#type' => 'html_tag',
           '#tag' => 'meta',
           '#attributes' => array(
-            'name' => 'news_keyword',
+            'name' => 'news_keywords',
             'content' => $meta_keyword,
           ),
           '#weight' => -999,
