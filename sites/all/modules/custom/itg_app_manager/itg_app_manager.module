@@ -678,8 +678,16 @@ function itg_app_manager_form_submit($form, &$form_state) {
             if ($form_val['menu_type'] == '0') {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
-            } 
-            elseif ($form_val['menu_type'] == '1') {
+            } else if ($form_val['menu_type'] == '1') {
+                $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $section_id = $form_val['section']['title'];
+            } else {
+                $title = $form['container'][$key]['menu_type']['#options'][$form_val['menu_type']];
+                $section_id = $form_val['menu_type'];
+                $s_id = $form_val['section']['title'];
+                $s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+            }
+            if ($form_val['menu_type'] == '1') {
                 if ($form_val['has_subcat'] == 1) {
                     $s_id = $form_val['sub_section'];
                     $s_title = $form['container'][$key]['sub_section']['#options'][$form_val['sub_section']];
