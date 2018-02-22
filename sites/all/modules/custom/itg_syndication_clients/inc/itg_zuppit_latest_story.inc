@@ -141,14 +141,14 @@ function get_top_story_for_zupit() {
 function client_samsung_video_detail() {
   $output_array = array();
   $nid = arg(2);
-  if ($_SERVER['HTTP_USER_AGENT'] == 'Tizen') {
+  //if ($_SERVER['HTTP_USER_AGENT'] == 'Tizen') {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "customised_message";
-  }
-  else {
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "";
-  }
+//  }
+//  else {
+//    $output_array['status_code'] = "0";
+//    $output_array['status_message'] = "";
+//  }
   $node = node_load($nid);
   $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
   $v_credit = itg_common_get_node_title($byline_id);
@@ -216,12 +216,12 @@ function client_samsung_video_detail() {
   $video_data['video']['v_updated_datetime'] = $created_date;
   $video_data['video']['v_duration'] = $duration;
   $video_data['video']['v_show_ad'] = '0';
-  if ($_SERVER['HTTP_USER_AGENT'] == 'Tizen') {
-    $video_data = $video_data;
-  }
-  else {
-    $video_data = array();
-  }
+//  if ($_SERVER['HTTP_USER_AGENT'] == 'Tizen') {
+//    $video_data = $video_data;
+//  }
+//  else {
+//    $video_data = array();
+//  }
   $output_array['data'] = $video_data;
   $jsondata = drupal_json_output($output_array);
   return $jsondata;
