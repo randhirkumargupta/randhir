@@ -212,7 +212,7 @@ function client_samsung_video_detail() {
   $video_detail['v_duration'] = $duration;
   $video_detail['v_show_ad'] = '0';
   
-  $video_data['data'][] = $video_detail;
+  $video_data['video'][] = $video_detail;
   $output_array['data'] = $video_data;
   $jsondata = drupal_json_output($output_array);
   return $jsondata;
