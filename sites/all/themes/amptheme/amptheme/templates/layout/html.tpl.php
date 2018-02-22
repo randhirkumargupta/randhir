@@ -1512,6 +1512,9 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
 .video_dec_amp {
     text-align: left;
   }
+  /* breadcrumb style */
+#block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/';padding: 0 3px;text-decoration: none;}
+#block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration: none;} 
         </style>
     </head>
     <?php
