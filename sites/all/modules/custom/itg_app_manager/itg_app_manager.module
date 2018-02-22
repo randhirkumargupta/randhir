@@ -585,11 +585,11 @@ function _get_section_options($term_id, $menu_form_id, $subsec_options) {
         //$option_arr = array();
         $option_arr[1206553] = 'Programes';
     }
-    elseif($term_id == 1206553 || $term_id == '1206553'){
+    elseif($term_id == 1206552 || $term_id == '1206552'){
         //$option_arr = array();
         $option_arr[1206552] = 'Videos';
     }
-    elseif($term_id == 1206553 || $term_id == '1206553'){
+    elseif($term_id == 1208521 || $term_id == '1208521'){
         //$option_arr = array();
         $option_arr[1208521] = 'Photos';
     }
