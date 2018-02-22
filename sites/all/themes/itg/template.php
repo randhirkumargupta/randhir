@@ -350,7 +350,7 @@ function itg_html_head_alter(&$head_elements) {
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
-    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keywords';
   }
 
   if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
@@ -363,7 +363,7 @@ function itg_html_head_alter(&$head_elements) {
           '#tag' => 'meta',
             
           '#attributes' => array(
-            'name' => 'news_keyword',
+            'name' => 'news_keywords',
             'content' => $meta_keywords
           ),
         );
