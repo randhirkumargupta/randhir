@@ -102,7 +102,7 @@ function menu_list($result) {
     foreach ($result as $data) {
       $menu['id'] = isset($data['s_id']) ? $data['s_id'] : "";
       $menu['order'] = isset($data['order_id']) ? $data['order_id'] : "";
-      $menu['title'] = isset($data['title']) ? $data['title'] : "";
+      $menu['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
       $menu['type'] = isset($data['type']) ? $data['type'] : "";
       $menu['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
       $menu['icon_url'] = isset($data['icon_url']) ? $data['icon_url'] : "";
