@@ -49,8 +49,10 @@
         <?php print $head; ?>
         <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
         <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700" rel="stylesheet">
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <script async src="https://cdn.ampproject.org/v0.js"></script>
         <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
@@ -89,8 +91,8 @@ p {
     border: none
 }
 body {
-    font: 400 14px/18px 'Roboto Slab';
-    color: #333
+    font: 400 15px/20px 'Open Sans';
+    color: #111
 }
 h1,
 h2,
@@ -98,12 +100,14 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Roboto
+    font-family:'Open Sans'
 }
 h1 {
+    font-family:'Merriweather';
     font-size: 25px;
-    font-weight: 600;
-    line-height: 30px
+    font-weight: 700;
+    line-height: 30px;
+
 }
 p {
     line-height: 24px;
@@ -174,7 +178,7 @@ img {
     bottom: 0;
     background-color: #222;
     font-size: 12px;
-    font-family: Roboto;
+    font-family:Open Sans;
     left: 0
 }
 .header-menu li a {
@@ -183,7 +187,7 @@ img {
     color: #fff;
     border-top: 1px solid rgba(255, 255, 255, .7);
     display: block;
-    font-family: Roboto;
+    font-family: Open Sans;
     height: 35px
 }
 .header-menu li:first-child a {
@@ -193,7 +197,7 @@ img {
     margin: 10px 0;
     font-size: 12px;
     color: #8c8c8c;
-    font-family: Roboto
+    font-family: Open Sans
 }
 .stryimg {
     position: relative
@@ -215,11 +219,12 @@ img {
     padding-left: 18px
 }
 .image-alt {
-    color: #aeaeae;
-    font-size: 12px;
-    font-family: Roboto;
+    color: #777;
+    font-size:13px;
+    font-family: Open Sans;
     padding: 10px 0;
-    border-bottom: 1px solid #ddd
+    border-bottom: 1px solid #ddd;
+    font-weight:600;
 }
 .related-story ul {
     list-style: none
@@ -258,7 +263,7 @@ img {
 }
 .other-date,
 .other-title a {
-    font-family: "Roboto Slab"
+    font-family: "Open Sans"
 }
 .story-right {
     padding-bottom: 30px
@@ -278,6 +283,9 @@ img {
 .story-section .listicle-page .listicle-detail+.listicle-detail {
     border-top: 1px solid #ccc
 }
+
+.story-section  .description h3{ font-size: 16px;font-weight: bold; margin: 10px 0; line-height: 28px; text-transform: uppercase;}
+.story-section  .description p{ font-size:17px; line-height:29px; }
 .story-section .listicle-page .listicle-detail>span {
     width: 24px;
     height: 24px;
@@ -609,7 +617,8 @@ img {
 .front-end-breadcrumb,
 .front-end-breadcrumb a {
     color: #a1a1a1;
-    font-family: roboto
+    font-family: Open Sans;
+    text-decoration: none;
 }
 .story-right .description iframe {
     width: 100%;
@@ -627,7 +636,7 @@ pre {
     position: relative;
     z-index: 9998;
     color: #a1a1a1;
-    font-family: roboto
+    font-family: Open Sans
 }
 .front-end-breadcrumb {
     margin: 0 -12px;
@@ -642,7 +651,7 @@ pre {
     background-color: #000;
     color: #fff;
     margin-top: 30px;
-    font-family: roboto;
+    font-family: Open Sans;
     position: relative
 }
 #footer ul {
@@ -650,7 +659,7 @@ pre {
 }
 #footer a {
     color: #a6a6a6;
-    font-family: Roboto, sans-serif
+    font-family: Open Sans, sans-serif
 }
 #footer a:hover {
     color: #ffc106
@@ -863,38 +872,23 @@ pre {
     margin-right: 5px
 }
 .quotes {
-    margin: 5px 0 5px 15px
+    margin:15px 0 15px 0px;
+    border-left: 5px solid #bb0a0a;
+    padding: 0 0 0 20px;
 }
+
 blockquote {
-    color: #000;
-    font: 600 20px/28px "Roboto Slab", sans-serif;
+    color: #111;
+    font:400 19px/28px 'Merriweather', serif;
     position: relative;
-    text-align: justify;
-    text-indent: 40px
 }
 .quotes .author {
     font-size: 12px;
     color: #828282;
     text-align: right
 }
-blockquote:before {
-    content: "\201C";
-    display: inline-block;
-    font: 700 60px/28px Georgia, serif;
-    vertical-align: baseline;
-    position: absolute;
-    left: 0;
-    top: 12px;
-    text-indent: 0
-}
-blockquote:after {
-    content: "\201D";
-    display: inline-block;
-    font: 700 60px/0 Georgia, serif;
-    vertical-align: top;
-    text-indent: 10px;
-    margin-top: 32px
-}
+
+
 #header .top-nav .main-nav li.desktop-hide,
 #header .top-nav .main-nav ul.menu li.desktop-hide {
     display: none
@@ -1005,7 +999,7 @@ blockquote:after {
     text-align: justify;
     font-style: italic;
     color: #8d8d8d;
-    font-family: Roboto
+    font-family: Open Sans
 }
 .search-form input[type=search] {
     height: 28px;
@@ -1058,7 +1052,7 @@ a.search {
 }
 #header a {
     color: #a9a9a9;
-    font-family: Roboto;
+    font-family: Open Sans;
     font-size: 16px;
     margin: 0
 }
@@ -1141,7 +1135,7 @@ ul.header-menu li:first-child {
     padding: 0 3px;
     font-size: 13px;
     text-transform: uppercase;
-    font-weight: 500
+    font-weight:700
 }
 #header .top-nav .top-first-menu ul.menu li.last.leaf:after {
     position: absolute;

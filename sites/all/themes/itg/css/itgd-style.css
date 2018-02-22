@@ -593,6 +593,8 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 .front .watch-right-now-video ul li{padding:13px 0px 13px 0px;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/'; padding: 0 3px;text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration:none;}
+.front .top-takes-video-container ul .top-takes-video .title{font-family:"OpenSans-Semibold"}
+#block-itg-front-end-common-latest-from-aajtak ul .third-party-list .title{font-weight: 600;letter-spacing: 0.8px;}
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{height: 415px;}
 .breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
@@ -684,10 +686,10 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 245px;display: inline-block;line-height: 20px; position: relative;top: 4px;}
 #itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top: 50%;transform: translateY(-50%);}
 /*poll Home section */
-.home_page_poll_widget_block .poll-data .active-poll-title h2 {color: #fff;font-size: 16px; line-height: 22px;margin: 0;padding: 5px 10px;}
+.home_page_poll_widget_block .poll-data .active-poll-title h2 {color: #fff;font-size: 16px; line-height: 22px;margin: 0;padding: 5px 10px; font-family:inherit;}
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id {padding: 10px 0 0;max-height: inherit;overflow-y: auto;margin-top: 0;}
 .home_page_poll_widget_block .poll-data .active-poll-title {background-color: #000;float: left;width: 100%;height: auto;overflow: hidden;}
-.home_page_poll_widget_block .poll-data form label {display: inline-block;vertical-align: top;padding: 0;text-transform: uppercase;font-family:"OpenSans-Regular"; }
+.home_page_poll_widget_block .poll-data form label {display: inline-block;vertical-align: top;padding: 0;text-transform: uppercase;font-family:"OpenSans-Semibold"; }
 /* pr news */
 .section-pr-newswire #w4315_landing{overflow: hidden;overflow-x: hidden;}
 .section-pr-newswire #w4315_landing ul{ margin-top:30px;}
