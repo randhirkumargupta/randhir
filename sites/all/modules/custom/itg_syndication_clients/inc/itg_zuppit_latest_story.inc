@@ -187,6 +187,7 @@ function client_samsung_video_detail() {
     $inter_video_details = internal_video_bitrate_data($video_id);
     $bitrate_url = $inter_video_details['bitrate_url'];
   }
+  $bitrate_url = str_replace(',156,', ',', $bitrate_url);
   $pub_date = get_content_publish_date($nid);
   if (!empty($pub_date)) {
     $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
