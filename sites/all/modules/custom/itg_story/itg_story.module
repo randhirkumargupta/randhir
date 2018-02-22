@@ -1442,22 +1442,13 @@ function itg_story_ad_code_in_content($content) {
       $after_content[] = $value;
     }
   }
-
-  $before_content = implode(' ', $before_content);
+	
+	$before_content = implode(' ', $before_content);
   $after_content = implode(' ', $after_content);
   $after_content_arr = explode('</p>', $after_content);
-  if (count(explode(' ', $after_content_arr[0])) > 5) {
-    $ad_code = $ad_code . '</p>';
-    $before_content_arr = explode('<p>', $before_content);
-    $w_length = count($before_content_arr);
-    array_splice($before_content_arr, ($w_length - 1), 0, $ad_code);
-    $before_content = implode('<p>', $before_content_arr);
-  }
-  else {
-    $ad_code = '<p>' . $ad_code;
-    array_splice($after_content_arr, 1, 0, $ad_code);
-    $after_content = implode('</p>', $after_content_arr);
-  }
+  $ad_code = '<p>' . $ad_code;
+  array_splice($after_content_arr, 1, 0, $ad_code);
+  $after_content = implode('</p>', $after_content_arr);
   $content = $before_content . $after_content;
   return $content;
 }
