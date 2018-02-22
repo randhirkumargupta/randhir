@@ -24,6 +24,7 @@
 			  $view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
 			  $section_id = $view[0]->_field_data['nid']['entity']->field_story_category[LANGUAGE_NONE][0]['tid'];
 			  $section_name = get_term_name_from_tid($section_id)->name;
+			  $nid_arr[] = $view[0]->nid;
             ?>
             <span class="web-excl"><?php print t($section_name); ?></span>
             <?php
@@ -58,8 +59,12 @@
           print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
         }
         else {
+		  $view = views_get_view_result('magazine_top_story', 'block', $issue_attribute_date);
+		  foreach($view as $key => $view_val){
+			  $nid_arr[] = $view_val->nid;
+		  }
           print views_embed_view('magazine_top_story', 'block', $issue_attribute_date);
-        }
+        }        
         ?>
     </div>
   <?php endforeach; ?>
@@ -89,12 +94,11 @@
     global $base_url;
 // category based story according issue date
     if (function_exists('itg_msi_issue_category_data')) {
-      $data = itg_msi_issue_category_data($issue_attribute_date);
+      $data = itg_msi_issue_category_data($issue_attribute_date, $nid_arr);
     }
     if (function_exists('itg_msi_issue_suppliment_data')) {
-      $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
+      $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date, $nid_arr);
     }
-
     $style_name = 'section_ordering_widget';
     $final_data_array = array();
     if (!empty($data)) {
