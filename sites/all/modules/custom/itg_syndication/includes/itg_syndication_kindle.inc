@@ -113,7 +113,7 @@ function _issues_options($magazine) {
     $itg_query->join('field_data_field_issue_magazine', 'sc', 'n.nid = sc.entity_id');
     $itg_query->condition('sc.field_issue_magazine_target_id', $magazine);
     $itg_query->condition('n.type', 'issue');
-    $itg_query->condition('n.status', 1);
+    //$itg_query->condition('n.status', 1);
     $itg_query->orderBy('n.created', 'DESC');
     $itg_query->range(0, 10);
     $itg_result = $itg_query->execute()->fetchAll();
@@ -364,8 +364,9 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
     if(!is_null($file_name) && !is_null($node_id) && !is_null($section)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
         $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
-        $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
-        $node_data = node_load($node_id);
+        //$issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+        $issue_date = $issue_date[0].'.000';
+        $node_data = node_load($node_id);        
         $bylines = _get_byline_from_nid_for_kindle($node_id);
         // Node xml data.
         $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
@@ -375,7 +376,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
             <doc-id id-string="' . $node_id . '" regsrc="AMZN" />
             <urgency ed-urg="2" /> 
             <date.issue norm="' . $issue_date . '" />
-            <date.release norm="' . $current_time . '" /> 
+            <date.release norm="' . $issue_date . '" /> 
             <du-key generation="1" key="GN3;5275646997;Amazon.4" />
             <doc.copyright holder="India Today" />
             <key-list>
@@ -387,12 +388,12 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
     <body>
         <body.head>
             <hedline>
-                <hl1> <![CDATA[ ' . $node_data->title . ' ]]>  </hl1>
-                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '  ]]> </hl2>
+                <hl1>' . $node_data->title . '</hl1>
+                <hl2 class="subhead">' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' </hl2>
             </hedline>
-            <byline> <![CDATA[ ' . implode(",", $bylines) . ']]></byline>
+            <byline> ' . implode(",", $bylines) . '></byline>
             <dateline></dateline>
-            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' ]]> </abstract>
+            <abstract>' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '</abstract>
         </body.head>
         <body.content>
             <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body['und'][0]['value'])) . ' ]]> </block>
@@ -504,7 +505,8 @@ function _create_cover_page_xml() {
     // Time with mili second.
     $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
     $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
-    $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+    //$issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+    $issue_date = $issue_date[0].'.000';
     $data['file_name'] = 'Cover_page.xml';
     $xml = '<?xml version="1.0" encoding="utf-8"?>
   <nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
@@ -514,14 +516,14 @@ function _create_cover_page_xml() {
               <doc-id id-string="0" regsrc="AMZN" />
               <urgency ed-urg="2" /> 
               <date.issue norm="' . $issue_date . '" />
-              <date.release norm="' . $current_time . '" /> 
+              <date.release norm="' . $issue_date . '" /> 
               <du-key generation="1" key="GN3;5275646997;Amazon.4" />
               <doc.copyright holder="India Today" />
               <key-list>
                   <keyword key="" />
               </key-list>
           </docdata>
-          <pubdata type="print" date.publication="' . $current_time . '" item-length="" position.sequence="1" unit-of-measure="character" />
+          <pubdata type="print" date.publication="' . $issue_date . '" item-length="" position.sequence="1" unit-of-measure="character" />
       </head> 
       <body>
           <body.head>
