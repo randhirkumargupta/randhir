@@ -133,3 +133,85 @@ function get_top_story_for_zupit() {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 }
+
+/**
+ * function for generate samsung video detail for Tizen clients
+ * @return json
+ */
+function client_samsung_video_detail() {
+  $output_array = array();
+  $nid = arg(2);
+  $output_array['status_code'] = "1";
+  $output_array['status_message'] = "customised_message";
+  $node = node_load($nid);
+  $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+  $v_credit = itg_common_get_node_title($byline_id);
+  if (is_null($v_credit)) {
+    $v_credit = "";
+  }
+  $video_description = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($node->field_video_kicker['und'][0]['value']));
+  $video_small_image = completeFilePath($node->field_story_small_image['und'][0]['fid']);
+  $video_large_image = completeFilePath($node->field_story_large_image['und'][0]['fid']);
+
+  $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+  $videotag = video_detail_formats($nid, $source_type);
+  $video_data = get_itg_video_transcoding($nid);
+  $duration = '';
+  if (count($video_data) > 0) {
+    $duration = $video_data[0]->video_duration;
+  }
+  if (!empty($videotag['migrated'])) {
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+  }
+  elseif (!empty($videotag['dailymotion'])) {
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      }
+      elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+    }
+    $inter_video_details = internal_video_bitrate_data($video_id);
+    $bitrate_url = $inter_video_details['bitrate_url'];
+  }
+  $bitrate_url = str_replace(',156,', ',', $bitrate_url);
+  $pub_date = get_content_publish_date($nid);
+  if (!empty($pub_date)) {
+    $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+  }
+  $upload_video = $node->field_video_upload['und'][0]['value'];
+  $load_collection = field_collection_item_load($upload_video);
+  $show_add = $load_collection->field_include_ads['und'][0]['value'];
+  if ($show_add == 'yes') {
+    $show_add = '1';
+  }
+  else {
+    $show_add = '0';
+  }
+  $byline = get_byline_name_by_nid($nid);
+  $created_date = date("Y-m-d H:i:s", $node->created);
+  $video_data['id'] = $node->nid;
+  $video_data['title'] = html_entity_decode($node->title);
+  $video_data['video']['v_id'] = $node->nid;
+  $video_data['video']['v_title'] = html_entity_decode($node->title);
+  $video_data['video']['v_credit'] = FRONT_URL;
+  $video_data['video']['v_byline'] = $byline;
+  $video_data['video']['v_desc'] = $video_description;
+  $video_data['video']['v_small_image'] = $video_small_image;
+  $video_data['video']['v_large_image'] = $video_large_image;
+  $video_data['video']['v_download_url'] = $bitrate_url;
+  $video_data['video']['v_updated_datetime'] = $created_date;
+  $video_data['video']['v_duration'] = $duration;
+  $video_data['video']['v_show_ad'] = '0';
+
+  $output_array['data'] = $video_data;
+  $jsondata = drupal_json_output($output_array);
+  return $jsondata;
+}
