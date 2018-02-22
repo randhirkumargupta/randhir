@@ -383,7 +383,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
                 <keyword key="' . $node_data->metatags['und']['keywords']['value'] . '" />
             </key-list>
         </docdata>
-        <pubdata type="print" date.publication="' . $current_time . '" item-length="" position.sequence="1" unit-of-measure="character" />
+        <pubdata type="print" date.publication="' . $issue_date . '" item-length="" position.sequence="1" unit-of-measure="character" />
     </head> 
     <body>
         <body.head>
@@ -391,7 +391,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
                 <hl1>' . $node_data->title . '</hl1>
                 <hl2 class="subhead">' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' </hl2>
             </hedline>
-            <byline> ' . implode(",", $bylines) . '></byline>
+            <byline>'.implode(",", $bylines).'></byline>
             <dateline></dateline>
             <abstract>' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '</abstract>
         </body.head>
