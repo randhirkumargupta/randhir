@@ -348,7 +348,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 'wrapper' => 'menu-title-' . $i,
             ),
         );
-        $subsec_options = array('' => '- Select -');
+        $subsec_options = array('0' => '- Select -');
         if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
             $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
             $form['container'][$i]['section']['title'] = array(
