@@ -560,6 +560,9 @@ function _create_manifest_file($section_array = array(), $section_with_nids_arra
     $data['file_name'] = 'manifest.xml';
     // Get sections which have valid story , which have not future story and expried story.
     $fresh_sections = array_keys(_get_sections_with_corrected_nids($section_with_nids_array));
+    $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
+    //$issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+    $issue_date = $issue_date[0].'.000';
     //itg_watchdog("sections_with_nids", array($fresh_sections, $section_array));
     if(!empty($section_array)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
@@ -567,7 +570,7 @@ function _create_manifest_file($section_array = array(), $section_with_nids_arra
         $xml .="<channel>";
         $xml .="<title>India Today</title>";
         $xml .="<link>manifest.xml</link>";
-        $xml .= "<pubDate>" . $current_time . "</pubDate>";
+        $xml .= "<pubDate>" . $issue_date . "</pubDate>";
         $xml .= "<item>";
         $xml .="<link>Cover.xml</link>";
         $xml .= "</item>";
