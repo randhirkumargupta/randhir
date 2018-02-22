@@ -156,7 +156,10 @@ jQuery(document).ready(function() {
 		}
 		else{
 			if (jQuery("#story_submit_link")[0]){
-				jQuery("#edit-workbench-moderation-state-new").val('draft');
+				var publish_lnik_class = jQuery('#story_submit_link').attr('class').split(' ')[1];
+				if(publish_lnik_class == 'published'){
+					jQuery("#edit-workbench-moderation-state-new").val('draft');
+				}				
 		    }
 		}
 	});                 
