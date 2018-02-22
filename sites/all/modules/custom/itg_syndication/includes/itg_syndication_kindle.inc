@@ -381,6 +381,8 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
 			$node_body = str_replace($images, $img, $node_body);
 			$i++;
 		  }
+	    $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
+        $node_body = trim($node_body);
         // Node xml data.
         $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
     <head>
