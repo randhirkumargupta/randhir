@@ -462,6 +462,16 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
           drupal_goto($bestclgurl, array(), 301);
         } 
       }
+    } else if(!empty($arg[0]) && $arg[0] == 'rssFeed_it.php') {
+      if (!empty($_GET['secId'])) {     
+        $old_content_id = $_GET['secId'];
+        $table = 'migrate_map_itgsection';
+      } else {
+        $old_content_id = 'nzero';
+        $table = 'none';
+      }
+      $type = 'rss';
+      $rss_url = 'rss';
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
     }
