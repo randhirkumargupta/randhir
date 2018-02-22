@@ -1197,8 +1197,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       preg_match_all('/<img[^>]*>/s', $right_emoji, $rightimages);
       $right_emoji_html = itg_get_emoji_amp_html($rightimages[0]);
 
-      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;
-      
+      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;      
       $node->body[LANGUAGE_NONE][0]['value'] = itg_story_ad_code_in_content($node->body[LANGUAGE_NONE][0]['value']);
     }
     if ($view_mode == 'full' && ($theme == FRONT_THEME_NAME)) {
@@ -1422,37 +1421,43 @@ function itg_story_dropdown_supplement($issue_date){
   return $data;
 }
 
-
+/**
+ * Function place ad code in content after 250
+ * @param string $content
+ * @return string
+ */
 function itg_story_ad_code_in_content($content) {
-	$ad_code = variable_get('place_amp_ad_within_content');
-  if(empty($ad_code)){
-		$content;
-	}
-	$content = html_entity_decode($content);
-  $content_parts = explode(' ',$content);
+  $ad_code = variable_get('place_amp_ad_within_content');
+  if (empty($ad_code)) {
+    $content;
+  }
+  $content = html_entity_decode($content);
+  $content_parts = explode(' ', $content);
   $ad_code_after = 250;
   foreach ($content_parts as $key => $value) {
-		if ($key < $ad_code_after) {
-			$before_content[] = $value;
-		}else{
-			$after_content[] = $value;
-		}
-	}
-	
-	$before_content = implode(' ', $before_content);
-	$after_content = implode(' ', $after_content);
-	$after_content_arr = explode('</p>', $after_content);
-	if(count(explode(' ', $after_content_arr[0])) > 5){
-		$ad_code = $ad_code.'</p>';
-		$before_content_arr = explode('<p>', $before_content);
-		$w_length = count($before_content_arr);
-		array_splice($before_content_arr, ($w_length - 1), 0, $ad_code);
-		$before_content = implode('<p>', $before_content_arr);
-	}else{
-		$ad_code = '<p>'.$ad_code;
-		array_splice($after_content_arr, 1, 0, $ad_code);
-		$after_content = implode('</p>', $after_content_arr);
-	}	
-	$content = $before_content . $after_content;
-	return $content;
+    if ($key < $ad_code_after) {
+      $before_content[] = $value;
+    }
+    else {
+      $after_content[] = $value;
+    }
+  }
+
+  $before_content = implode(' ', $before_content);
+  $after_content = implode(' ', $after_content);
+  $after_content_arr = explode('</p>', $after_content);
+  if (count(explode(' ', $after_content_arr[0])) > 5) {
+    $ad_code = $ad_code . '</p>';
+    $before_content_arr = explode('<p>', $before_content);
+    $w_length = count($before_content_arr);
+    array_splice($before_content_arr, ($w_length - 1), 0, $ad_code);
+    $before_content = implode('<p>', $before_content_arr);
+  }
+  else {
+    $ad_code = '<p>' . $ad_code;
+    array_splice($after_content_arr, 1, 0, $ad_code);
+    $after_content = implode('</p>', $after_content_arr);
+  }
+  $content = $before_content . $after_content;
+  return $content;
 }
