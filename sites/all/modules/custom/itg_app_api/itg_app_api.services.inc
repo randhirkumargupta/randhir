@@ -6326,7 +6326,7 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
         //Insert the value
         $content_title = addslashes($content_title);
         $category = addslashes($category);
-        $share_comment = addslashes($share_comment);
+        //$share_comment = addslashes($share_comment);
         $query = db_insert('jos_social_media_sharing')
                         ->fields(array(
                             'content_id' => isset($content_id) ? $content_id : '',
