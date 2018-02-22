@@ -382,6 +382,7 @@ function itg_front_search_views_pre_render(&$view) {
   if ($arg[0] == 'topic' && !empty($arg[1])) {
     $search_str = urldecode($arg[1]);
     $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
     $front_search .='<h1 class="hide">' . $search_str . '</h1>';
   }
 

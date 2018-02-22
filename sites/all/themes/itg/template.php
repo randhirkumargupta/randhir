@@ -324,6 +324,7 @@ function itg_preprocess_html(&$vars) {
   if($arg[0] == 'topic' && !empty($arg[1])) {
     $search_str = urldecode($arg[1]);
     $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
     $vars['head_title'] = "$search_str News, Videos, Photos and Magazines | " . variable_get('site_name');
   }
 }
