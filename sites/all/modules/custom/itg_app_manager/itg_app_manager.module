@@ -709,7 +709,15 @@ function itg_app_manager_form_submit($form, &$form_state) {
                    }
             }
 
-
+            if($title == "Photo"){
+                $title = "PHOTOS";
+            }
+            elseif($title == "Program"){
+                $title = "PROGRAMMES";
+            }
+            elseif($title == "Video"){
+                $title = "VIDEOS";
+            }
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
                 'menu_label_id' => $form_val['menu_label_id'],
