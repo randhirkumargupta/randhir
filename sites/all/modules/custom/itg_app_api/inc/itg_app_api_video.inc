@@ -1021,8 +1021,14 @@ function featuresWidgetData() {
 
 
     //end
-    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
+    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $key => $value) {
+        $type = $value['type'];
+        if($type !="videogallery" || $type !="photogallery" || $type !="story"){
+            unset($result[$key]);
+        }
+    }
     return $result;
 }
 
