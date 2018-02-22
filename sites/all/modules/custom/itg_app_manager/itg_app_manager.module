@@ -580,7 +580,7 @@ function ajax_subsection_callback($form, $form_state) {
  * @return array
  */
 function _get_section_options($term_id, $menu_form_id, $subsec_options) {
-    $option_arr = array('' => '- Select -');
+    $option_arr = array('0' => '- Select -');
     
     if($subsec_options == 0){
     
