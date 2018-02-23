@@ -102,8 +102,8 @@ $config_name = $comment_value[0]->config_name;
     ?>
     <div class="vukkul-comment">
         <div id="vuukle-emote"></div>
-        <div id="vuukle_div"></div>
-
+        <!--<div id="vuukle_div"></div>-->
+        <div id="vuukle-comments"></div>
         <?php
         if (function_exists('vukkul_view')) {
           vukkul_view();
