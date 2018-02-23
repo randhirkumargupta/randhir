@@ -130,7 +130,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
         'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'keyword',
+          'name' => 'keywords',
           'content' => $og_description,
           ),
          '#weight' => -99
@@ -162,7 +162,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
         'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'keyword',
+          'name' => 'keywords',
           'content' => $og_description_live,
           ),
          '#weight' => -99
@@ -196,7 +196,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
       'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'keyword',
+          'name' => 'keywords',
           'content' => $og_description_topic,
         ),
         '#weight' => -99
