@@ -339,6 +339,20 @@ function itg_image_croping_ajax_make_ajax() {
     $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
     $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
   }
+  
+  // For Mos image
+  if ($_POST['content_type'] == 'bodyeditor') {
+    $file_image = image_load($file->uri);
+    $image_width = $file_image->info['width'];
+    $image_height = $file_image->info['height'];
+    if ($image_width > '647') { 
+        print "<div style='color:#ff0000'>image dimenssions must be less than 647px width.</div>";        
+        $image_width = '647';
+    } else {
+        $image_width = '';
+    }
+  } 
+  
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
