@@ -14,7 +14,6 @@
           }
           $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
           $count_issue = count($view);
-          print_r($row);die;
           ?>
           <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) { ?>
             <span class="web-excl"><?php print t('Cover Story'); ?></span>
@@ -109,7 +108,7 @@
         $all_terms = taxonomy_get_parents_all($parent_key1);
         $number_parent = count($all_terms);
         $section_key = $number_parent - 1;
-        if ($parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499') {
+        if ($row['field_show_web_exclusive'] != 1 && $parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499') {
           $section_data_final[$parent_key1] = $parent_value1;
         }
       }
