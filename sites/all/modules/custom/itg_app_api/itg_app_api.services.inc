@@ -5443,9 +5443,10 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    $searchpage = file_get_contents('https://www.indiatoday.in/advance_search/modi');
+    $searchpage = views_embed_view('Front end global search', 'page_1', 'modi'); 
+    //$searchpage = file_get_contents('https://www.indiatoday.in/advance_search/modi');
 p($searchpage); die();
-    p(node_load(1069041));
+   /* p(node_load(1069041));
     $str = '{
     "status_code": "0",
     "status_message": "Customised Message",
@@ -5454,7 +5455,7 @@ p($searchpage); die();
     $jsondata = $str;
     $obj = json_decode($jsondata, TRUE);
     $return_obj = $obj;
-    return $return_obj;
+    return $return_obj;*/
 }
 
 /**
