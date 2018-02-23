@@ -20,7 +20,7 @@ function itg_indiatoday_samsung_search_api(){
     $data['data']['title'] = "Video";
     $data['data']['video'] = $video_list;
     
-    p($data);
+    echo json_encode($data);
 }
 /**
  * 
