@@ -12,6 +12,7 @@ $nid = itg_event_backend_get_event_node();
 <div class="sign-and-win-contest"><i class="fa fa-frown-o" aria-hidden="true"></i> <?php echo t('SIGN AND WIN CONTEST IS CLOSED NOW.')?> <i class="fa fa-frown-o" aria-hidden="true"></i></div>
 <!--<div id="vuukle_div"></div>-->
 <div id="vuukle-comments"></div>
+<div class='vuukle-powerbar'></div>
 <?php 
 echo itg_event_backend_vukkul_content($nid);
 ?>
