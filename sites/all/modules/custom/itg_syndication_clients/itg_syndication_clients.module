@@ -378,6 +378,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_indiatoday_daily_report_jsonfeed_syndication.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['clients/samsung_search_api/%'] = array(
+    'page callback' => 'itg_indiatoday_samsung_search_api',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_samsung_search_api.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
