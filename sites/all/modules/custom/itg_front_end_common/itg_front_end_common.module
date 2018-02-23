@@ -352,12 +352,9 @@ function _vukkul_block_content() {
                     authors: "' . $author . '",
                     tags: "' . $tag . '"                     
                   };
-                  (function () {
-                    var d = document,
-                    s = d.createElement("script");
-                    s.src = "https://cdn.vuukle.com/platform.js";
-                            (d.head || d.body).appendChild(s);
-                    })();
+                  (function () 
+                    { var d = document, s = d.createElement("script"); s.src = "https://cdn.vuukle.com/platform.js"; (d.head || d.body).appendChild(s);}
+                  )();
               </script>';
   return $output;
   }
