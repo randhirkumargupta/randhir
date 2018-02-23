@@ -744,6 +744,7 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
     $file_id = file_usage($field_video_upload);
     //to get the video of all the other formats
     $load_collection = field_collection_item_load($field_video_upload);
+    p($load_collection);
     $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
 
     //display all the video sounce check and format
@@ -760,7 +761,7 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
     else {
       $show_add = '0';
     }
-    $video_desc = $load_collection->field_story_expert_description['und'][0]['value'];
+    $video_desc = $load_collection->field_videogallery_description['und'][0]['value'];
     $primary_cat = $res['field_primary_category_value'];
     $prim_cat = taxonomy_term_load($primary_cat);
 
@@ -911,7 +912,7 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
     else {
       $show_add = '0';
     }
-    $video_desc = $load_collection->field_story_expert_description['und'][0]['value'];
+    $video_desc = $load_collection->field_videogallery_description['und'][0]['value'];
     $primary_cat = $res['field_primary_category_value'];
     $prim_cat = taxonomy_term_load($primary_cat);
 
