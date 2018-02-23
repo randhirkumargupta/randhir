@@ -4,6 +4,7 @@
       <div class="magazin-top-left">
           <?php
           $migrated = $row['field_story_source_type'];
+          $field_show_web_exclusive = $row['field_show_web_exclusive']
           $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
           if (empty($year_arr[2])) {
             $year = itg_msi_issue_attribute_date();
@@ -108,9 +109,10 @@
         $all_terms = taxonomy_get_parents_all($parent_key1);
         $number_parent = count($all_terms);
         $section_key = $number_parent - 1;
-        if ($row['field_show_web_exclusive'] != 1 && $parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499') {
+        if ($field_show_web_exclusive == 1 || $parent_key1 != '1206509') {
           $section_data_final[$parent_key1] = $parent_value1;
         }
+        //~ $section_data_final[$parent_key1] = $parent_value1;
       }
     }
 
