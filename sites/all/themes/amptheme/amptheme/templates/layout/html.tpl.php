@@ -1157,7 +1157,7 @@ ul.header-menu li:first-child {
     margin-left: -3px;
 }
 .container.top-nav .main-nav .nav-container-menu .nav-centerall {
-    width: 296px;
+    width: 315px;
     margin: 0 auto
 }
 .footer-latest * {
@@ -1515,6 +1515,12 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
   /* breadcrumb style */
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/';padding: 0 3px;text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration: none;} 
+@media only screen and (max-width: 320px) {
+  #header .main-nav .nav-container-menu{width: calc(100% - 40px);}
+  #header .top-nav ul.menu li a{ font-size:12px; }
+  #header .top-nav ul li{margin: 0 2px;}
+
+}
         </style>
     </head>
     <?php
