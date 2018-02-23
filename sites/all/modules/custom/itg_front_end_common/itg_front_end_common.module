@@ -322,7 +322,7 @@ function _vukkul_block_content() {
   }
   
   $author = base64_encode($reporter_node);
-  drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external'));
+  /*drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
@@ -343,7 +343,22 @@ function _vukkul_block_content() {
 
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
 
-               </script>';
+               </script>';*/
+  $output = '<script type="text/javascript">
+              var VUUKLE_CONFIG = {
+                    apiKey: "dc34b5cc-453d-468a-96ae-075a66cd9eb7",
+                    articleId: "' . $unique_id . '",
+                    title: "' . $n_title . '",
+                    authors: "' . $author . '",
+                    tags: "' . $tag . '"                     
+                  };
+                  (function () {
+                    var d = document,
+                    s = d.createElement("script");
+                    s.src = "https://cdn.vuukle.com/platform.js";
+                            (d.head || d.body).appendChild(s);
+                    })();
+              </script>';
   return $output;
   }
 }
