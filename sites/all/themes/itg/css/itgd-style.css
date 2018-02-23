@@ -157,7 +157,10 @@
     padding-bottom: 15px
 }
 .node-type-story .node-unpublished {background-color: #fff;}
+/*live Tv page */
 
+.section-livetv h1#page-title{font-weight: 700;font-size: 30px;border-top: 1px solid #dddddd;line-height: 40px;}
+.organic-thumbnails-rr .trc_rbox_header{max-height: 0px; }
 @media all and (max-width: 767px) {
     article.node-mega-review-critic .movie-review-wrapper .movie-review-text,
     article.node-mega-review-critic .movie-review-wrapper .movie-trailer {
@@ -345,7 +348,7 @@ width: 100%;
     }
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
     #itg-scorecard-container .scorecard-stripcontent{display:none;}
-    .front .mt-50 { margin-top: 30px;}
+    .front .mt-50 { margin-top:20px;}
 	  
 }
 
@@ -363,7 +366,7 @@ width: 100%;
    .section-movies .movies-featured-news .movies-featured-post { width:50%; float:left;}
    .section-movies .movies-featured-news .movies-featured-post img{width:95%;}
    #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
-   .front .mt-50 {margin-top: 30px;}
+   .front .mt-50 {margin-top:20px;}
    .itg-layout-container .itg-h321-section .droppable{height: auto;}
 }
 .may-be-recommend .trc_rbox_container .video-label.video-title {
@@ -405,7 +408,7 @@ width: 100%;
 }
 .movies-top-section {
     background: url(../images/pattern.jpg);
-    padding: 40px 0
+    padding: 30px 0
 }
 .movies-top-section .backbg {
     background: #1f1f1f;
@@ -837,7 +840,7 @@ background:none;
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:block}
 .front .trending-videos .trending-videos-list:nth-child(5){ display:block; }
-.front .mt-50 {margin-top: 30px;}
+.front .mt-50 {margin-top:20px;}
 /* embed code page scroll */
 .show-embed-code-link .show-embed-code-div{left: -150%;}
 }

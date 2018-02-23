@@ -339,6 +339,7 @@ function itg_image_croping_ajax_make_ajax() {
     $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
     $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
   }
+   
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }

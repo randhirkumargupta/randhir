@@ -2974,7 +2974,7 @@
     .sidebar-second .may-be-suggest-container h3 span,
     .sidebar-second .top-takes-video-container h3 span,
     .sidebar-second .watch-right-now-video h3 span {
-      padding: 45px 20px 10px 30px; }
+      padding: 20px 20px 10px 30px; }
   .sidebar-second .may-be-suggest-container ul li,
   .sidebar-second .top-takes-video-container ul li,
   .sidebar-second .watch-right-now-video ul li {
@@ -2983,7 +2983,7 @@
   /* End side bar common */
   /*CSS start program RHS*/
   .program-rhs h3 span {
-    padding: 45px 20px 10px 30px; }
+    padding: 20px 20px 10px 30px; }
   .program-rhs ul {
     padding: 10px 20px 0 30px; }
 
@@ -3804,7 +3804,7 @@
 
   #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
     margin: 0 auto;
-    width: 347px; }
+    width: 390px; }
 
   #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
     width: 125px;
@@ -3933,12 +3933,32 @@
 
   #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
     margin: 0 auto;
-    width: 265px; }
+    width: 295px; }
 
   #block-itg-layout-manager-header-block .logo {
     width: 55px;
     position: absolute;
     top: 15px; } }
+@media only screen and (max-width: 320px) {
+  #block-itg-layout-manager-header-block .main-nav .nav-container-menu {
+    width: calc(100% - 40px); }
+
+  #block-itg-layout-manager-header-block .top-nav .main-nav li a {
+    font-size: 12px;
+    font-weight: bold; }
+
+  #block-itg-layout-manager-header-block .top-nav .main-nav li a {
+    padding: 0 5px; }
+
+  #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
+    width: 300px; }
+
+  #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
+    width: 50px;
+    height: 35px; }
+
+  #block-itg-layout-manager-header-block .logo {
+    width: 45px; } }
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   #block-itg-layout-manager-header-block .navigation {
     display: block !important; } }
