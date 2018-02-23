@@ -329,7 +329,7 @@ $root-font-size: 16px;
             z-index: 1;
             @include pos(relative);
             /* padding-left: 10px; */
-            padding: 45px 20px 10px 10px;
+            padding:20px 20px 10px 10px;
             display: inline-block;
         }
         &:before {
