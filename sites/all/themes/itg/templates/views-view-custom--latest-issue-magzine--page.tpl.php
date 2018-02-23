@@ -4,7 +4,7 @@
       <div class="magazin-top-left">
           <?php
           $migrated = $row['field_story_source_type'];
-          $field_show_web_exclusive = $row['field_show_web_exclusive']
+          $field_show_web_exclusive = $row['field_show_web_exclusive'];
           $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
           if (empty($year_arr[2])) {
             $year = itg_msi_issue_attribute_date();
