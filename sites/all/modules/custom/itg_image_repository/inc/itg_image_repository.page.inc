@@ -294,7 +294,7 @@ function itg_image_repository_validate_all($file, $itg_image_repository) {
   $errors = itg_image_repository_validate_filesize($file, $itg_image_repository['filesize']);
   //image resolution validation
   if (empty($errors) && preg_match('/\.(png|gif|jpe?g)$/i', $file->filename)) {
-    $itg_image_repository['dimensions'] = ($itg_image_repository['dimensions'] == '1200x1200') ? '3000x3000' : $itg_image_repository['dimensions']; 
+    $itg_image_repository['dimensions'] = ($itg_image_repository['dimensions'] == '1200x1200') ? '1200x4000' : $itg_image_repository['dimensions']; 
     $errors = array_merge($errors, file_validate_image_resolution($file, $itg_image_repository['dimensions']));
   }
   //directory quota validation
