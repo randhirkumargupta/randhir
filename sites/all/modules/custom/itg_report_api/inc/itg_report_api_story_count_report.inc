@@ -264,8 +264,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end
-    
-    if($start_date != "na" && $end_date != "na"){
+     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
         $query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
@@ -283,25 +282,8 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     }
     $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    /*$query = "SELECT n.nid AS nid, n.title AS title, n.created AS created, n.type AS type, n.uid AS uid, n.changed AS changed, fpc.field_primary_category_value AS field_primary_category_value, dbody.body_value AS body_value, npd.field_itg_content_publish_date_value AS field_itg_content_publish_date_value FROM node n LEFT OUTER JOIN field_data_field_primary_category fpc ON fpc.entity_id=n.nid LEFT OUTER JOIN field_data_body dbody ON dbody.entity_id=n.nid LEFT OUTER JOIN field_data_field_itg_content_publish_date npd ON npd.entity_id=n.nid WHERE 1=1";
-    if ($type != "na") {
-        $query .= " AND n.type = '".$type."'";
-    }
-    if ($status != '') {
-        $query .= " AND n.status = '".$status."'";
-    }
-    if($start_date != "na" && $end_date != "na"){
-        $start_date_timestamp = $start_date . " 12:01:00";
-        $end_date_timestamp = $end_date . " 23:59:00";
-        $query .= " AND npd.field_itg_content_publish_date_value BETWEEN '".$start_date_timestamp."' AND '".$end_date_timestamp."'";
-    }
-    $query .= " GROUP BY n.nid ORDER BY npd.field_itg_content_publish_date_value DESC LIMIT ".$range_max." OFFSET ".$range_min."";
-    $result =db_query($query);
-    //echo $query; die();
-    */
     $loopc = 1;
     foreach ($result as $reskey => $resvalue) {
-        //while($resvalue = $result->fetchAssoc()){
         $total_cont++;
         $nid = $resvalue['nid'];
         $title = $resvalue['title'];
@@ -311,9 +293,8 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $changed = $resvalue['changed'];
         $field_primary_category_value = $resvalue['field_primary_category_value'];
         $body_value = $resvalue['body_value'];
-        $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value']; 
-        //$last_pub_date = date("Y-m-d H:i:s", strtotime($field_itg_content_publish_date_value));
-
+        $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
+        $last_pub_date = date("Y-m-d H:i:s", strtotime($field_itg_content_publish_date_value));
         $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
         $created_by = getNodeCreatedBy_UserName($uid);
         $wordcount = str_word_count($body_value);
@@ -344,14 +325,13 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $is_promoted = $social_query[0]['is_promoted'];
         $promotion_remark = $social_query[0]['promotion_remark'];
         // list data
-        
         $list[$loopc]['is_promoted'] = "$is_promoted";
         $list[$loopc]['promotion_remark'] = "$promotion_remark";
         $list[$loopc]['id'] = "$nid";
         $list[$loopc]['title'] = "$title";
         $list[$loopc]['url'] = "$url";
         $list[$loopc]['word_count'] = "$wordcount";
-        $list[$loopc]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$loopc]['published_datetime'] = "$last_pub_date";
         $list[$loopc]['section_name'] = "$prime_cat->name";
         $list[$loopc]['created_datetime'] = "$created_datetime";
         $list[$loopc]['video_embed'] = "$video_embed";

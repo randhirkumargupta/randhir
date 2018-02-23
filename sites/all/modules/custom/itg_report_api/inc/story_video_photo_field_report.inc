@@ -74,18 +74,22 @@ function getSectionListByVID($vid = 14) {
  * @return array $section_list_count
  */
 function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
-    
+    $section_list_count = array();
+    $between_list_count = array();
+    $today_list_count = array();
+    $yesterday_list_count = array();
+    $video_cont = array();
+    $photo_cont = array();
+    $story_cont = array();
     $loop_count = 0;
     // loop on section list
     foreach ($section_list as $key => $value) {
-        $video_cont = array();
-        $photo_cont = array();
-        $story_cont = array();
-        $between_list_count = array();
         $story_cont = countStory($start_date, $end_date, $value['tid']);
         $video_cont = countVideo($start_date, $end_date, $value['tid']);
         $photo_cont = countPhoto($start_date, $end_date, $value['tid']);
-        $sum_between = 0;        
+        $sum_between = 0;
+        $sum_today = 0;
+        $sum_yesteday = 0;
         $sum_between += $story_cont['total_records_between_inhouse'] + $story_cont['total_records_between_agency'];
         $sum_between += $video_cont['total_records_between'];
         $sum_between += $photo_cont['total_records_between'];

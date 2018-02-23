@@ -372,7 +372,7 @@ function itg_report_api_user_list() {
   }
   $redis_key = "itg_report_api_user_list_" . $suffix;
   $result_get = getRedis($redis_key);
-  if ($result_get['key_value11'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
@@ -393,20 +393,10 @@ function itg_report_api_user_list() {
  *
  * @return array - The processed information array.
  */
-function itg_report_api_get_story_api() {  
-  if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
-  }
-  else {
-    $start_date = $_GET['start_date'];
-  }
-
-  if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']. " 23:59:00");
-  }
-  else {
-    $end_date = $_GET['end_date'];
-  }
+function itg_report_api_get_story_api() {
+  //p($_GET);die();
+  $start_date = $_GET['start_date'];
+  $end_date = $_GET['end_date'];
   $user_type = $_GET['user_type'];
   $user_sub_type = $_GET['user_sub_type'];
   $userid = $_GET['userid'];
@@ -463,7 +453,7 @@ function itg_report_api_story_video_photo_field_report() {
 
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value11'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
