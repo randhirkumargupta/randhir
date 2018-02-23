@@ -6,6 +6,8 @@
  * @param string $file_name
  */
 function itg_indiatoday_daily_report_jsonfeed_syndication() {
+    $interval = 1;
+    date('Y-m-d', strtotime("-" . $interval . " days"));
     $file_name = date('Y-m-d', time()).".xml";
     // query for vedio
     $query = db_select('node', 'n');
@@ -15,8 +17,8 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
-    $start_date = "2017-02-05";
-    $end_date = "2017-02-05";
+    $start_date = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $end_date = $start_date;
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
@@ -46,8 +48,8 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
-    $start_date = "2017-02-05";
-    $end_date = "2017-02-05";
+    $start_date = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $end_date = $start_date;
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
@@ -76,8 +78,8 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
-    $start_date = "2017-02-05";
-    $end_date = "2017-02-05";
+    $start_date = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $end_date = $start_date;
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
