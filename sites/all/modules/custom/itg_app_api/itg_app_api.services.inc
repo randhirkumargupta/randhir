@@ -5443,6 +5443,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    $searchpage = file_get_contents('https://www.indiatoday.in/topic/modi/Video');
+echo $searchpage;die();
     p(node_load(1069041));
     $str = '{
     "status_code": "0",
