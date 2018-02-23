@@ -5618,20 +5618,10 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
 
-  echo $term_feed_path = "public://xml_it/photos";
-  die();
-
-  $str = '{
-	"status_code": "0",
-	"status_message": "Customised Message",
-	"data": {}
-}';
-
-
-  $jsondata = $str;
-  $obj = json_decode($jsondata, TRUE);
-  $return_obj = $obj;
-  return $return_obj;
+  $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india'); 
+  $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
+print_r($searchpage1);
+p($searchpage2);
 }
 
 /**
