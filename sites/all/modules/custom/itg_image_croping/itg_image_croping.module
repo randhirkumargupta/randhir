@@ -340,24 +340,31 @@ function itg_image_croping_ajax_make_ajax() {
     $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
     $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
   }
-  
-  // For Mos image
-  if ($_POST['content_type'] == 'bodyeditor') {
-    $file_image = image_load($file->uri);
-    $image_width = $file_image->info['width'];
-    if ($image_width > '647') { 
-        print "<div style='color:#ff0000'>image dimenssions must be less than 647px width.</div>";
-    }
-  } 
-  
+    
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
   $imagedata = base64_encode(file_get_contents($file->uri));
   $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, '', $_POST['content_type'], $is_solr));
-
+  
+  // For Mos image
+  if ($_POST['content_type'] == 'bodyeditor') {
+    $file_image = image_load($file->uri);
+    $image_width = $file_image->info['width'];
+    $image_height = $file_image->info['height'];
+    if ($image_width > '647') { 
+        print "<div style='color:#ff0000'>image dimenssions must be less than 647px width.</div>";        
+        $image_width = '647';
+    } else {
+        $image_width = '';
+    }
+  } 
+  
   drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
   type' => 'file', 'scope' => 'content', 'cache' => FALSE));
+  
+  
+ 
   print theme('image_repository', array('data' => $file,
     'field_name' => $field_name,
     'image_height' => $image_height,
@@ -1130,22 +1137,23 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
   );
   
   // For MOS Image
-  if($content_name == 'bodyeditor') {
-    
-  $form['image_bodyeditor_width'] = array(
-    '#type' => 'hidden',
-    '#value' => ($image_width) ? $image_width : '',
-    '#attributes' => array('id' => 'image_bodyeditor_width', 'name' => 'image_bodyeditor_width'),
-  );
+  /*
+  if($content_name == 'bodyeditor') { 
+      $form['image_bodyeditor_width'] = array(
+        '#type' => 'hidden',
+        '#value' => ($image_width) ? $image_width : '',
+        '#attributes' => array('id' => 'image_bodyeditor_width', 'name' => 'image_bodyeditor_width'),
+      );
     
     $image_height = '';
-    if ($image_width > 647) {
+    if ($image_width > '647') {
       $image_width = '647';
     } else {
       $image_width = '';
     }
     
   }
+  */
   
   $form['image_original_hight'] = array(
     '#type' => 'hidden',

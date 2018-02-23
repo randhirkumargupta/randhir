@@ -45,7 +45,7 @@ function imce_user1_profile() {
   if (isset($profiles[1])) {
     return $profiles[1];
   }
-  return  imce_construct_profile('User-1', 1, 0, 0, 0, '*', '1200x1200', 0, array(array('.', 1, 1, 1, 1, 1, 1)), array(array('Small', '90x90', 'small_', ''), array('Medium', '120x120', 'medium_', ''), array('Large', '180x180', 'large_', '')));
+  return  imce_construct_profile('User-1', 1, 0, 0, 0, '*', '1200x4000', 0, array(array('.', 1, 1, 1, 1, 1, 1)), array(array('Small', '90x90', 'small_', ''), array('Medium', '120x120', 'medium_', ''), array('Large', '180x180', 'large_', '')));
 }
 
 /**
