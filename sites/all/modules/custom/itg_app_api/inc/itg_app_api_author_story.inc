@@ -763,12 +763,12 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
     $video_desc = $load_collection->field_videogallery_description['und'][0]['value'];
     $primary_cat = $res['field_primary_category_value'];
     $prim_cat = taxonomy_term_load($primary_cat);
-
+    $desc = anchortxt($res['nid']);
     $prog['p_id'] = $res['nid'];
     $prog['p_title'] = $res['title'];
     $prog['p_credit'] = "$reporter_node";
     $prog['p_byline'] = "$reporter_node";
-    $prog['p_short_desc'] = "$video_desc";
+    $prog['p_short_desc'] = "$desc";
     $prog['p_small_image'] = $file_small_img_url;
     $prog['p_large_image'] = $file_large_img_url;
     $prog['p_extralarge_image'] = "$file_extra_large_img_url";
@@ -914,12 +914,13 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
     $video_desc = $load_collection->field_videogallery_description['und'][0]['value'];
     $primary_cat = $res['field_primary_category_value'];
     $prim_cat = taxonomy_term_load($primary_cat);
+    $desc = anchortxt($res['nid']);
 
     $prog['p_id'] = $res['nid'];
     $prog['p_title'] = $res['title'];
     $prog['p_credit'] = "$reporter_node";
     $prog['p_byline'] = "$reporter_node";
-    $prog['p_short_desc'] = "$video_desc";
+    $prog['p_short_desc'] = "$desc";
     $prog['p_small_image'] = $file_small_img_url;
     $prog['p_large_image'] = $file_large_img_url;
     $prog['p_extralarge_image'] = "$file_extra_large_img_url";
@@ -1293,3 +1294,15 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
   return $output_array;
 }
 
+function anchortxt($nid){
+    $desc = "";
+    if($nid){
+        $query = db_select('field_data_field_story_expert_description', 'kit');
+        //$query->leftJoin('field_data_field_video_anchor', 'av', 'av.entity_id = n.nid');
+        $query->fields('kit', array('field_story_expert_description_value'));
+        $query->condition('kit.entity_id', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $desc = $result[0]['field_story_expert_description_value'];
+    }
+    return $desc;
+}
