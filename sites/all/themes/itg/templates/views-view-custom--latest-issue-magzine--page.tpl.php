@@ -15,7 +15,7 @@
           $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
           $count_issue = count($view);
           ?>
-          <?php if ($row['field_story_source_type'] == 'migrated' && $count_issue > 0) { ?>
+          <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) { echo "inif";die;?>
             <span class="web-excl"><?php print t('Cover Story'); ?></span>
             <?php
             print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
@@ -55,7 +55,7 @@
 
     <div class="magazin-bottom">
       <?php 
-        if ($row['field_story_source_type'] == 'migrated' && $count_issue > 0) {
+        if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) {
           print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
         }
         else {
