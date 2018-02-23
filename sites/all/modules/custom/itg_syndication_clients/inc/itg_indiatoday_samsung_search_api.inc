@@ -32,25 +32,14 @@ function itg_indiatoday_samsung_search_api_video_list(){
     $video_list[0]['v_title'] = "Xiaomi Redmi Note 5 Pro Review";
     $video_list[0]['v_credit'] = "Rahul Sethi";
     $video_list[0]['v_byline'] = "Rahul Sethi";
-    $video_list[0]['v_desc'] = "<p>Redmi Note 5 Pro is selling at R</p>";
+    $video_list[0]['v_desc'] = "Redmi Note 5 Pro is selling at R";
     $video_list[0]['v_small_image'] = "medium-img";
     $video_list[0]['v_large_image'] = "extr-l-img";
     $video_list[0]['v_download_url'] = "url";
     $video_list[0]['v_updated_datetime'] = "2018-02-04 15:02:27";
     $video_list[0]['v_duration'] = "11";
-    $video_list[0]['v_show_ad'] = "0";
+    $video_list[0]['v_show_ad'] = "0";  
     
-    $video_list[1]['v_id'] = "1176124";
-    $video_list[1]['v_title'] = "Xiaomi Redmi Note 5 Pro Review";
-    $video_list[1]['v_credit'] = "Rahul Sethi";
-    $video_list[1]['v_byline'] = "Rahul Sethi";
-    $video_list[1]['v_desc'] = "<p>Redmi Note 5 Pro is selling at R</p>";
-    $video_list[1]['v_small_image'] = "medium-img";
-    $video_list[1]['v_large_image'] = "extr-l-img";
-    $video_list[1]['v_download_url'] = "url";
-    $video_list[1]['v_updated_datetime'] = "2018-02-04 15:02:27";
-    $video_list[1]['v_duration'] = "11";
-    $video_list[1]['v_show_ad'] = "0";
     
     return $video_list;
     
