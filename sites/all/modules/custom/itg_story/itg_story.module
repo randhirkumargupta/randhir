@@ -1435,14 +1435,14 @@ function itg_story_ad_code_in_content($content) {
   $content_parts = explode(' ', $content);
   $ad_code_after = 250;
   
-  if(count($content_parts) < 250){
+  if(count($content_parts) < $ad_code_after){
 		$content = implode(' ', $content_parts);
 		$content .= $ad_code;
 		return $content;
 	}
   
   foreach ($content_parts as $key => $value) {
-    if ($key < $ad_code_after) {
+    if ($key <= $ad_code_after) {
       $before_content[] = $value;
     }
     else {
@@ -1454,7 +1454,7 @@ function itg_story_ad_code_in_content($content) {
   $after_content = implode(' ', $after_content);
   $after_content_arr = explode('</p>', $after_content);
   $ad_code = '<p class="custom-amp-ad">' . $ad_code;
-  array_splice($after_content_arr, 0, 0, $ad_code);
+  array_splice($after_content_arr, 1, 0, $ad_code);
   $after_content = implode('</p>', $after_content_arr);
   $content = $before_content . $after_content;
   return $content;
