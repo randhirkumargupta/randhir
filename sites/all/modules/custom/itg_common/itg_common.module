@@ -1407,6 +1407,9 @@ function _remove_embded_tags_from_story_body($body_content) {
  * @return boolean
  */
 function itg_workflow_stop_node_update_batch_for_widgets() {
+	if (!isset($_REQUEST['id'])) {
+		return FALSE;
+	}
   $id = $_REQUEST['id'];
   $query = db_select('batch', 'b')
       ->fields('b', array('batch'))
