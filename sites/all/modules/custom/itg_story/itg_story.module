@@ -1453,7 +1453,7 @@ function itg_story_ad_code_in_content($content) {
 	$before_content = implode(' ', $before_content);
   $after_content = implode(' ', $after_content);
   $after_content_arr = explode('</p>', $after_content);
-  $ad_code = '<p>' . $ad_code;
+  $ad_code = '<p class="custom-amp-ad">' . $ad_code;
   array_splice($after_content_arr, 0, 0, $ad_code);
   $after_content = implode('</p>', $after_content_arr);
   $content = $before_content . $after_content;
