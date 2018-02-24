@@ -153,8 +153,9 @@ function itg_seo_node_data($node) {
             '#tag' => 'link',
             '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
           );
+          drupal_add_html_head($google_standout, 'standout');
         }
-        drupal_add_html_head($google_standout, 'standout');
+        
     }
   }
   // Rich Snippet for Movie Review
