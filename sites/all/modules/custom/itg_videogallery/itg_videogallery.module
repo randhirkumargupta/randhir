@@ -464,9 +464,10 @@ function itg_videogallery_managed_file_process_accept_attribute($element, &$form
  * impliment hook node insert
  */
 function itg_videogallery_node_insert($node) {
+/* Comment code by Shashank
   if ($node->type == 'story') {
     itg_videogallery_save_story_video_data($node->body['und'][0]['value'], $node->nid);
-  }
+  }*/
 
   // Here Check node type not migrated
   if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
