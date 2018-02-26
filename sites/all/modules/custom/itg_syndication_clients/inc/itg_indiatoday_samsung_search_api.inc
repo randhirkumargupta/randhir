@@ -11,6 +11,8 @@
  * @param string $result
  */
 function itg_indiatoday_samsung_search_api(){
+    $searchpage = views_get_view_result('front_end_global_search', 'page_1', 'india');
+    p($searchpage);
     $data = array();
     $video_list = array();
     $video_list = itg_indiatoday_samsung_search_api_video_list();
@@ -40,7 +42,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
     $video_list[0]['v_duration'] = "11";
     $video_list[0]['v_show_ad'] = "0";  
     
-    
+    $video_list = array();
     return $video_list;
     
 }
