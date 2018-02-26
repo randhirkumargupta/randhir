@@ -20,7 +20,7 @@ $query->keys($term);
 $query->fields(array('title','body:value')); 
 $srv= new SearchApiDbService($server);
 $result = $srv->search($query);
-p($result);
+p($result); 
 
 
     //$searchpage = views_get_view_result('front_end_global_search', 'page_1', 'india');
