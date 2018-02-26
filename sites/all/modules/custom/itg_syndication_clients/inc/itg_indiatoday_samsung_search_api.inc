@@ -61,7 +61,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
         $video_list[$loopc]['v_show_ad'] = "0"; 
         $loopc++;
     }
-    p($video_list);
+    //p($video_list);
     
     return $video_list;
     
