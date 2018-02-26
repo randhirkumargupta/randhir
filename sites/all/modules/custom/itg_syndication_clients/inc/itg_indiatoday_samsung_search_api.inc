@@ -10,9 +10,7 @@
  * @param str $key
  * @param string $result
  */
-function itg_indiatoday_samsung_search_api(){
-    $searchpage = views_get_view_result('front_end_global_search', 'page_1', 'india');
-    p($searchpage);
+function itg_indiatoday_samsung_search_api(){    
     $data = array();
     $video_list = array();
     $video_list = itg_indiatoday_samsung_search_api_video_list();
@@ -22,7 +20,7 @@ function itg_indiatoday_samsung_search_api(){
     $data['data']['title'] = "Video";
     $data['data']['video'] = $video_list;
     
-     p(json_encode($data));
+     print json_encode($data);
 }
 /**
  * 
