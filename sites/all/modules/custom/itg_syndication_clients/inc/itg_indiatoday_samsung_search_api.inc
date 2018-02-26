@@ -14,9 +14,8 @@ function itg_indiatoday_samsung_search_api(){
     //$searchpage = views_get_view_result('front_end_global_search', 'page_1', 'india');
     $i_arg = array();
     $i_arg[0] = 'india';
-    $searchpage1 = views_get_view_result('front_end_global_search', 'default', $i_arg);
-    $searchpage2 = views_get_view_result('Front_end_global_search', 'default', $i_arg);
-    print_r($searchpage2);
+    $searchpage1 = views_get_view_result('front_end_global_search', 'page_1', $i_arg);
+   
     p($searchpage1);
     $data = array();
     $video_list = array();
