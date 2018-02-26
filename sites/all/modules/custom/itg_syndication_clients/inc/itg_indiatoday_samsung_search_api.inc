@@ -11,6 +11,18 @@
  * @param string $result
  */
 function itg_indiatoday_samsung_search_api(){
+    
+$term = 'india';
+$server = search_api_server_load('database');
+$index = search_api_index_load('default_node_index');
+$query = new SearchApiQuery($index);
+$query->keys($term); 
+$query->fields(array('title','body:value')); 
+$srv= new SearchApiDbService($server);
+$result = $srv->search($query);
+p($result);
+
+
     //$searchpage = views_get_view_result('front_end_global_search', 'page_1', 'india');
     $i_arg = array();
     $i_arg[0] = 'india';
