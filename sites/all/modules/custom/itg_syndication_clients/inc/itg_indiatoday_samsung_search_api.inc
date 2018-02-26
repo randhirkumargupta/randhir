@@ -30,7 +30,8 @@ function itg_indiatoday_samsung_search_api_video_list(){
     $key = arg(2);
     $i_arg = array();
     $i_arg[0] = $key;
-    $searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);    
+    $searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);  
+    p($searchpage);
     $video_list = array();
     $loopc = 0;
     foreach ($searchpage as $key => $value){
