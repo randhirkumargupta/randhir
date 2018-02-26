@@ -1440,7 +1440,7 @@ footer {
   color: #fff;
   padding: 10px;
   background: #000000;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   font-family: "OpenSans-Regular"; }
   .big-news .big-story-col-1,
   .big-news .big-story-col-2 {
@@ -13896,12 +13896,10 @@ ul.pron-cons-img li img {
   overflow-y: auto; }
 
 .video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 .video_header_tabs .trending-videos li.trending-videos-list img {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
   color: #aaa9a9; }
