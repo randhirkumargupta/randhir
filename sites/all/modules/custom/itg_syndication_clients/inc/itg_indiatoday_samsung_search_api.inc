@@ -10,25 +10,7 @@
  * @param str $key
  * @param string $result
  */
-function itg_indiatoday_samsung_search_api(){
-    
-$term = 'india';
-$server = search_api_server_load('database');
-$index = search_api_index_load('default_node_index');
-$query = new SearchApiQuery($index);
-$query->keys($term); 
-$query->fields(array('title','body:value')); 
-$srv= new SearchApiDbService($server);
-$result = $srv->search($query);
-p($result); 
-
-
-    //$searchpage = views_get_view_result('front_end_global_search', 'page_1', 'india');
-    $i_arg = array();
-    $i_arg[0] = 'india';
-    $searchpage1 = views_get_view_result('front_end_global_search', 'page_1', $i_arg);
-   
-    p($searchpage1);
+function itg_indiatoday_samsung_search_api(){    
     $data = array();
     $video_list = array();
     $video_list = itg_indiatoday_samsung_search_api_video_list();
@@ -38,37 +20,48 @@ p($result);
     $data['data']['title'] = "Video";
     $data['data']['video'] = $video_list;
     
-     p(json_encode($data));
+     echo json_encode($data);
 }
 /**
  * 
  */
 
 function itg_indiatoday_samsung_search_api_video_list(){
+    $key = arg(2);
+    $i_arg = array();
+    $i_arg[0] = $key;
+    $searchpage = views_get_view_result('front_end_global_search', 'page_1', $i_arg);    
     $video_list = array();
-    $video_list[0]['v_id'] = "1176124";
-    $video_list[0]['v_title'] = "Xiaomi Redmi Note 5 Pro Review";
-    $video_list[0]['v_credit'] = "Rahul Sethi";
-    $video_list[0]['v_byline'] = "Rahul Sethi";
-    $video_list[0]['v_desc'] = "<p>Redmi Note 5 Pro is selling at R</p>";
-    $video_list[0]['v_small_image'] = "medium-img";
-    $video_list[0]['v_large_image'] = "extr-l-img";
-    $video_list[0]['v_download_url'] = "url";
-    $video_list[0]['v_updated_datetime'] = "2018-02-04 15:02:27";
-    $video_list[0]['v_duration'] = "11";
-    $video_list[0]['v_show_ad'] = "0";
+    $loopc = 0;
+    foreach ($searchpage as $key => $value){
+        $nid = $value->entity_id;
+        $node = node_load($nid);
+        $title = $node->title;
+        $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
+        $img_info = getInfoData($large_image_fid);
+        $image_courtesy = $img_info['image_courtesy'];
+        $image_caption = $img_info['image_caption'];
+        $caption = $node->field_story_extra_large_image['und'][0]['title'];
+        $body = $node->body['und'][0]['value'];
+        $firebase_url = get_node_firebase_weburl($nid);
+        $changed = $node->changed;
+        if ($changed) {
+            $changed_datetime = date("Y-m-d H:i:s", $changed);
+        }
+        $video_list[$loopc]['v_id'] = "$nid";
+        $video_list[$loopc]['v_title'] = "$title";
+        $video_list[$loopc]['v_credit'] = "$image_courtesy";
+        $video_list[$loopc]['v_byline'] = "$image_caption";
+        $video_list[$loopc]['v_desc'] = "$body";
+        $video_list[$loopc]['v_small_image'] = "$extra_large_image";
+        $video_list[$loopc]['v_large_image'] = "$extra_large_image";
+        $video_list[$loopc]['v_download_url'] = "$firebase_url";
+        $video_list[$loopc]['v_updated_datetime'] = "$changed_datetime";
+        $video_list[$loopc]['v_duration'] = "";
+        $video_list[$loopc]['v_show_ad'] = "0"; 
+        $loopc++;
+    }
     
-    $video_list[1]['v_id'] = "1176124";
-    $video_list[1]['v_title'] = "Xiaomi Redmi Note 5 Pro Review";
-    $video_list[1]['v_credit'] = "Rahul Sethi";
-    $video_list[1]['v_byline'] = "Rahul Sethi";
-    $video_list[1]['v_desc'] = "<p>Redmi Note 5 Pro is selling at R</p>";
-    $video_list[1]['v_small_image'] = "medium-img";
-    $video_list[1]['v_large_image'] = "extr-l-img";
-    $video_list[1]['v_download_url'] = "url";
-    $video_list[1]['v_updated_datetime'] = "2018-02-04 15:02:27";
-    $video_list[1]['v_duration'] = "11";
-    $video_list[1]['v_show_ad'] = "0";
     
     return $video_list;
     
