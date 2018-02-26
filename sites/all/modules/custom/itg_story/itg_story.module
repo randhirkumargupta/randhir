@@ -292,12 +292,12 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
       }
       // Reporter unique id in case of issue based story created from XML Upload.
-      if (isset($form['#node']->nid) && empty($form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value'])) {
-        $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-'.$form['#node']->nid;
+      if (isset($form['#node']->nid) &&  empty($form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+	    $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-'.$form['#node']->nid;
       }
       if ($user->uid != 1) {
         $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
-        $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
+        $form['C']['#attributes']['class'][] = 'element-hidden';
       }
       $form['field_story_reporter']['und'][0]['target_id']['#autocomplete_path'] = 'byline/autocomplete';
 
