@@ -676,7 +676,11 @@ function itg_app_manager_form_submit($form, &$form_state) {
             $section_id = 0;
             $s_id = 0;
             $s_title = '';
-            if ($form_val['menu_type'] == '0') {
+            if(arg(2) == "edit" && arg(3) == 1){
+               $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $section_id = $form_val['section']['title']; 
+            }
+            elseif ($form_val['menu_type'] == '0') {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
