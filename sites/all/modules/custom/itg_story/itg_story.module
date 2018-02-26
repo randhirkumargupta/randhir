@@ -1197,6 +1197,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           $new_body_text .= $body_text[$i] . "</p>";
         }
         $node->body[LANGUAGE_NONE][0]['value'] = $new_body_text;
+        $node->body[LANGUAGE_NONE][0]['value'] = itg_story_ad_code_in_content($node->body[LANGUAGE_NONE][0]['value']);
       }
       else {
         $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
@@ -1395,4 +1396,43 @@ function replace_emoji($text){
   $string = str_replace(array("?", "? ", " ?"), array(""), $string);
   $string = str_replace("{%}", "?", $string);
   return trim($string);
+}
+
+/**
+ * Function place ad code in content after 250
+ * @param string $content
+ * @return string
+ */
+function itg_story_ad_code_in_content($content) {
+  $ad_code = variable_get('place_amp_ad_within_content');
+  if (empty($ad_code)) {
+    $content;
+  }
+  $content = html_entity_decode($content);
+  $content_parts = explode(' ', $content);
+  $ad_code_after = 250;
+
+  if (count($content_parts) < $ad_code_after) {
+    $content = implode(' ', $content_parts);
+    $content .= $ad_code;
+    return $content;
+  }
+
+  foreach ($content_parts as $key => $value) {
+    if ($key <= $ad_code_after) {
+      $before_content[] = $value;
+    }
+    else {
+      $after_content[] = $value;
+    }
+  }
+
+  $before_content = implode(' ', $before_content);
+  $after_content = implode(' ', $after_content);
+  $after_content_arr = explode('</p>', $after_content);
+  $ad_code = '<p class="custom-amp-ad">' . $ad_code;
+  array_splice($after_content_arr, 1, 0, $ad_code);
+  $after_content = implode('</p>', $after_content_arr);
+  $content = $before_content . $after_content;
+  return $content;
 }
