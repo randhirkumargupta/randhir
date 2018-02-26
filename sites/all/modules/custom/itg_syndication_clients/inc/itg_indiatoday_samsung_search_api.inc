@@ -10,7 +10,8 @@
  * @param str $key
  * @param string $result
  */
-function itg_indiatoday_samsung_search_api(){    
+function itg_indiatoday_samsung_search_api(){  
+    p(arg());
     $data = array();
     $video_list = array();
     $video_list = itg_indiatoday_samsung_search_api_video_list();
