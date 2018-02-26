@@ -31,10 +31,11 @@ function itg_indiatoday_samsung_search_api_video_list(){
     $i_arg = array();
     $i_arg[0] = $key;
     $searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);  
-    p($searchpage);
+    //p($searchpage);
     $video_list = array();
     $loopc = 0;
     foreach ($searchpage as $key => $value){
+       print_r($value);
         $nid = $value->entity_id;
         $node = node_load($nid);
         $title = $node->title;
@@ -62,7 +63,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
         $video_list[$loopc]['v_show_ad'] = "0"; 
         $loopc++;
     }
-    
+    p($video_list);
     
     return $video_list;
     
