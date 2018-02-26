@@ -291,6 +291,11 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
         $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
       }
+      // Reporter unique id in case of issue based story created from XML Upload.
+      if (isset($form['#node']->nid) && empty($form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value'])) {
+        $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-'.$form['#node']->nid;
+      }
+      // Unset defualy value if attached gallery is unpublished.
       if ($user->uid != 1) {
         $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
         $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
