@@ -1746,7 +1746,7 @@ footer {
     color: $white-color;
     padding: 10px;
     background: $black-bg;
-    margin-bottom: 50px;
+    margin-bottom:20px;
     ul {
         @extend .list-none;
     }
@@ -14890,12 +14890,10 @@ ul.pron-cons-img li img {
 
 .video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
     width: 170px;
-    height: 127px;
 }
 
 .video_header_tabs .trending-videos li.trending-videos-list img {
     width: 170px;
-    height: 127px;
 }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {

@@ -654,7 +654,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 /* App page css */
 .app-area-wrapper{width:1160px; margin:0px auto;}
 .app-area{float:left; width:100%;}
-.app-area h2{font:bold 29px/35px 'OpenSans-Regular', sans-serif; color:#404040; display:block; margin:0}
+.app-area h2{font:bold 29px/35px 'Merriweather-Semibold'; color:#111; display:block; margin:0}
 .app-area .top-area{float:left; width:100%;}
 .app-area .top-area{display:block; margin:25px auto 0;}
 .app-area .top-area .left-area{width:212px; float:left; padding-bottom:37px;}
@@ -669,7 +669,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .top-area .right-area{float:right; width:900px;}
 .app-area .top-area .right-area ul{margin:10px 0 0 23px; padding:0;}
 .app-area .top-area .right-area ul li{float:left; width:100%;color:#a7a7a7; font-size:18px; list-style:disc; padding-left:5px; margin-bottom:15px; font-weight:bold;}
-.app-area .top-area .right-area ul li strong{font:normal 14px/20px 'OpenSans-Regular', sans-serif; color:#404040;}
+.app-area .top-area .right-area ul li strong{font:normal 14px/20px 'OpenSans-Regular', sans-serif; color:#111;}
 .app-area .top-area .right-area ul li:last-child{list-style:none;}
 .app-area .top-area .right-area ul li:last-child strong{font-weight:bold;color:#276b9e;}
 .app-area .top-area .right-area ul li:last-child a{font-size:13px; color:#276b9e; font-weight:bold; text-decoration:none}
@@ -680,8 +680,8 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .bottom-area ul li{width:362px; float:left; border-right:1px solid #efefef; padding-right:15px; margin-left:20px; min-height:430px;}
 .app-area .bottom-area ul li:first-child{margin-left:0}
 .app-area .bottom-area ul li:last-child{padding-right:0; border:0;}
-.app-area .bottom-area ul li h3{font:bold 20px/22px 'OpenSans-Regular', sans-serif; color:#404040; display:inline-block; width:100%; text-transform:uppercase; text-align:center; margin:50px 0 5px 0;}
-.app-area .bottom-area ul li p{font:14px/22px 'OpenSans-Regular', sans-serif; color:#6d6d6d; display:block; margin:0}
+.app-area .bottom-area ul li h3{font:bold 20px/22px 'OpenSans-Regular', sans-serif; color:#111; display:inline-block; width:100%; text-transform:uppercase; text-align:center; margin:50px 0 5px 0;}
+.app-area .bottom-area ul li p{font:14px/22px 'OpenSans-Regular', sans-serif; color:#111; display:block; margin:0}
 .share_bar{ display:none;}
 /*  Score card Changes */
 #itg-scorecard-container{background: #222834;padding: 0;height: 60px;}

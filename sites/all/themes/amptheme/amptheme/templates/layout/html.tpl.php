@@ -101,7 +101,7 @@ h4,
 h5,
 h6 {
     font-family:'Open Sans'
-}
+} 
 h1 {
     font-family:'Merriweather';
     font-size: 25px;
@@ -132,7 +132,7 @@ img {
     margin-bottom: 0;
     z-index: 9999;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, .1);
-    height: 45px
+    height: 35px
 }
 #logo {
     margin: 12px 5px;
@@ -222,7 +222,7 @@ img {
     color: #777;
     font-size:13px;
     font-family: Open Sans;
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #ddd;
     font-weight:600;
 }
@@ -640,7 +640,7 @@ pre {
 }
 .front-end-breadcrumb {
     margin: 0 -12px;
-    padding: 20px 12px;
+    padding:10px 12px;
     font-size: 14px
 }
 .front-end-breadcrumb.front-end-breadcrumb-photo-video {
@@ -1152,7 +1152,7 @@ ul.header-menu li:first-child {
     margin-left: -3px;
 }
 .container.top-nav .main-nav .nav-container-menu .nav-centerall {
-    width:315px;
+    width:325px;
     margin: 0 auto
 }
 .footer-latest * {
@@ -1468,7 +1468,7 @@ ul.header-menu li {
     border-bottom: 1px solid #ccc;
     width: 270px;
 }
-.story_ad_block.custom-amp-ad{margin-top:15px;}
+.story_ad_block.custom-amp-ad{margin-top:5px;}
 .node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{margin-bottom:8px;}
 section.sidebar .block-itg-ads > div {
     margin: auto;
@@ -1501,6 +1501,13 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
         margin-left: 6%;
         box-sizing: border-box
     }
+}
+
+@media only screen and (max-width:320px) {
+#header .main-nav .nav-container-menu{ width: calc(100% - 40px) }
+#header .top-nav ul li{ margin:0px 4px; }
+#header .top-nav ul.menu li a{ padding:0;  }
+#header .top-nav .top-first-menu ul.menu li.last.leaf:after{ left:-4px; }
 }
 
 .video_dec_amp {
