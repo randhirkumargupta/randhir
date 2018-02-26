@@ -670,17 +670,12 @@ function _get_section_options($term_id, $menu_form_id, $subsec_options) {
 function itg_app_manager_form_submit($form, &$form_state) {
     if (!empty($form_state['values'])) {
         foreach ($form_state['values']['container'] as $key => $form_val) {
-            //echo $form_val['menu_type']; die();
             $data = array();
             $title = '';
             $section_id = 0;
             $s_id = 0;
             $s_title = '';
-            if(arg(2) == "edit" && arg(3) == 1){
-               $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                $section_id = $form_val['section']['title']; 
-            }
-            elseif ($form_val['menu_type'] == '0') {
+            if ($form_val['menu_type'] == '0') {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
@@ -689,8 +684,8 @@ function itg_app_manager_form_submit($form, &$form_state) {
             } else {
                 $title = $form['container'][$key]['menu_type']['#options'][$form_val['menu_type']];
                 $section_id = $form_val['menu_type'];
-                $s_id = $form_val['sub_section'];
-                    $s_title = $form['container'][$key]['sub_section']['#options'][$form_val['sub_section']];
+                $s_id = $form_val['section']['title'];
+                $s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
             }
             if ($form_val['menu_type'] == '1') {
                 if ($form_val['has_subcat'] == 1) {
