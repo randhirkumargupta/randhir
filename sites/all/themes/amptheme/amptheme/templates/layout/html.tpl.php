@@ -1152,7 +1152,7 @@ ul.header-menu li:first-child {
     margin-left: -3px;
 }
 .container.top-nav .main-nav .nav-container-menu .nav-centerall {
-    width: 296px;
+    width:315px;
     margin: 0 auto
 }
 .footer-latest * {

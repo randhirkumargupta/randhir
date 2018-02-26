@@ -199,7 +199,7 @@ img {
 }
 
 .mt-50 {
-    margin-top: 50px;
+    margin-top:20px;
 }
 
 .ml-10 {
@@ -426,7 +426,7 @@ p {
 /*start header css*/
 
 header {
-    margin-bottom: 30px;
+    margin-bottom:10px;
     position: relative;
     z-index: 9999;
 }
@@ -517,7 +517,7 @@ header {
         }
     .top-nav {
         padding: 0 15px 0 15px;
-        margin: 25px auto 15px auto;
+        margin: 25px auto 5px auto;
         float: none;
         @include clearfix;
         background: transparent;
@@ -531,7 +531,7 @@ header {
         .main-nav {
 			padding-left:0px;
 			line-height: 28px;
-			width:58%;
+			width:65%;
 			margin: 0 auto;
             li {
                 &.desktop-hide {
@@ -573,7 +573,7 @@ header {
     }
     .navigation {
         @include clearfix;
-        margin-top: 20px;
+        margin-top:0px;
         overflow:visible;
         background: #a00606;
         box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
@@ -1481,7 +1481,7 @@ section.sidebar {
 /*Start CSS footer section*/
 
 footer {
-    margin-top: 40px;
+    margin-top: 20px;
     background: $black-bg;
     @include itg-font($itg-opensans);
     ul {
@@ -2709,12 +2709,12 @@ footer {
             border-bottom: 1px solid #e5e5e5;
         }
         .description {
-            padding-top: 25px;
+            padding-top: 10px;
             @include font(17px,
             29px);
             word-wrap: break-word;
             p {
-                padding: 10px 0;
+                padding: 5px 0;
             }
             video {
                 max-width: 100%;
@@ -2973,7 +2973,7 @@ footer {
         }
     }
     .tags {
-        padding: 25px 0px;
+        padding: 10px 0px;
         ul {
             li {
                 @include display-inline;
@@ -3867,7 +3867,7 @@ h1.category-heading {
 }
 
 .list-grid {
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 18px;
     font-family: $itg-opensans;
     text-align: right;
@@ -4296,7 +4296,7 @@ h1.category-heading {
         h3 {
             display: block;
             span {
-                padding: 45px 20px 10px 0px;
+                padding: 20px 20px 10px 0px;
             }
         }
         ul {
@@ -9612,7 +9612,7 @@ section.sidebar {
 /*css start taboola page*/
 
 .taboola {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 
@@ -10426,17 +10426,17 @@ div#playerContainer {
     @include pager;
     h3 {
         display: block;
-        margin-bottom: 20px;
+        margin-bottom:0px;
         span {
             padding-left: 0;
         }
     }
     .program_data {
-        margin-bottom: 50px;
+        margin-bottom:10px;
     }
     .program-row {
         @include pos(relative);
-        margin-bottom: 10px;
+        margin-bottom:0px;
         padding: 0 5px;
         .programe-title {
             a {
@@ -12388,7 +12388,7 @@ span.smilies-title {
     z-index: 9998;
     color: #a1a1a1;
     font-family: $itg-opensans;
-    padding-top: 15px;
+    padding-top: 0px;
     a {
         color: #a1a1a1;
         font-family: $itg-opensans;
