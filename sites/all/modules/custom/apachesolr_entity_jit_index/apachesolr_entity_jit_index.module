@@ -57,6 +57,7 @@ function apachesolr_entity_jit_index_entity_form() {
  * {@inheritdoc}
  */
 function apachesolr_entity_jit_index_entity_insert($entity, $type) {
+  p($type);
   if ($type == 'node') {
     $content_type = array_values(variable_get('apachesolr_entity_jit_index_for_solr_index'));
     $content_type = array_filter($content_type, function ($a) {
