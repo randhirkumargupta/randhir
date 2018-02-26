@@ -10,7 +10,9 @@
  */
 function itg_scribd_feed_live_issue() {
   $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
+  $query->fields('fsli', array('field_issue_large_cover_image_fid'));
   $query->condition('n.status', 1);
   $query->condition('n.type', 'issue');
   $query->orderBy('n.nid', "DESC");
@@ -28,7 +30,8 @@ function itg_genrate_scribd_live_issue_syndication($issue_result = NULL) {
   if (!empty($issue_result)) {
     $issue_title = date('F d, Y', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
-    $query = db_select('node', 'n');
+    $field_issue_large_cover_image_fid = $issue_result[0]['field_issue_large_cover_image_fid'];
+    $query = db_select('node', 'n');    
     // $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
@@ -46,7 +49,7 @@ function itg_genrate_scribd_live_issue_syndication($issue_result = NULL) {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     //print strtr((string) $query, $query->arguments());die;
-    $xml = genrate_scribd_live_issue_syndication_xml($result, $issue_title, $issue_result);
+    $xml = genrate_scribd_live_issue_syndication_xml($result, $issue_title, $issue_result, $field_issue_large_cover_image_fid);
     $xml_path = 'public://rss-feeds/xml_data/googlenewstand/it/stories/';
     $file_path = $xml_path . 'it-latest-issue.xml';
     $fp = fopen($file_path, "w");
@@ -63,13 +66,14 @@ function itg_genrate_scribd_live_issue_syndication($issue_result = NULL) {
  * @param array $issue_result
  * @return string
  */
-function genrate_scribd_live_issue_syndication_xml($result = NULL, $issue_title, $issue_result) {
+function genrate_scribd_live_issue_syndication_xml($result = NULL, $issue_title, $issue_result, $field_issue_large_cover_image_fid) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $issue_title_n = "[India Today Magazine - ".$issue_title;
     $issue_identifier = $issue_title;
-    $issue_cover_image = getIssueCoverImgScribed($issue_title);
+    //$issue_cover_image = getIssueCoverImgScribed($issue_title);
+    $issue_cover_image = completeFilePath($field_issue_large_cover_image_fid);
     $xml = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[' . $issue_title . ']]></title>';
