@@ -198,6 +198,7 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
+  print_r($arg);
   if ($arg[0] == 'tribute-to-sridevi' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score')) {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
