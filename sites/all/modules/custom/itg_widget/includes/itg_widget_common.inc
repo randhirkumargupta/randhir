@@ -2870,7 +2870,7 @@ function itg_widget_node_insert($node) {
                         $single_insert_query->execute();
                         //Delete Logic
                         // As we do not want to keep more data in table.
-                        _delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
+                        //_delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
                         
                         $single_insert_query_all = db_insert('itg_widget_order_section')->fields(
                                 array(
@@ -2896,7 +2896,7 @@ function itg_widget_node_insert($node) {
                         $single_insert_query_all->execute();
                         //Delete Logic
                         // As we do not want to keep more data in table.
-                        _delete_old_data_from_section_widget('itg_widget_order_section', $category['tid'], $node->type);
+                       // _delete_old_data_from_section_widget('itg_widget_order_section', $category['tid'], $node->type);
                     }
                 }
             }
