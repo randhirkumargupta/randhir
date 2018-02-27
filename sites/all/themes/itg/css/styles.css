@@ -5407,7 +5407,7 @@ h1.category-heading {
   #block-views-photo-list-of-category-block-2 h3 span,
   .view-photo-list-of-category h3 span,
   .view-podcasts-listing.podcast-detail-page h3 span {
-    padding: 45px 20px 10px 0px; }
+    padding: 20px 20px 10px 0px; }
 
 [id*="block-itg-widget-featured-photo-carousel"] .flexslider .slides img {
   max-height: 340px; }
@@ -8404,8 +8404,7 @@ section.sidebar .block-itg-ads {
         height: 32px;
         text-transform: uppercase;
         width: 90px;
-        cursor: pointer;
-        font-size: 14px; }
+        cursor: pointer; }
       .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha {
         border: none; }
         .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha legend,
@@ -11731,7 +11730,8 @@ span.smilies-title {
 }*/
 .photo-heading {
   font-size: 32px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   color: #fff;
   line-height: 42px; }
 
@@ -13697,7 +13697,7 @@ ul.pron-cons-img li img {
   background: #fff;
   z-index: 1;
   position: relative;
-  padding: 45px 20px 10px 0px;
+  padding: 20px 20px 10px 0px;
   display: inline-block; }
 
 .other_photogallery_category h3:before {
@@ -13736,7 +13736,7 @@ ul.pron-cons-img li img {
   color: #969696; }
 
 #block-itg-photogallery-photogallery-link-menu-block {
-  margin-top: 22px; }
+  margin-top: 10px; }
 
 .other_video_category h3 {
   text-transform: uppercase;
