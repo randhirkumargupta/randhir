@@ -175,6 +175,7 @@ function get_ola_feed_videos_array() {
     '1208898' => 'person_of_interest.xml',
     '1208061' => 'the_long_story.xml',
     '1208898' => 'person_of_interest.xml',
+    '1207303' => 'movies.xml',
   );
   return $cabbytabby_feed_videos;
 }

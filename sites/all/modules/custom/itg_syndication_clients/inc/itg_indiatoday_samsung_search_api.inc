@@ -10,7 +10,7 @@
  * @param str $key
  * @param string $result
  */
-function itg_indiatoday_samsung_search_api(){    
+function itg_indiatoday_samsung_search_api(){
     $data = array();
     $video_list = array();
     $video_list = itg_indiatoday_samsung_search_api_video_list();
@@ -38,6 +38,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
         $node = node_load($nid);
         $title = $node->title;
         $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
+        $field_story_medium_image = file_create_url($node->field_story_medium_image['und'][0]['uri']);
         $img_info = getInfoData2($large_image_fid);
         $image_courtesy = $img_info['image_courtesy'];
         $image_caption = $img_info['image_caption'];
@@ -53,7 +54,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
         $video_list[$loopc]['v_credit'] = "$image_courtesy";
         $video_list[$loopc]['v_byline'] = "$image_caption";
         $video_list[$loopc]['v_desc'] = "$body";
-        $video_list[$loopc]['v_small_image'] = "$extra_large_image";
+        $video_list[$loopc]['v_small_image'] = "$field_story_medium_image";
         $video_list[$loopc]['v_large_image'] = "$extra_large_image";
         $video_list[$loopc]['v_download_url'] = "$firebase_url";
         $video_list[$loopc]['v_updated_datetime'] = "$changed_datetime";
