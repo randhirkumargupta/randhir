@@ -287,7 +287,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       }
       // Reporter unique id in case of issue based story created from XML Upload.
       if (isset($form['#node']->nid) && empty($form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'])) {
-	    $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-'.$form['#node']->nid;
+        $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-' . $form['#node']->nid;
       }
       if ($user->uid != 1) {
         $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
@@ -788,8 +788,8 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
   if (function_exists('itg_story_dropdown_supplement')) {
-    if(!empty($issue_date)) {
-    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_story_dropdown_supplement($issue_date);
+    if (!empty($issue_date)) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_story_dropdown_supplement($issue_date);
     }
   }
 
@@ -1447,18 +1447,23 @@ function itg_story_ad_code_in_content($content) {
   return $content;
 }
 
-function itg_story_dropdown_supplement($issue_date){
-	// Fetch supplements for selected magazine
+/**
+ * Fetch supplements for selected magazine
+ * @param type $issue_date
+ * @return type
+ */
+function itg_story_dropdown_supplement($issue_date) {
+  // Fetch supplements for selected magazine
   $select = t('- None -');
   $data = array('_none' => $select);
-  $query = db_select('field_data_field_issue_supplement' , 'm');
-  $query->join('node' , 'n' , 'm.entity_id = n.nid');
-  $query->join('node' , 'ns' , 'm.field_issue_supplement_target_id = ns.nid');
-  $query->fields('m' , array('entity_id', 'field_issue_supplement_target_id'));
-  $query->fields('n' , array('title'));
-  $query->fields('ns' , array('title'));
+  $query = db_select('field_data_field_issue_supplement', 'm');
+  $query->join('node', 'n', 'm.entity_id = n.nid');
+  $query->join('node', 'ns', 'm.field_issue_supplement_target_id = ns.nid');
+  $query->fields('m', array('entity_id', 'field_issue_supplement_target_id'));
+  $query->fields('n', array('title'));
+  $query->fields('ns', array('title'));
   //$query->condition('n.status' , 1 , '=');
-  $query->condition('n.title' , $issue_date , '=');
+  $query->condition('n.title', $issue_date, '=');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
