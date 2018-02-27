@@ -248,8 +248,8 @@ function genrate_syndication_xml_cat_1206735() {
         $xml .= '<edition>' . $publish_date . '</edition>';
         $xml .= '<items>';
         foreach ($result as $key => $value) {
-            $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
-            //$prime_cat = getNodePrimeCatByNid($nid);
+            //$primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
+            $prime_cat = getNodePrimeCatByNid($value['nid']);
             $byline = get_byline_name_by_nid($value['nid']);
             $byline = empty($byline) ? 'IndiaToday.in' : $byline;
             $body = remove_extra_tag_in_body($value["body_value"]);
@@ -257,7 +257,7 @@ function genrate_syndication_xml_cat_1206735() {
             $body = itg_remove_tags_from_body($body);
             $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
-            $xml .= '<section name="' . $primary_cat . '">';
+            $xml .= '<section name="' . $prime_cat->name . '">';
             $xml .= '<article>';
             $xml .= '<headline>' . $value['title'] . '</headline>';
             $xml .= '<byline>' . $byline . '</byline>';
