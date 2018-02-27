@@ -234,7 +234,7 @@ function genrate_syndication_xml_cat_1206735() {
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    if (!empty($result)) {
+    if (!empty($result)) { 
         global $base_url;
         $publish_date = date("F d, Y", time());
         $xml = '<?xml version="1.0" encoding="ISO-8859-1"?>';
