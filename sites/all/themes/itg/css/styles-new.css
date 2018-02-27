@@ -378,9 +378,10 @@ input[type="text"] {
   padding: 0;
   font-weight: 600;
   margin-bottom: 5px;
-  height: auto; }
+  height: auto;
+  font-family: "OpenSans-Bold"; }
   .widget-title a {
-    color: #323232; }
+    color: #111; }
 
 .sidebar-section-photo .itg-widget {
   /*margin: 35px 0; for video page sidebar */
