@@ -4,6 +4,7 @@
       <div class="magazin-top-left">
           <?php
           $migrated = $row['field_story_source_type'];
+          $field_show_web_exclusive = $row['field_show_web_exclusive'];
           $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
           if (empty($year_arr[2])) {
             $year = itg_msi_issue_attribute_date();
@@ -15,14 +16,18 @@
           $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
           $count_issue = count($view);
           ?>
-          <?php if ($row['field_story_source_type'] == 'migrated' && $count_issue > 0) { ?>
+          <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) { ?>
             <span class="web-excl"><?php print t('Cover Story'); ?></span>
             <?php
             print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
           }
           else {
+			  $view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
+			  $section_id = $view[0]->_field_data['nid']['entity']->field_story_category[LANGUAGE_NONE][0]['tid'];
+			  $section_name = get_term_name_from_tid($section_id)->name;
+			  $nid_arr[] = $view[0]->nid;
             ?>
-            <span class="web-excl"><?php print t('web exclusive'); ?></span>
+            <span class="web-excl"><?php print t($section_name); ?></span>
             <?php
             print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
           }
@@ -51,12 +56,16 @@
 
     <div class="magazin-bottom">
       <?php 
-        if ($row['field_story_source_type'] == 'migrated' && $count_issue > 0) {
+        if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) {
           print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
         }
         else {
+		  $view = views_get_view_result('magazine_top_story', 'block', $issue_attribute_date);
+		  foreach($view as $key => $view_val){
+			  $nid_arr[] = $view_val->nid;
+		  }
           print views_embed_view('magazine_top_story', 'block', $issue_attribute_date);
-        }
+        }        
         ?>
     </div>
   <?php endforeach; ?>
@@ -86,12 +95,11 @@
     global $base_url;
 // category based story according issue date
     if (function_exists('itg_msi_issue_category_data')) {
-      $data = itg_msi_issue_category_data($issue_attribute_date);
+      $data = itg_msi_issue_category_data($issue_attribute_date, $nid_arr);
     }
     if (function_exists('itg_msi_issue_suppliment_data')) {
-      $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
+      $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date, $nid_arr);
     }
-
     $style_name = 'section_ordering_widget';
     $final_data_array = array();
     if (!empty($data)) {
@@ -101,9 +109,10 @@
         $all_terms = taxonomy_get_parents_all($parent_key1);
         $number_parent = count($all_terms);
         $section_key = $number_parent - 1;
-        if ($parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
+        if ($field_show_web_exclusive == 1 || $parent_key1 != '1206509') {
           $section_data_final[$parent_key1] = $parent_value1;
         }
+        //~ $section_data_final[$parent_key1] = $parent_value1;
       }
     }
 
@@ -289,13 +298,13 @@
               if(!empty($supp_img_url)) {  
                 $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
               }
-              $supp_title = l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+              $supp_title = '<h3 class="lock">'. l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage'). '</h3>';
             }
             else {
               if(!empty($supp_img_url)) {
                 $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
               }
-              $supp_title = l(t($shortheadline_supp), 'node/' . $s_value->nid);
+              $supp_title = '<h3>' . l(t($shortheadline_supp), 'node/' . $s_value->nid) . '</h3>';
             }
           }
           elseif ($key > 0) {
@@ -309,13 +318,7 @@
         }
         $supp_output = '<span class="widget-title">' . itg_msi_issue_suppliment_title($s_value->field_story_select_supplement_target_id) . '</span>';
         $supp_output .= $supp_img;
-        if (!empty($lock_story)) {
-          $supp_output .= '<h3 class="lock">' . $supp_title . '</h3>';
-        }
-        else {
-          $supp_output .= '<h3>' . $supp_title . '</h3>';
-        }
-
+        $supp_output .= $supp_title;
         if (!empty($sup_sub_title)) {
           $supp_output .= $sup_sub_title;
         }

@@ -113,7 +113,7 @@ function _issues_options($magazine) {
     $itg_query->join('field_data_field_issue_magazine', 'sc', 'n.nid = sc.entity_id');
     $itg_query->condition('sc.field_issue_magazine_target_id', $magazine);
     $itg_query->condition('n.type', 'issue');
-    $itg_query->condition('n.status', 1);
+    //$itg_query->condition('n.status', 1);
     $itg_query->orderBy('n.created', 'DESC');
     $itg_query->range(0, 10);
     $itg_result = $itg_query->execute()->fetchAll();
@@ -360,13 +360,29 @@ function is_future_story($node) {
 function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) {
     $data = array();
     $data['file_name'] = $file_name;
-
+	
     if(!is_null($file_name) && !is_null($node_id) && !is_null($section)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
         $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
-        $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
-        $node_data = node_load($node_id);
+        //$issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+        $issue_date = $issue_date[0].'.000';
+        $node_data = node_load($node_id);     
         $bylines = _get_byline_from_nid_for_kindle($node_id);
+        $node_body = $node_data->body['und'][0]['value'];
+        $node_body = preg_replace('#<div class="body_caption">(.*?)</div>#', ' ', $node_body);
+        $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);       
+		  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $node_body, $matches);
+		  $i = 0;
+		  foreach ($matches[0] as $images) {
+			$src = $matches[1][$i];
+			$img_info = pathinfo($src);
+			$img_name = $img_info['basename'];
+			$img = '<img src="images/'.$img_name.'" credit=""></img>';
+			$node_body = str_replace($images, $img, $node_body);
+			$i++;
+		  }
+	    $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
+        $node_body = trim($node_body);
         // Node xml data.
         $xml = '<?xml version="1.0" encoding="utf-8"?><nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
     <head>
@@ -375,27 +391,27 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
             <doc-id id-string="' . $node_id . '" regsrc="AMZN" />
             <urgency ed-urg="2" /> 
             <date.issue norm="' . $issue_date . '" />
-            <date.release norm="' . $current_time . '" /> 
+            <date.release norm="' . $issue_date . '" /> 
             <du-key generation="1" key="GN3;5275646997;Amazon.4" />
             <doc.copyright holder="India Today" />
             <key-list>
                 <keyword key="' . $node_data->metatags['und']['keywords']['value'] . '" />
             </key-list>
         </docdata>
-        <pubdata type="print" date.publication="' . $current_time . '" item-length="" position.sequence="1" unit-of-measure="character" />
+        <pubdata type="print" date.publication="' . $issue_date . '" item-length="" position.sequence="1" unit-of-measure="character" />
     </head> 
     <body>
         <body.head>
             <hedline>
-                <hl1> <![CDATA[ ' . $node_data->title . ' ]]>  </hl1>
-                <hl2 class="subhead"> <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '  ]]> </hl2>
+                <hl1>' . $node_data->title . '</hl1>
+                <hl2 class="subhead">' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' </hl2>
             </hedline>
-            <byline> <![CDATA[ ' . implode(",", $bylines) . ']]></byline>
+            <byline>'.implode(",", $bylines).'></byline>
             <dateline></dateline>
-            <abstract>  <![CDATA[ ' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . ' ]]> </abstract>
+            <abstract>' . html_entity_decode($node_data->field_story_kicker_text['und'][0]['value']) . '</abstract>
         </body.head>
         <body.content>
-            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_data->body['und'][0]['value'])) . ' ]]> </block>
+            <block>  <![CDATA[ ' . html_entity_decode(_remove_embded_tags_from_story_body($node_body)) . ' ]]> </block>
         </body.content>
         <body.end />
     </body>
@@ -504,7 +520,8 @@ function _create_cover_page_xml() {
     // Time with mili second.
     $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
     $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
-    $issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+    //$issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+    $issue_date = $issue_date[0].'.000';
     $data['file_name'] = 'Cover_page.xml';
     $xml = '<?xml version="1.0" encoding="utf-8"?>
   <nitf version="-//IPTC//DTD NITF 3.3//EN" xmlns:extra="urn:extra-functions">
@@ -514,14 +531,14 @@ function _create_cover_page_xml() {
               <doc-id id-string="0" regsrc="AMZN" />
               <urgency ed-urg="2" /> 
               <date.issue norm="' . $issue_date . '" />
-              <date.release norm="' . $current_time . '" /> 
+              <date.release norm="' . $issue_date . '" /> 
               <du-key generation="1" key="GN3;5275646997;Amazon.4" />
               <doc.copyright holder="India Today" />
               <key-list>
                   <keyword key="" />
               </key-list>
           </docdata>
-          <pubdata type="print" date.publication="' . $current_time . '" item-length="" position.sequence="1" unit-of-measure="character" />
+          <pubdata type="print" date.publication="' . $issue_date . '" item-length="" position.sequence="1" unit-of-measure="character" />
       </head> 
       <body>
           <body.head>
@@ -558,6 +575,9 @@ function _create_manifest_file($section_array = array(), $section_with_nids_arra
     $data['file_name'] = 'manifest.xml';
     // Get sections which have valid story , which have not future story and expried story.
     $fresh_sections = array_keys(_get_sections_with_corrected_nids($section_with_nids_array));
+    $issue_date = explode("+", date("c", strtotime($_GET['issue'])));
+    //$issue_date = $issue_date[0] . substr(microtime(), 1, 4);
+    $issue_date = $issue_date[0].'.000';
     //itg_watchdog("sections_with_nids", array($fresh_sections, $section_array));
     if(!empty($section_array)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
@@ -565,7 +585,7 @@ function _create_manifest_file($section_array = array(), $section_with_nids_arra
         $xml .="<channel>";
         $xml .="<title>India Today</title>";
         $xml .="<link>manifest.xml</link>";
-        $xml .= "<pubDate>" . $current_time . "</pubDate>";
+        $xml .= "<pubDate>" . $issue_date . "</pubDate>";
         $xml .= "<item>";
         $xml .="<link>Cover.xml</link>";
         $xml .= "</item>";

@@ -19,6 +19,8 @@ function itg_common_dropdown_supplement($id = '') {
   $query->fields('n' , array('title'));
   $query->condition('n.status' , 1 , '=');
   $query->condition('m.field_supp_select_magazine_target_id' , $id , '=');
+  $query->groupBy('n.title');
+  $query->orderBy('n.nid', 'DESC');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
