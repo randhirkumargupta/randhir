@@ -335,14 +335,14 @@ function itg_generate_samsung_json_feed_newslist(){
     $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
     $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
     $json['data']['news'][] = array(
-      'n_id' => $value['nid'],
+      'n_id' => (int)$value['nid'],
       'n_title' => $value['title'],
       'n_short_desc' => $kicker_text,
       'n_small_image' => $medium_img["imag_url"],
       'n_updated_datetime' => $publish_date
     );
   }
-  $json_output = json_encode($json);
+  $json_output = json_encode($json, JSON_UNESCAPED_UNICODE);
   $json_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $json_path . 'newslist.json';
   $fp = fopen($file_path, "w");
@@ -381,7 +381,7 @@ function itg_generate_samsung_json_feed_video_newslist(){
       'title' => 'News',
       'url' => 'newslist.json'
     );
-  $json_data = json_encode($json);
+  $json_data = json_encode($json, JSON_UNESCAPED_UNICODE);
   $xml_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $xml_path . 'categorylist.json';
   $fp = fopen($file_path, "w");
@@ -495,7 +495,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       
       $video_url = str_replace(',156,', ',', $video_url);
       $jsondetail['data']['video'][] = array(
-        'v_id' => $nid,
+        'v_id' => (int)$nid,
         'v_title' => $value['title'],
         'v_credit' => FRONT_URL,
         'v_byline' => $byline,
@@ -509,7 +509,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       );
       
     }
-    $json_data1 = json_encode($jsondetail);
+    $json_data1 = json_encode($jsondetail, JSON_UNESCAPED_UNICODE);
     $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos/';
     $file_path1 = $xml_path1 . $filename;
     $fp1 = fopen($file_path1, "w");
