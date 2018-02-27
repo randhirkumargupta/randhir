@@ -83,7 +83,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
     }
     $xml .= '</artical>';
   }
-  $xml_path = 'public://syndications/';
+  $xml_path = 'public://rss-feeds/xml_data/syndications/';
   $file_path = $xml_path . 'factiva-latest-issue.xml';
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
@@ -129,7 +129,7 @@ function genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result
       $xml .= '</article>';
     }
   }
-  $xml_path = 'public://syndications/';
+  $xml_path = 'public://rss-feeds/xml_data/syndications/';
   $file_path = $xml_path . 'para-feed.txt';
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
@@ -176,7 +176,7 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
     $xml .= '</items>';
   }
   $xml .= '</root>';
-  $xml_path = 'public://syndications/';
+  $xml_path = 'public://rss-feeds/xml_data/syndications/';
   $file_path = $xml_path . 'syndication-xml-latest-issue.xml';
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
@@ -189,6 +189,10 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
 function genrate_syndication_xml_cat_1206735() {
     $xml = '';
     $tid = 1206735;
+    //$end_date = $start_date = date("Y-m-d", time());
+    $end_date = $start_date = "2017-10-22";
+    $start_date_timestamp = strtotime($start_date . " 00:00:00");
+    $end_date_timestamp = strtotime($end_date . " 23:59:00");
     // select node belong from current term id or child term id
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
@@ -227,11 +231,9 @@ function genrate_syndication_xml_cat_1206735() {
     $query->fields('dbody', array('body_value'));
     //end
 
-    $query->condition('ti.tid', $tid, '=');
-    $interval = 360;
-    $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
-    $d2 = date(strtotime($d1));
-    $query->condition('n.created', $d2, '>=');
+    $query->condition('ti.tid', $tid, '=');    
+    $query->condition('n.created', $start_date_timestamp, '>=');
+    $query->condition('n.created', $end_date_timestamp, '<=');
     $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     if (!empty($result)) { 
@@ -266,8 +268,8 @@ function genrate_syndication_xml_cat_1206735() {
         $xml .= '</items>';
     }
     $xml .= '</root>';
-    $xml_path = 'public://syndications/';
-    $file_path = $xml_path . 'India_Today_Television_currentdate.xml';
+    $xml_path = 'public://rss-feeds/xml_data/syndications/';
+    $file_path = $xml_path . 'India_Today_Television_'.$start_date.'.xml';
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
