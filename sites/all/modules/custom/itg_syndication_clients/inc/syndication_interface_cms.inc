@@ -43,6 +43,8 @@ function itgd_genrate_factiva_syndication($issue_result) {
     genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_result);
+    //1206735 xml
+    genrate_syndication_xml_cat_1206735();
   }
 }
 
@@ -179,4 +181,94 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
   fclose($fp);
+}
+/**
+ * genrate_syndication_xml_cat_1206735
+ * @return string
+ */
+function genrate_syndication_xml_cat_1206735() {
+    $xml = '';
+    $tid = 1206735;
+    // select node belong from current term id or child term id
+    $query = db_select('taxonomy_index', 'ti');
+    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+    //join  for field value
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
+    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+
+    $query->fields('eli_file', array('uri'));
+    $query->fields('li_file', array('uri'));
+    $query->fields('mi_file', array('uri'));
+    $query->fields('si_file', array('uri'));
+    $query->fields('esi_file', array('uri'));
+
+    $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('si', array('field_story_small_image_fid'));
+    $query->fields('rc', array('field_common_related_content_value'));
+    $query->fields('li', array('field_story_large_image_fid'));
+
+    $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('vd', array('field_video_duration_value'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+    $query->fields('dbody', array('body_value'));
+    //end
+
+    $query->condition('ti.tid', $tid, '=');
+    $interval = 360;
+    $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $d2 = date(strtotime($d1));
+    $query->condition('n.created', $d2, '>=');
+    $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($result)) {
+        global $base_url;
+        $publish_date = date("F d, Y", time());
+        $xml = '<?xml version="1.0" encoding="ISO-8859-1"?>';
+        $xml .= '<root>';
+        $xml .= '<magazine>India Today Television</magazine>';
+        $xml .= '<frequency>Daily</frequency>';
+        $xml .= '<edition>' . $publish_date . '</edition>';
+        $xml .= '<items>';
+        foreach ($result as $key => $value) {
+            //$primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
+            $prime_cat = getNodePrimeCatByNid($nid);
+            $byline = get_byline_name_by_nid($value['nid']);
+            $byline = empty($byline) ? 'IndiaToday.in' : $byline;
+            $body = remove_extra_tag_in_body($value["body_value"]);
+            $body = itg_replace_token_with_data($body, $value['nid']);
+            $body = itg_remove_tags_from_body($body);
+            $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+
+            $xml .= '<section name="' . $prime_cat->name . '">';
+            $xml .= '<article>';
+            $xml .= '<headline>' . $value['title'] . '</headline>';
+            $xml .= '<byline>' . $byline . '</byline>';
+            $xml .= '<introtext>' . $kicker_text . '</introtext>';
+            $xml .= '<bodytext>' . $body . '</bodytext>';
+            $xml .= '<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright>';
+            $xml .= '</article>';
+            $xml .= '</section>';
+        }
+        $xml .= '</items>';
+    }
+    $xml .= '</root>';
+    $xml_path = 'public://syndications/';
+    $file_path = $xml_path . 'India_Today_Television_currentdate.xml';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
 }
