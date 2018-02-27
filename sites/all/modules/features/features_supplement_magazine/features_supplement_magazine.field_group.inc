@@ -27,6 +27,7 @@ function features_supplement_magazine_field_group_info() {
       1 => 'field_issue_supplement',
       2 => 'field_issue_title',
       3 => 'field_issue_publish',
+      4 => 'field_show_web_exclusive',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -57,7 +58,7 @@ function features_supplement_magazine_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Issue Cover Images',
-    'weight' => '3',
+    'weight' => '2',
     'children' => array(
       0 => 'field_issue_large_cover_image',
       1 => 'field_issue_small_cover_image',
@@ -193,7 +194,7 @@ function features_supplement_magazine_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Import XML',
-    'weight' => '2',
+    'weight' => '1',
     'children' => array(
       0 => 'field_field_issue_import_xml',
     ),
