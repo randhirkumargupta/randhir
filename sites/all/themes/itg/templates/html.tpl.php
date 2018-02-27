@@ -121,15 +121,35 @@
 	<?php else:?>
     <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
+    <!-- Branch IO code -->
+    <?php 
+      $content_id = '';
+      if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+        $content_id = $nid;
+      }
+    ?>
     <script type="text/javascript">
-		(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
+		/*(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
 		branch.init('key_live_cgwzd2EvhB7X2XUsBd2N6joitydwu3OS');
 		branch.setBranchViewData({
 		  data: {
 		    '$deeplink_path': window.location.pathname + window.location.search + window.location.hash,
 			'user_id': '45123'
 		  }
-		});
+		});*/
+    (function(b,r,a,n,c,h,,s,d,k){if(!b[n]||!b[n]._q){for(;s<.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
+    branch.init('key_live_djuJxtD2ZARYUWRnZZp9WnegBtjqJrld',
+    {'no_journeys':no_journeys}
+
+    );
+    branchJsonPram =
+    {'user_id': '45123','url_id':'<?php print $content_id; ?>' }
+
+    ;
+    branch.setBranchViewData(
+    {data: branchJsonPram }
+
+    );
 	</script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
