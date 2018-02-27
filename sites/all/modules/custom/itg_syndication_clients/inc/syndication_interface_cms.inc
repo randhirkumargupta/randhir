@@ -213,6 +213,7 @@ function genrate_syndication_xml_cat_1206735() {
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -229,6 +230,7 @@ function genrate_syndication_xml_cat_1206735() {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('dbody', array('body_value'));
+    $query->fields('pc', array('field_primary_category_value'));
     //end
 
     $query->condition('ti.tid', $tid, '=');    
@@ -246,8 +248,8 @@ function genrate_syndication_xml_cat_1206735() {
         $xml .= '<edition>' . $publish_date . '</edition>';
         $xml .= '<items>';
         foreach ($result as $key => $value) {
-            //$primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
-            $prime_cat = getNodePrimeCatByNid($nid);
+            $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
+            //$prime_cat = getNodePrimeCatByNid($nid);
             $byline = get_byline_name_by_nid($value['nid']);
             $byline = empty($byline) ? 'IndiaToday.in' : $byline;
             $body = remove_extra_tag_in_body($value["body_value"]);
@@ -255,7 +257,7 @@ function genrate_syndication_xml_cat_1206735() {
             $body = itg_remove_tags_from_body($body);
             $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
-            $xml .= '<section name="' . $prime_cat->name . '">';
+            $xml .= '<section name="' . $primary_cat . '">';
             $xml .= '<article>';
             $xml .= '<headline>' . $value['title'] . '</headline>';
             $xml .= '<byline>' . $byline . '</byline>';
