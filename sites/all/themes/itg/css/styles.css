@@ -1617,7 +1617,8 @@ footer {
   .itg-listing li {
     padding: 15px;
     position: relative;
-    border-bottom: 1px solid #e4e4e4; }
+    border-bottom: 1px solid #e4e4e4;
+    font-family: "OpenSans-Semibold"; }
     .itg-listing li a {
       color: #111;
       padding: 15px 15px 15px 20px;
@@ -2109,10 +2110,10 @@ footer {
       #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing .dm-detail p,
       #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing .dm-detail p,
       .osscar-video ul .dont-miss-listing .dm-detail p {
-        font-size: 14px;
-        font-size: 0.875rem;
-        line-height: 18px;
-        color: #333;
+        font-size: 15px;
+        font-size: 0.9375rem;
+        line-height: 20px;
+        color: #111;
         font-family: "OpenSans-Semibold"; }
       .dont-miss ul .dont-miss-listing:nth-child(2n+1),
       #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing:nth-child(2n+1),
@@ -3755,7 +3756,8 @@ h1.category-heading {
     font-size: 1rem;
     line-height: 22px;
     color: #111;
-    display: none; }
+    display: none;
+    font-family: "OpenSans-Regular"; }
   .view-category-wise-content-list .catagory-listing span.blog-anchor a,
   .view-blog-listing .catagory-listing span.blog-anchor a,
   .page-podcast .view-podcasts-listing .catagory-listing span.blog-anchor a,
@@ -6976,7 +6978,8 @@ section.sidebar .block-itg-ads {
       .tech-layout-page #block-itg-widget-tech-most-read ul li.dont-miss-listing .dm-pic a {
         display: block; }
   .tech-layout-page .buying-guides a {
-    display: block; }
+    display: block;
+    font-family: "OpenSans-Semibold"; }
   .tech-layout-page .buying-guides h3 {
     padding: 10px 0;
     border-bottom: 1px solid #dddddd;
@@ -13208,7 +13211,7 @@ span.story-sponsor-powered-text::last-word {
   margin-bottom: 20px; }
 
 .data-holder .itg-listing li {
-  padding: 20px 18px; }
+  padding: 10px; }
 
 .itg-sponsor-title {
   position: absolute;
@@ -13227,7 +13230,7 @@ span.story-sponsor-powered-text::last-word {
   padding: 5px 0; }
 
 .data-holder .section-ordering p:before {
-  top: 22px; }
+  top: 25px; }
 
 .featured-news .featured-post a.itg-sponsored {
   color: #193984; }
@@ -14107,10 +14110,10 @@ ul.pron-cons-img li img {
 .auto-layout-page .auto-road-trip .trending-videos li:nth-child(1) {
   padding-top: 0px; }
 
-.front .section-ordering p, .front .trending-videos .trending-videos-list, .front .watch-right-now-video ul li {
+.section-ordering p, .trending-videos .trending-videos-list, .watch-right-now-video ul li {
   font-family: "OpenSans-Semibold"; }
 
-.front .itg-top-section .home-top-story .data-holder .itg-listing li {
+.itg-top-section .home-top-story .data-holder .itg-listing li {
   padding: 10px;
   font-family: "OpenSans-Semibold"; }
 
