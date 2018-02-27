@@ -91,6 +91,7 @@ if (!isset($term)) {
     </div><div id="file-preview"></div></div>
 <script>
   jQuery('.div-upload-img').addClass('active');
-  //jQuery('#forms-wrapper,#loader-data ').show();
+  jQuery('#forms-wrapper,#loader-data ').show();
   jQuery('#imce-search-form').remove();
+  setTimeout(function(){hideloader();},500);
 </script>
