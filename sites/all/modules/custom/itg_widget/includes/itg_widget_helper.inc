@@ -252,7 +252,6 @@ function is_widget_views($view) {
       'yearender_top_news_and_top_videos',
       'most_read_widget',
       'special_how_i_made_it',
-      'manage_issues',
     );
     if (in_array($view->name, $view_name)) {
         $flag = TRUE;
