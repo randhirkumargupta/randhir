@@ -298,13 +298,13 @@
               if(!empty($supp_img_url)) {  
                 $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
               }
-              $supp_title = l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+              $supp_title = '<h3 class="lock">'. l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage'). '</h3>';
             }
             else {
               if(!empty($supp_img_url)) {
                 $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
               }
-              $supp_title = l(t($shortheadline_supp), 'node/' . $s_value->nid);
+              $supp_title = '<h3>' . l(t($shortheadline_supp), 'node/' . $s_value->nid) . '</h3>';
             }
           }
           elseif ($key > 0) {
@@ -318,13 +318,7 @@
         }
         $supp_output = '<span class="widget-title">' . itg_msi_issue_suppliment_title($s_value->field_story_select_supplement_target_id) . '</span>';
         $supp_output .= $supp_img;
-        if (!empty($lock_story)) {
-          $supp_output .= '<h3 class="lock">' . $supp_title . '</h3>';
-        }
-        else {
-          $supp_output .= '<h3>' . $supp_title . '</h3>';
-        }
-
+        $supp_output .= $supp_title;
         if (!empty($sup_sub_title)) {
           $supp_output .= $sup_sub_title;
         }
