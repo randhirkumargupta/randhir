@@ -2715,7 +2715,7 @@ footer {
             29px);
             word-wrap: break-word;
             p {
-                padding: 5px 0;
+                padding: 10px 0;
             }
             video {
                 max-width: 100%;
@@ -9480,6 +9480,7 @@ section.sidebar {
                 p {
                     overflow: hidden;
                     display: block;
+                    font-family: "OpenSans-Semibold";
                 }
                 .col-md-6 {
                     +.col-md-6 {
