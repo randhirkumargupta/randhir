@@ -321,14 +321,16 @@ $result = db_query($qry)->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
       $load_collection = field_collection_item_load($resvalue['field_collection_item_field_data_field_gallery_image_item_id']);
       $fid = $load_collection->field_images['und'][0]['fid'];
-      $getInfoData = getInfoData($fid);
+      //$getInfoData = getInfoData($fid);
       $img_path = completeFilePath($fid);
-      $image_caption = $getInfoData['image_caption'];
-      $image_courtesy = $getInfoData['image_courtesy'];
+      //$image_caption = $getInfoData['image_caption'];
+      //$image_courtesy = $getInfoData['image_courtesy'];
+      $field_image_caption = $load_collection->field_image_caption['und'][0]['fid'];
+      $field_credit = $load_collection->field_credit['und'][0]['fid'];
       $photo_list_array[$listcont]['p_id'] = "$fid";
       $photo_list_array[$listcont]['p_image'] = "$img_path";
-      $photo_list_array[$listcont]['p_credit'] = "$image_courtesy";
-      $photo_list_array[$listcont]['p_caption'] = "$image_caption";
+      $photo_list_array[$listcont]['p_credit'] = "$field_credit";
+      $photo_list_array[$listcont]['p_caption'] = "$field_image_caption";
       $listcont++;
     }
   }
