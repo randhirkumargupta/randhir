@@ -836,7 +836,7 @@ header {
 .answer-container .form-type-checkboxes > label {
   width: 200px;
   color: #323232;
-  font: 400 14px/18px "Roboto Slab"; }
+  font: 400 14px/18px "OpenSans-Regular"; }
 .answer-container .form-type-checkboxes div.rating {
   padding: 0;
   margin: 10px 0; }
@@ -2713,7 +2713,7 @@ footer {
   padding: 13px 10px 13px 15px;
   font-family: "OpenSans-Regular"; }
   .story-section .story-expert-opinion h4 {
-    font-family: "Roboto Slab", sans-serif;
+    font-family: "OpenSans-Regular";
     font-size: 20px;
     font-weight: 700;
     color: #000; }
@@ -5633,7 +5633,7 @@ h1.category-heading {
     background-color: #fff;
     color: #323232;
     display: inline-block;
-    font: 700 14px/18px Roboto;
+    font: 700 14px/18px "OpenSans-Regular";
     padding-left: 10px;
     position: relative;
     vertical-align: top;
@@ -7875,7 +7875,6 @@ section.sidebar .block-itg-ads {
     border: 1px solid #ddd; }
 .speaker-detail-page h3,
 #block-views-program-schedule-block-3 h3 {
-  font-family: roboto-slab;
   margin-bottom: 10px;
   text-transform: uppercase; }
 .speaker-detail-page .body-content,
@@ -8343,7 +8342,6 @@ section.sidebar .block-itg-ads {
     height: 30px;
     line-height: 30px;
     text-transform: uppercase;
-    font-family: roboto-slab;
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer; }
@@ -8351,7 +8349,6 @@ section.sidebar .block-itg-ads {
     overflow-y: auto; }
   .education-layout-page .ask-question {
     padding: 15px;
-    font-family: roboto-slab;
     overflow: auto; }
     .education-layout-page .ask-question .form-type-textarea,
     .education-layout-page .ask-question .form-type-textfield {
@@ -8367,10 +8364,8 @@ section.sidebar .block-itg-ads {
       .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"]:after {
         clear: both; }
       .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] input[type="text"] {
-        width: 100%;
-        font-family: roboto-slab; }
+        width: 100%; }
       .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] textarea {
-        font-family: roboto-slab;
         height: 65px;
         margin-bottom: 10px; }
       .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] #question p {
@@ -8410,7 +8405,7 @@ section.sidebar .block-itg-ads {
         text-transform: uppercase;
         width: 90px;
         cursor: pointer;
-        font-family: roboto-slab; }
+        font-size: 14px; }
       .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha {
         border: none; }
         .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha legend,
@@ -8428,7 +8423,7 @@ section.sidebar .block-itg-ads {
           float: left; }
         .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
           width: 47%;
-          font-family: roboto-slab;
+          font-size: 14px;
           float: right; }
         .education-layout-page .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
           display: none; }
@@ -10645,10 +10640,10 @@ h1.about-us-heading {
     [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] input[type="text"],
     .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] input[type="text"] {
       width: 100%;
-      font-family: roboto-slab; }
+      font-size: 14px; }
     [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] textarea,
     .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] textarea {
-      font-family: roboto-slab;
+      font-size: 14px;
       height: 65px;
       margin-bottom: 10px; }
     [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] #question p,
@@ -10701,7 +10696,7 @@ h1.about-us-heading {
       text-transform: uppercase;
       width: 90px;
       cursor: pointer;
-      font-family: roboto-slab; }
+      font-size: 14px; }
     [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .captcha,
     .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .captcha {
       border: none; }
@@ -10727,7 +10722,7 @@ h1.about-us-heading {
       [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"],
       .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
         width: 47%;
-        font-family: roboto-slab;
+        font-size: 14px;
         float: right; }
       [id*="block-itg-ask-expert-custom-ask-expert-form-block"] [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description,
       .ask-question-sidebar [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
@@ -11777,7 +11772,6 @@ span.smilies-title {
   position: absolute; }
 .itg-layout-container.default-section .ask-question {
   padding: 15px;
-  font-family: roboto-slab;
   overflow: auto; }
   .itg-layout-container.default-section .ask-question .form-type-textarea,
   .itg-layout-container.default-section .ask-question .form-type-textfield {
@@ -11794,9 +11788,9 @@ span.smilies-title {
       clear: both; }
     .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] input[type="text"] {
       width: 100%;
-      font-family: roboto-slab; }
+      font-size: 14px; }
     .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] textarea {
-      font-family: roboto-slab;
+      font-size: 14px;
       height: 65px;
       margin-bottom: 10px; }
     .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] #question p {
@@ -11836,7 +11830,7 @@ span.smilies-title {
       text-transform: uppercase;
       width: 90px;
       cursor: pointer;
-      font-family: roboto-slab;
+      font-size: 14px;
       margin-top: 10px; }
     .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .captcha {
       border: none; }
@@ -11855,7 +11849,7 @@ span.smilies-title {
         float: left; }
       .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response input[type="text"] {
         width: 47%;
-        font-family: roboto-slab;
+        font-size: 14px;
         float: right; }
       .itg-layout-container.default-section .ask-question [id*="itg-custom-ask-an-expert-form"] .form-item-captcha-response .description {
         display: none; }
@@ -12571,7 +12565,7 @@ span.close_btt {
   .page-state-election section.sidebar .block-title {
     color: #09619f;
     font-weight: 700;
-    font-family: "Roboto", sans-serif;
+    font-family: "OpenSans-Regular";
     text-transform: uppercase;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
@@ -12729,7 +12723,7 @@ span.close_btt {
   max-width: 760px;
   margin: 0 auto;
   text-align: center;
-  font-family: 'Roboto Slab';
+  font-family: "OpenSans-Regular";
   color: #000; }
   .payment-messages-wrapper h1 {
     font-size: 48px;
@@ -12804,7 +12798,7 @@ span.close_btt {
 #block-views-past-speaker-event-block-1 .block-title {
   font-size: 24px;
   color: #ef3c24;
-  font-family: "Roboto Slab", sans-serif;
+  font-family: "OpenSans-Regular";
   margin-bottom: 15px; }
 
 .logged-in .header-top .links.inline.clearfix {
@@ -13099,7 +13093,7 @@ span.see-picture a {
   width: 100%;
   padding: 25px;
   color: #fff;
-  font-family: "Roboto", sans-serif; }
+  font-family: "OpenSans-Regular"; }
 
 .big-pic .cat-heading h3 {
   font-size: 22px;
@@ -13327,7 +13321,7 @@ span.story-sponsor-powered-text::last-word {
   font-size: 1.25rem; }
 
 .anchor-right span.followers-link {
-  font: 400 15px/17px roboto;
+  font: 400 15px/17px "OpenSans-Regular";
   color: #a8a8a8;
   margin: 6px 0 12px;
   display: block; }
@@ -13384,7 +13378,7 @@ span.story-sponsor-powered-text::last-word {
   position: relative; }
 
 #cricketblog h2 {
-  font: 300 16px/20px roboto;
+  font: 300 16px/20px "OpenSans-Regular";
   color: #767676;
   margin-bottom: 15px; }
 
