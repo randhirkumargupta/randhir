@@ -2420,7 +2420,7 @@ footer {
   line-height: 29px;
   word-wrap: break-word; }
   .story-section .story-right .description p {
-    padding: 5px 0; }
+    padding: 10px 0; }
   .story-section .story-right .description video {
     max-width: 100%; }
   .story-section .story-right .description ul {
@@ -8956,7 +8956,8 @@ section.sidebar .block-itg-ads {
     padding: 15px 0; }
   .movie-layout-page .tech-in-depth ul li p {
     overflow: hidden;
-    display: block; }
+    display: block;
+    font-family: "OpenSans-Semibold"; }
   .movie-layout-page .tech-in-depth ul li .col-md-6 + .col-md-6 {
     margin-top: 20px; }
 .movie-layout-page .itg-h396-section .widget-wrapper {
