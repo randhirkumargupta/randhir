@@ -532,5 +532,10 @@ function itg_widgets_custom_variables() {
     '#title' => t('Video publish content email alert'),
     '#default_value' => variable_get('publish_alert_emails_videos'),
   );
+  $form['place_amp_ad_within_content'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Place amp Ad After 250 words'),
+    '#default_value' => variable_get('place_amp_ad_within_content'),
+  );
   return system_settings_form($form);
 }
