@@ -679,7 +679,8 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
-                $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $title = $form_val['section']['title'];
+                p(taxonomy_get_term_by_name($title, $vocabulary = 14) );
                 $section_id = $form_val['section']['title'];
             } else {
                 $title = $form_val['section']['title'];
@@ -696,7 +697,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                     $s_title = '';
                 }
             }
-p($form_state['values']);
+
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
                 'menu_label_id' => $form_val['menu_label_id'],
