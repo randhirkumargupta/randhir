@@ -343,8 +343,8 @@ function itg_generate_samsung_json_feed_newslist(){
     );
   }
   $json_output = json_encode($json);
-  $json_output = utf8_encode($json_output);
-  $json_output=mb_convert_encoding($json_output,'utf-16','utf8');
+  //$json_output = utf8_encode($json_output);
+  $json_output=mb_convert_encoding($json_output,'utf-16');
   $json_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $json_path . 'newslist.json';
   $fp = fopen($file_path, "w");
@@ -384,8 +384,8 @@ function itg_generate_samsung_json_feed_video_newslist(){
       'url' => 'newslist.json'
     );
   $json_data = json_encode($json);
-  $json_data = utf8_encode($json_data);
-  $json_data=mb_convert_encoding($json_data,'utf-16','utf8');
+  //$json_data = utf8_encode($json_data);
+  $json_data=mb_convert_encoding($json_data,'utf-16');
   $xml_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $xml_path . 'categorylist.json';
   $fp = fopen($file_path, "w");
@@ -514,8 +514,8 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       
     }
     $json_data1 = json_encode($jsondetail);
-    $json_data1 = utf8_encode($json_data1);
-    $json_data1=mb_convert_encoding($json_data1,'utf-16','utf8');
+    //$json_data1 = utf8_encode($json_data1);
+    $json_data1=mb_convert_encoding($json_data1,'utf-16');
     $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos/';
     $file_path1 = $xml_path1 . $filename;
     $fp1 = fopen($file_path1, "w");
