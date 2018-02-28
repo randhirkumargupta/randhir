@@ -1063,7 +1063,6 @@ function itg_msi_views_query_alter(&$view, &$query) {
   }
   elseif ($view->name == 'magazine_top_story' && $view->current_display == 'block_2') {
     $issue_date = $query->where[0]['conditions'][0]['value'][':field_data_field_story_issue_date_field_story_issue_date_value'];
-    echo "frommodule".$issue_date;
     $chk_wid_val = itg_msi_check_magazine_widget($issue_date);
     if (!empty($chk_wid_val)) {
       unset($query->orderby[1]);
