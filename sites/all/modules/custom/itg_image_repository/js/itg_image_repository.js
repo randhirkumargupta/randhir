@@ -854,7 +854,7 @@ updateUI: function() {
   
   jQuery('.div-search-img').live('click',function()
   {
-		var have_iframe = jQuery("#search-preview").html();
+    var have_iframe = jQuery("#search-preview").html();
     if (have_iframe.search('iframe') < 0 ) {
       showloader();
       if(Drupal.serach_preview_url !== undefined){
