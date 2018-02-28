@@ -7,16 +7,18 @@
           $field_show_web_exclusive = $row['field_show_web_exclusive'];
           $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
           if (empty($year_arr[2])) {
+			  echo "infif";
             $year = itg_msi_issue_attribute_date();
             $issue_attribute_date = strip_tags(date('Y-m-d', strtotime($year)));
           }
           else {
+			   echo "inelse";
             $issue_attribute_date = strip_tags($row['field_issue_title_1']);
           }
           $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
           $count_issue = count($view);
           print_r($row);
-          echo "count".$count_issue;die;
+          echo "count".$count_issue."issueatt".$issue_attribute_date;die;
           ?>
           <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) { ?>
             <span class="web-excl"><?php print t('Cover Story'); ?></span>
