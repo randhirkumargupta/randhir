@@ -100,7 +100,7 @@ function menu_list($result) {
   $total_menu = count($result);
   if ($total_menu > 0) {
     foreach ($result as $data) {
-      $menu['id'] = isset($data['s_id']) ? $data['s_id'] : "";
+      $menu['id'] = isset($data['section_id']) ? $data['section_id'] : "";
       $menu['order'] = isset($data['order_id']) ? $data['order_id'] : "";
       $menu['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
       $menu['type'] = isset($data['type']) ? $data['type'] : "";
