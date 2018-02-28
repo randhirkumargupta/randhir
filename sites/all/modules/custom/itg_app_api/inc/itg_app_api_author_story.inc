@@ -8,7 +8,7 @@
  * main function for generate author_story_list api
  * @pram int $author_id, $story_type, $cpageno
  *
- * @return array
+ * @return array 
  */
 function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
   // variable decalartion
