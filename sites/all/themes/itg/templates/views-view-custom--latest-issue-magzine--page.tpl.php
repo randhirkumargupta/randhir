@@ -15,6 +15,8 @@
           }
           $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
           $count_issue = count($view);
+          print_r($row);
+          echo "count".$count_issue;die;
           ?>
           <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) { ?>
             <span class="web-excl"><?php print t('Cover Story'); ?></span>
