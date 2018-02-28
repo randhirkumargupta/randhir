@@ -605,6 +605,7 @@ print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: PHP */
   $handler->display->display_options['fields']['php']['id'] = 'php';
@@ -710,6 +711,7 @@ print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['pager']['options']['offset'] = '1';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Global: Dynamic Clone Link */
   $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
