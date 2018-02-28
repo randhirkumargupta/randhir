@@ -1914,9 +1914,9 @@ function homePageJsonWidget_1() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "Watch India Today Live"; 
-    $n_widget[0]['short_url'] = "http://feeds.intoday.in/indiatoday/livetv/indiatodayembed.html";
-    $n_widget[0]['extended_url'] = "";
+    $n_widget[0]['tilte'] = "Election Results Live Coverage"; 
+    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
+    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/india/story/live-updates-cauvery-water-dispute-supreme-court-verdict-karnataka-tamil-nadu-situation-1170686-2018-02-16";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
