@@ -150,9 +150,11 @@
     foreach ($final_data_array_left as $final_key => $final_value) {
       if ($final_value['type'] == 'section') {
         unset($final_value['type']);
-        $parent_value = $final_value;
-        $sub_title = '';
+        $parent_value = $final_value;        
         foreach ($parent_value as $key => $value) {
+		  $sub_title = '';
+		  $title = '';
+		  $img = '';
 		  // get status of lock story
           if (function_exists(itg_msi_get_lock_story_status)) {
             $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
@@ -162,9 +164,6 @@
             if (!empty($value->uri)) {
               $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
             }
-            /*else {
-              $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
-            }*/
             // Get the short headline for a node data
             $shortheadline_cat = $value->field_story_short_headline_value;
             if (!empty($lock_story)) {
@@ -172,12 +171,14 @@
                     $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
               }
               $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+              $title = '<h3 class="lock" title="' . strip_tags($title) . '">' . $title . '</h3>';
             }
             else {
               if(!empty($img_url)) {  
                 $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
               }
               $title = l(t($shortheadline_cat), 'node/' . $value->nid);
+              $title = '<h3 title="' . strip_tags($title) . '">' . $title . '</h3>';
             }
           }
           elseif ($key > 0) {
@@ -189,20 +190,9 @@
             }
           }
         }
-        if (!empty($lock_story)) {
-          $lock_class = 'class="lock"';
-        }
-
         $output = '<span class="widget-title">' . t($value->name) . '</span>';
         $output .= $img;
-
-        if (!empty($lock_story)) {
-          $output .= '<h3 class="lock" title="' . strip_tags($title) . '">' . $title . '</h3>';
-        }
-        else {
-          $output .= '<h3 title="' . strip_tags($title) . '">' . $title . '</h3>';
-        }
-
+        $output .= $title;
         if (!empty($sub_title)) {
           $output .= $sub_title;
         }
@@ -216,9 +206,11 @@
     foreach ($final_data_array_right as $final_key => $final_value) {
       if ($final_value['type'] == 'section') {
         unset($final_value['type']);
-        $parent_value = $final_value;
-        $sub_title = '';
+        $parent_value = $final_value;        
         foreach ($parent_value as $key => $value) {
+		  $sub_title = '';
+		  $img = '';
+		  $title = '';
           // get status of lock story
           if (function_exists(itg_msi_get_lock_story_status)) {
             $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
@@ -228,9 +220,6 @@
             if (!empty($value->uri)) {
               $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
             }
-            /*else {
-              $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
-            }*/
             // Get the short headline for a node data
             $shortheadline_cat = $value->field_story_short_headline_value;
             if (!empty($lock_story)) {
@@ -238,12 +227,14 @@
                 $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
               }
               $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+              $title = '<h3 class="lock" title="' . strip_tags($title) . '">' . $title . '</h3>';
             }
             else {
               if(!empty($img_url)) {  
                 $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
               }
               $title = l(t($shortheadline_cat), 'node/' . $value->nid);
+              $title = '<h3 title="' . strip_tags($title) . '">' . $title . '</h3>';
             }
           }
           elseif ($key > 0) {
@@ -255,20 +246,9 @@
             }
           }
         }
-        if (!empty($lock_story)) {
-          $lock_class = 'class="lock"';
-        }
-
         $output = '<span class="widget-title">' . t($value->name) . '</span>';
         $output .= $img;
-
-        if (!empty($lock_story)) {
-          $output .= '<h3 class="lock" title="' . strip_tags($title) . '">' . $title . '</h3>';
-        }
-        else {
-          $output .= '<h3 title="' . strip_tags($title) . '">' . $title . '</h3>';
-        }
-
+        $output .= $title;
         if (!empty($sub_title)) {
           $output .= $sub_title;
         }
@@ -277,9 +257,10 @@
       else if ($final_value['type'] == 'suppliment') {
         unset($final_value['type']);
         $supplement_value = $final_value;
-        $sup_sub_title = '';
-
-        foreach ($supplement_value as $key => $s_value) {
+        foreach ($supplement_value as $key => $s_value) {		  
+          $sup_sub_title = '';
+          $supp_img = '';
+          $supp_title = '';
           // get status of lock story
           if (function_exists(itg_msi_get_lock_story_status)) {
             $lock_story = itg_msi_get_lock_story_status($s_value->nid, 'lock_story');
@@ -289,9 +270,6 @@
             if (!empty($s_value->uri)) {
               $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" title="" />';
             }
-           /* else {
-              $supp_img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
-            }*/
             // Get the short headline for a node data
             $shortheadline_supp = $s_value->field_story_short_headline_value;
             if (!empty($lock_story)) {
