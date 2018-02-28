@@ -193,8 +193,8 @@ function itg_sitemap_get_sitemap($total_links) {
         //Publication tag END
 
         $xml .= '<news:publication_date>' . $total_link['news_publication_date'] . '</news:publication_date>';
-        $xml .= '<news:title> <![CDATA[' . stripInvalidXml($total_link['news_title']) . ' ]]> </news:title>';
-        $xml .= '<news:keywords> <![CDATA[ ' . stripInvalidXml($total_link['news_keywords']) . '  ]]> </news:keywords>';
+        $xml .= '<news:title> <![CDATA[' . $total_link['news_title'] . ' ]]> </news:title>';
+        $xml .= '<news:keywords> <![CDATA[ ' . $total_link['news_keywords'] . '  ]]> </news:keywords>';
 
 
         $xml .= '</news:news>';
