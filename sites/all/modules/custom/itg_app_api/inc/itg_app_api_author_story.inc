@@ -580,8 +580,7 @@ function news_wrap_datalist() {
             $lcont++;
         }
     }
-    $news3 = array();
-    $data['data'] = $news3;
+    $data['data'] = $news2;
     $data['lcount'] = $lcont;
     return $data;
 }
