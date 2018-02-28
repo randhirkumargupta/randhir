@@ -696,7 +696,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                     $s_title = '';
                 }
             }
-p($form_val);
+p($form_state['values']);
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
                 'menu_label_id' => $form_val['menu_label_id'],
@@ -712,9 +712,9 @@ p($form_val);
                 's_id' => $s_id,
                 's_title' => $s_title,
             );
-            if (isset($form_state['values']['m_id']) && $form_state['values']['m_id'] > 0) {
+            if (arg(2) == "edit") {
                 p($form_val);
-                $m_id = $form_state['values']['m_id'];
+                $m_id = arg(2);
                 db_update('itg_app_menu_content')
                         ->fields(array(
                             'menu_type_id' => $form_val['menu_type_id'],
