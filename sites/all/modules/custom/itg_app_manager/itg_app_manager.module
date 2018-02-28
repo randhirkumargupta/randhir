@@ -679,9 +679,10 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
-                $title = $form_val['section']['title'];                
-                //$section_id = get_taxo_tid($title);
-                $section_id = $title;
+                $term = taxonomy_term_load$form_val['section']['title']);     
+                $title = $term->name;
+                $section_id = $term->tid;
+                
             } else {
                 $title = $form_val['section']['title'];
                 $section_id = $form_val['menu_type'];
