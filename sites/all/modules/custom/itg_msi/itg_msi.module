@@ -468,15 +468,15 @@ function itg_msi_node_presave($node) {
     }
     //Set date in title
     if ($node->type == 'issue') {
-        $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
-         if ($node->is_new == 1) {
-			$node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
-		}
-		else {
-			$publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
-			$node->status = $publish;
-		    field_attach_update('node', $node);
-		}
+      $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
+      if ($node->is_new == 1) {
+        $node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+        $node->status = $publish;
+        field_attach_update('node', $node);
+      }
     }
 }
 
@@ -1186,8 +1186,8 @@ function itg_msi_issue_category_data($issue_date, $extract_nids = array()) {
     $query->condition('story_section.bundle', 'story', '=');
     $query->condition('n.status', 1, '=');
     if(!empty($extract_nids)){
-		$query->condition('n.nid', $extract_nids, 'NOT IN');
-	}    
+      $query->condition('n.nid', $extract_nids, 'NOT IN');
+    }    
     $query->fields('itg_order');
     $query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
     $query->condition('itg_order.widget', 'issue_primary_category_magazin_widget', '=');
@@ -1220,8 +1220,8 @@ function itg_msi_issue_category_data($issue_date, $extract_nids = array()) {
     $query->condition('story_section.bundle', 'story', '=');
     $query->condition('n.status', 1, '=');
     if(!empty($extract_nids)){
-		$query->condition('n.nid', $extract_nids, 'NOT IN');
-	} 
+      $query->condition('n.nid', $extract_nids, 'NOT IN');
+    } 
     $query->orderBy('n.created', DESC);
     $results = $query->execute();   
       foreach ($results as $value) {
@@ -1263,8 +1263,8 @@ function itg_msi_issue_suppliment_data($issue_date, $extract_nids = array()) {
     $query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
     $query->condition('itg_order.widget', 'issue_supplement_magazin_widget', '=');
     if(!empty($extract_nids)){
-		$query->condition('n.nid', $extract_nids, 'NOT IN');
-	} 
+      $query->condition('n.nid', $extract_nids, 'NOT IN');
+    } 
     $query->orderBy('itg_order.weight', ASC);
     $results = $query->execute();
     foreach ($results as $value) {
@@ -1294,8 +1294,8 @@ function itg_msi_issue_suppliment_data($issue_date, $extract_nids = array()) {
       //$query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
       //$query->condition('itg_order.widget', 'issue_supplement_magazin_widget', '=');
       if(!empty($extract_nids)){
-		$query->condition('n.nid', $extract_nids, 'NOT IN');
-	  } 
+        $query->condition('n.nid', $extract_nids, 'NOT IN');
+      } 
       $query->orderBy('n.created', DESC);
       $results = $query->execute();
       foreach ($results as $value) {
