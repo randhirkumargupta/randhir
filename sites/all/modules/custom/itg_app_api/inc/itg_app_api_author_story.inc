@@ -554,6 +554,37 @@ function news_wrap_list() {
  * @return array
  */
 function news_wrap_datalist() {
+    global $base_url;
+    $data = array();
+    $data_topstories = topstoriesList();
+    //p($data_topstories); data
+    $data = $data_topstories['data'];
+    $lcont = 0;
+    foreach ($data as $k => $res) {
+        if (count($res['n_highlight']) > 0) {
+            $nid = $res['n_id'];
+            $n_title = strip_tags($res['n_title']);
+            $n_large_image = $res['n_large_image'];
+            $n_updated_datetime = $res['n_updated_datetime'];
+            $category_id = $res['n_pcategory_id'];
+            $category_title = $res['n_pcategory_name'];
+            $highlight = $res['n_highlight'];
+            $news['n_id'] = $nid;
+            $news['n_title'] = $n_title;
+            $news['n_large_image'] = "$n_large_image";
+            $news['n_updated_datetime'] = "$n_updated_datetime";
+            $news['category_id'] = $category_id;
+            $news['category_title'] = $category_title;
+            $news['highlight'] = $highlight;
+            $news2[] = $news;
+            $lcont++;
+        }
+    }
+    $data['data'] = $news2;
+    $data['lcount'] = $lcont;
+    return $data;
+}
+function news_wrap_datalist_bk() {
   global $base_url;
 
   $data = array();
