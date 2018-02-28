@@ -713,7 +713,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 's_title' => $s_title,
             );
             if (isset($form_state['values']['m_id']) && $form_state['values']['m_id'] > 0) {
-                //p($form_val);
+                p($form_val);
                 $m_id = $form_state['values']['m_id'];
                 db_update('itg_app_menu_content')
                         ->fields(array(
