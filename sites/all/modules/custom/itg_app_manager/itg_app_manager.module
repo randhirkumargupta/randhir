@@ -696,7 +696,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                     $s_title = '';
                 }
             }
-
+p($form_val);
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
                 'menu_label_id' => $form_val['menu_label_id'],
