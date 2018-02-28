@@ -682,10 +682,10 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
                 $section_id = $form_val['section']['title'];
             } else {
-                $title = $form['container'][$key]['menu_type']['#options'][$form_val['menu_type']];
+                $title = $form_val['section']['title'];
                 $section_id = $form_val['menu_type'];
-                $s_id = $form_val['section']['title'];
-                $s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $s_id = 0;
+                $s_title = '';
             }
             if ($form_val['menu_type'] == '1') {
                 if ($form_val['has_subcat'] == 1) {
