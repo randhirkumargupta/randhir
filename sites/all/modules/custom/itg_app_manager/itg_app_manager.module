@@ -679,10 +679,8 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
-                $title = $form_val['section']['title'];
-                echo $title; die();
-                p(taxonomy_get_term_by_name($title, $vocabulary = 14) );
-                $section_id = $form_val['section']['title'];
+                $title = $form_val['section']['title'];                
+                $section_id = get_taxo_tid($title);
             } else {
                 $title = $form_val['section']['title'];
                 $section_id = $form_val['menu_type'];
@@ -4068,4 +4066,17 @@ function itg_app_manager_magazine_update_conf_form_submit($form, &$form_state) {
     drupal_write_record('itg_app_master_info_internal', $data);    
     drupal_set_message(t('Data saved successfully.'), 'status');
     drupal_goto('itg-app-manager-magazine');
+}
+
+function get_taxo_tid($name){
+    $tid = 0;
+    if($name){
+        $query = db_select('taxonomy_term_data', 'ttd');
+        $query->fields('ttd', array('tid'));
+        $query->condition('ttd.name', $name);
+        $query->condition('ttd.vid', 14);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $tid = $result[0]['tid'];
+    }
+    return $tid;
 }
