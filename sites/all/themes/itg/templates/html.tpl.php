@@ -134,17 +134,12 @@
     {'no_journeys':false}
 
     );
-    branchJsonPram =
-    {'user_id': '45123','url_id':'<?php print $content_id; ?>' }
-
-    ;
-    branch.setBranchViewData(
-      {
-        data: {
-          'user_id': '45123',
-          'url_id':'<?php print $content_id; ?>' 
-        } 
-      }
+    var linkData = {
+      data: {
+      '$canonical_identifier':174820,
+      '$data_type': "story",
+    }};
+    branch.setBranchViewData(linkData);
     );
 	</script>
 </head>
