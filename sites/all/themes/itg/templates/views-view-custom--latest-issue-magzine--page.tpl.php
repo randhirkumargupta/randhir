@@ -152,14 +152,14 @@
         unset($final_value['type']);
         $parent_value = $final_value;        
 		$sub_title = '';     
-        foreach ($parent_value as $key => $value) {
-		  $img = '';
+        foreach ($parent_value as $key => $value) {		  
 		  // get status of lock story
           if (function_exists(itg_msi_get_lock_story_status)) {
             $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
           }
           if ($key == 0) {
             $img_url = '';
+            $img = '';
             if (!empty($value->uri)) {
               $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
             }
@@ -207,14 +207,14 @@
         unset($final_value['type']);
         $parent_value = $final_value;   
         $sub_title = '';     
-        foreach ($parent_value as $key => $value) {		  
-		  $img = '';
+        foreach ($parent_value as $key => $value) {			  
           // get status of lock story
           if (function_exists(itg_msi_get_lock_story_status)) {
             $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
           }
           if ($key == 0) {
               $img_url = '';
+              $img = '';
             if (!empty($value->uri)) {
               $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
             }
@@ -256,14 +256,14 @@
         unset($final_value['type']);
         $supplement_value = $final_value;
         $sup_sub_title = '';
-        foreach ($supplement_value as $key => $s_value) {          
-          $supp_img = '';
+        foreach ($supplement_value as $key => $s_value) {
           // get status of lock story
           if (function_exists(itg_msi_get_lock_story_status)) {
             $lock_story = itg_msi_get_lock_story_status($s_value->nid, 'lock_story');
           }
           if ($key == 0) {
               $supp_img_url = '';
+              $supp_img = '';
             if (!empty($s_value->uri)) {
               $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" title="" />';
             }
