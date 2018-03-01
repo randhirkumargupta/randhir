@@ -124,8 +124,10 @@
     <!-- Branch IO code -->
     <?php 
       $content_id = '';
+      $content_type = '';
       if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
         $content_id = $nid;
+        $content_type = $type;
       }
     ?>
     <script type="text/javascript">
@@ -136,8 +138,8 @@
     );
     var linkData = {
       data: {
-      '$canonical_identifier':174820,
-      '$data_type': "story",
+      '$canonical_identifier':"<?php print $content_id; ?>",
+      '$data_type': "<?php print $content_type; ?>",
     }};
     branch.setBranchViewData(linkData);
     );
