@@ -67,7 +67,7 @@ function itg_indiatoday_samsung_search_api_video_list() {
             $bitrate_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
         }
         else{
-            $bitrate_url = "https://indiatoday-pdelivery.akamaized.net/indiatoday/video/2018_03/01_mar_18_bura_na_mano_holi_hai_so_sorry_it_1024_512.mp4";
+            //$bitrate_url = "https://indiatoday-pdelivery.akamaized.net/indiatoday/video/2018_03/01_mar_18_bura_na_mano_holi_hai_so_sorry_it_1024_512.mp4";
         }
 
         $video_list[$loopc]['v_id'] = (int) $nid;
