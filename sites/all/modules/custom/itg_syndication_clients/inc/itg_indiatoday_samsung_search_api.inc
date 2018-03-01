@@ -39,6 +39,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
     foreach ($searchpage as $key => $value){       
         $nid = $value->entity_id;
         $node = node_load($nid);
+        p($node);
         if($node->type !="videogallery"){
             continue;
         }
