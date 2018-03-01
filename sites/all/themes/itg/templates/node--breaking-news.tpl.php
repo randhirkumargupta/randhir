@@ -207,11 +207,6 @@ $coverage_end_final_date = '';
             </ul>            
             <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
               <span class="refresh-icon">Check Latest Updates <i onclick="location.reload();" style="cursor: pointer;" class="fa fa-refresh" aria-hidden="true"></i></span>
-                <?php if (isset($embed_image) && !empty($embed_image)) { ?>
-                  <div class="stryimg" id="liveblog" >
-                    <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
-                  </div>
-                <?php } ?>
             <?php endif; ?>
         </div>
 
