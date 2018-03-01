@@ -56,19 +56,34 @@ function itg_indiatoday_samsung_search_api_video_list() {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
         }
         $source_type = $node->field_story_source_type['und'][0]['value'];
-        $videotag = itg_video_detail_formats($nid, $source_type);
-        $video_size = migrated_video_transcoding($nid);
-
-        if (!empty($videotag['migrated'])) { //migrated video
-            //$video_xml .= "<videoparts><part_0>" . $videotag['migrated']['video_path_mp4'] . "</part_0></videoparts>";
-            $bitrate_url = $videotag['migrated']['video_path_mp4'];
-        } elseif (!empty($videotag['dailymotion'])) {
-            //$video_xml .= "<videoparts><part_0>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</videoparts>";
-            $bitrate_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
-        }
-        else{
-            //$bitrate_url = "https://indiatoday-pdelivery.akamaized.net/indiatoday/video/2018_03/01_mar_18_bura_na_mano_holi_hai_so_sorry_it_1024_512.mp4";
-        }
+        $videotag = video_detail_formats($nid, $source_type);
+  $video_transcoding_data = get_itg_video_transcoding($nid);
+  $duration = '';
+  if (count($video_transcoding_data) > 0) {
+    $duration = $video_transcoding_data[0]->video_duration;
+  }
+  if (!empty($videotag['migrated'])) {
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+  }
+  elseif (!empty($videotag['dailymotion'])) {
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      }
+      elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+    }
+    $inter_video_details = internal_video_bitrate_data($video_id);
+    $bitrate_url = $inter_video_details['bitrate_url'];
+  }
+  $bitrate_url = str_replace(',156,', ',', $bitrate_url); 
 
         $video_list[$loopc]['v_id'] = (int) $nid;
         $video_list[$loopc]['v_title'] = "$title";
