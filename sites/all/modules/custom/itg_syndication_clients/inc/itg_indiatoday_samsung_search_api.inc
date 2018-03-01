@@ -39,6 +39,9 @@ function itg_indiatoday_samsung_search_api_video_list(){
     foreach ($searchpage as $key => $value){       
         $nid = $value->entity_id;
         $node = node_load($nid);
+        if($node->type !="videogallery"){
+            continue;
+        }
         $title = $node->title;
         $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
         $field_story_medium_image = file_create_url($node->field_story_medium_image['und'][0]['uri']);
@@ -56,29 +59,14 @@ function itg_indiatoday_samsung_search_api_video_list(){
         $videotag = itg_video_detail_formats($nid, $source_type);
   $video_size = migrated_video_transcoding($nid);
 
-  if (!empty($videotag['migrated'])) { //migrated video
-    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-    foreach ($videoids as $keys => $video_value) {
-      $url = $video_value->field_migrated_video_url_value;
-    }
-    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-    $bitrate_url = $data_video['bitrate_url'];
-    $mp4_url = $data_video['file_url'];
-    //$video_xml .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
+    if (!empty($videotag['migrated'])) { //migrated video
+    //$video_xml .= "<videoparts><part_0>" . $videotag['migrated']['video_path_mp4'] . "</part_0></videoparts>";
+    $bitrate_url = $videotag['migrated']['video_path_mp4'];
   }
   elseif (!empty($videotag['dailymotion'])) {
-    $videoids = get_video_in_fieldcollection_by_nid($nid);
-    foreach ($videoids as $keys => $video_value) {
-      if ($video_value->video_id != '') {
-        $video_id = $video_value->video_id;
-      } elseif ($video_value->solr_video_id != '') {
-        $video_id = $video_value->solr_video_id;
-      }
-    }
-    $inter_video_details = internal_video_bitrate_data($video_id);
-    $bitrate_url = $inter_video_details['bitrate_url'];
-    //$video_xml .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
-  }
+    //$video_xml .= "<videoparts><part_0>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</videoparts>";
+      $bitrate_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4']; 
+  } 
            
         $video_list[$loopc]['v_id'] = (int)$nid;
         $video_list[$loopc]['v_title'] = "$title";
