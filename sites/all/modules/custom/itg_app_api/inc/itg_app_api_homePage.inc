@@ -1915,7 +1915,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "Election Results Live Coverage"; 
-    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
+    $n_widget[0]['short_url'] = "https://smedia2.intoday.in/microsites/rapidvalue/assembly_election_2018.html";
     $n_widget[0]['extended_url'] = "https://www.indiatoday.in/india/story/live-updates-cauvery-water-dispute-supreme-court-verdict-karnataka-tamil-nadu-situation-1170686-2018-02-16";
     $n_widget[0]['action'] = "webview";    
     
