@@ -608,7 +608,7 @@ if (!empty($content)):
                 ?>
                 <div class="stryimg" >
                   <?php if($activate_live_tv) { ?>
-                        <div class="story_itg_live_tv">
+                        <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
                         </div>
                 <?php } else {
