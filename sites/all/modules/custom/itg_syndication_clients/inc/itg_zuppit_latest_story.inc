@@ -214,6 +214,8 @@ function client_samsung_video_detail() {
   
   $video_data['video'][] = $video_detail;
   $output_array['data'] = $video_data;
-  $jsondata = drupal_json_output($output_array);
+  drupal_add_http_header('Content-Type', 'application/json', 'utf16');
+  $jsondata = drupal_json_encode($output_array);
+  //$jsondata = drupal_json_output($output_array);
   return $jsondata;
 }
