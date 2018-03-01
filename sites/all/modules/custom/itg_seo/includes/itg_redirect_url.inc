@@ -470,6 +470,43 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
       $type = 'rss';
       $rss_url = 'rss';
+    } else if ((!empty($arg[0]) && ($arg[0] == 'article')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // article/raina-finds-himself-in-unsavoury-controversy/1/117704.html
+      $storyarg = $arg[3];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+    } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && (!empty($arg[1]) && is_numeric($arg[1])) && (!empty($arg[2]) && $arg[2] == 'magazine.html')) {
+      $year = $arg[1];
+      $current_time = date('Y-m-d', strtotime(date($year . '-01-01')));
+      $output = get_first_issue_by_year($current_time);
+      $current_issue = explode(' 00:', $output);
+      $url = FRONT_URL.'/magazine/'.format_date(strtotime($current_issue[0]),'custom', 'd-m-Y');
+      drupal_goto($url, array(), 301);
+    } else if ((!empty($arg[0]) && ($arg[0] == 'Cartoon')) && (!empty($_GET['cId']))) {
+      if (!empty($_GET['cId'])) {
+        $content_id = 376019;
+        $alias = drupal_get_path_alias('node/'.$content_id);
+      }
+      $url = FRONT_URL.'/'.$alias;
+      drupal_goto($url, array(), 301);
+    } else if ((!empty($arg[0]) && ($arg[0] == 'category')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern category/americas/149/182.html
+      $photo_cat = $arg[3];
+      $query_alias = $arg[2];
+      $photo_cat_explode = explode('.html', $photo_cat);
+      $old_content_id = $photo_cat_explode[0];
+      $type = 'category';
+      $table = 'migrate_map_itgcategory'; 
+    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+      $photo_cat = $arg[4];
+      $query_alias = $arg[3];
+      $photo_cat_explode = explode('.html', $photo_cat);
+      $old_content_id = $photo_cat_explode[0];
+      $type = 'category';
+      $table = 'migrate_map_itgcategory';
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
