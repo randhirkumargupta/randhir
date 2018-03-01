@@ -34,7 +34,7 @@ function itg_indiatoday_samsung_search_api_video_list() {
     $i_arg = array();
     $i_arg[0] = $key;
     echo $key;
-    $fields = "nid,type,title,link";
+    $fields = "entity_id,type,title,link";
     solr_search_custom_results($key);
     $searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);
     $video_list = array();
