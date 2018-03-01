@@ -118,16 +118,26 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   <div class="topCategoryInnerDataBox" id="topStorySlider">
     <div class="swiper-container">
       <ul class="swiper-wrapper">
-        <li class="swiper-slide"> <img src="http://media2.intoday.in/indiatoday/tourism/images/slider1.jpg" alt="" /> <span class="bannerTxt">India Today State of States Awards: Tamil<br>
-          Nadu, Goa win top honours</span> </li>
-        <li class="swiper-slide"> <img src="http://media2.intoday.in/indiatoday/tourism/images/slider2.jpg" alt="" /> <span class="bannerTxt">India Today State of States Awards: Tamil<br>
-          Nadu, Goa win top honours</span> </li>
-        <li class="swiper-slide"> <img src="http://media2.intoday.in/indiatoday/tourism/images/slider3.jpg" alt="" /> <span class="bannerTxt">India Today State of States Awards: Tamil<br>
-          Nadu, Goa win top honours</span> </li>
-        <li class="swiper-slide"> <img src="http://media2.intoday.in/indiatoday/tourism/images/slider4.jpg" alt="" /> <span class="bannerTxt">India Today State of States Awards: Tamil<br>
-          Nadu, Goa win top honours</span> </li>
-        <li class="swiper-slide"> <img src="http://media2.intoday.in/indiatoday/tourism/images/slider5.jpg" alt="" /> <span class="bannerTxt">India Today State of States Awards: Tamil<br>
-          Nadu, Goa win top honours</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/AIZWAL_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Dzukou-Valley_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Khongjom-War-Memorial_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Lonar_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Mahabodhi-Temple_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Namchi_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Sirpur_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Unakoti_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/Valmiki-Nagar-Tiger-Reserve_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/White-river-rafting--Uttarakhand_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
       </ul>
       <div class="sliderLeftShadow"></div>
       <div class="sliderRightShadow"></div>
@@ -181,7 +191,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     <!--end ipad ad code -->
     <div class="row">
       <div class="col-xs-12 col-md-8 col-lg-8 pad30">
-	  <iframe id="quiz_iframe" width="100%"  src="https://aajtak.intoday.in/quiz_app/quiz_tourism.php?act=confirmation&key=<?php echo $_GET['key']; ?>" frameborder="0" allowfullscreen  onLoad="autoResize();"></iframe>
+	  <iframe id="quiz_iframe" width="100%"  src="http://aajtak.intoday.in/quiz_app/quiz_tourism.php?act=confirmation&key=<?=$_GET['key']?>" frameborder="0" allowfullscreen  onLoad="autoResize();"></iframe>
      
         <!--end intro --> 
         
@@ -293,7 +303,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     </div>
   </section>
   <section class="termConditionBg">
-    <p>Copyright © 2017 Living Media India Limited. For reprint rights: Syndications Today.</p>
+    <p>Copyright © 2018 Living Media India Limited. For reprint rights: Syndications Today.</p>
   </section>
 </footer>
 <!--end footer --> 
