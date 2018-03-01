@@ -16,18 +16,18 @@
           $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
           $count_issue = count($view);
           ?>
-          <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) { ?>
+          <?php if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1)) { ?>
             <span class="web-excl"><?php print t('Cover Story'); ?></span>
             <?php
             print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
           }
           else {
             $view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
-            $section_id = $view[0]->_field_data['nid']['entity']->field_story_category[LANGUAGE_NONE][0]['tid'];
-            $section_name = get_term_name_from_tid($section_id)->name;
+            //$section_id = $view[0]->_field_data['nid']['entity']->field_story_category[LANGUAGE_NONE][0]['tid'];
+            //$section_name = get_term_name_from_tid($section_id)->name;
             $nid_arr[] = $view[0]->nid;
             ?>
-            <span class="web-excl"><?php print t($section_name); ?></span>
+            <span class="web-excl"><?php print t('Web Exclusive'); ?></span>
             <?php
             print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
           }
@@ -56,7 +56,7 @@
 
     <div class="magazin-bottom">
       <?php 
-        if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1) && $count_issue > 0) {
+        if (($row['field_story_source_type'] == 'migrated' || $row['field_show_web_exclusive'] != 1)) {
           print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
         }
         else {
