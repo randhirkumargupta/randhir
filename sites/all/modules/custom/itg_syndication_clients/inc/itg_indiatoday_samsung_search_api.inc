@@ -35,12 +35,13 @@ function itg_indiatoday_samsung_search_api_video_list() {
     $i_arg[0] = $key;
     echo $key;
     $fields = "entity_id,type,title,link";
-    solr_search_custom_results($key);
-    $searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);
+    $searchpage = solr_search_custom_results($key);
+    //$searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);
     $video_list = array();
     $loopc = 0;
     foreach ($searchpage as $key => $value) {
-        $nid = $value->entity_id;
+        //$nid = $value->entity_id;
+        $nid = $value;
         $node = node_load($nid);        
         if ($node->type != "videogallery") {
             continue;
@@ -182,11 +183,12 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
       $results['facets'] = facetapi_build_realm($searcher, 'block');
     }
     foreach ($results as $key => $value) {
-        print_r($value);
-        $link = $value['fields']['entity_id'];
-        echo $link; die();
+        
+        $entity_id = $value['fields']['entity_id'];
+        $nid_ar[] = $entity_id;
+        
     }
-    //return $results;
+    return $nid_ar;
   }
   return services_error(t('Search returned no results.'));
 }
