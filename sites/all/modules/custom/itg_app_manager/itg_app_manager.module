@@ -670,6 +670,7 @@ function _get_section_options($term_id, $menu_form_id, $subsec_options) {
 function itg_app_manager_form_submit($form, &$form_state) {
     if (!empty($form_state['values'])) {
         foreach ($form_state['values']['container'] as $key => $form_val) {
+            p($form_val);
             $data = array();
             $title = '';
             $section_id = 0;
