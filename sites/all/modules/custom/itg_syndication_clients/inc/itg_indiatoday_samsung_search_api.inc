@@ -23,7 +23,7 @@ function itg_indiatoday_samsung_search_api(){
      $jdata = json_encode($data);
      $jdata = utf8_encode($jdata);
      $jdata = fixBadUnicodeForJson2($jdata);
-     echo $jdata
+     echo $jdata;
 }
 /**
  * 
@@ -53,32 +53,32 @@ function itg_indiatoday_samsung_search_api_video_list(){
             $changed_datetime = date("Y-m-d H:i:s", $changed);
         }
         $source_type = $node->field_story_source_type_value['und'][0]['value'];
-        $videotag = video_detail_formats($nid, $source_type);
-        if (!empty($videotag['dailymotion'])) {
-            $videoids = get_video_in_fieldcollection_by_nid($nid);
-            foreach ($videoids as $keys => $video_value) {
-                if ($video_value->video_id != '') {
-                    $video_id = $video_value->video_id;
-                } elseif ($video_value->solr_video_id != '') {
-                    $video_id = $video_value->solr_video_id;
-                }
-            }
+        $videotag = itg_video_detail_formats($nid, $source_type);
+  $video_size = migrated_video_transcoding($nid);
 
-            $inter_video_details = internal_video_bitrate_data($video_id);
-
-            $bitrate_url = $inter_video_details['bitrate_url'];
-            $file_url_1 = $inter_video_details['file_url'];
-        }
-        elseif (!empty($videotag['migrated'])) {
-            $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-                foreach ($videoids as $keys => $video_value) {
-                    $url = $video_value->field_migrated_video_url_value;
-                }
-                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-                $bitrate_url = $data_video['bitrate_url'];
-                $mp4_url = $data_video['file_url'];
-            
-        }
+  if (!empty($videotag['migrated'])) { //migrated video
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+    $mp4_url = $data_video['file_url'];
+    //$video_xml .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
+  }
+  elseif (!empty($videotag['dailymotion'])) {
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      } elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+    }
+    $inter_video_details = internal_video_bitrate_data($video_id);
+    $bitrate_url = $inter_video_details['bitrate_url'];
+    //$video_xml .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
+  }
            
         $video_list[$loopc]['v_id'] = (int)$nid;
         $video_list[$loopc]['v_title'] = "$title";
