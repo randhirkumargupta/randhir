@@ -181,7 +181,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     <!--end ipad ad code -->
     <div class="row">
       <div class="col-xs-12 col-md-8 col-lg-8 pad30">
-	  <iframe id="quiz_iframe" width="100%"  src="http://aajtak.intoday.in/quiz_app/quiz_tourism.php?act=confirmation&key=<?=$_GET['key']?>" frameborder="0" allowfullscreen  onLoad="autoResize();"></iframe>
+	  <iframe id="quiz_iframe" width="100%"  src="https://aajtak.intoday.in/quiz_app/quiz_tourism.php?act=confirmation&key=<?php echo $_GET['key']; ?>" frameborder="0" allowfullscreen  onLoad="autoResize();"></iframe>
      
         <!--end intro --> 
         
