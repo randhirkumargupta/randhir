@@ -52,7 +52,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
         if ($changed) {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
         }
-        $source_type = $node->field_story_source_type_value['und'][0]['value'];
+        $source_type = $node->field_story_source_type['und'][0]['value'];
         $videotag = itg_video_detail_formats($nid, $source_type);
   $video_size = migrated_video_transcoding($nid);
 
