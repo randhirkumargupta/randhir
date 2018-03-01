@@ -670,7 +670,7 @@ function _get_section_options($term_id, $menu_form_id, $subsec_options) {
 function itg_app_manager_form_submit($form, &$form_state) {
     if (!empty($form_state['values'])) {
         foreach ($form_state['values']['container'] as $key => $form_val) {
-            p($form_val);
+            
             $data = array();
             $title = '';
             $section_id = 0;
@@ -680,12 +680,11 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
-                /*$term = taxonomy_term_load($form_val['section']['title']);     
-                $title = $term->name;
-                $section_id = $term->tid;*/
-                $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                $section_id = $form_val['section']['title'];
-                echo $section_id; die();
+                $title = = $form_val['section']['title'];
+                $section_id = get_taxo_tid($name);                     
+                /*$title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $section_id = $form_val['section']['title'];*/
+                
                 
             } else {
                 $title = $form_val['section']['title'];
