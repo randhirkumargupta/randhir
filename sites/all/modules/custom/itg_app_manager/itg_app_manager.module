@@ -4081,6 +4081,7 @@ function get_taxo_tid($name){
         $query->condition('ttd.name', $name);
         $query->condition('ttd.vid', 14);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        p($result);
         $tid = $result[0]['tid'];
     }
     return $tid;
