@@ -509,6 +509,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
       $table = 'migrate_map_itgcategory';
+    } else if ((!empty($arg[0]) && ($arg[0] == 'elections')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3]) && !empty ($arg[4]) && !empty ($arg[5])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
+      $old_content_id = $arg[3];
+      $query_alias = $arg[4];
+      $type = 'category';
+      $table = 'migrate_map_itgsection';
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
     }
