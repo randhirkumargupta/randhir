@@ -20,7 +20,9 @@ function itg_indiatoday_samsung_search_api(){
     $data['data']['title'] = "Video";
     $data['data']['video'] = $video_list;
     
-     echo json_encode($data);
+     $jdata = json_encode($data);
+     $jdata = utf8_encode($jdata);
+     $jdata = fixBadUnicodeForJson2($jdata);
 }
 /**
  * 
@@ -49,14 +51,42 @@ function itg_indiatoday_samsung_search_api_video_list(){
         if ($changed) {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
         }
-        $video_list[$loopc]['v_id'] = "$nid";
+        $source_type = $node->field_story_source_type_value['und'][0]['value'];
+        $videotag = video_detail_formats($nid, $source_type);
+        if (!empty($videotag['dailymotion'])) {
+            $videoids = get_video_in_fieldcollection_by_nid($nid);
+            foreach ($videoids as $keys => $video_value) {
+                if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                } elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                }
+            }
+
+            $inter_video_details = internal_video_bitrate_data($video_id);
+
+            $bitrate_url = $inter_video_details['bitrate_url'];
+            $file_url_1 = $inter_video_details['file_url'];
+        }
+        elseif (!empty($videotag['migrated'])) {
+            $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+                foreach ($videoids as $keys => $video_value) {
+                    $url = $video_value->field_migrated_video_url_value;
+                }
+                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+                $bitrate_url = $data_video['bitrate_url'];
+                $mp4_url = $data_video['file_url'];
+            
+        }
+           
+        $video_list[$loopc]['v_id'] = (int)$nid;
         $video_list[$loopc]['v_title'] = "$title";
         $video_list[$loopc]['v_credit'] = "$image_courtesy";
         $video_list[$loopc]['v_byline'] = "$image_caption";
         $video_list[$loopc]['v_desc'] = "$body";
         $video_list[$loopc]['v_small_image'] = "$field_story_medium_image";
         $video_list[$loopc]['v_large_image'] = "$extra_large_image";
-        $video_list[$loopc]['v_download_url'] = "$firebase_url";
+        $video_list[$loopc]['v_download_url'] = "$bitrate_url";
         $video_list[$loopc]['v_updated_datetime'] = "$changed_datetime";
         $video_list[$loopc]['v_duration'] = "";
         $video_list[$loopc]['v_show_ad'] = "0"; 
@@ -88,4 +118,11 @@ function getInfoData2($fid) {
     }
   }
   return $data;
+}
+function fixBadUnicodeForJson2($str) {
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3")).chr(hexdec("$4"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
+    return $str;
 }
