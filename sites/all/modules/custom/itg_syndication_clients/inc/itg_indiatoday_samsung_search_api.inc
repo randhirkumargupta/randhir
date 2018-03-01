@@ -32,12 +32,15 @@ function itg_indiatoday_samsung_search_api() {
 function itg_indiatoday_samsung_search_api_video_list() {
     $key = arg(2);
     $i_arg = array();
-    $i_arg[0] = $key;
-    $searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);
+    $i_arg[0] = $key;   
+    $fields = "entity_id,type,title,link";
+    $searchpage = solr_search_custom_results($key);
+    //$searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);
     $video_list = array();
     $loopc = 0;
     foreach ($searchpage as $key => $value) {
-        $nid = $value->entity_id;
+        //$nid = $value->entity_id;
+        $nid = $value;
         $node = node_load($nid);        
         if ($node->type != "videogallery") {
             continue;
@@ -131,4 +134,60 @@ function fixBadUnicodeForJson2($str) {
     $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2"))', $str);
     $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
     return $str;
+}
+/**
+ * Callback for solr service.
+ */
+function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
+    $link_ar = array();
+    $nid_ar = array();
+  $stdkeys = explode(',', str_replace(' ', '', $fields));
+  $results = array();
+  watchdog('solr_service', 'search.solr invoked for !keys', array('!keys' => $key));
+
+  try {
+    $condition = apachesolr_search_conditions();
+    $results = apachesolr_search_search_execute($key, $condition);
+  }
+  catch (Exception $e) {
+    watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
+    apachesolr_failure(t('Solr search'), $key);
+  }
+
+  watchdog('solr_service', 'search.solr returned !count results for !keys', array('!count' => count($results), '!keys' => $key));
+
+  if ($results and is_array($results) and count($results)) {
+    // If specific fields requested, remove extra data.
+    if ($fields) {
+      $num = count($results);
+      for ($i = 0; $i < $num; $i++) {
+        $value = array_keys($results[$i]);
+        foreach ($value as $keys) {
+          if (!in_array($keys, $stdkeys)) {
+            unset($results[$i][$keys]);
+          }
+        }
+      }
+    }
+    // Result count.
+    $env_id = apachesolr_default_environment();
+    $query = apachesolr_current_query($env_id);
+    if (is_object($query)) {
+      $response = apachesolr_static_response_cache($query->getSearcher());
+      $results['total'] = $response->response->numFound;
+    }
+    // If Facets enabled then show.
+    if ($facets) {
+      $searcher = $query->getSearcher();
+      $results['facets'] = facetapi_build_realm($searcher, 'block');
+    }
+    foreach ($results as $key => $value) {
+        
+        $entity_id = $value['fields']['entity_id'];
+        $nid_ar[] = $entity_id;
+        
+    }
+    return $nid_ar;
+  }
+  return services_error(t('Search returned no results.'));
 }
