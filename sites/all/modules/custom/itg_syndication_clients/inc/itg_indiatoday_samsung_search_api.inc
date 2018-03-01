@@ -50,7 +50,7 @@ function itg_indiatoday_samsung_search_api_video_list(){
         $image_courtesy = $img_info['image_courtesy'];
         $image_caption = $img_info['image_caption'];
         $caption = $node->field_story_extra_large_image['und'][0]['title'];
-        $body = $node->body['und'][0]['value'];
+        $body = $node->field_story_expert_description['und'][0]['value'];
         $firebase_url = 'http://indiatoday.in/'.drupal_get_path_alias('node/'.$nid.'');
         $changed = $node->changed;
         if ($changed) {
