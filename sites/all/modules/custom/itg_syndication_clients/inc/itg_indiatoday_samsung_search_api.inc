@@ -139,6 +139,8 @@ function fixBadUnicodeForJson2($str) {
  * Callback for solr service.
  */
 function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
+    $link_ar = array();
+    $nid_ar = array();
   $stdkeys = explode(',', str_replace(' ', '', $fields));
   $results = array();
   watchdog('solr_service', 'search.solr invoked for !keys', array('!keys' => $key));
@@ -179,8 +181,12 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
       $searcher = $query->getSearcher();
       $results['facets'] = facetapi_build_realm($searcher, 'block');
     }
-    p($results);
-    return $results;
+    foreach ($results as $key => $value) {
+        print_r($value);
+        $link = $value['fields']['entity_id'];
+        echo $link; die();
+    }
+    //return $results;
   }
   return services_error(t('Search returned no results.'));
 }
