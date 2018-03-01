@@ -684,6 +684,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $section_id = $term->tid;*/
                 $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
                 $section_id = $form_val['section']['title'];
+                echo $section_id; die();
                 
             } else {
                 $title = $form_val['section']['title'];
@@ -700,8 +701,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                     $s_title = '';
                 }
             }
-            $s_id = 0;
-                    $s_title = '';
+            
 
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
