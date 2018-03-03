@@ -1017,7 +1017,7 @@ function featuresWidgetData() {
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
 
     //end
