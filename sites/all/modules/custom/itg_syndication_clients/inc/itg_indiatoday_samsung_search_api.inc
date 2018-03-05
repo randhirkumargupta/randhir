@@ -152,10 +152,10 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
       $values['type'] = 'videogallery';
       //$filter = array_key_exists('type', $values) ? array('fq'=>array('type:' . $values['type'])): NULL;
       $filter = array();
-      $filter['fq'] = array('entity_type' => 'story');
+      $filter['fq'] = array('bundle' => 'videogallery');
       $filter['apachesolr_search_sort'] = "entity_id DESC";
-    $results = apachesolr_search_search_execute($key, $condition);
-    p($results);
+    $results = apachesolr_search_search_execute($key, $filter);
+    //p($results);
   }
   catch (Exception $e) {
     watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
