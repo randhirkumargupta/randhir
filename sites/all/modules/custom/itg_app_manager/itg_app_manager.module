@@ -686,7 +686,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 }
                     else{
                         $section_id = $form_val['section']['title'];
-                        $term = taxonomy_term_load($tid);
+                        $term = taxonomy_term_load($section_id);
                         $title = $term->name;
                     }
                 
