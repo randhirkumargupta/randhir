@@ -147,6 +147,7 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
 
   try {
     $condition = apachesolr_search_conditions();
+    p($condition);
     $filter = array('fq'=>array('type' => 'videogallery'));
     $results = apachesolr_search_search_execute($key, $filter);
   }
