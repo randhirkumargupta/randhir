@@ -37,8 +37,7 @@ function itg_indiatoday_samsung_search_api_video_list() {
     $searchpage = solr_search_custom_results($key);
     //$searchpage = views_get_view_result('front_end_global_search', 'default', $i_arg);
     $video_list = array();
-    $loopc = 0;
-    print_r($searchpage);
+    $loopc = 0;    
     foreach ($searchpage as $key => $value) {
         //$nid = $value->entity_id;
         $nid = $value;
@@ -181,8 +180,7 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
     if ($facets) {
       $searcher = $query->getSearcher();
       $results['facets'] = facetapi_build_realm($searcher, 'block');
-    }
-    print_r($results);
+    }    
     foreach ($results as $key => $value) {
         
         $entity_id = $value['fields']['entity_id'];
