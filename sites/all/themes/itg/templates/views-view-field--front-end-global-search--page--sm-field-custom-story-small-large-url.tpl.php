@@ -30,12 +30,12 @@ if (function_exists('itg_apache_solr_get_site_url')) {
 }
 if(!empty($related_data->sm_field_magazine_small_url[0]) && $related_data->bundle == 'magazine' && getimagesize($related_data->sm_field_magazine_small_url[0]) !== false) {
 ?>
-<a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px; height: 127px" src="<?php print $related_data->sm_field_magazine_small_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>
+<a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px;" src="<?php print $related_data->sm_field_magazine_small_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>
 <?php
 } else if(!empty($related_data->sm_field_custom_story_small_large_url[0]) && getimagesize($related_data->sm_field_custom_story_small_large_url[0]) !== false) {
  ?> 
   
-<a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px; height: 127px" src="<?php print $related_data->sm_field_custom_story_small_large_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>  
+<a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px;" src="<?php print $related_data->sm_field_custom_story_small_large_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>  
   
 <?php }  else {
   $default_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
