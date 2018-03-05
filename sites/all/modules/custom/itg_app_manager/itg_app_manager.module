@@ -509,7 +509,7 @@ function theme_itg_app_manager_menu_form_table($variables) {
         $row['data'][] = drupal_render($element[$i]['is_new']);
         $rows[] = $row;
     }
-    p($rows);
+    
 
     // Build the table header.
     if ($form_type == '1') {
@@ -2325,6 +2325,7 @@ function hamburger_menu_list() {
     $query->fields('imc', array('id', 'menu_type_id', 'menu_label_id', 'order_id', 'menu_type', 'section_id', 'title', 'type', 'webview_url', 'icon_url', 'is_new', 'has_subcategory', 's_id', 's_title'));
     $query->condition('imc.menu_type_id', 1, '=');
     $query_results = $query->execute()->fetchAll();
+    p($query_results);
     return theme('itg_app_manager_menu_list_table', array('output' => $query_results, 'source' => 1));
 }
 
