@@ -92,12 +92,21 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                             $background_color_style = ($color_value == '') ? "" : "background : $color_value";
                             
                             if($menu_link_data['url_type'] == 'url-type-external') {
-                              $attribute_array = array(
+                              if (strpos($link_url, $_SERVER['HTTP_HOST'])) {
+                                $attribute_array = array(
+                                    'style' => array( $background_color_style ),  
+                                    'target' => $target,
+                                    'class' => array("third-level-child" , "third-level-child-$key" , $active , $image_class , $url_type)
+                                    );
+                              } else {
+                                $attribute_array = array(
                                     'style' => array( $background_color_style ),  
                                     'target' => $target , 
                                     'rel' => 'nofollow', 
                                     'class' => array("third-level-child" , "third-level-child-$key" , $active , $image_class , $url_type)
                                     );
+                              }
+                              
                             } else {
                               $attribute_array = array(
                                     'style' => array( $background_color_style ),  

@@ -1385,7 +1385,7 @@ footer {
   height: 266px; }
 
 .itg-common-section .droppable {
-  min-height: 420px; }
+  min-height: 600px; }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px; }
 
@@ -13830,12 +13830,10 @@ ul.pron-cons-img li img {
   overflow-y: auto; }
 
 .video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 .video_header_tabs .trending-videos li.trending-videos-list img {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
   color: #aaa9a9; }
