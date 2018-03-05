@@ -2408,11 +2408,12 @@ footer {
       background-color: #222;
       padding: 3px 10px; }
 .story-section .story-right .image-alt {
-  color: #929292;
+  color: #777;
   font-size: 13px;
   font-size: 0.8125rem;
-  padding: 10px 0;
-  border-bottom: 1px solid #e5e5e5; }
+  padding: 5px 0;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: "OpenSans-Semibold"; }
 .story-section .story-right .description {
   padding-top: 10px;
   font-size: 17px;
@@ -8253,7 +8254,8 @@ section.sidebar .block-itg-ads {
       float: left;
       margin-right: 10px; }
   .education-layout-page .from-the-magazine > p {
-    padding: 10px 0; }
+    padding: 10px 0;
+    font-family: "OpenSans-Semibold"; }
   .education-layout-page .from-the-magazine > p + p {
     border-top: 1px solid #ddd; }
   .education-layout-page .auto-block-2 {

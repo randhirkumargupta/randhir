@@ -200,9 +200,8 @@ select, input[type="password"]{ width:100px;}
 /*Rakesh End*/
 
 @media screen and (max-width: 800px) {
-    .wrapper{width:100%;}
-    .top-nav ul li{padding-right:8px;}
-    .top-nav ul li a{font:500 12px/31px "Roboto",Arial,Helvetica,sans-serif;}
+    .wrapper{width:100%;}    
+    .top-nav ul li a{font:500 12px/31px "OpenSans-Semibold"}
     .lucky_container_meter{width: 676px;}
     .lucky_container_meter .container_l .left_part_box{width:590px;}
     .lucky_container_meter .container_l .left_part_box .row_l .cols_l{ width:168px;}

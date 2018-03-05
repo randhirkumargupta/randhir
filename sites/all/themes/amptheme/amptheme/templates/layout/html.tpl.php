@@ -111,7 +111,7 @@ h1 {
 }
 p {
     line-height: 24px;
-    margin: 10px 0;
+    padding: 10px 0;
     white-space: normal
 }
 img {
@@ -224,7 +224,7 @@ img {
     font-family: Open Sans;
     padding: 5px 0;
     border-bottom: 1px solid #ddd;
-    font-weight:600;
+    font-weight:600; line-height:18px;
 }
 .related-story ul {
     list-style: none
@@ -1484,6 +1484,9 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
 .node-type-story .posted-by .profile-detail ul.profile-byline ul li.title{display: inline-block;color: #6b6b6b;font-size: 12px;line-height:14px;font-weight: 500; border-left:1px solid #ddd;padding:0 5px;}
 .node-type-story .posted-by .profile-detail ul.profile-byline ul li.title:nth-child(1){border-left:0px;padding-left:0px;}
 .node-type-story .posted-by .profile-detail ul.profile-byline ul{ font-size:0px; margin:0px;line-height: 0px;}
+
+.itgimage .body_caption {font-size: 0.8125rem; padding:5px 0; border-bottom: 1px solid #e5e5e5; color: #777; font-weight:600; line-height: 18px;font-family: Open Sans;}
+
 @media only screen and (max-width: 767px) {
     ul.pron-cons-img {
         width: 100%
