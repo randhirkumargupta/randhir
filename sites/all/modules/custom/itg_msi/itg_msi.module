@@ -524,20 +524,32 @@ function itg_msi_node_validate($node, $form, &$form_state) {
     }
 
     //Case: Issue creation (If issue is already exist, throw an error) 
-    if ($node->type == 'issue') {
-        if (arg(2) == 'edit') {
-            $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', arg(1));
-        }
-        else {
-            $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', NULL);
-        }
-
-        if ($is_issue_exist) {
-            form_set_error('field_supp_issue', t('This issue is already exist.'));
-        }
+  if ($node->type == 'issue') {
+    if (arg(2) == 'edit') {
+      $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', arg(1));
+    }
+    else {
+      $is_issue_exist = itg_msi_check_for_issue_existence($node, 'issue', NULL);
     }
 
-    // Validate XML 
+    if ($is_issue_exist) {
+      form_set_error('field_supp_issue', t('This issue is already exist.'));
+    }
+
+    if (!empty($node->field_field_issue_import_xml)) {
+      foreach ($node->field_field_issue_import_xml[LANGUAGE_NONE] as $f_key => $f_val_arr) {
+        $file_name_arr[] = file_load($f_val_arr['fid'])->filename;
+      }
+      $file_arr = array_count_values($file_name_arr);
+      foreach ($file_arr as $file_name => $times) {
+        if ($times > 1) {
+          form_set_error('field_field_issue_import_xml', t('FileName <strong>@filename</strong> is being uploaded @times times. Please upload single file once.', array('@filename' => $file_name, '@times' => $times)));
+        }
+      }
+    }
+  }
+
+  // Validate XML 
     if ($node->type == 'issue' || $node->type == 'supplement') {
 
         if ($node->type == 'supplement') {
