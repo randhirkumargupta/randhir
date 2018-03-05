@@ -509,6 +509,7 @@ function theme_itg_app_manager_menu_form_table($variables) {
         $row['data'][] = drupal_render($element[$i]['is_new']);
         $rows[] = $row;
     }
+    p($rows);
 
     // Build the table header.
     if ($form_type == '1') {
