@@ -152,7 +152,7 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
       $values['type'] = 'videogallery';
       //$filter = array_key_exists('type', $values) ? array('fq'=>array('type:' . $values['type'])): NULL;
       $filter = array();
-      $filter['fq'] = array('type' => 'story');
+      $filter['fq'] = array('entity_type' => 'story');
       $filter['apachesolr_search_sort'] = "entity_id DESC";
     $results = apachesolr_search_search_execute($key, $filter);
   }
