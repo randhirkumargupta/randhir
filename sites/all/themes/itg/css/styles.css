@@ -6847,7 +6847,7 @@ section.sidebar .block-itg-ads {
     padding-left: 22px; }
     .auto-layout-page .special-top-news ul li:before {
       position: absolute;
-      top: 27px;
+      top: 20px;
       left: 8px;
       content: '';
       border-radius: 100%;
