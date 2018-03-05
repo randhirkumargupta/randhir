@@ -680,6 +680,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1') {
+                p($form_val);
                 $title  = $form_val['section']['title'];
                 $section_id = get_taxo_tid($title);                     
                 /*$title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
