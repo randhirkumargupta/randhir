@@ -2704,10 +2704,11 @@ footer {
             }
         }
         .image-alt {
-            color: #929292;
+            color: #777;
             @include font(13px);
-            padding: 10px 0;
+            padding: 5px 0;
             border-bottom: 1px solid #e5e5e5;
+            font-family:$itg-opensanssemibold;
         }
         .description {
             padding-top: 10px;
@@ -8606,6 +8607,7 @@ section.sidebar {
         }
         >p {
             padding: 10px 0;
+            font-family: "OpenSans-Semibold";
         }
         >p+p {
             border-top: 1px solid #ddd;
