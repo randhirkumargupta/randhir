@@ -87,7 +87,7 @@ if ($theme != 'itgadmin') {
                 <?php endif; ?>
                 <div class="row itg-top-section itg-layout-672 here ">
                     <div class="top-block">
-                        <div class="col-md-8">
+                        <div class="col-lg-8 col-md-12 ">
                             <div class="widget-help-text">Special widgets ( <strong>Automated Top Story</strong> )</div>
                             <div class="">
                                 <div class="itg-widget">
@@ -120,11 +120,11 @@ if ($theme != 'itgadmin') {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-12">
                             <div class="widget-help-text"><?php print t('Non Draggable'); ?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
                             <div class="auto-block-3">
                                 <div class="row">
-                                    <div class="itg-widget-parent m-bottom40 col-md-12 col-sm-6 col-xs-12">
+                                    <div class="itg-widget-parent m-bottom40 col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                         <div class="itg-widget">
                                             <div class="ad-widget">
                                                 <div class="sidebar-ad">
@@ -137,7 +137,7 @@ if ($theme != 'itgadmin') {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="itg-widget trending-list col-md-12 col-sm-6 col-xs-12">   
+                                    <div class="itg-widget trending-list col-lg-12 col-md-6 col-sm-6 col-xs-12">   
                                         <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('How I made it'); ?></strong> )</div>
                                         <div class="itg-widget-child shadow-on">
                                             <div class="droppable <?php print $gray_bg_layout; ?>">

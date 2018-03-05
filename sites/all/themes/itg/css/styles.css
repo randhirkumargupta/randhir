@@ -8187,8 +8187,9 @@ section.sidebar .block-itg-ads {
     height: 672px; }
     .education-layout-page .itg-layout-672 .droppable .auto-block-1,
     .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
-      height: 672px;
-      overflow: hidden; }
+      height: 710px;
+      overflow: hidden;
+      margin-bottom: 30px; }
     .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
       border: 1px solid #ddd; }
       .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
