@@ -22,7 +22,7 @@ function itg_indiatoday_samsung_search_api() {
 
     $jdata = json_encode($data);
     $jdata = utf8_encode($jdata);
-    //$jdata = fixBadUnicodeForJson2($jdata);
+    $jdata = fixBadUnicodeForJson2($jdata);
     echo $jdata;
 }
 
