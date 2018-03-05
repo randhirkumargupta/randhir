@@ -9,7 +9,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $date = date( 'Y-m-d', time());
     $day_before = date( 'Y-m-d', strtotime( $date . ' -1 day' ) );
     //$file_name = date('Y-m-d', time()).".xml";
-    $file_name = $day_before.".xml";
+    $file_name = $day_before."_1.xml";
     // query for vedio
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -118,6 +118,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $xml .= story_xml($result_story);
     $xml .= gallery_xml($result_gallery);
     $xml .= '</data>';
+    $xml = badUnicodeparse_clients($xml);
     $xml_path = 'public://rss-feeds/xml_data/indiatoday/it/daily_report/';
     //$xml_path = 'public://rss-feeds/xml_data/celtick/it/stories/';
     $file_path = $xml_path . $file_name;
@@ -300,3 +301,4 @@ function gallery_xml($result = NULL) {
   }
   return $xml;
 }
+
