@@ -541,10 +541,12 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         $file_name_arr[] = file_load($f_val_arr['fid'])->filename;
       }
       $file_arr = array_count_values($file_name_arr);
+      $i = 11;
       foreach ($file_arr as $file_name => $times) {
         if ($times > 1) {
-          form_set_error('field_field_issue_import_xml', t('FileName <strong>@filename</strong> is being uploaded @times times. Please upload single file once.', array('@filename' => $file_name, '@times' => $times)));
+          form_set_error('field_field_issue_import_xml'.$i, t('FileName <strong>@filename</strong> is being uploaded @times times. Please upload single file once.', array('@filename' => $file_name, '@times' => $times)));
         }
+        $i++;
       }
     }
   }
