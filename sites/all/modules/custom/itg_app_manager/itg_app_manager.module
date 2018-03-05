@@ -3103,7 +3103,7 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['magazine_group']['magazine_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
-        '#default_value' => fetchMasterConfigData('hamburger_menu_config_options'),
+        '#default_value' => fetchMasterConfigData('magazine_config_options'),
     );
     $form['magazine_group']['magazine_information'] = array(
         '#markup' => "<a href='$base_url/itg-app-manager-magazine' target='_blank'>$img_tag</a>",
