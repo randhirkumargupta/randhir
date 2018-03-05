@@ -146,12 +146,12 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
   watchdog('solr_service', 'search.solr invoked for !keys', array('!keys' => $key));
 
   try {
-    //$condition = apachesolr_search_conditions();    
+    $condition = apachesolr_search_conditions();    
     //$filter = array('fq'=>array('type' => 'videogallery'));
       $values = array();
       $values['type'] = 'videogallery';
-       $filter = array_key_exists('type', $values) ? array('fq'=>array('type:' . $values['type'])): NULL;
-    $results = apachesolr_search_search_execute($key, $filter);
+      $filter = array_key_exists('type', $values) ? array('fq'=>array('type:' . $values['type'])): NULL;
+    $results = apachesolr_search_search_execute($key, $condition);
   }
   catch (Exception $e) {
     watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
