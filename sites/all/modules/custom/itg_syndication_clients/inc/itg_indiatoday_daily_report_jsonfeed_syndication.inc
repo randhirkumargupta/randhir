@@ -6,9 +6,10 @@
  * @param string $file_name
  */
 function itg_indiatoday_daily_report_jsonfeed_syndication() {
-    $interval = 1;
-    date('Y-m-d', strtotime("-" . $interval . " days"));
-    $file_name = date('Y-m-d', time()).".xml";
+    $date = date( 'Y-m-d', time());
+    $day_before = date( 'Y-m-d', strtotime( $date . ' -1 day' ) );
+    //$file_name = date('Y-m-d', time()).".xml";
+    $file_name = $day_before.".xml";
     // query for vedio
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -17,12 +18,16 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
-    $start_date = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $start_date = $day_before;
     $end_date = $start_date;
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
-        $query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+        $s_time = date(strtotime($start_date_timestamp));
+        $e_time = date(strtotime($end_date_timestamp));
+        //$query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+        $query->condition('n.created', $s_time, '>=');
+        $query->condition('n.created', $e_time, '<=');
     }
     
     //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -48,12 +53,16 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
-    $start_date = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $start_date = $day_before;
     $end_date = $start_date;
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
-        $query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+        $s_time = date(strtotime($start_date_timestamp));
+        $e_time = date(strtotime($end_date_timestamp));
+        //$query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+        $query->condition('n.created', $s_time, '>=');
+        $query->condition('n.created', $e_time, '<=');
     }
     
     //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -78,12 +87,16 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
-    $start_date = date('Y-m-d', strtotime("-" . $interval . " days"));
+    $start_date = $day_before;
     $end_date = $start_date;
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
-        $query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+        $s_time = date(strtotime($start_date_timestamp));
+        $e_time = date(strtotime($end_date_timestamp));
+        //$query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+        $query->condition('n.created', $s_time, '>=');
+        $query->condition('n.created', $e_time, '<=');
     }
     
     //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');

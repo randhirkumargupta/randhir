@@ -1010,7 +1010,7 @@ function featuresWidgetData() {
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
 
     //end
@@ -1178,7 +1178,7 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
         $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
         $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
-        $data_newslist[$home_list_count]['n_updated_datetime'] = "$pub_date";
+        $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
         
         $heighligth = array();
         $heighligth = (array) getHighlightByNid($nid);
