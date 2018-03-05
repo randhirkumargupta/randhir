@@ -608,7 +608,7 @@ if (!empty($content)):
                 ?>
                 <div class="stryimg" >
                   <?php if($activate_live_tv) { ?>
-                        <div class="story_itg_live_tv">
+                        <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
                         </div>
                 <?php } else {
@@ -1257,7 +1257,8 @@ if (!empty($content)):
             ?>
             <div class="c_ques"><?php print $question; ?></div>
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>                       
+            <div id="vuukle-comments"></div>
+            <div class="vuukle-powerbar"></div>                       
             <?php
             if (function_exists('vukkul_view')) {
                   vukkul_view();
