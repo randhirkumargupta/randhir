@@ -310,10 +310,12 @@ if (!empty($content)):
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                     }
-                    else {
+                    /*else {
                       $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                    }
-                    print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
+                    }*/
+                    if (isset($file_uri)) {
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
+				    }
                   }
                   else {
                     if(empty($node->field_story_template_guru['und'][0]['value'])) {
@@ -322,12 +324,14 @@ if (!empty($content)):
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                     }
-                    else {
+                    /*else {
                       $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                    }
+                    }*/
                     //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                    if (isset($file_uri)) {
                        print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
+                    }
                     ?>        
 
                     <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
@@ -367,13 +371,14 @@ if (!empty($content)):
                       //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
                                     //<i class="fa fa-camera"></i></span>';
                     }
-                    else {
+                    /*else {
                       $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                    }
+                    }*/
                     
                     //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                     if (isset($file_uri)) {
                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
-                    
+                     }
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
