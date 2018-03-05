@@ -150,8 +150,11 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
     //$filter = array('fq'=>array('type' => 'videogallery'));
       $values = array();
       $values['type'] = 'videogallery';
-      $filter = array_key_exists('type', $values) ? array('fq'=>array('type:' . $values['type'])): NULL;
-    $results = apachesolr_search_search_execute($key, $condition);
+      //$filter = array_key_exists('type', $values) ? array('fq'=>array('type:' . $values['type'])): NULL;
+      $filter = array();
+      $filter['fq'] = array('type:videogallery');
+      $filter['apachesolr_search_sort'] = "";
+    $results = apachesolr_search_search_execute($key, $filter);
   }
   catch (Exception $e) {
     watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
