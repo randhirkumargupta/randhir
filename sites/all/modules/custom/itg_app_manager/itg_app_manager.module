@@ -683,7 +683,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 if(arg(2) == "edit"){
                     $title  = $form_val['section']['title'];
                     $section_id = get_taxo_tid($title);  
-                )
+                }
                     else{
                         $section_id = $form_val['section']['title'];
                         $term = taxonomy_term_load($tid);
