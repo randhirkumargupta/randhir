@@ -2325,7 +2325,7 @@ function hamburger_menu_list() {
     $query->fields('imc', array('id', 'menu_type_id', 'menu_label_id', 'order_id', 'menu_type', 'section_id', 'title', 'type', 'webview_url', 'icon_url', 'is_new', 'has_subcategory', 's_id', 's_title'));
     $query->condition('imc.menu_type_id', 1, '=');
     $query_results = $query->execute()->fetchAll();
-    p($query_results);
+   
     return theme('itg_app_manager_menu_list_table', array('output' => $query_results, 'source' => 1));
 }
 
@@ -3603,7 +3603,7 @@ function getMenuTypeLabel($m_id, $label) {
         $menu_name = "";
         if ($m_id == 0) {
             $menu_name = "Static";
-        } elseif ($m_id == 2) {
+        } elseif ($m_id == 1) {
             $menu_name = "Mix";
         } elseif ($m_id == 1208521) {
             $menu_name = "Photo";
