@@ -554,64 +554,35 @@ function news_wrap_list() {
  * @return array
  */
 function news_wrap_datalist() {
-  global $base_url;
-
-  $data = array();
-  $changed_datetime = "";
-
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_common_by_line_reporter_id', 'bl', 'bl.entity_id = n.nid');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id = n.nid');
-  $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = pc.field_primary_category_value');
-  $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-  $query->innerJoin('field_data_field_story_highlights', 'hi', 'hi.entity_id = n.nid');
-
-  $query->fields('n', array('nid', 'title', 'type', 'created', 'changed'));
-  $query->fields('td', array('tid', 'name'));
-  $query->fields('hi', array('field_story_highlights_value'));
-  $query->fields('li', array('field_story_large_image_fid'));
-
-  $query->condition('n.type', 'story');
-  $query->condition('n.status', 1);
-  $query->range(0, 25);
-  $query->orderBy('n.nid', 'DESC');
-  $query->groupBy('n.nid');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  $news = array();
-  $hresult = array();
-
-  foreach ($result as $k => $res) {
-
-    $changed = $res['changed'];
-    $file_large_img_url = file_create_url($res['li_file_uri']);
-    $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
-
-    $hquery = db_select('node', 'n');
-    $hquery->innerJoin('field_data_field_story_highlights', 'hi', 'hi.entity_id = n.nid');
-    $hquery->addField('hi', 'field_story_highlights_value', 'h_title');
-    $hquery->condition('n.nid', $res['nid']);
-    $hresult = $hquery->execute()->fetchAll();
-
-    if ($changed) {
-      $changed_datetime = date("Y-m-d H:i:s", $changed);
+    global $base_url;
+    $data = array();
+    $data_topstories = topstoriesList();
+    //p($data_topstories); data
+    $data = $data_topstories['data'];
+    $lcont = 0;
+    foreach ($data as $k => $res) {
+        if (count($res['n_highlight']) > 0) {
+            $nid = $res['n_id'];
+            $n_title = strip_tags($res['n_title']);
+            $n_large_image = $res['n_large_image'];
+            $n_updated_datetime = $res['n_updated_datetime'];
+            $category_id = $res['n_pcategory_id'];
+            $category_title = $res['n_pcategory_name'];
+            $highlight = $res['n_highlight'];
+            $news['n_id'] = $nid;
+            $news['n_title'] = $n_title;
+            $news['n_large_image'] = "$n_large_image";
+            $news['n_updated_datetime'] = "$n_updated_datetime";
+            $news['category_id'] = $category_id;
+            $news['category_title'] = $category_title;
+            $news['highlight'] = $highlight;
+            $news2[] = $news;
+            $lcont++;
+        }
     }
-
-
-    $news['n_id'] = isset($res['nid']) ? $res['nid'] : "";
-    $news['n_title'] = isset($res['title']) ? $res['title'] : "";
-    $news['n_large_image'] = "$file_large_img_url";
-    $news['n_updated_datetime'] = "$changed_datetime";
-    $news['category_id'] = isset($res['tid']) ? $res['tid'] : "";
-    $news['category_title'] = isset($res['name']) ? $res['name'] : "";
-    $news['highlight'] = $hresult;
-
-    $news2[] = $news;
-  }
-
-  $data['data'] = $news2;
-  $data['lcount'] = count($result);
-  return $data;
+    $data['data'] = $news2;
+    $data['lcount'] = $lcont;
+    return $data;
 }
 
 /**
