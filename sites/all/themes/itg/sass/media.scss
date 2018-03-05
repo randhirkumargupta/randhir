@@ -112,14 +112,14 @@
     .auto-layout-page {
         .auto-block-1,
         .auto-block-2 {
-            height: 520px;
-            margin-bottom: 50px;
+            height:710px;
+            margin-bottom:30px;
         }
         .auto-block-3 {
             .ad-widget {
                 height: 272px;
                 padding: 10px;
-                width: 300px;
+                width: 320px;
                 margin: 0 auto;
             }
             .itg-widget-child {
@@ -1894,6 +1894,7 @@
 }
 
 @media only screen and (max-width:767px) {
+
     /*css start oscar-layout-page */
     .oscar-layout-page .oscar-news {
         .col-md-6:nth-child(3n+1) {
@@ -4426,6 +4427,8 @@
 }
 
 @media all and (max-width: 320px) {
+    .ad-pd0{ padding:0px;margin:0 -15px;}
+
     .story-section .story-right .description {
         .itgvideo {
             >iframe {
