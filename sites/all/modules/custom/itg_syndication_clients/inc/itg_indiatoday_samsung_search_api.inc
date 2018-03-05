@@ -154,7 +154,7 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
       $filter = array();
       $filter['fq'] = array('type' => 'videogallery');
       $filter['apachesolr_search_sort'] = "entity_id DESC";
-    $results = apachesolr_search_search_execute($key, $condition);
+    $results = apachesolr_search_search_execute($key, $filter);
   }
   catch (Exception $e) {
     watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
