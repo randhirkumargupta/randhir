@@ -20,7 +20,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'budget-reactions' => 4,
           'home-shows' => 5,
           'election-other-story' => 4,
-          'home-watch' => 4,
+          'home-watch' => 3,
           'india-inc-on-budget' => 4,
           'budget-decoded' => 3,
           'edu-featurefilia' => 4,
