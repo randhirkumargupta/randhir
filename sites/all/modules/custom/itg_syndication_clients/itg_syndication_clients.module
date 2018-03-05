@@ -6,6 +6,14 @@
  * Contains functionality for ITG Syndication for clients.
  */
 module_load_include('inc', 'itg_syndication_clients', 'itg_syndication_clients.helper');
+/**
+ * Implements hook_apachesolr_modify_query().
+ */
+function itg_syndication_clients_apachesolr_modify_query(&$query, &$params, $caller){
+    print_r($params);
+    p($query);
+    
+}
 
 /**
  * Implements hook_menu().
