@@ -6725,7 +6725,7 @@ section.sidebar {
                 padding-left: 22px;
                 &:before {
                     position: absolute;
-                    top: 27px;
+                    top: 20px;
                     left: 8px;
                     content: '';
                     border-radius: 100%;
@@ -8494,8 +8494,9 @@ section.sidebar {
             height: 672px;
             .auto-block-1,
             .auto-block-2 {
-                height: 672px;
+                height:710px;
                 overflow: hidden;
+                margin-bottom: 30px;
             }
             .auto-block-1 {
                 border: 1px solid #ddd;
