@@ -8,6 +8,18 @@
 module_load_include('inc', 'itg_syndication_clients', 'itg_syndication_clients.helper');
 
 /**
+ * Implementation of hook_apachesolr_modify_query().
+ */
+function itg_syndication_clients_apachesolr_modify_query(&$query, &$params, $caller) {
+    if(arg(0) == "clients" && arg(1) == "samsung_search_api"){
+        $query->add_filter('type', 'podcast', TRUE); 
+        $query->add_filter('type', 'story', TRUE); 
+        $query->add_filter('type', 'bestcolleges', TRUE); 
+        $query->add_filter('type', 'photogallery', TRUE);   
+    }
+}
+
+/**
  * Implements hook_menu().
  */
 function itg_syndication_clients_menu() {
