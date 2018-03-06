@@ -89,15 +89,27 @@ function itg_pti_content() {
                     $meta_keyword = implode(", ", $final_keyword);
                     $description = $pti_value->description;
                     $description = trim(strip_tags($description, '<p>'));
-                    $body_description = '<p>'.$description.'</p>';
-                    if(preg_match('/[\t]+/', $body_description, $matches)){
-						$body_description = trim(preg_replace('/[\t]+/', '</p><p>', $body_description));
-					}
-					else{
-						$body_description = preg_replace('/[^(\x20-\x7F)\x0A\x0D]*/','', $body_description);
-						$body_description = trim(preg_replace('/\s\s+/', '</p><p>', $body_description));
-					}
-                    $kicker = substr($description, 0, 200);
+                    $body_description = $description;
+                    if (preg_match('/[\t]+/', $body_description, $matches)) {
+                      $body_description = trim(preg_replace('/[\t]+/', '</p><p>', $body_description));
+                    }
+                    else {
+                      $body_description = preg_replace('/[^(\x20-\x7F)\x0A\x0D]*/', '', $body_description);
+                      $body_description = trim(preg_replace('/\s\s+/', '</p><p>', $body_description));
+                    }
+                    $body_arr = explode('</p><p>', $body_description);
+                    $first_para_arr = explode(' ', $body_arr[0]);
+                    if (count($first_para_arr) < 5) {
+                      $body_arr[0] = $body_arr[0] . ' ' . $body_arr[1];
+                      unset($body_arr[1]);
+                      $body_arr = array_values($body_arr);
+                      $body_description = implode('</p><p>', $body_arr);
+                    }
+                    else {
+                      $body_description = $body_description;
+                    }
+                    $body_description = '<p>' . $body_description . '</p>';
+                    $kicker = substr($description, 0, 200);   
                     $kicker = trim(strip_tags($kicker));
                     $kicker1 = substr($description, 200);
                     $kicker1 = trim(strip_tags($kicker1));
