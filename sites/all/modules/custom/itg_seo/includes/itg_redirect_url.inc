@@ -512,7 +512,68 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $query_alias = $arg[4];
       $type = 'category';
       $table = 'migrate_map_itgsection';
-    } else if ($arg[0] == 'node' && empty($arg[1])) {
+    } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'Story') && !empty($arg[2]) && !empty ($arg[3])) {
+      $storyarg = $arg[2];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($storyarg, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'video') && !empty($arg[2]) && !empty ($arg[3]) && !empty ($arg[4])) {
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgvideogallery';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'story')) && !empty($arg[1]) && !empty($arg[2])) {
+      $storyarg = $arg[2];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'story')) && !empty($arg[1]) && !empty($arg[2])) {
+      $storyarg = $arg[2];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'Photo')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {
+      $storyarg = $arg[1];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgphotogallery';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'article') && !empty($arg[2]) && !empty($arg[3]) && !empty($arg[4])) {
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'gallery') && !empty($arg[2]) && !empty($arg[3]) && !empty($arg[4])) {
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgphotogallery';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $newurl = FRONT_URL.'/'.$redirecturl;
+      drupal_goto($newurl, array(), 301);
+     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
   // Code for url redirection:
