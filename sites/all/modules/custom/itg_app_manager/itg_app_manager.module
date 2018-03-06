@@ -753,6 +753,12 @@ function itg_app_manager_form_submit($form, &$form_state) {
             }
         }
     }
+    if($form_val['menu_type_id'] == 1){
+        drupal_goto("hamburger-menu-management");
+    }
+    else{
+        drupal_goto("horizontal-menu-management");
+    }
 }
 
 /**
