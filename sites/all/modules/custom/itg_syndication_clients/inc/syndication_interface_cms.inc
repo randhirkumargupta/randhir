@@ -331,9 +331,9 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
       $xml .= '<section>' . $primary_cat . '</section>';
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<byline>' . $byline . '</byline>';
-      $xml .= '<headline>' . $value['title'] . '</headline>';
-      $xml .= '<introtext>' . $kicker_text . '</introtext>';
-      $xml .= '<bodytext>' . $body;
+      $xml .= '<headline>' . stripInvalidXml($value['title']) . '</headline>';
+      $xml .= '<introtext>' . stripInvalidXml($kicker_text) . '</introtext>';
+      $xml .= '<bodytext>' . stripInvalidXml($body);
       $xml .= "<copyright>Reproduced From Women's Health. Copyright " . date('Y') . ". LMIL. All rights reserved.</copyright>";
       $xml .= '</bodytext>';
     }
