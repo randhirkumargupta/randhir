@@ -513,7 +513,7 @@ function theme_itg_app_manager_menu_form_table($variables) {
     } else {
         $header = array(t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'));
     }
-    // Render the table.
+    // Render the table. 
     // Note: For TableSelect instead of TableDrag, you would have specified
     //   'tableselect' as render element #type and passed the $rows as 'options'
     //   instead of 'rows'.
