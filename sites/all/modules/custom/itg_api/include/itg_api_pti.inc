@@ -91,6 +91,8 @@ function itg_pti_content() {
                     $description = trim(strip_tags($description, '<p>'));
                     $body_description = '<p>'.$description.'</p>';
                     $body_description = trim(preg_replace('/\s\s+/', '</p><p>', $body_description));
+                    $body_description = trim(preg_replace('/[\t]+/', '</p><p>', $body_description));
+					$body_description = preg_replace('/[^(\x20-\x7F)\x0A\x0D]*/','', $body_description);
                     $kicker = substr($description, 0, 200);
                     $kicker = trim(strip_tags($kicker));
                     $kicker1 = substr($description, 200);
