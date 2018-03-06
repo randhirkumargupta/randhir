@@ -100,6 +100,15 @@ function menu_list($result) {
   $total_menu = count($result);
   if ($total_menu > 0) {
     foreach ($result as $data) {
+      if($data['section_id'] == '1206553'){
+          $data['title'] = "PROGRAMMES";
+      }
+      elseif($data['section_id'] == '1206552'){
+          $data['title'] = "VIDEOS";
+      }
+      elseif($data['section_id'] == '1208521'){
+          $data['title'] = "PHOTOS";
+      }
       $menu['id'] = isset($data['section_id']) ? $data['section_id'] : "";
       $menu['order'] = isset($data['order_id']) ? $data['order_id'] : "";
       $menu['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
