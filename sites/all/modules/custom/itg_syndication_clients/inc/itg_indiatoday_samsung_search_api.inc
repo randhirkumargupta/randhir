@@ -32,6 +32,9 @@ function itg_indiatoday_samsung_search_api() {
 function itg_indiatoday_samsung_search_api_video_list() {
   $key = arg(2);
   $nids = solr_search_custom_results($key);
+  if($nids === FALSE){
+		return array();
+	}
   $searchpage = get_node_data_from_nids($nids);
   $video_list = array();
   $loopc = 0;
@@ -132,8 +135,8 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
 
   try {
     $condition = apachesolr_search_conditions();
-    $condition['fq'] = array("bundle:videogallery");
-    $condition['apachesolr_search_sort'] = "entity_id DESC";
+    $condition['fq'] = array("bundle:videogallery", "bs_status:true");
+    $condition['apachesolr_search_sort'] = "ds_changed DESC";
     $results = apachesolr_search_search_execute($key, $condition);
     //p($results);
   }
@@ -148,7 +151,7 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
     }
     return $nid_ar;
   }
-  return services_error(t('Search returned no results.'));
+  return FALSE;
 }
 
 function get_node_data_from_nids($nids) {
