@@ -26,12 +26,10 @@ else {
   $ads_url = 'https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]';
 }
 $uri = base64_encode($actual_link);
-$byline_id = itg_get_multi_byline_details($video_node->nid, 1);
 $byline_title = '';
-if (is_array($byline_id) && count($byline_id) > 0) {
- foreach($byline_id as $key => $value) {
-	 $byline_title .= $value['title'];
- }
+if(!empty($video_node->field_story_reporter)){
+	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['value'];	
+	$byline_title = itg_common_get_node_title($target_nid);
 }
 ?>
 <?php foreach ($rows as $row): ?>
@@ -45,7 +43,7 @@ if (is_array($byline_id) && count($byline_id) > 0) {
                     ?>
                     <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
                   <?php } ?>
-				  <?php print $byline_title . '|' . date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>
+				  <?php print $byline_title . ' | ' . date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>
               </div>
               <div class="col-md-8 video-header-left">
                   <div class="video">
