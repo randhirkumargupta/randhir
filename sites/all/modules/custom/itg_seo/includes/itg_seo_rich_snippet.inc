@@ -133,7 +133,7 @@ function itg_seo_node_data($node) {
                                       "name": "' . $moviename . '",
                                       "image": "' . $largimage . '",
                                       "datePublished": "' . $publisheddate . '",
-                                      "sameAs": "' . $pageurl . '",
+                                      "sameAs": "http://www.imdb.com/title/tt7329858/",
                                       "director": "' . $directorname . '"
                                   },
                                   "reviewRating": {
