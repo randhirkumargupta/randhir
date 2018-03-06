@@ -94,8 +94,7 @@ body {
     font: 400 15px/20px 'Open Sans';
     color: #111
 }
-h1,
-h2,
+
 h3,
 h4,
 h5,
@@ -109,6 +108,14 @@ h1 {
     line-height: 30px;
 
 }
+h2{
+
+    font-family:'Merriweather';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+}
+
 p {
     line-height: 24px;
     padding: 10px 0;
