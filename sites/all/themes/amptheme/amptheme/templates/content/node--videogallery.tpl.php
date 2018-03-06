@@ -1,5 +1,15 @@
+<?php
+$byline_title = '';
+if(!empty($node->field_story_reporter)){
+	$target_nid = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
+	$byline_title = itg_common_get_node_title($target_nid);
+	$byline_title = trim($byline_title);
+}
+?>
 <div class="black-box">
-  <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
+  <div class="photo-title"><h1><?php print $node->title; ?></h1>
+    <span class="video-byline"><?php print $byline_title . ' | ' . date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>
+  </div>
    <?php
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
     if($source_type != 'migrated') { ?>

@@ -30,6 +30,7 @@ $byline_title = '';
 if(!empty($video_node->field_story_reporter)){
 	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
 	$byline_title = itg_common_get_node_title($target_nid);
+	$byline_title = trim($byline_title);
 }
 ?>
 <?php foreach ($rows as $row): ?>
@@ -37,13 +38,14 @@ if(!empty($video_node->field_story_reporter)){
       <div class ="video-landing-header">
           <div class="row">
               <div class="col-md-12">
-                  <h1 class="video-heading"><?php print $row['title']; ?></h1><?php
+                  <h1 class="video-heading"><?php print $row['title']; ?></h1>
+                  <span class="video-byline"><?php print $byline_title . ' | ' . date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>
+                  <?php
                   global $user;
                   if (in_array('Social Media', $user->roles)) {
                     ?>
                     <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
-                  <?php } ?>
-				  <?php print $byline_title . ' | ' . date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>
+                  <?php } ?>				  
               </div>
               <div class="col-md-8 video-header-left">
                   <div class="video">
