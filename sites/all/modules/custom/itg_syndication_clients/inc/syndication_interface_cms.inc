@@ -334,7 +334,7 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
       $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<introtext>' . $kicker_text . '</introtext>';
       $xml .= '<bodytext>' . $body;
-      $xml .= "<copyright>Reproduced From Women's Health. Copyright ' . date('Y') . '. LMIL. All rights reserved.</copyright>";
+      $xml .= "<copyright>Reproduced From Women's Health. Copyright " . date('Y') . ". LMIL. All rights reserved.</copyright>";
       $xml .= '</bodytext>';
     }
     $xml .= '</artical>';
