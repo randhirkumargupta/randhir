@@ -2597,20 +2597,18 @@ function itg_rapid_api_hamburger_menu($token) {
   $redis_key = "devitgd_rapid_hamburger_menu_json";
   $result_get = getRedis($redis_key);
 
-      if ($result_get['key_value'] != "") {
-         $jsondata = $result_get['key_value'];
-      } else {
-  $jsondata = variable_get('hamburger_menu_json');
-  //$jsondata = hamburger_menu_middleware_data();
-  $jsondata = json_encode($jsondata);
-  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-  $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('hamburger_menu_json');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
 
-  $obj = json_decode($jsondata, TRUE);
-  $return_obj = $obj;
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
 
-  return $return_obj;
+    return $return_obj;
 }
 /**
  * Call back function for hamburger_menu API
