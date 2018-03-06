@@ -911,3 +911,4 @@ background:none;
 .auto-layout-page .special-top-news ul li:before{display:none;}
 .auto-layout-page .featured-news .featured-post h3{line-height: 20px;font-size:15px;}
 }
+.latest_video .tab-buttons.tab-buttons span.hide{display:none;}
