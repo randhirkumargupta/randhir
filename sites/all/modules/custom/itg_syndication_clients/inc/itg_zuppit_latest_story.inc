@@ -197,10 +197,10 @@ function client_samsung_video_detail() {
   }
   $byline = get_byline_name_by_nid($nid);
   $created_date = date("Y-m-d H:i:s", $node->created);
-  $video_data['id'] = $node->nid;
+  $video_data['id'] = (int)$node->nid;
   $video_data['title'] = html_entity_decode($node->title);
  
-  $video_detail['v_id'] = $node->nid;
+  $video_detail['v_id'] = (int)$node->nid;
   $video_detail['v_title'] = html_entity_decode($node->title);
   $video_detail['v_credit'] = FRONT_URL;
   $video_detail['v_byline'] = $byline;

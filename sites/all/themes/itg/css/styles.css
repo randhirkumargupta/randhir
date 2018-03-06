@@ -1385,7 +1385,7 @@ footer {
   height: 266px; }
 
 .itg-common-section .droppable {
-  min-height: 420px; }
+  min-height: 600px; }
 .itg-common-section .home-page-poll-block-wrap .droppable {
   min-height: 408px; }
 
@@ -4828,8 +4828,7 @@ h1.category-heading {
           display: block;
           margin-bottom: 7px; }
           .poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-answer-text img {
-            width: 170px;
-            height: 127px; }
+            width: 170px; }
         .poll-banner.image-poll-list .poll-list .voting-data .past-poll li .noofvotes {
           padding: 0 0 0 10px; }
         .poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-past-percentage-progess {
@@ -13734,8 +13733,7 @@ ul.pron-cons-img li img {
   margin-bottom: 22px; }
 
 #block-itg-videogallery-itg-other-videogallery-section .photo-list img {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 .video-header-right .video_header_tabs .tab-data-2 h3 {
   display: none; }
@@ -13830,12 +13828,10 @@ ul.pron-cons-img li img {
   overflow-y: auto; }
 
 .video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 .video_header_tabs .trending-videos li.trending-videos-list img {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
   color: #aaa9a9; }
