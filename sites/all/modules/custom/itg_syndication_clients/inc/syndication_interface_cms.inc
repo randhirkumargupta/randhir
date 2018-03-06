@@ -40,12 +40,12 @@ function itgd_genrate_factiva_syndication($issue_result) {
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    //~ genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result);
-    //~ genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result);
-    //~ genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_result);
+    genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result);
+    genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result);
+    genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_indiatoday_lifestyle_monthly_1206567_xml($result, $issue_title, $issue_result);
     //1206735 xml
-    //~ genrate_syndication_xml_cat_1206735();
+    genrate_syndication_xml_cat_1206735();
   }
 }
 
