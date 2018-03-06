@@ -28,7 +28,7 @@ else {
 $uri = base64_encode($actual_link);
 $byline_title = '';
 if(!empty($video_node->field_story_reporter)){
-	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['value'];	
+	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
 	$byline_title = itg_common_get_node_title($target_nid);
 }
 ?>
