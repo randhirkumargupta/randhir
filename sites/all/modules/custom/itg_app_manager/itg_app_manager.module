@@ -327,7 +327,8 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#type' => 'select',
                 '#title' => '',
                 '#options' => $menu_lablel_arr,
-                '#default_value' => $d_row->menu_label_id
+                '#default_value' => $d_row->menu_label_id,
+                '#required' => TRUE
             );
         }
         
@@ -335,7 +336,8 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#type' => 'select',
             '#title' => '',
             '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10' , '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25'),
-            '#default_value' => $d_row->order_id
+            '#default_value' => $d_row->order_id,
+            '#required' => TRUE,
         );
         $form['container'][$i]['menu_type'] = array(
             '#type' => 'select',
@@ -347,6 +349,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 'callback' => 'ajax_dependent_dropdown_callback',
                 'wrapper' => 'menu-title-' . $i,
             ),
+            '#required' => TRUE,
         );
         $subsec_options = array('0' => '- Select -');
         if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
@@ -363,6 +366,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                     'wrapper' => 'subsection-wrapper' . $i,
                 ),
                 '#default_value' => $d_row->title,
+                '#required' => TRUE,
             );
             if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
                 $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
@@ -376,6 +380,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#prefix' => '<div id="menu-title-' . $i . '">',
                 '#suffix' => '</div>',
                 '#default_value' => $d_row->title,
+                '#required' => TRUE,
             );
         }
         $form['container'][$i]['has_subcat'] = array(
