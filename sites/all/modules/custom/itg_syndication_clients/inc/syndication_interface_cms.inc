@@ -287,31 +287,30 @@ function genrate_syndication_xml_cat_1206735() {
  */
 function genrate_indiatoday_lifestyle_monthly_1206567_xml($result, $issue_title, $issue_result) {
   $xml = '';
-    $tid = 1206567;
-    
-    // select node belong from current term id or child term id
-    $query = db_select('taxonomy_index', 'ti');
-    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-		$query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $tid = 1206567;
+  // select node belong from current term id or child term id
+  $query = db_select('taxonomy_index', 'ti');
+  $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
 
-		$query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
 
-    $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-    $query->fields('dbody', array('body_value'));
-    $query->fields('pc', array('field_primary_category_value'));
-    //end
-		$days_ago = strtotime(date('Y-m-d', strtotime('-1 month')));
-    $query->condition('n.created', $days_ago, '>=');
-    
-    $query->condition('ti.tid', $tid, '=');    
-    $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+  $query->fields('dbody', array('body_value'));
+  $query->fields('pc', array('field_primary_category_value'));
+  //end
+  $days_ago = strtotime(date('Y-m-d', strtotime('-1 month')));
+  $query->condition('n.created', $days_ago, '>=');
+
+  $query->condition('ti.tid', $tid, '=');
+  $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $xml = '';
   if (!empty($result)) {
     global $base_url;
