@@ -4090,9 +4090,17 @@ function get_taxo_tid($name) {
 
 function itg_app_manager_form_validate($form, &$form_state) {
   // Random example, if the title is 'test' throw an error 
-    p($form_state['values']);
-  if ($form_state['values']['title'] == 'test') {
-    form_set_error('title', 'Title cannot be "test"');
-  }
+    //p($form_state['values']);
+    $order_id = $form_state['values']['container'][1]['order_id'];
+    $menu_type_id = $form_state['values']['container'][1]['menu_type_id'];
+    $query = db_select('itg_app_menu_content', 'imc');
+    $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
+    $query->condition('imc.menu_type_id', $menu_type_id, '=');
+    $query->condition('imc.order_id', $order_id, '=');
+    $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($results) > 0) {
+      $title = $results[0]['title'];
+      form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
+    }
 }
 
