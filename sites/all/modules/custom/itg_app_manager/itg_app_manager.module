@@ -4089,7 +4089,7 @@ function get_taxo_tid($name) {
 }
 
 function itg_app_manager_form_validate($form, &$form_state) {
-  // Random example, if the title is 'test' throw an error
+  // Random example, if the title is 'test' throw an error 
     p($form_state['values']);
   if ($form_state['values']['title'] == 'test') {
     form_set_error('title', 'Title cannot be "test"');
