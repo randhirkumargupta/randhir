@@ -9,7 +9,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $date = date( 'Y-m-d', time());
     $day_before = date( 'Y-m-d', strtotime( $date . ' -1 day' ) );
     //$file_name = date('Y-m-d', time()).".xml";
-    $file_name = $day_before.".xml";
+    $file_name = $day_before.".json";
     // query for vedio
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -23,11 +23,11 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
-        $s_time = date(strtotime($start_date_timestamp));
-        $e_time = date(strtotime($end_date_timestamp));
+        $s_time = $start_date_timestamp;//date(strtotime($start_date_timestamp));
+        $e_time = $end_date_timestamp;//date(strtotime($end_date_timestamp));
         //$query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
-        $query->condition('n.created', $s_time, '>=');
-        $query->condition('n.created', $e_time, '<=');
+        $query->condition('npd.field_itg_content_publish_date_value', $s_time, '>=');
+        $query->condition('npd.field_itg_content_publish_date_value', $e_time, '<=');
     }
     
     //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -58,11 +58,11 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
-        $s_time = date(strtotime($start_date_timestamp));
-        $e_time = date(strtotime($end_date_timestamp));
+        $s_time = $start_date_timestamp;//date(strtotime($start_date_timestamp));
+        $e_time = $end_date_timestamp;//date(strtotime($end_date_timestamp));
         //$query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
-        $query->condition('n.created', $s_time, '>=');
-        $query->condition('n.created', $e_time, '<=');
+        $query->condition('npd.field_itg_content_publish_date_value', $s_time, '>=');
+        $query->condition('npd.field_itg_content_publish_date_value', $e_time, '<=');
     }
     
     //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -92,11 +92,11 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
-        $s_time = date(strtotime($start_date_timestamp));
-        $e_time = date(strtotime($end_date_timestamp));
+        $s_time = $start_date_timestamp;//date(strtotime($start_date_timestamp));
+        $e_time = $end_date_timestamp;//date(strtotime($end_date_timestamp));
         //$query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
-        $query->condition('n.created', $s_time, '>=');
-        $query->condition('n.created', $e_time, '<=');
+        $query->condition('npd.field_itg_content_publish_date_value', $s_time, '>=');
+        $query->condition('npd.field_itg_content_publish_date_value', $e_time, '<=');
     }
     
     //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -112,19 +112,19 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->groupBy('n.nid');
     $result_gallery = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
-    $xml = "";
-    $xml = '<?xml version="1.0" encoding="UTF-8"?><data>';
-    $xml .= vedio_xml($result_vedio);
-    $xml .= story_xml($result_story);
-    $xml .= gallery_xml($result_gallery);
-    $xml .= '</data>';
-    $xml = badUnicodeparse_clients($xml);
+    $xml = array();
+    $xml['data'] = array();
+    $xml['data']['videos'] = vedio_xml($result_vedio);
+    $xml['data']['stories'] = story_xml($result_story);
+    $xml['data']['galleries'] = gallery_xml($result_gallery);
+    $xml = json_encode($xml);
     $xml_path = 'public://rss-feeds/xml_data/indiatoday/it/daily_report/';
     //$xml_path = 'public://rss-feeds/xml_data/celtick/it/stories/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
+    //echo file_create_url($file_path);die;
    //echo $file_path;echo "<br>";
    //echo $xml;
 }
@@ -139,7 +139,6 @@ function vedio_xml($result = NULL) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;   
-    $xml .= '<videos>';
     foreach ($result as $key => $value) {
       
       $nid = $value['nid'];
@@ -153,7 +152,7 @@ function vedio_xml($result = NULL) {
         $description = $temp['description']['value'];
       }
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = "https://www.indiatoday.in/" . $alias;
+      $weburl = FRONT_URL .'/' . $alias;
       $title = $value['title'];
       $created = $value['created'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
@@ -165,24 +164,24 @@ function vedio_xml($result = NULL) {
       $created_datetime = date("Y-m-d H:i:s", $created);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $article_type = slugify(preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($category)));
-      $xml .= '<item>';
-      $xml .= '<id>'.$nid.'</id>';
-      $xml .= '<title>'.$title.'</title>';
-      $xml .= '<category>'.$prime_cat->name.'</category>';
-      $xml .= '<sub_category>'.$prime_cat->name.'</sub_category>';
-      $xml .= '<editor>'.$byline.'</editor>';
-      $xml .= '<headline>'.$kicker_text.'</headline>';
-      $xml .= '<author>'.$cmsuser.'</author>';
-      $xml .= '<creative_url_image>'.$large_img.'</creative_url_image>';
-      $xml .= '<meta_key>'.$keywords.'</meta_key>';
-      $xml .= '<meta_description>'.$description.'</meta_description>';
-      $xml .= '<pv></pv>';
-      $xml .= '<uv></uv>';
-      $xml .= '<url>'.$weburl.'</url>';
-      $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
-      $xml .= '</item>';
+      $xml['item'][] = array(
+																	'id' => $nid,
+																	'title' => $title,
+																	'category' => $prime_cat->name,
+																	'sub_category' => $prime_cat->name,
+																	'editor' => $byline,
+																	'headline' => $kicker_text,
+																	'author' => $cmsuser,
+																	'creative_url_image' => $large_img,
+																	'meta_key' => $keywords,
+																	'meta_description' => $description,
+																	'pv' => '',
+																	'uv' => '',
+																	'url' => $weburl,
+																	'date_and_time' => $created_datetime,
+															);
+      
     }
-    $xml .= '</videos>';
   }
   
   return $xml;
@@ -197,7 +196,7 @@ function story_xml($result = NULL) {
   $xml = '';
   if (!empty($result)) {
     global $base_url; 
-    $xml .= '<stories>';
+    $xml = array();
     foreach ($result as $key => $value) {
       
       $nid = $value['nid'];
@@ -211,7 +210,7 @@ function story_xml($result = NULL) {
         $description = $temp['description']['value'];
       }
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = "https://www.indiatoday.in/" . $alias;
+      $weburl = FRONT_URL .'/'. $alias;
       $title = $value['title'];
       $created = $value['created'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
@@ -223,24 +222,24 @@ function story_xml($result = NULL) {
       $created_datetime = date("Y-m-d H:i:s", $created);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $article_type = slugify(preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($category)));
-      $xml .= '<item>';
-      $xml .= '<id>'.$nid.'</id>';
-      $xml .= '<title>'.$title.'</title>';
-      $xml .= '<category>'.$prime_cat->name.'</category>';
-      $xml .= '<sub_category>'.$prime_cat->name.'</sub_category>';
-      $xml .= '<editor>'.$byline.'</editor>';
-      $xml .= '<headline>'.$kicker_text.'</headline>';
-      $xml .= '<author>'.$cmsuser.'</author>';
-      $xml .= '<creative_url_image>'.$large_img.'</creative_url_image>';
-      $xml .= '<meta_key>'.$keywords.'</meta_key>';
-      $xml .= '<meta_description>'.$description.'</meta_description>';
-      $xml .= '<pv></pv>';
-      $xml .= '<uv></uv>';
-      $xml .= '<url>'.$weburl.'</url>';
-      $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
-      $xml .= '</item>';
+      $xml['item'][] = array(
+														'id' => $nid,
+														'title' => $title,
+														'category' => $prime_cat->name,
+														'sub_category' => $prime_cat->name,
+														'editor' => $byline,
+														'headline' => $kicker_text,
+														'author' => $cmsuser,
+														'creative_url_image' => $large_img,
+														'meta_key' => $keywords,
+														'meta_description' => $description,
+														'pv' => '',
+														'uv' => '',
+														'url' => $weburl,
+														'date_and_time' => $created_datetime,
+														
+												);
     }
-    $xml .= '</stories>';
   }
   return $xml;
 }
@@ -253,7 +252,7 @@ function story_xml($result = NULL) {
 function gallery_xml($result = NULL) {
   $xml = '';
   if (!empty($result)) {
-    $xml .= '<galleries>';
+    $xml = array();
     global $base_url;    
     foreach ($result as $key => $value) {
       
@@ -268,7 +267,7 @@ function gallery_xml($result = NULL) {
         $description = $temp['description']['value'];
       }
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = "https://www.indiatoday.in/" . $alias;
+      $weburl = FRONT_URL .'/'. $alias;
       $title = $value['title'];
       $created = $value['created'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
@@ -280,24 +279,26 @@ function gallery_xml($result = NULL) {
       $created_datetime = date("Y-m-d H:i:s", $created);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $article_type = slugify(preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($category)));
-      $xml .= '<item>';
-      $xml .= '<id>'.$nid.'</id>';
-      $xml .= '<title>'.$title.'</title>';
-      $xml .= '<category>'.$prime_cat->name.'</category>';
-      $xml .= '<sub_category>'.$prime_cat->name.'</sub_category>';
-      $xml .= '<editor>'.$byline.'</editor>';
-      $xml .= '<headline>'.$kicker_text.'</headline>';
-      $xml .= '<author>'.$cmsuser.'</author>';
-      $xml .= '<creative_url_image>'.$large_img.'</creative_url_image>';
-      $xml .= '<meta_key>'.$keywords.'</meta_key>';
-      $xml .= '<meta_description>'.$description.'</meta_description>';
-      $xml .= '<pv></pv>';
-      $xml .= '<uv></uv>';
-      $xml .= '<url>'.$weburl.'</url>';
-      $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
-      $xml .= '</item>';
+      
+      $xml['item'][] = array(
+														'id' => $nid,
+														'title' => $title,
+														'category' => $prime_cat->name,
+														'sub_category' => $prime_cat->name,
+														'editor' => $byline,
+														'headline' => $kicker_text,
+														'author' => $cmsuser,
+														'creative_url_image' => $large_img,
+														'meta_key' => $keywords,
+														'meta_description' => $description,
+														'pv' => '',
+														'uv' => '',
+														'url' => $weburl,
+														'date_and_time' => $created_datetime,
+														
+												);
+      
     }
-    $xml .= '</galleries>';
   }
   return $xml;
 }
