@@ -123,7 +123,7 @@ function itg_seo_node_data($node) {
                                   "author": {
                                       "@type": "Person",
                                       "name": "' . $authors . '",
-                                      "sameAs": "' . $pageurl . '"
+                                      "sameAs": "http://www.imdb.com/title/tt7329858/"
                                   },
 
                                   "datePublished": "' . $publisheddate . '",
