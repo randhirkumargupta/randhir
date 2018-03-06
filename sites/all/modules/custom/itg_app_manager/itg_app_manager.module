@@ -509,7 +509,7 @@ function theme_itg_app_manager_menu_form_table($variables) {
 
     // Build the table header.
     if ($form_type == '1') {
-        $header = array(t('Menu label'), t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'));
+        $header = array(t('Menu label'), t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'));
     } else {
         $header = array(t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'));
     }
@@ -2257,7 +2257,7 @@ function theme_itg_app_manager_menu_list_table($variables) {
     $loopc = 0;
     $source = $variables['source'];
     if ($source == '1') {
-        $header = array(t('Menu label'), t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'), t('Action'));
+        $header = array(t('Menu label'), t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'), t('Action'));
         foreach ($data as $key => $value) {
             $rows[$loopc]['menu_label_id'] = getMenuTypeLabel($value->menu_label_id, 1);
             $rows[$loopc]['order_id'] = $value->order_id;
