@@ -1929,7 +1929,7 @@ function itg_widget_anchor_landing_menu($nid) {
     $cat_query->fields('ttd', array('name'));
     $cat_query->condition('video_anchor.field_video_anchor_target_id', $nid, '=');
     $cat_query->condition('cat.bundle', 'videogallery', '=');
-    $cat_query->condition('th.parent', 0, '=');
+    $cat_query->condition('th.parent', variable_get('program_category_id_for_programmes'), '=');
     $categories_of_anchor = $cat_query->execute();
     foreach ($categories_of_anchor as $cate) {
         $result[$cate->field_story_category_tid] = $cate->name;
