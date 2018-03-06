@@ -1952,8 +1952,8 @@ body.has-cart-popup {
       right: 12px;
       top: 10px; }
     .cart-popup-wrapper .cart-popup h2 {
-      font: 400 28px/30px "OpenSans-Regular";
-      color: #000; }
+      font: 400 28px/30px "Merriweather-Bold";
+      color: #111; }
     .cart-popup-wrapper .cart-popup p {
       color: #676767;
       font: 400 14px/22px "OpenSans-Regular";
@@ -3482,7 +3482,7 @@ div#forgot-field-heading {
 .page-order-confirmation .thankyou-block {
   text-align: center; }
   .page-order-confirmation .thankyou-block h2 {
-    font: 500 24px/32px "OpenSans-Regular";
+    font: 500 24px/32px "Merriweather-Bold";
     color: #464646; }
   .page-order-confirmation .thankyou-block p {
     font: 400 15px/24px "OpenSans-Regular";
@@ -3623,7 +3623,7 @@ div#forgot-field-heading {
     max-height: 480px; }
     #change-address-popup .popup-inner h2 {
       color: #474747;
-      font: normal 400 23px/18px "OpenSans-Regular";
+      font: normal 400 23px/18px "Merriweather-Bold";
       background-color: #ececec;
       border-radius: 5px 5px 0 0;
       padding: 13px; }
@@ -3710,7 +3710,7 @@ div#forgot-field-heading {
   padding: 15px; }
   .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow h2,
   .page-personalization-my-following #block-itg-personalization-personalization-following h2 {
-    font: 400 24px/28px "OpenSans-Regular";
+    font: 400 24px/28px "Merriweather-Bold";
     margin: 20px 0; }
   .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name,
   .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name {
@@ -4136,7 +4136,7 @@ article.node-mega-review-critic .bottom-movie-desc {
 article.node-mega-review-critic .other-reviews {
   margin: 10px 0; }
   article.node-mega-review-critic .other-reviews h2 {
-    font: 700 16px/27px "OpenSans-Regular"; }
+    font: 700 16px/27px "Merriweather-Bold"; }
   article.node-mega-review-critic .other-reviews .other-reviews-posted-on {
     font: 400 13px/27px "OpenSans-Regular"; }
     article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-by {

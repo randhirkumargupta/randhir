@@ -118,7 +118,7 @@ h1 {
 }
 
 h2 {
-    font-family:Merriweather-Bold;
+    font-family:$itg-merriweatherbold;
     font-size: $h2-font-size;
     line-height: $h2-line-height;
     font-weight: $itg-font-bold;
@@ -3097,7 +3097,7 @@ footer {
             text-align: right;
         }
         h2 {
-            font-family: $itg-opensans;
+            font-family:$itg-merriweatherbold;
             color: #000;
             font-size: 26px;
             &:before,
@@ -3904,7 +3904,7 @@ h1.category-heading {
                 margin-bottom: 5px;
                 @include font(20px,
                 30px,
-                itg-merriweatherbold);
+                $itg-merriweatherbold);
                 color: #111;
             }
             h3 {
@@ -4895,7 +4895,7 @@ h1.category-heading {
                             margin-bottom: 7px;
                             img {
                                 width: 170px;
-                                height: 127px;
+                                
                             }
                         }
                         .noofvotes {
@@ -7520,7 +7520,7 @@ section.sidebar {
         font-size: 20px;
         border-bottom: 1px solid $border-color;
         text-transform: uppercase;
-        font-family:$itg-opensans;
+        font-family:$itg-merriweatherbold;
         margin-bottom: 30px;
         padding-bottom: 10px;
         font-weight: 700;
@@ -7578,7 +7578,7 @@ section.sidebar {
     h2 {
         font-size: 24px;
         color: #ef3c24;
-        font-family:$itg-opensans;
+        font-family:$itg-merriweatherbold;
         margin-bottom: 15px;
     }
 }
@@ -8490,13 +8490,12 @@ section.sidebar {
         background: #f3f3f3;
     }
     .itg-layout-672 {
-        .droppable {
-            height: 672px;
+        .droppable {            
             .auto-block-1,
             .auto-block-2 {
-                height:710px;
+                height:670px;
                 overflow: hidden;
-                margin-bottom: 30px;
+                margin-bottom:20px;
             }
             .auto-block-1 {
                 border: 1px solid #ddd;
@@ -14297,7 +14296,7 @@ span.story-sponsor-powered-text::last-word {
 }
 
 #cricketblog h2 {
-    font: 300 16px/20px "OpenSans-Regular";
+    font: 300 16px/20px $itg-merriweatherbold;
     color: #767676;
     margin-bottom: 15px
 }
@@ -14795,7 +14794,7 @@ ul.pron-cons-img li img {
 
 #block-itg-videogallery-itg-other-videogallery-section .photo-list img {
     width: 170px;
-    height: 127px;
+    
 }
 
 .video-header-right .video_header_tabs .tab-data-2 h3 {
