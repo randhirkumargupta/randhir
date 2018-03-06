@@ -8423,12 +8423,13 @@ section.sidebar {
         background: #f3f3f3;
     }
     .itg-layout-672 {
-        .droppable {
-            height: 672px;
+        .droppable {            
             .auto-block-1,
             .auto-block-2 {
-                height: 672px;
+                height: 670px;
                 overflow: hidden;
+                margin-bottom: 20px;
+
             }
             .auto-block-1 {
                 border: 1px solid #ddd;
