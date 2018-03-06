@@ -451,6 +451,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
         '#value' => t('Save'),
         '#submit' => array('itg_app_manager_form_submit'),
     );
+    $form['#validate'][] = 'itg_app_manager_form_validate';
     if ($menu_form_id == 1) {
         $form['markup_v'] = array(
             '#markup' => "<br><hr><br>" . hamburger_menu_list(),
@@ -4087,4 +4088,11 @@ function get_taxo_tid($name) {
     return $tid;
 }
 
+function itg_app_manager_form_validate($form, &$form_state) {
+  // Random example, if the title is 'test' throw an error
+    p($form_state['values']);
+  if ($form_state['values']['title'] == 'test') {
+    form_set_error('title', 'Title cannot be "test"');
+  }
+}
 
