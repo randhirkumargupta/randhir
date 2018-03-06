@@ -43,10 +43,11 @@ function itgd_genrate_factiva_syndication($issue_result) {
     genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_result);
-    genrate_indiatoday_lifestyle_monthly_1206567_xml($result, $issue_title, $issue_result);
+    
     //1206735 xml
     genrate_syndication_xml_cat_1206735();
   }
+  genrate_indiatoday_lifestyle_monthly_1206567_xml();
 }
 
 /**
@@ -285,7 +286,7 @@ function genrate_syndication_xml_cat_1206735() {
  * @param string $category
  * @return string
  */
-function genrate_indiatoday_lifestyle_monthly_1206567_xml($result, $issue_title, $issue_result) {
+function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   $xml = '';
   $tid = 1206567;
   // select node belong from current term id or child term id
