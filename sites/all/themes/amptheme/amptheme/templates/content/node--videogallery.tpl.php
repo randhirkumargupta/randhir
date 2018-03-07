@@ -108,8 +108,10 @@
                 
                 if(strpos($video_value->field_migrated_video_url_value, 'https') === FALSE) {
                  $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                 $video_id = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net", $video_id);
                 } else {
                  $video_id = $video_value->field_migrated_video_url_value;
+                 $video_id = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net", $video_id);
                 }
                 ?> 
               <div class="slide"> <div class="photo-slide">

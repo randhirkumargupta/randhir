@@ -381,7 +381,7 @@ $uri = base64_encode($actual_link);
                         }
                         ?>
                         <div class="tab-buttons">
-                            <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
+                            <span class="<?php echo ($_flag ? 'active' : 'hide'); ?>" data-id="tab-data-1">
                               <a href="#Related" onclick="ga('send', 'event', 'RelatedvideoTab', 'click','1', 1, {'nonInteraction': 1});return true;">
                                 <?php
                                 print 'Related';
