@@ -47,6 +47,16 @@ function itg_msi_menu() {
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_msi.inc',
     );
+    
+    $items['admin/config/show_web_exclusive'] = array(
+      'title' => 'Show Web Exclusive',
+      'description' => 'Show Web Exclusive',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_msi_show_web_exclusive_form'),
+      'access arguments' => array('administer itg_term settings'),
+      'file' => 'includes/itg_msi.inc',
+      'type' => MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
