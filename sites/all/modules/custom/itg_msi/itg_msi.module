@@ -301,7 +301,8 @@ function itg_msi_views_pre_render(&$view) {
     //Add "Create Issue" button on listing page of issue
     if ($view->name == "manage_issues") {
         drupal_add_js(drupal_get_path('module', 'jquery_update') . '/replace/ui/ui/minified/jquery.ui.datepicker.min.js', array('scope' => 'footer'));
-        $header_content_issue = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+        $header_content_issue = '<a href="/admin/config/show_web_exclusive">Show Web Exclusive</a>';
+        $header_content_issue .= '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
         $header_content_issue .= '<a href="./node/add/issue">Create Issue</a>';
         $view->attachment_before = $header_content_issue;
     }
