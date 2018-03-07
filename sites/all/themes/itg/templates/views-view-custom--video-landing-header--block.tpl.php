@@ -26,19 +26,26 @@ else {
   $ads_url = 'https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]';
 }
 $uri = base64_encode($actual_link);
+$byline_title = '';
+if(!empty($video_node->field_story_reporter)){
+	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
+	$byline_title = itg_common_get_node_title($target_nid);
+	$byline_title = trim($byline_title);
+}
 ?>
 <?php foreach ($rows as $row): ?>
   <div class="container">
       <div class ="video-landing-header">
           <div class="row">
               <div class="col-md-12">
-                  <h1 class="video-heading"><?php print $row['title']; ?></h1><?php
+                  <h1 class="video-heading"><?php print $row['title']; ?></h1>
+                  <span class="video-byline"><?php print $byline_title . ' | ' . date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>
+                  <?php
                   global $user;
                   if (in_array('Social Media', $user->roles)) {
                     ?>
                     <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
-                  <?php } ?>
-
+                  <?php } ?>				  
               </div>
               <div class="col-md-8 video-header-left">
                   <div class="video">
@@ -381,7 +388,7 @@ $uri = base64_encode($actual_link);
                         }
                         ?>
                         <div class="tab-buttons">
-                            <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
+                            <span class="<?php echo ($_flag ? 'active' : 'hide'); ?>" data-id="tab-data-1">
                               <a href="#Related" onclick="ga('send', 'event', 'RelatedvideoTab', 'click','1', 1, {'nonInteraction': 1});return true;">
                                 <?php
                                 print 'Related';

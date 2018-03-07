@@ -219,7 +219,7 @@ h1 {
   font-weight: 700; }
 
 h2 {
-  font-family: Merriweather-Bold;
+  font-family: "Merriweather-Bold";
   font-size: 29px;
   line-height: 34px;
   font-weight: 700; }
@@ -2745,7 +2745,7 @@ footer {
   .story-section .story-expert-opinion .right-side {
     text-align: right; }
   .story-section .story-expert-opinion h2 {
-    font-family: "OpenSans-Regular";
+    font-family: "Merriweather-Bold";
     color: #000;
     font-size: 26px; }
     .story-section .story-expert-opinion h2:before, .story-section .story-expert-opinion h2:after {
@@ -3736,7 +3736,7 @@ h1.category-heading {
     margin-bottom: 5px;
     font-size: 20px;
     font-size: 1.25rem;
-    font-weight: itg-merriweatherbold;
+    font-weight: "Merriweather-Bold";
     line-height: 30px;
     color: #111; }
   .view-category-wise-content-list .catagory-listing .detail h3,
@@ -4903,8 +4903,7 @@ h1.category-heading {
           display: block;
           margin-bottom: 7px; }
           .poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-answer-text img {
-            width: 170px;
-            height: 127px; }
+            width: 170px; }
         .poll-banner.image-poll-list .poll-list .voting-data .past-poll li .noofvotes {
           padding: 0 0 0 10px; }
         .poll-banner.image-poll-list .poll-list .voting-data .past-poll li .poll-past-percentage-progess {
@@ -6847,7 +6846,7 @@ section.sidebar .block-itg-ads {
     padding-left: 22px; }
     .auto-layout-page .special-top-news ul li:before {
       position: absolute;
-      top: 27px;
+      top: 20px;
       left: 8px;
       content: '';
       border-radius: 100%;
@@ -7413,7 +7412,7 @@ section.sidebar .block-itg-ads {
   font-size: 20px;
   border-bottom: 1px solid #dddddd;
   text-transform: uppercase;
-  font-family: "OpenSans-Regular";
+  font-family: "Merriweather-Bold";
   margin-bottom: 30px;
   padding-bottom: 10px;
   font-weight: 700; }
@@ -7456,7 +7455,7 @@ section.sidebar .block-itg-ads {
   #block-views-past-speaker-event-block h2 {
     font-size: 24px;
     color: #ef3c24;
-    font-family: "OpenSans-Regular";
+    font-family: "Merriweather-Bold";
     margin-bottom: 15px; }
 
 .event-sidebar section.sidebar {
@@ -8183,16 +8182,15 @@ section.sidebar .block-itg-ads {
     padding: 10px; }
   .education-layout-page .grey-bg {
     background: #f3f3f3; }
-  .education-layout-page .itg-layout-672 .droppable {
-    height: 672px; }
-    .education-layout-page .itg-layout-672 .droppable .auto-block-1,
-    .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
-      height: 672px;
-      overflow: hidden; }
-    .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
-      border: 1px solid #ddd; }
-      .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
-        border: none; }
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1,
+  .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+    height: 670px;
+    overflow: hidden;
+    margin-bottom: 20px; }
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
+    border: 1px solid #ddd; }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
+      border: none; }
   .education-layout-page .itg-layout-672 .itg-widget-child .droppable {
     height: 310px; }
   .education-layout-page .itg-layout-565 .droppable {
@@ -13411,7 +13409,7 @@ span.story-sponsor-powered-text::last-word {
   position: relative; }
 
 #cricketblog h2 {
-  font: 300 16px/20px "OpenSans-Regular";
+  font: 300 16px/20px "Merriweather-Bold";
   color: #767676;
   margin-bottom: 15px; }
 
@@ -13827,8 +13825,7 @@ ul.pron-cons-img li img {
   margin-bottom: 22px; }
 
 #block-itg-videogallery-itg-other-videogallery-section .photo-list img {
-  width: 170px;
-  height: 127px; }
+  width: 170px; }
 
 .video-header-right .video_header_tabs .tab-data-2 h3 {
   display: none; }

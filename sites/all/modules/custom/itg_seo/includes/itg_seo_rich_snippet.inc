@@ -104,40 +104,93 @@ function itg_seo_node_data($node) {
     } else {
       $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
+    
+    if ($node->nid == '1132033' || $node->nid == '1132959') {
+        $moviename = $node->title;
+        $review_item_type = 'Movie';
+        $worstrate = 0;
+        $bestrate = 5;
+        $avaragrate = 3;
+        $pathalias = drupal_get_path_alias('node/' . $node->nid);
+        $pageurl = $base_url . '/' . $pathalias;
+    
+          $markup = array(
+            '#type' => 'markup',
+            '#markup' => '<script type="application/ld+json">
+                            {
+                                  "@context": "http://schema.org",
+                                  "@type": "Review",
+                                  "author": {
+                                      "@type": "Person",
+                                      "name": "' . $authors . '",
+                                      "sameAs": "http://www.imdb.com/title/tt7329858/"
+                                  },
 
-    $markup = array(
-        '#type' => 'markup',
-        '#markup' => '<script type="application/ld+json"> {  
-                    "@context": "http://schema.org",
+                                  "datePublished": "' . $publisheddate . '",
+                                  "name": "' . $moviename . '",
+                                  "itemReviewed": {
+                                      "@type": "' . $review_item_type . '",
+                                      "name": "' . $moviename . '",
+                                      "image": "' . $largimage . '",
+                                      "datePublished": "' . $publisheddate . '",
+                                      "sameAs": "http://www.imdb.com/title/tt7329858/",
+                                      "director": "' . $directorname . '"
+                                  },
+                                  "reviewRating": {
+                                      "@type": "Rating",
+                                      "worstRating": ' . $worstrate . ',
+                                      "bestRating": ' . $bestrate . ',
+                                      "ratingValue": ' . $avaragrate . '
+                                  },
+                                  "url": "' . $pageurl . '",
+                                  "description": "' . $description . '",
+                                  "publisher": {
+                                      "@type": "Organization",
+                                      "name": "India Today"
+                                  }
+                              }
+                            </script>',
+        );
+    } else {
+        $markup = array(
+             '#type' => 'markup',
+             '#markup' => '<script type="application/ld+json"> {  
+                         "@context": "http://schema.org",
 
-                    "@type": "NewsArticle",
-                    "mainEntityOfPage": "' . $mainEntityOfPage . '",
-                    "headline": "' . $headline . '",
-                    "datePublished": "' . $publisheddate . '",
-                    "dateModified": "' . $modified_date . '",
-                    "description": "' . $description . '",
-                    "author": {
-                    "@type": "Person",
-                    "name": "' . $authors . '"
-                    },
-                    "publisher": {
-                    "@type": "Organization",
-                    "name": "India Today",
-                    "logo": {
-                    "@type": "ImageObject",
-                    "url": "' . $logo . '",
-                    "width": 600,
-                    "height": 60
-                    }
-                    },
-                    "image": {
-                    "@type": "ImageObject",
-                    "url": "' . $largimage . '",
-                    "width": 647,
-                    "height": 363
-                    }
-                    }  </script>',
-    );
+                         "@type": "NewsArticle",
+                         "mainEntityOfPage": "' . $mainEntityOfPage . '",
+                         "headline": "' . $headline . '",
+                         "datePublished": "' . $publisheddate . '",
+                         "dateModified": "' . $modified_date . '",
+                         "description": "' . $description . '",
+                         "author": {
+                         "@type": "Person",
+                         "name": "' . $authors . '"
+                         },
+                         "publisher": {
+                         "@type": "Organization",
+                         "name": "India Today",
+                         "logo": {
+                         "@type": "ImageObject",
+                         "url": "' . $logo . '",
+                         "width": 600,
+                         "height": 60
+                         }
+                         },
+                         "image": {
+                         "@type": "ImageObject",
+                         "url": "' . $largimage . '",
+                         "width": 647,
+                         "height": 363
+                         }
+                         }  </script>',
+           );
+    }
+     
+
+
+    
+   
 
     drupal_add_html_head($markup, 'sd_json');
     

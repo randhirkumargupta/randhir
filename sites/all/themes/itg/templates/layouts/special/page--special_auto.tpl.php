@@ -146,7 +146,7 @@ if ($theme != 'itgadmin') {
             </div> 
             </div> 
 	</div>
-<div class="col-md-8">
+<div class="col-lg-8 col-md-12">
   <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
             <div class="">
               <div class="itg-widget">
@@ -178,9 +178,10 @@ if ($theme != 'itgadmin') {
               </div>
             </div>
 </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12">
               <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
             <div class="auto-block-3">
+              <div class="col-lg-12 col-md-6">
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget">
@@ -194,6 +195,8 @@ if ($theme != 'itgadmin') {
                     </div>
                   </div>
                 </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
                     <div class="itg-widget trending-list">
                         <div class="widget-help-text"><?php print t('Section card'); ?></div>
                       <div class="itg-widget-child">
@@ -223,6 +226,7 @@ if ($theme != 'itgadmin') {
                           </div>
                         </div>
                       </div>                      
+                    </div>
                     </div>
                 </div>
                 </div>

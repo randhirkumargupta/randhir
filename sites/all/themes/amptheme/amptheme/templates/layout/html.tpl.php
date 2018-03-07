@@ -94,8 +94,7 @@ body {
     font: 400 15px/20px 'Open Sans';
     color: #111
 }
-h1,
-h2,
+
 h3,
 h4,
 h5,
@@ -109,6 +108,14 @@ h1 {
     line-height: 30px;
 
 }
+h2{
+
+    font-family:'Merriweather';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+}
+
 p {
     line-height: 24px;
     padding: 10px 0;
@@ -244,7 +251,7 @@ img {
     padding-right: 10px
 }
 .related-story ul li .tile a {
-    color: #000;
+    color: #111;
     text-decoration: none
 }
 .related-story ul li>a {
@@ -306,11 +313,11 @@ img {
     margin-top: 27px
 }
 .story-section .listicle-page .listicle-detail .listicle-description {
-    font-size: 14px;
+    font-size: 15px;
     color: #282828;
     padding: 18px 10px;
     overflow: hidden;
-    line-height: 24px
+    line-height: 22px
 }
 .story-section .listicle-page .listicle-detail .listicle-description span {
     font-weight: 600;
@@ -341,7 +348,7 @@ img {
     background: #a00606
 }
 .factoids-slider ul li:nth-child(even) {
-    background: #000
+    background: #111
 }
 .buzz-feedback .buzz-section,
 .buzz-feedback .buzz-section h1 {
@@ -648,7 +655,7 @@ pre {
     padding-bottom: 0
 }
 #footer {
-    background-color: #000;
+    background-color: #111;
     color: #fff;
     margin-top: 30px;
     font-family: Open Sans;
@@ -707,7 +714,7 @@ pre {
     text-align: center;
     padding: 0;
     border: none;
-    background: #000;
+    background: #111;
     margin-top: -50px;
     z-index: 99;
     position: absolute;
@@ -967,7 +974,7 @@ blockquote {
     height: 60px;
     width: 60px;
     line-height: 60px;
-    color: #000;
+    color: #111;
     background: rgba(255, 255, 255, .5);
     border-radius: 100%
 }
@@ -1268,7 +1275,7 @@ ul.header-menu li:first-child {
     --caption-padding: 1rem;
     --button-size: 28px;
     --caption-color: #f5f5f5;
-    --caption-bg-color: #000
+    --caption-bg-color: #111
 }
 .collapsible-captions * {
     box-sizing: border-box
@@ -1328,7 +1335,7 @@ ul.header-menu li:first-child {
     --caption-padding: 1rem;
     --button-size: 28px;
     --caption-color: #f5f5f5;
-    --caption-bg-color: #000
+    --caption-bg-color: #111
 }
 .story-section .story-tech-chunk .tech-rating {
     width: 88px;
@@ -1346,7 +1353,7 @@ ul.header-menu li:first-child {
 .tech-pros-cons-main h2 {
     font-size: 28px;
     line-height: 45px;
-    color: #000;
+    color: #111;
     font-weight: 700;
     padding: 0 0 0 10px;
     float: left;
