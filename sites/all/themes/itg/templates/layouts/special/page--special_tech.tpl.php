@@ -106,7 +106,7 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
     <?php endif; ?>
     <div class="row itg-top-section">
          <div class="top-block">
-<div class="col-md-8">
+<div class="col-lg-8 col-md-12">
   <div class="widget-help-text"><?php print t('Special Manual Widget');?> ( <strong><?php print t('Section Manual order Widget'); ?></strong> )</div>
             <div class="">
               <div class="itg-widget">
@@ -140,8 +140,9 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
               </div>
             </div>
 </div>
-            <div class="col-md-4">              
+            <div class="col-lg-4 col-md-12">              
             <div class="auto-block-3">
+            <div class="col-sm-6 col-lg-12 ad-pd0">
               <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
@@ -155,6 +156,8 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
                     </div>
                   </div>
                 </div>
+                </div>
+                <div class="col-sm-6 col-lg-12 ">
                     <div class="itg-widget trending-list">
                         <div class="widget-help-text">Special widgets ( <strong>Most read</strong> )</div>
                       <div class="itg-widget-child">
@@ -184,6 +187,7 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
                           </div>
                         </div>
                       </div>                      
+                    </div>
                     </div>
                 </div>
                 </div>

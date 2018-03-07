@@ -8099,16 +8099,15 @@ section.sidebar .block-itg-ads {
     padding: 10px; }
   .education-layout-page .grey-bg {
     background: #f3f3f3; }
-  .education-layout-page .itg-layout-672 .droppable {
-    height: 672px; }
-    .education-layout-page .itg-layout-672 .droppable .auto-block-1,
-    .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
-      height: 672px;
-      overflow: hidden; }
-    .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
-      border: 1px solid #ddd; }
-      .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
-        border: none; }
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1,
+  .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+    height: 670px;
+    overflow: hidden;
+    margin-bottom: 20px; }
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
+    border: 1px solid #ddd; }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
+      border: none; }
   .education-layout-page .itg-layout-672 .itg-widget-child .droppable {
     height: 310px; }
   .education-layout-page .itg-layout-565 .droppable {

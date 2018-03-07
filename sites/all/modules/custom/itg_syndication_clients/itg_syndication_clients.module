@@ -384,6 +384,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_indiatoday_samsung_search_api.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['clients/jioexpress'] = array(
+    'page callback' => 'itg_indiatoday_jioexpress_api',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_jioexpress_api.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
