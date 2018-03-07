@@ -311,7 +311,6 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   $query->condition('ti.tid', $tid, '=');
   $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  p($result);
   $xml = '';
   if (!empty($result)) {
     global $base_url;
