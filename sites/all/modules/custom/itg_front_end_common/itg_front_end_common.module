@@ -899,7 +899,7 @@ function _related_story_left_block_content() {
       } else {
         $display_title = $related_data->label;
       }
-      $related_title = html_entity_decode($display_title);//mb_strimwidth($display_title, 0, 80, "..");
+      $related_title = addslashes(html_entity_decode($display_title));
       if(empty($related_data->sm_field_custom_story_small_large_url[0])) {
       $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';  
       } else {
@@ -908,11 +908,12 @@ function _related_story_left_block_content() {
       if (function_exists('itg_apache_solr_get_site_url')) {
           $hash_url = itg_apache_solr_get_site_url();
         }
-        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
+        $front_url = addslashes($hash_url[$related_data->hash].'/'.$related_data->path_alias);
         if (!empty($related_title)) {
         $img_alt = strip_tags($related_title);
-        $related_story.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-        $related_story.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
+        $related_story.= '<li class="col-md-12"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" />
+          </a>';
+        $related_story.= '<span class="tile"><a href="'.$front_url.'">'.$related_title.'</a></span></li>';
       }
     $i++;
     if ($i == 10)
