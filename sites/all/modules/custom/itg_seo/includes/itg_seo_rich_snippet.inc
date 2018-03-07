@@ -105,12 +105,58 @@ function itg_seo_node_data($node) {
       $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
     
-    if ($node->nid == '1132033' || $node->nid == '1132959') {
-        $moviename = $node->title;
+    if ($node->nid == '1143316' || $node->nid == '1142893') {
         $review_item_type = 'Movie';
         $worstrate = 0;
         $bestrate = 5;
-        $avaragrate = 3;
+        $authname = str_replace(' ', '-', $authname[0]);
+        $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
+        $author_url = 'https://www.indiatoday.in/topic/'.$authname;
+        switch ($node->nid) {
+          case '1112499':          
+            $moviename = 'Pari';
+            $item_movie_url = 'http://www.imdb.com/title/tt7329858/';
+            $directorname = 'Prosit Roy';
+            $avaragrate = 2;
+          break;
+          case '1171112':
+            $moviename = 'Aiyaary';
+            $item_movie_url = 'http://www.imdb.com/title/tt6774212/';
+            $directorname = 'Neeraj Pandey';
+            $avaragrate = 1.5;
+          break;
+          case '1165812':
+            $moviename = 'Pad Man';
+            $item_movie_url = 'http://www.imdb.com/title/tt7218518/';
+            $directorname = 'R Balki';
+            $avaragrate = 4;
+          break;
+          case '1153788':
+            $moviename = 'Padmaavat';
+            $item_movie_url = 'http://www.imdb.com/title/tt5935704/';
+            $directorname = 'Sanjay Leela Bhansali';
+            $avaragrate = 3;
+          break;
+          case '1112499':
+            $moviename = 'Tiger Zinda Hai';
+            $item_movie_url = 'http://www.imdb.com/title/tt5956100/';
+            $directorname = 'Ali Abbas Zafar';
+            $avaragrate = 3;
+          break;
+          case '1143316':
+            $moviename = 'Thaana Serndah Koottam';
+            $item_movie_url = 'http://www.imdb.com/title/tt6237966/';
+            $directorname = 'Vignesh Shivn';
+            $avaragrate = 2.5;
+          break;
+          case '1142893':
+            $moviename = 'Mukkabaaz';
+            $item_movie_url = 'http://www.imdb.com/title/tt7180544/';
+            $directorname = ' Anurag Kashyap';
+            $avaragrate = 3.5;
+          break;
+        }
+        
         $pathalias = drupal_get_path_alias('node/' . $node->nid);
         $pageurl = $base_url . '/' . $pathalias;
     
@@ -122,8 +168,8 @@ function itg_seo_node_data($node) {
                                   "@type": "Review",
                                   "author": {
                                       "@type": "Person",
-                                      "name": "' . $authors . '",
-                                      "sameAs": "http://www.imdb.com/title/tt7329858/"
+                                      "name": "' . $auth_title . '",
+                                      "sameAs": "' . $author_url . '"
                                   },
 
                                   "datePublished": "' . $publisheddate . '",
@@ -133,7 +179,7 @@ function itg_seo_node_data($node) {
                                       "name": "' . $moviename . '",
                                       "image": "' . $largimage . '",
                                       "datePublished": "' . $publisheddate . '",
-                                      "sameAs": "http://www.imdb.com/title/tt7329858/",
+                                      "sameAs": "' . $item_movie_url . '",
                                       "director": "' . $directorname . '"
                                   },
                                   "reviewRating": {
