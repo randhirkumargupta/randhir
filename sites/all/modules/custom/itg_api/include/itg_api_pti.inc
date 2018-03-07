@@ -13,12 +13,13 @@ function itg_pti_content() {
     global $user;
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 
-    $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
+   /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
     $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
     foreach ($tax as $key => $val) {
       $op[$val->tid] = strtolower($val->name);
-    }
+    }*/
+    $op = array();
     $bucket = variable_get('api_bucket');
     $aws_access_key = variable_get('aws_access_key');
     $aws_secret_key = variable_get('aws_secret_key');
@@ -36,7 +37,7 @@ function itg_pti_content() {
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
-          if ($exp[2] != 'XmlBhasha') {
+          if ($exp[2] != 'XmlBhasha' && $exp[2] != 'Complete_xml' && $exp[2] != 'already_imported') {
             $xml_file_path = $s3->getObjectUrl($bucket, $object['Key']);
             if (empty($exp[3])) {
               $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2];
@@ -47,7 +48,7 @@ function itg_pti_content() {
             $xml_filename = basename(trim($file_path));
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-            if (empty(itg_api_get_xml_info($xml_filename))) {
+            //if (empty(itg_api_get_xml_info($xml_filename))) {
               if (!empty($pti_xml)) {
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
@@ -57,7 +58,7 @@ function itg_pti_content() {
 
                   $category_name = trim($pti_value->category);
 
-                  if (!empty($category_name)) {
+                /*  if (!empty($category_name)) {
                     $category_name = 'PTI feed'; //$category_name;
                   }
                   else {
@@ -65,11 +66,13 @@ function itg_pti_content() {
                   }
 
                   $term_id = itg_api_get_term_id($category_name, CATEGORY_MANAGMENT);
+                  
 
                   if (empty($term_id)) {
                     $term_id = itg_api_get_term_id('PTI', CATEGORY_MANAGMENT);
                   }
-
+                  */
+                  $term_id = variable_get('pti_section_id');
                   $title = itg_api_check_title($headline);
                   if (!$title) {
                     $alchemyapi[$pti] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
@@ -86,9 +89,27 @@ function itg_pti_content() {
                     $meta_keyword = implode(", ", $final_keyword);
                     $description = $pti_value->description;
                     $description = trim(strip_tags($description, '<p>'));
-                    $body_description = '<p>'.$description.'</p>';
-                    $body_description = trim(preg_replace('/\s\s+/', '</p><p>', $body_description));
-                    $kicker = substr($description, 0, 200);
+                    $body_description = $description;
+                    if (preg_match('/[\t]+/', $body_description, $matches)) {
+                      $body_description = trim(preg_replace('/[\t]+/', '</p><p>', $body_description));
+                    }
+                    else {
+                      $body_description = preg_replace('/[^(\x20-\x7F)\x0A\x0D]*/', '', $body_description);
+                      $body_description = trim(preg_replace('/\s\s+/', '</p><p>', $body_description));
+                    }
+                    $body_arr = explode('</p><p>', $body_description);
+                    $first_para_arr = explode(' ', $body_arr[0]);
+                    if (count($first_para_arr) < 5) {
+                      $body_arr[0] = $body_arr[0] . ' ' . $body_arr[1];
+                      unset($body_arr[1]);
+                      $body_arr = array_values($body_arr);
+                      $body_description = implode('</p><p>', $body_arr);
+                    }
+                    else {
+                      $body_description = $body_description;
+                    }
+                    $body_description = '<p>' . $body_description . '</p>';
+                    $kicker = substr($description, 0, 200);   
                     $kicker = trim(strip_tags($kicker));
                     $kicker1 = substr($description, 200);
                     $kicker1 = trim(strip_tags($kicker1));
@@ -122,11 +143,12 @@ function itg_pti_content() {
                     $node = new stdClass();
                     $node->title = trim(html_entity_decode($headline));
                     $node->type = "story";
-                    node_object_prepare($node);
+                    //node_object_prepare($node);
                     $node->language = LANGUAGE_NONE;
                     $node->uid = ADMINISTRATOR;
                     $node->promote = 0;
                     $node->comment = 0;
+                    $node->revision = 1;
                     $node->body[$node->language][0]['value'] = $body_description ? $body_description : '';
                     $node->body[$node->language][0]['format'] = 'full_html';
                     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
@@ -165,7 +187,8 @@ function itg_pti_content() {
                     else {
                       if ($title_length > 15) {
                         $node->log = 'State Changed to published';
-                        $node->workbench_moderation_state_new = workbench_moderation_state_published();
+                        //$node->workbench_moderation_state_new = workbench_moderation_state_published();
+                        workbench_moderation_moderate($node, 'published');
                       }
 
                       if ($title_length < 15) {
@@ -173,29 +196,52 @@ function itg_pti_content() {
                         $node->workbench_moderation_state_new = workbench_moderation_state_review();
                       }
                     }
-                    $node = node_submit($node); // Prepare node for saving
+                    //$node = node_submit($node); // Prepare node for saving
                     $node->created = $publish_date_timestamp;
                     node_save($node); // Finally save node
-                    $newpath = itg_api_path_insert($node);
+                    db_update('node') // Table name no longer needs {}
+                        ->fields(array(
+                          'changed' => $publish_date_timestamp,
+                        ))
+                        ->condition('nid', $node->nid, '=')
+                        ->execute();
+                    
+                      db_update('node_revision') // Table name no longer needs {}
+                        ->fields(array(
+                          'timestamp' => $publish_date_timestamp,
+                        ))
+                        ->condition('nid', $node->nid, '=')
+                        ->condition('vid', $node->vid, '=')      
+                        ->execute();
+                  /*  $newpath = itg_api_path_insert($node);
                     $path = array(
                       'source' => "node/{$node->nid}",
                       'alias' => $newpath, // Any alias that you want to set.
                     );
-                    path_save($path);
-                    itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
+                    path_save($path);*/
+                   // itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
+                    // move xml files/
+                    $complete_folder_path = "s3://{$bucket}".'/agencies/pti/Complete_xml/';
+                    if (copy($file_path, $complete_folder_path.$xml_filename)) {
+                      unlink($file_path);
+                    }
                     $msg = $headline . ' imported sucessfully';
                     watchdog('PTI_XML', $msg);
+//                    if ($pti == variable_get('api_content_limit'))
+//                    break;
+//                  $pti++;
                   }
                   else {
+                   $complete_folder_path = "s3://{$bucket}".'/agencies/pti/already_imported/';
+                    if (copy($file_path, $complete_folder_path.$xml_filename)) {
+                      unlink($file_path);
+                    }
                     $msg = $headline . ' Already imported';
                     watchdog('PTI_XML', $msg);
                   }
                 }
               }
-              if ($pti == variable_get('api_content_limit'))
-                break;
-              $pti++;
-            }
+           // }
           }
         }
       }
