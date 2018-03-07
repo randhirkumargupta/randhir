@@ -109,9 +109,9 @@ function itg_seo_node_data($node) {
         $review_item_type = 'Movie';
         $worstrate = 0;
         $bestrate = 5;
-        $authname = str_replace(' ', '-', $authname[0]);
+        $auth_name = str_replace(' ', '-', trim($authname[0]));
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
-        $author_url = 'https://www.indiatoday.in/topic/'.$authname;
+        $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
         switch ($node->nid) {
           case '1112499':          
             $moviename = 'Pari';
