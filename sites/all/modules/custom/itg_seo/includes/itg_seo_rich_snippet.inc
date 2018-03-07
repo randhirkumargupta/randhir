@@ -104,41 +104,121 @@ function itg_seo_node_data($node) {
     } else {
       $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
-
-    $markup = array(
-        '#type' => 'markup',
-        '#markup' => '<script type="application/ld+json"> {  
-                    "@context": "http://schema.org",
-
-                    "@type": "NewsArticle",
-                    "mainEntityOfPage": "' . $mainEntityOfPage . '",
-                    "headline": "' . $headline . '",
-                    "datePublished": "' . $publisheddate . '",
-                    "dateModified": "' . $modified_date . '",
-                    "description": "' . $description . '",
-                    "author": {
-                    "@type": "Person",
-                    "name": "' . $authors . '"
-                    },
-                    "publisher": {
-                    "@type": "Organization",
-                    "name": "India Today",
-                    "logo": {
-                    "@type": "ImageObject",
-                    "url": "' . $logo . '",
-                    "width": 600,
-                    "height": 60
-                    }
-                    },
-                    "image": {
-                    "@type": "ImageObject",
-                    "url": "' . $largimage . '",
-                    "width": 647,
-                    "height": 363
-                    }
-                    }  </script>',
-    );
-
+    
+    if ($node->nid == '1112499' || $node->nid == '1171112' || $node->nid == '1165812' || $node->nid == '1153788' || $node->nid == '1112499') {
+        $review_item_type = 'Movie';
+        $worstrate = 0;
+        $bestrate = 5;
+        $auth_name = str_replace(' ', '-', trim($authname[0]));
+        $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
+        $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
+        switch ($node->nid) {
+          case '1112499':          
+            $moviename = 'Pari';
+            $item_movie_url = 'http://www.imdb.com/title/tt7329858/';
+            $directorname = 'Prosit Roy';
+            $avaragrate = 2;
+          break;
+          case '1171112':
+            $moviename = 'Aiyaary';
+            $item_movie_url = 'http://www.imdb.com/title/tt6774212/';
+            $directorname = 'Neeraj Pandey';
+            $avaragrate = 1.5;
+          break;
+          case '1165812':
+            $moviename = 'Pad Man';
+            $item_movie_url = 'http://www.imdb.com/title/tt7218518/';
+            $directorname = 'R Balki';
+            $avaragrate = 4;
+          break;
+          case '1153788':
+            $moviename = 'Padmaavat';
+            $item_movie_url = 'http://www.imdb.com/title/tt5935704/';
+            $directorname = 'Sanjay Leela Bhansali';
+            $avaragrate = 3;
+          break;
+          case '1112499':
+            $moviename = 'Tiger Zinda Hai';
+            $item_movie_url = 'http://www.imdb.com/title/tt5956100/';
+            $directorname = 'Ali Abbas Zafar';
+            $avaragrate = 3;
+          break;
+        }
+        
+        $pathalias = drupal_get_path_alias('node/' . $node->nid);
+        $pageurl = $base_url . '/' . $pathalias;
+    
+          $markup = array(
+            '#type' => 'markup',
+            '#markup' => '<script type="application/ld+json">
+                            {
+                                  "@context": "http://schema.org",
+                                  "@type": "Review",
+                                  "author": {
+                                      "@type": "Person",
+                                      "name": "' . $auth_title . '",
+                                      "sameAs": "' . $author_url . '"
+                                  },
+                                  "datePublished": "' . $publisheddate . '",
+                                  "name": "' . $moviename . '",
+                                  "itemReviewed": {
+                                      "@type": "' . $review_item_type . '",
+                                      "name": "' . $moviename . '",
+                                      "image": "' . $largimage . '",
+                                      "datePublished": "' . $publisheddate . '",
+                                      "sameAs": "' . $item_movie_url . '",
+                                      "director": "' . $directorname . '"
+                                  },
+                                  "reviewRating": {
+                                      "@type": "Rating",
+                                      "worstRating": ' . $worstrate . ',
+                                      "bestRating": ' . $bestrate . ',
+                                      "ratingValue": ' . $avaragrate . '
+                                  },
+                                  "url": "' . $pageurl . '",
+                                  "description": "' . $description . '",
+                                  "publisher": {
+                                      "@type": "Organization",
+                                      "name": "India Today"
+                                  }
+                              }
+                            </script>',
+        );
+    } else {
+        $markup = array(
+             '#type' => 'markup',
+             '#markup' => '<script type="application/ld+json"> {  
+                         "@context": "http://schema.org",
+                         "@type": "NewsArticle",
+                         "mainEntityOfPage": "' . $mainEntityOfPage . '",
+                         "headline": "' . $headline . '",
+                         "datePublished": "' . $publisheddate . '",
+                         "dateModified": "' . $modified_date . '",
+                         "description": "' . $description . '",
+                         "author": {
+                         "@type": "Person",
+                         "name": "' . $authors . '"
+                         },
+                         "publisher": {
+                         "@type": "Organization",
+                         "name": "India Today",
+                         "logo": {
+                         "@type": "ImageObject",
+                         "url": "' . $logo . '",
+                         "width": 600,
+                         "height": 60
+                         }
+                         },
+                         "image": {
+                         "@type": "ImageObject",
+                         "url": "' . $largimage . '",
+                         "width": 647,
+                         "height": 363
+                         }
+                         }  </script>',
+           );
+    }
+     
     drupal_add_html_head($markup, 'sd_json');
     
     if (is_array($node->field_story_configurations[LANGUAGE_NONE]) && !empty($node->field_story_configurations[LANGUAGE_NONE])) {
