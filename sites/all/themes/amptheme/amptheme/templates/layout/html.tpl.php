@@ -1530,7 +1530,6 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
   /* breadcrumb style */
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/';padding: 0 3px;text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration: none;} 
-.amp-video-embed{ min-height: initial;}
         </style>
     </head>
     <?php
