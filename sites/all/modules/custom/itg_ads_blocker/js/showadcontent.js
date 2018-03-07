@@ -15,6 +15,8 @@ jQuery(document).ready(function () {
 
 
 function openPopup() {
+    jQuery(".ad-blocker").show();
+    jQuery(".ad-blocker-content").show();
     jQuery(".description").hide();
     jQuery(".buzz-section").hide();
     jQuery('.view-photo-landing-slider').hide();
