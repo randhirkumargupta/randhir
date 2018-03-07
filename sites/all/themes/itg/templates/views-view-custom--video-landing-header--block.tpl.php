@@ -39,7 +39,12 @@ if(!empty($video_node->field_story_reporter)){
           <div class="row">
               <div class="col-md-12">
                   <h1 class="video-heading"><?php print $row['title']; ?></h1>
-                  <span class="video-byline"><?php print $byline_title . ' | ' . date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>
+                  <div class="byline_date">
+                    <?php if (!empty($byline_title)) { ?>
+                    <span class="video-byline"><?php print $byline_title; ?></span>
+                    <?php } ?>
+                    <span class="video-ppdate"><?php print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
+                  </div>
                   <?php
                   global $user;
                   if (in_array('Social Media', $user->roles)) {
