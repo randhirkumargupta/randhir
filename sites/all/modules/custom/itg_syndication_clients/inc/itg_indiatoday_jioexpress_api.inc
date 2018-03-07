@@ -13,8 +13,8 @@ function itg_indiatoday_jioexpress_api(){
   $query->fields('dbody', array('body_value'));
   $query->fields('smi', array('field_story_medium_image_fid'));
   
-  $days_ago = strtotime(date('Y-m-d', strtotime('-60 days')));
-  $query->condition('n.created', $days_ago, '>=');  
+  //~ $days_ago = strtotime(date('Y-m-d', strtotime('-60 days')));
+  //~ $query->condition('n.created', $days_ago, '>=');  
   $query->condition('ti.tid', $sid, '=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
