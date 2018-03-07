@@ -685,7 +685,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .bottom-area ul li p{font:14px/22px 'OpenSans-Regular', sans-serif; color:#111; display:block; margin:0}
 .share_bar{ display:none;}
 /*  Score card Changes */
-#itg-scorecard-container{background: #222834;padding: 0;height: 60px;}
+#itg-scorecard-container{background: #222834;padding: 0;height: 60px; overflow: hidden;}
 #itg-scorecard-container .scorecard-stripcontent{padding: 0px;position: relative;height: 60px;}
 #itg-scorecard-container .scorecard-stripcontent ul li{list-style: none; display: inline-block; border-left: 1px solid #4f4f4f; padding: 0 5px;}
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1){border-left:0px;}
@@ -770,6 +770,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .share_bar .social-share .fa-bookmark{color: #607083;}
 .share_bar .social-share .fa-comment{color: #a2a2a2;}
 #itg-scorecard-container .container, #itg-scorecard-container .container .col-xs-12{padding:0;}
+#itg-scorecard-container, #itg-scorecard-container iframe.embed-responsive-item{ height:70px;}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}

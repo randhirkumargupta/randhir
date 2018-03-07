@@ -118,7 +118,7 @@ h2{
 
 p {
     line-height: 24px;
-    padding: 10px 0;
+    padding: 8px 0;
     white-space: normal
 }
 img {
@@ -292,7 +292,7 @@ img {
 }
 
 .story-section  .description h3{ font-size: 16px;font-weight: bold; margin: 10px 0; line-height: 28px; text-transform: uppercase;}
-.story-section  .description p{ font-size:17px; line-height:29px; }
+.story-section  .description p{ font-size:16px; line-height:26px; }
 .story-section .listicle-page .listicle-detail>span {
     width: 24px;
     height: 24px;
