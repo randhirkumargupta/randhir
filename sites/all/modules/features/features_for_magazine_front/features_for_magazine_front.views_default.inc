@@ -160,11 +160,6 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['field_story_source_type']['id'] = 'field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['table'] = 'field_data_field_story_source_type';
   $handler->display->display_options['fields']['field_story_source_type']['field'] = 'field_story_source_type';
-  /* Field: Content: Show Web Exclusive */
-  $handler->display->display_options['fields']['field_show_web_exclusive']['id'] = 'field_show_web_exclusive';
-  $handler->display->display_options['fields']['field_show_web_exclusive']['table'] = 'field_data_field_show_web_exclusive';
-  $handler->display->display_options['fields']['field_show_web_exclusive']['field'] = 'field_show_web_exclusive';
-  $handler->display->display_options['fields']['field_show_web_exclusive']['exclude'] = TRUE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
