@@ -80,7 +80,7 @@ if(!empty($node->field_story_reporter)){
             <?php
             }
             ?>
-                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                    <div class="video-caption"><p><?php print $video_value->field_video_title_value;?></p></div>
                     <div class="video_dec_amp video_dec_<?php print $video_value->video_id; ?>" ><?php print ucfirst($description); ?></div>
                     
                 </div>
@@ -136,7 +136,7 @@ if(!empty($node->field_story_reporter)){
                        controls>
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
-                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                    <div class="video-caption"><p><?php print $video_value->field_video_title_value;?></p></div>
                     <div class="video_dec_amp video_dec_<?php print $video_value->video_id; ?>" ><?php print ucfirst($description); ?></div>
                     
                 </div>
