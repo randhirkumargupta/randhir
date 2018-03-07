@@ -4,7 +4,6 @@
       <div class="magazin-top-left">
           <?php
           $migrated = $row['field_story_source_type'];
-          $field_show_web_exclusive = $row['field_show_web_exclusive'];
           $show_web_exclusive = variable_get('show_web_exclusive');
           $is_magazine_page = FALSE;
           $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
