@@ -45,7 +45,6 @@ function itg_indiatoday_samsung_search_api_video_list() {
     
     $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
     $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
-    
     $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
     $body = empty($result->content) ? '' : $result->content;
     $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
@@ -133,9 +132,9 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
   $nid_ar = array();
   $stdkeys = explode(',', str_replace(' ', '', $fields));
   $results = array();
-  watchdog('solr_service', 'search.solr invoked for !keys', array('!keys' => $key));
-
+  
   try {
+		$key = preg_replace('/\s+/', ' OR ', $key);
     $solr = apachesolr_get_solr();
 		$query = apachesolr_drupal_query("custom", array('q' => $key));
 		$query->setSolrsort('ds_changed', 'desc');
