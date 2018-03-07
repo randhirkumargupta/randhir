@@ -31,23 +31,24 @@ function itg_indiatoday_samsung_search_api() {
  */
 function itg_indiatoday_samsung_search_api_video_list() {
   $key = arg(2);
-  $nids = solr_search_custom_results($key);
+  $searchpage = solr_search_custom_results($key);
   if($nids === FALSE){
 		return array();
 	}
-  $searchpage = get_node_data_from_nids($nids);
+  
   $video_list = array();
   $loopc = 0;
   foreach ($searchpage as $key => $result) {
-    $nid = $result['nid'];
-    $title = $result['title'];
-    $image_courtesy = $result['field_story_courtesy_value'];
-    $extra_large_image = get_image_info_by_fid($result['field_story_large_image_fid']);
-    $field_story_medium_image = get_image_info_by_fid($result['field_story_medium_image_fid']);
-    $image_caption = $extra_large_image['caption'];
-    $body = $result['field_story_expert_description_value'];
-    $changed = date("Y-m-d H:i:s", $result['changed']);
-    $source_type = $result['field_story_source_type_value'];
+    $nid = $result->entity_id;
+    $title = $result->label;
+    $image_courtesy = FRONT_URL;
+    
+    $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
+    $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
+    $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
+    $body = empty($result->content) ? '' : $result->content;
+    $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
+    $source_type =  $result->sm_field_story_source_type[0];
     $videotag = video_detail_formats($nid, $source_type);
     $video_transcoding_data = get_itg_video_transcoding($nid);
     $duration = '';
@@ -80,10 +81,10 @@ function itg_indiatoday_samsung_search_api_video_list() {
     $video_list[$loopc]['v_id'] = (int) $nid;
     $video_list[$loopc]['v_title'] = "$title";
     $video_list[$loopc]['v_credit'] = "$image_courtesy";
-    $video_list[$loopc]['v_byline'] = "$image_caption";
+    $video_list[$loopc]['v_byline'] = "$byline";
     $video_list[$loopc]['v_desc'] = "$body";
-    $video_list[$loopc]['v_small_image'] = $field_story_medium_image['imag_url'];
-    $video_list[$loopc]['v_large_image'] = $extra_large_image['imag_url'];
+    $video_list[$loopc]['v_small_image'] = $field_story_medium_image;
+    $video_list[$loopc]['v_large_image'] = $extra_large_image;
     $video_list[$loopc]['v_download_url'] = "$bitrate_url";
     $video_list[$loopc]['v_updated_datetime'] = "$changed";
     $video_list[$loopc]['v_duration'] = "$duration";
@@ -131,25 +132,29 @@ function solr_search_custom_results($key, $fields, $facets = FALSE, $page = 0) {
   $nid_ar = array();
   $stdkeys = explode(',', str_replace(' ', '', $fields));
   $results = array();
-  watchdog('solr_service', 'search.solr invoked for !keys', array('!keys' => $key));
-
+  
   try {
-    $condition = apachesolr_search_conditions();
-    $condition['fq'] = array("bundle:videogallery", "bs_status:true");
-    $condition['apachesolr_search_sort'] = "ds_changed DESC";
-    $results = apachesolr_search_search_execute($key, $condition);
-    //p($results);
+		$key = preg_replace('/\s+/', ' OR ', $key);
+    $solr = apachesolr_get_solr();
+		$query = apachesolr_drupal_query("custom", array('q' => $key));
+		$query->setSolrsort('ds_changed', 'desc');
+		$query->removeFilter('bundle_name');
+		$query->addParam('fq', "hash:(".apachesolr_site_hash().")");
+		$query->addParam('fq', "bundle_name:Video");
+		$query->addParam('sort', "ds_changed DESC");
+		$resp = $query->search();
+		if(!empty($resp->data)){
+			$data = json_decode($resp->data);
+		}
+    $results = $data->response->docs;
   }
   catch (Exception $e) {
     watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
     apachesolr_failure(t('Solr search'), $key);
   }
 
-  if ($results and is_array($results) and count($results)) {
-    foreach ($results as $key => $value) {
-      $nid_ar[] = $value['node']->entity_id;
-    }
-    return $nid_ar;
+  if ($results and is_array($results) and count($results)) {   
+    return $results;
   }
   return FALSE;
 }
