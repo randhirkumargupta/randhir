@@ -1750,7 +1750,7 @@ footer {
       color: #111;
       font-family: "OpenSans-Semibold"; }
   .trending-videos li + li {
-    border-top: 1px solid #dddddd; }
+    border-top: 1px solid #aaa9a9; }
   .trending-videos li .detail {
     overflow: hidden;
     display: block; }
@@ -4951,7 +4951,7 @@ h1.category-heading {
       border: 1px solid #242424;
       position: relative; }
     #block-views-video-landing-header-block .video-header-left .iframe-video {
-      padding-bottom: 72.3%;
+      padding-bottom: 75%;
       padding-top: 0; }
       #block-views-video-landing-header-block .video-header-left .iframe-video .jwplayer {
         position: relative; }
@@ -4980,7 +4980,7 @@ h1.category-heading {
         #block-views-video-landing-header-block .video-header-left .social-likes ul li .flag-throbber {
           display: none; }
     #block-views-video-landing-header-block .video-header-left .slick-slider {
-      padding: 10px;
+      padding: 10px 0;
       /*background: #000*/
       border: none; }
       #block-views-video-landing-header-block .video-header-left .slick-slider .slick-slide {
@@ -11724,7 +11724,7 @@ span.smilies-title {
   z-index: 9998;
   color: #a1a1a1;
   font-family: "OpenSans-Regular";
-  padding-top: 0px; }
+  padding-top: 3px; }
   #block-itg-layout-manager-front-end-breadcrumb a {
     color: #a1a1a1;
     font-family: "OpenSans-Regular"; }
@@ -11767,9 +11767,17 @@ span.smilies-title {
 .video-heading {
   color: #fff;
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   line-height: 34px;
   padding-top: 7px; }
+
+.video-landing-header .byline_date {
+  display: block;
+  margin-bottom: 10px; }
+
+.video-landing-header .byline_date span + span:before {
+  content: "|";
+  padding: 0 5px 0px 0px; }
 
 .promote-btn {
   background: #a00606;
@@ -13838,12 +13846,12 @@ ul.pron-cons-img li img {
   width: 170px;
   float: right;
   margin-left: 5px;
-  position: relative; }
+  position: relative;
+  margin-right: 0px; }
 
 #related-video-tab ul li,
 .video_header_tabs .trending-videos li {
-  padding: 15px 24px 15px 0px;
-  border-bottom: 1px solid #aaa9a9;
+  padding: 15px 0px 15px 0px;
   overflow: hidden; }
 
 #related-video-tab ul li.related_content_tab .title,
@@ -13912,11 +13920,11 @@ ul.pron-cons-img li img {
   margin-bottom: 10px; }
 
 .latest_video.video_header_tabs .tab-data-1 {
-  height: 475px;
+  height: 400px;
   overflow-y: auto; }
 
 .latest_video.video_header_tabs .tab-data-2 {
-  height: 475px;
+  height: 400px;
   overflow-y: auto; }
 
 .video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {

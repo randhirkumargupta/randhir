@@ -3646,7 +3646,7 @@
             .video {
                 @include float(left);
                 width: 84.5%;
-                padding: 15px 10px;
+                padding: 10px 10px;
                 border: 1px solid #242424;
             }
             .social-likes {
@@ -3661,7 +3661,7 @@
                     li {
                         @include float(none);
                         a {
-                            padding: 23.5px 5px 23.5px 10px;
+                            padding: 24px 5px 24px 10px;
                             span {
                                 display: inline-block;
                             }
@@ -3900,7 +3900,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video {
-    padding: 0 4px 0 30px;
+    padding: 0 15px 0 15px;
 }
 
 @media (max-width: 1024px) {

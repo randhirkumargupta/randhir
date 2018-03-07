@@ -3112,7 +3112,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   #block-views-video-landing-header-block .video-header-left .video {
     float: left;
     width: 84.5%;
-    padding: 15px 10px;
+    padding: 10px 10px;
     border: 1px solid #242424; }
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
@@ -3126,7 +3126,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
       #block-views-video-landing-header-block .video-header-left .social-likes ul li {
         float: none; }
         #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
-          padding: 23.5px 5px 23.5px 10px; }
+          padding: 24px 5px 24px 10px; }
           #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
             display: inline-block; }
           #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
@@ -3292,7 +3292,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   padding: 1px 5px; }
 
 #block-views-video-landing-header-block .latest_video {
-  padding: 0 4px 0 30px; }
+  padding: 0 15px 0 15px; }
 
 @media (max-width: 1024px) {
   .view-video-landing-header .defalt-bar {
