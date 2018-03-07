@@ -12,9 +12,6 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
   $path_aleas = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
 }
 ?>
-<style>
-	#main,#page{ min-height: initial; height:auto;}
-</style>
 <div class="itg-embed-wrapper">
 <!--    <h1 class="embed-title"><?php // print $title;  ?></h1>-->
     <?php
