@@ -60,10 +60,8 @@ if(!empty($node->field_story_reporter)){
               }
               if(strpos($player_content['file_url'], 'https') === FALSE) {
                 $video_urls = str_replace("http","https",$player_content['file_url']);
-                $video_urls = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net",$video_urls);
              } else {
                 $video_urls = $player_content['file_url'];
-                $video_urls = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net",$video_urls);
              }
             ?>
               <amp-video width="300"
@@ -118,8 +116,10 @@ if(!empty($node->field_story_reporter)){
                 
                 if(strpos($video_value->field_migrated_video_url_value, 'https') === FALSE) {
                  $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                 $video_id = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net", $video_id);
                 } else {
                  $video_id = $video_value->field_migrated_video_url_value;
+                 $video_id = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net", $video_id);
                 }
                 ?> 
               <div class="slide"> <div class="photo-slide">
