@@ -9,6 +9,7 @@
 ?>
 <?php
 $amp_class = '';
+print_r(arg());die;
 $is_amp = amp_is_amp_request();
 if($is_amp){
   $amp_class = 'amp-video-embed';
