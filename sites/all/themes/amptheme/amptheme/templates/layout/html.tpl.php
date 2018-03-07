@@ -423,6 +423,10 @@ img {
 .field .field-label {
     font-weight: 700
 }
+
+.byline_date { display:block; margin-bottom: 10px; color:#aaa8a9; font-size:14px;}
+.byline_date span + span:before{ content:"|"; padding: 0 5px 0px 0px;}
+
 .story-section .story-right .stryimg .photoby .story-img-rating {
     background: #b00808;
     display: inline-block;
@@ -504,7 +508,7 @@ img {
 }
 .photo-title {
     font-size: 32px;
-    margin: 20px 0;
+    margin:15px 0 5px;
     color: #fff;
     line-height: 42px
 }
