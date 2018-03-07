@@ -355,7 +355,7 @@ if(!empty($video_node->field_story_reporter)){
                       </div>
                       <?php print $description_slider; ?>
 
-                      <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
+                      <!-- <p class="upload-date"><?php //print $row['field_itg_content_publish_date']; ?></p> -->
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
