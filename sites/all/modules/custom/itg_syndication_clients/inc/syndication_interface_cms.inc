@@ -43,9 +43,11 @@ function itgd_genrate_factiva_syndication($issue_result) {
     genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result);
     genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_result);
+    
     //1206735 xml
     genrate_syndication_xml_cat_1206735();
   }
+  genrate_indiatoday_lifestyle_monthly_1206567_xml();
 }
 
 /**
@@ -193,8 +195,9 @@ function genrate_syndication_xml_cat_1206735() {
     $start_date_timestamp = strtotime($start_date . " 00:00:00");
     $end_date_timestamp = strtotime($end_date . " 23:59:00");
     // select node belong from current term id or child term id
-    $query = db_select('taxonomy_index', 'ti');
-    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+    
+    $query = db_select('node', 'n');
+    $query->join('taxonomy_index', 'ti', 'n.nid=ti.nid');
     //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
@@ -274,4 +277,70 @@ function genrate_syndication_xml_cat_1206735() {
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
+}
+
+
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $category
+ * @return string
+ */
+function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
+  $xml = '';
+  $tid = 1206567;
+  // select node belong from current term id or child term id
+  $query = db_select('node', 'n');
+  $query->join('taxonomy_index', 'ti', 'n.nid=ti.nid');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+  $query->fields('dbody', array('body_value'));
+  $query->fields('pc', array('field_primary_category_value'));
+  //end
+  $days_ago = strtotime(date('Y-m-d', strtotime('-1 month')));
+  $query->condition('n.created', $days_ago, '>=');
+  $query->condition('ti.tid', $tid, '=');
+  $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $xml = '';
+  if (!empty($result)) {
+    global $base_url;
+    $xml = '<artical>';
+    $xml .= "<magazine>Women's Health</magazine>";
+    $xml .= '<frequency>--</frequency>';
+    foreach ($result as $key => $value) {
+      $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
+      $byline = get_byline_name_by_nid($value['nid']);
+      $byline = empty($byline) ? '' : $byline;
+      $publish_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
+      $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
+      $body = itg_remove_tags_from_body($body);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+
+      $xml .= '<section>' . $primary_cat . '</section>';
+      $xml .= '<edition>' . $publish_date . '</edition>';
+      $xml .= '<byline>' . $byline . '</byline>';
+      $xml .= '<headline>' . stripInvalidXml($value['title']) . '</headline>';
+      $xml .= '<introtext>' . stripInvalidXml($kicker_text) . '</introtext>';
+      $xml .= '<bodytext>' . stripInvalidXml($body);
+      $xml .= "<copyright>Reproduced From Women's Health. Copyright " . date('Y') . ". LMIL. All rights reserved.</copyright>";
+      $xml .= '</bodytext>';
+    }
+    $xml .= '</artical>';
+  }
+  $xml_path = 'public://rss-feeds/xml_data/syndications/';
+  $file_path = $xml_path . 'indiatoday-lifestyle.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
