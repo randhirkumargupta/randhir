@@ -17,22 +17,22 @@
           }
           ?>
           <?php if ($is_magazine_page && $show_web_exclusive) {
-			$view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
+            $view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
             $nid_arr[] = $view[0]->nid;
             ?>
             <span class="web-excl"><?php print t('Web Exclusive'); ?></span>
             <?php
             print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);             
-          }
-          else {            
-            $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
-            $count_issue = count($view);
-            if ($count_issue > 0) { 
-			?>
-			<span class="web-excl"><?php print t('Cover Story'); ?></span>
-			<?php }
-            print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
-          }
+            }
+            else {            
+              $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
+              $count_issue = count($view);
+              if ($count_issue > 0) { 
+            ?>
+            <span class="web-excl"><?php print t('Cover Story'); ?></span>
+            <?php }
+                print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
+            }
           ?>
       </div>
 
