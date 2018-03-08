@@ -4905,7 +4905,7 @@ h1.category-heading {
         #block-views-video-landing-header-block .video-header-left .social-likes ul li .flag-throbber {
           display: none; }
     #block-views-video-landing-header-block .video-header-left .slick-slider {
-      padding: 10px;
+      padding: 10px 0;
       /*background: #000*/
       border: none; }
       #block-views-video-landing-header-block .video-header-left .slick-slider .slick-slide {
@@ -8099,16 +8099,15 @@ section.sidebar .block-itg-ads {
     padding: 10px; }
   .education-layout-page .grey-bg {
     background: #f3f3f3; }
-  .education-layout-page .itg-layout-672 .droppable {
-    height: 672px; }
-    .education-layout-page .itg-layout-672 .droppable .auto-block-1,
-    .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
-      height: 672px;
-      overflow: hidden; }
-    .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
-      border: 1px solid #ddd; }
-      .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
-        border: none; }
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1,
+  .education-layout-page .itg-layout-672 .droppable .auto-block-2 {
+    height: 670px;
+    overflow: hidden;
+    margin-bottom: 20px; }
+  .education-layout-page .itg-layout-672 .droppable .auto-block-1 {
+    border: 1px solid #ddd; }
+    .education-layout-page .itg-layout-672 .droppable .auto-block-1 .featured-news {
+      border: none; }
   .education-layout-page .itg-layout-672 .itg-widget-child .droppable {
     height: 310px; }
   .education-layout-page .itg-layout-565 .droppable {
@@ -11636,7 +11635,7 @@ span.smilies-title {
   z-index: 9998;
   color: #a1a1a1;
   font-family: "Roboto-Regular";
-  padding-top: 0px; }
+  padding-top: 3px; }
   #block-itg-layout-manager-front-end-breadcrumb a {
     color: #a1a1a1;
     font-family: "Roboto-Regular"; }
@@ -11678,9 +11677,17 @@ span.smilies-title {
 .video-heading {
   color: #fff;
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   line-height: 34px;
   padding-top: 7px; }
+
+.video-landing-header .byline_date {
+  display: block;
+  margin-bottom: 10px; }
+
+.video-landing-header .byline_date span + span:before {
+  content: "|";
+  padding: 0 5px 0px 0px; }
 
 .promote-btn {
   background: #a00606;
@@ -13689,7 +13696,7 @@ ul.pron-cons-img li img {
   background: #fff;
   z-index: 1;
   position: relative;
-  padding: 45px 20px 10px 0px;
+  padding: 20px 20px 10px 0px;
   display: inline-block; }
 
 .other_video_category h3:before {

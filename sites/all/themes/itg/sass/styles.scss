@@ -4906,7 +4906,7 @@ h1.category-heading {
         }
         @include video-detail-page-sociallike;
         .slick-slider {
-            padding: 10px;
+            padding: 10px 0;
             /*background: #000*/
             border: none;
             .slick-slide {
@@ -8423,12 +8423,13 @@ section.sidebar {
         background: #f3f3f3;
     }
     .itg-layout-672 {
-        .droppable {
-            height: 672px;
+        .droppable {            
             .auto-block-1,
             .auto-block-2 {
-                height: 672px;
+                height: 670px;
                 overflow: hidden;
+                margin-bottom: 20px;
+
             }
             .auto-block-1 {
                 border: 1px solid #ddd;
@@ -12331,7 +12332,7 @@ span.smilies-title {
     z-index: 9998;
     color: #a1a1a1;
     font-family: $itg-roboto;
-    padding-top:0px;
+    padding-top:3px;
     a {
         color: #a1a1a1;
         font-family: $itg-roboto;
@@ -12390,10 +12391,13 @@ span.smilies-title {
 .video-heading {
     color: #fff;
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
     line-height: 34px;
     padding-top: 7px;
 }
+
+.video-landing-header .byline_date{display: block; margin-bottom: 10px;}
+.video-landing-header .byline_date span + span:before {content: "|";padding: 0 5px 0px 0px;}
 
 .promote-btn {
     background: #a00606;
@@ -14668,7 +14672,7 @@ ul.pron-cons-img li img {
     background: #fff;
     z-index: 1;
     position: relative;
-    padding: 45px 20px 10px 0px;
+    padding:20px 20px 10px 0px;
     display: inline-block;
 }
 
