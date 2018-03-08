@@ -21,7 +21,7 @@ function syndication_interface_cms() {
  * @param string $file_name
  */
 function itgd_genrate_factiva_syndication($issue_result) {
-  if (!empty($issue_result)) {
+  if (FALSE && !empty($issue_result)) {
     $issue_title = date('F d, Y', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
     $query = db_select('node', 'n');
@@ -340,6 +340,7 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   }
   $xml_path = 'public://rss-feeds/xml_data/syndications/';
   $file_path = $xml_path . 'indiatoday-lifestyle.xml';
+  echo file_create_url($file_path);
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
   fclose($fp);
