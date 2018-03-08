@@ -39,13 +39,13 @@ function generate_jioexpress_feeds($result, $sid){
     $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today Latest News]]></title>';
-    $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA[ ' . FRONT_URL . ']]></link>';
+    $xml .= '<description><![CDATA[ India Today ]]></description>';
+    $xml .= '<link>' . FRONT_URL . '</link>';
     
     $xml .= '<image>';
     $xml .= '<url>' . $logo . '</url>';
     $xml .= '<title><![CDATA[ India Today Latest News ]]></title>';
-    $xml .= '<link><![CDATA[' . FRONT_URL . ']]></link>';
+    $xml .= '<link>' . FRONT_URL . '</link>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
       if (is_lock_story($value['nid'])) {
@@ -59,13 +59,17 @@ function generate_jioexpress_feeds($result, $sid){
       $body = stripInvalidXml($body);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
       $byline = get_byline_name_by_nid($value['nid']);
+      $uniq_id = "indiatoday.in".$value['nid'];
+      $guid = itg_genrate_uniqui_guid($uniq_id);
+      
       $xml .= '<item>';
-      $xml .= '<title>' . stripInvalidXml($value['title']) . '</title>';
+      $xml .= '<title><![CDATA[' . stripInvalidXml($value['title']) . ']]></title>';
+      $xml .= '<guid isPermaLink="false">' . $guid . '</guid>';
       $xml .= '<description><![CDATA[' . $body . ']]></description>';
-      $xml .= '<pubDate>' . $pub_date . '+0000</pubDate>';
+      $xml .= '<pubDate>' . $pub_date . ' +0000</pubDate>';
       $xml .= '<link>' . $url . '</link>';
-      $xml .= '<image>' . $medium_img["imag_url"] . '</image>';
-      $xml .= '<author>' . $byline . '</author>';
+      $xml .= '<dc:creator><![CDATA[' . $byline . ']]></dc:creator>';
+      $xml .= '<media:thumbnail url = "'.$medium_img["imag_url"].'"></media:thumbnail>';
       $xml .= '</item>';
     }
     $xml .= '</channel>';
