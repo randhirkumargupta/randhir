@@ -4122,6 +4122,7 @@ function itg_app_manager_form_validate($form, &$form_state) {
 function testtolive_hamburgermenu(){
     $jsondata = hamburger_menu_middleware_data();
     $jsondata = json_encode($jsondata);    
+    echo $jsondata; die();
     variable_set('hamburger_menu_json', $jsondata);
     drupal_set_message(t('Test-to-live hamburger-menu have been saved'));
     drupal_goto('hamburger-menu-management');
