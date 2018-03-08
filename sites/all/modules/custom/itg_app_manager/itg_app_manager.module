@@ -487,8 +487,13 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
         '#submit' => array('hori_itg_app_manager_form_submit'),
         );
     }
+    if ($menu_form_id == '1') {
+       $form['#validate'][] = 'itg_app_manager_form_validate'; 
+    }
+    else{
+        $form['#validate'][] = 'hori_itg_app_manager_form_validate'; 
+    }
     
-    $form['#validate'][] = 'itg_app_manager_form_validate';
     if ($menu_form_id == 1) {
         $u_url = $base_url."/test-to-live/hamburger-menu";
         $url_order = $base_url."/manage-order/hamburger-menu";
@@ -4390,4 +4395,23 @@ function hori_itg_app_manager_form_submit($form, &$form_state) {
         }
     }
 }
-
+/**
+ * itg_app_manager_form_validate
+ */
+function hori_itg_app_manager_form_validate($form, &$form_state) {
+  // Random example, if the title is 'test' throw an error 
+    //p($form_state['values']);
+    $m_id = $form_state['values']['m_id'];
+    $order_id = $form_state['values']['container'][1]['order_id'];
+    $menu_type_id = $form_state['values']['container'][1]['menu_type_id'];
+    $query = db_select('itg_app_menu_content', 'imc');
+    $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
+    $query->condition('imc.menu_type_id', $menu_type_id, '=');
+    $query->condition('imc.order_id', $order_id, '=');
+    $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $m_id_db = $results[0]['id'];
+    if (count($results) > 0 && ($m_id_db != $m_id)) {
+      $title = $results[0]['title'];      
+      //form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
+    }
+}
