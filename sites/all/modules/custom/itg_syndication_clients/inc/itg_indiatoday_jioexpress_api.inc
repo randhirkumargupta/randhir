@@ -1,7 +1,7 @@
 <?php
 function itg_indiatoday_jioexpress_api(){
 
-  $sid = 1206643;
+  $sid = 1787193;
   
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -13,8 +13,8 @@ function itg_indiatoday_jioexpress_api(){
   $query->fields('dbody', array('body_value'));
   $query->fields('smi', array('field_story_medium_image_fid'));
   
-  //~ $days_ago = strtotime(date('Y-m-d', strtotime('-60 days')));
-  //~ $query->condition('n.created', $days_ago, '>=');  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');  
   $query->condition('ti.tid', $sid, '=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
@@ -22,8 +22,8 @@ function itg_indiatoday_jioexpress_api(){
   $query->groupBy('n.nid')->range(0, 10);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $xml = generate_jioexpress_feeds($result, $sid);
-  $xml_path = 'public://rss-feeds/xml_data/syndications/';
-	$file_path = $xml_path . 'jio-express.xml';
+  $xml_path = 'public://rss-feeds/xml_data/jio/';
+	$file_path = $xml_path . 'conclave2018.xml';
 	$fp = fopen($file_path, "w");
 	fwrite($fp, $xml);
 	fclose($fp);
