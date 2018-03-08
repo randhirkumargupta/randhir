@@ -907,7 +907,7 @@ function _related_story_left_block_content() {
       } else {
         $display_title = $related_data->label;
       }
-      $related_title = addslashes($display_title);
+      $related_title = html_entity_decode($display_title);
       if(empty($related_data->sm_field_custom_story_small_large_url[0])) {
       $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';  
       } else {
