@@ -4127,7 +4127,7 @@ function testtolive_hamburgermenu(){
     $jsondata = hamburger_menu_middleware_data();
     $jsondata = json_encode($jsondata);     
     variable_set('hamburger_menu_json', $jsondata);
-    redis_key_delete($key)
+    redis_key_delete($key);
     drupal_set_message(t('Test-to-live hamburger-menu have been saved'));
     drupal_goto('hamburger-menu-management');
 }
