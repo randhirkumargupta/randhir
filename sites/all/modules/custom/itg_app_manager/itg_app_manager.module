@@ -368,7 +368,13 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
         );
         $subsec_options = array('0' => '- Select -');
         if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
-            $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
+            if ($menu_form_id == '1') {
+                $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
+            }
+            else{
+                $section_options = _get_section_options_hori($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
+            }
+            
             $form['container'][$i]['section']['title'] = array(
                 '#type' => 'select',
                 '#title' => '',
@@ -384,7 +390,13 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#required' => TRUE,
             );
             if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
-                $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
+                if ($menu_form_id == '1') {
+                    $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
+                }
+                else{
+                    $subsec_options = _get_section_options_hori($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
+                }
+                
             }
         } else {
             $form['container'][$i]['section']['title'] = array(
@@ -461,11 +473,21 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#limit_validation_errors' => array(),
         );
     }
-    $form['submit_button'] = array(
+    if ($menu_form_id == '1') {
+        $form['submit_button'] = array(
         '#type' => 'submit',
         '#value' => t('Save'),
         '#submit' => array('itg_app_manager_form_submit'),
-    );
+        );
+    }
+    else{
+        $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('hori_itg_app_manager_form_submit'),
+        );
+    }
+    
     $form['#validate'][] = 'itg_app_manager_form_validate';
     if ($menu_form_id == 1) {
         $u_url = $base_url."/test-to-live/hamburger-menu";
@@ -4247,6 +4269,125 @@ function manage_order_hamburger_menu_form_validate($form, &$form_state) {
     $data = $form_state['input'];    
     if(count(array_unique($data))< (count($data))) {        
       form_set_error('order_id', t('More than one menu have same order value.'));
+    }
+}
+
+/**
+ * Getting child taxonomies form tid
+ * @param int $term_id
+ * @return array
+ */
+function _get_section_options_hori($term_id) {
+    $option_arr = array('' => '- Select -');
+    if ((isset($term_id)) && !empty($term_id)) {
+        if ($term_id == '1') {
+            $term_query = db_select('taxonomy_term_data', 'tt');
+            $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+            $term_query->fields('tt', array('tid', 'name'));
+            $term_query->condition('tt.vid', 14, '=');
+            $term_query->condition('tt.tid', 1208521, '!=');
+            $term_query->condition('tt.tid', 1207762, '!=');
+            $term_query->condition('th.parent', 0, '=');
+            $term_query_results = $term_query->execute()->fetchAll();
+            foreach ($term_query_results as $key => $val) {
+                $option_arr[$val->tid] = $val->name;
+            }
+        } else {
+            $term_query = db_select('taxonomy_term_data', 'tt');
+            $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+            $term_query->fields('tt', array('tid', 'name'));
+            $term_query->condition('th.parent', $term_id, '=');
+            $term_query_results = $term_query->execute()->fetchAll();
+            foreach ($term_query_results as $key => $val) {
+                $option_arr[$val->tid] = $val->name;
+            }
+        }
+    }
+    return $option_arr;
+}
+
+/**
+ * Submit callback for menu management form
+ * @param array $form
+ * @param array $form_state
+ */
+function hori_itg_app_manager_form_submit($form, &$form_state) {
+    if (!empty($form_state['values'])) {
+        foreach ($form_state['values']['container'] as $key => $form_val) {
+            $data = array();
+            $title = '';
+            $section_id = 0;
+            $s_id = 0;
+            $s_title = '';
+            if ($form_val['menu_type'] == '0') {
+                $title = $form_val['section']['title'];
+                $section_id = 0;
+            } else if ($form_val['menu_type'] == '1') {
+                $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $section_id = $form_val['section']['title'];
+            } else {
+                $title = $form['container'][$key]['menu_type']['#options'][$form_val['menu_type']];
+                $section_id = $form_val['menu_type'];
+                $s_id = $form_val['section']['title'];
+                $s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+            }
+            if ($form_val['menu_type'] == '1') {
+                if ($form_val['has_subcat'] == 1) {
+                    $s_id = $form_val['sub_section'];
+                    $s_title = $form['container'][$key]['sub_section']['#options'][$form_val['sub_section']];
+                } else {
+                    $s_id = 0;
+                    $s_title = '';
+                }
+            }
+
+
+            $data = array(
+                'menu_type_id' => $form_val['menu_type_id'],
+                'menu_label_id' => $form_val['menu_label_id'],
+                'order_id' => $form_val['order_id'],
+                'menu_type' => $form_val['menu_type'],
+                'section_id' => $section_id,
+                'title' => $title,
+                'type' => $form_val['type'],
+                'webview_url' => $form_val['webview_url'],
+                'icon_url' => $form_val['icon_url'],
+                'is_new' => $form_val['is_new'],
+                'has_subcategory' => $form_val['has_subcat'],
+                's_id' => $s_id,
+                's_title' => $s_title,
+            );
+            if (isset($form_state['values']['m_id']) && $form_state['values']['m_id'] > 0) {
+                $m_id = $form_state['values']['m_id'];
+                db_update('itg_app_menu_content')
+                        ->fields(array(
+                            'menu_type_id' => $form_val['menu_type_id'],
+                            'menu_label_id' => $form_val['menu_label_id'],
+                            'order_id' => $form_val['order_id'],
+                            'menu_type' => $form_val['menu_type'],
+                            'section_id' => $section_id,
+                            'title' => $title,
+                            'type' => $form_val['type'],
+                            'webview_url' => $form_val['webview_url'],
+                            'icon_url' => $form_val['icon_url'],
+                            'is_new' => $form_val['is_new'],
+                            'has_subcategory' => $form_val['has_subcat'],
+                            's_id' => $s_id,
+                            's_title' => $s_title,
+                        ))->condition('id', $m_id, '=')->execute();
+                drupal_set_message(t('Data update for id: ' . $m_id . ' successfully.'), 'status');
+            } else {
+                drupal_write_record('itg_app_menu_content', $data);
+                $last_id = db_query('SELECT MAX(id) FROM {itg_app_menu_content}')->fetchField();
+                $icon_url = $form_val['icon_url'];
+                db_update('itg_app_menu_content')
+                        ->fields(array(
+                            'icon_url' => $icon_url,
+                        ))->condition('id', $last_id, '=')->execute();
+
+                drupal_set_message(t('Data saved successfully.'), 'status');
+            }
+        }
     }
 }
 
