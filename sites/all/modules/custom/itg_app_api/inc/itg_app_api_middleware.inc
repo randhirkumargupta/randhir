@@ -79,7 +79,7 @@ function hamburger_menu_data() {
   $order_s = $all_menus['order_l'];
   $other_cat_result = hamburger_menu_listing(2);
   $other_cat['menu_label'] = 'Other Categories';
-  $top_cat_menus = menu_list($other_cat_result);
+  $top_cat_menus = menu_list($other_cat_result,$order_s);
   $other_cat['menu'] = $top_cat_menus['data'];
 
   $hamburger_menu['hamburger_menu'][0] = $top_cat;
