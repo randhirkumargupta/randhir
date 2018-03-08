@@ -4147,8 +4147,8 @@ function testtolive_hamburgermenu(){
  */
 function manage_order_hamburger_menu_form($form, &$form_state, $menu_form_id) {
     global $base_url;    
-    results_top = hamburger_menu_listing(1);
-    results_other = hamburger_menu_listing(2);
+    $results_top = hamburger_menu_listing(1);
+    $results_other = hamburger_menu_listing(2);
     //top cat ordring
     $form['top-categories'] = array(
         '#type' => 'fieldset',
@@ -4156,7 +4156,7 @@ function manage_order_hamburger_menu_form($form, &$form_state, $menu_form_id) {
         '#collapsible' => FALSE,
         '#collapsed' => FALSE,
     );
-    foreach (results_top as $data) {
+    foreach ($results_top as $data) {
         if($data['section_id'] == '1206553'){
             $title = "PROGRAMMES";
         }
@@ -4186,7 +4186,7 @@ function manage_order_hamburger_menu_form($form, &$form_state, $menu_form_id) {
         '#collapsible' => FALSE,
         '#collapsed' => FALSE,
     );
-    foreach (results_other as $data) {
+    foreach ($results_other as $data) {
         if($data['section_id'] == '1206553'){
             $title = "PROGRAMMES";
         }
