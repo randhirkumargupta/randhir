@@ -97,6 +97,12 @@ function itg_miscellaneous_menu() {
     'file' => 'includes/itg_miscellaneous.inc',
   );
   
+  $items['remove-flooded-node-from-widget'] = array(
+    'title' => 'Remove Flooded node from Widget',
+    'page callback' => 'itg_remove_flooded_nodes',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
 
   
   return $items;
