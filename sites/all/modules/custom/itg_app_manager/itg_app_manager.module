@@ -5,6 +5,7 @@
  * The ITG App Management Module.
  *
  */
+module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_middleware');
 
 /**
  * Implements hook_init(). 
