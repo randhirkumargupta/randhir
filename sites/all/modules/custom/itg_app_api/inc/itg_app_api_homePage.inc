@@ -1917,7 +1917,7 @@ function homePageJsonWidget_1() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "INDIA TODAY CONCLAVE"; 
+    $n_widget[0]['tilte'] = "CONCLAVE 2018 SPECIAL COVERAGE"; 
     $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
     $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/programme.php";
     $n_widget[0]['action'] = "webview";    
@@ -2891,8 +2891,8 @@ function homePageJsonWidget_3() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "Watch Live – India Today Conclave 2018"; 
-    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/tezembed.html";
+    $n_widget[0]['tilte'] = "India Today Conclave 2018 Live"; 
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/aajtakembedjw.html";
     $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
     $n_widget[0]['action'] = "webview";    
     
