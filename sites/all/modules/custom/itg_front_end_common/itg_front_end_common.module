@@ -877,7 +877,7 @@ function _related_story_left_block_content() {
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
-        $img_alt = strip_tags($related_title);
+        $img_alt = addslashes(strip_tags($related_title));
         $related_story.= '<li class="col-md-12"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" />
           </a>';
         $related_story.= '<span class="tile"><a href="'.$front_url.'">'.$related_title.'</a></span></li>';
