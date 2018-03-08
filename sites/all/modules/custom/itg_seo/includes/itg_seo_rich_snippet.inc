@@ -105,7 +105,7 @@ function itg_seo_node_data($node) {
       $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
     
-    if ($node->nid == '1112499' || $node->nid == '1171112' || $node->nid == '1165812' || $node->nid == '1153788' || $node->nid == '1112499') {
+    if ($node->nid == '1180647' || $node->nid == '1171112' || $node->nid == '1165812' || $node->nid == '1153788' || $node->nid == '1112499') {
         $review_item_type = 'Movie';
         $worstrate = 0;
         $bestrate = 5;
@@ -113,7 +113,7 @@ function itg_seo_node_data($node) {
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
         $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
         switch ($node->nid) {
-          case '1112499':          
+          case '1180647':          
             $moviename = 'Pari';
             $item_movie_url = 'http://www.imdb.com/title/tt7329858/';
             $directorname = 'Prosit Roy';
