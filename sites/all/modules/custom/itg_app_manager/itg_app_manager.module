@@ -4227,7 +4227,7 @@ function manage_order_hamburger_menu_form_submit($form, &$form_state) {
     $data = $form_state['input'];    
     foreach ($results_top as $key => $value){
         $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
-        echo $id; echo "<br>"; echo $key; echo "<br>"; echo $value;
+        echo $id; echo "<br>"; echo $key; echo "<br>"; echo $value;die();
     }
     
 }
