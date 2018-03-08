@@ -27,6 +27,12 @@ function itg_indiatoday_jioexpress_api(){
 	$fp = fopen($file_path, "w");
 	fwrite($fp, $xml);
 	fclose($fp);
+	
+	$xml_path = 'public://rss-feeds/xml_data/reliance/';
+	$file_path = $xml_path . 'conclave2018.xml';
+	$fp = fopen($file_path, "w");
+	fwrite($fp, $xml);
+	fclose($fp);
 }
 
 
