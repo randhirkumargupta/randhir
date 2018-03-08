@@ -22,8 +22,8 @@ function itg_indiatoday_jioexpress_api(){
   $query->groupBy('n.nid')->range(0, 10);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $xml = generate_jioexpress_feeds($result, $sid);
-  $xml_path = 'public://rss-feeds/xml_data/syndications/';
-	$file_path = $xml_path . 'jio-express.xml';
+  $xml_path = 'public://rss-feeds/xml_data/jio/';
+	$file_path = $xml_path . 'conclave2018.xml';
 	$fp = fopen($file_path, "w");
 	fwrite($fp, $xml);
 	fclose($fp);
