@@ -4145,7 +4145,7 @@ function testtolive_hamburgermenu(){
  * @param int $form_state 
  * @return array
  */
-function manage_order_hamburger_menu_form($form, &$form_state, $menu_form_id) {
+function manage_order_hamburger_menu_form($form, &$form_state) {
     global $base_url;    
     $results_top = hamburger_menu_listing(1);
     $results_other = hamburger_menu_listing(2);
@@ -4209,6 +4209,21 @@ function manage_order_hamburger_menu_form($form, &$form_state, $menu_form_id) {
                 '#required' => TRUE,                
             );
     }
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('manage_order_hamburger_menu_form_submit'),
+    );
     return $form;
+}
+
+ /**
+ * Submit callback for manage_order_hamburger_menu form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_form_submit($form, &$form_state) {
+    p($form_state);
+    
 }
 
