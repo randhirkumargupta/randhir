@@ -61,7 +61,7 @@ function generate_jioexpress_feeds($result, $sid){
       $byline = get_byline_name_by_nid($value['nid']);
       $uniq_id = "indiatoday.in".$value['nid'];
       $guid = itg_genrate_uniqui_guid($uniq_id);
-      
+      $medium_img["imag_url"] = empty($medium_img["imag_url"]) ? $logo : $medium_img["imag_url"];
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . stripInvalidXml($value['title']) . ']]></title>';
       $xml .= '<guid isPermaLink="false">' . $guid . '</guid>';
