@@ -4105,6 +4105,7 @@ function get_taxo_tid($name) {
 function itg_app_manager_form_validate($form, &$form_state) {
   // Random example, if the title is 'test' throw an error 
     //p($form_state['values']);
+    $m_id = $form_state['values']['m_id'];
     $order_id = $form_state['values']['container'][1]['order_id'];
     $menu_type_id = $form_state['values']['container'][1]['menu_type_id'];
     $query = db_select('itg_app_menu_content', 'imc');
@@ -4112,8 +4113,9 @@ function itg_app_manager_form_validate($form, &$form_state) {
     $query->condition('imc.menu_type_id', $menu_type_id, '=');
     $query->condition('imc.order_id', $order_id, '=');
     $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    if (count($results) > 0) {
-      $title = $results[0]['title'];
+    $m_id_db = $results[0]['id'];
+    if (count($results) > 0 && ($m_id_db != $m_id)) {
+      $title = $results[0]['title'];      
       form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
     }
 }
@@ -4121,9 +4123,11 @@ function itg_app_manager_form_validate($form, &$form_state) {
  * testtolive_hamburgermenu
  */
 function testtolive_hamburgermenu(){
+    $key = "devitgd_rapid_hamburger_menu_json";
     $jsondata = hamburger_menu_middleware_data();
     $jsondata = json_encode($jsondata);     
     variable_set('hamburger_menu_json', $jsondata);
+    redis_key_delete($key)
     drupal_set_message(t('Test-to-live hamburger-menu have been saved'));
     drupal_goto('hamburger-menu-management');
 }
