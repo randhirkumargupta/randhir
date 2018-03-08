@@ -29,6 +29,8 @@ function homePageJson() {
     $homePageJsonWidget_1 = homePageJsonWidget_1();
     $homePageJsonWidget_2 = array();
     $homePageJsonWidget_2 = homePageJsonWidget_2();
+    $homePageJsonWidget_3 = array();
+    $homePageJsonWidget_3 = homePageJsonWidget_3();
     $business = array();
     //$business = homePageJsonNewslist_business();
     //change on 19-feb-18
@@ -40,23 +42,18 @@ function homePageJson() {
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
 
     $data['status_code'] = "1";
-    $data['status_message'] = "customised_message";
-    //$data['data'][0] = $data_packagelist_india;
-
-    //$data['data'][0] = $homePageJsonWidget_1;
+    $data['status_message'] = "customised_message";    
     $data['data'][0] = $homePageJsonWidget_2;
-    $data['data'][1] = $homePageJsonWidget_1;
-    $data['data'][2] = $data_topstories;
-    //$data['data'][1] = $business;
-    $data['data'][3] = $itg_rapid_home_movies_json;
-    $data['data'][4] = $itg_rapid_home_technology_json;
-    $data['data'][5] = $data_news_india;
-    $data['data'][6] = $itg_rapid_home_sports_json;
-    $data['data'][7] = $data_news_lifestyle;
-    $data['data'][8] = $data_news_world;
-    $data['data'][9] = $data_magazine;
-    //$data['data'][6] = $data_poll;
-
+    $data['data'][1] = $homePageJsonWidget_3;
+    $data['data'][2] = $homePageJsonWidget_1;
+    $data['data'][3] = $data_topstories;    
+    $data['data'][4] = $itg_rapid_home_movies_json;
+    $data['data'][5] = $itg_rapid_home_technology_json;
+    $data['data'][6] = $data_news_india;
+    $data['data'][7] = $itg_rapid_home_sports_json;
+    $data['data'][8] = $data_news_lifestyle;
+    $data['data'][9] = $data_news_world;
+    $data['data'][10] = $data_magazine;
     return $data;
 }
 
@@ -1922,8 +1919,8 @@ function homePageJsonWidget_1() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "INDIA TODAY CONCLAVE"; 
-    $n_widget[0]['short_url'] = "https://smedia2.intoday.in/microsites/rapidvalue/banner.html";
+    $n_widget[0]['tilte'] = "CONCLAVE 2018 SPECIAL COVERAGE"; 
+    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
     $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/programme.php";
     $n_widget[0]['action'] = "webview";    
     
@@ -2844,6 +2841,62 @@ function homePageJsonWidget_2() {
     $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_detail.html";
     $n_widget[0]['action'] = "webview"; 
     $n_widget[0]['is_india_match'] = "1";
+    
+    $data_newslist[$listcount]['n_widget'] = $n_widget;
+
+    $data_news['news'] = (array) $data_newslist;
+    return $data_news;
+}
+/**
+ * main function for generate homePage Widget3 array
+ *
+ * @return array
+ */
+function homePageJsonWidget_3() {
+    global $base_url;
+    $data_news = array();
+    $data_newslist = array();
+    $comman = array();
+    $n_widget = array();
+    $listcount = 0;
+    
+
+    $data_news['id'] = "0";
+    $data_news['order'] = "0";
+    $data_news['type'] = "webview";
+    $data_news['title'] = "Widget";
+    $data_news['label'] = "Widget";
+    $data_news['show_label'] = "0";
+    $data_news['n_template_id'] = "1";
+
+    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_template_id'] = "";
+    $data_newslist[$listcount]['n_type'] = "widget";
+    $data_newslist[$listcount]['n_is_developing'] = "0";
+    $data_newslist[$listcount]['n_is_sponsored'] = "0";
+    $data_newslist[$listcount]['n_share_link'] = "";
+    $data_newslist[$listcount]['n_title'] = "";
+    $data_newslist[$listcount]['n_description'] = "0";
+    $data_newslist[$listcount]['n_pcategory_id'] = "0";
+    $data_newslist[$listcount]['n_pcategory_name'] = "";
+    $data_newslist[$listcount]['n_comment_count'] = "";
+    $data_newslist[$listcount]['n_small_image'] = "";
+    $data_newslist[$listcount]['n_large_image'] = "";
+    $data_newslist[$listcount]['n_image_credit'] = "";
+    $data_newslist[$listcount]['n_updated_datetime'] = "";
+
+    $data_newslist[$listcount]['n_photo'] = $comman;
+    $data_newslist[$listcount]['n_video'] = $comman;
+    $data_newslist[$listcount]['n_polls'] = $comman;
+    $data_newslist[$listcount]['n_rating'] = $comman;
+    $data_newslist[$listcount]['n_magazine'] = $comman; 
+    
+    $n_widget[0]['type'] = "4";
+    $n_widget[0]['type_label'] = "watchlive";
+    $n_widget[0]['tilte'] = "India Today Conclave 2018 Live"; 
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/conclave.html";
+    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
+    $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
