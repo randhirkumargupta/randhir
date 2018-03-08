@@ -71,14 +71,16 @@ function hamburger_menu_data() {
   // Top Categories
   $result = hamburger_menu_listing(1);
   $top_cat['menu_label'] = 'Top Categories';
-  $all_menus = menu_list($result);
-  $top_cat['menu'] = $all_menus;
+  $order_s = 1;
+  $all_menus = menu_list($result, $order_s);
+  $top_cat['menu'] = $all_menus['data'];
 
   // Other Categories
+  $order_s = $all_menus['order_l'];
   $other_cat_result = hamburger_menu_listing(2);
   $other_cat['menu_label'] = 'Other Categories';
   $top_cat_menus = menu_list($other_cat_result);
-  $other_cat['menu'] = $top_cat_menus;
+  $other_cat['menu'] = $top_cat_menus['data'];
 
   $hamburger_menu['hamburger_menu'][0] = $top_cat;
   $hamburger_menu['hamburger_menu'][1] = $other_cat;
@@ -95,7 +97,7 @@ function hamburger_menu_data() {
  *
  * @return array
  */
-function menu_list($result) {
+function menu_list($result, $order_s = 1) {
   $all_menus = array();
   $total_menu = count($result);
   if ($total_menu > 0) {
@@ -110,7 +112,8 @@ function menu_list($result) {
           $data['title'] = "PHOTOS";
       }
       $menu['id'] = isset($data['section_id']) ? $data['section_id'] : "";
-      $menu['order'] = isset($data['order_id']) ? $data['order_id'] : "";
+      //$menu['order'] = isset($data['order_id']) ? $data['order_id'] : "";
+      $menu['order'] = $order_s;
       $menu['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
       $menu['type'] = isset($data['type']) ? $data['type'] : "";
       $menu['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
@@ -121,9 +124,13 @@ function menu_list($result) {
       $menu['has_subcategory'] = "$sub_cat_total";
       $menu['subcategory'] = $sub_cat['data'];
       $all_menus[] = $menu;
+      $order_s++;
     }
   }
-  return $all_menus;
+  $all_menus_data = array();
+  $all_menus_data['data'] = $all_menus;
+  $all_menus_data['order_l'] = $order_s;
+  return $all_menus_data;
 }
 
 /**
