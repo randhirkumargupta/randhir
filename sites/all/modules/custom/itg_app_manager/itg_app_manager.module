@@ -469,8 +469,9 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
     $form['#validate'][] = 'itg_app_manager_form_validate';
     if ($menu_form_id == 1) {
         $u_url = $base_url."/test-to-live/hamburger-menu";
+        $url_order = $base_url."/manage-order/hamburger-menu";
         $form['markup_v_1'] = array(
-            '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live hamburger-menu</a>",
+            '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live hamburger-menu</a>&nbsp;&nbsp;&nbsp;<a href='".$url_order."'>Update order of hamburger-menu</a>",
         );
         $form['markup_v'] = array(
             '#markup' => "<br><hr><br>" . hamburger_menu_list(),
