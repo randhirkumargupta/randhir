@@ -267,6 +267,12 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['test-to-live/hamburger-menu'] = array(
+        'title' => 'Test to live: hamburger-menu',
+        'page callback' => 'testtolive_hamburgermenu',        
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
@@ -286,6 +292,7 @@ function itg_app_manager_menu_form_function($menu_form_id) {
  * @return array
  */
 function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
+    global $base_url;
     $output = "";
     drupal_add_css(drupal_get_path('module', 'itg_app_manager') . '/css/itg_app_manager.css');
     if ($menu_form_id == '1') {
@@ -453,6 +460,10 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
     );
     $form['#validate'][] = 'itg_app_manager_form_validate';
     if ($menu_form_id == 1) {
+        $u_url = $base_url."/test-to-live/hamburger-menu";
+        $form['markup_v'] = array(
+            '#markup' => "<br><hr><br><a href=''>Update Live hamburger-menu</a>",
+        );
         $form['markup_v'] = array(
             '#markup' => "<br><hr><br>" . hamburger_menu_list(),
         );
@@ -4087,7 +4098,9 @@ function get_taxo_tid($name) {
     }
     return $tid;
 }
-
+/**
+ * itg_app_manager_form_validate
+ */
 function itg_app_manager_form_validate($form, &$form_state) {
   // Random example, if the title is 'test' throw an error 
     //p($form_state['values']);
@@ -4102,5 +4115,15 @@ function itg_app_manager_form_validate($form, &$form_state) {
       $title = $results[0]['title'];
       form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
     }
+}
+/**
+ * testtolive_hamburgermenu
+ */
+function testtolive_hamburgermenu(){
+    $jsondata = hamburger_menu_middleware_data();
+    $jsondata = json_encode($jsondata);    
+    variable_set('hamburger_menu_json', $jsondata);
+    drupal_set_message(t('Test-to-live hamburger-menu have been saved'));
+    drupal_goto('hamburger-menu-management');
 }
 
