@@ -4217,13 +4217,26 @@ function manage_order_hamburger_menu_form($form, &$form_state) {
     return $form;
 }
 
- /**
+/**
  * Submit callback for manage_order_hamburger_menu form
  * @param array $form
  * @param array $form_state
  */
 function manage_order_hamburger_menu_form_submit($form, &$form_state) {
     p($form_state);
+    $data = $form_state['values'];
+    foreach ($results_top as $data) {
+        
+    }
     
+}
+/**
+ * manage_order_hamburger_menu_form_validate
+ */
+function manage_order_hamburger_menu_form_validate($form, &$form_state) {  
+    $data = $form_state['values'];
+    if(count(array_unique($data))< count($data)) {        
+      form_set_error('order_id', t('More than one menu have same order value.'));
+    }
 }
 
