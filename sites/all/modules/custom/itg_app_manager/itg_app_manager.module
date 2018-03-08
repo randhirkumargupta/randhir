@@ -4223,8 +4223,8 @@ function manage_order_hamburger_menu_form($form, &$form_state) {
  * @param array $form_state
  */
 function manage_order_hamburger_menu_form_submit($form, &$form_state) {
-    p($form_state);
-    $data = $form_state['values'];
+    p($form_state['input']);
+    $data = $form_state['input'];
     foreach ($results_top as $data) {
         
     }
@@ -4234,9 +4234,7 @@ function manage_order_hamburger_menu_form_submit($form, &$form_state) {
  * manage_order_hamburger_menu_form_validate
  */
 function manage_order_hamburger_menu_form_validate($form, &$form_state) {  
-    $data = $form_state['input']; 
-    echo "<pre>";print_r(array_unique($data));echo "<pre>";
-    p($data);
+    $data = $form_state['input'];    
     if(count(array_unique($data))< (count($data))) {        
       form_set_error('order_id', t('More than one menu have same order value.'));
     }
