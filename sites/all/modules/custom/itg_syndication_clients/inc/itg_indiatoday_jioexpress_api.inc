@@ -36,7 +36,7 @@ function generate_jioexpress_feeds($result, $sid){
     global $base_url;
     $logo = theme_get_setting('logo');
     $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
-    $xml .= '<rss xmlns:atom10="http://www.w3.org/2005/Atom" version="2.0">';
+    $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today Latest News]]></title>';
     $xml .= '<description>India Today</description>';
