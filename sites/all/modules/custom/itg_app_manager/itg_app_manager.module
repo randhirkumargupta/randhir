@@ -4226,10 +4226,18 @@ function manage_order_hamburger_menu_form_submit($form, &$form_state) {
     //p($form_state['input']);
     $data = $form_state['input'];    
     foreach ($data as $key => $value){
-        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
-        echo $id; echo "<br>"; echo $key; echo "<br>"; echo $value;die();
+        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);        
+        if ($id > 0 && $value > 0) {
+            // uapdete query
+            db_update('itg_app_menu_content')
+                    ->fields(array(
+                        'order_id' => $value,
+                    ))->condition('id', $id, '=')->execute();
+        }
+        
     }
-    
+    drupal_set_message(t('hamburger-menu order have been saved'));
+    drupal_goto('hamburger-menu-management');
 }
 /**
  * manage_order_hamburger_menu_form_validate
