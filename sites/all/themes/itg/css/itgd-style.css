@@ -125,6 +125,7 @@
     height: 5px;
     width: 5px
 }
+.auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
 @media all and (max-width: 700px) {
     .section-news figure img {
         width: 100%
@@ -331,6 +332,7 @@ width: 100%;
 }
 @media only screen and (max-width: 1024px) {
 .itg-layout-container .itg-h321-section .droppable{height: 300px;}
+.auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
