@@ -194,6 +194,34 @@ function itg_app_api_resource() {
         ),
       ),
     ),
+      // horizontal_menu_dev custom resource declaration.....
+    'horizontal_menu_dev' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves horizontal_menu schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_rapid_api_horizontal_menu_dev',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              //'source' => array('param' => 'token'),
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
     // server_error_master custom resource declaration.....
     'server_error_master' => array(
       'operations' => array(
@@ -2643,8 +2671,21 @@ function itg_rapid_api_hamburger_menu_dev($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_horizontal_menu($token) {
+  $jsondata = variable_get('horizontal_menu_json');
+  $jsondata = json_encode($jsondata);
+  $obj = json_decode($jsondata, TRUE);
+  $return_obj = $obj;
+  return $return_obj;
+}
+/**
+ * Call back function for horizontal_menu API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_horizontal_menu_dev($token) {
   $redis_key = "devitgd_rapid_horizontal_menu_json";
-  $result_get = getRedis($redis_key);
+  //$result_get = getRedis($redis_key);
 
   //    if ($result_get['key_value'] != "") {
   //        $jsondata = $result_get['key_value'];
@@ -2653,7 +2694,7 @@ function itg_rapid_api_horizontal_menu($token) {
   $jsondata = horizontal_menu_middleware_data();
   $jsondata = json_encode($jsondata);
   $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  ///$result_set = setRedis($redis_key, $jsondata, $ttl);
   //}
 
   $obj = json_decode($jsondata, TRUE);
