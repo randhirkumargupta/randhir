@@ -136,7 +136,6 @@ function itg_bestcolleges_deatils() {
 	  $title = $term->metatags[LANGUAGE_NONE]['title']['value'];
 	  $description = $term->metatags[LANGUAGE_NONE]['description']['value'];
 	  $keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
-	  drupal_set_title($title);
 	  $html_head = array(
 		'description' => array(
 		  '#tag' => 'meta',

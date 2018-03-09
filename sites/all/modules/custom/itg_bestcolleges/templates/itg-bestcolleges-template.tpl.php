@@ -14,7 +14,7 @@ $arg = arg();
 <div class="col-md-12 col-sm-12 col-xs-12 left-panel arts">
 <!-- Slider Start-->
 <?php $term = taxonomy_term_load(arg(3));?>
-<h2><?php print t("INDIA'S BEST ") . strtoupper($term->name) . t(" COLLEGES ") .arg(1); ?></h2>
+<h1><?php print t("INDIA'S BEST ") . strtoupper($term->name) . t(" COLLEGES ") .arg(1); ?></h1>
 <div class="slider_outer1">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
