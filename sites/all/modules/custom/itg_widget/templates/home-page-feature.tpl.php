@@ -34,7 +34,7 @@
             }
           }
         ?>
-        <h2 class="<?php echo $pipelineclass; ?> home-page-feature-<?php echo $data[0]['nid'] ?>" <?php echo $data_tb_region_item;?>>
+        <h2 class="<?php echo $pipelineclass; ?> home-page-feature-<?php echo $data[0]['nid'] ?>">
           <?php
           
           if (function_exists('itg_common_get_smiley_title')) {
