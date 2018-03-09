@@ -8,6 +8,10 @@
  */
 
 /**
+ * Implements hook_apachesolr_modify_query().
+ */
+
+/**
  * Implements hook_init().
  */
 function itg_app_api_init() {
@@ -2574,6 +2578,15 @@ function time_interval() {
         '#size' => 20,
         '#maxlength' => 3,
         '#description' => t('Enter interval in days.'),
+    );
+    $form['live_tv_switch'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Live TV Switch'),
+        '#default_value' => variable_get('live_tv_switch'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('1=on, 0=off.'),
     );
     return system_settings_form($form);
     

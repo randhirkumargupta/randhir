@@ -44,18 +44,36 @@ function homePageJson() {
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
     //$data['data'][0] = $data_packagelist_india;
-    $data['data'][0] = $homePageJsonWidget_2;
-    $data['data'][1] = $homePageJsonWidget_3;
-    $data['data'][2] = $homePageJsonWidget_1;
-    $data['data'][3] = $data_topstories;
-    $data['data'][4] = $itg_rapid_home_movies_json;
-    $data['data'][5] = $itg_rapid_home_technology_json;
-    //$data['data'][3] = $business;
-    $data['data'][6] = $data_news_india;
-    $data['data'][7] = $itg_rapid_home_sports_json;
-    $data['data'][8] = $data_news_lifestyle;
-    $data['data'][9] = $data_news_world;
-    $data['data'][10] = $data_magazine;
+    $live_tv_switch = 0;
+    $live_tv_switch = variable_get('live_tv_switch');
+    if($live_tv_switch == 1){
+        $data['data'][0] = $homePageJsonWidget_2;
+        $data['data'][1] = $homePageJsonWidget_3;
+        $data['data'][2] = $homePageJsonWidget_1;
+        $data['data'][3] = $data_topstories;
+        $data['data'][4] = $itg_rapid_home_movies_json;
+        $data['data'][5] = $itg_rapid_home_technology_json;        
+        $data['data'][6] = $data_news_india;
+        $data['data'][7] = $itg_rapid_home_sports_json;
+        $data['data'][8] = $data_news_lifestyle;
+        $data['data'][9] = $data_news_world;
+        $data['data'][10] = $data_magazine;
+        
+    }
+    else{
+        $data['data'][0] = $homePageJsonWidget_2;
+        //$data['data'][1] = $homePageJsonWidget_3;
+        $data['data'][1] = $homePageJsonWidget_1;
+        $data['data'][2] = $data_topstories;
+        $data['data'][3] = $itg_rapid_home_movies_json;
+        $data['data'][4] = $itg_rapid_home_technology_json;        
+        $data['data'][5] = $data_news_india;
+        $data['data'][6] = $itg_rapid_home_sports_json;
+        $data['data'][7] = $data_news_lifestyle;
+        $data['data'][8] = $data_news_world;
+        $data['data'][9] = $data_magazine;
+    }
+    
     //$data['data'][6] = $data_poll;
 
     return $data;
