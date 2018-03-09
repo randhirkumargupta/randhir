@@ -405,4 +405,34 @@ function master_config_internal_data() {
   $data_list['data'] = $config_list_data;
   return $data_list;
 }
+/**
+ * horizontal_menu_listing_top
+ */
 
+function horizontal_menu_listing_top(){
+    $query = db_select('itg_app_menu_content', 'ham');
+    $query->fields('ham');
+    $query->condition('ham.menu_type_id', 2);
+    // only parent menus
+    $query->condition('ham.has_subcategory', 0);
+    $query->orderBy('order_id', 'ASC');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+/**
+ * hamburger_menu_listing_sub
+ */
+
+function hamburger_menu_listing_sub(){
+  $query = db_select('itg_app_menu_content', 'cl');
+  $query->fields('cl');
+  //$query->condition('cl.section_id', $cat_id);
+  // only parent menus
+  $query->condition('cl.has_subcategory', 1);
+  //$query->condition('cl.menu_type', 0, '!=');
+  $query->condition('cl.s_id', 0, '!=');
+  $query->condition('cl.menu_type_id', 2);
+  $query->orderBy('order_id', 'ASC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}

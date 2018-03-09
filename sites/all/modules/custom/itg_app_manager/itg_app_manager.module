@@ -287,10 +287,10 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
-    $items['manage-order/horizontal-menu-main'] = array(
-        'title' => 'Manage order - main section: horizontal-menu',
+    $items['manage-order/horizontal-menu'] = array(
+        'title' => 'Manage order : horizontal-menu',
         'page callback' => 'drupal_get_form',
-        'page arguments' => array('manage_order_horizontal_menu_main_form'),
+        'page arguments' => array('manage_order_horizontal_menu_form'),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
@@ -521,8 +521,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
         );
     } else {
         $u_url = $base_url."/test-to-live/horizontal-menu";
-        $url_order = $base_url."/manage-order/horizontal-menu";
-        $url_order = "";
+        $url_order = $base_url."/manage-order/horizontal-menu";        
         $form['markup_v_1'] = array(
             '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live horizontal-menu</a>&nbsp;&nbsp;&nbsp;<a href='".$url_order."'>Update order of horizontal-menu</a>",
         );
@@ -4557,4 +4556,112 @@ function testtolive_horizontalmenu(){
     //redis_key_delete($key);
     drupal_set_message(t('Test-to-live horizontal-menu have been saved'));
     drupal_goto('horizontal-menu-management');
+}
+
+/**
+ * manage_order_horizontal_menu callback function
+ * @param type $form
+ * @param int $form_state 
+ * @return array
+ */
+function manage_order_horizontal_menu_form($form, &$form_state) {
+    global $base_url;    
+    $results_top = horizontal_menu_listing_top();
+    $results_other = hamburger_menu_listing_sub();
+    //top cat ordring
+    $form['top-categories'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Top Categories'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+    );
+    foreach ($results_top as $data) {
+        if($data['section_id'] == '1206553'){
+            $title = "PROGRAMMES";
+        }
+        elseif($data['section_id'] == '1206552'){
+            $title = "VIDEOS";
+        }
+        elseif($data['section_id'] == '1208521'){
+            $title = "PHOTOS";
+        }
+        else{
+           $title = strtoupper($data['title']); 
+        }
+        $id = $data['id'];
+        $order = $data['order_id'];
+        $form['top-categories']['order_id_'.$id.''] = array(
+                '#type' => 'select',
+                '#title' => 'Manage Order of: '.$title.'',
+                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+                '#default_value' => $order,
+                '#required' => TRUE,                
+            );
+    }
+    //other cat ordring
+    $form['sub-categories'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Sub Categories'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+    );
+    foreach ($results_other as $data) {
+        if($data['section_id'] == '1206553'){
+            $title = "PROGRAMMES";
+        }
+        elseif($data['section_id'] == '1206552'){
+            $title = "VIDEOS";
+        }
+        elseif($data['section_id'] == '1208521'){
+            $title = "PHOTOS";
+        }
+        $title_sub = strtoupper($data['s_title']); 
+        $id = $data['id'];
+        $order = $data['order_id'];
+        $form['sub-categories']['order_id_'.$id.''] = array(
+                '#type' => 'select',
+                '#title' => 'Manage Order of: '.$title.' >> '.$title_sub.'',
+                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+                '#default_value' => $order,
+                '#required' => TRUE,                
+            );
+    }
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Update'),
+        '#submit' => array('manage_order_horizontal_menu_form_submit'),
+    );
+    return $form;
+}
+
+/**
+ * Submit callback for manage_order_horizontal_menu form
+ * @param array $form
+ * @param array $form_state
+ */
+function manage_order_horizontal_menu_form_submit($form, &$form_state) {
+    //p($form_state['input']);
+    $data = $form_state['input'];    
+    foreach ($data as $key => $value){
+        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);        
+        if ($id > 0 && $value > 0) {
+            // uapdete query
+            db_update('itg_app_menu_content')
+                    ->fields(array(
+                        'order_id' => $value,
+                    ))->condition('id', $id, '=')->execute();
+        }
+        
+    }
+    drupal_set_message(t('horizontal-menu order have been saved'));
+    drupal_goto('horizontal-menu-management');
+}
+/**
+ * manage_order_hamburger_menu_form_validate
+ */
+function manage_order_horizontal_menu_form_validate($form, &$form_state) {  
+    $data = $form_state['input'];    
+    if(count(array_unique($data))< (count($data))) {        
+      //form_set_error('order_id', t('More than one menu have same order value.'));
+    }
 }
