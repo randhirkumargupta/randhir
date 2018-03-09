@@ -170,10 +170,19 @@ function horizontal_menu_data($menu_type_id) {
       $menu_list['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
       $menu_list['icon_url'] = isset($data['icon_url']) ? $data['icon_url'] : "";
       $menu_list['is_new'] = isset($data['is_new']) ? $data['is_new'] : "";
-      $sub_cat = middleware_menu_subcat_list($data['section_id']);
-      $sub_cat_total = $sub_cat['total_sub_cat'];
-      $menu_list['has_subcategory'] = "$sub_cat_total";
-      $menu_list['subcategory'] = $sub_cat['data'];
+      
+      if($data['section_id'] == '1206553' || $data['section_id'] == '1208521' || $data['section_id'] == '1206552'){
+          $sub_cat = middleware_menu_subcat_list($data['section_id']);
+          $sub_cat_total = $sub_cat['total_sub_cat'];
+          $menu_list['has_subcategory'] = "$sub_cat_total";
+          $menu_list['subcategory'] = $sub_cat['data'];
+      }
+      else{
+          $subcategory = array();
+          $menu_list['has_subcategory'] = "0";
+          $menu_list['subcategory'] = $subcategory;
+      }
+      
       $all_menus[] = $menu_list;
     }
   }
@@ -219,7 +228,7 @@ function middleware_menu_data($menu_type_id) {
     $query->fields('ham');
     $query->condition('ham.menu_type_id', $menu_type_id);
     // only parent menus
-    $query->condition('ham.s_id', 0);
+    $query->condition('ham.has_subcategory', 0);
     $query->orderBy('order_id', 'ASC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -243,16 +252,21 @@ function middleware_menu_subcat_list($cat_id) {
   $query->fields('cl', array('menu_type', 'section_id', 's_title', 'order_id', 'is_new'));
   $query->condition('cl.section_id', $cat_id);
   // only parent menus
-  $query->condition('cl.has_subcategory', 0);
-  $query->condition('cl.menu_type', 0, '!=');
+  $query->condition('cl.has_subcategory', 1);
+  //$query->condition('cl.menu_type', 0, '!=');
   $query->condition('cl.s_id', 0, '!=');
   $query->condition('cl.menu_type_id', 2);
   $query->orderBy('order_id', 'ASC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $total_sub_cat = count($result);
-
+ // one static features sub-cat..
+      $sub_cat['s_id'] = "0";
+      $sub_cat['s_title'] = "FEATURED";
+      $sub_cat['s_order'] = "1";
+      $sub_cat['s_is_new'] = "0";
+      $all_sub_cat[] = $sub_cat;
   if ($total_sub_cat > 0) {
-    foreach ($result as $cat_data) {
+    foreach ($result as $cat_data) {        
       $sub_cat['s_id'] = $cat_data['section_id'];
       $sub_cat['s_title'] = $cat_data['s_title'];
       $sub_cat['s_order'] = $cat_data['order_id'];
@@ -261,7 +275,7 @@ function middleware_menu_subcat_list($cat_id) {
     }
   }
 
-  $sub_cat_list['total_sub_cat'] = $total_sub_cat;
+  $sub_cat_list['total_sub_cat'] = $total_sub_cat + 1;
   $sub_cat_list['data'] = $all_sub_cat;
   return $sub_cat_list;
 }
