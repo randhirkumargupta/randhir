@@ -55,7 +55,7 @@ function itg_remove_flooded_nodes(){
 
 function remove_old_widgets_from_table(){
   $widget_to_be_delete = array('top_stories_widget', 'trending_videos_widget', 'most_popular_widget', 'top_takes_video_widget', 'watch_right_now_widget', 'home_page_feature_widget', 'photo_carousel_list_widget', 'video_carousel_list_widget', 'we_may_suggest_widget', 'anchors_listing_widget');
-  foreach ($widget_to_be_delete as $key => $value) {p($value);
+  foreach ($widget_to_be_delete as $key => $value) {
     itg_widget_delete_old_data_by_limit($value);
   }
 }
