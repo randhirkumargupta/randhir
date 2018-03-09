@@ -4,10 +4,8 @@
  * Function to delete flooded node from itg_widget_order table
  */
 function itg_remove_flooded_nodes(){
-  $time_start = microtime(true); 
-  
+  $time_start = microtime(true);   
   $keep_row = (int) variable_get('section_widget_keep_row_count', 100);
-  $content_types = array('breaking_news', 'photogallery', 'story', 'videogallery');
   $deleted_cat_id = array();
   
   //Delete From Table itg_widget_order
@@ -52,4 +50,12 @@ function itg_remove_flooded_nodes(){
   watchdog("delete_widget_table", $params);
   //$to_mail = 'shashank.singh@aajtak.com,randhirkumar.gupta@aajtak.com,vishal.kamal@aajtak.com';
   //drupal_mail('itg_miscellaneous', 'itg_miscellaneous_delete_widget_table', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
+}
+
+
+function remove_old_widgets_from_table(){
+  $widget_to_be_delete = array('top_stories_widget', 'trending_videos_widget', 'most_popular_widget', 'top_takes_video_widget', 'watch_right_now_widget', 'home_page_feature_widget', 'photo_carousel_list_widget', 'video_carousel_list_widget', 'we_may_suggest_widget', 'anchors_listing_widget');
+  foreach ($widget_to_be_delete as $key => $value) {p($value);
+    itg_widget_delete_old_data_by_limit($value);
+  }
 }
