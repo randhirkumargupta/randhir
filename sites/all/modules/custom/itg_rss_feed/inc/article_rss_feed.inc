@@ -173,8 +173,7 @@ function article_rss_feed_google_newsstand() {
  */
 function get_article_google_stand_item_rss($section_id, $term_name, $section_url) {
   global $base_url;
-  $tid_list = array();
-  $tid = $section_id;
+  $tid = ($section_id) ? $section_id : '1206723';
   $tid_list = array();
   if (!empty($tid)) {
     $tid_list[] = $tid;
@@ -187,7 +186,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
 
   if (!empty($tid)) {
     $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-  }
+  } 
   $term_tree_count = count($term_tree);
   if ($term_tree_count) {
     foreach ($term_tree as $key => $value) {
