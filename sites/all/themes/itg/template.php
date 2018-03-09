@@ -198,7 +198,9 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score')) {
+  //tribute-to-sridevi: nid-1144219
+  
+  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score')) {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
@@ -324,6 +326,7 @@ function itg_preprocess_html(&$vars) {
   if($arg[0] == 'topic' && !empty($arg[1])) {
     $search_str = urldecode($arg[1]);
     $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
     $vars['head_title'] = "$search_str News, Videos, Photos and Magazines | " . variable_get('site_name');
   }
 }
@@ -350,7 +353,7 @@ function itg_html_head_alter(&$head_elements) {
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
-    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keywords';
   }
 
   if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
@@ -363,7 +366,7 @@ function itg_html_head_alter(&$head_elements) {
           '#tag' => 'meta',
             
           '#attributes' => array(
-            'name' => 'news_keyword',
+            'name' => 'news_keywords',
             'content' => $meta_keywords
           ),
         );

@@ -608,7 +608,7 @@ if (!empty($content)):
                 ?>
                 <div class="stryimg" >
                   <?php if($activate_live_tv) { ?>
-                        <div class="story_itg_live_tv">
+                        <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
                         </div>
                 <?php } else {
@@ -829,10 +829,11 @@ if (!empty($content)):
                 $limit = 300;
               }
               if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {
+                /*
                 ?>
                 <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
-                <?php } ?>
-              <div class="ad-blocker"></div>
+                <?php */ } ?>
+              <div class="ad-blocker" style="display: none;"></div>
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
@@ -1257,7 +1258,9 @@ if (!empty($content)):
             ?>
             <div class="c_ques"><?php print $question; ?></div>
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>                       
+            <!-- <div id="vuukle_div"></div>-->
+            <div id="vuukle-comments"></div>
+            <div class='vuukle-powerbar'></div>
             <?php
             if (function_exists('vukkul_view')) {
                   vukkul_view();

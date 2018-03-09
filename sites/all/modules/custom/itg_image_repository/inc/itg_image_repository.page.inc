@@ -166,7 +166,9 @@ function itg_image_repository_upload_submit($form, &$form_state) {
   }
 
   $form_state['redirect'] = FALSE;
+  // pr($form_state['build_info']['args']);
   $itg_image_repository = & $form_state['build_info']['args'][0]['itg_image_repository'];
+  // die;
   // Need to provide extension validatior, otherwise file_save_upload uses the default.
   $validators['file_validate_extensions'] = array($itg_image_repository['extensions'] === '*' ? NULL : $itg_image_repository['extensions']);
   $validators['itg_image_repository_validate_all'] = array(&$itg_image_repository);
@@ -292,6 +294,7 @@ function itg_image_repository_validate_all($file, $itg_image_repository) {
   $errors = itg_image_repository_validate_filesize($file, $itg_image_repository['filesize']);
   //image resolution validation
   if (empty($errors) && preg_match('/\.(png|gif|jpe?g)$/i', $file->filename)) {
+    $itg_image_repository['dimensions'] = ($itg_image_repository['dimensions'] == '1200x1200') ? '6000x6000' : $itg_image_repository['dimensions']; 
     $errors = array_merge($errors, file_validate_image_resolution($file, $itg_image_repository['dimensions']));
   }
   //directory quota validation

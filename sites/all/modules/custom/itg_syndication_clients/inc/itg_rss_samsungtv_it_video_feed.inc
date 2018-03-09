@@ -335,7 +335,7 @@ function itg_generate_samsung_json_feed_newslist(){
     $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
     $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
     $json['data']['news'][] = array(
-      'n_id' => $value['nid'],
+      'n_id' => (int)$value['nid'],
       'n_title' => $value['title'],
       'n_short_desc' => $kicker_text,
       'n_small_image' => $medium_img["imag_url"],
@@ -343,6 +343,9 @@ function itg_generate_samsung_json_feed_newslist(){
     );
   }
   $json_output = json_encode($json);
+  $json_output = utf8_encode($json_output);
+  $json_output = fixBadUnicodeForJson($json_output);
+  //$json_output=mb_convert_encoding($json_output,'utf-16');
   $json_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $json_path . 'newslist.json';
   $fp = fopen($file_path, "w");
@@ -382,6 +385,9 @@ function itg_generate_samsung_json_feed_video_newslist(){
       'url' => 'newslist.json'
     );
   $json_data = json_encode($json);
+  $json_data = utf8_encode($json_data);
+  $json_data = fixBadUnicodeForJson($json_data);
+  //$json_data=mb_convert_encoding($json_data,'utf-16');
   $xml_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $xml_path . 'categorylist.json';
   $fp = fopen($file_path, "w");
@@ -495,7 +501,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       
       $video_url = str_replace(',156,', ',', $video_url);
       $jsondetail['data']['video'][] = array(
-        'v_id' => $nid,
+        'v_id' => (int)$nid,
         'v_title' => $value['title'],
         'v_credit' => FRONT_URL,
         'v_byline' => $byline,
@@ -510,10 +516,20 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       
     }
     $json_data1 = json_encode($jsondetail);
+    $json_data1 = utf8_encode($json_data1);
+    $json_data1 = fixBadUnicodeForJson($json_data1);
+    //$json_data1=mb_convert_encoding($json_data1,'utf-16');
     $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos/';
     $file_path1 = $xml_path1 . $filename;
     $fp1 = fopen($file_path1, "w");
     fwrite($fp1, $json_data1);
     fclose($fp1);
   }
+}
+function fixBadUnicodeForJson($str) {
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3")).chr(hexdec("$4"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
+    return $str;
 }

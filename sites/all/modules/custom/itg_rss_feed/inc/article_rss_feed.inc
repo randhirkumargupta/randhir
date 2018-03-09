@@ -173,8 +173,7 @@ function article_rss_feed_google_newsstand() {
  */
 function get_article_google_stand_item_rss($section_id, $term_name, $section_url) {
   global $base_url;
-  $tid_list = array();
-  $tid = $section_id;
+  $tid = ($section_id) ? $section_id : '1206723';
   $tid_list = array();
   if (!empty($tid)) {
     $tid_list[] = $tid;
@@ -187,7 +186,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
 
   if (!empty($tid)) {
     $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-  }
+  } 
   $term_tree_count = count($term_tree);
   if ($term_tree_count) {
     foreach ($term_tree as $key => $value) {
@@ -198,22 +197,22 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-  //$query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_reporter', 'sr', 'sr.entity_id=n.nid');
   $query->leftJoin('node', 'reporter', 'sr.field_story_reporter_target_id=reporter.nid');
-
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('reporter', array('title'));
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
-  //$query->fields('eli', array('field_story_extra_large_image_fid'));
+  $query->fields('eli', array('field_story_extra_large_image_fid'));
   $query->fields('kt', array('field_story_kicker_text_value'));
   $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
-  if (!empty($section_id)) {
+  $query->condition('n.nid', '1144609', '!=');
+  if (!empty($tid)) {
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $tid_list, 'IN');
   }
@@ -224,25 +223,27 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     if (is_lock_story_rss_feed($resvalue['nid'])) {
       continue;
     }
-    $title = $resvalue['title'];
+    $title = stripInvalidXml($resvalue['title']);
     $nid = $resvalue['nid'];
-    $body_value = $resvalue['body_value'];
+    $body_value = stripInvalidXml($resvalue['body_value']);
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
     $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
-    //$image_data = get_thumbnail_by_fid($field_story_extra_large_image_fid);
-    $reporter = (isset($resvalue['reporter_title']) ? $resvalue['reporter_title'] : '');
-    //$img_url = $image_data->imageurl;
+    $reporter = isset($resvalue['reporter_title']) ? $resvalue['reporter_title'] : '';
     $created = $resvalue['created'];
-    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $field_story_kicker_text_value = stripInvalidXml($resvalue['field_story_kicker_text_value']);
     date_default_timezone_set("GMT");
     $created_date = date("D, d M Y H:i:s e", $created);
+    $file_data = get_image_info_by_fid($field_story_extra_large_image_fid);
+    $img_url = $file_data['imag_url'];
+    $caption = $file_data['caption'];
+    $figure  = "<figure><img src='".$img_url."' width='505' /><figcaption>". $caption ."</figcaption></figure>";
     $output .= '<item><title><![CDATA[' . $title . ']]></title>';
     $output .= '<link><![CDATA[' . $url . ']]></link>';
     $output .= '<guid>' . $nid . '</guid>';
     $output .= '<pubDate>' . $created_date . ' GMT</pubDate>';
     $output .= '<dc:creator>' . $reporter . '</dc:creator>';
     $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
-    $output .= '<content:encoded><![CDATA[' . $body_value . ']]></content:encoded>';
+    $output .= '<content:encoded><![CDATA[' . $figure . $body_value . ']]></content:encoded>';
     $output .= '</item>';
   }
   return $output;

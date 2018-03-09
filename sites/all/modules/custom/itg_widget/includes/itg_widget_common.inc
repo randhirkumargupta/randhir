@@ -1929,7 +1929,7 @@ function itg_widget_anchor_landing_menu($nid) {
     $cat_query->fields('ttd', array('name'));
     $cat_query->condition('video_anchor.field_video_anchor_target_id', $nid, '=');
     $cat_query->condition('cat.bundle', 'videogallery', '=');
-    $cat_query->condition('th.parent', 0, '=');
+    $cat_query->condition('th.parent', variable_get('program_category_id_for_programmes'), '=');
     $categories_of_anchor = $cat_query->execute();
     foreach ($categories_of_anchor as $cate) {
         $result[$cate->field_story_category_tid] = $cate->name;
@@ -2870,7 +2870,7 @@ function itg_widget_node_insert($node) {
                         $single_insert_query->execute();
                         //Delete Logic
                         // As we do not want to keep more data in table.
-                        _delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
+                        //_delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
                         
                         $single_insert_query_all = db_insert('itg_widget_order_section')->fields(
                                 array(
@@ -2896,7 +2896,7 @@ function itg_widget_node_insert($node) {
                         $single_insert_query_all->execute();
                         //Delete Logic
                         // As we do not want to keep more data in table.
-                        _delete_old_data_from_section_widget('itg_widget_order_section', $category['tid'], $node->type);
+                        //_delete_old_data_from_section_widget('itg_widget_order_section', $category['tid'], $node->type);
                     }
                 }
             }

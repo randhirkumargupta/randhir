@@ -141,14 +141,8 @@ function get_top_story_for_zupit() {
 function client_samsung_video_detail() {
   $output_array = array();
   $nid = arg(2);
-  if ($_SERVER['HTTP_USER_AGENT'] == 'Tizen') {
-    $output_array['status_code'] = "1";
-    $output_array['status_message'] = "customised_message";
-  }
-  else {
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "";
-  }
+  $output_array['status_code'] = "1";
+  $output_array['status_message'] = "Video";
   $node = node_load($nid);
   $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
   $v_credit = itg_common_get_node_title($byline_id);
@@ -161,10 +155,10 @@ function client_samsung_video_detail() {
 
   $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
   $videotag = video_detail_formats($nid, $source_type);
-  $video_data = get_itg_video_transcoding($nid);
+  $video_transcoding_data = get_itg_video_transcoding($nid);
   $duration = '';
-  if (count($video_data) > 0) {
-    $duration = $video_data[0]->video_duration;
+  if (count($video_transcoding_data) > 0) {
+    $duration = $video_transcoding_data[0]->video_duration;
   }
   if (!empty($videotag['migrated'])) {
     $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -187,6 +181,7 @@ function client_samsung_video_detail() {
     $inter_video_details = internal_video_bitrate_data($video_id);
     $bitrate_url = $inter_video_details['bitrate_url'];
   }
+  $bitrate_url = str_replace(',156,', ',', $bitrate_url);
   $pub_date = get_content_publish_date($nid);
   if (!empty($pub_date)) {
     $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
@@ -204,23 +199,20 @@ function client_samsung_video_detail() {
   $created_date = date("Y-m-d H:i:s", $node->created);
   $video_data['id'] = $node->nid;
   $video_data['title'] = html_entity_decode($node->title);
-  $video_data['video']['v_id'] = $node->nid;
-  $video_data['video']['v_title'] = html_entity_decode($node->title);
-  $video_data['video']['v_credit'] = FRONT_URL;
-  $video_data['video']['v_byline'] = $byline;
-  $video_data['video']['v_desc'] = $video_description;
-  $video_data['video']['v_small_image'] = $video_small_image;
-  $video_data['video']['v_large_image'] = $video_large_image;
-  $video_data['video']['v_download_url'] = $bitrate_url;
-  $video_data['video']['v_updated_datetime'] = $created_date;
-  $video_data['video']['v_duration'] = $duration;
-  $video_data['video']['v_show_ad'] = '0';
-  if ($_SERVER['HTTP_USER_AGENT'] == 'Tizen') {
-    $video_data = $video_data;
-  }
-  else {
-    $video_data = array();
-  }
+ 
+  $video_detail['v_id'] = $node->nid;
+  $video_detail['v_title'] = html_entity_decode($node->title);
+  $video_detail['v_credit'] = FRONT_URL;
+  $video_detail['v_byline'] = $byline;
+  $video_detail['v_desc'] = $video_description;
+  $video_detail['v_small_image'] = $video_small_image;
+  $video_detail['v_large_image'] = $video_large_image;
+  $video_detail['v_download_url'] = $bitrate_url;
+  $video_detail['v_updated_datetime'] = $created_date;
+  $video_detail['v_duration'] = $duration;
+  $video_detail['v_show_ad'] = '0';
+  
+  $video_data['video'][] = $video_detail;
   $output_array['data'] = $video_data;
   $jsondata = drupal_json_output($output_array);
   return $jsondata;

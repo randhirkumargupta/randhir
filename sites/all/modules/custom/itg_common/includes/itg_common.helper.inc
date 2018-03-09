@@ -221,7 +221,7 @@ function get_email_by_roll($id) {
   $query = db_select('users', 'u');
   $query->fields('u', array('mail'));
   $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-  $query->condition('ur.rid', $id, IN);
+  $query->condition('ur.rid', $id, 'IN');
   $query->condition('u.status', 1);
   $result = $query->execute();
 

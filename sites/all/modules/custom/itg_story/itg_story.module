@@ -291,6 +291,10 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
         $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
       }
+      // Reporter unique id in case of issue based story created from XML Upload.
+      if (isset($form['#node']->nid) && empty($form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+	    $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-'.$form['#node']->nid;
+      }
       if ($user->uid != 1) {
         $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
         $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
@@ -1197,7 +1201,8 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       preg_match_all('/<img[^>]*>/s', $right_emoji, $rightimages);
       $right_emoji_html = itg_get_emoji_amp_html($rightimages[0]);
 
-      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;
+      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;      
+      $node->body[LANGUAGE_NONE][0]['value'] = itg_story_ad_code_in_content($node->body[LANGUAGE_NONE][0]['value']);
     }
     if ($view_mode == 'full' && ($theme == FRONT_THEME_NAME)) {
       $body_text = $node->body[LANGUAGE_NONE][0]['value'];
@@ -1418,4 +1423,43 @@ function itg_story_dropdown_supplement($issue_date){
     $data[$record['field_issue_supplement_target_id']] = $record['ns_title'];
   }
   return $data;
+}
+
+/**
+ * Function place ad code in content after 250
+ * @param string $content
+ * @return string
+ */
+function itg_story_ad_code_in_content($content) {
+  $ad_code = variable_get('place_amp_ad_within_content');
+  if (empty($ad_code)) {
+    $content;
+  }
+  $content = html_entity_decode($content);
+  $content_parts = explode(' ', $content);
+  $ad_code_after = 250;
+  
+  if(count($content_parts) < $ad_code_after){
+		$content = implode(' ', $content_parts);
+		$content .= $ad_code;
+		return $content;
+	}
+  
+  foreach ($content_parts as $key => $value) {
+    if ($key <= $ad_code_after) {
+      $before_content[] = $value;
+    }
+    else {
+      $after_content[] = $value;
+    }
+  }
+	
+	$before_content = implode(' ', $before_content);
+  $after_content = implode(' ', $after_content);
+  $after_content_arr = explode('</p>', $after_content);
+  $ad_code = '<p class="custom-amp-ad">' . $ad_code;
+  array_splice($after_content_arr, 1, 0, $ad_code);
+  $after_content = implode('</p>', $after_content_arr);
+  $content = $before_content . $after_content;
+  return $content;
 }

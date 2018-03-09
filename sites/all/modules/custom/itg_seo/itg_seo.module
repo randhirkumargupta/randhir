@@ -306,7 +306,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
 
   //for Magazine Story
   if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
-    $section_link .= l('Magazine', 'magazine');
+    $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'.l('<span itemprop="title">Magazine</span>', "magazine", array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))).'</div>';
   }
 
   if (!empty($id)) {
@@ -435,7 +435,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       '#type' => 'html_tag',
       '#tag' => 'meta',
       '#attributes' => array(
-        'name' => 'news_keyword',
+        'name' => 'news_keywords',
         'content' => $meta_keywords
       ),
     );
@@ -488,7 +488,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
           '#type' => 'html_tag',
           '#tag' => 'meta',
           '#attributes' => array(
-            'name' => 'news_keyword',
+            'name' => 'news_keywords',
             'content' => $meta_keyword,
           ),
           '#weight' => -999,

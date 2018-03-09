@@ -1,6 +1,20 @@
+<?php
+$byline_title = '';
+if(!empty($node->field_story_reporter)){
+	$target_nid = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
+	$byline_title = itg_common_get_node_title($target_nid);
+	$byline_title = trim($byline_title);
+}
+?>
 <div class="black-box">
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
-   <?php
+  <div class="byline_date">
+      <?php if (!empty($byline_title)) { ?>
+      <span class="video-byline"><?php print $byline_title; ?></span>
+      <?php } ?>
+      <span class="video-ppdate"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
+  </div> 
+  <?php
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
     if($source_type != 'migrated') { ?>
     <div class="amp-photo-slider">
@@ -65,7 +79,7 @@
             <?php
             }
             ?>
-                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                    <div class="video-caption"><p><?php print $video_value->field_video_title_value;?></p></div>
                     <div class="video_dec_amp video_dec_<?php print $video_value->video_id; ?>" ><?php print ucfirst($description); ?></div>
                     
                 </div>
@@ -107,8 +121,10 @@
                 
                 if(strpos($video_value->field_migrated_video_url_value, 'https') === FALSE) {
                  $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                 $video_id = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net", $video_id);
                 } else {
                  $video_id = $video_value->field_migrated_video_url_value;
+                 $video_id = str_replace("medias3d.intoday.in","indiatoday-pdelivery.akamaized.net", $video_id);
                 }
                 ?> 
               <div class="slide"> <div class="photo-slide">
@@ -119,7 +135,7 @@
                        controls>
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
-                    <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                    <div class="video-caption"><p><?php print $video_value->field_video_title_value;?></p></div>
                     <div class="video_dec_amp video_dec_<?php print $video_value->video_id; ?>" ><?php print ucfirst($description); ?></div>
                     
                 </div>

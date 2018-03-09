@@ -3,35 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<script type='text/javascript'>
-  var _comscore = _comscore || [];
-  _comscore.push({ c1: "2", c2: "8549097" });
-  (function() {
-    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
-    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
-    el.parentNode.insertBefore(s, el);
-  })();
-</script>
-<noscript>
-<img src="http://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
-</noscript>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-795349-17', 'auto');
-  ga('send', 'pageview');
-
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="A Nationwide Poll For The Best Adventure, Heritage, Mountains, Beaches & Wildlife Destinations Across The Country. So Come Forth & Vote Today." />
-<meta name="keywords" content="India Today State of States Awards, State of States Awards, India Today Tourism Awards, ABOUT THE TOURISM AWARDS, India Today Events" />
 <title>India Today Tourism Awards</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
-<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/css/swiper.min.css" type="text/css">
-<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="https://smedia2.intoday.in/indiatoday/tourism/css/swiper.min.css" type="text/css">
+<link rel="stylesheet" href="https://smedia2.intoday.in/indiatoday/tourism/css/bootstrap.min.css" type="text/css">
 <style type="text/css">
 .video_ltop_icon {
 	margin-left: -1px !important;
@@ -44,12 +20,12 @@
 </style>
 
 <!--[if lt IE 9]>
-      <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/js/html5shiv.min.js"></script>
-      <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/js/respond.min.js"></script>
+      <script src="https://smedia2.intoday.in/indiatoday/tourism/js/html5shiv.min.js"></script>
+      <script src="https://smedia2.intoday.in/indiatoday/tourism/js/respond.min.js"></script>
 <![endif]-->
 
-<link rel="stylesheet" href="https://smedia2.intoday.in/indiatoday/tourism-2018/css/style.css" type="text/css" >
-<link rel="stylesheet" href="https://smedia2.intoday.in/indiatoday/tourism-2018/css/responsive.css" type="text/css">
+<link rel="stylesheet" href="https://smedia2.intoday.in/indiatoday/tourism/css/style.css" type="text/css" >
+<link rel="stylesheet" href="https://smedia2.intoday.in/indiatoday/tourism/css/responsive.css" type="text/css">
 <script type="text/javascript">
  var zmt_mtag;
 function zd_get_placements(){
@@ -68,12 +44,13 @@ function zd_get_placements(){
 } 
 </script>
 <script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>
-</head><body>
+</head>
+<body>
 <header>
   <div class="topBlackBg">
     <div class="container">
       <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-4"> <a href="index.html" class="topLogo"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/logo.png" alt="" /></a> </div>
+        <div class="col-xs-3 col-sm-3 col-md-2 col-lg-4"> <a href="index.html" class="topLogo"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/logo.png" alt="" /></a> </div>
         <div class="col-xs-9 col-sm-9 col-md-10 col-lg-8">
           <div class="topAd728x90"> 
             <!-- begin ZEDO for channel: SOS_TOP_728x90, Publisher: default, Ad Dimension: Super Banner-728x90 -->
@@ -91,9 +68,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
           </div>
           <div class="navSocialShare IpadsocIcon">
             <ul>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/facebook.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/twitter.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/gplus.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/facebook.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/twitter.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/gplus.png" alt="" /></a></li>
             </ul>
           </div>
           <!--end ipad social icon --> 
@@ -107,34 +84,26 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   <nav>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
           <div id="navSwipeSlider" class="navListSec">
             <div class="swiper-container">
               <ul class="navigation swiper-wrapper">
                 <li class="swiper-slide" onclick="window.open('index.html','_self')"><a href="javascript:void(0)">Home</a></li>
                 <li class="swiper-slide" onclick="window.open('awards.html','_self')"><a href="javascript:void(0)">Awards</a></li>
-                <!--<li class="swiper-slide"><a href="#">Awards</a></li> --> 
+                <!--<li class="swiper-slide"><a href="#">state</a></li> -->
+                <!--<li class="swiper-slide"><a href="#">Awards</a></li> -->
                 <!--  <li class="swiper-slide"><a href="sponsors.html">sponsors</a></li>-->
               </ul>
             </div>
           </div>
-          <!--<div class="topRightNav">
-            <ul>
-              <li><a href="javascript:void(0)">Flashback</a>
-                <ul>
-                  <li><a href="https://www.indiatoday.in/tourismawards/" target="_blank">Flashback 2017</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div> -->
         </div>
         <div class="hidden-xs  hidden-sm  col-md-2 col-lg-2">
           <div class="navSocialShare">
             <ul>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/facebook.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/twitter.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/gplus.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/rss.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/facebook.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/twitter.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/gplus.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/rss.png" alt="" /></a></li>
             </ul>
           </div>
           <!--end destop icon --> 
@@ -221,18 +190,17 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
       </div>
     </div>
     <!--end ipad ad code -->
-    
     <div class="row">
       <div class="col-xs-12 col-md-8 col-lg-8 pad30">
-        <iframe id="quiz_iframe" width="100%"  height="1400" scrolling="no"   src="https://aajtak.intoday.in/quiz_app/quiz.php?site_id=2&event_id=1" frameborder="0" allowfullscreen></iframe>
-        
+	  <iframe id="quiz_iframe" width="100%"  src="https://aajtak.intoday.in/quiz_app/quiz_tourism.php?act=confirmation&key=<?php echo $_GET['key'];?>" frameborder="0" allowfullscreen  onLoad="autoResize();"></iframe>
+     
         <!--end intro --> 
         
       </div>
       <!--end left side -->
       
       <div class="col-xs-12 col-md-4 col-lg-4">
-        <div class="RightConatiner bordtop">
+        <div class="RightConatiner pad30 bordtop">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
               <div class="rightAdCode desktopAdd">
@@ -276,8 +244,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             </div>
             <!--end right ad code -->
             
-            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12"> 
-              <!--<div class="twiRightArea"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/twitter-placeholder.png" alt=""> </div>--> 
+            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+              <div class="twiRightArea"> <img src="https://smedia2.intoday.in/indiatoday/tourism/images/twitter-placeholder.png" alt=""> </div>
             </div>
           </div>
         </div>
@@ -292,7 +260,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   <section class="blackBg">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
           <div class="topAd728x90 bootom"> 
             <!-- begin ZEDO for channel: SOS_Bottom_728x90 1, Publisher: default, Ad Dimension: Super Banner-728x90 -->
             <div id="zt_142368_7" style="display:show"> 
@@ -325,10 +293,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
           <div class="navSocialShare">
             <ul>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/facebook.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/twitter.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/gplus.png" alt="" /></a></li>
-              <li><a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/images/rss.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/facebook.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/twitter.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/gplus.png" alt="" /></a></li>
+              <li><a href="#"><img src="https://smedia2.intoday.in/indiatoday/tourism/images/rss.png" alt="" /></a></li>
             </ul>
           </div>
         </div>
@@ -341,23 +309,17 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 </footer>
 <!--end footer --> 
 
-<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/js/jquery-min.js"></script> 
-<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/js/swiper.js"></script> 
-<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/tourism/js/custom.js"></script> 
-<script type="text/javascript">
-function receiveMessage(e){
- // console.log("Received Message: " + e);
-//console.log(e.originalEvent.origin);
-console.log(e.originalEvent.origin);
-  if (e.originalEvent.origin === 'http://aajtak.intoday.in') {
-     $("html, body").animate({
-        scrollTop : 0
-    }, "fast");
-  }
-}
-$(window).bind("message", receiveMessage);
-
-</script>
+<script type="text/javascript" src="https://smedia2.intoday.in/indiatoday/tourism/js/jquery-min.js"></script> 
+<script type="text/javascript" src="https://smedia2.intoday.in/indiatoday/tourism/js/bootstrap.min.js"></script> 
+<script type="text/javascript" src="https://smedia2.intoday.in/indiatoday/tourism/js/swiper.js"></script> 
+<script type="text/javascript" src="https://smedia2.intoday.in/indiatoday/tourism/js/custom.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+function autoResize(){
+    $('#quiz_iframe').height($('#quiz_iframe').contents().height());
+}
+(function() {
+	$('#quiz_iframe').css('height', $(window).height()+'px');
+});
+</script>

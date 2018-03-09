@@ -14,7 +14,7 @@ $arg = arg();
 <div class="col-md-12 col-sm-12 col-xs-12 left-panel arts">
 <!-- Slider Start-->
 <?php $term = taxonomy_term_load(arg(3));?>
-<h2><?php print t("INDIA'S BEST ") . strtoupper($term->name) . t(" COLLEGES ") .arg(1); ?></h2>
+<h1><?php print t("INDIA'S BEST ") . strtoupper($term->name) . t(" COLLEGES ") .arg(1); ?></h1>
 <div class="slider_outer1">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -298,8 +298,9 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
           <div class="c_ques"><?php print $question; ?></div>
           <div class="vukkul-comment">
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>
-
+            <!--<div id="vuukle_div"></div>-->
+            <div id="vuukle-comments"></div>
+            <div class='vuukle-powerbar'></div>
             <?php
             if (function_exists('vukkul_view')) {
               vukkul_view();

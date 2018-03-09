@@ -24,8 +24,9 @@ if ($config_name == 'vukkul' && in_array('comment_box', $config)) {
   ?>
   <div class="vukkul-comment">
       <div id="vuukle-emote"></div>
-      <div id="vuukle_div"></div>
-
+      <!-- <div id="vuukle_div"></div> -->
+      <div id="vuukle-comments"></div>
+      <div class='vuukle-powerbar'></div>
       <?php
       if (function_exists('vukkul_view')) {
         vukkul_view();

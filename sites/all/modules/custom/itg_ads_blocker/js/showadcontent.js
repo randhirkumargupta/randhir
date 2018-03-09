@@ -15,6 +15,7 @@ jQuery(document).ready(function () {
 
 
 function openPopup() {
+    jQuery(".ad-blocker").show();
     jQuery(".description").hide();
     jQuery(".buzz-section").hide();
     jQuery('.view-photo-landing-slider').hide();
@@ -35,6 +36,7 @@ function openPopup() {
         {
            jQuery(".ad-blocker").html(result);
            if(jQuery('body').hasClass('node-type-videogallery')){
+               jwplayer('videoplayer').remove();
                jQuery('.node-type-videogallery').find('#content').prepend('<div class="ad-blocker">' + result + '</div>');
            }
            if(jQuery('body').hasClass('node-type-photogallery')){

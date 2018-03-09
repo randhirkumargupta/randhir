@@ -175,6 +175,7 @@ function get_ola_feed_videos_array() {
     '1208898' => 'person_of_interest.xml',
     '1208061' => 'the_long_story.xml',
     '1208898' => 'person_of_interest.xml',
+    '1207303' => 'movies.xml',
   );
   return $cabbytabby_feed_videos;
 }
@@ -557,4 +558,16 @@ function get_samsung_video_category(){
     'videolist-auto-today.json' => 1207978, 
     'videolist-long-story.json' => 1208061, 
   );
+}
+/**
+ * 
+ * @param type $str
+ * @return type
+ */
+function badUnicodeparse_clients($str) {
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3")).chr(hexdec("$4"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
+    return $str;
 }

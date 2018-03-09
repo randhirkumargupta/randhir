@@ -97,11 +97,41 @@ function itg_miscellaneous_menu() {
     'file' => 'includes/itg_miscellaneous.inc',
   );
   
+  $items['remove-flooded-node-from-widget'] = array(
+    'title' => 'Remove Flooded node from Widget',
+    'page callback' => 'itg_remove_flooded_nodes',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  
+  $items['remove-old-widgets-from-table'] = array(
+    'title' => 'Remove Old widgets from tables',
+    'page callback' => 'remove_old_widgets_from_table',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
 
   
   return $items;
 }
 
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_miscellaneous_cronapi($op, $job = NULL) {
+  $items['remove-flooded-node-from-widget-cron'] = array(
+    'description' => 'Remove Flooded nodes from widget tables cron.',
+    'callback' => 'itg_remove_flooded_nodes',
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  $items['remove-old-widgets-from-table-cron'] = array(
+    'description' => 'Remove Old widgets from tables cron.',
+    'callback' => 'remove_old_widgets_from_table',
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  return $items;
+}
 
 /**  
  *  implements hook_advagg_get_root_files_dir_alter()
@@ -130,7 +160,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
         'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'keyword',
+          'name' => 'keywords',
           'content' => $og_description,
           ),
          '#weight' => -99
@@ -162,7 +192,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
         'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'keyword',
+          'name' => 'keywords',
           'content' => $og_description_live,
           ),
          '#weight' => -99
@@ -187,6 +217,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
   if (arg(0) == 'topic' && !empty(arg(1))) {
     $search_str = urldecode(arg(1));
     $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
     $description_topic = "$search_str: Find $search_str news, videos, photos and magazines on India Today. Also get breaking news from all over India and worldwide.";
     $og_description_topic = "$search_str, $search_str News, $search_str Videos, $search_str Photos, $search_str Images, $search_str Magazines";
   
@@ -195,7 +226,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
         'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
-          'name' => 'keyword',
+          'name' => 'keywords',
           'content' => $og_description_topic,
           ),
          '#weight' => -99

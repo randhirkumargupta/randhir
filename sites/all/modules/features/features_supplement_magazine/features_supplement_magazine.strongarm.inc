@@ -189,7 +189,7 @@ function features_supplement_magazine_strongarm() {
           'weight' => '5',
         ),
         'redirect' => array(
-          'weight' => '7',
+          'weight' => '6',
         ),
       ),
       'display' => array(),
@@ -254,7 +254,7 @@ function features_supplement_magazine_strongarm() {
           'weight' => '4',
         ),
         'title' => array(
-          'weight' => '1',
+          'weight' => '6',
         ),
         'path' => array(
           'weight' => '3',
