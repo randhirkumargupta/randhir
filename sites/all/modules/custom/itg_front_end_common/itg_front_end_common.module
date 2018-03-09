@@ -918,7 +918,8 @@ function _related_story_left_block_content() {
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
-        $img_alt = addslashes(strip_tags($related_title));
+        $img_alt = str_replace(array('\'', '"'), '', $related_title); 
+        
         $related_story.= '<li class="col-md-12"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" />
           </a>';
         $related_story.= '<span class="tile"><a href="'.$front_url.'">'.$related_title.'</a></span></li>';
@@ -1273,7 +1274,7 @@ function _related_story_amp_block_content() {
   }
   if(!empty($related_result_amp)) {
   $related_story = '<h2>RELATED</h2>';
-  $related_story.= "<ul>";
+  $related_story.= '<ul>';
   $i = 0;
   foreach ($related_result_amp as $site_hash_key) {
     $current_entity_id = $site_hash_key;
@@ -1308,12 +1309,12 @@ function _related_story_amp_block_content() {
         $image_link_url = $amp_url;
         if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_story.= "<li>";
-        $related_story.= "<span class='tile'><a href='$amp_url' target='_blank' title='$related_title'>" . $related_title . "</a></span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /><div fallback>offline</div></amp-img></a></li>";
+        $related_story.= '<li>';
+        $related_story.= '<span class="tile"><a href="'.$amp_url.'">'.$related_title.'</a></span><a href="'.$image_link_url.'"><amp-img height="127" width="170" layout="responsive" src="'.$img_url.'" title="'.$related_title.'" alt="'.$related_title.'" /><div fallback>offline</div></amp-img></a></li>';
       }
       else {
-        $related_story.= "<li>";
-        $related_story.= "<span class='tile'><a href='$amp_url' target='_blank' title='$related_title'>" . $related_title . "</a></span><a href='$image_link_url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
+        $related_story.= '<li>';
+        $related_story.= '<span class="tile"><a href="'.$amp_url.'">'.$related_title.'</a></span><a href="'.$image_link_url.'">' . $related_image .'</a></li>';
       }
     }
     $i++;
@@ -1321,7 +1322,7 @@ function _related_story_amp_block_content() {
       break;
   }
   
-  $related_story.= "</ul>";
+  $related_story.= '</ul>';
   return $related_story;
   }
 }
