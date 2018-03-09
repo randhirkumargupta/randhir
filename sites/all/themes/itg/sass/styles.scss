@@ -1572,7 +1572,7 @@ footer {
     }
     .footer-mid {
         background: $second-black-bg;
-        padding: 12px 0;
+        padding:4px 0 10px;
         text-align: center;
     }
     .footer-bottom {
@@ -14970,9 +14970,10 @@ ul.pron-cons-img li img {
 
 /* New Header by ITGD */
 .hidden-desktop{ display: none; }
+.adtext{ font-size:11px; color:#5f5f5f; line-height:16px; text-align:center;text-transform: uppercase;}
 #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{ display: none; }
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{ display: none; }
-#block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:10px; margin-bottom:10px; }
+#block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:4px; margin-bottom:10px; }
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{ float: left; }
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width: 8px; height: 8px;border-radius: 100%;background: #c00;display: inline-block;
     position: relative;top: -5px; left:-5px; box-shadow: 0 0 0 rgba(214,2,12,.8);  border-radius: 50%; background: #c00; animation: pulse 1.7s infinite; content:"";}

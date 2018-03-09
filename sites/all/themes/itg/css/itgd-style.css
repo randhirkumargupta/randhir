@@ -308,14 +308,11 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     margin-top: 30px
 }
 .front .itg-top-section .top-rhs-add-child .ad-widget {
-    padding: 15px;
+    padding: 4px 15px;
     height: 283px
 }
 .front .itg-top-section .top-rhs-add-child .ad-widget .sidebar-ad {
     background: #fff;
-    margin: 0
-}
-.front .itg-top-section .top-rhs-add-child .ad-widget .sidebar-ad .block-itg-ads {
     margin: 0
 }
 .front .itg-top-section .home-top-story .data-holder .itg-listing li {
@@ -885,7 +882,7 @@ background:none;
  .front .itg-layout-container .ad-widget {
     border: 1px solid #ddd;
      height: 280px;
-     padding: 14px 37px;
+     padding:4px 37px;
 }
 
  footer .footer-top .footer-top-link{
@@ -900,7 +897,7 @@ background:none;
          height:280px;
     }
      .front .itg-layout-container .ad-widget{
-        padding:10px;
+        padding:4px 10px;
     }
     .itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:none; }
 }
@@ -920,6 +917,13 @@ background:none;
          line-height: 44px;
     }
 }
+
+@media only screen and (max-width: 767px){
+   .front .itg-layout-container .itg-h321-section .ad-widget {height:282px;padding:4px 0 10px;}
+}
+@media only screen and (max-width:320px){
+.itg-layout-container .ad-widget{width: 300px; padding:0; height:250px; border:0px; } 
+}
 .instagram-media{position: static!important;}
 @media only screen and (max-width: 1024px) and (min-width:786px){
 .sport-home-layout-page .featured-news .featured-post h3{line-height: 18px; font-size: 15px;}
@@ -933,4 +937,4 @@ background:none;
 .auto-layout-page .special-top-news ul li:before{display:none;}
 .auto-layout-page .featured-news .featured-post h3{line-height: 20px;font-size:15px;}
 }
-.latest_video .tab-buttons.tab-buttons span.hide{display:none;}
+
