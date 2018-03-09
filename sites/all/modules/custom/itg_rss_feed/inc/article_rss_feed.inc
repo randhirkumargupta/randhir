@@ -213,7 +213,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
-  // $query->condition('n.nid', '1144609', '!=');
+  $query->condition('n.nid', '1144609', '!=');
   if (!empty($section_id)) {
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $tid_list, 'IN');
