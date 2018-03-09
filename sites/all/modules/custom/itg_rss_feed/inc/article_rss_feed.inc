@@ -199,11 +199,10 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-  $query->leftJoin('field_data_field_story_reporter', 'sr', 'sr.entity_id=n.nid');
-  $query->leftJoin('node', 'reporter', 'sr.field_story_reporter_target_id=reporter.nid');
-
+  $query->leftJoin('field_data_field_story_reporter', 'sr', 'sr.entity_id=n.nid AND sr.field_story_reporter_target_id=n.nid');
+  // $query->leftJoin('node', 'reporter', 'sr.field_story_reporter_target_id=reporter.nid');
   $query->fields('n', array('nid', 'title', 'created'));
-  $query->fields('reporter', array('title'));
+  //$query->fields('reporter', array('title'));
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('eli', array('field_story_extra_large_image_fid'));
@@ -213,12 +212,13 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('n.nid', '1144609', '!=');
-  if (!empty($section_id)) {
+  if (!empty($tid)) {
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $tid_list, 'IN');
   }
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range($range_min, $range_max);
+   print strtr((string)$query, $query->arguments()); die;
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     if (is_lock_story_rss_feed($resvalue['nid'])) {
@@ -229,7 +229,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $body_value = stripInvalidXml($resvalue['body_value']);
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
     $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
-    $reporter = (isset($resvalue['reporter_title']) ? $resvalue['reporter_title'] : '');
+    $reporter = (isset($resvalue['title']) ? $resvalue['title'] : '');
     $created = $resvalue['created'];
     $field_story_kicker_text_value = stripInvalidXml($resvalue['field_story_kicker_text_value']);
     date_default_timezone_set("GMT");
