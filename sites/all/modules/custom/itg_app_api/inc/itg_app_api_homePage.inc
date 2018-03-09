@@ -1919,7 +1919,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "CONCLAVE 2018 SPECIAL COVERAGE"; 
     $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/programme.php";
+    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
