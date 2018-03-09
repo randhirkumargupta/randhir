@@ -133,8 +133,11 @@
     line-height: 40px;
 }
 
+
 .latest_video .tab-buttons.tab-buttons span.hide{display:none;}
 .auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
+.section-movies .auto-block-3 .ad-widget{ margin-top:35px; }
+
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -340,6 +343,9 @@ width: 100%;
 @media only screen and (max-width: 1024px) {
 .itg-layout-container .itg-h321-section .droppable{height: 300px;}
 .auto-layout-page .auto-block-3 .ad-widget, .tech-layout-page .auto-block-3 .ad-widget{ padding:10px;}
+.section-movies .auto-block-3 .itg-widget-parent{ padding:0px; }
+.section-movies .auto-block-3.backbg{ background: transparent; }
+
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
@@ -377,6 +383,8 @@ width: 100%;
    #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
    .front .mt-50 {margin-top:20px;}
    .itg-layout-container .itg-h321-section .droppable{height: auto;}
+   .section-movies .auto-block-3 .itg-widget-parent.m-bottom40{ padding:0px; margin-bottom:0; }
+   .section-movies .auto-block-3 .ad-widget{ margin-top:20px; }
 }
 .may-be-recommend .trc_rbox_container .video-label.video-title {
     font-size: 15px;

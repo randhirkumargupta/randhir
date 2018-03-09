@@ -181,7 +181,7 @@ if ($theme != 'itgadmin') {
             <div class="col-lg-4 col-md-12">
               <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
             <div class="auto-block-3">
-              <div class="col-lg-12 col-md-6">
+              <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                 <div class="itg-widget-parent m-bottom40">
                   <div class="itg-widget">
                     <div class="ad-widget">
@@ -196,7 +196,7 @@ if ($theme != 'itgadmin') {
                   </div>
                 </div>
                 </div>
-                <div class="col-lg-12 col-md-6">
+                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                     <div class="itg-widget trending-list">
                         <div class="widget-help-text"><?php print t('Section card'); ?></div>
                       <div class="itg-widget-child">
@@ -338,7 +338,7 @@ if ($theme != 'itgadmin') {
   <!--Don't miss and Ad section starts here-->
 <?php if (isset($widget_data['itg-block-7']['widget_name']) || $theme == 'itgadmin') { ?>  
   <div class="row itg-h321-section">
-        <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 mt-50">
           <div class="widget-help-text">Special widgets ( <strong>Auto Reviews</strong> )</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -371,7 +371,7 @@ if ($theme != 'itgadmin') {
                 </div>               
             </div>  
         </div>
-         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-50">
            <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad Widget'); ?></strong> )</div>
             <div class="itg-widget">
               <div class="ad-widget">
