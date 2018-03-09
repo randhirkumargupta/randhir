@@ -6264,9 +6264,10 @@ h1.category-heading {
 section.sidebar .block-itg-ads {
   display: inline-block;
   vertical-align: top;
-  padding: 30px 34px;
+  padding: 25px 34px 30px;
   border-bottom: 1px solid #dddddd;
-  width: 100%; }
+  width: 100%;
+  background: #f2f2f2; }
 
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/

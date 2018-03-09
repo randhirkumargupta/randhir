@@ -77,13 +77,13 @@
     }
     /*defalt add for special pages START*/
     .itg-layout-container .ad-widget {
-        height: 272px;
-        padding: 10px;
-        width: 322px;
+        height:300px;
+        padding:10px 0;
+        width: 300px;
         margin: 0 auto;
     }
     section.sidebar .block-itg-ads {
-        padding: 0;
+        padding: 4px 0;
         border-bottom: none;
     }
     /*defalt add for special pages END*/
@@ -117,7 +117,7 @@
         }
         .auto-block-3 {
             .ad-widget {
-                height: 272px;
+                height: 290px;
                 padding: 10px;
                 width: 320px;
                 margin: 0 auto;
@@ -3949,6 +3949,7 @@
 }
 
 @media (max-width: 767px) {
+    .itg-layout-container .ad-widget{ width:322px;}
     #block-views-video-landing-header-block .latest_video {
         padding: 30px 0 0;
         float: left;
