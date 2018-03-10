@@ -2333,6 +2333,14 @@ function itg_widget_block_view_alter(&$data, $block) {
           $data['content'] = array();
         }
     }
+    
+      if ($block->delta == 'ads_medium_rectangl_rhs1_300x250') {
+        $arg = arg();
+        $ntype = menu_get_object('node');
+        if (($block->region == 'sidebar_second') && ($ntype->type == 'photogallery' || $ntype->type == 'videogallery')) {
+          $data['content'] = array();
+        } 
+    }
 }
 
 /**
