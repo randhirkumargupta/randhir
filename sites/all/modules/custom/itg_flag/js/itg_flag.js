@@ -118,6 +118,7 @@ jQuery(document).ready(function () {
         var typ = jQuery(this).attr('id');
         var dtag = jQuery(this).attr('data-tag');
         var datatype = jQuery(this).attr('data-type');
+        var data_heart = jQuery(this).attr('data-heart');
         var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag + "&datatype=" + datatype;
 
         jQuery.ajax({
