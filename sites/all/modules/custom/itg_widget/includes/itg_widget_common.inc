@@ -2338,7 +2338,11 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arg = arg();
         $ntype = menu_get_object('node');
         if (($block->region == 'sidebar_second') && ($ntype->type == 'photogallery' || $ntype->type == 'videogallery')) {
-          $data['content'] = array();
+          // This is for hiding a specific RHS1 block for photo / video
+			drupal_add_js("jQuery(document).ready(function(){
+jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
+});", array('type' => 'inline', 'scope' => 'footer'));
+      
         } 
     }
 }
