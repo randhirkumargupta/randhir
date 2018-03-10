@@ -134,8 +134,10 @@ jQuery(document).ready(function () {
                 var obj = jQuery.parseJSON(result);
 
                 jQuery('#widget-ajex-loader').hide();
+                // console.log(obj.type, obj, obj.type == 'like_count');
                 if (obj.type == 'like_count') {
                     jQuery("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
+                    jQuery("#no-of-likes_mobile_" + obj.nd_id).html("(" + obj.count + ")");
                     jQuery("#vno-of-likes_" + obj.nd_id).html(obj.count);
                 }
                 if (obj.chk == 'sty') {

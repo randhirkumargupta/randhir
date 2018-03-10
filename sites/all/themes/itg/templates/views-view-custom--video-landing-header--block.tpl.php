@@ -270,7 +270,7 @@ if(!empty($video_node->field_story_reporter)){
                               if (function_exists('itg_common_get_node_type')) {
                                 $datatype = itg_common_get_node_type(arg(1));
                               }
-                              print itg_event_backend_heart_like_dislike($val, $datatype);
+                              print itg_event_backend_heart_like_dislike($val, $datatype, '', 'web');
                             }
                             ?>
 
@@ -326,7 +326,7 @@ if(!empty($video_node->field_story_reporter)){
                                   if (function_exists('itg_common_get_node_type')) {
                                     $datatype = itg_common_get_node_type(arg(1));
                                   }
-                                  print itg_event_backend_heart_like_dislike($val, $datatype);
+                                  print itg_event_backend_heart_like_dislike($val, $datatype, '','mobile');
                                 }
                                 ?>  
                               </li>
