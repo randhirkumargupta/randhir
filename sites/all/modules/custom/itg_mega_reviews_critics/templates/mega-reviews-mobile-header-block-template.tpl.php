@@ -24,7 +24,7 @@ if (function_exists('itg_story_global_comment_last_record')) {
         <?php
         if ($config_name == 'vukkul') {
             ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
         <?php } if ($config_name == 'other') { ?> 
             <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
         <?php } ?>

@@ -137,6 +137,7 @@ jQuery(document).ready(function () {
                 if (obj.type == 'like_count') {
                     jQuery("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
                     jQuery("#vno-of-likes_" + obj.nd_id).html(obj.count);
+                    jQuery("#no-of-likes_mobile_" + obj.nd_id).html("(" + obj.count + ")");
                 }
                 if (obj.chk == 'sty') {
                     jQuery("#sty-dv").show(0);
@@ -150,8 +151,10 @@ jQuery(document).ready(function () {
                 if (obj.error == 'error') {
 
                     jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                    jQuery("#voted_mobile_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
                 }
                 jQuery('#like_count,#dislike_count').prop('disabled', false);
+                jQuery('.btn-heart-like').addClass( "heart-dislike" );
             }
         });
 
