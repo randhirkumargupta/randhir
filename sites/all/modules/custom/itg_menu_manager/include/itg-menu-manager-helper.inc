@@ -431,8 +431,8 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
  
   $vertical_menu_icon = "";
-  $sponser_logo_alt = $menu_data['term_load']->field_sponser_logo['und'][0]['alt'];
-  $sponser_logo_title = $menu_data['term_load']->field_sponser_logo['und'][0]['title'];
+  $sponser_logo_alt = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['alt']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['alt'] : '';
+  $sponser_logo_title = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['title']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['title'] : '';
   // handel case for external menu.
   // display_icon is true and icon_fid is set then show icon other wise title.
   if ($url_type == 'external' && $display_icon && $icon_fid) {
