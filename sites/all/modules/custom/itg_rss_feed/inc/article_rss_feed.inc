@@ -240,7 +240,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $output .= '<item><title><![CDATA[' . $title . ']]></title>';
     $output .= '<link><![CDATA[' . $url . ']]></link>';
     $output .= '<guid>' . $nid . '</guid>';
-    $output .= '<pubDate>' . $created_date . ' GMT</pubDate>';
+    $output .= '<pubDate>' . $created_date . '</pubDate>';
     $output .= '<dc:creator>' . $reporter . '</dc:creator>';
     $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
     $output .= '<content:encoded><![CDATA[' . $figure . $body_value . ']]></content:encoded>';
