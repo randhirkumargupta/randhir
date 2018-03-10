@@ -91,7 +91,7 @@
                 <?php
                 if ($config_name == 'vukkul') {
                   ?>
-                  <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                  <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
                 <?php } if ($config_name == 'other') { ?> 
                   <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
                 <?php } ?>

@@ -289,7 +289,7 @@ if(!empty($video_node->field_story_reporter)){
                           }
                           if ($config_name == 'vukkul') {
                             ?>
-                            <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                            <li><a onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                           <?php } if ($config_name == 'other') { ?> 
                             <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                           <?php } ?>
@@ -340,7 +340,7 @@ if(!empty($video_node->field_story_reporter)){
                               }
                               if ($config_name == 'vukkul') {
                                 ?>
-                                <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
+                                <li><a onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                               <?php } if ($config_name == 'other') { ?> 
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                               <?php } ?>
