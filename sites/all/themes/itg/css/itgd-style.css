@@ -945,6 +945,7 @@ background:none;
 
 
 @media screen and (max-width:800px){
-.videogallery #block-views-video-landing-header-block .video-header-left .social-likes ul li a i{margin-right: 5px;} 
+.social-likes ul li a i{margin-right: 5px;} 
+#block-views-video-landing-header-block .video-header-left .social-likes ul li a i.fa-clock-o{margin-right: 5px;}
 .btn-heart-like {padding: 14px 5px 9.4px 10px;}
 }
