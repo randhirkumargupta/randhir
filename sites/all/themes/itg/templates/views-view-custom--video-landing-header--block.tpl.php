@@ -259,16 +259,18 @@ if(!empty($video_node->field_story_reporter)){
 
                   <div class="social-likes mhide">
                       <ul>
-                          <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                      if (function_exists(itg_flag_get_count)) {
-                                        $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                      }
-                                      // get migrated count 
-                                      if (function_exists('itg_get_migrated_like_count')) {
-                                        $migrated_count = itg_get_migrated_like_count(arg(1));
-                                      }
-                                      print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                      ?></span></a></li>
+                          <li>
+                            <?php
+                            if (function_exists(itg_event_backend_heart_like_dislike)) {
+                              $val = arg(1);
+                              if (function_exists('itg_common_get_node_type')) {
+                                $datatype = itg_common_get_node_type(arg(1));
+                              }
+                              print itg_event_backend_heart_like_dislike($val, $datatype);
+                            }
+                            ?>
+
+                          </li>
                           <li class="later akamai-video-replace">
                           <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
                           </li>  
@@ -310,16 +312,17 @@ if(!empty($video_node->field_story_reporter)){
                   <div class="top-section">
                       <div class="social-likes desktop-hide">
                           <ul>
-                              <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                          if (function_exists(itg_flag_get_count)) {
-                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                          }
-                                          // get migrated count 
-                                          if (function_exists('itg_get_migrated_like_count')) {
-                                            $migrated_count = itg_get_migrated_like_count(arg(1));
-                                          }
-                                          print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                          ?></span></a></li>
+                              <li>
+                                <?php
+                                if (function_exists(itg_event_backend_highlights_like_dislike)) {
+                                  $val = arg(1);
+                                  if (function_exists('itg_common_get_node_type')) {
+                                    $datatype = itg_common_get_node_type(arg(1));
+                                  }
+                                  print itg_event_backend_highlights_like_dislike($val, $datatype);
+                                }
+                                ?>  
+                              </li>
                               <li class="later akamai-video-replace">
                               <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
                           </li>  
