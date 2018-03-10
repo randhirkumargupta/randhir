@@ -77,7 +77,7 @@ $config_name = $comment_value[0]->config_name;
           <?php
           if ($config_name == 'vukkul') {
             ?> 
-            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
           <?php } if ($config_name == 'other') { ?> 
             <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
           <?php } ?>
