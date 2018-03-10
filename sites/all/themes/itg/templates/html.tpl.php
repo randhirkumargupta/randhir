@@ -109,15 +109,7 @@
         }
     </script>
     <?php if(drupal_is_front_page()):?>
-    <script type="text/javascript">
-     var _sf_async_config = _sf_async_config || {};
-     /** CONFIGURATION START **/
-      _sf_async_config.uid = 60355;
-      _sf_async_config.domain = 'indiatoday.in';
-   _sf_async_config.useCanonical = true;
-     /** CONFIGURATION END **/
-     var _sf_startpt = (new Date()).getTime();
-	</script><script src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
+    
 	<?php else:?>
     <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
@@ -180,5 +172,17 @@ branch.setBranchViewData(linkData);
         });
       });
     </script>
+	<?php if(drupal_is_front_page()):?>
+	<script type="text/javascript">
+     var _sf_async_config = _sf_async_config || {};
+     /** CONFIGURATION START **/
+      _sf_async_config.uid = 60355;
+      _sf_async_config.domain = 'indiatoday.in';
+   _sf_async_config.useCanonical = true;
+     /** CONFIGURATION END **/
+     var _sf_startpt = (new Date()).getTime();
+	</script>
+   <script src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
+	<?php endif;?>
 </body>
 </html> 
