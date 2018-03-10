@@ -50,7 +50,7 @@ $node_author = $content["author"];
   <?php
   if ($config_name == 'vukkul') {
     ?>
-    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
+    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span><?php
           if (function_exists(itg_vukkul_comment_count)) {
             print itg_vukkul_comment_count('story_' . $node->nid);
           }
