@@ -143,7 +143,7 @@ if (!empty($content)):
           ?>          
           <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
           <?php if ($config_name == 'vukkul') { ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
           <?php } if ($config_name == 'other') { ?> 
             <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
           <?php } ?>
@@ -395,7 +395,7 @@ if (!empty($content)):
                   <?php
                   if ($config_name == 'vukkul') {
                     ?>
-                    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } if ($config_name == 'other') { ?> 
                     <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                     <?php
@@ -465,7 +465,7 @@ if (!empty($content)):
 			 ?>   
 			</li>
 			<?php if ($config_name == 'vukkul') { ?>
-			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
 			<?php } if ($config_name == 'other') { ?> 
 			  <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
 			<?php } ?>
@@ -550,7 +550,7 @@ if (!empty($content)):
                   <li><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                   <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                   <?php if ($config_name == 'vukkul'): ?>
-                    <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php endif; ?>
     <?php if ($config_name == 'other'): ?> 
                     <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
@@ -1112,7 +1112,7 @@ if (!empty($content)):
                 <?php
                 if ($config_name == 'vukkul') {
                   ?>
-                  <a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
+                  <a onclick ="scrollToAnchor('vuukle-comments');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
                 <?php } if ($config_name == 'other') { ?> 
                   <a onclick ="scrollToAnchor('other-comment');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
               <?php } ?>
@@ -1121,7 +1121,7 @@ if (!empty($content)):
               <?php
               if ($config_name == 'vukkul') {
                 ?>
-                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments'); ?></a></span>
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><?php print t('comments'); ?></a></span>
               <?php } if ($config_name == 'other') { ?> 
                 <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments'); ?></a></span> 
               <?php } ?>
@@ -1146,7 +1146,7 @@ if (!empty($content)):
               <?php
               if ($config_name == 'vukkul') {
                 ?>
-                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
+                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span><?php
                       // Hide vukul comment by Shashnak due to long time take:
                       //if (function_exists(itg_vukkul_comment_count)) {
                         //print itg_vukkul_comment_count('story_' . arg(1));
