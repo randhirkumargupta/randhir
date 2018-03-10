@@ -6294,7 +6294,3 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 /*css end Mega Review || Mobile */
 
 /*# sourceMappingURL=styles-new.css.map */
-
-@media screen and (max-width:800px){
-.videogallery #block-views-video-landing-header-block .video-header-left .social-likes ul li a i.fa.fa-clock-o{margin-right: 5px;} 
-}
