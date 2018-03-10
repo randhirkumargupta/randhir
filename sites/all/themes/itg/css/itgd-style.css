@@ -914,3 +914,14 @@ background:none;
 .auto-layout-page .featured-news .featured-post h3{line-height: 20px;font-size:15px;}
 }
 .latest_video .tab-buttons.tab-buttons span.hide{display:none;}
+
+.btn-heart-like{border:0; background-color:#1a1a1a; width:100%; text-align:left; padding:24.5px 5px 24.4px 10px; display:block}
+.btn-heart-like:hover{background:#363636;}
+.btn-heart-like span,.btn-heart-like i{color:#fff;}
+.heart-dislike i{color:red;}
+
+
+@media screen and (max-width:800px){
+#block-views-video-landing-header-block .video-header-left .social-likes ul li a i.fa-clock-o{margin-right: 5px;}
+.btn-heart-like {padding: 14px 5px 9.4px 10px;}
+}
