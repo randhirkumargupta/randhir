@@ -1991,7 +1991,7 @@ function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL,
  * @param int $unique_id
  * @return string
  */
-function itg_event_backend_heart_like_dislike($unique_id, $datatype = NULL, $nid = NULL, $type) {
+function itg_event_backend_heart_like_dislike($unique_id, $datatype = NULL, $nid = NULL, $web_type) {
   $arg = arg();
   if (function_exists('itg_flag_get_count')) {
     $mongo_like_dislike = itg_flag_get_count($unique_id);
@@ -2015,7 +2015,7 @@ function itg_event_backend_heart_like_dislike($unique_id, $datatype = NULL, $nid
   $likes_class = !empty($sum_of_likes) ? 'heart-dislike' : '';  
   
   $pid = "voted_" . $unique_id;
-  $like = ($type == 'web') ? "no-of-likes_" . $unique_id : "no-of-likes_mobile_" . $unique_id;
+  $like = ($web_type == 'web') ? "no-of-likes_" . $unique_id : "no-of-likes_mobile_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
   $like_btn = '<div class="agbutton"><button class="btn-heart-like '.$likes_class.'" id="like_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
