@@ -48,7 +48,7 @@
         <title><?php print $head_title; ?></title>
         <?php print $head; ?>
         <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
-        <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
+        <?php //include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700" rel="stylesheet">
