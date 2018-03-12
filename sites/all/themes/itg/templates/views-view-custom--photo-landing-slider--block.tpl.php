@@ -47,7 +47,7 @@ $argum = base64_encode(arg(1));
                 if ($comment_flag) {
                   if ($config_name == 'vukkul') {
                     ?>
-                    <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <li><a onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } if ($config_name == 'other') { ?> 
                     <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } ?>
@@ -103,7 +103,7 @@ $argum = base64_encode(arg(1));
             <?php foreach ($rows as $index => $row):
               ?>
               <li data-slide-number="<?php echo $index ?>">
-                  <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['fid']; ?>">
+                  <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['item_id']; ?>">
 
 
                       <?php
@@ -189,7 +189,7 @@ $argum = base64_encode(arg(1));
                     if ($comment_flag) {
                       if ($config_name == 'vukkul') {
                         ?>
-                        <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                        <li><a onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                       <?php } if ($config_name == 'other') { ?> 
                         <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                       <?php } ?>

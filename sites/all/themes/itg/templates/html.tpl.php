@@ -108,18 +108,8 @@
             (new Image).src = "https://sb.scorecardresearch.com/b?c1\x3d2\x26c2\x3d8549097\x26c8\x3d" + encodeURIComponent(document.title) + "\x26c7\x3d" + encodeURIComponent(document.location.href) + "\x26c9\x3d" + encodeURIComponent(document.referrer) + "\x26rn\x3d" + ("" + (new Date).getTime())
         }
     </script>
-    <?php if(drupal_is_front_page()):?>
-    <script type="text/javascript">
-     var _sf_async_config = _sf_async_config || {};
-     /** CONFIGURATION START **/
-      _sf_async_config.uid = 60355;
-      _sf_async_config.domain = 'indiatoday.in';
-   _sf_async_config.useCanonical = true;
-     /** CONFIGURATION END **/
-     var _sf_startpt = (new Date()).getTime();
-	</script><script src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
-	<?php else:?>
-    <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
+    <?php if(!drupal_is_front_page()):?>
+   <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
     <!-- Branch IO code -->
     <?php 
@@ -131,18 +121,36 @@
       }
     ?>
     <script type="text/javascript">
-    (function(b,r,a,n,c,h,,s,d,k){if(!b[n]||!b[n]._q){for(;s<.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
-    branch.init('key_live_djuJxtD2ZARYUWRnZZp9WnegBtjqJrld',
-    {'no_journeys':false}
-
+    (function(b, r, a, n, c, h, , s, d, k) {
+    if (!b[n] || !b[n]._q) {
+        for (; s < .length;) c(h, _[s++]);
+        d = r.createElement(a);
+        d.async = 1;
+        d.src = "https://cdn.branch.io/branch-latest.min.js";
+        k = r.getElementsByTagName(a)[0];
+        k.parentNode.insertBefore(d, k);
+        b[n] = h
+    }
+    })(window, document, "script", "branch", function(b, r) {
+    b[r] = function() {
+        b._q.push([r, arguments])
+    }
+    }, {
+    _q: [],
+    _v: 1
+    }, "addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
+    branch.init('key_live_djuJxtD2ZARYUWRnZZp9WnegBtjqJrld', {
+      'no_journeys': false
+    } 
     );
     var linkData = {
-      data: {
-      '$canonical_identifier':"<?php print $content_id; ?>",
-      '$data_type': "<?php print $content_type; ?>",
-    }};
-    branch.setBranchViewData(linkData);
-    );
+    data: {
+        '$canonical_identifier': "<?php print $content_id; ?>",
+        '$data_type': "<?php print $content_type; ?>",
+    }
+    };
+branch.setBranchViewData(linkData);
+);
 	</script>
   <!-- Branch IO code end -->
 </head>
