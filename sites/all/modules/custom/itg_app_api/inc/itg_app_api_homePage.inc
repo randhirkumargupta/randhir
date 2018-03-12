@@ -43,10 +43,9 @@ function homePageJson() {
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
-    $data['data'][0] = $homePageJsonWidget_2;
-    //$data['data'][1] = $homePageJsonWidget_3;
-    $data['data'][1] = $homePageJsonWidget_1;
-    $data['data'][2] = $data_topstories;    
+    $data['data'][0] = $homePageJsonWidget_2;     // scorecard   
+    $data['data'][1] = $data_topstories; 
+    $data['data'][2] = $homePageJsonWidget_1; // CONCLAVE
     $data['data'][3] = $itg_rapid_home_movies_json;
     $data['data'][4] = $itg_rapid_home_technology_json;
     $data['data'][5] = $data_news_india;
