@@ -288,7 +288,7 @@ function get_rss_feed_sub_header_article_news_stand($term_name = NULL, $section_
   }
   date_default_timezone_set("GMT");
   $todat_date = date("D, d M Y H:i:s e");
-  $output .= "<title>India Today</title><link>" . FRONT_URL . "></link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
+  $output .= "<title>India Today</title><link>" . FRONT_URL . "</link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
   return $output;
 }
 
