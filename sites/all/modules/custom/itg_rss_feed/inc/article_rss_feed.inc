@@ -227,7 +227,10 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     }
     $title = stripInvalidXml($resvalue['title']);
     $nid = $resvalue['nid'];
-    $body_value = remove_iframe_img_tags(remove_extra_tag_in_body(stripInvalidXml($resvalue['body_value'])));
+    $body_value = stripInvalidXml($resvalue['body_value']);
+    $body_value = remove_extra_tag_in_body($body_value);
+    $body_value = remove_iframe_img_tags($body_value);
+
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
     $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $reporter = get_byline_name_by_nid($nid);

@@ -773,6 +773,17 @@ function remove_extra_tag_in_body($story_body) {
     }
     $story_body = str_replace('[ITG:POLL:' . $poll_nid . ']', '', $story_body);
   }
+  
+  // remove FACTOIDS
+  if (strpos($story_body, '[ITG:FACTOIDS]')) {
+      $story_body = str_replace('[ITG:FACTOIDS]', '', $story_body);
+  }
+  
+  // remove LISTICLES
+  if (strpos($story_body, '[ITG:LISTICLES]')) {
+      $story_body = str_replace('[ITG:LISTICLES]', '', $story_body);
+  }
+  
 
   // some tags remove
   $tags = array("table", "div");
