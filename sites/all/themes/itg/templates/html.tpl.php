@@ -121,16 +121,14 @@
 	<?php else:?>
     <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
-    <script type="text/javascript">
-		(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
-		branch.init('key_live_cgwzd2EvhB7X2XUsBd2N6joitydwu3OS');
-		branch.setBranchViewData({
-		  data: {
-		    '$deeplink_path': window.location.pathname + window.location.search + window.location.hash,
-			'user_id': '45123'
-		  }
-		});
-	</script>
+    <?php 
+      $content_id = '';
+      $content_type = '';
+      if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
+        $content_id = $nid;
+        $content_type = $type;
+      }
+    ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>
@@ -148,5 +146,17 @@
         });
       });
     </script>
+    <!-- Branch IO code -->
+    <script type="text/javascript">
+    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);branch.init('key_live_djuJxtD2ZARYUWRnZZp9WnegBtjqJrld',{'no_journeys':false} );
+    var linkData = {
+    data: {
+        '$canonical_identifier': "<?php print $content_id; ?>",
+        '$data_type': "<?php print $content_type; ?>",
+    }
+    };
+    branch.setBranchViewData(linkData);
+	</script>
+  <!-- Branch IO code end -->
 </body>
 </html> 
