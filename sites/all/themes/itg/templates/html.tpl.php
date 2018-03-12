@@ -146,7 +146,6 @@
     }
     };
     branch.setBranchViewData(linkData);
-);
 	</script>
   <!-- Branch IO code end -->
 </body>
