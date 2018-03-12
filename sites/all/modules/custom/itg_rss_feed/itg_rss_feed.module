@@ -124,7 +124,7 @@ function get_rss_feed_sub_header_latestnews($section_url) {
  */
 function get_rss_feed_google_stand_header() {
   $output = "";
-  $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
+  $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
   return $output;
 }
 
