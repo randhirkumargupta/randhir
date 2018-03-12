@@ -244,7 +244,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $figure  = "<figure><img src='".$img_url."' width='505' /><figcaption>". $caption ."</figcaption></figure>";
     $output .= '<item><title><![CDATA[' . $title . ']]></title>';
     $output .= '<link><![CDATA[' . $url . ']]></link>';
-    $output .= '<guid>' . $nid . '</guid>';
+    $output .= '<guid>' . $url . '</guid>';
     $output .= '<pubDate>' . $created_date . '</pubDate>';
     $output .= '<dc:creator>' . $reporter . '</dc:creator>';
     $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
