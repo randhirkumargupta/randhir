@@ -152,7 +152,7 @@ function itg_pti_content() {
                     $node->body[$node->language][0]['value'] = $body_description ? $body_description : '';
                     $node->body[$node->language][0]['format'] = 'full_html';
                     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
-                    $node->field_story_magazine_headline[LANGUAGE_NONE][0]['value'] = $final_kicker;
+                    //$node->field_story_magazine_headline[LANGUAGE_NONE][0]['value'] = $final_kicker;
                     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
                     //$node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
                     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
