@@ -111,7 +111,6 @@
     <?php if(!drupal_is_front_page()):?>
    <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
-    <!-- Branch IO code -->
     <?php 
       $content_id = '';
       $content_type = '';
@@ -120,8 +119,26 @@
         $content_type = $type;
       }
     ?>
+</head>
+<body class="<?php print $classes; ?>" <?php print $attributes;?>>
+  <?php if ($skip_link_text && $skip_link_anchor): ?>
+    <p id="skip-link">
+      <a href="#<?php print $skip_link_anchor; ?>" class="element-invisible element-focusable"><?php print $skip_link_text; ?></a>
+    </p>
+  <?php endif; ?>
+  <?php print $page_top; ?>
+  <?php print $page; ?>
+  <?php print $page_bottom; ?>
+    <script>
+      jQuery(document).ready(function () {
+        jQuery(".tab-buttons span , .video_landing_menu a , .slick-arrow, .slick-slide, .pager a").on('click' , function() {
+            comscoreBeacon();
+        });
+      });
+    </script>
+    <!-- Branch IO code -->
     <script type="text/javascript">
-    (function(b, r, a, n, c, h, , s, d, k) {
+    (function(b,r,a,n,c,h,_,s,d,k) {
     if (!b[n] || !b[n]._q) {
         for (; s < .length;) c(h, _[s++]);
         d = r.createElement(a);
@@ -149,26 +166,9 @@
         '$data_type': "<?php print $content_type; ?>",
     }
     };
-branch.setBranchViewData(linkData);
+    branch.setBranchViewData(linkData);
 );
 	</script>
   <!-- Branch IO code end -->
-</head>
-<body class="<?php print $classes; ?>" <?php print $attributes;?>>
-  <?php if ($skip_link_text && $skip_link_anchor): ?>
-    <p id="skip-link">
-      <a href="#<?php print $skip_link_anchor; ?>" class="element-invisible element-focusable"><?php print $skip_link_text; ?></a>
-    </p>
-  <?php endif; ?>
-  <?php print $page_top; ?>
-  <?php print $page; ?>
-  <?php print $page_bottom; ?>
-    <script>
-      jQuery(document).ready(function () {
-        jQuery(".tab-buttons span , .video_landing_menu a , .slick-arrow, .slick-slide, .pager a").on('click' , function() {
-            comscoreBeacon();
-        });
-      });
-    </script>
 </body>
 </html> 
