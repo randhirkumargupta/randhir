@@ -576,6 +576,28 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         );
         drupal_add_html_head($head_elements, 'canonical');
       }
+      // Branch io code start
+      if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
+      $branchio_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'branch:deeplink:canonical_identifier',
+            'content' => $node->nid,
+          )
+        );
+        $branchio_type = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'branch:deeplink:data_type',
+            'content' => $node->type,
+          )
+        );
+        drupal_add_html_head($branchio_tag, 'branchio_tag');
+        drupal_add_html_head($branchio_type, 'branchio_type');
+      }
+      // Branch io code end
 
       drupal_add_html_head($fb_og_url, 'fb_og_url');
       drupal_add_html_head($og_description, 'og_description');
