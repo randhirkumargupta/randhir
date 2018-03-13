@@ -1608,3 +1608,15 @@ function getCmsUserByNid_dailyReport($nid){
     }
     return $cmsuser;
 }
+
+/**
+ * Function to remove iframe tag from content.
+ * @param string $content
+ * @return string
+ */
+function remove_iframe_img_tags($content) {
+  $contents = preg_replace('/<img alt="" data-syndication="no"[^>]+\>/i', " ", $content);
+  $story_body = str_replace('<p></p>', '', $contents);
+  $string = preg_replace("/\s+/", " ", $story_body);
+  return preg_replace('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', " ", $string);
+}

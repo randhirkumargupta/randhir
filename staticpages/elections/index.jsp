@@ -560,154 +560,154 @@ Modi's popularity has started worrying the Congress, AAP other parties.</p>
  <h6>
         <b>A</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18214">Alagiri, Advani, Ambedkar, Adarsh, AGP-IMDT, AFSPA, Affidavit</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18214">Alagiri, Advani, Ambedkar, Adarsh, AGP-IMDT, AFSPA, Affidavit</a></div>
           </h6>
 	
 
  <h6>
         <b>B</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18215">Babri, Bofors, Bellary, Batla, Bhagalpur, Babuji, Bhatta, Bhanwari</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18215">Babri, Bofors, Bellary, Batla, Bhagalpur, Babuji, Bhatta, Bhanwari</a></div>
           </h6>
 	
 
  <h6>
         <b>C</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18218">Cauvery water dispute, Countermanding of poll</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18218">Cauvery water dispute, Countermanding of poll</a></div>
           </h6>
 	
 
  <h6>
         <b>D</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18219">Dynasty politics, Dalits</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18219">Dynasty politics, Dalits</a></div>
           </h6>
 	
 
  <h6>
         <b>E</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18220">Emergency</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18220">Emergency</a></div>
           </h6>
 	
 
  <h6>
         <b>F</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18221">Feku, Fodder scam</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18221">Feku, Fodder scam</a></div>
           </h6>
 	
 
  <h6>
         <b>G</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18222">Godhra, Gujjar, Goa mining</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18222">Godhra, Gujjar, Goa mining</a></div>
           </h6>
 	
 
  <h6>
         <b>H</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18223">Hindu terror, Hurriyat</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18223">Hindu terror, Hurriyat</a></div>
           </h6>
 	
 
  <h6>
         <b>I</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18224">India First, Indira Gandhi</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18224">India First, Indira Gandhi</a></div>
           </h6>
 	
 
  <h6>
         <b>J</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18225">JP, Jan Aushadhi, Janata Party, Janata Dal</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18225">JP, Jan Aushadhi, Janata Party, Janata Dal</a></div>
           </h6>
 	
 
  <h6>
         <b>L</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18226">Lok Satta, Left Front, Lingayat, Lankan Tamils</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18226">Lok Satta, Left Front, Lingayat, Lankan Tamils</a></div>
           </h6>
 	
 
  <h6>
         <b>M</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18227">Maoists, Muzaffarnagar, Meham, Mandal, Mahadalit</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18227">Maoists, Muzaffarnagar, Meham, Mandal, Mahadalit</a></div>
           </h6>
 	
 
  <h6>
         <b>N</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18228">NTR, Nagpur</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18228">NTR, Nagpur</a></div>
           </h6>
 	
 
  <h6>
         <b>P</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18229">Pappu, Paid news, Purno Sangma</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18229">Pappu, Paid news, Purno Sangma</a></div>
           </h6>
 	
 
  <h6>
         <b>Q</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18230">Quota</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18230">Quota</a></div>
           </h6>
 	
 
  <h6>
         <b>R</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18231">RTI, Right to food, Reserved seat</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18231">RTI, Right to food, Reserved seat</a></div>
           </h6>
 	
 
  <h6>
         <b>S</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18232">Seemandhra, Spectrum, Sanjay Gandhi, Solar scam</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18232">Seemandhra, Spectrum, Sanjay Gandhi, Solar scam</a></div>
           </h6>
 	
 
  <h6>
         <b>T</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18233">Telangana, Third Front,</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18233">Telangana, Third Front,</a></div>
           </h6>
 	
 
  <h6>
         <b>V</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18234">Vidarbha, Vadra, Vokkaligas</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18234">Vidarbha, Vadra, Vokkaligas</a></div>
           </h6>
 	
 
  <h6>
         <b>W</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18236">Withdrawal of nomination</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18236">Withdrawal of nomination</a></div>
           </h6>
 	
 
  <h6>
         <b>Y</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18235">YSR Congress</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18235">YSR Congress</a></div>
           </h6>
 	
 
  <h6>
         <b>Z</b>
 
-          <div class="slid-content"><a href="a-to-z.jsp?id=18237">Z-plus security, Zakia Jafri</a></div>
+          <div class="slid-content"><a href="/elections/a-to-z.jsp?id=18237">Z-plus security, Zakia Jafri</a></div>
           </h6>
 	
 
