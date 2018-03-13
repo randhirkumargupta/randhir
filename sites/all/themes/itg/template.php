@@ -471,6 +471,24 @@ function itg_html_head_alter(&$head_elements) {
   if ($status === '404 Not Found'){
 	unset($head_elements['metatag_canonical']);
   }
+  
+  $head_elements['manifest'] = array(
+		'#type' => 'html_tag',
+		'#tag' => 'link',
+		'#attributes' => array(
+			'rel' => 'manifest',
+			'href' => 'https://akm-img-a-in.tosshub.com/indiatoday/manifest.json'
+		),
+	);
+  $head_elements['apple-touch-icon'] = array(
+		'#type' => 'html_tag',
+		'#tag' => 'link',
+		'#attributes' => array(
+			'rel' => 'apple-touch-icon',
+			'href' => 'https://smedia2.intoday.in/businesstoday_wap/resources/images/bt_96x96.png'
+		),
+	);
+  
 }
 
 /**
