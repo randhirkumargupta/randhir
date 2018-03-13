@@ -18,8 +18,9 @@ function openPopup() {
     jQuery(".ad-blocker").show();
     jQuery(".description").hide();
     jQuery(".buzz-section").hide();
-    jQuery('.view-photo-landing-slider').hide();
-    jQuery('.video-landing-header').hide();
+    jQuery(".view-photo-landing-slider").hide();
+    jQuery(".video-landing-header").hide();
+    jQuery(".briefcase").hide();
     var a = gup('source');
     ga("send", "event", "AdblockPopup", a, "true");
     ga("send", "event", "Adblock", a, "true");
