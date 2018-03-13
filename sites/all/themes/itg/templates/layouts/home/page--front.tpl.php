@@ -939,9 +939,9 @@ if ($theme != 'itgadmin') {
                                     <div class="widget-wrapper">
                                         <?php
                                         if ($widget_choice['aajtak'] != '0') {
-                                          //$block = block_load('itg_front_end_common', 'latest_from_aajtak');
-                                          //$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                          //print render($render_array);
+                                          $block = block_load('itg_front_end_common', 'latest_from_aajtak');
+                                          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                          print render($render_array);
                                         }
                                         ?>
                                     </div>             
