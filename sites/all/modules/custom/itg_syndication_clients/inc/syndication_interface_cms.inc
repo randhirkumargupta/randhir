@@ -214,7 +214,6 @@ function genrate_syndication_xml_cat_1206735() {
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
 
     $query->fields('eli_file', array('uri'));
@@ -297,7 +296,6 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
   
   $query->fields('npd', array('field_itg_content_publish_date_value'));
