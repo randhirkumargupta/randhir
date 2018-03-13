@@ -28,7 +28,8 @@
     }
   </script>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
-  <?php print $styles; ?>  
+  <?php print $styles; ?>
+  <?php print $scripts; ?>
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/html5.js"></script>
@@ -127,7 +128,6 @@
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?>
-  <?php print $scripts; ?>
   <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
