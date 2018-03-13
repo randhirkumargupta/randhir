@@ -28,8 +28,9 @@
     }
   </script>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
-  <?php print $styles; ?>
-  <?php print $scripts; ?>
+  <?php print $styles; ?>  
+  <script type="text/javascript" src="/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js"></script>
+  <script type="text/javascript" async="async" src="https://vuukle.com/js/vuukle.js"></script>
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/html5.js"></script>
@@ -128,6 +129,7 @@
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?>
+  <?php print $scripts; ?>
   <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
