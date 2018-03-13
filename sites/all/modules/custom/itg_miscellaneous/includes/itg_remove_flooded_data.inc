@@ -18,7 +18,7 @@ function itg_remove_flooded_nodes(){
   $query->havingCondition('count', $keep_row, '>');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
   foreach($result as $value){
-    if($value['count'] <= 100){
+    if($value['count'] <= $keep_row){
       continue;
     }
     _delete_old_data_from_section_widget('itg_widget_order', $value['cat_id'], 'All');
@@ -35,7 +35,7 @@ function itg_remove_flooded_nodes(){
   $query->havingCondition('count', $keep_row, '>');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
   foreach($result as $value){
-    if($value['count'] <= 100){
+    if($value['count'] <= $keep_row){
       continue;
     }
     _delete_old_data_from_section_widget('itg_widget_order_section', $value['cat_id'], $value['content_type']);
