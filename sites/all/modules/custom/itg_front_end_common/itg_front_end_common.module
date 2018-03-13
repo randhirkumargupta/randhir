@@ -510,14 +510,14 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           )
         );
       
-      $og_locale = array(
+      /*$og_locale = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
           '#attributes' => array(
             'property' => 'og:locale',
             'content' => 'en_US',
           )
-        );
+        );*/
       
       $og_sitename = array(
           '#type' => 'html_tag',
@@ -528,7 +528,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           )
         );
       
-      $data = getimagesize($fb_image);
+      /*$data = getimagesize($fb_image);
       $publish_time = date('F d,Y h.i A', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
       $og_image_width = array(
           '#type' => 'html_tag',
@@ -562,7 +562,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
             'property' => 'og:published_time',
             'content' => $publish_time,
           )
-        );
+        );*/
       
       $og_description = array(
           '#type' => 'html_tag',
@@ -622,20 +622,20 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
       drupal_add_html_head($og_description, 'og_description');
       drupal_add_html_head($fb_og_title, 'fb_og_title');
       drupal_add_html_head($fb_og_type, 'fb_og_type');
-      drupal_add_html_head($og_locale, 'og_locale');
+      //drupal_add_html_head($og_locale, 'og_locale');
       drupal_add_html_head($og_sitename, 'og_sitename');
-      drupal_add_html_head($og_publish_time, 'og_publish_time');
+      //drupal_add_html_head($og_publish_time, 'og_publish_time');
       if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
         drupal_add_html_head($fb_image_tag, 'fb_image_tag');
-        drupal_add_html_head($og_image_width, 'og_image_width');
-        drupal_add_html_head($og_image_height, 'og_image_height');
-        drupal_add_html_head($og_image_type, 'og_image_type');
+        //drupal_add_html_head($og_image_width, 'og_image_width');
+        //drupal_add_html_head($og_image_height, 'og_image_height');
+        //drupal_add_html_head($og_image_type, 'og_image_type');
       }
       else if ($is_fron_page) {
         drupal_add_html_head($fb_image_tag, 'fb_image_tag');
-        drupal_add_html_head($og_image_width, 'og_image_width');
-        drupal_add_html_head($og_image_height, 'og_image_height');
-        drupal_add_html_head($og_image_type, 'og_image_type');
+        //drupal_add_html_head($og_image_width, 'og_image_width');
+        //drupal_add_html_head($og_image_height, 'og_image_height');
+        //drupal_add_html_head($og_image_type, 'og_image_type');
       }
     }
   }
