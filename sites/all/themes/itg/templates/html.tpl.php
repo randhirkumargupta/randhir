@@ -132,8 +132,6 @@
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?>
-  <?php print $styles; ?>
-  <?php print $scripts; ?>
   <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
@@ -153,6 +151,8 @@
     };
     branch.setBranchViewData(linkData);
 	</script>
-  <!-- Branch IO code end -->
+  <!-- Branch IO code end -->  
+  <?php print $styles; ?>
+  <?php print $scripts; ?>
 </body>
 </html> 
