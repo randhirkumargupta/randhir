@@ -324,8 +324,8 @@ img {
 
 .story-section .briefcase { margin:15px 0;}
 .story-section .briefcase h4{font-size: 18px;font-size: 1.125rem;text-transform: uppercase; margin-bottom: 10px; color: #bb0a0a;}
-.story-section .briefcase ul li {position: relative; font-size: 15px; margin-bottom: 10px; padding-left: 15px;line-height: 22px;}
-.story-section .briefcase ul li:before { position: absolute; top: 6px; left: 0px; content: ''; border-radius: 100%; background: #a00606; height: 5px; width: 5px;}
+.story-section .briefcase ul li {position: relative; font-size: 15px; margin-bottom: 10px; padding-left: 15px;line-height: 22px;list-style: none;}
+.story-section .briefcase ul li:before { position: absolute; top: 10px; left: 0px; content: ''; border-radius: 100%; background: #a00606; height: 5px; width: 5px;}
 .scroll-x {
     overflow-x: auto
 }
