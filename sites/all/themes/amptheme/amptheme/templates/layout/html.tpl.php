@@ -48,7 +48,7 @@
         <title><?php print $head_title; ?></title>
         <?php print $head; ?>
         <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
-        <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
+        <?php //include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
