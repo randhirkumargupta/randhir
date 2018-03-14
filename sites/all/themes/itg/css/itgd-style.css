@@ -137,7 +137,8 @@
 .latest_video .tab-buttons.tab-buttons span.hide{display:none;}
 .auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
 .section-movies .auto-block-3 .ad-widget{ margin-top:35px; }
-
+.morediv{text-align: right; text-transform: uppercase; font-size: 11px; color:  #111; font-weight: 700; color: #5794e0;}
+.morediv a{color: #5794e0;font-weight: 700;position: relative;display:  block;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -705,12 +706,12 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 /*  Score card Changes */
 #itg-scorecard-container{background: #222834;padding: 0;height: 60px; overflow: hidden;}
 #itg-scorecard-container .scorecard-stripcontent{padding: 0px;position: relative;height: 60px;}
-#itg-scorecard-container .scorecard-stripcontent ul li{list-style: none; display: inline-block; border-left: 1px solid #4f4f4f; padding: 0 5px;}
+#itg-scorecard-container .scorecard-stripcontent ul li{list-style: none; display: inline-block; border-left: 1px solid #4f4f4f; padding: 0 4px;}
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1){border-left:0px;}
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(3){border-right:0px}
 #itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top:-1px;}
 #itg-scorecard-container .scorecard-stripcontent ul li a{color: #fff; font-family: "OpenSans-Regular";font-weight:normal; font-size: 14px; }
-#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 245px;display: inline-block;line-height: 20px; position: relative;top: 4px;}
+#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 242px;display: inline-block;line-height: 20px; position: relative;top: 4px;}
 #itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top: 50%;transform: translateY(-50%);}
 /*poll Home section */
 .home_page_poll_widget_block .poll-data .active-poll-title h2 {color: #fff;font-size: 16px; line-height: 22px;margin: 0;padding: 5px 10px;}
