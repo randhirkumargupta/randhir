@@ -250,7 +250,7 @@ function itg_layout_manager_block_view($delta = '') {
       }
       module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
       $detect = new Mobile_Detect;
-      $data['detect'] = $detect->isMobile();
+      $mobileDetect = $detect->isMobile();
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
       $data['itg_top_manu_header_second'] = menu_tree('menu-itg-top-menu-header-second');
@@ -264,8 +264,13 @@ function itg_layout_manager_block_view($delta = '') {
           $data['menu_manager'][] = $temp_data;
         }
       }
-
-      $block['content'] = theme('header_block', array('data' => $data));
+      
+      if($mobileDetect) {
+        $block['content'] = theme('header_mobile_block', array('data' => $data));
+      } else {
+        $block['content'] = theme('header_block', array('data' => $data));
+      }
+      
       break;
 
     case 'footer_block':
@@ -569,6 +574,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
     'header_block' => array(
       'variable' => array('data' => NULL),
       'template' => 'itg-header',
+      'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
+    ),
+    'header_mobile_block' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'itg-header-mobile',
       'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts',
     ),
     'amp_footer_block' => array(
