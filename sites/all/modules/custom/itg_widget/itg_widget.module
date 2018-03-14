@@ -1468,7 +1468,7 @@ function itg_widget_save_bulk_operation_widget_data($form_state, $widget_name) {
                 itg_widget_insert_widget_data($node, $widget_name, 0);
             }
         }
-        itg_widget_delete_old_data_by_limit($widget_name);
+        //itg_widget_delete_old_data_by_limit($widget_name);
     }
 }
 

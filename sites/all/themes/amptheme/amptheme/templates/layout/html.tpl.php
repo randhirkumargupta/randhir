@@ -1524,7 +1524,11 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
   }
   /* breadcrumb style */
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/';padding: 0 3px;text-decoration: none;}
-#block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration: none;} 
+#block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration: none;}
+.story-section .briefcase { margin:15px 0;}
+.story-section .briefcase h4{font-size: 18px;font-size: 1.125rem;text-transform: uppercase; margin-bottom: 10px;}
+.story-section .briefcase ul li {position: relative; font-size: 15px; margin-bottom: 10px; padding-left: 15px;line-height: 22px;list-style: none;}
+.story-section .briefcase ul li:before { position: absolute; top: 10px; left: 0px; content: ''; border-radius: 100%; background: #a00606; height: 5px; width: 5px;} 
 @media only screen and (max-width: 320px) {
   #header .main-nav .nav-container-menu{width: calc(100% - 40px);}
   #header .top-nav ul.menu li a{ font-size:12px; }
