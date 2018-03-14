@@ -68,10 +68,10 @@ $config_name = $comment_value[0]->config_name;
         <!--<dfn>1522</dfn>-->
       </span>
       <span>
-          <a title="share on twitter" class= "twitter def-cur-pointer" onclick="twitter_popup('<?php print 'Quiz :'.urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          <a title="share on twitter" class= "twitter def-cur-pointer" onclick='twitter_popup("<?php print 'Quiz :'.urlencode($node->title);?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter" aria-hidden="true"></i></a>
       </span>
       <span>
-          <a title="share on google+" class= "google def-cur-pointer" onclick="return googleplusbtn('<?php print $actual_link; ?>')"> <i class="fa fa-google-plus" aria-hidden="true"></i></a>
+          <a title="share on google+" class= "google def-cur-pointer" onclick='return googleplusbtn("<?php print $actual_link; ?>")'> <i class="fa fa-google-plus" aria-hidden="true"></i></a>
       </span>
       <span>
           <?php
