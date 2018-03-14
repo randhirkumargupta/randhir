@@ -2044,3 +2044,14 @@ function itg_video_file_managed_file_process($element) {
   $element['upload']['#attributes']['accept'] = '.mp4';
   return $element;
 }
+/**
+ * function for get publish date from content
+ * @param int $nid
+ */ 
+function get_content_publish_date ($nid) {
+  $query = db_select('field_data_field_itg_content_publish_date', 'cbd');
+  $query->condition('cbd.entity_id', $nid);
+  $query->fields('cbd', array('field_itg_content_publish_date_value'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
