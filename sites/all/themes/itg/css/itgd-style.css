@@ -137,8 +137,8 @@
 .latest_video .tab-buttons.tab-buttons span.hide{display:none;}
 .auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
 .section-movies .auto-block-3 .ad-widget{ margin-top:35px; }
-.morediv{text-align: right; text-transform: uppercase; font-size: 11px; color:  #111; font-weight: 700; color: #5794e0;}
-.morediv a{color: #5794e0;font-weight: 700;position: relative;display:  block;}
+.morediv{text-align: right; text-transform: uppercase; font-size:11px; color:#111; font-weight:700; color:#5794e0; font-family:OpenSans-Bold;}
+.morediv a{color: #5794e0;font-weight: 700;position: relative;display:block;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -157,10 +157,10 @@
 }
 .embed-mega-review a {
     text-decoration: none;
-    font-family: OpenSans-Regular , sans-serif
+    font-family: OpenSans-Regular;
 }
 .embed-mega-review .field-name-field-story-movie-description .field-item {
-    font-family: OpenSans-Regular, sans-serif;
+    font-family: OpenSans-Regular;
     padding: 10px 0;
     font-size: .9375rem;
     line-height: 27px
