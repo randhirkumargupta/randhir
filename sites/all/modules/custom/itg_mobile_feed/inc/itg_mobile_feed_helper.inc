@@ -8,7 +8,7 @@ define('DEFAULT_REDIS_EXPIRE_TIME', 600);
 define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 600);
 define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 600);
 define('ITGD_DEV_FILES_PATH', 'http://itgddev.indiatodayonline.in/sites/default/files');
-define('ITGD_MUM_DEV_FILES_PATH', 'http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public');
+define('ITGD_MUM_DEV_FILES_PATH', 'https://static-dev.indiatodayonline.in/s3fs-public');
 define('NOTIFICATION_FEED_PATH', 'http://feeds.intoday.in/pushwoosh/message_api.php?app_id=');
 function tidConfig() {
   $tid_config = array();
