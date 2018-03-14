@@ -3286,9 +3286,9 @@ function itg_app_dashboard_form($form, &$form_state) {
 function itg_app_dashboard_form_submit($form, &$form_state) {
     form_state_values_clean($form_state);
     foreach ($form_state['values'] as $key => $val) {
-        $key_val = "";
+        $key_val = "NA";
         $key_val = fetchMasterConfigData($key);
-        if ($key_val != "") {
+        if ($key_val != "NA") {
             // uapdete query
             db_update('itg_app_master_config_internal')
                     ->fields(array(
