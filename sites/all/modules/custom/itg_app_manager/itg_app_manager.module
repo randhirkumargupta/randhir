@@ -4532,16 +4532,35 @@ function hori_itg_app_manager_form_validate($form, &$form_state) {
     //p($form_state['values']);
     $m_id = $form_state['values']['m_id'];
     $order_id = $form_state['values']['container'][1]['order_id'];
-    $menu_type_id = $form_state['values']['container'][1]['menu_type_id'];
+    $menu_type_id = $form_state['values']['container'][1]['menu_type_id']; 
+    $has_subcat = $form_state['values']['container'][1]['has_subcat'];
+    //rule1 : not duplicate order for root
     $query = db_select('itg_app_menu_content', 'imc');
     $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
     $query->condition('imc.menu_type_id', $menu_type_id, '=');
     $query->condition('imc.order_id', $order_id, '=');
+    $query->condition('imc.has_subcategory', 0, '=');
     $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $m_id_db = $results[0]['id'];
-    if (count($results) > 0 && ($m_id_db != $m_id)) {
+    
+    if (count($results) > 0 && ($m_id_db != $m_id) && $has_subcat == 0) {
       $title = $results[0]['title'];      
-      //form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
+      form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
+    }
+    
+    //rule2 : not duplicate title for root
+    $title = hori_return_menu_section_title($form_state);    
+    $query = db_select('itg_app_menu_content', 'imc');
+    $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
+    $query->condition('imc.menu_type_id', $menu_type_id, '=');
+    $query->condition('imc.title', $title, '=');
+    $query->condition('imc.has_subcategory', 0, '=');
+    $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $title = $results[0]['title'];
+    
+    if (count($results) > 0 && $has_subcat == 0) {
+      $title = $results[0]['title'];      
+      form_set_error('order_id', t('Tile: '.$title.' alreday used by for other section'));
     }
 }
 
@@ -4664,4 +4683,95 @@ function manage_order_horizontal_menu_form_validate($form, &$form_state) {
     if(count(array_unique($data))< (count($data))) {        
       //form_set_error('order_id', t('More than one menu have same order value.'));
     }
+}
+/**
+ * hori_return_menu_section_title
+ */
+function hori_return_menu_section_title($form_state) {
+    //p($form_state);
+    $data = array();
+            $title = '';
+            $section_id = 0;
+            $s_id = 0;
+            $s_title = '';
+            if (!empty($form_state['values'])) {
+        foreach ($form_state['values']['container'] as $key => $form_val) {    
+           
+            
+            $data = array();
+            $title = '';
+            $section_id = 0;
+            $s_id = 0;
+            $s_title = '';
+            if ($form_val['menu_type'] == '0') {
+                $title = $form_val['section']['title'];
+                $section_id = 0;
+            } else if ($form_val['menu_type'] == '1' || $form_val['menu_type'] == '1206553' || $form_val['menu_type'] == '1208521' || $form_val['menu_type'] == '1206552') {
+                // p($form_val);
+                if (arg(2) == "edit") {
+                    $title = $form_val['section']['title'];
+                    $section_id = get_taxo_tid($title);
+                    $s_id = $form_val['sub_section_id'];
+                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                    $term = taxonomy_term_load($s_id);
+                    $s_title = $term->name;                    
+                } else {
+                    $section_id = $form_val['section']['title'];
+                    $term = taxonomy_term_load($section_id);
+                    $title = $term->name;
+                    $s_id = $form_val['sub_section_id'];
+                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                    $term = taxonomy_term_load($s_id);
+                    $s_title = $term->name;
+                }
+            } else {
+                $title = $form_val['section']['title'];
+                $section_id = $form_val['menu_type'];
+                $s_id = 0;
+                $s_title = '';
+            }
+            if ($form_val['menu_type'] == '1') {
+                if ($form_val['has_subcat'] == 1) {
+                   if (arg(2) == "edit") {
+                    $title = $form_val['section']['title'];
+                    $section_id = get_taxo_tid($title);
+                    $s_id = $form_val['sub_section_id'];
+                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                    $term = taxonomy_term_load($s_id);
+                    $s_title = $term->name;                    
+                }
+                else{
+                   $s_id = $form_val['sub_section_id'];
+                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                    $term = taxonomy_term_load($s_id);
+                    $s_title = $term->name;
+                }
+                } else {
+                    $s_id = 0;
+                    $s_title = '';
+                }
+            }
+            //p($form_val);
+            if(arg(2) == "edit" && $form_val['sub_section_id'] > 0){
+                $s_id = $form_val['sub_section_id'];
+                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                    $term = taxonomy_term_load($s_id);
+                    $s_title = $term->name;
+            }
+            elseif($form_val['sub_section'] > 0) {
+                 $s_id = $form_val['sub_section'];
+                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                    $term = taxonomy_term_load($s_id);
+                    $s_title = $term->name;
+                    
+                }
+                else{
+                    $s_id = 0;
+                    $s_title = '';
+                }
+
+            
+        }
+    }
+                return $title;
 }

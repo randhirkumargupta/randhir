@@ -160,11 +160,12 @@ function horizontal_menu_data($menu_type_id) {
 
   $result = middleware_menu_data($menu_type_id);
   $total_menu = count($result);
-
+  $oredr_lc = 1;
   if ($total_menu > 0) {
     foreach ($result as $data) {
       $menu_list['id'] = isset($data['section_id']) ? $data['section_id'] : "";
-      $menu_list['order'] = isset($data['order_id']) ? $data['order_id'] : "";
+      //$menu_list['order'] = isset($data['order_id']) ? $data['order_id'] : "";
+      $menu_list['order'] = $oredr_lc;
       $menu_list['title'] = isset($data['title']) ? $data['title'] : "";
       $menu_list['type'] = isset($data['type']) ? $data['type'] : "";
       $menu_list['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
@@ -184,6 +185,7 @@ function horizontal_menu_data($menu_type_id) {
       }
       
       $all_menus[] = $menu_list;
+      $oredr_lc++;
     }
   }
 
