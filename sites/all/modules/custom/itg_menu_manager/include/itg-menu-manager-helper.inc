@@ -444,7 +444,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
         $link_text = $vertical_menu_icon = "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; 
       } else {
         //$img_path = image_style_url('menu_manager_icons' , $icon_object->uri);
-        $link_text = $vertical_menu_icon =   "<img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='".$link_title_for_vertical."' />";
+        $link_text = $link_text_mobile = $vertical_menu_icon =   "<img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='".$link_title_for_vertical."' />";
       }
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
@@ -477,7 +477,10 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   if (!empty($menu_data['db_data']['menu_level']) && $menu_data['db_data']['menu_level'] == 'second') {
     $temp_data = taxonomy_term_load($tid);
     $link_text_icon_uri = '';
-    $link_text_mobile = isset($temp_data->name) ? $temp_data->name : $title_array[0];
+    if (empty($link_text_mobile)) {
+      $link_text_mobile = isset($temp_data->name) ? $temp_data->name : $title_array[0];
+    }
+    
     if (!empty($temp_data->field_sponser_logo['und'][0]['uri']) && file_exists($temp_data->field_sponser_logo['und'][0]['uri'])) {
       $link_text_icon_uri = $temp_data->field_sponser_logo['und'][0]['uri'];
       $img_path_new = file_create_url($link_text_icon_uri);
