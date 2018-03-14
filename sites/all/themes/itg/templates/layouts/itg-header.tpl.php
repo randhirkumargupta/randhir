@@ -142,7 +142,6 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                     <div class="user-menus">
                         <?php
                         if ($_GET['q'] != 'user') {
-                          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                           if ($user->uid == 0) {
                             ?>
                             <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-user"></i> <?php print t('Login'); ?></a>
