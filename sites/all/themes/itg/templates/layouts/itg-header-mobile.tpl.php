@@ -31,7 +31,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
             <div class="nav-container-menu">
                 <div class="nav-centerall">
                     <?php print drupal_render($data['itg_top_manu_header']); ?>
-                    <!----------logo start -->
+                    <!----------mobile logo start -->
                     <?php $logo_itg = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png'); ?>
                     <div class="container headeritg-logo">
                         <?php if ($logo_itg): ?>
@@ -40,7 +40,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                           </div>
                         <?php endif; ?>
                     </div>
-                    <!----------logo end -->
+                    <!----------mobile logo end -->
                     <?php print drupal_render($data['itg_top_manu_header_second']); ?>
                 </div>
             </div>
@@ -129,22 +129,19 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                       }
      
                      $link_title_for_vertical = $menu_link_data['link_text_mobile'];
-                     // $link_title_for_vertical = $menu_link_data['link_text_icon'] . $menu_link_data['link_text_mobile'];
+     
                       ?>
-                      <li <?php echo $style_tag; ?> class="nav-items <?php print $image_class; ?>">
-                      <?php print l($link_text, $link_url, array('html' => true, 'attributes' => $attribute_array,)); ?> 
+                      <li <?php echo $style_tag; ?> class="nav-items ">
+                      <?php print l($link_title_for_vertical, $link_url, array('html' => true, 'attributes' => $attribute_array));?> 
                       </li>
 
                       <?php
                     }
                   endforeach;
                 }
-               // die();
               ?>
             </ul>         
 
-
-<?php //die(); ?>
             <div class="menu-login mhide">
 
                 <div class="social-nav mhide">
