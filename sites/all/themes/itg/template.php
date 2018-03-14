@@ -426,7 +426,7 @@ function itg_html_head_alter(&$head_elements) {
         );
       }
     }
-  
+  /*
   if ($default_mobile_metatags) {
     $head_elements['viewport'] = array(
       '#tag' => 'meta',
@@ -437,7 +437,7 @@ function itg_html_head_alter(&$head_elements) {
       ),
       '#weight' => -980,
     );
-  }
+  }*/
   unset($head_elements['system_meta_content_type']);
   $head_elements['metatag_description_0']['#weight'] = -1000;
   $head_elements['metatag_keywords_0']['#weight'] = -999;

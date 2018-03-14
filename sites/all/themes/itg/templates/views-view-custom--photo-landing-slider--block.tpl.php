@@ -103,7 +103,7 @@ $argum = base64_encode(arg(1));
             <?php foreach ($rows as $index => $row):
               ?>
               <li data-slide-number="<?php echo $index ?>">
-                  <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['fid']; ?>">
+                  <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['item_id']; ?>">
 
 
                       <?php

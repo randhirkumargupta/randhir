@@ -112,20 +112,20 @@ define('FRONT_THEME_NAME', 'itg');
 define('AMP_THEME_NAME', 'amptheme');
 define('EXTRA_SECTION_CARDS', 9);
 define('SECTION_TAB', 20);
-$extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
-define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);
+//$extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
+//define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);
 
-$large_image_style = array('magazine_top_story_483x271');
-define('LARGE_IMAGE_STYLES', $large_image_style);
+//$large_image_style = array('magazine_top_story_483x271');
+//define('LARGE_IMAGE_STYLES', $large_image_style);
 
-$medium_image_style = array('home_page_feature_small', 'section_ordering_widget' , 'anchors_landing', 'magazine_top_three_story_237x133');
-define('MEDIUM_IMAGE_STYLES', $medium_image_style);
+//$medium_image_style = array('home_page_feature_small', 'section_ordering_widget' , 'anchors_landing', 'magazine_top_three_story_237x133');
+//define('MEDIUM_IMAGE_STYLES', $medium_image_style);
 
-$small_image_style = array('image170x127');
-define('SMALL_IMAGE_STYLES', $small_image_style);
+//$small_image_style = array('image170x127');
+//define('SMALL_IMAGE_STYLES', $small_image_style);
 
-$small_extra_image_style = array('widget_very_small');
-define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
+//$small_extra_image_style = array('widget_very_small');
+//define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
 
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
 define('CITY_MANAGMENT', variable_get('city_manager_vid'));
