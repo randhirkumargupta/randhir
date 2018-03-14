@@ -152,7 +152,7 @@ function itg_pti_content() {
                     $node->body[$node->language][0]['value'] = $body_description ? $body_description : '';
                     $node->body[$node->language][0]['format'] = 'full_html';
                     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
-                    $node->field_story_magazine_headline[LANGUAGE_NONE][0]['value'] = $final_kicker;
+                    //$node->field_story_magazine_headline[LANGUAGE_NONE][0]['value'] = $final_kicker;
                     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($headline));
                     //$node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
                     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
@@ -165,6 +165,14 @@ function itg_pti_content() {
                     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                     $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
                     $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
+                    // Attach random image to PTI Story
+                    $file_name_arr = array('latest-news.jpg', 'news-flash.jpg', 'news-update.jpg');
+                    $k = array_rand($file_name_arr);
+					$filename = $file_name_arr[$k];
+					$image = file_get_contents(file_create_url('public://'.$filename));
+					$file = file_save_data($image, 'public://' . $filename, FILE_EXISTS_REPLACE);
+					$node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array)$file));
+					// Attach random image to PTI Story
                     $exp_description = strtolower($description);
                     $exp_description = explode(" ", $exp_description);
                     $exclude_word = array('embargoed', 'ap', 'afp', 'dpa');
