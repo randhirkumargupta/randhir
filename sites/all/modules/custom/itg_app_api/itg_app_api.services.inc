@@ -795,6 +795,33 @@ function itg_app_api_resource() {
         ),
       ),
     ),
+    // homePagedev custom resource declaration.....
+    'home_dev' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves storydetail schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_rapid_api_homePageDev',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
     // livetv_indiatoday_json custom resource declaration.....
     'livetv_indiatoday' => array(
       'operations' => array(
@@ -3317,8 +3344,20 @@ function itg_rapid_api_storydetail($token) {
  */
 function itg_rapid_api_homePage($token) {
 
+  $jsondata = file_get_contents(''.ITGD_MUM_DEV_FILES_PATH.'/homeRVJson.json');
+  $jsondata = json_decode($jsondata, TRUE);
+  return $jsondata;
+}
+/**
+ * Call back function for homePagedev API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_homePageDev($token) {
+
   $redis_key = "devitg_rapid_api_homePage";
-  $result_get = getRedis($redis_key);
+  //$result_get = getRedis($redis_key);
 
   //    if ($result_get['key_value'] != "") {
   //        $jsondata = $result_get['key_value'];
@@ -3327,7 +3366,7 @@ function itg_rapid_api_homePage($token) {
   $jsondata = homePageJson();
   $jsondata = json_encode($jsondata);
   $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
-  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //$result_set = setRedis($redis_key, $jsondata, $ttl);
   //}
 
   $jsondata = json_decode($jsondata, TRUE);

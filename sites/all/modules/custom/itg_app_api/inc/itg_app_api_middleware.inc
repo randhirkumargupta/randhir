@@ -268,12 +268,14 @@ function middleware_menu_subcat_list($cat_id) {
       $sub_cat['s_is_new'] = "0";
       $all_sub_cat[] = $sub_cat;
   if ($total_sub_cat > 0) {
+      $lc = 2;
     foreach ($result as $cat_data) {        
       $sub_cat['s_id'] = $cat_data['section_id'];
       $sub_cat['s_title'] = $cat_data['s_title'];
-      $sub_cat['s_order'] = $cat_data['order_id'];
+      $sub_cat['s_order'] = $lc;
       $sub_cat['s_is_new'] = $cat_data['is_new'];
       $all_sub_cat[] = $sub_cat;
+      $lc++;
     }
   }
 

@@ -823,4 +823,24 @@ function generateAuthorTagStory($node, $status) {
   $output['a_twitter_handler'] = "$a_twitter_handler";
   return $output;
 }
+/**
+ * function for getHighlightByNid
+ * @pram int $nid
+ *
+ * @return array
+ */
+function getHighlightByNid($nid) {
+  $heighlight = array();
+  $query = db_select('field_data_field_story_highlights', 'shl');
+  $query->fields('shl', array('field_story_highlights_value'));
+  $query->condition('shl.entity_id', $nid, '=');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $loop_cont = 0;
+  foreach ($result as $reskey => $resvalue) {
+    $text = $resvalue['field_story_highlights_value'];
+    $heighlight[$loop_cont]['h_title'] = "$text";
+    $loop_cont++;
+  }
+  return $heighlight; 
+}
 

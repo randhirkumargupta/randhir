@@ -294,6 +294,7 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+    
 
     return $items;
 }
@@ -1903,13 +1904,14 @@ function itg_app_create_widget_form($form, &$form_state, $w_id) {
     $w_url = '';
     if (isset($w_id) && !empty($w_id)) {
         $w_query = db_select('itg_app_middleware', 'itg_m');
-        $w_query->fields('itg_m', array('name', 'url'));
+        $w_query->fields('itg_m', array('name', 'url', 'status'));
         $w_query->condition('itg_m.identifier', 'itg_widget', '=');
         $w_query->condition('itg_m.id', $w_id, '=');
         $w_query_results = $w_query->execute()->fetchAll();
-        foreach ($w_query_results as $key => $val) {
+        foreach ($w_query_results as $key => $val) {            
             $w_name = $val->name;
             $w_url = $val->url;
+            $status = $val->status;
         }
     }
     $form['widget_name'] = array(
@@ -1918,14 +1920,24 @@ function itg_app_create_widget_form($form, &$form_state, $w_id) {
         '#default_value' => $w_name,
         '#size' => 25,
         '#maxlength' => 255,
+        '#required' => TRUE,                 
+   
     );
     $form['widget_url'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Url',
+        '#type' => 'textarea',
+        '#title' => 'N_widget',
         '#default_value' => $w_url,
-        '#size' => 25,
-        '#maxlength' => 255,
+        '#cols' => 60,
+        '#rows' => 5,
+        '#required' => TRUE, 
     );
+    $form['status'] = array(
+                '#type' => 'select',
+                '#title' => 'Status',
+                '#options' => array( '1' => 'Active', '0' => 'In-Active'),
+                '#default_value' => $status,
+                '#required' => TRUE,                
+            );
     if (isset($w_id) && !empty($w_id)) {
         $form['id'] = array(
             '#type' => 'hidden',
@@ -1949,9 +1961,10 @@ function itg_app_create_widget_form_submit($form, &$form_state) {
     if (isset($form_state['values']['id']) && !empty($form_state['values']['id'])) {
         $num_updated = db_update('itg_app_middleware')
                 ->fields(array(
-                    'name' => $form_state['values']['widget_name'],
-                    'url' => $form_state['values']['widget_url'],
+                    'name' => trim($form_state['values']['widget_name']),
+                    'url' => trim($form_state['values']['widget_url']),
                     'changed' => REQUEST_TIME,
+                    'status' => $form_state['values']['status'],
                 ))
                 ->condition('id', $form_state['values']['id'], '=')
                 ->execute();
@@ -1962,10 +1975,11 @@ function itg_app_create_widget_form_submit($form, &$form_state) {
         db_insert('itg_app_middleware')
                 ->fields(array(
                     'identifier' => 'itg_widget',
-                    'name' => $form_state['values']['widget_name'],
-                    'url' => $form_state['values']['widget_url'],
+                    'name' => trim($form_state['values']['widget_name']),
+                    'url' => trim($form_state['values']['widget_url']),
                     'created' => REQUEST_TIME,
                     'changed' => REQUEST_TIME,
+                    'status' => $form_state['values']['status'],
                 ))
                 ->execute();
         drupal_set_message(t('Data saved successfully.'), 'status');
@@ -1982,16 +1996,17 @@ function itg_app_widget_table() {
     $w_query->fields('itg_m');
     $w_query->condition('itg_m.identifier', 'itg_widget', '=');
     $w_query_results = $w_query->execute()->fetchAll();
+    $header = array(t('S.No'), t('Name'), t('N_widget'), t('Status'), t('Update'), t('Remove'));
     foreach ($w_query_results as $key => $val) {
         $delete = l(t('Delete'), 'itg-app-widget/' . $val->id . '/delete');
         $edit = l(t('Edit'), 'itg-app-widget/' . $val->id . '/edit');
-        $rows[] = array('number' => $key + 1, 'widget_name' => $val->name, 'edit' => $edit, 'delete' => $delete);
+        $rows[] = array('number' => $key + 1, 'widget_name' => $val->name, 'url' => $val->url, 'status' => $val->status, 'edit' => $edit, 'delete' => $delete);
     }
     return array(
         '#theme' => 'table',
         '#header' => $header,
         '#rows' => $rows,
-        '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
+        '#empty' => t('Nothing found.'),
     );
 }
 
@@ -3710,6 +3725,7 @@ function getMenuTypeLabel($m_id, $label) {
  * @return array
  */
 function itg_app_arrange_home_form($form, &$form_state) {
+    global $base_url;
     drupal_add_css(drupal_get_path('module', 'itg_app_manager') . '/css/itg_app_manager.css');
     // Build Breadcrumbs
     $breadcrumb = array();
@@ -3718,36 +3734,59 @@ function itg_app_arrange_home_form($form, &$form_state) {
     drupal_set_breadcrumb($breadcrumb);
     global $base_url;
     $form = array();
-
+    $form['contact_information'] = array(
+        '#markup' => '<span font-color="red">*</span>Please make sure order start from 0 AND Maintain sequence',
+    );
+    $query = db_select('itg_app_middleware', 'mci');
+    $query->fields('mci');          
+    $query->condition('mci.identifier', 'itg_widget', '=');  
+    $query->condition('mci.status', '1', '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $key => $value) {
+        $name = $value['name'];
+        $name = str_replace(" ","_",$name);
+        $form['homeapi_order_widget_'.$name.''] = array(
+        '#type' => 'select',
+        '#title' => t('Widget - '.$name.''),
+        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#default_value' => fetchMasterConfigData('homeapi_order_widget_'.$name.''),
+        '#required' => TRUE,
+       );
+    }
     $form['homeapi_order_packages'] = array(
         '#type' => 'select',
         '#title' => t('Packages order'),
-        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-        '#default_value' => fetchMasterConfigData('homeapi_order_packages')
+        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#default_value' => fetchMasterConfigData('homeapi_order_packages'),
+         '#required' => TRUE,
     );
     $form['homeapi_order_topstories'] = array(
         '#type' => 'select',
         '#title' => t('Topstories order'),
-        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-        '#default_value' => fetchMasterConfigData('homeapi_order_topstories')
+        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#default_value' => fetchMasterConfigData('homeapi_order_topstories'),
+         '#required' => TRUE,
     );
     $form['homeapi_order_categories'] = array(
         '#type' => 'select',
         '#title' => t('Categories order'),
-        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-        '#default_value' => fetchMasterConfigData('homeapi_order_categories')
+        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#default_value' => fetchMasterConfigData('homeapi_order_categories'),
+         '#required' => TRUE,
     );
     $form['homeapi_order_magazines'] = array(
         '#type' => 'select',
         '#title' => t('Magazines order'),
-        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-        '#default_value' => fetchMasterConfigData('homeapi_order_magazines')
+        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#default_value' => fetchMasterConfigData('homeapi_order_magazines'),
+         '#required' => TRUE,
     );
     $form['homeapi_order_polls'] = array(
         '#type' => 'select',
         '#title' => t('Polls order'),
-        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
-        '#default_value' => fetchMasterConfigData('homeapi_order_polls')
+        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#default_value' => fetchMasterConfigData('homeapi_order_polls'),
+         '#required' => TRUE,
     );
 
     $form['home_arra_submit_button'] = array(
@@ -3755,8 +3794,27 @@ function itg_app_arrange_home_form($form, &$form_state) {
         '#value' => t('Save'),
         '#submit' => array('itg_app_arrange_home_form_submit'),
     );
+    $form['#validate'][] = 'itg_app_arrange_home_form_validate'; 
+    $u_url = $base_url."/test-to-live/home-api";
+    $form['markup_v_1'] = array(
+            '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live Home API</a>",
+        );
 
     return $form;
+}
+function itg_app_arrange_home_form_validate($form, &$form_state){
+    $data = $form_state['input'];  
+    $max = itg_max_from_array($data);
+    //validation rule1
+    for($i = 0; $i <= $max ; $i++){
+        if(!array_search($i,$data)){
+           form_set_error('order_id', t('Maintain sequence order.')); 
+        }
+    }
+    //validation rule2
+    if(count(array_unique($data))< (count($data))) {        
+      form_set_error('order_id', t('More than one menu have same order value.'));
+    }
 }
 
 /**
@@ -4035,7 +4093,7 @@ function itg_app_manager_packages_update_conf_form_submit($form, &$form_state) {
     // insert query
     $key = arg(1);
     $info_type = "packages";
-
+    db_delete('itg_app_master_info_internal')->condition('org_id', $cat_id)->condition('info_type', $info_type)->execute();
     $data = array(
         'org_id' => $cat_id,
         'info_id' => $key,
@@ -4089,7 +4147,7 @@ function itg_app_manager_poll_update_conf_form_submit($form, &$form_state) {
     // insert query
     $key = arg(1);
     $info_type = "poll";
-
+    db_delete('itg_app_master_info_internal')->condition('org_id', $cat_id)->condition('info_type', $info_type)->execute();
     $data = array(
         'org_id' => $cat_id,
         'info_id' => $key,
@@ -4143,7 +4201,7 @@ function itg_app_manager_magazine_update_conf_form_submit($form, &$form_state) {
     // insert query
     $key = arg(1);
     $info_type = "magazine";
-
+    db_delete('itg_app_master_info_internal')->condition('org_id', $cat_id)->condition('info_type', $info_type)->execute();
     $data = array(
         'org_id' => $cat_id,
         'info_id' => $key,
@@ -4317,6 +4375,8 @@ function manage_order_hamburger_menu_form_validate($form, &$form_state) {
  * @return array
  */
 function _get_section_options_hori($term_id, $menu_form_id, $subsec_options) {
+    
+   //echo "trem-d:".$term_id."subopt:".$subsec_options;
     $option_arr = array('' => '- Select -');
     if ($subsec_options == 0) {
 
@@ -4684,9 +4744,21 @@ function manage_order_horizontal_menu_form_validate($form, &$form_state) {
       //form_set_error('order_id', t('More than one menu have same order value.'));
     }
 }
-/**
- * hori_return_menu_section_title
- */
+
+function itg_max_from_array($data){
+    unset($data['op']);
+    unset($data['form_build_id']);
+    unset($data['form_token']);
+    unset($data['form_id']);
+    $b = 0;    
+    foreach ($data as $key=>$val) {
+        if ($val > $b) {
+            $b = $val;
+        }
+    }
+    return $b;
+}
+
 function hori_return_menu_section_title($form_state) {
     //p($form_state);
     $data = array();
@@ -4775,3 +4847,5 @@ function hori_return_menu_section_title($form_state) {
     }
                 return $title;
 }
+
+
