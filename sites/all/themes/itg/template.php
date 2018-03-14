@@ -564,9 +564,9 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
-  unset($javascript['https://vuukle.com/js/vuukle.js']);
-  unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
+  //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+  //unset($javascript['https://vuukle.com/js/vuukle.js']);
+  //unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
   
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
@@ -604,6 +604,7 @@ function itg_js_alter(&$javascript) {
   * @param array $variables
   * @return string
   */
+/*
 function itg_css_alter(&$css) {
    global $user;
    $exclude = array(
@@ -627,7 +628,7 @@ function itg_css_alter(&$css) {
    if ($user->uid == 0) {
      $css = array_diff_key($css, $exclude);
    }
-}
+}*/
 
 function itg_image($variables) {
   $attributes = $variables['attributes'];
@@ -742,58 +743,58 @@ function itgd_chart_beat_code() {
             $ImpulseID = "IMPL-ITDG-INDIATODAY-RESP-GENERIC"; EmbedScript();
         }', array('type' => 'inline', 'scope' => 'footer'));    
     }
-    drupal_add_js("var _sf_async_config = _sf_async_config || {};
+    drupal_add_js('var _sf_async_config = _sf_async_config || {};
       /** CONFIGURATION START **/
     _sf_async_config.uid = 60355;
-    _sf_async_config.domain = 'indiatoday.in';
+    _sf_async_config.domain = "indiatoday.in";
     _sf_async_config.useCanonical = true;
-    _sf_async_config.sections = '" . $chart_sections . "';  
-    _sf_async_config.authors = '" . $chart_authors . "';    
-	_sf_async_config.title = '" . $chart_title . "';
-	_sf_async_config.path = '" . $chart_path . "';
+    _sf_async_config.sections = "' . $chart_sections . '";  
+    _sf_async_config.authors = "' . $chart_authors . '";    
+	_sf_async_config.title = "' . $chart_title . '";
+	_sf_async_config.path = "' . $chart_path . '";
     /** CONFIGURATION END **/
      (function () {
           function loadChartbeat() { 
                window._sf_endpt = (new Date()).getTime();
-               var e = document.createElement('script');
-               e.setAttribute('language', 'javascript');
-               e.setAttribute('type', 'text/javascript');
-               e.setAttribute('src', '" . $chart_js . "');
+               var e = document.createElement("script");
+               e.setAttribute("language", "javascript");
+               e.setAttribute("type", "text/javascript");
+               e.setAttribute("src", "' . $chart_js . '");
                document.body.appendChild(e);
           }
           var oldonload = window.onload;
-        window.onload = (typeof window.onload != 'function') ?
+        window.onload = (typeof window.onload != "function") ?
             loadChartbeat : function() {
                 oldonload();
                 loadChartbeat();
             };	  
 		  
-     })();", array('type' => 'inline', 'scope' => 'footer'));
+     })();', array('type' => 'inline', 'scope' => 'footer'));
   } else {
-  drupal_add_js("var _sf_async_config = _sf_async_config || {};
+  drupal_add_js('var _sf_async_config = _sf_async_config || {};
       /** CONFIGURATION START **/
     _sf_async_config.uid = 60355;
-    _sf_async_config.domain = 'indiatoday.in';
+    _sf_async_config.domain = "indiatoday.in";
     _sf_async_config.useCanonical = true;
-    _sf_async_config.sections = '" . $chart_sections . "';  
-    _sf_async_config.authors = '" . $chart_authors . "';
+    _sf_async_config.sections = "' . $chart_sections . '";  
+    _sf_async_config.authors = "' . $chart_authors . '";
     /** CONFIGURATION END **/
      (function () {
           function loadChartbeat() { 
                window._sf_endpt = (new Date()).getTime();
-               var e = document.createElement('script');
-               e.setAttribute('language', 'javascript');
-               e.setAttribute('type', 'text/javascript');
-               e.setAttribute('src', '" . $chart_js . "');
+               var e = document.createElement("script");
+               e.setAttribute("language", "javascript");
+               e.setAttribute("type", "text/javascript");
+               e.setAttribute("src", "' . $chart_js . '");
                document.body.appendChild(e);
           }
           var oldonload = window.onload;
-        window.onload = (typeof window.onload != 'function') ?
+        window.onload = (typeof window.onload != "function") ?
             loadChartbeat : function() {
                 oldonload();
                 loadChartbeat();
             };	  
 		  
-     })();", array('type' => 'inline', 'scope' => 'footer'));
+     })();', array('type' => 'inline', 'scope' => 'footer'));
   }
 }
