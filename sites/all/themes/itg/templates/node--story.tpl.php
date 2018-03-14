@@ -1074,7 +1074,7 @@ if (!empty($content)):
                 $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a title = "share" href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick=\'fbpop("' . $actual_link . '", "' . $buzz_title_share . '", "'  . $share_desc . '", "' . $share_image . '", "' . $base_url . '", "' $nid . '"' . ')\' class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick=\'fbpop("' . $actual_link . '", "' . $buzz_title_share . '", "'  . $share_desc . '", "' . $share_image . '", "' . $base_url . '", "' . $nid . '")\' class="facebook"><i class="fa fa-facebook"></i></a></li>
               <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick=\'twitter_popup("' . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]["value"]) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $actual_link . '")\' class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>

@@ -48,7 +48,96 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     </div>
     <nav class="navigation">
         <div class="container">
-            <ul class="second-level-menu before-load menu">
+            <ul class="second-level-menu before-load menu mhide">
+                <li class="userlogin-icon-parent-mobile">    
+                    <div class="user-menus">
+                        <?php
+                        if ($_GET['q'] != 'user') {
+                          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+                          if ($user->uid == 0) {
+                            ?>
+                            <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-user"></i> <?php print t('Login'); ?></a>
+                            <?php
+                          }
+                          else {
+                            ?>
+                            <a href="<?php print $base_url; ?>/personalization/edit-profile/general-settings" class="user-icon loginicon"><?php print $user_pic; ?></a>  
+                            <?php
+                          }
+                        }
+                        ?>
+
+                        <?php
+                        $block = module_invoke('system', 'block_view', 'user-menu');
+                        print render($block['content']);
+                        ?>
+                    </div>
+
+                </li>
+                
+
+                <?php
+
+                // Contion to check fucntion isset.
+                $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
+                $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
+              
+                $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
+               
+               
+                // Contion to check fucntion isset.
+                $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
+                if (!empty($menu_manager)) {
+                  foreach ($menu_manager as $key => $menu_data) :
+                    if (function_exists('itg_menu_manager_get_menu')) {
+                      // Logic to exclude inactive category.
+                      $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
+                     
+                      $image_class = $menu_link_data['image_class'];
+                      $link_text = $menu_link_data['link_text'];
+                      $link_url = $menu_link_data['link_url'];
+                      $target = $menu_link_data['target'];
+                      $active = $menu_link_data['active'];
+                      $sponsored_class = $menu_link_data['sponsored_class'];
+                      $parent_class = $menu_link_data['parent_class'];
+                      $active_cls = $menu_link_data['active_cls'];
+                      $url_type = $menu_link_data['url_type'];
+                      $style_tag = '';
+                      $color_value = 'transparent';
+                      if (!empty($sponsored_class)) {
+                        $color_value = $menu_data['db_data']['bk_color'];
+                      }
+                      if ($menu_link_data['url_type'] == 'url-type-external') {
+                        $attribute_array = array(
+                          'style' => array("background : $color_value"),
+                          'target' => $target,
+                          'rel' => 'nofollow',
+                          'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                        );
+                      }
+                      else {
+                        $attribute_array = array(
+                          'style' => array("background : $color_value"),
+                          'target' => $target,
+                          'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                        );
+                      }
+                   
+                      ?>
+                     <li <?php echo $style_tag; ?> class="nav-items <?php print $image_class; ?>">
+                      <?php print l($link_text, $link_url, array('html' => true, 'attributes' => $attribute_array)); ?> 
+                      </li>
+                     
+
+                      <?php
+                    }
+                  endforeach;
+                }
+               // die();
+              ?>
+            </ul>
+            
+            <ul class="second-level-menu before-load menu desktop-hide">
                 <li class="userlogin-icon-parent-mobile">    
                     <div class="user-menus">
                         <?php
@@ -127,24 +216,23 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                           'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
                         );
                       }
-     
+                     // For Mobile link
                      $link_title_for_vertical = $menu_link_data['link_text_mobile'];
                      // $link_title_for_vertical = $menu_link_data['link_text_icon'] . $menu_link_data['link_text_mobile'];
                       ?>
-                      <li <?php echo $style_tag; ?> class="nav-items <?php print $image_class; ?>">
-                      <?php print l($link_text, $link_url, array('html' => true, 'attributes' => $attribute_array,)); ?> 
+                    
+                      
+                      <li <?php echo $style_tag; ?> class="nav-items desktop-hide <?php print $image_class; ?>">
+                      <?php print l($link_title_for_vertical, $link_url, array('html' => true, 'attributes' => $attribute_array)); ?> 
                       </li>
 
                       <?php
                     }
                   endforeach;
                 }
-               // die();
               ?>
-            </ul>         
+            </ul>   
 
-
-<?php //die(); ?>
             <div class="menu-login mhide">
 
                 <div class="social-nav mhide">
