@@ -295,7 +295,7 @@ function _get_content_type_for_widget($widget_name) {
   $content_type = array('story', 'videogallery', 'photogallery');
   switch ($widget_name) {
     case 'top_stories_widget':
-      $content_type = array('story', 'breaking_news', 'mega_review_critic');
+      $content_type = array('story', 'breaking_news', 'mega_review_critic', 'videogallery', 'photogallery');
       break;
     case 'dont_miss_content_widget':
       $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
