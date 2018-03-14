@@ -413,6 +413,18 @@ if (!empty($content)):
                   <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
                 <?php } ?>                            
               </div>
+              <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+                <div class="briefcase mhide">
+                  <h4><?php print t('HIGHLIGHTS'); ?></h4>
+                  <ul>
+                    <?php
+                    foreach ($node->field_story_highlights['und'] as $high) {
+                      print '<li>' . $high['value'] . '</li>';
+                    }
+                    ?>
+                  </ul>
+                </div>              
+              <?php } ?>  
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
                   <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">                            
