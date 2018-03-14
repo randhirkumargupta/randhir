@@ -11,7 +11,7 @@ use Aws\Common\Credentials\Credentials;
 function itg_pti_content() {
   if (!empty(variable_get('api_info'))) {
     global $user;
-    module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
+    //module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
     $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -20,31 +20,32 @@ function itg_pti_content() {
       $op[$val->tid] = strtolower($val->name);
     }*/
     $op = array();
-    $bucket = variable_get('api_bucket');
-    $aws_access_key = variable_get('aws_access_key');
-    $aws_secret_key = variable_get('aws_secret_key');
-    $aws_region = variable_get('aws_region');
-
-    $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
-    $s3->registerStreamWrapper();
-    try {
-      $objects = $s3->getIterator('ListObjects', array(
-        'Bucket' => $bucket,
-        "Prefix" => 'agencies/pti/'
-      ));
+    //~ $bucket = variable_get('api_bucket');
+    //~ $aws_access_key = variable_get('aws_access_key');
+    //~ $aws_secret_key = variable_get('aws_secret_key');
+    //~ $aws_region = variable_get('aws_region');
+//~ 
+    //~ $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+    //~ $s3->registerStreamWrapper();
+    //~ try {
+      //~ $objects = $s3->getIterator('ListObjects', array(
+        //~ 'Bucket' => $bucket,
+        //~ "Prefix" => 'agencies/pti/'
+      //~ ));
       $pti = 1;
-      foreach ($objects as $object) {
-        $exp = explode('/', $object['Key']);
-        $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
-        if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
-          if ($exp[2] != 'XmlBhasha' && $exp[2] != 'Complete_xml' && $exp[2] != 'already_imported') {
-            $xml_file_path = $s3->getObjectUrl($bucket, $object['Key']);
-            if (empty($exp[3])) {
-              $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2];
-            }
-            else {
-              $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2] . '/' . $exp[3];
-            }
+      //foreach ($objects as $object) {
+        //$exp = explode('/', $object['Key']);
+        //$xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
+        //if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
+          //if ($exp[2] != 'XmlBhasha' && $exp[2] != 'Complete_xml' && $exp[2] != 'already_imported') {
+            //~ $xml_file_path = $s3->getObjectUrl($bucket, $object['Key']);
+            //~ if (empty($exp[3])) {
+              //~ $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2];
+            //~ }
+            //~ else {
+              //~ $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2] . '/' . $exp[3];
+            //~ }
+            $file_path = '/var/www/html/test/MCM11-PRICES-CNI-OILSEEDS CLOSE.xml';
             $xml_filename = basename(trim($file_path));
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -165,6 +166,14 @@ function itg_pti_content() {
                     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                     $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
                     $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
+                    // Attach random image to PTI Story
+                    $file_name_arr = array('latest-news.jpg', 'news-flash.jpg', 'news-update.jpg');
+                    $k = array_rand($file_name_arr);
+					$filename = $file_name_arr[$k];
+					$image = file_get_contents(file_create_url('public://'.$filename));
+					$file = file_save_data($image, 'public://' . $filename, FILE_EXISTS_REPLACE);
+					$node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array)$file));
+					// Attach random image to PTI Story
                     $exp_description = strtolower($description);
                     $exp_description = explode(" ", $exp_description);
                     $exclude_word = array('embargoed', 'ap', 'afp', 'dpa');
@@ -242,13 +251,13 @@ function itg_pti_content() {
                 }
               }
            // }
-          }
-        }
-      }
-    }
-    catch (S3Exception $e) {
-      echo $e->getMessage() . "\n";
-    }
+          //}
+        //}
+      //}
+    //}
+    //~ catch (S3Exception $e) {
+      //~ echo $e->getMessage() . "\n";
+    //~ }
   }
   else {
     watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
