@@ -176,7 +176,7 @@ function horizontal_menu_data($menu_type_id) {
       $menu_list['id'] = isset($data['section_id']) ? $data['section_id'] : "";
       //$menu_list['order'] = isset($data['order_id']) ? $data['order_id'] : "";
       $menu_list['order'] = $oredr_lc;
-      $menu_list['title'] = isset($data['title']) ? $data['title'] : "";
+      $menu_list['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
       $menu_list['type'] = isset($data['type']) ? $data['type'] : "";
       $menu_list['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
       $menu_list['icon_url'] = isset($data['icon_url']) ? $data['icon_url'] : "";
@@ -281,7 +281,7 @@ function middleware_menu_subcat_list($cat_id) {
       $lc = 2;
     foreach ($result as $cat_data) {        
       $sub_cat['s_id'] = $cat_data['section_id'];
-      $sub_cat['s_title'] = $cat_data['s_title'];
+      $sub_cat['s_title'] = strtoupper($cat_data['s_title']);
       $sub_cat['s_order'] = $lc;
       $sub_cat['s_is_new'] = $cat_data['is_new'];
       $all_sub_cat[] = $sub_cat;
