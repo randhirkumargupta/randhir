@@ -130,7 +130,15 @@ function itg_miscellaneous_cronapi($op, $job = NULL) {
     'callback' => 'remove_old_widgets_from_table',
     'file' => 'includes/itg_remove_flooded_data.inc',
   );
+  $items['cron_test'] = array(
+    'description' => 'cron_test',
+    'callback' => 'test'
+  );
   return $items;
+}
+
+function test(){
+	
 }
 
 /**  
