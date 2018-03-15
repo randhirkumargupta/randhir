@@ -196,6 +196,9 @@ function getSectionCountData_report($start_date, $end_date, $type, $status) {
  * @return int $n_count;
  */
 function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
+    $synd = empty($_GET['synd']) ? 0 : $_GET['synd'];
+    $exclude_agency = empty($_GET['exclude_agency']) ? 0 : $_GET['exclude_agency'];
+    $agencies = array('ANI', 'AP', 'IANS', 'Mail Today', 'PTI', 'Reuters');
     //story count between
     $query = db_select('node', 'n');
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
@@ -220,6 +223,17 @@ function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
     if ($type != "na") {
         $query->condition('n.type', $type);
     }
+    
+    if ($synd) {
+      $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+      $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    }
+    
+    if ($exclude_agency) {
+      $query->join('field_data_field_story_source_type', 'fsst', 'fsst.entity_id=n.nid');
+      $query->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
+    }
+    
     $query->condition('ti.tid', $tid, '=');
     $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
     $query->groupBy('n.nid');
@@ -249,6 +263,9 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $total_cont = 0;
     $range_max = $item_per_page;
     $all_tids = array();
+    $synd = empty($_GET['synd']) ? 0 : $_GET['synd'];
+    $exclude_agency = empty($_GET['exclude_agency']) ? 0 : $_GET['exclude_agency'];
+    $agencies = array('ANI', 'AP', 'IANS', 'Mail Today', 'PTI', 'Reuters');
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -272,11 +289,17 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($type != "na") {
         $query->condition('n.type', $type);
     }
-    if ($synd == 'Yes') {
-        $query->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
-        $query->fields('syn', array('field_story_syndication_value'));
-        $query->condition('syn.field_story_syndication_value', $synd);
+    if ($synd) {
+      $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+      $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     }
+    
+    if ($exclude_agency) {
+      $query->join('field_data_field_story_source_type', 'fsst', 'fsst.entity_id=n.nid');
+      $query->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
+    }
+    
+    
     if ($status != '') {
         $query->condition('n.status', $status);
     }
@@ -391,6 +414,10 @@ function get_prime_cat_by_nid($nid) {
  * @return int $total_records
  */
 function report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno) {
+    $synd = empty($_GET['synd']) ? 0 : $_GET['synd'];
+    $exclude_agency = empty($_GET['exclude_agency']) ? 0 : $_GET['exclude_agency'];
+    $agencies = array('ANI', 'AP', 'IANS', 'Mail Today', 'PTI', 'Reuters');
+    
     $query_cont = db_select('node', 'n');
     $query_cont->fields('n', array('nid'));
     //end
@@ -405,11 +432,16 @@ function report_totalRecordsCount($start_date, $end_date, $type, $status, $synd,
     if ($type != "na") {
         $query_cont->condition('n.type', $type);
     }
-    if ($synd == 'Yes') {
-        $query_cont->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
-        $query_cont->fields('syn', array('field_story_syndication_value'));
-        $query_cont->condition('syn.field_story_syndication_value', $synd);
+    if ($synd) {
+      $query_cont->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+      $query_cont->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     }
+    
+    if ($exclude_agency) {
+      $query_cont->join('field_data_field_story_source_type', 'fsst', 'fsst.entity_id=n.nid');
+      $query_cont->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
+    }
+     
     $query_cont->condition('n.status', $status);
     $result_cont = $query_cont->execute()->fetchAll();
     $total_records = count($result_cont);
