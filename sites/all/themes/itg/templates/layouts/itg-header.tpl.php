@@ -142,7 +142,6 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                     <div class="user-menus">
                         <?php
                         if ($_GET['q'] != 'user') {
-                          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                           if ($user->uid == 0) {
                             ?>
                             <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-user"></i> <?php print t('Login'); ?></a>
@@ -171,16 +170,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                 </li>
 
                 <?php
-
-                // Contion to check fucntion isset.
-                $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
-                $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
-              
-                $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
-               
-               
-                // Contion to check fucntion isset.
-                $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
+                
                 if (!empty($menu_manager)) {
                   foreach ($menu_manager as $key => $menu_data) :
                     if (function_exists('itg_menu_manager_get_menu')) {

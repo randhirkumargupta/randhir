@@ -22,6 +22,10 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
     $total_cont = 0;
     $range_max = $item_per_page;
     $range_min = 0;
+    $synd = empty($_GET['synd']) ? 0 : $_GET['synd'];
+    $exclude_agency = empty($_GET['exclude_agency']) ? 0 : $_GET['exclude_agency'];
+    $agencies = array('ANI', 'AP', 'IANS', 'Mail Today', 'PTI', 'Reuters');
+    
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     }
@@ -49,8 +53,18 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
     if ($type != "na") {
         $query->condition('n.type', $type);
     }
-    //$query->condition('ti.tid', '1206640', '<>');
-    $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+    if ($synd) {
+      $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+      $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    }
+    
+    if ($exclude_agency) {
+      $query->join('field_data_field_story_source_type', 'fsst', 'fsst.entity_id=n.nid');
+      $query->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
+    }
+    if($type == 'story'){
+      $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+    }    
     $query->groupBy('n.nid');
     $query->condition('n.status', $status)->orderBy('n.created', 'DESC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
