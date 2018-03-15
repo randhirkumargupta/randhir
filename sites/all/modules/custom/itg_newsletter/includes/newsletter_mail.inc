@@ -96,9 +96,9 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $campaign['listId'] = NETCORE_LIST_ID;
     $mail_scehdule = itg_netcore_mail_scehdule_campaign($campaign);
 
-    watchdog("netcore content", '<pre>' . print_r($data_email, TRUE) . '</pre>');
-    watchdog("netcore create campaign", '<pre>' . print_r($create_campaign, TRUE) . '</pre>');
-    watchdog("netcore mail", '<pre>' . print_r($mail_scehdule, TRUE) . '</pre>');
+    //watchdog("netcore content", '<pre>' . print_r($data_email, TRUE) . '</pre>');
+    //atchdog("netcore create campaign", '<pre>' . print_r($create_campaign, TRUE) . '</pre>');
+    //watchdog("netcore mail", '<pre>' . print_r($mail_scehdule, TRUE) . '</pre>');
   }
   /* $params = array(
     'body' => $mail_content,
@@ -141,7 +141,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 600px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" width="100%" height="100px" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 600px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" title="" width="100%" height="100px" /></td></tr>';
 
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
@@ -176,7 +176,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     }
     if ($flag) {
       $news_content .= '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
@@ -240,7 +240,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial">
-    <tr><td colspan="2"><img src="' . $banner . '" alt="" width="100%" height="100px" /></td></tr>';
+    <tr><td colspan="2"><img src="' . $banner . '" alt="" title="" width="100%" height="100px" /></td></tr>';
 
     $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
@@ -260,7 +260,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       }
       $link = FRONT_URL . '/node/' . $news_detail->nid;
       $content .= '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
@@ -331,5 +331,70 @@ function itg_update_newsletter_cron_tbl($nid) {
     $new_time_value = date('Y-m-d 00:00:00', $scheduled_time);
     $node_load_data->field_survey_start_date[LANGUAGE_NONE][0]['value'] = $new_time_value;
     field_attach_update('node', $node_load_data);
+  }
+}
+
+/**
+ * Get Newsletter content using nid
+ * Used on newsletter form
+ */
+function itg_newsletter_content_data() {
+
+  $getnid = $_POST['content_id'];
+  if (isset($getnid) && !empty($getnid)) {
+	$type = array("videogallery", "photogallery", "story");
+    $query = db_select('node', 'n');
+//    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.nid', $getnid, '=');
+//    $query->condition('mnh.state', 'published', '=');
+    $result = $query->execute();
+    $record_nid = $result->rowCount();
+    $record_nid = $result->fetchField();
+    if (!empty($record_nid)) {
+      $node = node_load($record_nid);
+      if ($node->type == 'story') {
+        $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      } else if ($node->type == 'videogallery') {
+        $kicker = $node->field_video_kicker[LANGUAGE_NONE][0]['value'];
+      } else if ($node->type == 'photogallery') {
+        $kicker = $node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+      } else {
+        $kicker = '';
+      }
+      $file_id = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+      $file_data = _itg_get_extra_large_img_alt_and_title_from_tid($file_id , $getnid);
+      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'file_data' => $file_data  ,'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
+      exit;
+    }
+  }
+}
+
+/**
+ * Implements page callback
+ * @return json
+ */
+function itg_newsletter_content_subject_headline($title) {
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('node', 'n');
+      $query->leftJoin('field_data_field_news_title' , 'nt' , 'nt.entity_id=n.nid');
+      $query->fields('nt', array('field_news_title_value'));
+      $query->condition('nt.field_news_title_value', '%' . $title . '%', 'LIKE');
+      $query->condition('n.type', 'newsletter', '=');
+      $query->condition('n.status', 1);
+      $query->range(0, 20);
+      $query->orderBy('nt.field_news_title_value');
+      $result = $query->execute();
+
+      while ($record = $result->fetchAssoc()) {
+          $options[$record['field_news_title_value']] = $record['field_news_title_value'];
+      }
+
+      drupal_json_output($options);
   }
 }

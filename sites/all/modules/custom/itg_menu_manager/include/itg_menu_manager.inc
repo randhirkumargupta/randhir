@@ -83,6 +83,43 @@ function remove_from_menu_manager($tid) {
 
   if (is_numeric($tid)) {
     db_delete('itg_menu_manager')->condition('id', $tid)->execute();
+    //START Logic to clear cache
+    $block_cache = array(
+      'itg_layout_manager:header_block',
+      'itg_menu_manager:vertical_menu',
+      'itg_menu_manager:second_level_menu',
+      'itg_menu_manager:third_level_menu'
+    );
+    itg_common_cache_clear($block_cache);
+    //END Logic to clear cache
   }
   drupal_goto($_SERVER['HTTP_REFERER']);
+}
+
+/**
+ * Block content callback for magazine content.
+ * @return string
+ */
+function magazine_node_third_level_menu_content() {
+  $output = '';
+  $node = menu_get_object();
+  if ((!empty($node) && !empty($node->field_story_magazine_story_issue) && $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] == 'magazine_issue_story') || (arg(0) == 'magazine')) {
+    //~ $magazine_entity = $node->field_story_select_magazine['und'][0]['entity'];
+    //~ $uri = !empty($magazine_entity->field_magazine_cover_photo['und'][0]['uri']) ? $magazine_entity->field_magazine_cover_photo['und'][0]['uri'] : "";
+    //~ if (!empty($uri)) {
+    //~ $src = file_create_url($uri);
+    //~ }
+    $src = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/FROM-THE-MAGAZINE.png');
+    $output .= '<div class="menu-wrapper">';
+    $output .= '<div class="container">';
+    $output .= '<div class="row">';
+    $output .= '<div class="col-md-6 col-sm-9 col-xs-9">';
+    if (!empty($src)) {
+      $output .= l("<img src='" . $src . "' alt='' title='' />", "magazine", array("html" => TRUE));
+    }
+    $output .= '</div>';
+    $output .= '<div class="col-md-6 col-sm-3 col-xs-3"></div>';
+    $output .= '</div></div></div>';
+  }
+  return $output;
 }

@@ -42,13 +42,14 @@
                               $small_src_set = ', ' . $small_amp_image . ' ' . $small_width . 'w';
                             }
 
-                            $srcset = $amp_image . ' ' . $width . 'w' . $small_src_set;
+                            //$srcset = $amp_image . ' ' . $width . 'w' . $small_src_set;
+                            $caption = trim(preg_replace('/mce_href=[^>]*/', '', $caption));
                             ?>
               <figure>
                   <div class="fixed-height-container">
                       <amp-img src="<?php print image_style_url("photo_slider_753x543", $file->uri); ?>"
                                
-                                layout="fill" srcset="<?php print $srcset; ?>"><div fallback>offline</div>
+                                layout="fill"><div fallback>offline</div>
                       </amp-img>   
                   </div>
                   
@@ -69,15 +70,16 @@
 ?>
   </div>
 </div>
-<div class="custom-amp-ad">
-<amp-ad width=300 height=250
-    type="doubleclick"
-    data-slot="/1007232/Indiatoday_AMP_Mobile_Photo_ATF_300x250"
-    data-multi-size-validation="false">
-  <div placeholder></div>
-  <div fallback></div>
-</amp-ad>  
-</div>
+<?php if(!empty(variable_get('amp_taboola_ad_script'))) { ?>
+  <div class="amp-taboola">
+	<?php print variable_get('amp_taboola_ad_script'); ?>
+  </div>
+<?php } ?>
+<?php if(!empty(variable_get('amp_photo_second_ad'))) { ?>
+  <div class="custom-amp-ad ad-btf">
+    <?php print variable_get('amp_photo_second_ad'); ?> 
+  </div>
+<?php } ?>
 <div class="amp-other-gallery">
 <?php
 // get all node id related to current node primary category
@@ -99,17 +101,18 @@ if (function_exists('get_other_gallery_amp')) {
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
-        $other_src_set = $small_image . ' ' . $small_width . 'w';
+        //$other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       else {
-        $small_image = $base_url . '/' . path_to_theme() . '/images/itg_image170x127.jpg';
-        $other_src_set = $small_image . ' ' . $small_width . 'w';
+        $small_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
+        //$other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       
       $alias = drupal_get_path_alias('node/'.$value['nid']);
       $path_alias = $base_url.'/amp/'.$alias;
-      $title = l($value['title'], $path_alias, array("attributes" => array("title" => $value['title'])));
-      $amp_image = '<a href="' . $path_alias . '"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '" srcset="'.$other_src_set.'"><div fallback>offline</div></amp-img></a>';
+      $dec_title = html_entity_decode($value['title']);
+      $title = l($dec_title, $path_alias, array("attributes" => array("title" => $dec_title)));
+      $amp_image = '<a href="' . $path_alias . '"><amp-img height="127" width="170" layout="responsive"  alt="' . $dec_title . '" title="' . $dec_title . '" src="' . $small_image . '"><div fallback>offline</div></amp-img></a>';
       $other_gallery .= '<li><div class="other-img">' . $amp_image . '<div class="other-count"><i class="fa fa-camera" aria-hidden="true"></i> ' . $img_count . ' images</div></div><div class="other-date">' . date('D, d M, Y', $value['created']) . '</div><div class="other-title">' . $title . '</div></li>';
     }
     $other_gallery .= '</ul>';

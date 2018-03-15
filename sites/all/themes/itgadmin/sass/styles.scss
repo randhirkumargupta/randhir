@@ -2354,7 +2354,10 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-story-technology-values"],
 [id*="field-photo-story-values"],
 [id*="field-story-listicle-values"],
-[id*="field-event-tabs-values"] {
+[id*="field-event-tabs-values"],
+[id*="field-add-member-values"],
+[id*="field-associate-event-photo-values"],
+[id*="field-associate-event-video-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -6081,9 +6084,9 @@ div.node {
         margin-right: 0;
     }
     .button {
-        +.button {
+        /*+.button {
             margin-left: 10px;
-        }
+        }*/
     }
 }
 
@@ -7834,7 +7837,7 @@ div.node {
             font-size: 14px;
         }
         &.active {
-            width: 200px;
+            width: 186px;
             input[type="text"] {
                 display: block;
             }
@@ -7857,12 +7860,16 @@ div.node {
     line-height: 30px;
     padding: 0;
     text-align: center;
-    width: 28px;
+    width: 46px;
     cursor: pointer;
     z-index: 9;
     float: right;
     .fa {
         font-size: 18px;
+    }
+    a {
+        color: #fff;
+        padding-left: 5px;
     }
 }
 
@@ -8452,7 +8459,10 @@ div.node {
 [id*="field-video-anchor-values"],
 [id*="field-story-template-quotes-values"],
 [id*="field-story-template-factoids-values"],
-[id*="field-story-template-guru-values"] {
+[id*="field-story-template-guru-values"],
+[id*="field-add-member-values"],
+[id*="field-associate-event-photo-values"],
+[id*="field-associate-event-video-values"] {
     tbody tr {
         td {
             border: none;
@@ -8476,6 +8486,21 @@ div.node {
 [id*="vas-service-content-node-form"] {
     div.vertical-tabs {
         display: none;
+    }
+    .form-field-name-field-service-association-title {
+        .form-type-select {
+            display: inline-block;
+            width: 50%;
+            padding-right: 0;
+            vertical-align: middle;
+        }
+        .form-submit {
+            display: inline-block;
+            line-height: 26px;
+            height: 29px;
+            padding: 0 10px;
+            vertical-align: middle;
+        }
     }
 }
 
@@ -9178,7 +9203,9 @@ div.node {
 
 .node-story-form,
 .node-videogallery-form,
-.node-photogallery-form {
+.node-photogallery-form,
+.node-type-print-team-integration,
+.node-type-event-backend {
     font-family: Roboto;
     margin: 0;
     .ajax-progress {
@@ -9303,7 +9330,10 @@ div.node {
     [id*="field-story-template-buzz-values"],
     [id*="field-story-template-guru-values"],
     [id*="field-video-anchor-values"],
-    [id*="field-story-listicle-values"] {
+    [id*="field-story-listicle-values"],
+    [id*="field-add-member-values"],
+    [id*="field-associate-event-photo-values"],
+    [id*="field-associate-event-video-values"] {
         thead {
             padding-left: 20px;
             padding-right: 10px;
@@ -9429,7 +9459,8 @@ div.node {
     .form-field-type-text,
     .form-field-name-field-story-reporter,
     .form-field-name-field-video-anchor,
-    .form-field-type-field-collection {
+    .form-field-type-field-collection,
+    .form-field-name-field-add-member {
         position: relative;
     }
     .vertical-tabs ul.vertical-tabs-list {
@@ -11311,10 +11342,7 @@ div.node {
                             color: #2f2f2f;
                             @extend .dib;
                             @extend .of-hide;
-                            text-overflow: ellipsis;
                             @extend .vtop;
-                            white-space: nowrap;
-                            width: 82px;
                         }
                     }
                     .file-size {
@@ -11451,7 +11479,10 @@ div.node {
                 width: 140px;
             }
             &.form-item-filtertype {
-                width: 220px;
+                width: 150px;
+            }
+            &.form-item-video-art-id {
+                width: 140px;
             }
         }
         .container-inline-date {
@@ -11483,9 +11514,9 @@ div.node {
         @extend .btn-small;
         margin-top: 33px;
         position: absolute;
-        left: 0;
+        left: auto;
         top: 71px;
-        left: 315px;
+        right: 109px;
     }
     table {
         @extend .views-table;
@@ -13884,6 +13915,7 @@ fieldset#edit-xmlsitemap {
                 position: absolute;
                 left: 600px;
                 top: 30px;
+                z-index: 1;
             }
         }
     }
@@ -14401,7 +14433,7 @@ div.ctools-modal-content {
 /* css end Url Redirect page */
 
 
-/* css added by rajveer singh gangwar */
+/* css added by start */
 
 #views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
 #views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
@@ -14413,9 +14445,364 @@ div.ctools-modal-content {
 #views-exposed-form-home-page-feature-widget-page-2,
 #views-exposed-form-photo-carousel-widget-photo-carousel,
 #views-exposed-form-photo-carousel-widget-video-carousel,
-#views-exposed-form-so-sorry-so-sorry-videos-widget {
-    display: none;
+#views-exposed-form-so-sorry-so-sorry-videos-widget,
+#views-exposed-form-widget-anchors-listing-anchors-listing-widget,
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-widget-per-page,
+#views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list .form-item-items-per-page,
+#views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list .form-item-items-per-page {
+    display: none !important;
 }
 
 
-/* css added by rajveer singh gangwar end */
+/* css added by end  */
+
+.node-type-print-team-integration [id*="field-add-member-values"]+div.clearfix {
+    right: 560px;
+}
+
+.node-type-print-team-integration fieldset.date-combo .container-inline-date .date-padding .form-item {
+    padding: 0;
+}
+
+#itg-report-created-date-range {
+    text-align: right;
+    fieldset {
+        border: 1px solid #ccc;
+        margin: 20px 0 40px;
+        float: left;
+        width: 49%;
+        text-align: left;
+        +fieldset {
+            float: right;
+        }
+        input[type="text"] {
+            width: auto;
+        }
+        label {
+            width: auto;
+            margin-right: 10px;
+        }
+        legend {
+            font-weight: 700;
+        }
+    }
+    .form-item.form-type-select {
+        margin-left: 0;
+        padding-left: 0;
+        text-align: left;
+    }
+    .fieldset-wrapper {
+        .form-item {
+            float: left;
+            width: 50%;
+            padding: 0 10px;
+            text-align: left;
+        }
+    }
+    .row {
+        margin-top: 40px;
+    }
+}
+
+.pagination {
+    margin: 40px auto;
+    text-align: center;
+    color: #000;
+    a {
+        padding: 0 5px;
+        /* background-color: #1fb5ad; */
+        color: #000;
+    }
+    b {
+        padding: 2px 6px;
+        border: 1px solid #ccc;
+        background: #1fb5ad;
+        color: #fff;
+    }
+}
+
+
+/*css start add by rajveer */
+
+.page-node-add-alexa-audio-clips .vertical-tabs {
+    display: none
+}
+
+#modal-content #reporter-node-form .vertical-tabs {
+    display: none;
+}
+
+.add-byline-link.ctools-use-modal {
+    position: absolute;
+    right: 70px;
+    top: 4px;
+}
+
+.node-survey-form label.no-after::after {
+    content: " " !important;
+}
+
+
+/*css end add by rajveer */
+
+[id*="itg-videogallery-dfp-tags-list"] {
+    table {
+        @extend .views-table;
+    }
+    a.btn-submit {
+        float: right;
+        margin-bottom: 20px;
+    }
+}
+
+[id*="edit-metatags-und-facebook"] {
+    border: none;
+}
+
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-exposed-widget .form-item,
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-exposed-widget #view-display-isesue {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 200px;
+}
+
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-exposed-widget .form-submit {
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+
+#print-team-integration-node-form [id*="field-add-member-values"] tbody {
+    overflow: inherit;
+}
+
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
+    height: auto;
+    .file {
+        a {
+            display: inline;
+        }
+    }
+}
+
+[id*="views-exposed-form-searchimage-search-publish-video"] {
+    .form-select[multiple="multiple"] {
+        min-height: 40px;
+        margin-bottom: 30px;
+    }
+    .views-exposed-form .views-exposed-widget {
+        padding-right: 12px;
+    }
+}
+
+.section-unpublished-story,
+.section-unpublished-photogallery,
+.section-unpublished-podcast,
+.section-unpublished-blogs,
+.section-unpublished-video {
+    .form-actions {
+        .form-submit {
+            +a {
+                @extend .button;
+            }
+        }
+    }
+}
+
+
+/*css for emoji*/
+
+.emoji-container {
+    display: inline-block;
+    vertical-align: top;
+    span {
+        vertical-align: bottom;
+    }
+    a {
+        display: inline-block;
+    }
+}
+
+#smily,
+#smilysad,
+#wgmf {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    .face {
+        position: fixed;
+        z-index: 9999;
+        &.face1 {
+            left: 400px;
+            top: 500px;
+        }
+        &.face2 {
+            left: 200px;
+            top: 0;
+        }
+        &.face3 {
+            top: 0;
+            right: 200px;
+        }
+        &.face4 {
+            right: 600px;
+            top: 100px;
+        }
+    }
+}
+
+
+/*css end for emoji*/
+
+.view .view-filters [id*="views-exposed-form-key-candidate-special-key-candidate-widget-list"] .views-exposed-form .views-exposed-widget {
+    width: 150px;
+    .form-item {
+        width: 140px !important;
+    }
+    .ajax-progress {
+        top: 20px;
+        position: absolute;
+        right: 10px;
+    }
+    &.views-submit-button,
+    &.views-reset-button {
+        width: auto;
+        .form-item {
+            padding-right: 10px;
+        }
+    }
+    #view-display-isesue {
+        width: auto;
+    }
+}
+
+.form-field-name-field-associate-event-video,
+.form-field-name-field-associate-event-photo {
+    [id*="field-associate-event-video-values"],
+    [id*="field-associate-event-photo-values"] {
+        thead {
+            padding: 0px 20px;
+        }
+        tbody {
+            overflow: visible;
+            tr td .form-type-textfield {
+                padding: 0;
+                margin: 0;
+            }
+        }
+        +.description {
+            +.clearfix {
+                left: 580px;
+            }
+        }
+    }
+    [id*="field-associate-event-video-values"] {
+        margin-top: 10px;
+    }
+}
+
+/*Section Header */
+.section_right_side_block .multi-right-block{
+
+position: absolute;
+
+bottom: 0px;
+top: 64px;
+
+left: 571px;
+
+border-radius: 1px;
+
+border: 1px solid #1fb5ad;
+
+background-color: #1fb5ad;
+
+box-shadow: 0 0 5px #3a8a82;
+
+padding: 0 20px;
+
+line-height: 32px;
+
+height: 36px;
+
+text-transform: uppercase;
+
+color: #fff;
+
+cursor: pointer;
+
+text-align: center;
+
+display: inline-block;
+
+vertical-align: top;
+
+margin-right: 10px;
+
+}
+
+.blocks-list{
+
+padding: 0 10px 0 220px;
+
+position: relative;
+
+}
+
+.blocks-list .blocks-ul{
+
+display: inline-block;
+
+list-style: outside none none;
+
+vertical-align: top;
+
+width: 332px;
+
+}
+
+.blocks-list .blocks-ul li{
+
+background-color: #e5e5e5;
+
+border-top: 1px solid #fff;
+
+padding: 10px;
+
+cursor: move;
+
+min-height: 38px;
+
+font-size: 12px;
+
+position: relative;
+
+}
+
+.blocks-list .blocks-ul li .fa-arrows{
+
+float: left;
+
+margin: 2px 2px 0 0;
+
+}
+
+.blocks-list .save-blocks{
+
+bottom: 1px;
+
+position: absolute;
+
+right: 140px;
+
+}
+
+.section_right_side_block{position:relative;}
+.node-story-form .form-field-name-field-facebook-gallery-associate .field-name-field-story-big-image{
+display:none;
+}
+.node-story-form .ajax-progress-throbber .message {display: block !important;}
+.node-story-form .ajax-progress .throbber {margin: 0;}
+.node-story-form .ajax-progress {display: block;}

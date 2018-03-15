@@ -9,7 +9,8 @@
  * @return array $output
  */
 function itg_layout_delete() { 
-  if (is_numeric(arg(1))) {    
+  if (is_numeric(arg(1))) {
+    
     $query = db_select('itg_layout_tpl', 'tpl');
     $query->fields('tpl', array('id', 'status'));  
     $query->condition('section_name', arg(1));                
@@ -21,7 +22,14 @@ function itg_layout_delete() {
       db_delete('itg_layout_tpl')->condition('id', $row->id)->execute(); 
     }
     
-    drupal_set_message('layout deleted');
+    if (function_exists('get_term_name_from_tid') && is_numeric(arg(1))) { 
+      $t_name = get_term_name_from_tid(arg(1));
+      $msg = $t_name->name.' template has been deleted';
+      drupal_set_message($msg);
+    }
+    
+    
+    
     drupal_goto('itg-layout-list/'.$_GET['destination']);
    
   }

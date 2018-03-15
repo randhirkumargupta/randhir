@@ -486,7 +486,7 @@ function itg_sitemap_chunks_setting_form() {
 
     foreach($content_type as $ct) {
         $form["itg_sitemap_chunks_number_$ct"] = array(
-            '#type' => 'hidden',
+            '#type' => 'textfield',
             '#title' => t("Number of Chunk <b> $ct </b>"),
             '#default_value' => variable_get("itg_sitemap_chunks_number_$ct"),
             '#size' => 20,
@@ -494,13 +494,13 @@ function itg_sitemap_chunks_setting_form() {
         );
         
         $form["itg_sitemap_chunks_last_processed_node_xml_$ct"] = array(
-            '#type' => 'hidden',
+            '#type' => 'textarea',
             '#title' => t('Last Processed ' . $ct . ' XML'),
             '#default_value' => variable_get("itg_sitemap_chunks_last_processed_node_xml_$ct", 0),
         );
         
         $form["itg_sitemap_chunks_last_processed_node_$ct"] = array(
-            '#type' => 'hidden',
+            '#type' => 'textfield',
             '#title' => t("Last Processed Node ID $ct"),
             '#default_value' => variable_get("itg_sitemap_chunks_last_processed_node_$ct", 0),
             '#size' => 20,
@@ -588,7 +588,7 @@ function itg_sitemap_chunks_gereral_setting_form() {
  */
 function itg_sitemap_chunks_delete_chunks() {
     module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
-    itg_video_get_s3_video_del('s3fs-public/' . SITEMAP_BUCKET);
+    itg_video_get_s3_video_del(BUCKET_FOLDER.'/' . SITEMAP_BUCKET);
     // remove directory if previously created sitemap.
     drupal_set_message(t("Sitemap directory has been deleted , Please create sitemap again"));
 }

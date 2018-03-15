@@ -5,7 +5,7 @@
  * The ITG Users module.
  * Provides Users functionality and customizations.
  */
-module_load_include('inc', 'itg_users', 'includes/itg_users');
+//module_load_include('inc', 'itg_users', 'includes/itg_users');
 module_load_include('inc', 'itg_users', 'includes/itg_user_role_and_permission');
 /**
  * Implement hook_user_presave
@@ -39,6 +39,7 @@ function itg_users_menu() {
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
     'access callback' => TRUE,
+    'file' => 'includes/itg_users.inc',
   );
 
   return $items;
@@ -349,6 +350,15 @@ function itg_users_validate_user_profile_validate(&$form, &$form_state) {
       form_set_error('field_user_section', t("Section Field is required!"));
     }
   }
+  
+  
+  // validation for zip code
+ 
+  if (!empty($form_state['values']['field_user_pincode'][LANGUAGE_NONE][0]['value'])) {     
+    if (!is_numeric($form_state['values']['field_user_pincode'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_user_pincode', t('Please enter valid pincode.'));
+    }
+  }
 }
 
 /**
@@ -391,7 +401,9 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
-  unset($_COOKIE['itg_forced_login']);
+
+  setrawcookie("itg_forced_login", "null", -1,'/', SSO_COOKIE_DOMAIN);
+
   $_GET['destination'] = 'user';
 }
 
@@ -510,7 +522,7 @@ function itg_users_user_login(&$edit, $account) {
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {
-        $_GET['destination'] = 'ask-an-expert-backend';
+        $_GET['destination'] = 'ask-an-expert-inqueue-content';
       }
     }
   }  
@@ -822,26 +834,7 @@ function itg_users_role_name($rid) {
   return $role_result['name'];
 }
 
-/**
- * Page callback for the access denied page. Does a redirect to login page (Taken from r4032login.module)
- */
-function itg_users_access_denied() {
-  global $user;
-  if ($user->uid) {
-    return MENU_ACCESS_DENIED;
-  }
 
-  // The code in drupal_get_destination() doesn't preserve any query string
-  // on 403 pages, so reproduce the part we want here.
-  $path = $_GET['destination'];
-  $query = drupal_http_build_query(drupal_get_query_parameters(NULL, array('q', 'destination')));
-  if ($query != '') {
-    $path .= '?' . $query;
-  }
-  $destination = array('destination' => $path);
-  header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
-  drupal_exit();
-}
 
 /**
  * Implements hook_js_alter().
@@ -875,7 +868,7 @@ function itg_users_backend_validate(&$form, &$form_state) {
   global $base_url;
   
   $user_info = user_load_by_name($form_state['values']['name']);
- 
+  
   if (array_key_exists(FRONT_USER, $user_info->roles) && $base_url == BACKEND_URL) {
      form_set_error('name', t('User does not exist!'));
   } else if (!array_key_exists(FRONT_USER, $user_info->roles) && $base_url == FRONT_URL) {    
@@ -887,14 +880,14 @@ function itg_users_backend_validate(&$form, &$form_state) {
 /**
  * Implements hook_user_delete().
  */
-//function itg_users_user_delete($account) {
-//  if (!empty($account->uid)) {
-//    // code to delete mail in sso server history
-//    if (function_exists('global_sso_entry_backend_user_email')) {
-//      if (!empty(variable_get('property_name'))) {
-//        $property = variable_get('property_name');
-//      }
-//      global_sso_entry_backend_user_email($account->mail , $account->uid, $property, 'delete');
-//    }
-//  }
-//}
+function itg_users_user_delete($account) {
+  if (!empty($account->uid)) {
+    // code to delete mail in sso server history
+    if (function_exists('global_sso_entry_backend_user_email')) {
+      if (!empty(variable_get('property_name'))) {
+        $property = variable_get('property_name');
+      }
+      global_sso_entry_backend_user_email($account->mail , $account->uid, $property, 'delete');
+    }
+  }
+}

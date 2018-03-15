@@ -77,7 +77,7 @@ function itg_ugc_reject_content() {
   );
   if (function_exists('mongodb')) {
     $con = mongodb();
-    if ($con) {
+    if (isset($con)) {
       $people = $con->ugc_details;
       $query = array();
       $limit = 0;

@@ -17,6 +17,7 @@ function itg_live_tv_menu() {
     'page callback' => 'itg_live_tv_details',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'include/itg_live_tv.inc',
   );
   return $items;
 }
@@ -32,6 +33,10 @@ function itg_live_tv_block_info() {
   );
   $blocks['live_tv_video_page'] = array(
     'info' => t('Live Tv Video Page'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['international_live_tv_block'] = array(
+    'info' => t('International Live TV Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
@@ -52,6 +57,9 @@ function itg_live_tv_block_view($delta = '') {
     case 'live_tv_video_page':
       $data = itg_live_tv_page_video();
       $block['content'] = theme('live_tv_video_page_block', array('data' => $data));
+      break;
+   case 'international_live_tv_block':
+      $block['content'] = international_live_tv_block_content();
       break;
   }
 
@@ -236,38 +244,6 @@ function itg_live_tv_views_pre_render(&$view) {
 }
 
 /**
- * Implements itg_live_tv_details
- */
-function itg_live_tv_details() {
-  $n_id = $_POST['company'];
-  $device = $_POST['device'];
-  // check if value is exist
-  if (!empty($n_id) && !empty($device)) {
-    $exist_val = itg_live_tv_company($device);
-    $errors = array_filter($exist_val);
-
-    if (!empty($errors)) {
-      foreach ($exist_val as $val) {
-        $node = node_load($val);
-        foreach ($node->field_live_tv_device[LANGUAGE_NONE] as $key => $value) {
-          if ($value['value'] == $device) {
-            unset($node->field_live_tv_device[LANGUAGE_NONE][$key]);
-            field_attach_presave('node', $node);
-            field_attach_update('node', $node);
-            // Clear the static loading cache.
-            entity_get_controller('node')->resetCache(array($node->nid));
-            itg_live_tv_insert($n_id, $device);
-          }
-        }
-      }
-    }
-    else {
-      itg_live_tv_insert($n_id, $device);
-    }
-  }
-}
-
-/**
  * Implements itg_live_tv_company
  * @param string $device
  * @return array
@@ -426,4 +402,25 @@ function itg_live_tv_page_video_category() {
     $output = $current_program_cat[0]['tid'];
     return $output;
   }
+}
+
+/**
+ * International live tv block
+ * @return string
+ */
+function international_live_tv_block_content() {
+  $sad_round_icon = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/sad-round-icon.png');
+  $video_section_id = variable_get('tid_videos', 1206552);
+  $newstoday_section_id = variable_get('news_today_tid', 1207797);
+  $video_section_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $video_section_id);
+  $news_today_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $newstoday_section_id);
+  $output = '';
+  $output .= '<div class="location-area">';
+  $output .= '<span><img src="' . $sad_round_icon . '" alt=""></span>';
+  $output .= '<h2>Live TV is not available at your location. You can watch <a href="https://www.mydish.com/station/INDT">here</a> if you subscribe.<br>';
+  $output .= 'You can however watch our freshly recorded programmes <a href="' . $video_section_alias . '">here</a>. <br>';
+  $output .= 'All Rajdeep Sardesai shows <a href="' . $news_today_alias . '">here</a>.';
+  $output .= '</h2>';
+  $output .= '</div>';
+  return $output;
 }

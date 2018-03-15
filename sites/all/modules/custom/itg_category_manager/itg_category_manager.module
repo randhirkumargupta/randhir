@@ -11,8 +11,7 @@ module_load_include('inc' , 'itg_category_manager' , 'includes/itg_category_mana
 /**
  * Implements hook_init
  */
-function itg_category_manager_init() {
-  variable_set('taxonomy_terms_per_page_admin' , 20);
+function itg_category_manager_init() {  
   global $base_url;
   $settings['baseUrl'] = $base_url;
   drupal_add_js(array('baseUrl' => $settings) , 'setting');
@@ -127,6 +126,10 @@ function itg_category_manager_import_tag_form($form , $form_state) {
     '#type' => 'submit' ,
     '#value' => t('Import') ,
   );
+  $form['reset'] = array(
+    '#type' => 'markup' ,
+    '#markup' => l('Reset' , "import-tag-file-uploader" , array("attributes" => array("class" => array("btn btn-primary form-submit")))) ,
+  );
   return $form;
 }
 
@@ -227,6 +230,7 @@ function itg_category_manager_menu_alter(&$menu) {
  * @return array
  */
 function itg_category_manager_taxonomy_view_page($term) {
+  
   global $user;
   $term_status = itg_category_manager_term_state($term->tid);
   if (!$term_status) {
@@ -257,9 +261,10 @@ function itg_category_manager_taxonomy_view_page($term) {
       }
     }
   }
-  $voc = taxonomy_vocabulary_load($term->vid);
-  switch ($voc->machine_name) {
-    case 'category_management':
+  //$voc = taxonomy_vocabulary_load($term->vid);
+  switch ($term->vid) {
+    case CATEGORY_MANAGMENT:
+      
       $maped_with = '';
       for ($i = 0; $i < count($term->field_cm_select_type[LANGUAGE_NONE]); $i++) {
         $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']) . ', ';
@@ -543,7 +548,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
 //Non-editable fields in edit mode
       if (arg(3) == 'edit') {
         $form['name']['#attributes'] = array('readonly' => 'readonly');
-        $form['field_cm_redirection_url']['#disabled'] = TRUE;
+        //$form['field_cm_redirection_url']['#disabled'] = TRUE;
         $form['field_cm_hide_cat_from_home']['#disabled'] = TRUE;
         //$form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
         //$form['field_cm_no_follow']['#disabled'] = TRUE;
@@ -580,7 +585,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
                 ':input[name="term_state"]' => array('checked' => FALSE) ,
               ) ,
             ) ,
-            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module' , 'views') . '/images/status-active.gif" alt="" /></div>' ,
+            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module' , 'views') . '/images/status-active.gif" alt="" title="" /></div>' ,
           );
         }
         else {
@@ -679,7 +684,16 @@ function itg_category_manager_term_validate($form , &$form_state) {
   $tid = $form_state['values']['tid'];
   $cat_arr = $form_state['input']['parent']['hierarchical_select']['selects'];
   $num_cat_selected = count($cat_arr);
-
+  $all_children = array();
+  
+  if (!empty($cat_arr[0]) && $cat_arr[0] != 0) {
+    $_all_children = taxonomy_get_tree(CATEGORY_MANAGMENT, $cat_arr[0]);
+    $all_children[] = get_term_name_from_tid($cat_arr[0])->name;
+    foreach ($_all_children as $_term) {
+      $all_children[] = $_term->name;
+    }
+  }
+  
   if ($form_state['triggering_element']['#value'] != 'Delete') {
     if (($cat_arr[0] == 'label_0')) {
       form_set_error('parent' , t('Section field is required.'));
@@ -687,19 +701,33 @@ function itg_category_manager_term_validate($form , &$form_state) {
     if ($num_cat_selected > 4) {
       form_set_error('parent' , t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
-//Check for duplicate category    
+    if(!is_numeric(arg(2)) && ((count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))){
+			form_set_error('name' , t('Category name already exists4.'));
+		}else if(is_numeric(arg(2))){
+			$all_children_edited = taxonomy_get_tree(CATEGORY_MANAGMENT, arg(2));
+			foreach($all_children_edited as $value){
+				if(($value->tid != arg(2)) && in_array($value->name, $all_children)){
+					form_set_error('name' , t('Category name already exists5.'));
+				}
+			}
+		}
+		
+		//Check for duplicate category    
     $dup_parents = itg_category_manager_is_dupe_term($term , $vid , $tid);
     $erros = $dup_parents ? array_filter($dup_parents) : NULL;
+    $term_load = taxonomy_term_load(arg(2));
     if (!empty($erros)) {
       $new_rparent = $termParent != 0 ? taxonomy_get_parents_all($termParent) : 0;
       $new_rparent = is_array($new_rparent) ? $new_rparent[count($new_rparent) - 1]->tid : 0;
-
-      foreach ($dup_parents as $value) {
+			foreach ($dup_parents as $value) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name' , t('Category name already exists.'));
         }
-        elseif ($new_rparent == 0 && $value->name == $form_state['values']['name']) {
-          form_set_error('name' , t('Category name already exists.'));
+        elseif (is_numeric(arg(2)) && $term_load->name != trim($form_state['values']['name']) && $new_rparent == 0 && $value->name == trim($form_state['values']['name'])) {
+          form_set_error('name' , t('Category name already exists2.'));
+        }
+        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == trim($form_state['values']['name']) && ((count($all_children) <= 0) || (count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))) {
+          form_set_error('name' , t('Category name already exists3.'));
         }
         else {
           

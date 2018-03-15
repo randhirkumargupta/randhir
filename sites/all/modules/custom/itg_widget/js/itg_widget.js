@@ -154,7 +154,6 @@ Drupal.behaviors.itg_widgets = {
         });
 
         //        var events = jQuery('#edit-actionitg-widget-categories-wise-node-group').data('events'); // Get the jQuery events.
-        //        console.log(events);
         //jQuery('#edit-actionitg-widget-categories-wise-node-group').unbind('mousedown'); // Remove the click events.
         //        jQuery('#edit-actionitg-widget-categories-wise-node-group').mousedown(function() {
         //            if (confirm('Are you sure you want to delete that?')) {
@@ -235,8 +234,6 @@ Drupal.behaviors.itg_widgets = {
                     jQuery('#widget-ajex-loader').hide();
                 },
                 error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
         })
@@ -257,7 +254,6 @@ Drupal.behaviors.itg_widgets = {
                         }
                     });
                 }
-                console.log("section and type found");
             } else {
                 if (confirm('Are you sure you want to move this content ?')) {
                     jQuery("#widget-ajex-loader").css("display", "block");
@@ -376,7 +372,6 @@ jQuery("#edit-widget-name").on("keyup", function () {
         jQuery.ajax({
             url: "custom_widget_name_list/" + jQuery(this).val(),
             success: function (data) {
-                console.log(data);
                 if (data != null) {
                     jQuery(".error-message-widget").remove();
                     jQuery(".form-item-widget-name").append("<div class='messages error error-message-widget'><ul><li>Widget <b>" + widget_name + "</b> already exists in database. Please change it or new content will add in <b>" + widget_name + "</b> widget..</li></ul></div>");
@@ -407,4 +402,35 @@ jQuery(document).ajaxSuccess(function () {
         jQuery('#' + forms[i] + ' #edit-shs-term-node-tid-depth-select-1 > option[value=0]').html("- Any -");
         jQuery('#' + forms[i] + ' #edit-category-tid-select-1 > option[value=0]').html("- Any -");
     }
+});
+
+jQuery(window).load(function() {
+    try {
+		if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+			jQuery(".flexslider").flexslider({
+			 animation: "slide",
+			 prevText: "",
+			 nextText: "",
+				 animation: "slide",
+				 prevText: "",
+				 nextText: "",
+			  });
+		}		     
+     }
+     catch(err) {
+         console.log(err.message);
+     }
+});
+
+jQuery(window).load(function() {
+    try {
+         if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+			 jQuery(".flexslider-video").flexslider({
+				animation: "slide"
+			 });
+		 }	         
+     }
+     catch(err) {
+         console.log(err.message);
+     }
 });

@@ -6,7 +6,7 @@
             <?php if(!empty($row['field_story_extra_large_image'])) : ?>
             <figure>
                 <?php if($row['field_story_extra_large_image'] == 'notFound') {
-         print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+         print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
        }
        else  {
           $doc = new DOMDocument();
@@ -16,7 +16,7 @@
          if(function_exists('url_exists') && url_exists($src)) {
            print $row['field_story_extra_large_image']; 
          } else {
-           print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+           print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
          }
        }
        ?>    

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+<title>India Today Media Institute(ITMI) - PG Program in Broadcast Journalism</title>
+<meta http-equiv="content-language" content="hi" />
+<meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
+<meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
+
+<!-- Begin comScore Tag -->
+<script type='text/javascript'>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+</noscript>
+<!-- End comScore Tag -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-795349-72', 'intoday.in');
+  ga('send', 'pageview');
+</script>
+<link rel="canonical" href="/itmi/journalism.jsp" />
+<script type="text/javascript">
+function canonicalUrlRedirection() {
+	//if (window.innerWidth > 985) {    
+		var canonicalUrl = ""; 
+		var links = document.getElementsByTagName("link");
+		for (var i = 0; i < links.length; i ++) {
+			if (links[i].getAttribute("rel") == "canonical") {
+				canonicalUrl = links[i].getAttribute("href");
+				break;
+			}
+		}
+		if (canonicalUrl != "") {
+			window.location.href = canonicalUrl;
+		}
+	//}
+}
+var mobile = (/iphone|vnd.wap.xhtml+xml|sony|symbian|S60|SymbOS|nokia|samsung|mobile|windows ce|epoc|opera mini|nitro|j2me|midp-|cldc-|netfront|mot|up.browser|up.link|audiovox|blackberry|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|smartphone|rover|ipaq|au-mic|alcatel|ericy|vodafone|wap1|wap2|teleca|playstation|lge|lg-|android|htc|dream|webos|bolt|nintendo|palm/i.test(navigator.userAgent.toLowerCase()));
+if((navigator.userAgent.toLowerCase().indexOf("ipad")>=0)){
+canonicalUrlRedirection();
+}else{
+if (!mobile) {             
+	canonicalUrlRedirection(); 
+}}
+</script>
+</head><body>
+<div class="wrapper">
+<?php include('header.php');?>
+<div class="body_section">
+  <div class="outer_box">
+    <h2>Programmes</h2>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="text-containt"> 
+  <!--Body Content Start Here-->
+  <div class="normaltxt">
+    <div>
+      <h3 id="tab1"><strong>Two-Year, Full-Time Postgraduate Diploma in Mass Communication (Journalism)</strong></h3>
+      <div class="down" id="down1">
+        <div id="dif">
+          <p><strong>Journalism:</strong> While print, digital and broadcast media are covered, it is our belief that a journalist is one by thinking, and therefore it is important for each trainee to learn tools and techniques of all the three platforms. As FM radio may be permitted soon to broadcast news, we will train you in radio journalism as well. You will regularly produce live news in our studio and benefit hugely from some of India’s best known TV news networks—Aaj Tak, Dilli Aaj Tak, Tez, and Headlines Today, print and online platforms—India Today, Business Today, Mail Today and 30-odd other specialized magazines, and our radio network Oye 104.8 FM. While CSR is a sunrise activity for communicators, corporations are increasingly discovering the value in hiring strategic communication professionals for social communication in the form of making strategic plans, audiovisual films, media relations, digital media management, etc.</p>
+          <p><strong>Structure:</strong> The most comprehensive of all our programmes, this is structured and formatted to suit graduates who need orientation to communication and media and then go on to an advanced level of learning and enter our media and communication industries. With three semesters of in-class, lab, studio / field learning, this programme is both rigorous as well as paced strategically to let you learn and contribute. </p>
+          <p>It will have two mandatory internships—one in the social sector and another in the industry. A third internship can also be arranged at the end of your tenure in lieu of a job. Internships may be within the India Today Group / TV Today Network or outside of it, appropriate to your interest and aspirations. </p>
+          <p><strong>Academic Approach:</strong> The two-year programme comprehensively grounds you in concepts and prepares you for a rewarding career in communication practice or research. Our endeavour will be to prepare you to be independent thinkers and self-starting professionals in the demanding and exciting world of the media and allied industries. This means that learning the tools, techniques and technology is only a preliminary surface of what you will learn. Beyond the usual, we will guide you to explore concepts and discover new paradigms in the way that your world of communication will function in future. </p>
+          <p>The methodology we employ is largely founded on the innovative approaches we have designed and implemented, whereby learning follows hard work, smart thinking, and a 360-degree approach to understanding the world around you.</p>
+          <p><strong>Academic input:</strong> Research-based projects, independent work, internships, practical and field work—often self-inspired and approved by us, and sometimes in far-flung areas—will form the crux of your academic plan at ITMI. Our programme places a high level of credence to your output based on the input you received; therefore, assessment will always be continuous and based on your understanding—not on reproduction of notes. A final research project is required. </p>
+          <p><strong>Internship and placement:</strong> Arguably the biggest differentiator between a trainee and a professional is industry interface, and the most time you will spend in the industry while still a trainee is at your internship. You will have three internships, in different settings. Of the three internships, one is in the social sector, while the second will be within the India Today Group (including channels, digital content and marketing, e-commerce, marketing, sales, events, magazines, etc.). The final, longer, job-oriented internship will be industry-wide within your chosen stream. The institute will assist you in every way on internships. In the normal course, internships should be obtainable. </p>
+          <p>A Placement Committee is constituted to assist you in securing job offers. We will leave no stone unturned in ensuring you’re employable. Because ITMI is a professional institute, our focus in on your employability.</p>
+          <p>All eligible candidates are assured placement opportunities.</p>
+          <p><strong>Collaborations:</strong> We have ongoing and planned strategic, academic and research collaborations with several international governments and universities, development agencies, and media & communication firms and companies to give you the widest, richest and most global possible spectrum of academic, professional, cultural and communicative learning and hands-on experience. </p>
+          <p>&nbsp;</p>
+        </div>
+        <!--down end--> 
+      </div>
+    </div>
+  </div>
+  <!--BODY text-containt end--> 
+</div>
+<div class="common_outer">
+  <iframe src="https://specials.intoday.in/specials/itmi/mobile/applynow_second.jsp?source=null?source=null" frameborder="0" scrolling="no" width="100%" height="960px"></iframe>
+</div>
+<div class="clearfix"></div>
+<div class="footer_cont"> </div>
+</body>
+</html>

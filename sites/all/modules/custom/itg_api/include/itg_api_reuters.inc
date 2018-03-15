@@ -218,6 +218,7 @@ function itg_reuters_content() {
                   $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
                   $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'Reuters';
                   $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
+                  $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
                   $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                   $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
                   $exp_description = strtolower($description);
@@ -261,6 +262,6 @@ function itg_reuters_content() {
     }
   }
   else {
-    print 'Enable agency feed from configuration';
+    watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
   }
 }

@@ -6,11 +6,15 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
-// include inc file
 
 module_load_include('inc', 'itg_app_api_sso', 'inc/itg_app_api_sso_fblogin');
 module_load_include('inc', 'itg_app_api_sso', 'inc/itg_app_api_sso_twtlogin');
 module_load_include('inc', 'itg_app_api_sso', 'inc/itg_app_api_sso_edit_profile');
+
+/**
+ * itg_app_api_sso_resource function().
+ * @return array
+ */
 function itg_app_api_sso_resource() {
 
   /**
@@ -18,7 +22,7 @@ function itg_app_api_sso_resource() {
    */
   $api = array(
     // login_request custom resource declaration.....
-   'login_request' => array(
+    'login_request' => array(
       'operations' => array(
         'create' => array(
           'help' => 'Retrieves storydetail schemes info.',
@@ -35,8 +39,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user email or mobile',
               'type' => 'array',
@@ -44,8 +46,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'password',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'user password',
               'type' => 'array',
@@ -53,8 +53,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'login_type'),
               'source' => array('data'),
               'description' => 'device_id ',
               'type' => 'array',
@@ -62,8 +60,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'token_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'token_id'),
               'source' => array('data'),
               'description' => 'device_type',
               'type' => 'array',
@@ -90,8 +86,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'first_name',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'First Name',
               'type' => 'array',
@@ -99,8 +93,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'last_name',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'last_name'),
               'source' => array('data'),
               'description' => 'Last Name',
               'type' => 'array',
@@ -108,8 +100,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'User email or mobile number',
               'type' => 'array',
@@ -117,8 +107,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'password',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Password',
               'type' => 'array',
@@ -126,8 +114,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'confirm_password',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Confirm Password',
               'type' => 'array',
@@ -135,8 +121,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'login_type',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'login_type'),
               'source' => array('data'),
               'description' => '0=for traditional, 1=socail media',
               'type' => 'array',
@@ -144,8 +128,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'email_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Email Id',
               'type' => 'array',
@@ -153,8 +135,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'phone_number',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Phone Number',
               'type' => 'array',
@@ -162,8 +142,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'location',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Location',
               'type' => 'array',
@@ -171,8 +149,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'profile_image',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Profile image',
               'type' => 'array',
@@ -180,8 +156,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'gender',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Gender',
               'type' => 'array',
@@ -189,8 +163,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'date_of_birth',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Date of birth',
               'type' => 'array',
@@ -198,8 +170,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Device id',
               'type' => 'array',
@@ -207,8 +177,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Device type',
               'type' => 'array',
@@ -244,7 +212,6 @@ function itg_app_api_sso_resource() {
               'name' => 'app_id',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'description' => 'application master id',
               'type' => 'string',
             ),
@@ -252,7 +219,6 @@ function itg_app_api_sso_resource() {
               'name' => 'uname',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'password'),
               'description' => 'username (in socail login)',
               'type' => 'string',
             ),
@@ -260,7 +226,6 @@ function itg_app_api_sso_resource() {
               'name' => 'uid',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'login_type'),
               'description' => 'uid (in socail login)',
               'type' => 'int',
             ),
@@ -268,7 +233,6 @@ function itg_app_api_sso_resource() {
               'name' => 'issued_at',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'token_id'),
               'description' => 'in timestamp',
               'type' => 'int',
             ),
@@ -276,7 +240,6 @@ function itg_app_api_sso_resource() {
               'name' => 'expires_at',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'token_id'),
               'description' => 'in timestamp',
               'type' => 'int',
             ),
@@ -311,7 +274,6 @@ function itg_app_api_sso_resource() {
               'name' => 'app_id',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'description' => 'application master id',
               'type' => 'string',
             ),
@@ -319,7 +281,6 @@ function itg_app_api_sso_resource() {
               'name' => 'uname',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'password'),
               'description' => 'username (in socail login)',
               'type' => 'string',
             ),
@@ -327,7 +288,6 @@ function itg_app_api_sso_resource() {
               'name' => 'uid',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'login_type'),
               'description' => 'uid (in socail login)',
               'type' => 'int',
             ),
@@ -335,7 +295,6 @@ function itg_app_api_sso_resource() {
               'name' => 'issued_at',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'token_id'),
               'description' => 'in timestamp',
               'type' => 'int',
             ),
@@ -343,7 +302,6 @@ function itg_app_api_sso_resource() {
               'name' => 'expires_at',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'token_id'),
               'description' => 'in timestamp',
               'type' => 'int',
             ),
@@ -369,8 +327,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -397,8 +353,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -406,8 +360,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'otp_code',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'otp_code',
               'type' => 'array',
@@ -434,8 +386,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -462,8 +412,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -471,8 +419,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'old_pass',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'password',
               'type' => 'array',
@@ -480,8 +426,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'new_pass',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'confirm password',
               'type' => 'array',
@@ -508,8 +452,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -517,8 +459,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -526,8 +466,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'first_name',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'first_name',
               'type' => 'array',
@@ -535,8 +473,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'last_name',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'last_name',
               'type' => 'array',
@@ -544,8 +480,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'zipcode',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'zipcode',
               'type' => 'array',
@@ -553,8 +487,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'address',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'address',
               'type' => 'array',
@@ -562,8 +494,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'profile_image',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'profile_image',
               'type' => 'array',
@@ -571,8 +501,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'gender',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'gender',
               'type' => 'array',
@@ -580,8 +508,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'date_of_birth',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'date_of_birth',
               'type' => 'array',
@@ -608,8 +534,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -617,8 +541,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -626,8 +548,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'profile_image',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'profile_image',
               'type' => 'array',
@@ -654,8 +574,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -663,8 +581,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -691,8 +607,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -719,8 +633,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -728,8 +640,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -756,8 +666,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -765,8 +673,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -774,8 +680,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'preference',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'node_id',
               'type' => 'array',
@@ -812,8 +716,6 @@ function itg_app_api_sso_resource() {
               'name' => 'user_id',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'first_name'),
-              //'source' => array('data'),
               'description' => 'user_id',
               'type' => 'string',
             ),
@@ -848,8 +750,6 @@ function itg_app_api_sso_resource() {
               'name' => 'user_id',
               'optional' => FALSE,
               'source' => 'data',
-              //'source' => array('data' => 'first_name'),
-              //'source' => array('data'),
               'description' => 'user_id',
               'type' => 'string',
             ),
@@ -875,8 +775,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -884,8 +782,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'new_password',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'new password',
               'type' => 'array',
@@ -893,8 +789,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'confirm_password',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'confirm password',
               'type' => 'array',
@@ -902,8 +796,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device id',
               'type' => 'array',
@@ -911,8 +803,6 @@ function itg_app_api_sso_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
-              //'source' => 'data',
-              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device type',
               'type' => 'array',
@@ -1019,12 +909,12 @@ function itg_rapid_api_signup_sso($token) {
 
 
   // check user_id is mail or mobile
-  $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
+  $url_info = substr(uniqid('', true), -5);
   $mail_flag = 1;
   if (preg_match('/^\d{10}$/', $user_id)) {
     $mail_flag = 0;
     $mobile = $user_id;
-    $mail = $first_name . "@nowhereandy.com";
+    $mail = $first_name . '@' . 'nowhere.com';
   }
   else {
     $mobile = "";
@@ -1093,27 +983,20 @@ function itg_rapid_api_signup_sso($token) {
     $op = 'register_no_approval_required';
     // Send an email.
     if (empty($form_state['values']['mobile'])) {
-      // _user_mail_notify($op, $account);
       if (function_exists('itg_sso_get_mail_content')) {
         if (!empty($form_state['values']['url_info'])) {
           $url_info = $form_state['values']['url_info'];
         }
-        //$mail_content = itg_sso_get_mail_content($account, $mail, $url_info);
       }
-      //itg_user_mapping_activate($account->uid);
     }
     else {
       $rand_otp = rand(0, 9999);
       if (function_exists('itg_sso_first_time_otp_insert')) {
         itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
-        //itg_sso_sms_send($rand_otp, $mobile);
-      }
-      if (!empty($form_state['values']['mail'])) {
-        //itg_sso_otp_mail_content($rand_otp, $mail);
       }
     }
   }
-  catch(Exception$e) {
+  catch (Exception$e) {
     watchdog('error on user save', $e->getMessage());
     drupal_set_message('Error:' . $e->getMessage(), 'error');
     $account = $e;
@@ -1128,7 +1011,6 @@ function itg_rapid_api_signup_sso($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_fblogin_sso($token) {
-
   return fblogin_sso($_GET);
 }
 
@@ -1210,8 +1092,6 @@ function itg_rapid_api_otp_verification_sso($token) {
     if (function_exists(itg_sso_user_email_check)) {
       $get_user_check_email = itg_sso_user_email_check($ufname);
     }
-    // $account = user_load($get_user_check_email);
-    // $mail_content = itg_forgot_email_get_mail_content($account, $ufname);
     if (function_exists(itg_sso_otp_delete)) {
       $resp = itg_sso_otp_check_ser_sso($ufname, $mobile, $uotp);
     }
@@ -1470,7 +1350,7 @@ function itg_rapid_api_get_preference_sso($token) {
   $query = db_select('itg_widget_order', 'iwo');
   // Orderby weight or taxonomyterm id.
   $query->fields('iwo', array('weight', 'nid'))->condition('iwo.widget', "personalization_widget")->condition('iwo.extra', $user_id)
-  ->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
+      ->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
   $result = $query->execute()->fetchAllAssoc('nid');
   $new_array_of_terms = array_keys($result);
   // case handled if perferences is not saved.
@@ -1519,11 +1399,13 @@ function itg_rapid_api_get_preference_sso($token) {
  * @return array
  */
 function itg_rapid_api_get_personalization_saved_value_sso($tid, $uid) {
-  $query = db_select('itg_widget_order', 'iwo');
-  $query->addField('iwo', 'weight');
-  $query->condition('iwo.nid', $tid);
-  $query->condition('iwo.extra', $uid);
-  return $query->execute()->fetch();
+  if (!empty($tid) && !empty($uid)) {
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->addField('iwo', 'weight');
+    $query->condition('iwo.nid', $tid);
+    $query->condition('iwo.extra', $uid);
+    return $query->execute()->fetch();
+  }
 }
 
 /**
@@ -1535,7 +1417,6 @@ function itg_rapid_api_get_personalization_saved_value_sso($tid, $uid) {
  *
  */
 function itg_rapid_api_update_preference_sso($token) {
-
   return $_POST;
 }
 
@@ -1557,11 +1438,11 @@ function update_preference($user_id, $tid) {
   // Update the weight of tids if exists or insert if dont exists.
   foreach ($updates as $term_id => $weight) {
     db_merge('itg_widget_order')->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))->fields(array(
-        'nid' => $term_id,
-        'widget' => $widget_name,
-        'weight' => $weight,
-        'extra' => $user->uid,
-      ))->execute();
+      'nid' => $term_id,
+      'widget' => $widget_name,
+      'weight' => $weight,
+      'extra' => $user->uid,
+    ))->execute();
   }
   drupal_set_message(t("My Preferences Has Been Save."));
 }
@@ -1572,7 +1453,7 @@ function update_preference($user_id, $tid) {
  *
  * @return array - The processed information array.
  */
-function itg_rapid_api_check_user($token) {
+function itg_rapid_api_check_user_sso($token) {
   $uname = $_GET['user_id'];
 
   $account = user_load_by_name($uname);
@@ -1664,24 +1545,22 @@ function itg_rapid_api_reset_password_sso($token) {
 
   // Save the account with the new password.
   $flag = user_save($account, $edit);
-
-
-
   return $flag;
 }
 
+/**
+ * itg_rapid_api_testing_sso function().
+ * @param type $token
+ * @return type
+ */
 function itg_rapid_api_testing_sso($token) {
-
   $str = '{
 	"status_code": "0",
 	"status_message": "Customised Message",
 	"data": {}
 }';
-
-
   $jsondata = $str;
   $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
 }
-

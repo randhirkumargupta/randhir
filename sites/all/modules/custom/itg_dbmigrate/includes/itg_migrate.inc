@@ -127,6 +127,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_breaking_news' => array(
         'title' => t('Itg breaking news, Live blog, cricket live blog, news live blog Imports'),
       ),
+      'itg_cricketliveblog' => array(
+        'title' => t('Itg Cricket Live Blog Migration'),
+      ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
@@ -153,10 +156,7 @@ function itg_dbmigrate_migrate_api() {
 
       'itg_best_college' => array(
         'title' => t('Itg Best College Migration'),
-      ),
-      'itg_cricketliveblog' => array(
-        'title' => t('Itg Cricket Live Blog Migration'),
-      ),
+      ),  
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -276,8 +276,8 @@ function itg_dbmigrate_migrate_api() {
         'group_name' => 'itg_megareview',
       ),
       'ItgCricketliveblog' => array(
-        'class_name' => 'ItgCricketliveblog', 
-        'group_name' => 'itg_cricketliveblog'
+        'class_name' => 'ItgCricketliveblog',
+        'group_name' => 'itg_cricketliveblog',
       ),
     ),
 

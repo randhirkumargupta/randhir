@@ -34,7 +34,7 @@
                 {
 
                     $.ajax({
-                        'url': base_url + '/ajaxcallback',
+                        'url': base_url + '/related-ajaxcallback',
                         'data': post,
                         'type': 'POST',
                         'success': function (data)
@@ -67,7 +67,6 @@ jQuery(document).ready(function(){
    // var itemString = parent.jQuery('#edit-field-story-kicker-text-und-0-value').val();
     var itemString = parent.jQuery('#edit-field-common-related-content-und-0-value').val();
     var detailString = parent.jQuery('#edit-field-cm-related-content-detail-und-0-value').val();
-    //console.log(detailString);
     var insvalue = '';
     var relatedtit = '';
     jQuery('#insvalue').val(itemString);
@@ -130,7 +129,6 @@ jQuery(document).ready(function(){
         jQuery('#insvalue').val(seprated_item);
         jQuery('#relatedtit').text(seprated_detail);
         jQuery('#insvalue').attr('title', seprated_item);
-        //console.log("hasurl index = " + item);
     });
 
      jQuery('body').on('click', '.insert-url', function(){

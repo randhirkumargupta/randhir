@@ -1,4 +1,11 @@
 <?php if (!empty($data)) : global $base_url;?>
+
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
   <div class="dont-miss top-news">
     <ul>
       <?php  foreach ($data as $key => $node_data) { 
@@ -7,7 +14,7 @@
             $video_class = 'video-icon';
         }
           ?>
-        <li class="dont-miss-listing">
+        <li <?php echo $data_tb_region_item;?> class="dont-miss-listing">
           <?php if (!empty($node_data['uri'])) {
            
             ?>
@@ -22,7 +29,7 @@
             ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
+                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" title="" />
               </a>
             </div>
           <?php } ?>

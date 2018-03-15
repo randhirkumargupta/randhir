@@ -33,7 +33,7 @@ function itg_syndication_generate_xml($data) {
     $delivery_mode_type = 'web_url';
   }
 
-  watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
+  //watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
@@ -74,7 +74,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $delivery_mode,
-    //'from' => 'noreply@indiatoday.com',
+    'from' => 'care@intoday.in',
     'subject' => 'Syndication feed',
     'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
@@ -82,7 +82,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $delivery_mode . "\r\n",
-    //'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      'From: India Today <care@intoday.in>' . "\r\n",
     ),
   );
   $language = language_default();

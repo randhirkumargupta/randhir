@@ -29,6 +29,21 @@ function feature_for_video_views_api($module = NULL, $api = NULL) {
 function feature_for_video_image_default_styles() {
   $styles = array();
 
+  // Exported image style: image_647x363.
+  $styles['image_647x363'] = array(
+    'label' => 'image_647x363',
+    'effects' => array(
+      13 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 647,
+          'height' => 363,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: video_landing_page_170_x_127.
   $styles['video_landing_page_170_x_127'] = array(
     'label' => 'video_landing_page_170 X 127',

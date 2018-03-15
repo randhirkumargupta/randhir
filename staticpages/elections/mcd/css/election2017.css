@@ -1,0 +1,288 @@
+.hide,.elect-banner{display:none;}
+#swp_menu,#top_head{display:none;}
+
+ .asselection-bgbox{padding:25px 0 3px 0;}.topinnerbox1{height: auto !important;width: 100% !important;}.topzone1{ background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;line-height: inherit; min-height: auto; position: static;}
+ .election-bgbox{padding:0 !important; margin:0 !important;}#graph-area{width:1000px; margin-top:-35px;}
+.election-bgbox { border:1px solid transparent; overflow:hidden; display: none}
+
+#main_container{ float: left; width:100%}
+.storysection h2{ background:#323232; color:#fff; font:bold 18px/24px Roboto; display: block; padding:4px 10px;}
+.topHeadStory{ background:#323232; color:#fff; font:bold 18px/24px Roboto; display: block; padding:5px 10px;}
+.more{color: #3b3b3b; font: 800 13px roboto,sans-serif; padding: 2px 10px; text-align: right; position: relative}
+#right-section .rt-colum h2{ background:#323232; color:#fff; font:bold 18px/24px Roboto; display: block; padding:2px 5px; position: relative; float: left; width:100%;    box-sizing: border-box !important;}
+#right-section .rt-colum h2 a{ background:#323232; color:#fff; font:bold 18px/24px Roboto; display: block; padding:2px 5px;}
+.captionWicon span.photo-icon{ display: block;background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/photo_icon.png) no-repeat center 0; padding-top:20px; height:20px; text-align: center;}
+.captionWicon span.withicontext { float: right; width: 255px;box-sizing: border-box !important; padding: 10px;color:#fff; 
+font:17px/20px Roboto; margin-left:0px; }
+.captionWicon{ padding-bottom:0px;}
+.coverage-nav{ margin:15px 0 30px; overflow: inherit; float: left; width:100%; margin-top:30px; }
+.coverage-nav ul li.coverage-heading{ background:#d00b27; text-transform: capitalize; font:bold 18px/24px Roboto; padding:3px 5px; margin-top:-6px;}
+.coverage-nav ul li.coverage-heading a{ font:bold 18px/24px Roboto}
+.coverage-nav ul li.coverage-heading:before{border-left-color:#d00b27;border-width: 14px; margin-top: -14px;}
+.coverage-nav ul li.coverage-heading:after{border-left-color:#d00b27;border-width: 14px; margin-top: -15px;}
+#right-section .map_2017 {overflow: hidden; position: relative; width: 300px; margin: 0 auto; padding: 5px; border: 1px solid #e7e7e7;  box-shadow: 0px 2px 5px #CECECE;}
+select.mapSelectBox{ position: absolute; right:10px; top:5px; border: none; padding:2px; width:150px;}
+.electionSocialIcons2017{ background:#f9f9f9; border:1px solid #eaeaea; padding:7px 20px; height:46px; margin-top:20px;}
+.electionSocialIcons2017 ul{ float: left; width:100%; display: table; text-align: center}
+.electionSocialIcons2017 ul li{ list-style: none; display: table-cell;}
+.coverage-nav ul li+li+li+li a{ /*border-right:0*/}      
+#right-section{transition: all 0.5s ease;}
+.right_fixed {  position: fixed; width: 390px; bottom: 10px;transition: all 0.5s ease;}
+.bihar_elec_banner{/* margin-top:20px !important;*/ float: left}
+#map_2017{ margin-top:15px; float: left}
+.loading_image_center { width: 100%; float: left; text-align: center; display:none;}
+.load-btn {  border: 1px solid #8e8e8e; font: 800 24px/30px 'Roboto Slab', serif; color: #575757; padding: 10px 45px; border-radius: 1px;  text-transform: uppercase;
+    margin: 5px auto 30px; display: inline-block; cursor: pointer;text-align: center}
+.photo-slider a#photoprev-elec16{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -173px -296px;}
+.photo-slider a#photonext-elec16{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -219px -296px;}
+#right-section .photo-slider { padding:3px; margin:0}
+#wapper {  margin: 0 auto;}
+
+.storysection{ margin-top:15px;}
+.assembly_widget_container{ float:left; background:#f3f3f3; margin-top:20px; }
+.assembly_widget_container .assembly_nav{ width:647px; position:relative; top: 184px; z-index:9999; margin-left: 5px;}
+.assembly_widget_container .assembly_nav .arrow_odd{ cursor:pointer; width:25px; height:26px; float:left; display:block; background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/oddnaari/resources/images/oddnaari_leftright_it_widget.png) no-repeat;}
+.assembly_widget_container .assembly_nav .odd_left_arrow{ background-position:0 0; }
+.assembly_widget_container .assembly_nav .odd_right_arrow{ float:right;background-position:-26px 0;}
+.assembly_widget_container .assembly_cont{width:647px; float:left;margin:5px;position:relative; overflow:hidden; margin-top:-20px;}
+.assembly_widget_container .assembly_cont ul{ position:relative; list-style-type:none; }
+.assembly_widget_container .assembly_cont ul li{width:647px; float:left; position: relative;}
+.assembly_widget_container .assembly_cont ul li .odd_li_container{width:100%; float:left; padding:5px;}
+.clearfix { clear: both; }
+.tabcontent { margin-bottom: 15px; }
+.tabcontent2 h2 a{ color:#fff;}   
+.tabcontent .latestnew-rel { /*height:240px;*/ overflow:hidden; width:305px; float:left; margin-right:20px;  }
+.tabcontent .toplatestnew { margin-bottom: 20px; background: #ffffff; padding-bottom: 10px; }
+.tabcontent .toplatestnew a { font-size:23px; font-weight:500; line-height:25px; color:#000; display:block; }
+#latestnews ul.newslist-tab { float:right; width:330px; margin-top: 0px; padding:0px; }
+#latestnews ul.newslist-tab li { margin-bottom:20px; width:312px; margin-right:0; height:auto; list-style:none;  margin: 0 0px 18px 0;  overflow:hidden; float:left; }
+#latestnews ul.newslist-tab li .newsimg { width: 88px; float: left;  margin-right: 14px; }
+.tabcontent ul.newslist-tab li a { color: #070707; float: left; font-size: 16px; line-height: 20px; }
+#latestnews ul.newslist-tab li .newstextlink { width: 196px; float: left; }
+a { text-decoration: none; outline: 0; color: #000; }
+ul {list-style-type: none;}
+h2 { background: #323232; color: #fff; font: bold 18px/24px Roboto; display: block; padding: 4px 10px; margin-bottom:0px; }
+.images { height: auto; width: 100%; }
+a img { border: 0; }
+.tabcontent2 { margin-bottom: 30px; }
+.bottom_shd_h { width: 100%; position: absolute; bottom: 0; z-index: 99999; background: url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/photo_bg.png); }
+.bottom_shd_h p { color: #fff; font-size: 24px; font-weight: bold; left: 0px; line-height: 24px; margin: 0; padding: 10px; position: relative; top: 0; }
+.tab_asem_3,.tab_asem_2{ display:none;}
+.coverage-nav ul li{ margin-right:10px;}            
+.coverage-nav ul li a{padding:0 10px 0 0; text-transform:uppercase}   
+.coverage-nav ul li.active_assm{border-bottom:3px solid #c00; }
+#ipadcent{width:1000px; margin:0 auto; }     
+iframe.map_state_inner_orint{border: 0;width: 100%;height: 226px; margin-bottom: 15px}   
+.topthree-story .maintitle{ min-height:145px;}
+.topstories .right-column  { min-height:438px;}
+
+.mobile_ad { display:none}
+  
+.coverage-nav.innerMap {margin-top: 15px;  margin-left: 20px;}   
+.banner_main_election{width:100%;float: left; margin-bottom: 10px; font-family: roboto}
+.banner_main_election .image_cont_elec{width:100%;}
+.banner_main_election .image_cont_elec img{width:100%;float:left;}
+.banner_main_election .menu_election{width:100%; background: #060606; float: left; }
+.banner_main_election .menu_election ul{ list-style-type: none; padding: 0; margin: 0 }
+.banner_main_election .menu_election ul li{ float: left;    padding: 5px 10px; }
+.banner_main_election .menu_election ul li.live_tv{ background: #B10509 }
+.banner_main_election .menu_election ul li h2{font-size: 16px; line-height: 20px; background: none;padding: 0;margin:0;}  
+.banner_main_election .menu_election ul li a{ text-decoration: none; color: #fff; }
+.banner_main_election .menu_election ul li a:hover{ text-decoration: none; color: #EECC00; }
+.banner_main_election .menu_election ul li ul.list_dropdown{display: none; background: #060606;list-style-type: none;pading:0;margin:0; position: absolute;z-index:111;margin-left:-10px;margin-top: 2px;}
+.banner_main_election .menu_election ul li:hover ul.list_dropdown{display: block;}
+.banner_main_election .menu_election ul li ul.list_dropdown li{float: none;}
+.banner_main_election .menu_election ul li ul.list_dropdown li h2{font-size: 14px; font-weight: 600}
+.banner_main_election .menu_election ul li a.active_tb{ color: #EECC00; }    
+.election-bgbox{width:1000px; float:none;margin: 0 auto !important;}
+         
+.middle_election_container{width:100%; float:left; margin-bottom:20px;}   
+.middle_election_container .left_cont_election{ width:48%; float:left}
+.middle_election_container .left_cont_election iframe{ box-shadow:none !important;border:0 !important;margin-bottom:0 !important;}   
+.middle_election_container .left_cont_election div h2 a{ color:#fff !important;}      
+.middle_election_container .right_cont_election{ width:48%; float:right;border:1px solid #eee;height:391px;}    
+#keycondidates{border:1px solid #eee;}
+				   
+@media screen and (max-width:1024px){}
+
+
+@media only screen and (max-width: 800px) {
+.ad_bn{ margin: auto !important; float: none !important}
+.homeleft { width: 100%; margin-right:0%}
+#asselection .boxcont{ width:217px;}
+#right-section .rt-colum { width: 47%; margin-right: 2%;}
+#right-section .photo-slider{ margin:0 auto}
+.watch_chunk{ width:96%}
+.watch_chunk_container{ width:100%}
+#right-section .map_2017{ width:96%; margin:0}
+.captionWicon { padding-bottom: 0px;}
+.photo-slider .photo-list{ height: auto}
+.bihar_elec_banner{   margin-bottom: 15px !important;   margin-top:0px !important /*15px !important*/;}
+.coverage-nav{width: 90%; margin: auto; float: none}
+#map_2017{ margin-top:0px;}
+.coverage-nav {clear: both; display: block; float: none; margin: 0 auto; overflow: hidden;  padding-top: 6px;   width: 90%; margin-bottom:30px;}
+.electionSocialIcons2017{width:100%;}
+.rtcolum-ipad{width:100% !important;}
+
+
+.electionSocialIcons2017{width:83%; margin-top:10%;}
+.rtcolum-ipad{width:100% !important;}
+.assembly_widget_container .assembly_cont ul li,.assembly_widget_container .assembly_cont{width:681px;}
+.assembly_cont ul li img{width:100%;}
+#right-section .rt-colum{margin-right:0;}
+.red{margin-left:2%; width:93%;}
+
+.banner_main_election .menu_election ul li{padding: 5px;} 
+.election-bgbox { width:95%!Important;}       
+
+
+}
+
+
+
+@media only screen and (max-width: 768px) {
+#graph-area{width:750px; -webkit-overflow-scrolling: touch;overflow-y: scroll;}.topzone1 a{font-size:30px;}.coverage-nav ul li a{font-size:13px;}.bihar_elec_banner{width:100%;}.bihar_elec_banner img{width:100%;}#ipadcent{width:100% !important;}
+.coverage-nav.innerMap { margin-left:47px;}
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 767px) {
+	
+	.mobile_ad { display:block} 
+	
+#toppanel{display:none;}
+.topthree-story,.topthree-story .mainstory{width:100%;}
+.topthree-story .mainstory{padding:0 !important;}
+.topthree-story .mainstory{padding:5px;}
+.topthree-story .maintitle a{font-size:20px; line-height:26px;}
+.topstories .right-column{width:100% !important;}
+.topHeadStory{font-size:16px; line-height:22px;}
+#asselection .boxcont{width:47.4%; box-sizing:border-box;}
+#asselection .thirdcrad{margin:0 2.6% 3% 0;}
+.box .innerbox a {font: 400 13px/17px Roboto,sans-serif;}
+#asselection .boxcont{height:195px;}
+#right-section .rt-colum.right-ad,#right-section .rt-colum{width:100%;}
+.elect-banner{display:block; background-color:#484848; width:100%; float:left; text-align:center; text-transform:uppercase; font:bold 18px/26px 'Roboto', sans-serif; color:#fddc03; padding:5px 0; margin-bottom:28px; margin-top:20px;}
+.bihar_elec_banner{display:none;}
+.coverage-nav ul li.coverage-heading{padding:1px 5px;}
+.coverage-nav ul li.coverage-heading a{font:bold 13px/24px 'Roboto', sans-serif !important; position:relative; top:-1px;}
+.coverage-nav li.coverage-heading a{padding:0 !important;}
+.watch_chunk_right{width:56%;}
+
+.watch_chunk_left{width:36%;}
+.watch_chunk_left img{width:100%;}
+
+#top_head,#swp_menu{display:block;}
+#top_head {width: 100%; border-bottom: 1px solid #ccc;float:left;}
+#top_head ul {text-transform: uppercase; list-style-type: none; padding: 0; margin: 0;}
+#top_head ul li.logo {padding: 6px 0;}
+#top_head ul li {float: left; width: 19%; text-align: center; padding: 18px 0; border-right: 1px solid #ccc;}
+#top_head ul li a {text-decoration: none; color: #000; font-size: 18px; font-weight: bold;}
+#swp_menu{background: #111 none repeat scroll 0 0; width:100%; height:40px}
+#swp_menu .swiper-slide{background: #111; padding:10px; width:auto !important}
+#swp_menu .swiper-slide a{ color:#fff; text-decoration:none; font-size: 19px;font-weight: 600;}
+.swiper-container-horizontal > .swiper-pagination{ z-index:9999; position:absolute;}
+#swp_menu {background: #111 none repeat scroll 0 0; width: 100%; height: 40px;}
+.swiper-container {margin: 0 auto; position: relative; overflow: hidden; z-index: 1;}
+.swiper-wrapper {width: 100%;}
+#swp_menu .swiper-slide {background: #111; padding: 10px; width: auto !important;}
+.dropdown_btm.indiatoday_menu.hide {display: none;}
+.dropdown_btm {z-index: 99999;}
+.dropdown_btm {width: 100%; background: #DDDBDC; float: left; box-shadow: 0 3px 6px #333; position: absolute; top: 54px;}
+.fnt22 {font-size: 24px;}
+.search_cont {padding: 10px; background: #A4A4A4;}
+a.search_btn {text-decoration: none; color: #fff; position: relative; top: 4px;}
+.fa {display: inline-block; font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased;    -moz-osx-font-smoothing: grayscale;}
+.search_cont .search_box {border: 0; color: #fff; font-weight: bold; background: none; font-size: 14px; padding: 5px 10px; width:84%; border: 2px solid #fff;border-radius: 0px;}
+user agent stylesheet
+input[type="search" i] {padding: 1px;}
+.dropdown_btm ul li {width: 49.6%;float: left; border-bottom: 1px solid #B2B0B1; border-right: 1px solid #B2B0B1; position: relative;}
+.dropdown_btm ul li a {padding: 10px; color: #515151; font-size: 18px; font-weight: bold; text-decoration: none; display: inline-block;}
+.dropdown_btm.indiatoday_menu.hide {display: none;}
+.dropdown_btm {z-index: 99999;}
+.dropdown_btm {width: 100%; background: #DDDBDC; float: left; box-shadow: 0 3px 6px #333; position: absolute; top: 54px;}
+#mainMenu{list-style:none;}
+#wapper { width:96%; padding:2%;}
+.watch_chunk_left img { height:auto}
+#rosRightColumn .rt-colum:nth-child(2n+1) { float:none;}
+#right-section .photo-slider { padding:0;} 
+.topstories .right-column {border: 1px solid #e4e4e4; box-shadow: none; margin-right: 0;  width: 99% !important;}
+
+    
+/********************dROPDOWN nAV***********************/
+#dropdown{ width:100%; float:left; background:#A4A4A4; color:#fff; display:none}
+#dropdown .dropdown_main{ width:92%; margin:0 auto;}
+.search_cont{ padding:10px; background:#A4A4A4;}
+.search_cont .search_box{ border:0; color:#fff; font-weight:bold; background:none; font-size:14px;  padding:5px 10px; width:90%; border:2px solid #fff; border-radius:0px;}
+.fnt22{ font-size:24px;}
+a.search_btn{ text-decoration:none; color:#fff; position:relative; top:4px;}
+.dropdown_btm{width:100%; background:#DDDBDC;  float:left; box-shadow:0 3px 6px #333; position:absolute; top:54px;}
+.dropdown_btm ul li{width:49.6%; float:left;border-bottom:1px solid #B2B0B1; border-right:1px solid #B2B0B1; position:relative}
+.dropdown_btm ul li:nth-child(2n){border-right:0}
+.dropdown_btm ul li a{padding:10px; color:#515151; font-size:18px; font-weight:bold; text-decoration:none; display:inline-block}
+.dropdown_btm ul li span.fa{ font-size:19px; cursor:pointer;}
+.dropdown_sub{ position:absolute; right:10px; top:-10px; }
+.menu_btn_main{}
+#subMenu .back-menu{ font-size:16px; font-weight:300; padding:10px 0 10px 2%; border-bottom:1px solid #b2b0b1; display:block; cursor:pointer;}
+
+.main_photo_cont{ width:100%; margin:0 auto;}
+.main_photo_cont img{width:100%;/* height:100%;*/}
+.main_photo_cont h1{padding:8px 0;}
+
+.dropdown_btm.indiatoday_menu.hide{ display:none;}
+
+
+/*****************************************************/
+.coverage-nav{width:100%;margin-bottom: 10px;}
+.photo-slider a#photoprev-elec16{left:0;}
+.photo-slider a#photonext-elec16{right:0;}        
+.elect-banner{ margin-top:0; margin-bottom:15px;}
+#ipadcent{float:left;}
+.mobile_ad{float:left;width:100%;margin:5px 0}
+.dropdown_btm{top:58px;}
+
+}
+
+
+
+
+      
+
+/*********************Home Page CSS****************/
+
+      
+
+@media screen and (min-width: 320px) and (max-width: 674px) {
+#latestnews ul.newslist-tab { float:left; width: 100%; margin-top:0px;}
+.tabcontent .latestnew-rel { height:auto; overflow:visible; width:100%; float:left; margin-right:20px;  }
+#latestnews ul.newslist-tab li { width: 100%; display:inline-flex; }
+#latestnews ul.newslist-tab li .newstextlink { width: 100%; float: left; }
+.coverage-nav ul li{margin-right:5px;}
+.coverage-nav ul li a{padding:0 5px 0 0;}
+.assembly_widget_container .assembly_cont{width:300px; margin:0 0 0 0px;}
+.assembly_widget_container .assembly_cont ul li{width:300px;}
+.bottom_shd_h p{font-size:16px; line-height:20px;}
+.assembly_widget_container .assembly_nav{ width:auto; position:absolute; top: 50%; z-index:9999; }
+.assembly_widget_container{position:relative; width:300px; margin:20px auto 0; float:none}
+.assembly_widget_container .assembly_nav .odd_right_arrow{position:relative; right:-242px}
+.hotrightnow-head{float:left; width:100%;}
+.electionSocialIcons2017{width:85%;}
+.rtcolum-ipad{width:95% !important;}
+
+
+}
+
+@media only screen and (max-width: 767px){
+#asselection .boxcont { height: 240px; border: 0; box-shadow: none;}
+}
+@media only screen and (max-width: 480px){
+#asselection .boxcont { height: 200px;}
+}
+@media only screen and (max-width: 360px){
+#asselection .boxcont { height: 195px;}
+}   

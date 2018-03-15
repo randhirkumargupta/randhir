@@ -1,0 +1,454 @@
+<?php
+
+/**
+ * @file
+ * ITG Section Header module.
+ *
+ * Module for change the header and right sidebar.
+ *
+ */
+
+/**
+ * Implements hook_block_list_alter().
+ * {@inheritdoc}
+ */
+function itg_section_header_block_list_alter(&$blocks) {
+  $arg = arg();
+  if (is_valid_node_header_section($arg) || is_valid_category_header_section($arg)) {
+    if ($arg[0] == 'taxonomy') {
+      $tid = $arg[2];
+      if (is_section_header($tid)) {
+        $primary_tid = $tid;
+      }
+      else {
+        $p_terms = taxonomy_get_parents_all($tid);
+        foreach ($p_terms as $p_term) {
+          if ($p_term->tid != $tid && isset($p_term->field_is_section_header['und'][0]['value']) && !empty($p_term->field_is_section_header['und'][0]['value']) && $p_term->field_is_section_header['und'][0]['value'] == 1) {
+            $primary_tid = $p_term->tid;
+            break;
+          }
+        }
+      }
+    }
+    else {
+      $nid = $arg[1];
+      $primary_tid = get_primary_category_node($nid);
+    }
+    if ($primary_tid) {
+      if (is_section_header($primary_tid)) {
+        $section_blocks = get_section_blocks($primary_tid);
+        if (!$section_blocks || count($section_blocks) <= 0) {
+          return;
+        }
+        $counter = 0;
+        $block_weight = 0;
+        $new_blocks = array();
+        foreach ($blocks as $key => $block) {
+          if (($block->theme == 'itg') && ($block->region == 'sidebar_second')) {
+            $block_weight = $block->weight;
+            if ($block->module == 'itg_ads') {
+              $new_blocks[$block->bid] = $block;
+            }
+            unset($blocks[$key]);
+            if (isset($section_blocks[$counter])) {
+              $block_data = explode(':', $section_blocks[$counter]);
+              $_block = block_load($block_data[0], $block_data[1]);
+              $_block->region = 'sidebar_second';
+              $_block->weight = $block_weight;
+              $new_blocks[$_block->bid] = $_block;
+              $counter++;
+            }
+          }
+        }
+        for ($i = $counter; $i < count($section_blocks); $i++) {
+          $block_data = explode(':', $section_blocks[$i]);
+          $_block = block_load($block_data[0], $block_data[1]);
+          $_block->region = 'sidebar_second';
+          $_block->weight = $block_weight;
+          $new_blocks[$_block->bid] = $_block;
+        }
+        $blocks = $blocks + $new_blocks;
+      }
+    }
+  }
+}
+
+/**
+ * Function to check Section header
+ */
+function is_section_header($tid) {
+  $is_section_header = FALSE;
+  if (!empty($tid)) {
+    $query = db_select('field_data_field_is_section_header', 'sh');
+    $query->fields('sh', array('field_is_section_header_value'));
+    $query->condition('sh.entity_id', $tid, '=');
+    $query->condition('sh.bundle', 'category_management', '=');
+    $query->condition('sh.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result) && !empty($query_result[0]->field_is_section_header_value)) {
+      $is_section_header = $query_result[0]->field_is_section_header_value;
+    }
+  }
+  return $is_section_header;
+}
+
+/**
+ * Function to check Section header
+ */
+function get_all_section_header_tid() {
+  $query = db_select('field_data_field_is_section_header', 'sh');
+  $query->fields('sh', array('entity_id'));
+  $query->condition('sh.field_is_section_header_value', 1, '=');
+  $query->condition('sh.bundle', 'category_management', '=');
+  $query->condition('sh.entity_type', 'taxonomy_term', '=');
+  $query_result = $query->execute()->fetchAll();
+  $is_section_header = $query_result;
+  return $is_section_header;
+}
+
+/**
+ * Function to check Section header
+ */
+function get_primary_category_node($nid) {
+  $tid = FALSE;
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_primary_category', 'pc');
+    $query->fields('pc', array('field_primary_category_value'));
+    $query->condition('pc.entity_id', $nid, '=');
+    $query->condition('pc.entity_type', 'node', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result) && !empty($query_result[0]->field_primary_category_value)) {
+      $tid = $query_result[0]->field_primary_category_value;
+    }
+  }
+  return $tid;
+}
+
+/**
+ * Function to check Section header menu
+ */
+function get_section_menu($tid) {
+  $menu = FALSE;
+  if (!empty($tid)) {
+    $query = db_select('field_data_field_section_menu', 'sm');
+    $query->fields('sm', array('field_section_menu_mlid'));
+    $query->condition('sm.entity_id', $tid, '=');
+    $query->condition('sm.bundle', 'category_management', '=');
+    $query->condition('sm.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result) && !empty($query_result[0]->field_section_menu_mlid)) {
+      $menu = $query_result[0]->field_section_menu_mlid;
+    }
+  }
+  return $menu;
+}
+
+/**
+ * Function to check Section header blocks
+ */
+function get_section_blocks($tid) {
+  $blocks = FALSE;
+  if (!empty($tid)) {
+    $query = db_select('field_data_field_section_right_side_block', 'sb');
+    $query->fields('sb', array('field_section_right_side_block_moddelta'));
+    $query->condition('sb.entity_id', $tid, '=');
+    $query->condition('sb.bundle', 'category_management', '=');
+    $query->condition('sb.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchAll();
+    foreach ($query_result as $result) {
+      if ($result->field_section_right_side_block_moddelta != '_none') {
+        $blocks[] = $result->field_section_right_side_block_moddelta;
+      }
+    }
+  }
+  return $blocks;
+}
+
+/**
+ * Implements hook_theme().
+ * {@inheritdoc}
+ */
+function itg_section_header_theme($existing, $type, $theme, $path) {
+  $themes = array();
+  $all_section_tpls = get_all_section_header_tid();
+  foreach ($all_section_tpls as $value) {
+    $themes['section_header_' . $value->entity_id . '_block'] = array(
+      'template' => 'itg-section-' . $value->entity_id . '-header',
+      'path' => drupal_get_path('theme', FRONT_THEME_NAME) . '/templates/layouts/section-header',
+    );
+  }
+  return $themes;
+}
+
+/**
+ * Implements hook_form_alter().
+ * {@inheritdoc}
+ */
+function itg_section_header_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'taxonomy_form_term') {
+    if (isset($form['field_section_right_side_block'])) {
+      drupal_add_js(drupal_get_path('module', 'itg_section_header') . '/js/itg_section_header.js', array('scope' => 'footer'));
+      $form['field_section_right_side_block']['#prefix'] = '<div class="section_right_side_block">';
+      $form['field_section_right_side_block']['#suffix'] = '<a class="multi-right-block" data-tag="save">' . t('Add') . '</a></div><div class="blocks-list"><ul class="blocks-ul">' . itg_sections_blocks_info($form, $form_state) . '</ul></div><span class="success-blocks"></span>';
+      array_unshift($form['#submit'], 'manage_block_order_section_submit');
+    }
+  }
+}
+
+/**
+ * function for form submit custom
+ * @param array $form
+ * @param array $form_state
+ */
+function manage_block_order_section_submit(&$form, &$form_state) {
+  if (isset($form_state['values']['field_section_right_side_block'])) {
+    $counter = 0;
+    unset($form_state['values']['field_section_right_side_block']['und']);
+    foreach ($form_state['input']['rightsideblock'] as $block) {
+      $form_state['values']['field_section_right_side_block']['und'][$counter]['moddelta'] = $block;
+      $counter++;
+    }
+  }
+}
+
+/**
+ * Function for show blocks in taxonomy form
+ * @param array $form
+ * @param array $form_state
+ * @return string
+ */
+function itg_sections_blocks_info($form, $form_state) {
+  if (isset($form_state['term']) && isset($form_state['term']->field_section_right_side_block) && !empty($form_state['term']->field_section_right_side_block['und'])) {
+    $html = '';
+    foreach ($form_state['term']->field_section_right_side_block['und'] as $key => $block) {
+      $html .= '<li id="' . $block["moddelta"] . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="hidden" name="rightsideblock[' . $key . ']" value="' . $block["moddelta"] . '"><span>' . $form['field_section_right_side_block']['und']['#options'][$block["moddelta"]] . '</span></span></li>';
+    }
+    return $html;
+  }
+}
+
+/**
+ * Function for check node is valid section header
+ * @param array $arg
+ * @return boolean
+ */
+function is_valid_node_header_section($arg) {
+  if ($arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * function for check taxonomy listing page have valid section header
+ * @param array $arg
+ * @return boolean
+ */
+function is_valid_category_header_section($arg) {
+  if ($arg[0] == 'taxonomy' && $arg[1] == 'term' && !empty($arg[2]) && is_numeric($arg[2])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Function for get Node type
+ * @return string
+ */
+function itgd_get_node_type() {
+  $node = menu_get_object();
+  return $node->type;
+}
+
+/**
+ * function for get Event Section
+ * @param int $tid
+ * @return boolean
+ */
+function is_event_section_category($tid) {
+  $node = menu_get_object();
+  if (empty($node))
+    return FALSE;
+  if ($node->field_section['und'][0]['tid'] == $tid)
+    return TRUE;
+}
+
+/**
+ * Function for check event have section header
+ * @param int $tid
+ * @return int
+ */
+function is_section_event($tid) {
+  $nid = FALSE;
+  if (!empty($tid)) {
+    $query = db_select('field_data_field_event_section', 'fs');
+    $query->fields('fs', array('entity_id'));
+    $query->condition('fs.field_event_section_target_id', $tid, '=');
+    $query->condition('fs.bundle', 'event_backend', '=');
+    $query->condition('fs.entity_type', 'node', '=');
+    $result = $query->execute()->fetchAll();
+    if (count($result) > 0) {
+      $nid = $result[0]->entity_id;
+    }
+  }
+  return $nid;
+}
+
+/**
+ * Function for get event section tid
+ * @param int $nid
+ * @return boolean/tid
+ */
+function is_node_section_header_event($nid) {
+  $tid = FALSE;
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_event_section', 'fs');
+    $query->fields('fs', array('field_event_section_target_id'));
+    $query->condition('fs.entity_id', $nid, '=');
+    $query->condition('fs.bundle', 'event_backend', '=');
+    $query->condition('fs.entity_type', 'node', '=');
+    $result = $query->execute()->fetchAll();
+    if (count($result) > 0) {
+      $tid = $result[0]->field_event_section_target_id;
+    }
+  }
+  return $tid;
+}
+
+/**
+ * Function for generate section header
+ * @param array $arg
+ * @return boolean|string
+ */
+function get_section_header_menu_and_content($arg) {
+  if (is_valid_node_header_section($arg) || is_valid_category_header_section($arg) || ($arg[0] == 'taxonomy' && is_event_section_category($arg[2]))) {
+    switch ($arg[0]) {
+      case 'taxonomy':
+        $tid = $arg[2];
+        $tpl_name = 'section_header_' . $tid . '_block';
+        $nid = is_section_event($tid);
+        if ($nid && !empty(theme($tpl_name))) {
+          $menu_data = get_event_menu($nid);
+          $data['menu_manager'] = $menu_data;
+          $return_data['data'] = $data;
+          $return_data['is_event'] = TRUE;
+          $return_data['template_name'] = $tpl_name;
+          return $return_data;
+        }
+        else if (is_section_header($tid)) {
+          $primary_tid = $tid;
+        }
+        else {
+          $p_terms = taxonomy_get_parents_all($tid);
+          foreach ($p_terms as $p_term) {
+            if ($p_term->tid != $tid && isset($p_term->field_is_section_header['und'][0]['value']) && !empty($p_term->field_is_section_header['und'][0]['value']) && $p_term->field_is_section_header['und'][0]['value'] == 1) {
+              $primary_tid = $p_term->tid;
+              break;
+            }
+          }
+        }
+        break;
+      case 'node':
+        $nid = $arg[1];
+        $primary_tid = get_primary_category_node($nid);
+        if (!is_section_header($primary_tid)) {
+          return FALSE;
+        }
+        $event_nid = is_section_event($primary_tid);
+        if ($event_nid) {
+          $tpl_name = 'section_header_' . $primary_tid . '_block';
+          $menu_data = get_event_menu($event_nid);
+          $data['menu_manager'] = $menu_data;
+          $return_data['data'] = $data;
+          $return_data['is_event'] = TRUE;
+          $return_data['template_name'] = $tpl_name;
+          return $return_data;
+        }
+        break;
+      default:
+        return FALSE;
+    }
+
+    if (!empty($primary_tid) && is_section_header($primary_tid)) {
+      $tpl_name = 'section_header_' . $primary_tid . '_block';
+      if (!empty(theme($tpl_name))) {
+        $child_menu = $child_terms = menu_build_tree('menu-section-header-menu');
+        $section_menu = get_section_menu($primary_tid);
+        if ($section_menu) {
+          foreach ($child_terms as $key => $m) {
+            if ($m['link']['mlid'] == $section_menu) {
+              $child_menu = $m['below'];
+              break;
+            }
+          }
+        }
+        else {
+          $child_menu = FALSE;
+        }
+        $data['menu_manager'] = $child_menu;
+        $return_data['data'] = $data;
+        $return_data['is_event'] = FALSE;
+        $return_data['template_name'] = $tpl_name;
+        return $return_data;
+      }
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Function for get event menu
+ * @global string $base_url
+ * @param int $nid
+ * @return array
+ */
+function get_event_menu($nid) {
+  global $base_url;
+  $node_data = itg_event_backend_section_menu_detail($nid);
+  $baseurl = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
+  $node = $node_data[0];
+  $event_start_date = date('F d, Y', strtotime($node->field_event_start_date_value));
+  $event_config_home = $node->field_config_home_value;
+  $event_location = $node->field_story_kicker_text_value;
+  $event_config_programme = $node->field_config_programme_value;
+  $event_config_speakers = $node->field_config_speakers_value;
+  $event_config_sponsors = $node->field_config_sponsors_value;
+  $event_config_flashback = $node->field_config_flashback_value;
+  $event_type = $node->field_event_types_tid;
+
+  $menu_font_color = $node->field_e_menu_font_color_rgb ? $node->field_e_menu_font_color_rgb : '#f7ee23';
+  $menu_highlights_color = $node->field_e_highlighted_font_color_rgb ? $node->field_e_highlighted_font_color_rgb : '#f7ee24';
+  $home_menu = $menu_highlights_color;
+  $program_menu = $menu_highlights_color;
+  $speakers_menu = $menu_highlights_color;
+  $registration_menu = $menu_highlights_color;
+  $sponsors_menu = $menu_highlights_color;
+
+  $menu = array();
+  if ($event_config_home) {
+    $menu['menu'][] = '<li>' . l('Home', $baseurl, array('attributes' => array("style" => "color:$home_menu"))) . '</li>';
+  }
+  if ($event_config_programme) {
+    $menu['menu'][] = '<li>' . l('Programme', $baseurl . '/programme', array('attributes' => array("style" => "color:$program_menu"))) . '</li>';
+  }
+
+  if ($event_config_speakers) {
+    $menu['menu'][] = '<li>' . l('Speakers', $baseurl . '/speakers', array('attributes' => array("style" => "color:$speakers_menu"))) . '</li>';
+  }
+  $menu['menu'][] = '<li>' . l('Registration', $baseurl . '/registration', array('attributes' => array("style" => "color:$registration_menu"))) . '</li>';
+  if ($event_config_sponsors) {
+    $menu['menu'][] = '<li>' . l('Sponsors', $baseurl . '/sponsors', array('attributes' => array("style" => "color:$sponsors_menu"))) . '</li>';
+  }
+  if ($event_config_flashback) {
+    $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color, $event_type);
+    $flash_old_event = '';
+    if (!empty($flash_old)) {
+      $flash_old_event = $flash_old['menu'];
+    }
+    $menu['flashback_menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+  }
+  $menu['event_start_date'] = $event_start_date;
+  $menu['event_location'] = $event_location;
+  $menu['event_title'] = $node->title;
+  return $menu;
+}

@@ -322,16 +322,9 @@
 //		if (!$.isFunction(fmt[methodName])) {
 //			$.error("'" + methodName + "' is not a Formatter method.")
 //		};
-//		console.log("call " + methodName + " on " + $.type(this));
-//		console.log(this);
 		return this.each(function() {
-//			console.log($.type(this));
-//			console.log(this);
 			var node = $(this);
-//			console.log($.type(node));
-//			console.log(node);
 			var text = node.val();
-//			console.log("text ==>\n" + text);
 			text = fmt.format(text);
 			node.val(text);
 		});
@@ -346,8 +339,6 @@
 //		if (!$.isFunction(fmt[methodName])) {
 //			$.error("'" + methodName + "' is not a Formatter method.")
 //		};
-//		console.log("call " + methodName + " on " + $.type(text));
-//		console.log(text);
 //		return fmt[methodName].call(fmt, text);
 		return fmt.format(text);
 	};

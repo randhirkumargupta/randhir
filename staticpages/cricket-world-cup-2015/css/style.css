@@ -1,0 +1,714 @@
+*{margin:0; padding:0; outline:0;}
+
+body{ background:#fff; margin:0; font-family:roboto;}
+.clr:before, .clr:after{content:''; display:table}
+.clr:after{clear:both;}
+img { border:none; }
+.flt{ float:left;}
+.flr{ float:right;}
+
+a{text-decoration:none; color:#000;}
+
+/*=======================================Top navigation css=======================================================*/
+#top_nav{background:#000; width:100%}
+.itgd_links{ width:995px; margin:0 auto;color:#7a7a7a;font:bold 12px/15px roboto;padding:5px 0px;text-align:center;display:flex;}
+.redborder{border-top:1px solid #C7C7C7;}
+.itgd_links a{color:#fff;text-decoration:none;}
+.itgd_links a:hover{color:#000;text-decoration:none;}
+.itgd_links ul{margin:0 auto;padding:0;width:1003px;}
+.itgd_links ul li{float:left;padding:0 5px;list-style:none;}
+.itgd_links ul li.last{border-right:none;}
+
+
+/*=======================================Header css=======================================================*/
+#header{  background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/BG1_WC.jpg") no-repeat scroll center top #000;}
+.header{ overflow:hidden; width:1000px; margin:0 auto;}
+.nav-top{background:#1E2B00;}
+.nav-top ul{ width:1000px; margin:0 auto;}
+.nav-top ul li{ float:left; list-style:none; position:relative;}
+.nav-top ul li a{ padding:10px 17px; display:block;color:#FFF; text-transform:uppercase;font:300 14px roboto;}
+.nav-top ul li a:hover{ color:#FAFE0B;}
+
+.team-container{ position: absolute; width:550px; background:#F2F2EE; top: 38px; left: 0; z-index: 999999999; border-bottom:5px solid #000; display:none; padding-bottom:10px;}
+.team-container li{clear:left;}
+.col-1 {float: left;width: 175px; margin-top: 0px;}
+.col-1 li { list-style:none;}
+.col-1 li a { font-family:Arial, Helvetica, sans-serif; color:#000 !important; font-size:14px;}
+.col-1 li a:hover{ text-decoration:underline; color:#000;}
+.col-2 {float: left;width: 165px;}
+.col-2 li { list-style:none;}
+.col-2 li a { font-family:Arial, Helvetica, sans-serif; color:#000 !important; font-size:14px;}
+.col-2 li a:hover{ text-decoration:underline; color:#000;}
+.col-3 {float: left;width:200px;}
+.col-3 li { list-style:none;}
+.col-3 li a { font-family:Arial, Helvetica, sans-serif; color:#000 !important; font-size:14px;}
+.col-3 li a:hover{ text-decoration:underline; color:#000;}
+
+.nav-top ul li:hover a{ color:#FAFE0B;}
+.nav-top ul li:hover .team-container{display:block;} 
+
+
+.header .logo{ width:256px; float:left; padding:10px 0 0;}
+.header-ad{ text-align:center; margin:10px auto 0; width:728px;}
+#live_add{ width:1000px; margin:0 auto; margin-top:35px;} 
+.live-updates{background-color: #FFFFFF;border: 1px solid #CCCCCC;color: #6E6E6E;float: left;font: 500 14px/18px roboto;padding: 10px;width: 220px;overflow: hidden; height:68px;}
+.live-adver{  width:728px; height:92px; margin:0 auto;}
+
+
+#wrapper{ width:960px; margin:0 auto; }
+
+/*=======================================Left-panel css=======================================================*/
+#left-panel{ float:left; width:638px;}
+
+
+/*==========Top Big Slider css===========*/
+#video-chunk{ width:638px; margin-top:0px;}
+.video_area {padding:0px 0px 0px; position:relative;  height:540px;}
+.video_area .belt {overflow:hidden; width:638px; margin-bottom:20px; }
+.video_area ul { padding:0px; margin:0px 0px 0px 0px; position:relative; overflow:hidden}
+.video_area ul li { list-style:none; padding:0px; margin:0px; float:left; position:relative; width:638px;}
+.y-headings { background:#fd0900; padding:7px 10px;  font-size:16px; font-weight:bold; color:#FFF; font-family:roboto; display:inline-block; position:absolute; z-index:10; left:20px;}
+.lbg {position: absolute;right: 35px;top: 322px;z-index: 10;}
+.rbg {position: absolute;right: 8px;top: 322px;z-index: 10;}
+.slider-content { background:#FFFFFF; font-weight:normal; padding:10px 10px 0px; color:#000; font-size:16px; font-family:roboto;width:618px; line-height:22px; margin-top:-5px;  }
+.slider-content b { display:block; line-height:26px; color:#ffcc3f; font-size:24px; font-weight:bold; font-family:roboto; margin-bottom:5px;}
+.slider-content b a { color:#000; text-decoration:none; font-family:roboto;}
+
+#new-live-match{margin-top:20px;}
+#news{ float:left; width:640px; background:#FFF; position:relative;}
+/*.heading{background: #ff4900;padding: 7px 10px;font-size: 16px;font-weight: bold;color: #FFF;font-family: roboto;display: inline-block;position: absolute;z-index: 10;left: 20px; text-transform:uppercase;}*/
+#news h3{font:bold 16px/18px roboto; margin:40px 0 0 15px;}
+
+#left-panel .heading{ background:#458F04 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/LHS-HEADING-BAND.jpg) no-repeat 0 0; color:#fff; height:31px; padding-left:15px; line-height:31px; font-size:15px; font-weight:500;}
+#left-panel .heading a {color:#FFF}
+.photo a{color:#fff; line-height:31px; font-size:15px; font-weight:500; text-transform:uppercase;}
+.video{color:#fff; line-height:31px; font-size:15px; font-weight:500; text-transform:uppercase !important;}
+.video a{color:#fff; line-height:31px; font-size:15px; font-weight:500; text-transform:uppercase;}
+.news a{color:#fff; line-height:31px; font-size:15px; font-weight:500; text-transform:uppercase;}
+
+
+.news-list {padding: 14px;}
+.news-list li{ float:left;list-style:none; margin-bottom:8px; min-height:75px;width: 263px;margin-right:40px;}
+.news-list li img {float: left;margin-right: 10px;border: 1px solid #ccc;padding: 2px;}
+.news-list li a{font:bold 14px/18px roboto; padding-bottom:5px;}
+.more a {padding: 1px 6px;display: inline-block;background: #333333;color: #FFF;font: bold 18px roboto;text-decoration: none;width: 50px;float: right;}
+
+#live-match{ float:right; width:300px; background:#FFF; position:relative;height:300px}
+#live-match h2{padding:10px;font: bold 18px roboto;}
+.match{ background:#3d00fd}
+
+.share a{padding: 1px 6px;float: right; margin-right:10px; margin-top:29px;}
+
+/*=======================================Photo slider css=======================================================*/
+
+#photos{ width:638px; position:relative; background:#FFF; margin-top:20px;}
+.photos-chunk p {font-size: 17px;line-height: 17px;margin: 0;padding-bottom: 5px;text-transform: uppercase;}
+.photos-chunk a {color: #FFFFFF;font-size: 14px;text-decoration: none;}
+.photos-slider {background-color: #FFFFFF;height: 235px;position: relative;width: 638px;}
+.caption {bottom: 35px;	color: #FFFFFF;	font:bold 14px/22px roboto;	height: 77px;padding: 0 5px;position: absolute;	width: 171px;}
+.belts-one {height: 210px;left: 12px;overflow: hidden;position: relative;top:15px;width: 570px;}
+.belts-one ul {margin: 0; padding: 0;position: relative;}
+.belts-one ul li {float: left;height: 252px;list-style: none outside none;margin-right: 5px;position: relative;width: 185px;}
+.back {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SLIDER1.png) no-repeat 0 0;cursor: pointer;float: left;height: 30px;opacity: 1;width: 18px;z-index: 999;margin-top: 75px;margin-left: 7px;}
+.next-ipl {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SLIDER2.png) no-repeat 0 0;cursor: pointer;float: right;height: 30px;opacity: 1;width: 18px;z-index: 999;margin-top: 75px;margin-right: 10px;}
+.back:hover, .next:hover {opacity: 1;}
+.belts-one ul li a img {margin-bottom: 7px; border:2px solid #FAB49A;}
+.more-btn {background: none repeat scroll 0 0 #B3B3B3;bottom: 2px;height: 22px;position: absolute;right: 2px;width: 60px;z-index: 999;}
+.more-btn a {color: #000000;float: left;font-weight: bold;margin-left: 3px;margin-top: -2px;padding: 5px;text-transform: uppercase;}
+.pmedia-image-icon {background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/bt/img-icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);bottom: 121px;height: 27px;
+position: absolute;right: 34px;width: 29px;}
+
+/*=======================================videos slider css=======================================================*/
+#videos{ width:638px; margin-top:20px;}
+.videos{ background:#ed1b24;}
+
+.videos-slider {background-color: #FFFFFF;height: 235px;position: relative;width: 638px;}
+.belts-two {height: 210px;left: 12px;overflow: hidden;position: relative;top: 15px;width: 570px;}
+.belts-two ul {margin: 0;padding: 0;position: relative;}
+.belts-two ul li {float: left;height: 252px;list-style: none outside none;margin-right: 5px;position: relative;width: 185px;}
+.belts-two ul li a img {margin-bottom: 7px; border:2px solid #FAB49A;}
+.back-two {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SLIDER1.png) no-repeat 0 0;cursor: pointer;float: left;height: 30px;opacity: 1;width: 18px;z-index: 999;margin-top: 75px;margin-left: 7px;}
+.next-two {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SLIDER2.png) no-repeat 0 0;cursor: pointer;float: right;height: 30px;opacity: 1;width: 18px;z-index: 999;margin-top: 75px;margin-right: 10px;}
+
+/*=======================================Right-panel css=======================================================*/
+
+#right-panel{ float:right; width:300px;margin-top: 0px}
+.social-icon{height: 63px;padding: 5px;}
+.blueheader {color: rgb(0, 0, 0);font:bold 16px roboto; font-weight:normal;line-height: 18px;margin-bottom: 5px;margin-left:10px;text-align: left;}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon, .tv-iconph{display:block;float:left;height:40px;margin-left:10px !important;width:36px;}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon, .tv-iconph{background:url("http://indiatoday.intoday.in/images/India-Today-Sprites1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
+.fb-icon{background-position:-5px -35px;margin:0;}
+.tw-icon{background-position:-48px -35px;}
+.plus-icon{background-position:-92px -35px;}
+.rediff-icon{background-position:-137px -35px;}
+.rss-icon{background-position:-180px -35px;}
+.mobile-icon{background-position:-223px -35px;}
+.tv-icon{background:url("http://indiatoday.intoday.in/images/ht-live-tv_on-white.gif") no-repeat scroll 3px 5px rgba(0, 0, 0, 0);}
+
+
+.right-add{ width:300px; height:250px; margin:20px 0 15px 0; box-shadow: 0 0 2px #333333; float:right;}
+.right-box{ width:300px; min-height:150px; background:#FFF; margin-bottom:22px; position:relative; display:inline-block;}
+
+.right-box h3{padding:8px;font: bold 16px roboto;}
+
+.right-more a{padding: 1px 6px;display: inline-block;background: #333333;color: #FFF;font: bold 18px roboto;text-decoration: none; position:absolute; right:0; bottom:0;}
+.golden a{ background:#e49f03;}
+
+
+.schedule a{ background:#0a70ba;}
+.heading_schedule span{ font-size:14px; font-weight:normal; margin-left:8px;}
+
+.poll-sec{width:300px; margin:0; padding:0;}
+.poll-sec li {list-style: none;float: left;margin-right:8px;background: #68ab4c;display: block;padding: 5px 15px; font: bold 14px roboto; color:#FFF; text-transform:uppercase;}
+.poll-sec li:last-child{margin-right:0;}
+.poll-sec li input[type="radio"]{margin-right:5px;}
+.submit a{ background:#000;}
+
+#right-panel .heading_team, #right-panel .heading_golden, #right-panel .heading_schedule, #right-panel .live-comment{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/RHS_BAND.jpg) no-repeat 0 0; height:31px; line-height:31px; padding-left:15px; color:#fff; font-size:15px; font-weight:500;} 
+
+#right-panel .heading_team a, #right-panel .heading_golden a, #right-panel .heading_schedule a{ color:#fff;}
+
+span.readmore{ font-size:13px; color:#fff; font-weight:500; float:right; margin-right:10px;}
+span.readmore a{ color:#fff;font-size:13px;}
+.topstory-box {box-shadow:1px 1px 3px 1px #cbcbcb; -moz-box-shadow:1px 1px 3px 1px #cbcbcb; -webkit-box-shadow:1px 1px 3px 1px #cbcbcb; padding:5px; margin-bottom:20px;}
+.topstory-box img{ width:100%;}
+.topstory-box p{ padding:10px 0; line-height:18px;}
+
+.poll-section{width:298px; border:1px solid #ececec; border-top:none; min-height:117px; }
+
+.poll-radio{margin:20px 0 0 10px;}
+.poll-radio li{ float:left; list-style:none; margin-right:10px;}
+.poll-radio input[type="radio"] {position: absolute;opacity: 0;} 
+.poll-radio input[type="radio"] + label::before {
+  content: "";
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  line-height: 13px;
+  margin: 0 8px 0 0;
+  background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/checkboxc.png") no-repeat 0 0;
+  vertical-align: middle;
+} 
+.poll-radio input[type="radio"] + label::before{background-position: -13px 0;} 
+.poll-radio input[type="radio"]:hover + label::before {background-position: -13px -13px;} 
+.poll-radio input[type="radio"]:checked + label::before {background-position: -13px -26px;} 
+ 
+
+
+
+/*=======================================Footer css=======================================================*/
+
+footer{width: 978px;overflow: hidden;margin: 0 auto;background:#fff;clear:both;}
+.bottomad {margin-top: 5px;text-align: center;}
+.footertag, footer{width:1000px;overflow:hidden;margin:0 auto;}
+.footertag .fot-itlogo ,footer .fot-itlogo{background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -66px -95px rgba(0, 0, 0, 0);text-indent:-9999px;width:176px;float:left;}
+.footertag nav, footer nav {background-color: #333333;color: #FFFFFF;font: bold 16px arial;float: left;width: 776px; height:43px;}
+.footertag nav ul li,footer nav ul li{background-color:#333333;}
+.searc-icon1 .img{background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -10px -95px rgba(0, 0, 0, 0);cursor:pointer;display:inline-block;float:right;text-indent:-9999px;width:41px;}
+#footer1{clear:both;background:#fff;padding:0 5px;display:none;}
+nav{background-color:#000000;color:#FFFFFF;font:bold 15px arial;margin:0 auto; display:block;}
+nav ul{margin:0 auto;padding:0;width:978px;position:relative}
+nav ul li{list-style:none;float:left;background-color:#000;padding:5px 10px;text-transform:uppercase;z-index:2147483647;font-size:15px;}
+nav ul li:hover,nav ul li.active{background-color:#fff;color:#d71920;cursor:pointer;}
+nav ul li h2 {font-family: roboto !important;font-size: 14px;font-weight: 500;line-height: 16px;margin: 0;padding: 0;}
+.nav ul{margin:0 auto;padding:0;}
+.nav ul li{list-style:none;float:left;text-transform:uppercase;padding:12px 0px!Important;}
+.nav ul li a{padding:0px 3px!Important; color:#FFF;}
+.nav ul li:hover,nav ul li.active{background-color:#eb1c24;color:#FFF;cursor:pointer;}
+.home {padding: 0px!Important;margin: 0px 3px!Important;float: left;}
+
+
+
+
+
+
+.tooltip {width: 410px;height:auto;border: 1px solid #adc549;border-radius: 6px;position: absolute;bottom: 95px; padding:15px; background:#FFF; box-shadow: 2px 2px 3px 2px #ccc; z-index:9999;}
+.down-arow {position: absolute;bottom: -44px;left: 27px;}
+.text-section{}
+.text-section p span {width: 62px;height: 72px;border-right: 1px solid #465208;display: block;line-height: 90px;float: left;margin: 12px;
+color: #1f1f1f;font-size: 35px;padding-right: 20px;}
+
+.text-section p {float: left;line-height: 18px;font-size: 15px;color: #000;text-align: left;}
+.popup-inner ul li.last .tooltip{ left:-325px;}
+.popup-inner ul li.last .tooltip .down-arow{right:68px; left:auto;}
+a#closepopup{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/close_button_green.png) no-repeat 0 0; width:22px; height:22px; display:block; position:absolute; right:-10px; top:-10px; text-indent:-99999px;}
+
+/*=======================================Inner page css=======================================================*/
+
+#golden-boots-inner-chunk{ width:638px; min-height:840px;-moz-box-shadow: 0px 0px 3px #000000;-webkit-box-shadow: 0px 0px 3px #000000;box-shadow: 0px 0px 3px #000000; margin-top:32px; background:#FFF;}
+.iframe-box{ width:600px; margin:0 auto;}
+.imgs {float: left;margin-right: 10px;}
+#news, #live-match, .video_area, .videos-slider, .photos-slider { border:1px solid #ddd;}
+
+header, #spc-topnav  { width:100%; }
+#top_nav {margin-top:0px;}
+.itgd_links { }
+#live_add { overflow:hidden; padding-bottom:25px;}
+.live-updates {
+    background-color: #FFFFFF;
+    border: medium none;
+    color: #6E6E6E;
+    float: left;
+    font: 500 14px/18px roboto;
+    height: 91px;
+    overflow: hidden;
+    padding: 0;
+    width: 243px;
+}
+.topbox_lft { width: 221px; padding:10px; }
+section#right { float:right; padding-right:10px;}
+section#right, .sectopmarg { margin:0px;}
+#bodycontainer { width:1000px; margin: 0 auto; background:#fff; overflow:hidden}
+#bodycontainer .pathway { margin:0px; padding-top:10px;}
+#bodycontainer section#left {    margin-left: 10px;}
+#bodycontainer .sectopmarg { width:630px;}
+
+.slider-year{ width:700px; margin:11px auto 0 238px; overflow:hidden; height:31px;}
+.slider-year ul{ position:relative;}
+.timeline-slider ul li{ list-style:none; display:inline-block; float:left;}
+.timeline-slider{ background:#262000 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/timeline-band.jpg) no-repeat 0 0; height:54px; border-top:1px solid #3F381C; border-bottom:1px solid #3F381C; margin:20px 0;}
+
+.timeline-slider ul li a{ color:#fff; width:140px; text-align:center; font-weight:bold; font-size:19px; font-family:roboto; display:block; float:left; padding:3px 0;}
+.timeline-slider ul li a:hover{ color:#F7FA15;}
+
+
+.timeline-slider ul li:nth-child(1){ background:#48B4B7;}
+.timeline-slider ul li:nth-child(2){ background:#04988C;}
+.timeline-slider ul li:nth-child(3){ background:#730C3B;}
+.timeline-slider ul li:nth-child(4){ background:#193C9A;}
+.timeline-slider ul li:nth-child(5){ background:#AE222D;}
+.timeline-slider ul li:nth-child(6){ background:#48B4B7;}
+.timeline-slider ul li:nth-child(7){ background:#04988C;}
+.timeline-slider ul li:nth-child(8){ background:#730C3B;}
+.timeline-slider ul li:nth-child(9){ background:#980F4C;}
+.timeline-slider ul li:nth-child(10){ background:#CD1567;}
+.timeline-outer{ position:relative;}
+.timeline-outer #pre{ position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SLIDER1.png) no-repeat 0 0; display:block; width:32px; height:32px; text-indent:-99999px; top:2px; left:218px;}
+.timeline-outer #next{ position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SLIDER2.png) no-repeat 0 0; display:block; width:32px; height:32px; text-indent:-99999px; top:4px; right:-11px;}
+
+/* Live score css */
+.live-score{ border-bottom:1px dashed #ddd; margin-bottom:20px;}
+.live-score .score-inner p img{ float:left; margin-right:5px;}
+.live-score .score-inner p{ font-size:13px; font-weight:500; color:#000; line-height:22px; padding-bottom:5px;}
+.live-score .score-inner p .teamvs{ color:#666263; font-weight:700;}
+.live-score .score-inner p span{ margin-right:20px;}
+
+/* World Cups banenr */
+.worldcup-banner{box-shadow:1px 1px 3px 1px #cbcbcb; -moz-box-shadow:1px 1px 3px 1px #cbcbcb; -webkit-box-shadow:1px 1px 3px 1px #cbcbcb; margin-top:20px;}
+.worldcup-banner .image-box{ width:575px; margin:0 auto; position:relative; padding:30px 0 20px;}
+.worldcup-banner .image-box img{box-shadow:0 0 5px 1px #000000; -moz-box-shadow:0 0 5px 1px #000000; -webkit-box-shadow:0 0 5px 1px #000000;}
+.worldcup-banner .image-box .text{ position:absolute; z-index:10; bottom:40px; right:20px;}
+.worldcup-banner .image-box .text{ font-size:53px; color:#FCFF00; font-weight:bold;}
+.worldcup-banner .image-box .text b{ font-size:53px;}
+.worldcup-banner .image-box .text span{ display:block; color:#01FFEE; font-size:33px; font-weight:bold;}
+
+/* Footer New Css*/
+
+.footer-worldcup{ background:#212121; color:#fff; padding:10px 0 5px;}
+.footer-inner{ width:1000px; margin:0 auto;}
+.footer-inner .footer-left{ width:728px; float:left;}
+.footer-inner ul li{ list-style:none;}
+.footer-inner ul li a{ color:#fff; font-size:12px;}
+.footer-nav ul li{ width:auto; float:left; margin-right:10px;}
+.footer-nav ul li a{ text-transform:uppercase;}
+.footer-right{ width:240px; float:right; padding-top:25px;}
+.footer-right ul li{ width:32px; float:left; margin-right:10px;}
+.footer-right ul li span.facbookicon{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SOCIAL_ICONS_BOTTOM.png) no-repeat 0 0; width:32px; height:40px; display:block; text-indent:-9999px;}
+.footer-right ul li span.twittericon{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SOCIAL_ICONS_BOTTOM.png) no-repeat -44px 0; width:32px; height:40px; display:block; text-indent:-9999px;}
+.footer-right ul li span.googleicon{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/SOCIAL_ICONS_BOTTOM.png) no-repeat -93px 0; width:32px; height:40px; display:block; text-indent:-9999px;}
+
+
+/*Footer popup css */
+
+.footerpopup-section{/* background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/mastt.jpg) no-repeat center top #769e17;*/ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/bottom-band.jpg) no-repeat center top #000; height:114px; padding-top:20px;}
+.footerpopup-section .popup-inner{ width:1000px; margin:0 auto;}
+.footerpopup-section .popup-inner li{ position:relative; width:76px; height:76px; line-height:76px; text-align:center; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/whitepng.png) repeat 0 0; color:#999999; list-style:none; float:left; margin-right:44px; border-radius:15px; font-size:22px; font-weight:700; cursor:pointer;}
+.footerpopup-section .popup-inner li:hover, .footerpopup-section .popup-inner li.active{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/gaypng.png) repeat 0 0; color:#FFFB00;}
+.footerpopup-section .popup-inner li:nth-last-child{ margin-right:0px;}
+
+
+
+
+
+/* Logo */
+
+.logo .logotext h1{ color: #fff;
+    font-size: 29px;
+    font-weight: 700;
+    line-height: 32px;
+    margin-left: 17px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: right;
+    text-shadow: 4px 4px 2px #000;
+    text-transform: uppercase;
+    width: 195px;}
+.logo .logotext h1 span{ display:block; color:#fff600; font-size:24px; text-shadow: 4px 4px 2px #000;}
+
+/*======================================================== Slider Area =================================================================*/
+#slider-area { width:668px; position:relative; margin-bottom:80px;}
+.img-border { border:10px solid #f5f3f4; width:650px; /*height:310px;*/ overflow:hidden   }
+.img-border ul { position:relative;}
+.img-border ul li { list-style:none; float:left; width:650px; height:350px;}
+.cap-area { width: 610px;background: #f5f3f4;padding: 10px;position: absolute;bottom: -30px !important;left: 20px;height: 100px;overflow: hidden;}
+.shed { left: 1px;margin-left: 20px;position: absolute;bottom: -57px;}
+.cap-area ul { position:relative; }
+.cap-area ul li { font: bold 23px/25px roboto; list-style:none; width:650px; height:105px; float:left }
+.cap-area ul li a { color:#000; text-decoration:none; width:610px; float:left;}
+.cap-area ul li a:hover { color:#77767b; text-decoration:underline;}
+.cap-area ul li p { font: 12px/18px arial; color:#77767b; }
+.thumb { position:absolute; right:25px; bottom:65px }
+.thumb ul { padding:0px; margin:0px;}
+.thumb ul li { line-height:none; padding:5px; width:3px; height:3px; list-style:none;
+background: -webkit-linear-gradient(#666, #ccc); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#666, #ccc); /* For Opera 11.1 to 12.0 */
+background: -moz-linear-gradient(#666, #ccc); /* For Firefox 3.6 to 15 */
+background: linear-gradient(#666, #ccc); /* Standard syntax (must be last) */ border-radius:10px; float:left; margin-left:10px; cursor:pointer}
+.active { background:#000!Important}
+
+/******************************************************Schedule section starts**************************************************/
+body{background-color:#eee !important;}
+
+h2.head{font-size:24px; color:#9a9a9a; line-height:24px; text-transform:uppercase; display:block; margin:15px 0; font-weight:500;}
+h2.head strong{background-color:#249509; font-size:26px; display:inline; color:#fff; padding:0px 19px; border:1px solid #c2c6c9; letter-spacing:1px;}  
+
+.schedule_head{width:638px; float:left; background-color:#b0b0b0;}
+.schedule_section{width:615px; float:left; border:11px solid #f5f5f5; border-top:0px; background-color:#fff;}
+.schedule_section table,.schedule_head table{text-align:center;}
+.schedule_head table thead tr td{font-size:18px; line-height:32px; color:#fff !important; font-weight:600;}
+.schedule_section table tr td{font-size:13px; line-height:18px; color:#4c4c4c; padding:8px 0 24px;}
+
+/******************************************************Schedule section ends**************************************************/
+
+/****************************************************** Schedule Right Section ***********************************************/
+.nav_right_schedule_head{width: 300px; float: left; background-color:#BD3A49;}
+.nav_right_schedule_section{width:278px; float:left; border:11px solid #f5f5f5; border-top:0px; background-color:#fff; height:165px;}
+.nav_right_schedule_section table, .nav_right_schedule_head table{text-align:center;}
+.nav_right_schedule_head table thead tr td{font-size:15px; line-height:32px; color:#fff !important; font-weight:600;}
+.nav_right_schedule_section table tr td{font-size:13px; color:#4c4c4c; padding:8px 0 30px;}
+/*****************************************************************************************************************************/
+
+/****************************************************** Navigation Right for Points Tally ************************************/
+.nav_right_points_tally_head{width: 300px; float: left; background-color:#BD3A49;}
+.nav_right_points_tally_head ul{list-style:none; float:left; width:100%;}
+.nav_right_points_tally_head ul li{width:45%; float:left;}
+.nav_right_points_tally_head ul li a{padding:6px 20px; float:left; color:#fff;}
+.nav_right_points_tally_head ul li a.active{color:#fff; background-color:#BD3A49 !important; font-weight:bold;}
+
+#content1 table tr th,#content2 table tr th{color:#ddd; padding:11px 8px 10px;}
+#content1 table tr td,#content2 table tr td{color:#000;}
+
+.nav_right_points_tally_section{width:278px; float:left; border:11px solid #f5f5f5; border-top:0px; background-color:#fff; height:210px;}
+.nav_right_points_tally_head table thead tr td{font-size:15px; line-height:32px; color:#fff !important; font-weight:600;padding: 0px 22px}
+.nav_right_points_tally_section table{text-align:left;}
+.nav_right_points_tally_section table tr td{font-size:15px; color:#445A1C; padding:8px 8px 10px;padding-top:11px}
+/*****************************************************************************************************************************/
+
+/******************************************************Right section scorebord starts**************************************************/
+
+.live{float:left; width:100%; margin:4px 0 6px;}
+.live h3{background-color:#f30502; font-size:24px; line-height:28px; padding:0 4px; display:inline; letter-spacing:1px; font-weight:600;}
+.live span{font-size:24px; line-height:24px; color:#6a6667; display:inline; font-weight:normal;}
+.live p{font-size:16px; line-height:22px; color:#6a6667; float:left; font-weight:normal;}
+
+/******************************************************Right section scorebord ends**************************************************/
+
+
+/******************************************************World Cups section starts**************************************************/
+
+.wlft{float:left; width:620px;}
+.wlft h1{font-size:45px; line-height:48px; color:#007c7f; display:block; font-weight:600; padding:0 0 12px;}
+.wlft h1 strong{color:#03711a; font-weight:normal;}
+.wlft h2{background-color:#356186; font-size:20px; line-height:34px; color:#f9fefa; display:block; padding:0 0 0 6px;}
+.wlft h2 strong{color:#fff202;}
+
+.wlft .story_top_section{float:left; width:608px; background-color:#fff; padding:6px 6px 0px; margin-bottom:-10px;}
+.wlft .story_section{float:left; width:100%;}
+.wlft .story_slider{float:left; width:100%; margin:1px 0 0; height:500px;}
+.wlft .story_slider .belt-outer {overflow: hidden; position: relative; width: 608px;}
+.wlft .story_slider .belt{overflow:hidden; position:relative; float:left; width:608px; height:460px;}
+.wlft .story_slider .belt li{width:608px; height:460px; float:left;}
+
+.wlft .story_slider .prev a{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png) no-repeat 0 0; width:25px; height:38px; position:absolute; left:0; top:40%; z-index:99999; text-indent:-99999px;}
+.wlft .story_slider .next a{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png) no-repeat -28px 0; width:25px; height:38px; position:absolute; right:0; top:40%; z-index:99999; text-indent:-99999px;}
+
+.wlft .story_slider .panel{float:left; width:100%; position:relative; height:436px;}
+.wlft .story_slider .panel img{float:left; box-shadow:1px 2px 2px #a29da3; height:425px;}
+.wlft .story_slider .strip{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/strip.png) repeat 0 0; height:63px; position:absolute; bottom:11px; left:10px; width:574px; font-size:22px; line-height:26px; color:#fff; padding:5px 0 0 17px; font-weight:600;}  
+
+.wlft .heading{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/LHS-HEADING-BAND.jpg") no-repeat scroll 0 0 #458f04; color: #fff; font-size: 15px; font-weight: 500; height: 31px; line-height: 31px; padding-left: 15px; margin:0 0 19px; text-transform:uppercase; display:block !important;}
+.wlft .heading a{color:#fff;}
+.wlft .heading a em{font-style:normal; color:#f6ef01;}
+
+.wlft .thumbnail{float:left; width:100%; background-color:#fff; padding-bottom:15px;}
+.wlft .thumbnail ul{list-style:none; float:left; width:310px; padding-left:0px;}
+.wlft .thumbnail ul li{width:auto; float:left; padding:0 0 8px 11px; position:relative; cursor:pointer;}
+.wlft .thumbnail ul li .activestrip{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/strip.png) repeat 0 0; height:50px; position:absolute; bottom:12px; left:11px; width:264px; font-size:15px; line-height:20px; color:#fff; padding:5px 0 0 17px;}
+
+/*.wlft .thumbnail ul li:first-child{padding-left:0;}*/
+.wlft .thumbnail ul li img{width: 298px;height: 250px;}
+
+.wlft .gallery{float:left; width:100%; background-color:#fff; margin-top:19px; padding-bottom:20px; box-shadow:0px 2px 2px #a29da3;}
+.wlft .gallery .big_img{float:left; width:auto; background-color:#f1f1f1; padding:6px 12px; margin:0 0 0 20px; position:relative;}
+.wlft .gallery .strip{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/white_strip.png) repeat 0 0; position:absolute; bottom:0px; left:18px; width:518px; font-size:22px; line-height:26px; color:#1f1b1a; padding:5px 0 0 17px; font-weight:600;} 
+
+.wlft .gallery .small_img{float:left; width:100%; margin-top:14px;}
+.wlft .gallery .small_img ul{list-style:none; float:left; width:90%; padding:0 5%;}
+.wlft .gallery .small_img ul li{width:auto; float:left; }
+.wlft .gallery .small_img ul li:first-child{margin-left:0;}
+.wlft .gallery .small_img ul li img{}
+
+.wlft .gallery .belt-outer {overflow: hidden; position: relative; width: 550px; height:300px; padding:6px 11px;}
+.wlft .gallery .belt{overflow:hidden; position:relative; float:left; width:608px; height:460px;}
+.wlft .gallery .belt li{width:608px; height:460px; float:left;}
+
+.wlft .gallery .prev a{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png) no-repeat 0 0; width:25px; height:38px; position:absolute; left:0; top:40%; z-index:99999; text-indent:-99999px;}
+.wlft .gallery .next a{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png) no-repeat -28px 0; width:25px; height:38px; position:absolute; right:0; top:40%; z-index:99999; text-indent:-99999px;}
+.wlft .gallery .btm_right{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/gallery_slider_arrow.png) no-repeat -14px 0; width:14px; height:24px; position:absolute; right:6%; top:50%; z-index:99999; text-indent:-99999px; cursor:pointer;}
+.wlft .gallery .btm_left{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/gallery_slider_arrow.png) no-repeat 0px 0; width:14px; height:24px; position:absolute; left:6%; top:50%; z-index:99999; text-indent:-99999px; cursor:pointer;}
+.bottom-slider {overflow: hidden; padding-top: 51px; position: relative;}
+.home-slider {background:#f1f1f1; height: 313px; width: 573px; margin-left:22px;}
+.slide-back, .slide-back2 {cursor: pointer; display: none;  height: 212px;  left: 0; opacity: 0.5;  padding: 154px 5px 5px; position: absolute; top: 34px; width: 40px; z-index: 9;}
+.bottom-slider .btm_belt {float: left; height: 136px; margin-left:62px; margin-top: -27px; overflow: hidden; width: 496px;}
+.bottom-slider .btm_belt ul {position: relative;}
+
+.bottom-slider .btm_belt ul li {float: left; height: 130px; list-style: outside none none; position: relative; width: 144px; background-color:#dedede; padding:3px 5px; margin:0 0 0 10px;}
+/*.activethumb{box-shadow:0px 0px 4px #000; background-color:none !important;}*/
+.wlft .gallery .slide-back a{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png) no-repeat 0 0; width:25px; height:38px; position:absolute; left:6%; top:50%; z-index:99999; text-indent:-99999px;}
+.wlft .gallery .slide-next a{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png) no-repeat -28px 0; width:25px; height:38px; position:absolute; right:6%; top:50%; z-index:99999; text-indent:-99999px;}
+.btm_belt ul li img{ width:145px; height:130px}
+.amazing-facts li .img_box img{ width:100%;}
+/******************************************************World Cups section ends**************************************************/
+
+/******************************************************Timeline section starts**************************************************/
+.timesec{box-shadow:0 0px 6px #cbcbcb;}
+.timesec .strip{background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/white_strip.png") repeat 0 0 !important; color:#242424 !important;}
+.timesec .story_slider{height:auto !important;}
+ul.slider_thumb{float:left; width:100%; list-style:none; margin:5px 0 0;}
+ul.slider_thumb li{width:149px; margin-left:3px; float:left; position:relative;}
+ul.slider_thumb li img{width:149px; height:98px; cursor:pointer;}
+ul.slider_thumb li:first-child{margin-left:1px;}
+
+ul.slider_thumb li span{position:absolute; top:0; left:0; width:144px; height:72px; background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/strip.png") repeat 0 0; font-size:18px; line-height:24px; color:#fff; font-weight:600; padding:26px 0 0 5px; display:none;}
+ul.slider_thumb li a.hover span{display:block !important;}
+
+
+
+.amazing_facts{float:left; width:100%; margin-top:19px; background-color:#fff; box-shadow:0 2px 2px #a29da3; height:316px;}
+.amazing_facts .box{float:left; width:100%; height:250px;}
+
+.amazing_facts ul{list-style:none; float:left; width:608px; margin:0 0 0 12px;}
+.amazing_facts ul li{width:auto; float:left; margin-bottom:6px; box-shadow:0 0 5px #ededed; padding:5px 6px;}
+/*.amazing_facts ul li:last-child{margin-bottom:0;}*/
+.amazing_facts ul li .img_box{float:left; width:144px; border:2px solid #d5d1d0; border-radius:1px;}
+.amazing_facts ul li .img_box img{float:left;}
+.amazing_facts ul li .content_box{float:left; width:420px; padding:0 6px;}
+.amazing_facts ul li .content_box p{font-size:18px; color:#8a8889; line-height:24px; display:block;}
+.amazing_facts ul li ul.social{}
+.amazing_facts ul li ul.social li{box-shadow:0 0 0 #fff; margin:5px 0 0 0 !important; padding:0 !important;}
+.amazing_facts ul li ul.social li a{background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/amz_social_icon.jpg") repeat 0 0; display:inline-block; width:22px; height:21px; margin-right:4px;}
+.amazing_facts ul li ul.social li a.share{background-position:0 0;}
+.amazing_facts ul li ul.social li a.facebook{background-position:-23px 0;}
+.amazing_facts ul li ul.social li a.twitter{background-position:-50px 0;}
+.amazing_facts ul li ul.social li a.gplus{background-position:-76px 0;}
+.amazing_facts ul li ul.social li a.rss{background-position:-101px 0;}
+.amazing_facts ul li ul.social li a:hover{background-position:0 bottom;}
+
+#timeline{position:absolute; top:5px; left:20px; width:158px; height:24px; text-indent:-9999px;}
+
+
+/******************************************************Timeline section ends**************************************************/
+
+/*=======================================venues page css start=======================================================*/
+.venues{ background:#2bc972}
+.top-inner-heading{ width:638px; height:60px; line-height:60px;margin-top:10px; clear:both;}
+.top-inner-heading h2{ color:#FFFFFF; margin-left:15px; font-size:50px; font-family:roboto; float:left; }
+
+.venues-icon{ background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat; width:31px; height:48px; display: inline-block;margin-left: 15px; background-position: -360px -39px; float:left; margin-top:5px;}
+
+.venues-box-section{ width:618px; padding:10px; background:#f6f6f6; margin-top:10px; float:left;}
+.venu{ width:300px;}
+.venu h3{ font-size:30px; font-family:roboto; color:#7f7f7f; font-weight:lighter; margin-bottom:10px;}
+.venu ul{ padding:0; margin:0;}
+.venu ul li {list-style: none;padding: 7px;background: #FFFFFF;display: block;width: 285px;min-height: 77px; margin-bottom:20px; float:left;}
+.venu ul li div {background: #f7f7f7;float: left;padding: 5px;width: 275px;border-radius: 8px;box-shadow: 1px 1px 0px 1px #F1F1F1;}
+.venu ul li img{ width:90px; height:68px; float:left; margin-right:8px;}
+.venu ul li h4{ font-size:14px; color:#91908e;  font-family:roboto; font-weight:bold;}
+
+/*=======================================venues page css end=======================================================*/
+
+
+
+/*=======================================keyplayer page css start=======================================================*/
+.keyplayer{ background:#1bafb3}
+.keyplayer-icon{ background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat; width:104px; height:72px; display: inline-block;margin-left: 15px; background-position: -360px -133px; float:left; margin-top:5px;}
+.keyplayer-box-section{width:618px; padding:10px; background:#f6f6f6; margin-top:10px; float:left;}
+.keyplayer-box{ width:300px; text-align:center;}
+.keyplayer-box h3{ width:303px;border-bottom:1px solid #FFFFFF; height:51px;font-size:30px; font-family:roboto; color:#7f7f7f; font-weight:lighter; margin-bottom:10px;}
+
+.keyplayer-box ul li {list-style: none;line-height: 78px;background: #fff;padding: 10px;float:left; width:280px; margin-bottom:15px; display:block;}
+.keyplayer-box ul li:hover{box-shadow: 2px 2px 3px #cccccc;}
+.keyplayer-box ul li span{ float:left; display:inline-block; margin-right:10px;}
+.keyplayer-box ul li h4{ float:left; display:inline-block; text-transform:uppercase;}
+
+.left-border {border-left: 2px solid #FFFFFF;padding-left: 6px;height: 52px;}
+
+.new-zealand{ background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat; width:98px; height:78px;margin-left: 15px; background-position: -43px -30px; margin-top:5px;}
+
+.srilanka {background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position: -155px -31px;margin-top: 5px;}
+
+.austrarila {background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position: -42px -134px;margin-top: 5px;}
+
+.england{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-161px -124px;margin-top: 5px;}
+
+.bangladesh{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-47px -245px;margin-top: 5px;}
+
+.afganistan{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-47px -338px;margin-top: 5px;}
+
+
+.scotland{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-36px -437px;margin-top: 5px;}
+
+
+.south-africa{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-174px -435px;margin-top: 5px;}
+
+
+.pakistan{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-168px -324px;margin-top: 5px;}
+
+
+.india{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-158px -220px;margin-top: 5px;}
+
+
+.zimbabwe {background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-265px -27px;margin-top: 5px;}
+
+
+.ireland{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-265px -156px;margin-top: 5px;}
+
+.west-indies{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-265px -290px;margin-top: 5px;}
+
+.uae{background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/sprite.png") no-repeat;
+width: 98px;height: 78px;margin-left: 15px;background-position:-265px -427px;margin-top: 5px;}
+
+/*=======================================keyplayer page css end=======================================================*/
+
+
+/*=======================================point-tally page css start=======================================================*/
+
+.points-tally{ background:#055276; width:637px; height:54px; line-height:54px;}
+
+.points-tally h2 {  margin-left:15px;color:#FFFc00; float:left; margin-right:10px;}
+.points-tally h2 strong{color:#FFFFFF;}
+.point-tally-icon{ background:url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/icon-trophy.png') no-repeat; width:56px; height:51px; display:block; float:left;}
+.pointtally-box-section{ border:5px solid #c9c9c8; width:627px; margin-top:10px;float:left;}
+.pointtally-box table{border-bottom: 2px solid #fff;margin-bottom: 20px;}
+.pointtally-box table tr td{ padding:15px;color:#959595; font-size:13px; font-family:roboto;}
+.pointtally-box table tr td strong{color:#626262; font-size:16px;}
+.pointtally-box table tr:nth-child(odd){ background:#FFFFFF}
+.pointtally-box table tr:nth-child(even){ background:#eeeeec;}
+
+.pointtally-box table:last-child{ border-bottom:none; margin-bottom:0px;}
+
+
+
+
+/*=======================================point-tally page css end=======================================================*/
+
+
+.hides { display:none!Important;}
+
+.bt-slider{ width:920px; margin:0 auto; height:76px; overflow:hidden;}
+.bt-slider ul{ position:relative; height:76px;}
+.bt-timeline-outer{ position:relative; width:1000px; margin:0 auto; height:82px;}
+.bt-timeline-outer #bt-pre{ position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/NUMBER-CRUNCHING-SLIDER.png) no-repeat 0 0; display:block; width:33px; height:42px; text-indent:-99999px; top:15px; left:-40px;}
+.bt-timeline-outer #bt-next{ position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/NUMBER-CRUNCHING-SLIDER-right.png) no-repeat 0 0; display:block; width:33px; height:42px; text-indent:-99999px; top:15px; right:-40px;}
+
+/*sponsor saction*/
+.sp_strip {margin:10px auto 0; width:1003px; display:block; height:70px;}
+.sponserd_outer{margin:0 auto; width:1000px;}
+.sponsered_sec{float:left; width:100%;}
+.sponsered_sec .left_img_sec{float:left; width:359px; margin-top:9px;}
+.sponsered_sec .right_img_sec{float:left; width:641px; margin-top:13px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/Grey-base.png) no-repeat 0 0; min-height:56px;}
+.sponsered_sec .right_img_sec strong{font-size:10px; color:#7a7a7a; font-weight:normal; font-family:roboto; display:block; text-align:center;}
+.sponsered_sec .right_img_sec ul{list-style:none; float:left; width:auto;}
+.sponsered_sec .right_img_sec ul li {width: auto;float: left;border-right: 1px solid #f5f5f5;padding: 2px 4px 0 8px;text-align: center;}
+.sponsered_sec .right_img_sec ul li:last-child{border:none;}
+
+
+/*key players*/
+
+.keyplayer_box ul li .player-cation{ background:#000; opacity:0.8; color:#fff; font-size:15px; font-family:roboto; position:absolute; top:230px; padding:0 10px;} 
+	.keyplayer_box ul li{ list-style:none;}
+	
+	.keyplayer_box {
+	    position: relative;
+	}
+	.keyplayer_box ul{ position:relative;}
+	.keyplayer_box ul li {
+	    float: left;
+	    margin-right: 5px;
+	    width: 300px;
+	}
+	.keyplayer_box #keyplayer-prev a {
+	    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	    height: 38px;
+	    left: 0;
+	    position: absolute;
+	    text-indent: -99999px;
+	    top: 70px;
+	    width: 25px;
+	    z-index: 99;
+	}
+	.keyplayer_box #keyplayer-next a {
+	    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/story_slider_arrow.png") no-repeat scroll -24px 0 rgba(0, 0, 0, 0);
+	    height: 38px;
+	    position: absolute;
+	    right: 0;
+	    text-indent: -99999px;
+	    top: 70px;
+	    width: 27px;
+	    z-index: 99;
+	}
+	.tv-updates{ height:55px; margin-bottom:10px; width:635px;}
+	#rightschdule{height:210px;}
+.worldcup-banner{margin-top:0px !important; }
+
+/* Footer Popup */
+
+
+a.closepopup {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/close_button_green.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    height: 22px;
+    position: absolute;
+    right: -10px;
+    text-indent: -99999px;
+    top: -10px;
+    width: 22px;
+	display:none;
+}
+
+.bt-slider  { padding-top:150px; position:relative; top:-150px; }
+
+.bt-timeline-frame {  margin: 0 auto; padding-right: 39px;width: 923px;}
+.bt-timeline-outer { float:right; width:674px; margin:auto}
+.number-crunch { float:left;}
+.footerpopup-section .popup-inner { width:681px}
+
+
+/*Big Slider */
+.video_area .belt { background:#fff;}
+.video_area{overflow:hidden; height:auto; background:#fff;}
+.video_area ul li a img{width:650px; height:450px;}
+.right-arrow{position:absolute; top:30%; right:-5px; cursor:pointer;}
+.left-arrow{position:absolute; top:30%; left:-8px; cursor:pointer; width:30px;}

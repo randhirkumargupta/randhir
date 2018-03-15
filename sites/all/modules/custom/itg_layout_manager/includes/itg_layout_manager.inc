@@ -30,7 +30,7 @@ function itg_layout_admin() {
  * @return array $output
  */
 function itg_layout_list() {
-  
+
   drupal_add_js('jQuery(document).ready(function(){
                   jQuery(".layout_delete_conformation").click(function() {
                     if (!confirm("Are you sure, you want to delete.")) {
@@ -38,7 +38,7 @@ function itg_layout_list() {
                     }
                   }); 
               });', array('scope' => 'footer', 'type' => 'inline'));
-  
+
   // configure the table header columns
   $header = array(
     array('data' => t('ID')),
@@ -62,12 +62,20 @@ function itg_layout_list() {
     $items_per_page = 20;
   }
 
+  if (isset($_GET['page'])) {
+    $pages = $_GET['page'];
+  }
+  else {
+    $pages = 0;
+  }
+
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl')->extend('PagerDefault')->limit($items_per_page);
   $itg_query->fields('layout_tpl', array('id', 'section_name', 'template_name', 'layout_type', 'status', 'created_date'));
   $itg_query->join('taxonomy_term_data', 'ttd', 'ttd.tid = layout_tpl.section_name');
   $itg_query->fields('ttd', array('name'));
   $itg_query->groupBy('layout_tpl.section_name');
   $itg_query->condition('layout_tpl.layout_type', arg(1));
+  $itg_query->orderBy('layout_tpl.id', 'DESC');
   if (!empty($_GET['section']) && $_GET['section'] != '_none') {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
@@ -81,10 +89,10 @@ function itg_layout_list() {
   foreach ($itg_result as $row) {
 
     $edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)));
-    $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/'.arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
+    $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/' . arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
     $itg_action = $edit_link . ' / ' . $delete_link;
     $rows[] = array(
-      array('data' => $count + 1),
+      array('data' => ($items_per_page * $pages + $count + 1)),
       array('data' => $row->name),
       array('data' => $row->template_name),
       array('data' => $row->layout_type),
@@ -152,6 +160,7 @@ function itg_layout_gethomecarddata() {
   $block_name = array($widget_name1, $widget_name2, $widget_name3);
   $section = 'home_page';
   $template_name = 'page--front';
+  $_GET['is_home_front'] = TRUE;
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
   $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
 
@@ -160,7 +169,7 @@ function itg_layout_gethomecarddata() {
   if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
 
     print '<div class="row itg-common-section"  id="content-section-widget">
-              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
+              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" data-tb-region="' . itg_get_dive_region_name($widget_data[$widget_name1]['block_title'], 'Home') . '" id="section-cart-' . $widget_name1 . '">
               <div class="itg-widget">
               <div class="droppable ' . $gray_bg_layout . '">
               <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
@@ -170,7 +179,7 @@ function itg_layout_gethomecarddata() {
     }
 
     print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
-              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
+              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" data-tb-region="' . itg_get_dive_region_name($widget_data[$widget_name2]['block_title'], 'Home') . '" id="section-cart-' . $widget_name2 . '">
               <div class="itg-widget">
               <div class="droppable ' . $gray_bg_layout . '">
               <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
@@ -181,7 +190,7 @@ function itg_layout_gethomecarddata() {
 
     print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
 
-    print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
+    print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart"  data-tb-region="' . itg_get_dive_region_name($widget_data[$widget_name3]['block_title'], 'Home') . '" id="section-cart-' . $widget_name3 . '">
               <div class="itg-widget">
               <div class="droppable ' . $gray_bg_layout . '">
               <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';
@@ -472,4 +481,63 @@ function get_use_category_on_tpl($section_id, $cate_id) {
   $id = $itg_query->execute()->fetchField();
 
   return $id;
+}
+
+/**
+ * This function use for make state election page
+ */
+function itg_state_election() {
+  global $base_url;
+
+  $section = arg(1);
+  $state = arg(2);
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+  foreach ($terms as $values) {
+    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
+
+      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+    }
+  }
+
+
+  make_graph();
+
+  return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
+}
+
+/**
+ * This function use for plote .
+ */
+function make_graph() {
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'header'));
+  $section = arg(1);
+  $state = arg(2);
+  $data = itg_widget_get_graph_data_by_state($section, $state);
+  $jsondata = file_get_contents($data[0]->field_election_constituency_tall_value);
+  $settings['index'] = 0;
+  $settings['json_data'] = $jsondata;
+  drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+
+}
+
+/**
+ * callback for section card refresh
+ */
+function itg_section_card_refresh() {
+  $data = explode("_", $_REQUEST['card_val']);
+  $section_id = $data[1];
+  $widget_style = '';
+  $block_id = $data[2];
+  $data = create_setion_widgets($section_id, $widget_style, $block_id);
+  if (function_exists('itg_akamai_setting_ttl_for_section_cart')) {
+    itg_akamai_setting_ttl_for_section_cart();
+  }
+  echo $data;
+  exit;
 }

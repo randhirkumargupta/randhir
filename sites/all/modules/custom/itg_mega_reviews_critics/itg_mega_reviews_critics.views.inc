@@ -54,15 +54,14 @@ class itg_mega_reviews_critics_views_handler_field_mega_review_custom_view_link 
   function render($values) {
     global $base_url;
 
-    //$values->nid
     $mega_review_status = $values->node_status;
-    if ($mega_review_status == 0) {
-      $node_url = $base_url . '/node/' . $values->nid;
+    if ($mega_review_status == 0) {      
+      $node_url = $base_url . '/'. drupal_get_path_alias('node/' . $values->nid);
       $mob_link = '<a class="colorbox-load" href="' . $node_url . '?width=300&amp;height=600&amp;iframe=true">mobile</a>';
       $web_link = l('web', 'node/' . $values->nid, array('attributes' => array('target' => '_blank')));
     }
-    else {
-      $node_url = FRONT_URL . '/node/' . $values->nid;
+    else {      
+      $node_url = FRONT_URL . '/'. drupal_get_path_alias('node/' . $values->nid);
       $web_link = '<a href="' . $node_url . '" target="_blank">web</a>';
       $mob_link = '<a class="colorbox-load" href="' . $node_url . '?width=300&amp;height=600&amp;iframe=true">mobile</a>';
     }

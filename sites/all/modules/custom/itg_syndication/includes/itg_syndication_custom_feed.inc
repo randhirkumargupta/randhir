@@ -516,11 +516,11 @@ function get_predefine_variables_value($node = '', $variable) {
             } else {
                 $published_date = $node->created;
             }
-            $value = "<![CDATA[" . gmdate('D, d M Y H:i:s T', $published_date) . "]]>";
+            $value = "<![CDATA[" . date('D, d M Y H:i:s T', $published_date) . "]]>";
             break;
         case 'node_last_updated_date':
             $changed_date = $node->changed;
-            $value = "<![CDATA[ " . gmdate('D, d M Y H:i:s T', $changed_date) . " ]]>";
+            $value = "<![CDATA[ " . date('D, d M Y H:i:s T', $changed_date) . " ]]>";
             break;
         case 'node_author':
             $user_profile_data = user_load($node->uid);
@@ -570,7 +570,7 @@ function get_predefine_variables_value($node = '', $variable) {
             $value = t('http://indiatoday.intoday.in');
             break;
         case 'xml_creation_date':
-            $value = gmdate('D, d M Y H:i:s T', time());
+            $value = date('D, d M Y H:i:s T', time());
             break;
         case 'web_logo_url':
             $value = theme_get_setting('logo', 'itg');
@@ -979,7 +979,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&
         if (count($result) >= 1) {
             form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Pattern already exists for this client");
         }
-        watchdog('debug', "Total " . count($result) . " results founds for combination");
+        //watchdog('debug', "Total " . count($result) . " results founds for combination");
     }
 
     // For retaing value of markup field.
@@ -1002,14 +1002,14 @@ function is_all_vars_valid($xml_pattern, $content_type) {
     foreach ($var_array[1] as $field_name) {
         if (!isValidField($field_name, $content_type)) {
             $invalid_vars[] = $field_name;
-            watchdog('syndication', "invalid variables found");
+            //watchdog('syndication', "invalid variables found");
         }
     }
     if (!empty($invalid_vars)) {
         $invalid_vars_str = implode("<b>, </b>", $invalid_vars);
         form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Invalid variables are $invalid_vars_str");
     }
-    watchdog('syndication', "Variable validation pass");
+    //watchdog('syndication', "Variable validation pass");
 }
 
 /**
@@ -1072,7 +1072,10 @@ function get_default_feed_pattern_callback($form, &$form_state) {
         );
     }
 }
-
+/**
+ * _get_byline_from_nid().
+ * @return $final_result
+ */
 function _get_byline_from_nid($nid) {
     $final_result = array();
     $query = db_select('itg_multi_byline_info', 'bi');
@@ -1088,6 +1091,10 @@ function _get_byline_from_nid($nid) {
     return $final_result;
 }
 
+/**
+ * _get_byline_from_nid_for_kindle().
+ * @return $final_result
+ */
 function _get_byline_from_nid_for_kindle($nid) {
     $final_result = array();
     $query = db_select('itg_multi_byline_info', 'bi');
@@ -1102,4 +1109,42 @@ function _get_byline_from_nid_for_kindle($nid) {
         }
     }
     return $final_result;
+}
+
+/**
+ * Get all parent of term.
+ * @return $top_parents
+ */
+function _get_all_parent_terms($tid) {
+  $parents = array_reverse(taxonomy_get_parents_all($tid));
+  $top_parents = array();
+  foreach($parents as $parent) {
+      $top_parents['tid'][] = $parent->tid;
+      $top_parents['title'][] = $parent->name;
+  }
+  return $top_parents;
+}
+
+/**
+ * Function which gives flag weather node is future date or not.
+ * 
+ * @param int $nid
+ *    Node id
+ * 
+ * @return boolean
+ */
+function is_not_future_node($nid) {
+  $results = array();
+  if(!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin("field_data_field_story_schedule_date_time" , "sdt" , "sdt.entity_id=n.nid");
+    $query->fields('n', array('nid'));
+    // Logic to skip future nodes.
+    $db_or = db_or()->isNull("sdt.field_story_schedule_date_time_value")
+      ->condition("sdt.field_story_schedule_date_time_value" , date('Y-m-d H:i:s') , "<");
+    $query->condition($db_or);
+    $query->condition('n.nid' , $nid);
+    $results = $query->execute()->fetchAllAssoc('nid');
+  }
+  return empty($results) ? FALSE : TRUE;
 }

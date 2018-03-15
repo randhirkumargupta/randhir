@@ -66,6 +66,15 @@ function itg_reports_menu() {
     'type' => MENU_CALLBACK ,
     'file' => 'includes/itg_users_reports.inc' ,
   );
+  
+  // Menu form active users reports.
+  $items['itg-content-created-between-date-range'] = array(
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_report_created_date_range') ,
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg-content-created-between-date-range.inc' ,
+  );
 
   // Menu for section wise breakup.
   $items['itg-section-wise-breakup-report'] = array(
@@ -266,6 +275,38 @@ function itg_reports_form_views_exposed_form_alter(&$form , &$form_state , $form
       $form['from_state']['#prefix'] = '<div style="display: none;">';
       $form['from_state']['#suffix'] = '</div>';
       $form['#after_build'][] = 'itg_reports_view_after_build';
+      
+      $cn_type = 'story';
+      
+      $query = db_select('field_data_field_story_source_type', 'st');
+      $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
+      $query->condition('n.type', $cn_type)->distinct()
+          ->fields('st', array('field_story_source_type_value'));
+      $result = $query->execute()->fetchAll();
+      $option_st[''] = 'All';
+      foreach ($result as $option_values) {
+        if ($option_values->field_story_source_type_value == 'videogallery') {
+          $option_st[$option_values->field_story_source_type_value] = 'Video';
+        }
+        else {
+          $option_st[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
+        }
+      }
+
+      $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
+      foreach ($option_st as $option_value => $option_element) {
+        if (!empty($_GET['field_story_source_type_value_1']) && $_GET['field_story_source_type_value_1'] == $option_value) {
+          $select = "selected";
+        }
+        else {
+          $select = "";
+        }
+        $source_type .= "<option value=\"$option_value\" $select>$option_element</option>";
+      }
+      $source_type .= "</select>";
+      $form['field_story_source_type_value_1']['#suffix'] = $source_type;
+      drupal_add_css("input#edit-field-story-source-type-value-1 {display:none}", "inline");
+
 
       break;
     case 'views-exposed-form-comparative-report-cm-page':

@@ -18,7 +18,7 @@ if($source_type != 'migrated') { ?>
     );
   }
   else {
-    $actor_pic = '<img src="' . $actor[$key]['pic_uri'] . '" alt="" />';
+    $actor_pic = '<img src="' . $actor[$key]['pic_uri'] . '" alt="" title="" />';
   }
   ?>
   <div class="career-graph-data">
@@ -81,7 +81,7 @@ foreach ($output as $key => $value) {
           text: ""
         },
         toolTip: {
-          content: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name}>',
+          content: '{movie_name},{y} cr in {x} <img src={graph_name} alt={movie_name} title={movie_name}>',
         },
         axisX: {
           interval: 1,

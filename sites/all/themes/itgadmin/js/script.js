@@ -67,6 +67,11 @@ jQuery(document).ready(function () {
 //        }
 //    });
 
+    jQuery("select#fake-soruce-type").on("change", function () {
+        var soruce_type = jQuery(this).val();
+        jQuery("#edit-field-story-source-type-value-1").val(soruce_type);
+    });
+
 });
 
 // code for add loader in solr ajex view.
@@ -217,9 +222,10 @@ jQuery(document).ready(function () {
             var at_offset = $('.action-with-title').offset();
             var at_height = $('.action-with-title').outerHeight(true);
             var at_top = at_offset.top;
+            
             $('.action-with-title').closest('#content').css('padding-top', at_height);
             $(window).scroll(function () {
-                if ($(this).scrollTop() >= at_top) {
+                if ($(this).scrollTop() >= 202) {
                     $('.action-with-title').addClass('fixed');
                 } else {
                     $('.action-with-title').removeClass('fixed');
@@ -386,8 +392,6 @@ jQuery(document).ready(function () {
                     }, 2000);
                 },
                 error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
         });
@@ -709,14 +713,12 @@ jQuery(document).ready(function () {
                 $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Minute') {
-                console.log(radioVal);
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
                 $(this).parents('td').find('.field-name-field-minute').show();
                 $(this).parents('td').find('.field-name-field-minute select').show();
                 var time_val = $(this).parents('td').find('.field-name-field-syndication-time input').val();
-                console.log(time_val);
                 if(time_val == "" || time_val.length <=0) {
                     $(this).parents('td').find('.field-name-field-syndication-time').hide();
                     $(this).parents('td').find('.field-name-field-syndication-time input').val("00:00");
@@ -1095,8 +1097,6 @@ jQuery(document).ready(function () {
             complete: function () {
             },
             error: function (xhr, desc, err) {
-//                console.log(xhr);
-//                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });
@@ -1131,6 +1131,12 @@ jQuery(document).ready(function () {
     });
 });
 jQuery(document).ready(function () {
+    jQuery("input[name='field_poll_start_date[und][0][value][time]']").keyup(function(){
+      jQuery("input[name='field_poll_start_date[und][0][value][time]']").val(jQuery(this).val() || "00:00");
+    });
+    jQuery("input[name='field_poll_end_date[und][0][value][time]']").keyup(function(){
+      jQuery("input[name='field_poll_end_date[und][0][value][time]']").val(jQuery(this).val() || "00:00");
+    });
     jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function () {
         var CT = jQuery("#edit-field-cm-select-type-und").val();
         if (typeof CT === "undefined" || CT == null || CT == '_none') {
@@ -1179,7 +1185,6 @@ jQuery(document).ready(function () {
                 }
             }
 
-
             jQuery('#loader-data img').show().parent().addClass('loader_overlay');
             var getbtnmane = jQuery(this).attr('btn_name');
             jQuery.ajax({
@@ -1193,7 +1198,7 @@ jQuery(document).ready(function () {
                 success: function (data) {
                     jQuery(".asso-filed-video").unbind('click');
                     jQuery('.asso-filed-video').prop('disabled', false);
-
+					var flag = false;
                     jQuery("#video_iframe").contents().find('.video-checkbox-form').prop("checked", false);
                     var as = JSON.parse(data);
                     var parsed = JSON.parse(data);
@@ -1212,8 +1217,12 @@ jQuery(document).ready(function () {
                             if (unique[0] == 'INTERNAL') {
                                 window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
                             }
-
-                            window.parent.jQuery('#widget-ajex-loader').hide();
+                                                        
+                            if(flag){
+							    window.parent.jQuery('#widget-ajex-loader').hide();
+							    flag = false;
+							}
+							flag = true;
                         } catch (err) {
 
                         }

@@ -10,7 +10,7 @@ foreach($rows as $index => $row){
      <?php if($row['field_story_medium_image'] != "") {
                 print $row['field_story_medium_image'];
             } else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
+                print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') ."' alt='' title='' />";
             }?>
         <div class="title"><h3  title="<?php print strip_tags($row['title']) ; ?>">
           <?php 

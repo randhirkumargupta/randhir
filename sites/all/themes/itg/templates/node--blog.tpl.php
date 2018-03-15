@@ -102,10 +102,11 @@ if (!empty($node->field_blog_configuration['und'])) {
     $path = $node->field_story_extra_large_image['und'][0]['uri'];
     $src = image_style_url('blog_landing_image', $path);
     $alt = $node->field_story_extra_large_image['und'][0]['alt'];
-    print "<img src='" . $src . "' alt='".$alt."' />";
+    $title = $node->field_story_extra_large_image['und'][0]['title'];
+    print "<img src='" . $src . "' alt='" . $alt . "' title='" . $title . "'>";
     ?>
   <?php else : ?>
-    <img src="<?php print $base_url. "/" . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg" ?>">
+  <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');?>" alt="Default Image" title="Default Image">
   <?php endif; ?>
   
   <!-- Long description -->
@@ -124,7 +125,9 @@ if (!empty($node->field_blog_configuration['und'])) {
 <?php if ($config_name == 'vukkul' && in_array('commentbox', $config)) : ?>
   <div class="vukkul-comment">
     <div id="vuukle-emote"></div>
-    <div id="vuukle_div"></div>
+    <!--<div id="vuukle_div"></div>-->
+    <div id="vuukle-comments"></div>
+    <div class='vuukle-powerbar'></div>
     <?php if (function_exists('vukkul_view')) : ?>
       <?php vukkul_view(); ?>
     <?php endif; ?>

@@ -9,7 +9,7 @@
         }
         else {
           global $base_url;
-          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+          $img = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
         }
         ?>
         <li class="col-md-3">
@@ -19,7 +19,7 @@
             </figure>
             <span class="posted-on"><?php echo $row['created']; ?></span>
             <p title="<?php print strip_tags($row['title']); ?>">
-              <?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
+              <?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 999, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>
             </p>
           </div>           
         </li>

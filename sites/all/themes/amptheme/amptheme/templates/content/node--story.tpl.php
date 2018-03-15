@@ -19,7 +19,7 @@ if (!empty($content)):
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
   $amp_link = str_replace('?amp', '', $actual_link);
-  $short_url = shorten_url($amp_link, 'goo.gl');
+  $short_url = $amp_link;
   $fb_title = addslashes($node->title);
   $share_desc = '';
   $image = '';
@@ -49,7 +49,7 @@ if (!empty($content)):
   $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
 
-  $byline_id = $content["byline_id"];
+  $byline_id_mobile = $byline_id = $content["byline_id"];
 
   //get byline detail
   $reporter_node = '';
@@ -67,6 +67,13 @@ if (!empty($content)):
   if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
     $photo_story_section_class = ' photo-story-section';
   }
+  $node_title = $content['amp_title'];
+  $node_image_alt = '';
+  $node_image_title = '';
+  $node_image_alt = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
+  $node_image_title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
+  // source type array
+  $source_type_arr = array('PTI' , 'IANS', 'ANI');
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
     <div class='<?php print $classes ?>'>      
@@ -78,12 +85,12 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-      <h1  title="<?php echo strip_tags($content['amp_title']);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+      <h1  title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1 title="<?php echo strip_tags($content['amp_title']);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
       <?php } ?>
       <?php
       //code for Associate lead
@@ -114,8 +121,59 @@ if (!empty($content)):
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
           <div class="story-left"> 
               <div class="posted-by">
-                  <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
-                  <span><?php print date('F j, Y', $node->created); ?>   </span>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
         <?php } ?>
@@ -123,8 +181,59 @@ if (!empty($content)):
         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
           <div class="buzzfeed-byline">
             <div class="posted-by">
-                  <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
-                  <span><?php print date('F j, Y', $node->created); ?>   </span>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
 
@@ -154,7 +263,7 @@ if (!empty($content)):
               <?php } ?>                      
               <?php
               // code for srcset
-                $extra_large_image_src_set = '';
+                /*$extra_large_image_src_set = '';
                 if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                  $extra_large_image_uri = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
                  $extra_large_image_data = getimagesize($extra_large_image_uri);
@@ -186,11 +295,14 @@ if (!empty($content)):
                 }
                 
                 $image_repo_srcset = $extra_large_image_src_set.$large_image_src_set.$medium_image_src_set.$small_image_src_set.$extra_small_image_src_set;
+                if(empty($image_repo_srcset)) {
+                  $image_repo_srcset =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg').' 647w';
+                }*/
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
                 <div class="stryimg" ><?php
                 
-                  if (empty($widget_data) && empty($node->field_story_template_guru['und'][0]['value'])) {
+                  if (empty($widget_data)) {
                     $story_image = '';
                     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -198,10 +310,9 @@ if (!empty($content)):
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                     }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>';
+                    if (isset($file_uri)) {
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
+				    }
                   }
                   else {
                     if(empty($node->field_story_template_guru['und'][0]['value'])) {
@@ -210,12 +321,10 @@ if (!empty($content)):
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                     }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>'
+                    if (isset($file_uri)) {
+                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
+                    }
                     ?>        
 
                     <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
@@ -247,8 +356,7 @@ if (!empty($content)):
                   ?>
 
                   <div class="stryimg"><?php
-                    
-                    
+                     
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
@@ -256,13 +364,9 @@ if (!empty($content)):
                       //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
                                     //<i class="fa fa-camera"></i></span>';
                     }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    
-                    //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>';
-                    
+                     if (isset($file_uri)) {
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
+                     }
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -278,12 +382,12 @@ if (!empty($content)):
                   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                     <?php if(empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
                       <div class="photoby">
-                      <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                      <?php if (!empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'])) { ?>
                         <div class="story-img-rating">
                           <?php
                           // added technology rating field value for story technology
-                          $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                          echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
+                          $tech_rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+                          echo $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] . '/10';
                           ?>
                         </div>
                       <?php } ?>
@@ -302,10 +406,7 @@ if (!empty($content)):
               </div>
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
-                  <div class="movie-rating">
-                      <div class="grey-star"><amp-img src="<?php print $base_url .'/'. path_to_theme().'/images/rating-grey.png'?>" width="111" height="18"></amp-img></div>
-                      <!--<div class="red-star" data-value="<?php //print $node->field_story_rating[LANGUAGE_NONE]['0']['value'];?>" style="width: <?php //print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 22 . "px"; ?>"><amp-img src="<?php //print $base_url .'/'. path_to_theme().'/images/rating-red.png'?>" width="111" height="18"></amp-img></div>-->
-                      <div class="red-star" data-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value']; ?>"><amp-img src="<?php print $base_url .'/'. path_to_theme().'/images/rating-red.png'?>" width="111" height="18"></amp-img></div>
+                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">                      
                   </div>                            
                 <?php endif; ?>
                 <div class="movie-detail">
@@ -363,7 +464,8 @@ if (!empty($content)):
                     $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
 
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
-                                 <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div>
+                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+                                 /*
                                   <div class="social-share">
                                   <amp-accordion disable-session-states>
                                   <section>
@@ -379,7 +481,7 @@ if (!empty($content)):
                                  </section>
                                  </amp-accordion>
                                  </div>
-                                 </div>';
+                                 </div>'; */
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><div class="scroll-x"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
@@ -423,11 +525,31 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) { 
+                  if ((!empty($node->field_technology_photogallery['und']))) {
+				    if(itg_common_get_node_status($node->field_technology_photogallery['und'][0]['target_id']) == 1){
+                      $gallery_node = node_load($node->field_technology_photogallery['und'][0]['target_id']);
+                      $tech_gallery_images = $gallery_node->field_gallery_image[LANGUAGE_NONE];
+                      $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_node->nid);
+                      $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, 'amp');
+                      $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+					}
+					else{
+					  $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+					}
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
                 }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                //code for listicle story
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                    $listicle_output.= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -437,10 +559,7 @@ if (!empty($content)):
                     $entity = entity_load('field_collection_item', array($field_collection_id));
                     $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
                     $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
-                    //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
-                    $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
                     $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                    $color = ($color) ? $color : '#000000';
                     if ($li_type == 'bullet_points') {
                       $listicle_output.= '<span class="bullet_points"></span>';
                     }
@@ -454,7 +573,9 @@ if (!empty($content)):
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                 }
                 }
                 else {
                   // Print story body
@@ -467,11 +588,6 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                  <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
-                    <span class="tech-rating">
-                      <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
-                    </span>
-                  <?php } ?>
                   <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
               <?php } ?>
@@ -527,14 +643,14 @@ if (!empty($content)):
             
             $share_image = file_create_url($share_uri);
             //$img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
-                $buzz_image_src_set = '';
+                /*$buzz_image_src_set = '';
                 if(!empty($buzz_imguri)) {
                  $buzz_image_uri = file_create_url($buzz_imguri);
                  $buzz_image_data = getimagesize($buzz_image_uri);
                  $buzz_image_src_set = $buzz_image_uri . ' ' . $buzz_image_data[0] . 'w';
-                }
+                }*/
             
-            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '" srcset="'.$buzz_image_src_set.'"><div fallback>offline</div></amp-img>';
+            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '"><div fallback>offline</div></amp-img>';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
               $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
@@ -580,17 +696,16 @@ if (!empty($content)):
 
         <div class="section-left-bototm">
         </div>
-        <div class="amp-taboola">
-        <amp-embed width=100 height=500
-             type=taboola
-             layout=responsive
-             heights="(min-width:1907px) 39%, (min-width:1200px) 46%, (min-width:780px) 64%, (min-width:480px) 98%, (min-width:460px) 167%, 196%"
-             data-publisher="amp-demo"
-             data-mode="thumbnails-a"
-             data-placement="Ads Example"
-             data-article="auto">
-        </amp-embed>
-        </div>
+        <?php if(!empty(variable_get('amp_taboola_ad_script'))) { ?>
+          <div class="amp-taboola">
+            <?php print variable_get('amp_taboola_ad_script'); ?>
+          </div>
+        <?php } ?>
+        <?php if(!empty(variable_get('amp_story_second_ad'))) { ?>
+          <div class="custom-amp-ad ad-btf">
+            <?php print variable_get('amp_story_second_ad'); ?> 
+          </div>
+        <?php } ?>
           <!-- code for related content -->   
           <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">

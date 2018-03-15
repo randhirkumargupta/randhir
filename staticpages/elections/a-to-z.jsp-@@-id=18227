@@ -1,0 +1,938 @@
+<!DOCTYPE HTML>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+<head>
+<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW" />
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<title>India Today - Breaking News from India, World, Business and Politics</title>
+<meta name="description" content="India Today gives you the latest news, politics, current affairs, cricket, sports, business and cinema news from India and around the world. Track the latest from bollywood, hollywood, regional film industries and TV channels." />
+<meta name="keywords" content="news, india news, India Today Group, world, best news site, top, business, sports, Bollywood, Politics, Science Technology, business, Videos, Photos" />
+<!-- disable iPhone inital scale -->
+<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+<link href="/elections/assembly/2015/bihar/css/homepage-new.css" type="text/css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' />
+<!-- html5.js for IE less than 9 -->
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->  
+<!-- css3-mediaqueries.js for IE less than 9 --> 
+<!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<link href="/elections/assembly/2015/bihar/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
+<link href="/elections/assembly/2015/bihar/css/responsive.css" type="text/css" rel="stylesheet" />
+<link rel="canonical" href="/" /> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
+<script async>
+$(document).ready(function(e) {
+    	setTimeout(function(){
+		$('#newsflash').html('<iframe width="300" style="margin-bottom:10px; padding-bottom:10px;" scrolling="no" height="341" frameborder="0" id="livetv_video1" allowfullscreen="" src="http://indiatoday.intoday.in/election2014/chunk_manifesto.jsp"></iframe>');
+		},5000);	
+});
+</script>
+
+<style type="text/css">
+body{ background:#549dc0 url('https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/BG.jpg')no-repeat center top !important;}
+#wapper{ background:#FFFFFF !important;}
+.home-icon, .home-icon:hover{width:22px;}
+
+.homeleft{margin-left:1%;}
+.topstr-list-one {
+	background-color: #f3f1f2;
+	margin-top:-13px;
+	position: relative;
+	right:-5px;
+	}
+	
+.topstr-list li:last-child{padding-bottom:8px; margin-bottom:0px; border-bottom:none;}
+.right-column{padding-bottom:0px;}
+.morehead {z-index: 999;top:18px;}	
+	
+body { }
+.right{float:right;}
+.lft {float:left;}
+a { outline: medium none; text-decoration: none;}
+
+
+#top-web { height:15px;}
+#amlesh{background:#016fa4; height:220px; margin-bottom:10px;}
+.itgd_links {background-color: #ffffff !important; color: #7a7a7a; font: bold 12px/15px roboto;margin: 0; padding: 0.3%; text-align: center;display: flex; border-bottom:1px solid #fff;}
+.redborder { border-top:1px solid #C7C7C7;}
+.itgd_links a {color: #a29ca6;text-decoration: none;  font: bold 12px/15px Roboto, sans-serif; }
+.itgd_links a:hover {color: #000;text-decoration: none;}	
+.itgd_links ul {margin: 0 auto;padding: 0;width:1003px;}
+.itgd_links ul li {float:left; padding:0 10px; list-style:none;}
+.clr {clear:both}
+.itgd_links ul li.last {border-right:none;}
+header{height:147px;  width:1000px; margin:0 auto;  position:relative }
+.logo{width:180px; height:132px; float:left;}
+.ad{margin-top: 20px;
+    position: absolute;
+    right: 0; z-index: 99;}	
+.homeright{padding-top:1%;}	
+.homeleft{padding-top:1%;}
+.box p{ font:18px Roboto, sans-serif;}
+
+
+
+.subnav { width:100%; background:#fff; padding:5px 0px; overflow:hidden; display:block; float:left; margin-bottom:10px;   border-bottom: 2px solid #0A76A7}
+.subnav ul { width:1000px; margin:0 auto;}
+.subnav ul li { list-style:none; float:left; }
+.subnav ul li a { font-family:roboto; text-transform:uppercase; font-size:14px; color:#000; padding:4px 10px 7px; }
+.subnav ul li a:hover {color:#fff; text-decoration:none; background:#0476aa } 
+.subnav ul li a.active {color:#fff; text-decoration:none; background:#0476aa } 
+
+</style>
+
+
+</head>
+<body >
+<div id="amlesh">
+<div class="itgd_links" id="top-web">
+<ul> 
+<li class="last"><a href="http://indiatodaygroup.com/" target="_blank" rel="nofollow">THE INDIA TODAY GROUP</a></li>
+<li><a href="http://www.indiatoday.in/" target="_blank" class="mainlevel" rel="nofollow">India Today</a></li>
+<li><a href="http://www.aajtak.in/" target="_blank" class="mainlevel" rel="nofollow">Aaj Tak</a></li>
+<li><a href="http://www.businesstoday.in/" target="_blank" class="mainlevel" rel="nofollow">Business Today</a></li>
+<li><a href="http://www.menshealthindia.in/" target="_blank" class="mainlevel" rel="nofollow">Men's Health</a></li>
+<li><a href="http://www.wonderwoman.in" target="_blank" class="mainlevel" rel="nofollow">Wonder Woman</a></li>
+<li><a href="http://www.cosmopolitan.in/" target="_blank" class="mainlevel" rel="nofollow">Cosmopolitan</a></li>
+<li><a href="http://oyefm.in/" target="_blank" class="mainlevel" rel="nofollow">Oye! 104.8FM</a></li>
+<li class="last"><a href="http://travelplus.intoday.in" target="_blank" class="mainlevel" rel="nofollow">Travel Plus</a></li>
+</ul></div>
+<div class="clr"></div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+$('.searc-icon').click(function(){
+		$('#search-saction').slideToggle('slow');
+	});
+});
+</script>
+<div class="menues">
+<nav>
+<div class="app sp_bg"><a href="http://indiatoday.intoday.in/">Indiatoday</a></div>
+<ul>
+<li class="home-icon sp_bg home_b active"  ><a href="http://indiatoday.intoday.in/index.jsp" ></a></li>
+<li class="india_b " >
+
+<a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a>
+
+
+</li>
+<li class="world_b " >
+
+<a href="http://indiatoday.intoday.in/section/113/1/world.html" >World</a>
+
+</li>
+<li class="video_b " >
+
+<a href="http://indiatoday.intoday.in/videos" >Videos</a>
+
+</li>
+<li class="photo_b " >
+
+<a href="http://indiatoday.intoday.in/galleries" >Photos</a>
+
+</li>
+<li class="cricket_b " >
+
+<a href="http://indiatoday.intoday.in/section/214/1/cricket.html" >Cricket</a>
+
+</li>
+<li class="movies_b " >
+
+<a href="http://indiatoday.intoday.in/section/67/1/movies.html" >Movies</a>
+
+</li>
+<li class="auto_b "  >
+
+<a href="http://indiatoday.intoday.in/section/230/1/auto.html" >Auto</a>
+
+</li> 
+<li class="sports_b " >
+
+<a href="http://indiatoday.intoday.in/section/84/1/sports.html" >Sports</a>
+
+</li>
+<li class="lifestyle_b " style="padding-right:3px;"   >
+
+<a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" >Lifestyle</a>
+
+</li>
+<li class="tech_b " style="padding-right:3px;"   >
+
+<a href="http://indiatoday.intoday.in/section/229/1/technology.html" class="edu"   >Tech</a>
+
+</li>
+<li class="edu_b " style="padding-right:3px;" >
+
+<a href="http://indiatoday.intoday.in/education/" class="edu"   >Education</a>
+
+</li>
+
+<li class="business_b"><a href="http://businesstoday.intoday.in/" target="_blank" class="edu" >Business</a></li>
+</ul>
+<div class="searc-icon">Search</div>
+<div class="clear"></div>
+
+</nav>
+
+<div id="search-saction">
+<div class="search-inner">
+<form action="http://indiatoday.intoday.in/advanced_search.jsp" method="get" name="searchform1" onsubmit="return validate1();" style="margin:0;padding:0;">
+<input name="option" value="com_search" type="hidden">
+<input type="text" class="input-box" name="searchword" id="mod_search_searchword"  value="Type Your search" onblur="if(this.value=='') this.value='Type Your search';" onfocus="if(this.value=='Type Your search') this.value='';"> 
+<input name="" type="submit" class="submit-btn" value="search" />
+</form> 
+</div>
+</div>
+ </div>
+ <div class="clr"></div>
+ 	<!-- Begin comScore Tag -->
+<script>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1"  />
+</noscript>
+<!-- End comScore Tag -->
+	<script type="text/javascript" >
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-795349-17");
+	pageTracker._trackPageview();
+	pageTracker._trackPageLoadTime();
+	} catch(err) {}</script>
+<div class="clear"></div>
+
+<header>
+<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Logo.png"></a></div>
+<div class="ad">
+<!-- begin ZEDO for channel:  IT Election Top nav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="2131"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel:  IT Election Top nav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
+
+
+</div>
+</header>
+
+<div class="subnav">
+	<ul>
+    	<li><a href="http://indiatoday.intoday.in/category/highlights/1/799.html" target="_blank" class="active">news</a></li>
+        <li><a href="http://indiatoday.intoday.in/category/diary/1/776.html" target="_blank">poll diary</a></li>
+        <li><a href="http://indiatoday.intoday.in/category/ground-report/1/798.html" target="_blank">ground report</a></li>
+        <li><a href="http://indiatoday.intoday.in/videos" target="_blank">videos</a></li>
+        <li><a href="http://indiatoday.intoday.in/galleries" target="_blank">photos</a></li>
+	<li><a href="http://indiatoday.intoday.in/voter-election/" target="_blank">Election Helpline</a></li>
+    </ul>
+</div>
+
+</div>
+ <div class="clr"></div>
+
+
+
+<div class="beaking_news">
+<script type="text/javascript" async>ajaxinclude("http://indiatoday.intoday.in/chunk_breakingnews.jsp")</script>
+</div>
+<div class="clear"></div>
+<div id="main_container" style="position:relative; ">
+<div id="wapper">
+<div class="homeleft">
+<div class="topstories leftmarg">
+<div class="alpha">
+
+<style>
+.outer-atoz { width:664px;}
+.topzone {
+    color: #000000;
+    font-family: Roboto !important;
+    line-height: 37px !important;
+	 font-size: 24px !important;
+}
+.topzone h2 a {
+   
+    font-weight: 500;
+    line-height: 27px;
+	  color: #000000;
+	  text-decoration:none
+}
+
+.atoz-top { background:#595959; overflow:hidden;  }
+.left-atoz {
+    color: #FFFFFF;
+    float: left;
+    font-family: roboto;
+    font-size: 196px;
+    font-weight: bolder;
+    line-height: 163px;
+    padding: 0 20px 15px;
+	border-right:2px solid #3c3c3c;
+}
+.right-atoz { padding:15px; float:left; width:450px;  }
+.head-atoz {  color: #FFFFFF;
+    font-family: roboto;
+    font-size: 20px;
+    font-weight: bold; }
+	
+.content-atoz {color:#c4c4c4; font-family: roboto;   font-size: 16px; line-height:20px; }
+.atoz {  background: none repeat scroll 0 0 #C3C3C3;
+    color: #FFFFFF;
+    float: left;
+    font-family: roboto;
+    font-size: 100px;
+    font-weight: bolder;
+    line-height: 100px;
+	height:100px;
+	text-align:center;
+    margin-right:22px; width:92px; margin-bottom:20px; }
+.atoz a { color: #FFFFFF; text-decoration:none;  padding: 0 0px 10px;  }
+.atoz:hover {color: #FFFFFF; text-decoration:none; background:#595959;}
+.active {color: #FFFFFF; text-decoration:none; background:#595959;}
+.lt { margin-right:0px}
+.social-icon { float:right; padding-top:9px;}
+.social-icon ul { padding:0px; margin:0px;}
+.social-icon ul li { list-style:none; float:right;}
+
+</style>
+
+
+<div class="outer-atoz">
+	<div class="topzone">
+		<h2>A to Z of electoral politics</h2>
+    </div>
+
+   
+    
+	
+	  
+    <div class="atoz-top">
+    	<div class="left-atoz"> M</div>
+        <div class="right-atoz">
+        	
+            <div class="content-atoz"><b>Maoists</b>
+<p>Insurgents in states of Jharkhand, Chhattisgarh, Andhra Pradesh and parts of Maharashtra, Uttar Pradesh, Bihar, Karnataka, West Bengal and Odisha call themselves Maoists and indulge in violence against the state. They boycott and try to disrupt polls.</p> 
+<br>
+<b>Muzaffarnagar</b>
+<p>Clashes between the Hindu and Muslim communities of the Muzaffarnagar district, Uttar Pradesh, in August-September 2013 claimed 43 lives and injured 93. It displaced over 50,000 who kept languishing in relief camps for months afterwards while some still live there. Highly politicised, the issue has polarised votes in the region which is likely to benefit the BJP which had just 10 seats in 2009 LS polls here.</p> 
+<br>
+<b>Maha Yuti</b>
+<p>An alliance of opposition parties in Maharashtra, comprising the Shiv Sena, the BJP, RPI-Athawale, Swabhimani Shetkari Sanghatana and the Rashtriya Samaj Party.</p>   
+<br>
+<b>Meham</b>
+<p>The 1990 bypoll countermanded in this Haryana constituency following mysterious killing of opponent Amir Singh brought INLD chief Om Prakash Chautala to national 
+notoriety. Chautala's lathi-wielding supporters softening up Mahem residents following the murder was captured by media photographers and resulted in a national outcry. The shadow of Meham dogged Chautala right up to 1996, when the Justice KN Saikia Commission indicted him as an accessory in the killing of Amir Singh.</p>   
+<br>
+<b>Mandal</b>
+<p>A commission set up in 1979 with BP Mandal as its head to "identify the socially or educationally backward". Report submitted in 1980 recommended corrective measures through quota for SC, ST and OBCs in government jobs, increasing them by 27% to 49.5%. A decade after the commission gave its report, then PM VP Singh implemented some of its recommendations in 1989, leading to massive protests throughout the country. The move opened a Pandora's box since fervent quota demands 
+started pouring in from several communities ever since and caste politics became order of the day.</p> 
+<br>
+<b>Mahadalit</b>       
+<p>In preparation for the 2010 Bihar Assembly elections, CM Nitish Kumar exploited contradictions of Dalit politics by making Mahadalit Commission in 2007. The panel submitted two interim reports and recommended inclusion of 19 castes as the extremely weaker castes among SCs. By acquiring a new identity, the Mahadalits of Bihar consolidated behind JD(U) and cast their votes en bloc to give a historic verdict to Nitish.</p>
+<br>
+<b>Marathi Manoos</b>
+<p>Marathi term for natives, used by local political parties, mainly Shiv Sena and MNS, to target outsiders in Maharashtra.</p> </div>
+            <div class="social-icon">
+            	<ul style="border: medium none; display: block;" id="349516"><li><iframe scrolling="no" frameborder="0" allowtransparency="true" style="border:none; overflow:hidden; width:80px; height:25px;" src="http://www.facebook.com/plugins/like.php?href=http://indiatoday.intoday.in//elections/a-to-z.jsp?id=18227&amp;layout=button_count&amp;show_faces=true&amp;&amp;width=80&amp;action=like&amp;font&amp;colorscheme=light&amp;height=25" class="frame"></iframe></li><li><iframe scrolling="no" frameborder="0" data-twttr-rendered="true" title="Twitter Tweet Button" style="width: 100px; height: 20px;" src="http://platform.twitter.com/widgets/tweet_button.1346833764.html#_=1346847881207&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=//elections/a-to-z.jsp?id=18227&amp;size=m&amp;text=<b>Maoists</b>
+<p>Insurgents in states of Jharkhand, Chhattisgarh, Andhra Pradesh and parts of Maharashtra, Uttar Pradesh, Bihar, Karnataka, West Bengal and Odisha call themselves Maoists and indulge in violence against the state. They boycott and try to disrupt polls.</p> 
+<br>
+<b>Muzaffarnagar</b>
+<p>Clashes between the Hindu and Muslim communities of the Muzaffarnagar district, Uttar Pradesh, in August-September 2013 claimed 43 lives and injured 93. It displaced over 50,000 who kept languishing in relief camps for months afterwards while some still live there. Highly politicised, the issue has polarised votes in the region which is likely to benefit the BJP which had just 10 seats in 2009 LS polls here.</p> 
+<br>
+<b>Maha Yuti</b>
+<p>An alliance of opposition parties in Maharashtra, comprising the Shiv Sena, the BJP, RPI-Athawale, Swabhimani Shetkari Sanghatana and the Rashtriya Samaj Party.</p>   
+<br>
+<b>Meham</b>
+<p>The 1990 bypoll countermanded in this Haryana constituency following mysterious killing of opponent Amir Singh brought INLD chief Om Prakash Chautala to national 
+notoriety. Chautala's lathi-wielding supporters softening up Mahem residents following the murder was captured by media photographers and resulted in a national outcry. The shadow of Meham dogged Chautala right up to 1996, when the Justice KN Saikia Commission indicted him as an accessory in the killing of Amir Singh.</p>   
+<br>
+<b>Mandal</b>
+<p>A commission set up in 1979 with BP Mandal as its head to "identify the socially or educationally backward". Report submitted in 1980 recommended corrective measures through quota for SC, ST and OBCs in government jobs, increasing them by 27% to 49.5%. A decade after the commission gave its report, then PM VP Singh implemented some of its recommendations in 1989, leading to massive protests throughout the country. The move opened a Pandora's box since fervent quota demands 
+started pouring in from several communities ever since and caste politics became order of the day.</p> 
+<br>
+<b>Mahadalit</b>       
+<p>In preparation for the 2010 Bihar Assembly elections, CM Nitish Kumar exploited contradictions of Dalit politics by making Mahadalit Commission in 2007. The panel submitted two interim reports and recommended inclusion of 19 castes as the extremely weaker castes among SCs. By acquiring a new identity, the Mahadalits of Bihar consolidated behind JD(U) and cast their votes en bloc to give a historic verdict to Nitish.</p>
+<br>
+<b>Marathi Manoos</b>
+<p>Marathi term for natives, used by local political parties, mainly Shiv Sena and MNS, to target outsiders in Maharashtra.</p> -%20India%20Today&amp;url=http://indiatoday.intoday.in//elections/a-to-z.jsp?id=18227&amp;via=indiatoday" allowtransparency="true" class="frame"></iframe></li><li><iframe scrolling="no" frameborder="0" allowtransparency="true" style="border:none; overflow:hidden; width:100px; height:25px;" src="https://apis.google.com/_/+1/fastbutton?bva&amp;url=http://indiatoday.intoday.in//elections/a-to-z.jsp?id=18227" class="frame"></iframe></li></ul>
+            </div>
+            
+        </div>
+    
+    </div>
+    
+    
+    <div class="clr">&nbsp;</div>
+	
+	
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18214"> A</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18215"> B</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18218"> C</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18219"> D</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18220"> E</a></div>
+   
+      
+   
+    
+    <div class="atoz lt" >
+    
+    <a href="a-to-z.jsp?id=18221"> F</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18222"> G</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18223"> H</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18224"> I</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18225"> J</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18226"> L</a></div>
+   
+      
+   
+    
+    <div class="atoz active">
+    
+    <a href="a-to-z.jsp?id=18227"> M</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18228"> N</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18229"> P</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18230"> Q</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18231"> R</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18232"> S</a></div>
+   
+      
+   
+    
+    <div class="atoz lt" >
+    
+    <a href="a-to-z.jsp?id=18233"> T</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18234"> V</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18236"> W</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18235"> Y</a></div>
+   
+      
+   
+    
+    <div class="atoz" >
+    
+    <a href="a-to-z.jsp?id=18237"> Z</a></div>
+   
+      
+    
+    
+</div>
+
+
+
+</div>
+<div class="divclear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+ 		 	
+
+<div class="homeright">
+<div class="colum">
+
+<div class="item stayconnected">
+                <p class="blueheader">STAY CONNECTED WITH US ON</p>
+                <a href="http://www.facebook.com/indiatoday" target="_blank" rel="nofollow" title="Facebook"><span class="fb-icon"></span></a>
+                <a href="http://www.twitter.com/indiatoday" target="_blank" rel="nofollow" title="Twitter"><span class="tw-icon"></span></a>
+                <!--<a title="Google Plus" rel="nofollow" target="_blank" href="https://plus.google.com/u/0/102138128034776070977/"><span class="plus-icon"></span></a>-->
+                <a href="http://www.google.com/+indiatoday" target="_blank" rel="nofollow" title="Google Plus"><span class="plus-icon"></span></a>
+                <!--<a href="http://www.rediff.com/indiatoday" target="_blank" rel="nofollow" title="Rediff"><span class="rediff-icon"></span></a>-->
+                <a href="http://indiatoday.intoday.in/site/rssFeed.jsp" target="_blank" rel="nofollow" title="RSS"><span class="rss-icon"></span></a>
+                <a href="http://m.indiatoday.in/" target="_blank" rel="nofollow" title="Mobile"><span class="mobile-icon"></span></a>
+                <a href="http://indiatoday.intoday.in/site/livetv.jsp" target="_blank" title="Live TV"><span class="tv-icon"></span></a>
+             	<div class="clear"></div>
+          	</div>
+
+ 
+<div style="width:307px; margin-top:15px">
+<!-- begin ZEDO for channel:  IT Election Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="2132"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel:  IT Election Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 --></div>
+</div>
+
+
+
+<script>
+function myOpen(abc) {
+	document.location.href= abc.value;
+}
+</script>
+
+<style>
+.clear { clear: both; }
+.item{margin-bottom:0px !important;}
+.reportcard { background-color: #fff;}
+.rp-head {  background: none repeat scroll 0 0 #E2001D;
+    color: #FFFFFF;
+    float: left;
+    font-family: Roboto,sans-serif;
+    font-size: 18px;
+    padding: 2px 3px;}
+.drop-rp{background:#ebe7e8; padding:1px 5px 15px 5px; margin-top:5px}
+
+
+.reportcard-box{height: 156px;}
+.title_main{margin-left:10px;}
+
+.title_main h2 {
+    color: #000000;
+    font: bold 18px Roboto,sans-serif;
+    margin: 40px 0 0;
+    padding: 0 5px 5px 1px;
+}
+.dropdown{width:242px; background:url('https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/MP_report.gif') no-repeat; margin:15px 0 0 18px;}
+
+.dropdown select {
+	width:204px;
+	height:27px;
+	color:#000;
+	margin-left:35px;
+	padding-top:4px;
+      border: 0 !important;.  /*Removes border*/
+     -webkit-appearance: none;  /*Removes default chrome and safari style*/
+     -moz-appearance: none;  /*Removes default style Firefox*/
+	 background:#FFFFFF;
+     /* background: url('https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Dropdown.png')  no-repeat;*/
+  }
+ .poll-flot{ margin:15px 0px 0px 20px;}
+ .poll-flot li{ float:left; margin-right:10px; list-style:none;} 
+ .poll-flot li label{ font-weight:normal;} 
+ .ad-two{margin-top:0px !important;}
+</style>
+<!-- 
+<div class="ad-two" style="width:298px;margin-right:3%; height:159px; margin-bottom:3%;">
+
+<div class="boxcont reportcard">
+  <div class="box reportcard-box">
+  <div class="subhead rp-head"><a href="http://election.intoday.in/mpreport/index.php" target="_blank">MY MP'S REPORT CARD</a></div>
+    <div class="title_main"><h2>See your MP performance and report card</h2></div>
+    <div class="drop-rp">
+    <div class="dropdown"><select onchange="javascript:myOpen(this);"><option>SELECT YOUR STATE</option>
+        	           <option value="http://election.intoday.in/mpreport/Andhra-Pradesh.html" >Andhra Pradesh</option>
+                        <option  value="http://election.intoday.in/mpreport/Arunachal-Pradesh.html" >Arunachal Pradesh</option>
+                        <option value="http://election.intoday.in/mpreport/Assam.html" >Assam</option>
+                        <option value="http://election.intoday.in/mpreport/Bihar.html" >Bihar</option>
+                        <option  value="http://election.intoday.in/mpreport/Chhattisgarh.html" >Chhattisgarh</option>
+                        <option value="http://election.intoday.in/mpreport/Delhi.html" >Delhi</option>
+                        <option value="http://election.intoday.in/mpreport/Goa.html" >Goa</option>
+                        <option  value="http://election.intoday.in/mpreport/Gujarat.html" >Gujarat</option>
+                        <option  value="http://election.intoday.in/mpreport/Haryana.html" >Haryana</option>
+                        <option  value="http://election.intoday.in/mpreport/Himachal-Pradesh.html" >Himachal Pradesh</option>
+                        <option  value="http://election.intoday.in/mpreport/Jammu-and-Kashmir.html" >Jammu and Kashmir</option>
+                        <option  value="http://election.intoday.in/mpreport/Jharkhand.html" >Jharkhand</option>
+                        <option value="http://election.intoday.in/mpreport/Karnataka.html" >Karnataka</option>
+                        <option value="http://election.intoday.in/mpreport/Kerala.html" >Kerala</option>
+                        <option  value="http://election.intoday.in/mpreport/Madhya-Pradesh.html" >Madhya Pradesh</option>
+                        <option value="http://election.intoday.in/mpreport/Maharashtra.html" >Maharashtra</option>
+                        <option  value="http://election.intoday.in/mpreport/Manipur.html" >Manipur</option>
+                        <option  value="http://election.intoday.in/mpreport/Meghalaya.html" >Meghalaya</option>
+                        <option  value="http://election.intoday.in/mpreport/Mizoram.html" >Mizoram</option>
+                        <option value="http://election.intoday.in/mpreport/Nagaland.html" >Nagaland</option>
+                        <option value="http://election.intoday.in/mpreport/Odisha.html" >Odisha</option>
+                        <option  value="http://election.intoday.in/mpreport/Punjab.html" >Punjab</option>
+                        <option  value="http://election.intoday.in/mpreport/Rajasthan.html" >Rajasthan</option>
+                        <option value="http://election.intoday.in/mpreport/Sikkim.html" >Sikkim</option>
+                        <option  value="http://election.intoday.in/mpreport/Tamil-Nadu.html" >Tamil Nadu</option>
+                        <option  value="http://election.intoday.in/mpreport/Tripura.html" >Tripura</option>
+                        <option value="http://election.intoday.in/mpreport/Uttar-Pradesh.html" >Uttar Pradesh</option>
+                        <option  value="http://election.intoday.in/mpreport/Uttarakhand.html" >Uttarakhand</option>
+                        <option  value="http://election.intoday.in/mpreport/West-Bengal.html" >West Bengal</option>                         
+      
+</select></div>
+	</div>
+  </div>
+</div>
+
+</div>
+
+ -->
+
+
+
+
+
+<div style="margin:15px 0px"><a href="http://www.electionexpress.in" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/EE_Banner.jpg" border="0"></a></div>
+
+
+
+
+<style> .subhead-poll {     background: none repeat scroll 0 0 #149197;     margin-top: 0px; }  .subhead h2 {     font: 700 12px/16px roboto; }  </style>  <div class="boxcont colum">   <div class="box" style="height:295px;">     <div class="subhead subhead-poll"><h2>POLL OF THE DAY</h2></div>   	<iframe src="http://indiatoday.intoday.in/poll/poll_story_small.php?id=1378" mce_src="http://indiatoday.intoday.in/poll/poll_story_small.php?id=1378" frameborder="0" height="350" width="300"></iframe>   </div> </div>    
+
+
+
+
+
+<!--
+<div class="colum"> 
+<div class="boxcont ipdwidth mr-right">
+<div class="hotrightnow-head red" style="margin-bottom:3%; margin-left:10px;">TUBELIGHT OF THE DAY</div>
+<div style="width:300px; clear:both; padding-left:3px;">
+<a target="_blank" href="http://indiatoday.intoday.in/slideshows/tubelight-of-the-day.html"><img  width="275px;" title="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/it/arvind_350.jpg" class="color-chunk"></a>
+</div>
+</div>
+</div>
+-->
+<!-- 
+<div class="boxcont colum">
+  	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Quiz_banner.gif" width="297" height="98" />
+</div>
+ -->
+
+<div class="boxcont colum">
+ 
+</div>
+
+
+
+ 
+ <div class="colum">
+   
+<div class="leftspac ipdwidth"><div class="hotrightnow-head red "><h3><a href="http://indiatoday.intoday.in/videos" target="_blank">Videos</a></h3></div>
+
+<li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jaya-video_179_052215024729.jpg"></a><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html">Jayalalithaa makes first public appearance in 217 days</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-kiran-bedi-cm-candidate/1/414085.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kiran-bedi_video_179_011915030550.jpg"></a><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-kiran-bedi-cm-candidate/1/414085.html">Bedi to be face of Delhi BJP?</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-bjp-candidate-list/1/414066.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bjp_video_179_011915012251.jpg"></a><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-bjp-candidate-list/1/414066.html">BJP to release list of candidates today</a><span class='small-play-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/videos" target="_blank">More</a></div></div>
+
+ </div>
+ 
+ 
+ <div class="colum"> 
+   
+<div class="leftspac ipdwidth"><div class="hotrightnow-head red "><h3><a href="http://indiatoday.intoday.in/galleries"       target="_blank">Photos</a></h3></div>
+
+<li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sushma-new_179_052814010833.jpg"></a><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html">Photos: NDA government takes charge</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-swearing-in-ceremony-celebrations-modi-cabinet/1/11871.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/pti1_210_052714023135.jpg"></a><a href="http://indiatoday.intoday.in/gallery/narendra-modi-swearing-in-ceremony-celebrations-modi-cabinet/1/11871.html">Photos: How Modi's oath ceremony was celebrated across India</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/nawaz-sharif-mahinda-rajapaksa-hamid-karzai-narendra-modi-swearing-in/1/11862.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sharif_179_052614035616.jpg"></a><a href="http://indiatoday.intoday.in/gallery/nawaz-sharif-mahinda-rajapaksa-hamid-karzai-narendra-modi-swearing-in/1/11862.html">Sharif, other SAARC leaders arrive for Modi swearing-in</a><span class='small-image-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/galleries" target="_blank">More</a></div></div> 
+  
+ </div>
+  
+   
+  <div class="colum"> 
+     
+ 
+
+<div class="boxcont ipdwidth mr-right"><div class="strbox-home"><div class="subhead"><a href="http://indiatoday.intoday.in/category/opinion/1/806.html" target="_blank()">Opinion</a></div><div class="opttopmarg"><div class="strinnerbox lft"><a href="http://indiatoday.intoday.in/story/spirits-run-low-in-the-family-party-gandhi-rahul-sonia/1/363142.html"><img align="left" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/manoj-joshi-4_88_052314090310.jpg' class="imgs">Spirits run low in the 'family party' by Manoj Joshi</a></div><div class="strinnerbox lft"><a href="http://indiatoday.intoday.in/story/namo-makes-india-proud-manmohan-singh/1/363135.html"><img align="left" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/column-1-4_88_052314095057.jpg' class="imgs">NaMo makes India proud by Rajiv Kumar</a></div><div class="strinnerbox lft"><a href="http://indiatoday.intoday.in/story/why-the-lok-sabha-results-shocked-me/1/363073.html"><img align="left" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/parliament_88_052214045224.jpg' class="imgs">Why the Lok Sabha results shocked me</a></div></div><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/category/opinion/1/806.html" target="_blank()">More</a></div></div></div>
+
+</div> 
+
+
+
+
+
+<div class="colum">  <div class="boxcont ipdwidth mr-right"> <div class="hotrightnow-head red" style="margin-bottom:3%; margin-left:10px;">Political lines</div> <div style="width:300px; clear:both; padding-left:3px;"> <a href="http://indiatoday.intoday.in/slideshows/r-prasad-take-on-elections-2014.html" mce_href="http://indiatoday.intoday.in/slideshows/r-prasad-take-on-elections-2014.html" target="_blank" class="color-chunk" width="275px;"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014April/azam-khans-muslims_350_040914092358.jpg" mce_src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014April/azam-khans-muslims_350_040914092358.jpg" title="" http:="" media2.intoday.in="" indiatoday="" images="" stories="" 2014april="" azam-khans-muslims_350_040914092358.jpg"=""></a> </div> </div> </div>       
+
+
+
+
+
+
+
+<!--
+<style>
+#sosorry { width:297px!Important;}
+</style>
+<div class="colum" style="overflow:hidden;"> 
+<div class="width47per"></div>
+</div>
+-->
+<div class="colum">
+  <div class="boxcont ipdwidth mr-right" >
+<div class="strbox-home">
+
+ <!--<a class="twitter-timeline"  width="395"  height="475" href="https://twitter.com/search?q=%23yourvote2014 "  data-widget-id="444427670609096704">Tweets about "#yourvote2014"</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+    
+<a class="twitter-timeline" width="395" height="475" href="https://twitter.com/search?q=%23YourVote2014"  data-widget-id="448721464141705217">Tweets about "#YourVote2014"</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+    
+
+</div>
+ 	</div>
+    </div>
+
+</div>
+
+
+
+
+<div class="clear"></div>
+
+<div class="index-footer">
+
+  
+<footer style="margin:0px auto;" >
+<div id="footer1" style="display:block !important">
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
+    </div>
+  </div>
+  </div>
+</footer>
+
+
+</div>
+</div>
+<style>
+#leftrightads { height: 0; position: absolute; top: 86px; width: 1020px;}
+.leftad, .rightad{position: absolute; top: 160px;}
+#leftrightads .leftad{left: -130px}
+#leftrightads .rightad{right: 12px}
+#leftrightads .leftad {
+    left: -165px;
+    top:75px;
+}
+#leftrightads .rightad {
+    left: 1005px;
+    top:75px;
+}
+.fixed {
+    position: fixed!Important;
+    top: 50px !Important;
+}
+.fixed-r {
+    position: fixed!Important;
+    top: 50px !Important;
+}
+.footertag .nav ul li a{ font-size:12px;}
+</style>
+
+<script type="text/javascript">
+$(function () {
+var msie6 = $.browser == 'msie' && $.browser.version < 7;
+if (!msie6) {
+var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));
+$(window).scroll(function (event) {
+var y = $(this).scrollTop();
+if (y >= top) {
+$('.leftad a').addClass('fixed');
+} else {
+$('.leftad a').removeClass('fixed');
+}
+});
+}
+}); 
+            </script>
+            
+            <script type="text/javascript">
+$(function () {
+var msie6 = $.browser == 'msie' && $.browser.version < 7;
+if (!msie6) {
+var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));
+$(window).scroll(function (event) {
+var y = $(this).scrollTop();
+if (y >= top) {
+$('.rightad a').addClass('fixed-r');
+} else {
+$('.rightad a').removeClass('fixed-r');
+}
+});
+}
+}); 
+            </script>
+
+
+<div id="leftrightads">
+            <div style="left:-170px;" class="leftad">
+              
+<!-- Javascript tag: -->
+<!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+                 
+             </div>
+             
+<div class="rightad">               
+           <!-- Javascript tag: -->
+<!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex right , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->    
+               
+             </div>
+             
+</div>
+
+
+ 
+ 
+<script>
+winscreen();
+$(window).resize(function() {
+	winscreen();
+});
+
+function winscreen(){
+if (document.body.offsetWidth>=1250) {
+		if (document.getElementById("leftrightads") != null || document.getElementById("leftrightads") != undefined)
+		{document.getElementById("leftrightads").style.display="block";
+			var lft = ((document.body.offsetWidth-1000)/2);
+			document.getElementById("leftrightads").style.left=lft+'px';
+		}
+	} 
+	else { 
+		if (document.getElementById("leftrightads") != null || document.getElementById("leftrightads") != undefined){
+		document.getElementById("leftrightads").style.display="none"; }}
+}
+</script>
+<script>
+	var myUserAgent = navigator.userAgent.toLowerCase();
+	if(myUserAgent.match('ipad')) {
+		   $('.leftad, .rightad').remove();
+		}
+</script>
+
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
+<script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='/staticpages/js/copypaste_common.js' ></script>
+<script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
+<img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
+<script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>
+
+</div>
+</div> 
+
+</body>
+</html>

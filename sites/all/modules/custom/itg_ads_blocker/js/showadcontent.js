@@ -4,8 +4,8 @@
 
 jQuery(document).ready(function () {
     if (__at__ != 1) {
+      console.log('detected');  
       setTimeout(openPopup(), 4000);
-      console.log('Detected');
     } else {
         jQuery('.ad-blocker').hide();
         jQuery('.ad-blocker-content').hide();
@@ -13,18 +13,9 @@ jQuery(document).ready(function () {
 
 });
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)
-    [0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-795349-17', 'auto');
-  ga('set', 'dimension1', 'IndiaToday.in');
-  ga('set', 'dimension2', 'India');
-  ga('set', 'dimension3', 'India');  
-  ga('send', 'pageview');
 
 function openPopup() {
+    jQuery(".ad-blocker").show();
     jQuery(".description").hide();
     jQuery(".buzz-section").hide();
     jQuery('.view-photo-landing-slider').hide();
@@ -45,6 +36,7 @@ function openPopup() {
         {
            jQuery(".ad-blocker").html(result);
            if(jQuery('body').hasClass('node-type-videogallery')){
+               jwplayer('videoplayer').remove();
                jQuery('.node-type-videogallery').find('#content').prepend('<div class="ad-blocker">' + result + '</div>');
            }
            if(jQuery('body').hasClass('node-type-photogallery')){

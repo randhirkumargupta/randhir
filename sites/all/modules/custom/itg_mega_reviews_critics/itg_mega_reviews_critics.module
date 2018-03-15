@@ -16,6 +16,13 @@ function itg_mega_reviews_critics_menu() {
     'page callback' => 'itg_mega_review_filter_callback',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mega_reviews_critics.helper.inc',
+  );
+  $items['migrate/mega-review-migration/%'] = array(
+    'page callback' => 'itg_mega_review_migration',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mega_reviews_critics.helper.inc',
   );
   return $items;
 }
@@ -220,6 +227,12 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'mega_review_critic_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'mega-review-critic-node-form',
+      'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
+      'render element' => 'form',
+    ),
   );
 
   return $themes;
@@ -251,37 +264,5 @@ function itg_get_megareview_company($byline_id) {
     $company = get_term_name_from_tid_for_report($byline);
     }
     return $company;
-  }
-}
-
-/*
- * Implements itg_mega_review_filter_callback().
- * @param string $title
- */
-function itg_mega_review_filter_callback($title) {
-  
-  if (strlen(trim($title)) > 0) {
-    $content_type = arg(1);
-    $state = trim(arg(2));
-    $draft_array = array('movie-review-draft-list');
-    if(in_array($state, $draft_array)) {
-      $status = 0;
-    } else {
-      $status = 1;
-    }
-    
-    $options = '';
-    $title = strtolower(trim($title));
-    $query = db_select('node', 'n');
-    $query->fields('n', array('title'));
-    $query->condition('title', '%' . $title . '%', 'LIKE');
-    $query->condition('n.type', $content_type, '=');
-    $query->condition('n.status', $status);
-    $query->range(0, 20);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $options[$record['title']] = $record['title'];
-    }
-    drupal_json_output($options);
   }
 }

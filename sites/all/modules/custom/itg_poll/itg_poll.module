@@ -422,7 +422,7 @@ function itg_poll_form_ajax_submit($form , &$form_state) {
     $sso_id = itg_global_loyality_get_sso_id($user->uid);
   }
   if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
-    watchdog('poll_earn_point', $node_id);
+    //watchdog('poll_earn_point', $node_id);
     //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
      itg_global_loyality_send_data($user->uid, 'poll', $node_id, '', $sso_id);
   }
@@ -532,8 +532,9 @@ function itg_poll_views_pre_render(&$view) {
  */
 function itg_poll_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   //Get the Form Id
+  
   if ($form["#id"] == 'views-exposed-form-poll-listing-page') {
-    $form['title']['#autocomplete_path'] = 'content-title-list/poll/autocomplete';
+    //$form['title']['#autocomplete_path'] = 'content-title-list/poll/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/poll/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Poll ID'));
@@ -546,6 +547,14 @@ function itg_poll_form_views_exposed_form_alter(&$form , &$form_state , $form_id
       ) ,
     );
     views_poll_insert_field($form , 'poll_status' , 3);
+  }
+  
+  if ($form['#id'] == 'views-exposed-form-poll-listing-page') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/poll/published/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-poll-listing-page-1') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/poll/draft/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-poll-listing-page-2') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/poll/unpublished/autocomplete';
   }
 }
 
@@ -619,7 +628,7 @@ function itg_poll_complete_time_mail() {
       
       if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false)) {
         $user_alt_mail = itg_get_user_alt_email($user->uid);
-        watchdog('poll_complete_time_email_id', $user_alt_mail);
+        //watchdog('poll_complete_time_email_id', $user_alt_mail);
         $poll_mail = $user_alt_mail;
       } else {
         $poll_mail = $user->mail;
@@ -808,6 +817,7 @@ function itg_poll_menu() {
     'page callback' => 'associate_content_poll' ,
     'access arguments' => array('access itg story') ,
     'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg_associate_poll.inc',
   );
 
   return $items;
@@ -998,7 +1008,7 @@ function itg_poll_form_home_page_ajax_submit($form , &$form_state) {
     }
     
     if ($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
-      watchdog('poll_earn_point', $node_id);
+      //watchdog('poll_earn_point', $node_id);
       //itg_loyalty_reward_earnpoint($node_id , 'poll' , $user->uid);
       itg_global_loyality_send_data($user->uid, 'poll', $node_id, '', $sso_id);
     }
@@ -1056,77 +1066,6 @@ function itg_poll_node_view($node , $view_mode , $langcode) {
       $node->content['poll_count'] = '<div class="field"><div class="field-label">' . t('Associate content count:') . '</div><div class="field-items">' . $poll_count . '</div></div><div class="field">' . l(t('Associate content view') , 'associate-content-poll/' . $node->nid) . '</div>';
     }
   }
-}
-
-/**
- * Get associate content poll list
- * @return array $output //http://localhost/itg-cms/content/testttt
- */
-function associate_content_poll() {
-  // configure the table header columns
-  $header = array(
-    array('data' => t('S.No.')) ,
-    array('data' => t('Title')) ,
-    array('data' => t('ID')) ,
-    array('data' => t('Status')) ,
-    array('data' => t('Content type')) ,
-    array('data' => t('Action')) ,
-  );
-
-  if ($_GET['items_per_page']) {
-    $items_per_page = $_GET['items_per_page'];
-  }
-  else {
-    $items_per_page = 10;
-  }
-  $current_time = date("Y-m-d H:i:s");
-
-  $itg_query = db_select('itg_poll_count_content' , 'p');
-  $itg_query->fields('p' , array('content_id' , 'content_type'));
-  $itg_query->join('node' , 'n' , 'n.nid = p.content_id');
-  $itg_query->join('workbench_moderation_node_history' , 'w' , 'w.nid = n.nid');
-  $itg_query->leftJoin('field_data_field_story_expiry_date' , 'expiry' , 'n.nid = expiry.entity_id');
-  $itg_query->fields('n' , array('title' , 'status'));
-  $itg_query->fields('expiry' , array('field_story_expiry_date_value'));
-  $itg_query->fields('w' , array('state'));
-  $itg_query->extend('PagerDefault')->limit($items_per_page);
-  $itg_query->condition('p.poll_id' , arg(1));
-  $itg_query->condition('w.is_current' , 1);
-
-  $itg_result = $itg_query->execute()->fetchAll();
-
-  $rows = array();
-
-  $count = 0;
-
-  foreach ($itg_result as $row) {
-    if (empty($row->field_story_expiry_date_value) || ($row->field_story_expiry_date_value >= $current_time)) {
-      $action_link = l(t('Edit') , 'node/' . $row->content_id . '/edit');
-      $status = $row->state;
-    }
-    else {
-      $action_link = '';
-      $status = 'Expired';
-    }
-
-    $rows[] = array(
-      array('data' => $count + 1) ,
-      array('data' => $row->title) ,
-      array('data' => $row->content_id) ,
-      array('data' => $status) ,
-      array('data' => $row->content_type) ,
-      array('data' => $action_link) ,
-    );
-    $count++;
-  }
-
-  $output = '<div class="view"><div class="attachment"><span class="count">Count (' . $count . ') </span>';
-  $output .= theme('table' , array('header' => $header , 'rows' => $rows , 'attributes' => array('class' => array('views-table')) , 'empty' => 'No results found'));
-
-  // add the pager
-  $output .= theme('pager');
-
-  return $output;
 }
 
 /**

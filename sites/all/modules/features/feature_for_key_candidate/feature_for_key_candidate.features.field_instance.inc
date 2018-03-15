@@ -63,7 +63,7 @@ function feature_for_key_candidate_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_state_map_color_json',
     'label' => 'State Map Color JSON',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,
@@ -100,7 +100,7 @@ function feature_for_key_candidate_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_state_map_json',
     'label' => 'State Map JSON',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'display_summary' => 0,
       'exclude_cv' => FALSE,
@@ -139,7 +139,7 @@ function feature_for_key_candidate_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_state_svg_json',
     'label' => 'State SVG JSON',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'display_summary' => 0,
       'exclude_cv' => FALSE,

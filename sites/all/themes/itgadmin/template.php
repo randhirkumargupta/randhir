@@ -223,18 +223,69 @@ function itgadmin_node_preview($variables) {
   // Do we need to preview trimmed version of post as well as full version?
   if ($trimmed != $full) {
     //drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
-    $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    if ($node->type != 'newsletter') {
+      $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    }
     $output .= $trimmed;
-    $output .= '<h3>' . t('Preview full version') . '</h3>';
+    if ($node->type != 'newsletter') {
+     $output .= '<h3>' . t('Preview full version') . '</h3>';
+    }
     $output .= $full;
     if ($node->type == 'newsletter') {
+      $previoustimestamp = itg_newsletter_get_previous_time($node->nid);
       $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
-      $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-      foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
-        $cat_array[] = $values['tid'];
+      if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){
+        $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
+        $current_nid = $node->nid;
+        if ($newletterContents == 'top_20_trending') {
+          if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
+            $story_nodes = _get_most_popular_nodes_based_on_top_20_trending($previoustimestamp);
+            foreach ($story_nodes as $new_array) {
+              $news_detail = node_load($new_array);
+              $manual_nids[] = $news_detail->nid;
+            }
+          }
+          $manualnids = implode(',' , $manual_nids);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        } 
+        elseif ($newletterContents == 'top_20_shared') {
+          if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
+            $story_nodes = _get_most_popular_nodes_based_on_top_20_shared($previoustimestamp);
+            foreach ($story_nodes as $new_array) {
+              $news_detail = node_load($new_array);
+              $manual_nids[] = $news_detail->nid;
+            }
+          }
+          $manualnids = implode(',' , $manual_nids);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        } 
+        elseif ($newletterContents == 'top_20_most_viewed') {
+          if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
+            $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed($previoustimestamp);
+            foreach ($story_nodes as $new_array) {
+              $news_detail = node_load($new_array);
+              $manual_nids[] = $news_detail->nid;
+            }
+          }
+          $manualnids = implode(',' , $manual_nids);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        }
+        elseif ($newletterContents == 'select_section') {
+          foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+            $cat_array[] = $values['tid'];
+          }  
+          // $cat_array = array(1206686, 1206620); // for testing purpose
+          $tid_val = implode(',' , $cat_array);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val  . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        }
+      } 
+      else {
+        foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $k => $v){
+          $manual_nids[] = $v['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+        }
+        $manualnids = implode(',' , $manual_nids);
+        $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $manualnids , array('attributes' => array('class' => 'download-html') , 'html' => true));
       }
-      $tid_val = implode(',' , $cat_array);
-      $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array('attributes' => array('class' => 'download-html') , 'html' => true));
     }
   }
   else {
@@ -446,6 +497,7 @@ function itgadmin_preprocess_page(&$vars) {
     , 'search-publish-internal-video'
     , 'search-publish-internal-video-singal'
     , 'search-unpublish-internal-video-singal'
+    , 'section-manual-order-widget-listing'
   );
 
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
@@ -534,37 +586,67 @@ function itgadmin_js_alter(&$javascript) {
   $javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']['scope'] = 'footer';
   $javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']['scope'] = 'footer';
   $javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.button.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.position.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.dialog.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.datepicker.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.menu.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.autocomplete.min.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
-//  $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
-
-  /* group for unset image js file 
-  if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
-  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);  
-  }*/
   
-  /* group for colorbox js */
-// $unset_array = array('mydraft-story', 'itg-menu-manager', 'in-queue-story', 'published-story', 'expired-story', 'unpublished-story', 'archive-story', 'ugc-published-story');
-//  if(in_array($arg[0], $unset_array)) {
-//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
-//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
-//  unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
-//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
-//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
-//  unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
-// }
+  unset($javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']);
+  unset($javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope']);  
+  
 }
 
+/**
+ * @param $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties of the element.
+ *     Properties used: #title, #value, #options, #description, #extra,
+ *     #multiple, #required, #name, #attributes, #size.
+ *
+ * @ingroup themeable
+ */
+function itgadmin_select($variables) {
+  $element = $variables['element'];
+  element_set_attributes($element, array('id', 'name', 'size'));
+  _form_set_class($element, array('form-select'));
+
+  return '<select' . drupal_attributes($element['#attributes']) . '>' . itgadmin_form_select_options($element) . '</select>';
+}
+
+/**
+ * Converts an array of options into HTML, for use in select list form elements.
+ * @param array $element
+ * @param null $choices
+ * @return string
+ */
+function itgadmin_form_select_options($element, $choices = NULL) {
+  if (!isset($choices)) {
+    $choices = $element['#options'];
+  }
+  // array_key_exists() accommodates the rare event where $element['#value'] is NULL.
+  // isset() fails in this situation.
+  $value_valid = isset($element['#value']) || array_key_exists('#value', $element);
+  $value_is_array = $value_valid && is_array($element['#value']);
+  $options = '';
+  foreach ($choices as $key => $choice) {
+    if (is_array($choice)) {
+      $options .= '<optgroup label="' . check_plain($key) . '">';
+      $options .= form_select_options($element, $choice);
+      $options .= '</optgroup>';
+    }
+    elseif (is_object($choice)) {
+      $options .= form_select_options($element, $choice->option);
+    }
+    else {
+      $key = (string) $key;
+      $attributes = "";
+      if (isset($element['#option_attributes'][$key])) {
+        $attributes = drupal_attributes($element['#option_attributes'][$key]);
+      }
+      if ($value_valid && (!$value_is_array && (string) $element['#value'] === $key || ($value_is_array && in_array($key, $element['#value'])))) {
+        $selected = ' selected="selected"';
+      }
+      else {
+        $selected = '';
+      }
+      $options .= '<option ' . $attributes . ' value="' . check_plain($key) . '"' . $selected . '>' . check_plain($choice) . '</option>';
+    }
+  }
+  return $options;
+}

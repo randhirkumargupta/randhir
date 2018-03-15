@@ -128,7 +128,6 @@ function filefield_source_itg_image_repository_settings($option, $instance) {
  */
 function filefield_source_itg_image_repository_process($element, &$form_state, $form) {
     $instance = field_widget_instance($element, $form_state);
-
     $element['filefield_itg_image_repository'] = array(
         '#weight' => 100.5,
         '#theme' => 'filefield_source_itg_image_repository_element',
@@ -154,11 +153,13 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $getimageoptions = explode('(', @$element['#description']);
     $getimageoptions = explode(')', @$getimageoptions[1]);
     $getimagehightwidth = explode('x', @$getimageoptions[0]);
-
-    $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $form['#node']->type . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
-      
-    $itg_image_repository_function="showimagerepopopu('".$url."')";
-    $element['filefield_itg_image_repository']['display_path'] = array(
+     if(isset($element['#entity']->tid)) {
+        $url = url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $element['#entity']->vocabulary_machine_name . '/' . $element['#field_name'], array('query' => array('advagg'=>0,'app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));      
+     } else {
+      $url = url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $form['#node']->type . '/' . $element['#field_name'], array('query' => array('advagg'=>0,'app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));      
+     }
+     $itg_image_repository_function="showimagerepopopu('".$url."')";
+     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
         '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
     );
@@ -281,9 +282,7 @@ function filefield_source_itg_image_repository_value($element, &$item) {
  */
 function theme_filefield_source_itg_image_repository_element($variables) {
     $element = $variables['element'];
-
     $output = drupal_render_children($element);
-    ;
     return '<div class="filefield-source filefield-source-itg_image_repository clear-block">' . $output . '</div>';
 }
 
@@ -296,10 +295,10 @@ function theme_filefield_source_itg_image_repository_element($variables) {
  */
 function filefield_source_itg_image_repository_page($entity_type, $bundle_name, $field_name) {
     global $conf;
-
+    $conf['preprocess_js'] = 0;
     $field = field_info_field($field_name);
-
-    // Disable absolute URLs.
+ 
+    // Disable absolu URLs.
     $conf['itg_image_repository_settings_absurls'] = 0;
 
     module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.page');

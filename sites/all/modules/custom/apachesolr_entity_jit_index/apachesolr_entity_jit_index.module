@@ -61,8 +61,8 @@ function apachesolr_entity_jit_index_entity_insert($entity, $type) {
     $content_type = array_values(variable_get('apachesolr_entity_jit_index_for_solr_index'));
     $content_type = array_filter($content_type, function ($a) {
       return ($a !== 0);
-    });
-    if (in_array($entity->type, $content_type)) {
+    });    
+    if (in_array($entity->type, $content_type) && !(($entity->type == 'photogallery' || $entity->type == 'story') && $entity->status == 0)) {
       apachesolr_entity_jit_index_immediately($entity, $type);
     }
   }
@@ -130,7 +130,7 @@ $item = new stdClass();
   module_load_include('inc', 'apachesolr', 'apachesolr.index');
   if (function_exists('apachesolr_index_entity_to_documents')) {
     $doc = apachesolr_index_entity_to_documents($item, $env_id);
-    watchdog("Entity Update Solr", "<pre> ".print_r($doc, true)."</pre>");
+    //watchdog("Entity Update Solr", "<pre> ".print_r($doc, true)."</pre>");
     apachesolr_index_send_to_solr($env_id, $doc);
   }
 }

@@ -1,7 +1,8 @@
 <?php
+global $base_url;
 // configuration for sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/funalytics';
-$short_url = shorten_url($row->url, 'goo.gl');
+$short_url = $row->url; //shorten_url($row->url, 'goo.gl');
 ?>
 <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
         <div class="funalytics-slider-wrapper">
@@ -20,7 +21,14 @@ $short_url = shorten_url($row->url, 'goo.gl');
                     <div>
                       <div class="title" title="<?php echo html_entity_decode(strip_tags($row['title']));?>"><?php print html_entity_decode(strip_tags($row['title'])); ?></div>
                       <div class="pic">
-                        <?php print $row['field_itg_funalytics_image']; ?>
+                        <?php 
+													if($row['field_itg_funalytics_image']){
+														print $row['field_itg_funalytics_image'];
+													}else{
+                            ?>	<img  src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="">
+													<?php
+													}	
+												?>
                         <div class="funalytics-socials">
                           <a class="download-nf" href="javascript:;" title=""></a>
                           <a class="google-play" href="javascript:;" title=""></a>

@@ -83,6 +83,13 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'anchor_list' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'anchor_programm_list' => array(
       'operations' => array(
         'retrieve' => array(
@@ -100,6 +107,20 @@ function feature_for_app_rest_api_default_services_endpoint() {
     'author_follow_list' => array(
       'operations' => array(
         'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'author_list' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'author_report' => array(
+      'operations' => array(
+        'retrieve' => array(
           'enabled' => '1',
         ),
       ),
@@ -187,13 +208,6 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'datanotexist_api' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
     'edit_profile' => array(
       'operations' => array(
         'create' => array(
@@ -204,13 +218,6 @@ function feature_for_app_rest_api_default_services_endpoint() {
     'edit_user_image' => array(
       'operations' => array(
         'create' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'fblogin' => array(
-      'operations' => array(
-        'retrieve' => array(
           'enabled' => '1',
         ),
       ),
@@ -250,6 +257,13 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'follow_topic' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'forgot_password' => array(
       'operations' => array(
         'create' => array(
@@ -271,6 +285,20 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'get_story_api' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'get_the_user_follow_status' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'hamburger_menu' => array(
       'operations' => array(
         'retrieve' => array(
@@ -286,13 +314,6 @@ function feature_for_app_rest_api_default_services_endpoint() {
       ),
     ),
     'horizontal_menu' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'livetv' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
@@ -506,6 +527,13 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'reset_password' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'server_error_master' => array(
       'operations' => array(
         'retrieve' => array(
@@ -601,13 +629,6 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'twtlogin' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
     'update_preference' => array(
       'operations' => array(
         'create' => array(
@@ -675,14 +696,21 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'videolist' => array(
+    'user_follow_topic_list' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'user_list' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
         ),
       ),
     ),
-    'views' => array(
+    'videolist' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',

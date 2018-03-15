@@ -257,8 +257,10 @@ function itg_ap_content() {
                   //$node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = $by_line;
                   if ($category_name) {
                     $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $category_name;
+                    $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $category_name;
                   }
                   $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
+                  $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $publish_date;
                   $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                   $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
                   $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
@@ -271,6 +273,12 @@ function itg_ap_content() {
                   }
                   $node = node_submit($node); // Prepare node for saving
                   node_save($node); // Finally save node
+                  $newpath = itg_api_path_insert($node);
+                  $path = array(
+                    'source' => "node/{$node->nid}",
+                    'alias' => $newpath, // Any alias that you want to set.
+                  );
+                  path_save($path);
                   itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'AP');
                   $msg = $headline . ' imported sucessfully';
                   watchdog('AP_XML', $msg);
@@ -293,6 +301,6 @@ function itg_ap_content() {
     }
   }
   else {
-    print 'Enable agency feed from configuration';
+    watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
   }
 }

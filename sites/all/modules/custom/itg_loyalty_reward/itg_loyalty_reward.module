@@ -289,6 +289,12 @@ function itg_loyalty_reward_views_pre_render(&$view) {
   }
   if ($view->name == 'sold_item_history') {
     $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    
+    if ($view->total_rows == 0) {
+      drupal_add_js('jQuery(document).ready(function() {
+      jQuery("#edit-submit").hide();
+      });', array('type' => 'inline', 'scope' => 'footer'));
+    }
     $view->attachment_before = $header_content_loyalty;
   }
 }
@@ -411,7 +417,9 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
   module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_mail');
 
   $rid = array(SITE_ADMIN, MARKETING_MANAGER);
+  if(function_exists('get_email_by_roll')) {
   $user_email = get_email_by_roll($rid);
+  }
   $query = db_select('field_data_field_lrp_product_count', 'flpc');
   $query->fields('flpc', array('entity_id'));
   $query->condition('flpc.field_lrp_product_count_value', 0, '=');
@@ -585,7 +593,7 @@ function itg_loyalty_reward_block_view($delta = '') {
       }
       else {
         $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
-        $user_pic = "<img src=$file width='200' height='200' alt='user-image' />";
+        $user_pic = "<img src=$file width='200' height='200' alt='user-image' title='user-image' />";
         $data['profile_pic'] = $user_pic;
       }
       // Load user name    

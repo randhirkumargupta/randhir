@@ -6,7 +6,7 @@
  */
 $share_title = 'India Today Live TV';
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link; //shorten_url($actual_link, 'goo.gl');
 $useragent = $_SERVER['HTTP_USER_AGENT'];
 if (function_exists('mobile_user_agent_switch')) {
   $flag = mobile_user_agent_switch();
@@ -33,6 +33,7 @@ if (function_exists('itg_live_tv_company')) {
           <ul>
               <li><a class="def-cur-pointer" title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i> <span>Share</span></a></li>
               <li><a class="def-cur-pointer" title="share on twitter" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Tweet</span></a></li>
+              <?php if (empty(variable_get('disable_livetv_embed'))) { ?>
               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a>
                   <div class="show-embed-code-div">
                       <div class="copy-sample-code">
@@ -54,6 +55,7 @@ if (function_exists('itg_live_tv_company')) {
                       </div>
                   </div>
               </li>
+              <?php } ?>
               <li class="light-off-on-tab">
                   <a href="javascript:;">
                       <i class="fa fa-lightbulb-o"></i> 
@@ -65,10 +67,18 @@ if (function_exists('itg_live_tv_company')) {
       </div>
   </div>
   <?php
-      }
-      $current_time_program_tid = '';
-      if (function_exists('itg_live_tv_page_video_category')) {
-      $current_time_program_tid = itg_live_tv_page_video_category();
-  }
-  ?>
-  <div class="latest-livetv-video"><h4><?php print t('Latest Videos'); ?></h4><?php print views_embed_view( 'programme_content_live_tv', 'block_1', $current_time_program_tid); ?></div>
+}
+$current_time_program_tid = '';
+if (function_exists('itg_live_tv_page_video_category')) {
+  $current_time_program_tid = itg_live_tv_page_video_category();
+}
+?>
+<?php
+/*if (!empty($current_time_program_tid)) {
+  $latest_video = views_embed_view('programme_content_live_tv', 'block_1', $current_time_program_tid);
+  if (trim(strip_tags($latest_video)) != NULL) {
+    ?>
+    <div class="latest-livetv-video"><h4><?php print t('Latest Videos'); ?></h4><?php print $latest_video; ?></div>
+  <?php }
+}*/
+?>

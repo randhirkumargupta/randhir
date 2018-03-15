@@ -7,10 +7,12 @@
  */
 class ItgVideogalleryMigration extends XMLMigration {
 
+  public $video_consvalue;
+
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Videogallery)');
-
+    $this->video_consvalue = $this->read_folder_xml_video();
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'multibitrate_flag' => t('multibitrate_flag'),
@@ -86,9 +88,9 @@ class ItgVideogalleryMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     //$file_path = drupal_realpath('public://');
     $file_path = DRUPAL_ROOT . '/' . 'sites/default/files';
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->video_consvalue . '/';
 
-    $items_url = $xml_folder . 'failed_video.xml';
+    $items_url = $xml_folder . 'indiatoday_videos.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -309,10 +311,11 @@ class ItgVideogalleryMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
-    if(empty((string) $row->xml->metatags->sefurl)) {
-       $row->xml->metatags->sefurl =  itg_common_custompath_insert_val(trim((string) $row->xml->longheadline));
+    if (empty((string) $row->xml->metatags->sefurl)) {
+      $row->xml->metatags->sefurl = itg_common_custompath_insert_val(trim((string) $row->xml->longheadline));
     }
-    if(empty($row->xml->modifieddate) || (string) $row->xml->modifieddate == 0) {
+    
+    if (empty($row->xml->modifieddate) || (string) $row->xml->modifieddate == 0) {
       $row->xml->modifieddate = (string) $row->xml->createddate;
     }
     if (!empty($row->xml->extralargeimage)) {
@@ -359,51 +362,78 @@ class ItgVideogalleryMigration extends XMLMigration {
       $row->xml->syndications = '';
     }
 
-    // Category migrate
-    /*$data_category = '';
 
+
+    $data_category = '';
     if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {
-      foreach ($row->xml->categories->category as $final_category) {
-        $category_array = explode('#', $final_category);
-        $array_count = count($category_array);
-        $table_name = itg_migrate_category_table($array_count);
-        $last_value = end($category_array);
-        $source_cid = (string) $last_value;
-        $orignal_category = get_itg_destination_id($table_name, $source_cid);
-        $data_category[]['tid'] = $orignal_category;
-      }
-    }
-    $row->category_new = $data_category;*/
-    
-  $data_category = '';
-  if (isset($row->xml->categories->category) && !empty($row->xml->categories->category)) {  
-    $category_array = array();
-    $tid_array = array();
-    foreach ($row->xml->categories->category as $xm_cat) {
-      $category_array = explode('#', $xm_cat);
-      $k = 1;
-      foreach ($category_array as $individal_cat) {
+      $category_array = array();
+      $tid_array = array();
+      foreach ($row->xml->categories->category as $xm_cat) {
+        $category_array = explode('#', $xm_cat);
+        $k = 1;
+        foreach ($category_array as $individal_cat) {
 
-        $array_count = $k;
-        $source_cid = (string) $individal_cat;
+          $array_count = $k;
+          $source_cid = (string) $individal_cat;
 
-        $table_name = itg_migrate_category_table($array_count);
-        if ($k != 1) {
-          $str = '#';
+          $table_name = itg_migrate_category_table($array_count);
+          if ($k != 1) {
+            $str = '#';
+          }
+          $tid_array[] = get_itg_destination_id($table_name, $source_cid);
+          $k++;
         }
-        $tid_array[] = get_itg_destination_id($table_name, $source_cid);
-        $k++;
+      }
+      $all_category = array_unique($tid_array);
+      foreach ($all_category as $chunk_data) {
+        if(!empty($chunk_data) && is_numeric($chunk_data)) {
+          $data_category[]['tid'] = $chunk_data;
+        }
       }
     }
-    $all_category = array_unique($tid_array);
-    foreach ($all_category as $chunk_data) {
-        $data_category[]['tid'] = $chunk_data;
+    
+    
+    
+    //category according drupal id
+    $drupal_id_category = '';
+    if (isset($row->xml->content_mapping->content_mapping_category) && !empty($row->xml->content_mapping->content_mapping_category)) {
+      $drupal_category_array = array();
+      $xm_cat = '';
+      $drupal_tid_array = array();
+      foreach ($row->xml->content_mapping->content_mapping_category as $xm_cat) {
+        $drupal_category_array = explode('#', $xm_cat);
+        $k = 1;
+        foreach ($drupal_category_array as $drupal_individal_cat) {
+
+          $array_count = $k;
+          $drupal_source_cid = (string) $drupal_individal_cat;
+
+          //$table_name = itg_migrate_category_table($array_count);
+          if ($k != 1) {
+            $str = '#';
+          }
+          $drupal_tid_array[] = $drupal_source_cid;
+          $k++;
+        }
       }
-  }
- $row->category_new = $data_category;
+      $drupal_all_category = array_unique($drupal_tid_array);
+      $chunk_datas = '';
+      foreach ($drupal_all_category as $chunk_datas) {
+        if(!empty($chunk_datas) && is_numeric($chunk_datas)) {
+          $drupal_id_category[]['tid'] = $chunk_datas;
+        }
+      }
+    }
+    $final_mix_category = '';
+    if((!empty($drupal_id_category) && isset($drupal_id_category)) && (!empty($data_category) && isset($data_category))){
+      $final_mix_category = array_merge($drupal_id_category, $data_category);
+    }else{
+      $final_mix_category = $data_category;
+    }
+    $row->category_new = $final_mix_category;
 
     // Primary category
-    if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
+    /*if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
       $source_cid = (string) $row->xml->primarycategory;
       $pcategory_array = explode('#', $source_cid);
       $parray_count = count($pcategory_array);
@@ -412,9 +442,13 @@ class ItgVideogalleryMigration extends XMLMigration {
       $source_cid = (string) $last_value;
       $orignal_pcategory = get_itg_destination_id($table_name, $source_cid);
       $row->xml->primarycategory = $orignal_pcategory;
+    }*/
+    if (isset($row->xml->primarycategory) && !empty($row->xml->primarycategory)) {
+      $orignal_pcategory = (int) $row->xml->primarycategory; // Last value provided by ITG.
+      $row->xml->primarycategory = $orignal_pcategory;
     }
-    
-    
+
+
     // Story tags migration
     $data_tags = '';
     if (isset($row->xml->tags->tag) && !empty($row->xml->tags->tag)) {
@@ -539,6 +573,8 @@ class ItgVideogalleryMigration extends XMLMigration {
   }
 
   public function prepare($node, stdClass $row) {
+    //for update sef
+    $node->sef_url = array('sef' => (string) $row->xml->metatags->sefurl);
     $node->path['alias'] = (string) $row->xml->metatags->sefurl; // path alias set because upper not work
     $node->teaser = (string) $row->xml->description;
     if (!empty($row->category_new)) {
@@ -567,8 +603,8 @@ class ItgVideogalleryMigration extends XMLMigration {
     if (!empty($row->bitrates)) {
       $node->field_multi_bitrate[LANGUAGE_NONE] = $row->bitrates;
     }
-    $node->uid = $row->xml->createdby;
-    
+   $node->uid = (int) $row->xml->createdby;
+
     // publish time for photo
     if (!empty((int) $row->xml->publisheddate)) {
       $published_date = (int) $row->xml->publisheddate;
@@ -576,7 +612,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     else {
       $published_date = (int) $row->xml->createddate;
     }
-    if(!empty($published_date)) {
+    if (!empty($published_date)) {
       $mod_time = $published_date;
       $modi_time = date('Y-m-d H:i:s', $mod_time);
       $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $modi_time;
@@ -622,6 +658,7 @@ class ItgVideogalleryMigration extends XMLMigration {
             $chk_variable = (string) $bitrate;
 
             if (!empty($chk_variable)) {
+                if((int) $row->xml->video_update != 1){
               db_insert('itg_video_transcoding')
                   ->fields(array(
                     'nid' => $node->nid,
@@ -640,6 +677,7 @@ class ItgVideogalleryMigration extends XMLMigration {
                     'video_url' => ($video_url ? $video_url : NULL),
                   ))
                   ->execute();
+                }
             }
           }
         }
@@ -649,12 +687,23 @@ class ItgVideogalleryMigration extends XMLMigration {
 
     //code for like and dislike
     if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+        if((int) $row->xml->video_update == 1){
+         itg_flag_insert_like_dislike_update($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);  
+        }else{
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+        }
     }
 
-
+    if((int) $row->xml->video_update == 1) {
+        $time_stamp = (string) $row->xml->modifieddate;
+        __insert_modified_date_flag_table('story', $time_stamp, $node->nid);
+    }
+    
     //code for order set
     //if (isset($row->xml->ordering)) {
+    if((int) $row->xml->video_update == 1){
+        ordering_set_of_content_update($node, (string) $row->xml->ordering);
+    }
     ordering_set_of_content($node, (string) $row->xml->ordering);
     //}
     // Related content save in db
@@ -675,7 +724,34 @@ class ItgVideogalleryMigration extends XMLMigration {
       }
       }
       } */
-    print $row->xml->id.' ';
+    print $row->xml->id . ' ';
+  }
+
+  public function read_folder_xml_video() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
+
+    return $result[0];
+  }
+
+  public function postImport() {
+    parent::postImport();
+    // mail send if Video failed.
+    $content = failed_record_xml_id('migrate_map_itgvideogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Video',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
   }
 
 }

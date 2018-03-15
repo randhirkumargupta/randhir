@@ -27,7 +27,7 @@ class pagination {
 
   var $page = 1; // Current Page
   var $perPage = 10; // Items on each page, defaulted to 10
-  var $showFirstAndLast = false; // if you would like the first and last page options.
+  var $showFirstAndLast = true; // if you would like the first and last page options.
 
   function generate($array, $perPage = 10) {
     // Assign the items per page variable

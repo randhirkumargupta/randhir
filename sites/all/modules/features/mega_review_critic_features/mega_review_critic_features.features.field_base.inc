@@ -205,7 +205,7 @@ function mega_review_critic_features_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',

@@ -245,8 +245,16 @@ function itg_survey_views_pre_render(&$view) {
 function itg_survey_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1' || $form['#id'] == 'views-exposed-form-manage-survey-page-2') {
     // Call function autocomplete to show matching titles
-    $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
+    //$form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  
+  if ($form['#id'] == 'views-exposed-form-manage-survey-page') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/published/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-manage-survey-page-1') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/draft/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-manage-survey-page-2') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/unpublished/autocomplete';
   }
 }
 
@@ -504,7 +512,7 @@ function itg_survey_vote_percentage_user($nid , $ques_id , $answer , $user_type)
 function itg_survey_vote_percentage_user_rating($nid , $ques_id , $answer , $rating) {
 
   $total_vote_on_question_user = itg_survey_get_total_vote_question($nid , $ques_id , $answer , $rating);
-
+  
   if (!$total_vote_on_question_user) {
     return '0%';
   }
@@ -519,7 +527,7 @@ function itg_survey_vote_percentage_user_rating($nid , $ques_id , $answer , $rat
         ->groupBy('su.rating_value');
     $itg_query->addExpression('COUNT(su.rating_value)' , 'user');
     $total_answwer_for_ques_user = $itg_query->execute()->fetchAll();
-
+    
     return $total_answwer_for_ques_user;
   }
 }
@@ -593,11 +601,13 @@ function itg_survey_block_view($delta = '') {
  * @return string
  */
 function itg_survey_show_survey_result($nid) {
-  if (itg_common_check_record_existance($nid , 'itg_survey_detail' , 'nid') > 0) {
-    return l('View Result' , 'survey-result/' . $nid , array('attributes' => array('target' => '_blank')));
-  }
-  else {
-    return 'View Result';
+  if (function_exists('itg_common_check_record_existance')) {
+    if (itg_common_check_record_existance($nid , 'itg_survey_detail' , 'nid') > 0) {
+      return l('View Result' , 'survey-result/' . $nid , array('attributes' => array('target' => '_blank')));
+    }
+    else {
+      return 'View Result';
+    }
   }
 }
 
@@ -836,17 +846,33 @@ function itg_survey_pqs_generatetokens() {
     $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
     $query->orderBy('n.created', 'DESC'); //ORDER BY created
   }
+  elseif ($type == 'mega_review_critic') {
+    $title_text = arg(3);
+    $query = db_select('node', 'n');
+    $query->fields('n', array('nid', 'title'));
+    $query->condition('n.type', $type, '=');
+    if (isset($title_text) && !empty($title_text)) {
+      $query->condition('n.title', '%' . db_like($title_text) . '%', 'LIKE');
+    }
+    $query->condition('n.status', 1, '=');
+  }
   $data = array();
   $result = $query->execute();
   // Fetch node title and nid
   while ($record = $result->fetchAssoc()) {
     if (strlen($record['title']) > 30) {
-      $title = substr($record['title'] , 0 , 30) . '...';
+      $title = substr($record['title'], 0, 30) . '...';
     }
     else {
       $title = $record['title'];
     }
-    $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+    if ($type == 'mega_review_critic') {
+      $iframe = '<iframe src="' . FRONT_URL . '/mega-review/embed/' . $record['nid'] . '" width="100%" class="embed-megareview" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
+      $options[$iframe] = $title;
+    }
+    else {
+      $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+    }
   }
   $form = array();
   $form['pqs-listing-heading'] = array(
@@ -904,7 +930,10 @@ function itg_survey_pqs_associate_poll_with_story($nid) {
   if (!empty($node->nid) && $node->type == 'poll') {
     $poll_banner_image = '';
     if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
-      $poll_banner_image = theme('image_style' , array('style_name' => 'home_page_poll_images_style' , 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+      $poll_banner_image = theme('image_style' , array('style_name' => 'home_page_poll_images_style' , 'path' => $node->field_poll_banner[$node->language][0]['uri'],
+          'alt' => $node->field_poll_banner[$node->language][0]['alt'],
+          'title' => $node->field_poll_banner[$node->language][0]['title']
+          ));
     }
     else {
       $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="" />';
@@ -1152,19 +1181,14 @@ function itg_survey_survey_form_submit($form , &$form_state) {
 
       // Insert for rating type answer
       if ($form_state['values']['question_type' . $ques_num] == 'rating') {
-
         for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
           for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
             if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] == 1) {
-              $ans_data = 0;
-              if (!empty($form_state['values']['answer_option0_0'])) {
-
-                foreach ($form_state['values']['answer_option0_0'] as $ans_data) {
+                foreach ($form_state['values']['answer_option'.$rating_field.'_'.$rating_field] as $ans_data) {
                   if ($ans_data != 0) {
                     $rating = $ans_data;
                   }
                 }
-              }
 
               db_insert('itg_survey_detail')
                   ->fields(array(

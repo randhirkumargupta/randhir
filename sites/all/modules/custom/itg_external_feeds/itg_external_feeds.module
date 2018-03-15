@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * ITG External feeds
+ *
+ * ITG Custom module to show AajTak & BusinessToday feeds on home Page.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itg_external_feeds_menu() {
+  $items['itg-external-latestfeed-bt'] = array(
+    'page callback' => 'itg_external_latest_feed_bt',
+    'access arguments' => array('access administrator'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['itg-external-latestfeed-at'] = array(
+    'page callback' => 'itg_external_latest_feed_at',
+    'access arguments' => array('access administrator'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_external_feeds_cronapi($op, $job = NULL) {
+  $items['itg-external-latestfeed-bt'] = array(
+    'description' => 'Insert/Update BT feed in database.',
+    'callback' => 'itg_external_latest_feed_bt',
+  );
+  $items['itg-external-latestfeed-at'] = array(
+    'description' => 'Insert/Update AT feed in database.',
+    'callback' => 'itg_external_latest_feed_at',
+  );
+  return $items;
+}
+
+/*
+ * Function to store latest story of BT.
+ * return none
+ */
+function itg_external_latest_feed_bt() {
+  $url = variable_get('business_today_json_url');
+  if (!empty($url)) {
+    $JSON = file_get_contents($url);
+    $business_data = json_decode($JSON);
+    // Delete old data.
+    db_delete('itg_external_feed_data')->condition('content_site', 'bt')->execute();
+    
+    foreach ($business_data AS $business_data_key => $business_data_val) {
+      db_insert('itg_external_feed_data')
+        ->fields(array(
+          'content_id' => $business_data_val->id,
+          'content_title' => $business_data_val->title,
+          'content_url' => $business_data_val->story_url,
+          'content_thumb_image' => $business_data_val->thumb_image,
+          'content_site' => 'bt',
+        ))->execute();
+    }
+    //watchdog('itg_external_feeds', 'BT feed has been successfully updated.');
+    drupal_set_message('BT feed has been successfully updated.');
+  }
+  else {
+    return 'Please set variable value of business_today_json_url.';
+  }
+}
+/*
+ * Function to store latest story of AT.
+ * return none
+ */
+function itg_external_latest_feed_at() {
+  $url = variable_get('aaj_tak_json_url');
+  if (!empty($url)) {
+    $JSON = file_get_contents($url);
+    $business_data = json_decode($JSON);
+    
+    // Delete old data.
+    db_delete('itg_external_feed_data')->condition('content_site', 'at')->execute();
+    
+    foreach ($business_data AS $business_data_key => $business_data_val) {
+      db_insert('itg_external_feed_data')
+        ->fields(array(
+          'content_id' => $business_data_val->id,
+          'content_title' => $business_data_val->title,
+          'content_url' => $business_data_val->story_url,
+          'content_thumb_image' => $business_data_val->thumb_image,
+          'content_site' => 'at',
+        ))->execute();
+    }
+    //watchdog('itg_external_feeds', 'AT feed has been successfully updated.');
+    drupal_set_message('AT feed has been successfully updated.');
+  }
+  else {
+    return 'Please set variable value of aaj_tak_json_url.';
+  }
+}
+
+
+

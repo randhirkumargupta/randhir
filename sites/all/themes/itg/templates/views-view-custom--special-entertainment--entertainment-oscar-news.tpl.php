@@ -15,7 +15,7 @@
     }
    if($index==0){?>
        <div class="first-oscar-block <?php echo $video_class;?>"><?php print $row['field_story_extra_large_image'];?></div>
-       <div><?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>
+       <div><?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 999, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>
    <?php }else{
 ?>
 <div class="<?php echo $video_class;?>"><?php print $row['field_story_extra_large_image_1'];?></div>

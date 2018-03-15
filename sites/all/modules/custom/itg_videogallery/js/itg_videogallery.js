@@ -102,12 +102,51 @@
             } catch (e) {
 
             }
+            // Code to Disable Submit button
+           jQuery('.top-actions input[type="submit"]').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9");
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
+           jQuery('.top-actions .published.btn-submit').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9");
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
+           jQuery('.itg-form-action .form-actions input[type="submit"]').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9"); 
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
+           jQuery('.itg-form-action .form-actions .published.btn-submit').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9"); 
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
 
         }
 
     };
 })(jQuery, Drupal, this, this.document);
 jQuery('document').ready(function () {
+    jQuery('#field-video-upload-values').find('.delta-order').each(function(){
+        var getlength = jQuery(this).html();
+         if(getlength == "") {
+          jQuery('#field-video-upload-values').find('.draggable').remove();
+        }
+    })
     var first_fid = jQuery("input[name='field_video_upload[und][0][field_videogallery_video_upload][und][0][fid]").val();
     if (first_fid != "" && first_fid != 0)
     {

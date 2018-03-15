@@ -16,11 +16,19 @@ function itg_breaking_news_menu() {
   $items['cricket_live_blog_content'] = array(
     'page callback' => 'cricket_live_blog_content_callback',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_breaking_news.inc',
   );
   $items['cricket_live_blog_content_db/%/%'] = array(
     'page callback' => 'get_commentary_data_db_callback',
     'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_breaking_news.inc',
+  );
+  $items['breakingnews'] = array(
+    'title' => 'Breaking News',
+    'page callback' => 'redirect_breakingnews_to_latest_node',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK
   );
@@ -440,6 +448,7 @@ function itg_breaking_news_node_presave($node) {
 
   if ($node->type == 'breaking_news') {
     $type = $node->field_type[LANGUAGE_NONE][0]['value'];
+    $node->status = 1;
     if ($type == 'Live Blog') {
       $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
     }
@@ -472,18 +481,25 @@ function itg_breaking_news_views_query_alter(&$view, &$query) {
 }
 
 /**
- * Function for ajax request callback
+ * Redirect to latest node of breaking news
+ * if user hit the breakingnews url
  */
-function cricket_live_blog_content_callback() {
-  $match_id = $_POST['match_id'];
-  if (isset($match_id)) {
-    $html = get_cricket_live_blog_data($match_id);
-    print json_encode(array('status' => 'success', 'data' => $html));
+function redirect_breakingnews_to_latest_node() {
+  $latestnid = '';
+  $latestnid_query = db_select('node', 'n');
+  $latestnid_query->leftJoin('field_data_field_type', 'ft', 'ft.entity_id = n.nid');
+  $latestnid_query->fields('n', array('nid'));
+  $latestnid_query->condition('n.type', 'breaking_news');
+  $latestnid_query->condition('n.status', 1);
+  $latestnid_query->condition('ft.field_type_value', 'Breaking News');
+  $latestnid_query->condition('ft.bundle', 'breaking_news');
+  $latestnid_query->condition('ft.entity_type', 'node');
+  $latestnid_query->orderBy('n.changed', 'DESC');
+  $latestnid_query->range(0, 1);
+  $latestnid = $latestnid_query->execute()->fetchField();
+  if (is_numeric($latestnid)) {
+    drupal_goto('node/' . $latestnid);
   }
-  else {
-    print json_encode(array('status' => 'error'));
-  }
-  drupal_exit();
 }
 
 /**
@@ -530,23 +546,6 @@ function get_cricket_live_blog_data($match_id, $limit = NULL) {
 }
 
 /**
- * Menu callback for load commentary from db
- * @param int $nid
- * @param int $page
- * 
- */
-function get_commentary_data_db_callback($nid, $page = 0) {
-  $data = get_commentary_data_db($nid, $page);
-  if ($data) {
-    print json_encode(array('status' => 'success', 'data' => $data));
-  }
-  else {
-    print json_encode(array('status' => 'error'));
-  }
-  die;
-}
-
-/**
  * 
  * @param int $nid
  * @param int $page
@@ -573,3 +572,4 @@ function get_commentary_data_db($nid, $page) {
     }
   return $data;
 }
+

@@ -90,9 +90,161 @@ function itg_miscellaneous_menu() {
     'access callback' => TRUE,
   );
   
+  $items['alter-sso-nid'] = array(
+    'title' => 'sso nid callback menu',
+    'page callback' => 'itg_sso_nid_callback',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_miscellaneous.inc',
+  );
+  
+  $items['remove-flooded-node-from-widget'] = array(
+    'title' => 'Remove Flooded node from Widget',
+    'page callback' => 'itg_remove_flooded_nodes',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  
+  $items['remove-old-widgets-from-table'] = array(
+    'title' => 'Remove Old widgets from tables',
+    'page callback' => 'remove_old_widgets_from_table',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
 
   
   return $items;
 }
 
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_miscellaneous_cronapi($op, $job = NULL) {
+  $items['remove-flooded-node-from-widget-cron'] = array(
+    'description' => 'Remove Flooded nodes from widget tables cron.',
+    'callback' => 'itg_remove_flooded_nodes',
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  $items['remove-old-widgets-from-table-cron'] = array(
+    'description' => 'Remove Old widgets from tables cron.',
+    'callback' => 'remove_old_widgets_from_table',
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  return $items;
+}
+
+/**  
+ *  implements hook_advagg_get_root_files_dir_alter()
+ */
+function itg_miscellaneous_advagg_get_root_files_dir_alter(&$css_paths, &$js_paths) {  
+  if ($css_paths[0] == 'public://advagg_css' || $js_paths[0] == 'public://advagg_js') {    
+    $css_paths[0] = 's3://css';    $js_paths[0] = 's3://js';  
+    
+  }
+  
+} 
+
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function itg_miscellaneous_preprocess_page(&$vars) {
+  // Set meta data for required pages.
+  if ('magazine' == arg(0)) {
+    $description = "Select a date from the calendar to get the day's news headlines from India. All archive news, photos and videos available here.";
+    $og_description = 'Archive India Today, India, World, Sports, politics, Cricket, movies reviews, videos';
+  
+  // Prepare meta data.
+  if (isset($description) && isset($og_description)) {
+    $html_head = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keywords',
+          'content' => $og_description,
+          ),
+         '#weight' => -99
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description,
+          ),
+         '#weight' => -99
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+  }
+  
+    // Set meta data for required pages.
+  if ('livetv' == arg(0) || 'international-livetv' == arg(0)) {
+    $description_live = "India Today Live TV Streaming: Watch live tv news from worldwide and get live tv streaming by 24*7 online.";
+    $og_description_live = 'india today, tv online, live streaming, live tv online, live tv streaming, watch live tv';
+  
+  // Prepare meta data.
+    $html_head_live = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keywords',
+          'content' => $og_description_live,
+          ),
+         '#weight' => -99
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description_live,
+          ),
+         '#weight' => -99
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head_live as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+  
+    // Set meta data for required pages.
+  if (arg(0) == 'topic' && !empty(arg(1))) {
+    $search_str = urldecode(arg(1));
+    $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
+    $description_topic = "$search_str: Find $search_str news, videos, photos and magazines on India Today. Also get breaking news from all over India and worldwide.";
+    $og_description_topic = "$search_str, $search_str News, $search_str Videos, $search_str Photos, $search_str Images, $search_str Magazines";
+  
+  // Prepare meta data.
+    $html_head_live = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keywords',
+          'content' => $og_description_topic,
+          ),
+         '#weight' => -99
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description_topic,
+          ),
+         '#weight' => -99
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head_live as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+}
 

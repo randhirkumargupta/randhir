@@ -41,9 +41,6 @@ function itg_user_log_node_view($node , $view_mode , $langcode) {
   }
 
   $is_fron_page = drupal_is_front_page();
-//  if ($theme == 'itg' && $view_mode == 'full' && $view_mode != 'search_index' && empty($is_fron_page)) {
-//    
-//  }
   
   // code start for recommended for you
   if ($theme == 'itg' && $view_mode == 'full' && $view_mode != 'search_index' && empty($is_fron_page)) {
@@ -85,7 +82,7 @@ function itg_user_log_menu() {
   $items['count'] = array(
     'page callback' => 'itg_logged_in_user_activity' ,
     'access callback' => TRUE ,
-    'type' => MENU_CALLBACK ,
+    'type' => MENU_CALLBACK ,    
   );
   $items['active-users'] = array(
     'page callback' => 'itg_logged_in_user_active_user' ,
@@ -98,12 +95,14 @@ function itg_user_log_menu() {
     'page callback' => 'itg_users_output_for_report' ,
     'page arguments' => array(2) ,
     'access arguments' => array('administer itg custom widget') ,
+    'file' => 'includes/itg_user_log.inc' ,
   );
   
   $items['itg-users-email-output-for-report/autocomplete'] = array(
     'page callback' => 'itg_users_email_output_for_report' ,
     'page arguments' => array(2) ,
     'access arguments' => array('administer itg custom widget') ,
+    'file' => 'includes/itg_user_log.inc' ,
   );
 
   $items['content-visits-by-user'] = array(
@@ -123,51 +122,6 @@ function itg_user_log_menu() {
   return $items;
 }
 
-/**
- * Function to get json output for name.
- * @param string $name
- */
-function itg_users_output_for_report($name) {
-  $roles = user_roles();
-  $fornt_user_role_id = array_search('Front User' , $roles);
-  $query = db_select('users' , 'u');
-  $query->leftJoin('users_roles' , 'ur' , 'ur.uid = u.uid');
-  $query->fields('u' , array('name'));
-  $query->condition('u.name' , '%' . db_like($name) . '%' , 'LIKE');
-  $query->condition('status' , 1);
-  $query->condition('ur.rid' , $fornt_user_role_id);
-  $query->range(0 , 20);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  foreach($result as $record) {
-    $options[$record['name']] = $record['name'];
-  }
-
-  drupal_json_output($options);
-}
-
-/**
- * Function to get json output for email.
- * @param string $name
- */
-function itg_users_email_output_for_report($name) {
-  $roles = user_roles();
-  $fornt_user_role_id = array_search('Front User' , $roles);
-  $query = db_select('users' , 'u');
-  $query->leftJoin('users_roles' , 'ur' , 'ur.uid = u.uid');
-  $query->fields('u' , array('mail'));
-  $query->condition('u.mail' , '%' . db_like($name) . '%' , 'LIKE');
-  $query->condition('status' , 1);
-  $query->condition('ur.rid' , $fornt_user_role_id);
-  $query->range(0 , 20);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
-  foreach($result as $record) {
-    $options[$record['mail']] = $record['mail'];
-  }
-
-  drupal_json_output($options);
-}
 
 /**
  * function write for the count value and also added for condtion when the user make it filter.  itg_user_log_get_count()
@@ -521,52 +475,56 @@ function itg_get_recommended_data($section) {
 
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $sections = explode(',' , $section);
-    $data = array();
-    $ar_document = array();
+    if (isset($con)) {
+      $sections = explode(',', $section);
+      $data = array();
+      $ar_document = array();
 
-    foreach ($sections as $tid) {
-      $people = $con->pagedetails;
-      $cond = array('section' => $tid);
-      $cursor = $people->count($cond);
-      $data[$tid] = $cursor;
-    }
-    
-    arsort($data);
-    $three = array_slice($data , 0 , 4 , true);
-    
-    foreach ($three as $key => $value) {
-      $people = $con->pagedetails;
-      $cursor = $con->command(
-          array(
-            "distinct" => "pagedetails" ,
-            "key" => "section" ,
-            "query" => array('section' => (string) $key)
-      ));
-      foreach ($cursor['values'] as $document) {
-        $ar_document[] = (int) $document;
+      foreach ($sections as $tid) {
+        $people = $con->pagedetails;
+        $cond = array('section' => $tid);
+        $cursor = $people->count($cond);
+        $data[$tid] = $cursor;
       }
+
+      arsort($data);
+      $three = array_slice($data, 0, 4, true);
+
+      foreach ($three as $key => $value) {
+        $people = $con->pagedetails;
+        $cursor = $con->command(
+            array(
+              "distinct" => "pagedetails",
+              "key" => "section",
+              "query" => array('section' => (string) $key)
+        ));
+        foreach ($cursor['values'] as $document) {
+          $ar_document[] = (int) $document;
+        }
+      }
+      return $ar_document;
     }
-    return $ar_document;
   }
 }
 
 /**
  * Helper function to get title and url by nid
  */
-function itg_user_log_get_details($nid , $collection) {
+function itg_user_log_get_details($nid, $collection) {
   $data = '';
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $people = $con->$collection;
-    $cond = array('nid' => $nid);
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      $data['title'] = $document['title'];
-      $data['url'] = $document['url'];
-      $data['section'] = $document['section'];
+    if (isset($con)) {
+      $people = $con->$collection;
+      $cond = array('nid' => $nid);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+        $data['title'] = $document['title'];
+        $data['url'] = $document['url'];
+        $data['section'] = $document['section'];
+      }
+      return $data;
     }
-    return $data;
   }
 }
 
@@ -576,10 +534,12 @@ function itg_user_log_get_details($nid , $collection) {
 function itg_user_log_get_sections($c_name) {
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $people = $con->may_we_recommend_data;
-    $cond = array('unique_id' => (int) $c_name);
-    $cursor = $people->findOne($cond , array('section'));
-    return $cursor['section'];
+    if (isset($con)) {
+      $people = $con->may_we_recommend_data;
+      $cond = array('unique_id' => (int) $c_name);
+      $cursor = $people->findOne($cond, array('section'));
+      return $cursor['section'];
+    }
   }
 }
 

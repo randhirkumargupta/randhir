@@ -26,8 +26,10 @@
           $url_type = $menu_link_data['url_type'];
           //Check if icon found empty.
           if (empty($icon)) {
-            $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_48_32.jpeg";
-            $icon = "<img src='" . $image_url . "' alt='' />";
+            $image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpg');
+            //$image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/default_for_all_48_32.jpeg'));
+            //$image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_48_32.jpeg";
+            $icon = "<img src='" . $image_url . "' alt='' title='' />";
           }
 
           $style_tag = '';
@@ -35,8 +37,28 @@
           if(!empty($sponsored_class)) {
             $color_value = $menu_data['db_data']['bk_color'];
           }
+          if($menu_link_data['url_type'] == 'url-type-external') {
+            $attribute_array = array(
+            'style' => array("background : $color_value" ) , 
+            'target' => $target, 
+            'rel' => 'nofollow', 
+            'title' => $menu_link_data['link_title_for_vertical'], 
+            'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+            );
+            
+          } else {
+            $attribute_array = array(
+            'style' => array("background : $color_value" ) , 
+            'target' => $target, 
+            'title' => $menu_link_data['link_title_for_vertical'], 
+            'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+            );
+          }
         ?>
-        <li><?php print l($icon . $link_title_display, $link_url, array("html" => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'title' => $menu_link_data['link_title_for_vertical'], 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
+        <li><?php print l($icon . $link_title_display, $link_url, array(
+          "html" => true, 
+          'attributes' => $attribute_array,
+          )); ?></li>
         <?php
       endforeach;
       ?>

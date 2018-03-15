@@ -1,0 +1,135 @@
+.homeleft{ width:66%;}
+.topstories {
+    float: left;
+    margin-bottom: 3%;
+    width: 100%; 
+}
+.belt {
+    border: medium none;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 425px;
+	height: 480px;
+}
+.inner-belts {
+    height: 593px;
+    position: relative;
+    width: 2500px;
+}
+.left-column {
+    overflow: hidden;
+    padding: 10px 0 10px 10px;
+    position: relative;
+	 min-height: 470px;
+}
+.topstories .thumbs {
+    height: 50px;
+    left: 168px;
+    position: absolute;
+    width: 300px;
+	bottom:-26px;
+
+}
+.thumbs ul {
+    margin: 0;
+    padding: 0;
+}
+.thumbs ul li {
+    border-radius: 100%;
+    box-shadow: 2px 2px 4px #333 inset;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    list-style: outside none none;
+    margin-right: 5px;
+    width: 15px;
+}
+
+.thumbs ul li.active {
+    background: none repeat scroll 0 0 #000 !important;
+}
+
+.right-column {
+    background: #f7f7f7 none repeat scroll 0 0;
+    margin-right: 0;
+    padding: 2px 0 2%;
+}
+.right-column {
+    float: right;
+    padding: 2% 0;
+    width: 35% !important; margin-right:-5px; margin-top:-5px;
+}
+.right-column {
+    float: right;
+    width: 35% !important;
+}
+.images { width:415px;}
+.slwidth {
+    padding-left: 0 !important;
+    width: 425px !important;}
+	
+#asselection .topstr-list {
+    list-style: outside none none;
+    padding: 20px 10px 0;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+
+.right-column .morehead a {
+    background-color: #eb1c24;
+    color: #ffffff;
+    padding: 0 5px;
+}
+
+.right-column .morehead {
+    font: 500 20px/20px Roboto,sans-serif;
+}
+.right-column .morehead {
+    color: #000000;
+    font: 900 18px/20px Roboto,sans-serif;
+    padding: 0 0 5px 10px;
+    position: absolute;
+    text-transform: uppercase;
+}
+
+
+#asselection .boxcont {
+    background-color: #ffffff;
+    box-shadow: 2px 2px 10px 2px #cccccc;
+    float: left;
+    margin: 0 0 7%;
+    min-height: inherit !important;
+    width: 100%;
+}
+#asselection .boxcont {
+    box-shadow: 0 0 2px #cccccc;
+    height: 240px;
+    margin: 0 2.6% 3% 0;
+    width: 205px; float:left;
+}
+.box {
+    float: left;
+    height: auto;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%; padding:0;
+}
+.posrel{ position:relative; width:auto; height:auto; box-shadow:0 0 0 0; padding:0;} .box img.images {width: 205px; height:auto;} 
+.box .innerbox { float: left;padding: 4%; width:auto;} .box .innerbox a { color: #505050;font: bold 16px/22px Roboto,sans-serif;} #asselection .thirdcrad {
+    margin-right: 0;
+}
+#asselection .topzone h2 { margin-bottom:10px;} #asselection .topinnerbox p{ margin-top:10px;}  #asselection .pmedia-image-icon, .pmedia-play-icon{ bottom:10px; right:10px;}
+#asselection .pmedia-image-icon{ background-position:-299px -386px;} 
+
+#asselection .share-story{ position:absolute; top:288px; left:5px;} #asselection .share-story ul{ bottom:-12px;} #asselection .posrel{ height:123px; overflow:hidden;}
+
+.storysection h2, .photosection h2, .videosection h2, .sosorrysection h2{  color: #404040; font-size: 22px; font-weight: 300; margin-bottom: 10px;}
+
+.storysection, .photosection, .videosection, .sosorrysection{ overflow:hidden; position:relative; padding-left:2px;}
+a.heademore{ position:absolute; top:3px; right:10px;}
+
+#asselection .share-icon { background: #ffcc3f url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/shares.png") no-repeat scroll 0 4px; bottom: 3px; padding-left: 25px; padding-right: 10px; position: absolute; width: auto;}
+#asselection .share-story span.sharetext { float: left;font-size: 16px;font-weight: 300;line-height: 30px;margin-left: 5px;width: auto;}

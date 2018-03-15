@@ -18,7 +18,7 @@ function global_point_report_history_form($form, &$form_state) {
 
   $form['fieldset']['display_button'] = array(
     '#prefix' => '<div class="submit">',
-    '#suffix' => l(t('Reset'), 'admin/config/people/global-point-report-history', array('attributes' => array('class' => array('reset')))) . '</div">',
+    '#suffix' => l(t('Reset'), 'admin/config/people/global-point-report-history', array('attributes' => array('class' => array('reset')))) . '| '.l(t('Delete Point, Redem point, order table history'), 'del-point-history-data', array('attributes' => array('class' => array('reset')))). '</div">',
     '#type' => 'submit',
     '#value' => t('Search'),
     '#submit' => array('global_point_report_history_form_submit'),

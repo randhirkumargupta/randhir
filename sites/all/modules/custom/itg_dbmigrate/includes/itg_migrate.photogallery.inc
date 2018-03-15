@@ -7,10 +7,11 @@
  */
 class ItgPhotogalleryMigration extends XMLMigration {
 
+  public $photo_consvalue;
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Photogallery)');
-
+    $this->photo_consvalue = $this->read_folder_xml_photo();
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'title' => t('title'),
@@ -88,7 +89,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = DRUPAL_ROOT . '/' . 'sites/default/files';
 
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+     $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->photo_consvalue . '/';
 
     $items_url = $xml_folder . 'indiatoday-galleries.xml';
 
@@ -454,11 +455,50 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $tid_array[] = 1208521; // photo section
       $all_category = array_unique($tid_array);
       foreach ($all_category as $chunk_data) {
-        $data_category[]['tid'] = $chunk_data;
+         if(!empty($chunk_data) && is_numeric($chunk_data)) {
+          $data_category[]['tid'] = $chunk_data;
+         }
       }
     }
-    $row->category_new = $data_category;
+    
+    //category according drupal id
+    
+    $drupal_id_category = '';
+    if (isset($row->xml->content_mapping->content_mapping_category) && !empty($row->xml->content_mapping->content_mapping_category)) {
+      $drupal_category_array = array();
+      $xm_cat = '';
+      $drupal_tid_array = array();
+      foreach ($row->xml->content_mapping->content_mapping_category as $xm_cat) {
+        $drupal_category_array = explode('#', $xm_cat);
+        $k = 1;
+        foreach ($drupal_category_array as $drupal_individal_cat) {
 
+          $array_count = $k;
+          $drupal_source_cid = (string) $drupal_individal_cat;
+
+          //$table_name = itg_migrate_category_table($array_count);
+          if ($k != 1) {
+            $str = '#';
+          }
+          $drupal_tid_array[] = $drupal_source_cid;
+          $k++;
+        }
+      }
+      $drupal_all_category = array_unique($drupal_tid_array);
+      foreach ($drupal_all_category as $chunk_datas) {
+        if(!empty($chunk_datas) && is_numeric($chunk_datas)) {
+          $drupal_id_category[]['tid'] = $chunk_datas;
+        }
+      }
+    }
+    $final_mix_category = '';
+    if((!empty($drupal_id_category) && isset($drupal_id_category)) && (!empty($data_category) && isset($data_category))){
+      $final_mix_category = array_merge($drupal_id_category, $data_category);
+    }else{
+      $final_mix_category = $data_category;
+    }
+    
+    $row->category_new = $final_mix_category;
 
     // Story tags migration
     $data_tags = '';
@@ -489,11 +529,16 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $row->final_social_checkbox = $final_social;
 
     // Primary category
-    if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
+   /* if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
       $category_primary_array = explode('#', $row->xml->primary_category);
       $last_primary_value = end($category_primary_array);
       $source_cid = (string) $last_primary_value;
       $orignal_pcategory = get_itg_destination_id('migrate_map_itgphoto', $source_cid);
+      $row->xml->primary_category = $orignal_pcategory;
+    }*/
+    
+    if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
+      $orignal_pcategory = (int) $row->xml->primary_category;
       $row->xml->primary_category = $orignal_pcategory;
     }
 
@@ -515,6 +560,8 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
   public function prepare($node, stdClass $row) {
     //drupal_set_message('<pre>'.print_r($row->xml->workbench_moderation_state_new, 1).'<pre>');
+    //for update sef
+    $node->sef_url = array('sef' => (string) $row->xml->metatags->sef_url);
     $node->teaser = (string) $row->xml->description;
 
     if (!empty($row->category_new)) {
@@ -565,14 +612,27 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
     //code for order set
     //if (isset($row->xml->ordering) && !empty($row->xml->ordering)) {
+    
+    if((int) $row->xml->video_update == 1){
+        ordering_set_of_content_update($node, (string) $row->xml->ordering);
+    }
     ordering_set_of_content($node, (string) $row->xml->ordering);
     //}
     //code for like and dislike
-    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+   /* if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+    }*/
+    
+     if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+        if((int) $row->xml->video_update == 1){
+            itg_flag_insert_like_dislike_update($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);  
+        }else{
+            itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+        }
     }
+    
     // Related content save in db
-    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+   /* if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
       //$arr = array();
       foreach ($row->xml->relatedcontents->relatedcontent as $value) {
         $chk_variable = (string) $value;
@@ -588,7 +648,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
               ->execute();
         }
       }
-    }
+    }*/
 
     if (isset($row->xml->gallery->image_details) && !empty($row->xml->gallery->image_details)) {
       $key = 0;
@@ -733,6 +793,38 @@ class ItgPhotogalleryMigration extends XMLMigration {
       }
       field_attach_update('node', $node);
     }
+    
+    if((int) $row->xml->video_update == 1) {
+        $time_stamp = (string) $row->xml->modified;
+        __insert_modified_date_flag_table('story', $time_stamp, $node->nid);
+    }
+    
+  }
+  
+  public function read_folder_xml_photo() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
+
+    return $result[0];
   }
 
+  public function postImport() {
+    parent::postImport();
+    // mail send if Photo failed.
+    $content = failed_record_xml_id('migrate_map_itgphotogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Photo',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  }
 }

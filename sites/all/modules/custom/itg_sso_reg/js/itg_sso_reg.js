@@ -15,7 +15,6 @@
                         jQuery('.mobile-error').html(item);
                     }
                     if (index == 'mail') {
-                        console.log(item);
                         jQuery('.email-error').html(item);
                     }
                     if (index == 'fname') {

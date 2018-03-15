@@ -2,10 +2,14 @@
   <div class="may-be-suggest-container">
     <?php $is_fron_page = drupal_is_front_page();
     if (empty($is_fron_page)) {
-      ?><h3><span><?php print t("May We Suggest") ?></span></h3><?php } ?>
+	  $data_tb_region_item = '';
+	  if($is_fron_page){
+		$data_tb_region_item = 'data-tb-region-item';  
+	  }
+      ?><h3><span><?php print t("READ THIS") ?></span></h3><?php } ?>
     <ul>
         <?php foreach ($data as $key => $entity_info) { ?>
-        <li class="may-we-suggest">
+        <li <?php echo $data_tb_region_item;?> class="may-we-suggest">
             <?php if (!empty($entity_info['esi_file_uri'])) { ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity_info['nid']); ?>" class="pic">
       <?php $file_uri = file_create_url($entity_info['esi_file_uri']); ?>
@@ -16,7 +20,7 @@
           else {
             ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity_info['nid']); ?>" class="pic">
-              <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
+              <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="" title="" />
             </a>
           <?php } ?>
             <?php if (!empty($entity_info['title'])) : ?>

@@ -62,6 +62,7 @@ stylesheets[all][] = css/jquery.mCustomScrollbar.min.css
 stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/styles-new.css
 stylesheets[all][] = css/media.css
+stylesheets[all][] = css/itgd-style.css
 
 ; Built-in conditional stylesheet support has been removed from Zen 7.x-5.x.
 ; Instead, Zen now adds conditional-comment-included classes to the html

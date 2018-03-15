@@ -2,8 +2,10 @@
 /**
  * @file : itg-bestcolleges-template.tpl.php
  */
-$comment_value = variable_get('COMMENT_CONFIG');
-$config_name = $comment_value[0]->config_name;
+if (function_exists('itg_story_global_comment_last_record')) {
+  $comment_value = itg_story_global_comment_last_record();
+  $config_name = $comment_value[0]->config_name;
+}
 $arg = arg();
 ?>
 <?php global $base_url;?>
@@ -12,7 +14,7 @@ $arg = arg();
 <div class="col-md-12 col-sm-12 col-xs-12 left-panel arts">
 <!-- Slider Start-->
 <?php $term = taxonomy_term_load(arg(3));?>
-<h2><?php print "INDIA'S BEST ". strtoupper($term->name) ." COLLEGES ".arg(1); ?></h2>
+<h1><?php print t("INDIA'S BEST ") . strtoupper($term->name) . t(" COLLEGES ") .arg(1); ?></h1>
 <div class="slider_outer1">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -46,25 +48,29 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 <div class="col-sm-12 col-xs-12 view1">
 <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("MORE STORIES ") ; ?></div>
 
-
-
 </div>
 <div class="col-sm-12 related-story-list">
     <div class="row">
     <div class="clearfix">
     <?php
      foreach ($related_story_value as $key => $value){
-
+       $file = file_load($value['field_story_small_image_fid']);
+       $file_uri = file_create_url($file->uri);
          ?>
          <div class="midstoryleft">
-           <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="http://media2.intoday.in/indiatoday/images/stories/bc-arts-jun29-1_180_061915094528.jpg" width="125" align="left" height="93"></a>
+             <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $value['nid']); ?>" target="_blank">
+       <?php if (!empty($file->uri)) : ?>
+               <img src="<?php print $file_uri; ?>" alt="" title="" width="125" align="left" height="93" />
+       <?php else : ?>
+                 <img src="<?php print  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image483x271.jpg'); ?>" width="125" align="left" height="93" />
+       <?php endif; ?>
+             </a>
            <div class="midstorydetail">
-               <div class="midstorytitle"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a>
+               <div class="midstorytitle"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $value['nid']); ?>" target="_blank"><?php print $value['title']; ?></a>
                </div>
                <div class="midstoryintro"><?php print $value['title']; ?></div>
            </div>
          </div>
-
 
     <?php
 
@@ -84,67 +90,66 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
 <!-- ranking-section start-->
 <?php
     $page_data = bestCollegesrank($arg);
-    if(isset($page_data['flag-rank']) && (is_array($page_data['previous-rank']) && count($page_data['previous-rank']) > 0) && (is_array($page_data['parameterwise-rank']) && count($page_data['parameterwise-rank']) > 0)){
-?>
-<div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Ranking Section ") ; ?></div>
-</div>
-<?php
-    //$page_data = bestCollegesrank();
-    $str_fulldata = "";
-    $data_parameterwise_rank = $page_data['parameterwise-rank'];
-    $data_previous_rank = $page_data['previous-rank'];
-
-
-    // parameterwise data string building
-
-    $str_parameterwise_rank = "<div class='wishranking'>
+    $data_parameterwise_rank = $page_data['parameterwise_rank'];
+    $data_previous_rank = $page_data['previous_rank'];
+    if ((is_array($data_parameterwise_rank) && count($data_parameterwise_rank) > 0) || is_array($data_previous_rank) && count($data_previous_rank) > 0) {
+      ?>
+        <div class="col-sm-12 col-xs-12 view1">
+            <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Ranking Section "); ?></div>
+        </div>
+      <?php
+      if (count($data_parameterwise_rank) > 0) {
+        $str_fulldata = "";
+        // parameterwise data string building
+        $str_parameterwise_rank = "<div class='wishranking'>
         <div class='midcontitles'>PARAMETER-WISE RANKING <span style='float:right;'></span></div>
         <div class='midmorestories'>
           <ul>
-             <li>Reputation: ".$data_parameterwise_rank[0]['reputation']."</li>
-             <li>Academic Input: ".$data_parameterwise_rank[0]['academic_input']."</li>
-             <li>Student Care: ".$data_parameterwise_rank[0]['studentcare']."</li>
-             <li>Infrastructure: ".$data_parameterwise_rank[0]['infrastructure']."</li>
-             <li>Placement: ".$data_parameterwise_rank[0]['placement']."</li>
-             <li>Perceptual Rank: ".$data_parameterwise_rank[0]['preceptual_rank']."</li>
-             <li>Factual Rank: ".$data_parameterwise_rank[0]['factual_rank']."</li>
+             <li>". t('Reputation') ." : " . $data_parameterwise_rank[0]['reputation'] . "</li>
+             <li>". t('Academic Input') ." : " . $data_parameterwise_rank[0]['academic_input'] . "</li>
+             <li>". t('Student Care') ." : " . $data_parameterwise_rank[0]['studentcare'] . "</li>
+             <li>". t('Infrastructure') ." : " . $data_parameterwise_rank[0]['infrastructure'] . "</li>
+             <li>". t('Placement') ." : " . $data_parameterwise_rank[0]['placement'] . "</li>
+             <li>". t('Perceptual Rank') ." : " . $data_parameterwise_rank[0]['preceptual_rank'] . "</li>
+             <li>". t('Factual Rank') ." : " . $data_parameterwise_rank[0]['factual_rank'] . "</li>
 
           </ul>
         <div class='clear'></div>
         </div>
       </div>";
 
-    // yearwisewise data string building
-
-    $str_yearwise_rank= "<div class='prvlink'>
-	<div class='prvarrtxt'>PREVIOUS RANKING:</div>
+      }
+      if (count($data_previous_rank) > 0) {
+        // yearwisewise data string building
+        $str_yearwise_rank = "<div class='prvlink'>
+	<div class='prvarrtxt'>". t('PREVIOUS RANKING:') ."</div>
     <div class='prvyrs'>
 	 <ul>";
 
-    foreach ($data_previous_rank as $key => $value){
-        $year = $value['year'];
-        $rank = $value['rank'];
-        $str_yearwise_rank .= "<li>".$year." - <span>".$rank."</span></li>";
-    }
-    $str_yearwise_rank .= "</ul></div></div>";
+        foreach ($data_previous_rank as $key => $value) {
+          $year = $value['year'];
+          $rank = $value['rank'];
+          $str_yearwise_rank .= "<li>" . $year . " - <span>" . $rank . "</span></li>";
+        }
+        $str_yearwise_rank .= "</ul></div></div>";
 
-    $str_fulldata = "<div class='col-sm-12 ranking-section'><div class='ranking-section'>".$str_parameterwise_rank." ".$str_yearwise_rank."</div></div>";
-    print $str_fulldata;
+        $str_fulldata = "<div class='col-sm-12 ranking-section'><div class='ranking-section'>" . $str_parameterwise_rank . " " . $str_yearwise_rank . "</div></div>";
+        print $str_fulldata;
+      }
     }
 ?>
 <!-- ranking-section end-->
 
 <!-- Related image start-->
 <?php
-$related_image_value = bestCollegesRelatedImgList();
+$related_image_value = itg_bestcolleges_related_videolist();
+
 if(isset($related_image_value['relatedimg_count']) && $related_image_value['relatedimg_count'] > 0){
     unset($related_image_value['relatedimg_count']);
 ?>
 
 <div class="col-sm-12 col-xs-12 view1 related-img-head">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("MORE IMAGES ") ; ?></div>
-
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("SEE VIDEOS") ; ?></div>
 
 
 </div>
@@ -153,16 +158,13 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
     <div class="clearfix">
     <?php
      foreach ($related_image_value as $key => $value){
-         //$img_ob = file_load($value['field_story_small_image_fid']);
-
          $file = file_load($value['field_story_large_image_fid']);
-
          ?>
-
                 <div class="midstoryleft">
-                    <a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><img alt="" title="" src="<?php print file_create_url($file->uri); ?>" width="125" align="left" height="93"></a>
+                        <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $value['nid']); ?>" target="_blank">
+                        <img alt="" title="" src="<?php print file_create_url($file->uri); ?>" width="125" align="left" height="93"></a>
                     <div class="midstorydetail">
-                      <div class="midstoryintro"><a href="<?php print $base_url; ?>/node/<?php print $value['nid']; ?>" target="_blank"><?php print $value['title']; ?></a></div></div>
+                      <div class="midstoryintro"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $value['nid']); ?>" target="_blank"><?php print $value['title']; ?></a></div></div>
                 </div>
     <?php
 
@@ -199,7 +201,7 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
 <div>
 <div class="clearfix"></div>
 <div class="col-sm-12 remove_padd_right">
-<div class="row list-group college">
+<div class="list-group college">
       <div class="clr_chn right_align_bestcollege" >
 
 
@@ -296,8 +298,9 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
           <div class="c_ques"><?php print $question; ?></div>
           <div class="vukkul-comment">
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>
-
+            <!--<div id="vuukle_div"></div>-->
+            <div id="vuukle-comments"></div>
+            <div class='vuukle-powerbar'></div>
             <?php
             if (function_exists('vukkul_view')) {
               vukkul_view();

@@ -8,7 +8,8 @@ foreach ($rows as $row): ?>
         print $row['field_sponser_logo'];
       }
       else {
-        print "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
+        //print "<img src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image237x133.jpg')) . "' alt='' title='' />";
+        print "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image237x133.jpg') . "' alt='' title='' />";
       }
       ?>
   </div>

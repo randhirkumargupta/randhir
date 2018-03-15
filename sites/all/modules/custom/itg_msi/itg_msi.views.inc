@@ -56,12 +56,19 @@ class itg_msi_views_handler_field_dynamic_clone_link extends views_handler_field
     if(function_exists(itg_msi_get_lock_story_status)) {
       $lock_story = itg_msi_get_lock_story_status($values->nid, 'lock_story');
     }
+    
+    if (function_exists('itg_common_get_smiley_title')) {
+      $node_title = itg_common_get_smiley_title($values->nid, 0, 999);
+    } else {
+      $node_title = $values->node_title;
+    }
+    
     // Prepare dynamic link on title field.
     if (!empty($lock_story)) {
-      $output = l($values->node_title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage',array('attributes' => array('class' =>'lock')));
+      $output = l($node_title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array("html" => TRUE, 'attributes' => array('class' =>'lock', 'title' => $node_title)));
     }
     else {
-      $output = l($values->node_title, 'node/' . $values->nid);
+      $output = l($node_title, 'node/' . $values->nid, array("html" => TRUE, 'attributes' => array('title' => $node_title)));
     }    
     
     return $output;

@@ -10,11 +10,10 @@
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-2']['block_title']);
 $fb_share_title = htmlentities($search_title, ENT_QUOTES);
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $share_desc = '';
 $src = '';
 ?>
-
 <?php
 global $theme;
 $live_url = "";
@@ -22,9 +21,11 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
+}
 $highlights = itg_widget_highlights_block_data();
-
-
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
@@ -37,20 +38,12 @@ if (!empty($device[0])) {
   }
 }
 ?>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
       <header class="header" id="header" role="banner">
           <section class="header-top">
-              <div class="container header-logo">
-                  <?php if ($logo): ?>
-                    <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-                    </div>
-                  <?php endif; ?>         
-              </div>
-
+         
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -58,15 +51,12 @@ if (!empty($device[0])) {
                           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
                       </h1>
                     <?php endif; ?>
-
                     <?php if ($site_slogan): ?>
                       <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
                     <?php endif; ?>
                 </div>
               <?php endif; ?>
-
               <?php if ($secondary_menu): ?>
-
                 <?php
                 print theme('links__system_secondary_menu', array(
                   'links' => $secondary_menu,
@@ -80,19 +70,14 @@ if (!empty($device[0])) {
                   ),
                 ));
                 ?>
-
               <?php endif; ?>
-
               <?php print render($page['header']); ?>
-
           </section>
-
       </header>
       <?php
       // Render the sidebars to see if there's anything in them.
       $sidebar_first = render($page['sidebar_first']);
       $sidebar_second = render($page['sidebar_second']);
-
       $cls = 'col-md-12';
       if ($sidebar_first || $sidebar_second):
         $cls = 'col-md-9';
@@ -118,10 +103,8 @@ if (!empty($device[0])) {
               <?php if ($action_links): ?>
                 <ul class="action-links"><?php print render($action_links); ?></ul>
               <?php endif; ?>       
-
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
-
             <?php
             $itg_class = 'itg-admin';
             if ($theme != 'itgadmin') {
@@ -170,21 +153,19 @@ if (!empty($device[0])) {
                       <div class="col-md-4">   
                           <div class="row">
                               <div class="col-md-12">
-
                                   <div class="itg-widget-parent">
                                       <div class="itg-widget">
                                           <div class="ad-widget budget-ad">
                                               <div class="sidebar-ad">
-  <?php
-  $block = block_load('itg_ads', ADS_RHS1);
-  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  print render($render_array);
-  ?>
+                                                <?php
+                                                $block = block_load('itg_ads', ADS_RHS1);
+                                                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                print render($render_array);
+                                                ?>
                                               </div>
                                           </div>
                                       </div>
                                   </div>                    
-
                               </div>
                               <div class="col-md-12">
                                   <div class="itg-widget">
@@ -205,7 +186,6 @@ if (!empty($device[0])) {
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
   <?php } ?>  
-
                                               <div class="data-holder" id="itg-block-6"><?php
   $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
   print render($block['content']);
@@ -213,14 +193,12 @@ if (!empty($device[0])) {
                                           </div>             
                                       </div>
                                   </div>
-
                               </div>
                           </div>    
                       </div>    
                   </div>    
                 <?php }
                 else { ?>
-
                   <div class="row itg-325-layout">
                       <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
                         <div class="col-md-4 col-sm-12 mt-50">
@@ -228,12 +206,8 @@ if (!empty($device[0])) {
                             <div class="itg-widget">
                                 <div class=" <?php print $gray_bg_layout; ?>">
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-
                                         <h4 class="heading">LIVE TV</h4>
-
                                         <!-- for admin  -->
-
-
                                         <div class="data-holder" id="itg-block-1"><div class="video-wrapper"><?php print $live_url; ?></div></div>
                                     </div>             
                                 </div>
@@ -244,7 +218,6 @@ if (!empty($device[0])) {
                             <div class="itg-widget">
                                 <div class=" droppable <?php print $gray_bg_layout; ?>">
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name']; ?>">
-
                                         <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-2']['block_title'])) { ?>
                                           <h4 class="heading"><?php print $widget_data['itg-block-2']['block_title']; ?></h4>
                                         <?php } ?>
@@ -258,12 +231,8 @@ if (!empty($device[0])) {
                                               </div>
                                               <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                               <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-2"><i class="fa fa-times"></i></a></span>
-
                                           </div>
                                         <?php } ?>  
-
-
-
                                         <div class="data-holder" id="itg-block-2">
                                             <?php
                                             if (isset($widget_data['itg-block-2']['widget'])) {
@@ -294,12 +263,10 @@ if (!empty($device[0])) {
                                 </div>
                             </div>                    
                         </div>
-
                   <?php } ?>
                   </div>
 <?php } ?>
                 <!--End budget predictor with first block--> 
-
                 <!--budget predictor with second block-->  
                     <?php if ($_GET['type'] != 'budget-predictor') { ?>
                   <div class="row itg-530-layout">
@@ -325,7 +292,6 @@ if (!empty($device[0])) {
                                           <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-4"><i class="fa fa-times"></i></a></span>
                                           </div>
     <?php } ?>  
-
                                         <div class="data-holder" id="itg-block-4">
                                             <?php
                                             if (isset($widget_data['itg-block-4']['widget'])) {
@@ -340,7 +306,6 @@ if (!empty($device[0])) {
                                 </div>
                             </div>                       
                         </div>
-
                         <div class="col-md-4 mt-50">
                             <div class="widget-help-text">Special widgets ( <strong>Live Chat</strong> )</div>
                             <div class="itg-widget">
@@ -355,7 +320,7 @@ if (!empty($device[0])) {
                                               <div class="widget-title-wrapper">
                                                   <?php if (isset($widget_data['itg-block-6']['block_title'])) { ?>
                                                     <span class="widget-title" data-id="itg-block-6"><?php print $widget_data['itg-block-6']['block_title']; ?></span>
-      <?php } ?>
+                                                    <?php } ?>
                                                   <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
                                               </div>
                                               <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
@@ -381,13 +346,10 @@ if (!empty($device[0])) {
                                 </div>
                             </div>
                         </div>
-
   <?php } ?>
                   </div>
 <?php } ?>
                 <!--End budget predictor with first block--> 
-
-
                 <div class="row itg-370-layout">
 <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
@@ -411,7 +373,6 @@ if (!empty($device[0])) {
                                         <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a></span>
                                         </div>
                                           <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-7" data-widget-style="india-inc-on-budget">
                                           <?php
                                           if (isset($widget_data['itg-block-7']['widget'])) {
@@ -447,7 +408,6 @@ if (!empty($device[0])) {
                                         <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-8"><i class="fa fa-times"></i></a></span>
                                         </div>
                                           <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-8" data-widget-style="budget-decoded">
                                           <?php
                                           if (isset($widget_data['itg-block-8']['widget'])) {
@@ -483,7 +443,6 @@ if (!empty($device[0])) {
                                        <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-9"><i class="fa fa-times"></i></a></span>
                                         </div>
                                           <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-9" data-widget-style="budget-reactions">
                                           <?php
                                           if (isset($widget_data['itg-block-9']['widget'])) {
@@ -500,8 +459,6 @@ if (!empty($device[0])) {
                       </div>
 <?php } ?>
                 </div>
-
-
                 <div class="row itg-480-layout">
 <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-8 mt-50">
@@ -619,8 +576,6 @@ if (!empty($device[0])) {
                       </div>                      
 <?php } ?>
                 </div>
-
-
                 <div class="row itg-715-layout">
                                     <?php if (isset($widget_data['itg-block-13']['widget_name']) || isset($widget_data['itg-block-15']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="col-md-8 mt-50">
@@ -659,9 +614,8 @@ if (!empty($device[0])) {
                           </div>
                       </div>
                       <div class="col-md-4 mt-50">
-
                           <div class="row">
-                              <div class="col-md-12 col-sm-6 col-xs-12"> 
+                              <div class="col-md-12 col-sm-12 col-xs-12"> 
                                   <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
                                   <div class="itg-widget-parent">
                                       <div class="itg-widget">
@@ -719,24 +673,13 @@ if (!empty($device[0])) {
                       </div>                      
 <?php } ?>
                 </div>
-
-
-
-
             </div>
-
-
-
-
-
             <!--------------------------------Code for Front tpl---------------------------------------->
                 <?php if ($theme != 'itgadmin') { ?>
                   <?php //print $feed_icons;      ?>
           </section>
-
                   <?php if (false) { ?> 
             <div id="navigation">
-
                     <?php if ($main_menu): ?>
                   <nav id="main-menu" role="navigation" tabindex="-1">
                       <?php
@@ -758,23 +701,13 @@ if (!empty($device[0])) {
                       ?>
                   </nav>
         <?php endif; ?>
-
     <?php print render($page['navigation']); ?>
-
             </div>
   <?php } ?>
-
-
       </main>
-
-
   <?php print render($page['footer']); ?>
-
-
   </div>
-
   <?php print render($page['bottom']); ?>
-
 <?php } ?>
 <?php if ($theme == 'itgadmin') { ?>
   <div class="itg-ajax-loader">
@@ -790,3 +723,29 @@ if (!empty($device[0])) {
       });
   });
 </script>
+
+<?php
+  $good_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/highlights_icons/good-big.png');
+  $bad_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/highlights_icons/Bad-big.png');
+  $wgmf_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/highlights_icons/wgmf-big.png');
+?>
+<!--animation emoji for hightlight-->
+<div id="smily">
+  <div class="face1 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>    
+    <div class="face2 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>    
+    <div class="face3 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>    
+    <div class="face4 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>       
+  </div>
+  <div id="smilysad">
+   <div class="face1 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>
+    <div class="face2 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>
+    <div class="face3 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>
+    <div class="face4 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>  
+  </div>
+  <div id="wgmf">
+    <div class="face1 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+    <div class="face2 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+    <div class="face3 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+    <div class="face4 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+  </div>
+<!--animation emoji for hightlight end-->

@@ -18,6 +18,15 @@ function itg_photogallery_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_photogallery_filter.inc',
   );
+  
+  $items['itg-photo-block-refresh/%'] = array(
+    'title' => 'photogallery block refresh',
+    'description' => 'photogallery block refresh',
+    'page callback' => 'itg_photo_block_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_photo_block_refresh.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -60,28 +69,33 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
 		$form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">' . $form['field_story_category'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span></label>';
 		//code for common syndication field hide
-		drupal_add_js('jQuery(document).ready(function() {
+		/*drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-expert-description").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+            });', array('type' => 'inline', 'scope' => 'footer'));*/
 
-		$form['upload'] = array(
-			'#type' => 'plupload',
-			'#weight' => 21,
-			'#upload_validators' => array(
-				'file_validate_extensions' => array("png gif jpg jpeg"),
-			),
-			'#description' => t('88x66 smallest size of image.'),
-		);
-		$form['field_common_audio_file']['#states'] = array(
-			'visible' => array(
-				':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
-			),
-		);
-		$form['field_credit_name']['#states'] = array(
-			'visible' => array(
-				':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
-			),
-		);
+    $form['upload'] = array(
+      '#type' => 'plupload',
+      '#weight' => 21,
+      '#upload_validators' => array(
+        'file_validate_extensions' => array("png gif jpg jpeg"),
+      ),
+      '#description' => t('88x66 smallest size of image. Max ' . variable_get('max_upload_image_limit', 6) . ' file upload at once.'),
+      '#plupload_settings' => array(
+        'unique_names' => TRUE,
+        'rename' => TRUE,
+        'max_file_count' => variable_get('max_upload_image_limit', 6),
+      ),
+    );
+    $form['field_common_audio_file']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    $form['field_credit_name']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
 
 //		$form['field_story_comment_question']['#states'] = array(
 //			'visible' => array(
@@ -312,7 +326,7 @@ function itg_photogallery_after_build($form, &$form_state) {
 	}
 
 	$form['actions']['cancel'] = array(
-		'#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
+		'#markup' => l(t('Close'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
 		'#weight' => 25,
 	);
 	global $user, $base_url;
@@ -463,8 +477,8 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 		// Save media file.
 		$scheme = variable_get('file_default_scheme', 'public') . '://';
 		$source = $img['tmppath'];
-
 		$directory = $filedir;
+                $img['name'] = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $img['name']);
 		$destination = file_stream_wrapper_uri_normalize($scheme . $directory . $img['name']);
 		$destination = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
 		global $user;
@@ -704,9 +718,8 @@ function itg_photogallery_byline_photoby($type, $id) {
 function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
 	//Get the Form Id
-	if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
-		//$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
-		//$form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+	if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-10' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
+		
 		$form['title']['#autocomplete_path'] = 'photo-workbench-title-list/photogallery/' . arg(0) . '/autocomplete';
 		$form['title']['#attributes'] = array('placeholder' => t('Title'));
 		$form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
@@ -813,6 +826,19 @@ jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-
 	}
 }
 */
+
+/**
+ *Implement hook_node_view().
+ * {@inheritdoc}
+ */
+function itg_photogallery_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'photogallery' && !empty(variable_get('photo_block_refresh'))) {
+    $settings = array();
+    $settings['photo_nid'] = $node->nid;
+    drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_block_refresh.js', array('scope' => 'footer'));
+  }
+}
 
 /**
  * Implement widget alter()
@@ -926,4 +952,16 @@ function itg_photogallery_views_query_alter(&$view, &$query) {
       }
   }
 }
- 
+
+/**
+ * Implements hook_views_pre_view().
+ * {@inheritdoc}
+ */
+function itg_photogallery_views_pre_view(&$view, &$display_id, &$args) {
+  if ($view->name == 'photo_list_of_category' && $view->current_display == 'block_2') {
+    $node = menu_get_object();
+    if(isset($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])){
+      $view->args[0] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    }
+  }
+} 

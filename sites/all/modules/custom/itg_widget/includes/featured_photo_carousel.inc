@@ -46,36 +46,36 @@ function itg_widget_featured_photo_carousel_data_fetch($result, $slider_type) {
     if ($slider_type == 'rolling') {
        // $style = 'photo_carousel_rollingslider';
     }
-    if (arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))) {
+    /*if (arg(0) == 'taxonomy' && arg(1) == 'term' && is_numeric(arg(2))) {
         $sid = arg(2);
         $section_cat_id = get_first_category_of_media_widget(arg(2), 'page--section_photo', 'photo_list_of_category');
-    }
+    }*/
     
     foreach ($result as $key => $data) {
         $data['entity_id'] = $data['nid'];
         $image_count = "";
-        /*$node = node_load($data['entity_id']);        
+        $node = node_load($data['entity_id']);        
         $gallery_image = $node->field_gallery_image[$node->language];        
-        $image_count = itg_photo_image_count($gallery_image);*/
+        $image_count = itg_photo_image_count($gallery_image);
         
         if(!empty($data['uri'])) {
             $file_uri = file_create_url($data['uri']);
         } else {
-            $file_uri = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg";
+            $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
         }
         
         //  $data_render[$data['entity_id']]['file_url'] = theme('image_style', array('style_name' => $style, 'path' => $node->field_story_extra_large_image[$node->language][0]['uri']));
         $data_render[$data['entity_id']]['file_url'] = $file_uri;
-        $data_render[$data['entity_id']]['count'] = $image_count;
+        $data_render[$data['entity_id']]['count'] = $image_count . ' ';
         $data_render[$data['entity_id']]['caption'] = isset($data['field_story_extra_large_image_title']) ? $data['field_story_extra_large_image_title'] : "";
-        //$data_render[$data['entity_id']]['node_url'] = $base_url . '/' . drupal_get_path_alias('node/' . $data['entity_id']);
+        $data_render[$data['entity_id']]['node_url'] = $base_url . '/' . drupal_get_path_alias('node/' . $data['entity_id']);
         $data_render[$data['entity_id']]['title'] = $data['title'];
         $data_render[$data['entity_id']]['nid'] = $data['entity_id'];
         $data_render[$data['entity_id']]['image_alt'] = isset($data['field_story_extra_large_image_alt']) ? $data['field_story_extra_large_image_alt'] : "";
         $data_render[$data['entity_id']]['image_title'] = isset($data['field_story_extra_large_image_title']) ? $data['field_story_extra_large_image_title'] : "";
         //$data_render[$data['entity_id']]['primary_category'] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-        $data_render[$data['entity_id']]['sid'] = isset($sid) ? $sid : 0;
-        $data_render[$data['entity_id']]['cat'] = isset($section_cat_id) ? $section_cat_id :0;
+        //$data_render[$data['entity_id']]['sid'] = isset($sid) ? $sid : 0;
+        //$data_render[$data['entity_id']]['cat'] = isset($section_cat_id) ? $section_cat_id :0;
     }
     return $data_render;
 }

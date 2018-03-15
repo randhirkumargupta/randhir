@@ -8,7 +8,7 @@
             print $row['field_story_extra_large_image'];
           }
           else {
-            $img = "<img width='103' height='103'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/imgpsh_fullsize103x103.png' alt='' />";
+            $img = "<img width='103' height='103'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/imgpsh_fullsize103x103.png' alt='' title='' />";
             print l($img, $row['php'] . '/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
           }
           ?>

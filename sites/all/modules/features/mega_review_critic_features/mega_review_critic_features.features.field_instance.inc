@@ -629,7 +629,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 26,
+      'weight' => 11,
     ),
   );
 
@@ -1040,6 +1040,45 @@ function mega_review_critic_features_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-mega_review_critic-field_story_category'.
+  $field_instances['node-mega_review_critic-field_story_category'] = array(
+    'bundle' => 'mega_review_critic',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 31,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_category',
+    'label' => 'Section',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance:
   // 'node-mega_review_critic-field_story_extra_large_image'.
   $field_instances['node-mega_review_critic-field_story_extra_large_image'] = array(
@@ -1429,7 +1468,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -1553,7 +1592,7 @@ function mega_review_critic_features_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -1595,7 +1634,7 @@ function mega_review_critic_features_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -1638,6 +1677,7 @@ function mega_review_critic_features_field_default_field_instances() {
   t('Review URL Link');
   t('Review type');
   t('Reviewer');
+  t('Section');
   t('Small image');
   t('Source type');
   t('Twitter Widget');

@@ -142,7 +142,7 @@ function features_for_story_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_story_big_image',
     'label' => 'Facebook instant image',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
@@ -2690,6 +2690,54 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_embed_webcast'.
+  $field_instances['node-story-field_story_embed_webcast'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 133,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_embed_webcast',
+    'label' => 'Embed Webcast',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 114,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_expert_description'.
   $field_instances['node-story-field_story_expert_description'] = array(
     'bundle' => 'story',
@@ -3232,7 +3280,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_extra_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (88 x 66)',
+    'description' => 'Image Size (88 x 50)',
     'display' => array(
       'amp' => array(
         'label' => 'above',
@@ -3288,6 +3336,8 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -5121,7 +5171,7 @@ function features_for_story_field_default_field_instances() {
   $field_instances['node-story-field_story_small_image'] = array(
     'bundle' => 'story',
     'deleted' => 0,
-    'description' => 'Image Size (170 x 127)',
+    'description' => 'Image Size (170 x 96)',
     'display' => array(
       'amp' => array(
         'label' => 'above',
@@ -5177,6 +5227,8 @@ function features_for_story_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -5834,7 +5886,7 @@ function features_for_story_field_default_field_instances() {
         'weight' => 116,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -6742,6 +6794,57 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_technology_photogallery'.
+  $field_instances['node-story-field_technology_photogallery'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 132,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_technology_photogallery',
+    'label' => 'Technology Photogallery',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 113,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-city-field_city_states'.
   $field_instances['taxonomy_term-city-field_city_states'] = array(
     'bundle' => 'city',
@@ -6806,6 +6909,7 @@ function features_for_story_field_default_field_instances() {
   t('Courtesy');
   t('Date');
   t('Director');
+  t('Embed Webcast');
   t('Emoji position');
   t('Expert Name');
   t('Expert description');
@@ -6829,11 +6933,11 @@ function features_for_story_field_default_field_instances() {
   t('Highlights');
   t('Image');
   t('Image Size (1024 x 1024)');
-  t('Image Size (170 x 127)');
+  t('Image Size (170 x 96)');
   t('Image Size (370 x 208)');
   t('Image Size (483x271)');
   t('Image Size (647 x 363)');
-  t('Image Size (88 x 66)');
+  t('Image Size (88 x 50)');
   t('Issue based story');
   t('Issue date');
   t('Kicker image caption');
@@ -6899,6 +7003,7 @@ function features_for_story_field_default_field_instances() {
   t('Syndications photo');
   t('Tags');
   t('Tech Review Widget');
+  t('Technology Photogallery');
   t('Technology cons');
   t('Technology image gallery');
   t('Technology pros');

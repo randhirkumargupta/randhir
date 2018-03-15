@@ -54,7 +54,7 @@ function itg_video_get_sitemap_xmls() {
     try {
         $objects = $s3->getIterator('ListObjects', array(
             'Bucket' => $bucket,
-            "Prefix" => 's3fs-public/' . SITEMAP_BUCKET . '/'
+            "Prefix" => BUCKET_FOLDER.'/' . SITEMAP_BUCKET . '/'
         ));
         foreach ($objects as $object) {
             if (end(explode('.', $object['Key'])) == 'gz') {
@@ -146,31 +146,7 @@ function itg_video_send_dm_to_s3_for_octopus($bitrate_url, $video_name) {
     return $success_data;
 }
 
-/**
- * @argument struing $bitrate_url, $video_name
- * @return $result array
- */
-function itg_video_copy_onfile_to_anoter($video_name, $folder) {
-    $bucket = variable_get('aws_bucket');
-    $aws_access_key = variable_get('aws_access_key');
-    $aws_secret_key = variable_get('aws_secret_key');
-    $aws_region = variable_get('aws_region');
-    $aws_video_dir = variable_get('aws_video_dir');
-    $aws_video_dir_to_move = variable_get('aws_video_dir_to_move');
-    $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
-    $result = $s3->copyObject(array(
-        'Bucket' => $bucket,
-        'Key' => urldecode($aws_video_dir_to_move . $folder . '/' . $video_name),
-        'CopySource' => urldecode($bucket . '/' . $aws_video_dir . $video_name),
-    ));
-    if (!empty($result)) {
-        $keyvalue = urldecode($aws_video_dir . $video_name);
-        $result_delete = $s3->deleteObject(array(
-            'Bucket' => $bucket,
-            'Key' => $keyvalue
-        ));
-    }
-}
+
 
 function itg_video_check_file_existance($filename) {
     $bucket = variable_get('aws_bucket');

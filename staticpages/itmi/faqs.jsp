@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
+<title>India Today Media Institute(ITMI) - PG Program in Broadcast Journalism</title>
+<meta http-equiv="content-language" content="hi" />
+<meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
+<meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
+<link rel="apple-touch-icon" sizes="72x72" href="https://smedia2.intoday.in/indiatoday/itmi/itmi-72x72.png"/>
+<link rel="apple-touch-icon" sizes="114x114" href="https://smedia2.intoday.in/indiatoday/itmi/itmi-144x144.png"/>
+<link rel='shortcut icon' type='image/x-icon' href='https://smedia2.intoday.in/indiatoday/itmi/itmi.ico'/>
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<script>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<!-- Begin comScore Tag -->
+<script type='text/javascript'>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+</noscript>
+<!-- End comScore Tag -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-795349-72', 'intoday.in');
+  ga('send', 'pageview');
+</script>
+<link rel="alternate" media="only screen and (max-width: 640px)" href="/itmi/mobile/"/>
+<script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
+<script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
+</head><body>
+<div class="outerWrapper">
+  <?php include('header.php');?>
+  <?php include('banner.php');?>
+  <div class="contentCn">
+    <div class="wrapper">
+      <div class="leftBar">
+        <div class="text-containt"> 
+          <!--Body Content Start Here-->
+          <ul class="top-tab">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="424">&nbsp;</td>
+                <td width="66"><a href="https://aajtak.intoday.in/itmi" target=_blank ><img src="https://specials.intoday.in/aajtaknew/tvtmi/images/itmi.jpg" width="60"></a></td>
+              </tr>
+            </table>
+            <h2 class="faq">Frequently Asked Questions</h2>
+            <div class="navigationarea">
+              <div id='cssmenu'>
+                <ul>
+                  <li><a href="javascript:void(0);">I'm thinking of applying. Now, tell me...</a>
+                    <ul class="sub-menu">
+                      <li><a href="javascript:void(0);">1. What is the eligibility for applying to ITMI? </a>
+                        <ul class="sub-menu">
+                          <li>ITMI currently offers only postgraduate programmes. The eligibility is 15 years of schooling--usually a basic three- or four- or five-year degree. Three-(or more-)year, post-12th grade diplomas are also accepted. We do not believe that your grades at graduation can sufficiently reflect your ability as a communication professional, so ITMI does not impose "cut-off" marks percentages for eligibility.<a href="eligibility%20criteria_26072012.htm">For further information refer to Eligibility Criteria</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">2. Is there an age limit to apply to ITMI?</a>
+                        <ul class="sub-menu">
+                          <li>No. There is no restriction on work experience either.</li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">3. What is the admission process?</a>
+                        <ul class="sub-menu">
+                          <li>Once you apply online / offline, you're automatically eligible to go through the admission process. This includes an admission test in multiple locations, and two interviews on our Noida (National Capital Region) campus. You will be notified of the venue and time via email. The admission test is a qualifier; however, in exceptional cases, we may use our discretion to invite you for an interview based on your educational or work background or any exceptional ability. <a href="how-to-apply.html">For further information refer to How to Apply</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">4. What does the admission test cover, and how should I prepare for it?</a>
+                        <ul class="sub-menu">
+                          <li>The admission test covers<br>
+                            a) General Awareness (objective, mostly multiple-choice)<br>
+                            b) Language Ability (objective, many of them multiple-choice)<br>
+                            c) Written Expression (subjective, analytical writing)<br>
+                            <br>
+                            Applicants will be evaluated on use of language, ability to follow instructions in a logical way, reasoning ability, response to given situations, and awareness of recent events/incidents. We deliberately do not provide "sample questions", and do not encourage applicants to prepare specifically. As a suggestion, however, applicants are expected to be generally aware of the world around them. Everything else is more or less a test of suitability for a communication career. Questions may cover some media-related topics, but only those that are part of common knowledge.<br>
+                            <br>
+                            For c), we will place emphasis on developing an idea, and the strength of logic and reasoning, and how well the applicant analyses a question, a situation, an issue. An essay is expected to have a meaningful beginning, middle and end.</li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">5. Is the institute affiliated to any university?</a>
+                        <ul class="sub-menu">
+                          <li>No. ITMI is not currently affiliated to any university.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0);">OK, so I received a letter to appear at an interview. Help!</a>
+                    <ul class="sub-menu">
+                      <li><a href="javascript:void(0);">6. How should I prepare for the ITMI admission interviews?</a>
+                        <ul class="sub-menu">
+                          <li>The objective of the entire ITMI admission process is to evaluate an applicant's scope to be a good communicator and a communication professional--not to test his / her preeminence in it. Not knowing much about the media or about communication will not hamper your chances at all. However, our interviews will evaluate how well you do whatever you do. In other words, if you say you're a cricket player, you should be able to substantiate it. If you say you're interested in philately, you should be able to converse about the history of stamps.<br>
+                            <br>
+                            In addition, while we pay attention to clean clothes and grooming, we do not care how much you're "with it".<br>
+                            <br>
+                            Come to the interview armed with as much evidence of your ability as you can: Recommendations from prominent people, certificates, professional or academic articles published, videos, photo-features, or other creative work are all evidences we would love to see. Avoid manuscripts--unless you have strong reason to show them. Your portfolio should be meant to establish what you or others say about yourself.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0);">I got my admission letter from ITMI! But before I enroll...</a>
+                    <ul class="sub-menu">
+                      <li><a href="javascript:void(0);">7. Does the institute provide or facilitate education loans?</a>
+                        <ul class="sub-menu">
+                          <li>Once you're admitted, ITMI can recommend you for an education loan from your bank, and provide whatever documentation is required at the bank. Since we are an educational institute, we do not provide loans. </li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">8. What is the medium of instruction and testing at ITMI?</a>
+                        <ul class="sub-menu">
+                          <li>We do not believe non-proficiency in English necessarily precludes rewarding careers, and we make every  effort to admit trainees who are proficient in languages other than English, but with a working knowledge of English. However, keeping in mind ground realities:<br>
+                            <br>
+                            For the PGP in Broadcast Journalism, a significant percentage of admitted trainees are Hindi-speaking. We have encouraged this, since 3 of our 4 news TV channels are in Hindi. Most of our faculty members are at least bilingual, so instruction is often bilingual help trainees understand. Trainees may report and write answer sheets, project reports, scripts, etc, and speak (including anchor), in either Hindi or English.<br>
+                            <br>
+                            For the remaining programmes (the 2-year PGD in Mass Communication and the 1-year PGP in Media Studies), the medium of instruction and classroom sharing will be largely in English. We will make every effort to help trainees understand.</li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">9. I'm a media / mass communication / journalism graduate. Will I be repeating my subjects at ITMI?</a>
+                        <ul class="sub-menu">
+                          <li>Some of the subjects may sound familiar to you, but the development of ideas at the postgraduate level is expected to be much more sophisticated than at the undergraduate level. Because our approach is independent-analysis and research-driven, the methodology of your output, too, will be largely new to you.</li>
+                        </ul>
+                      </li>
+                      <li><a href="javascript:void(0);">10. Does the institute provide placements?</a>
+                        <ul class="sub-menu">
+                          <li>Please note that ITMI does not guarantee placements: being hired is a reflection of how well you develop your abilities here. However, we make every possible effort to place you well and gainfully in the communication industries. The scope for recruitment includes our own publications and channels.<br>
+                            <br>
+                            Each year, we will form a Placement Committee under the Dean's Chairmanship. This body will seek out opportunities in the industries and endeavour to provide platforms for recruitment, both on- and off-campus. We have been developing formal and informal associations with organizations that will consider ITMI trainees for hiring.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+          <br>
+          <br>
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <map name="Map" id="Map">
+            <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
+            <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="253,10,339,52" href="/" target="_blank">
+            <area shape="rect" coords="344,10,399,52" href="../aajtak.intoday.in" target="_blank">
+            <area shape="rect" coords="403,11,511,52" href="https://cosmo.intoday.in/" target="_blank">
+            <area shape="rect" coords="67,65,166,113" href="http://www.readersdigest.co.in/" target="_blank">
+            <area shape="rect" coords="170,65,230,110" href="https://aajtak.intoday.in/dilliaajtak/" target="_blank">
+            <area shape="rect" coords="312,64,350,112" href="https://aajtak.intoday.in/itmi" target="_blank">
+            <area shape="rect" coords="363,64,441,113" href="http://oyefm.in/" target="_blank">
+          </map>
+        </div>
+        
+        <!--BODY text-containt end--> 
+        
+      </div>
+      <div class="rightBar">
+        <iframe src="https://specials.intoday.in/specials/itmi/applynow_second.jsp?source=null"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
+        <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;"> </div>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+  <div class="footer">
+    <ul class="footer-link">
+      <li><a href="about_us.jsp">About US</a></li>
+      <li><a href="faculty-members.jsp">Faculty</a></li>
+      <li><a href="what-we-offer.jsp">Courses</a></li>
+      <li><a href="placements.jsp">Placement</a></li>
+      <li><a href="fees.jsp">Fees Structure</a></li>
+      <li><a href="#">Apply Now</a></li>
+      <li><a href="#">Others</a></li>
+    </ul>
+    <iframe width="98%" scrolling="no" height="170" frameborder="0" src="https://smedia2.intoday.in/microsites/common/common_it_footer.html"
+         style="margin-top: 20px;"></iframe>
+  </div>
+</div>
+<!--footer end-->
+
+</body>
+</html>

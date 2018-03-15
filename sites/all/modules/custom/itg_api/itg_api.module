@@ -53,6 +53,7 @@ function itg_api_cronapi($op, $job = NULL) {
   $items['itg-nifty-feed'] = array(
     'description' => 'Import Nifty Feed',
     'callback' => 'itg_nifty_feed',
+    'file' => 'include/itg_nifty_feed.inc',
   );
 
   return $items;
@@ -131,34 +132,6 @@ function itg_api_permission() {
  */
 function workbench_moderation_state_review() {
   return 'needs_review';
-}
-
-/**
- * Implement itg_nifty_feed
- */
-function itg_nifty_feed() {
-  $direc = getcwd() . '/sites/all/modules/custom/itg_api/feeds/nifty/';
-  $new_file_name = $direc . 'SensexNiftyFeed.txt';
-  $response_xml_data = get_content_from_xml_loc('http://businesstoday.accordhostings.com/SensexNiftyFeed.aspx');
-
-  if ($response_xml_data) {
-    $nifty_xml = simplexml_load_string($response_xml_data);
-    $final_output = '';
-    foreach ($nifty_xml as $nifty_value) {
-      $final_output .= $nifty_name = $nifty_value->name . ',';
-      $final_output .= 'Current Value : ' . $current_value = $nifty_value->current_value . ',';
-      $final_output .= 'Value Change : ' . $value_change = $nifty_value->value_change . ',';
-      $final_output .= 'Percentage Change : ' . $percentage_change = $nifty_value->percentage_change . '@';
-    }
-    unlink($new_file_name);
-    if (!file_exists($new_file_name)) {
-      $file = fopen($new_file_name, "w+");
-      fwrite($file, $final_output);
-      fclose($file);
-      chmod($file, 777);
-    }
-  }
-  print 'Saved Successfully';
 }
 
 /**
@@ -364,5 +337,43 @@ function itg_api_node_delete($node) {
     db_delete('itg_multi_byline_info')
         ->condition('nid', $node->nid)
         ->execute();
+  }
+}
+
+/**
+ * Implements itt_api_path_insert().
+ */
+function itg_api_path_insert($node) {
+  if ($node->type == 'story') {
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (function_exists('_remove_slash_from_string')) {
+      $edited_sef_url = _remove_slash_from_string($node->path['alias']);
+    }
+    if (!empty($edited_sef_url)) {
+      $lencount_sef = strlen($edited_sef_url);
+      if ($lencount_sef >= 160) {
+        $node_sef = substr($edited_sef_url, 0, 160);
+      }
+      else {
+        $node_sef = $edited_sef_url;
+      }
+    }
+    else {
+      $title_lenght = strlen($node->title);
+      if ($title_lenght >= 160) {
+        $node_sef = substr($node->title, 0, 160);
+      }
+      else {
+        $node_sef = _remove_slash_from_string($node->title);
+      }
+    }
+    $pathdata = get_path_from_category($getsection);
+    // Add static value for photo story.
+    $pathdata .= '/story';
+    // Add node title.
+    $pathdata .= '/' . trim($node_sef);
+    // Prepare SEO friendly node url
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
   }
 }

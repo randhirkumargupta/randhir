@@ -70,15 +70,15 @@ $config = array(
  // The filesystem path of the Drupal directory.
  //'drupalroot' => '/var/www/simplesamlphp/www/drupal-sso',
  //'drupalroot' => '/var/www/html/',
- 'drupalroot' => '/opt/httpd/vhosts/indiatodayonline.in/httpdocs/',
+ 'drupalroot' => '/opt/httpd/vhosts/staging.indiatodayonline.in/httpdocs/',
  // Whether to turn on debug
  'debug' => true,
 
- // the URL of the Drupal logout page
- 'drupal_logout_url' => 'http://uat-sso.indiatodayonline.in/user/logout',
+ // URL of the Drupal logout page
+ 'drupal_logout_url' => 'http://staging-sso.indiatodayonline.in/user/logout',
 
- // the URL of the Drupal login page
- 'drupal_login_url' => 'http://uat-sso.indiatodayonline.in/user',
+ // URL of the Drupal login page
+ 'drupal_login_url' => 'http://staging-sso.indiatodayonline.in/user',
 
  // Which attributes should be retrieved from the Drupal site.
 
@@ -251,8 +251,8 @@ $config = array(
     //  http://twitter.com/oauth_clients
     'twitter' => array(
         'authtwitter:Twitter',
-        'key' => 'zSOZD3vMS0JGOvQs2e7zcS5Y0',
-        'secret' => 'P3978MuHRkGWYIPXAToj3WpkAY0ICByDskZIZkgCt3GV8GR6aP',
+        'key' => 'KGWrGyf2Exw0Ah7g5WwnveNV8',
+        'secret' => 'Leh78TMDDIKBAmwT0cPLNux9Ve3aveUj6fm9VfpaAoAVt2kQmX',
 
         // Forces the user to enter their credentials to ensure the correct users account is authorized.
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate

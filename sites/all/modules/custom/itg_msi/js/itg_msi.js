@@ -55,6 +55,23 @@
           }
         });
       });
+      // Disable Submit Button
+      jQuery('.top-actions input[type="submit"]').click(function (){
+	   if(jQuery('.node-issue-form').valid()){
+		jQuery(this).css("background-color", "#d9d9d9"); 
+		jQuery(this).css("border-color", "#d9d9d9");
+		jQuery(this).parent().children().css( 'pointer-events', 'none' );
+		jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+	   }               
+	  });
+	  jQuery('.form-actions input[type="submit"]').click(function (){
+	   if(jQuery('.node-issue-form').valid()){
+		jQuery(this).css("background-color", "#d9d9d9"); 
+		jQuery(this).css("border-color", "#d9d9d9");
+		jQuery(this).parent().children().css( 'pointer-events', 'none' );
+		jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+	   }               
+	  });
     }
  };
 })(jQuery, Drupal, this, this.document);

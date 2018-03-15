@@ -115,167 +115,21 @@ function itg_layout_manager_menu() {
     'page callback' => 'itg_state_election',
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
   );
 
   $items['section-card-refresh'] = array(
     'page callback' => 'itg_section_card_refresh',
     //'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
   );
 
   return $items;
 }
 
-/**
- * This function use for make state election page
- */
-function itg_state_election() {
-  global $base_url;
-
-  $section = arg(1);
-  $state = arg(2);
-  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
-  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
-  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-  foreach ($terms as $values) {
-    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
-
-      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
-      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
-    }
-  }
-
-
-  make_graph();
-
-  return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
-}
-
-function make_graph() {
-  drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
-  $section = arg(1);
-  $state = arg(2);
-  $data = itg_widget_get_graph_data_by_state($section, $state);
-  foreach ($data as $index => $row) {
-    $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-
-    drupal_add_js(' jQuery(function() {
-                   
-            var ids = "container_' . $index . '";
-            var data =' . $jsondata . ';
-            var combined = [];
-            var colorArray = [];
-            var aName = data.election.aName;
-            var aSeats = data.election.aSeats;
-            var aSeatOthers = data.election.aSeatOthers;
-            var aappos = 0;
-            var aapcolor = "";
-            var aapname = "";
-            var aapseats = "";
-            var ty = 0;
-            for (var x = 0; x < data.election.items.length; x++)
-            {
-                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
-                    colorArray[ty] = data.election.items[x].pColor;
-                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
-                    ty++;
-                } else {
-                    aapcolor = data.election.items[x].pColor;
-                    aappos = data.election.items[x].pColor;
-                    aapname = data.election.items[x].pName;
-                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
-                }
-            }
-            var showtooltip = true;
-            if (aSeatOthers == 0) {
-                jQuery("#resultawaited").show();
-                colorArray[ty] = "#A2A9AD";
-                combined.push(["Result Awaited", "1"]);
-                showtooltip = false;
-            } else {
-
-                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
-                combined.push([aapname, aapseats]);
-            }
-
-
-            var combined = [];
-            var colorArray = [];
-            var aName = data.election.aName;
-            var aSeats = data.election.aSeats;
-            var aSeatOthers = data.election.aSeatOthers;
-            var aappos = 0;
-            var aapcolor = "";
-            var aapname = "";
-            var aapseats = "";
-            var colindex = 0;
-            var shets =[];
-            var apname =[];
-            var apcolor =[];
-            for (var x = 0; x < data.election.items.length; x++)
-            {
-                if (data.election.items[x].pName.toLowerCase() != "bjp+") {
-                    colorArray[colindex] = data.election.items[x].pColor;
-                    apname.push(data.election.items[x].pName);
-                    apcolor.push(data.election.items[x].pColor);
-                    shets.push(parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
-                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
-                    colindex++;
-                } else {
-                    aapcolor = data.election.items[x].pColor;
-                    aappos = data.election.items[x].pColor;
-                    aapname = data.election.items[x].pName;
-                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
-                }
-            }
-            var showtooltip = true;
-            if (aSeatOthers == 0) {
-                jQuery("#resultawaited").show();
-                colorArray[colindex] = "#A2A9AD";
-                combined.push(["Result Awaited", "1"]);
-                showtooltip = false;
-            } else {
-
-                colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
-                combined.push([aapname, aapseats]);
-            }
-     loadStateTable(apname,shets,apcolor);
-           jQuery("#" + ids).highcharts({
-      colors: colorArray,
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 0,
-            plotShadow: false
-        },
-        title: {
-           text: "Total "+aSeatOthers +"/"+ aSeats,
-        },
-       tooltip: {
-                    enabled: showtooltip,
-                    pointFormat: "<b>{point.y}</b>"
-                },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: "pointer",
-                dataLabels: {
-                 enabled: false
-                }
-            }
-        },
-        
-        series: [{
-            type: "pie",
-            name: "Seats",
-			data: combined
-        }]
-    });
-                
-    });', array('type' => 'inline', 'scope' => 'footer'));
-  }
-}
 
 /**
  * Implements hook_block_info().
@@ -367,6 +221,11 @@ function itg_layout_manager_block_info() {
     'info' => t('election widget block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['latest_headlines404_block'] = array(
+    'info' => t('Latest Headlines'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -381,10 +240,20 @@ function itg_layout_manager_block_view($delta = '') {
 
   switch ($delta) {
     case 'header_block':
-
-      $arg = arg();
+      $arg = arg();      
+      if (function_exists('get_section_header_menu_and_content')) {
+        $section_header = get_section_header_menu_and_content($arg);
+        if ($section_header) {
+          $block['content'] = theme($section_header['template_name'], array('data' => $section_header));
+          break;
+        }
+      }
+      module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
+      $detect = new Mobile_Detect;
+      $data['detect'] = $detect->isMobile();
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
+      $data['itg_top_manu_header_second'] = menu_tree('menu-itg-top-menu-header-second');
 
       if (function_exists('get_second_level_menu')) {
         $second_level_menu = get_second_level_menu();
@@ -438,13 +307,18 @@ function itg_layout_manager_block_view($delta = '') {
         $fin = arg(2);
       }
 
-
-
       $settings['uid'] = $user->uid ? $user->uid : 0;
       $settings['check_sso_url'] = $fin;
       $settings['user_arg'] = arg(0);
       $settings['change_arg'] = $change_arg;
       $settings['base_url'] = $base_url;
+      $settings['sso_url'] = trim(PARENT_SSO);
+      $settings['front_url'] = base64_encode(trim(FRONT_URL));
+      /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
+         $settings['sso_login_check'] = 'yes';
+      } else{
+          $settings['sso_login_check'] = 'no';
+      }*/
       if (!empty(variable_get('logoutsec_time'))) {
         $settings['logoutsec'] = variable_get('logoutsec_time');
       } else {
@@ -453,6 +327,25 @@ function itg_layout_manager_block_view($delta = '') {
       drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
       drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE, 'defer' => TRUE));
       
+      /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {       
+        $js_check_user = 'jQuery(document).ready(function() {
+                            try {
+                                jQuery.ajax({
+                                    url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
+                                    type: "post",
+                                    data: "",
+                                    beforeSend: function() {},
+                                    success: function(t) {
+                                        0 != t.length && jQuery(".user-menu").html(t)
+                                    },
+                                    error: function(t, s, e) {
+                                        console.log(t), console.log("Details: " + s + "\nError:" + e)
+                                    }
+                                })
+                            } catch (t) {}
+                        });';
+         drupal_add_js($js_check_user, array('type' => 'inline', 'scope' => 'footer'));
+      }*/
       /* end here */
 
       $data = get_itg_footer_menu();
@@ -465,6 +358,7 @@ function itg_layout_manager_block_view($delta = '') {
       $arg = arg();
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
+      $data['itg_top_manu_header_second'] = menu_tree('menu-itg-top-menu-header-second');
 
       if (function_exists('get_second_level_menu')) {
         $second_level_menu = get_second_level_menu();
@@ -606,6 +500,7 @@ function itg_layout_manager_block_view($delta = '') {
           'calendar/0/0/magazine.html' => t('Magazine'),
           'rss' => t('RSS'),
           'poll' => t('Polls'),
+          'sitemap' => t('Sitemap'),
         );
         if (function_exists('frontend_breadcrumb_display')) {
           if (arg(0) == 'calendar') {
@@ -632,6 +527,14 @@ function itg_layout_manager_block_view($delta = '') {
       $election_widgets_form = drupal_get_form('election_widgets_search_form');
       $widget_array['election_widgets_form'] = drupal_render($election_widgets_form);
       $block['content'] = theme('layout_election_widgets_block', array('data' => $widget_array));
+      break;
+    
+    case 'latest_headlines404_block':
+      if (function_exists(itg_seo_latest_headlines)) {
+        $latest_headlines = itg_seo_latest_headlines();
+      }
+      
+      $block['content'] = $latest_headlines;
       break;
   }
 
@@ -775,84 +678,13 @@ function itg_layout_clean_url($string) {
   return strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', $string)); // Removes special chars.
 }
 
-/**
- * Implements itg_layout_gethomecarddata_new_pre().
- * {@inheritdoc}
- */
-function itg_layout_gethomecarddata_new_pre($sectinno) {
-
-  global $theme;
-
-  if ($sectinno >= '25') {
-    $sectinno = $sectinno + 1;
-  }
-
-  $arg = arg();
-  $widget_name1 = 'itg-block-' . ($sectinno);
-  $widget_name2 = 'itg-block-' . ($sectinno + 1);
-  $widget_name3 = 'itg-block-' . ($sectinno + 2);
-  $block_name = array($widget_name1, $widget_name2, $widget_name3);
-  $section = 'home_page';
-  $template_name = 'page--front';
-
-  $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-
-  if ($data == "" && $sectinno < 80) {
-    return itg_layout_gethomecarddata_new_pre($sectinno + 3);
-  }
-
-  $widget_data = $data;
-
-  if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
-    return 1;
-  }
-  else {
-    return 0;
-  }
-}
-
-/**
- * Implements itg_layout_getsectioncarddata_new_pre().
- * {@inheritdoc}
- */
-function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
-
-  global $theme;
-
-  if ($sectinno >= '25') {
-    $sectinno = $sectinno + 1;
-  }
-
-  $arg = arg();
-  $widget_name1 = 'itg-block-' . ($sectinno);
-  $widget_name2 = 'itg-block-' . ($sectinno + 1);
-  $widget_name3 = 'itg-block-' . ($sectinno + 2);
-  $block_name = array($widget_name1, $widget_name2, $widget_name3);
-
-  $template_name = 'page--section_default';
-
-  $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
-
-  if ($data == "" && $sectinno < 80) {
-    return itg_layout_getsectioncarddata_new_pre($sectinno + 3, $section);
-  }
-
-  $widget_data = $data;
-
-  if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
-    return 1;
-  }
-  else {
-    return 0;
-  }
-}
 
 /**
  * Implements hook_manager_preprocess_page().
  * {@inheritdoc}
  */
 function itg_layout_manager_preprocess_page(&$vars) {
-  global $theme;
+  global $user, $theme;
   $arg = arg();
 
   $is_fron_page = drupal_is_front_page();
@@ -867,6 +699,9 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data['personlization'] = get_itg_widget('personlization');
     $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
+    
+    //js for personalization_slider
+    //drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('scope' => 'footer', 'weight' => 5));
     drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
   }
 
@@ -905,17 +740,36 @@ function itg_layout_manager_preprocess_page(&$vars) {
 }
 
 /**
- * callback for section card refresh
+ * Function which is used to render load more data.
  */
-function itg_section_card_refresh() {
-  $data = explode("_", $_REQUEST['card_val']);
-  $section_id = $data[1];
-  $widget_style = '';
-  $block_id = $data[2];
-  $data = create_setion_widgets($section_id, $widget_style, $block_id);
-  if (function_exists('itg_akamai_setting_ttl_for_section_cart')) {
-    itg_akamai_setting_ttl_for_section_cart();
+function itg_layout_gethomecarddata_new_pre($sectinno) {
+
+  global $theme;
+
+  if ($sectinno >= '25') {
+    $sectinno = $sectinno + 1;
   }
-  echo $data;
-  exit;
+
+  $arg = arg();
+  $widget_name1 = 'itg-block-' . ($sectinno);
+  $widget_name2 = 'itg-block-' . ($sectinno + 1);
+  $widget_name3 = 'itg-block-' . ($sectinno + 2);
+  $block_name = array($widget_name1, $widget_name2, $widget_name3);
+  $section = 'home_page';
+  $template_name = 'page--front';
+
+  $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
+
+  if ($data == "" && $sectinno < 80) {
+    return itg_layout_gethomecarddata_new_pre($sectinno + 3);
+  }
+
+  $widget_data = $data;
+
+  if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
 }

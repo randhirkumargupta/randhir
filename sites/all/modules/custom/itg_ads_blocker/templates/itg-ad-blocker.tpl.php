@@ -19,7 +19,7 @@
         </ul>
       </div>
       <div class='show_instruction' id='tab11'>
-        <h2><img src='http://media2.intoday.in/indiatoday/1.0.4/resources/css/images/abp.jpg'/> - Using AdBlocks Plus</h2>
+        <h2><img src='http://media2.intoday.in/indiatoday/1.0.4/resources/css/images/abp.jpg' alt="" title=""/> - Using AdBlocks Plus</h2>
         <ul>
           <li><b><?php print t('STEP 1');?> -</b><?php print t('Click on the AdBlock Plus icon on the top right of your browser'); ?></li>
           <li><b><?php print t('STEP 2'); ?> -</b><?php print t(' A drop-down menu will appear with a check mark followed by'); ?><strong><?php print t('Enabled on this site'); ?></strong></li>
@@ -28,11 +28,11 @@
         </ul>
         <br/>
         <br/>
-        <h2><img src='http://media2.intoday.in/indiatoday/1.0.4/resources/css/images/chrome_icon.jpg'/> - <?php print t('Using Chrome adblock extension'); ?> </h2>
+        <h2><img src='http://media2.intoday.in/indiatoday/1.0.4/resources/css/images/chrome_icon.jpg' alt="" title=""/> - <?php print t('Using Chrome adblock extension'); ?> </h2>
         <ul>
           <li><b><?php print t('STEP 1');?> -</b><?php print t('Click on the hand icon for adblock extension, on the top right corner of your browser'); ?></li>
           <li><b><?php print t('STEP 2');?> -</b> <?php print t('A drop-down menu will appear'); ?></li>
-          <li><b><?php print t('STEP 3');?> -</b> <?php print t('Click the');?> <strong><?php print t("Don't run on pages on this domain");?></strong><?php printt('option on the drop down');?> </li>
+          <li><b><?php print t('STEP 3');?> -</b> <?php print t('Click the');?> <strong><?php print t("Don't run on pages on this domain");?></strong><?php print('option on the drop down');?> </li>
           <li><b><?php print t('STEP 4');?> -</b> <?php print t('Once clicked a settings popup will appear');?></li>
           <li><b><?php print t('STEP 5');?> -</b> <?php print t('Click Exclude');?> </li>
           <li><b><?php print t('STEP 6');?> -</b> <?php print t('Refresh the page or go to home Page, to access indiatoday.in');?></li>

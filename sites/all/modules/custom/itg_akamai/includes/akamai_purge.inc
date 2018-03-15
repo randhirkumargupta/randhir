@@ -30,18 +30,21 @@ class ItgAkamaiUtility {
 
       try {
         foreach ($data as $fields) {
-          $akamai_activity = db_insert('itg_akamai_log')
-              ->fields($fields)
-              ->execute();
+          if(is_array($fields)) {
+            $akamai_activity = db_insert('itg_akamai_log')
+                ->fields($fields)
+                ->execute();
+          }
         }
       }
       catch (Exception $e) {
-        die($e->getMessage());
+        watchdog('ITG Akamai Error', 'Error:' . $e->getMessage());
       }
     }
   }
 
-  static function itgAkamaiSetDataForLog($request, $response, $uid, $status, $purge_id) {
+  static function itgAkamaiSetDataForLog($request, $response, $uid, $status,
+      $purge_id) {
     $data = array();
     $data['timestamp'] = time();
     if ($status == 201) {
@@ -57,7 +60,8 @@ class ItgAkamaiUtility {
     return $data;
   }
 
-  static function itgAkamaiGetDataForLog($urls, $request, $response, $uid, $status, $purge_id) {
+  static function itgAkamaiGetDataForLog($urls, $request, $response, $uid,
+      $status, $purge_id) {
     $data = array();
     foreach ($urls as $url) {
       $data[] = array(

@@ -1,10 +1,16 @@
 
 
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
     <div class="dont-miss top-video">
         <ul>
             <?php foreach ($data as $key => $node_data) { ?>
-                <li class="<?php print $node_data['node_load_data']->type ?> dont-miss-listing">
+                <li <?php echo $data_tb_region_item;?> class="<?php print $node_data['node_load_data']->type ?> dont-miss-listing">
                     <?php if (!empty($node_data['si_file_uri'])) { ?>            
                         <div class="dm-pic">
                             <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']); ?>">
@@ -18,7 +24,7 @@
                         ?>
                         <div class="dm-pic">
                             <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']); ?>">
-                                <img width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' alt="" />
+                              <img width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' alt="" title="" />
                             </a>                            
                         </div>
                         <?php } ?>

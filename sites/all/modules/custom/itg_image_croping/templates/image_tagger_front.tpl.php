@@ -7,7 +7,7 @@
 
 <div id="container">
     <div id="imgtag">
-        <img id="" src="<?php echo $url;?>" alt="" /> 
+      <img id="" src="<?php echo $url;?>" alt="" title="" /> 
         <div id="tagbox">
         </div>
     </div> 
@@ -21,9 +21,9 @@
 
 <?php
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/jquery.min.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_image_front.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
 
 print $js = drupal_get_js('content');
 ?>

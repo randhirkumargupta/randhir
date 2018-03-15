@@ -14,11 +14,11 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
     if (is_array($info)) {
         $range = 3;
         // set range of data here
-        $rangearray = array('auto-road-trip' => 2,
+        $rangearray = array('auto-road-trip' => 4,
           'auto-tips-and-tricks' => 3,
           'edu-exam' => 4,
           'budget-reactions' => 4,
-          'home-shows' => 4,
+          'home-shows' => 5,
           'election-other-story' => 4,
           'home-watch' => 3,
           'india-inc-on-budget' => 4,
@@ -30,7 +30,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'edu-sample-paper' => 5,
           'edu-from-the-magazine' => 4,
           'edu-gov-jobs' => 4,
-          'buying-guid' => 6,
+          'buying-guid' => 7,
           'standpoint' => 5,
           'edu-notification' => 4,
           'tech-tips' => 4,
@@ -40,7 +40,8 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'movies-lifestyle' => 7,
           'movies-celebrities' => 7,
           'oscar-news' => 5,
-          'oscar-features' => 6);
+          'oscar-features' => 6,
+          'news-section' => 8);
 
         if (array_key_exists($widget_style, $rangearray)) {
             $range = $rangearray[$widget_style];

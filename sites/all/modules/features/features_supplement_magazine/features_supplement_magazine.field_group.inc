@@ -26,6 +26,8 @@ function features_supplement_magazine_field_group_info() {
       0 => 'field_issue_magazine',
       1 => 'field_issue_supplement',
       2 => 'field_issue_title',
+      3 => 'field_issue_publish',
+      4 => 'field_show_web_exclusive',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -124,7 +126,7 @@ function features_supplement_magazine_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'SEO Meta Tags',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'metatags',
       1 => 'path',
@@ -331,7 +333,8 @@ function features_supplement_magazine_field_group_info() {
       0 => 'field_supp_issue',
       1 => 'field_supp_publish',
       2 => 'field_supp_select_magazine',
-      3 => 'title',
+      3 => 'field_supplement_name',
+      4 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(

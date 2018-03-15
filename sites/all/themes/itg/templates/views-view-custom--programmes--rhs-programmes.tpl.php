@@ -4,22 +4,21 @@
         <?php
         global $base_url;
         foreach ($rows as $row) :
+          $view = views_get_view('programme_content');
+		  $args = array($row['tid']);
+		  $view->preview('block' , $args);
+		  $view_result = $view->result;
+		  $recent_video_under_cat = $view_result[0]->nid;
           if (function_exists('itg_category_manager_term_state')) {
             $status = itg_category_manager_term_state($row['tid']);
           } else {
             $status = 0;
           }
-          if ($status) {
-            $view = views_get_view('programme_content');
-            $args = array($row['tid']);
-            $view->preview('block', $args);
-            $view_result = $view->result;
-            $recent_video_under_cat = !empty($view_result[0]->nid) ? $view_result[0]->nid : '';
-            ?>
+          if ($status) { ?>
             <li>
                 <h4>
                     <?php if (!empty($row['field_cm_display_title'])) : ?>
-                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
                     <?php endif; ?>
                 </h4>
                 <span class="time">
@@ -40,22 +39,28 @@
 
                 <div class="detail">
                     <div class="pic">
-                        <?php if (isset($row['field_sponser_logo'])) : ?>
+						<?php if (isset($row['field_programme_category_image'])) : ?>
+                          <?php
+                          $img = $row['field_programme_category_image'];
+                          ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
+                        <?php elseif (isset($row['field_sponser_logo'])) : ?>
                           <?php
                           $img = $row['field_sponser_logo'];
                           ?>
-                          <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
                         <?php else : ?>
                           <?php
-                          $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' />";
+                          $img = "<img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') ."' alt='' title='' />";
                           ?>
-                          <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
 
                         <?php endif; ?>
                     </div>
                     <div class="discription">
                         <?php if (!empty($row['description'])) : ?>
-                          <?php print __html_output_with_tags($row['description']); ?>
+                          <?php 
+                          echo html_entity_decode(htmlspecialchars_decode($row['description'], ENT_QUOTES)); ?>
                         <?php endif; ?>
 
                     </div>

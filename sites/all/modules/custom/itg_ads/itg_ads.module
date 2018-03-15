@@ -12,7 +12,7 @@
  * {@inheritdoc}
  *
  * ##Code started for new block creation as per suggested sheet 6 block name have been given as follows##
- * 1.Page pusher 1x1
+ * 1.Page pusher 1x1.
  * 2.Overlay 1x1
  * 3.Super Banner (Top Nav) 728x90
  * 4.Super Banner (Bottom nav) 728x90
@@ -77,11 +77,14 @@ function itg_ads_block_view($delta = '') {
   if (isset($current_path) && !empty($current_path)) {
     $current_path_array = explode('/', $current_path);
   }
+  
+  global $theme;
+  
   switch ($delta) {
 
     case 'ads_page_pusher_1x1':
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show') {
+      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $theme == 'itgadmin') {
         $block['content'] = '';
       }
       else {
@@ -91,9 +94,9 @@ function itg_ads_block_view($delta = '') {
       break;
 
     // For Overlay 1x1
-    case 'ads_overlay_1x1':
+    case 'ads_overlay_1x1':      
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show') {
+      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $theme == 'itgadmin') {
         $block['content'] = '';
       }
       else {
@@ -105,7 +108,7 @@ function itg_ads_block_view($delta = '') {
     // For Super Banner (Top Nav) 728x90
     case 'ads_super_banner_top_nav_728x90':
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show') {
+      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $theme == 'itgadmin') {
         $block['content'] = '';
       }
       else {
@@ -117,20 +120,21 @@ function itg_ads_block_view($delta = '') {
     // For Super Banner (Bottom nav) 728x90
     case 'ads_super_banner_bottomnav728x90':
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show') {
+      if ($current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $theme == 'itgadmin') {
         $block['content'] = '';
       }
       else {
         $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
         $block['content'] = $ad_script;
-      }break;
+      }
+      break;
 
     // Medium Rectangle-RHS1-300x250
     case 'ads_medium_rectangl_rhs1_300x250':
-      $status = drupal_get_http_header("status");
-
+      $status = drupal_get_http_header("status");      
+      
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order' || $current_path_final == 'snap-post') {
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order' || $current_path_final == 'snap-post' || $theme == 'itgadmin') {
         $block['content'] = '';
       }
       else {
@@ -143,7 +147,7 @@ function itg_ads_block_view($delta = '') {
     case 'ads_medium_rectangl_rhs2_300x250':
       $status = drupal_get_http_header("status");
       $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
-      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order' || $current_path_final == 'snap-post') {
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order' || $current_path_final == 'snap-post' || $theme == 'itgadmin') {
         $block['content'] = '';
       }
       else {
@@ -175,7 +179,13 @@ function itg_ads_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-
+  // Implementing the menu item for ads.txt.
+  $items['ads.txt'] = array(
+    'title' => '',
+    'description' => 'Show ads data through webservice',
+    'page callback' => 'itg_ads_txt',
+    'access callback' => TRUE,
+  );
   return $items;
 }
 
@@ -915,6 +925,8 @@ function get_header_body_start_end_code() {
   }
   else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
+    $node_nid = $node_object->nid;
+    $node_type = $node_object->type;
     $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
     if (isset($tid) && !empty($tid)) {
       $taxonomy_array = taxonomy_get_parents_all($tid);
@@ -950,9 +962,13 @@ function get_header_body_start_end_code() {
           if (strpos($header['value'], '[ITGD:ads:1]') && strpos($header['value'], '[ITGD:ads:2]')) {
             $section_header_s = 'ROS';
             $category_header_s = 'ROS';
+            $ads3value = '';
+            $ads4value = '';
             if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
-              $section_geader_s = $header_section['section_header_s'];
-              $category_geader_s = $header_section['category_geader_s'];
+              $section_geader_s = str_replace("'", "", $header_section['section_header_s']);
+              $category_geader_s = str_replace("'", "", $header_section['category_geader_s']);
+              $ads3value = str_replace("'", "", $header_section['node_type']);
+              $ads4value = str_replace("'", "", $header_section['node_id']);
             }
             if (strpos($header['value'], '[ITGD:ads:1]')) {
               $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
@@ -960,6 +976,12 @@ function get_header_body_start_end_code() {
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
             }
+            if (strpos($header['value'], '[ITGD:ads:3]')) {
+              $header['value'] = str_replace('[ITGD:ads:3]', $ads3value , $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:4]')) {
+              $header['value'] = str_replace('[ITGD:ads:4]', $ads4value , $header['value']);
+            }         
           }
           $adsheaderbody['header'][] = $header['value'];
         }
@@ -972,15 +994,25 @@ function get_header_body_start_end_code() {
           if (strpos($header['value'], '[ITGD:ads:1]') && strpos($header['value'], '[ITGD:ads:2]')) {
             $section_header_s = 'ROS';
             $category_header_s = 'ROS';
+            $ads3value = '';
+            $ads4value = '';
             if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
-              $section_geader_s = $header_section['section_header_s'];
-              $category_geader_s = $header_section['category_geader_s'];
+              $section_geader_s = str_replace("'", "", $header_section['section_header_s']);
+              $category_geader_s = str_replace("'", "", $header_section['category_geader_s']);
+              $ads3value = str_replace("'", "", $header_section['node_type']);
+              $ads4value = str_replace("'", "", $header_section['node_id']);
             }
             if (strpos($header['value'], '[ITGD:ads:1]')) {
               $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
             }
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:3]')) {
+              $header['value'] = str_replace('[ITGD:ads:3]', $ads3value , $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:4]')) {
+              $header['value'] = str_replace('[ITGD:ads:4]', $ads4value , $header['value']);
             }
           }
           $adsheaderbody['header'][] = $header['value'];
@@ -1156,10 +1188,56 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 		if (count($term_data) > 1 && !empty($term_data[0]->name)) {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
 			$return['category_geader_s'] = $taxname1.ucfirst($node_object->type);
+      $return['node_type'] = ucfirst($node_object->type);
+      $return['node_id'] = ucfirst($node_object->nid);
 		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
-			$return['category_geader_s'] = 'ROS';
+			$return['category_geader_s'] = (!empty($taxname1) ? ($taxname1.ucfirst($node_object->type)) : 'ROS');
+      $return['node_type'] = ucfirst($node_object->type);
+      $return['node_id'] = ucfirst($node_object->nid);
 		}
 	}
 	return $return;
+}
+
+/*
+ * Page callback of ads.txt
+ * @return String
+*/
+function itg_ads_txt() {
+  header("Content-Type: text/plain");
+  $adsApiUrl = 'http://feeds.intoday.in/ad_txt_manager/api/api.php?site_id=1';
+  $data = getAdsTxtFeed( $adsApiUrl );
+  echo $data['content'];
+  drupal_exit();
+}
+
+/**
+ * Get a web file (HTML, XHTML, XML, image, etc.) from a URL.  Return an
+ * array containing the HTTP server response header fields and content.
+ */
+function getAdsTxtFeed($url) {	
+  $options = array(
+    CURLOPT_RETURNTRANSFER => true,     // return web page
+    CURLOPT_HEADER         => false,    // don't return headers
+    CURLOPT_FOLLOWLOCATION => true,     // follow redirects
+    CURLOPT_ENCODING       => "",       // handle all encodings
+    CURLOPT_USERAGENT      => "spider", // who am i
+    CURLOPT_AUTOREFERER    => true,     // set referer on redirect
+    CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
+    CURLOPT_TIMEOUT        => 120,      // timeout on response
+    CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
+    CURLOPT_SSL_VERIFYPEER => false     // Disabled SSL Cert checks
+  );
+  $ch      = curl_init( $url );
+  curl_setopt_array( $ch, $options );
+  $content = curl_exec( $ch );
+  $err     = curl_errno( $ch );
+  $errmsg  = curl_error( $ch );
+  $header  = curl_getinfo( $ch );
+  curl_close( $ch );
+  $header['errno']   = $err;
+  $header['errmsg']  = $errmsg;
+  $header['content'] = $content;
+  return $header;
 }

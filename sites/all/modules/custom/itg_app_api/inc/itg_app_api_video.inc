@@ -602,7 +602,6 @@ function programCategoryListlPageRerourceValue($token) {
     $program_key = "itg_programmes_order_by";
     //$Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
     $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1208173,1207755,1206960,1207972,1208061);
-    
 
     // list array building
     $data = generateProgramSectionList($Program_section_list);
@@ -783,7 +782,7 @@ function generateVideoDetail($nid) {
             $changed_datetime = "";
         }
         $title = strip_tags($title);
-        //$desc = strip_tags($desc);
+        $desc = strip_tags($desc);
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
         $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -1017,18 +1016,12 @@ function featuresWidgetData() {
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
 
     //end
-    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
+    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $key => $value) {
-        $type = $value['type'];
-        if($type !="videogallery" || $type !="photogallery" || $type !="story"){
-            unset($result[$key]);
-        }
-    }
     return $result;
 }
 
@@ -1118,13 +1111,13 @@ function topstoriesList($source) {
     // loop on top stories.
     foreach ($result as $key => $value) {
         // varibale for json tag
-        $title = strip_tags($value['title']);
+        $title = $value['title'];
         $type = $value['type'];
         $nid = $value['nid'];
         $created = $value['created'];
         $changed = $value['changed'];
         $tid = $value['tid'];
-        $field_story_kicker_text_value = strip_tags($value['field_story_kicker_text_value']);
+        $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
 
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;

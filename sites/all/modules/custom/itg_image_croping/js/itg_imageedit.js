@@ -45,8 +45,6 @@ jQuery(document).ready(function() {
 
                     },
                     error: function(xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
                     }
 
                 });
@@ -104,8 +102,6 @@ jQuery(document).ready(function() {
 
                 },
                 error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
         } else {
@@ -193,8 +189,6 @@ function viewtag(pic_id) {
             hideloader();
         },
         error: function(xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError:" + err);
         }
     });
 

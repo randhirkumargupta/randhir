@@ -280,14 +280,10 @@ function _map_xml_all_category(&$stories, $pti_section = NULL) {
           if ($k != 1) {
             $str = '#';
           }
-          
-          //$orignal_category .= $str.get_itg_destination_id($table_name, $source_cid);
           $orignal_category[] = get_itg_destination_id($table_name, $source_cid);
-          //$orignal_category[] = implode('#', $orignal_category);
         }
         $k++;
       } 
-       //$stories->categories->category[$i] = $orignal_category;
       $orignal_categories = array_filter($orignal_category);
       $cate_val = implode('#', $orignal_categories);
       $cat_rtrim_value = rtrim($cate_val, '#');

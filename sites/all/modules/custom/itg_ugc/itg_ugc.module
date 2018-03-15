@@ -615,9 +615,11 @@ function ugc_form_submit_handler($form, &$form_state) {
 
   if (function_exists('mongodb')) {
     $con = mongodb();
+    if (isset($con)) {
     $people = $con->ugc_details;
     $qry = array("unid" => $unique_id, "name" => $name, "email" => $email, "city" => $city, "section" => $section, "content_type" => $content_type, "title" => $title, "description" => $description, "video" => $video, "audio" => $audio, "publish_date" => $publish_date, "publish_date_time" => $publish_date_time, "publish_status" => "", "updated_by" => "", "status" => 1, "rejected_date" => "", "uid" => $user->uid, "multiple_image" => $ins_image, "image_caption" => $multiple_caption, "review_status" => "");
     $result = $people->insert($qry);
+    }
   }
 
   if (isset($_SESSION['messages']['status'])) {
@@ -763,7 +765,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     // validate if video field is blank
     if (($type == 'videogallery')) {
       if (empty($upload_video)) {
-        form_set_error('field_astro_video', t("Video field is required."));
+        form_set_error('field_astro_video', t("Video field is required, Only files with the following extensions are allowed: mp4"));
       }
     }
 
@@ -797,7 +799,7 @@ function itg_ugc_node_status_update($nid, $title, $type = NULL, $status = NULL, 
   global $user;
   if (function_exists('mongodb')) {
     $con = mongodb();
-    if ($con) {
+    if (isset($con)) {
       if (function_exists('itg_ugc_content_details')) {
         if (!empty($title)) {
           $ugc_content_details = itg_ugc_content_details($nid, 1);
@@ -951,7 +953,7 @@ function itg_ugc_node_insert($node) {
       }
     }
     if ($source_type == 'UGC' && !empty($source_id)) {
-      watchdog('ugc_insert', 'called');
+      //watchdog('ugc_insert', 'called');
       itg_ugc_node_status_update($source_id, $title, $node->type, $node->status, $node->nid);
     }
   }
@@ -979,7 +981,7 @@ function itg_ugc_node_update($node) {
       }
     }
     if ($source_type == 'UGC' && !empty($source_id)) {
-      watchdog('ugc_update', 'called');
+     // watchdog('ugc_update', 'called');
       itg_ugc_node_status_update($source_id, $title, $node->type, $node->status, $node->nid);
     }
   }
@@ -1032,7 +1034,7 @@ function itg_ugc_view_content($unique_id) {
   if (!empty($unique_id)) {
     if (function_exists('mongodb')) {
       $con = mongodb();
-      if ($con) {
+      if (isset($con)) {
         $pid = new MongoId($unique_id);
         $people = $con->ugc_details;
         $userData = $people->find(array("_id" => $pid))->limit($limit);
@@ -1055,7 +1057,7 @@ function itg_ugc_view_content($unique_id) {
           }
           if (!empty($final_view['image'])) {
             $file = file_load($final_view['image']);
-            $output.= '<li>' . '<strong>Image :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '"/></span></li>';
+            $output.= '<li>' . '<strong>Image :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '" title="" /></span></li>';
           }
           if (!empty($final_view['multiple_image'])) {
             $myimgArray = explode(',', $final_view['multiple_image']);
@@ -1064,7 +1066,7 @@ function itg_ugc_view_content($unique_id) {
             foreach ($myimgArray as $key => $value) {
               $file = file_load($value);
               $caption = 'caption : ' . $myimgcaption[$key];
-              $output.= '<li>' . '<strong>Image' . $img_no . ' :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '"/></span><span>' . $caption . '</span></li>';
+              $output.= '<li>' . '<strong>Image' . $img_no . ' :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '" title="" /></span><span>' . $caption . '</span></li>';
               $img_no++;
             }
           }
@@ -1087,7 +1089,7 @@ function itg_ugc_view_content($unique_id) {
                                                 width: "622",
                                                 height: "446",
                                                 aspectratio: "4:3",
-                                                "stretching": "exactfit",
+                                                "stretching": "uniform",
                                                 androidhls: "true",
                                                 fallback: "false",
 
@@ -1119,37 +1121,39 @@ function itg_ugc_content_details($nid, $un = NULL) {
   $data = '';
   if (function_exists('mongodb') && !empty(trim($nid))) {
     $con = mongodb();
-    $people = $con->ugc_details;
-    if (!empty($un)) {
-      $cond = array('unid' => (int) $nid);
-    }
-    else {
-      try {
-        $pid = new MongoId($nid);
-        $cond = array('_id' => $pid);
+    if (isset($con)) {
+      $people = $con->ugc_details;
+      if (!empty($un)) {
+        $cond = array('unid' => (int) $nid);
       }
-      catch (Exception $ex) {
-        drupal_set_message($ex->getMessage(), 'error');
+      else {
+        try {
+          $pid = new MongoId($nid);
+          $cond = array('_id' => $pid);
+        }
+        catch (Exception $ex) {
+          drupal_set_message($ex->getMessage(), 'error');
+        }
       }
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+        $data['name'] = $document['name'];
+        $data['email'] = $document['email'];
+        $data['city'] = $document['city'];
+        $data['title'] = $document['title'];
+        $data['content_type'] = $document['content_type'];
+        $data['image'] = $document['image'];
+        $data['multiple_image'] = $document['multiple_image'];
+        $data['image_caption'] = $document['image_caption'];
+        $data['video'] = $document['video'];
+        $data['audio'] = $document['audio'];
+        $data['description'] = $document['description'];
+        $data['section'] = $document['section'];
+        $data['unid'] = $document['unid'];
+        $data['_id'] = $document['_id'];
+      }
+      return $data;
     }
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      $data['name'] = $document['name'];
-      $data['email'] = $document['email'];
-      $data['city'] = $document['city'];
-      $data['title'] = $document['title'];
-      $data['content_type'] = $document['content_type'];
-      $data['image'] = $document['image'];
-      $data['multiple_image'] = $document['multiple_image'];
-      $data['image_caption'] = $document['image_caption'];
-      $data['video'] = $document['video'];
-      $data['audio'] = $document['audio'];
-      $data['description'] = $document['description'];
-      $data['section'] = $document['section'];
-      $data['unid'] = $document['unid'];
-      $data['_id'] = $document['_id'];
-    }
-    return $data;
   }
 }
 

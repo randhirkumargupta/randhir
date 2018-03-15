@@ -25,7 +25,7 @@
                 print $row['field_story_large_image'];
               }
               else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
+                print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image483x271.jpg') ."' alt='' title='' />";
               }
               ?> 
 
@@ -51,7 +51,7 @@
                 print $row['field_story_medium_image'];
               }
               else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' />";
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' title='' />";
               }
               ?>
               <h3 title="<?php echo strip_tags($desc); ?>">
@@ -81,11 +81,10 @@
           foreach ($rows as $index => $row) {
             if (strtolower($row['type']) == 'story') {
                 if (function_exists('itg_common_get_addontitle')) {
-                  $add_on_data = itg_common_get_addontitle($row['nid']);
                   $pipelinetext = "";
                   $pipelineclass = "";
-                  if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
-                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+                  if (!empty($row['field_story_new_title']) && !empty($row['field_story_redirection_url_titl'])) {
+                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $row['field_story_redirection_url_titl'] . '" title="' . $row['field_story_new_title'] . '">' . ucfirst($row['field_story_new_title']) . '</a>';
                     $pipelineclass = 'pipeline-added';
                     
                   }
@@ -97,7 +96,7 @@
               ?>
               <li title="<?php echo strip_tags($desc); ?>" class="<?php print $pipelineclass; ?>">
               <?php if (_is_sponsor_story_article($row['nid'])):?>
-                <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+                <span class="itg-sponsor-title"><?php print t('IMPACT FEATURE'); ?></span>
               <?php endif; ?>
               <?php
                 if (function_exists('itg_common_get_smiley_title')) {

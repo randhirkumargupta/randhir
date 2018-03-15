@@ -17,13 +17,34 @@ function itg_poll_get_all_current_poll() {
   $arg1 = __get_first_poll_nid();
   $node = node_load($arg1);
   $poll_banner_image = '';
-  if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
-    $poll_banner_image = theme('image_style' , array('style_name' => 'poll_banner_active_poll_front_end' , 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+  $get_poll_type = $node->field_poll_question[LANGUAGE_NONE][0]['value'];
+  
+  if (!empty($get_poll_type) && $get_poll_type == 1) {
+    if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
+      $poll_banner_image = theme('image_style' , array('style_name' => 'poll_banner_active_poll_front_end' , 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+    }
+    else {
+      $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="">';
+    }
+  } 
+  elseif (!empty($get_poll_type) && $get_poll_type == 2){
+    if (isset($node->field_poll_question_image[$node->language][0]['uri']) && !empty($node->field_poll_question_image[$node->language][0]['uri'])) {
+      $poll_banner_image = theme('image_style' , array('style_name' => 'poll_banner_active_poll_front_end' , 'path' => $node->field_poll_question_image[$node->language][0]['uri']));
+    }
+    else {
+      $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="">';
+    }
+  } 
+  elseif(!empty($get_poll_type) && $get_poll_type == 3) {
+    if (isset($node->field_poll_question_video[$node->language][0]['fid']) && !empty($node->field_poll_question_video[$node->language][0]['fid'])) {
+      $video_banner = db_query('SELECT solr_video_thumb FROM {itg_solr_video_info} WHERE fid = :fid', array(':fid' => $node->field_poll_question_video[LANGUAGE_NONE][0]['fid']))->fetchAll();
+      $poll_banner_image = theme('image_style' , array('style_name' => 'poll_banner_active_poll_front_end' , 'path' => $video_banner[0]->solr_video_thumb));
+    }
+    else {
+      $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="">';
+    }
   }
-  else {
-    $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="">';
-  }
-
+  
   $poll_image_exist_class = '';
 
   foreach ($node->field_poll_answer['und'] as $row) {

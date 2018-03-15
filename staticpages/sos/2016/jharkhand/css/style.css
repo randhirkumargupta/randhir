@@ -1,0 +1,222 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500);/*** 'Roboto', sans-serif; ***/
+
+* { margin: 0; padding: 0; outline: none; }
+.clear { clear: both; }
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: middle; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { font-size: 100%; font-family:'Roboto', sans-serif;}
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; }
+li { list-style: none; }
+a { text-decoration: none; }
+a:focus { outline: none; outline-offset: 0px; }
+a:hover{ text-decoration: none}
+
+
+
+/*=============Top Header============*/
+.topBlackBg{ float:  left; width: 100%; background: #000; height: 130px; box-sizing:border-box; padding:20px 0; position:  relative;}
+.topLogo{ position:  absolute;; left: 0; top:-20px; z-index: 99}
+.topAd728x90{ float:  right; width: 100%; text-align:  right;}
+/*=====Navigation Css====*/
+nav{ background: #b50000; float:  left; width: 100%; height: 36px;}
+.navigation{ text-align:  center;}
+.navigation li{list-style:  none; display: inline-block; text-align:  center; text-transform:  uppercase; color: #fff; font:300 18px/32px 'Roboto', sans-serif; background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/navTxtSaperator.png) no-repeat left center;}
+.navigation li:first-child{ background: none;  width: 86px !important;}
+.navigation li:first-child a { cursor:default;}
+.navigation li a{ color: #fff; padding:6px 0px;}
+.navigation li a:hover, .navigation li a.active { color:#000}
+.navListSec{ width: 78%; float:  right;}
+.navSocialShare{ float:  right; width: 100%; text-align:  center; display: table;}
+.navSocialShare ul{ display: table; width: 100%; height: 36px}
+.navSocialShare li{ list-style:  none; display:  table-cell; vertical-align:  middle; }
+.navSocialShare li a { padding:0 10px; display:none}
+.navSocialShare li:hover {/*background: #9d0000*/}
+
+/*===========Top Slider============*/
+.topSectionSlider{ float:  left; width: 100%; background: #000; padding-bottom: 5px;}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide { max-width: 1260px;}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide img{ width: 100%}
+.sliderLeftShadow, .sliderRightShadow {background: rgba(0, 0, 0, .8); height: 100%; z-index: 9; position: absolute;top: 0;}
+.sliderLeftShadow { left: 0;width: calc(50% - 630px); width: -webkit-calc(50% - 630px); width: -moz-calc(50% - 630px);}
+.sliderRightShadow {right: 0; width: calc(50% - 630px);width: -webkit-calc(50% - 630px); width: -moz-calc(50% - 630px);}
+
+.mobAdTop, .mobAdBottom {margin: 0px auto;    text-align: center;    width: 320px; margin-top:5px;}
+.mobAdTop, .mobAdBottom { display:none}
+
+@media (max-width: 1360px) and (min-width: 768px){
+	.topSectionSlider .topCategoryInnerDataBox .swiper-slide {  width: 90%;}
+	.sliderLeftShadow, .sliderRightShadow {width: 5%;}
+}
+.topSectionSlider .topCategoryInnerDataBox .swiper-slide span.bannerTxt{font:700 28px/33px 'Roboto', sans-serif; color: #fff; position:  absolute; bottom: 37px; left: 20px; width: 600px;text-shadow: 15px 0px 12px #000;}
+#topStorySlider .swiper-button-next{ background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/topSlideNext.png) no-repeat center center; height: 55px; width: 52px;right: 18%; top: 92%}
+#topStorySlider .swiper-button-prev{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/topSlidePrev.png) no-repeat center center; height: 55px; width: 52px; right: 21.2%; top: 92%}
+
+/*===============Sponsor Css===================*/
+.sponsorSec{ float:  left; width: 100%; background: #dfdfdf; margin-top:5px; height: 80px; padding-top:5px;}
+.sponsorDiv{ float:  left; background: #b50000; padding: 10px; border-radius: 5px 0 0 5px; text-transform:  uppercase;font:400 20px/24px 'Roboto', sans-serif; color: #fff; margin-top: 13px;}
+.sponsorImageSec { margin:4px 0 0 0; padding:0px; text-align:center}
+
+/*===============Sponsor Page Css===================*/
+.sponsPage { margin:55px 0 0 0; padding:0px;}
+.sponsPage h3 { margin:0px; padding:0px 0 25px 0; font-size:23px; font-weight:500; text-transform:uppercase}
+.sponsLogo { margin:0px; padding:0px; }
+.sponsLogo ul { margin:0px; padding:0px; list-style:none}
+.sponsLogo ul li { margin:0px 0px 40px 0; padding:0px; float:left; width: 47%; margin-right:2% }
+.sponsLogo ul li a { color:#000}
+.sponsLogo ul li a:hover { color:#000}
+
+.sponsLogo ul li img { padding:4px; border:1px solid #f5f5f5; display:block; margin-bottom:10px; width:100%}
+.sponsLogo ul li h3 { margin:0px; padding:0px; font-size:16px; text-align:center; line-height:25px;}
+
+
+/*===============Sponsor and video Page Css===================*/
+#speakerPageSlider{ margin-bottom:40px;}
+#speakerPageSlider .swiper-slide li{ float:  left; width: 22%; border: 1px solid #dedede; margin-right:4%}
+#speakerPageSlider .swiper-slide li img { width:100%}
+#speakerPageSlider .swiper-slide li:last-child { margin-right:0px;}
+#speakerPageSlider {}
+#speakerPageSlider h2{ margin-top: 40px; margin-bottom: 10px; float:  left; width: 100%; background: #000; padding: 1px 10px; text-transform:  uppercase;font:300 20px/30px 'Roboto', sans-serif; color: #fff}
+#speakerPageSlider .swiper-button-next{ background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:25px; top:47px; margin-top:0px;}
+#speakerPageSlider .swiper-button-prev{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:47px; top: 47px;  margin-top:0px;}
+
+/*==================video page slider==============*/
+#VideoSliderPage  { margin-bottom:30px; position:relative}
+#VideoSliderPage h2{ margin-top: 0px; margin-bottom: 10px; float:  left; width: 100%; background: #000; padding: 1px 10px; text-transform:  uppercase;font:300 20px/30px 'Roboto', sans-serif; color: #fff}
+#VideoSliderPage .videoPicArea { width:48%; margin-right:4%; float:left; border:1px solid #dedede; margin-bottom:35px;}
+#VideoSliderPage .videoPicArea .videoimgSec img { width:100%}
+#VideoSliderPage .videoPicArea p { border-bottom:0px; font-size:14px; line-height:21px;}
+#VideoSliderPage .videoPicArea:nth-child(2) { margin-right:0px;}
+#VideoSliderPage .videoPicArea:nth-child(4) { margin-right:0px;}
+#VideoSliderPage .swiper-button-next{ background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:10px; top:29px}
+#VideoSliderPage .swiper-button-prev{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:32px; top:29px}
+
+/*==================light box==============*/
+.lightBoxAll { width:643px; padding:10px; position:relative}
+.lightBoxAll .modal-content { border-radius:0px; padding:0px; margin:0px; position:relative}
+.lightBoxAll button.close {  width:30px; height:30px; background:#a9a9a9; border-radius:50%; color:#000; position:absolute; top: -15px; right: -12px; width:30px; height:30px; opacity:1; z-index:555}
+.lightBoxAll button.close span { position:relative; top:-2px;}
+.lightBoxAll .lightBoxTitle { margin:0px 0 0 0; padding:15px 15px; background:#e5e5e5; font-size:18px; font-weight:500; border-top:1px solid #c9c9c9}
+.lightBoxIframe { text-align:center; margin-top:5px; margin-bottom:5px; overflow-y: scroll;
+    height: 500px;}
+
+.lightBoxIframe p { margin:0px; padding:10px 20px 15px 20px; text-align:left; font-size:14px; line-height:22px;}
+
+.sponLightLogo { margin:0px; padding:20px 0 10px 20px; text-align:left; overflow:hidden}
+.sponLightLogo img { margin:0px; padding:4px; display:block; float:left; border:1px solid #fff; background:#dfdfdf; box-shadow:2px 3px 5px #aaa; margin-bottom:10px}
+.sponLightLogo h4 { margin:0px 0 0 25px; padding:0px; font-size:18px; display:block; float:left; font-weight:500; text-transform:uppercase}
+.sponLightLogo img { width:auto}
+
+
+/*==================mainContainer.==============*/
+.mainContainer{ float:  left; width: 100%; margin-top:30px;}
+.RightConatiner{ overflow: hidden; float:  left; width: 100%; border-left: 1px solid #dedede;border-right: 1px solid #dedede; border-top: 1px solid #dedede; border-bottom: 1px solid #dedede;}
+.RightConatiner h2{ margin-top: 40px; margin-bottom: 10px; float:  left; width: 100%; background: #000; padding: 1px 10px; text-transform:  uppercase;font:300 20px/30px 'Roboto', sans-serif; color: #fff}
+.RightConatiner h2 a { color:#fff; position:relative; z-index:5555}
+.speakerSliderSec{ float:  left; width: 100%}
+.speakerSliderSec .swiper-container{overflow: inherit;}
+.speakerSliderSec .swiper-slide li{ float:  left; width: 47%; border-right: 1px solid #dedede;  border-bottom: 1px solid #dedede; padding-bottom:20px;}
+.speakerSliderSec .swiper-slide li:nth-child(even){ float:  right;border-left: 1px solid #dedede; border-right: 0;   border-bottom: 1px solid #dedede;}
+.speakerSliderSec .swiper-slide li h3{font:600 14px/20px 'Roboto', sans-serif; color: #000; padding: 8px 5px;}
+.speakerSliderSec .swiper-slide li p{font:12px/18px "Roboto",sans-serif; color: #888; margin-top:0px; padding: 0 5px; min-height:90px;}
+
+#speakerSlider .swiper-button-next{ background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:25px; top:47px; margin-top:0px;}
+#speakerSlider .swiper-button-prev{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:47px; top: 47px;  margin-top:0px;}
+
+.navSocialShare.IpadsocIcon { display:none}
+.ipadAdTop { display:none}
+.speakerSliderSec { overflow:hidden}
+
+/*==================right advertis code==============*/
+.rightAdCode { margin:0px; padding:30px; }
+.rightAdCode h3 { margin:0px; padding:0px 60px; font-size:12px; font-family:Arial, Helvetica, sans-serif; color:#b0b0b0; text-transform:uppercase; text-align:center;
+ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/right-dott.jpg) repeat-x left bottom;
+width:220px; margin:0px auto}
+.rightAdCode h3 span {  background:#fff;}
+.rightAdCode .rgAddArea { margin-top:10px;}
+
+/*==================right video slider==============*/
+.VideoSliderSec{ float:  left; width: 100%; overflow:hidden}
+.VideoSliderSec .swiper-container{overflow: inherit;}
+.VideoSliderSec .swiper-slide p{font:14px/20px 'Roboto', sans-serif;; border-bottom: 1px solid #dfdfdf;   color: #000; margin-top:10px; padding: 3px 5px 12px; float:  left; width: 100%; box-sizing:border-box;}
+#VideoSlider .swiper-button-next{ background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlideNext.png) no-repeat center center; height: 19px; width: 17px;right:25px; top:69px}
+#VideoSlider .swiper-button-prev{background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/SlidePrev.png) no-repeat center center; height: 19px; width: 17px; right:47px; top:69px}
+.videoimgSec{ position:  relative; float:  left; width: 100%}
+.videoIcon{ position:  absolute; margin: auto; left: 0; right: 0; top: 0; bottom: 0; height: 66px; width: 66px; background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/videoIcon.png) no-repeat center center;}
+
+/*=============repoartCardSec css==============*/
+.repoartCardBox{ float:  left; width: 100%; position:  relative; padding-bottom:0px; border-bottom:1px solid #dedede}
+.repoartCardBox h2{ margin-bottom: 0px;}
+.accodianSec{ float:  left;; width: 100%; background: #f5f5f5; padding-top: 30px;}
+.accodianSec li{ position: relative; float: left; width:100%; background:#fff;  list-style: none; margin-bottom:10px;padding:4px 18px 4px 10px; font:bold 12px/32px arial; color: #505050}
+
+.accodianSec li .accodianData{ display: none; padding-top:3px; padding-bottom:5px;}
+.accodianSec li .acodIcon{ cursor: pointer; position: absolute; right:10px; top:11px;  background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/plus.png) no-repeat center center; height:16px; width:15px;}
+.accodianSec li.active .acodIcon{ cursor: pointer; position: absolute; right:10px; top:11px;     background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sos/images/minus.png) no-repeat center center !important; height:16px; width:15px;}
+.accodianSec li.active{ color: #c00; background: #f5f5f5;}
+.accodianSec li.active p{font:normal 12px/20px arial; color: #505050; }
+.leftAccodianData{ float:  left; width: 50%}
+.rightAccodianData{ float:  right; width: 45%}
+.leftAccodianData small,.rightAccodianData small{ float:  left; width: 100%}
+.repoarCardDownloadIcon{ position:  absolute; top: 19px; right: 2px; width: 100px;}
+.repoarCardDownloadIcon img{ float:  left; margin-top: 24px; z-index:5}
+.repoarCardDownloadIcon img+img{ margin-top: 12px; float: right;}
+
+/*=============Left Main Sec==============*/
+.topLeftHeading{ float:  left; width: 100%; margin-top: 20px;}
+.topLeftHeading h2{font:bold 18px/24px 'Roboto', sans-serif;; color: #000; text-transform:  uppercase;}
+.topLeftHeading p{font:normal 14px/24px 'Roboto', sans-serif;; color: #686868; margin-top: 10px;}
+
+/*=============programme==============*/
+.ltop_tab_programme { margin-top:40px; margin-bottom:40px;}
+.ltop_tab_programme .txt_cont_prog { margin:0px; padding:8px 0 8px 12px; background:#eeeeee; font-size:23px; color:#000; margin-bottom:10px;}
+.box_programme {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
+.timing_l{ color:#b50000; font-size:13px; font-weight:bold; padding:6px 0; text-align:right;/* border-right:2px dotted #ddd;*/}
+.prog_container{  font-size:15px; margin-bottom:10px; margin-left:15px;}
+.box_programme{/*background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;*/ }
+.prog_container .prog_txt{padding:5px 10px; background:#ECECEC; }
+.session_ltop_cov{}
+.session_ltop_cov a{text-decoration:none; font-size:13px; font-weight:bold;}
+.pink_col{color:#b50000; margin-right:5px}
+.pink_col_pvs{}
+.video_ltop_icon{ background:url(/images/video_icon.gif) no-repeat; display:inline-block; width:18px; position:relative; top:1px; height:10px;  margin-right:5px; margin-left:7px;}
+.photo_ltop_icon{background:url(http://conclave.intoday.in/conclave/images/photo_icon.jpg) no-repeat; display:inline-block; width:18px; position:relative; top:-1px; height:12px; margin-right:5px;}
+.story_ltop_icon{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/story-arrow.gif) no-repeat; display:inline-block; width:18px; position:relative; top:3px; height:10px; float:left;}
+.session_inner_cont{ padding:20px 15px;}
+.rpt_s{ margin-bottom:15px; text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;}
+.rpt_s a{ color:#000; cursor:pointer}
+.rpt_s p{ margin:0; padding:0; overflow:hidden;}
+.session_inner_cont .session_left{}
+.session_inner_cont .session_right{   padding-left: 25px;background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;}
+.ltop_tab_programme .tab-content{ margin-top:10px;}
+.speaker_profile{ width:100%;}
+.speaker_txt{color:#b50000; font-weight:bold;    font-size: 14px;}
+.speaker_details{ margin-top:5px;}
+.speaker_details .speaker_image{width:80px; height:60px; float:left; margin-right:20px;}
+.speaker_details .speaker_image img{border-radius:100%; width:70px; height:70px; border:2px solid #b50000}
+.speaker_details .speaker_dt{ overflow:hidden;  display: block;line-height:18px;position: relative; top: 10px;}
+.speaker_details .speaker_dt .hdn{ display:block; font-size:14px; font-weight:bold;}
+.speaker_details .speaker_dt .desc_l{ font-size:13px; }
+.ltop_tab_programme h3.proTitle { margin:0px; padding:5px 10px 5px 10px; background:#000; color:#fff; font-size:20px; text-transform:uppercase}
+
+.boxListPoint { margin:0px; padding:0px 0 0 23px; list-style:disc; font-size: 14px;    line-height: 23px;}
+.boxListPoint li { margin:0px; padding:0px 0 10px 0; text-align:left;}
+
+.tableSpon { margin:0px auto; padding:0px; border:1px solid #eee; font-size:12px; text-align:left; margin-bottom:20px;}
+.tableSpon th { margin:0px; padding:6px; background:#ededed; color:#000; text-align:left;}
+.tableSpon td { margin:0px; padding:6px; border-bottom:1px solid #eee}
+.lightBoxInfo h5 { text-align:left; font-size:15px; padding:0 0 19px 15px; text-transform:uppercase; font-weight:500;}
+.lightBoxInfo h3 { text-align:left; font-size:15px; padding:20px 0 10px 15px; text-transform:uppercase;  font-weight:500;}
+
+
+
+
+/*============Footer ============*/
+.blackBg{ background: #191d21; height: 136px; float:  left; width: 100%;     margin-top: 30px;}
+.blackBg .topAd728x90{ text-align:  left; margin-top: 25px;}
+.blackBg .navSocialShare{ float:  right; width: 72%; text-align:  center; display: table;}
+.blackBg .navSocialShare ul{ display: table; width: 100%; height: 136px}
+.blackBg .navSocialShare li{ list-style:  none; display:  table-cell; vertical-align:  middle;}
+.termConditionBg{ float:  left;; width: 100%; background: #000; height: 30px}
+.termConditionBg p{font: 12px/30px arial; color: #838383; text-align:  center; }

@@ -79,7 +79,9 @@ if (!empty($node) && ($node->type == 'event_backend')) {
                     if (!empty($flash_old)) {
                       $flash_old_event = $flash_old['menu'];
                     }
-                    print '<li>' . l(t('Flashback'), 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+                    if(!empty($flash_old['top'])) {
+                      print '<li>' . l(t('Flashback'), 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+                    }
                   }
                   $tab_menu = '';
                   $tab_menu = itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font);

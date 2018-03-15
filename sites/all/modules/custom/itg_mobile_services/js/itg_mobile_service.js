@@ -381,7 +381,6 @@ var descriptionFlag = 1;
                         jQuery('#content-enable-button').hide();
                         jQuery('#edit-field-service-content-und-add-more').mousedown();
                         setTimeout(function () {  //Beginning of code that should run AFTER the timeout
-                            console.log('calender update');
                             set_dates();
                             //lots more code
                         }, 3000);
@@ -511,7 +510,6 @@ var descriptionFlag = 1;
                 var id = jQuery(this).attr("id");
                 var string = id.split("-");
                 var tlength = jQuery(this).val().length;
-                console.log(maxLen);
                 jQuery(this).val(jQuery(this).val().substring(0, maxLen));
                 remain = maxLen - parseInt(tlength);
                 jQuery('#custom_service_content_' + string[5]).text(remain + ' characters remaining out of ' + maxLen);
@@ -612,7 +610,6 @@ var descriptionFlag = 1;
                 if (vid !== "" && !$.isNumeric(vid)) {
                     alert('Please select video file.');
                 } else {
-                    console.log(dynamicUploadImage);
                     $(dynamicUploadImage).val(vid);
                     jQuery(dynamicUploadButtonName).mousedown();
                     $.colorbox.close();
@@ -713,8 +710,6 @@ var descriptionFlag = 1;
 
                         },
                         error: function (xhr, desc, err) {
-                            console.log(xhr);
-                            console.log("Details: " + desc + "\nError:" + err);
                         }
                     });
 
@@ -755,8 +750,6 @@ if (dailymotionFlag == 1) {
 
                 },
                 error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
 

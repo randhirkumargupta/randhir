@@ -12,7 +12,15 @@
  */
 function itg_personalization_edit_profile_form($form, &$form_state) {
   global $user;
-  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+  
+  if (!empty(SITE_PROTOCOL)) {
+    $scheme = SITE_PROTOCOL;
+  }
+  else {
+    $scheme = 'http://';
+  }
+  
+  $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   //prepare url for change mobile and email
   $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
@@ -24,33 +32,29 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $edit_mobile_link = '<a href="'. $edit_mobile_url .'">Edit</a>';
   
   $user_detail = user_load($user->uid);
-  if (is_numeric($user_detail->name)) {
-    $mobile = $user_detail->name;
+  if (strpos($user_detail->mail, '@twitter.com') !== false || strpos($user_detail->mail, '@facebook.com') !== false) {
+    if (array_key_exists(FRONT_USER, $user->roles)) {
+      // code to use in optimization using drupal http request.
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      if (empty($sso_final_id)) {
+        $sso_id = $user->uid;
+      }
+      else {
+        $sso_id = $sso_final_id;
+      }
+      if (function_exists('itg_sso_get_social_uid')) {
+        $mobile = itg_sso_get_social_uid($sso_id);
+      }
+    }
   }
-  else if(strpos($user_detail->mail, '@twitter.com') !== false || strpos($user_detail->mail, '@facebook.com') !== false) {
-        if (array_key_exists(FRONT_USER, $user->roles)) {
-        /*$authname = simplesaml_get_authname($user->uid);
-        db_set_active('sso_db');
-        $auth_attr = simplesaml_get_uid_byauth($authname);
-        $mobile = $auth_attr['mobile'];
-        db_set_active();*/
-        // code to use in optimization using drupal http request.
-        if (function_exists('itg_global_loyality_get_sso_id')) {
-          $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
-         }
-         if (empty($sso_final_id)) {
-           $sso_id = $user->uid;
-         }
-         else {
-           $sso_id = $sso_final_id;
-         }
-         if(function_exists('itg_sso_get_social_uid')) {
-           $mobile = itg_sso_get_social_uid($sso_id);
-         }
-  
-  }
-  } else {
-    $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+  else {
+    if(is_numeric($user_detail->name)) {
+      $mobile = $user_detail->name;
+    } else {
+      $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+    }
   }
   // email setting
   if (strpos($user_detail->mail, 'nowhere.com') !== false) {
@@ -150,11 +154,11 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $form['profile_pic'] = array(
     '#title' => t('Profile Pic'),
     '#type' => 'managed_file',
-    '#upload_location' => 'public://profile_pic/',
+    '#upload_location' => file_default_scheme() . '://sso_user_image/',
     '#description' => 'Files must be less than<strong>512 MB</strong>.<br>Allowed file types:<strong>gif jpg jpeg</strong>',
     '#preview' => TRUE,
     "#upload_validators" => array(
-      "file_validate_extensions" => array("gif jpeg jpg"),
+      "file_validate_extensions" => array("jpeg jpg png"),
       "file_validate_size" => array(500 * 1024 * 1024),
     ),
     '#default_value' => $user_detail->field_user_picture['und'][0]['fid'],
@@ -230,11 +234,12 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   ),
   );
   
-  if($form_state['values']['user_state'] != '_none') {
+  /*if($form_state['values']['user_state'] != '_none') {
     $city = get_city_by_state($form_state['values']['user_state']);
   } else {
     $city = get_city_by_state($user_detail->field_personalization_state['und'][0]['tid']);
-  }
+  }*/
+  $city = get_city_by_state();
   $default_city = '';
   if (!empty($user_detail->field_personalization_city['und'][0]['tid'])) {
     $default_city = $user_detail->field_personalization_city['und'][0]['tid'];
@@ -243,8 +248,8 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   }
   $form['user_city'] = array(
     '#type' => 'select',
-    '#prefix' => '<div id="city-wrapper">',
-    '#suffix' => '</div>',
+    //'#prefix' => '<div id="city-wrapper">',
+    //'#suffix' => '</div>',
     '#default_value' => $default_city, 
     '#title' => t('City'),
     '#options' => $city,
@@ -258,6 +263,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $form['zip_code'] = array(
     '#title' => t('Pincode'),
     '#type' => 'textfield',
+    '#maxlength' => 6,
     '#attributes' => array('placeholder' => 'E.g., 122016'),
     '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
   );

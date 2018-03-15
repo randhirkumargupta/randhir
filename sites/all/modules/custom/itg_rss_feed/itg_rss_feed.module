@@ -1,0 +1,313 @@
+<?php
+
+/**
+ * @file
+ * The ITG RSS XML Feed.
+ *
+ * Contains functionality for ITG RSS XML Feed.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itg_rss_feed_menu() {
+  $items['rss/anchor'] = array(
+    'page callback' => 'anchor_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/anchor_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/article'] = array(
+    'page callback' => 'article_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/article_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/article-google-newsstand'] = array(
+    'page callback' => 'article_rss_feed_google_newsstand',
+    'access arguments' => array('access content'),
+    'file' => 'inc/article_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['rss/video'] = array(
+    'page callback' => 'video_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/video_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/gallery'] = array(
+    'page callback' => 'photo_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/photo_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/homepage-topstories'] = array(
+    'page callback' => 'homepage_topstories_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/homepage_topstories_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/issue'] = array(
+    'page callback' => 'issue_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/issue_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/latestnews'] = array(
+    'page callback' => 'latestnews_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/latestnews_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['rss/miscellaneous'] = array(
+    'page callback' => 'miscellaneous_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/miscellaneous_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['video-sitemap.xml'] = array(
+    'page callback' => 'itg_video_sitemap',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_video_sitemap.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_header() {
+  $output = "";
+  $output = '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>';
+
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_miscellaneous() {
+  global $base_url;
+  $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today | Twitter]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "/newsbuzzer ]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India TodayMiscellaneous]]></title><link><![CDATA[" . FRONT_URL . "/newsbuzzer ]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ * @param string $section_url
+ * @return string
+ */
+function get_rss_feed_sub_header_latestnews($section_url) {
+  global $base_url;
+  $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today Latest News]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[ India TodayTop Stories ]]></title><link><![CDATA[" . $section_url . "]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_google_stand_header() {
+  $output = "";
+  $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_anchors() {
+  global $base_url;
+  $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today | Anchors]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[" . FRONT_URL . "/headlines_today/anchors]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ * @param string $issue
+ * @param string $issue_url
+ * @return string
+ */
+function get_rss_feed_sub_header_issue($issue = NULL, $issue_url) {
+  global $base_url;
+  $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today | " . $issue . "]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "/?utm_source=rss]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | " . $issue . "]]></title><link><![CDATA[" . $issue_url . "/?utm_source=rss]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_home_top() {
+  global $base_url;
+  $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today Latest Stories]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "/?utm_source=rss]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today Latest Stories]]></title><link><![CDATA[" . FRONT_URL . "/?utm_source=rss]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ * @param string $term_name
+ * @param string $section_url
+ * @return string
+ */
+function get_rss_feed_sub_header_video($term_name, $section_url = NULL) {
+  global $base_url;
+  $output = "";
+  $cat_name = '';
+  if (!empty($term_name)) {
+    $cat_name = '| ' . $term_name;
+  }
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output .= "<title><![CDATA[India Today | Videos " . $cat_name . " ]]></title><description>India Today</description><link><![CDATA[ " . FRONT_URL . "/?utm_source=rss ]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Videos " . $cat_name . "]]></title>";
+  if (!empty($section_url)) {
+    $output .= "<link><![CDATA[ " . $section_url . "/?utm_source=rss]]></link>";
+  }
+  else {
+    $output .= "<link><![CDATA[ " . FRONT_URL . "/?utm_source=rss]]></link>";
+  }
+  $output .= "<description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ * @param string $term_name
+ * @param string $section_url
+ * @return string
+ */
+function get_rss_feed_sub_header_photo($term_name, $section_url = NULL) {
+  global $base_url;
+  $output = "";
+  $cat_name = '';
+  if (!empty($term_name)) {
+    $cat_name = '| ' . $term_name;
+  }
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output .= "<title><![CDATA[India Today | Photos " . $cat_name . " ]]></title><description>India Today</description><link><![CDATA[ " . FRONT_URL . "/?utm_source=rss ]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Photos " . $cat_name . "]]></title>";
+  if (!empty($section_url)) {
+    $output .= "<link><![CDATA[ " . $section_url . "/?utm_source=rss]]></link>";
+  }
+  else {
+    $output .= "<link><![CDATA[ " . FRONT_URL . "/?utm_source=rss]]></link>";
+  }
+  $output .= "<description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_footer() {
+  $output = "";
+  $output = "</channel></rss>";
+  return $output;
+}
+
+/**
+ * Function is used to fetch thumbnail
+ * @param int $fid
+ */
+function get_thumbnails_by_fid($fid = NULL) {
+  if (!empty($fid)) {
+    $file_obj = file_load($fid);
+    $image_data = image_style_url('image170x127', $file_obj->uri);
+    $file_obj->imageurl = $image_data;
+    return $file_obj;
+  }
+  return FALSE;
+}
+
+/**
+ * common function for return rss feed file Subheader Article
+ * @param string $term_name
+ * @param string $section_url
+ * @return string
+ */
+function get_rss_feed_sub_header_article($term_name = NULL, $section_url = NULL) {
+  global $base_url;
+  $output = "";
+  $cat_name = '';
+  if (!empty($term_name)) {
+    $cat_name = '| ' . $term_name;
+  }
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output .= "<title><![CDATA[India Today " . $cat_name . "]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "/?utm_source=rss]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title>";
+  $output .= "<![CDATA[India Today " . $cat_name . "]]></title>";
+  if (!empty($section_url)) {
+    $output .= "<link><![CDATA[" . $section_url . "/?utm_source=rss]]></link>";
+  }
+  $output .= "<description>India Today</description></image>";
+
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader Article
+ * @param string $term_name
+ * @param string $section_url
+ * @return string
+ */
+function get_rss_feed_sub_header_article_news_stand($term_name = NULL, $section_url = NULL) {
+  global $base_url;
+  $output = "";
+  $cat_name = '';
+  if (!empty($term_name)) {
+    $cat_name = '| ' . $term_name;
+  }
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output .= "<title>India Today</title><link>" . FRONT_URL . "></link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
+  return $output;
+}
+
+/**
+ * common function to check lock story
+ * @param int $nid
+ * @return boolean
+ */
+function is_lock_story_rss_feed($nid) {
+  if (empty($nid)) {
+    return FALSE;
+  }
+  $query1 = db_select('field_data_field_story_configurations', 'fsc');
+  $query1->fields('fsc', array('entity_id'));
+  $query1->condition('fsc.field_story_configurations_value', 'lock_story', 'LIKE');
+  $query1->condition('fsc.entity_id', $nid, '=');
+  $result1 = $query1->execute()->fetchAll();
+  if (!empty($result1)) {
+    return TRUE;
+  }
+  return FALSE;
+}

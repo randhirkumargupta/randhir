@@ -5,7 +5,6 @@
 
 Drupal.behaviors.itg_widget = {
     attach: function (context, settings) {
-        //console.log(settings.itg_widget.data);
         // settings for entire widgets which is using nodequeue module as bulk operation
         if (settings.itg_widget.data) {
             var select_option = settings.itg_widget.data;

@@ -99,7 +99,7 @@ function ugc_comment_user_listing() {
   if (function_exists('mongodb'))
   {
     $con = mongodb();
-    if ($con)
+    if (isset($con))
     {
       /* connection for fetching user detail */
       $people = $con->itgcms_comment_user;
@@ -179,26 +179,27 @@ function ugc_comment_user_listing() {
 function ugc_comment_user_block() {
   $email = $_POST['email'];
   $event = $_POST['event'];
-  if (function_exists('mongodb') && !empty($email))
-  {
+  if (function_exists('mongodb') && !empty($email)) {
     $con = mongodb();
-    $final_email = explode(',', $email);
-    foreach ($final_email as $value) {
-      $people = $con->itgcms_comment_user;
-      if($event == 'comment-user-block') {
-      $newdata = array('$set' => array('status' => 0));
+    if (isset($con)) {
+      $final_email = explode(',', $email);
+      foreach ($final_email as $value) {
+        $people = $con->itgcms_comment_user;
+        if ($event == 'comment-user-block') {
+          $newdata = array('$set' => array('status' => 0));
+        }
+        if ($event == 'comment-user-unblock') {
+          $newdata = array('$set' => array('status' => 1));
+        }
+        $people->update(array("email" => trim($value)), $newdata);
       }
-      if($event == 'comment-user-unblock') {
-      $newdata = array('$set' => array('status' => 1));
+      if ($event == 'comment-user-unblock') {
+        $response = array('success' => 'unblock', 'ok' => 'true');
       }
-      $people->update(array("email" => trim($value)), $newdata);
+      if ($event == 'comment-user-block') {
+        $response = array('success' => 'block', 'ok' => 'true');
+      }
+      print json_encode($response);
     }
-    if($event == 'comment-user-unblock') {
-    $response = array('success' => 'unblock', 'ok' => 'true');
-    }
-    if($event == 'comment-user-block') {
-    $response = array('success' => 'block', 'ok' => 'true');
-    }
-    print json_encode($response);
   }
 }

@@ -33,6 +33,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'migrated-video-player',
   );
+  $items['internal_video_player_jw'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'internal-video-player-jw',
+  );
   return $items;
 }
 
@@ -41,28 +45,35 @@ function itg_theme() {
  * {@inheritdoc}
  */
 function itg_preprocess_node(&$variables) {
+  //p($variables['node']->type);
   $node = $variables['node'];
   unset($variables['content']['links']['node']['#links']['node-readmore']);
-  // Inclue pathauto module
-  module_load_all_includes('inc', 'pathauto', 'pathauto');
-  if (function_exists('pathauto_cleanstring')) {
-    // This assumes that you are using Pathauto for generating clean URLs.
-    // Get the "clean" title.
-    $title = pathauto_cleanstring($variables['node']->title);
-    // Replace all dashes with underscores. This is necessary for recognizing the
-    // template filenames.
-    $title = str_replace('-', '_', $title);
-    // Add new template variation.
-    $variables['theme_hook_suggestions'][] = 'node__' . $title;
-    $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+  if ($variables['node']->type == 'page') {
+    // Inclue pathauto module
+    module_load_all_includes('inc', 'pathauto', 'pathauto');
+    if (function_exists('pathauto_cleanstring')) {
+      // This assumes that you are using Pathauto for generating clean URLs.
+      // Get the "clean" title.
+      $title = pathauto_cleanstring($variables['node']->title);
+      // Replace all dashes with underscores. This is necessary for recognizing the
+      // template filenames.
+      $title = str_replace('-', '_', $title);
+      // Add new template variation.
+      $variables['theme_hook_suggestions'][] = 'node__' . $title;
+      $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+     
+    }
+  }
+  
+  $content_type = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'mega_review_critic');
+  if ($variables['node']->type != 'page' && in_array($variables['node']->type, $content_type)) {
     if (function_exists('global_comment_last_record')) {
       $variables['global_comment_last_record'] = global_comment_last_record();
     }
   }
 
   if ($variables['type'] == 'webform') {
-    unset($variables['submitted']);
-    //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+    unset($variables['submitted']);    
   }
 
 
@@ -89,6 +100,7 @@ function itg_preprocess_node(&$variables) {
   // code start for Akamai Puposes (Self refresh content)
   if ($variables['type'] == 'story') {
     drupal_add_js(drupal_get_path('theme', 'itg') . '/js/story_altr.js');
+    $variables['story_zedo_ad'] = "<div id='z61b6b10d-8ff4-41e3-b8b0-c46bf2be1e7e' style='display:none' ></div>";
   }
   // Code ends for Akamai Purposes (Self refresh content)
   if (!empty($node) && $node->type == 'story' && arg(2) === null && (isset($node->field_story_technology[LANGUAGE_NONE]))) {
@@ -159,7 +171,9 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
-  //unset($variables['page']['content']);
+  $path_request = request_path();
+  $path_request_array = explode('/', $path_request);
+  
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__ssoheader';
@@ -184,28 +198,14 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today') {
+  //tribute-to-sridevi: nid-1144219
+  
+  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score')) {
+	  if($arg[0] == 'node' && $arg[1] == 1124436) {
+		  drupal_set_title('');
+    }		  
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
-
-  // Access domain
-  /*if (function_exists('domain_select_format')) {
-    $format = domain_select_format();
-    foreach (domain_domains() as $data) {
-      if ($data['valid'] || user_access('access inactive domains')) {
-        $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
-      }
-    }
-
-    // Add another page.tpl file for existing domains
-    $parse = parse_url($base_url);
-
-    // Call Event Parent TPL
-    if (in_array($parse['host'], $options)) {
-      $variables['theme_hook_suggestions'][] = 'page__event_domain';
-    }
-  }*/
-
 
   // Call Event Parent TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
@@ -218,8 +218,7 @@ function itg_preprocess_page(&$variables) {
 
   if ($arg[0] == 'blog') {
     drupal_add_css('#page-title , .feed-icon  {display: none !important}', 'inline');
-    unset($variables['page']['content']);
-    //pr($variables['theme_hook_suggestions']);
+    unset($variables['page']['content']);    
     $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
   }
 
@@ -285,16 +284,50 @@ function itg_preprocess_html(&$vars) {
         '#type' => 'markup',
         '#markup' => $code,
       );
+      
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  
-  // Code for setting page header title for home page
-  if (!empty(arg(1)) && is_numeric(arg(1))) {
-    $arg_data = node_load(arg(1));
-    if ($arg_data->type == 'page' && $arg_data->nid == 2 && isset($arg_data->metatags[LANGUAGE_NONE]['title']['value']) && !empty($arg_data->metatags[LANGUAGE_NONE]['title']['value'])) {
-      $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
+  if ($arg[2] != 'embed') {
+    itgd_chart_beat_code();
+  }
+  $newsroomjs = get_newsroom_js();
+  $script_code = array(
+	'#type' => 'markup',
+	'#markup' => $newsroomjs,
+  );
+  drupal_add_html_head($script_code, 'newsroomjs');
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
+    $add_script = variable_get('add_traffic_script');
+    if ($add_script) {
+      $script_js = variable_get('traffic_script_js');
+      $script = array(
+        '#tag' => 'script',
+        '#attributes' => array('type' => 'text/javascript'),
+        '#value' => $script_js,
+      );
+      drupal_add_html_head($script, 'script');
     }
+  }
+  if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+    $term = menu_get_object('taxonomy_term', 2);
+    if (!empty($term)) {
+      $title = $term->metatags[LANGUAGE_NONE]['title']['value'];
+      $vars['head_title'] = $title;
+    }
+  }
+  
+  if($arg[0] == 'magazine') {
+      $vars['head_title'] = 'India Today Headlines Archive- Get News headlines by date | '.variable_get('site_name');
+  }
+  if($arg[0] == 'livetv' || $arg[0] == 'international-livetv') {
+      $vars['head_title'] = 'India Today Live TV Online: Live TV News Streaming, Watch Live TV News | '.variable_get('site_name');
+  }
+  if($arg[0] == 'topic' && !empty($arg[1])) {
+    $search_str = urldecode($arg[1]);
+    $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
+    $vars['head_title'] = "$search_str News, Videos, Photos and Magazines | " . variable_get('site_name');
   }
 }
 
@@ -304,119 +337,28 @@ function itg_preprocess_html(&$vars) {
 function itg_html_head_alter(&$head_elements) {
   $arg = arg();
   global $base_url;
-  if (!empty(arg(1)) && is_numeric(arg(1))) {
-    $arg_data = node_load(arg(1));
-    if ($arg_data->type == 'page' && $arg_data->nid == 2) {
-      // canonical for home page
-      $path = current_path();
-      $path_alias = drupal_lookup_path('alias', $path);
-      $home_canonical = $base_url . '/' . $arg_data->path['alias'];
-      $head_elements['canonical'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
-      );
-      // meta name description for home page
-      $meta_description = $arg_data->metatags[LANGUAGE_NONE]['description']['value'];
-      if (isset($meta_description) && !empty($meta_description)) {
-        $head_elements['metatag_description'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'name' => 'description',
-            'content' => $meta_description,
-          ),
-        );
-      }
-    }
-
-    if ($arg_data->type == 'videogallery') {
-      if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-    else if ($arg_data->type == 'photogallery') {
-      if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-    else if ($arg_data->type == 'podcast') {
-      if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-    else if ($arg_data->type == 'story') {
-      if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
+  
+  // canonical for home page
+  if (drupal_is_front_page()) {
+    $home_canonical = $base_url . '/';
+    $head_elements['canonical_0'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'canonical',
+        'href' => $home_canonical
+      ),
+    );
   }
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
-    $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keywords';
   }
-  else {
-    if ($arg[0] == 'node' && is_numeric($arg[1])) {
-      $node = node_load($arg[1]);
-      $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
-      if (!empty($meta_keywords)) {
-        $head_elements['metatag_keywords_0'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'name' => 'news_keyword',
-            'content' => $meta_keywords
-          ),
-        );
-      }
-    }
-    elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+
+  if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
       $term = taxonomy_term_load($arg[2]);
+      $term_url_alias = drupal_get_path_alias('taxonomy/term/'.$term->tid);
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
@@ -424,8 +366,19 @@ function itg_html_head_alter(&$head_elements) {
           '#tag' => 'meta',
             
           '#attributes' => array(
-            'name' => 'news_keyword',
+            'name' => 'news_keywords',
             'content' => $meta_keywords
+          ),
+        );
+      }
+      $meta_description = $term->metatags[LANGUAGE_NONE]['description']['value'];
+      if (isset($meta_description) && !empty($meta_description)) {
+        $head_elements['metatag_description_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',            
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => $meta_description
           ),
         );
       }
@@ -464,9 +417,19 @@ function itg_html_head_alter(&$head_elements) {
             );
           }
         }
+        // Add canonical for taxonomy page:
+        $head_elements['canonical_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'canonical',
+            'href' => FRONT_URL.'/'.$term_url_alias
+          ),
+        );
       }
     }
-  }
+  
+  /*
   if ($default_mobile_metatags) {
     $head_elements['viewport'] = array(
       '#tag' => 'meta',
@@ -475,12 +438,13 @@ function itg_html_head_alter(&$head_elements) {
         'name' => 'viewport',
         'content' => 'width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
       ),
+      '#weight' => -980,
     );
   }
-  
+  */ 
+  unset($head_elements['system_meta_content_type']);
   $head_elements['metatag_description_0']['#weight'] = -1000;
   $head_elements['metatag_keywords_0']['#weight'] = -999;
-  $head_elements['system_meta_content_type']['#weight'] = -998;
   $head_elements['og_locale']['#weight'] = -997;
   $head_elements['og_sitename']['#weight'] = -996;
   $head_elements['twitter_tag2']['#weight'] = -995;
@@ -498,7 +462,15 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['fia_pagesid']['#weight'] = -983;
   $head_elements['og_publish_time']['#weight'] = -982;
   $head_elements['metatag_generator_0']['#weight'] = -981;
-  $head_elements['viewport']['#weight'] = -980;
+  $head_elements['og_image_type']['#weight'] = -979;
+  $head_elements['og_image_height']['#weight'] = -978;
+  $head_elements['og_image_width']['#weight'] = -977;
+  $head_elements['og_image']['#weight'] = -976;
+  $head_elements['canonical_0']['#weight'] = -1001;
+  $status = drupal_get_http_header("status");
+  if ($status === '404 Not Found'){
+	unset($head_elements['metatag_canonical']);
+  }
 }
 
 /**
@@ -569,27 +541,207 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-  // some js unset
-
+  
+  unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+  
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
-  }
-  unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+    
+    //remove some js in footer for home page
+    $javascript['misc/jquery.once.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
+    $javascript['misc/ajax.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']['scope'] = 'footer';
+    $javascript['misc/progress.js']['scope'] = 'footer';
+    
+  }  
 
-//itg theme JS alter    
+  //remove some js in footer for all front page    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
-  //$javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';  
   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';  
+  $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
+
+}
+
+function itg_image($variables) {
+  $attributes = $variables['attributes'];
+  // unset done for seo validation.
+  unset($attributes['typeof']);
+  $attributes['src'] = file_create_url($variables['path']);
+  
+  $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
+  $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
+  $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
+  $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
+
+  return '<img' . drupal_attributes($attributes) . ' />';
+}
+
+/**
+ * Get newsroom js ad code
+ */ 
+function get_newsroom_js(){
+	if(drupal_is_front_page()){
+		return <<<jscode
+	<!-- NEWSROOM SCRIPT -->
+<script>
+window._newsroom = window._newsroom || [];
+window._newsroom.push({pageTemplate: 'home'});
+window._newsroom.push({pageDashboard: 'home-mobile'});
+window._newsroom.push('auditClicks');
+window._newsroom.push('trackPage');
+
+!function (e, f, u) {
+	e.async = 1;
+	e.src = u;
+	f.parentNode.insertBefore(e, f);
+}(document.createElement('script'),
+		document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+	}else{
+		return <<<jscode
+		<!-- NEWSROOM SCRIPT -->
+<script>
+    window._newsroom = window._newsroom || [];
+ 
+    !function (e, f, u) {
+        e.async = 1;
+        e.src = u;
+        f.parentNode.insertBefore(e, f);
+    }(document.createElement('script'),
+            document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+	}
+}
+
+/**
+ * Function for add chart beat js code
+ */
+function itgd_chart_beat_code() {
+  global $base_url;
+  $chart_sections = '';
+  $chart_authors = '';
+  $chart_title = '';
+  $chart_path = $base_url;
+  $chart_js = '//static.chartbeat.com/js/chartbeat.js';
+  $node = menu_get_object('node');
+  if (!drupal_is_front_page() && isset($node) && !empty($node)) {
+    if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_category['und'])) {
+      $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+      $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+      $chart_sections = $section_tids[0]->name;
+    }
+    if (isset($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
+      $get_authors_name = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
+    }
+    $auths_name = '';
+    if (!empty($get_authors_name)) {
+      $auths_name = itg_get_story_authors_name($get_authors_name) . ',';
+    }
+    $chart_authors = $auths_name . 'Edited by ' . itg_get_story_edited_authors_name($node->uid);
+    $chart_title = str_replace("'", "", $node->title);
+    $chart_path = drupal_get_path_alias('node/' . $node->nid);
+    $chart_path = '/' . $chart_path;
+    if ($node->type == 'videogallery') {
+      $chart_js = '//static.chartbeat.com/js/chartbeat_video.js';
+    }
+    
+    if ($node->type == 'story') {
+      drupal_add_js('!function(a,n,e,t,r){tagsync=e;var c=window[a];if(tagsync){var d=document.createElement("script");d.src="https://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/atm.js",d.async=!0;var i=document.getElementById(n);if(null==i||"undefined"==i)return;i.parentNode.appendChild(d,i),d.onload=d.onreadystatechange=function(){var a=new zTagManager(n);a.initTagManager(n,c,this.aync,t,r)}}else document.write("<script src=\'https://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/tm.js?data="+a+"\'><\/script>")}("datalayer","z61b6b10d-8ff4-41e3-b8b0-c46bf2be1e7e",true, 1 , 1);', array('type' => 'inline', 'scope' => 'footer'));
+      drupal_add_js('var unruly = window.unruly || {};
+					unruly.native = unruly.native || {};
+					unruly.native.siteId = 321603', array('type' => 'inline', 'scope' => 'footer'));
+	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));
+    //Forkmedia ad code
+    drupal_add_js('function EmbedScript() {
+        var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";
+        _Impulser.async = true;
+        _Impulser.src = ("https:" == window.parent.document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+        var _scripter = window.parent.document.getElementsByTagName("script")[0]; _scripter.parentNode.insertBefore(_Impulser, _scripter);
+        };
+        function inIframe() {
+            try {
+                return window.self !== window.top;
+            } catch (e) {
+                return true;
+            }
+        }
+        if (inIframe()) {
+            window.parent.$ImpulseID = "IMPL-ITDG-INDIATODAY-RESP-GENERIC"; EmbedScript();
+        } else {
+            $ImpulseID = "IMPL-ITDG-INDIATODAY-RESP-GENERIC"; EmbedScript();
+        }', array('type' => 'inline', 'scope' => 'footer'));    
+    }
+    drupal_add_js("var _sf_async_config = _sf_async_config || {};
+      /** CONFIGURATION START **/
+    _sf_async_config.uid = 60355;
+    _sf_async_config.domain = 'indiatoday.in';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = '" . $chart_sections . "';  
+    _sf_async_config.authors = '" . $chart_authors . "';    
+	_sf_async_config.title = '" . $chart_title . "';
+	_sf_async_config.path = '" . $chart_path . "';
+    /** CONFIGURATION END **/
+     (function () {
+          function loadChartbeat() { 
+               window._sf_endpt = (new Date()).getTime();
+               var e = document.createElement('script');
+               e.setAttribute('language', 'javascript');
+               e.setAttribute('type', 'text/javascript');
+               e.setAttribute('src', '" . $chart_js . "');
+               document.body.appendChild(e);
+          }
+          var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };	  
+		  
+     })();", array('type' => 'inline', 'scope' => 'footer'));
+  } else {
+  drupal_add_js("var _sf_async_config = _sf_async_config || {};
+      /** CONFIGURATION START **/
+    _sf_async_config.uid = 60355;
+    _sf_async_config.domain = 'indiatoday.in';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = '" . $chart_sections . "';  
+    _sf_async_config.authors = '" . $chart_authors . "';
+    /** CONFIGURATION END **/
+     (function () {
+          function loadChartbeat() { 
+               window._sf_endpt = (new Date()).getTime();
+               var e = document.createElement('script');
+               e.setAttribute('language', 'javascript');
+               e.setAttribute('type', 'text/javascript');
+               e.setAttribute('src', '" . $chart_js . "');
+               document.body.appendChild(e);
+          }
+          var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };	  
+		  
+     })();", array('type' => 'inline', 'scope' => 'footer'));
+  }
 }

@@ -132,7 +132,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         ' . $link_text . '
      </div>';
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
-      $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
+       $form['field_e_event_banner']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
 
     $form['field_config_photo']['#access'] = FALSE;
@@ -287,8 +287,21 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if(!empty($form_state['values']['field_event_tabs'])){
     foreach ($form_state['values']['field_event_tabs'][LANGUAGE_NONE] as $key => $event_tabs) {
       if (is_numeric($key)) {
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value'])){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter Tab URL.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_sef'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_sef', t('Please enter Tab SEF.'));
+        }
+        
         if ($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url') {
-          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL)) {
+          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL) && !empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'])) {
               form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter valid Tab External URL.'));  
             }
         }
@@ -688,6 +701,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
     $form['metatags']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
+    $form['field_e_from_the_chairman']['#prefix'] = '<h2 id="title-from_the_chairman" class="story-title">From the chairman Details</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
@@ -973,10 +987,10 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_sponsor_tab_form_display_block', array('data' => ''));
       break;
     case 'program_tab_block':
-      $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
+      $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab(), 'host_node' => itg_event_backend_get_event_node('node')));
       break;
     case 'post_event_block':
-      $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab()));
+      $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab(), 'host_node' => itg_event_backend_get_event_node('node')));
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
@@ -1052,11 +1066,14 @@ function itg_event_backend_views_pre_render(&$view) {
 function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   // Get the Form Id
   if ($form["#id"] == 'views-exposed-form-Event-backend-page' || $form['#id'] == 'views-exposed-form-Event-backend-page-1') {
-    //$form['title']['#autocomplete_path'] = 'content-title-list/event_backend/autocomplete';
     $form['title']['#autocomplete_path'] = 'content-title-event/active/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2' || $form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event close and draft
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') { // for event close
+    $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
     $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
@@ -1241,9 +1258,8 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid = pic.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
   $query->condition('n.nid', $spk_id, '=');
-  // $query->condition('designation.bundle', 'reporter', '=');
+  $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();
-  $result[0]->occupation_speaker = itg_event_backend_occupation_home($spk_id);
   return $result;
 }
 
@@ -1271,14 +1287,8 @@ function itg_event_backend_occupation_home($spk_id) {
  * @param str $daywise
  * @return array
  */
-function itg_event_backend_get_session_photo_video($daywise) {
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
-  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
-  $query->fields('daywise', array('field_daywise_event_value'));
-  $query->fields('media', array('field_event_media_value'));
-  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
-  $result = $query->execute();
+function itg_event_backend_get_session_photo_video($daywise, $nid = NULL) { 
+  $result = itg_event_backend_event_field_collection_media($daywise, $nid);
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
     if (!empty($daywise_detail[$value->field_event_media_value]->field_event_photo)) {
@@ -1299,16 +1309,18 @@ function itg_event_backend_get_session_photo_video($daywise) {
  * @param str $daywise
  * @return array
  */
-function itg_event_backend_get_session_sponsor($daywise) {
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
+function itg_event_backend_get_session_sponsor($daywise, $nid = NULL) {
+  //$query = db_select('node', 'n');
+  $query = db_select('field_data_field_associate_sponsors', 'media');
+  //$query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
   $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_associate_sponsors_value');
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_associate_sponsors_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $query->condition('daywise.bundle', 'field_associate_sponsors', '=');
+  $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
   foreach ($result as $value) {
-
     $daywise_detail = entity_load('field_collection_item', array($value->field_associate_sponsors_value));
     if (!empty($daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor)) {
       $session['sponsor'] = $daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor[LANGUAGE_NONE][0]['target_id'];
@@ -1319,52 +1331,37 @@ function itg_event_backend_get_session_sponsor($daywise) {
 
 /**
  * Implement function to get associated story
- * @return arrayy
+ * @return array
  */
-function itg_event_backend_get_session_story_title($daywise, $font_color) {
-
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_highlights', 'eh', 'n.nid = eh.entity_id');
-  $query->join('field_data_field_programe_title', 'pt', 'pt.entity_id = eh.field_event_highlights_value');
-  $query->fields('pt', array('field_programe_title_value'));
-  $query->fields('n', array('nid'));
-  $query->fields('eh', array('field_event_highlights_value'));
-  $query->condition('pt.field_programe_title_value', $daywise, '=');
-  $result = $query->execute();
-
+function itg_event_backend_get_session_story_title_move_field($daywise, $font_color, $nid = NULL) { 
+  $result = itg_event_backend_event_field_collection_media($daywise, $nid);
+  $key = 0;
+  $story_title = '';
   foreach ($result as $value) {
-    $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
-    $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
-    $story_title = itg_common_get_node_title($story_nid);
+    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
+    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
     $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
+    $story_title = $story_detail['title'];
+    $session[$key]['story_title'] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session[$key]['story_details'] = $story_detail;
+    $key++;
   }
   return $session;
 }
 
 /**
- * Implement function to get associated story
- * @return array
+ * Implement function return fieldcollection
  */
-function itg_event_backend_get_session_story_title_move_field($daywise, $font_color) { 
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
+function itg_event_backend_event_field_collection_media($daywise, $nid = NULL) {
+  $query = db_select('field_data_field_event_media', 'media');
   $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_event_media_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $query->condition('daywise.bundle', 'field_event_media', '=');
+  $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
-
-  foreach ($result as $value) {
-    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
-    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
-    $story_title = itg_common_get_node_title($story_nid);
-    $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
-  }
-  return $session;
+  return $result;
 }
 
 /**
@@ -1387,6 +1384,7 @@ function itg_event_get_story_details($nid) {
     $resu['uri'] = $rel->uri;
     $resu['kicker'] = $rel->field_story_kicker_text_value;
     $resu['nid'] = $rel->nid;
+    $resu['title'] = $rel->title;
   }
   return $resu;
 }
@@ -1398,12 +1396,6 @@ function itg_event_backend_menu() {
   $items['itg-event-test'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
-  );
-
-  $items['programme'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
-    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
@@ -1627,8 +1619,7 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
-        $node = node_load($event_nid[1]);
-        return $node->nid;
+        return $event_nid[1];
       }
       elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         return $arg[1];
@@ -1724,7 +1715,7 @@ function itg_event_backend_vukkul_content($nid) {
   $n_title = "Event: " . $node->title;
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($event_author_name);
-  drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
+  /*drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
@@ -1745,7 +1736,19 @@ function itg_event_backend_vukkul_content($nid) {
 
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
 
-               </script>';
+               </script>';*/
+  $output = '<script type="text/javascript">
+              var VUUKLE_CONFIG = {
+                    apiKey: "dc34b5cc-453d-468a-96ae-075a66cd9eb7",
+                    articleId: "' . $unique_id . '",
+                    title: "' . $n_title . '",
+                    authors: "' . $author . '",
+                    tags: "Event"                     
+                  };
+                  (function () 
+                    { var d = document, s = d.createElement("script"); s.src = "https://cdn.vuukle.com/platform.js"; (d.head || d.body).appendChild(s);}
+                  )();
+              </script>';             
   return $output;
 }
 
@@ -1792,11 +1795,6 @@ function itg_event_backend_header_add_block() {
  */
 function itg_event_backend_convert_number_to_words($number) {
 
-  $hyphen = '-';
-  $conjunction = ' and ';
-  $separator = ', ';
-  $negative = 'negative ';
-  $decimal = ' point ';
   $dictionary = array(
     0 => 'zero',
     1 => 'one',
@@ -1819,86 +1817,18 @@ function itg_event_backend_convert_number_to_words($number) {
     18 => 'eighteen',
     19 => 'nineteen',
     20 => 'twenty',
+    21 => 'twenty one',
+    22 => 'twenty two',
+    23 => 'twenty three',
+    24 => 'twenty four',
+    25 => 'twenty five',
+    26 => 'twenty six',
+    27 => 'twenty seven',
+    28 => 'twenty eight',
+    29 => 'twenty nine',
     30 => 'thirty',
-    40 => 'fourty',
-    50 => 'fifty',
-    60 => 'sixty',
-    70 => 'seventy',
-    80 => 'eighty',
-    90 => 'ninety',
-    100 => 'hundred',
-    1000 => 'thousand',
-    1000000 => 'million',
-    1000000000 => 'billion',
-    1000000000000 => 'trillion',
-    1000000000000000 => 'quadrillion',
-    1000000000000000000 => 'quintillion'
   );
-
-  if (!is_numeric($number)) {
-    return false;
-  }
-
-  if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
-    // overflow
-    trigger_error(
-        'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX, E_USER_WARNING
-    );
-    return false;
-  }
-
-  if ($number < 0) {
-    return $negative . convert_number_to_words(abs($number));
-  }
-
-  $string = $fraction = null;
-
-  if (strpos($number, '.') !== false) {
-    list($number, $fraction) = explode('.', $number);
-  }
-
-  switch (true) {
-    case $number < 21:
-      $string = $dictionary[$number];
-      break;
-    case $number < 100:
-      $tens = ((int) ($number / 10)) * 10;
-      $units = $number % 10;
-      $string = $dictionary[$tens];
-      if ($units) {
-        $string .= $hyphen . $dictionary[$units];
-      }
-      break;
-    case $number < 1000:
-      $hundreds = $number / 100;
-      $remainder = $number % 100;
-      $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
-      if ($remainder) {
-        $string .= $conjunction . convert_number_to_words($remainder);
-      }
-      break;
-    default:
-      $baseUnit = pow(1000, floor(log($number, 1000)));
-      $numBaseUnits = (int) ($number / $baseUnit);
-      $remainder = $number % $baseUnit;
-      $string = convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
-      if ($remainder) {
-        $string .= $remainder < 100 ? $conjunction : $separator;
-        $string .= convert_number_to_words($remainder);
-      }
-      break;
-  }
-
-  if (null !== $fraction && is_numeric($fraction)) {
-    $string .= $decimal;
-    $words = array();
-    foreach (str_split((string) $fraction) as $number) {
-      $words[] = $dictionary[$number];
-    }
-    $string .= implode(' ', $words);
-  }
-
-  return $string;
+return $dictionary[$number];
 }
 
 /**
@@ -1909,14 +1839,16 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color, $event_ty
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->join('field_data_field_event_close_date', 'event_close_date', 'event_close_date.entity_id = n.nid');
+  $query->join('field_data_field_event_start_date', 'event_start_date', 'event_start_date.entity_id = n.nid');
   $query->join('field_data_field_event_types', 'event_types', 'event_types.entity_id = n.nid');
   $query->fields('event_close_date', array('field_event_close_date_value'));
+  $query->fields('event_start_date', array('field_event_start_date_value'));
   $query->condition('n.type', 'event_backend', '=');
   $query->condition('n.nid', $curr_event_id, '!=');
   $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
   $query->condition('event_types.field_event_types_tid', $event_type, '=');
   $query->condition('n.status', 1, '=');
-  $query->orderBy('n.created', 'DESC');
+  $query->orderBy('event_start_date.field_event_start_date_value', 'DESC');
   $result = $query->execute();
   $flash_back_link = '';
   $count = 1;
@@ -1991,9 +1923,8 @@ function itg_event_backend_highlights_block_content() {
     $query->condition('fh.entity_id', $nid, '=');
     $highlights_nid = $query->execute()->fetchField();
     $highlights_node = node_load($highlights_nid);
-
     $output = '';
-    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
+    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">'.t('Highlights').'</h2><div class="wrap-listing">';
     $text = '';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
@@ -2004,8 +1935,11 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-
-    $output .= $text . '</div></div>';
+    if(!empty($text)) {
+      $output .= $text . '</div></div>';
+    }else{
+      $output = '';
+    }
     return $output;
   }
 }
@@ -2016,6 +1950,48 @@ function itg_event_backend_highlights_block_content() {
  * @return string
  */
 function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL, $nid = NULL) {
+  $arg = arg();
+  if (function_exists('itg_flag_get_count')) {
+    $mongo_like_dislike = itg_flag_get_count($unique_id, 0);
+    //$dislike = itg_flag_get_count($unique_id, 'dislike_count');
+  }
+  // get migrated count
+  //node type check for migrated content
+  $type = itg_event_backend_get_node_type($arg[1]);
+  if (function_exists('itg_get_migrated_like_count')) {
+    if($type == 'photogallery') {
+    $migrated_count = itg_get_migrated_like_count($nid);
+    } else {
+    $migrated_count = itg_get_migrated_like_count($unique_id); 
+    }
+  }
+  $mongo_like_dislike['like_count'] = empty($mongo_like_dislike['like_count']) ? 0 : $mongo_like_dislike['like_count'];
+  $mongo_like_dislike['dislike_count'] = empty($mongo_like_dislike['dislike_count']) ? 0 : $mongo_like_dislike['dislike_count'];
+
+  $migrated_count[0]['like_count'] = empty($migrated_count[0]['like_count']) ? 0 : $migrated_count[0]['like_count'];
+  $migrated_count[0]['dislike_count'] = empty($migrated_count[0]['like_count']) ? 0 : $migrated_count[0]['dislike_count'];
+	
+	$sum_of_likes = $mongo_like_dislike['like_count'] + $migrated_count[0]['like_count'];
+  $sum_of_dislikes = $mongo_like_dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
+  $like_count_common = '(' . $sum_of_likes . ')';
+  $dislike_count_common = '(' . $sum_of_dislikes . ')';
+
+  $pid = "voted_" . $unique_id;
+  $like = "no-of-likes_" . $unique_id;
+  $dislike = "no-of-dislikes_" . $unique_id;
+
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
+  $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
+  return $like_btn . $dislike_btn . $error_msg;
+}
+
+/**
+ * Like and dislike button for highlights on event page
+ * @param int $unique_id
+ * @return string
+ */
+function itg_event_backend_heart_like_dislike($unique_id, $datatype = NULL, $nid = NULL, $web_type) {
   $arg = arg();
   if (function_exists('itg_flag_get_count')) {
     $mongo_like_dislike = itg_flag_get_count($unique_id);
@@ -2034,17 +2010,18 @@ function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL,
 
   $sum_of_likes = $mongo_like_dislike['like_count'] + $migrated_count[0]['like_count'];
   $sum_of_dislikes = $mongo_like_dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
-  $like_count_common = '(' . $sum_of_likes . ')';
+  $like_count_common =  $sum_of_likes ;
   $dislike_count_common = '(' . $sum_of_dislikes . ')';
-
-  $pid = "voted_" . $unique_id;
-  $like = "no-of-likes_" . $unique_id;
+  // $likes_class = !empty($sum_of_likes) ? 'heart-dislike' : '';  
+  
+  $pid = ($web_type == 'web') ? "heart_voted_" . $unique_id : "heart_voted_mobile_" . $unique_id;
+  $like = ($web_type == 'web') ? "no-of-likes_" . $unique_id : "no-of-likes_mobile_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-heart-like '.$likes_class.'" id="like_count" data-heart="heart-msg" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  //$dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
   $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
-  return $like_btn . $dislike_btn . $error_msg;
+  return $like_btn . $error_msg;
 }
 
 /**
@@ -2452,6 +2429,7 @@ function itg_event_backend_tab_title($node, $tab_sef) {
 
    foreach ($node->field_event_tabs['und'] as $imagecollection){
     $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    //$value = entity_load('field_collection_item', array($imagecollection['value']));
     if($tab_sef == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
     $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_name'] = $value->field_tab_name[LANGUAGE_NONE][0]['value'];
     $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_title'] = $value->field_tab_title[LANGUAGE_NONE][0]['value'];
@@ -2499,4 +2477,81 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
   $flash_back_link .= '</ul>';
   $all_link = array('tab_top_menu' => $flash_back_link_top, 'tab_menu' => $flash_back_link);
   return $all_link;
+}
+
+/**
+ * Implement function for return node color
+ */
+function itg_event_backend_page_domain($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('color', array('field_e_menu_bck_color_rgb'));
+  $query->leftjoin('field_data_field_e_event_banner', 'banner', 'banner.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_bck_color', 'color', 'color.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = banner.field_e_event_banner_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement funciton for sponsor details
+ */
+function itg_event_backend_sponsor_details($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('n', array('nid', 'title'));
+  $query->leftjoin('field_data_field_sponser_logo', 'logo', 'logo.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = logo.field_sponser_logo_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement funciton for Event Section detail
+ */
+function itg_event_backend_section_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fes', array('field_event_section_target_id'));
+  $query->leftjoin('field_data_field_event_section', 'fes', 'fes.entity_id = n.nid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    return $result[0]->field_event_section_target_id;
+  }
+  return FALSE;
+}
+
+/**
+ * Implement funciton for Event Section menu detail
+ */
+function itg_event_backend_section_menu_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title', 'nid'));
+  $query->fields('fesd', array('field_event_start_date_value'));
+  $query->fields('skt', array('field_story_kicker_text_value'));
+  $query->fields('fch', array('field_config_home_value'));
+  $query->fields('fcp', array('field_config_programme_value'));
+  $query->fields('fcs', array('field_config_speakers_value'));
+  $query->fields('dfcs', array('field_config_sponsors_value'));
+  $query->fields('dfcf', array('field_config_flashback_value'));
+  $query->fields('dfet', array('field_event_types_tid'));
+  $query->fields('femfc', array('field_e_menu_font_color_rgb'));
+  $query->fields('fehfc', array('field_e_highlighted_font_color_rgb'));
+
+  $query->leftjoin('field_data_field_event_start_date', 'fesd', 'fesd.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_home', 'fch', 'fch.entity_id = n.nid');
+  $query->leftjoin('field_data_field_story_kicker_text', 'skt', 'skt.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_programme', 'fcp', 'fcp.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_speakers', 'fcs', 'fcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_sponsors', 'dfcs', 'dfcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_flashback', 'dfcf', 'dfcf.entity_id = n.nid');
+  $query->leftjoin('field_data_field_event_types', 'dfet', 'dfet.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_font_color', 'femfc', 'femfc.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_highlighted_font_color', 'fehfc', 'fehfc.entity_id = n.nid');
+
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }

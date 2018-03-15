@@ -7,7 +7,13 @@
  * Fetch the xml value in database from octopus api.
  *
  */
-define("OCTOPUS_DUMPING_MACHINE_URL", "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4");
+define("OCTOPUS_SUCCESS_STATUS", 1);
+define("OCTOPUS_FAIL_STATUS", 0);
+define("DEF_OCTOPUS_REQ_TV_TEAM","Request send to TV team for copying video");
+define("DEF_OCTOPUS_REQ_DMP_MACHINE","File Copied to dumping machine");
+define("DEF_OCTOPUS_REQ_CPY_DMP_S3_BKT","File Copied to S3 bucket");
+define("DEF_OCTOPUS_REQ_PROCS_DM","Processing to DM..");
+define("DEF_OCTOPUS_REQ_READY_TO_USE","Video is ready to use..");
 
 /**
  * Implements hook_menu().
@@ -41,7 +47,6 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
-
   $items['slug_title/autocomplete'] = array(
     'page callback' => 'demo_autocomplete',
     'access arguments' => array('administer itg octopus'),
@@ -62,8 +67,17 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
-  $items['itg-octopus-dumping-video-status'] = array(
-    'page callback' => 'itg_octopus_dumping_video_status',
+  // This is for sending request to TV team
+
+  $items['itg-octopus-sending-request-to-tv-team'] = array(
+    'page callback' => 'itg_octopus_sending_request_to_tv_team',
+    'access arguments' => array('administer itg octopus'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+  
+   $items['itg-octopus-background-video-status'] = array(
+    'page callback' => 'itg_octopus_background_video_status',
     'access arguments' => array('administer itg octopus'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_octopus_api.inc',
@@ -132,7 +146,29 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_rfa.inc',
   );
 
-  return $items;
+  $items['itg-octopus-cron-bkprocess'] = array(
+    'title' => 'Cron Process Manually to handle background process',
+    'page callback' => 'itg_octopus_cron_bkprocess',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
+  $items['itg-octopus-restore-back-g-process'] = array(
+    'title' => 'ITG Octopus restore background process',
+    'page callback' => 'itg_octopus_restore_back_g_process',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+  
+  $items['itg-octopus-check-slug-inprogress'] = array(
+    'title' => 'itg octopus check slug inprogress',
+    'page callback' => 'itg_octopus_check_slug_inprogress',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+    
+  
+ return $items;
 }
 
 /**
@@ -364,7 +400,6 @@ function itg_octopus_api_form_alter(&$form, &$form_state, $form_id) {
  * @param type $element_type
  * @return type
  */
-
 function itg_octopus_api_slug_data($slug_id, $element_type) {
   $query = db_select('itg_octopus_slug', 'ios');
   $query->leftJoin('itg_element_clip', 'iec', 'iec.storyid = ios.storyid');
@@ -387,6 +422,13 @@ function itg_octopus_api_cronapi($op, $job = NULL) {
     'callback' => 'itg_octopus_api_rundown',
     'file' => 'includes/itg_octopus_api.inc',
   );
+
+  $items['itg_octopus_cron_bkprocess'] = array(
+    'description' => 'This cron is for running octopus background process',
+    'callback' => 'itg_octopus_cron_bkprocess',
+    'file' => 'includes/itg_octopus_api.inc',
+  );
+
   return $items;
 }
 
@@ -410,7 +452,8 @@ function itg_octopus_api_send_email_to_support($mail_subject, $msg) {
     'subject' => $mail_subject,
   );
   $to = variable_get('itg_octopus_support_team_email');
-  $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $from = variable_get('itg_octopus_oct_fromemail');
+  $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, $from, TRUE);
   if ($mail['result']) {
     return TRUE;
   }
@@ -442,7 +485,8 @@ function itg_octopus_api_send_email_to_octopus($mail_subject, $msg) {
     'subject' => $mail_subject,
   );
   $to = variable_get('itg_octopus_notify_email');
-  $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $from = variable_get('itg_octopus_oct_fromemail');
+  $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, $from, TRUE);
   if ($mail['result']) {
     return TRUE;
   }
@@ -526,7 +570,7 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    if ($chunk->type == 'task'){
+    if ($chunk->type == 'task') {
       $get_id = explode("/", $chunk->hyperlink);
       $nodeuid = db_query("SELECT field_task_team_member_target_id from {field_data_field_task_team_member} WHERE entity_id = :nid", array(":nid" => $get_id[1]))->fetchField();
       if ($user->uid == $nodeuid) {
@@ -564,11 +608,10 @@ function itg_octopus_get_slug_notification() {
       $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
       ++$count;
     }
-    
   }
 
   if ($count == 0) {
-    $html .= '<li>' . l(t('Sorry no content available'), 'rundown-listing') . '</li>';
+    $html .= '<li>' . l(t('Sorry no content available'), '<front>') . '</li>';
   }
 
   $html .= '</ul>';
@@ -655,13 +698,13 @@ function itg_octopus_api_ftp_connection_setup() {
   $conn_id = ftp_connect($ftp_ip, $ftp_port);
   $login_result = ftp_login($conn_id, $ftp_username, $ftp_password);
   if ((!$conn_id)) {
-    watchdog("WATCHDOG_INFO_octopus", "FTP connection has failed");
+    //watchdog("WATCHDOG_INFO_octopus", "FTP connection has failed");
     itg_octopus_api_send_email_to_support("Octopus:Unable to create connection with FTP server", 'Unable to create connection with FTP server');
     return false;
   }
 
   if ((!$login_result)) {
-    watchdog("WATCHDOG_INFO_octopus", "Unable to login  on FTP server");
+    //watchdog("WATCHDOG_INFO_octopus", "Unable to login  on FTP server");
     itg_octopus_api_send_email_to_support("Octopus:Unable to login  on FTP server", 'Unable to login  on FTP server');
     return false;
   }
@@ -721,7 +764,8 @@ function itg_octopus_api_is_url_exist($url) {
  * @param type $url
  * @return boolean
  */
-function itg_octopus_add_notification($type, $msg, $hyperlink, $query_string, $time, $status) {
+function itg_octopus_add_notification($type, $msg, $hyperlink, $query_string,
+    $time, $status) {
 
   try {
     $qry = db_insert('itg_octopus_notification')

@@ -6,10 +6,10 @@ $content = node_view($node, 'full');
 // get related content associated with story
 $related_content = $content['related_content'];
 // condition for buzz
-$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 //$uri = base64_encode($actual_link);
 $uri = base64_encode($_SERVER['HTTP_REFERER']);
-$short_url = shorten_url($_SERVER['HTTP_REFERER'], 'goo.gl');
+$short_url = $_SERVER['HTTP_REFERER']; //shorten_url($_SERVER['HTTP_REFERER'], 'goo.gl');
 $fb_title = addslashes($node->title);
 $share_desc = '';
 $image = '';
@@ -38,19 +38,19 @@ $follow_status = $content["follow_status"];
 $node_author = $content["author"];
 ?>
 <ul>
-  <?php if ($user->uid > 0): ?>
-    <!-- <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>-->
+  <!--<?php if ($user->uid > 0): ?>-->
+    <!-- <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
     <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer story-login-follow" href="javascript:"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
   <?php else: ?>
     <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer akamai-story-submit-holder" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
-  <?php endif; ?>
+  <?php endif; ?>-->
   <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $_SERVER['HTTP_REFERER']; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
   <li class="mhide"><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
   <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $_SERVER['HTTP_REFERER']; ?>')"><i class="fa fa-google-plus"></i></a></li>
   <?php
   if ($config_name == 'vukkul') {
     ?>
-    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
+    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span><?php
           if (function_exists(itg_vukkul_comment_count)) {
             print itg_vukkul_comment_count('story_' . $node->nid);
           }

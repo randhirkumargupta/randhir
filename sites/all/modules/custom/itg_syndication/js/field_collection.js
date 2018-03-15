@@ -14,7 +14,6 @@
                 var field_syndication_frequency = jQuery('input[name="field_syndication_rule_details[und][' + i + '][field_syndication_frequency][und]"]:checked').val();
 
                 if (field_syndication_frequency == "Weekly") {
-                    console.log(field_syndication_frequency);
                     jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-und\"]').parent().parent().show();
                 }
 

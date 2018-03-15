@@ -3,7 +3,7 @@
 @import "itg-variables";
 @import "itg-mixins";
 @import "_progressbar";
-@font-face {
+/*@font-face {
     font-family: 'RobotoSlab-Regular';
     src: url('../fonts/RobotoSlab-Regular.eot');
     src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
@@ -19,8 +19,7 @@
     font-style: normal;
 }
 
-
-/*@font-face {
+@font-face {
     font-family: 'Roboto-Medium';
     src: url('../fonts/Roboto-Medium.eot');
     src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
@@ -37,6 +36,50 @@
 }*/
 
 
+@font-face {
+    font-family: 'Merriweather-Bold';
+    src: local('/'), url('../fonts/merriweather-latin-700.woff') format('woff'), url('../fonts/Merriweather-Bold.ttf') format('truetype'), url('../fonts/merriweather-latin-700.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Merriweather-Semibold';
+    src: local('/'), url('../fonts/merriweather-latin-400.woff') format('woff'), url('../fonts/Merriweather-Bold.ttf') format('truetype'), url('../fonts/merriweather-latin-400.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/OpenSans-Regular.eot');
+    src: local('/'), url('../fonts/OpenSans-Regular.woff') format('woff'), url('../fonts/OpenSans-Regular.ttf') format('truetype'), url('../fonts/OpenSans-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('../fonts/OpenSans-Bold.eot');
+    src: local('/'), url('../fonts/OpenSans-Bold.woff') format('woff'), url('../fonts/OpenSans-Bold.ttf') format('truetype'), url('../fonts/OpenSans-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    src: url('../fonts/OpenSans-Semibold.eot');
+    src: local('/'), url('../fonts/OpenSans-Semibold.woff') format('woff'), url('../fonts/OpenSans-Semibold.ttf') format('truetype'), url('../fonts/OpenSans-Semibold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+
+
+
 /* Global CSS */
 
 * {
@@ -46,15 +89,19 @@
 }
 
 body {
-    font: 400 14px/18px $itg-robotoslab;
-    color: #333;
+    font: 400 15px/20px $itg-opensans;
+    color: #111;
+}
+
+main {
+    display: block;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    @include itg-font($itg-roboto,
+    @include itg-font($itg-opensans,
     $itg-font-medium);
     word-wrap: break-word;
 }
@@ -64,18 +111,21 @@ button {
 }
 
 h1 {
+    font-family:Merriweather-Bold;
     font-size: $h1-font-size;
     line-height: $h1-line-height;
     font-weight: $itg-font-bold;
 }
 
 h2 {
+    font-family:$itg-merriweatherbold;
     font-size: $h2-font-size;
     line-height: $h2-line-height;
     font-weight: $itg-font-bold;
 }
 
 h3 {
+    font-family:$itg-opensanssemibold;
     font-size: $h3-font-size;
     line-height: $h3-line-height;
 }
@@ -87,7 +137,7 @@ h4 {
 
 h4.heading {
     color: $heading-blue-color;
-    @include itg-font($itg-roboto,
+    @include itg-font($itg-opensans,
     $itg-font-bold);
     text-transform: uppercase;
     margin-bottom: 15px;
@@ -149,7 +199,7 @@ img {
 }
 
 .mt-50 {
-    margin-top: 50px;
+    margin-top:20px;
 }
 
 .ml-10 {
@@ -376,7 +426,7 @@ p {
 /*start header css*/
 
 header {
-    margin-bottom: 30px;
+    margin-bottom:10px;
     position: relative;
     z-index: 9999;
 }
@@ -387,8 +437,8 @@ header {
 
 #block-itg-layout-manager-header-block {
     padding-top: 20px;
-    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-    background: #000;
+    background: #fff;
+    position: relative;
     .header-top {
         height: 163px;
     }
@@ -396,14 +446,15 @@ header {
         @extend .list-none;
     }
     a {
-        color: $white-color;
-        font-family: $itg-roboto;
+        color: #a9a9a9;
+        font-family: $itg-opensanssemibold;
     }
     .header-logo {
         @include pos(relative);
     }
     .header-ads {
         text-align: center;
+        padding-top:10px;
         .row {
             margin: 0 auto;
             @include display-inline;
@@ -419,74 +470,20 @@ header {
     }
     .logo {
         width: auto;
-        top: -15px;
+        top: 15px;
         position: absolute;
         a {
             display: block;
-            overflow: hidden;
+            overflow: visible;
         }
         img {
-            background: #000;
             padding-left: 4px;
             padding-right: 0px;
             vertical-align: top;
             margin-bottom: -2px;
         }
     }
-    .top-nav {
-        padding: 0 15px 0 15px;
-        margin: 25px auto 15px auto;
-        float: none;
-        @include clearfix;
-        background: transparent;
-        ul li {
-            @extend .dib;
-            a {
-                @extend .pdlr-10;
-                font-weight: 500;
-            }
-        }
-        .main-nav {
-            @include float(left);
-            padding-left: 145px;
-            line-height: 28px;
-            li {
-                &.desktop-hide {
-                    display: none;
-                }
-                &:nth-child(3) {
-                    @include pos(relative);
-                    a {
-                        &:before {
-                            content: '';
-                            background: url(../images/live-icon.png) no-repeat;
-                            @include pos(absolute,
-                            -11px,
-                            null,
-                            null,
-                            20px);
-                            width: 28px;
-                            height: 19px;
-                        }
-                    }
-                }
-                a {
-                    padding: 0 35px;
-                    @include font(27px,
-                    null,
-                    null);
-                    text-transform: uppercase;
-                    &.active,
-                    &:hover {
-                        color: $yellow-color;
-                    }
-                }
-                &:nth-child(2) a {
-                    padding-left: 0;
-                }
-            }
-        }
-        .social-nav {
+     .social-nav {
             @include pos(relative);
             @include float(right);
             a {
@@ -518,16 +515,73 @@ header {
                 }
             }
         }
+    .top-nav {
+        padding: 0 15px 0 15px;
+        margin: 25px auto 5px auto;
+        float: none;
+        @include clearfix;
+        background: transparent;
+        ul li {
+            @extend .dib;
+            a {
+                @extend .pdlr-10;
+                font-weight: 500;
+            }
+        }
+        .main-nav {
+			padding-left:0px;
+			line-height: 28px;
+			width:65%;
+			margin: 0 auto;
+            li {
+                &.desktop-hide {
+                    display: none;
+                }
+                &:nth-child(3) {
+                    @include pos(relative);
+                    a {
+                        &:before {
+                            content: '';
+                            background: url(../images/sprite.png) no-repeat 0 -123px;
+                            @include pos(absolute,
+                            -11px,
+                            null,
+                            null,
+                            20px);
+                            width: 28px;
+                            height: 19px;
+                        }
+                    }
+                }
+                a {
+                    padding: 0 35px;
+                    @include font(27px,
+                    null,
+                    null);
+                    text-transform: uppercase;
+                    &.active,
+                    &:hover {
+                        color: $yellow-color;
+                    }
+                }
+                &:nth-child(2) a {
+                    padding-left: 0;
+                }
+            }
+        }
+       
     }
     .navigation {
         @include clearfix;
-        margin-top: 20px;
+        margin-top:0px;
+        overflow:visible;
         background: #a00606;
+        box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
         .container {
             @include pos(relative);
         }
         .menu {
-            margin-left: 135px;
+            margin-left: 0px;
             margin-right: 50px;
             max-width: 985px;
             li {
@@ -538,7 +592,6 @@ header {
                     @include itg-font(null,
                     $itg-font-medium);
                     padding: 0 10px;
-                    /*                        border-right: 1px solid $itg-nav-bordercolor;*/
                     border-top: none;
                     height: 37px;
                     white-space: nowrap;
@@ -602,7 +655,7 @@ header {
             cursor: pointer;
             i {
                 font-size: 7px;
-                color: #000;
+                color: #e0e0e0;
             }
         }
         ul#newlist {
@@ -884,7 +937,7 @@ header {
             @extend .dib;
             @extend .vmid;
             color: #323232;
-            font: 400 14px/18px "Roboto Slab";
+            font: 400 14px/18px "OpenSans-Regular";
         }
         div.rating {
             @extend .fleft;
@@ -1428,15 +1481,15 @@ section.sidebar {
 /*Start CSS footer section*/
 
 footer {
-    margin-top: 40px;
+    margin-top: 20px;
     background: $black-bg;
-    @include itg-font($itg-roboto);
+    @include itg-font($itg-opensans);
     ul {
         @extend .list-none;
     }
     a {
         color: $footer-text-color;
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
     }
     .footer-top {
         .container {
@@ -1511,15 +1564,16 @@ footer {
             @include text-align(center);
             height: 37px;
             cursor: pointer;
-            background: $black-bg url(../images/footer-close-icon.png) no-repeat center center;
+            background: $black-bg url(../images/sprite.png) no-repeat 10px 10px;
         }
         .footer-open-icon {
-            background: $black-bg url(../images/footer-open-icon.png) no-repeat center center;
+            background: $black-bg url(../images/sprite.png) no-repeat 10px -35px;
         }
     }
     .footer-mid {
         background: $second-black-bg;
-        padding: 12px 0;
+        padding:4px 0 10px;
+        text-align: center;
     }
     .footer-bottom {
         padding: 20px 0;
@@ -1530,7 +1584,7 @@ footer {
             }
         }
         h4 {
-            @include itg-font($itg-roboto,
+            @include itg-font($itg-opensans,
             $itg-font-medium);
             color: $white-color;
             text-transform: uppercase;
@@ -1666,7 +1720,7 @@ footer {
 
 .itg-common-section {
     .droppable {
-        height: 420px;
+        min-height: 420px;
     }
     .home-page-poll-block-wrap {
         .droppable {
@@ -1692,11 +1746,11 @@ footer {
     color: $white-color;
     padding: 10px;
     background: $black-bg;
-    margin-bottom: 50px;
+    margin-bottom:20px;
     ul {
         @extend .list-none;
     }
-    @include itg-font($itg-roboto);
+    @include itg-font($itg-opensans);
     .big-story-col-1,
     .big-story-col-2 {
         padding: 0 15px;
@@ -1867,6 +1921,7 @@ footer {
         padding: 15px;
         @include tab-listing;
         border-bottom: 1px solid #e4e4e4;
+        font-family: "OpenSans-Semibold";
         a {
             display: inline;
             border-bottom: none;
@@ -1951,8 +2006,8 @@ footer {
         @include font(20px);
     }
     p {
-        @include font(14px,
-        18px);
+        @include font(15px,
+        20px);
         @include before-icon-list(5px,
         5px,
         18px,
@@ -1961,6 +2016,10 @@ footer {
         100%);
         border-top: 1px solid $border-color;
         padding: 12px 0 12px 12px;
+    }
+    img {
+        width: 100%;
+        max-height: 208px;
     }
 }
 
@@ -1974,7 +2033,7 @@ footer {
     @include display-inline;
     @extend .pos-rel;
     &:after {
-        background: url(../images/video-icon-small.png) no-repeat;
+        background: url(../images/sprite.png) no-repeat 0 -87px;
         content: "";
         width: 18px;
         height: 18px;
@@ -1998,7 +2057,7 @@ footer {
             @extend .video-icon;
         }
         &+li {
-            border-top: 1px solid $border-color;
+            border-top: 1px solid #aaa9a9;
         }
         .detail {
             overflow: hidden;
@@ -2059,12 +2118,12 @@ footer {
         overflow-x: auto;
         .views-exposed-widget {
             float: none;
-            display: inline-block;
+            display: none;
             vertical-align: top;
         }
     }
     .view-filters {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         color: #b3b3b3;
         margin-bottom: 20px;
     }
@@ -2171,7 +2230,6 @@ footer {
                 h2 {
                     @include font(22px,
                     28px);
-                    margin-top: -5px;
                     a {
                         @include font(22px,
                         28px);
@@ -2190,7 +2248,7 @@ footer {
             }
         }
         .other-info {
-            @include itg-font($itg-roboto);
+            @include itg-font($itg-opensans);
             @include font(12px);
             color: #8f8f8f;
             padding-top: 15px;
@@ -2202,7 +2260,7 @@ footer {
         @include pager;
     }
     .attachment {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         border-bottom: 1px solid $border-color;
         .count {
             @include font(19px,
@@ -2304,9 +2362,11 @@ footer {
                     max-width: 100%;
                 }
                 p {
-                    @include font(14px,
-                    18px);
-                    color: #333;
+                    @include font(15px,
+                    20px);
+                    color: #111;
+                    font-family:$itg-opensanssemibold;
+
                 }
             }
             &:nth-child(2n+1) {
@@ -2403,8 +2463,8 @@ footer {
     }
     .comment-mobile {
         background: #1c1c1c;
-        margin: -15px -15px 20px;
-        font-family: $itg-roboto;
+        margin:0px -15px 20px;
+        font-family:$itg-opensans;
         text-align: right;
         ul {
             @include display-inline;
@@ -2433,13 +2493,13 @@ footer {
                             margin-top: 0;
                         }
                         span {
-                            font-family: $itg-roboto;
+                            font-family: $itg-opensans;
                         }
                     }
                 }
             }
             &.social-share {
-                display: none;
+                display: initial;
             }
         }
     }
@@ -2456,7 +2516,7 @@ footer {
     }
     .byline {
         color: #989898;
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         @include font(12px);
         @include clearfix;
         a {
@@ -2572,6 +2632,8 @@ footer {
                 @include font(18px,
                 null,
                 700);
+                color: #bb0a0a;
+                font-family:$itg-opensansbold;
             }
             ul {
                 li {
@@ -2583,7 +2645,7 @@ footer {
                     50%);
                     color: #575757;
                     padding: 5px 0px 5px 12px;
-                    @include font(12px,
+                    @include font(13px,
                     18px);
                     word-wrap: break-word;
                 }
@@ -2597,7 +2659,7 @@ footer {
             .saved-photogallery {
                 background: #fff none repeat scroll 0 0;
                 box-shadow: 0 0 8px #666;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 font-size: 22px;
                 font-weight: 700;
                 height: 160px;
@@ -2635,22 +2697,23 @@ footer {
                 .photoby-text {
                     color: #aeaeae;
                     @include font(13px);
-                    @include itg-font($itg-roboto);
+                    @include itg-font($itg-opensans);
                     background-color: #222;
                     padding: 3px 10px;
                 }
             }
         }
         .image-alt {
-            color: #929292;
+            color: #777;
             @include font(13px);
-            padding: 10px 0;
+            padding: 5px 0;
             border-bottom: 1px solid #e5e5e5;
+            font-family:$itg-opensanssemibold;
         }
         .description {
-            padding-top: 25px;
-            @include font(15px,
-            27px);
+            padding-top: 10px;
+            @include font(17px,
+            29px);
             word-wrap: break-word;
             p {
                 padding: 10px 0;
@@ -2676,10 +2739,11 @@ footer {
         .briefcase {
             margin-top: 20px;
             h4 {
-                @include font(16px);
-                color: #323232;
+                @include font(18px);
                 text-transform: uppercase;
                 margin-bottom: 10px;
+                color: #bb0a0a;
+                font-family:$itg-opensansbold;
             }
             ul {
                 li {
@@ -2689,9 +2753,10 @@ footer {
                     0px,
                     $red-color,
                     100%);
-                    @include font(13px);
+                    @include font(14px);
                     margin-bottom: 10px;
                     padding-left: 15px;
+                    line-height: 22px;
                 }
             }
             video {
@@ -2721,7 +2786,7 @@ footer {
                     a {
                         color: #404040;
                         font-size: 11px;
-                        font-family: roboto;
+                        font-family: $itg-opensans;
                         position: relative;
                         &:before {
                             content: '';
@@ -2784,7 +2849,7 @@ footer {
                 border-radius: 7px 0px 0px 7px;
             }
             .multiple-photo {
-                padding: 0 50px;
+                padding: 0 70px;
                 .photo-slider {
                     padding: 0 5px;
                     cursor: pointer;
@@ -2799,7 +2864,7 @@ footer {
                     z-index: 1;
                     left: 0;
                     margin-top: -7px;
-                    font-family: $itg-robotoslab;
+                    font-family: $itg-opensans;
                     font-size: 12px;
                     color: #959595;
                     text-transform: uppercase;
@@ -2848,13 +2913,13 @@ footer {
                         background-color: #222;
                         color: #a1a1a1;
                         font-size: 13px;
-                        font-family: Roboto;
+                        font-family:$itg-opensans;
                     }
                 }
                 .photo-description {
                     padding: 10px 0;
                     border-bottom: 1px solid #ddd;
-                    font-family: Roboto;
+                    font-family:$itg-opensans;
                     font-size: 13px;
                     color: #8d8d8d;
                     font-weight: 300;
@@ -2895,7 +2960,7 @@ footer {
                 box-shadow: 2px 2px 0px #aeaeae;
                 text-transform: uppercase;
                 @include font(12px);
-                @include itg-font($itg-robotoslab);
+                @include itg-font($itg-opensans);
                 margin-right: 10px;
                 cursor: pointer;
                 span {
@@ -2910,7 +2975,7 @@ footer {
         }
     }
     .tags {
-        padding: 25px 0px;
+        padding: 10px 0px;
         ul {
             li {
                 @include display-inline;
@@ -2928,7 +2993,7 @@ footer {
         }
     }
     .social-list {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         color: #939292;
         @include font(12px);
         border-top: 1px solid $border-color;
@@ -2995,9 +3060,9 @@ footer {
         margin-right: 15px;
         margin-bottom: 5px;
         padding: 13px 10px 13px 15px;
-        font-family: $itg-robotoslab;
+        font-family: $itg-opensans;
         h4 {
-            font-family: "Roboto Slab", sans-serif;
+            font-family: "OpenSans-Regular";
             font-size: 20px;
             font-weight: 700;
             color: #000;
@@ -3032,7 +3097,7 @@ footer {
             text-align: right;
         }
         h2 {
-            font-family: $itg-robotoslab;
+            font-family:$itg-merriweatherbold;
             color: #000;
             font-size: 26px;
             &:before,
@@ -3055,7 +3120,7 @@ footer {
         text-align: center;
         padding: 15px 0;
         color: #929292;
-        font-family: roboto;
+        font-family: $itg-opensans;
         font-size: 16px;
         font-weight: 700;
         #name-dv {
@@ -3167,7 +3232,7 @@ footer {
                     span {
                         display: block;
                         @include font(11px);
-                        font-family: $itg-roboto;
+                        font-family: $itg-opensans;
                     }
                     &.unflag-action {
                         position: relative;
@@ -3251,7 +3316,7 @@ footer {
         }
         .movie-detail {
             div {
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #000;
                 @include clearfix;
                 +div {
@@ -3270,7 +3335,7 @@ footer {
         }
     }
     .story-tech-chunk {
-        padding-right: 100px;
+        /* padding-right: 100px; remove buy ITG arun*/
         .tech-rating {
             width: 88px;
             height: 33px;
@@ -3305,7 +3370,7 @@ footer {
         @include calculate-width(1);
     }
     .byline {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         color: #989898;
         @include font(12px);
         padding-bottom: 10px;
@@ -3338,7 +3403,7 @@ footer {
         .buzz-discription {
             @include font(16px,
             22px);
-            @include itg-font($itg-roboto);
+            @include itg-font($itg-opensans);
             word-wrap: break-word;
         }
         .buzz-img {
@@ -3390,7 +3455,7 @@ footer {
         .photoby {
             background: black;
             color: #aeaeae;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             padding: 5px;
             margin-top: -15px;
         }
@@ -3414,10 +3479,12 @@ footer {
 .related-story-page {
     margin-top: 50px;
     h3 {
-        font-size: 16px;
+        font-size: 18px;
+        color: #bb0a0a;
         text-transform: uppercase;
         font-weight: 700;
         margin-bottom: 5px;
+        font-family:$itg-opensansbold;
     }
     li {
         margin-bottom: 20px;
@@ -3644,7 +3711,7 @@ footer {
     ul {
         @extend .list-none;
     }
-    @include itg-font($itg-roboto);
+    @include itg-font($itg-opensans);
     h1#page-title,
     .container.header-logo {
         @extend .hide;
@@ -3802,9 +3869,9 @@ h1.category-heading {
 }
 
 .list-grid {
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 18px;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     text-align: right;
     font-weight: 600;
     a {
@@ -3833,24 +3900,33 @@ h1.category-heading {
             width: 124px;
         }
         .detail {
+            h2 {
+                margin-bottom: 5px;
+                @include font(20px,
+                30px,
+                $itg-merriweatherbold);
+                color: #111;
+            }
             h3 {
                 margin-bottom: 10px;
                 @include font(15px,
                 22px,
                 $itg-font-regular);
-                color: #323232;
+                color: #111;
             }
             p {
-                @include font(14px,
-                19px);
-                color: #696969;
+                @include font(16px,
+                22px);
+                color: #111;
                 display: none;
+                font-family: $itg-opensans;
+
             }
         }
         span.blog-anchor {
             a {
                 @include font(12px);
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #a00606;
                 line-height: 12px;
                 display: block;
@@ -3929,7 +4005,7 @@ h1.category-heading {
                 @include font(14px,
                 22px);
                 color: #323232;
-                @include itg-font($itg-roboto);
+                @include itg-font($itg-opensans);
             }
         }
     }
@@ -4001,7 +4077,7 @@ h1.category-heading {
         box-shadow: 0px 0px 5px #cecccc;
         @include clearfix;
         padding: 10px;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         overflow: hidden;
     }
     .anchor-left {
@@ -4086,6 +4162,8 @@ h1.category-heading {
         line-height: 22px;
         +.breaking-section {
             border-top: 1px solid $border-color;
+            font-size: 16px;
+            line-height: 27px;
         }
         .breaking-date {
             color: #9f9f9f;
@@ -4229,7 +4307,7 @@ h1.category-heading {
         h3 {
             display: block;
             span {
-                padding: 45px 20px 10px 0px;
+                padding: 20px 20px 10px 0px;
             }
         }
         ul {
@@ -4286,7 +4364,7 @@ h1.category-heading {
                 border-right: 1px solid #fff;
                 .detail {
                     @include calculate-width(1);
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     .flex-caption {
                         padding: 5px;
                         background: #000;
@@ -4530,7 +4608,7 @@ h1.category-heading {
     .updated-msg {
         @include font(12px);
         color: #8a8a8a;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
     }
     .social-share {
         display: inline-block;
@@ -4573,7 +4651,7 @@ h1.category-heading {
             font-size: 14px;
             margin-top: 10px;
             height: 22px;
-            font-family: Roboto;
+            font-family: $itg-opensans;
             font-weight: 600;
         }
         .error {
@@ -4582,7 +4660,7 @@ h1.category-heading {
         .poll-updated-wrapper {
             font-size: 12px;
             color: #8a8a8a;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
         }
         &.relative-with-img {
             @include float(left);
@@ -4590,7 +4668,7 @@ h1.category-heading {
         }
         label {
             color: #33363b;
-            font-family: roboto;
+            font-family: $itg-opensans;
             font-size: 14px;
             text-transform: capitalize;
         }
@@ -4664,7 +4742,7 @@ h1.category-heading {
 }
 
 .poll-banner {
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     ul {
         @extend .list-none;
     }
@@ -4817,7 +4895,7 @@ h1.category-heading {
                             margin-bottom: 7px;
                             img {
                                 width: 170px;
-                                height: 127px;
+                                
                             }
                         }
                         .noofvotes {
@@ -4887,15 +4965,15 @@ h1.category-heading {
             position: relative;
         }
         .iframe-video {
-            padding-bottom: 72.3%;
+            padding-bottom: 75%;
             padding-top: 0;
             .jwplayer {
-                position: static !important;
+                position:relative;
             }
         }
         @include video-detail-page-sociallike;
         .slick-slider {
-            padding: 10px;
+            padding: 10px 0 ;
             /*background: #000*/
             border: none;
             .slick-slide {
@@ -5010,7 +5088,7 @@ h1.category-heading {
             font-size: 12px;
             color: $white-color;
             margin-top: 10px;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
         }
         .ads {
             width: 300px;
@@ -5103,7 +5181,7 @@ h1.category-heading {
                 margin: 0;
                 padding: 10px 5px 3px;
                 border-bottom: 3px solid transparent;
-                font-family: Roboto;
+                font-family: $itg-opensans;
                 font-weight: 500;
                 color: #969696;
                 &:hover,
@@ -5181,7 +5259,7 @@ h1.category-heading {
                             background-color: rgba(0, 0, 0, .5);
                             color: #fff;
                             font-size: 12px;
-                            font-family: Roboto;
+                            font-family: $itg-opensans;
                             .fa {
                                 font-size: 14px;
                                 margin-right: 5px;
@@ -5255,7 +5333,7 @@ h1.category-heading {
     h3 {
         display: block;
         span {
-            padding: 45px 20px 10px 0px;
+            padding:20px 20px 10px 0px;
         }
     }
 }
@@ -5354,11 +5432,11 @@ h1.category-heading {
         @extend .list-none;
         li {
             @include display-inline;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             padding-right: 5px;
             color: #a1a1a1;
             a {
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #a1a1a1;
             }
             &:after {
@@ -5389,7 +5467,7 @@ h1.category-heading {
     pic,
     program-right);
     .program-row {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         background-color: #f5f5f5;
         .programe-title {
             @include font(20px,
@@ -5465,7 +5543,7 @@ h1.category-heading {
                     background-color: #fff;
                     color: #323232;
                     display: inline-block;
-                    font: 700 14px/18px Roboto;
+                    font: 700 14px/18px "OpenSans-Regular";
                     padding-left: 10px;
                     position: relative;
                     vertical-align: top;
@@ -5545,7 +5623,7 @@ h1.category-heading {
             @include social-share;
         }
         .other-info {
-            @include itg-font($itg-roboto);
+            @include itg-font($itg-opensans);
             @include font(12px);
             color: #8f8f8f;
             margin-top: 15px;
@@ -5561,7 +5639,7 @@ h1.category-heading {
                 a {
                     @include font(16px);
                     text-transform: uppercase;
-                    @include itg-font($itg-roboto);
+                    @include itg-font($itg-opensans);
                     display: block;
                     height: 50px;
                     padding-top: 8px;
@@ -5582,7 +5660,7 @@ h1.category-heading {
         }
     }
     .attachment {
-        @include itg-font($itg-roboto);
+        @include itg-font($itg-opensans);
         .count {
             @include font(19px,
             22px,
@@ -5645,7 +5723,7 @@ h1.category-heading {
                     color: #989898;
                     top: 18px;
                     left: 10px;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     @include font(12px);
                     display: none;
                 }
@@ -5729,7 +5807,7 @@ h1.category-heading {
         background: #f5f5f5;
         padding: 5px 5px;
         font-weight: 700;
-        font-family: $itg-robotoslab;
+        font-family: $itg-opensans;
     }
     @include listing-with-image(detail,
     right,
@@ -5773,7 +5851,7 @@ h1.category-heading {
                 border-left: none;
                 a {
                     display: block;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     color: #808080;
                     &.active,
                     &:hover,
@@ -5820,7 +5898,7 @@ h1.category-heading {
 
 #block-views-latest-issue-magzine-block-1 {
     padding: 50px 0px 20px 0px;
-    font-family: $itg-roboto;
+    font-family:$itg-opensans;
     h2 {
         background: transparent;
         color: #000;
@@ -5895,7 +5973,7 @@ h1.category-heading {
                 padding: 0;
                 font-weight: 600;
                 text-transform: uppercase;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
             }
             h2 {
                 margin-top: 10px;
@@ -5905,7 +5983,7 @@ h1.category-heading {
             @include float(right);
             width: 33.33333%;
             padding: 10px;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             background: $white-color;
             border: 1px solid $border-color;
             .latest-issue {
@@ -5973,14 +6051,20 @@ h1.category-heading {
         ul {
             @include clearfix;
             @extend .list-none;
+            margin-left: 28px;
+            padding: 0;
             li {
-                @include calculate-width(3);
-                padding: 0 10px;
+                width:auto;
+                padding: 0;
                 @include float(left);
+                list-style: disc;
+				margin: 0;
+				color:#a00606;
             }
         }
         h3 {
-            margin-top: 10px;
+            margin-top: 5px;
+            font-size:16px;
         }
     }
 }
@@ -6015,9 +6099,10 @@ h1.category-heading {
 section.sidebar {
     .block-itg-ads {
         @include display-inline;
-        padding: 30px 34px;
+        padding:25px 34px 30px;
         border-bottom: 1px solid $border-color;
         width: 100%;
+        background: #f2f2f2;
     }
 }
 
@@ -6048,7 +6133,7 @@ section.sidebar {
         a {
             color: #eff94e;
             font-size: 12px;
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
         }
         ul {
             @extend .list-none;
@@ -6122,7 +6207,7 @@ section.sidebar {
         padding: 10px;
         a {
             color: #fff;
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
         }
     }
 }
@@ -6209,7 +6294,7 @@ section.sidebar {
         a {
             background: #db0e0f;
             color: #fff;
-            font-family: roboto;
+            font-family:$itg-opensans;
             text-transform: uppercase;
             padding: 10px 15px;
             border-radius: 30px 0px 0px 30px;
@@ -6265,7 +6350,7 @@ section.sidebar {
             null,
             500);
             color: #000;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             text-transform: uppercase;
             margin-top: 5px;
         }
@@ -6296,14 +6381,8 @@ section.sidebar {
             a {
                 cursor: pointer;
                 &.user-icon {
-                    position: absolute;
-                    right: 0;
-                    background: #ffc106;
-                    width: 37px;
-                    height: 40px;
-                    line-height: 40px;
-                    color: #ac0000;
-                    top: -39px;
+                    background:transparent;
+                    color: #fff;
                     text-align: center;
                     font-size: 28px;
                 }
@@ -6418,7 +6497,7 @@ section.sidebar {
                         padding: 13px 10px;
                         font-size: 18px;
                         line-height: 24px;
-                        font-family: roboto;
+                        font-family: $itg-opensans;
                         font-weight: 500;
                     }
                 }
@@ -6497,7 +6576,7 @@ section.sidebar {
                     background: rgba(0, 0, 0, 0.4);
                     color: $white-color;
                     @include font(12px);
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     padding: 2px 5px;
                     i {
                         @include font(16px);
@@ -6540,7 +6619,7 @@ section.sidebar {
             background: #d6d6d6;
             @include display-inline;
             padding: 5px 10px;
-            font-family: roboto;
+            font-family:$itg-opensans;
             border-radius: 3px;
             margin-bottom: 50px;
         }
@@ -6567,7 +6646,7 @@ section.sidebar {
                 0);
                 background: rgba(0, 0, 0, 0.56);
                 color: #fff;
-                @include itg-font($itg-roboto);
+                @include itg-font($itg-opensans);
                 font-size: 12px;
                 padding: 5px;
                 i {
@@ -6588,13 +6667,13 @@ section.sidebar {
 .auto-layout-page {
     .auto-block-1,
     .auto-block-2 {
-        height: 605px;
+        height: 705px;
         overflow: hidden;
     }
     .auto-block-3 {
         .itg-widget-child {
             .droppable {
-                height: 245px;
+                height: 345px;
                 overflow: hidden;
             }
         }
@@ -6647,7 +6726,7 @@ section.sidebar {
                 padding-left: 22px;
                 &:before {
                     position: absolute;
-                    top: 27px;
+                    top: 20px;
                     left: 8px;
                     content: '';
                     border-radius: 100%;
@@ -6695,7 +6774,7 @@ section.sidebar {
                     }
                 }
                 &.trending-videos-list {
-                    padding: 15px 0;
+                    padding: 13px 0;
                 }
             }
         }
@@ -6786,7 +6865,7 @@ section.sidebar {
     }
     .itg-h396-section {
         .droppable {
-            height: 396px;
+            height: 425px;
             background: #f3f3f3;
             padding: 10px;
         }
@@ -6839,6 +6918,7 @@ section.sidebar {
     .buying-guides {
         a {
             display: block;
+            font-family: "OpenSans-Semibold";
         }
         h3 {
             padding: 10px 0;
@@ -7283,7 +7363,7 @@ section.sidebar {
                 @include clearfix;
                 font-size: 13px;
                 font-weight: 500;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 margin-top: 15px;
                 margin-bottom: 15px;
                 .section-part {
@@ -7441,7 +7521,7 @@ section.sidebar {
         font-size: 20px;
         border-bottom: 1px solid $border-color;
         text-transform: uppercase;
-        font-family: $itg-robotoslab;
+        font-family:$itg-merriweatherbold;
         margin-bottom: 30px;
         padding-bottom: 10px;
         font-weight: 700;
@@ -7468,7 +7548,7 @@ section.sidebar {
     }
     .views-row {
         @include text-align(center);
-        font-family: roboto;
+        font-family: $itg-opensans;
         color: #ef2a24;
         font-weight: 700;
         text-transform: uppercase;
@@ -7499,7 +7579,7 @@ section.sidebar {
     h2 {
         font-size: 24px;
         color: #ef3c24;
-        font-family: $itg-robotoslab;
+        font-family:$itg-merriweatherbold;
         margin-bottom: 15px;
     }
 }
@@ -7603,7 +7683,7 @@ section.sidebar {
             }
         }
         .date-display-range {
-            font-family: $itg-roboto;
+            font-family:$itg-opensans;
             font-weight: 900;
             font-size: 18px;
             margin-bottom: 10px;
@@ -7818,7 +7898,7 @@ section.sidebar {
 #block-itg-event-backend-event-sign-and-win,
 #block-itg-event-backend-event-registration {
     h1 {
-        font-family: $itg-robotoslab;
+        font-family:$itg-opensans;
         font-size: 40px;
         margin-bottom: 40px;
     }
@@ -7896,7 +7976,7 @@ section.sidebar {
             .views-field-field-story-new-title {
                 font-size: 11px;
                 font-weight: 700;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 color: #000;
                 margin-top: 10px;
                 text-transform: uppercase;
@@ -7922,7 +8002,7 @@ section.sidebar {
             li {
                 border-radius: 0;
                 color: #000;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 font-weight: normal;
                 padding: 15px 10px;
                 span {
@@ -7966,7 +8046,8 @@ section.sidebar {
                     @include calculate-width(1);
                     @include float(none);
                     padding-right: 0;
-                    font-family: $itg-robotoslab;
+                    font-family: $itg-opensans;
+                    line-height: initial;
                     .bottom-links {
                         margin-top: 10px;
                         a {
@@ -7984,7 +8065,7 @@ section.sidebar {
                 }
                 .small-title {
                     color: #ef3c24;
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     @include font(13px);
                     margin-bottom: 5px;
                     text-transform: uppercase;
@@ -8016,7 +8097,6 @@ section.sidebar {
         }
     }
     h3 {
-        font-family: roboto-slab;
         margin-bottom: 10px;
         text-transform: uppercase;
     }
@@ -8353,7 +8433,7 @@ section.sidebar {
             padding: 5px 10px;
             color: #fff;
             font-weight: 500;
-            font-family: roboto;
+            font-family: $itg-opensans;
             border-radius: 4px;
         }
         #field-erf-registration-fee-add-more-wrapper {
@@ -8377,7 +8457,7 @@ section.sidebar {
         /* padding: 0;
         background: transparent;
         border: none;*/
-        font-family: roboto;
+        font-family: $itg-opensans;
         font-size: 12px;
         color: #707070;
         ul {
@@ -8411,12 +8491,12 @@ section.sidebar {
         background: #f3f3f3;
     }
     .itg-layout-672 {
-        .droppable {
-            height: 672px;
+        .droppable {            
             .auto-block-1,
             .auto-block-2 {
-                height: 672px;
+                height:670px;
                 overflow: hidden;
+                margin-bottom:20px;
             }
             .auto-block-1 {
                 border: 1px solid #ddd;
@@ -8437,7 +8517,8 @@ section.sidebar {
         }
         .itg-widget-parent {
             .droppable {
-                height: 225px;
+                height: auto;
+                min-height: initial;
             }
         }
         .itg-widget-child {
@@ -8484,6 +8565,7 @@ section.sidebar {
         -moz-box-shadow: 0 0 5px #d4cdcd;
         -webkit-box-shadow: 0 0 5px #d4cdcd;
         box-shadow: 0 0 5px #d4cdcd;
+        margin: 2px 0;
         .section-ordering {
             h3 {
                 padding: 10px;
@@ -8497,7 +8579,7 @@ section.sidebar {
         }
         .more {
             padding: 10px 20px 20px 0px;
-            position: absolute;
+            position: unset;
             right: 0px;
             bottom: 0px;
         }
@@ -8526,6 +8608,7 @@ section.sidebar {
         }
         >p {
             padding: 10px 0;
+            font-family: "OpenSans-Semibold";
         }
         >p+p {
             border-top: 1px solid #ddd;
@@ -8563,7 +8646,7 @@ section.sidebar {
                 @include clearfix;
                 padding: 10px 0;
                 position: relative;
-                padding-bottom: 50px;
+                padding-bottom: 10px;
                 .dm-pic {
                     @include float(left);
                     margin-right: 15px;
@@ -8589,7 +8672,7 @@ section.sidebar {
         border: 1px solid #ddd;
         padding: 10px;
         .auto-tips-n-tricks {
-            height: 220px;
+            height: 344px;
             overflow: auto;
         }
     }
@@ -8673,18 +8756,17 @@ section.sidebar {
             height: 30px;
             line-height: 30px;
             text-transform: uppercase;
-            font-family: roboto-slab;
             font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
+            font-family: "OpenSans-Regular";
         }
     }
     .widget-wrapper.custom_ask_expert_form_block {
         overflow-y: auto;
     }
     .ask-question {
-        padding: 15px;
-        font-family: roboto-slab;
+        padding: 15px;       
         overflow: auto;
         .form-type-textarea,
         .form-type-textfield {
@@ -8695,10 +8777,10 @@ section.sidebar {
             @include clearfix;
             input[type="text"] {
                 width: 100%;
-                font-family: roboto-slab;
+                
             }
             textarea {
-                font-family: roboto-slab;
+                
                 height: 65px;
                 margin-bottom: 10px;
             }
@@ -8739,8 +8821,8 @@ section.sidebar {
                 height: 32px;
                 text-transform: uppercase;
                 width: 90px;
-                cursor: pointer;
-                font-family: roboto-slab;
+                cursor: pointer; 
+                font-family: "OpenSans-Regular";               
             }
             .captcha {
                 border: none;
@@ -8763,7 +8845,7 @@ section.sidebar {
                 }
                 input[type="text"] {
                     width: 47%;
-                    font-family: roboto-slab;
+                    font-size:14px;
                     float: right;
                 }
                 .description {
@@ -8787,7 +8869,7 @@ section.sidebar {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -8862,9 +8944,9 @@ section.sidebar {
 }
 
 .section-sport-ipl-bg {
-    background: url('../images/sports-bg.png') no-repeat center 135px;
+    background: url('../images/sports-bg.png') no-repeat center 409px;
     main.container {
-        background: #fff;
+        background:transparent;
     }
 }
 
@@ -8921,7 +9003,7 @@ section.sidebar {
     }
     .itg-layout-225 {
         .droppable {
-            height: 225px;
+            min-height: 225px;
         }
         .widget-title {
             margin-bottom: 10px;
@@ -9161,7 +9243,7 @@ section.sidebar {
 
 .live-scorecard {
     text-align: center;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     padding-bottom: 20px;
     h4 {
         padding: 15px 0 5px 0;
@@ -9274,7 +9356,7 @@ section.sidebar {
                                         line-height: 24px;
                                         font-size: 20px;
                                         font-weight: 700;
-                                        font-family: $itg-roboto;
+                                        font-family: $itg-opensans;
                                         &:hover {
                                             color: #193984;
                                         }
@@ -9401,6 +9483,7 @@ section.sidebar {
                 p {
                     overflow: hidden;
                     display: block;
+                    font-family: "OpenSans-Semibold";
                 }
                 .col-md-6 {
                     +.col-md-6 {
@@ -9467,7 +9550,7 @@ section.sidebar {
                 height: 30px;
                 line-height: 30px;
                 text-transform: uppercase;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 font-weight: 500;
                 &:hover,
                 &.active {
@@ -9542,7 +9625,7 @@ section.sidebar {
 /*css start taboola page*/
 
 .taboola {
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 
@@ -9576,7 +9659,8 @@ section.sidebar {
         }
         .itg-widget-parent {
             .droppable {
-                height: 160px;
+                height: auto;
+                /*160px;*/
             }
         }
         .itg-widget-child {
@@ -9807,7 +9891,7 @@ section.sidebar {
     .election-graph-5 {
         display: inline-block;
         width: 100%;
-        margin-top: -60px;
+        margin-top: -120px;
     }
     .left-side {
         .itg-415-layout {
@@ -9939,7 +10023,7 @@ section.sidebar {
         }
     }
     .key-candidate {
-        font-family: $itg-roboto;
+        font-family:$itg-opensans;
         .most_popular {
             border: none;
         }
@@ -9966,7 +10050,7 @@ section.sidebar {
             }
         }
         .key-candidate-detail {
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             display: none;
             max-height: 282px;
             overflow: auto;
@@ -10123,7 +10207,7 @@ section.sidebar {
         }
         table {
             font-size: 13px;
-            font-family: roboto;
+            font-family: $itg-opensans;
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
@@ -10182,7 +10266,7 @@ section.sidebar {
             tspan {
                 &:nth-child(1) {
                     font-weight: 900;
-                    font-family: roboto;
+                    font-family: $itg-opensans;
                     font-size: 42px;
                     color: #515151;
                 }
@@ -10238,7 +10322,7 @@ section.sidebar {
             svg {
                 >text {
                     fill: #009ef0 !important;
-                    font-family: Roboto;
+                    font-family: $itg-opensans;
                 }
             }
         }
@@ -10248,7 +10332,7 @@ section.sidebar {
             margin-top: 50px;
             table {
                 width: 100%;
-                font-family: Roboto;
+                font-family: $itg-opensans;
                 th,
                 td {
                     padding: 3px;
@@ -10295,7 +10379,7 @@ div#playerContainer {
                 font-size: 13px;
                 padding: 20px 15px;
                 display: block;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 position: relative;
                 border-bottom: 1px solid #1a1a1a;
                 i {
@@ -10355,26 +10439,27 @@ div#playerContainer {
     @include pager;
     h3 {
         display: block;
-        margin-bottom: 20px;
+        margin-bottom:0px;
         span {
             padding-left: 0;
         }
     }
     .program_data {
-        margin-bottom: 50px;
+        margin-bottom:10px;
     }
     .program-row {
         @include pos(relative);
-        margin-bottom: 10px;
+        margin-bottom:0px;
         padding: 0 5px;
         .programe-title {
             a {
                 font-size: 14px;
                 text-transform: uppercase;
-                color: #525252;
+                color: #111;
                 font-weight: 500;
                 height: 22px;
                 line-height: 22px;
+                font-family:$itg-opensanssemibold;
             }
         }
     }
@@ -10452,7 +10537,7 @@ div#playerContainer {
         @include font(12px,
         null,
         500);
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         text-transform: uppercase;
         line-height: 15px;
         display: block;
@@ -10472,7 +10557,7 @@ div#playerContainer {
         .vertical-menu {
             max-width: 58px;
             span {
-                font-family: roboto;
+                font-family: $itg-opensans;
                 font-weight: 600;
                 text-transform: uppercase;
                 padding: 5px 5px;
@@ -10643,7 +10728,7 @@ h1.about-us-heading {
 /*css start static feedback form*/
 
 .static-feedback-from {
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
     h1 {
         @include font(34px);
         text-transform: capitalize;
@@ -10652,7 +10737,7 @@ h1.about-us-heading {
             color: #7e7e7e;
             float: right;
             font-weight: 500;
-            font-family: $itg-robotoslab;
+            font-family: $itg-opensans;
             text-transform: initial;
             i {
                 color: #e61e1e;
@@ -10663,7 +10748,7 @@ h1.about-us-heading {
     .or-share-detail {
         text-align: center;
         font-size: 16px;
-        font-family: roboto;
+        font-family: $itg-opensans;
         color: #777777;
         margin: 25px 0;
     }
@@ -10771,7 +10856,7 @@ h1.about-us-heading {
     .view-header {
         font-size: 30px;
         color: #fff;
-        font-family: roboto;
+        font-family: $itg-opensans;
         background: #353535;
         font-weight: 700;
         height: 50px;
@@ -10933,7 +11018,7 @@ h1.about-us-heading {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -10989,7 +11074,7 @@ h1.about-us-heading {
                 font-size: 12px;
                 color: #6b6b6b;
                 text-transform: uppercase;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 font-weight: 600;
             }
         }
@@ -11016,7 +11101,7 @@ h1.about-us-heading {
             }
             p {
                 font-size: 12px;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 color: #000;
                 font-weight: 500;
             }
@@ -11252,7 +11337,7 @@ h1.about-us-heading {
 
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"],
 .ask-question-sidebar {
-    font-family: roboto;
+    font-family: $itg-opensans;
     border-bottom: 1px solid #ddd;
     @include sidebar-heading;
     ul {
@@ -11276,10 +11361,10 @@ h1.about-us-heading {
         @include clearfix;
         input[type="text"] {
             width: 100%;
-            font-family: roboto-slab;
+            font-size:14px;
         }
         textarea {
-            font-family: roboto-slab;
+            font-size:14px;
             height: 65px;
             margin-bottom: 10px;
         }
@@ -11321,7 +11406,9 @@ h1.about-us-heading {
             text-transform: uppercase;
             width: 90px;
             cursor: pointer;
-            font-family: roboto-slab;
+            font-size:14px;
+            font-family: "OpenSans-Regular";
+
         }
         .captcha {
             border: none;
@@ -11345,7 +11432,7 @@ h1.about-us-heading {
             }
             input[type="text"] {
                 width: 47%;
-                font-family: roboto-slab;
+                font-size:14px;
                 float: right;
             }
             .description {
@@ -11370,7 +11457,7 @@ h1.about-us-heading {
             display: inline-block;
             color: #fff;
             text-align: center;
-            font-family: roboto;
+            font-family: $itg-opensans;
             margin-right: 10px;
             position: absolute;
             top: 20px;
@@ -11486,7 +11573,7 @@ h1.about-us-heading {
             color: #fff;
             margin: 0 -15px;
             border-bottom: 5px solid #fff;
-            font-family: roboto;
+            font-family: $itg-opensans;
         }
     }
     .col-list-1 {
@@ -11691,7 +11778,7 @@ h1.about-us-heading {
 #content {
     [id*="ugc-node-form"].ugc-custom-wrapper {
         background: #fff;
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         .form-item {
             margin: 0;
             margin-bottom: 10px;
@@ -11815,7 +11902,7 @@ h1.about-us-heading {
 
 .breakingnew-home {
     margin-bottom: 30px;
-    font-family: roboto;
+    font-family: $itg-opensans;
     @include clearfix;
     @include pos(relative);
     .title {
@@ -11957,7 +12044,7 @@ h1.about-us-heading {
     .lock {
         padding-left: 30px;
         &:before {
-            top: 13px;
+            top: 9px;
             background-size: 70%;
         }
     }
@@ -12009,7 +12096,7 @@ h1.about-us-heading {
                 text-transform: uppercase;
                 color: #000;
                 font-weight: 600;
-                font-family: $itg-roboto;
+                font-family: $itg-opensans;
                 ul {
                     margin-top: 20px;
                     li {
@@ -12019,7 +12106,7 @@ h1.about-us-heading {
                             font-size: 14px;
                             text-transform: capitalize;
                             font-weight: 400;
-                            font-family: $itg-robotoslab;
+                            font-family: $itg-opensans;
                         }
                     }
                     ul {
@@ -12064,7 +12151,7 @@ h1.about-us-heading {
                 background-color: rgba(0, 0, 0, 0.5);
                 color: #fff;
                 font-size: 12px;
-                font-family: Roboto;
+                font-family: $itg-opensans;
                 i {
                     font-size: 14px;
                 }
@@ -12315,14 +12402,22 @@ span.smilies-title {
     position: relative;
     z-index: 9998;
     color: #a1a1a1;
-    font-family: roboto;
-    padding-top: 15px;
+    font-family: $itg-opensans;
+    padding-top:3px;
     a {
         color: #a1a1a1;
-        font-family: roboto;
+        font-family: $itg-opensans;
         &:hover {
             text-decoration: underline;
         }
+    }
+    h1 {
+        color: #a1a1a1;
+        font-size: 14px;
+        line-height: inherit;
+        font-weight: normal;
+        display: inline-block;
+        font-family: $itg-opensans;
     }
     .container {
         div.lft {
@@ -12359,7 +12454,8 @@ span.smilies-title {
 
 .photo-heading {
     font-size: 32px;
-    margin-bottom: 25px;
+    margin-bottom:10px;
+    margin-top:10px;
     color: #fff;
     line-height: 42px;
 }
@@ -12367,10 +12463,12 @@ span.smilies-title {
 .video-heading {
     color: #fff;
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom:3px;
     line-height: 34px;
     padding-top: 7px;
 }
+.video-landing-header .byline_date { display:block; margin-bottom: 10px;}
+.video-landing-header .byline_date span + span:before{ content:"|"; padding: 0 5px 0px 0px;}
 
 .promote-btn {
     background: #a00606;
@@ -12383,7 +12481,7 @@ span.smilies-title {
     text-transform: capitalize;
     font-size: 18px;
     border-radius: 3px;
-    font-family: roboto;
+    font-family: $itg-opensans;
     pointer-events: auto;
 }
 
@@ -12409,7 +12507,7 @@ span.smilies-title {
     }
     .ask-question {
         padding: 15px;
-        font-family: roboto-slab;
+        
         overflow: auto;
         .form-type-textarea,
         .form-type-textfield {
@@ -12420,10 +12518,10 @@ span.smilies-title {
             @include clearfix;
             input[type="text"] {
                 width: 100%;
-                font-family: roboto-slab;
+                font-size:14px;
             }
             textarea {
-                font-family: roboto-slab;
+                font-size:14px;
                 height: 65px;
                 margin-bottom: 10px;
             }
@@ -12465,8 +12563,9 @@ span.smilies-title {
                 text-transform: uppercase;
                 width: 90px;
                 cursor: pointer;
-                font-family: roboto-slab;
+                font-size:14px;
                 margin-top: 10px;
+                font-family: "OpenSans-Regular";
             }
             .captcha {
                 border: none;
@@ -12489,7 +12588,7 @@ span.smilies-title {
                 }
                 input[type="text"] {
                     width: 47%;
-                    font-family: roboto-slab;
+                    font-size:14px;
                     float: right;
                 }
                 .description {
@@ -12513,7 +12612,7 @@ span.smilies-title {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -13217,7 +13316,7 @@ span.close_btt {
         .block-title {
             color: #09619f;
             font-weight: 700;
-            font-family: "Roboto", sans-serif;
+            font-family: "OpenSans-Regular";
             text-transform: uppercase;
             margin-bottom: 15px;
             border-bottom: 1px solid #ddd;
@@ -13227,7 +13326,7 @@ span.close_btt {
         }
     }
     .key-candidate {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         max-height: 282px;
         overflow: auto;
         .most_popular {
@@ -13254,7 +13353,7 @@ span.close_btt {
             }
         }
         .key-candidate-detail {
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             display: none;
             ul {
                 @include clearfix;
@@ -13377,7 +13476,7 @@ span.close_btt {
     max-width: 760px;
     margin: 0 auto;
     text-align: center;
-    font-family: 'Roboto Slab';
+    font-family: "OpenSans-Regular";
     color: #000;
     h1 {
         font-size: 48px;
@@ -13473,7 +13572,7 @@ span.close_btt {
 #block-views-past-speaker-event-block-1 .block-title {
     font-size: 24px;
     color: #ef3c24;
-    font-family: "Roboto Slab", sans-serif;
+    font-family: "OpenSans-Regular";
     margin-bottom: 15px;
 }
 
@@ -13493,7 +13592,7 @@ span.close_btt {
         padding: 10px 0 10px 45px;
         font-size: 16px;
         font-weight: 300;
-        font-family: Roboto;
+        font-family:$itg-opensans;
         color: #aaa;
         margin: 28px 0;
         .fa {
@@ -13535,7 +13634,7 @@ span.close_btt {
             width: 220px;
             a {
                 color: #ddd;
-                font-family: Roboto;
+                font-family: $itg-opensans;
                 font-size: 12px;
                 &:hover {
                     text-decoration: underline;
@@ -13548,7 +13647,7 @@ span.close_btt {
         margin: 20px 0 0;
         border-top: 1px solid #666;
         color: #666;
-        font-family: Roboto;
+        font-family: $itg-opensans;
         font-size: 12px;
         text-align: center;
     }
@@ -13614,7 +13713,7 @@ span.close_btt {
             a {
                 font-size: 16px;
                 line-height: 28px;
-                font-family: Roboto;
+                font-family: $itg-opensans;
                 font-weight: 500;
                 color: #666;
                 padding-left: 30px;
@@ -13705,6 +13804,9 @@ span.close_btt {
         #main {
             min-height: inherit;
         }
+        .container {
+            padding: 0;
+        }
     }
     .itgvideo {
         >iframe {
@@ -13771,8 +13873,8 @@ span.see-picture {
     color: #086DC7;
 }
 
-.featured_photo_carousel .data-holder {
-    height: calc(100% - 22px);
+.widget-wrapper.featured_photo_carousel .data-holder {
+    height: calc(100% - 27px);
 }
 
 .top_stories_ordering,
@@ -13798,10 +13900,14 @@ span.see-picture {
     .view-front-end-global-search .view-content .itg-search-list>.search-detail,
     .view-front-end-global-search .view-content .itg-search-list>.social-share {
         overflow: initial;
-        padding-left: 154px;
+        padding-left: 0px;
     }
     .view-front-end-global-search .view-content .itg-search-list>.views-field {
         padding-left: 154px;
+    }
+    .view-front-end-global-search .view-content .search-pic {
+        float: left;
+        margin-right: 15px;
     }
 }
 
@@ -13855,7 +13961,7 @@ span.see-picture {
     width: 100%;
     padding: 25px;
     color: #fff;
-    font-family: "Roboto", sans-serif;
+    font-family: "OpenSans-Regular";
 }
 
 .big-pic .cat-heading h3 {
@@ -13888,16 +13994,17 @@ span.see-picture {
     width: 100%
 }
 
-body.page-taxonomy-term #main .row {
+
+/*body.page-taxonomy-term #main .row {
     overflow: inherit !important;
-}
+}*/
 
 .sponsor-header {
     float: right;
     margin-top: -45px;
     color: #83b1cb;
     text-transform: uppercase;
-    font-family: roboto;
+    font-family:$itg-opensans;
     font-size: 12px;
     position: relative;
     z-index: 9999;
@@ -13920,7 +14027,7 @@ body.page-taxonomy-term #main .row {
 
 .story-sponsor-powered-text {
     color: #83b1cb;
-    font-family: roboto;
+    font-family: $itg-opensans;
     font-size: 14px;
 }
 
@@ -13931,7 +14038,7 @@ span.story-sponsor-powered-text::last-word {
 
 .story-sponsor-impact {
     color: #83b1cb;
-    font-family: roboto;
+    font-family: $itg-opensans;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
@@ -13960,7 +14067,7 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .data-holder .itg-listing li {
-    padding: 20px 18px;
+    padding:10px;
 }
 
 .itg-sponsor-title {
@@ -13983,7 +14090,7 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .data-holder .section-ordering p:before {
-    top: 22px;
+    top: 25px;
 }
 
 .featured-news .featured-post a.itg-sponsored {
@@ -13998,6 +14105,7 @@ span.story-sponsor-powered-text::last-word {
         color: #086DC7;
         +a {
             color: #086DC7;
+            display: initial;
         }
     }
 }
@@ -14126,7 +14234,7 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .anchor-right span.followers-link {
-    font: 400 15px/17px roboto;
+    font: 400 15px/17px "OpenSans-Regular";
     color: #a8a8a8;
     margin: 6px 0 12px;
     display: block;
@@ -14179,8 +14287,9 @@ span.story-sponsor-powered-text::last-word {
     font-size: 0.8125rem;
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
-    color: #929292;
+    color: #777;
     line-height: 18px;
+    font-family:$itg-opensanssemibold;
 }
 
 #cricketblog .bolg-content .row {
@@ -14190,7 +14299,7 @@ span.story-sponsor-powered-text::last-word {
 }
 
 #cricketblog h2 {
-    font: 300 16px/20px roboto;
+    font: 300 16px/20px $itg-merriweatherbold;
     color: #767676;
     margin-bottom: 15px
 }
@@ -14220,9 +14329,10 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .live-block h1 {
-    font-weight: 900;
-    color: #000;
-    font-size: 42px;
+    font-weight:700;
+    color: #111;
+    font-size:34px;
+    line-height: 45px;
 }
 
 .live-block h1 span {
@@ -14234,14 +14344,14 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .live-block .bolg-content#bolgcontent p {
-    color: #474747;
-    line-height: 26px;
+    color: #111;
+    line-height: 27px;
 }
 
 .live-block .bolg-content#bolgcontent p span {
     font-weight: 700;
     margin-right: 4px;
-    color: #000;
+    color: #111;
 }
 
 .live-block #cricketblog .bolg-content .para-live-blog {
@@ -14345,14 +14455,15 @@ span.story-sponsor-powered-text::last-word {
 
 .tech-pros-cons-main h2 {
     font-size: 28px;
-    line-height: 45px;
-    color: #000;
+    line-height: 35px;
+    color: #fff;
     font-weight: bold;
     padding: 0 0 0 10px;
     float: left;
-    margin-left: 42%;
-    width: 58%;
+    width:100%;
     margin-bottom: 10px;
+    background: #000;
+    border-bottom: 2px solid #cccc;
 }
 
 .tech-pros-cons-main h2 strong {
@@ -14376,15 +14487,16 @@ ul.tech-pron-cons-img {
 
 ul.tech-pros {
     list-style: disc;
-    width: 27%;
+    width: 25%;
     float: left;
     margin-left: 4%;
 }
 
 ul.tech-cons {
     list-style: disc;
-    width: 27%;
+    width: 25%;
     float: left;
+    margin-left: 4%;
 }
 
 ul.tech-cons li,
@@ -14403,9 +14515,11 @@ ul.tech-pros li span {
     font-weight: bold;
     line-height: 24px;
     list-style: outside none none;
-    margin-left: -14px;
+    margin-left: -17px;
     text-transform: uppercase;
 }
+
+.story-section .story-right .description .tech-pros-cons-main ul{padding-left:0px;}
 
 ul.tech-cons li:first-child,
 ul.tech-pros li:first-child {
@@ -14549,11 +14663,12 @@ ul.pron-cons-img li img {
     z-index: 9999 !important;
 }
 
-.cheaper_dearer {
+
+/*.cheaper_dearer {
     .budget-predictor-img {
         max-height: 130px;
     }
-}
+}*/
 
 
 /* css add by arun/itg */
@@ -14571,7 +14686,7 @@ ul.pron-cons-img li img {
     background: #fff;
     z-index: 1;
     position: relative;
-    padding: 45px 20px 10px 0px;
+    padding: 20px 20px 10px 0px;
     display: inline-block;
 }
 
@@ -14586,7 +14701,7 @@ ul.pron-cons-img li img {
     background: #ddd;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block ul {
+#block-itg-photogallery-photogallery-link-menu-block ul {
     list-style: none;
     white-space: nowrap;
     display: inline-block;
@@ -14596,7 +14711,7 @@ ul.pron-cons-img li img {
     overflow: auto;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block ul li {
+#block-itg-photogallery-photogallery-link-menu-block ul li {
     display: inline-block;
     vertical-align: top;
     border-right: 0;
@@ -14604,18 +14719,18 @@ ul.pron-cons-img li img {
     padding-right: 30px;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block ul li a {
+#block-itg-photogallery-photogallery-link-menu-block ul li a {
     display: block;
     margin: 0;
     padding: 10px 5px 3px;
     border-bottom: 3px solid transparent;
-    font-family: Roboto;
+    font-family: $itg-opensans;
     font-weight: 500;
     color: #969696;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block {
-    margin-top: 22px;
+#block-itg-photogallery-photogallery-link-menu-block {
+    margin-top: 10px;
 }
 
 .other_video_category h3 {
@@ -14646,7 +14761,7 @@ ul.pron-cons-img li img {
     background: #ddd;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content ul {
+#block-itg-videogallery-itg-videogallery-menu-content ul {
     list-style: none;
     white-space: nowrap;
     display: inline-block;
@@ -14656,7 +14771,7 @@ ul.pron-cons-img li img {
     overflow: auto;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content ul li {
+#block-itg-videogallery-itg-videogallery-menu-content ul li {
     display: inline-block;
     vertical-align: top;
     border-right: 0;
@@ -14664,53 +14779,52 @@ ul.pron-cons-img li img {
     padding-right: 30px;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content ul li a {
+#block-itg-videogallery-itg-videogallery-menu-content ul li a {
     display: block;
     margin: 0;
     padding: 10px 5px 3px;
     border-bottom: 3px solid transparent;
-    font-family: Roboto;
+    font-family: $itg-opensans;
     font-weight: 500;
     color: #969696;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content {
+#block-itg-videogallery-itg-videogallery-menu-content {
     margin-top: 22px;
-    float: left;
     width: 100%;
     margin-bottom: 22px;
 }
 
-#block-itg- videogallery-itg- other-videogallery- section .photo-list img {
+#block-itg-videogallery-itg-other-videogallery-section .photo-list img {
     width: 170px;
-    height: 127px;
+    
 }
 
-.video-header- right .video_header_tabs .tab-data-2 h3 {
+.video-header-right .video_header_tabs .tab-data-2 h3 {
     display: none;
 }
 
-.video-header- right .trending-videos {
+.video-header-right .trending-videos {
     border: 0px;
 }
 
-#related-video- tab ul li.related_content_tab .pic,
-.video-header- right .trending-videos li.trending-videos- list .pic {
+#related-video-tab ul li.related_content_tab .pic,
+.video-header-right .trending-videos li.trending-videos-list .pic {
     width: 170px;
     float: right;
     margin-left: 5px;
     position: relative;
+    margin-right:0px;
 }
 
-#related-video- tab ul li,
-.trending-videos ul li {
-    padding: 15px 24px 15px 0px;
-    border-bottom: 1px solid #aaa9a9;
+#related-video-tab ul li,
+.video_header_tabs .trending-videos li {
+    padding: 15px 0px 15px 0px;
     overflow: hidden;
 }
 
-#related-video- tab ul li.related_content_tab .title,
-.video-header- right .trending-videos li.trending-videos- list p {
+#related-video-tab ul li.related_content_tab .title,
+.video-header-right .trending-videos li.trending-videos-list p {
     display: block;
     overflow: hidden;
     word-wrap: break-word;
@@ -14720,8 +14834,8 @@ ul.pron-cons-img li img {
     color: #aaa9a9;
 }
 
-#related-video- tab ul li.related_content_tab .title a,
-.trending-videos li.trending-videos- list p a {
+#related-video-tab ul li.related_content_tab .title a,
+.video_header_tabs .trending-videos li.trending-videos-list p a {
     color: #aaa9a9;
 }
 
@@ -14731,7 +14845,7 @@ ul.pron-cons-img li img {
     padding: 5px 0 0 5px;
 }
 
-.latest_video .tab-buttons.tab- buttons span {
+.latest_video .tab-buttons.tab-buttons span {
     border: 0px;
     background: none;
     width: auto;
@@ -14746,6 +14860,10 @@ ul.pron-cons-img li img {
     border-radius: 0;
 }
 
+.latest_video .tab-buttons.tab-buttons span a {
+    color: #fff;
+}
+
 .latest_video .tab-buttons span.active {
     border: 0px;
     background: #363636;
@@ -14757,7 +14875,7 @@ ul.pron-cons-img li img {
     border-radius: 0;
 }
 
-.video-header- right .related_content_tab span.videolengh {
+.video-header-right .related_content_tab span.videolengh {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -14765,58 +14883,56 @@ ul.pron-cons-img li img {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 12px;
-    font-family: Roboto;
+    font-family: $itg-opensans;
 }
 
-.video-landing- header .upload-date span {
+.video-landing-header .upload-date span {
     font-size: 12px;
     font-weight: 600;
     margin: 10px 0;
     display: block;
 }
 
-.video-landing- header .top-section p {
+.video-landing-header .top-section p {
     margin-bottom: 10px
 }
 
 .latest_video.video_header_tabs .tab-data-1 {
-    height: 475px;
+    height:400px;
     overflow-y: auto;
 }
 
 .latest_video.video_header_tabs .tab-data-2 {
-    height: 475px;
+    height:400px;
     overflow-y: auto;
 }
 
-.video_header_tabs #related-video- tab ul li.related_content_tab .related- default {
+.video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
     width: 170px;
-    height: 127px;
 }
 
-.video_header_tabs .trending-videos ul li .trending-videos- list img {
+.video_header_tabs .trending-videos li.trending-videos-list img {
     width: 170px;
-    height: 127px;
 }
 
-#block-itg- videogallery-itg- videogallery-tab- realted .related_content_tabs .title a {
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
     color: #aaa9a9;
 }
 
-#block-itg- videogallery-itg- videogallery-tab- realted .related_content_tabs figure a {
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figure a {
     position: relative;
     float: right;
 }
 
-#block-itg- videogallery-itg- videogallery-tab- realted .related_content_tabs figcaption {
-    bottom: 0;
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figcaption {
+    bottom: 0px;
     left: 0;
     position: absolute;
     padding: 5px;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 12px;
-    font-family: Roboto;
+    font-family: $itg-opensans;
 }
 
 #modal-content #reporter-node-form .vertical-tabs {
@@ -14847,3 +14963,82 @@ ul.pron-cons-img li img {
     margin-right: 20px;
     margin-top: 6px;
 }
+
+.budget-page-layout [id*="twitter-widget"] {
+    margin: 0 auto;
+    display: inherit;
+}
+
+/* New Header by ITGD */
+.hidden-desktop{ display: none; }
+.adtext{ font-size:11px; color:#5f5f5f; line-height:16px; text-align:center;text-transform: uppercase;}
+#block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{ display: none; }
+#block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{ display: none; }
+#block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:4px; margin-bottom:10px; }
+#block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{ float: left; }
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width: 8px; height: 8px;border-radius: 100%;background: #c00;display: inline-block;
+    position: relative;top: -5px; left:-5px; box-shadow: 0 0 0 rgba(214,2,12,.8);  border-radius: 50%; background: #c00; animation: pulse 1.7s infinite; content:"";}
+#block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile{ display: none; }
+#block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{ float: left;width:185px; text-align: center; height:40px; }
+#block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo + .menu li.menu__item.is-leaf a{ padding-right:0px;padding-left:35px; }
+
+#block-itg-layout-manager-header-block .social-nav .social-dropdown{ display: none; position: absolute; top:-5px; right:40px;    -webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out; width:0px; background:#f0f0f0;height: 37px;}
+#block-itg-layout-manager-header-block .navigation .menu{ margin-right:0px; }
+#block-itg-layout-manager-header-block .menu-login{position: absolute;right: 0px;top: 0px;}
+#block-itg-layout-manager-header-block .menu-login .social-nav ul li{ display:inline-block;}
+#block-itg-layout-manager-header-block .menu-login .social-nav ul li a{ padding:0 10px; line-height:32px; color:#fff; }
+#block-itg-layout-manager-header-block .social-nav .globle-search .search-text{ height:37px; border:0px; }
+#block-itg-layout-manager-header-block .social-nav .share-icon-parent{ position: relative; }
+#block-itg-layout-manager-header-block .social-nav .social-dropdown.active{ display: block; width:260px;}
+#block-itg-layout-manager-header-block .social-nav .social-dropdown ul li a{ line-height:45px; color:#333; }
+#block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li:hover .fa,#block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li .fa{ color:#333; }
+
+.dot_red {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background: #c00;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+.dot_red {
+    box-shadow: 0 0 0 rgba(214, 2, 12, .8);
+    border-radius: 50%;
+    background: #c00;
+    animation: pulse 1.7s infinite;
+}
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(214, 2, 12, .8)
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(214, 2, 12, 0)
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(214, 2, 12, 0)
+    }
+}
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(214, 2, 12, .4);
+        box-shadow: 0 0 0 0 rgba(214, 2, 12, .4)
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 6px rgba(214, 2, 12, 0);
+        box-shadow: 0 0 0 6px rgba(214, 2, 12, 0)
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(214, 2, 12, 0);
+        box-shadow: 0 0 0 0 rgba(214, 2, 12, 0)
+    }
+}
+
+.front .ad-widget .sidebar-ad .block-itg-ads{margin:0px auto 0;}
+.education-layout-page .widget-title{padding:5px;}
+.education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable {height: 314px; min-height: initial;}
+.auto-layout-page .auto-road-trip .trending-videos li:nth-child(1){padding-top:0px;}
+.section-ordering p,.trending-videos .trending-videos-list, .watch-right-now-video ul li{font-family:$itg-opensanssemibold;}
+.itg-top-section .home-top-story .data-holder .itg-listing li {padding: 10px;font-family:$itg-opensanssemibold;}
+#block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list{font-family:$itg-opensanssemibold;}

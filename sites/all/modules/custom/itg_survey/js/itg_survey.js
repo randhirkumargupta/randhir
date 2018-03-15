@@ -177,10 +177,14 @@
       var select_value =  $('.form-field-name-field-survey-add-questions tr .form-select').val();
       var hideOption = $('.form-field-name-field-survey-add-questions tr').find('.field-name-field-survey-answer-option-2');
       if(select_value == "rating"){
-          hideOption.hide();
+          hideOption.hide(function() {
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").addClass('no-after');
+          });
         }
         else{
-          hideOption.show();
+          hideOption.show(function(){
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").removeClass('no-after');
+          });
         }
       
       // Hiding add more options from answer choices if Answer Type is Rating
@@ -188,10 +192,14 @@
         var selvalue = $(this).val();
         var hide_option = $(this).closest('tr').find('.field-name-field-survey-answer-option-2');
         if(selvalue == "rating"){
-          hide_option.hide();
+          hide_option.hide(function() {
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").addClass('no-after');
+          });
         }
         else {
-          hide_option.show();
+          hide_option.show(function(){
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").removeClass('no-after');
+          });
         }
       });
 

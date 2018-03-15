@@ -104,7 +104,6 @@ jQuery(document).ready(function () {
     jQuery('.event-form-remove').click(function () {
         var $eventNum = jQuery(".event-form-number");
         var b = $eventNum.val();
-        console.log(b);
         if (b > 1) {
             jQuery("table.field-multiple-table tr td:last").prev().find(".cancel.form-submit").trigger("mousedown");
             jQuery('html, body').animate({
@@ -198,8 +197,9 @@ jQuery(document).ready(function () {
                         if (obj_success['discounted_value'] == 0) {
                             jQuery('.form-field-name-field-erf-payment-gateway').hide();
                             jQuery('.event-total-fees-text').hide();
-                            jQuery('.event-total-fees-text').parent().append("<span class='free-class'>Free</span>");
-                            jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();
+                            var _total_fee = jQuery('.event-total-fees-text').html();
+                            jQuery('.event-total-fees-text').parent().html("<label for='edit-total-fees-container'>Total Fees </label><span class='event-total-fees-text' style='display:none;'>"+_total_fee +"</span><span class='free-class'>Free</span>");
+                            jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();               
                         }
                     }
                 }
@@ -259,7 +259,6 @@ jQuery(document).ready(function () {
 jQuery(document).ajaxSuccess(function () {
     if (jQuery(".messages--error").length > 1) {
         var error_message_length = jQuery(".messages--error").length;
-        console.log(error_message_length);
         if (error_message_length > 1) {
             jQuery("body").find("#page-title").next(".messages--error").remove();
         }

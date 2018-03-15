@@ -238,11 +238,6 @@ function itg_octopus_api_schema() {
         'type' => 'int',
         'not null' => TRUE,
       ),
-      'new_element_id' => array(
-        'description' => 'TODO: to add new content id for story,video,photo!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
       'element_type' => array(
         'description' => 'element_type',
         'type' => 'varchar',
@@ -566,7 +561,162 @@ function itg_octopus_api_schema() {
     ),
   );
 
+  // Octopus itg_octopus_cron_log
+  $schema['itg_octopus_cron_log'] = array(
+    'description' => 'The base table for itg_octopus_cron_log.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a itg_octopus_cron_log.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cron_id' => array(
+        'description' => 'Cron id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'slug_id' => array(
+        'description' => 'Slug id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'message' => array(
+        'description' => 'Message',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'Type',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
 
+  // Octopus itg_octopus_cron
+  $schema['itg_octopus_cron'] = array(
+    'description' => 'The base table for itg_octopus_cron.',
+    'fields' => array(
+      'cron_id' => array(
+        'description' => 'The primary identifier for a itg_octopus_cron.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'Slug id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'video_request_id' => array(
+        'description' => 'Video request id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'request_tv_to_s3' => array(
+        'description' => 'Request tv to s3',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'file_copied_dump_machine' => array(
+        'description' => 'File copied dump machine',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'file_copied_to_s3' => array(
+        'description' => 'File copied to s3',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'request_s3_to_dm' => array(
+        'description' => 'Request s3 to dm',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cron_init_time' => array(
+        'description' => 'Cron init time',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'last_cron_run_time' => array(
+        'description' => 'Last Cron Run Time',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'final_success' => array(
+        'description' => 'Final Success',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cron_id'),
+  );
+
+
+  // Octopus itg_octopus_s3_path_for_cron
+  $schema['itg_octopus_s3_path_for_cron'] = array(
+    'description' => 'The base table for itg_octopus_s3_path_for_cron.',
+    'fields' => array(
+      'cs3_id' => array(
+        'description' => 'The primary identifier for a itg_octopus_s3_path_for_cron.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cron_id' => array(
+        'description' => 'Cron id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'video_request_id' => array(
+        'description' => 'Video request id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      's3_path' => array(
+        'description' => 'S3 path',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'file_size' => array(
+        'description' => 'File size',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'timestamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cs3_id'),
+  );
 
   return $schema;
 }

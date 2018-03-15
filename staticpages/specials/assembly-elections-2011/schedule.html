@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Assembly elections 2011</title>
+<style>
+body { margin:0; padding:0;}
+</style>
+<SCRIPT>
+var img1 = new Image().src = "images/schedule_assam.jpg"
+var img2 = new Image().src = "images/schedule_kerala.jpg"
+var img3 = new Image().src = "images/schedule_pondicherry.jpg"
+var img4 = new Image().src = "images/schedule_tanil_nadu.jpg"
+var img5 = new Image().src = "images/schedule_west_bengal_click.jpg"
+
+function setImage(imageSelect) {
+ theImageIndex = imageSelect.options[imageSelect.selectedIndex].value;
+ if (document.images)
+ {
+   
+	 if(theImageIndex==5)
+	 {
+	 
+	 document.getElementById('imgs').innerHTML="<a onclick=window.open('/popup.html','windowname1','width=540"+","+"height=242')><img src='images/schedule_west_bengal_click.jpg' border='0'></a>";
+	 }
+	 else
+	 {
+		document.getElementById('imgs').innerHTML="<img src='images/schedule_west_bengal_click.jpg' border='0'>";
+		document.images[0].src = eval("img" + theImageIndex);
+	 }
+}
+  }
+</SCRIPT>
+</head>
+<body>
+<FORM NAME="theForm" METHOD="POST">
+<TABLE width="300" cellpadding="0" cellspacing="0"><TR><TD align="right" style="float:right;">
+<SELECT NAME="items" onChange="setImage(this)">
+   <OPTION VALUE="1" >Assam</OPTION>
+   <OPTION VALUE="2">Kerala</OPTION>
+   <OPTION VALUE="3">Puducherry</OPTION>
+   <OPTION VALUE="4" selected="selected">Tamil Nadu</OPTION>
+   <OPTION VALUE="5">West Bengal</OPTION>
+ </SELECT></TD></TR>
+ <TR>
+ <TD id="imgs"><IMG SRC = "images/schedule_tanil_nadu.jpg" border="0" ></TD></TR>
+ </TABLE></FORM>
+</body>
+</html>

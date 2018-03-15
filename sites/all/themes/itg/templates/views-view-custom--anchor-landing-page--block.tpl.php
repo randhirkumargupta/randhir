@@ -3,7 +3,7 @@ global $base_url;
 $anchor = $rows[0];
 $nid = $anchor['nid'];
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $fb_title = itg_common_only_text_string($anchor['title']);
 $src = '';
 // prepare url for sharing
@@ -23,7 +23,7 @@ $follow_status = $content["follow_status"];
       }
       else {
         ?>
-        <img width="370" height="208" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt=""/>
+      <img width="370" height="208" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title=""/>
       <?php } ?>
     </div>
     <div class="anchor-right" >

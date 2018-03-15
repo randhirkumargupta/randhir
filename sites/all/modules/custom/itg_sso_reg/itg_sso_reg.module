@@ -17,9 +17,9 @@ function itg_sso_reg_init() {
   global $user, $base_url, $theme;
   $arg = arg();
   // condition to redirect backend user in case of sso
-  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
-     drupal_goto(FRONT_URL);
-  }
+//  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
+//     drupal_goto(FRONT_URL);
+//  }
   
   if (array_key_exists(FRONT_USER, $user->roles) && $arg[0] == 'sso-user') {
     // make configuration for js file
@@ -153,7 +153,7 @@ function itg_sso_reg_menu() {
   
   
   $items['akamai-user'] = array(
-    'title' => 'Logged in akamai user',
+    'title' => '',
     'page callback' => 'itg_sso_itgredirect',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -344,7 +344,8 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
  */
 function itguser_logout() {
   global $user;
-
+  setrawcookie("itg_forced_login", "null", -1,'/', SSO_COOKIE_DOMAIN);
+  
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');
     $domain_array = explode(',', $domains);
@@ -541,18 +542,20 @@ function itg_del_history_table_data() {
  * function itg_sso_itgredirect().
  */
 function itg_sso_itgredirect() {
-  drupal_add_http_header('Cache-Control', 'no-store');
-  watchdog('user_page', 'pass');
+  global $base_url;
   $arg = arg();
+  drupal_add_http_header('Cache-Control', 'no-store');
+  drupal_add_css(drupal_get_path('module', 'itg_sso_reg') . '/css/itg_login_popup.css');
+  //watchdog('user_page', 'pass');
   $redirect = base64_decode($arg[1]);
-  watchdog('redirect_sso', $redirect);
-  //drupal_goto($redirect);
-  print 'Please wait while redirecting';
+  //watchdog('redirect_sso', $redirect);
+  $loader = $base_url . '/sites/all/themes/itg/images/loader.svg';
+  $login_html = '<div class="please-wait-loading"><span><img height="50" width="50" class="profile-loader" align="center" src="' . $loader . '" alt="Loading..." /> Please wait while we are logging you in..</span></div>';
   
   drupal_add_js('
   jQuery(document).ready(function () {
     window.location.href = "' . $redirect . '";
   });', 'inline');
-  
-  return 'Login';
+
+  return $login_html;
 }

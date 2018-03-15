@@ -26,6 +26,13 @@
                 }
             });
 
+            jQuery("#edit-custom-drp").mouseup(function () {
+                var val = jQuery(this).val();
+                if (val == 'calender') {
+                    jQuery(".searh-all-filters .caln").show();
+                }
+            });
+
             if (custom_field_val != 'calender') {
                 $(".caln").hide();
                 $(".caln").hide();
@@ -99,8 +106,6 @@
                     onSelect: function (dateText, inst) {
                         urlpath = window.location.href;
                         url = urlpath.split("/");
-                        console.log(url[3]);
-                        console.log(url[4]);
                         var ctype = ["story", "gallery", "video"];
                         if (jQuery.inArray(url[4], ctype) != -1) {
                             var pathname = base_url + '/' + 'archives/' + url[4] + '/' + dateText;

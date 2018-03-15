@@ -3,7 +3,7 @@ global $user, $base_url;
 $node = $data['node'];
 $nid = $node->nid;   
 $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $fb_title = addslashes($node->title);
 $share_desc = '';
 $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
@@ -24,7 +24,7 @@ if (function_exists('itg_story_global_comment_last_record')) {
         <?php
         if ($config_name == 'vukkul') {
             ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
         <?php } if ($config_name == 'other') { ?> 
             <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
         <?php } ?>

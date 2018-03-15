@@ -2275,6 +2275,45 @@ function feature_for_reports_views_default_views() {
   $handler->display->display_options['filters']['field_story_source_type_value']['field'] = 'field_story_source_type_value';
   $handler->display->display_options['filters']['field_story_source_type_value']['value'] = 'migrated';
   $handler->display->display_options['filters']['field_story_source_type_value']['group'] = 2;
+  /* Filter criterion: Content: Source type (field_story_source_type) */
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['id'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['table'] = 'field_data_field_story_source_type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['field'] = 'field_story_source_type_value';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator_id'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['label'] = 'Source type';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['operator'] = 'field_story_source_type_value_1_op';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['identifier'] = 'field_story_source_type_value_1';
+  $handler->display->display_options['filters']['field_story_source_type_value_1']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
+  );
   $handler->display->display_options['path'] = 'report/filed-content';
 
   /* Display: Data export */

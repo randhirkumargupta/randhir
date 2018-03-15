@@ -86,7 +86,6 @@ class ItgCategoryMigration extends XMLMigration {
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     $this->addFieldMapping('field_cm_select_template_type', 'template_name')->xpath('template_name');
-    //$this->addFieldMapping('pathauto', 'sef_url')->xpath(t('sef_url'));
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sefurl')->xpath('sef_url');
     $this->addFieldMapping('field_user_city', 'programme_schedule')->xpath('programme_schedule');
@@ -94,15 +93,9 @@ class ItgCategoryMigration extends XMLMigration {
     $this->addFieldMapping('field_category_app_description', 'app_description')->xpath('app_description');
     $this->addFieldMapping('field_program_timing_in_days', 'telecasting_time')->xpath('telecasting_time');
     $this->addFieldMapping('field_cm_redirection_url', 'content_url')->xpath('content_url');
-    //$this->addFieldMapping('field_category_section_type', 'section_type')->xpath('section_type');
     $this->addFieldMapping('field_cm_category_color', 'content_display_color')->xpath('content_display_color');
     // Redirect
     $this->addFieldMapping('migrate_redirects', 'content_url')->xpath('content_url');
-    //<simply_flag>0</simply_flag>(not clear)
-    //<params>(not clear)
-    //<schedule_duration>(not clear)
-    //<telecasting_time>(not clear)
-    //<created>(NULL)</created>(not clear)
   }
 
   public function prepareRow($row) {
@@ -114,7 +107,7 @@ class ItgCategoryMigration extends XMLMigration {
       
       //sef url
       $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
-     // $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
+      $row->xml->sef_url = $sef_path.'/'.itg_common_custompath_insert_val(trim((string) $row->xml->sef_url));
     }
     else {
       $row->xml->section = '';

@@ -59,7 +59,7 @@ function be_lucky_today_home($form, $form_state) {
     ctools_include('modal');
     ctools_modal_add_js();
     $form['be_lucky_markup_image'] = array(
-      '#markup' => '<img src="' . $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today') . '/images/iphone-one.png" alt="">',
+      '#markup' => '<img src="' . $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today') . '/images/iphone-one.png" alt="" title="">',
       '#prefix' => '<div class="ball">',
       '#suffix' => '</div>',
     );
@@ -399,11 +399,11 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     global $base_url;
     $state = '';
     if (isset($form_state['multistep_values']['registration3']['state'])) {
-        $state = get_term_name_by_tid($form_state['multistep_values']['registration3']['state']);
+        $state = get_term_name_by_tid_custom($form_state['multistep_values']['registration3']['state']);
     }
     $city = '';
     if (isset($form_state['multistep_values']['registration3']['city'])) {
-        $city = get_term_name_by_tid($form_state['multistep_values']['registration3']['city']);
+        $city = get_term_name_by_tid_custom($form_state['multistep_values']['registration3']['city']);
     }
     $selected_magazine_name = $form_state['input']['magazine_name'];
     $magazine1 = $form_state['input']['magazine'];
@@ -459,7 +459,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
  * @param int $tid
  * @return array
  */
-function get_term_name_by_tid($tid) {
+function get_term_name_by_tid_custom($tid) {
     return db_select('taxonomy_term_data', 't')
             ->fields('t', array('name'))
             ->condition('tid', $tid)
@@ -566,7 +566,7 @@ meter;
     $form['#prefix'] = '<div class="itg_be_lucky_today_2">';
     $form['#suffix'] = '</div>';
     $form['indiatoday_logo'] = array(
-      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group" title="India Today Group"></a>',
       '#prefix' => '<div class="body-center">'
     );
     $form['header'] = array(
@@ -883,9 +883,9 @@ function thank_you_payment_failed_form($form, &$form_state) {
     $module_path = $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today');
     $html = <<<share
 <ul class="social" style="width:156px;">
-<li><a href="javascript:void(0);" onclick="return fbs_click()" title="facebook"><img src="$module_path/images/fb.png" alt="facebook"></a></li>
-<li><a href="https://twitter.com/intent/tweet?original_referer=http://indiatoday.intoday.in/be-lucky-today&amp;source=tweetbutton&amp;text=Grab the chance before it??s gone! Enter the India Today Survey %26 stand a chance to win an iPhone6: bit.ly/Social_sharing %23YourLuckToday" target="_blank" title="twitter"><img src="$module_path/images/twitter.png" alt="twitter"></a></li>
-<li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus"></a></li>
+<li><a href="javascript:void(0);" onclick="return fbs_click()" title="facebook"><img src="$module_path/images/fb.png" alt="facebook" title="facebook"></a></li>
+<li><a href="https://twitter.com/intent/tweet?original_referer=http://indiatoday.intoday.in/be-lucky-today&amp;source=tweetbutton&amp;text=Grab the chance before it??s gone! Enter the India Today Survey %26 stand a chance to win an iPhone6: bit.ly/Social_sharing %23YourLuckToday" target="_blank" title="twitter"><img src="$module_path/images/twitter.png" alt="twitter" title="twitter"></a></li>
+<li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus" title="gplus"></a></li>
 </ul>
 share;
     $form['#attached']['js'] = array(
@@ -895,7 +895,7 @@ share;
       drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
     );
     $form['indiatoday_logo'] = array(
-      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group" title="India Today Group"></a>',
       '#prefix' => '<div class="body-center">'
     );
     $form['header'] = array(
@@ -929,9 +929,9 @@ function thank_you_payment_success_form($form, &$form_state) {
     $module_path = $base_url . '/' . drupal_get_path('module', 'itg_be_lucky_today');
     $html = <<<share
 <ul class="social" style="width:156px;">
-<li><a href="javascript:void(0);" onclick="return fbs_click()" title="facebook"><img src="$module_path/images/fb.png" alt="facebook"></a></li>
-<li><a href="https://twitter.com/intent/tweet?original_referer=http://indiatoday.intoday.in/be-lucky-today&amp;source=tweetbutton&amp;text=Grab the chance before it??s gone! Enter the India Today Survey %26 stand a chance to win an iPhone6: bit.ly/Social_sharing %23YourLuckToday" target="_blank" title="twitter"><img src="$module_path/images/twitter.png" alt="twitter"></a></li>
-<li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus"></a></li>
+<li><a href="javascript:void(0);" onclick="return fbs_click()" title="facebook"><img src="$module_path/images/fb.png" alt="facebook" title="facebook"></a></li>
+<li><a href="https://twitter.com/intent/tweet?original_referer=http://indiatoday.intoday.in/be-lucky-today&amp;source=tweetbutton&amp;text=Grab the chance before it??s gone! Enter the India Today Survey %26 stand a chance to win an iPhone6: bit.ly/Social_sharing %23YourLuckToday" target="_blank" title="twitter"><img src="$module_path/images/twitter.png" alt="twitter" title="twitter"></a></li>
+<li><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/be-lucky-today/index.jsp" target="_blank" title="gplus"><img src="$module_path/images/gplus.png" alt="gplus" title="gplus"></a></li>
 </ul>
 share;
     $form['#attached']['js'] = array(
@@ -941,7 +941,7 @@ share;
       drupal_get_path('module', 'itg_be_lucky_today') . '/css/itg_be_lucky_today.css',
     );
     $form['indiatoday_logo'] = array(
-      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group"></a>',
+      '#markup' => '<a href="/" title="India Today Group" class="logo"><img src="' . $base_url . '/' . drupal_get_path("module", "itg_be_lucky_today") . '/images/logo.png" alt="India Today Group" title="India Today Group"></a>',
       '#prefix' => '<div class="body-center">'
     );
     $form['header'] = array(

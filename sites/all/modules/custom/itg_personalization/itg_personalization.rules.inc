@@ -66,12 +66,14 @@ function itg_user_list_by_tid($tid) {
   $data = '';
   if (function_exists('mongodb') && !empty($tid)) {
     $con = mongodb();
-    $people = $con->following_personalization;
-    $cond = array('tid' => $tid);
-    $cursor = $people->find($cond);
-    foreach ($cursor as $key => $document) {
-      $data[]['uid'] = $document['uid'];
+    if (isset($con)) {
+      $people = $con->following_personalization;
+      $cond = array('tid' => $tid);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $key => $document) {
+        $data[]['uid'] = $document['uid'];
+      }
+      return $data;
     }
-    return $data;
   }
 }

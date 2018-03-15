@@ -60,7 +60,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
     }
    
     if(!empty($cart_point)) {
-      watchdog('cart_total_point', $cart_point);
+      //watchdog('cart_total_point', $cart_point);
       $remaining_point = $remaining_previous_point - $cart_point;
     } else {
       $remaining_point = $remaining_previous_point;
@@ -399,7 +399,7 @@ function _get_order_item() {
         'path' => $product['product']['image']['uri'],
           )
       );*/
-      $product_pic = '<img src="'.$product['product']['product_image'].'" alt="product_image" />';
+      $product_pic = '<img src="'.$product['product']['product_image'].'" alt="product_image" title="product_image" />';
       $output = '<div class="checkout-details">';
       $output = '<div class="checkout-inner">';
       //$output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['title'] . '</strong></div>';

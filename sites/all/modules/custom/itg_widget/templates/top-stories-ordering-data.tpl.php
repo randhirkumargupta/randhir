@@ -1,5 +1,11 @@
 
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
   <ul class="itg-listing">
       <?php
       foreach ($data as $entity) {
@@ -15,9 +21,9 @@
             }
           }
           ?>
-          <li title="<?php echo _widget_title($entity['title']); ?>" class="<?php print $entity['type'] ?> top-story-<?php print $entity['nid'] ?>  <?php print $pipelineclass; ?>">
-              <?php if (_is_sponsor_story_article($entity['nid'])): ?>
-                <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+          <li <?php echo $data_tb_region_item;?> title="<?php echo _widget_title($entity['title']); ?>" class="<?php print $entity['type'] ?> top-story-<?php print $entity['nid'] ?>  <?php print $pipelineclass; ?>">
+              <?php if ($entity['is_spnoser']): ?>
+                <span class="itg-sponsor-title"><?php print t('IMPACT FEATURE'); ?></span>
                 <?php
               endif;
               if (function_exists('itg_common_get_smiley_title')) {

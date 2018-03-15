@@ -100,7 +100,7 @@
 
 <?php
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
 $imagedata = base64_encode(file_get_contents($data->uri));
 $url = file_create_url($data->uri);
 $image_exten = end(explode('.', $data->uri));
@@ -118,7 +118,9 @@ $image_exten = end(explode('.', $data->uri));
 </div>
 <div class="croper-action">
     <button class=" add-more <?php echo ($extra_crop == 1) ? 'crop-all' : 'crop-image'; ?>">Crop</button>
+ <?php if ($content_type == 'bodyeditor') { ?>   
     <button class="original-image add-more">Use Original</button>
+ <?php } ?> 
     <button class="cancel-image add-more">Cancel</button>    
 </div>
 

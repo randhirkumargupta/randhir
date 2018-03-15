@@ -27,6 +27,12 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
+  $items['content-state-title-list/%/%/autocomplete'] = array(
+    'page callback' => 'itg_state_get_content_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
   $items['content-workbench-title-list/%/%/autocomplete'] = array(
     'page callback' => 'itg_story_get_workbench_title',
     'access arguments' => array('access itg story'),
@@ -61,19 +67,21 @@ function itg_story_menu() {
     'page callback' => 'itg_story_create_breaking_news',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_story.helper.inc',
+    'file' => 'includes/itg_story.inc',
   );
 
   $items['byline/autocomplete'] = array(
     'page callback' => 'itg_story_byline',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
 
   $items['multibyline-save'] = array(
     'page callback' => 'itg_story_byline_save',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
 
   $items['admin/config/administration/sponsor_category'] = array(
@@ -101,6 +109,41 @@ function itg_story_menu() {
     'page arguments' => array(1),
     'access callback' => TRUE,
     'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_story.inc',
+  );
+  
+  $items['mega-review/embed/%node'] = array(
+    'page callback' => 'itg_story_mega_review_node_embed',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
+  
+  $items['itg-read-later-refresh/%'] = array(
+    'title' => 'Read later refresh',
+    'description' => 'Read later refresh',
+    'page callback' => 'itg_story_readlater_block_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_story_readlater_refresh.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-follow-story-refresh/%'] = array(
+    'title' => 'Follow story refresh home page',
+    'description' => 'Follow story refresh home page',
+    'page callback' => 'itg_follow_story_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_follow_story_refresh.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['technology/embedegallery/%'] = array(
+    'page callback' => 'itg_story_technology_embedgalery',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
 
   return $items;
@@ -207,7 +250,6 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         )
       );
 
-
       // checked comment box by default
       if (!isset($form['#node']->nid)) {
 
@@ -218,6 +260,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
           $values = array('commentbox');
         }
         $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $values;
+      }
+      // Unset defualy value if attached gallery is unpublished.
+      if (isset($form['#node']->nid) && !empty($form['#node']->field_technology_photogallery[LANGUAGE_NONE][0]['target_id'])) {
+        $gallery_id = $form['#node']->field_technology_photogallery[LANGUAGE_NONE][0]['target_id'];
+        if (itg_common_get_node_status($gallery_id) == 0) {
+          $form['field_technology_photogallery'][LANGUAGE_NONE][0]['target_id']['#default_value'] = '';
+        }
       }
 
       if ($user->uid != 1) {
@@ -242,6 +291,10 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 
         $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = $reporter_id;
       }
+      // Reporter unique id in case of issue based story created from XML Upload.
+      if (isset($form['#node']->nid) && empty($form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+	    $form['field_reporter_unique_id'][LANGUAGE_NONE][0]['value']['#default_value'] = 'migrated-'.$form['#node']->nid;
+      }
       if ($user->uid != 1) {
         $form['field_reporter_publish_id']['#attributes']['class'][] = 'element-hidden';
         $form['field_reporter_unique_id']['#attributes']['class'][] = 'element-hidden';
@@ -259,7 +312,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       $breaking_check = '';
 
       if (empty($source_id) && empty($source_type)) {
-        $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
+       // $breaking_check = '<input type="checkbox" title="breaking_text" id="breaking_text"><span> Make it breaking news</span>';
       }
 
       $form['title']['#suffix'] = '<div class="breaking_class">' . $breaking_check . '</div>';
@@ -289,6 +342,21 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
           'file_validate_extensions' => array("png gif jpg jpeg"),
         ),
       );
+      // Google standout chekbox modifications.
+      $approved_roleid = array(ADMINISTRATOR, EDITOR, SITE_ADMIN);
+      $check = array();
+      $check = array_intersect($approved_roleid, array_keys($user->roles));
+      if (empty($check)) {
+        unset($form['field_story_configurations'][LANGUAGE_NONE]['#options']['google_standout']);
+      }
+      if ((isset($form['#node']->nid)) && (in_array(EDITOR, array_keys($user->roles)))) {
+        foreach ($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] as $key => $val) {
+          if ($val == 'google_standout') {
+            $form['field_story_configurations'][LANGUAGE_NONE]['google_standout']['#attributes']['disabled'] = 'disabled';
+            break;
+          }
+        }
+      }
       //Byline popup
       // Load the modal library and add the modal javascript.
       ctools_include('modal');
@@ -326,49 +394,40 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  if ($form_state['input']['op'] == 'Apply') {
-    if ($form_state['node']->status == '1') {
-      /* Assign story to widget */
-      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
-        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
-      }
-      else {
-        $previous_story_assign = '';
-      }
-      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
-      // for story assign to widget
-      if (function_exists('itg_story_assign_to_widget')) {
-        if (is_array($story_widget) && count($story_widget) > 0) {
-          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
-        }
-      }
-      /* End for Assign story to widget */
-      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-      $_GET['destination'] = $redirect_path;
-      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
+  
+  if ($form_state['node']->status == '1') {
+    /* Assign story to widget */
+    if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+      $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
     }
-  }
+    else {
+      $previous_story_assign = '';
+    }
+    $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+    // for story assign to widget
+    if (function_exists('itg_story_assign_to_widget')) {
+      if (is_array($story_widget) && count($story_widget) > 0) {
+        itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
+      }
+    }
+    /* End for Assign story to widget */
+  } 
+  
+  
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
+  
   $node_type = str_replace("_", " ", $node_type);
   $title = ucfirst($form_state['node']->title);
+  
   $clone_id = $_GET['clone_id'];
-  // code insert image in custom table
- 
-  if (isset($_SESSION['messages']['status'])) {
-    unset($_SESSION['messages']['status']);
-  }
-
+  
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
-
-  if ($request_destination == 'published-story') {
-    $redirect_path .= "?field_story_syndication_value_op=all";
-    $_GET['destination'] = $redirect_path;
-  }
-
-  // redirection for clone story
-  if ($request_destination == 'clone-story' && !empty($clone_id)) {
+  
+  if ($form_state['input']['op'] == 'Apply' && $form_state['node']->status == '1') { // redirection for Apply button
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];    
+  } else if ($request_destination == 'clone-story' && !empty($clone_id)) { // redirection for clone story
     if (arg(1) == 'add') {
       if ($workbench_current_state == 'published') {
         $op = 'cloned and published.';
@@ -378,15 +437,20 @@ function itg_story_form_custom_callback($form, &$form_state) {
         $op = 'created';
         drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
       }
-      $_GET['destination'] = 'published-story?field_story_syndication_value_op=all';
+      $redirect_path = 'published-story?field_story_syndication_value_op=all';
     }
+  } else if ($request_destination == 'published-story' && $form_state['input']['op'] != 'Apply') { // redirection for published-story
+    $redirect_path .= "?field_story_syndication_value_op=all";    
   }
-
-  //if ($form_state['input']['op'] != 'Save as Draft') {
+  
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+ 
   if (function_exists('itg_custom_message')) {
     itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
   }
-  //}
+ 
 }
 
 /**
@@ -432,27 +496,54 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
   if (in_array($form['#id'], $soruce_type_filter_display_views)) {
     if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-videogallery-management-page' || $form['#id'] == 'views-exposed-form-videogallery-management-page-2' || $form['#id'] == 'views-exposed-form-videogallery-management-page-5') {
       $cn_type = 'videogallery';
+      $option = array(
+          '' => '-Any-',
+          'videogallery' => 'Video',
+          'migrated' => 'Migrated',
+          'OCTOPUS' => 'OCTOPUS',
+          'UGC' => 'UGC'
+      );
     }
     elseif ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5') {
       $cn_type = 'photogallery';
+      $option = array(
+          '' => '-Any-',
+          'photogallery' => 'Photogallery',
+          'migrated' => 'Migrated',
+          'UGC' => 'UGC',
+      );
     }
     else {
       $cn_type = 'story';
+        $option = array("" => '-Any-',
+        'story' => 'Internal Story',
+        'Magazine Story' => 'Magazine Story',
+        'Clone Story' => 'Clone Story',
+        'breaking' => 'Breaking',
+        'UGC' => 'UGC',
+        'migrated' => 'Migrated',
+        'AP' => 'AP',
+        'Mail Today' => 'Mail Today',
+        'Reuters' => 'Reuters',
+        'IANS' => 'IANS',
+        'PTI' => 'PTI');
     }
-    $option = array("" => '-Any-', $cn_type => $cn_type);
-    $query = db_select('field_data_field_story_source_type', 'st');
-    $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
-    $query->condition('n.type', $cn_type)->distinct()
-        ->fields('st', array('field_story_source_type_value'));
-    $result = $query->execute()->fetchAll();
-    foreach ($result as $option_values) {
-      if ($option_values->field_story_source_type_value == 'videogallery') {
-        $option[$option_values->field_story_source_type_value] = 'Video';
-      }
-      else {
-        $option[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
-      }
-    }
+  //  $option = array("" => '-Any-', $cn_type => $cn_type);
+//    $query = db_select('field_data_field_story_source_type', 'st');
+//    $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
+//    $query->condition('n.type', $cn_type)->distinct()
+//        ->fields('st', array('field_story_source_type_value'));
+//    $result = $query->execute()->fetchAll();
+//    foreach ($result as $option_values) {
+//      if ($option_values->field_story_source_type_value == 'videogallery') {
+//        $option[$option_values->field_story_source_type_value] = 'Video';
+//      } else if ($option_values->field_story_source_type_value == 'story') {
+//        $option[$option_values->field_story_source_type_value] = 'Internal Story';
+//      }
+//      else {
+//        $option[$option_values->field_story_source_type_value] = ucwords($option_values->field_story_source_type_value);
+//      }
+//    }
 
     $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
     foreach ($option as $option_value => $option_element) {
@@ -492,7 +583,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based) && empty($magazine_kicker)) {
-      form_set_error('field_story_magazine_headline', t("Magazine kicker text is required"));
+      form_set_error('field_story_magazine_headline', t("Magazine headline is required"));
     }
     $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
     if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
@@ -532,6 +623,30 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
     if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->body[LANGUAGE_NONE][0]['value'])) {
       form_set_error('body', t("Description field is required."));
+    }
+    if ((!empty($node->field_story_configurations[LANGUAGE_NONE]))) {
+      foreach ($node->field_story_configurations[LANGUAGE_NONE] as $config_key => $config_val) {
+        if ($config_val['value'] == 'google_standout') {
+          $current_calender_week = date("W");
+          $current_year = date("Y");
+          $calender_week = _get_calender_week_start_end_date($current_calender_week, $current_year);
+          $start_time = strtotime($calender_week['week_start']);
+          $end_time = strtotime($calender_week['week_end']);
+          $query = db_select('field_data_field_story_configurations', 'fsc');
+          $query->join('node', 'n', 'fsc.entity_id=n.nid');
+          $query->fields('n', array('nid'));
+          $query->condition('n.changed', array($start_time, $end_time), 'BETWEEN');
+          $query->condition('n.status', 1);
+          $query->condition('n.type', 'story', '=');
+          $query->condition('fsc.field_story_configurations_value', 'google_standout', '=');
+          $result = $query->execute();
+          $num_of_results = $result->rowCount();
+          if ($num_of_results >= 7) {
+            form_set_error('field_story_configurations', t("We can have only seven story with google standout with in a calender week."));
+          }
+          break;
+        }
+      }
     }
   }
 }
@@ -646,6 +761,12 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   else {
     $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '';
   }
+  if (isset($form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
+    $issue_date = $form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value'];
+  }
+  else {
+    $issue_date = !empty($form_state['values']['field_story_issue_date'][LANGUAGE_NONE]) ? $form_state['values']['field_story_issue_date'][LANGUAGE_NONE][0]['value'] : '';
+  }
 
   if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
     $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
@@ -655,7 +776,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // add ajax on magazine field
-  $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+  $form['field_story_issue_date'][LANGUAGE_NONE][0]['#ajax'] = array(
     'event' => 'change',
     'callback' => 'itg_story_magazine_ajax_callback',
     'wrapper' => $supplement_field . '_replace',
@@ -672,9 +793,9 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
   $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
-  if (function_exists('itg_common_dropdown_supplement')) {
-    if(!empty($magazine_id)) {
-    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+  if (function_exists('itg_story_dropdown_supplement')) {
+    if(!empty($issue_date)) {
+    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_story_dropdown_supplement($issue_date);
     }
   }
 
@@ -911,7 +1032,9 @@ function itg_story_node_presave($node) {
         }
       }
     }
-
+    
+    $node->body[LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
+    $_REQUEST['body'][LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
     // Prevent expiry date to save if expiry checkbox is unchecked
 
     if (empty($node->field_story_expires[LANGUAGE_NONE][0]['value'])) {
@@ -924,7 +1047,12 @@ function itg_story_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
-
+	if (!empty($_GET['iframe'])) {
+		drupal_add_js('jQuery(document).ready(function() {           
+                jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");               
+             });', array('type' => 'inline', 'scope' => 'footer'));
+	}	
+             
   if ($node->type == 'story' && $view_mode != 'search_index') {
     global $user, $theme;
     // for lock story
@@ -935,17 +1063,18 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           $config[] = $value['value'];
         }
       }
-      //pr(BACKEND_URL);
-      //p($_SERVER);
-      if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
-        $get_backend_url = explode("/", BACKEND_URL);
-        $referer_url = explode("/", $_SERVER['HTTP_REFERER']);
-        if (in_array('lock_story', $config) && $referer_url[2] != $get_backend_url[2]) {
-          drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
-        }
-      } 
-      elseif (in_array('lock_story', $config)) {
+      if (in_array('lock_story' , $config) && empty($_GET['preview_log'])) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+      }
+      if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
+        if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+          foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+            if ($val['value'] == 'display_lock') {
+              $subscription_url = "http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITStorypage";
+              drupal_goto($subscription_url);
+            }
+          }
+        }
       }
     }
     
@@ -954,17 +1083,18 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
     
     if (!empty($node->field_story_technology['und'])) {
-    $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
+      $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
     }
     
     if(!empty($node->field_photo_story) && $node->field_story_type[LANGUAGE_NONE][0]['value']== 'photo_story') {
-    $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
-    $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
+      $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
+      $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
     }
     
-    /*if ($external_url = _is_external_url_story_article($node->nid)) {
+    if((isset($node->field_story_external_url)) && (!empty($node->field_story_external_url[LANGUAGE_NONE][0]['value']))) {
+      $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
       drupal_goto($external_url);
-    }*/
+    }
     
     // modified code external url code
     if ($view_mode != 'search_index' && ($theme == FRONT_THEME_NAME || $theme == 'amptheme') && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
@@ -973,7 +1103,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       }
     }
 
-    $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     if (function_exists('itg_get_related_content')) {
       if(!empty($node->field_common_related_content['und'][0]['value'])) {
       $node->content['related_content'] = itg_get_related_content($node->nid);
@@ -987,7 +1117,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     if (function_exists('itg_msi_get_lock_story_status')) {
        if (in_array('developing_story', $config)) {
-       $node->content['develop_story_status'] =  1; 
+        $node->content['develop_story_status'] =  1; 
        }
       //$node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
     }
@@ -1001,10 +1131,8 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
 
     if (function_exists('itg_common_get_latest_byline') && function_exists('itg_get_multi_byline_details')) {
-      if (!empty($node->field_reporter_publish_id['und'][0]['value'])) {
-        $byline = itg_common_get_latest_byline($node->nid, '1');
-        $node->content['byline_id'] = itg_get_multi_byline_details($byline);
-      }
+       // $byline = itg_common_get_latest_byline($node->nid, '1');
+        $node->content['byline_id'] = itg_get_multi_byline_details($node->nid, '1');
     }
 
     if (isset($node->field_story_type[LANGUAGE_NONE][0]['value']) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
@@ -1036,6 +1164,18 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       }
     }
     
+    // code for akamai read later refresh
+    if (!empty(variable_get('photo_block_refresh')) && $view_mode != 'amp') {
+      $fname_token = '[custom:fname]';
+      $settings = array();
+      $settings['story_nid'] = $node->nid;
+      $settings['u_mail'] = $user->mail;
+      $settings['u_name'] = token_replace($fname_token);
+      drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_readlater_refresh.js', array('scope' => 'footer'));
+    }
+
+    // end here
 
     // code for amp page
     if ($view_mode == 'amp') {
@@ -1061,269 +1201,17 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       preg_match_all('/<img[^>]*>/s', $right_emoji, $rightimages);
       $right_emoji_html = itg_get_emoji_amp_html($rightimages[0]);
 
-      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;
+      $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;      
+      $node->body[LANGUAGE_NONE][0]['value'] = itg_story_ad_code_in_content($node->body[LANGUAGE_NONE][0]['value']);
+    }
+    if ($view_mode == 'full' && ($theme == FRONT_THEME_NAME)) {
+      $body_text = $node->body[LANGUAGE_NONE][0]['value'];
+      $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
+      $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
     }
   }
 }
 
-/**
- * Implements itg_story_movie_image_plugin_data()
- * @param type $node_id
- */
-function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
-  //Store the node id of the story from the argument
-  
-  if (!empty($node_obj->nid)) {
-    $dty = date("D j M Y", $node_obj->changed);
-    //store entity id of multi value field collection field
-    if (isset($node_obj->field_story_technology[LANGUAGE_NONE])) {
-      $technology_entity = $node_obj->field_story_technology[LANGUAGE_NONE];
-    }
-
-    $html = '';
-    if (!empty($technology_entity)) {
-      $html .= '<div class="story-photo-list-wrapper"><h3 class="story-photo-list-heading"><span>SAMPLE PHOTOS</span></h3><div class="story-photo-list">';
-
-      foreach ($technology_entity as $key => $val) {
-        $entity = entity_load('field_collection_item', array($val['value']));
-        // store the actual image path
-        $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
-        $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
-        $ori_img_fid = $entity[$val['value']]->field_technology_sample_photo['und'][0]['fid'];
-        $href_sample_img = itg_story_sample_image_path($ori_img_fid);
-        // store image title
-        $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
-        // generate html 
-        $html .= '<div class="story-photo-list-item">';
-        if ($source == 'amp') {
-          $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
-        }
-        else {
-          $html .= '<a rel="prettyPhoto[gallery2]" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
-        }
-        $html .= '<span class="smp-date">' . $dty . '</span>';
-        $html .= '<p>' . $sample_title . '</p>';
-        $html .= '</div>';
-      }
-      $html .= '</div></div>';
-    }
-    return $html;
-  }
-  else {
-    return t('No content id found');
-  }
-}
-
-/**
- * Implements itg_story_photo_story_previous()
- * @param type $node_id
- */
-function itg_story_photo_story_redirect($node_id, $type = 'prev', $cat_id) {
-  if (!empty($node_id)) {
-    global $base_url;
-    $current_time = date("Y-m-d H:i:s");
-    $query = db_select('field_data_field_story_type', 'fst');
-    $query->leftJoin('node', 'n', 'n.nid=fst.entity_id');
-    $query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'fst.entity_id = expiry.entity_id');
-    $query->leftJoin('field_data_field_story_expires', 'expiry_status', 'n.nid = expiry_status.entity_id');
-    $query->leftJoin('field_data_field_primary_category', 'pr', 'pr.entity_id = fst.entity_id');
-    $query->fields('fst', array('entity_id'));
-    $query->condition('fst.field_story_type_value', 'photo_story');
-    if ($type == 'next') {
-      $query->condition('fst.entity_id', $node_id, '>');
-      $query->condition('pr.field_primary_category_value', $cat_id);
-      $query->orderBy('fst.entity_id', 'ASC');
-    }
-    else {
-      $query->condition('fst.entity_id', $node_id, '<');
-      $query->condition('pr.field_primary_category_value', $cat_id);
-      $query->orderBy('fst.entity_id', 'DESC');
-    }
-
-    $query->range(0, 1);
-    $query->condition('n.status', 1);
-    $query->condition('n.type', array('story'), 'IN');
-    $or = db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>=');
-    $query->condition($or);
-    $result = $query->execute()->fetchAll();
-
-    if ($result[0]->entity_id) {
-      $required_node_id = 'node/' . $result[0]->entity_id;
-      $href = $base_url . '/' . $required_node_id;
-    }
-    else {
-      $href = '';
-    }
-    return $href;
-  }
-}
-
-/**
- * 
- * @param type $node_id
- * @return string
- */
-function itg_story_photo_story_html($node, $primary_cat = NULL) {
-  // generate the html for photo story top slider
-  if (!empty($node->nid)) {
-    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $next = itg_story_photo_story_redirect($node_id, 'next', $primary_cat);
-    $previous = itg_story_photo_story_redirect($node_id, 'prev', $primary_cat);
-    $next_link_count = count($photo_story) - 1;
-    $html = '';
-    $html .= '<div class="photo-story-img multiple-photo-disc">';
-    foreach ($photo_story as $key => $val) {
-      if ($key == 0 && !empty($previous)) {
-        $previous_link = "<a class='fa fa-chevron-left prev-story-link' href='" . $previous . "'></a>";
-      }
-      else {
-        $previous_link = "";
-      }
-      if ($key == $next_link_count && !empty($next)) {
-        $next_link = "<a class='fa fa-chevron-right next-story-link' href='" . $next . "'></a>";
-      }
-      else {
-        $next_link = "";
-      }
-
-      $entity_obj = entity_load('field_collection_item', array($val['value']));
-      $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-
-      $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
-      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
-      $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
-      $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
-      if (function_exists('itg_story_get_image_info')) {
-        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
-      }
-      $html .= '<div class="photo-slider">';
-      $html .= $next_link . '<div class="image-caption"><img src="' . $photo_story_img . '" title="' . $photo_story_img_title . '" alt="' . $photo_story_img_alt . '" /><span class="photo-caption">' . $getImageInfo[0]->image_photo_grapher . '</span></div>' . $previous_link;
-      $html .= '<div class="photo-description">' . $getImageInfo[0]->image_caption . '</div><div class="description"><p>' . $photo_story_desc . '</p></div>';
-      $html .= '</div>';
-    }
-    $html .= '</div>';
-    return $html;
-  }
-}
-
-/**
- * 
- * @param type $node_id
- * @return string
- */
-function itg_story_photo_amp_html($node) {
-  // generate the html for photo story top slider
-  if (!empty($node->nid)) {
-    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $next = itg_story_photo_story_redirect($node_id, 'next');
-    $previous = itg_story_photo_story_redirect($node_id, 'prev');
-    $next_link_count = count($photo_story) - 1;
-    $html = '';
-    $html .='<amp-carousel id="carousel-with-preview"
-    width="400"
-    height="300"
-    layout="responsive"
-    type="slides">';
-    $i = 1;
-    foreach ($photo_story as $key => $val) {
-
-      $entity_obj = entity_load('field_collection_item', array($val['value']));
-      $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-      $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
-      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
-      $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
-      $photo_story_img_alt = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
-      if (function_exists('itg_story_get_image_info')) {
-        $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
-      }
-      $photo_story_src_set = '';
-      if (!empty($photo_story_img_path)) {
-        $photo_image_uri = file_create_url($photo_story_img_path);
-        $photo_image_data = getimagesize($photo_image_uri);
-        $photo_story_src_set = $photo_image_uri . ' ' . $photo_image_data[0] . 'w';
-      }
-      $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
-      width="771"
-      height="432"
-      layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
-      <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><span>' . $photo_story_desc . '</span></div>';
-      $i++;
-    }
-    $html .= '</amp-carousel>';
-    return $html;
-  }
-}
-
-/**
- * 
- * @param type $node_id
- * @return string
- */
-function itg_story_photo_amp_bottom_html($node) {
-  // generate the html for photo story top slider
-  if (!empty($node->nid)) {
-    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $count = sizeof($photo_story);
-    $html = '';
-    //$html = '<div class="photo-story-img multiple-photo common-photo">';
-    $html .= '<div class="carousel-preview">';
-    $index = 0;
-    $slide = 1;
-    for ($i = 0; $i < $count; $i++) {
-      $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
-      $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
-      $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
-      $photo_story_img_title = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['title'];
-      $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
-      $photo_story_src_set = '';
-      if (!empty($photo_story_img_path)) {
-        $photo_image_uri = file_create_url($photo_story_img_path);
-        $photo_image_data = 88;
-        $photo_story_src_set = ', ' . $photo_image_uri . ' ' . $photo_image_data . 'w';
-      }
-      $html .= '<button on="tap:carousel-with-preview.goToSlide(index=' . $index . ')">
-      <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
-        width="88"
-        height="66"
-       alt="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
-    </button>';
-      $index++;
-      $slide++;
-    }
-    $html .= '</div>';
-    return $html;
-  }
-}
-
-/**
- * 
- * @param type $node_id
- * @return string
- */
-function itg_story_photo_story_bottom_html($node) {
-  $current_url = $_SERVER['REQUEST_URI'];
-  // generate the html for photo story bottom slider
-  if (!empty($node->nid)) {
-    $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $count = sizeof($photo_story);
-    $html = '';
-    $html .= '<div class="photo-story-img multiple-photo common-photo">';
-
-    for ($i = 0; $i < $count; $i++) {
-      $entity_obj = entity_load('field_collection_item', array($photo_story[$i]['value']));
-      $photo_story_img_path = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['uri'];
-      $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
-      $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
-      $html .= '<div class="photo-slider">';
-      $html .= '<span class="img-wrapper"><img src="' . $photo_story_img . '" title="' . $photo_story_file_name . '" alt="photo_story" />';
-      $html .= '<em class="photo-count">' . ($i + 1) . '</em></span>';
-      $html .= '</div>';
-    }
-    $html .= '</div>';
-    return $html;
-  }
-}
 
 /**
  * Implements hook_views_api().
@@ -1336,32 +1224,7 @@ function itg_story_views_api() {
   );
 }
 
-/**
- * Implements itg_get_emoji_amp_html().
- */
-function itg_get_emoji_amp_html($result, $arr = NULL) {
-  if (!empty($result)) {
-    $emoji_html = '<span class="smilies-title">';
-    if (empty($arr)) {
-      foreach ($result as $key => $value) {
-        $html = $value;
-        $html = str_ireplace(
-            ['<img', '<video', '/video>', '<audio', '/audio>'], ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>'], $html
-        );
-        $emoji_html .= preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
-      }
-    }
-    else {
-      $html = $result;
-      $html = str_ireplace(
-          ['<img', '<video', '/video>', '<audio', '/audio>'], ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>'], $html
-      );
-      $emoji_html .= preg_replace('/<amp-img(.*?)\/?>/', '<amp-img$1></amp-img>', $html);
-    }
-    $emoji_html .= '</span>';
-    return $emoji_html;
-  }
-}
+
 
 /**
  * Function for admin setting for sponsor category.
@@ -1381,74 +1244,6 @@ function _sponsor_category_setting() {
   return system_settings_form($form);
 }
 
-/**
- * Function for check external url in story
- * @return false or external url
- */
-function _is_external_url_story_article($nid) {
-  
-  $is_external_url = FALSE;
-  //commented by shravan and discussed with shashank
- /* if (isset($nid)) {
-    if (db_table_exists('field_data_field_story_external_url')) {
-      $type_query = db_select('node', 'n');
-      $type_query->fields('n', array('type'));
-      $type_query->condition('n.nid', $nid, '=');
-      $node_type = $type_query->execute()->fetchField();
-      if ($node_type == 'story') {
-        $query = db_select('field_data_field_story_external_url', 'eu');
-        $query->fields('eu', array('field_story_external_url_value'));
-        $query->isNotNull('eu.field_story_external_url_value');
-        $query->condition('eu.entity_id', $nid, '=');
-        $query->condition('eu.bundle', 'story', '=');
-        $query->condition('eu.entity_type', 'node', '=');
-        $query_result = $query->execute()->fetchAll();
-        if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
-          $is_external_url = trim($query_result[0]->field_story_external_url_value);
-        }
-      }
-    }
-  }*/
-  return $is_external_url;
-}
-
-/**
- * Function return tech photogallery html
- * @param Array $tech_photo_arr
- * @return string
- */
-function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias) {
-  $count = 0;
-  $output = '';
-  $output .= '<div class="tech-photos">';
-  $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
-  $output .= '<span class="tech-photos-count">' . count($tech_gallery_images[LANGUAGE_NONE]) . ' Photos</span></div>';
-  foreach ($tech_gallery_images[LANGUAGE_NONE] as $num => $val) {
-    if ($count == 3) {
-      break;
-    }
-    $photo_img_alt = '';
-    $photo_img_title = '';
-    $gallery_entity = entity_load('field_collection_item', array($val['value']));
-    $photo_img_path = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['uri'];
-    $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
-    $photo_img_alt = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['alt'];
-    $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
-    $output .= '<div class="tech-photo-item">';
-    $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank">';
-    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
-    $output .= '</a>';
-    if ($count == 2) {
-      $output .= '<div class="tech-photo-overlay">';
-      $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank" title="More"><span class="tech-photo-seemore"> +SEE MORE</span> </a>';
-      $output .= '</div>';
-    }
-    $output .= '</div>';
-    $count++;
-  }
-  $output .= '</div>';
-  return $output;
-}
 
 /**
  * Function return original image fid
@@ -1580,147 +1375,91 @@ function itg_story_field_add_more_submit($form, &$form_state) {
 }
 
 /**
- * 
- * @global object $user
- * @param integer $fid
- * @return integer fid
+ * function for large image url.
+ * @param int $nid
+ * @return string
  */
-function itg_story_save_original_sample_image($fid) {
-  global $user;
-  $content_type = 'story';
-  $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
-  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-  }
-  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-  $file_image = file_load($fid);
-  $file_url_orignal = file_create_url($file_image->uri);
-  $image = image_load($file_image->uri);
-  if (!empty($image)) {
-    $image_exten = end(explode('.', $file_image->uri));
-    $filepath = file_default_scheme() . '://' . $filedir;
-    $image_width = EXTRA_LARGE_IMAGE_WIDTH;
-    $image_height = EXTRA_LARGE_IMAGE_HEIGHT;
-    if ($image->info['width'] < $image_width || $image->info['height'] < $image_height) {
-      $scaled = image_scale($image, $image_width, $image_height, true);
-    }
-    else {
-      $scaled = image_scale_and_crop($image, $image_width, $image_height);
-    }
-    $image_name_orignal = $file_image->filename;
-    $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
-    $image_name = $image_name_orignal . '-' . $image_width . 'x' . $image_height;
-    $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
-    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
-    $uri = $filepath . '/' . $image_name . '.' . $image_exten;
-    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
-    $file = new StdClass;
-    $file->uid = $user->uid;
-    $file->filename = basename($uri);
-    $file->uri = $uri;
-    $file->filemime = file_get_mimetype($uri);
-    $file->filesize = @filesize($uri);
-    $file->timestamp = REQUEST_TIME;
-    $file->is_new = TRUE;
-    $file->status = FILE_STATUS_PERMANENT;
-    $file = file_save($file);
-    file_usage_add($file, 'file', 'field_collection_item', 1);
-    if ($file->fid) {
-      db_insert('itg_all_orignal_image')->fields(array(
-        'fid' => $file->fid,
-        'orignal_fid' => $fid,
-        'url' => $file_url_orignal
-      ))->execute();
-    }
-    return $file->fid;
+function itg_get_story_extra_large_image($nid) {
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftjoin('field_data_field_story_extra_large_image', 'sm', 'sm.entity_id = n.nid');
+    $query->leftJoin('file_managed', 'fm', 'fm.fid = sm.field_story_extra_large_image_fid');
+    $query->fields('fm', array('uri'));
+    $query->condition('n.nid', $nid);
+    $query->orderBy('n.created', 'DESC');
+    $result = $query->execute();
+    return $query->execute()->fetchField();
   }
 }
 
 /**
- * function for story assign to widget
- * @param int $nid
- * @param array $story_widget
- * @param int $cat_id
- */
-function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $previous_story_assign) {
-  if (!empty($story_widget) && count($story_widget)) {
-    $result = array();
-    foreach ($story_widget as $widget_name) {
-      if (!empty($widget_name) && $widget_name != '_none') {
-        $result[$widget_name] = $widget_name;
-        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
-        if (!$is_node_in_widget) {
-          if ($widget_name == 'big_story_format_widget') {
-            $extra = '[]';
-            itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
-          }
-          else {
-            itg_widget_insert_widget_data($nid, $widget_name, 0);
-          }
-        }
-      }
-    }
-    itg_widget_delete_old_data_by_limit($widget_name);
-    foreach ($previous_story_assign as $row) {
-      $widget_value = $row['value'];
-      if ($widget_value != $result[$row['value']]) {
-        itg_watchdog('widget_value_inner', $widget_value);
-        if (!empty($widget_value)) {
-          itg_widget_delete_data_from_widget($widget_value, $nid);
-        }
-      }
-    }
+ * Function for replace emoji characters from string
+ */ 
+function replace_emoji($text){
+  $string = str_replace("?", "{%}", $text);
+  $string = mb_convert_encoding($string, "ISO-8859-1", "UTF-8");
+  $string = mb_convert_encoding($string, "UTF-8", "ISO-8859-1");
+  $string = str_replace(array("?", "? ", " ?"), array(""), $string);
+  $string = str_replace("{%}", "?", $string);
+  return trim($string);
+  //return preg_replace('/([0-9|#][\x{20E3}])|[\x{00ae}|\x{00a9}|\x{203C}|\x{2047}|\x{2048}|\x{2049}|\x{3030}|\x{303D}|\x{2139}|\x{2122}|\x{3297}|\x{3299}][\x{FE00}-\x{FEFF}]?|[\x{2190}-\x{21FF}][\x{FE00}-\x{FEFF}]?|[\x{2300}-\x{23FF}][\x{FE00}-\x{FEFF}]?|[\x{2460}-\x{24FF}][\x{FE00}-\x{FEFF}]?|[\x{25A0}-\x{25FF}][\x{FE00}-\x{FEFF}]?|[\x{2600}-\x{27BF}][\x{FE00}-\x{FEFF}]?|[\x{2900}-\x{297F}][\x{FE00}-\x{FEFF}]?|[\x{2B00}-\x{2BF0}][\x{FE00}-\x{FEFF}]?|[\x{1F000}-\x{1F6FF}][\x{FE00}-\x{FEFF}]?/u', '', $text);
+}
+
+function itg_story_dropdown_supplement($issue_date){
+	// Fetch supplements for selected magazine
+  $select = t('- None -');
+  $data = array('_none' => $select);
+  $query = db_select('field_data_field_issue_supplement' , 'm');
+  $query->join('node' , 'n' , 'm.entity_id = n.nid');
+  $query->join('node' , 'ns' , 'm.field_issue_supplement_target_id = ns.nid');
+  $query->fields('m' , array('entity_id', 'field_issue_supplement_target_id'));
+  $query->fields('n' , array('title'));
+  $query->fields('ns' , array('title'));
+  //$query->condition('n.status' , 1 , '=');
+  $query->condition('n.title' , $issue_date , '=');
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $data[$record['field_issue_supplement_target_id']] = $record['ns_title'];
   }
-}  
-    
+  return $data;
+}
+
 /**
- * Add byline menu page callback
- * @global object $user
- * @param type $ajax
+ * Function place ad code in content after 250
+ * @param string $content
+ * @return string
  */
-function itg_story_add_byline_popup($ajax) {
-  global $user;
-  if ($ajax) {
-    ctools_include('ajax');
-    ctools_include('modal');
-
-    ctools_include('node.pages', 'node', '');
-    $node = (object) array(
-          'uid' => $user->uid,
-          'name' => (isset($user->name) ? $user->name : ''),
-          'type' => 'reporter',
-          'language' => LANGUAGE_NONE,
-    );
-
-    $form_state = array(
-      'ajax' => TRUE,
-      'title' => t('Add Byline'),
-      'reporter_popup_form' => 1,
-    );
-    $form_state['build_info']['args'] = array($node);
-    // Use ctools to generate ajax instructions for the browser to create
-    // a form in a modal popup.
-    $output = ctools_modal_form_wrapper('reporter_node_form', $form_state);
-
-    // If the form has been submitted, there may be additional instructions
-    // such as dismissing the modal popup.
-    if (!empty($form_state['executed'])) {
-      if (!empty($form_state['values']['field_reporter_profile_type'])) {
-        $reporter_type = '(' . $form_state['values']['field_reporter_profile_type']['und'][0]['value'] . ')';
-      }
-      if (!empty($form_state['values']['field_reporter_email_id'])) {
-        $reporter_email = '(' . $form_state['values']['field_reporter_email_id']['und'][0]['value'] . ')';
-      }
-      $name_format = $form_state['values']['title'] . $reporter_type . $reporter_email . '{' . $form_state['values']['nid'] . '}';
-      $output = array();
-      $output[] = ctools_modal_command_display(
-          t('Node created'), 'Node creation successful.');/** Add success message */
-      $output[] = ctools_modal_command_dismiss(); //Close modal automatically
-      //$output[] = ctools_ajax_command_reload(); //reload parent window
-      $output[] = ajax_command_invoke('#edit-field-story-reporter-und-0-target-id', 'val', array($name_format));
-    };
-    // Return the ajax instructions to the browser via ajax_render().
-    print ajax_render($output);
-    drupal_exit();
+function itg_story_ad_code_in_content($content) {
+  $ad_code = variable_get('place_amp_ad_within_content');
+  if (empty($ad_code)) {
+    $content;
   }
+  $content = html_entity_decode($content);
+  $content_parts = explode(' ', $content);
+  $ad_code_after = 250;
+  
+  if(count($content_parts) < $ad_code_after){
+		$content = implode(' ', $content_parts);
+		$content .= $ad_code;
+		return $content;
+	}
+  
+  foreach ($content_parts as $key => $value) {
+    if ($key <= $ad_code_after) {
+      $before_content[] = $value;
+    }
+    else {
+      $after_content[] = $value;
+    }
+  }
+	
+	$before_content = implode(' ', $before_content);
+  $after_content = implode(' ', $after_content);
+  $after_content_arr = explode('</p>', $after_content);
+  $ad_code = '<p class="custom-amp-ad">' . $ad_code;
+  array_splice($after_content_arr, 1, 0, $ad_code);
+  $after_content = implode('</p>', $after_content_arr);
+  $content = $before_content . $after_content;
+  return $content;
 }

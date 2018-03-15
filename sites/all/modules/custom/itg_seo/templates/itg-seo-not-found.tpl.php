@@ -10,7 +10,7 @@ global $base_url;
   <div class="row">
     <div class="col-md-6">
       <div class="page-error-pic">
-          <a href="<?php print url(''); ?>"><img src="<?php echo $base_url . '/sites/all/themes/itg/images/error_404.png';?>" alt=""/></a>
+        <a href="<?php print url(''); ?>"><img src="<?php echo $base_url . '/sites/all/themes/itg/images/error_404.png';?>" alt="" title="" /></a>
         <p>T<?php print t('he page you are looking for is no longer available.'); ?></p>
       </div>
     </div>
@@ -21,11 +21,10 @@ global $base_url;
       <span class="error-or">OR</span>
       <h3><?php print t('Check out Latest Headlines'); ?></h3>
       <ul class="latest-headlines-list">
-          <?php 
-          foreach ($data as $key => $val) { 
-          ?>
-          <a href="<?php print url('node/'. $key); ?>" target="_blank"><li><?php print_r($val); ?></li></a>
-          <?php } ?>
+        <?php
+        echo render($data);
+        ?>
+          
       </ul>
     </div>
   </div>

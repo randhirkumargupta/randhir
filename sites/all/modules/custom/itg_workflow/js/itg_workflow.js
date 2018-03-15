@@ -22,7 +22,7 @@
                 jQuery(".reasons-form").hide();              
                 jQuery("#edit-log").val("");
 
-                 jQuery("#edit-workbench-moderation-state-new").change(function() {
+                 /*jQuery("#edit-workbench-moderation-state-new").change(function() {
                   jQuery("#edit-log").val("");
                   if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {                  
                     jQuery(".form-item-log").hide();
@@ -36,7 +36,7 @@
                     jQuery(".form-item-log").show();
                     jQuery(".reasons-form").hide();
                   }
-                });
+                });*/
              }
              if (workflowState == 'needs_modification') {
                 jQuery("#edit-workbench-moderation-state-new").val("needs_modification");
@@ -85,14 +85,28 @@ jQuery(document).ready(function() {
         if (msg == true) {
             if(title != '') {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
+                jQuery("#edit-submit").addClass('publish-clicked');
             }
              jQuery("#edit-submit").click();
              return true;
         }
-        return false; 
+        setTimeout($.proxy(function(){
+			jQuery(this).parent().children().css( 'pointer-events', 'auto' );
+			jQuery(this).parent().children().css( 'background-color', '' );
+			jQuery(this).parent().children().css( 'border-color', '' );
+			jQuery(this).parent().children().last().css( 'background-color', '#ee4d4d' );
+			jQuery(this).parent().children().last().css( 'border-color', '#ee4d4d' );
+			jQuery('.top-actions').children().css( 'pointer-events', 'auto' );
+			jQuery('.top-actions').children().css( 'background-color', '' );
+			jQuery('.top-actions').children().css( 'border-color', '' );
+			jQuery('.top-actions').children().last().css( 'background-color', '#ee4d4d' );
+			jQuery('.top-actions').children().last().css( 'border-color', '#ee4d4d' );
+		}, this),500);
+        return false;
        } else {
             if(title != '') {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
+                jQuery("#edit-submit").addClass('publish-clicked');
             }
             jQuery("#edit-submit").click();
        }
@@ -115,12 +129,40 @@ jQuery(document).ready(function() {
                 if (msg == true) {
                     return true;
                 }
-                return false; 
+            setTimeout($.proxy(function(){
+				jQuery(this).parent().children().css( 'pointer-events', 'auto' );
+				jQuery(this).parent().children().css( 'background-color', '' );
+				jQuery(this).parent().children().css( 'border-color', '' );
+				jQuery(this).parent().children().last().css( 'background-color', '#ee4d4d' );
+				jQuery(this).parent().children().last().css( 'border-color', '#ee4d4d' );
+				jQuery('.top-actions').children().css( 'pointer-events', 'auto' );
+				jQuery('.top-actions').children().css( 'background-color', '' );
+				jQuery('.top-actions').children().css( 'border-color', '' );
+				jQuery('.top-actions').children().last().css( 'background-color', '#ee4d4d' );
+				jQuery('.top-actions').children().last().css( 'border-color', '#ee4d4d' );
+			}, this),500);
+			return false; 
             }
             return true;  
         }
     
-    });                  
+    }); 
+    // 
+    jQuery('#edit-submit').click(function() {
+		var publish_clicked = jQuery( "#edit-submit" ).hasClass( "publish-clicked" );		
+		if(publish_clicked){
+			var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
+			jQuery("#edit-workbench-moderation-state-new").val(story_state);
+		}
+		else{
+			if (jQuery("#story_submit_link")[0]){
+				var publish_lnik_class = jQuery('#story_submit_link').attr('class').split(' ')[1];
+				if(publish_lnik_class == 'published'){
+					jQuery("#edit-workbench-moderation-state-new").val('draft');
+				}				
+		    }
+		}
+	});                 
 });
 
 

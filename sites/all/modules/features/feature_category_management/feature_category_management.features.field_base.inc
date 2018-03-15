@@ -409,6 +409,34 @@ function feature_category_management_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_is_section_header'.
+  $field_bases['field_is_section_header'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_is_section_header',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 0,
+        1 => 1,
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
+  );
+
   // Exported field_base: 'field_is_sponsor'.
   $field_bases['field_is_sponsor'] = array(
     'active' => 1,
@@ -509,6 +537,131 @@ function feature_category_management_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_programme_category_image'.
+  $field_bases['field_programme_category_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_programme_category_image',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
+  // Exported field_base: 'field_section_menu'.
+  $field_bases['field_section_menu'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_section_menu',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'mlid' => array(
+        0 => 'mlid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'menu_reference',
+    'settings' => array(
+      'allowed_menus' => array(
+        'devel' => 0,
+        'features' => 0,
+        'main-menu' => 0,
+        'management' => 0,
+        'menu-about-us-page-menu' => 0,
+        'menu-admin-left-menu' => 0,
+        'menu-ask-an-expert-menu' => 0,
+        'menu-astro-content-admin-menu' => 0,
+        'menu-blog-admin-menu' => 0,
+        'menu-election-map-json' => 0,
+        'menu-event-backend' => 0,
+        'menu-event-menu' => 0,
+        'menu-funalytics-tab' => 0,
+        'menu-itg-distribution-menu-foote' => 0,
+        'menu-itg-education-menu-footer' => 0,
+        'menu-itg-events-menu-footer' => 0,
+        'menu-itg-main-menu-footer' => 0,
+        'menu-itg-main-menu-header' => 0,
+        'menu-itg-music-menu-footer' => 0,
+        'menu-itg-printing-menu-footer' => 0,
+        'menu-itg-publications-menu-foote' => 0,
+        'menu-itg-radio-menu-footer' => 0,
+        'menu-itg-shopping-menu-footer' => 0,
+        'menu-itg-syndication-menu-footer' => 0,
+        'menu-itg-television-menu-footer' => 0,
+        'menu-itg-top-menu-header' => 0,
+        'menu-itg-top-menu-header-second' => 0,
+        'menu-loyalty-management-tab' => 0,
+        'menu-manage-quiz-tabs' => 0,
+        'menu-manage-survey-tabs' => 0,
+        'menu-mega-review-menu' => 0,
+        'menu-newsletter-manage-tabs' => 0,
+        'menu-photogallery-admin-menu' => 0,
+        'menu-podcast-admin-menu' => 0,
+        'menu-poll-content-admin-menu' => 0,
+        'menu-print-team-menu' => 0,
+        'menu-recipe-admin-menu' => 0,
+        'menu-rss-blogs' => 0,
+        'menu-rss-news' => 0,
+        'menu-rss-photo' => 0,
+        'menu-rss-video' => 0,
+        'menu-section-header-menu' => 'menu-section-header-menu',
+        'menu-story-content-admin-menu' => 0,
+        'menu-task-allocation-menu' => 0,
+        'menu-ugc-comment-menu' => 0,
+        'menu-ugc-content-menu' => 0,
+        'menu-user-menu' => 0,
+        'menu-videogallery-admin-menu' => 0,
+        'navigation' => 0,
+        'user-menu' => 0,
+      ),
+      'language_visibility' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'menu_reference_link',
+  );
+
+  // Exported field_base: 'field_section_right_side_block'.
+  $field_bases['field_section_right_side_block'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_section_right_side_block',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'moddelta' => array(
+        0 => 'moddelta',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'blockreference',
+    'settings' => array(
+      'referenceable_modules' => array(),
+    ),
+    'translatable' => 0,
+    'type' => 'blockreference',
   );
 
   // Exported field_base: 'field_set_as_featured_cate'.

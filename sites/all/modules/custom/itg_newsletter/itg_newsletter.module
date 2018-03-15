@@ -18,6 +18,7 @@ function itg_newsletter_menu() {
     'title' => 'Autocomplete for Newsletter' ,
     'page callback' => 'itg_newsletter_content_data' ,
     'access callback' => TRUE ,
+    'file' => 'includes/newsletter_mail.inc',
   );
 
   $items['test_mail'] = array(
@@ -57,32 +58,10 @@ function itg_newsletter_menu() {
     'page callback' => 'itg_newsletter_content_subject_headline',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
+    'file' => 'includes/newsletter_mail.inc',
   );
 
   return $items;
-}
-
-function itg_newsletter_content_subject_headline($title) {
-    if (strlen(trim($title)) > 0) {
-      $content_type = arg(1);
-      $options = '';
-      $title = strtolower(trim($title));
-      $query = db_select('node', 'n');
-      $query->leftJoin('field_data_field_news_title' , 'nt' , 'nt.entity_id=n.nid');
-      $query->fields('nt', array('field_news_title_value'));
-      $query->condition('nt.field_news_title_value', '%' . $title . '%', 'LIKE');
-      $query->condition('n.type', 'newsletter', '=');
-      $query->condition('n.status', 1);
-      $query->range(0, 20);
-      $query->orderBy('nt.field_news_title_value');
-      $result = $query->execute();
-
-      while ($record = $result->fetchAssoc()) {
-          $options[$record['field_news_title_value']] = $record['field_news_title_value'];
-      }
-
-      drupal_json_output($options);
-  }
 }
 
 /**
@@ -158,6 +137,16 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
   }
   // Set destination for newsletter form
   if ($form_id == 'newsletter_node_form') {
+    $content_limit = variable_get('newsletter_content_limit');
+    if (isset($content_limit) && is_numeric($content_limit)) {
+      $range = $content_limit;
+    } else {
+      $range = 20;
+    }
+    $form['field_newsl_newsletter_content']['und']['#options']['top_20_trending'] = t("Top ".$range." Trending News");
+    $form['field_newsl_newsletter_content']['und']['#options']['top_20_shared'] = t("Top ".$range." Shared News");
+    $form['field_newsl_newsletter_content']['und']['#options']['top_20_most_viewed'] = t("Top ".$range." Most Viewed News");
+
     // Modify content id(show content id only instead of title and content id)
     if (arg(0) == 'node' && arg(2) == 'edit') {
       for ($delta_counter = 0; $delta_counter <= $form['field_newsl_add_news']['und']['#max_delta']; $delta_counter++) {
@@ -177,7 +166,7 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
       '#value' => t('Cancel') ,
     );
     $form['actions']['submit']['#value'] = t('Publish');
-    unset($form['actions']['preview']);
+//    unset($form['actions']['preview']);
     unset($form['title']);
     unset($form['field_newsl_website_name']);
 
@@ -236,7 +225,7 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
         foreach($options_array as $option) {
           $options[$option->value] = $option->text;
         }
-        $form['field_story_category']['und']['#options'] = $options;
+        $form['field_story_category']['und']['#default_value'] = $options;
       }
     }
   }
@@ -412,6 +401,7 @@ function itg_newsletter_form_after_build($form , &$form_state) {
  * @param object $view
  */
 function itg_newsletter_views_pre_render(&$view) {
+  
   // Add "Create Newsletter" button on listing page of Newsletter
   if ($view->name == "manage_newsletter") {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -424,6 +414,11 @@ function itg_newsletter_views_pre_render(&$view) {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_newsletter .= '<a href="./node/add/newsletter-templates">Create Newsletter Template</a>';
     $view->attachment_before = $header_content_newsletter;
+  }
+  
+  if ($view->name == "users_newsletter_subscribers") {
+    $header_newsletter_subscribers = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';    
+    $view->attachment_before = $header_newsletter_subscribers;
   }
 }
 
@@ -725,39 +720,6 @@ function itg_newsletter_check_existence_frequency($frequency , $newsletter_conte
   }
 }
 
-/**
- * Get Newsletter content using nid
- * Used on newsletter form
- */
-function itg_newsletter_content_data() {
-
-  $getnid = $_POST['content_id'];
-  if (isset($getnid) && !empty($getnid)) {
-    $query = db_select('node', 'n');
-//    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
-    $query->fields('n', array('nid'));
-    $query->condition('n.status', 1, '=');
-    $query->condition('n.type', 'story', '=');
-    $query->condition('n.nid', $getnid, '=');
-//    $query->condition('mnh.state', 'published', '=');
-    $result = $query->execute();
-    $record_nid = $result->rowCount();
-    $record_nid = $result->fetchField();
-    if (!empty($record_nid)) {
-      $node = node_load($record_nid);
-      if ($node->type == 'story') {
-        $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-      } else {
-        $kicker = '';
-      }
-      $file_id = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-      $file_data = _itg_get_extra_large_img_alt_and_title_from_tid($file_id , $getnid);
-      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'file_data' => $file_data  ,'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
-      exit;
-    }
-  }
-}
-
 function _itg_get_extra_large_img_alt_and_title_from_tid($fid , $getnid) {
     $data['field_story_extra_large_image_alt'] =  " ";
     $data['field_story_extra_large_image_title'] = " ";
@@ -855,11 +817,11 @@ function itg_newsletter_send_automatic_newsletter() {
   }
   // Send automatic mail
   if (!empty($automatic_nids)) {
-    watchdog('Automaitic', '<pre>'.print_r($automatic_nids, true).'</pre>');
+    //watchdog('Automaitic', '<pre>'.print_r($automatic_nids, true).'</pre>');
     foreach ($automatic_nids as $auto_nids) {
       $node_auto = node_load($auto_nids);
       if (!empty($node_auto)) {
-        watchdog('Not empty Nid', '<pre>'.print_r($node_auto->nid, true).'</pre>');
+        //watchdog('Not empty Nid', '<pre>'.print_r($node_auto->nid, true).'</pre>');
         itg_send_mail_newsletter($node_auto , 'automatically' , 'stories');
       }
     }
@@ -1102,4 +1064,22 @@ function itg_newsletter_published_nids($get_nid){
       return FALSE;
     }
   }
+}
+
+/*
+ * Get Newsletter Previuious time
+ */
+function itg_newsletter_get_previous_time($nids){
+  $node = node_load($nids);
+  if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'daily') { 
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $previoustime = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 day');
+  }elseif ($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'weekly') { 
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $previoustime = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 days');
+  } elseif($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'monthly') { 
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $previoustime = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 month');
+  } 
+  return $previoustime;
 }

@@ -6,39 +6,29 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-
-
 global $theme, $user;
 $preview = NULL;
-
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
-
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
+}
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
-
 $itg_class = 'itg-admin';
 if ($theme != 'itgadmin') {
   $itg_class = 'itg-front';
 }
-
 ?>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
   <div id="page">
     <header class="header" id="header" role="banner">
       <section class="header-top">
-        <div class="container header-logo">
-          <?php if ($logo): ?>
-            <div class="logo">
-              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-            </div>
-          <?php endif; ?>
-        </div>
-
+    
         <?php if ($site_name || $site_slogan): ?>
           <div class="header__name-and-slogan" id="name-and-slogan">
             <?php if ($site_name): ?>
@@ -46,25 +36,18 @@ if ($theme != 'itgadmin') {
                 <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
               </h1>
             <?php endif; ?>
-
             <?php if ($site_slogan): ?>
               <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
             <?php endif; ?>
           </div>
         <?php endif; ?>
-
-
-
         <?php print render($page['header']); ?>
-
       </section>
-
     </header>
     <?php
         // Render the sidebars to see if there's anything in them.
         $sidebar_first = render($page['sidebar_first']);
         $sidebar_second = render($page['sidebar_second']);
-
         $cls = 'col-md-12';
         if ($sidebar_first || $sidebar_second):
           $cls = 'col-md-9';
@@ -87,11 +70,8 @@ if ($theme != 'itgadmin') {
         <?php if ($action_links): ?>
           <ul class="action-links"><?php print render($action_links); ?></ul>
         <?php endif; ?>
-
 <?php } ?>
 <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
-
-
 <div class="itg-layout-container <?php echo $itg_class; ?> oscar-layout-page ">
     <!-- Breaking news band -->
     <?php if (!empty($page['breaking_news'])): ?>
@@ -112,42 +92,37 @@ if ($theme != 'itgadmin') {
         ?>
       <!-- end sponsor for static -->
       </div>
-
-
         <div class="col-md-8 col-sm-12 col-xs-12 left-side">
            <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || isset($widget_data['itg-block-3']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row">
               <?php if ($theme == 'itgadmin') { ?>
-
                 <div class="col-md-12 itg-h747-section">
                     <div class="itg-widget">
                       <div class="droppable <?php print $gray_bg_layout; ?>">
                       <?php
-                        if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
-                            print views_embed_view('best_college_image_slider', 'block');
-                        }
+                        $block = block_load('itg_bestcolleges', 'bestcollege_image_slider');
+                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                        if(is_array($render_array)) {
+                          print render($render_array);
+                        } 
+                       
                       ?>
-
                         </div>
                     </div>
                 </div>
               <?php } else {
-                      if($url_get[2] != '2014' && $url_get[2] != '2013') {
-                          if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
-                              print views_embed_view('best_college_image_slider', 'block');
-                          }
-                      } else {
+                      if ($url_get[2] >= '2015') {
+                        $block = block_load('itg_bestcolleges', 'bestcollege_image_slider');
+                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                        print $output = render($render_array);
+                        
+                      } elseif($url_get[2] == '2014' || $url_get[2] == '2013') {
                           print bestcollege_get_sponser_data('Best college graph');
-
                       }
-
                } ?>
-
         <div>
-
   <div class="clearfix"></div>      <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
-
 <div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[2]; ?></div>
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
@@ -165,9 +140,7 @@ if ($theme != 'itgadmin') {
       <div class="row list-group college">
         <div class="clr_chn">
           <?php if ($theme == 'itgadmin') { ?>
-
           <div class="droppable <?php print $gray_bg_layout; ?>">
-
           <?php
           if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) {
               if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2])))
@@ -176,11 +149,9 @@ if ($theme != 'itgadmin') {
               }
           }
           ?>
-
             <div class="data-holder" id="itg-block-3">
               <?php print $widget_data['itg-block-3']['widget']; ?>
             </div>
-
           </div>
           <?php } else {
             if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2])))
@@ -189,35 +160,21 @@ if ($theme != 'itgadmin') {
             }
           }
         ?>
-
-
-
         </div>
       </div>
     </div>
-
   </div>
 </div>
-
-
         </div>
-
-
-
      </div>
   <?php } ?>
-
         </div>
-
-
         <div class="col-md-4 col-sm-12 col-xs-12 right-side">
-
-          <div class="col-md-12 mt-50 itg-h1735-section">
+          <div class="itg-h1735-section">
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-4']['widget_name'].$widget_data['itg-block-4']['widget_display_name']; ?>">
                     <div class="data-holder" id="itg-block-4" data-widget-style="oscar-news best-news">
-
                                 <div class="ad-widget">
                                     <div class="sidebar-ad">
                                       <?php
@@ -230,81 +187,52 @@ if ($theme != 'itgadmin') {
                                             print $itg_ad['200*200_right_bar_ad1'];
                                           }
                                         }
-
-
-
-
                                        ?></div>
                                 </div>
-
                     <?php
                           $block = block_load('itg_bestcolleges', 'bestcollege_rhssearch');
                           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                           print $output = render($render_array);
-
                           // static html block
                           $block1 = block_load('itg_bestcolleges', 'bestcollege_rhsstatic');
                           $render_rhsstatic = _block_get_renderable_array(_block_render_blocks(array($block1)));
                           print render($render_rhsstatic);
-
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
                           $render_video = _block_get_renderable_array(_block_render_blocks(array($block_video)));
                           print render($render_video);
+                          ?>
+                          <!-- RHS Adds 2 -->
+                          <div class="ad-widget">
+                                    <div class="sidebar-ad">
+                                      <?php
+                                      $block1 = block_load('itg_ads', ADS_RHS2);
+                                      $render_array1 = _block_get_renderable_array(_block_render_blocks(array($block1)));
+                                        if(is_array($render_array1)) {
+                                          print render($render_array1);
+                                        } else {
+                                           if (!empty($itg_ad['200*200_right_bar_ad2'])) {
+                                            print $itg_ad['200*200_right_bar_ad2'];
+                                          }
+                                        }
+                                       ?></div>
+                                </div>
 
-
-                          // RHS Adds 2
-                          $block1 = block_load('itg_ads', ADS_RHS2);
-                          $render_array1 = _block_get_renderable_array(_block_render_blocks(array($block1)));
-                          print render($render_array1);
-
-                    ?>
                     </div>
                   </div>
                 </div>
             </div>
         </div>
-
-
-            <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || $theme == 'itgadmin') { ?>
-            <div class="row">
-                <div class="col-md-12">
-                        <div class="itg-widget-parent">
-                            <div class="itg-widget">
-                                <div class="ad-widget">
-                                    <div class="sidebar-ad">
-                                      <?php
-                                        if (!empty($itg_ad['200*200_right_bar_ad1'])) {
-                                          print $itg_ad['200*200_right_bar_ad1'];
-                                        }
-                                        ?></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-            </div>
-
-            <?php } ?>
+            
         </div>
-
     </div>
-
-
-
-
-
-
 </div>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
         <?php if ($theme != 'itgadmin') {?>
         <?php //print $feed_icons;  ?>
       </section>
-
       <?php if (false) { ?>
         <div id="navigation">
-
           <?php if ($main_menu): ?>
             <nav id="main-menu" role="navigation" tabindex="-1">
               <?php
@@ -326,27 +254,17 @@ if ($theme != 'itgadmin') {
               ?>
             </nav>
           <?php endif; ?>
-
           <?php print render($page['navigation']); ?>
-
         </div>
       <?php } ?>
-
       <?php if ($sidebar_first || $sidebar_second): ?>
         <aside class="sidebars">
-         
-        </aside>
+                 </aside>
       <?php endif; ?>
     </main>
-
-
     <?php print render($page['footer']); ?>
-
-
   </div>
-
   <?php print render($page['bottom']); ?>
-
 <?php } ?>
 <?php if ($theme == 'itgadmin') {?>
 <div class="itg-ajax-loader">
@@ -383,5 +301,4 @@ if($theme != 'itgadmin')
 
     });", array('type' => 'inline', 'scope' => 'footer'));
 }
-
 ?>

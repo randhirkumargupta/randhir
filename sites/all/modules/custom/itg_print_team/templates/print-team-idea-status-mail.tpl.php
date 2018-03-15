@@ -3,7 +3,6 @@
  * Template file to send mail on idea submission
  * @file: print-team-idea-status-mail.tpl.php
  */
-
 global $base_url;
 $idea_link = $base_url . '/user/login?destination=node/' . $node->nid.'/edit';
 
@@ -21,9 +20,15 @@ $idea_link = $base_url . '/user/login?destination=node/' . $node->nid.'/edit';
       <tr>
         <td style="padding: 10px 20px;"><?php print t('Dear User'); ?>,</td>
       </tr>
+      <?php if (!empty($node->field_add_member[LANGUAGE_NONE])) { ?>
+        <tr>
+          <td style="padding: 10px 20px;"><?php print t('Idea has been reviewed and updated by our team. Details are given below'); ?>:</td>
+        </tr>
+      <?php } else { ?>
       <tr>
         <td style="padding: 10px 20px;"><?php print t('Your idea has been reviewed and updated by our team. Details are given below'); ?>:</td>
       </tr>
+      <?php } ?>
       <tr>
         <td style="padding: 10px 20px;"><?php print t('Current status'); ?>: <strong><?php echo $node->field_pti_idea_status[LANGUAGE_NONE][0]['value']; ?></strong></td>
       </tr>

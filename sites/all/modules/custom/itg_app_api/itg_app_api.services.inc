@@ -5443,11 +5443,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    $searchpage = views_get_view_result('Front end global search', 'page_1', 'modi'); 
-    //$searchpage = views_get_view_result('front_end_global_search', 'page_1');
-    //$searchpage = file_get_contents('https://www.indiatoday.in/advance_search/modi');
-p($searchpage); die();
-   /* p(node_load(1069041));
+    p(node_load(1069041));
     $str = '{
     "status_code": "0",
     "status_message": "Customised Message",
@@ -5456,7 +5452,7 @@ p($searchpage); die();
     $jsondata = $str;
     $obj = json_decode($jsondata, TRUE);
     $return_obj = $obj;
-    return $return_obj;*/
+    return $return_obj;
 }
 
 /**
@@ -6348,6 +6344,9 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
         $message = 'Data has been Inserted successfully';
     } else {
         //Update the value
+        $content_title = addslashes($content_title);
+        $category = addslashes($category);
+        $share_comment = addslashes($share_comment);
         $query = db_update('jos_social_media_sharing')
                         ->fields(array(
                             'content_id' => $content_id,
@@ -6406,7 +6405,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
-    $query->orderBy('iwo.weight', 'ASC');   
+    $query->orderBy('iwo.weight', 'ASC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);

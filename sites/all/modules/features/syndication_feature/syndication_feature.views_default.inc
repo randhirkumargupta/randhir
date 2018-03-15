@@ -33,6 +33,7 @@ function syndication_feature_views_default_views() {
     20 => '20',
     10 => '10',
     9 => '9',
+    29 => '29',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -417,6 +418,7 @@ function syndication_feature_views_default_views() {
     20 => '20',
     10 => '10',
     9 => '9',
+    29 => '29',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -881,7 +883,6 @@ function syndication_feature_views_default_views() {
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['label'] = 'Section/Category';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['operator'] = 'shs_term_node_tid_depth_op';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['identifier'] = 'shs_term_node_tid_depth';
-  $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -937,6 +938,7 @@ function syndication_feature_views_default_views() {
     6 => '6',
     20 => '20',
     10 => '10',
+    29 => '29',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';

@@ -27,7 +27,7 @@
 <?php global $base_url; ?>
 <?php
   $actual_link = $base_url . '/node/' . $row->nid;
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $short_url = $actual_link;
   $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
   $image = '';
   $share_desc = '';
@@ -53,13 +53,18 @@
       <?php } ?>   
       <div class="new-detail">  
           <div class="marquee-container">
+		<marquee onmouseover="this.stop();" onmouseout="this.start();" scrollamount="5" scrolldelay="0">
          <div class="marquee-child">
                 <?php print $field->content; ?>        
-            </div>   
+         </div>   
+         </marquee>
           </div>
           <div class="ltv-and-ss"> 
           <div class="live-tv-link">
-              <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV" />'; ?>
+            <?php
+              $livetv_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/imgpsh_fullsize.png');
+            ?>
+              <?php $live_tv_img = '<img src="'.$livetv_url.'" alt="LiveTV" title="LiveTV" />'; ?>
               <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
@@ -78,7 +83,7 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    jQuery(document).ready(function(){
+    /*jQuery(document).ready(function(){
         jQuery('.marquee-child').liMarquee({        
             direction: 'left', 
             scrolldelay: 0, 
@@ -86,5 +91,5 @@
             circular: true, 
             hoverstop: true
         });
-    });
+    });*/
 </script>

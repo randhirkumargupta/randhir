@@ -93,6 +93,13 @@ function itg_global_loyality_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   
+   $items['del-point-history-data'] = array(
+    'title' => 'Delete Point history table data',
+    'page callback' => 'itg_del_point_history_data',
+    'access arguments' => array('access global point report history'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -409,7 +416,7 @@ function itg_get_global_point_history() {
   $data['redeemed_points'] = 0;
   $data['remaining_point'] = 0;
   $data['unit_description'] = array();
-  watchdog('result', '<pre>' . print_r($itg_result, true) . '</pre>');
+  //watchdog('result', '<pre>' . print_r($itg_result, true) . '</pre>');
   if(!empty($itg_result)) {
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {
@@ -1023,5 +1030,21 @@ function itg_sso_get_social_mobile($sso_id = NULL) {
   }
   else {
     return drupal_access_denied();
+  }
+}
+
+/*
+ * Implements itg_del_point_history_data().
+ */
+function itg_del_point_history_data() {
+  try {
+    $result = db_truncate('itg_global_loyality_point')->execute();
+    $result = db_truncate('itg_global_redem_point')->execute();
+    $result = db_truncate('itg_global_reward_order')->execute();
+    $redirect_url = 'admin/config/people/global-point-report-history';
+    drupal_goto($redirect_url);
+  }
+  catch (Exception $e) {
+    watchdog('Delete Point, Redem point, order table not truncate', '<pre>' . $e->getMessage() . '</pre>');
   }
 }

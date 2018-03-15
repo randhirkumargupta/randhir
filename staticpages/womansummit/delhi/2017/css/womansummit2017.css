@@ -1,0 +1,567 @@
+@charset "utf-8";
+/* CSS Document */
+/* ==============================thelallantopshow============================================*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500);
+
+* { outline:none}
+
+.margintop5{margin-top:5px;}
+.margintop10{margin-top:10px;}
+.margintop15{margin-top:15px;}
+.margintop20{margin-top:20px;}
+.marginbottom5{margin-bottom:5px;}
+.marginbottom10{margin-bottom:10px;}
+.marginbottom15{margin-bottom:15px;}
+.marginbottom20{margin-bottom:20px;}
+.marginbottom30{margin-bottom:30px;}
+.paddingtop5{padding-top:5px;}
+.paddingtop10{padding-top:10px;}
+
+/************************************Header CSS*********************************************************/
+body{font-family: 'Roboto', sans-serif;}
+#wrapper_ltop{width:100%; float:left;}
+.header_ltop_container{ background:#ffd0f6; padding:10px 0;}
+.header_ltop_container .main_logo{float:left;}
+.header_ltop_container .main_logo a{}
+.header_ltop_container .main_logo a img{}
+.header_ltop_container .right_part_header{width:100%;margin-top:90px; float:left}
+/************************************Header CSS*********************************************************/
+
+/************************************Nav CSS*********************************************************/
+.nav_ltop_container{ background:#000; margin-bottom:30px; margin-top:0px; height: 45px; }
+.nav_ltop_container a{color:#fff; font-size:20px; text-decoration:none;text-transform:uppercase;padding:15px 0; float:left;}
+.nav_ltop{width:100%;float:left; }
+.nav_ltop .register_lt{ float:right; display:block;background:#e6058f; padding:15px;text-transform:uppercase; text-align:center; font-weight:bold; }
+.nav_ltop .register_lt a{text-decoration:none; color:#fff; padding:0;}
+.nav_ltop_container .swiper-container {width: 100%;height: 100%; }
+.nav_ltop_container .swiper-slide {width:auto;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;}
+
+/************************************Nav CSS*********************************************************/
+
+/************************************Main Container CSS*********************************************************/
+.subnavigation-top{ background:#fff; padding:5px 0; text-align: center; color:#828181;}
+.subnavigation-top a{ color:#828181; text-decoration: none; padding:0 10px;}
+.spon {background: #a9218e url(http://media2.intoday.in/indiatoday/womansummit/2017/images/event.jpg) no-repeat center center !important;float: left;width: 86px;height: 57px;}
+.spondiv {background-color: #FFFFFF; float: left; height: 57px;overflow: hidden; width:650px; margin-top: 7px;}
+
+.ltop_slider_container{ display:block; margin-top:20px; margin-bottom:35px;}
+.ltop_slider_container .swiper-container {border:4px solid #000;width: 100%;height: 100%; box-sizing:border-box; }
+.ltop_slider_container .swiper-slide {display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;padding:10px;}
+.ltop_slider_container .swiper-slide img{width:100%;}
+.swiper-button-prev_lt { display:none; position: absolute;top: 50%;width: 27px;height: 44px;margin-top: -22px;z-index: 10;cursor: pointer;-moz-background-size: 27px 44px;-webkit-background-size: 27px 44px;background-size: 27px 44px;background-position: center;background-repeat: no-repeat;}
+.swiper-button-next_lt {display:none; position: absolute;top: 50%;width: 27px;height: 44px;margin-top: -22px;z-index: 10;cursor: pointer;-moz-background-size: 27px 44px;-webkit-background-size: 27px 44px;background-size: 27px 44px;background-position: center;background-repeat: no-repeat;right:-3px;}
+.main_ltop_container .ltop_container .right_ltop_container{ width:300px; float:right}
+.about_the_lallantop{width:100%; float:left; margin-bottom:40px;}
+.about_the_lallantop .hdn_lt{ font-weight:bold; text-transform:uppercase; font-size:20px; padding-bottom:10px;  border-bottom:1px solid #eee; margin-bottom:5px;}
+.about_the_lallantop .cont_lt{ padding:10px 0;font-size:14px; color:#6e6e6e; line-height:22px;}
+.about_the_lallantop .cont_lt p:first-child{ display:inline;}
+.about_the_lallantop .cont_lt p{ display:none;}      
+.more_less{ color:#c00; font-size:12px; display:inline; cursor:pointer}
+.progSubText {
+    font-size: 14px;
+    padding: 10px 0 10px 3px;
+    text-transform: capitalize;
+}
+
+.ltop_tab_programme { margin-bottom:50px;}
+.like_follow_us{ width:100%; float:left;}
+.like_follow_us .txt_lf{ font-size:20px; text-transform:uppercase}
+.like_follow_us .socials_ltab{}
+.txt_cont_prog{ background:#eeeeee; padding:10px; font-size:22px; top: -2px; position:relative}	  
+.ltop_tab_programme .nav-tabs{ background:#000;}
+.ltop_tab_programme .nav-tabs>li { margin-bottom:-2px;margin-top: -4px; text-transform:uppercase}
+.ltop_tab_programme .nav-tabs>li a{ margin-right:0; border-radius:0; padding:8px 25px; color:#fff; font-size:18px;}
+.ltop_tab_programme .nav-tabs>li>a:hover{ border-color:#2ddcd6;}
+.ltop_tab_programme .nav>li>a:hover,.ltop_tab_programme .nav>li>a:focus{ background-color:#2ddcd6;}
+.ltop_tab_programme .nav-tabs>li.active>a, .ltop_tab_programme .nav-tabs>li.active>a:hover, .ltop_tab_programme .nav-tabs>li.active>a:focus{ border:0; color:#fff; background:#ee1c25; border-top-left-radius:5px; border-top-right-radius:5px;}
+.ltop_tab_programme .nav-tabs>li.active>a{ }
+.box_programme {background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y -10px top;}
+.timing_l{ color:#323232; font-size:13px; font-weight:bold; padding:6px 0; text-align:right;/* border-right:2px dotted #ddd;*/}
+.prog_container{  font-size:15px; margin-bottom:10px; margin-left:10px;}
+.box_programme{/*background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;*/ }
+.prog_container .prog_txt{padding:5px 10px; background:#ECECEC;  text-transform: uppercase; font-weight: 600; }          
+.session_ltop_cov{}
+.session_ltop_cov a{text-decoration:none; font-size:13px; font-weight:bold;}
+.pink_col{color:#a9218e;}
+.pink_col_pvs{}
+.video_ltop_icon{ background:url(http://media2.intoday.in/indiatoday/womansummit/2017/images/video_icon.gif) no-repeat; display:inline-block; width:18px; position:relative; top:1px; height:10px;}
+.photo_ltop_icon{background:url(http://media2.intoday.in/indiatoday/womansummit/2017/images/photo_icon.gif) no-repeat; display:inline-block; width:18px; position:relative; top:1px; height:12px;}
+.story_ltop_icon{background:url(http://media2.intoday.in/indiatoday/womansummit/2017/images/story-icon.gif) no-repeat; display:inline-block; width:18px; position:relative; top:3px; height:10px; float:left;}
+.session_inner_cont{ padding:20px 15px;}
+.rpt_s{ margin-bottom:15px;}
+.rpt_s a{ color:#000;}
+.rpt_s p{ margin:0; padding:0; overflow:hidden;}
+.session_inner_cont .session_left{}
+.session_inner_cont .session_right{   padding-left: 15px; padding-bottom:27px; background: url("http://media2.intoday.in/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;}
+.ltop_tab_programme .tab-content{ margin-top:10px;}
+.speaker_profile{ width:100%;}            
+.speaker_txt{color:#a9218e; font-weight:bold;    font-size: 14px;}
+.speaker_details{ margin-top:5px;}
+.speaker_details .speaker_image{width:80px; height:60px; float:left; margin-right:20px;}
+.speaker_details .speaker_image img{border-radius:100%; width:80px; border:2px solid #a9218e}
+.speaker_details .speaker_dt{ overflow:hidden;  display: block;line-height:18px;position: relative; top: 10px;}
+.speaker_details .speaker_dt .hdn{ display:block; font-size:14px; font-weight:bold;}
+.speaker_details .speaker_dt .desc_l{ font-size:13px; }
+
+/**********************Programme Page****************************************/
+.prog_lallantop{ width:100%; float:left;}
+.prog_lallantop .hdn_lt{ text-transform:uppercase; font-size:18px; font-weight:bold; padding-bottom:5px; margin-bottom:10px; border-bottom:1px solid #ccc;}
+.prog_lallantop .cont_lt{}
+.prog_lallantop .cont_lt p{ margin-bottom:10px;  font-size:15px;}
+.progamme_panel{ width:100%; float:left;}
+.progamme_panel .heading_prog{ padding:5px 10px; font-weight:bold; margin-bottom:15px; color:#fff; background:#ee1c25; font-size:15px; text-transform:uppercase;}
+.box_rtprogramme{background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
+.box_rtprogramme .prog_container .prog_txt{ background:#fff;}
+.prog_rt_heading{ font-weight:bold; padding:5px 10px;}
+.moderator_right{ margin-left:20px; border-left:1px solid #ccc; margin-top:38px; }
+.moderator_right .mod_cont{ padding:10px;}
+.moderator_right .mod_cont .mod_txt{font-size:15px; font-weight:bold;}
+.moderator_right .mod_cont .mod_name{}
+.box_rtprogramme{ }
+.box_rtprogramme .session_ltop_cov{margin-bottom:30px; float:left;}
+.box_rtprogramme .session_inner_cont{padding:0 15px 15px 15px}
+.introSocial { margin:15px 0 0 0; padding:0px; overflow:hidden}
+.introSocial h3 { margin:4px 015px 0 0; padding:0px; float:left; font-size:15px; }
+.introSocial ul { margin:0px; padding:0px; list-style:none}
+.introSocial ul li { margin:0px 10px 0 0; padding:0px; float:left}
+
+
+/**********************Programme Page****************************************/
+
+/**********************Navigation***************************************/
+.navArea { margin:0px; padding:0px;}
+.navLink { margin:0px; padding:0px;}
+.navLink ul { margin:0px; padding:0px; list-style:none}
+.navLink ul li { margin:0px 1px 0 0; padding:0px; float:left; font-size:16px; color:#fff; text-transform:uppercase; position:relative}
+.navLink ul li a { margin:0px; padding:8px 20px;}
+.navLink ul li a:hover { color:#ffabee}
+.navLink ul li.active a {color:#ffabee}
+.navSocial { margin:0px; padding:0px; float:right}
+.navLink ul li ul.subMenu { margin:0px; padding:0px; position:absolute; top:45px; width:200px; background:#000; z-index:555; display:none}
+.navLink ul li ul.subMenu li { margin:0px; padding:0px; float:none; border-bottom:1px solid #999;}
+.navLink ul li ul.subMenu li:last-child { border-bottom:0px;}
+.navLink ul li ul.subMenu li a { margin:0px; padding:10px; font-size:14px;  display:block; float:none}
+.navLink ul li ul.subMenu li a:hover { background:#333; color:#fff}
+
+.navSocial a {
+    padding: 8px 12px !important;
+}
+/**********************Top Right***************************************/
+
+.topRight { margin:-5px 0 0 0; padding:0px;}  
+.topRight h1 ,.topRight h2{ margin:0px; padding:0px; line-height:46px; font-size:44px; color:#98187f; text-transform:uppercase; font-weight:700; font-family:roboto;}
+.topRight .rightDate { margin:0px; padding:0px; font-size:26px;font-weight:700; font-family:roboto; color:#000;}
+
+/*************Registration CSS******************************/
+#registraiton_ltop_container{ margin-bottom:40px;} 
+#registraiton_ltop_container .heading_lt{ font-weight:bold; margin-bottom:10px;padding-bottom:5px; border-bottom:1px solid #ccc; text-transform:uppercase; font-size:16px} 
+#registraiton_ltop_container .cont_lt {width:100%; float:left}
+#registraiton_ltop_container .cont_lt .cont_txt{ font-size:14px; font-weight:bold;width:100%; float:left; margin-bottom:10px;} 
+#registraiton_ltop_container .form_cont{}
+#registraiton_ltop_container .form-control{ border-radius:0;}
+.captcha_lt{ width:100px; height:50px; border:1px solid #eee; margin-top:10px; }
+.btn-pink { padding: 4px 16px;background-color: #D60090;border-color: #D60090;color: #fff; text-transform:uppercase}
+.btn-pink:hover, .btn-pink:focus, .btn-pink.focus {color: #fff;text-decoration: none;}
+#myModal .modal-dialog{width:500px;}
+#myModal .modal-content{ padding:0 10px; border-radius:0}
+#myModal .modal-header{ padding:20px 0 5px 0; margin-bottom:20px;}
+#myModal .modal-header h4{ font-size: 16px;}
+#myModal .modal-body{ padding: 0; }
+#myModal .modal-dialog{margin:30% auto}
+/*************Registration CSS******************************/
+
+/*************Speakers CSS******************************/
+.speakArea { margin:10px 0 0 0; padding:0px;}
+.speakArea ul { margin:0px; padding:0px; list-style:none; }
+.speakArea ul li { margin:0px 0 40px 0; padding:0px; overflow:hidden}
+.speakArea ul li .speakPicArea { float: left; margin-right: 20px; width:140px; height:145px; }
+.speakArea ul li .speakPicArea img{ border: 2px solid #a9218e !important;   /* border-radius: 100%; -moz-border-radius: 100%; -ms-border-radius: 100%; -oborder-radius: 100%; -webkit-border-radius: 100%; */ /*width: 140px; height:145px;*/    }
+.speakArea ul li .speakInfoArea { margin:18px 0 0 0; padding:0px; float:right; width:77%}
+.speakArea ul li h3 { margin:0px; padding:0px 0 10px 0; text-align:left; font-size:14px; text-transform:uppercase; font-weight:600}
+.speakArea p { line-height:24px; font-size:14px; margin:0 0 15px;}
+.speakArea p a{color:#a00606; font-size:13px; line-height:19px;}
+
+/*************Speakers CSS******************************/
+
+/*************Sponsors CSS******************************/
+.sponsors_container{ width:100%; float:left; margin-top:18px;}
+.sponsors_container .sponsors_hdn{width:100%; float:left;text-transform:uppercase; font-size:20px; font-weight:bold; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid #ccc;}
+.sponsors_container .sponsors_cont{width:100%; float:left;}
+.sponsors_logo_cont{ width:100%; border:1px solid #cfcfcf; margin-bottom:10px;}
+.sponsors_logo_cont img{ text-align:center; width:100%; border:3px solid #fff}
+.sponsors_cont h3 { margin:0px 0 10px 0; padding:0px; font-size:16px; text-align:center; text-transform:uppercase}
+.sponBoxArea { margin:0px; padding:0px 0 25px 0;}
+.sponBoxArea a { color:#000}
+.sponBoxArea a:hover { color:#000; text-decoration:none}
+.sponsInfo { margin:0px; padding:0px;}
+.sponsInfo p { margin:0px; padding:0px 0 25px 0; font-size:14px; line-height:24px; color:#000}
+.sponsInfoLogo { margin:0px 0 20px 0; padding:0px;}
+/*************Sponsors CSS******************************/
+
+.video_player_cont{ width:100%; float:left}
+.video_player_cont img{max-width:100%;}
+.landing_page .hdn_ltop_cont{ }
+
+
+/*************footer Sponsors CSS******************************/
+.sponArea { margin:0px; padding:0px; overflow:hidden}
+.sponArea .sponFirst { margin:0px 40px 0 0; padding:0px; float:left}
+.sponArea ul { margin:6px 0 0 0; padding:0px; list-style:none}
+.sponArea ul li { margin:0px 18px 0 0; padding:0px; float:left}
+.sponArea ul li img { border:2px solid #d4d4d4}
+
+.sponArea ul li .footText { margin:0px; padding:0px; display:block; font-size:11px; color:#fff; height:20px;}
+.sponArea ul li img { display:block}
+
+
+/*************************************Right Part************************************************************/
+
+.ad_container{ width:100%; float:left; text-align:center; background:#F6F6F6}
+.ad_container .ad_cont {width:300px; margin:20px auto;}
+.first_picture_container{}
+.first_picture_container .hd_n_fp{ font-size:20px; font-weight:bold; color:#ee1c25;} 
+.first_picture_container .cont_fp{}
+.first_picture_container .cont_fp img{width:100%; float:left;}
+.short_crisp_container{}
+.short_crisp_container .hd_n_sc{ font-size:20px; font-weight:bold; color:#ee1c25;} 
+.short_crisp_container .cont_sc img{width:100%; float:left;}
+.short_crisp_container .sc_img_cont{ padding:5px; float:left; background:#f1f1f1; margin-bottom:10px; box-sizing:border-box; width:100%;}
+.short_crisp_container .sc_img_cont img{width:100%; float:left;}
+.venue_container{}
+.venue_container .venue_ltdt{font-size:20px; font-weight:bold; color:#ee1c25; border-bottom:1px dotted #000;}
+.venue_container .hd_n_ltdt{border-bottom:1px solid #ccc; text-transform:uppercase; color:#000; font-weight:bold}
+.venue_container .cont_ltdt{}
+.venue_container .cont_ltdt p{ margin-bottom:5px}
+.twitter_container{width:100%; float:left;text-align:center; background:#F6F6F6}
+.twitter_container .twitter_cont{ width:300px; margin:20px auto;}
+/*************************************Right Part************************************************************/
+
+
+
+/************************************Main Container CSS*********************************************************/
+
+/*************************Footer Part****************************************/
+.footer_ltop{ background:#2f2d2d;width:100%; float:left; padding:0px 0; /*position:fixed; bottom:0; left:0; */}
+.footer_ltop{}
+.footer_ltop .add_ltop {background: #fff;padding:3px 0 4px 15px;}
+.footer_ltop .socials_icons{ margin-top:15px; width:100%; float:left; text-align:center}
+.footer_ltop .spons_cnt{width:100%; float:left;}
+.footer_ltop .add_ltop .hd_txt{font-size: 11px;font-weight: 600;}
+.footer_ltop .spons_cnt .spns{ width:88px; float:left; margin-right:10px;}
+.footer_ltop .spons_cnt .spns.damilano{width:114px;}    
+.footer_ltop .spons_cnt .spns img{width:100%;}
+/*************************end Footer Part****************************************/
+
+/*************************Right Part****************************************/
+
+.rightSide { margin:22px 0 0 0; padding:0px;}
+.rightSide h2 { margin:0px; padding:0px 0 10px 0; font-size:24px; color:#ee1c25; font-weight:500}
+
+.rightAdCode { margin:0px 0 30px 0; padding:30px; background:#f7f7f7; border:1px solid #e2e2e2}
+.rightTwiterArea { margin:0px 0 30px 0; padding:30px; background:#f7f7f7; border:1px solid #e2e2e2}
+.rightTwiterArea iframe { height:252px !important;}
+.rightFirstPic {margin:0px 0 30px 0; padding:0px;}
+.rightFirstPic ul { margin:0px; padding:0px; list-style:none}
+.rightFirstPic ul li { margin:0px; padding:0px;}
+.shorVideo {margin:0px 0 30px 0; padding:0px; overflow:hidden}
+.shorVideo ul { margin:0px; padding:0px; list-style:none}
+.shorVideo ul li { margin:0px 0 17px 0; padding:0px 0 10px 0; border-bottom:1px solid #e5e5e5; color:#000}
+.shorVideo ul li a { color:#fff}
+.shorVideo ul li .shorVideoPic { margin:0px 0 10px 0; padding:0px; position:relative}
+.shorVideo ul li .shorVideoPic .videoIcon { margin:0px; padding:3px 8px 3px 8px; position:absolute; bottom:0px; background:rgba(0,0,0,0.5)}
+.shorVideo ul li .shorVideoPic .videoIcon img { float:left; display:block; margin-right:5px; margin-top:2px}
+.shorVideo ul li .shorVideoPic .videoIcon span { margin:0px; padding:0px 0 0 0; float:left; display:block}
+.shorVideo ul li h3 { margin:0px; padding:0px; line-height:22px; font-size:15px; font-weight:400; line-height:22px;}
+.shorVideo ul li a h3 { color:#000}
+
+/*************************end Right Part****************************************/
+
+
+.nav-bar-toggle{display:none;}
+
+.swiper-container#sponsor_striph .swiper-slide {
+        width: auto;
+
+    }
+
+
+
+@media screen and (max-width:1024px){
+.sponArea .sponFirst { width:20%;}
+.sponArea .sponFirst img { width:100%}
+.sponArea ul li { width:16%;}
+.sponArea ul li img { width:100%}
+.topRight h1,.topRight h2 { font-size:50px;}
+.topRight .rightTitle, .topRight .rightDate { font-size:20px;}
+.header_ltop_container .main_logo a img { width:100%}
+.topRight { margin:0px 0 0 10px; }
+.rightAdCode { padding:0px;}
+.rightTwiterArea { padding:0px}
+.rightAdCodeArea img { width:100%}
+.rightTwiterArea iframe { width:100% !important}
+.rightFirstPic ul li img { width:100%}
+.shorVideo ul li .shorVideoPic img { width:100%}
+.shorVideo ul li .shorVideoPic .videoIcon img { width:auto}
+.sponArea ul li { width:13%;}
+.sponArea ul li:last-child { margin-right:0px;}
+.sponArea ul { margin-top:14px;}
+.timing_l { font-size:11px;}
+.session_inner_cont .session_right { padding-bottom:0px;}
+.box_programme {    background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -31px top;}
+.speakArea ul li .speakInfoArea { width:74%}
+
+.session_inner_cont .session_right { padding-bottom:30px;}
+}
+
+@media  (max-width: 800px){
+.header_ltop_container .main_logo{width:190px;}
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:90px;}
+.header_ltop_container .right_part_header img{width:100%}
+#registraiton_ltop_container{ margin-bottom:20px;}
+.timing_l{ text-align:left;}
+.sponArea .sponFirst { float:none; display:block; text-align:center; width:100%; margin-bottom:20px;}
+.sponArea .sponFirst img { width:auto;}
+.sponArea ul { margin:0px; padding:0px; text-align:center}
+.sponArea ul li { margin:0px 15px 15px 0; padding:0px; float:none; display:inline-block; width:auto}
+.navLink ul li a { padding:8px 15px}
+.topRight{ width:100%; overflow: hidden;}
+.topRight h1 ,.topRight h2{ font-size:35px;}
+.topRight .rightTitle, .topRight .rightDate { font-size:16px;}
+.topRight { margin-top:0px;}
+.prog_container { padding-left:0px;}
+.ltop_tab_programme { margin-bottom:10px;}
+.rightAdCode { width:48%; float:left}
+.rightTwiter { float:right; width:48%;}
+.rightTwiterArea iframe { height:252px !important}
+.shorVideo ul li { width:48%; float:left; margin-right:3%}
+.shorVideo ul li:nth-child(2) { margin-right:0px;}
+.shorVideo ul li:nth-child(4) { margin-right:0px;}
+.sponArea ul li { width:18%}
+.rightAdCodeArea { text-align:center}
+.subnavigation-top a{ padding: 0 6px; }
+
+.rightTwiter .rightTwiterArea iframe { height:252px !important}
+.subnavigation-top a{ padding: 0 6px; }  
+}
+
+@media (max-width: 767px){
+.subnavigation-top{ display: none;}
+
+.header_ltop_container{ text-align:center}
+.header_ltop_container .main_logo{width:200px; float:none; margin:0 auto; text-align:center; margin-bottom:5px;}
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:20px;}
+.header_ltop_container .right_part_header img{width:100%}
+.timing_l{ text-align:left}
+.session_inner_cont .session_right{ padding-left:0; background:none;}
+.speaker_details .speaker_image{ margin-right:0; margin-bottom:20px;}
+.speaker_details .speaker_dt{ float:left; overflow:visible;position: initial;}
+#myModal .modal-dialog{ width:300px; margin:10% auto}
+.captcha_lt{ margin-bottom:10px;}
+#registraiton_ltop_container{ margin-bottom:25px;}
+.slft{float:left;}
+.srtl{float:right;}
+.topRight { margin-top:0px; margin-bottom:10px;}
+.topRight h1,.topRight h2{ font-size:25px; line-height:25px;}
+.shorVideo ul li h3 { font-size:12px;}
+.rightAdCode { width:100%; float:none}
+.rightTwiter { width:100%; float:none}
+.rightTwiter .rightTwiterArea iframe { height:400px !important;}
+.prog_container { font-size:12px;}
+.topRight h3 { font-size:30px;}
+.topRight { margin:0px; margin-bottom:15px;}
+.speaker_details .speaker_dt { padding-left: 15px; width: 82%;}
+.sponArea ul li:last-child { margin-right:15px;}
+.shorVideo ul li h3 { line-height:20px;}
+.rightSide h2 { font-size:20px;}
+.session_ltop_cov a { font-size:11px;}
+.sponArea ul li { width:auto}
+.speakArea ul li .speakPicArea { float:none; margin:0px auto}
+.speakArea ul li .speakInfoArea { float:none; width:100%}
+.speakArea ul li h3 { text-align:center}
+
+.nav-bar .nav-bar-toggle {float: left; padding: 9px 2px; margin-top: 3px; margin-right: 15px; margin-bottom:0px; border-radius: 4px; background:none; border:0 !important; overflow:visible; cursor:pointer; display:block;}
+.nav-bar .sr-only {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0 !important;}
+.nav-bar .nav-bar-toggle .icon-bar {background-color: #fff; height: 3px; width: 30px; border-radius: 1px; display: block; margin-top:4px;}
+.nav-bar ul{float:left; width:100%; background-color:#000;}
+.nav-bar ul li{width:100%; border-bottom:1px solid #5a5a5a; display:inline-block; padding:0px; box-sizing:border-box;}	
+ul#subnav{display:none; position:absolute; top:42px; left:0; z-index:999999999;}
+.nav_ltop_container a { display:block; float:none}
+.navSocial ul li{width:auto; border-bottom:0;}
+.navSocial ul li a { padding-top:6px; padding-bottom:9px;}
+.navLink ul li ul.subMenu { position:relative; top:0px; width:100%; background:#474747}
+.rightAdCodeArea { margin:0px auto; width:300px;}
+.footAdCode {/*margin-top: -20px;    margin-bottom: 30px;*/}  
+
+.ltop_slider_container .swiper-slide img{width:100%; height:100%}
+.topRight { float:left; width:100%}
+
+.session_inner_cont .session_right { padding-bottom:90px;}
+
+.speaker_details .speaker_dt { padding-left:0px;}
+.session_inner_cont .session_right {overflow: hidden;padding-bottom: 20px;padding-left: 0;}
+.speaker_details .speaker_image { float:none}
+.speaker_details .speaker_dt { float:none}
+
+}
+
+/* Footer CSS */
+.footerSection {width: 100%;background-color: #1e1e1e;float: left; position: relative;}
+.footerGrayBg {background: #343434;float: left;width: 100%;}
+.common_foot_odd {background: url(http://media2.intoday.in/oddnaari/resources/images/foot_right_strip.png) top right no-repeat;background-position-y: 20%;width: 100%;float: left;margin: 20px 0;height: 310px;}
+.odd_naari_footer_container h3 {margin: 0;padding: 0;color: #c62b2f;text-transform: uppercase;margin-bottom: 10px;font: 700 15px Roboto, sans-serif;}
+.odd_naari_footer_container ul {list-style-type: none;padding: 0;margin: 0;margin-bottom: 20px;}
+.odd_naari_footer_container li {margin-bottom: 10px;font: 13px/16px Roboto, sans-serif;}
+.odd_naari_footer_container li a {color: #fff;text-decoration: none;}
+#copyright{text-align: center; padding: 5px 0; color:#949494;width:100%;float: left}
+.sponsors_logo_cont img { width:auto; margin-left:auto; margin-right:auto; display:block}
+ul.sponList { margin:0px; padding:0px 0 0 35px;}
+ul.sponList li { margin:0px; padding:0px 0 10px 0}
+.sponsor_container{background-color:#f5f5f5;border-top:1px solid #dbdbdb;width:100%; float:left; padding:10px 0;}
+.sponsor_container a{border:1px solid #dbdbdb; display:block;}
+.sponsor_container a img{/*width:100%;*/}
+.sponsor-text{font-size:22px; line-height:50px; color:#a9218e; text-transform:uppercase; float:left; width:100%; font-weight:bold;}
+
+/* Footer CSS */
+
+@media (max-width: 640px){
+.header_ltop_container{ text-align:center}
+.header_ltop_container .main_logo{width:200px; float:none; }
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:20px;}
+.header_ltop_container .right_part_header img{width:100%}
+.timing_l{ text-align:left}
+.session_inner_cont .session_right{ padding-left:0; background:none;}
+.speaker_details .speaker_image{ margin-right:0; margin-bottom:20px;}
+.speaker_details .speaker_dt{ float:none; overflow:visible;position: initial;}
+#myModal .modal-dialog{ width:300px; margin:10% auto}
+.captcha_lt{ margin-bottom:10px;}
+#registraiton_ltop_container{ margin-bottom:10px;}
+.box_programme {    background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -48px top;}
+
+.swiper-button-prev#prevSwp{ display: none }
+.swiper-button-next#nextSwp{ display: none }  
+
+
+}
+
+
+@media (max-width: 481px){
+.header_ltop_container{ text-align:center}
+.header_ltop_container .main_logo{width:180px;   }
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:20px;}
+.header_ltop_container .right_part_header img{width:100%}
+.timing_l{ text-align:left; font-size:10px; line-height: 10px}     
+.session_inner_cont .session_right{ padding-left:0; background:none;}
+.speaker_details .speaker_image{ margin-right:0; margin-bottom:20px;}
+.speaker_details .speaker_dt{ float:left; overflow:visible;position: initial;}
+#myModal .modal-dialog{ width:300px; margin:10% auto}
+.captcha_lt{ margin-bottom:10px;}
+#registraiton_ltop_container{ margin-bottom:10px;}
+.box_programme { background:none}
+.speaker_details .speaker_dt { padding-left:0px; margin-bottom:10px; margin-top:15px;}
+.timing_l { padding-top:0px;}
+}
+
+@media (max-width: 330px){
+.MobAdCodeArea , .footAdCode{ margin-left:-15px;}	   
+
+}
+
+
+
+/****************************right Side chunk*******************************/
+
+
+.hotrightnow_lft{ position:relative}
+span.mediaimgright { position: absolute; left: 95px; bottom: 15px; }
+.sprit {background-image: url(http://media2.intoday.in/btmt/newpage/spritnew.png);}
+.videos { background-position: -39px -42px; width: 33px; height: 33px; }
+.hotrightnow_lft {background-color: #FFF;border: 1px solid #CCC;color: #6E6E6E;float: left;font: 700 14px/18px Arial, Helvetica, sans-serif;margin-top: 10px;padding: 10px;width: 100%;box-sizing:border-box;box-shadow: 0 0 7px #CCC;position: relative;list-style: none;}
+.hotrightnow_lft a {color: #5e5e5e;text-decoration: none;}
+.imgs {margin-right: 10px;}
+.hotrightnow_lft a {color: #5e5e5e;text-decoration: none;}
+.red a{background-color:#d71920; text-decoration:none; font:500 14px/20px roboto, sans-serif!Important; padding:2px 5px; color:#fff; text-transform:uppercase;}
+.day-one-right a {text-decoration: none;color: #d71920;}
+.photo_left h2, .photo_right h2, .day-one-right h2 {font-size: 16px;margin-bottom: 10px;padding: 5px;color: #d71920;background: #000;}
+
+
+.venuBox { margin:0px; padding:0px;}
+.venuBox h2 { margin: 0px;    padding: 0 0 15px 0;    font-size: 22px;    text-transform: uppercase;    color: #a9218e;    font-weight: 600;}
+.venuArea { margin:0px; padding:13px; background:#f7f7f7; border:1px solid #e5e5e5}
+.venuArea h3 { margin:0px; padding:0px 0 8px 0; font-size:18px; color:#000; font-weight:600; line-height:26px; text-transform:uppercase}
+.venuArea p { margin:0px; padding:0px; font-size:15px; color:#000}
+
+
+.quoteBox { margin:0px 0 15px 0; padding:0px;}
+.quoteArea { margin:0px; padding:15px 0px 15px 0px; background:#f5f5f5}
+.quoteArea h3 { margin:0px; padding:0 23px; font-size:24px; font-weight:500; color:#000; line-height:32px; display:block}
+.quoteArea h3 a { color:#000;}
+.quoteArea h3 a:hover { text-decoration:none;}
+.nameQuote {    display: block;    font-size: 15px;    padding-bottom: 12px;    padding-top: 15px;    text-align: center; color:#d71920}
+.quoteBox .swiper-pagination { position:relative}
+.quoteArea h3 .top{  padding-right: 12px;}
+.quoteArea h3 .bottom{  padding-left: 12px;}
+.quoteBox  .swiper-pagination-bullet-active { background:#181818}
+.swiper-pagination-bullet { background:#7a7a7a; opacity:1}
+.red a {color: #fff !important;} 
+
+
+
+.winnerArea { margin:0px; padding:0px;}
+.winnerSlide { margin:0px; padding:0px;}
+.winnerSlide h2 {background: #000000 none repeat scroll 0 0;    color: #d71920;    font-size: 16px;    margin-bottom: 10px;    padding: 5px;}
+
+.winnerSlide a {    color: #d71920;    text-decoration: none;}
+
+.rightSide { margin-bottom:30px;} 
+
+.winnerArea .swiper-button-prev, .winnerArea .swiper-container-rtl .swiper-button-next { background:url(http://media2.intoday.in/btmt/mindrush/2016/img/slide-left-btn.png) no-repeat; opacity:1; left:0px;}
+.winnerArea .swiper-button-next, .winnerArea .swiper-container-rtl .swiper-button-prev {background:url(http://media2.intoday.in/btmt/mindrush/2016/img/slide-right-btn.png) no-repeat; opacity:1; right:0px;}
+
+.ads_slot_desktop{ margin: 10px 0 4px 0 }
+.footerLeftConteiner{ text-align: center; }
+.swiper-button-prev#prevSwp{top:0;left:0; margin-top: 0; height: 100%; background:url(http://media2.intoday.in/indiatoday/womansummit/2017/images/prev-arrow.png) no-repeat center center;}
+.swiper-button-next#nextSwp{top:0;right:0;margin-top: 0; height: 100%;background:url(http://media2.intoday.in/indiatoday/womansummit/2017/images/next-arrow.png) no-repeat center center;}  
+#copyright a{/*color:#c62b2f*/color:#bfbfbf;}   
+
+
+
+@media only screen and (min-width:768px) and (max-width:991px) {
+.two_sec img { width:100% !important;}
+.two_sec  h2 {width: 100% !important;}
+.day-one-right img {width: 95%;}
+.day-one-right h2 {width: 95%;}
+}
+
+
+
+
+/*** LIVE TV ***/
+.liveVideoTv { margin:20px 0 10px 0; padding:0px;}
+.liveVideoTv h3 { margin: 0px; padding: 0px; font-size: 25px; text-transform: uppercase; font-weight: 600; border-bottom: 1px dotted #aaa; padding-bottom: 10px; margin-bottom: 10px;	color:#a9218e }
+.eventLiveTv { margin:0px auto; width:100%; margin-bottom:10px; background:#000; text-align:center;}
+.eventLiveTv iframe { margin:0px auto; width:100% !important; margin-top:5px; border:0px;}
+.eventUpdateLive { margin:0px 0 0 0; padding:0px;}
+.eventUpdateLive h3 { margin: 0px; padding: 5px; font-size: 15px; color: #000; font-weight: 600; background: #fbe7f7; border-bottom: 0px;}
+.eventUpdateLive h3 span {text-align: right; font-size: 13px; font-weight: normal; text-transform: capitalize; display: inline-block; float: right; padding-top: 1px; padding-right: 5px;}
+.eventUpdateLive h3 span a { color:#000}
+	
+@media screen and (max-width:800px) {
+.eventLiveTv iframe { height:400px}
+}
+@media screen and (max-width:767px){
+.eventLiveTv iframe { width:100% !important}
+.liveVideoTv {margin:10px 0 10px 0; }  
+.liveVideoTv h3{font-size: 20px}     
+}
+		
+@media screen and (max-width:640px){
+ 
+.eventLiveTv iframe { height:200px}
+
+}
+/*** end LIVE TV ***/

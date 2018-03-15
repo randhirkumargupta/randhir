@@ -311,13 +311,20 @@ function itg_widgets_custom_variables() {
 		'#default_value' => variable_get('newsletter_content_limit'),
 	);
   
+	$form['ga_code'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter current GA code for FIA'),
+		'#attributes' => array('placeholder' => t('Enter current GA code for FIA')),
+		'#default_value' => variable_get('ga_code'),
+	);
+  
   $form['api_info'] = array(
       '#type' =>'checkbox',
       '#title'=>t('Enable agency feed'),
       '#required'=> FALSE,
       '#default_value' => variable_get('api_info'), // for default checked and false is not checked
   );
-
+  
   $form["api_content_limit"] = array(
     "#type" => "select",
     "#title" => t("Select agency feed node limit"),
@@ -337,5 +344,197 @@ function itg_widgets_custom_variables() {
     ),
   );
   
+  $form['custom_canonical_amp'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable custom canonical for amp'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('custom_canonical_amp'), // for default checked and false is not checked
+  );
+
+  $form['taboola_bottom_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Taboola code for bottom block'),
+		'#default_value' => variable_get('taboola_bottom_block'),
+	);
+  
+  $form['third_party_may_recommend_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Suggested Stories (taboola script)'),
+		'#default_value' => variable_get('third_party_may_recommend_block'),
+	);
+  $form['third_party_recommend_new_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Recommended (taboola script)'),
+		'#default_value' => variable_get('third_party_recommend_new_block'),
+	);
+  $form['third_party_crowdynews_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Crowdy News Ads Script'),
+		'#default_value' => variable_get('third_party_crowdynews_block'),
+	);
+  
+  $form['disable_third_party_api'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Disable third party api'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('disable_third_party_api'), // for default checked and false is not checked
+  );
+  
+  $form['amp_photo_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp photo ad script'),
+		'#default_value' => variable_get('amp_photo_ad'),
+	);
+  
+  $form['amp_video_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp video ad script'),
+		'#default_value' => variable_get('amp_video_ad'),
+	);
+  
+  $form['amp_story_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp story ad script'),
+		'#default_value' => variable_get('amp_story_ad'),
+	);
+  
+  $form['photo_block_refresh'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable story, photo and video block refresh in case of akamai'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('photo_block_refresh'), // for default checked and false is not checked
+  );
+  
+  $form['solr_down'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Custom message when solr is down'),
+		'#default_value' => variable_get('solr_down'),
+	);
+  
+  $form['disable_livetv_embed'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Disbale Live tv Embed'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('disable_livetv_embed'), // for default checked and false is not checked
+  );
+
+  $form['technology_review_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Technology Review TID'),
+    '#attributes' => array('placeholder' => t('Enter Technology Review Taxonomy ID')),
+    '#default_value' => variable_get('technology_review_tid', 1207760),
+  );
+  
+  $form['add_traffic_script'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add Traffic Script'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('add_traffic_script'), // for default checked and false is not checked
+  );
+
+  $form['traffic_script_js'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Traffic Script JS'),
+    '#default_value' => variable_get('traffic_script_js'),
+  );
+
+  $form['pti_section_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('PTI Section TID'),
+    '#attributes' => array('placeholder' => t('Enter PTI Section TID')),
+    '#default_value' => variable_get('pti_section_id'),
+  );
+  
+  $form['sso_cookie_domain'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter sso cookie domain'),
+		'#attributes' => array('placeholder' => t('Ex: .indiatoday.in')),
+		'#default_value' => variable_get('sso_cookie_domain'),
+	);
+	
+  $form['movies_review_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Movies Review TID'),
+    '#attributes' => array('placeholder' => t('Enter Movies Review Taxonomy ID')),
+    '#default_value' => variable_get('movies_review_tid', 1207047),
+  );
+	
+  $form['itg_programmes_order_by'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Programmes category ids for order'),
+    '#default_value' => variable_get('itg_programmes_order_by'),
+  );
+  
+  $form['news_today_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('News Today Section TID'),
+    '#default_value' => variable_get('news_today_tid', 1207797),
+  );
+  $form['site_mapindexurl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site Map Index url'),
+    '#default_value' => variable_get('site_mapindexurl', 'https://instore-tosshub-com.s3.ap-south-1.amazonaws.com'),
+  );
+  $form['site_replaceurl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site Map Replace url'),
+    '#default_value' => variable_get('site_replaceurl', 'indiatoday.intoday.in'),
+  );
+  // AMP Second ad variables
+  $form['amp_photo_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp photo second ad script'),
+    '#default_value' => variable_get('amp_photo_second_ad'),
+  );
+
+  $form['amp_video_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp video second ad script'),
+    '#default_value' => variable_get('amp_video_second_ad'),
+  );
+
+  $form['amp_story_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp story second ad script'),
+    '#default_value' => variable_get('amp_story_second_ad'),
+  );
+  // AMP Tabola Ad script
+  $form['amp_taboola_ad_script'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp tabola ad script'),
+    '#default_value' => variable_get('amp_taboola_ad_script'),
+  );
+  // Unpublish content email alert
+  $form['unpublish_alert_emails'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Story/Photo/Video Unpublish content email alert'),
+    '#default_value' => variable_get('unpublish_alert_emails'),
+  );
+  $form['max_upload_image_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Max image count for upload'),
+    '#default_value' => variable_get('max_upload_image_limit', 6),
+  );
+  $form['place_mobile_ad_after_paragraph'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Place Mobile Ad After Paragraph'),
+    '#default_value' => variable_get('place_mobile_ad_after_paragraph', 2),
+  );
+  // Unpublish content email alert
+  $form['unpublish_alert_emails_videos'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Video Unpublish content email alert'),
+    '#default_value' => variable_get('unpublish_alert_emails_videos'),
+  );
+  $form['publish_alert_emails_videos'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Video Unpublish content email alert'),
+    '#default_value' => variable_get('publish_alert_emails_videos'),
+  );
+  $form['place_amp_ad_within_content'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Place amp Ad After 250 words'),
+    '#default_value' => variable_get('place_amp_ad_within_content'),
+  );
   return system_settings_form($form);
 }

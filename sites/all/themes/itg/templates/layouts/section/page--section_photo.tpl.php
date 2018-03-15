@@ -7,32 +7,26 @@
  * @see https://drupal.org/node/1728148
  */
 ?>
-
 <?php
 global $theme;
 $preview = NULL;
 if (arg(2) == 'preview') {
-  $preview = 'preview';
+  $preview = 'preview';  
 }
-
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
+}
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
 ?>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
       <header class="header" id="header" role="banner">
           <section class="header-top">
-              <div class="container header-logo">
-                  <?php if ($logo): ?>
-                    <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-                    </div>
-                  <?php endif; ?>         
-              </div>
-
+       
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -40,7 +34,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
                       </h1>
                     <?php endif; ?>
-
                     <?php if ($site_slogan): ?>
                       <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
                     <?php endif; ?>
@@ -69,13 +62,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               print render($render_array);
               ?>
           </section>
-
       </header>
       <?php
       // Render the sidebars to see if there's anything in them.
       $sidebar_first = render($page['sidebar_first']);
       $sidebar_second = render($page['sidebar_second']);
-
       $cls = 'col-md-12';
       if ($sidebar_first || $sidebar_second):
         $cls = 'col-md-9';
@@ -84,12 +75,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
       <div class="itg-region">
           <div class="container pos-rel">
               <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
-
               <ul class="video_landing_menu">
                   <?php for ($count = 1; $count < 21; $count++) { ?>
                     <?php $blockid = 'itg-block-' . $count; ?>
                     <?php if ($theme == FRONT_THEME_NAME) { ?>
-
                       <?php if (isset($widget_data[$blockid]['block_title'])) { ?>
                         <li>                     
                             <?php
@@ -97,14 +86,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               'external' => TRUE,
                               'attributes' => array(
                                 'data-anchor' => $widget_data[$blockid]['cat_id'],
-                                'class' => 'active'
+                                'class' => 'active',
+                                'onclick' => 'ga("send", "event", "'.trim(str_replace(" ", "", $widget_data[$blockid]['block_title'])).'Tab", "click","1", 1, {"nonInteraction": 1});return true;'
                               ),
                                     )
                             );
                             ?>
 
                         </li>
-
       <?php } ?>
     <?php } ?>
                   <?php } ?>              
@@ -116,6 +105,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                        jQuery('#edit-field-story-category-tid').val(section_id); 
                        jQuery('#edit-field-story-category-tid').trigger('change');
                        jQuery(this).addClass('menu-active');
+                       jQuery('body').css('pointer-events','none');
                    });", array('type' => 'inline', 'scope' => 'footer'));
 
                   drupal_add_js("jQuery(document).ready(function(){
@@ -123,10 +113,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                        jQuery('#edit-field-story-category-tid').val(section_id); 
                        jQuery('#edit-field-story-category-tid').trigger('change');
                        jQuery('.video_landing_menu li a:first').addClass('menu-active');
+                       jQuery('body').css('pointer-events','none');
                    });", array('type' => 'inline', 'scope' => 'footer'));
-//           drupal_add_js("jQuery(document).ready(function(){
-//                       jQuery('.video_landing_menu li:first a').addClass('menu-active');
-//                    });", array('type' => 'inline', 'scope' => 'footer'));
                   ?>
               <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
           </div>
@@ -149,7 +137,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               <?php if ($action_links): ?>
                 <ul class="action-links"><?php print render($action_links); ?></ul>
               <?php endif; ?>       
-
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
             <?php
@@ -190,7 +177,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       $cls = 'active';
                                     }
                                     ?>
-
                                         <a class="droppable <?php print $cls; ?>" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
                                             <div class="data-holder" id="<?php print $blockid; ?>">
     <?php
@@ -206,7 +192,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                             </div>
                                         </a>
                                     </li>
-
                                   <?php } ?>              
                               </ul>
                               <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
@@ -225,12 +210,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               print "You can't drag any widget in main content area!";
                             }
                             ?>
-
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="sidebar-section-photo">
-
                             <div class="itg-widget">
                                 <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                   <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
@@ -267,7 +250,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                               </div>
                                             <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-21">
                                                 <?php
                                                 if (isset($widget_data['itg-block-21']['widget'])) {
@@ -302,7 +284,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                               </div>
                                             <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-22">
                                                 <?php
                                                 if (isset($widget_data['itg-block-22']['widget'])) {
@@ -346,10 +327,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             <?php if ($theme != 'itgadmin') { ?>
   <?php //print $feed_icons;    ?>
           </section>
-
   <?php if (false) { ?> 
             <div id="navigation">
-
                     <?php if ($main_menu): ?>
                   <nav id="main-menu" role="navigation" tabindex="-1">
                       <?php
@@ -371,26 +350,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       ?>
                   </nav>
                 <?php endif; ?>
-
     <?php print render($page['navigation']); ?>
-
             </div>
           <?php } ?>
-
   <?php if ($sidebar_first || $sidebar_second): ?>
             <aside class="sidebars">
             </aside>
   <?php endif; ?>
       </main>
-
-
   <?php print render($page['footer']); ?>
-
-
   </div>
-
   <?php print render($page['bottom']); ?>
-
 <?php } ?>
 <?php if ($theme == 'itgadmin') { ?>
   <div class="itg-ajax-loader">

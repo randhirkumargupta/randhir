@@ -23,7 +23,7 @@
             else {
               $right_img = ($frist_key == 0) ? 'itg_image370x208.jpg' : 'itg_image170x127.jpg';
               ?>
-              <img src="<?php echo $base_url . "/" . drupal_get_path('theme', 'itg') ?>/images/<?php echo $right_img; ?>" alt="" />
+              <img src="<?php echo $base_url . "/" . drupal_get_path('theme', 'itg') ?>/images/<?php echo $right_img; ?>" alt="" title="" />
             <?php } ?>
           </a>
         </div>
@@ -66,7 +66,7 @@
               }
               else {
                 ?>
-                <img width="170" height="127" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
+              <img width="170" height="127" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>" alt="" title="" />
               <?php } ?>
             </a>
           </div>

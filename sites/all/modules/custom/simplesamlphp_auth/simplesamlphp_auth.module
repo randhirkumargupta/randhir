@@ -217,12 +217,24 @@ function simplesamlphp_auth_loginpage() {
 function simplesamlphp_auth_init() {
   
   $segments = explode('/', $_GET['q']);
+  global $base_url;
   global $user;
   global $_simplesamlphp_auth_as;
   global $_simplesamlphp_auth_saml_attributes;
   global $_simplesamlphp_auth_saml_config;
   global $_simplesamlphp_auth_saml_version;
   global $myval;
+  
+  $front_login = TRUE;
+  if (!empty(variable_get('itg_backend_url'))) {
+    $backend_variable = variable_get('itg_backend_url');
+    $backend_var_url = parse_url($backend_variable);
+    $base_uri_host = parse_url($base_url);
+
+    if ($backend_var_url['host'] == $base_uri_host['host']) {
+      $front_login  = FALSE;
+    }
+  }
 
   if (!_simplesamlphp_auth_isEnabled(TRUE)) {
     // Exit without initializing.
@@ -272,7 +284,7 @@ function simplesamlphp_auth_init() {
   //pr($_simplesamlphp_auth_saml_attributes);
   if ($user->uid == 0) {
     // User is not logged in to Drupal.
-    if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if ($_simplesamlphp_auth_as->isAuthenticated() && $front_login) {
       // User is logged in - SimpleSAMLphp (but not Drupal).
       // Get unique identifier from saml attributes.
       $authname = _simplesamlphp_auth_get_authname();
@@ -1426,13 +1438,24 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
  */
 function simplesaml_twitter_image($url) {
   if (!empty($url)) {
+    watchdog('sso_image_url', '<pre>' . print_r($url, true) . '</pre>');
+    $sso_image_fid = '';
     $imagedata = file_get_contents($url);
     $image_url = 'itg' . time() . end(explode('/', $url));
+    $parse_image_url = parse_url($image_url);
     $image_extension = end(explode('.', $image_url));
-    $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-    $file = file_load($file_data_temp->fid);
-    file_usage_add($file, 'itg_sso_image', 'file', 4);
-
-    return $file_data_temp->fid;
+    try {
+      if (!file_exists(file_default_scheme() . '://sso_user_image')) {
+        mkdir(file_default_scheme() . '://sso_user_image', 0777, TRUE);
+      }
+      $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://sso_user_image/' . $parse_image_url['path']);
+      watchdog('sso_image_arr', '<pre>' . print_r($file_data_temp, true) . '</pre>');
+      file_usage_add((object) $file_data_temp, 'itg_sso_image', 'file', $file_data_temp->fid);
+      $sso_image_fid = $file_data_temp->fid;
+    }
+    catch (Exception $e) {
+      watchdog('SSo image exception', '<pre>' . $e->getMessage() . '</pre>');
+    }
+    return $sso_image_fid;
   }
 }

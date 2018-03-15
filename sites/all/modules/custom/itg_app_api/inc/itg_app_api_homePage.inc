@@ -42,40 +42,17 @@ function homePageJson() {
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
 
     $data['status_code'] = "1";
-    $data['status_message'] = "customised_message";
-    //$data['data'][0] = $data_packagelist_india;
-    $live_tv_switch = 0;
-    $live_tv_switch = variable_get('live_tv_switch');
-    if($live_tv_switch == 1){
-        $data['data'][0] = $homePageJsonWidget_2;
-        $data['data'][1] = $homePageJsonWidget_3;        
-        $data['data'][2] = $data_topstories;
-        $data['data'][3] = $homePageJsonWidget_1;
-        $data['data'][4] = $itg_rapid_home_movies_json;
-        $data['data'][5] = $itg_rapid_home_technology_json;        
-        $data['data'][6] = $data_news_india;
-        $data['data'][7] = $itg_rapid_home_sports_json;
-        $data['data'][8] = $data_news_lifestyle;
-        $data['data'][9] = $data_news_world;
-        $data['data'][10] = $data_magazine;
-        
-    }
-    else{
-        $data['data'][0] = $homePageJsonWidget_2;
-        //$data['data'][1] = $homePageJsonWidget_3;        
-        $data['data'][1] = $data_topstories;
-        $data['data'][2] = $homePageJsonWidget_1;
-        $data['data'][3] = $itg_rapid_home_movies_json;
-        $data['data'][4] = $itg_rapid_home_technology_json;        
-        $data['data'][5] = $data_news_india;
-        $data['data'][6] = $itg_rapid_home_sports_json;
-        $data['data'][7] = $data_news_lifestyle;
-        $data['data'][8] = $data_news_world;
-        $data['data'][9] = $data_magazine;
-    }
-    
-    //$data['data'][6] = $data_poll;
-
+    $data['status_message'] = "customised_message";    
+    $data['data'][0] = $homePageJsonWidget_2;     // scorecard   
+    $data['data'][1] = $data_topstories; 
+    $data['data'][2] = $homePageJsonWidget_1; // CONCLAVE
+    $data['data'][3] = $itg_rapid_home_movies_json;
+    $data['data'][4] = $itg_rapid_home_technology_json;
+    $data['data'][5] = $data_news_india;
+    $data['data'][6] = $itg_rapid_home_sports_json;
+    $data['data'][7] = $data_news_lifestyle;
+    $data['data'][8] = $data_news_world;
+    $data['data'][9] = $data_magazine;
     return $data;
 }
 
@@ -182,12 +159,12 @@ function homePageJsonPackagelist_india() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -393,12 +370,12 @@ function homePageJsonPackagelist_lifestyle() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -603,12 +580,12 @@ function homePageJsonPackagelist_world() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             //$weburl = $base_url . "/node/" . $nid;
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
@@ -975,12 +952,12 @@ function homePageJsonNewslist_india() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1189,12 +1166,12 @@ function homePageJsonNewslist_world() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1489,12 +1466,12 @@ function getMagazineStory($issue_date) {
 
     foreach ($result as $reskey => $resvalue) {
 
-        $title = strip_tags($resvalue['title']);
+        $title = $resvalue['title'];
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
         $changed = $resvalue['changed'];
-        $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+        $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
         $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1778,12 +1755,12 @@ function homePageJsonNewslist_lifestyle() {
 
         foreach ($result as $reskey => $resvalue) {
 
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1946,64 +1923,6 @@ function homePageJsonWidget_1() {
     return $data_news;
 }
 /**
- * main function for generate homePage Widget2 array
- *
- * @return array
- */
-function homePageJsonWidget_2() {
-    global $base_url;
-    $data_news = array();
-    $data_newslist = array();
-    $comman = array();
-    $n_widget = array();
-    $listcount = 0;
-    
-
-    $data_news['id'] = "0";
-    $data_news['order'] = "0";
-    $data_news['type'] = "webview";
-    $data_news['title'] = "Widget";
-    $data_news['label'] = "Widget";
-    $data_news['show_label'] = "0";
-    $data_news['n_template_id'] = "1";
-
-    $data_newslist[$listcount]['n_id'] = "0";    
-    $data_newslist[$listcount]['n_template_id'] = "";
-    $data_newslist[$listcount]['n_type'] = "widget";
-    $data_newslist[$listcount]['n_is_developing'] = "0";
-    $data_newslist[$listcount]['n_is_sponsored'] = "0";
-    $data_newslist[$listcount]['n_share_link'] = "";
-    $data_newslist[$listcount]['n_title'] = "";
-    $data_newslist[$listcount]['n_description'] = "0";
-    $data_newslist[$listcount]['n_pcategory_id'] = "0";
-    $data_newslist[$listcount]['n_pcategory_name'] = "";
-    $data_newslist[$listcount]['n_comment_count'] = "";
-    $data_newslist[$listcount]['n_small_image'] = "";
-    $data_newslist[$listcount]['n_large_image'] = "";
-    $data_newslist[$listcount]['n_image_credit'] = "";
-    $data_newslist[$listcount]['n_updated_datetime'] = "";
-
-    $data_newslist[$listcount]['n_photo'] = $comman;
-    $data_newslist[$listcount]['n_video'] = $comman;
-    $data_newslist[$listcount]['n_polls'] = $comman;
-    $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman; 
-    
-    $n_widget[0]['type'] = "2";
-    $n_widget[0]['type_label'] = "scorecard";
-    $n_widget[0]['tilte'] = "Scorecard"; 
-    $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_home_v1.html";
-    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_detail.html";
-    $n_widget[0]['action'] = "webview"; 
-    $n_widget[0]['is_india_match'] = "1";
-    
-    $data_newslist[$listcount]['n_widget'] = $n_widget;
-
-    $data_news['news'] = (array) $data_newslist;
-    return $data_news;
-}
-
-/**
  * main function for generate homePageJsonNewslist_india array
  *
  * @return array
@@ -2112,12 +2031,12 @@ function homePageJsonNewslist_business() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = strip_tags($resvalue['title']);
+            $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
+            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -2145,7 +2064,7 @@ function homePageJsonNewslist_business() {
             } else {
                 $changed_datetime = "";
             }
-            // Get Publish time:
+			// Get Publish time:
             $pub_date = get_content_publish_date($nid);
             if (!empty($pub_date)) {  
               $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
@@ -2222,6 +2141,7 @@ function homePageJsonNewslist_business() {
 
     return $data_news;
 }
+
 //changes on 19-feb-18
 /**
  * main function for generate itg_rapid_home_movies array
@@ -2864,6 +2784,63 @@ function itg_rapid_home_sports_json() {
     return $data_news;
 }
 /**
+ * main function for generate homePage Widget2 array
+ *
+ * @return array
+ */
+function homePageJsonWidget_2() {
+    global $base_url;
+    $data_news = array();
+    $data_newslist = array();
+    $comman = array();
+    $n_widget = array();
+    $listcount = 0;
+    
+
+    $data_news['id'] = "0";
+    $data_news['order'] = "0";
+    $data_news['type'] = "webview";
+    $data_news['title'] = "Widget";
+    $data_news['label'] = "Widget";
+    $data_news['show_label'] = "0";
+    $data_news['n_template_id'] = "1";
+
+    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_template_id'] = "";
+    $data_newslist[$listcount]['n_type'] = "widget";
+    $data_newslist[$listcount]['n_is_developing'] = "0";
+    $data_newslist[$listcount]['n_is_sponsored'] = "0";
+    $data_newslist[$listcount]['n_share_link'] = "";
+    $data_newslist[$listcount]['n_title'] = "";
+    $data_newslist[$listcount]['n_description'] = "0";
+    $data_newslist[$listcount]['n_pcategory_id'] = "0";
+    $data_newslist[$listcount]['n_pcategory_name'] = "";
+    $data_newslist[$listcount]['n_comment_count'] = "";
+    $data_newslist[$listcount]['n_small_image'] = "";
+    $data_newslist[$listcount]['n_large_image'] = "";
+    $data_newslist[$listcount]['n_image_credit'] = "";
+    $data_newslist[$listcount]['n_updated_datetime'] = "";
+
+    $data_newslist[$listcount]['n_photo'] = $comman;
+    $data_newslist[$listcount]['n_video'] = $comman;
+    $data_newslist[$listcount]['n_polls'] = $comman;
+    $data_newslist[$listcount]['n_rating'] = $comman;
+    $data_newslist[$listcount]['n_magazine'] = $comman; 
+    
+    $n_widget[0]['type'] = "2";
+    $n_widget[0]['type_label'] = "scorecard";
+    $n_widget[0]['tilte'] = "Scorecard"; 
+    $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_home_v1.html";
+    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_detail.html";
+    $n_widget[0]['action'] = "webview"; 
+    $n_widget[0]['is_india_match'] = "1";
+    
+    $data_newslist[$listcount]['n_widget'] = $n_widget;
+
+    $data_news['news'] = (array) $data_newslist;
+    return $data_news;
+}
+/**
  * main function for generate homePage Widget3 array
  *
  * @return array
@@ -2910,7 +2887,7 @@ function homePageJsonWidget_3() {
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "India Today Conclave 2018 Live"; 
-    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/aajtakembedjw.html";
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/conclave.html";
     $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
     $n_widget[0]['action'] = "webview";    
     

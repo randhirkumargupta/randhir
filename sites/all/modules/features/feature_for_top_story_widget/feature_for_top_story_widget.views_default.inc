@@ -605,6 +605,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'breaking_news' => 'breaking_news',
+    'mega_review_critic' => 'mega_review_critic',
     'story' => 'story',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
@@ -688,6 +689,7 @@ function feature_for_top_story_widget_views_default_views() {
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = array(
     'breaking_news' => 'breaking_news',
+    'mega_review_critic' => 'mega_review_critic',
     'story' => 'story',
   );
   $handler->display->display_options['filters']['type_1']['group'] = 1;

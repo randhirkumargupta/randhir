@@ -8,10 +8,11 @@
 //http://feeds.intoday.in/migration/byline-master.xml
 
 class ItgBylineMigration extends XMLMigration {
+  public $byline_consvalue;
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Byline)');
-    
+    $this->byline_consvalue = $this->read_folder_xml_byline(); // get current folder name
     
     
     // "fields" from an XML feed, so we pass an explicit list of source fields
@@ -43,10 +44,10 @@ class ItgBylineMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/movie-review-xmls-19-06-2017/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->byline_consvalue . '/';
+
+    $items_url = $xml_folder . 'byline-master.xml';
     
-    //$items_url = $xml_folder . 'byline-master.xml';
-    $items_url = $xml_folder . 'reviewer_master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -91,18 +92,14 @@ class ItgBylineMigration extends XMLMigration {
     $this->addFieldMapping('body', 'full_description')->xpath('full_description');
      $this->addFieldMapping('body:format', 'format')
          ->defaultValue('full_html');
-    //$this->addFieldMapping('pathauto', 'sef_url')->xpath('sef_url');
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
     $this->addFieldMapping('field_reporter_twitter_handle', 'twitter_id')->xpath('twitter_id');
     $this->addFieldMapping('field_reporter_facebook_id', 'facebook_id')->xpath('facebook_id');    
     $this->addFieldMapping('created', 'created_datetime')->xpath('created_datetime');    
     $this->addFieldMapping('changed', 'modified_datetime')->xpath('modified_datetime');    
-    $this->addFieldMapping('status', 'published')->xpath('published');
-    
+    $this->addFieldMapping('status', 'published')->xpath('published');  
     $this->addFieldMapping('field_reporter_profile_type', 'profile_type')->xpath('profile_type');   
-    /*$this->addFieldMapping('field_story_expert_name', 'facebook_page')->xpath('facebook_page');
-    $this->addFieldMapping('field_celebrity_pro_occupation', 'occupation')->xpath('occupation');*/
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/matadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/metakeywords');
@@ -126,10 +123,9 @@ class ItgBylineMigration extends XMLMigration {
   public function prepare($node, stdClass $row) {
        
     $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = 285750; // fix for reporter
-    //$node->field_celebrity_pro_occupation[LANGUAGE_NONE][1]['tid'] = 285903; // fix for anchor for 32 update;
     $node->uid = $row->xml->created_by;
     // Manage department in byline
-    if (isset($row->xml->company) && !empty($row->xml->company)) {
+    if (!empty((string)$row->xml->company)) {
       $company_value = (string) $row->xml->company;
       $vid = itg_db_migrate_vocab_id('byline_company'); // Company byline vocab
       $company_option_value = itg_db_migrate_parent_term($company_value, $vid);
@@ -137,7 +133,7 @@ class ItgBylineMigration extends XMLMigration {
           $node->field_byline_company[LANGUAGE_NONE][0]['tid'] = $company_option_value;
         }
     }
-    if (isset($row->xml->department) && !empty($row->xml->department)) {
+    if (!empty((string)$row->xml->department)) {
       $department_value = (string) $row->xml->department;
       $vid = itg_db_migrate_vocab_id('byline_department'); // Department byline vacab
       $department_option_value = itg_db_migrate_parent_term($department_value, $vid);
@@ -156,5 +152,32 @@ class ItgBylineMigration extends XMLMigration {
      ordering_set_for_byline($entity->nid, $row->xml->ordering);
    }
    
+  }
+  
+   public function read_folder_xml_byline() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
+
+    return $result[0];
+  }
+  
+  public function postImport() {
+    parent::postImport();
+    // mail send if city failed.
+    $content = failed_record_xml_id('migrate_map_itgbyline');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Byline',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
   }
 }

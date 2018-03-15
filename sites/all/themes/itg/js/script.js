@@ -50,8 +50,6 @@
                     complete: function () {
                     },
                     error: function (xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
                     }
                 });
 
@@ -60,7 +58,7 @@
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
-                //jQuery(this).remove();
+
                 jQuery('.sectioncart').each(function () {
                     section_ids = jQuery(this).attr('id');
                 });
@@ -69,7 +67,7 @@
                     url: Drupal.settings.basePath + 'getsecttioncarddata',
                     type: 'post',
                     beforeSend: function () {
-                        // jQuery('#widget-ajex-loader').show();
+
                     },
                     data: { 'section_ids': section_ids, getsectionid: getsectionid },
                     success: function (data) {
@@ -83,14 +81,12 @@
 
                         }
                         elementobj.remove();
-                        //  alert(data);  
+
 
                     },
                     complete: function () {
                     },
                     error: function (xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
                     }
                 });
 
@@ -260,7 +256,6 @@
             if (change_email_mobile) {
                 $('.activate-message').show();
             }
-            //jQuery('#main').find('img').parent().addClass('zoom-image');
 
             // jQuery code to set message error on my content page
             var my_content_error = jQuery('.page-personalization-my-content').find('.messages--error');
@@ -290,8 +285,6 @@ jQuery(document).ready(function () {
     var numLatestVideo = jQuery(".view-video-landing-header.view-display-id-block_1 ul.photo-list li").length;
     var winWidth = window.innerWidth;
     if (winWidth > 680) {
-        // var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
-        // jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
         jQuery(".defalt-bar").mCustomScrollbar({
             axis: "y",
         });
@@ -309,17 +302,6 @@ jQuery(document).ready(function () {
             return false;
         }
     }
-
-    //  jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
-    //    var h = jQuery(this).height() + 13;
-    //    var offset = jQuery(this).offset();
-    //    var position = (e.pageY - offset.top) / jQuery(this).height();
-    //    if (position < 0.20) {
-    //      jQuery(this).stop().animate({scrollTop: 0}, 1000);
-    //    } else if (position > 0.70) {
-    //      jQuery(this).stop().animate({scrollTop: h}, 1000);
-    //    }
-    //  });
 
     jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
     jQuery(".special-top-news .itg-listing-wrapper").mCustomScrollbar();
@@ -386,7 +368,6 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-
     var elmt = jQuery('.search-text');
     jQuery('.search-text').keypress(function (e) {
         el = jQuery(this);
@@ -401,9 +382,7 @@ jQuery(document).ready(function () {
         el = jQuery(this);
         value = el.val();
         var code = e.keyCode || e.which;
-        if (code == 13 && value.length != 0) { //Enter keycode
-            //Do something
-            //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
+        if (code == 13 && value.length != 0) { //Enter keycode            
             keyword = jQuery(this).val();
             myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             myStr = myStr.replace(/\s+/g, "-");
@@ -417,13 +396,12 @@ jQuery(document).ready(function () {
             el.closest('.search-icon-parent').find('.search-icon-default').show().next().hide();
         }
     });
-    jQuery('.search-icon-search').click(function () {
+    jQuery('.search-icon-search, .search-icon-default').click(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
             nkeyword = search_value;
             nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             nmyStr = nmyStr.replace(/\s+/g, "-");
-            //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
             window.location.href = urldata;
         }
@@ -432,10 +410,10 @@ jQuery(document).ready(function () {
     //ITG header
     headerMain();
     function headerMain() {
-        //header menu add icon for mobile
-        jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
-
-        //var logotxt = $('.container.header-logo').html();
+        //header menu add icon for mobile 
+        jQuery('.main-nav').first().prepend('<div class="desktop-hide"><a class="mobile-nav nochange" href="javascript:void(0)"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></a></div>');  
+        jQuery('.main-nav ul').first().prepend('<li class="desktop-hide"><a href="javascript:void(0)"></a></li>');
+	
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
         var mouse_is_inside = false;
@@ -459,7 +437,11 @@ jQuery(document).ready(function () {
             }
             jQuery(this).parent().find('.globle-search').toggleClass('active');
         });
-
+        
+        jQuery('.share-icon-default').on('click', function(e) {    
+                jQuery(this).parent().find('.social-dropdown').toggleClass('active');
+            });
+            
         jQuery('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function () {
             jQuery('#newlist').hide();
         });
@@ -469,7 +451,8 @@ jQuery(document).ready(function () {
         });
 
         if (is_mobile) {
-            jQuery('.head-live-tv .user-icon').click(function () {
+            jQuery(document).on('click', '.head-live-tv .loginicon', function (e) {
+                e.preventDefault();
                 jQuery(this).next('ul.menu').toggle();
             });
         }
@@ -484,28 +467,9 @@ jQuery(document).ready(function () {
             jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
             jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
         });
-        //footer add more link
-        //        jQuery('.footer-bottom .cell ul').each(function () {
-        //            var countList = jQuery(this).children('li').length;
-        //            if (countList > 8) {
-        //                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
-        //                jQuery(this).append("<li><span class='more-link'>More</span></li>");
-        //            }
-        //        });
-        //        jQuery('.footer-bottom .more-link').click(function () {
-        //            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
-        //            jQuery(this).toggleClass('active');
-        //            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
-        //            if (jQuery(this).hasClass('active')) {
-        //                jQuery('.footer-bottom .more-link').text('Less');
-        //            } else {
-        //                jQuery('.footer-bottom .more-link').text('More');
-        //            }
-        //        });
     }
 
-    //Add header for so-sorry page
-    jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
+    //Add header for so-sorry page    
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
 
@@ -635,21 +599,10 @@ jQuery(document).ready(function () {
             complete: function () {
             },
             error: function (xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });
 
-    //    //saved message
-    //    var getmsgsaves = jQuery('.saved-photogallery').text();
-    //    if (getmsgsaves != "") {
-    //        jQuery('.saved-photogallery').remove();
-    //        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
-    //    }
-    //    setTimeout(function () {
-    //        jQuery('.saved-photogallery').remove();
-    //    }, 3000);
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {
@@ -668,13 +621,13 @@ jQuery(document).ready(function () {
 
 jQuery(document).ready(function () {
     var winWidth;
-    jQuery('.mobile-nav i.fa').click(function () {
-        if (jQuery(this).hasClass('fa-bars')) {
-            jQuery(this).addClass('fa-times').removeClass('fa-bars');
+    jQuery('.mobile-nav').click(function () {
+        if (jQuery(this).hasClass('nochange')) {
+            jQuery(this).addClass('change').removeClass('nochange');
             jQuery('.navigation').slideDown();
 
         } else {
-            jQuery(this).addClass('fa-bars').removeClass('fa-times');
+            jQuery(this).addClass('nochange').removeClass('change');
             jQuery('.navigation').slideUp();
         }
     });
@@ -699,25 +652,6 @@ jQuery(document).ready(function () {
     jQuery('.social-share li').click(function () {
         jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
-
-    //vertical menu position      
-    /*var getNumberMenu = jQuery('.vertical-menu li').length;
-     if (getNumberMenu > 6) {
-     jQuery('.vertical-menu').slick({
-     vertical: true,
-     slidesToShow: 6,
-     slidesToScroll: 2,
-     infinite: false,
-     nextArrow: '<span class="more"><i class="fa fa-chevron-down"></i> More</span>',
-     prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
-     });
-     jQuery(document).find('.vertical-menu span.less').hide();
-     jQuery('.vertical-menu span.more').click(function () {
-     jQuery('.vertical-menu span.less').show();
-     });
-     } else {
-     return false;
-     }*/
 
     var menuLength;
     jQuery(".vertical-menu").each(function () {
@@ -941,19 +875,20 @@ var menuBuilder = function () {
         jQuery('#newlist').html('');
     }
     jQuery('.all-menu').remove();
-    jQuery('.second-level-menu.menu li').each(function () {
+    jQuery('.second-level-menu.menu li.nav-items').each(function () {
         liLength = jQuery(this).outerWidth(true);
         Totalwidth = Totalwidth + liLength;
         if (Totalwidth <= menuWidth) {
             jQuery(this).removeClass('hide');
         } else {
             if (jQuery('.all-menu').length === 0) {
-                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
+                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga(\'send\', \'event\', \'ParentMenu\', \'click\',\'1\', 1, {\'nonInteraction\': 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
                 clickHere = 1;
             }
             if (jQuery('#newlist').length === 0) {
                 jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
             }
+            
             var html = '<li>' + jQuery(this).html() + '</li>';
             jQuery('#newlist').append(html);
             jQuery(this).addClass('hide');
@@ -994,7 +929,11 @@ jQuery(document).ready(function () {
 
     });
 
-    jQuery('#modalCarousel').carousel({ interval: false });
+    var element = document.getElementById('#modalCarousel');
+    if (typeof (element) != 'undefined' && element != null)
+    {
+        jQuery('#modalCarousel').carousel({interval: false});
+    }
 
     jQuery('#modalCarousel').on('slid.bs.carousel', function () {
         jQuery('.modal-title').html(jQuery(this).find('.active').attr("title"));
@@ -1007,64 +946,14 @@ jQuery(document).ready(function () {
         jQuery('.active > a > img').attr({ 'src': img_src });
     });
 
-    //    jQuery(window).bind({
-    //        'load': setSidebarHeight,
-    //        'scroll': setSidebarHeight,
-    //        'resize': setSidebarHeight
-    //    });
-
     jQuery(window).load(function () {
         var sticky = jQuery('.region-vertical-menu');
-        //var sticky_sidebar = jQuery('.region-sidebar-second');
         sticky.stickyMojo({ footerID: '#footer', contentID: '#main' });
-        //sticky_sidebar.stickyMojo({footerID: '#footer', contentID: '#main'});
     });
 });
 
-jQuery(document).ready(function () {
-    var winWidth = jQuery(window).width();
-    if (jQuery('section').hasClass('region-sidebar-second') && winWidth > 1024) {
-        var el = jQuery('.region-sidebar-second');
-        var el_height = el.outerHeight(true);
-        var el_offset = el.offset();
-        var win_height = jQuery(window).height();
-        var footer_offset = jQuery('#footer').offset();
-        var footer_offset_top = footer_offset.top - win_height;
-        var fix_point = el_offset.top + el_height - win_height;
-        var content_ht = jQuery('#content').outerHeight(true);
-        el.parent().css('position', 'static');
-        jQuery(window).scroll(function () {
-            if (content_ht > el_height) {
-                if (el_height > win_height) {
-                    if (jQuery(this).scrollTop() >= fix_point && jQuery(this).scrollTop() <= footer_offset_top) {
-                        el.css({ "position": "fixed", "bottom": "0" });
-                    } else if (jQuery(this).scrollTop() >= footer_offset_top) {
-                        el.css({ "position": "absolute", "bottom": "0" });
-                    } else {
-                        el.css({ "position": "static" });
-                    }
-                } else {
-                    var diff = footer_offset_top + win_height - el_height - 50;
-                    if (jQuery(this).scrollTop() >= el_offset.top && jQuery(this).scrollTop() <= diff) {
-                        el.css({ "position": "fixed", "top": "0", "height": el_height });
-                    } else if (jQuery(this).scrollTop() >= footer_offset_top) {
-                        el.css({ "position": "absolute", "top": "auto", "bottom": "0" });
-                    } else {
-                        el.css({ "position": "static" });
-                    }
-                }
-            }
-        });
-    }
-
-
-});
 
 jQuery(document).ready(function (e) {
-    // story discription iframe wrap in div
-    var tagIframe = jQuery('.story-section .story-right .description');
-    tagIframe.find('iframe').removeAttr('height').removeAttr('width').wrap('<div class="iframe-video"></div>');
-
     // iframe wrap with div
     jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
 
@@ -1073,8 +962,10 @@ jQuery(document).ready(function (e) {
     jQuery('.thumb-video').click(function () {
         var getvideoindex = jQuery(this).attr('data-image-index');
         var getvideofid = jQuery(this).attr('data-image-fid');
+        var getvideousedon = jQuery(this).attr('data-used-on');
+        var video_title = jQuery(this).attr('data-video-title');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer';
-        load_video_in_slider(getvideofid, ajaxpath, getvideoindex)
+        load_video_in_slider(getvideofid, ajaxpath, getvideoindex, getvideousedon, video_title)
 
     });
 
@@ -1083,8 +974,9 @@ jQuery(document).ready(function (e) {
         var getvideoimage = jQuery(this).attr('data-image');
         var getvideonid = jQuery(this).attr('data-nid');
         var getvideourl = jQuery(this).attr('data-video-url');
+        var getvideousedon = jQuery(this).attr('data-used-on');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer-migrated';
-        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl)
+        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl, getvideousedon)
 
     });
     jQuery('.itg-embed-photo-slider').slick({
@@ -1130,12 +1022,33 @@ jQuery(document).ready(function (e) {
             }
         ]
     });
+
+    /* start photo/ video next/pre icon*/
+    var t = jQuery(".itg-region ul li").length,
+        e = jQuery(".itg-region ul li").outerWidth(true),
+        o = e * t;
+    jQuery(".itg-region ul").css("width", o + 100);
+    var s = 0;
+    jQuery(".scroll-arrow-left").click(function () {
+        if (0 == s)
+            jQuery(this).show();
+        else {
+            var t = jQuery(".itg-region ul li").eq(s - 1).outerWidth(true);
+            jQuery(".itg-region ul").animate({
+                left: "+=" + t
+            }), s -= 1, jQuery(".scroll-arrow-right").fadeIn()
+        }
+    }), jQuery(".scroll-arrow-right").click(function () {
+        if (t - 7 >= s) {
+            var e = jQuery(".itg-region ul li").eq(s).outerWidth();
+            jQuery(".itg-region ul").animate({
+                left: "-=" + e
+            }), s += 1
+        } else
+            jQuery(".scroll-arrow-right").fadeOut()
+    })
+    /* end photo/ video next/pre icon*/
 });
-//function setSidebarHeight() {
-//    var sticky_sidebar = jQuery('.region-sidebar-second');
-//    var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
-//    sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
-//}
 
 
 jQuery(window).load(function () {
@@ -1186,7 +1099,7 @@ function navigationResize() {
 }
 
 
-function load_video_in_slider(fid, path, getvideoindex) {
+function load_video_in_slider(fid, path, getvideoindex, getvideousedon, video_title) {
 
     jQuery.ajax({
         url: path,
@@ -1194,7 +1107,7 @@ function load_video_in_slider(fid, path, getvideoindex) {
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: { 'fid': fid, 'tabindex': getvideoindex },
+        data: { 'fid': fid, 'tabindex': getvideoindex, 'getvideousedon': getvideousedon, 'video_title': video_title },
         success: function (data) {
             jQuery('#video_palyer_container').html(data);
             jQuery('.loading-video').hide();
@@ -1203,8 +1116,6 @@ function load_video_in_slider(fid, path, getvideoindex) {
         complete: function () {
         },
         error: function (xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError:" + err);
         }
     });
 
@@ -1218,7 +1129,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: { 'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl },
+        data: { 'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl, 'getvideousedon': getvideousedon },
         success: function (data) {
             jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();
@@ -1227,9 +1138,37 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
         complete: function () {
         },
         error: function (xhr, desc, err) {
-            console.log(xhr);
-            console.log("Details: " + desc + "\nError:" + err);
         }
     });
 
+}
+
+// Adding js for google analytocs for home page photo carousel
+jQuery(window).load(function () {
+    if (window.location.pathname == '/') {
+        // adding onclick attribute for ga code for photo carousel for next button
+        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");
+        // adding onclick attribute for ga code for photo carousel for prev button
+        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
+    }
+
+    // For Prev button in slider thumbnails    
+    jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderThumbPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Next button in slider thumbnails
+    jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-next').attr('onclick', "ga('send', 'event', 'SliderThumbNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Slider Main Prev
+    jQuery('div.col-md-8 ul.slickslide button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderMainPrev', 'click','1', 1, {'nonInteraction': 1}); ga('send', {hitType: 'pageview',page: location.pathname}); return true;");
+    // For Slider Main Next
+    jQuery('div.col-md-8 ul.slickslide button.slick-next').attr('onclick', "ga('send', 'event', 'SliderMainNext', 'click','1', 1, {'nonInteraction': 1}); ga('send', {hitType: 'pageview',page: location.pathname}); return true;");
+    // For Slider Counter Next
+    jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-next').attr('onclick', "ga('send', 'event', 'CounterSliderNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Slider Counter Prev
+    jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-prev').attr('onclick', "ga('send', 'event', 'CounterSliderPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+});
+
+// Resize megareview iframe.
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }

@@ -7,6 +7,7 @@
  */
 module_load_include('inc', 'itg_syndication_clients', 'itg_syndication_clients.helper');
 
+
 /**
  * Implements hook_menu().
  */
@@ -109,6 +110,13 @@ function itg_syndication_clients_menu() {
   );
   $items['clients/indiatoday-zuppit-top'] = array(
     'page callback' => 'itg_zuppit_feed_latest_story',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_zuppit_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/samsung_video_detail/%'] = array(
+    'page callback' => 'client_samsung_video_detail',
+    'page arguments' => array(2),
     'access arguments' => array('access content'),
     'file' => 'inc/itg_zuppit_latest_story.inc',
     'type' => MENU_CALLBACK,
@@ -375,6 +383,12 @@ function itg_syndication_clients_menu() {
     'page callback' => 'itg_indiatoday_samsung_search_api',
     'access arguments' => array('access content'),
     'file' => 'inc/itg_indiatoday_samsung_search_api.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/jioexpress'] = array(
+    'page callback' => 'itg_indiatoday_jioexpress_api',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_jioexpress_api.inc',
     'type' => MENU_CALLBACK,
   );
   return $items;
@@ -1593,4 +1607,14 @@ function getCmsUserByNid_dailyReport($nid){
         }
     }
     return $cmsuser;
+}
+
+/**
+ * Function to remove iframe tag from content.
+ * @param string $content
+ * @return string
+ */
+function remove_iframe_img_tags($content) {
+  $contents = preg_replace('/<img alt="" data-syndication="no"[^>]+\>/i', " ", $content); 
+  return preg_replace('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', " ", $contents);
 }

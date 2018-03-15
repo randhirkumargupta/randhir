@@ -53,7 +53,7 @@ function itg_users_cms_user_dashboard() {
       'manage-ads' => 'Ads',
       'manage-poll' => 'Poll',
       'manage-survey' => 'Survey',
-      'ask-an-expert' => 'Ask an expert',
+      'ask-an-expert-inqueue-content' => 'Ask an expert',
       'manage-quiz' => 'Quiz',
       'manage-newsletter' => 'Newsletter',
       'manage-event-backend' => 'Events',
@@ -65,7 +65,10 @@ function itg_users_cms_user_dashboard() {
       'mydraft-blogs' => 'Blogs',
       'report/filed-content' => 'CMS Report');
 
-  
+   if(!in_array("Expert", $user->roles)) {
+     unset($listed_menu_link_site_admin['ask-an-expert-inqueue-content']); 
+   }
+   
    if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
       unset($listed_menu_link_site_admin['category-manager-listing'],
             $listed_menu_link_site_admin['manage-users'],
@@ -146,6 +149,27 @@ function itg_users_cms_user_dashboard() {
    }
    
   return theme('cms_user_dashboard', array('data' => $data));
+}
+
+/**
+ * Page callback for the access denied page. Does a redirect to login page (Taken from r4032login.module)
+ */
+function itg_users_access_denied() {
+  global $user;
+  if ($user->uid) {
+    return MENU_ACCESS_DENIED;
+  }
+
+  // The code in drupal_get_destination() doesn't preserve any query string
+  // on 403 pages, so reproduce the part we want here.
+  $path = $_GET['destination'];
+  $query = drupal_http_build_query(drupal_get_query_parameters(NULL, array('q', 'destination')));
+  if ($query != '') {
+    $path .= '?' . $query;
+  }
+  $destination = array('destination' => $path);
+  header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
+  drupal_exit();
 }
 
 /**

@@ -9,6 +9,8 @@
  * q = itg_image_repository.
  */
 function itg_image_repository($scheme = NULL) {
+  global $conf;
+  $conf['preprocess_js'] = 0;
   module_invoke('admin_menu', 'suppress'); //suppress admin_menu
   $jsop = isset($_GET['jsop']) ? $_GET['jsop'] : NULL;
   drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
@@ -48,15 +50,15 @@ function itg_image_repository_content($user, $scheme = NULL, $jsop = NULL) {
   //itg_image_repository_process_profile($itg_image_repository); //get active directory content
   //Before creating the content let's add main files required for itg_image_repository to function properly.
   $path = drupal_get_path('module', 'itg_image_repository');
-  drupal_add_js($path . '/js/jquery.form.js', array( 'scope' => 'footer'));
-  drupal_add_js($path . '/js/itg_image_repository.js', array( 'scope' => 'header'));
-  drupal_add_js($path . '/js/itg_image_repository_extras.js', array( 'scope' => 'footer'));
+  drupal_add_js($path . '/js/jquery.form.js', array('scope' => 'footer', 'cache' => FALSE));
+  drupal_add_js($path . '/js/itg_image_repository.js', array('scope' => 'header', 'cache' => FALSE));
+  drupal_add_js($path . '/js/itg_image_repository_extras.js', array('scope' => 'footer', 'cache' => FALSE));
   drupal_add_js($path . '/js/dropzone.js');
 
-  drupal_add_css($path . '/css/itg_image_repository-content.css');
-  drupal_add_css($path . '/css/dropzone.css');
-  drupal_add_js($path . '/js/imce.js');
-  drupal_add_js($path . '/js/imce_extras.js', array( 'scope' => 'footer'));
+  drupal_add_css($path . '/css/itg_image_repository-content.css', array('cache' => FALSE));
+  drupal_add_css($path . '/css/dropzone.css', array('cache' => FALSE));
+  drupal_add_js($path . '/js/imce.js', array('cache' => FALSE));
+  drupal_add_js($path . '/js/imce_extras.js', array('scope' => 'footer', 'cache' => FALSE));
 
   //process forms.
   $itg_image_repository_ref = array('itg_image_repository' => &$itg_image_repository);
@@ -100,7 +102,7 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
   //data
   if ($itg_image_repository = itg_image_repository_initiate_profile($user, $scheme)) {
 
-    module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.js', array( 'scope' => 'footer'));
+    module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.js', array('scope' => 'footer'));
     if (function_exists($func = 'itg_image_repository_js_' . $jsop)) {
       $response['data'] = $func($itg_image_repository);
     }
@@ -164,7 +166,9 @@ function itg_image_repository_upload_submit($form, &$form_state) {
   }
 
   $form_state['redirect'] = FALSE;
+  // pr($form_state['build_info']['args']);
   $itg_image_repository = & $form_state['build_info']['args'][0]['itg_image_repository'];
+  // die;
   // Need to provide extension validatior, otherwise file_save_upload uses the default.
   $validators['file_validate_extensions'] = array($itg_image_repository['extensions'] === '*' ? NULL : $itg_image_repository['extensions']);
   $validators['itg_image_repository_validate_all'] = array(&$itg_image_repository);
@@ -290,6 +294,7 @@ function itg_image_repository_validate_all($file, $itg_image_repository) {
   $errors = itg_image_repository_validate_filesize($file, $itg_image_repository['filesize']);
   //image resolution validation
   if (empty($errors) && preg_match('/\.(png|gif|jpe?g)$/i', $file->filename)) {
+    $itg_image_repository['dimensions'] = ($itg_image_repository['dimensions'] == '1200x1200') ? '6000x6000' : $itg_image_repository['dimensions']; 
     $errors = array_merge($errors, file_validate_image_resolution($file, $itg_image_repository['dimensions']));
   }
   //directory quota validation
@@ -564,7 +569,7 @@ function itg_image_repository_inaccessible_directory($dirname, $itg_image_reposi
     $dirname = utf8_encode($dirname);
     $diruri = itg_image_repository_dir_uri($itg_image_repository, $dirname);
     drupal_set_message(t('Directory %dirname is not accessible.', array('%dirname' => $dirname)), 'error');
-    watchdog('itg_image_repository', 'Access to %directory was denied.', array('%directory' => $diruri), WATCHDOG_ERROR);
+    //watchdog('itg_image_repository', 'Access to %directory was denied.', array('%directory' => $diruri), WATCHDOG_ERROR);
   }
   return FALSE;
 }

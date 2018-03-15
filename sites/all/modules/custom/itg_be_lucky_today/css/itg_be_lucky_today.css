@@ -31,7 +31,7 @@ and open the template in the editor.
 .top-outer-nav{width:100%; background-color:#e30009; display:block; min-height:32px;}
 .top-nav{display:block;}
 .top-nav ul{list-style:none; margin:0; padding:0;}
-.top-nav ul li{width:auto; display:inline; padding-right:26px;}
+.top-nav ul li{width:auto; display:inline;}
 .top-nav ul li:last-child{padding-right:0;} 
 .top-nav ul li a{font:500 13px/31px 'Roboto',Arial, Helvetica, sans-serif; color:#fff; text-decoration:none;}
 
@@ -200,9 +200,8 @@ select, input[type="password"]{ width:100px;}
 /*Rakesh End*/
 
 @media screen and (max-width: 800px) {
-    .wrapper{width:100%;}
-    .top-nav ul li{padding-right:8px;}
-    .top-nav ul li a{font:500 12px/31px "Roboto",Arial,Helvetica,sans-serif;}
+    .wrapper{width:100%;}    
+    .top-nav ul li a{font:500 12px/31px "OpenSans-Semibold"}
     .lucky_container_meter{width: 676px;}
     .lucky_container_meter .container_l .left_part_box{width:590px;}
     .lucky_container_meter .container_l .left_part_box .row_l .cols_l{ width:168px;}

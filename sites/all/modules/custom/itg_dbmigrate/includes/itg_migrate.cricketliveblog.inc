@@ -84,7 +84,7 @@ class ItgCricketliveblog extends XMLMigration {
     $this->addFieldMapping('field_type', 'type')->xpath('type');
     $this->addFieldMapping('field_story_expires', 'activatelivetv')->xpath('activatelivetv');
     //$this->addFieldMapping('field_breaking_content_details', 'content_details')->xpath('content_details');
-    $this->addFieldMapping('field_label', 'shortdescription')->xpath('shortdescription');
+    $this->addFieldMapping('field_common_short_description', 'shortdescription')->xpath('shortdescription');
     //$this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
 
     $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
@@ -126,6 +126,7 @@ class ItgCricketliveblog extends XMLMigration {
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+    $this->addFieldMapping('migrate_redirects', 'redirection_url')->xpath('redirection_url');
     $this->addFieldMapping('field_story_source_type')
         ->defaultValue('migrated');
     $this->addFieldMapping('field_story_source_id', 'id')->xpath('id'); // source id
@@ -167,7 +168,6 @@ class ItgCricketliveblog extends XMLMigration {
 
     // Brifcase migration
     $data_brifcase = '';
-
     if (isset($row->xml->highlights->highlight) && !empty($row->xml->highlights->highlight)) {
       foreach ($row->xml->highlights->highlight as $final_briefcase) {
         $source_briefcase = (string) $final_briefcase;
@@ -175,7 +175,7 @@ class ItgCricketliveblog extends XMLMigration {
       }
     }
     $row->brifcase_new = $data_brifcase;
-
+    
     return TRUE;
   }
 
@@ -196,24 +196,18 @@ class ItgCricketliveblog extends XMLMigration {
     if (!empty($row->match_id_new)) {
       $node->field_match_id[LANGUAGE_NONE][0]['value'] = $row->match_id_new;
     }
+    
     $node->field_constituancy[LANGUAGE_NONE][0]['value'] = '';
+    $modified_time = (int) $row->xml->modifieddate; // TIme migrate as IST
+    $mod_time = $modified_time;
+    $modi_time = date('Y-m-d h:i:s', $mod_time);
+    $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $modi_time;  
   }
 
   public function complete($entity, $row) {
-	  $node = node_load($entity->nid);
+	$node = node_load($entity->nid);
     $key = 0;
-    if (isset($row->xml->redirection_url)) {
-      $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-      $redirect = new stdClass();
-      $redirect->type = 'redirect';
-      $redirect->source_options = $redirect->redirect_options = array();
-      $redirect->language = LANGUAGE_NONE;
-      $redirect->status_code = 0;
-      $redirect->source = trim($sorce_url);
-      $redirect->redirect = "node/{$node->nid}";
-      redirect_save($redirect);
-    }
-
+    
     if (isset($row->xml->content_details->details)) {
       foreach ($row->xml->content_details->details as $value) {
         $content_title = (string) $value->content_title;

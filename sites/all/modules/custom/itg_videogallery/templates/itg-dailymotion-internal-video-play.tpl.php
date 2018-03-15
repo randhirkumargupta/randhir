@@ -11,8 +11,7 @@ if ($height == "") {
 if (arg(0) == 'embeded-video') {
   global $base_url;
   ?>
-<script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer-jquery-1.11.3.min.js';?>"></script>
-  <script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js';?>"></script>
+
  <?php } 
 $video_all_data = json_decode($video_data, TRUE);
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
@@ -24,23 +23,9 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 
 
 <script type="text/javascript">
-  var myUserAgent = navigator.userAgent;
-
-  var myUserAgent = navigator.userAgent;
-  var currentItem = 0;
-  //var videoSectionId=321;
-  var vdopiavideoid = '15719';
-  //var arrPlaylist=[""];
-
-  var autoplay = "true";
-  var mp4videoFlagJS = 1;
-  //$(document).ready(function() {	
-
   function loadplayerjw() {
-
-      // var playerInstance = jwplayer('videoplayer');
+var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
       jwplayer('videoplayer').setup({
-          //var multipart=0;
           playlist: [{
                   title: "",
                   'image': "<?php echo $player_content['player_image']; ?>",
@@ -52,18 +37,19 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 
                       }]
               }],
-          primary: "html5",
+          primary: "flash",
+          autostart: "true",
           width: "100%",
           height: "100%",
           aspectratio: "16:9",
-          "stretching": "exactfit",
+          "stretching": "uniform",
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
           autostart: true,
           advertising: {
               client: "googima", skipoffset: 5,
-              schedule: {"myAds": {"offset": "pre", "tag": "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]"}}},
+              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "",
               label: "73d673"
@@ -74,21 +60,13 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
   playerInstance.on('setupError', function (event) {
-      //alert('Setup Error:'+event.message);
       if (event.message == 'Error loading player: No playable sources found') {
-
-          //alert(event.message);
-          document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
+         document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
       } else {
           loadplayerjw();
       }
   });
-
-  //});           
-
-
-
-
+          
 </script>
 
 

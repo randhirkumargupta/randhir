@@ -23,7 +23,7 @@ else {
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $node->title);
 $fb_share_title= 'Quiz: '.htmlentities($search_title, ENT_QUOTES);    
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $share_desc = '';
 $src = '';
 $comment_value = variable_get('COMMENT_CONFIG');
@@ -77,7 +77,7 @@ $config_name = $comment_value[0]->config_name;
           <?php
           if ($config_name == 'vukkul') {
             ?> 
-            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+            <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
           <?php } if ($config_name == 'other') { ?> 
             <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
           <?php } ?>
@@ -102,8 +102,9 @@ $config_name = $comment_value[0]->config_name;
     ?>
     <div class="vukkul-comment">
         <div id="vuukle-emote"></div>
-        <div id="vuukle_div"></div>
-
+        <!--<div id="vuukle_div"></div>-->
+        <div id="vuukle-comments"></div>
+        <div class='vuukle-powerbar'></div>
         <?php
         if (function_exists('vukkul_view')) {
           vukkul_view();

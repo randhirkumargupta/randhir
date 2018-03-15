@@ -225,7 +225,6 @@ jQuery(document).ready(function () {
                     dataType: "JSON",
                     success: function (data) {
                         if (data != null) {
-                            console.log(data);
                             //jQuery("#widget-ajex-loader").show();
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').parent().find(".newsletter-loader").html('');
                             jQuery('.newsletter-get-content[rel="' + relval + '"]').removeClass('inactive');

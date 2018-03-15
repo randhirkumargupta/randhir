@@ -8,7 +8,8 @@
 if (isset($_GET['sid']) && !empty($_GET['sid'])) {
   $menus = itg_videogallery_ftp_video_post($_GET['sid'], 'page--section_video', 'video_list_of_category');
   foreach ($menus as $menu):
-    $output .= '<li value="' . $menu->filter_url . '"><a href="javascript:void(0)" class="NULL">' . $menu->name . '</a></li>';
+    $ga_data = "ga('send', 'event', 'Video_" . trim(str_replace(" ", "", $menu->name)) . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+    $output .= '<li value="' . $menu->filter_url . '"><a href="javascript:void(0)" class="NULL" onclick="'.$ga_data.'">' . $menu->name . '</a></li>';
   endforeach;
 }
 
@@ -31,15 +32,3 @@ if (empty($_GET['category'])) {
    }
 }
 ?>
-
-<script>
-
-$('.video_landing_menu').slick({
-  dots: false,
-  infinite: true,
-  speed: 300,
-  slidesToShow: 1,
-  centerMode: true,
-  variableWidth: true
-});
-</script>

@@ -59,8 +59,6 @@ function itg_image_croping_menu() {
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
-
-
   $items['savetags'] = array(
     'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
     'type' => MENU_CALLBACK,
@@ -110,15 +108,6 @@ function itg_image_croping_menu() {
 }
 
 /**
- * This function use for load the croper according to size!
- */
-//function itg_image_croping_info_edit() {
-//  $arg = arg(1);
-//  $drupal_form = drupal_render(drupal_get_form('itg_image_croping_image_info_form', $arg));
-//  p($drupal_form);
-//}
-
-/**
  * Implements hook_form().
  * {@inheritdoc}
  */
@@ -136,23 +125,6 @@ function itg_image_croping_image_info_form($form, $form_state) {
       '#default_value' => ($info[0]->image_caption) ? $info[0]->image_caption : '',
     );
   }
-
-//  $form['image_alt'] = array(
-//    '#type' => 'textfield',
-//    '#title' => 'Alt Text',
-//    '#attributes' => array(
-//      'placeholder' => t('Alt Text'),
-//    ),
-//    '#default_value' => ($info[0]->alt) ? $info[0]->alt : '',
-//  );
-//  $form['image_title'] = array(
-//    '#type' => 'textfield',
-//    '#title' => 'Title',
-//    '#attributes' => array(
-//      'placeholder' => t('Title'),
-//    ),
-//    '#default_value' => ($info[0]->title) ? $info[0]->title : '',
-//  );
   $form['courtesy'] = array(
     '#type' => 'textfield',
     '#title' => 'Courtesy',
@@ -308,7 +280,6 @@ function itg_image_croping_change_image_aspect_ratio() {
   $aspect_ratio = trim($_POST['aspect_ratio']);
 
   $file = file_load($image_id);
-
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
@@ -316,7 +287,7 @@ function itg_image_croping_change_image_aspect_ratio() {
   $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, $aspect_ratio));
 
   drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
   $aspect_ratio_data = itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width);
   print theme('image_repository', array('data' => $file,
     'field_name' => $field_name,
@@ -358,23 +329,43 @@ function itg_image_croping_ajax_make_ajax() {
   }
 
   $file = file_load($image_id);
+  
   if ($_POST['img_width'] != "" && $_POST['img_height'] == "") {
     $imagedata_info = image_get_info($file->uri);
     $image_height = $imagedata_info['height'];
     $image_width = trim($_POST['img_width']);
   }
+
   if ($image_height == "" && $image_width == "") {
     $image_height = EXTRA_LARGE_IMAGE_HEIGHT;  //set the inital height of croper
     $image_width = EXTRA_LARGE_IMAGE_WIDTH;    //set the inital width of croper 
   }
+  
+      // For Mos image
+  if ($_POST['content_type'] == 'bodyeditor') {
+    $file_image = image_load($file->uri);
+    $image_width = $file_image->info['width'];
+    $image_height = $file_image->info['height'];
+    if ($image_width > '647') { 
+        print "<div style='color:#ff0000'>image dimenssions must be less than 647px width.</div>";        
+        $image_width = '647';
+    } else {
+        $image_width = '';
+    }
+  } 
+  
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
   $imagedata = base64_encode(file_get_contents($file->uri));
   $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, '', $_POST['content_type'], $is_solr));
+  
 
-  drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+     drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
+  
+  
+ 
   print theme('image_repository', array('data' => $file,
     'field_name' => $field_name,
     'image_height' => $image_height,
@@ -811,17 +802,7 @@ function itg_image_croping_crop_image_orignal() {
   $filepath = file_default_scheme() . '://' . $filedir;
   $orig_width = $image->info['width'];
   $orig_height = $image->info['height'];
-   if($image_width > 1800) {
-    $scaled = image_scale_and_crop($image, $image_width, $image_height);
-
-   }else {
-  if ($image->info ['width'] < $image_width || $image->info['height'] < $image_height) {
-    $scaled = image_scale($image, $image_width, $image_height, true);
-  }
-  else {
-    $scaled = image_scale_and_crop($image, $image_width, $image_height);
-  }
-   }
+  $scaled = image_scale($image, $image_width, $image_height,trues);
   $image_name_orignal = $file_image->filename;
   $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
   $image_name = $image_name_orignal .'-'. $image_width.'x'.$image_height;
@@ -888,7 +869,6 @@ function itg_image_croping_crop_image_orignal() {
  */
 function mageimagedimesion() {
   $image_dim = array();
-
   $image_dim['magazine']['field_magazine_cover_photo']['width'] = 172;
   $image_dim['magazine']['field_magazine_cover_photo']['height'] = 240;
   $image_dim['photogallery']['field_images']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
@@ -932,6 +912,8 @@ function mageimagedimesion() {
   $image_dim['story']['field_story_small_image']['height'] = SMALL_IMAGE_HEIGHT;
   $image_dim['story']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
   $image_dim['story']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
+  $image_dim['story']['field_story_big_image']['width'] = EXTRA_BIG_IMAGE_WIDTH;
+  $image_dim['story']['field_story_big_image']['height'] = EXTRA_BIG_IMAGE_HEIGHT;
 
   // Dimension for story
   $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
@@ -1058,7 +1040,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
   }
 
   if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image' ) || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image')) {
-
+    $extrabigimagesize = '(' . $imgdim[$content_name]['field_story_big_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_big_image'] ['height'] . ')';
     $largsize = '(' . $imgdim[$content_name]['field_story_large_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_large_image'] ['height'] . ')';
     $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image'] ['height'] . ')';
     $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image'] ['height'] . ')';
@@ -1112,10 +1094,11 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     else {
 
       $checkoption = array(
+        //'field_story_big_image' => t("Facebook Instant Article Image $extrabigimagesize"),
         'field_story_large_image' => t(" Large Image  $largsize"),
         'field_story_medium_image' => t(" Medium Image $mediumsize"),
         'field_story_small_image' => t(" Small Image  $smallsize"),
-        'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize")
+        'field_story_extra_small_image' => t("Extra Small Image $extrasmallsize"),        
       );
     }
 
@@ -1153,6 +1136,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     '#value' => ($is_solr == 1) ? $is_solr : '',
     '#attributes' => array('id' => 'is_solr', 'name' => 'is_solr'),
   );
+    
   $form['image_original_hight'] = array(
     '#type' => 'hidden',
     '#value' => ($image_height) ? $image_height : '',
@@ -1163,6 +1147,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     '#value' => ($image_width) ? $image_width : '',
     '#attributes' => array('id' => 'image_original_width', 'name' => 'image_original_width'),
   );
+
   $form['data_field_name'] = array(
     '#type' => 'hidden',
     '#value' => ($field_name) ? $field_name : '',

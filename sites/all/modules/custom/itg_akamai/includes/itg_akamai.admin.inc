@@ -11,6 +11,7 @@ function itg_akamai_settings() {
     '#type' => 'fieldset',
     '#title' => 'Akamai Cache Host Map URL',
   );
+
   $form['itg_akamai_host_map']['itg_akamai_mapping_host'] = array(
     '#type' => 'textfield',
     '#title' => t('ITG Akamai Map Host URL'),
@@ -168,13 +169,18 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
   );
 
   $form['fieldset']['markup1'] = array(
-    '#weight' => 1,
+    '#weight' => -1,
     '#markup' => '<p>' . l('Click here for node report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamai_not_implemented') . '</p>',
   );
 
   $form['fieldset']['markup2'] = array(
-    '#weight' => 2,
+    '#weight' => 1,
     '#markup' => '<p>' . l('Click here for section report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamais_not_implemented') . '</p>',
+  );
+
+  $form['fieldset']['markup3'] = array(
+    '#weight' => 2,
+    '#markup' => '<p>' . l('Click here to get list of Block/Widget where TTL(Time to Live) is not set', 'admin/config/system/itg_akamai/comp_widgt_ttl_not_implemented') . '</p>',
   );
 
   $form['fieldset']['purge_id'] = array(
@@ -430,7 +436,7 @@ function itg_akamai_cache_akamai_ccpurge() {
  * Ajax menu callback.
  */
 function itg_akamai_cache_akamai_ccpurge_settings($ajax, $type) {
-    return drupal_get_form('akamai_cc_frm_form');
+  return drupal_get_form('akamai_cc_frm_form');
 }
 
 /**
@@ -440,7 +446,7 @@ function akamai_cc_frm_form($form, $form_state) {
   $form = array();
   $type = arg(6);
   $form['#attributes']['class'][] = 'node-form';
-  
+
   $key = $type;
   $name = $type;
 
@@ -555,21 +561,22 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
   $akamai_config_cctype_flag = $form_state['values']['limit'];
   $akamai_config_cctype_type = $form_state['values']['contenttype'];
 
-  $qry = db_select('node', 'n');
-  $qry->condition('n.type', $akamai_config_cctype_type);
-  $qry->condition('n.status', 1);
-  $qry->fields('n', array('nid'));
-  $qry->orderBy('n.updated', 'DESC');
-  $qry->range(0, $akamai_config_cctype_flag);
-  $res = $qry->execute();
-
-
-  $a = array();
-  foreach ($res as $chunk_data) {
-    $a[] = $chunk_data;
-    $operations[] = array('akamai_cc_clear_ct_op', array($chunk_data));
+  try {
+    $qry = db_select('node', 'n');
+    $qry->condition('n.type', $akamai_config_cctype_type);
+    $qry->condition('n.status', 1);
+    $qry->fields('n', array('nid', 'type'));
+    $qry->orderBy('n.changed', 'DESC');
+    $qry->range(0, $akamai_config_cctype_flag);
+    $res = $qry->execute();
+  }
+  catch (Exception $e) {
+    watchdog('ITG Akamai', 'Error:' . $e->getMessage());
   }
 
+  foreach ($res as $chunk_data) {
+    $operations[] = array('akamai_cc_clear_ct_op', array($chunk_data));
+  }
 
   $batch = array(
     'title' => t('Content type nodes are purging process have been started...please wait....!'),
@@ -591,7 +598,17 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
 function akamai_cc_clear_ct_op($nodedata, &$context) {
   $message = '';
   if (isset($nodedata->nid) && !empty($nodedata->nid)) {
-    itg_akamai_clear_url('node/' . $nodedata->nid);
+    $alias = drupal_get_path_alias('node/' . $nodedata->nid);
+    if (isset($alias) && !empty($alias)) {
+      $amp_types = itg_akamai_amp_cc_mapping();
+      if (in_array($nodedata->type, $amp_types)) {
+        $url = itg_akamai_send_for_host_mapping_for_amp($alias);
+        itg_akamai_clear_url($url);
+      }
+      else {
+        itg_akamai_clear_url($alias);
+      }
+    }
   }
 }
 
@@ -672,7 +689,7 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
   );
 
   $form['markup_data'] = [
-    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-cache.'),
+    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-store.'),
   ];
 
   $form['field_container'] = [
@@ -848,7 +865,7 @@ function itg_akamai_cache_akamai_other_submit($form, &$form_state) {
                 ->execute();
           }
           catch (Exception $e) {
-            die($e->getMessage());
+            watchdog('ITG Akamai TTL Error', 'Error:' . $e->getMessage());
           }
           $inserted_count++;
         }
@@ -941,8 +958,8 @@ function itg_akamai_akamai_not_implemented_rows() {
     $query_node->condition('n.nid', $data_nids, 'NOT IN');
   }
 
-  $query->condition('n.entity_type', $mapping, 'IN');
-  $query->orderBy('n.nid', 'DESC');
+  $query_node->condition('n.type', $mapping, 'IN');
+  $query_node->orderBy('n.nid', 'DESC');
 
   $query_node = $query_node->extend('PagerDefault')->limit(50);
 
@@ -959,6 +976,70 @@ function itg_akamai_akamai_not_implemented_rows() {
 
   $render_array['akamai_cache_logs_n_nid'] = array(
     array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#empty' => t('No Record found!'),
+      '#attributes' => array(
+        'class' => array('views-table'),
+      ),
+    ),
+    array(
+      '#theme' => 'pager',
+    ),
+  );
+
+  return $render_array;
+}
+
+/**
+ * Implements itg_akamai_akamai_not_implemented_rows()
+ */
+function itg_akamai_comp_widgt_ttl_not_implemented() {
+
+  $rows = array();
+
+  $header = array(
+    t('Sn no.'),
+    t('Module'),
+    t('Delta'),
+    t('Action'),
+  );
+
+  // Getting all settings for Akamai block refresh , We send all settings into Drupal variables 
+
+  $settings = variable_get('itg_akamai_block_refresh_settings', array());
+  $settings_keys = array_keys($settings);
+  $settings_keys = array_map(function($el) {
+    return str_replace('-', '_', $el);
+  }, $settings_keys);
+
+  try {
+    $query = db_select('block', 'a');
+    $query->fields('a', array('module', 'delta'));
+    $query->addExpression("CONCAT('block_', a.module, '_', a.delta)", 'itg_block_refresh_id');
+    $query->condition('a.theme', 'itg');
+    $query = $query->extend('PagerDefault')->limit(50);
+    $result = $query->execute();
+  }
+  catch (Exception $e) {
+    die($e->getMessage());
+  }
+  $sn = 0;
+  while ($record = $result->fetchObject()) {
+    if (!in_array($record->itg_block_refresh_id, $settings_keys)) {
+      $rows[] = array(
+        ++$sn,
+        $record->module,
+        $record->delta,
+        l('Configure', "/admin/structure/block/manage/{$record->module}/{$record->delta}/configure"),
+      );
+    }
+  }
+
+  $render_array['akamai_cache_logs_n_nid'] = array(
+    array(
+      '#prefix' => t('Note:You must have to check "Enable block to be refreshed automatically" in Block configuration setting'),
       '#theme' => 'table',
       '#header' => $header,
       '#rows' => $rows,
@@ -1104,7 +1185,7 @@ function itg_akamai_cache_get_amp_cc_mapping($alias) {
     }
   }
   catch (Exception $e) {
-    
+    watchdog('ITG Akamai Mapping', 'Error:' . $e->getMessage());
   }
   return $nids;
 }

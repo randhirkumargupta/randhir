@@ -40,16 +40,16 @@ $video_data = "";
     foreach ($rows as $id => $row) {
       $image_path = $row['sm_field_video_thumb_url'];
       if (empty($row['sm_field_video_thumb_url'])) {
-        $image_path = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
+        $image_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
       }
       if ($row['sm_field_video_used'] == 1) {
         if (VIDEO_PROPERTY == $row['sm_field_property']) {
           if (!in_array($row['sm_field_video_id'], $all_draft_video)) {
             if ($row['sm_field_video_type'] == 'INTERNAL') {
-              $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL' . $row['sm_field_all_xml_content'] . '#video_gallery#';
+              $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL#' . $row['sm_field_all_xml_content'] . '#video_gallery#';
             }
             else {
-              $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL';
+              $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL#';
             }
 
             $video_image = '<img  width="100" height="44" src="' . $image_path . '">';
@@ -59,10 +59,10 @@ $video_data = "";
         }
         else {
           if ($row['sm_field_video_type'] == 'INTERNAL') {
-            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL' . $row['sm_field_all_xml_content'] . '#video_gallery#';
+            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL#' . $row['sm_field_all_xml_content'] . '#video_gallery#';
           }
           else {
-            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL';
+            $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#other' . '#1#INTERNAL#';
           }
           if (!empty($row['sm_field_video_thumb_url'])) {
             $video_image = '<img  width="100" height="44" src="' . $image_path . '">';

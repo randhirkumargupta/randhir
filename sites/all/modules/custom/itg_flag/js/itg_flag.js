@@ -3,7 +3,7 @@
  * Contains all functionality related to Flag Management
  */
 
-(function ($) {
+/*(function ($) {
     Drupal.behaviors.itg_flag = {
         attach: function (context, settings) {
             var uid = settings.itg_flag.settings.uid;
@@ -11,7 +11,7 @@
         }
 
     };
-})(jQuery, Drupal, this, this.document);
+})(jQuery, Drupal, this, this.document);*/
 
 // script for facebook sharing
 var app = Drupal.settings.itg_flag.settings.fb_app;
@@ -57,7 +57,6 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     },
     function (response) {
         var front_uid = Drupal.settings.itg_flag.settings.uid;
-        console.log(response);
         jQuery.ajax({
                 //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 url: base_url + '/fb-share-callback/' + node_id + '/' + front_uid,
@@ -119,6 +118,7 @@ jQuery(document).ready(function () {
         var typ = jQuery(this).attr('id');
         var dtag = jQuery(this).attr('data-tag');
         var datatype = jQuery(this).attr('data-type');
+        var data_heart = jQuery(this).attr('data-heart');
         var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag + "&datatype=" + datatype;
 
         jQuery.ajax({
@@ -135,8 +135,10 @@ jQuery(document).ready(function () {
                 var obj = jQuery.parseJSON(result);
 
                 jQuery('#widget-ajex-loader').hide();
+                // console.log(obj.type, obj, obj.type == 'like_count');
                 if (obj.type == 'like_count') {
                     jQuery("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
+                    jQuery("#no-of-likes_mobile_" + obj.nd_id).html("(" + obj.count + ")");
                     jQuery("#vno-of-likes_" + obj.nd_id).html(obj.count);
                 }
                 if (obj.chk == 'sty') {
@@ -149,10 +151,16 @@ jQuery(document).ready(function () {
                     jQuery("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");
                 }
                 if (obj.error == 'error') {
-
-                    jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                    if(data_heart == 'heart-msg') {
+                        jQuery("#heart_voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                        jQuery("#heart_voted_mobile_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                    } else {
+                        jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
+                    }   
+                    
                 }
                 jQuery('#like_count,#dislike_count').prop('disabled', false);
+                jQuery('.btn-heart-like').addClass( "heart-dislike" );
             }
         });
 
@@ -354,7 +362,8 @@ jQuery(document).ready(function () {
         }
     });
     
-    jQuery('body').on('click', '.story-login-follow', function (event) {
+    // call back for submit story in case of akamai
+    jQuery('body').on('click', '.story-login-follow, .photo-login-akamai, .video-login-akamai', function (event) {
     //jQuery('.story-login-follow').click(function (event) {
         var post_data = "";
             jQuery.ajax({
@@ -373,13 +382,13 @@ jQuery(document).ready(function () {
                     }
                     if (obj.loggedin == 'true') {
                       var uri = Drupal.settings.baseUrl.baseUrl+'/post-ugc-content';
-                      console.log(uri);
                       window.location.href = uri;
                     }
                 }
             });
         
     });
+
 });
 
 // jquery for delete follow / unfollow

@@ -1,0 +1,232 @@
+.homeleft{ width:66%;}
+.topstories {
+    float: left;
+    margin-bottom:0; margin-top:1px; margin-left:1px;
+    width: 100%; border:0px; padding:0px; box-shadow: 0 0 0; -webkit-box-shadow: 0 0 0; height: auto; margin-bottom:20px;
+}
+.belt {
+    border: medium none;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 425px;
+	height: 480px;
+}
+.inner-belts {
+    height: 593px;
+    position: relative;
+    width: 2500px;
+}
+.left-column {
+    overflow: hidden;
+    padding: 10px 0 10px 10px;
+    position: relative;
+	 min-height: 470px;
+}
+.topstories .thumbs {
+    height: 50px;
+    left: 168px;
+    position: absolute;
+    width: 300px;
+	bottom:-26px;
+
+}
+.thumbs ul {
+    margin: 0;
+    padding: 0;
+}
+.thumbs ul li {
+    border-radius: 100%;
+    box-shadow: 2px 2px 4px #333 inset;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    list-style: outside none none;
+    margin-right: 5px;
+    width: 15px; 
+}
+
+.thumbs ul li.active {
+    background: none repeat scroll 0 0 #000 !important;
+}
+.captionWicon span.photo-icon{position: absolute;top: 50%;transform: translateY(-50%);-webkit-transform: translateY(-50%);}.captionWicon span.withicontext{float: left;margin-left: 50px;}
+.gap{margin-top:0px; padding-top:3px;}
+#tabs1, #tabs2{border: 1px solid #e7e7e7; overflow:auto;}
+#tabs1 ul, #tabs2 ul{float:left; width:100%;}
+#tabs1 ul li, #tabs2 ul li{float:left; width:100%;border-bottom: 1px dotted #cccccc; font: 400 15px/18px Roboto; list-style: none none; margin:0 0 8px 0; padding-bottom: 7px; position:relative; color:#191919;}
+#tabs1 ul li a, #tabs2 ul li a{color:#191919;}
+#tabs1 ul li:first-child, #tabs2 ul li:first-child{margin-top:8px;}
+#tabs1 ul li:last-child, #tabs2 ul li:last-child{border-bottom:0;}
+#tabs1 ul li a img, #tabs2 ul li a img{float:left; margin-right:5px;}
+#tabs1 ul li a strong, #tabs2 ul li a strong{display:block; font-weight:normal;}
+.ytbbot{bottom:11px; width: 25px; height: 15px; display: block; position: absolute; z-index: 111; background: url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home.png) -243px -655px; left: 5px;
+}
+.candidate-statenav{ background:#F1F1F3; overflow:hidden; border-bottom:3px solid #222;}
+.candidate-statenav ul li{ list-style:none; width:auto; float:left; display:block;}
+.candidate-statenav ul li a{ font-size:10px; color:#222; padding:7px 4px; display:block;}
+.candidate-statenav ul li a.active{ background:#222; color:#fff;}
+
+@media only screen and (max-width: 800px) {
+.homeleft{width:98%;}
+#rosRightColumn{top:0 !important;}
+#rosRightColumn .rt-colum:nth-child(odd){float:right;}
+#rosRightColumn .rt-colum:nth-child(even){float:left;}
+#rosRightColumn .rt-colum:nth-child(8){float:left;}
+.bihar_elec_banner{width:100% !important;}
+.bihar_elec_banner img{width:100%;}
+
+}
+
+@media screen and (max-width: 900px){
+.sponserd_outer_all_1 iframe {
+    height: 170px !important;
+}
+}
+
+.topstories .thumbs ul li.actives, .thumbs ul li.actives {background: #eb1c24 none repeat scroll 0 0 !important;}
+.bihar_elec_banner{margin:10px auto; width:1002px;}
+.bihar_elec_banner h1{ text-indent:-99999px; display:block; font-size:1px; line-height:1px;}
+.topstr-list li{ padding-right:5px; border-bottom: 1px solid #E4E4E4; padding-left: 7px;}
+.topstr-list li:nth-child(6){ border-bottom:0px; margin-bottom: 0px;}
+.more a, .more a:hover {
+    color: #111; text-transform:lowercase;
+}
+.right-column {
+    margin-right: 0;
+    padding: 2px 0 2%;
+}
+.right-column {
+    float: right;
+    padding: 2% 0;
+    width: 35% !important;
+}
+.right-column {
+    float: right;
+    width: 35% !important; padding:0;
+}
+.images { width:415px;}
+.slwidth {
+    padding-left: 0 !important;
+    width: 425px !important;}
+	
+#asselection .topstr-list {
+    list-style: outside none none;
+    padding:0; margin:0;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.topstories .right-column{-webkit-box-shadow: 0px 2px 5px #CECECE; box-shadow: 0px 2px 5px #CECECE; margin-right: 3px; margin-bottom: 3px;} 
+.right-column .morehead{ margin-bottom:10px;} 
+.right-column .morehead a{color: #fff;font: 400 22px/30px Roboto,sans-serif;display: block;background: #01408D;padding: 3px 0 0px 10px;}
+.topthree-story{ width:415px; float:left;}
+.topthree-story .mainstory{ position:relative; display:block; width:415px; margin-bottom:8px;} .topthree-story img.mainstory-img{ width:415px;} .topthree-story img{ width:100%;} .topthree-story .maintitle{ position:relative; padding:15px 10px; background:#212121;}
+.topthree-story .maintitle a{ color:#fff; text-decoration:none; font-size: 26px;line-height: 31px;font-weight: 600;}
+
+.topthree-story .otherstory ul li{ list-style:none; width:203px; float:left; margin-right:8px;}.topthree-story .otherstory ul li:nth-child(2){ margin-right:0;} .topthree-story .otherstory ul li .otherstory-img{ width:203px;} .topthree-story .storytitle{ position:relative; padding:8px; background:#3C3A3B;}
+.topthree-story .storytitle a{ color:#fff; text-decoration:none; font-size:14px; line-height:18px; font-weight:400;}
+
+.coverage-nav{ margin-bottom:10px;overflow: hidden;}
+.coverage-nav ul li{ width:auto; float:left; list-style:none;}
+/*.coverage-nav ul li.coverage-heading{ background:#155AB7; font-size:16px; font-weight:600; padding:3px 5px; color:#fff; text-transform:uppercase; line-height:19px; position:relative;}
+.coverage-nav ul li.coverage-heading:after{ width: 0;height: 0;border-style: solid;border-width: 50px 0 50px 86.6px;border-color: transparent transparent transparent #007bff;line-height: 0px;_border-color: #000000 #000000 #000000 #007bff;_filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000'); position:relative; right:0px;}*/
+.hotrightnow-head{ display:block; float:none; background:#155AB7; font:400 22px/30px Roboto,sans-serif;}
+.coverage-nav ul li a{ border-right:1px solid #ccc;} .coverage-nav ul li:nth-child(6) a{border-right:0px;} .coverage-nav ul li a.active{ color:#111;}
+.coverage-nav ul li a{ font-size: 15px;line-height: 24px; padding: 0 10px;}
+.coverage-nav ul li.coverage-heading {background:#155AB7; font-size:16px; font-weight:600; padding:3px 5px; color:#fff; text-transform:uppercase; line-height:19px; position:relative; margin-right:20px; border-right:0px;}
+.coverage-nav ul li.coverage-heading:after, .coverage-nav ul li.coverage-heading:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.coverage-nav ul li.coverage-heading:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: #155AB7;
+	border-width: 11px;
+	margin-top: -12px;
+}
+.coverage-nav ul li.coverage-heading:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #155AB7;
+	border-width: 11px;
+	margin-top: -11px;
+}
+
+.coverage-nav li.coverage-heading a{color:#FFF;border-right: none;padding-right: 12px;}
+
+
+#asselection .boxcont {
+    background-color: #ffffff;
+    box-shadow:0 0 0 0;
+    float: left;
+    margin: 0 0 7%;
+    min-height: inherit !important;
+    width: 100%;
+}
+#asselection .boxcont {
+    box-shadow:0 0 0 0;
+    height: 240px;
+    margin: 0 2.6% 3% 0;
+    width: 205px; float:left;
+}
+.box {
+    float: left;
+    height: auto;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%; padding:0;
+}
+.posrel{ position:relative; width:auto; height:auto; border:1px solid #E9E9E9; padding:3px; box-shadow:0 0 0 0;} .box img.images {height:auto;} 
+.box .innerbox { float: left;padding: 4%; width:auto;} .box .innerbox a { color: #505050;font:400 16px/22px Roboto,sans-serif;} #asselection .thirdcrad {
+    margin-right: 0;
+}
+#asselection .topzone h2 { margin-bottom:10px;} #asselection .topinnerbox p{ margin-top:10px;}  #asselection .pmedia-image-icon, .pmedia-play-icon{ bottom:10px; right:10px;}
+#asselection .pmedia-image-icon{ background-position:-299px -386px;} 
+
+#asselection .share-story{ position:absolute; top:288px; left:5px;} #asselection .share-story ul{ bottom:-12px;} #asselection .posrel{ height:auto; overflow:hidden;}
+
+.storysection h2, .photosection h2, .videosection h2, .sosorrysection h2{  color: #404040; font-size: 22px; font-weight: 300; margin-bottom: 10px;}
+
+.storysection, .photosection, .videosection, .sosorrysection{ overflow:hidden; position:relative; padding-left:2px;}
+a.heademore{ position:absolute; top:3px; right:10px; color:#111; text-transform:lowercase; font-weight: 500;}
+
+#asselection .share-icon { background: #ffcc3f url("http://media2.intoday.in/indiatoday/images/homenew/shares.png") no-repeat scroll 0 4px; bottom: 3px; padding-left: 25px; padding-right: 10px; position: absolute; width: auto;}
+#asselection .share-story span.sharetext { float: left;font-size: 16px;font-weight: 300;line-height: 30px;margin-left: 5px;width: auto;}
+
+
+
+#right-section .rt-colum h2{ position:relative; display:block; background:#01408D;padding-bottom: 0px; margin-bottom:5px; padding-left:10px; left:0; top:0;} #right-section .rt-colum h2 a{display: block; float: none;font: 400 22px/30px Roboto,sans-serif; background:none; border-left:0px; padding:0px}
+
+
+#right-section .photo-slider{ height: 350px; overflow: hidden; position: relative;width: 305px;margin: 0 auto;padding: 5px;border: 1px solid #e7e7e7;margin-left: -5px; box-shadow: 0px 2px 5px #CECECE;}
+.photo-slider .photo-list{width: 305px;position: relative; float: left; margin-right:5px; height: 350px; overflow: hidden;}
+.photo-slider a#photoprev-elec16, .photo-slider a#photonext-elec16 { position: absolute; top: 40%;}
+.photo-slider a#photoprev-elec16{left: 3px; background-position: -171px -368px; width: 37px; height: 58px; display: block;text-indent: -999999px;display: none;}
+.photo-slider a#photonext-elec16{right: 4px; background-position: -210px -368px; width: 37px; height: 58px; display: block; text-indent: -999999px;}
+
+
+.photo-slider a#photoprev-nastybites, .photo-slider a#photonext-nastybites { position: absolute; top: 40%;}
+.photo-slider a#photoprev-nastybites{left: 3px; background-position: -171px -368px; width: 37px; height: 58px; display: block;text-indent: -999999px;display: none;}
+.photo-slider a#photonext-nastybites{right: 4px; background-position: -210px -368px; width: 37px; height: 58px; display: block; text-indent: -999999px;}
+ 
+.watchright_now .watch_chunk_container ul li{ margin-bottom:5px;} .watch_chunk_right{ color:#4D4D4D; width:185px; font-weight:400;}
+.watch_chunk_container{ background-color:#fff; border:0px;} .watch_chunk{ background: none; padding: 3px; box-shadow:0px 0px 6px 1px #CECECE; margin: 3px; width:297px;}
+.showing{box-shadow:0px 0px 6px 1px #CECECE;}
+
+.allmap-section{ margin-bottom:20px;}
+.allmap-section .mapheading{ background:#155AB7; font:400 22px/30px Roboto,sans-serif; padding: 2px 5px; color:#fff;} .allmap-section .mapheading a{ color:#fff; text-decoration:none;}
+.maps-mainsection{ background:#F5F3F4; overflow:hidden; padding:5px 0 0 0} .maps-mainsection > div{ border-right:1px solid #E4E4E4; float:left;}
+.maps-mainsection div h3{} .maps-mainsection div h3 a{ background:#E7E7E7; width:auto; float:left; padding:5px 8px; font-size:14px; color:#111; font-weight:400;}
+
+.maps-mainsection div.map-tamilnadu{ width:114px;}
+.maps-mainsection div.map-westbangal{ width:124px;}
+.maps-mainsection div.map-kerla{ width:96px;}
+.maps-mainsection div.map-puduchare{ width:163px;}
+.maps-mainsection div.map-assam{ width:153px; border-right:0px;}

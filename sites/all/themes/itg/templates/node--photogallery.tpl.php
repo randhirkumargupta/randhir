@@ -12,7 +12,10 @@ if (!empty($node->field_photogallery_configuration['und'])) {
 }
 
 if (function_exists('taboola_view')) {
-  taboola_view();
+  $tab_org = "_taboola.push({article:";
+  $tab_rep = "_taboola.push({photo:";
+  $tabula_view = taboola_view();
+  str_replace($tab_org, $tab_rep, $tabula_view);
 }
      
 if (function_exists(global_comment_last_record)) {
@@ -23,8 +26,9 @@ if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
   ?>
   <div class="vukkul-comment">
       <div id="vuukle-emote"></div>
-      <div id="vuukle_div"></div>
-
+      <!-- <div id="vuukle_div"></div> -->
+      <div id="vuukle-comments"></div>
+      <div class='vuukle-powerbar'></div>
       <?php
       if (function_exists('vukkul_view')) {
         vukkul_view();

@@ -11,7 +11,6 @@
                 var url_type = $('input[name=url_type]:checked').val();
                 var menu_level_val = jQuery("select[name=menu_level]").val();
                 if (url_type == 'internal') {
-                    console.log('ajax' + url_type);
                     $('#edit-category-icon-ajax-wrapper').css("display", "none");
                     $("input[name*='url']" ).attr('readonly', true);
                 } else {
@@ -49,7 +48,6 @@ jQuery(document).ready(function () {
     var menu_level_val = jQuery("select[name=menu_level]").val();
     var sponsored_category = jQuery("sponsored_category['Yes']").val();
     if (url_type == 'internal') {
-        console.log(url_type);
         jQuery('#edit-category-icon-ajax-wrapper').css("display", "none");
         jQuery('#edit-url').attr('readonly', true);
     } else {

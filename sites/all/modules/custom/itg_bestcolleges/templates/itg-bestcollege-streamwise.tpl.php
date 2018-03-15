@@ -44,7 +44,7 @@
 
 <div class="clearfix"></div>
 <div class="col-sm-12 remove_padd_right">
-<div class="row list-group college">
+<div class="list-group college">
       <div class="clr_chn right_align_bestcollege" >
             <?php
                $url_get = explode('/',$_SERVER['REQUEST_URI']);
@@ -133,8 +133,9 @@
           <div class="c_ques"><?php print $question; ?></div>
           <div class="vukkul-comment">
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>
-
+            <!-- <div id="vuukle_div"></div> -->
+            <div id="vuukle-comments"></div>
+            <div class='vuukle-powerbar'></div>
             <?php
             if (function_exists('vukkul_view')) {
               vukkul_view();

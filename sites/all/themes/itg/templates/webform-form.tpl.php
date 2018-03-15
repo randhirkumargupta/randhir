@@ -32,8 +32,8 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
       <div class="webform-submit-social">
         <?php print t("<div class=\"submit-feedback\"><span>Submit feedback via</span></div>"); ?>
        <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon">
-            <img src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' alt='twitter' />
-            <img src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' alt='facebook' />
+         <img src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/twitter.png' alt='twitter' title='twitter' />
+         <img src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/facebook.png' alt='facebook' title='facebook' />
             <!--<img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/google-plus.png' alt='' />-->
             <!--<img   src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/linked.png' alt='linkedin' />-->
        </a>

@@ -20,9 +20,9 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_field_node_status', $node->status);
     }
     
-    /*if(isset($node->field_cm_related_content_detail['und'][0]['value'])) {
+    if(isset($node->field_cm_related_content_detail['und'][0]['value']) && !empty($node->field_cm_related_content_detail['und'][0]['value'])) {
       unset($node->field_cm_related_content_detail['und'][0]['value']);
-    }*/
+    }
     
     if (isset($node->nid)) {
         $document->addField('sm_itg_custom_nid', $node->nid);

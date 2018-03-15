@@ -274,13 +274,13 @@
         <?php endif; ?>
         <!-- render story technology fields -->
         <?php
-        $tech = render($content['field_story_technology_rating']);
+        $tech = render($content['field_story_tech_pros_cons_ratin']);
         if (!empty($tech)):
           ?>
           <div class="tech-details content-box">
             <h2><?php print t('Technology'); ?></h2>
             <div class="content-details">
-      <?php print render($content['field_story_technology_rating']); ?>
+      <?php print render($content['field_story_tech_pros_cons_ratin']); ?>
           <?php print render($content['field_story_tech_review_chunk']); ?>
             </div>
           </div>
