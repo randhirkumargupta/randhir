@@ -140,6 +140,7 @@ function itg_pti_content() {
                       itg_custom_byline_create($uniqueid, $by_line);
                     }
                     //Set values to node
+                    $headline = stripInvalidXml($headline)
                     $node = new stdClass();
                     $node->title = trim(stripInvalidXml($headline));
                     $node->type = "story";
@@ -168,11 +169,11 @@ function itg_pti_content() {
                     // Attach random image to PTI Story
                     $file_name_arr = array('latest-news.jpg', 'news-flash.jpg', 'news-update.jpg');
                     $k = array_rand($file_name_arr);
-					$filename = $file_name_arr[$k];
-					$image = file_get_contents(file_create_url('public://'.$filename));
-					$file = file_save_data($image, 'public://' . $filename, FILE_EXISTS_REPLACE);
-					$node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array)$file));
-					// Attach random image to PTI Story
+                    $filename = $file_name_arr[$k];
+                    $image = file_get_contents(file_create_url('public://'.$filename));
+                    $file = file_save_data($image, 'public://' . $filename, FILE_EXISTS_REPLACE);
+                    $node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array)$file));
+                    // Attach random image to PTI Story
                     $exp_description = strtolower($description);
                     $exp_description = explode(" ", $exp_description);
                     $exclude_word = array('embargoed', 'ap', 'afp', 'dpa');
