@@ -26,20 +26,20 @@ function itg_remove_flooded_nodes(){
   }
   
   //Delete From Table itg_widget_order_section
-  $query = db_select('itg_widget_order_section', 'widget');
-  $query->fields('widget', array('cat_id', 'content_type'));
-  $query->addExpression('COUNT(widget.cat_id)', 'count');
-  $query->condition('widget.widget', 'section_wise_widget');
-  $query->groupBy('widget.cat_id');
-  $query->groupBy('widget.content_type');
-  $query->havingCondition('count', $keep_row, '>');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
-  foreach($result as $value){
-    if($value['count'] <= $keep_row){
+  $query1 = db_select('itg_widget_order_section', 'widget');
+  $query1->fields('widget', array('cat_id', 'content_type'));
+  $query1->addExpression('COUNT(widget.cat_id)', 'count');
+  $query1->condition('widget.widget', 'section_wise_widget');
+  $query1->groupBy('widget.cat_id');
+  $query1->groupBy('widget.content_type');
+  $query1->havingCondition('count', $keep_row, '>');
+  $result1 = $query1->execute()->fetchAll(PDO::FETCH_ASSOC);  
+  foreach($result1 as $value1){
+    if($value1['count'] <= $keep_row){
       continue;
     }
-    _delete_old_data_from_section_widget('itg_widget_order_section', $value['cat_id'], $value['content_type']);
-    $deleted_cat_id[] = $value['cat_id'] . '#' . $value['count'];
+    _delete_old_data_from_section_widget('itg_widget_order_section', $value1['cat_id'], $value1['content_type']);
+    $deleted_cat_id[] = $value1['cat_id'] . '#' . $value1['count'];
   }
   
   $time_end = microtime(true);
