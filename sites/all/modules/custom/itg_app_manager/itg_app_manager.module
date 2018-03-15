@@ -4618,7 +4618,7 @@ function hori_itg_app_manager_form_validate($form, &$form_state) {
     $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $title = $results[0]['title'];
     
-    if (count($results) > 0 && $has_subcat == 0) {
+    if (count($results) > 0 && $has_subcat == 0 && arg(2) != "edit") {
       $title = $results[0]['title'];      
       form_set_error('order_id', t('Tile: '.$title.' alreday used by for other section'));
     }
