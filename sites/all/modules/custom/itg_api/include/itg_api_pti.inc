@@ -141,7 +141,7 @@ function itg_pti_content() {
                     }
                     //Set values to node
                     $node = new stdClass();
-                    $node->title = trim(html_entity_decode($headline));
+                    $node->title = trim(stripInvalidXml($headline));
                     $node->type = "story";
                     //node_object_prepare($node);
                     $node->language = LANGUAGE_NONE;
