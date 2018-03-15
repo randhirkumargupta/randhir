@@ -323,7 +323,7 @@ function itg_report_api_story_count_report() {
   $item_per_page = $_GET['item_per_page'];
   $pageno = $_GET['pageno'];
   if ($type == 'gallery') {
-    $type == 'photogallery';
+    $type = 'photogallery';
   }
   //valid tid & pageno
   if (!is_numeric($status)) {
