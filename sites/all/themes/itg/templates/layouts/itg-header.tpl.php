@@ -112,21 +112,29 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                       if (!empty($sponsored_class)) {
                         $color_value = $menu_data['db_data']['bk_color'];
                       }
-                      if ($menu_link_data['url_type'] == 'url-type-external') {
-                        $attribute_array = array(
-                          'style' => array("background : $color_value"),
-                          'target' => $target,
-                          'rel' => 'nofollow',
-                          'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
-                        );
-                      }
-                      else {
-                        $attribute_array = array(
-                          'style' => array("background : $color_value"),
-                          'target' => $target,
-                          'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
-                        );
-                      }
+                      
+                       if ($menu_link_data['url_type'] == 'url-type-external') {
+                        if (strpos($link_url, $_SERVER['HTTP_HOST'])) {
+                            $attribute_array = array(
+                              'style' => array("background : $color_value"),
+                              'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                            );
+                          } else {
+                            $attribute_array = array(
+                              'style' => array("background : $color_value"),
+                              'target' => $target,
+                              'rel' => 'nofollow',
+                              'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                            );
+                          }
+                        } else {
+                          $attribute_array = array(
+                            'style' => array("background : $color_value"),
+                            'target' => $target,
+                            'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                          );
+                        }
+                        
                       
 					 $link_title_for_vertical = $menu_link_data['link_text_mobile'];
                      //$link_title_for_vertical = $menu_link_data['link_text_icon'] . $menu_link_data['link_text_mobile'];
