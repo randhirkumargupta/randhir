@@ -2,10 +2,8 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/
+    destination: /opt/httpd/vhosts/intoday.in/subdomains/itgdrapid/httpdocs/
   - source: scripts/setup/local.settings.php
-    destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
+    destination: /opt/httpd/vhosts/intoday.in/subdomains/itgdrapid/httpdocs/sites/default/
   - source: scripts/setup/settings.php
-    destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
-  - source : simplesamlphp
-    destination: /opt/httpd/vhosts/indiatodayonline.in/simplesamlphp
+    destination: /opt/httpd/vhosts/intoday.in/subdomains/itgdrapid/httpdocs/sites/default/
