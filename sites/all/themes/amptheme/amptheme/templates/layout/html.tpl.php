@@ -710,7 +710,7 @@ pre {
 }
 .footer-bottom-menu h4 {
     text-transform: uppercase;
-    margin: 20px 0 5px
+    margin: 22px 0 5px
 }
 .footer-bottom-menu ul li {
     padding: 3px 0
@@ -1482,12 +1482,11 @@ ul.header-menu li {
     border-bottom: 1px solid #ccc;
     width: 270px;
 }
-.story_ad_block.custom-amp-ad{margin-top:5px;}
-.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{margin-bottom:8px;}
-section.sidebar .block-itg-ads > div {
-    margin: auto;
-}
-.custom-amp-ad.ad-btf{margin-bottom:50px;}
+.story_ad_block.custom-amp-ad{padding:10px 0 0; width:300px; margin:0 auto}
+.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{padding:10px 0 0; width:300px; margin:0 auto}
+.description amp-ad{ margin:auto; display: block; width:300px;}
+section.sidebar .block-itg-ads > div {margin: auto;}
+.custom-amp-ad.ad-btf{padding-bottom: 20px; width: 300px; margin: 0 auto;}
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
 .node-type-story .posted-by{overflow:hidden;}
 .node-type-story .posted-by .profile-pic, .node-type-story .posted-by .profile-detail { float: left;}

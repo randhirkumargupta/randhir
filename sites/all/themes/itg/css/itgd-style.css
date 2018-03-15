@@ -619,7 +619,7 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 }
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{height:560px;}
-.breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
+.breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:23px;font-size: 14px;}
 }
 @media screen and (max-width: 767px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 490px;}
