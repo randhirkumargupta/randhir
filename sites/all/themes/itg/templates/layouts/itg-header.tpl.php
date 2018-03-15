@@ -139,11 +139,8 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 					 $link_title_for_vertical = $menu_link_data['link_text_mobile'];
                      //$link_title_for_vertical = $menu_link_data['link_text_icon'] . $menu_link_data['link_text_mobile'];
                       ?>
-                      <li <?php echo $style_tag; ?> class="nav-items <?php
-                      if (!$data['detect']) {
-                        print $image_class;
-                      }
-                      ?>">
+                 
+                      <li <?php echo $style_tag; ?> class="nav-items <?php print $image_class; ?>">
                       <?php
                       if (!$data['detect']) {
                         print l($link_text, $link_url, array('html' => true, 'attributes' => $attribute_array,));
