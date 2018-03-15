@@ -62,8 +62,9 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
       $query->join('field_data_field_story_source_type', 'fsst', 'fsst.entity_id=n.nid');
       $query->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
     }
-    //$query->condition('ti.tid', '1206640', '<>');
-    $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+    if($type == 'story'){
+      $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+    }    
     $query->groupBy('n.nid');
     $query->condition('n.status', $status)->orderBy('n.created', 'DESC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
