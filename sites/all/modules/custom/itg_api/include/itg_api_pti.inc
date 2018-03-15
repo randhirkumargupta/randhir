@@ -140,7 +140,7 @@ function itg_pti_content() {
                       itg_custom_byline_create($uniqueid, $by_line);
                     }
                     //Set values to node
-                    $headline = stripInvalidXml($headline)
+                    $headline = stripInvalidXml($headline);
                     $node = new stdClass();
                     $node->title = trim($headline);
                     $node->type = "story";
