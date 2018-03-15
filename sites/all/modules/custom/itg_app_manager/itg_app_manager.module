@@ -4622,6 +4622,23 @@ function hori_itg_app_manager_form_validate($form, &$form_state) {
       $title = $results[0]['title'];      
       form_set_error('order_id', t('Tile: '.$title.' alreday used by for other section'));
     }
+    //rule3 : parent create 1st than chield
+    
+    if($has_subcat == 1){
+        $title = "";
+        $title = hori_return_menu_section_title($form_state); 
+        $query = db_select('itg_app_menu_content', 'imc');
+        $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
+        $query->condition('imc.menu_type_id', $menu_type_id, '=');
+        $query->condition('imc.title', $title, '=');
+        $query->condition('imc.has_subcategory', 0, '=');
+        $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $title = $results[0]['title'];
+        if(!$title){
+            form_set_error('order_id', t('Mandatory to create parent 1st'));
+        }
+    }
+    
 }
 
 /**

@@ -171,9 +171,9 @@ function horizontal_menu_data($menu_type_id) {
       $menu_list['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
       $menu_list['icon_url'] = isset($data['icon_url']) ? $data['icon_url'] : "";
       $menu_list['is_new'] = isset($data['is_new']) ? $data['is_new'] : "";
-      
-      if($data['section_id'] == '1206553' || $data['section_id'] == '1208521' || $data['section_id'] == '1206552'){
-          $sub_cat = middleware_menu_subcat_list($data['section_id']);
+      $sub_cat = middleware_menu_subcat_list($data['section_id']);
+      //if($data['section_id'] == '1206553' || $data['section_id'] == '1208521' || $data['section_id'] == '1206552'){
+      if(count($sub_cat['data']) > 1){    
           $sub_cat_total = $sub_cat['total_sub_cat'];
           $menu_list['has_subcategory'] = "$sub_cat_total";
           $menu_list['subcategory'] = $sub_cat['data'];
