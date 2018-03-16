@@ -1,7 +1,7 @@
 <?php
 function itg_indiatoday_jioexpress_api(){
 
-  $sid = 1787193;
+  $sid = array(1787193, 1206584);
   
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -15,13 +15,13 @@ function itg_indiatoday_jioexpress_api(){
   
   $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');  
-  $query->condition('ti.tid', $sid, '=');
+  $query->condition('ti.tid', $sid, 'IN');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 10);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $xml = generate_jioexpress_feeds($result, $sid);
+  $xml = generate_jioexpress_feeds($result);
   $xml_path = 'public://rss-feeds/xml_data/jio/';
 	$file_path = $xml_path . 'conclave2018.xml';
 	$fp = fopen($file_path, "w");
@@ -36,12 +36,11 @@ function itg_indiatoday_jioexpress_api(){
 }
 
 
-function generate_jioexpress_feeds($result, $sid){
+function generate_jioexpress_feeds($result){
 	$xml = '';
   if (!empty($result)) {
     global $base_url;
     $logo = theme_get_setting('logo');
-    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
     $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today Latest News]]></title>';
