@@ -315,3 +315,10 @@ function minify_cron() {
   module_load_include('inc', 'minify', 'minify.admin');
   _minify_clear_invalid_cache();
 }
+
+/**
+ * Returns path where minified files are stored.
+ */
+function minify_path() {
+  return 'public://minify';
+}
