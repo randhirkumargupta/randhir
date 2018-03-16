@@ -1049,10 +1049,11 @@ function itg_story_node_presave($node) {
 function itg_story_node_view($node, $view_mode, $langcode) {
 	if (!empty($_GET['iframe'])) {
 		drupal_add_js('jQuery(document).ready(function() {
+      jQuery(".cboxIframe").css("width","600px !important", "height","600px !important");   
       setTimeout(function(){
         jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");     
-      },700); 
-                  
+      },1000); 
+                
     });', array('type' => 'inline', 'scope' => 'footer'));
 	}	
              
