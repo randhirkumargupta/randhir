@@ -1,7 +1,7 @@
 <?php
 function itg_indiatoday_jioexpress_api(){
 
-  $sid = 1787193;
+  $sid = array(1787193, 1206584);
   
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -15,7 +15,7 @@ function itg_indiatoday_jioexpress_api(){
   
   $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');  
-  $query->condition('ti.tid', $sid, '=');
+  $query->condition('ti.tid', $sid, 'IN');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
