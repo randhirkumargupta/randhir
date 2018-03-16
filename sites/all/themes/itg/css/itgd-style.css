@@ -659,9 +659,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 #itg-scorecard-container .container .col-xs-12{padding:0;}
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 260px;}
 }
-@media screen and (max-width:320px){
-.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
-}
+
 
 #block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
@@ -867,7 +865,7 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
 /* home page extra space fix */
-.front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto;}
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto; background:#f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:block}
@@ -875,6 +873,13 @@ background:none;
 .front .mt-50 {margin-top: 20px;}
 /* embed code page scroll */
 .show-embed-code-link .show-embed-code-div{left: -150%;}
+}
+
+@media screen and (max-width:320px){
+.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
+.front .itg-top-section .top-rhs-add-child .ad-widget{margin:15px -30px 0;width: 320px; padding:4px 10px; }
+.front .itg-layout-container .itg-h321-section .ad-widget{margin: 0 -17px;}
+
 }
 
 .cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
