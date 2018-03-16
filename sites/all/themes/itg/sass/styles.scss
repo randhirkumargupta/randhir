@@ -9011,7 +9011,7 @@ section.sidebar {
     }
     .itg-layout-300 {
         .droppable {
-            height: 300px;
+            min-height: 300px;
         }
     }
     .itg-layout-485 {
@@ -11979,6 +11979,7 @@ h1.about-us-heading {
                 color: #fff;
                 font-size: 14px;
                 padding: 7px;
+                background: #ffc106;
                 img {
                     padding-top: 5px;
                 }
