@@ -379,12 +379,12 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     
     $total_records = report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $next_page_no = $pageno + 1;
-    if ($type == 'videogallery') {
-        $type = 'video';
-    }
-    if ($type == 'photogallery') {
-        $type = 'gallery';
-    }
+//    if ($type == 'videogallery') {
+//        $type = 'video';
+//    }
+//    if ($type == 'photogallery') {
+//        $type = 'gallery';
+//    }
 //    if ($status == 0) {
 //        $status = 'unpublish';
 //    } elseif ($status == 1) {
