@@ -575,6 +575,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $redirecturl = get_redirect_url($newcontentid);
       $newurl = FRONT_URL.'/'.$redirecturl;
       drupal_goto($newurl, array(), 301);
+     } else if ((!empty($arg[0]) && ($arg[0] == 'a-to-z.jsp')) && !empty($_GET['id'])) {
+      $id = $_GET['id'];
+      $newurl = "elections/a-to-z.jsp-@@-id=".$id;
+      $newurl = FRONT_URL.'/'.$newurl;
+      drupal_goto($newurl, array(), 301);
      } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
     }
