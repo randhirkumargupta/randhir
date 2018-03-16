@@ -1,5 +1,12 @@
 <script type="text/javascript">var __at__ = 0;</script>
-<div style="display:none">
+<?php 
+if (!empty($_GET['preview_log'])) {
+     $display_style = 'block'; 
+	} else {
+    $display_style = 'none';
+  }
+?>
+<div style="display:<?php print $display_style; ?>">
 <?php print render($content); ?>
 </div>
 <?php print $node->view_output; ?>
