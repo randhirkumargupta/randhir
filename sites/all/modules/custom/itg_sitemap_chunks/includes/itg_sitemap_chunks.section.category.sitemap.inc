@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Function for getting sitemap for listed saection and categories.
+ * Function for getting sitemap for listed section and categories.
  */
 function itg_sitemap_chunks_get_section_category_sitemap() {
   $sitemap_string = "";
