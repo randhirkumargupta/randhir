@@ -132,6 +132,7 @@ function generatePhotoCategoryList($tid, $pageno) {
 
     if ($tid == 0 && count($tid_list) > 0) {
         $query->condition('ti.tid', $tid_list, 'IN');
+        $query->condition('ti.tid', 1208521, '=');
     }
     else{
         $query->condition('ti.tid', $tid, '=');
@@ -218,7 +219,7 @@ function generatePhotoCategoryList($tid, $pageno) {
   }
   $data['lcount'] = $listcount;
   $data['data'] = $photo_list_array;
-  $data['updated_datetime'] = $changed_datetime;
+  $data['updated_datetime'] = $pub_date;
   return $data;
 }
 
