@@ -690,14 +690,14 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .bottom-area ul li p{font:14px/22px 'Roboto', sans-serif; color:#6d6d6d; display:block; margin:0}
 .share_bar{ display:none;}
 /*  Score card Changes */
-#itg-scorecard-container{background: #000;padding: 10px 0 5px;}
+#itg-scorecard-container{background: #222834;padding: 0;height: 60px;}
 #itg-scorecard-container .scorecard-stripcontent ul li{list-style: none; display: inline-block; border-left: 1px solid #4f4f4f; padding: 0 5px;}
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1){border-left:0px;}
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(3){border-right:0px}
-#itg-scorecard-container .scorecard-stripcontent{ padding:0px;position: relative; height: 20px;}
-#itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top:-1px;}
+#itg-scorecard-container .scorecard-stripcontent{ padding:0px;position: relative; height:60px;}
+#itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top:50%;transform: translateY(-50%); -webkit-transform:translateY(-50%);}
 #itg-scorecard-container .scorecard-stripcontent ul li a{color: #fff; font-family: "Roboto-Regular";font-weight:normal; font-size: 14px; }
-#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 340px;display: inline-block;line-height: 20px;position: relative;top: 4px;}
+#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width:245px;display: inline-block;line-height: 20px;position: relative;top: 4px;}
 /*poll Home section */
 .home_page_poll_widget_block .poll-data .active-poll-title h2 {color: #fff;font-size: 16px; line-height: 22px;margin: 0;padding: 5px 10px;}
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id {padding: 10px 0 0;max-height: inherit;overflow-y: auto;margin-top: 0;}
@@ -773,7 +773,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .share_bar .social-share .fa-whatsapp{color: #0dbe50;}
 .share_bar .social-share .fa-bookmark{color: #607083;}
 .share_bar .social-share .fa-comment{color: #a2a2a2;}
-iframe.embed-responsive-item {height:55px}
+
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}
@@ -856,6 +856,8 @@ background:none;
 .front .mt-50 {margin-top:20px;}
 /* embed code page scroll */
 .show-embed-code-link .show-embed-code-div{left: -150%;}
+#itg-scorecard-container,#itg-scorecard-container iframe.embed-responsive-item{ height:70px;}
+#itg-scorecard-container .container,#itg-scorecard-container .container .col-xs-12{padding:0px;}
 }
 
 .cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
