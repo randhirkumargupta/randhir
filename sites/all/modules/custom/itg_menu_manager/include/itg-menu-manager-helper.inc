@@ -457,6 +457,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
       $link_text = $vertical_menu_icon = "<img width='110' height='37' title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_152_37.png' alt='amp-image' />";
     } else {
       $link_text = $link_text_mobile = $vertical_menu_icon = "<img  title='" . $link_title_for_vertical . "' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_110_37.jpeg' alt='' />";
+      $image_class = "has-image";
     }
   }
 
