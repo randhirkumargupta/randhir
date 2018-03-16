@@ -610,7 +610,20 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                  <?php print render($content['field_story_tech_review_chunk']); ?>
+                  <?php 
+                  $tech_review_chunk = $node->field_story_tech_review_chunk['und'][0]['value'];
+                  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $tech_review_chunk, $matches);
+                  $i = 0;
+                  foreach ($matches[0] as $images) {
+                    $src = $matches[1][$i];
+                    list($width, $height, $type, $attr) = getimagesize($src);
+                    $layout_responsive = ($width > 300) ? 'layout="responsive"' : '';
+                    $img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
+                    $tech_review_chunk = str_replace($images, $img, $tech_review_chunk);
+                    $i++;
+                  }
+                  print $tech_review_chunk; 
+                  ?>
                 </div>
               <?php } ?>
             </div>
