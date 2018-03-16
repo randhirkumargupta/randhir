@@ -13,7 +13,7 @@ function itg_sitemap_chunks_get_section_category_sitemap() {
   $sitemap_string .= "<lastmod>" . $l_node_time . "</lastmod>";
   $sitemap_string .= "</url>";
   $sitemap_string .= "<loc> ".FRONT_URL."/magazine</loc>";
-  $l_node_timestamp = get_last_node_updated_time_by_taxonomy();
+  $l_node_timestamp = get_last_node_updated_time_by_taxonomy('magazine');
   $l_node_time = date('Y-m-d\TH:i:s', $l_node_timestamp) . '+00:00';
   $sitemap_string .= "<lastmod>" . $l_node_time . "</lastmod>";
   $sitemap_string .= "</url>";
@@ -47,7 +47,12 @@ function get_last_node_updated_time_by_taxonomy($tid = null) {
   if(!empty($tid) && is_numeric($tid)){
     $query->condition('sct.field_story_category_tid', $tid);
   }
-  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  if($tid == 'magazine'){
+     $query->condition('n.type', 'issue');
+  }
+  else{
+	  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  }  
   $query->condition('n.status', 1);
   $query->orderBy('n.changed', 'DESC');
   $query->range(0, 1);
