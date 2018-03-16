@@ -1048,9 +1048,13 @@ function itg_story_node_presave($node) {
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
 	if (!empty($_GET['iframe'])) {
-		drupal_add_js('jQuery(document).ready(function() {           
-                jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");               
-             });', array('type' => 'inline', 'scope' => 'footer'));
+		drupal_add_js('jQuery(document).ready(function() {
+      jQuery("div#cboxLoadedContent iframe).css("display: block !important;"); 
+      setTimeout(function(){
+        jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");     
+      },200); 
+                  
+    });', array('type' => 'inline', 'scope' => 'footer'));
 	}	
              
   if ($node->type == 'story' && $view_mode != 'search_index') {
