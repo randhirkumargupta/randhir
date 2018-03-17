@@ -91,7 +91,6 @@
     <noscript>
       <img alt="" src="http://b.scorecardresearch.com/p?c1=2&ac2=8549097&cv=2.0&cj=1">
     </noscript>
-    <?php print get_newsroom_js();?>
         <!-- Comscore function which is called on ajax -->
     <script>
       function comscoreBeacon() {
