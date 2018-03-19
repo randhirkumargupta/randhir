@@ -23,7 +23,7 @@ function itg_sitemap_chunks_get_section_category_sitemap() {
   foreach ($section_cat_ids_arr as $key => $tax_id) {
     $tax_url = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $tax_id);
     $l_node_updated_timestamp = get_last_node_updated_time_by_taxonomy($tax_id);
-    $l_node_updated_time = date('Y-m-d\TH:i:s', $l_node_updated_timestamp) . '+00:00';
+    $l_node_updated_time = date('Y-m-d\TH:i:s', $l_node_updated_timestamp) . '+05:30';
     $sitemap_string .= "<url>";
     $sitemap_string .= "<loc> " . $tax_url . " </loc>";
     $sitemap_string .= "<lastmod>" . $l_node_updated_time . "</lastmod>";
