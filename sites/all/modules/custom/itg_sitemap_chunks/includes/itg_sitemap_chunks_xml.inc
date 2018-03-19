@@ -281,7 +281,9 @@ function itg_sitemap_get_previous_time($section_data) {
 function itg_sitemap_get_section_sitemap_required_data($nid) {
     $final_data = array();
     $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'fpd', 'fpd.entity_id = n.nid');
     $query->fields('n', array('title', 'nid', 'created' ,'changed'));
+    $query->fields('fpd', array('field_itg_content_publish_date_value'));
     $query->condition('nid', $nid);
     $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -291,7 +293,8 @@ function itg_sitemap_get_section_sitemap_required_data($nid) {
         $final_data['news_name'] = ITG_INDIATODAY_SITENAME_XML;
         $final_data['news_language'] = $GLOBALS['language']->language;
         $final_data['url'] = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data['nid']);
-        $final_data['news_publication_date'] = date('c', $data['created']);
+        //$final_data['news_publication_date'] = date('c', $data['created']);
+        $final_data['news_publication_date'] = date('c', strtotime($data['field_itg_content_publish_date_value']));
         $final_data['news_changed_date'] = date('c', $data['changed']);
     }
     return $final_data;
