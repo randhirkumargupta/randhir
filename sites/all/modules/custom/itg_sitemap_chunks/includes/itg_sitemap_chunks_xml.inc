@@ -278,8 +278,9 @@ function itg_sitemap_get_previous_time($section_data) {
 function itg_sitemap_get_section_sitemap_required_data($nid) {
     $final_data = array();
     $query = db_select('node', 'n');
-    $query->fields('n', array('title', 'nid', 'created' ,'changed'));
     $query->leftJoin('field_data_field_itg_content_publish_date', 'fpd', 'fpd.entity_id = n.nid');
+    $query->fields('n', array('title', 'nid', 'created' ,'changed'));
+    $query->fields('fpd', array('field_itg_content_publish_date_value'));
     $query->condition('nid', $nid);
     $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
