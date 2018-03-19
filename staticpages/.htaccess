@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
         RewriteEngine On
 	RewriteCond %{QUERY_STRING} ^(.*)=(.*)$
-        RewriteRule ^(.*)?(.*)$ /$1-@@-%0? [R=301,L]
+        RewriteRule ^(.*)?(.*)$ /$1-@@-%0? [R=200,L]
 </IfModule>
 <IfModule mod_rewrite.c>
         RewriteEngine On
-	RewriteRule ^(.*):(.*)$ /$1@--@$2 [L,R=301]
+	RewriteRule ^(.*):(.*)$ /$1@--@$2 [L,R=200]
 </IfModule>
