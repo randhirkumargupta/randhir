@@ -465,7 +465,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   if(empty($to_mail)){
     return FALSE;
   }
-  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
+  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'desk-itgd@intoday.com', TRUE);
   if ($mail['result']) {
     return TRUE;
   }

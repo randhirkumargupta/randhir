@@ -74,7 +74,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $delivery_mode,
-    'from' => 'care@intoday.in',
+    'from' => 'desk-itgd@intoday.com',
     'subject' => 'Syndication feed',
     'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
@@ -82,7 +82,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $delivery_mode . "\r\n",
-      'From: India Today <care@intoday.in>' . "\r\n",
+      'From: India Today <desk-itgd@intoday.com>' . "\r\n",
     ),
   );
   $language = language_default();

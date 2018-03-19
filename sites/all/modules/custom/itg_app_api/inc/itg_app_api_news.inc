@@ -141,10 +141,14 @@ function generateNewsCategoryList($tid, $pageno) {
 
 
     //end
+    /*
     if ($tid == 0 && count($tid_list) > 0) {
         $query->condition('ti.tid', $tid_list, 'IN');
     }
     else{
+        $query->condition('ti.tid', $tid, '=');
+    }*/
+    if ($tid > 0) {
         $query->condition('ti.tid', $tid, '=');
     }
     $interval = itg_app_time_interval($tid);    
@@ -161,7 +165,7 @@ function generateNewsCategoryList($tid, $pageno) {
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
-      
+
       if ($type == 'story') {
         $type = getStoryType($nid);
       }

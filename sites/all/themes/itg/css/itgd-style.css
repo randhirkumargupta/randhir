@@ -137,8 +137,8 @@
 .latest_video .tab-buttons.tab-buttons span.hide{display:none;}
 .auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
 .section-movies .auto-block-3 .ad-widget{ margin-top:35px; }
-.morediv{text-align: right; text-transform: uppercase; font-size: 11px; color:  #111; font-weight: 700; color: #5794e0;}
-.morediv a{color: #5794e0;font-weight: 700;position: relative;display:  block;}
+.morediv{text-align: right; text-transform: uppercase; font-size:11px; color:#111; font-weight:700; color:#5794e0; font-family:OpenSans-Bold;}
+.morediv a{color: #5794e0;font-weight: 700;position: relative;display:block;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -157,10 +157,10 @@
 }
 .embed-mega-review a {
     text-decoration: none;
-    font-family: OpenSans-Regular , sans-serif
+    font-family: OpenSans-Regular;
 }
 .embed-mega-review .field-name-field-story-movie-description .field-item {
-    font-family: OpenSans-Regular, sans-serif;
+    font-family: OpenSans-Regular;
     padding: 10px 0;
     font-size: .9375rem;
     line-height: 27px
@@ -619,7 +619,8 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 }
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{height:560px;}
-.breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
+.breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:23px;font-size: 14px;}
+.breakingnew-home .new-detail .live-tv-link a{ padding:0 7px}
 }
 @media screen and (max-width: 767px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 490px;}
@@ -658,9 +659,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 #itg-scorecard-container .container .col-xs-12{padding:0;}
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 260px;}
 }
-@media screen and (max-width:320px){
-.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
-}
+
 
 #block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
@@ -866,7 +865,7 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
 /* home page extra space fix */
-.front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto;}
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto; background:#f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:block}
@@ -874,7 +873,10 @@ background:none;
 .front .mt-50 {margin-top: 20px;}
 /* embed code page scroll */
 .show-embed-code-link .show-embed-code-div{left: -150%;}
+.front .itg-top-section .top-rhs-add .home-trending-video{ padding:0px; }
 }
+
+
 
 .cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
      font-family: OpenSans-Regular;}
@@ -933,6 +935,9 @@ background:none;
 }
 @media only screen and (max-width:320px){
 .itg-layout-container .ad-widget{width: 300px; padding:0; height:250px; border:0px; } 
+.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
+.front .itg-top-section .top-rhs-add-child .ad-widget{margin:15px -30px 0;width: 320px; padding:4px 10px; }
+.front .itg-layout-container .itg-h321-section .ad-widget{margin: 0 -17px;}
 }
 .instagram-media{position: static!important;}
 @media only screen and (max-width: 1024px) and (min-width:786px){

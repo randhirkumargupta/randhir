@@ -185,7 +185,7 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $service_email_address,
-    'from' => 'care@intoday.in',
+    'from' => 'desk-itgd@intoday.com',
     'subject' => 'VAS feed',
     'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
@@ -193,7 +193,7 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $service_email_address . "\r\n",
-      'From: India Today <care@intoday.in>' . "\r\n",
+      'From: India Today <desk-itgd@intoday.com>' . "\r\n",
     ),
   );
   $language = language_default();

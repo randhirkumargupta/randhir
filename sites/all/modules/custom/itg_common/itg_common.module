@@ -1710,6 +1710,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
           $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js" "></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//www.instagram.com/embed.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);          
         }
       }
     }
@@ -1722,7 +1724,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
  * Implements itg_get_instagram_shortcode();
  */
 function itg_get_instagram_shortcode($bodystr) {
-
+  $shortcode = false;
   preg_match("'<blockquote class=\"instagram-media\"(.*)</blockquote>'si", $bodystr, $match);
   if ($match) {
     preg_match_all('/<a href="(.*)">/', $bodystr, $a);
@@ -1735,13 +1737,23 @@ function itg_get_instagram_shortcode($bodystr) {
       $hrefs[] = $tag->getAttribute('href');
       }
     }
-    $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
-    $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
-    $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
-    $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
-    return $twitter_url_emb_id;
+    //~ $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+    //~ $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
+    //~ $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+    //~ $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
+    //~ return $twitter_url_emb_id;
+    foreach ($hrefs as $key => $href) {
+      if (preg_match('&(*UTF8)instagram.com/p/([^/]+)/?&i', $href, $matches)) {
+        if (!empty($matches[1])) {
+          $shortcode = $matches[1];
+          $url = $href;
+          break;
+        }
+      }
+    }
   }
-  return false;
+  //return false;
+  return $shortcode;
 }
 
 /**
