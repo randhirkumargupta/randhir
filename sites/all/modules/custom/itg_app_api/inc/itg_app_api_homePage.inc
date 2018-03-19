@@ -112,28 +112,32 @@ function homePageJson() {
       unset($data['data'][$homeapi_order_polls]);  
     }
     /* widget calling start */
-    $query_w = db_select('itg_app_middleware', 'iam');
-    $query_w->fields('iam');
-    $query_w->condition('iam.identifier', 'itg_widget', '=');
-    $query_w->condition('iam.status', 1, '=');
-    $result_w = $query_w->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
-    foreach ($result_w as $reskey => $resvalue) {
-        $name = $resvalue['name'];
-        $widget = fetch_widget_config($name);
-        if($widget['status'] == 1){
-            $widget_data = itg_rv_widget_data($widget);
-            //p($widget_data);
-            $widget_order = fetchitg_app_master_config_internal('homeapi_order_widget_'.$name.'');
-            
-            $data['data'][$widget_order] = (array) $widget_data;
-            
+    $middleware_packages_config = fetchMasterConfigData('widget_config_options');
+    if($middleware_packages_config){
+        $query_w = db_select('itg_app_middleware', 'iam');
+        $query_w->fields('iam');
+        $query_w->condition('iam.identifier', 'itg_widget', '=');
+        $query_w->condition('iam.status', 1, '=');
+        $result_w = $query_w->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result_w as $reskey => $resvalue) {
+            $name = $resvalue['name'];
+            $widget = fetch_widget_config($name);
+            if($widget['status'] == 1){
+                $widget_data = itg_rv_widget_data($widget);
+                //p($widget_data);
+                $widget_order = fetchitg_app_master_config_internal('homeapi_order_widget_'.$name.'');
+
+                $data['data'][$widget_order] = (array) $widget_data;
+
+            }
         }
     }
     $active_chunk_c = count($data['data']);
     $data_live = array();
     for($i = 0; $i < $active_chunk_c ; $i++){
         if(count($data['data'][$i]) > 1){
+            p($data['data'][$i]);
         $data_live[$i] = $data['data'][$i];  
         }
     }
