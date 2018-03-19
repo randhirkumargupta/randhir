@@ -336,6 +336,8 @@ width: 100%;
 @media only screen and (max-width: 1024px) {
 .itg-layout-container .itg-h321-section .droppable{height: 300px;}
 .auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:10px;}
+#block-itg-layout-manager-header-block .menu-login{ right:48px}
+
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
