@@ -82,11 +82,12 @@ function itg_seo_node_data($node) {
     $mainEntityOfPage = $base_url . '/' . $node->path['alias'];
     $headline = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
     if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
-      $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->workbench_moderation['current']->timestamp);
+      //$publisheddate = date('Y-m-d\Th:i:s+5:30', $node->workbench_moderation['current']->timestamp);
+      $publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
     } else {
-      $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
+      $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
-    $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
+    $modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
     $bylines = itg_get_multi_byline_details($node->nid, 1);
     $authname = array();
@@ -261,7 +262,8 @@ function itg_seo_node_data($node) {
     $review_item_type = $node->field_mega_review_type[LANGUAGE_NONE][0]['taxonomy_term']->name;
     $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
-    $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
+    //$publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
+    $publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
     $directorname = $node->field_mega_review_director[LANGUAGE_NONE][0]['value'];
     $moviedescription = $node->field_story_movie_description[LANGUAGE_NONE][0]['value'];
     $markup = array(
@@ -291,9 +293,10 @@ function itg_seo_node_data($node) {
     $name = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
     $description = $node->title;
     if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
-      $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->workbench_moderation['current']->timestamp);
+      //$publisheddate = date('Y-m-d\Th:i:s+5:30', $node->workbench_moderation['current']->timestamp);
+      $publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
     } else {
-      $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
+      $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
     $createdate = date('Y-m-d\Th:i:s+5:30', $node->created);
     $contenturl = $base_url . '/' . $node->path['alias'];
