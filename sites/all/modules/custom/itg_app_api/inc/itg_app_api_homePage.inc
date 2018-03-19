@@ -137,7 +137,7 @@ function homePageJson() {
     $data_live = array();
     for($i = 0; $i < $active_chunk_c ; $i++){
         if(count($data['data'][$i]) > 1){
-            p($data['data'][$i]);
+           //p($data['data'][$i]);
         $data_live[$i] = $data['data'][$i];  
         }
     }
