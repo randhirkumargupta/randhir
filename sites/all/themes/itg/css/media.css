@@ -1759,7 +1759,6 @@ $itg-robotoslab:'RobotoSlab-Regular';
     line-height: 30px;
     font-size: 20px; }
 
-  /* css start add by arun */
   .live-block #cricketblog .batBollDetails .batsmanDetails {
     width: 100%; }
 
@@ -1791,7 +1790,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
     right: 8px; }
 
-  /* css end add by arun */ }
+  #block-views-video-landing-header-block .video-header-right .ads {
+    background: transparent; } }
 @media all and (min-width: 680px) {
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     position: relative; }
