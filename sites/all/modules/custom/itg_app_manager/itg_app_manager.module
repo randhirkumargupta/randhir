@@ -2172,10 +2172,10 @@ function itg_app_manager_packages_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['package_options']['#options'][$id];
-            $num_deleted = db_delete('itg_app_middleware')
+            /*$num_deleted = db_delete('itg_app_middleware')
                     ->condition('name', $package_name)
                     ->condition('identifier', 'itg_package')
-                    ->execute();
+                    ->execute();*/
         }
     }
 
@@ -2638,10 +2638,10 @@ function itg_app_manager_categories_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['categories_options']['#options'][$id];
-            $num_deleted = db_delete('itg_app_middleware')
+            /*$num_deleted = db_delete('itg_app_middleware')
                     ->condition('name', $package_name)
                     ->condition('identifier', 'categories_options')
-                    ->execute();
+                    ->execute();*/
         }
     }
 
@@ -2793,10 +2793,10 @@ function itg_app_manager_poll_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['poll_options']['#options'][$id];
-            $num_deleted = db_delete('itg_app_middleware')
+            /*$num_deleted = db_delete('itg_app_middleware')
                     ->condition('name', $package_name)
                     ->condition('identifier', 'poll_options')
-                    ->execute();
+                    ->execute();*/
         }
     }
 
@@ -3005,10 +3005,10 @@ function itg_app_manager_magazine_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['magazine_options']['#options'][$id];
-            $num_deleted = db_delete('itg_app_middleware')
+           /* $num_deleted = db_delete('itg_app_middleware')
                     ->condition('name', $package_name)
                     ->condition('identifier', 'magazine_options')
-                    ->execute();
+                    ->execute();*/
         }
     }
 
