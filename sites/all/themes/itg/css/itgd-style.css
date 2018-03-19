@@ -912,6 +912,7 @@ background:none;
         font-size:19px;
          line-height: 44px;
     }
+    .breakingnew-home .new-detail .live-tv-link a{ padding:0 7px;}
 }
 .instagram-media{position: static!important;}
 @media only screen and (max-width: 1024px) and (min-width:786px){
