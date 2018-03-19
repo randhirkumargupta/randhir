@@ -9,13 +9,13 @@ function itg_sitemap_chunks_get_section_category_sitemap() {
   $sitemap_string .= "<url>";
   $sitemap_string .= "<loc> ".FRONT_URL."/</loc>";
   $l_node_timestamp = get_last_node_updated_time_by_taxonomy();
-  $l_node_time = date('Y-m-d\TH:i:s', $l_node_timestamp) . '+00:00';
+  $l_node_time = date('Y-m-d\TH:i:s', $l_node_timestamp) . '+05:30';
   $sitemap_string .= "<lastmod>" . $l_node_time . "</lastmod>";
   $sitemap_string .= "</url>";
   $sitemap_string .= "<url>";
   $sitemap_string .= "<loc> ".FRONT_URL."/magazine</loc>";
   $l_node_timestamp = get_last_node_updated_time_by_taxonomy('magazine');
-  $l_node_time = date('Y-m-d\TH:i:s', $l_node_timestamp) . '+00:00';
+  $l_node_time = date('Y-m-d\TH:i:s', $l_node_timestamp) . '+05:30';
   $sitemap_string .= "<lastmod>" . $l_node_time . "</lastmod>";
   $sitemap_string .= "</url>";
   $section_cat_ids = variable_get('section_category_sitemap_tids');
