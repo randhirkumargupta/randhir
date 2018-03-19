@@ -83,9 +83,9 @@ function itg_seo_node_data($node) {
     $headline = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
     if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
       //$publisheddate = date('Y-m-d\Th:i:s+5:30', $node->workbench_moderation['current']->timestamp);
-      $publisheddate = date('Y-m-d\Th:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+      $publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
     } else {
-      $publisheddate = date('Y-m-d\Th:i:s+5:30', $node->changed);
+      $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
     $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
