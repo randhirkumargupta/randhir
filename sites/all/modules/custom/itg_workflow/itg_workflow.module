@@ -526,6 +526,9 @@ function itg_workflow_node_access($node, $op, $account) {
 //    }
 //  }
 
+  if ($node->status == 0 && $op == 'view') {
+		drupal_not_found();
+	}
 
   if (isset($node->workbench_moderation['current']->from_state) && $node->workbench_moderation['current']->from_state == 'draft' && $node->workbench_moderation['current']->state == 'draft' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
     //~ if ($node->uid != $user->uid) {
