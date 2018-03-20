@@ -1,4 +1,4 @@
-<h3><span><?php print t('Show videoss'); ?></span></h3>
+<h3><span><?php print t('Show videos'); ?></span></h3>
 <?php
 $episodes_text = '';
 global $base_url;
