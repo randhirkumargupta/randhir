@@ -49,7 +49,7 @@ function itg_remove_flooded_nodes(){
   $params = 'Total Exe time: ' . $execution_time . $params;
   watchdog("delete_widget_table", $params);
   //$to_mail = 'shashank.singh@aajtak.com,randhirkumar.gupta@aajtak.com,vishal.kamal@aajtak.com';
-  //drupal_mail('itg_miscellaneous', 'itg_miscellaneous_delete_widget_table', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
+  //drupal_mail('itg_miscellaneous', 'itg_miscellaneous_delete_widget_table', $to_mail, language_default(), $params, 'desk-itgd@intoday.com', TRUE);
 }
 
 
