@@ -169,7 +169,7 @@ function itg_ads_block_view($delta = '') {
       }
       else {
         $ad_script = get_itg_page_name('Medium Rectangle-RHS-MTF-300x200');
-        $block['content'] = $ad_script;
+        $block['content'] = $ad_script . '<p>Kid addicted to TV? Here is the Perfect Answer</p>';
       }
       break;
   }
