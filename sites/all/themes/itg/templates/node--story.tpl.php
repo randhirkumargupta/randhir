@@ -150,9 +150,9 @@ if (!empty($content)):
           <li><a href="javascript:void(0)" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
         </ul>
         <ul class="social-share">
-          <li><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print urlencode($actual_link); ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print urlencode($base_url); ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+          <li><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
           <li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick='twitter_popup("<?php print urlencode($node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
-          <li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print urlencode($actual_link); ?>")'><i class="fa fa-google-plus"></i></a></li>
+          <li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
         </ul> 
       </div>
       <?php
@@ -389,9 +389,9 @@ if (!empty($content)):
                  
                 <ul class="social-links mhide">
                                        
-                  <li><a title = "share on facebook" href="javascript:void(0)"  onclick='fbpop("<?php print urlencode($actual_link); ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print urlencode($base_url); ?>", "<?php print $node->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+                  <li><a title = "share on facebook" href="javascript:void(0)"  onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $node->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
                   <li><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick='twitter_popup("<?php print urlencode($node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print urlencode($actual_link); ?>")'><i class="fa fa-google-plus"></i></a></li>
+                  <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
                   <?php
                   if ($config_name == 'vukkul') {
                     ?>
@@ -439,10 +439,10 @@ if (!empty($content)):
 			<!-- social icon list for mobile only  -->  
 			<div class="share_bar clearfix desktop-hide">
 			<ul class="list-inline social-share">
-			<li><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print urlencode($actual_link); ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print urlencode($base_url); ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+			<li><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
 			<li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick='twitter_popup("<?php print urlencode($node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
 			<!-- <li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="fa fa-youtube-play"></i></a></li> -->
-			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print urlencode($actual_link); ?>")'><i class="fa fa-google-plus"></i></a></li>
+			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
 			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
 
 			<li>
@@ -546,9 +546,9 @@ if (!empty($content)):
               </div>
               <div class="social-share-story">
                 <ul class="">
-                  <li><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print urlencode($actual_link); ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print urlencode($base_url); ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+                  <li><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
                   <li><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick='twitter_popup("<?php print urlencode($node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print urlencode($actual_link); ?>")'><i class="fa fa-google-plus"></i></a></li>
+                  <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
                   <?php if ($config_name == 'vukkul'): ?>
                     <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php endif; ?>
@@ -1074,9 +1074,9 @@ if (!empty($content)):
                 $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a title = "share" href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-              <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick=\'fbpop("' . urlencode($actual_link) . '", "' . urlencode($buzz_title_share) . '", "'  . urlencode($share_desc) . '", "' . $share_image . '", "' . $base_url . '", "' . $nid . '")\' class="facebook"><i class="fa fa-facebook"></i></a></li>
+              <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick=\'fbpop("' . $actual_link . '", "' . urlencode($buzz_title_share) . '", "'  . urlencode($share_desc) . '", "' . $share_image . '", "' . $base_url . '", "' . $nid . '")\' class="facebook"><i class="fa fa-facebook"></i></a></li>
               <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick=\'twitter_popup("' . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]["value"]) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . urlencode($actual_link) . '")\' class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
+              <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $actual_link . '")\' class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
           </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
@@ -1106,9 +1106,9 @@ if (!empty($content)):
         <div class="agbutton story-like-dislike">
           <div id="name-dv"><?php print t('Do You Like This Story?'); ?>
             <span id="lky"><button title="Like" id="like_count" data-rel="<?php print $get_val; ?>" data-tag="sty" data-type="story"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count_like; ?></span> </button>
-              <span id="sty-dv" style="display:none">Awesome! <br/> Now share the story <br/> <a title="share on facebook" onclick='fbpop("<?php print urlencode($actual_link); ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>")'><i class="fa fa-facebook"></i></a> 
+              <span id="sty-dv" style="display:none">Awesome! <br/> Now share the story <br/> <a title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>")'><i class="fa fa-facebook"></i></a> 
                 <a title="share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick='twitter_popup("<?php print urlencode($node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a>
-                <a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print urlencode($actual_link); ?>")'><i class="fa fa-google-plus"></i></a>
+                <a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a>
                 <?php
                 if ($config_name == 'vukkul') {
                   ?>
@@ -1140,9 +1140,9 @@ if (!empty($content)):
               <?php else: ?>
                 <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
               <?php endif; ?>-->
-              <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print urlencode($actual_link); ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print urlencode($base_url); ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+              <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
               <li class="mhide"><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick='twitter_popup("<?php print urlencode($node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
-              <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick='return googleplusbtn("<?php print urlencode($actual_link); ?>")'><i class="fa fa-google-plus"></i></a></li>
+              <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
               <?php
               if ($config_name == 'vukkul') {
                 ?>
