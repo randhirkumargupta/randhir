@@ -647,9 +647,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 #itg-scorecard-container .container .col-xs-12{padding:0 5px;}
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 260px;}
 }
-@media screen and (max-width:320px){
-.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
-}
+
 
 #block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
@@ -747,6 +745,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li{width:100%}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:none}
+
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
@@ -860,6 +859,8 @@ background:none;
 .show-embed-code-link .show-embed-code-div{left: -150%;}
 #itg-scorecard-container,#itg-scorecard-container iframe.embed-responsive-item{ height:70px;}
 #itg-scorecard-container .container,#itg-scorecard-container .container .col-xs-12{padding:0px;}
+.front .itg-top-section .top-rhs-add .home-trending-video {padding: 0px;}
+.front .itg-layout-container .itg-h321-section .ad-widget {height: 282px; padding: 4px 0 10px;}
 }
 
 .cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
@@ -940,4 +941,10 @@ background:none;
 @media screen and (max-width:800px){
 #block-views-video-landing-header-block .video-header-left .social-likes ul li a i.fa-clock-o{margin-right: 5px;}
 .btn-heart-like {padding: 14px 5px 9.4px 10px;}
+}
+
+@media screen and (max-width:320px){
+.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
+.front .itg-top-section .top-rhs-add-child .ad-widget {margin: 15px -30px 0;width: 320px;padding: 4px 10px;}
+.front .itg-layout-container .itg-h321-section .ad-widget {margin: 0 -17px;}
 }
