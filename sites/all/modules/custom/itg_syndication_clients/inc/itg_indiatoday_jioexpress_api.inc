@@ -1,7 +1,7 @@
 <?php
 function itg_indiatoday_jioexpress_api(){
 
-  $sid = array(1787193, 1206584);
+  $sid = 1787193;
   
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -15,7 +15,7 @@ function itg_indiatoday_jioexpress_api(){
   
   $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');  
-  $query->condition('ti.tid', $sid, 'IN');
+  $query->condition('ti.tid', $sid, '=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
@@ -33,6 +33,34 @@ function itg_indiatoday_jioexpress_api(){
 	$fp = fopen($file_path, "w");
 	fwrite($fp, $xml);
 	fclose($fp);
+	
+	
+	
+	$query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+	$query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
+  $query->fields('n', array('nid', 'title', 'created', 'changed'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('dbody', array('body_value'));
+  $query->fields('smi', array('field_story_medium_image_fid'));
+  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');  
+  $query->condition('ti.tid', 1206584, '=');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'story', '=');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 10);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $xml = generate_jioexpress_feeds($result);
+  $xml_path = 'public://rss-feeds/xml_data/jio/';
+	$file_path = $xml_path . 'top-stories.xml';
+	$fp = fopen($file_path, "w");
+	fwrite($fp, $xml);
+	fclose($fp);
+	
 }
 
 
