@@ -139,6 +139,8 @@
 .section-movies .auto-block-3 .ad-widget{ margin-top:35px; }
 .morediv{text-align: right; text-transform: uppercase; font-size:11px; color:#111; font-weight:700; color:#5794e0; font-family:OpenSans-Bold;}
 .morediv a{color: #5794e0;font-weight: 700;position: relative;display:block;}
+.page-livetv .programe-container .block-itg-ads{ padding:10px 0; text-align:center; background:#f3f3f3; margin-bottom:15px;}
+.page-livetv .programe-container .block-itg-ads > div{margin:0 auto;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -205,6 +207,8 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
         height: auto;
         width: 100%
     }
+
+    #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figure a,#related-video-tab ul li.related_content_tab .pic, .video-header-right .trending-videos li.trending-videos-list .pic{ width:40%}
 }
 .side_chunk_event_chairman:after,
 .side_chunk_event_chairman:before {
@@ -343,6 +347,7 @@ width: 100%;
 .auto-layout-page .auto-block-3 .ad-widget, .tech-layout-page .auto-block-3 .ad-widget{ padding:10px;}
 .section-movies .auto-block-3 .itg-widget-parent{ padding:0px; }
 .section-movies .auto-block-3.backbg{ background: transparent; }
+#block-itg-layout-manager-header-block .menu-login{ right:48px;}
 
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
@@ -587,11 +592,11 @@ ul.pron-cons-img li img {
     position: relative;
 }
 .story-right .description p:first-child:first-letter {
-    font-size: 50px;
+    font-size: 55px;
     font-weight: bold;
     padding-right:5px;
     float:left;
-    line-height:52px;
+    line-height:57px;
 }
 .droppable.hide-widget{
 	display:none;
@@ -631,7 +636,7 @@ ul.pron-cons-img li img { margin-top: -12px!important;}
 .front .itg-listing li:before{display:block;}
 .featured-news .featured-post a{font-weight:bold;}
 .front .itg-top-section .top-rhs-add-child .ad-widget{padding:0; margin-top:20px;}
-footer .footer-top .footer-social-link{display:block; opacity:0;}
+footer .footer-top .footer-social-link{display:none; opacity:0;}
 .front .itg-top-section .home-top-story .droppable{height: auto;}
 .tech-layout-page .auto-block-2,.auto-layout-page .auto-block-2, .education-layout-page .itg-layout-672 .droppable .auto-block-2,.sport-home-layout-page .itg-layout-615 .auto-block-2{height: auto;}
 #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation{width:100%; padding-left:0;}
