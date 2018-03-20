@@ -223,8 +223,10 @@ function home_page_magazine_node_list() {
   
   
   foreach ($result_query as $result_data){
-    $mag_news_list[] = $result_data[0]['ids'];
+     
+    $mag_news_list[] = $result_data['ids'];
   }
+  
   return $mag_news_list;
 }
 

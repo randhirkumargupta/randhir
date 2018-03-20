@@ -275,7 +275,7 @@ function magazineCoverstoriesPageRerourceValueList($source ="") {
   // issue list query..
   if($source == "home"){
     $magazine_nids = home_page_magazine_node_list();
-    
+   
     $query_issue = db_select('node', 'n');
     $query_issue->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=n.nid');
     $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
