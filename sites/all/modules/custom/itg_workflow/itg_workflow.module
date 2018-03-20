@@ -591,8 +591,7 @@ function itg_workflow_node_access($node, $op, $account) {
 function itg_workflow_node_view($node, $view_mode, $langcode) {
     
   global $theme, $user;
-  
-  if ($node->status == NODE_NOT_PUBLISHED) {
+  if ($node->status == NODE_NOT_PUBLISHED && $theme == 'itg') {
     drupal_not_found();
     drupal_exit();
   }
