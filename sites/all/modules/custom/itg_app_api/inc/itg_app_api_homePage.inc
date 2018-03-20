@@ -221,8 +221,9 @@ function home_page_magazine_node_list() {
   $query->orderBy('mii.info_value', 'ASC');  
   $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   
+  
   foreach ($result_query as $result_data){
-    $mag_news_list[] = $result_data['ids'];
+    $mag_news_list[] = $result_data[0]['ids'];
   }
   return $mag_news_list;
 }
