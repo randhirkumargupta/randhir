@@ -11270,7 +11270,8 @@ h1.about-us-heading {
       .breakingnew-home .new-detail .live-tv-link a {
         color: #fff;
         font-size: 14px;
-        padding: 7px; }
+        padding: 7px;
+        background: #ffc106; }
         .breakingnew-home .new-detail .live-tv-link a img {
           padding-top: 5px; }
 

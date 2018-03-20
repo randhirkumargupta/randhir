@@ -1383,29 +1383,30 @@
     .breakingnew-home {
         text-align: center;
         background: #ffc106;
-        margin: -15px -15px 15px -15px;
-        padding: 7px;
+        margin: -15px -15px 10px -15px;
+        padding:0px;
         .title {
-            float: none;
-            font-size: 14px;
-            line-height: 22px;
-            height: 20px;
+            float: left;
+            font-size: 12px;
+            line-height: 23px;
+            height: 23px;
             padding: 0 5px;
             display: inline-block;
             margin-bottom: 5px;
         }
         .new-detail {
             height: inherit;
-            line-height: 20px;
+            line-height: 23px;
             font-size: 16px;
             padding: 0;
             width: 100%;
             float: none;
             .marquee-container {
-                width: 100%;
+                width:calc(100% - 130px);
                 height: 23px;
-                float: none;
+                float:left;
                 line-height: 23px;
+                margin-left:5px;
                 .marquee-child {
                     height: 23px;
                     line-height: 23px;
