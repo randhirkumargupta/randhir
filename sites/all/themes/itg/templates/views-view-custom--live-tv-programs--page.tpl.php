@@ -38,14 +38,14 @@ $current_time_program_tid = itg_live_tv_page_video_category();
 
         </div>
         <div class="program_data"><?php print views_embed_view('programme_content_live_tv', 'block', $row['tid']); ?></div>
-				<?php
-					if($counter == 0){
-						$block = block_load('itg_ads', 'ads_medium_rectangl_mtf_300x200');
-						$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-						print render($render_array);
-						$counter++;
-					}
-				?>
+			<?php
+				if($counter == 0){
+					$block = block_load('itg_ads', 'ads_medium_rectangl_mtf_300x200');
+					$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+					print render($render_array);
+					$counter++;
+				}
+			?>
       <?php }
     } endforeach; ?>
 </div>
