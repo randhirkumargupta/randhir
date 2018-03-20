@@ -3877,6 +3877,10 @@ function itg_app_arrange_home_form_submit($form, &$form_state) {
     foreach ($form_state['values'] as $key => $val) {
         $key_val = "";
         $key_val = fetchMasterConfigData($key);
+        $num_deleted = db_delete('itg_app_master_config_internal')
+                ->condition('config_val', $val)
+                ->condition('config_key', $key)
+                ->execute();
         if ($key_val != "") {
             // uapdete query
             db_update('itg_app_master_config_internal')

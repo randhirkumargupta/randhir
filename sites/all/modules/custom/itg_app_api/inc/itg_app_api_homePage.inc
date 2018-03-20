@@ -40,6 +40,7 @@ function homePageJson() {
     $middleware_cat_config = fetchMasterConfigData('categories_config_options');
     if($middleware_cat_config == 1){ //enable
       $data_cat_news= home_page_newslist_cat();
+     // echo count($data_cat_news);die();
       $total_count += count($data_cat_news);
     }
     
@@ -91,6 +92,7 @@ function homePageJson() {
       unset($data['data'][$homeapi_order_topstories]);  
     }
     if(count($data_cat_news) > 0){
+        
       $data['data'][$homeapi_order_categories] = $data_cat_news;
       $i++;
     }
@@ -201,6 +203,7 @@ function home_page_newslist_cat() {
   foreach ($query_results as $tid) {
     $cat_news_list[] = homePageCatNewslist($tid['ids']);
   }
+  
   return $cat_news_list;
   //p($list_arr);
 }
@@ -1093,6 +1096,7 @@ function homePageCatNewslist($tid) {
 
     $data_news['news'] = (array) $data_newslist;
     $order++;
+    
     return $data_news;
 }
 
