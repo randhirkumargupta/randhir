@@ -1,4 +1,4 @@
-<h3><span><?php print t('Show videos'); ?></span></h3>
+<h3><span><?php print t('Show videoss'); ?></span></h3>
 <?php
 $episodes_text = '';
 global $base_url;
@@ -6,6 +6,7 @@ $current_time_program_tid = itg_live_tv_page_video_category();
 ?>
 <div class="programe-container">
   <?php
+  $counter = 0;
   foreach ($rows as $row) :
     if (function_exists('itg_category_manager_term_state')) {
       $status = itg_category_manager_term_state($row['tid']);
@@ -37,6 +38,14 @@ $current_time_program_tid = itg_live_tv_page_video_category();
 
         </div>
         <div class="program_data"><?php print views_embed_view('programme_content_live_tv', 'block', $row['tid']); ?></div>
+				<?php
+					if($counter == 0){
+						$block = block_load('itg_ads', 'ads_medium_rectangl_mtf_300x200');
+						$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+						print render($render_array);
+						$counter++;
+					}
+				?>
       <?php }
     } endforeach; ?>
 </div>
