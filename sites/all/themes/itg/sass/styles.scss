@@ -5786,28 +5786,29 @@ h1.category-heading {
     h3 {
         display: block;
         span {
-            padding: 45px 20px 10px 0px;
+            padding: 20px 20px 10px 0px;
         }
     }
     ul {
         @extend .list-none;
         padding: 10px 20px 0 0px;
         span.time {
-            color: #b1b1b1;
+            color: #969696;
             @include font(12px);
-            padding: 10px 0;
+            padding:0 0 5px;
             display: block;
         }
         .detail {
-            padding: 0 0 22px 0;
+            padding: 0 0 20px 0;
         }
     }
     h4 {
         font-size: 18px;
         background: #f5f5f5;
-        padding: 5px 5px;
+        padding:0px;
         font-weight: 700;
         font-family: $itg-opensans;
+        line-height: 24px;
     }
     @include listing-with-image(detail,
     right,

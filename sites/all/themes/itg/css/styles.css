@@ -5976,23 +5976,24 @@ h1.category-heading {
 .program-rhs h3 {
   display: block; }
   .program-rhs h3 span {
-    padding: 45px 20px 10px 0px; }
+    padding: 20px 20px 10px 0px; }
 .program-rhs ul {
   padding: 10px 20px 0 0px; }
   .program-rhs ul span.time {
-    color: #b1b1b1;
+    color: #969696;
     font-size: 12px;
     font-size: 0.75rem;
-    padding: 10px 0;
+    padding: 0 0 5px;
     display: block; }
   .program-rhs ul .detail {
-    padding: 0 0 22px 0; }
+    padding: 0 0 20px 0; }
 .program-rhs h4 {
   font-size: 18px;
   background: #f5f5f5;
-  padding: 5px 5px;
+  padding: 0px;
   font-weight: 700;
-  font-family: "OpenSans-Regular"; }
+  font-family: "OpenSans-Regular";
+  line-height: 24px; }
 .program-rhs .detail {
   overflow: hidden;
   padding: 10px; }
