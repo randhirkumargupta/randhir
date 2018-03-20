@@ -42,6 +42,21 @@
        }
     ?> 
   </div>  
+  
+    <div class="ads-rhs-mtf"> 
+    <?php
+      foreach ($data['code']['Medium Rectangle-RHS-MTF-300x200'] as $ads_chunk) {
+         print '<div class="ads-header-code-holder">';
+         print '<div class="ads-header-code-holder-device">';
+         //print ucfirst($ads_chunk['device']);
+         print '</div>';
+         print '<div class="ads-header-code-holder-code">';
+         print $ads_chunk['code'];
+         print '</div>';
+         print '</div>';
+       }
+    ?> 
+  </div>  
  
     <div class="ads-bottom"> 
     <?php
