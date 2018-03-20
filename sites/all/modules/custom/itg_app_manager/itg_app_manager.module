@@ -2229,8 +2229,19 @@ function itg_app_manager_package_delete_comfirm($form, &$form_state, $cid) {
 function itg_app_manager_package_delete_comfirm_submit($form, &$form_state) {
     $record = $form_state['values']['delete'];
     if ($record) {
+        $query = db_select('itg_app_middleware', 'im');
+        $query->fields('im', array('ids'));
+        $query->condition('im.identifier', 'itg_package', '=');
+        $query->condition('im.id', $record, '=');        
+        $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
-                ->condition('id', $record)
+                ->condition('ids', $ids)
+                ->condition('identifier', 'itg_package')
+                ->execute();
+        $num_deleted2 = db_delete('itg_app_master_info_internal')
+                ->condition('org_id', $ids)
+                ->condition('info_type', 'packages')
                 ->execute();
         drupal_set_message('The record has been deleted!');
     }
@@ -2678,8 +2689,20 @@ function itg_app_manager_categories_delete_comfirm($form, &$form_state, $cid) {
 function itg_app_manager_categories_delete_comfirm_submit($form, &$form_state) {
     $record = $form_state['values']['delete'];
     if ($record) {
+        
+        $query = db_select('itg_app_middleware', 'im');
+        $query->fields('im', array('ids'));
+        $query->condition('im.identifier', 'categories_options', '=');
+        $query->condition('im.id', $record, '=');        
+        $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
-                ->condition('id', $record)
+                ->condition('ids', $ids)
+                ->condition('identifier', 'categories_options')
+                ->execute();
+        $num_deleted2 = db_delete('itg_app_master_info_internal')
+                ->condition('org_id', $ids)
+                ->condition('info_type', 'categories')
                 ->execute();
         drupal_set_message('The record has been deleted!');
     }
@@ -2833,8 +2856,19 @@ function itg_app_manager_poll_delete_comfirm($form, &$form_state, $cid) {
 function itg_app_manager_poll_delete_comfirm_submit($form, &$form_state) {
     $record = $form_state['values']['delete'];
     if ($record) {
+        $query = db_select('itg_app_middleware', 'im');
+        $query->fields('im', array('ids'));
+        $query->condition('im.identifier', 'poll_options', '=');
+        $query->condition('im.id', $record, '=');        
+        $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
-                ->condition('id', $record)
+                ->condition('ids', $ids)
+                ->condition('identifier', 'poll_options')
+                ->execute();
+        $num_deleted2 = db_delete('itg_app_master_info_internal')
+                ->condition('org_id', $ids)
+                ->condition('info_type', 'poll')
                 ->execute();
         drupal_set_message('The record has been deleted!');
     }
@@ -3045,10 +3079,20 @@ function itg_app_manager_magazine_delete_comfirm($form, &$form_state, $cid) {
 function itg_app_manager_magazine_delete_comfirm_submit($form, &$form_state) {
     $record = $form_state['values']['delete'];
     if ($record) {
+        $query = db_select('itg_app_middleware', 'im');
+        $query->fields('im', array('ids'));
+        $query->condition('im.identifier', 'magazine_options', '=');
+        $query->condition('im.id', $record, '=');        
+        $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
-                ->condition('id', $record)
+                ->condition('ids', $ids)
+                ->condition('identifier', 'magazine_options')
                 ->execute();
-        drupal_set_message('The record has been deleted!');
+        $num_deleted2 = db_delete('itg_app_master_info_internal')
+                ->condition('org_id', $ids)
+                ->condition('info_type', 'magazine')
+                ->execute();
     }
     $form_state['redirect'] = "itg-app-manager-magazine";
 }
