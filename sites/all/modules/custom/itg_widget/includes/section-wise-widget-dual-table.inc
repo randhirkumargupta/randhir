@@ -38,6 +38,7 @@ function section_wise_widget_form($form, &$form_state) {
 	$db_query->condition('iwo.nid', $node_id);
   }
   $db_query->orderBy('iwo.weight', 'DESC');
+  $db_query->orderBy('iwo.nid', 'DESC');
   $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
   if (count($result)) {
 
