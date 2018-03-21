@@ -133,7 +133,7 @@ if (!empty($device[0])) {
                           <div class="social-share">
                               <ul>
                                   <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                  <li><a title="share on facebook" class= "facebook def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print $fb_share_title; ?>", "<?php print $share_desc; ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i></a></li>
+                                  <li><a title="share on facebook" class= "facebook def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i></a></li>
                                   <li><a title="share on twitter" class= "twitter def-cur-pointer" onclick='twitter_popup("<?php print urlencode($widget_data['itg-block-2']['block_title']); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
                                   <li><a title="share on google+" class= "google def-cur-pointer" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a></li>
                               </ul>
