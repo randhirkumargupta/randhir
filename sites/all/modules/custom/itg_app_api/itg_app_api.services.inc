@@ -3344,7 +3344,8 @@ function itg_rapid_api_storydetail($token) {
  */
 function itg_rapid_api_homePage($token) {
 
-  $jsondata = file_get_contents(''.ITGD_MUM_DEV_FILES_PATH.'/homeRVJson.json');
+  //$jsondata = file_get_contents(''.ITGD_MUM_DEV_FILES_PATH.'/homeRVJson.json');
+  $jsondata = variable_get('homeRVJson', '');
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }

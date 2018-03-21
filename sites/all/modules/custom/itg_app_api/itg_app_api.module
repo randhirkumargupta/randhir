@@ -2619,7 +2619,8 @@ function time_interval() {
     $jsondata = json_encode($jsondata);
     $file_name = "homeRVJson.json";
     $term_feed_path = "public://";
-    writeFeedFile($term_feed_path, $file_name, $jsondata);
+    //writeFeedFile($term_feed_path, $file_name, $jsondata);
+    variable_set('homeRVJson', $jsondata);
     drupal_set_message(t('copy dev to live home api done.'));
     drupal_goto('itg-app-arrange-home');
 }
