@@ -42,7 +42,7 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     } else {
         overrideImage = overrideImage;
     }
-    
+    overrideTitle = decodeURI(overrideTitle);
     FB.ui({
         method: 'share_open_graph',
         action_type: 'og.shares',
