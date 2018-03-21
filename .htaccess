@@ -181,7 +181,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/(modi-oneyear|modi-oneyear/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(slideshows|slideshows/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(team-modi|team-modi/(.*))$ [NC]
-  RewriteCond %{REQUEST_URI} !^/(100days/(.*)|100days/(.*)/(.*).html)$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(100days/(.*)/(.*).html)$ [NC]
   RewriteCond %{REQUEST_URI} !^/(mood-of-the-nation|mood-of-the-nation/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(holy-men|holy-men/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(india-australia-2016|india-australia-2016/(.*))$ [NC]
