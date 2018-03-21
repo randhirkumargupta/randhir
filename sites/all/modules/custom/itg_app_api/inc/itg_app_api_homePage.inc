@@ -27,6 +27,7 @@ function homePageJson() {
     $middleware_packages_config = fetchMasterConfigData('packages_config_options');
     if($middleware_packages_config == 1){
       $data_middleware = home_page_packages();
+     
       $total_count += count($data_middleware);
     }
     
@@ -76,7 +77,8 @@ function homePageJson() {
     $homeapi_order_topstories = fetchitg_app_master_config_internal('homeapi_order_topstories');
     $homeapi_order_categories = fetchitg_app_master_config_internal('homeapi_order_categories');
     $homeapi_order_magazines = fetchitg_app_master_config_internal('homeapi_order_magazines');
-    $homeapi_order_polls = fetchitg_app_master_config_internal('homeapi_order_polls');   
+    $homeapi_order_polls = fetchitg_app_master_config_internal('homeapi_order_polls');  
+    
     if(count($data_middleware) > 0){
       $data['data'][$homeapi_order_packages] = $data_middleware;
       $i++;
@@ -84,6 +86,7 @@ function homePageJson() {
     else{
       unset($data['data'][$homeapi_order_packages]);  
     }
+    
     if(count($data_topstories) > 0){
       $data['data'][$homeapi_order_topstories] = $data_topstories;
       $i++;
@@ -135,15 +138,17 @@ function homePageJson() {
             }
         }
     }
+   
     $active_chunk_c = count($data['data']);
     $data_live = array();
     for($i = 0; $i < $active_chunk_c ; $i++){
-        if(count($data['data'][$i]) > 1){
+        
+        if(count($data['data'][$i]) > 1 || isset($data['data'][$i][0]['id'])){
            //p($data['data'][$i]);
         $data_live[$i] = $data['data'][$i];  
         }
     }
-    
+     
     $data['data'] = $data_live;
     
     $lc = 0;
@@ -286,8 +291,10 @@ function home_page_packages() {
 
   $list_arr = array();
   foreach ($query_results as $tid) {
+     
     $list_arr[] = homePageJsonPackagelist($tid['ids']);
   }
+  
   return $list_arr;
 }
 /**

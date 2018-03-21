@@ -4010,6 +4010,10 @@ function itg_app_manager_categories_update_conf_form_submit($form, &$form_state)
     $lcont = $form_state['values']['lcont'];
     $order = $form_state['values']['order'];
     $cat_id = (int) $form_state['values']['category_id'];
+    $num_deleted = db_delete('itg_app_master_info_internal')
+                ->condition('org_id', $cat_id)
+                ->condition('info_type', 'categories')
+                ->execute();
     // insert query
     $key = arg(1);
     $data = array(
