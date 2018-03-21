@@ -564,9 +564,9 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
-  //unset($javascript['https://vuukle.com/js/vuukle.js']);
-  //unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
+  unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+  unset($javascript['https://vuukle.com/js/vuukle.js']);
+  unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
   
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
@@ -604,7 +604,6 @@ function itg_js_alter(&$javascript) {
   * @param array $variables
   * @return string
   */
-/*
 function itg_css_alter(&$css) {
    global $user;
    $exclude = array(
@@ -628,7 +627,7 @@ function itg_css_alter(&$css) {
    if ($user->uid == 0) {
      $css = array_diff_key($css, $exclude);
    }
-}*/
+}
 
 function itg_image($variables) {
   $attributes = $variables['attributes'];

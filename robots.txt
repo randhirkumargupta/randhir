@@ -1,6 +1,3 @@
-Sitemap: https://www.indiatoday.in/sitemapindex.xml
-Sitemap: https://www.indiatoday.in/sitemap.xml
-
 Disallow /
 
 # Disallow directive
