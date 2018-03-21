@@ -138,17 +138,25 @@ function homePageJson() {
             }
         }
     }
-   
+   $array_key = array_keys($data['data']);
+ 
     $active_chunk_c = count($data['data']);
     $data_live = array();
     for($i = 0; $i < $active_chunk_c ; $i++){
-        
-        if(count($data['data'][$i]) > 1 || isset($data['data'][$i][0]['id'])){
+        $min_key = min($array_key);
+        if(count($data['data'][$min_key]) > 1 || isset($data['data'][$min_key][0]['id'])){
            //p($data['data'][$i]);
-        $data_live[$i] = $data['data'][$i];  
+        $data_live[$i] = $data['data'][$min_key];  
+        unset($data['data'][$min_key]);
+        
+        foreach ($array_key as $key => $value) {
+            if($value == $min_key){
+                unset($array_key[$key]);
+            }
+        }
         }
     }
-     
+    
     $data['data'] = $data_live;
     
     $lc = 0;
@@ -1562,4 +1570,15 @@ function itg_rv_widget_data($scorecard){
 
     $data_news['news'] = (array) $data_newslist;
     return $data_news;
+}
+
+function findarmin($arr) {
+    $min = $arr[0];
+
+    foreach ($arr as $key => $val) {
+        if ($min > $val) {
+            $min = $val;
+        }
+    }
+    return $min;
 }
