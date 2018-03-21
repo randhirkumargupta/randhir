@@ -577,10 +577,11 @@ header {
                 }
                 &.has-image {
                     a {
+                        padding:0px;
                         img {
                             max-height: 37px;
                             width: auto;
-                            padding: 4px 0;
+                            padding:0;
                         }
                     }
                 }
