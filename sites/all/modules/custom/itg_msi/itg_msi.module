@@ -1192,7 +1192,7 @@ function itg_msi_issue_category_data($issue_date, $extract_nids = array()) {
     $query->orderBy('itg_order.weight', ASC);
     $results = $query->execute()->fetchAll();   
     if(!empty($results)){
-		echo "inid";die;
+		//echo "inid";die;
 		foreach ($results as $value) {
 		$cat_id = $value->cat_id;
         $query = db_select('node', 'n');
