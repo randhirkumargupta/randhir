@@ -1214,8 +1214,8 @@ function itg_msi_issue_category_data($issue_date, $extract_nids = array()) {
       $query->condition('n.nid', $extract_nids, 'NOT IN');
     }    
     $query->fields('itg_order');
-    $query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
-    $query->condition('itg_order.widget', 'issue_primary_category_magazin_widget', '=');
+    //$query->condition('itg_order.extra', '%' . db_like($issue_date_cat) . '%', 'LIKE');
+    $query->condition('itg_order.widget', 'section_wise_widget', '=');
     $query->orderBy('itg_order.weight', ASC);
     $results = $query->execute();   
     foreach ($results as $value) {
