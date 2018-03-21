@@ -1,6 +1,6 @@
 <?php
 function itg_indiatoday_jioexpress_api(){
-
+	/*
   $sid = 1787193;
   
   $query = db_select('node', 'n');
@@ -33,7 +33,7 @@ function itg_indiatoday_jioexpress_api(){
 	$fp = fopen($file_path, "w");
 	fwrite($fp, $xml);
 	fclose($fp);
-	
+	*/
 	
 	
 	$query = db_select('node', 'n');
