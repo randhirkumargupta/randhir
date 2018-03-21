@@ -64,7 +64,7 @@ $config_name = $comment_value[0]->config_name;
     </div>
     <div class="social-info">
       <span>
-          <a title="share on facebook" class= "facebook def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print $fb_share_title; ?>", "<?php print $share_desc; ?>", "<?php print $src; ?>")'><i class="fa fa-facebook" aria-hidden="true"></i></a>
+          <a title="share on facebook" class= "facebook def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook" aria-hidden="true"></i></a>
         <!--<dfn>1522</dfn>-->
       </span>
       <span>
