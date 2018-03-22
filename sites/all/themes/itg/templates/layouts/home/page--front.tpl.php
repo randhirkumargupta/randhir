@@ -187,6 +187,20 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
+                            <!-- replace home-trending-video if webcast enable -->
+                            <div class="col-sm-6 col-lg-12 home-trending-video">
+                              <?php if (!empty(get_itg_variable('itg_webcast_status', 0))):?>
+                                <div class='live-webcast-coverage'>
+                                  <?php print get_itg_variable('itg_webcast_iframe'); ?>
+                                </div>
+                                <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
+                                  <div class="webcast_link webcast_title"><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url')); ?></div>
+                                <?php }else { ?>
+                                  <div class="webcast_title"><?php print get_itg_variable('itg_webcast_title') ?></div>
+                                <?php } ?>
+                            </div>
+                            <!-- replace home-trending-video if webcast enable end here -->
+                            <?php else: ?>
                             <div class="col-sm-6 col-lg-12 home-trending-video">
                                 <div class="widget-help-text">Template widgets(<strong>Trending Videos &amp; Top Takes</strong>)</div>
                                 <div class="tab-buttons">
@@ -273,6 +287,7 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
