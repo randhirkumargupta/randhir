@@ -71,7 +71,7 @@
           <div class="social-share">
               <ul>
                   <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
-                  <li><a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print $fb_title; ?>", "<?php print $share_desc; ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $row->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $row->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
                   <li><a href="javascript:;" title = "share on twitter" class="twitter" onclick='twitter_popup("<?php print urlencode($fb_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
                   <li><a href="javascript:;" title="share on google+" class="google" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a></li>                  
               </ul>

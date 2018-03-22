@@ -229,6 +229,11 @@ function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
         $query->condition('n.type', $type);
     }
     
+    if($_GET['type'] == 'fb'){
+      $query->join('field_data_field_story_social_media_integ', 'ssmi', 'ssmi.entity_id=n.nid');
+      $query->condition('ssmi.field_story_social_media_integ_value', 'facebook_instant_article', 'LIKE');
+    }
+    
     if ($synd) {
       $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
       $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -276,6 +281,10 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $range_max = $item_per_page;
     $all_tids = array();
     $synd = empty($_GET['synd']) ? 0 : $_GET['synd'];
+    if($type == 'fb'){
+      $type = 'story';
+    }
+    
     $exclude_agency = empty($_GET['exclude_agency']) ? 0 : $_GET['exclude_agency'];
     $agencies = array('ANI', 'AP', 'IANS', 'Mail Today', 'PTI', 'Reuters');
     //$photolist = array();
@@ -311,6 +320,11 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
       $query->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
       //$query->join('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
       $query->condition('fpc.field_primary_category_value', '1206640', '!='); //PTI category
+    }
+    
+    if($_GET['type'] == 'fb'){
+      $query->join('field_data_field_story_social_media_integ', 'ssmi', 'ssmi.entity_id=n.nid');
+      $query->condition('ssmi.field_story_social_media_integ_value', 'facebook_instant_article', 'LIKE');
     }
     
     
@@ -457,6 +471,10 @@ function report_totalRecordsCount($start_date, $end_date, $type, $status, $synd,
     if ($synd) {
       $query_cont->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
       $query_cont->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    }
+    if($_GET['type'] == 'fb'){
+      $query_cont->join('field_data_field_story_social_media_integ', 'ssmi', 'ssmi.entity_id=n.nid');
+      $query_cont->condition('ssmi.field_story_social_media_integ_value', 'facebook_instant_article', 'LIKE');
     }
     
     if ($exclude_agency) {

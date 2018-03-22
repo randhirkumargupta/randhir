@@ -192,7 +192,7 @@ if (!empty($data)) : global $base_url, $theme;
 </table><div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link; ?>", "<?php echo $fb_share_title; ?>","<?php echo $share_desc; ?>","<?php echo $src; ?>")'><i class="fa fa-facebook"></i></a></li>
+                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link; ?>", "<?php echo urlencode($fb_share_title); ?>","<?php echo urlencode($share_desc); ?>","<?php echo $src; ?>")'><i class="fa fa-facebook"></i></a></li>
                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick='twitter_popup("<?php echo urlencode($search_title) ?>", "<?php echo urlencode($short_url) ?>")'><i class="fa fa-twitter"></i></a></li>
                         <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' class="google def-cur-pointer"></a></li>
                     </ul>

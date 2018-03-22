@@ -74,7 +74,7 @@
             }
           }
         ?>
-        <h3 <?php echo $data_tb_region_item;?> title="<?php echo $data[1]['title'];  ?>" class="<?php echo $pipelineclass; ?> home-page-feature-small-<?php echo $data[1]['nid'] ?>">
+        <h3 title="<?php echo $data[1]['title'];  ?>" class="<?php echo $pipelineclass; ?> home-page-feature-small-<?php echo $data[1]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[1]['node_obj'], 0, 60), "node/" . $data[1]['nid'], array('html' => TRUE , 'attributes' => array("title" => _widget_title($data[1]['title']))));
@@ -115,7 +115,7 @@
             }
           }
         ?>
-        <h3 <?php echo $data_tb_region_item;?> title="<?php echo $data[2]['title'];  ?>" class="<?php echo $pipelineclass; ?> home-page-feature-small-<?php echo $data[2]['nid'] ?>">
+        <h3 title="<?php echo $data[2]['title'];  ?>" class="<?php echo $pipelineclass; ?> home-page-feature-small-<?php echo $data[2]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[2]['node_obj'], 0, 60), "node/" . $data[2]['nid'], array('html' => TRUE , 'attributes' => array("title" => _widget_title($data[2]['title']))));

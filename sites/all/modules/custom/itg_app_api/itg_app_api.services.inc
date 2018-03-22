@@ -5443,7 +5443,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    p(node_load(1069041));
+    p(node_load(1143582));
     $str = '{
     "status_code": "0",
     "status_message": "Customised Message",
@@ -6405,7 +6405,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
-    $query->orderBy('iwo.weight', 'ASC');   
+    $query->orderBy('iwo.weight', 'ASC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);

@@ -79,7 +79,7 @@ $twitter_count = itg_common_mongo_share_count($node->nid, 'twitter_share', 'fron
     </div>
     <div class="social-info">
       <span>
-        <a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print $fb_title; ?>", "<?php print $share_desc; ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a title = "share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook" aria-hidden="true"></i></a>
         <dfn><?php print $fb_count; ?></dfn>
       </span>
       <span>
