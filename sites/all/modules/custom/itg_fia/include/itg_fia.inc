@@ -288,7 +288,7 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></iframe></figure>', $node_body);
       $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script></iframe></figure>', $node_body);
       $node_body = str_replace('<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></iframe></figure>', $node_body);
-      $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+      //$ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
       $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
       $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
       $node_body = preg_replace("/ITG:POLL:([0-9]+)/", "", $node_body);
