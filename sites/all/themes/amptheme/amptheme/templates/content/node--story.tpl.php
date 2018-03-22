@@ -462,7 +462,7 @@ if (!empty($content)):
                 $story_body = $node->body['und'][0]['value'];
                 }
                 $story_body = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $story_body);
-                $doc = new domDocument(); 
+                /*$doc = new domDocument(); 
 				$doc->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . "\n" . $story_body);
 				$classname = 'm_btm';
 				$finder = new DOMXPath($doc);
@@ -470,7 +470,7 @@ if (!empty($content)):
 				foreach($_nodes as $_node){
 					$_node->parentNode->removeChild($_node);
 				}
-				$story_body = $doc->saveHTML();
+				$story_body = $doc->saveHTML();*/
                 // check video is delete form video content   
                 if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
                   itg_videogallery_remove_delete_video_form_body_html_body($story_body);
