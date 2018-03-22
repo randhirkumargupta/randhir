@@ -663,54 +663,46 @@ function _related_video_block_content() {
   $arg = arg();
   $related_content = itg_get_related_content($arg[1]);
   if (!empty($related_content)) {
-    drupal_add_js('jQuery(document).ready(function(){
-        jQuery("#related-video .video-list").slick({
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            centerPadding: \'30px\',
-            variableWidth: true,
-            prevArrow: \'<i class="fa fa-angle-left slick-prev"></i>\',
-            nextArrow: \'<i class="fa fa-angle-right slick-next"></i>\'
-        });
-    });', array('type' => 'inline', 'scope' => 'footer'));
+  
     if (function_exists('itg_get_related_story_id')) {
       $related_result = itg_get_related_story_id($related_content);
     }
+    if (!empty($related_result)) {
+      $i = 0;
+      $related_video = '<h3><span>Related</span></h3>';
+      $related_video.= "<div id='related-video'><ul class='video-list'>";
+      foreach ($related_result as $site_hash_key) {
+        $current_entity_id = $site_hash_key;
+        $related_data = itg_get_related_story_content($current_entity_id);
+          $display_title = get_related_display_title($arg[1], $current_entity_id);
+          if (!empty($display_title)) {
+            $display_title = $display_title;
+          }
+          else {
+            $display_title = $related_data->label;
+          }
+          $related_title = html_entity_decode($display_title);//mb_strimwidth($display_title, 0, 80, "..");
 
-    $related_video = '<h3><span>Related</span></h3>';
-    $related_video.= "<div id='related-video'><ul class='video-list'>";
-    foreach ($related_result as $site_hash_key) {
-      $current_entity_id = $site_hash_key;
-      $related_data = itg_get_related_story_content($current_entity_id);
-        $display_title = get_related_display_title($arg[1], $current_entity_id);
-        if (!empty($display_title)) {
-          $display_title = $display_title;
-        }
-        else {
-          $display_title = $related_data->label;
-        }
-        $related_title = html_entity_decode($display_title);//mb_strimwidth($display_title, 0, 80, "..");
-        
-        if(empty($related_data->sm_field_custom_story_small_large_url[0])) {
-        $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';  
-        } else {
-        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0]; 
-        }
-        if (function_exists('itg_apache_solr_get_site_url')) {
-          $hash_url = itg_apache_solr_get_site_url();
-        }
-        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
-        
-        if (!empty($related_title)) {
-          $img_alt = strip_tags($related_title);
-          $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-          $related_video.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
-        }
-    }
+          if(empty($related_data->sm_field_custom_story_small_large_url[0])) {
+          $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';  
+          } else {
+          $related_image_url = $related_data->sm_field_custom_story_small_large_url[0]; 
+          }
+          if (function_exists('itg_apache_solr_get_site_url')) {
+            $hash_url = itg_apache_solr_get_site_url();
+          }
+          $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
 
-    $related_video.= "</ul></div>";
-    return $related_video;
+          if (!empty($related_title)) {
+            $img_alt = str_replace(array('\'', '"'), '', $related_title); 
+            $related_video.= '<li class="col-md-3"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" /></a>';
+            $related_video.= '<span class="tile"><a href="'.$front_url.'">'.$related_title.'</a></span></li>';
+          }
+      }
+
+      $related_video.= "</ul></div>";
+      return $related_video;
+    }    
   }
 }
 
