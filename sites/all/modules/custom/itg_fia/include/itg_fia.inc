@@ -36,25 +36,7 @@ function itg_fia_xml_node_feed($query) {
   $nodes = node_load_multiple($query);
   $items = '';
   $last_build = FALSE;
-  $last_build_date = '';
-  $ad_string = '<section class="op-ad-template">
-    <figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250"></iframe>
-    </figure>
-      <figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1635110396733718&adtype=banner300x250"></iframe>
-    </figure>
-          <figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1767534293491327&adtype=banner300x250"></iframe>
-    </figure>
-<figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_2041485232762897&adtype=banner300x250"></iframe>
-    </figure>
-<figure class="op-ad op-ad-default">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_2041485232762897&adtype=banner300x250"></iframe>
-    </figure>
-
-</section>';
+  $last_build_date = '';  
   foreach ($nodes as $node) {
     $body_vals = array();
     $img_path = '';
@@ -323,7 +305,7 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace("100%", "300", $node_body);
       $node_body = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $node_body);
       //$node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
-      $node_body .= $ad_string;
+      //$node_body .= $ad_string;
       $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
       $node_body = trim($node_body);
       $node_body_content = '<p>' . $node_body;
@@ -377,6 +359,24 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
   $desc = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $desc);
   $title = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $title);
+  $ad_string = '<section class="op-ad-template">
+    <figure class="op-ad">
+       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250"></iframe>
+    </figure>
+      <figure class="op-ad">
+       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1635110396733718&adtype=banner300x250"></iframe>
+    </figure>
+          <figure class="op-ad">
+       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1767534293491327&adtype=banner300x250"></iframe>
+    </figure>
+<figure class="op-ad">
+       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_2041485232762897&adtype=banner300x250"></iframe>
+    </figure>
+<figure class="op-ad op-ad-default">
+       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_2041485232762897&adtype=banner300x250"></iframe>
+    </figure>
+
+</section>';
   $output = "<item>";
   $output .= "<title>" . $title . "</title>";
   $output .= "<link>" . check_url($link) . "?sr=fbia</link>";
@@ -403,7 +403,8 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "<body>";
   $output .= "<article>";
   $output .= "<header>";
-  $output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+  //$output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+  $output .= $ad_string;
   // <!-- The header image shown inside your article --> 
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
     $output .= "<figure>";  
