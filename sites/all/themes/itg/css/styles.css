@@ -666,10 +666,13 @@ header {
             width: 1px;
             right: 0;
             top: 0; }
-        #block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
-          max-height: 37px;
-          width: auto;
-          padding: 4px 0; }
+        #block-itg-layout-manager-header-block .navigation .menu li.has-image a {
+          padding: 0px; }
+          #block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
+            max-height: inherit;
+            width: auto;
+            padding: 0;
+            margin-top: -15px; }
       #block-itg-layout-manager-header-block .navigation .menu#newlist li a:after {
         display: none; }
     #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
@@ -14134,5 +14137,8 @@ ul.pron-cons-img li img {
 
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list {
   font-family: "OpenSans-Semibold"; }
+
+#block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect {
+  overflow: visible; }
 
 /*# sourceMappingURL=styles.css.map */
