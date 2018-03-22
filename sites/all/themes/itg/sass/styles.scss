@@ -186,7 +186,7 @@ img {
     cursor: none;
 }
 
-.pointer-event-none {
+.pointer-event-none .tabs-primary {
     pointer-events: none;
 }
 
@@ -623,10 +623,12 @@ header {
                 }
                 &.has-image {
                     a {
+                        padding:0px;
                         img {
-                            max-height: 37px;
+                            max-height:inherit;
                             width: auto;
-                            padding: 4px 0;
+                            padding:0;
+                            margin-top:-15px;
                         }
                     }
                 }
@@ -1572,7 +1574,7 @@ footer {
     }
     .footer-mid {
         background: $second-black-bg;
-        padding: 12px 0;
+        padding:4px 0 10px;
         text-align: center;
     }
     .footer-bottom {
@@ -5786,28 +5788,29 @@ h1.category-heading {
     h3 {
         display: block;
         span {
-            padding: 45px 20px 10px 0px;
+            padding: 20px 20px 10px 0px;
         }
     }
     ul {
         @extend .list-none;
         padding: 10px 20px 0 0px;
         span.time {
-            color: #b1b1b1;
+            color: #969696;
             @include font(12px);
-            padding: 10px 0;
+            padding:0 0 5px;
             display: block;
         }
         .detail {
-            padding: 0 0 22px 0;
+            padding: 0 0 20px 0;
         }
     }
     h4 {
         font-size: 18px;
         background: #f5f5f5;
-        padding: 5px 5px;
+        padding:0px;
         font-weight: 700;
         font-family: $itg-opensans;
+        line-height: 24px;
     }
     @include listing-with-image(detail,
     right,
@@ -6099,9 +6102,10 @@ h1.category-heading {
 section.sidebar {
     .block-itg-ads {
         @include display-inline;
-        padding: 30px 34px;
+        padding:25px 34px 30px;
         border-bottom: 1px solid $border-color;
         width: 100%;
+        background: #f2f2f2;
     }
 }
 
@@ -9010,7 +9014,7 @@ section.sidebar {
     }
     .itg-layout-300 {
         .droppable {
-            height: 300px;
+            min-height: 300px;
         }
     }
     .itg-layout-485 {
@@ -11900,7 +11904,7 @@ h1.about-us-heading {
 }
 
 .breakingnew-home {
-    margin-bottom: 30px;
+    margin-bottom:10px;
     font-family: $itg-opensans;
     @include clearfix;
     @include pos(relative);
@@ -11978,6 +11982,7 @@ h1.about-us-heading {
                 color: #fff;
                 font-size: 14px;
                 padding: 7px;
+                background: #ffc106;
                 img {
                     padding-top: 5px;
                 }
@@ -14911,7 +14916,7 @@ ul.pron-cons-img li img {
 }
 
 .video_header_tabs .trending-videos li.trending-videos-list img {
-    width: 170px;
+   
 }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
@@ -14970,9 +14975,10 @@ ul.pron-cons-img li img {
 
 /* New Header by ITGD */
 .hidden-desktop{ display: none; }
+.adtext{ font-size:11px; color:#5f5f5f; line-height:16px; text-align:center;text-transform: uppercase;}
 #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{ display: none; }
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{ display: none; }
-#block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:10px; margin-bottom:10px; }
+#block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:4px; margin-bottom:10px; }
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{ float: left; }
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width: 8px; height: 8px;border-radius: 100%;background: #c00;display: inline-block;
     position: relative;top: -5px; left:-5px; box-shadow: 0 0 0 rgba(214,2,12,.8);  border-radius: 50%; background: #c00; animation: pulse 1.7s infinite; content:"";}
@@ -15040,3 +15046,4 @@ ul.pron-cons-img li img {
 .section-ordering p,.trending-videos .trending-videos-list, .watch-right-now-video ul li{font-family:$itg-opensanssemibold;}
 .itg-top-section .home-top-story .data-holder .itg-listing li {padding: 10px;font-family:$itg-opensanssemibold;}
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list{font-family:$itg-opensanssemibold;}
+#block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect{overflow:visible}

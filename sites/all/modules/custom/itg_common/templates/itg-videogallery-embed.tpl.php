@@ -14,6 +14,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
 ?>
 <style>
 	#main { min-height: initial;}
+  .container{max-width:100%!important; padding: 0px;}
+  .itg-embed-wrapper{padding:0px!important;background-color:#fff!important;}
 </style>
 <div class="itg-embed-wrapper">
 <!--    <h1 class="embed-title"><?php // print $title;  ?></h1>-->

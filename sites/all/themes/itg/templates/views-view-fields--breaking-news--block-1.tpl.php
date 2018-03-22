@@ -68,9 +68,9 @@
           <div class="social-share">
               <ul>
                   <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
-                  <li><a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $row->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="javascript:;" title = "share on twitter" class="user-activity twitter def-cur-pointer" rel="1" data-tag="homepage-breaking-news" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="javascript:;" title="share on google+" class="user-activity google def-cur-pointer" rel="1" data-tag="homepage-breaking-news" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>                  
+                  <li><a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $row->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="javascript:;" title = "share on twitter" class="user-activity twitter def-cur-pointer" rel="1" data-tag="homepage-breaking-news" data-activity="twitter_share" data-status="1" onclick='twitter_popup("<?php print urlencode($fb_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="javascript:;" title="share on google+" class="user-activity google def-cur-pointer" rel="1" data-tag="homepage-breaking-news" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a></li>                  
               </ul>
           </div> 
         </div>

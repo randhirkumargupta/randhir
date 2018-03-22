@@ -544,9 +544,10 @@ function itg_story_mega_review_node_embed($node) {
     $output .= 0;
   }
   $output .= '</i>SHARES</span>';
-  $output .= '<span><a title="share on google+" class="user-activity def-cur-pointer" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" onclick="return googleplusbtn(\'' . $node_alias . '\')" data-status="1"><i class="fa fa-google-plus"></i></a></span>';
-  $output .= '<span><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop(\'' . $actual_link . ', ' . $fb_title . ', ' . $share_desc . ', ' . $image . ', ' . $base_url . ', ' . $node->nid . '\')"><i class="fa fa-facebook"></i></a></span>';
-  $output .= '<span><a class="user-activity def-cur-pointer" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup(\'' . urlencode($node->title) . ', ' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></span>';
+  $output .= '<span><a title="share on google+" class="user-activity def-cur-pointer" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" onclick=\'return googleplusbtn("' . $node_alias . '")\' data-status="1"><i class="fa fa-google-plus"></i></a></span>';
+  $output .= '<span><a class="def-cur-pointer" title ="share on facebook" onclick=\'fbpop("' . $actual_link . '", "' . urlencode($fb_title) . '", "' . urlencode($share_desc) . '", "' . $image . '", "' . $base_url . '", "' . $node->nid . '")\'><i class="fa fa-facebook"></i></a></span>';
+  
+  $output .= '<span><a class="user-activity def-cur-pointer" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" title="share on twitter" onclick=\'twitter_popup("' . urlencode($node->title) . '", "' . urlencode($short_url) . '")\'><i class="fa fa-twitter"></i></a></span>';
   $output .= '<span>';
   /* if ($config_name == 'vukkul') {
     $output .= '<a class= "def-cur-pointer" onclick ="scrollToAnchor("vuukle-emotevuukle_div");" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>';

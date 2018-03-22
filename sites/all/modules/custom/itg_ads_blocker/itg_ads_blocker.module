@@ -48,9 +48,11 @@ function itg_ads_blocker_preprocess_page(&$vars) {
   global $theme;
   if ($theme == FRONT_THEME_NAME) {
     if (isset($vars['node']->type) && ($vars['node']->type == 'story' || $vars['node']->type == 'photogallery' || $vars['node']->type == 'videogallery')) {
-      drupal_add_js(drupal_get_path('module', 'itg_ads_blocker') . '/js/ads.js', array('preprocess' => false, 'scope' => 'footer', 'weight' => 0));
-      drupal_add_js(drupal_get_path('module', 'itg_ads_blocker') . '/js/showadcontent.js', array('preprocess' => false, 'scope' => 'footer', 'weight' => 1));
-      drupal_add_css(drupal_get_path('module', 'itg_ads_blocker') . '/css/ad_content_blocker.css');
+      if ($vars['node']->nid == '360513' || $vars['node']->nid == '377896' || $vars['node']->nid == '448804') {
+       drupal_add_js(drupal_get_path('module', 'itg_ads_blocker') . '/js/ads.js', array('preprocess' => false, 'scope' => 'footer', 'weight' => 0));
+       drupal_add_js(drupal_get_path('module', 'itg_ads_blocker') . '/js/showadcontent.js', array('preprocess' => false, 'scope' => 'footer', 'weight' => 1));
+       drupal_add_css(drupal_get_path('module', 'itg_ads_blocker') . '/css/ad_content_blocker.css'); 
+      }
     }
   }
 }

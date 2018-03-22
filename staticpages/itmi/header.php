@@ -64,7 +64,7 @@ ul.navbar li a {padding: 8px 17px;}
 .punch-content {font-size: 40px;padding-top: 7px;}
 }
 .bottomleft .topdate_Addmiss {margin: 0px 0 5px 0;padding: 4px 0 4px 0;background: #333335;width: 632px;color: #efb901;text-align: center;font-size: 28px;font-weight: 600;overflow: hidden}
-.bottomleft .topdate_Addmiss a {color: #efb901;float: none;font-size: 28px;font-weight: 600;margin: 0px;text-transform: uppercase;display: block}
+.bottomleft .topdate_Addmiss a {color: #efb901;float: none;font-size: 20px;font-weight: 600;margin: 0px;text-transform: uppercase;display: block}
 </style>
 <header>
        <script src="https://smedia2.intoday.in/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
@@ -87,7 +87,7 @@ ul.navbar li a {padding: 8px 17px;}
         <div class="wrapper">
           <div class="logo"> <a href="/itmi/index.jsp"><img src=" https://smedia2.intoday.in/indiatoday/itmi/images/itmi-logo.png" alt="" border="0"></a> </div>
           <div class="bottomleft">
-            <div class="topdate_Addmiss"> <a href="javascript:void();" target="_blank" style="cursor:default">ADMISSION TEST - 10th March 2018</a> </div>
+            <div class="topdate_Addmiss"> <a href="javascript:void();" target="_blank" style="cursor:default">Admission Test date for Noida - 9th June <br/> Admission Test date for other centres  - 2nd June</a> </div>
           </div>
           <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0"></a> </div>
         </div>

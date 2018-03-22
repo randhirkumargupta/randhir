@@ -34,9 +34,9 @@ $argum = base64_encode(arg(1));
         <?php } ?>
         <div class="social-icon desktop-hide">
             <ul>
-                <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $photo_node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <li><a title="share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $photo_node->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+                <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
+                <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick='twitter_popup("<?php print urlencode($share_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
                 <?php
                 if (function_exists('global_comment_last_record')) {
@@ -47,7 +47,7 @@ $argum = base64_encode(arg(1));
                 if ($comment_flag) {
                   if ($config_name == 'vukkul') {
                     ?>
-                    <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    <li><a onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } if ($config_name == 'other') { ?> 
                     <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                   <?php } ?>
@@ -103,7 +103,7 @@ $argum = base64_encode(arg(1));
             <?php foreach ($rows as $index => $row):
               ?>
               <li data-slide-number="<?php echo $index ?>">
-                  <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['fid']; ?>">
+                  <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['item_id']; ?>">
 
 
                       <?php
@@ -176,9 +176,9 @@ $argum = base64_encode(arg(1));
 
             <div class="social-icon mhide">
                 <ul>
-                    <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $photo_node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                    <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                    <li><a title="share on facebook" class="def-cur-pointer" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $photo_node->nid; ?>")'><i class="fa fa-facebook"></i></a></li>
+                    <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
+                    <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick='twitter_popup("<?php print urlencode($share_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
                     <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
                     <?php
                     if (function_exists(global_comment_last_record)) {
@@ -189,7 +189,7 @@ $argum = base64_encode(arg(1));
                     if ($comment_flag) {
                       if ($config_name == 'vukkul') {
                         ?>
-                        <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                        <li><a onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
                       <?php } if ($config_name == 'other') { ?> 
                         <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                       <?php } ?>

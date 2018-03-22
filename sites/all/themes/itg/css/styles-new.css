@@ -497,9 +497,8 @@ input[type="text"] {
 .itg-layout-container .ad-widget {
   border: 1px solid #ddd;
   height: 321px;
-  padding: 37px; }
+  padding: 25px 37px; }
   .itg-layout-container .ad-widget .sidebar-ad {
-    background: #ddd;
     height: 100%; }
 
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad {

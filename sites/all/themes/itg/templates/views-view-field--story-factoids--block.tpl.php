@@ -34,9 +34,9 @@ if (isset($row->field_field_story_template_factoids) && !empty($row->field_field
   <div class="social-share">
   <ul>
       <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-      <li><a class="facebook" href="javascript:void(0)" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $title; ?>', '<?php print $share_desc; ?>')"><i class="fa fa-facebook"></i></a></li>
-      <li><a class="twitter" href="javascript:" onclick="twitter_popup('<?php print urlencode($title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-      <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>
+      <li><a class="facebook" href="javascript:void(0)" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($title); ?>", "<?php print urlencode($share_desc); ?>")'><i class="fa fa-facebook"></i></a></li>
+      <li><a class="twitter" href="javascript:" onclick='twitter_popup("<?php print urlencode($title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
+      <li><a class="google" title="share on google+" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a></li>
   </ul>      
   </div>
   

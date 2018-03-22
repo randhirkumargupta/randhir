@@ -285,7 +285,7 @@ img {
 .def-cur-none {
   cursor: none; }
 
-.pointer-event-none {
+.pointer-event-none .tabs-primary {
   pointer-events: none; }
 
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
@@ -666,10 +666,13 @@ header {
             width: 1px;
             right: 0;
             top: 0; }
-        #block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
-          max-height: 37px;
-          width: auto;
-          padding: 4px 0; }
+        #block-itg-layout-manager-header-block .navigation .menu li.has-image a {
+          padding: 0px; }
+          #block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
+            max-height: inherit;
+            width: auto;
+            padding: 0;
+            margin-top: -15px; }
       #block-itg-layout-manager-header-block .navigation .menu#newlist li a:after {
         display: none; }
     #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
@@ -1314,7 +1317,7 @@ footer {
     background: #000000 url(../images/sprite.png) no-repeat 10px -35px; }
   footer .footer-mid {
     background: #111111;
-    padding: 12px 0;
+    padding: 4px 0 10px;
     text-align: center; }
   footer .footer-bottom {
     padding: 20px 0;
@@ -5976,23 +5979,24 @@ h1.category-heading {
 .program-rhs h3 {
   display: block; }
   .program-rhs h3 span {
-    padding: 45px 20px 10px 0px; }
+    padding: 20px 20px 10px 0px; }
 .program-rhs ul {
   padding: 10px 20px 0 0px; }
   .program-rhs ul span.time {
-    color: #b1b1b1;
+    color: #969696;
     font-size: 12px;
     font-size: 0.75rem;
-    padding: 10px 0;
+    padding: 0 0 5px;
     display: block; }
   .program-rhs ul .detail {
-    padding: 0 0 22px 0; }
+    padding: 0 0 20px 0; }
 .program-rhs h4 {
   font-size: 18px;
   background: #f5f5f5;
-  padding: 5px 5px;
+  padding: 0px;
   font-weight: 700;
-  font-family: "OpenSans-Regular"; }
+  font-family: "OpenSans-Regular";
+  line-height: 24px; }
 .program-rhs .detail {
   overflow: hidden;
   padding: 10px; }
@@ -6264,9 +6268,10 @@ h1.category-heading {
 section.sidebar .block-itg-ads {
   display: inline-block;
   vertical-align: top;
-  padding: 30px 34px;
+  padding: 25px 34px 30px;
   border-bottom: 1px solid #dddddd;
-  width: 100%; }
+  width: 100%;
+  background: #f2f2f2; }
 
 /*CSS End RHS add block*/
 /*CSS Start So sorry page*/
@@ -8618,7 +8623,7 @@ section.sidebar .block-itg-ads {
 .sport-home-layout-page .itg-layout-225 .widget-title {
   margin-bottom: 10px; }
 .sport-home-layout-page .itg-layout-300 .droppable {
-  height: 300px; }
+  min-height: 300px; }
 .sport-home-layout-page .itg-layout-485 .droppable {
   height: 485px; }
 .sport-home-layout-page .itg-layout-195 .droppable {
@@ -11239,7 +11244,7 @@ h1.about-us-heading {
   width: 100%; }
 
 .breakingnew-home {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-family: "OpenSans-Regular";
   zoom: 1;
   position: relative; }
@@ -11357,7 +11362,8 @@ h1.about-us-heading {
       .breakingnew-home .new-detail .live-tv-link a {
         color: #fff;
         font-size: 14px;
-        padding: 7px; }
+        padding: 7px;
+        background: #ffc106; }
         .breakingnew-home .new-detail .live-tv-link a img {
           padding-top: 5px; }
 
@@ -13930,9 +13936,6 @@ ul.pron-cons-img li img {
 .video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
   width: 170px; }
 
-.video_header_tabs .trending-videos li.trending-videos-list img {
-  width: 170px; }
-
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
   color: #aaa9a9; }
 
@@ -13977,6 +13980,13 @@ ul.pron-cons-img li img {
 .hidden-desktop {
   display: none; }
 
+.adtext {
+  font-size: 11px;
+  color: #5f5f5f;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase; }
+
 #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile {
   display: none; }
 
@@ -13985,7 +13995,7 @@ ul.pron-cons-img li img {
 
 #block-itg-ads-ads-super-banner-top-nav-728x90 {
   text-align: center;
-  padding-top: 10px;
+  padding-top: 4px;
   margin-bottom: 10px; }
 
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu {
@@ -14127,5 +14137,8 @@ ul.pron-cons-img li img {
 
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list {
   font-family: "OpenSans-Semibold"; }
+
+#block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect {
+  overflow: visible; }
 
 /*# sourceMappingURL=styles.css.map */

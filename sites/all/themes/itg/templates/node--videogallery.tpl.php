@@ -1,6 +1,12 @@
 <script type="text/javascript">var __at__ = 0;</script>
-<div style="display:none"><?php //print render($content); 
-?> </div>
+<?php 
+if (!empty($_GET['preview_log'])) {
+?>     
+     <div style="display:block">
+      <?php print render($content); ?>
+     </div>
+<?php } ?>
+
 <?php print $node->view_output; ?>
 <?php
 if (function_exists('taboola_view')) {

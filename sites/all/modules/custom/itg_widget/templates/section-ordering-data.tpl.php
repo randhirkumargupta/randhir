@@ -1617,6 +1617,11 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
         }
         ?>
     </div>
+    <?php if (!empty($itg_section_id)): 
+			$tname = get_term_name_from_tid($itg_section_id)->name;
+    ?>
+    <div class="morediv"><a href="<?php echo $base_url . '/' . drupal_get_path_alias("taxonomy/term/$itg_section_id"); ?>">more from <?php echo $tname; ?> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></div>
+    <?php endif;?>
   <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>
   <?php endif; ?>

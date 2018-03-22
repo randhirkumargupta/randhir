@@ -34,9 +34,9 @@ $short_url = $row->url; //shorten_url($row->url, 'goo.gl');
                           <a class="google-play" href="javascript:;" title=""></a>
                           <a class="app-store" href="javascript:;" title=""></a>
                           <span class="funalytics-social-links">
-                            <a class="fn-facebook facebook" title = "share on facebook " href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_share_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"></a>
-                            <a class="fn-twitter twitter user-activity" title = "share on twitter" class="" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($twitter_title); ?>', '<?php print urlencode($short_url); ?>')"></a>
-                            <a title="share on google+" class="fn-gplus google user-activity" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a>
+                            <a class="fn-facebook facebook" title = "share on facebook " href="javascript:void(0)"  onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'></a>
+                            <a class="fn-twitter twitter user-activity" title = "share on twitter" class="" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick='twitter_popup("<?php print urlencode($twitter_title); ?>", "<?php print urlencode($short_url); ?>")'></a>
+                            <a title="share on google+" class="fn-gplus google user-activity" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a>
                           </span>
                         </div>
                       </div>

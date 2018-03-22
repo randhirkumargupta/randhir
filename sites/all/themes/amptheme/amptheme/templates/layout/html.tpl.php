@@ -48,11 +48,9 @@
         <title><?php print $head_title; ?></title>
         <?php print $head; ?>
         <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
-        <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
-
+        <?php //include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700" rel="stylesheet">
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <script async src="https://cdn.ampproject.org/v0.js"></script>
         <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
@@ -323,6 +321,11 @@ img {
     font-weight: 600;
     text-transform: capitalize
 }
+
+.story-section .briefcase { margin:15px 0;}
+.story-section .briefcase h4{font-size: 18px;font-size: 1.125rem;text-transform: uppercase; margin-bottom: 10px; color: #bb0a0a;}
+.story-section .briefcase ul li {position: relative; font-size: 15px; margin-bottom: 10px; padding-left: 15px;line-height: 22px;list-style: none;}
+.story-section .briefcase ul li:before { position: absolute; top: 10px; left: 0px; content: ''; border-radius: 100%; background: #a00606; height: 5px; width: 5px;}
 .scroll-x {
     overflow-x: auto
 }
@@ -707,7 +710,7 @@ pre {
 }
 .footer-bottom-menu h4 {
     text-transform: uppercase;
-    margin: 20px 0 5px
+    margin: 22px 0 5px
 }
 .footer-bottom-menu ul li {
     padding: 3px 0
@@ -1479,12 +1482,11 @@ ul.header-menu li {
     border-bottom: 1px solid #ccc;
     width: 270px;
 }
-.story_ad_block.custom-amp-ad{margin-top:5px;}
-.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{margin-bottom:8px;}
-section.sidebar .block-itg-ads > div {
-    margin: auto;
-}
-.custom-amp-ad.ad-btf{margin-bottom:50px;}
+.story_ad_block.custom-amp-ad{padding:10px 0 0; width:300px; margin:0 auto}
+.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{padding:10px 0 0; width:300px; margin:0 auto}
+.description amp-ad{ margin:auto; display: block; width:300px;}
+section.sidebar .block-itg-ads > div {margin: auto;}
+.custom-amp-ad.ad-btf{padding-bottom: 20px; width: 300px; margin: 0 auto;}
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
 .node-type-story .posted-by{overflow:hidden;}
 .node-type-story .posted-by .profile-pic, .node-type-story .posted-by .profile-detail { float: left;}

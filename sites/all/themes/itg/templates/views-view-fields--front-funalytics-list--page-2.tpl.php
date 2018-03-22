@@ -44,9 +44,9 @@ $changed = date("D j M Y", $row->node_changed);
       <div class="social-share">
               <ul>
                   <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
-                  <li><a class="def-cur-pointer facebook" title = "share on facebook " href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a class="def-cur-pointer twitter user-activity" title = "share on twitter" class="" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($twitter_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="def-cur-pointer google user-activity" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>                  
+                  <li><a class="def-cur-pointer facebook" title = "share on facebook " href="javascript:void(0)"  onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>")'><i class="fa fa-facebook"></i></a></li>
+                  <li><a class="def-cur-pointer twitter user-activity" title = "share on twitter" class="" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick='twitter_popup("<?php print urlencode($twitter_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
+                  <li><a title="share on google+" class="def-cur-pointer google user-activity" rel="<?php print $row->nid; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a></li>                  
               </ul>
           </div>
   </div>

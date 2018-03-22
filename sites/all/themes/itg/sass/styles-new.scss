@@ -586,9 +586,8 @@ input[type="text"] {
     .ad-widget {
         border: 1px solid #ddd;
         height: 321px;
-        padding: 37px;
-        .sidebar-ad {
-            background: #ddd;
+        padding: 25px 37px;
+        .sidebar-ad {            
             height: 100%;
         }
     }

@@ -536,5 +536,10 @@ function itg_widgets_custom_variables() {
     '#title' => t('Place amp Ad After 250 words'),
     '#default_value' => variable_get('place_amp_ad_within_content'),
   );
+  $form['section_category_sitemap_tids'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Section and Categgory Sitemap Tids'),
+    '#default_value' => variable_get('section_category_sitemap_tids'),
+  );
   return system_settings_form($form);
 }

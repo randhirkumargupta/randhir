@@ -74,7 +74,7 @@ define('MOBILE_VAS', $role_array['Mobile VAS']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
 define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
 define('ITG_IMAGE_FOLDER', 'images/');
-define('ITG_NEWSLETTER_EMAIL', 'care@intoday.in');
+define('ITG_NEWSLETTER_EMAIL', 'desk-itgd@intoday.com');
 define('ITG_NEWSLETTER_FROMNAME', 'India Today');
 define('JWPLAYER_DFP_TAG','https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]');
 define('ITG_GA_CODE', 'UA-795349-17');
@@ -108,6 +108,7 @@ define('ISSUE_SMALL_HEIGHT', 140);
  */
 define('ADS_RHS1', 'ads_medium_rectangl_rhs1_300x250');
 define('ADS_RHS2', 'ads_medium_rectangl_rhs2_300x250');
+define('ADS_RHS_MTF', 'ads_medium_rectangl_mtf_300x200');
 define('ADS_FOOTER', 'ads_super_banner_bottomnav728x90');
 define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
 
@@ -117,21 +118,21 @@ define('FRONT_THEME_NAME', 'itg');
 define('AMP_THEME_NAME', 'amptheme');
 define('EXTRA_SECTION_CARDS', 9);
 define('SECTION_TAB', 20);
-$extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
-define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);
+//$extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
+//define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);
 
-$large_image_style = array('magazine_top_story_483x271');
-define('LARGE_IMAGE_STYLES', $large_image_style);
+//$large_image_style = array('magazine_top_story_483x271');
+//define('LARGE_IMAGE_STYLES', $large_image_style);
 
-$medium_image_style = array('home_page_feature_small', 'section_ordering_widget' , 'anchors_landing', 'magazine_top_three_story_237x133');
-define('MEDIUM_IMAGE_STYLES', $medium_image_style);
+//$medium_image_style = array('home_page_feature_small', 'section_ordering_widget' , 'anchors_landing', 'magazine_top_three_story_237x133');
+//define('MEDIUM_IMAGE_STYLES', $medium_image_style);
 
 //$small_image_style = array('image170x127' , 'video_landing_page_170_x_127');
-$small_image_style = array('image170x127');
-define('SMALL_IMAGE_STYLES', $small_image_style);
+//$small_image_style = array('image170x127');
+//define('SMALL_IMAGE_STYLES', $small_image_style);
 
-$small_extra_image_style = array('widget_very_small');
-define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
+//$small_extra_image_style = array('widget_very_small');
+//define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
 
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
 define('CITY_MANAGMENT', variable_get('city_manager_vid'));

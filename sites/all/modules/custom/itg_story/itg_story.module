@@ -1048,9 +1048,13 @@ function itg_story_node_presave($node) {
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
 	if (!empty($_GET['iframe'])) {
-		drupal_add_js('jQuery(document).ready(function() {           
-                jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");               
-             });', array('type' => 'inline', 'scope' => 'footer'));
+		drupal_add_js('jQuery(document).ready(function() {
+      jQuery(".cboxIframe").css("width","600px !important", "height","600px !important");   
+      setTimeout(function(){
+        jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");     
+      },1000); 
+                
+    });', array('type' => 'inline', 'scope' => 'footer'));
 	}	
              
   if ($node->type == 'story' && $view_mode != 'search_index') {
@@ -1460,6 +1464,6 @@ function itg_story_ad_code_in_content($content) {
   $ad_code = '<p class="custom-amp-ad">' . $ad_code;
   array_splice($after_content_arr, 1, 0, $ad_code);
   $after_content = implode('</p>', $after_content_arr);
-  $content = $before_content . $after_content;
+  $content = $before_content . ' ' . $after_content;
   return $content;
 }

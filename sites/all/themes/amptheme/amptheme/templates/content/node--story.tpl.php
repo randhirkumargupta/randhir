@@ -402,8 +402,21 @@ if (!empty($content)):
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
                   <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
-                <?php } ?>                            
-              </div>
+											<?php } ?>                            
+										</div>
+							<?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+								<div class="briefcase mhide">
+									<h4><?php print t('HIGHLIGHTS'); ?></h4>
+									<ul>
+										<?php
+										foreach ($node->field_story_highlights['und'] as $high) {
+											print '<li>' . $high['value'] . '</li>';
+										}
+										?>
+									</ul>
+								</div>              
+              <?php } ?>
+              
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
                   <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">                      
@@ -448,6 +461,7 @@ if (!empty($content)):
                 } else {
                 $story_body = $node->body['und'][0]['value'];
                 }
+                $story_body = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $story_body);
                 // check video is delete form video content   
                 if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
                   itg_videogallery_remove_delete_video_form_body_html_body($story_body);
@@ -543,6 +557,10 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
                   }
                 }
+                // Remove Expert chunk
+                if (strpos($story_body, '[ITG:EXPERT-CHUNK]')) {
+					$story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
+				}                
                 //code for listicle story
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
@@ -588,7 +606,20 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                  <?php print render($content['field_story_tech_review_chunk']); ?>
+                  <?php 
+                  $tech_review_chunk = $node->field_story_tech_review_chunk['und'][0]['value'];
+                  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $tech_review_chunk, $matches);
+                  $i = 0;
+                  foreach ($matches[0] as $images) {
+                    $src = $matches[1][$i];
+                    list($width, $height, $type, $attr) = getimagesize($src);
+                    $layout_responsive = ($width > 300) ? 'layout="responsive"' : '';
+                    $img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
+                    $tech_review_chunk = str_replace($images, $img, $tech_review_chunk);
+                    $i++;
+                  }
+                  print $tech_review_chunk; 
+                  ?>
                 </div>
               <?php } ?>
             </div>

@@ -42,9 +42,9 @@ foreach($rows as $id => $row):
                             <div class="social-share">
                                 <ul>
                                     <li><span class="share"><i class="fa fa-share-alt"></i></span></li>
-                                    <li><a href="javascript:;" onclick="<?php echo 'fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $fb_share_desc . "'" . ', ' . "'" . $fb_share_image . "'" . ')'; ?>" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a title = "share on twitter"  <?php echo ' onclick="twitter_popup(\'' . urlencode($row['title']) . ',' . urlencode($short_url) . '\')" href="javascript:;"'; ?> class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a title="share on google+" <?php echo 'onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"'; ?> href="javascript:;"  class="google"></a></li>
+                                    <li><a href="javascript:;" onclick='fbpop("<?php echo $actual_link ?>" , "<?php echo urlencode($fb_share_title) ?>", "<?php echo urlencode($fb_share_desc) ?>" ,"<?php echo $fb_share_image ?>")' class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a title = "share on twitter"  onclick='twitter_popup("<?php echo urlencode($row['title']) ?>","<?php echo urlencode($short_url) ?>")' href="javascript:;" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' href="javascript:;"  class="google"></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -57,9 +57,9 @@ foreach($rows as $id => $row):
                 <div class="social-share">
                     <ul>
                         <li><span class="share"><i class="fa fa-share-alt"></i></span></li>
-                        <li><a href="javascript:;" onclick="<?php echo 'fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $fb_share_desc . "'" . ', ' . "'" . $fb_share_image . "'" . ')'; ?>" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a title = "share on twitter"  <?php echo ' onclick="twitter_popup(\'' . urlencode($row['title']) . ',' . urlencode($short_url) . '\')" href="javascript:;"'; ?> class="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a title="share on google+" <?php echo 'onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"'; ?> href="javascript:;"  class="google"></a></li>
+                        <li><a href="javascript:;" onclick='fbpop("<?php echo $actual_link ?>" , "<?php echo urlencode($fb_share_title) ?>", "<?php echo urlencode($fb_share_desc) ?>" ,"<?php echo $fb_share_image ?>")' class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a title = "share on twitter"  onclick='twitter_popup("<?php echo urlencode($row['title']) ?>","<?php echo urlencode($short_url) ?>")' href="javascript:;" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' href="javascript:;"  class="google"></a></li>
                     </ul>
                 </div>
             </div>

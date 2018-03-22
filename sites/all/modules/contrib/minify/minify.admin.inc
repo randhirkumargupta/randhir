@@ -208,7 +208,8 @@ function minify_batch_process($script, &$context) {
  * Submit callback to clear captured data
  */
 function minify_clear_js_cache($form, &$form_state) {
-  $minify_dir = variable_get('file_public_path', conf_path() . '/files') . '/minify';
+  //$minify_dir = variable_get('file_public_path', conf_path() . '/files') . '/minify';
+  $minify_dir = minify_path();
   $files = file_scan_directory($minify_dir, '/.*\.*$/');
   foreach ($files as $key => $value) {
     drupal_unlink($key);
@@ -287,10 +288,10 @@ function _minify_get_post_fields($js_code) {
 function _minify_send_request($post_data) {
   if (function_exists('curl_init')) {
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "closure-compiler.appspot.com/compile");
+    curl_setopt($curl, CURLOPT_URL, "https://closure-compiler.appspot.com/compile");
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_POST, true);    
     curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-    curl_setopt($curl, CURLOPT_POST, true);
     $response = json_decode(curl_exec($curl));
     $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
     curl_close($curl);
@@ -307,7 +308,8 @@ function _minify_construct_min_js_path($script, $cache_data) {
     return $cache_data[$script]['minified_file_path'];
   } else {
     /* Not minified file */
-    $minify_js_dir = variable_get('file_public_path', conf_path() . '/files') . '/minify/';
+    //$minify_js_dir = variable_get('file_public_path', conf_path() . '/files') . '/minify/';
+    $minify_js_dir = minify_path() . '/';
     if (!is_dir($minify_js_dir)) {
       drupal_mkdir($minify_js_dir);
     }

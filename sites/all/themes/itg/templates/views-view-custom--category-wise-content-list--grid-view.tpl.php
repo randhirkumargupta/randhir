@@ -24,7 +24,7 @@ global $base_url;
     }
   }
     $video_class ="";
-  if($row['type'] == 'videogallery') {
+  if($row['type'] == 'Video' || $row['type'] == 'videogallery') {
      $video_class = 'video-icon';
   }?>
     <div class="catagory-grid-view col-md-3 col-sm-4 col-xs-6">
@@ -33,7 +33,7 @@ global $base_url;
         <?php if ($row['field_story_small_image'] != ''): ?>
           <?php print $row['field_story_small_image']; ?>
         <?php else: ?>
-          <?php if ($row['type'] == 'videogallery'): ?>
+          <?php if ($row['type'] == 'Video' || $row['type'] == 'videogallery'): ?>
             <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
           <?php else: ?>
             <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>

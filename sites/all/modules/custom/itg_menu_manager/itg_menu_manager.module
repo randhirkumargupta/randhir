@@ -128,6 +128,7 @@ function itg_menu_manager_block_info() {
  */
 function itg_menu_manager_block_view($delta = '') {
     $block = array();
+    $data = array();
     switch ($delta) {
         case 'second_level_menu':
             $second_level_menu = get_second_level_menu();

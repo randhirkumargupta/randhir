@@ -9,7 +9,7 @@ global $base_url;
 ?>
 <?php ?>
 <?php if (!empty($title)): ?>
-  <h3><?php print $title; ?></h3>
+  <h1><?php print $title; ?></h1>
 <?php endif; ?>
 
 <?php foreach ($rows as $id => $row):
@@ -24,7 +24,7 @@ global $base_url;
     }
   }
   $video_class ="";
-  if($row['type'] == 'videogallery') {
+  if($row['type'] == 'Video' || $row['type'] == 'videogallery') {
      $video_class = 'video-icon';
   }  
   // Check if it is sponsor category.
@@ -42,7 +42,7 @@ global $base_url;
             <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
           <?php endif; ?>
           <div class="cat-heading">
-              <h3 class="<?php echo $pipelineclass; ?> cat-heading-title" title="<?php echo strip_tags($row['title']);?>"><?php
+              <h2 class="<?php echo $pipelineclass; ?> cat-heading-title" title="<?php echo strip_tags($row['title']);?>"><?php
                 if (function_exists('itg_common_get_smiley_title')) {
                   print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
                   echo $pipelinetext;
@@ -52,7 +52,7 @@ global $base_url;
                   echo $pipelinetext;
                   
                 }
-                ?></h3>
+                ?></h2>
           </div>
       </div>
     <?php else: ?>
@@ -61,7 +61,7 @@ global $base_url;
       <?php if ($row['field_story_small_image'] != ''): ?>
         <?php print $row['field_story_small_image']; ?>
       <?php else: ?>
-            <?php if ($row['type'] == 'videogallery'): ?>
+            <?php if ($row['type'] == 'Video' || $row['type'] == 'videogallery'): ?>
               <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
             <?php else: ?>
               <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
@@ -73,7 +73,7 @@ global $base_url;
           <?php } ?>
         </div>
     <?php endif; ?>
-    <div class="detail"><h3 class="<?php echo $pipelineclass; ?>" title="<?php echo strip_tags($row['title']);?>"><?php
+    <div class="detail"><h2 class="<?php echo $pipelineclass; ?>" title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
         echo $pipelinetext;
@@ -83,7 +83,7 @@ global $base_url;
         print l(__html_output_with_tags($row['title']), "node/" . $row['nid']);
         echo $pipelinetext;
       }
-      ?></h3>
+      ?></h2>
         <?php if (strtolower($row['type']) == 'story'): ?>
         <p><?php if (isset($row['field_story_kicker_text'])) {
         print __html_output_with_tags($row['field_story_kicker_text']);

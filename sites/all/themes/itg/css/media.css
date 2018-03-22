@@ -92,13 +92,13 @@ $itg-robotoslab:'RobotoSlab-Regular';
 
   /*defalt add for special pages START*/
   .itg-layout-container .ad-widget {
-    height: 272px;
-    padding: 10px;
-    width: 322px;
+    height: 300px;
+    padding: 10px 0;
+    width: 300px;
     margin: 0 auto; }
 
   section.sidebar .block-itg-ads {
-    padding: 0;
+    padding: 4px 0;
     border-bottom: none; }
 
   /*defalt add for special pages END*/
@@ -127,7 +127,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     margin-bottom: 30px; }
   .tech-layout-page .auto-block-3 .ad-widget,
   .auto-layout-page .auto-block-3 .ad-widget {
-    height: 272px;
+    height: 290px;
     padding: 10px;
     width: 320px;
     margin: 0 auto; }
@@ -1185,28 +1185,29 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .breakingnew-home {
     text-align: center;
     background: #ffc106;
-    margin: -15px -15px 15px -15px;
-    padding: 7px; }
+    margin: -15px -15px 10px -15px;
+    padding: 0px; }
     .breakingnew-home .title {
-      float: none;
-      font-size: 14px;
-      line-height: 22px;
-      height: 20px;
+      float: left;
+      font-size: 12px;
+      line-height: 23px;
+      height: 23px;
       padding: 0 5px;
       display: inline-block;
-      margin-bottom: 5px; }
+      margin-bottom: 0px; }
     .breakingnew-home .new-detail {
       height: inherit;
-      line-height: 20px;
+      line-height: 23px;
       font-size: 16px;
       padding: 0;
       width: 100%;
       float: none; }
       .breakingnew-home .new-detail .marquee-container {
-        width: 100%;
+        width: calc(100% - 130px);
         height: 23px;
-        float: none;
-        line-height: 23px; }
+        float: left;
+        line-height: 23px;
+        margin-left: 5px; }
         .breakingnew-home .new-detail .marquee-container .marquee-child {
           height: 23px;
           line-height: 23px; }
@@ -1758,7 +1759,6 @@ $itg-robotoslab:'RobotoSlab-Regular';
     line-height: 30px;
     font-size: 20px; }
 
-  /* css start add by arun */
   .live-block #cricketblog .batBollDetails .batsmanDetails {
     width: 100%; }
 
@@ -1790,7 +1790,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
     right: 8px; }
 
-  /* css end add by arun */ }
+  #block-views-video-landing-header-block .video-header-right .ads {
+    background: transparent; } }
 @media all and (min-width: 680px) {
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     position: relative; }
@@ -2987,7 +2988,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   /* End side bar common */
   /*CSS start program RHS*/
   .program-rhs h3 span {
-    padding: 45px 20px 10px 30px; }
+    padding: 20px 20px 10px 30px; }
   .program-rhs ul {
     padding: 10px 20px 0 30px; }
 
@@ -3334,6 +3335,9 @@ $itg-robotoslab:'RobotoSlab-Regular';
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
     padding: 10px !important; } }
 @media (max-width: 767px) {
+  .itg-layout-container .ad-widget {
+    width: 322px; }
+
   #block-views-video-landing-header-block .latest_video {
     padding: 30px 0 0;
     float: left;
@@ -3842,8 +3846,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
     color: #666;
     font-size: 14px;
     font-weight: 300;
-    height: 42px;
-    line-height: 42px; }
+    height: 37px;
+    line-height: 37px; }
 
   #block-itg-layout-manager-header-block .navigation .container {
     padding: 0px; }

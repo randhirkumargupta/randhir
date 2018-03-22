@@ -124,7 +124,7 @@ function get_rss_feed_sub_header_latestnews($section_url) {
  */
 function get_rss_feed_google_stand_header() {
   $output = "";
-  $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
+  $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
   return $output;
 }
 
@@ -288,7 +288,7 @@ function get_rss_feed_sub_header_article_news_stand($term_name = NULL, $section_
   }
   date_default_timezone_set("GMT");
   $todat_date = date("D, d M Y H:i:s e");
-  $output .= "<title>India Today</title><link>" . FRONT_URL . "></link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
+  $output .= "<title>India Today</title><link>" . FRONT_URL . "</link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
   return $output;
 }
 
