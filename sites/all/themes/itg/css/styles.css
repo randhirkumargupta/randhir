@@ -14138,7 +14138,7 @@ ul.pron-cons-img li img {
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list {
   font-family: "OpenSans-Semibold"; }
 
-#block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect {
+#block-itg-layout-manager-header-block .navigation .menu li.has-image, #block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect {
   overflow: visible; }
 
 /*# sourceMappingURL=styles.css.map */
