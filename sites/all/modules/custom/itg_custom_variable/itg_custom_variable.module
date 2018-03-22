@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * The ITG Custom Variable
+ *
+ * Contains functionality for Custom Variable set and get
+ *
+ */
+
+function set_itg_variable($name, $value){
+  if(!isset($name) || !isset($value)){
+    return FALSE;
+  }
+  
+  db_merge('itg_custom_variable')
+    ->key(array(
+    'name' => $name,
+  ))
+    ->fields(array(
+    'value' => serialize($value),
+  ))
+    ->execute();
+  return true;
+}
+
+function get_itg_variable($name, $default = NULL){
+  if(empty($name) && !isset($default)){
+    return FALSE;
+  }
+  if(empty($name) && isset($default)){
+    return $default;
+  }
+  
+  $value = db_select('itg_custom_variable', 'cv')
+  ->fields('cv', array('value'))
+  ->condition('cv.name', $name)
+  ->execute()
+  ->fetchField();
+  $value = unserialize($value);
+  return isset($value) ? $value : $default;
+}
