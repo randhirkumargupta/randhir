@@ -250,8 +250,10 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                 }
                 
                 $i++;
+                $redirection_url = itg_custom_amp_body_filter($redirection_url);
+                $redirection_url = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $redirection_url);
                 $breaking_output .= '<div class="dwrap"><div class="breaking-date">' . $pub_display_time . ' PDT</div>';
-                $breaking_output .= '<div class="breaking-discription">' . itg_custom_amp_body_filter($redirection_url) . '</div>';
+                $breaking_output .= '<div class="breaking-discription">' . $redirection_url . '</div>';
                 $breaking_output .= '<div id="live-blog-amp-share"><div class="social-share"><amp-accordion disable-session-states><section><h2><span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span><span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span></h2><div class="share-link">';
                 $breaking_output .= '<a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>';
                 $breaking_output .= '<a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>';
