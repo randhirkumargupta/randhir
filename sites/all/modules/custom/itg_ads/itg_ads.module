@@ -63,6 +63,10 @@ function itg_ads_block_info() {
     'info' => t('Ads- Medium Rectangle-RHS2-300x250'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['ads_medium_rectangl_mtf_300x200'] = array(
+    'info' => t('Ads- Medium Rectangle-RHS-MTF-300x200'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -152,6 +156,18 @@ function itg_ads_block_view($delta = '') {
       }
       else {
         $ad_script = get_itg_page_name('Medium Rectangle-RHS2-300x250');
+        $block['content'] = $ad_script;
+      }
+      break;
+    // Medium Rectangle-RHS-MTF-300x200
+    case 'ads_medium_rectangl_mtf_300x200':
+      $status = drupal_get_http_header("status");
+      $current_path_final = isset($current_path_array[0]) ? $current_path_array[0] : '';
+      if ($status == '404 Not Found' || $status == '403 Forbidden' || current_path() == 'user/login' || current_path() == 'user/registration' || current_path() == 'user' || $current_path_final == 'user' || $current_path_final == 'personalization' || $current_path_final == 'tv-show' || $current_path_final == 'product' || $current_path_final == 'cart' || $current_path_final == 'order-summary' || $current_path_final == 'order-confirmation' || $current_path_final == 'order' || $current_path_final == 'snap-post' || $theme == 'itgadmin') {
+        $block['content'] = '';
+      }
+      else {
+        $ad_script = get_itg_page_name('Medium Rectangle-RHS-MTF-300x200');
         $block['content'] = $ad_script;
       }
       break;

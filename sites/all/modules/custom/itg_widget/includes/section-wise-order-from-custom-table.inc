@@ -90,6 +90,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
         //$query->condition('n.status', 1)
         //$query->condition('n.type', $valid_content_type)->condition('n.status', 1)
           ->orderBy('iwo.weight', 'DESC')
+          ->orderBy('iwo.nid', 'DESC')
           ->groupBy('iwo.nid')
           ->range(0, $range);
         $result = $query->execute();
