@@ -114,6 +114,7 @@ function itg_indiatoday_yahoo_unionbudget2018_section() {
  */
 function getmsn_story_section_array() {
   $msn_story = array(
+    'msn/indiatoday/story-movies.xml' => 1206533,
     'msn/indiatoday/story-travel.xml' => 1206589,
     'msn/indiatoday/story-food.xml' => 1206793,
     'msn/indiatoday/story-lifestyle.xml' => 1206567,
