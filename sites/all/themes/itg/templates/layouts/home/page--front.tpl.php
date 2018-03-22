@@ -194,9 +194,9 @@ if ($theme != 'itgadmin') {
                                   <?php print get_itg_variable('itg_webcast_iframe'); ?>
                                 </div>
                                 <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
-                                  <div class="webcast_link webcast_title"><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url')); ?></div>
+                                <div class="webcast_link webcast_title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url')); ?></h3></div>
                                 <?php }else { ?>
-                                  <div class="webcast_title"><?php print get_itg_variable('itg_webcast_title') ?></div>
+                                <div class="webcast_title"><h3><?php print get_itg_variable('itg_webcast_title') ?></h3></div>
                                 <?php } ?>
                             </div>
                             <!-- replace home-trending-video if webcast enable end here -->
