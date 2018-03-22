@@ -113,7 +113,7 @@ function menu_list($result, $order_s = 1) {
       }
       $menu['id'] = isset($data['section_id']) ? $data['section_id'] : "";
       //$menu['order'] = isset($data['order_id']) ? $data['order_id'] : "";
-      $menu['order'] = $order_s;
+      $menu['order'] = "$order_s";
       $menu['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
       $menu['type'] = isset($data['type']) ? $data['type'] : "";
       $menu['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
@@ -175,7 +175,7 @@ function horizontal_menu_data($menu_type_id) {
       }
       $menu_list['id'] = isset($data['section_id']) ? $data['section_id'] : "";
       //$menu_list['order'] = isset($data['order_id']) ? $data['order_id'] : "";
-      $menu_list['order'] = $oredr_lc;
+      $menu_list['order'] = "$oredr_lc";
       $menu_list['title'] = isset($data['title']) ? strtoupper($data['title']) : "";
       $menu_list['type'] = isset($data['type']) ? $data['type'] : "";
       $menu_list['webview_url'] = isset($data['webview_url']) ? $data['webview_url'] : "";
@@ -282,7 +282,7 @@ function middleware_menu_subcat_list($cat_id) {
     foreach ($result as $cat_data) {        
       $sub_cat['s_id'] = $cat_data['section_id'];
       $sub_cat['s_title'] = strtoupper($cat_data['s_title']);
-      $sub_cat['s_order'] = $lc;
+      $sub_cat['s_order'] = "$lc";
       $sub_cat['s_is_new'] = $cat_data['is_new'];
       $all_sub_cat[] = $sub_cat;
       $lc++;
@@ -320,10 +320,14 @@ function humberger_menu_subcat_list($cat_id) {
 
   if ($total_sub_cat > 0) {
     foreach ($result as $cat_data) {
-      $sub_cat['s_id'] = $cat_data['section_id'];
-      $sub_cat['s_title'] = $cat_data['s_title'];
-      $sub_cat['s_order'] = $cat_data['order_id'];
-      $sub_cat['s_is_new'] = $cat_data['is_new'];
+      $order_val = $cat_data['order_id'];
+      $section_id = $cat_data['section_id'];
+      $s_title = $cat_data['s_title'];
+      $is_new = $cat_data['is_new'];
+      $sub_cat['s_id'] = "$section_id";
+      $sub_cat['s_title'] = "$s_title";
+      $sub_cat['s_order'] = "$order_val";
+      $sub_cat['s_is_new'] = "$is_new";
       $all_sub_cat[] = $sub_cat;
     }
   }

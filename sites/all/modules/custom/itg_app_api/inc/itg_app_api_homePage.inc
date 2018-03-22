@@ -163,13 +163,15 @@ function homePageJson() {
     foreach ($data['data'] as $key => $value) {
         if(count($value[0]) > 0){            
             foreach ($value as $key2 => $value2) {
-                $value2['order'] = $lc +1;
+                $order_v = $lc +1;
+                $value2['order'] = "$order_v";
                 $data_final['data'][$lc] = $value2;
                  $lc ++;
             }
         }
         else{
-            $value['order'] = $lc + 1;
+            $order_v = $lc +1;
+            $value['order'] = "$order_v";
             $data_final['data'][$lc] = $value;
             $lc ++;
         }
