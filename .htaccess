@@ -193,7 +193,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/yuvraj.jsp [NC]
   RewriteCond %{REQUEST_URI} !^/(globalroundtable|globalroundtable/(.*)|globalroundtablenepal|globalroundtablenepal/(.*)|globalroundtabledelhi|globalroundtabledelhi/(.*)|safaigiriawards|safaigiriawards/(.*))$ [NC]
  
-  RewriteCond %{REQUEST_URI} !^/(state-of-the-states|state-of-the-states/(.*)|state-of-the-states/2013|state-of-the-states/2013/(.*))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(state-of-the-states/(2011|2012|2013|2014|2015|2016)|state-of-the-states/([0-9]*).(jsp|html)|state-of-the-states/([0-9]*)/(.*).(jsp|html|js|css)|state-of-the-states/([0-9]*)/images/(.*)|state-of-the-states/([0-9]*)/css/(.*)|state-of-the-states/images/(.*).(jpg|gif))$ [NC]
   
   RewriteCond %{REQUEST_URI} !^/(distribution|distribution/(.*))$ [NC]
 # RewriteCond %{REQUEST_URI} !^/applications [NC]
@@ -509,8 +509,8 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^state-of-the-states/2016$ /staticpages/state-of-the-states/2016/index.html [L]
   RewriteRule ^state-of-the-states/2016/(.*) /staticpages/state-of-the-states/2016/$1 [L]
   
-  RewriteRule ^state-of-the-states$ /staticpages/state-of-the-states/2012/index.jsp [L]
-  RewriteRule ^state-of-the-states/(.*) /staticpages/state-of-the-states/2012/$1 [L]
+  RewriteRule ^state-of-the-states/2012$ /staticpages/state-of-the-states/2012/index.jsp [L]
+  RewriteRule ^state-of-the-states/2012/(.*) /staticpages/state-of-the-states/2012/$1 [L]
   RewriteRule ^distribution$ /staticpages/distribution/index.html [L]
   RewriteRule ^distribution/(.*)$ /staticpages/distribution/$1 [L] 
   RewriteRule ^petrol.jsp$ /staticpages/petrol/petrol.jsp [L]
