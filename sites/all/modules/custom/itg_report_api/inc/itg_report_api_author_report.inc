@@ -166,6 +166,7 @@ function author_report($start_date) {
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
+  p($author_list);
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
     $name = getAuthorNameDashboard($user_id);
