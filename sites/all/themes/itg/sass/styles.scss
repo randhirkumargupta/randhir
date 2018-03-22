@@ -576,12 +576,11 @@ header {
                     }
                 }
                 &.has-image {
-                    a {
-                        padding:0px;
+                    a {                        
                         img {
                             max-height: 37px;
                             width: auto;
-                            padding:0;
+                            padding:4px 0;
                         }
                     }
                 }

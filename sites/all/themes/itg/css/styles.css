@@ -627,12 +627,10 @@ header {
             width: 1px;
             right: 0;
             top: 0; }
-        #block-itg-layout-manager-header-block .navigation .menu li.has-image a {
-          padding: 0px; }
-          #block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
-            max-height: 37px;
-            width: auto;
-            padding: 0; }
+        #block-itg-layout-manager-header-block .navigation .menu li.has-image a img {
+          max-height: 37px;
+          width: auto;
+          padding: 4px 0; }
       #block-itg-layout-manager-header-block .navigation .menu#newlist li a:after {
         display: none; }
     #block-itg-layout-manager-header-block .navigation ul li.sponser-link a {
