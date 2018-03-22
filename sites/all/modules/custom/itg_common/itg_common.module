@@ -1616,7 +1616,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
       if ($Twitterdataid != 0) {
        $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
         $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
-        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        /*$value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
@@ -1649,7 +1649,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" " charset="utf-8"></script>';
-        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/
         
       }
     }
@@ -1668,7 +1668,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         //echo $amp_twitter; die();
         $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
         
-        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        /*$value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
@@ -1684,7 +1684,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
-        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/
       }
     }
   }
@@ -1696,10 +1696,10 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
       foreach ($value as $key1 => $value1) {
         $instagramcode = itg_get_instagram_shortcode($value1);
         if ($instagramcode) {
-          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
+          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" data-captioned data-default-framing width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
           
           $fullReplacesBodyText = str_replace($value1, $amp_instagram, $fullReplacesBodyText);
-          $value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
+          /*$value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
           $value2 = '<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
@@ -1711,7 +1711,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
           $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js" "></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
           $value2 = '<script async="" defer="defer" src="//www.instagram.com/embed.js"></script>';
-          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);          
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/          
         }
       }
     }
