@@ -20,14 +20,14 @@ function itg_manage_webcast_widget() {
   
   $form['itg_webcast_title'] = array(
     '#type' => 'textfield',
-    '#title' => t('Webcast Title'),
+    '#title' => t('Widget Title'),
     '#default_value' => get_itg_variable('itg_webcast_title', ''),
     '#required' => TRUE
   );
 
   $form['itg_webcast_url'] = array(
     '#type' => 'textfield',
-    '#title' => t('Webcast URL'),
+    '#title' => t('Widget URL'),
     '#default_value' => get_itg_variable('itg_webcast_url', ''),
   );
   
