@@ -128,6 +128,10 @@
   /* end bootstrap */
 .element-hidden {display: none;}
 .element-invisible {position: absolute !important;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);overflow: hidden;height: 1px;}
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
 /*start header css*/
 header {
   margin-bottom: 10px;
@@ -215,6 +219,9 @@ header {
       line-height: 28px;
       width: 65%;
       margin: 0 auto; }
+      #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu {
+    float: left;
+}
       #block-itg-layout-manager-header-block .top-nav .main-nav li.desktop-hide {
         display: none; }
       #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) {
@@ -324,7 +331,46 @@ header {
           padding: 7px 10px;
           white-space: normal;
           word-wrap: break-word; }
-
+#block-itg-layout-manager-header-block ul{ list-style:none; }
+#block-itg-layout-manager-header-block .top-nav ul li{display: inline-block;}
+body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active {color: #a9a9a9;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(2) a {padding-left: 0;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: #c00;
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    left: -5px;
+    box-shadow: 0 0 0 rgba(214, 2, 12, 0.8);
+    border-radius: 50%;
+    background: #c00;
+    animation: pulse 1.7s infinite;
+    content: "";
+}
+#block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
+    float: left;
+    width: 185px;
+    text-align: center;
+    height: 40px;
+}
+#block-itg-layout-manager-header-block .logo {
+    width: auto;
+    top: 15px;
+    position: absolute;
+}
+#block-itg-layout-manager-header-block .logo a {
+    display: block;
+    overflow: visible;
+}
+#block-itg-layout-manager-header-block .logo img {
+    padding-left: 4px;
+    padding-right: 0px;
+    vertical-align: top;
+    margin-bottom: -2px;
+}
 /*End header css*/
 
 
