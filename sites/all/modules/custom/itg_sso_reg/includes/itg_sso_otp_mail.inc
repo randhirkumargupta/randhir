@@ -16,7 +16,7 @@ function itg_sso_otp_mail_content($rand_otp, $to) {
   );
 
 //  $to = 'gourav.walia@kelltontech.com';
-  $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@intoday.com', TRUE);
   if ($mail['result']) {
     return TRUE;
   }
