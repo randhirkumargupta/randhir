@@ -110,10 +110,8 @@ function userSignupTWT($uname_social, $uid_social, $password) {
 
   // signup method
   $form_state = array();
-
-
   // check user_id is mail or mobile
-  $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
+  $url_info = substr(uniqid('', TRUE), -5);
 
   $form_state['values']['mobile'] = "";
   $form_state['values']['url_info'] = $url_info;
@@ -182,10 +180,6 @@ function userSignupTWT($uname_social, $uid_social, $password) {
       $rand_otp = rand(0, 9999);
       if (function_exists('itg_sso_first_time_otp_insert')) {
         itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
-        //itg_sso_sms_send($rand_otp, $mobile);
-      }
-      if (!empty($form_state['values']['mail'])) {
-        //itg_sso_otp_mail_content($rand_otp, $mail);
       }
     }
   }

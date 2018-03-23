@@ -12,28 +12,20 @@
  */
 function StoryDetailPageRerourceValue($id) {
   // variable decalartion
-
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
-
-  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
-  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-
-
   // list array building
   $data = generateStoryDeatilList($id);
   if (!empty($data['data']['title'])) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "$success_status_message";
+    $output_array['status_message'] = "";
   }
   else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
-
   $output_array['data'] = $data['data'];
-
   return $output_array;
 }
 
@@ -57,12 +49,19 @@ function generateStoryDeatilList($id) {
   $tid = $node->field_primary_category['und'][0]['value'];
   $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
   $large_image_fid = $node->field_story_extra_large_image['und'][0]['fid'];
-  $body_without_html = $node->body['und'][0]['value'];
+  $body_without_html = strip_tags($node->body['und'][0]['value']);
 
   $director = $node->field_mega_review_director[LANGUAGE_NONE]['0']['value'];
   $movie_plot = $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'];
-  $star_cast = $node->field_mega_review_cast['und'][0]['target_id'];
-  $star_cast_name = getCastName($star_cast);
+  $star_cast = $node->field_mega_review_cast['und'];
+  $star_cast_name = "";
+  if(count($star_cast) > 0){
+  foreach ($star_cast as $key => $value) {
+        $star_cast_name .= getCastName($value['target_id']).", ";
+    }
+    $star_cast_name = rtrim($star_cast_name, ", ");
+  }
+  
   $n_body = $node->body['und']['0']['value'];
   //$body_with_html = story_body_with_html($node);
   $body_with_html_data = formateNodeBodyToken($n_body);
@@ -118,8 +117,6 @@ function generateStoryDeatilList($id) {
   $content_org = $content;
   $tech_pros = array();
   $tech_pros = (array) getTechPros($content_org);
-
-  //$field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
   if (count($buzz_data) > 0) {
     $buzz_temp_flag = "1";
   }
@@ -143,16 +140,31 @@ function generateStoryDeatilList($id) {
 
   $tech_photo_gallery = "";
   $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
+  $caption = "";
+  $byline = "";
+  $img_info = getInfoData($large_image_fid);
+  $image_courtesy = $img_info['image_courtesy'];
+  $image_caption = $img_info['image_caption'];
 
-  //data array building
+  $caption = $node->field_story_extra_large_image['und'][0]['title'];
+  $style = '<style>*{ margin:0; padding:0}.allVideoSection{margin:10px auto; }.iframepotr{ width:100%!Important;height: calc(100vw * 1.7425)}.iframeland{ width:100%!Important;height: calc(100vw * 0.5625)}.iframesqu{width:100%!Important;height: calc(100vw)}iframe[src*="https://www.youtube.com/"]{ width:100%;height: calc(100vw * 0.5625)}iframe[src*="https://www.indiatoday.in/"]{width: 100%; height: calc(100vw * 0.5625)}</style>';
+  //$style = '<style>*{ margin:0; padding:0}.allVideoSection{margin:10px auto; }.iframepotr{ width:100%!Important;height: calc(100vw * 1.7425)}.iframeland{ width:100%!Important;height: calc(100vw * 0.5625)}.iframesqu{width:100%!Important;height: calc(100vw)}iframe[src*=\"https://www.youtube.com/\"]{ width:100%;height: calc(100vw * 0.5625)}iframe[src*=\"https://www.indiatoday.in/\"]{width: 100%; height: calc((100vw) * 0.5625)}</style>';
+  $js = '<script type="text/javascript"> var iframesrc = document.querySelectorAll("iframe[src*=\'www.facebook.com\']");for(var idx=0;idx < iframesrc.length;idx++){var url_string = iframesrc[idx].src;var url = new URL(url_string);var hheight = iframesrc[idx].height;var wwidth = url.searchParams.get("width");if(hheight == wwidth){iframesrc[idx].classList.add(\'iframesqu\')}else if(hheight > wwidth){iframesrc[idx].classList.add(\'iframepotr\')}else{iframesrc[idx].classList.add(\'iframeland\')}}</script>';
+  
+  //$body_with_html = $style."".$body_with_html."".$js; 
+ 
+
+    //data array building
+  $title = strip_tags($title);
+  $image_caption = strip_tags($image_caption);
 
   $data_array['category_id'] = "$tid";
   $data_array['category_title'] = "$term_name";
   $data_array['id'] = "$nid";
   $data_array['title'] = "$title";
   $data_array['large_image'] = "$extra_large_image";
-  $data_array['image_credit'] = "$byline";
-  $data_array['image_caption'] = "$caption";
+  $data_array['image_credit'] = "$image_courtesy";
+  $data_array['image_caption'] = "$image_caption";
   $data_array['updated_datetime'] = "$changed_datetime";
   $data_array['published_datetime'] = "$published_date";
   $data_array['buzzflag'] = "$buzz_temp_flag";
@@ -193,14 +205,22 @@ function generateStoryDeatilList($id) {
   }
 
   if ($tech_photo_gallery) {
-    $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
-  }
-  else {
-    $tech_photo_gallery = new stdClass();
+        $photo_list_array = getPhotolistforPhotostory($tech_photo_gallery);
+        $photolist = $photo_list_array;
+        $data_array['tech_photo_gallery'][0]['title'] = "PHOTO GALLERY";
+        $data_array['tech_photo_gallery'][0]['data'] = (array) $photolist[0]['photos'];
+     // $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
+    } else {
+    $tech_photo_gallery = array();
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
   }
-
-  $data_array['tech_photos'] = $story_tech;
+  if(count($story_tech[0]['data']) > 0){
+      $data_array['tech_photos'][0]['title'] = "SAMPLE PHOTOS";
+      $data_array['tech_photos'][0]['data'] = $story_tech[0]['data'];
+    }
+    else{
+      $data_array['tech_photos'] = array();
+    }
   if ($tech_pros['listcont'] > 0) {
     unset($tech_pros['listcont']);
     $data_array['tech_pros_cons'] = $tech_pros;
@@ -227,7 +247,7 @@ function generateStoryDeatilList($id) {
 
     $data_array['author'] = $author;
   }
-  if (trim($rating['r_cur_value']) == "" && trim($rating['r_upper_range']) == "" && trim($rating['r_is_star_rating']) == "") {
+  if (trim($rating['r_cur_value']) == ""  && trim($rating['r_is_star_rating']) == "") {
     $rating = new stdClass();
     $data_array['rating'] = $rating;
   }
@@ -247,7 +267,6 @@ function generateStoryDeatilList($id) {
  */
 function getTag($node) {
   $tag = array();
-
   $tag_obj = $node->field_story_itg_tags['und'];
   $loop_cont = 0;
   foreach ($tag_obj as $key => $value) {
@@ -258,7 +277,6 @@ function getTag($node) {
     $tag[$loop_cont]['t_title'] = "$term_name";
     $loop_cont++;
   }
-
   return $tag;
 }
 
@@ -270,7 +288,6 @@ function getTag($node) {
  */
 function getHighlight($node) {
   $heighlight = array();
-
   $heighlight_obj = $node->field_story_highlights['und'];
   $loop_cont = 0;
   foreach ($heighlight_obj as $key => $value) {
@@ -278,10 +295,29 @@ function getHighlight($node) {
     $heighlight[$loop_cont]['h_title'] = "$text";
     $loop_cont++;
   }
-
   return $heighlight;
 }
 
+/**
+ * function for getHighlightByNid
+ * @pram int $nid
+ *
+ * @return array
+ */
+function getHighlightByNid($nid) {
+  $heighlight = array();
+  $query = db_select('field_data_field_story_highlights', 'shl');
+  $query->fields('shl', array('field_story_highlights_value'));
+  $query->condition('shl.entity_id', $nid, '=');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $loop_cont = 0;
+  foreach ($result as $reskey => $resvalue) {
+    $text = $resvalue['field_story_highlights_value'];
+    $heighlight[$loop_cont]['h_title'] = "$text";
+    $loop_cont++;
+  }
+  return $heighlight; 
+}
 /**
  * function for get story rating
  * @pram object $node
@@ -300,16 +336,19 @@ function getRating($node) {
   return $rating;
 }
 
+/**
+ *
+ * @param type $node
+ *
+ * @return type
+ */
 function getRatings($node) {
-  $rating = array();
-  if ($field_story_rating != "") {
+    $rating = array();
     $field_story_rating = trim($node->field_story_rating['und'][0]['value']);
     $rating['r_cur_value'] = "$field_story_rating";
-    $rating['r_upper_range'] = "$field_story_rating";
+    $rating['r_upper_range'] = "5";
     $rating['r_is_star_rating'] = "$field_story_rating";
-  }
-
-  return $rating;
+    return $rating;
 }
 
 /**
@@ -319,70 +358,18 @@ function getRatings($node) {
  * @return array
  */
 function getCastName($nid) {
-  $query = db_select('node', 'n');
-  $query->fields('n', array('title'));
-  $query->condition('n.nid', $nid);
-
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result[0]['title'];
-}
-
-/**
- * function for story body html
- * @pram object $node
- *
- * @return string
- */
-function story_body_with_html($node) {
-  $full_body = $node->body['und']['0']['value'];
-  $body_android = getBodyDataForAndroid($full_body);
-  $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
-  $large_image_fid = $node->field_story_extra_large_image['und'][0]['fid'];
-  $caption = getImgCaption($large_image_fid);
-  $getHighlight_ar = getHighlight($node);
-  $getHighlight_str = "";
-  foreach ($getHighlight_ar as $key => $value) {
-    $text = $value['h_title'];
-    $getHighlight_str .= "<li>" . $text . "</li>";
+  $title = "";
+  if ($nid) {
+    $query = db_select('node', 'n');
+    $query->fields('n', array('title'));
+    $query->condition('n.nid', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    //return $result[0]['title'];    
+    foreach ($result as $key => $value) {
+        $title = $value['title'];
+    }
   }
-  $output = '';
-  $output .= '<div class="story-section">
-<div class="story-right ">
-                      <div class="">
-
-                              <div class="stryimg"><img alt="" title="" src="' . $extra_large_image . '">
-
-                                      <div class="photoby">
-                                                                    <div class="photoby-text">' . $caption . '</div>
-                                          </div>
-
-
-
-
-                </div>
-
-                  <div class="image-alt">' . $caption . '</div>
-
-              </div>
-
-                                <div class="briefcase desktop-hide">
-                    <h4>Briefcase</h4>
-                    <ul>
-                      ' . $getHighlight_str . '                   </ul>
-                  </div>
-
-              <div class="story-movie">
-                                <div class="movie-detail">
-                                                                      </div>
-              </div>
-              <div class="ad-blocker"></div>';
-  $output .= '<div class="description">' . $body_android . '
-                </div>';
-  $output .= ' <!-- render story technology chunk -->
-                          </div>
-</div>';
-
-  return $output;
+  return $title;
 }
 
 /**
@@ -402,28 +389,30 @@ function getStoryTechs($node) {
   $content_org = $content;
   /* remove pros & cons from contents start */
 
+
   $content = preg_replace('#<div class="tech-pros"(.|\s)+</div>#', '', $content);
   $content = preg_replace('#<div class="tech-cons"(.|\s)+</div>#', '', $content);
   /* remove pros & cons from contents start */
 
+
   $tect_img = $node->field_story_technology['und'];
-  //$storytech['tech_photo_gallery']['p_id'] = "";
 
   foreach ($tect_img as $key => $value) {
     $val_fid = $value['value'];
     $load_collection = field_collection_item_load($val_fid);
     $photo_ttile = $load_collection->field_technology_photo_title['und'][0]['value'];
     $img_url = completeFilePath($load_collection->field_technology_sample_photo['und'][0]['fid']);
-    $storytech['data'][$listcont]['title'] = $photo_ttile;
-    $storytech['data'][$listcont]['img'] = $img_url;
+    $img_info = getInfoData($val_fid);
+    $p_credit = $img_info['image_courtesy'];
+    $p_captions = $img_info['image_caption'];
+    $image_date = $img_info['image_date'];
+    $storytech['data'][$listcont]['title'] = "$photo_ttile";
+    $storytech['data'][$listcont]['img'] = "$img_url";
+    $storytech['data'][$listcont]['photo_date'] = "$img_url";
+    $storytech['data'][$listcont]['p_credit'] = "$p_credit";
+    $storytech['data'][$listcont]['p_captions'] = "$p_captions";
     $listcont++;
   }
-  //get tech pros
-  //$storytech['tech_pros_cons'] = $tech_pros;
-  //get tech pros
-  // static photo section
-  //$storytech['photos']['p_id'] = "358749";
-  //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
   $storytech_fi[] = (array) $storytech;
   if ($listcont) {
     return $storytech_fi;
@@ -443,7 +432,6 @@ function getStoryTechs($node) {
 function buildListicleNode($node) {
   $listiclenode = array();
   $listcont = 0;
-
   //get listcle temp
   $field_story_templates = $node->field_story_templates['und'][0]['value'];
   // get title
@@ -451,19 +439,16 @@ function buildListicleNode($node) {
   $listcont = 0;
   $listiclenode['templates'] = "$field_story_templates";
   $listiclenode['title'] = "$field_story_template_guru";
-  //$listiclenode['title'] = "$field_story_template_guru";
   //listicle loop data
   $field_story_listicle = $node->field_story_listicle['und'];
   //$listcont = 1;
   foreach ($field_story_listicle as $key => $value) {
     $collection_id = $value['value'];
     $load_collection = field_collection_item_load($collection_id);
-
     $color = $load_collection->field_listicle_color_new['und'][0]['jquery_colorpicker'];
     $type = $load_collection->field_story_listicle_type['und'][0]['value'];
     $description = $load_collection->field_story_listicle_description['und'][0]['value'];
     // loop data
-    //$listiclenode[$listcont]['templates'] = "$field_story_templates";
     $listiclenode['data'][$listcont]['description'] = "$description";
     $listiclenode['data'][$listcont]['type'] = "$type";
     $listiclenode['data'][$listcont]['color'] = "$color";
@@ -486,9 +471,6 @@ function buildFactoidNode($node) {
   $field_story_factoids_title = $node->field_story_factoids_title['und'][0]['value'];
   $listcont = 0;
   $factoidnode['title'] = "$field_story_factoids_title";
-  //$factoidnode['title'] = "$field_story_factoids_title";
-  //$listcont = 1;
-  // loop data - field_story_template_factoids
   $field_story_template_factoids = $node->field_story_template_factoids['und'];
   foreach ($field_story_template_factoids as $key => $value) {
     $factoids = $value['value'];
@@ -565,7 +547,6 @@ function getTechPros($content_org) {
   $dom->loadHTML($html);
   $xpath = new DOMXPath($dom);
   $nodes = $xpath->query('//*[@class="tech-pros"]');
-  //$nodes = $xpath->query('//ul[class="tech-pros"]');
   $listcont_flag = 0;
 
   $data = array();
@@ -587,7 +568,6 @@ function getTechPros($content_org) {
     $rate = "";
     foreach ($str_html->find('strong') as $element) {
       $rate = $element;
-      //$rate_dup = $rate;
     }
     $rate = ltrim($rate, "<strong>");
     $rate = rtrim($rate, "</strong>");
@@ -611,9 +591,7 @@ function getTechPros($content_org) {
       $listcont_flag = 1;
     }
   }
-  if (count($techpross_data['pros']['data']) < 0) {
-    //$techpross_data['pros']['label'] = "";
-  }
+
   $tech_cons = array();
   $tech_cons = getTechCons($content_org);
   $techpross_data['cons'] = $tech_cons;
@@ -629,9 +607,6 @@ function getTechPros($content_org) {
  * @return array
  */
 function getTechCons($content_org) {
-
-
-
   $techpross = array();
   $listcont = 0;
   $html = $content_org;
@@ -639,7 +614,6 @@ function getTechCons($content_org) {
   $dom->loadHTML($html);
   $xpath = new DOMXPath($dom);
   $nodes = $xpath->query('//*[@class="tech-cons"]');
-  //$nodes = $xpath->query('//ul[class="tech-pros"]');
 
   $data = array();
   for ($i = 0; $i < $nodes->length; $i++) {
@@ -659,12 +633,6 @@ function getTechCons($content_org) {
     $techpross_data['data'][$listcont]['title'] = $value;
     $listcont++;
   }
-
-  if (count($techpross_data['data']) < 0) {
-    //$techpross_data['label'] = "";
-  }
-
-
   return $techpross_data;
 }
 
@@ -682,8 +650,12 @@ function getPollsData($poll_id) {
   return $poll_data;
 }
 
-/*
+/**
  * Return the data of  poll
+ *
+ * @param int $poll_id
+ *
+ * @return array
  */
 function pollsdatalist($poll_id) {
 
@@ -711,14 +683,12 @@ function pollsdatalist($poll_id) {
     $news2[$lcont] = getPollLData($res);
     $lcont++;
   }
-
-
   return $news2;
 }
 
 /*
  * function for associative array based on expected json
- * @pram array
+ * @pram array 
  * @return array
  */
 function getPollLData($res) {
@@ -809,8 +779,8 @@ function getBalanklist($nid) {
  * @return array
  */
 function generateAuthorTagStory($node, $status) {
-  $byline = itg_common_get_latest_byline($node->nid, $status);
-  $byline_data = itg_get_multi_byline_details($byline);
+  //$byline = itg_common_get_latest_byline($node->nid, $status);
+  $byline_data = itg_get_multi_byline_details($node->nid, $status);
   $aid = $byline_data[0]['nid'];
   $a_title = $byline_data[0]['title'];
   $extra_laarge_file = file_load($byline_data[0]['extra_large_image']);
@@ -824,23 +794,24 @@ function generateAuthorTagStory($node, $status) {
   return $output;
 }
 /**
- * function for getHighlightByNid
- * @pram int $nid
+ * function for get getInfoData
+ * @pram int
  *
  * @return array
  */
-function getHighlightByNid($nid) {
-  $heighlight = array();
-  $query = db_select('field_data_field_story_highlights', 'shl');
-  $query->fields('shl', array('field_story_highlights_value'));
-  $query->condition('shl.entity_id', $nid, '=');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $loop_cont = 0;
-  foreach ($result as $reskey => $resvalue) {
-    $text = $resvalue['field_story_highlights_value'];
-    $heighlight[$loop_cont]['h_title'] = "$text";
-    $loop_cont++;
+function getInfoData($fid) {
+  $data = array();
+  if ($fid) {
+    $query = db_select('image_info', 'iminfo');
+    $query->fields('iminfo', array('image_courtesy', 'image_caption', 'image_date'));
+    $query->condition('iminfo.fid', $fid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $k => $res) {
+      $data['image_courtesy'] = $res['image_courtesy'];
+      $data['image_caption'] = $res['image_caption'];
+      $data['image_date'] = $res['image_date'];
+    }
   }
-  return $heighlight; 
+  return $data;
 }
 

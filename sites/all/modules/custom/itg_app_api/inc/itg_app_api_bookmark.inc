@@ -15,22 +15,17 @@ function bookmark_responce_data($user_id) {
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
-  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
-  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   // list array building
   $data = bookmark_responce_datalist($user_id);
-
-
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "$success_status_message";
+    $output_array['status_message'] = "";
   }
   else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
-
   //data array building
   $data_array['news'] = $data['data'];
   $output_array['data'] = $data_array;
@@ -83,7 +78,6 @@ function bookmark_set_data_responce($user_id, $node_ids) {
     }
   }
   // list array building
-  //$data = bookmark_set_responce_datalist($user_id);
   $output_array = bookmark_responce_data($user_id);
   return $output_array;
 }
@@ -105,10 +99,6 @@ function bookmark_del_data_responce($user_id, $node_ids) {
   $user_activity = 'read_later';
   $activity_date = date('d-m-Y');
   $activity_date_time = date('d-m-Y h:i:s');
-
-  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
-  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-
 
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -138,7 +128,7 @@ function bookmark_del_data_responce($user_id, $node_ids) {
 
   if (!empty($all_delete_bookmark)) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "$success_status_message";
+    $output_array['status_message'] = "";
     $output_array['data'] = array('bookmark_content' => $all_delete_bookmark);
   }
   else {
@@ -168,11 +158,9 @@ function bookmark_set_responce_datalist($user_id) {
       $bookmark_data = $people->find(array('uid' => $user_id, 'activity' => 'read_later'));
 
       foreach ($bookmark_data as $book_data) {
-
         $news['id'] = $book_data["nid"];
         $news2[] = $news;
       }
-      //print_r($news2);
     }
   }
 
@@ -190,6 +178,7 @@ function bookmark_set_responce_datalist($user_id) {
 function bookmark_responce_datalist($user_id) {
 
   $user_id = isset($user_id) ? $user_id : '';
+  $changed_datetime = "";
   $news = array();
   $news2 = array();
 
@@ -200,7 +189,6 @@ function bookmark_responce_datalist($user_id) {
       $bookmark_data = $people->find(array('uid' => $user_id, 'activity' => 'read_later'))->sort(array('activity_date_time' => -1));
 
       foreach ($bookmark_data as $book_data) {
-
         //to get some more details about the code
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
@@ -214,14 +202,11 @@ function bookmark_responce_datalist($user_id) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $k => $dd) {
-
           $changed = $dd['changed'];
           if ($changed) {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
           }
-          else {
-            $changed_datetime = "";
-          }
+
           $file_small_img_url = completeFilePath($dd['field_story_small_image_fid']);
           $file_large_img_url = completeFilePath($dd['field_story_large_image_fid']);
         }
@@ -236,7 +221,6 @@ function bookmark_responce_datalist($user_id) {
 
         $news2[] = $news;
       }
-      //print_r($news2);
     }
   }
 

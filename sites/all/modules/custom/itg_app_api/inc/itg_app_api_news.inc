@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for news API
+ * Inc file contains the functions for news API 
  */
 
 /**
@@ -18,15 +18,6 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $photo_list_array = array();
   $updated_datetime = "";
 
-  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
-  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-
-  $dis_count = fetchMasterConfigData('news_display_count');
-  $display_count = isset($dis_count) ? $dis_count : "10";
-
-  $pag_cap = fetchMasterConfigData('news_pagination_cap');
-  $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
-
   $term = taxonomy_term_load($tid);
   $term_name = $term->name;
   if (!$tid) {
@@ -37,7 +28,7 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $data = generateNewsCategoryList($tid, $pageno);
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "$success_status_message";
+    $output_array['status_message'] = "";
   }
   else {
     $output_array['status_code'] = "0";
@@ -56,8 +47,8 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $data_array['title'] = "$term_name";
   $data_array['layout_id'] = "0";
   $data_array['news_count'] = "$datacount";
-  $data_array['news_display_count'] = "$display_count";
-  $data_array['news_pagination_cap'] = "$pagination_cap";
+  $data_array['news_display_count'] = "10";
+  $data_array['news_pagination_cap'] = "50";
   $data_array['updated_datetime'] = "$data_up_time";
 
 
@@ -83,20 +74,13 @@ function generateNewsCategoryList($tid, $pageno) {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
-  $dis_count = fetchMasterConfigData('news_display_count');
-  if (!empty($dis_count) && is_numeric($dis_count)) {
-    $range_max = $dis_count;
-  }
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
-  //$type = "videogallery, photogallery, story";
   $news_list_array = array();
   $photolist = array();
   $videolist = array();
@@ -115,7 +99,6 @@ function generateNewsCategoryList($tid, $pageno) {
         $tid_list[] = $value->tid;
       }
     }
-    //p($tid_list);
     // code vid=14  end
     // select node belong from current term id or child term id
 
@@ -158,14 +141,22 @@ function generateNewsCategoryList($tid, $pageno) {
 
 
     //end
-
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
+    /*
+    if ($tid == 0 && count($tid_list) > 0) {
+        $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-90 days"));
+    else{
+        $query->condition('ti.tid', $tid, '=');
+    }*/
+    if ($tid > 0) {
+        $query->condition('ti.tid', $tid, '=');
+    }
+    $interval = itg_app_time_interval($tid);    
+    $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
-    //$query->condition('n.created', $d2, '>=');
+    $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
@@ -214,6 +205,13 @@ function generateNewsCategoryList($tid, $pageno) {
       else {
         $changed_datetime = "";
       }
+      // Get Publish time:
+      $pub_date = get_content_publish_date($nid);
+      if (!empty($pub_date)) {  
+        $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+      } else {
+        $pub_date = "";
+      }
       $field_primary_category_value = $resvalue['field_primary_category_value'];
       $term = taxonomy_term_load($field_primary_category_value);
       $term_name = $term->name;
@@ -228,6 +226,9 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_pcategory_name'] = "$term_name";
       $news_list_array[$listcount]['n_rating'] = "";
       $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
+      $heighligth = array();
+      $heighligth = (array) getHighlightByNid($nid);      
+      $news_list_array[$listcount]['n_highlight'] = $heighligth;
       if ($type == "photogallery") {
         $node_data = node_load($nid);
 
@@ -258,15 +259,15 @@ function generateNewsCategoryList($tid, $pageno) {
         $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
         $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
       }
-      $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
+      $news_list_array[$listcount]['n_updated_datetime'] = "$pub_date";
 
       // photo list array
 
       if ($type == "photogallery") {
-        $photolist = getPhotolist($nid);
+        $photolist = (object) getPhotolist($nid, 1);
       }
       if ($type == "photostory") {
-        $photolist = getPhotostorylist($nid);
+        $photolist = (object) getPhotostorylist($nid);
       }
       if (count($photolist) == 0) {
         $photolist = (object) $photolist;
@@ -277,7 +278,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
       // video list array
       if ($type == "videogallery") {
-        $videolist = getVideolist($nid);
+        $videolist = (object) getVideolist($nid, 1);
       }
       if (count($videolist) == 0) {
         $videolist = (object) $videolist;
@@ -292,7 +293,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
   $data['lcount'] = $listcount;
   $data['data'] = $news_list_array;
-  $data['updated_datetime'] = $changed_datetime;
+  $data['updated_datetime'] = $pub_date;
   return $data;
 }
 
@@ -302,7 +303,7 @@ function generateNewsCategoryList($tid, $pageno) {
  *
  * @return array
  */
-function getPhotolist($nid) {
+function getPhotolistforPhotostory($nid, $source = 0) {
   // variable decalaration
   $photolist = array();
   $photolist_loop = array();
@@ -310,16 +311,6 @@ function getPhotolist($nid) {
   $galleryimg = $node->field_gallery_image['und'];
   $lcont = 0;
   foreach ($galleryimg as $key => $value) {
-
-    /* $fc = field_collection_field_get_entity($value);
-          $fid = $fc->field_api_image['und'][0]['fid'];
-          $fid_file = $fid;
-          $img_url = completeFilePath($fid_file);
-          // custom function for get img caption
-          $caption = getImgCaption($fid);
-          // custom function for get img byline
-          $byline = getImgByline($fid); */
-
     $fc = field_collection_field_get_entity($value);
 
     $fid = $fc->field_image_id['und'][0]['value'];
@@ -328,25 +319,68 @@ function getPhotolist($nid) {
     }
     $uri = $fc->field_images['und'][0]['uri'];
     $file_uri = file_create_url($uri);
-    //$file_uri_fi = field_data_field_story_large_image($file_uri);
     $fid_file = $fid;
     $img_url = completeFilePath($fid_file);
-    // custom function for get img caption
-    //$caption = getImgCaption($fid);
-    $caption = $fc->field_image_caption['und'][0]['value'];
-    // custom function for get img byline
-    //$byline = getImgByline($fid);
-    $byline = $fc->field_credit['und'][0]['value'];
+    $title = strip_tags($fc->title);
+    $caption = strip_tags($fc->field_image_caption['und'][0]['value']);
+    $byline = strip_tags($fc->field_credit['und'][0]['value']);
+    $photo_date = date("Y-m-d H:i:s", $node->created);    
     $photo_story_img = image_style_url('photo_slider_753x543', $uri);
-    //$photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files","http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public",$photo_story_img);
+    $photolist_loop[$lcont]['title'] = "$title";
+    $photolist_loop[$lcont]['img'] = "$photo_story_img";
+    $photolist_loop[$lcont]['photo_date'] = "$photo_date";
+    $photolist_loop[$lcont]['p_credit'] = "$byline";
+    $photolist_loop[$lcont]['p_caption'] = "$caption";
+    $lcont++;
+  }
+  if ($source == 1) {
+    $photolist['photos'] = (array) $photolist_loop;
+  }
+  else {
+    $photolist[0]['photos'] = (array) $photolist_loop;
+  }
+  return $photolist;
+}
 
+/**
+ * function for generate getPhotolist array
+ * @pram int $nid
+ *
+ * @return array
+ */
+function getPhotolist($nid, $source = 0) {
+  // variable decalaration
+  $photolist = array();
+  $photolist_loop = array();
+  $node = node_load($nid);
+  $galleryimg = $node->field_gallery_image['und'];
+  $lcont = 0;
+  foreach ($galleryimg as $key => $value) {
+    $fc = field_collection_field_get_entity($value);
+
+    $fid = $fc->field_image_id['und'][0]['value'];
+    if (!$fid > 0) {
+      $fid = $fc->field_images['und'][0]['fid'];
+    }
+    $uri = $fc->field_images['und'][0]['uri'];
+    $file_uri = file_create_url($uri);
+    $fid_file = $fid;
+    $img_url = completeFilePath($fid_file);
+    $caption = strip_tags($fc->field_image_caption['und'][0]['value']);
+    $byline = strip_tags($fc->field_credit['und'][0]['value']);
+    $photo_story_img = image_style_url('photo_slider_753x543', $uri);
     $photolist_loop[$lcont]['np_id'] = "$fid";
     $photolist_loop[$lcont]['np_image'] = "$photo_story_img";
     $photolist_loop[$lcont]['np_credit'] = "$byline";
     $photolist_loop[$lcont]['np_caption'] = "$caption";
     $lcont++;
   }
-  $photolist[0]['photos'] = (array) $photolist_loop;
+  if ($source == 1) {
+    $photolist['photos'] = (array) $photolist_loop;
+  }
+  else {
+    $photolist[0]['photos'] = (array) $photolist_loop;
+  }
   return $photolist;
 }
 
@@ -356,15 +390,10 @@ function getPhotolist($nid) {
  *
  * @return array
  */
-function getVideolist($nid) {
+function getVideolist($nid, $source = 0) {
   // variable declaration
   $videolist = array();
-
-  // select node belong from current nid
-
-
   $query = db_select('node', 'n');
-  //join  for field value
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -406,10 +435,6 @@ function getVideolist($nid) {
   $query->condition('n.nid', $nid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
-
-    // node feed tag
-
-
     $title = $resvalue['title'];
     $type = $resvalue['type'];
     $nid = $resvalue['nid'];
@@ -469,9 +494,21 @@ function getVideolist($nid) {
     $videolist['nv_large_image'] = "$file_large_img_url";
 
     if (!empty($videotag['dailymotion'])) {
-      $videolist['nv_is_jwplayer'] = "1";
-      $videolist['nv_url'] = $videotag['dailymotion']['video_id'];
-      $videolist['nv_download_url'] = "";
+      $videoids = get_video_in_fieldcollection_by_nid($nid);
+      foreach ($videoids as $keys => $video_value) {
+        if ($video_value->video_id != '') {
+            $video_id = $video_value->video_id;
+        } elseif ($video_value->solr_video_id != '') {
+            $video_id = $video_value->solr_video_id;
+        }
+      }
+      $inter_video_details = internal_video_bitrate_data($video_id);
+      $bitrate_url = $inter_video_details['bitrate_url'];
+      $file_url_1 = $inter_video_details['file_url'];
+                
+      $videolist['nv_is_jwplayer'] = "0";
+      $videolist['nv_url'] = $bitrate_url; //$videotag['dailymotion']['video_id'];
+      $videolist['nv_download_url'] = $file_url_1;
     }
     elseif (!empty($videotag['migrated'])) {
       $videolist['nv_is_jwplayer'] = "0";
@@ -485,7 +522,12 @@ function getVideolist($nid) {
     $videolist['nv_duration'] = "$field_video_duration_value";
     $videolist['nv_show_ad'] = "0";
   }
-  $videolist2[0] = $videolist;
+  if ($source == 1) {
+    $videolist2 = $videolist;
+  }
+  else {
+    $videolist2[0] = $videolist;
+  }
   return $videolist2;
 }
 
@@ -496,10 +538,11 @@ function getVideolist($nid) {
  * @return int $nv_count
  */
 function getNodeViewCount($nid) {
-
-  $node_anyalytics = analytics_node_data($nid, 'array');
-  $nv_count = $node_anyalytics['node_view_count'];
-  return $nv_count;
+  $nc_view = 0;
+  return $nc_view;
+  $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
+  $nc_view = $node_anyalytics['node_view_count'];
+  return $nc_view;
 }
 
 /*
@@ -520,7 +563,7 @@ function getNodeShareCount($nid) {
  * 'total' will return the count of it
  * @return an Associated array with count all these values.
  */
-function analytics_node_data($nid, $total) {
+function analytics_node_data($nid, $total, $source) {
 
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -552,6 +595,10 @@ function analytics_node_data($nid, $total) {
 
       // Appended 0 as in mongo database 0 is going.
       $count_condition = array('nid' => "0$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      if ($source == "commentcont") {
+        $count_condition = array('nid' => "0$nid");
+      }
+
       $count_result = $count_collection->find($count_condition);
       foreach ($count_result as $count_document) {
         $data_count_node_like = $count_document['like_count'];
@@ -595,20 +642,24 @@ function analytics_node_data($nid, $total) {
       $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
       //END
     }
-
-    if ($total == 'total') {
-      // return the total count
-      // Caculate sum of all data.
-      foreach ($analytics_data_array as $counting) {
-        if (is_int($counting)) {
-          $final_count_result = $final_count_result + $counting;
-        }
-      }
-      return $final_count_result;
+    if ($source == "commentcont") {
+      return $analytics_data_array;
     }
     else {
-      // return the associated Array
-      return $analytics_data_array;
+      if ($total == 'total') {
+        // return the total count
+        // Caculate sum of all data.
+        foreach ($analytics_data_array as $counting) {
+          if (is_int($counting)) {
+            $final_count_result = $final_count_result + $counting;
+          }
+        }
+        return $final_count_result;
+      }
+      else {
+        // return the associated Array
+        return $analytics_data_array;
+      }
     }
   }
 }
@@ -657,11 +708,13 @@ function getPhotostorylist($nid) {
  * @param type $fid
  */
 function getPhotostoryPhotodetail($fid) {
-  $query = db_select('image_info', 'img');
-  $query->fields('img', array('image_caption', 'image_photo_grapher'));
-  $query->condition('img.fid', $fid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result;
+  if ($fid) {
+    $query = db_select('image_info', 'img');
+    $query->fields('img', array('image_caption', 'image_photo_grapher'));
+    $query->condition('img.fid', $fid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
 }
 
 /**
@@ -672,14 +725,13 @@ function getPhotostoryPhotodetail($fid) {
  * @return $type
  */
 function customNodeCountChildNews($tid, $type, $child_count = TRUE) {
-
+  global $language;
   $tids = array($tid);
   if ($child_count) {
     $tids = array_merge($tids, term_get_children_ids($tid));
   }
-  global $language;
   $langs = array($language->language);
-  $langs[] = 'und';
+  $langs[] = language_default();
   $query = db_select('taxonomy_index', 't');
   $query->condition('tid', $tids, 'IN');
   $query->join('node', 'n', 't.nid = n.nid');
