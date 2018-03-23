@@ -11,7 +11,7 @@ if (!empty($photo_node->field_photogallery_configuration['und'])) {
     }
   }
 }
-
+die('In templates');
 $tid = $photo_node->field_primary_category[LANGUAGE_NONE][0]['value'];
 $term = taxonomy_term_load($tid);
 $primary_category_name = itg_common_custompath_insert_val($term->name);
