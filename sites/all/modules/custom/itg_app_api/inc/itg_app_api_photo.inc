@@ -130,8 +130,8 @@ function generatePhotoCategoryList($tid, $pageno) {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
 
-    if ($tid == 0 && count($tid_list) > 0) {
-        $query->condition('ti.tid', $tid_list, 'IN');
+    if ($tid == 0 ) {
+        //$query->condition('ti.tid', $tid_list, 'IN');
         $query->condition('ti.tid', 1208521, '=');
     }
     else{
