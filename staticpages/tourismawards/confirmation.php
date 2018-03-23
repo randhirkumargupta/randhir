@@ -139,6 +139,20 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
           India Through Your Eyes</span> </li>
         <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/White-river-rafting--Uttarakhand_1148x411.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
           India Through Your Eyes</span> </li>
+          
+          
+          
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/up.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/puducherry.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/mahabalipuram.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+
+        <li class="swiper-slide"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/tourism/images/slider/banaras.jpg" alt="India Today Tourism Awards" title="India Today Tourism Awards" /> <span class="bannerTxt">India Today Tourism Awards:<br>
+          India Through Your Eyes</span> </li>
+          
       </ul>
       <div class="sliderLeftShadow"></div>
       <div class="sliderRightShadow"></div>
