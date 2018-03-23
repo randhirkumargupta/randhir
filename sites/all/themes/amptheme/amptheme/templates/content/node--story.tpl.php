@@ -68,11 +68,11 @@ if (!empty($content)):
     $photo_story_section_class = ' photo-story-section';
   }
   $node_title = $content['amp_title'];
-  $node_title = str_replace(array('\'', '"'), '', $node_title);
   $node_image_alt = '';
   $node_image_title = '';
   $node_image_alt = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
   $node_image_title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
+  // source type array
   $source_type_arr = array('PTI' , 'IANS', 'ANI');
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
@@ -121,129 +121,121 @@ if (!empty($content)):
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
           <div class="story-left"> 
               <div class="posted-by">
-                    <?php
-                      $byline_detail = $byline_id[0];
-                      $extra_large_file = file_load($byline_detail['extra_large_image']);
-                      $bylineextra_large_image = $extra_large_file->uri;
-                      ?>
-                      <div class="profile-pic">
-                          <?php
-                          if (!empty($bylineextra_large_image)) {
-                            $file = image_style_url('user_picture', $bylineextra_large_image);
-                          }
-                          else {
-                            $file = file_create_url(file_default_scheme() . '://images/default-user.png');
-                          }
-                          print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="' . $file . '"></amp-img>';
-                          ?>
-                      </div>
-                      <div class="profile-detail">
-                          <ul class="profile-byline">
-                              <?php
-                              if (is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
-                                echo '<li><ul>';
-                                foreach ($byline_id_mobile as $mobile_key => $mobile_val) {
-                                  if (!empty($mobile_val['title'])) {
-                                    ?>	 
-                                    <li class="title"><?php if (!empty($mobile_val['title'])) {
-                            print t($mobile_val['title']);
-                          } ?></li>
-                                      <?php
-                                      }
-                                    }
-                                    echo '</ul></li>';
-                                  }
-                                  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
-                                    ?>
-                                <li><?php
-                                    $city = array();
-                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
-                                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
-                                    }
-                                    print implode(' | ', $city);
-                                    ?>
-                                </li>
-                                    <?php
-                                  }
-                                  ?>
-                              <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
-                                  <?php
-                                  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
-                                    print date('H:i', $node->created);
-                                  }
-                                  else {
-                                    print date('H:i', $node->changed);
-                                  }
-                                  ?>
-                                  IST </li>
-                          </ul>
-                      </div>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
         <?php } ?>
         <!-- For buzzfeed section start -->
         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
-        <div class="buzzfeed-byline">
-                <div class="posted-by">
-                    <?php
-                    $byline_detail = $byline_id[0];
-                    $extra_large_file = file_load($byline_detail['extra_large_image']);
-                    $bylineextra_large_image = $extra_large_file->uri;
-                    ?>
-                    <div class="profile-pic">
-                        <?php
-                        if (!empty($bylineextra_large_image)) {
-                          $file = image_style_url('user_picture', $bylineextra_large_image);
-                        }
-                        else {
-                          $file = file_create_url(file_default_scheme() . '://images/default-user.png');
-                        }
-                        print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="' . $file . '"></amp-img>';
-                        ?>
-                    </div>
-                    <div class="profile-detail">
-                        <ul class="profile-byline">
-                            <?php
-                            if (is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
-                              echo '<li><ul>';
-                              foreach ($byline_id_mobile as $mobile_key => $mobile_val) {
-                                if (!empty($mobile_val['title'])) {
-                                  ?>	 
-                                  <li class="title"><?php if (!empty($mobile_val['title'])) {
-                          print t($mobile_val['title']);
-                        } ?></li>
-                                <?php
-                                }
-                              }
-                              echo '</ul></li>';
-                            }
-                            if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
-                              ?>
-                              <li><?php
-                                  $city = array();
-                                  foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
-                                    $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
-                                  }
-                                  print implode(' | ', $city);
-                                  ?>
-                              </li>
-                                  <?php
-                                }
-                                ?>
-                            <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
-                                <?php
-                                if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
-                                  print date('H:i', $node->created);
-                                }
-                                else {
-                                  print date('H:i', $node->changed);
-                                }
-                                ?>
-                                IST </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          <div class="buzzfeed-byline">
+            <div class="posted-by">
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
+					  </ul>
+                 </div>
+              </div>
+          </div>
 
         <?php } ?>
         <!-- Check the story type whether it is a photo story or not-->
@@ -372,10 +364,9 @@ if (!empty($content)):
                       //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
                                     //<i class="fa fa-camera"></i></span>';
                     }
-                    if (isset($file_uri)) {
+                     if (isset($file_uri)) {
                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
-                    }
-                    
+                     }
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -411,24 +402,25 @@ if (!empty($content)):
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
                   <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
-                <?php } ?>                            
-              </div>
-              <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-                <div class="briefcase mhide">
-                  <h4><?php print t('HIGHLIGHTS'); ?></h4>
-                  <ul>
-                    <?php
-                    foreach ($node->field_story_highlights['und'] as $high) {
-                      print '<li>' . $high['value'] . '</li>';
-                    }
-                    ?>
-                  </ul>
-                </div>              
-              <?php } ?>  
+											<?php } ?>                            
+										</div>
+							<?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
+								<div class="briefcase mhide">
+									<h4><?php print t('HIGHLIGHTS'); ?></h4>
+									<ul>
+										<?php
+										foreach ($node->field_story_highlights['und'] as $high) {
+											print '<li>' . $high['value'] . '</li>';
+										}
+										?>
+									</ul>
+								</div>              
+              <?php } ?>
+              
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
-                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">                            
-                  </div>
+                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">                      
+                  </div>                            
                 <?php endif; ?>
                 <div class="movie-detail">
                   <?php if (!empty($node->field_mega_review_cast)): ?>
@@ -469,6 +461,7 @@ if (!empty($content)):
                 } else {
                 $story_body = $node->body['und'][0]['value'];
                 }
+                $story_body = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $story_body);
                 // check video is delete form video content   
                 if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
                   itg_videogallery_remove_delete_video_form_body_html_body($story_body);
@@ -502,8 +495,7 @@ if (!empty($content)):
                                  </section>
                                  </amp-accordion>
                                  </div>
-                                 </div>';
-                                */ 
+                                 </div>'; */
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><div class="scroll-x"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
@@ -548,24 +540,28 @@ if (!empty($content)):
                   }
                 }
                 // Code for Tech Photo gallery
-                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) { 
                   if ((!empty($node->field_technology_photogallery['und']))) {
-                    if (itg_common_get_node_status($node->field_technology_photogallery['und'][0]['target_id']) == 1) {
+				    if(itg_common_get_node_status($node->field_technology_photogallery['und'][0]['target_id']) == 1){
                       $gallery_node = node_load($node->field_technology_photogallery['und'][0]['target_id']);
                       $tech_gallery_images = $gallery_node->field_gallery_image[LANGUAGE_NONE];
                       $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_node->nid);
                       $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, 'amp');
                       $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
-                    }
-                    else {
-                      $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
-                    }
+					}
+					else{
+					  $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+					}
                   }
                   else {
                     $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
                   }
                 }
-    //code for listicle story
+                // Remove Expert chunk
+                if (strpos($story_body, '[ITG:EXPERT-CHUNK]')) {
+					$story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
+				}                
+                //code for listicle story
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
                   if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {

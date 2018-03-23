@@ -13,8 +13,8 @@ if(!empty($node->field_story_reporter)){
       <span class="video-byline"><?php print $byline_title; ?></span>
       <?php } ?>
       <span class="video-ppdate"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
-  </div>
-   <?php
+  </div> 
+  <?php
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
     if($source_type != 'migrated') { ?>
     <div class="amp-photo-slider">
@@ -36,11 +36,11 @@ if(!empty($node->field_story_reporter)){
       else {
         $description = $node->field_video_kicker[LANGUAGE_NONE][0]['value'];
       }
-      if (function_exists('itg_custom_amp_body_filter')) {
-        $description = itg_custom_amp_body_filter($description);
-      }
-
-    foreach ($videoids as $keys => $video_value) {
+      if(function_exists('itg_custom_amp_body_filter')) {
+	    $description = itg_custom_amp_body_filter($description);
+	  } 
+	  $description = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $description);                
+      foreach ($videoids as $keys => $video_value) {
         if (function_exists('get_amp_video_time')) {
         $video_time = get_amp_video_time($node->nid, 'videogallery', 'field_video_duration');
         } 
@@ -110,10 +110,11 @@ if(!empty($node->field_story_reporter)){
                   } else {
                 $description = $video_kicker[0]->field_video_kicker_value;
               }
-              if (function_exists('itg_custom_amp_body_filter')) {
-                $description = itg_custom_amp_body_filter($description);
-              }
-  ?>
+              if(function_exists('itg_custom_amp_body_filter')) {
+			    $description = itg_custom_amp_body_filter($description);
+		      }
+		      $description = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $description);
+              ?>
         <amp-carousel width="300"
                   height="280"
                   layout="responsive"
