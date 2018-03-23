@@ -530,13 +530,11 @@ function report_getSectionCountData_report($start_date, $end_date, $all_tids,$ty
     $section_list_count = array();
     $unique_tids = array_unique($all_tids);
     $loop_count = 0;
-    $countt = 0;
     foreach ($unique_tids as $value) {
         //p($value);die();
         $n_cont = 0;
         $n_cont = countTidNode_report($start_date, $end_date, $value,$type, $status);
         if ($n_cont) {
-          $countt += $n_cont;
             $ntid = $value;
             $term = taxonomy_term_load($ntid);
             $section_data[$loop_count]['count'] = "$n_cont";
