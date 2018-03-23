@@ -1268,10 +1268,6 @@ ul.header-menu li:first-child {
     left: 25px;
     transform: translateY(-60%)
 }
-.live-block .breaking-section amp-instagram {
-    width: 490px;
-    margin: 0 auto
-}
 .live-block .timeline {
     border-bottom: 1px solid #ddd;
     padding-bottom: 25px;
