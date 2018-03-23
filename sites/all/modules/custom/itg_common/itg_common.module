@@ -1539,7 +1539,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   
   $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
 
-  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));  
+  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
   $fullReplacesBodyText = trim(preg_replace('/mce_src="[^"]*/', '', $fullReplacesBodyText));
   $fullReplacesBodyText = trim(preg_replace("/mce_src='[^']*/", "", $fullReplacesBodyText));
 
@@ -1548,7 +1548,6 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   $fullReplacesBodyText = trim(preg_replace('/<style(.*)\/style>/', '', $fullReplacesBodyText));
   $fullReplacesBodyText = preg_replace('#<div class="clicktoenlarge"[^>]*>(.*?)</div>#', '', $fullReplacesBodyText);
   $fullReplacesBodyText = str_replace('xml:lang="en"', '', $fullReplacesBodyText);
-
   preg_match_all('/<img.*src=\"(.*)\".*>/isU', $fullReplacesBodyText, $matches);
 
   $i = 0;
@@ -1612,7 +1611,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
       if ($Twitterdataid != 0) {
        $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
         $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
-        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        /*$value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
@@ -1645,7 +1644,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" " charset="utf-8"></script>';
-        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/
         
       }
     }
@@ -1664,7 +1663,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         //echo $amp_twitter; die();
         $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
         
-        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        /*$value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
@@ -1680,7 +1679,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
-        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/
       }
     }
   }
@@ -1692,10 +1691,10 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
       foreach ($value as $key1 => $value1) {
         $instagramcode = itg_get_instagram_shortcode($value1);
         if ($instagramcode) {
-          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
+          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" data-captioned data-default-framing width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
           
           $fullReplacesBodyText = str_replace($value1, $amp_instagram, $fullReplacesBodyText);
-          $value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
+          /*$value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
           $value2 = '<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
@@ -1706,6 +1705,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
           $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js" "></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//www.instagram.com/embed.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/          
         }
       }
     }
@@ -1718,7 +1719,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
  * Implements itg_get_instagram_shortcode();
  */
 function itg_get_instagram_shortcode($bodystr) {
-
+  $shortcode = false;
   preg_match("'<blockquote class=\"instagram-media\"(.*)</blockquote>'si", $bodystr, $match);
   if ($match) {
     preg_match_all('/<a href="(.*)">/', $bodystr, $a);
@@ -1731,13 +1732,23 @@ function itg_get_instagram_shortcode($bodystr) {
       $hrefs[] = $tag->getAttribute('href');
       }
     }
-    $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
-    $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
-    $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
-    $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
-    return $twitter_url_emb_id;
+    //~ $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+    //~ $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
+    //~ $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+    //~ $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
+    //~ return $twitter_url_emb_id;
+    foreach ($hrefs as $key => $href) {
+      if (preg_match('&(*UTF8)instagram.com/p/([^/]+)/?&i', $href, $matches)) {
+        if (!empty($matches[1])) {
+          $shortcode = $matches[1];
+          $url = $href;
+          break;
+        }
+      }
+    }
   }
-  return false;
+  //return false;
+  return $shortcode;
 }
 
 /**
