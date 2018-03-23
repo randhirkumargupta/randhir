@@ -330,7 +330,7 @@ function homePageJsonPackagelist($tid) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 5;
+    $range_max = 3;
     $range_min = 0;
     if (!$pageno == 0) {
         $range_min = $pageno * $lcont;
