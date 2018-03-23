@@ -2110,8 +2110,8 @@ function itg_app_manager_packages_form($form, &$form_state) {
         $default_checked[] = _get_term_from_name($package->name, 'category_management');
     }
 
-    $package_term = taxonomy_get_term_by_name('packages', 'category_management'); // for after local
-    $package_term = taxonomy_get_term_by_name('india', 'category_management');
+    $package_term = taxonomy_get_term_by_name('Packages', 'category_management'); // for after local
+    //$package_term = taxonomy_get_term_by_name('india', 'category_management');
     $key = "";
     $key = arg(1);
     foreach ($package_term as $pack_tid => $pack_obj) {
