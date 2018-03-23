@@ -202,17 +202,9 @@ function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
     //story count between
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
-    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-    $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
-    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
-    $query->leftJoin('field_data_field_reporter_profile_type', 'repro', 'byli.byline_id=repro.entity_id');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
-    $query->fields('fpc', array('field_primary_category_value'));
-    $query->fields('npd', array('field_itg_content_publish_date_value'));
-    $query->fields('byli', array('byline_id', 'publish_status'));
-    $query->fields('repr', array('field_reporter_email_id_value'));
-    $query->fields('repro', array('field_reporter_profile_type_value'));
+    $query->join('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    $query->join('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->fields('n', array('nid'));
     //end
 //    if ($start_date != "na") {
 //        $query->condition('n.created', $start_date, ">=");
@@ -246,15 +238,13 @@ function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
       $query->condition('fpc.field_primary_category_value', '1206640', '!='); //PTI category
     }
     if($tid != '1206640'){
-      $query->condition('ti.tid', $tid, '='); 
+      $query->condition('fpc.field_primary_category_value', $tid, '='); 
     }
     if($type == 'story'){
-      $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+      //$query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
     }    
     $query->groupBy('n.nid');
     $query->condition('n.status', $status)->orderBy('n.created', 'DESC');
-    
-    //print strtr((string)$query,$query->arguments());die;
     $result = $query->execute()->fetchAll();
     $total_records_between = count($result);
     return $total_records_between;
@@ -332,7 +322,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $query->condition('n.status', $status);
     }
     $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-    //print strtr((String)$query, $query->arguments());die;
+//    print strtr((String)$query, $query->arguments());die;
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $loopc = 1;
     foreach ($result as $reskey => $resvalue) {
@@ -413,10 +403,54 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $data['next_page_url'] = "$next_page_url";
     //secrtion data report
     $section_data = array();
+    $all_tids = get_all_section_tids($start_date, $end_date, $type, $status, $synd, $exclude_agency, $agencies);
     $section_data = report_getSectionCountData_report($start_date, $end_date, $all_tids,$type, $status);
     $data['section_data'] = $section_data;
     //p($data);
     return $data;
+}
+
+function get_all_section_tids($start_date, $end_date, $type, $status, $synd, $exclude_agency, $agencies){
+  
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->fields('fpc', array('field_primary_category_value'));    
+    //end
+     if($start_date != "na" && $end_date != "na"){
+        $start_date_timestamp = $start_date . " 00:00:00";
+        $end_date_timestamp = $end_date . " 23:59:00";
+        $query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
+    }
+    if ($type != "na") {
+        $query->condition('n.type', $type);
+    }
+    if ($synd) {
+      $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+      $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    }
+    
+    if ($exclude_agency) {
+      $query->join('field_data_field_story_source_type', 'fsst', 'fsst.entity_id=n.nid');
+      $query->condition('fsst.field_story_source_type_value', $agencies , 'NOT IN');
+      $query->condition('fpc.field_primary_category_value', '1206640', '!='); //PTI category
+    }
+    
+    if($_GET['type'] == 'fb'){
+      $query->join('field_data_field_story_social_media_integ', 'ssmi', 'ssmi.entity_id=n.nid');
+      $query->condition('ssmi.field_story_social_media_integ_value', 'facebook_instant_article', 'LIKE');
+    }        
+    if ($status != '') {
+        $query->condition('n.status', $status);
+    }
+    $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $tids = array();
+    foreach($result as $value){
+      $tids[] = $value['field_primary_category_value'];
+    }
+    $tids = array_unique($tids);
+    return $tids;
 }
 
 /**
@@ -496,11 +530,13 @@ function report_getSectionCountData_report($start_date, $end_date, $all_tids,$ty
     $section_list_count = array();
     $unique_tids = array_unique($all_tids);
     $loop_count = 0;
+    $countt = 0;
     foreach ($unique_tids as $value) {
         //p($value);die();
         $n_cont = 0;
         $n_cont = countTidNode_report($start_date, $end_date, $value,$type, $status);
         if ($n_cont) {
+          $countt += $n_cont;
             $ntid = $value;
             $term = taxonomy_term_load($ntid);
             $section_data[$loop_count]['count'] = "$n_cont";
