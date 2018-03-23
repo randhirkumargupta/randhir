@@ -623,7 +623,9 @@ header {
     margin-top: 0px;
     overflow: visible;
     background: #a00606;
-    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1); }
+    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+    height: auto;
+    overflow: visible; }
     #block-itg-layout-manager-header-block .navigation:before, #block-itg-layout-manager-header-block .navigation:after {
       content: "";
       display: block;
