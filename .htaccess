@@ -181,8 +181,8 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/(modi-oneyear|modi-oneyear/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(slideshows|slideshows/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(team-modi|team-modi/(.*))$ [NC]
-  RewriteCond %{REQUEST_URI} !^/(100days/(.*)|100days/(.*)/(.*).html)$ [NC]
-  RewriteCond %{REQUEST_URI} !^/(mood-of-the-nation|mood-of-the-nation/(.*))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(100days/(.*)/(.*).html)$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(mood-of-the-nation/(.*).(html|jsp)|mood-of-the-nation/2016|mood-of-the-nation/2016/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(holy-men|holy-men/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(india-australia-2016|india-australia-2016/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/sholay.jsp [NC]
@@ -193,10 +193,10 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/yuvraj.jsp [NC]
   RewriteCond %{REQUEST_URI} !^/(globalroundtable|globalroundtable/(.*)|globalroundtablenepal|globalroundtablenepal/(.*)|globalroundtabledelhi|globalroundtabledelhi/(.*)|safaigiriawards|safaigiriawards/(.*))$ [NC]
  
-  RewriteCond %{REQUEST_URI} !^/(state-of-the-states|state-of-the-states/(.*)|state-of-the-states/2013|state-of-the-states/2013/(.*))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(state-of-the-states/(2011|2012|2013|2014|2015|2016)|state-of-the-states/([0-9]*).(jsp|html)|state-of-the-states/([0-9]*)/(.*).(jsp|html|js|css)|state-of-the-states/([0-9]*)/images/(.*)|state-of-the-states/([0-9]*)/css/(.*)|state-of-the-states/images/(.*).(jpg|gif))$ [NC]
   
   RewriteCond %{REQUEST_URI} !^/(distribution|distribution/(.*))$ [NC]
-# RewriteCond %{REQUEST_URI} !^/applications [NC]
+  RewriteCond %{REQUEST_URI} !^/(dynasty|dynasty/(.*))$ [NC] 
   RewriteCond %{REQUEST_URI} !^/(special40|special40/(.*))$ [NC]
   
   RewriteCond %{REQUEST_URI} !^/(newswiz/(.*).(jsp|html)|newswiz/ajax_include/(.*)|newswiz/(.*).jsp?(.*)=(.*)|newswiz/(.*).jsp-@@-(.*)=(.*))$ [NC]
@@ -210,9 +210,12 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/(sachin|sachin/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(womansummit/delhi/2015|womansummit/delhi/2015/(.*)|womansummit/delhi/2014|womansummit/delhi/2014/(.*)|womansummit/delhi/2013|womansummit/delhi/2013/(.*)|womansummit/2011|womansummit/2011/(.*)|womansummit/2010|womansummit/2010/(.*)|womansummit/2009|womansummit/2009/(.*))$ [NC]
   
-  RewriteCond %{REQUEST_URI} !^/(best-universities|best-universities/(.*))$ [NC]
-  RewriteCond %{REQUEST_URI} !^/(assembly-elections|assembly-elections/(.*)|assembly-elections/delhi|assembly-elections/delhi/(.*)|assembly-elections/2013|assembly-elections/2013/(.*))$ [NC]
-  RewriteCond %{REQUEST_URI} !^/(assembly-elections-2012|assembly-elections-2012/(.*).jsp|assembly-elections-2012/(.*).jsp?state=(.*)|assembly-elections-2012/(.*).jsp-@@-state=(.*))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(best-universities/(.*).(jsp|html)|best-universities/([a-z]*)/(.*).(css|js|jpg|png|gif))$ [NC]
+  
+  RewriteCond %{REQUEST_URI} !^/(assembly-elections/(css|js|images)/(.*).(css|gif|ico|png|jpg|js)|assembly-elections/(.*).(jsp|html)|assembly-elections/(.*).jsp?state=(.*)|assembly-elections/(.*).jsp-@@-state=(.*))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(assembly-elections/delhi/(css|js)/(.*).(css|js)|assembly-elections/delhi/(.*).(jsp|html))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(assembly-elections/2013/(css|js|images)/(.*).(css|gif|ico|png|jpg|swf|js)|assembly-elections/2013/(.*).html)$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(assembly-elections-2012/(css|js|images|flash)/(.*).(css|gif|ico|png|jpg|swf|js)|assembly-elections-2012/(.*).(jsp|html)|assembly-elections-2012/(.*).jsp?state=(.*)|assembly-elections-2012/(.*).jsp-@@-state=(.*))$ [NC]
   
   RewriteCond %{REQUEST_URI} !^/(37th-anniversary-issue|37th-anniversary-issue/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(itmi|itmi/(.*))$ [NC]
@@ -299,7 +302,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/(olympics2016|olympics2016/(.*)|oscar2012|oscar2012/(.*)|oscar2013|oscar2013/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/updatedtime_chunk.jsp [NC]
   RewriteCond %{REQUEST_URI} !^/chunk_social_strip.html [NC]
-  RewriteCond %{REQUEST_URI} !^/(saif-kareena-wedding|saif-kareena-wedding/(.*))$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(saif-kareena-wedding/(.*).(html|jsp|css)|saif-kareena-wedding/images/(.*).(jpg|gif|png)|saif-kareena-wedding/jquery.easing.1.3.js)$ [NC]
   RewriteCond %{REQUEST_URI} !^/(sos/2016/jharkhand|sos/2016/jharkhand/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(sos/2017/odisha|sos/2017/odisha/(.*))$ [NC]
 
@@ -472,6 +475,8 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^saveyourleader/(.*) /staticpages/saveyourleader/$1 [L]
   RewriteRule ^mood-of-the-nation$ /staticpages/mood-of-the-nation/index.jsp [L]
   RewriteRule ^mood-of-the-nation/(.*) /staticpages/mood-of-the-nation/$1 [L]
+  RewriteRule ^mood-of-the-nation/2016$ /staticpages/mood-of-the-nation/2016/index.html [L]
+  RewriteRule ^mood-of-the-nation/2016/(.*) /staticpages/mood-of-the-nation/2016/$1 [L]
   RewriteRule ^holy-men$ /staticpages/holy-men/index.jsp [L]
   RewriteRule ^india-australia-2016$ /staticpages/india-australia-2016/index.jsp [L]
   RewriteRule ^india-australia-2016/(.*) /staticpages/india-australia-2016/$1 [L]
@@ -509,10 +514,12 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^state-of-the-states/2016$ /staticpages/state-of-the-states/2016/index.html [L]
   RewriteRule ^state-of-the-states/2016/(.*) /staticpages/state-of-the-states/2016/$1 [L]
   
-  RewriteRule ^state-of-the-states$ /staticpages/state-of-the-states/2012/index.jsp [L]
-  RewriteRule ^state-of-the-states/(.*) /staticpages/state-of-the-states/2012/$1 [L]
+  RewriteRule ^state-of-the-states/2012$ /staticpages/state-of-the-states/2012/index.jsp [L]
+  RewriteRule ^state-of-the-states/2012/(.*) /staticpages/state-of-the-states/2012/$1 [L]
   RewriteRule ^distribution$ /staticpages/distribution/index.html [L]
   RewriteRule ^distribution/(.*)$ /staticpages/distribution/$1 [L] 
+  RewriteRule ^dynasty$ /staticpages/dynasty/dynasty-graphic.jsp [L]
+  RewriteRule ^dynasty/(.*)$ /staticpages/dynastys/$1 [L]
   RewriteRule ^petrol.jsp$ /staticpages/petrol/petrol.jsp [L]
   RewriteRule ^petrol/(.*)$ /staticpages/petrol/$1 [L]  
   RewriteRule ^gudiyas.jsp$ /staticpages/gudiyas/gudiyas.jsp [L]  
@@ -553,7 +560,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^assembly-elections/(.*)$ /staticpages/assembly-elections/$1 [L]
   RewriteRule ^37th-anniversary-issue$ /staticpages/37th-anniversary-issue/index.html? [L]
   RewriteRule ^37th-anniversary-issue/(.*) /staticpages/37th-anniversary-issue/$1 [L]
-  RewriteRule ^assembly-elections-2012$ /staticpages/assembly-elections-2012/index.html? [L]
+  # RewriteRule ^assembly-elections-2012$ /staticpages/assembly-elections-2012/index.html [L]
   RewriteRule ^assembly-elections-2012/(.*)$ /staticpages/assembly-elections-2012/$1 [L]
   RewriteRule ^itmi$ /staticpages/itmi/index.jsp? [L]
   RewriteRule ^itmi/(.*) /staticpages/itmi/$1 [L]
@@ -734,7 +741,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^oscar2013/(.*) /staticpages/oscar2013/$1 [L]
   RewriteRule ^updatedtime_chunk.jsp$ /staticpages/updatedtime_chunk.jsp? [L]
   RewriteRule ^chunk_social_strip.html$ /staticpages/chunk_social_strip.html? [L]
-  RewriteRule ^saif-kareena-wedding$ /staticpages/saif-kareena-wedding/index.html? [L]
+  RewriteRule ^saif-kareena-wedding$ /staticpages/saif-kareena-wedding/index.html [L]
   RewriteRule ^saif-kareena-wedding/(.*) /staticpages/saif-kareena-wedding/$1 [L]
   RewriteRule ^sos/2016/jharkhand$ /staticpages/sos/2016/jharkhand/index.html? [L]
   RewriteRule ^sos/2016/jharkhand/(.*) /staticpages/sos/2016/jharkhand/$1 [L]
@@ -954,7 +961,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^money$ /staticpages/money/index.html [L]
   RewriteRule ^money/(.*)$ /staticpages/money/$1 [L]
   RewriteRule ^swachhbharat$ /staticpages/swachhbharat/index.html [L]
-  RewriteRule ^swachhbharat/(.*)$ /staticpages/swachhbharat/$1 [L]  
+  RewriteRule ^swachhbharat/(.*)$ /staticpages/swachhbharat/$1 [L]   
   ####### End saticpages phase 3 #########
 
   # Rules to correctly serve gzip compressed CSS and JS files.
