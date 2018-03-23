@@ -568,8 +568,8 @@ if (!empty($content)):
                 }
                 // Remove Expert chunk
                 if (strpos($story_body, '[ITG:EXPERT-CHUNK]')) {
-					$story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
-				} 
+                  $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
+                } 
     //code for listicle story
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
