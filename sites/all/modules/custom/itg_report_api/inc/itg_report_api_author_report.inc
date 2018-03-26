@@ -166,6 +166,7 @@ function author_report($start_date) {
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
+  //p($author_list);
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
     $name = getAuthorNameDashboard($user_id);
@@ -324,7 +325,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->condition('n.type', 'story');
   $query->condition('ti.tid', '1206640', '<>');
   $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-  $query->groupBy('n.nid');
+  //$query->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {

@@ -767,7 +767,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:none}
 /* sponser img navigation css */
 #block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect{overflow:visible; padding:4px 0;}
-#block-itg-layout-manager-header-block .navigation .menu li.has-image img{ margin-top: 0px;}
+#block-itg-layout-manager-header-block .navigation .menu li.has-image a img{ margin-top: 0px; max-height:37px;}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
