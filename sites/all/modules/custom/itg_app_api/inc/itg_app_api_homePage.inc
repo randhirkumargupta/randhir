@@ -138,6 +138,7 @@ function homePageJson() {
             }
         }
     }
+    p($data['data']);
    $array_key = array_keys($data['data']);
  
     $active_chunk_c = count($data['data']);
