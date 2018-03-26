@@ -173,6 +173,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/(vivekananda|vivekananda/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(bhagat-singh|bhagat-singh/(.*))$ [NC]
   # RewriteCond %{REQUEST_URI} !^/(prnewswire|prnewswire/(.*))$ [NC]
+  Redirect /(applications|applications/(.*)) /our-apps
   RewriteCond %{REQUEST_URI} !^/dynasty-graphic.jsp [NC]
   RewriteCond %{REQUEST_URI} !^/(voter-election|voter-election/(.*))$ [NC]
   RewriteCond %{REQUEST_URI} !^/(pdf-web|pdf-web/(.*))$ [NC]
