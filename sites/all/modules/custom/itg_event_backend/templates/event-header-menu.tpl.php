@@ -66,7 +66,7 @@ if (!empty($node) && ($node->type == 'event_backend')) {
                   if ($event_config_speakers) {
                     print '<li>' . l(t('Speakers'), $baseurl . '/speakers', array('attributes' => array("style" => "color:$speakers_menu"))) . '</li>';
                   }
-                  if (($registration_close >= time() && !empty($registration_close)) || ($force_registration_flag == 1) || (empty($registration_close) && $event_close >= time())) {
+                  if (($registration_close >= time() && !empty($registration_close)) || ($force_registration_flag == 1)) {
                     print '<li>' . l(t('Registration'), $baseurl . '/registration', array('attributes' => array("style" => "color:$registration_menu"))) . '</li>';
                   }
                   if ($event_config_sponsors) {
