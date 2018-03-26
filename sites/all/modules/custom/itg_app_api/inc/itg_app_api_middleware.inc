@@ -261,7 +261,7 @@ function middleware_menu_subcat_list($cat_id) {
 
   //$secion_id = array(0);
   $query = db_select('itg_app_menu_content', 'cl');
-  $query->fields('cl', array('menu_type', 'section_id', 's_title', 'order_id', 'is_new'));
+  $query->fields('cl', array('menu_type', 'section_id', 's_title', 'order_id', 'is_new', 's_id'));
   $query->condition('cl.section_id', $cat_id);
   // only parent menus
   $query->condition('cl.has_subcategory', 1);
@@ -280,7 +280,7 @@ function middleware_menu_subcat_list($cat_id) {
   if ($total_sub_cat > 0) {
       $lc = 2;
     foreach ($result as $cat_data) {        
-      $sub_cat['s_id'] = $cat_data['section_id'];
+      $sub_cat['s_id'] = $cat_data['s_id'];
       $sub_cat['s_title'] = strtoupper($cat_data['s_title']);
       $sub_cat['s_order'] = "$lc";
       $sub_cat['s_is_new'] = $cat_data['is_new'];
