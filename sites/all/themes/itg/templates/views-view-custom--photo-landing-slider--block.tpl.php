@@ -1,4 +1,5 @@
 <?php
+
 /*global $base_url;
 // configuration for social sharing
 $photo_node = node_load(arg(1));
