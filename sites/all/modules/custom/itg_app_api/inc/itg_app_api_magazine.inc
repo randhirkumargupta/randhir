@@ -293,7 +293,7 @@ function magazineCoverstoriesPageRerourceValueList($source ="") {
     $query_issue->condition('n.nid', $magazine_nids, 'IN');
     $query_issue->condition('mci.info_type','magazine','=');
     $query_issue->orderBy('mci.info_value', 'ASC');  
-    $query_issue->orderBy('n.nid', 'DESC');  
+    $query_issue->orderBy('fsit.field_issue_title_value', 'DESC');  
   }
   else {
         $query_issue = db_select('node', 'n');
