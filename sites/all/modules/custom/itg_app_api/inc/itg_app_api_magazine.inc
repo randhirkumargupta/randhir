@@ -287,12 +287,13 @@ function magazineCoverstoriesPageRerourceValueList($source ="") {
     $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
     $query_issue->fields('fsit', array('field_issue_title_value'));
     $query_issue->fields('n', array('nid'));
+    $query_issue->fields('mci', array('info_value'));
 
     $query_issue->condition('n.status', 1);
     $query_issue->condition('n.type', 'issue');
     $query_issue->condition('n.nid', $magazine_nids, 'IN');
     $query_issue->condition('mci.info_type','magazine','=');
-    //$query_issue->orderBy('mci.info_value', 'ASC');  
+    $query_issue->orderBy('mci.info_value', 'ASC');  
     $query_issue->orderBy('fsit.field_issue_title_value', 'DESC');  
   }
   else {
