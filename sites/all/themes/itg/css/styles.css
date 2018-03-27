@@ -7334,7 +7334,8 @@ section.sidebar .block-itg-ads {
             padding-left: 15px;
             color: #6e6e6e;
             font-weight: normal; }
-            #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation .speaker-title {
+            #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation width:calc(100% - 72px)
+            .speaker-title {
               font-weight: 700; }
           #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop {
             margin-bottom: 20px;
@@ -7902,7 +7903,7 @@ section.sidebar .block-itg-ads {
   .speaker-detail-page .col-md-3 img,
   #block-views-program-schedule-block-3 .col-md-3 img {
     border-radius: 100%;
-    border: 1px solid #ddd; }
+    border: 2px solid #d71921; }
 .speaker-detail-page h3,
 #block-views-program-schedule-block-3 h3 {
   margin-bottom: 10px;

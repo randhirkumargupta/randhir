@@ -7409,6 +7409,7 @@ section.sidebar {
                         padding-left: 15px;
                         color: #6e6e6e;
                         font-weight: normal;
+                        width:calc(100% - 72px)
                         .speaker-title {
                             font-weight: 700;
                         }
@@ -8096,7 +8097,7 @@ section.sidebar {
         }
         img {
             border-radius: 100%;
-            border: 1px solid #ddd;
+            border: 2px solid #d71921;
         }
     }
     h3 {
