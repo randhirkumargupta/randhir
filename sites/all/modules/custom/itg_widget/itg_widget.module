@@ -603,7 +603,7 @@ function itg_widget_block_view($delta = '') {
             prevText: "",
             nextText: "",
             });
-            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            });', array('type' => 'inline')
             );
             $info['widget'] = 'photo_carousel_list_widget';
             $info['order'] = 'ASC';
