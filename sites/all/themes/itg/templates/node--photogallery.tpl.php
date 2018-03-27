@@ -46,7 +46,6 @@ if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
 <?php
 }
 if ($config_name == 'other' && in_array('commentbox', $config)) {
-  die("Test123");
   ?>
   <div id="other-comment">
         <?php
