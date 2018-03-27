@@ -16,7 +16,7 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
 ?>
 
 
-<div class="program-sub-title" style="color: <?php print $program_title_font_color;?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div>
+<!-- <div class="program-sub-title" style="color: <?php print $program_title_font_color;?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div> -->
 <div class="row">
   <?php $output_left = '';
   $output_right = '';
