@@ -649,6 +649,7 @@ footer .footer-top .footer-social-link{display:none; opacity:0;}
 .itg-layout-container .itg-h321-section .droppable{height: auto;}
 #block-itg-event-backend-program-tab-block .event-listing{ padding:0 10px; }
 #block-itg-event-backend-program-tab-block .top-block-highlight h2{ padding:0 10px; }
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video.col-md-12 .live-event-video{ height:250px; }
 }
 .view-display-id-block_5 .detail {  position: relative; top: -18px;}
 @media screen and (max-width:800px){
