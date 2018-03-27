@@ -74,7 +74,7 @@ function flexslider_library() {
     'version' => FLEXSLIDER_VERSION,
     'js' => array(
       $library_path . '/jquery.flexslider-min.js' => array(
-      'type' => 'file',
+        'scope' => 'footer',
       ),
     ),
     'css' => array(
