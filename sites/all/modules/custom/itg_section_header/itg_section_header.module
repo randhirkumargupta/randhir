@@ -423,7 +423,7 @@ function get_event_menu($nid) {
   $speakers_menu = $menu_highlights_color;
   $registration_menu = $menu_highlights_color;
   $sponsors_menu = $menu_highlights_color;
-
+	var_dump(arg());die;
   $menu = array();
   if ($event_config_home) {
     $menu['menu'][] = '<li>' . l('Home', $baseurl, array('attributes' => array("style" => "color:$home_menu"))) . '</li>';
