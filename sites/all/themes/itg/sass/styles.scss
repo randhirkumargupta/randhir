@@ -7409,6 +7409,7 @@ section.sidebar {
                         padding-left: 15px;
                         color: #6e6e6e;
                         font-weight: normal;
+                        width:calc(100% - 72px)
                         .speaker-title {
                             font-weight: 700;
                         }
@@ -7834,13 +7835,14 @@ section.sidebar {
     padding: 30px;
     border: 1px solid #ddd;
     background: #f7f7f7;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 #block-itg-event-backend-tweet-right-sidebar-event {
     padding: 15px 30px;
     background: #f7f7f7;
     border: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 #block-views-program-schedule-block-4 {
@@ -8096,7 +8098,7 @@ section.sidebar {
         }
         img {
             border-radius: 100%;
-            border: 1px solid #ddd;
+            border: 2px solid #d71921;
         }
     }
     h3 {
