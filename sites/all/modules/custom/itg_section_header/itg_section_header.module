@@ -423,8 +423,8 @@ function get_event_menu($nid) {
   $speakers_menu = $menu_highlights_color;
   $registration_menu = $menu_highlights_color;
   $sponsors_menu = $menu_highlights_color;
-	
-	$home_link_class = ($node_is_page() ? '' : 'active');
+	$page_node = menu_get_object();
+	$home_link_class = (!empty($page_node->nid) ? 'active' : '');
 	$programe_link_class = (arg(3) == 'programme' ? 'active' : '');
 	$speakers_link_class = (arg(3) == 'speakers' ? 'active' : '');
 	$registration_link_class = (arg(3) == 'registration' ? 'active' : '');
