@@ -1871,12 +1871,12 @@ $itg-robotoslab:'RobotoSlab-Regular';
           margin-top: 10px; }
 
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li:first-child {
-    width: 28%;
-    padding-top: 15px;
+    width: 25%;
+    padding-top: 0px;
     font-size: 12px; }
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
-    width: 26%;
-    text-align: center; }
+    width: 75%;
+    text-align: left; }
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
     width: 45%; }
 
