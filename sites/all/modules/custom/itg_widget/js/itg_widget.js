@@ -406,7 +406,7 @@ jQuery(document).ajaxSuccess(function () {
 
 jQuery(window).load(function() {
     try {
-		if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+		if(jQuery('.flexslider').length && typeof flexslider == 'function'){
 			jQuery(".flexslider").flexslider({
 			 animation: "slide",
 			 prevText: "",
