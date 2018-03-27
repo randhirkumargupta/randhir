@@ -99,7 +99,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                               print '<div class="profile-loop"><label style="color:' . $font_color . '">Speaker:</label>';
 
                               $spk_title = '<div class="speaker-title">' . l(t($spk_detail[0]->title), $baseurl . 'speaker-details', array('attributes' => array('style' => 'color:' . $content_font_color), 'query' => array('speaker' => $spk_detail[0]->nid))) . '</div>';
-                              if (!empty($spk_detail[0]->uri)) {echo '<pre>';print_r($spk_detail);die;
+                              if (!empty($spk_detail[0]->uri)) {//echo '<pre>';print_r($spk_detail);die;
                                 $img = '<img src="' . file_create_url($spk_detail[0]->uri) . '" alt="" title="'.$spk_detail[0]->uri.'" />';
                               }
                               else {
