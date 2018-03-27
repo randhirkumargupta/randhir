@@ -7409,7 +7409,8 @@ section.sidebar {
                         padding-left: 15px;
                         color: #6e6e6e;
                         font-weight: normal;
-                        width:calc(100% - 72px)
+                        width: calc(100% - 72px);
+
                         .speaker-title {
                             font-weight: 700;
                         }
@@ -7673,12 +7674,12 @@ section.sidebar {
                     }
                 }
                 &:nth-child(1) {
-                    width: 28%;
-                    padding-top: 25px;
+                    width: 20%;
+                    padding-top:0px;
                 }
                 &:nth-child(2) {
-                    width: 24%;
-                    text-align: center;
+                    width: 75%;
+                    text-align: left;
                 }
                 &:nth-child(3) {
                     width: 48%;

@@ -143,9 +143,9 @@
 .page-livetv .programe-container .block-itg-ads > div{margin:0 auto;}
 
 /* event Sidebar Ad */
-
 .event-sidebar .sidebars .block-itg-ads{border: 1px solid #ddd;padding: 10px 0;margin-bottom: 20px;}
 .event-sidebar .sidebars .block-itg-ads > div{ margin:0 auto; }
+.program-schedule-content .speakers-text{font-size: 15px;text-align: left;color: #ef2a24; border-top: 1px solid #adadad; padding-top: 10px; margin-top: 10px;text-transform: uppercase;}
 
 
 @media all and (max-width: 700px) {

@@ -2251,13 +2251,13 @@
             ul.profile-detail {
                 li {
                     &:first-child {
-                        width: 28%;
-                        padding-top: 15px;
+                        width: 25%;
+                        padding-top: 0px;
                         font-size: 12px;
                     }
                     &:nth-child(2) {
-                        width: 26%;
-                        text-align: center;
+                        width: 75%;
+                        text-align: left;
                     }
                     &:nth-child(3) {
                         width: 45%;
