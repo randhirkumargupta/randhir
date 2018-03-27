@@ -503,8 +503,8 @@
         background-color: #aaa;
     }
     #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-        width: 55px;
-        height: 55px;
+        width: 72px;
+        height: 72px;
     }
     .education-layout-page {
         .widget-wrapper {
@@ -1896,6 +1896,10 @@
 
 @media only screen and (max-width:767px) {
 
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
+    }
     /*css start oscar-layout-page */
     .oscar-layout-page .oscar-news {
         .col-md-6:nth-child(3n+1) {
@@ -2233,7 +2237,7 @@
                             }
                             label {
                                 color: #ef2a24;
-                                position: absolute;
+                                position: relative;
                                 left: 86px;
                                 top: 0;
                             }

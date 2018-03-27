@@ -146,7 +146,7 @@
 .event-sidebar .sidebars .block-itg-ads{border: 1px solid #ddd;padding: 10px 0;margin-bottom: 20px;}
 .event-sidebar .sidebars .block-itg-ads > div{ margin:0 auto; }
 .program-schedule-content .speakers-text{font-size: 15px;text-align: left;color: #ef2a24; border-top: 1px solid #adadad; padding-top: 10px; margin-top: 10px;text-transform: uppercase;}
-
+#block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video.col-md-12 .live-event-video{ height:435px; margin-bottom:20px; }
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -645,8 +645,10 @@ ul.pron-cons-img li img { margin-top: -12px!important;}
 footer .footer-top .footer-social-link{display:none; opacity:0;}
 .front .itg-top-section .home-top-story .droppable{height: auto;}
 .tech-layout-page .auto-block-2,.auto-layout-page .auto-block-2, .education-layout-page .itg-layout-672 .droppable .auto-block-2,.sport-home-layout-page .itg-layout-615 .auto-block-2{height: auto;}
-#block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation{width:100%; padding-left:0;}
+/*#block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation{width:100%; padding-left:0;}*/
 .itg-layout-container .itg-h321-section .droppable{height: auto;}
+#block-itg-event-backend-program-tab-block .event-listing{ padding:0 10px; }
+#block-itg-event-backend-program-tab-block .top-block-highlight h2{ padding:0 10px; }
 }
 .view-display-id-block_5 .detail {  position: relative; top: -18px;}
 @media screen and (max-width:800px){
