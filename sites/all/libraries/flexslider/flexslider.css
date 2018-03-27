@@ -48,7 +48,7 @@
   display: none;
   -webkit-backface-visibility: hidden;
 }
-.flexslider .slides > li:first-child {float:left; display:block;}
+/*.flexslider .slides > li:first-child {display: block; -webkit-backface-visibility: visible;}*/
 .flexslider .slides img {
   width: 100%;
   display: block;
