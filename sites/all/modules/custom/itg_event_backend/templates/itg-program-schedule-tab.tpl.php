@@ -100,7 +100,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
 
                               $spk_title = '<div class="speaker-title">' . l(t($spk_detail[0]->title), $baseurl . 'speaker-details', array('attributes' => array('style' => 'color:' . $content_font_color), 'query' => array('speaker' => $spk_detail[0]->nid))) . '</div>';
                               if (!empty($spk_detail[0]->uri)) {
-                                $img = '<img src=' . image_style_url("original", $spk_detail[0]->uri) . ' alt="" title="" />';
+                                $img = '<img src=' . file_create_url($spk_detail[0]->uri) . ' alt="" title="" />';
                               }
                               else {
                                 $img = "<img width='72' height='72' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image72x72.jpg') . "' alt='' title='' />";
