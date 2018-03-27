@@ -118,7 +118,7 @@ $image_exten = end(explode('.', $data->uri));
 </div>
 <div class="croper-action">
     <button class=" add-more <?php echo ($extra_crop == 1) ? 'crop-all' : 'crop-image'; ?>">Crop</button>
- <?php if ($content_type == 'bodyeditor') { ?>   
+ <?php if ($content_type == 'bodyeditor' || $content_type == 'reporter') { ?>   
     <button class="original-image add-more">Use Original</button>
  <?php } ?> 
     <button class="cancel-image add-more">Cancel</button>    
