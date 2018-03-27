@@ -6,7 +6,7 @@
 
 /* karnataka panchayat 2018 */
 #section-header-event-1771900 .bgcolor{background:#e5e5e5;}
-#section-header-event-1771900 .conclave-header{ padding:15px 0; overflow: hidden;}
+#section-header-event-1771900 #conclave-header{ padding:15px 0; overflow: hidden;}
 #section-header-event-1771900 .topBanner .conclave-logo { width:320px; float: left; }
 #section-header-event-1771900 .topBanner .conclave-event-details{ width:50%;float:right; text-align: right; position: relative; height:123px}
 #section-header-event-1771900 .topBanner .conclave-event-details .center-content{position: absolute; width: 100%;top: 50%;transform: translateY(-50%); -webkit-transform: translateY(-50%);}
@@ -31,7 +31,7 @@
 #section-header-event-1771900 .topBanner .conclave-event-details h6{ font-size: 15px;}
 }
 @media screen and (max-width:320px){
-#section-header-event-1771900 .conclave-header{ padding:10px 0; }
+#section-header-event-1771900 #conclave-header{ padding:10px 0; }
 #section-header-event-1771900 .topBanner .conclave-event-details{ height:50px; }
 #section-header-event-1771900 .topBanner .conclave-event-details h3{ font-size:20px;line-height: 25px; }
 #section-header-event-1771900 .topBanner .conclave-event-details h6{ font-size: 12px;}
