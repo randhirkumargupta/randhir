@@ -4,17 +4,21 @@ drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
 <div id="section-header-event-1771900" class="karnataka-panchayat-2018">
+<div class="bgcolor">
+ <div class="container">
     <div id="conclave-header">
         <div class="topBanner">
             <div class="conclave-logo"><a href="#" title="Karnataka Panchayat 2018"><img src="https://akm-img-a-in.tosshub.com/indiatoday/section-header/images/karnataka-panchayat-logo.png" alt="Karnataka Panchayat 2018"></a></div>
             <div class="conclave-event-details">
                 <div class="center-content">
-                    <h3><span>THE ELECTION SHOWDOWN</span></h3>                    
+                    <h3>THE ELECTION SHOWDOWN</h3>                    
                     <h6>March 31, 2018 <span>Hotal Lalit Ashok, Bangaluru</span></h6>
                 </div>
             </div>            
         </div>
     </div>
+  </div>
+  </div>
     <div class="itg-logo-container">
 	<?php
 	if ($data['is_event']) {
