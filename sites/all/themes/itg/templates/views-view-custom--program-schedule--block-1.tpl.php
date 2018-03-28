@@ -16,7 +16,7 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
 ?>
 
 
-<div class="program-sub-title" style="color: <?php print $program_title_font_color;?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div>
+<!-- <div class="program-sub-title" style="color: <?php print $program_title_font_color;?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div> -->
 <div class="row">
   <?php $output_left = '';
   $output_right = '';
@@ -41,7 +41,7 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
      }
 
     $daywise_style = ($daywise_arr[0] == 'Day-1') ? 'style="display: block"' : '';
-    $output_left .= '<div '.$daywise_style.' class="'.$daywise_arr[0].' common-class  col-lg-6 col-md-6 col-sm-12">';
+    $output_left .= '<div '.$daywise_style.' class="'.$daywise_arr[0].' common-class  col-lg-12 col-md-12 col-sm-12">';
     $output_left .= $sponsor_tags .'<div class="content-list" style="background:'.$heading_background_color.'">';
     $output_left .= '<div style="color:'.$content_font_color .'"><span class="date-display-single"><div class="date-display-range">'.$row['field_start_time_1'].' to '.$row['field_start_time_2'].'</div></span></div>';
     $output_left .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
@@ -56,7 +56,9 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
   foreach ($daywise as $key => $value) {
     $tabs .= '<li style="background: ' . $tab_highlighted_color . '" data-tag="' . $value . '" class="event-program-tabs ' . $value . '">' . $value . '</li>';
   }
-  print '<div class="top-tab col-lg-12 col-md-12 col-sm-12"><ul>' . $tabs . '</ul></div>';
+  if(count($daywise) > 1){
+    print '<div class="top-tab col-lg-12 col-md-12 col-sm-12"><ul>' . $tabs . '</ul></div>';
+  }  
   print '<div class ="left-side-event-contents col-lg-12 col-md-12 col-sm-12">'.$output_left.'</div>';
 
 ?>
