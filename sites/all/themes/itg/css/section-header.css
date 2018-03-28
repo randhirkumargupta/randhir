@@ -6,7 +6,7 @@
 /* karnataka panchayat 2018 */
 .karnataka-panchayat-2018 .bgcolor{background:#e5e5e5;}
 .karnataka-panchayat-2018 #conclave-header{ padding:15px 0; overflow: hidden;}
-.karnataka-panchayat-2018 .topBanner .conclave-logo { width:320px; float: left; }
+.karnataka-panchayat-2018 .topBanner .conclave-logo { width:320px; float: left; position: relative;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details{ width:50%;float:right; text-align: right; position: relative; height:123px}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details .center-content{position: absolute; width: 100%;top: 50%;transform: translateY(-50%); -webkit-transform: translateY(-50%);}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details h3{font-size: 40px;font-weight: 700;line-height:48px; font-family: "OpenSans-Bold";}
