@@ -1,2 +1,2 @@
-# India Today CMS (Drupal)
-India Today Team
+# India Today CMS 
+India Today Team.
