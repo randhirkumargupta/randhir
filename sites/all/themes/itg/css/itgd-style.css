@@ -136,6 +136,10 @@
 .event-sidebar .sidebars .block-itg-ads > div{ margin:0 auto; }
 .program-schedule-content .speakers-text{font-size: 15px;text-align: left;color: #ef2a24; border-top: 1px solid #adadad; padding-top: 10px; margin-top: 10px;text-transform: uppercase;}
 #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video.col-md-12 .live-event-video{ height:435px; margin-bottom:20px; }
+#block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li{ position: relative; }
+.view-id-event_photo_slider.view-display-id-block_1 .field-content:before { content: "\f030";   display: inline-block; font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; position: absolute;  color: #fff; bottom: 6px;  right: 6px; background: rgba(0,0,0,.5); padding: 3px 5px;}
+.event-add-header{ padding:10px 0;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
