@@ -50,6 +50,10 @@ function homePageJson() {
       $data_magazine = homePageJsonMagazine();
       $total_count += count($data_magazine);
     }
+    elseif($middleware_magazine_config == 2){
+        $data_magazine = homePageJsonMagazine('direct');
+        $total_count += count($data_magazine);
+    }
     
     $middleware_polls_config = fetchMasterConfigData('polls_config_options');
     if($middleware_polls_config == 1){ //enable
@@ -1123,7 +1127,7 @@ function homePageCatNewslist($tid) {
  *
  * @return array
  */
-function homePageJsonMagazine() {
+function homePageJsonMagazine($direct = "") {
   global $order;
     $data_magazine = array();
     $data_newslist = array();
@@ -1131,7 +1135,13 @@ function homePageJsonMagazine() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $n_magazine_data = magazineCoverstoriesPageRerourceValueList('home');
+    if($direct == 'direct'){
+        $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
+    }
+    else{
+        $n_magazine_data = magazineCoverstoriesPageRerourceValueList('home');
+    }
+    
     $n_magazine = $n_magazine_data['data'];
 
     $data_magazine['id'] = "0";

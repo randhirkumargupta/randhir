@@ -2607,7 +2607,7 @@ function time_interval() {
         return $interval;
     }
     
-    function testtolive_homeapi(){
+    function testtolive_homeapi_bk(){
         
     include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_video.inc");
     include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_news.inc");
@@ -2621,6 +2621,40 @@ function time_interval() {
     $term_feed_path = "public://";
     //writeFeedFile($term_feed_path, $file_name, $jsondata);
     variable_set('homeRVJson', $jsondata);
+    drupal_set_message(t('copy dev to live home api done.'));
+    drupal_goto('itg-app-arrange-home');
+}
+function testtolive_homeapi(){
+        
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_video.inc");
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_news.inc");
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_story.inc");
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_polls.inc");
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_photo.inc");
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_magazine.inc");
+    $jsondata = homePageJson();
+    $jsondata = json_encode($jsondata);
+    $redis_key = "devitg_rapid_api_homePage";
+    $ttl = 600;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    //truncate & insert into live table start
+    db_truncate('itg_app_middleware_live')->execute();
+    db_truncate('itg_app_master_config_internal_live')->execute();
+    db_truncate('itg_app_master_info_internal_live')->execute();
+    //into itg_app_middleware
+    $query = db_select('itg_app_middleware', 'iam');
+    $query->fields('iam');
+    db_insert('itg_app_middleware_live')->from($query)->execute();
+    //into itg_app_master_config_internal
+    $query = db_select('itg_app_master_config_internal', 'imi');
+    $query->fields('imi');
+    db_insert('itg_app_master_config_internal_live')->from($query)->execute();
+    //into itg_app_master_config_internal
+    $query = db_select('itg_app_master_info_internal', 'imin');
+    $query->fields('imin');
+    db_insert('itg_app_master_info_internal_live')->from($query)->execute();
+    redis_key_delete($redis_key);
+    //insert into live table end    
     drupal_set_message(t('copy dev to live home api done.'));
     drupal_goto('itg-app-arrange-home');
 }

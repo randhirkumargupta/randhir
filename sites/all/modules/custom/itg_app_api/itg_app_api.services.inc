@@ -2559,6 +2559,42 @@ function itg_app_api_resource() {
         ),
       ),
     ),
+      
+   //search
+    'search' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'search api.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'search_data_rest',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+            array(
+              'name' => 'key',
+              'optional' => FALSE,
+              'source' => 'data',
+              //'source' => array('data' => 'first_name'),
+              'description' => 'Key',
+              'type' => 'string',
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $api;
@@ -3342,12 +3378,30 @@ function itg_rapid_api_storydetail($token) {
  *
  * @return array - The processed information array.
  */
-function itg_rapid_api_homePage($token) {
+function itg_rapid_api_homePage_bk($token) {
 
-  //$jsondata = file_get_contents(''.ITGD_MUM_DEV_FILES_PATH.'/homeRVJson.json');
+ 
   $jsondata = variable_get('homeRVJson', '');
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
+
+}
+function itg_rapid_api_homePage($token) {
+$redis_key = "devitg_rapid_api_homePage";
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else{
+    include(DRUPAL_ROOT."/sites/all/modules/custom/itg_app_api/inc/itg_app_api_homePage_live.inc");
+    $jsondata = homePageJson_live();
+    $jsondata = json_encode($jsondata);
+    $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
 }
 /**
  * Call back function for homePagedev API
@@ -5747,12 +5801,11 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-
-    p(node_load(988282));
-    $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
-    $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
-    print_r($searchpage1);
-    p($searchpage2);
+p(node_load(988282));
+  $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india'); 
+  $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
+print_r($searchpage1);
+p($searchpage2);
 }
 
 /**
@@ -6626,5 +6679,317 @@ function itg_rapid_api_topstories($token) {
   }
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
+}
+
+
+/**
+ * Call back function for search API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+
+function search_data_rest($token){
+    $key = $_GET['key'];
+    $nid_ar = array();
+    $searchpage = solr_search_custom_results_restapi($key);
+    p($searchpage);
+  if($nids === FALSE){
+		return array();
+	}
+  
+  $video_list = array();
+  $loopc = 0;
+  foreach ($searchpage as $key => $result) {
+    $nid = $result->entity_id;
+    $nid_ar[] = $nid;
+  }
+  $nid_str = implode(",",$nid_ar);
+   newscategoryPageRerourceValue_search_rest($nid_ar); 
+}
+
+/**
+ * Callback for solr service.
+ */
+function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
+  $link_ar = array();
+  $nid_ar = array();
+  $stdkeys = explode(',', str_replace(' ', '', $fields));
+  $results = array();
+  
+  try {
+		$key = preg_replace('/\s+/', ' OR ', $key);
+    $solr = apachesolr_get_solr();
+		$query = apachesolr_drupal_query("custom", array('q' => $key));
+		$query->setSolrsort('ds_changed', 'desc');
+		$query->removeFilter('bundle_name');
+		$query->addParam('fq', "hash:(".apachesolr_site_hash().")");
+		//$query->addParam('fq', "bundle_name:Video");
+		$query->addParam('sort', "ds_changed DESC");
+		$resp = $query->search();
+		if(!empty($resp->data)){
+			$data = json_decode($resp->data);
+		}
+    $results = $data->response->docs;
+  }
+  catch (Exception $e) {
+    watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
+    apachesolr_failure(t('Solr search'), $key);
+  }
+
+  if ($results and is_array($results) and count($results)) {   
+    return $results;
+  }
+  return FALSE;
+}
+/**
+ * main function for generate videoCategoryPage array
+ * @pram int $tid, $pageno
+ *
+ * @return array
+ */
+function newscategoryPageRerourceValue_search_rest($nid_ar) {
+
+  // variable decalartion
+  $output_array = array();
+  $data_array = array();
+  $photo_list_array = array();
+  $updated_datetime = "";  
+  $term_name = "Latest";
+  // list array building
+  $data = generateNewsCategoryListsearch_rest($nid_ar);
+  if ($data['lcount'] > 0) {
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "";
+  }
+  else {
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "customised_message";
+  }
+  $datacount = $data['lcount'];
+  $data_up_time = $data['updated_datetime'];
+
+  //data array building
+
+  if ($datacount > 10) {
+    $datacount = 10;
+  }
+
+  $data_array['id'] = "$tid";
+  $data_array['title'] = "$term_name";
+  $data_array['layout_id'] = "0";
+  $data_array['news_count'] = "$datacount";
+  $data_array['news_display_count'] = "10";
+  $data_array['news_pagination_cap'] = "50";
+  $data_array['updated_datetime'] = "$data_up_time";
+
+
+  $data_array['news'] = $data['data'];
+  $output_array['data'] = $data_array;
+
+  return $output_array;
+}
+
+/**
+ * function for generate videoCategoryPage list
+ * @pram int $tid, $pageno
+ *
+ * @return array
+ */
+function generateNewsCategoryListsearch_rest($nid_str) {
+  // variable declaration
+  global $base_url;
+  $node_count = "";
+  $output = "";
+  $data = array();  
+  $listcount = 0;
+
+  $order_by = 'ASC';  
+  $news_list_array = array();
+  $photolist = array();
+  $videolist = array();
+  $loop_count = 0; {
+  $listcount = 0;
+    
+    // select node belong from current term id or child term id
+
+    
+    
+    $query = db_select('node', 'n');
+    //join  for field value
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
+    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+
+    $query->fields('eli_file', array('uri'));
+    $query->fields('li_file', array('uri'));
+    $query->fields('mi_file', array('uri'));
+    $query->fields('si_file', array('uri'));
+    $query->fields('esi_file', array('uri'));
+
+    $query->fields('eli', array('field_story_extra_large_image_fid'));
+    $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('li', array('field_story_large_image_fid'));
+    $query->fields('si', array('field_story_small_image_fid'));
+    $query->fields('rc', array('field_common_related_content_value'));
+
+    $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('vd', array('field_video_duration_value'));
+    $query->fields('fpc', array('field_primary_category_value'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));   
+    $query->orderBy('n.nid', $nid_ar, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid');
+
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $reskey => $resvalue) {
+
+      // node feed tag
+      $title = $resvalue['title'];
+      $type = $resvalue['type'];
+      $nid = $resvalue['nid'];
+
+      if ($type == 'story') {
+        $type = getStoryType($nid);
+      }
+      $created = $resvalue['created'];
+      $changed = $resvalue['changed'];
+      $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+      $alias = drupal_get_path_alias('node/' . $nid . '');
+      $weburl = $base_url . "/" . $alias;
+      $field_video_duration_value = $resvalue['field_video_duration_value'];
+
+      // file url
+      $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
+      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+      $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+
+
+
+      //related content
+      $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+      $comment_cont = getCommentsCount($nid);
+
+      // create date formating
+      $firebase_url = get_node_firebase_weburl($nid);
+
+      if ($created) {
+        $create_datetime = date("Y-m-d H:i:s", $created);
+        $create_date = date("Y-m-d H:i:s", $created);
+      }
+      else {
+        $create_datetime = "";
+        $create_date = "";
+      }
+      if ($changed) {
+        $changed_datetime = date("Y-m-d H:i:s", $changed);
+      }
+      else {
+        $changed_datetime = "";
+      }
+      // Get Publish time:
+      $pub_date = get_content_publish_date($nid);
+      if (!empty($pub_date)) {  
+        $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+      } else {
+        $pub_date = "";
+      }
+      $field_primary_category_value = $resvalue['field_primary_category_value'];
+      $term = taxonomy_term_load($field_primary_category_value);
+      $term_name = $term->name;
+
+      $news_list_array[$listcount]['n_id'] = "$nid";
+      $news_list_array[$listcount]['n_type'] = "$type";
+      $news_list_array[$listcount]['n_is_sponsored'] = "0";
+      $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
+      $news_list_array[$listcount]['n_title'] = "$title";
+      $news_list_array[$listcount]['n_short_desc'] = "$field_story_kicker_text_value";
+      $news_list_array[$listcount]['n_pcategory_id'] = "$field_primary_category_value";
+      $news_list_array[$listcount]['n_pcategory_name'] = "$term_name";
+      $news_list_array[$listcount]['n_rating'] = "";
+      $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
+      $heighligth = array();
+      $heighligth = (array) getHighlightByNid($nid);      
+      $news_list_array[$listcount]['n_highlight'] = $heighligth;
+      if ($type == "photogallery") {
+        $node_data = node_load($nid);
+
+        $img_data = $node_data->field_gallery_image['und'][0];
+        $fc = field_collection_field_get_entity($img_data);
+
+
+        $fid = $fc->field_api_image['und'][0]['fid'];
+        $uri = $fc->field_images['und'][0]['uri'];
+        $source_data = $node_data->field_story_source_type['und'][0]['value'];
+        if ($source_data != "migrated" && $uri != '') {
+          $photo_story_eliimg = image_style_url('photo_slider_753x543', $uri);
+          $photo_story_liimg = image_style_url('large', $uri);
+          $photo_story_siimg = image_style_url('photo_landing_slider_thumb_88_86', $uri);
+
+          $news_list_array[$listcount]['n_small_image'] = "$photo_story_siimg";
+          $news_list_array[$listcount]['n_large_image'] = "$photo_story_eliimg";
+          $news_list_array[$listcount]['n_extralarge_image'] = "$photo_story_eliimg";
+        }
+        else {
+          $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
+          $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
+          $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
+        }
+      }
+      else {
+        $news_list_array[$listcount]['n_small_image'] = "$file_small_img_url";
+        $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
+        $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
+      }
+      $news_list_array[$listcount]['n_updated_datetime'] = "$pub_date";
+
+      // photo list array
+
+      if ($type == "photogallery") {
+        $photolist = (object) getPhotolist($nid, 1);
+      }
+      if ($type == "photostory") {
+        $photolist = (object) getPhotostorylist($nid);
+      }
+      if (count($photolist) == 0) {
+        $photolist = (object) $photolist;
+      }
+      $news_list_array[$listcount]['n_photo'] = $photolist;
+      // re-insalize photolist
+      $photolist = array();
+
+      // video list array
+      if ($type == "videogallery") {
+        $videolist = (object) getVideolist($nid, 1);
+      }
+      if (count($videolist) == 0) {
+        $videolist = (object) $videolist;
+      }
+      $news_list_array[$listcount]['n_video'] = $videolist;
+      // re-insalize vediolist
+      $videolist = array();
+
+      $listcount++;
+    }
+  }
+
+  $data['lcount'] = $listcount;
+  $data['data'] = $news_list_array;
+  $data['updated_datetime'] = $pub_date;
+  return $data;
+
 }
 

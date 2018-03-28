@@ -3238,7 +3238,7 @@ function itg_app_dashboard_form($form, &$form_state) {
     );
     $form['magazine_group']['magazine_config_options'] = array(
         '#type' => 'radios',
-        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#options' => array(0 => 'In Active', 1 => 'Active', 2 => 'Direct'),
         '#default_value' => fetchMasterConfigData('magazine_config_options'),
     );
     $form['magazine_group']['magazine_information'] = array(
@@ -4306,7 +4306,16 @@ function testtolive_hamburgermenu(){
     $jsondata = hamburger_menu_middleware_data();
     $jsondata = json_encode($jsondata);     
     variable_set('hamburger_menu_json', $jsondata);
-    redis_key_delete($key);
+    /*config_update_status_json updation*/
+    $update_conf_json = variable_get('config_update_status_json');
+    $update_conf_arr = json_decode($update_conf_json, TRUE);
+    $update_conf_arr['data']['menu_update']['hamburger_updated_datetime'] = date("Y-m-d H:i:s", time());
+    $update_conf_json = json_encode($update_conf_arr);
+    variable_set('config_update_status_json', $update_conf_json);
+    /*config_update_status_json updation*/
+    //clear redish
+    redis_key_delete($key);// hamburger_menu redish key
+    redis_key_delete('devitgd_rapid_config_update_status_json'); // config_update_status_json key
     drupal_set_message(t('Test-to-live hamburger-menu have been saved'));
     drupal_goto('hamburger-menu-management');
 }
@@ -4701,7 +4710,17 @@ function testtolive_horizontalmenu(){
     $jsondata = horizontal_menu_middleware_data();
     //$jsondata = json_encode($jsondata);     
     variable_set('horizontal_menu_json', $jsondata);
-    //redis_key_delete($key);
+    /*config_update_status_json updation*/
+    $update_conf_json = variable_get('config_update_status_json');
+    $update_conf_arr = json_decode($update_conf_json, TRUE);
+    //p($update_conf_arr);
+    $update_conf_arr['data']['menu_update']['horizontal_updated_datetime'] = date("Y-m-d H:i:s", time());
+    $update_conf_json = json_encode($update_conf_arr);
+    variable_set('config_update_status_json', $update_conf_json);
+    /*config_update_status_json updation*/
+    //clear redish
+    redis_key_delete($key);// horizontal_menu redish key
+    redis_key_delete('devitgd_rapid_config_update_status_json'); // config_update_status_json key
     drupal_set_message(t('Test-to-live horizontal-menu have been saved'));
     drupal_goto('horizontal-menu-management');
 }
