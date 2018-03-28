@@ -2009,12 +2009,12 @@
     /*Globe change for don't miss end*/
     /*event page css start*/
     #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li {
-        width: 100%;
+        width:320px;
     }
     #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider {
         .slick-prev,
         .slick-next {
-            display: none;
+            display: none!important;
         }
     }
     /*event page css end*/
