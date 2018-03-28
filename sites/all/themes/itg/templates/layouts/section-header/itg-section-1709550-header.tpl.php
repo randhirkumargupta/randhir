@@ -8,7 +8,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
  <div class="container">
     <div id="conclave-header">
         <div class="topBanner">
-            <div class="conclave-logo"><a href="/karnataka-panchayat-2018/2018/" title="Karnataka Panchayat 2018"><img src="https://akm-img-a-in.tosshub.com/indiatoday/section-header/images/karnataka-panchayat-logo.png" alt="Karnataka Panchayat 2018"></a></div>
+            <div class="conclave-logo"><a href="/karnataka-panchayat-2018/2018/" title="Karnataka Panchayat 2018"><img src="https://akm-img-a-in.tosshub.com/indiatoday/section-header/images/karnataka-panchayat-logo.png" alt="Karnataka Panchayat 2018"></a><a href="/" class="indiatoday-link">Indiatoday</a></div>
             <div class="conclave-event-details">
                 <div class="center-content">
                     <h3>THE ELECTION SHOWDOWN</h3>                    
