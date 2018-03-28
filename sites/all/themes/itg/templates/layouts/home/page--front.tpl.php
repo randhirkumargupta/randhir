@@ -188,7 +188,7 @@ if ($theme != 'itgadmin') {
                                 </div>
                             </div>
                             <!-- replace home-trending-video if webcast enable -->
-                            <?php if (!empty(get_itg_variable('itg_webcast_status', 0))):?>
+                            <?php if (function_exists('get_itg_variable') && !empty(get_itg_variable('itg_webcast_status', 0))):?>
 															<div class="col-sm-6 col-lg-12 home-trending-video">
                                 <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
                                 <span class="widget-title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url')); ?></h3></span>
