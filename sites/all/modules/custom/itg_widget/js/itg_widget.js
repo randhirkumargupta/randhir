@@ -404,7 +404,7 @@ jQuery(document).ajaxSuccess(function () {
     }
 });
 
-jQuery(window).load(function() {
+/*jQuery(window).load(function() {
     try {
       jQuery(".flexslider").flexslider({
      animation: "slide",
@@ -418,7 +418,7 @@ jQuery(window).load(function() {
      catch(err) {
          console.log(err.message);
      }
-});
+});*/
 
 jQuery(window).load(function() {
     try {
