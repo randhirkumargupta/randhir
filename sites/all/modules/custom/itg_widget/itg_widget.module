@@ -247,6 +247,14 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_widget_scorecard.inc',
     );
+    $items['itg-webcast-widget'] = array(
+      'title' => t('Web Cast Widget form'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_manage_webcast_widget'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_web_cast_widget_form.inc',
+    );
 
     return $items;
 }
