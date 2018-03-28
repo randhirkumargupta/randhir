@@ -49,8 +49,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       <!--<div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div>-->
       <?php
       if (count($data) > 1) {
-				print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
-			}
+        print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
+      }
       foreach ($data as $key => $value) {
         ?>
         <div class="<?php print 'Day-' . $key; ?> event-listing common-class">

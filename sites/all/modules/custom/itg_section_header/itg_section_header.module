@@ -415,7 +415,7 @@ function get_event_menu($nid) {
   $event_config_sponsors = $node->field_config_sponsors_value;
   $event_config_flashback = $node->field_config_flashback_value;
   $event_type = $node->field_event_types_tid;
-	$force_registration_flag = $node->field_force_registration_open_value;
+  $force_registration_flag = $node->field_force_registration_open_value;
   $menu_font_color = $node->field_e_menu_font_color_rgb ? $node->field_e_menu_font_color_rgb : '#f7ee23';
   $menu_highlights_color = $node->field_e_highlighted_font_color_rgb ? $node->field_e_highlighted_font_color_rgb : '#f7ee24';
   $home_menu = $menu_highlights_color;
@@ -423,12 +423,12 @@ function get_event_menu($nid) {
   $speakers_menu = $menu_highlights_color;
   $registration_menu = $menu_highlights_color;
   $sponsors_menu = $menu_highlights_color;
-	$page_node = menu_get_object();
-	$home_link_class = (!empty($page_node->nid) ? 'active' : '');
-	$programe_link_class = (arg(3) == 'programme' ? 'active' : '');
-	$speakers_link_class = (arg(3) == 'speakers' ? 'active' : '');
-	$registration_link_class = (arg(3) == 'registration' ? 'active' : '');
-	$sponsors_link_class = (arg(3) == 'sponsors' ? 'active' : '');
+  $page_node = menu_get_object();
+  $home_link_class = (!empty($page_node->nid) ? 'active' : '');
+  $programe_link_class = (arg(3) == 'programme' ? 'active' : '');
+  $speakers_link_class = (arg(3) == 'speakers' ? 'active' : '');
+  $registration_link_class = (arg(3) == 'registration' ? 'active' : '');
+  $sponsors_link_class = (arg(3) == 'sponsors' ? 'active' : '');
 	
   $menu = array();
   if ($event_config_home) {
