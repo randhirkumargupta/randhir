@@ -23,6 +23,16 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   if ($actual_host_name) {
     $baseurl = $actual_host_name . '/';
   }
+  
+  $output = '';
+  if (!empty($host_node->field_enable_livetv_highlights)) {
+    $output .= itg_event_backend_get_highlights_block();
+  }
+  elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
+    $output = '<h2 class="block-title">' . $host_node->title . '</h2>';
+    $output .= '<div class="mb-20">' . $host_node->body[LANGUAGE_NONE][0]['value'] . '</div>';
+  }
+  
   // Tab title
   if(empty($_GET['tab'])) {
 
@@ -32,23 +42,15 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       $tabs = '';
       foreach ($data as $key => $value) {
         $tabs .= '<li style="background: ' . $tab_highlighted_color . '" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
-      }
-
-      $output = '';
-      if ($current_date > $event_start_date && $current_date < $event_close_date) {
-        $output .= itg_event_backend_get_highlights_block();
-      }
-      elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
-        $output = '<h2 class="block-title">' . $host_node->title . '</h2>';
-        $output .= '<div class="mb-20">' . $host_node->body[LANGUAGE_NONE][0]['value'] . '</div>';
-      }
-
+      }      
       print $output;
       ?>
       <h2 class="block-title"><?php print t('Session wise coverage'); ?></h2>
-      <div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div>
+      <!--<div class="program-sub-title" style="color: <?php echo $program_title_font_color; ?>; background: <?php print $heading_background_color; ?>"><?php echo t('Programme Schedule'); ?></div>-->
       <?php
-      print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
+      if (count($data) > 1) {
+				print '<div class="top-tab"><ul>' . $tabs . '</ul></div>';
+			}
       foreach ($data as $key => $value) {
         ?>
         <div class="<?php print 'Day-' . $key; ?> event-listing common-class">
