@@ -472,7 +472,7 @@ var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_wid
 
 
 <div class="colum">
-<script type="text/javascript">ajaxinclude("http://indiatoday.intoday.in/chunk_todaysheadline_mustread.jsp")</script>
+<script type="text/javascript">ajaxinclude("/staticpages/chunk_todaysheadline_mustread.jsp")</script>
 </div>
 <div class="colum"> 
   

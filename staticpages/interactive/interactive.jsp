@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html><html lang="en">
 <head>
 <!-- Begin comScore Tag -->
@@ -29,7 +24,7 @@
   ga('send', 'pageview');
 </script>
 <meta charset="utf-8">
-<base href="http://indiatoday.intoday.in/"/>
+<base href="/staticpages/"/>
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 <title>India Today - Error 404 - Page Not Found</title>
 <meta name="description" content="http://indiatoday.intoday.in - India Today - Error 404 - Page Not Found" />
@@ -40,8 +35,8 @@
 <link rel="alternate" type="application/rss+xml" title="India Today" href="rss/article.jsp?sid=120" /> 
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
-<link href="css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="main/js/jquery.bxslider.min.js"></script>
+<link href="/staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="css/it-inner-15.css" />
 <link rel="stylesheet" type="text/css" href="css/it-common-15.css" />
 <link href="css/responsive.css" type="text/css" rel="stylesheet" />
