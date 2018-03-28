@@ -187,6 +187,25 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
+                            <!-- replace home-trending-video if webcast enable -->
+                            <?php if (function_exists('get_itg_variable') && !empty(get_itg_variable('itg_webcast_status', 0))):?>
+															<div class="col-sm-6 col-lg-12 home-trending-video">
+                                <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
+                                <span class="widget-title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url')); ?></h3></span>
+                                <?php }else { ?>
+                                <span class="widget-title"><h3><?php print get_itg_variable('itg_webcast_title') ?></h3></span>
+                                <?php } ?>
+                                <div class='live-webcast-coverage'>
+                                  <?php print get_itg_variable('itg_webcast_iframe'); ?>
+                                </div>
+                                <?php if (!empty(get_itg_variable('itg_content_webcast_url'))) { ?>
+                                <div class="webcast_link webcast_title"><h3><?php print l(get_itg_variable('itg_content_webcast_title'), get_itg_variable('itg_content_webcast_url')); ?></h3></div>
+                                <?php }else { ?>
+                                <div class="webcast_title"><h3><?php print get_itg_variable('itg_content_webcast_title') ?></h3></div>
+                                <?php } ?>
+															</div>
+                            <!-- replace home-trending-video if webcast enable end here -->
+                            <?php else: ?>
                             <div class="col-sm-6 col-lg-12 home-trending-video">
                                 <div class="widget-help-text">Template widgets(<strong>Trending Videos &amp; Top Takes</strong>)</div>
                                 <div class="tab-buttons">
@@ -273,6 +292,7 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
