@@ -7443,11 +7443,11 @@ section.sidebar .block-itg-ads {
         #block-views-program-schedule-block-1 .content-list ul.profile-detail li span.designation {
           font-weight: normal; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(1) {
-        width: 28%;
-        padding-top: 25px; }
+        width: 20%;
+        padding-top: 0px; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
-        width: 24%;
-        text-align: center; }
+        width: 75%;
+        text-align: left; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
         width: 48%;
         padding-top: 8px; }
