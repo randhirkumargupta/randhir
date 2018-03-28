@@ -18,11 +18,13 @@
 .karnataka-panchayat-2018 .topBanner .conclave-logo{ width:260px;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details {width: calc(100% - 260px); height:100px;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details h3{ font-size:37px; }
+.event-sidebar .sidebars .block-itg-ads{ border:0px; }
 }
 @media screen and (max-width:768px){
 .karnataka-panchayat-2018 .topBanner .conclave-logo{ width:220px;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details {width: calc(100% - 220px); height:85px;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details h3{ font-size:32px; }
+.event-sidebar .sidebars .block-itg-ads{ border:1px solid #ddd; }
 }
 @media screen and (max-width:767px){
 .karnataka-panchayat-2018 .topBanner .conclave-logo{ width:220px; float: none; margin: 0 auto 15px;}
@@ -33,6 +35,6 @@
 @media screen and (max-width:320px){
 .karnataka-panchayat-2018 #conclave-header{ padding:10px 0; }
 .karnataka-panchayat-2018 .topBanner .conclave-event-details{ height:50px; }
-.karnataka-panchayat-2018 .topBanner .conclave-event-details h3{ font-size:20px;line-height: 25px; }
+.karnataka-panchayat-2018 .topBanner .conclave-event-details h3{ font-size:18px;line-height: 25px; }
 .karnataka-panchayat-2018 .topBanner .conclave-event-details h6{ font-size: 12px;}
 }
