@@ -1248,6 +1248,23 @@ function path_to_theme() {
 function drupal_find_theme_functions($cache, $prefixes) {
   $implementations = array();
   $functions = get_defined_functions();
+  static $lookup_table = NULL;
+  static $seen = array();
+
+  foreach ($functions['user'] as $function) {
+    if (isset($seen[$function])) {
+      continue;
+    }
+    $seen[$function] = TRUE;
+    $t = explode('_', $function);
+    $count = count($t);
+    $prefix = '';
+    for ($i = 0; $i < $count; $i++) {
+      $prefix .= $t[$i];
+      $lookup_table[$prefix][] = $function;
+      $prefix .= '_';
+    }
+  }
 
   foreach ($cache as $hook => $info) {
     foreach ($prefixes as $prefix) {
@@ -1263,8 +1280,8 @@ function drupal_find_theme_functions($cache, $prefixes) {
       // are found using the base hook's pattern, not a pattern from an
       // intermediary suggestion.
       $pattern = isset($info['pattern']) ? $info['pattern'] : ($hook . '__');
-      if (!isset($info['base hook']) && !empty($pattern)) {
-        $matches = preg_grep('/^' . $prefix . '_' . $pattern . '/', $functions['user']);
+      if (!isset($info['base hook']) && !empty($pattern) && isset($lookup_table[$prefix])) {
+        $matches = preg_grep('/^' . $prefix . '_' . $pattern . '/', $lookup_table[$prefix]);
         if ($matches) {
           foreach ($matches as $match) {
             $new_hook = substr($match, strlen($prefix) + 1);
@@ -1280,7 +1297,7 @@ function drupal_find_theme_functions($cache, $prefixes) {
       // Find theme functions that implement registered theme hooks and include
       // that in what is returned so that the registry knows that the theme has
       // this implementation.
-      if (function_exists($prefix . '_' . $hook)) {
+      if (isset($seen[$prefix . '_' . $hook])) {
         $implementations[$hook] = array(
           'function' => $prefix . '_' . $hook,
         );
