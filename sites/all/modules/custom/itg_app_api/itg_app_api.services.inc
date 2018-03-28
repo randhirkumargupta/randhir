@@ -5747,11 +5747,43 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-p(node_load(988282));
-  $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india'); 
-  $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
-print_r($searchpage1);
-p($searchpage2);
+
+    $query1 = "CREATE TABLE IF NOT EXISTS `itg_app_middleware_live` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The primary identifier',
+  `identifier` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `url` text NOT NULL,
+  `ids` int(11) NOT NULL DEFAULT '0' COMMENT 'value of term or node id.',
+  `created` int(11) NOT NULL DEFAULT '0' COMMENT 'The Unix timestamp when the identifier was created.',
+  `changed` int(11) NOT NULL DEFAULT '0' COMMENT 'The Unix timestamp when the identifier was most recently saved.',
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '1=active, 0= inactive',
+  PRIMARY KEY (`id`),
+  KEY `identifier_changed` (`changed`),
+  KEY `identifier_created` (`created`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='The base table for itg middleware management.' AUTO_INCREMENT=1 ";
+    db_query($query1);
+    $query2 = "CREATE TABLE IF NOT EXISTS `itg_app_master_config_internal_live` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The primary identifier',
+  `config_key` varchar(255) NOT NULL DEFAULT '',
+  `config_val` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='The base table for itg master config internal.' AUTO_INCREMENT=1";
+    db_query($query2);
+    $query3 = "CREATE TABLE IF NOT EXISTS `itg_app_master_info_internal_live` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The primary identifier',
+  `org_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'org content id',
+  `info_id` varchar(255) NOT NULL DEFAULT '' COMMENT 'info id- cat/menu id',
+  `info_type` varchar(255) NOT NULL DEFAULT '' COMMENT 'info type- cat/menu/poll',
+  `info_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'info key',
+  `info_value` varchar(255) NOT NULL DEFAULT '' COMMENT 'info value',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='The base table for itg master info internal.' AUTO_INCREMENT=1";
+    db_query($query3);
+    p(node_load(988282));
+    $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
+    $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
+    print_r($searchpage1);
+    p($searchpage2);
 }
 
 /**
