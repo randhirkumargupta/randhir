@@ -3,7 +3,7 @@ global $base_url;
 drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
-<div id="section-header-event-1788598" class="karnataka-panchayat-2018">
+<div id="section-header-event-1709550" class="karnataka-panchayat-2018">
 <div class="bgcolor">
  <div class="container">
     <div id="conclave-header">
