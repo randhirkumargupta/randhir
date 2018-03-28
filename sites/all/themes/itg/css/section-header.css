@@ -13,6 +13,7 @@
 .karnataka-panchayat-2018 .topBanner .conclave-event-details h6{font-size: 17px;font-family: "OpenSans-semibold";font-weight: 200; color: #ca1218;line-height: 30px;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details h6 span{background: #111;color: #fff; padding: 0px 5px 2px;}
 .karnataka-panchayat-2018  #block-menu-menu-event-menu ul li a{ color:#fff!important;font-weight: bold;}
+.karnataka-panchayat-2018 #block-menu-menu-event-menu ul li.active a{ background:#c81218}
 @media screen and (max-width:1024px){
 .karnataka-panchayat-2018 .topBanner .conclave-logo{ width:260px;}
 .karnataka-panchayat-2018 .topBanner .conclave-event-details {width: calc(100% - 260px); height:100px;}
