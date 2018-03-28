@@ -955,6 +955,8 @@ background:none;
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 220px;}
 .front .itg-top-section .top-rhs-add-child .ad-widget{margin:15px -30px 0;width: 320px; padding:4px 10px; }
 .front .itg-layout-container .itg-h321-section .ad-widget{margin: 0 -17px;}
+.event-sidebar .sidebars .block-itg-ads{ margin:0 -15px 20px; }
+
 }
 .instagram-media{position: static!important;}
 @media only screen and (max-width: 1024px) and (min-width:786px){
