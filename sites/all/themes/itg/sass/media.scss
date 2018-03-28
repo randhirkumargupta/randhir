@@ -503,8 +503,8 @@
         background-color: #aaa;
     }
     #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-        width: 55px;
-        height: 55px;
+        width: 72px;
+        height: 72px;
     }
     .education-layout-page {
         .widget-wrapper {
@@ -2232,7 +2232,7 @@
                             }
                             label {
                                 color: #ef2a24;
-                                position: absolute;
+                                position: relative;
                                 left: 86px;
                                 top: 0;
                             }
@@ -2250,13 +2250,13 @@
             ul.profile-detail {
                 li {
                     &:first-child {
-                        width: 28%;
-                        padding-top: 15px;
+                        width: 25%;
+                        padding-top: 0px;
                         font-size: 12px;
                     }
                     &:nth-child(2) {
-                        width: 26%;
-                        text-align: center;
+                        width: 75%;
+                        text-align: left;
                     }
                     &:nth-child(3) {
                         width: 45%;
@@ -3949,6 +3949,11 @@
 }
 
 @media (max-width: 767px) {
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
+    }
+
     #block-views-video-landing-header-block .latest_video {
         padding: 30px 0 0;
         float: left;
