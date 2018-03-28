@@ -88,7 +88,7 @@ function itg_seo_node_data($node) {
       $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
     $modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
-    $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
+    $description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
     $bylines = itg_get_multi_byline_details($node->nid, 1);
     $authname = array();
     foreach ($bylines AS $bylines_val) {

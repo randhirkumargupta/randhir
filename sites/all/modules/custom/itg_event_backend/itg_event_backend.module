@@ -2017,9 +2017,19 @@ function itg_event_backend_live_content() {
   if (module_exists('itg_live_tv')) {
     $banner_video = itg_live_tv_page_video();
   }
-  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 class="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
-  $highlights_content = '<div class="highlights-container col-md-5">' . itg_event_backend_highlights_block_content() . '</div></div>';
-  return $video . $highlights_content;
+  $live_tvClass = 'col-md-7';
+  $highlight_content = itg_event_backend_highlights_block_content();
+  if(empty($highlight_content)){
+    $live_tvClass = 'col-md-12';
+  }
+  $video = '<div class="row top-block-highlight"><div class="highlights-video '.$live_tvClass.'"><h2 class="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
+  $highlights_content = '<div class="highlights-container col-md-5">' . $highlight_content . '</div></div>';
+  if(empty($highlight_content)){
+    return $video;
+  }else{
+    return $video . $highlights_content;
+  }
+  
 }
 
 /**
@@ -2522,6 +2532,7 @@ function itg_event_backend_section_menu_detail($nid) {
   $query->fields('dfet', array('field_event_types_tid'));
   $query->fields('femfc', array('field_e_menu_font_color_rgb'));
   $query->fields('fehfc', array('field_e_highlighted_font_color_rgb'));
+  $query->fields('ffro', array('field_force_registration_open_value'));
 
   $query->leftjoin('field_data_field_event_start_date', 'fesd', 'fesd.entity_id = n.nid');
   $query->leftjoin('field_data_field_config_home', 'fch', 'fch.entity_id = n.nid');
@@ -2533,6 +2544,7 @@ function itg_event_backend_section_menu_detail($nid) {
   $query->leftjoin('field_data_field_event_types', 'dfet', 'dfet.entity_id = n.nid');
   $query->leftjoin('field_data_field_e_menu_font_color', 'femfc', 'femfc.entity_id = n.nid');
   $query->leftjoin('field_data_field_e_highlighted_font_color', 'fehfc', 'fehfc.entity_id = n.nid');
+  $query->leftjoin('field_data_field_force_registration_open', 'ffro', 'ffro.entity_id = n.nid');
 
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchAll();
