@@ -1231,7 +1231,7 @@ function topstoriesList($source, $limit = 0) {
             $body_without_html = strip_tags($body_value);
             $no_desc_withouthtml = $body_without_html;
             $arr_offline = array();
-            $arr_offline['no_desc_withouthtml'] = "$no_desc_withouthtml";
+            $arr_offline['no_desc_withouthtml'] = "$body_value";
             $arr_offline['no_author']['a_title'] = "$a_title";
             $data_newslist[$home_list_count]['n_offline_data'] = $arr_offline;
         }
