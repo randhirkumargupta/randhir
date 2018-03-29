@@ -925,8 +925,11 @@ function itg_common_node_view($node, $view_mode, $langcode) {
     }
 
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-      if (function_exists('totalcomments')) {
+      $last_record = global_comment_last_record(); 
+      if (function_exists('totalcomments') && (trim($last_record[0]->config_name) == 'other')) {
         $node->content['comment_count'] = totalcomments($arg[1]);
+      } else {
+        $node->content['comment_count'] = 0;
       }
     }
 
