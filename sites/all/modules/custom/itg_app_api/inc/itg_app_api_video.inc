@@ -1229,9 +1229,11 @@ function topstoriesList($source, $limit = 0) {
             $aid = $byline_data[0]['nid'];
             $a_title = $byline_data[0]['title'];
             $body_without_html = strip_tags($body_value);
+            $body_with_html_data = formateNodeBodyToken($body_value);
+            $body_with_html = $body_with_html_data['n_body'];
             $no_desc_withouthtml = $body_without_html;
             $arr_offline = array();
-            $arr_offline['no_desc_withouthtml'] = "$body_value";
+            $arr_offline['no_desc_withouthtml'] = "$body_with_html";
             $arr_offline['no_author']['a_title'] = "$a_title";
             $data_newslist[$home_list_count]['n_offline_data'] = $arr_offline;
         }
