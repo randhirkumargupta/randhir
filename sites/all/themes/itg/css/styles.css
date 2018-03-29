@@ -7245,7 +7245,8 @@ section.sidebar .block-itg-ads {
             vertical-align: middle;
             padding-left: 15px;
             color: #6e6e6e;
-            font-weight: normal; }
+            font-weight: normal;
+            width: calc(100% - 72px); }
             #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation .speaker-title {
               font-weight: 700; }
           #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop {
