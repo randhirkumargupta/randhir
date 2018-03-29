@@ -25,7 +25,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   }
   
   $output = '';
-  if (!empty($host_node->field_enable_livetv_highlights)) {
+  if (!empty($host_node->field_enable_livetv_highlights[LANGUAGE_NONE][0]['value'])) {
     $output .= itg_event_backend_get_highlights_block();
   }
   elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
