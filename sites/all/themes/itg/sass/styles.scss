@@ -7306,7 +7306,7 @@ section.sidebar {
                     }
                     a {
                         color: #d71921;
-                        width: 32%;
+                        width: 42%;
                         display: inline-block;
                         i {
                             color: #000;
@@ -7600,12 +7600,12 @@ section.sidebar {
                     }
                 }
                 &:nth-child(1) {
-                    width: 28%;
-                    padding-top: 25px;
+                    width: 20%;
+                    padding-top:0px;
                 }
                 &:nth-child(2) {
-                    width: 24%;
-                    text-align: center;
+                    width: 75%;
+                    text-align: left;
                 }
                 &:nth-child(3) {
                     width: 48%;
@@ -8024,7 +8024,7 @@ section.sidebar {
         }
         img {
             border-radius: 100%;
-            border: 1px solid #ddd;
+            border: 2px solid #d71921;
         }
     }
     h3 {

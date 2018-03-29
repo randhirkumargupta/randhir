@@ -405,10 +405,7 @@
     .breakingnew-home .title {
         font-size: 15px;
     }
-    /*event page css start*/
-    .event-add-header {
-        display: none;
-    }
+    /*event page css start .event-add-header {display: none;} */
     #block-menu-menu-event-menu {
         ul {
             li {
@@ -503,8 +500,8 @@
         background-color: #aaa;
     }
     #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-        width: 55px;
-        height: 55px;
+        width: 72px;
+        height: 72px;
     }
     .education-layout-page {
         .widget-wrapper {
@@ -2009,12 +2006,12 @@
     /*Globe change for don't miss end*/
     /*event page css start*/
     #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li {
-        width: 100%;
+        width:320px;
     }
     #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider {
         .slick-prev,
         .slick-next {
-            display: none;
+            display: none!important;
         }
     }
     /*event page css end*/
@@ -2232,8 +2229,8 @@
                             }
                             label {
                                 color: #ef2a24;
-                                position: absolute;
-                                left: 86px;
+                                position: relative;
+                                left:0px;
                                 top: 0;
                             }
                             .speaker-designation {
@@ -2250,13 +2247,13 @@
             ul.profile-detail {
                 li {
                     &:first-child {
-                        width: 28%;
-                        padding-top: 15px;
+                        width: 25%;
+                        padding-top: 0px;
                         font-size: 12px;
                     }
                     &:nth-child(2) {
-                        width: 26%;
-                        text-align: center;
+                        width: 75%;
+                        text-align: left;
                     }
                     &:nth-child(3) {
                         width: 45%;
@@ -3949,6 +3946,11 @@
 }
 
 @media (max-width: 767px) {
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
+    }
+
     #block-views-video-landing-header-block .latest_video {
         padding: 30px 0 0;
         float: left;

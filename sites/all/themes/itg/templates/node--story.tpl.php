@@ -162,12 +162,14 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+        <!--<h1  title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>-->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>       
         <?php
       }
       else {
         ?>
-        <h1 title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
+        <!--<h1 title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>-->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -836,6 +838,7 @@ if (!empty($content)):
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
+                $story_body = str_replace("&#13;", "", $story_body);
                 // check video is delete form video content   
 //                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
 //                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);

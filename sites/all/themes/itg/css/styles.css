@@ -7221,7 +7221,7 @@ section.sidebar .block-itg-ads {
             margin-bottom: 10px; }
           #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part a {
             color: #d71921;
-            width: 32%;
+            width: 42%;
             display: inline-block; }
             #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part a i {
               color: #000; }
@@ -7443,11 +7443,11 @@ section.sidebar .block-itg-ads {
         #block-views-program-schedule-block-1 .content-list ul.profile-detail li span.designation {
           font-weight: normal; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(1) {
-        width: 28%;
-        padding-top: 25px; }
+        width: 20%;
+        padding-top: 0px; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
-        width: 24%;
-        text-align: center; }
+        width: 75%;
+        text-align: left; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
         width: 48%;
         padding-top: 8px; }
@@ -7813,7 +7813,7 @@ section.sidebar .block-itg-ads {
   .speaker-detail-page .col-md-3 img,
   #block-views-program-schedule-block-3 .col-md-3 img {
     border-radius: 100%;
-    border: 1px solid #ddd; }
+    border: 2px solid #d71921; }
 .speaker-detail-page h3,
 #block-views-program-schedule-block-3 h3 {
   font-family: roboto-slab;
