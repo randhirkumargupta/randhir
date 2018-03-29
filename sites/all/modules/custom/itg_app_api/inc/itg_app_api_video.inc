@@ -1215,6 +1215,10 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
         $n_widget = array();
         $data_newslist[$home_list_count]['n_widget'] = $n_widget;
+        $arr_offline = array();
+        $arr_offline[0]['no_desc_withouthtml'] = "$field_story_kicker_text_value";
+        $arr_offline[0]['no_author'][0]['a_title'] = "andy";
+        $data_newslist[$home_list_count]['n_offline_data'] = $n_widget;
         $home_list_count++;
         //}
     }
