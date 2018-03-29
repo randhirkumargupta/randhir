@@ -1,12 +1,6 @@
-
-
-
-
-
-
-<link rel="stylesheet" href="http://media2.intoday.in/aajtak/election-css-2016/election2016indiatoday.min.css">
+<link rel="stylesheet" href="/staticpages/css/election2016indiatoday.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="http://media2.intoday.in/aajtak/elections2016/js/election2016-custom.js"></script>
+<script type="text/javascript" src="/staticpages/js/election2016-custom.js"></script>
 
 	<div class="resultTabContainer">
     	<div class="electionStateListSec">
