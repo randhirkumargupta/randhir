@@ -114,97 +114,97 @@ border-bottom:1px solid #B3B3B3;
 
 <div id="wrap"><ul id="mycarousel">
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Jitan-Ram-Manjhi.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Jitan Ram Manjhi</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Jitan-Ram-Manjhi.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Jitan Ram Manjhi</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(HAM) Imamganj</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Uday-Narayan-Chaudhary.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Uday Narayan Chaudhary</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Uday-Narayan-Chaudhary.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Uday Narayan Chaudhary</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(JD-U) Imamganj</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Shyam-Rajak.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Shyam Rajak</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Shyam-Rajak.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Shyam Rajak</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(JD-U) Phulwari</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Ramai-Ram.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Ramai Ram</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Ramai-Ram.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Ramai Ram</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(JD-U) Bochahan</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Tej-Pratap-Yadav.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Tej Pratap Yadav</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Tej-Pratap-Yadav.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Tej Pratap Yadav</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(RJD) Mahua </span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Tejaswi-Yadav.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Tejaswi Yadav</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Tejaswi-Yadav.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Tejaswi Yadav</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(RJD) Raghopur </span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Nand-Kishore-Yadav.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Nand Kishore Yadav</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Nand-Kishore-Yadav.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Nand Kishore Yadav</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(BJP) Patna Sahib</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Nitish-Mishra.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Nitish Mishra</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Nitish-Mishra.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Nitish Mishra</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(BJP) Jhanjharpur </span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Sadanand-Singh.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Sadanand Singh</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Sadanand-Singh.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Sadanand Singh</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(INC) Kahalgaon</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Abdul-Bari-Siddiqui.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Abdul Bari Siddiqui</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Abdul-Bari-Siddiqui.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Abdul Bari Siddiqui</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(RJD) Alinagar</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Ramchandra-Purve.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Ramchandra Purve</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Ramchandra-Purve.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Ramchandra Purve</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(RJD) Parihar</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Shakuni-Chowdhary.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Shakuni Chowdhary</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Shakuni-Chowdhary.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Shakuni Chowdhary</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(HAM) Tarapur </span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Lovely-Anand.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Lovely Anand</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Lovely-Anand.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Lovely Anand</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(HAM) Sheohar </span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Renu-Kushawah.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Renu Kushawah</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Renu-Kushawah.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Renu Kushawah</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(BJP) Samastipur</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Akhtarul-Iman.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Akhtarul Iman</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Akhtarul-Iman.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Akhtarul Iman</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(AIMIM) Kochadam </span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Prem-Kumar.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Prem Kumar</span><span class="resulttxt wontxt">
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/assemblypoll/Prem-Kumar.jpg" width="60" height="60" align="left" /><div class="candidate-name"> <span class="">Prem Kumar</span><span class="resulttxt wontxt">
 
 	</span></div>
     <span class="party-txt">(BJP) Gaya</span>
@@ -212,7 +212,7 @@ border-bottom:1px solid #B3B3B3;
           
 </ul></div>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
 		(function($){
 			$(window).load(function(){

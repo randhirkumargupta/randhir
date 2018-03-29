@@ -1,4 +1,4 @@
-var domain = "http://media2.intoday.in/";
+var domain = "https://smedia2.intoday.in/";
 var fpath = "/elections/js/";
 //console.log(document.domain);
 

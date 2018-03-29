@@ -131,5 +131,5 @@
 .storysection, .photosection, .videosection, .sosorrysection{ overflow:hidden; position:relative; padding-left:2px;}
 a.heademore{ position:absolute; top:3px; right:10px;}
 
-#asselection .share-icon { background: #ffcc3f url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/shares.png") no-repeat scroll 0 4px; bottom: 3px; padding-left: 25px; padding-right: 10px; position: absolute; width: auto;}
+#asselection .share-icon { background: #ffcc3f url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/shares.png") no-repeat scroll 0 4px; bottom: 3px; padding-left: 25px; padding-right: 10px; position: absolute; width: auto;}
 #asselection .share-story span.sharetext { float: left;font-size: 16px;font-weight: 300;line-height: 30px;margin-left: 5px;width: auto;}

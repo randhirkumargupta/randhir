@@ -116,7 +116,7 @@ border-bottom:1px solid #B3B3B3;
           
 </ul></div>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
 		(function($){
 			$(window).load(function(){

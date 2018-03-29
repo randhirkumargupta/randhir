@@ -14,7 +14,7 @@ footer { background:none!Important}
 .nav ul li { padding: 13px 0 !important;}
 body{ background:#fff!important;}
 .lineheader {
-    background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/headingborder.png) repeat-x scroll 0 12px;
+    background: url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/headingborder.png) repeat-x scroll 0 12px;
     height:20px;
     margin-bottom: 10px;   
 }
@@ -22,7 +22,7 @@ body{ background:#fff!important;}
 .topinnerbox1{}
 .menues { width:1003px}
 .left-column1{ width:98%!important;  background:#F8F6F7;}
-.logo-election { height:168px;  background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Delhi_Election_logo.gif") no-repeat scroll left top transparent;
+.logo-election { height:168px;  background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Delhi_Election_logo.gif") no-repeat scroll left top transparent;
     text-indent: -9999px;
     width: auto; float:left; margin:10px 0 -25px 0 }
 	
@@ -199,17 +199,17 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 .d_colum ul li a { color:#555; font-weight: normal;  line-height: 16px;} 
 .d_colum ul li a:hover { color:#000; }
 .d_seemore { border:1px solid #dbdbdb; border-radius:5px; background:#fff; padding:5px 10px 5px 10px; color:#000; float:left; margin-left:40px; cursor:pointer; margin-bottom:8px; }
-.d_seemore .d_downarrow { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/down_arrow_delhi.jpg) left top no-repeat; width:19px; height:19px; display:inline-block; margin-bottom:-6px; margin-right:8px;}
-.d_seemore .d_uparrow { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/up_arrow_delhi.jpg) left top no-repeat; width:19px; height:19px; display:inline-block; margin-bottom:-6px; margin-right:8px;}
-.vid_icon {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png) left top no-repeat; width:55px; height:55px; position:absolute; left:85px; top:50px; }
+.d_seemore .d_downarrow { background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/down_arrow_delhi.jpg) left top no-repeat; width:19px; height:19px; display:inline-block; margin-bottom:-6px; margin-right:8px;}
+.d_seemore .d_uparrow { background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/up_arrow_delhi.jpg) left top no-repeat; width:19px; height:19px; display:inline-block; margin-bottom:-6px; margin-right:8px;}
+.vid_icon {background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png) left top no-repeat; width:55px; height:55px; position:absolute; left:85px; top:50px; }
 
 .bx-wrapper .bx-controls-direction a { width:48px; height:70px; top:42%; opacity:0.7;}
 .bx-wrapper .bx-next {
-    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Right.gif") left top no-repeat rgba(0, 0, 0, 0);
+    background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Right.gif") left top no-repeat rgba(0, 0, 0, 0);
     right: -3px!Important;
 }
 .bx-wrapper .bx-prev {
-    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Left.gif") left top no-repeat rgba(0, 0, 0, 0);
+    background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Left.gif") left top no-repeat rgba(0, 0, 0, 0);
     left: 0!Important;
 }
 .bx-wrapper .bx-next:hover { background-position:0 0;}

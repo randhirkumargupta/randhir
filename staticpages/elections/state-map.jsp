@@ -6,7 +6,7 @@
     <div class="clr"></div>
     <div class="box-poll-shadow" style="width:99%">
     <div>
-        <a href="/elections/2014/indiamaps.html"><img width="270" alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/indiamap_delhi.gif"></a>
+        <a href="/elections/2014/indiamaps.html"><img width="270" alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/indiamap_delhi.gif"></a>
         </div>
     </div>
 </div>

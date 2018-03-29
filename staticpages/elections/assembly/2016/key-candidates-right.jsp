@@ -11,7 +11,7 @@ $(document).ready(function(){$('.candidate-statenav ul li >a').click(function(){
     <li><a href="javascript:KeyCandidate('http://indiatoday.intoday.in/elections/assembly/2016/vipcandidate_en.jsp?state=tamil-nadu');" title="TAMIL NADU">TAMIL NADU</a></li>
     <li><a href="javascript:KeyCandidate('http://indiatoday.intoday.in/elections/assembly/2016/vipcandidate_en.jsp?state=kerala');" title="KERALA">KERALA</a></li>
     <li><a href="javascript:KeyCandidate('http://indiatoday.intoday.in/elections/assembly/2016/vipcandidate_en.jsp?state=puducherry');" title="PUDUCHERRY">PUDUCHERRY</a></li>
-    <!--<li><a href="javascript:KeyCandidate('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/assembly-2016/vip-candidate-pondichery-election.htm');" title="PUNDUCHERRY">PUNDUCHERRY</a></li>-->
+    <!--<li><a href="javascript:KeyCandidate('https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/assembly-2016/vip-candidate-pondichery-election.htm');" title="PUNDUCHERRY">PUNDUCHERRY</a></li>-->
   </ul>
 </div>
 <div id="keycondidates">

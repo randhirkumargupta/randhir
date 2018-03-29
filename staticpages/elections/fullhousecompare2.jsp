@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 <link href="/elections/assembly/2015/bihar/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> 
@@ -22,7 +22,7 @@
 <![endif]-->
 <link href="http://indiatoday.intoday.in/css/responsive.css" type="text/css" rel="stylesheet" />
 <link rel="canonical" href="/" /> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <link href="http://election2014live.intoday.in/elections/css/election-style.css" type="text/css" rel="stylesheet" />
  <script src="http://election2014live.intoday.in/elections/js/maps2.js" type="text/javascript"></script>
 <script src="http://election2014live.intoday.in/elections/js/highcharts.js"></script>
@@ -174,7 +174,7 @@ $('.searc-icon').click(function(){
 <div class="clear"></div>
 
 <header>
-<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Logo.png"></a></div>
+<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Logo.png"></a></div>
 <div class="ad">
 <!-- begin ZEDO for channel:  IT Election Top nav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 <script language="JavaScript">
@@ -267,7 +267,7 @@ hmelection2014();
   
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
-	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
     </div>
   </div>
   </div>
@@ -390,10 +390,10 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
 <script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='/staticpages/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>

@@ -12,7 +12,7 @@
 <link href="/elections/assembly/2015/bihar/css/homepage-new.css" type="text/css" rel="stylesheet" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> 
@@ -25,12 +25,12 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <!--<link href="http://indiatoday.intoday.in/css/responsive.css" type="text/css" rel="stylesheet" />-->
 <link rel="canonical" href="/" /> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
 
 <link href="/elections/assembly/2015/bihar/css/election-style.css" type="text/css" rel="stylesheet" />
 <script src="/elections/assembly/2015/bihar/js/maps2.js" type="text/javascript"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/tooltip.js" type="text/javascript"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/tooltip.js" type="text/javascript"></script>
 
 <script>
 
@@ -193,7 +193,7 @@ $('.searc-icon').click(function(){
 <div class="clear"></div>
 
 <header>
-<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Logo.png"></a></div>
+<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Logo.png"></a></div>
 <div class="ad">
 <!-- begin ZEDO for channel:  IT Election Top nav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 <script language="JavaScript">
@@ -353,14 +353,14 @@ function myOpen(abc) {
    
 <div class="leftspac ipdwidth"><div class="hotrightnow-head red "><h3><a href="http://indiatoday.intoday.in/videos" target="_blank">Videos</a></h3></div>
 
-<li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jaya-video_179_052215024729.jpg"></a><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html">Jayalalithaa makes first public appearance in 217 days</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-kiran-bedi-cm-candidate/1/414085.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kiran-bedi_video_179_011915030550.jpg"></a><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-kiran-bedi-cm-candidate/1/414085.html">Bedi to be face of Delhi BJP?</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-bjp-candidate-list/1/414066.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bjp_video_179_011915012251.jpg"></a><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-bjp-candidate-list/1/414066.html">BJP to release list of candidates today</a><span class='small-play-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/videos" target="_blank">More</a></div></div>
+<li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jaya-video_179_052215024729.jpg"></a><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html">Jayalalithaa makes first public appearance in 217 days</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-kiran-bedi-cm-candidate/1/414085.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kiran-bedi_video_179_011915030550.jpg"></a><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-kiran-bedi-cm-candidate/1/414085.html">Bedi to be face of Delhi BJP?</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-bjp-candidate-list/1/414066.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bjp_video_179_011915012251.jpg"></a><a href="http://indiatoday.intoday.in/video/delhi-assembly-elections-bjp-candidate-list/1/414066.html">BJP to release list of candidates today</a><span class='small-play-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/videos" target="_blank">More</a></div></div>
 
  </div> 
  <div class="colum"> 
    
 <div class="leftspac ipdwidth"><div class="hotrightnow-head red "><h3><a href="http://indiatoday.intoday.in/galleries"       target="_blank">Photos</a></h3></div>
 
-<li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sushma-new_179_052814010833.jpg"></a><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html">Photos: NDA government takes charge</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-swearing-in-ceremony-celebrations-modi-cabinet/1/11871.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/pti1_210_052714023135.jpg"></a><a href="http://indiatoday.intoday.in/gallery/narendra-modi-swearing-in-ceremony-celebrations-modi-cabinet/1/11871.html">Photos: How Modi's oath ceremony was celebrated across India</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/nawaz-sharif-mahinda-rajapaksa-hamid-karzai-narendra-modi-swearing-in/1/11862.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sharif_179_052614035616.jpg"></a><a href="http://indiatoday.intoday.in/gallery/nawaz-sharif-mahinda-rajapaksa-hamid-karzai-narendra-modi-swearing-in/1/11862.html">Sharif, other SAARC leaders arrive for Modi swearing-in</a><span class='small-image-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/galleries" target="_blank">More</a></div></div> 
+<li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sushma-new_179_052814010833.jpg"></a><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html">Photos: NDA government takes charge</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-swearing-in-ceremony-celebrations-modi-cabinet/1/11871.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/pti1_210_052714023135.jpg"></a><a href="http://indiatoday.intoday.in/gallery/narendra-modi-swearing-in-ceremony-celebrations-modi-cabinet/1/11871.html">Photos: How Modi's oath ceremony was celebrated across India</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="http://indiatoday.intoday.in/gallery/nawaz-sharif-mahinda-rajapaksa-hamid-karzai-narendra-modi-swearing-in/1/11862.html"><img align="left" class="imgs" width="125" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sharif_179_052614035616.jpg"></a><a href="http://indiatoday.intoday.in/gallery/nawaz-sharif-mahinda-rajapaksa-hamid-karzai-narendra-modi-swearing-in/1/11862.html">Sharif, other SAARC leaders arrive for Modi swearing-in</a><span class='small-image-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="http://indiatoday.intoday.in/galleries" target="_blank">More</a></div></div> 
   
  </div>  
    
@@ -380,7 +380,7 @@ function myOpen(abc) {
   
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
-	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
     </div>
   </div>
   </div>
@@ -503,10 +503,10 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
 <script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='/staticpages/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>

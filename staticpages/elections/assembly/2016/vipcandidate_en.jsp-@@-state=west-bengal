@@ -80,7 +80,7 @@
     width: 1px;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-   background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scrol-but.png) repeat-y 0 0;
+   background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scrol-but.png) repeat-y 0 0;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
     border-radius: 10px;
@@ -94,7 +94,7 @@ box-shadow:         0px -2px 0px 0px rgba(50, 50, 50, 0.75);
 border-bottom:1px solid #B3B3B3;
 }
 .mCSB_scrollTools .mCSB_draggerRail {
-    background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scroller-bg.png) repeat-y 0 0;
+    background: url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scroller-bg.png) repeat-y 0 0;
 }
 .mCSB_scrollTools .mCSB_draggerRail {
     border-radius: 10px;
@@ -116,14 +116,14 @@ border-bottom:1px solid #B3B3B3;
 .desc{float:left; width:135px; padding:5px;}
 .lost_won{width:50px; float:left; margin-left:10px;}
 .desc-title{ font-weight:bold; font-size:15px; color:#969696}
-.lost{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg) no-repeat 0 16px; width:45px; height:78px;}
+.lost{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg) no-repeat 0 16px; width:45px; height:78px;}
 .won{ background:url(won.jpg) no-repeat  0 16px; width:45px; height:78px;}
 .candidate-name{ font-size:15px; color:#969696; padding-left:5px;}
 .party-txt{ padding-left:5px;}
 .resulttxt{};
-.resulttxt.losstxt{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
-.losstxt{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
-.resulttxt.wontxt{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Won.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
+.resulttxt.losstxt{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
+.losstxt{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
+.resulttxt.wontxt{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Won.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
 .resulttxt{ margin:0;}
 </style>
 </head>
@@ -131,104 +131,104 @@ border-bottom:1px solid #B3B3B3;
 <body>
 <div id="wrap"><ul id="mycarousel">
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Mamata-Banerjee.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Mamata-Banerjee.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Mamata Banerjee</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt wontxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
+<span class='resulttxt wontxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
 
 
 	</span></div>
     <span class="party-txt"> TMC</br> Bhawanipore</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Surya-Kant-Mishra.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Surya-Kant-Mishra.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Surya Kant Mishra</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt losstxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
+<span class='resulttxt losstxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
 
 
 	</span></div>
     <span class="party-txt"> CPI(M)</br> Narayangarh</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Chandra-Kumar-Bose.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Chandra-Kumar-Bose.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Chandra Kumar Bose</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt losstxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
+<span class='resulttxt losstxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
 
 
 	</span></div>
     <span class="party-txt"> BJP</br> Bhawanipore</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Laxmi-Ratan-Shukla.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Laxmi-Ratan-Shukla.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Laxmi Ratan Shukla</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt wontxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
+<span class='resulttxt wontxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
 
 
 	</span></div>
     <span class="party-txt"> TMC</br> Howrah North</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Roopa-Ganguly.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Roopa-Ganguly.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Roopa Ganguly</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt losstxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
+<span class='resulttxt losstxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
 
 
 	</span></div>
     <span class="party-txt"> BJP</br> Howrah North</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Amit-Mitra.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Amit-Mitra.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Amit Mitra</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt wontxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
+<span class='resulttxt wontxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
 
 
 	</span></div>
     <span class="party-txt"> TMC</br> Khardaha</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/-Vaishali-Dalmiya.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/-Vaishali-Dalmiya.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line"> Vaishali Dalmiya</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt wontxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
+<span class='resulttxt wontxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/won.jpg' />WON</span>
 
 
 	</span></div>
     <span class="party-txt"> TMC</br> Bally</span>
     </li>
 
-    <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Rahul-Sinha.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
+    <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/1.0.2/resources/images/assemblypoll/Rahul-Sinha.jpg" width="60" height="60" align="left" style="border:1px solid #a7a7a7" align="left" class="pic LOST" />
 	<div class="candidate-name">
 	<span class="first-line">Rahul Sinha</span>
 	<span class="resulttxt">
 
 
-<span class='resulttxt losstxt'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
+<span class='resulttxt losstxt'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg' />LOST</span>
 
 
 	</span></div>
@@ -238,7 +238,7 @@ border-bottom:1px solid #B3B3B3;
  
 </ul></div>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
 		(function($){
 			$(window).load(function(){
