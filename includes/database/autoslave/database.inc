@@ -686,7 +686,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
    */
   function goReadOnly() {
     $this->__readonly = TRUE;
-    drupal_set_message(t('The system is currently in read-only mode. Any changes you make will not be saved!'), 'error');
+    //drupal_set_message(t('The system is currently in read-only mode. Any changes you make will not be saved!'), 'error');
   }
 
   /**
