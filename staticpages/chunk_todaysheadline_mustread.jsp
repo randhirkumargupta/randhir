@@ -1,5 +1,5 @@
 
-<!-- saved from url=(0062)http://indiatoday.intoday.in/chunk_todaysheadline_mustread.jsp -->
+<!-- saved from url=(0062)/staticpages/chunk_todaysheadline_mustread.jsp -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><script>
 $(document).ready(function() {
 	$("#tab2").hide();
