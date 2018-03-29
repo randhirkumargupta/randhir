@@ -52,7 +52,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <title>IPL 2014</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script src="js/custom.js"></script>
 <script>
 $(document).ready(function(){
@@ -62,11 +62,11 @@ $(document).ready(function(){
 </script></head>
 <body>
 
-<link rel="stylesheet" type="text/css" href="http://indiatoday.intoday.in/ipl2014/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/staticpages/ipl2014/css/style.css" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script src="http://indiatoday.intoday.in/ipl2014/js/custom.js"></script>
-<script src="http://indiatoday.intoday.in/js/ajaxinclude.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script src="/staticpages/ipl2014/js/custom.js"></script>
+<script src="/staticpages/js/ajaxinclude.js"></script>
 <div class="itgd_links" id="top-web">
   <ul>
     <li class="last"><a href="http://indiatodaygroup.com/" target="_blank" rel="nofollow">THE INDIA TODAY GROUP</a></li>

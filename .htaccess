@@ -324,6 +324,7 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteCond %{REQUEST_URI} !^/browse_indiatoday_chunk.jsp [NC]
   RewriteCond %{REQUEST_URI} !^/aarushi-murder.jsp [NC]
   RewriteCond %{REQUEST_URI} !^/chunk_shutterbus_photo.jsp.html [NC]
+  RewriteCond %{REQUEST_URI} !^/(vipcandidate_en.jsp|vipcandidate_en.jsp?state=(.*)&width=225) [NC]
   
   RewriteCond %{REQUEST_URI} !^/akbar-ka-darbar-section.jsp [NC]
   Redirect /akbar-ka-darbar-section.jsp.1 /akbar-ka-darbar-section.jsp
@@ -830,6 +831,8 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
   RewriteRule ^understand/(.*) /staticpages/understand/$1 [L]
   RewriteRule ^aarushi-murder.jsp$ /staticpages/aarushi-murder.jsp [L]
   RewriteRule ^chunk_shutterbus_photo.jsp.html$ /staticpages/chunk_shutterbus_photo.jsp.html [L]
+  RewriteRule ^vipcandidate_en.jsp$ /staticpages/vipcandidate_en.jsp [L]
+  RewriteRule ^vipcandidate_en.jsp(.*)$ /staticpages/vipcandidate_en.jsp [L]
   RewriteRule ^browse_indiatoday_chunk.jsp$ /staticpages/browse_indiatoday_chunk.jsp [L]
   RewriteRule ^akbar-ka-darbar-section.jsp$ /staticpages/akbar-ka-darbar-section.jsp [L]
   RewriteRule ^armstrade.jsp$ /staticpages/armstrade.jsp [L]
