@@ -1223,7 +1223,7 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 			if (!empty($event_nid)){
 				$event_title = itg_common_get_node_title($event_nid);
 				$event_title = preg_replace('/\s+/', '', $event_title);
-				$event_sub_title = $event_title.$arg[3];
+				$event_sub_title = $arg[3];
 				$return['section_header_s'] = (!empty($event_title) ? $event_title : 'ROS');
 			  $return['category_geader_s'] = (!empty($event_sub_title) ? $event_sub_title : 'Home');
         $return['node_type'] = ucfirst('event');
