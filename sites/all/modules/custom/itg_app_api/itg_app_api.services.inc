@@ -6667,7 +6667,7 @@ function itg_rapid_api_topstories($token) {
   $redis_key = "devitg_rapid_api_topstories";
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
+  if ($result_get['key_value1'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {

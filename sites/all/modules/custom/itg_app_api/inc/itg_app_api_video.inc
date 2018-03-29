@@ -1090,6 +1090,7 @@ function topstoriesList($source, $limit = 0) {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('ti', array('tid'));
+    $query->fields('dbody', array('body_value'));
 
 
     //end
@@ -1123,6 +1124,7 @@ function topstoriesList($source, $limit = 0) {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+        $body_value = $value['body_value'];
 
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
@@ -1220,6 +1222,20 @@ function topstoriesList($source, $limit = 0) {
         $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
         $n_widget = array();
         $data_newslist[$home_list_count]['n_widget'] = $n_widget;
+        /* work on offline start */
+
+        if ($type == "story") {
+            $byline_data = itg_get_multi_byline_details($nid, 1);
+            $aid = $byline_data[0]['nid'];
+            $a_title = $byline_data[0]['title'];
+            $body_without_html = strip_tags($body_value);
+            $no_desc_withouthtml = $body_without_html;
+            $arr_offline = array();
+            $arr_offline['no_desc_withouthtml'] = "$no_desc_withouthtml";
+            $arr_offline['no_author']['a_title'] = "$a_title";
+            $data_newslist[$home_list_count]['n_offline_data'] = $arr_offline;
+        }
+        /* work on offline end */
         $home_list_count++;
         //}
     }
