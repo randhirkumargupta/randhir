@@ -183,7 +183,7 @@ $menu_background_color = (!empty($menu_color) ? $menu_color : '#000');
 <?php print render($page['bottom']); ?>
 <?php global $base_url; ?>
 <div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+    <img class="widget-loader" src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itgadmin/images/loader.svg'); ?>" alt="Loading..." />
 </div>
 <?php
 drupal_add_js("jQuery(document).ready(function(){
