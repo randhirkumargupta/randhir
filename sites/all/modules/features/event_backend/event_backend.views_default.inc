@@ -2508,6 +2508,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '6';
@@ -2760,6 +2761,9 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler = $view->new_display('block', 'Associate event photo slider', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Photo';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -2826,6 +2830,9 @@ return itg_event_backend_get_event_node();
 
   /* Display: Associate event photo sub block */
   $handler = $view->new_display('block', 'Associate event photo sub block', 'block_1');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -3417,7 +3424,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3497,7 +3504,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -3901,7 +3908,7 @@ if (function_exists(\'itg_event_get_host_name\')) {
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_celebrity_pro_occupation']['separator'] = ' / ';
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4257,7 +4264,7 @@ return itg_event_backend_speaker_ids(arg(1));
   /* Display: program page block */
   $handler = $view->new_display('block', 'program page block', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Session wise Coverage';
+  $handler->display->display_options['title'] = 'Programme Schedule';
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Programme Schedule (field_program_schedule) */
@@ -4320,7 +4327,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4430,7 +4437,7 @@ return itg_event_backend_speaker_ids(arg(1));
     'image_style' => 'event_speaker_program_72x72',
     'image_link' => '',
   );
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -4746,7 +4753,7 @@ print  "<img src=\'" . $base_url . \'/\' . drupal_get_path(\'theme\', \'itg\') .
   $handler->display->display_options['fields']['title']['alter']['path'] = '[php]/speaker-details?speaker=[nid]';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';

@@ -24,7 +24,6 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
   }
   // popular story
   elseif ($story_type == '1') {
-    //$data = author_popular_storylist($author_id, $cpageno);
     $data = author_popular_storylist($author_id, $cpageno);
   }
 

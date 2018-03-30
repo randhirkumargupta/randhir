@@ -74,7 +74,7 @@ define('MOBILE_VAS', $role_array['Mobile VAS']);
 define('QUIZ_TAXONOMY_TID', variable_get('quiz_taxonomy_tid'));
 define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
 define('ITG_IMAGE_FOLDER', 'images/');
-define('ITG_NEWSLETTER_EMAIL', 'care@intoday.in');
+define('ITG_NEWSLETTER_EMAIL', 'desk-itgd@intoday.com');
 define('ITG_NEWSLETTER_FROMNAME', 'India Today');
 define('JWPLAYER_DFP_TAG','https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]');
 define('ITG_GA_CODE', 'UA-795349-17');
@@ -108,6 +108,7 @@ define('ISSUE_SMALL_HEIGHT', 140);
  */
 define('ADS_RHS1', 'ads_medium_rectangl_rhs1_300x250');
 define('ADS_RHS2', 'ads_medium_rectangl_rhs2_300x250');
+define('ADS_RHS_MTF', 'ads_medium_rectangl_mtf_300x200');
 define('ADS_FOOTER', 'ads_super_banner_bottomnav728x90');
 define('ADS_HEADER', 'ads_super_banner_top_nav_728x90');
 

@@ -1210,7 +1210,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 1,
     'field_name' => 'body',
     'label' => 'Description',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'display_summary' => 0,
       'exclude_cv' => FALSE,
@@ -1270,7 +1270,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 52,
+      'weight' => 53,
     ),
   );
 
@@ -1315,7 +1315,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 53,
+      'weight' => 54,
     ),
   );
 
@@ -1399,7 +1399,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 50,
+      'weight' => 51,
     ),
   );
 
@@ -1442,7 +1442,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 44,
+      'weight' => 45,
     ),
   );
 
@@ -1485,7 +1485,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 48,
+      'weight' => 49,
     ),
   );
 
@@ -1528,7 +1528,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 45,
+      'weight' => 46,
     ),
   );
 
@@ -1571,7 +1571,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 46,
+      'weight' => 47,
     ),
   );
 
@@ -1614,7 +1614,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 47,
+      'weight' => 48,
     ),
   );
 
@@ -1657,7 +1657,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 49,
+      'weight' => 50,
     ),
   );
 
@@ -1741,7 +1741,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 59,
+      'weight' => 60,
     ),
   );
 
@@ -1819,7 +1819,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 54,
+      'weight' => 55,
     ),
   );
 
@@ -1897,7 +1897,7 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 70,
+      'weight' => 71,
     ),
   );
 
@@ -1939,7 +1939,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 68,
+      'weight' => 69,
     ),
   );
 
@@ -1981,7 +1981,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 67,
+      'weight' => 68,
     ),
   );
 
@@ -2024,7 +2024,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 57,
+      'weight' => 58,
     ),
   );
 
@@ -2068,7 +2068,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 58,
+      'weight' => 59,
     ),
   );
 
@@ -2107,7 +2107,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 55,
+      'weight' => 56,
     ),
   );
 
@@ -2150,7 +2150,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 56,
+      'weight' => 57,
     ),
   );
 
@@ -2193,7 +2193,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 61,
+      'weight' => 62,
     ),
   );
 
@@ -2236,7 +2236,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 60,
+      'weight' => 61,
     ),
   );
 
@@ -2276,6 +2276,52 @@ function event_backend_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-event_backend-field_enable_livetv_highlights'.
+  $field_instances['node-event_backend-field_enable_livetv_highlights'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 63,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_enable_livetv_highlights',
+    'label' => 'Enable LiveTV / Highlights',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 44,
     ),
   );
 
@@ -2607,7 +2653,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 64,
+      'weight' => 65,
     ),
   );
 
@@ -2649,7 +2695,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 62,
+      'weight' => 63,
     ),
   );
 
@@ -2775,7 +2821,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 51,
+      'weight' => 52,
     ),
   );
 
@@ -3100,7 +3146,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 63,
+      'weight' => 64,
     ),
   );
 
@@ -3480,6 +3526,7 @@ function event_backend_field_default_field_instances() {
   t('Early Bird Group Registration Fee (for 10 members)');
   t('Early Bird Group Registration Fee (for 5 members)');
   t('Early Bird Individual Registration Fee');
+  t('Enable LiveTV / Highlights');
   t('Enter fees in INR');
   t('Event Banner');
   t('Event Close Date');

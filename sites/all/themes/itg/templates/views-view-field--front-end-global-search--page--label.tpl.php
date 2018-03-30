@@ -23,7 +23,7 @@
  */
 ?>
 <?php 
-/*if (function_exists(itg_story_clone_data))
+if (function_exists(itg_story_clone_data))
 {
  
   $related_data = itg_get_related_story_content($row->entity_id);
@@ -37,9 +37,9 @@
   }
   $front_url = $hash_url[$related_data->hash] . '/' . $related_data->path_alias;
 }
-if(!empty($position) && $position == 'left') {*/
+if(!empty($position) && $position == 'left') {
   ?>
-<!--<div class="n-title search-detail"><h2 title="<?php //print strip_tags($label); ?>"><span class="smily-im"><?php //print $smilies; ?></span> <?php //print l(mb_strimwidth($label, 0, 500, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>-->
-<?php //} else { ?>
-<!--<div class="n-title search-detail"><h2 title="<?php //print strip_tags($label); ?>"><?php //print l(mb_strimwidth($label, 0, 500, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?> <span class="smily-im"><?php //print $smilies; ?></span></h2></div>-->
-<?php //} ?>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $smilies; ?></span> <?php print l(mb_strimwidth($label, 0, 500, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>
+<?php } else { ?>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 500, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?> <span class="smily-im"><?php print $smilies; ?></span></h2></div>
+<?php } ?>

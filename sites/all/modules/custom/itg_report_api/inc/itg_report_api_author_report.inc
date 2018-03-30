@@ -228,9 +228,15 @@ function getContentCountByDate($start_date, $end_date) {
   $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
+  if($_GET['author_report'] == 1){
+      $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
+  }
   $query->fields('n', array('nid', 'status'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
+  if($_GET['author_report'] == 1){
+    $query->fields('autr', array('field_author_report_value'));
+  }
   //end
   if ($start_date != "na") {
     $query->condition('n.created', $start_date, ">=");
@@ -239,7 +245,13 @@ function getContentCountByDate($start_date, $end_date) {
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story');
   $query->condition('ti.tid', '1206640', '<>');
-  $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+  if($_GET['author_report'] != 1){
+      $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+      
+    }
+    else{
+       $query->condition('autr.field_author_report_value', 'author_report', '='); 
+    }
   $query->groupBy('n.nid');
   $result = $query->execute();
   $cont = $result->rowCount();
@@ -312,9 +324,16 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->leftJoin('node', 'n', 'byli.nid=n.nid');
   $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.byline_id');
+  if($_GET['author_report'] == 1){
+      $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
+  }
+  
   $query->fields('n', array('nid', 'status'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
+  if($_GET['author_report'] == 1){
+    $query->fields('autr', array('field_author_report_value'));
+  }
   //end
   if ($start_date != "na") {
     $query->condition('n.created', $s_date, ">=");
@@ -323,8 +342,16 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story');
   $query->condition('ti.tid', '1206640', '<>');
-  $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-  $query->groupBy('n.nid');
+  
+  
+  if($_GET['author_report'] != 1){
+      $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+      $query->groupBy('n.nid');
+    }
+    else{
+       $query->condition('autr.field_author_report_value', 'author_report', '='); 
+    }
+  
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {
