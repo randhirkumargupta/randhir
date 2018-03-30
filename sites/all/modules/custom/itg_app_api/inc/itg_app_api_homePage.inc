@@ -2786,7 +2786,7 @@ function homePageJsonWidget_3() {
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "KARNATAKA PANCHAYAT: LIVE"; 
-    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/tezembed.html";
+    $n_widget[0]['short_url'] = "https://livestream.com/accounts/14014394/events/8135990/player?enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=false";
     $n_widget[0]['extended_url'] = "";
     $n_widget[0]['action'] = "webview";    
     
