@@ -327,6 +327,20 @@ function itg_preprocess_html(&$vars) {
     $search_str = preg_replace('/\s+/', ' ', $search_str);
     $vars['head_title'] = "$search_str News, Videos, Photos and Magazines | " . variable_get('site_name');
   }
+  if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))) {
+    $event_nid = itg_event_backend_get_event_node();
+    $event_tags = get_node_metatags_by_nid($event_nid);
+    $event_tags = unserialize($event_tags['data']);
+    if (!empty($event_tags['title']['value'])) {
+      $vars['head_title'] = $event_tags['title']['value'] . ' | ' . variable_get('site_name');
+    }
+  }
+  if ($arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_event = menu_get_object();
+    if (!empty($node_event->metatags[LANGUAGE_NONE]['title']['value'])) {
+      $vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
+    }
+  }
 }
 
 /**
@@ -336,6 +350,55 @@ function itg_html_head_alter(&$head_elements) {
   $arg = arg();
   global $base_url;
   
+  // canonical for home page
+  if ($arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_event = menu_get_object();
+    if (!empty($node_event->nid) && $node_event->type == "event_backend") {
+      $event_canonical = FRONT_URL . $_SERVER['REQUEST_URI'];
+      $head_elements['canonical_0'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#attributes' => array(
+          'rel' => 'canonical',
+          'href' => $event_canonical
+        ),
+      );
+    }
+  }
+  if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))) {
+    $event_nid = itg_event_backend_get_event_node();
+    $event_tags = get_node_metatags_by_nid($event_nid);
+    $event_tags = unserialize($event_tags['data']);
+    if (!empty($event_tags['keywords']['value'])) {
+      $head_elements['metatag_keywords_0'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'news_keywords',
+          'content' => $event_tags['keywords']['value']
+        ),
+      );
+    }
+    if (!empty($event_tags['description']['value'])) {
+      $head_elements['metatag_description_0'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $event_tags['description']['value']
+        ),
+      );
+    }
+    $event_canonical = FRONT_URL . $_SERVER['REQUEST_URI'];
+    $head_elements['canonical_0'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'canonical',
+        'href' => $event_canonical
+      ),
+    );
+  }
   // canonical for home page
   if (drupal_is_front_page()) {
     $home_canonical = $base_url . '/';
