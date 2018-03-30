@@ -500,9 +500,7 @@ function itg_get_related_story_content($entity_id) {
     $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
     $query->addParam('qf', 'entity_id'); // Only search in id
     $query->addParam('bs_status', 'true'); // Only search in title
-    //echo $query;
     $resp_search = $query->search();
-    print_r($resp_search);die;
     return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
   }
 }
