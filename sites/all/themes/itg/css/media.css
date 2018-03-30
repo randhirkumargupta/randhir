@@ -373,7 +373,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
 
   /*event page css start*/
   .event-add-header {
-    display: none; }
+    display: block; }
 
   #block-menu-menu-event-menu ul li a {
     padding: 0 8px; }
@@ -1601,6 +1601,9 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .page-order-confirmation .order-summary-block h3 {
     font: 500 18px/28px "OpenSans-Regular"; } }
 @media only screen and (max-width: 767px) {
+  .node-type-event-backend .event-add-header {
+    display: none; }
+
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
     width: 55px;
     height: 55px; }
