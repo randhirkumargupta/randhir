@@ -407,7 +407,7 @@
     }
     /*event page css start*/
     .event-add-header {
-        display: none;
+        display: block;
     }
     #block-menu-menu-event-menu {
         ul {
@@ -1895,6 +1895,8 @@
 }
 
 @media only screen and (max-width:767px) {
+    
+    .node-type-event-backend .event-add-header {display: none;}
 
     #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
         width: 55px;
