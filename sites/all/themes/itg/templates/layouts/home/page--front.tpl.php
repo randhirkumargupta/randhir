@@ -191,7 +191,7 @@ if ($theme != 'itgadmin') {
                             <?php if (!empty(get_itg_variable('itg_webcast_status', 0))):?>
 															<div class="col-sm-6 col-lg-12 home-trending-video">
                                 <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
-                                <span class="widget-title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url')); ?></h3></span>
+                                <span class="widget-title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url'), array('attributes' => array('target' => '_blank'))); ?></h3></span>
                                 <?php }else { ?>
                                 <span class="widget-title"><h3><?php print get_itg_variable('itg_webcast_title') ?></h3></span>
                                 <?php } ?>
@@ -199,7 +199,7 @@ if ($theme != 'itgadmin') {
                                   <?php print get_itg_variable('itg_webcast_iframe'); ?>
                                 </div>
                                 <?php if (!empty(get_itg_variable('itg_content_webcast_url'))) { ?>
-                                <div class="webcast_link webcast_title"><h3><?php print l(get_itg_variable('itg_content_webcast_title'), get_itg_variable('itg_content_webcast_url')); ?></h3></div>
+                                <div class="webcast_link webcast_title"><h3><?php print l(get_itg_variable('itg_content_webcast_title'), get_itg_variable('itg_content_webcast_url'), array('attributes' => array('target' => '_blank'))); ?></h3></div>
                                 <?php }else { ?>
                                 <div class="webcast_title"><h3><?php print get_itg_variable('itg_content_webcast_title') ?></h3></div>
                                 <?php } ?>

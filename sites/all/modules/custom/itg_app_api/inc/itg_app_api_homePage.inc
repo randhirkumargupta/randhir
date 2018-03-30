@@ -43,9 +43,9 @@ function homePageJson() {
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
-    $data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    $data['data'][1] = $data_topstories; 
-    //$data['data'][2] = $homePageJsonWidget_1; // CONCLAVE
+    //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
+    $data['data'][0] = $homePageJsonWidget_1; // Karnataka Panchayat
+    $data['data'][1] = $data_topstories;     
     $data['data'][2] = $itg_rapid_home_movies_json;
     $data['data'][3] = $itg_rapid_home_technology_json;
     $data['data'][4] = $data_news_india;
@@ -1851,9 +1851,9 @@ function homePageJsonWidget_1() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "CONCLAVE 2018 SPECIAL COVERAGE"; 
+    $n_widget[0]['tilte'] = "Karnataka Panchayat Special Coverage"; 
     $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
+    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/karnataka-panchayat/2018?utm_source=app_store&utm_medium=link&utm_campaign=app_store_referral";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
