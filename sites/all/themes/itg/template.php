@@ -339,8 +339,8 @@ function itg_preprocess_html(&$vars) {
 	}
 	if ($arg[0] == 'node' && is_numeric($arg[1])) {
 		$node_event = menu_get_object();
-		if (!empty($node_event->title)) {
-			$vars['head_title'] = $node_event->title . ' | ' . variable_get('site_name');
+		if (!empty($node_event->metatags[LANGUAGE_NONE]['title']['value'])) {
+			$vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
 		}		
 	}
 }
