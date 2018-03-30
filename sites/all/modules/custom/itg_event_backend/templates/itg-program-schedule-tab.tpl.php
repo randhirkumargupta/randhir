@@ -29,8 +29,9 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
     $output .= itg_event_backend_get_highlights_block();
   }
   elseif ($current_date < $event_start_date && $current_date < $event_close_date) {
-    $output = '<h2 class="block-title">' . $host_node->title . '</h2>';
-    $output .= '<div class="mb-20">' . $host_node->body[LANGUAGE_NONE][0]['value'] . '</div>';
+    //$output = '<h2 class="block-title">' . $host_node->title . '</h2>';
+    //$output .= '<div class="mb-20">' . $host_node->body[LANGUAGE_NONE][0]['value'] . '</div>';
+    $output = '';
   }
   
   // Tab title
