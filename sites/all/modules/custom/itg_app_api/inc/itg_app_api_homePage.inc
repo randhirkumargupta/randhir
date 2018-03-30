@@ -43,16 +43,16 @@ function homePageJson() {
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
-    $data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    $data['data'][1] = $data_topstories; 
-    $data['data'][2] = $homePageJsonWidget_1; // CONCLAVE
-    $data['data'][3] = $itg_rapid_home_movies_json;
-    $data['data'][4] = $itg_rapid_home_technology_json;
-    $data['data'][5] = $data_news_india;
-    $data['data'][6] = $itg_rapid_home_sports_json;
-    $data['data'][7] = $data_news_lifestyle;
-    $data['data'][8] = $data_news_world;
-    $data['data'][9] = $data_magazine;
+    //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
+    $data['data'][0] = $homePageJsonWidget_1; // Karnataka Panchayat
+    $data['data'][1] = $data_topstories;     
+    $data['data'][2] = $itg_rapid_home_movies_json;
+    $data['data'][3] = $itg_rapid_home_technology_json;
+    $data['data'][4] = $data_news_india;
+    $data['data'][5] = $itg_rapid_home_sports_json;
+    $data['data'][6] = $data_news_lifestyle;
+    $data['data'][7] = $data_news_world;
+    $data['data'][8] = $data_magazine;
     return $data;
 }
 
@@ -93,17 +93,7 @@ function homePageJsonPackagelist_india() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
         $tid_list = array();
         $tid_list[] = $tid;
         // code vid=14  end
@@ -305,17 +295,7 @@ function homePageJsonPackagelist_lifestyle() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+       
         // code vid=14  end
         $data_news['id'] = "$tid";
         $data_news['order'] = "2";
@@ -514,17 +494,7 @@ function homePageJsonPackagelist_world() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
         $data_news['id'] = "$tid";
@@ -885,17 +855,7 @@ function homePageJsonNewslist_india() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+       
 
         // code vid=14  end
 
@@ -1098,18 +1058,7 @@ function homePageJsonNewslist_world() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
 
@@ -1684,17 +1633,7 @@ function homePageJsonNewslist_lifestyle() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
 
@@ -1912,9 +1851,9 @@ function homePageJsonWidget_1() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "CONCLAVE 2018 SPECIAL COVERAGE"; 
+    $n_widget[0]['tilte'] = "Karnataka Panchayat Special Coverage"; 
     $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
+    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/karnataka-panchayat/2018";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
@@ -1964,17 +1903,7 @@ function homePageJsonNewslist_business() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
 
@@ -2178,17 +2107,7 @@ function itg_rapid_home_movies_json() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
         $term = taxonomy_term_load($tid);
@@ -2392,17 +2311,7 @@ function itg_rapid_home_technology_json() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
         $term = taxonomy_term_load($tid);
@@ -2605,17 +2514,7 @@ function itg_rapid_home_sports_json() {
     {
         $listcount = 0;
         // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
         $term = taxonomy_term_load($tid);
