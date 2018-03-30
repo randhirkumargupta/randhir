@@ -116,8 +116,15 @@ function itg_ads_block_view($delta = '') {
         $block['content'] = '';
       }
       else {
-        $ad_script = get_itg_page_name('Super Banner (Top Nav) 728x90');
-        $block['content'] = $ad_script;
+        $arg = arg();
+        $node_object = menu_get_object();
+        if ((!empty($node_object->nid) &&  $node_object->type == 'event_backend') || ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win')))){
+          $ad_script = get_itg_page_name('Super Banner (Top Nav) event 728x90');
+          $block['content'] = $ad_script;
+        }else{
+          $ad_script = get_itg_page_name('Super Banner (Top Nav) 728x90');
+          $block['content'] = $ad_script;
+        }        
       }
       break;
 
@@ -128,8 +135,15 @@ function itg_ads_block_view($delta = '') {
         $block['content'] = '';
       }
       else {
-        $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
-        $block['content'] = $ad_script;
+        $arg = arg();
+        $node_object = menu_get_object();
+        if ((!empty($node_object->nid) &&  $node_object->type == 'event_backend') || ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win')))){
+          $ad_script = get_itg_page_name('Super Banner (Bottom nav) event 728x90');
+          $block['content'] = $ad_script;
+        }else{
+          $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
+          $block['content'] = $ad_script;
+        }        
       }
       break;
 
@@ -142,8 +156,15 @@ function itg_ads_block_view($delta = '') {
         $block['content'] = '';
       }
       else {
-        $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
-        $block['content'] = $ad_script;
+        $arg = arg();
+        $node_object = menu_get_object();
+        if ((!empty($node_object->nid) &&  $node_object->type == 'event_backend') || ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win')))){
+          $ad_script = get_itg_page_name('Medium Rectangle-event-RHS1-300x250');
+          $block['content'] = $ad_script;
+        }else{
+          $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
+          $block['content'] = $ad_script;
+        }
       }
       break;
 
