@@ -1853,7 +1853,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "Karnataka Panchayat Special Coverage"; 
     $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/karnataka-panchayat/2018";
+    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/karnataka-panchayat/2018?utm_source=app_store&utm_medium=link&utm_campaign=app_store_referral";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
