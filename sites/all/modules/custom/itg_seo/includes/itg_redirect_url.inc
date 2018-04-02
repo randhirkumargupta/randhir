@@ -588,7 +588,15 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $newurl = "elections/a-to-z.jsp-@@-id=".$id;
       $newurl = FRONT_URL.'/'.$newurl;
       drupal_goto($newurl, array(), 301);
-     } else if ($arg[0] == 'node' && empty($arg[1])) {
+     } else if ((!empty($arg[0]) && ($arg[0] == 'Story')) && (!empty($arg[1])) && (!empty($arg[2]))) {
+      $old_content_id = $arg[1];
+      $table = 'migrate_map_itgstorylist';
+      $newurl = getNewStoryUrl($old_content_id, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+     }
+     else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
     }
   // Code for url redirection:
