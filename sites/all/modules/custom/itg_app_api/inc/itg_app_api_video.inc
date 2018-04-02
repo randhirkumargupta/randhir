@@ -832,7 +832,7 @@ function generateVideoDetail($nid) {
             $photo_list_array[$listcount]['v_url'] = $bitrate_url; //$mp4_url;
             //$video_path_mp4
             $photo_list_array[$listcount]['v_download_url'] = $mp4_url;
-            $p_duration = $node->field_video_duration['und']['0']['value'];
+            $p_duration = $node->field_video_duration['und']['0']['value']; 
         }
         
         $comment_cont = getCommentsCount($nid);
