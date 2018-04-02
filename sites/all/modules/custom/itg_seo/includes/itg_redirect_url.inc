@@ -351,11 +351,19 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         drupal_goto($newmatchurl, array(), 301);
       }
   } else if ((!empty($arg[0]) && ($arg[0] == 'gallery')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
-      $urlarg = $arg[2];
+      /*$urlarg = $arg[2];
       if ($urlarg > 1) {
         $newmatchurl = $base_url.'/'.$arg[0].'/'.$arg[1].'/1/'.$arg[3];
         drupal_goto($newmatchurl, array(), 301);
-      } 
+      }*/
+      $storyarg = $arg[3];
+      $storyarg_exp = explode('.html', $storyarg);
+	    $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgphotogallery';
+      $newurl = getNewStoryUrl($old_content_id, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
   } else if ((!empty($arg[0]) && ($arg[0] == 'section')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
       $old_content_id = $arg[1];
       $query_alias = $arg[2];
