@@ -600,6 +600,19 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
+     } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'video_page.jsp')) {
+      $old_content_id = $_GET['vid'];
+      $table = 'migrate_map_itgvideogallery';
+      $newurl = getNewStoryUrl($old_content_id, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+     } else if ((!empty($arg[0]) && ($arg[0] == 'Issue')) && (!empty($_GET['issueId']))) {
+      $old_content_id = $_GET['issueId'];
+      $newurl = get_issue_by_id($old_content_id);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
      }
      else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
@@ -747,3 +760,26 @@ function get_first_issue_by_year($year){
   $output = $query->execute()->fetchField();
   return $output;
 }
+
+
+/**
+ * function of get issue URL
+ * @param int nid
+ * @return string $output
+ */
+function get_issue_by_id($nid) {
+  $url = '';
+  $query = db_select('migrate_map_itgissue', 'mmi');
+  $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = mmi.destid1');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('ft.bundle', 'issue', '=');
+  $query->range(0, 1);
+  $output = $query->execute()->fetchField();
+  $current_issue = explode(' 00:', $output);
+  if (!empty($current_issue)) {
+    $url = 'magazine/'.format_date(strtotime($current_issue[0]),'custom', 'd-m-Y');
+    $url = FRONT_URL.'/'.$url;
+  }
+  return $url;
+}
+
