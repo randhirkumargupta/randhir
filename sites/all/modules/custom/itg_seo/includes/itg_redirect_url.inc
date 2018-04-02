@@ -600,6 +600,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
+     } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'video_page.jsp')) {
+      $old_content_id = $_GET['vid'];
+      $table = 'migrate_map_itgvideogallery';
+      $newurl = getNewStoryUrl($old_content_id, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
      }
      else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
