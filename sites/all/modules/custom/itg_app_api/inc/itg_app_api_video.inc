@@ -232,6 +232,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
             if (!empty($videotag['dailymotion'])) {
+                $v_duration = get_rv_video_duration_by_nid($nid);
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
                 foreach ($videoids as $keys => $video_value) {
                     if ($video_value->video_id != '') {
@@ -254,6 +255,7 @@ function generateVideoCategoryList($tid, $pageno) {
                     //$photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
             }
             elseif (!empty($videotag['migrated'])) {
+                $p_duration = $node->field_video_duration['und']['0']['value'];
                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                 foreach ($videoids as $keys => $video_value) {
                     $url = $video_value->field_migrated_video_url_value;
@@ -266,7 +268,7 @@ function generateVideoCategoryList($tid, $pageno) {
                 //$video_path_mp4
                 $photo_list_array[$listcount]['v_download_url'] = $mp4_url;
             }
-            $v_duration = get_rv_video_duration_by_nid($nid);
+            
             $term_pri = taxonomy_term_load($field_primary_category_value);
             $term_name_pri = $term_pri->name;
             $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
@@ -544,8 +546,10 @@ function generateProgramCategoryList($tid, $pageno) {
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
                 $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$mp4_url;
                 $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
+                $p_duration = $node->field_video_duration['und']['0']['value'];
             } elseif (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
+                $p_duration = get_rv_video_duration_by_nid($nid);
                 foreach ($videoids as $keys => $video_value) {
                     if ($video_value->video_id != '') {
                         $video_id = $video_value->video_id;
@@ -569,7 +573,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $term_name = $term->name;
             $trem_id = $term->tid;
             $comment_cont = getCommentsCount($nid);
-            $p_duration = get_rv_video_duration_by_nid($nid);
+            
             $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
             $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
             $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
@@ -796,6 +800,7 @@ function generateVideoDetail($nid) {
         $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
         $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
         if (!empty($videotag['dailymotion'])) {
+            $v_duration = get_rv_video_duration_by_nid($nid);
             $videoids = get_video_in_fieldcollection_by_nid($nid);
             foreach ($videoids as $keys => $video_value) {
                 if ($video_value->video_id != '') {
@@ -827,8 +832,9 @@ function generateVideoDetail($nid) {
             $photo_list_array[$listcount]['v_url'] = $bitrate_url; //$mp4_url;
             //$video_path_mp4
             $photo_list_array[$listcount]['v_download_url'] = $mp4_url;
+            $p_duration = $node->field_video_duration['und']['0']['value'];
         }
-        $v_duration = get_rv_video_duration_by_nid($nid);
+        
         $comment_cont = getCommentsCount($nid);
         $term_pri = taxonomy_term_load($field_primary_category_value);
         $term_name_pri = $term_pri->name;
@@ -939,6 +945,7 @@ function generateProgramDetail($nid) {
             $photo_list_array[$listcount]['p_is_default_player'] = "0";
             $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url'];
             $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
+            $p_duration = get_rv_video_duration_by_nid($nid);
         }
         elseif (!empty($videotag['migrated'])) {
             $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -952,13 +959,14 @@ function generateProgramDetail($nid) {
             $photo_list_array[$listcount]['p_is_default_player'] = "0";
             $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$mp4_url;
             $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
+            $p_duration = $node->field_video_duration['und']['0']['value'];
         }
         $field_primary_category_value = $node->field_primary_category['und']['0']['value'];
         $term = taxonomy_term_load($field_primary_category_value);
         $term_name = $term->name;
         $trem_id = $term->tid;
         $comment_cont = getCommentsCount($nid);
-        $p_duration = get_rv_video_duration_by_nid($nid);
+        
         $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
         $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
         $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
