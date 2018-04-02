@@ -193,8 +193,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Video') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Video/3578/2/i-am-too-old-for-bwood-gauri-khan.html
       $old_content_id = $arg[2];
       $type = 'videogallery';
-  } else if ((!empty($arg[0]) && $arg[0] == 'gallerylist') && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
-      $photo_cat = $arg[3];
+  } else if (!empty($arg[0]) && !empty($arg[1]) && ($arg[0] == 'gallerylist' || $arg[1] == 'gallerylist') && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
+      if ($arg[0] == 'gallerylist') {
+        $photo_cat = $arg[3];
+      } else if ($arg[1] == 'gallerylist') {
+        $photo_cat = explode('.html', $arg[4]);
+        $photo_cat = $photo_cat[0];
+      } 
       $query_alias = $arg[2];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
