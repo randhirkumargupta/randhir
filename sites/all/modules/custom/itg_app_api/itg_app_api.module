@@ -2598,4 +2598,20 @@ function time_interval() {
 
         return $interval;
     }
+    /**
+ * This function use for get video duration data by nid
+ * 
+ */
+function get_rv_video_duration_by_nid($nid) {
+  $query = db_select('field_data_field_video_upload', 'up_video');
+  $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
+  $query->leftJoin('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+  $query->Join('itg_solr_video_info', 'isvi', 'isvi.fid = fvu.field_videogallery_video_upload_fid');  
+  $query->fields('isvi', array('solr_video_duration'));  
+  $query->condition('up_video.entity_id', $nid);
+  $query->groupBy('isvi.solr_video_id');
+  $query->orderBy('up_video.delta', 'ASC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0]['solr_video_duration'];
+}
     
