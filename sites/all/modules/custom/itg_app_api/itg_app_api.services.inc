@@ -5443,6 +5443,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    $item_id= 1415797;
+    p(entity_load('field_collection_item', array($item_id)));
     p(node_load(1145458));
     $str = '{
     "status_code": "0",
