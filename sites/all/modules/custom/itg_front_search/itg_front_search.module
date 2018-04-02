@@ -619,5 +619,5 @@ function topic_form_submit_handler($form, &$form_state) {
 }
 
 function itgd_speed_test_page($keyword){
-	return $keyword;
+	print $keyword;
 }
