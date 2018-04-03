@@ -751,10 +751,13 @@ function _related_photo_block_content() {
           $hash_url = itg_apache_solr_get_site_url();
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
+        
+        
         if (!empty($related_title)) {
-          $img_alt = strip_tags($related_title);
-          $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-          $related_photo.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
+          $img_alt = str_replace(array('\'', '"'), '', $related_title);
+          $rel_title = str_replace(array('\'', '"'), '', $related_title);
+          $related_photo.= '<li class="col-md-3"><a href="'$front_url'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" /></a>';
+          $related_photo.= '<span class="tile"><a href="'.$front_url.'" title="'.$rel_title.'">'.$rel_title.'</a></span></li>';
         }
     }
 
