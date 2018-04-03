@@ -1250,7 +1250,7 @@ function topstoriesList($source) {
             $arr_offline['no_author']['a_title'] = "$a_title";
             $data_newslist[$home_list_count]['n_offline_data'] = $arr_offline;
         }
-        /* work on offline end */
+        /* work on offline end  */
         $home_list_count++;
         //}
     }
