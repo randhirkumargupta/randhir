@@ -30,12 +30,12 @@ if (!empty(variable_get('itg_front_url'))) {
   $parse_scheme = parse_url(variable_get('itg_front_url'));
   $scheme = $parse_scheme['scheme'] . "://";
 }
-/*$byline_title = '';
+$byline_title = '';
 if(!empty($video_node->field_story_reporter)){
 	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
 	$byline_title = itg_common_get_node_title($target_nid);
 	$byline_title = trim($byline_title);
-}*/
+}
 ?>
 <?php foreach ($rows as $row): ?>
   <div class="container">
