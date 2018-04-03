@@ -521,20 +521,30 @@ function get_header_tab_related_video_block_content() {
       else {
         $display_title = $related_data->label;
       }
-      $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
+      // $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
+      $related_title = html_entity_decode($display_title);
       if (empty($related_data->sm_field_custom_story_small_large_url[0])) {
         $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
       }
       else {
         $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       }
+        
       $related_video_duration = $related_data->sm_field_video_duration[0];
-      $img_alt = strip_tags($related_title);
+
+      $img_alt = str_replace(array('\'', '"'), '', $related_title); 
+      $rel_title = str_replace(array('\'', '"'), '', $related_title);
       $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
-      $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
+      $options = array(
+        'html' => TRUE,
+        "attributes" => array("target" => '_blank')
+      );
+      $output = l(htmlspecialchars_decode($rel_title, ENT_COMPAT), $url, $options);
+           
+      $related_image = '<img class="related-default" alt="' . $img_alt . '" title="'. $img_alt .'" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
-        $related_video .= "<li class='related_content_tabs'><figure><a href='$url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
-        $related_video .= "</figure></a><p class='title'>" . l($related_title, $url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+        $related_video .= '<li class="related_content_tabs"><figure><a href="'.$url.'" target="_blank" class="pic">'. $related_image .'<figcaption><i class="fa fa-play-circle"></i>'. $related_video_duration .'</figcaption>';
+        $related_video .= '</figure></a><p class="title">' . $output . '</p></li>';
       }
     }
     $related_video .= "</ul></div>";
