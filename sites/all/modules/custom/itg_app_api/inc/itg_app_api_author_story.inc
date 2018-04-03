@@ -561,7 +561,9 @@ function news_wrap_datalist() {
     $lcont = 0;
     foreach ($data as $k => $res) {
         if (count($res['n_highlight']) > 0) {
-            $nid = $res['n_id'];
+            $nid = $res['n_id'];            
+            $type = getStoryType($nid);
+            $firebase_url = get_node_firebase_weburl($nid);
             $n_title = strip_tags($res['n_title']);
             $n_large_image = $res['n_large_image'];
             $n_updated_datetime = $res['n_updated_datetime'];
@@ -575,6 +577,8 @@ function news_wrap_datalist() {
             $news['category_id'] = $category_id;
             $news['category_title'] = $category_title;
             $news['highlight'] = $highlight;
+            $news['n_type'] = $type;
+            $news['n_share_link'] = $firebase_url;
             $news2[] = $news;
             $lcont++;
         }
