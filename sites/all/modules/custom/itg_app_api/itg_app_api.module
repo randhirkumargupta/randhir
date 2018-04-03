@@ -2612,6 +2612,7 @@ function get_rv_video_duration_by_nid($nid) {
   $query->groupBy('isvi.solr_video_id');
   $query->orderBy('up_video.delta', 'ASC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  p($result);
   return $result[0]['solr_video_duration'];
 }
     
