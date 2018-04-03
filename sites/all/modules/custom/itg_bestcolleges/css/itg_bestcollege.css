@@ -702,6 +702,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:100px;}
 .main-streamwisecompare .streamcontainer, .main-streamwisecompare .streamcontainer1{ width:100%;}
 .main-streamwisecompare .streamcontainer1{ margin-left:0px; margin-top:30px;}
+.slider_outer .slick-next, .slider_outer .slick-prev{transform: translateY(-40%);}
 /*EMERGING COLLEGES RANKING TABLE CSS */
 .emergingCollege-section table{border: 0px;}
 .emergingCollege-section table tr:nth-child(1){ display: none;}
