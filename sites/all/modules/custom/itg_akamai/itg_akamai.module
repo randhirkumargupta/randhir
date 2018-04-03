@@ -1105,7 +1105,7 @@ function itg_akamai_init() {
           akamai_max_age($ttl_for_custom_url);
         } 
         else if (arg(0) == 'sitemap' && !empty(arg(1))) {
-          $ttl_for_custom_url = 300;
+          $ttl_for_custom_url = 120;
           akamai_max_age($ttl_for_custom_url);
         }
         else {          
