@@ -25,7 +25,7 @@ function itg_scribd_feed_latest_issue() {
  * 
  * @param array $issue_result
  */
-function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
+function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {var_dump($issue_result);die;
   if (!empty($issue_result)) {
     $issue_title = date('F d, Y', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
