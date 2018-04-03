@@ -173,6 +173,7 @@ if ($theme != 'itgadmin') {
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-4 top-rhs-add">
+                          <div class="row">
                             <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
                             <div class="col-xs-12 col-sm-6 col-md-5 col-lg-12 top-rhs-add-child">
                                 <div class="itg-widget">
@@ -295,6 +296,7 @@ if ($theme != 'itgadmin') {
                             <?php endif;?>
                         </div>
                     </div>
+                  </div>
                 </div>
                 <?php
                 /*if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {
