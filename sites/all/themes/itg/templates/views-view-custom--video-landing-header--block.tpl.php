@@ -260,6 +260,8 @@ if(!empty($video_node->field_story_reporter)){
                   <div class="social-likes mhide">
                       <ul>
                           <li>
+                            <a href="#" title ="Like"><i class="fa fa-heart"></i> 
+                            <span id="vno-of-likes_<?php print arg(1); ?>">  
                             <?php
                               if (function_exists(itg_flag_get_count)) {
                                 $like_count = itg_flag_get_count(arg(1), 'like_count');
@@ -270,7 +272,8 @@ if(!empty($video_node->field_story_reporter)){
                               }
                               print $like_count['like_count'] + $migrated_count[0]['like_count'];
                               ?>
-
+                              </span>
+                             </a> 
                           </li>
                           <li class="later akamai-video-replace">
                            <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
@@ -314,6 +317,8 @@ if(!empty($video_node->field_story_reporter)){
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li>
+                                <a href="#" title ="Like"><i class="fa fa-heart"></i> 
+                                <span id="vno-of-likes_<?php print arg(1); ?>">  
                                 <?php
                                  if (function_exists(itg_flag_get_count)) {
                                     $like_count = itg_flag_get_count(arg(1), 'like_count');
@@ -323,7 +328,9 @@ if(!empty($video_node->field_story_reporter)){
                                     $migrated_count = itg_get_migrated_like_count(arg(1));
                                   }
                                   print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                  ?>  
+                                  ?>
+                                  </span>
+                                  </a>  
                               </li>
                               <li class="later akamai-video-replace">
                               <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
