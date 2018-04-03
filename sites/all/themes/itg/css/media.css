@@ -373,7 +373,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
 
   /*event page css start*/
   .event-add-header {
-    display: none; }
+    display: block; }
 
   #block-menu-menu-event-menu ul li a {
     padding: 0 8px; }
@@ -460,8 +460,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
     background-color: #aaa; }
 
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-    width: 55px;
-    height: 55px; }
+    width: 72px;
+    height: 72px; }
 
   .education-layout-page .widget-wrapper {
     height: 100%; }
@@ -1384,7 +1384,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     white-space: nowrap; }
 
   #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video {
-    margin-bottom: 50px; }
+    margin-bottom: 20px; }
 
   .event-sidebar .region-sidebar-second-event {
     zoom: 1; }
@@ -1601,6 +1601,13 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .page-order-confirmation .order-summary-block h3 {
     font: 500 18px/28px "OpenSans-Regular"; } }
 @media only screen and (max-width: 767px) {
+  .node-type-event-backend .event-add-header {
+    display: none; }
+
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+    width: 55px;
+    height: 55px; }
+
   /*css start oscar-layout-page */
   .oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
     clear: left; }
@@ -1680,11 +1687,11 @@ $itg-robotoslab:'RobotoSlab-Regular';
   /*Globe change for don't miss end*/
   /*event page css start*/
   #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li {
-    width: 100%; }
+    width: 320px; }
 
   #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-prev,
   #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider .slick-next {
-    display: none; }
+    display: none !important; }
 
   /*event page css end*/
   .video-heading,
@@ -1864,19 +1871,19 @@ $itg-robotoslab:'RobotoSlab-Regular';
           display: none; }
         #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop label {
           color: #ef2a24;
-          position: absolute;
-          left: 86px;
+          position: relative;
+          left: 0px;
           top: 0; }
         #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop .speaker-designation {
           margin-top: 10px; }
 
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li:first-child {
-    width: 28%;
-    padding-top: 15px;
+    width: 25%;
+    padding-top: 0px;
     font-size: 12px; }
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
-    width: 26%;
-    text-align: center; }
+    width: 75%;
+    text-align: left; }
   #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
     width: 45%; }
 

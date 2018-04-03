@@ -22,26 +22,30 @@ function itg_manage_webcast_widget() {
     '#type' => 'textfield',
     '#title' => t('Widget Title'),
     '#default_value' => get_itg_variable('itg_webcast_title', ''),
-    '#required' => TRUE
+    '#required' => TRUE,
+    '#maxlength' => 1024,
   );
 
   $form['itg_webcast_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Widget URL'),
     '#default_value' => get_itg_variable('itg_webcast_url', ''),
+    '#maxlength' => 1024,
   );
   
   $form['itg_content_webcast_title'] = array(
     '#type' => 'textfield',
     '#title' => t('Webcast Title'),
     '#default_value' => get_itg_variable('itg_content_webcast_title', ''),
-    '#required' => TRUE
+    '#required' => TRUE,
+    '#maxlength' => 1024,
   );
 
   $form['itg_content_webcast_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Webcast URL'),
     '#default_value' => get_itg_variable('itg_content_webcast_url', ''),
+    '#maxlength' => 1024,
   );
 
   $form['itg_webcast_iframe'] = array(

@@ -88,7 +88,8 @@ function itg_seo_node_data($node) {
       $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
     $modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
-    $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
+    $description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
+    $story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
     $bylines = itg_get_multi_byline_details($node->nid, 1);
     $authname = array();
     foreach ($bylines AS $bylines_val) {
@@ -199,6 +200,7 @@ function itg_seo_node_data($node) {
                             </script>',
         );
     } else {
+        $description_text = !empty($story_kicker) ? $story_kicker : $description;  
         $markup = array(
              '#type' => 'markup',
              '#markup' => '<script type="application/ld+json"> {  
@@ -209,7 +211,7 @@ function itg_seo_node_data($node) {
                          "headline": "' . $headline . '",
                          "datePublished": "' . $publisheddate . '",
                          "dateModified": "' . $modified_date . '",
-                         "description": "' . $description . '",
+                         "description": "' . $description_text . '",
                          "author": {
                          "@type": "Person",
                          "name": "' . $authors . '"

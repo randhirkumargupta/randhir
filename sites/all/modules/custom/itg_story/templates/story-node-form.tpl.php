@@ -93,6 +93,7 @@
                 <?php print drupal_render($form['field_mega_review_cast']); ?>
                 <?php print drupal_render($form['field_mega_review_director']); ?>
                 <?php print drupal_render($form['field_mega_review_movie_plot']); ?>
+                <?php print drupal_render($form['field_review_movie_imdb_url']); ?>
             </div>
         </div>
 
@@ -150,6 +151,7 @@
                     <?php print drupal_render($form['field_common_related_content']); ?>
                     <?php print drupal_render($form['field_story_show_fields']); ?>
                     <?php print drupal_render($form['field_story_assign_to_widget']); ?>
+                    <?php print drupal_render($form['field_story_schema']); ?>
                     <?php print drupal_render($form['field_story_embed_webcast']); ?>
                 </div>
             </div>

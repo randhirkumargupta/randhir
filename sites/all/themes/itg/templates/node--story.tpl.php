@@ -162,12 +162,14 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
-        <?php
+        <!--<h1  title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1> -->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+          <?php
       }
       else {
         ?>
-        <h1 title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
+        <!-- <h1 title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>-->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -1258,6 +1260,10 @@ if (!empty($content)):
               }
             ?>
             <div class="c_ques"><?php print $question; ?></div>
+            <!--Vidtent Adds -->
+            <script type="text/javascript" src="//vt.andbeyond.media/vidtent-player-2.0.0.min.js" id="vidTentPlayerJsScript" data-vidtent-var="E02EEBF9" async ></script>
+            <div id="playerE02EEBF9"></div>
+            <!--Vidtent Adds end -->
             <div id="vuukle-emote"></div>
             <!-- <div id="vuukle_div"></div>-->
             <div id="vuukle-comments"></div>

@@ -7309,7 +7309,7 @@ section.sidebar .block-itg-ads {
             margin-bottom: 10px; }
           #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part a {
             color: #d71921;
-            width: 32%;
+            width: 42%;
             display: inline-block; }
             #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .section-part a i {
               color: #000; }
@@ -7333,7 +7333,8 @@ section.sidebar .block-itg-ads {
             vertical-align: middle;
             padding-left: 15px;
             color: #6e6e6e;
-            font-weight: normal; }
+            font-weight: normal;
+            width: calc(100% - 72px); }
             #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation .speaker-title {
               font-weight: 700; }
           #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop {
@@ -7531,11 +7532,11 @@ section.sidebar .block-itg-ads {
         #block-views-program-schedule-block-1 .content-list ul.profile-detail li span.designation {
           font-weight: normal; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(1) {
-        width: 28%;
-        padding-top: 25px; }
+        width: 20%;
+        padding-top: 0px; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(2) {
-        width: 24%;
-        text-align: center; }
+        width: 75%;
+        text-align: left; }
       #block-views-program-schedule-block-1 .content-list ul.profile-detail li:nth-child(3) {
         width: 48%;
         padding-top: 8px; }
@@ -7664,12 +7665,13 @@ section.sidebar .block-itg-ads {
   padding: 30px;
   border: 1px solid #ddd;
   background: #f7f7f7;
-  margin-bottom: 30px; }
+  margin-bottom: 20px; }
 
 #block-itg-event-backend-tweet-right-sidebar-event {
   padding: 15px 30px;
   background: #f7f7f7;
-  border: 1px solid #ddd; }
+  border: 1px solid #ddd;
+  margin-bottom: 20px; }
 
 #block-views-program-schedule-block-4 .view-display-id-block_4 > .view-content > .views-row {
   width: 24%;
@@ -7902,7 +7904,7 @@ section.sidebar .block-itg-ads {
   .speaker-detail-page .col-md-3 img,
   #block-views-program-schedule-block-3 .col-md-3 img {
     border-radius: 100%;
-    border: 1px solid #ddd; }
+    border: 2px solid #d71921; }
 .speaker-detail-page h3,
 #block-views-program-schedule-block-3 h3 {
   margin-bottom: 10px;
