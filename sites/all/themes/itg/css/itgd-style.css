@@ -353,7 +353,7 @@ width: 100%;
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
-        margin-top: 40px
+        margin-top:20px
     }
     .front .itg-top-section .top-rhs-add .home-trending-video {
         margin-top: 0
