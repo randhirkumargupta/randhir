@@ -36,6 +36,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('isuue.field_story_issue_date_value', $title, '=');
     $query->condition('n.status', 1);
@@ -46,6 +47,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('dbody', array('body_value'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_scribd_latest_issue_syndication_xml($result, $issue_title, $issue_result, $field_issue_large_cover_image_fid);
     $xml_path = 'public://rss-feeds/xml_data/scribd/it/stories/';
