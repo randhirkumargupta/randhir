@@ -516,8 +516,9 @@ function poll_detail_datalist($poll_id) {
       $options['o_count'] = "$total_voter";
       $options2[] = $options;
     }
-    echo strtotime($field_poll_end_date_value); echo "hi"; echo time(); die();
     $field_poll_end_date_value = $res['field_poll_end_date_value'];
+    echo strtotime($field_poll_end_date_value); echo "hi"; echo time(); die();
+    
     if(strtotime($field_poll_end_date_value) > time()){
         $p_type = "running";
     }
