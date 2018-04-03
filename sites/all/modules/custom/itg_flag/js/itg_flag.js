@@ -119,7 +119,6 @@ jQuery(document).ready(function () {
         var typ = jQuery(this).attr('id');
         var dtag = jQuery(this).attr('data-tag');
         var datatype = jQuery(this).attr('data-type');
-        var data_heart = jQuery(this).attr('data-heart');
         var post_data = "&nd_id=" + nd_id + "&typ=" + typ + "&dtag=" + dtag + "&datatype=" + datatype;
 
         jQuery.ajax({
@@ -139,7 +138,6 @@ jQuery(document).ready(function () {
                 // console.log(obj.type, obj, obj.type == 'like_count');
                 if (obj.type == 'like_count') {
                     jQuery("#no-of-likes_" + obj.nd_id).html("(" + obj.count + ")");
-                    jQuery("#no-of-likes_mobile_" + obj.nd_id).html("(" + obj.count + ")");
                     jQuery("#vno-of-likes_" + obj.nd_id).html(obj.count);
                 }
                 if (obj.chk == 'sty') {
@@ -152,16 +150,9 @@ jQuery(document).ready(function () {
                     jQuery("#no-of-dislikes_" + obj.nd_id).html("(" + obj.count + ")");
                 }
                 if (obj.error == 'error') {
-                    if(data_heart == 'heart-msg') {
-                        jQuery("#heart_voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
-                        jQuery("#heart_voted_mobile_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
-                    } else {
-                        jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);
-                    }   
-                    
+                    jQuery("#voted_" + obj.nd_id).html('You have already voted').show(0).delay(2000).hide(1000);                      
                 }
                 jQuery('#like_count,#dislike_count').prop('disabled', false);
-                jQuery('.btn-heart-like').addClass( "heart-dislike" );
             }
         });
 
