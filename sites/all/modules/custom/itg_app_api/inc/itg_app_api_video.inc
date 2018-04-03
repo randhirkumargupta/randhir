@@ -8,7 +8,7 @@
  * main function for generate videoCategoryPage array
  * @pram int $tid, $pageno
  *
- * @return array
+ * @return array 
  */
 function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $output_array = array();
