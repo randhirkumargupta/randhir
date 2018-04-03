@@ -231,7 +231,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
       $table = 'migrate_map_itgcategory'; 
-  } else if(($arg[0] == 'story') && !empty($arg[1]) && !empty($arg[2] && !empty($arg[3]))) {
+  } else if(($arg[0] == 'story') && !empty($arg[1]) && isset ($arg[2]) && !empty($arg[3])) {
     $storyarg = $arg[3];
     $table = 'migrate_map_itgstorylist';
     $newurl = getNewStoryUrl($storyarg, $table);
@@ -326,7 +326,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-  } else if ((!empty($arg[0]) && ($arg[0] == 'Story')) && (!empty($arg[1]) && is_numeric($arg[1])) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern embed/@#trfg
+  } else if ((!empty($arg[0]) && ($arg[0] == 'Story')) && (!empty($arg[1]) && is_numeric($arg[1])) && !empty($arg[2]) && !empty($arg[3])) {
       $storyid = $arg[1];
       $table = 'migrate_map_itgstorylist';
       $newurl = getNewStoryUrl($storyid, $table);
@@ -501,20 +501,36 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
       $url = FRONT_URL.'/'.$alias;
       drupal_goto($url, array(), 301);
-    } else if ((!empty($arg[0]) && ($arg[0] == 'category')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern category/americas/149/182.html
+    } else if ((!empty($arg[0]) && ($arg[0] == 'section' || $arg[0] == 'category' || $arg[0] == 'subcategory' || $arg[0] == 'subsubcategory')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern category/americas/149/182.html
       $photo_cat = $arg[3];
       $query_alias = $arg[2];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
-      $table = 'migrate_map_itgcategory'; 
-    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+      if ($arg[0] == 'section') {
+        $table = 'migrate_map_itgsection'; 
+      } else if ($arg[0] == 'category') {
+        $table = 'migrate_map_itgcategory';
+      } else if ($arg[0] == 'subcategory') {
+        $table = 'migrate_map_itgsubcategory';
+      } else if ($arg[0] == 'subsubcategory') {
+        $table = 'migrate_map_itgsubsubcategory';
+      }
+    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
       $photo_cat = $arg[4];
       $query_alias = $arg[3];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
-      $table = 'migrate_map_itgcategory';
+      if ($arg[1] == 'section') {
+        $table = 'migrate_map_itgsection'; 
+      } else if ($arg[1] == 'category') {
+        $table = 'migrate_map_itgcategory';
+      } else if ($arg[1] == 'subcategory') {
+        $table = 'migrate_map_itgsubcategory';
+      } else if ($arg[1] == 'subsubcategory') {
+        $table = 'migrate_map_itgsubsubcategory';
+      }
     } else if ((!empty($arg[0]) && ($arg[0] == 'elections')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3]) && !empty ($arg[4]) && !empty ($arg[5])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
       $old_content_id = $arg[3];
       $query_alias = $arg[4];
@@ -532,15 +548,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $storyarg_exp = explode('.html', $storyarg);
       $old_content_id = $storyarg_exp[0];
       $table = 'migrate_map_itgvideogallery';
-      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
-      $redirecturl = get_redirect_url($newcontentid);
-      $newurl = FRONT_URL.'/'.$redirecturl;
-      drupal_goto($newurl, array(), 301);
-     } else if ((!empty($arg[0]) && ($arg[0] == 'story')) && !empty($arg[1]) && !empty($arg[2])) {
-      $storyarg = $arg[2];
-      $storyarg_exp = explode('.html', $storyarg);
-      $old_content_id = $storyarg_exp[0];
-      $table = 'migrate_map_itgstorylist';
       $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
       $redirecturl = get_redirect_url($newcontentid);
       $newurl = FRONT_URL.'/'.$redirecturl;
@@ -603,6 +610,20 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
      } else if ((!empty($arg[0]) && ($arg[0] == 'Issue')) && (!empty($_GET['issueId']))) {
       $old_content_id = $_GET['issueId'];
       $newurl = get_issue_by_id($old_content_id);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+     } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && $arg[1] == 'ArticleComment')) {
+      $old_content_id = $_GET['artId'];
+      $table = 'migrate_map_itgstorylist';
+      $newurl = getNewStoryUrl($old_content_id, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+     } else if ((!empty($arg[0]) && ($arg[0] == 'Video')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {
+      $old_content_id = $arg[1];
+      $table = 'migrate_map_itgvideogallery';
+      $newurl = getNewStoryUrl($old_content_id, $table);
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }

@@ -339,23 +339,23 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   elseif (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
     if (empty($isMobile)) {
 			$section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Video', 'videos') . '</div>';
+      $section_link .= l('<span itemprop="title">Video</span>', 'videos', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       $section_link .= $node_title;
     }
     else {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Video', 'videos') . '</div>';
+      $section_link .= l('<span itemprop="title">Video</span>', 'videos', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
     if (empty($isMobile)) {
 			$section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Gallery', 'photo') . '</div>';
+      $section_link .= l('<span itemprop="title">Gallery</span>', 'photo', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       $section_link .= $node_title;
     }
     else {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Gallery', 'photo') . '</div>';
+      $section_link .= l('<span itemprop="title">Gallery</span>', 'photo', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
