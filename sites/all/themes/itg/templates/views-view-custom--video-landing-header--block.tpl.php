@@ -40,12 +40,12 @@ if(!empty($video_node->field_story_reporter)){
           <div class="row">
               <div class="col-md-12">
                   <h1 class="video-heading"><?php print $row['title']; ?></h1>
-                  <div class="byline_date">
-                    <?php if (!empty($byline_title)) { ?>
-                    <span class="video-byline"><?php print $byline_title; ?></span>
-                    <?php } ?>
-                    <span class="video-ppdate"><?php print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
-                  </div>
+                  <!-- <div class="byline_date">
+                    <?php //if (!empty($byline_title)) { ?>
+                    <span class="video-byline"><?php //print $byline_title; ?></span>
+                    <?php //} ?>
+                    <span class="video-ppdate"><?php //print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
+                  </div> -->
                   <?php
                   global $user;
                   if (in_array('Social Media', $user->roles)) {
@@ -368,7 +368,7 @@ if(!empty($video_node->field_story_reporter)){
                       </div>
                       <?php print $description_slider; ?>
 
-                      <!-- <p class="upload-date"><?php //print $row['field_itg_content_publish_date']; ?></p> -->
+                      <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
