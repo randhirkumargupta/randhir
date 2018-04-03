@@ -233,6 +233,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
             if (!empty($videotag['dailymotion'])) {
                 $v_duration = get_rv_video_duration_by_nid($nid);
+                echo $v_duration; die();
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
                 foreach ($videoids as $keys => $video_value) {
                     if ($video_value->video_id != '') {
