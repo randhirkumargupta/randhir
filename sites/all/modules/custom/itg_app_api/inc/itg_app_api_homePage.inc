@@ -41,18 +41,18 @@ function homePageJson() {
     $itg_rapid_home_sports_json = array();
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
 
-    $data['status_code'] = "1";
+     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
     //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    $data['data'][0] = $homePageJsonWidget_1; // Karnataka Panchayat
-    $data['data'][1] = $data_topstories;     
-    $data['data'][2] = $itg_rapid_home_movies_json;
-    $data['data'][3] = $itg_rapid_home_technology_json;
-    $data['data'][4] = $data_news_india;
-    $data['data'][5] = $itg_rapid_home_sports_json;
-    $data['data'][6] = $data_news_lifestyle;
-    $data['data'][7] = $data_news_world;
-    $data['data'][8] = $data_magazine;
+    //$data['data'][0] = $homePageJsonWidget_1; // Karnataka Panchayat
+    $data['data'][0] = $data_topstories;     
+    $data['data'][1] = $itg_rapid_home_movies_json;
+    $data['data'][2] = $itg_rapid_home_technology_json;
+    $data['data'][3] = $data_news_india;
+    $data['data'][4] = $itg_rapid_home_sports_json;
+    $data['data'][5] = $data_news_lifestyle;
+    $data['data'][6] = $data_news_world;
+    $data['data'][7] = $data_magazine;
     return $data;
 }
 
@@ -2785,9 +2785,9 @@ function homePageJsonWidget_3() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "India Today Conclave 2018 Live"; 
-    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/conclave.html";
-    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
+    $n_widget[0]['tilte'] = "KARNATAKA PANCHAYAT: LIVE"; 
+    $n_widget[0]['short_url'] = "https://livestream.com/accounts/14014394/events/8135990/player?enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=false";
+    $n_widget[0]['extended_url'] = "";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;

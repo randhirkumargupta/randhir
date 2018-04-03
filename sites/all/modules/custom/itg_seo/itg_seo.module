@@ -338,23 +338,23 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   elseif (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
     if (empty($isMobile)) {
 			$section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Video', 'videos') . '</div>';
+      $section_link .= l('<span itemprop="title">Video</span>', 'videos', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       $section_link .= $node_title;
     }
     else {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Video', 'videos') . '</div>';
+      $section_link .= l('<span itemprop="title">Video</span>', 'videos', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
     if (empty($isMobile)) {
 			$section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Gallery', 'photo') . '</div>';
+      $section_link .= l('<span itemprop="title">Gallery</span>', 'photo', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       $section_link .= $node_title;
     }
     else {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('Gallery', 'photo') . '</div>';
+      $section_link .= l('<span itemprop="title">Gallery</span>', 'photo', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
@@ -496,6 +496,36 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
         drupal_add_html_head($meta_keyword, 'news_keyword');
       }
   }
+  $node_object = menu_get_object();
+  if (!empty($node_object->nid) && $node_object->type == "event_backend") {
+	 $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
+		if (isset($meta_description) && !empty($meta_description)) {
+			$metatag_description = array(
+				'#type' => 'html_tag',
+				'#tag' => 'meta',
+				'#attributes' => array(
+					'name' => 'description',
+					'content' => $meta_description,
+				),
+				'#weight' => -1000,
+			);
+			drupal_add_html_head($metatag_description, 'description');
+		}
+		
+		$meta_keyword = $node_object->metatags[LANGUAGE_NONE]['keywords']['value'];
+		if (isset($meta_keyword) && !empty($meta_keyword)) {
+			$meta_keyword = array(
+				'#type' => 'html_tag',
+				'#tag' => 'meta',
+				'#attributes' => array(
+					'name' => 'news_keywords',
+					'content' => $meta_keyword,
+				),
+				'#weight' => -999,
+			);
+			drupal_add_html_head($meta_keyword, 'news_keyword');
+		}
+	}
 }
 
 /**

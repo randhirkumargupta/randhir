@@ -26,16 +26,13 @@ else {
   $ads_url = 'https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]';
 }
 $uri = base64_encode($actual_link);
-if (!empty(variable_get('itg_front_url'))) {
-  $parse_scheme = parse_url(variable_get('itg_front_url'));
-  $scheme = $parse_scheme['scheme'] . "://";
-}
-$byline_title = '';
+
+/*$byline_title = '';
 if(!empty($video_node->field_story_reporter)){
 	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
 	$byline_title = itg_common_get_node_title($target_nid);
 	$byline_title = trim($byline_title);
-}
+}*/
 ?>
 <?php foreach ($rows as $row): ?>
   <div class="container">
@@ -43,12 +40,12 @@ if(!empty($video_node->field_story_reporter)){
           <div class="row">
               <div class="col-md-12">
                   <h1 class="video-heading"><?php print $row['title']; ?></h1>
-                  <div class="byline_date">
-                    <?php if (!empty($byline_title)) { ?>
-                    <span class="video-byline"><?php print $byline_title; ?></span>
-                    <?php } ?>
-                    <span class="video-ppdate"><?php print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
-                  </div>
+                  <!-- <div class="byline_date">
+                    <?php //if (!empty($byline_title)) { ?>
+                    <span class="video-byline"><?php //print $byline_title; ?></span>
+                    <?php //} ?>
+                    <span class="video-ppdate"><?php //print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
+                  </div> -->
                   <?php
                   global $user;
                   if (in_array('Social Media', $user->roles)) {
@@ -264,22 +261,23 @@ if(!empty($video_node->field_story_reporter)){
                   <div class="social-likes mhide">
                       <ul>
                           <li>
+                            <a href="#" title ="Like"><i class="fa fa-heart"></i> 
+                            <span id="vno-of-likes_<?php print arg(1); ?>">
                             <?php
-                            if (function_exists(itg_event_backend_heart_like_dislike)) {
-                              $val = arg(1);
-                              if (function_exists('itg_common_get_node_type')) {
-                                $datatype = itg_common_get_node_type(arg(1));
-                              }
-                              print itg_event_backend_heart_like_dislike($val, $datatype, '', 'web');
-                            }
+                             if (function_exists(itg_flag_get_count)) {
+                              $like_count = itg_flag_get_count(arg(1), 'like_count');
+                             }
+                             // get migrated count 
+                             if (function_exists('itg_get_migrated_like_count')) {
+                             $migrated_count = itg_get_migrated_like_count(arg(1));
+                             }
+                             print $like_count['like_count'] + $migrated_count[0]['like_count'];
                             ?>
-
+                            </span>
+                            </a>
                           </li>
-                          <?php
-														$uri_sso = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-													?>
                           <li class="later akamai-video-replace">
-                          <a title = "Watch later" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri_sso; ?>" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
+                           <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
                           </li>  
                           <li><a class="def-cur-pointer" title ="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i> <span><?php print t('Share'); ?></span></a></li>
                           <li><a class="user-activity def-cur-pointer" data-rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick='twitter_popup("<?php print urlencode($video_node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i> <span><?php print t('Twitter'); ?></span></a></li>
@@ -320,21 +318,23 @@ if(!empty($video_node->field_story_reporter)){
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li>
+                                <a href="#" title ="Like"><i class="fa fa-heart"></i> 
+                                <span id="vno-of-likes_<?php print arg(1); ?>">
                                 <?php
-                                if (function_exists(itg_event_backend_heart_like_dislike)) {
-                                  $val = arg(1);
-                                  if (function_exists('itg_common_get_node_type')) {
-                                    $datatype = itg_common_get_node_type(arg(1));
-                                  }
-                                  print itg_event_backend_heart_like_dislike($val, $datatype, '','mobile');
-                                }
-                                ?>  
+                                 if (function_exists(itg_flag_get_count)) {
+                                   $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                 }
+                                 // get migrated count 
+                                 if (function_exists('itg_get_migrated_like_count')) {
+                                   $migrated_count = itg_get_migrated_like_count(arg(1));
+                                 }
+                                 print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                                ?>
+                                </span>
+                                </a>
                               </li>
-                              <?php
-																$uri_sso = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-															?>
                               <li class="later akamai-video-replace">
-                              <a title = "Watch later" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri_sso; ?>" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
+                              <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
                           </li>  
                               <li><a class="def-cur-pointer" title ="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i> <span>Share</span></a></li>
                               <li><a class="user-activity def-cur-pointer" data-rel="<?php print $video_node->nid; ?>" data-tag="<?php print $video_node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" href="javascript:" onclick='twitter_popup("<?php print urlencode($video_node->title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>
@@ -368,7 +368,7 @@ if(!empty($video_node->field_story_reporter)){
                       </div>
                       <?php print $description_slider; ?>
 
-                      <!-- <p class="upload-date"><?php //print $row['field_itg_content_publish_date']; ?></p> -->
+                      <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
@@ -384,7 +384,27 @@ if(!empty($video_node->field_story_reporter)){
 
                       </div>
                   </div>
+                  <div id="taboola-below-article-thumbnails"></div>
+									<script type="text/javascript">
+										window._taboola = window._taboola || [];
+										_taboola.push({
+											mode: 'thumbnails-g',
+											container: 'taboola-below-article-thumbnails',
+											placement: 'Below Article Thumbnails',
+											target_type: 'mix'
+										});
+									</script>
               </div>
+              <div id="taboola-below-article-thumbnails-2"></div>
+							<script type="text/javascript">
+								window._taboola = window._taboola || [];
+								_taboola.push({
+									mode: 'organic-thumbnails-c',
+									container: 'taboola-below-article-thumbnails-2',
+									placement: 'Below Article Thumbnails 2',
+									target_type: 'mix'
+								});
+							</script>
               <?php //$row['field_story_expert_description'];                  ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">

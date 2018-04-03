@@ -1326,7 +1326,7 @@ function itg_videogallery_node_access($node, $op, $account) {
       if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
         $video_expire_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
       }
-      if (($node->status == 1) && ($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
+      if (($current_time > $video_schedule_date) && ($current_time < $video_expire_date) && ($node->type == 'videogallery' && $op == 'view')) {
         return NODE_ACCESS_ALLOW;
       }
       elseif (($current_time > $video_expire_date) && ($node->type == 'videogallery') && ($op == 'view')) {

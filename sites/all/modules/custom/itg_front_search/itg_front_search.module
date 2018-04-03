@@ -20,6 +20,13 @@ function itg_front_search_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'include/itg_front_search.inc',
   );
+  
+  $items['itgd/%'] = array(
+    'page callback' => 'itgd_speed_test_page',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -609,4 +616,8 @@ function topic_form_submit_handler($form, &$form_state) {
   $options = array('query' => $search_key);
   drupal_goto($search_web_url, $options);
   */ 
+}
+
+function itgd_speed_test_page($keyword){
+	print $keyword;
 }

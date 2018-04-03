@@ -1987,53 +1987,16 @@ function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL,
 }
 
 /**
- * Like and dislike button for highlights on event page
- * @param int $unique_id
- * @return string
- */
-function itg_event_backend_heart_like_dislike($unique_id, $datatype = NULL, $nid = NULL, $web_type) {
-  $arg = arg();
-  if (function_exists('itg_flag_get_count')) {
-    $mongo_like_dislike = itg_flag_get_count($unique_id);
-    //$dislike = itg_flag_get_count($unique_id, 'dislike_count');
-  }
-  // get migrated count
-  //node type check for migrated content
-  $type = itg_event_backend_get_node_type($arg[1]);
-  if (function_exists('itg_get_migrated_like_count')) {
-    if($type == 'photogallery') {
-    $migrated_count = itg_get_migrated_like_count($nid);
-    } else {
-    $migrated_count = itg_get_migrated_like_count($unique_id); 
-    }
-  }
-
-  $sum_of_likes = $mongo_like_dislike['like_count'] + $migrated_count[0]['like_count'];
-  $sum_of_dislikes = $mongo_like_dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
-  $like_count_common =  $sum_of_likes ;
-  $dislike_count_common = '(' . $sum_of_dislikes . ')';
-  // $likes_class = !empty($sum_of_likes) ? 'heart-dislike' : '';  
-  
-  $pid = ($web_type == 'web') ? "heart_voted_" . $unique_id : "heart_voted_mobile_" . $unique_id;
-  $like = ($web_type == 'web') ? "no-of-likes_" . $unique_id : "no-of-likes_mobile_" . $unique_id;
-  $dislike = "no-of-dislikes_" . $unique_id;
-
-  $like_btn = '<div class="agbutton"><button class="btn-heart-like '.$likes_class.'" id="like_count" data-heart="heart-msg" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
-  //$dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
-  $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
-  return $like_btn . $error_msg;
-}
-
-/**
  * Get event live whole content
  * @return string
  */
 function itg_event_backend_live_content() {
   $nid = itg_event_backend_get_event_node();
   $title = itg_common_get_node_title($nid);
-  if (module_exists('itg_live_tv')) {
+  /*if (module_exists('itg_live_tv')) {
     $banner_video = itg_live_tv_page_video();
-  }
+  }*/
+  $banner_video = get_itg_variable('itg_webcast_iframe');
   $live_tvClass = 'col-md-7';
   $highlight_content = itg_event_backend_highlights_block_content();
   if(empty($highlight_content)){
