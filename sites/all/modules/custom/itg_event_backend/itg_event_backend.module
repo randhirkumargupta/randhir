@@ -1965,49 +1965,6 @@ function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL,
 }
 
 /**
- * Like and dislike button for heart on video page
- * @param int $unique_id
- * @return string
- */
-function itg_event_backend_heart_like_dislike($unique_id, $datatype = NULL, $nid = NULL, $web_type) {
-  $arg = arg();
-  if (function_exists('itg_flag_get_count')) {
-    $mongo_like_dislike = itg_flag_get_count($unique_id, 0);
-    //$dislike = itg_flag_get_count($unique_id, 'dislike_count');
-  }
-  // get migrated count
-  //node type check for migrated content
-  $type = itg_event_backend_get_node_type($arg[1]);
-  if (function_exists('itg_get_migrated_like_count')) {
-    if($type == 'photogallery') {
-    $migrated_count = itg_get_migrated_like_count($nid);
-    } else {
-    $migrated_count = itg_get_migrated_like_count($unique_id); 
-    }
-  }
-	
-  $mongo_like_dislike['like_count'] = empty($mongo_like_dislike['like_count']) ? 0 : $mongo_like_dislike['like_count'];
-  $mongo_like_dislike['dislike_count'] = empty($mongo_like_dislike['dislike_count']) ? 0 : $mongo_like_dislike['dislike_count'];
-  $migrated_count[0]['like_count'] = empty($migrated_count[0]['like_count']) ? 0 : $migrated_count[0]['like_count'];
-  $migrated_count[0]['dislike_count'] = empty($migrated_count[0]['like_count']) ? 0 : $migrated_count[0]['dislike_count'];
-	
-  $sum_of_likes = $mongo_like_dislike['like_count'] + $migrated_count[0]['like_count'];
-  $sum_of_dislikes = $mongo_like_dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
-  $like_count_common =  $sum_of_likes ;
-  $dislike_count_common = '(' . $sum_of_dislikes . ')';
-  // $likes_class = !empty($sum_of_likes) ? 'heart-dislike' : '';  
-  
-  $pid = ($web_type == 'web') ? "heart_voted_" . $unique_id : "heart_voted_mobile_" . $unique_id;
-  $like = ($web_type == 'web') ? "no-of-likes_" . $unique_id : "no-of-likes_mobile_" . $unique_id;
-  $dislike = "no-of-dislikes_" . $unique_id;
-
-  $like_btn = '<div class="agbutton"><button class="btn-heart-like '.$likes_class.'" id="like_count" data-heart="heart-msg" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
-  //$dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-heart"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
-  $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
-  return $like_btn . $error_msg;
-}
-
-/**
  * Get event live whole content
  * @return string
  */
