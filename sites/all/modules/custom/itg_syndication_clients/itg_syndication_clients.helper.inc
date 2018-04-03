@@ -143,11 +143,11 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-states.xml' => 1207682,
     'msn/mailtoday/story-entertainment.xml' => 1207680,
     'msn/mailtoday/story-cricket.xml' => 1208384,
-    'msn/mailtoday/story-world.xml' => 1206577,
-    'msn/mailtoday/story-india.xml' => 1206578,
-    'msn/mailtoday/story-top-stories.xml' => 1206584,
-    'msn/mailtoday/story-technology.xml' => 1206688,
-    'msn/mailtoday/story-auto.xml' => 1206689,
+    'msn/indiatoday/story-world.xml' => 1206577,
+    'msn/indiatoday/story-india.xml' => 1206578,
+    'msn/indiatoday/story-top-stories.xml' => 1206584,
+    'msn/indiatoday/story-technology.xml' => 1206688,
+    'msn/indiatoday/story-auto.xml' => 1206689,
     'msn/mailtoday/story-education.xml' => 1206666
   );
   return $msn_story;
