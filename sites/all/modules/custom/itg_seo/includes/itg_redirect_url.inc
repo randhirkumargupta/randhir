@@ -545,15 +545,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $redirecturl = get_redirect_url($newcontentid);
       $newurl = FRONT_URL.'/'.$redirecturl;
       drupal_goto($newurl, array(), 301);
-     } else if ((!empty($arg[0]) && ($arg[0] == 'story')) && !empty($arg[1]) && !empty($arg[2])) {
-      $storyarg = $arg[2];
-      $storyarg_exp = explode('.html', $storyarg);
-      $old_content_id = $storyarg_exp[0];
-      $table = 'migrate_map_itgstorylist';
-      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
-      $redirecturl = get_redirect_url($newcontentid);
-      $newurl = FRONT_URL.'/'.$redirecturl;
-      drupal_goto($newurl, array(), 301);
      } else if ((!empty($arg[0]) && ($arg[0] == 'Photo')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {
       $storyarg = $arg[1];
       $storyarg_exp = explode('.html', $storyarg);
