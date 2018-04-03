@@ -469,7 +469,7 @@ function poll_detail_datalist($poll_id) {
   $news = array();
   $news2 = array();
 
-  $query = db_select('node', 'n');
+  $query = db_select('node', 'n');  
   $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
   $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
   $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
@@ -516,7 +516,13 @@ function poll_detail_datalist($poll_id) {
       $options['o_count'] = "$total_voter";
       $options2[] = $options;
     }
-
+    $field_poll_end_date_value = $res['field_poll_end_date_value'];
+    if(strtotime($field_poll_end_date_value) > time()){
+        $p_type = "running";
+    }
+    else{
+        $p_type = "closed";
+    }
     $count_total_patic = poll_participants($res['nid']);
     $poll_id = isset($res['nid']) ? $res['nid'] : "";
     $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
@@ -531,6 +537,7 @@ function poll_detail_datalist($poll_id) {
     $news['p_image'] = "$poll_ques_img";
     $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
     $news['total_participants'] = "$count_total_patic";
+    $news['p_type'] = "$p_type";
 
     $news['p_option'] = $options2;
     $news2[] = $news;
