@@ -5486,10 +5486,9 @@ function itg_rapid_api_testing($token) {
     $prod_url =  "https://appfeeds.intoday.in";   
     $url = $prod_url . "/appapi/topstories/" . $rand;
     $contents = file_get_contents($url);
-    $contents_ar = json_decode($contents);
-    echo $url;
+    $contents_ar = json_decode($contents);    
     $data = $contents_ar->data;
-    p($data);
+    
     $l_cont = 1;
     foreach ($data as $key => $value) {
         $n_share_link = $value->n_share_link;
@@ -5503,7 +5502,7 @@ function itg_rapid_api_testing($token) {
     }
     $return_flag = "";
     $output = $html_temp_top . $html_temp_content . $html_temp_footer;
-    $term_feed_path = "public://topstories_chunk";
+    $term_feed_path = "public://topstories_chunks";
     file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
     $file_name1 = "it_thelallantop.html";
     $file_name2 = "it_ichowk.html";
