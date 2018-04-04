@@ -813,10 +813,6 @@ function itg_state_election_map() {
   $state = arg(2);
   $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
   $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-  $section_tid = get_category_parent_one_level($section);
-  if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-	$section = $section_tid[0]->parent;
-  }
   foreach ($terms as $values) {
     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
 	    $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
