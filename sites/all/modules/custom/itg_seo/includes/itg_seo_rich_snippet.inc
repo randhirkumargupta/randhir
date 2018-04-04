@@ -107,58 +107,25 @@ function itg_seo_node_data($node) {
       $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
     
-    if ($node->nid == '1143316' || $node->nid == '1142893') {
+    $term_arr = array();
+    if($node->field_story_category[LANGUAGE_NONE]) {
+      foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $catvalue) {
+        $term_arr[] = $catvalue['tid'];        
+      }
+    }
+    
+    if (in_array('1207047', $term_arr)) {
         $review_item_type = 'Movie';
         $worstrate = 0;
         $bestrate = 5;
         $auth_name = str_replace(' ', '-', trim($authname[0]));
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
         $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
-        switch ($node->nid) {
-          case '1112499':          
-            $moviename = 'Pari';
-            $item_movie_url = 'http://www.imdb.com/title/tt7329858/';
-            $directorname = 'Prosit Roy';
-            $avaragrate = 2;
-          break;
-          case '1171112':
-            $moviename = 'Aiyaary';
-            $item_movie_url = 'http://www.imdb.com/title/tt6774212/';
-            $directorname = 'Neeraj Pandey';
-            $avaragrate = 1.5;
-          break;
-          case '1165812':
-            $moviename = 'Pad Man';
-            $item_movie_url = 'http://www.imdb.com/title/tt7218518/';
-            $directorname = 'R Balki';
-            $avaragrate = 4;
-          break;
-          case '1153788':
-            $moviename = 'Padmaavat';
-            $item_movie_url = 'http://www.imdb.com/title/tt5935704/';
-            $directorname = 'Sanjay Leela Bhansali';
-            $avaragrate = 3;
-          break;
-          case '1112499':
-            $moviename = 'Tiger Zinda Hai';
-            $item_movie_url = 'http://www.imdb.com/title/tt5956100/';
-            $directorname = 'Ali Abbas Zafar';
-            $avaragrate = 3;
-          break;
-          case '1143316':
-            $moviename = 'Thaana Serndah Koottam';
-            $item_movie_url = 'http://www.imdb.com/title/tt6237966/';
-            $directorname = 'Vignesh Shivn';
-            $avaragrate = 2.5;
-          break;
-          case '1142893':
-            $moviename = 'Mukkabaaz';
-            $item_movie_url = 'http://www.imdb.com/title/tt7180544/';
-            $directorname = ' Anurag Kashyap';
-            $avaragrate = 3.5;
-          break;
-        }
-        
+        $moviename = trim($node->field_mega_review_movie_plot[LANGUAGE_NONE][0]['value']);
+        $directorname = trim($node->field_mega_review_director[LANGUAGE_NONE][0]['value']);
+        $imdb_url = trim($node->field_review_movie_imdb_url[LANGUAGE_NONE][0]['value']);
+        $story_rating = trim($node->field_story_rating[LANGUAGE_NONE][0]['value']);
+     
         $pathalias = drupal_get_path_alias('node/' . $node->nid);
         $pageurl = $base_url . '/' . $pathalias;
     
@@ -181,17 +148,17 @@ function itg_seo_node_data($node) {
                                       "name": "' . $moviename . '",
                                       "image": "' . $largimage . '",
                                       "datePublished": "' . $publisheddate . '",
-                                      "sameAs": "' . $item_movie_url . '",
+                                      "sameAs": "' . $imdb_url . '",
                                       "director": "' . $directorname . '"
                                   },
                                   "reviewRating": {
                                       "@type": "Rating",
                                       "worstRating": ' . $worstrate . ',
                                       "bestRating": ' . $bestrate . ',
-                                      "ratingValue": ' . $avaragrate . '
+                                      "ratingValue": ' . $story_rating . '
                                   },
                                   "url": "' . $pageurl . '",
-                                  "description": "' . $description . '",
+                                  "description": "' . $story_kicker . '",
                                   "publisher": {
                                       "@type": "Organization",
                                       "name": "India Today"
