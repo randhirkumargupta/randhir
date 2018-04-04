@@ -835,7 +835,7 @@ if (!empty($content)):
                 ?>
                 <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
                 <?php */ } ?>
-              <div class="ad-blocker" style="display: none;"></div>
+              <?php /* <div class="ad-blocker" style="display: none;"></div> */ ?>
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
