@@ -395,16 +395,6 @@ if(!empty($video_node->field_story_reporter)){
 										});
 									</script>
               </div>
-              <div id="taboola-below-article-thumbnails-2"></div>
-							<script type="text/javascript">
-								window._taboola = window._taboola || [];
-								_taboola.push({
-									mode: 'organic-thumbnails-c',
-									container: 'taboola-below-article-thumbnails-2',
-									placement: 'Below Article Thumbnails 2',
-									target_type: 'mix'
-								});
-							</script>
               <?php //$row['field_story_expert_description'];                  ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">
