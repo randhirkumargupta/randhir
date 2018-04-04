@@ -129,20 +129,34 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
-                $display_title = "";
-                if ($widget_data['itg-block-4']['block_title'] == "") {
-                  $display_title = 'style="display:none"';
-                }
-                ?>
-                <div class="row"><div class="col-md-12 election-top-block"><h1 <?php print $display_title ?> id="display_tit"><span class="highlights-title"> <?php echo mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, ".."); ?> </span></h1> <div class="social-share">
-                    <ul>
-                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link ?>", "<?php echo urlencode($fb_share_title); ?>", "<?php echo urlencode($share_desc); ?>", "<?php echo $src ?>")'><i class="fa fa-facebook"></i></a></li>
-                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick='twitter_popup("<?php echo urlencode($search_title) ?>" , "<?php echo urlencode($short_url) ?>" )'><i class="fa fa-twitter"></i></a></li>
-                        <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' class="google def-cur-pointer"></a></li>
-                    </ul>
-                </div></div></div>
-                <?php
+                $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+								$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
+								$fb_share_title = htmlentities($search_title, ENT_QUOTES);
+												$story_title = get_first_story_title_by_tid(arg(2));
+												$story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+												if(!empty($story_title)){
+									$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+									$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+									$actual_link = $content_link;
+									$search_title = preg_replace("/'/", "\\'", $story_title_display);
+									$fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
+								}else{
+									$short_url = shorten_url($actual_link, 'goo.gl');					
+								}
+												$display_title = "";
+												if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
+													$display_title = 'style="display:none"';
+												}
+												
+												echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
+														<ul>
+																<li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+																<li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+																<li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+																<li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+														</ul>
+												</div></div></div>';
+                
                 $graphdata = itg_widget_get_graph_data();
                 if (count($graphdata) > 2) {
                   ?>
@@ -467,15 +481,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <?php
                         $adsclass = "";
                         $key_candidate_extra_block = "";
+                        $margin_class = 'election-topaddd';
                         if (count($graphdata) > 2) {
-                          $adsclass = 'ads-after-two';
+                          $adsclass = 'ads-after-two mt-50';
+                          $margin_class = 'election-topadd';
                           $key_candidate_extra_block = 'key_candidate_extra_block';
                         }
                         ?>
                         <div class="row">
-                            <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
+                            <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6">
                                 <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
-                                <div class="itg-widget election-topadd">
+                                <div class="itg-widget <?php echo $margin_class;?>">
                                     <div class="ad-widget droppable">
                                         <div class="sidebar-ad">
                                             <?php
@@ -716,4 +732,5 @@ $wgmf_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/
 <!--animation emoji for hightlight end-->
 <style>
 	.small_state_graph{height: 320px;}
+	.election-page .itg-map #map-state{top: 24px;}
 </style>
