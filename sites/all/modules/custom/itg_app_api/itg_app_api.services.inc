@@ -5483,7 +5483,8 @@ function itg_rapid_api_testing($token) {
     global $base_url;
     $data = array();
     $rand = rand();
-    $url = $base_url . "/appapi/topstories/" . $rand;
+    $prod_url =  "https://appfeeds.intoday.in";   
+    $url = $prod_url . "/appapi/topstories/" . $rand;
     $contents = file_get_contents($url);
     $contents_ar = json_decode($contents);
     $data = $contents_ar->data;
