@@ -299,11 +299,17 @@ function itg_preprocess_html(&$vars) {
   if ($arg[2] != 'embed') {
     itgd_chart_beat_code();
   }
+
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
 	'#markup' => $newsroomjs,
   );
+
+  if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){
+      $newsroomjs = get_newsroom_screcard_js();
+  }
+
   drupal_add_html_head($script_code, 'newsroomjs');
   if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
     $add_script = variable_get('add_traffic_script');
@@ -755,6 +761,36 @@ jscode;
 <!-- END NEWSROOM SCRIPT -->
 jscode;
 	}
+}
+
+/**
+ * Get score card script code
+ */
+
+/**
+ * Get newsroom js ad code
+ */
+function get_newsroom_screcard_js(){
+        return <<<jscode
+		<!-- NEWSROOM SCRIPT -->
+<script type="text/javascript">
+window._taboola = window._taboola || [];
+_taboola.push(
+{article:'auto'}
+);
+!function (e, f, u, i) {
+if (!document.getElementByIdhttps://indiatodaygroup.atlassian.net/images/icons/emoticons/information.png)
+{ e.async = 1; e.src = u; e.id = i; f.parentNode.insertBefore(e, f); }
+}(document.createElement('script'),
+document.getElementsByTagName('script')[0],
+'//cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js',
+'tb_loader_script');
+if(window.performance && typeof window.performance.mark == 'function')
+{window.performance.mark('tbl_ic');}
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+
 }
 
 /**
