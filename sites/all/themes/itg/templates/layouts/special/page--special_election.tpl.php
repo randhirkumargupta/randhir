@@ -273,36 +273,50 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <?php
                                               }
                                               ?>                                          
-                                              <div class="data-holder pos-rel" id="itg-block-5">
-                                                  <select id="map-state" name="map_state">
-                                                      <?php
-                                                      $countf = 0;
-                                                      $svgurl = "";
-                                                      $mapgurl = "";
-                                                      $colorurl = "";
-                                                      foreach ($terms as $values) {
-                                                        if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
-                                                          if ($countf == 0) {
-                                                            $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-                                                            $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
-                                                            $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-                                                          }
-                                                          echo '<option value="' . itg_layout_clean_url($values->tid) . '">' . $values->name . '</option>';
-                                                          $countf++;
-                                                        }
-                                                      }
-                                                      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
-                                                      ?>
-                                                  </select>
+                                              <div class="data-holder pos-rel" id="itg-block-5">                              
+
+                                                  <?php
+                                                  $countf = 0;
+                                                  $svgurl = "";
+                                                  $mapgurl = "";
+                                                  $colorurl = "";
+                                                  $state = 0;
+                                                  $state_opt = '';
+                                                  foreach ($terms as $values) {
+                                                    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
+                                                      if ($countf == 0) {
+																												$svgurl1 = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+																												$state = $values->tid;
+																												}
+																												$svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+                                                        $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+                                                        $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+                                                      echo '<input type="hidden" name="svg_url_'.$values->tid.'" value= "'.$svgurl.'" id="svg_url_'.$values->tid.'">';
+                                                      echo '<input type="hidden" name="election_cat_'.$values->tid.'" value= "'.arg(2).'" id="election_cat_'.$values->tid.'">';
+                                                      
+                                                      $state_opt .= '<option value="'. $values->tid . '">' . $values->name . '</option>';
+                                                      $countf++;
+                                                    }
+                                                  }
+                                                  //~ $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+                                                  ?>
+                                              <select id="map-state" name="map_state" onChange="change_mini_state_graph(this)">
+																								<?php echo $state_opt;?>
+                                              </select>
                                                   <div id="main_container" class="map-result-detail">
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>
-                                                  <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
+                                               <div class="small_state_graph_wrapper">
+																								 <a href="/state-elections/<?php echo arg(2)."/". $state; ?>"> 
+																									<div class="small_state_graph">
+																										<iframe src="<?php echo $svgurl1;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
+																									</div>
+																								</a>
+																							</div>
                                               </div>
                                           </div>             
                                       </div>
-                                    <?php
-                                    }
+                                    <?php }
                                     else {
                                       ?>
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -700,3 +714,6 @@ $wgmf_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/
     <div class="face4 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
 </div>
 <!--animation emoji for hightlight end-->
+<style>
+	.small_state_graph{height: 320px;}
+</style>
