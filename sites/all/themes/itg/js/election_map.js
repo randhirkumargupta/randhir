@@ -206,3 +206,10 @@ function getJSONFeedDetails(conurl, consID) {
 function tabclose() {
     jQuery('.map-result-detail').hide();
 }
+
+function change_mini_state_graph(value){
+	var iframe_url = jQuery(value).val()   
+	var iframe_html = '<iframe src = "'+iframe_url+'" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > ';
+	console.log(iframe_url);
+	jQuery(".small_state_graph").html(iframe_html);  
+}
