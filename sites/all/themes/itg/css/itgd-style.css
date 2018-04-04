@@ -150,11 +150,18 @@
 #block-views-event-photo-slider-block .view-event-photo-slider .view-event-photo-slider .slick-slider li{ position: relative; }
 .view-id-event_photo_slider.view-display-id-block_1 .field-content:before { content: "\f030"; display: inline-block; font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; position: absolute; color: #fff; bottom: 6px; right: 6px; background: rgba(0,0,0,.5); padding: 3px 5px;}
-.view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .views-field , .view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .search-detail{ padding-left: 0px; }
-.view-front-end-global-search .view-content li.itg-search-list{ overflow: hidden; }
+.view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .views-field , .view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .front-search-date-share{ padding-left: 0px; }
+.view-front-end-global-search .view-content .front-search-date-share{ overflow: hidden; padding-left: 180px;}
 .view-front-end-global-search .view-content .itg-search-list .search-detail{ width:auto; float: left; }
-.view-front-end-global-search .view-content .itg-search-list .front-search-share{width: auto;float: left;margin-top: 14px;}
+.view-front-end-global-search .view-content .itg-search-list .social-share{width: auto;float: left;margin-top: 14px;}
 
+/* election chart */
+
+.election-graph  .statename {text-align: center; background: #e7e7e7; padding: 5px 0; font-size: 20px; font-weight: bold; color: #545454; position: relative; overflow: hidden;}
+.election-graph  .partyname-seats {width: 70%; margin: 0 auto;}
+.election-graph  .partyname-seats table td{font-weight: bold; text-align: center; font-size: 15px; color: #545454; position: relative; padding-top: 20px;}
+.election-graph  .partyname-seats span.partybrand{width: 7px; height: 7px; display: block; position: absolute; top: 10px; left: 50%; border-radius: 100%; transform: translateX(-50%);-webkit-transform: translateX(-50%);}
+.election-graph  .partyname-seats span.winseats{display: block; font-weight: bold;}
 @media all and (max-width: 700px) {
     .section-news figure img {
         width: 100%
