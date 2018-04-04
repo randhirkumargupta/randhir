@@ -3334,7 +3334,9 @@
             }
             .social-share {
                 @include social-share;
-                margin-top: 0px;
+                margin-top: 12px;
+                width: auto;
+                float: left;
             }
             .other-info {
                 padding-top: 0;

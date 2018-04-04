@@ -2757,7 +2757,9 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .view-front-end-global-search .view-content .search-detail p {
     display: block; }
   .view-front-end-global-search .view-content .social-share {
-    margin-top: 0px; }
+    margin-top: 12px;
+    width: auto;
+    float: left; }
     .view-front-end-global-search .view-content .social-share ul {
       list-style-type: none; }
       .view-front-end-global-search .view-content .social-share ul li {

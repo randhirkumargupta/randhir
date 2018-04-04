@@ -9870,7 +9870,7 @@ section.sidebar {
 
 .election-page {
     .election-top-block {
-        margin-top: 40px;
+        margin-top:0px;
         position: relative;
         z-index: 10;
         h1 {
@@ -9959,11 +9959,11 @@ section.sidebar {
             }
         }
         .ad-widget {
-            border: none;
+            border: 1px solid #ddd;
         }
         .election-topadd .ad-widget {
-            margin-top: 103px;
-            margin-bottom: 90px;
+            margin-top:0px;
+            margin-bottom:20px;
         }
         .ads-after-two {
             .election-topadd {
@@ -10217,8 +10217,7 @@ section.sidebar {
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
-                &:nth-child(2) {
-                    text-align: left;
+                &:nth-child(2) {                    
                     padding-left: 10px;
                 }
             }
@@ -10231,7 +10230,6 @@ section.sidebar {
                     padding-right: 5px;
                 }
                 &:nth-child(2) {
-                    text-align: left;
                     padding-left: 10px;
                 }
                 &.party-color {
@@ -13909,13 +13907,15 @@ span.see-picture {
         overflow: initial;
         padding-left: 0px;
     }
-    .view-front-end-global-search .view-content .itg-search-list>.views-field {
+    .view-front-end-global-search .view-content .itg-search-list>.views-field , .view-front-end-global-search .view-content .front-search-date-share {
         padding-left: 154px;
     }
     .view-front-end-global-search .view-content .search-pic {
         float: left;
         margin-right: 15px;
     }
+
+
 }
 
 @media (min-width: 768px) {

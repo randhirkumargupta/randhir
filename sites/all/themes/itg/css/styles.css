@@ -9259,7 +9259,7 @@ section.sidebar .block-itg-ads {
 /*css end defalt image */
 /* CSS For Election Page */
 .election-page .election-top-block {
-  margin-top: 40px;
+  margin-top: 0px;
   position: relative;
   z-index: 10; }
   .election-page .election-top-block h1 {
@@ -9348,10 +9348,10 @@ section.sidebar .block-itg-ads {
 .election-page .right-side .key_candidate_extra_block .droppable {
   height: 375px; }
 .election-page .right-side .ad-widget {
-  border: none; }
+  border: 1px solid #ddd; }
 .election-page .right-side .election-topadd .ad-widget {
-  margin-top: 103px;
-  margin-bottom: 90px; }
+  margin-top: 0px;
+  margin-bottom: 20px; }
 .election-page .right-side .ads-after-two .election-topadd .ad-widget {
   margin-top: 0;
   margin-bottom: 4px; }
@@ -9542,7 +9542,6 @@ section.sidebar .block-itg-ads {
     text-align: center;
     border-bottom: 10px solid #FFF; }
     .election-page .election-graph table th:nth-child(2) {
-      text-align: left;
       padding-left: 10px; }
   .election-page .election-graph table td {
     background: #f5f5f5;
@@ -9552,7 +9551,6 @@ section.sidebar .block-itg-ads {
     .election-page .election-graph table td:first-child {
       padding-right: 5px; }
     .election-page .election-graph table td:nth-child(2) {
-      text-align: left;
       padding-left: 10px; }
     .election-page .election-graph table td.party-color {
       width: 13px;
@@ -13096,7 +13094,7 @@ span.see-picture a {
     overflow: initial;
     padding-left: 0px; }
 
-  .view-front-end-global-search .view-content .itg-search-list > .views-field {
+  .view-front-end-global-search .view-content .itg-search-list > .views-field, .view-front-end-global-search .view-content .front-search-date-share {
     padding-left: 154px; }
 
   .view-front-end-global-search .view-content .search-pic {
