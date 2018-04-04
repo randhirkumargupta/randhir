@@ -151,6 +151,9 @@
 .view-id-event_photo_slider.view-display-id-block_1 .field-content:before { content: "\f030"; display: inline-block; font: normal normal normal 14px/1 FontAwesome; font-size: inherit; text-rendering: auto; -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; position: absolute; color: #fff; bottom: 6px; right: 6px; background: rgba(0,0,0,.5); padding: 3px 5px;}
 .view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .views-field , .view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .search-detail{ padding-left: 0px; }
+.view-front-end-global-search .view-content li.itg-search-list{ overflow: hidden; }
+.view-front-end-global-search .view-content .itg-search-list .search-detail{ width:auto; float: left; }
+.view-front-end-global-search .view-content .itg-search-list .front-search-share{width: auto;float: left;margin-top: 14px;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
