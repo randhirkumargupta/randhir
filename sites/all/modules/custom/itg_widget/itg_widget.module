@@ -745,14 +745,13 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("tech_most_read", array("data" => $data));
             break;
         case 'graph_election':
-            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
-            if ($theme != 'itgadmin'){
-             drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/jquery.min.1.8.2.js', array('type' => 'file', 'scope' => 'footer','weight' => '14'));
-            }
-            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
-            drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
-            
             $data = itg_widget_get_graph_data($info);
+            if($data[0]->field_graph_type_value == 'Graph'){
+							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+						}else if ($data[0]->field_graph_type_value == 'Dot Graph'){
+							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+							drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
+						}
             foreach ($data as $index => $row) {
                 $jsondata = file_get_contents($row->field_election_constituency_tall_value);
                 $settings['index'] = $index;
@@ -912,9 +911,9 @@ function itg_widget_get_graph_data() {
         $cat_id = arg(2);
     }
     $itg_query = db_select('node', 'n');
-    $itg_query->innerjoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
-    $itg_query->innerjoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
-    $itg_query->innerjoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+    $itg_query->leftJoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
 
