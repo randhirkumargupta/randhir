@@ -305,12 +305,18 @@ function itg_preprocess_html(&$vars) {
 	'#type' => 'markup',
 	'#markup' => $newsroomjs,
   );
+  drupal_add_html_head($script_code, 'newsroomjs');
 
   if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){
       $newsroomjs = get_newsroom_screcard_js();
+      $script_code = array(
+          '#type' => 'markup',
+          '#markup' => $newsroomjs,
+      );
+      drupal_add_html_head($script_code, 'newsroomjs');
   }
 
-  drupal_add_html_head($script_code, 'newsroomjs');
+
   if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
     $add_script = variable_get('add_traffic_script');
     if ($add_script) {
