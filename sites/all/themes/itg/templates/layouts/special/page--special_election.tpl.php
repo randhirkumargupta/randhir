@@ -134,7 +134,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   $display_title = 'style="display:none"';
                 }
                 ?>
-                <div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' <?php echo mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, ".."); ?> </span></h1> <div class="social-share">
+                <div class="row"><div class="col-md-12 election-top-block"><h1 <?php print $display_title ?> id="display_tit"><span class="highlights-title"> <?php echo mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, ".."); ?> </span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link ?>", "<?php echo urlencode($fb_share_title); ?>", "<?php echo urlencode($share_desc); ?>", "<?php echo $src ?>")'><i class="fa fa-facebook"></i></a></li>
