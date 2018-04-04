@@ -714,3 +714,6 @@ $wgmf_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/
     <div class="face4 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
 </div>
 <!--animation emoji for hightlight end-->
+<style>
+	.small_state_graph{height: 320px;}
+</style>
