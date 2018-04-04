@@ -5307,16 +5307,76 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    p(node_load(1069041));
-    $str = '{
-    "status_code": "0",
-    "status_message": "Customised Message",
-    "data": {}
-  }';
-    $jsondata = $str;
-    $obj = json_decode($jsondata, TRUE);
-    $return_obj = $obj;
-    return $return_obj;
+    ############ code write static html start #####################
+    $html_temp_top = '<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <title>aaa     </title>
+            <link rel="shortcut icon" href="https://www.indiatoday.in/sites/all/themes/itg/favicon.ico" type="image/vnd.microsoft.icon" />
+       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+   <style>
+*{padding:0;margin:0;}   
+._it_container{width:100%;box-sizing: border-box;font-family: "Roboto", sans-serif; padding:10px;}
+._it_container ._head{width:100%;margin-bottom: 10px;}
+._it_container ._head h3{font-size: 18px;line-height: 22px;}
+._it_container ._body{width:100%;border:1px solid #ccc;box-sizing: border-box;}
+._it_container ._body ul{list-style-type: none;padding: 0;margin:0;}
+._it_container ._body ul li{border-bottom: 1px solid #ccc;padding:5px;font-size: 15px;line-height: 18px;}
+._it_container ._body ul li ._contmain{}
+._it_container ._body ul li ._contmain ._leftImg{width: auto; float: left;margin-right: 10px;}
+._it_container ._body ul li ._contmain ._leftImg img{width:88px;height:50px;}
+._it_container ._body ul li ._contmain ._leftImg a{outline: none;}
+._it_container ._body ul li ._contmain ._rightText{display: table;}
+._it_container ._body ul li ._contmain ._rightText a{outline: none;text-decoration: none;color:#323232;}
+._clr{clear: both;}
+</style>             
+    </head>
+    <body>
+       
+<div class="_it_container">
+<div class="_head">
+	<h3>Latest from India Today</h3>
+</div>
+<div class="_body">
+	<ul id="_fetchData">';
+    $html_temp_content = "";
+    $html_temp_footer = "</ul></div></div></body></html>";
+    $output = "";
+    global $base_url;
+    $data = array();
+    $rand = rand();
+    $prod_url =  "https://appfeeds.intoday.in";   
+    $url = $prod_url . "/appapi/topstories/" . $rand;
+    $contents = file_get_contents($url);
+    $contents_ar = json_decode($contents);    
+    $data = $contents_ar->data;
+    
+    $l_cont = 1;
+    foreach ($data as $key => $value) {
+        $n_share_link = $value->n_share_link;
+        $n_small_image = $value->n_small_image;
+        $n_title = $value->n_title;
+        $html_temp_content .= '<li><div class="_contmain"><div class="_leftImg"><a href="' . $n_share_link . '" title="' . $n_title . '" target="_blank"><img src="' . $n_small_image . '" alt=""></a></div><div class="_rightText"><a href="' . $n_share_link . '" title="' . $n_title . '" target="_blank">' . $n_title . '</a></div><div class="_clr"></div></div></li>';
+        if ($l_cont >= 5) {
+            break;
+        }
+        $l_cont++;
+    }
+    $return_flag = "";
+    $output = $html_temp_top . $html_temp_content . $html_temp_footer;
+    $term_feed_path = "public://topstories_chunks";
+    file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
+    $file_name1 = "it_thelallantop.html";
+    $file_name2 = "it_ichowk.html";
+    $file_name3 = "it_dailyo.html";
+    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name1, $output);
+    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name2, $output);
+    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name3, $output);
+    print $return_flag;
+    ############ code write static html end #####################
+    die();
 }
 
 /**
