@@ -274,8 +274,16 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
-  // Code started for adding header , body start , body close for ads module
-
+  // Fact schema code adding in header for story module  
+  $fact_schema =  get_fact_schema();
+  if (!empty($fact_schema)) {
+	   $fact_schema_code = array(
+        '#type' => 'markup',
+        '#markup' => $fact_schema,
+	   );		  
+	  drupal_add_html_head($fact_schema_code, 'fact_schema');	  
+  }	  
+  // Code started for adding header , body start , body close for ads module     
   if (function_exists('get_header_body_start_end_code')) {
     $ads_code = get_header_body_start_end_code();
     foreach ($ads_code as $ads_key => $ads_chunk) {

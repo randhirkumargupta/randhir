@@ -1899,3 +1899,18 @@ function itg_common_node_update($node) {
     $node->workbench_moderation_state_new = 'published';
   }
 }
+
+/**
+ * Get fact schema for story.
+ * @return type string
+ */
+function get_fact_schema() {
+  $arg = arg();
+  $entity_id = isset($arg['1']) ? $arg['1'] : '';
+  if(!empty($entity_id)) {
+    $query = db_select('field_data_field_story_schema', 's');
+    $query->fields('s', array('field_story_schema_value'));
+    $result = $query->condition('s.entity_id', $entity_id)->execute()->fetchAssoc();
+    return $result['field_story_schema_value'];
+  } 
+}

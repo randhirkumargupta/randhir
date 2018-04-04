@@ -152,6 +152,7 @@
                     <?php print drupal_render($form['field_story_show_fields']); ?>
                     <?php print drupal_render($form['field_story_assign_to_widget']); ?>
                     <?php print drupal_render($form['field_story_schema']); ?>
+                    <div> </div>
                     <?php print drupal_render($form['field_story_embed_webcast']); ?>
                 </div>
             </div>
