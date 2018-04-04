@@ -107,14 +107,29 @@ function itg_seo_node_data($node) {
       $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
     
-    $term_arr = array();
-    if($node->field_story_category[LANGUAGE_NONE]) {
-      foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $catvalue) {
-        $term_arr[] = $catvalue['tid'];        
-      }
+    $structured_data = ''; // $node->field_story_schema[LANGUAGE_NONE][0]['safe_value'];
+    if (!empty($structured_data)) {
+       $json_ld_script = array(
+      '#type' => 'markup',
+      '#markup' => '<script type="application/ld+json">' . json_encode($structured_data, JSON_UNESCAPED_SLASHES) . '</script>' . "\n",
+    );
+
+    drupal_add_html_head($json_ld_script, 'structured_data_json_ld');
+
+    
+     /* $fact_schema_markup = array(
+            '#type' => 'markup',
+            '#markup' => '<script type="application/ld+json">'. $fact_schema . '</script>',
+        );
+      drupal_add_html_head($fact_schema_markup, 'fact_json');
+      * 
+      */
+      
     }
     
-    if (in_array('1207047', $term_arr)) {
+    $primary_category = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    
+    if (isset($primary_category) && $primary_category == '1207047') {
         $review_item_type = 'Movie';
         $worstrate = 0;
         $bestrate = 5;

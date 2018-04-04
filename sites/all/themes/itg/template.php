@@ -200,7 +200,7 @@ function itg_preprocess_page(&$variables) {
   // For single column page
   //tribute-to-sridevi: nid-1144219
   
-  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score')) {
+  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score') || $arg[0] == 'state-elections') {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
@@ -274,8 +274,16 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
-  // Code started for adding header , body start , body close for ads module
-
+  // Fact schema code adding in header for story module  
+  $fact_schema =  get_fact_schema();
+  if (!empty($fact_schema)) {
+	   $fact_schema_code = array(
+        '#type' => 'markup',
+        '#markup' => $fact_schema,
+	   );		  
+	  drupal_add_html_head($fact_schema_code, 'fact_schema');	  
+  }	  
+  // Code started for adding header , body start , body close for ads module     
   if (function_exists('get_header_body_start_end_code')) {
     $ads_code = get_header_body_start_end_code();
     foreach ($ads_code as $ads_key => $ads_chunk) {

@@ -129,20 +129,34 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
-                $display_title = "";
-                if ($widget_data['itg-block-4']['block_title'] == "") {
-                  $display_title = 'style="display:none"';
-                }
-                ?>
-                <div class="row"><div class="col-md-12 election-top-block"><h1 <?php print $display_title ?> id="display_tit"><span class="highlights-title"> <?php echo mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, ".."); ?> </span></h1> <div class="social-share">
-                    <ul>
-                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link ?>", "<?php echo urlencode($fb_share_title); ?>", "<?php echo urlencode($share_desc); ?>", "<?php echo $src ?>")'><i class="fa fa-facebook"></i></a></li>
-                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick='twitter_popup("<?php echo urlencode($search_title) ?>" , "<?php echo urlencode($short_url) ?>" )'><i class="fa fa-twitter"></i></a></li>
-                        <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' class="google def-cur-pointer"></a></li>
-                    </ul>
-                </div></div></div>
-                <?php
+                $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+								$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
+								$fb_share_title = htmlentities($search_title, ENT_QUOTES);
+												$story_title = get_first_story_title_by_tid(arg(2));
+												$story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+												if(!empty($story_title)){
+									$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+									$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+									$actual_link = $content_link;
+									$search_title = preg_replace("/'/", "\\'", $story_title_display);
+									$fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
+								}else{
+									$short_url = shorten_url($actual_link, 'goo.gl');					
+								}
+												$display_title = "";
+												if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
+													$display_title = 'style="display:none"';
+												}
+												
+												echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
+														<ul>
+																<li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+																<li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+																<li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+																<li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+														</ul>
+												</div></div></div>';
+                
                 $graphdata = itg_widget_get_graph_data();
                 if (count($graphdata) > 2) {
                   ?>
@@ -273,36 +287,50 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <?php
                                               }
                                               ?>                                          
-                                              <div class="data-holder pos-rel" id="itg-block-5">
-                                                  <select id="map-state" name="map_state">
-                                                      <?php
-                                                      $countf = 0;
-                                                      $svgurl = "";
-                                                      $mapgurl = "";
-                                                      $colorurl = "";
-                                                      foreach ($terms as $values) {
-                                                        if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
-                                                          if ($countf == 0) {
-                                                            $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-                                                            $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
-                                                            $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-                                                          }
-                                                          echo '<option value="' . itg_layout_clean_url($values->tid) . '">' . $values->name . '</option>';
-                                                          $countf++;
-                                                        }
-                                                      }
-                                                      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
-                                                      ?>
-                                                  </select>
+                                              <div class="data-holder pos-rel" id="itg-block-5">                              
+
+                                                  <?php
+                                                  $countf = 0;
+                                                  $svgurl = "";
+                                                  $mapgurl = "";
+                                                  $colorurl = "";
+                                                  $state = 0;
+                                                  $state_opt = '';
+                                                  foreach ($terms as $values) {
+                                                    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
+                                                      if ($countf == 0) {
+																												$svgurl1 = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+																												$state = $values->tid;
+																												}
+																												$svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+                                                        $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+                                                        $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+                                                      echo '<input type="hidden" name="svg_url_'.$values->tid.'" value= "'.$svgurl.'" id="svg_url_'.$values->tid.'">';
+                                                      echo '<input type="hidden" name="election_cat_'.$values->tid.'" value= "'.arg(2).'" id="election_cat_'.$values->tid.'">';
+                                                      
+                                                      $state_opt .= '<option value="'. $values->tid . '">' . $values->name . '</option>';
+                                                      $countf++;
+                                                    }
+                                                  }
+                                                  //~ $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+                                                  ?>
+                                              <select id="map-state" name="map_state" onChange="change_mini_state_graph(this)">
+																								<?php echo $state_opt;?>
+                                              </select>
                                                   <div id="main_container" class="map-result-detail">
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>
-                                                  <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
+                                               <div class="small_state_graph_wrapper">
+																								 <a href="/state-elections/<?php echo arg(2)."/". $state; ?>"> 
+																									<div class="small_state_graph">
+																										<iframe src="<?php echo $svgurl1;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
+																									</div>
+																								</a>
+																							</div>
                                               </div>
                                           </div>             
                                       </div>
-                                    <?php
-                                    }
+                                    <?php }
                                     else {
                                       ?>
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -453,15 +481,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <?php
                         $adsclass = "";
                         $key_candidate_extra_block = "";
+                        $margin_class = 'election-topaddd';
                         if (count($graphdata) > 2) {
-                          $adsclass = 'ads-after-two';
+                          $adsclass = 'ads-after-two mt-50';
+                          $margin_class = 'election-topadd';
                           $key_candidate_extra_block = 'key_candidate_extra_block';
                         }
                         ?>
                         <div class="row">
-                            <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
+                            <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6">
                                 <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
-                                <div class="itg-widget election-topadd">
+                                <div class="itg-widget <?php echo $margin_class;?>">
                                     <div class="ad-widget droppable">
                                         <div class="sidebar-ad">
                                             <?php
@@ -700,3 +730,7 @@ $wgmf_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/
     <div class="face4 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
 </div>
 <!--animation emoji for hightlight end-->
+<style>
+	.small_state_graph{height: 320px;}
+	.election-page .itg-map #map-state{top: 24px;}
+</style>

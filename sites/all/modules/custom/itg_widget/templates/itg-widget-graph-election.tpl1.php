@@ -1,7 +1,5 @@
 <?php if (!empty($data)) : global $base_url, $theme; ?>
-
-
-  <?php
+<?php
   global $base_url;
   $classrow = 6;
   $rowcounter = ceil(12 / count($data));
@@ -30,10 +28,6 @@
   }
   // Start high chart Graph
   foreach ($data as $index => $row):
-		$graph_link = $base_url . '/state-elections/' . $section . '/' . $row->field_election_state_tid;
-		if(!empty($row->field_graph_category_value)){
-			$graph_link = $base_url . '/'. drupal_get_path_alias('taxonomy/term/' . $row->field_graph_category_value);
-		}
     if($row->field_graph_type_value == 'Graph'){
 
     ?>
@@ -41,7 +35,7 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                   <div id="container_<?php echo $index; ?>"></div>
@@ -74,15 +68,15 @@
 </table><div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link; ?>", "<?php echo urlencode($fb_share_title); ?>","<?php echo urlencode($share_desc); ?>","<?php echo $src; ?>")'><i class="fa fa-facebook"></i></a></li>
-                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick='twitter_popup("<?php echo urlencode($search_title) ?>" , "<?php echo urlencode($short_url)?>")'><i class="fa fa-twitter"></i></a></li>
-                        <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' class="google def-cur-pointer"></a></li>
+                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
                     </ul>
-                </div>'
-     
+                </div>';
+    ?>
               </div>
             </a>
-          </div>             
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +93,7 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
