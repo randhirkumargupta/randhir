@@ -5487,7 +5487,9 @@ function itg_rapid_api_testing($token) {
     $url = $prod_url . "/appapi/topstories/" . $rand;
     $contents = file_get_contents($url);
     $contents_ar = json_decode($contents);
+    echo $url;
     $data = $contents_ar->data;
+    p($data);
     $l_cont = 1;
     foreach ($data as $key => $value) {
         $n_share_link = $value->n_share_link;
