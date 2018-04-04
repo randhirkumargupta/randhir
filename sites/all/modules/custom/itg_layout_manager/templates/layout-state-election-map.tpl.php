@@ -11,9 +11,8 @@
 .mapright-tally #keycondidates { border:0px;}
 .mapright-tally #keycondidates iframe { box-shadow:0px !important;}
 
-@media screen and (max-width:900px){
-/*iframe.map_state_inner_orint { height:555px;}	
-*/}
+.state-election-map-wrapper{height: 800px;}
+.full_state_graph{height: 100%;}
 </style><div class="kikerNewsRightSec"><b> How to use:</b><ul><li><span>Click on the constituencies to get their result, or search by constituency name.</span></li><li><span>Use the + and - buttons (bottom right corner) to zoom in and zoom out. </span></li><li><span>Click on the home icon (bottom right) any time to return to the default view.</span></li></ul></div></div>
 	<iframe src="<?php echo $map_data;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;" height="100%" width="100%" > </iframe>
 </div>
