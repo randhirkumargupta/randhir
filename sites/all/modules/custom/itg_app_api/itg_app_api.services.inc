@@ -5307,7 +5307,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    ############ code write static html start #####################
+   ############ code write static html start #####################
     $html_temp_top = '<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5341,9 +5341,13 @@ function itg_rapid_api_testing($token) {
 </div>
 <div class="_body">
 	<ul id="_fetchData">';
-    $html_temp_content = "";
+    $html_temp_content1 = "";
+    $html_temp_content2 = "";
+    $html_temp_content3 = "";
     $html_temp_footer = "</ul></div></div></body></html>";
-    $output = "";
+    $output1 = "";
+    $output2 = "";
+    $output3 = "";
     global $base_url;
     $data = array();
     $rand = rand();
@@ -5358,22 +5362,26 @@ function itg_rapid_api_testing($token) {
         $n_share_link = $value->n_share_link;
         $n_small_image = $value->n_small_image;
         $n_title = $value->n_title;
-        $html_temp_content .= '<li><div class="_contmain"><div class="_leftImg"><a href="' . $n_share_link . '" title="' . $n_title . '" target="_blank"><img src="' . $n_small_image . '" alt=""></a></div><div class="_rightText"><a href="' . $n_share_link . '" title="' . $n_title . '" target="_blank">' . $n_title . '</a></div><div class="_clr"></div></div></li>';
+        $html_temp_content1 .= '<li><div class="_contmain"><div class="_leftImg"><a href="' . $n_share_link . '?utm_source=thelallantop" title="' . $n_title . '" target="_blank"><img src="' . $n_small_image . '" alt=""></a></div><div class="_rightText"><a href="' . $n_share_link . '?utm_source=thelallantop" title="' . $n_title . '" target="_blank">' . $n_title . '</a></div><div class="_clr"></div></div></li>';
+        $html_temp_content2 .= '<li><div class="_contmain"><div class="_leftImg"><a href="' . $n_share_link . '?utm_source=ichowk" title="' . $n_title . '" target="_blank"><img src="' . $n_small_image . '" alt=""></a></div><div class="_rightText"><a href="' . $n_share_link . '?utm_source=ichowk" title="' . $n_title . '" target="_blank">' . $n_title . '</a></div><div class="_clr"></div></div></li>';
+        $html_temp_content3 .= '<li><div class="_contmain"><div class="_leftImg"><a href="' . $n_share_link . '?utm_source=dailyo" title="' . $n_title . '" target="_blank"><img src="' . $n_small_image . '" alt=""></a></div><div class="_rightText"><a href="' . $n_share_link . '?utm_source=dailyo" title="' . $n_title . '" target="_blank">' . $n_title . '</a></div><div class="_clr"></div></div></li>';
         if ($l_cont >= 5) {
             break;
         }
         $l_cont++;
     }
     $return_flag = "";
-    $output = $html_temp_top . $html_temp_content . $html_temp_footer;
+    $output1 = $html_temp_top . $html_temp_content1 . $html_temp_footer;
+    $output2 = $html_temp_top . $html_temp_content2 . $html_temp_footer;
+    $output3 = $html_temp_top . $html_temp_content3 . $html_temp_footer;
     $term_feed_path = "public://topstories_chunks";
     file_prepare_directory($term_feed_path, FILE_CREATE_DIRECTORY);
     $file_name1 = "it_thelallantop.html";
     $file_name2 = "it_ichowk.html";
     $file_name3 = "it_dailyo.html";
-    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name1, $output);
-    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name2, $output);
-    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name3, $output);
+    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name1, $output1);
+    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name2, $output2);
+    $return_flag .= "<br>" . writeFeedFile($term_feed_path, $file_name3, $output3);
     print $return_flag;
     ############ code write static html end #####################
     die();
