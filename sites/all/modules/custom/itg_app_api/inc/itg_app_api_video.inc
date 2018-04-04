@@ -1032,7 +1032,7 @@ function featuresWidgetData() {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
+    $query->fields('dbody', array('body_value'));
 
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
@@ -1100,6 +1100,7 @@ function topstoriesList($source) {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('ti', array('tid'));
+    $query->fields('dbody', array('body_value'));
 
 
     //end
@@ -1133,6 +1134,7 @@ function topstoriesList($source) {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+        $body_value = $value['body_value'];
 
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
