@@ -237,9 +237,9 @@ function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
       //$query->join('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
       $query->condition('fpc.field_primary_category_value', '1206640', '!='); //PTI category
     }
-    if($tid != '1206640'){
+    //if($tid != '1206640'){
       $query->condition('fpc.field_primary_category_value', $tid, '='); 
-    }
+    //}
     if($type == 'story'){
       //$query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
     }    
