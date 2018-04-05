@@ -2988,6 +2988,7 @@ function node_access($op, $node, $account = NULL) {
   $rights = &drupal_static(__FUNCTION__, array());
 
   if (!$node || !in_array($op, array('view', 'update', 'delete', 'create'), TRUE)) {
+		die('1');
     // If there was no node to check against, or the $op was not one of the
     // supported ones, we return access denied.
     return FALSE;
@@ -3010,10 +3011,12 @@ function node_access($op, $node, $account = NULL) {
 
   if (user_access('bypass node access', $account)) {
     $rights[$account->uid][$cid][$op] = TRUE;
+    die('2');
     return TRUE;
   }
   if (!user_access('access content', $account)) {
     $rights[$account->uid][$cid][$op] = FALSE;
+    die('3');
     return FALSE;
   }
 
@@ -3025,16 +3028,19 @@ function node_access($op, $node, $account = NULL) {
   $access = module_invoke_all('node_access', $node, $op, $account);
   if (in_array(NODE_ACCESS_DENY, $access, TRUE)) {
     $rights[$account->uid][$cid][$op] = FALSE;
+    die('4');
     return FALSE;
   }
   elseif (in_array(NODE_ACCESS_ALLOW, $access, TRUE)) {
     $rights[$account->uid][$cid][$op] = TRUE;
+    die('5');
     return TRUE;
   }
 
   // Check if authors can view their own unpublished nodes.
   if ($op == 'view' && !$node->status && user_access('view own unpublished content', $account) && $account->uid == $node->uid && $account->uid != 0) {
     $rights[$account->uid][$cid][$op] = TRUE;
+    die('6');
     return TRUE;
   }
 
@@ -3068,16 +3074,18 @@ function node_access($op, $node, $account = NULL) {
         ->execute()
         ->fetchField();
       $rights[$account->uid][$cid][$op] = $result;
+      die('7');
       return $result;
     }
     elseif (is_object($node) && $op == 'view' && $node->status) {
       // If no modules implement hook_node_grants(), the default behavior is to
       // allow all users to view published nodes, so reflect that here.
       $rights[$account->uid][$cid][$op] = TRUE;
+      die('8');
       return TRUE;
     }
   }
-
+	die('9');
   return FALSE;
 }
 
