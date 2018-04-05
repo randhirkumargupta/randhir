@@ -907,8 +907,15 @@ function itg_widget_get_graph_data() {
 
     global $theme;
     $cat_id = $_GET['section'];
+    if(isset($_GET['category']) && !empty($_GET['category'])){
+			$cat_id = $_GET['category'];
+		}
     if ($theme == FRONT_THEME_NAME) {
         $cat_id = arg(2);
+        $section_tid = get_category_parent_one_level($cat_id);
+				if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
+					$cat_id = $section_tid[0]->parent;
+				}        
     }
     $itg_query = db_select('node', 'n');
     $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');

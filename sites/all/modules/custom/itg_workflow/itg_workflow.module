@@ -526,7 +526,7 @@ function itg_workflow_node_access($node, $op, $account) {
 //      itg_get_node_redirect_url($node, $op);
 //    }
 //  }
-
+echo '<pre>';print_r($node);die;
 	if ($node->status == 0 && $op == 'view') {
     return NODE_ACCESS_ALLOW;
   }
