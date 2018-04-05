@@ -4210,8 +4210,8 @@ function itg_rapid_api_change_password($token) {
     $data['status_code'] = "1";
     $data['status_message'] = "$success_status_message";
     $data['auth_token'] = "$auth_token";
-    $data['session_id'] = "$session_id";
-    $data['session_name'] = "$session_name";
+    //$data['session_id'] = "$session_id";
+    //$data['session_name'] = "$session_name";
   }
   else {
     $data['status_code'] = "2";
