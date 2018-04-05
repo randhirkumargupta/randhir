@@ -4166,6 +4166,7 @@ function itg_rapid_api_change_password($token) {
         $params_login['password'] = $params['new_password'];
         $params_login['device_id'] = $params['device_id'];
         $params_login['device_type'] = $params['device_type'];
+        p($params_login);
         $url = $base_url . "/appapi/login_request";
         $result = callAPI($method, $url, $params_login);
         p($result);
