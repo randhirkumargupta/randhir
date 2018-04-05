@@ -4200,7 +4200,7 @@ function itg_rapid_api_change_password($token) {
                 if (is_numeric($name)) {
                     $phone_number = $name;
                 } else {
-                    $mail = $name;
+                    $mail = $name; 
                 }
             }
         }
