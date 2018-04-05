@@ -526,7 +526,7 @@ function itg_workflow_node_access($node, $op, $account) {
 //      itg_get_node_redirect_url($node, $op);
 //    }
 //  }
-echo '<pre>';print_r($node);die;
+
 	if ($node->status == 0 && $op == 'view') {
     return NODE_ACCESS_ALLOW;
   }
@@ -539,7 +539,7 @@ echo '<pre>';print_r($node);die;
 	  return NODE_ACCESS_DENY;
 	}
   }
-
+echo '<pre>';print_r($node);die;
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
