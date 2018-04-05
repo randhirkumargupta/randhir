@@ -531,9 +531,9 @@ function get_header_tab_related_video_block_content() {
       }
         
       $related_video_duration = $related_data->sm_field_video_duration[0];
-
-      $img_alt = str_replace(array('\'', '"'), '', $related_title); 
-      $rel_title = str_replace(array('\'', '"'), '', $related_title);
+        
+      $img_alt = str_replace('"', '', $related_title);
+      $rel_title = str_replace('"', '', $related_title);
       $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
       $options = array(
         'html' => TRUE
