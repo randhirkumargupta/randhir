@@ -4160,15 +4160,19 @@ function itg_rapid_api_change_password($token) {
     //$success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
     $success_status_mess = "Password has changed";
     ################ relogin srart#############################
-        $account = array();   
-        $params_login = array();
-        $params_login['user_id'] = $params['user_id'];
-        $params_login['password'] = $params['new_password'];
-        $params_login['device_id'] = $params['device_id'];
-        $params_login['device_type'] = $params['device_type'];
-        p($params_login);
+        $account = array();           
+        $user_id = $params['user_id'];
+        $password = $params['new_password'];
+        $device_id = $params['device_id'];
+        $device_type = $params['device_type'];  
+        $pram_lo_str = '{
+            "user_id":"'.$user_id.'",
+            "password":"'.$password.'",
+            "device_id":"'.$device_id.'",
+            "device_type":"'.$device_type.'"
+        }';
         $url = $base_url . "/appapi/login_request";
-        $result = callAPI($method, $url, $params_login);
+        $result = callAPI("POST", $url, $pram_lo_str);
         p($result);
         $result_obj = json_decode($result);
         $uid = 0;
