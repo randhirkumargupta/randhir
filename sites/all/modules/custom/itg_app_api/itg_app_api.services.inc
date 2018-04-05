@@ -4155,13 +4155,18 @@ function itg_rapid_api_change_password($token) {
 
     drupal_save_session($original_session_state);
     deviceTokenReset_Rapid($params);
-    //$success_status_mess = fetchMasterConfigData('master_config_internal_msg');
-    $success_status_mess = "";
-    $success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
+    //$success_status_mess = fetchMasterConfigData('master_config_internal_msg');    
+    //$success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
+    $success_status_mess = "Password has changed";
     ################ relogin srart#############################
         $account = array();
+        $params_login = array();
+        $params_login['user_id'] = $params['user_id'];
+        $params_login['password'] = $params['new_password'];
+        $params_login['device_id'] = $params['device_id'];
+        $params_login['device_type'] = $params['device_type'];
         $url = PARENT_SSO . "/appapisso/login_request";
-        $result = callAPI($method, $url, $params);
+        $result = callAPI($method, $url, $params_login);
         $result_obj = json_decode($result);
         $uid = 0;
         $uid = $result_obj->uid;
@@ -4170,7 +4175,7 @@ function itg_rapid_api_change_password($token) {
 
         if ($uid) {
             //$local_account = localSignup($params);
-            $local_account = localLogin($params);
+            $local_account = localLogin($params_login);
             $cookie_val = getSmlCookie();
             $session_id = $cookie_val['session_id'];
             $session_name = $cookie_val['session_name'];
