@@ -1914,3 +1914,18 @@ function get_fact_schema() {
     return $result['field_story_schema_value'];
   } 
 }
+
+/**
+ * Get the category custom html/js code
+ * @arg type int , term id
+ * @return string custom html js code
+ */
+function get_category_custom_code($term_id){
+    if($term_id != ''){
+        $query = db_select('field_data_field_section_custom_code','cat');
+        $query->fields('cat',array('field_section_custom_code_value'));
+        $query->condition('cat.entity_id',$term_id);
+        $data_result = $query->execute()->fetchCol();
+        return $data_result[0];
+    }
+}
