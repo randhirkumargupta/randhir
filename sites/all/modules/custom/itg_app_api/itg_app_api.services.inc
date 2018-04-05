@@ -4094,82 +4094,82 @@ function itg_rapid_api_log_out($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_change_password($token) {
-  global $base_url;
-  $HTTP_RAW_POST_DATA;
-  $method = "POST";
-  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-  $params['old_pass'] = trim($params['old_password']);
-  $params['new_pass'] = trim($params['new_password']);
+    global $base_url;
+    $HTTP_RAW_POST_DATA;
+    $method = "POST";
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $params['old_pass'] = trim($params['old_password']);
+    $params['new_pass'] = trim($params['new_password']);
 
-  // raw input validation
-  $validation_error = array();
-  $validation_error_str = "";
-  $validation_error = validateChangePass($params);
-  $validation_error_str = implode(", ", $validation_error['custom_error']);
-  if ($validation_error_str) {
-    $account_err['status_code'] = "0";
-    $account_err['status_message'] = "$validation_error_str";
-    return $account_err;
-  }
-  $rand = rand();
-  $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-  $result = callAPI("GET", $url, $params);
-  $result_obj = json_decode($result);
+    // raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = validateChangePass($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
+    $rand = rand();
+    $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
+    $result = callAPI("GET", $url, $params);
+    $result_obj = json_decode($result);
 
-  if (!$result_obj->uid) {
-    $account_err['status_code'] = "0";
-    $account_err['status_message'] = "Invalid User_ID";
-    return $account_err;
-  }
-  $token = $params['auth_token'];
-  $token_val_flag = 0;
-  $token_val_flag = tokenValidator($params['user_id'], $token);
-  if (!drupal_valid_token($token, 'services')) {
-    //if (!$token_val_flag) {
-    $res['status_code'] = "0";
-    $res['status_message'] = "invalid token";
-    return $res;
-  }
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
+    $token = $params['auth_token'];
+    $token_val_flag = 0;
+    $token_val_flag = tokenValidator($params['user_id'], $token);
+    if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
+        $res['status_code'] = "0";
+        $res['status_message'] = "invalid token";
+        return $res;
+    }
 
-  $url = PARENT_SSO . "/appapisso/change_password";
-  $result = callAPI($method, $url, $params);
-  $result_obj = json_decode($result);
+    $url = PARENT_SSO . "/appapisso/change_password";
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
 
-  if ($result_obj->uid) {
-    $local_obj = localChangePass($params, $result_obj->uid);
-    itg_reset_pass_info_insert_rapid($params, 2);
-    cleanToken_Rapid($params);
-    $user_name = $params['user_id'];
-    $user = user_load_by_name($user_name);
+    if ($result_obj->uid) {
+        $local_obj = localChangePass($params, $result_obj->uid);
+        itg_reset_pass_info_insert_rapid($params, 2);
+        cleanToken_Rapid($params);
+        $user_name = $params['user_id'];
+        $user = user_load_by_name($user_name);
 
-    watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
 
-    $original_session_state = drupal_save_session();
-    drupal_save_session(TRUE);
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
 
-    // Destroy the current session.
-    module_invoke_all('user_logout', $user);
-    session_destroy();
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
 
-    // Load the anonymous user.
-    $user = drupal_anonymous_user();
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
 
-    drupal_save_session($original_session_state);
-    deviceTokenReset_Rapid($params);
-    //$success_status_mess = fetchMasterConfigData('master_config_internal_msg');    
-    //$success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
-    $success_status_mess = "Password has changed";
-    ################ relogin srart#############################
-        $account = array();           
+        drupal_save_session($original_session_state);
+        deviceTokenReset_Rapid($params);
+        //$success_status_mess = fetchMasterConfigData('master_config_internal_msg');    
+        //$success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
+        $success_status_mess = "Password has changed";
+        ################ relogin srart#############################
+        $account = array();
         $user_id = $params['user_id'];
         $password = $params['new_password'];
         $device_id = $params['device_id'];
-        $device_type = $params['device_type'];  
+        $device_type = $params['device_type'];
         $data_json = '{
-            "user_id":"'.$user_id.'",
-            "password":"'.$password.'",
-            "device_id":"'.$device_id.'",
-            "device_type":"'.$device_type.'"
+            "user_id":"' . $user_id . '",
+            "password":"' . $password . '",
+            "device_id":"' . $device_id . '",
+            "device_type":"' . $device_type . '"
         }';
         $url = $base_url . "/appapi/login_request";
         $ch = curl_init();
@@ -4177,63 +4177,25 @@ function itg_rapid_api_change_password($token) {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response  = curl_exec($ch);
+        $response = curl_exec($ch);
         curl_close($ch);
-        p($response);
-        $result_obj = json_decode($result);
-        $uid = 0;
-        $uid = $result_obj->uid;
-        $auth_token = $result_obj->token;
-        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-
-        if ($uid) {
-            $local_account = localLogin($params);
-            $cookie_val = getSmlCookie();
-            $session_id = $cookie_val['session_id'];
-            $session_name = $cookie_val['session_name'];
-            $uid = $local_account->user->uid;
-            $name = $local_account->user->name;
-            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
-            $auth_token = $local_account->token;
-            $is_first_login = 1;
-            if ($field_logged_in_count > 0) {
-                $is_first_login = 0;
-            }
-            if ($auth_token) {
-
-                $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
-                $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
-                $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
-                $field_short_description = $local_account->user->field_short_description['und'][0]['value'];
-                $profile_image = completeFilePath($local_account->user->field_user_picture['und'][0]['fid']);
-                $gender = $local_account->user->field_user_gender['und'][0]['value'];
-                $date_of_birth = $local_account->user->field_story_issue_date['und'][0]['value'];
-                $phone_number = "";
-                $mail = "";
-                if (is_numeric($name)) {
-                    $phone_number = $name;
-                } else {
-                    $mail = $name; 
-                }
-            }
-        }
+        $auth_token = $response['data']['auth_token'];
 ################ relogin end #############################
         $data['status_code'] = "1";
-    $data['status_message'] = "$success_status_mess";
-    $data['auth_token'] = "$auth_token";
-    //$data['session_id'] = "$session_id";
-    //$data['session_name'] = "$session_name";
-  }
-  else {
-    $data['status_code'] = "2";
-    $data['status_message'] = "Password has not changed";
-  }
+        $data['status_message'] = "$success_status_mess";
+        $data['auth_token'] = "$auth_token";
+        //$data['session_id'] = "$session_id";
+        //$data['session_name'] = "$session_name";
+    } else {
+        $data['status_code'] = "2";
+        $data['status_message'] = "Password has not changed";
+    }
 
 
 
-  return $data;
+    return $data;
 }
 
 /**
