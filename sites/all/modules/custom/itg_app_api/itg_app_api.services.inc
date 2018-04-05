@@ -4157,9 +4157,55 @@ function itg_rapid_api_change_password($token) {
     deviceTokenReset_Rapid($params);
     $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
+    ################ relogin srart#############################
+        $account = array();
+        $url = PARENT_SSO . "/appapisso/login_request";
+        $result = callAPI($method, $url, $params);
+        $result_obj = json_decode($result);
+        $uid = 0;
+        $uid = $result_obj->uid;
+        $auth_token = $result_obj->token;
+        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
 
+        if ($uid) {
+            //$local_account = localSignup($params);
+            $local_account = localLogin($params);
+            $cookie_val = getSmlCookie();
+            $session_id = $cookie_val['session_id'];
+            $session_name = $cookie_val['session_name'];
+            $uid = $local_account->user->uid;
+            $name = $local_account->user->name;
+            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $auth_token = $local_account->token;
+            $is_first_login = 1;
+            if ($field_logged_in_count > 0) {
+                $is_first_login = 0;
+            }
+            if ($auth_token) {
+
+                $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
+                $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
+                $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
+                $field_short_description = $local_account->user->field_short_description['und'][0]['value'];
+                $profile_image = completeFilePath($local_account->user->field_user_picture['und'][0]['fid']);
+                $gender = $local_account->user->field_user_gender['und'][0]['value'];
+                $date_of_birth = $local_account->user->field_story_issue_date['und'][0]['value'];
+                //$mail = $result_obj->mail;
+                $phone_number = "";
+                $mail = "";
+                if (is_numeric($name)) {
+                    $phone_number = $name;
+                } else {
+                    $mail = $name;
+                }
+            }
+        }
+################ relogin end #############################
     $data['status_code'] = "1";
     $data['status_message'] = "$success_status_message";
+    $data['auth_token'] = "$auth_token";
+    $data['session_id'] = "$session_id";
+    $data['session_name'] = "$session_name";
   }
   else {
     $data['status_code'] = "2";
