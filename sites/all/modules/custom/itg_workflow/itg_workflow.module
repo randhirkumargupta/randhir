@@ -536,11 +536,13 @@ function itg_workflow_node_access($node, $op, $account) {
       //~ return NODE_ACCESS_DENY;
     //~ }
     if (!(array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(ADMINISTRATOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles)) && ($node->uid != $user->uid)) {
+			die('test10');
 	  return NODE_ACCESS_DENY;
 	}
   }
-echo '<pre>';print_r($node);die;
+
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
+		
     if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
       $story_expiry_date = strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value']);
     }
@@ -552,9 +554,11 @@ echo '<pre>';print_r($node);die;
     $current_time = time();
 
     if ($node->status == 0 && ((isset($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || (isset($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'rejected'))) {
+      die('test12');
       return NODE_ACCESS_DENY;
     }
     elseif ((!empty($story_expiry_date) && $story_expiry_date < $current_time) && (arg(0) != 'issue-listing')) {
+			die('test13');
       return NODE_ACCESS_DENY;
     }
     /*elseif ((!empty($story_schedule_date) && $story_schedule_date > $current_time)) {
@@ -563,6 +567,7 @@ echo '<pre>';print_r($node);die;
   }
   elseif (isset($node->type) && $op == 'update' && ($node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery')) {
     if (!empty($node) && $node->status == 0 && ((!empty($node->field_story_archive[LANGUAGE_NONE][0]['value']) && $node->field_story_archive[LANGUAGE_NONE][0]['value'] == 'Yes') || $node->workbench_moderation['current']->state == 'rejected')) { //shravan
+			die('test14');
       return NODE_ACCESS_DENY;
     }
   }
