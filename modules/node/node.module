@@ -3070,10 +3070,14 @@ function node_access($op, $node, $account = NULL) {
       if (count($grants) > 0) {
         $query->condition($grants);
       }
+      
       $result =  (bool) $query
         ->execute()
         ->fetchField();
       $rights[$account->uid][$cid][$op] = $result;
+      
+      print strtr((String)$query, $query->arguments());
+      var_dump($result);die;
       die('7');
       return $result;
     }
