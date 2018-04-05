@@ -4174,7 +4174,6 @@ function itg_rapid_api_change_password($token) {
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
 
         if ($uid) {
-            //$local_account = localSignup($params);
             $local_account = localLogin($params_login);
             $cookie_val = getSmlCookie();
             $session_id = $cookie_val['session_id'];
@@ -4182,7 +4181,7 @@ function itg_rapid_api_change_password($token) {
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
             $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
-            $auth_token = $local_account->token;
+            $auth_token_l = $local_account->token;
             $is_first_login = 1;
             if ($field_logged_in_count > 0) {
                 $is_first_login = 0;
@@ -4196,7 +4195,6 @@ function itg_rapid_api_change_password($token) {
                 $profile_image = completeFilePath($local_account->user->field_user_picture['und'][0]['fid']);
                 $gender = $local_account->user->field_user_gender['und'][0]['value'];
                 $date_of_birth = $local_account->user->field_story_issue_date['und'][0]['value'];
-                //$mail = $result_obj->mail;
                 $phone_number = "";
                 $mail = "";
                 if (is_numeric($name)) {
@@ -4207,8 +4205,8 @@ function itg_rapid_api_change_password($token) {
             }
         }
 ################ relogin end #############################
-    $data['status_code'] = "1";
-    $data['status_message'] = "$success_status_message";
+        $data['status_code'] = "1";
+    $data['status_message'] = "$success_status_mess";
     $data['auth_token'] = "$auth_token";
     //$data['session_id'] = "$session_id";
     //$data['session_name'] = "$session_name";
