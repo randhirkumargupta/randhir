@@ -4165,15 +4165,23 @@ function itg_rapid_api_change_password($token) {
         $password = $params['new_password'];
         $device_id = $params['device_id'];
         $device_type = $params['device_type'];  
-        $pram_lo_str = '{
+        $data_json = '{
             "user_id":"'.$user_id.'",
             "password":"'.$password.'",
             "device_id":"'.$device_id.'",
             "device_type":"'.$device_type.'"
         }';
         $url = $base_url . "/appapi/login_request";
-        $result = callAPI("POST", $url, $pram_lo_str);
-        p($result);
+        $ch = curl_init();
+        curl_setopt($curl, CURLOPT_USERPWD, "itgddev:itgd@789");
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data_json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response  = curl_exec($ch);
+        curl_close($ch);
+        p($response);
         $result_obj = json_decode($result);
         $uid = 0;
         $uid = $result_obj->uid;
