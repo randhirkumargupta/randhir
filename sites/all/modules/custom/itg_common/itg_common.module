@@ -1904,7 +1904,7 @@ function itg_common_node_update($node) {
  * Get fact schema for story.
  * @return type string
  */
-function get_fact_schema() {
+function get_fact_schema() {return;
   $arg = arg();
   $entity_id = isset($arg['1']) ? $arg['1'] : '';
   if(!empty($entity_id)) {

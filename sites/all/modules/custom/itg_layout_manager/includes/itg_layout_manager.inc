@@ -11,7 +11,11 @@
 function itg_layout_admin() {
   $data = '';
   if (isset($_GET['section']) && isset($_GET['template_name'])) {
-    $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin');
+  	$tid = $_GET['section'];
+  	if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] != 0){
+  	  $tid = $_GET['category'];
+  	}
+    $data = get_layout_details($tid, $_GET['template_name'], 'admin');
   }
   if ($_GET['template_name'] == 'page--front') {
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
