@@ -778,23 +778,25 @@ jscode;
  */
 function get_newsroom_screcard_js(){
         return <<<jscode
-		<!-- NEWSROOM SCRIPT -->
+		<!-- Scorecard NEWSROOM SCRIPT -->
 <script type="text/javascript">
-window._taboola = window._taboola || [];
-_taboola.push(
-{article:'auto'}
-);
-!function (e, f, u, i) {
-if (!document.getElementByIdhttps://indiatodaygroup.atlassian.net/images/icons/emoticons/information.png)
-{ e.async = 1; e.src = u; e.id = i; f.parentNode.insertBefore(e, f); }
-}(document.createElement('script'),
-document.getElementsByTagName('script')[0],
-'//cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js',
-'tb_loader_script');
-if(window.performance && typeof window.performance.mark == 'function')
-{window.performance.mark('tbl_ic');}
+  window._taboola = window._taboola || [];
+  _taboola.push({article:'auto'});
+  !function (e, f, u, i) {
+    if (!document.getElementById(i)){
+      e.async = 1;
+      e.src = u;
+      e.id = i;
+      f.parentNode.insertBefore(e, f);
+    }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js',
+  'tb_loader_script');
+  if(window.performance && typeof window.performance.mark == 'function')
+    {window.performance.mark('tbl_ic');}
 </script>
-<!-- END NEWSROOM SCRIPT -->
+<!-- END Scorecard NEWSROOM SCRIPT -->
 jscode;
 
 }

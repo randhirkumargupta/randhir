@@ -148,5 +148,13 @@
     branch.setBranchViewData(linkData);
 	</script>
   <!-- Branch IO code end -->
+<!-- Scorecard taboola js -->
+<?php if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){ ?>
+    <script type="text/javascript">
+        window._taboola = window._taboola || [];
+        _taboola.push({flush: true});
+    </script>
+<?php } ?>
+<!-- End Scorecard taboola js -->
 </body>
 </html> 
