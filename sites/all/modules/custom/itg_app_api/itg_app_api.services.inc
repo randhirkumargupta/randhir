@@ -4159,14 +4159,13 @@ function itg_rapid_api_change_password($token) {
     //$success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
     $success_status_mess = "Password has changed";
     ################ relogin srart#############################
-        $account = array();
-        $params_login = array();
-        $params_login['user_id'] = $params['user_id'];
-        $params_login['password'] = $params['new_password'];
-        $params_login['device_id'] = $params['device_id'];
-        $params_login['device_type'] = $params['device_type'];
+        $account = array();        
+        $params['user_id'] = $params['user_id'];
+        $params['password'] = $params['new_password'];
+        $params['device_id'] = $params['device_id'];
+        $params['device_type'] = $params['device_type'];
         $url = PARENT_SSO . "/appapisso/login_request";
-        $result = callAPI($method, $url, $params_login);
+        $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
         $uid = 0;
         $uid = $result_obj->uid;
@@ -4174,14 +4173,14 @@ function itg_rapid_api_change_password($token) {
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
 
         if ($uid) {
-            $local_account = localLogin($params_login);
+            $local_account = localLogin($params);
             $cookie_val = getSmlCookie();
             $session_id = $cookie_val['session_id'];
             $session_name = $cookie_val['session_name'];
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
             $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
-            $auth_token_l = $local_account->token;
+            $auth_token = $local_account->token;
             $is_first_login = 1;
             if ($field_logged_in_count > 0) {
                 $is_first_login = 0;
