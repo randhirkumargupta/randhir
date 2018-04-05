@@ -4094,6 +4094,7 @@ function itg_rapid_api_log_out($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_change_password($token) {
+  global $base_url;
   $HTTP_RAW_POST_DATA;
   $method = "POST";
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
@@ -4164,8 +4165,9 @@ function itg_rapid_api_change_password($token) {
         $params['password'] = $params['new_password'];
         $params['device_id'] = $params['device_id'];
         $params['device_type'] = $params['device_type'];
-        $url = PARENT_SSO . "/appapisso/login_request";
+        $url = $base_url . "/appapi/login_request";
         $result = callAPI($method, $url, $params);
+        p($result);
         $result_obj = json_decode($result);
         $uid = 0;
         $uid = $result_obj->uid;
