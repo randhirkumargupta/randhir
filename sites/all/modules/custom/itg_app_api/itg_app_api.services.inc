@@ -4155,7 +4155,7 @@ function itg_rapid_api_change_password($token) {
         $user = drupal_anonymous_user();
 
         drupal_save_session($original_session_state);
-        deviceTokenReset_Rapid($params);
+        //deviceTokenReset_Rapid($params);
         //$success_status_mess = fetchMasterConfigData('master_config_internal_msg');    
         //$success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
         $success_status_mess = "Password has changed";
