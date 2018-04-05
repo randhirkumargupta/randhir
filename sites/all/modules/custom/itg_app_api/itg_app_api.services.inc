@@ -4182,7 +4182,7 @@ function itg_rapid_api_change_password($token) {
         $response = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response);
-        p($response);
+        p($response); 
         $auth_token = $response['data']['auth_token'];
 ################ relogin end #############################
         $data['status_code'] = "1";
