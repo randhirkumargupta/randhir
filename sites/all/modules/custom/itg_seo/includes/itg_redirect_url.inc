@@ -634,12 +634,10 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-     } else if (isset($_GET['galleryid']) && !($arg[0] == 'conclave' || $arg[0] == 'conclave13' || $arg[0] == 'conclave14' || $arg[0] == 'conclave2013' || $arg[0] == 'conclave2014' || $arg[0] == 'conclave2016' || $arg[0] == 'conclave2017' || $arg[1] == 'mumbai' || $arg[1] == 'south')) {
+     } else if (isset($_GET['galleryid'])) {
       $old_content_id = $_GET['galleryid'];
       $table = 'migrate_map_itgphotogallery';
       $newurl = getNewStoryUrl($old_content_id, $table);
-      pr($arg[0]);
-      p($newurl);
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
