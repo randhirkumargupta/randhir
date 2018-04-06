@@ -19,10 +19,10 @@ function feature_category_management_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '9',
+          'weight' => '10',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '9',
         ),
         'name' => array(
           'weight' => '9',
@@ -31,7 +31,7 @@ function feature_category_management_strongarm() {
           'weight' => '5',
         ),
         'redirect' => array(
-          'weight' => '7',
+          'weight' => '8',
         ),
       ),
       'display' => array(),

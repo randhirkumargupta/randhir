@@ -76,6 +76,7 @@ function feature_category_management_field_group_info() {
       6 => 'field_is_section_header',
       7 => 'field_section_menu',
       8 => 'field_section_right_side_block',
+      9 => 'field_section_custom_code',
     ),
     'format_type' => 'div',
     'format_settings' => array(
