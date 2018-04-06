@@ -227,7 +227,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   } else if ((($arg[0] == 'videolist' || $arg[0] == 'programmelist') || ($arg[0] == 'site' && ($arg[1] == 'videolist' || $arg[1] == 'programmelist'))) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
       $photo_cat = $arg[3];
       $query_alias = $arg[2];
-      if ($arg[0] == 'site') {
+      if ($arg[1] == 'videolist' || $arg[1] == 'programmelist') {
         $photo_cat = $arg[4];
         $query_alias = $arg[3];
       }
