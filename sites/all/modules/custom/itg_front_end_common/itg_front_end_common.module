@@ -744,7 +744,7 @@ function _related_photo_block_content() {
           $img_alt = str_replace('"', '', $related_title);
           $rel_title = str_replace('"', '', $related_title);
           $related_photo.= '<li class="col-md-3"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" /></a>';
-          $related_photo.= '<span class="tile"><a href="'.$front_url.'" title="'.$rel_title.'">'.$rel_title.'</a></span></li>';
+          $related_photo.= '<span class="tile"><a href="'.$front_url.'">'.$rel_title.'</a></span></li>';
         }
     }
 
