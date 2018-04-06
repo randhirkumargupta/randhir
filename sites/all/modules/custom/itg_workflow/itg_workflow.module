@@ -514,13 +514,9 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  * Check access for forum menu item.
  * {@inheritdoc}
  */
-function itg_workflow_node_access($node, $op, $account) {return NODE_ACCESS_ALLOW;
+function itg_workflow_node_access($node, $op, $account) {
   global $user;
-//~ echo '<pre>';
-//~ var_dump($op);
-//~ var_dump(arg());
-//~ var_dump($account);
-//~ var_dump($node);die;
+
   $story_expiry_date = '';
   $arr_source_type = array('issue', 'supplement');
 
