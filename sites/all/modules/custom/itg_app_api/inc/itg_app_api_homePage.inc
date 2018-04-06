@@ -41,18 +41,18 @@ function homePageJson() {
     $itg_rapid_home_sports_json = array();
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
 
-     $data['status_code'] = "1";
+    $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
-    //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
+    $data['data'][0] = $homePageJsonWidget_2;     // scorecard   
     //$data['data'][0] = $homePageJsonWidget_1; // Karnataka Panchayat
-    $data['data'][0] = $data_topstories;     
-    $data['data'][1] = $itg_rapid_home_movies_json;
-    $data['data'][2] = $itg_rapid_home_technology_json;
-    $data['data'][3] = $data_news_india;
-    $data['data'][4] = $itg_rapid_home_sports_json;
-    $data['data'][5] = $data_news_lifestyle;
-    $data['data'][6] = $data_news_world;
-    $data['data'][7] = $data_magazine;
+    $data['data'][1] = $data_topstories;     
+    $data['data'][2] = $itg_rapid_home_movies_json;
+    $data['data'][3] = $itg_rapid_home_technology_json;
+    $data['data'][4] = $data_news_india;
+    $data['data'][5] = $itg_rapid_home_sports_json;
+    $data['data'][6] = $data_news_lifestyle;
+    $data['data'][7] = $data_news_world;
+    $data['data'][8] = $data_magazine;
     return $data;
 }
 

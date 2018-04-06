@@ -516,7 +516,10 @@ function itg_workflow_query_alter(QueryAlterableInterface $query) {
  */
 function itg_workflow_node_access($node, $op, $account) {
   global $user;
-
+//~ $qq = menu_get_item();
+//~ $qqo = menu_get_object();
+//~ echo '<pre>';var_dump($qq);
+//~ echo '<pre>';var_dump($qqo);die;
   $story_expiry_date = '';
   $arr_source_type = array('issue', 'supplement');
 
