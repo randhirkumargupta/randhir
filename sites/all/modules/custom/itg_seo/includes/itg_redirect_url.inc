@@ -648,8 +648,9 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-     } else if (isset($_GET['galleryid'])) {
+     } else if (isset($_GET['galleryid']) && ($arg[0] != 'conclave')) {
       $old_content_id = $_GET['galleryid'];
+      p($arg[0]);
       $table = 'migrate_map_itgphotogallery';
       $newurl = getNewStoryUrl($old_content_id, $table);
       if ($newurl) {
