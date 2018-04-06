@@ -3914,6 +3914,7 @@ function itg_rapid_api_change_password($token) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
+        p($response);
         curl_close($ch);
         $response = json_decode($response);       
         $auth_token = $response->data->auth_token;
