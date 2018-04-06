@@ -141,6 +141,7 @@
     -moz-osx-font-smoothing: grayscale; position: absolute;  color: #fff; bottom: 6px;  right: 6px; background: rgba(0,0,0,.5); padding: 3px 5px;}
 .event-add-header{ padding:10px 0;}
 .page-scorecard-matchcenter #taboola-below-scorecard {margin-top: 20px;}
+.page-custom-search h1.page__title {display: none;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
