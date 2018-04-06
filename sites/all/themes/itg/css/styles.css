@@ -1763,9 +1763,11 @@ footer {
   border: 1px solid #dddddd; }
 
 .top-takes-video-container.home-top-takes ul {
-  padding-top: 10px; }
+  padding-top: 10px;
+  border: 1px solid #ddd; }
 .top-takes-video-container.home-top-takes .top-takes-list {
-  padding: 10px; }
+  padding: 10px;
+  border: 0px; }
 
 /*End CSS trending-videos Home  page*/
 /*Start Search page css*/

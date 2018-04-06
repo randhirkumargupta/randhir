@@ -158,13 +158,17 @@
 .view-front-end-global-search .view-content .itg-search-list .social-share{width: auto;float: left;margin-top: 14px;}
 
 /* election chart */
-
 .election-graph  .statename {text-align: center; background: #e7e7e7; padding: 5px 0; font-size: 20px; font-weight: bold; color: #545454; position: relative; overflow: hidden;}
 .election-graph  .partyname-seats {width: 70%; margin: 0 auto;}
 .election-graph  .partyname-seats table td{font-weight: bold; text-align: center; font-size: 15px; color: #545454; position: relative; padding-top: 20px;}
 .election-graph  .partyname-seats span.partybrand{width: 7px; height: 7px; display: block; position: absolute; top: 10px; left: 50%; border-radius: 100%; transform: translateX(-50%);-webkit-transform: translateX(-50%);}
 .election-graph  .partyname-seats span.winseats{display: block; font-weight: bold;}
+/*score matchcenter Css */
 .page-scorecard-matchcenter #taboola-below-scorecard { margin-top: 20px; }
+
+.page-itg-not-found-200 h1.page__title {display: none;}
+
+
 
 @media all and (max-width: 700px) {
     .section-news figure img {
@@ -208,6 +212,9 @@
         height: 170px;
         overflow-y: auto
     }
+
+/* ipl point table RHS Css */
+
 }
 article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info {
     display: block;
