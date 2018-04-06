@@ -528,13 +528,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
     } else if(($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
       $photo_cat = $arg[4];
-      if (is_integer($arg[2])) {
+      if (is_numeric($arg[2])) {
         $photo_cat = $arg[2];
       }
       $query_alias = $arg[3];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
-      p($old_content_id);
+      p();
       $type = 'category';
       if ($arg[1] == 'section') {
         $table = 'migrate_map_itgsection'; 
