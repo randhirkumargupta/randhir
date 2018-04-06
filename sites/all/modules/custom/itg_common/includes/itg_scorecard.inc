@@ -41,7 +41,9 @@ function itg_common_get_scorecard($matchid) {
     drupal_add_html_head($data, $key);
   }
   $iframe_url = '';
-  $iframe_url .= '<iframe  id="si-scorecard"   class="mhide"  width="100%"   height="740" src="https://assets-indiatoday.sportz.io/cricket/matchcentre.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
-  $iframe_url .= '<iframe style=" margin-top: 20px;" class="desktop-hide"  width="100%" height="740" src="https://assets-indiatoday.sportz.io/cricket/matchcentre-mobile.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
+  $iframe_url .= '<iframe  id="si-scorecard"   class="mhide"  width="100%"   height="780" src="https://assets-indiatoday.sportz.io/cricket/matchcentre.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
+  $iframe_url .= '<iframe style=" margin-top: 20px;" class="desktop-hide"  width="100%" height="780" src="https://assets-indiatoday.sportz.io/cricket/matchcentre-mobile.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
+  $iframe_url .= '<div id="taboola-below-scorecard"></div>';
+  $iframe_url .= '<script type="text/javascript">window._taboola = window._taboola || [];_taboola.push({ mode: \'thumbs-3r\', container: \'taboola-below-scorecard\', placement: \'Below Scorecard\', target_type: \'mix\' });</script>';
   return $iframe_url;
 }
