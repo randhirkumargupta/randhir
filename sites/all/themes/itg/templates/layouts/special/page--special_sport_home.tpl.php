@@ -259,7 +259,7 @@ $hide_widget = '';
                                               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'] . $widget_data['itg-block-5']['widget_display_name']; ?>">                      
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
                                                     <?php if (isset($tax_name)) : ?>  
-                                                      <a href="/photo/<?php print $tax_name;?>"><span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span></a>
+                                                      <a href="/photo/<?php print str_replace(" ", "-", $tax_name);?>"><span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span></a>
                                                     <?php else: ?>
                                                       <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
                                                     <?php endif; ?>
@@ -452,7 +452,7 @@ $hide_widget = '';
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'] . $widget_data['itg-block-11']['widget_display_name']; ?>">
 											<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
                                                 <?php if (isset($tax_name)) : ?>
-                                                  <a href="/videos/<?php print $tax_name;?>"><span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span></a>
+                                                  <a href="/videos/<?php print str_replace(" ", "-", $tax_name);?>"><span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span></a>
                                                 <?php else: ?>
                                                   <span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span>
                                                 <?php endif; ?>

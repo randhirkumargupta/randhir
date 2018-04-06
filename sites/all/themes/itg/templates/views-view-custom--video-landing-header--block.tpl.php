@@ -26,12 +26,12 @@ else {
   $ads_url = 'https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]';
 }
 $uri = base64_encode($actual_link);
-$byline_title = '';
+/*$byline_title = '';
 if(!empty($video_node->field_story_reporter)){
 	$target_nid = $video_node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];	
 	$byline_title = itg_common_get_node_title($target_nid);
 	$byline_title = trim($byline_title);
-}
+}*/
 ?>
 <?php foreach ($rows as $row): ?>
   <div class="container">
@@ -39,12 +39,12 @@ if(!empty($video_node->field_story_reporter)){
           <div class="row">
               <div class="col-md-12">
                   <h1 class="video-heading"><?php print $row['title']; ?></h1>
-                  <div class="byline_date">
-                    <?php if (!empty($byline_title)) { ?>
-                    <span class="video-byline"><?php print $byline_title; ?></span>
-                    <?php } ?>
-                    <span class="video-ppdate"><?php print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
-                  </div>
+                  <!-- <div class="byline_date">
+                    <?php //if (!empty($byline_title)) { ?>
+                    <span class="video-byline"><?php //print $byline_title; ?></span>
+                    <?php //} ?>
+                    <span class="video-ppdate"><?php //print date('F j, Y', strtotime($video_node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></span>  
+                  </div> -->
                   <?php
                   global $user;
                   if (in_array('Social Media', $user->roles)) {
@@ -260,6 +260,8 @@ if(!empty($video_node->field_story_reporter)){
                   <div class="social-likes mhide">
                       <ul>
                           <li>
+                            <a href="#" title ="Like"><i class="fa fa-heart"></i> 
+                            <span id="vno-of-likes_<?php print arg(1); ?>">  
                             <?php
                               if (function_exists(itg_flag_get_count)) {
                                 $like_count = itg_flag_get_count(arg(1), 'like_count');
@@ -270,7 +272,8 @@ if(!empty($video_node->field_story_reporter)){
                               }
                               print $like_count['like_count'] + $migrated_count[0]['like_count'];
                               ?>
-
+                              </span>
+                             </a> 
                           </li>
                           <li class="later akamai-video-replace">
                            <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
@@ -314,6 +317,8 @@ if(!empty($video_node->field_story_reporter)){
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li>
+                                <a href="#" title ="Like"><i class="fa fa-heart"></i> 
+                                <span id="vno-of-likes_<?php print arg(1); ?>">  
                                 <?php
                                  if (function_exists(itg_flag_get_count)) {
                                     $like_count = itg_flag_get_count(arg(1), 'like_count');
@@ -323,7 +328,9 @@ if(!empty($video_node->field_story_reporter)){
                                     $migrated_count = itg_get_migrated_like_count(arg(1));
                                   }
                                   print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                  ?>  
+                                  ?>
+                                  </span>
+                                  </a>  
                               </li>
                               <li class="later akamai-video-replace">
                               <a title = "Watch later" href="javascript:" class="default-render"><i class="fa fa-clock-o"></i><?php print t('Watch Later'); ?></a>
@@ -360,7 +367,7 @@ if(!empty($video_node->field_story_reporter)){
                       </div>
                       <?php print $description_slider; ?>
 
-                      <!-- <p class="upload-date"><?php //print $row['field_itg_content_publish_date']; ?></p> -->
+                      <p class="upload-date"><?php print $row['field_itg_content_publish_date']; ?></p>
                       <div class="section-like-dislike">
                           <div id="btn-div">
                               <?php
