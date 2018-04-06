@@ -534,8 +534,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $query_alias = $arg[3];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
-      pr($photo_cat);
-      p($old_content_id);
       $type = 'category';
       if ($arg[1] == 'section') {
         $table = 'migrate_map_itgsection'; 
