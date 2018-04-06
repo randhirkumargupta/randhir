@@ -272,6 +272,8 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  
+  if ($arg[2] != 'embed') {
   // Code started for adding header , body start , body close for ads module
 
   if (function_exists('get_header_body_start_end_code')) {
@@ -286,15 +288,23 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  if ($arg[2] != 'embed') {
-    itgd_chart_beat_code();
-  }
+  
+  itgd_chart_beat_code();
+  
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
 	'#markup' => $newsroomjs,
   );
   drupal_add_html_head($script_code, 'newsroomjs');
+    if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){
+        $newsroomjs = get_newsroom_screcard_js();
+        $script_code = array(
+            '#type' => 'markup',
+            '#markup' => $newsroomjs,
+        );
+        drupal_add_html_head($script_code, 'newsroomjs');
+    }
   if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
     $add_script = variable_get('add_traffic_script');
     if ($add_script) {
@@ -341,6 +351,7 @@ function itg_preprocess_html(&$vars) {
       $vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
     }
   }
+ } 
 }
 
 /**
@@ -689,6 +700,33 @@ jscode;
 <!-- END NEWSROOM SCRIPT -->
 jscode;
 	}
+}
+
+/**
+ * Get newsroom js ad code
+ */
+function get_newsroom_screcard_js(){
+    return <<<jscode
+		<!-- Scorecard NEWSROOM SCRIPT -->
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({article:'auto'});
+  !function (e, f, u, i) {
+    if (!document.getElementById(i)){
+      e.async = 1;
+      e.src = u;
+      e.id = i;
+      f.parentNode.insertBefore(e, f);
+    }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js',
+  'tb_loader_script');
+  if(window.performance && typeof window.performance.mark == 'function')
+    {window.performance.mark('tbl_ic');}
+</script>
+<!-- END Scorecard NEWSROOM SCRIPT -->
+jscode;
 }
 
 /**

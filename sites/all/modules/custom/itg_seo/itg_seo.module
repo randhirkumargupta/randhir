@@ -23,6 +23,12 @@ function itg_seo_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['custom-search'] = array(
+    'title' => t('Custom search'),
+    'page callback' => 'itg_not_found_200',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
 
   return $items;
@@ -75,6 +81,11 @@ function itg_seo_theme() {
     ),
     'itg_not_found' => array(
       'template' => 'itg-seo-not-found',
+      'path' => drupal_get_path('module', 'itg_seo') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_not_found_200' => array(
+      'template' => 'itg-seo-not-found-200',
       'path' => drupal_get_path('module', 'itg_seo') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -758,4 +769,15 @@ function itg_seo_editors_pick_data($ids){
     $query->condition('mbi.nid', $ids);
   $author_name = $query->execute()->fetchField();
   return $author_name;
+}
+
+/**
+ * Call template file for not found page
+ * 
+ * @return array
+ */
+function itg_not_found_200() {
+  $block = block_load('itg_layout_manager', 'latest_headlines404_block');
+  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  return theme('itg_not_found_200', array('data' => $render_array));
 }
