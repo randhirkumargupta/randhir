@@ -3904,7 +3904,7 @@ function itg_rapid_api_change_password($token) {
             "password":"' . $password . '",
             "device_id":"' . $device_id . '",
             "device_type":"' . $device_type . '"
-        }';
+        }'; 
         $url = $base_url . "/appapi/login_request";
         $ch = curl_init();
         curl_setopt($curl, CURLOPT_USERPWD, "itgd:A@a1t#f17stg");
