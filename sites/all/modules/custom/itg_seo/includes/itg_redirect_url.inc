@@ -528,10 +528,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
     } else if(($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3])) {
       $photo_cat = $arg[4];
+      $query_alias = $arg[3];
       if (is_numeric(trim($arg[2])) && $arg[0] != 't20-world-cup-2016') {
         $photo_cat = $arg[2];
       }
-      $query_alias = $arg[3];
+      if (is_numeric(trim($arg[2])) && $arg[0] == 't20-world-cup-2016') {
+        $photo_cat = $arg[3];
+        $query_alias = $arg[2];
+      }
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
