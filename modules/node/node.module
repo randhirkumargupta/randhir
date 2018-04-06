@@ -1389,7 +1389,7 @@ function node_view($node, $view_mode = 'full', $langcode = NULL) {
  *   (optional) A language code to use for rendering. Defaults to the global
  *   content language of the current request.
  */
-function node_build_content($node, $view_mode = 'full', $langcode = NULL) {
+function node_build_content($node, $view_mode = 'full', $langcode = NULL) {die('asd');
   if (!isset($langcode)) {
     $langcode = $GLOBALS['language_content']->language;
   }
@@ -2984,7 +2984,7 @@ function node_search_validate($form, &$form_state) {
  * @return
  *   TRUE if the operation may be performed, FALSE otherwise.
  */
-function node_access($op, $node, $account = NULL) {return TRUE;
+function node_access($op, $node, $account = NULL) {
   $rights = &drupal_static(__FUNCTION__, array());
 
   if (!$node || !in_array($op, array('view', 'update', 'delete', 'create'), TRUE)) {
