@@ -3907,7 +3907,7 @@ function itg_rapid_api_change_password($token) {
         }'; 
         $url = $base_url . "/appapi/login_request";
         $ch = curl_init();
-        curl_setopt($curl, CURLOPT_USERPWD, "itgd:A@a1t#f17stg");
+        //curl_setopt($curl, CURLOPT_USERPWD, "itgd:A@a1t#f17stg");
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POST, 1);
