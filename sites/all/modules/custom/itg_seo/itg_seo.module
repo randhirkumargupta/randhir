@@ -23,8 +23,8 @@ function itg_seo_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  $items['expired-content'] = array(
-    'title' => t('Expired Content'),
+  $items['custom-search'] = array(
+    'title' => t('Custom search'),
     'page callback' => 'itg_not_found_200',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,

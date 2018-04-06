@@ -11,7 +11,8 @@ global $base_url;
 		<div class="col-md-4">&nbsp;</div>
     <div class="col-md-4">
       <p class="go-back">
-          <?php print t('The Content has expired.'); ?></br> <?php print t('Open the'); ?> <a href="<?php print url(''); ?>"><?php print t('India Today'); ?></a> <?php print t('homepage for me'); ?>
+          <?php print t('This page is no longer exit.'); ?>
+          <p class="mt-50"><?php print t('Open the'); ?> <a href="<?php print url(''); ?>"><?php print t('India Today'); ?></a> <?php print t('homepage for me'); ?></p>
       </p>
       <span class="error-or">OR</span>
       <h3><?php print t('Check out Latest Headlines'); ?></h3>
