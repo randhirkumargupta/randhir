@@ -274,6 +274,7 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  if ($arg[2] != 'embed') {
   // Fact schema code adding in header for story module  
   $fact_schema =  get_fact_schema();
   if (!empty($fact_schema)) {
@@ -296,16 +297,18 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  if ($arg[2] != 'embed') {
+  
     itgd_chart_beat_code();
-  }
+    
+    $newsroomjs = get_newsroom_js();
+    $script_code = array(
+    '#type' => 'markup',
+    '#markup' => $newsroomjs,
+    );
+    drupal_add_html_head($script_code, 'newsroomjs');
+  
 
-  $newsroomjs = get_newsroom_js();
-  $script_code = array(
-	'#type' => 'markup',
-	'#markup' => $newsroomjs,
-  );
-  drupal_add_html_head($script_code, 'newsroomjs');
+ 
 
   if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){
       $newsroomjs = get_newsroom_screcard_js();
@@ -363,6 +366,7 @@ function itg_preprocess_html(&$vars) {
 			$vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
 		}		
 	}
+ } 
 }
 
 /**
