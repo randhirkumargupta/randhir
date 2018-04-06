@@ -122,7 +122,11 @@
                 $taxonomy_url = $base_url . '/' . drupal_get_path_alias("taxonomy/term/$arg[2]");
                 //show heading and list/grid view if category is not sponsored.
                 if (!_is_sponsored_category($arg[2])) {
-                  $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
+                    $custom_code = get_category_custom_code($term->tid);
+                    if($custom_code != ''){
+                        echo $custom_code;
+                    }
+                    $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
                   if ($arg[2] !== variable_get('pti_section_id', 1206640)) {
                     $query = drupal_get_query_parameters();
                     if ($query['view_type'] == 'list') {
