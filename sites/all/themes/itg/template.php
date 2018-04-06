@@ -272,6 +272,8 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  
+  if ($arg[2] != 'embed') {
   // Code started for adding header , body start , body close for ads module
 
   if (function_exists('get_header_body_start_end_code')) {
@@ -286,9 +288,9 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  if ($arg[2] != 'embed') {
-    itgd_chart_beat_code();
-  }
+  
+  itgd_chart_beat_code();
+  
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
@@ -349,6 +351,7 @@ function itg_preprocess_html(&$vars) {
       $vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
     }
   }
+ } 
 }
 
 /**
