@@ -3859,8 +3859,8 @@ function itg_rapid_api_change_password($token) {
     $token = $params['auth_token'];
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
-    //if (!drupal_valid_token($token, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($token, 'services')) {
+    //if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
@@ -3891,6 +3891,28 @@ function itg_rapid_api_change_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
+        ################logout sart##############
+        $params_logout = array();
+        $params_logout[user_id] = $params['user_id'];
+        $params_logout[auth_token] = $params['auth_token'];
+        $params_logout[device_id] = $params['device_id'];
+        $params_logout[device_type] = $params['device_type'];
+        $url_logout = PARENT_SSO . "/appapisso/log_out";
+        $result = callAPI($method, $url_logout, $params_logout);
+        $user_id = $params['user_id'];
+        $user = user_load_by_name($user_id);
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
+        drupal_save_session($original_session_state);
+        // call custom function to clean token in custom table
+        cleanToken_Rapid($params_logout);
+        ################logout sart##############
         ###############relogin start ##########
         $params_login = array();
         $params_login['user_id'] = $params['user_id'];
