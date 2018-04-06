@@ -941,6 +941,43 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_section_custom_code'.
+  $field_instances['taxonomy_term-category_management-field_section_custom_code'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 31,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_section_custom_code',
+    'label' => 'Category Custom Code',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 36,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_section_menu'.
   $field_instances['taxonomy_term-category_management-field_section_menu'] = array(
     'bundle' => 'category_management',
@@ -1347,6 +1384,7 @@ function feature_category_management_field_default_field_instances() {
   t('App description');
   t('Category Banner Colour');
   t('Category Banner Icon');
+  t('Category Custom Code');
   t('Category Icon');
   t('Content Type');
   t('Description');
