@@ -3830,7 +3830,6 @@ function itg_rapid_api_log_out($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_change_password($token) {
-    global $base_url;
     $HTTP_RAW_POST_DATA;
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
@@ -3892,38 +3891,8 @@ function itg_rapid_api_change_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
-        $success_status_mess = "Password has changed";
-        ################ relogin srart#############################
-       $account = array();
-        $user_id = $params['user_id'];
-        $password = $params['new_password'];
-        $device_id = $params['device_id'];
-        $device_type = $params['device_type'];
-        $data_json = '{
-            "user_id":"' . $user_id . '",
-            "password":"' . $password . '",
-            "device_id":"' . $device_id . '",
-            "device_type":"' . $device_type . '"
-        }'; 
-        $url = $base_url . "/appapi/login_request";
-        $ch = curl_init();
-        //curl_setopt($curl, CURLOPT_USERPWD, "itgd:A@a1t#f17stg");
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        p($response);
-        curl_close($ch);
-        $response = json_decode($response);       
-        $auth_token = $response->data->auth_token;
-################ relogin end #############################
         $data['status_code'] = "1";
-        $data['status_message'] = "$success_status_mess";
-        $data['auth_token'] = "$auth_token";
-        //$data['session_id'] = "$session_id";
-        //$data['session_name'] = "$session_name"; 
+        $data['status_message'] = "Password has changed";
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
