@@ -224,9 +224,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $table = 'migrate_map_itgcategory';
       $type = 'category';
       $query_alias = $arg[3];
-  } else if ((!empty($arg[0]) && ($arg[0] == 'videolist' || $arg[0] == 'programmelist')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
+  } else if (($arg[0] == 'videolist' || $arg[0] == 'programmelist' || $arg[1] == 'videolist' || $arg[1] == 'programmelist') && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
       $photo_cat = $arg[3];
       $query_alias = $arg[2];
+      if ($arg[1] == 'videolist' || $arg[1] == 'programmelist') {
+        $photo_cat = $arg[4];
+        $query_alias = $arg[3];
+      }
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
@@ -237,6 +241,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     $newurl = getNewStoryUrl($storyarg, $table);
     if ($newurl) {
       drupal_goto($newurl, array(), 301);
+    } else {
+      $table = 'migrate_map_itgvideogallery';
+      $newurl_n = getNewStoryUrl($storyarg, $table);
+      if ($newurl_n) {
+        drupal_goto($newurl_n, array(), 301);
+      }
     }
   } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp')))) {      
     if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
@@ -326,7 +336,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-  } else if ((!empty($arg[0]) && ($arg[0] == 'Story')) && (!empty($arg[1]) && is_numeric($arg[1])) && !empty($arg[2]) && !empty($arg[3])) {
+  } else if ((!empty($arg[0]) && ($arg[0] == 'Story')) && (!empty($arg[1]) && is_numeric($arg[1])) && !empty($arg[2]) && !empty($arg[3])) {  
       $storyid = $arg[1];
       $table = 'migrate_map_itgstorylist';
       $newurl = getNewStoryUrl($storyid, $table);
@@ -503,6 +513,9 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($url, array(), 301);
     } else if ((!empty($arg[0]) && ($arg[0] == 'section' || $arg[0] == 'category' || $arg[0] == 'subcategory' || $arg[0] == 'subsubcategory')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern category/americas/149/182.html
       $photo_cat = $arg[3];
+      if (is_numeric(trim($arg[1]))) {
+        $photo_cat = $arg[1];
+      }
       $query_alias = $arg[2];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
@@ -516,9 +529,16 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       } else if ($arg[0] == 'subsubcategory') {
         $table = 'migrate_map_itgsubsubcategory';
       }
-    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+    } else if(($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3])) {
       $photo_cat = $arg[4];
       $query_alias = $arg[3];
+      if (is_numeric(trim($arg[2])) && $arg[0] != 't20-world-cup-2016') {
+        $photo_cat = $arg[2];
+      }
+      if (is_numeric(trim($arg[2])) && $arg[0] == 't20-world-cup-2016') {
+        $photo_cat = $arg[3];
+        $query_alias = $arg[2];
+      }
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
@@ -627,9 +647,16 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
+     } else if (isset($_GET['galleryid'])) {
+      $old_content_id = $_GET['galleryid'];
+      $table = 'migrate_map_itgphotogallery';
+      $newurl = getNewStoryUrl($old_content_id, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
      } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
-  }
+     }
   // Code for url redirection:
   if (!empty($old_content_id)) {
       if ($type == 'category') {
