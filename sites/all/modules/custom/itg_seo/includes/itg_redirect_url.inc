@@ -531,7 +531,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if (is_integer($arg[2])) {
         $photo_cat = $arg[2];
       }
-      p("test");
       $query_alias = $arg[3];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
