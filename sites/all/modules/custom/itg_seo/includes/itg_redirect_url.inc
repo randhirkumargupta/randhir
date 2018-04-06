@@ -510,7 +510,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($url, array(), 301);
     } else if ((!empty($arg[0]) && ($arg[0] == 'section' || $arg[0] == 'category' || $arg[0] == 'subcategory' || $arg[0] == 'subsubcategory')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern category/americas/149/182.html
       $photo_cat = $arg[3];
-      if (is_integer($arg[1])) {
+      if (is_numeric(trim($arg[1]))) {
         $photo_cat = $arg[1];
       }
       $query_alias = $arg[2];
@@ -526,7 +526,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       } else if ($arg[0] == 'subsubcategory') {
         $table = 'migrate_map_itgsubsubcategory';
       }
-    } else if(($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+    } else if(($arg[1] == 'section' || $arg[1] == 'category' || $arg[1] == 'subcategory' || $arg[1] == 'subsubcategory') && !empty($arg[2]) && !empty($arg[3])) {
       $photo_cat = $arg[4];
       if (is_numeric(trim($arg[2]))) {
         $photo_cat = $arg[2];
