@@ -75,6 +75,7 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     //for media content end
 
     if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = 200;
       $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
       $query->condition('n.created', $days_ago, '>=');
     }
