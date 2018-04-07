@@ -1849,7 +1849,7 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman; 
     
-    $n_widget[0]['type'] = "5";
+    $n_widget[0]['type'] = "1";
     $n_widget[0]['type_label'] = "cwgtally";
     $n_widget[0]['tilte'] = "CWG 2018 MEDAL TALLY"; 
     $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_rhs.html";
