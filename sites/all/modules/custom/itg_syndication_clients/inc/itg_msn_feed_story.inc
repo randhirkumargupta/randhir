@@ -85,11 +85,13 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
-    $xml_path = 'public://';
-    $file_path = $xml_path . $file_name;
-    $fp = fopen($file_path, "w");
-    fwrite($fp, $xml);
-    fclose($fp);
+    $xml_path = 'public://msnfeed';
+    file_prepare_directory($xml_path, FILE_CREATE_DIRECTORY);
+    writeFeedFile($xml_path, $file_name, $xml);
+    //$file_path = $xml_path . $file_name;
+    //$fp = fopen($file_path, "w");
+    //fwrite($fp, $xml);
+    //fclose($fp);
   }
 }
 
