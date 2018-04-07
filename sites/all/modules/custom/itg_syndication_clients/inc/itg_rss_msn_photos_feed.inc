@@ -20,7 +20,7 @@ function itg_rss_msn_photos_feed() {
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'photogallery', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ function genrate_msn_photo_syndication_xml($result = NULL) {
       $created_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $xml .= '<item>';
       $xml .= '<gallery_id>' . $nid . '</gallery_id>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';

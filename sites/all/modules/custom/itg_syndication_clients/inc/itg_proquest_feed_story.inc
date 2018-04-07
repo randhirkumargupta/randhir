@@ -28,6 +28,10 @@ function itg_genrate_proquest_feed_story_syndication($section_id = NULL, $file_n
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
 
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
@@ -36,13 +40,13 @@ function itg_genrate_proquest_feed_story_syndication($section_id = NULL, $file_n
     $query->fields('synopsis', array('field_story_kicker_text_value'));
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_proquest_feed_story_syndication_xml($result, $section_name);
-    $xml_path = 'public://rss-feeds/ver1.0/proquest/42ecea07/it/stories/';
+    $xml_path = 'public://rss-feeds/xml_data/proquest/it/stories/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -63,13 +67,18 @@ function genrate_proquest_feed_story_syndication_xml($result = NULL, $category) 
     global $base_url;
     $xml = '<root>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $nid = $value['nid'];
       $publish_date = date("D, j M Y H:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $place = get_content_city($value['nid']);
       $keyword = get_content_tags($value['nid'], TRUE);
       $byline = get_byline_name_by_nid($nid);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $article_type = slugify(preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($category)));
       $xml .= '<article>';

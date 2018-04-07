@@ -46,7 +46,10 @@ function itg_genrate_vuclip_programme_syndication($section_id = NULL, $file_name
 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
-
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
@@ -82,7 +85,7 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
   $xml = '<rss xmlns:media="http://search.yahoo.com/mrss" version="2.0">';
   $xml .= '<channel>';
   $xml .= "<title>India Today's Videos Feed</title>";
-  $xml .= '<link>' . $base_url . '</link>';
+  $xml .= '<link>' . FRONT_URL . '</link>';
   $xml .= "<description>India Today's Videos Feed</description>";
 
   if (!empty($result)) {
@@ -98,15 +101,34 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
       $metatags = get_node_metatags_by_nid($nid);
       $keywords = '';
       if ($metatags) {
-        $keywords = $metatags['keywords']['value'];
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       if (!empty($videotag['migrated'])) { //migrated video  
-        $xml .= '<link><![CDATA[' . $videotag['migrated']['video_path_mp4'] . ']]></link>';
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          $url = $video_value->field_migrated_video_url_value;
+        }
+        $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+        $bitrate_url = $data_video['bitrate_url'];
+        $mp4_url = $data_video['file_url'];
+        $xml .= '<link><![CDATA[' . $mp4_url . ']]></link>';
       }
       elseif (!empty($videotag['dailymotion'])) {
-        $xml .= '<link><![CDATA[' . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . ']]></link>';
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          if ($video_value->video_id != '') {
+            $video_id = $video_value->video_id;
+          } elseif ($video_value->solr_video_id != '') {
+            $video_id = $video_value->solr_video_id;
+          }
+        }
+        $inter_video_details = itg_internal_video_bitrate_data($video_id);
+        //$videotag = itg_video_detail_formats($nid, $source_type);
+        $video_url = $inter_video_details['file_url'];
+        $xml .= '<link><![CDATA[' . $video_url . ']]></link>';
       }
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<pubDate>' . $created_date . '</pubDate>';
@@ -151,6 +173,10 @@ function itg_genrate_mauj_video_syndication($section_id = NULL, $file_name, $lim
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if($days_ago = get_content_fetch_time($section_id)){
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
 
     $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -183,7 +209,7 @@ function genrate_mauj_programme_xml($result) {
   $xml = '<rss xmlns:media="http://search.yahoo.com/mrss" version="2.0">';
   $xml .= '<channel>';
   $xml .= "<title>India Today's Videos Feed</title>";
-  $xml .= '<link>' . $base_url . '</link>';
+  $xml .= '<link>' . FRONT_URL . '</link>';
   $xml .= "<description>India Today's Videos Feed</description>";
 
   if (!empty($result)) {

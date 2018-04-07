@@ -19,7 +19,7 @@ function itg_cabbytabby_feed_videos_syndication() {
 function itg_genrate_cabbytabby_feed_videos_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
     $section_name = 'CabbyTabby';
-    $type = array('videogallery');
+    
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
@@ -32,16 +32,21 @@ function itg_genrate_cabbytabby_feed_videos_syndication($section_id = NULL, $fil
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     $query->fields('sed', array('field_story_expert_description_value'));
-
+    
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+    
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_cabbytabby_feed_videos_syndication_xml($result, $section_id, $section_name);
-    $xml_path = 'public://rss-feeds/ver1.0/cabbytabby/71dea842/it/videos/';
+    $xml_path = 'public://rss-feeds/xml_data/cabbytabby/it/videos/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -76,7 +81,7 @@ function genrate_cabbytabby_feed_videos_syndication_xml($result = NULL, $section
       $catname = get_term_name_by_tid($section_id);
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $source_type = $value['field_story_source_type_value'];
-      $videotag = itg_video_detail_formats($nid, $source_type);
+      //$videotag = itg_video_detail_formats($nid, $source_type);
       $video_data = get_itg_video_transcoding($nid);
       $meta_tags = get_node_metatags_by_nid($nid);
       $tags = get_content_tags($nid, TRUE);
@@ -93,11 +98,28 @@ function genrate_cabbytabby_feed_videos_syndication_xml($result = NULL, $section
       }
 
       $video_url = '';
-      if (!empty($videotag['migrated'])) { //migrated video
-        $video_url = $videotag['migrated']['video_path_mp4'];
+      if ($source_type = 'migrated') { //migrated video
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          $url = $video_value->field_migrated_video_url_value;
+        }
+        $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+        $bitrate_url = $data_video['bitrate_url'];
+        $mp4_url = $data_video['file_url'];
+        $video_url = $mp4_url;
       }
-      elseif (!empty($videotag['dailymotion'])) {
-        $video_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
+      else {
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          if ($video_value->video_id != '') {
+            $video_id = $video_value->video_id;
+          } elseif ($video_value->solr_video_id != '') {
+            $video_id = $video_value->solr_video_id;
+          }
+        }
+        $inter_video_details = itg_internal_video_bitrate_data($video_id);
+        //$videotag = itg_video_detail_formats($nid, $source_type);
+        $video_url = $inter_video_details['file_url'];
       }
       $xml .= '<item>';
       $xml .= '<guid isPermaLink="false">' . $nid . '</guid>';

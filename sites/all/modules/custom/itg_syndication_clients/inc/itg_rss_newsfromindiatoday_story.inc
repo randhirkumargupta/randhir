@@ -27,7 +27,12 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
-
+    
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+    
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
@@ -40,11 +45,11 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
     $query->fields('ssi', array('field_story_small_image_fid'));
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 30);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $xml = genrate_bsb_story_syndication_xml($result, $section_name);
+    $xml = genrate_newsfromindiatoday_story_syndication_xml($result, $section_name);
     $xml_path = 'public://indiatoday/rss/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
@@ -60,19 +65,24 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
  * @param string $category
  * @return string
  */
-function genrate_bsb_story_syndication_xml($result = NULL, $category) {
+function genrate_newsfromindiatoday_story_syndication_xml($result = NULL, $category) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));
       $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
       $place = get_content_city($value['nid']);
       $keyword = get_content_tags($value['nid'], TRUE);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);

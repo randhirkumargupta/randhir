@@ -111,7 +111,7 @@ function itg_rss_breakingnews_feed() {
   $query->fields('ssi', array('field_story_small_image_fid'));
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -148,6 +148,10 @@ function itg_genrate_hltapps_stories_syndication($section_id = NULL, $file_name)
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if ($days_ago = get_content_fetch_time($section_id)) {
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
     else {
       $section_id = 1;
@@ -193,10 +197,13 @@ function genrate_hltapps_stories_xml($result = NULL, $category, $section_id) {
     $xml .= '<title><![CDATA[ ' . $category . ' ]]></title>';
     $xml .= '<itemcount>' . count($result) . '</itemcount>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $nid = $value['nid'];
       $publish_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml_story_file = 'story' . $nid . '.xml';
       $xml .= '<item>';
@@ -229,10 +236,12 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   $byline = get_byline_name_by_nid($value['nid']);
   $place = get_content_city($value['nid']);
   $body = remove_extra_tag_in_body($value["body_value"]);
+  $body = itg_replace_token_with_data($body, $value['nid']);
+  $body = itg_remove_extra_custom_tags($body);
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $courtesy = $value['field_story_courtesy_value'];
-  $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+  $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
   $xml_detail = '<root>';
   $xml_detail .= '<item>';
   $xml_detail .= '<id>' . $value["nid"] . '</id>';
@@ -292,6 +301,10 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if ($days_ago = get_content_fetch_time($section_id)) {
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
     else {
       $section_id = 1;
@@ -347,7 +360,7 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
       $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       //$primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
-      $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
@@ -388,7 +401,7 @@ function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $v
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $source_type = $value['field_story_source_type_value'];
   $videotag = itg_video_detail_formats($nid, $source_type);
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
 
   $video_xml = '<root>';
   $video_xml .= '<item>';
@@ -443,6 +456,11 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
 
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -450,7 +468,7 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
     $query->fields('sli', array('field_story_large_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'photogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, $limit);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -486,7 +504,7 @@ function genrate_hltapps_photos_xml($result, $section_name, $section_id) {
       $photo_detail_file_name = 'photo' . $nid . '.xml';
       $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
@@ -518,7 +536,7 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
   $gallery_img_fc = get_all_associated_photos($nid);
   $image_count = count($gallery_img_fc);
   $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
 
@@ -590,6 +608,10 @@ function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_nam
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if ($days_ago = get_content_fetch_time($section_id)) {
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
     else {
       $section_id = 1;
@@ -685,6 +707,15 @@ function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name
   if (count($categories_id) > 0) {
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $categories_id, 'IN');
+    $max_day_ago = 10;
+    foreach ($categories_id as $sec_id) {
+      $temp = get_content_fetch_time($sec_id);
+      if ($max_day_ago < $temp) {
+        $max_day_ago = $temp;
+      }
+    }
+    $days_ago = strtotime(date('Y-m-d', strtotime('-' . $max_day_ago . ' days')));
+    $query->condition('n.created', $days_ago, '>=');
   }
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -728,6 +759,9 @@ function genrate_hltapps_mixed_feed($result, $sections, $feed_name) {
       $nid = $value['nid'];
 
       if ($value['type'] == 'story') {
+        if (is_lock_story($value['nid'])) {
+          continue;
+        }
         $section_id = $sections['story'];
         $category = get_term_name_by_tid($section_id);
         $detail_file_name = 'stories/story' . $nid . '.xml';
@@ -788,7 +822,7 @@ function itg_rss_hltapps_livenow_listing_feed() {
     else {
       $file_name = $fixed_section_files[$value['tid']];
     }
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $value['tid']);
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $value['tid']);
     $cat_img = get_image_info_by_fid($value['field_sponser_logo_fid']);
     $xml .= '<item>';
     $xml .= '<title><![CDATA[ ' . $value['name'] . ' ]]></title>';
@@ -852,6 +886,10 @@ function itg_genrate_msn_hlt_videos_feed_syndication($section_id = NULL, $file_n
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
 
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     $query->fields('sli', array('field_story_large_image_fid'));
@@ -890,14 +928,14 @@ function genrate_msn_hlt_videos_xml($result, $section_name, $section_id) {
   $xml .= '<id>' . $section_id . '</id>';
   $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
   $xml .= '<itemcount>' . count($result) . '</itemcount>';
-  $file_base_path = file_create_url('public://msn/hlt/videos/');
+  $file_base_path = get_feed_base_url() . '/msn/hlt/videos'; //file_create_url('public://msn/hlt/videos/');
   if (!empty($result)) {
     foreach ($result as $value) {
       $nid = $value['nid'];
       $video_file_name = 'video' . $nid . '.xml';
       $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
@@ -935,7 +973,8 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $source_type = $value['field_story_source_type_value'];
   $videotag = itg_video_detail_formats($nid, $source_type);
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $video_size = migrated_video_transcoding($nid);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
 
   $video_xml = '<root>';
   $video_xml .= '<item>';
@@ -951,10 +990,26 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $video_xml .= '<mediaid></mediaid>';
   $video_xml .= '<uurl></uurl>';
   if (!empty($videotag['migrated'])) { //migrated video
-    $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+    $mp4_url = $data_video['file_url'];
+    $video_xml .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit></size_364bit><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
   }
   elseif (!empty($videotag['dailymotion'])) {
-    $video_xml .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      } elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+    }
+    $inter_video_details = internal_video_bitrate_data($video_id);
+    $video_xml .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
   }
   $video_xml .= '<images>';
   $video_xml .= '<image>';
@@ -1103,13 +1158,11 @@ function itg_generate_hltapps_static_api() {
   fclose($fpd);
 }
 
-
 /**
  * Function for generate progamme feed
  * @global string $base_url
  * @param int $section_id
  */
-
 function itg_generate_hltapps_programme_static($section_id) {
   $sections = get_parent_category_name_by_tid($section_id);
   global $base_url;
@@ -1133,7 +1186,7 @@ function itg_generate_hltapps_programme_static($section_id) {
     else {
       $file_name = $fixed_section_files[$value['tid']];
     }
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $value['tid']);
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $value['tid']);
     $cat_img = get_image_info_by_fid($value['field_sponser_logo_fid']);
     $xml .= '<item>';
     $xml .= '<title><![CDATA[ ' . $value['name'] . ' ]]></title>';

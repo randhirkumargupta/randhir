@@ -25,7 +25,7 @@ function itg_genrate_dailyhunt_story_syndication($section_id = NULL, $file_name)
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'smi', 'smi.entity_id=n.nid');
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
@@ -33,16 +33,21 @@ function itg_genrate_dailyhunt_story_syndication($section_id = NULL, $file_name)
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
-    $query->fields('smi', array('field_story_medium_image_fid'));
+    $query->fields('smi', array('field_story_extra_large_image_fid'));
+
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_dailyhunt_story_syndication_xml($result);
-    $destination = "public://rss-feeds/ver1.0/dailyhunt/83951470/it/stories/";
+    $destination = "public://rss-feeds/xml_data/dailyhunt/it/stories/";
     $file_path = $destination . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -62,15 +67,20 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
     global $base_url;
     $xml = '<Data>';
     foreach ($result as $key => $value) {
-      $publish_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
-      $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
+      $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
+      $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
-      $xml .= '<pubdate><![CDATA[' . $publish_date . ']]></pubdate>';
+      $xml .= '<pubdate><![CDATA[' . $publish_date . ' +0000 ]]></pubdate>';
       $xml .= '<image>' . $medium_img['imag_url'] . '</image>';
       $xml .= '<youtubeEmbedURL></youtubeEmbedURL>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
@@ -86,7 +96,7 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
  * Generate Breaking news feed
  */
 function itg_rss_breakingnewsOctober072017_syndication() {
-  $type = array('breaking_news');
+
 //  $end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime('07-10-2017'))));
   $end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime('19-09-2017'))));
   $start_time = strtotime(date('Y-m-d', strtotime('-1 day', strtotime('19-09-2017'))));
@@ -103,7 +113,7 @@ function itg_rss_breakingnewsOctober072017_syndication() {
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -165,7 +175,6 @@ function genrate_breaking_news_7oct2017($result) {
  * Generate breakingnewscategorypageurl.xml feed
  */
 function itg_dailyhunt_feed_breakingnews_syndication() {
-  $type = array('breaking_news');
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
@@ -176,7 +185,7 @@ function itg_dailyhunt_feed_breakingnews_syndication() {
 
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 3);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

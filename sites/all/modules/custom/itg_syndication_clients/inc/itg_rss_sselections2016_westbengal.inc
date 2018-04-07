@@ -27,6 +27,10 @@ function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL,
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
 
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
@@ -36,7 +40,7 @@ function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL,
     $query->fields('ssi', array('field_story_small_image_fid'));
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -68,9 +72,12 @@ function genrate_rsselections2016_westbengal_syndication_xml($result = NULL, $se
     $xml .= '<start_index>0</start_index>';
     $xml .= '<end_index>' . count($result) . '</end_index>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $publish_date = date("M d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $create_datetime = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
       $related = related_content_node_type($nid, 'story');

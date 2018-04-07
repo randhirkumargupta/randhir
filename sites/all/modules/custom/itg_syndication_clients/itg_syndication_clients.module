@@ -7,6 +7,7 @@
  */
 module_load_include('inc', 'itg_syndication_clients', 'itg_syndication_clients.helper');
 
+
 /**
  * Implements hook_menu().
  */
@@ -101,7 +102,7 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_scribd_latest_issue.inc',
     'type' => MENU_CALLBACK,
   );
-  $items['ucbrowser/indiatoday-new'] = array(
+  $items['clients/indiatoday-new'] = array(
     'page callback' => 'itg_uc_browser_feed_latest_story',
     'access arguments' => array('access content'),
     'file' => 'inc/itg_uc_browser_latest_story.inc',
@@ -109,6 +110,13 @@ function itg_syndication_clients_menu() {
   );
   $items['clients/indiatoday-zuppit-top'] = array(
     'page callback' => 'itg_zuppit_feed_latest_story',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_zuppit_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/samsung_video_detail/%'] = array(
+    'page callback' => 'client_samsung_video_detail',
+    'page arguments' => array(2),
     'access arguments' => array('access content'),
     'file' => 'inc/itg_zuppit_latest_story.inc',
     'type' => MENU_CALLBACK,
@@ -323,6 +331,66 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_scribd_live_issue.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/celtick/it_stories'] = array(
+    'page callback' => 'itg_celtick_feed_it_stories',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_celtick_feed_it_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/videsectionlist_india_rss_fun_on_go'] = array(
+    'page callback' => 'videsectionlist_india_rss_fun_on_go',
+    'access arguments' => array('access content'),
+    'file' => 'inc/videsectionlist_india_rss_fun_on_go.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/factiva_stories'] = array(
+    'page callback' => 'factiva_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/factiva_stories_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/syndication-cms'] = array(
+    'page callback' => 'syndication_interface_cms',
+    'access arguments' => array('access content'),
+    'file' => 'inc/syndication_interface_cms.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['pti-feeds/genrate_pti_feeds'] = array(
+    'page callback' => 'itg_generate_pti_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/generate_pti_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/unionbudget2018'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_unionbudget2018_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/samsung/jsonfeed'] = array(
+    'page callback' => 'itg_indiatoday_samsung_jsonfeed_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/indiatoday/daily_report'] = array(
+    'page callback' => 'itg_indiatoday_daily_report_jsonfeed_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_daily_report_jsonfeed_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/samsung_search_api/%'] = array(
+    'page callback' => 'itg_indiatoday_samsung_search_api',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_samsung_search_api.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/jioexpress'] = array(
+    'page callback' => 'itg_indiatoday_jioexpress_api',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_jioexpress_api.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -331,44 +399,44 @@ function itg_syndication_clients_menu() {
  * @return array
  */
 function itg_syndication_clients_theme() {
-    return array(
-      'hltapps_homesectionslist' => array(
-        'template' => 'templates/hltapps_homesectionslist_template',
-      ),
-      'hltapps_sectionslist' => array(
-        'template' => 'templates/hltapps_sectionslist_template',
-      ),
-      'hltapps_video_sectionslist' => array(
-        'template' => 'templates/hltapps_video_sectionslist_template',
-      ),
-      'hltapps_photo_sectionslist' => array(
-        'template' => 'templates/hltapps_photo_sectionslist_template',
-      ),
-      'hltapps_static_about_us' => array(
-        'template' => 'templates/hltapps_static_about_us_template',
-      ),
-      'hltapps_static_livetv_text' => array(
-        'template' => 'templates/hltapps_static_livetv_text_template',
-      ),
-      'hltapps_static_playbook_ad' => array(
-        'template' => 'templates/hltapps_static_playbook_ad_template',
-      ),
-      'hltapps_static_bb_ad' => array(
-        'template' => 'templates/hltapps_static_bb_ad_template',
-      ),
-      'hltapps_static_api_livetv' => array(
-        'template' => 'templates/hltapps_static_api_livetv_template',
-      ),
-      'hltapps_static_api' => array(
-        'template' => 'templates/hltapps_static_api',
-      ),
-      'msn_static_stories_what_to_expect' => array(
-        'template' => 'templates/msn_static_stories_what_to_expect',
-      ),
-      'msn_static_stories_top_news' => array(
-        'template' => 'templates/msn_static_stories_top_news',
-      )
-    );
+  return array(
+    'hltapps_homesectionslist' => array(
+      'template' => 'templates/hltapps_homesectionslist_template',
+    ),
+    'hltapps_sectionslist' => array(
+      'template' => 'templates/hltapps_sectionslist_template',
+    ),
+    'hltapps_video_sectionslist' => array(
+      'template' => 'templates/hltapps_video_sectionslist_template',
+    ),
+    'hltapps_photo_sectionslist' => array(
+      'template' => 'templates/hltapps_photo_sectionslist_template',
+    ),
+    'hltapps_static_about_us' => array(
+      'template' => 'templates/hltapps_static_about_us_template',
+    ),
+    'hltapps_static_livetv_text' => array(
+      'template' => 'templates/hltapps_static_livetv_text_template',
+    ),
+    'hltapps_static_playbook_ad' => array(
+      'template' => 'templates/hltapps_static_playbook_ad_template',
+    ),
+    'hltapps_static_bb_ad' => array(
+      'template' => 'templates/hltapps_static_bb_ad_template',
+    ),
+    'hltapps_static_api_livetv' => array(
+      'template' => 'templates/hltapps_static_api_livetv_template',
+    ),
+    'hltapps_static_api' => array(
+      'template' => 'templates/hltapps_static_api',
+    ),
+    'msn_static_stories_what_to_expect' => array(
+      'template' => 'templates/msn_static_stories_what_to_expect',
+    ),
+    'msn_static_stories_top_news' => array(
+      'template' => 'templates/msn_static_stories_top_news',
+    )
+  );
 }
 
 /**
@@ -508,8 +576,7 @@ function get_image_info_by_fid($fid = NULL) {
     }
     $img_url = get_thumbnail_by_fid($fid);
     $image_data['imag_url'] = $img_url;
-    $ext = end(explode(".", $img_url));
-    $image_data['mime_type'] = $ext;
+    $image_data['mime_type'] = 'jpg';
   }
   return $image_data;
 }
@@ -540,6 +607,10 @@ function get_thumbnail_by_fid($fid = NULL, $style = NULL) {
  * @return string
  */
 function get_term_name_by_tid($tid = NULL) {
+  if ($cached = cache_get('taxonomy_' . $tid, 'cache')) {
+    $tname = $cached->data;
+    return $tname;
+  }
   $tname = '';
   if (!empty($tid)) {
     $query = db_select('taxonomy_term_data', 'ttd');
@@ -550,6 +621,7 @@ function get_term_name_by_tid($tid = NULL) {
       $tname = $tname[0]['name'];
     }
   }
+  cache_set('taxonomy_' . $tid, $tname, 'cache', 60 * 60 * 24 * 7); //7 days
   return $tname;
 }
 
@@ -667,6 +739,15 @@ function get_node_metatags_by_nid($nid = NULL) {
  */
 function genrate_uniqui_guid() {
   return md5(uniqid(rand(), true));
+}
+
+/**
+ * Function is used to generate unique String
+ * @param type $uniq_id
+ * @return type
+ */
+function itg_genrate_uniqui_guid($uniq_id) {
+  return md5($uniq_id);
 }
 
 /**
@@ -885,7 +966,7 @@ function related_content_node_type($node_list = "", $type) {
     $nid = $resvalue['nid'];
     if ($resvalue['type'] == "story") {
       $type_ar['stories'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_story_xml .= '<story>';
       $related_story_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -895,7 +976,7 @@ function related_content_node_type($node_list = "", $type) {
     }
     elseif ($resvalue['type'] == "videogallery") {
       $type_ar['videos'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_video_xml .= '<video>';
       $related_video_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -905,7 +986,7 @@ function related_content_node_type($node_list = "", $type) {
     }
     elseif ($resvalue['type'] == "photogallery") {
       $type_ar['photos'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_photo_xml .= '<photo>';
       $related_photo_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -953,7 +1034,6 @@ function itg_video_detail_formats($nid, $source_type) {
   if ($source_type != 'migrated') {
     $video_status = 'dailymotion';
     $videoids = get_video_in_fieldcollection_by_nid($nid);
-
     foreach ($videoids as $keys => $video_value) {
       if ($video_value->video_id != '') {
         $video_id = $video_value->video_id;
@@ -961,13 +1041,9 @@ function itg_video_detail_formats($nid, $source_type) {
       elseif ($video_value->solr_video_id != '') {
         $video_id = $video_value->solr_video_id;
       }
-      else {
-        
-      }
       $video_detail[$video_status]['video_id'] = $video_id;
       $file_id = $video_value->fid;
     }
-
     $query = db_select('file_managed', 'fm');
     $query->condition('fm.fid', $file_id);
     $query->fields('fm', array('filename', 'uri', 'filemime', 'filesize', 'status'));
@@ -977,12 +1053,10 @@ function itg_video_detail_formats($nid, $source_type) {
     $uri = $results[0]->uri;
     $video_detail[$video_status]['filename'] = $results[0]->filename;
     $video_detail[$video_status]['filsize'] = $results[0]->filesize;
-
     $query = db_select('itg_video_bitrates_data', 'itgv');
     $query->fields('itgv', array('bitate_url', 'bitates_field'));
     $query->condition('itgv.video_id', $video_id);
     $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     $video_format = array();
     foreach ($result2 as $res_data) {
       $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
@@ -990,7 +1064,7 @@ function itg_video_detail_formats($nid, $source_type) {
     $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
     $video_format['videoparts_mp4'] = $video_path_mp4;
     $video_detail[$video_status]['bitate_url'] = $video_format;
-    $dailymotion_download = itg_dailymotion_download_video_uri($video_id);
+    $dailymotion_download = dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
   }
   elseif ($source_type == 'migrated') {
@@ -999,10 +1073,31 @@ function itg_video_detail_formats($nid, $source_type) {
     foreach ($videoids as $keys => $video_value) {
       $video_path_mp4 = $video_value->field_migrated_video_url_value;
     }
+    $video_path_mp4 = str_replace('http://medias3d.intoday.in/', 'http://indiatoday-pdelivery.akamaized.net/', $video_path_mp4);
     $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
     $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
-    $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
+    $rr = explode('/', $video_path_mp4);
+    $mp4_last_fname = end($rr);
+    $gp_file_path = '3gp/' . $mp4_last_fname . '';
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+    // m3u8
+    $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);
+    $m3u8_tags = itg_mcu8_tags($nid);
+    if (!empty($m3u8_tags)) {
+      $m3 = implode(',', $m3u8_tags);
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
+    }
+    else {
+      $m3 = "";
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
+    }
+    $videoparts_m3u8 = str_replace('http://indiatoday-pdelivery.akamaized.net', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
+    //end
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
     $video_detail[$video_status]['flv_url'] = $flv_url;
+    $video_detail[$video_status]['videoparts_m3u8'] = $videoparts_m3u8;
     $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
   }
   return $video_detail;
@@ -1156,7 +1251,6 @@ function get_term_description_by_tid($tid = NULL) {
   return $tdescription;
 }
 
-
 /**
  * function is used to get parent category name
  * @param int $tid
@@ -1250,4 +1344,279 @@ function get_samsung_breaking_news_lists($result) {
   }
 
   return $breaking_xml;
+}
+
+function is_lock_story($nid) {
+  if (empty($nid)) {
+    return FALSE;
+  }
+  $query1 = db_select('field_data_field_story_configurations', 'fsc');
+  $query1->fields('fsc', array('entity_id'));
+  $query1->condition('fsc.field_story_configurations_value', 'lock_story', 'LIKE');
+  $query1->condition('fsc.entity_id', $nid, '=');
+  $result1 = $query1->execute()->fetchAll();
+  if (!empty($result1)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * function for getmcu8 url of vedio
+ *
+ * @param type $nid
+ *
+ * @return type
+ */
+function itg_mcu8_tags($nid) {
+  //$nid = 17378;
+  $query = db_select('field_data_field_multi_bitrate', 'mvr');
+  $query->fields('mvr', array('field_multi_bitrate_value'));
+  $query->condition('mvr.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $tags = array();
+  if (count($result) > 0) {
+    foreach ($result as $data) {
+      $first_char = strstr($data['field_multi_bitrate_value'], '@', TRUE);
+      if ($first_char == 'B' || $first_char == 'M') {
+        $tags[] = substr(strstr($data['field_multi_bitrate_value'], '@'), 1);
+      }
+    }
+  }
+  return $tags;
+}
+
+/**
+ * Function for remove tags from content
+ * @param string $content
+ * @return string
+ */
+function itg_remove_tags_from_body($content) {
+  $content = strip_tags($content, '<p>');
+  $content = preg_replace('<div(.*?)class="itg-mosimage"(.*?)div>', "", $content);
+  $content = preg_replace('/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s', "", $content);
+  return $content;
+}
+
+/**
+ * Get the internal uploaded video on the Site
+ */
+function itg_internal_video_bitrate_data($video_id) {
+  $data_video_info = itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+    $data_from_solr = itg_xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
+    $video_data = $data_from_solr[0];
+    $video_all_data = json_decode($video_data, TRUE);
+    $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+  }
+  return $player_content;
+}
+
+/**
+ * Implements itg_videogallery_get_all_video_info_by_video_id
+ * @param string $video_id
+ * @param array $result
+ */
+function itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('video_id', $video_id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement itg_videogallery_getsolr_data_for_internal_video
+ * @param string $video_id
+ */
+function itg_xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    $all_video_ids = array();
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'sm_field_video_id'); // Only search in title
+//The bundle which you want to search
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->addFilter("sm_field_video_id", $video_id);
+    $query->setSolrsort('sort_label', 'desc');
+    $resp_search = $query->search();
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      return $all_data[0]->sm_field_all_xml_content;
+    }
+  }
+}
+
+function itg_remove_extra_custom_tags($content) {
+  $content = str_replace('[ITG:FACTOIDS]', '', $content);
+  $content = str_replace('[ITG:LISTICLES]', '', $content);
+  $content = str_replace('[ITG:EXPERT-CHUNK]', '', $content);
+  $content = str_replace('[ITG:TECH-PHOTOS]', '', $content);
+  $content = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $content);
+  $content = stripInvalidXml($content);
+  return $content;
+}
+
+function itg_replace_token_with_data($node_body, $nid) {
+  if (strpos($node_body, '[ITG:LISTICLES]')) {
+    $query = db_select('field_data_field_story_listicle', 'fsl');
+    $query->leftJoin('field_data_field_story_template_guru', 'stg', 'stg.entity_id=fsl.entity_id');
+    $query->condition('fsl.entity_id', array($nid), 'IN');
+    $query->fields('fsl', array('field_story_listicle_value'));
+    $query->fields('stg', array('field_story_template_guru_value'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $listicle_output = '';
+    if (!empty($result) && count($result) > 0) {
+      if (isset($result[0]['field_story_template_guru_value'])) {
+        $listicle_output .= '<span>' . $result[0]['field_story_template_guru_value'] . '</span>';
+      }
+      $buzz_output .= '';
+      $num = 1;
+      $listicle_output .= '<ul>';
+      foreach ($result as $buzz_item) {
+        $listicletype = '';
+        $field_collection_id = $buzz_item['field_story_listicle_value'];
+        $entity = entity_load('field_collection_item', array($field_collection_id));
+        $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+        $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+        $listicle_output .= '<li>' . $listicletype . $description . '</li>';
+        $num++;
+      }
+      $listicle_output .= '</ul>';
+      $node_body = str_replace('[ITG:LISTICLES]', $listicle_output, $node_body);
+    }
+  }
+  return $node_body;
+}
+
+
+function get_highest_bitrate_video_by_nid($nid){
+  $query = db_select('itg_video_transcoding', 'ivt');
+  $query->fields('ivt', array('bitrate'));
+  $query->condition('ivt.nid', $nid, '=');
+  $query->orderBy('ivt.bitrate', 'DESC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+function stripInvalidXml($value) {
+  $ret = "";
+  $current;
+  if (empty($value)) {
+    return $ret;
+  }
+  $length = strlen($value);
+  for ($i = 0; $i < $length; $i++) {
+    $current = ord($value{$i});
+    if (($current == 0x9) ||
+        ($current == 0xA) ||
+        ($current == 0xD) ||
+        (($current >= 0x20) && ($current <= 0xD7FF)) ||
+        (($current >= 0xE000) && ($current <= 0xFFFD)) ||
+        (($current >= 0x10000) && ($current <= 0x10FFFF))) {
+      $ret .= chr($current);
+    }
+    else {
+      $ret .= " ";
+    }
+  }
+  $ret = preg_replace("[^\\x00-\\x7f]", "", $ret);
+  $chr_map = array(
+   // Windows codepage 1252
+   "\xC2\x82" => "'", // U+0082⇒U+201A single low-9 quotation mark
+   "\xC2\x84" => '"', // U+0084⇒U+201E double low-9 quotation mark
+   "\xC2\x8B" => "'", // U+008B⇒U+2039 single left-pointing angle quotation mark
+   "\xC2\x91" => "'", // U+0091⇒U+2018 left single quotation mark
+   "\xC2\x92" => "'", // U+0092⇒U+2019 right single quotation mark
+   "\xC2\x93" => '"', // U+0093⇒U+201C left double quotation mark
+   "\xC2\x94" => '"', // U+0094⇒U+201D right double quotation mark
+   "\xC2\x9B" => "'", // U+009B⇒U+203A single right-pointing angle quotation mark
+
+   "\xC2\xAB"     => '"', // U+00AB left-pointing double angle quotation mark
+   "\xC2\xBB"     => '"', // U+00BB right-pointing double angle quotation mark
+   "\xE2\x80\x98" => "'", // U+2018 left single quotation mark
+   "\xE2\x80\x99" => "'", // U+2019 right single quotation mark
+   "\xE2\x80\x9A" => "'", // U+201A single low-9 quotation mark
+   "\xE2\x80\x9B" => "'", // U+201B single high-reversed-9 quotation mark
+   "\xE2\x80\x9C" => '"', // U+201C left double quotation mark
+   "\xE2\x80\x9D" => '"', // U+201D right double quotation mark
+   "\xE2\x80\x9E" => '"', // U+201E double low-9 quotation mark
+   "\xE2\x80\x9F" => '"', // U+201F double high-reversed-9 quotation mark
+   "\xE2\x80\xB9" => "'", // U+2039 single left-pointing angle quotation mark
+   "\xE2\x80\xBA" => "'", // U+203A single right-pointing angle quotation mark
+);
+$chr = array_keys  ($chr_map); // but: for efficiency you should
+$rpl = array_values($chr_map); // pre-calculate these two arrays
+$ret = str_replace($chr, $rpl, html_entity_decode($ret, ENT_QUOTES, "UTF-8"));
+
+  return $ret;
+}
+
+/**
+ * function for get getIssueCoverImg 
+ * @param type $title
+ * @return string
+ */
+
+ function getIssueCoverImgScribed($title) {
+    $img = "";
+    $img_fid = 0;    
+    if ($title) {        
+        $query = db_select('node', 'n');
+        $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
+        $query->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
+        $query->fields('n', array('nid'));
+        $query->fields('fsli', array('field_issue_large_cover_image_fid'));
+        $query->condition('n.type', 'issue');
+        $query->condition('isuue.field_story_issue_date_value', $title, '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $img_fid = $resvalue['field_issue_large_cover_image_fid'];
+        }
+        $img = completeFilePath($img_fid);
+    }
+    return $img;
+}
+
+/**
+ * function for get getCmsUserByNid_dailyReport
+ * @param int $nid
+ * @return string
+ */
+
+function getCmsUserByNid_dailyReport($nid){
+    $cmsuser = "";
+    if($nid){
+        $query = db_select('node', 'n');
+        $query->join('users', 'u', 'n.uid=u.uid');
+        $query->fields('u', array('name'));
+        $query->condition('n.nid', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $cmsuser = $resvalue['name'];
+        }
+    }
+    return $cmsuser;
+}
+
+/**
+ * Function to remove iframe tag from content.
+ * @param string $content
+ * @return string
+ */
+function remove_iframe_img_tags($content) {
+  $contents = preg_replace('/<img alt="" data-syndication="no"[^>]+\>/i', " ", $content);
+  $story_body = str_replace('<p></p>', '', $contents);
+  $string = preg_replace("/\s+/", " ", $story_body);
+  return preg_replace('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', " ", $string);
 }

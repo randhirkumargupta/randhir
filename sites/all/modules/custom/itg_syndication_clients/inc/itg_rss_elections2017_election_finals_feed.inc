@@ -50,7 +50,10 @@ function itg_genrate_elections2017_election_finals_syndication($section_id = NUL
 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
-
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -87,8 +90,11 @@ function genrate_elections2017_election_finals_xml($result = NULL, $category, $s
     $xml = '<state>';
     $xml .= '<name>' . $category . '</name>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $nid = $value['nid'];
-      $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $value["nid"]);
+      $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value["nid"]);
       $xml_story_file = 'story' . $nid . '.xml';
       $xml .= '<nlink>';
       $xml .= '<news>';
@@ -147,8 +153,10 @@ function genrate_elections2017_election_finals_detail_xml($value, $category, $xm
   $byline = get_byline_name_by_nid($value['nid']);
   $place = get_content_city($value['nid']);
   $body = remove_extra_tag_in_body($value["body_value"]);
+  $body = itg_replace_token_with_data($body, $value['nid']);
+  $body = itg_remove_extra_custom_tags($body);
   $sectionname = get_term_name_by_tid($section_id);
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $value["nid"]);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value["nid"]);
   $courtesy = $value['field_story_courtesy_value'];
   $related = related_content_node_type($value['nid'], 'story');
   $xml_detail = '<Root>';

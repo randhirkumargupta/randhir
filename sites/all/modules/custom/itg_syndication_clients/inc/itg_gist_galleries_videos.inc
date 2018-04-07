@@ -24,16 +24,19 @@ function itg_genrate_gist_photo_syndication() {
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('smi', array('field_story_medium_image_fid'));
   $query->fields('ssi', array('field_story_small_image_fid'));
-
+  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-10 days')));
+  $query->condition('n.created', $days_ago, '>=');
+  
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'photogallery', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 15);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $xml = genrate_gist_photo_syndication_xml($result);
-  $xml_path = 'public://rss-feeds/ver1.0/gist/9b9fdf70/it/galleries/';
+  $xml_path = 'public://rss-feeds/xml_data/gist/it/galleries/';
   $file_path = $xml_path . 'gallery.xml';
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
@@ -53,12 +56,12 @@ function genrate_gist_photo_syndication_xml($result = NULL) {
     $xml_pub_date = date("Y-m-d H:i:s", $result[0]['created']);
     $logo = theme_get_setting('logo');
     $copy_right_yr = date("Y");
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/1208589');
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/1208589');
     $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today | Photos | Exclusive Photo ]]></title>';
     $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA[' . $base_url . '/?utm_source=rss]]></link>';
+    $xml .= '<link><![CDATA[' . FRONT_URL . '/?utm_source=rss]]></link>';
     $xml .= '<lastBuildDate>' . $xml_pub_date . '</lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
@@ -70,7 +73,7 @@ function genrate_gist_photo_syndication_xml($result = NULL) {
 
     foreach ($result as $photo) {
       $nid = $photo['nid'];
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $small_img = get_image_info_by_fid($photo['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($photo['field_story_medium_image_fid']);
       $publish_date = date("D, j M Y H:i:s P", strtotime($photo['field_itg_content_publish_date_value']));

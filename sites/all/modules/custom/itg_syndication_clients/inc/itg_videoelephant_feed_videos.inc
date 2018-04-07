@@ -37,9 +37,17 @@ function itg_genrate_videoelephant_feed_videos_syndication($section_id = NULL, $
     $query->fields('sed', array('field_story_expert_description_value'));
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+    else {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-30 days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

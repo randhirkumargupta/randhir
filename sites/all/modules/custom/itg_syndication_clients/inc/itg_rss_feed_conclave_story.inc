@@ -22,10 +22,16 @@ function itg_rss_conclave_story_syndication() {
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('sli', array('field_story_large_image_fid'));
+  
+  if($days_ago = get_content_fetch_time($sid)){
+    $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+    $query->condition('n.created', $days_ago, '>=');
+  }
+  
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('ti.tid', $sid, '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -56,7 +62,7 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
     $xml .= '<atom:link type="application/rss+xml" rel="self" href="http://feeds.intoday.in/xml/conclave/stories/conclave_story.xml"/>';
     $xml .= '<title>India Today - Jio</title>';
     $xml .= '<link>http://conclave.intoday.in/</link>';
-    $xml .= '<description>Conclave updates from ' . $base_url . ' for Jio </description>';
+    $xml .= '<description>Conclave updates from ' . FRONT_URL . ' for Jio </description>';
     $xml .= '<language>en-gb</language><copyright></copyright><docs>http://conclave.intoday.in/</docs>';
     $xml .= '<image>';
     $xml .= '<title>India Today - Jio</title>';
@@ -64,7 +70,10 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
     $xml .= '<url>' . $logo . '</url>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);

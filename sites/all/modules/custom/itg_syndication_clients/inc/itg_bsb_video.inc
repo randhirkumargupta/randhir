@@ -18,9 +18,8 @@ function itg_bsb_video_syndication() {
  */
 function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
-    $section_name = 'Latest Videos'; //get_terms_name_by_ids(array($section_id));
-//    $section_name = $section_name[0]['name'];
-    $type = array('videogallery');
+    $section_name = 'Latest Videos'; 
+    
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
@@ -35,11 +34,16 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
     $query->fields('pc', array('field_primary_category_value'));
     $query->fields('sc', array('field_story_courtesy_value'));
     $query->fields('sst', array('field_story_source_type_value'));
-
+    
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+    
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -83,8 +87,8 @@ function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $categor
 
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-      $xml .= '<mediumimage><![CDATA[' . $medium_img['imag_url'] . ']]></mediumimage>';
-      $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+      $xml .= '<mediumimage><![CDATA[' . $small_img['imag_url'] . ']]></mediumimage>';
+      $xml .= '<thumbimage><![CDATA[' . $medium_img['imag_url'] . ']]></thumbimage>';
       $xml .= '<url>' . $video_file_name . '</url>';
       $xml .= '<create_date>' . $created_date . '</create_date>';
       $xml .= '<create_datetime>' . $created_datetime . '</create_datetime>';
@@ -118,7 +122,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $title = $result['title'];
   $primary_cat = get_term_name_by_tid($result['field_primary_category_value']);
   $credit = $result['field_story_courtesy_value'];
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
   $created_date = date("Y-m-d", $result['created']);
   $created_datetime = date("Y-m-d\TH:i:sP", $result['created']);
   $is_fav = get_nid_is_favorite($nid);
@@ -143,12 +147,29 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '<mediaid></mediaid><uurl></uurl>';
   $source_type = $result['field_story_source_type_value'];
   $videotag = itg_video_detail_formats($nid, $source_type);
+  $video_size = migrated_video_transcoding($nid);
 
   if (!empty($videotag['migrated'])) { //migrated video
-    $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+    $mp4_url = $data_video['file_url'];
+    $video_xml .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
   }
   elseif (!empty($videotag['dailymotion'])) {
-    $video_xml .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      } elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+    }
+    $inter_video_details = internal_video_bitrate_data($video_id);
+    $video_xml .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
   }
   $video_xml .= "<create_date><![CDATA[" . $created_date . "]]></create_date><create_datetime><![CDATA[" . $created_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $meta_title . "]]></metakeyword><metadescription><![CDATA[" . $meta_description . "]]></metadescription><weburl>" . $content_url . "</weburl>";
 

@@ -25,19 +25,19 @@ function getbsb_client_array() {
     '1206796' => 'it-story-television.xml',
     '1207046' => 'it-story-gossip.xml',
     '1207051' => 'it-story-north.xml',
-    '1207536' => 'it-story-ipl-2013.xml',
-    '1207645' => 'it-story-diary.xml',
-    '1207665' => 'it-story-ground-report.xml',
-    '1207666' => 'it-story-highlights.xml',
-    '1207667' => 'it-story-more-stories.xml',
-    '1207715' => 'it-story-mobile-main.xml',
-    '1208001' => 'it-story-news.xml',
-    '1208185' => 'it-story-uttar-pradesh.xml',
-    '1208365' => 'it-story-gujarat.xml',
-    '1208366' => 'it-story-karnataka.xml',
-    '1208367' => 'it-story-tamilnadu.xml',
-    '1208368' => 'it-story-maharashtra.xml',
-    '1208369' => 'it-story-westbengal.xml',
+    //'1207536' => 'it-story-ipl-2013.xml',
+    //'1207645' => 'it-story-diary.xml',
+    //'1207665' => 'it-story-ground-report.xml',
+    //'1207666' => 'it-story-highlights.xml',
+    //'1207667' => 'it-story-more-stories.xml',
+    //'1207715' => 'it-story-mobile-main.xml',
+    //'1208001' => 'it-story-news.xml',
+    //'1208185' => 'it-story-uttar-pradesh.xml',
+    //'1208365' => 'it-story-gujarat.xml',
+    //'1208366' => 'it-story-karnataka.xml',
+    //'1208367' => 'it-story-tamilnadu.xml',
+    //'1208368' => 'it-story-maharashtra.xml',
+    //'1208369' => 'it-story-westbengal.xml',
   );
   return $story;
 }
@@ -98,11 +98,23 @@ function getindiatoday_yahoo_client_sections() {
 }
 
 /**
+ * Function is used to get Yahoo video tids and File
+ * @return array
+ */
+function itg_indiatoday_yahoo_unionbudget2018_section() {
+  $unionbudget2018 = array(
+    'unionbudget2018.xml' => array(1778508, 1783640, 1783624, 1783641, 1783642, 1783643)
+  );
+  return $unionbudget2018;
+}
+
+/**
  * Function is used to get msn story tids and File
  * @return array
  */
 function getmsn_story_section_array() {
   $msn_story = array(
+    'msn/indiatoday/story-movies.xml' => 1206533,
     'msn/indiatoday/story-travel.xml' => 1206589,
     'msn/indiatoday/story-food.xml' => 1206793,
     'msn/indiatoday/story-lifestyle.xml' => 1206567,
@@ -110,7 +122,7 @@ function getmsn_story_section_array() {
     'msn/indiatoday/latest-news.xml' => 1206578,
     'msn/mailtoday/story-msn-mail-today.xml' => 1206734,
     'msn/indiatoday/story-national.xml' => 1207674,
-    'msn/indiatoday/story-sports.xml' => 1207675,
+    'msn/indiatoday/story-sports.xml' => 1206550,
     'msn/indiatoday/story-states.xml' => 1207676,
     'msn/indiatoday/story-health.xml' => 1207677,
     'msn/indiatoday/story-leisure.xml' => 1207678,
@@ -130,9 +142,13 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-sports.xml' => 1207681,
     'msn/mailtoday/story-states.xml' => 1207682,
     'msn/mailtoday/story-entertainment.xml' => 1207680,
-    'xml_it/stories/fromthemagazine.xml' => 1207044,
-    'xml_it/stories/movies.xml' => 1206533,
-    'msn/mailtoday/story-cricket.xml' => 1208384
+    'msn/mailtoday/story-cricket.xml' => 1208384,
+    'msn/indiatoday/story-world.xml' => 1206577,
+    'msn/indiatoday/story-india.xml' => 1206578,
+    'msn/indiatoday/story-top-stories.xml' => 1206584,
+    'msn/indiatoday/story-technology.xml' => 1206688,
+    'msn/indiatoday/story-auto.xml' => 1206689,
+    'msn/mailtoday/story-education.xml' => 1206666
   );
   return $msn_story;
 }
@@ -154,7 +170,13 @@ function get_cabbytabby_feed_videos_array() {
  */
 function get_ola_feed_videos_array() {
   $cabbytabby_feed_videos = array(
-    '1207580' => 'sosorry.xml'
+    '1207580' => 'sosorry.xml',
+    '1207978' => 'auto_today.xml',
+    '1207304' => 'lifestyle.xml',
+    '1208898' => 'person_of_interest.xml',
+    '1208061' => 'the_long_story.xml',
+    '1208898' => 'person_of_interest.xml',
+    '1207303' => 'movies.xml',
   );
   return $cabbytabby_feed_videos;
 }
@@ -197,6 +219,22 @@ function getproquest_feed_story_client_array() {
 }
 
 /**
+ * Function is used to get Proquest Story tids and File
+ * @return array
+ */
+function getceltick_feed_story_client_array() {
+  $story_sectios = array(
+    '1206578' => 'india.xml',
+    '1206795' => 'fyi.xml',
+    '1206567' => 'lifestyle.xml',
+    '1206533' => 'movies.xml',
+    '1206550' => 'sports.xml',
+    '1206676' => 'cricket.xml'
+  );
+  return $story_sectios;
+}
+
+/**
  * Function is used to get Dailyhunt story tids and File
  * @return array
  */
@@ -207,7 +245,7 @@ function get_dailyhunt_sections_for_feed() {
     '1206600' => 'gossip.xml',
     '1206578' => 'india.xml',
     '1206567' => 'lifestyle.xml',
-    '1206514' => 'magazine.xml',
+    '1206598' => 'magazine.xml',
     '1206572' => 'mailtoday.xml',
     '1206533' => 'movies.xml',
     '1206550' => 'sports.xml',
@@ -345,7 +383,8 @@ function get_hltapps_sections($type) {
         'india.xml' => array('section' => '1206955', 'limit' => 15),
         'world.xml' => array('section' => '1206956', 'limit' => 15),
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
-        'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
+        'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
+        'movies.xml' => array('section' => '1207303', 'limit' => 15)
       );
       break;
     case 'programmes':
@@ -437,4 +476,123 @@ function getelections2016_westbenga_sections() {
   return array(
     1206846 => 'assemblyelections2016-westbengal.xml'
   );
+}
+
+function get_feed_base_url() {
+  return 'http://feeds.intoday.in';
+}
+
+function get_content_fetch_time($section_id) {
+  $time_array = array(
+    '1206577' => 15,
+    '1206533' => 10,
+    '1206552' => 10,
+    '1206550' => 15,
+    '1206566' => 60,
+    '1206567' => 10,
+    '1206572' => 15,
+    '1206574' => 60,
+    '1206578' => 15,
+    '1206640' => 10,
+    '1206584' => 7,
+    '1206638' => 30,
+    '1206723' => 10,
+    '1206666' => 15,
+    '1206670' => 15,
+    '1206674' => 30,
+    '1206676' => 15,
+    '1206687' => 15,
+    '1206688' => 30,
+    '1206689' => 30,
+    '1206719' => 15,
+    '1206733' => 15,
+    '1206955' => 10,
+    '1207045' => 15,
+    '1207048' => 60,
+    '1207049' => 30,
+    '1207051' => 30,
+    '1207084' => 30,
+    '1207085' => 30,
+    '1207086' => 30,
+    '1207113' => 90,
+    '1207303' => 90,
+    '1207440' => 180,
+    '1208296' => 60,
+    '1208365' => 60,
+    '1208559' => 120,
+    '1208561' => 120,
+    '1208589' => 120,
+    '1208598' => 120,
+    '1208618' => 120,
+  );
+  if (isset($time_array[$section_id])) {
+    return $time_array[$section_id];
+  }
+  else {
+    return 730;
+  }
+}
+
+function get_factiva_sections() {
+  return array('1206578' => 'india.xml',
+    '-1' => 'latest-news.xml');
+}
+function get_factiva_sections_v1() {
+  return array(
+      '1206578' => 'india.xml',
+      '1206577' => 'world.xml',
+      '1206795' => 'fyi.xml',
+      '1206567' => 'lifestyle.xml',
+      '1206723' => 'latest-of-the-lot.xml',
+      '1206584' => 'top-stories.xml',
+      '1206572' => 'mail-today.xml',
+      '1206674' => 'home-top.xml',
+      '1206688' => 'technology.xml',
+      '1206689' => 'auto.xml',
+      '1206676' => 'cricket.xml',
+      '1206638' => 'must-read.xml',
+      '1206670' => 'buzz-tool.xml',
+      '1206733' => 'msn-it.xml',
+      '1206735' => 'msn-itt.xml',
+      '1207926' => 'food.xml',
+      '1206589' => 'travel.xml',
+      '1206550' => 'sports.xml',
+      '1206796' => 'television.xml',
+      '1206734' => 'msn-mail-today.xml',
+      );
+}
+
+
+function get_samsung_video_category(){
+  return array(
+    'videolist-featured.json' => 1, 
+    'videolist-popular-now.json' => 1207974, 
+    'videolist-india.json' => 1206955, 
+    'videolist-movie.json' => array(1207303,1207980),
+    'videolist-tech.json' => 1207486, 
+    'videolist-sosorry.json' => 1207580, 
+    'videolist-news-today.json' => 1207797, 
+    'videolist-newsroom.json' => 1207827, 
+    'videolist-to-the-point.json' => 1207722, 
+    'videolist-people-court.json' => 1208900, 
+    'videolist-india-first.json' => 1208095, 
+    'videolist-5ive-live.json' => 1208902, 
+    'videolist-in-the-club.json' => 1208173, 
+    'videolist-first-up.json' => 1207755, 
+    'videolist-sports-today.json' => 1206960, 
+    'videolist-auto-today.json' => 1207978, 
+    'videolist-long-story.json' => 1208061, 
+  );
+}
+/**
+ * 
+ * @param type $str
+ * @return type
+ */
+function badUnicodeparse_clients($str) {
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3")).chr(hexdec("$4"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2")).chr(hexdec("$3"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2"))', $str);
+    $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
+    return $str;
 }

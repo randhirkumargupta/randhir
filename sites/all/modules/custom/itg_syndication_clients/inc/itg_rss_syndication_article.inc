@@ -34,11 +34,14 @@ function itg_rss_syndication_article() {
       $query->fields('synopsis', array('field_story_kicker_text_value'));
     }
     $query->fields('npd', array('field_itg_content_publish_date_value'));
-
+    if($days_ago = get_content_fetch_time($sid)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $sid, '=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -68,12 +71,12 @@ function get_syndication_client_feed_xml($result, $sid, $section_name, $fulltext
     $last_build_date = end($result);
     $last_build_date = date("D, j M Y H:i:s P", strtotime($last_build_date['field_itg_content_publish_date_value']));
     $logo = theme_get_setting('logo');
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
     $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today | ' . $section_name . ']]></title>';
     $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA[ ' . $base_url . ']]></link>';
+    $xml .= '<link><![CDATA[ ' . FRONT_URL . ']]></link>';
     $xml .= '<lastBuildDate>' . $last_build_date . '</lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
@@ -83,13 +86,18 @@ function get_syndication_client_feed_xml($result, $sid, $section_name, $fulltext
     $xml .= '<description>India Today</description>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       if ($fulltext == 1) {
         $body = remove_extra_tag_in_body($value["body_value"]);
+        $body = itg_replace_token_with_data($body, $value['nid']);
+        $body = itg_remove_extra_custom_tags($body);
         $xml .= '<description><![CDATA[' . $body . ']]></description>';
       }
       else {
