@@ -60,12 +60,19 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-
+    //for media content start
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    //for media content end
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
+     //for media content start
+    $query->fields('eli', array('field_story_extra_large_image_fid'));
+    $query->fields('mi', array('field_story_medium_image_fid'));
+    //for media content end
 
     if($days_ago = get_content_fetch_time($section_id)){
       $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
@@ -120,6 +127,36 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
 
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $title = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['title']));
+      
+      ############## prepare media content start ################
+      
+      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);      
+      $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+      $nObject = new stdClass();
+      $nObject->nid = $nid;
+      $author = (array) generateAuthorTagStory($nObject, 1);
+      $a_title= $author['a_title'];
+      $media_cont = "";
+      $media_cont .= '<media:content url="'.$file_ext_large_img_url.'">';
+      $media_cont .= '<media:thumbnail url="'.$file_medium_img_url.'"/>';
+      $media_cont .= '<media:credit>'.$a_title.'</media:credit>';
+      $media_cont .= '<media:title>
+                    <![CDATA[
+                    '.$title.'
+                    ]]>
+                    </media:title>';
+      $media_cont .= '<media:text>
+                    <![CDATA[
+                    '.$kicker_text.'
+                    ]]>
+                    </media:text>';
+      $media_cont .= '<mi:focalRegion/>';
+      $media_cont .= '<mi:hasSyndicationRights>1</mi:hasSyndicationRights>';
+      $media_cont .= '<mi:licenseId>0</mi:licenseId>';
+      $media_cont .= '<mi:licensorName/>';
+      $media_cont .= '</media:content>';
+      
+      ############## prepare media content end ################
 
       $year = date('Y');
       $xml .= '<NewsItem LinkType="normal">';
@@ -163,6 +200,9 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       $xml .= '</NewsComponent>';
       $xml .= '</NewsComponent>';
       $xml .= '</NewsComponent>';
+      //for media content start
+      $xml .= $media_cont;
+      //for media content start
       $xml .= '</NewsItem>';
     }
     $xml .= '</NewsML>';
