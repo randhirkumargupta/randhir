@@ -137,7 +137,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
       $nObject = new stdClass();
       $nObject->nid = $nid;
-      $author = (array) generateAuthorTagStory($nObject, 1);
+      $author = (array) generateAuthorTagStory_syndication($nObject, 1);
       $a_title= $author['a_title'];
       $media_cont = "";
       $media_cont .= '<media:content url="'.$file_ext_large_img_url.'">';
@@ -211,4 +211,26 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
     $xml .= '</NewsML>';
   }
   return $xml;
+}
+
+/**
+ * function for get author list for story
+ * @pram object $node
+ *
+ * @return array
+ */
+function generateAuthorTagStory_syndication($node, $status) {
+  //$byline = itg_common_get_latest_byline($node->nid, $status);
+  $byline_data = itg_get_multi_byline_details($node->nid, $status);
+  $aid = $byline_data[0]['nid'];
+  $a_title = $byline_data[0]['title'];
+  $extra_laarge_file = file_load($byline_data[0]['extra_large_image']);
+  $a_image = file_create_url($extra_laarge_file->uri);
+  $a_twitter_handler = $byline_data[0]['twitter_handle'];
+  $output = array();
+  $output['a_id'] = "$aid";
+  $output['a_title'] = "$a_title";
+  $output['a_image'] = "$a_image";
+  $output['a_twitter_handler'] = "$a_twitter_handler";
+  return $output;
 }
