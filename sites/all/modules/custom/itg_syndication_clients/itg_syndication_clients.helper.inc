@@ -537,6 +537,30 @@ function get_factiva_sections() {
   return array('1206578' => 'india.xml',
     '-1' => 'latest-news.xml');
 }
+function get_factiva_sections_v1() {
+  return array(
+      '1206578' => 'india.xml',
+      '1206577' => 'world.xml',
+      '1206795' => 'fyi.xml',
+      '1206567' => 'lifestyle.xml',
+      '1206723' => 'latest-of-the-lot.xml',
+      '1206584' => 'top-stories.xml',
+      '1206572' => 'mail-today.xml',
+      '1206674' => 'home-top.xml',
+      '1206688' => 'technology.xml',
+      '1206689' => 'auto.xml',
+      '1206676' => 'cricket.xml',
+      '1206638' => 'must-read.xml',
+      '1206670' => 'buzz-tool.xml',
+      '1206733' => 'msn-it.xml',
+      '1206735' => 'msn-itt.xml',
+      '1207926' => 'food.xml',
+      '1206589' => 'travel.xml',
+      '1206550' => 'sports.xml',
+      '1206796' => 'television.xml',
+      '1206734' => 'msn-mail-today.xml',
+      );
+}
 
 
 function get_samsung_video_category(){
