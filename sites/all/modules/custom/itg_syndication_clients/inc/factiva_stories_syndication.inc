@@ -125,8 +125,8 @@ function itg_genrate_factiva_story_syndication_v1($section_id = NULL, $file_name
         $query->fields('npd', array('field_itg_content_publish_date_value'));
         $query->fields('dbody', array('body_value'));
         $query->fields('smi', array('field_story_medium_image_fid'));
-
-        $days_ago = strtotime(date('Y-m-d', strtotime('-200 days')));
+        $interval = itg_app_time_interval($section_id);        
+        $days_ago = strtotime(date('Y-m-d', strtotime('-'.$interval.' days')));
         $query->condition('n.created', $days_ago, '>=');
         $query->condition('ti.tid', $section_id, '=');
         $query->condition('n.status', 1);
