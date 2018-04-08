@@ -314,7 +314,7 @@ function itg_fia_xml_node_feed($query) {
       $desc = str_replace('<br />', '', $desc);
       $desc = str_replace("'", "&#39;", $desc);
       $node_title = str_replace("'", "&#39;", $node->title);
-      $items .= itg_fia_xml_format_rss_item('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+      $items .= itg_fia_xml_format_rss_item('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid);
     }
   }
   global $base_url;
@@ -354,7 +354,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified, $nid) {
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
   $desc = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $desc);
   $title = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $title);
@@ -397,11 +397,13 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "<details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
   $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe><script>var _comscore = _comscore || [ ];_comscore.push({ c1: '2', c2: '8549097', options: { url_append:'comscorekw=fbia' }});(function() {var s = document.createElement('script'), el = document.getElementsByTagName('script')[0];s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';el.parentNode.insertBefore(s, el); })();</script><noscript><img src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' /></noscript></iframe></figure><!-- End comScore Tag -->";
+  $relatednode = itg_fia_related_node($nid);
   $output .= "<address>" . $name . "</address>";
   $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
   $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
   $output .= "</header>";
   $output .= "<div property='content:encoded'>" . $node_body_content . "</div>"; 
+  $output .= $relatednode;
   $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-795349-17', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe>".$comscorecode."</iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
   $output .= "</article>";
   $output .= "</body>";
@@ -437,13 +439,53 @@ function itg_fia_config_form($form, &$form_state) {
 }
 
 /*
- * ITG FIA related node
+ * ITG FIA related node  $relatednode .="";
  */
 function itg_fia_related_node($nid) {
-    $relatednode = "";    
+    $relatednode = "";   
+    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
     if($nid){
-        
-    }    
+        $query = db_select('field_data_field_common_related_content', 'frc');
+        $query->fields('frc', array('field_common_related_content_value'));
+        $query->condition('frc.entity_id', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $node_str = $result[0]['field_common_related_content_value'];
+        // replace enviroment name
+        // stage related node structure: 'IT_1146622|~|IT_849473|~|IT_1146628|~|IT_1146629|~|IT_1146631|~|IT_1146630'
+        $node_str = str_replace("|~|IT_", ",", $node_str);
+        $node_str = str_replace("IT_", "", $node_str);
+
+        $nid_list = explode(",", $node_str);
+        if(count($nid_list) > 0){
+            //related node
+            foreach ($nid_list as $key => $value) {
+                $firebase_url = get_node_firebase_weburl($value);
+                $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
+            }
+        }
+        else{
+            // top story data
+            $rand = rand();
+            $prod_url =  "https://appfeeds.intoday.in";   
+            $url = $prod_url . "/appapi/topstories/" . $rand;
+            $contents = file_get_contents($url);
+            $contents_ar = json_decode($contents);    
+            $data = $contents_ar->data;
+
+            $l_cont = 1;
+            foreach ($data as $key => $value) {
+                $n_share_link = $value->n_share_link;
+                $n_small_image = $value->n_small_image;
+                $n_title = $value->n_title;
+                $relatednode .='<li><a href="'.$n_share_link.'"> </a></li>';
+                if ($l_cont >= 3) {
+                    break;
+                }
+                $l_cont++;
+            }
+        }
+    }  
+    $relatednode .='</ul>';
     return $relatednode;
 }
 
