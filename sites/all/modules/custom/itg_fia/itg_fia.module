@@ -52,3 +52,106 @@ function itg_fia_uninstall() {
   // Delete variables.
   variable_del('itg_fia_config');
 }
+
+/**
+ * Function for adding ad code in fbia
+ * @param string $content
+ * @param type $after_word1
+ * @return string
+ */
+function itg_fia_split_by_words($fullBodaydata, $content_id, $adCode) {  
+  $FinalBodayAds = '';
+  $BodyWithAds = '';
+  $c = 0;
+  $wordcount = 230;
+  $NewString = '';
+  $newIssue = '';
+  $fullBodaydata = str_replace('<', ' <', $fullBodaydata);
+  $fullBodaydata = str_replace('>', '> ', $fullBodaydata);
+  $expVal = explode(" ", $fullBodaydata);
+
+  $withOutHMTLTags = strip_tags($fullBodaydata);
+  $expVlue = explode(" ", $withOutHMTLTags);
+  //echo '<br />TotalCount:'.count($expVlue)."\n<br />".$content_id.'<br>';
+  if (count($expVlue) > $wordcount) {
+    $adFlag = false;
+    $pFlag = false;
+    $adPlaced = false;
+    $wordCounter = 0;
+    foreach ($expVal as $word) {
+      $BodyWithAds .=$word . ' ';
+      if (substr($word, 0, 7) == '<figure') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 3) == '<p>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 4) == '<em>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 5) == '</em>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 8) == '<strong>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 9) == '</strong>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 2) == '<a') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 4) == '</a>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 6) == '<table') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 8) == '</table>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 6) == '<table') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 7) == '<iframe') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 9) == '</iframe>') {
+        $pFlag = false;
+      }
+      if (substr($word, 0, 9) == '</figure>' && $adFlag) {
+        $pFlag = true;
+      }
+
+      if (strip_tags($word) == $word && !$pFlag) {
+        $wordCounter++;
+      }
+      if ($wordCounter >= $wordcount) {
+        $adFlag = true;
+        $pFlag = true;
+      }
+      $newIssue .="\n adplaced=" . $adPlaced . ",wordcounter =" . $wordCounter . ",adflag =" . $adFlag . ", pflag = " . $pFlag . ",contentid =" . $content_id . ",word=" . $word . "\n";
+
+      if (substr($word, 0, 4) == '</p>' && $adFlag && $pFlag) {
+        $BodyWithAds .=$adCode . ' ';
+        $pFlag = false;
+        $adFlag = true;
+        $wordCounter = 0;
+        $adPlaced = true;
+      }
+      else if ($wordCounter < $wordcount && $adFlag == 1 && !$pFlag && !$adPlaced) {
+        $BodyWithAds .=$adCode . ' ';
+        $pFlag = false;
+        $adFlag = true;
+        $wordCounter = 0;
+        $adPlaced = true;
+      }
+    }
+    $FinalBodayAds = $BodyWithAds;
+  }
+  else {
+    $FinalBodayAds = $fullBodaydata . $adCode;
+  }
+
+  return $FinalBodayAds;
+}
