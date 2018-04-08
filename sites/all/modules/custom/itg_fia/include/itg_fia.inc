@@ -396,28 +396,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   // <!-- A kicker for your article -->
   $output .= "<details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
-  $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe>
-                    <script>
-                    var _comscore = _comscore || [ ];
-                    _comscore.push({ c1: '2', c2: '8549097',
-                    options: {
-                    url_append: 'comscorekw=fbia'
-                    }
-                    });
-                    (function() {
-                    var s = document.createElement('script'), el =
-                    document.getElementsByTagName('script')[0]; s.async = true;
-                    s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') +
-                    '.scorecardresearch.com/beacon.js';
-                    el.parentNode.insertBefore(s, el);
-                    })();
-                    </script>
-                    <noscript>
-                    <img
-                    src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' />
-                    </noscript>
-                    </iframe>
-                    </figure><!-- End comScore Tag -->";
+  $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe><script>var _comscore = _comscore || [ ];_comscore.push({ c1: '2', c2: '8549097', options: { url_append:'comscorekw=fbia' }});(function() {var s = document.createElement('script'), el = document.getElementsByTagName('script')[0];s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';el.parentNode.insertBefore(s, el); })();</script><noscript><img src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' /></noscript></iframe></figure><!-- End comScore Tag -->";
   $output .= "<address>" . $name . "</address>";
   $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
   $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
