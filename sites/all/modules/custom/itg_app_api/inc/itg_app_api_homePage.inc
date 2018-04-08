@@ -2836,8 +2836,8 @@ function homePageJsonWidget_2() {
     $n_widget[0]['type'] = "2";
     $n_widget[0]['type_label'] = "scorecard";
     $n_widget[0]['tilte'] = "Scorecard"; 
-    $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_home_v1.html";
-    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/widget_scorecardapp_detail.html";
+    $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_home.html";
+    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
     $n_widget[0]['action'] = "webview"; 
     $n_widget[0]['is_india_match'] = "1";
     
