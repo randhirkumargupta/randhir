@@ -441,7 +441,7 @@ function itg_fia_config_form($form, &$form_state) {
 /*
  * ITG FIA related node  $relatednode .="";
  */
-function itg_fia_related_node($nid) {
+function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
     if($nid){
