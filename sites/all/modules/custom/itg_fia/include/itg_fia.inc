@@ -456,7 +456,7 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
-        if(count($nid_list) > 0){
+        if(count($nid_list) > 1){
             //related node
             foreach ($nid_list as $key => $value) {
                 $firebase_url = get_node_firebase_weburl($value);
