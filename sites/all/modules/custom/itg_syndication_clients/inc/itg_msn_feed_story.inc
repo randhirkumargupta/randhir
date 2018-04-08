@@ -133,8 +133,8 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       
       ############## prepare media content start ################
       
-      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);      
-      $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+      $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);      
+      $file_ext_large_img_url = completeFilePath($value['field_story_extra_large_image_fid']);
       $nObject = new stdClass();
       $nObject->nid = $nid;
       $author = (array) generateAuthorTagStory_syndication($nObject, 1);
