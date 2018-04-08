@@ -75,7 +75,7 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     //for media content end
 
     if($days_ago = get_content_fetch_time($section_id)){
-      $days_ago = 200;
+      $days_ago = 300;
       $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
       $query->condition('n.created', $days_ago, '>=');
     }
@@ -133,8 +133,8 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       
       ############## prepare media content start ################
       
-      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);      
-      $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+      $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);      
+      $file_ext_large_img_url = completeFilePath($value['field_story_extra_large_image_fid']);
       $nObject = new stdClass();
       $nObject->nid = $nid;
       $author = (array) generateAuthorTagStory_syndication($nObject, 1);
