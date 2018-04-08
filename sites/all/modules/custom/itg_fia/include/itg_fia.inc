@@ -416,12 +416,34 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   // <!-- A kicker for your article -->
   $output .= "<details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
+  $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe>
+                    <script>
+                    var _comscore = _comscore || [ ];
+                    _comscore.push({ c1: '2', c2: '8549097',
+                    options: {
+                    url_append: 'comscorekw=fbia'
+                    }
+                    });
+                    (function() {
+                    var s = document.createElement('script'), el =
+                    document.getElementsByTagName('script')[0]; s.async = true;
+                    s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') +
+                    '.scorecardresearch.com/beacon.js';
+                    el.parentNode.insertBefore(s, el);
+                    })();
+                    </script>
+                    <noscript>
+                    <img
+                    src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' />
+                    </noscript>
+                    </iframe>
+                    </figure><!-- End comScore Tag -->";
   $output .= "<address>" . $name . "</address>";
   $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
   $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
   $output .= "</header>";
   $output .= "<div property='content:encoded'>" . $node_body_content . "</div>"; 
-  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-795349-17', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
+  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-795349-17', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe>".$comscorecode."</iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
   $output .= "</article>";
   $output .= "</body>";
   $output .= "</html>";
