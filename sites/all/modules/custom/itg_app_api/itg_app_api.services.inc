@@ -3859,8 +3859,8 @@ function itg_rapid_api_change_password($token) {
     $token = $params['auth_token'];
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
-    if (!drupal_valid_token($token, 'services')) {
-        //if (!$token_val_flag) {
+    //if (!drupal_valid_token($token, 'services')) {
+    if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
@@ -3891,8 +3891,76 @@ function itg_rapid_api_change_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
+        ################logout sart##############
+        $params_logout = array();
+        $params_logout[user_id] = $params['user_id'];
+        $params_logout[auth_token] = $params['auth_token'];
+        $params_logout[device_id] = $params['device_id'];
+        $params_logout[device_type] = $params['device_type'];
+        $url_logout = PARENT_SSO . "/appapisso/log_out";
+        $result = callAPI($method, $url_logout, $params_logout);
+        $user_id = $params['user_id'];
+        $user = user_load_by_name($user_id);
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
+        drupal_save_session($original_session_state);
+        // call custom function to clean token in custom table
+        cleanToken_Rapid($params_logout);
+        ################logout sart##############
+        ###############relogin start ##########
+        $params_login = array();
+        $params_login['user_id'] = $params['user_id'];
+        $params_login['password'] = $params['new_pass'];
+        $params_login['device_id'] = $params['device_id'];
+        $params_login['device_type'] = $params['device_type'];
+        $account = array();
+        $token = "";
+        $url = PARENT_SSO . "/appapisso/login_request";
+        $result = callAPI($method, $url, $params_login);
+        $result_obj = json_decode($result);
+        $uid = 0;
+        $uid = $result_obj->uid;
+        $auth_token = $result_obj->token;
+        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
+
+        if ($uid) {
+            $local_account = localLogin($params_login);
+            $cookie_val = getSmlCookie();
+            $session_id = $cookie_val['session_id'];
+            $session_name = $cookie_val['session_name'];
+            $uid = $local_account->user->uid;
+            $name = $local_account->user->name;
+            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $auth_token = $local_account->token;
+            $is_first_login = 1;
+            if ($field_logged_in_count > 0) {
+                $is_first_login = 0;
+            }
+            if ($auth_token) {
+                $token = $auth_token;
+                // query for insert data into itg_app_device - $action $token
+                $action = 2;
+                $device_id = $params_login['device_id'];
+                $device_type = $params_login['device_type'];
+                db_insert('itg_app_device')->fields(array(
+                    'uid' => $uid,
+                    'device_id' => check_plain($device_id),
+                    'device_type' => check_plain($device_type),
+                    'action' => check_plain($action),
+                    'token' => check_plain($auth_token),
+                ))->execute();
+            }
+        }
+        ###############relogin end ##########
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
+        $data['auth_token'] = "$token";
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";

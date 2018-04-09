@@ -41,18 +41,18 @@ function homePageJson() {
     $itg_rapid_home_sports_json = array();
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
 
-     $data['status_code'] = "1";
+    $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
-    //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    //$data['data'][0] = $homePageJsonWidget_1; // Karnataka Panchayat
-    $data['data'][0] = $data_topstories;     
-    $data['data'][1] = $itg_rapid_home_movies_json;
-    $data['data'][2] = $itg_rapid_home_technology_json;
-    $data['data'][3] = $data_news_india;
-    $data['data'][4] = $itg_rapid_home_sports_json;
-    $data['data'][5] = $data_news_lifestyle;
-    $data['data'][6] = $data_news_world;
-    $data['data'][7] = $data_magazine;
+    $data['data'][0] = $homePageJsonWidget_2;     // scorecard   
+    $data['data'][1] = $data_topstories;  
+    $data['data'][2] = $homePageJsonWidget_1; // CWG       
+    $data['data'][3] = $itg_rapid_home_movies_json;
+    $data['data'][4] = $itg_rapid_home_technology_json;
+    $data['data'][5] = $data_news_india;
+    $data['data'][6] = $itg_rapid_home_sports_json;
+    $data['data'][7] = $data_news_lifestyle;
+    $data['data'][8] = $data_news_world;
+    $data['data'][9] = $data_magazine;
     return $data;
 }
 
@@ -1849,11 +1849,11 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman; 
     
-    $n_widget[0]['type'] = "4";
-    $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "Karnataka Panchayat Special Coverage"; 
-    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/karnataka-panchayat/2018?utm_source=app_store&utm_medium=link&utm_campaign=app_store_referral";
+    $n_widget[0]['type'] = "1";
+    $n_widget[0]['type_label'] = "cwgtally";
+    $n_widget[0]['tilte'] = "CWG 2018 MEDAL TALLY"; 
+    $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_rhs.html";
+    $n_widget[0]['extended_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_page.html";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;

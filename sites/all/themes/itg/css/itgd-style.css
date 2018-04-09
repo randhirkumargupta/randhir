@@ -158,12 +158,18 @@
 .view-front-end-global-search .view-content .itg-search-list .social-share{width: auto;float: left;margin-top: 14px;}
 
 /* election chart */
-
 .election-graph  .statename {text-align: center; background: #e7e7e7; padding: 5px 0; font-size: 20px; font-weight: bold; color: #545454; position: relative; overflow: hidden;}
 .election-graph  .partyname-seats {width: 70%; margin: 0 auto;}
 .election-graph  .partyname-seats table td{font-weight: bold; text-align: center; font-size: 15px; color: #545454; position: relative; padding-top: 20px;}
 .election-graph  .partyname-seats span.partybrand{width: 7px; height: 7px; display: block; position: absolute; top: 10px; left: 50%; border-radius: 100%; transform: translateX(-50%);-webkit-transform: translateX(-50%);}
 .election-graph  .partyname-seats span.winseats{display: block; font-weight: bold;}
+/*score matchcenter Css */
+.page-scorecard-matchcenter #taboola-below-scorecard { margin-top: 20px; }
+
+.page-custom-search h1.page__title {display: none;}
+
+
+
 @media all and (max-width: 700px) {
     .section-news figure img {
         width: 100%
@@ -206,6 +212,9 @@
         height: 170px;
         overflow-y: auto
     }
+
+/* ipl point table RHS Css */
+
 }
 article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info {
     display: block;
@@ -635,7 +644,7 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
 .story-section .description h3{ text-transform: uppercase; font-family:OpenSans-Bold;margin: 10px 0; line-height:28px;}
-.story-section .description h2{font-size: 25px;}
+.story-section .description h2,.story-section .description h4{font-size: 25px;font-family: "Merriweather-Bold"; line-height: 34px; font-weight: 700; }
 .front .watch-right-now-video ul li{padding:13px 0px 13px 0px;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/'; padding: 0 3px;text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration:none;}

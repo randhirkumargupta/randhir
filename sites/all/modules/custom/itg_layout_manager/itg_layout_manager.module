@@ -723,7 +723,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $query->condition('tth.tid', $arg[2]);
     $query->condition('ttd.vid', CATEGORY_MANAGMENT);
     $parent_id = $query->execute()->fetchField();
-    if ($parent_id == 0) {
+    if (TRUE || $parent_id == 0) {
       $tpl_name = get_template_name_by_section_name($arg[2]);
 
       $tid_val = $arg[2]; //section id
@@ -820,4 +820,16 @@ function itg_state_election_map() {
     }
   }
 	return theme('itg_state_election_map', array('widget_data' => $data, 'map_data' => $mapgurl, 'state_name' => $state_name));
+}
+
+/**
+ * get parent of category one level
+ * {@inheritdoc}
+ */
+function get_category_parent_one_level($tid) {
+  $itg_query = db_select('taxonomy_term_hierarchy', 'tth');
+  $itg_query->fields('tth', array('parent'));
+  $itg_query->condition('tth.tid', $tid, '=');
+  $itg_result = $itg_query->execute()->fetchAll();
+  return $itg_result;
 }

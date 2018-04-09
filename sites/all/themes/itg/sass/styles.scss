@@ -784,8 +784,9 @@ header {
 }
 
 #page-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 500;
+    line-height: 35px;
 }
 
 #block-formblock-ask-an-expert {
@@ -2077,9 +2078,11 @@ footer {
 .top-takes-video-container.home-top-takes {
     ul {
         padding-top: 10px;
+        border: 1px solid #ddd;
     }
     .top-takes-list {
         padding: 10px;
+        border:0px;
     }
 }
 

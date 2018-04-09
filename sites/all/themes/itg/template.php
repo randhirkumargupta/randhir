@@ -350,7 +350,7 @@ function itg_preprocess_html(&$vars) {
     $search_str = urldecode($arg[1]);
     $search_str = ucwords(str_replace("-", " ", $search_str));
     $search_str = preg_replace('/\s+/', ' ', $search_str);
-    $vars['head_title'] = "$search_str News, Videos, Photos and Magazines | " . variable_get('site_name');
+    $vars['head_title'] = "$search_str News, Videos, Photos and Magazine Stories | " . variable_get('site_name');
   }
   if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))){
 		$event_nid = itg_event_backend_get_event_node();
@@ -782,23 +782,25 @@ jscode;
  */
 function get_newsroom_screcard_js(){
         return <<<jscode
-		<!-- NEWSROOM SCRIPT -->
+		<!-- Scorecard NEWSROOM SCRIPT -->
 <script type="text/javascript">
-window._taboola = window._taboola || [];
-_taboola.push(
-{article:'auto'}
-);
-!function (e, f, u, i) {
-if (!document.getElementByIdhttps://indiatodaygroup.atlassian.net/images/icons/emoticons/information.png)
-{ e.async = 1; e.src = u; e.id = i; f.parentNode.insertBefore(e, f); }
-}(document.createElement('script'),
-document.getElementsByTagName('script')[0],
-'//cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js',
-'tb_loader_script');
-if(window.performance && typeof window.performance.mark == 'function')
-{window.performance.mark('tbl_ic');}
+  window._taboola = window._taboola || [];
+  _taboola.push({article:'auto'});
+  !function (e, f, u, i) {
+    if (!document.getElementById(i)){
+      e.async = 1;
+      e.src = u;
+      e.id = i;
+      f.parentNode.insertBefore(e, f);
+    }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js',
+  'tb_loader_script');
+  if(window.performance && typeof window.performance.mark == 'function')
+    {window.performance.mark('tbl_ic');}
 </script>
-<!-- END NEWSROOM SCRIPT -->
+<!-- END Scorecard NEWSROOM SCRIPT -->
 jscode;
 
 }
