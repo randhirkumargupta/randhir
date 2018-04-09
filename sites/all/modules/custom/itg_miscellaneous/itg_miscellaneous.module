@@ -218,8 +218,8 @@ function itg_miscellaneous_preprocess_page(&$vars) {
     $search_str = urldecode(arg(1));
     $search_str = ucwords(str_replace("-", " ", $search_str));
     $search_str = preg_replace('/\s+/', ' ', $search_str);
-    $description_topic = "$search_str: Find $search_str news, videos, photos and magazines on India Today. Also get breaking news from all over India and worldwide.";
-    $og_description_topic = "$search_str, $search_str News, $search_str Videos, $search_str Photos, $search_str Images, $search_str Magazines";
+    $description_topic = "$search_str: Find $search_str news, videos, photos and magazine stories on India Today. Also get breaking news from all over India and worldwide.";
+    $og_description_topic = "$search_str, $search_str News, $search_str Videos, $search_str Photos, $search_str Images, $search_str Magazine Stories";
 
     // Prepare meta data.
     $html_head_live = array(
