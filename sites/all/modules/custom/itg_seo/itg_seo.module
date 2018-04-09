@@ -579,6 +579,9 @@ function itg_seo_node_insert($node) {
         $node->path['alias'] = $newpath;
       }
     }
+    if(!empty($node->path['alias']) && $node->path['pathauto'] == 1){
+			$node->path['pathauto'] = 0;
+		}
     //watchdog("seo_insert1", "<pre> ".print_r($node, true)."</pre>");
   }
 }
@@ -604,6 +607,9 @@ function itg_seo_node_presave($node) {
     if ($node->path['pathauto'] == 1) {
       $node->path['alias'] = $node->title;
     }
+    if(!empty($node->path['alias']) && $node->path['pathauto'] == 1){
+			$node->path['pathauto'] = 0;
+		}
   }
 }
 
@@ -663,6 +669,7 @@ function itg_seo_node_update($node) {
       $path = array(
         'source' => "node/{$node->nid}",
         'alias' => $newpath, // Any alias that you want to set.
+        'pid' => $node->path['pid'], 
       );
       path_save($path);
     }
