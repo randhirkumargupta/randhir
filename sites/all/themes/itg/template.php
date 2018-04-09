@@ -335,7 +335,7 @@ function itg_preprocess_html(&$vars) {
     $search_str = urldecode($arg[1]);
     $search_str = ucwords(str_replace("-", " ", $search_str));
     $search_str = preg_replace('/\s+/', ' ', $search_str);
-    $vars['head_title'] = "$search_str News, Videos, Photos and Magazines | " . variable_get('site_name');
+    $vars['head_title'] = "$search_str News, Videos, Photos and Magazine Stories | " . variable_get('site_name');
   }
   if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))) {
     $event_nid = itg_event_backend_get_event_node();
