@@ -68,7 +68,8 @@ function itg_image_path_update_submit($form, &$form_state) {
   $fid = $form_state['values']['itg_fid'];
   $file_name = end(explode('/', $itg_updated_path));
   $file_uri = file_create_url($itg_updated_path);
-
+  
+  /*
   $del_data = db_delete('cache_entity_file')->condition('cid', $fid, '=')
     ->execute();
 
@@ -77,7 +78,7 @@ function itg_image_path_update_submit($form, &$form_state) {
     $del_data1 = db_delete('cache_entity_node')->condition('cid', $nid, '=')
       ->execute();
   }
-
+  */
   $insert_count = db_select('file_managed', 'sr')
     ->fields('sr')
     ->condition('sr.uri', $itg_updated_path)
