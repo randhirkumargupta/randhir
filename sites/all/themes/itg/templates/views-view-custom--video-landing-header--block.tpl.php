@@ -384,6 +384,7 @@ if(!empty($video_node->field_story_reporter)){
 
                       </div>
                   </div>
+                  <?php if($nid == '1134565'){ ?>
                   <div class="taboola desktop-hide">
 										<div id="taboola-below-article-thumbnails"></div>
                   </div>
@@ -396,6 +397,7 @@ if(!empty($video_node->field_story_reporter)){
 											target_type: 'mix'
 										});
 									</script>
+									<?php } ?>
               </div>
               <?php //$row['field_story_expert_description'];                  ?>
               <div class="col-md-4 video-header-right">
