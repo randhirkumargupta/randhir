@@ -75,7 +75,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
   // requested URL, we might end up being unable to check if there is a path
   // alias matching the URL path.
   $path_language = $path_language ? $path_language : $language_url->language;
-var_dump($action, $path, $cache, $path_language);die;
+
   if ($action == 'wipe') {
     $cache = NULL;
   }
@@ -221,6 +221,7 @@ var_dump($action, $path, $cache, $path_language);die;
     // isn't a path that has this alias
     elseif ($action == 'source' && !isset($cache['no_source'][$path_language][$path])) {
       // Look for the value $path within the cached $map
+      
       $source = FALSE;
       if (!isset($cache['map'][$path_language]) || !($source = array_search($path, $cache['map'][$path_language]))) {
         $path_cid = $path_language . ':' . $path;
@@ -250,6 +251,7 @@ var_dump($action, $path, $cache, $path_language);die;
         else {
           $result = db_query("SELECT source FROM {url_alias} WHERE alias = :alias AND language IN (:language, :language_none) ORDER BY language ASC, pid DESC", $args);
         }
+        var_dump($cache, $result, $args);die;
         if ($source = $result->fetchField()) {
           $cache['map'][$path_language][$source] = $path;
           cache_set($path_cid, $source, 'cache_path_source');
