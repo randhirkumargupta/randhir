@@ -384,9 +384,6 @@ if(!empty($video_node->field_story_reporter)){
 
                       </div>
                   </div>
-                  <script>
-										if (jQuery(window).width() < 767) {
-									</script>
                   <div class="taboola desktop-hide">
 										<div id="taboola-below-article-thumbnails"></div>
                   </div>
@@ -398,9 +395,6 @@ if(!empty($video_node->field_story_reporter)){
 											placement: 'Below Article Thumbnails',
 											target_type: 'mix'
 										});
-									</script>
-									<script>
-										}
 									</script>
               </div>
               <?php //$row['field_story_expert_description'];                  ?>
