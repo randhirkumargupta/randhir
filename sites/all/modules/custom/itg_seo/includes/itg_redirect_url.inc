@@ -102,7 +102,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-  //p($_SERVER);
   if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
     $old_url = substr($_SERVER['REQUEST_URI'], 1);	  
     $source_url = redirect_load_by_source($old_url);    
@@ -241,6 +240,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     $newurl = getNewStoryUrl($storyarg, $table);
     if ($newurl) {
       drupal_goto($newurl, array(), 301);
+    } else {
+      $table = 'migrate_map_itgvideogallery';
+      $newurl_n = getNewStoryUrl($storyarg, $table);
+      if ($newurl_n) {
+        drupal_goto($newurl_n, array(), 301);
+      }
     }
   } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp')))) {      
     if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
@@ -305,19 +310,17 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($refurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp' || $arg[1] == 'matchcenter-new.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $matchid = $_GET['matchid'];
-      $paging = array('query' => array('matchid' => $matchid));
-      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
-      drupal_goto($newmatchurl, $paging, 301);
-  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter')) && (!empty($_GET['matchid']))) {  
-      $matchid = $_GET['matchid'];
-      $paging = array('query' => array('matchid' => $matchid));
-      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
-      drupal_goto($newmatchurl, $paging, 301);
-  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter')) && (!empty($_GET['matchid']))) {  
-      $matchid = $_GET['matchid'];
-      $paging = array('query' => array('matchid' => $matchid));
-      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
-      drupal_goto($newmatchurl, $paging, 301);
+      $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
+      drupal_goto($newmatchurl, array(), 301);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && !empty($arg[1]) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {  // Pattern embed/@#trfg
+      $magazine_issue_id = $arg[1];
+      $mag_issue_id = get_new_seccat_by_mig_id($magazine_issue_id,'migrate_map_itgissue');
+      $query = db_select('node', 'n');
+      $query->fields('n', array('title'));  
+      $query->condition('n.nid', $mag_issue_id);
+      $magazine_title = $query->execute()->fetchField();
+      $url = 'magazine/'.format_date(strtotime($magazine_title),'custom', 'd-m-Y');
+      drupal_goto($url, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'comment')) && (!empty($arg[1]) && $arg[1] == 'story') && (!empty($arg[2]) && (is_numeric($arg[2]))) && (!empty($arg[3]) && (is_numeric($arg[3])))) {  // Pattern embed/@#trfg
       $storyid = $arg[3];
       $table = 'migrate_map_itgstorylist';
@@ -360,19 +363,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         drupal_goto($newmatchurl, array(), 301);
       }
   } else if ((!empty($arg[0]) && ($arg[0] == 'gallery')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
-      /*$urlarg = $arg[2];
-      if ($urlarg > 1) {
-        $newmatchurl = $base_url.'/'.$arg[0].'/'.$arg[1].'/1/'.$arg[3];
-        drupal_goto($newmatchurl, array(), 301);
-      }*/
       $storyarg = $arg[3];
       $storyarg_exp = explode('.html', $storyarg);
-	    $old_content_id = $storyarg_exp[0];
+	  $old_content_id = $storyarg_exp[0];
       $table = 'migrate_map_itgphotogallery';
       $newurl = getNewStoryUrl($old_content_id, $table);
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
-      }
+      } 
   } else if ((!empty($arg[0]) && ($arg[0] == 'section')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
       $old_content_id = $arg[1];
       $query_alias = $arg[2];
@@ -655,10 +653,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-     }
-     else if ($arg[0] == 'node' && empty($arg[1])) {
+     } else if (!empty($arg[0]) && $arg[0] == 'category.jsp') {  // http://m.indiatoday.in/category.jsp?id=125&page=1
+        $query_alias = $_GET['page'];
+        $old_content_id = $_GET['id'];
+        $type = 'category';
+        $table = 'migrate_map_itgcategory';
+     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
-    }
+     }
   // Code for url redirection:
   if (!empty($old_content_id)) {
       if ($type == 'category') {
@@ -802,7 +804,6 @@ function get_first_issue_by_year($year){
   $output = $query->execute()->fetchField();
   return $output;
 }
-
 
 /**
  * function of get issue URL
