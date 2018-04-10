@@ -50,7 +50,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
     $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__);
   }
   $cache = &$drupal_static_fast['cache'];
-var_dump($action, $path, $drupal_static_fast);die;
+
   if (!isset($cache)) {
     $cache = array(
       'map' => array(),
@@ -75,7 +75,7 @@ var_dump($action, $path, $drupal_static_fast);die;
   // requested URL, we might end up being unable to check if there is a path
   // alias matching the URL path.
   $path_language = $path_language ? $path_language : $language_url->language;
-
+var_dump($action, $path, $cache, $path_language);die;
   if ($action == 'wipe') {
     $cache = NULL;
   }
