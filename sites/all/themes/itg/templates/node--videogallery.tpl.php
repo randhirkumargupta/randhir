@@ -8,9 +8,6 @@ if (!empty($_GET['preview_log'])) {
 <?php } ?>
 
 <?php print $node->view_output; ?>
-<script>
-	if (jQuery(window).width() > 767) {
-</script>
 <div class="taboola mhide">
 <?php
 if (function_exists('taboola_view')) {
@@ -18,9 +15,6 @@ if (function_exists('taboola_view')) {
 }
 ?>
 </div>
-<script>
-	}
-</script>
 <?php
 // get config value 
 if (!empty($node->field_video_configurations['und'])) {
