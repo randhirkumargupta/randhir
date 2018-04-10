@@ -9,7 +9,7 @@ if (!empty($_GET['preview_log'])) {
 
 <?php print $node->view_output; ?>
 <script>
-	if (jQuery(window).width() < 767) {
+	if (jQuery(window).width() > 767) {
 </script>
 <div class="taboola mhide">
 <?php
