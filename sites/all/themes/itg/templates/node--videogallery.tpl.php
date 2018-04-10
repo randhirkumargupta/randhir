@@ -8,7 +8,7 @@ if (!empty($_GET['preview_log'])) {
 <?php } ?>
 
 <?php print $node->view_output; ?>
-<div class="taboola mhide">
+<div class="taboola mhides">
 <?php
 //~ if (function_exists('taboola_view')) {
   //~ taboola_view();
