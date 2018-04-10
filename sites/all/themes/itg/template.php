@@ -376,6 +376,25 @@ function itg_html_head_alter(&$head_elements) {
   $arg = arg();
   global $base_url;
   
+  if ($arg[0] == 'custom-search') {
+    $head_elements['nofollow'] = array(
+      '#tag' => 'meta',
+      '#type' => 'html_tag',
+      '#attributes' => array(
+        'name' => 'robots',
+        'content' => 'nofollow'
+      )
+    );
+
+    $head_elements['noindex_nofollow'] = array(
+      '#tag' => 'meta',
+      '#type' => 'html_tag',
+      '#attributes' => array(
+        'name' => 'robots',
+        'content' => 'noindex'
+      )
+    );
+  }
   // canonical for home page
   if ($arg[0] == 'node' && is_numeric($arg[1])) {
 		$node_event = menu_get_object();
