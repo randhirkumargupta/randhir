@@ -384,7 +384,9 @@ if(!empty($video_node->field_story_reporter)){
 
                       </div>
                   </div>
-                  <div id="taboola-below-article-thumbnails"  class="taboola desktop-hide"></div>
+                  <div class="taboola desktop-hide">
+										<div id="taboola-below-article-thumbnails"></div>
+                  </div>
 									<script type="text/javascript">
 										window._taboola = window._taboola || [];
 										_taboola.push({
