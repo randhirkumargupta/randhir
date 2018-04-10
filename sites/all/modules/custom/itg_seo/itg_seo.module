@@ -612,8 +612,6 @@ function itg_seo_node_presave($node) {
  * @param object $node
  */
 function itg_seo_node_update($node) {
-	pathcache_clear_cache($node->path);
-	pathcache_clear_cache($node->path['original']);
   //set custom path alias  
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
@@ -782,4 +780,13 @@ function itg_not_found_200() {
   $block = block_load('itg_layout_manager', 'latest_headlines404_block');
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   return theme('itg_not_found_200', array('data' => $render_array));
+}
+
+/**
+ * Implements hook_path_update().
+ */
+function itg_seo_path_update($path) {
+  if(!empty($path['original'])){
+    pathcache_clear_cache($path['original']);
+  }
 }
