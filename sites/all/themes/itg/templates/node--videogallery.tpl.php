@@ -8,12 +8,13 @@ if (!empty($_GET['preview_log'])) {
 <?php } ?>
 
 <?php print $node->view_output; ?>
+<div class="taboola mhide">
 <?php
 if (function_exists('taboola_view')) {
   taboola_view();
 }
 ?>
-
+</div>
 <?php
 // get config value 
 if (!empty($node->field_video_configurations['und'])) {
