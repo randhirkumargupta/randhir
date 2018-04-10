@@ -272,8 +272,6 @@ function itg_seo_node_data($node) {
   }
   // Rich Snippet for Videos Rich Snippet
   elseif ($node->type == 'videogallery') {
-	$mainEntityOfPage = $base_url . '/' . $node->path['alias'];
-	$logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     $video_time = explode(':', $node->field_video_duration[LANGUAGE_NONE][0]['value']);
     $video_duration = t("PT" . $video_time[0] . "M" . $video_time[1] . "S");
     $name = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -285,7 +283,6 @@ function itg_seo_node_data($node) {
       $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
     $createdate = date('Y-m-d\Th:i:s+5:30', $node->created);
-    $modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
     $contenturl = $base_url . '/' . $node->path['alias'];
     //$imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -297,11 +294,7 @@ function itg_seo_node_data($node) {
         {
         "@context": "http://schema.org",
         "@type": "VideoObject",
-        "mainEntityOfPage": "' . $mainEntityOfPage . '",
         "name": "' . $name . '",
-        "headline": "' . $name . '",        
-        "datePublished": "' . $publisheddate . '",
-        "dateModified": "' . $modified_date . '",
           "description":"' . $description . '",
           "thumbnailUrl": "' . $extra_large_image . '",
             "duration":"' . $video_duration . '",
@@ -315,16 +308,6 @@ function itg_seo_node_data($node) {
                         "@type": "PublicationEvent",
                         "startDate": "' . $publisheddate . '"
                         },
-            "publisher": {
-                         "@type": "Organization",
-                         "name": "India Today",
-                         "logo": {
-                         "@type": "ImageObject",
-                         "url": "' . $logo . '",
-                         "width": 600,
-                         "height": 60
-                         }
-                         },
                 "potentialAction": [
                                {
                                  "@type": "ViewAction",
