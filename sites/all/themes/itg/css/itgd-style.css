@@ -141,6 +141,13 @@
     -moz-osx-font-smoothing: grayscale; position: absolute;  color: #fff; bottom: 6px;  right: 6px; background: rgba(0,0,0,.5); padding: 3px 5px;}
 .event-add-header{ padding:10px 0;}
 .page-scorecard-matchcenter #taboola-below-scorecard {margin-top: 20px;}
+/* search page Css */
+.view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .views-field , .view-front-end-global-search .view-content .itg-search-list .search-pic.hide ~ .front-search-date-share{ padding-left: 0px; }
+.view-front-end-global-search .view-content .front-search-date-share{ overflow: hidden; padding-left: 180px; clear: both;}
+.view-front-end-global-search .view-content .front-search-date-share:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.view-front-end-global-search .view-content .itg-search-list .search-detail{ width:auto; float: left; }
+.view-front-end-global-search .view-content .itg-search-list .social-share{width: auto;float: left;margin-top: 14px;}
+
 .page-custom-search h1.page__title {display: none;}
 
 @media all and (max-width: 700px) {
@@ -188,6 +195,7 @@
         height: 170px;
         overflow-y: auto
     }
+    .view-front-end-global-search .view-content .front-search-date-share{ padding-left:154px; }
 }
 article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info {
     display: block;
