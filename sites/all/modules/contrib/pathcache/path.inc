@@ -226,10 +226,10 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
         $path_cid = $path_language . ':' . $path;
 				$cached = cache_get($path_cid, 'cache_path_source');
 				
-				if(empty($cached->data)){
+				if(empty($cached->data)){var_dump('vishalincacheclear');
 						cache_clear_all($path_cid, 'cache_path_source');
 				}
-        if (!empty($cached->data)) {die('in');
+        if (!empty($cached->data)) {var_dump('vishalin');
           if (!empty($cached->data)) {
             $cache['map'][$path_language][$source] = $source =  $cached->data;
           }
