@@ -410,7 +410,7 @@ function itg_seo_get_term_name_by_tid($tid) {
 
 function itg_seo_node_view($node, $view_mode, $langcode) {
   global $base_url;
-  
+  echo "viewmode".$view_mode;
 
   // adding meta description tag if no meta description comes along with node data
    if (!isset($node->metatags[LANGUAGE_NONE]['description'])) {
