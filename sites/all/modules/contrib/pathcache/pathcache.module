@@ -41,6 +41,9 @@ function pathcache_path_insert($path) {
  */
 function pathcache_path_update($path) {
   pathcache_clear_cache($path);
+  if(!empty($path->path['original'])){
+    pathcache_clear_cache($path->path['original']);
+  }
 }
 
 /**
