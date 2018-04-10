@@ -389,13 +389,15 @@ if(!empty($video_node->field_story_reporter)){
 										<div id="taboola-below-article-thumbnails"></div>
                   </div>
 									<script type="text/javascript">
-										window._taboola = window._taboola || [];
-										_taboola.push({
-											mode: 'thumbnails-g',
-											container: 'taboola-below-article-thumbnails',
-											placement: 'Below Article Thumbnails',
-											target_type: 'mix'
-										});
+										if (jQuery(window).width() < 767) {
+											window._taboola = window._taboola || [];
+											_taboola.push({
+												mode: 'thumbnails-g',
+												container: 'taboola-below-article-thumbnails',
+												placement: 'Below Article Thumbnails',
+												target_type: 'mix'
+											});
+										}
 									</script>
 									<?php } ?>
               </div>

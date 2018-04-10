@@ -10,10 +10,42 @@ if (!empty($_GET['preview_log'])) {
 <?php print $node->view_output; ?>
 <div class="taboola mhide">
 <?php
-if (function_exists('taboola_view')) {
-  taboola_view();
-}
+//~ if (function_exists('taboola_view')) {
+  //~ taboola_view();
+//~ }
 ?>
+<div class="taboola">
+   <script type="text/javascript">
+		window._taboola = window._taboola || [];
+		_taboola.push({article:"auto"});
+		!function (e, f, u) {
+		e.async = 1;
+		e.src = u;
+		f.parentNode.insertBefore(e, f);
+		}(document.createElement("script"), document.getElementsByTagName("script")[0], "https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
+		</script>
+		<div class="divclear"></div>
+		<div class="nocontent">
+				<div id="taboola-below-main-column"></div>
+				<script type="text/javascript">
+					if (jQuery(window).width() > 767) {
+						window._taboola = window._taboola || [];
+						_taboola.push({mode: "thumbs-2r", container: "taboola-below-main-column", placement: "below-main-column"});
+				 }
+				</script>
+				<div id="taboola-text-2-columns"></div>
+				<script type="text/javascript">
+					if (jQuery(window).width() > 767) {
+						window._taboola = window._taboola || [];
+						_taboola.push({mode: "hybrid-text-links-2c", container: "taboola-text-2-columns", placement: "text-2-columns", target_type: "mix"});
+					}
+				</script>
+				<script type="text/javascript">
+					window._taboola = window._taboola || [];
+					_taboola.push({flush: true});
+				</script>
+		</div>
+		</div>
 </div>
 <?php
 // get config value 
