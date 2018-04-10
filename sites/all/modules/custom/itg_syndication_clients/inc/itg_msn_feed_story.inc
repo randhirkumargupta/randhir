@@ -107,7 +107,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
   if (!empty($result)) {
     global $base_url;
     $current_date = date("Ymd\THisP");
-    $xml = '<NewsML>';
+    $xml = "<?xml version='1.0' encoding='utf-8'?><NewsML xmlns:media='http://search.yahoo.com/mrss/' xmlns:mi='http://schemas.ingestion.microsoft.com/common/' version='2.0'>";
     $xml .= '<NewsEnvelope>';
     $xml .= '<DateAndTime>' . $current_date . '</DateAndTime>';
     $xml .= '</NewsEnvelope>';
