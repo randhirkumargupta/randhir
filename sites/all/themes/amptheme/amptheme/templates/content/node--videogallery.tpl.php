@@ -16,6 +16,8 @@ if(!empty($node->field_story_reporter)){
   </div> -->
   <?php
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+    $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+    $extra_large_image = file_create_url($thumb_uri);
     if($source_type != 'migrated') { ?>
     <div class="amp-photo-slider">
     <?php
@@ -74,6 +76,7 @@ if(!empty($node->field_story_reporter)){
                        height="200"
                        src="<?php print $video_urls;?>"  
                        layout="responsive"
+                       poster="<?php print $extra_large_image ; ?>"
                        controls>
                        <source type="video/webm" src="<?php print $video_urls;?>">
               </amp-video>
@@ -134,6 +137,7 @@ if(!empty($node->field_story_reporter)){
                        height="200"
                        src="<?php print $video_id;?>"  
                        layout="responsive"
+                       poster="<?php print $extra_large_image ; ?>"
                        controls>
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
