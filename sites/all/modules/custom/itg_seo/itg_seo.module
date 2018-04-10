@@ -781,3 +781,12 @@ function itg_not_found_200() {
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   return theme('itg_not_found_200', array('data' => $render_array));
 }
+
+/**
+ * Implements hook_path_update().
+ */
+function itg_seo_path_update($path) {
+  if(!empty($path['original'])){
+    pathcache_clear_cache($path['original']);
+  }
+}
