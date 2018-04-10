@@ -817,7 +817,7 @@ if (!empty($content)):
                   <?php endif; ?>
     <?php if (!empty($node->field_mega_review_movie_plot)): ?>
                     <div class="plot">
-                      <span class="title"> <?php print t('Plot:'); ?></span>                                    
+                      <span class="title"> <?php print t('Movie Name:'); ?></span>                                    
                       <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
                     </div>
     <?php endif; ?>
