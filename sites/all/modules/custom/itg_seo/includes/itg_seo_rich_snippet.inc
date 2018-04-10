@@ -322,6 +322,7 @@ function itg_seo_node_data($node) {
       $publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
     }
     $createdate = date('Y-m-d\Th:i:s+5:30', $node->created);
+    $modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
     $contenturl = $base_url . '/' . $node->path['alias'];
     //$imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -335,7 +336,9 @@ function itg_seo_node_data($node) {
         "@type": "VideoObject",
         "mainEntityOfPage": "' . $mainEntityOfPage . '",
         "name": "' . $name . '",
-        "headline": "' . $name . '",
+        "headline": "' . $name . '",        
+        "datePublished": "' . $publisheddate . '",
+        "dateModified": "' . $modified_date . '",
           "description":"' . $description . '",
           "thumbnailUrl": "' . $extra_large_image . '",
             "duration":"' . $video_duration . '",
