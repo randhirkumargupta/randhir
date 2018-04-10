@@ -50,7 +50,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
     $drupal_static_fast['cache'] = &drupal_static(__FUNCTION__);
   }
   $cache = &$drupal_static_fast['cache'];
-
+var_dump($action, $path, $drupal_static_fast);die;
   if (!isset($cache)) {
     $cache = array(
       'map' => array(),
