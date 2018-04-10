@@ -226,7 +226,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
         $path_cid = $path_language . ':' . $path;
 				$cached = cache_get($path_cid, 'cache_path_source');
 				
-				if(empty($cached->data) && $_GET['q'] == $path){
+				if(empty($cached->data) && $_GET['q'] == $path){var_dump('vishalincache', $_GET['q']);
 						cache_clear_all($path_cid, 'cache_path_source');
 				}
         if (!empty($cached->data)) {var_dump('vishalin', $_GET['q']);
