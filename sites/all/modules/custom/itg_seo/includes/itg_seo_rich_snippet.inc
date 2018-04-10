@@ -315,12 +315,16 @@ function itg_seo_node_data($node) {
                         "@type": "PublicationEvent",
                         "startDate": "' . $publisheddate . '"
                         },
-            "logo": {
-					 "@type": "ImageObject",
-					 "url": "' . $logo . '",
-					 "width": 600,
-					 "height": 60
-			},
+            "publisher": {
+                         "@type": "Organization",
+                         "name": "India Today",
+                         "logo": {
+                         "@type": "ImageObject",
+                         "url": "' . $logo . '",
+                         "width": 600,
+                         "height": 60
+                         }
+                         },
                 "potentialAction": [
                                {
                                  "@type": "ViewAction",
