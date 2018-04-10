@@ -385,7 +385,7 @@ if(!empty($video_node->field_story_reporter)){
                       </div>
                   </div>
                   <script>
-										if (jQuery(window).width() > 767) {
+										if (jQuery(window).width() < 767) {
 									</script>
                   <div class="taboola desktop-hide">
 										<div id="taboola-below-article-thumbnails"></div>
