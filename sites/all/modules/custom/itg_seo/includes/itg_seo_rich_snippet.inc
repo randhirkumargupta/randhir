@@ -310,6 +310,7 @@ function itg_seo_node_data($node) {
   }
   // Rich Snippet for Videos Rich Snippet
   elseif ($node->type == 'videogallery') {
+	$mainEntityOfPage = $base_url . '/' . $node->path['alias'];
     $video_time = explode(':', $node->field_video_duration[LANGUAGE_NONE][0]['value']);
     $video_duration = t("PT" . $video_time[0] . "M" . $video_time[1] . "S");
     $name = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -332,7 +333,9 @@ function itg_seo_node_data($node) {
         {
         "@context": "http://schema.org",
         "@type": "VideoObject",
+        "mainEntityOfPage": "' . $mainEntityOfPage . '",
         "name": "' . $name . '",
+        "headline": "' . $name . '",
           "description":"' . $description . '",
           "thumbnailUrl": "' . $extra_large_image . '",
             "duration":"' . $video_duration . '",
