@@ -229,7 +229,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
 				if(empty($cached->data)){var_dump('vishalincacheclear');
 						cache_clear_all($path_cid, 'cache_path_source');
 				}
-        if (!empty($cached->data)) {var_dump('vishalin');
+        if (!empty($cached->data)) {var_dump('vishalin', $_GET['q']);
           if (!empty($cached->data)) {
             $cache['map'][$path_language][$source] = $source =  $cached->data;
           }
