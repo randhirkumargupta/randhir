@@ -46,7 +46,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     
     $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button"><i class="fa fa-search"></i></a><a id="reset_button"><i class="fa fa-times"></i></a></div>';
     
-    $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Blog' => 'Blog', 'photogallery' => 'Photos', 'Video' => 'Videos', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
+    /*$bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Blog' => 'Blog', 'photogallery' => 'Photos', 'Video' => 'Videos', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
     $form['bundle_name']['#size'] = 5;
@@ -95,7 +95,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
-    );
+    );*/
   }
 
   // handler for topic serach
