@@ -59,7 +59,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#attributes' => array('readonly' => 'readonly'),
       );
     
-  } else {
+  } elseif($arg[0] != 'file' && $arg[1] != 'ajax') {
     $exist_alexa = check_exist_alexa();
     if($exist_alexa && $exist_alexa >= 2) {
       drupal_set_message('Audio & Video data exist in our system.');
