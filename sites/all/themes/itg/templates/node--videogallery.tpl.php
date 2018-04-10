@@ -17,7 +17,7 @@ if (!empty($_GET['preview_log'])) {
 <div class="taboola">
    <script type="text/javascript">
 		window._taboola = window._taboola || [];
-		_taboola.push({article:"auto"});
+		_taboola.push({video:"auto"});
 		!function (e, f, u) {
 		e.async = 1;
 		e.src = u;
