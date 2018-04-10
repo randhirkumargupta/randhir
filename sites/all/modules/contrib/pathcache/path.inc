@@ -227,6 +227,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
         $path_cid = $path_language . ':' . $path;
 
         if ($cached = cache_get($path_cid, 'cache_path_source')) {
+					var_dump($cached, $path_cid);die;
           if (!empty($cached->data)) {
             $cache['map'][$path_language][$source] = $source =  $cached->data;
           }
@@ -251,7 +252,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
         else {
           $result = db_query("SELECT source FROM {url_alias} WHERE alias = :alias AND language IN (:language, :language_none) ORDER BY language ASC, pid DESC", $args);
         }
-        var_dump($cache, $result, $args);die;
+        
         if ($source = $result->fetchField()) {
           $cache['map'][$path_language][$source] = $path;
           cache_set($path_cid, $source, 'cache_path_source');
