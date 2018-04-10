@@ -180,6 +180,8 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     $old_content_id = $_GET['sId'];
     if (isset($_GET['sid'])) {
       $old_content_id = $_GET['sid'];
+    } else if (isset($_GET['id'])) {
+      $old_content_id = $_GET['id'];
     }
   } else if ((!empty ($arg[0]) && $arg[0] == 'content_Email.jsp') && (!empty($_GET['sid']) && is_numeric($_GET['sid']))) {
     $old_content_id = $_GET['sid'];
