@@ -226,6 +226,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
         $path_cid = $path_language . ':' . $path;
 
         if ($cached = cache_get($path_cid, 'cache_path_source')) {
+					var_dump($path_cid, $cached);die;
           if (!empty($cached->data)) {
             $cache['map'][$path_language][$source] = $source =  $cached->data;
           }
