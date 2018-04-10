@@ -218,8 +218,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $query_alias = $_GET['page'];
       $type = 'category';
       $table = 'migrate_map_itgphoto';
-  } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId']) && ($_GET['catId'])) {  // Pattern Simply?secId=20&catId=17
+  } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId'])) {  // Pattern Simply?secId=20&catId=17
       $old_content_id = $_GET['catId'];
+      if(isset($_GET['amp;catId'])) {
+        $old_content_id = $_GET['amp;catId'];
+      }
       $type = 'category';
       $table = 'migrate_map_itgcategory';
   } else if(!empty($arg[0]) && (!empty($arg[1]) && $arg[1] == 'category') && !empty($arg[2]) && (!empty($arg[3]) && is_numeric($arg[3])) && (!empty($arg[4]) && (strpos($arg[4], 'html')))) { // Pattern http://indiatoday.intoday.in/auto/category/cars/1/1186.html
