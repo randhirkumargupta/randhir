@@ -1048,3 +1048,16 @@ if ($theme != 'itgadmin') {
         <p><?php print t('Your Account Activated Successfully!'); ?></p>
     </div>
 </div>
+<style type="text/css">
+  .crosscloseif{position: absolute;top: 28px;right: 17px;color: #fff;font-size: 12px;font-family: arial;height: 20px;width: 20px;text-align: center;cursor: pointer;
+  z-index: 99;background: #000;line-height: 20px;border-radius: 100%;}
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+   $(".crosscloseif").click(function(){
+    $("#twisstiframe").fadeOut(500)
+    $(this).fadeOut(500); 
+   })  
+ })
+</script>
+<div id="twister" style="position: fixed;right: 0px;bottom: -8px;z-index: 99999;"><span class="crosscloseif">X</span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
