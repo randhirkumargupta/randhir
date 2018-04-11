@@ -15,7 +15,13 @@
  * @param string $form_id
  */
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'alexa_audio_clips_node_form') {    
+  if ($form_id == 'alexa_audio_clips_node_form') {
+    $curent_feed = get_last_alexa_feed();
+    $exist_nid = $curent_feed[0]['nid'];
+    if ($exist_nid) {
+      drupal_set_message('Audio & Video data exist in our system.');
+      drupal_goto('alexa-audio-clips');
+    }    
     $arg = arg();
     if (is_array($arg) && $arg[2] == 'edit') {
       $node = node_load($arg[1]);
@@ -107,6 +113,20 @@ function genrate_alexa_audio_json($value) {
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
   $file_obj = file_load($audiofid);
   $stream_url = file_create_url($file_obj->uri);
+  $json = array(
+    'uid' => 'itaudiofeed' . $uid,
+    'updateDate' => $date,
+    'titleText' => $title,
+    'mainText' => "",
+    'streamUrl' => $stream_url,
+    'redirectionUrl' => FRONT_URL
+  );
+  $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
+  $file_path = $xml_path . 'it_audioclip50_time.json';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, json_encode($json));
+  fclose($fp);
+  // for video
   $videofid = $value['field_alexa_video']['und'][0]['fid'];
   $file_video_obj = file_load($videofid);
   $video_url = file_create_url($file_video_obj->uri);
@@ -119,12 +139,6 @@ function genrate_alexa_audio_json($value) {
     'videoUrl' => $video_url,
     'redirectionUrl' => FRONT_URL
   );
-  $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
-  $file_path = $xml_path . 'it_audioclip50_time.json';
-  $fp = fopen($file_path, "w");
-  fwrite($fp, json_encode($json));
-  fclose($fp);
-  // for video
   $video_file_path = $xml_path . 'it_audioclip50_time_video.json';
   $fpv = fopen($video_file_path, "w");
   fwrite($fpv, json_encode($json));
@@ -192,3 +206,16 @@ XML;
   fclose($fp);
 }
 
+/**
+ * Function is for to get latest insert alexa clip
+ * @return array $result
+ */
+function get_last_alexa_feed() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title', 'created'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', "alexa_audio_clips", '=');
+  $query->orderBy('n.created', 'DESC')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
