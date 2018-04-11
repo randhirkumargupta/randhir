@@ -161,7 +161,7 @@
                             $('#display_tit').show();
                         }
 
-                        if (block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election') {
+                        if (block_name == 'itg-block-4' && splitewidgitname[0] == 'highlights' && template_name == 'page--special_election' || template_name == 'page--special_electioncat') {
                             $('.highlights-title').html(category_name_tab);
                             $('#display_tit').show();
                         }
