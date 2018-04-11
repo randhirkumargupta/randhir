@@ -70,7 +70,7 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $issue_title_n = "[India Today Magazine - ".$issue_title;
+    $issue_title_n = "India Today Magazine - ".$issue_title;
     $issue_identifier = $issue_title;
     //$issue_cover_image = getIssueCoverImgScribed($issue_title);
     $issue_cover_image = completeFilePath($field_issue_large_cover_image_fid);
