@@ -27,7 +27,7 @@ function itg_manage_score_card() {
     $query = db_select('itg_score_card', 'm');
     $query->condition('m.id', $action, '=');
     # get the desired fields from the database
-    $query->fields('m', array('id', 'score_section', 'score_description', 'score_story', 'score_photo', 'score_video', 'score_status'));
+    $query->fields('m', array('id', 'score_section', 'score_description', 'score_story', 'score_photo', 'score_video', 'score_status','score_triangle'));
     # execute the query
     $results = $query->execute()->fetchObject();
   }
@@ -70,7 +70,15 @@ function itg_manage_score_card() {
     '#default_value' => ($results->score_description) ? $results->score_description : '',
     '#required' => TRUE
   );
-
+  
+  $form['score_triangle'] = array(
+    '#type' => 'radios',
+    '#title' => t('Score Triangle'),
+    '#options' => array(1 => "Active", 2 => "Inactive"),
+    '#default_value' => ($results->score_triangle) ? $results->score_triangle : 1,
+    '#required' => TRUE
+  );
+  
   $form['score_action'] = array(
     '#type' => 'hidden',
     '#value' => $action,
@@ -103,6 +111,7 @@ function itg_manage_score_card_submit($form, &$form_state) {
   $score_photo = $form_state['values']['score_photo'];
   $score_video = $form_state['values']['score_video'];
   $score_status = $form_state['values']['score_status'];
+  $score_triangle = $form_state['values']['score_triangle'];
   $score_action = $form_state['input']['score_action'];
 
 
@@ -115,6 +124,7 @@ function itg_manage_score_card_submit($form, &$form_state) {
           'score_photo' => $score_photo,
           'score_video' => $score_video,
           'score_status' => $score_status,
+          'score_triangle' => $score_triangle,
         ))
         ->condition('id', $score_action, '=')
         ->execute();
@@ -128,7 +138,8 @@ function itg_manage_score_card_submit($form, &$form_state) {
           'score_story' => $score_story,
           'score_photo' => $score_photo,
           'score_video' => $score_video,
-          'score_status' => $score_status
+          'score_status' => $score_status,
+          'score_triangle' => $score_triangle,
         ))
         ->execute();
     drupal_set_message(t('The form has been submitted'));
@@ -166,7 +177,7 @@ function itg_manage_score_list() {
   global $base_url;
   $build = array();
   $query = db_select('itg_score_card', 's')->extend('PagerDefault');
-  $query->fields('s', array('id', 'score_story', 'score_photo', 'score_video', 'score_status'))
+  $query->fields('s', array('id', 'score_story', 'score_photo', 'score_video', 'score_status', 'score_triangle'))
       ->orderBy('id', 'DESC')
       ->limit(10);
 
@@ -178,7 +189,8 @@ function itg_manage_score_list() {
     '3' => array('data' => t('Score photo'), 'sort' => 'desc'),
     '4' => array('data' => t('Score video'), 'sort' => 'desc'),
     '5' => array('data' => t('Score Status'), 'sort' => 'desc'),
-    '6' => t('Action'),
+    '6' => array('data' => t('Score Triangle'), 'sort' => 'desc'),
+    '7' => t('Action'),
   );
   # build the table fields
   $rows = array();
@@ -196,12 +208,19 @@ function itg_manage_score_list() {
       elseif ($row->score_status == 2) {
         $status = 'Inactive';
       }
+      if ($row->score_triangle == 1) {
+        $status = 'Active';
+      }
+      elseif ($row->score_triangle == 2) {
+        $status = 'Inactive';
+      }
       $action = l(t('Edit'), 'manage-score-card/edit/' . $score_id, array('query' => array('destination' => 'manage-score-list')));
       $rows[] = array($i,
         $score_story,
         $score_photo,
         $score_video,
         $status,
+        $score_triangle,
         $action
       );
       $i++;
