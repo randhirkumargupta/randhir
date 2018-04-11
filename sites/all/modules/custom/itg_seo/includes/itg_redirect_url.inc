@@ -102,7 +102,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-  //p($_SERVER);
   if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
     $old_url = substr($_SERVER['REQUEST_URI'], 1);	  
     $source_url = redirect_load_by_source($old_url);    
@@ -177,8 +176,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $rss_url = '';
   $query_alias = '';
   $paging = array();
-  if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
+  if (($arg[0] == 'story.jsp' || $arg[1] == 'story.jsp') && (!empty($_GET['sId']) || !empty($_GET['sid']) || !empty($_GET['id']))) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
+    if (isset($_GET['sid'])) {
+      $old_content_id = $_GET['sid'];
+    } else if (isset($_GET['id'])) {
+      $old_content_id = $_GET['id'];
+    }
   } else if ((!empty ($arg[0]) && $arg[0] == 'content_Email.jsp') && (!empty($_GET['sid']) && is_numeric($_GET['sid']))) {
     $old_content_id = $_GET['sid'];
   } else if ((!empty ($arg[0]) && $arg[0] == 'articlePrint.jsp') && (!empty($_GET['aid']) && is_numeric($_GET['aid']))) {
@@ -214,8 +218,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $query_alias = $_GET['page'];
       $type = 'category';
       $table = 'migrate_map_itgphoto';
-  } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId']) && ($_GET['catId'])) {  // Pattern Simply?secId=20&catId=17
+  } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId'])) {  // Pattern Simply?secId=20&catId=17
       $old_content_id = $_GET['catId'];
+      if(isset($_GET['amp;catId'])) {
+        $old_content_id = $_GET['amp;catId'];
+      }
       $type = 'category';
       $table = 'migrate_map_itgcategory';
   } else if(!empty($arg[0]) && (!empty($arg[1]) && $arg[1] == 'category') && !empty($arg[2]) && (!empty($arg[3]) && is_numeric($arg[3])) && (!empty($arg[4]) && (strpos($arg[4], 'html')))) { // Pattern http://indiatoday.intoday.in/auto/category/cars/1/1186.html
@@ -366,7 +373,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   } else if ((!empty($arg[0]) && ($arg[0] == 'gallery')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
       $storyarg = $arg[3];
       $storyarg_exp = explode('.html', $storyarg);
-	  $old_content_id = $storyarg_exp[0];
+	    $old_content_id = $storyarg_exp[0];
       $table = 'migrate_map_itgphotogallery';
       $newurl = getNewStoryUrl($old_content_id, $table);
       if ($newurl) {
@@ -654,9 +661,34 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-     } else if ($arg[0] == 'node' && empty($arg[1])) {
-      drupal_goto(FRONT_URL);
-     }
+      } else if (!empty($arg[0]) && $arg[0] == 'category.jsp') {  // http://m.indiatoday.in/category.jsp?id=125&page=1
+        $query_alias = $_GET['page'];
+        $old_content_id = $_GET['id'];
+        $type = 'category';
+        $table = 'migrate_map_itgcategory';
+     } else if ((!empty($arg[0]) && ($arg[0] == 'gallery.jsp'))) {  // Pattern gallery.jsp?id=13789&page=1
+        $old_content_id = $_GET['id'];
+        $table = 'migrate_map_itgphotogallery';
+        $newurl = getNewStoryUrl($old_content_id, $table);
+        if ($newurl) {
+          drupal_goto($newurl, array(), 301);
+        } 
+      } else if ((!empty($arg[0]) && ($arg[0] == 'section.jsp' || $arg[1] == 'section.jsp'))) {
+        $old_content_id = $_GET['secid'];
+        if ($arg[0] == 'section.jsp') {
+          $old_content_id = $_GET['id'];
+        }
+        $query_alias = 0;
+        $type = 'category';
+        $table = 'migrate_map_itgsection';
+      } else if ((!empty($arg[0]) && ($arg[0] == 'subsection.jsp' || $arg[1] == 'subsection.jsp'))) {
+        $old_content_id = $_GET['catId'];
+        $query_alias = 0;
+        $type = 'category';
+        $table = 'migrate_map_itgcategory';
+      } else if ($arg[0] == 'node' && empty($arg[1])) {
+        drupal_goto(FRONT_URL);
+      }
   // Code for url redirection:
   if (!empty($old_content_id)) {
       if ($type == 'category') {
