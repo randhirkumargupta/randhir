@@ -17,112 +17,106 @@ function homePageJson() {
     $data_topstories = array();
     $data_news = array();
     $data_magazine = array();
-    $order  = "1";
+    $order = "1";
     $data_cat_news = array();
     $data_poll = array();
     $data_topstories = array();
     $data_middleware = array();
     $total_count = 0;
-    
+
     $middleware_packages_config = fetchMasterConfigData('packages_config_options');
-    if($middleware_packages_config == 1){
-      $data_middleware = home_page_packages();
-     
-      $total_count += count($data_middleware);
+    if ($middleware_packages_config == 1) {
+        $data_middleware = home_page_packages();
+
+        $total_count += count($data_middleware);
     }
-    
+
     $middleware_topstories_config = fetchMasterConfigData('top_stories_config_options');
-    if($middleware_topstories_config == 1){ //enable
-       $limit = fetchMasterConfigData('top_stories_management');
-       $data_topstories = topstoriesList('home', $limit);
-       $total_count += count($data_topstories);
+    if ($middleware_topstories_config == 1) { //enable
+        $limit = fetchMasterConfigData('top_stories_management');
+        $data_topstories = topstoriesList('home', $limit);
+        $total_count += count($data_topstories);
     }
-   
+
     $middleware_cat_config = fetchMasterConfigData('categories_config_options');
-    if($middleware_cat_config == 1){ //enable
-      $data_cat_news= home_page_newslist_cat();
-     // echo count($data_cat_news);die();
-      $total_count += count($data_cat_news);
+    if ($middleware_cat_config == 1) { //enable
+        $data_cat_news = home_page_newslist_cat();
+        
+        $total_count += count($data_cat_news);
     }
-    
-    $middleware_magazine_config = fetchMasterConfigData('magazine_config_options');    
-    if($middleware_magazine_config == 1){ //enable
-      $data_magazine = homePageJsonMagazine();
-      $total_count += count($data_magazine);
-    }
-    elseif($middleware_magazine_config == 2){
+
+    $middleware_magazine_config = fetchMasterConfigData('magazine_config_options');
+    if ($middleware_magazine_config == 1) { //enable
+        $data_magazine = homePageJsonMagazine();
+        $total_count += count($data_magazine);
+    } elseif ($middleware_magazine_config == 2) {
         $data_magazine = homePageJsonMagazine('direct');
         $total_count += count($data_magazine);
     }
-    
+
     $middleware_polls_config = fetchMasterConfigData('polls_config_options');
-    if($middleware_polls_config == 1){ //enable
-      $data_poll = homePageJsonPoll();
-      $total_count += count($data_poll);
+    if ($middleware_polls_config == 1) { //enable
+        $data_poll = homePageJsonPoll();
+        $total_count += count($data_poll);
     }
-    
+
     $success_status_mess = fetchMasterConfigData('homePage_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
-    if($total_count > 0){
-      $data['status_code'] = "1";
-      $data['status_message'] = "$success_status_message";
-      $data_final['status_code'] = "1";
-      $data_final['status_message'] = "$success_status_message";
-    }else{
-      $data['status_code'] = "0";
-      $data['status_message'] = "";
-      $data_final['status_code'] = "0";
-      $data_final['status_message'] = "";
+
+    if ($total_count > 0) {
+        $data['status_code'] = "1";
+        $data['status_message'] = "$success_status_message";
+        $data_final['status_code'] = "1";
+        $data_final['status_message'] = "$success_status_message";
+    } else {
+        $data['status_code'] = "0";
+        $data['status_message'] = "";
+        $data_final['status_code'] = "0";
+        $data_final['status_message'] = "";
     }
-    
-    $i= 0;
+
+    $i = 0;
     $homeapi_order_packages = fetchitg_app_master_config_internal('homeapi_order_packages');
     $homeapi_order_topstories = fetchitg_app_master_config_internal('homeapi_order_topstories');
     $homeapi_order_categories = fetchitg_app_master_config_internal('homeapi_order_categories');
     $homeapi_order_magazines = fetchitg_app_master_config_internal('homeapi_order_magazines');
-    $homeapi_order_polls = fetchitg_app_master_config_internal('homeapi_order_polls');  
-    
-    if(count($data_middleware) > 0){
-      $data['data'][$homeapi_order_packages] = $data_middleware;
-      $i++;
+    $homeapi_order_polls = fetchitg_app_master_config_internal('homeapi_order_polls');
+
+    if (count($data_middleware) > 0) {
+        $data['data'][$homeapi_order_packages] = $data_middleware;
+        $i++;
+    } else {
+        unset($data['data'][$homeapi_order_packages]);
     }
-    else{
-      unset($data['data'][$homeapi_order_packages]);  
+
+    if (count($data_topstories) > 0) {
+        $data['data'][$homeapi_order_topstories] = $data_topstories;
+        $i++;
+    } else {
+        unset($data['data'][$homeapi_order_topstories]);
     }
-    
-    if(count($data_topstories) > 0){
-      $data['data'][$homeapi_order_topstories] = $data_topstories;
-      $i++;
+    if (count($data_cat_news) > 0) {
+
+        $data['data'][$homeapi_order_categories] = $data_cat_news;
+        $i++;
+    } else {
+        unset($data['data'][$homeapi_order_categories]);
     }
-    else{
-      unset($data['data'][$homeapi_order_topstories]);  
+    if (count($data_magazine) > 0) {
+        $data['data'][$homeapi_order_magazines] = $data_magazine;
+        $i++;
+    } else {
+        unset($data['data'][$homeapi_order_magazines]);
     }
-    if(count($data_cat_news) > 0){
-        
-      $data['data'][$homeapi_order_categories] = $data_cat_news;
-      $i++;
-    }
-    else{
-      unset($data['data'][$homeapi_order_categories]);  
-    }
-    if(count($data_magazine) > 0){
-      $data['data'][$homeapi_order_magazines] = $data_magazine;
-      $i++;
-    }
-    else{
-      unset($data['data'][$homeapi_order_magazines]);  
-    }
-    if(count($data_poll) > 0){
-      $data['data'][$homeapi_order_polls] = $data_poll;
-      $i++;
-    }
-    else{
-      unset($data['data'][$homeapi_order_polls]);  
+    if (count($data_poll) > 0) {
+        $data['data'][$homeapi_order_polls] = $data_poll;
+        $i++;
+    } else {
+        unset($data['data'][$homeapi_order_polls]);
     }
     /* widget calling start */
     $middleware_packages_config = fetchMasterConfigData('widget_config_options');
-    if($middleware_packages_config){
+    if ($middleware_packages_config) {
         $query_w = db_select('itg_app_middleware', 'iam');
         $query_w->fields('iam');
         $query_w->condition('iam.identifier', 'itg_widget', '=');
@@ -132,61 +126,58 @@ function homePageJson() {
         foreach ($result_w as $reskey => $resvalue) {
             $name = $resvalue['name'];
             $widget = fetch_widget_config($name);
-            if($widget['status'] == 1){
+            if ($widget['status'] == 1) {
                 $widget_data = itg_rv_widget_data($widget);
-                //p($widget_data);
-                $widget_order = fetchitg_app_master_config_internal('homeapi_order_widget_'.$name.'');
+                
+                $widget_order = fetchitg_app_master_config_internal('homeapi_order_widget_' . $name . '');
 
                 $data['data'][$widget_order] = (array) $widget_data;
-
             }
         }
     }
-    //p($data['data']);
-   $array_key = array_keys($data['data']);
- 
+    
+    $array_key = array_keys($data['data']);
+
     $active_chunk_c = count($data['data']);
     $data_live = array();
-    for($i = 0; $i < $active_chunk_c ; $i++){
+    for ($i = 0; $i < $active_chunk_c; $i++) {
         $min_key = min($array_key);
-        if(count($data['data'][$min_key]) > 1 || isset($data['data'][$min_key][0]['id'])){
-           //p($data['data'][$i]);
-        $data_live[$i] = $data['data'][$min_key];  
-        unset($data['data'][$min_key]);
-        
-        foreach ($array_key as $key => $value) {
-            if($value == $min_key){
-                unset($array_key[$key]);
+        if (count($data['data'][$min_key]) > 1 || isset($data['data'][$min_key][0]['id'])) {
+           
+            $data_live[$i] = $data['data'][$min_key];
+            unset($data['data'][$min_key]);
+
+            foreach ($array_key as $key => $value) {
+                if ($value == $min_key) {
+                    unset($array_key[$key]);
+                }
             }
-        }
         }
     }
-    
+
     $data['data'] = $data_live;
-    
+
     $lc = 0;
     foreach ($data['data'] as $key => $value) {
-        if(count($value[0]) > 0){            
+        if (count($value[0]) > 0) {
             foreach ($value as $key2 => $value2) {
-                $order_v = $lc +1;
+                $order_v = $lc + 1;
                 $value2['order'] = "$order_v";
                 $data_final['data'][$lc] = $value2;
-                 $lc ++;
+                $lc ++;
             }
-        }
-        else{
-            $order_v = $lc +1;
+        } else {
+            $order_v = $lc + 1;
             $value['order'] = "$order_v";
             $data_final['data'][$lc] = $value;
             $lc ++;
         }
-        
     }
-    if(count($data) == 2){
-      $data['data'] = array();
-      $data_final['data'] = array();
+    if (count($data) == 2) {
+        $data['data'] = array();
+        $data_final['data'] = array();
     }
-    
+
     return $data_final;
 }
 
@@ -195,12 +186,12 @@ function homePageJson() {
  * @return type
  */
 function homepage_topstories() {
-  $top_story_list = array();
-  $top_story_data = fetchMasterConfigData('top_stories_management');
-  $top_story_limit = isset($top_story_data) ? $top_story_data : '10';
-  
-  $top_story_list = homePageJsonTopstories($top_story_limit);
-  return $top_story_list;
+    $top_story_list = array();
+    $top_story_data = fetchMasterConfigData('top_stories_management');
+    $top_story_limit = isset($top_story_data) ? $top_story_data : '10';
+
+    $top_story_list = homePageJsonTopstories($top_story_limit);
+    return $top_story_list;
 }
 
 /**
@@ -208,24 +199,24 @@ function homepage_topstories() {
  * @return type
  */
 function home_page_newslist_cat() {
-  $query = db_select('itg_app_middleware', 'am');
-  $query->innerJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
-  $query->fields('am', array('ids'));
-  $query->condition('am.identifier','categories_options');
-  $query->condition('am.ids','0','!=');
-  $query->condition('mci.info_type','categories','=');
-  $query->condition('mci.info_key','order','=');
-  $query->orderBy('mci.info_value', 'ASC');
-  $query->groupBy('am.ids');
-  $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-//p($query_results);
-  $cat_news_list = array();
-  foreach ($query_results as $tid) {
-    $cat_news_list[] = homePageCatNewslist($tid['ids']);
-  }
-  
-  return $cat_news_list;
-  //p($list_arr);
+    $query = db_select('itg_app_middleware', 'am');
+    $query->innerJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
+    $query->fields('am', array('ids'));
+    $query->condition('am.identifier', 'categories_options');
+    $query->condition('am.ids', '0', '!=');
+    $query->condition('mci.info_type', 'categories', '=');
+    $query->condition('mci.info_key', 'order', '=');
+    $query->orderBy('mci.info_value', 'ASC');
+    $query->groupBy('am.ids');
+    $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    $cat_news_list = array();
+    foreach ($query_results as $tid) {
+        $cat_news_list[] = homePageCatNewslist($tid['ids']);
+    }
+
+    return $cat_news_list;
+    
 }
 
 /**
@@ -233,24 +224,24 @@ function home_page_newslist_cat() {
  * @return type
  */
 function home_page_magazine_node_list() {
-  $mag_news_list = array();
-  
-  $query = db_select('itg_app_middleware', 'am');
-  $query->leftJoin('itg_app_master_info_internal', 'mii', 'mii.org_id=am.ids');
-  $query->fields('am', array('ids'));
-  $query->condition('am.identifier','magazine_options');
-  $query->condition('am.ids','0','!=');
-  $query->condition('mii.info_type','magazine','=');
-  $query->orderBy('mii.info_value', 'ASC');  
-  $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
-  
-  foreach ($result_query as $result_data){
-     
-    $mag_news_list[] = $result_data['ids'];
-  }
-  
-  return $mag_news_list;
+    $mag_news_list = array();
+
+    $query = db_select('itg_app_middleware', 'am');
+    $query->leftJoin('itg_app_master_info_internal', 'mii', 'mii.org_id=am.ids');
+    $query->fields('am', array('ids'));
+    $query->condition('am.identifier', 'magazine_options');
+    $query->condition('am.ids', '0', '!=');
+    $query->condition('mii.info_type', 'magazine', '=');
+    $query->orderBy('mii.info_value', 'ASC');
+    $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+
+    foreach ($result_query as $result_data) {
+
+        $mag_news_list[] = $result_data['ids'];
+    }
+
+    return $mag_news_list;
 }
 
 /**
@@ -258,18 +249,18 @@ function home_page_magazine_node_list() {
  * @return type
  */
 function home_page_polls_node_list() {
-  $polls_node_list = array();
-  
-  $query = db_select('itg_app_middleware', 'am');
-  $query->fields('am', array('ids'));
-  $query->condition('am.identifier','poll_options');
-  $query->condition('am.ids','0','!=');
-  $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
-  foreach ($result_query as $result_data){
-    $polls_node_list[] = $result_data['ids'];
-  }
-  return $polls_node_list;
+    $polls_node_list = array();
+
+    $query = db_select('itg_app_middleware', 'am');
+    $query->fields('am', array('ids'));
+    $query->condition('am.identifier', 'poll_options');
+    $query->condition('am.ids', '0', '!=');
+    $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result_query as $result_data) {
+        $polls_node_list[] = $result_data['ids'];
+    }
+    return $polls_node_list;
 }
 
 /**
@@ -277,41 +268,43 @@ function home_page_polls_node_list() {
  * @return type
  */
 function home_page_packages_bk() {
-  $query = db_select('itg_app_middleware', 'am');
-  $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
-  $query->fields('am', array('ids'));
-  $query->condition('am.identifier','itg_package');
-  $query->condition('am.ids','0','!=');
-  $query->condition('mci.info_type','packages','=');
-  $query->orderBy('mci.info_value', 'ASC');  
-  $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query = db_select('itg_app_middleware', 'am');
+    $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
+    $query->fields('am', array('ids'));
+    $query->condition('am.identifier', 'itg_package');
+    $query->condition('am.ids', '0', '!=');
+    $query->condition('mci.info_type', 'packages', '=');
+    $query->orderBy('mci.info_value', 'ASC');
+    $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-  $list_arr = array();
-  foreach ($query_results as $tid) {
-    $list_tid[] = $tid['ids'];
-  }
-  //$list_tid_str = implode(",",$list_tid);
-  $list_arr = homePageJsonPackagelist($list_tid);
-  return $list_arr;
+    $list_arr = array();
+    foreach ($query_results as $tid) {
+        $list_tid[] = $tid['ids'];
+    }
+    //$list_tid_str = implode(",",$list_tid);
+    $list_arr = homePageJsonPackagelist($list_tid);
+    return $list_arr;
 }
+
 function home_page_packages() {
-  $query = db_select('itg_app_middleware', 'am');
-  $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
-  $query->fields('am', array('ids'));
-  $query->condition('am.identifier','itg_package');
-  $query->condition('am.ids','0','!=');
-  $query->condition('mci.info_type','packages','=');
-  $query->orderBy('mci.info_value', 'ASC');  
-  $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query = db_select('itg_app_middleware', 'am');
+    $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
+    $query->fields('am', array('ids'));
+    $query->condition('am.identifier', 'itg_package');
+    $query->condition('am.ids', '0', '!=');
+    $query->condition('mci.info_type', 'packages', '=');
+    $query->orderBy('mci.info_value', 'ASC');
+    $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-  $list_arr = array();
-  foreach ($query_results as $tid) {
-     
-    $list_arr[] = homePageJsonPackagelist($tid['ids']);
-  }
-  
-  return $list_arr;
+    $list_arr = array();
+    foreach ($query_results as $tid) {
+
+        $list_arr[] = homePageJsonPackagelist($tid['ids']);
+    }
+
+    return $list_arr;
 }
+
 /**
  * main function for generate homePageJsonPackagelist_india array
  * @param int $tid term id
@@ -319,7 +312,7 @@ function home_page_packages() {
  */
 function homePageJsonPackagelist($tid) {
 
-    global $base_url,$order;
+    global $base_url, $order;
     $data_news = array();
     $data_newslist = array();
     $n_photo = array();
@@ -346,8 +339,7 @@ function homePageJsonPackagelist($tid) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -457,10 +449,10 @@ function homePageJsonPackagelist($tid) {
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -533,9 +525,10 @@ function homePageJsonPackagelist($tid) {
     $order++;
     return $data_news;
 }
+
 function homePageJsonPackagelist_bk($tid) {
 
-    global $base_url,$order;
+    global $base_url, $order;
     $data_news = array();
     $data_newslist = array();
     $n_photo = array();
@@ -562,10 +555,9 @@ function homePageJsonPackagelist_bk($tid) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
-        
+
 
         $data_news['id'] = "1206552"; // india now calling
         $data_news['order'] = "$order";
@@ -660,10 +652,10 @@ function homePageJsonPackagelist_bk($tid) {
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -893,16 +885,14 @@ function homePageJsonTopstories($top_story_limit) {
  * @return array
  */
 function homePageCatNewslist($tid) {
-    global $base_url,$order;
+    global $base_url, $order;
     $lcont = fetchitg_app_master_info_internaldata($tid, 'lcont');
     $template = fetchitg_app_master_info_internaldata($tid, 'template');
-    if($template == "Template1"){
+    if ($template == "Template1") {
         $template_val = 1;
-    }
-    elseif($template == "Template2"){
+    } elseif ($template == "Template2") {
         $template_val = 2;
-    }
-    elseif($template == "Template3"){
+    } elseif ($template == "Template3") {
         $template_val = 3;
     }
     //fetch config data
@@ -933,8 +923,7 @@ function homePageCatNewslist($tid) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -1044,10 +1033,10 @@ function homePageCatNewslist($tid) {
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -1118,7 +1107,7 @@ function homePageCatNewslist($tid) {
 
     $data_news['news'] = (array) $data_newslist;
     $order++;
-    
+
     return $data_news;
 }
 
@@ -1128,20 +1117,19 @@ function homePageCatNewslist($tid) {
  * @return array
  */
 function homePageJsonMagazine($direct = "") {
-  global $order;
+    global $order;
     $data_magazine = array();
     $data_newslist = array();
     $n_photo = array();
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    if($direct == 'direct'){
+    if ($direct == 'direct') {
         $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
-    }
-    else{
+    } else {
         $n_magazine_data = magazineCoverstoriesPageRerourceValueList('home');
     }
-    
+
     $n_magazine = $n_magazine_data['data'];
 
     $data_magazine['id'] = "0";
@@ -1419,8 +1407,6 @@ function getNodeBodyByNid_Report($nid) {
     return $field_data_body;
 }
 
-
-
 /**
  * main function for generate homePageJsonPoll array
  *
@@ -1481,10 +1467,9 @@ function homePageJsonPoll() {
     return $data_magazine;
 }
 
-
-function fetchitg_app_master_info_internaldata($tid, $key){
+function fetchitg_app_master_info_internaldata($tid, $key) {
     $value = "";
-    if($tid){
+    if ($tid) {
         $query = db_select('itg_app_master_info_internal', 'mci');
         $query->fields('mci');
         $query->condition('mci.org_id', $tid, '=');
@@ -1492,60 +1477,62 @@ function fetchitg_app_master_info_internaldata($tid, $key){
         $query->condition('mci.info_key', $key, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $value = $result[0]['info_value'];
-    }    
+    }
     return $value;
 }
 
-function fetchitg_app_master_config_internal($key){
+function fetchitg_app_master_config_internal($key) {
     $value = "";
-    if($key){
+    if ($key) {
         $query = db_select('itg_app_master_config_internal', 'mci');
-        $query->fields('mci');          
-        $query->condition('mci.config_key', $key, '=');             
+        $query->fields('mci');
+        $query->condition('mci.config_key', $key, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $value = $result[0]['config_val'];
-    }    
-    return $value;
-}
-function fetchitg_app_master_config_internal_key($config_val =0){
-    $value = "";
-    if($config_val){
-        $query = db_select('itg_app_master_config_internal', 'mci');
-        $query->fields('mci');          
-        $query->condition('mci.config_val', $config_val, '=');         
-        $db_or = db_or();
-        $db_or->condition('mci.config_key', 'homeapi_order_packages' , '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_topstories' , '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_categories' , '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_magazines' , '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_polls' , '=');
-        $query->condition($db_or);        
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $value = $result[0]['config_key'];
-    }    
+    }
     return $value;
 }
 
-function fetch_widget_config($name){
+function fetchitg_app_master_config_internal_key($config_val = 0) {
+    $value = "";
+    if ($config_val) {
+        $query = db_select('itg_app_master_config_internal', 'mci');
+        $query->fields('mci');
+        $query->condition('mci.config_val', $config_val, '=');
+        $db_or = db_or();
+        $db_or->condition('mci.config_key', 'homeapi_order_packages', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_topstories', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_categories', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_magazines', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_polls', '=');
+        $query->condition($db_or);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $value = $result[0]['config_key'];
+    }
+    return $value;
+}
+
+function fetch_widget_config($name) {
     $data = array();
-    if($name){
+    if ($name) {
         $query = db_select('itg_app_middleware', 'iam');
         $query->fields('iam');
         $query->condition('iam.identifier', 'itg_widget', '=');
         $query->condition('iam.name', $name, '=');
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $data = $result[0];
     }
     return $data;
 }
-function itg_rv_widget_data($scorecard){
+
+function itg_rv_widget_data($scorecard) {
     global $base_url;
     $data_news = array();
     $data_newslist = array();
     $comman = array();
     $n_widget = array();
     $listcount = 0;
-    
+
 
     $data_news['id'] = "0";
     $data_news['order'] = "0";
@@ -1555,7 +1542,7 @@ function itg_rv_widget_data($scorecard){
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "1";
 
-    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_id'] = "0";
     $data_newslist[$listcount]['n_template_id'] = "";
     $data_newslist[$listcount]['n_type'] = "widget";
     $data_newslist[$listcount]['n_is_developing'] = "0";
@@ -1575,10 +1562,10 @@ function itg_rv_widget_data($scorecard){
     $data_newslist[$listcount]['n_video'] = $comman;
     $data_newslist[$listcount]['n_polls'] = $comman;
     $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman; 
-    
+    $data_newslist[$listcount]['n_magazine'] = $comman;
+
     $n_widget[0] = json_decode($scorecard['url'], TRUE);
-    
+
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
     $data_news['news'] = (array) $data_newslist;

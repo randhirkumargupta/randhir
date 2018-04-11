@@ -270,7 +270,7 @@ function itg_app_manager_menu() {
     );
     $items['test-to-live/hamburger-menu'] = array(
         'title' => 'Test to live: hamburger-menu',
-        'page callback' => 'testtolive_hamburgermenu',        
+        'page callback' => 'testtolive_hamburgermenu',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
@@ -283,7 +283,7 @@ function itg_app_manager_menu() {
     );
     $items['test-to-live/horizontal-menu'] = array(
         'title' => 'Test to live: horizontal-menu',
-        'page callback' => 'testtolive_horizontalmenu',        
+        'page callback' => 'testtolive_horizontalmenu',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
@@ -294,7 +294,7 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
-    
+
 
     return $items;
 }
@@ -360,12 +360,12 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             );
         }
         $form['container'][$i]['order_id'] = array(
-                '#type' => 'select',
-                '#title' => '',
-                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
-                '#default_value' => $d_row->order_id,
-                '#required' => TRUE,                
-            );
+            '#type' => 'select',
+            '#title' => '',
+            '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+            '#default_value' => $d_row->order_id,
+            '#required' => TRUE,
+        );
 
 
         $form['container'][$i]['menu_type'] = array(
@@ -384,11 +384,10 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
         if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
             if ($menu_form_id == '1') {
                 $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
-            }
-            else{
+            } else {
                 $section_options = _get_section_options_hori($form_state['values']['container'][$i]['menu_type'], $menu_form_id, 0);
             }
-            
+
             $form['container'][$i]['section']['title'] = array(
                 '#type' => 'select',
                 '#title' => '',
@@ -406,11 +405,9 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
                 if ($menu_form_id == '1') {
                     $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
-                }
-                else{
+                } else {
                     $subsec_options = _get_section_options_hori($form_state['values']['container'][$i]['section']['title'], $menu_form_id, 1);
                 }
-                
             }
         } else {
             $form['container'][$i]['section']['title'] = array(
@@ -430,8 +427,8 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#default_value' => $d_row->has_subcategory,
         );
         if (arg(0) == 'm-menu' && arg(2) == 'edit' && $menu_form_id == '2') {
-                         $subsec_options = _get_section_options_hori($d_row->section_id, $menu_form_id, 1);
-                    }
+            $subsec_options = _get_section_options_hori($d_row->section_id, $menu_form_id, 1);
+        }
         $form['container'][$i]['sub_section'] = array(
             '#type' => 'select',
             '#title' => '',
@@ -492,39 +489,37 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
     }
     if ($menu_form_id == '1') {
         $form['submit_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Save'),
-        '#submit' => array('itg_app_manager_form_submit'),
+            '#type' => 'submit',
+            '#value' => t('Save'),
+            '#submit' => array('itg_app_manager_form_submit'),
         );
-    }
-    else{
+    } else {
         $form['submit_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Save'),
-        '#submit' => array('hori_itg_app_manager_form_submit'),
+            '#type' => 'submit',
+            '#value' => t('Save'),
+            '#submit' => array('hori_itg_app_manager_form_submit'),
         );
     }
     if ($menu_form_id == '1') {
-       $form['#validate'][] = 'itg_app_manager_form_validate'; 
+        $form['#validate'][] = 'itg_app_manager_form_validate';
+    } else {
+        $form['#validate'][] = 'hori_itg_app_manager_form_validate';
     }
-    else{
-        $form['#validate'][] = 'hori_itg_app_manager_form_validate'; 
-    }
-    
+
     if ($menu_form_id == 1) {
-        $u_url = $base_url."/test-to-live/hamburger-menu";
-        $url_order = $base_url."/manage-order/hamburger-menu";
+        $u_url = $base_url . "/test-to-live/hamburger-menu";
+        $url_order = $base_url . "/manage-order/hamburger-menu";
         $form['markup_v_1'] = array(
-            '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live hamburger-menu</a>&nbsp;&nbsp;&nbsp;<a href='".$url_order."'>Update order of hamburger-menu</a>",
+            '#markup' => "<br><hr><br><a href='" . $u_url . "'>Update Live hamburger-menu</a>&nbsp;&nbsp;&nbsp;<a href='" . $url_order . "'>Update order of hamburger-menu</a>",
         );
         $form['markup_v'] = array(
             '#markup' => "<br><hr><br>" . hamburger_menu_list(),
         );
     } else {
-        $u_url = $base_url."/test-to-live/horizontal-menu";
-        $url_order = $base_url."/manage-order/horizontal-menu";        
+        $u_url = $base_url . "/test-to-live/horizontal-menu";
+        $url_order = $base_url . "/manage-order/horizontal-menu";
         $form['markup_v_1'] = array(
-            '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live horizontal-menu</a>&nbsp;&nbsp;&nbsp;<a href='".$url_order."'>Update order of horizontal-menu</a>",
+            '#markup' => "<br><hr><br><a href='" . $u_url . "'>Update Live horizontal-menu</a>&nbsp;&nbsp;&nbsp;<a href='" . $url_order . "'>Update order of horizontal-menu</a>",
         );
         $form['markup_v'] = array(
             '#markup' => "<br><hr><br>" . horizontal_menu_list(),
@@ -1908,7 +1903,7 @@ function itg_app_create_widget_form($form, &$form_state, $w_id) {
         $w_query->condition('itg_m.identifier', 'itg_widget', '=');
         $w_query->condition('itg_m.id', $w_id, '=');
         $w_query_results = $w_query->execute()->fetchAll();
-        foreach ($w_query_results as $key => $val) {            
+        foreach ($w_query_results as $key => $val) {
             $w_name = $val->name;
             $w_url = $val->url;
             $status = $val->status;
@@ -1920,8 +1915,7 @@ function itg_app_create_widget_form($form, &$form_state, $w_id) {
         '#default_value' => $w_name,
         '#size' => 25,
         '#maxlength' => 255,
-        '#required' => TRUE,                 
-   
+        '#required' => TRUE,
     );
     $form['widget_url'] = array(
         '#type' => 'textarea',
@@ -1929,15 +1923,15 @@ function itg_app_create_widget_form($form, &$form_state, $w_id) {
         '#default_value' => $w_url,
         '#cols' => 60,
         '#rows' => 5,
-        '#required' => TRUE, 
+        '#required' => TRUE,
     );
     $form['status'] = array(
-                '#type' => 'select',
-                '#title' => 'Status',
-                '#options' => array( '1' => 'Active', '0' => 'In-Active'),
-                '#default_value' => $status,
-                '#required' => TRUE,                
-            );
+        '#type' => 'select',
+        '#title' => 'Status',
+        '#options' => array('1' => 'Active', '0' => 'In-Active'),
+        '#default_value' => $status,
+        '#required' => TRUE,
+    );
     if (isset($w_id) && !empty($w_id)) {
         $form['id'] = array(
             '#type' => 'hidden',
@@ -2172,10 +2166,10 @@ function itg_app_manager_packages_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['package_options']['#options'][$id];
-            /*$num_deleted = db_delete('itg_app_middleware')
-                    ->condition('name', $package_name)
-                    ->condition('identifier', 'itg_package')
-                    ->execute();*/
+            /* $num_deleted = db_delete('itg_app_middleware')
+              ->condition('name', $package_name)
+              ->condition('identifier', 'itg_package')
+              ->execute(); */
         }
     }
 
@@ -2232,7 +2226,7 @@ function itg_app_manager_package_delete_comfirm_submit($form, &$form_state) {
         $query = db_select('itg_app_middleware', 'im');
         $query->fields('im', array('ids'));
         $query->condition('im.identifier', 'itg_package', '=');
-        $query->condition('im.id', $record, '=');        
+        $query->condition('im.id', $record, '=');
         $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
@@ -2442,12 +2436,12 @@ function m_menu_delete() {
             ->condition('id', $id)
             ->execute();
     drupal_set_message('The record has been deleted!');
-   // for redirction
-  $query = db_select('itg_app_menu_content', 'mm');
-  $query->fields('mm', array('menu_type_id'));
-  $query->condition('mm.id', $id);
-  $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $menu_type_id = $query_results[0]['menu_type_id'];    
+    // for redirction
+    $query = db_select('itg_app_menu_content', 'mm');
+    $query->fields('mm', array('menu_type_id'));
+    $query->condition('mm.id', $id);
+    $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $menu_type_id = $query_results[0]['menu_type_id'];
     if ($menu_type_id == 1) {
         drupal_goto("hamburger-menu-management");
     } else {
@@ -2649,10 +2643,10 @@ function itg_app_manager_categories_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['categories_options']['#options'][$id];
-            /*$num_deleted = db_delete('itg_app_middleware')
-                    ->condition('name', $package_name)
-                    ->condition('identifier', 'categories_options')
-                    ->execute();*/
+            /* $num_deleted = db_delete('itg_app_middleware')
+              ->condition('name', $package_name)
+              ->condition('identifier', 'categories_options')
+              ->execute(); */
         }
     }
 
@@ -2689,11 +2683,11 @@ function itg_app_manager_categories_delete_comfirm($form, &$form_state, $cid) {
 function itg_app_manager_categories_delete_comfirm_submit($form, &$form_state) {
     $record = $form_state['values']['delete'];
     if ($record) {
-        
+
         $query = db_select('itg_app_middleware', 'im');
         $query->fields('im', array('ids'));
         $query->condition('im.identifier', 'categories_options', '=');
-        $query->condition('im.id', $record, '=');        
+        $query->condition('im.id', $record, '=');
         $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
@@ -2816,10 +2810,10 @@ function itg_app_manager_poll_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['poll_options']['#options'][$id];
-            /*$num_deleted = db_delete('itg_app_middleware')
-                    ->condition('name', $package_name)
-                    ->condition('identifier', 'poll_options')
-                    ->execute();*/
+            /* $num_deleted = db_delete('itg_app_middleware')
+              ->condition('name', $package_name)
+              ->condition('identifier', 'poll_options')
+              ->execute(); */
         }
     }
 
@@ -2859,7 +2853,7 @@ function itg_app_manager_poll_delete_comfirm_submit($form, &$form_state) {
         $query = db_select('itg_app_middleware', 'im');
         $query->fields('im', array('ids'));
         $query->condition('im.identifier', 'poll_options', '=');
-        $query->condition('im.id', $record, '=');        
+        $query->condition('im.id', $record, '=');
         $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
@@ -3039,10 +3033,10 @@ function itg_app_manager_magazine_form_submit($form, &$form_state) {
             }
         } else {
             $package_name = $form['magazine_options']['#options'][$id];
-           /* $num_deleted = db_delete('itg_app_middleware')
-                    ->condition('name', $package_name)
-                    ->condition('identifier', 'magazine_options')
-                    ->execute();*/
+            /* $num_deleted = db_delete('itg_app_middleware')
+              ->condition('name', $package_name)
+              ->condition('identifier', 'magazine_options')
+              ->execute(); */
         }
     }
 
@@ -3082,7 +3076,7 @@ function itg_app_manager_magazine_delete_comfirm_submit($form, &$form_state) {
         $query = db_select('itg_app_middleware', 'im');
         $query->fields('im', array('ids'));
         $query->condition('im.identifier', 'magazine_options', '=');
-        $query->condition('im.id', $record, '=');        
+        $query->condition('im.id', $record, '=');
         $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $ids = $results[0]['ids'];
         $num_deleted = db_delete('itg_app_middleware')
@@ -3782,55 +3776,55 @@ function itg_app_arrange_home_form($form, &$form_state) {
         '#markup' => '<span font-color="red">*</span>Please make sure order start from 0 AND Maintain sequence',
     );
     $query = db_select('itg_app_middleware', 'mci');
-    $query->fields('mci');          
-    $query->condition('mci.identifier', 'itg_widget', '=');  
+    $query->fields('mci');
+    $query->condition('mci.identifier', 'itg_widget', '=');
     $query->condition('mci.status', '1', '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $key => $value) {
         $name = $value['name'];
-        $name = str_replace(" ","_",$name);
-        $form['homeapi_order_widget_'.$name.''] = array(
-        '#type' => 'select',
-        '#title' => t('Widget - '.$name.''),
-        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
-        '#default_value' => fetchMasterConfigData('homeapi_order_widget_'.$name.''),
-        '#required' => TRUE,
-       );
+        $name = str_replace(" ", "_", $name);
+        $form['homeapi_order_widget_' . $name . ''] = array(
+            '#type' => 'select',
+            '#title' => t('Widget - ' . $name . ''),
+            '#options' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8),
+            '#default_value' => fetchMasterConfigData('homeapi_order_widget_' . $name . ''),
+            '#required' => TRUE,
+        );
     }
     $form['homeapi_order_packages'] = array(
         '#type' => 'select',
         '#title' => t('Packages order'),
-        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#options' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8),
         '#default_value' => fetchMasterConfigData('homeapi_order_packages'),
-         '#required' => TRUE,
+        '#required' => TRUE,
     );
     $form['homeapi_order_topstories'] = array(
         '#type' => 'select',
         '#title' => t('Topstories order'),
-        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#options' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8),
         '#default_value' => fetchMasterConfigData('homeapi_order_topstories'),
-         '#required' => TRUE,
+        '#required' => TRUE,
     );
     $form['homeapi_order_categories'] = array(
         '#type' => 'select',
         '#title' => t('Categories order'),
-        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#options' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8),
         '#default_value' => fetchMasterConfigData('homeapi_order_categories'),
-         '#required' => TRUE,
+        '#required' => TRUE,
     );
     $form['homeapi_order_magazines'] = array(
         '#type' => 'select',
         '#title' => t('Magazines order'),
-        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#options' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8),
         '#default_value' => fetchMasterConfigData('homeapi_order_magazines'),
-         '#required' => TRUE,
+        '#required' => TRUE,
     );
     $form['homeapi_order_polls'] = array(
         '#type' => 'select',
         '#title' => t('Polls order'),
-        '#options' => array(0 => 0,1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7,8 => 8),
+        '#options' => array(0 => 0, 1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8),
         '#default_value' => fetchMasterConfigData('homeapi_order_polls'),
-         '#required' => TRUE,
+        '#required' => TRUE,
     );
 
     $form['home_arra_submit_button'] = array(
@@ -3838,26 +3832,27 @@ function itg_app_arrange_home_form($form, &$form_state) {
         '#value' => t('Save'),
         '#submit' => array('itg_app_arrange_home_form_submit'),
     );
-    $form['#validate'][] = 'itg_app_arrange_home_form_validate'; 
-    $u_url = $base_url."/test-to-live/home-api";
+    $form['#validate'][] = 'itg_app_arrange_home_form_validate';
+    $u_url = $base_url . "/test-to-live/home-api";
     $form['markup_v_1'] = array(
-            '#markup' => "<br><hr><br><a href='".$u_url."'>Update Live Home API</a>",
-        );
+        '#markup' => "<br><hr><br><a href='" . $u_url . "'>Update Live Home API</a>",
+    );
 
     return $form;
 }
-function itg_app_arrange_home_form_validate($form, &$form_state){
-    $data = $form_state['input'];  
+
+function itg_app_arrange_home_form_validate($form, &$form_state) {
+    $data = $form_state['input'];
     $max = itg_max_from_array($data);
     //validation rule1
-    for($i = 0; $i <= $max ; $i++){
-        if(!array_search($i,$data)){
-           form_set_error('order_id', t('Maintain sequence order.')); 
+    for ($i = 0; $i <= $max; $i++) {
+        if (!array_search($i, $data)) {
+            form_set_error('order_id', t('Maintain sequence order.'));
         }
     }
     //validation rule2
-    if(count(array_unique($data))< (count($data))) {        
-      form_set_error('order_id', t('More than one menu have same order value.'));
+    if (count(array_unique($data)) < (count($data))) {
+        form_set_error('order_id', t('More than one menu have same order value.'));
     }
 }
 
@@ -3877,10 +3872,10 @@ function itg_app_arrange_home_form_submit($form, &$form_state) {
     foreach ($form_state['values'] as $key => $val) {
         $key_val = "";
         $key_val = fetchMasterConfigData($key);
-        /*$num_deleted = db_delete('itg_app_master_config_internal')
-                ->condition('config_val', $val)
-                ->condition('config_key', $key)
-                ->execute();*/ 
+        /* $num_deleted = db_delete('itg_app_master_config_internal')
+          ->condition('config_val', $val)
+          ->condition('config_key', $key)
+          ->execute(); */
         if ($key_val != "") {
             // uapdete query
             db_update('itg_app_master_config_internal')
@@ -3966,7 +3961,7 @@ function itg_app_manager_categories_search_form_submit($form, &$form_state) {
  * @return array
  */
 function itg_app_manager_categories_update_conf_form($form, &$form_state, $cat_id) {
-    //p(arg());
+
     $tempalte = get_data_itg_app_master_info_internal(arg(4), 'categories', 'template', 'form');
     $lcont = get_data_itg_app_master_info_internal(arg(4), 'categories', 'lcont', 'form');
     $order = get_data_itg_app_master_info_internal(arg(4), 'categories', 'order', 'form');
@@ -3990,7 +3985,7 @@ function itg_app_manager_categories_update_conf_form($form, &$form_state, $cat_i
     $form['order'] = array(
         '#type' => 'select',
         '#title' => 'Order',
-        '#options' => array('' => '- Select -','1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
+        '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
         '#default_value' => $order
     );
     $form['cat_conf'] = array(
@@ -4011,9 +4006,9 @@ function itg_app_manager_categories_update_conf_form_submit($form, &$form_state)
     $order = $form_state['values']['order'];
     $cat_id = (int) $form_state['values']['category_id'];
     $num_deleted = db_delete('itg_app_master_info_internal')
-                ->condition('org_id', $cat_id)
-                ->condition('info_type', 'categories')
-                ->execute();
+            ->condition('org_id', $cat_id)
+            ->condition('info_type', 'categories')
+            ->execute();
     // insert query
     $key = arg(1);
     $data = array(
@@ -4063,7 +4058,7 @@ function get_data_itg_app_master_info_internal($org_id, $info_type, $info_key, $
         }
         $query->condition('iai.info_type', $info_type, '=');
         $query->condition('iai.info_key', $info_key, '=');
-        //print strtr((string) $query, $query->arguments());die();
+
         $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $key => $val) {
             $data = $val['info_value'];
@@ -4123,7 +4118,7 @@ function itg_app_manager_packages_update_conf_form($form, &$form_state, $cat_id)
     $form['order'] = array(
         '#type' => 'select',
         '#title' => 'Order',
-        '#options' => array('' => '- Select -',  '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
+        '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
         '#default_value' => $order
     );
     $form['cat_conf'] = array(
@@ -4231,7 +4226,7 @@ function itg_app_manager_magazine_update_conf_form($form, &$form_state, $cat_id)
     $form['order'] = array(
         '#type' => 'select',
         '#title' => 'Order',
-        '#options' => array('' => '- Select -',  '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
+        '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
         '#default_value' => $order
     );
     $form['cat_conf'] = array(
@@ -4278,12 +4273,13 @@ function get_taxo_tid($name) {
     }
     return $tid;
 }
+
 /**
  * itg_app_manager_form_validate
  */
 function itg_app_manager_form_validate($form, &$form_state) {
-  // Random example, if the title is 'test' throw an error 
-    //p($form_state['values']);
+    // Random example, if the title is 'test' throw an error 
+
     $m_id = $form_state['values']['m_id'];
     $order_id = $form_state['values']['container'][1]['order_id'];
     $menu_type_id = $form_state['values']['container'][1]['menu_type_id'];
@@ -4294,27 +4290,28 @@ function itg_app_manager_form_validate($form, &$form_state) {
     $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $m_id_db = $results[0]['id'];
     if (count($results) > 0 && ($m_id_db != $m_id)) {
-      $title = $results[0]['title'];      
-      form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
+        $title = $results[0]['title'];
+        form_set_error('order_id', t('Order: ' . $order_id . ' alreday used by: ' . $title . ''));
     }
 }
+
 /**
  * testtolive_hamburgermenu
  */
-function testtolive_hamburgermenu(){
+function testtolive_hamburgermenu() {
     $key = "devitgd_rapid_hamburger_menu_json";
     $jsondata = hamburger_menu_middleware_data();
-    $jsondata = json_encode($jsondata);     
+    $jsondata = json_encode($jsondata);
     variable_set('hamburger_menu_json', $jsondata);
-    /*config_update_status_json updation*/
+    /* config_update_status_json updation */
     $update_conf_json = variable_get('config_update_status_json');
     $update_conf_arr = json_decode($update_conf_json, TRUE);
     $update_conf_arr['data']['menu_update']['hamburger_updated_datetime'] = date("Y-m-d H:i:s", time());
     $update_conf_json = json_encode($update_conf_arr);
     variable_set('config_update_status_json', $update_conf_json);
-    /*config_update_status_json updation*/
+    /* config_update_status_json updation */
     //clear redish
-    redis_key_delete($key);// hamburger_menu redish key
+    redis_key_delete($key); // hamburger_menu redish key
     redis_key_delete('devitgd_rapid_config_update_status_json'); // config_update_status_json key
     drupal_set_message(t('Test-to-live hamburger-menu have been saved'));
     drupal_goto('hamburger-menu-management');
@@ -4327,7 +4324,7 @@ function testtolive_hamburgermenu(){
  * @return array
  */
 function manage_order_hamburger_menu_form($form, &$form_state) {
-    global $base_url;    
+    global $base_url;
     $results_top = hamburger_menu_listing(1);
     $results_other = hamburger_menu_listing(2);
     //top cat ordring
@@ -4338,27 +4335,24 @@ function manage_order_hamburger_menu_form($form, &$form_state) {
         '#collapsed' => FALSE,
     );
     foreach ($results_top as $data) {
-        if($data['section_id'] == '1206553'){
+        if ($data['section_id'] == '1206553') {
             $title = "PROGRAMMES";
-        }
-        elseif($data['section_id'] == '1206552'){
+        } elseif ($data['section_id'] == '1206552') {
             $title = "VIDEOS";
-        }
-        elseif($data['section_id'] == '1208521'){
+        } elseif ($data['section_id'] == '1208521') {
             $title = "PHOTOS";
-        }
-        else{
-           $title = strtoupper($data['title']); 
+        } else {
+            $title = strtoupper($data['title']);
         }
         $id = $data['id'];
         $order = $data['order_id'];
-        $form['top-categories']['order_id_'.$id.''] = array(
-                '#type' => 'select',
-                '#title' => 'Manage Order of: '.$title.'',
-                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
-                '#default_value' => $order,
-                '#required' => TRUE,                
-            );
+        $form['top-categories']['order_id_' . $id . ''] = array(
+            '#type' => 'select',
+            '#title' => 'Manage Order of: ' . $title . '',
+            '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+            '#default_value' => $order,
+            '#required' => TRUE,
+        );
     }
     //other cat ordring
     $form['other-categories'] = array(
@@ -4368,27 +4362,24 @@ function manage_order_hamburger_menu_form($form, &$form_state) {
         '#collapsed' => FALSE,
     );
     foreach ($results_other as $data) {
-        if($data['section_id'] == '1206553'){
+        if ($data['section_id'] == '1206553') {
             $title = "PROGRAMMES";
-        }
-        elseif($data['section_id'] == '1206552'){
+        } elseif ($data['section_id'] == '1206552') {
             $title = "VIDEOS";
-        }
-        elseif($data['section_id'] == '1208521'){
+        } elseif ($data['section_id'] == '1208521') {
             $title = "PHOTOS";
-        }
-        else{
-           $title = strtoupper($data['title']); 
+        } else {
+            $title = strtoupper($data['title']);
         }
         $id = $data['id'];
         $order = $data['order_id'];
-        $form['other-categories']['order_id_'.$id.''] = array(
-                '#type' => 'select',
-                '#title' => 'Manage Order of: '.$title.'',
-                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
-                '#default_value' => $order,
-                '#required' => TRUE,                
-            );
+        $form['other-categories']['order_id_' . $id . ''] = array(
+            '#type' => 'select',
+            '#title' => 'Manage Order of: ' . $title . '',
+            '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+            '#default_value' => $order,
+            '#required' => TRUE,
+        );
     }
     $form['submit_button'] = array(
         '#type' => 'submit',
@@ -4404,10 +4395,10 @@ function manage_order_hamburger_menu_form($form, &$form_state) {
  * @param array $form_state
  */
 function manage_order_hamburger_menu_form_submit($form, &$form_state) {
-    //p($form_state['input']);
-    $data = $form_state['input'];    
-    foreach ($data as $key => $value){
-        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);        
+
+    $data = $form_state['input'];
+    foreach ($data as $key => $value) {
+        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
         if ($id > 0 && $value > 0) {
             // uapdete query
             db_update('itg_app_menu_content')
@@ -4415,18 +4406,18 @@ function manage_order_hamburger_menu_form_submit($form, &$form_state) {
                         'order_id' => $value,
                     ))->condition('id', $id, '=')->execute();
         }
-        
     }
     drupal_set_message(t('hamburger-menu order have been saved'));
     drupal_goto('hamburger-menu-management');
 }
+
 /**
  * manage_order_hamburger_menu_form_validate
  */
-function manage_order_hamburger_menu_form_validate($form, &$form_state) {  
-    $data = $form_state['input'];    
-    if(count(array_unique($data))< (count($data))) {        
-      form_set_error('order_id', t('More than one menu have same order value.'));
+function manage_order_hamburger_menu_form_validate($form, &$form_state) {
+    $data = $form_state['input'];
+    if (count(array_unique($data)) < (count($data))) {
+        form_set_error('order_id', t('More than one menu have same order value.'));
     }
 }
 
@@ -4436,8 +4427,8 @@ function manage_order_hamburger_menu_form_validate($form, &$form_state) {
  * @return array
  */
 function _get_section_options_hori($term_id, $menu_form_id, $subsec_options) {
-    
-   //echo "trem-d:".$term_id."subopt:".$subsec_options;
+
+
     $option_arr = array('' => '- Select -');
     if ($subsec_options == 0) {
 
@@ -4515,10 +4506,10 @@ function _get_section_options_hori($term_id, $menu_form_id, $subsec_options) {
  * @param array $form_state
  */
 function hori_itg_app_manager_form_submit($form, &$form_state) {
-   if (!empty($form_state['values'])) {
-        foreach ($form_state['values']['container'] as $key => $form_val) {    
-           
-            
+    if (!empty($form_state['values'])) {
+        foreach ($form_state['values']['container'] as $key => $form_val) {
+
+
             $data = array();
             $title = '';
             $section_id = 0;
@@ -4528,14 +4519,14 @@ function hori_itg_app_manager_form_submit($form, &$form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1' || $form_val['menu_type'] == '1206553' || $form_val['menu_type'] == '1208521' || $form_val['menu_type'] == '1206552') {
-                // p($form_val);
+
                 if (arg(2) == "edit") {
                     $title = $form_val['section']['title'];
                     $section_id = get_taxo_tid($title);
                     $s_id = $form_val['sub_section_id'];
                     //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
                     $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;                    
+                    $s_title = $term->name;
                 } else {
                     $section_id = $form_val['section']['title'];
                     $term = taxonomy_term_load($section_id);
@@ -4553,43 +4544,39 @@ function hori_itg_app_manager_form_submit($form, &$form_state) {
             }
             if ($form_val['menu_type'] == '1') {
                 if ($form_val['has_subcat'] == 1) {
-                   if (arg(2) == "edit") {
-                    $title = $form_val['section']['title'];
-                    $section_id = get_taxo_tid($title);
-                    $s_id = $form_val['sub_section_id'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;                    
-                }
-                else{
-                   $s_id = $form_val['sub_section_id'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;
-                }
+                    if (arg(2) == "edit") {
+                        $title = $form_val['section']['title'];
+                        $section_id = get_taxo_tid($title);
+                        $s_id = $form_val['sub_section_id'];
+                        //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                        $term = taxonomy_term_load($s_id);
+                        $s_title = $term->name;
+                    } else {
+                        $s_id = $form_val['sub_section_id'];
+                        //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                        $term = taxonomy_term_load($s_id);
+                        $s_title = $term->name;
+                    }
                 } else {
                     $s_id = 0;
                     $s_title = '';
                 }
             }
-            //p($form_val);
-            if(arg(2) == "edit" && $form_val['sub_section_id'] > 0){
+
+            if (arg(2) == "edit" && $form_val['sub_section_id'] > 0) {
                 $s_id = $form_val['sub_section_id'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;
+                //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $term = taxonomy_term_load($s_id);
+                $s_title = $term->name;
+            } elseif ($form_val['sub_section'] > 0) {
+                $s_id = $form_val['sub_section'];
+                //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $term = taxonomy_term_load($s_id);
+                $s_title = $term->name;
+            } else {
+                $s_id = 0;
+                $s_title = '';
             }
-            elseif($form_val['sub_section'] > 0) {
-                 $s_id = $form_val['sub_section'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;
-                    
-                }
-                else{
-                    $s_id = 0;
-                    $s_title = '';
-                }
 
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
@@ -4608,7 +4595,7 @@ function hori_itg_app_manager_form_submit($form, &$form_state) {
             );
             if (isset($form_state['values']['m_id']) && $form_state['values']['m_id'] > 0) {
                 $m_id = $form_state['values']['m_id'];
-                //echo $s_id; echo "<br>"; echo $s_title;die();
+
                 db_update('itg_app_menu_content')
                         ->fields(array(
                             'menu_type_id' => $form_val['menu_type_id'],
@@ -4645,15 +4632,16 @@ function hori_itg_app_manager_form_submit($form, &$form_state) {
         drupal_goto("horizontal-menu-management");
     }
 }
+
 /**
  * itg_app_manager_form_validate
  */
 function hori_itg_app_manager_form_validate($form, &$form_state) {
-  // Random example, if the title is 'test' throw an error 
-    //p($form_state['values']);
+    // Random example, if the title is 'test' throw an error 
+
     $m_id = $form_state['values']['m_id'];
     $order_id = $form_state['values']['container'][1]['order_id'];
-    $menu_type_id = $form_state['values']['container'][1]['menu_type_id']; 
+    $menu_type_id = $form_state['values']['container'][1]['menu_type_id'];
     $has_subcat = $form_state['values']['container'][1]['has_subcat'];
     //rule1 : not duplicate order for root
     $query = db_select('itg_app_menu_content', 'imc');
@@ -4663,14 +4651,14 @@ function hori_itg_app_manager_form_validate($form, &$form_state) {
     $query->condition('imc.has_subcategory', 0, '=');
     $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $m_id_db = $results[0]['id'];
-    
+
     if (count($results) > 0 && ($m_id_db != $m_id) && $has_subcat == 0) {
-      $title = $results[0]['title'];      
-      form_set_error('order_id', t('Order: '.$order_id.' alreday used by: '.$title.''));
+        $title = $results[0]['title'];
+        form_set_error('order_id', t('Order: ' . $order_id . ' alreday used by: ' . $title . ''));
     }
-    
+
     //rule2 : not duplicate title for root
-    $title = hori_return_menu_section_title($form_state);    
+    $title = hori_return_menu_section_title($form_state);
     $query = db_select('itg_app_menu_content', 'imc');
     $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
     $query->condition('imc.menu_type_id', $menu_type_id, '=');
@@ -4678,16 +4666,16 @@ function hori_itg_app_manager_form_validate($form, &$form_state) {
     $query->condition('imc.has_subcategory', 0, '=');
     $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $title = $results[0]['title'];
-    
+
     if (count($results) > 0 && $has_subcat == 0 && arg(2) != "edit") {
-      $title = $results[0]['title'];      
-      form_set_error('order_id', t('Tile: '.$title.' alreday used by for other section'));
+        $title = $results[0]['title'];
+        form_set_error('order_id', t('Tile: ' . $title . ' alreday used by for other section'));
     }
     //rule3 : parent create 1st than chield
-    
-    if($has_subcat == 1){
+
+    if ($has_subcat == 1) {
         $title = "";
-        $title = hori_return_menu_section_title($form_state); 
+        $title = hori_return_menu_section_title($form_state);
         $query = db_select('itg_app_menu_content', 'imc');
         $query->fields('imc', array('id', 'menu_type_id', 'title', 'order_id'));
         $query->condition('imc.menu_type_id', $menu_type_id, '=');
@@ -4695,31 +4683,30 @@ function hori_itg_app_manager_form_validate($form, &$form_state) {
         $query->condition('imc.has_subcategory', 0, '=');
         $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $title = $results[0]['title'];
-        if(!$title){
+        if (!$title) {
             form_set_error('order_id', t('Mandatory to create parent 1st'));
         }
     }
-    
 }
 
 /**
  * testtolive_horizontalmenu
  */
-function testtolive_horizontalmenu(){
+function testtolive_horizontalmenu() {
     $key = "devitgd_rapid_horizontal_menu_json";
     $jsondata = horizontal_menu_middleware_data();
     //$jsondata = json_encode($jsondata);     
     variable_set('horizontal_menu_json', $jsondata);
-    /*config_update_status_json updation*/
+    /* config_update_status_json updation */
     $update_conf_json = variable_get('config_update_status_json');
     $update_conf_arr = json_decode($update_conf_json, TRUE);
-    //p($update_conf_arr);
+
     $update_conf_arr['data']['menu_update']['horizontal_updated_datetime'] = date("Y-m-d H:i:s", time());
     $update_conf_json = json_encode($update_conf_arr);
     variable_set('config_update_status_json', $update_conf_json);
-    /*config_update_status_json updation*/
+    /* config_update_status_json updation */
     //clear redish
-    redis_key_delete($key);// horizontal_menu redish key
+    redis_key_delete($key); // horizontal_menu redish key
     redis_key_delete('devitgd_rapid_config_update_status_json'); // config_update_status_json key
     drupal_set_message(t('Test-to-live horizontal-menu have been saved'));
     drupal_goto('horizontal-menu-management');
@@ -4732,7 +4719,7 @@ function testtolive_horizontalmenu(){
  * @return array
  */
 function manage_order_horizontal_menu_form($form, &$form_state) {
-    global $base_url;    
+    global $base_url;
     $results_top = horizontal_menu_listing_top();
     $results_other = hamburger_menu_listing_sub();
     //top cat ordring
@@ -4743,27 +4730,24 @@ function manage_order_horizontal_menu_form($form, &$form_state) {
         '#collapsed' => FALSE,
     );
     foreach ($results_top as $data) {
-        if($data['section_id'] == '1206553'){
+        if ($data['section_id'] == '1206553') {
             $title = "PROGRAMMES";
-        }
-        elseif($data['section_id'] == '1206552'){
+        } elseif ($data['section_id'] == '1206552') {
             $title = "VIDEOS";
-        }
-        elseif($data['section_id'] == '1208521'){
+        } elseif ($data['section_id'] == '1208521') {
             $title = "PHOTOS";
-        }
-        else{
-           $title = strtoupper($data['title']); 
+        } else {
+            $title = strtoupper($data['title']);
         }
         $id = $data['id'];
         $order = $data['order_id'];
-        $form['top-categories']['order_id_'.$id.''] = array(
-                '#type' => 'select',
-                '#title' => 'Manage Order of: '.$title.'',
-                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
-                '#default_value' => $order,
-                '#required' => TRUE,                
-            );
+        $form['top-categories']['order_id_' . $id . ''] = array(
+            '#type' => 'select',
+            '#title' => 'Manage Order of: ' . $title . '',
+            '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+            '#default_value' => $order,
+            '#required' => TRUE,
+        );
     }
     //other cat ordring
     $form['sub-categories'] = array(
@@ -4773,25 +4757,23 @@ function manage_order_horizontal_menu_form($form, &$form_state) {
         '#collapsed' => FALSE,
     );
     foreach ($results_other as $data) {
-        if($data['section_id'] == '1206553'){
+        if ($data['section_id'] == '1206553') {
             $title = "PROGRAMMES";
-        }
-        elseif($data['section_id'] == '1206552'){
+        } elseif ($data['section_id'] == '1206552') {
             $title = "VIDEOS";
-        }
-        elseif($data['section_id'] == '1208521'){
+        } elseif ($data['section_id'] == '1208521') {
             $title = "PHOTOS";
         }
-        $title_sub = strtoupper($data['s_title']); 
+        $title_sub = strtoupper($data['s_title']);
         $id = $data['id'];
         $order = $data['order_id'];
-        $form['sub-categories']['order_id_'.$id.''] = array(
-                '#type' => 'select',
-                '#title' => 'Manage Order of: '.$title.' >> '.$title_sub.'',
-                '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
-                '#default_value' => $order,
-                '#required' => TRUE,                
-            );
+        $form['sub-categories']['order_id_' . $id . ''] = array(
+            '#type' => 'select',
+            '#title' => 'Manage Order of: ' . $title . ' >> ' . $title_sub . '',
+            '#options' => array('' => '- Select -', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10', '11' => '11', '12' => '12', '13' => '13', '14' => '14', '15' => '15', '16' => '16', '17' => '17', '18' => '18', '19' => '19', '20' => '20', '21' => '21', '22' => '22', '23' => '23', '24' => '24', '25' => '25', '26' => '26', '27' => '27', '28' => '28', '29' => '29', '30' => '30'),
+            '#default_value' => $order,
+            '#required' => TRUE,
+        );
     }
     $form['submit_button'] = array(
         '#type' => 'submit',
@@ -4807,10 +4789,10 @@ function manage_order_horizontal_menu_form($form, &$form_state) {
  * @param array $form_state
  */
 function manage_order_horizontal_menu_form_submit($form, &$form_state) {
-    //p($form_state['input']);
-    $data = $form_state['input'];    
-    foreach ($data as $key => $value){
-        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);        
+
+    $data = $form_state['input'];
+    foreach ($data as $key => $value) {
+        $id = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
         if ($id > 0 && $value > 0) {
             // uapdete query
             db_update('itg_app_menu_content')
@@ -4818,28 +4800,28 @@ function manage_order_horizontal_menu_form_submit($form, &$form_state) {
                         'order_id' => $value,
                     ))->condition('id', $id, '=')->execute();
         }
-        
     }
     drupal_set_message(t('horizontal-menu order have been saved'));
     drupal_goto('horizontal-menu-management');
 }
+
 /**
  * manage_order_hamburger_menu_form_validate
  */
-function manage_order_horizontal_menu_form_validate($form, &$form_state) {  
-    $data = $form_state['input'];    
-    if(count(array_unique($data))< (count($data))) {        
-      //form_set_error('order_id', t('More than one menu have same order value.'));
+function manage_order_horizontal_menu_form_validate($form, &$form_state) {
+    $data = $form_state['input'];
+    if (count(array_unique($data)) < (count($data))) {
+        //form_set_error('order_id', t('More than one menu have same order value.'));
     }
 }
 
-function itg_max_from_array($data){
+function itg_max_from_array($data) {
     unset($data['op']);
     unset($data['form_build_id']);
     unset($data['form_token']);
     unset($data['form_id']);
-    $b = 0;    
-    foreach ($data as $key=>$val) {
+    $b = 0;
+    foreach ($data as $key => $val) {
         if ($val > $b) {
             $b = $val;
         }
@@ -4848,16 +4830,15 @@ function itg_max_from_array($data){
 }
 
 function hori_return_menu_section_title($form_state) {
-    //p($form_state);
     $data = array();
-            $title = '';
-            $section_id = 0;
-            $s_id = 0;
-            $s_title = '';
-            if (!empty($form_state['values'])) {
-        foreach ($form_state['values']['container'] as $key => $form_val) {    
-           
-            
+    $title = '';
+    $section_id = 0;
+    $s_id = 0;
+    $s_title = '';
+    if (!empty($form_state['values'])) {
+        foreach ($form_state['values']['container'] as $key => $form_val) {
+
+
             $data = array();
             $title = '';
             $section_id = 0;
@@ -4867,14 +4848,14 @@ function hori_return_menu_section_title($form_state) {
                 $title = $form_val['section']['title'];
                 $section_id = 0;
             } else if ($form_val['menu_type'] == '1' || $form_val['menu_type'] == '1206553' || $form_val['menu_type'] == '1208521' || $form_val['menu_type'] == '1206552') {
-                // p($form_val);
+
                 if (arg(2) == "edit") {
                     $title = $form_val['section']['title'];
                     $section_id = get_taxo_tid($title);
                     $s_id = $form_val['sub_section_id'];
                     //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
                     $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;                    
+                    $s_title = $term->name;
                 } else {
                     $section_id = $form_val['section']['title'];
                     $term = taxonomy_term_load($section_id);
@@ -4892,48 +4873,40 @@ function hori_return_menu_section_title($form_state) {
             }
             if ($form_val['menu_type'] == '1') {
                 if ($form_val['has_subcat'] == 1) {
-                   if (arg(2) == "edit") {
-                    $title = $form_val['section']['title'];
-                    $section_id = get_taxo_tid($title);
-                    $s_id = $form_val['sub_section_id'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;                    
-                }
-                else{
-                   $s_id = $form_val['sub_section_id'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;
-                }
+                    if (arg(2) == "edit") {
+                        $title = $form_val['section']['title'];
+                        $section_id = get_taxo_tid($title);
+                        $s_id = $form_val['sub_section_id'];
+                        //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                        $term = taxonomy_term_load($s_id);
+                        $s_title = $term->name;
+                    } else {
+                        $s_id = $form_val['sub_section_id'];
+                        //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                        $term = taxonomy_term_load($s_id);
+                        $s_title = $term->name;
+                    }
                 } else {
                     $s_id = 0;
                     $s_title = '';
                 }
             }
-            //p($form_val);
-            if(arg(2) == "edit" && $form_val['sub_section_id'] > 0){
-                $s_id = $form_val['sub_section_id'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;
-            }
-            elseif($form_val['sub_section'] > 0) {
-                 $s_id = $form_val['sub_section'];
-                    //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
-                    $term = taxonomy_term_load($s_id);
-                    $s_title = $term->name;
-                    
-                }
-                else{
-                    $s_id = 0;
-                    $s_title = '';
-                }
 
-            
+            if (arg(2) == "edit" && $form_val['sub_section_id'] > 0) {
+                $s_id = $form_val['sub_section_id'];
+                //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $term = taxonomy_term_load($s_id);
+                $s_title = $term->name;
+            } elseif ($form_val['sub_section'] > 0) {
+                $s_id = $form_val['sub_section'];
+                //$s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+                $term = taxonomy_term_load($s_id);
+                $s_title = $term->name;
+            } else {
+                $s_id = 0;
+                $s_title = '';
+            }
         }
     }
-                return $title;
+    return $title;
 }
-
-
