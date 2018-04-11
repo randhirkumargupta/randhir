@@ -1940,3 +1940,15 @@ function get_category_custom_code($term_id){
         return $data_result[0];
     }
 }
+
+/**
+ * Function for itg_ipl_triangle_status().
+ */
+function itg_ipl_triangle_status(){
+    $sid = 1;
+    $query = db_select('itg_score_card', 'm');
+    $query->condition('m.id', $sid, '=');
+    $query->fields('m', array('score_triangle'));
+    $data_result = $query->execute()->fetchCol();
+    return $data_result[0];
+}
