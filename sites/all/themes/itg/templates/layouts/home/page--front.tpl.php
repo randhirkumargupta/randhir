@@ -1055,10 +1055,10 @@ if ($theme != 'itgadmin') {
   z-index: 99;background: #000;line-height: 20px;border-radius: 100%;}
 </style>
 <script type="text/javascript">
-  $(document).ready(function(){
-   $(".crosscloseif").click(function(){
-    $("#twisstiframe").fadeOut(500)
-    $(this).fadeOut(500); 
+  jQuery(document).ready(function(){
+   jQuery(".crosscloseif").click(function(){
+    jQuery("#twisstiframe").fadeOut(500)
+    jQuery(this).fadeOut(500); 
    })  
  })
 </script>
