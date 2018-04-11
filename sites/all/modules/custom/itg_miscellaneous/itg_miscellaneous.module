@@ -111,6 +111,15 @@ function itg_miscellaneous_menu() {
     'file' => 'includes/itg_remove_flooded_data.inc',
   );
 
+  $items['admin/import-url-redirection'] = array(
+        'title' => 'Import Redirection Url',
+        'description' => 'Import Redirection Url',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('import_redirection_url_form'),
+        'access callback' => 'user_access',
+        'access arguments' => array('administer users'),
+  );
+
   
   return $items;
 }
@@ -182,7 +191,7 @@ function itg_miscellaneous_preprocess_page(&$vars) {
   }
   }
   
-    // Set meta data for required pages.
+  // Set meta data for required pages.
   if ('livetv' == arg(0) || 'international-livetv' == arg(0)) {
     $description_live = "India Today Live TV Streaming: Watch live tv news from worldwide and get live tv streaming by 24*7 online.";
     $og_description_live = 'india today, tv online, live streaming, live tv online, live tv streaming, watch live tv';
@@ -220,26 +229,25 @@ function itg_miscellaneous_preprocess_page(&$vars) {
     $search_str = preg_replace('/\s+/', ' ', $search_str);
     $description_topic = "$search_str: Find $search_str news, videos, photos and magazine stories on India Today. Also get breaking news from all over India and worldwide.";
     $og_description_topic = "$search_str, $search_str News, $search_str Videos, $search_str Photos, $search_str Images, $search_str Magazine Stories";
-  
-  // Prepare meta data.
+
+    // Prepare meta data.
     $html_head_live = array(
-        'keyword' => array(
+      'keyword' => array(
         '#tag' => 'meta',
         '#attributes' => array(
           'name' => 'keywords',
           'content' => $og_description_topic,
-          ),
-         '#weight' => -99
         ),
+        '#weight' => -99
+      ),
       'description' => array(
         '#tag' => 'meta',
         '#attributes' => array(
           'name' => 'description',
           'content' => $description_topic,
-          ),
-         '#weight' => -99
         ),
-  
+        '#weight' => -99
+      ),
     );
     // Push data to HTML head.
     foreach ($html_head_live as $key => $value) {
@@ -248,3 +256,132 @@ function itg_miscellaneous_preprocess_page(&$vars) {
   }
 }
 
+/**
+ * This function is used to import csv for url Redirection
+ * {@inheritdoc}
+ */
+function import_redirection_url_form($form, &$form_state){
+    $form['#attributes'] = array(
+    'enctype' => 'multipart/form-data'
+    );
+    $form['csvfile'] = array(
+        '#title' => t('CSV File'),
+        '#type' => 'file',
+        '#description' => 'Import CSV file',
+    );
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Import'),
+    );
+    $form['#validate'] = array(
+        'import_url_redirection_csv_validate'
+    );
+    return $form;
+}
+
+/**
+ * This function validate uploaded CSV file
+ * @param $form
+ * @param $form_state
+ *
+ */
+function import_url_redirection_csv_validate($form, &$form_state) {
+    $validators = array(
+        'file_validate_extensions' => array('csv'),
+    );
+
+    if ($file = file_save_upload('csvfile', $validators, FALSE, FILE_EXISTS_REPLACE)) {
+        $form_state['values']['csvupload'] = $file->destination;
+    }
+    else {
+        form_set_error('csvImporter', t('Unable to copy upload file to !dest'));
+    }
+}
+
+/**
+ * This function import CSV data to database
+ * @param $form
+ * @param $form_state
+ *
+ */
+function import_redirection_url_form_submit($form, &$form_state) {
+    global $user;
+    $handle = fopen(drupal_realpath($form_state['values']['csvupload']), 'r');
+    $values = array();
+    $already_exist = array();
+    while ($line = fgetcsv($handle)) {
+        if ($line[0] == 'Source' && $line[1] == 'Destination') {
+            continue;
+        }
+        if($line[0] == '' || $line[1] == ''){
+            continue;
+        }
+        if($line[0] == '' && $line[1] == ''){
+            continue;
+        }
+        $url_data_validate = get_data_url_redirection($line[0]);
+        if ($url_data_validate != '') {
+            $already_exist[] = array(
+                'Source' => $line[0],
+                'status' => 'duplicate'
+           );
+            continue;
+        }
+        if ($line[0] != '' && $line[1] != '' && url($line[0]) == url($line[1])) {
+            $already_exist[] = array(
+                'Source' => $line[0],
+                'status' => 'same_url'
+            );
+            continue;
+        }
+        $source_parse = redirect_parse_url($line[0]);
+        $destination_parse = redirect_parse_url($line[1]);
+        $values = array(
+            "rid" => '',
+            "type" => 'redirect',
+            "hash" => '',
+            "uid" => $user->uid,
+            "source" => $source_parse['path'],
+            "source_options" => array($source_parse['query']),
+            "redirect" => $destination_parse['path'],
+            "redirect_options" => array($destination_parse['query']),
+            "language" => LANGUAGE_NONE,
+            "status" => 1,
+            "status_code" => 0,
+            "override" => ''
+        );
+        //save redirection
+        $custom_redirect = (object) $values;
+        $total_values[] = $values;
+        redirect_save($custom_redirect);
+    }
+
+    if ((count($values)) > 0) {
+        drupal_set_message(t('Successfully import :' . count($total_values)) . ' item(s)', 'status');
+    }
+    if (count($already_exist) > 0) {
+        foreach ($already_exist as $url_data) {
+            if($url_data['status'] == 'duplicate'){
+                drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " already exists"), 'warning');
+            }elseif ($url_data['status'] == 'same_url'){
+                drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " is attempting to redirect the page to itself"), 'warning');
+            }
+        }
+    }
+
+}
+
+/** function for checking the url redirection
+ * @param string source
+ * @return array of matched value
+ *
+ */
+function get_data_url_redirection($source){
+    if($source != '' && db_table_exists('redirect')){
+        $query = db_select('redirect','rd');
+        $query->fields('rd',array('rid'));
+        $query->condition('rd.source',$source);
+        $result = $query->execute()->fetchCol();
+        return $data = $result[0];
+    }
+}
