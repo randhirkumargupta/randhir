@@ -113,6 +113,7 @@ if ($theme != 'itgadmin') {
     <div class="row itg-common-section">
 	<!-- Left 8 Block Section -->
     <div class="col-md-8 col-sm-8">
+    <div class="row">
 		<div class="col-md-12 col-sm-12">		
 			<h2 class="news-head"><span>Top Headlines</span></h2>
 			<?php
@@ -132,15 +133,19 @@ if ($theme != 'itgadmin') {
 							echo l(mb_strimwidth($data_val['title'], 0, 90, ".."), "node/" . $data_val['nid']  , array('attributes' => array("title" => $data_val['title'])));
 						  }
 						  ?>
-						</h2>   
+						</h3>   
 					<?php endif; ?>
 				<?php } ?>
 		</div>
+    </div>
+    <div class="row">
 		<div class="col-md-12 col-sm-12 mt-30">
 		  <h1 class="news-heading"> News </h1>
 		</div>
+    </div>
+    <div class="row">
 		<!-- First News section Card -->
-        <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="widget-help-text"><?php print t('News section card'); ?></div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -205,7 +210,10 @@ if ($theme != 'itgadmin') {
                 </div>               
             </div>
         </div>
-        <!-- Third News section Card-->        
+        </div>
+        
+        <div class="row">
+        <!-- Third News section Card--> 
         <div class="col-md-6 col-sm-6 col-xs-12 mt-50">
           <div class="widget-help-text"><?php print t('News section card'); ?></div>
             <div class="itg-widget">
@@ -271,6 +279,8 @@ if ($theme != 'itgadmin') {
                 </div>               
             </div>  
         </div>
+        </div>
+        <div class="row">
         <!-- Fifth News section Card-->        
         <div class="col-md-6 col-sm-6 col-xs-12 mt-50">
           <div class="widget-help-text"><?php print t('News section card'); ?></div>
@@ -336,6 +346,7 @@ if ($theme != 'itgadmin') {
                   </div>             
                 </div>               
             </div>  
+        </div>
         </div>
         <!-- News Section card Ends -->
         <!-- Photogallery Section -->
