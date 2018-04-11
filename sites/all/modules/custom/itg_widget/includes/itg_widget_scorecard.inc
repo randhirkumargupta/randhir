@@ -209,10 +209,10 @@ function itg_manage_score_list() {
         $status = 'Inactive';
       }
       if ($row->score_triangle == 1) {
-        $status = 'Active';
+        $triangle = 'Active';
       }
       elseif ($row->score_triangle == 2) {
-        $status = 'Inactive';
+        $triangle = 'Inactive';
       }
       $action = l(t('Edit'), 'manage-score-card/edit/' . $score_id, array('query' => array('destination' => 'manage-score-list')));
       $rows[] = array($i,
@@ -220,7 +220,7 @@ function itg_manage_score_list() {
         $score_photo,
         $score_video,
         $status,
-        $score_triangle,
+        $triangle,
         $action
       );
       $i++;
