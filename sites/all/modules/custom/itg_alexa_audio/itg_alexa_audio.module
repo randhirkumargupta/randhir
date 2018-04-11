@@ -16,12 +16,6 @@
  */
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
-    $curent_feed = get_last_alexa_feed();
-    $exist_nid = $curent_feed[0]['nid'];
-    if ($exist_nid) {
-      drupal_set_message('Audio & Video data exist in our system.');
-      drupal_goto('alexa-audio-clips');
-    }    
     $arg = arg();
     if (is_array($arg) && $arg[2] == 'edit') {
       $node = node_load($arg[1]);
@@ -87,6 +81,13 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#maxlength' => 256,
         '#attributes' => array('readonly' => 'readonly'),
       );
+    } else {
+      $curent_feed = get_last_alexa_feed();
+      $exist_nid = $curent_feed[0]['nid'];   
+      if ($exist_nid && $arg[0] != 'file' && $arg[1] != 'ajax') {
+        drupal_set_message('Audio & Video data exist in our system.');
+        drupal_goto('alexa-audio-clips');
+      } 
     }
 
     $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
