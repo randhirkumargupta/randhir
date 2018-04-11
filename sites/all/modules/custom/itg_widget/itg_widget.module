@@ -748,7 +748,8 @@ function itg_widget_block_view($delta = '') {
             $data = itg_widget_get_graph_data($info);
             if($data[0]->field_graph_type_value == 'Graph'){
 							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
-						}else if ($data[0]->field_graph_type_value == 'Dot Graph'){
+						}
+						if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
 							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
 							drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
 						}
@@ -907,14 +908,17 @@ function itg_widget_get_graph_data() {
 
     global $theme;
     $cat_id = $_GET['section'];
+    $is_category = FALSE;
     if(isset($_GET['category']) && !empty($_GET['category'])){
 			$cat_id = $_GET['category'];
 		}
     if ($theme == FRONT_THEME_NAME) {
         $cat_id = arg(2);
+        $cat_id_org = $cat_id;
         $section_tid = get_category_parent_one_level($cat_id);
 				if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
 					$cat_id = $section_tid[0]->parent;
+					$is_category = TRUE;
 				}        
     }
     $itg_query = db_select('node', 'n');
@@ -923,7 +927,11 @@ function itg_widget_get_graph_data() {
     $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
-
+    
+    $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
+    if($is_category){
+	    $itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
+    }
 
     $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
@@ -1671,4 +1679,14 @@ function _itg_widget_delete_node_data_from_helper_table($nid) {
     if (!__itg_check_nid_in_widget($nid)) {
         __itg_widget_helper_data_delete($nid);
     }
+}
+
+function get_election_state_by_category($catid){
+	$itg_query = db_select('field_data_field_graph_category', 'dfgc');
+	$itg_query->innerJoin("field_data_field_election_state", "fes", "fes.entity_id=dfgc.entity_id");
+	$itg_query->condition('dfgc.field_graph_category_value', $catid, '=');
+	$itg_query->fields('fes', array('field_election_state_tid'));
+	$itg_result = $itg_query->execute()->fetchAll();
+	return $itg_result;
+	
 }

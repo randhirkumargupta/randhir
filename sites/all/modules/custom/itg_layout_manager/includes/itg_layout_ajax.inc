@@ -75,7 +75,7 @@ function insert_layout_setting_ajax() {
         ));
         $query_layout_manager->execute();
       }
-      else if ($_GET['template_name'] == 'page--special_election' && $_GET['block_name'] == 'itg-block-5') {
+      else if (($_GET['template_name'] == 'page--special_electioncat' || $_GET['template_name'] == 'page--special_election') && $_GET['block_name'] == 'itg-block-5') {
         $query_layout_manager = db_insert('itg_layout_manager');
         $query_layout_manager->fields(array(
           'layout_id' => $unpublish_tpl_id,

@@ -391,7 +391,11 @@ function itg_layout_manager_block_view($delta = '') {
     // for admin widgets list in side bar
     case 'layout_widget_list_block':
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
-        $template_id = check_template_of_section($_GET['section'], $_GET['template_name']);
+				$cat_id = $_GET['section'];  
+				if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] > 0){
+					$cat_id = $_GET['category'];  
+				}
+        $template_id = check_template_of_section($cat_id, $_GET['template_name']);
       }
 
       if (empty($template_id)) {
@@ -421,7 +425,11 @@ function itg_layout_manager_block_view($delta = '') {
         $widgets_type = 'section_wise_order';
       }
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
-        $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
+				$cat_id = $_GET['section'];  
+				if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] > 0){
+					$cat_id = $_GET['category'];  
+				}
+        $data['widgets_list'] = display_section_widgets_list($cat_id, $_GET['template_name'], $widgets_type);
       }
 
       $block['content'] = theme('layout_section_widgets_block', array('data' => $data));
@@ -432,6 +440,12 @@ function itg_layout_manager_block_view($delta = '') {
       $data['section_widget2_form'] = drupal_render($section_widgets_form);
 
       $widgets_type = 'section_widget2_wise_order';
+			
+			$cat_id = $_GET['section'];  
+			if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] > 0){
+				$cat_id = $_GET['category'];  
+			}
+      $data['widgets_list'] = display_section_widgets_list($cat_id, $_GET['template_name'], $widgets_type);
 
       $data['widgets_list'] = display_section_widgets_list($_GET['section'], $_GET['template_name'], $widgets_type);
 
