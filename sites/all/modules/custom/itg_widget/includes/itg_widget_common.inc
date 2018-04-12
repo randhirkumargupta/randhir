@@ -375,6 +375,7 @@ function itg_widget_get_sate_by_category_ajax_callback($form, &$form_state) {
         '#type' => 'ajax',
         '#commands' => array(
             ajax_command_replace("#dropdown_state_all", render($form['field_election_state'])),
+            ajax_command_replace("#election_category_wrapper", render($form['field_graph_category'])),
         )
     );
 }

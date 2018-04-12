@@ -669,8 +669,6 @@ function itg_seo_node_update($node) {
     
   }
  }
-  pathcache_clear_cache($node->path);
-  pathcache_clear_cache($node->path['original']);
 }
 
 /**
