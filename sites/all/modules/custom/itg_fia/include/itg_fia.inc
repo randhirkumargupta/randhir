@@ -464,29 +464,58 @@ function itg_fia_related_node($nid = 0) {
             }
         }
         else{
-            // top story data
-            $rand = rand();
-            $prod_url =  "https://appfeeds.intoday.in";   
-            $url = $prod_url . "/appapi/topstories/" . $rand;
-            $contents = file_get_contents($url);
-            $contents_ar = json_decode($contents);    
-            $data = $contents_ar->data;
-
-            $l_cont = 1;
-            foreach ($data as $key => $value) {
-                $n_share_link = $value->n_share_link;
-                $n_small_image = $value->n_small_image;
-                $n_title = $value->n_title;
-                $relatednode .='<li><a href="'.$n_share_link.'"> </a></li>';
-                if ($l_cont >= 3) {
-                    break;
-                }
-                $l_cont++;
-            }
+            // related content of primary cat
+            $prime_cat = getNodePrimeCatByNid($nid);
+            $order = fia_get_order_node_by_nid($nid);
+            $related_content_primary_cat = "";
+            $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_cat->tid, $order);      
+            $relatednode .= $related_content_primary_cat;
         }
       
     $relatednode .='</ul>';
     return $relatednode;
 }
 
+/*
+ * ITG FIA function for get content of primary cat
+ */
 
+function fia_related_content_primary_cat($nid, $prime_cat, $order = 0) {
+    $relatednode = "";
+    if ($prime_cat) {
+        $query = db_select('node', 'n');
+        $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+        $query->join('field_data_field_primary_category', 'fpc', 'n.nid=fpc.entity_id');
+        $query->join('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
+        $query->fields('n', array('nid'));
+        $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+        $query->condition('n.type', 'story', '=');
+        $query->condition('n.status', '1', '=');
+        $query->condition('iwo.widget', $order, '>');
+        $query->condition('iwo.widget', 'section_wise_widget');
+        $query->condition('fpc.field_primary_category_value', $prime_cat, '=');
+        $query->range(0, 3);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
+        foreach ($result as $reskey => $resvalue) {            
+            $firebase_url = get_node_firebase_weburl($resvalue['nid']);
+            $relatednode .= '<li><a href="' . $firebase_url . '"> </a></li>';
+        }
+    }
+    return $relatednode;
+}
+
+/*
+ * ITG FIA function for get order of current node
+ */
+function fia_get_order_node_by_nid($nid){
+    $order = 0;
+    if($nid){
+        $query = db_select('itg_widget_order', 'iwo');
+        $query->fields('iwo', array('weight'));
+        $query->condition('iwo.nid', $nid);
+        $query->condition('iwo.widget', 'section_wise_widget');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $order = $result[0]['weight'];
+    }
+    return $order;
+}
