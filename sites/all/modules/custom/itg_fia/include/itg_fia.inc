@@ -485,7 +485,7 @@ function fia_related_content_primary_cat($nid, $prime_cat, $order = 0) {
     if ($prime_cat) {
         $query = db_select('node', 'n');
         $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
-        $query->join('field_data_field_primary_category', 'fpc', 'n.nid=fpc.nid');
+        $query->join('field_data_field_primary_category', 'fpc', 'n.nid=fpc.entity_id');
         $query->join('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
         $query->fields('n', array('nid'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
