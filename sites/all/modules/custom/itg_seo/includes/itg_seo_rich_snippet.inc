@@ -262,6 +262,7 @@ function itg_seo_node_data($node) {
   }
   // Rich Snippet for Videos Rich Snippet
   elseif ($node->type == 'videogallery') {
+	$logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     $video_time = explode(':', $node->field_video_duration[LANGUAGE_NONE][0]['value']);
     $video_duration = t("PT" . $video_time[0] . "M" . $video_time[1] . "S");
     $name = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -298,6 +299,16 @@ function itg_seo_node_data($node) {
                         "@type": "PublicationEvent",
                         "startDate": "' . $publisheddate . '"
                         },
+            "publisher": {
+            "@type": "Organization",
+            "name": "India Today",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "' . $logo . '",
+            "width": 600,
+            "height": 60
+            }
+            },
                 "potentialAction": [
                                {
                                  "@type": "ViewAction",
