@@ -208,7 +208,7 @@ function tabclose() {
 }
 
 function change_mini_state_graph(value){
-	var state_id = jQuery(value).val();
+		var state_id = jQuery(value).val();
 		var iframe_url = jQuery("#svg_url_"+state_id).val();   
 		var election_cat = jQuery("#election_cat_"+state_id).val();   
 		var large_graph_link = '<a href="state-elections/'+election_cat+'/'+state_id+'">';
