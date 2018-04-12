@@ -937,9 +937,9 @@ function itg_widget_get_graph_data() {
     $itg_query->fields('n', array('nid'));
     $itg_query->fields('frq', array('field_election_constituency_tall_value'));
     $itg_query->fields('astw', array('field_election_state_tid'));
-     $itg_query->fields('cju', array('field_election_chart_json_url_value'));
+    $itg_query->fields('cju', array('field_election_chart_json_url_value'));
     $itg_query->fields('sju', array('field_election_svg_json_url_value'));
-    $itg_query->fields('gt', array('field_graph_type_value'))
+    $itg_query->fields('gt', array('field_graph_type_value'));
     $itg_query->fields('dfgc', array('field_graph_category_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('ast.field_section_tid', $cat_id, '=')
