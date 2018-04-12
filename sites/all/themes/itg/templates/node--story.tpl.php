@@ -1258,11 +1258,7 @@ if (!empty($content)):
                   $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
               }
             ?>
-            <div class="c_ques"><?php print $question; ?></div>
-            <!--Vidtent Adds -->
-            <script type="text/javascript" src="//vt.andbeyond.media/vidtent-player-2.0.0.min.js" id="vidTentPlayerJsScript" data-vidtent-var="E02EEBF9" async ></script>
-            <div id="playerE02EEBF9"></div>
-            <!--Vidtent Adds end -->
+            <div class="c_ques"><?php print $question; ?></div>            
             <div id="vuukle-emote"></div>
             <div id="vuukle-comments"></div>
             <div class="vuukle-powerbar"></div>                       
