@@ -113,7 +113,7 @@ function itg_seo_node_data($node) {
         $bestrate = 5;
         $auth_name = str_replace(' ', '-', trim($authname[0]));
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
-        $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
+        $author_url = FRONT_URL . '/topic/' . $auth_name;
         $moviename = trim($node->field_mega_review_movie_plot[LANGUAGE_NONE][0]['value']);
         $directorname = trim($node->field_mega_review_director[LANGUAGE_NONE][0]['value']);
         $imdb_url = trim($node->field_review_movie_imdb_url[LANGUAGE_NONE][0]['value']);
