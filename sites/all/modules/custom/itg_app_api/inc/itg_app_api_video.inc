@@ -1060,7 +1060,7 @@ function topstoriesList($source) {
     if ($source == 'home') {
         $result_fs_cont_ar = $result_fs;
         $result_fs_cont = count($result_fs_cont_ar);
-        $range_max = 10- $result_fs_cont;
+        $range_max = 5- $result_fs_cont;
     }
     $range_min = 0;
     $order_by = 'ASC';

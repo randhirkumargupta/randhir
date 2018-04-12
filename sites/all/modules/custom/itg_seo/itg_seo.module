@@ -23,8 +23,8 @@ function itg_seo_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  $items['expired-content'] = array(
-    'title' => t('Expired Content'),
+  $items['custom-search'] = array(
+    'title' => t('Custom search'),
     'page callback' => 'itg_not_found_200',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -662,10 +662,11 @@ function itg_seo_node_update($node) {
       $node->path['alias'] = $newpath;
       $path = array(
         'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
+        'alias' => $newpath,
+     );
       path_save($path);
     }
+    
   }
  }
 }

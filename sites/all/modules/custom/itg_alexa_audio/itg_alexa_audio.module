@@ -16,14 +16,22 @@
  */
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
-    $curent_feed = get_last_alexa_feed();
-    if (!empty($curent_feed) && (count($curent_feed) > 0)) {
-      $fid = $curent_feed[0]['field_audio_fid'];
-      $file_obj = file_load($fid);
-      $stream_url = file_create_url($file_obj->uri);
+  $arg = arg();
+  if (is_array($arg) && $arg[2] == 'edit') {
+    $node = node_load($arg[1]);
+    $alexa_type = $node->field_alexa_type[LANGUAGE_NONE][0]['value'];
+    $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
+    $file_obj = file_load($fid);
+    $stream_url = file_create_url($file_obj->uri);
+    if($alexa_type == 1) {           
       $alexa_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time.json");
-      $google_syndication_xml = file_create_url("public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml");
-      $form['last_audio_url'] = array(
+    } elseif($alexa_type == 2) {
+      $alexa_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");      
+    }
+    
+    $google_syndication_xml = file_create_url("public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml");
+    
+    $form['last_audio_url'] = array(
         '#type' => 'textfield',
         '#title' => t("Last Uploaded Audio Url"),
         '#default_value' => $stream_url,
@@ -50,9 +58,16 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#maxlength' => 256,
         '#attributes' => array('readonly' => 'readonly'),
       );
+    
+  } elseif($arg[0] != 'file' && $arg[1] != 'ajax') {
+    $exist_alexa = check_exist_alexa();
+    if($exist_alexa && $exist_alexa >= 2) {
+      drupal_set_message('Audio & Video data exist in our system.');
+      drupal_goto('alexa-audio-clips');
     }
-
-    $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
+   
+  }
+      $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
   }
 }
 
@@ -70,26 +85,62 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * @param array $value   
  */
 function genrate_alexa_audio_json($value) {
-  $audiofid = $value['field_audio']['und'][0]['fid'];
-  $title = $value['title'];
-  $uid = $value['uid'];
-  $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
-  $file_obj = file_load($audiofid);
-  $stream_url = file_create_url($file_obj->uri);
-  $json = array(
-    'uid' => 'itaudiofeed' . $uid,
-    'updateDate' => $date,
-    'titleText' => $title,
-    'mainText' => "",
-    'streamUrl' => $stream_url,
-    'redirectionUrl' => FRONT_URL
-  );
-  $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
-  $file_path = $xml_path . 'it_audioclip50_time.json';
-  $fp = fopen($file_path, "w");
-  fwrite($fp, json_encode($json));
-  fclose($fp);
-  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . $uid);
+  $alexa_type = $value['field_alexa_type'][LANGUAGE_NONE][0]['value'];
+  if ($alexa_type == 1) {
+    $audiofid = $value['field_audio']['und'][0]['fid'];
+    $title = $value['title'];
+    $uid = $value['uid'];
+    $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
+    $file_obj = file_load($audiofid);
+    $stream_url = file_create_url($file_obj->uri);
+    $json = array(
+      'uid' => 'itaudiofeed' . $uid,
+      'updateDate' => $date,
+      'titleText' => $title,
+      'mainText' => "",
+      'streamUrl' => $stream_url,
+      'redirectionUrl' => FRONT_URL
+    );
+    $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
+    $file_path = $xml_path . 'it_audioclip50_time.json';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, json_encode($json));
+    fclose($fp);
+    itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . $uid);
+    
+  } elseif ($alexa_type == 2) {
+    
+    $audiofid = $value['field_audio']['und'][0]['fid'];
+    $title = $value['title'];
+    $uid = $value['uid'];
+    $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
+    $file_obj = file_load($audiofid);
+    $video_url = file_create_url($file_obj->uri);
+    $data_array = get_last_alexa_feed();
+    foreach ($data_array as $key => $value) {
+          if ($value['field_alexa_type_value'] == 1) {
+             $audio_fid = $value['field_audio_fid']; 
+          }
+    }
+    
+    $file_obj_audio = file_load($audio_fid);
+    $stream_url = file_create_url($file_obj_audio->uri);
+    
+    $json = array(
+      'uid' => 'itaudiofeed' . $uid,
+      'updateDate' => $date,
+      'titleText' => $title,
+      'mainText' => "",
+      'streamUrl' => $stream_url,
+      'videoUrl' => $video_url,
+      'redirectionUrl' => FRONT_URL
+    );
+    $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
+    $file_path = $xml_path . 'it_audioclip50_time_video.json';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, json_encode($json));
+    fclose($fp);
+  }  
 }
 
 /**
@@ -159,11 +210,25 @@ XML;
 function get_last_alexa_feed() {
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_audio', 'fu', 'fu.entity_id=n.nid');
+  $query->leftJoin('field_data_field_alexa_type', 'ft', 'ft.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('fu', array('field_audio_fid'));
+  $query->fields('ft', array('field_alexa_type_value'));
   $query->condition('n.status', 1);
   $query->condition('n.type', "alexa_audio_clips", '=');
+  $query->condition('ft.field_alexa_type_value', 1, '=');
   $query->orderBy('n.created', 'DESC')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 }
+
+/**
+ * For alexa type
+ */
+function check_exist_alexa() {
+  return db_select('field_data_field_alexa_type')
+          ->fields(NULL, array('field_alexa_type_value'))
+          ->countQuery()->execute()
+          ->fetchField();
+}
+
