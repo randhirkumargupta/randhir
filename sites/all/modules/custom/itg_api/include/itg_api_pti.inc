@@ -139,7 +139,8 @@ function itg_pti_content() {
                     if (function_exists('itg_custom_byline_create')) {
                       itg_custom_byline_create($uniqueid, $by_line);
                     }
-                    //Set values to node$headline_flag = FALSE;
+                    //Set values to node
+                    $headline_flag = FALSE;
                     $full_headline = '';
                     $headline = stripInvalidXml($headline);
                     $headline_len = strlen($headline);
