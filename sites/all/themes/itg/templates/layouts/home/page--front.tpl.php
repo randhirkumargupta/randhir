@@ -1058,26 +1058,21 @@ $ipl_triangle_status = itg_ipl_triangle_status();
 if ($ipl_triangle_status == 1) {
 ?>
 
-<div id="twister" style="position: fixed;right: 0px;bottom: -8px;z-index: 99999;"><span class="crosscloseif"><i class="fa fa-angle-double-down" aria-hidden="true"></i></span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
+<div id="twister"><span class="crosscloseif"><i class="fa fa-angle-double-down" aria-hidden="true"></i></span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
 
 <style type="text/css"> 
   #twister{ position: fixed;right: 0px;bottom: -8px;z-index: 99999; cursor:crosshair;}
-    span.crosscloseif{ z-index: 99; background:#ccc; color:#000; font-size:12px; font-weight:bold; padding:5px; position: absolute; top:-25px; right:0; }
+    span.crosscloseif{z-index: 99; background: #f1f1f1; color: #000;font-size: 20px;font-weight: bold;padding: 5px 10px;position: absolute;top: 16px;
+    right: 28px;line-height: 20px; box-shadow: 0px -2px 2px 1px #ccc; border-radius: 3px 3px 0 0;}
     #twister.movearrow{ position: fixed; bottom:-180px; }
 </style>
+
 <script type="text/javascript">
-  if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof jQuery.browser !== "undefined" && jQuery.browser.msie == 1))
+if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof jQuery.browser !== "undefined" && jQuery.browser.msie == 1))
     {
       document.getElementById('twister').style.display='none';
     }
-  jQuery(document).ready(function(){
-   jQuery(".crosscloseif").click(function(){
-    jQuery("#twisstiframe").fadeOut(500)
-    jQuery(this).fadeOut(500); 
-   })  
- })
-</script>
-<script type="text/javascript">
+
 onload = adding;
 var body = document.body;
 var dragme = document.getElementById('twister');
