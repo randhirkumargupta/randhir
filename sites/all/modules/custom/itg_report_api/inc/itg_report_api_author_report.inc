@@ -225,7 +225,7 @@ function getContentCountByDate($start_date, $end_date) {
   $cont = 0;
   $flag = 0;
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
   if($_GET['author_report'] == 1){
@@ -244,7 +244,7 @@ function getContentCountByDate($start_date, $end_date) {
   }
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
   $query->condition('pc.bundle', 'story');
   if($_GET['author_report'] != 1){
       $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
@@ -322,7 +322,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $flag = 0;
   $query = db_select('itg_multi_byline_info', 'byli');
   $query->leftJoin('node', 'n', 'byli.nid=n.nid');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.byline_id');
   if($_GET['author_report'] == 1){
       $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
@@ -341,7 +341,7 @@ function getAuthorList_Report($s_date, $e_date) {
   }
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
   $query->condition('pc.bundle', 'story');
   if($_GET['author_report'] != 1){
       $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
@@ -378,7 +378,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
   $cont = 0;
   $flag = 0;
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
   $query->fields('n', array('nid', 'status'));
@@ -391,7 +391,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
   }
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
   $query->condition('pc.bundle', 'story');
   $query->condition('repr.field_reporter_email_id_value', $email, '=');
   $query->groupBy('n.nid');
@@ -438,7 +438,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
   $cont = 0;
   $flag = 0;
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
   $query->fields('n', array('nid', 'status', 'title'));
@@ -451,7 +451,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
   }
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
   $query->condition('pc.bundle', 'story');
   $query->condition('repr.field_reporter_email_id_value', $mail, '=');
   $query->groupBy('n.nid');
