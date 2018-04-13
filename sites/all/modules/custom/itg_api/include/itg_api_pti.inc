@@ -48,7 +48,7 @@ function itg_pti_content() {
             $xml_filename = basename(trim($file_path));
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-            //if (empty(itg_api_get_xml_info($xml_filename))) {
+            if (empty(itg_api_get_xml_info($xml_filename))) {
               if (!empty($pti_xml)) {
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
@@ -140,7 +140,15 @@ function itg_pti_content() {
                       itg_custom_byline_create($uniqueid, $by_line);
                     }
                     //Set values to node
+                    $headline_flag = FALSE;
+                    $full_headline = '';
                     $headline = stripInvalidXml($headline);
+                    $headline_len = strlen($headline);
+                    if ($headline_len >= 250) {
+                      $full_headline = $headline;
+                      $headline = substr($headline, 0, 250);
+                      $headline_flag = TRUE;
+                    }
                     $node = new stdClass();
                     $node->title = trim($headline);
                     $node->type = "story";
@@ -155,6 +163,9 @@ function itg_pti_content() {
                     $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim($headline);
                     //$node->field_story_magazine_headline[LANGUAGE_NONE][0]['value'] = $final_kicker;
                     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim($headline);
+                    if ($headline_flag) {
+                      $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = trim($full_headline);
+                    }
                     //$node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
                     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
                     if (!empty($term_id)) {
@@ -213,15 +224,14 @@ function itg_pti_content() {
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
                     }
                     else {
-                      if ($title_length > 15) {
+                      if (($title_length < 15) || ($headline_flag)) {
+                        $node->log = 'State Changed to Review';
+                        $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                      }
+                      else {
                         $node->log = 'State Changed to published';
                         //$node->workbench_moderation_state_new = workbench_moderation_state_published();
                         workbench_moderation_moderate($node, 'published');
-                      }
-
-                      if ($title_length < 15) {
-                        $node->log = 'State Changed to Review';
-                        $node->workbench_moderation_state_new = workbench_moderation_state_review();
                       }
                     }
                     //$node = node_submit($node); // Prepare node for saving
@@ -247,7 +257,7 @@ function itg_pti_content() {
                       'alias' => $newpath, // Any alias that you want to set.
                     );
                     path_save($path);*/
-                   // itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
+                    itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
                     // move xml files/
                     $complete_folder_path = "s3://{$bucket}".'/agencies/pti/Complete_xml/';
                     if (copy($file_path, $complete_folder_path.$xml_filename)) {
@@ -269,7 +279,7 @@ function itg_pti_content() {
                   }
                 }
               }
-           // }
+            }
           }
         }
       }
