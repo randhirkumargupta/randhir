@@ -792,6 +792,14 @@ if (!empty($content)):
                   <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>"></div>                            
                   <?php endif; ?>
                 <div class="movie-detail">
+
+                <?php if (!empty($node->field_mega_review_movie_plot)): ?>
+                    <div class="plot">
+                      <span class="title"> <?php print t('Movie Name:'); ?></span>                                    
+                      <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
+                    </div>
+                <?php endif; ?>
+      
     <?php if (!empty($node->field_mega_review_cast)): ?>
                     <div class="cast">
                       <span class="title"> <?php print t('Cast:'); ?></span>
@@ -815,12 +823,7 @@ if (!empty($content)):
                       <span class="detail"> <?php print $node->field_mega_review_director[LANGUAGE_NONE]['0']['value']; ?></span>
                     </div>
                   <?php endif; ?>
-    <?php if (!empty($node->field_mega_review_movie_plot)): ?>
-                    <div class="plot">
-                      <span class="title"> <?php print t('Plot:'); ?></span>                                    
-                      <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
-                    </div>
-    <?php endif; ?>
+    
                 </div>                            
               </div>
               <?php
@@ -1258,7 +1261,7 @@ if (!empty($content)):
                   $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
               }
             ?>
-            <div class="c_ques"><?php print $question; ?></div>            
+            <div class="c_ques"><?php print $question; ?></div>
             <div id="vuukle-emote"></div>
             <div id="vuukle-comments"></div>
             <div class="vuukle-powerbar"></div>                       

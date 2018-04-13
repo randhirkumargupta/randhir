@@ -3272,7 +3272,10 @@ footer {
                 .title {
                     float: left;
                     padding-right: 7px;
-                    width: 60px;
+                    width: auto;
+                    margin-right: 5px;
+                    font-weight: 600;
+                    font-size: 13px;
                 }
                 .detail {
                     display: block;

@@ -686,6 +686,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $query_alias = 0;
         $type = 'category';
         $table = 'migrate_map_itgcategory';
+      } else if ((!empty($arg[0]) && $arg[0] == 'section') && !empty($_GET['secId'])) {
+        $old_content_id = $_GET['secId'];
+        $type = 'category';
+        if ($arg[0] == 'section') {
+          $table = 'migrate_map_itgsection'; 
+        }
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }

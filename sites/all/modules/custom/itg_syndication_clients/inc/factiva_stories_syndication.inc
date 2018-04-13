@@ -119,6 +119,7 @@ function itg_genrate_factiva_story_syndication_v1($section_id = NULL, $file_name
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
         $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+        $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
         $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
         $query->fields('n', array('nid', 'title', 'created', 'changed'));
@@ -127,6 +128,7 @@ function itg_genrate_factiva_story_syndication_v1($section_id = NULL, $file_name
         $query->fields('smi', array('field_story_medium_image_fid'));
         $interval = itg_app_time_interval($section_id);        
         $days_ago = strtotime(date('Y-m-d', strtotime('-'.$interval.' days')));
+        $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
         $query->condition('n.created', $days_ago, '>=');
         $query->condition('ti.tid', $section_id, '=');
         $query->condition('n.status', 1);
@@ -155,7 +157,7 @@ function genrate_factiva_story_syndication_xml_v1($result = NULL, $category, $si
     $xml = '';
     if (!empty($result)) {
         global $base_url;
-        $logo = theme_get_setting('logo');
+        $logo = FRONT_URL.'/sites/all/themes/itg/logo.png'; //theme_get_setting('logo');
         $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
         $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
         $xml .= '<channel>';

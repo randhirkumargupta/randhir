@@ -93,6 +93,7 @@
                 <?php print drupal_render($form['field_mega_review_cast']); ?>
                 <?php print drupal_render($form['field_mega_review_director']); ?>
                 <?php print drupal_render($form['field_mega_review_movie_plot']); ?>
+                <?php print drupal_render($form['field_review_movie_imdb_url']); ?>
             </div>
         </div>
 
