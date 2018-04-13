@@ -297,7 +297,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
   } else if (($arg[0] == 'index.php' && !empty($_GET['option']) && $_GET['option'] == 'com_magazine')) { // Pattern http://indiatoday.intoday.in/index.php?option=com_magazine&opt=section&sectionid=89&Itemid=1&issueid=95
       drupal_goto(FRONT_URL, array(), 301);
-  } else if ((!empty ($arg[0]) && $arg[0] == 'calendar') && !empty($arg[1]) && (!empty($arg[2]) && $arg[2] == 'online.html')) {  // Pattern calendar/16-10-2017/online.html
+  } else if ((!empty ($arg[0]) && $arg[0] == 'calendar') && !empty($arg[1]) && (!empty($arg[2]) && ($arg[2] == 'online.html' || $arg[2] == 'news.html'))) {  // Pattern calendar/16-10-2017/online.html
       $old_content_id = $arg[1];
       $table = 'none';
       $type = 'archives';
