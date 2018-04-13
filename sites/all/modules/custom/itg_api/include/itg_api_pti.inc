@@ -48,7 +48,7 @@ function itg_pti_content() {
             $xml_filename = basename(trim($file_path));
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
-            //if (empty(itg_api_get_xml_info($xml_filename))) {
+            if (empty(itg_api_get_xml_info($xml_filename))) {
               if (!empty($pti_xml)) {
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
@@ -247,7 +247,7 @@ function itg_pti_content() {
                       'alias' => $newpath, // Any alias that you want to set.
                     );
                     path_save($path);*/
-                   // itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
+                    itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
                     // move xml files/
                     $complete_folder_path = "s3://{$bucket}".'/agencies/pti/Complete_xml/';
                     if (copy($file_path, $complete_folder_path.$xml_filename)) {
@@ -269,7 +269,7 @@ function itg_pti_content() {
                   }
                 }
               }
-           // }
+            }
           }
         }
       }
