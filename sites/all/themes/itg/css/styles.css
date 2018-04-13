@@ -3025,7 +3025,10 @@ footer {
   .story-section .story-movie .movie-detail div .title {
     float: left;
     padding-right: 7px;
-    width: 60px; }
+    width: auto;
+    margin-right: 5px;
+    font-weight: 600;
+    font-size: 13px; }
   .story-section .story-movie .movie-detail div .detail {
     display: block;
     overflow: hidden; }
