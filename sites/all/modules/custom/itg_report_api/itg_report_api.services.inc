@@ -512,7 +512,7 @@ function itg_report_api_author_report() {
   $suffix = $start_date;
   $redis_key = "itg_report_api_author_report_" . $suffix;
 
-  //$result_get = getRedis($redis_key);
+  $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
@@ -522,7 +522,7 @@ function itg_report_api_author_report() {
     $jsondata = author_report($start_date);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
