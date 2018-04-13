@@ -383,6 +383,20 @@ if(!empty($video_node->field_story_reporter)){
 
                       </div>
                   </div>
+                    <div class="taboola desktop-hide">
+                        <div id="taboola-below-article-thumbnails"></div>
+                    </div>
+                    <script type="text/javascript">
+                      if (jQuery(window).width() < 767) {
+                        window._taboola = window._taboola || [];
+                        _taboola.push({
+                          mode: 'thumbnails-g',
+                          container: 'taboola-below-article-thumbnails',
+                          placement: 'Below Article Thumbnails',
+                          target_type: 'mix'
+                        });
+                      }
+                    </script>
               </div>
               <?php //$row['field_story_expert_description'];                  ?>
               <div class="col-md-4 video-header-right">
