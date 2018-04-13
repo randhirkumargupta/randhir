@@ -175,7 +175,10 @@ function itg_pti_content() {
                     $node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array)$file));
                     // Attach random image to PTI Story
                     $exp_description = strtolower($description);
+                    $exp_headline = strtolower($headline);
+                    $exp_xml_filename = strtolower($xml_filename);
                     $exp_description = explode(" ", $exp_description);
+                    $f3_filename = substr($exp_xml_filename, 0, 3);
                     $exclude_word = array('embargoed', 'ap', 'afp', 'dpa');
                     if (array_intersect($op, $exp_description)) {
                       $node->log = 'State Changed to Review';
@@ -185,11 +188,27 @@ function itg_pti_content() {
                       $node->log = 'State Changed to Review';
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
                     }
-                    else if (preg_match('/embargoed/', $headline)) {
+                    else if (preg_match('/embargoed/', $exp_headline)) {
                       $node->log = 'State Changed to Review';
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
                     }
-                    else if (preg_match('/pwr/', $xml_filename)) {
+                    else if (preg_match('/newsalert/', $exp_headline)) {
+                      $node->log = 'State Changed to Review';
+                      $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                    }
+                    else if (preg_match('/reopens/', $exp_headline)) {
+                      $node->log = 'State Changed to Review';
+                      $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                    }
+                    else if ($f3_filename == 'pwr') {
+                      $node->log = 'State Changed to Review';
+                      $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                    }
+                    else if (preg_match('/newsalert/', $exp_xml_filename)) {
+                      $node->log = 'State Changed to Review';
+                      $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                    }
+                    else if (preg_match('/reopens/', $exp_xml_filename)) {
                       $node->log = 'State Changed to Review';
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
                     }
