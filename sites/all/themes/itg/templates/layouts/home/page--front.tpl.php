@@ -1062,6 +1062,10 @@ if ($ipl_triangle_status == 1) {
   z-index: 99;background: #000;line-height: 20px;border-radius: 100%;}
 </style>
 <script type="text/javascript">
+  if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof jQuery.browser !== "undefined" && jQuery.browser.msie == 1))
+    {
+      document.getElementById('twister').style.display='none';
+    }
   jQuery(document).ready(function(){
    jQuery(".crosscloseif").click(function(){
     jQuery("#twisstiframe").fadeOut(500)
