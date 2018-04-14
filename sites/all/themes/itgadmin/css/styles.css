@@ -11278,6 +11278,8 @@ span.file a {
   padding: 0;
   position: relative; }
 
+
+
 /*.uploaded-video-view{
   @extend .dib;
   @extend .vtop;
@@ -12549,6 +12551,8 @@ body.taxonomy-form-term-tags {
   .view .view-filters [id*="views-exposed-form-section-wiser-breakup-report-page"] .views-exposed-form .views-exposed-widget.views-submit-button .form-submit {
     margin-top: 28px; }
 
+.node-type-alexa-audio-clips .form-type-managed-file > label + div.file-widget.form-managed-file {height: auto; }
+.node-type-alexa-audio-clips .vertical-tabs{ display:none; }
 /*For Edit Quiz*/
 .form-type-managed-file > label + div.file-widget.form-managed-file {
   height: 28px; }
