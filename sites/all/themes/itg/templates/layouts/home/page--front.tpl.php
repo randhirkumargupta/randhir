@@ -1,3 +1,6 @@
+<!--[if IE]>
+  <style>#twister{display:none}</style>
+<![endif]-->
 <?php
 /**
  * @file
