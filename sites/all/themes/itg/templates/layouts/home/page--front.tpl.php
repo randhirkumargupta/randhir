@@ -1057,9 +1057,13 @@ if ($theme != 'itgadmin') {
 $ipl_triangle_status = itg_ipl_triangle_status(); 
 if ($ipl_triangle_status == 1) {
 ?>
-<style type="text/css">
-  .crosscloseif{position: absolute;top: 28px;right: 17px;color: #fff;font-size: 12px;font-family: arial;height: 20px;width: 20px;text-align: center;cursor: pointer;
-  z-index: 99;background: #000;line-height: 20px;border-radius: 100%;}
+
+<div id="twister" style="position: fixed;right: 0px;bottom: -8px;z-index: 99999;"><span class="crosscloseif"><i class="fa fa-angle-double-down" aria-hidden="true"></i></span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
+
+<style type="text/css"> 
+  #twister{ position: fixed;right: 0px;bottom: -8px;z-index: 99999; cursor:crosshair;}
+    span.crosscloseif{ z-index: 99; background:#ccc; color:#000; font-size:12px; font-weight:bold; padding:5px; position: absolute; top:-25px; right:0; }
+    #twister.movearrow{ position: fixed; bottom:-180px; }
 </style>
 <script type="text/javascript">
   if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof jQuery.browser !== "undefined" && jQuery.browser.msie == 1))
@@ -1073,5 +1077,76 @@ if ($ipl_triangle_status == 1) {
    })  
  })
 </script>
-<div id="twister" style="position: fixed;right: 0px;bottom: -8px;z-index: 99999;"><span class="crosscloseif">X</span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
+<script type="text/javascript">
+onload = adding;
+var body = document.body;
+var dragme = document.getElementById('twister');
+var body_t = document.body;
+var dragme_t = document.getElementById('twister');
+var cs = dragme.style ;
+var height = dragme.offsetHeight;
+var width = dragme.offsetWidth;
+/*var text = document.getElementById('y');*/
+
+
+//==> Add Some Event Listener for Mouse & Touch <==
+function adding()
+{
+dragme.addEventListener('mousedown',hold,false);
+body.addEventListener('mouseup',release,false);
+	
+dragme_t.addEventListener('touchstart',hold,false);
+body_t.addEventListener('touchend',release,false);
+}
+
+//==> On Hold Function <==
+function hold()
+{
+	dragme.addEventListener('mousemove',move,true);
+	body.addEventListener('mousemove',move,true);
+	
+	dragme_t.addEventListener('touchmove',tmove,true);
+	body_t.addEventListener('touchmove',tmove,true);
+}
+//==> On Realease Function <==
+function release()
+{
+	dragme.removeEventListener('mousemove',move,true);
+	body.removeEventListener('mousemove',move,true);
+	
+	dragme_t.removeEventListener('touchmove',tmove,true);
+	body_t.removeEventListener('touchmove',tmove,true);
+
+}
+
+//==> On  Mousemove Function <==
+function move(event){
+	var epY = event.clientY;
+	var epX = event.clientX;	
+	cs.position = "absolute";
+	cs.top = epY + "px";
+	cs.left = epX + "px";
+	cs.transform = "translateX(" + -width/2 + "px ) translateY("+ -height/2 +"px)";
+}
+
+// ==> On Touchmove Function <==
+function tmove(touch){
+	var epY = touch.touches[0].clientY;
+	var epX = touch.touches[0].clientX;
+	cs.position = "absolute";
+	cs.top = epY + "px";
+	cs.left = epX +  "px";
+	cs.transform = "translateX(" + -width/2 + "px ) translateY("+ -height/2 +"px)";
+}
+
+cs.position = "";
+
+function movebottom() {
+    var arrow = document.getElementById("twister");  
+    arrow.classList.toggle("movearrow");
+    arrow.removeAttribute('style');    
+    }
+
+</script>
+
 <?php } ?>
