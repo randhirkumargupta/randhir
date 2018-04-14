@@ -90,6 +90,9 @@ function itg_seo_node_data($node) {
     $modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
     $description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
     $story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
+    $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
+    $description_text = !empty($story_kicker) ? $story_kicker : $meta_description; 
+    
     $bylines = itg_get_multi_byline_details($node->nid, 1);
     $authname = array();
     foreach ($bylines AS $bylines_val) {
@@ -153,7 +156,7 @@ function itg_seo_node_data($node) {
                                       "ratingValue": ' . $story_rating . '
                                   },
                                   "url": "' . $pageurl . '",
-                                  "description": "' . $story_kicker . '",
+                                  "description": "' . $description_text . '",
                                   "publisher": {
                                       "@type": "Organization",
                                       "name": "India Today"
@@ -162,7 +165,7 @@ function itg_seo_node_data($node) {
                             </script>',
         );
     } else {
-        $description_text = !empty($story_kicker) ? $story_kicker : $description;  
+         
         $markup = array(
              '#type' => 'markup',
              '#markup' => '<script type="application/ld+json"> {  
