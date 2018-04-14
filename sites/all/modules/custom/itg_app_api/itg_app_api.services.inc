@@ -4084,8 +4084,8 @@ function itg_rapid_api_change_password($token) {
     $token = $params['auth_token'];
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
-    if (!drupal_valid_token($token, 'services')) {
-    //if (!$token_val_flag) {
+    //if (!drupal_valid_token($token, 'services')) {
+    if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
