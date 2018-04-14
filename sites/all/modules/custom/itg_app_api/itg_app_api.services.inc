@@ -4117,12 +4117,12 @@ function itg_rapid_api_change_password($token) {
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
         ################logout sart##############
-        $params_logout = array();
+       $params_logout = array();
         $params_logout[user_id] = $params['user_id'];
         $params_logout[auth_token] = $params['auth_token'];
         $params_logout[device_id] = $params['device_id'];
         $params_logout[device_type] = $params['device_type'];
-        $url_logout = PARENT_SSO . "/appapisso/log_out";
+        /* $url_logout = PARENT_SSO . "/appapisso/log_out";
         $result = callAPI($method, $url_logout, $params_logout);
         $user_id = $params['user_id'];
         $user = user_load_by_name($user_id);
@@ -4136,7 +4136,7 @@ function itg_rapid_api_change_password($token) {
         $user = drupal_anonymous_user();
         drupal_save_session($original_session_state);
         // call custom function to clean token in custom table
-        cleanToken_Rapid($params_logout);
+        cleanToken_Rapid($params_logout);*/
         ################logout sart##############
         ###############relogin start ##########
         $params_login = array();
@@ -4184,6 +4184,8 @@ function itg_rapid_api_change_password($token) {
         }
         ###############relogin end ##########
         $token_arr_data['auth_token'] = "$token";
+        $token_arr_data['session_id'] = "$session_id";
+        $token_arr_data['session_name'] = "$session_name";
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
         $data['data'] = $token_arr_data;
