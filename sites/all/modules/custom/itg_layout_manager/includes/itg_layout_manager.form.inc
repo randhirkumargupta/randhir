@@ -399,7 +399,7 @@ function itgd_get_section_category_ajax_callback($form, &$form_state){
  * {@inheritdoc}
  */
 function get_category_of_associate_tpl($tpl_type, $section_id) {
-  $op = array("" => "-- Category --");
+  $op = array(0 => "-- Category --");
   $itg_query = db_select('taxonomy_term_data', 'term');
   $itg_query->fields('term', array('name', 'tid'));
   $itg_query->join('taxonomy_term_hierarchy', 'tth', 'tth.tid = term.tid');

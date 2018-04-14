@@ -265,17 +265,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 										
                                       if ($theme == FRONT_THEME_NAME) {
                                         $section = arg(2);
-                                        $section_org = $section;
-                                        $section_tid = get_category_parent_one_level($section);
-                                        if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-											$section = $section_tid[0]->parent;
-										}
                                       }
                                       else {
-										$section = $_GET['section'];
-										if(isset($_GET['category']) && !empty($_GET['category'])){
-										  $section = $_GET['category'];
-										}
+																				$section = $_GET['section'];
+																				if(isset($_GET['category']) && !empty($_GET['category'])){
+																					$section = $_GET['category'];
+																				}
                                       }
                                     }
                                     $state_tid = $graphdata[0]->field_election_state_tid;

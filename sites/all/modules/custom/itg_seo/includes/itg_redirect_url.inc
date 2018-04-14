@@ -176,7 +176,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $rss_url = '';
   $query_alias = '';
   $paging = array();
-  if (($arg[0] == 'story.jsp' || $arg[1] == 'story.jsp') && (!empty($_GET['sId']) || !empty($_GET['sid']) || !empty($_GET['id']))) { //code for this URL (story.jsp?sId=877)
+  if (($arg[0] == 'story.jsp' || $arg[0] == 'story' || $arg[0] == 'Story' || $arg[1] == 'story.jsp' || $arg[1] == 'story' || $arg[1] == 'Story') && (!empty($_GET['sId']) || !empty($_GET['sid']) || !empty($_GET['id']))) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
     if (isset($_GET['sid'])) {
       $old_content_id = $_GET['sid'];
@@ -686,6 +686,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $query_alias = 0;
         $type = 'category';
         $table = 'migrate_map_itgcategory';
+      } else if ((!empty($arg[0]) && $arg[0] == 'section') && !empty($_GET['secId'])) {
+        $old_content_id = $_GET['secId'];
+        $type = 'category';
+        if ($arg[0] == 'section') {
+          $table = 'migrate_map_itgsection'; 
+        }
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }

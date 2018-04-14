@@ -1918,12 +1918,13 @@ function itg_common_node_update($node) {
 function get_fact_schema() {return;
   $arg = arg();
   $entity_id = isset($arg['1']) ? $arg['1'] : '';
+  if(db_table_exists('field_data_field_story_schema')){
   if(!empty($entity_id)) {
     $query = db_select('field_data_field_story_schema', 's');
     $query->fields('s', array('field_story_schema_value'));
     $result = $query->condition('s.entity_id', $entity_id)->execute()->fetchAssoc();
     return $result['field_story_schema_value'];
-  } 
+  }}
 }
 
 /**
@@ -1939,4 +1940,16 @@ function get_category_custom_code($term_id){
         $data_result = $query->execute()->fetchCol();
         return $data_result[0];
     }
+}
+
+/**
+ * Function for itg_ipl_triangle_status().
+ */
+function itg_ipl_triangle_status(){
+    $sid = 1;
+    $query = db_select('itg_score_card', 'm');
+    $query->condition('m.id', $sid, '=');
+    $query->fields('m', array('score_triangle'));
+    $data_result = $query->execute()->fetchCol();
+    return $data_result[0];
 }

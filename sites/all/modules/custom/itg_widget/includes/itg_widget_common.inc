@@ -375,6 +375,7 @@ function itg_widget_get_sate_by_category_ajax_callback($form, &$form_state) {
         '#type' => 'ajax',
         '#commands' => array(
             ajax_command_replace("#dropdown_state_all", render($form['field_election_state'])),
+            ajax_command_replace("#election_category_wrapper", render($form['field_graph_category'])),
         )
     );
 }
@@ -1525,10 +1526,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
                 $section = arg(2);
-                $section_tid = get_category_parent_one_level($section);
-                if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-                  $section = $section_tid[0]->parent;
-                }
             } else {
                 $section = $_GET['section'];
                 if(isset($_GET['category']) && !empty($_GET['category'])){
@@ -1555,10 +1552,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
                 $section = arg(2);
-                $section_tid = get_category_parent_one_level($section);
-                if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-                  $section = $section_tid[0]->parent;
-                }
             } else {
                 $section = $_GET['section'];
                 if(isset($_GET['category']) && !empty($_GET['category'])){
@@ -1577,10 +1570,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
                 $section = arg(2);
-                $section_tid = get_category_parent_one_level($section);
-                if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-                  $section = $section_tid[0]->parent;
-                }
             } else {
                 $section = $_GET['section'];
                 if(isset($_GET['category']) && !empty($_GET['category'])){
@@ -1598,10 +1587,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
                 $section = arg(2);
-                $section_tid = get_category_parent_one_level($section);
-                if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-                  $section = $section_tid[0]->parent;
-                }
             } else {
                 $section = $_GET['section'];
                 if(isset($_GET['category']) && !empty($_GET['category'])){
@@ -1619,10 +1604,6 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if ($view->name == 'most_popular' && ($view->current_display == 'state_key_candidate' )) {
         if ($theme != 'seven') {
             $section = arg(1);
-            $section_tid = get_category_parent_one_level($section);
-						if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
-							$section = $section_tid[0]->parent;
-						}
             $state = arg(2);
             $query->where[1]['conditions'][2]['value'] = $section;
             $query->where[1]['conditions'][3]['value'] = $state;
