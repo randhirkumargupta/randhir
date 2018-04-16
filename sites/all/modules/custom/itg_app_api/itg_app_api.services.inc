@@ -4110,6 +4110,7 @@ function itg_rapid_api_change_password($token) {
         // Destroy the current session.
         module_invoke_all('user_logout', $user);
         session_destroy();
+        drupal_session_start();
 
         // Load the anonymous user.
         //$user = drupal_anonymous_user();
@@ -4122,7 +4123,7 @@ function itg_rapid_api_change_password($token) {
         $params_logout['auth_token'] = $params['auth_token'];
         $params_logout['device_id'] = $params['device_id'];
         $params_logout['device_type'] = $params['device_type'];
-         $url_logout = PARENT_SSO . "/appapisso/log_out";
+        /* $url_logout = PARENT_SSO . "/appapisso/log_out";
         $result = callAPI($method, $url_logout, $params_logout);
         $user_id = $params['user_id'];
         $user = user_load_by_name($user_id);
@@ -4135,7 +4136,7 @@ function itg_rapid_api_change_password($token) {
         // Load the anonymous user.
         //$user = drupal_anonymous_user();
         //drupal_save_session($original_session_state);
-        // call custom function to clean token in custom table
+        // call custom function to clean token in custom table*/
         cleanToken_Rapid($params_logout);
         ################logout sart##############
         ###############relogin start ##########
