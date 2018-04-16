@@ -56,7 +56,7 @@ function author_report_tvtn($start_date) {
   $data['auhtorwise_data']['month'] = "$month_total";
   $data['auhtorwise_data']['year'] = "$year_total";
   $data['auhtorwise_data']['site_id'] = "$site_id";    //auhtor_data
-  $author_list = getAuthorList_Report($today_unix, $today_end);
+  $author_list = getAuthorList_Report($today_unix, $today_end,$type);
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
@@ -115,7 +115,7 @@ function author_report_tvtn($start_date) {
  * @pram datetime $start_date
  * @return array
  */
-function author_report($start_date) {
+function author_report($start_date, $type='story') {
   global $base_url;
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
@@ -144,10 +144,10 @@ function author_report($start_date) {
   $year_prev_unix = $year_time_s;
   $year_prev_unix_end = $today_end;
 
-  $today_total = getContentCountByDate($today_unix, $today_end);
-  $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
-  $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
-  $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
+  $today_total = getContentCountByDate($today_unix, $today_end,$type);
+  $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end,$type);
+  $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end,$type);
+  $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end,$type);
   $data['site_snapshot']['site_name'] = "$site_name";
   $data['site_snapshot']['today'] = "$today_total";
   $data['site_snapshot']['yesterday'] = "$yesterday_total";
@@ -162,7 +162,7 @@ function author_report($start_date) {
   $data['auhtorwise_data']['year'] = "$year_total";
   $data['auhtorwise_data']['site_id'] = "$site_id";
   //auhtor_data
-  $author_list = getAuthorList_Report($today_unix, $today_end);
+  $author_list = getAuthorList_Report($today_unix, $today_end, $type);
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
@@ -170,10 +170,10 @@ function author_report($start_date) {
     $user_id = $value['author_id'];
     $name = getAuthorNameDashboard($user_id);
     $mail = $value['author_email'];
-    $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
-    $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
-    $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $mail);
-    $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $mail);
+    $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail, $type);
+    $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail,$type);
+    $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $mail, $type);
+    $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $mail, $type);
     $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
     $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
     $auhtor_data[$author_loop_cont]['author_name'] = "$name";
@@ -183,7 +183,7 @@ function author_report($start_date) {
     $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
     $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
     //auhtor_data contents
-    $author_today_data = todayContentsByUid($today_unix, $today_end, $mail);
+    $author_today_data = todayContentsByUid($today_unix, $today_end, $mail, $type);
     //loop author today data
     $author_inner_loop_cont = 0;
     $contents = array();
@@ -220,16 +220,19 @@ function author_report($start_date) {
  *
  * @return int $count
  */
-function getContentCountByDate($start_date, $end_date) {
-
+function getContentCountByDate($start_date, $end_date, $type) {
   $cont = 0;
   $flag = 0;
+  $content_type = $type;
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
   if($_GET['author_report'] == 1){
       $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
+  }
+  if($content_type == 'videogallery'){
+      $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
   }
   $query->fields('n', array('nid', 'status'));
   $query->fields('byli', array('byline_id'));
@@ -237,20 +240,26 @@ function getContentCountByDate($start_date, $end_date) {
   if($_GET['author_report'] == 1){
     $query->fields('autr', array('field_author_report_value'));
   }
+  if($content_type == 'videogallery'){
+    $query->fields('mis', array('field_mis_report_value'));
+  }
   //end
   if ($start_date != "na") {
     $query->condition('n.created', $start_date, ">=");
     $query->condition('n.created', $end_date, "<=");
-  }
+  }  
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
-  $query->condition('pc.bundle', 'story');
+  $query->condition('n.type', $content_type);
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
+  $query->condition('pc.bundle', $content_type);
   if($_GET['author_report'] != 1){
       $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
     }
     else{
        $query->condition('autr.field_author_report_value', 'author_report', '=');
+    }
+    if($content_type == 'videogallery'){
+        $query->condition('mis.field_mis_report_value', 'mis_report', '=');
     }
   $query->groupBy('n.nid');
   $result = $query->execute();
@@ -315,40 +324,51 @@ function getbylineDetail($nid, $status) {
  *
  * @return array authorList
  */
-function getAuthorList_Report($s_date, $e_date) {
+function getAuthorList_Report($s_date, $e_date,$type) {
   global $base_url;
   $list = array();
   $cont = 0;
   $flag = 0;
+  $content_type = $type;
+
   $query = db_select('itg_multi_byline_info', 'byli');
   $query->leftJoin('node', 'n', 'byli.nid=n.nid');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.byline_id');
   if($_GET['author_report'] == 1){
       $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
   }
-
+if($content_type == 'videogallery'){
+      $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
+  }
   $query->fields('n', array('nid', 'status'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
   if($_GET['author_report'] == 1){
     $query->fields('autr', array('field_author_report_value'));
   }
+  if($content_type == 'videogallery'){
+    $query->fields('mis', array('field_mis_report_value'));
+  }
   //end
   if ($start_date != "na") {
     $query->condition('n.created', $s_date, ">=");
     $query->condition('n.created', $e_date, "<=");
   }
+
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
-  $query->condition('pc.bundle', 'story');
+  $query->condition('n.type', $content_type);
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
+  $query->condition('pc.bundle', $content_type);
   if($_GET['author_report'] != 1){
       $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
       $query->groupBy('n.nid');
     }
     else{
        $query->condition('autr.field_author_report_value', 'author_report', '=');
+    }
+    if($content_type == 'videogallery'){
+        $query->condition('mis.field_mis_report_value', 'mis_report', '=');
     }
 
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -374,25 +394,36 @@ function getAuthorList_Report($s_date, $e_date) {
  *
  * @return int $count
  */
-function getContentCountByDateAndByUid($start_date, $end_date, $email) {
+function getContentCountByDateAndByUid($start_date, $end_date, $email, $type) {
   $cont = 0;
   $flag = 0;
+  $content_type = $type;
+
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
+  if($content_type == 'videogallery'){
+      $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
+  }
   $query->fields('n', array('nid', 'status'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
+  if($content_type == 'videogallery'){
+    $query->fields('mis', array('field_mis_report_value'));
+  }
   //end
   if ($start_date != "na") {
     $query->condition('n.created', $start_date, ">=");
     $query->condition('n.created', $end_date, "<=");
   }
+ if($content_type == 'videogallery'){
+        $query->condition('mis.field_mis_report_value', 'mis_report', '=');
+    }
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
-  $query->condition('pc.bundle', 'story');
+  $query->condition('n.type', $content_type);
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
+  $query->condition('pc.bundle', $content_type);
   $query->condition('repr.field_reporter_email_id_value', $email, '=');
   $query->groupBy('n.nid');
   $result = $query->execute();
@@ -433,26 +464,36 @@ function getbylineFlagByEmail($nid, $status, $email) {
  *
  * @return int $count
  */
-function todayContentsByUid($start_date, $end_date, $mail) {
+function todayContentsByUid($start_date, $end_date, $mail, $type) {
   $list = array();
+  $content_type = $type;
   $cont = 0;
   $flag = 0;
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
+  if($content_type == 'videogallery'){
+      $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
+  }
   $query->fields('n', array('nid', 'status', 'title'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
+  if($content_type == 'videogallery'){
+    $query->fields('mis', array('field_mis_report_value'));
+  }
   //end
   if ($start_date != "na") {
     $query->condition('n.created', $start_date, ">=");
     $query->condition('n.created', $end_date, "<=");
   }
+  if($content_type == 'videogallery'){
+        $query->condition('mis.field_mis_report_value', 'mis_report', '=');
+    }
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'story');
-  $query->condition('pc.field_primary_category_value', '1206640', '<>');
-  $query->condition('pc.bundle', 'story');
+  $query->condition('n.type', $content_type);
+  $query->condition('pc.field_story_category_tid', '1206640', '<>');
+  $query->condition('pc.bundle', $content_type);
   $query->condition('repr.field_reporter_email_id_value', $mail, '=');
   $query->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
