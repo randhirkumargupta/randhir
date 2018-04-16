@@ -20,7 +20,7 @@
 
         <div id="videoupload" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Video Upload'); ?></h2>
-            <?php print drupal_render($form['field_mis_report']); ?>
+            
             <div class="itg-form-section hide">
                 <div class="browse-ftp">
                     <div id="itg_video_content">
@@ -58,7 +58,9 @@
                 <div class="browse-video-form"><?php print drupal_render($form['field_video_upload']); ?>
                     <span class="error vid-error"></span>
                 </div>
+                
                 <?php print drupal_render($form['field_video_kicker']); ?>
+                <?php print drupal_render($form['field_mis_report']); ?>
             </div>
         </div>
 
