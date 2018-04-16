@@ -4184,9 +4184,9 @@ function itg_rapid_api_change_password($token) {
             }
         }
         ###############relogin end ##########
-        $token_arr_data['auth_token'] = "$token";
-        $token_arr_data['session_id'] = "$session_id";
-        $token_arr_data['session_name'] = "$session_name";
+        $token_arr_data['auth_token'] = "$local_account->token";
+        $token_arr_data['session_id'] = "$local_account->sessid";
+        $token_arr_data['session_name'] = "$local_account->session_name";
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
         $data['data'] = $token_arr_data;
