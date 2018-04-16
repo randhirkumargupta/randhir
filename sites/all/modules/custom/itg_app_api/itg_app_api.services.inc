@@ -4116,6 +4116,7 @@ function itg_rapid_api_change_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
+         unset($_COOKIE);
         ################logout sart##############
        $params_logout = array();
         $params_logout[user_id] = $params['user_id'];
