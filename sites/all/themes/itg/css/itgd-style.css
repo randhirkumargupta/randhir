@@ -147,7 +147,8 @@
 .view-front-end-global-search .view-content .front-search-date-share:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 .view-front-end-global-search .view-content .itg-search-list .search-detail{ width:auto; float: left; }
 .view-front-end-global-search .view-content .itg-search-list .social-share{width: auto;float: left;margin-top: 14px;}
-
+.front .itg-top-section .home-top-story .data-holder .itg-listing li.itg-top-story-ad:before{display:none}
+.front .itg-top-section .home-top-story .data-holder .itg-listing li.itg-top-story-ad{padding:0px 10px 0px 10px;}
 .page-custom-search h1.page__title {display: none;}
 
 @media all and (max-width: 700px) {
