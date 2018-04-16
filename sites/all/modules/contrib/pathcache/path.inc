@@ -258,7 +258,7 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
           cache_set($path_cid, $source, 'cache_path_source');
         }
         else {
-					die('in Else');
+					//~ die('in Else');
           // We can't record anything into $map because we do not have a valid
           // index and there is no need because we have not learned anything
           // about any Drupal path. Thus cache to $no_source.
