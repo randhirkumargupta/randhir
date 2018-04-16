@@ -1078,7 +1078,7 @@ function _latest_from_pti() {
     $related_dt.= "<ul>";
     $i = 0;
     foreach ($related_content as $key => $value) {
-      if (!empty($value->title)) {
+      if (!empty(trim($value->title))) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = drupal_get_path_alias('node/' . $value->nid);
         $related_dt.= "<li " . $data_tb_region_item . " class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
