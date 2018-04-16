@@ -24,8 +24,8 @@
               $pipelineclass = ' pipeline-added';
             }
           }
-          if (!empty($enable_top_story_ad) && $counter == $top_story_ad_pos){
-						echo "<li class='itg-top-story-ad'>". $top_story_ad_html ."</li>";
+				if (!empty($enable_top_story_ad) && $counter == $top_story_ad_pos){
+						echo "<li class='itg-top-story-ad desktop-hide'>". $top_story_ad_html ."</li>";
 					}
 					$counter++;
           ?>
