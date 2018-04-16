@@ -465,7 +465,7 @@ function itg_fia_related_node($nid = 0) {
                 if($flag_fia){
                     $firebase_url = get_node_firebase_weburl($value);
                     $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
-                    $flag_fia_cont++;
+                    //$flag_fia_cont++;
                 }
             }
         }
