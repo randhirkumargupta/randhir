@@ -404,7 +404,7 @@ jQuery(document).ajaxSuccess(function () {
     }
 });
 
-jQuery(window).load(function() {
+/*jQuery(window).load(function() {
     try {
 		if(jQuery('#flexslider').length && typeof flexslider == 'function'){
 			jQuery(".flexslider").flexslider({
@@ -420,7 +420,7 @@ jQuery(window).load(function() {
      catch(err) {
          console.log(err.message);
      }
-});
+});*/
 
 jQuery(window).load(function() {
     try {
