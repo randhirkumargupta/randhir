@@ -4112,9 +4112,9 @@ function itg_rapid_api_change_password($token) {
         session_destroy();
 
         // Load the anonymous user.
-        $user = drupal_anonymous_user();
+        //$user = drupal_anonymous_user();
 
-        drupal_save_session($original_session_state);
+        //drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);         
         ################logout sart##############
        $params_logout = array();
@@ -4133,8 +4133,8 @@ function itg_rapid_api_change_password($token) {
         module_invoke_all('user_logout', $user);
         session_destroy();
         // Load the anonymous user.
-        $user = drupal_anonymous_user();
-        drupal_save_session($original_session_state);
+        //$user = drupal_anonymous_user();
+        //drupal_save_session($original_session_state);
         // call custom function to clean token in custom table
         cleanToken_Rapid($params_logout);
         ################logout sart##############
@@ -6538,7 +6538,7 @@ function resetToken($uname, $token) {
  *
  * @return array
  */
-function getSmlCookie() {   
+function getSmlCookie() {
     $cook_val = array();
     foreach ($_COOKIE as $key => $value) {
         $cook_val['session_id'] = $key;
