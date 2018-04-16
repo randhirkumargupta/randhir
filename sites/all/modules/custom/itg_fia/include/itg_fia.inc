@@ -456,14 +456,20 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
+        $flag_fia_cont = 0;
         if(count($nid_list) > 1){
             //related node
             foreach ($nid_list as $key => $value) {
-                $firebase_url = get_node_firebase_weburl($value);
-                $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
+                $flag_fia = 0;
+                $flag_fia = checkFIANodeBynid($value);
+                if($flag_fia){
+                    $firebase_url = get_node_firebase_weburl($value);
+                    $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
+                    $flag_fia_cont++;
+                }
             }
         }
-        else{
+        elseif($flag_fia_cont == 0){
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
             $order = fia_get_order_node_by_nid($nid);
@@ -473,6 +479,11 @@ function itg_fia_related_node($nid = 0) {
         }
       
     $relatednode .='</ul>';
+    //no any node found
+    if($flag_fia_cont == 0  && $related_content_primary_cat == "" ){
+        $relatednode = "";
+    }
+    
     return $relatednode;
 }
 
@@ -491,7 +502,7 @@ function fia_related_content_primary_cat($nid, $prime_cat, $order = 0) {
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.widget', $order, '>');
+        $query->condition('iwo.widget', $order, '<');
         $query->condition('iwo.widget', 'section_wise_widget');
         $query->condition('fpc.field_primary_category_value', $prime_cat, '=');
         $query->range(0, 3);
@@ -518,4 +529,22 @@ function fia_get_order_node_by_nid($nid){
         $order = $result[0]['weight'];
     }
     return $order;
+}
+/*
+ * ITG FIA function for get node is FIA or not by nid
+ */
+function checkFIANodeBynid($nid){
+    $nid = 0;
+    if($nid){
+        $query = db_select('node', 'n');
+        $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+        $query->fields('n', array('nid'));
+        $query->condition('n.type', 'story', '=');
+        $query->condition('n.status', '1', '=');
+        $query->condition('n.nid', $nid, '=');
+        $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $nid = $result[0]['nid'];
+    }
+    return $nid;
 }
