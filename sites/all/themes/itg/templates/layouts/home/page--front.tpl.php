@@ -1058,13 +1058,15 @@ $ipl_triangle_status = itg_ipl_triangle_status();
 if ($ipl_triangle_status == 1) {
 ?>
 
-<div id="twister"><span class="crosscloseif" onclick="movebottom()"><i class="fa fa-angle-double-down" aria-hidden="true"></i></span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
-
+<div id="twister"><span class="crosscloseif" onclick="movebottom()"><span>Open ScoreCard</span> <i class="fa fa-angle-double-down" aria-hidden="true"></i></span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
 <style type="text/css"> 
-  #twister{ position: fixed;right: 0px;bottom: -8px;z-index: 99999; cursor:crosshair;}
+    #twister{ position: fixed;right: 0px;bottom: -8px;z-index: 99999; cursor:move; width:190px; height: 180px;}
     span.crosscloseif{z-index: 99; background: #f1f1f1; color: #000;font-size: 20px;font-weight: bold;padding: 5px 10px;position: absolute;top: 18px;
     right: 29px;line-height: 20px; box-shadow: 0px -2px 2px 1px #ccc; border-radius: 3px 3px 0 0;}
-    #twister.movearrow{ position: fixed; bottom:-143px; }
+    #twister.movearrow{ position: fixed; bottom:-143px; cursor:pointer; }
+    #twister span.crosscloseif span{ display:none; font-size: 12px;line-height: 16px;display: inline-block;position: relative;top: -3px;text-transform: uppercase;}
+    #twister.movearrow .fa.fa-angle-double-down{content:"\f102"}
+    #twister.movearrow span.crosscloseif span{ display: block; }
 </style>
 
 <script type="text/javascript">
