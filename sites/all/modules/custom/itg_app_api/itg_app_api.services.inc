@@ -6538,8 +6538,7 @@ function resetToken($uname, $token) {
  *
  * @return array
  */
-function getSmlCookie() {
-    p($_COOKIE);
+function getSmlCookie() {   
     $cook_val = array();
     foreach ($_COOKIE as $key => $value) {
         $cook_val['session_id'] = $key;
