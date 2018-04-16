@@ -492,7 +492,7 @@ function itg_fia_related_node($nid = 0) {
  */
 
 function fia_related_content_primary_cat($nid, $prime_cat, $order = 0) {
-    echo $order; echo "##"; echo $prime_cat; echo "##"; echo $nid; die();
+   // echo $order; echo "##"; echo $prime_cat; echo "##"; echo $nid; die();
     $relatednode = "";
     if ($prime_cat) {
         $query = db_select('node', 'n');
