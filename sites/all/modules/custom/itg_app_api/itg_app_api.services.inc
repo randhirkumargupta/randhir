@@ -4403,8 +4403,8 @@ function itg_rapid_api_get_login_user_detail($token) {
     $token = $params['authtoken_id'];
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+    if (!drupal_valid_token($token, 'services')) {
+       // if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
     } else {
@@ -4486,8 +4486,8 @@ function itg_rapid_api_edit_profile($token) {
     $token = $params['authtoken_id'];
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
-    //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+    if (!drupal_valid_token($token, 'services')) {
+       // if (!$token_val_flag) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
@@ -4531,8 +4531,8 @@ function itg_rapid_api_get_preference($token) {
         return $account_err;
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-        if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+       // if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
         return $data;
@@ -4606,8 +4606,8 @@ function itg_rapid_api_update_preference($token) {
         return $account_err;
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
         return $data;
@@ -4751,8 +4751,8 @@ function itg_rapid_api_authtoken_verification($token) {
         }
         $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
-        //if (!drupal_valid_token($token, 'services')) {
-            if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+           // if (!$token_val_flag) {
 
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
@@ -4803,8 +4803,8 @@ function itg_rapid_api_author_list($token) {
         $message_array['data'] = array();
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -4859,8 +4859,8 @@ function itg_rapid_api_anchor_list($token) {
             $message_array['data'] = array();
         }
         $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-        //if (!drupal_valid_token($authtoken_id, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($authtoken_id, 'services')) {
+        //if (!$token_val_flag) {
             $args = '0';
             $message_array['status_code'] = "0";
             $message_array['status_message'] = "invalid token";
@@ -4917,8 +4917,8 @@ function itg_rapid_api_get_the_user_follow_status($token) {
         $message_array['data'] = array();
     }
 $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+//if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5203,8 +5203,8 @@ function bookmark_get_responce($token, $user_id, $authtoken_id) {
         $message_array['data'] = array('news' => array());
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5256,8 +5256,8 @@ function bookmark_set_responce($token, $user_id, $node_id) {
         $message_array['data'] = array('news' => array());
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5308,8 +5308,8 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
         $message_array['data'] = array('bookmark_content' => array());
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5367,8 +5367,8 @@ function follow_anchor_responce($token, $user_id, $node_id) {
         $message_array['data'] = array();
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-        if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5441,8 +5441,8 @@ function follow_author_responce($token, $user_id, $node_id) {
         $message_array['data'] = array();
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5508,8 +5508,8 @@ function itg_rapid_api_anchor_follow_list($token) {
         $message_array['data'] = array();
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5563,8 +5563,8 @@ function itg_rapid_api_author_follow_list($token) {
         $message_array['data'] = array();
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5704,8 +5704,8 @@ function itg_rapid_api_follow_topic($token) {
         $message_array['data'] = array();
     }
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-    if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5766,8 +5766,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
         $message_array['data'] = array();
     }
    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($authtoken_id, 'services')) {
-   if (!$token_val_flag) {
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+   //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
