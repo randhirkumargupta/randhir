@@ -5,7 +5,7 @@
 $latest_issue_data = get_latest_isssue_data();
 $issue_title = format_date(strtotime($latest_issue_data[0]->field_issue_title_value), 'itg');
 $issue_file = file_load($latest_issue_data[0]->field_issue_large_cover_image_fid);
-$issue_img_src = file_create_url($issue_file->uri);
+$issue_img_src = image_style_url('magazine_top_issue_172x240', $issue_file->uri);
 $arg = arg();	
     $show_web_exclusive = variable_get('show_web_exclusive');
     $is_magazine_page = FALSE;
