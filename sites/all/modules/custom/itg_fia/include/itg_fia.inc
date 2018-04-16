@@ -465,7 +465,7 @@ function itg_fia_related_node($nid = 0) {
                 if($flag_fia){
                     $firebase_url = get_node_firebase_weburl($value);
                     $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
-                    //$flag_fia_cont++;
+                    $flag_fia_cont++;
                 }
             }
         }
@@ -479,6 +479,10 @@ function itg_fia_related_node($nid = 0) {
         }
       
     $relatednode .='</ul>';
+    //no any node found
+    if($flag_fia_cont == 0  && $related_content_primary_cat == "" ){
+        $relatednode = "";
+    }
     
     return $relatednode;
 }
@@ -526,7 +530,9 @@ function fia_get_order_node_by_nid($nid){
     }
     return $order;
 }
-
+/*
+ * ITG FIA function for get node is FIA or not by nid
+ */
 function checkFIANodeBynid($nid){
     $nid = 0;
     if($nid){
