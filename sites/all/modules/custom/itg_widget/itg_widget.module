@@ -259,6 +259,15 @@ function itg_widget_menu() {
       'access arguments' => array('administer itg_term settings'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_web_cast_widget_form.inc',
+    );    
+     $items['admin/config/administration/itgd-custom-variables'] = array(
+      'title' => 'ITGD Custom variables',
+      'description' => 'Custom variables settings page',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_custom_variables'),
+      'file' => 'includes/itg_custom_variables.inc',
+      'access arguments' => array('access administrator'),
+      'type' => MENU_NORMAL_ITEM,
     );
 
   return $items;

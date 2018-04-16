@@ -8,6 +8,10 @@
 ?>
   <ul class="itg-listing">
       <?php
+      $counter = 1;
+      $enable_top_story_ad = get_itg_variable('enable_top_story_ad');
+      $top_story_ad_pos = get_itg_variable('top_story_ad_position');
+      $top_story_ad_html = get_itg_variable('top_story_ad_html');
       foreach ($data as $entity) {
         if (!empty($entity['nid'])) :
           // code for add on story title and url
@@ -20,6 +24,10 @@
               $pipelineclass = ' pipeline-added';
             }
           }
+          if (!empty($enable_top_story_ad) && $counter == $top_story_ad_pos){
+						echo "<li class='itg-top-story-ad'>". $top_story_ad_html ."</li>";
+					}
+					$counter++;
           ?>
           <li <?php echo $data_tb_region_item;?> title="<?php echo _widget_title($entity['title']); ?>" class="<?php print $entity['type'] ?> top-story-<?php print $entity['nid'] ?>  <?php print $pipelineclass; ?>">
               <?php if ($entity['is_spnoser']): ?>
