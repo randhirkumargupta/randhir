@@ -252,7 +252,7 @@ function _may_be_recommend_block_content() {
 function _recommend_new_block_content() {
   $output = '';
   if (!empty(variable_get('third_party_recommend_new_block')) && empty(variable_get('disable_third_party_api'))) {
-    $output = '<div class="may-be-recommend"><h3><span>' . t('Recommended') . '</span></h3>' . variable_get('third_party_recommend_new_block') . '</div>';
+    $output = '<div class="may-be-recommend mhide"><h3><span>' . t('Recommended') . '</span></h3>' . variable_get('third_party_recommend_new_block') . '</div>';
   }
   else {
     $output = '';
