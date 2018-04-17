@@ -26,16 +26,21 @@ if ($theme == 'itgadmin' || $preview == 'preview') {
   global $conf;
   $conf['preprocess_js'] = 0;
 }
-
-$highlights = itg_widget_highlights_block_data();
-$device = itg_live_tv_company('web');
-if (!empty($device[0])) {
-  $live_tv_get_details = node_load($device[0]);
-  $live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
-  if (filter_var($live_url, FILTER_VALIDATE_URL)) {
-    $live_url = '<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
-  }
+$tax_data = menu_get_object('taxonomy_term',2);
+if(empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])){
+	$highlights = itg_widget_highlights_block_data();
+	$device = itg_live_tv_company('web');
+	if (!empty($device[0])) {
+		$live_tv_get_details = node_load($device[0]);
+		$live_url = $live_tv_get_details->field_ads_ad_code[LANGUAGE_NONE][0]['value'];
+		if (filter_var($live_url, FILTER_VALIDATE_URL)) {
+			$live_url = '<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
+		}
+	}
+}else{
+	
 }
+//~ p($tax_data->field_is_election_live);
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
@@ -119,7 +124,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container election-page <?php echo $itg_class; ?> ">
+            <div class="itg-layout-container auto-layout-page election-page <?php echo $itg_class; ?> ">
                 <!-- Breaking news band -->    
                 <?php if (!empty($page['breaking_news'])): ?>
                   <div class="row">
@@ -129,36 +134,38 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
-                $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-								$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
-								$fb_share_title = htmlentities($search_title, ENT_QUOTES);
-									$story_title = get_first_story_title_by_tid(arg(2));
-									$story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
-									if(!empty($story_title)){
-										$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
-										$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
-										$actual_link = $content_link;
-										$search_title = preg_replace("/'/", "\\'", $story_title_display);
-										$fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
-								}else{
-									$short_url = shorten_url($actual_link, 'goo.gl');					
-								}
-												$display_title = "";
-												if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
-													$display_title = 'style="display:none"';
-												}
-												
-												echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
-														<ul>
-																<li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-																<li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-																<li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-																<li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
-														</ul>
-												</div></div></div>';
-                
-                $graphdata = itg_widget_get_graph_data();
-                if (count($graphdata) > 2) {
+                $graphdata = array();
+                if(!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])){
+                  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                  $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
+                  $fb_share_title = htmlentities($search_title, ENT_QUOTES);
+                    $story_title = get_first_story_title_by_tid(arg(2));
+                    $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+                    if(!empty($story_title)){
+                      $content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+                      $story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+                      $actual_link = $content_link;
+                      $search_title = preg_replace("/'/", "\\'", $story_title_display);
+                      $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
+                  }else{
+                    $short_url = shorten_url($actual_link, 'goo.gl');					
+                  }
+                          $display_title = "";
+                          if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
+                            $display_title = 'style="display:none"';
+                          }
+
+                          echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
+                              <ul>
+                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                  <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                  <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                  <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+                              </ul>
+                          </div></div></div>';
+                  $graphdata = itg_widget_get_graph_data();
+								}                
+                if (!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value']) && count($graphdata) > 2) {
                   ?>
                   <div class="row election-graph election-graph-<?php echo count($graphdata); ?>">
                       <?php
@@ -169,7 +176,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <?php } ?>
                 <div class="row">
                     <div class="col-md-8 col-sm-12 col-sx-12 election-graph left-side">
-                        <?php if (count($graphdata) <= 2) {
+                        <?php if (!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value']) && count($graphdata) <= 2) {
                           ?>
                           <div class="row itg-415-layout">
                               <?php
@@ -178,7 +185,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               ?>
                           </div>
                         <?php } ?>
-                     
+													<?php if(!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])){?>
                           <div class="row itg-325-layout">
                               <div class="col-md-6 col-sm-6 mt-50">
                                   <div class="widget-help-text"> <?php echo t('Draggable');?> ( <strong><?php echo t('Live Tv');?></strong> )</div>
@@ -250,6 +257,39 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                   </div>
                               </div>
                           </div>
+                          <?php } else{?>
+                        
+                            <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
+                                <div class="">
+                                  <div class="itg-widget">
+                                      <div class="droppable itg-layout-605 <?php print $gray_bg_layout; ?>">
+                                      <div id="auto-new-block" class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
+                                          <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-1']['block_title'])) { ?>
+                                                    <span class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                                                     <?php } ?>
+                                                  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                                    <div class="widget-settings">
+                                                      <div class="widget-title-wrapper">
+                                                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
+                                                      </div>
+                                                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                   <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
+                                                    </div>  
+                                                  <?php } ?>    
+                                        <div class="data-holder" id="itg-block-1">
+                                          <?php
+                                            if (isset($widget_data['itg-block-1']['widget'])) {
+                                              print $widget_data['itg-block-1']['widget']; 
+                                            } else{
+                                              print '<div class="widget-placeholder"><span>'.t('Auto featured').'</span></div>';
+                                            } 
+                                          ?>
+                                        </div>
+                                      </div>                     
+                                    </div>
+                                  </div>
+                                </div>
+                          <?php }?>
                
                         <div class="row itg-map">
                             <div class="col-md-6 col-sm-6 mt-50">

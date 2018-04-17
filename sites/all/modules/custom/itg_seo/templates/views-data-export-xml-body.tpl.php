@@ -17,7 +17,7 @@
 ?>
 <<?php print "channel"; ?>>
 <<?php print $xml_tag['path']; ?>><![CDATA[<?php print $base_url; ?>]]></<?php print $xml_tag['path']; ?>>
-<<?php print "description"; ?>><?php print $themed_rows[0]['custom_handler']; ?></<?php print "description"; ?>>
+<<?php print "description"; ?>><?php print 'India Today'; ?></<?php print "description"; ?>>
 <<?php print $xml_tag['title']; ?>><![CDATA[<?php print t("India Today Editor's Picks"); ?>]]></<?php print $xml_tag['title']; ?>>
 <<?php print "lastBuildDate"; ?>><?php print $themed_rows[0]['created']; ?></<?php print "lastBuildDate"; ?>>
 <<?php print "image"; ?>>
