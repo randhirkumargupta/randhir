@@ -354,6 +354,7 @@ function getAuthorList_Report($s_date, $e_date, $type) {
     if ($content_type == 'videogallery') {
         $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
         $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'fsr.field_story_reporter_target_id=repr.entity_id');
+        $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
     }
     $query->fields('n', array('nid', 'status'));
     if ($content_type == 'story') {
@@ -429,6 +430,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email, $type) {
 
     if ($content_type == 'videogallery') {
         $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
+        $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
         $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'fsr.field_story_reporter_target_id=repr.entity_id');
     }
     $query->fields('n', array('nid', 'status'));
@@ -509,6 +511,7 @@ function todayContentsByUid($start_date, $end_date, $mail, $type) {
 
     if ($content_type == 'videogallery') {
         $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
+        $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
         $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'fsr.field_story_reporter_target_id=repr.entity_id');
     }
     $query->fields('n', array('nid', 'status', 'title'));
