@@ -478,7 +478,7 @@ function itg_fia_related_node($nid = 0) {
             }
             
             
-            $order = fia_get_order_node_by_nid($nid, $prime_cat->tid);
+            $order = fia_get_order_node_by_nid($nid, $prime_section);
             $related_content_primary_cat = "";
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
             $relatednode .= $related_content_primary_cat;
@@ -511,7 +511,7 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->condition('n.status', '1', '=');
         $query->condition('iwo.widget', $order, '>');
         $query->condition('iwo.widget', 'section_wise_widget');
-        //$query->condition('iwo.cat_id', $prime_section);
+        $query->condition('iwo.cat_id', $prime_section);
         //$query->condition('fpc.field_primary_category_value', $prime_cat, '=');
         //$query->condition('pc.field_story_category_tid', '$prime_section', '');
         $query->condition('ti.tid', $prime_section, '=');
@@ -534,7 +534,7 @@ function fia_get_order_node_by_nid($nid, $prime_section){
         $query = db_select('itg_widget_order', 'iwo');
         $query->fields('iwo', array('weight'));
         $query->condition('iwo.nid', $nid);
-        //$query->condition('iwo.cat_id', $prime_section);
+        $query->condition('iwo.cat_id', $prime_section);
         $query->condition('iwo.widget', 'section_wise_widget');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $order = $result[0]['weight'];
