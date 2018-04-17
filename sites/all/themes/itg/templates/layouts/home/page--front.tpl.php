@@ -1033,8 +1033,8 @@ if ($theme != 'itgadmin') {
 </script>
 <style type="text/css"> 
     #twister{ position: fixed;right: 0px;bottom: -8px;z-index: 99999; cursor:move; width:190px; height: 180px;}
-    span.crosscloseif{z-index: 99; background: #f1f1f1; color: #000;font-size: 20px;font-weight: bold;padding: 5px 10px;position: absolute;top: 18px;
-    right: 29px;line-height: 20px; box-shadow: 0px -2px 2px 1px #ccc; border-radius: 3px 3px 0 0;}
+    span.crosscloseif{z-index: 99; background: #fff; color: #000;font-size: 20px;font-weight: bold;padding: 5px 10px;position: absolute;top: 16px;
+    right:32px;line-height:20px; box-shadow: 0px -2px 2px 1px #ccc; border-radius: 3px 3px 0 0;}
     #twister.movearrow{ position: fixed; bottom:-143px; cursor:pointer; }
     #twister span.crosscloseif span{ display:none; font-size: 12px;line-height: 16px;position: relative;top: -3px;text-transform: uppercase;}
     #twister.movearrow .fa.fa-angle-double-down:before{content:"\f102"}
