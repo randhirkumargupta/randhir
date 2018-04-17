@@ -444,7 +444,7 @@ function itg_fia_config_form($form, &$form_state) {
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-        $nid = 1143479;
+        //$nid = 1143479;
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
@@ -558,7 +558,7 @@ function checkFIANodeBynid($nid){
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        p($result);  
+         
         $nid_f = $result[0]['nid'];
     }
     return $nid_f;
