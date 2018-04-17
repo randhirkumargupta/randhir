@@ -124,7 +124,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               $itg_class = 'itg-front';
             }
             ?>
-            <div class="itg-layout-container election-page <?php echo $itg_class; ?> ">
+            <div class="itg-layout-container auto-layout-page election-page <?php echo $itg_class; ?> ">
                 <!-- Breaking news band -->    
                 <?php if (!empty($page['breaking_news'])): ?>
                   <div class="row">
