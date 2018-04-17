@@ -88,20 +88,36 @@ if ($theme != 'itgadmin') {
                       <div class="widget-help-text"><?php print t('Template widgets'); ?> ( <strong><?php print t('Home Page Election'); ?></strong> )</div>
                       <div class="itg-widget">
                           <div class="droppable <?php print $gray_bg_layout; ?>">
-                              <div class="widget-wrapper <?php print $widget_data['itg-block-0']['widget_name']; ?>">
+                              <div class="widget-wrapper">
+                                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-0']['block_title'])) { ?>
+                                    <h4 class="heading"><?php print $widget_data['itg-block-0']['block_title']; ?></h4>
+                                          <?php } ?>
+                                  <!-- for admin  -->
+                                          <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                    <div class="widget-settings">
+                                        <div class="widget-title-wrapper">
+<?php if (isset($widget_data['itg-block-0']['block_title'])) { ?>
+                                              <span class="widget-title" data-id="itg-block-0"><?php print $widget_data['itg-block-0']['block_title']; ?></span>
+<?php } ?>
+                                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-0']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
+                                        </div>
+                                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                        <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-0"><i class="fa fa-times"></i></a></span>
+                                    </div>
+                                      <?php } ?> 
                                   <div class="data-holder" id="itg-block-0">
                                       <?php
-                                      if (isset($widget_data['itg-block-0']['widget'])) {
+                                      if (isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) {
                                         print $widget_data['itg-block-0']['widget'];
                                       }
-                                      else { ?>
-                                        <div class="widget-placeholder"><span><?php print t('Home Election'); ?></span></div>
-                                     <?php }
+                                      else {
+                                        print '<div class="widget-placeholder"><span>' . t('Home page election') . '</span></div>';
+                                      }
                                       ?>
                                   </div>
-                              </div>
-                          </div>
-                      </div>
+                              </div>             
+                          </div>               
+                        </div>
                   </div>
                 <?php } ?>
                 <!-- End of Breaking news band -->
