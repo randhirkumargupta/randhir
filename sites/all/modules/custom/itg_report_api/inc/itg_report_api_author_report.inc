@@ -398,7 +398,7 @@ function getAuthorList_Report($s_date, $e_date, $type) {
         if($content_type == 'videogallery') {
             $author_nid = $resvalue['entity_id'];
         }
-        $author_name = getAuthorNameDashboard($author_id);
+        $author_name = getAuthorNameDashboard($author_nid);
         $data['author_id'] = $author_nid;
         $data['author_name'] = $author_name;
         $data['author_email'] = $resvalue['field_reporter_email_id_value'];
