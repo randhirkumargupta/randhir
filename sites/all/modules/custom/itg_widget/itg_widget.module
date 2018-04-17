@@ -788,7 +788,7 @@ function itg_widget_block_view($delta = '') {
                 drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
                 drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
             }
-            $block['content'] = theme("home_graph_election", array("data" => $data));
+            $block['content'] = theme("graph_election", array("data" => $data));
 
             break;
         case 'movies_reviews':
@@ -992,7 +992,6 @@ function itg_widget_get_graph_data_for_home() {
     if($is_category){
 	    $itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
     }
-
     $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
     $itg_query->fields('frq', array('field_election_constituency_tall_value'));
