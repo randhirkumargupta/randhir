@@ -514,7 +514,7 @@ function itg_report_api_author_report() {
       $type = 'videogallery';
   }
 
-  $suffix = $type.'_'.$start_date;
+  $suffix = $type.'_'.$start_date.'_'.$type;
   $redis_key = "itg_report_api_author_report_" . $suffix;
 
   $result_get = getRedis($redis_key);
