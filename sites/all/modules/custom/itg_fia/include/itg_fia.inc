@@ -558,7 +558,7 @@ function checkFIANodeBynid($nid){
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        p($result); 
+        p($result);  
         $nid = $result[0]['nid'];
     }
     return $nid;
