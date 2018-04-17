@@ -169,12 +169,10 @@ function article_rss_feed_google_newsstand() {
  */
 function indiatoday_editors_pic() {
   global $base_url;
-  $section_id = $_GET['section_id'];
   $output = "";
   $term_name = '';
   $section_url = NULL;
     //anchorRSSFeed writing...
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $output .= get_rss_feed_google_stand_header();
     $output .= get_rss_feed_sub_header_editors_pic();
     $output .= get_article_editors_pic_item_rss();
