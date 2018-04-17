@@ -444,18 +444,20 @@ function itg_fia_config_form($form, &$form_state) {
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-    
+        $nid = 1143479;
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $node_str = $result[0]['field_common_related_content_value'];
+        
         // replace enviroment name
         // stage related node structure: 'IT_1146622|~|IT_849473|~|IT_1146628|~|IT_1146629|~|IT_1146631|~|IT_1146630'
         $node_str = str_replace("|~|IT_", ",", $node_str);
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
+        p($nid_list);
         $flag_fia_cont = 0;
         if(count($nid_list) > 1){
             //related node
