@@ -232,7 +232,7 @@ function getContentCountByDate($start_date, $end_date, $type) {
   }
   if($content_type == 'videogallery'){
     $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
-    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'fsr.entity_id=repr.entity_id');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'fsr.field_story_reporter_target_id=repr.entity_id');
   }
   if($_GET['author_report'] == 1){
       $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
