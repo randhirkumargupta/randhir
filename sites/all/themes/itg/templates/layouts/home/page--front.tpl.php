@@ -1028,7 +1028,7 @@ if ($theme != 'itgadmin') {
         <p><?php print t('Your Account Activated Successfully!'); ?></p>
     </div>
 </div>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <style type="text/css"> 
     #twister{ position: fixed;right: 0px;bottom: -8px;z-index: 99999; cursor:move; width:190px; height: 180px;}
     span.crosscloseif{z-index: 99; background: #f1f1f1; color: #000;font-size: 20px;font-weight: bold;padding: 5px 10px;position: absolute;top: 18px;
@@ -1049,5 +1049,5 @@ function movebottom() {
     arrow.classList.toggle("movearrow");
     arrow.removeAttribute('style');    
     }
-jQuery(document).ready(function(){jQuery("#twister").draggable();});
+jQuery(document).ready(function(){jQuery("#twister").draggable()});
 </script>
