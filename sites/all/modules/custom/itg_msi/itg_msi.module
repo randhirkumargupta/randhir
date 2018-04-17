@@ -57,6 +57,13 @@ function itg_msi_menu() {
       'file' => 'includes/itg_msi.inc',
       'type' => MENU_NORMAL_ITEM,
     );
+    
+    $items['magazine'] = array(
+        'page callback' => 'itg_msi_magazine_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_msi.inc',
+    );
 
     return $items;
 }
@@ -920,6 +927,11 @@ function itg_msi_theme($existing, $type, $theme, $path) {
             'path' => drupal_get_path('module', 'itg_msi') . '/templates',
             'variables' => array('data' => NULL),
         ),
+         'magazine' => array(
+            'render element' => 'elements',
+            'template' => 'magazine',
+            'path' => drupal_get_path('module', 'itg_msi') . '/templates',
+        ),
     );
     return $themes;
 }
@@ -961,10 +973,10 @@ function itg_msi_last_issue_calendar($current_year) {
  * @return string
  */
 function itg_msi_last_week_issue() {
-    if(arg(0) == 'magazine' && empty(arg(1))){
+    if((arg(0) == 'magazine') && empty(arg(1))){
       $output = itg_msi_get_current_issue();
     }
-    elseif (arg(0) == 'magazine' && !empty(arg(1))) {
+    elseif ((arg(0) == 'magazine') && !empty(arg(1))) {
         if(itg_msi_validate_date(arg(1), 'd-m-Y')) {
           $issue_date_time = strtotime(arg(1));
           $issue_date = date('Y-m-d', $issue_date_time);
@@ -1365,4 +1377,18 @@ function _get_nid_from_title($title) {
     return db_select('node' , 'n')
       ->fields('n' , array("nid"))
       ->condition("n.title" , $title)->execute()->fetchField();
+}
+
+function get_latest_isssue_data(){
+	$last_week_date = itg_msi_last_week_issue();
+	$last_week_date = date("Y-m-d", strtotime($last_week_date));
+	$query = db_select('field_data_field_issue_title', 't');
+	$query->join('field_data_field_issue_large_cover_image', 'fi', 'fi.entity_id = t.entity_id');
+	$query->fields('t');
+	$query->fields('fi', array('field_issue_large_cover_image_fid'));
+	$query->condition('t.field_issue_title_value',  '%' . db_like($last_week_date) . '%', 'LIKE');
+	$query->range(0, 1);
+	$result = $query->execute()->fetchAll();
+	return $result;
+	//print_r($result);die;
 }
