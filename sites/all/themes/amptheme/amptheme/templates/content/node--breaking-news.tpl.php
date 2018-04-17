@@ -106,7 +106,7 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
           $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
         else {
-          $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+          $title = '<h1>' . $node->title . '</h1>';
         }
         $share_title = $node->title;
         $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$share_title.'&picture='.$share_image;

@@ -1,11 +1,9 @@
 <?php
-
 /*
  * Inc file scorecard functions
  *
  *
  */
-
 /**
  * This function is used to manage score card form
  * @return string
@@ -35,9 +33,7 @@ function itg_manage_score_card() {
     drupal_set_title(t('Add Score Card'));
     $action = '';
   }
-
   $form = array();
-
   $form['score_status'] = array(
     '#type' => 'radios',
     '#title' => t('Score status'),
@@ -45,52 +41,42 @@ function itg_manage_score_card() {
     '#default_value' => ($results->score_status) ? $results->score_status : 1,
     '#required' => TRUE
   );
-
   $form['score_story'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Story/Live Blog'),
     '#default_value' => ($results->score_story) ? $results->score_story : '',
   );
-
   $form['score_photo'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Photo'),
     '#default_value' => ($results->score_photo) ? $results->score_photo : '',
   );
-
   $form['score_video'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Video'),
     '#default_value' => ($results->score_video) ? $results->score_video : '',
   );
-
   $form['score_description'] = array(
     '#type' => 'textarea',
     '#title' => t('Score card iframe'),
     '#default_value' => ($results->score_description) ? $results->score_description : '',
     '#required' => TRUE
   );
-
   $form['score_action'] = array(
     '#type' => 'hidden',
     '#value' => $action,
   );
-
   $form['score_submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
-
   $destination = 'manage-score-list';
-
   $form['actions']['cancel'] = array(
     '#markup' => l(t('Cancel'), $destination),
     '#weight' => 20,
   );
-
   return $form;
 }
-
 /**
  * This function is used to score form submit.
  * {@inheritdoc}
@@ -104,8 +90,6 @@ function itg_manage_score_card_submit($form, &$form_state) {
   $score_video = $form_state['values']['score_video'];
   $score_status = $form_state['values']['score_status'];
   $score_action = $form_state['input']['score_action'];
-
-
   if (isset($score_action) && $score_action > 0) {
     db_update('itg_score_card')
         ->fields(array(
@@ -135,7 +119,6 @@ function itg_manage_score_card_submit($form, &$form_state) {
   }
   drupal_goto('manage-score-list');
 }
-
 /**
  * Option value set by section for budget predictor form.
  * @return type
@@ -156,7 +139,6 @@ function score_card_tid_by_content_type() {
   }
   return $op;
 }
-
 /**
  * function for list of score card
  * @global string $base_url
@@ -169,7 +151,6 @@ function itg_manage_score_list() {
   $query->fields('s', array('id', 'score_story', 'score_photo', 'score_video', 'score_status'))
       ->orderBy('id', 'DESC')
       ->limit(10);
-
   # execute the query
   $results = $query->execute();
   $header = array(
@@ -183,7 +164,6 @@ function itg_manage_score_list() {
   # build the table fields
   $rows = array();
   $i = 1;
-
   if (!empty($results)) {
     foreach ($results as $row) {
       $score_id = $row->id;
@@ -207,23 +187,18 @@ function itg_manage_score_list() {
       $i++;
     }
   }
-
   $caption_table_edit = l(t('Add Score card'), 'manage-score-card');
-
   // Format and print out the table.
   $output = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table'))));
-
   $build['content'] = array(
     'itg_score_card_content' => array(
       '#markup' => $output,
     ),
   );
-
   # add the pager
   $build['pager'] = array(
     '#theme' => 'pager',
     '#weight' => 5,
   );
-
   return $build;
 }
