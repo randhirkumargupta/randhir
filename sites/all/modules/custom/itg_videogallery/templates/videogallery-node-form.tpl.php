@@ -58,6 +58,7 @@
                     <span class="error vid-error"></span>
                 </div>
                 <?php print drupal_render($form['field_video_kicker']); ?>
+                <?php print drupal_render($form['field_mis_report']); ?>
             </div>
         </div>
 
