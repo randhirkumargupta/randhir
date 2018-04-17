@@ -367,7 +367,7 @@ function getAuthorList_Report($s_date, $e_date, $type) {
     }
     if ($content_type == 'videogallery') {
         $query->fields('mis', array('field_mis_report_value'));
-        $query->fields('fsr', array('entity_id'));
+        $query->fields('fsr', array('field_story_reporter_target_id'));
     }
     //end
     if ($start_date != "na") {
@@ -396,7 +396,7 @@ function getAuthorList_Report($s_date, $e_date, $type) {
     foreach ($result as $reskey => $resvalue) {
         $author_nid = $resvalue['byline_id'];
         if($content_type == 'videogallery') {
-            $author_nid = $resvalue['entity_id'];
+            $author_nid = $resvalue['field_story_reporter_target_id'];
         }
         $author_name = getAuthorNameDashboard($author_nid);
         $data['author_id'] = $author_nid;
