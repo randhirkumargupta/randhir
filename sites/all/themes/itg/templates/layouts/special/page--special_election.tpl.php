@@ -258,6 +258,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               </div>
                           </div>
                           <?php } else{?>
+                        
                             <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
                                 <div class="">
                                   <div class="itg-widget">
@@ -288,8 +289,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
                           <?php }?>
                
                         <div class="row itg-map">
