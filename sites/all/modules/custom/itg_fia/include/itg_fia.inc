@@ -487,7 +487,7 @@ function itg_fia_related_node($nid = 0) {
     $relatednode .='</ul>';
     //no any node found
     if($flag_fia_cont == 0  && $related_content_primary_cat == "" ){
-        $relatednode = "";
+        //$relatednode = "";
     }
     
     return $relatednode;
