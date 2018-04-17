@@ -457,11 +457,12 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
-        p($nid_list);
+        //p($nid_list);
         $flag_fia_cont = 0;
         if(count($nid_list) > 1){
             //related node
             foreach ($nid_list as $key => $value) {
+                echo $value."hi";
                 $flag_fia = 0;
                 $flag_fia = checkFIANodeBynid($value);
                 if($flag_fia){
@@ -557,6 +558,7 @@ function checkFIANodeBynid($nid){
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        p($result);  
         $nid = $result[0]['nid'];
     }
     return $nid;
