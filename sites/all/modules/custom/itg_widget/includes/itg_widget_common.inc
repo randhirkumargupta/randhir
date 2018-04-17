@@ -811,9 +811,6 @@ function itg_widget_theme() {
         'score_card_iframe' => array(
             'template' => 'templates/score-card-iframe',
         ),
-        'home_graph_election' => array(
-            'template' => 'templates/itg-widget-home-graph-election',
-        ),
 
     );
     return $themes;
