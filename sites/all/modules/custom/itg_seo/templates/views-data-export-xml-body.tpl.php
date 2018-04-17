@@ -12,6 +12,8 @@
  */
 ?>
 <?php
+print_r($themed_rows);
+exit();
   global $base_url;
   $logo = file_create_url(file_default_scheme() . '://sites/all/themes/itg/images/mastlogo_googleeditorspic_250x40.png');
 ?>
