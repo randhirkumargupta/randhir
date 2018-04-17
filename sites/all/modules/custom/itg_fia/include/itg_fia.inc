@@ -472,8 +472,12 @@ function itg_fia_related_node($nid = 0) {
         elseif($flag_fia_cont == 0){
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
-            $prime_section = taxonomy_get_parents($prime_cat->tid);
-            p($prime_section);die();
+            $prime_section_ar = taxonomy_get_parents($prime_cat->tid);
+            foreach ($prime_section_ar as $key => $value) {
+                $prime_section = $value->tid;
+            }
+            echo $prime_section;die();
+            
             $order = fia_get_order_node_by_nid($nid, $prime_section);
             $related_content_primary_cat = "";
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
