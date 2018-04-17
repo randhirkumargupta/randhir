@@ -227,9 +227,13 @@ function getContentCountByDate($start_date, $end_date, $type) {
   $query = db_select('node', 'n');
   if($content_type == 'story'){
     $query->leftJoin('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
+    $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
   }
-  $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
-  $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
+  if($content_type == 'videogallery'){
+    $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'fsr.entity_id=repr.entity_id');
+  }
   if($_GET['author_report'] == 1){
       $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
   }
@@ -237,13 +241,16 @@ function getContentCountByDate($start_date, $end_date, $type) {
       $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
   }
   $query->fields('n', array('nid', 'status'));
-  $query->fields('byli', array('byline_id'));
+  if($content_type == 'story') {
+    $query->fields('byli', array('byline_id'));
+  }
   $query->fields('repr', array('field_reporter_email_id_value'));
   if($_GET['author_report'] == 1){
     $query->fields('autr', array('field_author_report_value'));
   }
   if($content_type == 'videogallery'){
     $query->fields('mis', array('field_mis_report_value'));
+    $query->fields('fsr', array('entity_id'));
   }
   //end
   if ($start_date != "na") {
@@ -268,6 +275,7 @@ function getContentCountByDate($start_date, $end_date, $type) {
   $query->groupBy('n.nid');
   $result = $query->execute();
   $cont = $result->rowCount();
+  p($cont);
   return $cont;
 }
 
