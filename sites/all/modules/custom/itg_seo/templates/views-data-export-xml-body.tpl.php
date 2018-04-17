@@ -42,5 +42,4 @@
 ?>
 <<?php print "dc:creator"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "dc:creator"; ?>>
 </<?php print $item_node; ?>>
-<?php endforeach; ?>
-</<?php print "channel"; ?>>
+<?php endforeach; ?></<?php print "channel"; ?>>
