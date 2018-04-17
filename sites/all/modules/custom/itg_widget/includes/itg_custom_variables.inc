@@ -33,6 +33,14 @@ function itg_custom_variables() {
 		'#default_value' => get_itg_variable('top_story_ad_html'),
 		'#required'=> FALSE,
 	);	
+	$form['home_page_election_tid'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Home Page election Tid'),
+		'#default_value' => get_itg_variable('home_page_election_tid'),
+		'#size' => 20,
+		'#required'=> FALSE,
+		'#maxlength' => 20,
+	);	
 	$form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
@@ -49,5 +57,6 @@ function itg_custom_variables_submit($form, &$form_state){
 	unset($values['op']);
 	foreach ($values as $key => $value) {
 		set_itg_variable($key, $value);
-	}	
+	}
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
