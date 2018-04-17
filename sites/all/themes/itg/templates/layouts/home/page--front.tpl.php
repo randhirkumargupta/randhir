@@ -1049,5 +1049,5 @@ function movebottom() {
     arrow.classList.toggle("movearrow");
     arrow.removeAttribute('style');    
     }
-Jquery("#twister").draggable();
+jQuery(document).ready(function(){jQuery("#twister").draggable();});
 </script>
