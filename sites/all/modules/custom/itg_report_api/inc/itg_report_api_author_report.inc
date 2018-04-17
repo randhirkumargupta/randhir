@@ -273,10 +273,8 @@ function getContentCountByDate($start_date, $end_date, $type) {
         $query->condition('mis.field_mis_report_value', 'mis_report', '=');
     }
   $query->groupBy('n.nid');
-  echo (string)$query; die;
   $result = $query->execute();
   $cont = $result->rowCount();
-  p($cont);
   return $cont;
 }
 
