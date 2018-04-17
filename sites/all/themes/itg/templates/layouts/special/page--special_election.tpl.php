@@ -186,12 +186,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                           </div>
                         <?php } ?>
 													<?php if(empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])){?>
-                          <div class="row itg-325-layout">
-                            <div class="row itg-layout-615">
-                              <div class="col-md-12">
+                          <div class="col-lg-8 col-md-12">
+                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
                                   <div class="">
                                       <div class="itg-widget">
-                                          <div class="droppable <?php print $gray_bg_layout; ?>">
+                                          <div class="droppable itg-layout-605 <?php print $gray_bg_layout; ?>">
                                               <div id="auto-new-block" class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'] . $widget_data['itg-block-1']['widget_display_name']; ?>">
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
                                                     <span class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
@@ -221,8 +220,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       </div>
                                   </div>
                               </div>
-                            </div>  
-                          </div>
                           <?php } else{?>
                         <div class="col-lg-8 col-md-12">
                             <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Automated Top Story'); ?></strong> )</div>
