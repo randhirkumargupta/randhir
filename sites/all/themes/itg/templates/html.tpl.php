@@ -108,6 +108,14 @@
             (new Image).src = "https://sb.scorecardresearch.com/b?c1\x3d2\x26c2\x3d8549097\x26c8\x3d" + encodeURIComponent(document.title) + "\x26c7\x3d" + encodeURIComponent(document.location.href) + "\x26c9\x3d" + encodeURIComponent(document.referrer) + "\x26rn\x3d" + ("" + (new Date).getTime())
         }
     </script>
+    <!-- Quora Pixel Code (JS Helper) -->
+    <script>
+        !function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);}(window, 'script', 'https://a.quora.com/qevents.js');
+        qp('init', 'a50e46d4d6b444a7ab8308928a6df8f0');
+        qp('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript>
+    <!-- End of Quora Pixel Code -->
     <?php if(!drupal_is_front_page()):?>
    <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
