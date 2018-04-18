@@ -270,7 +270,7 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></iframe></figure>', $node_body);
       $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script></iframe></figure>', $node_body);
       $node_body = str_replace('<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></iframe></figure>', $node_body);
-      //$ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+      $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
       $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
       $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
       $node_body = preg_replace("/ITG:POLL:([0-9]+)/", "", $node_body);
@@ -304,8 +304,7 @@ function itg_fia_xml_node_feed($query) {
       }
       $node_body = str_replace("100%", "300", $node_body);
       $node_body = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $node_body);
-      //$node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
-      //$node_body .= $ad_string;
+      $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
       $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
       $node_body = trim($node_body);
       $node_body_content = '<p>' . $node_body;
@@ -315,7 +314,7 @@ function itg_fia_xml_node_feed($query) {
       $desc = str_replace('<br />', '', $desc);
       $desc = str_replace("'", "&#39;", $desc);
       $node_title = str_replace("'", "&#39;", $node->title);
-      $items .= itg_fia_xml_format_rss_item('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+      $items .= itg_fia_xml_format_rss_item('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid);
     }
   }
   global $base_url;
@@ -355,28 +354,10 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified, $nid) {
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
   $desc = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $desc);
   $title = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $title);
-  $ad_string = '<section class="op-ad-template">
-    <figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250"></iframe>
-    </figure>
-      <figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1635110396733718&adtype=banner300x250"></iframe>
-    </figure>
-          <figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_1767534293491327&adtype=banner300x250"></iframe>
-    </figure>
-<figure class="op-ad">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_2041485232762897&adtype=banner300x250"></iframe>
-    </figure>
-<figure class="op-ad op-ad-default">
-       <iframe width="300" height="250" style="border:0; margin:0;" src="https://www.facebook.com/adnw_request?placement=1634971070080984_2041485232762897&adtype=banner300x250"></iframe>
-    </figure>
-
-</section>';
   $output = "<item>";
   $output .= "<title>" . $title . "</title>";
   $output .= "<link>" . check_url($link) . "?sr=fbia</link>";
@@ -403,8 +384,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "<body>";
   $output .= "<article>";
   $output .= "<header>";
-  //$output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
-  $output .= $ad_string;
+  $output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
     $output .= "<figure>";  
@@ -416,12 +396,15 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   // <!-- A kicker for your article -->
   $output .= "<details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
+  $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe><script>var _comscore = _comscore || [ ];_comscore.push({ c1: '2', c2: '8549097', options: { url_append:'comscorekw=fbia' }});(function() {var s = document.createElement('script'), el = document.getElementsByTagName('script')[0];s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';el.parentNode.insertBefore(s, el); })();</script><noscript><img src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' /></noscript></iframe></figure><!-- End comScore Tag -->";
+  $relatednode = itg_fia_related_node($nid);
   $output .= "<address>" . $name . "</address>";
   $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
   $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
   $output .= "</header>";
   $output .= "<div property='content:encoded'>" . $node_body_content . "</div>"; 
-  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-795349-17', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
+  $output .= $relatednode;
+  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-795349-17', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe>".$comscorecode."</iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
   $output .= "</article>";
   $output .= "</body>";
   $output .= "</html>";
@@ -455,3 +438,129 @@ function itg_fia_config_form($form, &$form_state) {
   return $form;
 }
 
+/*
+ * ITG FIA related node  $relatednode .="";
+ */
+function itg_fia_related_node($nid = 0) {
+    $relatednode = "";   
+    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
+        //$nid = 1143479;
+        $query = db_select('field_data_field_common_related_content', 'frc');
+        $query->fields('frc', array('field_common_related_content_value'));
+        $query->condition('frc.entity_id', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $node_str = $result[0]['field_common_related_content_value'];
+        
+        // replace enviroment name
+        // stage related node structure: 'IT_1146622|~|IT_849473|~|IT_1146628|~|IT_1146629|~|IT_1146631|~|IT_1146630'
+        $node_str = str_replace("|~|IT_", ",", $node_str);
+        $node_str = str_replace("IT_", "", $node_str); 
+
+        $nid_list = explode(",", $node_str);
+        //p($nid_list);
+        $flag_fia_cont = 0;
+        if(count($nid_list) > 0){
+            //related node
+            foreach ($nid_list as $key => $value) {                
+                $flag_fia = 0;
+                $flag_fia = checkFIANodeBynid($value);
+                if($flag_fia){
+                    $firebase_url = get_node_firebase_weburl($value);
+                    $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
+                    $flag_fia_cont++;
+                }
+            }
+        }
+        elseif($flag_fia_cont == 0){
+            // related content of primary cat
+            $prime_cat = getNodePrimeCatByNid($nid);
+            $prime_section_ar = taxonomy_get_parents($prime_cat->tid);
+            foreach ($prime_section_ar as $key => $value) {
+                $prime_section = $value->tid;
+            }
+            
+            
+            $order = fia_get_order_node_by_nid($nid, $prime_section);
+            $related_content_primary_cat = "";
+            $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
+            $relatednode .= $related_content_primary_cat;
+        }
+      
+    $relatednode .='</ul>';
+    //no any node found
+    if($flag_fia_cont == 0  && $related_content_primary_cat == "" ){
+        $relatednode = "";
+    }
+    
+    return $relatednode;
+}
+
+/*
+ * ITG FIA function for get content of primary cat
+ */
+
+function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {    
+    $relatednode = "";
+    if ($prime_section) {
+        $query = db_select('node', 'n');
+        $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+        //$query->join('field_data_field_primary_category', 'fpc', 'n.nid=fpc.entity_id');
+        //$query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');  
+        $query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
+        $query->join('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
+        $query->fields('n', array('nid'));
+        $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+        $query->condition('n.type', 'story', '=');
+        $query->condition('n.status', '1', '=');
+        $query->condition('iwo.widget', $order, '<');
+        $query->condition('iwo.widget', 'section_wise_widget');
+        $query->condition('iwo.cat_id', $prime_section);
+        //$query->condition('fpc.field_primary_category_value', $prime_cat, '=');
+        $query->condition('pc.field_story_category_tid', '$prime_section', '');
+        //$query->condition('ti.tid', $prime_section, '=');
+        $query->range(0, 3);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
+        foreach ($result as $reskey => $resvalue) {            
+            $firebase_url = get_node_firebase_weburl($resvalue['nid']);
+            $relatednode .= '<li><a href="' . $firebase_url . '"> </a></li>';
+        }
+    }
+    return $relatednode;
+}
+
+/*
+ * ITG FIA function for get order of current node
+ */
+function fia_get_order_node_by_nid($nid, $prime_section){
+    $order = 0;
+    if($nid){
+        $query = db_select('itg_widget_order', 'iwo');
+        $query->fields('iwo', array('weight'));
+        $query->condition('iwo.nid', $nid);
+        $query->condition('iwo.cat_id', $prime_section);
+        $query->condition('iwo.widget', 'section_wise_widget');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $order = $result[0]['weight'];
+    }
+    return $order;
+}
+/*
+ * ITG FIA function for get node is FIA or not by nid
+ */
+function checkFIANodeBynid($nid){
+    $nid_f = 0;
+    
+    if($nid){
+        $query = db_select('node', 'n');
+        $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+        $query->fields('n', array('nid'));
+        $query->condition('n.type', 'story', '=');
+        $query->condition('n.status', '1', '=');
+        $query->condition('n.nid', $nid, '=');
+        $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+         
+        $nid_f = $result[0]['nid'];
+    }
+    return $nid_f;
+}
