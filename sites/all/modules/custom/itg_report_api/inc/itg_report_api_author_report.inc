@@ -261,10 +261,12 @@ function getContentCountByDate($start_date, $end_date, $type) {
         $query->condition('pc.field_story_category_tid', '1206640', '<>');
         $query->condition('pc.bundle', $content_type);
     }
-    if ($_GET['author_report'] != 1) {
-        $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-    } else {
-        $query->condition('autr.field_author_report_value', 'author_report', '=');
+    if ($content_type == 'story') {
+        if ($_GET['author_report'] != 1) {
+            $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+        } else {
+            $query->condition('autr.field_author_report_value', 'author_report', '=');
+        }
     }
     if ($content_type == 'videogallery') {
         $query->condition('mis.field_mis_report_value', 'mis_report', '=');
@@ -381,11 +383,13 @@ function getAuthorList_Report($s_date, $e_date, $type) {
         $query->condition('pc.field_story_category_tid', '1206640', '<>');
         $query->condition('pc.bundle', $content_type);
     }
-    if ($_GET['author_report'] != 1) {
-        $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-        $query->groupBy('n.nid');
-    } else {
-        $query->condition('autr.field_author_report_value', 'author_report', '=');
+    if ($content_type == 'story') {
+        if ($_GET['author_report'] != 1) {
+            $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+            $query->groupBy('n.nid');
+        } else {
+            $query->condition('autr.field_author_report_value', 'author_report', '=');
+        }
     }
     if ($content_type == 'videogallery') {
         $query->condition('mis.field_mis_report_value', 'mis_report', '=');
