@@ -55,6 +55,12 @@ function itg_api_cronapi($op, $job = NULL) {
     'callback' => 'itg_nifty_feed',
     'file' => 'include/itg_nifty_feed.inc',
   );
+  
+  $items['itg-delete-pti-old-xml'] = array(
+    'description' => 'Delete Old PTI XML',
+    'callback' => 'itg_delete_pti_old_xml',
+    'file' => 'include/itg_api_pti.inc',
+  );
 
   return $items;
 }
@@ -106,6 +112,13 @@ function itg_api_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
     'file' => 'include/itg_api_ap.inc',
+  );
+  
+  $items['ty-pti-delete-old-xml'] = array(
+    'page callback' => 'itg_delete_pti_old_xml',    
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_pti.inc',
   );
   
   return $items;
