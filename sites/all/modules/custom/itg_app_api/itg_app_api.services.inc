@@ -3842,11 +3842,9 @@ function itg_rapid_api_change_password($token) {
             }
         }
         ###############relogin end ##########
-        $token_arr_data['auth_token'] = "$token";
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
-        $data['data'] = $token_arr_data;
-       
+        $data['auth_token'] = "$token";
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
