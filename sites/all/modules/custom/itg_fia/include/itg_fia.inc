@@ -383,9 +383,9 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "</head>";
   $output .= "<body>";
   $output .= "<article>";
-  $output .= '<figure class="op-tracker"><iframe hidden><script>!function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);';
+  $output .= '<figure class="op-tracker"><iframe hidden><!-- DO NOT MODIFY --><!-- Quora Pixel Code (JS Helper) --><script>!function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);';
   $output .= "}(window, 'script', 'https://a.quora.com/qevents.js');qp('init', 'a50e46d4d6b444a7ab8308928a6df8f0');qp('track', 'ViewContent');</script>";
-  $output .= '<noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript></iframe></figure>';
+  $output .= '<noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript><!-- End of Quora Pixel Code --></iframe></figure>';
   $output .= "<header>";
   $output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
     // <!-- The header image shown inside your article -->
