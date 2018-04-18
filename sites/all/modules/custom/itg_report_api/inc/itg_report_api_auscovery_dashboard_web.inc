@@ -96,7 +96,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
  * @param type $loop_cont
  * @return type
  */
-function auscovery_dashboard_web_video_list($list, $loop_cont){    
+function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date){    
   $type = "videogallery";
   $query = db_select('node', 'n');  
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
@@ -124,7 +124,7 @@ function auscovery_dashboard_web_video_list($list, $loop_cont){
   }  
   $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
   $query->groupBy('n.nid');
-  $query->condition('n.status', 1)->orderBy('n.created', 'DESC');  
+  $query->condition('n.status', 1)->orderBy('n.created', 'DESC');    
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
