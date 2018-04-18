@@ -588,7 +588,8 @@ function itg_report_api_auscovery_dashboard_web() {
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
   $result_get = getRedis($redis_key);
-  if ($result_get['key_value'] != "") {
+
+  if ($result_get['key_value1'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {

@@ -125,6 +125,7 @@ function auscovery_dashboard_web_video_list($list, $loop_cont){
   $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');  
+  print strtr((string) $query, $query->arguments());die();
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
