@@ -292,3 +292,77 @@ function itg_pti_content() {
     watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
   }
 }
+
+/**
+ * Function for Deleting One day old Pti XML from S3 Bucket.
+ * @global type $user
+ */
+function itg_delete_pti_old_xml() {
+  if (!empty(variable_get('api_info'))) {    
+    // Delete Data From DB.	
+    if (!empty(get_itg_variable('delete_pti_xmlfile_days'))) {
+      $days = get_itg_variable('delete_pti_xmlfile_days');
+      $days = '-' . $days . ' day';
+      $db_delete_date = date('Y-m-d', strtotime($days));
+      $num_deleted = db_delete('itg_api_xml_info')
+          ->condition('source', 'PTI')
+          ->where("(DATE_FORMAT(created, '%Y-%m-%d') <= :filter_date)", array(':filter_date' => $db_delete_date))
+          ->execute();
+    }
+    //Delete Data from S3 Bucket.
+    $delete_date = date('Y-m-d', strtotime(' -1 day'));
+    $deleted = 0;
+    $not_deleted = 0;
+    $op = array();
+    $bucket = variable_get('api_bucket');
+    $aws_access_key = variable_get('aws_access_key');
+    $aws_secret_key = variable_get('aws_secret_key');
+    $aws_region = variable_get('aws_region');
+    $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+    $s3->registerStreamWrapper();
+    try {
+      $objects = $s3->getIterator('ListObjects', array(
+        'Bucket' => $bucket,
+        "Prefix" => 'agencies/pti/'
+      ));
+      foreach ($objects as $object) {
+        $exp = explode('/', $object['Key']);
+        $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
+        if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
+          if ($exp[2] != 'XmlBhasha' && $exp[2] != 'Complete_xml' && $exp[2] != 'already_imported') {
+            $xml_file_path = $s3->getObjectUrl($bucket, $object['Key']);
+            if (empty($exp[3])) {
+              $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2];
+            }
+            else {
+              $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2] . '/' . $exp[3];
+            }
+            $file_time = filemtime($file_path);
+            $file_date = gmdate('Y-m-d', $file_time);
+            if ((!empty($file_date)) && ($file_date == $delete_date)) {
+              $unlink_return = unlink($file_path);
+              if ($unlink_return) {
+                $deleted++;
+              }
+              else {
+                $not_deleted++;
+              }
+            }
+          }
+        }
+      }
+
+      $msg = $deleted . ' of Date ' . $delete_date . ' Deleted sucessfully';
+      watchdog('PTI_DELETE_XML', $msg);
+      $msg1 = $not_deleted . ' of Date ' . $delete_date . ' Not Deleted sucessfully';
+      watchdog('PTI_DELETE_XML', $msg1);
+      echo "Deleted" . $deleted . " Not Deleted" . $not_deleted;
+    }
+    catch (S3Exception $e) {
+      echo $e->getMessage() . "\n";
+    }    
+  }
+  else {
+    watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
+  }
+}

@@ -25,7 +25,6 @@
   <<?php print "title"; ?>><![CDATA[<?php print t("India Today Editor's Picks"); ?>]]></<?php print "title"; ?>>
   <<?php print $xml_tag['path']; ?>><![CDATA[<?php print $base_url; ?>]]></<?php print $xml_tag['path']; ?>>
 </<?php print "image"; ?>>
-
 <?php foreach ($themed_rows as $count => $row): ?>
   <<?php print $item_node; ?>>
 <?php foreach ($row as $field => $content): ?>
@@ -42,5 +41,4 @@
 ?>
 <<?php print "dc:creator"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "dc:creator"; ?>>
 </<?php print $item_node; ?>>
-<?php endforeach; ?>
-</<?php print "channel"; ?>>
+<?php endforeach; ?></<?php print "channel"; ?>>

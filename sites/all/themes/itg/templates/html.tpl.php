@@ -119,6 +119,14 @@
         $content_type = $type;
       }
     ?>
+    <!-- Quora Pixel Code (JS Helper) -->
+    <script>
+        !function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);}(window, 'script', 'https://a.quora.com/qevents.js');
+        qp('init', 'a50e46d4d6b444a7ab8308928a6df8f0');
+        qp('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript>
+    <!-- End of Quora Pixel Code -->
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>
@@ -129,24 +137,7 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
-    <script>
-      jQuery(document).ready(function () {
-        jQuery(".tab-buttons span , .video_landing_menu a , .slick-arrow, .slick-slide, .pager a").on('click' , function() {
-            comscoreBeacon();
-        });
-      });
-    </script>
-    <!-- Branch IO code -->
-    <script type="text/javascript">
-    (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);branch.init('key_live_cgwzd2EvhB7X2XUsBd2N6joitydwu3OS',{'no_journeys':false} );
-    var linkData = {
-    data: {
-        '$canonical_identifier': "<?php print $content_id; ?>",
-        '$data_type': "<?php print $content_type; ?>",
-    }
-    };
-    branch.setBranchViewData(linkData);
-	</script>
+    
   <!-- Branch IO code end -->
 <!-- Scorecard taboola js -->
 <?php if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){ ?>

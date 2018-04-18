@@ -773,9 +773,22 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("graph_election", array("data" => $data));
             break;
         case 'home_graph_election':
-            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
             $data = itg_widget_get_graph_data_for_home();
-            $block['content'] = theme("graph_election_section_cart", array("data" => $data, 'rand_id' => $rand, 'jsondata' => $jsondata));
+            if($data[0]->field_graph_type_value == 'Graph'){
+							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+						}
+						if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
+							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+							drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
+						}
+            foreach ($data as $index => $row) {
+                $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+                $settings['index'] = $index;
+                $settings['json_data'] = $jsondata;
+                drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+                drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+            }
+            $block['content'] = theme("graph_election", array("data" => $data));
 
             break;
         case 'movies_reviews':
@@ -960,22 +973,38 @@ function itg_widget_get_graph_data() {
 }
 
 function itg_widget_get_graph_data_for_home() {
-
+    $election_tid = get_itg_variable('home_page_election_tid');
+    if (empty($election_tid)){
+      return FALSE;
+    }
     global $theme;
-
+    $cat_id = $cat_id_org = $election_tid;
+    $is_category = FALSE;
+    
     $itg_query = db_select('node', 'n');
-    $itg_query->join('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
-    $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
-    $itg_query->join('itg_widget_order', 'iwo', 'n.nid = iwo.nid');
-    $itg_query->leftJoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
+    $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+    $itg_query->leftJoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
+    $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
+    $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
+    
+    $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
+    if($is_category){
+	    $itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
+    }
+    $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
     $itg_query->fields('frq', array('field_election_constituency_tall_value'));
     $itg_query->fields('astw', array('field_election_state_tid'));
-    $itg_query->fields('ast', array('field_section_tid'))
+    $itg_query->fields('cju', array('field_election_chart_json_url_value'));
+    $itg_query->fields('sju', array('field_election_svg_json_url_value'));
+    $itg_query->fields('gt', array('field_graph_type_value'));
+    $itg_query->fields('dfgc', array('field_graph_category_value'))
       ->condition('type', 'election_graph_xml')
-      ->condition('iwo.widget', 'election_graph_content', '=')
-      ->orderBy('iwo.weight', 'ASC')
+      ->condition('ast.field_section_tid', $cat_id, '=')
       ->condition('status', 1);
+    // ->range(0, 5);
+    //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
 }
