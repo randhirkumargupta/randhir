@@ -308,7 +308,6 @@ function itg_delete_pti_old_xml() {
     $aws_access_key = variable_get('aws_access_key');
     $aws_secret_key = variable_get('aws_secret_key');
     $aws_region = variable_get('aws_region');
-
     $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
     $s3->registerStreamWrapper();
     try {
@@ -328,26 +327,26 @@ function itg_delete_pti_old_xml() {
             else {
               $file_path = "s3://{$bucket}" . '/' . $exp[0] . '/' . $exp[1] . '/' . $exp[2] . '/' . $exp[3];
             }
-            $file_time =  filemtime($file_path);
+            $file_time = filemtime($file_path);
             $file_date = gmdate('Y-m-d', $file_time);
-            if((!empty($file_date)) && ($file_date == $delete_date)){
-			  $unlink_return = unlink($file_path);
-			  if($unlink_return){
-			    $deleted++;
-			  }
-			  else{
-				$not_deleted++;
-			  }
-			}
+            if ((!empty($file_date)) && ($file_date == $delete_date)) {
+              $unlink_return = unlink($file_path);
+              if ($unlink_return) {
+                $deleted++;
+              }
+              else {
+                $not_deleted++;
+              }
+            }
           }
         }
       }
-      
-	  $msg = $deleted . ' of Date '.$delete_date.' Deleted sucessfully';
-	  watchdog('PTI_DELETE_XML', $msg);
-	  $msg1 = $not_deleted . ' of Date '.$delete_date.' Not Deleted sucessfully';
-	  watchdog('PTI_DELETE_XML', $msg1);
-	  echo "Deleted".$deleted." Not Deleted".$not_deleted;
+
+      $msg = $deleted . ' of Date ' . $delete_date . ' Deleted sucessfully';
+      watchdog('PTI_DELETE_XML', $msg);
+      $msg1 = $not_deleted . ' of Date ' . $delete_date . ' Not Deleted sucessfully';
+      watchdog('PTI_DELETE_XML', $msg1);
+      echo "Deleted" . $deleted . " Not Deleted" . $not_deleted;
     }
     catch (S3Exception $e) {
       echo $e->getMessage() . "\n";
