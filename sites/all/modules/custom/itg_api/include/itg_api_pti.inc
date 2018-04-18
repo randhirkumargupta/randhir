@@ -299,17 +299,17 @@ function itg_pti_content() {
  */
 function itg_delete_pti_old_xml() {
   if (!empty(variable_get('api_info'))) {    
-	// Delete Data From DB.	
+    // Delete Data From DB.	
     if (!empty(get_itg_variable('delete_pti_xmlfile_days'))) {
-		$days = get_itg_variable('delete_pti_xmlfile_days');
-		$days = '-'.$days.' day';
-		$db_delete_date = date('Y-m-d', strtotime($days));
-		$num_deleted = db_delete('itg_api_xml_info')
-		  ->condition('source', 'PTI')
-		  ->where("(DATE_FORMAT(created, '%Y-%m-%d') <= :filter_date)", array(':filter_date' => $db_delete_date))
-		  ->execute();
-	}
-	//Delete Data from S3 Bucket.
+      $days = get_itg_variable('delete_pti_xmlfile_days');
+      $days = '-' . $days . ' day';
+      $db_delete_date = date('Y-m-d', strtotime($days));
+      $num_deleted = db_delete('itg_api_xml_info')
+          ->condition('source', 'PTI')
+          ->where("(DATE_FORMAT(created, '%Y-%m-%d') <= :filter_date)", array(':filter_date' => $db_delete_date))
+          ->execute();
+    }
+    //Delete Data from S3 Bucket.
     $delete_date = date('Y-m-d', strtotime(' -1 day'));
     $deleted = 0;
     $not_deleted = 0;
