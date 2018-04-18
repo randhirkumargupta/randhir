@@ -509,7 +509,12 @@ function itg_report_api_author_report() {
   else {
     $start_date = $_GET['start_date'];
   }
-  $suffix = $start_date;
+  $type = 'story';
+  if($_GET['type'] == "video"){
+      $type = 'videogallery';
+  }
+
+  $suffix = $type.'_'.$start_date.'_'.$type;
   $redis_key = "itg_report_api_author_report_" . $suffix;
 
   $result_get = getRedis($redis_key);
@@ -519,9 +524,9 @@ function itg_report_api_author_report() {
   }
   else {
     // call function from return data..
-    $jsondata = author_report($start_date);
+    $jsondata = author_report($start_date,$type);
     $jsondata = json_encode($jsondata);
-    $ttl = 14400; // DEFAULT_REDIS_EXPIRE_TIME; 4hrs
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
   $jsondata = json_decode($jsondata, TRUE);
