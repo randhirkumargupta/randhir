@@ -84,6 +84,9 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list[$loop_cont]['created'] = "$create_date";
     $list[$loop_cont]['content_status'] = "$node_satatus";
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
+    $list[$loop_cont]['content_type'] = "story";
+    $list[$loop_cont]['is_reporter'] = "1";
+    $list[$loop_cont]['mis_report'] = "1";
     $loop_cont++;
     $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
@@ -158,14 +161,15 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     $list[$loop_cont]['author_email'] = "$author_email";
     $list[$loop_cont]['author_name'] = "$author_name";
     $list[$loop_cont]['profile_type'] = "$profile_type";
-    $list[$loop_cont]['author_status'] = "$author_status";
+    $list[$loop_cont]['author_status'] = "1";
     $list[$loop_cont]['title'] = "$title";
     $list[$loop_cont]['content_url'] = "$url";
     $list[$loop_cont]['primary_category'] = "$prime_cat->tid";
     $list[$loop_cont]['created'] = "$create_date";
     $list[$loop_cont]['content_status'] = "$node_satatus";
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
-    $list[$loop_cont]['reporter_filed'] = "1";
+    $list[$loop_cont]['content_type'] = "video";
+    $list[$loop_cont]['is_reporter'] = "1";
     $list[$loop_cont]['mis_report'] = "$mis_report";
     $loop_cont++;    
   }
