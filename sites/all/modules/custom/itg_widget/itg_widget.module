@@ -441,6 +441,10 @@ function itg_widget_block_info() {
       'info' => t('Widget: Score Card Iframe Widget'),
     );
     
+    $blocks['election_top_stories'] = array(
+      'info' => t('Widget: Election top stories Widget'),
+    );
+    
     return $blocks;
 }
 
@@ -914,7 +918,24 @@ function itg_widget_block_view($delta = '') {
              } 	   	                 
           }				
           break;
-    }
+          case 'election_top_stories':
+            global $theme;
+            if (isset($_GET['category']) && !empty($_GET['category'])) {
+              $selction_name = 'category';
+            }
+            else {
+              $selction_name = 'section';
+            }
+            if (isset($_GET[$selction_name])) {
+              $cat_id = $_GET[$selction_name];
+            }
+            if ($theme == FRONT_THEME_NAME) {
+              $cat_id = arg(2);              
+            }            
+            $data = get_top_story_from_category($cat_id, 5);
+            $block['content'] = theme("election_top_stories", array("data" => $data));
+          break;
+    }       
     return $block;
 }
 
