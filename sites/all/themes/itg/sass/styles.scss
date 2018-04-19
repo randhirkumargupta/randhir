@@ -3110,12 +3110,12 @@ footer {
                 width: 30px;
                 height: 25px;
                 content: '';
-                background: url(../images/up-quotes.jpg) no-repeat center 0;
+                background: url(../images/up-quotes.png) no-repeat center 0;
                 display: inline-block;
                 vertical-align: top;
             }
             &:after {
-                background: url(../images/down-quote.jpg) no-repeat 6px 3px;
+                background: url(../images/down-quote.png) no-repeat 6px 3px;
             }
         }
     }
