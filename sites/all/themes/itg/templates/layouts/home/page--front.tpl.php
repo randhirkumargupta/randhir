@@ -1050,3 +1050,26 @@ if ($theme != 'itgadmin') {
         <p><?php print t('Your Account Activated Successfully!'); ?></p>
     </div>
 </div>
+<?php 
+$ipl_triangle_status = itg_ipl_triangle_status(); 
+if ($ipl_triangle_status == 1) {
+?>
+<style type="text/css">
+  .crosscloseif{position: absolute;top: 28px;right: 17px;color: #fff;font-size: 12px;font-family: arial;height: 20px;width: 20px;text-align: center;cursor: pointer;
+  z-index: 99;background: #000;line-height: 20px;border-radius: 100%;}
+</style>
+<script type="text/javascript">
+  if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof jQuery.browser !== "undefined" && jQuery.browser.msie == 1))
+    {
+      document.getElementById('twister').style.display='none';
+    }
+    	
+  jQuery(document).ready(function(){
+   jQuery(".crosscloseif").click(function(){
+    jQuery("#twisstiframe").fadeOut(500)
+    jQuery(this).fadeOut(500); 
+   })  
+ })
+</script>
+<div id="twister" style="position: fixed;right: 0px;bottom: -8px;z-index: 99999;"><span class="crosscloseif">X</span><iframe name="crbz_scag_frame" width="190" scrolling="no" height="180" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl6.html" frameborder="0" id="twisstiframe"></iframe></div>
+<?php } ?>
