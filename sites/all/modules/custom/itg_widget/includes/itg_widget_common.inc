@@ -1712,17 +1712,14 @@ function itg_widget_views_query_alter(&$view, &$query) {
         if ($arg[0] == 'taxonomy' && $arg[1] = 'term' && $term_id) {
 
             foreach ($query->where[1]['conditions'] as $key => $condition) {
-                if ($condition['field'] == 'field_data_field_story_category.field_story_category_tid') {
+                if ($condition['field'] == 'itg_widget_order.cat_id') {
                     $query->where[1]['conditions'][$key]['value'] = $term_id;
                     $query->where[1]['conditions'][$key]['operator'] = '=';
                 }
             }
         }
-        $query->add_field('node', 'nid', 'node_nid', array('function' => 'groupby'));
-$query->add_groupby('node.nid');
-		//$query->add_groupby('node.nid');
+
         unset($query->table_queue['node_itg_widget_order']);
-       // print_r($query);die;
     }
     // Adding relationship.
     if (_itg_analytics_relationship_views($view->name, $view->current_display)) {
