@@ -9,7 +9,7 @@
  * @pram datetime $start_date
  * @return array
  */
-function author_report_v1($start_date) {
+function author_report_v1($start_date, $type) {
     
     global $base_url;
     $data = array();
@@ -114,7 +114,7 @@ function author_report_v1($start_date) {
  *
  * @return int $count
  */
-function getContentCountByDate_v1($start_date, $end_date) {    
+function getContentCountByDate_v1($start_date, $end_date, $type) {    
     $cont = 0;
     $flag = 0;
     $content_type = $type;
@@ -144,7 +144,7 @@ function getContentCountByDate_v1($start_date, $end_date) {
     }
     if ($content_type == 'videogallery') {
         $query->fields('mis', array('field_mis_report_value'));
-        $query->fields('fsr', array('entity_id'));
+        $query->fields('fsr', array('field_story_reporter_target_id'));
     }
     //end
     if ($start_date != "na") {
@@ -179,7 +179,7 @@ function getContentCountByDate_v1($start_date, $end_date) {
  *
  * @return array authorList
  */
-function getAuthorList_Report_v1($s_date, $e_date) {
+function getAuthorList_Report_v1($s_date, $e_date, $type) {
     
     global $base_url;
     $list = array();
