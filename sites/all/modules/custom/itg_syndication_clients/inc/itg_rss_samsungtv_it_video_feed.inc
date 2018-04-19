@@ -305,6 +305,7 @@ function itg_generate_samsung_json_feed_newslist(){
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image','eli','eli.entity_id = n.nid');
 
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
@@ -312,6 +313,7 @@ function itg_generate_samsung_json_feed_newslist(){
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('smi', array('field_story_large_image_fid'));
+  $query->fields('eli', array('field_story_extra_large_image_fid'));
   $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
@@ -334,12 +336,17 @@ function itg_generate_samsung_json_feed_newslist(){
     $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));
     $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
     $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
+    $extra_large_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+    $alias = drupal_get_path_alias('node/' . $value['nid'] . '');
+    $weburl = FRONT_URL . "/" . $alias;
     $json['data']['news'][] = array(
       'n_id' => (int)$value['nid'],
       'n_title' => $value['title'],
       'n_short_desc' => $kicker_text,
       'n_small_image' => $medium_img["imag_url"],
-      'n_updated_datetime' => $publish_date
+      'n_updated_datetime' => $publish_date,
+      'n_content_url' => $weburl,
+      'v_large_image' => $extra_large_img["imag_url"],
     );
   }
   $json_output = json_encode($json);
@@ -432,7 +439,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $query->condition('n.status', 1);
     $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 10);
+    $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     $jsondetail = array(
@@ -452,6 +459,8 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_video_kicker_value']));
       
       $video_data = get_itg_video_transcoding($nid);
+      echo "video transcoding list";
+      print_r($video_data);
       $byline = get_byline_name_by_nid($nid);
       
       $duration = '';
@@ -459,6 +468,9 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         $duration = $video_data[0]->video_duration;
       }
       $highest_bit = get_highest_bitrate_video_by_nid($nid);
+      echo "Highest bitrate list";
+      print_r($highest_bit);
+      
       /*$bitrate_replace = '512.mp4';
       if(!empty($highest_bit)){
         $temp = array();
@@ -477,10 +489,14 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       $video_url = '';
       if ($source_type == 'migrated') { //migrated video
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        echo "Migrated : video ids";
+        print_r($videoids);
         foreach ($videoids as $keys => $video_value) {
           $url = $video_value->field_migrated_video_url_value;
         }
         $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+        echo "videogallery data";
+        print_r($data_video);
         $bitrate_url = $data_video['bitrate_url'];
         $mp4_url = $data_video['file_url'];
         $video_url = $bitrate_url;
@@ -496,6 +512,8 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
           }
         }
         $inter_video_details = itg_internal_video_bitrate_data($video_id);
+        echo "dailymotion video details";
+        print_r($inter_video_details);
         $video_url = $inter_video_details['bitrate_url'];
       }
       
@@ -521,6 +539,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     //$json_data1=mb_convert_encoding($json_data1,'utf-16');
     $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos/';
     $file_path1 = $xml_path1 . $filename;
+    die('die');
     $fp1 = fopen($file_path1, "w");
     fwrite($fp1, $json_data1);
     fclose($fp1);

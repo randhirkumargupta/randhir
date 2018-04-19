@@ -1403,8 +1403,12 @@ function itg_remove_tags_from_body($content) {
  */
 function itg_internal_video_bitrate_data($video_id) {
   $data_video_info = itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+  echo "All video info";
+  print_r($data_video_info);
   if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
     $data_from_solr = itg_xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
+    echo "Get solar data for video";
+    print_r($data_from_solr);
     $video_data = $data_from_solr[0];
     $video_all_data = json_decode($video_data, TRUE);
     $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
