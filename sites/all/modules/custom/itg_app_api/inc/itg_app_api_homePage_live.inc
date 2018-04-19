@@ -184,12 +184,13 @@ function homePageJson_live() {
      $cube_widget = array();
 $widget_detail = array();
 $cube_widget['show_widget'] = "1";
-$cube_widget['widget_detail'] = $widget_detail;
 $widget_detail['type'] = "webview";
 $widget_detail['title'] = "Scorecard";
 $widget_detail['type_label'] = "scorecard";
 $widget_detail['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl8.html";
 $widget_detail['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
+$cube_widget['widget_detail'] = $widget_detail;
+
      $data_final['cube_widget'] = $cube_widget;
 
     return $data_final;
