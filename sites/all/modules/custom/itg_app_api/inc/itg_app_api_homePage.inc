@@ -40,19 +40,29 @@ function homePageJson() {
     $itg_rapid_home_technology_json = itg_rapid_home_technology_json();
     $itg_rapid_home_sports_json = array();
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
+    $cube_widget = array();
+    $widget_detail = array();
+    $cube_widget['show_widget'] = "1";
+    $cube_widget['widget_detail'] = $widget_detail;
+    $widget_detail['type'] = "webview";
+    $widget_detail['title'] = "Scorecard";
+    $widget_detail['type_label'] = "scorecard";
+    $widget_detail['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl8.html";
+    $widget_detail['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
 
     $data['status_code'] = "1";
-    $data['status_message'] = "customised_message";    
-    $data['data'][0] = $homePageJsonWidget_3;     // Karnataka Panchayat live   
-    $data['data'][1] = $homePageJsonWidget_1; // Karnataka Panchayat
-    $data['data'][2] = $data_topstories;     
-    $data['data'][3] = $itg_rapid_home_movies_json;
-    $data['data'][4] = $itg_rapid_home_technology_json;
-    $data['data'][5] = $data_news_india;
-    $data['data'][6] = $itg_rapid_home_sports_json;
-    $data['data'][7] = $data_news_lifestyle;
-    $data['data'][8] = $data_news_world;
-    $data['data'][9] = $data_magazine;
+    $data['status_message'] = "customised_message";  
+    $data['data'][0] = $cube_widget;     // Karnataka Panchayat live  
+    $data['data'][1] = $homePageJsonWidget_3;     // Karnataka Panchayat live   
+    $data['data'][2] = $homePageJsonWidget_1; // Karnataka Panchayat
+    $data['data'][3] = $data_topstories;     
+    $data['data'][4] = $itg_rapid_home_movies_json;
+    $data['data'][5] = $itg_rapid_home_technology_json;
+    $data['data'][6] = $data_news_india;
+    $data['data'][7] = $itg_rapid_home_sports_json;
+    $data['data'][8] = $data_news_lifestyle;
+    $data['data'][9] = $data_news_world;
+    $data['data'][10] = $data_magazine;
     return $data;
 }
 
