@@ -459,8 +459,6 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_video_kicker_value']));
       
       $video_data = get_itg_video_transcoding($nid);
-      echo "video transcoding list";
-      print_r($video_data);
       $byline = get_byline_name_by_nid($nid);
       
       $duration = '';
@@ -468,9 +466,6 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         $duration = $video_data[0]->video_duration;
       }
       $highest_bit = get_highest_bitrate_video_by_nid($nid);
-      echo "Highest bitrate list";
-      print_r($highest_bit);
-      
       /*$bitrate_replace = '512.mp4';
       if(!empty($highest_bit)){
         $temp = array();
@@ -489,14 +484,10 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       $video_url = '';
       if ($source_type == 'migrated') { //migrated video
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-        echo "Migrated : video ids";
-        print_r($videoids);
         foreach ($videoids as $keys => $video_value) {
           $url = $video_value->field_migrated_video_url_value;
         }
         $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-        echo "videogallery data";
-        print_r($data_video);
         $bitrate_url = $data_video['bitrate_url'];
         $mp4_url = $data_video['file_url'];
         $video_url = $bitrate_url;
@@ -512,11 +503,10 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
           }
         }
         $inter_video_details = itg_internal_video_bitrate_data($video_id);
-        echo "dailymotion video details";
-        print_r($inter_video_details);
         $video_url = $inter_video_details['bitrate_url'];
       }
-      
+      $bitrate_rate = reverse_video_bitrate_data($video_id);
+      $video_url = str_replace($bitrate_rate['matched_bitrate'],$bitrate_rate['original_bitrate'],$video_url);
       $video_url = str_replace(',156,', ',', $video_url);
       $jsondetail['data']['video'][] = array(
         'v_id' => (int)$nid,
@@ -539,7 +529,6 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     //$json_data1=mb_convert_encoding($json_data1,'utf-16');
     $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos/';
     $file_path1 = $xml_path1 . $filename;
-    die('die');
     $fp1 = fopen($file_path1, "w");
     fwrite($fp1, $json_data1);
     fclose($fp1);
