@@ -572,7 +572,7 @@ function kickerByNid($nid, $type='story') {
                 $desc = $resvalue_n['field_story_kicker_text_value'];
             }
         }
-        elseif ($type == 'video') {
+        elseif ($type == 'videogallery') {
             $query_n = db_select('field_data_field_story_expert_description', 'kt');
             $query_n->fields('kt', array('field_story_expert_description_value'));
             $query_n->condition('kt.entity_id', $nid, '=');
