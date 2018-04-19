@@ -5763,8 +5763,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
     
-    $qry = 'ALTER TABLE `itg_app_middleware_live` ADD `status` INT( 11 ) NOT NULL ;';
-    db_query($qry);
+    //$qry = 'ALTER TABLE `itg_app_middleware_live` ADD `status` INT( 11 ) NOT NULL ;';
+    //db_query($qry);
     p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
