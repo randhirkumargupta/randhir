@@ -811,6 +811,9 @@ function itg_widget_theme() {
         'score_card_iframe' => array(
             'template' => 'templates/score-card-iframe',
         ),
+        'election_top_stories' => array(
+            'template' => 'templates/election-top-stories',
+        ),
 
     );
     return $themes;
@@ -3478,4 +3481,23 @@ function is_programme($tid, $flag_occupation, $page_argument) {
     return TRUE;
   }
   return FALSE;
+}
+
+
+function get_top_story_from_category($cat_id, $limit){
+  $query = db_select('node', 'n'); 
+  $query->join('itg_widget_order', 'wo', 'wo.nid=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');    
+  $query->condition('wo.widget', 'section_wise_widget')
+          ->condition('n.status', 1)
+          ->condition('wo.cat_id', $cat_id)
+          ->groupBy('n.nid')
+          ->orderBy('wo.weight', 'DESC')
+          ->orderBy('n.nid', 'DESC')
+          ->range(0, $limit)
+          ->fields('n', array('nid', 'title', 'type'));
+  $query->fields('fm', array('uri'));
+  $result = $query->execute()->fetchAll();
+  return $result;
 }
