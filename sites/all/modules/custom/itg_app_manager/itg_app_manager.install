@@ -297,6 +297,12 @@ function itg_app_manager_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+        'status' => array(
+        'description' => 'status- on or off',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
     ),
     'indexes' => array(
       'identifier_changed' => array('changed'),
