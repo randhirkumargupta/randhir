@@ -282,6 +282,8 @@ function itg_pti_content() {
             }
           }
         }
+        $pti++;
+        print $pti." XML Imported Successfully";
       }
     }
     catch (S3Exception $e) {
