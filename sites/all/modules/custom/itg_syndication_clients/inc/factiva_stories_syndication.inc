@@ -157,7 +157,7 @@ function genrate_factiva_story_syndication_xml_v1($result = NULL, $category, $si
     $xml = '';
     if (!empty($result)) {
         global $base_url;
-        $logo = theme_get_setting('logo');
+        $logo = FRONT_URL.'/sites/all/themes/itg/logo.png'; //theme_get_setting('logo');
         $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
         $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
         $xml .= '<channel>';
@@ -255,6 +255,9 @@ function remove_extra_tag_in_body_v1($story_body) {
     $story_body = preg_replace($patterns, $replacements, $story_body);
     // remove iframe
     $story_body = preg_replace('/<iframe.*?\/iframe>/i','', $story_body);
+    //remove table
+    $pattern= '/<table[^>]*>.*?<\/table>/s';
+    $story_body= preg_replace($pattern, '', $story_body, 1);
     return $story_body;
     
 }
