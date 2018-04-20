@@ -826,6 +826,48 @@ function feature_for_reporter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-reporter-field_streaming_anchor_id'.
+  $field_instances['node-reporter-field_streaming_anchor_id'] = array(
+    'bundle' => 'reporter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_streaming_anchor_id',
+    'label' => 'Live Streaming Anchor id',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance:
   // 'taxonomy_term-byline_department-field_byline_company'.
   $field_instances['taxonomy_term-byline_department-field_byline_company'] = array(
@@ -1043,6 +1085,7 @@ function feature_for_reporter_field_default_field_instances() {
   t('Facebook page');
   t('Image');
   t('Image Size (167 x 125)');
+  t('Live Streaming Anchor id');
   t('Movie name');
   t('Movie year');
   t('Occupation');
