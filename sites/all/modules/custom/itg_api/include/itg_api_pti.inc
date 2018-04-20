@@ -50,7 +50,9 @@ function itg_pti_content() {
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
             if (empty(itg_api_get_xml_info($xml_filename))) {
+				 echo "in secondif";
               if (!empty($pti_xml)) {
+				  echo "in thirdif";
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
 
