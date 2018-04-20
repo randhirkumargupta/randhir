@@ -9,8 +9,11 @@ use Aws\Common\Credentials\Credentials;
  * Implement itg_pti_content
  */
 function itg_pti_content() {
+	echo "1";
   if (!empty(variable_get('api_info'))) {
+	  echo "2";
     global $user;
+    echo "3";
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 	echo "inif";
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
