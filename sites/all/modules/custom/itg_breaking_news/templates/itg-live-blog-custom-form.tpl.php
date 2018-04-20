@@ -1,6 +1,10 @@
-<div id="live_data"><?php print itg_live_blog_list(); ?></div>
-<div id="live_blog_form">
+<?php $nid = (arg(2)) ? arg(2) : ''; ?>
+<div id="live_data"><?php print itg_live_blog_list($nid); ?></div>
+<div id="live_blog_form" class="table-bordered">    
+<?php
     
+    print drupal_render(drupal_get_form('itg_manage_breking_news', $nid, 'insert'));
+?>
 </div>
 
 <?php //if ($_SESSION['itg_blog_post']) { ?>
@@ -34,24 +38,6 @@ jQuery(document).ready(function($){
     }  
  
 
-    /*
-    $(document).on('click', '.itg-custom-blog', function(){  
-        var first_name = $('#edit-blog-title').text();
-        
-        $.ajax({  
-            url:"/manage-print-form/add/"+id,   
-            type:"POST",  
-            data: $('form').serialize(), 
-            dataType:"text",  
-            success:function(data)  
-            {  
-                alert('form was submitted');
-                $('#live_data').empty();  
-                $('#live_data').html(data);  
-            }  
-        })  
-    });  
-    */
     $(document).on('click', '.btn_edit', function(){  
         var id = $(this).data("id4");
         alert('id' + id);
@@ -103,19 +89,19 @@ jQuery(document).ready(function($){
             $("#row").val(row);
 
             $.ajax({
-                url: '/itg-live-blog-list',
+                url: '/itg-live-blog-row',
                 type: 'post',
                 data: {row:row,entityId:entityId},
                 beforeSend:function(){
                     $(".load-more").text("Loading...");
                 },
                 success: function(response){
-
+                    alert(response);
                     // Setting little delay while displaying new content
                     setTimeout(function() {
                         // appending posts after last post with class="post"
                        // $(".post:last").after(response).show().fadeIn("slow");
-                        $('#custom-live-blog tr:last').after(response).show().fadeIn("slow");
+                        $('#custom-live-blog tr:first').after(response).show().fadeIn("slow");
 
                         var rowno = row + rowperpage;
 
@@ -155,7 +141,54 @@ jQuery(document).ready(function($){
 
     });
     
-   
+   // jQuery(".filter-wrapper").hide();
     
 });  
 </script>
+
+<style>
+
+.filter-wrapper {display: none;}
+/* post */
+.post{
+    width: 97%;
+    min-height: 200px;
+    padding: 5px;
+    border: 1px solid gray;
+    margin-bottom: 15px;
+}
+
+.post h1{
+    letter-spacing: 1px;
+    font-weight: normal;
+    font-family: sans-serif;
+}
+
+
+.post p{
+    letter-spacing: 1px;
+    text-overflow: ellipsis;
+    line-height: 25px;
+}
+
+/* Load more */
+.load-more{
+    width: 99%;
+    background: #15a9ce;
+    text-align: center;
+    color: white;
+    padding: 10px 0px;
+    font-family: sans-serif;
+}
+
+.load-more:hover{
+    cursor: pointer;
+}
+/* more link */
+.more{
+    color: blue;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 16px;
+}
+</style>    
