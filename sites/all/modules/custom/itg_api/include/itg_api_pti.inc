@@ -9,13 +9,10 @@ use Aws\Common\Credentials\Credentials;
  * Implement itg_pti_content
  */
 function itg_pti_content() {
-	echo "1";
   if (!empty(variable_get('api_info'))) {
-	  echo "2";
     global $user;
-    echo "3";
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
-	echo "inif";
+
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
     $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
@@ -37,7 +34,6 @@ function itg_pti_content() {
       ));
       $pti = 1;
       foreach ($objects as $object) {
-		  echo "inforach";
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
@@ -53,9 +49,7 @@ function itg_pti_content() {
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
 
             if (empty(itg_api_get_xml_info($xml_filename))) {
-				 echo "in secondif";
               if (!empty($pti_xml)) {
-				  echo "in thirdif";
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
 
