@@ -759,36 +759,42 @@ function itg_live_blog_list($eid = NULL) {
 
   }
       $results = array_reverse($results);
-      // p($results);
-      foreach ($results as $row) 
-      {
-        $breaking_band = ($row->blog_breaking_band == 1) ? 'yes' : 'no'; 
-        $user = !empty($row->blog_uid) ? user_load($row->blog_uid)->name : '';
-         $edit_link = $base_url . '/manage-print-form/edit/' . $row->bid . '?width=1000&height=700&iframe=true';
-        $output .= '  
-                <tr>
-                     <td class="blog_title" id="pt'.$row->blog_publish_time.'" data-id1="'.$row->bid.'">'.$row->blog_publish_time.'</td>
-                     <td class="user" id="u'.$row->bid.'" data-id2="'.$row->bid.'">'.$user.'</td>
-                     <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.$row->blog_title.'</td>
-                     <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.substr($row->blog_description, 0, 100).'</td>
-                     <td class="blog_breaking_band" id="b'.$row->bid.'" data-id2="'.$row->bid.'">'.$breaking_band.'</td>
-                     
-                     <td>
-                     
-                      
-                      <a class="colorbox-load add-more add-related-content-link" oncontextmenu="return false;" href="'.$edit_link.'">Edit</a>  
-                      <button type="button" name="delete_btn" data-id3="'.$row->bid.'" class="btn btn-xs btn-danger btn_delete">Delete</button>
-                     </td>  
-                </tr>  
-           ';  
-      }  
+      if (is_array($results) && count($results) > 0) {
+        foreach ($results as $row) 
+        {
+          $breaking_band = ($row->blog_breaking_band == 1) ? 'yes' : 'no'; 
+          $user = !empty($row->blog_uid) ? user_load($row->blog_uid)->name : '';
+           $edit_link = $base_url . '/manage-print-form/edit/' . $row->bid . '?width=1000&height=700&iframe=true';
+            $output .= '  
+                    <tr>
+                         <td class="blog_title" id="pt'.$row->blog_publish_time.'" data-id1="'.$row->bid.'">'.$row->blog_publish_time.'</td>
+                         <td class="user" id="u'.$row->bid.'" data-id2="'.$row->bid.'">'.$user.'</td>
+                         <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.$row->blog_title.'</td>
+                         <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.substr($row->blog_description, 0, 100).'</td>
+                         <td class="blog_breaking_band" id="b'.$row->bid.'" data-id2="'.$row->bid.'">'.$breaking_band.'</td>
 
- if(empty($start_from)) {
-       $add_link = $base_url . '/manage-print-form/add/' . $blog_entity_id. '?width=1000&height=700&iframe=true';
-    $output .= '</table>  
-         <div class="load-more">Load More</div>
-        </div>';
- }
+                         <td>
+
+
+                          <a class="colorbox-load add-more add-related-content-link" oncontextmenu="return false;" href="'.$edit_link.'">Edit</a>  
+                          <button type="button" name="delete_btn" data-id3="'.$row->bid.'" class="btn btn-xs btn-danger btn_delete">Delete</button>
+                         </td>  
+                    </tr>  
+               ';  
+          }  
+
+           if(empty($start_from)) {
+                 $add_link = $base_url . '/manage-print-form/add/' . $blog_entity_id. '?width=1000&height=700&iframe=true';
+              $output .= '</table>  
+                   <div class="load-more">Load More</div>
+                  </div>';
+           }
+      } else {
+        $output .= '</table>  
+                   <div class="itg-blog-empty-data">Empty</div>
+                  </div>';
+      }
+      
  
  return $output; 
 }

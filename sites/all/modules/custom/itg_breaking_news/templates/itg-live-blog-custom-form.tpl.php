@@ -147,6 +147,11 @@ jQuery(document).ready(function($){
 </script>
 
 <style>
+.itg-blog-empty-data {
+    text-align: center;
+    font-family: sans-serif;
+    background: #158ece;
+}
 
 .filter-wrapper {display: none;}
 /* post */
