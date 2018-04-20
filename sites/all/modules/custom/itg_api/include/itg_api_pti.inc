@@ -274,7 +274,7 @@ function itg_pti_content() {
                     if (copy($file_path, $complete_folder_path.$xml_filename)) {
                       unlink($file_path);
                     }
-                    $msg = $xml_filename . ' Already imported';
+                    $msg = $headline . ' Already imported';
                     watchdog('PTI_XML', $msg);
                   }
                 }
