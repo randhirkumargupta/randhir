@@ -785,9 +785,11 @@ function itg_live_blog_list($eid = NULL) {
 
            if(empty($start_from)) {
                  $add_link = $base_url . '/manage-print-form/add/' . $blog_entity_id. '?width=1000&height=700&iframe=true';
-              $output .= '</table>  
-                   <div class="load-more">Load More</div>
-                  </div>';
+              $output .= '</table>';
+              if (is_array($results) && count($results) > ($limit -1)) {
+                $output .= '<div class="load-more">Load More</div>';
+              }
+               $output .= '</div>';
            }
       } else {
         $output .= '</table>  
