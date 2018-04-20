@@ -168,6 +168,8 @@
 .page-custom-search h1.page__title {display: none;}
 .front .itg-top-section .home-top-story .data-holder .itg-listing li.itg-top-story-ad:before{display:none}
 .front .itg-top-section .home-top-story .data-holder .itg-listing li.itg-top-story-ad{padding:0px 10px 0px 10px;}
+/* expert opnion */
+.story-section .description .story-expert-opinion h2 {color: #000; font: 400 19px/28px "Merriweather-Semibold"; position: relative;}
 
 @media all and (max-width: 700px) {
     .section-news figure img {
