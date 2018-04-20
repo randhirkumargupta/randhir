@@ -6,7 +6,7 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-drupal_add_library('flexslider', 'flexslider');
+//drupal_add_library('flexslider', 'flexslider');
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
 $fb_share_title = htmlentities($search_title, ENT_QUOTES);
