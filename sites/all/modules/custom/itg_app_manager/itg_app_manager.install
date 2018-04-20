@@ -162,6 +162,32 @@ function itg_app_manager_schema() {
     ),
     'primary key' => array('id'),
   );
+  $schema['itg_app_master_config_internal_live'] = array(
+    'description' => 'The base table for itg master config internal.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'config_key' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'config_val' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
   
   $schema['itg_app_middleware'] = array(
     'description' => 'The base table for itg middleware management.',
@@ -188,10 +214,9 @@ function itg_app_manager_schema() {
       ),
       'url' => array(
         'description' => '',
-        'type' => 'varchar',
-        'length' => 255,
+        'type' => 'text',        
         'not null' => TRUE,
-        'default' => '',
+        
       ),
       'ids' => array(
         'description' => 'value of term or node id.',
@@ -207,6 +232,72 @@ function itg_app_manager_schema() {
       ),
       'changed' => array(
         'description' => 'The Unix timestamp when the identifier was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'status- on or off',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'identifier_changed' => array('changed'),
+      'identifier_created' => array('created'),
+    ),
+    'primary key' => array('id'),
+  );
+  $schema['itg_app_middleware_live'] = array(
+    'description' => 'The base table for itg middleware management.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'identifier' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'url' => array(
+        'description' => '',
+        'type' => 'text',        
+        'not null' => TRUE,
+        
+      ),
+      'ids' => array(
+        'description' => 'value of term or node id.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'The Unix timestamp when the identifier was created.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'changed' => array(
+        'description' => 'The Unix timestamp when the identifier was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => 'status- on or off',
         'type' => 'int',
         'not null' => TRUE,
         'default' => 0,
@@ -252,5 +343,134 @@ function itg_app_manager_schema() {
     ),
     'primary key' => array('id'),
   );
+ $schema['itg_app_master_info_internal'] = array(
+    'description' => 'The base table for itg master info internal.',
+    'fields' => array(
+        'id' => array(
+            'description' => 'The primary for config settings.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        ),
+        'org_id' => array(
+            'description' => 'org content id',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_id' => array(
+            'description' => 'info id- cat/menu id',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_type' => array(
+            'description' => 'info type- cat/menu/poll',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_key' => array(
+            'description' => 'info key',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_value' => array(
+            'description' => 'info value',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+    ),
+    'primary key' => array('id'),
+);
+ $schema['itg_app_master_info_internal_live'] = array(
+    'description' => 'The base table for itg master info internal.',
+    'fields' => array(
+        'id' => array(
+            'description' => 'The primary for config settings.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        ),
+        'org_id' => array(
+            'description' => 'org content id',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_id' => array(
+            'description' => 'info id- cat/menu id',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_type' => array(
+            'description' => 'info type- cat/menu/poll',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_key' => array(
+            'description' => 'info key',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_value' => array(
+            'description' => 'info value',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+    ),
+    'primary key' => array('id'),
+);
   return $schema;
+}
+
+/**
+ * Implements hook_install()
+ * Initialise the itg_app_menu_master table
+ * @return array
+ */
+function itg_app_manager_install() {
+    itg_app_menu_master_initialise_table();
+}
+
+/**
+ * Initialise the itg_app_menu_master table
+ */
+function itg_app_menu_master_initialise_table() {
+    $positions[] = array(
+        'menu_id' => '1',
+        'menu_name' => 'Top Categories',
+        'parent' => '1',
+    );
+    $positions[] = array(
+        'menu_id' => '2',
+        'menu_name' => 'Other Categories',
+        'parent' => '1',
+    );
+
+    foreach ($positions as $position) {
+        db_insert('itg_app_menu_master')
+                ->fields(array(
+                    'menu_id' => $position['menu_id'],
+                    'menu_name' => $position['menu_name'],
+                    'parent' => $position['parent'])
+                )
+                ->execute();
+    }
 }

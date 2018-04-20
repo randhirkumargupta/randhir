@@ -1,8 +1,6 @@
 <?php
 
 drupal_add_css(
-        
-        
         '.page-itg-app-dashboard #itg-app-dashboard-form fieldset legend{ display: block; } 
 .page-itg-app-dashboard #itg-app-dashboard-form fieldset{ width:17%; float:left; margin:0 2% 2% 0; min-height:90px;}
 .page-itg-app-dashboard #itg-app-dashboard-form fieldset legend span.fieldset-legend{ font-size:18px;display: block; }
@@ -34,11 +32,6 @@ drupal_add_css(
 .page-itg-app-manager-categories #itg-app-manager-categories-form .form-checkboxes .form-type-checkbox{ width:50%; float:left;}
 .page-itg-app-manager-magazine #itg-app-manager-magazine-form .form-checkboxes .form-type-checkbox{width:50%; float:left;}
 '
-
-        
-        
-        
-        
         , array('type' => 'inline'));
 
 

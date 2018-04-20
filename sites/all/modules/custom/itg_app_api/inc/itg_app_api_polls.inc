@@ -12,28 +12,27 @@
  */
 function polls_open_list($cpageno) {
 
-  $output_array = array();
-  $data_array = array();
-  $updated_datetime = "";
-  // list array building
-  $data = polls_open_datalist($cpageno);
-  if ($data['lcount'] > 0) {
-    $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
-  }
-  else {
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "customised_message";
-  }
-  //data array building
-  //testing id, after testing we will change. $poll_id
-  $data_array['id'] = "";
-  //testing title, after testing we will change. $poll_title
-  $data_array['title'] = "";
-  $data_array['polls'] = $data['data'];
-  $output_array['data'] = $data_array;
+    $output_array = array();
+    $data_array = array();
+    $updated_datetime = "";
+    // list array building
+    $data = polls_open_datalist($cpageno);
+    if ($data['lcount'] > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+    } else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+    }
+    //data array building
+    //testing id, after testing we will change. $poll_id
+    $data_array['id'] = "";
+    //testing title, after testing we will change. $poll_title
+    $data_array['title'] = "";
+    $data_array['polls'] = $data['data'];
+    $output_array['data'] = $data_array;
 
-  return $output_array;
+    return $output_array;
 }
 
 /**
@@ -44,27 +43,26 @@ function polls_open_list($cpageno) {
  */
 function polls_close_list($cpageno) {
 
-  $output_array = array();
-  $data_array = array();
-  $updated_datetime = "";
+    $output_array = array();
+    $data_array = array();
+    $updated_datetime = "";
 
-  // list array building
-  $data = polls_close_datalist($cpageno);
-  if ($data['lcount'] > 0) {
-    $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
-  }
-  else {
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "customised_message";
-  }
-  //data array building
-  $data_array['id'] = "";
-  $data_array['title'] = "";
+    // list array building
+    $data = polls_close_datalist($cpageno);
+    if ($data['lcount'] > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+    } else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+    }
+    //data array building
+    $data_array['id'] = "";
+    $data_array['title'] = "";
 
-  $data_array['polls'] = $data['data'];
-  $output_array['data'] = $data_array;
-  return $output_array;
+    $data_array['polls'] = $data['data'];
+    $output_array['data'] = $data_array;
+    return $output_array;
 }
 
 /**
@@ -76,42 +74,40 @@ function polls_close_list($cpageno) {
  */
 function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) {
 
-  if (isset($option_id) && $option_id != '') {
-    $dsp_result = itg_poll_get_display_result($poll_id);
-    $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
+    if (isset($option_id) && $option_id != '') {
+        $dsp_result = itg_poll_get_display_result($poll_id);
+        $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
 
-    $check = db_select('itg_polls', 'itgp')->fields('itgp', array('Id'))->condition('itgp.nid', $poll_id)->condition('itgp.ip', $device_id)->execute()->fetchField();
+        $check = db_select('itg_polls', 'itgp')->fields('itgp', array('Id'))->condition('itgp.nid', $poll_id)->condition('itgp.ip', $device_id)->execute()->fetchField();
 
-    if ($check == '') {
-      $query = db_insert('itg_polls')->fields(array(
-          'nId' => $poll_id,
-          'ansId' => $option_id,
-          'uid' => 0,
-          'display_result' => $dsp_result,
-          'ip' => $device_id,
-          'device' => $device,
-          'created' => date('Y-m-d H:i:s', time()),
-        ))->execute();
+        if ($check == '') {
+            $query = db_insert('itg_polls')->fields(array(
+                        'nId' => $poll_id,
+                        'ansId' => $option_id,
+                        'uid' => 0,
+                        'display_result' => $dsp_result,
+                        'ip' => $device_id,
+                        'device' => $device,
+                        'created' => date('Y-m-d H:i:s', time()),
+                    ))->execute();
 
-      $output_array['status_code'] = "1";
-      $output_array['status_message'] = "";
+            $output_array['status_code'] = "1";
+            $output_array['status_message'] = "";
+        } else {
+
+            $output_array['status_code'] = "0";
+            $output_array['status_message'] = "You already cast poll on it";
+            $output_array['data'] = array();
+        }
+    } else {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
     }
-    else {
 
-      $output_array['status_code'] = "0";
-      $output_array['status_message'] = "You already cast poll on it";
-      $output_array['data'] = array();
-    }
-  }
-  else {
-    $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
-  }
+    $data = poll_cast_datalist($poll_id);
+    $output_array['data'] = $data['data'];
 
-  $data = poll_cast_datalist($poll_id);
-  $output_array['data'] = $data['data'];
-
-  return $output_array;
+    return $output_array;
 }
 
 /**
@@ -122,80 +118,80 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
  */
 function poll_cast_datalist($poll_id) {
 
-  $current_time = date('Y-m-d H:i:s', time());
-  $news = array();
-  $news2 = array();
+    $current_time = date('Y-m-d H:i:s', time());
+    $news = array();
+    $news2 = array();
 
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
 
-  $query->fields('n', array('nid', 'title', 'type', 'changed'));
-  $query->fields('pb', array('field_poll_banner_fid'));
-  $query->fields('st', array('field_poll_start_date_value'));
-  $query->fields('ai', array('field_poll_call_to_action_image_fid'));
-  $query->fields('ed', array('field_poll_end_date_value'));
-  $query->fields('qi', array('field_poll_question_image_fid'));
+    $query->fields('n', array('nid', 'title', 'type', 'changed'));
+    $query->fields('pb', array('field_poll_banner_fid'));
+    $query->fields('st', array('field_poll_start_date_value'));
+    $query->fields('ai', array('field_poll_call_to_action_image_fid'));
+    $query->fields('ed', array('field_poll_end_date_value'));
+    $query->fields('qi', array('field_poll_question_image_fid'));
 
-  $query->condition('n.type', 'poll');
-  $query->condition('n.nid', $poll_id);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-
-  foreach ($result as $k => $res) {
-
-    $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
-    $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
-    $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
-
-    $query2 = db_select('field_data_field_poll_answer', 'pa');
-    $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
-    $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
-    $query2->fields('pa', array('field_poll_answer_value'));
-    $query2->fields('ot', array('field_poll_answer_text_value'));
-    $query2->fields('ai', array('field_poll_answer_image_fid'));
-    $query2->condition('pa.entity_id', $res['nid']);
-    $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query->condition('n.type', 'poll');
+    $query->condition('n.nid', $poll_id);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $options2 = array();
-    $options = array();
-    foreach ($result_option as $p => $pv) {
-      $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+    foreach ($result as $k => $res) {
 
-      $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
-      $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
-      $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-      $options['o_count'] = "$total_voter";
-      $options2[] = $options;
+        $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
+        $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
+        $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
+
+        $query2 = db_select('field_data_field_poll_answer', 'pa');
+        $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
+        $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
+        $query2->fields('pa', array('field_poll_answer_value'));
+        $query2->fields('ot', array('field_poll_answer_text_value'));
+        $query2->fields('ai', array('field_poll_answer_image_fid'));
+        $query2->condition('pa.entity_id', $res['nid']);
+        $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $options2 = array();
+        $options = array();
+        foreach ($result_option as $p => $pv) {
+            $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+
+            $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+            $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
+            $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+            $options['o_count'] = "$total_voter";
+            $options2[] = $options;
+        }
+
+        $count_total_partic = itg_poll_getTotalPoll($res['nid']);
+        $poll_id = isset($res['nid']) ? $res['nid'] : "";
+        $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
+        $poll_title = $res['title'];
+
+        $news['p_id'] = "$poll_id";
+        $news['p_is_sponsored'] = "";
+        $news['p_sponsored_icon'] = "";
+        $news['p_sponsored_link'] = "";
+        $news['p_publish_datetime'] = "$poll_publish_date_time";
+        $news['p_title'] = "$poll_title";
+        $news['p_image'] = "$poll_ques_img";
+        $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
+        $news['total_participants'] = "$count_total_partic";
+
+        $news['p_option'] = $options2;
+        $news2[] = $news;
     }
 
-    $count_total_partic = itg_poll_getTotalPoll($res['nid']);
-    $poll_id = isset($res['nid']) ? $res['nid'] : "";
-    $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
-    $poll_title = $res['title'];
-
-    $news['p_id'] = "$poll_id";
-    $news['p_is_sponsored'] = "";
-    $news['p_sponsored_icon'] = "";
-    $news['p_sponsored_link'] = "";
-    $news['p_publish_datetime'] = "$poll_publish_date_time";
-    $news['p_title'] = "$poll_title";
-    $news['p_image'] = "$poll_ques_img";
-    $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-    $news['total_participants'] = "$count_total_partic";
-
-    $news['p_option'] = $options2;
-    $news2[] = $news;
-  }
-
-  $data['data'] = $news;
-  $data['id'] = $res['id'];
-  $data['title'] = $res['title'];
-  return $data;
+    $data['data'] = $news;
+    $data['id'] = $res['id'];
+    $data['title'] = $res['title'];
+    return $data;
 }
 
 /**
@@ -204,27 +200,26 @@ function poll_cast_datalist($poll_id) {
  *  @return the poll info in array
  */
 function poll_detail_data($poll_id) {
-  $output_array = array();
-  $data_array = array();
-  $updated_datetime = "";
-  // list array building
-  $data = poll_detail_datalist($poll_id);
-  if ($data['lcount'] > 0) {
-    $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
-  }
-  else {
-    $output_array['status_code'] = "0";
-    $output_array['status_message'] = "customised_message";
-  }
-  //$poll_id
-  $data_array['id'] = "";
-  //$poll_title
-  $data_array['title'] = "";
-  $data_array['polls'] = $data['data'];
-  $output_array['data'] = $data_array;
+    $output_array = array();
+    $data_array = array();
+    $updated_datetime = "";
+    // list array building
+    $data = poll_detail_datalist($poll_id);
+    if ($data['lcount'] > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+    } else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+    }
+    //$poll_id
+    $data_array['id'] = "";
+    //$poll_title
+    $data_array['title'] = "";
+    $data_array['polls'] = $data['data'];
+    $output_array['data'] = $data_array;
 
-  return $output_array;
+    return $output_array;
 }
 
 /**
@@ -235,54 +230,65 @@ function poll_detail_data($poll_id) {
  * @return array
  */
 function polls_open_datalist($cpageno, $from) {
-  $range_max = 10;
-  if ($from == "home") {
-    $range_max = 1;
-  }
-  $range_min = 0;
-  if (!$cpageno == 0) {
-    $range_min = $cpageno * $range_max;
-  }
-
-
-  $current_time = date('Y-m-d H:i:s', time());
-
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
-
-  $query->fields('n', array('nid', 'title', 'type', 'changed'));
-  $query->fields('pb', array('field_poll_banner_fid'));
-  $query->fields('st', array('field_poll_start_date_value'));
-  $query->fields('ai', array('field_poll_call_to_action_image_fid'));
-  $query->fields('ed', array('field_poll_end_date_value'));
-  $query->fields('qi', array('field_poll_question_image_fid'));
-
-  $query->condition('n.type', 'poll');
-  $query->condition('st.field_poll_start_date_value', $current_time, '<');
-  $query->condition('n.status', '1');
-  $query->orderBy('n.nid', 'DESC');
-  $query->range($range_min, $range_max);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  foreach ($result as $k => $res) {
-    if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
-      $news2[] = open_poll_list($res);
+    $range_max = 10;
+    if ($from == "home") {
+        $query_c = db_select('itg_app_master_info_internal', 'mci');
+        $query_c->fields('mci');
+        $query_c->condition('mci.info_type', 'poll', '=');
+        $query_c->condition('mci.info_key', 'order', '=');
+        $result_c = $query_c->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $range_max = count($result_c);
     }
-    elseif ($res['field_poll_end_date_value'] == '') {
-      //&& $res['field_poll_start_date_value'] >= $current_time
-      $news2[] = open_poll_list($res);
+    $range_min = 0;
+    if (!$cpageno == 0) {
+        $range_min = $cpageno * $range_max;
     }
-  }
 
-  $data['data'] = $news2;
-  $data['lcount'] = count($news2);
-  $data['id'] = $res['id'];
-  $data['title'] = $res['title'];
-  return $data;
+
+    $current_time = date('Y-m-d H:i:s', time());
+
+    $query = db_select('node', 'n');
+    if ($from == "home") {
+        $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=n.nid');
+    }
+    $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
+
+    $query->fields('n', array('nid', 'title', 'type', 'changed'));
+    $query->fields('pb', array('field_poll_banner_fid'));
+    $query->fields('st', array('field_poll_start_date_value'));
+    $query->fields('ai', array('field_poll_call_to_action_image_fid'));
+    $query->fields('ed', array('field_poll_end_date_value'));
+    $query->fields('qi', array('field_poll_question_image_fid'));
+
+    $query->condition('n.type', 'poll');
+    $query->condition('st.field_poll_start_date_value', $current_time, '<');
+    $query->condition('n.status', '1');
+    if ($from == "home") {
+        $query->condition('mci.info_type', 'poll', '=');
+        $query->orderBy('mci.info_value', 'ASC');
+    }
+    $query->orderBy('n.nid', 'DESC');
+    $query->range($range_min, $range_max);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $k => $res) {
+        if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
+            $news2[] = open_poll_list($res);
+        } elseif ($res['field_poll_end_date_value'] == '') {
+            //&& $res['field_poll_start_date_value'] >= $current_time
+            $news2[] = open_poll_list($res);
+        }
+    }
+
+    $data['data'] = $news2;
+    $data['lcount'] = count($news2);
+    $data['id'] = $res['id'];
+    $data['title'] = $res['title'];
+    return $data;
 }
 
 /**
@@ -293,45 +299,45 @@ function polls_open_datalist($cpageno, $from) {
  */
 function open_poll_list($res) {
 
-  $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
-  $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
-  $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
-  $poll_nid = $res['nid'];
-  $poll_publish_date_time = $res['field_poll_start_date_value'];
-  $poll_title = $res['title'];
+    $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
+    $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
+    $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
+    $poll_nid = $res['nid'];
+    $poll_publish_date_time = $res['field_poll_start_date_value'];
+    $poll_title = $res['title'];
 
-  $query2 = db_select('field_data_field_poll_answer', 'pa');
-  $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
-  $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
-  $query2->fields('pa', array('field_poll_answer_value'));
-  $query2->fields('ot', array('field_poll_answer_text_value'));
-  $query2->fields('ai', array('field_poll_answer_image_fid'));
-  $query2->condition('pa.entity_id', $res['nid']);
-  if ($from == "home") {
-    $query2->range(0, 1);
-  }
-  $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query2 = db_select('field_data_field_poll_answer', 'pa');
+    $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
+    $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
+    $query2->fields('pa', array('field_poll_answer_value'));
+    $query2->fields('ot', array('field_poll_answer_text_value'));
+    $query2->fields('ai', array('field_poll_answer_image_fid'));
+    $query2->condition('pa.entity_id', $res['nid']);
+    if ($from == "home") {
+        $query2->range(0, 1);
+    }
+    $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-  $options2 = array();
+    $options2 = array();
 
-  foreach ($result_option as $p => $pv) {
-    $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
-    $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
-    $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-    $options2[] = $options;
-  }
+    foreach ($result_option as $p => $pv) {
+        $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+        $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
+        $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+        $options2[] = $options;
+    }
 
-  $news['p_id'] = "$poll_nid";
-  $news['p_is_sponsored'] = "";
-  $news['p_sponsored_icon'] = "";
-  $news['p_sponsored_link'] = "";
-  $news['p_publish_datetime'] = "$poll_publish_date_time";
-  $news['p_title'] = "$poll_title";
-  $news['p_image'] = "$poll_ques_img";
-  $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
+    $news['p_id'] = "$poll_nid";
+    $news['p_is_sponsored'] = "";
+    $news['p_sponsored_icon'] = "";
+    $news['p_sponsored_link'] = "";
+    $news['p_publish_datetime'] = "$poll_publish_date_time";
+    $news['p_title'] = "$poll_title";
+    $news['p_image'] = "$poll_ques_img";
+    $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
 
-  $news['p_option'] = $options2;
-  return $news;
+    $news['p_option'] = $options2;
+    return $news;
 }
 
 /**
@@ -341,54 +347,53 @@ function open_poll_list($res) {
  * @return array
  */
 function polls_close_datalist($cpageno) {
-  $news2 = array();
-  $range_max = 10;
-  $range_min = 0;
-  if (!$cpageno == 0) {
-    $range_min = $cpageno * $range_max;
-  }
-
-
-  $current_time = date('Y-m-d H:i:s', time());
-
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
-
-  $query->fields('n', array('nid', 'title', 'type', 'changed'));
-  $query->fields('pb', array('field_poll_banner_fid'));
-  $query->fields('st', array('field_poll_start_date_value'));
-  $query->fields('ai', array('field_poll_call_to_action_image_fid'));
-  $query->fields('ed', array('field_poll_end_date_value'));
-  $query->fields('qi', array('field_poll_question_image_fid'));
-
-  $query->condition('n.type', 'poll');
-  $query->condition('ed.field_poll_end_date_value', $current_time, '<');
-  //$query->condition('st.field_poll_start_date_value', $current_time, '<');
-  $query->condition('n.status', '1');
-  $query->orderBy('n.nid', 'DESC');
-  $query->range($range_min, $range_max);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  foreach ($result as $k => $res) {
-    if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] < $current_time) {
-      $news2[] = poll_close_datalist($res);
+    $news2 = array();
+    $range_max = 10;
+    $range_min = 0;
+    if (!$cpageno == 0) {
+        $range_min = $cpageno * $range_max;
     }
-    elseif ($res['field_poll_end_date_value'] == '' && $res['field_poll_start_date_value'] < $current_time) {
 
-      $news2[] = poll_close_datalist($res);
+
+    $current_time = date('Y-m-d H:i:s', time());
+
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
+
+    $query->fields('n', array('nid', 'title', 'type', 'changed'));
+    $query->fields('pb', array('field_poll_banner_fid'));
+    $query->fields('st', array('field_poll_start_date_value'));
+    $query->fields('ai', array('field_poll_call_to_action_image_fid'));
+    $query->fields('ed', array('field_poll_end_date_value'));
+    $query->fields('qi', array('field_poll_question_image_fid'));
+
+    $query->condition('n.type', 'poll');
+    $query->condition('ed.field_poll_end_date_value', $current_time, '<');
+    //$query->condition('st.field_poll_start_date_value', $current_time, '<');
+    $query->condition('n.status', '1');
+    $query->orderBy('n.nid', 'DESC');
+    $query->range($range_min, $range_max);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $k => $res) {
+        if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] < $current_time) {
+            $news2[] = poll_close_datalist($res);
+        } elseif ($res['field_poll_end_date_value'] == '' && $res['field_poll_start_date_value'] < $current_time) {
+
+            $news2[] = poll_close_datalist($res);
+        }
     }
-  }
 
 
-  $data['data'] = $news2;
-  $data['lcount'] = count($news2);
-  $data['id'] = $res['id'];
-  $data['title'] = $res['title'];
-  return $data;
+    $data['data'] = $news2;
+    $data['lcount'] = count($news2);
+    $data['id'] = $res['id'];
+    $data['title'] = $res['title'];
+    return $data;
 }
 
 /**
@@ -401,85 +406,6 @@ function polls_close_datalist($cpageno) {
  */
 function poll_close_datalist($res) {
 
-  $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
-  $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
-  $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
-
-  $query2 = db_select('field_data_field_poll_answer', 'pa');
-  $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
-  $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
-  $query2->fields('pa', array('field_poll_answer_value'));
-  $query2->fields('ot', array('field_poll_answer_text_value'));
-  $query2->fields('ai', array('field_poll_answer_image_fid'));
-  $query2->condition('pa.entity_id', $res['nid']);
-  $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-  $options2 = array();
-  $options = array();
-  foreach ($result_option as $p => $pv) {
-    $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
-
-    $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
-    $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : '';
-    $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-    $options['o_count'] = "$total_voter";
-    $options2[] = $options;
-  }
-
-  $count_total_patic = poll_participants($res['nid']);
-  $poll_nid = $res['nid'];
-  $poll_start_date_value = $res['field_poll_start_date_value'];
-  $poll_title = $res['title'];
-
-  $news['p_id'] = "$poll_nid";
-  $news['p_is_sponsored'] = "";
-  $news['p_sponsored_icon'] = "";
-  $news['p_sponsored_link'] = "";
-  $news['p_publish_datetime'] = "$poll_start_date_value";
-  $news['p_title'] = "$poll_title";
-  $news['p_image'] = "$poll_ques_img";
-  $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
-  $news['total_participants'] = "$count_total_patic";
-
-  $news['p_option'] = $options2;
-  return $news;
-}
-
-/**
- * function for generate poll_detail_datalist array
- * @pram int $poll_id
- *
- * @return array
- */
-function poll_detail_datalist($poll_id) {
-
-  $current_time = date('Y-m-d H:i:s', time());
-  $news = array();
-  $news2 = array();
-
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
-
-  $query->fields('n', array('nid', 'title', 'type', 'changed'));
-  $query->fields('pb', array('field_poll_banner_fid'));
-  $query->fields('st', array('field_poll_start_date_value'));
-  $query->fields('ai', array('field_poll_call_to_action_image_fid'));
-  $query->fields('ed', array('field_poll_end_date_value'));
-  $query->fields('qi', array('field_poll_question_image_fid'));
-
-  $query->condition('n.type', 'poll');
-  //$query->condition('n.status','1');
-  $query->condition('n.nid', $poll_id);
-  $query->range(0, 2);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-
-  foreach ($result as $k => $res) {
-
     $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
     $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
     $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
@@ -493,43 +419,129 @@ function poll_detail_datalist($poll_id) {
     $query2->condition('pa.entity_id', $res['nid']);
     $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-
     $options2 = array();
     $options = array();
     foreach ($result_option as $p => $pv) {
-      $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
-      $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
-      $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
-      $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-      $options['o_count'] = "$total_voter";
-      $options2[] = $options;
+        $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+
+        $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+        $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : '';
+        $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+        $options['o_count'] = "$total_voter";
+        $options2[] = $options;
     }
 
     $count_total_patic = poll_participants($res['nid']);
-    $poll_id = isset($res['nid']) ? $res['nid'] : "";
-    $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
+    $poll_nid = $res['nid'];
+    $poll_start_date_value = $res['field_poll_start_date_value'];
     $poll_title = $res['title'];
 
-    $news['p_id'] = "$poll_id";
+    $news['p_id'] = "$poll_nid";
     $news['p_is_sponsored'] = "";
     $news['p_sponsored_icon'] = "";
     $news['p_sponsored_link'] = "";
-    $news['p_publish_datetime'] = "$poll_publish_date_time";
+    $news['p_publish_datetime'] = "$poll_start_date_value";
     $news['p_title'] = "$poll_title";
     $news['p_image'] = "$poll_ques_img";
     $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
     $news['total_participants'] = "$count_total_patic";
 
     $news['p_option'] = $options2;
-    $news2[] = $news;
-  }
+    return $news;
+}
+
+/**
+ * function for generate poll_detail_datalist array
+ * @pram int $poll_id
+ *
+ * @return array
+ */
+function poll_detail_datalist($poll_id) {
+
+    $current_time = date('Y-m-d H:i:s', time());
+    $news = array();
+    $news2 = array();
+
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
+
+    $query->fields('n', array('nid', 'title', 'type', 'changed'));
+    $query->fields('pb', array('field_poll_banner_fid'));
+    $query->fields('st', array('field_poll_start_date_value'));
+    $query->fields('ai', array('field_poll_call_to_action_image_fid'));
+    $query->fields('ed', array('field_poll_end_date_value'));
+    $query->fields('qi', array('field_poll_question_image_fid'));
+
+    $query->condition('n.type', 'poll');
+    //$query->condition('n.status','1');
+    $query->condition('n.nid', $poll_id);
+    $query->range(0, 2);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
 
-  $data['data'] = $news2;
-  $data['lcount'] = count($news2);
-  $data['id'] = $res['id'];
-  $data['title'] = $res['title'];
-  return $data;
+    foreach ($result as $k => $res) {
+
+        $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
+        $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
+        $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
+
+        $query2 = db_select('field_data_field_poll_answer', 'pa');
+        $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
+        $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
+        $query2->fields('pa', array('field_poll_answer_value'));
+        $query2->fields('ot', array('field_poll_answer_text_value'));
+        $query2->fields('ai', array('field_poll_answer_image_fid'));
+        $query2->condition('pa.entity_id', $res['nid']);
+        $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $options2 = array();
+        $options = array();
+        foreach ($result_option as $p => $pv) {
+            $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+            $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+            $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
+            $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+            $options['o_count'] = "$total_voter";
+            $options2[] = $options;
+        }
+
+        $field_poll_end_date_value = $res['field_poll_end_date_value'];
+        if (!$field_poll_end_date_value) {
+            $p_type = "running";
+        } else {
+            $p_type = "closed";
+        }
+        $count_total_patic = poll_participants($res['nid']);
+        $poll_id = isset($res['nid']) ? $res['nid'] : "";
+        $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
+        $poll_title = $res['title'];
+
+        $news['p_id'] = "$poll_id";
+        $news['p_is_sponsored'] = "";
+        $news['p_sponsored_icon'] = "";
+        $news['p_sponsored_link'] = "";
+        $news['p_publish_datetime'] = "$poll_publish_date_time";
+        $news['p_title'] = "$poll_title";
+        $news['p_image'] = "$poll_ques_img";
+        $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
+        $news['total_participants'] = "$count_total_patic";
+        $news['p_type'] = "$p_type";
+
+        $news['p_option'] = $options2;
+        $news2[] = $news;
+    }
+
+
+    $data['data'] = $news2;
+    $data['lcount'] = count($news2);
+    $data['id'] = $res['id'];
+    $data['title'] = $res['title'];
+    return $data;
 }
 
 /**
@@ -539,62 +551,62 @@ function poll_detail_datalist($poll_id) {
  */
 function poll_result($nid) {
 
-  $node = node_load($nid);
-  $outputnew = '';
-  $optionarr = itg_poll_getPollResult($nid);
-  $opttotal = itg_poll_getTotalPoll($nid);
-
-  foreach ($node->field_poll_answer[LANGUAGE_NONE] as $row) {
-    $item_id[] = $row['value'];
-  }
-
-  $result_format = $node->field_result_format[LANGUAGE_NONE][0]['value'];
-  $temp_entities = entity_load('field_collection_item', $item_id);
-
-  if (is_array($optionarr) && count($optionarr) > 0) {
-
-    $finaltotal = $opttotal;
+    $node = node_load($nid);
     $outputnew = '';
-    $poll_manipulate_allval = '';
-    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
-      $poll_manipulate_allval += isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+    $optionarr = itg_poll_getPollResult($nid);
+    $opttotal = itg_poll_getTotalPoll($nid);
+
+    foreach ($node->field_poll_answer[LANGUAGE_NONE] as $row) {
+        $item_id[] = $row['value'];
     }
-    $finaltotal += $poll_manipulate_allval;
 
-    $poll_options = array();
+    $result_format = $node->field_result_format[LANGUAGE_NONE][0]['value'];
+    $temp_entities = entity_load('field_collection_item', $item_id);
+
+    if (is_array($optionarr) && count($optionarr) > 0) {
+
+        $finaltotal = $opttotal;
+        $outputnew = '';
+        $poll_manipulate_allval = '';
+        foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+            $poll_manipulate_allval += isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+        }
+        $finaltotal += $poll_manipulate_allval;
+
+        $poll_options = array();
 
 
-    foreach ($temp_entities as $temp_ent_id => $temp_ents) {
-      $poll_options['o_id'] = $temp_ents->item_id;
-      $polls_answer_text = isset($temp_ents->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ents->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';
-      $polls_answer_image_fid = isset($temp_ents->field_poll_answer_image['und'][0]['fid']) ? $temp_ents->field_poll_answer_image['und'][0]['fid'] : '';
+        foreach ($temp_entities as $temp_ent_id => $temp_ents) {
+            $poll_options['o_id'] = $temp_ents->item_id;
+            $polls_answer_text = isset($temp_ents->field_poll_answer_text[LANGUAGE_NONE]) ? $temp_ents->field_poll_answer_text[LANGUAGE_NONE][0]['value'] : '';
+            $polls_answer_image_fid = isset($temp_ents->field_poll_answer_image['und'][0]['fid']) ? $temp_ents->field_poll_answer_image['und'][0]['fid'] : '';
 
-      // Poll Manipulate value
-      $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
+            // Poll Manipulate value
+            $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
 
-      $preoptioncnt = isset($optionarr[$temp_ent_id]->optionCnt) ? $optionarr[$temp_ent_id]->optionCnt : 0;
-      $optioncnt = $preoptioncnt + $poll_manipulate_val;
-      $percentage = number_format(($optioncnt / $finaltotal) * 100);
-      $polls_answer_text_render = '';
-      if ($polls_answer_text) {
-        $polls_answer_text_render = $polls_answer_text;
-      }
+            $preoptioncnt = isset($optionarr[$temp_ent_id]->optionCnt) ? $optionarr[$temp_ent_id]->optionCnt : 0;
+            $optioncnt = $preoptioncnt + $poll_manipulate_val;
+            $percentage = number_format(($optioncnt / $finaltotal) * 100);
+            $polls_answer_text_render = '';
+            if ($polls_answer_text) {
+                $polls_answer_text_render = $polls_answer_text;
+            }
 
-      // Percent
-      if ($result_format == 1) {
-        $poll_options['o_title'] = $polls_answer_text_render;
-        $poll_options['o_res'] = $percentage . '%';
-      }
-      // Number of votes
-      elseif ($result_format == 2) {
-        $poll_options['o_title'] = $polls_answer_text_render;
-        $poll_options['o_res'] = $optioncnt;
-      }
-      $poll_options['o_image'] = completeFilePath($polls_answer_image_fid);
-      $poll_options2[] = $poll_options;
+            // Percent
+            if ($result_format == 1) {
+                $poll_options['o_title'] = $polls_answer_text_render;
+                $poll_options['o_res'] = $percentage . '%';
+            }
+            // Number of votes
+            elseif ($result_format == 2) {
+                $poll_options['o_title'] = $polls_answer_text_render;
+                $poll_options['o_res'] = $optioncnt;
+            }
+            $poll_options['o_image'] = completeFilePath($polls_answer_image_fid);
+            $poll_options2[] = $poll_options;
+        }
     }
-  }
-  return $poll_options2;
+    return $poll_options2;
 }
 
 /**
@@ -605,12 +617,12 @@ function poll_result($nid) {
  */
 function poll_voter_count($node_id, $option_id) {
 
-  $query = db_select('itg_polls', 'p');
-  $query->condition('p.nid', $node_id);
-  $query->condition('p.ansId', $option_id);
-  $query->addExpression('COUNT(p.id)', 'optionCnt');
-  $results = $query->execute()->fetchField();
-  return $results;
+    $query = db_select('itg_polls', 'p');
+    $query->condition('p.nid', $node_id);
+    $query->condition('p.ansId', $option_id);
+    $query->addExpression('COUNT(p.id)', 'optionCnt');
+    $results = $query->execute()->fetchField();
+    return $results;
 }
 
 /**
@@ -621,12 +633,11 @@ function poll_voter_count($node_id, $option_id) {
  * @return array
  */
 function poll_participants($node_id) {
-  if ($node_id) {
-    $query = db_select('itg_polls', 'p');
-    $query->condition('p.nid', $node_id);
-    $query->addExpression('COUNT(p.id)', 'optionCnt');
-    $results = $query->execute()->fetchField();
-    return $results;
-  }
+    if ($node_id) {
+        $query = db_select('itg_polls', 'p');
+        $query->condition('p.nid', $node_id);
+        $query->addExpression('COUNT(p.id)', 'optionCnt');
+        $results = $query->execute()->fetchField();
+        return $results;
+    }
 }
-
