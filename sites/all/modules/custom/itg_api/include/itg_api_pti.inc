@@ -280,6 +280,10 @@ function itg_pti_content() {
                 }
               }
             }
+            else{
+			  $msg2 = 'Filename '. $xml_filename . 'is exist in DB';
+              watchdog('PTI_XML', $msg2);
+			}
           }
         }
       }
