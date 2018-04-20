@@ -274,12 +274,16 @@ function itg_pti_content() {
                     if (copy($file_path, $complete_folder_path.$xml_filename)) {
                       unlink($file_path);
                     }
-                    $msg = $headline . ' Already imported';
+                    $msg = $xml_filename . ' Already imported';
                     watchdog('PTI_XML', $msg);
                   }
                 }
               }
             }
+            else{
+			  $msg2 = 'Filename '. $xml_filename . 'is exist in DB';
+              watchdog('PTI_XML', $msg2);
+			}
           }
         }
       }
