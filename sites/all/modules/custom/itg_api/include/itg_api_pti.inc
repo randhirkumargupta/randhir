@@ -47,7 +47,7 @@ function itg_pti_content() {
             }
             $xml_filename = basename(trim($file_path));
             $pti_xml = simplexml_load_file($file_path, 'SimpleXMLElement', LIBXML_NOCDATA);
-			$row_count = itg_api_get_xml_info($xml_filename);
+            $row_count = itg_api_get_xml_info($xml_filename);
             if ($row_count == 0) {
               if (!empty($pti_xml)) {
                 $pti_body = $pti_xml->channel->item;
@@ -281,9 +281,9 @@ function itg_pti_content() {
               }
             }
             else{
-			  $msg2 = 'Filename '. $xml_filename . 'is exist in DB';
+              $msg2 = 'Filename '. $xml_filename . 'is exist in DB';
               watchdog('PTI_XML', $msg2);
-			}
+            }
           }
         }
       }

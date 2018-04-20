@@ -157,13 +157,13 @@ function itg_api_check_title($title) {
   $return = FALSE;
   $title = html_entity_decode($title);
   $result = db_select('node', 'node')
-    ->fields('node', array('title'))
-    ->condition('title', $title, '=')
-    ->condition('type', 'story', '=')
-    ->execute()->fetchAssoc();
+          ->fields('node', array('title'))
+          ->condition('title', $title, '=')
+          ->condition('type', 'story', '=')
+          ->execute()->fetchAssoc();
 
   if (!empty($result['title'])) {
-	$return = TRUE;
+    $return = TRUE;
   }
 
   return $return;
