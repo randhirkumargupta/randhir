@@ -12,7 +12,7 @@ function itg_pti_content() {
   if (!empty(variable_get('api_info'))) {
     global $user;
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
-
+	echo "inif";
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
     $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
 
@@ -34,6 +34,7 @@ function itg_pti_content() {
       ));
       $pti = 1;
       foreach ($objects as $object) {
+		  echo "inforach";
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
