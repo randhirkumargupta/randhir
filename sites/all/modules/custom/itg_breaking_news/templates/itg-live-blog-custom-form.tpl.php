@@ -83,8 +83,7 @@ jQuery(document).ready(function($){
         var entityId = Number($('#entity-id').val());
         var rowperpage = 3;
         row = row + rowperpage;
-        // alert('row' + row);
-
+       
         if(row <= allcount){
             $("#row").val(row);
 
@@ -109,7 +108,7 @@ jQuery(document).ready(function($){
                         if(rowno > allcount){
 
                             // Change the text and background
-                            $('.load-more').text("Hide");
+                            jQuery('.load-more').hide();
                             $('.load-more').css("background","darkorchid");
                         }else{
                             $(".load-more").text("Load more");
