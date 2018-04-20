@@ -154,6 +154,7 @@ function workbench_moderation_state_review() {
  */
 
 function itg_api_check_title($title) {
+  $return = FALSE;
   $title = html_entity_decode($title);
   $result = db_select('node', 'node')
     ->fields('node', array('title'))
@@ -162,10 +163,10 @@ function itg_api_check_title($title) {
     ->execute()->fetchAssoc();
 
   if (!empty($result['title'])) {
-    return TRUE;
+	$return = TRUE;
   }
 
-  return FALSE;
+  return $return;
 }
 
 /**
@@ -221,8 +222,8 @@ function itg_api_insert_xml_info($nid, $file, $type, $source) {
  */
 function itg_api_get_xml_info($filename) {
   $result = db_query("SELECT t.id FROM {itg_api_xml_info} t WHERE t.filename = :name", array(":name" => $filename));
-  $id = $result->fetchField();
-  return $id;
+  $count = $result->rowCount();  
+  return $count;
 }
 
 /**
