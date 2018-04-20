@@ -688,7 +688,7 @@ else { ?>
                                     </div>               
                                 </div> 
                             </div> 
-                            <div class="itg-460 col-md-12 col-sm-6 mt-50">
+                            <div class="itg-320 col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Special widgets ( <strong>Know your election</strong> )</div>
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -723,7 +723,7 @@ else { ?>
                                     </div>               
                                 </div> 
                             </div>
-                            <div class="itg-460 col-md-12 col-sm-6 mt-50">
+                            <div class="itg-484 col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Special widgets ( <strong>Past results</strong> )</div>
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
