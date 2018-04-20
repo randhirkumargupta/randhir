@@ -190,4 +190,7 @@
         </div>
     </div>
 </div>
-  
+<style>
+  #home-livetv-election iframe{width:100%}
+#home-webcast-election iframe{width:100%}
+</style>  
