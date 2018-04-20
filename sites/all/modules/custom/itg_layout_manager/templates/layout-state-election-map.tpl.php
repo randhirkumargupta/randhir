@@ -1,4 +1,7 @@
-<?php $story_title = get_first_story_title_by_tid(arg(2));?>
+<?php 
+$itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
+$story_title = get_first_story_title_by_tid($itg_election_home_content_id);
+?>
 <div class="state-election-map-wrapper">
 <div class="full_state_graph">
 	<div class="breadMap"><div class="breadMapLink"><?php echo $state_name;?> Detailed Result</div><style>
