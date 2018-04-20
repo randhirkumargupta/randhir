@@ -582,5 +582,5 @@ function kickerByNid($nid, $type='story') {
             }
         }
     }
-    return $desc;
+    return strip_tags($desc);
 }
