@@ -714,7 +714,7 @@ function itg_breaking_form_ajax_submit($form , &$form_state) {
      $form['breaking']['blog_title']['#value'] = $row->blog_title;
      $form['breaking']['blog_description']['value']['#value'] = $row->blog_description;
      $form['breaking']['blog_breaking_band']['#value'] = $row->blog_breaking_band;
-     $form['breaking']['blog_notification']['#value'] =$row->blog_notification;
+     // $form['breaking']['blog_notification']['#value'] =$row->blog_notification;
      $form['breaking']['blog_uid']['#value'] = $row->blog_uid;
      // $form['breaking']['blog_publish_time']['#value'] = '';
      $form['breaking']['blog_publish_time']['#value'] = $row->blog_publish_time;
