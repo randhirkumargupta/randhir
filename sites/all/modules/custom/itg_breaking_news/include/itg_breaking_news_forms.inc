@@ -81,7 +81,7 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     // '#required' => TRUE
   );
   
- 
+
    $publish_time = date('H:i');
    $form['breaking']['blog_publish_time'] = array(
     '#type' => 'textfield',

@@ -628,7 +628,7 @@ function itg_breaking_form_ajax_submit($form , &$form_state) {
   $blog_title = $form_state['values']['blog_title'];
   $blog_description = $form_state['values']['blog_description']['value'];
   $blog_breaking_band = $form_state['values']['blog_breaking_band'];
-  $blog_notification = $form_state['values']['blog_notification'];
+  $blog_notification = ($form_state['values']['blog_notification']) ? $form_state['values']['blog_notification'] : 1;
   // $blog_publish_time = $form_state['input']['blog_publish_time']['time'];
   $blog_publish_time = $form_state['values']['blog_publish_time'];
   $blog_highlight_status = $form_state['values']['blog_highlight_status'];
