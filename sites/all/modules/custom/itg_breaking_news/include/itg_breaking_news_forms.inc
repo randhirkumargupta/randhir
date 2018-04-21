@@ -42,10 +42,20 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#collapsed' => FALSE,  // Added
   );
    
- 
+  $form['breaking']["wrapper"] = array(
+      "#markup" => "<div class='inline-error-messages'></div>",
+      );
+   
+  /* 
+  $form['breaking']["highlight_wrapper"] = array(
+    "#markup" => "<div class='blog_highlight-wrapper'><input class='blog_highlight_checkbox' type='checkbox' name='blog_highlight_checkbox' value='1' /></div>",
+  );
+   * 
+   */
+  
    $form['breaking']['blog_title'] = array(
     '#type' => 'textfield',
-    '#prefix' => '<div id="blog_title_replace_wrapper">',
+    '#prefix' => '<div id="blog_title_replace_wrapper"><input class="blog_highlight_checkbox" type="checkbox" name="blog_highlight_checkbox" value="1" />',
     '#title' => t('Title'),
     '#default_value' => isset($results->blog_title) ? $results->blog_title : '',
     // '#required' => TRUE,
@@ -59,6 +69,8 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#resizable' => FALSE,
     '#default_value'=> isset($results->blog_description) ? $results->blog_description : '',
     '#format' => 'full_html',
+    '#prefix' => '<div id="blog_description_replace_wrapper">',
+    '#suffix' => '</div>',
   );
     
   $form['breaking']['blog_breaking_band'] = array(
@@ -82,33 +94,45 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#type' => 'textfield',
     '#title' => t('Publish Time'),
     '#default_value' => ($results->blog_notification) ? $results->blog_notification : $publish_time,
-    '#date_format' => 'H:i',
     '#size' => 10,
+    '#prefix' => '<div id="blog_publish_time_replace_wrapper">',
+    '#suffix' => '</div>',
   );
   
-  
+
   $form['breaking']['blog_highlight_status'] = array(
-    '#type' => 'radios',
-    '#title' => t('Blog highlight status'),
-    '#options' => array(1 => "Active", 2 => "Inactive"),
-    '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : 1,
-    '#required' => TRUE
+    '#type' => 'hidden',
+    '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : '1',
+    '#attributes' => array('class' => 'blog_highlights_status'),
+    '#prefix' => '<div id="blog_highlight_replace_wrapper">',
+    '#suffix' => '</div>',
   );
   
   $form['breaking']['blog_entity_id'] = array(
     '#type' => 'hidden',
     '#value' => ($results->blog_entity_id) ? $results->blog_entity_id : $blog_entity_id,
+    '#prefix' => '<div id="blog_entity_replace_wrapper">',
+    '#suffix' => '</div>',
   );
   
-   $form['breaking']['bid'] = array(
+  $form['breaking']['bid'] = array(
     '#type' => 'hidden',
     '#value' => ($results->bid) ? $results->bid : '',
+    '#attributes' => array('class' => 'custom_blog_bid'),
+    '#prefix' => '<div id="blog_bid_replace_wrapper">',
+    '#suffix' => '</div>',
+  );
+  
+  $form['breaking']['action'] = array(
+    '#type' => 'hidden',
+    '#value' => '',
+    '#attributes' => array('class' => 'custom_blog_action'),
   );
    
   if ($type == 'insert') {
      $form['breaking']['submit'] = array(
-      '#type' => 'submit' ,
-      '#value' => 'Submit' ,
+      '#type' => 'submit',
+      '#value' => 'Submit',
       '#ajax' => array(
         'callback' => 'itg_breaking_form_ajax_submit' ,
         'effect' => 'fade' ,
@@ -125,35 +149,27 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
       // '#attributes' => array("onclick" => "javascript:itg_blog_fetch_data($results->blog_entity_id);")
     );
     $form['#submit'][] = 'itg_live_blog_form_submit';
-    $blog_list = itg_live_blog_list($blog_entity_id);
-     drupal_add_js('
-       jQuery(document).ready(function($) {
-         alert("form submit");
-         $("#live_data").parent().empty();  
-         $("#live_data").parent().html("replace sting");             
-         parent.jQuery.colorbox.close();
-        });',"inline");
+   
   }
  
-  
-  $url = $base_url . '/manage-live-blog';
-  $form['breaking']['actions']['cancel'] = array(
-    '#markup' => l(t('Reset'), $url, array(
-      'attributes' => array(
-        'class' => 'button custom-url-search'
-      )
-    )),
-    '#weight' => 9,
-    '#value' => t('Reset')
-  );
-  
   return $form;
 }
 
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ */
 function itg_manage_breking_news_submit($form, &$form_state) {
   
 }
 
+/**
+ * 
+ * @global type $user
+ * @param type $form
+ * @param type $form_state
+ */
 function itg_live_blog_form_submit($form, &$form_state) {
   global $user;
   $insert_id = '';
@@ -191,42 +207,21 @@ function itg_live_blog_form_submit($form, &$form_state) {
 }
 
 
-
-function print_form() {
-  // p(arg());
-  
-   $nid = (arg(2)) ? arg(2) : '';
-   $type = (arg(1)) ? arg(1) : '';
-   if($type == 'add') {
-     return drupal_render(drupal_get_form('itg_manage_breking_news'));
-   } elseif($type == 'edit') {
-     return drupal_render(drupal_get_form('itg_manage_breking_news', $nid));
-   }
-   
-} 
-
-
+/**
+ * 
+ */
 function live_bog_delete() {
-  $blog_entity_id = (arg(1)) ? arg(1) : '';
-  $bid = (arg(2)) ? arg(2) : '';
+  $bid = ($_POST['id']) ? $_POST['id'] : '';
   if (!empty($bid)) {
     // db_delete('itg_live_blog')->condition('bid' , $bid)->execute();
   }
-  
-  if (!empty($blog_entity_id)) {
-     return $blog_list = itg_live_blog_list($blog_entity_id);
-  }
- 
 }
 
-
+/**
+ * 
+ * @return string
+ */
 function live_bog_cron()
 {
-            
-        db_query("INSERT INTO `itg_live_blog` (`bid`, `blog_entity_id`, `blog_type`, `blog_title`, `blog_description`, `blog_breaking_band`, `blog_notification`, `blog_publish_time`, `blog_highlight_status`, `blog_uid`, `blog_created_date`, `blog_updated_date`) VALUES
-(16, 1148227, 'Breaking News', 'dsd', '<p>daasd</p>\r\n', 1, 1, '', 1, 1522, '1524040055', NULL),
-(17, 1148227, 'Breaking News', 'test data', '<p>test data</p>\r\n', 1, 2, '', 1, 1522, '1524040256', NULL),
-(18, 1148227, 'Breaking News', 'test data 1', '<p>test data 1</p>\r\n', 1, 1, '', 1, 1522, '1524045105', NULL),
-(19, 1148227, 'Breaking News', 'test data 2', '<p>test data 2</p>\n', 1, 1, '', 1, 1522, '1524045279', NULL),
-(40, 1148227, 'Breaking News', 'xcxcxc', '<p>czxczx</p>\n', 1, 1, '', 1, 1522, '2018-04-19 13:27:21', NULL);");
+   return 'test';    
 }
