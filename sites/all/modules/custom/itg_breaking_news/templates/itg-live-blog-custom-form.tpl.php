@@ -23,6 +23,7 @@
 <script>  
 
 jQuery(document).ready(function($){   
+    /*
     function fetch_data(id)  
     {  
 
@@ -36,7 +37,19 @@ jQuery(document).ready(function($){
       });
      // setTimeout(fetch_data(id),1000 * 60 * 3);  
     }  
- 
+   */
+    jQuery('.blog_highlight_checkbox').change(function () {
+        if ($(this).attr("checked")) 
+        {
+            jQuery('.blog_highlights_status').val('2');
+            return;
+        }
+       jQuery('.blog_highlights_status').val('1');
+    });
+
+    $(document).on('click', '.blog_highlight_checkbox', function() {
+        jQuery('.blog_highlights_status').val('2');
+    });
 
     $(document).on('click', '.btn_edit', function(){  
         var id = $(this).data("id4");
@@ -59,17 +72,20 @@ jQuery(document).ready(function($){
     });
     
 	  $(document).on('click', '.btn_delete', function(){  
-        var id=$(this).data("id3");  
+        var id=$(this).data("id3");
         if(confirm("Are you sure you want to delete this?"))  
         {  
             $.ajax({  
-                url:"delete.php",  
-                method:"POST",  
-                data:{id:id},  
-                dataType:"text",  
-                success:function(data){  
-                    alert(data);  
-                    fetch_data();  
+                url: '/itg-live-bog-delete',
+                type: 'post',
+                data:{id:id},
+                beforeSend:function(){
+                    $(".load-ajax-box").show();
+                },
+                success:function(data){
+                    jQuery('.load-ajax-box').hide();
+                    jQuery("#custom-live-blog #"+id).animate({ backgroundColor: "#d9d9d9" }, "slow")
+  .animate({ opacity: "hide" }, "slow");
                 }  
             });  
         }  
@@ -95,7 +111,7 @@ jQuery(document).ready(function($){
                     $(".load-more").text("Loading...");
                 },
                 success: function(response){
-                    alert(response);
+                   // alert(response);
                     // Setting little delay while displaying new content
                     setTimeout(function() {
                         // appending posts after last post with class="post"
@@ -139,13 +155,28 @@ jQuery(document).ready(function($){
         }
 
     });
-    
-   // jQuery(".filter-wrapper").hide();
-    
+        
 });  
 </script>
 
 <style>
+#blog_title_replace_wrapper {position: relative;}
+#blog_title_replace_wrapper input.blog_highlight_checkbox {    right: 31%;
+    position: absolute;
+    top: 5px;}
+
+span.inline-error-messages.error {
+    text-align: center;
+    background: #a8c1e4;
+    font-size: 20px;
+}
+
+.load-ajax-box {
+    display:none;
+    text-align: center;
+    background: #158ece;
+}
+
 .itg-blog-empty-data {
     text-align: center;
     font-family: sans-serif;
