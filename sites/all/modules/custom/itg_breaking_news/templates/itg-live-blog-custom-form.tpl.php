@@ -160,10 +160,7 @@ jQuery(document).ready(function($){
 </script>
 
 <style>
-#blog_title_replace_wrapper {position: relative;}
-#blog_title_replace_wrapper input.blog_highlight_checkbox {    right: 31%;
-    position: absolute;
-    top: 5px;}
+
 
 span.inline-error-messages.error {
     text-align: center;

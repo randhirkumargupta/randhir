@@ -81,13 +81,6 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     // '#required' => TRUE
   );
   
-  $form['breaking']['blog_notification'] = array(
-    '#type' => 'radios',
-    '#title' => t('Blog Notification'),
-    '#options' => array(1 => "Active", 2 => "Inactive"),
-    '#default_value' => ($results->blog_notification) ? $results->blog_notification : 1,
-   // '#required' => TRUE
-  );
  
    $publish_time = date('H:i');
    $form['breaking']['blog_publish_time'] = array(
