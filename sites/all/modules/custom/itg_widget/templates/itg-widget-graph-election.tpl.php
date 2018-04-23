@@ -27,6 +27,9 @@
     if (empty($section)) {
       $section = $_GET['section_name'];
     }
+    if (empty($section)) {
+      $section = get_itg_variable('home_page_election_tid');
+    }
   }
   // Start high chart Graph
   foreach ($data as $index => $row):

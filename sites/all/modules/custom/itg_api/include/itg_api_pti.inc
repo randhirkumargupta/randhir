@@ -9,12 +9,11 @@ use Aws\Common\Credentials\Credentials;
  * Implement itg_pti_content
  */
 function itg_pti_content() {
+  session_cache_limiter('');
 	$t=time();
 	$t = date("Y-m-d H:i:s",$t);
 	$msg_t = $t.' Test Message';
 	watchdog('PTI Test', $msg_t);
-	//echo $t."in function check";
-	//exit;
   if (!empty(variable_get('api_info'))) {
     global $user;
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');

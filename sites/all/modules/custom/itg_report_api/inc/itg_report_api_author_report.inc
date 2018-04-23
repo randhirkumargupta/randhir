@@ -189,7 +189,7 @@ function author_report($start_date, $type = 'story') {
         foreach ($author_today_data as $today_key => $today_val) {
             $title = $today_val['title'];
             $nid = $today_val['nid'];
-            $desc = kickerByNid($nid, $type);
+            $desc = kickerByNid($nid, $type); 
             $title_path = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid . '');
             $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
@@ -572,7 +572,7 @@ function kickerByNid($nid, $type='story') {
                 $desc = $resvalue_n['field_story_kicker_text_value'];
             }
         }
-        elseif ($type == 'video') {
+        elseif ($type == 'videogallery') {
             $query_n = db_select('field_data_field_story_expert_description', 'kt');
             $query_n->fields('kt', array('field_story_expert_description_value'));
             $query_n->condition('kt.entity_id', $nid, '=');
@@ -582,5 +582,5 @@ function kickerByNid($nid, $type='story') {
             }
         }
     }
-    return $desc;
+    return strip_tags($desc);
 }
