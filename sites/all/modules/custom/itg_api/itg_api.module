@@ -72,13 +72,13 @@ function itg_api_cronapi($op, $job = NULL) {
  */
 function itg_api_menu() {
   
-  $items['ty-ani'] = array(
+  $items['migrate-press-trust'] = array(
     'page callback' => 'itg_pti_content',
     'access callback' => TRUE,
     'file' => 'include/itg_api_pti.inc',
   );
   
-  $items['ty-anibkkk'] = array(
+  $items['ty-ani'] = array(
     'page callback' => 'itg_ani_content',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
