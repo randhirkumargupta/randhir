@@ -34,9 +34,9 @@ function itg_pti_content() {
       ));
       $pti = 1;
       foreach ($objects as $object) {
-		$xml_filename = '';
-		$file_path = '';
-		$pti_xml = '';
+        $xml_filename = '';
+        $file_path = '';
+        $pti_xml = '';
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
