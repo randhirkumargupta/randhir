@@ -285,6 +285,7 @@ function itg_pti_content() {
             else{
               $msg2 = 'Filename '. $xml_filename . 'is exist in DB';
               watchdog('PTI_XML', $msg2);
+              echo "File Exist Failure";
             }
           }
         }
@@ -293,8 +294,10 @@ function itg_pti_content() {
     catch (S3Exception $e) {
       echo $e->getMessage() . "\n";
     }
+    echo "Success";
   }
   else {
+	echo "Failure";
     watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
   }
 }
