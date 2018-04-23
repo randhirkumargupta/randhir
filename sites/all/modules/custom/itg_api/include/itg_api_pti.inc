@@ -11,7 +11,7 @@ use Aws\Common\Credentials\Credentials;
 function itg_pti_content() {
   if (!empty(variable_get('api_info'))) {
     global $user;
-    module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
+    //module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
     $tax = taxonomy_get_tree($vocab_id->vid, $parent = 0, $max_depth = 1, $load_entities = FALSE);
@@ -34,6 +34,9 @@ function itg_pti_content() {
       ));
       $pti = 1;
       foreach ($objects as $object) {
+		$xml_filename = '';
+		$file_path = '';
+		$pti_xml = '';
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
@@ -52,7 +55,6 @@ function itg_pti_content() {
               if (!empty($pti_xml)) {
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
-
                   $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $pti_value->title))));
                   $title_length = strlen($pti_value->title);
 
