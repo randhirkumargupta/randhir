@@ -75,7 +75,6 @@ function itg_api_menu() {
   $items['migrate-press-trust'] = array(
     'page callback' => 'itg_pti_content',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
     'file' => 'include/itg_api_pti.inc',
   );
   
