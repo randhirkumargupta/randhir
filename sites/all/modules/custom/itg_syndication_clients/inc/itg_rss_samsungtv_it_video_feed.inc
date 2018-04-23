@@ -305,6 +305,7 @@ function itg_generate_samsung_json_feed_newslist(){
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image','eli','eli.entity_id = n.nid');
 
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
@@ -312,6 +313,7 @@ function itg_generate_samsung_json_feed_newslist(){
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('smi', array('field_story_large_image_fid'));
+  $query->fields('eli', array('field_story_extra_large_image_fid'));
   $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
@@ -334,12 +336,17 @@ function itg_generate_samsung_json_feed_newslist(){
     $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));
     $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
     $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
+    $extra_large_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+    $alias = drupal_get_path_alias('node/' . $value['nid'] . '');
+    $weburl = FRONT_URL . "/" . $alias;
     $json['data']['news'][] = array(
       'n_id' => (int)$value['nid'],
       'n_title' => $value['title'],
       'n_short_desc' => $kicker_text,
       'n_small_image' => $medium_img["imag_url"],
-      'n_updated_datetime' => $publish_date
+      'n_updated_datetime' => $publish_date,
+      'n_content_url' => $weburl,
+      'v_large_image' => $extra_large_img["imag_url"],
     );
   }
   $json_output = json_encode($json);
@@ -432,7 +439,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $query->condition('n.status', 1);
     $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 10);
+    $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     $jsondetail = array(
@@ -498,7 +505,8 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         $inter_video_details = itg_internal_video_bitrate_data($video_id);
         $video_url = $inter_video_details['bitrate_url'];
       }
-      
+      $bitrate_rate = reverse_video_bitrate_data($video_id);
+      $video_url = str_replace($bitrate_rate['matched_bitrate'],$bitrate_rate['original_bitrate'],$video_url);
       $video_url = str_replace(',156,', ',', $video_url);
       $jsondetail['data']['video'][] = array(
         'v_id' => (int)$nid,
