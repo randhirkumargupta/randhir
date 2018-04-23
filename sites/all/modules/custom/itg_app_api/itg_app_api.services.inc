@@ -6272,6 +6272,12 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     $share_status = $params['share_status'];
     $share_comment = $params['share_comment'];
     $message = '';
+    if ($content_type == 'video') {
+        $content_type = 'videogallery';
+    }
+    if ($content_type == 'gallery') {
+        $content_type = 'photogallery';
+    }
 
     if ($website_id == '' || $content_id == '') {
         echo "Please pass the website_id & content_id properly";

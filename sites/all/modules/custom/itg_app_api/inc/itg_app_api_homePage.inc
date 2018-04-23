@@ -40,6 +40,17 @@ function homePageJson() {
     $itg_rapid_home_technology_json = itg_rapid_home_technology_json();
     $itg_rapid_home_sports_json = array();
     $itg_rapid_home_sports_json = itg_rapid_home_sports_json();
+    //code for cube widget start
+    $cube_widget = array();
+    $widget_detail = array();
+    $cube_widget['show_widget'] = "1";
+    $widget_detail[0]['type'] = "webview";
+    $widget_detail[0]['title'] = "Scorecard";
+    $widget_detail[0]['type_label'] = "scorecard";
+    $widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl8.html";
+    $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
+    $cube_widget['widget_detail'] = $widget_detail;
+    //code for cube widget end
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";    
@@ -53,6 +64,7 @@ function homePageJson() {
     $data['data'][6] = $data_news_lifestyle;
     $data['data'][7] = $data_news_world;
     $data['data'][8] = $data_magazine;
+    $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
 
