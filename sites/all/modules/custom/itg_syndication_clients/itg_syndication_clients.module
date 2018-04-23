@@ -1403,7 +1403,7 @@ function itg_remove_tags_from_body($content) {
  */
 function itg_internal_video_bitrate_data($video_id) {
   $data_video_info = itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
-  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+    if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
     $data_from_solr = itg_xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
     $video_data = $data_from_solr[0];
     $video_all_data = json_decode($video_data, TRUE);
@@ -1620,3 +1620,21 @@ function remove_iframe_img_tags($content) {
   $string = preg_replace("/\s+/", " ", $story_body);
   return preg_replace('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', " ", $string);
 }
+
+/**
+ * Function to reverse the bitrate
+ * @param string video_id
+ * @return string
+ */
+ function reverse_video_bitrate_data($video_id){
+	$bitrates_list = array();
+	$video_info = itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+	$bitrates = $video_info[0]->bitrate;
+	$original_bitrate = str_replace('@',',',$bitrates);
+	$bit = explode('@',$bitrates);
+	$bit_reverse = array_reverse($bit);
+	$matched_bitrate = implode(",",$bit_reverse);
+	$bitrates_list['original_bitrate'] = $original_bitrate;
+	$bitrates_list['matched_bitrate'] = $matched_bitrate;
+	return $bitrates_list;
+ }

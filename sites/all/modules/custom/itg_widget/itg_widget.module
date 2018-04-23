@@ -260,7 +260,7 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_web_cast_widget_form.inc',
     );    
-     $items['admin/config/administration/itgd-custom-variables'] = array(
+    $items['admin/config/administration/itgd-custom-variables'] = array(
       'title' => 'ITGD Custom variables',
       'description' => 'Custom variables settings page',
       'page callback' => 'drupal_get_form',
@@ -268,6 +268,14 @@ function itg_widget_menu() {
       'file' => 'includes/itg_custom_variables.inc',
       'access arguments' => array('access administrator'),
       'type' => MENU_NORMAL_ITEM,
+    );
+    $items['itg-election-configure'] = array(
+      'title' => t('Election configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_election_configure'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
     );
 
   return $items;
@@ -439,6 +447,10 @@ function itg_widget_block_info() {
     
     $blocks['score_card_iframe_widget'] = array(
       'info' => t('Widget: Score Card Iframe Widget'),
+    );
+    
+    $blocks['election_top_stories'] = array(
+      'info' => t('Widget: Election top stories Widget'),
     );
     
     return $blocks;
@@ -788,7 +800,7 @@ function itg_widget_block_view($delta = '') {
                 drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
                 drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
             }
-            $block['content'] = theme("graph_election", array("data" => $data));
+            $block['content'] = theme("graph_election_section_cart", array("data" => $data));
 
             break;
         case 'movies_reviews':
@@ -914,7 +926,27 @@ function itg_widget_block_view($delta = '') {
              } 	   	                 
           }				
           break;
-    }
+          case 'election_top_stories':
+            global $theme;
+            if (isset($_GET['category']) && !empty($_GET['category'])) {
+              $selction_name = 'category';
+            }
+            else {
+              $selction_name = 'section';
+            }
+            if (isset($_GET[$selction_name])) {
+              $cat_id = $_GET[$selction_name];
+            }
+            if ($theme == FRONT_THEME_NAME) {
+              $cat_id = arg(2);              
+            }            
+            if (drupal_is_front_page()) {
+              $cat_id = get_itg_variable('home_page_election_tid');              
+            }            
+            $data = get_top_story_from_category($cat_id, 4);
+            $block['content'] = theme("election_top_stories", array("data" => $data));
+          break;
+    }       
     return $block;
 }
 

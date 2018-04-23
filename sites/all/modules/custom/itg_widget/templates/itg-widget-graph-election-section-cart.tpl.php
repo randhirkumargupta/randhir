@@ -1,191 +1,116 @@
-<?php
-ob_clean();
-if (!empty($data)) : global $base_url, $theme;
-  ?>
+<?php if (!empty($data)) : global $base_url, $theme; ?>
 
 
   <?php
   global $base_url;
-  $classrow = 6;
-  $height = "";
-  $rowcounter = ceil(12 / count($data));
-  if (count($data) <= 2) {
-    $classrow = "col-md-$rowcounter";
-  }
-  else if (count($data) > 2) {
-    if (count($data) > 5) {
-
-      $datacount = 5;
+  $classrow = "col-md-8";
+  $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
+  $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
+  if (!empty($itg_election_home_webcast_livetv)) {
+    $classrow = "col-md-4";
+  }  
+  if ($theme != 'seven') {
+    if ($theme == FRONT_THEME_NAME) {
+      $section = arg(2);
     }
     else {
-      $datacount = count($data);
+      $section = $_GET['section'];
     }
-    $classrow = "col-el-5";
+    if (empty($section)) {
+      $section = $_GET['section_name'];
+    }
+    if (empty($section)) {
+      $section = get_itg_variable('home_page_election_tid');
+    }
   }
-  if (count($data) >= 5) {
-    $height = "180px";
+ 
+?>
+<?php if(!empty($itg_election_home_content_id)){
+  $story_title = get_first_story_title_by_tid($itg_election_home_content_id);
+  $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+  if (!empty($story_title)) {
+    $content_link = $base_url . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+    $story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+    $actual_link = $content_link;
+    $search_title = preg_replace("/'/", "\\'", $story_title_display);
+    $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
   }
-  ?>
-  <div class="election-page">
-    <div class="election-graph">
-      <?php
-      foreach ($data as $index => $row):
-        $rand = rand(1, 999999);
-        $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-        if (is_valid_json($jsondata)) {
+  $short_url = $actual_link;
+  $display_title = "";
+  if (empty($story_title)) {
+    $display_title = 'style="display:none"';
+  }
+  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
+              <ul>
+                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                  <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                  <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                  <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+              </ul>
+          </div></div></div>';
+ }?>
+<?php if(!empty($itg_election_home_webcast_livetv)){?>
+<div class="col-md-4 mt-50">
+    <div class="itg-widget">
+      <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
+      <div class="data-holder" id="home-livetv-election">
+        <?php
+        $block = block_load('itg_widget', 'live_tv');
+        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+        print render($render_array);
+        ?>
+      </div>
+      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
+        <div class="data-holder" id="home-webcast-election">
+          <?php
+            print get_itg_variable('itg_election_home_webcast_html');
           ?>
-          <script>
-            jQuery(function() {
+        </div>
+      <?php }?>
+    </div>
+</div>
+<?php }?>
+<?php  
+  // Start high chart Graph
+  foreach ($data as $index => $row):
+		$graph_link = $base_url . '/state-elections/' . $section . '/' . $row->field_election_state_tid;
+		if(!empty($row->field_graph_category_value)){
+			$graph_link = $base_url . '/'. drupal_get_path_alias('taxonomy/term/' . $row->field_graph_category_value);
+		}
+    if($row->field_graph_type_value == 'Graph'){
 
-              var ids = "container_<?php echo $rand; ?>";
-              var data = '<?php echo $jsondata; ?>';
-              data = JSON.parse(data);
-              var combined = [];
-              var colorArray = [];
-              var aName = data.election.aName;
+    ?>
+    <div class="<?php echo $classrow; ?> mt-50">
+      <div class="itg-widget">
+        <div class="droppable <?php print $gray_bg_layout; ?>">
+          <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
+            <a href="<?php echo $graph_link; ?>" >
+              <div class="data-holder">
+                <div class="graph-design">
+                  <div id="container_<?php echo $index; ?>"></div>
+                  <div class="divider"></div>
+                </div>
 
-              var aSeats = data.election.aSeats;
-              var aSeatOthers = data.election.aSeatOthers;
-              var aappos = 0;
-              var aapcolor = "";
-              var aapname = "";
-              var aapseats = "";
-              var ty = 0;
-              if (data != "") {
-                for (var x = 0; x < data.election.items.length; x++)
-                {
-                  if (data.election.items[x].pName.toLowerCase() != "bjp+") {
-                    colorArray[ty] = data.election.items[x].pColor;
-                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
-                    ty++;
-                  } else {
-                    aapcolor = data.election.items[x].pColor;
-                    aappos = data.election.items[x].pColor;
-                    aapname = data.election.items[x].pName;
-                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
-                  }
-                }
-                var showtooltip = true;
-                if (aSeatOthers == 0) {
-                  jQuery("#resultawaited").show();
-                  colorArray[ty] = "#A2A9AD";
-                  combined.push(["Result Awaited", "1"]);
-                  showtooltip = false;
-                } else {
+    <?php
+    $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+    $jsondata = json_decode($jsondata);
 
-                  colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
-                  combined.push([aapname, aapseats]);
-                }
-
-
-                var combined = [];
-                var colorArray = [];
-                var aName = data.election.aName;
-                var aSeats = data.election.aSeats;
-                var aSeatOthers = data.election.aSeatOthers;
-                var aappos = 0;
-                var aapcolor = "";
-                var aapname = "";
-                var aapseats = "";
-                var colindex = 0;
-                for (var x = 0; x < data.election.items.length; x++)
-                {
-                  if (data.election.items[x].pName.toLowerCase() != "bjp+") {
-                    colorArray[colindex] = data.election.items[x].pColor;
-                    combined.push([data.election.items[x].pName, (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon))]);
-                    colindex++;
-                  } else {
-                    aapcolor = data.election.items[x].pColor;
-                    aappos = data.election.items[x].pColor;
-                    aapname = data.election.items[x].pName;
-                    aapseats = (parseInt(data.election.items[x].pLead) + parseInt(data.election.items[x].pWon));
-                  }
-                }
-                var showtooltip = true;
-                if (aSeatOthers == 0) {
-                  jQuery("#resultawaited").show();
-                  colorArray[colindex] = "#A2A9AD";
-                  combined.push(["Result Awaited", "1"]);
-                  showtooltip = false;
-                } else {
-
-                  colorArray[(parseInt(data.election.items.length) - 1)] = aapcolor;
-                  combined.push([aapname, aapseats]);
-                }
-
-                jQuery("#" + ids).highcharts({
-                  colors: colorArray,
-                  chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: 0,
-                    plotShadow: false
-                  },
-                  title: {
-                    text: aSeatOthers + "/" + aSeats + "<br>" + aName,
-                    align: "center",
-                    verticalAlign: "middle",
-                    y: 12
-                  },
-                  tooltip: {
-                    enabled: showtooltip,
-                    pointFormat: "<b>{point.y}</b>"
-                  },
-                  plotOptions: {
-                    pie: {
-                      dataLabels: {
-                        enabled: false,
-                        distance: -50,
-                        style: {
-                          fontWeight: "bold",
-                          color: "white",
-                          textShadow: "0px 1px 2px black"
-                        }
-                      },
-                      startAngle: -90,
-                      endAngle: 90,
-                      center: ["50%", "55%"]
-                    }
-                  },
-                  series: [{
-                      type: "pie",
-                      name: "",
-                      innerSize: "60%",
-                      data: combined
-                    }]
-                });
-              }
-            });</script>
-
-          <div class="<?php echo $classrow; ?>">
-            <?php
-            $section = $row->field_section_tid;
-            ?>
-            <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
-
-              <div class="graph-design">
-                <div id="container_<?php echo $rand; ?>"  style="<?php echo 'height:' . $height; ?>"></div>
-                <div class="divider"></div>                                
-              </div>
-              <?php
-              $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-              $jsondata = json_decode($jsondata);
-
-              if (!empty($jsondata)) {
-                print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>
+    if (!empty($jsondata)) {
+      print '<table cellspacing="0" cellpadding="8" border="0" width="100%" id="allianceTable_delhi" class="schedule2"><tbody>
 <tr><th></th><th>PARTIES</th><th>LEADS</th><th>WON</th><th>TOTAL</th></tr>
 ';
-              }
+    }
 
 
-              foreach ($jsondata->election->items as $elction_telly_data) {
-                $total_result = (int) $elction_telly_data->pWon + (int) $elction_telly_data->pLead;
-                print '<tr><td class="party-color" style="background:' . $elction_telly_data->pColor . '"></td><td class="padtext">' . ucfirst($elction_telly_data->pName) . '</td>
+    foreach ($jsondata->election->items as $elction_telly_data) {
+      $total_result = (int) $elction_telly_data->pWon + (int) $elction_telly_data->pLead;
+      print '<tr><td class="party-color" style="background:' . $elction_telly_data->pColor . '"></td><td class="padtext">' . ucfirst($elction_telly_data->pName) . '</td>
 <td>' . $elction_telly_data->pLead . '</td>
 <td>' . $elction_telly_data->pWon . '</td>
 <td>' . $total_result . '</td></tr>';
-              }
+    }
 
-     ?>
+    ?>
 </tbody>
 
 
@@ -193,23 +118,79 @@ if (!empty($data)) : global $base_url, $theme;
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php echo $actual_link; ?>", "<?php echo urlencode($fb_share_title); ?>","<?php echo urlencode($share_desc); ?>","<?php echo $src; ?>")'><i class="fa fa-facebook"></i></a></li>
-                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick='twitter_popup("<?php echo urlencode($search_title) ?>", "<?php echo urlencode($short_url) ?>")'><i class="fa fa-twitter"></i></a></li>
+                        <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick='twitter_popup("<?php echo urlencode($search_title) ?>" , "<?php echo urlencode($short_url)?>")'><i class="fa fa-twitter"></i></a></li>
                         <li><a title="share on google+" onclick='return googleplusbtn("<?php echo $actual_link ?>")' class="google def-cur-pointer"></a></li>
                     </ul>
+                </div>'
+     
+              </div>
+            </a>
+          </div>             
+        </div>
+      </div>
+    </div>
+    <?php }elseif ($row->field_graph_type_value == 'Dot Graph') { ?>
+
+      <div class="<?php echo $classrow; ?> mt-50">
+       <?php
+         $json_path = $row->field_election_svg_json_url_value;
+         $from = "fullhousemap-";
+         $to = ".json";
+         $sub = substr($json_path, strpos($json_path,$from)+strlen($from),strlen($json_path));
+         $state_name = substr($sub,0,strpos($sub,$to));
+         ?>
+      <div class="itg-widget">
+        <div class="droppable <?php print $gray_bg_layout; ?>">
+          <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
+            <a href="<?php echo $graph_link; ?>" >
+              <div class="data-holder">
+                <div class="graph-design">
+                <div class="statesvg-map">
+                     <span id = "hmelect-<?php echo $state_name;?>" onclick="openStateHref('up');"  class="tallyChartImageCursor"></span>
+                     <script type="text/javascript">
+                       var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
+                       var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
+                       var state_name = "<?php echo $state_name; ?>";
+                        hmelection(state_name, '1',svg_path,chart_path);
+                      </script>
+                      <div class="statename" ><span class="stateNameText" onclick="openStateHref('up');" rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
+                         <?php
+                                  print '<div class="social-share">
+                                         <ul>
+                                             <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                             <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                             <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                             <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+                                         </ul>
+                                     </div>';
+                         ?>
+                      </div>
+                  </div>
+                    <span id = "fhs-<?php echo $state_name;?>"></span>
                 </div>
-              
+              </div>
             </a>
           </div>
-
-
-
-
-        <?php } ?>
-        </a>
-  <?php endforeach; ?>
+        </div>
+      </div>
     </div>
-  </div>
-<?php else : ?>
-  <span class="no-result-found"><?php print t("Content Not Found") ?></span>
+  <?php } ?>
+  <?php endforeach; ?>
+<!-- End High Cart graph -->
 
 <?php endif; ?>
+<div class="col-md-4 col-sm-4 mt-50">
+    <div class="itg-widget">
+        <div class="data-holder" id="home-top-stories-election">
+          <?php
+          $block = block_load('itg_widget', 'election_top_stories');
+          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+          print render($render_array);
+          ?>
+        </div>
+    </div>
+</div>
+<style>
+  #home-livetv-election iframe{width:100%}
+#home-webcast-election iframe{width:100%}
+</style>  

@@ -157,7 +157,7 @@ function genrate_factiva_story_syndication_xml_v1($result = NULL, $category, $si
     $xml = '';
     if (!empty($result)) {
         global $base_url;
-        $logo = theme_get_setting('logo');
+        $logo = FRONT_URL.'/sites/all/themes/itg/logo.png'; //theme_get_setting('logo');
         $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
         $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
         $xml .= '<channel>';
@@ -176,7 +176,7 @@ function genrate_factiva_story_syndication_xml_v1($result = NULL, $category, $si
             }
             $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
             $pub_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
-            $body = remove_extra_tag_in_body($value["body_value"]);
+            $body = remove_extra_tag_in_body_v1($value["body_value"]);
             $body = itg_replace_token_with_data($body, $value['nid']);
             $body = itg_remove_extra_custom_tags($body);
             $body = stripInvalidXml($body);
@@ -200,4 +200,64 @@ function genrate_factiva_story_syndication_xml_v1($result = NULL, $category, $si
     }
 
     return $xml;
+}
+/**
+ * remove_extra_tag_in_body_v1
+ * @param type $story_body
+ * @return type
+ */
+function remove_extra_tag_in_body_v1($story_body) {
+  // remove survey
+  if (strpos($story_body, '[ITG:SURVEY:')) {
+    if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
+      $survey_nid = $matches_survey[1];
+    }
+    $story_body = str_replace('[ITG:SURVEY:' . $survey_nid . ']', '', $story_body);
+  }
+  // remove quiz
+  if (strpos($story_body, '[ITG:QUIZ:')) {
+    if (preg_match('/ITG:QUIZ:([0-9]+)/', $story_body, $matches_quiz)) {
+      $quiz_nid = $matches_quiz[1];
+    }
+    $story_body = str_replace('[ITG:QUIZ:' . $quiz_nid . ']', '', $story_body);
+  }
+  // remove poll
+  if (strpos($story_body, '[ITG:POLL:')) {
+    if (preg_match('/ITG:POLL:([0-9]+)/', $story_body, $matches_poll)) {
+      $poll_nid = $matches_poll[1];
+    }
+    $story_body = str_replace('[ITG:POLL:' . $poll_nid . ']', '', $story_body);
+  }
+  
+  // remove FACTOIDS
+  if (strpos($story_body, '[ITG:FACTOIDS]')) {
+      $story_body = str_replace('[ITG:FACTOIDS]', '', $story_body);
+  }
+  
+  // remove LISTICLES
+  if (strpos($story_body, '[ITG:LISTICLES]')) {
+      $story_body = str_replace('[ITG:LISTICLES]', '', $story_body);
+  }
+  
+
+  // some tags remove
+  /*$tags = array("table", "div");
+
+  return preg_replace('#<(' . implode('|', $tags) . ')(?:[^>]+)?>.*?</\1>#s', '', $story_body);*/
+  
+    // remove div
+    $patterns = array();
+    $patterns[0] = '/<div[^>]*>/';
+    $patterns[1] = '/<\/div>/';
+    $replacements = array();
+    $replacements[2] = '';
+    $replacements[1] = '';
+    $story_body = preg_replace($patterns, $replacements, $story_body);
+    // remove iframe
+    $story_body = preg_replace('/<iframe.*?\/iframe>/i','', $story_body);
+    //remove table
+    $pattern= '/<table[^>]*>.*?<\/table>/s';
+    $story_body= preg_replace($pattern, '', $story_body, 1);
+    return $story_body;
+    
 }
