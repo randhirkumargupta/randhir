@@ -14,8 +14,6 @@ function itg_pti_content() {
 	$t = date("Y-m-d H:i:s",$t);
 	$msg_t = $t.' Test Message';
 	watchdog('PTI Test', $msg_t);
-	echo $t."<br>in function check";
-	exit;
   if (!empty(variable_get('api_info'))) {
     global $user;
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
