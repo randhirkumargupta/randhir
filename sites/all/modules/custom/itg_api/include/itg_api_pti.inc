@@ -9,6 +9,7 @@ use Aws\Common\Credentials\Credentials;
  * Implement itg_pti_content
  */
 function itg_pti_content() {
+	echo "in function";die;
   if (!empty(variable_get('api_info'))) {
     global $user;
     module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
@@ -281,7 +282,7 @@ function itg_pti_content() {
               }
             }
             else{
-              $msg2 = 'Filename '. $xml_filename . 'is exist in DB';
+              $msg2 = 'Filename '. $xml_filename . ' is exist in DB';
               watchdog('PTI_XML', $msg2);
             }
           }
