@@ -7613,7 +7613,6 @@ class TCPDF {
 			$this->buffer = substr($pdfdoc, 0, $byte_range[1]).'<'.$signature.'>'.substr($pdfdoc, $byte_range[1]);
 			$this->bufferlen = strlen($this->buffer);
 		}
-    p($dest);
 		switch($dest) {
 			case 'I': {
 				// Send PDF to the standard output
