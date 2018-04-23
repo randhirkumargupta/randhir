@@ -306,7 +306,6 @@ function get_article_editors_pic_item_rss() {
 
     $output .= '<item><title><![CDATA[' . $title . ']]></title>';
     $output .= '<link><![CDATA[' . $url . ']]></link>';
-    $output .= '<guid><![CDATA[' . $url . ']]></guid>';
     $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
     $output .= '<dc:creator><![CDATA[' . $reporter . ']]></dc:creator>';
     $output .= '<pubDate><![CDATA[' . $created_date . ']]></pubDate>';
