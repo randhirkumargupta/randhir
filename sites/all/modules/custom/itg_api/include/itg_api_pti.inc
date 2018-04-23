@@ -9,6 +9,7 @@ use Aws\Common\Credentials\Credentials;
  * Implement itg_pti_content
  */
 function itg_pti_content() {
+  session_cache_limiter('');
 	$t=time();
 	$t = date("Y-m-d H:i:s",$t);
 	$msg_t = $t.' Test Message';
