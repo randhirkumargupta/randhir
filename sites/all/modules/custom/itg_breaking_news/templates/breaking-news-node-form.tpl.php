@@ -22,8 +22,9 @@
            </div>
 
 <div id="ContentDetails">
+    <?php print drupal_render($form['field_multi_user_allows']); ?>
     <?php print drupal_render($form['field_breaking_content_details']); ?>
-     </div>
+</div>
 
 <div id="Shortdescriptions">
     <?php print drupal_render($form['field_common_short_description']); ?>

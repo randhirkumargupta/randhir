@@ -14,6 +14,14 @@ function itg_live_blog_custom() {
 
 }
 
+/**
+ * custom form for content deatils.
+ * @param type $form
+ * @param type $form_state
+ * @param type $bid
+ * @param type $type
+ * @return string
+ */
 function itg_manage_breking_news($form, &$form_state, $bid, $type) {
   $arg = arg();
    
@@ -46,19 +54,12 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
       "#markup" => "<div class='inline-error-messages'></div>",
       );
    
-  /* 
-  $form['breaking']["highlight_wrapper"] = array(
-    "#markup" => "<div class='blog_highlight-wrapper'><input class='blog_highlight_checkbox' type='checkbox' name='blog_highlight_checkbox' value='1' /></div>",
-  );
-   * 
-   */
   
    $form['breaking']['blog_title'] = array(
     '#type' => 'textfield',
     '#prefix' => '<div id="blog_title_replace_wrapper"><input class="blog_highlight_checkbox" type="checkbox" name="blog_highlight_checkbox" value="1" />',
     '#title' => t('Title'),
     '#default_value' => isset($results->blog_title) ? $results->blog_title : '',
-    // '#required' => TRUE,
      '#suffix' => '</div>',
   );
    
@@ -205,8 +206,19 @@ function itg_live_blog_form_submit($form, &$form_state) {
  */
 function live_bog_delete() {
   $bid = ($_POST['id']) ? $_POST['id'] : '';
+  global $user;
+  $blog_uid = $user->uid;
+  $status = 0;
+  $updated_date = date('Y-m-d H:i:s');
   if (!empty($bid)) {
-    // db_delete('itg_live_blog')->condition('bid' , $bid)->execute();
+     db_update('itg_live_blog')
+              ->fields(array(
+                'status' => $status,
+                'update_uid' => $blog_uid,
+                'blog_updated_date' => $updated_date,
+              ))
+              ->condition('bid', $bid, '=')
+              ->execute();
   }
 }
 

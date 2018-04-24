@@ -107,6 +107,17 @@ function itg_preprocess_node(&$variables) {
     drupal_add_css(drupal_get_path('theme', 'itg') . "/css/prettyPhoto.css");
     drupal_add_js(drupal_get_path('theme', 'itg') . "/js/jquery.prettyPhoto.js");
   }
+  
+  if ($variables['type'] == 'breaking_news') {
+    if ($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) {
+       $variables['theme_hook_suggestions'][] = 'node__breaking_news_custom';
+    }
+    
+    // module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll'); // node--breaking-news-custom.tpl.php
+    
+    // $variables['poll_form'] = itg_poll_get_all_current_poll();
+  }
+  
 }
 
 /**
@@ -206,7 +217,13 @@ function itg_preprocess_page(&$variables) {
     }		  
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
+  
+  // Call Live Blog condition wise TPL
+  if (!empty($variables['node']->type) && $variables['node']->type == 'breaking_news' && isset($variables['node']->field_multi_user_allows['und'][0]['value']) && $variables['node']->field_multi_user_allows['und'][0]['value'] == 1) {
+    $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
+  }
 
+   
   // Call Event Parent TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
