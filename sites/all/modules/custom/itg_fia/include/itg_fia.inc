@@ -483,7 +483,7 @@ function itg_fia_related_node($nid = 0) {
             foreach ($prime_section_ar as $key => $value) {
                 $prime_section = $value->tid;
             }
-            
+            echo $prime_section; die();
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
             $related_content_primary_cat = "";
