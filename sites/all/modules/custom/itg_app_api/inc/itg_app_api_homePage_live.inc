@@ -183,7 +183,7 @@ $cube_widget['show_widget'] = "1";
 $widget_detail[0]['type'] = "webview";
 $widget_detail[0]['title'] = "Scorecard";
 $widget_detail[0]['type_label'] = "scorecard";
-$widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl8.html";
+$widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl99.html";
 $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
 $cube_widget['widget_detail'] = $widget_detail;
 
