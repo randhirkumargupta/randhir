@@ -575,7 +575,7 @@ function checkFIANodeBynid($nid){
 function gettopparentstid($term_tid) {
     
 //this will be your top parent term if any was found
-    $top_parent_term = $term_tid;
+    $top_parent_term = null;
 
     $parent_terms = taxonomy_get_parents_all($term_tid);
 
@@ -587,5 +587,6 @@ function gettopparentstid($term_tid) {
             $top_parent_term = $parent;
         }
     }
+    p($top_parent_term);
     return $top_parent_term;
 }
