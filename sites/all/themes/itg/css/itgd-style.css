@@ -1014,14 +1014,14 @@ background:none;
 .liveBlog-indiatoday h1{color:#000; text-align: center;}
 .liveBlog-indiatoday .liveblog-heading{ margin-bottom:20px; }
 .liveBlog-indiatoday span{color:#c2191d;}
-.liveBlog-indiatoday .locationdate{ color:#9e2729; text-align: center; padding-bottom:10px; font-size:13px;}
+.liveBlog-indiatoday .locationdate{ color:#9e2729; text-align: center; padding:5px 0px; font-size:13px; font-family:"OpenSans-Semibold"}
 .liveBlog-indiatoday p.short-discription{ padding-bottom: 20px; border-bottom:1px solid #e0e0e0}
 .liveBlog-indiatoday .liveblog-Lhs{}
-.liveBlog-indiatoday .liveblog-Lhs h4{ text-transform:uppercase; color:#000; font-size:17px; }
-.liveBlog-indiatoday .liveblog-Lhs .leftblog-publish-time{ color:#9e2729; font-size:12px; position: relative;}
-.liveBlog-indiatoday .liveblog-Lhs .leftblog-publish-time:before{ content:''; width:5px; height:5px; background:#9e2729; position:relative; left:0; top:2px;}
-.liveBlog-indiatoday .liveblog-Lhs .leftblog-title{ font-size:14px; color:#000; line-height:16px; }
-
+.liveBlog-indiatoday .liveblog-Lhs h4{ text-transform:uppercase; color:#000; font-size:17px;font-family: "OpenSans-Semibold"; }
+.liveBlog-indiatoday .liveblog-Lhs .leftblog-publish-time{ color:#9e2729; font-size:13px; position: relative;font-family:"OpenSans-Semibold"; padding-bottom:5px;}
+.liveBlog-indiatoday .liveblog-Lhs .leftblog-publish-time:before{ margin-right: 5px; content:''; width:6px; height:6px; background:#9e2729; position:relative; left:0; top:2px; display: inline-block;}
+.liveBlog-indiatoday .liveblog-Lhs .leftblog-title{ font-size:14px; color:#000; line-height:16px; font-family: "OpenSans-Semibold"; border-left:1px solid #e0e0e0; padding-left:10px; line-height:20px; }
+.liveBlog-indiatoday .liveblog-Lhs .lhs-detailList{ padding:10px 0; border-bottom:1px dotted #e0e0e0; }
 
 /* Karnatka Election chunks */
 .election_who_said_what #Slider.flexslider{ background:#ffff01;padding:35px 20px; text-align: center; border-radius: 5px; border:1px solid #d4d4d4;}
