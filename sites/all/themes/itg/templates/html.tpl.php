@@ -27,6 +27,7 @@
         e.preventDefault(); // no page reload
     }
   </script>
+  <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php
     $arg = arg();
     $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
@@ -35,8 +36,7 @@
   <?php //if((!drupal_is_front_page()) && $type != 'story') : ?>  
   <?php print $styles; ?>    
   <?php print $scripts; ?>
-  <?php //endif; ?>
-  <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
+  <?php //endif; ?>  
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/html5.js"></script>
