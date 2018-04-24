@@ -814,6 +814,12 @@ function itg_widget_theme() {
         'election_top_stories' => array(
             'template' => 'templates/election-top-stories',
         ),
+        'election_who_said_what' => array(
+            'template' => 'templates/election-who-said-what',
+        ),
+        'election_know_your_party' => array(
+            'template' => 'templates/election-know-your-party',
+        ),
 
     );
     return $themes;
@@ -3484,7 +3490,7 @@ function is_programme($tid, $flag_occupation, $page_argument) {
 }
 
 
-function get_top_story_from_category($cat_id, $limit){
+function get_top_story_from_category($cat_id, $limit = 4){
   $query = db_select('node', 'n'); 
   $query->join('itg_widget_order', 'wo', 'wo.nid=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
@@ -3500,4 +3506,27 @@ function get_top_story_from_category($cat_id, $limit){
   $query->fields('fm', array('uri'));
   $result = $query->execute()->fetchAll();
   return $result;
+}
+
+function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');  
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=fsei.field_story_expert_image_fid');  
+  $query->leftJoin('field_data_field_cm_display_title', 'fcdt', 'fcdt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_kicker_text', 'fskt', 'fskt.entity_id=n.nid');  
+  
+  $query->fields('fseu', array('field_story_external_url_value'));
+  $query->fields('fm', array('uri'));
+  $query->fields('fcdt', array('field_cm_display_title_value'));
+  $query->fields('fskt', array('field_story_kicker_text_value'));
+  $query->range(0, $limit);
+  $query->condition('fmt.field_miscellaneous_type_value', $type);
+  if(!empty($cat_id)){
+    $query->condition('fpc.field_primary_category_value', $cat_id);
+  }
+  $result = $query->execute()->fetchAll();
+  return $result;  
 }

@@ -453,6 +453,14 @@ function itg_widget_block_info() {
       'info' => t('Widget: Election top stories Widget'),
     );
     
+    $blocks['election_who_said_what'] = array(
+      'info' => t('Widget: Election Who said what'),
+    );
+    
+    $blocks['election_know_your_party'] = array(
+      'info' => t('Widget: Election Know your party'),
+    );
+    
     return $blocks;
 }
 
@@ -946,6 +954,46 @@ function itg_widget_block_view($delta = '') {
             $data = get_top_story_from_category($cat_id, 4);
             $block['content'] = theme("election_top_stories", array("data" => $data));
           break;
+        case 'election_who_said_what':
+          global $theme;
+          if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $selction_name = 'category';
+          }
+          else {
+            $selction_name = 'section';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME) {
+            $cat_id = arg(2);              
+          }            
+          if (drupal_is_front_page()) {
+            $cat_id = get_itg_variable('home_page_election_tid');              
+          }
+          $data = get_who_said_what_from_cat($cat_id, 4, 'who-said-what');
+          $block['content'] = theme("election_who_said_what", array("data" => $data));
+          break;
+        case 'election_know_your_party':
+          global $theme;
+          if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $selction_name = 'category';
+          }
+          else {
+            $selction_name = 'section';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME) {
+            $cat_id = arg(2);              
+          }            
+          if (drupal_is_front_page()) {
+            $cat_id = get_itg_variable('home_page_election_tid');              
+          }
+          $data = get_who_said_what_from_cat($cat_id, 10, 'know-your-party');
+          $block['content'] = theme("election_know_your_party", array("data" => $data));
+          
     }       
     return $block;
 }
