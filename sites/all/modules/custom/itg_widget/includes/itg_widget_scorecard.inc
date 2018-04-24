@@ -27,7 +27,7 @@ function itg_manage_score_card() {
     $query = db_select('itg_score_card', 'm');
     $query->condition('m.id', $action, '=');
     # get the desired fields from the database
-    $query->fields('m', array('id', 'score_section', 'score_description', 'score_story', 'score_photo', 'score_video', 'score_status','score_triangle','score_code_cube_app','score_triangle_app'));
+    $query->fields('m', array('id', 'score_section', 'score_description', 'score_story', 'score_photo', 'score_video', 'score_status','score_triangle','score_code_cube_app'));
     # execute the query
     $results = $query->execute()->fetchObject();
   }
@@ -81,19 +81,11 @@ function itg_manage_score_card() {
 
   $form['score_code_cube_app'] = array(
     '#type' => 'textarea',
-    '#title' => t('Code of cube'),
+    '#title' => t('Cube Code'),
     '#default_value' => ($results->score_code_cube_app) ? $results->score_code_cube_app : '',
     '#required' => TRUE
   );
 
-   $form['score_triangle_app'] = array(
-    '#type' => 'radios',
-    '#title' => t('Score Triangle for app'),
-    '#options' => array(1 => "Active", 2 => "Inactive"),
-    '#default_value' => ($results->score_triangle_app) ? $results->score_triangle_app : 1,
-    '#required' => TRUE
-  );
-  
   $form['score_action'] = array(
     '#type' => 'hidden',
     '#value' => $action,
@@ -128,7 +120,6 @@ function itg_manage_score_card_submit($form, &$form_state) {
   $score_status = $form_state['values']['score_status'];
   $score_triangle = $form_state['values']['score_triangle'];
   $score_code_cube_app = $form_state['values']['score_code_cube_app'];
-  $score_triangle_app = $form_state['values']['score_triangle_app'];
   $score_action = $form_state['input']['score_action'];
 
 
@@ -143,7 +134,6 @@ function itg_manage_score_card_submit($form, &$form_state) {
           'score_status' => $score_status,
           'score_triangle' => $score_triangle,
           'score_code_cube_app' => $score_code_cube_app,
-          'score_triangle_app' => $score_triangle_app,
         ))
         ->condition('id', $score_action, '=')
         ->execute();
@@ -160,7 +150,6 @@ function itg_manage_score_card_submit($form, &$form_state) {
           'score_status' => $score_status,
           'score_triangle' => $score_triangle,
           'score_code_cube_app' => $score_code_cube_app,
-          'score_triangle_app' => $score_triangle_app,
         ))
         ->execute();
     drupal_set_message(t('The form has been submitted'));
