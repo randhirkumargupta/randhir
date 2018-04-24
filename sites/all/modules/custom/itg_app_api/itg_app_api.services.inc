@@ -2589,6 +2589,46 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        //Social share in report API   
+        'social_share_save_it' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Social Share Rest API save data',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'social_share_save_it_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'website_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'First Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'content_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Last Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'content_type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User email or mobile number',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -6928,4 +6968,85 @@ function generateNewsCategoryListsearch_rest($nid_str) {
     $data['data'] = $news_list_array;
     $data['updated_datetime'] = $pub_date;
     return $data;
+}
+/**
+ * Call back function for Social Share API
+ * @pram $_POST in JSON formate
+ *
+ * @return array - The processed information array.
+ */
+function social_share_save_it_detail($website_id, $content_id, $content_type, $args) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $website_id = $params['website_id'];
+    $content_id = $params['content_id'];
+    $content_type = $params['content_type'];
+    $content_title = $params['content_title'];
+    $content_url = $params['content_url'];
+    $category = $params['category'];
+    $share_status = $params['share_status'];
+    $share_comment = $params['share_comment'];
+    $message = '';
+    if ($content_type == 'video') {
+        $content_type = 'videogallery';
+    }
+    if ($content_type == 'gallery') {
+        $content_type = 'photogallery';
+    }
+
+    if ($website_id == '' || $content_id == '') {
+        echo "Please pass the website_id & content_id properly";
+        exit;
+    }
+
+    $query = db_select('jos_social_media_sharing', 'sm');
+    $query->fields('sm', array('id'));
+    $query->condition('sm.content_type', $content_type);
+    $query->condition('sm.content_id', $content_id);
+    $result_id = $query->execute()->fetchField();
+
+    $current_time = date('Y-m-d H:i:s');
+    if ($result_id == '') {
+        //Insert the value
+        $content_title = addslashes($content_title);
+        $category = addslashes($category);
+        $share_comment = addslashes($share_comment);
+        $query = db_insert('jos_social_media_sharing')
+                        ->fields(array(
+                            'content_id' => isset($content_id) ? $content_id : '',
+                            'website_id' => isset($website_id) ? $website_id : '',
+                            'content_type' => isset($content_type) ? $content_type : '',
+                            'content_title' => isset($content_title) ? $content_title : '',
+                            'content_url' => isset($content_url) ? $content_url : '',
+                            'category' => isset($category) ? $category : '',
+                            'is_promoted' => isset($share_status) ? $share_status : '',
+                            'promotion_remark' => isset($share_comment) ? $share_comment : '',
+                            'promotion_datetime' => $current_time,
+                            'created_datetime' => $current_time,
+                        ))->execute();
+
+        $message = 'Data has been Inserted successfully';
+    } else {
+        //Update the value
+        $content_title = addslashes($content_title);
+        $category = addslashes($category);
+        $share_comment = addslashes($share_comment);
+        $query = db_update('jos_social_media_sharing')
+                        ->fields(array(
+                            'content_id' => $content_id,
+                            'content_type' => $content_type,
+                            'content_title' => $content_title,
+                            'content_url' => $content_url,
+                            'category' => $category,
+                            'is_promoted' => $share_status,
+                            'promotion_remark' => $share_comment,
+                            'promotion_datetime' => date('Y-m-d H:i:s'),
+                        ))->condition('id', $result_id)->execute();
+        if ($query) {
+            $message = 'Data has been updated successfully';
+        }
+    }
+    echo $message;
+    drupal_exit();
 }
