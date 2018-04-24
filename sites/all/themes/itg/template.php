@@ -564,6 +564,7 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+  unset($javascript['https://vuukle.com/js/vuukle.js']);
   
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
