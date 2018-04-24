@@ -447,7 +447,7 @@ function itg_fia_config_form($form, &$form_state) {
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-        //$nid = 1143479;
+        $nid = 1145469;
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
@@ -506,22 +506,22 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
     $relatednode = "";
     if ($prime_section) {
         $query = db_select('node', 'n');
-        $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
-        //$query->join('field_data_field_primary_category', 'fpc', 'n.nid=fpc.entity_id');
-        //$query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');  
-        $query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
-        $query->join('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
+        $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
+        //$query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
+        $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
+        $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
         $query->fields('n', array('nid'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.widget', $order, '<');
+        $query->condition('iwo.widget', $order, '>');
         $query->condition('iwo.widget', 'section_wise_widget');
-        $query->condition('iwo.cat_id', $prime_section);
-        //$query->condition('fpc.field_primary_category_value', $prime_cat, '=');
-        $query->condition('pc.field_story_category_tid', '$prime_section', '');
-        //$query->condition('ti.tid', $prime_section, '=');
+        //$query->condition('iwo.cat_id', $prime_section);        
+        //$query->condition('pc.field_story_category_tid', $prime_section, '=');
+        $query->condition('ti.tid', $prime_section, '=');
+        $query->groupBy('n.nid');
         $query->range(0, 3);
+        print strtr((string) $query, $query->arguments());die();
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
         foreach ($result as $reskey => $resvalue) {            
             $firebase_url = get_node_firebase_weburl($resvalue['nid']);
@@ -540,7 +540,7 @@ function fia_get_order_node_by_nid($nid, $prime_section){
         $query = db_select('itg_widget_order', 'iwo');
         $query->fields('iwo', array('weight'));
         $query->condition('iwo.nid', $nid);
-        $query->condition('iwo.cat_id', $prime_section);
+        //$query->condition('iwo.cat_id', $prime_section);
         $query->condition('iwo.widget', 'section_wise_widget');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $order = $result[0]['weight'];

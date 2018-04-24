@@ -16,6 +16,7 @@ function itg_api_cronapi($op, $job = NULL) {
   
   $items['itg-pti-content'] = array(
     'description' => 'Import PTI Feed.',
+    'rule' => '*/20 * * * *', // Every 15 minutes
     'callback' => 'itg_pti_content',
     'file' => 'include/itg_api_pti.inc',
   );
@@ -75,7 +76,6 @@ function itg_api_menu() {
   $items['migrate-press-trust'] = array(
     'page callback' => 'itg_pti_content',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
     'file' => 'include/itg_api_pti.inc',
   );
   
@@ -221,6 +221,7 @@ function itg_api_insert_xml_info($nid, $file, $type, $source) {
   * @param string $filename
  */
 function itg_api_get_xml_info($filename) {
+  $count = 0;
   $result = db_query("SELECT t.id FROM {itg_api_xml_info} t WHERE t.filename = :name", array(":name" => $filename));
   $count = $result->rowCount();  
   return $count;
