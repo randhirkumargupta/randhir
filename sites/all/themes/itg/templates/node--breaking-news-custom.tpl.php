@@ -50,9 +50,9 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
 </div>
 <?php endif;?>
 <?php } ?>
-
+<div class="liveBlog-indiatoday">
 <div class="row">
-  <div class="col-lg-12 col-md-12 col-sm-12">
+  <div class="col-lg-12 col-md-12 col-sm-12 liveblog-heading">
      <?php
     if (!empty($content)):
       $type = $node->field_type['und']['0']['value'];
@@ -67,12 +67,13 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         $share_title = $node->title;
         ?>
         <?php print ($title) ?>
-        <div class="">USA | 27 Apr 2018</div>
+        <div class="locationdate">New Delhi | April 24, 2018</div>
         <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
   </div>
 
 
-  <div class="col-sm-4">
+  <div class="col-md-4 col-xs-12 liveblog-Lhs">
+   <h4>Most Recent</h4>
   <?php 
    $left_side = get_custom_left_side_data($node->nid);
    foreach ($left_side as $lvalue) {
@@ -83,7 +84,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
   ?>  
             
   </div>
-  <div class="col-sm-8">
+  <div class="col-md-8 col-xs-12 liveblog-Rhs">
     <div class="live-block">
           <?php if (isset($embed_image) && !empty($embed_image)) { ?>
          <div class="stryimg" id="liveblog" >
@@ -197,4 +198,5 @@ endif;
 </div>
             
   </div>
+</div>
 </div>
