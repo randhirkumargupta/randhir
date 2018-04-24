@@ -485,14 +485,14 @@ function itg_fia_related_node($nid = 0) {
                 $prime_section = $value->tid;
             }*/
             $prime_section = gettopparentstid($prime_cat->tid);
-            echo $prime_section; die();
+            //echo $prime_section; die();
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
             $related_content_primary_cat = "";
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
             $relatednode .= $related_content_primary_cat;
         }
-        echo $flag_fia_cont; echo "<br>"; echo $relatednode; die();
+        //echo $flag_fia_cont; echo "<br>"; echo $relatednode; die();
       
     $relatednode .='</ul>';
     //no any node found
@@ -587,6 +587,6 @@ function gettopparentstid($term_tid) {
             $top_parent_term = $parent;
         }
     }
-    p($top_parent_term);
-    return $top_parent_term;
+    
+    return $top_parent_term->tid;
 }
