@@ -993,7 +993,7 @@ function itg_widget_block_view($delta = '') {
           }
           $data = get_who_said_what_from_cat($cat_id, 10, 'know-your-party');
           $block['content'] = theme("election_know_your_party", array("data" => $data));
-          
+          break;
     }       
     return $block;
 }
