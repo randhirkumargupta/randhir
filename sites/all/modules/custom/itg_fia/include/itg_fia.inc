@@ -447,7 +447,7 @@ function itg_fia_config_form($form, &$form_state) {
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-        //$nid = 1143479;
+        $nid = 1145469;
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
