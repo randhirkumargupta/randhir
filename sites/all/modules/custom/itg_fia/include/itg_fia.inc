@@ -460,7 +460,7 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
-        //p($nid_list);
+        p($nid_list);
         $flag_fia_cont = 0;
         if(count($nid_list) > 0){
             echo "andy"; die();
