@@ -118,7 +118,7 @@
       }
     ?>
 <script type="text/javascript" src="/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" async="async" src="https://vuukle.com/js/vuukle.js"></script>
+<!-- <script type="text/javascript" async="async" src="https://vuukle.com/js/vuukle.js"></script> -->
 <?php if ($nid && $type == 'videogallery') : ?>
 <script type="text/javascript" src="/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js"></script>
 <?php endif; ?>
