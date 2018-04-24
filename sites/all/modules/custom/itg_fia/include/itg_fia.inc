@@ -460,10 +460,10 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
-        p($nid_list);
+        //p($nid_list);
         $flag_fia_cont = 0;
-        if(count($nid_list) > 0){
-            echo "andy"; die();
+        if(count($nid_list) > 1){
+            //echo "andy"; die();
             //related node
             foreach ($nid_list as $key => $value) {                
                 $flag_fia = 0;
@@ -476,7 +476,7 @@ function itg_fia_related_node($nid = 0) {
             }
         }
         elseif($flag_fia_cont == 0){
-            echo "kumar"; die();
+            //echo "kumar"; die();
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
             $prime_section_ar = taxonomy_get_parents($prime_cat->tid);
