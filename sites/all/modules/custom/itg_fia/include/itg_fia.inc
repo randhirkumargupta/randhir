@@ -479,10 +479,11 @@ function itg_fia_related_node($nid = 0) {
             //echo "kumar"; die();
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
-            $prime_section_ar = taxonomy_get_parents($prime_cat->tid);
+            /*$prime_section_ar = taxonomy_get_parents($prime_cat->tid);
             foreach ($prime_section_ar as $key => $value) {
                 $prime_section = $value->tid;
-            }
+            }*/
+            $prime_section = gettopparentstid($prime_cat->tid);
             echo $prime_section; die();
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
@@ -569,4 +570,20 @@ function checkFIANodeBynid($nid){
         $nid_f = $result[0]['nid'];
     }
     return $nid_f;
+}
+function gettopparentstid($term_tid) {
+    
+//this will be your top parent term if any was found
+    $top_parent_term = null;
+
+    $parent_terms = taxonomy_get_parents_all($term_tid);
+
+//top parent term has no parents so find it out by checking if it has parents
+    foreach ($parent_terms as $parent) {
+        $parent_parents = taxonomy_get_parents_all($parent->tid);
+        if ($parent_parents != false) {
+            //this is top parent term
+            $top_parent_term = $parent;
+        }
+    }
 }
