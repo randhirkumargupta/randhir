@@ -16,6 +16,7 @@ function itg_api_cronapi($op, $job = NULL) {
   
   $items['itg-pti-content'] = array(
     'description' => 'Import PTI Feed.',
+    'rule' => '*/20 * * * *', // Every 15 minutes
     'callback' => 'itg_pti_content',
     'file' => 'include/itg_api_pti.inc',
   );
