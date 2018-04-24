@@ -383,9 +383,12 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "</head>";
   $output .= "<body>";
   $output .= "<article>";
+  $output .= '<figure class="op-tracker"><iframe hidden><!-- DO NOT MODIFY --><!-- Quora Pixel Code (JS Helper) --><script>!function(q,e,v,n,t,s){if(q.qp) return; n=q.qp=function(){n.qp?n.qp.apply(n,arguments):n.queue.push(arguments);}; n.queue=[];t=document.createElement(e);t.async=!0;t.src=v; s=document.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);';
+  $output .= "}(window, 'script', 'https://a.quora.com/qevents.js');qp('init', 'a50e46d4d6b444a7ab8308928a6df8f0');qp('track', 'ViewContent');</script>";
+  $output .= '<noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript><!-- End of Quora Pixel Code --></iframe></figure>';
   $output .= "<header>";
   $output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
-  // <!-- The header image shown inside your article --> 
+    // <!-- The header image shown inside your article -->
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
     $output .= "<figure>";  
     $output .= "<img src='" . $fb_instant_image . "' alt='' title='' />";
@@ -444,22 +447,24 @@ function itg_fia_config_form($form, &$form_state) {
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-    
+        $nid = 1145469;
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $node_str = $result[0]['field_common_related_content_value'];
+        
         // replace enviroment name
         // stage related node structure: 'IT_1146622|~|IT_849473|~|IT_1146628|~|IT_1146629|~|IT_1146631|~|IT_1146630'
         $node_str = str_replace("|~|IT_", ",", $node_str);
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
+        //p($nid_list);
         $flag_fia_cont = 0;
-        if(count($nid_list) > 1){
+        if(count($nid_list) > 0){
             //related node
-            foreach ($nid_list as $key => $value) {
+            foreach ($nid_list as $key => $value) {                
                 $flag_fia = 0;
                 $flag_fia = checkFIANodeBynid($value);
                 if($flag_fia){
@@ -501,21 +506,22 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
     $relatednode = "";
     if ($prime_section) {
         $query = db_select('node', 'n');
-        $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
-        //$query->join('field_data_field_primary_category', 'fpc', 'n.nid=fpc.entity_id');
-        $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');        
-        $query->join('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
+        $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
+        //$query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
+        $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
+        $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
         $query->fields('n', array('nid'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
         $query->condition('iwo.widget', $order, '>');
         $query->condition('iwo.widget', 'section_wise_widget');
-        $query->condition('iwo.cat_id', $prime_section);
-        //$query->condition('fpc.field_primary_category_value', $prime_cat, '=');
-        //$query->condition('pc.field_story_category_tid', '$prime_section', '');
+        //$query->condition('iwo.cat_id', $prime_section);        
+        //$query->condition('pc.field_story_category_tid', $prime_section, '=');
         $query->condition('ti.tid', $prime_section, '=');
+        $query->groupBy('n.nid');
         $query->range(0, 3);
+        print strtr((string) $query, $query->arguments());die();
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
         foreach ($result as $reskey => $resvalue) {            
             $firebase_url = get_node_firebase_weburl($resvalue['nid']);
@@ -534,7 +540,7 @@ function fia_get_order_node_by_nid($nid, $prime_section){
         $query = db_select('itg_widget_order', 'iwo');
         $query->fields('iwo', array('weight'));
         $query->condition('iwo.nid', $nid);
-        $query->condition('iwo.cat_id', $prime_section);
+        //$query->condition('iwo.cat_id', $prime_section);
         $query->condition('iwo.widget', 'section_wise_widget');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $order = $result[0]['weight'];
@@ -545,7 +551,8 @@ function fia_get_order_node_by_nid($nid, $prime_section){
  * ITG FIA function for get node is FIA or not by nid
  */
 function checkFIANodeBynid($nid){
-    $nid = 0;
+    $nid_f = 0;
+    
     if($nid){
         $query = db_select('node', 'n');
         $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
@@ -555,7 +562,8 @@ function checkFIANodeBynid($nid){
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $nid = $result[0]['nid'];
+         
+        $nid_f = $result[0]['nid'];
     }
-    return $nid;
+    return $nid_f;
 }
