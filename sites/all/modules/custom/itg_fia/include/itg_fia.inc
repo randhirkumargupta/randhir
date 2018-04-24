@@ -479,7 +479,7 @@ function itg_fia_related_node($nid = 0) {
             //echo "kumar"; die();
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
-            p($prime_cat);
+            //p($prime_cat);
             /*$prime_section_ar = taxonomy_get_parents($prime_cat->tid);
             foreach ($prime_section_ar as $key => $value) {
                 $prime_section = $value->tid;
@@ -575,7 +575,7 @@ function checkFIANodeBynid($nid){
 function gettopparentstid($term_tid) {
     
 //this will be your top parent term if any was found
-    $top_parent_term = null;
+    $top_parent_term = $term_tid;
 
     $parent_terms = taxonomy_get_parents_all($term_tid);
 
