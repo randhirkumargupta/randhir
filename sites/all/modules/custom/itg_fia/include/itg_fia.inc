@@ -446,8 +446,7 @@ function itg_fia_config_form($form, &$form_state) {
  */
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";   
-    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-        $nid = 1145469;
+    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';        
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
@@ -460,9 +459,10 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
-        //p($nid_list);
+        
         $flag_fia_cont = 0;
-        if(count($nid_list) > 0){
+        if(count($nid_list) > 1){
+            
             //related node
             foreach ($nid_list as $key => $value) {                
                 $flag_fia = 0;
@@ -475,12 +475,11 @@ function itg_fia_related_node($nid = 0) {
             }
         }
         elseif($flag_fia_cont == 0){
+            
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
-            $prime_section_ar = taxonomy_get_parents($prime_cat->tid);
-            foreach ($prime_section_ar as $key => $value) {
-                $prime_section = $value->tid;
-            }
+            
+            $prime_section = gettopparentstid($prime_cat->tid);
             
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
@@ -488,6 +487,7 @@ function itg_fia_related_node($nid = 0) {
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
             $relatednode .= $related_content_primary_cat;
         }
+        
       
     $relatednode .='</ul>';
     //no any node found
@@ -516,12 +516,12 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->condition('n.status', '1', '=');
         $query->condition('iwo.widget', $order, '>');
         $query->condition('iwo.widget', 'section_wise_widget');
-        //$query->condition('iwo.cat_id', $prime_section);        
+        $query->condition('iwo.cat_id', $prime_section);        
         //$query->condition('pc.field_story_category_tid', $prime_section, '=');
         $query->condition('ti.tid', $prime_section, '=');
         $query->groupBy('n.nid');
         $query->range(0, 3);
-        print strtr((string) $query, $query->arguments());die();
+        
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
         foreach ($result as $reskey => $resvalue) {            
             $firebase_url = get_node_firebase_weburl($resvalue['nid']);
@@ -540,7 +540,7 @@ function fia_get_order_node_by_nid($nid, $prime_section){
         $query = db_select('itg_widget_order', 'iwo');
         $query->fields('iwo', array('weight'));
         $query->condition('iwo.nid', $nid);
-        //$query->condition('iwo.cat_id', $prime_section);
+        $query->condition('iwo.cat_id', $prime_section);
         $query->condition('iwo.widget', 'section_wise_widget');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $order = $result[0]['weight'];
@@ -566,4 +566,22 @@ function checkFIANodeBynid($nid){
         $nid_f = $result[0]['nid'];
     }
     return $nid_f;
+}
+function gettopparentstid($term_tid) {
+    
+//this will be your top parent term if any was found
+    $top_parent_term = null;
+
+    $parent_terms = taxonomy_get_parents_all($term_tid);
+
+//top parent term has no parents so find it out by checking if it has parents
+    foreach ($parent_terms as $parent) {
+        $parent_parents = taxonomy_get_parents_all($parent->tid);
+        if ($parent_parents != false) {
+            //this is top parent term
+            $top_parent_term = $parent;
+        }
+    }
+    
+    return $top_parent_term->tid;
 }
