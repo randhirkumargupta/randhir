@@ -587,4 +587,5 @@ function gettopparentstid($term_tid) {
             $top_parent_term = $parent;
         }
     }
+    return $top_parent_term;
 }
