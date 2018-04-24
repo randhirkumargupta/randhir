@@ -77,8 +77,8 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
   <?php 
    $left_side = get_custom_left_side_data($node->nid);
    foreach ($left_side as $lvalue) {
-     print "<div class='leftblog-publish-time'>".$lvalue->blog_publish_time."</div>";
-     print "<div class='leftblog-title'>".$lvalue->blog_title."</div>";
+     print "<div class='lhs-detailList'><div class='leftblog-publish-time'>".$lvalue->blog_publish_time."</div>";
+     print "<div class='leftblog-title'>".$lvalue->blog_title."</div></div>";
    }
   
   ?>  
