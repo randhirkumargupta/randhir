@@ -17,12 +17,29 @@
         setTimeout(function() {
             jQuery('.form-submit').mousedown();
         }, 5000);
+                     
         
-       
-        
-      } );
+      });
+      
+      setTimeout(function() {
+            alert("itg-live-blog-row");
+        }, 5000);
+       function fetch_data() {
+          $.ajax({
+              url: '/itg-live-blog-row',
+              type: 'post',
+              data: {row:row,entityId:entityId},
+              beforeSend:function(){
+                  $(".load-more").text("Loading...");
+              },
+              success: function(response){
+                  setTimeout(function() {
+                      $('#custom-live-blog tr:first').after(response).show().fadeIn("slow");                      
+                  }, 2000);
 
-       
+              }
+          });
+      }
     }
   };    
 })(jQuery);

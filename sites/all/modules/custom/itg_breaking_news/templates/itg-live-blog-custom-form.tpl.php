@@ -11,40 +11,15 @@
 
 jQuery(document).ready(function($){
   
-    jQuery('.blog_highlight_checkbox').change(function () {
+    $(document).on('click', '.blog_highlight_checkbox', function() {
         if ($(this).attr("checked")) 
         {
-            jQuery('.blog_highlights_status').val('2');
+            jQuery('.blog_highlights_status').val('1');
             return;
         }
-       jQuery('.blog_highlights_status').val('1');
+       jQuery('.blog_highlights_status').val('2');
     });
-
-    $(document).on('click', '.blog_highlight_checkbox', function() {
-        jQuery('.blog_highlights_status').val('2');
-    });
-    
-    /*
-    $(document).on('click', '.btn_edit', function(){  
-        var id = $(this).data("id4");
-        alert('id' + id);
-        var first_name = $('#f'+id).text();
-        var last_name = $('#l'+id).text();
-        
-        $.ajax({  
-            url:"/manage-print-form/edit/"+id,  
-            type:"POST",  
-            data:{id:id},  
-            dataType:"text",  
-            success:function(data)  
-            {  
-                alert(data);
-                $('#live_data').empty();  
-                $('#live_data').html(data);  
-            }  
-        })  
-    });
-    */
+   
 	  $(document).on('click', '.btn_delete', function(){  
         var id=$(this).data("id3");
         if(confirm("Are you sure you want to delete this?"))  
@@ -130,8 +105,10 @@ jQuery(document).ready(function($){
         }
 
     });
-        
-});  
+           
+});
+
+
 </script>
 
 <style>
