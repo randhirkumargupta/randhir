@@ -80,7 +80,7 @@ if ($theme != 'itgadmin') {
                       </div>      
                   </div>    
                 <?php endif; ?>
-                <?php if ((isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) || ($theme == 'itgadmin')) { ?>
+                <?php /*if ((isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) || ($theme == 'itgadmin')) { ?>
                   <div class="home-election" data-tb-region="homeElection">
                       <div class="widget-help-text"><?php print t('Template widgets'); ?> ( <strong><?php print t('Home Page Election'); ?></strong> )</div>
                       <div class="itg-widget">
@@ -100,7 +100,7 @@ if ($theme != 'itgadmin') {
                           </div>
                       </div>
                   </div>
-                <?php } ?>
+                <?php } */?>
                 <!-- End of Breaking news band -->
                 <?php if (isset($widget_data['big_story'])) : ?>
                   <div class="row">
