@@ -13,10 +13,12 @@
         var slug_id = jQuery( this ).attr( 'data' );
         jQuery('.custom_blog_bid').val(slug_id);
         jQuery('.custom_blog_action').val('update');
+        // jQuery("#custom-live-blog #"+id).animate({ backgroundColor: "#d9d9d9" }, "slow");
         setTimeout(function() {
             jQuery('.form-submit').mousedown();
         }, 5000);
         
+       
         
       } );
 
