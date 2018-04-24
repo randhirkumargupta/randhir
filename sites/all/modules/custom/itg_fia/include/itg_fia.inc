@@ -521,6 +521,7 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->condition('ti.tid', $prime_section, '=');
         $query->groupBy('n.nid');
         $query->range(0, 3);
+        print strtr((string) $query, $query->arguments());die();
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
         foreach ($result as $reskey => $resvalue) {            
             $firebase_url = get_node_firebase_weburl($resvalue['nid']);
