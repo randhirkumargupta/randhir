@@ -460,10 +460,11 @@ function itg_fia_related_node($nid = 0) {
         $node_str = str_replace("IT_", "", $node_str); 
 
         $nid_list = explode(",", $node_str);
-        p($nid_list);
+        //p($nid_list);
         
         $flag_fia_cont = 0;
-        if(count($nid_list) > 1){
+        
+        if(count($nid_list) > 0 && $nid_list[0] > 0){
             
             //related node
             foreach ($nid_list as $key => $value) {                
@@ -516,7 +517,7 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.widget', $order, '>');
+        $query->condition('iwo.widget', $order, '<');
         $query->condition('iwo.widget', 'section_wise_widget');
         $query->condition('iwo.cat_id', $prime_section);        
         //$query->condition('pc.field_story_category_tid', $prime_section, '=');
