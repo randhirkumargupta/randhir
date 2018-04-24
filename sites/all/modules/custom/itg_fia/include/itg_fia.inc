@@ -490,6 +490,7 @@ function itg_fia_related_node($nid = 0) {
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
             $relatednode .= $related_content_primary_cat;
         }
+        echo $flag_fia_cont; echo "<br>"; echo $relatednode; die();
       
     $relatednode .='</ul>';
     //no any node found
