@@ -7,37 +7,10 @@
 ?>
 </div>
 
-<?php //if ($_SESSION['itg_blog_post']) { ?>
-<script>  
-  jQuery(document).ready(function($) { 
-    $(document).on('click', '#cboxClose', function(e){  
-      e.preventDefault();
-      alert('click function');
-    });
-    // $("#cboxClose" ).trigger( "click" );
-    // fetch_data(id);
-            
-});  
-</script>   
-<?php // } ?>
 <script>  
 
-jQuery(document).ready(function($){   
-    /*
-    function fetch_data(id)  
-    {  
-
-      $.ajax({  
-            url:"/manage-live-blog/add/"+id,  
-            method:"POST",  
-            success:function(data){  
-              $('#live_data').empty();  
-              $('#live_data').html(data);  
-            }  
-      });
-     // setTimeout(fetch_data(id),1000 * 60 * 3);  
-    }  
-   */
+jQuery(document).ready(function($){
+  
     jQuery('.blog_highlight_checkbox').change(function () {
         if ($(this).attr("checked")) 
         {
@@ -50,7 +23,8 @@ jQuery(document).ready(function($){
     $(document).on('click', '.blog_highlight_checkbox', function() {
         jQuery('.blog_highlights_status').val('2');
     });
-
+    
+    /*
     $(document).on('click', '.btn_edit', function(){  
         var id = $(this).data("id4");
         alert('id' + id);
@@ -70,7 +44,7 @@ jQuery(document).ready(function($){
             }  
         })  
     });
-    
+    */
 	  $(document).on('click', '.btn_delete', function(){  
         var id=$(this).data("id3");
         if(confirm("Are you sure you want to delete this?"))  
@@ -80,7 +54,8 @@ jQuery(document).ready(function($){
                 type: 'post',
                 data:{id:id},
                 beforeSend:function(){
-                    $(".load-ajax-box").show();
+                    //$(".load-ajax-box").show();
+                    jQuery("#custom-live-blog #"+id).animate({ backgroundColor: "#d9d9d9" }, "slow");
                 },
                 success:function(data){
                     jQuery('.load-ajax-box').hide();
