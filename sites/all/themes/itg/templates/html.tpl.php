@@ -26,9 +26,16 @@
         history.pushState('', document.title, window.location.pathname); // nice and clean
         e.preventDefault(); // no page reload
     }
-  </script>   
+  </script>
+  <?php
+    $arg = arg();
+    $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
+    $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
+  ?> 
+  <?php if((!drupal_is_front_page()) && $type != 'story') : ?>  
   <?php print $styles; ?>    
   <?php print $scripts; ?>
+  <?php endif; ?>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
@@ -42,9 +49,7 @@
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/respond.js"></script>
     <![endif]-->
-  <?php endif; 
-  $node_data = menu_get_object();
-  $arg = arg();
+  <?php endif;   
   ?>
 <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
@@ -58,9 +63,7 @@
       ?>
       ga('create', 'UA-795349-17', 'auto');
     <?php } ?>
-      <?php
-      $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
-      $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
+      <?php      
       $bylines = NULL;
       if($nid && $type == 'story') {
           if(function_exists('_get_byline_from_nid_for_kindle')) {
@@ -158,6 +161,10 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?> 
+  <?php if((drupal_is_front_page()) || $type == 'story') : ?>
+    <?php print $styles; ?>
+    <?php print $scripts; ?>
+  <?php endif; ?>
   <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
