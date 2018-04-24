@@ -26,7 +26,9 @@
         history.pushState('', document.title, window.location.pathname); // nice and clean
         e.preventDefault(); // no page reload
     }
-  </script>
+  </script>   
+  <?php print $styles; ?>    
+  <?php print $scripts; ?>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
@@ -117,11 +119,6 @@
         $content_type = $type;
       }
     ?>
-<script type="text/javascript" src="/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js"></script>
-<!-- <script type="text/javascript" async="async" src="https://vuukle.com/js/vuukle.js"></script> -->
-<?php if ($nid && $type == 'videogallery') : ?>
-<script type="text/javascript" src="/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js"></script>
-<?php endif; ?>
 <style>
 * {box-sizing: border-box; }
 /* Inline CSS bootstrap */
@@ -160,9 +157,7 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
     </p>
   <?php endif; ?>
   <?php print $page_top; ?>
-  <?php print $page; ?>  
-  <?php print $styles; ?>    
-  <?php print $scripts; ?>
+  <?php print $page; ?> 
   <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
