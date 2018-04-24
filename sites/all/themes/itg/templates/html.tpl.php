@@ -32,10 +32,10 @@
     $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
     $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
   ?> 
-  <?php if((!drupal_is_front_page()) && $type != 'story') : ?>  
+  <?php //if((!drupal_is_front_page()) && $type != 'story') : ?>  
   <?php print $styles; ?>    
   <?php print $scripts; ?>
-  <?php endif; ?>
+  <?php //endif; ?>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
@@ -161,10 +161,10 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?> 
-  <?php if((drupal_is_front_page()) || $type == 'story') : ?>
-    <?php print $styles; ?>
-    <?php print $scripts; ?>
-  <?php endif; ?>
+  <?php //if((drupal_is_front_page()) || $type == 'story') : ?>
+    <?php //print $styles; ?>
+    <?php //print $scripts; ?>
+  <?php //endif; ?>
   <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
