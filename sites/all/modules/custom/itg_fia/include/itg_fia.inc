@@ -479,6 +479,7 @@ function itg_fia_related_node($nid = 0) {
             //echo "kumar"; die();
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
+            p($prime_cat);
             /*$prime_section_ar = taxonomy_get_parents($prime_cat->tid);
             foreach ($prime_section_ar as $key => $value) {
                 $prime_section = $value->tid;
