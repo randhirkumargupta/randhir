@@ -820,6 +820,9 @@ function itg_widget_theme() {
         'election_know_your_party' => array(
             'template' => 'templates/election-know-your-party',
         ),
+        'election_key_issues' => array(
+            'template' => 'templates/election-key-issues',
+        ),
 
     );
     return $themes;
@@ -1533,7 +1536,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     // Start alter for tech
     if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8' || $view->current_display == 'movie_latest')) {
         if ($theme != 'seven') {
-            if ($theme == FRONT_THEME_NAME) {
+            if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
                 $section = arg(2);
             } else {
                 $section = $_GET['section'];
@@ -1577,7 +1580,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     //  condition for election most popular
     if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
         if ($theme != 'seven') {
-            if ($theme == FRONT_THEME_NAME) {
+            if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
                 $section = arg(2);
             } else {
                 $section = $_GET['section'];
@@ -1588,7 +1591,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             if (empty($section)) {
                 $section = $_GET['section_name'];
             }
-
+             
             $query->where[1]['conditions'][3]['value'] = $section;
         }
     }
@@ -3510,6 +3513,7 @@ function get_top_story_from_category($cat_id, $limit = 4){
 
 function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'){
   $query = db_select('node', 'n');
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
   $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
   $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
@@ -3523,10 +3527,31 @@ function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'
   $query->fields('fcdt', array('field_cm_display_title_value'));
   $query->fields('fskt', array('field_story_kicker_text_value'));
   $query->range(0, $limit);
+  $query->condition('fiel.field_is_election_live_value', 1);
   $query->condition('fmt.field_miscellaneous_type_value', $type);
   if(!empty($cat_id)){
     $query->condition('fpc.field_primary_category_value', $cat_id);
   }
   $result = $query->execute()->fetchAll();
   return $result;  
+}
+
+
+function get_html_widget_data_by_layout($section_name, $template_name, $block_name = 'itg-block-11', $widget_name = 'custom_html_widgets'){
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('filter_url'));
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+  $itg_query->condition('layout_tpl.section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('layout_manager.block_name', $block_name);
+  $itg_query->condition('layout_manager.widget_name', $widget_name);
+  $result = $itg_query->execute()->fetchAll();
+  if(!empty($result[0]->filter_url)){
+    $query = db_select('field_data_body', 'db');
+    $query->condition('db.entity_id', $result[0]->filter_url);
+    $query->fields('db', array('body_value'));
+    $result1 = $query->execute()->fetchAll();
+    return $result1[0]->body_value;
+  }
+  return '';
 }
