@@ -78,7 +78,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
    $left_side = get_custom_left_side_data($node->nid);
    foreach ($left_side as $lvalue) {
      print "<div class='lhs-detailList'><div class='leftblog-publish-time'>".$lvalue->blog_publish_time." IST</div>";
-     print "<div class='leftblog-title'>".$lvalue->blog_title."</div></div>";
+     print "<div class='leftblog-title'><a href='#1721'>".$lvalue->blog_title."</a></div></div>";
    }
   
   ?>  
@@ -170,7 +170,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         $user = !empty($breaking_item->update_uid) ? user_load($breaking_item->update_uid)->name : user_load($breaking_item->blog_uid)->name;
 
         // $user
-        $breaking_output .= '<div class="breaking-section">';
+        $breaking_output .= '<div class="breaking-section"><a name="1721"></a>';
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_item->blog_description);
         $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
         //$pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
@@ -183,7 +183,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
           $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="dateauthor"><div class="breaking-date">' . $pub_display_time . ' IST</div><div class="breaking-author"> Posted by ' . $user . '</div></div>';
           $breaking_output .= '<div class="blog-multi-title">'. $breaking_item->blog_title .'</div>';
           $breaking_output .= '<div class="blog-multi-desc">'. $html .'</div>';
-          $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
+          $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
           $breaking_output .= '</div></div>';
         //}
       }
