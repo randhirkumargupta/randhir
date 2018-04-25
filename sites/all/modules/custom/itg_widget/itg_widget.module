@@ -466,6 +466,10 @@ function itg_widget_block_info() {
       'info' => t('Widget: Election Know your party'),
     );
     
+    $blocks['election_key_issue'] = array(
+      'info' => t('Widget: Election Key issues'),
+    );
+    
     return $blocks;
 }
 
@@ -950,7 +954,7 @@ function itg_widget_block_view($delta = '') {
             if (isset($_GET[$selction_name])) {
               $cat_id = $_GET[$selction_name];
             }
-            if ($theme == FRONT_THEME_NAME) {
+            if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
               $cat_id = arg(2);              
             }            
             if (drupal_is_front_page()) {
@@ -996,7 +1000,7 @@ function itg_widget_block_view($delta = '') {
           if (isset($_GET[$selction_name])) {
             $cat_id = $_GET[$selction_name];
           }
-          if ($theme == FRONT_THEME_NAME) {
+          if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
             $cat_id = arg(2);              
           }            
           if (drupal_is_front_page()) {
@@ -1004,6 +1008,26 @@ function itg_widget_block_view($delta = '') {
           }
           $data = get_who_said_what_from_cat($cat_id, 10, 'know-your-party');
           $block['content'] = theme("election_know_your_party", array("data" => $data));
+          break;
+        case 'election_key_issue':
+          global $theme;
+          if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $selction_name = 'category';
+          }
+          else {
+            $selction_name = 'section';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
+            $cat_id = arg(2);              
+          }            
+          if (drupal_is_front_page()) {
+            $cat_id = get_itg_variable('home_page_election_tid');              
+          }
+          $data = get_who_said_what_from_cat($cat_id, 6, 'election-key-issues');
+          $block['content'] = theme("election_key_issues", array("data" => $data));
           break;
     }       
     return $block;
