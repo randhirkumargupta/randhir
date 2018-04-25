@@ -22,7 +22,7 @@
       });
       
       setTimeout(function() {
-            alert("itg-live-blog-row");
+            console.log("itg-live-blog-row");
         }, 5000);
        function fetch_data() {
           $.ajax({

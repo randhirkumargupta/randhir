@@ -20,10 +20,13 @@
   <?php print drupal_render($form['category_holder']); ?>
 
            </div>
+<div id="content-multi-user-allows">
+    <?php print drupal_render($form['field_multi_user_allows']); ?>
+</div>
 
 <div id="ContentDetails">
-    <?php print drupal_render($form['field_multi_user_allows']); ?>
     <?php print drupal_render($form['field_breaking_content_details']); ?>
+    <?php print drupal_render($form['field_blog_commentary']); ?>
 </div>
 
 <div id="Shortdescriptions">
