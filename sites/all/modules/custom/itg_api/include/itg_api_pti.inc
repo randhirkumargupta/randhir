@@ -168,7 +168,7 @@ function itg_pti_content() {
                       $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'] = trim($full_headline);
                     }
                     //$node->metatags[LANGUAGE_NONE]['keywords']['value'] = $meta_keyword;
-                    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'migrated';
+                    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'PTI';
                     if (!empty($term_id)) {
                       $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $term_id;
                       $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $term_id;
