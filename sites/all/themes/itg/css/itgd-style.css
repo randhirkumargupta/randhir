@@ -1038,7 +1038,7 @@ background:none;
 .liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.twitter:hover{color:#5896e7}
 .liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.google:hover{color:#c11722}
 .liveBlog-indiatoday .liveblog-Lhs .livebolg-videos { padding:10px 0 }
-.liveBlog-indiatoday .liveblog-Lhs .livebolg-videos h1{font-size: 25px;text-align: left;font-weight: 400; padding:10px 0;}
+.liveBlog-indiatoday .liveblog-Lhs .livebolg-videos h1{font-size: 25px;text-align: left;font-weight: 400; padding:10px 0;line-height: 30px;}
 .liveBlog-indiatoday .liveblog-Lhs .livebolg-videos p.short-discription{ border-bottom:0px; }
 
 /* Karnatka Election chunks */
