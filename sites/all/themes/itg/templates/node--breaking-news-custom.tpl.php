@@ -179,9 +179,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         $breaking_output .= '<div class="breaking-section"><a name="'.$breaking_item->bid.'"></a>';
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_item->blog_description);
         $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
-        //$pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
         $pub_time = date("H:i", strtotime($breaking_item->blog_publish_time));
-        //$pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
         $pub_display_time = date("H:i A", strtotime($breaking_item->blog_publish_time));
         $pub_time2 = str_replace(":", "", $pub_time);
         $current_time = str_replace(":", "", date('H:i'));
