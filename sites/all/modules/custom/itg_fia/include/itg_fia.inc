@@ -526,10 +526,15 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->groupBy('n.nid');
         $query->range(0, 3);
         
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
+        $range = 0;
         foreach ($result as $reskey => $resvalue) {            
             $firebase_url = get_node_firebase_weburl($resvalue['nid']);
             $relatednode .= '<li><a href="' . $firebase_url . '"> </a></li>';
+            if($range >= 3){
+                break;
+            }
+            $range++;
         }
     }
     return $relatednode;
