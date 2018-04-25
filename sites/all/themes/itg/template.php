@@ -37,6 +37,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'internal-video-player-jw',
   );
+  $items['itg_election_constituency'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'page--electionconstituency',
+  );
   return $items;
 }
 
@@ -218,6 +222,9 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
   
+  if($arg[0] == 'elections' && !empty($arg[1]) && !empty($arg[2])){
+		$variables['theme_hook_suggestions'][] = 'page__singlecolumn';
+	}
   // Call Live Blog condition wise TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'breaking_news' && isset($variables['node']->field_multi_user_allows['und'][0]['value']) && $variables['node']->field_multi_user_allows['und'][0]['value'] == 1) {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
