@@ -152,15 +152,23 @@ function workbench_moderation_state_review() {
  * @return bool
  */
 
-function itg_api_check_title($title) {
+function itg_api_check_title($title, $tid, $xml_date) {
   $return = FALSE;
+  $start_date = $xml_date.' 00:00:01';
+  $end_date = $xml_date.' 23:59:59';
+  $start_time = strtotime($start_date);
+  $end_time = strtotime($end_date);  
   $title = html_entity_decode($title);
-  $result = db_select('node', 'node')
-          ->fields('node', array('title'))
-          ->condition('title', $title, '=')
-          ->condition('type', 'story', '=')
-          ->execute()->fetchAssoc();
-
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_category', 'fs', 'fs.entity_id = n.nid');
+  $query->fields('n', array('title'));
+  $query->condition('n.title', $title, '=');
+  $query->condition('n.type', 'story', '=');
+  $query->condition('n.created', $start_time, '>=');
+  $query->condition('n.created', $end_time, '<=');
+  $query->condition('fs.field_story_category_tid', $tid, '=');
+  $query->condition('fs.bundle', 'story', '=');
+  $result = $query->execute()->fetchAssoc();
   if (!empty($result['title'])) {
     $return = TRUE;
   }
