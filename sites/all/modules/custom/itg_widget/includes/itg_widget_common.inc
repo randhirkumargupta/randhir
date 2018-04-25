@@ -820,6 +820,9 @@ function itg_widget_theme() {
         'election_know_your_party' => array(
             'template' => 'templates/election-know-your-party',
         ),
+        'election_key_issues' => array(
+            'template' => 'templates/election-key-issues',
+        ),
 
     );
     return $themes;
