@@ -58,10 +58,10 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
       $type = $node->field_type['und']['0']['value'];
       if ($type == 'Live Blog') {
         if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
-          $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . ':</span>' . $node->title . '</h1>';
+          $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . ': </span>' . $node->title . '</h1>';
         }
         else {
-          $title = '<h1><span>' . $type . ':</span>' . $node->title . '</h1>';
+          $title = '<h1><span>' . $type . ': </span>' . $node->title . '</h1>';
         }
 
         $share_title = $node->title;
@@ -77,7 +77,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
   <?php 
    $left_side = get_custom_left_side_data($node->nid);
    foreach ($left_side as $lvalue) {
-     print "<div class='lhs-detailList'><div class='leftblog-publish-time'>".$lvalue->blog_publish_time."</div>";
+     print "<div class='lhs-detailList'><div class='leftblog-publish-time'>".$lvalue->blog_publish_time." IST</div>";
      print "<div class='leftblog-title'>".$lvalue->blog_title."</div></div>";
    }
   
@@ -85,7 +85,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
             
   </div>
   <div class="col-md-8 col-xs-12 liveblog-Rhs">
-    <div class="live-block">
+    <div class="new-live-block">
           <?php if (isset($embed_image) && !empty($embed_image)) { ?>
          <div class="stryimg" id="liveblog" >
                  <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
@@ -180,7 +180,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         $pub_time2 = str_replace(":", "", $pub_time);
         $current_time = str_replace(":", "", date('H:i'));
         
-          $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="breaking-date">' . $pub_display_time . ' IST</div><div class="breaking-author"> Posted by ' . $user . '</div>';
+          $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="dateauthor"><div class="breaking-date">' . $pub_display_time . ' IST</div><div class="breaking-author"> Posted by ' . $user . '</div></div>';
           $breaking_output .= '<div class="blog-multi-title">'. $breaking_item->blog_title .'</div>';
           $breaking_output .= '<div class="blog-multi-desc">'. $html .'</div>';
           $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share"><ul><li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"></a></li></ul></div>';
