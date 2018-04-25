@@ -809,22 +809,25 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("graph_election", array("data" => $data));
             break;
         case 'home_graph_election':
-            $data = itg_widget_get_graph_data_for_home();
-            if($data[0]->field_graph_type_value == 'Graph'){
-							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
-						}
-						if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
-							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
-						}
-            foreach ($data as $index => $row) {
-                $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-                $settings['index'] = $index;
-                $settings['json_data'] = $jsondata;
-                drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
-                drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+            if(!empty(get_itg_variable('itg_election_home_chunk'))){
+              $data = itg_widget_get_graph_data_for_home();
+              if($data[0]->field_graph_type_value == 'Graph'){
+                drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+              }
+              if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
+                drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+              }
+              foreach ($data as $index => $row) {
+                  $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+                  $settings['index'] = $index;
+                  $settings['json_data'] = $jsondata;
+                  drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+                  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+              }
+              $block['content'] = theme("graph_election_section_cart", array("data" => $data));
+            }else{
+              $block['content'] = '';
             }
-            $block['content'] = theme("graph_election_section_cart", array("data" => $data));
-
             break;
         case 'movies_reviews':
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
