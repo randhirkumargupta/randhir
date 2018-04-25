@@ -192,8 +192,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
         ), 
     );
     
-  
-    
+   
     // code to add taxonomy parent terms with no child
    
     /*$tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = TRUE);
