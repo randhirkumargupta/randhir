@@ -80,6 +80,7 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'], 
             $listed_menu_link_site_admin['manage-newsletter']);
       
       $data['user_link'] = $listed_menu_link_site_admin;
@@ -92,6 +93,7 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['live-tv-integration'],
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items']);
 
      $data['user_link'] = $listed_menu_link_site_admin;
@@ -121,6 +123,7 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['my-published-story'],
             $listed_menu_link_site_admin['my-published-photogallery'],
             $listed_menu_link_site_admin['my-published-video'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
             $listed_menu_link_site_admin['published-story?field_story_syndication_value_op=all'],
             $listed_menu_link_site_admin['published-video?field_story_syndication_value_op=all'],
             $listed_menu_link_site_admin['published-photogallery?field_story_syndication_value_op=all']
@@ -135,6 +138,7 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['live-tv-integration'],
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items']);
      
      $data['user_link'] = $listed_menu_link_site_admin;
