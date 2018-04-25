@@ -235,8 +235,8 @@ function itg_pti_content() {
                       }
                       else {
                         $node->log = 'State Changed to published';
-                        $node->workbench_moderation_state_new = workbench_moderation_state_published();
-                        //workbench_moderation_moderate($node, 'published');
+                        //$node->workbench_moderation_state_new = workbench_moderation_state_published();
+                        workbench_moderation_moderate($node, 'published');
                       }
                     }
                     //$node = node_submit($node); // Prepare node for saving
