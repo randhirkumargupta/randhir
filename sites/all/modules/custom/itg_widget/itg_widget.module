@@ -1871,23 +1871,3 @@ function itg_election_constituency(){
   $_GET['section_name'] = $category;
   return theme('itg_election_constituency', array('data' => $data));
 }
-
-function itg_election_constituency(){
-  $arg = arg();
-  $section_alias = 'assembly-elections-2017';//$arg[0];
-  $category_alias = $arg[1];
-  $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
-  
-  if(empty($path_dest)){
-    drupal_not_found();
-  }
-  $tax_data = explode('/', $path_dest);  
-  if($tax_data[0] != 'taxonomy' || empty($tax_data[2]) || !is_numeric($tax_data[2])){
-    drupal_not_found();
-  }
-  drupal_add_library('flexslider', 'flexslider');
-  $category = $tax_data[2];
-  $_GET['section'] = $category;
-  $_GET['section_name'] = $category;
-  return theme('itg_election_constituency', array('data' => $data));
-}
