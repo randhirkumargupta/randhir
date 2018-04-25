@@ -1870,7 +1870,6 @@ function itg_election_constituency(){
   $_GET['section'] = $category;
   $_GET['section_name'] = $category;
   return theme('itg_election_constituency', array('data' => $data));
-  return $itg_result;
 }
 
 function itg_election_constituency(){
