@@ -75,7 +75,8 @@ if ($arg[2] != 'story' && $external_url = _is_external_url_story_article($row->n
         //print '<a href="' . $event_register_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
         print '<a href="' . $event_edit_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
       } else {
-        $node_url = FRONT_URL . '/node/' . $row->nid;
+        $alias_url = drupal_get_path_alias('node/' . $row->nid);
+        $node_url = FRONT_URL . '/'.$alias_url;
         print '<a href="' . $node_url . '" target="_blank">' . html_entity_decode(strip_tags($output)) . '</a>';
       }
     } else {
