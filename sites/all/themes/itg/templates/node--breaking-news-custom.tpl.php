@@ -72,7 +72,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
   </div>
 
 
-  <div class="col-md-4 col-xs-12 liveblog-Lhs">
+  <div class="col-md-4 col-xs-12 liveblog-Lhs mhide">
    <h4>Most Recent</h4>
   <?php 
    $left_side = get_custom_left_side_data($node->nid);
@@ -82,7 +82,11 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
    }
   
   ?>  
-            
+  <div class="livebolg-videos">
+      <div class="livevideo"><iframe width="100%" height="300" src="https://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;enableInfoAndActivity=false&amp;autoPlay=true&amp;mute=false" frameborder="0" allowfullscreen="" scrolling="no" class="media__video--responsive"></iframe></div>
+      <h1><span>Live Blog:</span> Bharat Bandh top updates - Vehicles burnt, people killed, public property destroyed</h1>
+      <p class="short-discription">Anti-reservation groups have called for a Bharat Bandh demanding a roll back of quota system. While there has been no formal Bharat Bandh call, messages calling for a nation-wide shutdown today have gone viral on social media platforms, including WhatsApp. The Union Ministry of Home Affairs, in response to these calls, has asked states to be on alert and ensure security.</p>
+  </div>        
   </div>
   <div class="col-md-8 col-xs-12 liveblog-Rhs">
     <div class="new-live-block">
