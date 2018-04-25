@@ -3513,6 +3513,7 @@ function get_top_story_from_category($cat_id, $limit = 4){
 
 function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'){
   $query = db_select('node', 'n');
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
   $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
   $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
@@ -3526,6 +3527,7 @@ function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'
   $query->fields('fcdt', array('field_cm_display_title_value'));
   $query->fields('fskt', array('field_story_kicker_text_value'));
   $query->range(0, $limit);
+  $query->condition('fiel.field_is_election_live_value', 1);
   $query->condition('fmt.field_miscellaneous_type_value', $type);
   if(!empty($cat_id)){
     $query->condition('fpc.field_primary_category_value', $cat_id);
