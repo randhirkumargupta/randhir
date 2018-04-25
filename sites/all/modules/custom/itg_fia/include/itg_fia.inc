@@ -446,7 +446,7 @@ function itg_fia_config_form($form, &$form_state) {
  */
 function itg_fia_related_node($nid = 0) {
     $relatednode = "";  
-    $nid = 1145469;
+    //$nid = 1145469;
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';        
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
@@ -517,11 +517,12 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.widget', $order, '<');
+        //$query->condition('iwo.widget', $order, '<');
         $query->condition('iwo.widget', 'section_wise_widget');
         $query->condition('iwo.cat_id', $prime_section);        
         //$query->condition('pc.field_story_category_tid', $prime_section, '=');
         $query->condition('ti.tid', $prime_section, '=');
+        $query->orderBy('n.created', 'DESC');
         $query->groupBy('n.nid');
         $query->range(0, 3);
         

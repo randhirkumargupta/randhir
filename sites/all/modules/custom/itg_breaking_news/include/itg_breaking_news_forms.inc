@@ -75,14 +75,18 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
   );
     
   $form['breaking']['blog_breaking_band'] = array(
-    '#type' => 'radios',
-    '#title' => t('Blog breaking band'),
-    '#options' => array(1 => "Active", 2 => "Inactive"),
-    '#default_value' => ($results->blog_breaking_band) ? $results->blog_breaking_band : 1,
-    // '#required' => TRUE
+    '#type' => 'hidden',
+    '#value' => ($results->blog_breaking_band) ? $results->blog_breaking_band : 1,
   );
   
-
+  $form['breaking']['blog_entity_id'] = array(
+    '#type' => 'hidden',
+    '#value' => ($results->blog_entity_id) ? $results->blog_entity_id : $blog_entity_id,
+    '#prefix' => '<div id="blog_entity_replace_wrapper">',
+    '#suffix' => '</div>',
+  );
+  
+   /*
    $publish_time = date('H:i');
    $form['breaking']['blog_publish_time'] = array(
     '#type' => 'textfield',
@@ -92,11 +96,11 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#prefix' => '<div id="blog_publish_time_replace_wrapper">',
     '#suffix' => '</div>',
   );
-  
+  */   
 
   $form['breaking']['blog_highlight_status'] = array(
     '#type' => 'hidden',
-    '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : '1',
+    '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : '2',
     '#attributes' => array('class' => 'blog_highlights_status'),
     '#prefix' => '<div id="blog_highlight_replace_wrapper">',
     '#suffix' => '</div>',
