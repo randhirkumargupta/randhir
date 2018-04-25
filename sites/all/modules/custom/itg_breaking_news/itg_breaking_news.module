@@ -806,7 +806,7 @@ function itg_live_blog_list($eid = NULL) {
                          <td class="blog_title" id="pt'.$row->blog_publish_time.'" data-id1="'.$row->bid.'">'.$row->blog_publish_time.'</td>
                          <td class="user" id="u'.$row->bid.'" data-id2="'.$row->bid.'">'.$user.'</td>
                          <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.$row->blog_title.'</td>
-                         <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.substr($row->blog_description, 0, 100).'</td>
+                         <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.limit_words($row->blog_description, 10).'</td>
                          <td>
                           <div class="load-ajax-box">Please Wait..</div>
 
@@ -871,7 +871,7 @@ function itg_live_blog_get_row($eid = NULL) {
                      <td class="blog_title" id="pt'.$row->blog_publish_time.'" data-id1="'.$row->bid.'">'.$row->blog_publish_time.'</td>
                      <td class="user" id="u'.$row->bid.'" data-id2="'.$row->bid.'">'.$user.'</td>
                      <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.$row->blog_title.'</td>
-                     <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.substr($row->blog_description, 0, 100).'</td>                     
+                     <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.limit_words($row->blog_description, 10).'</td>                     
                      <td>
                      
                       
@@ -925,3 +925,10 @@ function get_custom_left_side_data($blog_entity_id) {
   # execute the query
   return $results = $query->execute()->fetchAll();
 }
+
+function limit_words($string, $word_limit)
+{
+    $words = explode(" ",strip_tags($string));
+    return implode(" ",array_splice($words,0,$word_limit));
+}
+ 
