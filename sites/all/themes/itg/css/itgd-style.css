@@ -1038,23 +1038,23 @@ background:none;
 .liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.twitter:hover{color:#5896e7}
 .liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.google:hover{color:#c11722}
 /* Karnatka Election chunks */
-.election_who_said_what #Slider.flexslider{ background:#ffff01;padding:35px 20px; text-align: center; border-radius: 5px; border:1px solid #d4d4d4;}
-.election_who_said_what #Slider .flex-direction-nav .flex-next{ right:0;display: block; height:24px; width:28px;background:#a00606;opacity:1;line-height: 24px;text-align: center;
+#block-itg-widget-election-who-said-what #Slider.flexslider{ background:#ffff01;padding:35px 20px; text-align: center; border-radius: 5px; border:1px solid #d4d4d4;}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav .flex-next{ right:0;display: block; height:24px; width:28px;background:#a00606;opacity:1;line-height: 24px;text-align: center;
 border-radius: 0px 5px 5px 0px;}
-.election_who_said_what #Slider li:hover .flex-direction-nav .flex-next{display: block}
-.election_who_said_what #Slider .flex-direction-nav .flex-prev{left: inherit; right: 30px; display: block; height:24px; width:28px; background:#a00606;opacity:1;line-height: 24px; border-radius: 5px 0px 
+#block-itg-widget-election-who-said-what #Slider li:hover .flex-direction-nav .flex-next{display: block}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav .flex-prev{left: inherit; right: 30px; display: block; height:24px; width:28px; background:#a00606;opacity:1;line-height: 24px; border-radius: 5px 0px 
 0px 5px;}
-.election_who_said_what #Slider li:hover .flex-direction-nav .flex-prev{display: block}
-.election_who_said_what #Slider .flex-direction-nav .flex-next:before,#Slider .flex-direction-nav .flex-prev:before{color:#fff; font-size:16px;}
-.election_who_said_what #Slider .flex-direction-nav a{ top:-13px;}
-.election_who_said_what #Slider.flexslider .slides img{ width: auto;text-align: center; display: inline-block; border:5px solid #c49f08;border-radius:100%}
-.election_who_said_what #Slider.flexslider .slides p{font-size: 20px; line-height:28px; margin:10px 0;}
-.election_who_said_what #Slider.flexslider .slides span{color:#a48300;font-size:14px; text-transform: uppercase;margin-bottom:40px; display: block}
-.election_who_said_what #Slider .flex-control-nav{ display: none;}
+#block-itg-widget-election-who-said-what #Slider li:hover .flex-direction-nav .flex-prev{display: block}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav .flex-next:before,#Slider .flex-direction-nav .flex-prev:before{color:#fff; font-size:16px;}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav a{ top:-13px;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides img{ width: auto;text-align: center; display: inline-block; border:5px solid #c49f08;border-radius:100%}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides p{font-size: 20px; line-height:28px; margin:10px 0;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides span{color:#a48300;font-size:14px; text-transform: uppercase;margin-bottom:40px; display: block}
+#block-itg-widget-election-who-said-what #Slider .flex-control-nav{ display: none;}
 @media (max-width: 991px) and (min-width: 768px){
-.election_who_said_what #Slider.flexslider{padding: 10px 5px;}
-.election_who_said_what #Slider.flexslider .slides span{ margin-bottom:0px;}
-.election_who_said_what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
+#block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
 }
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
 #block-itg-widget-election-know-your-party .partylist-body{height:342px; overflow-y:auto;}
