@@ -474,6 +474,10 @@ function itg_widget_block_info() {
       'info' => t('Widget: Election Know your party'),
     );
     
+    $blocks['election_key_issue'] = array(
+      'info' => t('Widget: Election Key issues'),
+    );
+    
     return $blocks;
 }
 
@@ -958,7 +962,7 @@ function itg_widget_block_view($delta = '') {
             if (isset($_GET[$selction_name])) {
               $cat_id = $_GET[$selction_name];
             }
-            if ($theme == FRONT_THEME_NAME) {
+            if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
               $cat_id = arg(2);              
             }            
             if (drupal_is_front_page()) {
@@ -1004,7 +1008,7 @@ function itg_widget_block_view($delta = '') {
           if (isset($_GET[$selction_name])) {
             $cat_id = $_GET[$selction_name];
           }
-          if ($theme == FRONT_THEME_NAME) {
+          if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
             $cat_id = arg(2);              
           }            
           if (drupal_is_front_page()) {
@@ -1012,6 +1016,26 @@ function itg_widget_block_view($delta = '') {
           }
           $data = get_who_said_what_from_cat($cat_id, 10, 'know-your-party');
           $block['content'] = theme("election_know_your_party", array("data" => $data));
+          break;
+        case 'election_key_issue':
+          global $theme;
+          if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $selction_name = 'category';
+          }
+          else {
+            $selction_name = 'section';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
+            $cat_id = arg(2);              
+          }            
+          if (drupal_is_front_page()) {
+            $cat_id = get_itg_variable('home_page_election_tid');              
+          }
+          $data = get_who_said_what_from_cat($cat_id, 6, 'election-key-issues');
+          $block['content'] = theme("election_key_issues", array("data" => $data));
           break;
     }       
     return $block;
@@ -1826,6 +1850,27 @@ function get_election_state_by_category($catid){
 	$itg_query->fields('fes', array('field_election_state_tid'));
 	$itg_result = $itg_query->execute()->fetchAll();
 	return $itg_result;	
+}
+
+function itg_election_constituency(){
+  $arg = arg();
+  $section_alias = 'assembly-elections-2017';//$arg[0];
+  $category_alias = $arg[1];
+  $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
+  
+  if(empty($path_dest)){
+    drupal_not_found();
+  }
+  $tax_data = explode('/', $path_dest);  
+  if($tax_data[0] != 'taxonomy' || empty($tax_data[2]) || !is_numeric($tax_data[2])){
+    drupal_not_found();
+  }
+  drupal_add_library('flexslider', 'flexslider');
+  $category = $tax_data[2];
+  $_GET['section'] = $category;
+  $_GET['section_name'] = $category;
+  return theme('itg_election_constituency', array('data' => $data));
+  return $itg_result;
 }
 
 function itg_election_constituency(){

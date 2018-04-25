@@ -1023,24 +1023,42 @@ background:none;
 .liveBlog-indiatoday .liveblog-Lhs .leftblog-title{ font-size:14px; color:#000; line-height:16px; font-family: "OpenSans-Semibold"; border-left:1px solid #e0e0e0; padding-left:10px; line-height:20px; }
 .liveBlog-indiatoday .liveblog-Lhs .lhs-detailList{ padding:10px 0; border-bottom:1px dotted #e0e0e0; }
 
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section{ padding:10px 0; border-top:1px dotted #a8a8a8; overflow:hidden; }
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-title{ font-size:28px; font-family:"Merriweather-Semibold"; line-height:30px; padding-bottom:20px;}
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor{padding-bottom:10px;}
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor .breaking-date{color: #9e2729;font-size: 13px;font-family: "OpenSans-Semibold"; width:auto; display:inline-block; padding-right:5px;}
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor .breaking-author{width:auto; display:inline-block;color: #626262;font-size: 13px;font-family: "OpenSans-Semibold"; }
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-desc p{ font-size:17px; line-height:24px;color:#3c3c3c; padding-bottom: 10px; }
+.liveBlog-indiatoday .liveblog-Rhs .stryimg{ padding-bottom: 10px; } .liveBlog-indiatoday .liveblog-Rhs .stryimg img, .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-desc .itgimage img{ width:100%;}
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-desc .itgimage .body_caption{ border-bottom: 0px; font-size:12px; padding:5px 0; }
+.liveBlog-indiatoday .liveblog-Rhs .social-share-new{ padding-top:10px; float: right; }
+.liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li{ list-style:none;display: inline-block; width: 32px; height:32px text-align: center;font-size: 20px; }
+.liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a{ color:#ababaa; }
+.liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.facebook:hover{ color:#342e99 }
+.liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.twitter:hover{color:#5896e7}
+.liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li a.google:hover{color:#c11722}
+.liveBlog-indiatoday .liveblog-Lhs .livebolg-videos { padding:10px 0 }
+.liveBlog-indiatoday .liveblog-Lhs .livebolg-videos h1{font-size: 25px;text-align: left;font-weight: 400; padding:10px 0;}
+.liveBlog-indiatoday .liveblog-Lhs .livebolg-videos p.short-discription{ border-bottom:0px; }
+
 /* Karnatka Election chunks */
-.election_who_said_what #Slider.flexslider{ background:#ffff01;padding:35px 20px; text-align: center; border-radius: 5px; border:1px solid #d4d4d4;}
-.election_who_said_what #Slider .flex-direction-nav .flex-next{ right:0;display: block; height:24px; width:28px;background:#a00606;opacity:1;line-height: 24px;text-align: center;
+#block-itg-widget-election-who-said-what #Slider.flexslider{ background:#ffff01;padding:35px 20px; text-align: center; border-radius: 5px; border:1px solid #d4d4d4;}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav .flex-next{ right:0;display: block; height:24px; width:28px;background:#a00606;opacity:1;line-height: 24px;text-align: center;
 border-radius: 0px 5px 5px 0px;}
-.election_who_said_what #Slider li:hover .flex-direction-nav .flex-next{display: block}
-.election_who_said_what #Slider .flex-direction-nav .flex-prev{left: inherit; right: 30px; display: block; height:24px; width:28px; background:#a00606;opacity:1;line-height: 24px; border-radius: 5px 0px 
+#block-itg-widget-election-who-said-what #Slider li:hover .flex-direction-nav .flex-next{display: block}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav .flex-prev{left: inherit; right: 30px; display: block; height:24px; width:28px; background:#a00606;opacity:1;line-height: 24px; border-radius: 5px 0px 
 0px 5px;}
-.election_who_said_what #Slider li:hover .flex-direction-nav .flex-prev{display: block}
-.election_who_said_what #Slider .flex-direction-nav .flex-next:before,#Slider .flex-direction-nav .flex-prev:before{color:#fff; font-size:16px;}
-.election_who_said_what #Slider .flex-direction-nav a{ top:-13px;}
-.election_who_said_what #Slider.flexslider .slides img{ width: auto;text-align: center; display: inline-block; border:5px solid #c49f08;border-radius:100%}
-.election_who_said_what #Slider.flexslider .slides p{font-size: 20px; line-height:28px; margin:10px 0;}
-.election_who_said_what #Slider.flexslider .slides span{color:#a48300;font-size:14px; text-transform: uppercase;margin-bottom:40px; display: block}
-.election_who_said_what #Slider .flex-control-nav{ display: none;}
+#block-itg-widget-election-who-said-what #Slider li:hover .flex-direction-nav .flex-prev{display: block}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav .flex-next:before,#Slider .flex-direction-nav .flex-prev:before{color:#fff; font-size:16px;}
+#block-itg-widget-election-who-said-what #Slider .flex-direction-nav a{ top:-13px;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides img{ width: auto;text-align: center; display: inline-block; border:5px solid #c49f08;border-radius:100%}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides p{font-size: 20px; line-height:28px; margin:10px 0;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides span{color:#a48300;font-size:14px; text-transform: uppercase;margin-bottom:40px; display: block}
+#block-itg-widget-election-who-said-what #Slider .flex-control-nav{ display: none;}
 @media (max-width: 991px) and (min-width: 768px){
-.election_who_said_what #Slider.flexslider{padding: 10px 5px;}
-.election_who_said_what #Slider.flexslider .slides span{ margin-bottom:0px;}
-.election_who_said_what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
+#block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
+#block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
 }
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
 #block-itg-widget-election-know-your-party .partylist-body{height:342px; overflow-y:auto;}
@@ -1051,5 +1069,11 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-know-your-party .karnataka-partylist ul li span.party-details{display: block; float: left; width: calc(100% - 95px); padding-top: 8px;}
 #block-itg-widget-election-know-your-party .karnataka-partylist ul li span.party-details h6{ margin:0; padding-bottom:5px; font-weight:600; font-size:14px; text-transform: uppercase; line-height: 16px;}
 #block-itg-widget-election-know-your-party .karnataka-partylist ul li span.party-details p{ font-size:13px; color:#969696; padding:0px; line-height:15px; margin:0px;}
-
-
+#block-itg-widget-election-key-issue .keyImgSec{ position:relative;margin-bottom: 12px;}
+#block-itg-widget-election-key-issue .keyImgSec img{ width:100%}
+#block-itg-widget-election-key-issue .imgBg{ position: absolute;bottom:0; left:0; height:25px; width:100%; color:#fff; background:rgba(0,0,0,0.6); text-align: center;font-size:14px; line-height:25px;text-transform: uppercase}
+#block-itg-widget-election-key-issue .KeyIssueOuterBorder{ border:1px solid #d4d4d4; position: relative; padding:10px 10px 5px; border-radius:5px;}
+#block-itg-widget-election-key-issue .KeyIssueOuterBorder:before{content:""; height:6px ; width:100%; left:0; position: absolute; bottom:0px; background:#ffff00; border-radius:0px 0px 5px 5px;}
+@media (max-width: 991px) and (min-width: 768px){
+     #block-itg-widget-election-key-issue .imgBg{font-size:14px;line-height:25px;}
+}

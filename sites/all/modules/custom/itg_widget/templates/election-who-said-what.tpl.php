@@ -15,12 +15,4 @@
 </ul>
 </div>
 </div>
-<script type="text/javascript">
-    jQuery('.flexslider#Slider').flexslider({
-        animation: "slide",
-        controlNav:false,
-        slideshow:false,
-        //animationLoop:false
-      });
-</script>
 <?php endif;?>  
