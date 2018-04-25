@@ -27,6 +27,7 @@
 <div id="ContentDetails">
     <?php print drupal_render($form['field_breaking_content_details']); ?>
     <?php print drupal_render($form['field_blog_commentary']); ?>
+    <?php print drupal_render($form['field_blog_city']); ?>
 </div>
 
 <div id="Shortdescriptions">

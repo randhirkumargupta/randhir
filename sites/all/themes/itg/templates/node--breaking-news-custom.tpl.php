@@ -67,26 +67,29 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         $share_title = $node->title;
         ?>
         <?php print ($title) ?>
-        <div class="locationdate">New Delhi | April 24, 2018</div>
+        <?php $blog_city = ($node->field_blog_city[LANGUAGE_NONE][0]['value']) ? $node->field_blog_city[LANGUAGE_NONE][0]['value'] . " | " : ''; ?>
+        <div class="locationdate"><?php print $blog_city .  date("F d, Y", strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?><!-- April 24, 2018 --></div>
         <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
   </div>
 
 
   <div class="col-md-4 col-xs-12 liveblog-Lhs mhide">
+   <?php if (empty($node->field_blog_commentary[LANGUAGE_NONE])) { ?>  
    <h4>Most Recent</h4>
   <?php 
    $left_side = get_custom_left_side_data($node->nid);
    foreach ($left_side as $lvalue) {
      print "<div class='lhs-detailList'><div class='leftblog-publish-time'>".$lvalue->blog_publish_time." IST</div>";
-     print "<div class='leftblog-title'><a href='#1721'>".$lvalue->blog_title."</a></div></div>";
-   }
-  
+     print "<div class='leftblog-title'><a href='#".$lvalue->bid."'>".$lvalue->blog_title."</a></div></div>";
+    }
+   } else {
   ?>  
   <div class="livebolg-videos">
-      <div class="livevideo"><iframe width="100%" height="300" src="https://livestream.com/accounts/11965022/events/4086327/player?width=640&amp;height=360&amp;enableInfoAndActivity=false&amp;autoPlay=true&amp;mute=false" frameborder="0" allowfullscreen="" scrolling="no" class="media__video--responsive"></iframe></div>
-      <h1><span>Live Blog:</span> Bharat Bandh top updates - Vehicles burnt, people killed, public property destroyed</h1>
-      <p class="short-discription">Anti-reservation groups have called for a Bharat Bandh demanding a roll back of quota system. While there has been no formal Bharat Bandh call, messages calling for a nation-wide shutdown today have gone viral on social media platforms, including WhatsApp. The Union Ministry of Home Affairs, in response to these calls, has asked states to be on alert and ensure security.</p>
-  </div>        
+      <div class="livevideo"><?php print trim($node->field_blog_commentary[LANGUAGE_NONE][0]['value']); ?></div>
+     
+  </div> 
+  <?php } ?>
+
   </div>
   <div class="col-md-8 col-xs-12 liveblog-Rhs">
     <div class="new-live-block">
@@ -161,7 +164,6 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         <div class="timeline">
           <?php
             if (!empty($node->field_live_blog_timeline_active[LANGUAGE_NONE]['0']['value'])) { ?>
-                <h3><?php print t('Timeline'); ?></h3>
                 <input id="slider-range" class="irs-hidden-input" readonly="">
             <?php } ?>
     <?php
@@ -174,7 +176,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
         $user = !empty($breaking_item->update_uid) ? user_load($breaking_item->update_uid)->name : user_load($breaking_item->blog_uid)->name;
 
         // $user
-        $breaking_output .= '<div class="breaking-section"><a name="1721"></a>';
+        $breaking_output .= '<div class="breaking-section"><a name="'.$breaking_item->bid.'"></a>';
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_item->blog_description);
         $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
         //$pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
