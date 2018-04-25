@@ -1091,4 +1091,6 @@ border-radius: 0px 5px 5px 0px;}
 #fhs-karnataka  .leadparty-table td{ text-align: center; font-size:13px; font-weight: 600; }
 #fhs-karnataka  .leadparty-table td.partyname{ text-align: left; }
 #fhs-karnataka  .leadparty-table td.partyname span.partybrand{width:10px; height: 10px; display: inline-block; margin-right:5px;}
+#home-livetv-election iframe{ height:320px; width: 100% }
+.home-election h4.heading{ display: none; }
 
