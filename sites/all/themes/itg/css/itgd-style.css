@@ -1023,7 +1023,7 @@ background:none;
 .liveBlog-indiatoday .liveblog-Lhs .leftblog-title{ font-size:14px; color:#000; line-height:16px; font-family: "OpenSans-Semibold"; border-left:1px solid #e0e0e0; padding-left:10px; line-height:20px; }
 .liveBlog-indiatoday .liveblog-Lhs .lhs-detailList{ padding:10px 0; border-bottom:1px dotted #e0e0e0; }
 
-.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section{ padding:10px 0; border-top:1px dotted #a8a8a8; }
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section{ padding:10px 0; border-top:1px dotted #a8a8a8; overflow:hidden; }
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-title{ font-size:28px; font-family:"Merriweather-Semibold"; line-height:30px; padding-bottom:10px;}
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor{padding-bottom:10px;}
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor .breaking-date{color: #9e2729;font-size: 13px;font-family: "OpenSans-Semibold"; width:auto; display:inline-block; padding-right:5px;}
