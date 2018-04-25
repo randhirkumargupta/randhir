@@ -445,9 +445,9 @@ function itg_fia_config_form($form, &$form_state) {
  * ITG FIA related node  $relatednode .="";
  */
 function itg_fia_related_node($nid = 0) {
-    $relatednode = "";   
-    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';
-        $nid = 1145469;
+    $relatednode = "";  
+    //$nid = 1145469;
+    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';        
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
@@ -461,9 +461,11 @@ function itg_fia_related_node($nid = 0) {
 
         $nid_list = explode(",", $node_str);
         //p($nid_list);
+        
         $flag_fia_cont = 0;
-        if(count($nid_list) > 1){
-            //echo "andy"; die();
+        
+        if(count($nid_list) > 0 && $nid_list[0] > 0){
+            
             //related node
             foreach ($nid_list as $key => $value) {                
                 $flag_fia = 0;
@@ -476,23 +478,19 @@ function itg_fia_related_node($nid = 0) {
             }
         }
         elseif($flag_fia_cont == 0){
-            //echo "kumar"; die();
+            
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
-            //p($prime_cat);
-            /*$prime_section_ar = taxonomy_get_parents($prime_cat->tid);
-            foreach ($prime_section_ar as $key => $value) {
-                $prime_section = $value->tid;
-            }*/
+            
             $prime_section = gettopparentstid($prime_cat->tid);
-            //echo $prime_section; die();
+            
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
             $related_content_primary_cat = "";
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
             $relatednode .= $related_content_primary_cat;
         }
-        //echo $flag_fia_cont; echo "<br>"; echo $relatednode; die();
+        
       
     $relatednode .='</ul>';
     //no any node found
@@ -512,21 +510,22 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
     if ($prime_section) {
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
-        //$query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
-        $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
+        $query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
+        //$query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
         $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
         $query->fields('n', array('nid'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.widget', $order, '>');
+        $query->condition('iwo.widget', $order, '<');
         $query->condition('iwo.widget', 'section_wise_widget');
         $query->condition('iwo.cat_id', $prime_section);        
-        //$query->condition('pc.field_story_category_tid', $prime_section, '=');
-        $query->condition('ti.tid', $prime_section, '=');
+        $query->condition('pc.field_story_category_tid', $prime_section, '=');
+        //$query->condition('ti.tid', $prime_section, '=');
+        $query->orderBy('n.created', 'DESC');
         $query->groupBy('n.nid');
         $query->range(0, 3);
-        //print strtr((string) $query, $query->arguments());die();
+        
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);        
         foreach ($result as $reskey => $resvalue) {            
             $firebase_url = get_node_firebase_weburl($resvalue['nid']);
