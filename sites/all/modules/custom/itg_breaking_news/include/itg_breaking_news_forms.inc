@@ -54,12 +54,12 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
       "#markup" => "<div class='inline-error-messages'></div>",
       );
    
-
    $form['breaking']['blog_highlight_status'] = array(
-    '#type' => 'radios',
+    '#type' => 'checkbox',
     '#title' => t('Asign to left side'),
-    '#options' => array(1 => "Active", 0 => "Inactive"),
-    '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : 1,
+    '#default_value' => isset($results->blog_highlight_status) ? $results->blog_highlight_status : '1',
+    '#prefix' => '<div id="blog_highlight_replace_wrapper">',
+    '#suffix' => '</div>',
   );
    
    $form['breaking']['blog_title'] = array(
@@ -67,7 +67,7 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#prefix' => '<div id="blog_title_replace_wrapper">',
     '#title' => t('Title'),
     '#default_value' => isset($results->blog_title) ? $results->blog_title : '',
-     '#suffix' => '</div>',
+    '#suffix' => '</div>',
   );
    
   $form['breaking']['blog_description'] = array(
