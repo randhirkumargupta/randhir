@@ -1,4 +1,5 @@
 <?php $nid = (arg(2)) ? arg(2) : ''; ?>
+<div class="blog-referesh"><a class="referesh-custom-data" data="<?php print $nid; ?>" href="javascript:void(0);">Click to Refresh</a></div>
 <div class="blog-loader-container">
 <div id="blog-loader-data" style="display: none"><img class="blog-loader" src="<?php echo base_path(); ?>sites/all/themes/itg/images/tab-loading.gif" alt="Loading..." /></div>
 <div id="live_data"><?php print itg_live_blog_list($nid); ?></div></div>
@@ -12,7 +13,29 @@
 <script>  
 
 jQuery(document).ready(function($){
-  
+    
+    jQuery( ".referesh-custom-data" ).click( function() {
+      //var current_object = jQuery( this );
+      console.log( 'refresh data' );
+      var entityId = jQuery( this ).attr( 'data' );
+      var row = 0;
+      $.ajax({
+          url: '/itg-live-blog-refresh',
+          type: 'post',
+          data: {row:row,entityId:entityId},
+          success: function(response){
+              $('#live_data').html("");
+              console.log(response);
+              setTimeout(function() {
+                  $('#live_data').html(response).show().fadeIn("slow");                      
+              }, 2000);
+
+          }
+      });
+    });
+    
+     
+      
     $(document).on('click', '.blog_highlight_checkbox', function() {
         if ($(this).attr("checked")) 
         {

@@ -16,29 +16,9 @@
         jQuery('.custom_blog_action').val('update');
         setTimeout(function() {
             jQuery('.form-submit').mousedown();
-        }, 5000);
-                     
-        
+        }, 3000);    
       });
-      
-      setTimeout(function() {
-            var entityId = Number($('#entity-id').val());
-            console.log("data autoreload " + entityId);
-           // fetch_data('0',entityId);
-        }, 5000);
-       function fetch_data(row, entityId) {
-          $.ajax({
-              url: '/itg-live-blog-row',
-              type: 'post',
-              data: {row:row,entityId:entityId},
-              success: function(response){
-                  setTimeout(function() {
-                      $('#custom-live-blog tr:first').after(response).show().fadeIn("slow");                      
-                  }, 2000);
-
-              }
-          });
-      }
+        
     }
   };    
 })(jQuery);

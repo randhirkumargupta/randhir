@@ -40,8 +40,8 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
    
    $form['breaking']['blog_highlight_status'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Asign to left side'),
-    '#default_value' => '1',
+    '#title' => t('Mark as most recent'),
+    '#default_value' => '0',
     '#prefix' => '<div id="blog_highlight_replace_wrapper">',
     '#suffix' => '</div>',
   );
@@ -142,4 +142,9 @@ function live_bog_delete() {
 function live_bog_cron()
 {
    return 'test';    
+}
+
+function itg_live_blog_refresh() {
+  $blog_entity_id = '1144788';
+  print $blog_list = itg_live_blog_list($blog_entity_id); 
 }
