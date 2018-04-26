@@ -823,6 +823,9 @@ function itg_widget_theme() {
         'election_key_issues' => array(
             'template' => 'templates/election-key-issues',
         ),
+        'election_most_popular' => array(
+            'template' => 'templates/election-most-popular',
+        ),
 
     );
     return $themes;
