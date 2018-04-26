@@ -978,7 +978,7 @@ function itg_widget_block_view($delta = '') {
             if (drupal_is_front_page()) {
               $cat_id = get_itg_variable('home_page_election_tid');              
             }            
-            $data = get_top_story_from_category($cat_id, 4);
+            $data = get_top_story_from_category($cat_id, 4, 0);
             $block['content'] = theme("election_top_stories", array("data" => $data));
           break;
         case 'election_who_said_what':
@@ -1048,6 +1048,7 @@ function itg_widget_block_view($delta = '') {
           $block['content'] = theme("election_key_issues", array("data" => $data));
           break;
         case 'election_most_popular':
+          global $theme;
           if (isset($_GET['category']) && !empty($_GET['category'])) {
             $selction_name = 'category';
           }
@@ -1060,7 +1061,6 @@ function itg_widget_block_view($delta = '') {
           if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
             $cat_id = arg(2);              
           }            
-          
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_key_issues", array("data" => $data));
           break;

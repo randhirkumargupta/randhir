@@ -3493,7 +3493,7 @@ function is_programme($tid, $flag_occupation, $page_argument) {
 }
 
 
-function get_top_story_from_category($cat_id, $limit = 4){
+function get_top_story_from_category($cat_id, $limit = 4, $offset = 0){
   $query = db_select('node', 'n'); 
   $query->leftJoin('itg_widget_order', 'wo', 'wo.nid=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
@@ -3505,7 +3505,7 @@ function get_top_story_from_category($cat_id, $limit = 4){
           ->groupBy('n.nid')
           ->orderBy('wo.weight', 'DESC')
           ->orderBy('n.created', 'DESC')
-          ->range(0, $limit)
+          ->range($offset, $limit)
           ->fields('n', array('nid', 'title', 'type'));
   $query->fields('fm', array('uri'));
   $result = $query->execute()->fetchAll();
@@ -3558,5 +3558,14 @@ function get_html_widget_data_by_layout($section_name, $template_name, $block_na
 }
 
 function get_election_most_popular($cat_id, $limit = 12){
-  
+  $offset = 20;
+  $query = db_select('field_data_field_is_election_live', 'el');
+  $query->condition('el.entity_id', $cat_id, '=');
+  $query->fields('el', array('field_is_election_live_value'));
+  $data = $query->execute()->fetchField();
+  if(!empty($data)){
+    $offset = 4;
+  }
+  $node_data = get_top_story_from_category($cat_id, $limit, $offset);
+  return $node_data;
 }
