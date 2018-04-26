@@ -24,12 +24,8 @@ jQuery(document).ready(function($){
           type: 'post',
           data: {row:row,entityId:entityId},
           success: function(response){
-              $('#live_data').html("");
-              console.log(response);
-              setTimeout(function() {
-                  $('#live_data').html(response).show().fadeIn("slow");                      
-              }, 2000);
-
+             // $('#live_data').html(""); 
+              $('#live_data').html(response);                      
           }
       });
     });
