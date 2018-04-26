@@ -93,18 +93,10 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
   </div>
   <div class="col-md-8 col-xs-12 liveblog-Rhs">
     <div class="new-live-block">
-          <?php if (isset($embed_image) && !empty($embed_image)) { ?>
-         <div class="stryimg" id="liveblog" >
-                 <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
-         </div>
-        <?php } ?>     
-        
-
+         
         <?php
-        if ($type == 'Live Blog') {
-          $useragent = $_SERVER['HTTP_USER_AGENT'];
-          if (function_exists(itg_live_tv_company)) {
-            if (!empty($node->field_story_expires['und']['0']['value']) && $node->field_story_expires['und']['0']['value'] == 'Yes') {
+        if (!empty($node->field_story_expires['und']['0']['value']) && $node->field_story_expires['und']['0']['value'] == 'Yes') {
+            $useragent = $_SERVER['HTTP_USER_AGENT'];
               ?>
               <div class="iframe-video">
               <?php
@@ -137,12 +129,14 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
                   }
                   ?>
               </div>
-                  <?php
-                }
-              }
-              ?>
+             
 
-      <?php } ?>
+      <?php } elseif (isset($embed_image) && !empty($embed_image)) { ?>
+         <div class="stryimg" id="liveblog" >
+                 <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
+         </div>
+        <?php } ?>    
+
         <div class="timeline">
           <?php
             if (!empty($node->field_live_blog_timeline_active[LANGUAGE_NONE]['0']['value'])) { ?>
