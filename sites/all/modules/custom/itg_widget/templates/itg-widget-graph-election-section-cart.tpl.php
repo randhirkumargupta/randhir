@@ -178,8 +178,6 @@
   <?php } ?>
   <?php endforeach; ?>
 <!-- End High Cart graph -->
-
-<?php endif; ?>
 <div class="col-md-4 col-sm-4 mt-50">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
@@ -193,3 +191,5 @@
 </div>
 </div>
 <span class="fullcoverage-electionlink"><a href="#">Karnataka Election Full Coverage</a></span> 
+<?php endif; ?>
+

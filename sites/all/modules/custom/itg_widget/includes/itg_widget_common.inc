@@ -3495,15 +3495,16 @@ function is_programme($tid, $flag_occupation, $page_argument) {
 
 function get_top_story_from_category($cat_id, $limit = 4){
   $query = db_select('node', 'n'); 
-  $query->join('itg_widget_order', 'wo', 'wo.nid=n.nid');
+  $query->leftJoin('itg_widget_order', 'wo', 'wo.nid=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
   $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');    
   $query->condition('wo.widget', 'section_wise_widget')
           ->condition('n.status', 1)
           ->condition('wo.cat_id', $cat_id)
+          ->condition('wo.content_type', 'All', 'LIKE')
           ->groupBy('n.nid')
           ->orderBy('wo.weight', 'DESC')
-          ->orderBy('n.nid', 'DESC')
+          ->orderBy('n.created', 'DESC')
           ->range(0, $limit)
           ->fields('n', array('nid', 'title', 'type'));
   $query->fields('fm', array('uri'));
@@ -3554,4 +3555,8 @@ function get_html_widget_data_by_layout($section_name, $template_name, $block_na
     return $result1[0]->body_value;
   }
   return '';
+}
+
+function get_election_most_popular($cat_id, $limit = 12){
+  
 }
