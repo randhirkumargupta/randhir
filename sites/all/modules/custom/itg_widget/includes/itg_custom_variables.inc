@@ -128,18 +128,18 @@ function itg_mobile_app_configure(){
   if (!in_array("Editor", $user->roles)) {
   $form['cube_js_mini_url'] = array(
     '#type' => 'textfield',
-    '#title' => t('Mobile App Cube JS Mini url'),
+    '#title' => t('Mini url'),
     '#default_value' => get_itg_variable('cube_js_mini_url'),
   );
   $form['cube_js_full_url'] = array(
     '#type' => 'textfield',
-    '#title' => t('Mobile App Cube JS Full url'),
+    '#title' => t('Full url'),
     '#default_value' => get_itg_variable('cube_js_full_url'),
   );
   }
   $form['cube_js_status'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable Mobile App cube Js Widget'),
+    '#title' => t('Enable'),
     '#required' => FALSE,
     '#default_value' => get_itg_variable('cube_js_status'),
   );
