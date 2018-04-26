@@ -11,7 +11,7 @@
         <div class="col-md-3 col-sm-3 col-xs-6">
             <a class="<?php echo $video_class; ?>" href="<?php echo FRONT_URL . '/' . drupal_get_path_alias("node/{$row['nid']}") ?>">
                 <?php
-                if ($row['field_story_small_image'] != "") {
+                if ($row['uri'] != "") {
                   ?>
                     <img src="<?php print image_style_url("video_landing_page_170_x_127", $row['uri']); ?>" alt="<?php echo $row['title'];?>" title="<?php echo $row['title'];?>" />
                  <?php
