@@ -362,6 +362,7 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
  * @param array $form_state
  */
 function itg_breaking_news_form_custom_validate($form, &$form_state) {
+   /* 
    if(empty($form_state['values']['field_multi_user_allows'][LANGUAGE_NONE][0]['value'])){
       foreach ($form['field_breaking_content_details'][LANGUAGE_NONE] as $key => $fieldcollection) {
         if (is_numeric($key)) {
@@ -370,7 +371,7 @@ function itg_breaking_news_form_custom_validate($form, &$form_state) {
      }
      form_set_error('field_breaking_tile', t("Title Field is required!"));
     }
-    
+  */  
     
   if ($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog' && empty($form_state['values']['field_primary_category']['und'][0]['value'])) {
     form_set_error('field_primary_category', t("Primary category Field is required!"));
