@@ -2382,6 +2382,89 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        /*for dev service*/
+         // horizontal_menu_dev custom resource declaration.....
+        'horizontal_menu_dev' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves horizontal_menu schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_horizontal_menu_dev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // hamburger_menu_dev custom resource declaration.....
+        'hamburger_menu_dev' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves hamburger_menu schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_hamburger_menu_dev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // homePagedev custom resource declaration.....
+        'home_dev' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves storydetail schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_homePageDev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -6292,4 +6375,78 @@ function list_itg_rapid_api_anchor_list_default() {
         $output_array['data'] = $data;
     }
     return $output_array;
+}
+
+// for dev service 
+/**
+ * Call back function for horizontal_menu API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_horizontal_menu_dev($token) {
+    $redis_key = "itg_rapid_api_horizontal_menu_dev_json";
+    //$result_get = getRedis($redis_key);
+    //    if ($result_get['key_value'] != "") {
+    //        $jsondata = $result_get['key_value'];
+    //    } else {
+    //variable_get('horizontal_menu_json');
+    $jsondata = horizontal_menu_middleware_data();
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    ///$result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+    return $return_obj;
+}
+/**
+ * Call back function for hamburger_menu API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_hamburger_menu_dev($token) {
+    $redis_key = "itg_rapid_api_hamburger_menu_dev_json";
+    $result_get = getRedis($redis_key);
+
+    //    if ($result_get['key_value'] != "") {
+    //        $jsondata = $result_get['key_value'];
+    //    } else {
+    //variable_get('hamburger_menu_json');
+    $jsondata = hamburger_menu_middleware_data();
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+/**
+ * Call back function for homePagedev API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_homePageDev($token) {
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_homePage_dev.inc");
+
+    $redis_key = "itg_rapid_api_homePageDev_json";
+    //$result_get = getRedis($redis_key);
+    //    if ($result_get['key_value'] != "") {
+    //        $jsondata = $result_get['key_value'];
+    //    } else {
+    // call function from return data..
+    $jsondata = homePageJson_dev();
+    $jsondata = json_encode($jsondata);
+    $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
+
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
 }
