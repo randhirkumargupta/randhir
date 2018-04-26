@@ -41,6 +41,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'page--electionconstituency',
   );
+  $items['itg_election_constituency_map'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'page--electionconstituencymap',
+  );
   return $items;
 }
 
@@ -222,7 +226,7 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
   
-  if($arg[0] == 'elections' && !empty($arg[1]) && !empty($arg[2])){
+  if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
 		$variables['theme_hook_suggestions'][] = 'page__singlecolumn';
 	}
   // Call Live Blog condition wise TPL

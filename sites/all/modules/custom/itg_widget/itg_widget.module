@@ -277,7 +277,7 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
     );
-    $items['elections/%/%'] = array(
+    $items['elections/%/constituency/%'] = array(
       'title' => t('Constituency'),
       'page callback' => 'itg_election_constituency',
       'access callback' => TRUE,
@@ -289,6 +289,11 @@ function itg_widget_menu() {
       'access arguments' => array('administer itg_term settings'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
+    );
+    $items['elections/%/constituency-map'] = array(
+      'title' => t('Constituency Map'),
+      'page callback' => 'itg_election_constituency_map',
+      'access callback' => TRUE,
     );
 
   return $items;
@@ -797,7 +802,6 @@ function itg_widget_block_view($delta = '') {
 						}
 						if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
 							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
-							drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
 						}
             foreach ($data as $index => $row) {
                 $jsondata = file_get_contents($row->field_election_constituency_tall_value);
@@ -810,23 +814,25 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("graph_election", array("data" => $data));
             break;
         case 'home_graph_election':
-            $data = itg_widget_get_graph_data_for_home();
-            if($data[0]->field_graph_type_value == 'Graph'){
-							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
-						}
-						if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
-							drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
-							drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
-						}
-            foreach ($data as $index => $row) {
-                $jsondata = file_get_contents($row->field_election_constituency_tall_value);
-                $settings['index'] = $index;
-                $settings['json_data'] = $jsondata;
-                drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
-                drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+            if(!empty(get_itg_variable('itg_election_home_chunk'))){
+              $data = itg_widget_get_graph_data_for_home();
+              if($data[0]->field_graph_type_value == 'Graph'){
+                drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+              }
+              if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
+                drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+              }
+              foreach ($data as $index => $row) {
+                  $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+                  $settings['index'] = $index;
+                  $settings['json_data'] = $jsondata;
+                  drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+                  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+              }
+              $block['content'] = theme("graph_election_section_cart", array("data" => $data));
+            }else{
+              $block['content'] = '';
             }
-            $block['content'] = theme("graph_election_section_cart", array("data" => $data));
-
             break;
         case 'movies_reviews':
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_special_auto_review');
@@ -1868,6 +1874,24 @@ function itg_election_constituency(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
-  $_GET['section_name'] = $category;
   return theme('itg_election_constituency', array('data' => $data));
+}
+
+function itg_election_constituency_map(){
+  $arg = arg();
+  $section_alias = 'assembly-elections-2017';//$arg[0];
+  $category_alias = $arg[1];
+  $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
+  
+  if(empty($path_dest)){
+    drupal_not_found();
+  }
+  $tax_data = explode('/', $path_dest);  
+  if($tax_data[0] != 'taxonomy' || empty($tax_data[2]) || !is_numeric($tax_data[2])){
+    drupal_not_found();
+  }
+  drupal_add_library('flexslider', 'flexslider');
+  $category = $tax_data[2];
+  $_GET['section'] = $category;
+  return theme('itg_election_constituency_map', array('data' => $data));
 }
