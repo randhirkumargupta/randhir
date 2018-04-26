@@ -9,11 +9,11 @@
         var current_object = jQuery( this );
         
         console.log( 'Testing some data' );
+        jQuery('#blog-loader-data').show();
         var base_url = settings.itg_breaking_new_form.settings.base_url;
         var slug_id = jQuery( this ).attr( 'data' );
         jQuery('.custom_blog_bid').val(slug_id);
         jQuery('.custom_blog_action').val('update');
-        // jQuery("#custom-live-blog #"+id).animate({ backgroundColor: "#d9d9d9" }, "slow");
         setTimeout(function() {
             jQuery('.form-submit').mousedown();
         }, 5000);
@@ -22,16 +22,15 @@
       });
       
       setTimeout(function() {
-            console.log("itg-live-blog-row");
+            var entityId = Number($('#entity-id').val());
+            console.log("data autoreload " + entityId);
+           // fetch_data('0',entityId);
         }, 5000);
-       function fetch_data() {
+       function fetch_data(row, entityId) {
           $.ajax({
               url: '/itg-live-blog-row',
               type: 'post',
               data: {row:row,entityId:entityId},
-              beforeSend:function(){
-                  $(".load-more").text("Loading...");
-              },
               success: function(response){
                   setTimeout(function() {
                       $('#custom-live-blog tr:first').after(response).show().fadeIn("slow");                      
