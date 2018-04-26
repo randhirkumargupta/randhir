@@ -37,6 +37,7 @@ function itg_pti_content() {
         $xml_filename = '';
         $file_path = '';
         $pti_xml = '';
+        $publish_flag = FALSE;
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
@@ -75,7 +76,15 @@ function itg_pti_content() {
                   }
                   */
                   $term_id = variable_get('pti_section_id');
-                  $title = itg_api_check_title($headline);
+                  // get pubdate
+                  $publish_date_raw = $pti_value->pubdate;
+                  if(!empty($publish_date_raw)) {
+                    $publish_date_timestamp = strtotime($publish_date_raw);
+                  } else {
+                    $publish_date_timestamp = time();
+                  }
+                  $publish_date = date('Y-m-d', $publish_date_timestamp);
+                  $title = itg_api_check_title($headline, $term_id, $publish_date);
                   if (!$title) {
                     /*$alchemyapi[$pti] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
                     $response[$pti] = $alchemyapi[$pti]->keywords('text', $headline, array('sentiment' => 1));
@@ -121,16 +130,7 @@ function itg_pti_content() {
                     $final_kicker = substr($final_kicker, 0, 250);
                     $final_kicker = $final_kicker . '..';
                     $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));
-
-                    // get pubdate
-                    $publish_date_raw = $pti_value->pubdate;
-                    if(!empty($publish_date_raw)) {
-                      $publish_date_timestamp = strtotime($publish_date_raw);
-                    } else {
-                      $publish_date_timestamp = time();
-                    }
-                    $publish_date = date('Y-m-d', $publish_date_timestamp);
-
+                    
                     // create expiry date based on publish date 
                     $exp_date = strtotime('+10 years', strtotime($publish_date));
                     $exp_date = date('Y-m-d', $exp_date);
@@ -225,6 +225,10 @@ function itg_pti_content() {
                       $node->log = 'State Changed to Review';
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
                     }
+                    else if ($headline == '' || empty($headline) || $headline == '.') {
+                      $node->log = 'State Changed to Review';
+                      $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                    }
                     else {
                       if (($title_length < 15) || ($headline_flag)) {
                         $node->log = 'State Changed to Review';
@@ -233,7 +237,8 @@ function itg_pti_content() {
                       else {
                         $node->log = 'State Changed to published';
                         //$node->workbench_moderation_state_new = workbench_moderation_state_published();
-                        workbench_moderation_moderate($node, 'published');
+                        //workbench_moderation_moderate($node, 'published');
+                        $publish_flag = TRUE;
                       }
                     }
                     //$node = node_submit($node); // Prepare node for saving
@@ -253,7 +258,19 @@ function itg_pti_content() {
                         ->condition('nid', $node->nid, '=')
                         ->condition('vid', $node->vid, '=')      
                         ->execute();
-                  /*  $newpath = itg_api_path_insert($node);
+                                                
+                    if($publish_flag) {
+                      db_update('workbench_moderation_node_history') // Table name no longer needs {}
+                          ->fields(array(
+                            'state' => workbench_moderation_state_published(),
+                            'published' => 1,
+                            'uid' => ADMINISTRATOR,
+                          ))
+                          ->condition('nid', $node->nid, '=')
+                          ->condition('is_current', 1, '=')
+                          ->execute();
+                    }
+                    /*  $newpath = itg_api_path_insert($node);
                     $path = array(
                       'source' => "node/{$node->nid}",
                       'alias' => $newpath, // Any alias that you want to set.
