@@ -1078,6 +1078,9 @@ border-radius: 0px 5px 5px 0px;}
      #block-itg-widget-election-key-issue .imgBg{font-size:14px;line-height:25px;}
 }
 /* Election Home */
+#block-itg-widget-home-graph-election h1#display_tit{font-size: 35px; line-height:42px;}
+#block-itg-widget-home-graph-election h1#display_tit .social-share{cursor: pointer; display: inline-block;position: relative;top: 5px; font-size:18px;}
+#block-itg-widget-home-graph-election h1#display_tit .social-share li{ list-style:none; }
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{list-style: none; overflow: hidden;padding: 10px 0;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ width: auto;float: left;margin-right: 10px; }
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .ellection-top-detail{}
@@ -1096,3 +1099,5 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-home-graph-election .electionHome-section{ border: 1px solid #ccc; width: auto; margin: 0 1px;border-bottom: 4px solid #ccc;}
 #block-itg-widget-home-graph-election span.fullcoverage-electionlink{background: #ccc;font-size: 14px;font-weight: 600; padding: 3px 10px; line-height: 26px; border-radius: 0 0 3px 3px;float: right; margin-top: 0; margin-right: 1px; display: inline-block;}
 #block-itg-widget-home-graph-election span.fullcoverage-electionlink a{display: block; font-size: 13px; line-height: 17px;}
+#block-itg-widget-home-graph-election .electionHome-section .widget-wrapper .data-holder{ height:340px; }
+.home-election{ margin-bottom: 20px; }
