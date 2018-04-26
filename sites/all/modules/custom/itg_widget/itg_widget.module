@@ -1920,7 +1920,7 @@ function itg_election_constituency(){
 
 function itg_election_constituency_map(){
   $arg = arg();
-  $section_alias = 'assembly-elections-2017';//$arg[0];
+  $section_alias = $arg[0];
   $category_alias = $arg[1];
   $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
   
