@@ -1123,11 +1123,10 @@ function itg_widget_get_graph_data() {
 }
 
 function itg_widget_get_graph_data_for_home() {
-    $election_tid = get_itg_variable('home_page_election_section_tid');
+    $election_tid = get_itg_variable('home_page_election_tid');
     if (empty($election_tid)){
       return FALSE;
     }
-    global $theme;
     $cat_id = $cat_id_org = $election_tid;
     $is_category = FALSE;
     
