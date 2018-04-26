@@ -1,6 +1,8 @@
 <?php $nid = (arg(2)) ? arg(2) : ''; ?>
-<div id="live_data"><?php print itg_live_blog_list($nid); ?></div>
-<div id="live_blog_form" class="table-bordered">    
+<div class="blog-loader-container">
+<div id="blog-loader-data" style="display: none"><img class="blog-loader" src="<?php echo base_path(); ?>sites/all/themes/itg/images/tab-loading.gif" alt="Loading..." /></div>
+<div id="live_data"><?php print itg_live_blog_list($nid); ?></div></div>
+<div id="live_blog_form" class="table-bordered">   
 <?php
     
     print drupal_render(drupal_get_form('itg_manage_breking_news', $nid, 'insert'));
@@ -175,4 +177,11 @@ span.inline-error-messages.error {
     letter-spacing: 1px;
     font-size: 16px;
 }
+
+div#blog_highlight_replace_wrapper {
+    margin-left: 248px;
+}
+.blog-loader-container{ position: relative;}
+   .blog-loader-container #blog-loader-data{position: absolute; top: 0px; width: 100%; height: 100%;background: rgba(255,255,255,0.5);}
+   .blog-loader-container #blog-loader-data img.blog-loader{ width: 32px;height: 32px; position: absolute; left: 50%; top: 45%;transform: translate(-50%,-50%);}
 </style>    
