@@ -1078,10 +1078,15 @@ border-radius: 0px 5px 5px 0px;}
      #block-itg-widget-election-key-issue .imgBg{font-size:14px;line-height:25px;}
 }
 /* Election Home */
-#block-itg-widget-home-graph-election h1#display_tit{font-size: 35px; line-height:42px;}
-#block-itg-widget-home-graph-election h1#display_tit .social-share{cursor: pointer; display: inline-block;position: relative;top: 5px; font-size:18px;}
-#block-itg-widget-home-graph-election h1#display_tit .social-share li{ list-style:none; }
+#block-itg-widget-home-graph-election h1#display_tit{font-size: 35px; line-height:40px; padding-bottom: 15px;}
+#block-itg-widget-home-graph-election h1#display_tit .social-share{cursor: pointer; display: inline-block;position: relative;top:8px;font-size: 25px;}
+#block-itg-widget-home-graph-election h1#display_tit .social-share li{ list-style:none;float: left; text-align: center;margin: 0 5px; width:30px; height:30px;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{list-style: none; overflow: hidden;padding: 10px 0;}
+#block-itg-widget-home-graph-election h1#display_tit .social-share li a{color:#c2c2c2}
+h1#display_tit .social-share li a.facebook{color:#4251a2}
+h1#display_tit .social-share li a.twitter{color:#53a9f8}
+h1#display_tit .social-share li a.google{color:#bd1916}
+
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ width: auto;float: left;margin-right: 10px; }
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .ellection-top-detail{}
 #block-itg-widget-home-graph-election .graph-design{ position: relative; top:-80px; }
