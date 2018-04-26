@@ -92,7 +92,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $order_by = 'DESC';
     $story_list_array = array();
     $loop_count = 0;
-    $current_issue = itg_msi_get_current_issue();
+    $current_issue = itg_rapid_get_current_issue();
     $show_web_exclusive = variable_get('show_web_exclusive'); // 1
     
     if($current_issue == $issue_date && $show_web_exclusive == 1){
@@ -770,4 +770,53 @@ function itg_rapid_get_web_exclisive_story($issue_date) {
         $listcount++;
     }
     return $story_list_array;
+}
+/**
+ * itg_rapid_get_current_issue
+ * @return type
+ */
+function itg_rapid_get_current_issue() {
+  //$current_issue = itg_msi_get_current_time_issue();
+  $current_issue = itg_rapid_issue_attribute_date();
+  if (!empty($current_issue)) {
+    $output = $current_issue;
+  }
+  else {
+    $year_15_days_ago = date('Y', strtotime('+15 days'));
+    if ($year_15_days_ago > date('Y')) {
+      $last_issue_ass_story_date = itg_rapid_issue_attribute_date();
+      $current_time = date('Y-m-d', strtotime($last_issue_ass_story_date));
+      $condition_type = '=';
+    }
+    else {
+      $current_time = date('Y-m-d', time());
+      $condition_type = '<';
+    }
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
+    $query->fields('ft', array('field_issue_title_value'));
+    $query->condition('ft.field_issue_title_value', $current_time, $condition_type);
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
+    $query->condition('n.type', 'issue', '=');
+    $query->condition('n.status', 1, '=');
+    $query->range(0, 1);
+    $output = $query->execute()->fetchField();
+  }
+  return $output;
+}
+/**
+ * Implements function for itg_rapid_issue_attribute_date
+ * @return string
+ */
+function itg_rapid_issue_attribute_date() {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
+    $query->fields('ft', array('field_issue_title_value'));
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
+    $query->condition('n.type', 'issue', '=');
+    $query->condition('n.status', 1, '=');
+    $query->range(0, 1);
+    $result = strtotime($query->execute()->fetchField());
+    $result = $query->execute()->fetchField();
+    return $result;
 }
