@@ -829,6 +829,7 @@ function itg_widget_block_view($delta = '') {
                   drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
                   drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
               }
+              var_dump($data);die;
               $block['content'] = theme("graph_election_section_cart", array("data" => $data));
             }else{
               $block['content'] = '';
