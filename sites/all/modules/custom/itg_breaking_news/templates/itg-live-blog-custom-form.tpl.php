@@ -15,19 +15,21 @@
 jQuery(document).ready(function($){
     
     jQuery( ".referesh-custom-data" ).click( function() {
-      //var current_object = jQuery( this );
       console.log( 'refresh data' );
       var entityId = jQuery( this ).attr( 'data' );
       var row = 0;
-      $.ajax({
-          url: '/itg-live-blog-refresh',
-          type: 'post',
-          data: {row:row,entityId:entityId},
-          success: function(response){
-             // $('#live_data').html(""); 
-              $('#live_data').html(response);                      
-          }
-      });
+      if(entityId) {
+        $.ajax({
+            url: '/itg-live-blog-refresh',
+            type: 'post',
+            data: {row:row,entityId:entityId},
+            success: function(response){
+              if(response) {
+                $('#live_data').html(response);
+              }                                    
+            }
+        });
+      } 
     });
     
      

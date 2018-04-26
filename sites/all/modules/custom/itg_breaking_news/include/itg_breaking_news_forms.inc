@@ -145,6 +145,8 @@ function live_bog_cron()
 }
 
 function itg_live_blog_refresh() {
-  $blog_entity_id = '1144788';
-  print $blog_list = itg_live_blog_list($blog_entity_id); 
+ $entityId = ($_POST['entityId']) ? $_POST['entityId'] : '';
+ if (!empty($entityId)) {
+    print $blog_list = itg_live_blog_list($blog_entity_id); 
+ } 
 }
