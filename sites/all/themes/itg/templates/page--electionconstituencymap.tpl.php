@@ -60,7 +60,6 @@
                             <div class="droppable itg-layout-605">
                                 <div id="auto-new-block" class="widget-wrapper">
                                     <div class="data-holder" id="itg-block-1">
-                                        <iframe frameborder="0" height="635" name="crbz_scag_frame" scrolling="no" src="https://smedia2.intoday.in/elections/2018/maps/karnataka.html" width="100%"></iframe>
                                         <?php
                                           $map_iframe_html = get_constituency_large_map_html($_GET['section']);
                                           print $map_iframe_html;
