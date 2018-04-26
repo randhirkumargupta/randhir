@@ -303,12 +303,6 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
       )
     );
     
-    
-   
-      
-    // p($form['field_type']);
-    // $form['field_breaking_content_details'][LANGUAGE_NONE][0]['field_breaking_tile']['#required'] = FALSE;
-    
     $form['actions']['submit']['#value'] = 'Publish';
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
