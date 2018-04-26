@@ -485,6 +485,9 @@ function itg_widget_block_info() {
     
     $blocks['election_most_popular'] = array(
       'info' => t('Widget: Election most mopular'),
+    );    
+    $blocks['election_mini_map'] = array(
+      'info' => t('Widget: Election Mini Map'),
     );
     
     return $blocks;
@@ -1063,6 +1066,23 @@ function itg_widget_block_view($delta = '') {
           }            
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_key_issues", array("data" => $data));
+          break;          
+        case 'election_mini_map':
+          global $theme;
+          if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $selction_name = 'category';
+          }
+          else {
+            $selction_name = 'section';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
+            $cat_id = arg(2);              
+          }         
+          $data = get_election_mini_map_content($cat_id);
+          $block['content'] = $data;
           break;
     }       
     return $block;

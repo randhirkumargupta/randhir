@@ -3569,3 +3569,30 @@ function get_election_most_popular($cat_id, $limit = 12){
   $node_data = get_top_story_from_category($cat_id, $limit, $offset);
   return $node_data;
 }
+
+/**
+ * Mini Map Content Block.
+ * @param type $cat_id
+ * @return string
+ */
+function get_election_mini_map_content($cat_id) {
+  $cat_url = drupal_get_path_alias('taxonomy/term/' . $cat_id);
+  $graph_page_url = FRONT_URL . '/' . $cat_url . '/constituency-map';
+  $output = '';
+  $map_query = db_select('node', 'n');
+  $map_query->join('field_data_field_mini_map_json_url', 'fm', 'fm.entity_id = n.nid');
+  $map_query->join('field_data_field_graph_category', 'fg', 'fg.entity_id = n.nid');
+  $map_query->fields('fm', array('field_mini_map_json_url_value'));
+  $map_query->condition('fg.field_graph_category_value', $cat_id);
+  $map_query->condition('fg.bundle', 'election_graph_xml');
+  $map_query->condition('fm.bundle', 'election_graph_xml');
+  $result = $map_query->execute()->fetchField();
+  $json = file_get_contents($result);
+  $obj = json_decode($json);
+  $output .= '<div class="mini-map">';
+  $output .= '<a href="' . $graph_page_url . '" target="_blank">';
+  $output .= '<img class="mini-map-image" src="' . $obj->imagePath . '">';
+  $output .= '</a>';
+  $output .= '</div>';
+  return $output;
+}
