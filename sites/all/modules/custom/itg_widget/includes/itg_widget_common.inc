@@ -823,6 +823,9 @@ function itg_widget_theme() {
         'election_key_issues' => array(
             'template' => 'templates/election-key-issues',
         ),
+        'election_most_popular' => array(
+            'template' => 'templates/election-most-popular',
+        ),
 
     );
     return $themes;
@@ -3493,7 +3496,7 @@ function is_programme($tid, $flag_occupation, $page_argument) {
 }
 
 
-function get_top_story_from_category($cat_id, $limit = 4){
+function get_top_story_from_category($cat_id, $limit = 4, $offset = 0){
   $query = db_select('node', 'n'); 
   $query->leftJoin('itg_widget_order', 'wo', 'wo.nid=n.nid');
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
@@ -3505,7 +3508,7 @@ function get_top_story_from_category($cat_id, $limit = 4){
           ->groupBy('n.nid')
           ->orderBy('wo.weight', 'DESC')
           ->orderBy('n.created', 'DESC')
-          ->range(0, $limit)
+          ->range($offset, $limit)
           ->fields('n', array('nid', 'title', 'type'));
   $query->fields('fm', array('uri'));
   $result = $query->execute()->fetchAll();
@@ -3558,5 +3561,67 @@ function get_html_widget_data_by_layout($section_name, $template_name, $block_na
 }
 
 function get_election_most_popular($cat_id, $limit = 12){
-  
+  $offset = 20;
+  $query = db_select('field_data_field_is_election_live', 'el');
+  $query->condition('el.entity_id', $cat_id, '=');
+  $query->fields('el', array('field_is_election_live_value'));
+  $data = $query->execute()->fetchField();
+  if(!empty($data)){
+    $offset = 4;
+  }
+  $node_data = get_top_story_from_category($cat_id, $limit, $offset);
+  return $node_data;
+}
+
+/**
+ * Mini Map Content Block.
+ * @param type $cat_id
+ * @return string
+ */
+function get_election_mini_map_content($cat_id) {
+  $output = '';
+  if (isset($cat_id)) {
+    $cat_url = drupal_get_path_alias('taxonomy/term/' . $cat_id);
+    $graph_page_url = FRONT_URL . '/' . $cat_url . '/constituency-map';
+    $map_query = db_select('node', 'n');
+    $map_query->join('field_data_field_mini_map_json_url', 'fm', 'fm.entity_id = n.nid');
+    $map_query->join('field_data_field_graph_category', 'fg', 'fg.entity_id = n.nid');
+    $map_query->fields('fm', array('field_mini_map_json_url_value'));
+    $map_query->condition('fg.field_graph_category_value', $cat_id);
+    $map_query->condition('fg.bundle', 'election_graph_xml');
+    $map_query->condition('fm.bundle', 'election_graph_xml');
+    $result = $map_query->execute()->fetchField();
+    $json = file_get_contents($result);
+    $obj = json_decode($json);
+    $output .= '<div class="mini-map">';
+    $output .= '<a href="' . $graph_page_url . '" target="_blank">';
+    $output .= '<img class="mini-map-image" src="' . $obj->imagePath . '">';
+    $output .= '</a>';
+    $output .= '</div>';
+  }
+  return $output;
+}
+
+/**
+ * Get Constituency Large Map Iframe
+ * @param type $category_tid
+ * @return string
+ */
+function get_constituency_large_map_html($category_tid) {
+  $output = '';
+  if (isset($category_tid)) {
+    $output = '';
+    $map_query = db_select('node', 'n');
+    $map_query->join('field_data_field_constituency_large_map', 'fc', 'fc.entity_id = n.nid');
+    $map_query->join('field_data_field_graph_category', 'fg', 'fg.entity_id = n.nid');
+    $map_query->fields('fc', array('field_constituency_large_map_value'));
+    $map_query->condition('fg.field_graph_category_value', $category_tid);
+    $map_query->condition('fg.bundle', 'election_graph_xml');
+    $map_query->condition('fc.bundle', 'election_graph_xml');
+    $result = $map_query->execute()->fetchField();
+    $output .= '<div class="constituency-full-map">';
+    $output .= $result;
+    $output .= '</div>';
+  }
+  return $output;
 }

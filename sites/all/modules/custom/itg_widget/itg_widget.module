@@ -485,6 +485,9 @@ function itg_widget_block_info() {
     
     $blocks['election_most_popular'] = array(
       'info' => t('Widget: Election most mopular'),
+    );    
+    $blocks['election_mini_map'] = array(
+      'info' => t('Widget: Election Mini Map'),
     );
     
     return $blocks;
@@ -978,7 +981,7 @@ function itg_widget_block_view($delta = '') {
             if (drupal_is_front_page()) {
               $cat_id = get_itg_variable('home_page_election_tid');              
             }            
-            $data = get_top_story_from_category($cat_id, 4);
+            $data = get_top_story_from_category($cat_id, 4, 0);
             $block['content'] = theme("election_top_stories", array("data" => $data));
           break;
         case 'election_who_said_what':
@@ -1048,6 +1051,7 @@ function itg_widget_block_view($delta = '') {
           $block['content'] = theme("election_key_issues", array("data" => $data));
           break;
         case 'election_most_popular':
+          global $theme;
           if (isset($_GET['category']) && !empty($_GET['category'])) {
             $selction_name = 'category';
           }
@@ -1060,9 +1064,25 @@ function itg_widget_block_view($delta = '') {
           if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
             $cat_id = arg(2);              
           }            
-          
           $data = get_election_most_popular($cat_id, 12);
-          $block['content'] = theme("election_key_issues", array("data" => $data));
+          $block['content'] = theme("election_most_popular", array("data" => $data));
+          break;          
+        case 'election_mini_map':
+          global $theme;
+          if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $selction_name = 'category';
+          }
+          else {
+            $selction_name = 'section';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
+            $cat_id = arg(2);              
+          }         
+          $data = get_election_mini_map_content($cat_id);
+          $block['content'] = $data;
           break;
     }       
     return $block;
@@ -1900,7 +1920,7 @@ function itg_election_constituency(){
 
 function itg_election_constituency_map(){
   $arg = arg();
-  $section_alias = 'assembly-elections-2017';//$arg[0];
+  $section_alias = $arg[0];
   $category_alias = $arg[1];
   $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
   

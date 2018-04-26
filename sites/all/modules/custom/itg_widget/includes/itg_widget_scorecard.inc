@@ -73,7 +73,7 @@ function itg_manage_score_card() {
   
   $form['score_triangle'] = array(
     '#type' => 'radios',
-    '#title' => t('Score Triangle'),
+    '#title' => t('Cube Status'),
     '#options' => array(1 => "Active", 2 => "Inactive"),
     '#default_value' => ($results->score_triangle) ? $results->score_triangle : 1,
     '#required' => TRUE

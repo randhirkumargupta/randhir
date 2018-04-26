@@ -142,25 +142,7 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
               }
               ?>
 
-
-          <div class="live-hightlight">
-          <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-                <h3><?php print t('Highlights'); ?></h3>
-          <?php } ?>
-              <ul>
-      <?php
-      $h_count = 1;
-      foreach ($node->field_story_highlights['und'] as $high) {
-        if($high['value'] != '<br/>') {
-        print '<li>' . $high['value'] . '</li>';
-        $h_count++;
-        }
-      }
-      ?>
-
-              </ul>
-          </div>
-                <?php } ?>
+      <?php } ?>
         <div class="timeline">
           <?php
             if (!empty($node->field_live_blog_timeline_active[LANGUAGE_NONE]['0']['value'])) { ?>
