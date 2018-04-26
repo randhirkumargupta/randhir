@@ -129,7 +129,11 @@ if ($theme == 'itgadmin' || $preview == 'preview') {
                                         <div class="widget-wrapper">
                                             <h4 class="heading">Most Popular</h4>                                            
                                             <div class="data-holder" id="itg-block-7">
-                                                <?php echo views_embed_view('most_popular', 'elections_most_popular'); ?>
+                                                <?php
+                                                  $block = block_load('itg_widget', 'election_most_popular');
+                                                  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                  print render($render_array);
+                                                ?>
                                             </div>
                                         </div>             
                                     </div>
