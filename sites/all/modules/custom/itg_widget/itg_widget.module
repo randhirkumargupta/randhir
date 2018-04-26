@@ -829,7 +829,6 @@ function itg_widget_block_view($delta = '') {
                   drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
                   drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
               }
-              var_dump($data);die;
               $block['content'] = theme("graph_election_section_cart", array("data" => $data));
             }else{
               $block['content'] = '';
@@ -1109,7 +1108,7 @@ function itg_widget_get_graph_data_for_home() {
     }
     global $theme;
     $cat_id = $cat_id_org = $election_tid;
-    $is_category = FALSE;
+    $is_category = TRUE;
     
     $itg_query = db_select('node', 'n');
     $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
@@ -1121,6 +1120,8 @@ function itg_widget_get_graph_data_for_home() {
     $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
     if($is_category){
 	    $itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
+    }else{
+      $itg_query->condition('ast.field_section_tid', $cat_id, '=');
     }
     $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
@@ -1131,7 +1132,6 @@ function itg_widget_get_graph_data_for_home() {
     $itg_query->fields('gt', array('field_graph_type_value'));
     $itg_query->fields('dfgc', array('field_graph_category_value'))
       ->condition('type', 'election_graph_xml')
-      ->condition('ast.field_section_tid', $cat_id, '=')
       ->condition('status', 1);
     // ->range(0, 5);
     //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
