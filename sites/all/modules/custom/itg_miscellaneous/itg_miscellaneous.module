@@ -334,6 +334,20 @@ function import_redirection_url_form_submit($form, &$form_state) {
             );
             continue;
         }
+        if(strlen($line[0]) > 250){
+            $already_exist[] = array(
+                'Source' => $line[0],
+                'status' => 'source_exceeds'
+            );
+            continue;
+        }
+        if(strlen($line[1]) > 250){
+            $already_exist[] = array(
+                'destination' => $line[1],
+                'status' => 'destination_exceeds'
+            );
+            continue;
+        }
         $source_parse = redirect_parse_url($line[0]);
         $destination_parse = redirect_parse_url($line[1]);
         $values = array(
@@ -365,6 +379,10 @@ function import_redirection_url_form_submit($form, &$form_state) {
                 drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " already exists"), 'warning');
             }elseif ($url_data['status'] == 'same_url'){
                 drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " is attempting to redirect the page to itself"), 'warning');
+            }elseif ($url_data['status'] == 'source_exceeds') {
+              drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " value is more than 250 chars"), 'warning');
+            }elseif ($url_data['status'] == 'destination_exceeds') {
+              drupal_set_message(t("Destination: " . check_plain($url_data['destination']) . " value is more than 250 chars"), 'warning');
             }
         }
     }
