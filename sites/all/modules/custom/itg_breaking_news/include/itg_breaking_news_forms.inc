@@ -54,10 +54,17 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
       "#markup" => "<div class='inline-error-messages'></div>",
       );
    
-  
+
+   $form['breaking']['blog_highlight_status'] = array(
+    '#type' => 'radios',
+    '#title' => t('Asign to left side'),
+    '#options' => array(1 => "Active", 0 => "Inactive"),
+    '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : 1,
+  );
+   
    $form['breaking']['blog_title'] = array(
     '#type' => 'textfield',
-    '#prefix' => '<div id="blog_title_replace_wrapper"><input class="blog_highlight_checkbox" type="checkbox" name="blog_highlight_checkbox" value="1" />',
+    '#prefix' => '<div id="blog_title_replace_wrapper">',
     '#title' => t('Title'),
     '#default_value' => isset($results->blog_title) ? $results->blog_title : '',
      '#suffix' => '</div>',
@@ -72,6 +79,7 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#format' => 'full_html',
     '#prefix' => '<div id="blog_description_replace_wrapper">',
     '#suffix' => '</div>',
+    // '#attributes' => array('spellcheck' => 'true'),
   );
     
   $form['breaking']['blog_breaking_band'] = array(
@@ -85,19 +93,8 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#prefix' => '<div id="blog_entity_replace_wrapper">',
     '#suffix' => '</div>',
   );
-  
-   /*
-   $publish_time = date('H:i');
-   $form['breaking']['blog_publish_time'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Publish Time'),
-    '#default_value' => ($results->blog_notification) ? $results->blog_notification : $publish_time,
-    '#size' => 10,
-    '#prefix' => '<div id="blog_publish_time_replace_wrapper">',
-    '#suffix' => '</div>',
-  );
-  */   
-
+    
+ /*
   $form['breaking']['blog_highlight_status'] = array(
     '#type' => 'hidden',
     '#default_value' => ($results->blog_highlight_status) ? $results->blog_highlight_status : '2',
@@ -105,7 +102,7 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#prefix' => '<div id="blog_highlight_replace_wrapper">',
     '#suffix' => '</div>',
   );
-  
+  */
   $form['breaking']['blog_entity_id'] = array(
     '#type' => 'hidden',
     '#value' => ($results->blog_entity_id) ? $results->blog_entity_id : $blog_entity_id,
