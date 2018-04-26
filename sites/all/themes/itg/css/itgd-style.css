@@ -1099,7 +1099,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ width: auto;float: left;margin-right: 10px; }
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .ellection-top-detail{}
-#block-itg-widget-home-graph-election .graph-design{ position: relative; top:-80px; }
+#block-itg-widget-home-graph-election .graph-design{ position: relative;}
 .graph-design .statename{ background:#e2e1e1; display: block; text-align: center; font-size:16px; font-weight: 600; padding:5px 0; border-radius:3px; }
 #fhs-karnataka .partyname-seats{ padding-top: 10px; }
 #fhs-karnataka .partyname-seats td{ font-size:12px; color:#111; text-align: center; font-weight:600 }
