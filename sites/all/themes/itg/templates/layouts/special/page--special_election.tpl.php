@@ -503,121 +503,15 @@ else { ?>
                             <div class="col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Non Draggable ( <strong>MAP</strong> )</div>
                                 <div class="itg-widget">
+                                    <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <?php
-                                    if ($theme != 'seven') {
-                                      if ($theme == FRONT_THEME_NAME) {
-                                        $section = arg(2);
-                                      }
-                                      else {
-                                        $section = $_GET['section'];
-                                        if (isset($_GET['category']) && !empty($_GET['category'])) {
-                                          $section = $_GET['category'];
-                                        }
-                                      }
-                                    }
-                                    $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
-                                    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-                                    if (!empty($terms)) {
-                                      ?>
-                                      <div class="droppable <?php print $gray_bg_layout; ?>">
-                                          <div class="widget-wrapper map-box <?php print $widget_data['itg-block-5']['widget_name']; ?>">
-                                              <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                <h4 class="heading"><?php print $widget_data['itg-block-5']['block_title']; ?></h4>
-                                                      <?php } ?>
-                                              <!-- for admin  -->
-                                                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                                <div class="widget-settings">
-                                                    <div class="widget-title-wrapper">
-    <?php if (isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                          <span class="widget-title" data-id="itg-block-5"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
-                                                <?php } ?>
-                                                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
-                                                    </div>
-                                                    <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                </div>
-                                                    <?php
-                                                  }
-                                                  ?>                                          
-                                              <div class="data-holder pos-rel" id="itg-block-5">                              
-
-                                                  <?php
-                                                  $countf = 0;
-                                                  $svgurl = "";
-                                                  $mapgurl = "";
-                                                  $colorurl = "";
-                                                  $state = 0;
-                                                  $state_opt = '';
-                                                  foreach ($terms as $values) {
-                                                    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
-                                                      if ($countf == 0) {
-                                                        $svgurl1 = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-                                                        $state = $values->tid;
-                                                      }
-                                                      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-                                                      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
-                                                      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-                                                      echo '<input type="hidden" name="svg_url_' . $values->tid . '" value= "' . $svgurl . '" id="svg_url_' . $values->tid . '">';
-                                                      echo '<input type="hidden" name="election_cat_' . $values->tid . '" value= "' . arg(2) . '" id="election_cat_' . $values->tid . '">';
-
-                                                      $state_opt .= '<option value="' . $values->tid . '">' . $values->name . '</option>';
-                                                      $countf++;
-                                                    }
-                                                  }
-                                                  //~ $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
-                                                  ?>
-                                                  <select id="map-state" name="map_state" onChange="change_mini_state_graph(this)">
-  <?php echo $state_opt; ?>
-                                                  </select>
-                                                  <div id="main_container" class="map-result-detail">
-                                                      <div id= "consTable"></div></div>
-                                                  <div id = "conssvg"></div>
-                                                  <div class="small_state_graph_wrapper">
-                                                      <a href="/state-elections/<?php echo arg(2) . "/" . $state; ?>"> 
-                                                          <div class="small_state_graph">
-                                                              <iframe src="<?php echo $svgurl1; ?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
-                                                          </div>
-                                                      </a>
-                                                  </div>
-                                              </div>
-                                          </div>             
-                                      </div>
-                                            <?php
-                                            }
-                                            else {
-                                              ?>
-                                      <div class="droppable <?php print $gray_bg_layout; ?>">
-                                          <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name']; ?>">
-  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                <h4 class="heading"><?php print $widget_data['itg-block-5']['block_title']; ?></h4>
-                                                      <?php } ?>
-                                              <!-- for admin  -->
-                                                      <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                                <div class="widget-settings">
-                                                    <div class="widget-title-wrapper">
-    <?php if (isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                          <span class="widget-title" data-id="itg-block-5"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
-                                                <?php } ?>
-                                                        <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
-                                                    </div>
-                                                    <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-5"><i class="fa fa-times"></i></a></span>
-                                                </div>
-                                                  <?php } ?>  
-                                              <div class="data-holder" data-widget-style="election-other-story" id="itg-block-5">
-                                                  <?php
-                                                  if (isset($widget_data['itg-block-5']['widget'])) {
-                                                    print $widget_data['itg-block-5']['widget'];
-                                                  }
-                                                  else {
-                                                    print '<div class="widget-placeholder"><span>' . t('Map') . '</span></div>';
-                                                  }
-                                                  ?>
-                                              </div>
-                                          </div>             
-                                      </div>
-<?php } ?>
+                                        $block = block_load('itg_widget', 'election_mini_map');
+                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                        print render($render_array);
+                                    ?>
+                                    </div>                                                                       
                                 </div>
-                            </div>
+                            </div> 
                             <div class="itg-484 col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Special widgets ( <strong>Videos</strong> )</div>
                                 <div class="itg-widget">
