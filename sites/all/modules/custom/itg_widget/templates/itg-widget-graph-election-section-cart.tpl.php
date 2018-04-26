@@ -49,6 +49,7 @@
               </ul>
           </div></div></div>';
  }?>
+ <div class="row electionHome-section">
 <?php if(!empty($itg_election_home_webcast_livetv)){?>
 <div class="col-md-4 mt-50">
     <div class="itg-widget">
@@ -190,7 +191,9 @@
         </div>
     </div>
 </div>
+</div>
+<span class="fullcoverage-electionlink"><a href="#">Karnataka Election Full Coverage</a></span>
 <style>
-  #home-livetv-election iframe{width:100%}
+#home-livetv-election iframe{width:100%}
 #home-webcast-election iframe{width:100%}
 </style>  
