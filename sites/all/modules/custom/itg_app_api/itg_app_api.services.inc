@@ -5796,8 +5796,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    variable_set('show_web_exclusive', 1);
-    p(node_load(988282));
+    //variable_set('show_web_exclusive', 1);
+    p(node_load(1144212));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
     print_r($searchpage1);
