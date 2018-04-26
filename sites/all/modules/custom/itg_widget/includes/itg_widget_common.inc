@@ -3556,3 +3556,7 @@ function get_html_widget_data_by_layout($section_name, $template_name, $block_na
   }
   return '';
 }
+
+function get_election_most_popular($cat_id, $limit = 12){
+  
+}
