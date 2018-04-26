@@ -1065,7 +1065,7 @@ function itg_widget_block_view($delta = '') {
             $cat_id = arg(2);              
           }            
           $data = get_election_most_popular($cat_id, 12);
-          $block['content'] = theme("election_key_issues", array("data" => $data));
+          $block['content'] = theme("election_most_popular", array("data" => $data));
           break;          
         case 'election_mini_map':
           global $theme;
