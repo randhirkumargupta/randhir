@@ -257,7 +257,8 @@ function itg_pti_content() {
                         ))
                         ->condition('nid', $node->nid, '=')
                         ->condition('vid', $node->vid, '=')      
-                        ->execute();                        
+                        ->execute();
+                                                
                     if($publish_flag) {
                       db_update('workbench_moderation_node_history') // Table name no longer needs {}
                           ->fields(array(
