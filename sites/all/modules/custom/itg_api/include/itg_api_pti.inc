@@ -37,6 +37,7 @@ function itg_pti_content() {
         $xml_filename = '';
         $file_path = '';
         $pti_xml = '';
+        $publish_flag = FALSE;
         $exp = explode('/', $object['Key']);
         $xml_extension = pathinfo(end($exp), PATHINFO_EXTENSION);
         if ($exp[0] == 'agencies' && $exp[1] == 'pti' && $xml_extension == 'xml') {
@@ -236,7 +237,8 @@ function itg_pti_content() {
                       else {
                         $node->log = 'State Changed to published';
                         //$node->workbench_moderation_state_new = workbench_moderation_state_published();
-                        workbench_moderation_moderate($node, 'published');
+                        //workbench_moderation_moderate($node, 'published');
+                        $publish_flag = TRUE;
                       }
                     }
                     //$node = node_submit($node); // Prepare node for saving
@@ -255,8 +257,19 @@ function itg_pti_content() {
                         ))
                         ->condition('nid', $node->nid, '=')
                         ->condition('vid', $node->vid, '=')      
-                        ->execute();
-                  /*  $newpath = itg_api_path_insert($node);
+                        ->execute();                        
+                    if($publish_flag) {
+                      db_update('workbench_moderation_node_history') // Table name no longer needs {}
+                          ->fields(array(
+                            'state' => workbench_moderation_state_published(),
+                            'published' => 1,
+                            'uid' => ADMINISTRATOR,
+                          ))
+                          ->condition('nid', $node->nid, '=')
+                          ->condition('is_current', 1, '=')
+                          ->execute();
+                    }
+                    /*  $newpath = itg_api_path_insert($node);
                     $path = array(
                       'source' => "node/{$node->nid}",
                       'alias' => $newpath, // Any alias that you want to set.
