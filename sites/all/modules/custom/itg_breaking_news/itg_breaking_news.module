@@ -787,7 +787,7 @@ function itg_live_blog_list($eid = NULL) {
   # execute the query
   $results = $query->execute()->fetchAll();
  
-  $total_records = db_query("SELECT bid FROM itg_live_blog WHERE status = 1")->rowCount();
+  $total_records = db_query("SELECT bid FROM itg_live_blog WHERE status = 1 AND blog_entity_id = $blog_entity_id")->rowCount();
 
     $output .= '  
       <div class="table-responsive" id="custom-live-blog">  
