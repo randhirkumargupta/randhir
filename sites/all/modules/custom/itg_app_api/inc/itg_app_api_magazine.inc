@@ -1033,6 +1033,7 @@ function itg_rapid_get_supplement_by_issue($issue_date){
  */
 
 function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
+    
     // variable declaration
     global $base_url;
     //issue node
@@ -1047,6 +1048,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
     $loop_count = 0;
 
     // select node belong from current term id or child term id
+    if(count($supp_ar) > 0){
 
     $query = db_select('node', 'n');
     //join  for field value   
@@ -1058,16 +1060,16 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
     $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
     $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
     $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
     $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
-    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     //field_data_field_story_select_magazine
-    $query->leftJoin('field_data_field_story_select_magazine', 'fssm', 'fssm.field_story_select_magazine_target_id=n.nid');
+    //$query->leftJoin('field_data_field_story_select_magazine', 'fssm', 'fssm.field_story_select_magazine_target_id=n.nid');
     //field_data_field_story_issue_date
     $query->leftJoin('field_data_field_story_select_supplement', 'fsid', 'fsid.entity_id=n.nid');
     //field_data_field_story_magazine_story_issue
@@ -1088,10 +1090,10 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
-    $query->fields('rc', array('field_common_related_content_value'));
+    //$query->fields('rc', array('field_common_related_content_value'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('vd', array('field_video_duration_value'));
+    //$query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
     $query->fields('fsri', array('field_reporter_unique_id_value'));
@@ -1117,14 +1119,14 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
         $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
-        $field_video_duration_value = $resvalue['field_video_duration_value'];
+        //$field_video_duration_value = $resvalue['field_video_duration_value'];
         // file url
         $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
         $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
         $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
         //related content
-        $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+        //$related = relatedContentNodeType($resvalue['field_common_related_content_value']);
         $comment_cont = getCommentsCount($nid);
 
         // create date formating
@@ -1164,5 +1166,6 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
 
         $listcount++;
     }
+    } 
     return $story_list_array;
 }
