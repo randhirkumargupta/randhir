@@ -123,6 +123,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         //join  for field value
         $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
         $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
+        $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
 
         $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
@@ -169,6 +170,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
         $query->fields('fsri', array('field_reporter_unique_id_value'));
         $query->fields('fci', array('field_primary_category_value'));
+        $query->fields('fssh', array('field_story_short_headline_value'));
 
 
         //end 
@@ -178,7 +180,11 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
-            $title = $resvalue['title'];
+            //$title = $resvalue['title'];
+            $title = $resvalue['field_story_short_headline_value'];
+            if(!$title){
+                $title = $resvalue['title'];
+            }
             $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
             $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
             $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
@@ -409,6 +415,7 @@ function getCoverstoriesList($issue_date) {
     //join  for field value
     $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
     $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
+    $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
     
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
@@ -456,6 +463,7 @@ function getCoverstoriesList($issue_date) {
     $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
     $query->fields('fsri', array('field_reporter_unique_id_value'));
     $query->fields('fci', array('field_primary_category_value'));
+    $query->fields('fssh', array('field_story_short_headline_value'));
 
     //end
     //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
@@ -465,7 +473,11 @@ function getCoverstoriesList($issue_date) {
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
         $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
         $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
-        $title = $resvalue['title'];
+        //$title = $resvalue['title'];
+        $title = $resvalue['field_story_short_headline_value'];
+        if(!$title){
+                $title = $resvalue['title'];
+            }
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $field_primary_category_value = $resvalue['field_primary_category_value'];
@@ -696,6 +708,7 @@ function itg_rapid_get_web_exclisive_story($issue_date) {
     //join  for field value
     $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
     $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
+    $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
     
     
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -743,6 +756,7 @@ function itg_rapid_get_web_exclisive_story($issue_date) {
     $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
     $query->fields('fsri', array('field_reporter_unique_id_value'));
     $query->fields('fci', array('field_primary_category_value'));
+    $query->fields('fssh', array('field_story_short_headline_value'));
 
 
     //end
@@ -750,7 +764,11 @@ function itg_rapid_get_web_exclisive_story($issue_date) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag
-        $title = $resvalue['title'];
+        //$title = $resvalue['title'];
+        $title = $resvalue['field_story_short_headline_value'];
+        if(!$title){
+                $title = $resvalue['title'];
+            }
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
         $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
         $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
@@ -888,6 +906,7 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
     //join  for field value
     $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
     $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
+    $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
     
     
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -935,7 +954,7 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
     $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
     $query->fields('fsri', array('field_reporter_unique_id_value'));
     $query->fields('fci', array('field_primary_category_value'));
-
+    $query->fields('fssh', array('field_story_short_headline_value'));
 
     //end
     //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -943,7 +962,11 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag
-        $title = $resvalue['title'];
+        //$title = $resvalue['title'];
+        $title = $resvalue['field_story_short_headline_value'];
+        if(!$title){
+                $title = $resvalue['title'];
+            }
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
         $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
         $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
@@ -1054,7 +1077,8 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, 
 
     $query = db_select('node', 'n');
     //join  for field value   
-    //$query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');    
+    //$query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');  
+    $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -1100,6 +1124,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, 
     $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
     $query->fields('fsri', array('field_reporter_unique_id_value'));
     $query->fields('fci', array('field_primary_category_value'));
+    $query->fields('fssh', array('field_story_short_headline_value'));
 
 
     //end
@@ -1107,7 +1132,11 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag
-        $title = $resvalue['title'];
+        //$title = $resvalue['title'];
+        $title = $resvalue['field_story_short_headline_value'];
+        if(!$title){
+                $title = $resvalue['title'];
+            }
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
         $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
         $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
