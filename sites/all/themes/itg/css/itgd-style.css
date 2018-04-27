@@ -1093,13 +1093,10 @@ border-radius: 0px 5px 5px 0px;}
 
 /* Election page Graph */
 .election-page .left-side .itg-415-layout .statesvg-map{ width:50%; float: left; }
-.election-page .left-side .itg-415-layout #fhs-karnataka{display: block; width: 50%;float: right;}
+.election-page .left-side .itg-415-layout #fhs-karnataka{display: block; width:45%;float: right;}
 .election-page .left-side .itg-415-layout #fhs-karnataka .partyname-seats{ display: none; }
 .election-page .left-side .itg-415-layout #fhs-karnataka .leadparty-table{display: block; width: 100%;padding-top: 20px;}
-
 @media screen and (max-width:767px){.election-page .left-side .itg-415-layout .statesvg-map{ width:100%; float: none;} .election-page .left-side .itg-415-layout #fhs-karnataka{ width:100%; float: none;}  }
-
-
 
 /* Election Home */
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 35px; line-height:40px; padding-bottom: 15px;}

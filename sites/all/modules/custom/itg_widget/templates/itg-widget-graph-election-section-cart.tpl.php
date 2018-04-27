@@ -3,7 +3,7 @@
 
   <?php
   global $base_url;
-  $classrow = "col-md-8";
+  $classrow = "col-md-8 fullchart-table";
   $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
   if (!empty($itg_election_home_webcast_livetv)) {
