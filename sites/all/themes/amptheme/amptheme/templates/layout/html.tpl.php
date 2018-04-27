@@ -80,6 +80,9 @@
     }
     ?>
     <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
+      <!-- Quora Pixel Code (Static HTML) -->
+      <amp-pixel height="1" width="1" layout="nodisplay" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&u=CANONICAL_URL&amp=1"></amp-pixel>
+      <!-- End of Quora Pixel Code -->
         <?php print $page_top; ?>
         <?php print $page; ?>
         <?php print $page_bottom; ?>

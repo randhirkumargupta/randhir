@@ -29,7 +29,12 @@ function itg_rss_feed_menu() {
     'file' => 'inc/article_rss_feed.inc',
     'type' => MENU_CALLBACK,
   );
-
+  $items['rss/indiatoday_editors_pic.xml'] = array(
+    'page callback' => 'indiatoday_editors_pic',
+    'access arguments' => array('access content'),
+    'file' => 'inc/article_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['rss/video'] = array(
     'page callback' => 'video_rss_feed',
     'access arguments' => array('access content'),
@@ -289,6 +294,24 @@ function get_rss_feed_sub_header_article_news_stand($term_name = NULL, $section_
   date_default_timezone_set("GMT");
   $todat_date = date("D, d M Y H:i:s e");
   $output .= "<title>India Today</title><link>" . FRONT_URL . "</link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader Editors Pic
+ * @return string
+ */
+function get_rss_feed_sub_header_editors_pic() {
+  global $base_url;
+  $output = "";
+  $cat_name = '';
+  $tid = '1206641';
+  $title = "India Today Editor's Picks";
+  date_default_timezone_set("GMT");
+  $result = editor_pic_node_list($tid,0,5);
+  $build_date = date("D, d M Y H:i:s e", $result[0]['created']);
+  $logo = file_create_url(file_default_scheme() . '://sites/all/themes/itg/images/mastlogo_googleeditorspic_250x40.png');
+  $output .= "<link><![CDATA[" . FRONT_URL . "]]></link><description>India Today</description><title><![CDATA[" . $title . "]]></title><lastBuildDate><![CDATA[".$build_date."]]></lastBuildDate><image><url>".$logo."</url><title><![CDATA[" . $title . "]]></title><link><![CDATA[" . FRONT_URL . "]]></link></image>";
   return $output;
 }
 
