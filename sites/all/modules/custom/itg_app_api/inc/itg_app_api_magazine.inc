@@ -248,7 +248,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         }
         $range_max = 10- $listcount + 1;
         $supp_ar = itg_rapid_get_supplement_by_issue($issue_date);
-        $story_list_array = itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount);
+        $story_list_array = itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, $story_list_array);
     }
     $listcount = count($story_list_array);
     $data['lcount'] = $listcount;
@@ -1032,7 +1032,7 @@ function itg_rapid_get_supplement_by_issue($issue_date){
  * @return type
  */
 
-function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount) {
+function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, $story_list_array) {
     
     // variable declaration
     global $base_url;
