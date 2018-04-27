@@ -3,11 +3,7 @@
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
 /*Heading used in Indiatoday site Mobile version*/
-/*Fonts used in Indiatoday site
-
-$itg-roboto:'Roboto-Regular';
-$itg-robotoslab:'RobotoSlab-Regular';
- */
+/*Fonts used in Indiatoday site*/
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
 /*Border Colors used in Indiatoday site*/
@@ -72,8 +68,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
     font-size: 20px;
     font-size: 1.25rem; }
   #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before {
-    top: -6px;
-    left: 0; }
+    top: -3px;
+    left: -3px; }
   #block-itg-layout-manager-header-block .top-nav .headeritg-logo {
     margin-left: 10px; }
   #block-itg-layout-manager-header-block .navigation .menu {
@@ -92,13 +88,13 @@ $itg-robotoslab:'RobotoSlab-Regular';
 
   /*defalt add for special pages START*/
   .itg-layout-container .ad-widget {
-    height: 300px;
-    padding: 10px 0;
+    height: 272px;
+    padding: 10px;
     width: 322px;
     margin: 0 auto; }
 
   section.sidebar .block-itg-ads {
-    padding: 4px 0;
+    padding: 0;
     border-bottom: none; }
 
   /*defalt add for special pages END*/
@@ -127,7 +123,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     margin-bottom: 30px; }
   .tech-layout-page .auto-block-3 .ad-widget,
   .auto-layout-page .auto-block-3 .ad-widget {
-    height: 290px;
+    height: 272px;
     padding: 10px;
     width: 320px;
     margin: 0 auto; }
@@ -371,10 +367,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .breakingnew-home .title {
     font-size: 15px; }
 
-  /*event page css start*/
-  .event-add-header {
-    display: block; }
-
+  /*event page css start .event-add-header {display: none;} */
   #block-menu-menu-event-menu ul li a {
     padding: 0 8px; }
   #block-menu-menu-event-menu .event-detail .event-vanue-detail-place {
@@ -468,7 +461,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
 
   .view-product .product-wrapper .btn-redeem-points,
   .view-product .product-wrapper .btn-add-cart {
-    font: 600 12px/18px "OpenSans-Regular";
+    font: 600 12px/18px "Roboto-Regular";
     padding: 5px 5px; } }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .sport-home-layout-page .itg-layout-615 .droppable,
@@ -698,7 +691,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
             vertical-align: middle; }
         #block-itg-layout-manager-header-block .navigation .menu li.sponser-link a {
           background: #ffc106;
-          color: #111; }
+          color: #323232; }
     #block-itg-layout-manager-header-block .navigation ul#newlist {
       position: absolute;
       right: 0;
@@ -985,7 +978,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     height: 60px; }
   #block-itg-menu-manager-third-level-menu .select-menu {
     color: #fff;
-    font-family: "OpenSans-Regular";
+    font-family: "Roboto-Regular";
     width: 95px;
     background: #3c3a3b;
     padding-left: 5px;
@@ -1384,7 +1377,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     white-space: nowrap; }
 
   #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video {
-    margin-bottom: 20px; }
+    margin-bottom: 50px; }
 
   .event-sidebar .region-sidebar-second-event {
     zoom: 1; }
@@ -1596,18 +1589,11 @@ $itg-robotoslab:'RobotoSlab-Regular';
     text-align: center; }
 
   .page-order-confirmation .thankyou-block h2 {
-    font: 500 20px/32px "OpenSans-Regular"; }
+    font: 500 20px/32px "Roboto-Regular"; }
 
   .page-order-confirmation .order-summary-block h3 {
-    font: 500 18px/28px "OpenSans-Regular"; } }
+    font: 500 18px/28px "Roboto-Regular"; } }
 @media only screen and (max-width: 767px) {
-  .node-type-event-backend .event-add-header {
-    display: none; }
-
-  #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-    width: 55px;
-    height: 55px; }
-
   /*css start oscar-layout-page */
   .oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
     clear: left; }
@@ -1766,6 +1752,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     line-height: 30px;
     font-size: 20px; }
 
+  /* css start add by arun */
   .live-block #cricketblog .batBollDetails .batsmanDetails {
     width: 100%; }
 
@@ -1797,8 +1784,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
     right: 8px; }
 
-  #block-views-video-landing-header-block .video-header-right .ads {
-    background: transparent; } }
+  /* css end add by arun */ }
 @media all and (min-width: 680px) {
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     position: relative; }
@@ -2609,7 +2595,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     font-size: 34px;
     font-size: 2.125rem;
     font-weight: 700;
-    line-height: 45px; }
+    line-height: 42px; }
   .story-section .story-left,
   .story-section .story-right {
     float: left; }
@@ -2741,7 +2727,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
       border-top: none; }
   .view-front-end-global-search .view-content .search-pic {
     width: 170px;
-    height: 96px;
+    height: 127px;
     float: left; }
   .view-front-end-global-search .view-content .search-detail h2 {
     font-size: 22px;
@@ -2756,9 +2742,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .view-front-end-global-search .view-content .search-detail p {
     display: block; }
   .view-front-end-global-search .view-content .social-share {
-    margin-top: 12px;
-    width: auto;
-    float: left; }
+    margin-top: 0px; }
     .view-front-end-global-search .view-content .social-share ul {
       list-style-type: none; }
       .view-front-end-global-search .view-content .social-share ul li {
@@ -2917,7 +2901,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%;
-        font-family: "OpenSans-Regular"; }
+        font-family: "Roboto-Regular"; }
       .view-category-wise-content-list .item-list ul.pager li.pager-item a,
       .view-blog-listing .item-list ul.pager li.pager-item a,
       .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a,
@@ -2928,8 +2912,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
         font-size: 16px;
         font-size: 1rem;
         line-height: 25px;
-        color: #111;
-        font-family: "OpenSans-Regular"; }
+        color: #323232;
+        font-family: "Roboto-Regular"; }
         .view-category-wise-content-list .item-list ul.pager li.pager-item a:hover,
         .view-blog-listing .item-list ul.pager li.pager-item a:hover,
         .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a:hover,
@@ -2950,7 +2934,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a,
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a,
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
-        color: #111;
+        color: #323232;
         line-height: 25px; }
       .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last,
       .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first,
@@ -3122,7 +3106,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   #block-views-video-landing-header-block .video-header-left .video {
     float: left;
     width: 84.5%;
-    padding: 10px 10px;
+    padding: 15px 10px;
     border: 1px solid #242424; }
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
@@ -3136,7 +3120,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
       #block-views-video-landing-header-block .video-header-left .social-likes ul li {
         float: none; }
         #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
-          padding: 24px 5px 24px 10px; }
+          padding: 24.5px 5px 24.4px 10px; }
           #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
             display: inline-block; }
           #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
@@ -3268,14 +3252,14 @@ $itg-robotoslab:'RobotoSlab-Regular';
   float: right; }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p {
-  font: 400 14px/20px "OpenSans-Regular";
+  font: 400 14px/20px "Roboto-Regular";
   color: #b4b4b4; }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p a {
   color: #b4b4b4; }
 
 #block-views-video-landing-header-block .latest_video .view-header h3 {
-  font: 500 14px/35px "OpenSans-Regular";
+  font: 500 14px/35px "Roboto-Regular";
   margin-bottom: 10px;
   background: #131313;
   height: 35px;
@@ -3302,7 +3286,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   padding: 1px 5px; }
 
 #block-views-video-landing-header-block .latest_video {
-  padding: 0 15px 0 15px; }
+  padding: 0 4px 0 30px; }
 
 @media (max-width: 1024px) {
   .view-video-landing-header .defalt-bar {
@@ -3344,8 +3328,9 @@ $itg-robotoslab:'RobotoSlab-Regular';
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
     padding: 10px !important; } }
 @media (max-width: 767px) {
-  .itg-layout-container .ad-widget {
-    width: 322px; }
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+    width: 55px;
+    height: 55px; }
 
   #block-views-video-landing-header-block .latest_video {
     padding: 30px 0 0;
@@ -3456,7 +3441,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "OpenSans-Regular";
+    font: 14px/18px "Roboto-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -3656,7 +3641,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   text-align: justify;
   font-style: italic;
   color: #8d8d8d;
-  font-family: "OpenSans-Regular"; }
+  font-family: "Roboto-Regular"; }
 
 .ticket-type-require label:after {
   content: '*';
@@ -3701,10 +3686,6 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .story-section .story-right .description .itgvideo > iframe {
     min-height: 178px; } }
 @media all and (max-width: 320px) {
-  .ad-pd0 {
-    padding: 0px;
-    margin: 0 -15px; }
-
   .story-section .story-right .description .itgvideo > iframe {
     min-height: 150px; } }
 /*css start add by arun */
@@ -3718,7 +3699,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .personal-list .personal-follow a {
     display: inline-block;
     padding: 10px 20px;
-    font: normal 16px/18px "OpenSans-Regular";
+    font: normal 16px/18px "Roboto-Regular";
     color: #000;
     position: relative;
     bottom: -1px; }
@@ -3801,7 +3782,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "OpenSans-Regular";
+    font: 14px/18px "Roboto-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -3855,8 +3836,8 @@ $itg-robotoslab:'RobotoSlab-Regular';
     color: #666;
     font-size: 14px;
     font-weight: 300;
-    height: 37px;
-    line-height: 37px; }
+    height: 42px;
+    line-height: 42px; }
 
   #block-itg-layout-manager-header-block .navigation .container {
     padding: 0px; }
@@ -3961,11 +3942,18 @@ $itg-robotoslab:'RobotoSlab-Regular';
     position: absolute;
     top: 15px; } }
 @media only screen and (max-width: 320px) {
-  #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
-    width: 300px; }
+  #block-itg-layout-manager-header-block .main-nav .nav-container-menu {
+    width: calc(100% - 40px); }
+
+  #block-itg-layout-manager-header-block .top-nav .main-nav li a {
+    font-size: 12px;
+    font-weight: bold; }
 
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 5px; }
+
+  #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
+    width: 300px; }
 
   #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
     width: 50px;
