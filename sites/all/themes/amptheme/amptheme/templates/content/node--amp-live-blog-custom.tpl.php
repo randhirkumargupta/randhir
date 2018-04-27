@@ -186,8 +186,8 @@ $fb_appid = variable_get('itg_sharing_app_id');
   </div>
 <?php } ?>
 <?php if(!empty(variable_get('amp_story_second_ad'))) { ?>
-	<div class="custom-amp-ad ad-btf">
-	  <?php print variable_get('amp_story_second_ad'); ?> 
-	</div>
+<div class="custom-amp-ad ad-btf">
+  <?php print variable_get('amp_story_second_ad'); ?> 
+</div>
 <?php } ?>
    
