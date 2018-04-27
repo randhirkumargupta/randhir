@@ -241,7 +241,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     }
     
     //selection of suplement story
-    /*if($listcount < 9){
+    if($listcount < 9){
         $range_min = 0;
         if (!$pageno == 0) {
             $range_min = $pageno * $range_max;
@@ -249,7 +249,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         $range_max = 10- ($listcount + 1);
         $supp_ar = itg_rapid_get_supplement_by_issue($issue_date);
         $story_list_array = itg_rapid_get_supp_story($supp_ar, $range_min, $range_max);
-    }*/
+    }
     $listcount = count($story_list_array);
     $data['lcount'] = $listcount;
     $data['data'] = $story_list_array;
@@ -1049,11 +1049,8 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
     // select node belong from current term id or child term id
 
     $query = db_select('node', 'n');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
-    $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
-    
-    
+    //join  for field value   
+    $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');    
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -1074,7 +1071,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
     //field_data_field_story_issue_date
     $query->leftJoin('field_data_field_story_select_supplement', 'fsid', 'fsid.entity_id=n.nid');
     //field_data_field_story_magazine_story_issue
-    $query->leftJoin('field_data_field_story_magazine_story_issue', 'fsms', 'fsms.entity_id=n.nid');
+    
     //field_data_field_itg_common_by_line_name
     $query->leftJoin('field_data_field_itg_common_by_line_name', 'fsbl', 'fsbl.entity_id=n.nid');
     //field_data_field_reporter_unique_id
