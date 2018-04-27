@@ -114,7 +114,11 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         if (!$pageno == 0) {
             $range_min = $pageno * 10;
         }
-        $range_max = 10- $cover_st_cont;
+        if($cover_st_cont > 0){
+            $range_max = 10- $cover_st_cont;
+        }
+        
+        
         $query = db_select('node', 'n');
         //join  for field value
         $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
@@ -394,7 +398,10 @@ function getCoverstoriesList($issue_date) {
         // select node belong from current term id or child term id
         $loop_count = $cover_st_cont;
         $range_min = 0;        
-        $range_max = 2- $cover_st_cont;
+        
+        if($cover_st_cont > 0){
+            $range_max = 2- $cover_st_cont;
+        }
     
     // select node belong from current term id or child term id
     $query = db_select('node', 'n');
