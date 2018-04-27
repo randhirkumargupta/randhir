@@ -173,7 +173,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
 
         //end
         //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-        $query->condition('fsc.field_story_category_tid', 1206501, '!=')->condition('fsc.field_story_category_tid', 1206509, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+        $query->condition('fsc.field_story_category_tid', 1206501, '!=')->condition('fsc.field_story_category_tid', 1206509, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->condition('iwo.widget', 'section_wise_widget')->orderBy('iwo.weight', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
@@ -458,7 +458,7 @@ function getCoverstoriesList($issue_date) {
 
     //end
     //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
-    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
+    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->condition('iwo.widget', 'section_wise_widget')->orderBy('iwo.weight', 'DESC')->groupBy('n.nid')->range(0, 2);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
@@ -937,7 +937,7 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
 
 
     //end
-    $query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->condition('iwo.widget', 'section_wise_widget')->orderBy('iwo.weight', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag
