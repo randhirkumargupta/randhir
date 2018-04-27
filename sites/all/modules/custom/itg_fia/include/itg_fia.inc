@@ -477,7 +477,7 @@ function itg_fia_related_node($nid = 0) {
         // replace enviroment name
         // stage related node structure: 'IT_1146622|~|IT_849473|~|IT_1146628|~|IT_1146629|~|IT_1146631|~|IT_1146630'
         //$node_str = str_replace("|~|IT_", ",", $node_str);
-        //$node_str = str_replace("IT_", "", $node_str); 
+        //$node_str = str_replace("IT_", "", $node_str);  
         $node_str = str_replace("|~|UAT_", ",", $node_str);
         $node_str = str_replace("UAT_", "", $node_str); 
 
