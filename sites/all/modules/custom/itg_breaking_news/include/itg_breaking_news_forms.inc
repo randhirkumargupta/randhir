@@ -60,7 +60,7 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#rows' => 5,
     '#resizable' => FALSE,
     '#default_value'=> '',
-    '#format' => 'icon_profile',
+    '#format' => 'icon_format',
     '#prefix' => '<div id="blog_description_replace_wrapper">',
     '#suffix' => '</div>',
     // '#attributes' => array('spellcheck' => 'true'),
