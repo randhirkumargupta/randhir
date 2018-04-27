@@ -503,6 +503,7 @@ else { ?>
                             <div class="col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Non Draggable ( <strong>MAP</strong> )</div>
                                 <div class="itg-widget">
+                                    <h4 class="heading">Map</h4> 
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <?php
                                         $block = block_load('itg_widget', 'election_mini_map');

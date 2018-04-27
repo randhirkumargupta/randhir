@@ -2,11 +2,11 @@
  Election constituency js 
  */
 
-function getConstituencyData(jsonUrl, jsonKey) {console.log(jsonUrl, jsonKey);
+function getConstituencyData(jsonUrl, jsonKey) {
     if (jsonUrl === undefined || jsonKey === undefined) {
         return;
     }
-    
+
     jQuery.ajax({
         type: "GET",
         url: jsonUrl,
@@ -22,7 +22,9 @@ function getConstituencyData(jsonUrl, jsonKey) {console.log(jsonUrl, jsonKey);
 }
 jQuery(document).ready(function () {
     if (Drupal.settings.json_url !== undefined && Drupal.settings.constituency !== undefined) {
-        setTimeout(function(){getConstituencyData(Drupal.settings.json_url, Drupal.settings.constituency);}, 5000);        
+        setInterval(function () {
+            getConstituencyData(Drupal.settings.json_url, Drupal.settings.constituency);
+        }, 5000);
     }
 });
 
@@ -56,7 +58,7 @@ function renderConstituencyBlocks(data, jsonKey) {
     if (otherCondidates.length > 0) {
         showOthersConstituencyCandidatesHTML(otherCondidates, data);
     }
-    
+
 }
 
 function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
