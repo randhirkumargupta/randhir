@@ -14,6 +14,20 @@
 
 jQuery(document).ready(function($){
     
+    $(document).on('click', '.liveblog-custom-data', function() {  
+        var current_object = jQuery( this );
+        
+        console.log( 'Testing some data' );
+        jQuery('#blog-loader-data').show();
+        // var base_url = settings.itg_breaking_new_form.settings.base_url;
+        var slug_id = jQuery( this ).attr( 'data' );
+        jQuery('.custom_blog_bid').val(slug_id);
+        jQuery('.custom_blog_action').val('update');
+        setTimeout(function() {
+            jQuery('.form-submit').mousedown();
+        }, 3000);    
+    });
+      
     jQuery( ".referesh-custom-data" ).click( function() {
       console.log( 'refresh data' );
       var entityId = jQuery( this ).attr( 'data' );

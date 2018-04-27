@@ -37,8 +37,8 @@ function itg_breaking_news_menu() {
   $items['manage-live-blog'] = array(
     'title' => 'Manage Live Blog',
     'page callback' => 'itg_live_blog_custom',
-    'access callback' => TRUE,
     'access arguments' => array('access itg story'),
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_NORMAL_ITEM,
     'file' => 'include/itg_breaking_news_forms.inc',    
   );
@@ -47,20 +47,20 @@ function itg_breaking_news_menu() {
     'title' => 'Listing Live Blog',
     'page callback' => 'itg_live_blog_list',
     'access arguments' => array('access itg story'),
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_NORMAL_ITEM,   
   );
   
   $items['itg-live-blog-row'] = array(
     'page callback' => 'itg_live_blog_get_row',
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
     'access arguments' => array('access itg story'),
     'type' => MENU_NORMAL_ITEM,   
   );
 
   $items['itg-live-bog-delete'] = array(
     'page callback' => 'live_bog_delete',
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_CALLBACK,
     'access arguments' => array('access itg story'),
     'file' => 'include/itg_breaking_news_forms.inc', 
@@ -68,7 +68,7 @@ function itg_breaking_news_menu() {
   
   $items['itg-live-blog-refresh'] = array(
     'page callback' => 'itg_live_blog_refresh',
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
     'access arguments' => array('access itg story'),
     'file' => 'include/itg_breaking_news_forms.inc', 
     'type' => MENU_NORMAL_ITEM,   
@@ -77,7 +77,7 @@ function itg_breaking_news_menu() {
   $items['itg-live-bog-cron'] = array(
     'page callback' => 'live_bog_cron',
     'page arguments' => array(2, 3),
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
     'type' => MENU_CALLBACK,
     'access arguments' => array('access itg story'),
     'file' => 'include/itg_breaking_news_forms.inc', 

@@ -4,7 +4,8 @@
  
 (function ($) {
   Drupal.behaviors.itg_breaking_new_form = {
-    attach: function (context, settings) { 
+    attach: function (context, settings) {
+      /*  
       jQuery( ".liveblog-custom-data" ).click( function() {
         var current_object = jQuery( this );
         
@@ -18,7 +19,7 @@
             jQuery('.form-submit').mousedown();
         }, 3000);    
       });
-        
+      */  
     }
   };    
 })(jQuery);
