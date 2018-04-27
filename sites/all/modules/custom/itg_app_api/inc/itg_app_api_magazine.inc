@@ -1044,7 +1044,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, 
     $tid_list[] = $tid;
     $listcount = 0;       
     $order_by = 'DESC';
-    $story_list_array = array();
+    //$story_list_array = array();
     $loop_count = 0;
 
     // select node belong from current term id or child term id
