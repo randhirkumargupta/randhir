@@ -7,29 +7,77 @@
  * @see https://drupal.org/node/1728164
  */
 global $base_url;
-$embed_path = $base_url.'/'.drupal_get_path_alias('node/'.$node->nid);
 $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $embed_image = $embed_image;
 } else {
   $embed_image = '';
 }
+$embed_path = $base_url . '/' . drupal_get_path_alias('node/' . $node->nid);
+$embed_logo = $base_url . '/sites/all/themes/itg/logo.png';
+$blog_created_date = date('Y-m-d', $node->created);
+$blog_created_time = date('h:i:s', $node->created);
+$coverage_start_date = $blog_created_date . 'T' . $blog_created_time;
+$short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
+$custom_content = get_custom_content_details($node->nid);
+if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
+  $coverage_end = strtotime($custom_content[0]->blog_created_date);
+}
+else {
+  $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
+}
+$coverage_end_date = date('Y-m-d', $coverage_end);
+$coverage_end_time = date('h:i:s', $coverage_end);
+$coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time;
+$created_date = date('Y-m-d H:i:s', $node->created);
+$modify_date = date('Y-m-d H:i:s', $node->changed);
+$fb_appid = variable_get('itg_sharing_app_id');
 ?>
+<!-- Live Schema Starts -->
+<div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
+  <meta itemprop="coverageStartTime" content="<?php print $coverage_start_date; ?>">
+  <meta itemprop="coverageEndTime" content="<?php print $coverage_end_final_date; ?>">
+  <meta itemprop="url" content="<?php print $embed_path; ?>">
+  <meta itemprop="description" content="<?php print $short_description_source; ?>">
+  <div class="bolg-content" id="bolgcontent">    
+  <?php
+  if (!empty($custom_content)) {
+    foreach ($custom_content as $breaking_embed_item) {      
+  ?>
+      <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
+        <p itemprop="headline" content="<?php print $node->title; ?>"></p>
+        <meta itemprop="datePublished" content="<?php print $created_date; ?>">
+        <meta itemprop="author" content="IndiaToday.in">
+        <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
+        <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="<?php print $embed_image; ?>">
+          <meta itemprop="width" content="650">
+          <meta itemprop="height" content="450">
+        </span>
+        <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
+          <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" content="<?php print $embed_logo; ?>">
+          </span>
+          <meta itemprop="name" content="India Today">
+        </span>
+        <meta itemprop="mainEntityOfPage" content="<?php print $embed_path; ?>">
+      </div>
+    <?php }
+  } ?> 
+  </div> 
+</div>
+<!-- Live Schema Ends -->
 <?php if (!empty($content)): ?>
 <div class="title-block">
-<?php
-  
-    if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
-      $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
-    }
-    else {
-      $title = '<h1>' . $node->title . '</h1>';
-    }
-    $share_title = $node->title;
-    $blog_city = ($node->field_blog_city[LANGUAGE_NONE][0]['value']) ? $node->field_blog_city[LANGUAGE_NONE][0]['value'] . " | " : '';
-    $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$share_title.'&picture='.$share_image;
-    $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($share_title).'&url='.$short_url.'&via=IndiaToday';
-    $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
+<?php  
+  if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+    $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
+  }
+  else {
+    $title = '<h1>' . $node->title . '</h1>';
+  }
+  $share_title = $node->title;
+  $blog_city = ($node->field_blog_city[LANGUAGE_NONE][0]['value']) ? $node->field_blog_city[LANGUAGE_NONE][0]['value'] . " | " : '';
 ?>
 <?php print ($title) ?>
 <div class="locationdate"><?php print $blog_city .  date("F d, Y", strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></div>
@@ -101,16 +149,14 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   <?php } ?> 
 </div>
 <div class="timeline">
-  <?php
-  $custom_content = get_custom_content_details($node->nid);
-  //print_r($custom_content);die;
+  <?php  
   if (!empty($custom_content)) {
     $breaking_output .= '';
     foreach ($custom_content as $breaking_item) {	  
       $user = !empty($breaking_item->update_uid) ? user_load($breaking_item->update_uid)->name : user_load($breaking_item->blog_uid)->name;      
       $breaking_title = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_item->blog_title);
       $breaking_desc = itg_custom_amp_body_filter($breaking_item->blog_description);
-      
+      $breaking_desc = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_desc);
       $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
       $pub_time = date("H:i", strtotime($breaking_item->blog_publish_time));
       $pub_display_time = date("H:i A", strtotime($breaking_item->blog_publish_time));
@@ -123,6 +169,9 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
       $breaking_output .= '</div>';
       $breaking_output .= '<div class="blog-multi-title">'. $breaking_title .'</div>';
       $breaking_output .= '<div class="blog-multi-desc">'. $breaking_desc .'</div>';
+      $breaking_output .= '<amp-social-share type="facebook" data-param-app_id="'.$fb_appid.'" data-param-text="'.$breaking_title.'"></amp-social-share>';
+      $breaking_output .= '<amp-social-share type="twitter"></amp-social-share>';
+      $breaking_output .= '<amp-social-share type="gplus"></amp-social-share>';
       //$breaking_output .= '<div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
       $breaking_output .= '</div>';      
     }
