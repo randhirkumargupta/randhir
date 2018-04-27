@@ -241,15 +241,15 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     }
     
     //selection of suplement story
-    /*if($listcount < 9){
+    if($listcount < 10){
         $range_min = 0;
         if (!$pageno == 0) {
             $range_min = $pageno * $range_max;
         }
-        $range_max = 10- ($listcount + 1);
+        $range_max = 10- $listcount + 1;
         $supp_ar = itg_rapid_get_supplement_by_issue($issue_date);
         $story_list_array = itg_rapid_get_supp_story($supp_ar, $range_min, $range_max);
-    }*/
+    }
     $listcount = count($story_list_array);
     $data['lcount'] = $listcount;
     $data['data'] = $story_list_array;
@@ -1050,7 +1050,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
 
     $query = db_select('node', 'n');
     //join  for field value   
-    $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');    
+    //$query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');    
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -1099,7 +1099,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
 
 
     //end
-    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_select_supplement_target_id', $issue_ar, 'IN')->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_select_supplement_target_id', $supp_ar, 'IN')->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag
