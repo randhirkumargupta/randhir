@@ -388,8 +388,8 @@ function getCoverstoriesList($issue_date) {
     $loop_count = 0;
     
     //select cover story..
-    $story_list_array = itg_rapid_get_cover_story($issue_date, 0, 2);
-    $cover_st_cont = count($story_list_array);
+    $cover_story_list_array = itg_rapid_get_cover_story($issue_date, 0, 2);
+    $cover_st_cont = count($cover_story_list_array);
         if ($cover_st_cont < 2) {
         // select node belong from current term id or child term id
         $loop_count = $cover_st_cont;
