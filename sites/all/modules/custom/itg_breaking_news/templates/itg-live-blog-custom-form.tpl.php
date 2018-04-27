@@ -1,4 +1,5 @@
 <?php $nid = (arg(2)) ? arg(2) : ''; ?>
+<div class="blog-referesh"><a class="referesh-custom-data" data="<?php print $nid; ?>" href="javascript:void(0);">Click to Refresh</a></div>
 <div class="blog-loader-container">
 <div id="blog-loader-data" style="display: none"><img class="blog-loader" src="<?php echo base_path(); ?>sites/all/themes/itg/images/tab-loading.gif" alt="Loading..." /></div>
 <div id="live_data"><?php print itg_live_blog_list($nid); ?></div></div>
@@ -12,7 +13,41 @@
 <script>  
 
 jQuery(document).ready(function($){
-  
+    
+    $(document).on('click', '.liveblog-custom-data', function() {  
+        var current_object = jQuery( this );
+        
+        console.log( 'Testing some data' );
+        jQuery('#blog-loader-data').show();
+        // var base_url = settings.itg_breaking_new_form.settings.base_url;
+        var slug_id = jQuery( this ).attr( 'data' );
+        jQuery('.custom_blog_bid').val(slug_id);
+        jQuery('.custom_blog_action').val('update');
+        setTimeout(function() {
+            jQuery('.form-submit').mousedown();
+        }, 3000);    
+    });
+      
+    jQuery( ".referesh-custom-data" ).click( function() {
+      console.log( 'refresh data' );
+      var entityId = jQuery( this ).attr( 'data' );
+      var row = 0;
+      if(entityId) {
+        $.ajax({
+            url: '/itg-live-blog-refresh',
+            type: 'post',
+            data: {row:row,entityId:entityId},
+            success: function(response){
+              if(response) {
+                $('#live_data').html(response);
+              }                                    
+            }
+        });
+      } 
+    });
+    
+     
+      
     $(document).on('click', '.blog_highlight_checkbox', function() {
         if ($(this).attr("checked")) 
         {

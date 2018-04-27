@@ -133,7 +133,11 @@
                                         <div class="widget-wrapper">
                                             <h4 class="heading">Most Popular</h4>                                            
                                             <div class="data-holder" id="itg-block-7">
-                                                <?php echo views_embed_view('most_popular', 'elections_most_popular'); ?>
+                                                <?php
+                                                  $block = block_load('itg_widget', 'election_most_popular');
+                                                  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                  print render($render_array);
+                                                ?>
                                             </div>
                                         </div>             
                                     </div>
@@ -155,16 +159,6 @@
                                     </div>
                                 </div>
                             </div> 
-                            <div class="col-md-12 col-sm-6 mt-50">
-                                <div class="itg-widget">
-                                    <div class="droppable">                                        
-                                        <h4 class="heading">Map</h4>                                                 
-                                        <div class="data-holder" id="itg-block-12">
-
-                                        </div>
-                                    </div>    
-                                </div>
-                            </div>
                             <div class="itg-484 col-md-12 col-sm-6 mt-50">
                                 <div class="itg-widget">
                                     <div class="droppable">                                        
