@@ -392,7 +392,7 @@ function getCoverstoriesList($issue_date) {
     $cover_st_cont = count($story_list_array);
         if ($cover_st_cont < 2) {
         // select node belong from current term id or child term id
-        $listcount = $cover_st_cont;
+        $loop_count = $cover_st_cont;
         $range_min = 0;        
         $range_max = 2- $cover_st_cont;
     
