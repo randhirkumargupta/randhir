@@ -691,7 +691,7 @@ function itg_breaking_form_ajax_submit($form , &$form_state) {
                 'blog_description' => $blog_description,
                 'blog_breaking_band' => $blog_breaking_band,
                 'blog_notification' => $blog_notification,
-                'blog_publish_time' => $publish_time,
+                //'blog_publish_time' => $publish_time,
                 'blog_highlight_status' => $blog_highlight_status,
                 'update_uid' => $blog_uid,
                 'blog_updated_date' => $created,
