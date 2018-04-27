@@ -237,7 +237,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     }
     
     //selection of suplement story
-    if($listcount < 9){
+    /*if($listcount < 9){
         $range_min = 0;
         if (!$pageno == 0) {
             $range_min = $pageno * $range_max;
@@ -245,7 +245,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         $range_max = 10- ($listcount + 1);
         $supp_ar = itg_rapid_get_supplement_by_issue($issue_date);
         $story_list_array = itg_rapid_get_supp_story($supp_ar, $range_min, $range_max);
-    }
+    }*/
     $listcount = count($story_list_array);
     $data['lcount'] = $listcount;
     $data['data'] = $story_list_array;
