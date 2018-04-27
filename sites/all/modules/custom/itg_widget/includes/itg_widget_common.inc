@@ -826,6 +826,9 @@ function itg_widget_theme() {
         'election_most_popular' => array(
             'template' => 'templates/election-most-popular',
         ),
+        'election_constituency_page' => array(
+            'template' => 'templates/election-constituency-block',
+        ),
 
     );
     return $themes;
@@ -3622,6 +3625,22 @@ function get_constituency_large_map_html($category_tid) {
     $output .= '<div class="constituency-full-map">';
     $output .= $result;
     $output .= '</div>';
+  }
+  return $output;
+}
+
+function get_constituency_json_url($catid){
+  $output = '';
+  if (!empty($catid)) {
+    $map_query = db_select('node', 'n');
+    $map_query->join('field_data_field_constituency_json_url', 'fc', 'fc.entity_id = n.nid');
+    $map_query->join('field_data_field_graph_category', 'fg', 'fg.entity_id = n.nid');
+    $map_query->fields('fc', array('field_constituency_json_url‎_value'));
+    $map_query->condition('fg.field_graph_category_value', $catid);
+    $map_query->condition('fg.bundle', 'election_graph_xml');
+    $map_query->condition('fc.bundle', 'election_graph_xml');
+    $result = $map_query->execute()->fetchField();
+    $output = $result;
   }
   return $output;
 }
