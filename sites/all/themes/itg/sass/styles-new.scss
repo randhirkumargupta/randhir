@@ -266,7 +266,7 @@ input[type="text"] {
             margin-bottom: 20px;
             border-bottom: 1px solid #222222;
             padding: 15px 0px;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
         }
         .caption {
             .cap-text {
@@ -291,7 +291,7 @@ input[type="text"] {
             color: #c1c1c1;
             text-transform: uppercase;
             left: auto;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
             margin-top: 0;
             &:hover {
                 color: #fff;
@@ -348,7 +348,7 @@ input[type="text"] {
     .photo-by {
         font-size: 14px;
         color: #626262;
-        
+        font-family: roboto;
     }
     .photo-by-slider {
         background: transparent;
@@ -366,6 +366,7 @@ input[type="text"] {
         font-weight: 700;
         text-transform: capitalize;
         font-size: 26px;
+        font-family: roboto;
         text-align: center;
         line-height: 150px;
     }
@@ -441,9 +442,8 @@ input[type="text"] {
     font-weight: 600;
     margin-bottom: 5px;
     height: auto;
-    font-family: "OpenSans-Bold";
     a {
-        color: #111;
+        color: #323232;
     }
 }
 
@@ -476,7 +476,7 @@ input[type="text"] {
                 margin: 0;
                 padding: 10px 15px 3px;
                 border-bottom: 3px solid #fff;
-                font-family: $itg-opensans;
+                font-family: $itg-roboto;
                 font-weight: 500;
                 color: #969696;
                 &:hover,
@@ -532,7 +532,7 @@ input[type="text"] {
                             background-color: rgba(0, 0, 0, .5);
                             color: #fff;
                             font-size: 12px;
-                            font-family: $itg-opensans;
+                            font-family: $itg-roboto;
                             .fa {
                                 font-size: 16.5px;
                                 margin-right: 5px;
@@ -544,11 +544,11 @@ input[type="text"] {
                         font-size: 12px;
                         color: #b1b1b1;
                         padding: 8px 0 5px;
-                        font-family: $itg-opensans;
+                        font-family: $itg-robotoslab;
                     }
                     a {
                         color: #494949;
-                        font-family: $itg-opensans;
+                        font-family: $itg-robotoslab;
                     }
                 }
                 &:nth-child(4n+1) {
@@ -571,7 +571,6 @@ input[type="text"] {
     overflow: hidden;
     margin-top: 5px;
     line-height: 22px;
-    font-size:18px;
 }
 
 .itg-widget .tab-buttons span {
@@ -586,8 +585,9 @@ input[type="text"] {
     .ad-widget {
         border: 1px solid #ddd;
         height: 321px;
-        padding: 25px 37px;
-        .sidebar-ad {            
+        padding: 37px;
+        .sidebar-ad {
+            background: #ddd;
             height: 100%;
         }
     }
@@ -668,14 +668,14 @@ input[type="text"] {
     }
     .user-name {
         color: #1a3c8d;
-        font: 500 27px/27px $itg-opensans;
+        font: 500 27px/27px $itg-roboto;
         text-transform: uppercase;
         padding: 12px 0 2px;
         word-wrap: break-word;
     }
     .logout-link a {
         color: #777;
-        font: 400 16px/18px $itg-opensans;
+        font: 400 16px/18px $itg-roboto;
     }
 }
 
@@ -709,6 +709,7 @@ input[type="text"] {
     padding: 0;
     text-align: center;
     vertical-align: middle;
+    font-family: roboto;
     .total-point-value {
         display: inline-block;
         vertical-align: middle;
@@ -818,7 +819,7 @@ input[type="text"] {
         a {
             display: block;
             color: #4f4f4f;
-            font: 300 18px/18px $itg-opensans;
+            font: 300 18px/18px $itg-roboto;
             padding: 10px 8px;
             background-color: #f6f6f7;
             &:before {
@@ -893,7 +894,7 @@ input[type="text"] {
             border-bottom: 1px solid #f1f1f1;
             color: #515151;
             display: block;
-            font: 400 15px/18px $itg-opensans;
+            font: 400 15px/18px $itg-roboto;
             &.active,
             &:hover {
                 border-top-color: #bb3330;
@@ -960,7 +961,7 @@ input[type="text"] {
                 padding: 0 7px;
                 text-transform: uppercase;
                 color: #fff;
-                font-family: $itg-opensans;
+                font-family: $itg-roboto;
                 z-index: 10;
                 white-space: nowrap;
                 overflow: hidden;
@@ -1121,7 +1122,7 @@ input[type="text"] {
         td {
             padding: 10px;
             max-width: 300px;
-            font: 300 16px/22px $itg-opensans;
+            font: 300 16px/22px $itg-roboto;
             min-width: 120px;
         }
     }
@@ -1152,7 +1153,7 @@ input[type="text"] {
                     border: 1px solid rgba(0, 0, 0, .20);
                     box-shadow: 0 0 3px 0 #ccc;
                     color: #bababa;
-                    font: 300 16px/normal $itg-opensans;
+                    font: 300 16px/normal $itg-roboto;
                     text-align: center;
                 }
             }
@@ -1169,7 +1170,7 @@ input[type="text"] {
                 label {
                     width: 150px;
                     padding: 0 20px;
-                    font: 300 14px/36px $itg-opensans;
+                    font: 300 14px/36px $itg-roboto;
                     background-color: #fbfbfb;
                     border-right: 1px solid #e0e0e0;
                     z-index: 99;
@@ -1210,7 +1211,7 @@ input[type="text"] {
                     width: 150px;
                     height: 570px;
                     padding: 0 20px;
-                    font: 300 14px/36px $itg-opensans;
+                    font: 300 14px/36px $itg-roboto;
                     background-color: #fbfbfb;
                     border-right: 1px solid #e0e0e0;
                     z-index: 99;
@@ -1247,7 +1248,7 @@ input[type="text"] {
                         width: 150px;
                         height: 125px;
                         padding: 0 20px;
-                        font: 300 14px/36px $itg-opensans;
+                        font: 300 14px/36px $itg-roboto;
                         background-color: #fbfbfb;
                         border-right: 1px solid #e0e0e0;
                         z-index: 99;
@@ -1320,7 +1321,7 @@ input[type="text"] {
                     border: none;
                     width: 170px;
                     max-width: 40%;
-                    font: 300 20px/28px $itg-opensans;
+                    font: 300 20px/28px $itg-roboto;
                     color: #fff;
                     cursor: pointer;
                     &:hover {
@@ -1334,7 +1335,7 @@ input[type="text"] {
                     width: 170px;
                     max-width: 40%;
                     border-radius: 4px;
-                    font: 300 20px/41px $itg-opensans;
+                    font: 300 20px/41px $itg-roboto;
                     display: inline-block;
                     vertical-align: top;
                     color: #fff;
@@ -1466,7 +1467,7 @@ input[type="text"] {
                 height: 41px;
                 border: none;
                 width: 170px;
-                font: 300 20px/28px $itg-opensans;
+                font: 300 20px/28px $itg-roboto;
                 color: #fff;
                 margin: 0 20px;
                 cursor: pointer;
@@ -1492,7 +1493,7 @@ input[type="text"] {
         td {
             padding: 10px;
             max-width: 300px;
-            font: 300 16px/22px $itg-opensans;
+            font: 300 16px/22px $itg-roboto;
             min-width: 120px;
         }
         th {
@@ -1527,7 +1528,7 @@ input[type="text"] {
             display: inline-block;
             vertical-align: middle;
             padding: 10px 0;
-            font: 400 14px/18px $itg-opensans;
+            font: 400 14px/18px $itg-roboto;
             &+span:before {
                 content: '|';
                 display: inline-block;
@@ -1557,13 +1558,13 @@ input[type="text"] {
     .page-error-pic {
         text-align: center;
         p {
-            font: 16px/18px $itg-opensans;
+            font: 16px/18px $itg-robotoslab;
         }
     }
     .go-back {
         color: #000;
         padding-top: 30px;
-        font: 19px/28px $itg-opensans;
+        font: 19px/28px $itg-robotoslab;
         a {
             color: #1a3c8d;
         }
@@ -1572,14 +1573,14 @@ input[type="text"] {
         display: block;
         text-indent: 100px;
         color: #6c6c6c;
-        font: 19px/28px $itg-opensans;
+        font: 19px/28px $itg-robotoslab;
         padding: 20px 0;
     }
     h3 {
         background-color: #1a3c8d;
         color: #fff;
         display: inline-block;
-        font: 500 18px/28px $itg-opensans;
+        font: 500 18px/28px $itg-roboto;
         padding: 0 5px;
         text-transform: uppercase;
         vertical-align: top;
@@ -1652,7 +1653,7 @@ input[type="text"] {
     }
     .survey-description {
         color: #929292;
-        font: 400 14px/20px $itg-opensans;
+        font: 400 14px/20px $itg-roboto;
         margin-top: 10px;
     }
     .byline {
@@ -1661,7 +1662,7 @@ input[type="text"] {
         margin: 20px 0;
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
-        @include itg-font($itg-opensans);
+        @include itg-font($itg-roboto);
         @include font(12px);
         @include clearfix;
         a {
@@ -1778,7 +1779,7 @@ input[type="text"] {
                     line-height: 26px;
                 }
                 dfn {
-                    font: normal 400 12px/18px $itg-opensans;
+                    font: normal 400 12px/18px $itg-roboto;
                     display: block;
                 }
             }
@@ -1787,7 +1788,7 @@ input[type="text"] {
 }
 
 .question-container {
-    font-family: $itg-opensans;
+    font-family: $itg-roboto;
     .question-heading {
         font-size: 20px;
         font-weight: 500;
@@ -1802,7 +1803,7 @@ input[type="text"] {
         padding: 5px 10px;
         color: #fff;
         background-color: #989898;
-        font: 500 14px/18px $itg-opensans;
+        font: 500 14px/18px $itg-roboto;
     }
     .answer-container {
         position: relative;
@@ -1822,7 +1823,7 @@ input[type="text"] {
                 }
                 >label {
                     color: #323232;
-                    font: 400 14px/18px $itg-opensans;
+                    font: 400 14px/18px $itg-robotoslab;
                 }
             }
             &.form-type-checkbox {
@@ -1832,14 +1833,14 @@ input[type="text"] {
                 }
                 >label {
                     color: #323232;
-                    font: 400 14px/18px $itg-opensans;
+                    font: 400 14px/18px $itg-robotoslab;
                 }
             }
         }
         .form-type-checkboxs {
             >label {
                 color: #323232;
-                font: 400 14px/18px $itg-opensans;
+                font: 400 14px/18px $itg-robotoslab;
             }
         }
         .form-type-textfield {
@@ -1848,13 +1849,13 @@ input[type="text"] {
                 padding: 8px 20px 0 0;
                 width: 220px;
                 color: #323232;
-                font: 400 14px/18px $itg-opensans;
+                font: 400 14px/18px $itg-robotoslab;
             }
             .form-text {
                 width: 516px;
                 max-width: 100%;
                 height: 42px;
-                font: 400 14px/18px $itg-opensans;
+                font: 400 14px/18px $itg-roboto;
                 color: #322323;
             }
         }
@@ -1895,7 +1896,7 @@ input[type="text"] {
         background: linear-gradient(#4fb5ff, #0986e0);
         /* Standard syntax */
         font-size: 18px;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         color: #fff;
         font-weight: 400;
         margin-right: 20px;
@@ -1966,7 +1967,7 @@ input[type="text"] {
                 vertical-align: top;
                 padding: 0;
                 text-transform: uppercase;
-                
+                font-family: roboto;
             }
             .form-radios {
                 text-align: center;
@@ -1988,7 +1989,7 @@ input[type="text"] {
             background-color: #e3e3e3;
             border: none;
             font-weight: 500;
-            font-family:$itg-opensanssemibold;
+            font-family: $itg-roboto;
             color: #5f5f5f;
             margin: 15px auto 0;
             display: inherit;
@@ -2050,7 +2051,7 @@ input[type="text"] {
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px $itg-opensans;
+        font: 14px/18px $itg-roboto;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
@@ -2078,7 +2079,7 @@ input[type="text"] {
         display: none !important;
     }
     .block .block-title {
-        font: 400 18px/18px $itg-opensans;
+        font: 400 18px/18px $itg-roboto;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -2091,7 +2092,7 @@ input[type="text"] {
     }
     #block-block-2>p {
         margin-top: 30px;
-        
+        font-family: roboto;
     }
 }
 
@@ -2102,7 +2103,7 @@ input[type="text"] {
     position: relative;
     margin-top: 45px;
     .block-title {
-        font: 500 24px/30px $itg-opensans;
+        font: 500 24px/30px $itg-roboto;
         border-bottom: 1px solid #d8d8d8;
         padding-bottom: 15px;
         margin-bottom: 15px;
@@ -2130,7 +2131,7 @@ input[type="text"] {
         }
         .product-title {
             text-transform: uppercase;
-            font: 400 16px/18px $itg-opensans;
+            font: 400 16px/18px $itg-roboto;
             padding-top: 15px;
             height: 51px;
             overflow: hidden;
@@ -2141,7 +2142,7 @@ input[type="text"] {
         }
         .redeem-points {
             text-transform: uppercase;
-            font: 600 18px/18px $itg-opensans;
+            font: 600 18px/18px $itg-roboto;
             padding-top: 5px;
             color: #a00606;
         }
@@ -2155,7 +2156,7 @@ input[type="text"] {
             color: #777;
             display: inline-block;
             vertical-align: top;
-            font: 600 14px/18px $itg-opensans;
+            font: 600 14px/18px $itg-roboto;
             height: 30px;
             padding: 5px 10px;
             position: relative;
@@ -2176,7 +2177,7 @@ input[type="text"] {
             color: #fff;
             display: inline-block;
             vertical-align: top;
-            font: 600 14px/18px $itg-opensans;
+            font: 600 14px/18px $itg-roboto;
             height: 30px;
             padding: 5px 10px;
             margin: 0 5px;
@@ -2199,7 +2200,7 @@ input[type="text"] {
         top: 9px;
         a {
             color: #777;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
             &:hover {
                 color: #1a3c8d;
             }
@@ -2244,7 +2245,7 @@ body.has-cart-popup {
                 position: relative;
                 vertical-align: top;
                 width: 212px;
-                font: 500 14px/18px $itg-opensans;
+                font: 500 14px/18px $itg-roboto;
                 &:before {
                     border-color: transparent #2f2f2f transparent transparent;
                     border-style: solid;
@@ -2283,22 +2284,22 @@ body.has-cart-popup {
             top: 10px;
         }
         h2 {
-            font: 400 28px/30px $itg-merriweatherbold;
-            color: #111;
+            font: 400 28px/30px $itg-roboto;
+            color: #000;
         }
         p {
             color: #676767;
-            font: 400 14px/22px $itg-opensans;
+            font: 400 14px/22px $itg-roboto;
             margin: 10px 0;
         }
         .redeem-points {
             strong {
-                font: 400 18px/28px $itg-opensans;
+                font: 400 18px/28px $itg-roboto;
                 color: #000;
             }
             span {
                 display: block;
-                font: 600 18px/28px $itg-opensans;
+                font: 600 18px/28px $itg-roboto;
                 padding-top: 5px;
                 color: #a00606;
             }
@@ -2313,7 +2314,7 @@ body.has-cart-popup {
             color: #777;
             display: inline-block;
             vertical-align: top;
-            font: 600 14px/18px $itg-opensans;
+            font: 600 14px/18px $itg-roboto;
             height: 30px;
             padding: 5px 15px;
             margin: 0 5px;
@@ -2333,7 +2334,7 @@ body.has-cart-popup {
             color: #fff;
             display: inline-block;
             vertical-align: top;
-            font: 600 14px/18px $itg-opensans;
+            font: 600 14px/18px $itg-roboto;
             height: 30px;
             padding: 5px 15px;
             margin: 0 5px;
@@ -2359,7 +2360,7 @@ body.has-cart-popup {
 
 [id*="itg-quiz-quiz-form"] {
     .question-heading {
-        font: 400 20/28px $itg-opensans;
+        font: 400 20/28px $itg-roboto;
         color: #000;
         position: relative;
         padding-left: 20px;
@@ -2442,7 +2443,7 @@ body.has-cart-popup {
     ul.messages__list {
         padding-left: 18px;
         font-size: 14px;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
     }
     .center-heading {
         text-align: center;
@@ -2477,7 +2478,7 @@ body.has-cart-popup {
         padding-top: 20px;
         max-width: 540px;
         margin: 0 auto;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         color: #666;
         line-height: 24px;
         .form-item-ufname {
@@ -2605,13 +2606,13 @@ body.has-cart-popup {
         }
         .user-name {
             color: #1a3c8d;
-            font: 500 15px/18px $itg-opensans;
+            font: 500 15px/18px $itg-roboto;
             padding: 5px 0 0;
             text-transform: uppercase;
         }
         .logout-link a {
             color: #777;
-            font: 400 12px/12px $itg-opensans;
+            font: 400 12px/12px $itg-roboto;
         }
     }
     .header-cart {
@@ -2620,7 +2621,7 @@ body.has-cart-popup {
         padding-top: 40px;
         li {
             float: left;
-            font: 400 14px/18px $itg-opensans;
+            font: 400 14px/18px $itg-roboto;
             position: relative;
             color: #777;
             .cart-total {
@@ -2635,7 +2636,7 @@ body.has-cart-popup {
             &#my-remaining-points {
                 span {
                     color: #1a3c8d;
-                    font: 500 14px/18px $itg-opensans;
+                    font: 500 14px/18px $itg-roboto;
                 }
             }
             &.my-history-link {
@@ -2645,7 +2646,7 @@ body.has-cart-popup {
             }
             &+li:before {
                 content: '|';
-                font: 400 14px/18px $itg-opensans;
+                font: 400 14px/18px $itg-roboto;
                 color: #777;
                 margin: 0 12px 0 15px;
             }
@@ -2664,7 +2665,7 @@ body.has-cart-popup {
     vertical-align: top;
     width: 100%;
     .product-details {
-        font: 400 15px/18px $itg-opensans;
+        font: 400 15px/18px $itg-roboto;
         color: #000;
         >div {
             padding-bottom: 8px;
@@ -2684,7 +2685,7 @@ body.has-cart-popup {
         >div {
             display: inline-block;
             vertical-align: top;
-            font: 400 16px/24px $itg-opensans;
+            font: 400 16px/24px $itg-roboto;
             color: #2f2f2f;
             &.cart-action-links {
                 display: block;
@@ -2723,7 +2724,7 @@ body.has-cart-popup {
         width: 100%;
         padding-bottom: 15px;
         strong {
-            font: 600 16px/18px $itg-opensans;
+            font: 600 16px/18px $itg-roboto;
             color: #000;
             &:first-child {
                 float: left;
@@ -2739,7 +2740,7 @@ body.has-cart-popup {
         width: 100%;
         padding-top: 15px;
         span {
-            font: 400 16px/18px $itg-opensans;
+            font: 400 16px/18px $itg-roboto;
             color: #000;
             &:first-child {
                 float: left;
@@ -2752,7 +2753,7 @@ body.has-cart-popup {
     .checkout a {
         display: block;
         padding: 10px;
-        font: 500 22px/22px $itg-opensans;
+        font: 500 22px/22px $itg-roboto;
         background-color: #a00606;
         box-shadow: 2px 2px 0 #000;
         color: #fff;
@@ -2874,13 +2875,13 @@ body.has-cart-popup {
         height: 42px;
         border: 1px solid #d9d9d9;
         width: 100%;
-        font: 400 14px/18px $itg-opensans;
+        font: 400 14px/18px $itg-roboto;
     }
     .form-textarea {
         height: 82px;
         border: 1px solid #d9d9d9;
         width: 100%;
-        font: 400 14px/18px $itg-opensans;
+        font: 400 14px/18px $itg-roboto;
     }
     .form-submit {
         background-color: #000;
@@ -2888,7 +2889,7 @@ body.has-cart-popup {
         border-radius: 4px;
         color: #fff;
         cursor: pointer;
-        font: 400 14px/28px $itg-opensans;
+        font: 400 14px/28px $itg-roboto;
         height: 50px;
         padding: 0 20px;
         margin-top: 5px;
@@ -2906,11 +2907,11 @@ body.has-cart-popup {
     table {
         width: 100%;
         border-collapse: collapse;
-        font: 400 15px/20px $itg-opensans;
+        font: 400 15px/20px $itg-roboto;
         margin: 30px 0;
         th {
             background-color: #d9d9d9;
-            font: 500 15px/20px $itg-opensans;
+            font: 500 15px/20px $itg-roboto;
         }
         td {
             border-bottom: 1px solid #d9d9d9;
@@ -2980,7 +2981,7 @@ body.has-cart-popup {
 .page-user,
 .page-signup {
     form {
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         max-width: 780px;
         margin: 0 auto;
         padding: 20px 20px;
@@ -3034,7 +3035,7 @@ body.has-cart-popup {
         .form-text {
             width: 100%;
             height: 42px;
-            font: 400 14px/normal $itg-opensans;
+            font: 400 14px/normal $itg-roboto;
         }
         div.description {
             font-size: 12px;
@@ -3062,7 +3063,7 @@ body.has-cart-popup {
             color: #fff;
             padding: 0 15px 0 55px;
             overflow: hidden;
-            font: 400 16px/48px $itg-opensans;
+            font: 400 16px/48px $itg-roboto;
             @include display-inline;
             &+a {
                 margin-left: 10px;
@@ -3104,7 +3105,7 @@ body.has-cart-popup {
             vertical-align: middle;
             background-color: #fff;
             padding: 0 10px;
-            font: 300 16px/18px $itg-opensans;
+            font: 300 16px/18px $itg-roboto;
             color: #777;
             position: relative;
             z-index: 9;
@@ -3267,8 +3268,27 @@ body.has-cart-popup {
 .quotes{
 	blockquote {
 		color: #000;
-		font: 400 19px/28px $itg-merriweathersemibold;
+		font: 600 20px/28px $itg-robotoslab;
 		position: relative;
+		text-indent: 40px;
+		&:before {
+			content: "\201C";
+			display: inline-block;
+			font: bold 60px/28px Georgia, serif;
+			vertical-align: baseline;
+			position: absolute;
+			left: 0;
+			top: 12px;
+			text-indent: 0;
+		}
+		&:after {
+			content: "\201D";
+			display: inline-block;
+			font: bold 60px/0px Georgia, serif;
+			vertical-align: top;
+			text-indent: 10px;
+			margin-top: 32px;
+		}
 	}
 }
 .recom-listing,
@@ -3321,9 +3341,8 @@ footer .footer-top ul li a:hover {
 
 .quotes {
     float: none;
-    margin:15px 0 15px 10%;
-    border-left: 5px solid #bb0a0a;
-    padding:0 0 0 20px;
+    margin:15px 0;
+    width:100%;
     .author {
         font-size: 12px;
         color: #828282;
@@ -3451,7 +3470,7 @@ footer .footer-top ul li a:hover {
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    font-family: $itg-opensans;
+    font-family: $itg-roboto;
     font-size: 14px;
     font-weight: 500;
     height: 32px;
@@ -3514,7 +3533,7 @@ footer .footer-top ul li a:hover {
 .ugc-success {
     background-color: #fff;
     color: green;
-    font-family: $itg-opensans;
+    font-family: $itg-roboto;
     padding: 100px 0;
     text-align: center;
     h2 {
@@ -3602,7 +3621,7 @@ footer .footer-top ul li a:hover {
 .region-front-end-breadcrumb {
     color: #a1a1a1;
     margin-bottom: 5px;
-    font: 400 14px/18px $itg-opensans;
+    font: 400 14px/18px $itg-roboto;
     a {
         color: #a1a1a1;
         &:hover {
@@ -3739,7 +3758,7 @@ body {
             height: 32px;
             border-radius: 3px;
             line-height: 22px;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
             font-size: 14px;
             display: inline-block;
             vertical-align: top;
@@ -3945,7 +3964,7 @@ div#forgot-field-heading {
 [id*="protected-pages-enter-password"] {
     fieldset {
         border: none;
-        font: 14px/18px $itg-opensans;
+        font: 14px/18px $itg-roboto;
         .fieldset-description {
             font-size: 16px;
         }
@@ -3972,13 +3991,13 @@ div#forgot-field-heading {
             margin-left: 200px;
             padding: 3px 20px 5px;
             vertical-align: top;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
         }
     }
 }
 
 [id*="itg-mobile-services-search-form"] {
-    font: 14px/18px $itg-opensans;
+    font: 14px/18px $itg-roboto;
     .container-inline-date {
         clear: none;
         float: left;
@@ -4002,7 +4021,7 @@ div#forgot-field-heading {
         border-radius: 4px;
         color: #fff;
         display: inline-block;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         font-size: 14px;
         margin-top: 23px;
         padding: 4px 10px 6px;
@@ -4027,7 +4046,7 @@ div#forgot-field-heading {
 .page-mobile-services-feed {
     .views-table {
         border-collapse: collapse;
-        font: 400 14px/18px $itg-opensans;
+        font: 400 14px/18px $itg-roboto;
         margin: 40px 0 30px;
         width: 100%;
         th {
@@ -4052,7 +4071,7 @@ div#forgot-field-heading {
         td {
             padding: 10px;
             max-width: 300px;
-            font: 300 16px/22px $itg-opensans;
+            font: 300 16px/22px $itg-roboto;
         }
     }
 }
@@ -4077,7 +4096,7 @@ div#forgot-field-heading {
 }
 
 .cart-dropdown {
-    font: 14px/18px $itg-opensans;
+    font: 14px/18px $itg-roboto;
     background-color: #fff;
     box-shadow: 0 0 15px #999;
     left: 0;
@@ -4120,7 +4139,7 @@ div#forgot-field-heading {
     }
     .cart-dropdown-title {
         color: #000;
-        font: 16px/20px $itg-opensans;
+        font: 16px/20px $itg-roboto;
         padding-bottom: 5px;
         text-transform: uppercase;
     }
@@ -4135,7 +4154,7 @@ div#forgot-field-heading {
         color: #fff;
         display: inline-block;
         vertical-align: top;
-        font: 400 13px/18px $itg-opensans;
+        font: 400 13px/18px $itg-roboto;
         height: 28px;
         padding: 5px 10px;
         margin-top: 20px;
@@ -4165,11 +4184,11 @@ div#forgot-field-heading {
     .thankyou-block {
         text-align: center;
         h2 {
-            font: 500 24px/32px $itg-merriweatherbold;
+            font: 500 24px/32px $itg-roboto;
             color: #464646;
         }
         p {
-            font: 400 15px/24px $itg-opensans;
+            font: 400 15px/24px $itg-roboto;
             color: #a8a8a8;
             padding: 10px 0 30px;
         }
@@ -4177,7 +4196,7 @@ div#forgot-field-heading {
     .order-summary-block {
         border: 1px solid #dedede;
         h3 {
-            font: 500 20px/28px $itg-opensans;
+            font: 500 20px/28px $itg-roboto;
             color: #464646;
             padding: 10px;
             text-align: center;
@@ -4188,9 +4207,9 @@ div#forgot-field-heading {
             border-width: 1px 0;
             padding: 8px 20px;
             color: #828282;
-            font: 400 15px/18px $itg-opensans;
+            font: 400 15px/18px $itg-roboto;
             span {
-                font: 500 14px/18px $itg-opensans;
+                font: 500 14px/18px $itg-roboto;
                 color: #000;
             }
         }
@@ -4217,21 +4236,21 @@ div#forgot-field-heading {
         .cart-details {
             overflow: hidden;
             h4 {
-                font: 500 15px/20px $itg-opensans;
+                font: 500 15px/20px $itg-roboto;
                 color: #000;
             }
             span {
-                font: 400 12px/18px $itg-opensans;
+                font: 400 12px/18px $itg-roboto;
                 color: #9e9e9e;
             }
         }
         .delivery-by {
-            font: 400 15px/20px $itg-opensans;
+            font: 400 15px/20px $itg-roboto;
             color: 000;
             text-align: center;
         }
         .total-points {
-            font: 400 15px/20px $itg-opensans;
+            font: 400 15px/20px $itg-roboto;
             color: 000;
             text-align: right;
         }
@@ -4259,12 +4278,12 @@ div#forgot-field-heading {
         width: 100%;
         padding: 15px 0;
         h3 {
-            font: 500 20px/28px $itg-opensans;
+            font: 500 20px/28px $itg-roboto;
             color: #000;
             padding-bottom: 5px;
         }
         address {
-            font: normal 400 15px/22px $itg-opensans;
+            font: normal 400 15px/22px $itg-roboto;
             color: #000;
             span {
                 display: block;
@@ -4273,7 +4292,7 @@ div#forgot-field-heading {
         #change-address {
             display: block;
             padding: 7px 10px;
-            font: 500 20px/20px $itg-opensans;
+            font: 500 20px/20px $itg-roboto;
             background-color: #ccc;
             box-shadow: 2px 2px 0 #000;
             color: #000;
@@ -4285,7 +4304,7 @@ div#forgot-field-heading {
         }
     }
     .sent-on-message {
-        font: normal 400 15px/20px $itg-opensans;
+        font: normal 400 15px/20px $itg-roboto;
         color: #000;
         padding: 15px 20px;
         span {
@@ -4309,7 +4328,7 @@ div#forgot-field-heading {
             width: 103px;
         }
         .prd-title {
-            font: 500 18px/24px $itg-opensans;
+            font: 500 18px/24px $itg-roboto;
             float: left;
         }
     }
@@ -4342,7 +4361,7 @@ div#forgot-field-heading {
         max-height: 480px;
         h2 {
             color: #474747;
-            font: normal 400 23px/18px $itg-merriweatherbold;
+            font: normal 400 23px/18px $itg-roboto;
             background-color: #ececec;
             border-radius: 5px 5px 0 0;
             padding: 13px;
@@ -4395,7 +4414,7 @@ div#forgot-field-heading {
         a {
             text-align: center;
             padding: 10px;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
             font-size: 14px;
             color: #1a3c8d;
             padding: 15px 20px;
@@ -4413,7 +4432,7 @@ div#forgot-field-heading {
     .social-edit {
         background: #f8f8f8;
         text-align: center;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         padding-top: 20px;
         color: #757575;
         >ul {
@@ -4449,7 +4468,7 @@ div#forgot-field-heading {
         width: 400px;
         padding: 15px;
         h2 {
-            font: 400 24px/28px $itg-merriweatherbold;
+            font: 400 24px/28px $itg-roboto;
             margin: 20px 0;
         }
         .to_be_follow {
@@ -4462,13 +4481,13 @@ div#forgot-field-heading {
                 position: relative;
                 margin: 15px;
                 border-radius: 5px;
-                font: 400 16px/20px $itg-opensans;
+                font: 400 16px/20px $itg-roboto;
                 word-wrap: break-word;
                 &:hover {
                     background-color: #efefef;
                 }
                 span {
-                    font: 400 14px/20px $itg-opensans;
+                    font: 400 14px/20px $itg-roboto;
                     position: absolute;
                     right: 5px;
                     top: 10px;
@@ -4491,7 +4510,7 @@ div#forgot-field-heading {
     vertical-align: top;
     background-color: #a00606;
     color: #fff;
-    font: 400 14px/18px $itg-opensans;
+    font: 400 14px/18px $itg-roboto;
 }
 
 .continue-shopping {
@@ -4602,7 +4621,7 @@ div#forgot-field-heading {
         text-align: center;
         font-size: 12px;
         color: #666;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         font-weight: 500;
         box-sizing: border-box;
         padding-top: 4px;
@@ -4676,7 +4695,7 @@ div#forgot-field-heading {
             background-color: #ef3c24;
             width: auto;
             margin: 0 5px;
-            font: 400 18px/22px $itg-opensans;
+            font: 400 18px/22px $itg-roboto;
             height: 35px;
             text-align: center;
             text-transform: uppercase;
@@ -4693,7 +4712,7 @@ div#forgot-field-heading {
             text-align: center;
             width: auto;
             margin: 0 5px;
-            font: 400 18px/28px $itg-opensans;
+            font: 400 18px/28px $itg-roboto;
             height: 35px;
             text-transform: uppercase;
             color: #fff;
@@ -4713,7 +4732,7 @@ article.node-mega-review-critic {
     .comment-mobile {
         background: #1c1c1c;
         margin: -15px -15px 20px;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         text-align: right;
         ul {
             @include display-inline;
@@ -4735,7 +4754,7 @@ article.node-mega-review-critic {
         }
     }
     h1 {
-        font: 700 34px/42px $itg-opensans;
+        font: 700 34px/42px $itg-roboto;
         color: #323232;
     }
     .rating-and-social-wrapper {
@@ -4748,7 +4767,8 @@ article.node-mega-review-critic {
             margin-top: 20px;
             span {
                 color: #bebebe;
-                float: left;                
+                float: left;
+                font-family: roboto;
                 font-size: 12px;
                 padding: 5px 15px;
                 text-align: center;
@@ -4758,7 +4778,7 @@ article.node-mega-review-critic {
                     margin-top: 10px;
                 }
                 dfn {
-                    font: normal 400 12px/18px $itg-opensans;
+                    font: normal 400 12px/18px $itg-roboto;
                     display: block;
                 }
                 a {
@@ -4778,7 +4798,8 @@ article.node-mega-review-critic {
                 padding-bottom: 0;
                 i {
                     color: #bebebe;
-                    display: block;                    
+                    display: block;
+                    font-family: roboto;
                     font-size: 40px;
                     font-style: normal;
                     font-weight: 700;
@@ -4823,13 +4844,13 @@ article.node-mega-review-critic {
                 padding: 10px 8px 0;
                 color: #a0a0a0;
                 .review-label {
-                    font: normal 300 14px/16px $itg-opensans;
+                    font: normal 300 14px/16px $itg-roboto;
                     float: left;
                     width: 60px;
                 }
                 .review-txt {
                     display: block;
-                    font: 400 14px/16px $itg-opensans;
+                    font: 400 14px/16px $itg-roboto;
                     overflow: hidden;
                     .field-name-field-mega-review-cast {
                         .field-item {
@@ -4845,11 +4866,11 @@ article.node-mega-review-critic {
                 padding-top: 4px;
                 border-top: 1px solid rgba(255, 255, 255, .20);
                 h3 {
-                    font: 700 14px/23px $itg-opensans;
+                    font: 700 14px/23px $itg-roboto;
                     color: #ffc106;
                 }
                 p {
-                    font: 400 12px/23px $itg-opensans;
+                    font: 400 12px/23px $itg-roboto;
                     color: #a0a0a0;
                 }
                 &.movie-reviewer-other {
@@ -4885,10 +4906,10 @@ article.node-mega-review-critic {
     .other-reviews {
         margin: 10px 0;
         h2 {
-            font: 700 16px/27px $itg-merriweatherbold;
+            font: 700 16px/27px $itg-roboto;
         }
         .other-reviews-posted-on {
-            font: 400 13px/27px $itg-opensans;
+            font: 400 13px/27px $itg-roboto;
             .other-reviews-by {
                 font-style: italic;
                 color: #a00606;
@@ -4952,7 +4973,7 @@ article.node-mega-review-critic {
             padding: 10px 0;
         }
         .other-reviews-desc {
-            font: 400 15px/27px $itg-opensans;
+            font: 400 15px/27px $itg-roboto;
             color: #212121;
             margin-top: 10px;
             a {
@@ -4998,7 +5019,7 @@ article.node-mega-review-critic {
                 background-color: rgba(0, 0, 0, 0.5);
                 color: #fff;
                 font-size: 12px;
-                font-family: $itg-opensans;
+                font-family: $itg-roboto;
             }
         }
         .photo-date {
@@ -5006,7 +5027,7 @@ article.node-mega-review-critic {
             font-size: 12px;
             color: #b1b1b1;
             padding: 8px 0 5px;
-            font-family: $itg-opensans;
+            font-family: $itg-roboto;
         }
     }
 }
@@ -5017,7 +5038,8 @@ article.node-mega-review-critic {
         position: relative;
         .gray-bg {
             background-color: #dedede;
-            color: #000;            
+            color: #000;
+            font-family: roboto;
             font-size: 17px;
             font-weight: 500;
             padding: 17px 20px;
@@ -5027,7 +5049,8 @@ article.node-mega-review-critic {
         .black-bg {
             background-color: #2a2a2a;
             color: #fff;
-            font-size: 24px;            
+            font-size: 24px;
+            font-family: roboto;
             font-weight: 500;
             padding: 19px 20px 19px 195px;
             line-height: 28px;
@@ -5050,7 +5073,8 @@ article.node-mega-review-critic {
     .dots-know-more {
         text-align: right;
         padding: 15px;
-        background: #f7f7f7;        
+        background: #f7f7f7;
+        font-family: roboto;
         font-size: 13px;
         font-weight: 600;
         color: #818181;
@@ -5171,7 +5195,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 border: 1px solid rgba(0, 0, 0, .20);
                 box-shadow: 0 0 3px 0 #ccc;
                 color: #bababa;
-                font: 300 16px/normal $itg-opensans;
+                font: 300 16px/normal $itg-roboto;
                 text-align: center;
             }
         }
@@ -5187,7 +5211,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             label {
                 width: 150px;
                 padding: 0 20px;
-                font: 300 14px/36px $itg-opensans;
+                font: 300 14px/36px $itg-roboto;
                 background-color: #fbfbfb;
                 border-right: 1px solid #e0e0e0;
                 z-index: 10;
@@ -5217,7 +5241,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             label {
                 width: 150px;
                 padding: 0 20px;
-                font: 300 14px/36px $itg-opensans;
+                font: 300 14px/36px $itg-roboto;
                 background-color: #fbfbfb;
                 border-right: 1px solid #e0e0e0;
                 z-index: 10;
@@ -5247,7 +5271,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 width: 150px;
                 height: 128px;
                 padding: 0 20px;
-                font: 300 14px/36px $itg-opensans;
+                font: 300 14px/36px $itg-roboto;
                 background-color: #fbfbfb;
                 border-right: 1px solid #e0e0e0;
                 z-index: 10;
@@ -5271,7 +5295,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         }
         .form-type-checkboxes {
             >label {
-                font: 300 14px/18px $itg-opensans;
+                font: 300 14px/18px $itg-roboto;
                 color: #000;
                 display: block;
                 padding: 5px 0;
@@ -5284,7 +5308,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     margin-bottom: 10px;
                     vertical-align: top;
                     label {
-                        font: 400 13px/18px $itg-opensans;
+                        font: 400 13px/18px $itg-roboto;
                         vertical-align: top;
                         color: #757575;
                     }
@@ -5301,7 +5325,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             >label {
                 width: 150px;
                 padding: 0 20px;
-                font: 300 14px/36px $itg-opensans;
+                font: 300 14px/36px $itg-roboto;
                 background-color: #fbfbfb;
                 border: 1px solid #e0e0e0;
                 border-radius: 5px 0 0 5px;
@@ -5314,7 +5338,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     float: left;
                     margin: 0 0 0 40px;
                     label {
-                        font: 300 14px/36px $itg-opensans;
+                        font: 300 14px/36px $itg-roboto;
                     }
                 }
             }
@@ -5360,7 +5384,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 >label {
                     width: 150px;
                     padding: 0 20px;
-                    font: 300 14px/36px $itg-opensans;
+                    font: 300 14px/36px $itg-roboto;
                     background-color: #fbfbfb;
                     border-right: 1px solid #e0e0e0;
                     z-index: 10;
@@ -5383,7 +5407,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 width: 150px;
                 height: 125px;
                 padding: 0 20px;
-                font: 300 14px/36px $itg-opensans;
+                font: 300 14px/36px $itg-roboto;
                 background-color: #fbfbfb;
                 border-right: 1px solid #e0e0e0;
                 z-index: 10;
@@ -5411,7 +5435,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             div.description {
                 display: none;
                 color: #5f5f5f;
-                font: 400 12px/16px $itg-opensans;
+                font: 400 12px/16px $itg-roboto;
                 margin-top: 8px;
                 padding-left: 270px;
             }
@@ -5420,7 +5444,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 margin-bottom: 20px;
                 &+.form-submit {
                     color: #ee4d4d;
-                    font: 400 13px/18px $itg-opensans;
+                    font: 400 13px/18px $itg-roboto;
                     border: none;
                     background-color: #fff;
                     cursor: pointer;
@@ -5440,7 +5464,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     display: none;
                 }
                 a {
-                    font: 400 13px/18px $itg-opensans;
+                    font: 400 13px/18px $itg-roboto;
                     color: #323232;
                     pointer-events: none;
                 }
@@ -5482,7 +5506,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 height: 41px;
                 border: none;
                 width: 170px;
-                font: 300 20px/28px $itg-opensans;
+                font: 300 20px/28px $itg-roboto;
                 color: #fff;
                 cursor: pointer;
             }
@@ -5491,7 +5515,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 height: 41px;
                 border: none;
                 width: 170px;
-                font: 300 20px/41px $itg-opensans;
+                font: 300 20px/41px $itg-roboto;
                 display: inline-block;
                 vertical-align: top;
                 color: #fff;
@@ -5533,7 +5557,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             border: medium none;
             color: #fff;
             cursor: pointer;
-            font: 300 20px/28px $itg-opensans;
+            font: 300 20px/28px $itg-roboto;
             height: 41px;
             width: 170px;
             margin: 30px auto 0;
@@ -5587,7 +5611,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         padding: 10px;
         background: #09619f;
         color: #fff;
-        border-bottom: 5px solid #fff;        
+        border-bottom: 5px solid #fff;
+        font-family: roboto;
         min-width: 124px;
         max-width: 124px;
         text-align: left;
@@ -5739,7 +5764,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             padding: 20px 50px;
             .slick-slide {
                 .title {
-                    font: 500 26px/30px $itg-opensans;
+                    font: 500 26px/30px $itg-roboto;
                     padding-bottom: 12px;
                     padding-right: 50px;
                     white-space: nowrap;
@@ -5814,7 +5839,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             padding: 5px 0 0;
         }
         .title {
-            font: 500 20px/24px $itg-opensans;
+            font: 500 20px/24px $itg-roboto;
             color: #323232;
             height: 48px;
             overflow: hidden;
@@ -6073,7 +6098,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                         border: 1px solid rgba(0, 0, 0, .20);
                         box-shadow: 0 0 3px 0 #ccc;
                         color: #bababa;
-                        font: 300 16px/normal $itg-opensans;
+                        font: 300 16px/normal $itg-roboto;
                         text-align: center;
                     }
                 }
@@ -6195,7 +6220,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                                 display: none;
                             }
                             a {
-                                font: 400 13px/18px $itg-opensans;
+                                font: 400 13px/18px $itg-roboto;
                                 color: #323232;
                                 pointer-events: none;
                             }
@@ -6219,7 +6244,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                         border: none;
                         width: 170px;
                         max-width: 40%;
-                        font: 300 20px/28px $itg-opensans;
+                        font: 300 20px/28px $itg-roboto;
                         color: #fff;
                         cursor: pointer;
                         &:hover {
@@ -6233,7 +6258,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                         width: 170px;
                         max-width: 40%;
                         border-radius: 4px;
-                        font: 300 20px/41px $itg-opensans;
+                        font: 300 20px/41px $itg-roboto;
                         display: inline-block;
                         vertical-align: top;
                         color: #fff;
@@ -6316,7 +6341,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     }
                     .user-logout {
                         a {
-                            font-family: $itg-opensans;
+                            font-family: $itg-roboto;
                             color: #8d8d8d;
                         }
                     }
@@ -6361,7 +6386,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             .tab-text {
                 display: block;
                 color: #4f4f4f;
-                font: 400 14px/18px $itg-opensans;
+                font: 400 14px/18px $itg-roboto;
                 padding: 8px 8px;
                 background-color: #e7e5e6;
                 height: 36px;
@@ -6655,7 +6680,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                         display: none;
                     }
                     a {
-                        font: 400 13px/18px $itg-opensans;
+                        font: 400 13px/18px $itg-roboto;
                         color: #323232;
                         pointer-events: none;
                     }
@@ -6703,7 +6728,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     height: 41px;
                     border: none;
                     width: 170px;
-                    font: 300 20px/28px $itg-opensans;
+                    font: 300 20px/28px $itg-roboto;
                     color: #fff;
                     cursor: pointer;
                 }
@@ -6712,7 +6737,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     height: 41px;
                     border: none;
                     width: 170px;
-                    font: 300 20px/41px $itg-opensans;
+                    font: 300 20px/41px $itg-roboto;
                     display: inline-block;
                     vertical-align: top;
                     color: #fff;
@@ -6752,7 +6777,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 border: medium none;
                 color: #fff;
                 cursor: pointer;
-                font: 300 20px/28px $itg-opensans;
+                font: 300 20px/28px $itg-roboto;
                 height: 41px;
                 width: 170px;
                 margin: 30px auto 0;
@@ -6852,7 +6877,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     /* Responsive CSS For Loyalty and Rewards */
     [id*="block-views-redeem-points-block"] {
         .block-title {
-            font: 500 18px/24px $itg-opensans;
+            font: 500 18px/24px $itg-roboto;
         }
     }
     #block-itg-loyalty-reward-itg-loyalty-reward-header {
@@ -6897,7 +6922,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             }
             .btn-add-cart,
             .btn-redeem-points {
-                font: 500 13px/18px $itg-opensans;
+                font: 500 13px/18px $itg-roboto;
                 padding: 5px 8px;
                 margin: 0;
             }
@@ -6942,7 +6967,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 padding-bottom: 30px;
                 .btn-add-cart,
                 .btn-redeem-points {
-                    font: 500 13px/18px $itg-opensans;
+                    font: 500 13px/18px $itg-roboto;
                     padding: 5px 8px;
                     margin: 0;
                 }
@@ -7115,7 +7140,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             }
             .product-details {
                 float: none;
-                font: 400 12px/14px $itg-opensans;
+                font: 400 12px/14px $itg-roboto;
                 >div {
                     span {
                         color: #6c6c6c;
@@ -7318,7 +7343,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .block-itg-personalization .personal-menu-tab-mobile .tab-text {
     display: block;
     color: #4f4f4f;
-    font: 400 14px/24px $itg-opensans;
+    font: 400 14px/24px $itg-roboto;
     padding: 8px 8px 8px 40px;
     background-color: #e7e5e6;
     height: 36px;
@@ -7335,7 +7360,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 #block-itg-mega-reviews-critics-mega-review-mobile-header {
     .comment-mobile {
         background: #1c1c1c;
-        font-family: $itg-opensans;
+        font-family: $itg-roboto;
         text-align: right;
         ul {
             @include display-inline;
