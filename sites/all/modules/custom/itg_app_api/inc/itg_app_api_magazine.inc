@@ -1099,7 +1099,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max) {
 
 
     //end
-    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_select_supplement_target_id', $supp_ar, 'IN')->orderBy('iwo.widget', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_select_supplement_target_id', $supp_ar, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag
