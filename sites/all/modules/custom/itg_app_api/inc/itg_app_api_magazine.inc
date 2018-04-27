@@ -588,7 +588,7 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $pageno) {
     }
 
 
-    $loop_count = 0;
+    $loop_count = 0; 
 
     // issue list query..
     $query_issue = db_select('node', 'n');
