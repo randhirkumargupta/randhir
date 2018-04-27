@@ -83,9 +83,9 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     html += "<tr><td>Spouse Dependants</td><td>" + (data.spouse_dependants !== undefined ? data.spouse_dependants : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #candidates table tbody").html(html);
     if (consData.lbl_candidates !== undefined) {
-        jQuery("#constituency-top-chunk #candidates labels").html(consData.lbl_candidates);
+        jQuery("#constituency-top-chunk #candidates .labels").html(consData.lbl_candidates);
     } else {
-        jQuery("#constituency-top-chunk #candidates labels").html('Candidates');
+        jQuery("#constituency-top-chunk #candidates .labels").html('Candidates');
     }
 
     var mocHTML = "";
