@@ -149,6 +149,7 @@ $fb_appid = variable_get('itg_sharing_app_id');
   <?php } ?> 
 </div>
 <div class="timeline">
+    <div class="most-recent">Most Recent</div>
   <?php  
   if (!empty($custom_content)) {
     $breaking_output .= '';
@@ -171,8 +172,7 @@ $fb_appid = variable_get('itg_sharing_app_id');
       $breaking_output .= '<div class="blog-multi-desc">'. $breaking_desc .'</div>';
       $breaking_output .= '<amp-social-share type="facebook" data-param-app_id="'.$fb_appid.'" data-param-text="'.$breaking_title.'"></amp-social-share>';
       $breaking_output .= '<amp-social-share type="twitter"></amp-social-share>';
-      $breaking_output .= '<amp-social-share type="gplus"></amp-social-share>';
-      //$breaking_output .= '<div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
+      $breaking_output .= '<amp-social-share type="gplus"></amp-social-share>';      
       $breaking_output .= '</div>';      
     }
     print $breaking_output;       
@@ -180,4 +180,14 @@ $fb_appid = variable_get('itg_sharing_app_id');
   ?>
 </div>
 <?php endif; ?>
+<?php if(!empty(variable_get('amp_taboola_ad_script'))) { ?>
+  <div class="amp-taboola">
+    <?php print variable_get('amp_taboola_ad_script'); ?>
+  </div>
+<?php } ?>
+<?php if(!empty(variable_get('amp_story_second_ad'))) { ?>
+	<div class="custom-amp-ad ad-btf">
+	  <?php print variable_get('amp_story_second_ad'); ?> 
+	</div>
+<?php } ?>
    
