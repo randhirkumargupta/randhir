@@ -213,7 +213,7 @@ function itg_seo_node_data($node) {
                     "logo": [
                       {
                         "@type": "ImageObject",
-                        "url": "'.FRONT_URL.'sites/all/themes/itg/logo.png",
+                        "url": "'.FRONT_URL.'/sites/all/themes/itg/logo.png",
                         "width": "128px",
                         "height": "128px"
                       }
