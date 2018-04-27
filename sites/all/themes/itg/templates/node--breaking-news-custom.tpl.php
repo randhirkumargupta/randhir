@@ -35,7 +35,7 @@ $coverage_start_date = $blog_created_date.'T'.$blog_created_time;
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
 $custom_content = get_custom_content_details($node->nid);
 if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
-  $coverage_end = strtotime($custom_content[0]->blog_created_date);
+  $coverage_end = strtotime($custom_content[0]->blog_updated_date);
 }
 else {
   $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
