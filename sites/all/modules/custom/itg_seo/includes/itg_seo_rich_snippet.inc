@@ -209,7 +209,7 @@ function itg_seo_node_data($node) {
                   {
                     "@type": "Organization",
                     "name": "India Today",
-                    "url": "https://www.indiatoday.in/",
+                    "url": "'.FRONT_URL.'",
                     "logo": [
                       {
                         "@type": "ImageObject",
