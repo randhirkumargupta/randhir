@@ -5,14 +5,17 @@
  */
 function itg_fia_data() {  
   $start_time = strtotime("-300 day");
-  $end_time = strtotime("now");    
+  $end_time = strtotime("now");
+  $mail_today_tid = '1206572';    
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+  $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
   $query->fields('n', array('nid', 'created'));
   $query->condition('n.created', array($start_time, $end_time), 'BETWEEN'); 
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+  $query->condition('pc.field_primary_category_value',$mail_today_tid,'!=');
   $query->orderBy('n.created', 'DESC');
   $query->range(0, 100);
   $query = $query->execute()->fetchCol();
@@ -23,6 +26,64 @@ function itg_fia_data() {
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
   fclose($fp);
+}
+
+/**
+ * Implementing callback for mail today FIA
+ * @param null
+ * @return array
+ */
+function itg_mail_today_fia_data() {
+    $start_time = strtotime("-300 day");
+    $end_time = strtotime("now");
+    $mail_today_tid = '1206572';
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+    $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
+    $query->fields('n', array('nid', 'created'));
+    $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story', '=');
+    $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+    $query->condition('pc.field_primary_category_value',$mail_today_tid,'=');
+    $query->orderBy('n.created', 'DESC');
+    $query->range(0, 100);
+    $query = $query->execute()->fetchCol();
+    $xml = itg_fia_xml_node_feed($query);
+    $xml_path = 'public://fbinsight/';
+    $file_name = 'indiatoday-mailtodaynews.xml';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+}
+
+/**
+ * Implementing callback for Photos of FIA
+ * @param null
+ * @return array
+ */
+function itg_mail_photos_fia_data() {
+    $start_time = strtotime("-300 day");
+    $end_time = strtotime("now");
+    $mail_today_tid = '1206572';
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+    $query->fields('n', array('nid', 'created'));
+    $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'photogallery', '=');
+    $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+    $query->orderBy('n.created', 'DESC');
+    $query->range(0, 100);
+    $query = $query->execute()->fetchCol();
+    $xml = itg_fia_xml_node_feed($query);
+    $xml_path = 'public://fbinsight/';
+    $file_name = 'indiatoday-photogallery.xml';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
 }
 
 /**
