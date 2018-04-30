@@ -6996,21 +6996,27 @@ function generateNewsCategoryListsearch_rest($nid_str) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_manual_blog($token) {
-    $redis_key = "devitg_rapid_api_manual_blog_json";
+    //valid id
+    $id = $_GET['id'];
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+    // call function for return data..
+    $suffix = $id;
+    $redis_key = "itg_rapid_api_manual_blog_" . $suffix;
     $result_get = getRedis($redis_key);
-    $nid = $_GET['id'];
-    if ($result_get['key_value1'] != "") {
+
+    if ($result_get['key_value11'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
-        $jsondata = itg_rapid_value_manual_blog($nid);
+        // call function from return data..
+        $jsondata = itg_rapid_value_manual_blog($id);
+        $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
-
-    $obj = json_decode($jsondata, TRUE);
-    $return_obj = $obj;
-
-    return $return_obj;
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
 }
 /**
  * itg_rapid_value_manual_blog
