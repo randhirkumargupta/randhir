@@ -1139,8 +1139,8 @@ function _latest_from_aajtak() {
           $related_title = mb_strimwidth($value['content_title'], 0, 200, "..");
           $path = $value['content_url'];
           if ($value['content_thumb_image']) {
-            //$img_url = $value['content_thumb_image'];
-            $img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
+            $img_url = $value['content_thumb_image'];
+            //$img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
           }
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -1186,8 +1186,8 @@ function _latest_from_businesstoday() {
           $related_title = mb_strimwidth($value['content_title'], 0, 200, "..");
           $path = $value['content_url'];
           if ($value['content_thumb_image']) {
-            //$img_url = $value['content_thumb_image'];
-            $img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
+            $img_url = $value['content_thumb_image'];
+            //$img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
           }
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
