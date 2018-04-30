@@ -121,7 +121,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
 
         $query = db_select('node', 'n');
         //join  for field value
-        $query = leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+        $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
         $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
         $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
         $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
@@ -904,7 +904,7 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
 
     $query = db_select('node', 'n');
     //join  for field value
-    $query = leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
     $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
     $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
