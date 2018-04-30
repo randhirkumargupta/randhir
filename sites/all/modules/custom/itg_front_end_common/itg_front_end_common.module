@@ -1140,7 +1140,7 @@ function _latest_from_aajtak() {
           $path = $value['content_url'];
           if ($value['content_thumb_image']) {
             //$img_url = $value['content_thumb_image'];
-            $img_url = theme('image', array('path' => $value['content_thumb_image']));
+            $img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
           }
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -1187,7 +1187,7 @@ function _latest_from_businesstoday() {
           $path = $value['content_url'];
           if ($value['content_thumb_image']) {
             //$img_url = $value['content_thumb_image'];
-            $img_url = theme('image', array('path' => $value['content_thumb_image']));
+            $img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
           }
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
