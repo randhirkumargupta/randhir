@@ -5805,7 +5805,7 @@ function itg_rapid_api_testing($token) {
     
     //$qry = 'ALTER TABLE `itg_app_middleware_live` CHANGE `url` `url` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;';
     //db_query($qry);
-    p(1152730); // live blog
+    p(node_load(1152730)); // live blog
     p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
