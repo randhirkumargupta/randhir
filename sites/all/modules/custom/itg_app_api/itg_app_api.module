@@ -1842,11 +1842,13 @@ function formateNodeBodyToken($n_body) {
         }
     }
     // add AD block after 1st <p> start
-    $start = strpos($n_body, '<p>', 0);
+    $start = strpos($n_body, '<p>');
     $end = strpos($n_body, '</p>', $start);
     $paragraph = substr($n_body, $start, $end - $start + 4);
     $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
-    $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
+    if($paragraph != '<p> </p>'){
+        $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
+    }
     // add AD block after 1st <p> end
     $n_body = str_replace('<img', '<img style="width:100%;height:auto;"', $n_body);
     $n_body = str_replace('<iframe', '<iframe width="100%" ', $n_body);
