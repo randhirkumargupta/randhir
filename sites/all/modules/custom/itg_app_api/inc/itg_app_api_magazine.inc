@@ -107,7 +107,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     //select cover story..
     $story_list_array = itg_rapid_get_cover_story($issue_date, $range_min, $range_max);
     $cover_st_cont = count($story_list_array);
-    echo $cover_st_cont; die();
+    //echo $cover_st_cont; die();
     if ($cover_st_cont < 10) {
         // select node belong from current term id or child term id
         $listcount = $cover_st_cont;
@@ -250,7 +250,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     }
 
     //selection of suplement story
-    if ($listcount < 10) {
+    if ($cover_st_cont < 10 && $listcount < 10) {
         $range_min = 0;
         if (!$pageno == 0) {
             $range_min = $pageno * $range_max;
