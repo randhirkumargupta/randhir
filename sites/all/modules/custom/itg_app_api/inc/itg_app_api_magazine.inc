@@ -248,7 +248,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     }
 
     //selection of suplement story
-    if ($listcount < 10) {
+    if ($cover_st_cont < 10 && $listcount < 10) {
         $range_min = 0;
         if (!$pageno == 0) {
             $range_min = $pageno * $range_max;
