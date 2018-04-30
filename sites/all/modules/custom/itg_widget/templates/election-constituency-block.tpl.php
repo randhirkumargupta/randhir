@@ -3,9 +3,9 @@
 $jsondata = json_decode($data);
 $jsondata = $jsondata->$constituency;
 $top_chuck = '';
-$bottom_chuck = 'show';
+$bottom_chuck = 'hide';
 if ($jsondata->live == 1) {
-  $top_chuck = 'show';
+  $top_chuck = 'hide';
   $bottom_chuck = '';  
 }
 	$isWon = FALSE;

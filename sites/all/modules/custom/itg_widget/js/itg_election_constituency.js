@@ -114,14 +114,14 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
     })
     if (consData.live !== undefined && consData.live == "1") {
         jQuery("#other-candidates table tbody").html(html);
-        //jQuery("#other-candidates-past").hide();
+        jQuery("#other-candidates-past").hide();
         if (consData.lbl_otherscandidate !== undefined) {
             jQuery("#other-candidates .labels").html(consData.lbl_otherscandidate);
         } else {
             jQuery("#other-candidates .labels").html('Other Candidates');
         }
     } else {
-        //jQuery("#other-candidates").hide();
+        jQuery("#other-candidates").hide();
         jQuery("#other-candidates-past table tbody").html(html);
         if (consData.lbl_otherscandidate !== undefined) {
             jQuery("#other-candidates-past .labels").html(consData.lbl_otherscandidate);
