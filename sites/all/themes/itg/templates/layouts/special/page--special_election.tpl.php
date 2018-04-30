@@ -142,31 +142,32 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
                   $fb_share_title = htmlentities($search_title, ENT_QUOTES);
                   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
-                  $story_title = get_first_story_title_by_tid($itg_election_home_content_id);
-                  $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
-                  if (!empty($story_title)) {
-                    $content_link = $base_url . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
-                    $story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
-                    $actual_link = $content_link;
-                    $search_title = preg_replace("/'/", "\\'", $story_title_display);
-                    $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
-                  }
-                  else {
-                    $short_url = shorten_url($actual_link, 'goo.gl');
-                  }
-                  $display_title = "";
-                  if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
-                    $display_title = 'style="display:none"';
-                  }
-
-                  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
-                              <ul>
-                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                  <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                  <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                                  <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
-                              </ul>
-                          </div></div></div>';
+                  if (!empty($itg_election_home_content_id)) {
+                    $story_title = get_first_story_title_by_tid($itg_election_home_content_id);
+                    $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+                    if (!empty($story_title)) {
+                      $content_link = $base_url . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+                      $story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+                      $actual_link = $content_link;
+                      $search_title = preg_replace("/'/", "\\'", $story_title_display);
+                      $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
+                    }
+                    else {
+                      $short_url = shorten_url($actual_link, 'goo.gl');
+                    }
+                    $display_title = "";
+                    if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
+                      $display_title = 'style="display:none"';
+                    }
+                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
+                                <ul>
+                                    <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                    <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
+                                </ul>
+                            </div></div></div>';
+                  }                  
                   $graphdata = itg_widget_get_graph_data();
                 }
                 if (!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value']) && count($graphdata) > 2) {
