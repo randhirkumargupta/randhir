@@ -33,7 +33,18 @@ $blog_created_date = date('Y-m-d', $node->created);
 $blog_created_time = date('h:i:s', $node->created);
 $coverage_start_date = $blog_created_date.'T'.$blog_created_time;
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
-
+$custom_content = get_custom_content_details($node->nid);
+if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
+  $coverage_end = $node->changed;
+}
+else {
+  $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
+}
+$coverage_end_date = date('Y-m-d', $coverage_end);
+$coverage_end_time = date('h:i:s', $coverage_end);
+$coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time;
+$created_date = date('Y-m-d H:i:s', $node->created);
+$modify_date = date('Y-m-d H:i:s', $node->changed);
  // for call custom form value
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
@@ -42,10 +53,33 @@ $short_description_source = strip_tags($node->field_common_short_description[LAN
     <meta itemprop="url" content="<?php print $embed_path; ?>">
     <meta itemprop="description" content="<?php print $short_description_source; ?>">
     <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
-    <div class="bolg-content" id="bolgcontent">    
-    <?php endif;?>	    
-   
-</div> 
+    <div class="bolg-content" id="bolgcontent"> 
+      <?php
+        if (!empty($custom_content)) {
+          foreach ($custom_content as $breaking_embed_item) {      
+        ?>
+            <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
+              <p itemprop="headline" content="<?php print $node->title; ?>"></p>
+              <meta itemprop="datePublished" content="<?php print $created_date; ?>">
+              <meta itemprop="author" content="IndiaToday.in">
+              <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
+              <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                <meta itemprop="url" content="<?php print $embed_image; ?>">
+                <meta itemprop="width" content="650">
+                <meta itemprop="height" content="450">
+              </span>
+              <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
+                <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                  <meta itemprop="url" content="<?php print $embed_logo; ?>">
+                </span>
+                <meta itemprop="name" content="India Today">
+              </span>
+              <meta itemprop="mainEntityOfPage" content="<?php print $embed_path; ?>">
+            </div>
+          <?php }
+        } ?>
+    <?php endif;?>
+    </div> 
 <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
 </div>
 <?php endif;?>

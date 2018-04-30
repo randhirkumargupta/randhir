@@ -7,6 +7,7 @@
  * @see https://drupal.org/node/1728148
  */
 //drupal_add_library('flexslider', 'flexslider');
+
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
 $fb_share_title = htmlentities($search_title, ENT_QUOTES);
@@ -114,7 +115,11 @@ if ($theme == 'itgadmin' || $preview == 'preview') {
                                   <div class="droppable itg-layout-605">
                                       <div id="auto-new-block" class="widget-wrapper">
                                           <div class="data-holder" id="itg-block-1">
-                                              Parse json here
+                                              <?php
+                                                  $block = block_load('itg_widget', 'election_constituency_page');
+                                                  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                  print render($render_array);
+                                                ?>
                                           </div>
                                       </div>                     
                                   </div>
