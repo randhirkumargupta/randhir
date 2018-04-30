@@ -7024,24 +7024,46 @@ function itg_rapid_api_manual_blog($token) {
  * @return string
  */
 function itg_rapid_value_manual_blog($nid){
+    //1152730
+    $node_data = node_load($nid);
     $json_data = array();
     $blog_data = array();
     $blog_content = array();
     $json_data['status_code'] = "1";
     $json_data['status_message'] = "";
     // blog data code
-    $blog_data['category_id'] = "1206599";
-    $blog_data['category_title'] = "blogs";
-    $blog_data['blog_type'] = "1";
-    $blog_data['id'] = "1155588";
-    $blog_data['short_desc'] = "short_desc";
-    $blog_data['new_blog'] = "0/1";
-    $blog_data['live_tv'] = "0/1";
-    $blog_data['title'] = "";
-    $blog_data['sub_title'] = "";
-    $blog_data['large_image'] = "";
-    $blog_data['published_datetime'] = "";
-    $blog_data['share_link'] = "";
+    $category_id = $node_data->field_primary_category['und'][0]['value'];
+    $term = taxonomy_term_load($category_id);
+    $term_name = $term->name;
+    $blog_type = $node_data->field_type['und'][0]['value'];
+    $new_blog= 0;
+    if($node_data->field_multi_user_allows['und'][0]['value']){
+        $new_blog = $node_data->field_multi_user_allows['und'][0]['value'];
+    }
+    $live_tv = 0;
+    if($node_data->field_story_expires['und'][0]['value'] == 'Yes'){
+        $live_tv = 1;
+    }
+    $short_desc = $node_data->field_common_short_description['und'][0]['value'];
+    $page_title = $node_data->title;
+    $sub_title = $node_data->field_constituancy['und'][0]['value'];
+    $firebase_url = get_node_firebase_weburl($nid);
+    $publish_date = $node_data->field_itg_content_publish_date['und'][0]['value'];
+    $large_image_fid = $node_data->field_story_large_image['und'][0]['fid'];
+    $file_large_img_url = completeFilePath($large_image_fid);
+    
+    $blog_data['category_id'] = "$category_id";
+    $blog_data['category_title'] = "$term_name";
+    $blog_data['blog_type'] = "$blog_type";
+    $blog_data['id'] = "$nid";
+    $blog_data['short_desc'] = "$short_desc";
+    $blog_data['new_blog'] = "$new_blog";
+    $blog_data['live_tv'] = "$live_tv";
+    $blog_data['title'] = "$page_title";
+    $blog_data['sub_title'] = "$sub_title";
+    $blog_data['large_image'] = "$file_large_img_url";
+    $blog_data['published_datetime'] = "$publish_date";
+    $blog_data['share_link'] = "$firebase_url";
     // blog content code
     $loopc = 0;
     $blog_content[$loopc]['content_id'] = "2225";
