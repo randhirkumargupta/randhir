@@ -32,7 +32,7 @@ if ($jsondata->live == 1) {
 	}
 ?>
 
-<div class="row">
+<div class="row mb-20">
     <div class="col-md-12 <?php print $top_chuck;?>" id="other-candidates-past">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
@@ -50,7 +50,7 @@ if ($jsondata->live == 1) {
     </div>
   </div>
 <?php if(!empty($wonCondidate)) {?>
-  <div class="row" id="constituency-top-chunk">
+  <div class="row mb-20" id="constituency-top-chunk">
     <div class="col-md-6" id="candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h3>
 			<div class="text-center" id="candidates-image">
@@ -94,7 +94,7 @@ if ($jsondata->live == 1) {
     </div>
   </div>
 <?php }?>
-  <div class="row">
+  <div class="row mb-20">
     <div class="col-md-12 <?php print $bottom_chuck;?>" id="other-candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
