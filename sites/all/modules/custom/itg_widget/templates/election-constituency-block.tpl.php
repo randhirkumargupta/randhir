@@ -42,7 +42,7 @@ if ($jsondata->live == 1) {
 				 </thead>
 				 <tbody>
              <?php foreach ($otherCondidates as $key => $candidate) {
-               echo "<tr><td>".$candidate->candidate."</td><td>".$candidate->party."</td><td>".$candidate->votes."</td><td>".$candidate->percentage_votes."</td><td>".$candidate->percentage_change."</td></tr>";
+               echo "<tr><td data-column='Candidate Name'>".$candidate->candidate."</td><td data-column='Party'>".$candidate->party."</td><td data-column='Votes'>".$candidate->votes."</td><td data-column='%Votes'>".$candidate->percentage_votes."</td><td data-column='%Change'>".$candidate->percentage_change."</td></tr>";
              }?>
 				 </tbody>
 			</table>
@@ -104,7 +104,7 @@ if ($jsondata->live == 1) {
 					 </thead>
 					 <tbody>
 	            <?php foreach ($otherCondidates as $key => $candidate) {
-	              echo "<tr><td>".$candidate->candidate."</td><td>".$candidate->party."</td><td>".$candidate->votes."</td><td>".$candidate->percentage_votes."</td><td>".$candidate->percentage_change."</td></tr>";
+	              echo "<tr><td data-column='Candidate Name'>".$candidate->candidate."</td><td data-column='Party'>".$candidate->party."</td><td data-column='Votes'>".$candidate->votes."</td><td data-column='%Votes'>".$candidate->percentage_votes."</td><td data-column='%Change'>".$candidate->percentage_change."</td></tr>";
 	            }?>
 					 </tbody>
 				</table> 

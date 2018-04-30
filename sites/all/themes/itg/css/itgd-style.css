@@ -1132,6 +1132,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 /* Election Constituency page */
 .page-elections-karnataka-election-2018-constituency h1.page__title{ display: none; }
+.page-elections-karnataka-election-2018-constituency .election-page .election-graph table td{color:#272727;}
 #constituency-top-chunk .mb-20{ margin-bottom:20px; }
 #constituency-top-chunk{ border:1px solid #d4d4d4; position: relative;border-radius: 5px; padding: 10px 0; margin: 0px 2px 20px;}
 #constituency-top-chunk:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
@@ -1151,6 +1152,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .other-candidates-details table td{ background:#fff; }
 #constituency-top-chunk .constituency-details table td{ width:50% }
 #constituency-top-chunk #candidates-svg{ text-align: center; background:#f2f2f2; }
+#constituency-top-chunk #candidates-svg svg{ width:84%; margin:0 auto; }
 #other-candidates .other-candidates-details table td,#other-candidates-past .other-candidates-details table td{ width:20%;background: #fff;}
 #other-candidates .other-candidates-details table td:first-child,#other-candidates-past .other-candidates-details table td:first-child,#other-candidates .other-candidates-details table th:first-child,#other-candidates-past .other-candidates-details table th:first-child{text-align: left; padding-left: 10px; }
 #other-candidates .other-candidates-details table th,#other-candidates-past .other-candidates-details table th{ text-transform: uppercase; }
