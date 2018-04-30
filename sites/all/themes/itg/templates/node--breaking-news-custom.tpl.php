@@ -181,8 +181,9 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
     $custom_content = get_custom_content_details($node->nid);
     if (!empty($custom_content)) {
       $breaking_output .= '';
-   
+      $i = 0;
 			foreach ($custom_content as $breaking_item) {
+        $i++;
         $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
         $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
 
@@ -200,7 +201,20 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
           $breaking_output .= '<div class="blog-multi-desc">'. $html .'</div>';
           $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
           $breaking_output .= '</div></div>';
-        //}
+          if($i == 3) {
+            $breaking_output .= '<div class="breaking-section">';
+                $block = block_load('itg_ads', ADS_RHS1);
+                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                if(is_array($render_array)) {
+                  $breaking_output .=  render($render_array);
+                } else {
+                   if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                    $breaking_output .=  $itg_ad['200*200_right_bar_ad1'];
+                  }
+                }
+            $breaking_output .= '</div>'; 
+          // $i = 0;
+        }                          
       }
       $breaking_output .= '<span class="no-record" style="display:none">' . t('No Record Found') . '</span>';
       print $breaking_output;
