@@ -2589,6 +2589,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // manual_blog custom resource declaration.....
+        'manual_blog' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves manual_blog schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_manual_blog',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -5797,6 +5824,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
     //variable_set('show_web_exclusive', 1);
+    
     p(node_load(1144212));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
@@ -6960,4 +6988,66 @@ function generateNewsCategoryListsearch_rest($nid_str) {
     $data['data'] = $news_list_array;
     $data['updated_datetime'] = $pub_date;
     return $data;
+}
+/**
+ * Call back function for itg_rapid_api_manual_blog API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_manual_blog($token) {
+    $redis_key = "devitg_rapid_api_manual_blog_json";
+    $result_get = getRedis($redis_key);
+    $nid = $_GET['id'];
+    if ($result_get['key_value1'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = itg_rapid_value_manual_blog($nid);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+/**
+ * itg_rapid_value_manual_blog
+ * @param type $nid
+ * @return string
+ */
+function itg_rapid_value_manual_blog($nid){
+    $json_data = array();
+    $blog_data = array();
+    $blog_content = array();
+    $json_data['status_code'] = "1";
+    $json_data['status_message'] = "";
+    // blog data code
+    $blog_data['category_id'] = "1206599";
+    $blog_data['category_title'] = "blogs";
+    $blog_data['blog_type'] = "1";
+    $blog_data['id'] = "1155588";
+    $blog_data['short_desc'] = "short_desc";
+    $blog_data['new_blog'] = "0/1";
+    $blog_data['live_tv'] = "0/1";
+    $blog_data['title'] = "";
+    $blog_data['sub_title'] = "";
+    $blog_data['large_image'] = "";
+    $blog_data['published_datetime'] = "";
+    $blog_data['share_link'] = "";
+    // blog content code
+    $loopc = 0;
+    $blog_content[$loopc]['content_id'] = "2225";
+    $blog_content[$loopc]['desc_withouthtml'] = "2225";
+    $blog_content[$loopc]['desc_withhtml'] = "2225";
+    $blog_content[$loopc]['updated_datetime'] = "2225";
+    $blog_content[$loopc]['title'] = "2225";
+    
+    $blog_data['blog_content'] = $blog_content;
+    
+    //  data object
+    $json_data['data'] = $blog_data;
+    return $json_data;
+    
 }
