@@ -1174,6 +1174,7 @@ else if ($widget_style == 'election-so-sorry') {
             if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
               //$extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
               $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'section_ordering_widget'));
+              
             }
             ?>
             <?php if ($count == 0) : ?>
