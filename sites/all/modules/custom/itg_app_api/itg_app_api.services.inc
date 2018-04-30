@@ -7024,8 +7024,9 @@ function itg_rapid_api_manual_blog($token) {
  * @return string
  */
 function itg_rapid_value_manual_blog($nid){
-    //1152730
+    //1144212
     $node_data = node_load($nid);
+    //$node_data = node_load(1144212);
     p($node_data);
     $json_data = array();
     $blog_data = array();
