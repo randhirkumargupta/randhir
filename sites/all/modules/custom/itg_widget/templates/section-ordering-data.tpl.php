@@ -1581,7 +1581,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             //pr($entity);
             if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
               // $extra_large_image_url = image_style_url("section_ordering_widget", $entity['li_file_uri']);
-              //$extra_large_image_url = file_create_url($entity['mi_file_uri']);
+              $extra_large_image_url = file_create_url($entity['mi_file_uri']);
             }
             ?>
             <?php if ($count == 0) : ?>
