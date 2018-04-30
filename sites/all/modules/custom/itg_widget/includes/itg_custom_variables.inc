@@ -102,7 +102,7 @@ function itg_election_configure() {
     '#type' => 'textfield',
     '#title' => t('Live Home election Bottom label'),
     '#default_value' => get_itg_variable('itg_election_home_bottom_label'),
-    '#size' => 512,
+    '#size' => 60,
     '#required' => FALSE,
     '#maxlength' => 60,
   );
