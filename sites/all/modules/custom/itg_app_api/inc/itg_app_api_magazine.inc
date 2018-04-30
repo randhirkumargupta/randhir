@@ -107,6 +107,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     //select cover story..
     $story_list_array = itg_rapid_get_cover_story($issue_date, $range_min, $range_max);
     $cover_st_cont = count($story_list_array);
+    echo $cover_st_cont; die();
     if ($cover_st_cont < 10) {
         // select node belong from current term id or child term id
         $listcount = $cover_st_cont;
