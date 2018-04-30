@@ -7116,7 +7116,7 @@ function itg_rapid_value_manual_blog($nid){
     //1165361
     $node_data = node_load($nid);
     //$node_data = node_load(1165361);
-    p($node_data);
+    //p($node_data);
     $json_data = array();
     $blog_data = array();
     $blog_content = array();
