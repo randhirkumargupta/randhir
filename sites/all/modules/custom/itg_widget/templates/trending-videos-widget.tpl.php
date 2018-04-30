@@ -11,7 +11,8 @@
         <?php if (!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['nid']); ?>">
             <?php $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']); ?>
-              <img src="<?php print $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt'] ?>" title="<?php echo $entity['field_story_extra_small_image_title'] ?>" />
+              <!-- <img src="<?php print $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt'] ?>" title="<?php echo $entity['field_story_extra_small_image_title'] ?>" /> -->
+			  <?php print theme('image', array('path' => $entity['esi_file_uri'], 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
           </a>
           <?php
         }
