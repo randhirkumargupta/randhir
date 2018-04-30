@@ -25,7 +25,8 @@ if ($widget_style == 'auto-road-trip') {
               <li <?php echo $data_tb_region_item;?> class="trending-videos-list">
                   <?php
                   if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                   }
                   ?>
 
@@ -131,7 +132,8 @@ else if ($widget_style == 'buying-guid') {
               $desc = $entity['title'];
 
               if ((!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-                $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                //$extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'anchors_landing'));
               }
               else {
                 $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -254,7 +256,8 @@ else if ($widget_style == 'in-depth') {
 
               if ($count == 0) {
                 if ((!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-                  $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  //$extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'anchors_landing'));
                 }
                 else {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -283,7 +286,8 @@ else if ($widget_style == 'in-depth') {
               }
               else if ($count == 1) {
                 if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                  $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                  //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                  $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                 }
                 else {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -331,7 +335,8 @@ else if ($widget_style == 'in-depth') {
                   $nid = $entity['nid'];
                   if ($count > 1) {
                     if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                      $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                      //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                      $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                     }
                     else {
                       $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -392,7 +397,8 @@ else if ($widget_style == 'movies-celebrities') {
 
               if ($count == 0) {
                 if ((!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-                  $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  //$extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'anchors_landing'));
                 }
                 else {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -424,7 +430,8 @@ else if ($widget_style == 'movies-celebrities') {
               print "<ul class='moviesinglelist'>";  
               
               if ((!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri']))) {
-                $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
               }
               else {
                 $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -473,7 +480,8 @@ else if ($widget_style == 'movies-celebrities') {
                   $nid = $entity['nid'];
                   if ($count > 2) {
                     if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                      $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                      //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                      $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                     }
                     else {
                       $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -533,7 +541,8 @@ else if ($widget_style == 'movies-lifestyle') {
 
               if ($count == 0) {
                 if ((!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-                  $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  //$extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'anchors_landing'));
                 }
                 else {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -599,7 +608,8 @@ else if ($widget_style == 'movies-lifestyle') {
                   $nid = $entity['nid'];
                   if ($count > 2) {
                     if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                      $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                      //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                      $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                     }
                     else {
                       $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -658,7 +668,8 @@ else if ($widget_style == 'oscar-news') {
               $nid = $entity['nid'];
               if ($count == 0) {
                 if ((!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-                  $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  //$extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
+                  $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'anchors_landing'));
                 }
                 else {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -689,7 +700,8 @@ else if ($widget_style == 'oscar-news') {
               }
               else if ($count > 0) {
                 if ((!empty($entity['si_file_uri']) && isset($entity['si_file_uri']))) {
-                  $extra_large_image_url = image_style_url("widget_small", $entity['si_file_uri']);
+                  //$extra_large_image_url = image_style_url("widget_small", $entity['si_file_uri']);
+                  $extra_large_image_url = theme('image_style', array('path' => $entity['si_file_uri'],'style_name' => 'widget_small'));
                 }
                 else {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
@@ -745,7 +757,8 @@ else if ($widget_style == 'standpoint') {
     libraries_load('flexslider');
     module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
     if ((!empty($entity['uri']) && isset($entity['uri']))) {
-      $extra_large_image_url = image_style_url("section_ordering_widget", $entity['uri']);
+      //$extra_large_image_url = image_style_url("section_ordering_widget", $entity['uri']);
+      $extra_large_image_url = theme('image_style', array('path' => $entity['uri'],'style_name' => 'section_ordering_widget'));
     }
     else {
       $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -799,7 +812,8 @@ else if ($widget_style == 'oscar-features') {
           $desc = $entity['title'];
           $nid = $entity['nid'];
           if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-            $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+            //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+            $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
           }
           else {
             $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -857,7 +871,8 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
               <li <?php echo $data_tb_region_item;?> class="trending-videos-list">
                   <?php
                   if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                   }
                   else {
                     $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -916,7 +931,8 @@ else if ($widget_style == 'home-shows') {
               <li <?php echo $data_tb_region_item;?> class="trending-videos-list">
                   <?php
                   if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                   }
                   else {
                     $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -977,7 +993,8 @@ else if ($widget_style == 'home-watch') {
 
                       <?php
                       if ((!empty($entity['si_file_uri']) && file_exists($entity['si_file_uri']))) {
-                        $extra_large_image_url = image_style_url("image170x127", $entity['si_file_uri']);
+                        //$extra_large_image_url = image_style_url("image170x127", $entity['si_file_uri']);
+                        $extra_large_image_url = theme('image_style', array('path' => $entity['si_file_uri'],'style_name' => 'image170x127'));
                       }
                       else {
                         $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
@@ -1035,7 +1052,8 @@ else if ($widget_style == 'budget-decoded') {
               <li <?php echo $data_tb_region_item;?>>
                   <?php
                   if ((!empty($entity['esi_file_uri']) && isset($entity['si_file_uri']))) {
-                    $extra_large_image_url = image_style_url("anchors_landing", $entity['si_file_uri']);
+                    //$extra_large_image_url = image_style_url("anchors_landing", $entity['si_file_uri']);
+                    $extra_large_image_url = theme('image_style', array('path' => $entity['si_file_uri'],'style_name' => 'anchors_landing'));
                   }
                   else {
                     $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
@@ -1094,7 +1112,8 @@ else if ($widget_style == 'sport-column') {
               <li <?php echo $data_tb_region_item;?> class="trending-videos-list">
                   <?php
                   if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
+                    $extra_large_image_url = theme('image_style', array('path' => $entity['esi_file_uri'],'style_name' => 'widget_very_small'));
                   }
                   ?>
 
@@ -1153,7 +1172,8 @@ else if ($widget_style == 'election-so-sorry') {
             $desc = $entity['title'];
             $nid = $entity['nid'];
             if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-              $extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
+              //$extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
+              $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'section_ordering_widget'));
             }
             ?>
             <?php if ($count == 0) : ?>
@@ -1227,7 +1247,8 @@ else if ($widget_style == 'talking-point') {
                   }
 
                   if ((!empty($node_data->field_story_extra_large_image['und'][0]['uri']) && isset($node_data->field_story_extra_large_image['und'][0]['uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $node_data->field_story_extra_large_image['und'][0]['uri']);
+                    //$extra_large_image_url = image_style_url("widget_very_small", $node_data->field_story_extra_large_image['und'][0]['uri']);
+                    $extra_large_image_url = theme('image_style', array('path' => $node_data->field_story_extra_large_image['und'][0]['uri'],'style_name' => 'widget_very_small'));
                   }
                   else {
                     $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -1288,7 +1309,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             $desc = $entity['title'];
             $nid = $entity['nid'];
             if ($count == 0 && (!empty($entity['mi_file_uri']) && isset($entity['mi_file_uri']))) {
-              $extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
+              //$extra_large_image_url = image_style_url("section_ordering_widget", $entity['mi_file_uri']);
+              $extra_large_image_url = theme('image_style', array('path' => $entity['mi_file_uri'],'style_name' => 'section_ordering_widget'));
             }
 
             $video_class = "pic-no-icon";
@@ -1385,7 +1407,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             $desc = "";
             $nid = $entity['nid'];
             if ($count == 0 && (!empty($entity['uri']) && isset($entity['uri']))) {
-              $extra_large_image_url = image_style_url("magazine_rhs_100x140", $entity['uri']);
+              //$extra_large_image_url = image_style_url("magazine_rhs_100x140", $entity['uri']);
+              $extra_large_image_url = theme('image_style', array('path' => $entity['uri'],'style_name' => 'magazine_rhs_100x140'));
               if (!empty($entity['field_story_kicker_text_value'])) {
                 $desc = $entity['field_story_kicker_text_value'];
               }
