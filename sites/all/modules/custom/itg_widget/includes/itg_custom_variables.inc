@@ -102,17 +102,15 @@ function itg_election_configure() {
     '#type' => 'textfield',
     '#title' => t('Live Home election Bottom label'),
     '#default_value' => get_itg_variable('itg_election_home_bottom_label'),
-    '#size' => 20,
+    '#size' => 512,
     '#required' => FALSE,
-    '#maxlength' => 20,
+    '#maxlength' => 60,
   );
   $form['itg_election_home_bottom_label_url'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Live Home election Bottom label Link'),
     '#default_value' => get_itg_variable('itg_election_home_bottom_label_url'),
-    '#size' => 20,
-    '#required' => FALSE,
-    '#maxlength' => 20,
+    '#required' => FALSE
   );
   $form['submit_election'] = array(
     '#type' => 'submit',
