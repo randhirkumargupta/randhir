@@ -42,7 +42,7 @@ if ($jsondata->live == 1) {
 				 </thead>
 				 <tbody>
              <?php foreach ($otherCondidates as $key => $candidate) {
-               echo "<tr><td>".$candidate->candidate."<td><td>".$candidate->party."<td><td>".$candidate->votes."<td><td>".$candidate->percentage_votes."<td><td>".$candidate->percentage_change."<td></tr>";
+               echo "<tr><td>".$candidate->candidate."</td><td>".$candidate->party."</td><td>".$candidate->votes."</td><td>".$candidate->percentage_votes."</td><td>".$candidate->percentage_change."</td></tr>";
              }?>
 				 </tbody>
 			</table>
@@ -104,7 +104,7 @@ if ($jsondata->live == 1) {
 					 </thead>
 					 <tbody>
 	            <?php foreach ($otherCondidates as $key => $candidate) {
-	              echo "<tr><td>".$candidate->candidate."<td><td>".$candidate->party."<td><td>".$candidate->votes."<td><td>".$candidate->percentage_votes."<td><td>".$candidate->percentage_change."<td></tr>";
+	              echo "<tr><td>".$candidate->candidate."</td><td>".$candidate->party."</td><td>".$candidate->votes."</td><td>".$candidate->percentage_votes."</td><td>".$candidate->percentage_change."</td></tr>";
 	            }?>
 					 </tbody>
 				</table> 
