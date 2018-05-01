@@ -7079,13 +7079,14 @@ function itg_rapid_value_manual_blog($nid) {
             $desc_withhtml = $field_breaking_tile;
             $title = "";
             $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];   
-            
+            $posted_by = "";
             
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
             $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml";
             $blog_content[$loopc]['updated_datetime'] = "$field_breaking_publish_time";
             $blog_content[$loopc]['title'] = "$title";
+            $blog_content[$loopc]['posted_by'] = "$posted_by";
             $loopc++;
         }
     }
