@@ -315,13 +315,14 @@ function generateNewsCategoryList($tid, $pageno) {
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             if($new_blog == 0 && $field_type_value == "Yes"){
-                $n_blog[0]['blog_type'] = "$blog_type";
-                $n_blog[0]['id'] = "$nid";
-                $n_blog[0]['sub_title'] = "$sub_title";
-                $n_blog[0]['short_desc'] = "$short_desc";
-                $n_blog[0]['new_blog'] = "$new_blog";
-                $n_blog[0]['live_tv'] = "$live_tv";
+                $n_blog['blog_type'] = "$blog_type";
+                $n_blog['id'] = "$nid";
+                $n_blog['sub_title'] = "$sub_title";
+                $n_blog['short_desc'] = "$short_desc";
+                $n_blog['new_blog'] = "$new_blog";
+                $n_blog['live_tv'] = "$live_tv";
             }
+            $n_blog = (object) $n_blog;
             $news_list_array[$listcount]['n_blog'] = $n_blog;
 
             $listcount++;
