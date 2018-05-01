@@ -79,7 +79,7 @@ function generateNewsCategoryList($tid, $pageno) {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
@@ -120,12 +120,6 @@ function generateNewsCategoryList($tid, $pageno) {
 
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
         $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-        // for breaking_news
-        $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
-        $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
-        $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
-        $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
-        $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -143,13 +137,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-        
-        // for breaking_news
-        $query->fields('fmu', array('field_multi_user_allows_value'));
-        $query->fields('fcsd', array('field_common_short_description_value'));
-        $query->fields('fdt', array('field_type_value'));
-        $query->fields('fse', array('field_story_expires_value'));
-        $query->fields('fdc', array('field_constituancy_value'));
+
 
         //end
         /*
@@ -166,10 +154,6 @@ function generateNewsCategoryList($tid, $pageno) {
         $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
-        // for breaking_news start
-        $query->condition('fdt.field_type_value', 'Live Blog');
-        $query->condition('fmu.field_multi_user_allows_value', 1 , '!=');
-        // for breaking_news end
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -297,29 +281,6 @@ function generateNewsCategoryList($tid, $pageno) {
             $news_list_array[$listcount]['n_video'] = $videolist;
             // re-insalize vediolist
             $videolist = array();
-            
-            // for breaking_news
-            $n_blog = array();
-            $created = $resvalue['created'];
-            $blog_type = $resvalue['field_type_value'];
-            $new_blog = 0;
-            if ($resvalue['field_multi_user_allows_value']) {
-                $new_blog = $resvalue['field_multi_user_allows_value'];
-            }
-            $live_tv = 0;
-            if ($resvalue['field_story_expires_value'] == 'Yes') {
-                $live_tv = 1;
-            }
-            $short_desc = $resvalue['field_common_short_description_value'];
-            $sub_title = $resvalue['field_constituancy_value'];
-            $page_title = $node_data->title;
-            $n_blog['blog_type'] = "$blog_type";
-            $n_blog['id'] = "$nid";
-            $n_blog['sub_title'] = "$sub_title";
-            $n_blog['short_desc'] = "$short_desc";
-            $n_blog['new_blog'] = "$new_blog";
-            $n_blog['live_tv'] = "$live_tv";
-            $news_list_array[$listcount]['n_blog'] = $n_blog;
 
             $listcount++;
         }
