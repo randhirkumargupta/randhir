@@ -3564,6 +3564,7 @@ function get_html_widget_data_by_layout($section_name, $template_name, $block_na
 }
 
 function get_election_most_popular($cat_id, $limit = 12){
+  $arg = arg();
   $offset = 20;
   $query = db_select('field_data_field_is_election_live', 'el');
   $query->condition('el.entity_id', $cat_id, '=');
@@ -3572,6 +3573,9 @@ function get_election_most_popular($cat_id, $limit = 12){
   if(!empty($data)){
     $offset = 4;
   }
+  if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
+		$offset = 0;
+	}
   $node_data = get_top_story_from_category($cat_id, $limit, $offset);
   return $node_data;
 }
