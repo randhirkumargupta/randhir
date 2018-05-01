@@ -187,6 +187,9 @@ function generateNewsCategoryList($tid, $pageno) {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            if($type == 'breaking_news'){
+                $field_story_kicker_text_value = $resvalue['field_common_short_description_value'];
+            }
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
