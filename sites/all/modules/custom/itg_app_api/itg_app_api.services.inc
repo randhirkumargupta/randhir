@@ -7071,14 +7071,14 @@ function itg_rapid_value_manual_blog($nid) {
     $loopc = 0;
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
-        foreach ($content_ar as $key => $value) {            
-            $entity = entity_load('field_collection_item', $value);
-            p($entity);
-            $field_breaking_tile = $entity->field_breaking_tile['und'][0]['value'];            
+        foreach ($content_ar as $key => $value) {   
+            $content_id = $value['value'];
+            $entity = entity_load('field_collection_item', $value);            
+            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];            
             $desc_withouthtml = strip_tags($field_breaking_tile);
             $desc_withhtml = $field_breaking_tile;
             $title = "";
-            $field_breaking_publish_time = $entity->field_breaking_publish_time['und'][0]['value'];   
+            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];   
             $create_datetime = date("Y-m-d H:i:s", $field_breaking_publish_time);
             
             $blog_content[$loopc]['content_id'] = "$content_id";
