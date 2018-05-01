@@ -51,6 +51,7 @@ if ($jsondata->live == 1) {
   </div>
 <?php if(!empty($wonCondidate)) {?>
   <div class="row mb-20" id="constituency-top-chunk">
+    <div class="mb-viewsection">
     <div class="col-md-6" id="candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h3>
 			<div class="text-center" id="candidates-image">
@@ -91,6 +92,7 @@ if ($jsondata->live == 1) {
 					</tbody>
 				</table> 
 			</div>  
+    </div>
     </div>
   </div>
 <?php }?>
