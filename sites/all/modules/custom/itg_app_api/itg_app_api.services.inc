@@ -7073,6 +7073,7 @@ function itg_rapid_value_manual_blog($nid) {
         $content_ar = $node_data->field_breaking_content_details['und'];
         foreach ($content_ar as $key => $value) {            
             $entity = entity_load('field_collection_item', $value);
+            p($entity);
             $field_breaking_tile = $entity->field_breaking_tile['und'][0]['value'];            
             $desc_withouthtml = strip_tags($field_breaking_tile);
             $desc_withhtml = $field_breaking_tile;
