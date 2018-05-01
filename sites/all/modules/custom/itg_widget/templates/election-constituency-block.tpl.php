@@ -36,7 +36,7 @@ if ($jsondata->live == 1) {
     <div class="col-md-12 <?php print $top_chuck;?>" id="other-candidates-past">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
-			<table class="table">
+			<table class="table" id="other-candidates">
 				 <thead>
 					 <th>Candidate name</th><th>Party</th><th>Votes</th><th>% Votes</th><th>% Change</th>
 				 </thead>
@@ -116,8 +116,10 @@ if ($jsondata->live == 1) {
 <?php endif; ?>
 
 <script type="text/javascript">
+if (is_mobile) {
 var oRows = document.getElementById('othercandidates-list').getElementsByTagName('tr');
 var iRowCount = oRows.length; iRowCount = iRowCount - 1;
-var totalwidth = iRowCount*310;
+var totalwidth = iRowCount*330;
 document.getElementById('othercandidates-list').style.width = totalwidth +'px';
+}
 </script>
