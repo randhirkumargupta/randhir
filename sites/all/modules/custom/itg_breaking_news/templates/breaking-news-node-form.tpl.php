@@ -13,6 +13,7 @@
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_match_id']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
+  <?php print drupal_render($form['field_story_embed_webcast']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>
   <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
