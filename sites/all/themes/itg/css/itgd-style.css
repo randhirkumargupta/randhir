@@ -1169,7 +1169,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #other-candidates .other-candidates-details tr:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
 #other-candidates .other-candidates-details td{border:none;position:relative;padding-left:50%;}
 #other-candidates .other-candidates-details td:before{text-align:left; position:absolute;top:0px;left:0px;width:45%;padding-right:10px;white-space:nowrap;content:attr(data-column);}
-#constituency-top-chunk{border:0px;border-radius:0px;margin: 0 -15px 20px; overflow-x:auto; overflow:hidden; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
+#constituency-top-chunk{border:0px;border-radius:0px;margin: 0 -15px 20px; overflow-x:auto; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
 #constituency-top-chunk::-webkit-scrollbar { display: none;width: 0px; background: transparent;}
 #constituency-top-chunk:before{ display: none; }
 #constituency-top-chunk #candidates, #constituency-top-chunk #map-of-constituency{ width:310px; float: left; } 
