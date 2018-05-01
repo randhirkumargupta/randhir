@@ -811,6 +811,21 @@ function itg_widget_theme() {
         'score_card_iframe' => array(
             'template' => 'templates/score-card-iframe',
         ),
+        'election_top_stories' => array(
+            'template' => 'templates/election-top-stories',
+        ),
+        'election_who_said_what' => array(
+            'template' => 'templates/election-who-said-what',
+        ),
+        'election_know_your_party' => array(
+            'template' => 'templates/election-know-your-party',
+        ),
+        'election_key_issues' => array(
+            'template' => 'templates/election-key-issues',
+        ),
+        'election_most_popular' => array(
+            'template' => 'templates/election-most-popular',
+        ),
 
     );
     return $themes;
@@ -1524,7 +1539,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     // Start alter for tech
     if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8' || $view->current_display == 'movie_latest')) {
         if ($theme != 'seven') {
-            if ($theme == FRONT_THEME_NAME) {
+            if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
                 $section = arg(2);
             } else {
                 $section = $_GET['section'];
@@ -1568,7 +1583,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     //  condition for election most popular
     if ($view->name == 'most_popular' && ($view->current_display == 'elections_most_popular' )) {
         if ($theme != 'seven') {
-            if ($theme == FRONT_THEME_NAME) {
+            if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
                 $section = arg(2);
             } else {
                 $section = $_GET['section'];
@@ -1579,7 +1594,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             if (empty($section)) {
                 $section = $_GET['section_name'];
             }
-
+             
             $query->where[1]['conditions'][3]['value'] = $section;
         }
     }
@@ -3478,4 +3493,135 @@ function is_programme($tid, $flag_occupation, $page_argument) {
     return TRUE;
   }
   return FALSE;
+}
+
+
+function get_top_story_from_category($cat_id, $limit = 4, $offset = 0){
+  $query = db_select('node', 'n'); 
+  $query->leftJoin('itg_widget_order', 'wo', 'wo.nid=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');    
+  $query->condition('wo.widget', 'section_wise_widget')
+          ->condition('n.status', 1)
+          ->condition('wo.cat_id', $cat_id)
+          ->condition('wo.content_type', 'All', 'LIKE')
+          ->groupBy('n.nid')
+          ->orderBy('wo.weight', 'DESC')
+          ->orderBy('n.created', 'DESC')
+          ->range($offset, $limit)
+          ->fields('n', array('nid', 'title', 'type'));
+  $query->fields('fm', array('uri'));
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');  
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=fsei.field_story_expert_image_fid');  
+  $query->leftJoin('field_data_field_cm_display_title', 'fcdt', 'fcdt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_kicker_text', 'fskt', 'fskt.entity_id=n.nid');  
+  
+  $query->fields('fseu', array('field_story_external_url_value'));
+  $query->fields('fm', array('uri'));
+  $query->fields('fcdt', array('field_cm_display_title_value'));
+  $query->fields('fskt', array('field_story_kicker_text_value'));
+  $query->range(0, $limit);
+  $query->condition('fiel.field_is_election_live_value', 1);
+  $query->condition('fmt.field_miscellaneous_type_value', $type);
+  if(!empty($cat_id)){
+    $query->condition('fpc.field_primary_category_value', $cat_id);
+  }
+  $result = $query->execute()->fetchAll();
+  return $result;  
+}
+
+
+function get_html_widget_data_by_layout($section_name, $template_name, $block_name = 'itg-block-11', $widget_name = 'custom_html_widgets'){
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('filter_url'));
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+  $itg_query->condition('layout_tpl.section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('layout_manager.block_name', $block_name);
+  $itg_query->condition('layout_manager.widget_name', $widget_name);
+  $result = $itg_query->execute()->fetchAll();
+  if(!empty($result[0]->filter_url)){
+    $query = db_select('field_data_body', 'db');
+    $query->condition('db.entity_id', $result[0]->filter_url);
+    $query->fields('db', array('body_value'));
+    $result1 = $query->execute()->fetchAll();
+    return $result1[0]->body_value;
+  }
+  return '';
+}
+
+function get_election_most_popular($cat_id, $limit = 12){
+  $offset = 20;
+  $query = db_select('field_data_field_is_election_live', 'el');
+  $query->condition('el.entity_id', $cat_id, '=');
+  $query->fields('el', array('field_is_election_live_value'));
+  $data = $query->execute()->fetchField();
+  if(!empty($data)){
+    $offset = 4;
+  }
+  $node_data = get_top_story_from_category($cat_id, $limit, $offset);
+  return $node_data;
+}
+
+/**
+ * Mini Map Content Block.
+ * @param type $cat_id
+ * @return string
+ */
+function get_election_mini_map_content($cat_id) {
+  $output = '';
+  if (isset($cat_id)) {
+    $cat_url = drupal_get_path_alias('taxonomy/term/' . $cat_id);
+    $graph_page_url = FRONT_URL . '/' . $cat_url . '/constituency-map';
+    $map_query = db_select('node', 'n');
+    $map_query->join('field_data_field_mini_map_json_url', 'fm', 'fm.entity_id = n.nid');
+    $map_query->join('field_data_field_graph_category', 'fg', 'fg.entity_id = n.nid');
+    $map_query->fields('fm', array('field_mini_map_json_url_value'));
+    $map_query->condition('fg.field_graph_category_value', $cat_id);
+    $map_query->condition('fg.bundle', 'election_graph_xml');
+    $map_query->condition('fm.bundle', 'election_graph_xml');
+    $result = $map_query->execute()->fetchField();
+    $json = file_get_contents($result);
+    $obj = json_decode($json);
+    $output .= '<div class="mini-map">';
+    $output .= '<a href="' . $graph_page_url . '" target="_blank">';
+    $output .= '<img class="mini-map-image" src="' . $obj->imagePath . '">';
+    $output .= '</a>';
+    $output .= '</div>';
+  }
+  return $output;
+}
+
+/**
+ * Get Constituency Large Map Iframe
+ * @param type $category_tid
+ * @return string
+ */
+function get_constituency_large_map_html($category_tid) {
+  $output = '';
+  if (isset($category_tid)) {
+    $output = '';
+    $map_query = db_select('node', 'n');
+    $map_query->join('field_data_field_constituency_large_map', 'fc', 'fc.entity_id = n.nid');
+    $map_query->join('field_data_field_graph_category', 'fg', 'fg.entity_id = n.nid');
+    $map_query->fields('fc', array('field_constituency_large_map_value'));
+    $map_query->condition('fg.field_graph_category_value', $category_tid);
+    $map_query->condition('fg.bundle', 'election_graph_xml');
+    $map_query->condition('fc.bundle', 'election_graph_xml');
+    $result = $map_query->execute()->fetchField();
+    $output .= '<div class="constituency-full-map">';
+    $output .= $result;
+    $output .= '</div>';
+  }
+  return $output;
 }

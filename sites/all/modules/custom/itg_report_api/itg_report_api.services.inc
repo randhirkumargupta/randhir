@@ -541,7 +541,11 @@ function itg_report_api_author_report_v1() {
   else {
     $start_date = $_GET['start_date'];
   }
-  $suffix = $start_date;
+    $type = 'story';
+  if($_GET['type'] == "video"){
+      $type = 'videogallery';
+  }
+  $suffix = $type.'_'.$start_date.'_'.$type;
   $redis_key = "itg_report_api_author_report_v1" . $suffix;
 
   //$result_get = getRedis($redis_key);
@@ -551,7 +555,7 @@ function itg_report_api_author_report_v1() {
   }
   else {
     // call function from return data..
-    $jsondata = author_report_v1($start_date);
+    $jsondata = author_report_v1($start_date, $type);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     //$result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -615,7 +619,7 @@ function itg_report_api_auscovery_dashboard_web() {
 
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value1'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {

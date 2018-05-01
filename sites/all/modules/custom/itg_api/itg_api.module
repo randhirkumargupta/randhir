@@ -16,6 +16,7 @@ function itg_api_cronapi($op, $job = NULL) {
   
   $items['itg-pti-content'] = array(
     'description' => 'Import PTI Feed.',
+    'rule' => '*/20 * * * *', // Every 15 minutes
     'callback' => 'itg_pti_content',
     'file' => 'include/itg_api_pti.inc',
   );
@@ -72,10 +73,9 @@ function itg_api_cronapi($op, $job = NULL) {
  */
 function itg_api_menu() {
   
-  $items['ty-pti'] = array(
+  $items['migrate-press-trust'] = array(
     'page callback' => 'itg_pti_content',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
     'file' => 'include/itg_api_pti.inc',
   );
   
@@ -153,19 +153,28 @@ function workbench_moderation_state_review() {
  * @return bool
  */
 
-function itg_api_check_title($title) {
+function itg_api_check_title($title, $tid, $xml_date) {
+  $return = FALSE;
+  $start_date = $xml_date.' 00:00:01';
+  $end_date = $xml_date.' 23:59:59';
+  $start_time = strtotime($start_date);
+  $end_time = strtotime($end_date);  
   $title = html_entity_decode($title);
-  $result = db_select('node', 'node')
-    ->fields('node', array('title'))
-    ->condition('title', $title, '=')
-    ->condition('type', 'story', '=')
-    ->execute()->fetchAssoc();
-
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_category', 'fs', 'fs.entity_id = n.nid');
+  $query->fields('n', array('title'));
+  $query->condition('n.title', $title, '=');
+  $query->condition('n.type', 'story', '=');
+  $query->condition('n.created', $start_time, '>=');
+  $query->condition('n.created', $end_time, '<=');
+  $query->condition('fs.field_story_category_tid', $tid, '=');
+  $query->condition('fs.bundle', 'story', '=');
+  $result = $query->execute()->fetchAssoc();
   if (!empty($result['title'])) {
-    return TRUE;
+    $return = TRUE;
   }
 
-  return FALSE;
+  return $return;
 }
 
 /**
@@ -220,9 +229,10 @@ function itg_api_insert_xml_info($nid, $file, $type, $source) {
   * @param string $filename
  */
 function itg_api_get_xml_info($filename) {
+  $count = 0;
   $result = db_query("SELECT t.id FROM {itg_api_xml_info} t WHERE t.filename = :name", array(":name" => $filename));
-  $id = $result->fetchField();
-  return $id;
+  $count = $result->rowCount();  
+  return $count;
 }
 
 /**

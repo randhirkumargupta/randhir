@@ -189,7 +189,7 @@ function author_report($start_date, $type = 'story') {
         foreach ($author_today_data as $today_key => $today_val) {
             $title = $today_val['title'];
             $nid = $today_val['nid'];
-            $desc = kickerByNid($nid);
+            $desc = kickerByNid($nid, $type); 
             $title_path = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid . '');
             $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
@@ -261,10 +261,12 @@ function getContentCountByDate($start_date, $end_date, $type) {
         $query->condition('pc.field_story_category_tid', '1206640', '<>');
         $query->condition('pc.bundle', $content_type);
     }
-    if ($_GET['author_report'] != 1) {
-        $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-    } else {
-        $query->condition('autr.field_author_report_value', 'author_report', '=');
+    if ($content_type == 'story') {
+        if ($_GET['author_report'] != 1) {
+            $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+        } else {
+            $query->condition('autr.field_author_report_value', 'author_report', '=');
+        }
     }
     if ($content_type == 'videogallery') {
         $query->condition('mis.field_mis_report_value', 'mis_report', '=');
@@ -381,11 +383,13 @@ function getAuthorList_Report($s_date, $e_date, $type) {
         $query->condition('pc.field_story_category_tid', '1206640', '<>');
         $query->condition('pc.bundle', $content_type);
     }
-    if ($_GET['author_report'] != 1) {
-        $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-        $query->groupBy('n.nid');
-    } else {
-        $query->condition('autr.field_author_report_value', 'author_report', '=');
+    if ($content_type == 'story') {
+        if ($_GET['author_report'] != 1) {
+            $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+            $query->groupBy('n.nid');
+        } else {
+            $query->condition('autr.field_author_report_value', 'author_report', '=');
+        }
     }
     if ($content_type == 'videogallery') {
         $query->condition('mis.field_mis_report_value', 'mis_report', '=');
@@ -556,16 +560,27 @@ function todayContentsByUid($start_date, $end_date, $mail, $type) {
  * @pram int $nid
  * @return string $desc
  */
-function kickerByNid($nid) {
+function kickerByNid($nid, $type='story') {
     $desc = "";
     if ($nid) {
-        $query_n = db_select('field_data_field_story_kicker_text', 'kt');
-        $query_n->fields('kt', array('field_story_kicker_text_value'));
-        $query_n->condition('kt.entity_id', $nid, '=');
-        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result_n as $reskey_n => $resvalue_n) {
-            $desc = $resvalue_n['field_story_kicker_text_value'];
+        if($type =='story'){
+            $query_n = db_select('field_data_field_story_kicker_text', 'kt');
+            $query_n->fields('kt', array('field_story_kicker_text_value'));
+            $query_n->condition('kt.entity_id', $nid, '=');
+            $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result_n as $reskey_n => $resvalue_n) {
+                $desc = $resvalue_n['field_story_kicker_text_value'];
+            }
+        }
+        elseif ($type == 'videogallery') {
+            $query_n = db_select('field_data_field_story_expert_description', 'kt');
+            $query_n->fields('kt', array('field_story_expert_description_value'));
+            $query_n->condition('kt.entity_id', $nid, '=');
+            $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result_n as $reskey_n => $resvalue_n) {
+                $desc = $resvalue_n['field_story_expert_description_value'];
+            }
         }
     }
-    return $desc;
+    return strip_tags($desc);
 }

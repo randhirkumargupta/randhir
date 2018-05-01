@@ -803,15 +803,12 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
  * get first story title from section or category
  * {@inheritdoc}
  */
-function get_first_story_title_by_tid($tid) {
+function get_first_story_title_by_tid($nid) {
   $query = db_select('node', 'n');
-  $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
-  $query->condition('ti.tid', $tid, '=');
+  $query->condition('n.nid', $nid, '=');
   $query->fields('n', array('nid', 'title'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'story', '=');
-  $query->orderBy('n.created', 'DESC');
-  $query->groupBy('n.nid')->range(0, 1);
+  $query->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 }
