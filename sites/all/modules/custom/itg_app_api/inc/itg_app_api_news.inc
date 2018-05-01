@@ -313,7 +313,8 @@ function generateNewsCategoryList($tid, $pageno) {
             $short_desc = $resvalue['field_common_short_description_value'];
             $sub_title = $resvalue['field_constituancy_value'];
             $page_title = $node_data->title;
-            if($new_blog == 0){
+            $field_type_value = $resvalue['field_type_value'];
+            if($new_blog == 0 && $field_type_value == "Yes"){
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
