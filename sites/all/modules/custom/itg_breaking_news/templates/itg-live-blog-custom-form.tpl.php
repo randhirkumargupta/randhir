@@ -3,7 +3,7 @@ global $user;
 $user = !empty($user->uid) ? user_load($user->uid) : '';
 $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
 $nid = (arg(2)) ? arg(2) : ''; ?>
-<div class="blog-referesh"><a class="referesh-custom-data" data="<?php print $nid; ?>" href="javascript:void(0);">Click to Refresh</a></div><div class="itg-blog-user"><?php print $user_name; ?></div>
+<div class="blog-referesh"><a class="referesh-custom-data" data="<?php print $nid; ?>" href="javascript:void(0);">Click to Refresh</a><span class="itg-blog-user">User : <?php print $user_name; ?></span></div>
 <div class="blog-loader-container">
 <div id="blog-loader-data" style="display: none"><img class="blog-loader" src="<?php echo base_path(); ?>sites/all/themes/itg/images/tab-loading.gif" alt="Loading..." /></div>
 <div id="live_data"><?php print itg_live_blog_list($nid); ?></div></div>
@@ -151,8 +151,15 @@ jQuery(document).ready(function($){
 </script>
 
 <style>
+.blog-referesh {
+  padding: 5px 0;
+  font-weight: bold;
+}
 
-
+.itg-blog-user{
+    float:right;
+}
+   
 span.inline-error-messages.error {
     text-align: center;
     background: #a8c1e4;
@@ -218,6 +225,8 @@ span.inline-error-messages.error {
 div#blog_highlight_replace_wrapper {
     margin-left: 248px;
 }
+
+
 .blog-loader-container{ position: relative;}
    .blog-loader-container #blog-loader-data{position: absolute; top: 0px; width: 100%; height: 100%;background: rgba(255,255,255,0.5);}
    .blog-loader-container #blog-loader-data img.blog-loader{ width: 32px;height: 32px; position: absolute; left: 50%; top: 45%;transform: translate(-50%,-50%);}
