@@ -7018,16 +7018,17 @@ function itg_rapid_api_manual_blog($token) {
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
+
 /**
  * itg_rapid_value_manual_blog
  * @param type $nid
  * @return string
  */
-function itg_rapid_value_manual_blog($nid){
-    //1144212
+function itg_rapid_value_manual_blog($nid) {
+    //1165361
     $node_data = node_load($nid);
-    //$node_data = node_load(1144212);
-    p($node_data);
+    //$node_data = node_load(1165361);
+    //p($node_data);
     $json_data = array();
     $blog_data = array();
     $blog_content = array();
@@ -7038,12 +7039,12 @@ function itg_rapid_value_manual_blog($nid){
     $term = taxonomy_term_load($category_id);
     $term_name = $term->name;
     $blog_type = $node_data->field_type['und'][0]['value'];
-    $new_blog= 0;
-    if($node_data->field_multi_user_allows['und'][0]['value']){
+    $new_blog = 0;
+    if ($node_data->field_multi_user_allows['und'][0]['value']) {
         $new_blog = $node_data->field_multi_user_allows['und'][0]['value'];
     }
     $live_tv = 0;
-    if($node_data->field_story_expires['und'][0]['value'] == 'Yes'){
+    if ($node_data->field_story_expires['und'][0]['value'] == 'Yes') {
         $live_tv = 1;
     }
     $short_desc = $node_data->field_common_short_description['und'][0]['value'];
@@ -7053,7 +7054,7 @@ function itg_rapid_value_manual_blog($nid){
     $publish_date = $node_data->field_itg_content_publish_date['und'][0]['value'];
     $large_image_fid = $node_data->field_story_large_image['und'][0]['fid'];
     $file_large_img_url = completeFilePath($large_image_fid);
-    
+
     $blog_data['category_id'] = "$category_id";
     $blog_data['category_title'] = "$term_name";
     $blog_data['blog_type'] = "$blog_type";
@@ -7068,16 +7069,33 @@ function itg_rapid_value_manual_blog($nid){
     $blog_data['share_link'] = "$firebase_url";
     // blog content code
     $loopc = 0;
-    $blog_content[$loopc]['content_id'] = "2225";
-    $blog_content[$loopc]['desc_withouthtml'] = "2225";
-    $blog_content[$loopc]['desc_withhtml'] = "2225";
-    $blog_content[$loopc]['updated_datetime'] = "2225";
-    $blog_content[$loopc]['title'] = "2225";
-    
+    if ($new_blog == 0) {
+        $content_ar = $node_data->field_breaking_content_details['und'];
+        foreach ($content_ar as $key => $value) {
+            $content_id = $value['value'];
+            $query = db_select('node', 'n');
+            $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+            $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+            $query->fields('dbody', array('body_value'));
+            $query->condition('n.nid', $content_id);
+            $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+            $desc_withouthtml = strip_tags($result[0]['body_value']);
+            $desc_withhtml = $result[0]['body_value'];
+            $title = $result['title'];
+            $create_datetime = date("Y-m-d H:i:s", $result[0]['created']);
+            
+            $blog_content[$loopc]['content_id'] = "$content_id";
+            $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml";
+            $blog_content[$loopc]['updated_datetime'] = "$title";
+            $blog_content[$loopc]['title'] = "$create_datetime";
+            $loopc++;
+        }
+    }
+
     $blog_data['blog_content'] = $blog_content;
-    
+
     //  data object
     $json_data['data'] = $blog_data;
     return $json_data;
-    
 }
