@@ -68,6 +68,7 @@ $fb_appid = variable_get('itg_sharing_app_id');
 </div>
 <!-- Live Schema Ends -->
 <?php if (!empty($content)): ?>
+<div class="multi-live-blog">
 <div class="title-block">
 <?php  
   if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
@@ -178,6 +179,7 @@ $fb_appid = variable_get('itg_sharing_app_id');
     print $breaking_output;       
   }
   ?>
+</div>
 </div>
 <?php endif; ?>
 <?php if(!empty(variable_get('amp_taboola_ad_script'))) { ?>
