@@ -102,8 +102,10 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
         ?>
         <?php print ($title) ?>
         <?php $blog_city = ($node->field_blog_city[LANGUAGE_NONE][0]['value']) ? $node->field_blog_city[LANGUAGE_NONE][0]['value'] . " | " : ''; ?>
-        <div class="locationdate"><?php print $blog_city .  date("F d, Y", strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?><!-- April 24, 2018 --></div>
+        <div class="locationdate"><?php print $blog_city .  date("F d, Y", strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></div>
+
         <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+        <span class="refresh-icon"><span class="latest-update-data"></span> Check Latest Updates<i onclick="location.reload();" style="cursor: pointer;" class="fa fa-refresh" aria-hidden="true"></i></span>
   </div>
 
 
@@ -127,7 +129,8 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
   </div>
   <div class="col-md-8 col-xs-12 liveblog-Rhs">
     <div class="new-live-block">
-         
+        
+
         <?php
         if (!empty($node->field_story_expires['und']['0']['value']) && $node->field_story_expires['und']['0']['value'] == 'Yes') {
             $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -166,6 +169,7 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
              
 
       <?php } elseif (isset($embed_image) && !empty($embed_image)) { ?>
+
          <div class="stryimg" id="liveblog" >
                  <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
          </div>
@@ -177,11 +181,12 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
                 <input id="slider-range" class="irs-hidden-input" readonly="">
             <?php } ?>
     <?php
-    
     $custom_content = get_custom_content_details($node->nid);
+    
     if (!empty($custom_content)) {
       $breaking_output .= '';
-      $i = 0;
+
+      $last_blog_id = $custom_content[0]->bid;
 			foreach ($custom_content as $breaking_item) {
         $i++;
         $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
@@ -216,7 +221,7 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
           // $i = 0;
         }                          
       }
-      $breaking_output .= '<span class="no-record" style="display:none">' . t('No Record Found') . '</span>';
+      $breaking_output .= '<div class="last-custom-blog-id" date-entity="'.$node->nid.'" style="display:none">'.$last_blog_id.'</div>';
       print $breaking_output;
        
     }
@@ -225,7 +230,29 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
 endif;
 ?>
 </div>
-            
+  <script>
+    setInterval(check_updates_blog, 60000);
+
+function check_updates_blog() {
+        var bId = jQuery('.last-custom-blog-id').text();
+        var entity_id = jQuery('.last-custom-blog-id').attr( 'date-entity' );
+        console.log("Value of div is: " + entity_id);
+         
+        if(entity_id) {
+           jQuery.ajax({
+               url: '/itg-live-blog-check-updates',
+               type: 'post',
+               data: {'bId':bId,'entityId':entity_id},
+               success: function(response){
+                 if(response) {
+                   jQuery('.latest-update-data').html(response);
+                 }                                    
+               }
+           });
+         }
+         
+     }
+  </script>          
   </div>
 </div>
 </div>

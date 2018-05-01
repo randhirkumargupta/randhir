@@ -82,6 +82,15 @@ function itg_breaking_news_menu() {
     'access arguments' => array('access itg story'),
     'file' => 'include/itg_breaking_news_forms.inc', 
   );
+  
+  $items['itg-live-blog-check-updates'] = array(
+    'page callback' => 'itg_live_blog_check_updates',
+    'page arguments' => array(2, 3),
+    'access callback' => 'user_is_logged_in',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access itg story'),
+    'file' => 'include/itg_breaking_news_forms.inc', 
+  );
   return $items;
 }
 
