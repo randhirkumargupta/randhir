@@ -7073,18 +7073,12 @@ function itg_rapid_value_manual_blog($nid) {
         $content_ar = $node_data->field_breaking_content_details['und'];
         foreach ($content_ar as $key => $value) {            
             $entity = entity_load('field_collection_item', $value);
-            p($entity);
-            $content_id = $value['value'];
-            $query = db_select('node', 'n');
-            $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-            $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-            $query->fields('dbody', array('body_value'));
-            $query->condition('n.nid', $content_id);
-            $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-            $desc_withouthtml = strip_tags($result[0]['body_value']);
-            $desc_withhtml = $result[0]['body_value'];
-            $title = $result['title'];
-            $create_datetime = date("Y-m-d H:i:s", $result[0]['created']);
+            $field_breaking_tile = $entity->field_breaking_tile['und'][0]['value'];            
+            $desc_withouthtml = strip_tags($field_breaking_tile);
+            $desc_withhtml = $field_breaking_tile;
+            $title = "";
+            $field_breaking_publish_time = $entity->field_breaking_publish_time['und'][0]['value'];   
+            $create_datetime = date("Y-m-d H:i:s", $field_breaking_publish_time);
             
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
