@@ -314,6 +314,7 @@ function generateNewsCategoryList($tid, $pageno) {
             $sub_title = $resvalue['field_constituancy_value'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
+            p($resvalue);
             if($new_blog == 0 && $field_type_value == "Yes"){
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
