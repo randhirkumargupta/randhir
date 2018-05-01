@@ -150,3 +150,15 @@ function itg_live_blog_refresh() {
     print $blog_list = itg_live_blog_list($blog_entity_id); 
  } 
 }
+
+/**
+ * 
+ */
+function itg_live_blog_check_updates() {
+  $entityId = ($_POST['entityId']) ? $_POST['entityId'] : '';
+  $bid = ($_POST['bId']) ? $_POST['bId'] : '';
+  if(!empty($entityId) && !empty($bid)) {
+    $total_records = db_query("SELECT bid FROM itg_live_blog WHERE status = 1 AND blog_entity_id = $entityId AND bid > $bid")->rowCount();
+    print '(' . $total_records . ')'; 
+  } 
+}

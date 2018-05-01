@@ -51,6 +51,7 @@ if ($jsondata->live == 1) {
   </div>
 <?php if(!empty($wonCondidate)) {?>
   <div class="row mb-20" id="constituency-top-chunk">
+    <div class="mb-viewsection">
     <div class="col-md-6" id="candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h3>
 			<div class="text-center" id="candidates-image">
@@ -92,13 +93,14 @@ if ($jsondata->live == 1) {
 				</table> 
 			</div>  
     </div>
+    </div>
   </div>
 <?php }?>
   <div class="row mb-20">
     <div class="col-md-12 <?php print $bottom_chuck;?>" id="other-candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
-				<table class="table">
+				<table class="table" id="othercandidates-list">
 					 <thead>
 						 <th>Candidate name</th><th>Party</th><th>Votes</th><th>% Votes</th><th>% Change</th>
 					 </thead>
@@ -112,3 +114,10 @@ if ($jsondata->live == 1) {
     </div>
   </div> 
 <?php endif; ?>
+
+<script type="text/javascript">
+var oRows = document.getElementById('othercandidates-list').getElementsByTagName('tr');
+var iRowCount = oRows.length; iRowCount = iRowCount - 1;
+var totalwidth = iRowCount*310;
+document.getElementById('othercandidates-list').style.width = totalwidth +'px';
+</script>
