@@ -7072,8 +7072,8 @@ function itg_rapid_value_manual_blog($nid) {
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
         foreach ($content_ar as $key => $value) {            
-            $entity = entity_load('field_collection_item', $value['value']);
-            p($entity);
+            //$entity = entity_load('field_collection_item', $value['value']);
+            //p($entity);
             $content_id = $value['value'];
             $query = db_select('node', 'n');
             $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
