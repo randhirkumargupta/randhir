@@ -740,7 +740,6 @@ function itg_js_alter(&$javascript) {
   * @param array $variables
   * @return string
   */
-/*
 function itg_css_alter(&$css) {
    global $user;
    $exclude = array(
@@ -764,7 +763,7 @@ function itg_css_alter(&$css) {
    if ($user->uid == 0) {
      $css = array_diff_key($css, $exclude);
    }
-}*/
+}
 
 function itg_image($variables) {
   $attributes = $variables['attributes'];
