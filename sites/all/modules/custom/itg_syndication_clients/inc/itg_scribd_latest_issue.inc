@@ -48,6 +48,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('dbody', array('body_value'));
+    print strtr((string)$query, $query->arguments());die;
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_scribd_latest_issue_syndication_xml($result, $issue_title, $issue_result, $field_issue_large_cover_image_fid);
     $xml_path = 'public://rss-feeds/xml_data/scribd/it/stories/';
