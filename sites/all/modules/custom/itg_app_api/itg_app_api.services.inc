@@ -7084,8 +7084,8 @@ function itg_rapid_value_manual_blog($nid) {
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
             $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml";
-            $blog_content[$loopc]['updated_datetime'] = "$title";
-            $blog_content[$loopc]['title'] = "$field_breaking_publish_time";
+            $blog_content[$loopc]['updated_datetime'] = "$field_breaking_publish_time";
+            $blog_content[$loopc]['title'] = "$title";
             $loopc++;
         }
     }
