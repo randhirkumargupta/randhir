@@ -1,5 +1,9 @@
-<?php $nid = (arg(2)) ? arg(2) : ''; ?>
-<div class="blog-referesh"><a class="referesh-custom-data" data="<?php print $nid; ?>" href="javascript:void(0);">Click to Refresh</a></div>
+<?php 
+global $user;
+$user = !empty($user->uid) ? user_load($user->uid) : '';
+$user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
+$nid = (arg(2)) ? arg(2) : ''; ?>
+<div class="blog-referesh"><a class="referesh-custom-data" data="<?php print $nid; ?>" href="javascript:void(0);">Click to Refresh</a></div><div class="itg-blog-user"><?php print $user_name; ?></div>
 <div class="blog-loader-container">
 <div id="blog-loader-data" style="display: none"><img class="blog-loader" src="<?php echo base_path(); ?>sites/all/themes/itg/images/tab-loading.gif" alt="Loading..." /></div>
 <div id="live_data"><?php print itg_live_blog_list($nid); ?></div></div>
