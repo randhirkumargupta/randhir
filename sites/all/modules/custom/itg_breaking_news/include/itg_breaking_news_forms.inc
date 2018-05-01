@@ -5,13 +5,8 @@
  */
 
 function itg_live_blog_custom() {
-  global $base_url, $user;
-  $arg = arg();
-  // drupal_add_js(drupal_get_path('theme', 'itg') . '/js/bootstrap.min.js', array('preprocess' => false, 'weight' => 5, 'scope' => 'footer'));
-   drupal_add_css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', array('type' => 'external'));
- 
+  drupal_add_css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', array('type' => 'external')); 
   return theme('itg_live_blog_custom_form', array('data' => $data));
-
 }
 
 /**
