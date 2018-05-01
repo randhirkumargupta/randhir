@@ -432,8 +432,14 @@ function itg_fia_xml_node_feed_photos($query) {
             $guid = $node->nid;
             $op_modified = date('F j, h:i a', $node->changed);
             $modified = date('Y-m-d\TH:i:s\+05:30', $node->changed);
-            $auth_name = get_author_name($node->nid);
-            $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+            if($node->type == 'story'){
+                $auth_name = get_author_name($node->nid);
+                $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+            }elseif ($node->type == 'photogallery'){
+                $auth_name = 'Indiatoday Online';
+                $desc = $node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+            }
+
             $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
             $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
             $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
