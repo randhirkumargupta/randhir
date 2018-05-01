@@ -164,6 +164,65 @@ function itg_seo_node_data($node) {
                               }
                             </script>',
         );
+    }elseif (isset($primary_category) && $primary_category == '1207760'){
+        $start = strpos($node->body[LANGUAGE_NONE][0]['value'], '<p>');
+        $end = strpos($node->body[LANGUAGE_NONE][0]['value'], '</p>', $start);
+        $first_para = substr($node->body[LANGUAGE_NONE][0]['value'], $start, $end);
+        $first_paragraph = str_replace('</p>', '', $first_para);
+        $first_paragraph = str_replace('<p>', '', $first_para);
+        $page_title = $node->title;
+        $auth_name = str_replace(' ', '-', trim($authname[0]));
+        $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
+        $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
+        $keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
+        $rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+
+        $pathalias = drupal_get_path_alias('node/' . $node->nid);
+        $pageurl = $base_url . '/' . $pathalias;
+
+        $markup = array(
+            '#type' => 'markup',      
+            '#markup' => '<script type="application/ld+json">
+                      {
+                "@context": "https://schema.org",
+                "@type": "Review",
+                "reviewBody": "'.$first_paragraph.'",
+                "author": [
+                  {
+                    "@type": "Person",
+                    "url": "'.$author_url.'",
+                    "name": "'.$auth_name.'"
+                  }
+                ],
+                "datePublished": "'.$publisheddate.'",
+                "keywords": ["'.$keywords.'"],
+                "itemReviewed": "'.$page_title.'",
+                "reviewRating": [
+                  {
+                    "@type": "Rating",
+                    "ratingValue": "'.$rating.'",
+                    "bestRating": "10",
+                    "worstRating": "0"
+                  }
+                ],
+                "sourceOrganization": [
+                  {
+                    "@type": "Organization",
+                    "name": "India Today",
+                    "url": "'.FRONT_URL.'",
+                    "logo": [
+                      {
+                        "@type": "ImageObject",
+                        "url": "'.FRONT_URL.'/sites/all/themes/itg/logo.png",
+                        "width": "128px",
+                        "height": "128px"
+                      }
+                    ]
+                  }
+                ]
+              }
+              </script>',
+            );
     } else {
          
         $markup = array(
