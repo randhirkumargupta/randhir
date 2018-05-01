@@ -109,11 +109,11 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
 
   <div class="col-md-4 col-xs-12 liveblog-Lhs mhide">
    <?php if (empty($node->field_blog_commentary[LANGUAGE_NONE])) { ?>  
-   <h4>Most Recent</h4>
+   <h4>KEY UPDATES</h4>
   <?php 
    $left_side = get_custom_left_side_data($node->nid);
    foreach ($left_side as $lvalue) {
-     print "<div class='lhs-detailList'><div class='leftblog-publish-time'>".$lvalue->blog_publish_time." IST</div>";
+     print "<div class='lhs-detailList'><a href='#".$lvalue->bid."' class='leftblog-publish-time'>".$lvalue->blog_publish_time." IST</a>";
      print "<div class='leftblog-title'><a href='#".$lvalue->bid."'>".$lvalue->blog_title."</a></div></div>";
     }
    } else {
@@ -181,9 +181,11 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
     $custom_content = get_custom_content_details($node->nid);
     if (!empty($custom_content)) {
       $breaking_output .= '';
-   
+      $i = 0;
 			foreach ($custom_content as $breaking_item) {
-        $user = !empty($breaking_item->update_uid) ? user_load($breaking_item->update_uid)->name : user_load($breaking_item->blog_uid)->name;
+        $i++;
+        $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
+        $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
 
         // $user
         $breaking_output .= '<div class="breaking-section"><a name="'.$breaking_item->bid.'"></a>';
@@ -194,12 +196,25 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
         $pub_time2 = str_replace(":", "", $pub_time);
         $current_time = str_replace(":", "", date('H:i'));
         
-          $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="dateauthor"><div class="breaking-date">' . $pub_display_time . ' IST</div><div class="breaking-author"> Posted by ' . $user . '</div></div>';
+          $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="dateauthor"><div class="breaking-date">' . $pub_display_time . ' IST</div><div class="breaking-author"> Posted by ' . $user_name . '</div></div>';
           $breaking_output .= '<div class="blog-multi-title">'. $breaking_item->blog_title .'</div>';
           $breaking_output .= '<div class="blog-multi-desc">'. $html .'</div>';
           $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
           $breaking_output .= '</div></div>';
-        //}
+          if($i == 3) {
+            $breaking_output .= '<div class="breaking-section">';
+                $block = block_load('itg_ads', ADS_RHS1);
+                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                if(is_array($render_array)) {
+                  $breaking_output .=  render($render_array);
+                } else {
+                   if (!empty($itg_ad['200*200_right_bar_ad1'])) {
+                    $breaking_output .=  $itg_ad['200*200_right_bar_ad1'];
+                  }
+                }
+            $breaking_output .= '</div>'; 
+          // $i = 0;
+        }                          
       }
       $breaking_output .= '<span class="no-record" style="display:none">' . t('No Record Found') . '</span>';
       print $breaking_output;

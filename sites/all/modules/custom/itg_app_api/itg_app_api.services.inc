@@ -2629,6 +2629,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // manual_blog custom resource declaration.....
+        'manual_blog' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves manual_blog schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_manual_blog',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -5805,6 +5832,7 @@ function itg_rapid_api_testing($token) {
     
     //$qry = 'ALTER TABLE `itg_app_middleware_live` CHANGE `url` `url` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;';
     //db_query($qry);
+    p(node_load(1152730)); // live blog
     p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
@@ -7049,4 +7077,114 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     }
     echo $message;
     drupal_exit();
+}
+/**
+ * Call back function for itg_rapid_api_manual_blog API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_manual_blog($token) {
+    //valid id
+    $id = $_GET['id'];
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+    // call function for return data..
+    $suffix = $id;
+    $redis_key = "itg_rapid_api_manual_blog_" . $suffix;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value11'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = itg_rapid_value_manual_blog($id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
+}
+
+/**
+ * itg_rapid_value_manual_blog
+ * @param type $nid
+ * @return string
+ */
+function itg_rapid_value_manual_blog($nid) {
+    //1165361
+    $node_data = node_load($nid);
+    //$node_data = node_load(1165361);
+    //p($node_data);
+    $json_data = array();
+    $blog_data = array();
+    $blog_content = array();
+    $json_data['status_code'] = "1";
+    $json_data['status_message'] = "";
+    // blog data code
+    $category_id = $node_data->field_primary_category['und'][0]['value'];
+    $term = taxonomy_term_load($category_id);
+    $term_name = $term->name;
+    $blog_type = $node_data->field_type['und'][0]['value'];
+    $new_blog = 0;
+    if ($node_data->field_multi_user_allows['und'][0]['value']) {
+        $new_blog = $node_data->field_multi_user_allows['und'][0]['value'];
+    }
+    $live_tv = 0;
+    if ($node_data->field_story_expires['und'][0]['value'] == 'Yes') {
+        $live_tv = 1;
+    }
+    $short_desc = $node_data->field_common_short_description['und'][0]['value'];
+    $page_title = $node_data->title;
+    $sub_title = $node_data->field_constituancy['und'][0]['value'];
+    $firebase_url = get_node_firebase_weburl($nid);
+    $publish_date = $node_data->field_itg_content_publish_date['und'][0]['value'];
+    $large_image_fid = $node_data->field_story_large_image['und'][0]['fid'];
+    $file_large_img_url = completeFilePath($large_image_fid);
+
+    $blog_data['category_id'] = "$category_id";
+    $blog_data['category_title'] = "$term_name";
+    $blog_data['blog_type'] = "$blog_type";
+    $blog_data['id'] = "$nid";
+    $blog_data['short_desc'] = "$short_desc";
+    $blog_data['new_blog'] = "$new_blog";
+    $blog_data['live_tv'] = "$live_tv";
+    $blog_data['title'] = "$page_title";
+    $blog_data['sub_title'] = "$sub_title";
+    $blog_data['large_image'] = "$file_large_img_url";
+    $blog_data['published_datetime'] = "$publish_date";
+    $blog_data['share_link'] = "$firebase_url";
+    // blog content code
+    $loopc = 0;
+    if ($new_blog == 0) {
+        $content_ar = $node_data->field_breaking_content_details['und'];
+        foreach ($content_ar as $key => $value) {
+            $content_id = $value['value'];
+            $query = db_select('node', 'n');
+            $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+            $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+            $query->fields('dbody', array('body_value'));
+            $query->condition('n.nid', $content_id);
+            $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+            $desc_withouthtml = strip_tags($result[0]['body_value']);
+            $desc_withhtml = $result[0]['body_value'];
+            $title = $result['title'];
+            $create_datetime = date("Y-m-d H:i:s", $result[0]['created']);
+            
+            $blog_content[$loopc]['content_id'] = "$content_id";
+            $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml";
+            $blog_content[$loopc]['updated_datetime'] = "$title";
+            $blog_content[$loopc]['title'] = "$create_datetime";
+            $loopc++;
+        }
+    }
+
+    $blog_data['blog_content'] = $blog_content;
+
+    //  data object
+    $json_data['data'] = $blog_data;
+    return $json_data;
 }

@@ -80,7 +80,6 @@ jQuery(document).ready(function($){
     
     // Load more data
     $(document).on('click', '.load-more', function(){    
-      // alert('test');
         var row = Number($('#row').val());
         var allcount = Number($('#all').val());
         var entityId = Number($('#entity-id').val());
@@ -98,7 +97,6 @@ jQuery(document).ready(function($){
                     $(".load-more").text("Loading...");
                 },
                 success: function(response){
-                   // alert(response);
                     // Setting little delay while displaying new content
                     setTimeout(function() {
                         // appending posts after last post with class="post"
