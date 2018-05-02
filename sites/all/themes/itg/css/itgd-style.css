@@ -1191,6 +1191,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #other-past-results .other-past-results-details tr:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
 #other-past-results .other-past-results-details td{border:none;position:relative;padding-left:50%;}
 #other-past-results .other-past-results-details td:before{text-align:left; position:absolute;top:4px;left:0px;width:45%;padding-right:10px;white-space:nowrap;content:attr(data-column);}
+#other-past-results .other-past-results-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
+#other-past-results .other-past-results-details::-webkit-scrollbar{ display: none;width: 0px; background: transparent;}
 }
   
 
