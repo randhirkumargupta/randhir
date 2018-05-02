@@ -167,7 +167,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         // for breaking_news start
-        //$query->condition('fdt.field_type_value', 'Live Blog');
+        $query->condition('fdt.field_type_value', 'Breaking News', '!=');
         //$query->condition('fmu.field_multi_user_allows_value', 1 , '!=');
         // for breaking_news end
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -309,6 +309,9 @@ function generateNewsCategoryList($tid, $pageno) {
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = $resvalue['field_multi_user_allows_value'];
             }
+            elseif($field_type_value == "Cricket Live Blog"){
+               $new_blog = 2; 
+            }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
                 $live_tv = 1;
@@ -318,7 +321,8 @@ function generateNewsCategoryList($tid, $pageno) {
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             //p($resvalue);
-            if(($new_blog == 0 || $new_blog == '0') && $field_type_value == "Live Blog"){
+            
+            if($type == "breaking_news"){
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
