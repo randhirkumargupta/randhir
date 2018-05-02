@@ -3,7 +3,6 @@ $jsondata = json_decode($data);
 ?>
 <div class="row mb-20">
     <div class="col-md-12" id="other-past-results">
-			<h3 class="labels"><?php print !empty($jsondata->label)?$jsondata->label:'Past Results';?></h3>
 			<div class="other-past-results-details">
 			<table class="table" id="past-results-list">
 				 <thead>
