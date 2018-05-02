@@ -230,4 +230,51 @@ div#blog_highlight_replace_wrapper {
 .blog-loader-container{ position: relative;}
    .blog-loader-container #blog-loader-data{position: absolute; top: 0px; width: 100%; height: 100%;background: rgba(255,255,255,0.5);}
    .blog-loader-container #blog-loader-data img.blog-loader{ width: 32px;height: 32px; position: absolute; left: 50%; top: 45%;transform: translate(-50%,-50%);}
+   
+   
+   .table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+th {
+    text-align: left;
+}
+.load-ajax-box {
+    display: none;
+    text-align: center;
+    background: #158ece;
+}
+.btn-group-xs>.btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.load-more {
+    width: 100%;
+    background: #15a9ce;
+    text-align: center;
+    color: white;
+    padding: 10px 0px;
+    font-family: sans-serif;
+}
+.liveblog-custom-data { text-decoration:none; color:#337ab7}
 </style>    
