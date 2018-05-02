@@ -307,9 +307,9 @@ function generateNewsCategoryList($tid, $pageno) {
             $blog_type = $resvalue['field_type_value'];
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
-                $new_blog = $resvalue['field_multi_user_allows_value'];
+                $new_blog = 1;
             }
-            elseif($field_type_value == "Cricket Live Blog"){
+            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
                $new_blog = 2; 
             }
             $live_tv = 0;
