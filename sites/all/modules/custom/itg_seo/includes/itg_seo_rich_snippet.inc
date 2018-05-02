@@ -183,7 +183,7 @@ function itg_seo_node_data($node) {
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
         $author_url = ''.FRONT_URL.'/topic/'.$auth_name;
         $keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
-        $rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+        $rating = !empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value']) ? $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] : 0;
 
         $pathalias = drupal_get_path_alias('node/' . $node->nid);
         $pageurl = $base_url . '/' . $pathalias;
