@@ -1097,7 +1097,7 @@ function itg_widget_block_view($delta = '') {
            $constituency = $constituency[0];           
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
-             $json_url = $json_url.$constituency.'.json';
+             $json_url = $json_url . 'elections/2018/json/constituency/' . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
              drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
              drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_constituency.js', array('type' => 'file', 'scope' => 'footer'));
@@ -1116,8 +1116,8 @@ function itg_widget_block_view($delta = '') {
            $constituency = $constituency[0];           
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
-             $json_url = $json_url.$constituency.'.json';
-             $constituency_data = file_get_contents('https://smedia2.intoday.in/elections/2018/json/past-results/nippani.json');
+             $json_url = $json_url . 'elections/2018/json/past-results/' . $constituency.'.json';
+             $constituency_data = file_get_contents($json_url);
              $block['content'] = theme("election_past_results", array("data" => $constituency_data));;
            }else{
              $block['content'] = '';
