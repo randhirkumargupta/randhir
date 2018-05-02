@@ -169,11 +169,16 @@ function itg_seo_node_data($node) {
         $end = strpos($node->body[LANGUAGE_NONE][0]['value'], '</p>', $start);
         $first_para = substr($node->body[LANGUAGE_NONE][0]['value'], $start, $end);
         $first_paragraph = str_replace('</p>', '', $first_para);
-        $first_paragraph = str_replace('<p>', '', $first_para);
-        $page_title = $node->title;
+        $first_paragraph = str_replace('<p>', '', $first_paragraph);
+        $first_paragraph = str_replace('"', "'", $first_paragraph);
+        $first_paragraph = str_replace('”', "'", $first_paragraph);
+        $first_paragraph = str_replace('“', "'", $first_paragraph);
+        $first_paragraph = strip_tags($first_paragraph);
+        $page_title = explode(":",$node->title);
+        $review_title = !empty($page_title[0]) ? $page_title[0] : $node->title;
         $auth_name = str_replace(' ', '-', trim($authname[0]));
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
-        $author_url = 'https://www.indiatoday.in/topic/'.$auth_name;
+        $author_url = ''.FRONT_URL.'/topic/'.$auth_name;
         $keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
         $rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
 
@@ -196,7 +201,7 @@ function itg_seo_node_data($node) {
                 ],
                 "datePublished": "'.$publisheddate.'",
                 "keywords": ["'.$keywords.'"],
-                "itemReviewed": "'.$page_title.'",
+                "itemReviewed": "'.$review_title.'",
                 "reviewRating": [
                   {
                     "@type": "Rating",

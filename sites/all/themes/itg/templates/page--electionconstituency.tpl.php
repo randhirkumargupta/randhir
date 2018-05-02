@@ -34,6 +34,22 @@
                     </div>
                 </div>
             </div>
+            <div class="">
+                <div class="itg-widget">
+                    <div class="droppable itg-layout-605">
+                        <div id="auto-new-block" class="widget-wrapper">
+                            <h4 class="heading">Past Results</h4>
+                            <div class="data-holder" id="itg-block-1">
+                                <?php
+                                $block = block_load('itg_widget', 'election_past_results');
+                                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                print render($render_array);
+                                ?>
+                            </div>
+                        </div>                     
+                    </div>
+                </div>
+            </div>
             <div class="row itg-most-popular">
                 <div class="col-md-12 mt-50">
                     <div class="itg-widget">
