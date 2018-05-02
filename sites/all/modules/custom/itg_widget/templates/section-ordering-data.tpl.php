@@ -1564,7 +1564,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
               <?php if (!empty($extra_large_image_url)) { ?>
                 <div <?php echo $data_tb_region_item;?>>  
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
+                    <!-- <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" /> -->
+                    <?php print theme('image', array('path' => $entity['mi_file_uri'], 'alt' => $entity['field_story_medium_image_alt'], 'title' => $entity['field_story_medium_image_title'])); ?>
                 </a>
                 <?php
               }
