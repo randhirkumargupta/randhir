@@ -19,7 +19,7 @@ if(!empty($data)) {
                 ?>
                 <li <?php echo $data_tb_region_item;?>>
     <?php 
-		if($item == 1){
+		if($item == 1 || $item == 2){
 			$full_image = theme('image', array('path' => $entity_data_node['file_url'], 'alt' => $entity_data_node['image_title'], 'title' => $entity_data_node['image_alt']));
 		}
 		else{
@@ -40,8 +40,8 @@ if(!empty($data)) {
                         </p>
                     </div>
                 </li>
-            <?php } 
-            $item++;
+            <?php  
+            $item++; }
             ?>
         </ul>
     </div>
