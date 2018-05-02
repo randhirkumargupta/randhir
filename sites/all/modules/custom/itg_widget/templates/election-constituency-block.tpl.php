@@ -36,7 +36,7 @@ if ($jsondata->live == 1) {
     <div class="col-md-12 <?php print $top_chuck;?>" id="other-candidates-past">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
-			<table class="table" id="other-candidates">
+			<table class="table" id="othercandidates-list">
 				 <thead>
 					 <th>Candidate name</th><th>Party</th><th>Votes</th><th>% Votes</th><th>% Change</th>
 				 </thead>
