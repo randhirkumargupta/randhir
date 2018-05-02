@@ -247,10 +247,7 @@ function generateStoryDeatilList($id) {
             $byline_data = itg_get_multi_byline_details($nid, 1);
             $aid = $byline_data[0]['nid'];
             $a_title = $byline_data[0]['title'];
-            //$body_without_html = strip_tags($body_value);
-            $body_with_html_data = formateNodeBodyToken($body_value);
-            $body_with_html = $body_with_html_data['n_body'];
-            $no_desc_withouthtml = $body_without_html;
+            
             $arr_offline = array();
             $author = array();
             $nObject = new stdClass();
