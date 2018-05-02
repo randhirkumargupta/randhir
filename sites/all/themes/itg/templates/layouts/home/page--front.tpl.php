@@ -1052,17 +1052,8 @@ if ($theme != 'itgadmin') {
 </div>
 <?php 
 $ipl_triangle_status = itg_ipl_triangle_status(); 
-if ($ipl_triangle_status == 1) {
+if ($ipl_triangle_status['score_triangle'] == 1) {
+echo $ipl_triangle_status['score_code_cube_app'];
+}
 ?>
-<!-- score drag cube -->
-<script type="text/javascript" src="https://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script type="text/javascript">!function(a){function f(a,b){if(!(a.originalEvent.touches.length>1)){a.preventDefault();var c=a.originalEvent.changedTouches[0],d=document.createEvent("MouseEvents");d.initMouseEvent(b,!0,!0,window,1,c.screenX,c.screenY,c.clientX,c.clientY,!1,!1,!1,!1,0,null),a.target.dispatchEvent(d)}}if(a.support.touch="ontouchend"in document,a.support.touch){var e,b=a.ui.mouse.prototype,c=b._mouseInit,d=b._mouseDestroy;b._touchStart=function(a){var b=this;!e&&b._mouseCapture(a.originalEvent.changedTouches[0])&&(e=!0,b._touchMoved=!1,f(a,"mouseover"),f(a,"mousemove"),f(a,"mousedown"))},b._touchMove=function(a){e&&(this._touchMoved=!0,f(a,"mousemove"))},b._touchEnd=function(a){e&&(f(a,"mouseup"),f(a,"mouseout"),this._touchMoved||f(a,"click"),e=!1)},b._mouseInit=function(){var b=this;b.element.bind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),c.call(b)},b._mouseDestroy=function(){var b=this;b.element.unbind({touchstart:a.proxy(b,"_touchStart"),touchmove:a.proxy(b,"_touchMove"),touchend:a.proxy(b,"_touchEnd")}),d.call(b)}}}(jQuery);</script>
-<div id="twister"><span class="crosscloseif" onclick="movebottom()"><span>Open ScoreCard</span> <i class="fa fa-angle-double-down" aria-hidden="true"></i></span><iframe name="crbz_scag_frame" width="180" scrolling="no" height="130" src="https://feeds.intoday.in/xml_it/commentary/cube_ipl98.html" frameborder="0" id="twisstiframe"></iframe><div class="iframe-cover"></div></div>
-<style type="text/css">#twister{ position: fixed;right: 0px;bottom:30px;z-index: 99999; cursor:move; width:190px; height:115px;}span.crosscloseif{z-index: 99; background: #fff; color: #000;font-size: 20px;font-weight: bold;padding:3px 10px;position: absolute;top:-21px; right:42px;line-height:20px; box-shadow: 0px -2px 2px 1px #ccc; border-radius: 3px 3px 0 0;}#twister.movearrow{ position: fixed; bottom:-110px; cursor:pointer; }#twister span.crosscloseif span{ display:none; font-size: 12px;line-height: 16px;position: relative;top: -3px;text-transform: uppercase;}#twister.movearrow .fa.fa-angle-double-down:before{content:"\f102"}#twister.movearrow span.crosscloseif span{display: inline-block;; }#twister iframe#twisstiframe{ position:relative; z-index:-1; }#twister .iframe-cover{ width:190px; height: 130px; position: absolute; z-index:1; top:0px; right:0px; background:transparent; } #twister.movearrow span.crosscloseif{ width:147px;} </style>
-<script type="text/javascript">
-if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof jQuery.browser !== "undefined" && jQuery.browser.msie == 1)){ document.getElementById('twister').style.display='none';}
-function movebottom() {var arrow = document.getElementById("twister");arrow.classList.toggle("movearrow");arrow.removeAttribute('style');}
-jQuery(document).ready(function(){jQuery("#twister").draggable()});
-jQuery(window).on('orientationchange',function(){document.getElementById("twister").style.left="";document.getElementById("twister").style.top="";});
-</script>
-<?php } ?>
+
