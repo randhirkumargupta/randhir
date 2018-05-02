@@ -829,6 +829,9 @@ function itg_widget_theme() {
         'election_constituency_page' => array(
             'template' => 'templates/election-constituency-block',
         ),
+        'election_past_results' => array(
+            'template' => 'templates/election-past-restuls',
+        ),
 
     );
     return $themes;
