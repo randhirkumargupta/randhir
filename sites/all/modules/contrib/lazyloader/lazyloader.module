@@ -135,6 +135,15 @@ function lazyloader_image($variables) {
     $noscript = '<noscript><img' . drupal_attributes($noscript_attributes) . ' /></noscript>';
   }
 
+  // Compatibility with AMP module and AMP pages.
+  if(module_exists('amp') && amp_is_amp_request()) {
+    // Remove RDF properties incompatible with AMP specification.
+    if (isset($variables['attributes']['typeof'])) {
+      unset($variables['attributes']['typeof']);
+    }
+    return '<amp-img' . drupal_attributes($attributes) . '></amp-img>';
+  } 
+
   return '<img' . drupal_attributes($attributes) . ' />' . $noscript;
 }
 
@@ -187,7 +196,7 @@ function _lazy_loader_enabled() {
   }
 
   // Check if AMP module is enabled and if we are on an AMP page to exclude lazy loader.
-  if (module_exists('amp')) {
+  if (module_exists('amp') && amp_is_amp_request()) {
     return FALSE;
   }
   
