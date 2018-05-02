@@ -196,7 +196,7 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
         $breaking_output .= '<div class="breaking-section"><a name="'.$breaking_item->bid.'"></a>';
         $blog_title = $breaking_item->blog_title;
         $html = !empty($blog_title) ? $blog_title : preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_item->blog_description);
-        $blog_desc = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $breaking_item->blog_description);
+        $blog_desc = $breaking_item->blog_description
         $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
         $pub_time = date("H:i", strtotime($breaking_item->blog_publish_time));
         $pub_display_time = date("H:i A", strtotime($breaking_item->blog_publish_time));
