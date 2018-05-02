@@ -96,7 +96,7 @@ function lazyloader_image($variables) {
   $noscript_attributes = $variables['attributes'];
 
   $src = file_create_url($variables['path']);
-  if (_lazy_loader_enabled()) {
+  if (_lazy_loader_enabled() && drupal_is_front_page()) {
 
     $attributes['data-src'] = $src;
     if (!isset($image_placeholder_src)) {
