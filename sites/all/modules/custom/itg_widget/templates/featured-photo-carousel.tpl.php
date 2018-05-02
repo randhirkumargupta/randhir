@@ -17,7 +17,8 @@ if(!empty($data)) {
                 ?>
                 <li <?php echo $data_tb_region_item;?>>
     <?php 
-        $full_image = '<img src="'. $entity_data_node['file_url'] .'" title="'. $entity_data_node['image_title'] .'" alt="'. $entity_data_node['image_alt'].'" />';
+        //$full_image = '<img src="'. $entity_data_node['file_url'] .'" title="'. $entity_data_node['image_title'] .'" alt="'. $entity_data_node['image_alt'].'" />';
+        $full_image = theme('image', array('path' => $entity_data_node['file_url'], 'alt' => $entity_data_node['image_title'], 'title' => $entity_data_node['image_alt']));
     ?>                   
                     <?php
                         echo l($full_image , "node/".$entity_data_node['nid'] , array("html" => TRUE))

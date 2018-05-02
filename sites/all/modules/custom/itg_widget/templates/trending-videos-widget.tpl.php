@@ -10,8 +10,9 @@
       <li <?php echo $data_tb_region_item;?> class="<?php print $entity['type'] ?> trending-videos-list">
         <?php if (!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['nid']); ?>">
-            <?php $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']); ?>
-              <img src="<?php print $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt'] ?>" title="<?php echo $entity['field_story_extra_small_image_title'] ?>" />
+            <?php //$extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']); ?>
+              <!-- <img src="<?php print $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt'] ?>" title="<?php echo $entity['field_story_extra_small_image_title'] ?>" /> -->
+              <?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
           </a>
           <?php
         }
