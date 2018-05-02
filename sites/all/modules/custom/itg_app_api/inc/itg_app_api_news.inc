@@ -175,7 +175,10 @@ function generateNewsCategoryList($tid, $pageno) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-
+             // filter breaking news blog..
+            if($resvalue['field_type_value'] == "Breaking News"){
+                continue;
+            }
             // node feed tag
             $title = $resvalue['title'];
             $type = $resvalue['type'];
