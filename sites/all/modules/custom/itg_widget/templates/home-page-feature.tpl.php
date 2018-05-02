@@ -12,8 +12,8 @@
 		<div class='live-webcast-coverage'><?php print $data[0]['webcast_val']; ?></div>
       <?php elseif (!empty($data[0]['uri'])) : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-            <!-- <img src="<?php print image_style_url("magazine_top_story_483x271", $data[0]['uri']); ?>" alt="<?php echo $data[0]['field_story_extra_large_image_alt'] ?>" title="<?php echo $data[0]['field_story_extra_large_image_title'] ?>" /> -->
-            <?php print theme('image_style', array('path' => $data[0]['mi_file_uri'],'style_name' => 'home_page_feature_small', 'alt' => $data[0]['field_story_medium_image_alt'], 'title' => $data[0]['field_story_medium_image_title'])); ?> 
+            <img src="<?php print image_style_url("magazine_top_story_483x271", $data[0]['uri']); ?>" alt="<?php echo $data[0]['field_story_extra_large_image_alt'] ?>" title="<?php echo $data[0]['field_story_extra_large_image_title'] ?>" />
+            <?php //print theme('image_style', array('path' => $data[0]['uri'], 'style_name' => 'magazine_top_story_483x271', 'alt' => $data[0]['field_story_extra_large_image_alt'], 'title' => $data[0]['field_story_extra_large_image_title'])); ?> 
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
@@ -56,7 +56,7 @@
       <?php if (!empty($data[1]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
           <!-- <img src="<?php print image_style_url("home_page_feature_small", $data[1]['mi_file_uri']); ?>" alt="<?php echo $data[1]['field_story_medium_image_alt'];?>" title="<?php echo $data[1]['field_story_medium_image_title'];?>" /> -->
-          <?php print theme('image_style', array('path' => $data[1]['mi_file_uri'],'style_name' => 'home_page_feature_small', 'alt' => $data[1]['field_story_medium_image_alt'], 'title' => $data[1]['field_story_medium_image_title'])); ?> 
+          <?php print theme('image_style', array('path' => $data[1]['mi_file_uri'], 'style_name' => 'home_page_feature_small', 'alt' => $data[1]['field_story_medium_image_alt'], 'title' => $data[1]['field_story_medium_image_title'])); ?> 
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
@@ -98,7 +98,7 @@
       <?php if (!empty($data[2]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
             <!-- <img src="<?php print image_style_url("home_page_feature_small", $data[2]['mi_file_uri']); ?>" alt="<?php echo $data[1]['field_story_medium_image_alt'];?>" title="<?php echo $data[1]['field_story_medium_image_title'];?>" /> -->
-            <?php print theme('image_style', array('path' => $data[2]['mi_file_uri'],'style_name' => 'home_page_feature_small', 'alt' => $data[2]['field_story_medium_image_alt'], 'title' => $data[2]['field_story_medium_image_title'])); ?> 
+            <?php print theme('image_style', array('path' => $data[2]['mi_file_uri'], 'style_name' => 'home_page_feature_small', 'alt' => $data[2]['field_story_medium_image_alt'], 'title' => $data[2]['field_story_medium_image_title'])); ?> 
         </a>
       <?php else : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
