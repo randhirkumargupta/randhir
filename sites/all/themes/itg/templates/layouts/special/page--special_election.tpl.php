@@ -138,25 +138,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <?php
                 $graphdata = array();
                 if (!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])) {
-                  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-                  $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
-                  $fb_share_title = htmlentities($search_title, ENT_QUOTES);
                   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
                   if (!empty($itg_election_home_content_id)) {
                     $story_title = get_first_story_title_by_tid($itg_election_home_content_id);
-                    $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
-                    if (!empty($story_title)) {
-                      $content_link = $base_url . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
-                      $story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
-                      $actual_link = $content_link;
-                      $search_title = preg_replace("/'/", "\\'", $story_title_display);
-                      $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
-                    }
-                    else {
-                      $short_url = shorten_url($actual_link, 'goo.gl');
-                    }
+                    $content_link = $base_url . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+                    $story_title_display = $story_title[0]['title'];
+                    $actual_link = $content_link;
+                    $search_title = preg_replace("/'/", "\\'", $story_title_display);
+                    $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);  
+                    $short_url = $actual_link;
                     $display_title = "";
-                    if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
+                    if (empty($story_title)) {
                       $display_title = 'style="display:none"';
                     }
                     echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
