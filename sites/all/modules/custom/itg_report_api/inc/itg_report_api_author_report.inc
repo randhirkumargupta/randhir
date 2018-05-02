@@ -189,7 +189,7 @@ function author_report($start_date, $type = 'story') {
         foreach ($author_today_data as $today_key => $today_val) {
             $title = $today_val['title'];
             $nid = $today_val['nid'];
-            $desc = kickerByNid($nid);
+            $desc = kickerByNid($nid, $type); 
             $title_path = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid . '');
             $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
@@ -560,16 +560,27 @@ function todayContentsByUid($start_date, $end_date, $mail, $type) {
  * @pram int $nid
  * @return string $desc
  */
-function kickerByNid($nid) {
+function kickerByNid($nid, $type='story') {
     $desc = "";
     if ($nid) {
-        $query_n = db_select('field_data_field_story_kicker_text', 'kt');
-        $query_n->fields('kt', array('field_story_kicker_text_value'));
-        $query_n->condition('kt.entity_id', $nid, '=');
-        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result_n as $reskey_n => $resvalue_n) {
-            $desc = $resvalue_n['field_story_kicker_text_value'];
+        if($type =='story'){
+            $query_n = db_select('field_data_field_story_kicker_text', 'kt');
+            $query_n->fields('kt', array('field_story_kicker_text_value'));
+            $query_n->condition('kt.entity_id', $nid, '=');
+            $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result_n as $reskey_n => $resvalue_n) {
+                $desc = $resvalue_n['field_story_kicker_text_value'];
+            }
+        }
+        elseif ($type == 'videogallery') {
+            $query_n = db_select('field_data_field_story_expert_description', 'kt');
+            $query_n->fields('kt', array('field_story_expert_description_value'));
+            $query_n->condition('kt.entity_id', $nid, '=');
+            $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result_n as $reskey_n => $resvalue_n) {
+                $desc = $resvalue_n['field_story_expert_description_value'];
+            }
         }
     }
-    return $desc;
+    return strip_tags($desc);
 }
