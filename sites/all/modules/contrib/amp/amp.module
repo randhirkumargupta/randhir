@@ -330,8 +330,6 @@ function amp_entity_info_alter(&$entity_info) {
  * Determines whether a request should return AMP HTML.
  */
 function amp_is_amp_request() {
-  print_r($_GET);
-  var_dump($_GET['amp']);die;
   $result = &drupal_static(__FUNCTION__);
 
   if (!isset($result)) {
