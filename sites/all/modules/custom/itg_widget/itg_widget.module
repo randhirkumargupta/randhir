@@ -1120,7 +1120,7 @@ function itg_widget_block_view($delta = '') {
              $constituency_data = file_get_contents($json_url);
              $block['content'] = theme("election_past_results", array("data" => $constituency_data, 'constituency' => $constituency));;
            }else{
-             $block['subject'] = '';
+             $block['title'] = '';
              $block['content'] = '';
            }
           }else{
