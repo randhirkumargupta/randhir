@@ -167,7 +167,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         // for breaking_news start
-        $query->condition('fdt.field_type_value', 'Breaking News', '!=');
+        //$query->condition('fdt.field_type_value', 'Breaking News', '!=');
         //$query->condition('fmu.field_multi_user_allows_value', 1 , '!=');
         // for breaking_news end
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
