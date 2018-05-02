@@ -166,9 +166,9 @@ $fb_appid = variable_get('itg_sharing_app_id');
       $breaking_output .= '</div>';
       $breaking_output .= '<div class="blog-multi-title">'. $breaking_title .'</div>';
       $breaking_output .= '<div class="blog-multi-desc">'. $breaking_desc .'</div>';
-      $breaking_output .= '<div class="socilaicon-liveblog"><amp-social-share width="32" height="32" type="facebook" data-param-app_id="'.$fb_appid.'" data-param-text="'.$breaking_title.'"></amp-social-share>';
+      /*$breaking_output .= '<div class="socilaicon-liveblog"><amp-social-share width="32" height="32" type="facebook" data-param-app_id="'.$fb_appid.'" data-param-text="'.$breaking_title.'"></amp-social-share>';
       $breaking_output .= '<amp-social-share type="twitter" width="32" height="32"></amp-social-share>';
-      $breaking_output .= '<amp-social-share type="gplus" width="32" height="32"></amp-social-share></div>';      
+      $breaking_output .= '<amp-social-share type="gplus" width="32" height="32"></amp-social-share></div>';*/      
       $breaking_output .= '</div>';      
     }
     print $breaking_output;       
