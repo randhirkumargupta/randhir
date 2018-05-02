@@ -110,7 +110,7 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
     jQuery.each(data, function (key, value) {
         if (value !== undefined) {
             if (consData.live !== undefined && consData.live == "1") {
-               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + (value.win_loss !== undefined ? value.win_loss : 'Result Awaited') + "</td></tr>"; 
+               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + ((value.win_loss !== undefined && value.win_loss != '') ? value.win_loss : 'Result Awaited') + "</td></tr>"; 
             }else {
                html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td></tr>";
             }
