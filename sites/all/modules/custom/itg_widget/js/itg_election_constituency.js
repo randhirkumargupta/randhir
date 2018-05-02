@@ -110,7 +110,7 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
     jQuery.each(data, function (key, value) {
         if (value !== undefined) {
             if (consData.live !== undefined && consData.live == "1") {
-               html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='Votes'>" + (value.win_loss !== undefined ? value.win_loss : '') + "</td></tr>"; 
+               html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='Votes'>" + (value.win_loss !== undefined ? value.win_loss : 'Result Awaited') + "</td></tr>"; 
             }else {
                html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td></tr>";
             }

@@ -106,7 +106,7 @@ if ($jsondata->live == 1) {
 					 </thead>
 					 <tbody>
 	            <?php foreach ($otherCondidates as $key => $candidate) {
-	              echo "<tr><td data-column='Candidate Name'>".$candidate->candidate."</td><td data-column='Party'>".$candidate->party."</td><td data-column='Votes'>".$candidate->win_loss."</td></tr>";
+	              echo "<tr><td data-column='Candidate Name'>".$candidate->candidate."</td><td data-column='Party'>".$candidate->party."</td><td data-column='Votes'>" . (!empty($candidate->win_loss) ? $candidate->win_loss : 'Result Awaited') ."</td></tr>";
 	            }?>
 					 </tbody>
 				</table> 
