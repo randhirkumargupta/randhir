@@ -1,12 +1,15 @@
 <?php if (!empty($data)) : global $base_url;
 $jsondata = json_decode($data);
+$jsondata = $jsondata->$constituency;
+$labels = $jsondata->label;
+$jsondata = $jsondata->candidate;
 ?>
 <div class="row mb-20">
     <div class="col-md-12" id="other-past-results">
 			<div class="other-past-results-details">
 			<table class="table" id="past-results-list">
 				 <thead>
-					 <th>Years</th><th>Winner</th><th>Party</th>
+					 <th><?php echo (!empty($labels->year) ? $labels->year : 'Year'); ?></th><th><?php echo (!empty($labels->candidate_name) ? $labels->candidate_name : 'Winner'); ?></th><th><?php echo (!empty($labels->party) ? $labels->party : 'PARTY'); ?></th>
 				 </thead>
 				 <tbody>
              <?php foreach ($jsondata as $key => $value) {
