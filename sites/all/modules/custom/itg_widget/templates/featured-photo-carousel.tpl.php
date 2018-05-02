@@ -13,12 +13,19 @@ if(!empty($data)) {
     <div class="flexslider">
         <ul class="slides"> 
             <?php
+            $item = 1;
             foreach($data as $key => $entity_data_node) {
                 ?>
                 <li <?php echo $data_tb_region_item;?>>
     <?php 
+		if($item == 1 || $item == 2){
+		  $full_image = theme('image', array('path' => $entity_data_node['file_url'], 'alt' => $entity_data_node['image_title'], 'title' => $entity_data_node['image_alt']));
+		}
+		else{
+		  $full_image = '<img src="'. $entity_data_node['file_url'] .'" title="'. $entity_data_node['image_title'] .'" alt="'. $entity_data_node['image_alt'].'" />';
+		}
         //$full_image = '<img src="'. $entity_data_node['file_url'] .'" title="'. $entity_data_node['image_title'] .'" alt="'. $entity_data_node['image_alt'].'" />';
-        $full_image = theme('image', array('path' => $entity_data_node['file_url'], 'alt' => $entity_data_node['image_title'], 'title' => $entity_data_node['image_alt']));
+        //$full_image = theme('image', array('path' => $entity_data_node['file_url'], 'alt' => $entity_data_node['image_title'], 'title' => $entity_data_node['image_alt']));
     ?>                   
                     <?php
                         echo l($full_image , "node/".$entity_data_node['nid'] , array("html" => TRUE))
@@ -32,7 +39,9 @@ if(!empty($data)) {
                         </p>
                     </div>
                 </li>
-            <?php } ?>
+            <?php 
+            $item++; }
+            ?>
         </ul>
     </div>
 <?php } ?>
