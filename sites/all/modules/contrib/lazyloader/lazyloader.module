@@ -135,7 +135,7 @@ function lazyloader_image($variables) {
     $noscript = '<noscript><img' . drupal_attributes($noscript_attributes) . ' /></noscript>';
   }
 
-  return '<img' . drupal_attributes($attributes) . ' />' . $noscript;
+  return '<img class="lazy" width="647" height="363" ' . drupal_attributes($attributes) . ' />' . $noscript;
 }
 
 /**
