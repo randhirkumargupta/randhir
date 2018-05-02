@@ -51,7 +51,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_scribd_latest_issue_syndication_xml($result, $issue_title, $issue_result, $field_issue_large_cover_image_fid);
     $xml_path = 'public://rss-feeds/xml_data/scribd/it/stories/';
-    $file_path = $xml_path . 'it-latest-issue.xml';
+    $file_path = $xml_path . 'it-latest-issue1.xml';
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
