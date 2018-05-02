@@ -135,15 +135,6 @@ function lazyloader_image($variables) {
     $noscript = '<noscript><img' . drupal_attributes($noscript_attributes) . ' /></noscript>';
   }
 
-  // Compatibility with AMP module and AMP pages.
-  if(module_exists('amp')) {
-    // Remove RDF properties incompatible with AMP specification.
-    if (isset($variables['attributes']['typeof'])) {
-      unset($variables['attributes']['typeof']);
-    }
-    return '<amp-img' . drupal_attributes($attributes) . '></amp-img>';
-  } 
-
   return '<img' . drupal_attributes($attributes) . ' />' . $noscript;
 }
 
