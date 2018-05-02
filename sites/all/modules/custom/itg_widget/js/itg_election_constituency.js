@@ -118,7 +118,7 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
         }
     })
     if (consData.live !== undefined && consData.live == "1") {
-        var th = "<th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th><th>"+(consData.label.status !== undefined ? consData.label.status : 'STATUS')+"</th>";
+        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th><th>"+(consData.label.status !== undefined ? consData.label.status : 'STATUS')+"</th></tr>";
         jQuery("#other-candidates table thead").html(th);
         jQuery("#other-candidates table tbody").html(html);
         jQuery("#other-candidates-past").hide();
@@ -128,9 +128,9 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
             jQuery("#other-candidates .labels").html('Other Candidates');
         }
     } else {
-        var th = "<th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th>";
+        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th></tr>";
         jQuery("#other-candidates").hide();
-        jQuery("#other-candidates-past table tbody").html(th);
+        jQuery("#other-candidates-past table thead").html(th);
         jQuery("#other-candidates-past table tbody").html(html);
         if (consData.lbl_otherscandidate !== undefined) {
             jQuery("#other-candidates-past .labels").html(consData.lbl_otherscandidate);
