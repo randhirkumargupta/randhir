@@ -492,6 +492,9 @@ function itg_widget_block_info() {
     $blocks['election_constituency_page'] = array(
       'info' => t('Widget: Constituency Block'),
     );
+    $blocks['election_past_results'] = array(
+      'info' => t('Widget: Past Results'),
+    );
     
     return $blocks;
 }
@@ -1099,6 +1102,23 @@ function itg_widget_block_view($delta = '') {
              drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
              drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_constituency.js', array('type' => 'file', 'scope' => 'footer'));
              $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url));;
+           }else{
+             $block['content'] = '';
+           }
+          }else{
+            $block['content'] = '';
+          }
+          break;
+        case 'election_past_results' :
+          $args = arg();
+          if (!empty($args[3])) {
+           $constituency = explode("-", $args[3]);
+           $constituency = $constituency[0];           
+           $json_url = get_constituency_json_url($_GET['section']); 
+           if (!empty($json_url)){
+             $json_url = $json_url.$constituency.'.json';
+             $constituency_data = file_get_contents('https://smedia2.intoday.in/elections/2018/json/past-results/nippani.json');
+             $block['content'] = theme("election_past_results", array("data" => $constituency_data));;
            }else{
              $block['content'] = '';
            }
