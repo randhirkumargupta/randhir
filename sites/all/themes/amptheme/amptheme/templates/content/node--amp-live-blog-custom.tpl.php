@@ -127,12 +127,7 @@ $fb_appid = variable_get('itg_sharing_app_id');
               $live_url = str_replace($iframes, "", $live_url);
             }
             else {
-              $frame = '<amp-iframe width="200" height="100"
-        sandbox="allow-scripts allow-same-origin"
-        layout="responsive"
-        frameborder="0"
-        src="' . $match[1] . '">
-        </amp-iframe>';
+              $frame = '<amp-iframe width="200" height="100"  sandbox="allow-scripts allow-same-origin"  layout="responsive" frameborder="0" src="' . $match[1] . '"></amp-iframe>';
               $live_url = str_replace($iframes, $frame, $live_url);
             }
           }
