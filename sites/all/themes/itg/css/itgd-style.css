@@ -1075,10 +1075,10 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
 }
+
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
 #block-itg-widget-election-know-your-party .partylist-body{height:342px; overflow-y:auto;}
-#block-itg-widget-election-know-your-party .karnataka-partylist:before{content: "";height: 6px;width: 100%; left: 0;position: absolute;bottom: 0px;background: #ffff00; border-radius:0px 
-0px 5px 5px;}
+#block-itg-widget-election-know-your-party .karnataka-partylist:before{content: "";height: 6px;width: 100%; left: 0;position: absolute;bottom: 0px;background: #ffff00; border-radius:0px 0px 5px 5px;}
 #block-itg-widget-election-know-your-party .karnataka-partylist ul li{display:block; overflow: hidden; border-bottom:1px solid #ededed; padding:5px 0; list-style: none;}
 #block-itg-widget-election-know-your-party .karnataka-partylist ul li span.party-logo{ width:85px; display: block; float:left; margin-right:10px;}
 #block-itg-widget-election-know-your-party .karnataka-partylist ul li span.party-details{display: block; float: left; width: calc(100% - 95px); padding-top: 8px;}
@@ -1089,9 +1089,8 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-key-issue .imgBg{ position: absolute;bottom:0; left:0; height:25px; width:100%; color:#fff; background:rgba(0,0,0,0.6); text-align: center;font-size:14px; line-height:25px;text-transform: uppercase}
 #block-itg-widget-election-key-issue .KeyIssueOuterBorder{ border:1px solid #d4d4d4; position: relative; padding:10px 10px 5px; border-radius:5px;}
 #block-itg-widget-election-key-issue .KeyIssueOuterBorder:before{content:""; height:6px ; width:100%; left:0; position: absolute; bottom:0px; background:#ffff00; border-radius:0px 0px 5px 5px;}
-@media (max-width: 991px) and (min-width: 768px){
-     #block-itg-widget-election-key-issue .imgBg{font-size:14px;line-height:25px;}
-}
+@media (max-width: 991px) and (min-width: 768px){ #block-itg-widget-election-key-issue .imgBg{font-size:14px;line-height:25px;}}
+@media (max-width: 991px) and (min-width: 767px){}
 
 /* Election page Graph */
 .election-page .left-side .itg-415-layout .statesvg-map,.electionHome-section .fullchart-table .statesvg-map { width:50%; float: left; }
