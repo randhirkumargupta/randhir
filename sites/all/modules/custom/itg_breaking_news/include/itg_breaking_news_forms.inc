@@ -3,7 +3,6 @@
 /**
  * Function for ajax request callback
  */
-
 function itg_live_blog_custom() {
   drupal_add_css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', array('type' => 'external')); 
   return theme('itg_live_blog_custom_form', array('data' => $data));
@@ -25,15 +24,15 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
   $form['breaking'] = array(
     '#type' => 'fieldset',
     '#title' => t(''),
-    '#collapsible' => TRUE, // Added
-    '#collapsed' => FALSE,  // Added
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
   );
    
   $form['breaking']["wrapper"] = array(
       "#markup" => "<div class='inline-error-messages'></div>",
-      );
+  );
    
-   $form['breaking']['blog_highlight_status'] = array(
+  $form['breaking']['blog_highlight_status'] = array(
     '#type' => 'checkbox',
     '#title' => t('Mark as most recent'),
     '#default_value' => '0',
@@ -41,7 +40,7 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#suffix' => '</div>',
   );
    
-   $form['breaking']['blog_title'] = array(
+  $form['breaking']['blog_title'] = array(
     '#type' => 'textfield',
     '#prefix' => '<div id="blog_title_replace_wrapper">',
     '#title' => t('Title'),
@@ -58,7 +57,6 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
     '#format' => 'icon_format',
     '#prefix' => '<div id="blog_description_replace_wrapper">',
     '#suffix' => '</div>',
-    // '#attributes' => array('spellcheck' => 'true'),
   );
     
   $form['breaking']['blog_breaking_band'] = array(
@@ -101,16 +99,14 @@ function itg_manage_breking_news($form, &$form_state, $bid, $type) {
 }
 
 /**
- * 
- * @param type $form
- * @param type $form_state
+ * {@inheritdoc}.
  */
 function itg_manage_breking_news_submit($form, &$form_state) {
   
 }
 
 /**
- * 
+ * Delete live blog by cms.
  */
 function live_bog_delete() {
   $bid = ($_POST['id']) ? $_POST['id'] : '';
@@ -131,14 +127,8 @@ function live_bog_delete() {
 }
 
 /**
- * 
- * @return string
+ * refresh content for live blog.
  */
-function live_bog_cron()
-{
-   return 'test';    
-}
-
 function itg_live_blog_refresh() {
  $entityId = ($_POST['entityId']) ? $_POST['entityId'] : '';
  if (!empty($entityId)) {
@@ -147,7 +137,7 @@ function itg_live_blog_refresh() {
 }
 
 /**
- * 
+ * Notification alter for file new live blog.
  */
 function itg_live_blog_check_updates() {
   $entityId = ($_POST['entityId']) ? $_POST['entityId'] : '';
