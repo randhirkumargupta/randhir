@@ -187,7 +187,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                           <div class="row itg-325-layout">
                               <div class="col-md-6 col-sm-6 mt-50">
                                  <div class="itg-widget">
-                                    <span class="widget-title" data-id="itg-block-3"><?php print 'LiveTV'; ?></span>
+                                    <span class="widget-title" data-id="itg-block-3"><?php print 'Live TV'; ?></span>
                                     <div class="data-holder" id="itg-block-3">
                                       <?php
                                       $block = block_load('itg_widget', 'live_tv');
