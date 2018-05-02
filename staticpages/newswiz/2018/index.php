@@ -136,100 +136,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     </div>
   </div>
 </div>
-<header>
  
 <?php include('header.html');?>
-  <!--end top area -->
-       
-  <section class="nav_area">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="navArea">
-            <div class="responsive_menu" onclick="myFunction(this)">
-              <div class="bar1"></div>
-              <div class="bar2"></div>
-              <div class="bar3"></div>
-            </div>
-            <div class="topSocIcon mobIcon">
-              <ul>
-              <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
-                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
-              </ul>
-            </div>
-            <!--end responsive menu -->
-            
-            <div class="navLink">
-              <ul>
-           
-                <li><a href="/newswiz/2017/index.jsp" title="home" class="active_h"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-               <!-- <li><a href="newswiz-rules.jsp" class="" title="Rules">Rules &amp; Regulations</a></li>-->  
-                    
-                <li><a href="newswiz-rules.jsp" title="Rules">Rules And Regulations</a></li>
-
-                <li><a href="newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>                   
-                <li class="flashLinkBtn"><a href="javascript:void(0)" title="Flashback">Flashback</a>
-                  <ul class="flashLinkMenu">
-                    <li><a href="/newswiz/2016/" target="_blank">2016</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>   
-                         
-            <div class="topSocIcon">
-              <ul>
-              <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">REGISTRATIONS OPEN</a></li>
-                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   
-  <!--end navigation--> 
-  <!-- Ad Slot 2 tag: --> 
-  <!-- begin ZEDO for channel: NewsWiz_320x50_Top, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
-  <div class="mobileADSec">
-  <div id="zt_89344_2" style="display:show; text-align:center" align="center" > 
-    <script id="zt_89344_2" language="javascript"> 
-
-if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
-{
-     zmt_mtag.zmt_render_placement(p89344_2);
-}
- </script> 
-  </div>
-  </div>
-  <!-- end ZEDO for channel:  NewsWiz_320x50_Top, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 --> 
-</header>
-<!--end header--> 
-
-<!--<section class="sponsor_frame">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
-      </div>
-    </div>
-  </div>
-</section> --> 
-
-
-<style>
-a.active_h{background:#b10102} 
-@media screen and (max-width: 900px){
-.navLink ul li a {
-    padding: 9px 6px;
-}            
-}
-</style>
-
     <!--end sponsor -->   
     <section class="page_area">
       <div class="container">
@@ -240,10 +149,9 @@ a.active_h{background:#b10102}
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="over_area">
-                      
-                          <p>It gives us great pleasure to announce the return of the exciting and innovative news quiz, <strong> “News Wiz” for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</p>
-                                                <br>
-                                                <p>This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your teams may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
+<p>It gives us great pleasure to announce the return of the exciting and innovative news quiz, <strong> “News Wiz” for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</p>
+<br>
+<p>This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your teams may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
 If you are students / know students from class 9 to 12 - form teams of two members and register to take part for the qualifying test for what definitely will be an exciting new season of News Wiz !
 </p>
                       
