@@ -109,7 +109,12 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
     var html = "";
     jQuery.each(data, function (key, value) {
         if (value !== undefined) {
-            html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='Votes'>" + (value.votes !== undefined ? value.votes : '') + "</td><td data-column='%Votes'>" + (value.percentage_votes !== undefined ? value.percentage_votes : '') + "</td><td data-column='%Change'>" + (value.percentage_change !== undefined ? value.percentage_change : '') + "</td></tr>";
+            if (consData.live !== undefined && consData.live == "1") {
+               html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='Votes'>" + (value.win_loss !== undefined ? value.win_loss : '') + "</td></tr>"; 
+            }else {
+               html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td></tr>";
+            }
+            
         }
     })
     if (consData.live !== undefined && consData.live == "1") {
