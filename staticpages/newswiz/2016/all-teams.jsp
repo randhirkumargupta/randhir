@@ -231,7 +231,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2	 col-xs-12">
           <div class="logo_new">
-            <h1><a href="index.html"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
+            <h1><a href="/newswiz/2016/index.jsp"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -251,25 +251,25 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <h2><a href="index.html" title="home" class="active"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                <h2><a href="/newswiz/2016/index.jsp" title="home" class="active"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-rules.html" title="Rules">Rules</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-rules.html" title="Rules">Rules</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-schedule.html" title="Schedule">Schedule</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-schedule.html" title="Schedule">Schedule</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-faq.html" title="FAQS">FAQS</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
+                <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>
                <div class="swiper-slide">
-                  <h2><a href="show-question.html" title="Show Question">Show Question</a></h2>
+                  <h2><a href="/newswiz/2016/show-question.html" title="Show Question">Show Question</a></h2>
                 </div>
               <div class="swiper-slide comicon">
                 <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
@@ -360,7 +360,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                    </div>
                 </div>
 
-                <h2><a href="episodes.html" title="The Show"><span>Sneak peek</span></a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="The Show"><span>Sneak peek</span></a></h2>
                 <div class="right_advertis">
                   <div class="presen_area">
                     <h4>Presented By </h4>
@@ -542,22 +542,22 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <h2><a href="index.html" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                <h2><a href="/newswiz/2016/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-rules.html" title="Rules">Rules</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-rules.html" title="Rules">Rules</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-schedule.html" title="Schedule" class="active">Schedule</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-schedule.html" title="Schedule" class="active">Schedule</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-faq.html" title="FAQS">FAQS</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
+                <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>
               <div class="swiper-slide comicon">
                 <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
