@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -232,7 +231,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
       <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-2	 col-xs-12">
           <div class="logo_new">
-            <h1><a href="index.html"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
+            <h1><a href="/newswiz/2016/index.jsp"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -252,25 +251,25 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <h2><a href="index.html" title="home" class="active"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                <h2><a href="/newswiz/2016/index.jsp" title="home" class="active"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-rules.html" title="Rules">Rules</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-rules.html" title="Rules">Rules</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-schedule.html" title="Schedule">Schedule</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-schedule.html" title="Schedule">Schedule</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-faq.html" title="FAQS">FAQS</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
+                <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>
                <div class="swiper-slide">
-                  <h2><a href="show-question.html" title="Show Question">Show Question</a></h2>
+                  <h2><a href="/newswiz/2016/show-question.html" title="Show Question">Show Question</a></h2>
                 </div>
               <div class="swiper-slide comicon">
                 <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
@@ -335,7 +334,9 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
             <!--end overview -->
             <div class="row">
               <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <script type="text/javascript">ajaxinclude("http://indiatoday.intoday.in/newswiz/all-teams-include.jsp")</script>
+                <script type="text/javascript">
+                // ajaxinclude("http://indiatoday.intoday.in/newswiz/all-teams-include.jsp");
+              </script>
 
               </div>
             </div>
@@ -359,7 +360,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                    </div>
                 </div>
 
-                <h2><a href="episodes.html" title="The Show"><span>Sneak peek</span></a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="The Show"><span>Sneak peek</span></a></h2>
                 <div class="right_advertis">
                   <div class="presen_area">
                     <h4>Presented By </h4>
@@ -374,14 +375,14 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                         <ul>
                         <li>
                         <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt30g" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ1NjI5" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
                                 <p>Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra</p>
                                 </a> </div>
                             </div>
                         </li>
                         <li>
                         <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqcmz49s" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/india/embed/NDQ0MjI0" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
                                 <p>Watch this all-rounder genius girl make Rajdeep dance</p>
                                 </a> </div>
                             </div>
@@ -389,7 +390,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 
                                             <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g0xp3qm8" title="News Wiz goes to Tagore International School, Delhi">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ0MzY3" title="News Wiz goes to Tagore International School, Delhi">
                               <span class="icon_video_newswiz"></span>
                                 <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-video_647_081016044457.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz goes to Tagore International School, Delhi</p>
@@ -398,7 +399,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                           </li>
                         <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g074osio" title="News Wiz gets its own rap song">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ0NTEy" title="News Wiz gets its own rap song">
                               <span class="icon_video_newswiz"></span>
                                 <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rap-song-video_647_080716020800.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz gets its own rap song</p>
@@ -407,7 +408,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                           </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b0q7z4" title="Rapid fire with Jacqueline Fernandez on New Wiz">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg3NjM=" title="Rapid fire with Jacqueline Fernandez on New Wiz">
         <!-- <span class="icon_video_newswiz"></span> -->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/for-first-link.jpg" alt="Newswiz" width="320" height="219">
         <p>Rapid fire with Jacqueline Fernandez on New Wiz</p>
@@ -416,7 +417,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b1yznk" title="Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg3NjA=" title="Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz">
         <!-- <span class="icon_video_newswiz"></span> -->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/second.jpg" alt="Newswiz" width="320" height="219">
         <p>Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz</p>
@@ -425,7 +426,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ariq9xxc" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/salman-video_647_0704161223.gif" alt="Newswiz">
         <p>India's first News Quiz Show with 'Sultan' Salman Khan</p>
@@ -434,7 +435,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82mib40" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODk=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video1.jpg" alt="Newswiz">
         <p>News is knowledge, knowledge is news: Get ready for India Today News Wiz</p>
@@ -443,7 +444,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minnk" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODg=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video2.jpg" alt="Newswiz">
         <p>Newswiz, India's biggest news quiz: Anil Kapoor</p>
@@ -452,7 +453,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minog" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODc=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video3.jpg" alt="Newswiz">
         <p>Are brains better than brawn? Salman Khan will tell you this Sunday</p>
@@ -461,7 +462,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minpc" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODY=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video4.jpg" alt="Newswiz">
         <p>Losing and Winning with the mind, with Sultan Salman Khan</p>
@@ -541,22 +542,22 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <h2><a href="index.html" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                <h2><a href="/newswiz/2016/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-rules.html" title="Rules">Rules</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-rules.html" title="Rules">Rules</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-schedule.html" title="Schedule" class="active">Schedule</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-schedule.html" title="Schedule" class="active">Schedule</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="newswiz-faq.html" title="FAQS">FAQS</a></h2>
+                <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
+                <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
               </div>
               <div class="swiper-slide">
-                <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>
               <div class="swiper-slide comicon">
                 <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
@@ -740,17 +741,17 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 <!-- Swiper JS -->
 <!--<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>-->
 <script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
 	$('.videoplace-holder').click(function(){
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc&autoplay=true');
+$('#videoplayer').attr('src','https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc');
 
 });
 $('#closevideo').click(function(){
 $('.video_pic').removeClass('showvideo');
-$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc');
+$('#videoplayer').attr('src','https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc=');
 });
 
 
@@ -778,7 +779,8 @@ $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc');
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+// $('#videoplayer').attr('src',lnk+"&autoplay=true");
+$('#videoplayer').attr('src',lnk);
 })
     });
     </script>
