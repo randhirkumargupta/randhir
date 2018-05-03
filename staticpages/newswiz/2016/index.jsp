@@ -221,7 +221,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
         <div class="row">
           <div class="col-lg-2 col-md-2 col-sm-2	 col-xs-12">
             <div class="logo_new">
-              <h1><a href="index.html"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
+              <h1><a href="/newswiz/2016/index.jsp"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/new-logo1.png" alt="News Wiz Quiz"> </a> </h1>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -242,25 +242,25 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <h2><a href="index.html" title="home" class="active"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                  <h2><a href="/newswiz/2016/index.jsp" title="home" class="active"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-rules.html" title="Rules">Rules</a></h2>
+                  <h2><a href="/newswiz/2016/newswiz-rules.html" title="Rules">Rules</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-schedule.html" title="Schedule">Schedule</a></h2>
+                  <h2><a href="/newswiz/2016/newswiz-schedule.html" title="Schedule">Schedule</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-faq.html" title="FAQS">FAQS</a></h2>
+                  <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
+                  <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
+                  <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="show-question.html" title="Show Question">Show Question</a></h2>
+                  <h2><a href="/newswiz/2016/show-question.html" title="Show Question">Show Question</a></h2>
                 </div>
                 <div class="swiper-slide comicon">
                   <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
@@ -355,7 +355,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <div class="video_area">
-                        <h2><a href="episodes.html" title="The Show"><span>The Show</span></a></h2>
+                        <h2><a href="/newswiz/2016/episodes.html" title="The Show"><span>The Show</span></a></h2>
                         <div class="video_info">
                           <div id="video_slide" class="carousel slide" data-ride="carousel" data-interval="false">
                             <!-- Wrapper for slides -->
@@ -368,91 +368,91 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                               </div>-->
                               <div class="item active">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4osvk04kg" title="Grand Finale"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-story_647_101616020632.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQ2NzQz" title="Grand Finale"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-story_647_101616020632.jpg" alt="Newswiz" />
                                      <p>Grand Finale: Delhi's Springdales crowned champions in grand finale</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ornc1u68" title="Episode 12"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswhiz-video_647_100916011925.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/popular-now/embed/NDQ2OTk2" title="Episode 12"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswhiz-video_647_100916011925.jpg" alt="Newswiz" />
                                      <p>Episode 12: Chennai boys enter the finals</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4n1qlnhnk" title="Episode 11"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_100216015157.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/popular-now/embed/NDQ3MzE2" title="Episode 11"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_100216015157.jpg" alt="Newswiz" />
                                      <p>Episode 11: This school storms into the finals</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4n09jb58g" title="Episode 10"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/new-wiz_647_092516021855.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQ1MDAx" title="Episode 10"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/new-wiz_647_092516021855.jpg" alt="Newswiz" />
                                      <p>Episode 10: Sai International first team to qualify for finals</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4lacp5luo" title="Episode 9"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_091816012922.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/india/embed/NDQ1Mjc0" title="Episode 9"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_091816012922.jpg" alt="Newswiz" />
                                      <p>Episode 9: Springdales School Dhaula Kuan duo steer through four rounds to mark victory</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt9a8" title="Episode 8"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091116020206.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQ1NjI4" title="Episode 8"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091116020206.jpg" alt="Newswiz" />
                                      <p>Episode 8: Jamshedpur boys emerge victorious in a nail-biting finish</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4jiyxo7uo" title="Episode 7"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-by-rajdeep-sardesai-video_647_090416125732.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQ1OTI5" title="Episode 7"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-by-rajdeep-sardesai-video_647_090416125732.jpg" alt="Newswiz" />
                                      <p>Episode 7: Puducherry's St Patrick School scores over DPS Rohini</p>
                                     </a> </div>
                                 </div>
                               </div>
                                <div class="item ">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4jhhqbpxc" title="Episode 6"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082816014538.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQzNzU2" title="Episode 6"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082816014538.jpg" alt="Newswiz" />
                                      <p>Episode 6: Sai International gets through by the skin of their teeth</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hrkzxjz4" title="Episode 5"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082116021429.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQzOTky" title="Episode 5"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082116021429.jpg" alt="Newswiz" />
                                     <p>Episode 5: Tagore International breezes into the next round</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqclr1og" title="Episode 4"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/episode4.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ0MjQx" title="Episode 4"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/episode4.jpg" alt="Newswiz" />
                                     <p>Episode 4: Sunbeam School from Varanasi comes out on top</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g074o9k0" title="Episode 3"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_080716124828.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/NDQ0NTE1" title="Episode 3"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_080716124828.jpg" alt="Newswiz" />
                                     <p>Episode 3: National Gems School advances to next round</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ea1q4fs0" title="Episode 2"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_073116125705.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/MTg1Nzk=" title="Episode 2"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_073116125705.jpg" alt="Newswiz" />
                                     <p>Episode 2: The Choice School makes a stunning comeback to snatch victory</p>
                                     </a> </div>
                                 </div>
                               </div>
                               <div class="item">
                                 <div class="video_episode_snippets">
-                                  <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e8khk81s" title="Episode 1"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep1.jpg" alt="Newswiz" />
+                                  <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz/embed/MTg4NzE=" title="Episode 1"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep1.jpg" alt="Newswiz" />
                                     <p>Episode 1: Chennai's Chettinad Vidyashram takes the lead</p>
                                     </a> </div>
                                 </div>
@@ -473,13 +473,13 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                           <div class="match_table">
                             <div class="match_info">
                               <ul>
-                                <li> <a href="http://indiatoday.intoday.in/newswiz/team.jsp?teamname=Bhartiya-Vidya-Bhawan" title="Bhartiya Vidya Bhavan Vidyashram">
+                                <li> <a href="https://www.indiatoday.in/newswiz/team.jsp-@@-teamname=Bhartiya-Vidya-Bhawan" title="Bhartiya Vidya Bhavan Vidyashram">
                                   <div class="team_info">
                                     <div class="team_name">Bhartiya Vidya Bhavan Vidyashram</div>
                                     <div class="team_name school_name">Pratapnagar, Jaipur</div>
                                   </div>
                                   </a> </li>
-                                <li> <a href="http://indiatoday.intoday.in/newswiz/team.jsp?teamname=Cambridge-Court-High-School" title="Cambridge Court High School">
+                                <li> <a href="https://www.indiatoday.in/newswiz/team.jsp-@@-teamname=Cambridge-Court-High-School" title="Cambridge Court High School">
                                   <div class="team_info">
                                     <div class="team_name">Cambridge Court High School</div>
                                     <div class="team_name school_name">Jaipur</div>
@@ -669,7 +669,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 
                 </div>
 
-                <h2><a href="episodes.html" title="The Show"><span>Sneak peek</span></a></h2>
+                <h2><a href="/newswiz/2016/episodes.html" title="The Show"><span>Sneak peek</span></a></h2>
                 <div class="right_advertis">
                   <div class="presen_area">
                     <h4>Presented By </h4>
@@ -848,22 +848,22 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <h2><a href="index.html" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                  <h2><a href="/newswiz/2016/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-rules.html" title="Rules">Rules</a></h2>
+                  <h2><a href="/newswiz/2016/newswiz-rules.html" title="Rules">Rules</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-schedule.html" title="Schedule" class="active">Schedule</a></h2>
+                  <h2><a href="/newswiz/2016/newswiz-schedule.html" title="Schedule" class="active">Schedule</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-faq.html" title="FAQS">FAQS</a></h2>
+                  <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
+                  <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="episodes.html" title="Show Videos">Show Videos</a></h2>
+                  <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
                 </div>
                 <div class="swiper-slide comicon">
                   <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
@@ -1069,7 +1069,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+// $('#videoplayer').attr('src',lnk+"&autoplay=true");
+$('#videoplayer').attr('src',lnk);
 })
 
 

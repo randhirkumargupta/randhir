@@ -220,7 +220,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                                   <div class="video_info">
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="https://staging-it.indiatodayonline.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
                                                         <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
                                                         </a> </div>
                                                     </div>
