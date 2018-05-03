@@ -13,8 +13,8 @@
         <li <?php echo $data_tb_region_item;?> class="watch-right-now-list watch-right-now-<?php echo $video_key ?>">        
     <?php  if (!empty($video_data['esi_file_uri']) && file_exists($video_data['esi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-                <?php $file_uri = file_create_url($video_data['esi_file_uri']); ?>
-              <img title="<?php echo $video_data['field_story_extra_small_image_title'] ?>" alt="<?php echo $video_data['field_story_extra_small_image_alt'] ?>" src="<?php print $file_uri; ?>" />
+                <?php //$file_uri = file_create_url($video_data['esi_file_uri']); ?>
+              <?php print theme('image', array('path' => $video_data['esi_file_uri'], 'alt' => $video_data['field_story_extra_small_image_alt'], 'title' => $video_data['field_story_extra_small_image_title'])); ?>
             </a>
             <?php
           }
