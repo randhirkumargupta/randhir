@@ -334,7 +334,9 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
             <!--end overview -->
             <div class="row">
               <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                <script type="text/javascript">ajaxinclude("http://indiatoday.intoday.in/newswiz/all-teams-include.jsp")</script>
+                <script type="text/javascript">
+                // ajaxinclude("http://indiatoday.intoday.in/newswiz/all-teams-include.jsp");
+              </script>
 
               </div>
             </div>
@@ -739,12 +741,12 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 <!-- Swiper JS -->
 <!--<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>-->
 <script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
 	$('.videoplace-holder').click(function(){
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src','https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc=&autoplay=true');
+$('#videoplayer').attr('src','https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc');
 
 });
 $('#closevideo').click(function(){
