@@ -67,3 +67,51 @@ function itg_custom_variables_submit($form, &$form_state){
 	}
   drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
+/**
+* Function For mobile app setting
+* {@inheritdoc}
+*/
+function itg_mobile_app_configure(){
+  global $user;
+  $form = array();
+  if (!in_array("Editor", $user->roles)) {
+  $form['cube_js_mini_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Mini url'),
+    '#default_value' => get_itg_variable('cube_js_mini_url'),
+  );
+  $form['cube_js_full_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Full url'),
+    '#default_value' => get_itg_variable('cube_js_full_url'),
+  );
+  }
+  $form['cube_js_status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('cube_js_status'),
+  );
+  $form['submit_app_setting'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+  );
+  return $form;
+}
+
+/**
+* {@inheritdoc}
+*/
+function itg_mobile_app_configure_submit($form, &$form_state){
+  $values = $form_state['values'];
+  unset($values['submit_button']);
+  unset($values['form_build_id']);
+  unset($values['form_token']);
+  unset($values['form_id']);
+  unset($values['op']);
+  unset($values['submit_app_setting']);
+  foreach ($values as $key => $value) {
+    set_itg_variable($key, $value);
+  }
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}
