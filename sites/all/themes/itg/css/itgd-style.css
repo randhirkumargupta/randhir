@@ -872,9 +872,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
  .location-area h2 a {
      color: #eccc2c;
 }
-.section-news .itg-layout-container .ad-widget .sidebar-ad{
-background:none;
-}
+.section-news .itg-layout-container .ad-widget .sidebar-ad{background:none;}
 #block-itg-ads-ads-page-pusher-1x1{position: relative; overflow: hidden;}
 .section-pti-feed .view-category-wise-content-list .catagory-listing .detail h3{font-size: 1.2rem;font-weight: normal;line-height: 24px;}
 .section-pti-feed .view-category-wise-content-list .catagory-listing{border-bottom: 1px dotted #ccc; }
@@ -1070,6 +1068,12 @@ border-radius: 0px 5px 5px 0px;}
 .election-page #block-itg-widget-election-top-stories .ellection-top:before{content: ""; height: 6px;width: 100%;left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
 #block-itg-widget-election-mini-map .mini-map{ border:1px solid #d4d4d4; padding:10px; border-radius:5px; position: relative;}
 #block-itg-widget-election-mini-map .mini-map:before{content: ""; height: 6px;width: 100%;left: 0;position: absolute;bottom: 0px;background: #ffff00;border-radius: 0 0 5px 5px;}
+.election-page .left-side .itg-325-layout iframe{ height: 322px;}
+.election-page .election-graph .itg-415-layout .itg-widget{ padding:10px; border:1px solid #d4d4d4;border-radius: 5px; }
+.page-taxonomy.section-elections #block-itg-layout-manager-front-end-breadcrumb{ display:none; }
+.election-page .tech-block_5 .data-holder{ background:#fff; }
+.election-page .left-side .itg-photo .droppable{ height: auto; }
+.election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
 @media (max-width: 991px) and (min-width: 768px){
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
