@@ -434,7 +434,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .topSocIcon ul li.regLink a:focus { text-decoration:none}
 
 
-.video_pic.showvideo iframe#videoplayer {height: 405px !important;}
+.video_pic.showvideo iframe#videoplayer {height:525px !important; margin-top:12px;}
 .term-lft ul li em{width: 100%; border: 0; text-align: left; font-weight: bold; font-size: 16px; line-height: 20px; font-style:normal;}
 .auth_newswiz_q h3,.auth_newswiz_q h3 span{font-size: 33px;font-weight: bold;}
 .auth_newswiz_q h3{color:#000;}
