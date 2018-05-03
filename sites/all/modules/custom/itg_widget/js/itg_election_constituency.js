@@ -110,14 +110,16 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
     jQuery.each(data, function (key, value) {
         if (value !== undefined) {
             if (consData.live !== undefined && consData.live == "1") {
-               html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='Votes'>" + (value.win_loss !== undefined ? value.win_loss : 'Result Awaited') + "</td></tr>"; 
+               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + ((value.win_loss !== undefined && value.win_loss != '') ? value.win_loss : 'Result Awaited') + "</td></tr>"; 
             }else {
-               html += "<tr><td data-column='Candidate Name'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='Party'>" + (value.party !== undefined ? value.party : '') + "</td></tr>";
+               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td></tr>";
             }
             
         }
     })
     if (consData.live !== undefined && consData.live == "1") {
+        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th><th>"+(consData.label.status !== undefined ? consData.label.status : 'STATUS')+"</th></tr>";
+        jQuery("#other-candidates table thead").html(th);
         jQuery("#other-candidates table tbody").html(html);
         jQuery("#other-candidates-past").hide();
         if (consData.lbl_otherscandidate !== undefined) {
@@ -126,7 +128,9 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
             jQuery("#other-candidates .labels").html('Other Candidates');
         }
     } else {
+        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th></tr>";
         jQuery("#other-candidates").hide();
+        jQuery("#other-candidates-past table thead").html(th);
         jQuery("#other-candidates-past table tbody").html(html);
         if (consData.lbl_otherscandidate !== undefined) {
             jQuery("#other-candidates-past .labels").html(consData.lbl_otherscandidate);

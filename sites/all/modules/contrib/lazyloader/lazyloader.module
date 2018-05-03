@@ -96,7 +96,7 @@ function lazyloader_image($variables) {
   $noscript_attributes = $variables['attributes'];
 
   $src = file_create_url($variables['path']);
-  if (_lazy_loader_enabled() && drupal_is_front_page()) {
+  if (_lazy_loader_enabled()) {
 
     $attributes['data-src'] = $src;
     if (!isset($image_placeholder_src)) {
@@ -135,6 +135,20 @@ function lazyloader_image($variables) {
     $noscript = '<noscript><img' . drupal_attributes($noscript_attributes) . ' /></noscript>';
   }
 
+  // Compatibility with AMP module and AMP pages.
+  if(module_exists('amp') && amp_is_amp_request()) {
+    // Remove RDF properties incompatible with AMP specification.
+    if (isset($variables['attributes']['typeof'])) {
+      unset($variables['attributes']['typeof']);
+    }
+    return '<amp-img' . drupal_attributes($attributes) . '></amp-img>';
+  }
+  
+  //Remove typeof attribute from image. 
+  if((isset($attributes['typeof'])) && (!empty($attributes['typeof'])) && (!drupal_is_front_page())){
+	  unset($attributes['typeof']);
+  }
+  
   return '<img' . drupal_attributes($attributes) . ' />' . $noscript;
 }
 
@@ -183,6 +197,16 @@ Script;
 function _lazy_loader_enabled() {
   // Bail if lazyloader is disabled entirely.
   if (!variable_get('lazyloader_enabled', LAZYLOADER_ENABLED)) {
+    return FALSE;
+  }
+
+  // Check if AMP module is enabled and if we are on an AMP page to exclude lazy loader.
+  if (module_exists('amp') && amp_is_amp_request()) {
+    return FALSE;
+  }
+  
+  //Lazyloader only on homepage.
+  if (!drupal_is_front_page()) {
     return FALSE;
   }
 

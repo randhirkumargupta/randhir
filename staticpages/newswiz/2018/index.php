@@ -9,7 +9,7 @@
   content="News Quiz wiz 2018 by Rajdeep Sardesai and Siddhartha Basu properly known as the quiz man of India brings you first time at India Today for class X and XI students all across India. Come and participate here." />
 <meta name="keywords"
   content="News Wiz 2018, news quiz 2018, Rajdeep Sardesai, Siddhartha Basu, India today quiz, News Quiz rules, News Quiz schedule, News Quiz faq" />
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>  
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
 <link href="/newswiz/2018/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -207,7 +207,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                 </div>
                 <!--end overview -->
                 <script type="text/javascript">      
-                  ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
+                  // ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
                 </script>  
                 <div class="row">
                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -220,14 +220,14 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                                   <div class="video_info">
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fn1krlnts" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
                                                         <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
                                                         </a> </div>
                                                     </div>
                                                   </div>
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fn0cdg16o" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MTYy" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
                                                         <p>Episode 1: Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points </p>
                                                         </a> </div>
                                                     </div>
@@ -236,7 +236,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                                   
                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6forhbsnuo" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
                                 <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
                                 </a> </div>
                             </div>
@@ -244,7 +244,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                           
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fospr84ao" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
                                 <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
                                 </a> </div>
                             </div>
@@ -252,7 +252,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                           
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fqimcn0kg" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
                                 <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
                                 </a> </div>
                             </div>
@@ -289,7 +289,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
             <div class="header_win">RAJDEEP SARDESAI</div>
             <div class="container_wiz">
               <p> News and Quiz come together in a fantastic battle of brains. Rajdeep Sardesai who has spent his life in news will be at the helm of the first-of-its-kind quiz show - NewsWiz. There is no one better equipped than Rajdeep to host such a show considering that he has spent 26 years reporting, editing and anchoring news. </p>
@@ -298,7 +298,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
             <div class="header_win">SIDDHARTHA BASU </div>
             <div class="container_wiz">
               <p>Basu is the undisputed quiz man of India. He is the pioneer who hosted and produced the iconic Quiz Time on Doordarshan and also produced the marquee Kaun Banega Crorepati. He has been the mind behind Mastermind India, University Challenge and India's Child Genius. Now for the first time on news television in India, he is bringing a news-based quiz show.</p>
@@ -318,19 +318,19 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 </div>
 <!-- jQuery Bootstrap--> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
 <!-- Swiper JS --> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
-<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
+<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
 <script type="text/javascript">
 
-    $(document).ready(function(){
-  
+$(document).ready(function(){
   $('.video_episode_snippets .video_inner a').click(function(e){
- e.preventDefault();
-var lnk = $(this).attr('href');
-$('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+  e.preventDefault();
+  var lnk = $(this).attr('href');
+  $('.video_pic').addClass('showvideo');
+  // $('#videoplayer').attr('src',lnk+"&autoplay=true");
+  $('#videoplayer').attr('src',lnk);
 })
 
 

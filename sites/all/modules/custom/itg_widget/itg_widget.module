@@ -1118,7 +1118,7 @@ function itg_widget_block_view($delta = '') {
            if (!empty($json_url)){
              $json_url = $json_url . 'elections/2018/json/past-results/' . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
-             $block['content'] = theme("election_past_results", array("data" => $constituency_data));;
+             $block['content'] = theme("election_past_results", array("data" => $constituency_data, 'constituency' => $constituency));;
            }else{
              $block['content'] = '';
            }

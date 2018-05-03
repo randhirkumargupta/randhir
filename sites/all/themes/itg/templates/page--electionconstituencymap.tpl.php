@@ -93,6 +93,24 @@
                     <div class="itg-widget">
                         <div class="droppable">
                             <div class="widget-wrapper">
+                                <h4 class="heading">Key Issues</h4>                                            
+                                <div class="data-holder" id="itg-block-7">
+                                    <?php
+                                    $block = block_load('itg_widget', 'election_key_issue');
+                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                    print render($render_array);
+                                    ?>
+                                </div>
+                            </div>             
+                        </div>
+                    </div>
+                </div>
+            </div>                           
+            <div class="row itg-most-popular">
+                <div class="col-md-12 mt-50">
+                    <div class="itg-widget">
+                        <div class="droppable">
+                            <div class="widget-wrapper">
                                 <h4 class="heading">Most Popular</h4>                                            
                                 <div class="data-holder" id="itg-block-7">
                                     <?php

@@ -4,7 +4,6 @@
  * Function for ajax request callback
  */
 function itg_live_blog_custom() {
-  drupal_add_css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', array('type' => 'external')); 
   return theme('itg_live_blog_custom_form', array('data' => $data));
 }
 

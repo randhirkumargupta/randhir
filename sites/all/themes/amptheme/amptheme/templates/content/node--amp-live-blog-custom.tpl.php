@@ -19,6 +19,8 @@ $blog_created_date = date('Y-m-d', $node->created);
 $blog_created_time = date('h:i:s', $node->created);
 $coverage_start_date = $blog_created_date . 'T' . $blog_created_time;
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
+$short_description_source = str_replace("'", "", $short_description_source);
+$short_description_source = str_replace('"', '', $short_description_source);
 $custom_content = get_custom_content_details($node->nid);
 if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
   $coverage_end = $node->changed;
@@ -145,7 +147,6 @@ $fb_appid = variable_get('itg_sharing_app_id');
   <?php } ?> 
 </div>
 <div class="timeline">
-    <div class="most-recent">Most Recent</div>
   <?php  
   if (!empty($custom_content)) {
     $breaking_output .= '';
@@ -166,9 +167,9 @@ $fb_appid = variable_get('itg_sharing_app_id');
       $breaking_output .= '</div>';
       $breaking_output .= '<div class="blog-multi-title">'. $breaking_title .'</div>';
       $breaking_output .= '<div class="blog-multi-desc">'. $breaking_desc .'</div>';
-      $breaking_output .= '<div class="socilaicon-liveblog"><amp-social-share width="32" height="32" type="facebook" data-param-app_id="'.$fb_appid.'" data-param-text="'.$breaking_title.'"></amp-social-share>';
+      /*$breaking_output .= '<div class="socilaicon-liveblog"><amp-social-share width="32" height="32" type="facebook" data-param-app_id="'.$fb_appid.'" data-param-text="'.$breaking_title.'"></amp-social-share>';
       $breaking_output .= '<amp-social-share type="twitter" width="32" height="32"></amp-social-share>';
-      $breaking_output .= '<amp-social-share type="gplus" width="32" height="32"></amp-social-share></div>';      
+      $breaking_output .= '<amp-social-share type="gplus" width="32" height="32"></amp-social-share></div>';*/      
       $breaking_output .= '</div>';      
     }
     print $breaking_output;       

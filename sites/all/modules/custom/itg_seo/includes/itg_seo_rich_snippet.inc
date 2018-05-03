@@ -176,11 +176,14 @@ function itg_seo_node_data($node) {
         $first_paragraph = strip_tags($first_paragraph);
         $page_title = explode(":",$node->title);
         $review_title = !empty($page_title[0]) ? $page_title[0] : $node->title;
+        $review_title = str_replace('"', "'", $review_title);
+        $review_title = str_replace('”', "'", $review_title);
+        $review_title = str_replace('“', "'", $review_title);
         $auth_name = str_replace(' ', '-', trim($authname[0]));
         $auth_title = ($authname[0]) ? $authname[0] : 'India Today';
         $author_url = ''.FRONT_URL.'/topic/'.$auth_name;
         $keywords = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
-        $rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+        $rating = !empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value']) ? $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] : 0;
 
         $pathalias = drupal_get_path_alias('node/' . $node->nid);
         $pageurl = $base_url . '/' . $pathalias;
