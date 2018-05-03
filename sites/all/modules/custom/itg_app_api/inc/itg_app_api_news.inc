@@ -233,10 +233,17 @@ function generateNewsCategoryList($tid, $pageno) {
             }
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
-            $term_name = $term->name;
+            $term_name = $term->name;           
+            
 
             $news_list_array[$listcount]['n_id'] = "$nid";
-            $news_list_array[$listcount]['n_type'] = "$type";
+            if($type == "breaking_news"){
+                $news_list_array[$listcount]['n_type'] = "story"; 
+            }
+            else{
+              $news_list_array[$listcount]['n_type'] = "$type";  
+            }
+            
             $news_list_array[$listcount]['n_is_sponsored'] = "0";
             $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
             $news_list_array[$listcount]['n_title'] = "$title";
