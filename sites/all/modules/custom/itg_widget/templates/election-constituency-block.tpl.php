@@ -4,7 +4,7 @@ $jsondata = json_decode($data);
 $jsondata = $jsondata->$constituency;
 $top_chuck = '';
 $bottom_chuck = 'hide';
-if ($jsondata->live == 1) {
+if ($jsondata->live != 1) {
   $top_chuck = 'hide';
   $bottom_chuck = '';  
 }
