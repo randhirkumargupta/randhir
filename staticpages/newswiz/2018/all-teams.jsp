@@ -358,7 +358,7 @@ a.active_h{background:#353333}
 					<span class="img-stroke"></span>
 					<div class="circular_win">
 						<img
-							src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/raj_deep.jpg"
+							src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg"
 							alt="Rajdeep">
 					</div>
 					<div class="header_win">RAJDEEP SARDESAI</div>
