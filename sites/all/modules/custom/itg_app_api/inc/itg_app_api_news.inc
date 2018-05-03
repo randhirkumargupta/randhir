@@ -239,9 +239,11 @@ function generateNewsCategoryList($tid, $pageno) {
             $news_list_array[$listcount]['n_id'] = "$nid";
             if($type == "breaking_news"){
                 $news_list_array[$listcount]['n_type'] = "story"; 
+                $news_list_array[$listcount]['n_is_blog'] = "1"; 
             }
             else{
-              $news_list_array[$listcount]['n_type'] = "$type";  
+              $news_list_array[$listcount]['n_type'] = "$type"; 
+              $news_list_array[$listcount]['n_is_blog'] = "0"; 
             }
             
             $news_list_array[$listcount]['n_is_sponsored'] = "0";
