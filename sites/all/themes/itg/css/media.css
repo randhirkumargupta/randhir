@@ -3,7 +3,11 @@
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
 /*Heading used in Indiatoday site Mobile version*/
-/*Fonts used in Indiatoday site*/
+/*Fonts used in Indiatoday site
+
+$itg-roboto:'Roboto-Regular';
+$itg-robotoslab:'RobotoSlab-Regular';
+ */
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
 /*Border Colors used in Indiatoday site*/
@@ -68,8 +72,8 @@
     font-size: 20px;
     font-size: 1.25rem; }
   #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before {
-    top: -3px;
-    left: -3px; }
+    top: -6px;
+    left: 0; }
   #block-itg-layout-manager-header-block .top-nav .headeritg-logo {
     margin-left: 10px; }
   #block-itg-layout-manager-header-block .navigation .menu {
@@ -88,13 +92,13 @@
 
   /*defalt add for special pages START*/
   .itg-layout-container .ad-widget {
-    height: 272px;
-    padding: 10px;
+    height: 300px;
+    padding: 10px 0;
     width: 322px;
     margin: 0 auto; }
 
   section.sidebar .block-itg-ads {
-    padding: 0;
+    padding: 4px 0;
     border-bottom: none; }
 
   /*defalt add for special pages END*/
@@ -123,7 +127,7 @@
     margin-bottom: 30px; }
   .tech-layout-page .auto-block-3 .ad-widget,
   .auto-layout-page .auto-block-3 .ad-widget {
-    height: 272px;
+    height: 290px;
     padding: 10px;
     width: 320px;
     margin: 0 auto; }
@@ -367,7 +371,10 @@
   .breakingnew-home .title {
     font-size: 15px; }
 
-  /*event page css start .event-add-header {display: none;} */
+  /*event page css start*/
+  .event-add-header {
+    display: block; }
+
   #block-menu-menu-event-menu ul li a {
     padding: 0 8px; }
   #block-menu-menu-event-menu .event-detail .event-vanue-detail-place {
@@ -461,7 +468,7 @@
 
   .view-product .product-wrapper .btn-redeem-points,
   .view-product .product-wrapper .btn-add-cart {
-    font: 600 12px/18px "Roboto-Regular";
+    font: 600 12px/18px "OpenSans-Regular";
     padding: 5px 5px; } }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .sport-home-layout-page .itg-layout-615 .droppable,
@@ -691,7 +698,7 @@
             vertical-align: middle; }
         #block-itg-layout-manager-header-block .navigation .menu li.sponser-link a {
           background: #ffc106;
-          color: #323232; }
+          color: #111; }
     #block-itg-layout-manager-header-block .navigation ul#newlist {
       position: absolute;
       right: 0;
@@ -978,7 +985,7 @@
     height: 60px; }
   #block-itg-menu-manager-third-level-menu .select-menu {
     color: #fff;
-    font-family: "Roboto-Regular";
+    font-family: "OpenSans-Regular";
     width: 95px;
     background: #3c3a3b;
     padding-left: 5px;
@@ -1377,7 +1384,7 @@
     white-space: nowrap; }
 
   #block-itg-event-backend-program-tab-block .top-block-highlight .highlights-video {
-    margin-bottom: 50px; }
+    margin-bottom: 20px; }
 
   .event-sidebar .region-sidebar-second-event {
     zoom: 1; }
@@ -1589,11 +1596,18 @@
     text-align: center; }
 
   .page-order-confirmation .thankyou-block h2 {
-    font: 500 20px/32px "Roboto-Regular"; }
+    font: 500 20px/32px "OpenSans-Regular"; }
 
   .page-order-confirmation .order-summary-block h3 {
-    font: 500 18px/28px "Roboto-Regular"; } }
+    font: 500 18px/28px "OpenSans-Regular"; } }
 @media only screen and (max-width: 767px) {
+  .node-type-event-backend .event-add-header {
+    display: none; }
+
+  #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+    width: 55px;
+    height: 55px; }
+
   /*css start oscar-layout-page */
   .oscar-layout-page .oscar-news .col-md-6:nth-child(3n+1) {
     clear: left; }
@@ -1752,7 +1766,6 @@
     line-height: 30px;
     font-size: 20px; }
 
-  /* css start add by arun */
   .live-block #cricketblog .batBollDetails .batsmanDetails {
     width: 100%; }
 
@@ -1784,7 +1797,8 @@
   .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
     right: 8px; }
 
-  /* css end add by arun */ }
+  #block-views-video-landing-header-block .video-header-right .ads {
+    background: transparent; } }
 @media all and (min-width: 680px) {
   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon {
     position: relative; }
@@ -2595,7 +2609,7 @@
     font-size: 34px;
     font-size: 2.125rem;
     font-weight: 700;
-    line-height: 42px; }
+    line-height: 45px; }
   .story-section .story-left,
   .story-section .story-right {
     float: left; }
@@ -2727,7 +2741,7 @@
       border-top: none; }
   .view-front-end-global-search .view-content .search-pic {
     width: 170px;
-    height: 127px;
+    height: 96px;
     float: left; }
   .view-front-end-global-search .view-content .search-detail h2 {
     font-size: 22px;
@@ -2742,7 +2756,9 @@
   .view-front-end-global-search .view-content .search-detail p {
     display: block; }
   .view-front-end-global-search .view-content .social-share {
-    margin-top: 0px; }
+    margin-top: 12px;
+    width: auto;
+    float: left; }
     .view-front-end-global-search .view-content .social-share ul {
       list-style-type: none; }
       .view-front-end-global-search .view-content .social-share ul li {
@@ -2901,7 +2917,7 @@
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%;
-        font-family: "Roboto-Regular"; }
+        font-family: "OpenSans-Regular"; }
       .view-category-wise-content-list .item-list ul.pager li.pager-item a,
       .view-blog-listing .item-list ul.pager li.pager-item a,
       .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a,
@@ -2912,8 +2928,8 @@
         font-size: 16px;
         font-size: 1rem;
         line-height: 25px;
-        color: #323232;
-        font-family: "Roboto-Regular"; }
+        color: #111;
+        font-family: "OpenSans-Regular"; }
         .view-category-wise-content-list .item-list ul.pager li.pager-item a:hover,
         .view-blog-listing .item-list ul.pager li.pager-item a:hover,
         .page-podcast .view-podcasts-listing .item-list ul.pager li.pager-item a:hover,
@@ -2934,7 +2950,7 @@
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-last a,
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-first a,
       .page-podcasts-listing .view-podcasts-listing .item-list ul.pager li.pager-previous a {
-        color: #323232;
+        color: #111;
         line-height: 25px; }
       .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-next.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-last.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-first.pager-last.last, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-first.first, .view-category-wise-content-list .item-list ul.pager li.pager-previous.pager-last.last,
       .view-blog-listing .item-list ul.pager li.pager-next.pager-first.first,
@@ -3106,7 +3122,7 @@
   #block-views-video-landing-header-block .video-header-left .video {
     float: left;
     width: 84.5%;
-    padding: 15px 10px;
+    padding: 10px 10px;
     border: 1px solid #242424; }
   #block-views-video-landing-header-block .video-header-left .social-likes {
     float: left;
@@ -3120,7 +3136,7 @@
       #block-views-video-landing-header-block .video-header-left .social-likes ul li {
         float: none; }
         #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
-          padding: 24.5px 5px 24.4px 10px; }
+          padding: 24px 5px 24px 10px; }
           #block-views-video-landing-header-block .video-header-left .social-likes ul li a span {
             display: inline-block; }
           #block-views-video-landing-header-block .video-header-left .social-likes ul li a i {
@@ -3252,14 +3268,14 @@
   float: right; }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p {
-  font: 400 14px/20px "Roboto-Regular";
+  font: 400 14px/20px "OpenSans-Regular";
   color: #b4b4b4; }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p a {
   color: #b4b4b4; }
 
 #block-views-video-landing-header-block .latest_video .view-header h3 {
-  font: 500 14px/35px "Roboto-Regular";
+  font: 500 14px/35px "OpenSans-Regular";
   margin-bottom: 10px;
   background: #131313;
   height: 35px;
@@ -3286,7 +3302,7 @@
   padding: 1px 5px; }
 
 #block-views-video-landing-header-block .latest_video {
-  padding: 0 4px 0 30px; }
+  padding: 0 15px 0 15px; }
 
 @media (max-width: 1024px) {
   .view-video-landing-header .defalt-bar {
@@ -3328,9 +3344,8 @@
   #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
     padding: 10px !important; } }
 @media (max-width: 767px) {
-  #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-    width: 55px;
-    height: 55px; }
+  .itg-layout-container .ad-widget {
+    width: 322px; }
 
   #block-views-video-landing-header-block .latest_video {
     padding: 30px 0 0;
@@ -3441,7 +3456,7 @@
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "Roboto-Regular";
+    font: 14px/18px "OpenSans-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -3641,7 +3656,7 @@
   text-align: justify;
   font-style: italic;
   color: #8d8d8d;
-  font-family: "Roboto-Regular"; }
+  font-family: "OpenSans-Regular"; }
 
 .ticket-type-require label:after {
   content: '*';
@@ -3686,6 +3701,10 @@
   .story-section .story-right .description .itgvideo > iframe {
     min-height: 178px; } }
 @media all and (max-width: 320px) {
+  .ad-pd0 {
+    padding: 0px;
+    margin: 0 -15px; }
+
   .story-section .story-right .description .itgvideo > iframe {
     min-height: 150px; } }
 /*css start add by arun */
@@ -3699,7 +3718,7 @@
   .personal-list .personal-follow a {
     display: inline-block;
     padding: 10px 20px;
-    font: normal 16px/18px "Roboto-Regular";
+    font: normal 16px/18px "OpenSans-Regular";
     color: #000;
     position: relative;
     bottom: -1px; }
@@ -3782,7 +3801,7 @@
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "Roboto-Regular";
+    font: 14px/18px "OpenSans-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -3836,8 +3855,8 @@
     color: #666;
     font-size: 14px;
     font-weight: 300;
-    height: 42px;
-    line-height: 42px; }
+    height: 37px;
+    line-height: 37px; }
 
   #block-itg-layout-manager-header-block .navigation .container {
     padding: 0px; }
@@ -3942,18 +3961,11 @@
     position: absolute;
     top: 15px; } }
 @media only screen and (max-width: 320px) {
-  #block-itg-layout-manager-header-block .main-nav .nav-container-menu {
-    width: calc(100% - 40px); }
-
-  #block-itg-layout-manager-header-block .top-nav .main-nav li a {
-    font-size: 12px;
-    font-weight: bold; }
+  #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
+    width: 300px; }
 
   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
     padding: 0 5px; }
-
-  #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall {
-    width: 300px; }
 
   #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {
     width: 50px;
