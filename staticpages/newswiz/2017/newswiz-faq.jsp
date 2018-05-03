@@ -35,7 +35,7 @@ function zd_get_placements(){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
+<link rel="stylesheet" href="/newswiz/2017/css/responsive.css" type="text/css">
 <script type='text/javascript'>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
