@@ -264,6 +264,14 @@ function itg_widget_menu() {
       'access arguments' => array('access administrator'),
       'type' => MENU_NORMAL_ITEM,
     );
+	$items['itg-mobile-app-configure'] = array(
+      'title' => t('Mobile App cube configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_mobile_app_configure'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
 
     return $items;
 }
