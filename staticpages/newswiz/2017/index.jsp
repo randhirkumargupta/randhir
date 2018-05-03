@@ -864,13 +864,14 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 <script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function(){
+$(document).ready(function(){
 
 	$('.video_episode_snippets .video_inner a').click(function(e){
- e.preventDefault();
-var lnk = $(this).attr('href');
-$('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+    e.preventDefault();
+    var lnk = $(this).attr('href');
+    $('.video_pic').addClass('showvideo');
+    //$('#videoplayer').attr('src',lnk+"&autoplay=true");
+    $('#videoplayer').attr('src',lnk);
 })
 
 
