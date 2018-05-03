@@ -694,7 +694,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+$('#videoplayer').attr('src',lnk);
 })
 
 
