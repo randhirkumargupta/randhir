@@ -193,15 +193,15 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                 <li><a href="/newswiz/2017/index.jsp" title="home" class="active_h"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                <!-- <li><a href="newswiz-rules.jsp" class="" title="Rules">Rules &amp; Regulations</a></li>-->
 
-                <li><a href="newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
+                <li><a href="/newswiz/2017/newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
 
-                <li><a href="newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>
+                <li><a href="/newswiz/2017/newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>
 
-               <li><a href="all-teams.jsp" class='' title="Teams">Teams</a></li>
+               <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li>
 
-                 <li><a href="episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
+                 <li><a href="/newswiz/2017/episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
                  <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
- <li><a href="question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
+ <li><a href="/newswiz/2017/question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
 
 
 
