@@ -17,6 +17,7 @@
     src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -25,6 +26,7 @@
     src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -41,6 +43,7 @@
     src: local('/'), url('../fonts/merriweather-latin-700.woff') format('woff'), url('../fonts/Merriweather-Bold.ttf') format('truetype'), url('../fonts/merriweather-latin-700.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -48,6 +51,7 @@
     src: local('/'), url('../fonts/merriweather-latin-400.woff') format('woff'), url('../fonts/Merriweather-Bold.ttf') format('truetype'), url('../fonts/merriweather-latin-400.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -56,6 +60,7 @@
     src: local('/'), url('../fonts/OpenSans-Regular.woff') format('woff'), url('../fonts/OpenSans-Regular.ttf') format('truetype'), url('../fonts/OpenSans-Regular.svg') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -64,6 +69,7 @@
     src: local('/'), url('../fonts/OpenSans-Bold.woff') format('woff'), url('../fonts/OpenSans-Bold.ttf') format('truetype'), url('../fonts/OpenSans-Bold.svg') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -72,6 +78,7 @@
     src: local('/'), url('../fonts/OpenSans-Semibold.woff') format('woff'), url('../fonts/OpenSans-Semibold.ttf') format('truetype'), url('../fonts/OpenSans-Semibold.svg') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 
