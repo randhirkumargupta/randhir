@@ -574,6 +574,7 @@ jQuery(document).ready(function () {
         }
 
     })
+    /*
     jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
@@ -602,7 +603,7 @@ jQuery(document).ready(function () {
             }
         });
     });
-
+    */
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {

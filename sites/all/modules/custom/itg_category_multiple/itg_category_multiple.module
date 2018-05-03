@@ -22,6 +22,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'reporter_node_form': // reporter OR Byline
     case 'breaking_news_node_form': // Breaking News
     case 'mega_review_critic_node_form': // Mega Review
+    case 'miscellaneous_node_form':  
       $content_type = '';
       $itg_category_multiple_prev_data = '';
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
