@@ -78,7 +78,10 @@
 
                         // tamplate section value
                         var section_name = $('#edit-section').val();
-
+                        var category_name_c = $('#edit-category').val();
+                        if(category_name_c !== undefined && category_name_c !=0 ){
+                          section_name = category_name_c;
+                        }
                         // template name
                         var template_name = $('#edit-template-name').val();
 
@@ -204,6 +207,10 @@
                 var base_url = settings.itg_story.settings.base_url;
                 var layout_type_url = settings.itg_story.settings.layout_type;
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 var template_name = $('#edit-template-name').val();
 
                 $.ajax({
@@ -228,6 +235,10 @@
                 var base_url = settings.itg_story.settings.base_url;
 
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 var template_name = $('#edit-template-name').val();
                 $.ajax({
                     url: base_url + "/insert-layout-setting-ajax/delete",
@@ -252,6 +263,10 @@
             $('.block_title_id').blur(function () {
                 var block_id = $(this).attr("name");
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 var template_name = $('#edit-template-name').val();
                 var block_title = $(this).val();
 
@@ -284,6 +299,10 @@
 
                 // tamplate section value
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 // tamplate name
                 var template_name = $('#edit-template-name').val();
                 // widget name for content display
@@ -315,6 +334,10 @@
                 var category_name = $('#edit-section-widget2-name').val();
                 // tamplate section value
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 // tamplate name
                 var template_name = $('#edit-template-name').val();
                 // widget name for content display
@@ -344,6 +367,10 @@
                 var base_url = settings.itg_story.settings.base_url;
                 var widget_id = $(this).attr('data-widget');
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 var template_name = $('#edit-template-name').val();
 
                 $.ajax({
@@ -365,6 +392,10 @@
                 var base_url = settings.itg_story.settings.base_url;
                 var widget_id = $(this).attr('data-widget');
                 var section_name = $('#edit-section').val();
+                var category_name_c = $('#edit-category').val();
+                if(category_name_c !== undefined && category_name_c !=0 ){
+                  section_name = category_name_c;
+                }
                 var template_name = $('#edit-template-name').val();
 
                 $.ajax({
@@ -400,6 +431,10 @@
 
                     var block_id = $(this).attr("delete-block-id");
                     var section_name = $('#edit-section').val();
+                    var category_name_c = $('#edit-category').val();
+                    if(category_name_c !== undefined && category_name_c !=0 ){
+                      section_name = category_name_c;
+                    }
                     var template_name = $('#edit-template-name').val();
 
                     var base_url = settings.itg_story.settings.base_url;
@@ -425,6 +460,10 @@
                 jQuery(this).parent().parent('.itg-common-section').find('.delete-block-widget').each(function () {
                     var block_id = jQuery(this).attr("delete-block-id");
                     var section_name = jQuery('#edit-section').val();
+                    var category_name_c = $('#edit-category').val();
+                    if(category_name_c !== undefined && category_name_c !=0 ){
+                      section_name = category_name_c;
+                    }
                     var template_name = jQuery('#edit-template-name').val();
 
                     var base_url = settings.itg_story.settings.base_url;
