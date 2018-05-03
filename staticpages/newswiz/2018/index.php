@@ -324,14 +324,13 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 <script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
 <script type="text/javascript">
 
-    $(document).ready(function(){
-  
+$(document).ready(function(){
   $('.video_episode_snippets .video_inner a').click(function(e){
- e.preventDefault();
-var lnk = $(this).attr('href');
-$('.video_pic').addClass('showvideo');
-// $('#videoplayer').attr('src',lnk+"&autoplay=true");
-$('#videoplayer').attr('src',lnk);
+  e.preventDefault();
+  var lnk = $(this).attr('href');
+  $('.video_pic').addClass('showvideo');
+  // $('#videoplayer').attr('src',lnk+"&autoplay=true");
+  $('#videoplayer').attr('src',lnk);
 })
 
 
