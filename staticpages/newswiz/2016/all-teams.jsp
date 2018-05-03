@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -374,14 +373,14 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                         <ul>
                         <li>
                         <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt30g" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ1NjI5" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
                                 <p>Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra</p>
                                 </a> </div>
                             </div>
                         </li>
                         <li>
                         <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqcmz49s" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/india/embed/NDQ0MjI0" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
                                 <p>Watch this all-rounder genius girl make Rajdeep dance</p>
                                 </a> </div>
                             </div>
@@ -389,7 +388,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 
                                             <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g0xp3qm8" title="News Wiz goes to Tagore International School, Delhi">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ0MzY3" title="News Wiz goes to Tagore International School, Delhi">
                               <span class="icon_video_newswiz"></span>
                                 <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-video_647_081016044457.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz goes to Tagore International School, Delhi</p>
@@ -398,7 +397,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                           </li>
                         <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g074osio" title="News Wiz gets its own rap song">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/NDQ0NTEy" title="News Wiz gets its own rap song">
                               <span class="icon_video_newswiz"></span>
                                 <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rap-song-video_647_080716020800.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz gets its own rap song</p>
@@ -407,7 +406,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
                           </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b0q7z4" title="Rapid fire with Jacqueline Fernandez on New Wiz">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg3NjM=" title="Rapid fire with Jacqueline Fernandez on New Wiz">
         <!-- <span class="icon_video_newswiz"></span> -->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/for-first-link.jpg" alt="Newswiz" width="320" height="219">
         <p>Rapid fire with Jacqueline Fernandez on New Wiz</p>
@@ -416,7 +415,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b1yznk" title="Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg3NjA=" title="Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz">
         <!-- <span class="icon_video_newswiz"></span> -->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/second.jpg" alt="Newswiz" width="320" height="219">
         <p>Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz</p>
@@ -425,7 +424,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ariq9xxc" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/salman-video_647_0704161223.gif" alt="Newswiz">
         <p>India's first News Quiz Show with 'Sultan' Salman Khan</p>
@@ -434,7 +433,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82mib40" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODk=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video1.jpg" alt="Newswiz">
         <p>News is knowledge, knowledge is news: Get ready for India Today News Wiz</p>
@@ -443,7 +442,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minnk" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODg=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video2.jpg" alt="Newswiz">
         <p>Newswiz, India's biggest news quiz: Anil Kapoor</p>
@@ -452,7 +451,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minog" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODc=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video3.jpg" alt="Newswiz">
         <p>Are brains better than brawn? Salman Khan will tell you this Sunday</p>
@@ -461,7 +460,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
   </li>
   <li>
     <div class="video_episode_snippets">
-      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minpc" title="">
+      <div class="video_inner"> <a href="https://www.indiatoday.in/video/newswiz/embed/MTg5ODY=" title="">
         <!--<span class="icon_video_newswiz"></span>-->
         <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video4.jpg" alt="Newswiz">
         <p>Losing and Winning with the mind, with Sultan Salman Khan</p>
@@ -745,12 +744,12 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
     $(document).ready(function(){
 	$('.videoplace-holder').click(function(){
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc&autoplay=true');
+$('#videoplayer').attr('src','https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc=&autoplay=true');
 
 });
 $('#closevideo').click(function(){
 $('.video_pic').removeClass('showvideo');
-$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc');
+$('#videoplayer').attr('src','https://www.indiatoday.in/video/newswiz/embed/MTk2Nzc=');
 });
 
 
@@ -778,7 +777,8 @@ $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc');
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+// $('#videoplayer').attr('src',lnk+"&autoplay=true");
+$('#videoplayer').attr('src',lnk);
 })
     });
     </script>
