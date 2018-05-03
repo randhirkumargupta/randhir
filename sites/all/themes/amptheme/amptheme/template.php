@@ -161,6 +161,7 @@ function amptheme_preprocess_node(&$variables) {
     unset($variables['rdf_template_variable_attributes_array']);
   }
   // New Live Blog AMP Tpl File
+  watchdog('AMP Live Blog', print_r($variables, TRUE));
   if ($variables['type'] == 'breaking_news' && $variables['field_type'][0]['value'] == 'Live Blog') {
     if ($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) {
 	//if ($variables['field_multi_user_allows']['und'][0]['value'] && $variables['field_multi_user_allows']['und'][0]['value'] == 1) {
