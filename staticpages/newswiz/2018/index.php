@@ -207,7 +207,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                 </div>
                 <!--end overview -->
                 <script type="text/javascript">      
-                  ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
+                  // ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
                 </script>  
                 <div class="row">
                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -330,7 +330,8 @@ If you are students / know students from class 9 to 12 - form teams of two membe
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+// $('#videoplayer').attr('src',lnk+"&autoplay=true");
+$('#videoplayer').attr('src',lnk);
 })
 
 
