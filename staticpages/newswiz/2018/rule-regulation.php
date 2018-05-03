@@ -9,7 +9,7 @@
 	content="News Quiz wiz 2018 by Rajdeep Sardesai and Siddhartha Basu properly known as the quiz man of India brings you first time at India Today for class X and XI students all across India. Come and participate here." />
 <meta name="keywords"
 	content="News Wiz 2018, news quiz 2018, Rajdeep Sardesai, Siddhartha Basu, India today quiz, News Quiz rules, News Quiz schedule, News Quiz faq" />
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>	
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
 <link href="/newswiz/2018/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@ function zd_get_placements(){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
+<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
 <script type='text/javascript'>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
@@ -348,7 +348,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
             <div class="header_win">RAJDEEP SARDESAI</div>
             <div class="container_wiz">
               <p> News and Quiz come together in a fantastic battle of brains. Rajdeep Sardesai who has spent his life in news will be at the helm of the first-of-its-kind quiz show - NewsWiz. There is no one better equipped than Rajdeep to host such a show considering that he has spent 26 years reporting, editing and anchoring news. </p>
@@ -357,7 +357,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
             <div class="header_win">SIDDHARTHA BASU </div>
             <div class="container_wiz">
               <p>Basu is the undisputed quiz man of India. He is the pioneer who hosted and produced the iconic Quiz Time on Doordarshan and also produced the marquee Kaun Banega Crorepati. He has been the mind behind Mastermind India, University Challenge and India's Child Genius. Now for the first time on news television in India, he is bringing a news-based quiz show.</p>
@@ -377,10 +377,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 </div>
 <!-- jQuery Bootstrap--> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
 <!-- Swiper JS --> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
-<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
+<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
 <script type="text/javascript">
 
     $(document).ready(function(){
