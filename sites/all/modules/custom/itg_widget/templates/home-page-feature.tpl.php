@@ -54,7 +54,6 @@
     <div class="featured-post">
       <?php if (!empty($data[1]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[1]['nid']); ?>">
-          <!-- <img src="<?php print image_style_url("home_page_feature_small", $data[1]['mi_file_uri']); ?>" alt="<?php echo $data[1]['field_story_medium_image_alt'];?>" title="<?php echo $data[1]['field_story_medium_image_title'];?>" /> -->
           <?php print theme('image_style', array('path' => $data[1]['mi_file_uri'], 'style_name' => 'home_page_feature_small', 'alt' => $data[1]['field_story_medium_image_alt'], 'title' => $data[1]['field_story_medium_image_title'])); ?> 
         </a>
       <?php else : ?>
@@ -96,7 +95,6 @@
     <div class="featured-post">
       <?php if (!empty($data[2]['mi_file_uri'])) : ?>
         <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[2]['nid']); ?>">
-            <!-- <img src="<?php print image_style_url("home_page_feature_small", $data[2]['mi_file_uri']); ?>" alt="<?php echo $data[1]['field_story_medium_image_alt'];?>" title="<?php echo $data[1]['field_story_medium_image_title'];?>" /> -->
             <?php print theme('image_style', array('path' => $data[2]['mi_file_uri'], 'style_name' => 'home_page_feature_small', 'alt' => $data[2]['field_story_medium_image_alt'], 'title' => $data[2]['field_story_medium_image_title'])); ?> 
         </a>
       <?php else : ?>
