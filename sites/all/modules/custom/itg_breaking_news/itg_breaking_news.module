@@ -758,8 +758,10 @@ function itg_breaking_form_ajax_submit($form , &$form_state) {
   }
   $alias = drupal_get_path_alias('node/' . $blog_entity_id);
   $amp_alias = "amp/" . $alias;
-  itg_akamai_clear_url($alias);
-  itg_akamai_clear_url($amp_alias);
+  if ($alias) {
+    itg_akamai_clear_url($alias);
+    itg_akamai_clear_url($amp_alias);
+  } 
   return array('#type' => 'ajax', '#commands' => $commands);  
 }
 
