@@ -14,7 +14,9 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
   $arg1 = arg(1);
   
   global $base_url;
-  
+  if($arg1 == 'ajax' && isset($_POST['layout_type_arg']) && !empty($_POST['layout_type_arg'])){
+ 	  $arg1 = $_POST['layout_type_arg'];
+  }
   $settings['base_url'] = $base_url;
   $settings['layout_type'] = $arg1;
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));  
@@ -27,15 +29,39 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
       $op = array('home_page' => 'Home Page');
   }
   
+  $cat_op = array("" => "-- Category --");
+  if (isset($form_state['values']) && !empty($form_state['values']['section'])) {
+    $section_id = $form_state['values']['section'];
+    $cat_op = get_category_of_associate_tpl('special', $section_id); 
+  }else if(isset($_GET['section'])){
+    $section_id = $_GET['section'];
+    $cat_op = get_category_of_associate_tpl('special', $section_id); 
+  }
   $template = get_template_name($arg1);
-    
+  
+  $form['layout_type_arg'] = array(
+    '#type' => 'hidden',
+    '#value' => $arg1,
+  );
   $form['section'] = array(
     '#type' => 'select',
     '#title' => t('Select Section'),
     '#options' => $op,
     '#required' => TRUE,
-    '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",       
-   );
+    '#default_value' => isset($_GET['section']) ? $_GET['section'] : "",
+    '#ajax' => array(
+        'callback' => 'itgd_get_section_category_ajax_callback',
+        'wrapper' => 'category_template_wrapper',
+      ),
+  );
+  $form['category'] = array(
+    '#type' => 'select',
+    '#title' => t('Select Category'),
+    '#options' => $cat_op,
+    '#default_value' => isset($_GET['category']) ? $_GET['category'] : "",
+    '#prefix' => '<div id="category_template_wrapper">',
+    '#suffix' => '</div>',           
+  );
   
   $form['template_name'] = array(
     '#type' => 'select',
@@ -58,8 +84,13 @@ function itg_layout_manager_page_setting_form($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_layout_manager_page_setting_form_submit($form, &$form_state) { 
-  $options = array('query' => array('section' => $form_state['input']['section'], 'template_name' => $form_state['input']['template_name']));
-  drupal_goto('itg-layout-manager/' . arg(1), $options);  
+  $section_tid = $form_state['input']['section'];
+  $cat_tid = 0;
+  if(isset($form_state['input']['category']) && !empty($form_state['input']['category'])){
+	  $cat_tid = $form_state['input']['category'];  
+  }
+  $options = array('query' => array('section' => $section_tid, 'category' => $cat_tid, 'template_name' => $form_state['input']['template_name']));
+  drupal_goto('itg-layout-manager/' . arg(1), $options);    
 }
 
 /**
@@ -68,12 +99,17 @@ function itg_layout_manager_page_setting_form_submit($form, &$form_state) {
  */
 function itg_layout_manager_page_setting_form_validate($form, &$form_state) {
   
-  $template_id = check_template_of_section($form_state['input']['section'], $form_state['input']['template_name']);
-  
-  if (!empty($template_id)) {
-    form_set_error('edit-section', t('Already tpl select for this section.'));
-  }
-   
+  if(isset($form_state['input']['category']) && !empty($form_state['input']['category'])){
+	  $template_id = check_template_of_section($form_state['input']['category'], $form_state['input']['template_name']);  
+	  if (!empty($template_id)) {
+		  form_set_error('edit-category', t('Already tpl select for this category.'));
+	  }  
+	}else{
+		$template_id = check_template_of_section($form_state['input']['section'], $form_state['input']['template_name']);  
+		if (!empty($template_id)) {
+			form_set_error('edit-section', t('Already tpl select for this section.'));
+		}
+	}   
 }
 
 /**
@@ -348,5 +384,28 @@ function get_section_of_associate_tpl($tpl_type) {
     $op[$row->tid] = $row->name;
   }
   
+  return $op;
+}
+
+function itgd_get_section_category_ajax_callback($form, &$form_state){
+	return $form['category'];
+}
+
+/**
+ * get all associate category with tpl
+ * {@inheritdoc}
+ */
+function get_category_of_associate_tpl($tpl_type, $section_id) {
+  $op = array(0 => "-- Category --");
+  $itg_query = db_select('taxonomy_term_data', 'term');
+  $itg_query->fields('term', array('name', 'tid'));
+  $itg_query->join('taxonomy_term_hierarchy', 'tth', 'tth.tid = term.tid');
+  $itg_query->condition('tth.parent', $section_id, '=');
+  $itg_query->condition('term.vid', CATEGORY_MANAGMENT);
+  $itg_result = $itg_query->execute()->fetchAll();  
+  $rows = array();
+  foreach ($itg_result as $row) {
+    $op[$row->tid] = $row->name;
+  }  
   return $op;
 }

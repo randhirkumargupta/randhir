@@ -43,7 +43,7 @@ function itg_custom_variables() {
   );
   $form['delete_pti_xmlfile_days'] = array(
     '#type' => 'textfield',
-    '#title' => t('Delete PTI Xml FileName From DB (In Dyas)'),
+    '#title' => t('Delete PTI Xml FileName From DB (In Days)'),
     '#default_value' => get_itg_variable('delete_pti_xmlfile_days'),
     '#size' => 20,
     '#maxlength' => 20,
@@ -67,6 +67,71 @@ function itg_custom_variables_submit($form, &$form_state){
 	}
   drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
+
+
+function itg_election_configure() {
+	$form = array();
+  $form['itg_election_home_chunk'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Home election block'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_election_home_chunk'),
+  );
+  $form['itg_election_home_webcast_livetv'] = array(
+    '#type' => 'select',
+    '#title' => t('Enable Webcast/LiveTV on Home election'),
+    '#required' => FALSE,
+    '#options' => array(0 => "Select", 'livetv' => "Live TV", 'webcast' => "Webcast Iframe"),
+    '#default_value' => get_itg_variable('itg_election_home_webcast_livetv'),
+  );
+  $form['itg_election_home_webcast_html'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Webcast home election HTML'),
+    '#default_value' => get_itg_variable('itg_election_home_webcast_html'),
+    '#required' => FALSE,
+  );
+  $form['itg_election_home_content_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Live Home election Live blog nid'),
+    '#default_value' => get_itg_variable('itg_election_home_content_id'),
+    '#size' => 20,
+    '#required' => FALSE,
+    '#maxlength' => 20,
+  );
+  $form['itg_election_home_bottom_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Live Home election Bottom label'),
+    '#default_value' => get_itg_variable('itg_election_home_bottom_label'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+  );
+  $form['itg_election_home_bottom_label_url'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Live Home election Bottom label Link'),
+    '#default_value' => get_itg_variable('itg_election_home_bottom_label_url'),
+    '#required' => FALSE
+  );
+  $form['submit_election'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+  );
+  return $form;
+}
+
+function itg_election_configure_submit($form, &$form_state){
+	$values = $form_state['values'];
+	unset($values['submit_button']);
+	unset($values['form_build_id']);
+	unset($values['form_token']);
+	unset($values['form_id']);
+	unset($values['op']);
+	foreach ($values as $key => $value) {
+		set_itg_variable($key, $value);
+	}
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}
+
 /**
 * Function For mobile app setting
 * {@inheritdoc}

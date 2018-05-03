@@ -37,6 +37,14 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'internal-video-player-jw',
   );
+  $items['itg_election_constituency'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'page--electionconstituency',
+  );
+  $items['itg_election_constituency_map'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'page--electionconstituencymap',
+  );
   return $items;
 }
 
@@ -205,13 +213,16 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || ($arg[0] == 'node' && $arg[1] == 1178342) || (arg(0) == 'scorecard' && arg(1) == 'matchcenter')) {
+  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || ($arg[0] == 'node' && $arg[1] == 1178342) || (arg(0) == 'scorecard' && arg(1) == 'matchcenter') || $arg[0] == 'state-elections') {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
   
+  if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
+		$variables['theme_hook_suggestions'][] = 'page__singlecolumn';
+	}
   // For single column page at live Blog for multi_user_allows
   if (!empty($variables['node']->type) && $variables['node']->type == 'breaking_news' && isset($variables['node']->field_multi_user_allows['und'][0]['value']) && $variables['node']->field_multi_user_allows['und'][0]['value'] == 1) {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';

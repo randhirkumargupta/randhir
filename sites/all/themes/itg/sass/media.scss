@@ -48,8 +48,8 @@
                         @include font(20px);
                     }
                     &:nth-child(3) a:before {
-                        top: -3px;
-                        left: -3px;
+                        top: -6px;
+                        left: 0;
                     }
                 }
             }
@@ -77,13 +77,13 @@
     }
     /*defalt add for special pages START*/
     .itg-layout-container .ad-widget {
-        height: 272px;
-        padding: 10px;
+        height:300px;
+        padding:10px 0;
         width: 322px;
         margin: 0 auto;
     }
     section.sidebar .block-itg-ads {
-        padding: 0;
+        padding: 4px 0;
         border-bottom: none;
     }
     /*defalt add for special pages END*/
@@ -112,12 +112,12 @@
     .auto-layout-page {
         .auto-block-1,
         .auto-block-2 {
-            height: 670px;
+            height:670px;
             margin-bottom:30px;
         }
         .auto-block-3 {
             .ad-widget {
-                height: 272px;
+                height: 290px;
                 padding: 10px;
                 width: 320px;
                 margin: 0 auto;
@@ -405,7 +405,10 @@
     .breakingnew-home .title {
         font-size: 15px;
     }
-    /*event page css start .event-add-header {display: none;} */
+    /*event page css start*/
+    .event-add-header {
+        display: block;
+    }
     #block-menu-menu-event-menu {
         ul {
             li {
@@ -510,7 +513,7 @@
     }
     .view-product .product-wrapper .btn-redeem-points,
     .view-product .product-wrapper .btn-add-cart {
-        font: 600 12px/18px $itg-roboto;
+        font: 600 12px/18px $itg-opensans;
         padding: 5px 5px;
     }
 }
@@ -1174,7 +1177,7 @@
         }
         .select-menu {
             color: #fff;
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             width: 95px;
             background: #3c3a3b;
             padding-left: 5px;
@@ -1383,7 +1386,7 @@
         margin: -15px -15px 10px -15px;
         padding:0px;
         .title {
-            float: left;
+            float:left;
             font-size: 12px;
             line-height: 23px;
             height: 23px;
@@ -1399,9 +1402,9 @@
             width: 100%;
             float: none;
             .marquee-container {
-                width:calc(100% - 130px);
+                width: calc(100% - 130px);
                 height: 23px;
-                float:left;
+                float: left;
                 line-height: 23px;
                 margin-left:5px;
                 .marquee-child {
@@ -1651,7 +1654,7 @@
     }
     #block-itg-event-backend-program-tab-block .top-block-highlight {
         .highlights-video {
-            margin-bottom: 50px;
+            margin-bottom: 20px;
         }
     }
     .event-sidebar .region-sidebar-second-event {
@@ -1884,14 +1887,21 @@
         }
     }
     .page-order-confirmation .thankyou-block h2 {
-        font: 500 20px/32px $itg-roboto;
+        font: 500 20px/32px $itg-opensans;
     }
     .page-order-confirmation .order-summary-block h3 {
-        font: 500 18px/28px $itg-roboto;
+        font: 500 18px/28px $itg-opensans;
     }
 }
 
 @media only screen and (max-width:767px) {
+    
+    .node-type-event-backend .event-add-header {display: none;}
+
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
+    }
     /*css start oscar-layout-page */
     .oscar-layout-page .oscar-news {
         .col-md-6:nth-child(3n+1) {
@@ -2095,7 +2105,7 @@
         line-height: 30px;
         font-size: 20px;
     }
-    /* css start add by arun */
+    
     .live-block #cricketblog .batBollDetails .batsmanDetails {
         width: 100%
     }
@@ -2127,7 +2137,7 @@
     .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
         right: 8px;
     }
-    /* css end add by arun */
+   #block-views-video-landing-header-block .video-header-right .ads{background: transparent;} 
 }
 
 @media all and (min-width: 680px) {
@@ -2230,7 +2240,7 @@
                             label {
                                 color: #ef2a24;
                                 position: relative;
-                                left:0px;
+                                left: 0px;
                                 top: 0;
                             }
                             .speaker-designation {
@@ -3113,7 +3123,7 @@
     /*Start Story page css*/
     .story-section {
         h1 {
-            @include font(34px, 42px, 700);
+            @include font(34px, 45px, 700);
         }
         .story-left,
         .story-right {
@@ -3305,7 +3315,7 @@
             }
             .search-pic {
                 width: 170px;
-                height: 127px;
+                height: 96px;
                 float: left;
             }
             .search-detail {
@@ -3323,7 +3333,9 @@
             }
             .social-share {
                 @include social-share;
-                margin-top: 0px;
+                margin-top: 12px;
+                width: auto;
+                float: left;
             }
             .other-info {
                 padding-top: 0;
@@ -3449,7 +3461,7 @@
             h3 {
                 display: block;
                 span {
-                    padding:20px 20px 10px 30px;
+                    padding: 20px 20px 10px 30px;
                 }
             }
             ul {
@@ -3643,7 +3655,7 @@
             .video {
                 @include float(left);
                 width: 84.5%;
-                padding: 15px 10px;
+                padding: 10px 10px;
                 border: 1px solid #242424;
             }
             .social-likes {
@@ -3658,7 +3670,7 @@
                     li {
                         @include float(none);
                         a {
-                            padding: 24.5px 5px 24.4px 10px;
+                            padding: 24px 5px 24px 10px;
                             span {
                                 display: inline-block;
                             }
@@ -3856,7 +3868,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p {
-    font: 400 14px/20px $itg-roboto;
+    font: 400 14px/20px $itg-opensans;
     color: #b4b4b4
 }
 
@@ -3865,7 +3877,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video .view-header h3 {
-    font: 500 14px/35px $itg-roboto;
+    font: 500 14px/35px $itg-opensans;
     margin-bottom: 10px;
     background: #131313;
     height: 35px;
@@ -3897,7 +3909,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video {
-    padding: 0 4px 0 30px;
+    padding: 0 15px 0 15px;
 }
 
 @media (max-width: 1024px) {
@@ -3946,11 +3958,7 @@
 }
 
 @media (max-width: 767px) {
-    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
-        width: 55px;
-        height: 55px;
-    }
-
+    .itg-layout-container .ad-widget{ width:322px;}
     #block-views-video-landing-header-block .latest_video {
         padding: 30px 0 0;
         float: left;
@@ -4069,7 +4077,7 @@
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px $itg-roboto;
+        font: 14px/18px $itg-opensans;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
@@ -4332,7 +4340,7 @@
     text-align: justify;
     font-style: italic;
     color: #8d8d8d;
-    font-family: $itg-roboto;
+    font-family: $itg-opensans;
 }
 
 .ticket-type-require label:after {
@@ -4429,6 +4437,8 @@
 }
 
 @media all and (max-width: 320px) {
+    .ad-pd0{ padding:0px;margin:0 -15px;}
+
     .story-section .story-right .description {
         .itgvideo {
             >iframe {
@@ -4451,7 +4461,7 @@
     .personal-list .personal-follow a {
         display: inline-block;
         padding: 10px 20px;
-        font: normal 16px/18px $itg-roboto;
+        font: normal 16px/18px $itg-opensans;
         color: #000;
         position: relative;
         bottom: -1px;
@@ -4555,7 +4565,7 @@
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px $itg-roboto;
+        font: 14px/18px $itg-opensans;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
@@ -4616,8 +4626,8 @@
         color: #666;
         font-size: 14px;
         font-weight: 300;
-        height: 42px;
-        line-height: 42px;
+        height: 37px;
+        line-height:37px;
     }
     #block-itg-layout-manager-header-block .navigation .container {
         padding: 0px;
@@ -4733,20 +4743,11 @@
 	
 }
 
-@media only screen and (max-width: 320px) {
-   #block-itg-layout-manager-header-block .main-nav .nav-container-menu{
-     width: calc(100% - 40px);
-   }
-   #block-itg-layout-manager-header-block .top-nav .main-nav li a {
-        font-size: 12px;
-        font-weight:bold;
-    }
-    #block-itg-layout-manager-header-block .top-nav .main-nav li a {
-    padding: 0 5px;
-    } 
-    #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{ width:300px;}
-    #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{width:50px;height: 35px;}
-    #block-itg-layout-manager-header-block .logo{width:45px;}
+@media only screen and (max-width:320px){
+   #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{width: 300px;}
+   #block-itg-layout-manager-header-block .top-nav .main-nav li a {padding: 0 5px;}
+   #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo {width: 50px;height: 35px;}
+   #block-itg-layout-manager-header-block .logo {width: 45px;}
 
 }
 

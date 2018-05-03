@@ -2,7 +2,11 @@
 /*=======================================================================*/
 /*heading used in Indiatoday site*/
 /*Heading used in Indiatoday site Mobile version*/
-/*Fonts used in Indiatoday site*/
+/*Fonts used in Indiatoday site
+
+$itg-roboto:'Roboto-Regular';
+$itg-robotoslab:'RobotoSlab-Regular';
+ */
 /*Colors used in Indiatoday site*/
 /*Background Colors used in Indiatoday site*/
 /*Border Colors used in Indiatoday site*/
@@ -245,7 +249,7 @@ input[type="text"] {
       margin-bottom: 20px;
       border-bottom: 1px solid #222222;
       padding: 15px 0px;
-      font-family: "Roboto-Regular"; }
+      font-family: "OpenSans-Regular"; }
     #block-views-photo-landing-slider-block .other-details-main .caption .cap-text {
       min-height: 110px;
       max-height: 110px;
@@ -266,7 +270,7 @@ input[type="text"] {
       color: #c1c1c1;
       text-transform: uppercase;
       left: auto;
-      font-family: "Roboto-Regular";
+      font-family: "OpenSans-Regular";
       margin-top: 0; }
       #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-prev:hover,
       #block-views-photo-landing-slider-block .other-details-main .counterslide .slick-next:hover {
@@ -310,8 +314,7 @@ input[type="text"] {
       margin: 10px 0; }
   #block-views-photo-landing-slider-block .photo-by {
     font-size: 14px;
-    color: #626262;
-    font-family: roboto; }
+    color: #626262; }
   #block-views-photo-landing-slider-block .photo-by-slider {
     background: transparent;
     padding: 5px 0; }
@@ -327,7 +330,6 @@ input[type="text"] {
     font-weight: 700;
     text-transform: capitalize;
     font-size: 26px;
-    font-family: roboto;
     text-align: center;
     line-height: 150px; }
 
@@ -376,9 +378,10 @@ input[type="text"] {
   padding: 0;
   font-weight: 600;
   margin-bottom: 5px;
-  height: auto; }
+  height: auto;
+  font-family: "OpenSans-Bold"; }
   .widget-title a {
-    color: #323232; }
+    color: #111; }
 
 .sidebar-section-photo .itg-widget {
   /*margin: 35px 0; for video page sidebar */
@@ -406,7 +409,7 @@ input[type="text"] {
         margin: 0;
         padding: 10px 15px 3px;
         border-bottom: 3px solid #fff;
-        font-family: "Roboto-Regular";
+        font-family: "OpenSans-Regular";
         font-weight: 500;
         color: #969696; }
         .itg-region ul li a:hover, .itg-region ul li a.menu-active {
@@ -453,7 +456,7 @@ input[type="text"] {
         background-color: rgba(0, 0, 0, 0.5);
         color: #fff;
         font-size: 12px;
-        font-family: "Roboto-Regular"; }
+        font-family: "OpenSans-Regular"; }
         .view-photo-list-of-category .view-content .photo-list li .tile figure figcaption .fa,
         .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile figure figcaption .fa {
           font-size: 16.5px;
@@ -464,11 +467,11 @@ input[type="text"] {
       font-size: 12px;
       color: #b1b1b1;
       padding: 8px 0 5px;
-      font-family: "RobotoSlab-Regular"; }
+      font-family: "OpenSans-Regular"; }
     .view-photo-list-of-category .view-content .photo-list li .tile a,
     .view-podcasts-listing.podcast-detail-page .view-content .photo-list li .tile a {
       color: #494949;
-      font-family: "RobotoSlab-Regular"; }
+      font-family: "OpenSans-Regular"; }
     .view-photo-list-of-category .view-content .photo-list li:nth-child(4n+1),
     .view-podcasts-listing.podcast-detail-page .view-content .photo-list li:nth-child(4n+1) {
       clear: left; }
@@ -482,7 +485,8 @@ input[type="text"] {
 .featured-news .featured-post h3 {
   overflow: hidden;
   margin-top: 5px;
-  line-height: 22px; }
+  line-height: 22px;
+  font-size: 18px; }
 
 .itg-widget .tab-buttons span {
   padding: 0 3px; }
@@ -493,9 +497,8 @@ input[type="text"] {
 .itg-layout-container .ad-widget {
   border: 1px solid #ddd;
   height: 321px;
-  padding: 37px; }
+  padding: 25px 37px; }
   .itg-layout-container .ad-widget .sidebar-ad {
-    background: #ddd;
     height: 100%; }
 
 .itg-layout-container .top-colum-3 .itg-widget-parent .droppable.sidebar-ad {
@@ -560,13 +563,13 @@ input[type="text"] {
     overflow: hidden; }
   .personalized-user .user-name {
     color: #1a3c8d;
-    font: 500 27px/27px "Roboto-Regular";
+    font: 500 27px/27px "OpenSans-Regular";
     text-transform: uppercase;
     padding: 12px 0 2px;
     word-wrap: break-word; }
   .personalized-user .logout-link a {
     color: #777;
-    font: 400 16px/18px "Roboto-Regular"; }
+    font: 400 16px/18px "OpenSans-Regular"; }
 
 .personalized-user-info {
   display: table-cell;
@@ -593,8 +596,7 @@ input[type="text"] {
   display: table-cell;
   padding: 0;
   text-align: center;
-  vertical-align: middle;
-  font-family: roboto; }
+  vertical-align: middle; }
   .total-point-wrapper .total-point-value {
     display: inline-block;
     vertical-align: middle;
@@ -688,7 +690,7 @@ input[type="text"] {
     .personal-menu-tab li a {
       display: block;
       color: #4f4f4f;
-      font: 300 18px/18px "Roboto-Regular";
+      font: 300 18px/18px "OpenSans-Regular";
       padding: 10px 8px;
       background-color: #f6f6f7; }
       .personal-menu-tab li a:before {
@@ -738,7 +740,7 @@ input[type="text"] {
       border-bottom: 1px solid #f1f1f1;
       color: #515151;
       display: block;
-      font: 400 15px/18px "Roboto-Regular"; }
+      font: 400 15px/18px "OpenSans-Regular"; }
       .saved-item-tab li a.active, .saved-item-tab li a:hover {
         border-top-color: #bb3330;
         border-radius: 5px 5px 0 0;
@@ -784,7 +786,7 @@ input[type="text"] {
         padding: 0 7px;
         text-transform: uppercase;
         color: #fff;
-        font-family: "Roboto-Regular";
+        font-family: "OpenSans-Regular";
         z-index: 10;
         white-space: nowrap;
         overflow: hidden;
@@ -898,7 +900,7 @@ input[type="text"] {
   .view-personalization-my-content .views-table td {
     padding: 10px;
     max-width: 300px;
-    font: 300 16px/22px "Roboto-Regular";
+    font: 300 16px/22px "OpenSans-Regular";
     min-width: 120px; }
 .view-personalization-my-content .item-list ul.pager {
   margin: 10px 0;
@@ -914,7 +916,7 @@ input[type="text"] {
       background-color: #337ab7;
       color: #fff;
       border-radius: 50%;
-      font-family: "Roboto-Regular"; }
+      font-family: "OpenSans-Regular"; }
     .view-personalization-my-content .item-list ul.pager li.pager-item a {
       display: block;
       height: 25px;
@@ -922,14 +924,14 @@ input[type="text"] {
       font-size: 16px;
       font-size: 1rem;
       line-height: 25px;
-      color: #323232;
-      font-family: "Roboto-Regular"; }
+      color: #111;
+      font-family: "OpenSans-Regular"; }
       .view-personalization-my-content .item-list ul.pager li.pager-item a:hover {
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%; }
     .view-personalization-my-content .item-list ul.pager li.pager-next a, .view-personalization-my-content .item-list ul.pager li.pager-last a, .view-personalization-my-content .item-list ul.pager li.pager-first a, .view-personalization-my-content .item-list ul.pager li.pager-previous a {
-      color: #323232;
+      color: #111;
       line-height: 25px; }
     .view-personalization-my-content .item-list ul.pager li.pager-next.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-next.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-last.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-first.pager-last.last, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-first.first, .view-personalization-my-content .item-list ul.pager li.pager-previous.pager-last.last {
       display: none; }
@@ -952,7 +954,7 @@ input[type="text"] {
       border: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0 0 3px 0 #ccc;
       color: #bababa;
-      font: 300 16px/normal "Roboto-Regular";
+      font: 300 16px/normal "OpenSans-Regular";
       text-align: center; }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-type-textfield,
   .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select {
@@ -968,7 +970,7 @@ input[type="text"] {
     .page-personalization #block-formblock-ugc .node-ugc-form .form-type-select label {
       width: 150px;
       padding: 0 20px;
-      font: 300 14px/36px "Roboto-Regular";
+      font: 300 14px/36px "OpenSans-Regular";
       background-color: #fbfbfb;
       border-right: 1px solid #e0e0e0;
       z-index: 99;
@@ -1007,7 +1009,7 @@ input[type="text"] {
       width: 150px;
       height: 570px;
       padding: 0 20px;
-      font: 300 14px/36px "Roboto-Regular";
+      font: 300 14px/36px "OpenSans-Regular";
       background-color: #fbfbfb;
       border-right: 1px solid #e0e0e0;
       z-index: 99;
@@ -1041,7 +1043,7 @@ input[type="text"] {
       width: 150px;
       height: 125px;
       padding: 0 20px;
-      font: 300 14px/36px "Roboto-Regular";
+      font: 300 14px/36px "OpenSans-Regular";
       background-color: #fbfbfb;
       border-right: 1px solid #e0e0e0;
       z-index: 99;
@@ -1119,7 +1121,7 @@ input[type="text"] {
       border: none;
       width: 170px;
       max-width: 40%;
-      font: 300 20px/28px "Roboto-Regular";
+      font: 300 20px/28px "OpenSans-Regular";
       color: #fff;
       cursor: pointer; }
       .page-personalization #block-formblock-ugc .node-ugc-form .form-actions .form-submit:hover {
@@ -1131,7 +1133,7 @@ input[type="text"] {
       width: 170px;
       max-width: 40%;
       border-radius: 4px;
-      font: 300 20px/41px "Roboto-Regular";
+      font: 300 20px/41px "OpenSans-Regular";
       display: inline-block;
       vertical-align: top;
       color: #fff; }
@@ -1227,7 +1229,7 @@ input[type="text"] {
       height: 41px;
       border: none;
       width: 170px;
-      font: 300 20px/28px "Roboto-Regular";
+      font: 300 20px/28px "OpenSans-Regular";
       color: #fff;
       margin: 0 20px;
       cursor: pointer; }
@@ -1245,7 +1247,7 @@ input[type="text"] {
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%;
-        font-family: "Roboto-Regular"; }
+        font-family: "OpenSans-Regular"; }
       .view-personalization-my-preferences ul.pager li.pager-item a {
         display: block;
         height: 25px;
@@ -1253,14 +1255,14 @@ input[type="text"] {
         font-size: 16px;
         font-size: 1rem;
         line-height: 25px;
-        color: #323232;
-        font-family: "Roboto-Regular"; }
+        color: #111;
+        font-family: "OpenSans-Regular"; }
         .view-personalization-my-preferences ul.pager li.pager-item a:hover {
           background-color: #337ab7;
           color: #fff;
           border-radius: 50%; }
       .view-personalization-my-preferences ul.pager li.pager-next a, .view-personalization-my-preferences ul.pager li.pager-last a, .view-personalization-my-preferences ul.pager li.pager-first a, .view-personalization-my-preferences ul.pager li.pager-previous a {
-        color: #323232;
+        color: #111;
         line-height: 25px; }
       .view-personalization-my-preferences ul.pager li.pager-next.pager-first.first, .view-personalization-my-preferences ul.pager li.pager-next.pager-last.last, .view-personalization-my-preferences ul.pager li.pager-last.pager-first.first, .view-personalization-my-preferences ul.pager li.pager-last.pager-last.last, .view-personalization-my-preferences ul.pager li.pager-first.pager-first.first, .view-personalization-my-preferences ul.pager li.pager-first.pager-last.last, .view-personalization-my-preferences ul.pager li.pager-previous.pager-first.first, .view-personalization-my-preferences ul.pager li.pager-previous.pager-last.last {
         display: none; }
@@ -1280,7 +1282,7 @@ input[type="text"] {
     #block-itg-personalization-user-my-point .unit-description td {
       padding: 10px;
       max-width: 300px;
-      font: 300 16px/22px "Roboto-Regular";
+      font: 300 16px/22px "OpenSans-Regular";
       min-width: 120px; }
     #block-itg-personalization-user-my-point .unit-description th {
       background-color: #1a3c8d;
@@ -1308,7 +1310,7 @@ input[type="text"] {
       display: inline-block;
       vertical-align: middle;
       padding: 10px 0;
-      font: 400 14px/18px "Roboto-Regular"; }
+      font: 400 14px/18px "OpenSans-Regular"; }
       #block-itg-personalization-user-my-point .header-point span + span:before {
         content: '|';
         display: inline-block;
@@ -1326,24 +1328,24 @@ input[type="text"] {
 .page-error .page-error-pic {
   text-align: center; }
   .page-error .page-error-pic p {
-    font: 16px/18px "RobotoSlab-Regular"; }
+    font: 16px/18px "OpenSans-Regular"; }
 .page-error .go-back {
   color: #000;
   padding-top: 30px;
-  font: 19px/28px "RobotoSlab-Regular"; }
+  font: 19px/28px "OpenSans-Regular"; }
   .page-error .go-back a {
     color: #1a3c8d; }
 .page-error .error-or {
   display: block;
   text-indent: 100px;
   color: #6c6c6c;
-  font: 19px/28px "RobotoSlab-Regular";
+  font: 19px/28px "OpenSans-Regular";
   padding: 20px 0; }
 .page-error h3 {
   background-color: #1a3c8d;
   color: #fff;
   display: inline-block;
-  font: 500 18px/28px "Roboto-Regular";
+  font: 500 18px/28px "OpenSans-Regular";
   padding: 0 5px;
   text-transform: uppercase;
   vertical-align: top;
@@ -1391,7 +1393,7 @@ input[type="text"] {
   line-height: 34px; }
 .survey-form-main-container .survey-description {
   color: #929292;
-  font: 400 14px/20px "Roboto-Regular";
+  font: 400 14px/20px "OpenSans-Regular";
   margin-top: 10px; }
 .survey-form-main-container .byline {
   color: #989898;
@@ -1399,7 +1401,7 @@ input[type="text"] {
   margin: 20px 0;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   font-size: 12px;
   font-size: 0.75rem;
   zoom: 1; }
@@ -1520,11 +1522,11 @@ input[type="text"] {
         font-size: 26px;
         line-height: 26px; }
       .survey-form-main-container .byline .social-info span dfn {
-        font: normal 400 12px/18px "Roboto-Regular";
+        font: normal 400 12px/18px "OpenSans-Regular";
         display: block; }
 
 .question-container {
-  font-family: "Roboto-Regular"; }
+  font-family: "OpenSans-Regular"; }
   .question-container .question-heading {
     font-size: 20px;
     font-weight: 500;
@@ -1537,7 +1539,7 @@ input[type="text"] {
     padding: 5px 10px;
     color: #fff;
     background-color: #989898;
-    font: 500 14px/18px "Roboto-Regular"; }
+    font: 500 14px/18px "OpenSans-Regular"; }
   .question-container .answer-container {
     position: relative;
     padding: 0; }
@@ -1554,28 +1556,28 @@ input[type="text"] {
           margin: 3px 5px 0 0; }
         .question-container .answer-container > .form-item .form-item.form-type-radio > label {
           color: #323232;
-          font: 400 14px/18px "RobotoSlab-Regular"; }
+          font: 400 14px/18px "OpenSans-Regular"; }
       .question-container .answer-container > .form-item .form-item.form-type-checkbox {
         padding-left: 10px; }
         .question-container .answer-container > .form-item .form-item.form-type-checkbox .form-checkbox {
           margin: 3px 5px 0 0; }
         .question-container .answer-container > .form-item .form-item.form-type-checkbox > label {
           color: #323232;
-          font: 400 14px/18px "RobotoSlab-Regular"; }
+          font: 400 14px/18px "OpenSans-Regular"; }
     .question-container .answer-container .form-type-checkboxs > label {
       color: #323232;
-      font: 400 14px/18px "RobotoSlab-Regular"; }
+      font: 400 14px/18px "OpenSans-Regular"; }
     .question-container .answer-container .form-type-textfield > label {
       float: left;
       padding: 8px 20px 0 0;
       width: 220px;
       color: #323232;
-      font: 400 14px/18px "RobotoSlab-Regular"; }
+      font: 400 14px/18px "OpenSans-Regular"; }
     .question-container .answer-container .form-type-textfield .form-text {
       width: 516px;
       max-width: 100%;
       height: 42px;
-      font: 400 14px/18px "Roboto-Regular";
+      font: 400 14px/18px "OpenSans-Regular";
       color: #322323; }
     .question-container .answer-container iframe {
       display: block; }
@@ -1605,7 +1607,7 @@ input[type="text"] {
   background: linear-gradient(#4fb5ff, #0986e0);
   /* Standard syntax */
   font-size: 18px;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   color: #fff;
   font-weight: 400;
   margin-right: 20px;
@@ -1659,8 +1661,7 @@ input[type="text"] {
       display: inline-block;
       vertical-align: top;
       padding: 0;
-      text-transform: uppercase;
-      font-family: roboto; }
+      text-transform: uppercase; }
     .home_page_poll_widget_block .poll-data form .form-radios {
       text-align: center; }
       .home_page_poll_widget_block .poll-data form .form-radios .form-item {
@@ -1677,7 +1678,7 @@ input[type="text"] {
     background-color: #e3e3e3;
     border: none;
     font-weight: 500;
-    font-family: "Roboto-Regular";
+    font-family: "OpenSans-Semibold";
     color: #5f5f5f;
     margin: 15px auto 0;
     display: inherit;
@@ -1730,7 +1731,7 @@ input[type="text"] {
     display: inline-block;
     vertical-align: top;
     padding: 10px 20px;
-    font: 14px/18px "Roboto-Regular";
+    font: 14px/18px "OpenSans-Regular";
     color: #666;
     background-color: #d1d1d1;
     border-radius: 5px;
@@ -1764,7 +1765,7 @@ input[type="text"] {
 .page-personalization .ckeditor_links {
   display: none !important; }
 .page-personalization .block .block-title {
-  font: 400 18px/18px "Roboto-Regular";
+  font: 400 18px/18px "OpenSans-Regular";
   text-align: center;
   margin-bottom: 20px; }
 .page-personalization .personalized-wrapper {
@@ -1773,15 +1774,14 @@ input[type="text"] {
   max-width: 1170px;
   margin: 0 auto; }
 .page-personalization #block-block-2 > p {
-  margin-top: 30px;
-  font-family: roboto; }
+  margin-top: 30px; }
 
 /* CSS for redeem points */
 [id*="block-views-redeem-points-block"] {
   position: relative;
   margin-top: 45px; }
   [id*="block-views-redeem-points-block"] .block-title {
-    font: 500 24px/30px "Roboto-Regular";
+    font: 500 24px/30px "OpenSans-Regular";
     border-bottom: 1px solid #d8d8d8;
     padding-bottom: 15px;
     margin-bottom: 15px; }
@@ -1807,7 +1807,7 @@ input[type="text"] {
   .view-redeem-points .product-wrapper .product-title,
   .view-product .product-wrapper .product-title {
     text-transform: uppercase;
-    font: 400 16px/18px "Roboto-Regular";
+    font: 400 16px/18px "OpenSans-Regular";
     padding-top: 15px;
     height: 51px;
     overflow: hidden; }
@@ -1819,7 +1819,7 @@ input[type="text"] {
   .view-redeem-points .product-wrapper .redeem-points,
   .view-product .product-wrapper .redeem-points {
     text-transform: uppercase;
-    font: 600 18px/18px "Roboto-Regular";
+    font: 600 18px/18px "OpenSans-Regular";
     padding-top: 5px;
     color: #a00606; }
   .view-redeem-points .product-wrapper .product-actions,
@@ -1833,7 +1833,7 @@ input[type="text"] {
     color: #777;
     display: inline-block;
     vertical-align: top;
-    font: 600 14px/18px "Roboto-Regular";
+    font: 600 14px/18px "OpenSans-Regular";
     height: 30px;
     padding: 5px 10px;
     position: relative;
@@ -1854,7 +1854,7 @@ input[type="text"] {
     color: #fff;
     display: inline-block;
     vertical-align: top;
-    font: 600 14px/18px "Roboto-Regular";
+    font: 600 14px/18px "OpenSans-Regular";
     height: 30px;
     padding: 5px 10px;
     margin: 0 5px; }
@@ -1877,7 +1877,7 @@ input[type="text"] {
   .view-redeem-points .more-link a,
   .view-product .more-link a {
     color: #777;
-    font-family: "Roboto-Regular"; }
+    font-family: "OpenSans-Regular"; }
     .view-redeem-points .more-link a:hover,
     .view-product .more-link a:hover {
       color: #1a3c8d; }
@@ -1918,7 +1918,7 @@ body.has-cart-popup {
         position: relative;
         vertical-align: top;
         width: 212px;
-        font: 500 14px/18px "Roboto-Regular"; }
+        font: 500 14px/18px "OpenSans-Regular"; }
         .cart-popup-wrapper .cart-popup .pic span:before {
           border-color: transparent #2f2f2f transparent transparent;
           border-style: solid;
@@ -1951,18 +1951,18 @@ body.has-cart-popup {
       right: 12px;
       top: 10px; }
     .cart-popup-wrapper .cart-popup h2 {
-      font: 400 28px/30px "Roboto-Regular";
-      color: #000; }
+      font: 400 28px/30px "Merriweather-Bold";
+      color: #111; }
     .cart-popup-wrapper .cart-popup p {
       color: #676767;
-      font: 400 14px/22px "Roboto-Regular";
+      font: 400 14px/22px "OpenSans-Regular";
       margin: 10px 0; }
     .cart-popup-wrapper .cart-popup .redeem-points strong {
-      font: 400 18px/28px "Roboto-Regular";
+      font: 400 18px/28px "OpenSans-Regular";
       color: #000; }
     .cart-popup-wrapper .cart-popup .redeem-points span {
       display: block;
-      font: 600 18px/28px "Roboto-Regular";
+      font: 600 18px/28px "OpenSans-Regular";
       padding-top: 5px;
       color: #a00606; }
     .cart-popup-wrapper .cart-popup .cart-actions {
@@ -1974,7 +1974,7 @@ body.has-cart-popup {
       color: #777;
       display: inline-block;
       vertical-align: top;
-      font: 600 14px/18px "Roboto-Regular";
+      font: 600 14px/18px "OpenSans-Regular";
       height: 30px;
       padding: 5px 15px;
       margin: 0 5px; }
@@ -1992,7 +1992,7 @@ body.has-cart-popup {
       color: #fff;
       display: inline-block;
       vertical-align: top;
-      font: 600 14px/18px "Roboto-Regular";
+      font: 600 14px/18px "OpenSans-Regular";
       height: 30px;
       padding: 5px 15px;
       margin: 0 5px; }
@@ -2011,7 +2011,7 @@ body.has-cart-popup {
         color: #a00606; }
 
 [id*="itg-quiz-quiz-form"] .question-heading {
-  font: 400 20/28px "Roboto-Regular";
+  font: 400 20/28px "OpenSans-Regular";
   color: #000;
   position: relative;
   padding-left: 20px; }
@@ -2089,7 +2089,7 @@ body.has-cart-popup {
 [id*="itg_sso_reg_multistep_form"] ul.messages__list {
   padding-left: 18px;
   font-size: 14px;
-  font-family: "Roboto-Regular"; }
+  font-family: "OpenSans-Regular"; }
 [id*="itg_sso_reg_multistep_form"] .center-heading {
   text-align: center; }
   [id*="itg_sso_reg_multistep_form"] .center-heading h2 {
@@ -2114,7 +2114,7 @@ body.has-cart-popup {
     padding-top: 20px;
     max-width: 540px;
     margin: 0 auto;
-    font-family: "Roboto-Regular";
+    font-family: "OpenSans-Regular";
     color: #666;
     line-height: 24px; }
     [id*="itg_user_forgot_password_multistep_form"] form .form-item-ufname {
@@ -2215,19 +2215,19 @@ body.has-cart-popup {
       width: 60px; }
     #block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user .user-name {
       color: #1a3c8d;
-      font: 500 15px/18px "Roboto-Regular";
+      font: 500 15px/18px "OpenSans-Regular";
       padding: 5px 0 0;
       text-transform: uppercase; }
     #block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user .logout-link a {
       color: #777;
-      font: 400 12px/12px "Roboto-Regular"; }
+      font: 400 12px/12px "OpenSans-Regular"; }
   #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart {
     float: right;
     list-style: none;
     padding-top: 40px; }
     #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li {
       float: left;
-      font: 400 14px/18px "Roboto-Regular";
+      font: 400 14px/18px "OpenSans-Regular";
       position: relative;
       color: #777; }
       #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li .cart-total > a {
@@ -2237,12 +2237,12 @@ body.has-cart-popup {
           font-size: 16px; }
       #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li#my-remaining-points span {
         color: #1a3c8d;
-        font: 500 14px/18px "Roboto-Regular"; }
+        font: 500 14px/18px "OpenSans-Regular"; }
       #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li.my-history-link a {
         color: #777; }
       #block-itg-loyalty-reward-itg-loyalty-reward-header .header-cart li + li:before {
         content: '|';
-        font: 400 14px/18px "Roboto-Regular";
+        font: 400 14px/18px "OpenSans-Regular";
         color: #777;
         margin: 0 12px 0 15px; }
 
@@ -2256,7 +2256,7 @@ body.has-cart-popup {
   vertical-align: top;
   width: 100%; }
   .cart-checkout-list .product-details {
-    font: 400 15px/18px "Roboto-Regular";
+    font: 400 15px/18px "OpenSans-Regular";
     color: #000; }
     .cart-checkout-list .product-details > div {
       padding-bottom: 8px; }
@@ -2272,7 +2272,7 @@ body.has-cart-popup {
     .cart-checkout-list .cart-action > div {
       display: inline-block;
       vertical-align: top;
-      font: 400 16px/24px "Roboto-Regular";
+      font: 400 16px/24px "OpenSans-Regular";
       color: #2f2f2f; }
       .cart-checkout-list .cart-action > div.cart-action-links {
         display: block; }
@@ -2303,7 +2303,7 @@ body.has-cart-popup {
     width: 100%;
     padding-bottom: 15px; }
     .cart-total-block .grand-total strong {
-      font: 600 16px/18px "Roboto-Regular";
+      font: 600 16px/18px "OpenSans-Regular";
       color: #000; }
       .cart-total-block .grand-total strong:first-child {
         float: left; }
@@ -2315,7 +2315,7 @@ body.has-cart-popup {
     width: 100%;
     padding-top: 15px; }
     .cart-total-block .points-balance span {
-      font: 400 16px/18px "Roboto-Regular";
+      font: 400 16px/18px "OpenSans-Regular";
       color: #000; }
       .cart-total-block .points-balance span:first-child {
         float: left; }
@@ -2324,7 +2324,7 @@ body.has-cart-popup {
   .cart-total-block .checkout a {
     display: block;
     padding: 10px;
-    font: 500 22px/22px "Roboto-Regular";
+    font: 500 22px/22px "OpenSans-Regular";
     background-color: #a00606;
     box-shadow: 2px 2px 0 #000;
     color: #fff; }
@@ -2413,19 +2413,19 @@ body.has-cart-popup {
     height: 42px;
     border: 1px solid #d9d9d9;
     width: 100%;
-    font: 400 14px/18px "Roboto-Regular"; }
+    font: 400 14px/18px "OpenSans-Regular"; }
   [id*="itg-loyalty-reward-address-form"] .form-textarea {
     height: 82px;
     border: 1px solid #d9d9d9;
     width: 100%;
-    font: 400 14px/18px "Roboto-Regular"; }
+    font: 400 14px/18px "OpenSans-Regular"; }
   [id*="itg-loyalty-reward-address-form"] .form-submit {
     background-color: #000;
     border: 1px solid #000;
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font: 400 14px/28px "Roboto-Regular";
+    font: 400 14px/28px "OpenSans-Regular";
     height: 50px;
     padding: 0 20px;
     margin-top: 5px;
@@ -2438,11 +2438,11 @@ body.has-cart-popup {
 .page-order table {
   width: 100%;
   border-collapse: collapse;
-  font: 400 15px/20px "Roboto-Regular";
+  font: 400 15px/20px "OpenSans-Regular";
   margin: 30px 0; }
   .page-order table th {
     background-color: #d9d9d9;
-    font: 500 15px/20px "Roboto-Regular"; }
+    font: 500 15px/20px "OpenSans-Regular"; }
   .page-order table td {
     border-bottom: 1px solid #d9d9d9;
     vertical-align: top; }
@@ -2490,7 +2490,7 @@ body.has-cart-popup {
 
 .page-user form,
 .page-signup form {
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   max-width: 780px;
   margin: 0 auto;
   padding: 20px 20px; }
@@ -2546,7 +2546,7 @@ body.has-cart-popup {
   .page-signup form .form-text {
     width: 100%;
     height: 42px;
-    font: 400 14px/normal "Roboto-Regular"; }
+    font: 400 14px/normal "OpenSans-Regular"; }
   .page-user form div.description,
   .page-signup form div.description {
     font-size: 12px;
@@ -2572,7 +2572,7 @@ body.has-cart-popup {
     color: #fff;
     padding: 0 15px 0 55px;
     overflow: hidden;
-    font: 400 16px/48px "Roboto-Regular";
+    font: 400 16px/48px "OpenSans-Regular";
     display: inline-block;
     vertical-align: top; }
     .page-user .social-share a + a,
@@ -2618,7 +2618,7 @@ body.has-cart-popup {
     vertical-align: middle;
     background-color: #fff;
     padding: 0 10px;
-    font: 300 16px/18px "Roboto-Regular";
+    font: 300 16px/18px "OpenSans-Regular";
     color: #777;
     position: relative;
     z-index: 9; }
@@ -2751,25 +2751,8 @@ body.has-cart-popup {
 /* CSS For Block quotes */
 .quotes blockquote {
   color: #000;
-  font: 600 20px/28px "RobotoSlab-Regular";
-  position: relative;
-  text-indent: 40px; }
-  .quotes blockquote:before {
-    content: "\201C";
-    display: inline-block;
-    font: bold 60px/28px Georgia, serif;
-    vertical-align: baseline;
-    position: absolute;
-    left: 0;
-    top: 12px;
-    text-indent: 0; }
-  .quotes blockquote:after {
-    content: "\201D";
-    display: inline-block;
-    font: bold 60px/0px Georgia, serif;
-    vertical-align: top;
-    text-indent: 10px;
-    margin-top: 32px; }
+  font: 400 19px/28px "Merriweather-Semibold";
+  position: relative; }
 
 .recom-listing a:hover,
 .data-holder a:hover {
@@ -2809,8 +2792,9 @@ footer .footer-top ul li a:hover {
 
 .quotes {
   float: none;
-  margin: 15px 0;
-  width: 100%; }
+  margin: 15px 0 15px 10%;
+  border-left: 5px solid #bb0a0a;
+  padding: 0 0 0 20px; }
   .quotes .author {
     font-size: 12px;
     color: #828282;
@@ -2913,7 +2897,7 @@ footer .footer-top ul li a:hover {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   font-size: 14px;
   font-weight: 500;
   height: 32px;
@@ -2959,7 +2943,7 @@ footer .footer-top ul li a:hover {
 .ugc-success {
   background-color: #fff;
   color: green;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   padding: 100px 0;
   text-align: center; }
   .ugc-success h2 {
@@ -3023,7 +3007,7 @@ footer .footer-top ul li a:hover {
 .region-front-end-breadcrumb {
   color: #a1a1a1;
   margin-bottom: 5px;
-  font: 400 14px/18px "Roboto-Regular"; }
+  font: 400 14px/18px "OpenSans-Regular"; }
   .region-front-end-breadcrumb a {
     color: #a1a1a1; }
     .region-front-end-breadcrumb a:hover {
@@ -3131,7 +3115,7 @@ body {
       height: 32px;
       border-radius: 3px;
       line-height: 22px;
-      font-family: "Roboto-Regular";
+      font-family: "OpenSans-Regular";
       font-size: 14px;
       display: inline-block;
       vertical-align: top;
@@ -3316,7 +3300,7 @@ div#forgot-field-heading {
     color: #ffc106; } }
 [id*="protected-pages-enter-password"] fieldset {
   border: none;
-  font: 14px/18px "Roboto-Regular"; }
+  font: 14px/18px "OpenSans-Regular"; }
   [id*="protected-pages-enter-password"] fieldset .fieldset-description {
     font-size: 16px; }
   [id*="protected-pages-enter-password"] fieldset .form-type-password {
@@ -3339,10 +3323,10 @@ div#forgot-field-heading {
     margin-left: 200px;
     padding: 3px 20px 5px;
     vertical-align: top;
-    font-family: "Roboto-Regular"; }
+    font-family: "OpenSans-Regular"; }
 
 [id*="itg-mobile-services-search-form"] {
-  font: 14px/18px "Roboto-Regular"; }
+  font: 14px/18px "OpenSans-Regular"; }
   [id*="itg-mobile-services-search-form"] .container-inline-date {
     clear: none;
     float: left; }
@@ -3360,7 +3344,7 @@ div#forgot-field-heading {
     border-radius: 4px;
     color: #fff;
     display: inline-block;
-    font-family: "Roboto-Regular";
+    font-family: "OpenSans-Regular";
     font-size: 14px;
     margin-top: 23px;
     padding: 4px 10px 6px;
@@ -3381,7 +3365,7 @@ div#forgot-field-heading {
 
 .page-mobile-services-feed .views-table {
   border-collapse: collapse;
-  font: 400 14px/18px "Roboto-Regular";
+  font: 400 14px/18px "OpenSans-Regular";
   margin: 40px 0 30px;
   width: 100%; }
   .page-mobile-services-feed .views-table th {
@@ -3402,7 +3386,7 @@ div#forgot-field-heading {
   .page-mobile-services-feed .views-table td {
     padding: 10px;
     max-width: 300px;
-    font: 300 16px/22px "Roboto-Regular"; }
+    font: 300 16px/22px "OpenSans-Regular"; }
 
 #widget-ajex-loader,
 .profile-ajax-loader {
@@ -3423,7 +3407,7 @@ div#forgot-field-heading {
     top: 0; }
 
 .cart-dropdown {
-  font: 14px/18px "Roboto-Regular";
+  font: 14px/18px "OpenSans-Regular";
   background-color: #fff;
   box-shadow: 0 0 15px #999;
   left: 0;
@@ -3461,7 +3445,7 @@ div#forgot-field-heading {
     overflow: hidden; }
   .cart-dropdown .cart-dropdown-title {
     color: #000;
-    font: 16px/20px "Roboto-Regular";
+    font: 16px/20px "OpenSans-Regular";
     padding-bottom: 5px;
     text-transform: uppercase; }
   .cart-dropdown .cart-dropdown-added {
@@ -3474,7 +3458,7 @@ div#forgot-field-heading {
     color: #fff;
     display: inline-block;
     vertical-align: top;
-    font: 400 13px/18px "Roboto-Regular";
+    font: 400 13px/18px "OpenSans-Regular";
     height: 28px;
     padding: 5px 10px;
     margin-top: 20px; }
@@ -3497,16 +3481,16 @@ div#forgot-field-heading {
 .page-order-confirmation .thankyou-block {
   text-align: center; }
   .page-order-confirmation .thankyou-block h2 {
-    font: 500 24px/32px "Roboto-Regular";
+    font: 500 24px/32px "Merriweather-Bold";
     color: #464646; }
   .page-order-confirmation .thankyou-block p {
-    font: 400 15px/24px "Roboto-Regular";
+    font: 400 15px/24px "OpenSans-Regular";
     color: #a8a8a8;
     padding: 10px 0 30px; }
 .page-order-confirmation .order-summary-block {
   border: 1px solid #dedede; }
   .page-order-confirmation .order-summary-block h3 {
-    font: 500 20px/28px "Roboto-Regular";
+    font: 500 20px/28px "OpenSans-Regular";
     color: #464646;
     padding: 10px;
     text-align: center; }
@@ -3516,9 +3500,9 @@ div#forgot-field-heading {
     border-width: 1px 0;
     padding: 8px 20px;
     color: #828282;
-    font: 400 15px/18px "Roboto-Regular"; }
+    font: 400 15px/18px "OpenSans-Regular"; }
     .page-order-confirmation .order-summary-block .order-id span {
-      font: 500 14px/18px "Roboto-Regular";
+      font: 500 14px/18px "OpenSans-Regular";
       color: #000; }
 .page-order-confirmation section.sidebar {
   border: none; }
@@ -3538,17 +3522,17 @@ div#forgot-field-heading {
   .page-order-confirmation .cart-checkout-list .cart-details {
     overflow: hidden; }
     .page-order-confirmation .cart-checkout-list .cart-details h4 {
-      font: 500 15px/20px "Roboto-Regular";
+      font: 500 15px/20px "OpenSans-Regular";
       color: #000; }
     .page-order-confirmation .cart-checkout-list .cart-details span {
-      font: 400 12px/18px "Roboto-Regular";
+      font: 400 12px/18px "OpenSans-Regular";
       color: #9e9e9e; }
   .page-order-confirmation .cart-checkout-list .delivery-by {
-    font: 400 15px/20px "Roboto-Regular";
+    font: 400 15px/20px "OpenSans-Regular";
     color: 000;
     text-align: center; }
   .page-order-confirmation .cart-checkout-list .total-points {
-    font: 400 15px/20px "Roboto-Regular";
+    font: 400 15px/20px "OpenSans-Regular";
     color: 000;
     text-align: right; }
 
@@ -3574,18 +3558,18 @@ div#forgot-field-heading {
     width: 100%;
     padding: 15px 0; }
     .page-order-summary .order-address-wrapper h3 {
-      font: 500 20px/28px "Roboto-Regular";
+      font: 500 20px/28px "OpenSans-Regular";
       color: #000;
       padding-bottom: 5px; }
     .page-order-summary .order-address-wrapper address {
-      font: normal 400 15px/22px "Roboto-Regular";
+      font: normal 400 15px/22px "OpenSans-Regular";
       color: #000; }
       .page-order-summary .order-address-wrapper address span {
         display: block; }
     .page-order-summary .order-address-wrapper #change-address {
       display: block;
       padding: 7px 10px;
-      font: 500 20px/20px "Roboto-Regular";
+      font: 500 20px/20px "OpenSans-Regular";
       background-color: #ccc;
       box-shadow: 2px 2px 0 #000;
       color: #000;
@@ -3595,7 +3579,7 @@ div#forgot-field-heading {
       text-transform: uppercase;
       margin: 30px 0; }
   .page-order-summary .sent-on-message {
-    font: normal 400 15px/20px "Roboto-Regular";
+    font: normal 400 15px/20px "OpenSans-Regular";
     color: #000;
     padding: 15px 20px; }
     .page-order-summary .sent-on-message span {
@@ -3609,7 +3593,7 @@ div#forgot-field-heading {
     margin-right: 20px;
     width: 103px; }
   .page-order-summary .cart-checkout-list .prd-title {
-    font: 500 18px/24px "Roboto-Regular";
+    font: 500 18px/24px "OpenSans-Regular";
     float: left; }
   .page-order-summary .lhs-redeem-point {
     margin-bottom: 24px; }
@@ -3638,7 +3622,7 @@ div#forgot-field-heading {
     max-height: 480px; }
     #change-address-popup .popup-inner h2 {
       color: #474747;
-      font: normal 400 23px/18px "Roboto-Regular";
+      font: normal 400 23px/18px "Merriweather-Bold";
       background-color: #ececec;
       border-radius: 5px 5px 0 0;
       padding: 13px; }
@@ -3684,7 +3668,7 @@ div#forgot-field-heading {
     #block-itg-personalization-personalization-refer-friend li a {
       text-align: center;
       padding: 10px;
-      font-family: "Roboto-Regular";
+      font-family: "OpenSans-Regular";
       font-size: 14px;
       color: #1a3c8d;
       padding: 15px 20px;
@@ -3697,7 +3681,7 @@ div#forgot-field-heading {
 #block-itg-personalization-personalization-refer-friend .social-edit {
   background: #f8f8f8;
   text-align: center;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   padding-top: 20px;
   color: #757575; }
   #block-itg-personalization-personalization-refer-friend .social-edit > ul {
@@ -3725,7 +3709,7 @@ div#forgot-field-heading {
   padding: 15px; }
   .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow h2,
   .page-personalization-my-following #block-itg-personalization-personalization-following h2 {
-    font: 400 24px/28px "Roboto-Regular";
+    font: 400 24px/28px "Merriweather-Bold";
     margin: 20px 0; }
   .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name,
   .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name {
@@ -3737,14 +3721,14 @@ div#forgot-field-heading {
     position: relative;
     margin: 15px;
     border-radius: 5px;
-    font: 400 16px/20px "Roboto-Regular";
+    font: 400 16px/20px "OpenSans-Regular";
     word-wrap: break-word; }
     .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name:hover,
     .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name:hover {
       background-color: #efefef; }
     .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow .featured-name span,
     .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow .featured-name span {
-      font: 400 14px/20px "Roboto-Regular";
+      font: 400 14px/20px "OpenSans-Regular";
       position: absolute;
       right: 5px;
       top: 10px; }
@@ -3771,7 +3755,7 @@ div#forgot-field-heading {
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%;
-        font-family: "Roboto-Regular"; }
+        font-family: "OpenSans-Regular"; }
       .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-item a,
       .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-item a {
         display: block;
@@ -3780,8 +3764,8 @@ div#forgot-field-heading {
         font-size: 16px;
         font-size: 1rem;
         line-height: 25px;
-        color: #323232;
-        font-family: "Roboto-Regular"; }
+        color: #111;
+        font-family: "OpenSans-Regular"; }
         .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-item a:hover,
         .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-item a:hover {
           background-color: #337ab7;
@@ -3792,7 +3776,7 @@ div#forgot-field-heading {
       .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-last a,
       .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-first a,
       .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-previous a {
-        color: #323232;
+        color: #111;
         line-height: 25px; }
       .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-next.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-last.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-first.pager-last.last, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous.pager-first.first, .page-personalization-my-following #block-itg-personalization-personalization-to-be-follow .to_be_follow ul.pager li.pager-previous.pager-last.last,
       .page-personalization-my-following #block-itg-personalization-personalization-following .to_be_follow ul.pager li.pager-next.pager-first.first,
@@ -3811,7 +3795,7 @@ div#forgot-field-heading {
   vertical-align: top;
   background-color: #a00606;
   color: #fff;
-  font: 400 14px/18px "Roboto-Regular"; }
+  font: 400 14px/18px "OpenSans-Regular"; }
 
 .continue-shopping {
   position: absolute;
@@ -3896,7 +3880,7 @@ div#forgot-field-heading {
     text-align: center;
     font-size: 12px;
     color: #666;
-    font-family: "Roboto-Regular";
+    font-family: "OpenSans-Regular";
     font-weight: 500;
     box-sizing: border-box;
     padding-top: 4px; }
@@ -3948,7 +3932,7 @@ div#forgot-field-heading {
     background-color: #ef3c24;
     width: auto;
     margin: 0 5px;
-    font: 400 18px/22px "Roboto-Regular";
+    font: 400 18px/22px "OpenSans-Regular";
     height: 35px;
     text-align: center;
     text-transform: uppercase;
@@ -3963,7 +3947,7 @@ div#forgot-field-heading {
     text-align: center;
     width: auto;
     margin: 0 5px;
-    font: 400 18px/28px "Roboto-Regular";
+    font: 400 18px/28px "OpenSans-Regular";
     height: 35px;
     text-transform: uppercase;
     color: #fff;
@@ -3976,7 +3960,7 @@ article.node-mega-review-critic header {
 article.node-mega-review-critic .comment-mobile {
   background: #1c1c1c;
   margin: -15px -15px 20px;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   text-align: right; }
   article.node-mega-review-critic .comment-mobile ul {
     display: inline-block;
@@ -3994,7 +3978,7 @@ article.node-mega-review-critic .comment-mobile {
     article.node-mega-review-critic .comment-mobile ul.social-share {
       display: none; }
 article.node-mega-review-critic h1 {
-  font: 700 34px/42px "Roboto-Regular";
+  font: 700 34px/42px "OpenSans-Regular";
   color: #323232; }
 article.node-mega-review-critic .rating-and-social-wrapper {
   display: inline-block;
@@ -4042,7 +4026,6 @@ article.node-mega-review-critic .rating-and-social-wrapper {
     article.node-mega-review-critic .rating-and-social-wrapper .social-info span {
       color: #bebebe;
       float: left;
-      font-family: roboto;
       font-size: 12px;
       padding: 5px 15px;
       text-align: center; }
@@ -4051,7 +4034,7 @@ article.node-mega-review-critic .rating-and-social-wrapper {
         line-height: 22px;
         margin-top: 10px; }
       article.node-mega-review-critic .rating-and-social-wrapper .social-info span dfn {
-        font: normal 400 12px/18px "Roboto-Regular";
+        font: normal 400 12px/18px "OpenSans-Regular";
         display: block; }
       article.node-mega-review-critic .rating-and-social-wrapper .social-info span a {
         color: #bebebe; }
@@ -4068,7 +4051,6 @@ article.node-mega-review-critic .rating-and-social-wrapper {
       article.node-mega-review-critic .rating-and-social-wrapper .social-info span.share-count i {
         color: #bebebe;
         display: block;
-        font-family: roboto;
         font-size: 40px;
         font-style: normal;
         font-weight: 700;
@@ -4106,12 +4088,12 @@ article.node-mega-review-critic .movie-review-wrapper {
       padding: 10px 8px 0;
       color: #a0a0a0; }
       article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row .review-label {
-        font: normal 300 14px/16px "Roboto-Regular";
+        font: normal 300 14px/16px "OpenSans-Regular";
         float: left;
         width: 60px; }
       article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row .review-txt {
         display: block;
-        font: 400 14px/16px "Roboto-Regular";
+        font: 400 14px/16px "OpenSans-Regular";
         overflow: hidden; }
         article.node-mega-review-critic .movie-review-wrapper .movie-review-text .review-row .review-txt .field-name-field-mega-review-cast .field-item {
           display: inline-block;
@@ -4122,10 +4104,10 @@ article.node-mega-review-critic .movie-review-wrapper {
       padding-top: 4px;
       border-top: 1px solid rgba(255, 255, 255, 0.2); }
       article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer h3 {
-        font: 700 14px/23px "Roboto-Regular";
+        font: 700 14px/23px "OpenSans-Regular";
         color: #ffc106; }
       article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer p {
-        font: 400 12px/23px "Roboto-Regular";
+        font: 400 12px/23px "OpenSans-Regular";
         color: #a0a0a0; }
       article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-reviewer.movie-reviewer-other {
         margin-top: 0; }
@@ -4153,9 +4135,9 @@ article.node-mega-review-critic .bottom-movie-desc {
 article.node-mega-review-critic .other-reviews {
   margin: 10px 0; }
   article.node-mega-review-critic .other-reviews h2 {
-    font: 700 16px/27px "Roboto-Regular"; }
+    font: 700 16px/27px "Merriweather-Bold"; }
   article.node-mega-review-critic .other-reviews .other-reviews-posted-on {
-    font: 400 13px/27px "Roboto-Regular"; }
+    font: 400 13px/27px "OpenSans-Regular"; }
     article.node-mega-review-critic .other-reviews .other-reviews-posted-on .other-reviews-by {
       font-style: italic;
       color: #a00606;
@@ -4203,7 +4185,7 @@ article.node-mega-review-critic .other-reviews {
     border-top: 1px solid #e5e5e5;
     padding: 10px 0; }
   article.node-mega-review-critic .other-reviews .other-reviews-desc {
-    font: 400 15px/27px "Roboto-Regular";
+    font: 400 15px/27px "OpenSans-Regular";
     color: #212121;
     margin-top: 10px; }
     article.node-mega-review-critic .other-reviews .other-reviews-desc a {
@@ -4223,14 +4205,15 @@ article.node-mega-review-critic .other-reviews {
       font-weight: 700;
       color: #bb0a0a;
       display: none;
-      position: relative; }
+      position: relative;
+      font-family: "OpenSans-Bold"; }
       .photos-videos-wrapper .movie-videos h3 span,
       .photos-videos-wrapper .movie-photos h3 span {
         background: #fff;
         z-index: 1;
         position: relative;
         /* padding-left: 10px; */
-        padding: 45px 20px 10px 10px;
+        padding: 20px 20px 10px 10px;
         display: inline-block; }
       .photos-videos-wrapper .movie-videos h3:before,
       .photos-videos-wrapper .movie-photos h3:before {
@@ -4270,14 +4253,14 @@ article.node-mega-review-critic .other-reviews {
         background-color: rgba(0, 0, 0, 0.5);
         color: #fff;
         font-size: 12px;
-        font-family: "Roboto-Regular"; }
+        font-family: "OpenSans-Regular"; }
     .photos-videos-wrapper .movie-videos .photo-date,
     .photos-videos-wrapper .movie-photos .photo-date {
       display: block;
       font-size: 12px;
       color: #b1b1b1;
       padding: 8px 0 5px;
-      font-family: "Roboto-Regular"; }
+      font-family: "OpenSans-Regular"; }
 
 .career-graph .career-graph-data {
   margin-top: 80px;
@@ -4285,7 +4268,6 @@ article.node-mega-review-critic .other-reviews {
   .career-graph .career-graph-data .gray-bg {
     background-color: #dedede;
     color: #000;
-    font-family: roboto;
     font-size: 17px;
     font-weight: 500;
     padding: 17px 20px;
@@ -4295,7 +4277,6 @@ article.node-mega-review-critic .other-reviews {
     background-color: #2a2a2a;
     color: #fff;
     font-size: 24px;
-    font-family: roboto;
     font-weight: 500;
     padding: 19px 20px 19px 195px;
     line-height: 28px;
@@ -4314,7 +4295,6 @@ article.node-mega-review-critic .other-reviews {
   text-align: right;
   padding: 15px;
   background: #f7f7f7;
-  font-family: roboto;
   font-size: 13px;
   font-weight: 600;
   color: #818181; }
@@ -4399,7 +4379,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       background-color: #337ab7;
       color: #fff;
       border-radius: 50%;
-      font-family: "Roboto-Regular"; }
+      font-family: "OpenSans-Regular"; }
     .view-product ul.pager li.pager-item a {
       display: block;
       height: 25px;
@@ -4407,14 +4387,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       font-size: 16px;
       font-size: 1rem;
       line-height: 25px;
-      color: #323232;
-      font-family: "Roboto-Regular"; }
+      color: #111;
+      font-family: "OpenSans-Regular"; }
       .view-product ul.pager li.pager-item a:hover {
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%; }
     .view-product ul.pager li.pager-next a, .view-product ul.pager li.pager-last a, .view-product ul.pager li.pager-first a, .view-product ul.pager li.pager-previous a {
-      color: #323232;
+      color: #111;
       line-height: 25px; }
     .view-product ul.pager li.pager-next.pager-first.first, .view-product ul.pager li.pager-next.pager-last.last, .view-product ul.pager li.pager-last.pager-first.first, .view-product ul.pager li.pager-last.pager-last.last, .view-product ul.pager li.pager-first.pager-first.first, .view-product ul.pager li.pager-first.pager-last.last, .view-product ul.pager li.pager-previous.pager-first.first, .view-product ul.pager li.pager-previous.pager-last.last {
       display: none; }
@@ -4443,7 +4423,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         border: 1px solid rgba(0, 0, 0, 0.2);
         box-shadow: 0 0 3px 0 #ccc;
         color: #bababa;
-        font: 300 16px/normal "Roboto-Regular";
+        font: 300 16px/normal "OpenSans-Regular";
         text-align: center; }
     [id*="itg-personalization-edit-profile-form"] > div .form-type-textfield,
     [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield {
@@ -4459,7 +4439,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       [id*="itg-personalization-refer-a-friend-form"] > div .form-type-textfield label {
         width: 150px;
         padding: 0 20px;
-        font: 300 14px/36px "Roboto-Regular";
+        font: 300 14px/36px "OpenSans-Regular";
         background-color: #fbfbfb;
         border-right: 1px solid #e0e0e0;
         z-index: 10;
@@ -4489,7 +4469,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       [id*="itg-personalization-refer-a-friend-form"] > div .form-type-select label {
         width: 150px;
         padding: 0 20px;
-        font: 300 14px/36px "Roboto-Regular";
+        font: 300 14px/36px "OpenSans-Regular";
         background-color: #fbfbfb;
         border-right: 1px solid #e0e0e0;
         z-index: 10;
@@ -4519,7 +4499,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         width: 150px;
         height: 128px;
         padding: 0 20px;
-        font: 300 14px/36px "Roboto-Regular";
+        font: 300 14px/36px "OpenSans-Regular";
         background-color: #fbfbfb;
         border-right: 1px solid #e0e0e0;
         z-index: 10;
@@ -4541,7 +4521,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         padding: 10px; }
     [id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes > label,
     [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes > label {
-      font: 300 14px/18px "Roboto-Regular";
+      font: 300 14px/18px "OpenSans-Regular";
       color: #000;
       display: block;
       padding: 5px 0; }
@@ -4556,7 +4536,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         vertical-align: top; }
         [id*="itg-personalization-edit-profile-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label,
         [id*="itg-personalization-refer-a-friend-form"] > div .form-type-checkboxes .form-checkboxes .form-type-checkbox label {
-          font: 400 13px/18px "Roboto-Regular";
+          font: 400 13px/18px "OpenSans-Regular";
           vertical-align: top;
           color: #757575; }
     [id*="itg-personalization-edit-profile-form"] > div .form-type-radios,
@@ -4571,7 +4551,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios > label {
         width: 150px;
         padding: 0 20px;
-        font: 300 14px/36px "Roboto-Regular";
+        font: 300 14px/36px "OpenSans-Regular";
         background-color: #fbfbfb;
         border: 1px solid #e0e0e0;
         border-radius: 5px 0 0 5px;
@@ -4584,7 +4564,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         margin: 0 0 0 40px; }
         [id*="itg-personalization-edit-profile-form"] > div .form-type-radios .form-radios .form-type-radio label,
         [id*="itg-personalization-refer-a-friend-form"] > div .form-type-radios .form-radios .form-type-radio label {
-          font: 300 14px/36px "Roboto-Regular"; }
+          font: 300 14px/36px "OpenSans-Regular"; }
     [id*="itg-personalization-edit-profile-form"] > div .container-inline-date .form-type-date-popup,
     [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup {
       display: inline-block;
@@ -4627,7 +4607,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       [id*="itg-personalization-refer-a-friend-form"] > div .container-inline-date .form-type-date-popup > label {
         width: 150px;
         padding: 0 20px;
-        font: 300 14px/36px "Roboto-Regular";
+        font: 300 14px/36px "OpenSans-Regular";
         background-color: #fbfbfb;
         border-right: 1px solid #e0e0e0;
         z-index: 10;
@@ -4649,7 +4629,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         width: 150px;
         height: 125px;
         padding: 0 20px;
-        font: 300 14px/36px "Roboto-Regular";
+        font: 300 14px/36px "OpenSans-Regular";
         background-color: #fbfbfb;
         border-right: 1px solid #e0e0e0;
         z-index: 10;
@@ -4677,7 +4657,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file div.description {
         display: none;
         color: #5f5f5f;
-        font: 400 12px/16px "Roboto-Regular";
+        font: 400 12px/16px "OpenSans-Regular";
         margin-top: 8px;
         padding-left: 270px; }
       [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview,
@@ -4687,7 +4667,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file .upload-preview + .form-submit,
         [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file .upload-preview + .form-submit {
           color: #ee4d4d;
-          font: 400 13px/18px "Roboto-Regular";
+          font: 400 13px/18px "OpenSans-Regular";
           border: none;
           background-color: #fff;
           cursor: pointer;
@@ -4707,7 +4687,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
           display: none; }
         [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a,
         [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file a {
-          font: 400 13px/18px "Roboto-Regular";
+          font: 400 13px/18px "OpenSans-Regular";
           color: #323232;
           pointer-events: none; }
     [id*="itg-personalization-edit-profile-form"] > div div.image-widget-data,
@@ -4748,7 +4728,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         height: 41px;
         border: none;
         width: 170px;
-        font: 300 20px/28px "Roboto-Regular";
+        font: 300 20px/28px "OpenSans-Regular";
         color: #fff;
         cursor: pointer; }
       [id*="itg-personalization-edit-profile-form"] > div .form-actions a.button,
@@ -4757,7 +4737,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         height: 41px;
         border: none;
         width: 170px;
-        font: 300 20px/41px "Roboto-Regular";
+        font: 300 20px/41px "OpenSans-Regular";
         display: inline-block;
         vertical-align: top;
         color: #fff; }
@@ -4795,7 +4775,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       border: medium none;
       color: #fff;
       cursor: pointer;
-      font: 300 20px/28px "Roboto-Regular";
+      font: 300 20px/28px "OpenSans-Regular";
       height: 41px;
       width: 170px;
       margin: 30px auto 0;
@@ -4844,7 +4824,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     background: #09619f;
     color: #fff;
     border-bottom: 5px solid #fff;
-    font-family: roboto;
     min-width: 124px;
     max-width: 124px;
     text-align: left; }
@@ -4971,7 +4950,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .view-front-funalytics-list #funalytics_popup_display .funalytics-slider {
     padding: 20px 50px; }
     .view-front-funalytics-list #funalytics_popup_display .funalytics-slider .slick-slide .title {
-      font: 500 26px/30px "Roboto-Regular";
+      font: 500 26px/30px "OpenSans-Regular";
       padding-bottom: 12px;
       padding-right: 50px;
       white-space: nowrap;
@@ -5029,7 +5008,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     color: #b1b1b1;
     padding: 5px 0 0; }
   .view-front-funalytics-list .funalytics-tile .title {
-    font: 500 20px/24px "Roboto-Regular";
+    font: 500 20px/24px "OpenSans-Regular";
     color: #323232;
     height: 48px;
     overflow: hidden; }
@@ -5097,7 +5076,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       background-color: #337ab7;
       color: #fff;
       border-radius: 50%;
-      font-family: "Roboto-Regular"; }
+      font-family: "OpenSans-Regular"; }
     .view-front-funalytics-list ul.pager li.pager-item a {
       display: block;
       height: 25px;
@@ -5105,14 +5084,14 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       font-size: 16px;
       font-size: 1rem;
       line-height: 25px;
-      color: #323232;
-      font-family: "Roboto-Regular"; }
+      color: #111;
+      font-family: "OpenSans-Regular"; }
       .view-front-funalytics-list ul.pager li.pager-item a:hover {
         background-color: #337ab7;
         color: #fff;
         border-radius: 50%; }
     .view-front-funalytics-list ul.pager li.pager-next a, .view-front-funalytics-list ul.pager li.pager-last a, .view-front-funalytics-list ul.pager li.pager-first a, .view-front-funalytics-list ul.pager li.pager-previous a {
-      color: #323232;
+      color: #111;
       line-height: 25px; }
     .view-front-funalytics-list ul.pager li.pager-next.pager-first.first, .view-front-funalytics-list ul.pager li.pager-next.pager-last.last, .view-front-funalytics-list ul.pager li.pager-last.pager-first.first, .view-front-funalytics-list ul.pager li.pager-last.pager-last.last, .view-front-funalytics-list ul.pager li.pager-first.pager-first.first, .view-front-funalytics-list ul.pager li.pager-first.pager-last.last, .view-front-funalytics-list ul.pager li.pager-previous.pager-first.first, .view-front-funalytics-list ul.pager li.pager-previous.pager-last.last {
       display: none; }
@@ -5295,7 +5274,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       border: 1px solid rgba(0, 0, 0, 0.2);
       box-shadow: 0 0 3px 0 #ccc;
       color: #bababa;
-      font: 300 16px/normal "Roboto-Regular";
+      font: 300 16px/normal "OpenSans-Regular";
       text-align: center; }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-field-name-field-recipe-audio .form-type-managed-file {
     margin: 20px 0; }
@@ -5391,7 +5370,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file img {
       display: none; }
     .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file a {
-      font: 400 13px/18px "Roboto-Regular";
+      font: 400 13px/18px "OpenSans-Regular";
       color: #323232;
       pointer-events: none; }
   .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-file .form-type-managed-file span.file-size {
@@ -5409,7 +5388,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       border: none;
       width: 170px;
       max-width: 40%;
-      font: 300 20px/28px "Roboto-Regular";
+      font: 300 20px/28px "OpenSans-Regular";
       color: #fff;
       cursor: pointer; }
       .page-personalization #block-formblock-ugc .node-ugc-form .form-actions .form-submit:hover {
@@ -5421,7 +5400,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       width: 170px;
       max-width: 40%;
       border-radius: 4px;
-      font: 300 20px/41px "Roboto-Regular";
+      font: 300 20px/41px "OpenSans-Regular";
       display: inline-block;
       vertical-align: top;
       color: #fff; }
@@ -5477,7 +5456,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         font-size: 15px;
         line-height: 18px; }
       .page-personalization .personalized-wrapper .personalized-user-area .personalized-user .user-logout a {
-        font-family: "Roboto-Regular";
+        font-family: "OpenSans-Regular";
         color: #8d8d8d; }
     .page-personalization .personalized-wrapper .personalized-user-area .personalized-user-info {
       border: none;
@@ -5509,7 +5488,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .block-itg-personalization .personal-menu-tab-mobile .tab-text {
       display: block;
       color: #4f4f4f;
-      font: 400 14px/18px "Roboto-Regular";
+      font: 400 14px/18px "OpenSans-Regular";
       padding: 8px 8px;
       background-color: #e7e5e6;
       height: 36px; }
@@ -5729,7 +5708,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       display: none; }
     [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file a,
     [id*="itg-personalization-refer-a-friend-form"] > div .form-type-managed-file span.file a {
-      font: 400 13px/18px "Roboto-Regular";
+      font: 400 13px/18px "OpenSans-Regular";
       color: #323232;
       pointer-events: none; }
     [id*="itg-personalization-edit-profile-form"] > div .form-type-managed-file span.file + #edit-profile-pic-remove-button,
@@ -5776,7 +5755,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       height: 41px;
       border: none;
       width: 170px;
-      font: 300 20px/28px "Roboto-Regular";
+      font: 300 20px/28px "OpenSans-Regular";
       color: #fff;
       cursor: pointer; }
     [id*="itg-personalization-edit-profile-form"] > div .form-actions a.button,
@@ -5785,7 +5764,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       height: 41px;
       border: none;
       width: 170px;
-      font: 300 20px/41px "Roboto-Regular";
+      font: 300 20px/41px "OpenSans-Regular";
       display: inline-block;
       vertical-align: top;
       color: #fff; }
@@ -5821,7 +5800,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     border: medium none;
     color: #fff;
     cursor: pointer;
-    font: 300 20px/28px "Roboto-Regular";
+    font: 300 20px/28px "OpenSans-Regular";
     height: 41px;
     width: 170px;
     margin: 30px auto 0;
@@ -5915,7 +5894,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   /* Responsive CSS For Loyalty and Rewards */
   [id*="block-views-redeem-points-block"] .block-title {
-    font: 500 18px/24px "Roboto-Regular"; }
+    font: 500 18px/24px "OpenSans-Regular"; }
 
   #block-itg-loyalty-reward-itg-loyalty-reward-header .cart-user {
     width: 50%; }
@@ -5949,7 +5928,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .view-redeem-points .product-wrapper .btn-redeem-points,
     .view-product .product-wrapper .btn-add-cart,
     .view-product .product-wrapper .btn-redeem-points {
-      font: 500 13px/18px "Roboto-Regular";
+      font: 500 13px/18px "OpenSans-Regular";
       padding: 5px 8px;
       margin: 0; }
     .view-redeem-points .product-wrapper .btn-add-cart,
@@ -5979,7 +5958,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
       padding-bottom: 30px; }
       .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart,
       .cart-popup-wrapper .cart-popup .cart-actions .btn-redeem-points {
-        font: 500 13px/18px "Roboto-Regular";
+        font: 500 13px/18px "OpenSans-Regular";
         padding: 5px 8px;
         margin: 0; }
       .cart-popup-wrapper .cart-popup .cart-actions .btn-add-cart {
@@ -6119,7 +6098,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     .shopping-cart .cart-checkout-list .product-details,
     .order-summary .cart-checkout-list .product-details {
       float: none;
-      font: 400 12px/14px "Roboto-Regular"; }
+      font: 400 12px/14px "OpenSans-Regular"; }
       .shopping-cart .cart-checkout-list .product-details > div span,
       .order-summary .cart-checkout-list .product-details > div span {
         color: #6c6c6c; }
@@ -6283,7 +6262,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .block-itg-personalization .personal-menu-tab-mobile .tab-text {
   display: block;
   color: #4f4f4f;
-  font: 400 14px/24px "Roboto-Regular";
+  font: 400 14px/24px "OpenSans-Regular";
   padding: 8px 8px 8px 40px;
   background-color: #e7e5e6;
   height: 36px;
@@ -6294,7 +6273,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 /*css Mega Review || Mobile */
 #block-itg-mega-reviews-critics-mega-review-mobile-header .comment-mobile {
   background: #1c1c1c;
-  font-family: "Roboto-Regular";
+  font-family: "OpenSans-Regular";
   text-align: right; }
   #block-itg-mega-reviews-critics-mega-review-mobile-header .comment-mobile ul {
     display: inline-block;

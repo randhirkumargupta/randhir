@@ -1,4 +1,5 @@
-.section-bestcolleges h1, .section-bestcolleges h2, .section-bestcolleges h3, .section-bestcolleges h4 { font-weight: 500;font-family: "RobotoSlab-Regular"; word-wrap: break-word;}
+.section-bestcolleges h1, .section-bestcolleges h2, .section-bestcolleges h3, .section-bestcolleges h4 { font-weight: 500; word-wrap: break-word;}
+.section-bestcolleges h1{ font-size:32px; }
 .main-streamwisecompare{ overflow: hidden;}
 .main-streamwisecompare .streamcontainer, .main-streamwisecompare .streamcontainer1 {
   float:left;
@@ -88,7 +89,7 @@
      width: 100%;
  }
  .slider_outer {
-     background: #000;
+     background: #111;
      padding: 10px;
  }
  .slider_outer .carousel-control.left,
@@ -157,7 +158,7 @@
      font-weight: bold;
  }
  #content #page-title{
- 	font:normal 33px/35px RobotoSlab-Regular;
+    font:normal 33px/35px OpenSans-Regular;
     color: #545454;padding:0 0 10px;
  }
  .clr_chn .item {
@@ -412,7 +413,7 @@
      font-size:30px !important;
      display: inline-block;
      font-weight: bold;
-     color: #000;
+     color: #111;
     float: left;
     width: calc(100% - 142px);
     line-height: 32px;
@@ -440,7 +441,7 @@
      display: none;
  }
  .slider_outer1 .carousel-caption {
-     color: #000;
+     color: #111;
      left: 0;
      padding-bottom: 0px;
      position: relative !important;
@@ -600,7 +601,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .agbutton.story-like-dislike #name-dv #lky > span, .agbutton.story-like-dislike #name-dv #dlky > span { padding: 0 15px;
   display: inline-block; vertical-align: middle;}
 .agbutton.story-like-dislike #name-dv #lky > span#dlky, .agbutton.story-like-dislike #name-dv #dlky > span#dlky { padding-left: 0;}
-.agbutton.story-like-dislike #name-dv #lky #sty-dv, .agbutton.story-like-dislike #name-dv #lky #dsty-dv, .agbutton.story-like-dislike #name-dv #dlky #sty-dv, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv {background: #fff; width: 200px; position: absolute; box-shadow: 0px 0px 5px #ccc; left: 0; top: 40px; font-weight: normal; color: #000; padding: 15px; border-radius: 5px;
+.agbutton.story-like-dislike #name-dv #lky #sty-dv, .agbutton.story-like-dislike #name-dv #lky #dsty-dv, .agbutton.story-like-dislike #name-dv #dlky #sty-dv, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv {background: #fff; width: 200px; position: absolute; box-shadow: 0px 0px 5px #ccc; left: 0; top: 40px; font-weight: normal; color: #111; padding: 15px; border-radius: 5px;
   line-height: 24px; text-align: left; border: 1px solid #d2d2d2; overflow: visible !important;}
 
 .agbutton.story-like-dislike #name-dv #lky #sty-dv a, .agbutton.story-like-dislike #name-dv #lky #dsty-dv a, .agbutton.story-like-dislike #name-dv #dlky #sty-dv a, .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a { padding: 3px; display: inline-block;
@@ -614,17 +615,17 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .leftFirstLogo{ position: absolute; left:0; top:0;}
 .leftPresentingSponsor{ float: left; width:335px; box-sizing: border-box; margin-left:220px; position: relative }
 .leftPresentingSponsor:after{ content:""; position: absolute; right:0; top:2px; height:44px; width:1px; background:#c5c5c5}
-.PreSponsorTxt{ float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0 0 15px}
+.PreSponsorTxt{ float: left; font:normal 12px/14px OpenSans-Regular; color:#525252; margin:11px 0 0 15px}
 .PreSponsorImg{ float: left; margin-left:12px;}
 .rightAssociateSponsor{float: left; width:335px; box-sizing: border-box; }
-.assSponsorTxt{float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0px 0 15px}
+.assSponsorTxt{float: left; font:normal 12px/14px OpenSans-Regular; color:#525252; margin:11px 0px 0 15px}
 .assSponsorImg1{float: left; margin:0px 0 0 30px;}
 
 /* ranking section css */
 
 .ranking-section .wishranking{ width:45%; float:left;border: 1px solid #EAEAEA;padding-bottom: 20px;margin-top:20px;}
 .ranking-section .prvlink{ width:45%; float:right;border: 1px solid #EAEAEA;padding-bottom: 20px;margin-top:20px;}
-.midcontitles,.prvarrtxt {color: #545454;font: 700 17px RobotoSlab-Regular; background: #EAEAEA;padding: 3px 10px;}
+.midcontitles,.prvarrtxt {color: #545454;font: 700 15px OpenSans-Regular; background: #EAEAEA;padding: 3px 10px;}
 .ranking-section ul li{ list-style-image: none; font-size: 14px; color: #545454;font-weight: 400;margin-top:15px;
     padding-left: 10px;list-style: none;}
 
@@ -640,9 +641,9 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 
 /*Over image section */
 .divtopbest { margin-bottom:20px; width:100%; float:left}
-.topimgtxt {font:normal 18px arial; color:#666666; margin-bottom:10px;}
+.topimgtxt {font:normal 18px OpenSans-Regular; color:#666666; margin-bottom:10px;}
 .bestbox {width:33%; float:left; text-align: center;}
-.besthead {text-align:center; margin-top:10px; text-transform:uppercase; color:#666666; font:normal 18px arial;}
+.besthead {text-align:center; margin-top:10px; text-transform:uppercase; color:#666666; font:normal 18px OpenSans-Regular;}
 .besthead a {text-decoration:none; color:#666666;}
 .besthead a:hover { text-decoration:underline}
 
@@ -694,7 +695,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 /* Media Query for same */
 @media only screen  and (min-device-width: 320px)  and (max-device-width: 736px){ 
 .slider_besrCollage img{ min-height:inherit; max-height:inherit;}
-.slider_outer .carousel-caption{position: static;font-size: 18px;line-height: 25px;}
+.slider_outer .carousel-caption{position: static;font-size:18px;line-height: 25px;}
 .slider_outer1 span.rank{font-size: 18px; padding:10px;}
 .slider_outer1 h1{ font-size:25px !important; margin-bottom:10px;}
 .slider_outer1 .remove_padd_right+div{ padding-left: 0px; padding-right: 0px; margin-top:10px;}

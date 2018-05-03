@@ -13,6 +13,7 @@
   <?php print drupal_render($form['field_type']); ?>
   <?php print drupal_render($form['field_match_id']); ?>
   <?php print drupal_render($form['field_story_expires']); ?>
+  <?php print drupal_render($form['field_story_embed_webcast']); ?>
   <?php print drupal_render($form['field_story_snap_post']); ?>
   <?php print drupal_render($form['field_constituancy']); ?>
   <?php //print drupal_render($form['field_content_type']); ?>
@@ -20,10 +21,15 @@
   <?php print drupal_render($form['category_holder']); ?>
 
            </div>
+<div id="content-multi-user-allows">
+    <?php print drupal_render($form['field_multi_user_allows']); ?>
+</div>
 
 <div id="ContentDetails">
     <?php print drupal_render($form['field_breaking_content_details']); ?>
-     </div>
+    <?php print drupal_render($form['field_blog_commentary']); ?>
+    <?php print drupal_render($form['field_blog_city']); ?>
+</div>
 
 <div id="Shortdescriptions">
     <?php print drupal_render($form['field_common_short_description']); ?>
