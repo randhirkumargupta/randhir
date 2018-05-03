@@ -519,6 +519,17 @@ function itgadmin_preprocess_page(&$vars) {
   if (arg(0) == 'event-registration-config' && is_numeric(arg(1))) {
     $vars['theme_hook_suggestions'][] = 'page__registration_config';
   }
+
+   $page_url_blog_except_header_footer = array(
+    'manage-live-blog'
+    , 'itg-live-blog-list'
+    , 'itg-live-blog-row'
+    , 'itg-live-bog-delete'    
+  );
+  if (in_array(arg(0) , $page_url_blog_except_header_footer)) {
+     $vars['theme_hook_suggestions'][] = 'page__relatedcontent';
+  }
+
 }
 
 /**
