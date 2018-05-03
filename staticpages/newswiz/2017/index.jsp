@@ -359,7 +359,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 								</div>
 								<!--end overview -->
 								<script type="text/javascript">
-									ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
+									// ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
 								</script>
 								<div class="row">
 									<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -373,14 +373,14 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                                   <div class="video_info">
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
                                                         <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
                                                         </a> </div>
                                                     </div>
                                                   </div>
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="/video/news-wiz-2017/embed/OTg5MTYy" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MTYy" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
                                                         <p>Episode 1: Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points </p>
                                                         </a> </div>
                                                     </div>
@@ -389,7 +389,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 
                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
                                 <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
                                 </a> </div>
                             </div>
@@ -397,7 +397,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
                                 <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
                                 </a> </div>
                             </div>
@@ -405,7 +405,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
                                 <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
                                 </a> </div>
                             </div>
@@ -861,7 +861,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script>
 <!-- Swiper JS -->
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>
-<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
+<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function(){
