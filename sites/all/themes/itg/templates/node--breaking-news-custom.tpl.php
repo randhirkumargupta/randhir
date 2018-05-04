@@ -84,7 +84,8 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
 </div>
 <?php endif;?>
 <?php } ?>
-<div class="liveBlog-indiatoday">
+<?php $livetv_class = !empty($node->field_blog_commentary[LANGUAGE_NONE]) ? 'livetv-active' : '';  ?>
+<div class="liveBlog-indiatoday <?php print $livetv_class; ?>">
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 liveblog-heading">
      <?php
