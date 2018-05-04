@@ -142,8 +142,13 @@ function lazyloader_image($variables) {
       unset($variables['attributes']['typeof']);
     }
     return '<amp-img' . drupal_attributes($attributes) . '></amp-img>';
-  } 
-
+  }
+  
+  //Remove typeof attribute from image. 
+  if((isset($attributes['typeof'])) && (!empty($attributes['typeof'])) && (!drupal_is_front_page())){
+	  unset($attributes['typeof']);
+  }
+  
   return '<img' . drupal_attributes($attributes) . ' />' . $noscript;
 }
 
@@ -201,9 +206,9 @@ function _lazy_loader_enabled() {
   }
   
   //Lazyloader only on homepage.
-  if (!drupal_is_front_page()) {
-    return FALSE;
-  }
+  //~ if (!drupal_is_front_page()) {
+    //~ return FALSE;
+  //~ }
 
   // Convert path to lowercase. This allows comparison of the same path
   // with different case. Ex: /Page, /page, /PAGE.

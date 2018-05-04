@@ -120,7 +120,7 @@ ul.cntsdtls_q{padding-left:0px}
 .top_advertis { display:none}
 .terms-condition .terms-outer {-webkit-overflow-scrolling: touch; height:300px;}
 .match_info {-webkit-overflow-scrolling: touch;}
-.video_pic.showvideo iframe#videoplayer { height:220px !important;}
+.video_pic.showvideo iframe#videoplayer { height:280px !important;}
 .img-stroke{display:none;}
 ul.social{display:none;}
 .comicon{display:block;}
@@ -230,6 +230,7 @@ ul.headtxt_t {line-height: 22px; font-size: 14px;}
 @media screen and (max-width:320px) {
 	.navArea .topSocIcon ul li.regLink {
     	margin-right: 0px;
+    	font-size:14px;     margin-top: 1px;
  	}
 	.topSocIcon ul li.regLink a {
     	padding: 8px 5px;

@@ -147,7 +147,6 @@ $fb_appid = variable_get('itg_sharing_app_id');
   <?php } ?> 
 </div>
 <div class="timeline">
-    <div class="most-recent">Most Recent</div>
   <?php  
   if (!empty($custom_content)) {
     $breaking_output .= '';

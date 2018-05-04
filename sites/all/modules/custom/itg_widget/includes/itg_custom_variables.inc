@@ -43,9 +43,17 @@ function itg_custom_variables() {
   );
   $form['delete_pti_xmlfile_days'] = array(
     '#type' => 'textfield',
-    '#title' => t('Delete PTI Xml FileName From DB (In Dyas)'),
+    '#title' => t('Delete PTI Xml FileName From DB (In Days)'),
     '#default_value' => get_itg_variable('delete_pti_xmlfile_days'),
     '#size' => 20,
+    '#maxlength' => 20,
+  );
+  $form['election_graph_refreshtime'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Graph refresh Time'),
+    '#default_value' => get_itg_variable('election_graph_refreshtime'),
+    '#size' => 20,
+    '#required' => FALSE,
     '#maxlength' => 20,
   );
   $form['submit_button'] = array(
