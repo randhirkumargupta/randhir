@@ -1,6 +1,8 @@
 @charset "utf-8";
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100); /*** font-family: 'Roboto Slab', serif; ***/
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,500,500italic); /*** font-family: 'Roboto', sans-serif; ***/
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100);
+ /*** font-family: 'Roboto Slab', serif; ***/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,400italic,500,500italic);
+/*** font-family: 'Roboto', sans-serif; ***/
 /*** GENRAL CSS ***/
 body { margin:0px; padding:0px; font-family: 'Roboto Slab', serif; font-weight:400; font-size:15px; color:#181818; 
 background:#f8f8f8 /*url(http://media2.intoday.in/indiatoday/resources/newswiz/newimages/body-bg.png) no-repeat center 200px*/;}
@@ -430,7 +432,7 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
 .topSocIcon ul li.regLink a:focus { text-decoration:none}
 
 
-.video_pic.showvideo iframe#videoplayer {height: 405px !important;}
+.video_pic.showvideo iframe#videoplayer {height:525px !important;}
 .term-lft ul li em{width: 100%; border: 0; text-align: left; font-weight: bold; font-size: 16px; line-height: 20px; font-style:normal;}
 .auth_newswiz_q h3,.auth_newswiz_q h3 span{font-size: 33px;font-weight: bold;}
 .auth_newswiz_q h3{color:#000;}
