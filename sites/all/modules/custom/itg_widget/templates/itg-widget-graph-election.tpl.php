@@ -112,11 +112,9 @@
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
                         var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
                         var state_name = "<?php echo $state_name; ?>";
-                         hmelection(state_name, '1',svg_path,chart_path);
-                         setInterval(function(){
-                           hmelection(state_name, '1',svg_path,chart_path);
-                         }, 30000);
-                      });       
+                        var refresh_time = "<?php echo (!empty(get_itg_variable('election_graph_refreshtime')) ? get_itg_variable('election_graph_refreshtime') : 3000); ?>";
+                         hmelection(state_name, '1',svg_path,chart_path, refresh_time);
+                      });      
                       </script>
                       <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
                         
