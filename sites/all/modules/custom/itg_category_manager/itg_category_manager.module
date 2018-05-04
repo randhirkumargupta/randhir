@@ -1109,7 +1109,9 @@ function itg_category_manager_taxonomy_term_presave($term) {
     if (arg(0) == 'taxonomy' && arg(3) == 'edit') {
       $term->field_cm_select_type['und'] = array_merge($term->original->field_cm_select_type['und'], $term->field_cm_select_type['und']);
     }
-    
+    if($term->op == 'Save' && $term->path['pathauto'] == 0){
+      $term->path['alias'] = itg_category_manager_custom_path($term->path['alias']);
+    }
    }
 }
 
