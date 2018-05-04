@@ -34,7 +34,7 @@ function zd_get_placements(){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
+<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
 <script type='text/javascript'>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
@@ -125,7 +125,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
       <div class="row">
        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 text-center left_part_2017">
        	<div class="logo_2017">
-           <a href="http://indiatoday.intoday.in/newswiz/2017/" title="Newswiz 2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/logo_2017.png" alt="" class="logo_new"></a>
+           <a href="http://indiatoday.intoday.in/newswiz/2017/" title="Newswiz 2"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/logo_2017.png" alt="" class="logo_new"></a>
        	</div>
        </div>
 	 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 hidden-xs text-right">
@@ -137,9 +137,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
        </div>
 
 	 <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-     <div class="img_text_bgqz text-center"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/masthead-heading-mobile.png" alt=""></div>
+     <div class="img_text_bgqz text-center"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/masthead-heading-mobile.png" alt=""></div>
      <div class="img_text_date text-center">
-     	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/Mobile-date.png" alt="">
+     	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/Mobile-date.png" alt="">
 
      </div>
 	 </div>
@@ -162,9 +162,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="topSocIcon mobIcon">
               <ul>
               <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
-                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
               </ul>
             </div>
             <!--end responsive menu -->
@@ -198,9 +198,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="topSocIcon">
               <ul>
               <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
-                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
               </ul>
             </div>
           </div>
@@ -231,7 +231,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
+        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
       </div>
     </div>
   </div>
@@ -329,7 +329,7 @@ a.active_h{background:#353333}
 		<!--<div class="right_advertis">
                   
                   <div class="middle_quiz" style="box-shadow:none">
-                    <div class="banner_sec marginbtm10"> <a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
+                    <div class="banner_sec marginbtm10"> <a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
                     
                     
                   </div>
@@ -342,7 +342,7 @@ a.active_h{background:#353333}
 			<div class="presen_area">
 				<h4>Presented By</h4>
 				<div class="presen_logo">
-					<!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
+					<!--<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
 				</div>
 			</div>
 			<div class="tally_info">
@@ -372,7 +372,7 @@ a.active_h{background:#353333}
 			<div class="presen_area">
 				<h4>Presented By</h4>
 				<div class="presen_logo">
-					<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> 
+					<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> 
 				</div>
 			</div>
 			
@@ -409,7 +409,7 @@ a.active_h{background:#353333}
 					<span class="img-stroke"></span>
 					<div class="circular_win">
 						<img
-							src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/raj_deep.jpg"
+							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg"
 							alt="Rajdeep">
 					</div>
 					<div class="header_win">RAJDEEP SARDESAI</div>
@@ -430,7 +430,7 @@ a.active_h{background:#353333}
 					<span class="img-stroke"></span>
 					<div class="circular_win">
 						<img
-							src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
+							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
 							alt="Rajdeep">
 					</div>
 					<div class="header_win">SIDDHARTHA BASU</div>
@@ -459,7 +459,7 @@ a.active_h{background:#353333}
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
             <div class="header_win">RAJDEEP SARDESAI</div>
             <div class="container_wiz">
               <p> News and Quiz come together in a fantastic battle of brains. Rajdeep Sardesai who has spent his life in news will be at the helm of the first-of-its-kind quiz show - NewsWiz. There is no one better equipped than Rajdeep to host such a show considering that he has spent 26 years reporting, editing and anchoring news. </p>
@@ -468,7 +468,7 @@ a.active_h{background:#353333}
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
             <div class="header_win">SIDDHARTHA BASU </div>
             <div class="container_wiz">
               <p>Basu is the undisputed quiz man of India. He is the pioneer who hosted and produced the iconic Quiz Time on Doordarshan and also produced the marquee Kaun Banega Crorepati. He has been the mind behind Mastermind India, University Challenge and India's Child Genius. Now for the first time on news television in India, he is bringing a news-based quiz show.</p>
@@ -491,40 +491,40 @@ a.active_h{background:#353333}
                   <h2><a href="/newswiz/2017/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-rules.jsp" title="Rules">Rules &amp; Regulations</a></h2>
+                  <h2><a href="/newswiz/2017/newswiz-rules.jsp" title="Rules">Rules &amp; Regulations</a></h2>
                 </div>
                 <!--<div class="swiper-slide">
                   <h2><a href="newswiz-schedule.jsp" title="Schedule" class="active">Schedule</a></h2>
                 </div>-->
                 <div class="swiper-slide">
-                  <h2><a href="newswiz-faq.jsp" title="FAQS">FAQS</a></h2>
+                  <h2><a href="/newswiz/2017/newswiz-faq.jsp" title="FAQS">FAQS</a></h2>
                 </div>
                 <!--<div class="swiper-slide">
                   <h2><a href="all-teams.jsp" title="Schedule">Teams</a></h2>
                 </div>-->
                 <div class="swiper-slide">
-                  <h2><a href="episodes.jsp" title="Show Videos">Show Videos</a></h2>
+                  <h2><a href="/newswiz/2017/episodes.jsp" title="Show Videos">Show Videos</a></h2>
                 </div>
                 <div class="swiper-slide comicon">
-                  <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
+                  <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
                 </div>
                 <div class="swiper-slide comicon">
-                  <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
+                  <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
                 </div>
                 <div class="swiper-slide comicon">
-                  <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
+                  <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
                 </div>
                 <!--<div class="swiper-slide comicon">
-                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
+                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
                 </div> --> 
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <ul class="social">
-              <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-              <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-              <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+              <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+              <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+              <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
               <!--<li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="newimages/rss.png" alt="rss"></a></li> -->
             </ul>
           </div>
@@ -551,8 +551,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
               <div class="foot_partner">
                 <h3>Partners</h3>
                 <ul>
-                  <li class="big_logo"><img alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/big-synrgy.jpg"></li>
-                  <li class="tree_logo"><img alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/tree_logo.jpg"></li>
+                  <li class="big_logo"><img alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/big-synrgy.jpg"></li>
+                  <li class="tree_logo"><img alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/tree_logo.jpg"></li>
                 </ul>
               </div>
               <!--end footer sponser --> 
@@ -566,20 +566,20 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="col-md-2 col-sm-2 col-xs-12">
               <h3>PUBLICATIONS:</h3>
               <ul>
-                <li><a target="_blank" title="India Today" href="http://indiatoday.intoday.in/">India Today</a></li>
-                <li><a title="India Today - Hindi" href="http://subscriptions.intoday.in/subscriptions/itoday/ith_offer.jsp?source=website" target="_blank">India Today - Hindi </a></li>
-                <li><a title="Business Today " href="http://businesstoday.intoday.in/" target="_blank">Business Today </a></li>
-                <li><a title="Cosmopolitan" href="http://cosmo.intoday.in/" target="_blank">Cosmopolitan </a></li>
-                <li><a title="Men's Health" href="http://menshealth.intoday.in/" target="_blank">Men's Health </a></li>
-                <li><a title="Wonder Woman" href="http://www.wonderwoman.in/" target="_blank">Wonder Woman</a></li>
-                <li><a title="Money Today" href="http://moneytoday.intoday.in/" target="_blank">Money Today </a></li>
+                <li><a target="_blank" title="India Today" href="https://indiatoday.in/">India Today</a></li>
+                <li><a title="India Today - Hindi" href="https://subscriptions.intoday.in/subscriptions/itoday/ith_offer.jsp?source=website" target="_blank">India Today - Hindi </a></li>
+                <li><a title="Business Today " href="https://businesstoday.intoday.in/" target="_blank">Business Today </a></li>
+                <li><a title="Cosmopolitan" href="https://cosmo.intoday.in/" target="_blank">Cosmopolitan </a></li>
+                <li><a title="Men's Health" href="https://menshealth.intoday.in/" target="_blank">Men's Health </a></li>
+                <li><a title="Wonder Woman" href="https://www.wonderwoman.in/" target="_blank">Wonder Woman</a></li>
+                <li><a title="Money Today" href="https://moneytoday.in/" target="_blank">Money Today </a></li>
                <!--  <li><a title="Prevention" href="http://preventionindia.in/issue.html" target="_blank">Prevention</a></li> -->
-                <li><a title="Reader's Digest" href="http://www.rd-india.com/newsite/home/home.asp" target="_blank"> Reader's Digest </a></li>
-                <li><a title="Good Housekeeping" href="http://www.indiatodaygroup.com/goodhouse/issue.html" target="_blank">Good Housekeeping </a></li>
-                <li><a title="Travel Plus" href="http://travelplus.intoday.in/" target="_blank">Travel Plus</a></li>
-                <li><a title="Golf Digtest India" href="http://www.golfdigestindia.com/" target="_blank">Golf Digtest India</a></li>
-                <li><a title="Design Today" href="http://specials.indiatoday.com/design/issue.html" target="_blank">Design Today</a></li>
-                <li><a title="Time" href="http://subscriptions.digitaltoday.in/subscriptions/time/subscription.html" target="_blank">Time </a></li>
+                <li><a title="Reader's Digest" href="https://www.rd-india.com/newsite/home/home.asp" target="_blank"> Reader's Digest </a></li>
+                <li><a title="Good Housekeeping" href="httsp://www.indiatodaygroup.com/goodhouse/issue.html" target="_blank">Good Housekeeping </a></li>
+                <li><a title="Travel Plus" href="https://travelplus.intoday.in/" target="_blank">Travel Plus</a></li>
+                <li><a title="Golf Digtest India" href="https://www.golfdigestindia.com/" target="_blank">Golf Digtest India</a></li>
+                <li><a title="Design Today" href="https://specials.indiatoday.com/design/issue.html" target="_blank">Design Today</a></li>
+                <li><a title="Time" href="https://subscriptions.digitaltoday.in/subscriptions/time/subscription.html" target="_blank">Time </a></li>
                <!--  <li><a title="Harvard Business Review" href="http://www.hbrsasia.org/" target="_blank">Harvard Business Review</a></li> -->
                 <li><a title="Gadgets &amp; Gizmos" href="http://www.gadgetsngizmos.in/" target="_blank">Gadgets &amp; Gizmos </a></li>
               </ul>
@@ -587,26 +587,25 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="col-md-2 col-sm-2 col-xs-12">
               <h3>TELEVISION:</h3>
               <ul>
-                <li><a title="Aaj Tak" href="http://aajtak.intoday.in/" target="_blank">Aaj Tak</a></li>
-                <li><a title="Delhi Aaj Tak" href="http://aajtak.intoday.in/dilliaajtak/" target="_blank">Delhi Aaj Tak</a></li>
-                <li><a title="Tez" href="http://aajtak.intoday.in/tez/" target="_blank">Tez</a></li>
+                <li><a title="Aaj Tak" href="https://aajtak.intoday.in/" target="_blank">Aaj Tak</a></li>
+                <li><a title="Delhi Aaj Tak" href="https://aajtak.intoday.in/dilliaajtak/" target="_blank">Delhi Aaj Tak</a></li>
+                <li><a title="Tez" href="https://aajtak.intoday.in/tez/" target="_blank">Tez</a></li>
               </ul>
               <h3>RADIO:</h3>
               <ul>
-                <li><a title="Oye! 104.8FM" href="http://oyefm.in/" target="_blank">Oye! 104.8FM</a></li>
+                <li><a title="Oye! 104.8FM" href="https://oyefm.in/" target="_blank">Oye! 104.8FM</a></li>
               </ul>
             </div>
             <div class="col-md-2 col-sm-2 col-xs-12">
               <h3>EDUCATION:</h3>
               <ul>
-                <li><a title="Vasant Valley" href="http://www.vasantvalley.org/vasantvalley/default.shtml" target="_blank">Vasant Valley</a></li>
-                <li><a title="Online Courses" href="http://learntoday.in/" target="_blank">Online Courses</a></li>
-                <li><a title="India Today Education" href="http://education.intoday.in/" target="_blank">India Today Education</a></li>
+                <li><a title="Vasant Valley" href="https://www.vasantvalley.org/vasantvalley/default.shtml" target="_blank">Vasant Valley</a></li>
+                <li><a title="Online Courses" href="https://learntoday.in/" target="_blank">Online Courses</a></li>
+                <li><a title="India Today Education" href="https://education.intoday.in/" target="_blank">India Today Education</a></li>
               </ul>
               <h3>ONLINE SHOPPING:</h3>
-              <ul>
-                <li><a title="Bag It Today" href="http://www.bagittoday.com/" target="_blank">Bag It Today</a></li>
-                <li><a title="India Today Diaries" href="http://www.indiatodaydiaries.com/" target="_blank">India Today Diaries</a></li>
+              <ul>              
+                <li><a title="India Today Diaries" href="https://www.indiatodaydiaries.com/" target="_blank">India Today Diaries</a></li>
               </ul>
             </div>
             <div class="col-md-2 col-sm-2 col-xs-12">
@@ -614,10 +613,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
               <ul>
                 <li><a title="Agenda Aajtak" href="http://aajtak.intoday.in/agenda-aajtak/" target="_blank">Agenda Aajtak</a></li>
                 <li><a title="India Today Conclave" href="http://www.indiatodayconclave.com/" target="_blank">India Today Conclave</a></li>
-                <li><a title="India Today Woman's Summit" href="http://indiatoday.in/womansummit/index.php" target="_blank">India Today Woman's Summit</a></li>
-                <li><a title="India Today Youth Summit" href="http://www.indiatoday.in/youthsummit" target="_blank">India Today Youth Summit</a></li>
-                <li><a title="State Of The States Conclave" href="http://indiatoday.intoday.in/state-of-the-states/2015/" target="_blank">State Of The States Conclave</a></li>
-                <li><a title="India Today Education Summit" href="http://indiatoday.intoday.in/educationsummit/" target="_blank">India Today Education Summit</a></li>
+                <li><a title="India Today Woman's Summit" href="https://indiatoday.in/womansummit/index.php" target="_blank">India Today Woman's Summit</a></li>
+                <li><a title="India Today Youth Summit" href="https://www.indiatoday.in/youthsummit" target="_blank">India Today Youth Summit</a></li>
+                <li><a title="State Of The States Conclave" href="http://indiatoday.in/state-of-the-states/2015/" target="_blank">State Of The States Conclave</a></li>
+                <li><a title="India Today Education Summit" href="http://indiatoday.in/educationsummit/" target="_blank">India Today Education Summit</a></li>
               </ul>
             </div>
             <div class="col-md-2 col-sm-2 col-xs-12">
@@ -642,12 +641,12 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
               </ul>
               <h3>DISTRIBUTIONS:</h3>
               <ul>
-                <li><a title="Rate Card" href="http://indiatoday.intoday.in/" target="_blank">Rate Card</a></li>
+                <li><a title="Rate Card" href="http://aajtak.intoday.in/distribution/index.php" target="_blank">Rate Card</a></li>
               </ul>
               <h3>USEFUL LINKS:</h3>
               <ul>
                 <li><a title="Partners" href="http://indiatoday.intoday.in/site/partners.jsp" target="_blank">Partners</a></li>
-                <li><a title="Press Release" href="http://indiatoday.intoday.in/prnewswire/index.jsp" target="_blank">Press Release</a></li>
+                <li><a title="Press Release" href="http://indiatoday.intoday.in/prnewswire/" target="_blank">Press Release</a></li>
               </ul>
             </div>
           </div>
@@ -697,10 +696,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 </div>
 <!-- jQuery Bootstrap--> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
 <!-- Swiper JS --> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
-<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
+<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script> 
 <script type="text/javascript">
 
     $(document).ready(function(){
