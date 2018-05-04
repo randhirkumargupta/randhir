@@ -150,7 +150,8 @@ function getmsn_story_section_array() {
     'msn/indiatoday/story-auto.xml' => 1206689,
     'msn/mailtoday/story-education.xml' => 1206666,
     'msn/mailtoday/story-television.xml' => 1206796,
-    'msn/mailtoday/story-latest-of-the-lot.xml' => 1206723
+    'msn/mailtoday/story-latest-of-the-lot.xml' => 1206723,
+    'msn/indiatoday/from-india-today-magazine.xml' => 1206598
       
       
   );
