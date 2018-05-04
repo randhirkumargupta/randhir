@@ -115,7 +115,7 @@
                          hmelection(state_name, '1',svg_path,chart_path);
                          setInterval(function(){
                            hmelection(state_name, '1',svg_path,chart_path);
-                         }, 3000);
+                         }, 30000);
                       });       
                       </script>
                       <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
