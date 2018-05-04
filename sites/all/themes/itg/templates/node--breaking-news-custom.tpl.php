@@ -233,6 +233,7 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
 endif;
 ?>
 </div>
+<?php /*
   <script>
     setInterval(check_updates_blog, 40000);
     function check_updates_blog() {
@@ -251,7 +252,9 @@ endif;
                });
              }        
      }
-  </script>          
+  </script>
+
+ */ ?>          
   </div>
 </div>
 </div>
