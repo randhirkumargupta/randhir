@@ -147,10 +147,12 @@
                 <div class="statesvg-map">
                      <span id = "hmelect-<?php echo $state_name;?>" onclick="openStateHref('up');"  class="tallyChartImageCursor"></span>
                      <script type="text/javascript">
-                       var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
-                       var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
-                       var state_name = "<?php echo $state_name; ?>";
-                        hmelection(state_name, '1',svg_path,chart_path);
+                       jQuery(document).ready(function(){
+                        var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
+                        var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
+                        var state_name = "<?php echo $state_name; ?>";
+                         hmelection(state_name, '1',svg_path,chart_path);
+                       });                        
                       </script>
                       <div class="statename" ><span class="stateNameText" onclick="openStateHref('up');" rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
                          <?php
