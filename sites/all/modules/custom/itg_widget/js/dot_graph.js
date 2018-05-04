@@ -24,7 +24,7 @@ function hmelectioninner(a, x, chart_path, refresh_time) {
         }});
 
     setTimeout(function () {
-        console.log(refresh_time);
+        console.log(refresh_time, 'refresh_time');
         hmelectioninner(b, 2, chart_path)
     }, parseInt(refresh_time));
 }
