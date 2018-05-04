@@ -152,9 +152,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     if (empty($story_title)) {
                       $display_title = 'style="display:none"';
                     }
-                     if (!empty($story_title[0]['uri'])) {
-											 $src = file_create_url($story_title[0]['uri']);
-										 }
+                    if (!empty($story_title[0]['uri'])) {
+                      $src = file_create_url($story_title[0]['uri']);
+                    }
                     echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
                                 <ul>
                                     <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
