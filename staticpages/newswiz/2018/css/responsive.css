@@ -230,6 +230,7 @@ ul.headtxt_t {line-height: 22px; font-size: 14px;}
 @media screen and (max-width:320px) {
 	.navArea .topSocIcon ul li.regLink {
     	margin-right: 0px;
+    	font-size:14px;     margin-top: 1px;
  	}
 	.topSocIcon ul li.regLink a {
     	padding: 8px 5px;
