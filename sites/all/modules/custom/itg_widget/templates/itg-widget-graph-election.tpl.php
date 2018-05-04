@@ -106,24 +106,18 @@
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>" onclick="openStateHref('up');"  class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>"   class="tallyChartImageCursor"></span>
                      <script type="text/javascript">
-                       var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
-                       var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
-                       var state_name = "<?php echo $state_name; ?>";
-                        hmelection(state_name, '1',svg_path,chart_path);
+                       document.addEventListener("DOMContentLoaded", function(event) { 
+                        var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
+                        var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
+                        var state_name = "<?php echo $state_name; ?>";
+                        var refresh_time = "<?php echo (!empty(get_itg_variable('election_graph_refreshtime')) ? get_itg_variable('election_graph_refreshtime') : 3000); ?>";
+                         hmelection(state_name, '1',svg_path,chart_path, refresh_time);
+                      });      
                       </script>
-                      <div class="statename" ><span class="stateNameText" onclick="openStateHref('up');" rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
-                         <?php
-                                  print '<div class="social-share">
-                                         <ul>
-                                             <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                             <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                             <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                                             <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
-                                         </ul>
-                                     </div>';
-                         ?>
+                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
+                        
                       </div>
                   </div>
                     <span id = "fhs-<?php echo $state_name;?>"></span>
