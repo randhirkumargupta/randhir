@@ -468,7 +468,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <div class="team_area">
-                        <h2><a href="all-teams.jsp"><span>teams</span></a> </h2>
+                        <h2><a href="/newswiz/2016/all-teams.jsp"><span>teams</span></a> </h2>
                         <div class="team_info">
                           <div class="match_table">
                             <div class="match_info">

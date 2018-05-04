@@ -224,7 +224,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="video_area">
                           <h2>
-                            <a href="episodes.jsp" title="Second section"><span>Second Season Highlights</span></a>
+                            <a href="/newswiz/2017/episodes.jsp" title="Second section"><span>Second Season Highlights</span></a>
                           </h2>
                                                   <div class="video_info">
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

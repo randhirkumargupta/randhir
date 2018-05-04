@@ -367,7 +367,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 												<div class="video_area">
 													<h2>
-														<a href="episodes.jsp" title="The Show"><span>The
+														<a href="/newswiz/2017/episodes.jsp" title="The Show"><span>The
 																Show</span></a>
 													</h2>
                                                   <div class="video_info">
@@ -591,7 +591,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 					<div class="circular_win">
 						<img
 							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
-							alt="Rajdeep">
+							alt="sidharth">
 					</div>
 					<div class="header_win">SIDDHARTHA BASU</div>
 					<div class="container_wiz">
