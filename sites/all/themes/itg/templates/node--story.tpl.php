@@ -620,8 +620,9 @@ if (!empty($content)):
                                 $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             }
                             if (file_exists($story_image)) {
-                                $file_uri = file_create_url($story_image);
-                                print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                                //$file_uri = file_create_url($story_image);
+                                //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                                <?php print theme('image', array('path' => $story_image, 'alt' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'], 'title' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])); ?>
                             }
                             //else {
                               //  $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
