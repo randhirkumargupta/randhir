@@ -24,8 +24,7 @@ function hmelectioninner(a, x, chart_path, refresh_time) {
         }});
     if(refresh_time === undefined){refresh_time = 3000;}
     setTimeout(function () {
-        console.log(refresh_time, 'refresh_time');
-        hmelectioninner(b, 2, chart_path)
+        hmelectioninner(b, 2, chart_path, refresh_time)
     }, parseInt(refresh_time));
 }
 
@@ -40,7 +39,7 @@ function hmelection(a, type, json_path, chart_path, refresh_time) {
         crossDomain: true,
         jsonpCallback: 'ehmfh_' + a.replace("-", ""),
         success: function (data) {
-            //console.log(data.loksabha.htm);
+            //console.log(refresh_time, 'refresh_time11');
             jQuery("#hmelect-" + a).html(data.loksabha.htm);
             //console.log("#hmelect-"+data.loksabha.htm);
             hmelectioninner(b, 1, chart_path, refresh_time);
