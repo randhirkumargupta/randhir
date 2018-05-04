@@ -23,9 +23,9 @@ function hmelectioninner(a, x, chart_path) {
 
         }});
 
-    setTimeout(function () {
-        hmelectioninner(b, 2, chart_path)
-    }, 3000);
+//    setTimeout(function () {
+//        hmelectioninner(b, 2, chart_path)
+//    }, 3000);
 }
 
 function hmelection(a, type, json_path, chart_path) {
