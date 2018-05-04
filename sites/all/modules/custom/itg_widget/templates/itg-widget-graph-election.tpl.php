@@ -91,7 +91,7 @@
     </div>
     <?php }elseif ($row->field_graph_type_value == 'Dot Graph') { ?>
 
-      <div class="<?php echo $classrow; ?> mt-50">
+      <div class="<?php echo $classrow; ?>">
        <?php
          $json_path = $row->field_election_svg_json_url_value;
          $from = "fullhousemap-";

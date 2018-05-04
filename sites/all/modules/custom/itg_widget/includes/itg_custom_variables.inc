@@ -43,7 +43,7 @@ function itg_custom_variables() {
   );
   $form['delete_pti_xmlfile_days'] = array(
     '#type' => 'textfield',
-    '#title' => t('Delete PTI Xml FileName From DB (In Dyas)'),
+    '#title' => t('Delete PTI Xml FileName From DB (In Days)'),
     '#default_value' => get_itg_variable('delete_pti_xmlfile_days'),
     '#size' => 20,
     '#maxlength' => 20,
