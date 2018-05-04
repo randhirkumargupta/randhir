@@ -114,6 +114,7 @@ function itg_indiatoday_yahoo_unionbudget2018_section() {
  */
 function getmsn_story_section_array() {
   $msn_story = array(
+    'msn/indiatoday/story-movies.xml' => 1206533,
     'msn/indiatoday/story-travel.xml' => 1206589,
     'msn/indiatoday/story-food.xml' => 1206793,
     'msn/indiatoday/story-lifestyle.xml' => 1206567,
@@ -142,11 +143,11 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-states.xml' => 1207682,
     'msn/mailtoday/story-entertainment.xml' => 1207680,
     'msn/mailtoday/story-cricket.xml' => 1208384,
-    'msn/mailtoday/story-world.xml' => 1206577,
-    'msn/mailtoday/story-india.xml' => 1206578,
-    'msn/mailtoday/story-top-stories.xml' => 1206584,
-    'msn/mailtoday/story-technology.xml' => 1206688,
-    'msn/mailtoday/story-auto.xml' => 1206689,
+    'msn/indiatoday/story-world.xml' => 1206577,
+    'msn/indiatoday/story-india.xml' => 1206578,
+    'msn/indiatoday/story-top-stories.xml' => 1206584,
+    'msn/indiatoday/story-technology.xml' => 1206688,
+    'msn/indiatoday/story-auto.xml' => 1206689,
     'msn/mailtoday/story-education.xml' => 1206666
   );
   return $msn_story;
@@ -535,6 +536,30 @@ function get_content_fetch_time($section_id) {
 function get_factiva_sections() {
   return array('1206578' => 'india.xml',
     '-1' => 'latest-news.xml');
+}
+function get_factiva_sections_v1() {
+  return array(
+      '1206578' => 'india.xml',
+      '1206577' => 'world.xml',
+      '1206795' => 'fyi.xml',
+      '1206567' => 'lifestyle.xml',
+      '1206723' => 'latest-of-the-lot.xml',
+      '1206584' => 'top-stories.xml',
+      '1206572' => 'mail-today.xml',
+      '1206674' => 'home-top.xml',
+      '1206688' => 'technology.xml',
+      '1206689' => 'auto.xml',
+      '1206676' => 'cricket.xml',
+      '1206638' => 'must-read.xml',
+      '1206670' => 'buzz-tool.xml',
+      '1206733' => 'msn-it.xml',
+      '1206735' => 'msn-itt.xml',
+      '1207926' => 'food.xml',
+      '1206589' => 'travel.xml',
+      '1206550' => 'sports.xml',
+      '1206796' => 'television.xml',
+      '1206734' => 'msn-mail-today.xml',
+      );
 }
 
 

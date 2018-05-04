@@ -340,9 +340,29 @@ function itg_ugc_form_alter(&$form, &$form_state, $form_id) {
     foreach ($tax as $key => $val) {
       $op[$val->tid] = $val->name;
     }
-
-    $form['field_section']['#title'] = array('All' => '- Any -');
+		$cat_op = array("" => "-- Category --");
+    if (isset($form_state['values']) && !empty($form_state['values']['field_section']['und'][0]['tid'])) {
+		$section_id = $form_state['values']['field_section']['und'][0]['tid'];
+		$cat_op = get_category_of_associate_tpl('special', $section_id); 
+		}
+		//~ var_dump(arg(1), $form['field_section']['und']['#entity']->field_graph_category['und'][0]['value']);die;
+		if(arg(1) != 'ajax' && !empty($form['field_section']['und']['#entity']->field_section['und'][0]['tid'])){
+		$section_id = $form['field_section']['und']['#entity']->field_section['und'][0]['tid'];
+		$cat_op = get_category_of_associate_tpl('special', $section_id); 
+		}
+		if(isset($form['field_graph_category']['und']['#entity']->field_graph_category['und'][0]['value'])){
+			$form['field_graph_category']['und']['#default_value'] = $form['field_graph_category']['und']['#entity']->field_graph_category['und'][0]['value'];
+		}
+			
+		$form['field_section']['#title'] = array('All' => '- Any -');
     $form['field_section']['und']['#options'] = $op;
+    $form['field_graph_category']['und']['#options'] = $cat_op;
+    $form['field_graph_category']['und']['#prefix'] = '<div id="election_category_wrapper">';
+    $form['field_graph_category']['und']['#suffix'] = '</div>';
+    //~ $form['field_section']['und']['#ajax'] = array(
+        //~ 'callback' => 'election_category_ajax_callback',
+        //~ 'wrapper' => 'election_category_wrapper',
+      //~ );
   }
 
   if ($form_id == 'ugc_node_form') {
@@ -1169,4 +1189,8 @@ function itg_ugc_sect_pri_category_opts($all_section, $category_id) {
     }
   }
   return $return;
+}
+
+function election_category_ajax_callback($form, &$form_state){
+	return $form['field_graph_category'];
 }

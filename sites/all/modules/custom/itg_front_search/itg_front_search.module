@@ -20,6 +20,13 @@ function itg_front_search_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'include/itg_front_search.inc',
   );
+  
+  $items['itgd/%'] = array(
+    'page callback' => 'itgd_speed_test_page',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -46,7 +53,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
     
     $form['keyword']['#suffix'] = '<div class="s-link"><a id="search_button"><i class="fa fa-search"></i></a><a id="reset_button"><i class="fa fa-times"></i></a></div>';
     
-    $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Blog' => 'Blog', 'photogallery' => 'Photos', 'Video' => 'Videos', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
+    /*$bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Blog' => 'Blog', 'photogallery' => 'Photos', 'Video' => 'Videos', 'Podcast' => 'Podcast', 'Magazine' => 'Magazine');
     $form['bundle_name']['#type'] = 'select';
     $form['bundle_name']['#options'] = $bundle_name;
     $form['bundle_name']['#size'] = 5;
@@ -95,7 +102,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       '#attributes' => array(
         'readonly' => 'readonly'
       ),
-    );
+    );*/
   }
 
   // handler for topic serach
@@ -609,4 +616,8 @@ function topic_form_submit_handler($form, &$form_state) {
   $options = array('query' => $search_key);
   drupal_goto($search_web_url, $options);
   */ 
+}
+
+function itgd_speed_test_page($keyword){
+	return $keyword;
 }

@@ -1,3 +1,6 @@
+<!--[if IE]>
+  <style>#twister{display:none}</style>
+<![endif]-->
 <?php
 /**
  * @file
@@ -85,20 +88,36 @@ if ($theme != 'itgadmin') {
                       <div class="widget-help-text"><?php print t('Template widgets'); ?> ( <strong><?php print t('Home Page Election'); ?></strong> )</div>
                       <div class="itg-widget">
                           <div class="droppable <?php print $gray_bg_layout; ?>">
-                              <div class="widget-wrapper <?php print $widget_data['itg-block-0']['widget_name']; ?>">
+                              <div class="widget-wrapper">
+                                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-0']['block_title'])) { ?>
+                                    <h4 class="heading"><?php print $widget_data['itg-block-0']['block_title']; ?></h4>
+                                          <?php } ?>
+                                  <!-- for admin  -->
+                                          <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                    <div class="widget-settings">
+                                        <div class="widget-title-wrapper">
+<?php if (isset($widget_data['itg-block-0']['block_title'])) { ?>
+                                              <span class="widget-title" data-id="itg-block-0"><?php print $widget_data['itg-block-0']['block_title']; ?></span>
+<?php } ?>
+                                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-0']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
+                                        </div>
+                                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                        <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-0"><i class="fa fa-times"></i></a></span>
+                                    </div>
+                                      <?php } ?> 
                                   <div class="data-holder" id="itg-block-0">
                                       <?php
-                                      if (isset($widget_data['itg-block-0']['widget'])) {
+                                      if (isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) {
                                         print $widget_data['itg-block-0']['widget'];
                                       }
-                                      else { ?>
-                                        <div class="widget-placeholder"><span><?php print t('Home Election'); ?></span></div>
-                                     <?php }
+                                      else {
+                                        print '<div class="widget-placeholder"><span>' . t('Home page election') . '</span></div>';
+                                      }
                                       ?>
                                   </div>
-                              </div>
-                          </div>
-                      </div>
+                              </div>             
+                          </div>               
+                        </div>
                   </div>
                 <?php } ?>
                 <!-- End of Breaking news band -->
@@ -173,8 +192,9 @@ if ($theme != 'itgadmin') {
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-4 top-rhs-add">
+                          <div class="row">
                             <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
-                            <div class="col-sm-6 col-lg-12 top-rhs-add-child">
+                            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-12 top-rhs-add-child">
                                 <div class="itg-widget">
                                     <div class="ad-widget">
                                         <div class="sidebar-ad">
@@ -187,7 +207,26 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-12 home-trending-video">
+                            <!-- replace home-trending-video if webcast enable -->
+                            <?php if (!empty(get_itg_variable('itg_webcast_status', 0))):?>
+															<div class="col-xs-12 col-sm-6 col-md-7 col-lg-12 home-trending-video">
+                                <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
+                                <span class="widget-title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url'), array('attributes' => array('target' => '_blank'))); ?></h3></span>
+                                <?php }else { ?>
+                                <span class="widget-title"><h3><?php print get_itg_variable('itg_webcast_title') ?></h3></span>
+                                <?php } ?>
+                                <div class='live-webcast-coverage'>
+                                  <?php print get_itg_variable('itg_webcast_iframe'); ?>
+                                </div>
+                                <?php if (!empty(get_itg_variable('itg_content_webcast_url'))) { ?>
+                                <div class="webcast_link webcast_title"><h3><?php print l(get_itg_variable('itg_content_webcast_title'), get_itg_variable('itg_content_webcast_url'), array('attributes' => array('target' => '_blank'))); ?></h3></div>
+                                <?php }else { ?>
+                                <div class="webcast_title"><h3><?php print get_itg_variable('itg_content_webcast_title') ?></h3></div>
+                                <?php } ?>
+															</div>
+                            <!-- replace home-trending-video if webcast enable end here -->
+                            <?php else: ?>
+                            <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12 home-trending-video">
                                 <div class="widget-help-text">Template widgets(<strong>Trending Videos &amp; Top Takes</strong>)</div>
                                 <div class="tab-buttons">
                                     <span data-class="itg-block-5" data-id="tab-data-1" class="active">
@@ -273,8 +312,10 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
+                            <?php endif;?>
                         </div>
                     </div>
+                  </div>
                 </div>
                 <?php
                 /*if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {
@@ -1028,3 +1069,10 @@ if ($theme != 'itgadmin') {
         <p><?php print t('Your Account Activated Successfully!'); ?></p>
     </div>
 </div>
+<?php 
+$ipl_triangle_status = itg_ipl_triangle_status(); 
+if ($ipl_triangle_status['score_triangle'] == 1) {
+echo $ipl_triangle_status['score_code_cube_app'];
+}
+?>
+

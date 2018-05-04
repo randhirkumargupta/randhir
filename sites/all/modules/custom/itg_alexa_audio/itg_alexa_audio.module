@@ -16,13 +16,19 @@
  */
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
-    $curent_feed = get_last_alexa_feed();
-    if (!empty($curent_feed) && (count($curent_feed) > 0)) {
-      $fid = $curent_feed[0]['field_audio_fid'];
-      $file_obj = file_load($fid);
-      $stream_url = file_create_url($file_obj->uri);
-      $alexa_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time.json");
-      $google_syndication_xml = file_create_url("public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml");
+    $arg = arg();
+    if (is_array($arg) && $arg[2] == 'edit') {
+      $node = node_load($arg[1]);
+      $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
+      $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      if ($fid) {
+        $file_obj = file_load($fid);
+        $stream_url = file_create_url($file_obj->uri);
+        $alexa_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time.json");
+        $google_syndication_xml = file_create_url("public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml");      
+      }
+      
+      
       $form['last_audio_url'] = array(
         '#type' => 'textfield',
         '#title' => t("Last Uploaded Audio Url"),
@@ -41,6 +47,31 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#maxlength' => 256,
         '#attributes' => array('readonly' => 'readonly'),
       );
+      
+      if ($vide_fid) {
+        $file_video_obj = file_load($vide_fid);
+        $video_url = file_create_url($file_video_obj->uri); 
+        $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");
+        $form['last_video_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Last Uploaded Video Url"),
+        '#default_value' => $video_url,
+        '#weight' => 10,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      $form['alexa_json_video_path'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Alexa Json Video Path"),
+        '#default_value' => $alexa_vido_path,
+        '#weight' => 11,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      }
+      
       $form['google_syndication_xml'] = array(
         '#type' => 'textfield',
         '#title' => t("Google Syndicate XML Path"),
@@ -50,6 +81,13 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#maxlength' => 256,
         '#attributes' => array('readonly' => 'readonly'),
       );
+    } else {
+      $curent_feed = get_last_alexa_feed();
+      $exist_nid = $curent_feed[0]['nid'];   
+      if ($exist_nid && $arg[0] != 'file' && $arg[1] != 'ajax') {
+        drupal_set_message('Audio & Video data exist in our system.');
+        drupal_goto('alexa-audio-clips');
+      } 
     }
 
     $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
@@ -89,6 +127,23 @@ function genrate_alexa_audio_json($value) {
   $fp = fopen($file_path, "w");
   fwrite($fp, json_encode($json));
   fclose($fp);
+  // for video
+  $videofid = $value['field_alexa_video']['und'][0]['fid'];
+  $file_video_obj = file_load($videofid);
+  $video_url = file_create_url($file_video_obj->uri);
+  $json = array(
+    'uid' => 'itaudiofeed' . $uid,
+    'updateDate' => $date,
+    'titleText' => $title,
+    'mainText' => "",
+    'streamUrl' => $stream_url,
+    'videoUrl' => $video_url,
+    'redirectionUrl' => FRONT_URL
+  );
+  $video_file_path = $xml_path . 'it_audioclip50_time_video.json';
+  $fpv = fopen($video_file_path, "w");
+  fwrite($fpv, json_encode($json));
+  fclose($fpv);
   itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . $uid);
 }
 
@@ -158,9 +213,7 @@ XML;
  */
 function get_last_alexa_feed() {
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_audio', 'fu', 'fu.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
-  $query->fields('fu', array('field_audio_fid'));
   $query->condition('n.status', 1);
   $query->condition('n.type', "alexa_audio_clips", '=');
   $query->orderBy('n.created', 'DESC')->range(0, 1);

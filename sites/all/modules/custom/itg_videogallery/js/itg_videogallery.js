@@ -8,6 +8,7 @@
         attach: function (context, settings) {
             var uid = settings.itg_videogallery.settings.uid;
             jQuery('#edit-field-video-repo-type').hide();
+            jQuery('.form-item-field-mis-report-und-mis-report>label').hide();
             
             jQuery('input[name="field_story_schedule_date_time[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_story_expiry_date[und][0][value][date]"]').keydown(false);

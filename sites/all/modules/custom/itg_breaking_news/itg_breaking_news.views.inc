@@ -58,7 +58,7 @@ class itg_breaking_news_views_handler_field_dynamic_band_link extends views_hand
 	  $url = $values->field_field_breaking_redirection_url[0]['raw']['value'];
 	}	
 	else{
-	 $url = 'node/' . $values->nid;
+    $url = drupal_get_path_alias('node/' . $values->nid);
 	}
     $title = l(trim($values->field_field_breaking_tile[0]['raw']['value']), $url, array('html' => TRUE, 'external' => TRUE));   
     return $title;

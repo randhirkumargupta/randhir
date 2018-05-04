@@ -615,10 +615,10 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .leftFirstLogo{ position: absolute; left:0; top:0;}
 .leftPresentingSponsor{ float: left; width:335px; box-sizing: border-box; margin-left:220px; position: relative }
 .leftPresentingSponsor:after{ content:""; position: absolute; right:0; top:2px; height:44px; width:1px; background:#c5c5c5}
-.PreSponsorTxt{ float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0 0 15px}
+.PreSponsorTxt{ float: left; font:normal 12px/14px OpenSans-Regular; color:#525252; margin:11px 0 0 15px}
 .PreSponsorImg{ float: left; margin-left:12px;}
 .rightAssociateSponsor{float: left; width:335px; box-sizing: border-box; }
-.assSponsorTxt{float: left; font:normal 12px/14px Arial, Helvetica, sans-serif; color:#525252; margin:11px 0px 0 15px}
+.assSponsorTxt{float: left; font:normal 12px/14px OpenSans-Regular; color:#525252; margin:11px 0px 0 15px}
 .assSponsorImg1{float: left; margin:0px 0 0 30px;}
 
 /* ranking section css */
@@ -641,9 +641,9 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 
 /*Over image section */
 .divtopbest { margin-bottom:20px; width:100%; float:left}
-.topimgtxt {font:normal 18px arial; color:#666666; margin-bottom:10px;}
+.topimgtxt {font:normal 18px OpenSans-Regular; color:#666666; margin-bottom:10px;}
 .bestbox {width:33%; float:left; text-align: center;}
-.besthead {text-align:center; margin-top:10px; text-transform:uppercase; color:#666666; font:normal 18px arial;}
+.besthead {text-align:center; margin-top:10px; text-transform:uppercase; color:#666666; font:normal 18px OpenSans-Regular;}
 .besthead a {text-decoration:none; color:#666666;}
 .besthead a:hover { text-decoration:underline}
 
@@ -702,6 +702,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:100px;}
 .main-streamwisecompare .streamcontainer, .main-streamwisecompare .streamcontainer1{ width:100%;}
 .main-streamwisecompare .streamcontainer1{ margin-left:0px; margin-top:30px;}
+.slider_outer .slick-next, .slider_outer .slick-prev{transform: translateY(-40%);}
 /*EMERGING COLLEGES RANKING TABLE CSS */
 .emergingCollege-section table{border: 0px;}
 .emergingCollege-section table tr:nth-child(1){ display: none;}

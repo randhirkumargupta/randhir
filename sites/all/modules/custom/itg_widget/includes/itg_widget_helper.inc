@@ -145,7 +145,10 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               $webcast_val = '';
               $is_sponsor = FALSE;
               $node_load_data = unserialize($widget_data->node_data);
-              if ((isset($node_load_data->field_story_configurations['und'])) && (!empty($node_load_data->field_story_configurations['und']))) {
+             
+              if($node_load_data->type == 'breaking_news') {
+                $webcast_val = $node_load_data->field_story_embed_webcast['und'][0]['value'];
+              } elseif ((isset($node_load_data->field_story_configurations['und'])) && (!empty($node_load_data->field_story_configurations['und']))) {
                 foreach ($node_load_data->field_story_configurations['und'] as $id => $id_arr) {
                   if ($id_arr['value'] == 'webcast') {
                     $webcast_val = $node_load_data->field_story_embed_webcast['und'][0]['value'];

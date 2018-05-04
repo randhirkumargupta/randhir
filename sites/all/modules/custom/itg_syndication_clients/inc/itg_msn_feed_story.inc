@@ -60,14 +60,22 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-
+    //for media content start
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    //for media content end
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
+     //for media content start
+    $query->fields('eli', array('field_story_extra_large_image_fid'));
+    $query->fields('mi', array('field_story_medium_image_fid'));
+    //for media content end
 
     if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = 300;
       $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
       $query->condition('n.created', $days_ago, '>=');
     }
@@ -78,6 +86,8 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
     $xml_path = 'public://';
+    //file_prepare_directory($xml_path, FILE_CREATE_DIRECTORY);
+    //writeFeedFile($xml_path, $file_name, $xml);
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -97,7 +107,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
   if (!empty($result)) {
     global $base_url;
     $current_date = date("Ymd\THisP");
-    $xml = '<NewsML>';
+    $xml = "<?xml version='1.0' encoding='utf-8'?><NewsML xmlns:media='http://search.yahoo.com/mrss/' xmlns:mi='http://schemas.ingestion.microsoft.com/common/' version='2.0'>";
     $xml .= '<NewsEnvelope>';
     $xml .= '<DateAndTime>' . $current_date . '</DateAndTime>';
     $xml .= '</NewsEnvelope>';
@@ -120,6 +130,36 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
 
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $title = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['title']));
+      
+      ############## prepare media content start ################
+      
+      $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);      
+      $file_ext_large_img_url = completeFilePath($value['field_story_extra_large_image_fid']);
+      $nObject = new stdClass();
+      $nObject->nid = $nid;
+      $author = (array) generateAuthorTagStory_syndication($nObject, 1);
+      $a_title= $author['a_title'];
+      $media_cont = "";
+      $media_cont .= '<media:content url="'.$file_ext_large_img_url.'">';
+      $media_cont .= '<media:thumbnail url="'.$file_medium_img_url.'"/>';
+      $media_cont .= '<media:credit>'.$a_title.'</media:credit>';
+      $media_cont .= '<media:title>
+                    <![CDATA[
+                    '.$title.'
+                    ]]>
+                    </media:title>';
+      $media_cont .= '<media:text>
+                    <![CDATA[
+                    '.$kicker_text.'
+                    ]]>
+                    </media:text>';
+      $media_cont .= '<mi:focalRegion/>';
+      $media_cont .= '<mi:hasSyndicationRights>1</mi:hasSyndicationRights>';
+      $media_cont .= '<mi:licenseId>0</mi:licenseId>';
+      $media_cont .= '<mi:licensorName/>';
+      $media_cont .= '</media:content>';
+      
+      ############## prepare media content end ################
 
       $year = date('Y');
       $xml .= '<NewsItem LinkType="normal">';
@@ -163,9 +203,34 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       $xml .= '</NewsComponent>';
       $xml .= '</NewsComponent>';
       $xml .= '</NewsComponent>';
+      //for media content start
+      $xml .= $media_cont;
+      //for media content start
       $xml .= '</NewsItem>';
     }
     $xml .= '</NewsML>';
   }
   return $xml;
+}
+
+/**
+ * function for get author list for story
+ * @pram object $node
+ *
+ * @return array
+ */
+function generateAuthorTagStory_syndication($node, $status) {
+  //$byline = itg_common_get_latest_byline($node->nid, $status);
+  $byline_data = itg_get_multi_byline_details($node->nid, $status);
+  $aid = $byline_data[0]['nid'];
+  $a_title = $byline_data[0]['title'];
+  $extra_laarge_file = file_load($byline_data[0]['extra_large_image']);
+  $a_image = file_create_url($extra_laarge_file->uri);
+  $a_twitter_handler = $byline_data[0]['twitter_handle'];
+  $output = array();
+  $output['a_id'] = "$aid";
+  $output['a_title'] = "$a_title";
+  $output['a_image'] = "$a_image";
+  $output['a_twitter_handler'] = "$a_twitter_handler";
+  return $output;
 }

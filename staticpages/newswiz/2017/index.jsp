@@ -10,7 +10,7 @@
 	content="News Quiz wiz 2017 by Rajdeep Sardesai and Siddhartha Basu properly known as the quiz man of India brings you first time at India Today for class X and XI students all across India. Come and participate here." />
 <meta name="keywords"
 	content="News Wiz 2017, news quiz 2017, Rajdeep Sardesai, Siddhartha Basu, India today quiz, News Quiz rules, News Quiz schedule, News Quiz faq" />
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
 <link href="/newswiz/2017/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@ function zd_get_placements(){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<link rel="stylesheet" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
+<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newcss/responsive.css" type="text/css">
 <script type='text/javascript'>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
@@ -143,7 +143,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
       <div class="row">
        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 text-center left_part_2017">
        	<div class="logo_2017">
-           <a href="http://indiatoday.intoday.in/newswiz/2017/" title="Newswiz 2"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/logo_2017.png" alt="" class="logo_new"></a>
+           <a href="http://indiatoday.intoday.in/newswiz/2017/" title="Newswiz 2"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/logo_2017.png" alt="" class="logo_new"></a>
        	</div>
        </div>
 	 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 hidden-xs text-right">
@@ -155,9 +155,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
        </div>
 
 	 <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-     <div class="img_text_bgqz text-center"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/masthead-heading-mobile.png" alt=""></div>
+     <div class="img_text_bgqz text-center"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/masthead-heading-mobile.png" alt=""></div>
      <div class="img_text_date text-center">
-     	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/Mobile-date.png" alt="">
+     	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/Mobile-date.png" alt="">
 
      </div>
 	 </div>
@@ -180,9 +180,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="topSocIcon mobIcon">
               <ul>
               <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
-                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
               </ul>
             </div>
             <!--end responsive menu -->
@@ -193,15 +193,15 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                 <li><a href="/newswiz/2017/index.jsp" title="home" class="active_h"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                <!-- <li><a href="newswiz-rules.jsp" class="" title="Rules">Rules &amp; Regulations</a></li>-->
 
-                <li><a href="newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
+                <li><a href="/newswiz/2017/newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
 
-                <li><a href="newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>
+                <li><a href="/newswiz/2017/newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>
 
-               <li><a href="all-teams.jsp" class='' title="Teams">Teams</a></li>
+               <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li>
 
-                 <li><a href="episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
+                 <li><a href="/newswiz/2017/episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
                  <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
- <li><a href="question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
+ <li><a href="/newswiz/2017/question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
 
 
 
@@ -216,9 +216,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="topSocIcon">
               <ul>
               <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
-                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+                <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+                <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+                <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
               </ul>
             </div>
           </div>
@@ -249,7 +249,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
+        <iframe class="iframe_bestcol" width="100%" height="85px" frameborder="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/newswiz-sponsor/newswiz-sponsor.html" scrolling="no"></iframe>
       </div>
     </div>
   </div>
@@ -359,7 +359,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 								</div>
 								<!--end overview -->
 								<script type="text/javascript">
-									ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
+									// ajaxinclude("http://indiatoday.intoday.in/highlights/support-your-team-2017.jsp")
 								</script>
 								<div class="row">
 									<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
@@ -373,14 +373,14 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                                   <div class="video_info">
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fn1krlnts" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
                                                         <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
                                                         </a> </div>
                                                     </div>
                                                   </div>
                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fn0cdg16o" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
+                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MTYy" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
                                                         <p>Episode 1: Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points </p>
                                                         </a> </div>
                                                     </div>
@@ -389,7 +389,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 
                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6forhbsnuo" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
                                 <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
                                 </a> </div>
                             </div>
@@ -397,7 +397,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fospr84ao" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
                                 <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
                                 </a> </div>
                             </div>
@@ -405,7 +405,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/3d6fqimcn0kg" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
                                 <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
                                 </a> </div>
                             </div>
@@ -429,9 +429,9 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 		<!--<div class="right_advertis">
 
                   <div class="middle_quiz" style="box-shadow:none">
-                    <div class="banner_sec marginbtm10"> <a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
+                    <div class="banner_sec marginbtm10"> <a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
 
-                 <div class="banner_sec"><a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/Mohen-Jo-Daro-banner.gif" alt=""></a></div>
+                 <div class="banner_sec"><a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/Mohen-Jo-Daro-banner.gif" alt=""></a></div>
 
                   </div>
                 </div>-->
@@ -445,28 +445,28 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                         <ul>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt30g" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4l8vmt30g" title="Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/ep_8.jpg"  alt="Newswiz" />
                                 <p>Rajdeep shakes a leg with Katrina Kaif, Sidharth Malhotra</p>
                                 </a> </div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqcmz49s" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4hqcmz49s" title="Watch this all-rounder genius girl make Rajdeep dance"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video-647_081416031346.jpg"  alt="Newswiz" />
                                 <p>Watch this all-rounder genius girl make Rajdeep dance</p>
                                 </a> </div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g0xp3qm8" title="News Wiz goes to Tagore International School, Delhi"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-video_647_081016044457.jpg" alt="Newswiz" width="320" height="219">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g0xp3qm8" title="News Wiz goes to Tagore International School, Delhi"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/newswiz-video_647_081016044457.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz goes to Tagore International School, Delhi</p>
                                 </a> </div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g074osio" title="News Wiz gets its own rap song"> <span class="icon_video_newswiz"></span> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rap-song-video_647_080716020800.jpg" alt="Newswiz" width="320" height="219">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4g074osio" title="News Wiz gets its own rap song"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rap-song-video_647_080716020800.jpg" alt="Newswiz" width="320" height="219">
                                 <p>News Wiz gets its own rap song</p>
                                 </a> </div>
                             </div>
@@ -475,7 +475,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                             <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b0q7z4" title="Rapid fire with Jacqueline Fernandez on New Wiz">
 
-                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/for-first-link.jpg" alt="Newswiz" width="320" height="219">
+                                <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/for-first-link.jpg" alt="Newswiz" width="320" height="219">
                                 <p>Rapid fire with Jacqueline Fernandez on New Wiz</p>
                                 </a> </div>
                             </div>
@@ -484,42 +484,42 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                             <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e9b1yznk" title="Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz">
 
-                                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/second.jpg" alt="Newswiz" width="320" height="219">
+                                <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/second.jpg" alt="Newswiz" width="320" height="219">
                                 <p>Best Foot Forward: When Hrithik made Rajdeep dance on News Wiz</p>
                                 </a> </div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ariq9xxc" title="">  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/salman-video_647_0704161223.gif" alt="Newswiz">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4ariq9xxc" title="">  <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/salman-video_647_0704161223.gif" alt="Newswiz">
                                 <p>India's first News Quiz Show with 'Sultan' Salman Khan</p>
                                 </a></div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82mib40" title="">  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video1.jpg" alt="Newswiz">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82mib40" title="">  <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video1.jpg" alt="Newswiz">
                                 <p>News is knowledge, knowledge is news: Get ready for India Today News Wiz</p>
                                 </a></div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minnk" title="">  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video2.jpg" alt="Newswiz">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minnk" title="">  <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video2.jpg" alt="Newswiz">
                                 <p>Newswiz, India's biggest news quiz: Anil Kapoor</p>
                                 </a></div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minog" title="">  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video3.jpg" alt="Newswiz">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minog" title="">  <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video3.jpg" alt="Newswiz">
                                 <p>Are brains better than brawn? Salman Khan will tell you this Sunday</p>
                                 </a></div>
                             </div>
                           </li>
                           <li>
                             <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minpc" title="">  <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video4.jpg" alt="Newswiz">
+                              <div class="video_inner"> <a href="http://indiatoday.intoday.in/embed/j4e82minpc" title="">  <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video4.jpg" alt="Newswiz">
                                 <p>Losing and Winning with the mind, with Sultan Salman Khan</p>
                                 </a></div>
                             </div>
@@ -539,7 +539,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 			<div class="presen_area">
 				<h4>Presented By</h4>
 				<div class="presen_logo">
-					<!--<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
+					<!--<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
 				</div>
 			</div>
 			<div class="tally_info">
@@ -569,7 +569,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 					<span class="img-stroke"></span>
 					<div class="circular_win">
 						<img
-							src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/raj_deep.jpg"
+							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg"
 							alt="Rajdeep">
 					</div>
 					<div class="header_win">RAJDEEP SARDESAI</div>
@@ -590,7 +590,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 					<span class="img-stroke"></span>
 					<div class="circular_win">
 						<img
-							src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
+							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
 							alt="Rajdeep">
 					</div>
 					<div class="header_win">SIDDHARTHA BASU</div>
@@ -621,7 +621,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg" alt="Rajdeep"> </div>
             <div class="header_win">RAJDEEP SARDESAI</div>
             <div class="container_wiz">
               <p> News and Quiz come together in a fantastic battle of brains. Rajdeep Sardesai who has spent his life in news will be at the helm of the first-of-its-kind quiz show - NewsWiz. There is no one better equipped than Rajdeep to host such a show considering that he has spent 26 years reporting, editing and anchoring news. </p>
@@ -630,7 +630,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
-            <div class="circular_win"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
+            <div class="circular_win"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg" alt="Rajdeep"> </div>
             <div class="header_win">SIDDHARTHA BASU </div>
             <div class="container_wiz">
               <p>Basu is the undisputed quiz man of India. He is the pioneer who hosted and produced the iconic Quiz Time on Doordarshan and also produced the marquee Kaun Banega Crorepati. He has been the mind behind Mastermind India, University Challenge and India's Child Genius. Now for the first time on news television in India, he is bringing a news-based quiz show.</p>
@@ -667,25 +667,25 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                   <h2><a href="episodes.jsp" title="Show Videos">Show Videos</a></h2>
                 </div>
                 <div class="swiper-slide comicon">
-                  <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
+                  <h2><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></h2>
                 </div>
                 <div class="swiper-slide comicon">
-                  <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
+                  <h2><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></h2>
                 </div>
                 <div class="swiper-slide comicon">
-                  <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
+                  <h2><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></h2>
                 </div>
                 <!--<div class="swiper-slide comicon">
-                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
+                  <h2><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/rss.png" alt="rss"></a></h2>
                 </div> -->
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <ul class="social">
-              <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
-              <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
-              <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
+              <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
+              <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
+              <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
               <!--<li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" title="rss" target="_blank"><img src="newimages/rss.png" alt="rss"></a></li> -->
             </ul>
           </div>
@@ -712,8 +712,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
               <div class="foot_partner">
                 <h3>Partners</h3>
                 <ul>
-                  <li class="big_logo"><img alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/big-synrgy.jpg"></li>
-                  <li class="tree_logo"><img alt="" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/tree_logo.jpg"></li>
+                  <li class="big_logo"><img alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/big-synrgy.jpg"></li>
+                  <li class="tree_logo"><img alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/tree_logo.jpg"></li>
                 </ul>
               </div>
               <!--end footer sponser -->
@@ -858,19 +858,20 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 </div>
 <!-- jQuery Bootstrap-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script>
 <!-- Swiper JS -->
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>
-<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script>
+<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/custom.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function(){
+$(document).ready(function(){
 
 	$('.video_episode_snippets .video_inner a').click(function(e){
- e.preventDefault();
-var lnk = $(this).attr('href');
-$('.video_pic').addClass('showvideo');
-$('#videoplayer').attr('src',lnk+"&autoplay=true");
+    e.preventDefault();
+    var lnk = $(this).attr('href');
+    $('.video_pic').addClass('showvideo');
+    //$('#videoplayer').attr('src',lnk+"&autoplay=true");
+    $('#videoplayer').attr('src',lnk);
 })
 
 

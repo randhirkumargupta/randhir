@@ -206,3 +206,12 @@ function getJSONFeedDetails(conurl, consID) {
 function tabclose() {
     jQuery('.map-result-detail').hide();
 }
+
+function change_mini_state_graph(value){
+		var state_id = jQuery(value).val();
+		var iframe_url = jQuery("#svg_url_"+state_id).val();   
+		var election_cat = jQuery("#election_cat_"+state_id).val();   
+		var large_graph_link = '<a href="state-elections/'+election_cat+'/'+state_id+'">';
+		var iframe_html = large_graph_link + '<div class="small_state_graph"><iframe src = "'+iframe_url+'" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" ></div></a>';
+		jQuery(".small_state_graph_wrapper").html(iframe_html);  
+}

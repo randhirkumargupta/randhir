@@ -94,6 +94,16 @@ function amptheme_js_alter(&$javascript) {
 * Implements hook_preprocess_html() for HTML document templates.
 */
 function amptheme_preprocess_html(&$variables) {
+   // Fact schema code adding in header for story module
+  if(function_exists('get_fact_schema')){
+      $fact_schema =  get_fact_schema();
+      if (!empty($fact_schema)) {
+        $fact_schema_code = array(
+         '#type' => 'markup',
+         '#markup' => $fact_schema,
+        );
+      drupal_add_html_head($fact_schema_code, 'fact_schema');
+  }}
 
   $viewport = array(
     '#tag' => 'meta',
@@ -159,6 +169,12 @@ function amptheme_preprocess_node(&$variables) {
   }
   if (isset($variables['rdf_template_variable_attributes_array'])) {
     unset($variables['rdf_template_variable_attributes_array']);
+  }
+  // New Live Blog AMP Tpl File
+  if ($variables['type'] == 'breaking_news' && $variables['field_type'][0]['value'] == 'Live Blog') {
+    if (($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) || ($variables['field_multi_user_allows']['und'][0]['value'] && $variables['field_multi_user_allows']['und'][0]['value'] == 1)) {
+      $variables['theme_hook_suggestions'][] = 'node__amp_live_blog_custom';
+    } 
   }
 }
 

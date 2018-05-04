@@ -116,8 +116,15 @@ function itg_ads_block_view($delta = '') {
         $block['content'] = '';
       }
       else {
-        $ad_script = get_itg_page_name('Super Banner (Top Nav) 728x90');
-        $block['content'] = $ad_script;
+        $arg = arg();
+        $node_object = menu_get_object();
+        if ((!empty($node_object->nid) &&  $node_object->type == 'event_backend') || ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win')))){
+          $ad_script = get_itg_page_name('Super Banner (Top Nav) event 728x90');
+          $block['content'] = $ad_script;
+        }else{
+          $ad_script = get_itg_page_name('Super Banner (Top Nav) 728x90');
+          $block['content'] = $ad_script;
+        }        
       }
       break;
 
@@ -128,8 +135,15 @@ function itg_ads_block_view($delta = '') {
         $block['content'] = '';
       }
       else {
-        $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
-        $block['content'] = $ad_script;
+        $arg = arg();
+        $node_object = menu_get_object();
+        if ((!empty($node_object->nid) &&  $node_object->type == 'event_backend') || ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win')))){
+          $ad_script = get_itg_page_name('Super Banner (Bottom nav) event 728x90');
+          $block['content'] = $ad_script;
+        }else{
+          $ad_script = get_itg_page_name('Super Banner (Bottom nav) 728x90');
+          $block['content'] = $ad_script;
+        }        
       }
       break;
 
@@ -142,8 +156,15 @@ function itg_ads_block_view($delta = '') {
         $block['content'] = '';
       }
       else {
-        $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
-        $block['content'] = $ad_script;
+        $arg = arg();
+        $node_object = menu_get_object();
+        if ((!empty($node_object->nid) &&  $node_object->type == 'event_backend') || ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win')))){
+          $ad_script = get_itg_page_name('Medium Rectangle-event-RHS1-300x250');
+          $block['content'] = $ad_script;
+        }else{
+          $ad_script = get_itg_page_name('Medium Rectangle-RHS1-300x250');
+          $block['content'] = $ad_script;
+        }
       }
       break;
 
@@ -1207,13 +1228,30 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 			$return['category_geader_s'] = $taxname1.ucfirst($node_object->type);
       $return['node_type'] = ucfirst($node_object->type);
       $return['node_id'] = ucfirst($node_object->nid);
-		} else {
+		} elseif (!empty($node_object->nid) && $node_object->type == "event_backend") {
+			$event_title = preg_replace('/\s+/', '-', $node_object->title);
+			$return['section_header_s'] = (!empty($event_title) ? $event_title : 'ROS');
+			$return['category_geader_s'] = (!empty($arg[3]) ? $arg[3] : $event_title.'Home');
+      $return['node_type'] = ucfirst('event');
+      $return['node_id'] = ucfirst($node_object->nid);
+		}else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
 			$return['category_geader_s'] = (!empty($taxname1) ? ($taxname1.ucfirst($node_object->type)) : 'ROS');
       $return['node_type'] = ucfirst($node_object->type);
       $return['node_id'] = ucfirst($node_object->nid);
 		}
-	}
+	}else if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))) {
+			$event_nid = itg_event_backend_get_event_node();
+			if (!empty($event_nid)){
+				$event_title = itg_common_get_node_title($event_nid);
+				$event_title = preg_replace('/\s+/', '-', $event_title);
+				$event_sub_title = $arg[3];
+				$return['section_header_s'] = (!empty($event_title) ? $event_title : 'ROS');
+			  $return['category_geader_s'] = (!empty($event_sub_title) ? $event_sub_title : 'Home');
+        $return['node_type'] = ucfirst('event');
+        $return['node_id'] = ucfirst($event_nid);
+			}
+	}	
 	return $return;
 }
 

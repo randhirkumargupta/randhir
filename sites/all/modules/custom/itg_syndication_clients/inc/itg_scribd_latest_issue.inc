@@ -36,6 +36,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('isuue.field_story_issue_date_value', $title, '=');
     $query->condition('n.status', 1);
@@ -46,6 +47,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('dbody', array('body_value'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_scribd_latest_issue_syndication_xml($result, $issue_title, $issue_result, $field_issue_large_cover_image_fid);
     $xml_path = 'public://rss-feeds/xml_data/scribd/it/stories/';
@@ -68,7 +70,7 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $issue_title_n = "[India Today Magazine - ".$issue_title;
+    $issue_title_n = "India Today Magazine - ".$issue_title;
     $issue_identifier = $issue_title;
     //$issue_cover_image = getIssueCoverImgScribed($issue_title);
     $issue_cover_image = completeFilePath($field_issue_large_cover_image_fid);
@@ -89,14 +91,16 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
       $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
+      $issue_cover_image_ar = explode("?",$issue_cover_image);
+      $medium_img_ar = explode("?",$medium_img["imag_url"]);
       $xml .= '<item>';      
       $xml .= '<issue_title><![CDATA[' . $issue_title_n . ']]></issue_title>';
       $xml .= '<issue_identifier><![CDATA[' . $issue_identifier . ']]></issue_identifier>';
-      $xml .= '<issue_cover_image>'.$issue_cover_image.'</issue_cover_image>';      
+      $xml .= '<issue_cover_image>'.$issue_cover_image_ar[0].'</issue_cover_image>';      
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<pubdate>' . $publish_date . '</pubdate>';
       $xml .= '<author><![CDATA[' . $author . ']]></author>';
-      $xml .= '<imgUrl>' . $medium_img["imag_url"] . '</imgUrl>';
+      $xml .= '<imgUrl>' . $medium_img_ar[0] . '</imgUrl>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';

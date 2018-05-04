@@ -574,7 +574,7 @@ jQuery(document).ready(function () {
         }
 
     })
-    jQuery('#map-state').change(function () {
+    /*jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
 
@@ -601,7 +601,7 @@ jQuery(document).ready(function () {
             error: function (xhr, desc, err) {
             }
         });
-    });
+    });*/
 
 
     //movie review more less

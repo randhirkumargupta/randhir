@@ -224,8 +224,11 @@ function drupal_lookup_path($action, $path = '', $path_language = NULL) {
       $source = FALSE;
       if (!isset($cache['map'][$path_language]) || !($source = array_search($path, $cache['map'][$path_language]))) {
         $path_cid = $path_language . ':' . $path;
-
-        if ($cached = cache_get($path_cid, 'cache_path_source')) {
+        $cached = cache_get($path_cid, 'cache_path_source');				
+        if(empty($cached->data) && $_GET['q'] == $path){
+          cache_clear_all($path_cid, 'cache_path_source');
+        }
+        if (!empty($cached->data)) {
           if (!empty($cached->data)) {
             $cache['map'][$path_language][$source] = $source =  $cached->data;
           }

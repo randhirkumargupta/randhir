@@ -164,7 +164,27 @@ function article_rss_feed_google_newsstand() {
 }
 
 /**
- * 
+ * Function for Editors Pic feed
+ * @global string $base_url
+ */
+function indiatoday_editors_pic() {
+  global $base_url;
+  $output = "";
+  $term_name = '';
+  $section_url = NULL;
+    //anchorRSSFeed writing...
+    $output .= get_rss_feed_google_stand_header();
+    $output .= get_rss_feed_sub_header_editors_pic();
+    $output .= get_article_editors_pic_item_rss();
+    $output .= get_rss_feed_footer();
+
+  header('Content-Type: application/xml; charset=utf-8');
+  print $output;
+  drupal_exit();
+}
+
+/**
+ *
  * @global string $base_url
  * @param int $section_id
  * @param string $term_name
@@ -186,14 +206,14 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
 
   if (!empty($tid)) {
     $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-  } 
+  }
   $term_tree_count = count($term_tree);
   if ($term_tree_count) {
     foreach ($term_tree as $key => $value) {
       $tid_list[] = $value->tid;
     }
   }
-  
+
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
@@ -219,7 +239,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $query->condition('pc.field_primary_category_value', $tid_list, 'IN');
   }
   $query->orderBy('n.created', 'DESC');
-  $query->groupBy('n.nid')->range($range_min, $range_max); 
+  $query->groupBy('n.nid')->range($range_min, $range_max);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     if (is_lock_story_rss_feed($resvalue['nid'])) {
@@ -252,4 +272,70 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $output .= '</item>';
   }
   return $output;
+}
+
+/**
+ *
+ * @global string $base_url
+ * @param int $section_id
+ * @param string $term_name
+ * @param string $section_url
+ * @return string
+ */
+function get_article_editors_pic_item_rss() {
+  global $base_url;
+  $tid = '1206641';
+  $output = "";
+  $range_min = 0;
+  $range_max = 5;
+  //$type = array("videogallery", "photogallery", "story");
+  $result = editor_pic_node_list($tid,$range_min,$range_max);
+  foreach ($result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
+    $title = stripInvalidXml($resvalue['title']);
+    $nid = $resvalue['nid'];
+
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
+    $reporter = get_byline_name_by_nid($nid);
+    $created = $resvalue['created'];
+    $field_story_kicker_text_value = stripInvalidXml($resvalue['field_story_kicker_text_value']);
+    date_default_timezone_set("GMT");
+    $created_date = date("D, d M Y H:i:s e", $created);
+
+    $output .= '<item><title><![CDATA[' . $title . ']]></title>';
+    $output .= '<link><![CDATA[' . $url . ']]></link>';
+    $output .= '<guid><![CDATA[' . $url . ']]></guid>';
+    $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
+    $output .= '<dc:creator><![CDATA[' . $reporter . ']]></dc:creator>';
+    $output .= '<pubDate><![CDATA[' . $created_date . ']]></pubDate>';
+    $output .= '</item>';
+  }
+  return $output;
+}
+/**
+* Common function to get the node
+* @args: tid
+* @$range_min
+* @range_max
+* @return array
+**/
+function editor_pic_node_list($tid,$range_min,$range_max){
+
+  $type = array("story");
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->fields('n', array('nid', 'title', 'created'));
+ // $query->fields('reporter', array('title'));
+  //$query->fields('dbody', array('body_value'));
+  $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'story', '=');
+  $query->leftJoin('field_data_field_story_category', 'sc', 'sc.entity_id=n.nid');
+  $query->condition('sc.field_story_category_tid', $tid, '=');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range($range_min, $range_max);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }

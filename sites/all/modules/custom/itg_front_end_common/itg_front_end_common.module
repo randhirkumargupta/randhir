@@ -252,7 +252,7 @@ function _may_be_recommend_block_content() {
 function _recommend_new_block_content() {
   $output = '';
   if (!empty(variable_get('third_party_recommend_new_block')) && empty(variable_get('disable_third_party_api'))) {
-    $output = '<div class="may-be-recommend"><h3><span>' . t('Recommended') . '</span></h3>' . variable_get('third_party_recommend_new_block') . '</div>';
+    $output = '<div class="may-be-recommend mhide"><h3><span>' . t('Recommended') . '</span></h3>' . variable_get('third_party_recommend_new_block') . '</div>';
   }
   else {
     $output = '';
@@ -663,54 +663,46 @@ function _related_video_block_content() {
   $arg = arg();
   $related_content = itg_get_related_content($arg[1]);
   if (!empty($related_content)) {
-    drupal_add_js('jQuery(document).ready(function(){
-        jQuery("#related-video .video-list").slick({
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            centerPadding: \'30px\',
-            variableWidth: true,
-            prevArrow: \'<i class="fa fa-angle-left slick-prev"></i>\',
-            nextArrow: \'<i class="fa fa-angle-right slick-next"></i>\'
-        });
-    });', array('type' => 'inline', 'scope' => 'footer'));
+  
     if (function_exists('itg_get_related_story_id')) {
       $related_result = itg_get_related_story_id($related_content);
     }
+    if (!empty($related_result)) {
+      $i = 0;
+      $related_video = '<h3><span>Related</span></h3>';
+      $related_video.= "<div id='related-video'><ul class='video-list'>";
+      foreach ($related_result as $site_hash_key) {
+        $current_entity_id = $site_hash_key;
+        $related_data = itg_get_related_story_content($current_entity_id);
+          $display_title = get_related_display_title($arg[1], $current_entity_id);
+          if (!empty($display_title)) {
+            $display_title = $display_title;
+          }
+          else {
+            $display_title = $related_data->label;
+          }
+          $related_title = html_entity_decode($display_title);//mb_strimwidth($display_title, 0, 80, "..");
 
-    $related_video = '<h3><span>Related</span></h3>';
-    $related_video.= "<div id='related-video'><ul class='video-list'>";
-    foreach ($related_result as $site_hash_key) {
-      $current_entity_id = $site_hash_key;
-      $related_data = itg_get_related_story_content($current_entity_id);
-        $display_title = get_related_display_title($arg[1], $current_entity_id);
-        if (!empty($display_title)) {
-          $display_title = $display_title;
-        }
-        else {
-          $display_title = $related_data->label;
-        }
-        $related_title = html_entity_decode($display_title);//mb_strimwidth($display_title, 0, 80, "..");
-        
-        if(empty($related_data->sm_field_custom_story_small_large_url[0])) {
-        $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';  
-        } else {
-        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0]; 
-        }
-        if (function_exists('itg_apache_solr_get_site_url')) {
-          $hash_url = itg_apache_solr_get_site_url();
-        }
-        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
-        
-        if (!empty($related_title)) {
-          $img_alt = strip_tags($related_title);
-          $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-          $related_video.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
-        }
-    }
+          if(empty($related_data->sm_field_custom_story_small_large_url[0])) {
+          $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';  
+          } else {
+          $related_image_url = $related_data->sm_field_custom_story_small_large_url[0]; 
+          }
+          if (function_exists('itg_apache_solr_get_site_url')) {
+            $hash_url = itg_apache_solr_get_site_url();
+          }
+          $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
 
-    $related_video.= "</ul></div>";
-    return $related_video;
+          if (!empty($related_title)) {
+            $img_alt = str_replace(array('\'', '"'), '', $related_title); 
+            $related_video.= '<li class="col-md-3"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" /></a>';
+            $related_video.= '<span class="tile"><a href="'.$front_url.'">'.$related_title.'</a></span></li>';
+          }
+      }
+
+      $related_video.= "</ul></div>";
+      return $related_video;
+    }    
   }
 }
 
@@ -759,10 +751,13 @@ function _related_photo_block_content() {
           $hash_url = itg_apache_solr_get_site_url();
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
+        
+        
         if (!empty($related_title)) {
-          $img_alt = strip_tags($related_title);
-          $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-          $related_photo.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
+          $img_alt = str_replace('"', '', $related_title);
+          $rel_title = str_replace('"', '', $related_title);
+          $related_photo.= '<li class="col-md-3"><a href="'.$front_url.'"><img src="'.$related_image_url.'" class="related-default" alt="'.$img_alt.'" title="'.$img_alt.'" /></a>';
+          $related_photo.= '<span class="tile"><a href="'.$front_url.'">'.$rel_title.'</a></span></li>';
         }
     }
 
@@ -1097,7 +1092,7 @@ function _latest_from_pti() {
     $related_dt.= "<ul>";
     $i = 0;
     foreach ($related_content as $key => $value) {
-      if (!empty($value->title)) {
+      if (!empty(trim($value->title))) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = drupal_get_path_alias('node/' . $value->nid);
         $related_dt.= "<li " . $data_tb_region_item . " class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
@@ -1139,12 +1134,14 @@ function _latest_from_aajtak() {
           $related_title = mb_strimwidth($value['content_title'], 0, 200, "..");
           $path = $value['content_url'];
           if ($value['content_thumb_image']) {
-            $img_url = $value['content_thumb_image'];
+            //$img_url = $value['content_thumb_image'];
+            $img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
           }
           else {
-            $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+            //$img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+            $img_url = theme('image', array('path' => '/sites/all/themes/itg/images/itg_image170x127.jpg', 'alt' => '', 'title' => ''));
           }
-          $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
+          $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '">'.$img_url.'</a>';
           $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
         }
         $i++;
@@ -1185,12 +1182,14 @@ function _latest_from_businesstoday() {
           $related_title = mb_strimwidth($value['content_title'], 0, 200, "..");
           $path = $value['content_url'];
           if ($value['content_thumb_image']) {
-            $img_url = $value['content_thumb_image'];
+            //$img_url = $value['content_thumb_image'];
+            $img_url = theme('image', array('path' => $value['content_thumb_image'], 'alt' => '', 'title' => ''));
           }
           else {
-            $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+            //$img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+            $img_url = theme('image', array('path' => '/sites/all/themes/itg/images/itg_image170x127.jpg', 'alt' => '', 'title' => ''));
           }
-          $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
+          $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '">'.$img_url.'</a>';
           $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
         }
         $i++;

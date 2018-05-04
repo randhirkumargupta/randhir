@@ -285,6 +285,34 @@ function itg_report_api_resource() {
         ),
       ),
     ),
+      
+   // author_report custom resource declaration.....
+    'author_report_v1' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves author_report schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_report_api',
+            'name' => 'itg_report_api.services',
+          ),
+          'callback' => 'itg_report_api_author_report_v1',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $api;
@@ -481,17 +509,53 @@ function itg_report_api_author_report() {
   else {
     $start_date = $_GET['start_date'];
   }
-  $suffix = $start_date;
+  $type = 'story';
+  if($_GET['type'] == "video"){
+      $type = 'videogallery';
+  }
+
+  $suffix = $type.'_'.$start_date;
   $redis_key = "itg_report_api_author_report_" . $suffix;
 
   //$result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
+  if ($result_get['key_value1'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
     // call function from return data..
-    $jsondata = author_report($start_date);
+    $jsondata = author_report($start_date,$type);
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+  $jsondata = json_decode($jsondata, TRUE);
+  return $jsondata;
+}
+
+function itg_report_api_author_report_v1() {
+  module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_author_report_v1');
+  if ($_GET['start_date'] != "na") {
+    $start_date = strtotime($_GET['start_date']);
+  }
+  else {
+    $start_date = $_GET['start_date'];
+  }
+    $type = 'story';
+  if($_GET['type'] == "video"){
+      $type = 'videogallery';
+  }
+  $suffix = $type.'_'.$start_date.'_'.$type;
+  $redis_key = "itg_report_api_author_report_v1" . $suffix;
+
+  //$result_get = getRedis($redis_key);
+
+  if ($result_get['key_value1'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    // call function from return data..
+    $jsondata = author_report_v1($start_date, $type);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     //$result_set = setRedis($redis_key, $jsondata, $ttl);

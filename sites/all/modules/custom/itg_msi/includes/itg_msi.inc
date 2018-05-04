@@ -68,3 +68,8 @@ function itg_msi_show_web_exclusive_form() {
   );
   return system_settings_form($form);
 }
+
+function itg_msi_magazine_page(){
+	drupal_set_title('');
+	return theme('magazine');	
+}

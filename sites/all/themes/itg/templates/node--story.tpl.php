@@ -162,12 +162,14 @@ if (!empty($content)):
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1  title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
-        <?php
+        <!--<h1  title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1> -->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+          <?php
       }
       else {
         ?>
-        <h1 title="<?php echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
+        <!-- <h1 title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>-->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -789,7 +791,13 @@ if (!empty($content)):
     <?php if (!empty($node->field_story_rating)): ?>
                   <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>"></div>                            
                   <?php endif; ?>
-                <div class="movie-detail">
+                <div class="movie-detail">  
+                  <?php if (!empty($node->field_mega_review_movie_plot)): ?>
+                    <div class="plot">
+                      <span class="title"> <?php print t('Movie Name:'); ?></span>                                    
+                      <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
+                    </div>
+                  <?php endif; ?>    
     <?php if (!empty($node->field_mega_review_cast)): ?>
                     <div class="cast">
                       <span class="title"> <?php print t('Cast:'); ?></span>
@@ -813,12 +821,7 @@ if (!empty($content)):
                       <span class="detail"> <?php print $node->field_mega_review_director[LANGUAGE_NONE]['0']['value']; ?></span>
                     </div>
                   <?php endif; ?>
-    <?php if (!empty($node->field_mega_review_movie_plot)): ?>
-                    <div class="plot">
-                      <span class="title"> <?php print t('Plot:'); ?></span>                                    
-                      <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
-                    </div>
-    <?php endif; ?>
+  
                 </div>                            
               </div>
               <?php
@@ -833,10 +836,11 @@ if (!empty($content)):
                 ?>
                 <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
                 <?php */ } ?>
-              <div class="ad-blocker" style="display: none;"></div>
+              <?php /* <div class="ad-blocker" style="display: none;"></div> */ ?>
               <div class="description">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
+                $story_body = str_replace("&#13;", "", $story_body);
                 // check video is delete form video content   
 //                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
 //                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
@@ -1257,6 +1261,10 @@ if (!empty($content)):
               }
             ?>
             <div class="c_ques"><?php print $question; ?></div>
+            <!--Vidtent Adds -->
+            <script type="text/javascript" src="//vt.andbeyond.media/vidtent-player-2.0.0.min.js" id="vidTentPlayerJsScript" data-vidtent-var="E02EEBF9" async ></script>
+            <div id="playerE02EEBF9"></div>
+            <!--Vidtent Adds end -->
             <div id="vuukle-emote"></div>
             <!-- <div id="vuukle_div"></div>-->
             <div id="vuukle-comments"></div>

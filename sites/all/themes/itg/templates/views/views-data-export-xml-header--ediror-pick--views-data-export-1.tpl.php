@@ -12,7 +12,4 @@
  */
 
 // Short tags act bad below in the html so we print it here.
-print '<?xml version="1.0" encoding="UTF-8" ?>';
-?>
-
-<<?php print $root_node; ?> xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+print '<?xml version="1.0" encoding="UTF-8" ?>';?><<?php print trim($root_node); ?> xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">

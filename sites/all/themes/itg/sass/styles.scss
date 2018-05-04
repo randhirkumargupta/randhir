@@ -623,10 +623,12 @@ header {
                 }
                 &.has-image {
                     a {
+                        padding:0px;
                         img {
-                            max-height: 37px;
+                            max-height:inherit;
                             width: auto;
-                            padding: 4px 0;
+                            padding:0;
+                            margin-top:-15px;
                         }
                     }
                 }
@@ -782,8 +784,9 @@ header {
 }
 
 #page-title {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 500;
+    line-height: 35px;
 }
 
 #block-formblock-ask-an-expert {
@@ -2075,9 +2078,11 @@ footer {
 .top-takes-video-container.home-top-takes {
     ul {
         padding-top: 10px;
+        border: 1px solid #ddd;
     }
     .top-takes-list {
         padding: 10px;
+        border:0px;
     }
 }
 
@@ -3105,12 +3110,12 @@ footer {
                 width: 30px;
                 height: 25px;
                 content: '';
-                background: url(../images/up-quotes.jpg) no-repeat center 0;
+                background: url(../images/up-quotes.png) no-repeat center 0;
                 display: inline-block;
                 vertical-align: top;
             }
             &:after {
-                background: url(../images/down-quote.jpg) no-repeat 6px 3px;
+                background: url(../images/down-quote.png) no-repeat 6px 3px;
             }
         }
     }
@@ -3325,7 +3330,10 @@ footer {
                 .title {
                     float: left;
                     padding-right: 7px;
-                    width: 60px;
+                    width:auto;
+                    margin-right:5px;
+                    font-weight: 600;
+                    font-size: 13px;
                 }
                 .detail {
                     display: block;
@@ -7376,7 +7384,7 @@ section.sidebar {
                     }
                     a {
                         color: #d71921;
-                        width: 32%;
+                        width: 42%;
                         display: inline-block;
                         i {
                             color: #000;
@@ -7407,6 +7415,8 @@ section.sidebar {
                         padding-left: 15px;
                         color: #6e6e6e;
                         font-weight: normal;
+                        width: calc(100% - 72px);
+
                         .speaker-title {
                             font-weight: 700;
                         }
@@ -7670,12 +7680,12 @@ section.sidebar {
                     }
                 }
                 &:nth-child(1) {
-                    width: 28%;
-                    padding-top: 25px;
+                    width: 20%;
+                    padding-top:0px;
                 }
                 &:nth-child(2) {
-                    width: 24%;
-                    text-align: center;
+                    width: 75%;
+                    text-align: left;
                 }
                 &:nth-child(3) {
                     width: 48%;
@@ -7832,13 +7842,14 @@ section.sidebar {
     padding: 30px;
     border: 1px solid #ddd;
     background: #f7f7f7;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 #block-itg-event-backend-tweet-right-sidebar-event {
     padding: 15px 30px;
     background: #f7f7f7;
     border: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 #block-views-program-schedule-block-4 {
@@ -8094,7 +8105,7 @@ section.sidebar {
         }
         img {
             border-radius: 100%;
-            border: 1px solid #ddd;
+            border: 2px solid #d71921;
         }
     }
     h3 {
@@ -9865,7 +9876,7 @@ section.sidebar {
 
 .election-page {
     .election-top-block {
-        margin-top: 40px;
+        margin-top:0px;
         position: relative;
         z-index: 10;
         h1 {
@@ -9954,11 +9965,11 @@ section.sidebar {
             }
         }
         .ad-widget {
-            border: none;
+            border: 1px solid #ddd;
         }
         .election-topadd .ad-widget {
-            margin-top: 103px;
-            margin-bottom: 90px;
+            margin-top:0px;
+            margin-bottom:20px;
         }
         .ads-after-two {
             .election-topadd {
@@ -10212,8 +10223,7 @@ section.sidebar {
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
-                &:nth-child(2) {
-                    text-align: left;
+                &:nth-child(2) {                    
                     padding-left: 10px;
                 }
             }
@@ -10226,7 +10236,6 @@ section.sidebar {
                     padding-right: 5px;
                 }
                 &:nth-child(2) {
-                    text-align: left;
                     padding-left: 10px;
                 }
                 &.party-color {
@@ -13904,13 +13913,15 @@ span.see-picture {
         overflow: initial;
         padding-left: 0px;
     }
-    .view-front-end-global-search .view-content .itg-search-list>.views-field {
+    .view-front-end-global-search .view-content .itg-search-list>.views-field , .view-front-end-global-search .view-content .front-search-date-share {
         padding-left: 154px;
     }
     .view-front-end-global-search .view-content .search-pic {
         float: left;
         margin-right: 15px;
     }
+
+
 }
 
 @media (min-width: 768px) {
@@ -15044,3 +15055,4 @@ ul.pron-cons-img li img {
 .section-ordering p,.trending-videos .trending-videos-list, .watch-right-now-video ul li{font-family:$itg-opensanssemibold;}
 .itg-top-section .home-top-story .data-holder .itg-listing li {padding: 10px;font-family:$itg-opensanssemibold;}
 #block-itg-front-end-common-latest-from-aajtak ul .third-party-list, #block-itg-front-end-common-latest-from-pti ul .third-party-list, #block-itg-front-end-common-latest-from-businesstoday ul .third-party-list{font-family:$itg-opensanssemibold;}
+#block-itg-layout-manager-header-block .navigation .menu li.has-image,#block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect{overflow:visible}
