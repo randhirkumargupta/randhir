@@ -145,13 +145,16 @@
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>" onclick="openStateHref('up');"  class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span>
                      <script type="text/javascript">
                        document.addEventListener("DOMContentLoaded", function(event) { 
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
                         var svg_path = "<?php echo $row->field_election_svg_json_url_value; ?>";
                         var state_name = "<?php echo $state_name; ?>";
                          hmelection(state_name, '1',svg_path,chart_path);
+//                         setTimeout(function(){
+//                           hmelection(state_name, '1',svg_path,chart_path);
+//                         }, 3000);
                       });                   
                                              
                       </script>
