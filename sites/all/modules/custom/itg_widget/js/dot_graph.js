@@ -22,7 +22,7 @@ function hmelectioninner(a, x, chart_path, refresh_time) {
             jQuery("#fhs-" + a).html(loksabha_html);
 
         }});
-
+    if(refresh_time === undefined){refresh_time = 3000;}
     setTimeout(function () {
         console.log(refresh_time, 'refresh_time');
         hmelectioninner(b, 2, chart_path)
