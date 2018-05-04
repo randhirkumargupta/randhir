@@ -48,6 +48,14 @@ function itg_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
+  $form['election_graph_refreshtime'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Graph refresh Time'),
+    '#default_value' => get_itg_variable('election_graph_refreshtime'),
+    '#size' => 20,
+    '#required' => FALSE,
+    '#maxlength' => 20,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
