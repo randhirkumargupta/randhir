@@ -11,7 +11,11 @@
 function itg_layout_admin() {
   $data = '';
   if (isset($_GET['section']) && isset($_GET['template_name'])) {
-    $data = get_layout_details($_GET['section'], $_GET['template_name'], 'admin');
+    $tid = $_GET['section'];
+    if (isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] != 0) {
+      $tid = $_GET['category'];
+    }
+    $data = get_layout_details($tid, $_GET['template_name'], 'admin');
   }
   if ($_GET['template_name'] == 'page--front') {
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
@@ -88,8 +92,15 @@ function itg_layout_list() {
 
   foreach ($itg_result as $row) {
 
-    $edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)));
-    $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/' . arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
+    $section = $row->section_name;
+		$edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $section, 'template_name' => $row->template_name)));
+		$section_tid = get_category_parent_one_level($section);
+		if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
+			$category = $section;
+			$_section = $section_tid[0]->parent;
+			$edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $_section, 'category' => $category, 'template_name' => $row->template_name)));
+		}
+    $delete_link = l(t('Delete'), 'itg-deletelayout/' . $section, array('query' => array('destination' => 'itg-layout-list/'.arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
     $itg_action = $edit_link . ' / ' . $delete_link;
     $rows[] = array(
       array('data' => ($items_per_page * $pages + $count + 1)),

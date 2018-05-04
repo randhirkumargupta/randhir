@@ -32,6 +32,54 @@ function itg_breaking_news_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK
   );
+  
+  $items['manage-live-blog'] = array(		
+    'title' => 'Manage Live Blog',		
+    'page callback' => 'itg_live_blog_custom',		
+    'access arguments' => array('access itg story'),		
+    'access callback' => 'user_is_logged_in',		
+    'type' => MENU_NORMAL_ITEM,		
+    'file' => 'include/itg_breaking_news_forms.inc',    		
+  );		
+
+  $items['itg-live-blog-list'] = array(		
+    'title' => 'Listing Live Blog',		
+    'page callback' => 'itg_live_blog_list',		
+    'access arguments' => array('access itg story'),		
+    'access callback' => 'user_is_logged_in',		
+    'type' => MENU_NORMAL_ITEM,   		
+  );		
+
+  $items['itg-live-blog-row'] = array(		
+    'page callback' => 'itg_live_blog_get_row',		
+    'access callback' => 'user_is_logged_in',		
+    'access arguments' => array('access itg story'),		
+    'type' => MENU_NORMAL_ITEM,   		
+  );		
+
+  $items['itg-live-bog-delete'] = array(		
+    'page callback' => 'live_bog_delete',		
+    'access callback' => 'user_is_logged_in',		
+    'type' => MENU_CALLBACK,		
+    'access arguments' => array('access itg story'),		
+    'file' => 'include/itg_breaking_news_forms.inc', 		
+  );  		
+
+  $items['itg-live-blog-refresh'] = array(		
+    'page callback' => 'itg_live_blog_refresh',		
+    'access callback' => 'user_is_logged_in',		
+    'access arguments' => array('access itg story'),		
+    'file' => 'include/itg_breaking_news_forms.inc', 		
+    'type' => MENU_NORMAL_ITEM,   		
+  );		
+
+  $items['itg-live-blog-check-updates'] = array(
+    'page callback' => 'itg_live_blog_check_updates',
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+    'file' => 'include/itg_breaking_news_forms.inc', 
+  );
+  
   return $items;
 }
 
@@ -83,6 +131,11 @@ function itg_breaking_news_theme($existing, $type, $theme, $path) {
     ),
     'cricket_live_blog_commentary' => array(
       'template' => 'cricket-live-blog-commentary',
+      'path' => drupal_get_path('module', 'itg_breaking_news') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_live_blog_custom_form' => array(
+      'template' => 'itg-live-blog-custom-form',
       'path' => drupal_get_path('module', 'itg_breaking_news') . '/templates',
       'variables' => array('data' => NULL),
     ),
@@ -140,6 +193,13 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
+
+    $form['field_multi_user_allows']['#states'] = array(
+        'visible' => array(
+          ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+        ), 
+    );
+
     // code to add taxonomy parent terms with no child
     
     /*$tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = TRUE);
@@ -303,6 +363,20 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
  * @param array $form_state
  */
 function itg_breaking_news_form_custom_validate($form, &$form_state) {
+  $error = 0;  
+  if(empty($form_state['values']['field_multi_user_allows'][LANGUAGE_NONE][0]['value'])){
+      foreach ($form['field_breaking_content_details'][LANGUAGE_NONE] as $key => $fieldcollection) {
+        if (is_numeric($key)) {         
+          if($form_state['values']['field_breaking_content_details'][LANGUAGE_NONE][$key]['field_breaking_tile'][LANGUAGE_NONE][0]['value'] == '') {
+            $error = 1;
+          }
+        }
+     }
+     if($error == 1) {
+       form_set_error('field_breaking_tile', t("Title Field is required!"));
+     }    
+  }
+  
   if ($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog' && empty($form_state['values']['field_primary_category']['und'][0]['value'])) {
     form_set_error('field_primary_category', t("Primary category Field is required!"));
   }
@@ -572,3 +646,285 @@ function get_commentary_data_db($nid, $page) {
   return $data;
 }
 
+/**
+ * Ajax form submit itg_breaking_form_ajax_submit().
+ */
+function itg_breaking_form_ajax_submit($form , &$form_state) {
+  global $user;
+  $error = 0;
+  $blog_uid = $user->uid;
+  $blog_type = 'live_blog';
+  $action = ($form_state['input']['action']) ? $form_state['input']['action'] : '';
+  $bid = $form_state['input']['bid'];
+  $blog_title = $form_state['values']['blog_title'];
+  $blog_description = replace_emoji($form_state['values']['blog_description']['value']);
+  $blog_breaking_band = ($form_state['values']['blog_breaking_band']) ? $form_state['values']['blog_breaking_band'] : 1;
+  $blog_notification = ($form_state['values']['blog_notification']) ? $form_state['values']['blog_notification'] : 1;
+  $blog_publish_time = $form_state['values']['blog_publish_time'];
+  $blog_highlight_status = $form_state['values']['blog_highlight_status'];
+  $blog_entity_id = $form_state['values']['blog_entity_id'];
+  $status = 1;
+  $publish_time = !empty($blog_publish_time) ? $blog_publish_time : date('H:i');    
+  $commands = array();
+  
+  if (empty($action)) {    
+    if(!empty($blog_highlight_status) && empty($blog_title)) {
+      $error = 1;
+      $commands[] = ajax_command_replace('.inline-error-messages' , '<span class="inline-error-messages error">Title field is required.</span>');
+    } elseif (empty($blog_title) && empty($blog_description)) {
+      $error = 1;
+      $commands[] = ajax_command_replace('.inline-error-messages' , '<span class="inline-error-messages error">Title or description any one field is required.</span>');     
+    }
+    
+    if (!empty($error)) {
+      drupal_get_messages();
+      return array('#type' => 'ajax' , '#commands' => $commands);
+    }
+        
+     $created = date('Y-m-d H:i:s');
+      if (isset($bid) && $bid > 0) {
+          $insert_id = db_update('itg_live_blog')
+              ->fields(array(
+                'blog_title' => $blog_title,
+                'blog_description' => $blog_description,
+                'blog_highlight_status' => $blog_highlight_status,
+                'update_uid' => $blog_uid,
+                'blog_updated_date' => $created,
+              ))
+              ->condition('bid', $bid, '=')
+              ->execute();
+        }
+        else {
+             
+             $publish_time = date('H:i'); 
+             $insert_id = db_insert('itg_live_blog')
+              ->fields(array(
+                'blog_entity_id' => $blog_entity_id,
+                'blog_type' => $blog_type,
+                'blog_title' => $blog_title,
+                'blog_description' => $blog_description,
+                'blog_breaking_band' => $blog_breaking_band,
+                'blog_notification' => $blog_notification,
+                'blog_publish_time' => $publish_time,
+                'blog_highlight_status' => $blog_highlight_status,
+                'blog_uid' => $blog_uid,
+                'status' => $status,
+                'blog_created_date' => $created,
+              ))
+              ->execute();
+        }
+             
+      $blog_list = "<div id='live_data'>". itg_live_blog_list($blog_entity_id) . "</div>";
+      $form['breaking']['blog_title']['#value'] = '';
+      $form['breaking']['blog_highlight_status']['#checked'] = '';
+      $form['breaking']['blog_description']['value']['#value'] = '';
+      $form['breaking']['bid']['#value'] = '';
+      $commands[] = ajax_command_replace('.inline-error-messages' , '<span class="inline-error-messages error"></span>');
+      $commands[] = ajax_command_prepend(NULL, theme('status_messages')); // Messages output to a Drupal settings variable with registry alter
+      $commands[] = ajax_command_replace("#blog_highlight_replace_wrapper", render($form['breaking']['blog_highlight_status']));
+      $commands[] = ajax_command_replace("#blog_title_replace_wrapper", render($form['breaking']['blog_title']));
+      $commands[] = ajax_command_replace("#blog_description_replace_wrapper", render($form['breaking']['blog_description']));
+      // $commands[] = ajax_command_replace("#blog_publish_time_replace_wrapper", render($form['breaking']['blog_publish_time'])); 
+      $commands[] = ajax_command_replace("#blog_bid_replace_wrapper", render($form['breaking']['bid'])); 
+      $commands[] = ajax_command_replace('#live_data' , $blog_list);
+    
+  } else {
+     $query = db_select('itg_live_blog', 'p');
+     $query->fields('p', array('bid','blog_entity_id', 'blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification','blog_uid','blog_highlight_status','blog_publish_time'));
+     $query->condition('p.bid', $bid);
+     $query->condition('p.status', 1);
+     # execute the query
+     $row = $query->execute()->fetchObject();
+     $form['breaking']['blog_title']['#value'] = $row->blog_title;
+     $form['breaking']['blog_description']['value']['#value'] = $row->blog_description;
+     $form['breaking']['blog_breaking_band']['#value'] = $row->blog_breaking_band;
+     $form['breaking']['blog_uid']['#value'] = $row->blog_uid;
+     $form['breaking']['blog_publish_time']['#value'] = $row->blog_publish_time;
+     $form['breaking']['blog_highlight_status']['#checked'] = !empty($row->blog_highlight_status) ? $row->blog_highlight_status : '';
+     $form['breaking']['blog_entity_id']['#value'] = $row->blog_entity_id;
+     $form['breaking']['bid']['#value'] = $row->bid;       
+     $blog_form = "<div id='live_blog_form' class='table-bordered'>". drupal_render($form) . "</div>";
+     $commands[] = ajax_command_invoke('#blog-loader-data', 'hide');
+     $commands[] = ajax_command_replace('#live_blog_form', $blog_form);
+  }
+  
+  $alias = drupal_get_path_alias('node/' . $blog_entity_id);
+  $amp_alias = "amp/" . $alias;
+  if ($alias) {
+    itg_akamai_clear_url($alias);
+    itg_akamai_clear_url($amp_alias);
+  } 
+    
+  return array('#type' => 'ajax', '#commands' => $commands);  
+}
+
+/**
+ * Default show list of blog.
+ */
+function itg_live_blog_list($eid = NULL) {
+    global $base_url;
+    $output = '';
+    $limit = 3;
+    $start_from = ($_POST['row']) ? $_POST['row'] : '0';
+    $entityId = ($_POST['entityId']) ? $_POST['entityId'] : '';
+
+    if ($entityId) {
+      $blog_entity_id = $entityId;
+    } elseif($eid) {
+      $blog_entity_id = $eid;
+    } else {
+      $blog_entity_id = arg(2);  
+    } 
+
+    $query = db_select('itg_live_blog', 'p');
+    $query->condition('p.blog_entity_id', $blog_entity_id);
+    $query->condition('p.status', '1');
+    $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid',	'blog_created_date'))
+           ->range($start_from, $limit)
+          ->orderBy('bid', 'DESC');
+     # execute the query
+    $results = $query->execute()->fetchAll();
+ 
+    $total_records = db_query("SELECT bid FROM itg_live_blog WHERE status = 1 AND blog_entity_id = $blog_entity_id")->rowCount();
+
+    $output .= '  
+      <div class="table-responsive" id="custom-live-blog">  
+           <table class="table">  
+                <tr>  
+                     <th width="10%">Publish Time</th>
+                     <th width="10%">Posted by</th>
+                     <th width="10%">Title</th> 
+                     <th width="20%">Description</th> 
+                     <th width="10%">Action
+                      <input type="hidden" id="row" value="0">
+                      <input type="hidden" id="all" value="'.$total_records.'">
+                      <input type="hidden" id="entity-id" value="'.$blog_entity_id.'">  
+                     </th>  
+                </tr>';  
+
+      $results = array_reverse($results);
+      if (is_array($results) && count($results) > 0) {
+        foreach ($results as $row) 
+        {
+          $breaking_band = ($row->blog_breaking_band == 1) ? 'yes' : 'no'; 
+          $user = !empty($row->blog_uid) ? user_load($row->blog_uid) : '';
+          $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
+          $edit_link = '<div><a class="liveblog-custom-data" data="' . $row->bid . '" href="javascript:void(0);">' . t('Edit') . '</a>';
+            $output .= '  
+                    <tr id="'.$row->bid.'">
+                         <td class="blog_title" id="pt'.$row->blog_publish_time.'" data-id1="'.$row->bid.'">'.$row->blog_publish_time.'</td>
+                         <td class="user" id="u'.$row->bid.'" data-id2="'.$row->bid.'">'. $user_name .'</td>
+                         <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.$row->blog_title.'</td>
+                         <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.limit_words($row->blog_description, 10).'</td>
+                         <td>
+                          <div class="load-ajax-box">Please Wait..</div>
+
+                          ' . $edit_link . '
+                          <button type="button" name="delete_btn" data-id3="'.$row->bid.'" class="btn btn-xs btn-danger btn_delete">Delete</button>
+                         </td>  
+                    </tr>  
+               ';  
+          }  
+
+          $output .= '</table>';
+          if ($total_records > $limit) {
+            $output .= '<div class="load-more">Load More</div>';
+          }
+           $output .= '</div>';
+               
+      } else {
+        $output .= '</table>  
+                   <div class="itg-blog-empty-data">Empty</div>
+                  </div>';
+        } 
+ return $output; 
+}
+
+/**
+ * function for itg_live_blog_get_row().
+ */
+  function itg_live_blog_get_row($eid = NULL) {
+      global $base_url; 
+      $output = '';
+      $limit = 3;
+      $start_from = ($_POST['row']) ? $_POST['row'] : '0';
+      $entityId = ($_POST['entityId']) ? $_POST['entityId'] : '';
+
+      if ($entityId) {
+        $blog_entity_id = $entityId;
+      } elseif($eid) {
+        $blog_entity_id = $eid;
+      } 
+
+      $query = db_select('itg_live_blog', 'p');
+      if ($blog_entity_id) {
+        $query->condition('p.blog_entity_id', $blog_entity_id);
+      }
+
+      $query->condition('p.status', '1');
+      $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid',	'blog_created_date'))
+             ->range($start_from, $limit)
+            ->orderBy('bid', 'DESC');
+       # execute the query
+      $results = $query->execute()->fetchAll();
+      
+      $results = array_reverse($results);
+      foreach ($results as $row) 
+      {
+        $breaking_band = ($row->blog_breaking_band == 1) ? 'yes' : 'no'; 
+        $user = !empty($row->blog_uid) ? user_load($row->blog_uid) : '';
+        $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
+        $edit_link = '<div><a class="liveblog-custom-data" data="' . $row->bid . '" href="javascript:void(0);">' . t('Edit') . '</a>';
+        $output .= '  
+                <tr id="'.$row->bid.'">
+                     <td class="blog_title" id="pt'.$row->blog_publish_time.'" data-id1="'.$row->bid.'">'.$row->blog_publish_time.'</td>
+                     <td class="user" id="u'.$row->bid.'" data-id2="'.$row->bid.'">'.$user_name.'</td>
+                     <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.$row->blog_title.'</td>
+                     <td class="blog_title" id="t'.$row->bid.'" data-id1="'.$row->bid.'">'.limit_words($row->blog_description, 10).'</td>                     
+                     <td><div class="load-ajax-box">Please Wait..</div>
+
+                          ' . $edit_link . '
+                      <button type="button" name="delete_btn" data-id3="'.$row->bid.'" class="btn btn-xs btn-danger btn_delete">Delete</button>
+                     </td>  
+                </tr>  
+           ';  
+      }  
+    print $output; 
+  }
+
+/**
+ * content show at live blog page.
+ */
+function get_custom_content_details($blog_entity_id) {
+  $query = db_select('itg_live_blog', 'p');
+  $query->condition('p.blog_entity_id', $blog_entity_id);
+  $query->condition('p.status', '1');
+  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
+       ->orderBy('bid', 'DESC');
+  # execute the query
+  return $results = $query->execute()->fetchAll();
+ 
+}
+
+/**
+ * Left blog for live blog.
+ */
+function get_custom_left_side_data($blog_entity_id) {
+  $query = db_select('itg_live_blog', 'p');
+  $query->condition('p.blog_entity_id', $blog_entity_id);
+  $query->condition('p.status', '1');
+  $query->condition('p.blog_highlight_status', '1');
+  $query->fields('p', array('bid','blog_title', 'blog_publish_time'))
+       ->orderBy('bid', 'DESC');
+  # execute the query
+  return $results = $query->execute()->fetchAll();
+}
+
+/*
+ * function for limit_words().
+ */
+function limit_words($string, $word_limit)
+{
+    $words = explode(" ",strip_tags($string));
+    return implode(" ",array_splice($words,0,$word_limit));
+}
