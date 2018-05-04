@@ -975,7 +975,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
    .front .itg-layout-container .itg-h321-section .ad-widget {height:282px;padding:4px 0 10px;}
     /* ad code home page */
     #block-itg-ads-ads-super-banner-top-nav-728x90{background: #f2f2f2; padding-bottom: 10px; border: 1px solid #e2e2e2; min-height:280px;}
-    .front .itg-top-section .top-rhs-add-child .ad-widget .sidebar-ad{ padding-bottom: 10px; 
+    .front .itg-top-section .top-rhs-add-child .ad-widget .sidebar-ad{ padding-bottom: 10px; }
 }
 @media only screen and (max-width:320px){
 .itg-layout-container .ad-widget{width: 300px; padding:0; height:250px; border:0px; } 
