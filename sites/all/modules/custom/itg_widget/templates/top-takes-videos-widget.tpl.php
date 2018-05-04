@@ -15,8 +15,8 @@ if($is_fron_page){
         <li <?php echo $data_tb_region_item;?> class="top-takes-video top-takes-list top-takes-<?php echo $video_key ?>">
             <?php if (!empty($video_data['esi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">         
-              <?php $extra_large_image_url = image_style_url("widget_very_small", $video_data['esi_file_uri']); ?>
-                <img title="<?php echo $video_data['field_story_extra_small_image_title'] ?>" src="<?php print $extra_large_image_url; ?>" alt="<?php echo $video_data['field_story_extra_small_image_alt'] ?>" />
+              <?php //$extra_large_image_url = image_style_url("widget_very_small", $video_data['esi_file_uri']); ?>
+              <?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
             </a>
             <?php
           }
