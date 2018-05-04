@@ -84,7 +84,8 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
 </div>
 <?php endif;?>
 <?php } ?>
-<div class="liveBlog-indiatoday">
+<?php $livetv_class = !empty($node->field_blog_commentary[LANGUAGE_NONE][0]['value']) ? 'livetv-active' : '';  ?>
+<div class="liveBlog-indiatoday <?php print $livetv_class; ?>">
 <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 liveblog-heading">
      <?php
@@ -206,7 +207,7 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
           $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="dateauthor"><div class="breaking-date">' . $pub_display_time . ' IST</div><div class="breaking-author"> Posted by ' . $user_name . '</div></div>';
           $breaking_output .= '<div class="blog-multi-title">'. $blog_title .'</div>';
           $breaking_output .= '<div class="blog-multi-desc">'. $blog_desc .'</div>';
-          $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . urlencode($fb_title) . '" , "' . urlencode($share_desc) . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
+          $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . $fb_title . '" , "' . $share_desc . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
           $breaking_output .= '</div></div>';
           if($i == 3) {
             $breaking_output .= '<div class="breaking-section">';
@@ -232,6 +233,7 @@ $modify_date = date('Y-m-d H:i:s', $node->changed);
 endif;
 ?>
 </div>
+<?php /*
   <script>
     setInterval(check_updates_blog, 40000);
     function check_updates_blog() {
@@ -250,7 +252,9 @@ endif;
                });
              }        
      }
-  </script>          
+  </script>
+
+ */ ?>          
   </div>
 </div>
 </div>
