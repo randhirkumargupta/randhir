@@ -20,7 +20,8 @@
             ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print image_style_url("widget_very_small", $node_data['uri']); ?>" alt="<?php echo $node_data['field_story_extra_small_image_alt'];?>" title="<?php echo $node_data['field_story_extra_small_image_title'];?>" />
+                <!-- <img src="<?php print image_style_url("widget_very_small", $node_data['uri']); ?>" alt="<?php echo $node_data['field_story_extra_small_image_alt'];?>" title="<?php echo $node_data['field_story_extra_small_image_title'];?>" /> -->
+                <?php print theme('image_style', array('path' => $node_data['uri'], 'style_name' => 'widget_very_small', 'alt' => $node_data['field_story_extra_small_image_alt'], 'title' => $node_data['field_story_extra_small_image_title'])); ?>
               </a>
             </div>
             <?php
