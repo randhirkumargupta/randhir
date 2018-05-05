@@ -2433,6 +2433,8 @@ footer {
   word-wrap: break-word; }
   .story-section .story-right .description p {
     padding: 10px 0; }
+    .story-section .story-right .description p strong {
+      font-family: "OpenSans-Bold"; }
   .story-section .story-right .description video {
     max-width: 100%; }
   .story-section .story-right .description ul {
@@ -13159,7 +13161,7 @@ span.see-picture a {
   color: #fff; }
 
 .view-category-wise-content-list .catagory-listing {
-  padding: 10px 0; }
+  padding: 10px 0 15px; }
 
 .sidebar-second .may-be-suggest-container h3 {
   text-align: left; }
