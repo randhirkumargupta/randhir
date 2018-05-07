@@ -102,7 +102,7 @@
                         <div class="droppable">                                        
                             <h4 class="heading">Videos</h4>                                                 
                             <div class="data-holder" id="itg-block-12">
-                                <?php echo views_embed_view('tech', 'block_8'); ?>
+                                <?php echo views_embed_view('tech', 'election_videos'); ?>
                             </div>
                         </div>             
                     </div>               
