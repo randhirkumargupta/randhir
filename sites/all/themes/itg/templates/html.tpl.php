@@ -172,16 +172,6 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
-  <!-- Branch IO code end -->
-<!-- Scorecard taboola js -->
-<?php if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){ ?>
-    <script type="text/javascript">
-        window._taboola = window._taboola || [];
-        _taboola.push({flush: true});
-    </script>
-<?php } ?>
-<!-- End Scorecard taboola js -->
-   
 <?php 
 if((drupal_is_front_page()) || $type == 'story'){
   print $styles;
@@ -193,5 +183,15 @@ if ((drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1)) {
  echo $ipl_triangle_status['score_code_cube_app'];
 }
 ?>
+  <!-- Branch IO code end -->
+<!-- Scorecard taboola js -->
+<?php if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){ ?>
+    <script type="text/javascript">
+        window._taboola = window._taboola || [];
+        _taboola.push({flush: true});
+    </script>
+<?php } ?>
+<!-- End Scorecard taboola js --> 
+
 </body>
 </html> 
