@@ -1143,8 +1143,8 @@ function homePageCatNewslist($tid) {
                 $data_newslist[$listcount]['n_blog'] =  $n_blog;
             }
             else{
-                $n_blog = array();                
-                $n_blog['empty'] = "";
+                $n_blog = array();            
+                
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
@@ -1154,7 +1154,7 @@ function homePageCatNewslist($tid) {
         }
     }
 
-    $data_news['news'] = (array) $data_newslist;
+    $data_news['news'] = (object) $data_newslist;
     $order++;
 
     return $data_news;
