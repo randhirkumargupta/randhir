@@ -176,7 +176,7 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?>
-  <?php print $page_bottom; ?>
+  <?php //print $page_bottom; ?>
 <?php 
 if((drupal_is_front_page()) || $type == 'story'){
   print $styles;
