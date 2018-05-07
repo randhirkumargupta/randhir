@@ -2727,6 +2727,9 @@ footer {
             word-wrap: break-word;
             p {
                 padding: 10px 0;
+             strong{
+               font-family:$itg-opensansbold;
+             }
             }
             video {
                 max-width: 100%;
@@ -13992,7 +13995,7 @@ span.see-picture {
 }
 
 .view-category-wise-content-list .catagory-listing {
-    padding: 10px 0;
+    padding: 10px 0 15px;
 }
 
 .sidebar-second .may-be-suggest-container h3 {
