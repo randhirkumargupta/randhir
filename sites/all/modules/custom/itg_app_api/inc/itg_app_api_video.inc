@@ -1316,9 +1316,15 @@ function topstoriesList($source, $limit = 0) {
                 $n_blog['short_desc'] = "$short_desc";
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
+                $n_blog = (object) $n_blog;
+                $data_newslist[$home_list_count]['n_blog'] =  $n_blog;
             }
-            $n_blog = (object) $n_blog;
-            $data_newslist[$home_list_count]['n_blog'] = $n_blog;
+            else{
+                $n_blog = array();    
+                $n_blog['empty'] = "";
+                $n_blog = (object) $n_blog;  
+                $data_newslist[$home_list_count]['n_blog'] = $n_blog;
+            }
         $home_list_count++;
         //}
     }
