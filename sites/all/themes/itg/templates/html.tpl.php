@@ -185,11 +185,9 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
     </p>
   <?php endif; ?>
   <?php print $page_top; ?>
-  <?php print $page; ?>
-  <?php print $page_bottom; ?>   
+  <?php print $page; ?>     
   <?php 
     if((drupal_is_front_page()) || $type == 'story'){
-      print $styles;
       print $scripts;
     }
 
@@ -198,6 +196,7 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	 echo $ipl_triangle_status['score_code_cube_app'];
 	}
   ?>
+  <?php print $page_bottom; ?>
     <script>
       jQuery(document).ready(function () {
         jQuery(".tab-buttons span , .video_landing_menu a , .slick-arrow, .slick-slide, .pager a").on('click' , function() {
@@ -224,6 +223,11 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
           _taboola.push({flush: true});
       </script>
   <?php } ?>
-  <!-- End Scorecard taboola js -->
+  <!-- End Scorecard taboola js -->  
+<?php 
+    if((drupal_is_front_page()) || $type == 'story'){
+      print $styles;
+    }  
+?>
 </body>
 </html> 
