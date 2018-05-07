@@ -1226,15 +1226,3 @@ h1#display_tit .social-share li a.google{color:#bd1916}
     #other-past-results .other-past-results-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;margin:0 2px 0px;}
     #other-past-results .other-past-results-details::-webkit-scrollbar{ display: none;width: 0px; background: transparent;}
 }
-html {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  font-weight: 400;
-}
-@-moz-document url-prefix() {
-  body {
-    font-weight: lighter !important;
-  }
-} 
-
