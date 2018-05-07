@@ -7071,6 +7071,7 @@ function itg_rapid_value_manual_blog($nid) {
     $loopc = 0;
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
+        $content_ar = array_reverse($content_ar,true);
         foreach ($content_ar as $key => $value) {   
             $content_id = $value['value'];
             $entity = entity_load('field_collection_item', $value);            
