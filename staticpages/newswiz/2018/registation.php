@@ -146,7 +146,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 						<div class="row">
                               <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                                <h1>Registration: News Wiz Quiz 2018</h1>
-                               <iframe src="https://specials.intoday.in/specials/newswiz/registationform.jsp" width="100%" height="3200px" frameborder="0" marginheight="0" scrolling="no"></iframe>
+                               <?php $source = ($_SERVER['QUERY_STRING']) ? "?source=" . $_SERVER['QUERY_STRING'] : ''; ?>
+                               <iframe src="https://specials.intoday.in/specials/newswiz/registationform.jsp<?php print $source; ?>" width="100%" height="3200px" frameborder="0" marginheight="0" scrolling="no"></iframe>
                             </div>
 							
 							<!--end left -->
