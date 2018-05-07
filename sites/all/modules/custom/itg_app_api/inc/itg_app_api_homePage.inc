@@ -1141,7 +1141,7 @@ function homePageCatNewslist($tid) {
                 $n_blog['live_tv'] = "$live_tv";
             }
             $n_blog = (object) $n_blog;
-            $data_newslist[$listcount]['n_blog'] = $n_blog;
+            $data_newslist[$listcount]['n_blog'] = (object) $n_blog;
 
             $listcount++;
         }
