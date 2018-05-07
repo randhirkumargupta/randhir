@@ -1140,8 +1140,11 @@ function homePageCatNewslist($tid) {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
             }
+            else{
+                $n_blog = new stdClass();
+            }
             $n_blog = (object) $n_blog;
-            $data_newslist[$listcount]['n_blog'] = (object) $n_blog;
+            $data_newslist[$listcount]['n_blog'] =  $n_blog;
 
             $listcount++;
         }
