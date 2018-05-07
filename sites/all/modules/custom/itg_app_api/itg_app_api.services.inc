@@ -7069,7 +7069,7 @@ function itg_rapid_value_manual_blog($nid) {
     $blog_data['share_link'] = "$firebase_url";
     // blog content code
     $loopc = 0;
-    if ($new_blog == 0) {
+    if ($new_blog == 0 || $new_blog == 1) {
         $content_ar = $node_data->field_breaking_content_details['und'];
         $content_ar = array_reverse($content_ar,true);
         foreach ($content_ar as $key => $value) {   
