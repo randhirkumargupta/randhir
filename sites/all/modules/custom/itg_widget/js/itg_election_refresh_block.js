@@ -28,6 +28,6 @@ function refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time) {
         refresh_time = 30000;
     }
     setTimeout(function(){
-       getConstituencyData(jsonUrl, widget_name, delta, refresh_time); 
+       refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time); 
     }, refresh_time);
 }
