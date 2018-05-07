@@ -56,7 +56,7 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $section_name = get_term_name_by_tid($section_id);
     $type = array('story');
     $query = db_select('node', 'n');
-    $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
+    //$query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
@@ -81,9 +81,9 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story', '=');
-    $query->condition('iwo.widget', 'section_wise_widget');
-    $query->orderBy('iwo.weight', 'DESC');
-    //$query->orderBy('n.created', 'DESC');
+    //$query->condition('iwo.widget', 'section_wise_widget');
+    //$query->orderBy('iwo.weight', 'DESC');
+    $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
