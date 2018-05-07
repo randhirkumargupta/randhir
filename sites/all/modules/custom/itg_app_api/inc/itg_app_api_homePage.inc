@@ -212,7 +212,7 @@ function home_page_newslist_cat() {
 
     $cat_news_list = array();
     foreach ($query_results as $tid) {
-        $cat_news_list[] = (object) homePageCatNewslist($tid['ids']);
+        $cat_news_list[] = homePageCatNewslist($tid['ids']);
     }
 
     return $cat_news_list;
