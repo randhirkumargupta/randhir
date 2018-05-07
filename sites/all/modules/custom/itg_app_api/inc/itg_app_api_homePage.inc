@@ -1143,9 +1143,9 @@ function homePageCatNewslist($tid) {
                 $data_newslist[$listcount]['n_blog'] =  $n_blog;
             }
             else{
-                
+                $n_blog['blog_type'] = "";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'][0] = new \stdClass();
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
             
 
