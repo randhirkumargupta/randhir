@@ -8638,7 +8638,7 @@ section.sidebar .block-itg-ads {
 .sport-home-layout-page .itg-layout-225 .widget-title {
   margin-bottom: 10px; }
 .sport-home-layout-page .itg-layout-300 .droppable {
-  min-height: 300px; }
+  height: 315px; }
 .sport-home-layout-page .itg-layout-485 .droppable {
   height: 485px; }
 .sport-home-layout-page .itg-layout-195 .droppable {
@@ -8669,7 +8669,7 @@ section.sidebar .block-itg-ads {
     padding: 0; }
     .sport-home-layout-page .section_wise_order-sport-column .trending-videos .trending-videos-list + .trending-videos-list {
       border-top: none;
-      padding: 30px 0 0 0; }
+      padding: 15px 0 0 0; }
 .sport-home-layout-page .tech-block_5 {
   /*        .view-content{
       padding: 5px;

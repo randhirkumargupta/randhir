@@ -1077,10 +1077,10 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p{font-size: 20px; line-height:28px; margin:10px 0;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{color:#a48300;font-size:14px; text-transform: uppercase;margin-bottom:40px; display: block}
 #block-itg-widget-election-who-said-what #Slider .flex-control-nav{ display: none;}
-.election-page .view-display-id-block_8{background: #323232; padding: 10px;border-radius:5px;}
-.election-page .view-display-id-block_8 li.dont-miss-listing { padding: 10px 0!important; border-bottom: 1px solid rgb(33, 32, 32);}
-.election-page .view-display-id-block_8 li.dont-miss-listing:nth-last-child(1){ border-bottom:0px; }
-.election-page .view-display-id-block_8 li.dont-miss-listing .dm-detail a,.election-page .view-display-id-block_8 li.dont-miss-listing .dm-detail a:hover{ color:#fff; }
+.election-page .view-display-id-election_videos{background: #323232; padding: 10px;border-radius:5px;}
+.election-page .view-display-id-election_videos li.dont-miss-listing { padding: 10px 0!important; border-bottom: 1px solid rgb(33, 32, 32);}
+.election-page .view-display-id-election_videos li.dont-miss-listing:nth-last-child(1){ border-bottom:0px; }
+.election-page .view-display-id-election_videos li.dont-miss-listing .dm-detail a,.election-page .view-display-id-election_videos li.dont-miss-listing .dm-detail a:hover{ color:#fff; }
 .election-page .right-side .itg-484 .droppable{height: auto;}
 .election-page h4.heading, .election-graph .widget-title {font-family: "OpenSans-Regular";text-transform: uppercase;color: #c10504;font-size: 17px;font-weight: bold;border-bottom: 0px;padding-bottom: 0px;}
 .election-page #block-itg-widget-election-top-stories ul li{ list-style:none; overflow:hidden;padding: 10px 0; }
