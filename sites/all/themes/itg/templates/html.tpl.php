@@ -176,18 +176,16 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
   <?php endif; ?>
   <?php print $page_top; ?>
   <?php print $page; ?>
-  <?php //print $page_bottom; ?>
-<?php 
-if((drupal_is_front_page()) || $type == 'story'){
-  print $styles;
-  print $scripts;
-}
-
-$ipl_triangle_status = itg_ipl_triangle_status(); 
-if ((drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1)) {
- echo $ipl_triangle_status['score_code_cube_app'];
-}
-?>
+  <?php 
+	if((drupal_is_front_page()) || $type == 'story'){
+	  print $scripts;
+	}
+	$ipl_triangle_status = itg_ipl_triangle_status(); 
+	if ((drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1)) {
+	 echo $ipl_triangle_status['score_code_cube_app'];
+	}
+  ?>
+  <?php print $page_bottom; ?>
   <!-- Branch IO code end -->
 <!-- Scorecard taboola js -->
 <?php if($arg[0] == 'scorecard' && $arg[1] == 'matchcenter'){ ?>
@@ -197,6 +195,10 @@ if ((drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1)) {
     </script>
 <?php } ?>
 <!-- End Scorecard taboola js --> 
-
+<?php 
+	if((drupal_is_front_page()) || $type == 'story'){
+	  print $styles;
+	}
+?>
 </body>
 </html> 
