@@ -1145,7 +1145,7 @@ function homePageCatNewslist($tid) {
             else{
                 
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]->n_blog = $n_blog;
+                $data_newslist[$listcount]['n_blog'] = new \stdClass();
             }
             
 
