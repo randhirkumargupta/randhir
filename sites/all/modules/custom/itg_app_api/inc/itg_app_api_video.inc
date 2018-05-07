@@ -1325,7 +1325,7 @@ function topstoriesList($source, $limit = 0) {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$home_list_count]['n_blog'] = $n_blog;
             }
-        $home_list_count++;
+        $home_list_count++; 
         //}
     }
 
