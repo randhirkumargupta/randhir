@@ -59,9 +59,10 @@ function homePageJson() {
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";  
-    $data['data'][0] = $itg_rapid_home_sonam_json; // sonam-anand
+    
     //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    $data['data'][1] = $data_topstories;  
+    $data['data'][0] = $data_topstories;  
+    $data['data'][1] = $itg_rapid_home_sonam_json; // sonam-anand
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
     $data['data'][2] = $itg_rapid_home_movies_json;
     $data['data'][3] = $itg_rapid_home_technology_json;
@@ -2937,7 +2938,7 @@ function itg_rapid_home_sonam_json(){
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 5;
+    $range_max = 3;
     $range_min = 0;
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
