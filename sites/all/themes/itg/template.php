@@ -689,6 +689,42 @@ function itg_js_alter(&$javascript) {
 
 }
 
+/**
+* Implementation of hook_css_alter().
+* {@inheritdoc}
+* @param array $variables
+* @return string
+*/
+function itg_css_alter(&$css) {
+   global $user;
+   $type = '';
+   if (arg(0) == 'node') {
+     $node = menu_get_object();
+     $type = $node->type;
+   }
+   $exclude = array(
+     // Contrib CSS
+     'modules/system/system.base.css' => FALSE,
+     'modules/comment/comment.css' => FALSE,
+     'sites/all/modules/contrib/date/date_api/date.css' => FALSE,
+     'sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css' => FALSE,
+     'sites/all/modules/contrib/logintoboggan/logintoboggan.css' => FALSE,
+     'modules/node/node.css' => FALSE,
+     'modules/search/search.css' => FALSE,
+     'modules/user/user.css' => FALSE,
+     'sites/all/modules/contrib/youtube/css/youtube.css' => FALSE,
+     'sites/all/modules/contrib/views/css/views.css' => FALSE,
+     'sites/all/modules/contrib/ckeditor/css/ckeditor.css' => FALSE,
+     'sites/all/modules/contrib/colorbox/styles/default/colorbox_style.css' => FALSE,
+     'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
+     'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
+   );
+   // Exclude unnecessary CSS for anonymous users.
+   if (($user->uid == 0) && ((drupal_is_front_page()) || $type == 'story')) {
+     $css = array_diff_key($css, $exclude);
+   }
+}
+
 function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
