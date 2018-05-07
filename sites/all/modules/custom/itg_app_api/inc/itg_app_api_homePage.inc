@@ -1143,10 +1143,10 @@ function homePageCatNewslist($tid) {
                 $data_newslist[$listcount]['n_blog'] =  $n_blog;
             }
             else{
-                $n_blog = array();
-                $n_blog = (object) $n_blog;
-                $n_blog->gh = 0;
-                $data_newslist[$listcount]['n_blog'] = $n_blog->gh;
+                $n_blog = array();                
+                $n_blog['empty'] = "";
+                $n_blog = (object) $n_blog;  
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
             
 
