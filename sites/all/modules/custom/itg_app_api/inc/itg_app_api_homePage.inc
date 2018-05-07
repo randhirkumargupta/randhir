@@ -1154,7 +1154,7 @@ function homePageCatNewslist($tid) {
         }
     }
 
-    $data_news['news'] = (object) $data_newslist;
+    $data_news['news'] =  $data_newslist;
     $order++;
 
     return $data_news;
