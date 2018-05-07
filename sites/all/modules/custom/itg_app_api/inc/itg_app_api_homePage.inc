@@ -1143,7 +1143,7 @@ function homePageCatNewslist($tid) {
                 $data_newslist[$listcount]['n_blog'] =  $n_blog;
             }
             else{
-                $n_blog['1'] = "1";
+                $n_blog[] = array(array());
                 $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
