@@ -1151,7 +1151,7 @@ function topstoriesList($source, $limit = 0) {
     // loop on top stories.
     foreach ($result as $key => $value) {
         // filter breaking news blog..
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($value['field_type_value'] == "Breaking News"){
                 continue;
             }
         // varibale for json tag
@@ -1290,23 +1290,23 @@ function topstoriesList($source, $limit = 0) {
         /* work on offline end */
         // for breaking_news
             $n_blog = array();
-            $created = $resvalue['created'];
-            $blog_type = $resvalue['field_type_value'];
+            $created = $value['created'];
+            $blog_type = $value['field_type_value'];
             $new_blog = 0;
-            if ($resvalue['field_multi_user_allows_value']) {
+            if ($value['field_multi_user_allows_value']) {
                 $new_blog = 1;
             }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
+            elseif($value['field_type_value'] == "Cricket Live Blog"){
                $new_blog = 2; 
             }
             $live_tv = 0;
-            if ($resvalue['field_story_expires_value'] == 'Yes') {
+            if ($value['field_story_expires_value'] == 'Yes') {
                 $live_tv = 1;
             }
-            $short_desc = $resvalue['field_common_short_description_value'];
-            $sub_title = $resvalue['field_constituancy_value'];
+            $short_desc = $value['field_common_short_description_value'];
+            $sub_title = $value['field_constituancy_value'];
             $page_title = $node_data->title;
-            $field_type_value = $resvalue['field_type_value'];
+            $field_type_value = $value['field_type_value'];
             //p($resvalue);
             
             if($type == "breaking_news"){
