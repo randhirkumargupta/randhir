@@ -1100,6 +1100,9 @@ function homePageCatNewslist($tid) {
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
             $n_widget = array();
             $data_newslist[$listcount]['n_widget'] = $n_widget;
+            $n_blog = array();   
+            $n_blog = (object) $n_blog;  
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
 
             $listcount++;
         }
