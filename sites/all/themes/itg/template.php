@@ -743,6 +743,11 @@ function itg_js_alter(&$javascript) {
 
 function itg_css_alter(&$css) {
    global $user;
+   $type = '';
+   if (arg(0) == 'node') {
+     $node = menu_get_object();
+     $type = $node->type;
+   }
    $exclude = array(
      // Contrib CSS
      'modules/system/system.base.css' => FALSE,
@@ -761,7 +766,7 @@ function itg_css_alter(&$css) {
      'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
    );
    // Exclude unnecessary CSS for anonymous users.
-   if ($user->uid == 0) {
+   if (($user->uid == 0) && ((drupal_is_front_page()) || $type == 'story')) {
      $css = array_diff_key($css, $exclude);
    }
 }
