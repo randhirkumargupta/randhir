@@ -1139,12 +1139,14 @@ function homePageCatNewslist($tid) {
                 $n_blog['short_desc'] = "$short_desc";
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
+                $n_blog = (object) $n_blog;
+                $data_newslist[$listcount]['n_blog'] =  $n_blog;
             }
             else{
-                $n_blog = new stdClass();
+                $n_blog_blank = new stdClass();
+                $data_newslist[$listcount]['n_blog'] = $n_blog_blank;
             }
-            $n_blog = (object) $n_blog;
-            $data_newslist[$listcount]['n_blog'] =  $n_blog;
+            
 
             $listcount++;
         }
