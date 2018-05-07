@@ -1145,6 +1145,7 @@ function homePageCatNewslist($tid) {
             else{
                 $n_blog = array();
                 $n_blog = (object) $n_blog;
+                $n_blog->gh = 0;
                 $data_newslist[$listcount]['n_blog'] = $n_blog->gh;
             }
             
