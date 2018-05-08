@@ -1086,6 +1086,8 @@ function itg_widget_block_view($delta = '') {
             $data = $query->execute()->fetchField();
             if(!empty($data)){
               $offset = 4;
+            }else{
+              $offset = 12;
             }
             if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
               $offset = 0;
