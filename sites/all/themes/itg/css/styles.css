@@ -4025,14 +4025,14 @@ h1.category-heading {
     height: 5px;
     margin: 2px auto;
     background-color: #f7f7f7;
-    background-image: linear-gradient(#4a4a4a, #757575);
+    background: linear-gradient(#4a4a4a, #757575);
     border: 1px solid #c6c6c6;
     opacity: 1; }
   .anchor-detail-menu .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
     height: 9px;
     margin: 0 auto;
     width: 100%;
-    background-image: linear-gradient(#cacaca, #e4e4e4);
+    background: linear-gradient(#cacaca, #e4e4e4);
     border: 1px solid #afafaf;
     opacity: 1;
     border-radius: 0; }
@@ -4262,7 +4262,7 @@ h1.category-heading {
     font-size: 15px;
     color: #323232;
     cursor: move;
-    background-image: linear-gradient(#f5f3f2, #e7e5e4); }
+    background: linear-gradient(#f5f3f2, #e7e5e4); }
 
 /*End live block css*/
 /*Start css No result found side bar*/
@@ -7055,7 +7055,7 @@ section.sidebar .block-itg-ads {
     padding: 15px;
     color: #000;
     font-size: 18px;
-    background-image: linear-gradient(#fdcf2e, #fabb1d);
+    background: linear-gradient(#fdcf2e, #fabb1d);
     font-weight: 700; }
 .oscar-layout-page .oscar-features .col-md-6 {
   overflow: hidden;
@@ -8669,7 +8669,7 @@ section.sidebar .block-itg-ads {
     padding: 0; }
     .sport-home-layout-page .section_wise_order-sport-column .trending-videos .trending-videos-list + .trending-videos-list {
       border-top: none;
-      padding: 30px 0 0 0; }
+      padding: 15px 0 0 0; }
 .sport-home-layout-page .tech-block_5 {
   /*        .view-content{
       padding: 5px;
@@ -9249,7 +9249,7 @@ section.sidebar .block-itg-ads {
   height: 12px;
   margin: 3px auto;
   background-color: #f7f7f7;
-  background-image: linear-gradient(#a1a1a1, #d1d1d1);
+  background: linear-gradient(#a1a1a1, #d1d1d1);
   border: 1px solid #c6c6c6;
   opacity: 1; }
 
@@ -9257,7 +9257,7 @@ section.sidebar .block-itg-ads {
   height: 18px;
   margin: 0 auto;
   width: 98%;
-  background-image: linear-gradient(#0b0b0b, #171717);
+  background: linear-gradient(#0b0b0b, #171717);
   border: 1px solid #2c2c2c;
   opacity: 1; }
 
