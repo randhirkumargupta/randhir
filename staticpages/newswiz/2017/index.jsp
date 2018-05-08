@@ -275,25 +275,6 @@ a.active_h{background:#353333}
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="over_area">
-											<ul class="headtxt_t">
-												<li><strong>REGISTERATIONS HAVE BEEN CLOSED
-														BUT DON'T be disheartened, PLAY ALONG AND WIN AMAZING
-														GIFTS <a href="#" title="">Click Here</a> TO PLAY NEWS
-														WIZ.
-												</strong></li>
-												<li><strong>WANT TO KNOW MORE ABOUT WHAT NEWS WIZ IS ALL ABOUT <a href="episodes.jsp">Click Here</a>.
-												</strong>
-										</li>
-
-											<li>
-										<strong>FIND AND SUPPORT YOUR FAVOURITE TEAM. <a
-													href="all-teams.jsp" title="">Click Here</a> to support your team.
-												</strong>
-
-										</ul>
-
-
-
 											<p>It gives us great pleasure to announce the return of
 												the exciting and innovative news quiz, "News Wiz" for a
 												second season! Hosted by India's best known and award
