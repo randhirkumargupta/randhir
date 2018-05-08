@@ -3536,6 +3536,9 @@ function get_election_most_popular($cat_id, $limit = 12){
   if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
 		$offset = 0;
 	}
+  if( isset($_GET['offset']) ){
+    $offset = $_GET['offset'];
+  }
   $node_data = get_top_story_from_category($cat_id, $limit, $offset);
   return $node_data;
 }
