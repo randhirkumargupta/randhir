@@ -1096,6 +1096,8 @@ function itg_widget_block_view($delta = '') {
             if(!isset($offset)){
               $offset = 0;
             }
+          }else if ( $arg[0] == 'refresh_election_block'  && isset($arg[4])){
+            $_GET['offset']  = $arg[4];
           }     
           $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000');
           $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
