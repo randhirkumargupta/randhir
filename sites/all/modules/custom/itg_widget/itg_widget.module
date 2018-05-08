@@ -303,6 +303,13 @@ function itg_widget_menu() {
       'file path' => drupal_get_path('module', 'itg_widget'),
       'access callback' => TRUE,
     );
+    $items['refresh_election_view_block/%/%/%'] = array(
+      'page callback' => 'itg_election_view_block_refresh',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg-election_block_refresh.inc',
+      'file path' => drupal_get_path('module', 'itg_widget'),
+      'access callback' => TRUE,
+    );
 
   return $items;
 }

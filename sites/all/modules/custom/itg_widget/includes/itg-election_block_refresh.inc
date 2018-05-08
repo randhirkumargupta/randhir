@@ -19,3 +19,12 @@ function itg_election_block_refresh(){
     drupal_exit();
   }
 }
+
+function itg_election_view_block_refresh(){
+  $arg = arg();
+  if (!empty($arg[1]) && !empty($arg[2]) && !empty($arg[3]) ) {
+    $_GET['section'] = $arg[3];
+    print views_embed_view($arg[1], $arg[2]);
+    drupal_exit();
+  }
+}
