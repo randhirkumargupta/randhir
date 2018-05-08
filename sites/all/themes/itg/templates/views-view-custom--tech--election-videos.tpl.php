@@ -54,7 +54,7 @@ jQuery(document).ready(function(){
   ?>
   var jsonUrl = "<?php echo $jsonUrl;?>";
   setTimeout(function(){
-       refresh_election_view_blocks(jsonUrl, 'tech', 'election_videos', 30000); 
+       refresh_election_view_blocks(jsonUrl, 'tech', 'election_videos', refresh_time); 
     }, refresh_time);
 });
 </script>
