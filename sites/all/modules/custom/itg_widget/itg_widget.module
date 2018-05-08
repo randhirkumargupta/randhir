@@ -1104,7 +1104,7 @@ function itg_widget_block_view($delta = '') {
             $_GET['offset']  = $arg[4];
           }     
           $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
-          $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
+          $refresh_url = FRONT_URL . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
           drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_most_popular", array("data" => $data));

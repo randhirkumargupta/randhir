@@ -32,9 +32,9 @@
  </div>
 <script>
 jQuery(document).ready(function(){
-  var refresh_time = "<?php echo (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000'); ?>";
+  var refresh_time = "<?php echo (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000'); ?>";
   if (refresh_time === undefined){
-    refresh_time = 60000;
+    refresh_time = 900000;
   }
   <?php
   global $theme;
@@ -50,11 +50,11 @@ jQuery(document).ready(function(){
   if ($theme == FRONT_THEME_NAME && is_numeric(arg(2)) && arg(0) != 'refresh_election_view_block') {
     $cat_id = arg(2);              
   }
-  $jsonUrl = $base_url . '/refresh_election_view_block/tech/election_videos/'.$cat_id;
+  $jsonUrl = FRONT_URL . '/refresh_election_view_block/tech/election_videos/'.$cat_id;
   ?>
   var jsonUrl = "<?php echo $jsonUrl;?>";
   setTimeout(function(){
-       refresh_election_view_blocks(jsonUrl, 'tech', 'election_videos', 30000); 
+       refresh_election_view_blocks(jsonUrl, 'tech', 'election_videos', refresh_time); 
     }, refresh_time);
 });
 </script>
