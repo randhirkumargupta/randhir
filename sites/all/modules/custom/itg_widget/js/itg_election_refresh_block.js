@@ -27,7 +27,7 @@ function refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time) {
         }
     });
     if(refresh_time === undefined){
-        refresh_time = 30000;
+        refresh_time = 60000;
     }
     setTimeout(function(){
        refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time); 

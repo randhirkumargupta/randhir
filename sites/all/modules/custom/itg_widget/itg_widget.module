@@ -1096,7 +1096,7 @@ function itg_widget_block_view($delta = '') {
               $offset = 0;
             }
           }                    
-          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '30000');
+          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000');
           $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
           drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_election_most_popular($cat_id, 12);
