@@ -171,7 +171,7 @@ function homePageJsonPackagelist_india() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -383,7 +383,7 @@ function homePageJsonPackagelist_lifestyle() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -594,7 +594,7 @@ function homePageJsonPackagelist_world() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -980,7 +980,7 @@ function homePageJsonNewslist_india() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1258,7 +1258,7 @@ function homePageJsonNewslist_world() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1910,7 +1910,7 @@ function homePageJsonNewslist_lifestyle() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);

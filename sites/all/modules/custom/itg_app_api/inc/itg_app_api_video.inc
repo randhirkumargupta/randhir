@@ -143,7 +143,7 @@ function generateVideoCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -442,7 +442,7 @@ function generateProgramCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $d1 = date('Y-m-d', strtotime("-120 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
