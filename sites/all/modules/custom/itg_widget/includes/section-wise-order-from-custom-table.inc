@@ -34,7 +34,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'standpoint' => 5,
           'edu-notification' => 4,
           'tech-tips' => 4,
-          'sport-column' => 3,
+          'sport-column' => 4,
           'in-depth' => 6,
           'talking-point' => 4,
           'movies-lifestyle' => 7,
