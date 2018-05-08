@@ -7084,6 +7084,7 @@ function itg_rapid_value_manual_blog($nid) {
             if($desc_withhtml){
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
                 $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
             
             $blog_content[$loopc]['content_id'] = "$content_id";
