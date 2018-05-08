@@ -311,6 +311,96 @@ function itg_report_api_resource() {
         ),
       ),
     ),
+      
+   // insert_video custom resource declaration.....
+        'insert_video' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves insert_video schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_insert_video',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'long_headline',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Long headline',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'short_headline',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Short headline',
+                            'type' => 'array',
+                        ),
+                       array(
+                            'name' => 'description',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Description',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'city',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'City',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'anchor',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Anchor',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'video_kicker',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Video kicker',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'section_id',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Section id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'cat_id',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Cat id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'image_url',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Image url',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'video_file_name',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'Video file name',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
   );
   return $api;
 }
@@ -685,4 +775,17 @@ function itg_report_api_detail() {
   //}
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
+}
+/**
+ * Call back function for video insert API
+ * @pram $_POST in JSON formate
+ *
+ * @return array - The processed information array.
+ */
+
+function itg_rapid_api_insert_video(){
+    $HTTP_RAW_POST_DATA;
+    // check duplicate user
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    p($params);
 }
