@@ -1,12 +1,11 @@
 /*
- Election constituency js 
+ Election Block Refresh JS 
  */
 
 function refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time) {
     if (jsonUrl === undefined || widget_name === undefined) {
         return;
     }
-
     jQuery.ajax({
         type: "GET",
         url: jsonUrl,
@@ -32,4 +31,28 @@ function refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time) {
     setTimeout(function(){
        refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time); 
     }, refresh_time);
+}
+
+
+function refresh_election_view_blocks(jsonUrl, viewid, view_display_id, refresh_time) {
+    if (jsonUrl === undefined || viewid === undefined || view_display_id === undefined) {
+        return;
+    }
+    jQuery.ajax({
+        type: "GET",
+        url: jsonUrl,
+        cache: true,
+        crossDomain: true,
+        success: function (data) {
+            if (data !== undefined && data !== '') {
+                var replacewith = ".view-id-"+viewid + ".view-display-id-" + view_display_id;
+                if(jQuery(replacewith) !== undefined){
+                    jQuery(replacewith).replaceWith(data);
+                }                
+            }            
+        },
+        error: function (error) {
+            console.log(error, 'Refresh View Block error');
+        }
+    });
 }

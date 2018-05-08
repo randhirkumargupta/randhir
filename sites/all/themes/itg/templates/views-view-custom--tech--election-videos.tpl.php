@@ -2,7 +2,7 @@
      <ul class="">  
 <?php foreach($rows as $index => $row){
     $desc=$row['title'];
-   
+   global $base_url;
     if (!empty($row['field_story_small_image'])) {
                 $img = $row['field_story_small_image'];
             }
@@ -30,3 +30,31 @@
 <?php }; ?>
        </ul>
  </div>
+<script>
+jQuery(document).ready(function(){
+  var refresh_time = "<?php echo (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000'); ?>";
+  if (refresh_time === undefined){
+    refresh_time = 60000;
+  }
+  <?php
+  global $theme;
+  if (isset($_GET['category']) && !empty($_GET['category'])) {
+    $selction_name = 'category';
+  }
+  else {
+    $selction_name = 'section';
+  }
+  if (isset($_GET[$selction_name])) {
+    $cat_id = $_GET[$selction_name];
+  }
+  if ($theme == FRONT_THEME_NAME && is_numeric(arg(2)) && arg(0) != 'refresh_election_view_block') {
+    $cat_id = arg(2);              
+  }
+  $jsonUrl = $base_url . '/refresh_election_view_block/tech/election_videos/'.$cat_id;
+  ?>
+  var jsonUrl = "<?php echo $jsonUrl;?>";
+  setTimeout(function(){
+       refresh_election_view_blocks(jsonUrl, 'tech', 'election_videos', 30000); 
+    }, refresh_time);
+});
+</script>
