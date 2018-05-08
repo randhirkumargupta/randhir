@@ -7083,7 +7083,7 @@ function itg_rapid_value_manual_blog($nid) {
             $posted_by = "";
             if($desc_withhtml){
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body'];
+                $desc_withhtml_formated = $body_with_html_data['n_body']; 
             }
             
             $blog_content[$loopc]['content_id'] = "$content_id";
