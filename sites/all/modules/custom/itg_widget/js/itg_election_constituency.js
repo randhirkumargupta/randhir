@@ -22,9 +22,13 @@ function getConstituencyData(jsonUrl, jsonKey) {
 }
 jQuery(document).ready(function () {
     if (Drupal.settings.json_url !== undefined && Drupal.settings.constituency !== undefined) {
+				var refresh_time = 5000;
+				if(Drupal.settings.refresh_time !== undefined){
+					refresh_time = Drupal.settings.refresh_time;
+				}
         setInterval(function () {
             getConstituencyData(Drupal.settings.json_url, Drupal.settings.constituency);
-        }, 5000);
+        }, refresh_time);
     }
 });
 

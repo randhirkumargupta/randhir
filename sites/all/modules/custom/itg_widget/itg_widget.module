@@ -1108,7 +1108,7 @@ function itg_widget_block_view($delta = '') {
           }else if ( $arg[0] == 'refresh_election_block'  && isset($arg[4])){
             $_GET['offset']  = $arg[4];
           }     
-          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000');
+          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
           $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
           drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_election_most_popular($cat_id, 12);
@@ -1140,9 +1140,10 @@ function itg_widget_block_view($delta = '') {
            if (!empty($json_url)){
              $json_url = $json_url . 'elections/2018/json/constituency/' . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
+             $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
              drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
              drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_constituency.js', array('type' => 'file', 'scope' => 'footer'));
-             $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url));;
+             $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url, 'refresh_time' => $refresh_time));
            }else{
              $block['content'] = '';
            }
@@ -1984,7 +1985,7 @@ function get_election_state_by_category($catid){
 
 function itg_election_constituency(){
   $arg = arg();
-  //$section_alias = 'assembly-elections-2017';//$arg[0];
+  $section_alias = 'assembly-elections-2017/';//$arg[0];
   $section_alias = $arg[0];
   $category_alias = $arg[1];
   $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
