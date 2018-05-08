@@ -197,7 +197,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 
                 <li><a href="/newswiz/2017/newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>
 
-               <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li>
+              <!--  <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li> -->
 
                  <li><a href="/newswiz/2017/episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
                  <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
@@ -576,7 +576,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 					<div class="container_wiz">
 						<p>News and Quiz come together in a fantastic battle of
 							brains. Rajdeep Sardesai who has spent his life in news will be
-							at the helm of the first-of-its-kind quiz show - NewsWiz. There
+							at the helm of the first-of-its-kind quiz show - News Wiz. There
 							is no one better equipped than Rajdeep to host such a show
 							considering that he has spent 26 years reporting, editing and
 							anchoring news.</p>
