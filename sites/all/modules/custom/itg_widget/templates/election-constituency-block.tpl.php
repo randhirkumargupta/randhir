@@ -101,7 +101,7 @@ if ($jsondata->live != 1) {
     <div class="col-md-12 <?php print $bottom_chuck;?>" id="other-candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
-				<table class="table" id="othercandidates-list">
+				<table class="table" id="othercandidates-list-bottom">
 					 <thead>
 						 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th><th><?php echo (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS');?></th>
 					 </thead>
@@ -121,8 +121,12 @@ function mobilecheck() { var check = false; (function (a) { if (/(android|ipad|p
 var is_mobile = mobilecheck() ? true : false;
 if (is_mobile) {
 var oRows = document.getElementById('othercandidates-list').getElementsByTagName('tr');
+var oRowsT = document.getElementById('othercandidates-list-bottom').getElementsByTagName('tr');
 var iRowCount = oRows.length; iRowCount = iRowCount - 1;
-var totalwidth = iRowCount*330;
+var totalwidth = iRowCount*330; totalwidth = totalwidth+30;
 document.getElementById('othercandidates-list').style.width = totalwidth +'px';
+var iRowCountT = oRowsT.length; iRowCountT = iRowCountT - 1;
+var totalwidthT = iRowCountT*330; totalwidthT = totalwidthT+30;
+document.getElementById('othercandidates-list-bottom').style.width = totalwidthT +'px';
 }
 </script>
