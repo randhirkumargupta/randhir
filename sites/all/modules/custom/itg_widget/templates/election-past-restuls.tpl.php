@@ -4,7 +4,7 @@ $jsondata = $jsondata->$constituency;
 $labels = $jsondata->label;
 $jsondata = $jsondata->candidate;
 ?>
-<div class="row mb-20">
+<div class="row">
     <div class="col-md-12" id="other-past-results">
 			<div class="other-past-results-details">
 			<table class="table" id="past-results-list">
