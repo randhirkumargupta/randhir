@@ -24,7 +24,7 @@ $jsondata = $jsondata->candidate;
   	if (is_mobile) {
 var oRows = document.getElementById('past-results-list').getElementsByTagName('tr');
 var iRowCount = oRows.length; iRowCount = iRowCount - 1;
-var totalwidth = iRowCount*330;
+var totalwidth = iRowCount*330; totalwidth = totalwidth+30;
 document.getElementById('past-results-list').style.width = totalwidth +'px';
 }
   </script>
