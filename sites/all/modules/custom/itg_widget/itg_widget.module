@@ -1079,7 +1079,6 @@ function itg_widget_block_view($delta = '') {
             $cat_id = arg(2);              
           }
           if($arg[0] != 'refresh_election_block'){
-            $offset = 20;
             $query = db_select('field_data_field_is_election_live', 'el');
             $query->condition('el.entity_id', $cat_id, '=');
             $query->fields('el', array('field_is_election_live_value'));
@@ -1089,6 +1088,9 @@ function itg_widget_block_view($delta = '') {
             }
             if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
               $offset = 0;
+            }
+            if( isset($_GET['offset']) && !empty($_GET['offset'])){
+              $offset = $_GET['offset'];
             }
             if(empty($offset)){
               $offset = 0;
