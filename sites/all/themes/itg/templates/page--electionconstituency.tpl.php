@@ -6,6 +6,7 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
+drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
 ?>
 
 <div class="itg-layout-container auto-layout-page election-page <?php echo $itg_class; ?> ">
