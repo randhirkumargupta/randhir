@@ -1095,7 +1095,8 @@ function itg_widget_block_view($delta = '') {
             if(empty($offset)){
               $offset = 0;
             }
-          }                    
+          }     
+          
           $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000');
           $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
           drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
@@ -1972,6 +1973,7 @@ function get_election_state_by_category($catid){
 
 function itg_election_constituency(){
   $arg = arg();
+  //$section_alias = 'assembly-elections-2017';//$arg[0];
   $section_alias = $arg[0];
   $category_alias = $arg[1];
   $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
