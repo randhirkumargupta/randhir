@@ -296,7 +296,7 @@ function itg_widget_menu() {
       'access callback' => TRUE,
     );
     
-    $items['refresh_election_block/%/%/%'] = array(
+    $items['refresh_election_block/%/%/%/%'] = array(
       'page callback' => 'itg_election_block_refresh',
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg-election_block_refresh.inc',
@@ -1065,7 +1065,7 @@ function itg_widget_block_view($delta = '') {
           $block['content'] = theme("election_key_issues", array("data" => $data));
           break;
         case 'election_most_popular':
-          global $theme;
+          global $theme, $base_url;
           if (isset($_GET['category']) && !empty($_GET['category'])) {
             $selction_name = 'category';
           }
@@ -1078,8 +1078,24 @@ function itg_widget_block_view($delta = '') {
           if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
             $cat_id = arg(2);              
           }
+          if($arg[0] != 'refresh_election_block'){
+            $offset = 20;
+            $query = db_select('field_data_field_is_election_live', 'el');
+            $query->condition('el.entity_id', $cat_id, '=');
+            $query->fields('el', array('field_is_election_live_value'));
+            $data = $query->execute()->fetchField();
+            if(!empty($data)){
+              $offset = 4;
+            }
+            if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
+              $offset = 0;
+            }
+          }
+          if(empty($offset)){
+            $offset = 20;
+          }          
           $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '30000');
-          $refresh_url = FRONT_URL . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id;
+          $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
           drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_most_popular", array("data" => $data));

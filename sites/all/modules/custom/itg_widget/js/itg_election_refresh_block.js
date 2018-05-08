@@ -14,10 +14,12 @@ function refresh_election_blocks(jsonUrl, widget_name, delta, refresh_time) {
         crossDomain: true,
         success: function (data) {
             if (data !== undefined && data !== '') {
-                var _widget_name = widget_name.replace("_", "-");
-                var _delta = delta.replace("_", "-");
-                var replacewith = "#block-"+_widget_name+_delta;
-                jQuery(replacewith).replaceWith(data);
+                var _widget_name = widget_name.replace(/_/g, "-");
+                var _delta = delta.replace(/_/g, "-");
+                var replacewith = "#block-"+_widget_name + "-" + _delta;
+                if(jQuery(replacewith) !== undefined){
+                    jQuery(replacewith).replaceWith(data);
+                }                
             }            
         },
         error: function (error) {
