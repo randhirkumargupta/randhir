@@ -1158,13 +1158,17 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-home-graph-election span.fullcoverage-electionlink a{display: block; font-size: 13px; line-height: 17px;}
 .home-election{ margin-bottom: 20px;}
 .election-top-block .liststory-election {margin-bottom: 15px; color: #a00606;font-size: 16px;}
-.election-top-block .liststory-election ul li {display: inline-block;line-height: 18px;color: #a00606;padding: 0 15px;}
+.election-top-block .liststory-election ul li {display: inline-block;line-height: 18px;color: #a00606;padding: 0 15px; position: relative;}
+.election-top-block .liststory-election ul li + li:before{content: '|'; position: absolute; left: -4px; display: inline-block;}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
 .election-top-block .liststory-election ul li a {color: #111;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
 .election-page .right-side .ad-widget {border: 1px solid #ddd; padding: 20px 37px; height: 305px; border-radius: 5px;}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a:hover svg #hovesvg{ fill:#ffc106 }
+/* back button css */
+.election-back-button{ text-align: right; }
+.election-back-button span.back-button{background: #ddd; padding: 5px 20px; font-size: 16px; border-radius: 20px; display: inline-block; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.3);}
 @media screen and (max-width:767px){
 #home-livetv-election iframe,#home-webcast-election iframe{ height:280px; width: 100% }
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 22px; line-height: 26px;}
