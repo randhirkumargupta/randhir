@@ -19,6 +19,10 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
       </div>    
     <?php endif; ?>
     <div class="row">
+        <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print $page['title'];?></h1> </div>
+        <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="#">Back</a></span> </div>
+    </div>
+    <div class="row">
         <div class="col-md-8 col-sm-12 col-sx-12 election-graph left-side">             
             <div class="">
                 <div class="itg-widget">
