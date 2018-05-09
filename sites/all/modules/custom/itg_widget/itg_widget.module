@@ -2057,8 +2057,15 @@ function itg_election_constituency_map(){
     $keyword = $content->field_constituency_keyword[LANGUAGE_NONE][0]['value'];
     $description = $content->field_constituency_description[LANGUAGE_NONE][0]['value'];
     
-    drupal_set_title($title);
+    //drupal_set_title($title);
     $html_head = array(
+      'title' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'title',
+          'content' => $description,
+        ),
+      ),
       'description' => array(
         '#tag' => 'meta',
         '#attributes' => array(
