@@ -999,7 +999,7 @@ function homePageCatNewslist($tid) {
 
         foreach ($result as $reskey => $resvalue) {
             // filter breaking news blog..
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = $resvalue['title'];
