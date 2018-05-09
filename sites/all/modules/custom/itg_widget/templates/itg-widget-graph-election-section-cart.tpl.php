@@ -186,14 +186,14 @@
 </div>
 </div>
   <?php 
-  /*$bottom_label = get_itg_variable('itg_election_home_bottom_label');
+  $bottom_label = get_itg_variable('itg_election_home_bottom_label');
   $bottom_label_url = get_itg_variable('itg_election_home_bottom_label_url');
   if(!empty($bottom_label)) {
-    if(!empty($bottom_label_url)) {?>
+    if(!empty($bottom_label_url)) { ?>
 <span class="fullcoverage-electionlink"><a href="<?php echo $bottom_label_url;?>"><?php echo $bottom_label;?></a></span> 
     <?php } else {?>
       <span class="fullcoverage-electionlink"><?php echo $bottom_label;?></span> 
-    <?php }; ?>
-  <?php }; */ ?>
+    <?php } ?>
+  <?php } ?>
 <?php endif; ?>
 
