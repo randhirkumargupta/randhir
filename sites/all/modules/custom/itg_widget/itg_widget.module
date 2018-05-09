@@ -1002,7 +1002,7 @@ function itg_widget_block_view($delta = '') {
             if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
               $cat_id = arg(2);              
             }            
-            if (drupal_is_front_page()) {
+            if (drupal_is_front_page() || arg(0) == 'livetv') {
               $cat_id = get_itg_variable('home_page_election_tid');              
             }            
             $data = get_top_story_from_category($cat_id, 4, 0);
