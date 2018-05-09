@@ -239,12 +239,15 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 
                 <div class="social-nav mhide">
                     <ul class="social-nav mhide">
+                        <li class="livetv-icon-parent"><a href="/livetv"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<path id="hovesvg" fill="#FFFFFF" d="M22,7h-8.17l4.76-4.76c0.39-0.39,0.39-1.02,0-1.41c-0.39-0.39-1.02-0.39-1.41,0l-5.13,5.13L6.91,0.83
+  c-0.39-0.39-1.02-0.39-1.41,0c-0.39,0.39-0.39,1.02,0,1.41L10.25,7H2C0.9,7,0,7.9,0,9v12c0,1.1,0.9,2,2,2h20c1.1,0,2-0.9,2-2V9
+  C24,7.9,23.1,7,22,7z M22,20c0,0.55-0.45,1-1,1H3c-0.55,0-1-0.45-1-1V10c0-0.55,0.45-1,1-1h18c0.55,0,1,0.45,1,1V20z"/>
+</svg></a></li>                      
                         <li class="share-icon-parent">
                             <a href="javascript:void(0)" class="share-icon-default"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                             <div class="social-dropdown">
-                                <ul>
-
-                                    <li><a rel="nofollow" href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <ul>                                    <li><a rel="nofollow" href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
                                     <li><a rel="nofollow" href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                     <li><a rel="nofollow" href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
                                     <li><a href="<?php echo $base_url . '/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>

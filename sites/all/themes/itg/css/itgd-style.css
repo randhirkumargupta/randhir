@@ -1162,6 +1162,9 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
 .election-top-block .liststory-election ul li a {color: #111;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
+.election-page .right-side .ad-widget {border: 1px solid #ddd; padding: 20px 37px; height: 305px; border-radius: 5px;}
+#block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
+#block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a:hover svg #hovesvg{ fill:#ffc106 }
 @media screen and (max-width:767px){
 #home-livetv-election iframe,#home-webcast-election iframe{ height:280px; width: 100% }
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 22px; line-height: 26px;}
