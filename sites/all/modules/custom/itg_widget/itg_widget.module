@@ -831,7 +831,7 @@ function itg_widget_block_view($delta = '') {
                 drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
               }
               foreach ($data as $index => $row) {
-                  $jsondata = ''; //file_get_contents($row->field_election_constituency_tall_value);
+                  $jsondata = file_get_contents($row->field_election_constituency_tall_value);
                   $settings['index'] = $index;
                   $settings['json_data'] = $jsondata;
                   drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
