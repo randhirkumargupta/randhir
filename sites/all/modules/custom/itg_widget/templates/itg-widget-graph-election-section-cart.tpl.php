@@ -3,11 +3,11 @@
 
   <?php
   global $base_url;
-  $classrow = "col-md-8 fullchart-table";
+  $classrow = "col-md-8 col-sm-12 fullchart-table";
   $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
   if (!empty($itg_election_home_webcast_livetv)) {
-    $classrow = "col-md-4";
+    $classrow = "col-lg-4 col-md-4 col-sm-12";
   }  
   if ($theme != 'seven') {
     if ($theme == FRONT_THEME_NAME) {
@@ -41,37 +41,9 @@
   if (!empty($story_title[0]['uri'])) {
     $src = file_create_url($story_title[0]['uri']);
   }
-  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '<div class="social-share">
-              <ul>
-                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                  <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-              </ul>
-          </div></h1></div></div>';
+  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1></div></div>';
  }?>
  <div class="row electionHome-section">
-<?php if(!empty($itg_election_home_webcast_livetv)){?>
-<div class="col-md-4 mt-50">
-    <div class="itg-widget">
-      <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
-      <div class="data-holder" id="home-livetv-election">
-        <?php
-        $block = block_load('itg_widget', 'live_tv');
-        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-        print render($render_array);
-        ?>
-      </div>
-      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
-        <div class="data-holder" id="home-webcast-election">
-          <?php
-            print get_itg_variable('itg_election_home_webcast_html');
-          ?>
-        </div>
-      <?php }?>
-    </div>
-</div>
-<?php }?>
 <?php  
   // Start high chart Graph
   foreach ($data as $index => $row):
@@ -173,7 +145,30 @@
   <?php } ?>
   <?php endforeach; ?>
 <!-- End High Cart graph -->
-<div class="col-md-4 col-sm-4 mt-50">
+<!-- Live Tv and Webcast tv -->
+<?php if(!empty($itg_election_home_webcast_livetv)){?>
+<div class="col-lg-4 col-md-4 col-sm-12 mt-50">
+    <div class="itg-widget">
+      <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
+      <div class="data-holder" id="home-livetv-election">
+        <?php
+        $block = block_load('itg_widget', 'live_tv');
+        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+        print render($render_array);
+        ?>
+      </div>
+      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
+        <div class="data-holder" id="home-webcast-election">
+          <?php
+            print get_itg_variable('itg_election_home_webcast_html');
+          ?>
+        </div>
+      <?php }?>
+    </div>
+</div>
+<?php }?>
+<!-- Live Tv and Webcast tv End -->
+<div class="col-md-4 col-sm-4 col-sm-12 mt-50">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
           <?php
