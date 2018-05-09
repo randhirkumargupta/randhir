@@ -1135,7 +1135,8 @@ function itg_widget_block_view($delta = '') {
           $args = arg();
           if (!empty($args[3])) {
            $constituency = explode("-", $args[3]);
-           $constituency = $constituency[0];           
+           unset($constituency[(count($constituency) - 1)]);
+           $constituency = implode('-', $constituency);
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
              $json_url = $json_url . 'elections/2018/json/constituency/' . $constituency.'.json';
@@ -1986,7 +1987,7 @@ function get_election_state_by_category($catid){
 function itg_election_constituency(){
   $arg = arg();
   $section_alias = $arg[0];
-  $section_alias = $arg[0];
+  $section_alias = 'assembly-elections-2017';//$arg[0];
   $category_alias = $arg[1];
   $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
   
