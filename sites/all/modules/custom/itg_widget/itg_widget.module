@@ -2051,11 +2051,12 @@ function itg_election_constituency_map(){
   
   if ($_GET['test'] == 'xyz') {
     $get_election_nid = itg_get_election_nid($tax_data[2]);
+    pr($get_election_nid);
     $entity_id = $get_election_nid['entity_id'];
-    p($entity_id);
+    p(node_load($get_election_nid));
   }
   
- 
+        
   return theme('itg_election_constituency_map', array('data' => $data));
 }
 
@@ -2065,7 +2066,7 @@ function itg_election_constituency_map(){
  */
 function itg_get_election_nid($val){
     if ($val) {
-      $query = db_select('field_data_field_graph_category', 'c');
+      $query = db_select('field_data_field_graph_category', 'm');
       $query->condition('m.field_graph_category_value', $val, '=');
       $query->fields('m', array('entity_id'));
       $data_result = $query->execute()->fetchAssoc();
