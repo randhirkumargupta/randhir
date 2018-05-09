@@ -510,6 +510,9 @@ function itg_widget_block_info() {
     $blocks['election_past_results'] = array(
       'info' => t('Widget: Past Results'),
     );
+    $blocks['election_livetv_block'] = array(
+      'info' => t('Widget: Election LiveTV Block'),
+    );
     
     return $blocks;
 }
@@ -1170,6 +1173,23 @@ function itg_widget_block_view($delta = '') {
           }else{
             $block['content'] = '';
           }
+          break;
+        case 'election_livetv_block':
+          if(!empty(get_itg_variable('itg_election_home_chunk'))){
+              $data = itg_widget_get_graph_data_for_home();
+              if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
+                drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+              }
+              foreach ($data as $index => $row) {
+                  $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+                  $settings['index'] = $index;
+                  $settings['json_data'] = $jsondata;
+                  drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+              }
+              $block['content'] = theme("graph_election_livetv_chunk", array("data" => $data));
+            }else{
+              $block['content'] = '';
+            }
           break;
     }       
     return $block;
