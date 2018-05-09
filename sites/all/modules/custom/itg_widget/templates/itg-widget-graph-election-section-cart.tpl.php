@@ -182,7 +182,7 @@
 <div class="col-md-4 col-sm-4 col-sm-12 mt-50">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
-          <h3>Karnataka Election Top Stories</h3>
+          <h3><?php echo get_itg_variable('itg_election_top_stories_label');?></h3>
           <?php
           $block = block_load('itg_widget', 'election_top_stories');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));

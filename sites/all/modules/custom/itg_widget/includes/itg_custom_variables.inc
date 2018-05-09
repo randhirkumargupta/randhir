@@ -136,6 +136,14 @@ function itg_election_configure() {
     '#required' => FALSE,
     '#maxlength' => 20,
   );
+  $form['itg_election_top_stories_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Top Story label'),
+    '#default_value' => get_itg_variable('itg_election_top_stories_label'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+  );
   $form['submit_election'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
