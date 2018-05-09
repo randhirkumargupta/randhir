@@ -2051,9 +2051,8 @@ function itg_election_constituency_map(){
   
   if ($_GET['test'] == 'xyz') {
     $get_election_nid = itg_get_election_nid($tax_data[2]);
-    pr($get_election_nid);
     $entity_id = $get_election_nid['entity_id'];
-    p(node_load($get_election_nid));
+    p(node_load($entity_id));
   }
   
         
