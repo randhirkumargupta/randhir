@@ -2059,6 +2059,13 @@ function itg_election_constituency_map(){
     
     drupal_set_title($title);
     $html_head = array(
+      'title' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'title',
+          'content' => $description,
+        ),
+      ),
       'description' => array(
         '#tag' => 'meta',
         '#attributes' => array(
