@@ -5,13 +5,12 @@
  */
 function itg_fia_data() {  
   $start_time = strtotime("-300 day");
-  $end_time = strtotime("now");
-  $mail_today_tid = '1206572';    
+  $mail_today_tid = '1206572';//Mail Today Primary Cat    
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
   $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
   $query->fields('n', array('nid', 'created'));
-  $query->condition('n.created', array($start_time, $end_time), 'BETWEEN'); 
+  $query->condition('n.created', $start_time, '>='); 
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
@@ -35,13 +34,12 @@ function itg_fia_data() {
  */
 function itg_mail_today_fia_data() {
     $start_time = strtotime("-300 day");
-    $end_time = strtotime("now");
     $mail_today_tid = '1206572';
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
     $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
     $query->fields('n', array('nid', 'created'));
-    $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
+    $query->condition('n.created', $start_time, '>=');
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story', '=');
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
@@ -65,13 +63,12 @@ function itg_mail_today_fia_data() {
  */
 function itg_mail_photos_fia_data() {
     $start_time = strtotime("-300 day");
-    $end_time = strtotime("now");
     $mail_today_tid = '1206572';
     $type = array(story,photogallery);
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
     $query->fields('n', array('nid', 'created'));
-    $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
+    $query->condition('n.created', $start_time, '>=');
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, IN);
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
