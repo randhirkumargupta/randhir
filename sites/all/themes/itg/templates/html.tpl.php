@@ -181,6 +181,10 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	if ((drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1)) {
 	 echo $ipl_triangle_status['score_code_cube_app'];
 	}
+  
+  if ((!drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1) && get_itg_variable('itg_election_home_chunk')) {
+	 echo $ipl_triangle_status['score_code_cube_app'];
+	}
   ?>
   <?php print $page_bottom; ?>
     
