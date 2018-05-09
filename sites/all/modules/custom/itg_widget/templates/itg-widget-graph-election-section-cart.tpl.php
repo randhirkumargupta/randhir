@@ -52,7 +52,7 @@
   }
   echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1>
     <div class="liststory-election"><ul>' .$list_story_li.
-  '</div></div>';
+  '</ul></div></div>';
  }?>
  <div class="row electionHome-section">
 <?php  
