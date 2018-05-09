@@ -84,7 +84,6 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     html += "<tr><td>Movable Assets</td><td>" + (data.moveable_assets !== undefined ? data.moveable_assets : '') + "</td></tr>";
     html += "<tr><td>Immovable Assets</td><td>" + (data.immovable_assets !== undefined ? data.immovable_assets : '') + "</td></tr>";
     html += "<tr><td>Income</td><td>" + (data.income !== undefined ? data.income : '') + "</td></tr>";
-    html += "<tr><td>Spouse Dependants</td><td>" + (data.spouse_dependants !== undefined ? data.spouse_dependants : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #candidates table tbody").html(html);
     if (consData.lbl_candidates !== undefined) {
         jQuery("#constituency-top-chunk #candidates .labels").html(consData.lbl_candidates);
@@ -95,9 +94,7 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     var mocHTML = "";
     mocHTML += "<tr><td>AC name</td><td>" + (constituencyName !== undefined ? constituencyName : '') + "</td></tr>";
     mocHTML += "<tr><td>AC No</td><td>" + (consData.id !== undefined ? consData.id : '') + "</td></tr>";
-    mocHTML += "<tr><td>No of voters</td><td>" + (consData.voters_count !== undefined ? consData.voters_count : '') + "</td></tr>";
-    mocHTML += "<tr><td>Area</td><td>" + (consData.district !== undefined ? consData.district : '') + "</td></tr>";
-    mocHTML += "<tr><td>Sitting MLA's name</td><td>" + (data.candidate !== undefined ? data.candidate : '') + "</td></tr>";
+    mocHTML += "<tr><td>District</td><td>" + (consData.district !== undefined ? consData.district : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #map-of-constituency table tbody").html(mocHTML);
     if (consData.svg !== undefined) {
         jQuery("#constituency-top-chunk #map-of-constituency #candidates-svg").html(consData.svg);
@@ -114,15 +111,15 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
     jQuery.each(data, function (key, value) {
         if (value !== undefined) {
             if (consData.live !== undefined && consData.live != "1") {
-               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + ((value.win_loss !== undefined && value.win_loss != '') ? value.win_loss : 'Result Awaited') + "</td></tr>"; 
+               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td></tr>"; 
             }else {
-               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td></tr>";
+               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + ((value.win_loss !== undefined && value.win_loss != '') ? value.win_loss : 'Result Awaited') + "</td></tr>";
             }
             
         }
     })
     if (consData.live !== undefined && consData.live != "1") {
-        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th><th>"+(consData.label.status !== undefined ? consData.label.status : 'STATUS')+"</th></tr>";
+        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th></tr>";
         jQuery("#other-candidates table thead").html(th);
         jQuery("#other-candidates table tbody").html(html);
         jQuery("#other-candidates-past").hide();
@@ -132,7 +129,7 @@ function showOthersConstituencyCandidatesHTML(data, consData) {
             jQuery("#other-candidates .labels").html('Other Candidates');
         }
     } else {
-        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th></tr>";
+        var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th><th>"+(consData.label.status !== undefined ? consData.label.status : 'STATUS')+"</th></tr>";
         jQuery("#other-candidates").hide();
         jQuery("#other-candidates-past table thead").html(th);
         jQuery("#other-candidates-past table tbody").html(html);
