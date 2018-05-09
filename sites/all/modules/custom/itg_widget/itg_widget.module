@@ -822,7 +822,7 @@ function itg_widget_block_view($delta = '') {
             break;
         case 'home_graph_election':
             if(!empty(get_itg_variable('itg_election_home_chunk'))){
-              $data = itg_widget_get_graph_data_for_home();
+              /*$data = itg_widget_get_graph_data_for_home();
               if($data[0]->field_graph_type_value == 'Graph'){
                 drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
                 drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
@@ -835,7 +835,8 @@ function itg_widget_block_view($delta = '') {
                   $settings['index'] = $index;
                   $settings['json_data'] = $jsondata;
                   drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
-              }
+              }*/
+              $data = array();
               $block['content'] = theme("graph_election_section_cart", array("data" => $data));
             }else{
               $block['content'] = '';
