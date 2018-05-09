@@ -3682,3 +3682,23 @@ function get_miscellaneous_content($cat_id, $limit, $type = 'who-said-what'){
   $result = $query->execute()->fetchAll();
   return $result;  
 }
+
+function get_html_widget_name_by_layout($section_name, $template_name, $block_name = 'itg-block-11', $widget_name = NULL){
+  if(!empty($widget_name)){
+    $label_name = $widget_name;
+  }else{
+    $label_name = '';
+  }  
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('filter_url'));
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+  $itg_query->condition('layout_tpl.section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('layout_manager.block_name', $block_name);
+  $itg_query->condition('layout_manager.widget_name', $widget_name);
+  $result = $itg_query->execute()->fetchAll();
+  if(!empty($result[0]->block_title)){
+    $label_name = $result[0]->block_title;
+  }
+  return $label_name;
+}
