@@ -262,9 +262,9 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
               <div class="swiper-slide">
                 <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
               </div>
-              <div class="swiper-slide">
+              <!-- <div class="swiper-slide">
                 <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
-              </div>
+              </div> -->
               <div class="swiper-slide">
                 <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>
@@ -553,9 +553,9 @@ font-size: 20px;line-height:52px; color: #fff; text-transform: uppercase;}
               <div class="swiper-slide">
                 <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
               </div>
-              <div class="swiper-slide">
+              <!-- <div class="swiper-slide">
                 <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
-              </div>
+              </div> -->
               <div class="swiper-slide">
                 <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
               </div>

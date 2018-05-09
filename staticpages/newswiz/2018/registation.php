@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Registation - News Wiz Quiz 2018 Show by Rajdeep Sardesai, Siddhartha	Basu on India Today Television</title>
+<title>Registration in News Wiz Quiz 2018 Season 3 at India Today</title>
 <meta name="description"
-	content="News Quiz wiz 2018 by Rajdeep Sardesai and Siddhartha Basu properly known as the quiz man of India brings you first time at India Today for class X and XI students all across India. Come and participate here." />
+	content="Registration News Wiz Quiz Season 3: Fill here all the required information and register yourself to participate in third season of India Today News Wiz Quiz 2018." />
 <meta name="keywords"
-	content="News Wiz 2018, news quiz 2018, Rajdeep Sardesai, Siddhartha Basu, India today quiz, News Quiz rules, News Quiz schedule, News Quiz faq" />
+	content=" News Wiz, News Wiz Quiz 2018, News Wiz Quiz Season 3, News Wiz third season, News Quiz Registration, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+<link rel="canonical" href="https://indiatoday.in/newswiz/2018/registation.php" />
 <link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
@@ -144,7 +145,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad26">
 						<div class="row">
                               <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                               <iframe src="https://specials.intoday.in/specials/newswiz/registationform.jsp" width="100%" height="3200px" frameborder="0" marginheight="0" scrolling="no"></iframe>
+                               <h1>Registration: News Wiz Quiz 2018</h1>
+                               <?php $source = ($_SERVER['QUERY_STRING']) ? "?source=" . $_SERVER['QUERY_STRING'] : ''; ?>
+                               <iframe src="https://specials.intoday.in/specials/newswiz/registationform.jsp<?php print $source; ?>" width="100%" height="3200px" frameborder="0" marginheight="0" scrolling="no"></iframe>
                             </div>
 							
 							<!--end left -->

@@ -166,30 +166,35 @@ $itg-robotoslab:'RobotoSlab-Regular';
   font-family: 'Merriweather-Bold';
   src: local("/"), url("../fonts/merriweather-latin-700.woff") format("woff"), url("../fonts/Merriweather-Bold.ttf") format("truetype"), url("../fonts/merriweather-latin-700.woff2") format("woff2");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  font-display: swap; }
 @font-face {
   font-family: 'Merriweather-Semibold';
   src: local("/"), url("../fonts/merriweather-latin-400.woff") format("woff"), url("../fonts/Merriweather-Bold.ttf") format("truetype"), url("../fonts/merriweather-latin-400.woff2") format("woff2");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  font-display: swap; }
 @font-face {
   font-family: 'OpenSans-Regular';
   src: url("../fonts/OpenSans-Regular.eot");
   src: local("/"), url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.ttf") format("truetype"), url("../fonts/OpenSans-Regular.svg") format("svg");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  font-display: swap; }
 @font-face {
   font-family: 'OpenSans-Bold';
   src: url("../fonts/OpenSans-Bold.eot");
   src: local("/"), url("../fonts/OpenSans-Bold.woff") format("woff"), url("../fonts/OpenSans-Bold.ttf") format("truetype"), url("../fonts/OpenSans-Bold.svg") format("svg");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  font-display: swap; }
 @font-face {
   font-family: 'OpenSans-Semibold';
   src: url("../fonts/OpenSans-Semibold.eot");
   src: local("/"), url("../fonts/OpenSans-Semibold.woff") format("woff"), url("../fonts/OpenSans-Semibold.ttf") format("truetype"), url("../fonts/OpenSans-Semibold.svg") format("svg");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  font-display: swap; }
 /* Global CSS */
 * {
   box-sizing: border-box; }
@@ -2428,6 +2433,8 @@ footer {
   word-wrap: break-word; }
   .story-section .story-right .description p {
     padding: 10px 0; }
+    .story-section .story-right .description p strong {
+      font-family: "OpenSans-Bold"; }
   .story-section .story-right .description video {
     max-width: 100%; }
   .story-section .story-right .description ul {
@@ -4018,14 +4025,14 @@ h1.category-heading {
     height: 5px;
     margin: 2px auto;
     background-color: #f7f7f7;
-    background-image: linear-gradient(#4a4a4a, #757575);
+    background: linear-gradient(#4a4a4a, #757575);
     border: 1px solid #c6c6c6;
     opacity: 1; }
   .anchor-detail-menu .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
     height: 9px;
     margin: 0 auto;
     width: 100%;
-    background-image: linear-gradient(#cacaca, #e4e4e4);
+    background: linear-gradient(#cacaca, #e4e4e4);
     border: 1px solid #afafaf;
     opacity: 1;
     border-radius: 0; }
@@ -4255,7 +4262,7 @@ h1.category-heading {
     font-size: 15px;
     color: #323232;
     cursor: move;
-    background-image: linear-gradient(#f5f3f2, #e7e5e4); }
+    background: linear-gradient(#f5f3f2, #e7e5e4); }
 
 /*End live block css*/
 /*Start css No result found side bar*/
@@ -7048,7 +7055,7 @@ section.sidebar .block-itg-ads {
     padding: 15px;
     color: #000;
     font-size: 18px;
-    background-image: linear-gradient(#fdcf2e, #fabb1d);
+    background: linear-gradient(#fdcf2e, #fabb1d);
     font-weight: 700; }
 .oscar-layout-page .oscar-features .col-md-6 {
   overflow: hidden;
@@ -8631,7 +8638,7 @@ section.sidebar .block-itg-ads {
 .sport-home-layout-page .itg-layout-225 .widget-title {
   margin-bottom: 10px; }
 .sport-home-layout-page .itg-layout-300 .droppable {
-  min-height: 300px; }
+  height: 315px; }
 .sport-home-layout-page .itg-layout-485 .droppable {
   height: 485px; }
 .sport-home-layout-page .itg-layout-195 .droppable {
@@ -8662,7 +8669,7 @@ section.sidebar .block-itg-ads {
     padding: 0; }
     .sport-home-layout-page .section_wise_order-sport-column .trending-videos .trending-videos-list + .trending-videos-list {
       border-top: none;
-      padding: 30px 0 0 0; }
+      padding: 15px 0 0 0; }
 .sport-home-layout-page .tech-block_5 {
   /*        .view-content{
       padding: 5px;
@@ -9242,7 +9249,7 @@ section.sidebar .block-itg-ads {
   height: 12px;
   margin: 3px auto;
   background-color: #f7f7f7;
-  background-image: linear-gradient(#a1a1a1, #d1d1d1);
+  background: linear-gradient(#a1a1a1, #d1d1d1);
   border: 1px solid #c6c6c6;
   opacity: 1; }
 
@@ -9250,7 +9257,7 @@ section.sidebar .block-itg-ads {
   height: 18px;
   margin: 0 auto;
   width: 98%;
-  background-image: linear-gradient(#0b0b0b, #171717);
+  background: linear-gradient(#0b0b0b, #171717);
   border: 1px solid #2c2c2c;
   opacity: 1; }
 
@@ -13154,7 +13161,7 @@ span.see-picture a {
   color: #fff; }
 
 .view-category-wise-content-list .catagory-listing {
-  padding: 10px 0; }
+  padding: 10px 0 15px; }
 
 .sidebar-second .may-be-suggest-container h3 {
   text-align: left; }

@@ -13,6 +13,7 @@ $fb_share_title = htmlentities($search_title, ENT_QUOTES);
 $short_url = $actual_link;
 $share_desc = '';
 $src = '';
+drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
 ?>
 <?php
 global $theme;
@@ -151,6 +152,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     $display_title = "";
                     if (empty($story_title)) {
                       $display_title = 'style="display:none"';
+                    }
+                    if (!empty($story_title[0]['uri'])) {
+                      $src = file_create_url($story_title[0]['uri']);
                     }
                     echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
                                 <ul>
@@ -497,7 +501,7 @@ else { ?>
                             <div class="col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Non Draggable ( <strong>MAP</strong> )</div>
                                 <div class="itg-widget">
-                                    <h4 class="heading">Map</h4> 
+                                    <h4 class="heading">Results Map</h4> 
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
                                     <?php
                                         $block = block_load('itg_widget', 'election_mini_map');

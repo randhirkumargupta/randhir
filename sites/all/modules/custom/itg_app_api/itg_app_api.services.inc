@@ -7160,6 +7160,7 @@ function itg_rapid_value_manual_blog($nid) {
     $loopc = 0;
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
+        $content_ar = array_reverse($content_ar,true);
         foreach ($content_ar as $key => $value) {   
             $content_id = $value['value'];
             $entity = entity_load('field_collection_item', $value);            
@@ -7169,11 +7170,41 @@ function itg_rapid_value_manual_blog($nid) {
             $title = "";
             $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];   
             $posted_by = "";
+            if($desc_withhtml){
+                $body_with_html_data = formateNodeBodyToken($desc_withhtml);
+                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
+            }
             
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
-            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
             $blog_content[$loopc]['updated_datetime'] = "$field_breaking_publish_time";
+            $blog_content[$loopc]['title'] = "$title";
+            $blog_content[$loopc]['posted_by'] = "$posted_by";
+            $loopc++;
+        }
+    }
+    elseif ($new_blog == 1) {
+       $custom_content = itg_rapid_new_blog_content_details($nid);
+        foreach ($custom_content as $breaking_item) {             
+            $title = $breaking_item->blog_title;
+            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time); 
+            $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
+            $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
+            $posted_by = $user_name;
+            $desc_withhtml = $breaking_item->blog_description;
+            $desc_withouthtml = strip_tags($breaking_item->blog_description);
+            if($desc_withhtml){
+                $body_with_html_data = formateNodeBodyToken($desc_withhtml);
+                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
+            }
+            $content_id = $breaking_item->bid;
+            $blog_content[$loopc]['content_id'] = "$content_id";
+            $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
+            $blog_content[$loopc]['updated_datetime'] = "$breaking_item->blog_publish_time";
             $blog_content[$loopc]['title'] = "$title";
             $blog_content[$loopc]['posted_by'] = "$posted_by";
             $loopc++;
@@ -7185,4 +7216,18 @@ function itg_rapid_value_manual_blog($nid) {
     //  data object
     $json_data['data'] = $blog_data;
     return $json_data;
+}
+
+/**
+ * content show at live blog page.
+ */
+function itg_rapid_new_blog_content_details($blog_entity_id) {
+  $query = db_select('itg_live_blog', 'p');
+  $query->condition('p.blog_entity_id', $blog_entity_id);
+  $query->condition('p.status', '1');
+  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
+       ->orderBy('bid', 'DESC');
+  # execute the query
+  return $results = $query->execute()->fetchAll();
+ 
 }

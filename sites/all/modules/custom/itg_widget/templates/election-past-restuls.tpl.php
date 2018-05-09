@@ -4,7 +4,7 @@ $jsondata = $jsondata->$constituency;
 $labels = $jsondata->label;
 $jsondata = $jsondata->candidate;
 ?>
-<div class="row mb-20">
+<div class="row">
     <div class="col-md-12" id="other-past-results">
 			<div class="other-past-results-details">
 			<table class="table" id="past-results-list">
@@ -24,7 +24,7 @@ $jsondata = $jsondata->candidate;
   	if (is_mobile) {
 var oRows = document.getElementById('past-results-list').getElementsByTagName('tr');
 var iRowCount = oRows.length; iRowCount = iRowCount - 1;
-var totalwidth = iRowCount*330;
+var totalwidth = iRowCount*330; totalwidth = totalwidth+30;
 document.getElementById('past-results-list').style.width = totalwidth +'px';
 }
   </script>

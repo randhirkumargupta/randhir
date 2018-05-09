@@ -261,7 +261,10 @@ else if ($widget_style == 'in-depth') {
                 }
                 ?>
                 <div <?php echo $data_tb_region_item;?>>
-                <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/> </a></span>
+                <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                <!-- <img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/> -->
+                <?php print theme('image_style', array('path' => $entity['mi_file_uri'], 'style_name' => 'anchors_landing', 'alt' => $entity['field_story_medium_image_alt'], 'title' => $entity['field_story_medium_image_title'])); ?>
+                </a></span>
 
                 <h3 title="<?php echo $desc; ?>">
                     <?php
@@ -292,7 +295,8 @@ else if ($widget_style == 'in-depth') {
                 <ul>
                     <li <?php echo $data_tb_region_item;?>>
                         <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" />
+                                <!-- <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> -->
+                                <?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>                                
                             </a></span>
 
                         <p  title="<?php echo $desc; ?>">
@@ -340,7 +344,8 @@ else if ($widget_style == 'in-depth') {
 
                     <li <?php echo $data_tb_region_item;?>>
                         <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                                <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>"/>
+                                <!-- <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>"/> -->
+                                <?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>                                
                             </a></span>  
 
                         <p title="<?php echo $desc; ?>">
@@ -867,7 +872,8 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
                   <?php if (!empty($extra_large_image_url)) { ?>
 
                     <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  
-                            <img  height="66" width="88"  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
+                            <!-- <img  height="66" width="88"  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span> -->
+                            <?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
 
                   <?php }
                   ?>
@@ -988,7 +994,10 @@ else if ($widget_style == 'home-watch') {
                       <?php if (!empty($extra_large_image_url)) { ?>
 
                         <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  
-                                <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_small_image_alt']; ?>" title="<?php echo $entity['field_story_small_image_title']; ?>" /> </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity['field_video_duration_value']; ?></span></span>
+                                <!-- <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_small_image_alt']; ?>" title="<?php echo $entity['field_story_small_image_title']; ?>" />-->                                 
+                                <?php print theme('image_style', array('path' => $entity['si_file_uri'], 'style_name' => 'image170x127', 'alt' => $entity['field_story_small_image_alt'], 'title' => $entity['field_story_small_image_title'])); ?>
+                                </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity['field_video_duration_value']; ?>
+                        </span></span>
 
                       <?php }
                       ?>
@@ -1102,7 +1111,9 @@ else if ($widget_style == 'sport-column') {
                   <?php if (!empty($extra_large_image_url)) { ?>
 
                     <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"> 
-                            <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
+                            <!-- <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> -->
+					<?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
+					</a></span>
 
                     <?php
                   }
@@ -1237,7 +1248,10 @@ else if ($widget_style == 'talking-point') {
 
                   <?php if (!empty($extra_large_image_url)) { ?>
 
-                    <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"> <img  src="<?php print $extra_large_image_url ?>" alt="" title="" /> </a></span>
+                    <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"> 
+                    <!-- <img  src="<?php print $extra_large_image_url ?>" alt="" title="" /> -->
+                    <?php print theme('image_style', array('path' => $node_data->field_story_extra_large_image['und'][0]['uri'], 'style_name' => 'widget_very_small', 'alt' => $node_data->field_story_extra_large_image['und'][0]['alt'], 'title' => $node_data->field_story_extra_large_image['und'][0]['title'])); ?>
+                    </a></span>
 
                     <?php
                   }

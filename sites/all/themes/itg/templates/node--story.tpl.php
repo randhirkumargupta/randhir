@@ -206,13 +206,15 @@ if (!empty($content)):
               <?php
               $byline_detail = $byline_id[0];
               $extra_large_file = file_load($byline_detail['extra_large_image']);
-                $bylineextra_large_image = $extra_large_file->uri;
+                $bylineextra_large_image = $extra_large_file->uri;                
+                $file_alt = isset($extra_large_file['und'][0]['alt']) ? $extra_large_file['und'][0]['alt'] : "";
+                $file_title = isset($extra_large_file['und'][0]['title']) ? $extra_large_file['und'][0]['title'] : "";
                 if ($sponsor_text == ''):?>
                 <div class="profile-pic">
                   <?php
                   if(!empty($bylineextra_large_image)) {
                       $file = $bylineextra_large_image;
-                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file, 'alt' => $file_alt, 'title' => $file_title));
                     }
                     else {
                       $file = file_create_url(file_default_scheme() . '://images/default-user.png');
@@ -497,9 +499,11 @@ if (!empty($content)):
                 <?php
                 $byline_detail = $byline_id[0];
                 $extra_large_file = file_load($byline_detail['extra_large_image']);
-                $file = $extra_large_file->uri;
+                $file = $extra_large_file->uri;                                
+                $file_alt = isset($extra_large_file['und'][0]['alt']) ? $extra_large_file['und'][0]['alt'] : "";
+                $file_title = isset($extra_large_file['und'][0]['title']) ? $extra_large_file['und'][0]['title'] : "";
                 if (!empty($file)) {
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file, 'alt' => $file_alt, 'title' => $file_title));
                 }
                 else {
                   $file = 'default_images/user-default.png';
@@ -616,12 +620,15 @@ if (!empty($content)):
                 <?php } else {
                         if (empty($widget_data)) {
                             $story_image = '';
+                            $story_alt = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] : "";
+                            $story_title = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] : "";
                             if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                                 $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             }
                             if (file_exists($story_image)) {
-                                $file_uri = file_create_url($story_image);
-                                print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                                //$file_uri = file_create_url($story_image);
+                                //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
+                                print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title));
                             }
                             //else {
                               //  $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');

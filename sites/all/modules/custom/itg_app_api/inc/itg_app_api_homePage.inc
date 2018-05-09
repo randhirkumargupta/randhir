@@ -919,24 +919,13 @@ function homePageCatNewslist($tid) {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
+        
 
         // code vid=14  end
 
@@ -967,6 +956,13 @@ function homePageCatNewslist($tid) {
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+         // for breaking_news
+        $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
+        $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
+        $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
+        $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
+        $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
+
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -982,7 +978,12 @@ function homePageCatNewslist($tid) {
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
+        // for breaking_news
+        $query->fields('fmu', array('field_multi_user_allows_value'));
+        $query->fields('fcsd', array('field_common_short_description_value'));
+        $query->fields('fdt', array('field_type_value'));
+        $query->fields('fse', array('field_story_expires_value'));
+        $query->fields('fdc', array('field_constituancy_value'));
 
         //end
 
@@ -997,7 +998,10 @@ function homePageCatNewslist($tid) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-
+            // filter breaking news blog..
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+                continue;
+            }
             $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
@@ -1052,7 +1056,14 @@ function homePageCatNewslist($tid) {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            $data_newslist[$listcount]['n_type'] = "$type";
+            if($type == "breaking_news"){
+                $data_newslist[$listcount]['n_type'] = "story"; 
+                $data_newslist[$listcount]['n_is_blog'] = "1"; 
+            }
+            else{
+              $data_newslist[$listcount]['n_type'] = "$type"; 
+              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
             $data_newslist[$listcount]['n_share_link'] = "$firebase_url";
@@ -1100,12 +1111,50 @@ function homePageCatNewslist($tid) {
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
             $n_widget = array();
             $data_newslist[$listcount]['n_widget'] = $n_widget;
+            // for breaking_news
+            $n_blog = array();
+            $created = $resvalue['created'];
+            $blog_type = $resvalue['field_type_value'];
+            $new_blog = 0;
+            if ($resvalue['field_multi_user_allows_value']) {
+                $new_blog = 1;
+            }
+            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
+               $new_blog = 2; 
+            }
+            $live_tv = 0;
+            if ($resvalue['field_story_expires_value'] == 'Yes') {
+                $live_tv = 1;
+            }
+            $short_desc = $resvalue['field_common_short_description_value'];
+            $sub_title = $resvalue['field_constituancy_value'];
+            $page_title = $node_data->title;
+            $field_type_value = $resvalue['field_type_value'];
+            //p($resvalue);
+            
+            if($type == "breaking_news"){
+                $n_blog['blog_type'] = "$blog_type";
+                $n_blog['id'] = "$nid";
+                $n_blog['sub_title'] = "$sub_title";
+                $n_blog['short_desc'] = "$short_desc";
+                $n_blog['new_blog'] = "$new_blog";
+                $n_blog['live_tv'] = "$live_tv";
+                $n_blog = (object) $n_blog;
+                $data_newslist[$listcount]['n_blog'] =  $n_blog;
+            }
+            else{
+                $n_blog = array();    
+                $n_blog['empty'] = "";
+                $n_blog = (object) $n_blog;  
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            }
+            
 
             $listcount++;
         }
     }
 
-    $data_news['news'] = (array) $data_newslist;
+    $data_news['news'] = (object) $data_newslist;
     $order++;
 
     return $data_news;

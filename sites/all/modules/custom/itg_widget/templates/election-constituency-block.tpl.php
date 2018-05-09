@@ -39,11 +39,11 @@ if ($jsondata->live != 1) {
 			<div class="other-candidates-details">
 			<table class="table" id="othercandidates-list">
 				 <thead>
-					 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th>
+					 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th><th><?php echo (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS');?></th>
 				 </thead>
 				 <tbody>
              <?php foreach ($otherCondidates as $key => $candidate) {
-               echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td></tr>";
+               echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . (!empty($candidate->win_loss) ? $candidate->win_loss : 'Result Awaited') ."</td></tr>";
              }?>
 				 </tbody>
 			</table>
@@ -72,7 +72,6 @@ if ($jsondata->live != 1) {
 			              <tr><td>Movable Assets</td><td><?php echo $wonCondidate->moveable_assets;?></td></tr>
 			              <tr><td>Immovable Assets</td><td><?php echo $wonCondidate->immovable_assets;?></td></tr>
 			              <tr><td>Income</td><td><?php echo $wonCondidate->income;?></td></tr>
-			              <tr><td>Spouse Dependants</td><td><?php echo $wonCondidate->spouse_dependants;?></td></tr>	
 					</tbody>
 				</table>
 			</div>   
@@ -87,9 +86,7 @@ if ($jsondata->live != 1) {
 					<tbody>
 			             <tr><td>AC name</td><td><?php echo $constituency;?></td></tr>
 			             <tr><td>AC No</td><td><?php echo $jsondata->id;?></td></tr>
-			             <tr><td>No of voters</td><td><?php echo $jsondata->voters_count;?></td></tr>
-			             <tr><td>Area</td><td><?php echo $jsondata->district;?></td></tr>
-			             <tr><td>Sitting MLA's name</td><td><?php echo $jsondata->candidate;?></td></td></tr>
+			             <tr><td>District</td><td><?php echo $jsondata->district;?></td></tr>
 					</tbody>
 				</table> 
 			</div>  
@@ -101,13 +98,13 @@ if ($jsondata->live != 1) {
     <div class="col-md-12 <?php print $bottom_chuck;?>" id="other-candidates">
 			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
 			<div class="other-candidates-details">
-				<table class="table" id="othercandidates-list">
+				<table class="table" id="othercandidates-list-bottom">
 					 <thead>
-						 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th><th><?php echo (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS');?></th>
+						 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th>
 					 </thead>
 					 <tbody>
 	            <?php foreach ($otherCondidates as $key => $candidate) {
-	              echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . (!empty($candidate->win_loss) ? $candidate->win_loss : 'Result Awaited') ."</td></tr>";
+	              echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td></tr>";
 	            }?>
 					 </tbody>
 				</table> 
@@ -121,8 +118,12 @@ function mobilecheck() { var check = false; (function (a) { if (/(android|ipad|p
 var is_mobile = mobilecheck() ? true : false;
 if (is_mobile) {
 var oRows = document.getElementById('othercandidates-list').getElementsByTagName('tr');
+var oRowsT = document.getElementById('othercandidates-list-bottom').getElementsByTagName('tr');
 var iRowCount = oRows.length; iRowCount = iRowCount - 1;
-var totalwidth = iRowCount*330;
+var totalwidth = iRowCount*330; totalwidth = totalwidth+30;
 document.getElementById('othercandidates-list').style.width = totalwidth +'px';
+var iRowCountT = oRowsT.length; iRowCountT = iRowCountT - 1;
+var totalwidthT = iRowCountT*330; totalwidthT = totalwidthT+30;
+document.getElementById('othercandidates-list-bottom').style.width = totalwidthT +'px';
 }
 </script>

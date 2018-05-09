@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>News Wiz Quiz 2018 Show by Rajdeep Sardesai, Siddhartha	Basu on India Today Television</title>
+<title>News Wiz Quiz 2018 Season 3: Rules, Regulations Governing Registration and Participation</title>
 <meta name="description"
-	content="News Quiz wiz 2018 by Rajdeep Sardesai and Siddhartha Basu properly known as the quiz man of India brings you first time at India Today for class X and XI students all across India. Come and participate here." />
+	content="Know about News Wiz Quiz contest description, rules and regulations governing registration and participation in news wiz quiz season 3. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
 <meta name="keywords"
-	content="News Wiz 2018, news quiz 2018, Rajdeep Sardesai, Siddhartha Basu, India today quiz, News Quiz rules, News Quiz schedule, News Quiz faq" />
+	content="News Wiz, News Wiz Quiz 2018, News Wiz Quiz Season 3, News Wiz third season, News Quiz Rules and Regulations, News Wiz Quiz Registration, News Quiz rules Participation, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+<link rel="canonical" href="https://indiatoday.in/newswiz/2018/rule-regulation.php" />
 <link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>	
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
@@ -146,7 +147,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="over_area terms-condition">
-                                        <h2>RULES &amp; REGULATIONS</h2>
+                                        <h1>News Wiz Quiz 2018: Rules and Regulations</h1>
                                         <div class="terms-outer">
                                         	<div class="term-lft">
                                             	<p> <strong>RULES	&amp;	REGULATIONS	GOVERNING	REGISTRATION	AND   PARTICIPATION IN NEWS WIZ</strong></p>

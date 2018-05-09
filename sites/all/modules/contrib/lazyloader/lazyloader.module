@@ -206,9 +206,9 @@ function _lazy_loader_enabled() {
   }
   
   //Lazyloader only on homepage.
-  if (!drupal_is_front_page()) {
-    return FALSE;
-  }
+  //~ if (!drupal_is_front_page()) {
+    //~ return FALSE;
+  //~ }
 
   // Convert path to lowercase. This allows comparison of the same path
   // with different case. Ex: /Page, /page, /PAGE.

@@ -253,9 +253,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
                 </div>
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide">
                   <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
-                </div>
+                </div> -->
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
                 </div>
@@ -468,7 +468,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <div class="team_area">
-                        <h2><a href="all-teams.jsp"><span>teams</span></a> </h2>
+                        <h2><a href="/newswiz/2016/all-teams.jsp"><span>teams</span></a> </h2>
                         <div class="team_info">
                           <div class="match_table">
                             <div class="match_info">
@@ -859,9 +859,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2016/newswiz-faq.html" title="FAQS">FAQS</a></h2>
                 </div>
-                <div class="swiper-slide">
-                  <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
-                </div>
+               <!--  <div class="swiper-slide">
+                 <h2><a href="/newswiz/2016/all-teams.jsp" title="Schedule">Teams</a></h2>
+               </div> -->
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2016/episodes.html" title="Show Videos">Show Videos</a></h2>
                 </div>
