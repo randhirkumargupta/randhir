@@ -176,7 +176,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
         foreach ($result as $reskey => $resvalue) {
              // filter breaking news blog..
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             // node feed tag
