@@ -39,11 +39,11 @@ if ($jsondata->live != 1) {
 			<div class="other-candidates-details">
 			<table class="table" id="othercandidates-list">
 				 <thead>
-					 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th>
+					 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th><th><?php echo (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS');?></th>
 				 </thead>
 				 <tbody>
              <?php foreach ($otherCondidates as $key => $candidate) {
-               echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td></tr>";
+               echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . (!empty($candidate->win_loss) ? $candidate->win_loss : 'Result Awaited') ."</td></tr>";
              }?>
 				 </tbody>
 			</table>
@@ -89,7 +89,7 @@ if ($jsondata->live != 1) {
 			             <tr><td>AC No</td><td><?php echo $jsondata->id;?></td></tr>
 			             <tr><td>No of voters</td><td><?php echo $jsondata->voters_count;?></td></tr>
 			             <tr><td>Area</td><td><?php echo $jsondata->district;?></td></tr>
-			             <tr><td>Sitting MLA's name</td><td><?php echo $jsondata->candidate;?></td></td></tr>
+			             <tr><td>Sitting MLA's name</td><td><?php echo $wonCondidate->candidate;?></td></td></tr>
 					</tbody>
 				</table> 
 			</div>  
@@ -103,11 +103,11 @@ if ($jsondata->live != 1) {
 			<div class="other-candidates-details">
 				<table class="table" id="othercandidates-list-bottom">
 					 <thead>
-						 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th><th><?php echo (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS');?></th>
+						 <th><?php echo (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME');?></th><th><?php echo (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY');?></th>
 					 </thead>
 					 <tbody>
 	            <?php foreach ($otherCondidates as $key => $candidate) {
-	              echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . (!empty($candidate->win_loss) ? $candidate->win_loss : 'Result Awaited') ."</td></tr>";
+	              echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td></tr>";
 	            }?>
 					 </tbody>
 				</table> 
