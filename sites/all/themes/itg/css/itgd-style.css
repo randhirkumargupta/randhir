@@ -1031,6 +1031,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-title{ font-size:25px; font-family:"Merriweather-Bold"; line-height:34px; padding-bottom:10px; color:#262626}
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor{padding-bottom:10px;}
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor .breaking-date{color: #9e2729;font-size: 12px;font-family: "OpenSans-bold"; width:auto; display:inline-block; padding-right:5px;}
+.liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor .breaking-date a{color: #9e2729;}
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .dateauthor .breaking-author{width:auto; display:inline-block;color: #626262;font-size: 12px;font-family: "OpenSans-bold"; }
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-desc p{ font-size:17px; line-height:24px;color:#111; padding-bottom: 10px; }
 .liveBlog-indiatoday .liveblog-Rhs .stryimg{ padding-bottom: 10px; } .liveBlog-indiatoday .liveblog-Rhs .stryimg img, .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .blog-multi-desc .itgimage img{ width:auto;}
