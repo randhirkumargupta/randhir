@@ -74,7 +74,7 @@
 <?php }?>
 <?php  
   // Start high chart Graph
-  foreach ($data as $index => $row):
+  /*foreach ($data as $index => $row):
 		$graph_link = $base_url . '/state-elections/' . $section . '/' . $row->field_election_state_tid;
 		if(!empty($row->field_graph_category_value)){
 			$graph_link = $base_url . '/'. drupal_get_path_alias('taxonomy/term/' . $row->field_graph_category_value);
@@ -171,7 +171,7 @@
       </div>
     </div>
   <?php } ?>
-  <?php endforeach; ?>
+  <?php endforeach; */?>
 <!-- End High Cart graph -->
 <div class="col-md-4 col-sm-4 mt-50">
     <div class="itg-widget">
