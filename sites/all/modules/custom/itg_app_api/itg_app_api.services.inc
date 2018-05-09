@@ -7186,7 +7186,7 @@ function itg_rapid_value_manual_blog($nid) {
         }
     }
     elseif ($new_blog == 1) {
-       $custom_content = get_custom_content_details($nid);
+       $custom_content = itg_rapid_new_blog_content_details($nid);
         foreach ($custom_content as $breaking_item) {             
             $title = $breaking_item->blog_title;
             $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time); 
@@ -7216,4 +7216,18 @@ function itg_rapid_value_manual_blog($nid) {
     //  data object
     $json_data['data'] = $blog_data;
     return $json_data;
+}
+
+/**
+ * content show at live blog page.
+ */
+function itg_rapid_new_blog_content_details($blog_entity_id) {
+  $query = db_select('itg_live_blog', 'p');
+  $query->condition('p.blog_entity_id', $blog_entity_id);
+  $query->condition('p.status', '1');
+  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
+       ->orderBy('bid', 'DESC');
+  # execute the query
+  return $results = $query->execute()->fetchAll();
+ 
 }
