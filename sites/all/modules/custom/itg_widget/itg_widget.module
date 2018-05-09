@@ -1225,7 +1225,6 @@ function itg_widget_get_graph_data() {
       ->condition('status', 1);
     // ->range(0, 5);
     //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
-    print strtr((string)$itg_query, $itg_query->arguments());die;
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
 }
@@ -1261,7 +1260,6 @@ function itg_widget_get_graph_data_for_home() {
     $itg_query->fields('dfgc', array('field_graph_category_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('status', 1);
-    print strtr((string)$itg_query, $itg_query->arguments());die;
     // ->range(0, 5);
     //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
     $itg_result = $itg_query->execute()->fetchAll();
