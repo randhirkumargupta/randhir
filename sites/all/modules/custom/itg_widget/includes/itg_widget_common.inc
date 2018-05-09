@@ -3690,7 +3690,7 @@ function get_html_widget_name_by_layout($section_name, $template_name, $block_na
     $label_name = '';
   }  
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
-  $itg_query->fields('layout_manager', array('filter_url'));
+  $itg_query->fields('layout_manager', array('block_title'));
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
   $itg_query->condition('layout_tpl.section_name', $section_name);
   $itg_query->condition('layout_tpl.template_name', $template_name);
