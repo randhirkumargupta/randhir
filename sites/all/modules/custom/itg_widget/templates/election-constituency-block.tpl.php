@@ -88,7 +88,12 @@ if ($jsondata->live != 1) {
 			             <tr><td>AC No</td><td><?php echo $jsondata->id;?></td></tr>
 			             <tr><td>District</td><td><?php echo $jsondata->district;?></td></tr>
 					</tbody>
-				</table> 
+				</table>
+          <?php
+            $block = block_load('itg_widget', 'election_constituency_select_box');
+            $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+            print render($render_array);
+          ?>
 			</div>  
     </div>
     </div>

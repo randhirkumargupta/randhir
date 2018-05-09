@@ -102,9 +102,10 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            
               <div class="data-holder">
                 <div class="graph-design">
+                <a href="<?php echo $graph_link; ?>" >
                 <div class="statesvg-map">
                      <span id = "hmelect-<?php echo $state_name;?>"   class="tallyChartImageCursor"></span>
                      <script type="text/javascript">
@@ -120,7 +121,8 @@
                         
                       </div>
                   </div>
-                    <span id = "fhs-<?php echo $state_name;?>"></span>
+                    <span id = "fhs-<?php echo $state_name;?>"></span>                                    
+                </a>
                     <?php
                     $block = block_load('itg_widget', 'election_constituency_select_box');
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
