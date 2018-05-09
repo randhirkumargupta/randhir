@@ -175,7 +175,10 @@ function generateNewsCategoryList($tid, $pageno) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-
+             // filter breaking news blog..
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+                continue;
+            }
             // node feed tag
             $title = $resvalue['title'];
             $type = $resvalue['type'];
@@ -230,10 +233,19 @@ function generateNewsCategoryList($tid, $pageno) {
             }
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
-            $term_name = $term->name;
+            $term_name = $term->name;           
+            
 
             $news_list_array[$listcount]['n_id'] = "$nid";
-            $news_list_array[$listcount]['n_type'] = "$type";
+            if($type == "breaking_news"){
+                $news_list_array[$listcount]['n_type'] = "story"; 
+                $news_list_array[$listcount]['n_is_blog'] = "1"; 
+            }
+            else{
+              $news_list_array[$listcount]['n_type'] = "$type"; 
+              $news_list_array[$listcount]['n_is_blog'] = "0"; 
+            }
+            
             $news_list_array[$listcount]['n_is_sponsored'] = "0";
             $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
             $news_list_array[$listcount]['n_title'] = "$title";
