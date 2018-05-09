@@ -80,7 +80,7 @@ function generateNewsCategoryList($tid, $pageno) {
   }
 
   $order_by = 'ASC';
-  $type = array("videogallery", "photogallery", "story");
+  $type = array("videogallery", "photogallery", "story", "breaking_news");
   $news_list_array = array();
   $photolist = array();
   $videolist = array();
@@ -121,6 +121,13 @@ function generateNewsCategoryList($tid, $pageno) {
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    // for breaking_news
+        $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
+        $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
+        $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
+        $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
+        $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
+
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -138,14 +145,19 @@ function generateNewsCategoryList($tid, $pageno) {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('fpc', array('field_primary_category_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
+    // for breaking_news
+        $query->fields('fmu', array('field_multi_user_allows_value'));
+        $query->fields('fcsd', array('field_common_short_description_value'));
+        $query->fields('fdt', array('field_type_value'));
+        $query->fields('fse', array('field_story_expires_value'));
+        $query->fields('fdc', array('field_constituancy_value'));
 
     //end
 
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $d1 = date('Y-m-d', strtotime("-175 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -153,7 +165,9 @@ function generateNewsCategoryList($tid, $pageno) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
-
+      if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+                continue;
+            }
       // node feed tag
       $title = $resvalue['title'];
       $type = $resvalue['type'];
@@ -165,6 +179,9 @@ function generateNewsCategoryList($tid, $pageno) {
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+      if($type == 'breaking_news'){
+                $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
+            }
       $alias = drupal_get_path_alias('node/' . $nid . '');
       $weburl = $base_url . "/" . $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -210,7 +227,14 @@ function generateNewsCategoryList($tid, $pageno) {
       $term_name = $term->name;
 
       $news_list_array[$listcount]['n_id'] = "$nid";
-      $news_list_array[$listcount]['n_type'] = "$type";
+      if($type == "breaking_news"){
+                $news_list_array[$listcount]['n_type'] = "story"; 
+                $news_list_array[$listcount]['n_is_blog'] = "1"; 
+            }
+            else{
+              $news_list_array[$listcount]['n_type'] = "$type"; 
+              $news_list_array[$listcount]['n_is_blog'] = "0"; 
+            }
       $news_list_array[$listcount]['n_is_sponsored'] = "0";
       $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
       $news_list_array[$listcount]['n_title'] = "$title";
@@ -279,6 +303,37 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_video'] = $videolist;
       // re-insalize vediolist
       $videolist = array();
+      // for breaking_news
+            $n_blog = array();
+            $created = $resvalue['created'];
+            $blog_type = $resvalue['field_type_value'];
+            $new_blog = 0;
+            if ($resvalue['field_multi_user_allows_value']) {
+                $new_blog = 1;
+            }
+            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
+               $new_blog = 2; 
+            }
+            $live_tv = 0;
+            if ($resvalue['field_story_expires_value'] == 'Yes') {
+                $live_tv = 1;
+            }
+            $short_desc = $resvalue['field_common_short_description_value'];
+            $sub_title = $resvalue['field_constituancy_value'];
+            $page_title = $node_data->title;
+            $field_type_value = $resvalue['field_type_value'];
+            //p($resvalue);
+            
+            if($type == "breaking_news"){
+                $n_blog['blog_type'] = "$blog_type";
+                $n_blog['id'] = "$nid";
+                $n_blog['sub_title'] = "$sub_title";
+                $n_blog['short_desc'] = "$short_desc";
+                $n_blog['new_blog'] = "$new_blog";
+                $n_blog['live_tv'] = "$live_tv";
+            }
+            $n_blog = (object) $n_blog;
+            $news_list_array[$listcount]['n_blog'] = $n_blog;
 
       $listcount++;
     }

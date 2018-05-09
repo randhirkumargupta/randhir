@@ -133,7 +133,7 @@ function generatePhotoCategoryList($tid, $pageno) {
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $d1 = date('Y-m-d', strtotime("-175 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     //change in query

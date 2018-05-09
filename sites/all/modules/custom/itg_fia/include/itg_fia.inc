@@ -5,11 +5,10 @@
  */
 function itg_fia_data() {  
   $start_time = strtotime("-7 day");
-  $end_time = strtotime("now");    
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
   $query->fields('n', array('nid', 'created'));
-  $query->condition('n.created', array($start_time, $end_time), 'BETWEEN'); 
+  $query->condition('n.created', $start_time, '>='); 
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
@@ -530,12 +529,13 @@ function itg_fia_related_node($nid = 0) {
 function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {    
     $relatednode = "";
     if ($prime_section) {
+        $start_time = strtotime("-5 day");
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
         $query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
         //$query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
         $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
-        $query->fields('n', array('nid'));
+        $query->fields('n', array('nid','created'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
@@ -544,6 +544,7 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->condition('iwo.cat_id', $prime_section);        
         $query->condition('pc.field_story_category_tid', $prime_section, '=');
         $query->condition('n.nid', $nid, '!=');
+        $query->condition('n.created', $start_time, '>=');
         //$query->condition('ti.tid', $prime_section, '=');
         $query->orderBy('n.created', 'DESC');
         $query->groupBy('n.nid');
