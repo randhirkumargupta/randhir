@@ -72,7 +72,6 @@ if ($jsondata->live != 1) {
 			              <tr><td>Movable Assets</td><td><?php echo $wonCondidate->moveable_assets;?></td></tr>
 			              <tr><td>Immovable Assets</td><td><?php echo $wonCondidate->immovable_assets;?></td></tr>
 			              <tr><td>Income</td><td><?php echo $wonCondidate->income;?></td></tr>
-			              <tr><td>Spouse Dependants</td><td><?php echo $wonCondidate->spouse_dependants;?></td></tr>	
 					</tbody>
 				</table>
 			</div>   
@@ -87,9 +86,7 @@ if ($jsondata->live != 1) {
 					<tbody>
 			             <tr><td>AC name</td><td><?php echo $constituency;?></td></tr>
 			             <tr><td>AC No</td><td><?php echo $jsondata->id;?></td></tr>
-			             <tr><td>No of voters</td><td><?php echo $jsondata->voters_count;?></td></tr>
-			             <tr><td>Area</td><td><?php echo $jsondata->district;?></td></tr>
-			             <tr><td>Sitting MLA's name</td><td><?php echo $wonCondidate->candidate;?></td></td></tr>
+			             <tr><td>District</td><td><?php echo $jsondata->district;?></td></tr>
 					</tbody>
 				</table> 
 			</div>  
