@@ -832,6 +832,9 @@ function itg_widget_theme() {
         'election_past_results' => array(
             'template' => 'templates/election-past-restuls',
         ),
+        'graph_election_livetv_chunk' => array(
+            'template' => 'templates/election-livetv-chunk',
+        ),
 
     );
     return $themes;
