@@ -2048,5 +2048,12 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  
+  if ($_GET['test'] == 'xyz') {
+    print $node_id = get_election_state_by_category($tax_data[2]);
+    p(node_load($node_id));
+  }
+  
+ 
   return theme('itg_election_constituency_map', array('data' => $data));
 }
