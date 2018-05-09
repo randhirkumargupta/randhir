@@ -41,9 +41,18 @@
   if (!empty($story_title[0]['uri'])) {
     $src = file_create_url($story_title[0]['uri']);
   }
+  $list_story = get_miscellaneous_content($section, 3, 'home-story-lists');
+  $list_story_li = '';
+  foreach ($list_story as $_key => $_value) {
+    if(!empty($_value->field_story_external_url_value)){
+      $list_story_li .= '<li><a href="'.$_value->field_story_external_url_value.'">'.$_value->title.'</a></li>';
+    }else{
+       $list_story_li .= '<li>'.$_value->title.'</li>';
+    }
+  }
   echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1>
-    <div class="liststory-election"><ul><li><a href="#" title="">Election Story 1</a></li>|<li><a href="#" title="">Election Story 2</a></li>|<li><a href="#" title="">Election Story 3</a></li></ul></div>
-  </div></div>';
+    <div class="liststory-election"><ul>' .$list_story_li.
+  '</div></div>';
  }?>
  <div class="row electionHome-section">
 <?php  

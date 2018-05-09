@@ -3657,3 +3657,23 @@ function get_constituency_json_url($catid){
   }
   return $output;
 }
+
+
+function get_miscellaneous_content($cat_id, $limit = 4, $type = 'who-said-what'){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
+  
+  $query->fields('fseu', array('field_story_external_url_value'));
+  $query->fields('n', array('title'));
+  $query->range(0, $limit);
+  $query->condition('fiel.field_is_election_live_value', 1);
+  $query->condition('fmt.field_miscellaneous_type_value', $type);
+  if(!empty($cat_id)){
+    $query->condition('fpc.field_primary_category_value', $cat_id);
+  }
+  $result = $query->execute()->fetchAll();
+  return $result;  
+}
