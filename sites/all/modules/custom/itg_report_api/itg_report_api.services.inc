@@ -329,70 +329,98 @@ function itg_report_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'long_headline',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Long headline',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'short_headline',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Short headline',
                             'type' => 'array',
                         ),
-                       array(
+                        array(
                             'name' => 'description',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Description',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'city',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'City',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'anchor',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Anchor',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'video_kicker',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Video kicker',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'section_id',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Section id',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'cat_id',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Cat id',
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'image_url',
-                            'optional' => TRUE,                            
+                            'name' => 'extra_large_img',
+                            'optional' => TRUE,
                             'source' => array('data'),
-                            'description' => 'Image url',
+                            'description' => 'Extra Large img: 647*363',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'large_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Large img: 613*460',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'medium_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Medium img: 483*271',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'small_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Small img: 170*96',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'extra_small_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Extra small img: 88*50',
                             'type' => 'array',
                         ),
                         array(
                             'name' => 'video_file_name',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'Video file name',
                             'type' => 'array',
@@ -401,7 +429,7 @@ function itg_report_api_resource() {
                 ),
             ),
         ),
-  );
+    );
   return $api;
 }
 /**
@@ -783,9 +811,20 @@ function itg_report_api_detail() {
  * @return array - The processed information array.
  */
 
-function itg_rapid_api_insert_video(){
+function itg_rapid_api_insert_video() {
     $HTTP_RAW_POST_DATA;
     // check duplicate user
+    //node save - https://drupal.stackexchange.com/questions/8039/how-to-create-nodes-using-node-save?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+    /*
+      try {
+      node_save($node);
+      $success = TRUE;
+      }
+      catch (Exception $e) {
+      // Do your error handling here.
+      }
+
+     */
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     p($params);
 }
