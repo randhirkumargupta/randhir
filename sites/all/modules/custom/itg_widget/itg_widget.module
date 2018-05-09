@@ -1139,7 +1139,8 @@ function itg_widget_block_view($delta = '') {
            $constituency = implode('-', $constituency);
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
-             $json_url = $json_url . 'elections/2018/json/constituency/' . $constituency.'.json';
+             $json_url = reset(explode('|~|', $json_url));
+             $json_url = $json_url . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
              $refresh_time = (!empty(get_itg_variable('election_map_refreshtime')) ? get_itg_variable('election_map_refreshtime') : '900000');
              drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
@@ -1159,7 +1160,8 @@ function itg_widget_block_view($delta = '') {
            $constituency = $constituency[0];           
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
-             $json_url = $json_url . 'elections/2018/json/past-results/' . $constituency.'.json';
+             $json_url = end(explode('|~|', $json_url));
+             $json_url = $json_url . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
              $block['content'] = theme("election_past_results", array("data" => $constituency_data, 'constituency' => $constituency));;
            }else{
@@ -1223,6 +1225,7 @@ function itg_widget_get_graph_data() {
       ->condition('status', 1);
     // ->range(0, 5);
     //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
+    print strtr((string)$itg_query, $itg_query->arguments());die;
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
 }
@@ -1258,6 +1261,7 @@ function itg_widget_get_graph_data_for_home() {
     $itg_query->fields('dfgc', array('field_graph_category_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('status', 1);
+    print strtr((string)$itg_query, $itg_query->arguments());die;
     // ->range(0, 5);
     //$itg_query->condition('ast.field_astro_type_tid', $astro_type);
     $itg_result = $itg_query->execute()->fetchAll();
