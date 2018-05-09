@@ -826,5 +826,9 @@ function itg_rapid_api_insert_video() {
 
      */
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    p($params);
+    //p($params);
+    $data = array();
+    $data['status_code'] = "1";
+    $data['status_message'] = "";
+    return $data;
 }
