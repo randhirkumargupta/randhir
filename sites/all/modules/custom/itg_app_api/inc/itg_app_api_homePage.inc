@@ -988,7 +988,7 @@ function homePageJsonNewslist_india() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-             if($resvalue['field_type_value'] == "Breaking News"){
+             if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = $resvalue['title'];
@@ -1266,7 +1266,7 @@ function homePageJsonNewslist_world() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = $resvalue['title'];
@@ -1918,7 +1918,7 @@ function homePageJsonNewslist_lifestyle() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
 
@@ -2473,7 +2473,7 @@ function itg_rapid_home_movies_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -2750,7 +2750,7 @@ function itg_rapid_home_technology_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -3026,7 +3026,7 @@ function itg_rapid_home_sports_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -3416,7 +3416,7 @@ function itg_rapid_home_sonam_json(){
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News"){
+            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
             $title = strip_tags($resvalue['title']);

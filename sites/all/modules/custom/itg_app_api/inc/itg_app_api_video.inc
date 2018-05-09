@@ -1131,7 +1131,7 @@ function topstoriesList($source) {
     // loop on top stories. 
     foreach ($result as $key => $value) {
         // filter breaking news blog..
-            if($value['field_type_value'] == "Breaking News"){
+            if($value['field_type_value'] == "Breaking News" || $value['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
         // varibale for json tag
