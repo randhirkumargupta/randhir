@@ -2050,10 +2050,24 @@ function itg_election_constituency_map(){
   $_GET['section'] = $category;
   
   if ($_GET['test'] == 'xyz') {
-    print $node_id = get_election_state_by_category($tax_data[2]);
-    p(node_load($node_id));
+    $node_id = get_election_state_by_category($tax_data[2]);
+    p($node_id);
   }
   
  
   return theme('itg_election_constituency_map', array('data' => $data));
+}
+
+
+/**
+ * Function for itg_get_election_nid().
+ */
+function itg_get_election_nid($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'c');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('m', array('entity_id'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
 }
