@@ -2050,8 +2050,9 @@ function itg_election_constituency_map(){
   $_GET['section'] = $category;
   
   if ($_GET['test'] == 'xyz') {
-    $node_id = get_election_state_by_category($tax_data[2]);
-    p($node_id);
+    $get_election_nid = itg_get_election_nid($tax_data[2]);
+    $entity_id = $get_election_nid['entity_id'];
+    p($entity_id);
   }
   
  
