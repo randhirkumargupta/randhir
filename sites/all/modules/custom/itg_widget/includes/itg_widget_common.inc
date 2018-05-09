@@ -835,6 +835,9 @@ function itg_widget_theme() {
         'graph_election_livetv_chunk' => array(
             'template' => 'templates/election-livetv-chunk',
         ),
+        'election_constituency_select_box' => array(
+            'template' => 'templates/election-constituency-select_box',
+        ),
 
     );
     return $themes;

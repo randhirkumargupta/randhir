@@ -513,6 +513,9 @@ function itg_widget_block_info() {
     $blocks['election_livetv_block'] = array(
       'info' => t('Widget: Election LiveTV Block'),
     );
+    $blocks['election_constituency_select_box'] = array(
+      'info' => t('Widget: Election Constituency Select Box'),
+    );
     
     return $blocks;
 }
@@ -1190,6 +1193,9 @@ function itg_widget_block_view($delta = '') {
             }else{
               $block['content'] = '';
             }
+          break;
+        case 'election_constituency_select_box':
+          $block['content'] = theme("election_constituency_select_box", array());
           break;
     }       
     return $block;
