@@ -41,7 +41,7 @@
   if (!empty($story_title[0]['uri'])) {
     $src = file_create_url($story_title[0]['uri']);
   }
-  $list_story = get_miscellaneous_content($section, 3, 'home-story-lists');
+  $list_story = get_miscellaneous_content($section, NULL, 'home-story-lists');
   $list_story_li = '';
   foreach ($list_story as $_key => $_value) {
     if(!empty($_value->field_story_external_url_value)){
