@@ -84,7 +84,6 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     html += "<tr><td>Movable Assets</td><td>" + (data.moveable_assets !== undefined ? data.moveable_assets : '') + "</td></tr>";
     html += "<tr><td>Immovable Assets</td><td>" + (data.immovable_assets !== undefined ? data.immovable_assets : '') + "</td></tr>";
     html += "<tr><td>Income</td><td>" + (data.income !== undefined ? data.income : '') + "</td></tr>";
-    html += "<tr><td>Spouse Dependants</td><td>" + (data.spouse_dependants !== undefined ? data.spouse_dependants : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #candidates table tbody").html(html);
     if (consData.lbl_candidates !== undefined) {
         jQuery("#constituency-top-chunk #candidates .labels").html(consData.lbl_candidates);
@@ -95,9 +94,7 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     var mocHTML = "";
     mocHTML += "<tr><td>AC name</td><td>" + (constituencyName !== undefined ? constituencyName : '') + "</td></tr>";
     mocHTML += "<tr><td>AC No</td><td>" + (consData.id !== undefined ? consData.id : '') + "</td></tr>";
-    mocHTML += "<tr><td>No of voters</td><td>" + (consData.voters_count !== undefined ? consData.voters_count : '') + "</td></tr>";
-    mocHTML += "<tr><td>Area</td><td>" + (consData.district !== undefined ? consData.district : '') + "</td></tr>";
-    mocHTML += "<tr><td>Sitting MLA's name</td><td>" + (data.candidate !== undefined ? data.candidate : '') + "</td></tr>";
+    mocHTML += "<tr><td>District</td><td>" + (consData.district !== undefined ? consData.district : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #map-of-constituency table tbody").html(mocHTML);
     if (consData.svg !== undefined) {
         jQuery("#constituency-top-chunk #map-of-constituency #candidates-svg").html(consData.svg);
