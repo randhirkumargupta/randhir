@@ -19,7 +19,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
     <?php endif; ?>
     <div class="row electiontop-header">
         <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print drupal_get_title();?></h1> </div>
-        <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="<?php print FRONT_URL .'/'. drupal_get_path_alias('taxonomy/term/' . $_GET['section']);?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <?php echo get_itg_variable('itg_election_top_stories_label', 'Back');?></a></span> </div>
+        <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="<?php print FRONT_URL .'/'. drupal_get_path_alias('taxonomy/term/' . $_GET['section']);?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <?php echo get_itg_variable('itg_election_home_bottom_label', 'Back');?></a></span> </div>
     </div>
     <div class="row itg-map">
         <div class="col-md-12 mt-50">
