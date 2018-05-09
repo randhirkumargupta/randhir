@@ -1529,8 +1529,8 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $storyids = $line[7];
   $photoids = $line[8];
   $videoids = $line[9];
-  $published = $line[10];
-  $created_date = $line[11];
+  $published = !empty($line[10]) ? $line[10] : '';
+  $created_date = !empty($line[11]) ? $line[11] : date('Y-m-d H:i:s');
   $year = $line[13];
   $rank = $line[14];
   $stream = $line[15];
@@ -2056,8 +2056,8 @@ function itg_bestcollege_master_migrate($line, $session_nid, &$context) {
                 'storyids' => $storyids,
                 'photoids' => $photoids,
                 'videoids' => $videoids,
-                'published' => $published,
-                'created_date' => $created_date,
+                'published' => !empty($published) ? $published : 1,
+                'created_date' => !empty($created_date) ? $created_date : date('Y-m-d H:i:s'),
                 'node_id' => $node_id,
               ))->execute();
     }
@@ -2093,8 +2093,8 @@ function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context)
   $collegename = $line[6];
   $year = $line[7];
   $rank = $line[8];
-  $published = $line[9];
-  $created_date = $line[10];
+  $published = !empty($line[9]) ? $line[9] : 1;
+  $created_date = !empty($line[10]) ? $line[10] : date('Y-m-d H:i:s');
   $bestcollege_status = variable_get('bestcollege_status', '');
   watchdog('bestcollege_citywiseranking_status', $bestcollege_status);
 
@@ -2150,8 +2150,8 @@ function itg_bestcollege_emergingranking_migrate($line, $session_nid, &$context)
   $preceptual_rank = $line[11];
   $factual_rank = $line[11];
   $overall_score = $line[12];
-  $published = $line[13];
-  $created_date = $line[14];
+  $published = !empty($line[13]) ? $line[13] : 1;
+  $created_date = !empty($line[14]) ? $line[14] : date('Y-m-d H:i:s');
   $overall_rank = $line[15];
 
   $bestcollege_status = variable_get('bestcollege_status', '');
@@ -2204,8 +2204,8 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
   $CollegeNewNid = $line[4];
   $year = $line[5];
   $rank = $line[6];
-  $published = $line[7];
-  $created_date = $line[8];
+  $published = !empty($line[7]) ? $line[7] : 1;
+  $created_date = !empty($line[8]) ? $line[8] : date('Y-m-d H:i:s');
   $bestcollege_status = variable_get('bestcollege_status', '');
 
   try {
@@ -2420,8 +2420,8 @@ function itg_bestcollege_themebasedranking_migrate($line, $session_nid, &$contex
   $preceptual_rank = $line[11];
   $factual_rank = $line[12];
   $overall_score = $line[13];
-  $published = $line[14];
-  $created_date = $line[15];
+  $published = !empty($line[14]) ? $line[14] : '1';
+  $created_date = !empty($line[15]) ? $line[15] : date('Y-m-d H:i:s');
 
   $bestcollege_status = variable_get('bestcollege_status', '');
 
