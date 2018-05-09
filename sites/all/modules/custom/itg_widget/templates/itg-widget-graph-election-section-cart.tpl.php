@@ -41,7 +41,9 @@
   if (!empty($story_title[0]['uri'])) {
     $src = file_create_url($story_title[0]['uri']);
   }
-  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1></div></div>';
+  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1>
+    <div class=""><ul><li><a href="#" title="">Election Story 1</a></li>|<li><a href="#" title="">Election Story 2</a></li>|<li><a href="#" title="">Election Story 3</a></li></ul></div>
+  </div></div>';
  }?>
  <div class="row electionHome-section">
 <?php  
@@ -171,6 +173,7 @@
 <div class="col-md-4 col-sm-4 col-sm-12 mt-50">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
+          <h3>Karnataka Election Top Stories</h3>
           <?php
           $block = block_load('itg_widget', 'election_top_stories');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
