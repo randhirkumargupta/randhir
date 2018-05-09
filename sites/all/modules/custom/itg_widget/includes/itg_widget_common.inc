@@ -3695,7 +3695,6 @@ function get_html_widget_name_by_layout($section_name, $template_name, $block_na
   $itg_query->condition('layout_tpl.section_name', $section_name);
   $itg_query->condition('layout_tpl.template_name', $template_name);
   $itg_query->condition('layout_manager.block_name', $block_name);
-  $itg_query->condition('layout_manager.widget_name', $widget_name);
   $result = $itg_query->execute()->fetchAll();
   if(!empty($result[0]->block_title)){
     $label_name = $result[0]->block_title;
