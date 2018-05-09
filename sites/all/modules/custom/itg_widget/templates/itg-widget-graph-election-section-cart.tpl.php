@@ -177,16 +177,16 @@
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
           <?php
-          //$block = block_load('itg_widget', 'election_top_stories');
-          //$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-          //print render($render_array);
+          $block = block_load('itg_widget', 'election_top_stories');
+          $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+          print render($render_array);
           ?>
         </div>
     </div>
 </div>
 </div>
   <?php 
-  $bottom_label = get_itg_variable('itg_election_home_bottom_label');
+  /*$bottom_label = get_itg_variable('itg_election_home_bottom_label');
   $bottom_label_url = get_itg_variable('itg_election_home_bottom_label_url');
   if(!empty($bottom_label)) {
     if(!empty($bottom_label_url)) {?>
@@ -194,6 +194,6 @@
     <?php } else {?>
       <span class="fullcoverage-electionlink"><?php echo $bottom_label;?></span> 
     <?php }; ?>
-  <?php }; ?>
+  <?php }; */ ?>
 <?php endif; ?>
 
