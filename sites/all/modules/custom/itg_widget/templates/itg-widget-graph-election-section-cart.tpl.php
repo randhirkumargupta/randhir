@@ -42,7 +42,7 @@
     $src = file_create_url($story_title[0]['uri']);
   }
   echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1>
-    <div class=""><ul><li><a href="#" title="">Election Story 1</a></li>|<li><a href="#" title="">Election Story 2</a></li>|<li><a href="#" title="">Election Story 3</a></li></ul></div>
+    <div class="liststory-election"><ul><li><a href="#" title="">Election Story 1</a></li>|<li><a href="#" title="">Election Story 2</a></li>|<li><a href="#" title="">Election Story 3</a></li></ul></div>
   </div></div>';
  }?>
  <div class="row electionHome-section">
