@@ -413,7 +413,6 @@ function itg_preprocess_html(&$vars) {
       $get_election_nid = itg_get_election_nid($tax_data[2]);
       $entity_id = $get_election_nid['entity_id'];
       $content = node_load($entity_id);
-      // p($content->field_constituency_title);
       $vars['head_title'] = $content->field_constituency_title[LANGUAGE_NONE][0]['value'];
       $keyword = $content->field_constituency_keyword[LANGUAGE_NONE][0]['value'];
       $description = $content->field_constituency_description[LANGUAGE_NONE][0]['value'];

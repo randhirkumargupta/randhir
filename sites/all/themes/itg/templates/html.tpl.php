@@ -30,6 +30,7 @@
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php
     $arg = arg();
+    global $base_url;
     $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
     $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
     if((!drupal_is_front_page()) && $type != 'story'){
@@ -185,7 +186,7 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	 echo $ipl_triangle_status['score_code_cube_app'];
 	}
   
-  if ($arg[0] != 'video' && $arg[2] != 'embed' && (!drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1) && get_itg_variable('itg_election_home_chunk')) {
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] != 'video' && $arg[2] != 'embed' && (!drupal_is_front_page()) && ($ipl_triangle_status['score_triangle'] == 1) && get_itg_variable('itg_election_home_chunk')) {
 	 echo $ipl_triangle_status['score_code_cube_app'];
 	}
   ?>

@@ -2048,45 +2048,7 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
-  
-  /*
-    $get_election_nid = itg_get_election_nid($tax_data[2]);
-    $entity_id = $get_election_nid['entity_id'];
-    $content = node_load($entity_id);
-    // p($content->field_constituency_title);
-    $title = $content->field_constituency_title[LANGUAGE_NONE][0]['value'];
-    $keyword = $content->field_constituency_keyword[LANGUAGE_NONE][0]['value'];
-    $description = $content->field_constituency_description[LANGUAGE_NONE][0]['value'];
-    
-    $html_head = array(
-      'title' => array(
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => 'title',
-          'content' => $description,
-        ),
-      ),
-      'description' => array(
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => 'description',
-          'content' => $description,
-        ),
-      ),
-      'keywords' => array(
-        '#tag' => 'meta',
-        '#attributes' => array(
-          'name' => 'keywords',
-          'content' => $keyword,
-        ),
-      ),
-    );
-    foreach ($html_head as $key => $data) {
-      drupal_add_html_head($data, $key);
-    }
-
-  */
-        
+     
   return theme('itg_election_constituency_map', array('data' => $data));
 }
 
