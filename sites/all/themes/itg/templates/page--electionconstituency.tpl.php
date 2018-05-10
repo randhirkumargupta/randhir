@@ -91,9 +91,9 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                                 ?></div>
                         </div>
                     </div>
-                </div> 
+                </div>
+                <?php if(get_itg_variable('itg_election_mini_graph')) : ?> 
                 <div class="col-md-12 col-sm-6 mt-50">
-					<?php if(get_itg_variable('itg_election_mini_graph')) : ?>
                     <div class="itg-widget">
                         <div class="droppable">                                        
                             <h2 class="heading">Results Map</h2>                                                 
@@ -106,8 +106,8 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                             </div>
                         </div>    
                     </div>
-                    <?php endif; ?>
                 </div>
+                <?php endif; ?>
                 <div class="itg-484 col-md-12 col-sm-6 mt-50">
                     <div class="itg-widget">
                         <div class="droppable">                                        
