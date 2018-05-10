@@ -173,6 +173,18 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 @media only screen and (max-width: 768px){.story-section .story-left, .story-section .story-right {padding: 0;}.story-section .byline .profile-detail ul.profile-byline li{ float:none; display:block; margin-bottom:4px;}.story-section .byline .profile-detail ul.profile-byline li.title{ display:inline-block;line-height: 15px; border-right:0px;}.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left: 1px solid #ddd;}.story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}.story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
 }
+@media only screen and (max-width: 767px) {.story-section .byline .profile-detail { width: 78%;}
+.story-section .byline .profile-detail ul li.title{ border-right:0px; line-height: 15px;}
+.story-section .byline .profile-detail ul.date-update li + li{ border-left:0px;}
+.story-section .byline .profile-detail ul.date-update li{ width:100%; margin-bottom:4px;}
+.story-section .byline .profile-detail ul.date-update li.pubdata,.story-section .byline .profile-detail ul.date-update li.update-data{ width:auto;}
+.story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}.story-section .byline .profile-detail ul li.twitter{ display:none;}
+.byline .story-sponsor-header{margin: 0 0 0 15px;}.story-section .byline .profile-detail ul.profile-byline li{ float:none; display:block; margin-bottom:4px;}
+.story-section .byline .profile-detail ul.profile-byline li.title{ display:inline-block;line-height: 15px;}
+.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2),.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(3){border-left: 1px solid #ddd;}
+.story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
+.story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
+}
 
 </style>
 <?php } ?>
