@@ -916,11 +916,11 @@ function itg_rapid_api_insert_video() {
                     'field_stroy_city_tid' => $city,
                 ),
             )),
-        'field_video_anchor' => array(LANGUAGE_NONE => array(
+        /*'field_video_anchor' => array(LANGUAGE_NONE => array(
                 array(
                     'field_video_anchor_target_id' => $anchor,
                 ),
-            )),
+            )),*/
         'field_video_file_name' => array(LANGUAGE_NONE => array(
                 array(
                     'value' => $video_file_name,
