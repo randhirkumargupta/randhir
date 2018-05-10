@@ -491,7 +491,7 @@ else { ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php if(get_itg_variable('itg_election_mini_graph') && $theme != 'itgadmin') : ?> 
+                            <?php if(get_itg_variable('itg_election_mini_graph')) : ?> 
                             <div class="col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Non Draggable ( <strong>MAP</strong> )</div>
                                 <div class="itg-widget">
@@ -504,7 +504,7 @@ else { ?>
                                     ?>
                                     </div>                                                                       
                                 </div>
-                            </div> 
+                            </div>                           
                             <?php endif; ?>
                             <div class="itg-484 col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Special widgets ( <strong>Videos</strong> )</div>
