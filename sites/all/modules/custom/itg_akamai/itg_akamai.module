@@ -1109,6 +1109,10 @@ function itg_akamai_init() {
           $ttl_for_custom_url = 120;
           akamai_max_age($ttl_for_custom_url);
         }
+        else if (arg(0) == 'elections' && arg(2) == 'constituency' && !empty(arg(3))) {
+          $ttl_for_custom_url = get_itg_variable('itg_election_ttl_constituency');
+          akamai_max_age($ttl_for_custom_url);
+        }
         else {          
           $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);          
           if (isset($ttl_for_custom_url)) {
