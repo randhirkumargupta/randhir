@@ -420,9 +420,9 @@ function itg_preprocess_html(&$vars) {
       } elseif ($arg[2] == 'constituency') {
         $constituency_str = ($arg[3]) ? $arg[3] : '';
         $constituency_arr = explode('-', $constituency_str);  
-        $vars['head_title'] = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_title[LANGUAGE_NONE][0]['value']));
-        $keyword = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_keyword[LANGUAGE_NONE][0]['value']));
-        $description = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_description[LANGUAGE_NONE][0]['value']));
+        $vars['head_title'] = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
+        $keyword = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
+        $description = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
       }
      
       
