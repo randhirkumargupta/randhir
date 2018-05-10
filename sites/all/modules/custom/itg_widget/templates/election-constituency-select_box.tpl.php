@@ -1,5 +1,5 @@
 <select onchange="redirectToConstituencyPage(this.value)">
-<option value="0" selected="selected">Constituency wise results</option>
+<option value="0" selected="selected">Constituency results</option>
 <option value="<?php echo FRONT_URL;?>/elections/karnataka-election-2018/constituency/nippani-result">Nippani</option>
 <option value="<?php echo FRONT_URL;?>/elections/karnataka-election-2018/constituency/chikkodi-sadalga-result">Chikkodi-Sadalga</option>
 <option value="<?php echo FRONT_URL;?>/elections/karnataka-election-2018/constituency/athani-result">Athani</option>
