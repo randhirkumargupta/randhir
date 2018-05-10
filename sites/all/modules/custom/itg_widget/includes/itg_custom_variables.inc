@@ -48,14 +48,7 @@ function itg_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
-  $form['election_graph_refreshtime'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Election Graph refresh Time'),
-    '#default_value' => get_itg_variable('election_graph_refreshtime'),
-    '#size' => 20,
-    '#required' => FALSE,
-    '#maxlength' => 20,
-  );
+  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
@@ -119,6 +112,52 @@ function itg_election_configure() {
     '#title' => t('Live Home election Bottom label Link'),
     '#default_value' => get_itg_variable('itg_election_home_bottom_label_url'),
     '#required' => FALSE
+  );
+  $form['election_graph_refreshtime'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Graph refresh Time'),
+    '#default_value' => get_itg_variable('election_graph_refreshtime'),
+    '#size' => 20,
+    '#required' => FALSE,
+    '#maxlength' => 20,
+  );
+  $form['election_map_refreshtime'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Map and Constituency page refresh Time'),
+    '#default_value' => get_itg_variable('election_map_refreshtime'),
+    '#size' => 20,
+    '#required' => FALSE,
+    '#maxlength' => 20,
+  );
+  $form['election_blocks_refreshtime'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Blocks refresh Time'),
+    '#default_value' => get_itg_variable('election_blocks_refreshtime'),
+    '#size' => 20,
+    '#required' => FALSE,
+    '#maxlength' => 20,
+  );
+  $form['itg_election_top_stories_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Top Story label'),
+    '#default_value' => get_itg_variable('itg_election_top_stories_label'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+  );
+  $form['itg_election_ttl_constituency'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Constituency result AKAMAI cache TTL'),
+    '#default_value' => get_itg_variable('itg_election_ttl_constituency'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+  );
+  $form['itg_election_mini_graph'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Mini Graph'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_election_mini_graph'),
   );
   $form['submit_election'] = array(
     '#type' => 'submit',
