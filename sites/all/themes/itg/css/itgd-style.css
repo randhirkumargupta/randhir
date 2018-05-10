@@ -379,7 +379,7 @@ width: 100%;
 .auto-layout-page .auto-block-3 .ad-widget, .tech-layout-page .auto-block-3 .ad-widget{ padding:10px;}
 .section-movies .auto-block-3 .itg-widget-parent{ padding:0px; }
 .section-movies .auto-block-3.backbg{ background: transparent; }
-#block-itg-layout-manager-header-block .menu-login{ right:48px;}
+#block-itg-layout-manager-header-block .menu-login{ right:15px;}
 
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
