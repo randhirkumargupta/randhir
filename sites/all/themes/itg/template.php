@@ -395,6 +395,58 @@ function itg_preprocess_html(&$vars) {
 			$vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
 		}		
 	}
+  
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] == 'elections' && ($arg[2] == 'constituency-map' || $arg[2] == 'constituency')) {
+    
+      $section_alias = $arg[0];
+      $category_alias = $arg[1];
+      $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
+
+      if(empty($path_dest)){
+        drupal_not_found();
+      }
+      $tax_data = explode('/', $path_dest);  
+      if($tax_data[0] != 'taxonomy' || empty($tax_data[2]) || !is_numeric($tax_data[2])){
+        drupal_not_found();
+      }
+
+      $get_election_nid = itg_get_election_nid($tax_data[2]);
+      $entity_id = $get_election_nid['entity_id'];
+      $content = node_load($entity_id);
+      if ($arg[2] == 'constituency-map') {
+        $vars['head_title'] = trim($content->field_constituency_title[LANGUAGE_NONE][0]['value']);
+        $keyword = trim($content->field_constituency_keyword[LANGUAGE_NONE][0]['value']);
+        $description = trim($content->field_constituency_description[LANGUAGE_NONE][0]['value']);
+      } elseif ($arg[2] == 'constituency') {
+        $constituency_str = ($arg[3]) ? $arg[3] : '';
+        $constituency_arr = explode('-', $constituency_str);  
+        $vars['head_title'] = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
+        $keyword = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
+        $description = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
+      }
+ 
+      $html_head = array(
+       'description' => array(
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'description',
+           'content' => $description,
+         ),
+       ),
+       'news_keywords' => array(
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'news_keywords',
+           'content' => $keyword,
+         ),
+       ),
+     );
+     foreach ($html_head as $key => $data) {
+       drupal_add_html_head($data, $key);
+     }
+    
+  }
+  
  } 
 }
 

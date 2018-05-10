@@ -41,9 +41,18 @@
   if (!empty($story_title[0]['uri'])) {
     $src = file_create_url($story_title[0]['uri']);
   }
+  $list_story = get_miscellaneous_content($section, NULL, 'home-story-lists');
+  $list_story_li = '';
+  foreach ($list_story as $_key => $_value) {
+    if(!empty($_value->field_story_external_url_value)){
+      $list_story_li .= '<li><a href="'.$_value->field_story_external_url_value.'">'.$_value->title.'</a></li>';
+    }else{
+       $list_story_li .= '<li>'.$_value->title.'</li>';
+    }
+  }
   echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1>
-    <div class=""><ul><li><a href="#" title="">Election Story 1</a></li>|<li><a href="#" title="">Election Story 2</a></li>|<li><a href="#" title="">Election Story 3</a></li></ul></div>
-  </div></div>';
+    <div class="liststory-election"><ul>' .$list_story_li.
+  '</ul></div></div></div>';
  }?>
  <div class="row electionHome-section">
 <?php  
@@ -173,7 +182,7 @@
 <div class="col-md-4 col-sm-4 col-sm-12 mt-50">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
-          <h3>Karnataka Election Top Stories</h3>
+          <h3><?php echo get_itg_variable('itg_election_top_stories_label');?></h3>
           <?php
           $block = block_load('itg_widget', 'election_top_stories');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));

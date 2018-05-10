@@ -1,3 +1,15 @@
+<?php 
+if(!empty(get_itg_variable('itg_election_home_chunk'))){ ?>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-sm-12 mt-50">
+      <?php
+      $block = block_load('itg_widget', 'election_livetv_block');
+      $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+      print render($render_array);
+      ?>
+    </div>
+</div>
+<?php } ?>
 <h3><span><?php print t('Show videos'); ?></span></h3>
 <?php
 $episodes_text = '';
