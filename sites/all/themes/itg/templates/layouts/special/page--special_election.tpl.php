@@ -493,6 +493,7 @@ else { ?>
                             </div> 
                             <div class="col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Non Draggable ( <strong>MAP</strong> )</div>
+                                <?php if(get_itg_variable('itg_election_mini_graph')) : ?>
                                 <div class="itg-widget">
                                     <h2 class="heading">Results Map</h2> 
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -503,6 +504,7 @@ else { ?>
                                     ?>
                                     </div>                                                                       
                                 </div>
+                                <?php endif; ?>
                             </div> 
                             <div class="itg-484 col-md-12 col-sm-6 mt-50">
                                 <div class="widget-help-text">Special widgets ( <strong>Videos</strong> )</div>
