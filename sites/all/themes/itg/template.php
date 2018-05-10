@@ -395,6 +395,51 @@ function itg_preprocess_html(&$vars) {
 			$vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
 		}		
 	}
+  
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] == 'elections' && $arg[2] == 'constituency-map') {
+    
+      $section_alias = $arg[0];
+      $category_alias = $arg[1];
+      $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
+
+      if(empty($path_dest)){
+        drupal_not_found();
+      }
+      $tax_data = explode('/', $path_dest);  
+      if($tax_data[0] != 'taxonomy' || empty($tax_data[2]) || !is_numeric($tax_data[2])){
+        drupal_not_found();
+      }
+
+      $get_election_nid = itg_get_election_nid($tax_data[2]);
+      $entity_id = $get_election_nid['entity_id'];
+      $content = node_load($entity_id);
+      // p($content->field_constituency_title);
+      $vars['head_title'] = $content->field_constituency_title[LANGUAGE_NONE][0]['value'];
+      $keyword = $content->field_constituency_keyword[LANGUAGE_NONE][0]['value'];
+      $description = $content->field_constituency_description[LANGUAGE_NONE][0]['value'];
+      
+      $html_head = array(
+       'description' => array(
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'description',
+           'content' => $description,
+         ),
+       ),
+       'keywords' => array(
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'keywords',
+           'content' => $keyword,
+         ),
+       ),
+     );
+     foreach ($html_head as $key => $data) {
+       drupal_add_html_head($data, $key);
+     }
+    
+  }
+  
  } 
 }
 
