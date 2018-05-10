@@ -20,7 +20,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
     <?php endif; ?>
     <div class="row electiontop-header mb-20">
      <?php 
-        $header_text_value = isset($data['header_text_value']) ? "<span>". $data['header_text_value'] ."</span> "  : '';  
+        $header_text_value = isset($data['field_constituency_header_text_value']) ? "<span>". $data['field_constituency_header_text_value'] ."</span> "  : '';  
       ?>  
         
         <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print $header_text_value . drupal_get_title();?></h1> </div>

@@ -2030,8 +2030,7 @@ function itg_election_constituency(){
   $category = $tax_data[2];
   $_GET['section'] = $category;
   
-  $election_header_title = itg_get_election_header_title($tax_data[2]);
-  $data['header_text_value'] = $election_header_title['field_constituency_header_text_value'];  
+  $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
 }
 
