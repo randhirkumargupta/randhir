@@ -1113,10 +1113,12 @@ function itg_widget_block_view($delta = '') {
             }
           }else if ( $arg[0] == 'refresh_election_block'  && isset($arg[4])){
             $_GET['offset']  = $arg[4];
-          }     
-          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
-          $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
-          drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
+          }    
+          if ($arg[2] == 'constituency' || $arg[2] == 'constituency-map') {
+            $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
+            $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
+            drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
+          }          
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_most_popular", array("data" => $data));
           break;          
@@ -2029,6 +2031,8 @@ function itg_election_constituency(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  
+  $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
 }
 
@@ -2048,7 +2052,6 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
-     
   return theme('itg_election_constituency_map', array('data' => $data));
 }
 
@@ -2061,6 +2064,20 @@ function itg_get_election_nid($val){
       $query = db_select('field_data_field_graph_category', 'm');
       $query->condition('m.field_graph_category_value', $val, '=');
       $query->fields('m', array('entity_id'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
+}
+
+/**
+ * Function for itg_get_election_header_title().
+ */
+function itg_get_election_header_title($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'm');
+      $query->leftJoin('field_data_field_constituency_header_text', 'h', 'm.entity_id=h.entity_id');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('h', array('field_constituency_header_text_value'));
       $data_result = $query->execute()->fetchAssoc();
       return $data_result;
     }        

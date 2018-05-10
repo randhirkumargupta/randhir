@@ -144,6 +144,14 @@ function itg_election_configure() {
     '#required' => FALSE,
     '#maxlength' => 60,
   );
+  $form['itg_election_ttl_constituency'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Constituency result AKAMAI cache TTL'),
+    '#default_value' => get_itg_variable('itg_election_ttl_constituency'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+  );
   $form['submit_election'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

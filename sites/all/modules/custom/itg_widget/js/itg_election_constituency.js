@@ -22,10 +22,10 @@ function getConstituencyData(jsonUrl, jsonKey) {
 }
 jQuery(document).ready(function () {
     if (Drupal.settings.json_url !== undefined && Drupal.settings.constituency !== undefined) {
-				var refresh_time = 5000;
-				if(Drupal.settings.refresh_time !== undefined){
-					refresh_time = Drupal.settings.refresh_time;
-				}
+        var refresh_time = 5000;
+        if(Drupal.settings.refresh_time !== undefined){
+                refresh_time = Drupal.settings.refresh_time;
+        }
         setInterval(function () {
             getConstituencyData(Drupal.settings.json_url, Drupal.settings.constituency);
         }, refresh_time);
@@ -42,25 +42,26 @@ function renderConstituencyBlocks(data, jsonKey) {
     var seatingCondidate = undefined;
     var otherCondidates = [];
     jQuery.each(data.candidate, function (key, value) {
-        if (value.win_loss !== undefined && value.win_loss == "WON" && !isWon) {
+        if (value.win_loss !== undefined && value.win_loss == "WON" && !isWon && value.candidate_type == 'contesting') {
             isWon = true;
             wonCondidate = value;
         } else if (value.candidate_type == "seating") {
             isSeating = true;
             seatingCondidate = value;
-        } else {
+        }
+        if (value.candidate_type == 'contesting') {
             otherCondidates.push(value);
         }
     });
     if (isWon) {
-        otherCondidates.push(seatingCondidate);
+        //otherCondidates.push(seatingCondidate);
         showWonConstituencyCandidatesHTML(wonCondidate, data, jsonKey);
     }
     if (!isWon && isSeating) {
         showWonConstituencyCandidatesHTML(seatingCondidate, data, jsonKey);
     }
     if (otherCondidates.length > 0) {
-        showOthersConstituencyCandidatesHTML(otherCondidates, data);
+        showOthersConstituencyCandidatesHTML(otherCondidates, data, isWon);
     }
 
 }
@@ -75,7 +76,8 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
 
     var html = "";
     html += "<tr><td>Party</td><td>" + (data.party !== undefined ? data.party : '') + "</td></tr>";
-    html += "<tr><td>Gender</td><td>" + (data.age !== undefined ? data.age : '') + "</td></tr>";
+    html += "<tr><td>Gender</td><td>" + (data.gender !== undefined ? data.gender : '') + "</td></tr>";
+    html += "<tr><td>Age</td><td>" + (data.age !== undefined ? data.age : '') + "</td></tr>";
     html += "<tr><td>Education Qualification</td><td>" + (data.qualification !== undefined ? data.qualification : '') + "</td></tr>";
     html += "<tr><td>Profession</td><td>" + (data.profession !== undefined ? data.profession : '') + "</td></tr>";
     html += "<tr><td>Marital status</td><td>" + (data.marital_status !== undefined ? data.marital_status : '') + "</td></tr>";
@@ -106,14 +108,27 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     }
 }
 
-function showOthersConstituencyCandidatesHTML(data, consData) {
+function showOthersConstituencyCandidatesHTML(data, consData, isWon) {
     var html = "";
     jQuery.each(data, function (key, value) {
         if (value !== undefined) {
             if (consData.live !== undefined && consData.live != "1") {
                html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td></tr>"; 
             }else {
-               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + ((value.win_loss !== undefined && value.win_loss != '') ? value.win_loss : 'Result Awaited') + "</td></tr>";
+               if((value.win_loss !== undefined && value.win_loss != '') && value.win_loss == 'WON' && value.candidate_type == 'contesting'){
+                 var win_loss_status = 'WON';
+               }else if ((value.win_loss === undefined || value.win_loss == '') && !isWon){
+                 var win_loss_status = 'Result Awaited';
+               }else if ((value.win_loss !== undefined || value.win_loss != '') && isWon) {
+                 var win_loss_status = 'LOST';
+               }else if ((value.win_loss === undefined || value.win_loss == '') && isWon) {
+                 var win_loss_status = 'LOST';
+               }else if ((value.win_loss !== undefined && value.win_loss != '') && value.win_loss == 'LEADING'){
+                 var win_loss_status = 'TRAILING';
+               } else {
+                 var win_loss_status = '';
+               } 
+               html += "<tr><td data-column='"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"'>" + (value.candidate !== undefined ? value.candidate : '') + "</td><td data-column='"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"'>" + (value.party !== undefined ? value.party : '') + "</td><td data-column='"+ (consData.label.status !== undefined ? consData.label.status : 'STATUS') +"'>" + win_loss_status + "</td></tr>";
             }
             
         }
