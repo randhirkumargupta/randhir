@@ -2053,7 +2053,8 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
-  drupal_set_title('Karnataka Election 2018: Constituency Map');
+  $tname = get_term_name_from_tid($tax_data[2])->name;
+  drupal_set_title($tname . ': Constituency Map');
   return theme('itg_election_constituency_map', array('data' => $data));
 }
 
