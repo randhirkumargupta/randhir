@@ -182,7 +182,6 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	if($front_page || $type == 'story'){
 	  print $scripts;
 	}
-	$ipl_triangle_status = itg_ipl_triangle_status(); 
 	if ($front_page) {
 	 $ipl_triangle_status = itg_ipl_triangle_status();
 	 if($ipl_triangle_status['score_triangle'] == 1){
