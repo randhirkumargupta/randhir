@@ -1013,7 +1013,6 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 }
 
 .video-landing-header .top-section p,#block-views-photo-landing-slider-block .other-details-main{font-size:17px;line-height: 22px;}
-
 /* Live Blog */
 .liveBlog-indiatoday h1{color:#000; text-align: center;}
 .liveBlog-indiatoday .liveblog-heading{ margin-bottom:20px; }
@@ -1065,6 +1064,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .state-election-map-wrapper{height: 800px;}
 .full_state_graph{height: 100%;}
 /* custon title elelction*/
+
 .electiontop-header .custom-page-title h1 {font-size: 26px;font-weight: 500;line-height: 35px;}
 /* Karnatka Election chunks */
 .election-page .left-side .itg-415-layout .droppable{min-height:200px}
@@ -1099,10 +1099,14 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .tech-block_5 .data-holder{ background:#fff; }
 .election-page .left-side .itg-photo .droppable{ height: auto; }
 .election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
+@media only screen and (max-width: 1024px){
+ .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;}   
+}
 @media (max-width: 991px) and (min-width: 768px){
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
+.election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
 }
 
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
@@ -1165,7 +1169,6 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
 .election-top-block .liststory-election ul li a {color: #111;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
-.election-page .right-side .ad-widget {border: 1px solid #ddd; padding: 20px 37px; height: 305px; border-radius: 5px;}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a:hover svg #hovesvg{ fill:#ffc106 }
 .page-elections-karnataka-election-2018-constituency-map h1#page-title{ display: none; }
@@ -1179,8 +1182,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 22px; line-height: 26px;}
 }
 
-
 /* Election Constituency page */
+.election-page .election-top-block h1{ display: block; margin-bottom: 10px; }
 .page-elections-karnataka-election-2018-constituency h1#page-title{ display: none; }
 .page-elections-karnataka-election-2018-constituency .election-page .election-graph table td{color:#272727;}
 #constituency-top-chunk .mb-20{ margin-bottom:20px; }
@@ -1211,37 +1214,41 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #other-past-results .other-past-results-details:before{content: "";height: 6px;width: 100%;left: 0;position: absolute;bottom: 0;background: #ff0;border-radius: 0 0 5px 5px;}
 #other-past-results .other-past-results-details table td{ background:#fff; width:33%; }
 #other-past-results .other-past-results-details table td:first-child,#other-past-results .other-past-results-details table th:first-child{ text-align: left; padding-left:10px;}
-
+#other-past-results .other-past-results-details table{ width:100%; }
 
 /* other CANDIDATES table Css for mobile */
-@media screen and (max-width:767px){
-    .page-elections-karnataka-election-2018-constituency .election-page .election-graph{}
-    #other-candidates-past .other-candidates-details, #other-candidates .other-candidates-details,#other-past-results .other-past-results-details{border:0px;padding:0px;border-radius:0px;}
-    #other-candidates-past .other-candidates-details:before, #other-candidates .other-candidates-details:before,#other-past-results .other-past-results-details:before{ display:none;}
-    #other-candidates .other-candidates-details table td, #other-candidates-past .other-candidates-details table td,#other-past-results .other-past-results-details table td{ width:100%; padding: 4px 0px 4px 50%; }
-    #other-candidates .other-candidates-details table,.other-candidates-details tbody,.other-candidates-details td,.other-candidates-details th,.other-candidates-details thead,.other-candidates-details tr{display:block}
-    #other-candidates .other-candidates-details table td:first-child, #other-candidates-past .other-candidates-details table td:first-child, #other-candidates .other-candidates-details table th:first-child, #other-candidates-past .other-candidates-details table th:first-child{ text-align: center; padding-left:50%; }
+@media only screen and (max-width: 1024px) and (min-width:786px){
+#other-candidates-past .other-candidates-details table, #other-candidates .other-candidates-details table{ width:100%!important;}
+}
 
-    #other-candidates .other-candidates-details table thead tr,#other-candidates-past .other-candidates-details table thead tr{position:absolute;top:-9999px;left:-9999px}
-    #other-candidates .other-candidates-details tr,#other-candidates-past .other-candidates-details tr{border:1px solid #d4d4d4; padding:10px; border-radius:5px; position: relative; margin-bottom:0px; margin-right:20px; width: 310px; float: left;}
-    #other-candidates .other-candidates-details tr:before,#other-candidates-past .other-candidates-details tr:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
-    #other-candidates .other-candidates-details td,#other-candidates-past .other-candidates-details td{border:none;position:relative;padding-left:50%;}
-    #other-candidates .other-candidates-details td:before,#other-candidates-past .other-candidates-details td:before{text-align:left; position:absolute;top:4px;left:0px;width:45%;padding-right:10px;white-space:nowrap;content:attr(data-column);}
-    #constituency-top-chunk{border:0px;border-radius:0px;margin: 0 -15px 0px; overflow-x:auto; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
-    #constituency-top-chunk::-webkit-scrollbar { display: none;width: 0px; background: transparent;}
-    #constituency-top-chunk:before{ display: none; }
-    #constituency-top-chunk #candidates, #constituency-top-chunk #map-of-constituency{ width:310px; float: left; } 
-    #constituency-top-chunk .mb-viewsection{ width:620px; }
-    #other-candidates .other-candidates-details,#other-candidates-past .other-candidates-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
-    #other-candidates .other-candidates-details table,#other-candidates-past .other-candidates-details table{ width:3000px; }
-    #other-candidates .other-candidates-details::-webkit-scrollbar,#other-candidates-past .other-candidates-details::-webkit-scrollbar { display: none;width: 0px; background: transparent;}
-    #other-past-results .other-past-results-details table,.other-past-results-details tbody,.other-past-results-details td,.other-past-results-details th,.other-past-results-details thead,.other-past-results-details tr{display:block}
-    #other-past-results .other-past-results-details table td:first-child, #other-past-results .other-past-results-details table td:first-child, #other-past-results .other-past-results-details table th:first-child, #other-past-results .other-past-results-details table th:first-child{ text-align: center; padding-left:50%; }
-    #other-past-results .other-past-results-details table thead tr{position:absolute;top:-9999px;left:-9999px}
-    #other-past-results .other-past-results-details tr{border:1px solid #d4d4d4; padding:10px; border-radius:5px; position: relative; margin-bottom: 0px; margin-right:20px; width: 310px; float: left;}
-    #other-past-results .other-past-results-details tr:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
-    #other-past-results .other-past-results-details td{border:none;position:relative;padding-left:50%;}
-    #other-past-results .other-past-results-details td:before{text-align:left; position:absolute;top:4px;left:0px;width:45%;padding-right:10px;white-space:nowrap;content:attr(data-column);}
-    #other-past-results .other-past-results-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;margin:0 0px 0px;}
-    #other-past-results .other-past-results-details::-webkit-scrollbar{ display: none;width: 0px; background: transparent;}
+@media screen and (max-width:767px){
+.page-elections-karnataka-election-2018-constituency .election-page .election-graph{}
+#other-candidates-past .other-candidates-details, #other-candidates .other-candidates-details,#other-past-results .other-past-results-details{border:0px;padding:0px;border-radius:0px;}
+#other-candidates-past .other-candidates-details:before, #other-candidates .other-candidates-details:before,#other-past-results .other-past-results-details:before{ display:none;}
+#other-candidates .other-candidates-details table td, #other-candidates-past .other-candidates-details table td,#other-past-results .other-past-results-details table td{ width:100%; padding: 4px 0px 4px 50%; }
+#other-candidates .other-candidates-details table,.other-candidates-details tbody,.other-candidates-details td,.other-candidates-details th,.other-candidates-details thead,.other-candidates-details tr{display:block}
+#other-candidates .other-candidates-details table td:first-child, #other-candidates-past .other-candidates-details table td:first-child, #other-candidates .other-candidates-details table th:first-child, #other-candidates-past .other-candidates-details table th:first-child{ text-align: center; padding-left:50%; }
+
+#other-candidates .other-candidates-details table thead tr,#other-candidates-past .other-candidates-details table thead tr{position:absolute;top:-9999px;left:-9999px}
+#other-candidates .other-candidates-details tr,#other-candidates-past .other-candidates-details tr{border:1px solid #d4d4d4; padding:10px; border-radius:5px; position: relative; margin-bottom:0px; margin-right:20px; width: 310px; float: left;}
+#other-candidates .other-candidates-details tr:before,#other-candidates-past .other-candidates-details tr:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
+#other-candidates .other-candidates-details td,#other-candidates-past .other-candidates-details td{border:none;position:relative;padding-left:50%;}
+#other-candidates .other-candidates-details td:before,#other-candidates-past .other-candidates-details td:before{text-align:left; position:absolute;top:4px;left:0px;width:45%;padding-right:10px;white-space:nowrap;content:attr(data-column);}
+#constituency-top-chunk{border:0px;border-radius:0px;margin: 0 -15px 0px; overflow-x:auto; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
+#constituency-top-chunk::-webkit-scrollbar { display: none;width: 0px; background: transparent;}
+#constituency-top-chunk:before{ display: none; }
+#constituency-top-chunk #candidates, #constituency-top-chunk #map-of-constituency{ width:310px; float: left; } 
+#constituency-top-chunk .mb-viewsection{ width:620px; }
+#other-candidates .other-candidates-details,#other-candidates-past .other-candidates-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;}
+#other-candidates .other-candidates-details table,#other-candidates-past .other-candidates-details table{ width:3000px; }
+#other-candidates .other-candidates-details::-webkit-scrollbar,#other-candidates-past .other-candidates-details::-webkit-scrollbar { display: none;width: 0px; background: transparent;}
+#other-past-results .other-past-results-details table,.other-past-results-details tbody,.other-past-results-details td,.other-past-results-details th,.other-past-results-details thead,.other-past-results-details tr{display:block}
+#other-past-results .other-past-results-details table td:first-child, #other-past-results .other-past-results-details table td:first-child, #other-past-results .other-past-results-details table th:first-child, #other-past-results .other-past-results-details table th:first-child{ text-align: center; padding-left:50%; }
+#other-past-results .other-past-results-details table thead tr{position:absolute;top:-9999px;left:-9999px}
+#other-past-results .other-past-results-details tr{border:1px solid #d4d4d4; padding:10px; border-radius:5px; position: relative; margin-bottom: 0px; margin-right:20px; width: 310px; float: left;}
+#other-past-results .other-past-results-details tr:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
+#other-past-results .other-past-results-details td{border:none;position:relative;padding-left:50%;}
+#other-past-results .other-past-results-details td:before{text-align:left; position:absolute;top:4px;left:0px;width:45%;padding-right:10px;white-space:nowrap;content:attr(data-column);}
+#other-past-results .other-past-results-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;margin:0 0px 0px;}
+#other-past-results .other-past-results-details::-webkit-scrollbar{ display: none;width: 0px; background: transparent;}
 }
