@@ -1062,7 +1062,9 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .state-election-map-wrapper .mapright-tally #keycondidates iframe { box-shadow:0px 0px 0px 0px !important;}
 .state-election-map-wrapper{height: 800px;}
 .full_state_graph{height: 100%;}
+/* custon title elelction*/
 
+.electiontop-header .custom-page-title h1 {font-size: 26px;font-weight: 500;line-height: 35px;}
 /* Karnatka Election chunks */
 .election-page .left-side .itg-415-layout .droppable{min-height:200px}
 #block-itg-widget-election-who-said-what #Slider.flexslider{ background:#ffff01;padding:10px 20px; text-align: center; border-radius: 5px; border:1px solid #d4d4d4;}
@@ -1100,6 +1102,7 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
+.election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
 }
 
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
@@ -1162,10 +1165,9 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
 .election-top-block .liststory-election ul li a {color: #111;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
-.election-page .right-side .ad-widget {border: 1px solid #ddd; padding: 20px 37px; height: 305px; border-radius: 5px;}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a:hover svg #hovesvg{ fill:#ffc106 }
-.page-elections-karnataka-election-2018-constituency-map h1#page__title{ display: none; }
+.page-elections-karnataka-election-2018-constituency-map h1#page-title{ display: none; }
 .election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{ display: block;text-align: right; position: relative;top: 20px;}
 #constituency-top-chunk .constituency-details #block-itg-widget-election-constituency-select-box{display: block; text-align: right; position: relative; margin-top: 10px; margin-right: 7px;}
 /* back button css */
@@ -1177,14 +1179,15 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 }
 
 /* Election Constituency page */
-.page-elections-karnataka-election-2018-constituency h1.page__title{ display: none; }
+.election-page .election-top-block h1{ display: block; margin-bottom: 10px; }
+.page-elections-karnataka-election-2018-constituency h1#page-title{ display: none; }
 .page-elections-karnataka-election-2018-constituency .election-page .election-graph table td{color:#272727;}
 #constituency-top-chunk .mb-20{ margin-bottom:20px; }
 #constituency-top-chunk{ border:1px solid #d4d4d4; position: relative;border-radius: 5px; padding: 10px 0; margin: 0px 2px 20px;}
 #constituency-top-chunk:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
 #constituency-top-chunk .other-candidates-details{border: 1px solid #d4d4d4; position: relative; padding: 10px; border-radius: 5px; }
 #other-candidates .other-candidates-details:before,#other-candidates-past .other-candidates-details:before{content: ""; height: 6px; width: 100%; left: 0; position: absolute; bottom: 0px; background: #ffff00; border-radius: 0 0 5px 5px;}
-#block-itg-widget-election-constituency-page h3.labels,.election-page h2.heading{font-family: "OpenSans-Regular"; text-transform: uppercase; color: #c10504; font-size: 17px;font-weight: bold; border-bottom: 0px; padding-bottom: 10px;}
+#block-itg-widget-election-constituency-page h3.labels,.election-page h2.heading,.election-page h2.labels{font-family: "OpenSans-Regular"; text-transform: uppercase; color: #c10504; font-size: 17px;font-weight: bold; border-bottom: 0px; padding-bottom: 10px;}
 #constituency-top-chunk #candidates-image{ background:#f2f2f2;padding-top: 30px; }
 #constituency-top-chunk #candidates .text-center{ text-align: center; }
 #constituency-top-chunk .candidates-pic{width: 70px; height: 70px; border: 5px solid #fff; box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2); -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);  display: inline-block; border-radius: 100%;}.candidates-pic img{ width:100%; }
