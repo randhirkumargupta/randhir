@@ -33,7 +33,7 @@
 <script>
 <?php
 $arg = arg();
-if ($arg[2] == 'constituency' || $arg[2] == 'constituency-map') {
+if ($arg[2] == 'constituency' || $arg[2] == 'constituency-map' || ($arg[0] == 'refresh_election_view_block')) {
 ?>
 jQuery(document).ready(function(){
   var refresh_time = "<?php echo (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000'); ?>";
