@@ -14,18 +14,17 @@ if ($jsondata->live != 1) {
 	$seatingCondidate = NULL;
 	$otherCondidates = Array();
 	foreach($jsondata->candidate as $value){
-		if ($value->win_loss == "WON" && !$isWon) {
+		if ($value->win_loss == "WON" && !$isWon && $value->candidate_type == 'contesting') {
 			$isWon = TRUE;
 			$wonCondidate = $value;
 		} else if ($value->candidate_type == "seating"){
 			$isSeating = TRUE;
 			$seatingCondidate = $value;
-		} else {
-			$otherCondidates[] = $value;
-		}		
+		}
+		$otherCondidates[] = $value;		
 	}	
 	if ($isWon) {
-		$otherCondidates[] = $seatingCondidate;
+		//$otherCondidates[] = $seatingCondidate;
 	}
   if(!$isWon && $isSeating){
 		$wonCondidate = $seatingCondidate;
@@ -43,7 +42,20 @@ if ($jsondata->live != 1) {
 				 </thead>
 				 <tbody>
              <?php foreach ($otherCondidates as $key => $candidate) {
-               echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . (!empty($candidate->win_loss) ? $candidate->win_loss : 'Result Awaited') ."</td></tr>";
+               if (!empty($candidate->win_loss) && $candidate->win_loss == 'WON' && $candidate->candidate_type == 'contesting'){
+                 $win_loss_status = 'WON';
+               }elseif (empty($candidate->win_loss) && !$isWon){
+                 $win_loss_status = 'Result Awaited';
+               }else if (empty($candidate->win_loss) && $isWon) {
+                 $win_loss_status = 'LOST';
+               }else if (!empty($candidate->win_loss) && $isWon) {
+                 $win_loss_status = 'LOST';
+               }else if (!empty($candidate->win_loss) && $candidate->win_loss == 'LEADING'){
+                 $win_loss_status = 'TRAILING';
+               } else {
+                 $win_loss_status = '';
+               }
+               echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . $win_loss_status ."</td></tr>";
              }?>
 				 </tbody>
 			</table>
@@ -63,7 +75,8 @@ if ($jsondata->live != 1) {
 				<table class="table">
 					<tbody>
 			              <tr><td>Party</td><td><?php echo $wonCondidate->party;?></td></tr>
-			              <tr><td>Gender</td><td><?php echo $wonCondidate->age;?></td></tr>
+			              <tr><td>Gender</td><td><?php echo $wonCondidate->gender;?></td></tr>
+			              <tr><td>Age</td><td><?php echo $wonCondidate->age;?></td></tr>
 			              <tr><td>Education Qualification</td><td><?php echo $wonCondidate->qualification;?></td></tr>
 			              <tr><td>Profession</td><td><?php echo $wonCondidate->profession;?></td></tr>
 			              <tr><td>Marital status</td><td><?php echo $wonCondidate->marital_status;?></td></tr>
@@ -77,7 +90,7 @@ if ($jsondata->live != 1) {
 			</div>   
     </div>
     <div class="col-md-6" id="map-of-constituency">
-			<h3 class="labels">Map of Constituency</h3>
+			<h3 class="labels"><?php print !empty($jsondata->lbl_mapofconstituency)?$jsondata->lbl_mapofconstituency:'Map of constituency'?></h3>
 			<div class="text-center" id="candidates-svg">			
           <?php echo $jsondata->svg;?>
 			</div>
