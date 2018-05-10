@@ -2019,6 +2019,10 @@ function itg_election_constituency(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  $constituency_str = ($arg[3]) ? $arg[3] : '';
+  $constituency_arr = explode('-', $constituency_str);
+  $head_title = ucfirst($constituency_arr[0]) . ' Assembly Election Result 2018';
+  drupal_set_title($head_title);
   $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
 }
@@ -2039,6 +2043,8 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  $tname = get_term_name_from_tid($tax_data[2])->name;
+  drupal_set_title($tname . ': Constituency Map');
   return theme('itg_election_constituency_map', array('data' => $data));
 }
 
