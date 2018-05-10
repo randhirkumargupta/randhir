@@ -6,6 +6,7 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
+drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
 ?>
 <div class="itg-layout-container auto-layout-page election-page itg-front">
     <!-- Breaking news band -->    
@@ -16,6 +17,10 @@
           </div>      
       </div>    
     <?php endif; ?>
+    <div class="row electiontop-header">
+        <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print drupal_get_title();?></h1> </div>
+        <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="<?php print FRONT_URL .'/'. drupal_get_path_alias('taxonomy/term/' . $_GET['section']);?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <?php echo get_itg_variable('itg_election_home_bottom_label', 'Back');?></a></span> </div>
+    </div>
     <div class="row itg-map">
         <div class="col-md-12 mt-50">
             <div class="itg-widget">
@@ -41,7 +46,7 @@
                             <?php $seathtml = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-14', 'custom_html_widgets'); ?>
                             <div id="auto-new-block" class="widget-wrapper">
                                 <?php if (!empty($seathtml)) { ?>
-                                  <h4 class="heading">Seats</h4>  
+                                  <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-14', 'Seats'); ?></h2>  
                                 <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
@@ -60,7 +65,7 @@
                             <?php $condhtml = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-9', 'custom_html_widgets'); ?>
                             <div id="auto-new-block" class="widget-wrapper">
                                 <?php if (!empty($condhtml)) { ?>
-                                  <h4 class="heading">Key Candidate</h4>  
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-9', 'KEY CANDIDATE'); ?></h2>  
                                 <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
@@ -75,7 +80,7 @@
                     <div class="itg-widget">
                         <div class="droppable itg-layout-605">
                             <div id="auto-new-block" class="widget-wrapper">
-                                <h4 class="heading">Know Your party</h4>  
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'KNOW YOUR PARTY'); ?></h2>  
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
                                     $block = block_load('itg_widget', 'election_know_your_party');
@@ -93,7 +98,7 @@
                     <div class="itg-widget">
                         <div class="droppable">
                             <div class="widget-wrapper">
-                                <h4 class="heading">Key Issues</h4>                                            
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-15', 'KEY ISSUES'); ?></h2>                                            
                                 <div class="data-holder" id="itg-block-7">
                                     <?php
                                     $block = block_load('itg_widget', 'election_key_issue');
@@ -111,7 +116,7 @@
                     <div class="itg-widget">
                         <div class="droppable">
                             <div class="widget-wrapper">
-                                <h4 class="heading">Most Popular</h4>                                            
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-7', 'Latest Karnataka News'); ?></h2>                                            
                                 <div class="data-holder" id="itg-block-7">
                                     <?php
                                     $block = block_load('itg_widget', 'election_most_popular');
@@ -142,9 +147,9 @@
                 <div class="itg-484 col-md-12 col-sm-6 mt-50">
                     <div class="itg-widget">
                         <div class="droppable">                                        
-                            <h4 class="heading">Videos</h4>                                                 
+                            <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-12', 'Videos'); ?></h2>                                                 
                             <div class="data-holder" id="itg-block-12">
-                                <?php echo views_embed_view('tech', 'block_8'); ?>
+                                <?php echo views_embed_view('tech', 'election_videos'); ?>
                             </div>
                         </div>             
                     </div>               
@@ -153,7 +158,7 @@
                     <div class="itg-widget">
                         <div class="droppable <?php print $gray_bg_layout; ?>">
                             <div class="widget-wrapper">
-                                <h4 class="heading">Who said What</h4>
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-10'); ?></h2>
                                 <div class="data-holder" id="itg-block-10" data-widget-style="election-so-sorry">
                                     <?php
                                     $block = block_load('itg_widget', 'election_who_said_what');
@@ -169,7 +174,7 @@
                     <div class="itg-widget">
                         <div class="droppable">
                             <div class="widget-wrapper">
-                                <h4 class="heading">Know your election</h4>                                                 
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-11', ''); ?></h2>                                                 
                                 <div class="data-holder" id="itg-block-11">
                                     <?php
                                     print get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-11', 'custom_html_widgets');

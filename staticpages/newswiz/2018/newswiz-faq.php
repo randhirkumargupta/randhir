@@ -195,7 +195,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         </div>
                         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                             <div class="panel-body">Click on the attached link to fill out the Application form- Please give your link and ours here ours is 
-                            <a href="#"> www.toknowledge.com</a>   - our page Register here link to be given.</div>
+                            <a href="http://www.newswiz.in">www.newswiz.in</a>   - our page Register here link to be given.</div>
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -224,7 +224,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                             <div class="panel-body">
                                 <ul>
                                     <li>
-                                    •	Online team form, team members also need to email us recent passport size photographs of each member.Email id: <a href="mailto:newswiz@toknowledge.com" target="_top"> newswiz@toknowledge.com.</a> – New email id to be created.</li>
+                                    •	Online team form, team members also need to email us recent passport size photographs of each member.Email id: <a href="mailto:registration@newswiz.in" target="_top"> registration@newswiz.in</a> – New email id to be created.</li>
                                     <li>•	A letter from the school nominating your team. </li>
                                     <li>•	The shortlisted teams post the online written test will have to face a live video call test with 3 questions to be answered, to enable selection of the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer.</li>
                                     <li>•	Correct email ID’s & contact numbers where team members can be reached during June. </li>
@@ -438,7 +438,7 @@ following information:
                         </div>
                         <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
                             <div class="panel-body">
-                                           Please send your queries to newswiz@toknowledge.com and we will try to revert as              soon as we can. Alternately, you can refer to our terms and conditions on ……….  
+                                           Please send your queries to registration@newswiz.in and we will try to revert as              soon as we can. Alternately, you can refer to our terms and conditions on ……….  
                             </div>
                         </div>
                     </div>
