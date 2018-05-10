@@ -34,7 +34,7 @@ if ($jsondata->live != 1) {
 
 <div class="row mb-20">
     <div class="col-md-12 <?php print $top_chuck;?>" id="other-candidates-past">
-			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
+			<h2 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h2>
 			<div class="other-candidates-details">
 			<table class="table" id="othercandidates-list">
 				 <thead>
@@ -66,7 +66,7 @@ if ($jsondata->live != 1) {
   <div class="row mb-20" id="constituency-top-chunk">
     <div class="mb-viewsection">
     <div class="col-md-6" id="candidates">
-			<h3 class="labels"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h3>
+			<h2 class="labels"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h2>
 			<div class="text-center" id="candidates-image">
              <span class="candidates-pic"><img src="<?php echo $wonCondidate->image;?>"></span>
 				<div class="candidates-name"><?php echo $wonCondidate->candidate;?></div>
@@ -90,7 +90,7 @@ if ($jsondata->live != 1) {
 			</div>   
     </div>
     <div class="col-md-6" id="map-of-constituency">
-			<h3 class="labels"><?php print !empty($jsondata->lbl_mapofconstituency)?$jsondata->lbl_mapofconstituency:'Map of constituency'?></h3>
+			<h2 class="labels"><?php print !empty($jsondata->lbl_mapofconstituency)?$jsondata->lbl_mapofconstituency:'Map of constituency'?></h2>
 			<div class="text-center" id="candidates-svg">			
           <?php echo $jsondata->svg;?>
 			</div>
@@ -114,7 +114,7 @@ if ($jsondata->live != 1) {
 <?php }?>
   <div class="row mb-20">
     <div class="col-md-12 <?php print $bottom_chuck;?>" id="other-candidates">
-			<h3 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h3>
+			<h2 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h2>
 			<div class="other-candidates-details">
 				<table class="table" id="othercandidates-list-bottom">
 					 <thead>
