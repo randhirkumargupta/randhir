@@ -152,6 +152,12 @@ function itg_election_configure() {
     '#required' => FALSE,
     '#maxlength' => 60,
   );
+  $form['itg_election_mini_graph'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Mini Graph'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_election_mini_graph'),
+  );
   $form['submit_election'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
