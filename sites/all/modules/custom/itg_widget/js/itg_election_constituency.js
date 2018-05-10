@@ -88,9 +88,9 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     html += "<tr><td>Income</td><td>" + (data.income !== undefined ? data.income : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #candidates table tbody").html(html);
     if (consData.lbl_candidates !== undefined) {
-        jQuery("#constituency-top-chunk #candidates .labels").html(consData.lbl_candidates);
+        jQuery("#constituency-top-chunk #candidates .heading").html(consData.lbl_candidates);
     } else {
-        jQuery("#constituency-top-chunk #candidates .labels").html('Candidates');
+        jQuery("#constituency-top-chunk #candidates .heading").html('Candidates');
     }
 
     var mocHTML = "";
@@ -102,9 +102,9 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
         jQuery("#constituency-top-chunk #map-of-constituency #candidates-svg").html(consData.svg);
     }
     if (consData.lbl_mapofconstituency !== undefined) {
-        jQuery("#constituency-top-chunk #map-of-constituency .labels").html(consData.lbl_mapofconstituency);
+        jQuery("#constituency-top-chunk #map-of-constituency .heading").html(consData.lbl_mapofconstituency);
     } else {
-        jQuery("#constituency-top-chunk #map-of-constituency .labels").html('Map of constituency');
+        jQuery("#constituency-top-chunk #map-of-constituency .heading").html('Map of constituency');
     }
 }
 
@@ -139,9 +139,9 @@ function showOthersConstituencyCandidatesHTML(data, consData, isWon) {
         jQuery("#other-candidates table tbody").html(html);
         jQuery("#other-candidates-past").hide();
         if (consData.lbl_otherscandidate !== undefined) {
-            jQuery("#other-candidates .labels").html(consData.lbl_otherscandidate);
+            jQuery("#other-candidates .heading").html(consData.lbl_otherscandidate);
         } else {
-            jQuery("#other-candidates .labels").html('Other Candidates');
+            jQuery("#other-candidates .heading").html('Other Candidates');
         }
     } else {
         var th = "<tr><th>"+ (consData.label.candidate_name !== undefined ? consData.label.candidate_name : 'CANDIDATE NAME') +"</th><th>"+ (consData.label.party !== undefined ? consData.label.party : 'PARTY') +"</th><th>"+(consData.label.status !== undefined ? consData.label.status : 'STATUS')+"</th></tr>";
@@ -149,9 +149,9 @@ function showOthersConstituencyCandidatesHTML(data, consData, isWon) {
         jQuery("#other-candidates-past table thead").html(th);
         jQuery("#other-candidates-past table tbody").html(html);
         if (consData.lbl_otherscandidate !== undefined) {
-            jQuery("#other-candidates-past .labels").html(consData.lbl_otherscandidate);
+            jQuery("#other-candidates-past .heading").html(consData.lbl_otherscandidate);
         } else {
-            jQuery("#other-candidates-past .labels").html('Other Candidates');
+            jQuery("#other-candidates-past .heading").html('Other Candidates');
         }
     }
 }

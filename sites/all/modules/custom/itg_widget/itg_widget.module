@@ -2019,6 +2019,7 @@ function itg_election_constituency(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
 }
 
@@ -2039,4 +2040,32 @@ function itg_election_constituency_map(){
   $category = $tax_data[2];
   $_GET['section'] = $category;
   return theme('itg_election_constituency_map', array('data' => $data));
+}
+
+
+/**
+ * Function for itg_get_election_nid().
+ */
+function itg_get_election_nid($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'm');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('m', array('entity_id'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
+}
+
+/**
+ * Function for itg_get_election_header_title().
+ */
+function itg_get_election_header_title($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'm');
+      $query->leftJoin('field_data_field_constituency_header_text', 'h', 'm.entity_id=h.entity_id');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('h', array('field_constituency_header_text_value'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
 }
