@@ -31,6 +31,10 @@
        </ul>
  </div>
 <script>
+<?php
+$arg = arg();
+if ($arg[2] == 'constituency' || $arg[2] == 'constituency-map') {
+?>
 jQuery(document).ready(function(){
   var refresh_time = "<?php echo (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000'); ?>";
   if (refresh_time === undefined){
@@ -57,4 +61,5 @@ jQuery(document).ready(function(){
        refresh_election_view_blocks(jsonUrl, 'tech', 'election_videos', refresh_time); 
     }, refresh_time);
 });
+<?php }?>
 </script>

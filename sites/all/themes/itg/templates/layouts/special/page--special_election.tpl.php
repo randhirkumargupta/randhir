@@ -156,14 +156,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     if (!empty($story_title[0]['uri'])) {
                       $src = file_create_url($story_title[0]['uri']);
                     }
-                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
-                                <ul>
-                                    <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                    <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($search_title) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
-                                </ul>
-                            </div></div></div>';
+                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> </div></div>';
                   }                  
                   $graphdata = itg_widget_get_graph_data();
                 }

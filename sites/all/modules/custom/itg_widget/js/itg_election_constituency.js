@@ -48,8 +48,10 @@ function renderConstituencyBlocks(data, jsonKey) {
         } else if (value.candidate_type == "seating") {
             isSeating = true;
             seatingCondidate = value;
-        } 
-        otherCondidates.push(value);
+        }
+        if (value.candidate_type == 'contesting') {
+            otherCondidates.push(value);
+        }
     });
     if (isWon) {
         //otherCondidates.push(seatingCondidate);

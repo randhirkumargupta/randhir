@@ -117,7 +117,7 @@
                          hmelection(state_name, '1',svg_path,chart_path, refresh_time);
                       });      
                       </script>
-                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
+                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name)) . " RESULTS LIVE";?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
                         
                       </div>
                   </div>
