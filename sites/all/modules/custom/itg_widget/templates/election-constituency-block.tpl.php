@@ -36,6 +36,9 @@ if ($jsondata->live != 1) {
 		$wonCondidate = $seatingCondidate;
 	}
   $condidate_lebels = $jsondata->label;
+  $temp = explode("-", $constituency);
+  $temp = implode(" ", $temp);
+  $constituency_label = ucwords($temp);
 ?>
 
 <div class="row mb-20">
@@ -110,7 +113,7 @@ if ($jsondata->live != 1) {
 			<div class="constituency-details">
 				<table class="table">
 					<tbody>
-			             <tr><td>AC name</td><td><?php echo $constituency;?></td></tr>
+			             <tr><td>AC name</td><td><?php echo $constituency_label;?></td></tr>
 			             <tr><td>AC No</td><td><?php echo $jsondata->id;?></td></tr>
 			             <tr><td>District</td><td><?php echo $jsondata->district;?></td></tr>
 					</tbody>

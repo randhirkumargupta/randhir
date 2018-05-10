@@ -407,8 +407,7 @@ function itg_preprocess_html(&$vars) {
         $keyword = trim($content->field_constituency_keyword[LANGUAGE_NONE][0]['value']);
         $description = trim($content->field_constituency_description[LANGUAGE_NONE][0]['value']);
       } elseif ($arg[2] == 'constituency') {
-        $constituency_str = ($arg[3]) ? $arg[3] : '';
-        
+        $constituency_str = ($arg[3]) ? $arg[3] : '';        
         $constituency = explode("-", $constituency_str);
         unset($constituency[(count($constituency) - 1)]);
         $constituency = implode(' ', $constituency);

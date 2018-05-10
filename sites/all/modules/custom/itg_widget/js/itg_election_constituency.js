@@ -96,9 +96,19 @@ function showWonConstituencyCandidatesHTML(data, consData, constituencyName) {
     } else {
         jQuery("#constituency-top-chunk #candidates .heading").html('Candidates');
     }
-
+    
+    if (constituencyName !== undefined){
+        var constituencyName_t = constituencyName.split('-');
+        var constituencyNameLab = constituencyName_t.join(" ");
+        constituencyNameLab = constituencyNameLab.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+                return letter.toUpperCase();
+            });
+    }else {
+        var constituencyNameLab = '';
+    }
+    
     var mocHTML = "";
-    mocHTML += "<tr><td>AC name</td><td>" + (constituencyName !== undefined ? constituencyName : '') + "</td></tr>";
+    mocHTML += "<tr><td>AC name</td><td>" + (constituencyNameLab !== undefined ? constituencyNameLab : '') + "</td></tr>";
     mocHTML += "<tr><td>AC No</td><td>" + (consData.id !== undefined ? consData.id : '') + "</td></tr>";
     mocHTML += "<tr><td>District</td><td>" + (consData.district !== undefined ? consData.district : '') + "</td></tr>";
     jQuery("#constituency-top-chunk #map-of-constituency table tbody").html(mocHTML);
