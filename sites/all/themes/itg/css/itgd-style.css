@@ -379,7 +379,7 @@ width: 100%;
 .auto-layout-page .auto-block-3 .ad-widget, .tech-layout-page .auto-block-3 .ad-widget{ padding:10px;}
 .section-movies .auto-block-3 .itg-widget-parent{ padding:0px; }
 .section-movies .auto-block-3.backbg{ background: transparent; }
-#block-itg-layout-manager-header-block .menu-login{ right:48px;}
+#block-itg-layout-manager-header-block .menu-login{ right:15px;}
 
 }
 @media screen and (min-width: 991px) and (max-width: 1024px) {
@@ -997,6 +997,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .auto-layout-page .special-top-news ul li{padding:10px}
 .auto-layout-page .special-top-news ul li:before{display:none;}
 .auto-layout-page .featured-news .featured-post h3{line-height: 20px;font-size:15px;}
+.election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
 }
 
 .btn-heart-like{border:0; background-color:#1a1a1a; width:100%; text-align:left; padding:24.5px 5px 24.4px 10px; display:block}
@@ -1098,6 +1099,9 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .tech-block_5 .data-holder{ background:#fff; }
 .election-page .left-side .itg-photo .droppable{ height: auto; }
 .election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
+@media only screen and (max-width: 1024px){
+ .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;}   
+}
 @media (max-width: 991px) and (min-width: 768px){
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
@@ -1210,9 +1214,13 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #other-past-results .other-past-results-details:before{content: "";height: 6px;width: 100%;left: 0;position: absolute;bottom: 0;background: #ff0;border-radius: 0 0 5px 5px;}
 #other-past-results .other-past-results-details table td{ background:#fff; width:33%; }
 #other-past-results .other-past-results-details table td:first-child,#other-past-results .other-past-results-details table th:first-child{ text-align: left; padding-left:10px;}
-
+#other-past-results .other-past-results-details table{ width:100%; }
 
 /* other CANDIDATES table Css for mobile */
+@media only screen and (max-width: 1024px) and (min-width:786px){
+#other-candidates-past .other-candidates-details table, #other-candidates .other-candidates-details table{ width:100%!important;}
+}
+
 @media screen and (max-width:767px){
 .page-elections-karnataka-election-2018-constituency .election-page .election-graph{}
 #other-candidates-past .other-candidates-details, #other-candidates .other-candidates-details,#other-past-results .other-past-results-details{border:0px;padding:0px;border-radius:0px;}
