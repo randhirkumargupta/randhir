@@ -1102,6 +1102,7 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
+.election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
 }
 
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
@@ -1164,7 +1165,6 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
 .election-top-block .liststory-election ul li a {color: #111;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
-.election-page .right-side .ad-widget {border: 1px solid #ddd; padding: 20px 37px; height: 305px; border-radius: 5px;}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a:hover svg #hovesvg{ fill:#ffc106 }
 .page-elections-karnataka-election-2018-constituency-map h1#page-title{ display: none; }
@@ -1179,6 +1179,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 }
 
 /* Election Constituency page */
+.election-page .election-top-block h1{ display: block; margin-bottom: 10px; }
 .page-elections-karnataka-election-2018-constituency h1#page-title{ display: none; }
 .page-elections-karnataka-election-2018-constituency .election-page .election-graph table td{color:#272727;}
 #constituency-top-chunk .mb-20{ margin-bottom:20px; }
