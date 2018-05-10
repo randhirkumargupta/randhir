@@ -1146,7 +1146,7 @@ function itg_widget_block_view($delta = '') {
              $json_url = $json_url . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
              $refresh_time = (!empty(get_itg_variable('election_map_refreshtime')) ? get_itg_variable('election_map_refreshtime') : '900000');
-             drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
+             drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url, 'refresh_time' => $refresh_time ), 'setting');
              drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_constituency.js', array('type' => 'file', 'scope' => 'footer'));
              $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url, 'refresh_time' => $refresh_time));
            }else{
@@ -2020,8 +2020,10 @@ function itg_election_constituency(){
   $category = $tax_data[2];
   $_GET['section'] = $category;
   $constituency_str = ($arg[3]) ? $arg[3] : '';
-  $constituency_arr = explode('-', $constituency_str);
-  $head_title = ucfirst($constituency_arr[0]) . ' Assembly Election Result 2018';
+  $constituency = explode("-", $constituency_str);
+  unset($constituency[(count($constituency) - 1)]);
+  $constituency = implode(' ', $constituency);
+  $head_title = ucwords($constituency) . ' Assembly Election 2018';
   drupal_set_title($head_title);
   $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
