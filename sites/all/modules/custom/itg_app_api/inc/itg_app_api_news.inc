@@ -157,7 +157,7 @@ function generateNewsCategoryList($tid, $pageno) {
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $d1 = date('Y-m-d', strtotime("-175 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -165,7 +165,7 @@ function generateNewsCategoryList($tid, $pageno) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
-      if($resvalue['field_type_value'] == "Breaking News"){
+      if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
                 continue;
             }
       // node feed tag

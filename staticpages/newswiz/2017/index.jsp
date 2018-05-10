@@ -197,7 +197,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 
                 <li><a href="/newswiz/2017/newswiz-faq.jsp" class='' title="FAQS">FAQS</a></li>
 
-               <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li>
+              <!--  <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li> -->
 
                  <li><a href="/newswiz/2017/episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
                  <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
@@ -275,25 +275,6 @@ a.active_h{background:#353333}
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="over_area">
-											<ul class="headtxt_t">
-												<li><strong>REGISTERATIONS HAVE BEEN CLOSED
-														BUT DON'T be disheartened, PLAY ALONG AND WIN AMAZING
-														GIFTS <a href="#" title="">Click Here</a> TO PLAY NEWS
-														WIZ.
-												</strong></li>
-												<li><strong>WANT TO KNOW MORE ABOUT WHAT NEWS WIZ IS ALL ABOUT <a href="episodes.jsp">Click Here</a>.
-												</strong>
-										</li>
-
-											<li>
-										<strong>FIND AND SUPPORT YOUR FAVOURITE TEAM. <a
-													href="all-teams.jsp" title="">Click Here</a> to support your team.
-												</strong>
-
-										</ul>
-
-
-
 											<p>It gives us great pleasure to announce the return of
 												the exciting and innovative news quiz, "News Wiz" for a
 												second season! Hosted by India's best known and award
@@ -576,7 +557,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 					<div class="container_wiz">
 						<p>News and Quiz come together in a fantastic battle of
 							brains. Rajdeep Sardesai who has spent his life in news will be
-							at the helm of the first-of-its-kind quiz show - NewsWiz. There
+							at the helm of the first-of-its-kind quiz show - News Wiz. There
 							is no one better equipped than Rajdeep to host such a show
 							considering that he has spent 26 years reporting, editing and
 							anchoring news.</p>
