@@ -935,6 +935,7 @@ function itg_rapid_api_insert_video() {
         $success = TRUE;
     } catch (Exception $e) {
         // Do your error handling here.
+        p($e);
         $success = FALSE;
     }
 
