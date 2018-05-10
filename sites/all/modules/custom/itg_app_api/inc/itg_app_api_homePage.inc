@@ -34,8 +34,8 @@ function homePageJson() {
     $business = array();
     //$business = homePageJsonNewslist_business();
     //change on 19-feb-18
-    $itg_rapid_home_sonam_json = array();
-    $itg_rapid_home_sonam_json = itg_rapid_home_sonam_json();
+    $karnataka_elections_json = array();
+    $karnataka_elections_json = itg_rapid_home_karnataka_elections_json();
     //change on 19-feb-18
     $itg_rapid_home_movies_json = array();
     $itg_rapid_home_movies_json = itg_rapid_home_movies_json();
@@ -61,10 +61,10 @@ function homePageJson() {
     $data['status_message'] = "customised_message";  
     
     //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    $data['data'][0] = $data_topstories;  
-    $data['data'][1] = $itg_rapid_home_sonam_json; // sonam-anand
+    $data['data'][0] = $data_topstories;      
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
-    $data['data'][2] = $itg_rapid_home_movies_json;
+    $data['data'][1] = $itg_rapid_home_movies_json;
+    $data['data'][2] = $karnataka_elections_json; // karnataka_elections
     $data['data'][3] = $itg_rapid_home_technology_json;
     $data['data'][4] = $data_news_india;
     $data['data'][5] = $itg_rapid_home_sports_json;
@@ -3300,11 +3300,11 @@ function homePageJsonWidget_3() {
     return $data_news;
 }
 /**
- * itg_rapid_home_sonam_json
+ * itg_rapid_home_karnataka_elections_json
  * @global type $base_url
  * @return type
  */
-function itg_rapid_home_sonam_json(){
+function itg_rapid_home_karnataka_elections_json(){
     
     global $base_url;
     $data_news = array();
@@ -3313,7 +3313,7 @@ function itg_rapid_home_sonam_json(){
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = 1790676; // Sonam-Anand Wedding
+    $tid = 1790070; // karnataka_elections
     $node_count = "";
     $output = "";
     $data = array();
