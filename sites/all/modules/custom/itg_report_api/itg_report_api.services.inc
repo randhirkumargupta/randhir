@@ -818,11 +818,11 @@ function itg_rapid_api_insert_video() {
     $long_headline = $params['long_headline'];
     $short_headline = $params['short_headline'];
     $description = $params['description'];
-    $city = $params['city'];
-    $anchor = $params['anchor'];
+    $city = (int) $params['city'];
+    $anchor = (int) $params['anchor'];
     $video_kicker = $params['video_kicker'];
-    $section_id = $params['section_id'];
-    $cat_id = $params['cat_id'];
+    $section_id = (int) $params['section_id'];
+    $cat_id = (int) $params['cat_id'];
     $extra_large_img = $params['extra_large_img'];
     $large_img = $params['large_img'];
     $medium_img = $params['medium_img'];
@@ -868,18 +868,18 @@ function itg_rapid_api_insert_video() {
         ///
         'field_primary_category' => array(LANGUAGE_NONE => array(
                 array(
-                    'value' => $section_id,
-                    'safe_value' => $section_id,
+                    'field_primary_category_value' => $section_id,
+                    
                 ),
             )),
         'field_story_category' => array(LANGUAGE_NONE => array(
                 array(
-                    'value' => $cat_id,
+                    'field_story_category_tid' => $cat_id,
                 ),
             )),
         'field_story_expert_description' => array(LANGUAGE_NONE => array(
                 array(
-                    'value' => $video_kicker,
+                    'field_story_expert_description_value' => $video_kicker,
                 ),
             )),
         /* 'field_story_extra_large_image' => array(LANGUAGE_NONE => array(
@@ -913,12 +913,12 @@ function itg_rapid_api_insert_video() {
             )),
         'field_stroy_city' => array(LANGUAGE_NONE => array(
                 array(
-                    'tid' => $city,
+                    'field_stroy_city_tid' => $city,
                 ),
             )),
         'field_video_anchor' => array(LANGUAGE_NONE => array(
                 array(
-                    'target_id' => $anchor,
+                    'field_video_anchor_target_id' => $anchor,
                 ),
             )),
         'field_video_file_name' => array(LANGUAGE_NONE => array(
