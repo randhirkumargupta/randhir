@@ -814,7 +814,7 @@ function itg_report_api_detail() {
 function itg_rapid_api_insert_video() {
     $HTTP_RAW_POST_DATA;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    p($params);
+    //p($params);
     $long_headline = $params['long_headline'];
     $short_headline = $params['short_headline'];
     $description = $params['description'];
@@ -919,6 +919,11 @@ function itg_rapid_api_insert_video() {
         'field_video_anchor' => array(LANGUAGE_NONE => array(
                 array(
                     'target_id' => $anchor,
+                ),
+            )),
+        'field_video_file_name' => array(LANGUAGE_NONE => array(
+                array(
+                    'value' => $video_file_name,
                 ),
             )),
         ///
