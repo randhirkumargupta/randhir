@@ -389,6 +389,7 @@ function itg_preprocess_html(&$vars) {
         $constituency = explode("-", $constituency_str);
         unset($constituency[(count($constituency) - 1)]);
         $constituency = implode(' ', $constituency);
+        $constituency = ucwords($constituency);
         $vars['head_title'] = str_replace('<Constituency Name>', ucfirst($constituency), trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
         $keyword = str_replace('<Constituency Name>', ucfirst($constituency), trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
         $description = str_replace('<Constituency Name>', ucfirst($constituency), trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
