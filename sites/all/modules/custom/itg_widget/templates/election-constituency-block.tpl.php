@@ -9,6 +9,7 @@ if ($jsondata->live != 1) {
   $bottom_chuck = '';  
 }
 	$isWon = FALSE;
+	$isLeading = FALSE;
 	$isSeating = FALSE;
 	$wonCondidate = NULL;
 	$seatingCondidate = NULL;
@@ -23,7 +24,10 @@ if ($jsondata->live != 1) {
 		}
     if ($value->candidate_type == 'contesting') {
       $otherCondidates[] = $value; 
-    }		
+    }
+    if ($value->win_loss == "LEADING" && $value->candidate_type == 'contesting') {
+        $isLeading = true;
+    }
 	}	
 	if ($isWon) {
 		//$otherCondidates[] = $seatingCondidate;
@@ -36,7 +40,7 @@ if ($jsondata->live != 1) {
 
 <div class="row mb-20">
     <div class="col-md-12 <?php print $top_chuck;?>" id="other-candidates-past">
-			<h2 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h2>
+			<h2 class="heading"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h2>
 			<div class="other-candidates-details">
 			<table class="table" id="othercandidates-list">
 				 <thead>
@@ -57,6 +61,13 @@ if ($jsondata->live != 1) {
                } else {
                  $win_loss_status = '';
                }
+               
+               if ((!empty($candidate->win_loss)) && $candidate->win_loss == 'LEADING' && $isLeading){
+                 $win_loss_status = 'LEADING';
+               }else if ($isLeading) {
+                   $win_loss_status = 'TRAILING';
+               }
+               
                echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . $win_loss_status ."</td></tr>";
              }?>
 				 </tbody>
@@ -68,7 +79,7 @@ if ($jsondata->live != 1) {
   <div class="row mb-20" id="constituency-top-chunk">
     <div class="mb-viewsection">
     <div class="col-md-6" id="candidates">
-			<h2 class="labels"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h2>
+			<h2 class="heading"><?php print !empty($jsondata->lbl_candidates)?$jsondata->lbl_candidates:'Candidates'?></h2>
 			<div class="text-center" id="candidates-image">
              <span class="candidates-pic"><img src="<?php echo $wonCondidate->image;?>"></span>
 				<div class="candidates-name"><?php echo $wonCondidate->candidate;?></div>
@@ -92,7 +103,7 @@ if ($jsondata->live != 1) {
 			</div>   
     </div>
     <div class="col-md-6" id="map-of-constituency">
-			<h2 class="labels"><?php print !empty($jsondata->lbl_mapofconstituency)?$jsondata->lbl_mapofconstituency:'Map of constituency'?></h2>
+			<h2 class="heading"><?php print !empty($jsondata->lbl_mapofconstituency)?$jsondata->lbl_mapofconstituency:'Map of constituency'?></h2>
 			<div class="text-center" id="candidates-svg">			
           <?php echo $jsondata->svg;?>
 			</div>
@@ -116,7 +127,7 @@ if ($jsondata->live != 1) {
 <?php }?>
   <div class="row mb-20">
     <div class="col-md-12 <?php print $bottom_chuck;?>" id="other-candidates">
-			<h2 class="labels"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h2>
+			<h2 class="heading"><?php print !empty($jsondata->lbl_otherscandidate)?$jsondata->lbl_otherscandidate:'Other Candidates'?></h2>
 			<div class="other-candidates-details">
 				<table class="table" id="othercandidates-list-bottom">
 					 <thead>
