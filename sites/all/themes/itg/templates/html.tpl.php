@@ -189,17 +189,11 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	 }
 	}
   
-  if ($_GET['test'] == 'xyz') {
-    print "itg_election_home_chunk = ".get_itg_variable('itg_election_home_chunk');
-    print "<br>";
-    print "score_triangle = ".$ipl_triangle_status['score_triangle'];
-    print "<br>";
-    print "front_page = ".drupal_is_front_page();
-  }
-  
-  
-  if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] != 'video' && $arg[2] != 'embed' && (!drupal_is_front_page()) && $ipl_triangle_status['score_triangle'] == 1 && !empty(get_itg_variable('itg_election_home_chunk'))) {
-	 echo $ipl_triangle_status['score_code_cube_app'];
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] != 'video' && $arg[2] != 'embed' && (!drupal_is_front_page()) && get_itg_variable('itg_election_home_chunk')) {
+    $ipl_triangle_status = itg_ipl_triangle_status();
+    if ($ipl_triangle_status['score_triangle'] == 1) {
+      echo $ipl_triangle_status['score_code_cube_app'];
+    }   
 	}
   ?>
   <?php print $page_bottom; ?>
