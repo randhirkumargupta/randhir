@@ -1218,7 +1218,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 /* other CANDIDATES table Css for mobile */
 @media only screen and (max-width: 1024px) and (min-width:786px){
-#other-candidates-past .other-candidates-details table, #other-candidates .other-candidates-details table{ width:100%!important;}
+#other-candidates-past .other-candidates-details table, #other-candidates .other-candidates-details table,#other-past-results .other-past-results-details table{ width:100%!important;}
+.election-back-button span.back-button{ font-size:15px; }
 }
 
 @media screen and (max-width:767px){
