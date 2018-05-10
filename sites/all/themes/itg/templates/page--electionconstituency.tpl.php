@@ -92,7 +92,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>
                     </div>
                 </div> 
-                <div class="col-md-12 col-sm-6 mt-50">
+                <div class="col-md-12 col-sm-6 mt-50 itg-election-map">
                     <div class="itg-widget">
                         <div class="droppable">                                        
                             <h2 class="heading">Results Map</h2>                                                 
