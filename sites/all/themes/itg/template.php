@@ -414,18 +414,17 @@ function itg_preprocess_html(&$vars) {
       $entity_id = $get_election_nid['entity_id'];
       $content = node_load($entity_id);
       if ($arg[2] == 'constituency-map') {
-        $vars['head_title'] = $content->field_constituency_title[LANGUAGE_NONE][0]['value'];
-        $keyword = $content->field_constituency_keyword[LANGUAGE_NONE][0]['value'];
-        $description = $content->field_constituency_description[LANGUAGE_NONE][0]['value'];
+        $vars['head_title'] = trim($content->field_constituency_title[LANGUAGE_NONE][0]['value']);
+        $keyword = trim($content->field_constituency_keyword[LANGUAGE_NONE][0]['value']);
+        $description = trim($content->field_constituency_description[LANGUAGE_NONE][0]['value']);
       } elseif ($arg[2] == 'constituency') {
         $constituency_str = ($arg[3]) ? $arg[3] : '';
         $constituency_arr = explode('-', $constituency_str);  
-        $vars['head_title'] = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
-        $keyword = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
-        $description = str_replace('<Constituency Name>', $constituency_arr[0], trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
+        $vars['head_title'] = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
+        $keyword = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
+        $description = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
       }
-     
-      
+ 
       $html_head = array(
        'description' => array(
          '#tag' => 'meta',
@@ -434,10 +433,10 @@ function itg_preprocess_html(&$vars) {
            'content' => $description,
          ),
        ),
-       'keywords' => array(
+       'news_keywords' => array(
          '#tag' => 'meta',
          '#attributes' => array(
-           'name' => 'keywords',
+           'name' => 'news_keywords',
            'content' => $keyword,
          ),
        ),
