@@ -1099,6 +1099,9 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .tech-block_5 .data-holder{ background:#fff; }
 .election-page .left-side .itg-photo .droppable{ height: auto; }
 .election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
+@media only screen and (max-width: 1024px){
+ .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }   
+}
 @media (max-width: 991px) and (min-width: 768px){
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
