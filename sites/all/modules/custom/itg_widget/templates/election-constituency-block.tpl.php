@@ -21,7 +21,9 @@ if ($jsondata->live != 1) {
 			$isSeating = TRUE;
 			$seatingCondidate = $value;
 		}
-		$otherCondidates[] = $value;		
+    if ($value->candidate_type == 'contesting') {
+      $otherCondidates[] = $value; 
+    }		
 	}	
 	if ($isWon) {
 		//$otherCondidates[] = $seatingCondidate;
