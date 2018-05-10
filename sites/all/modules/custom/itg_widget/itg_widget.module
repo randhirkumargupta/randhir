@@ -2049,6 +2049,7 @@ function itg_election_constituency_map(){
   $category = $tax_data[2];
   $_GET['section'] = $category;
   
+  /*
     $get_election_nid = itg_get_election_nid($tax_data[2]);
     $entity_id = $get_election_nid['entity_id'];
     $content = node_load($entity_id);
@@ -2057,7 +2058,6 @@ function itg_election_constituency_map(){
     $keyword = $content->field_constituency_keyword[LANGUAGE_NONE][0]['value'];
     $description = $content->field_constituency_description[LANGUAGE_NONE][0]['value'];
     
-    //drupal_set_title($title);
     $html_head = array(
       'title' => array(
         '#tag' => 'meta',
@@ -2085,7 +2085,7 @@ function itg_election_constituency_map(){
       drupal_add_html_head($data, $key);
     }
 
-  
+  */
         
   return theme('itg_election_constituency_map', array('data' => $data));
 }
