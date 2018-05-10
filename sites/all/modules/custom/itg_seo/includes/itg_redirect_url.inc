@@ -696,6 +696,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $old_content_id = $_GET['scid'];
         $type = 'category';
         $table = 'migrate_map_itgsubcategory'; 
+      } else if ((!empty($arg[0]) && $arg[0] == 'PhotoGallery') && isset($_GET['gId'])) {
+        $old_content_id = $_GET['gId'];
+        $table = 'migrate_map_itgphotogallery';
+        $newurl = getNewStoryUrl($old_content_id, $table);
+        if ($newurl) {
+          drupal_goto($newurl, array(), 301);
+        }
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
