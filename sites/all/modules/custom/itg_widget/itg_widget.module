@@ -295,6 +295,21 @@ function itg_widget_menu() {
       'page callback' => 'itg_election_constituency_map',
       'access callback' => TRUE,
     );
+    
+    $items['refresh_election_block/%/%/%/%'] = array(
+      'page callback' => 'itg_election_block_refresh',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg-election_block_refresh.inc',
+      'file path' => drupal_get_path('module', 'itg_widget'),
+      'access callback' => TRUE,
+    );
+    $items['refresh_election_view_block/%/%/%'] = array(
+      'page callback' => 'itg_election_view_block_refresh',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg-election_block_refresh.inc',
+      'file path' => drupal_get_path('module', 'itg_widget'),
+      'access callback' => TRUE,
+    );
 
   return $items;
 }
@@ -494,6 +509,12 @@ function itg_widget_block_info() {
     );
     $blocks['election_past_results'] = array(
       'info' => t('Widget: Past Results'),
+    );
+    $blocks['election_livetv_block'] = array(
+      'info' => t('Widget: Election LiveTV Block'),
+    );
+    $blocks['election_constituency_select_box'] = array(
+      'info' => t('Widget: Election Constituency Select Box'),
     );
     
     return $blocks;
@@ -984,7 +1005,7 @@ function itg_widget_block_view($delta = '') {
             if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
               $cat_id = arg(2);              
             }            
-            if (drupal_is_front_page()) {
+            if (drupal_is_front_page() || arg(0) == 'livetv') {
               $cat_id = get_itg_variable('home_page_election_tid');              
             }            
             $data = get_top_story_from_category($cat_id, 4, 0);
@@ -1057,7 +1078,8 @@ function itg_widget_block_view($delta = '') {
           $block['content'] = theme("election_key_issues", array("data" => $data));
           break;
         case 'election_most_popular':
-          global $theme;
+          global $theme, $base_url;
+          $arg = arg();
           if (isset($_GET['category']) && !empty($_GET['category'])) {
             $selction_name = 'category';
           }
@@ -1069,7 +1091,32 @@ function itg_widget_block_view($delta = '') {
           }
           if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
             $cat_id = arg(2);              
-          }            
+          }
+          if($arg[0] != 'refresh_election_block'){
+            $query = db_select('field_data_field_is_election_live', 'el');
+            $query->condition('el.entity_id', $cat_id, '=');
+            $query->fields('el', array('field_is_election_live_value'));
+            $data = $query->execute()->fetchField();
+            if(!empty($data)){
+              $offset = 4;
+            }else{
+              $offset = 20;
+            }
+            if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
+              $offset = 0;
+            }
+            if( isset($_GET['offset'])){
+              $offset = $_GET['offset'];
+            }
+            if(!isset($offset)){
+              $offset = 0;
+            }
+          }else if ( $arg[0] == 'refresh_election_block'  && isset($arg[4])){
+            $_GET['offset']  = $arg[4];
+          }     
+          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
+          $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
+          drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_most_popular", array("data" => $data));
           break;          
@@ -1094,14 +1141,17 @@ function itg_widget_block_view($delta = '') {
           $args = arg();
           if (!empty($args[3])) {
            $constituency = explode("-", $args[3]);
-           $constituency = $constituency[0];           
+           unset($constituency[(count($constituency) - 1)]);
+           $constituency = implode('-', $constituency);
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
-             $json_url = $json_url . 'elections/2018/json/constituency/' . $constituency.'.json';
+             $json_url = reset(explode('|~|', $json_url));
+             $json_url = $json_url . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
+             $refresh_time = (!empty(get_itg_variable('election_map_refreshtime')) ? get_itg_variable('election_map_refreshtime') : '900000');
              drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
              drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_constituency.js', array('type' => 'file', 'scope' => 'footer'));
-             $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url));;
+             $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url, 'refresh_time' => $refresh_time));
            }else{
              $block['content'] = '';
            }
@@ -1116,7 +1166,8 @@ function itg_widget_block_view($delta = '') {
            $constituency = $constituency[0];           
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
-             $json_url = $json_url . 'elections/2018/json/past-results/' . $constituency.'.json';
+             $json_url = end(explode('|~|', $json_url));
+             $json_url = $json_url . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
              $block['content'] = theme("election_past_results", array("data" => $constituency_data, 'constituency' => $constituency));;
            }else{
@@ -1125,6 +1176,26 @@ function itg_widget_block_view($delta = '') {
           }else{
             $block['content'] = '';
           }
+          break;
+        case 'election_livetv_block':
+          if(!empty(get_itg_variable('itg_election_home_chunk'))){
+              $data = itg_widget_get_graph_data_for_home();
+              if ((count($data) > 1) || $data[0]->field_graph_type_value == 'Dot Graph'){
+                drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+              }
+              foreach ($data as $index => $row) {
+                  $jsondata = file_get_contents($row->field_election_constituency_tall_value);
+                  $settings['index'] = $index;
+                  $settings['json_data'] = $jsondata;
+                  drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+              }
+              $block['content'] = theme("graph_election_livetv_chunk", array("data" => $data));
+            }else{
+              $block['content'] = '';
+            }
+          break;
+        case 'election_constituency_select_box':
+          $block['content'] = theme("election_constituency_select_box", array());
           break;
     }       
     return $block;
@@ -1944,6 +2015,7 @@ function get_election_state_by_category($catid){
 function itg_election_constituency(){
   $arg = arg();
   $section_alias = $arg[0];
+  //$section_alias = 'assembly-elections-2017';//$arg[0];
   $category_alias = $arg[1];
   $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
   
@@ -1976,5 +2048,20 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+     
   return theme('itg_election_constituency_map', array('data' => $data));
+}
+
+
+/**
+ * Function for itg_get_election_nid().
+ */
+function itg_get_election_nid($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'm');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('m', array('entity_id'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
 }

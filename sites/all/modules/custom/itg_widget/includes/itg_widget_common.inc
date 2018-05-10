@@ -832,6 +832,12 @@ function itg_widget_theme() {
         'election_past_results' => array(
             'template' => 'templates/election-past-restuls',
         ),
+        'graph_election_livetv_chunk' => array(
+            'template' => 'templates/election-livetv-chunk',
+        ),
+        'election_constituency_select_box' => array(
+            'template' => 'templates/election-constituency-select_box',
+        ),
 
     );
     return $themes;
@@ -3579,6 +3585,9 @@ function get_election_most_popular($cat_id, $limit = 12){
   if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
 		$offset = 0;
 	}
+  if( isset($_GET['offset']) ){
+    $offset = $_GET['offset'];
+  }
   $node_data = get_top_story_from_category($cat_id, $limit, $offset);
   return $node_data;
 }
@@ -3650,4 +3659,45 @@ function get_constituency_json_url($catid){
     $output = $result;
   }
   return $output;
+}
+
+
+function get_miscellaneous_content($cat_id, $limit, $type = 'who-said-what'){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
+  
+  $query->fields('fseu', array('field_story_external_url_value'));
+  $query->fields('n', array('title'));
+  if(!empty($limit)){
+   $query->range(0, $limit); 
+  }
+  $query->condition('fiel.field_is_election_live_value', 1);
+  $query->condition('fmt.field_miscellaneous_type_value', $type);
+  if(!empty($cat_id)){
+    $query->condition('fpc.field_primary_category_value', $cat_id);
+  }
+  $result = $query->execute()->fetchAll();
+  return $result;  
+}
+
+function get_html_widget_name_by_layout($section_name, $template_name, $block_name = 'itg-block-11', $widget_name = NULL){
+  if(!empty($widget_name)){
+    $label_name = $widget_name;
+  }else{
+    $label_name = '';
+  }  
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('block_title'));
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+  $itg_query->condition('layout_tpl.section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('layout_manager.block_name', $block_name);
+  $result = $itg_query->execute()->fetchAll();
+  if(!empty($result[0]->block_title)){
+    $label_name = $result[0]->block_title;
+  }
+  return $label_name;
 }
