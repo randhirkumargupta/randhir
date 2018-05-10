@@ -34,7 +34,7 @@
     global $base_url;
     $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
     $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
-    if((!$front_page) && $type != 'story'){
+    if((!$front_page) && ($type != 'story')){
       print $styles; 
       print $scripts; 
     }
@@ -132,7 +132,7 @@
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript>
     <!-- End of Quora Pixel Code -->
-<?php if(($front_page) || $type == 'story'){ ?>
+<?php if(($front_page) || ($type == 'story')){ ?>
 <style>
 * {box-sizing: border-box; }
 /* Inline CSS bootstrap */
