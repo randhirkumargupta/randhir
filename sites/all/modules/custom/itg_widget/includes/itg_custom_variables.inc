@@ -180,7 +180,7 @@ function itg_election_configure() {
   );
   $form['graph_share'] = array(
     '#type' => 'fieldset',
-    '#title' => t('LiveTV share'),
+    '#title' => t('Graph share'),
     '#collapsible' => TRUE, // Added
     '#collapsed' => FALSE,  // Added
   );
