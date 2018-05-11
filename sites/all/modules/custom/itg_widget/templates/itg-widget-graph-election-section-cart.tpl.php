@@ -195,6 +195,7 @@
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
+        drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
         $block = block_load('itg_widget', 'live_tv');
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
