@@ -20,10 +20,20 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
     <?php endif; ?>
     <div class="row electiontop-header mb-20">
      <?php 
-        $header_text_value = isset($data['field_constituency_header_text_value']) ? "<span>". $data['field_constituency_header_text_value'] ."</span> "  : '';  
+        //$header_text_value = isset($data['field_constituency_header_text_value']) ? "<span>". $data['field_constituency_header_text_value'] ."</span> "  : '';
+        $header_text_value = $data['field_constituency_header_text_value'];
+        $livetext = '';
+        $header_text = '';
+        if (!empty($data['field_constituency_header_text_value'])) {
+          $header_text_value = explode(',', $data['field_constituency_header_text_value']);
+          $header_text = $header_text_value[0];
+          if (!empty($header_text_value[1])) {
+            $livetext = $header_text_value[1];
+          }
+        }
       ?>  
         
-        <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print $header_text_value . drupal_get_title();?></h1> </div>
+        <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print $livetext .' '. drupal_get_title() .' '. $header_text; ?></h1> </div>
         <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="<?php print FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $_GET['section']);?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <?php echo get_itg_variable('itg_election_home_bottom_label', 'Back');?></a></span> </div>
     </div>
     <div class="row">
