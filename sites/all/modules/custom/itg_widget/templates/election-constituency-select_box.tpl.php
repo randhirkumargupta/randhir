@@ -225,6 +225,17 @@
 <option value="<?php echo FRONT_URL;?>/elections/karnataka-election-2018/constituency/chamarajanagar-result">Chamarajanagar</option>
 <option value="<?php echo FRONT_URL;?>/elections/karnataka-election-2018/constituency/gundlupet-result">Gundlupet</option>
 </select>
+<?php $arg = arg();
+if (($arg[2] == 'constituency')){
+?>
+<script>
+function redirectToConstituencyPage(args){
+  if(args != 0 && args != '' && args !== undefined){
+    window.open(args,'_self');
+  }
+}
+</script>
+<?php } else {?>
 <script>
 function redirectToConstituencyPage(args){
   if(args != 0 && args != '' && args !== undefined){
@@ -232,3 +243,4 @@ function redirectToConstituencyPage(args){
   }
 }
 </script>
+<?php } ?>
