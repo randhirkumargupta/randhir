@@ -219,7 +219,7 @@ function itg_preprocess_page(&$variables) {
   // For single column page
   //tribute-to-sridevi: nid-1144219
   
-  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score') || $arg[0] == 'state-elections') {
+  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436 || $arg[1] == 1153176 || $arg[1] == 1153177 || $arg[1] == 1153178) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score') || $arg[0] == 'state-elections') {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
@@ -439,7 +439,20 @@ function itg_preprocess_html(&$vars) {
     
   }
   
- } 
+ }
+  if($arg[0] == 'livetv') {
+   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $fb_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+  } 
 }
 
 /**
