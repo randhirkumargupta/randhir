@@ -1160,7 +1160,8 @@ function itg_widget_block_view($delta = '') {
           $args = arg();
           if (!empty($args[3])) {
            $constituency = explode("-", $args[3]);
-           $constituency = $constituency[0];           
+           unset($constituency[(count($constituency) - 1)]);
+           $constituency = implode('-', $constituency);           
            $json_url = get_constituency_json_url($_GET['section']); 
            if (!empty($json_url)){
              $json_url = end(explode('|~|', $json_url));
