@@ -163,6 +163,7 @@
                                      </ul>
                                  </div>';
                             ?>
+                          </span>    
                       </div>
                   </div>
                     <span id = "fhs-<?php echo $state_name;?>"></span>
