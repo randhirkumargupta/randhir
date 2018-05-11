@@ -4,7 +4,7 @@
  * Inc file contains the functions for homePgae API 
  */
 
-/**cube
+/**
  * main function for generate homePageJson array
  *
  * @return array
@@ -188,7 +188,7 @@ $widget_detail[0]['type'] = "webview";
 $widget_detail[0]['title'] = "Karnataka Elections";
 $widget_detail[0]['type_label'] = "Karnataka Elections";
 $widget_detail[0]['width'] = "130";
-$widget_detail[0]['height'] = "180";
+$widget_detail[0]['height'] = "119";
 $widget_detail[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/cube/cube.html";
 $widget_detail[0]['extended_url'] = "https://smedia2.intoday.in/mailer/app-test/chunk.html";
 $cube_widget['widget_detail'] = $widget_detail;
