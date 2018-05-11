@@ -4,10 +4,12 @@
   <?php
   global $base_url;
   $classrow = "col-md-8 col-sm-12 fullchart-table";
+  $topstoryclass = "fullchart-top-story";
   $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
   if (!empty($itg_election_home_webcast_livetv)) {
     $classrow = "col-lg-4 col-md-4 col-sm-4 col-xs-12";
+    $topstoryclass = "";
   }  
   if ($theme != 'seven') {
     if ($theme == FRONT_THEME_NAME) {
@@ -222,7 +224,7 @@
 </div>
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
-<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50 <?php echo $topstoryclass;?>">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
           <h3><?php echo get_itg_variable('itg_election_top_stories_label');?></h3>
