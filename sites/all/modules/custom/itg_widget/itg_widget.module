@@ -2024,7 +2024,8 @@ function itg_election_constituency(){
   $constituency = explode("-", $constituency_str);
   unset($constituency[(count($constituency) - 1)]);
   $constituency = implode(' ', $constituency);
-  $head_title = ucwords($constituency) . ' Assembly Election 2018';
+  //$head_title = ucwords($constituency) . ' Assembly Election 2018';
+  $head_title = ucwords($constituency);
   drupal_set_title($head_title);
   $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
