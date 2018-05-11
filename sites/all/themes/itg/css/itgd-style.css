@@ -1182,7 +1182,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 	#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{ padding:5px 0; }
 	.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top: 0;}
 }
-@media screen and (max-width:768px) and (min-width:800px){
+@media screen and (max-width:800px) and (min-width:768px){
 .election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top:10px;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{padding: 5px 0;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li:nth-child(4),#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ display: none; }
