@@ -36,7 +36,7 @@
 		}
     if ($row->field_graph_type_value == 'Dot Graph') { ?>
 
-      <div class="<?php echo $classrow; ?> mt-50">
+      <div class="<?php echo $classrow; ?> col-md-12 col-sm-12 col-sm-12">
        <?php
          $json_path = $row->field_election_svg_json_url_value;
          $from = "fullhousemap-";
@@ -45,6 +45,7 @@
          $state_name = substr($sub,0,strpos($sub,$to));
          ?>
       <div class="itg-widget">
+        <h3><span>Karnataka Election Result</span></h3>
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
             <a href="<?php echo $graph_link; ?>" >
@@ -76,10 +77,10 @@
   <?php } ?>
   <?php endforeach; ?>
 <!-- End High Cart graph -->
-<div class="col-md-6 col-sm-6 col-sm-12 mt-50">
+<div class="col-md-12 col-sm-12 col-sm-12">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
-          <h3>Karnataka Election Top Stories</h3>
+          <h3><span>Karnataka Election Top Stories</span></h3>
           <?php
           $block = block_load('itg_widget', 'election_top_stories');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
