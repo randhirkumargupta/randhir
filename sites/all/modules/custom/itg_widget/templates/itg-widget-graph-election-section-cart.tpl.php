@@ -146,14 +146,14 @@
                       </div>
                   </div>
                     <span id = "fhs-<?php echo $state_name;?>"></span>
+                    </a>
                     <?php
                     $block = block_load('itg_widget', 'election_constituency_select_box');
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                     print render($render_array);
                     ?>
                 </div>
-              </div>
-            </a>
+              </div>            
           </div>
         </div>
       </div>

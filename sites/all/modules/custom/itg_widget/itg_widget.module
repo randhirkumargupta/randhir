@@ -1239,6 +1239,7 @@ function itg_widget_get_graph_data() {
     $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
     $itg_query->leftJoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
     $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_graph_share_json', 'fegsj', 'n.nid = fegsj.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
     
@@ -1254,7 +1255,8 @@ function itg_widget_get_graph_data() {
     $itg_query->fields('cju', array('field_election_chart_json_url_value'));
     $itg_query->fields('sju', array('field_election_svg_json_url_value'));
     $itg_query->fields('gt', array('field_graph_type_value'));
-    $itg_query->fields('dfgc', array('field_graph_category_value'))
+    $itg_query->fields('dfgc', array('field_graph_category_value'));
+    $itg_query->fields('fegsj', array('field_election_graph_share_json_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('ast.field_section_tid', $cat_id, '=')
       ->condition('status', 1);
