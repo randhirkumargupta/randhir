@@ -3297,7 +3297,7 @@ function homePageJsonWidget_3() {
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "LIVE: KARNATAKA ELECTIONS"; 
     $n_widget[0]['short_url'] = "https://feeds.intoday.in/indiatoday/livetv/apphomeembed.html";
-    $n_widget[0]['extended_url'] = "";
+    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/livetv";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
