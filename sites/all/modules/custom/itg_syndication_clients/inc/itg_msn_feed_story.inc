@@ -234,3 +234,70 @@ function generateAuthorTagStory_syndication($node, $status) {
   $output['a_twitter_handler'] = "$a_twitter_handler";
   return $output;
 }
+
+/**
+ * @file
+ * The ITG Syndication Get external story list
+ */
+function itg_msn_karnataka_election_who_said_what() {
+  $section_id = '1709552';
+  $file_name  = 'msn/indiatoday/karnataka_election_2018_who_said_what.xml';
+  $node_list = karnataka_election_who_said_what_nodelist($section_id);
+  itg_generate_karnataka_election_who_said_what_syndication($section_id, $file_name, $node_list);
+}
+
+/**
+ * @file
+ * The ITG Syndication clients for karnataka election
+ */
+function karnataka_election_who_said_what_nodelist($section_id) {
+  $cat_id = $section_id;
+  $limit = 15;
+  $type = 'who-said-what';
+  $node_list = array();
+  $result = get_who_said_what_from_cat($cat_id, $limit, $type);
+  if(isset($result) && count($result) > 0){
+    foreach ($result as $data) {
+        $story_path = substr($data->field_story_external_url_value,0,-11);
+        $story_id = explode("-",$story_path);
+        $node_list[] = end($story_id);
+    }
+  }
+  return $node_list;
+}
+
+
+/**
+ * Function is used to Generate Karnataka Election 2018 xml feed
+ * @param int $section_id
+ * @param string $file_name
+ * @param array $node_list
+ */
+function itg_generate_karnataka_election_who_said_what_syndication($section_id = NULL, $file_name, $node_list) {
+  if (!empty($section_id)) {
+    $section_name = get_term_name_by_tid($section_id);
+    $type = array('story');
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+    //for media content start
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    $query->fields('n', array('nid', 'title', 'created', 'changed'));
+    $query->fields('dbody', array('body_value'));
+    $query->fields('synopsis', array('field_story_kicker_text_value'));
+     //for media content start
+    $query->fields('eli', array('field_story_extra_large_image_fid'));
+    $query->fields('mi', array('field_story_medium_image_fid'));
+    //for media content end
+    $query->condition('n.nid', $node_list,'IN');
+    $query->range(0, 20);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
+    $xml_path = 'public://';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+  }
+}
