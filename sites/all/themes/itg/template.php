@@ -452,6 +452,16 @@ function itg_preprocess_html(&$vars) {
           '#weight' => -10,
         );
    drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+   $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'twitter:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
   } 
 }
 
