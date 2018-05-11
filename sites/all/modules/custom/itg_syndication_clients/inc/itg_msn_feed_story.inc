@@ -256,7 +256,7 @@ function karnataka_election_who_said_what_nodelist($section_id) {
   $limit = 15;
   $type = 'who-said-what';
   $node_list = array();
-  $result = get_who_said_what_from_cat($cat_id, $limit, $type);
+  $result = get_who_said_what_from_cat_feed($cat_id, $limit, $type);
   if(isset($result) && count($result) > 0){
     foreach ($result as $data) {
         $story_path = substr($data->field_story_external_url_value,0,-11);
@@ -267,6 +267,35 @@ function karnataka_election_who_said_what_nodelist($section_id) {
   return $node_list;
 }
 
+/**
+ *  Get who said what from electionn
+ * @param $cat_id
+ * @param $limit
+ * @param $type
+ */
+function get_who_said_what_from_cat_feed($cat_id, $limit = 4, $type = 'who-said-what'){
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');  
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=fsei.field_story_expert_image_fid');
+  $query->leftJoin('field_data_field_cm_display_title', 'fcdt', 'fcdt.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_kicker_text', 'fskt', 'fskt.entity_id=n.nid');  
+  $query->fields('fseu', array('field_story_external_url_value'));
+  $query->fields('fm', array('uri'));
+  $query->fields('fcdt', array('field_cm_display_title_value'));
+  $query->fields('fskt', array('field_story_kicker_text_value'));
+  $query->range(0, $limit);
+  $query->condition('fiel.field_is_election_live_value', 1);
+  $query->condition('fmt.field_miscellaneous_type_value', $type);
+  if(!empty($cat_id)){
+    $query->condition('fpc.field_primary_category_value', $cat_id);
+  }
+  $result = $query->execute()->fetchAll();
+  return $result;  
+}
 
 /**
  * Function is used to Generate Karnataka Election 2018 xml feed
