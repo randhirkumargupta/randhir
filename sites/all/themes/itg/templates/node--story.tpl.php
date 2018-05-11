@@ -1,6 +1,6 @@
 <script type="text/javascript">var __at__ = 0;</script>
 <?php
-global $base_url, $user;
+global $base_url, $user, $theme_key;
 if (!empty($content)):
   // get related content associated with story
   $related_content = $content['related_content'];
@@ -112,8 +112,31 @@ if (!empty($content)):
   }
   // source type array
   $source_type_arr = array('PTI' , 'IANS', 'ANI');
+  // Rich Snippet for Story
+$mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
+if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
+$publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+} else {
+$publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
+}
+$modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
+$story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
+$meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
+$description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
+$logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle" id="article">
+    <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
+    <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
+			<meta itemprop="url" content="<?php print $logo; ?>">
+			<meta itemprop="width" content="600">
+			<meta itemprop="height" content="60">
+		</div>
+		<meta itemprop="name" content="India Today">
+		<link itemprop="sameAs" href="https://www.indiatoday.in">
+	</div>
     <div class='<?php print $classes ?>'>      
       <div class="comment-mobile desktop-hide">
         <ul>
@@ -269,10 +292,10 @@ if (!empty($content)):
                                     ?>
                                 </li>
                                 <?php 
-                                  } 
+                                  }
                                 ?>
-                            <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                            <li class="update-data">
+                            <li class="pubdata" itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                            <li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
                                 <?php
                                 print t('UPDATED ');
                                 if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
@@ -344,6 +367,7 @@ if (!empty($content)):
                 <?php } ?>
                 
                 <ul class="profile-byline desktop-hide">
+					<span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
                 <?php
                    // For Mobile 
 					if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {	
@@ -355,7 +379,7 @@ if (!empty($content)):
 						  }
 				
 					if ($sponsor_text == '') { ?>	 
-						 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
+						 <li class="title" itemprop="name"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
 						  <?php if(!empty($mobile_twitter_handle)) { ?> 
 						  <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 						  </span>
@@ -514,7 +538,8 @@ if (!empty($content)):
               <div class="profile-detail">
                 <?php foreach($byline_id as $key => $value) { ?>
                   <ul>
-                  <li class="title"><?php print $value['title']; ?></li>
+				  <span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+                  <li class="title" itemprop="name"><?php print $value['title']; ?></li>
                   <?php
                   $twitter_handle = '';
                   if (isset($value['twitter_handle'])) {
@@ -612,7 +637,8 @@ if (!empty($content)):
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <div class="stryimg" >
+                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="img-1">
+				  <meta itemprop="representativeOfPage" content="true">
                   <?php if($activate_live_tv) { ?>
                         <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
@@ -626,9 +652,9 @@ if (!empty($content)):
                                 $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             }
                             if (file_exists($story_image)) {
-                                //$file_uri = file_create_url($story_image);
+                                $file_uri = file_create_url($story_image);
                                 //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
-                                print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title));
+                                print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title,  'attributes' => array('itemprop' => 'contentUrl')));
                             }
                             //else {
                               //  $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
@@ -680,6 +706,11 @@ if (!empty($content)):
                             print '</span></a>';
                         }
                     }
+                    ?>
+                    <meta itemprop="url" content="<?php print $file_uri; ?>">
+					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
+					<div class="image-alt" itemprop="description"><?php print $story_alt; ?></div>
+                    <?php
                   if (!empty($getimagetags)) {
                     foreach ($getimagetags as $key => $tagval) {
                       $urltags = addhttp($tagval->tag_url);
