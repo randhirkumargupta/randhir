@@ -1252,3 +1252,9 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #other-past-results .other-past-results-details{overflow-x:auto; width: 100%; -ms-overflow-style: none; overflow: -moz-scrollbars-none;margin:0 0px 0px;}
 #other-past-results .other-past-results-details::-webkit-scrollbar{ display: none;width: 0px; background: transparent;}
 }
+
+/* election live Tv page */
+#block-itg-widget-election-livetv-block .statesvg-map, #block-itg-widget-election-livetv-block #fhs-karnataka .partyname-seats { display: none; }
+#block-itg-widget-election-livetv-block #fhs-karnataka .leadparty-table{ display: block; }
+#block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li {list-style: none;overflow: hidden;padding: 10px 0;}
+#block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li .dm-pic {width: auto;float: left;margin-right: 10px;}
