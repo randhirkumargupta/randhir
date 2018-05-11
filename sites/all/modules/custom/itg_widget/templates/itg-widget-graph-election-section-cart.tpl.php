@@ -7,7 +7,7 @@
   $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
   if (!empty($itg_election_home_webcast_livetv)) {
-    $classrow = "col-lg-4 col-md-4 col-sm-12";
+    $classrow = "col-lg-4 col-md-4 col-sm-6 col-xs-12";
   }  
   if ($theme != 'seven') {
     if ($theme == FRONT_THEME_NAME) {
@@ -158,7 +158,7 @@
 <!-- End High Cart graph -->
 <!-- Live Tv and Webcast tv -->
 <?php if(!empty($itg_election_home_webcast_livetv)){?>
-<div class="col-lg-4 col-md-4 col-sm-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-50">
     <div class="itg-widget">
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
@@ -179,7 +179,7 @@
 </div>
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
-<div class="col-md-4 col-sm-4 col-sm-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-50">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
           <h3><?php echo get_itg_variable('itg_election_top_stories_label');?></h3>
