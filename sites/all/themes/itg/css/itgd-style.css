@@ -1101,8 +1101,9 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
 /* livetv fixed section */
 .livetv-fixed span.closelive{ width:30px; height: 30px; line-height:30px; text-align:center; background:#111; color:#fff; border:1px solid #fff; border-radius:100%; font-size: 18px;display: block; position: absolute;right: -10px;top: -15px; display:none;}
-.livetv-fixed.active{ position: fixed; top:50%; left:0; }
-.livetv-fixed.active span.closelive{ display: block; }
+.livetv-fixed.active{ position: fixed; bottom:10%; left: 10px; z-index: 999; }
+.livetv-fixed.active span.closelive{ display: block; cursor: pointer; }
+.placeholder-livetv{ background:#e2e1e1; height:280px }
 @media only screen and (max-width: 1024px){
  .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;}   
 }
@@ -1111,6 +1112,7 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
 .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
+.placeholder-livetv{ background:#e2e1e1; height:auto }
 }
 
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}

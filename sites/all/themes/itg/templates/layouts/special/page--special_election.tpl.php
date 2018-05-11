@@ -187,6 +187,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                  <div class="itg-widget">
                                     <h2 class="widget-title" data-id="itg-block-3"><?php print 'Live TV'; ?></h2>
                                     <div class="data-holder" id="itg-block-3">
+                                      <div class="placeholder-livetv">
                                       <div class="livetv-fixed">
                                         <span class="closelive" id="closetv">X</span>
                                       <?php
@@ -194,6 +195,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
                                       ?>
+                                      </div>
                                       </div>
                                      <div class="homelive-share">
                                       <span class="sharethis">SHARE </span>
