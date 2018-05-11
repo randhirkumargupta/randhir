@@ -6,26 +6,7 @@
   $section = get_itg_variable('home_page_election_tid');
  
 ?>
-<?php if(!empty($itg_election_home_content_id)){
-  $story_title = get_first_story_title_by_tid($itg_election_home_content_id);
-  $content_link = $base_url . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
-  $story_title_display = $story_title[0]['title'];
-  $actual_link = $content_link;
-  $search_title = preg_replace("/'/", "\\'", $story_title_display);
-  $fb_share_title = htmlentities($story_title_display, ENT_QUOTES);  
-  $short_url = $actual_link;
-  $story_title_display = l($story_title_display, $content_link);
-  $display_title = "";
-  if (empty($story_title)) {
-    $display_title = 'style="display:none"';
-  }
-  if (!empty($story_title[0]['uri'])) {
-    $src = file_create_url($story_title[0]['uri']);
-  }
-  echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit">' . $story_title_display . '</h1>
-    <div class=""><ul><li><a href="#" title="">Election Story 1</a></li>|<li><a href="#" title="">Election Story 2</a></li>|<li><a href="#" title="">Election Story 3</a></li></ul></div>
-  </div></div>';
- }?>
+
  <div class="row electionHome-section">
 <?php  
   // Start high chart Graph
@@ -36,7 +17,7 @@
 		}
     if ($row->field_graph_type_value == 'Dot Graph') { ?>
 
-      <div class="<?php echo $classrow; ?> mt-50">
+      <div class="<?php echo $classrow; ?> col-md-12 col-sm-12 col-sm-12">
        <?php
          $json_path = $row->field_election_svg_json_url_value;
          $from = "fullhousemap-";
@@ -45,6 +26,7 @@
          $state_name = substr($sub,0,strpos($sub,$to));
          ?>
       <div class="itg-widget">
+        <h3><span>Karnataka Election Result</span></h3>
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
             <a href="<?php echo $graph_link; ?>" >
@@ -76,10 +58,20 @@
   <?php } ?>
   <?php endforeach; ?>
 <!-- End High Cart graph -->
-<div class="col-md-6 col-sm-6 col-sm-12 mt-50">
+<div class="col-md-12 col-sm-12 col-sm-12">
     <div class="itg-widget">
+			<?php
+			$itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
+			if(!empty($itg_election_home_content_id)){
+				$story_title = get_first_story_title_by_tid($itg_election_home_content_id);
+				$story_title_display = $story_title[0]['title'];
+				$content_link = FRONT_URL . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+				$story_title_display = l($story_title_display, $content_link);			
+				echo '<div class="row"><div class="col-md-12 election-top-block"><h1 id="display_tit">' . $story_title_display . '</h1></div></div>';
+			}	
+			?>
         <div class="data-holder" id="home-top-stories-election">
-          <h3>Karnataka Election Top Stories</h3>
+          <h3><span><?php echo get_itg_variable('itg_election_top_stories_label');?></span></h3>
           <?php
           $block = block_load('itg_widget', 'election_top_stories');
           $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
