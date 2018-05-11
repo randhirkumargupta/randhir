@@ -1189,7 +1189,11 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 .graph-design .statename .sharethis{ position: absolute;position: absolute; right: 0; top: 0; background: #e2e1e1; height: 29px;border-radius: 3px 0 0 3px; }
 .graph-design .statename .sharethis .social-share{ line-height: 26px; }
-.graph-design .statename .sharethis .social-share ul li{ margin: 0 8px;}
+.graph-design .statename .sharethis .social-share ul li{ margin: 0 8px; display:inline-block; list-style:none;}
+.electionHome-section .graph-design .statename{ position: relative; }
+.electionHome-section .fullchart .fullchart-table #fhs-karnataka .leadparty-table{padding-top: 73px;}
+#block-itg-widget-home-graph-election .fullchart-top-story #block-itg-widget-election-top-stories ul li{ padding:5px 0; }
+
 
 @media only screen and (max-width: 1024px) and (min-width:991px){
 	#home-livetv-election iframe, #home-webcast-election iframe{ height:250px;}
