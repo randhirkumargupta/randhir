@@ -1034,6 +1034,12 @@ function itg_widget_block_view($delta = '') {
             slideshow:false,
             //animationLoop:false
           });', array('type' => 'inline', 'scope' => 'footer'));
+          drupal_add_js(' jQuery(".flexslider#pastResultSlider").flexslider({
+            animation: "slide",
+            controlNav:false,
+            slideshow:false,
+            //animationLoop:false
+          });', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_who_said_what_from_cat($cat_id, 4, 'who-said-what');
           $block['content'] = theme("election_who_said_what", array("data" => $data));
           break;

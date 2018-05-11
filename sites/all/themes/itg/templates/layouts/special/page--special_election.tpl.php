@@ -192,12 +192,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
                                       ?>
+                                     <div class="homelive-share">
                                       <span class="sharethis">SHARE </span>
                                           <?php
                                           $liveTvshare = FRONT_URL . '/livetv';
                                           $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
                                           $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
-                                          $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+                                          $liveTvsrc = file_create_url(file_default_scheme() . '://sites/all/themes/itg/logo.png');
                                             print '<div class="social-share">
                                                    <ul>
                                                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
@@ -206,7 +207,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                        <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
                                                    </ul>
                                                </div>';
-                                          ?>                                          
+                                          ?>
+                                     </div>    
                                     </div>
                                 </div> 
                               </div>
