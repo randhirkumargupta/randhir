@@ -274,7 +274,7 @@ function karnataka_election_who_said_what_nodelist($section_id) {
  * @param array $node_list
  */
 function itg_generate_karnataka_election_who_said_what_syndication($section_id = NULL, $file_name, $node_list) {
-  if (!empty($section_id)) {
+  if (!empty($section_id) && !empty($node_list)) {
     $section_name = get_term_name_by_tid($section_id);
     $type = array('story');
     $query = db_select('node', 'n');
