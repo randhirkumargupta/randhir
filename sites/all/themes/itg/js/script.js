@@ -1186,17 +1186,22 @@ function resizeIframe(obj) {
 
 jQuery(window).scroll(function(){
   if (jQuery(window).width() > 1024) {
-    $('.livetv-fixed').each(function(){
+    $('#livetv-section').each(function(){
     if(isScrolledIntoView($(this))){
-      jQuery(this).addClass('active');
+      jQuery('.livetv-fixed').removeClass('active');
     }
     else{
-      jQuery(this).removeClass('active');
+      jQuery('.livetv-fixed').addClass('active');
     }
   });
 }
 
 });
+
+jQuery('#closetv').click(function(){
+    jQuery('.livetv-fixed').removeClass('active');
+})
+
 
 function isScrolledIntoView(elem){
     var $elem = $(elem);
