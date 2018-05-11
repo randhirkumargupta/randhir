@@ -4,10 +4,12 @@
   <?php
   global $base_url;
   $classrow = "col-md-8 col-sm-12 fullchart-table";
+  $topstoryclass = "fullchart-top-story";
   $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
   if (!empty($itg_election_home_webcast_livetv)) {
     $classrow = "col-lg-4 col-md-4 col-sm-4 col-xs-12";
+    $topstoryclass = "";
   }  
   if ($theme != 'seven') {
     if ($theme == FRONT_THEME_NAME) {
@@ -131,7 +133,7 @@
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span></a>
                      <script type="text/javascript">
                        document.addEventListener("DOMContentLoaded", function(event) { 
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
@@ -142,11 +144,32 @@
                       });                   
                       </script>
                       <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name)).' RESULTS LIVE';?>" ><?php echo strtoupper(str_replace("-"," ",$state_name)) .' RESULTS LIVE' ;?></span> <span class="sharethis">
-                         
+                         <?php
+                            $liveTvshare = $graph_link;
+                            $liveTvfb_share_title = get_itg_variable('itg_graphshare_title');
+                            $liveTvshare_desc = get_itg_variable('itg_graphshare_desc');
+                            $liveTvsrc = '';
+                            if (!empty($row->field_election_graph_share_json_value)) {
+                              $liveTvsrc = file_get_contents($row->field_election_graph_share_json_value);
+                              $liveTvsrc = json_decode($liveTvsrc);
+                              if (!empty($liveTvsrc->imagePath)){
+                                $liveTvsrc = $liveTvsrc->imagePath; 
+                              }
+                            }                          
+                              print '<div class="social-share">
+                                     <ul>
+                                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                                     </ul>
+                                 </div>';
+                            ?>
+                          </span>    
                       </div>
                   </div>
                     <span id = "fhs-<?php echo $state_name;?>"></span>
-                    </a>
+                    
                     <?php
                     $block = block_load('itg_widget', 'election_constituency_select_box');
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -202,7 +225,7 @@
 </div>
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
-<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50 <?php echo $topstoryclass;?>">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
           <h3><?php echo get_itg_variable('itg_election_top_stories_label');?></h3>
