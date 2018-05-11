@@ -3,15 +3,7 @@ if(!empty(get_itg_variable('itg_election_home_chunk'))){ ?>
 <div class="row desktop-hide">
     <div class="col-md-12 col-sm-12 col-sm-12">
 			<?php			
-			$itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
-			if(!empty($itg_election_home_content_id)){
-				$story_title = get_first_story_title_by_tid($itg_election_home_content_id);
-				$story_title_display = $story_title[0]['title'];
-				$content_link = FRONT_URL . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
-				$story_title_display = l($story_title_display, $content_link);			
-				echo '<div class="row"><div class="col-md-12 election-top-block"><h1 id="display_tit">' . $story_title_display . '</h1></div></div>';
-			}			
-      $block = block_load('itg_widget', 'election_livetv_block');
+			$block = block_load('itg_widget', 'election_livetv_block');
       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
       print render($render_array);
       ?>
