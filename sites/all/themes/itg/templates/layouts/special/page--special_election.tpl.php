@@ -246,8 +246,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
                               if(cookies_id === undefined || cookies_id != 'smalltv'){
                               if (jQuery(window).width() > 1025) {
-                                $('#livetv-section').each(function(){
-                                if(isScrolledIntoView($(this))){
+                                jQuery('#livetv-section').each(function(){
+                                if(isScrolledIntoView(jQuery(this))){
                                   jQuery('.livetv-fixed').removeClass('active');
                                 }
                                 else{
@@ -265,12 +265,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 jQuery('.livetv-fixed').removeClass('active');
                             })
                             function isScrolledIntoView(elem){
-                                var $elem = $(elem);
-                                var $window = $(window);
-                                var docViewTop = $window.scrollTop();
-                                var docViewBottom = docViewTop + $window.height();
-                                var elemTop = $elem.offset().top;
-                                var elemBottom = elemTop + $elem.height();
+                                var elem = jQuery(elem);
+                                var window = jQuery(window);
+                                var docViewTop = window.scrollTop();
+                                var docViewBottom = docViewTop + window.height();
+                                var elemTop = elem.offset().top;
+                                var elemBottom = elemTop + elem.height();
                                 return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
                             }
                           });   
