@@ -1185,7 +1185,7 @@ function resizeIframe(obj) {
  
 var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
 jQuery(window).scroll(function(){
-  if(cookies_id !== undefined && cookies_id == 'smalltv'){
+  if(cookies_id === undefined || cookies_id != 'smalltv'){
   if (jQuery(window).width() > 1024) {
     $('#livetv-section').each(function(){
     if(isScrolledIntoView($(this))){
