@@ -441,7 +441,7 @@ function itg_preprocess_html(&$vars) {
   
  }
   if($arg[0] == 'livetv') {
-   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $liveTvsrc = file_create_url(file_default_scheme() . '://sites/all/themes/itg/logo.png');
    $fb_image_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
@@ -452,6 +452,16 @@ function itg_preprocess_html(&$vars) {
           '#weight' => -10,
         );
    drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+   $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'twitter:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
   } 
 }
 
