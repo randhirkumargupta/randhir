@@ -1183,7 +1183,6 @@ function resizeIframe(obj) {
 }
 
  
-
 jQuery(window).scroll(function(){
   var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
   if(cookies_id === undefined || cookies_id != 'smalltv'){
@@ -1208,8 +1207,6 @@ jQuery('#closetv').click(function(){
     jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
     jQuery('.livetv-fixed').removeClass('active');
 })
-
-
 function isScrolledIntoView(elem){
     var $elem = $(elem);
     var $window = $(window);
