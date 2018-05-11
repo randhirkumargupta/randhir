@@ -1265,7 +1265,8 @@ function topstoriesList($source) {
                 $live_tv = 1;
             }
             $short_desc = $value['field_common_short_description_value'];
-            $sub_title = $value['field_constituancy_value'];
+            //$sub_title = $value['field_constituancy_value'];
+            $sub_title = $value['title'];
             $page_title = $node_data->title;
             $field_type_value = $value['field_type_value'];
             //p($resvalue);
