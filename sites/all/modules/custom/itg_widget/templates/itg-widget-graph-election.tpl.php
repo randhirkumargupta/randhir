@@ -120,8 +120,8 @@
                       <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name)) . " RESULTS LIVE";?>" ><?php echo strtoupper(str_replace("-"," ",$state_name)). " RESULTS LIVE";?></span> <span class="sharethis">
                         
                       </div>
-                  </div></a>
-                    <span id = "fhs-<?php echo $state_name;?>">
+                  </div>
+                    <span id = "fhs-<?php echo $state_name;?>"></span> </a>
                     <div class="graphlive-share">
                       <span class="sharethis">SHARE </span>
                           <?php
@@ -146,7 +146,6 @@
                                </div>';
                           ?>
                      </div> 
-                  </span> 
                     <?php
                     $block = block_load('itg_widget', 'election_constituency_select_box');
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
