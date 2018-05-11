@@ -1173,8 +1173,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a:hover svg #hovesvg{ fill:#ffc106 }
 .page-elections-karnataka-election-2018-constituency-map h1#page-title{ display: none; }
-.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{ display: block;text-align: right; position: relative;top: 20px;}
-#constituency-top-chunk .constituency-details #block-itg-widget-election-constituency-select-box{display: block; text-align: right; position: relative; margin-top: 10px; margin-right: 7px;}
+.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{ display: block;text-align: right; position: relative;top: 20px; float: right;}
+#constituency-top-chunk .constituency-details #block-itg-widget-election-constituency-select-box{display: block; text-align: right; position: relative; margin-top: 10px; margin-right: 7px; float: right;}
 /* back button css */
 .election-back-button{ text-align: right; }
 .election-back-button span.back-button{background: #ddd; padding: 5px 20px; font-size: 16px; border-radius: 20px; display: inline-block; box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.3);}
@@ -1185,6 +1185,10 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .homelive-share .social-share ul li:nth-child(1){ display: none!important; }
 .electionHome-section .graph-design .statename{margin-top: -10px;}
 .electionHome-section h3{padding-bottom: 5px; text-transform: uppercase; font-family: "OpenSans-bold";}
+
+.graph-design .statename .sharethis{ position: absolute;position: absolute; right: 0; top: 0; background: #e2e1e1; height: 29px;border-radius: 3px 0 0 3px; }
+.graph-design .statename .sharethis .social-share{ line-height: 26px; }
+.graph-design .statename .sharethis .social-share ul li{ margin: 0 8px;}
 
 @media only screen and (max-width: 1024px) and (min-width:991px){
 	#home-livetv-election iframe, #home-webcast-election iframe{ height:250px;}
