@@ -1188,15 +1188,20 @@ jQuery(window).scroll(function(){
   if (jQuery(window).width() > 1024) {
     $('.livetv-fixed').each(function(){
     if(isScrolledIntoView($(this))){
-      jQuery(this).addClass('active');
+      jQuery(this).removeClass('active');
     }
     else{
-      jQuery(this).removeClass('active');
+      jQuery(this).addClass('active');
     }
   });
 }
 
 });
+
+jQuery('#closetv').click(function(){
+    jQuery('.livetv-fixed').removeClass('active');
+})
+
 
 function isScrolledIntoView(elem){
     var $elem = $(elem);
