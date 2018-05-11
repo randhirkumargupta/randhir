@@ -1174,7 +1174,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .election-top-block .liststory-election ul li {display: inline-block;line-height: 18px;color: #a00606;padding: 0 15px; position: relative;}
 .election-top-block .liststory-election ul li + li:before{content: '|'; position: absolute; left: -4px; display: inline-block;}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
-.election-top-block .liststory-election ul li a {color: #111;}
+.election-top-block .liststory-election ul li a {color: #111; width: auto; height: auto; background: transparent; text-align: left; line-height:inherit;}
 .election-top-block .liststory-election ul li a:hover{color:#193984;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }

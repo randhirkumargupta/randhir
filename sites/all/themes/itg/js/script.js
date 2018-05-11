@@ -1183,8 +1183,9 @@ function resizeIframe(obj) {
 }
 
  
-
+var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
 jQuery(window).scroll(function(){
+  if(cookies_id !== undefined && cookies_id == 'smalltv'){
   if (jQuery(window).width() > 1024) {
     $('#livetv-section').each(function(){
     if(isScrolledIntoView($(this))){
@@ -1195,10 +1196,15 @@ jQuery(window).scroll(function(){
     }
   });
 }
+}
 
 });
 
 jQuery('#closetv').click(function(){
+    var date = new Date();
+    var minutes = 30;
+    date.setTime(date.getTime() + (minutes * 60 * 1000));
+    jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
     jQuery('.livetv-fixed').removeClass('active');
 })
 
