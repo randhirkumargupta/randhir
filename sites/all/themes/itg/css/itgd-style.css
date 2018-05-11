@@ -1130,7 +1130,7 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .left-side .itg-415-layout #fhs-karnataka,.electionHome-section .fullchart-table #fhs-karnataka{display: block; width:45%;float: right;}
 .election-page .left-side .itg-415-layout #fhs-karnataka .partyname-seats,.electionHome-section .fullchart-table #fhs-karnataka .partyname-seats{ display: none; }
 .election-page .left-side .itg-415-layout #fhs-karnataka .leadparty-table{display: block; width: 100%;padding-top: 20px;}
-.electionHome-section .fullchart-table #fhs-karnataka .leadparty-table {display: block; width: 100%;padding-top: 45px;}
+.electionHome-section .fullchart-table #fhs-karnataka .leadparty-table {display: block; width: 100%;padding-top: 73px;}
 @media screen and (max-width:767px){
 .election-page .left-side .itg-415-layout .statesvg-map,.electionHome-section .fullchart-table .statesvg-map{ width:100%; float: none;}
  .election-page .left-side .itg-415-layout #fhs-karnataka,.electionHome-section .fullchart-table #fhs-karnataka{ width:100%; float: none;}
@@ -1191,7 +1191,6 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .graph-design .statename .sharethis .social-share{ line-height: 26px; }
 .graph-design .statename .sharethis .social-share ul li{ margin: 0 8px; display:inline-block; list-style:none;}
 .electionHome-section .graph-design .statename{ position: relative; }
-.electionHome-section .fullchart .fullchart-table #fhs-karnataka .leadparty-table{padding-top: 73px;}
 #block-itg-widget-home-graph-election .fullchart-top-story #block-itg-widget-election-top-stories ul li{ padding:5px 0; }
 
 
@@ -1208,6 +1207,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ display: none; }
 .electionHome-section .graph-design .statename .stateNameText{ font-size:13px; }
 .election-top-block .liststory-election ul li a {font-size:14px;}
+#block-itg-widget-home-graph-election .fullchart-top-story{ width:100% }
+#block-itg-widget-home-graph-election .fullchart-top-story #block-itg-widget-election-top-stories ul li .dm-pic{ display: block; }
 
 }
 @media screen and (max-width:767px){
