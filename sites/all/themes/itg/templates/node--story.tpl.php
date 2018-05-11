@@ -126,7 +126,7 @@ $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
 $description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
 $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle" id="article">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle">
     <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
     <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
 		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
@@ -637,7 +637,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="img-1">
+                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject">
 				  <meta itemprop="representativeOfPage" content="true">
                   <?php if($activate_live_tv) { ?>
                         <div class="story_itg_live_tv iframe-video">
