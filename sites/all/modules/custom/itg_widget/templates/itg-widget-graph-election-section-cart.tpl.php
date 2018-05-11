@@ -186,9 +186,12 @@
 <!-- End High Cart graph -->
 <!-- Live Tv and Webcast tv -->
 <?php if(!empty($itg_election_home_webcast_livetv)){?>
-<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50" id="livetv-section">
 <h3>Live Tv</h3>
     <div class="itg-widget">
+      <div class="placeholder-livetv">
+       <div class="livetv-fixed">
+         <span class="closelive" id="closetv">X</span>
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
@@ -196,6 +199,41 @@
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
         ?>
+       <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+          jQuery(window).scroll(function(){
+            var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
+            if(cookies_id === undefined || cookies_id != 'smalltv'){
+            if (jQuery(window).width() > 1025) {
+              $('#livetv-section').each(function(){
+              if(isScrolledIntoView($(this))){
+                jQuery('.livetv-fixed').removeClass('active');
+              }
+              else{
+                jQuery('.livetv-fixed').addClass('active');
+              }
+            });
+          }
+          }
+          });
+          jQuery('#closetv').click(function(){
+              var date = new Date();
+              var minutes = 30;
+              date.setTime(date.getTime() + (minutes * 60 * 1000));
+              jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
+              jQuery('.livetv-fixed').removeClass('active');
+          })
+          function isScrolledIntoView(elem){
+              var $elem = $(elem);
+              var $window = $(window);
+              var docViewTop = $window.scrollTop();
+              var docViewBottom = docViewTop + $window.height();
+              var elemTop = $elem.offset().top;
+              var elemBottom = elemTop + $elem.height();
+              return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+          }
+        });   
+          </script>   
       </div>
       <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
         <div class="data-holder" id="home-webcast-election">
@@ -204,6 +242,8 @@
           ?>
         </div>
       <?php }?>
+      </div>
+      </div>
       <div class="homelive-share">
         <span class="sharethis">SHARE </span>
             <?php
