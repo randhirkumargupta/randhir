@@ -192,6 +192,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
                                       ?>
+                                     <div class="homelive-share">
                                       <span class="sharethis">SHARE </span>
                                           <?php
                                           $liveTvshare = FRONT_URL . '/livetv';
@@ -206,7 +207,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                        <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
                                                    </ul>
                                                </div>';
-                                          ?>                                          
+                                          ?>
+                                     </div>    
                                     </div>
                                 </div> 
                               </div>
