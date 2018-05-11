@@ -3705,8 +3705,8 @@ function get_html_widget_name_by_layout($section_name, $template_name, $block_na
 function get_graph_share_json_url($cat_id){
  $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
+  $itg_query->leftJoin('field_data_field_election_graph_share_json', 'fegsj', 'n.nid = fegsj.entity_id');
   $itg_query->condition('dfgc.field_graph_category_value', $cat_id, '=');
-  $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
   $itg_query->fields('n', array('nid'));
   $itg_query->fields('fegsj', array('field_election_graph_share_json_value'))
     ->condition('n.type', 'election_graph_xml')
