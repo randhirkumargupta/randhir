@@ -36,7 +36,11 @@ $arg = arg();
 if (($arg[2] == 'constituency' || $arg[2] == 'constituency-map') || ($arg[0] == 'refresh_election_view_block')) {
 ?>
 jQuery(document).ready(function(){
+  <?php if (($arg[0] != 'refresh_election_view_block')) {?>
+      var refresh_time = 1000;
+  <?php } else {?>    
   var refresh_time = "<?php echo (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '60000'); ?>";
+  <?php }?>
   if (refresh_time === undefined){
     refresh_time = 60000;
   }
