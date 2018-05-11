@@ -131,7 +131,7 @@
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span></a>
                      <script type="text/javascript">
                        document.addEventListener("DOMContentLoaded", function(event) { 
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
@@ -167,7 +167,7 @@
                       </div>
                   </div>
                     <span id = "fhs-<?php echo $state_name;?>"></span>
-                    </a>
+                    
                     <?php
                     $block = block_load('itg_widget', 'election_constituency_select_box');
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
