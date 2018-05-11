@@ -1181,3 +1181,29 @@ jQuery(window).load(function () {
 function resizeIframe(obj) {
     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }
+
+ 
+
+$(window).scroll(function(){
+  if ($(window).width() > 1024) {
+    $('.livetv-fixed').each(function(){
+    if(isScrolledIntoView($(this))){
+      $(this).addClass('active');
+    }
+    else{
+      $(this).removeClass('active');
+    }
+  });
+}
+
+});
+
+function isScrolledIntoView(elem){
+    var $elem = $(elem);
+    var $window = $(window);
+    var docViewTop = $window.scrollTop();
+    var docViewBottom = docViewTop + $window.height();
+    var elemTop = $elem.offset().top;
+    var elemBottom = elemTop + $elem.height();
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
