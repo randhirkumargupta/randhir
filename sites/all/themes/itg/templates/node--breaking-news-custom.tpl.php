@@ -30,8 +30,8 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
 }
 $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
 $blog_created_date = date('Y-m-d', $node->created);
-$blog_created_time = date('h:i:s', $node->created);
-$coverage_start_date = $blog_created_date.'T'.$blog_created_time;
+$blog_created_time = date('H:i:s', $node->created);
+$coverage_start_date = $blog_created_date.'T'.$blog_created_time.'+05:30';
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
 $custom_content = get_custom_content_details($node->nid);
 if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
