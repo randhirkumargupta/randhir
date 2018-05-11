@@ -1141,6 +1141,7 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-home-graph-election h1#display_tit .social-share{cursor: pointer; display: inline-block;position: relative;top:0px;font-size: 25px;}
 #block-itg-widget-home-graph-election h1#display_tit .social-share li{ list-style:none;float: left; text-align: center;margin: 0 5px; width:30px; height:30px;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{list-style: none; overflow: hidden;padding: 13px 0;}
+#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li:nth-child(1){ padding-top:0px; }
 h1#display_tit .social-share li a{color:#c2c2c2}
 h1#display_tit .social-share li a.facebook{color:#4251a2}
 h1#display_tit .social-share li a.twitter{color:#53a9f8}
@@ -1157,7 +1158,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #fhs-karnataka  .leadparty-table td{ text-align: center; font-size:13px; font-weight: 600; }
 #fhs-karnataka  .leadparty-table td.partyname{ text-align: left; }
 #fhs-karnataka  .leadparty-table td.partyname span.partybrand{width:10px; height: 10px; display: inline-block; margin-right:5px;}
-#home-livetv-election iframe,#home-webcast-election iframe{ height:320px; width: 100% }
+#home-livetv-election iframe,#home-webcast-election iframe{ height:295px; width: 100% }
 .home-election h4.heading{ display: none; }
 #block-itg-widget-home-graph-election .electionHome-section{ border: 1px solid #dddddd; width: auto; margin: 0 1px;border-bottom: 4px solid #dddddd; padding-bottom: 15px;}
 #block-itg-widget-home-graph-election span.fullcoverage-electionlink{background: #dddddd;font-size: 14px;font-weight: 600; padding: 3px 10px; line-height: 26px; border-radius: 0 0 3px 3px;float: right; margin-top: 0; margin-right: 1px; display: inline-block;}
@@ -1183,7 +1184,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .homelive-share .social-share ul li{ display: inline-block!important; list-style: none; display: inline-block; margin:0 5px; }
 .homelive-share .social-share ul li:nth-child(1){ display: none!important; }
 .electionHome-section .graph-design .statename{margin-top: -10px;}
-
+.electionHome-section h3{padding-bottom: 5px; text-transform: uppercase; font-family: "OpenSans-bold";}
 
 @media only screen and (max-width: 1024px) and (min-width:991px){
 	#home-livetv-election iframe, #home-webcast-election iframe{ height:250px;}
