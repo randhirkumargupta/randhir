@@ -219,7 +219,7 @@ function itg_preprocess_page(&$variables) {
   // For single column page
   //tribute-to-sridevi: nid-1144219
   
-  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436 || $arg[1] == 1153176 || $arg[1] == 1153177 || $arg[1] == 1153178) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score') || $arg[0] == 'state-elections') {
+  if ($arg[1] == '1144219' || $arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score') || $arg[0] == 'state-elections') {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
