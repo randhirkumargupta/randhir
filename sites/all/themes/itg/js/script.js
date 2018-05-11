@@ -1184,14 +1184,14 @@ function resizeIframe(obj) {
 
  
 
-$(window).scroll(function(){
-  if ($(window).width() > 1024) {
+jQuery(window).scroll(function(){
+  if (jQuery(window).width() > 1024) {
     $('.livetv-fixed').each(function(){
     if(isScrolledIntoView($(this))){
-      $(this).addClass('active');
+      jQuery(this).addClass('active');
     }
     else{
-      $(this).removeClass('active');
+      jQuery(this).removeClass('active');
     }
   });
 }
