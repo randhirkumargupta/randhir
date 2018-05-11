@@ -18,6 +18,7 @@ function itg_msn_feed_story_syndication() {
 function itg_rss_msnstaticfeeds() {
   itg_generate_msn_static_stories_what_to_expect();
   itg_generate_msn_static_stories_top_news();
+  itg_msn_karnataka_election_who_said_what();
 }
 
 /**

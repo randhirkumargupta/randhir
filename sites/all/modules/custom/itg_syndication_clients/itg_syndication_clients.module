@@ -390,13 +390,6 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_indiatoday_jioexpress_api.inc',
     'type' => MENU_CALLBACK,
   );
-  $items['msn/karnataka-election/who-said-what'] = array(
-    'page callback' => 'itg_msn_karnataka_election_who_said_what',
-    'access arguments' => array('access content'),
-    'file' => 'inc/itg_msn_feed_story.inc',
-    'type' => MENU_CALLBACK,
-  );
-    
   return $items;
 }
 
