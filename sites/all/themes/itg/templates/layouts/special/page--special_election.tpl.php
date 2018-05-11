@@ -157,7 +157,16 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     if (!empty($story_title[0]['uri'])) {
                       $src = file_create_url($story_title[0]['uri']);
                     }
-                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> </div></div>';
+                    $list_story = get_miscellaneous_content($section, NULL, 'home-story-lists');
+										$list_story_li = '';
+										foreach ($list_story as $_key => $_value) {
+											if(!empty($_value->field_story_external_url_value)){
+												$list_story_li .= '<li><a href="'.$_value->field_story_external_url_value.'">'.$_value->title.'</a></li>';
+											}else{
+												 $list_story_li .= '<li>'.$_value->title.'</li>';
+											}
+										}
+                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1><div class="liststory-election"><ul>' .$list_story_li.'</ul></div> </div></div>';
                   }                  
                   $graphdata = itg_widget_get_graph_data();
                 }
