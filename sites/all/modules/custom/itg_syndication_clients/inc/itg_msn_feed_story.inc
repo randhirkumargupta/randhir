@@ -241,7 +241,7 @@ function generateAuthorTagStory_syndication($node, $status) {
  * The ITG Syndication Get external story list
  */
 function itg_msn_karnataka_election_who_said_what() {
-  $section_id = '1709552';
+  $section_id = '1790070';
   $file_name  = 'msn/indiatoday/karnataka_election_2018_who_said_what.xml';
   $node_list = karnataka_election_who_said_what_nodelist($section_id);
   itg_generate_karnataka_election_who_said_what_syndication($section_id, $file_name, $node_list);
