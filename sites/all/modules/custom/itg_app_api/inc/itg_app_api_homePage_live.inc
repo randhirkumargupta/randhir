@@ -185,8 +185,8 @@ function homePageJson_live() {
 $widget_detail = array();
 $cube_widget['show_widget'] = "1";
 $widget_detail[0]['type'] = "webview";
-$widget_detail[0]['title'] = "Scorecard";
-$widget_detail[0]['type_label'] = "scorecard";
+$widget_detail[0]['title'] = "Karnataka Elections";
+$widget_detail[0]['type_label'] = "Karnataka Elections";
 $widget_detail[0]['width'] = "130";
 $widget_detail[0]['height'] = "119";
 $widget_detail[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/cube/cube.html";
