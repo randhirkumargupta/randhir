@@ -844,7 +844,7 @@ if (!empty($content)):
                 <div class="ad-blocker-content"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
                 <?php */ } ?>
               <?php /* <div class="ad-blocker" style="display: none;"></div> */ ?>
-              <div class="description">
+              <div class="description" itemprop="articleBody">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
                 $story_body = str_replace("&#13;", "", $story_body);

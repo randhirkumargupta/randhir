@@ -41,10 +41,12 @@ else {
   $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
 }
 $coverage_end_date = date('Y-m-d', $coverage_end);
-$coverage_end_time = date('h:i:s', $coverage_end);
-$coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time;
-$created_date = date('Y-m-d H:i:s', $node->created);
-$modify_date = date('Y-m-d H:i:s', $node->changed);
+$coverage_end_time = date('H:i:s', $coverage_end);
+$coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time.'+05:30';
+$created_date = date('Y-m-d\TH:i:s', $node->created);
+$modify_date = date('Y-m-d\TH:i:s', $node->changed);
+$created_date = $created_date.'+05:30';
+$modify_date = $modify_date.'+05:30';
  // for call custom form value
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
