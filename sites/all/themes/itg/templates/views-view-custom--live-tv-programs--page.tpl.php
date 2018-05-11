@@ -1,6 +1,6 @@
 <?php 
 if(!empty(get_itg_variable('itg_election_home_chunk'))){ ?>
-<div class="row">
+<div class="row desktop-hide">
     <div class="col-md-12 col-sm-12 col-sm-12 mt-50">
       <?php
       $block = block_load('itg_widget', 'election_livetv_block');
