@@ -1180,10 +1180,19 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 @media only screen and (max-width: 1024px) and (min-width:991px){
 	#home-livetv-election iframe, #home-webcast-election iframe{ height:250px;}
 	#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{ padding:5px 0; }
+	.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top: 0;}
+}
+@media screen and (max-width:768px) and (min-width:800px){
+.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top:10px;}
+#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li{padding: 5px 0;}
+#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li:nth-child(4),#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ display: none; }
 }
 @media screen and (max-width:767px){
 #home-livetv-election iframe,#home-webcast-election iframe{ height:280px; width: 100% }
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 22px; line-height: 26px;}
+.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top: 0;}
+#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li:nth-child(4),#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ display:block; }
+
 }
 
 /* Election Constituency page */
