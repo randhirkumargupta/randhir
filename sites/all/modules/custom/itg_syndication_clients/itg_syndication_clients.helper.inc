@@ -152,7 +152,7 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-television.xml' => 1206796,
     'msn/mailtoday/story-latest-of-the-lot.xml' => 1206723,
     'msn/indiatoday/from-india-today-magazine.xml' => 1206598,
-    'msn/indiatoday/karnataka-election-2018.xml' => 1709552
+    'msn/indiatoday/karnataka-election-2018.xml' => 1790070
       
       
   );
@@ -391,7 +391,7 @@ function get_hltapps_sections($type) {
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
         'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
         'movies.xml' => array('section' => '1207303', 'limit' => 15),
-        'karnataka-election-2018.xml' => array('section' => '1709552', 'limit' => 15)
+        'karnataka-election-2018.xml' => array('section' => '1790070', 'limit' => 15)
       );
       break;
     case 'programmes':
