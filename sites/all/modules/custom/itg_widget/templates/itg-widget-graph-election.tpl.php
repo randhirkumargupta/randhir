@@ -107,7 +107,7 @@
                 <div class="graph-design">
                 <a href="<?php echo $graph_link; ?>" >
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>"   class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>"   class="tallyChartImageCursor"></span></a>
                      <script type="text/javascript">
                        document.addEventListener("DOMContentLoaded", function(event) { 
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
@@ -118,34 +118,32 @@
                       });      
                       </script>
                       <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name)) . " RESULTS LIVE";?>" ><?php echo strtoupper(str_replace("-"," ",$state_name)). " RESULTS LIVE";?></span> <span class="sharethis">
-                        
+                            <?php
+                            $liveTvshare = $graph_link;
+                            $liveTvfb_share_title = get_itg_variable('itg_graphshare_title');
+                            $liveTvshare_desc = get_itg_variable('itg_graphshare_desc');
+                            $liveTvsrc = '';
+                            if (!empty($row->field_election_graph_share_json_value)) {
+                              $liveTvsrc = file_get_contents($row->field_election_graph_share_json_value);
+                              $liveTvsrc = json_decode($liveTvsrc);
+                              if (!empty($liveTvsrc->imagePath)){
+                                $liveTvsrc = $liveTvsrc->imagePath; 
+                              }
+                            }                          
+                              print '<div class="social-share">
+                                     <ul>
+                                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                                     </ul>
+                                 </div>';
+                            ?>
+                         </span>
                       </div>
                   </div>
-                    <span id = "fhs-<?php echo $state_name;?>"></span> </a>
-                    <div class="graphlive-share">
-                      <span class="sharethis">SHARE </span>
-                          <?php
-                          $liveTvshare = $graph_link;
-                          $liveTvfb_share_title = get_itg_variable('itg_graphshare_title');
-                          $liveTvshare_desc = get_itg_variable('itg_graphshare_desc');
-                          $liveTvsrc = '';
-                          if (!empty($row->field_election_graph_share_json_value)) {
-                            $liveTvsrc = file_get_contents($row->field_election_graph_share_json_value);
-                            $liveTvsrc = json_decode($liveTvsrc);
-                            if (!empty($liveTvsrc->imagePath)){
-                              $liveTvsrc = $liveTvsrc->imagePath; 
-                            }
-                          }                          
-                            print '<div class="social-share">
-                                   <ul>
-                                       <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                       <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                       <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                                       <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
-                                   </ul>
-                               </div>';
-                          ?>
-                     </div> 
+                    <span id = "fhs-<?php echo $state_name;?>"></span> 
+                     
                     <?php
                     $block = block_load('itg_widget', 'election_constituency_select_box');
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));

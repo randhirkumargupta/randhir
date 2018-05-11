@@ -14,7 +14,7 @@ $short_url = $actual_link;
 $share_desc = '';
 $src = '';
 drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
-$term_data = menu_get_object('taxonomy_term', 2);
+
 ?>
 <?php
 global $theme;
