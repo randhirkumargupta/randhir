@@ -14,6 +14,7 @@ $short_url = $actual_link;
 $share_desc = '';
 $src = '';
 drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
+
 ?>
 <?php
 global $theme;
@@ -181,16 +182,36 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                           </div>
 <?php } ?>
 <?php if (!empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])) { ?>
-                          <div class="row itg-325-layout">
+                          <div class="row itg-325-layout" id="livetv-section">
                               <div class="col-md-6 col-sm-6 mt-50">
                                  <div class="itg-widget">
                                     <h2 class="widget-title" data-id="itg-block-3"><?php print 'Live TV'; ?></h2>
                                     <div class="data-holder" id="itg-block-3">
+                                      <div class="livetv-fixed">
+                                        <span class="closelive" id="closetv">X</span>
                                       <?php
                                       $block = block_load('itg_widget', 'live_tv');
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
                                       ?>
+                                      </div>
+                                     <div class="homelive-share">
+                                      <span class="sharethis">SHARE </span>
+                                          <?php
+                                          $liveTvshare = FRONT_URL . '/livetv';
+                                          $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
+                                          $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
+                                          $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+                                            print '<div class="social-share">
+                                                   <ul>
+                                                       <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                                       <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                                                       <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                                       <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                                                   </ul>
+                                               </div>';
+                                          ?>
+                                     </div>    
                                     </div>
                                 </div> 
                               </div>
@@ -202,7 +223,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                         $block = block_load('itg_widget', 'election_top_stories');
                                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                         print render($render_array);
-                                        ?>
+                                        ?>  
                                       </div>
                                   </div>
                               </div>
