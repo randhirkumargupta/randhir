@@ -459,7 +459,7 @@ function graphfbpop(overrideLink, overrideTitle, overrideDescription, overrideIm
                 'og:title': overrideTitle,
                 'og:description': overrideDescription,
                 'og:image': overrideImage,
-                'og:og:image:width': width,
+                'og:image:width': width,
                 'og:image:height': height
             }
         })
