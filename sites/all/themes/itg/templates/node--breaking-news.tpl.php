@@ -18,7 +18,7 @@ $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 
 if (!empty($node->field_multi_user_allows[LANGUAGE_NONE][0]['value']) || $_GET['debug_live_blog'] == 1) {
       $params = array(
-        'body' => $node,
+        'body' => "<pre>". print_r($node, TRUE) ."</pre>",
         'subject' => 'Debug new live blog content',
       );
 
