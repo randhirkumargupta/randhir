@@ -1104,8 +1104,10 @@ border-radius: 0px 5px 5px 0px;}
 .livetv-fixed.active{ position: fixed; bottom:10%; left: 10px; z-index: 999; }
 .livetv-fixed.active span.closelive{ display: block; cursor: pointer; }
 .placeholder-livetv{ background:#e2e1e1; height:280px }
+.electionHome-section .placeholder-livetv { height:299px; }
 @media only screen and (max-width: 1024px){
- .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;}   
+ .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;} 
+ .electionHome-section .placeholder-livetv { height:auto; } 
 }
 @media (max-width: 991px) and (min-width: 768px){
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
@@ -1113,6 +1115,7 @@ border-radius: 0px 5px 5px 0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
 .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
 .placeholder-livetv{ background:#e2e1e1; height:auto }
+.electionHome-section .placeholder-livetv { height:auto; }
 }
 
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
