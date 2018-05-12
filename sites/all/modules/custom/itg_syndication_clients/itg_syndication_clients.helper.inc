@@ -152,7 +152,7 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-television.xml' => 1206796,
     'msn/mailtoday/story-latest-of-the-lot.xml' => 1206723,
     'msn/indiatoday/from-india-today-magazine.xml' => 1206598,
-    'msn/indiatoday/karnataka-election-2018.xml' => 1790562
+    'msn/indiatoday/karnataka-election-2018.xml' => 1790070
       
       
   );
