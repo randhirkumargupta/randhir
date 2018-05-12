@@ -117,13 +117,9 @@ function itg_preprocess_node(&$variables) {
   }
   
   if ($variables['type'] == 'breaking_news') {
-    if ($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) {
+    if ((isset($variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value']) && $variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value'] == 1) || (isset($variables['field_multi_user_allows'][0]['value']) && $variables['field_multi_user_allows'][0]['value'] == 1)) {
        $variables['theme_hook_suggestions'][] = 'node__breaking_news_custom';
-    }
-    
-    // module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll'); // node--breaking-news-custom.tpl.php
-    
-    // $variables['poll_form'] = itg_poll_get_all_current_poll();
+    }    
   }
   
 }
