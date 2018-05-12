@@ -106,7 +106,7 @@ function generateIntodayMagazinePage($tid) {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-    $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->groupBy('n.nid')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+    $query->condition('n.status', 1)->condition('n.type', $type)->groupBy('n.nid')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
       $listcount++;

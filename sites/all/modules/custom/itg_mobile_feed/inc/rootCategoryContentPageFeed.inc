@@ -38,9 +38,6 @@ function rootCategoryContentPageFeed() {
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
             $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
             $catFile = $catFile . ".xml";
-            if($cattid == 1206598 || $cattid == '1206598'){
-                $catFile = "fromthemagazine.xml";
-            }
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
