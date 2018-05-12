@@ -186,9 +186,12 @@
 <!-- End High Cart graph -->
 <!-- Live Tv and Webcast tv -->
 <?php if(!empty($itg_election_home_webcast_livetv)){?>
-<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50" id="livetv-section">
 <h3>Live Tv</h3>
     <div class="itg-widget">
+      <div class="placeholder-livetv">
+       <div class="livetv-fixed">
+         <span class="closelive" id="closetv">X</span>
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
@@ -204,6 +207,8 @@
           ?>
         </div>
       <?php }?>
+      </div>
+      </div>
       <div class="homelive-share">
         <span class="sharethis">SHARE </span>
             <?php
