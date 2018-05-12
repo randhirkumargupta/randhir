@@ -18,6 +18,7 @@ function itg_msn_feed_story_syndication() {
 function itg_rss_msnstaticfeeds() {
   itg_generate_msn_static_stories_what_to_expect();
   itg_generate_msn_static_stories_top_news();
+  itg_msn_karnataka_election_who_said_what();
 }
 
 /**
@@ -257,10 +258,8 @@ function karnataka_election_who_said_what_nodelist() {
   $node_list = array();
   $result = get_who_said_what_from_cat($cat_id, $limit, $type);
   if(isset($result) && count($result) > 0){
-    foreach ($result as $data) {
-        $story_path = substr($data->field_story_external_url_value,0,-11);
-        $story_id = explode("-",$story_path);
-        $node_list[] = end($story_id);
+    foreach ($result as $data) {        
+        $node_list[] = $data->nid;
     }
   }
   return $node_list;
@@ -299,4 +298,26 @@ function itg_generate_karnataka_election_who_said_what_syndication($section_id =
     fwrite($fp, $xml);
     fclose($fp);
   }
+}
+/**
+ *  Get who said what from electionn
+ * @param $cat_id
+ * @param $limit
+ * @param $type
+ */
+function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid'); //
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid'); //
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid'); //    
+  $query->fields('n', array('nid'));  
+  $query->condition('fiel.field_is_election_live_value', 1);
+  $query->condition('fmt.field_miscellaneous_type_value', $type);
+  if(!empty($cat_id)){
+    $query->condition('fpc.field_primary_category_value', $cat_id);
+  }
+  $query->groupBy('n.nid');
+  $query->range(0, $limit);
+  $result = $query->execute()->fetchAll();
+  return $result;  
 }
