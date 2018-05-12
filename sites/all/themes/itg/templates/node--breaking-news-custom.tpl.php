@@ -40,6 +40,7 @@ if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
 else {
   $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
 }
+pr($coverage_end);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('H:i:s', $coverage_end);
 $coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time.'+05:30';
