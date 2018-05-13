@@ -25,6 +25,9 @@ if (!empty($node->field_multi_user_allows[LANGUAGE_NONE][0]['value']) || $_GET['
       $to = 'arunmishra.coder@gmail.com, arun.kumarmishra@aajtak.com';
       if (!empty($to)) {
         $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE); 
+        
+      }
+        
 }
 ?>
  
