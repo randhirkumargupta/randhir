@@ -672,3 +672,25 @@ function itg_get_taxonomy_tree($vid, $parent = 0, $max_depth = NULL, $load_entit
 
     return $tree;
 }
+
+/**
+ * function itg_constituency_sitemap().
+ * @return type
+ */
+function itg_constituency_sitemap() {
+    $str = file_get_contents('https://akm-img-a-in.tosshub.com/indiatoday/misc/constituency-sitemap.json');
+    $xml_sections_list = json_decode($str, true); // decode the JSON into an associative array
+    if(count($xml_sections_list) > 0) {
+        header('Content-type: application/xml');
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml .= "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd'>";
+        foreach($xml_sections_list as $key => $val) {;
+            $xml .= '<url>';
+            $xml .= '<loc><![CDATA[' . trim($val['loc']) . ']]></loc>';
+            $xml .= '<lastmod>' . trim($val['lastmod']) . '</lastmod>';
+            $xml .= '</url>';
+        }
+        $xml .= '</urlset>';
+        echo $xml;
+    }    
+}
