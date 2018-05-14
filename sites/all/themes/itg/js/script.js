@@ -1155,6 +1155,15 @@ jQuery(window).load(function () {
         jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
     }
 
+    if (window.location.pathname == '/elections/karnataka-election-2018') {
+        // adding onclick attribute for ga code for photo carousel for next button
+        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'electionsphotocarouselNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-next a').attr("href", "#electionsphotocarouselNext");
+        // adding onclick attribute for ga code for photo carousel for prev button
+        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'electionsphotocarouselPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#electionsphotocarouselPrev");
+    }
+
     // For Prev button in slider thumbnails    
     jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderThumbPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
     // For Next button in slider thumbnails
