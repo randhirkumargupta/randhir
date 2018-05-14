@@ -1101,7 +1101,9 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
 /* livetv fixed section */
 .livetv-fixed span.closelive{ width:30px; height: 30px; line-height:30px; text-align:center; background:#111; color:#fff; border:1px solid #fff; border-radius:100%; font-size: 18px;display: block; position: absolute;right: -10px;top: -15px; display:none;}
-.livetv-fixed.active{ position: fixed; bottom:10%; left: 10px; z-index: 999; }
+.livetv-fixed.active{ position: fixed; bottom:10%; left: 10px; z-index: 99999; }
+#livetv-section .livetv-fixed.active{z-index: 9999;}
+#livetv-section .livetv-fixed.active iframe{ height:160px; width:250px; }
 .livetv-fixed.active span.closelive{ display: block; cursor: pointer; }
 .placeholder-livetv{ background:#e2e1e1; height:280px }
 .electionHome-section .placeholder-livetv { height:299px; }
@@ -1310,5 +1312,4 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-election-livetv-block #fhs-karnataka .leadparty-table table th:nth-child(1){ text-align: left; }
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li {list-style: none;overflow: hidden;padding: 10px 0;}
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li .dm-pic {width: auto;float: left;margin-right: 10px;}
-#livetv-section .livetv-fixed.active{z-index: 9999;}
 .page-taxonomy-term .election-page.auto-layout-page .auto-block-1, .page-taxonomy-term .election-page.auto-layout-page .auto-block-2{height: 640px;}
