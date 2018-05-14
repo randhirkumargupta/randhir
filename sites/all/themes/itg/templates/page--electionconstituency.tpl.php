@@ -20,7 +20,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
     <?php endif; ?>
     <div class="row electiontop-header mb-20">
      <?php 
-        //$header_text_value = isset($data['field_constituency_header_text_value']) ? "<span>". $data['field_constituency_header_text_value'] ."</span> "  : '';
+        //$header_text_value = isset($data['field_constituency_header_text_value']) ? "<span>". $data['field_constituency_header_text_value'] ."</span> "  : '';  
         $header_text_value = $data['field_constituency_header_text_value'];
         $livetext = '';
         $header_text = '';
@@ -102,8 +102,8 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>
                     </div>
                 </div>
-                <?php if(get_itg_variable('itg_election_mini_graph')) : ?> 
-                <div class="col-md-12 col-sm-6 mt-50">
+                <?php if(get_itg_variable('itg_election_mini_graph')) : ?>  
+                <div class="col-md-12 col-sm-6 mt-50 itg-election-map">
                     <div class="itg-widget">
                         <div class="droppable">                                        
                             <h2 class="heading">Results Map</h2>                                                 
