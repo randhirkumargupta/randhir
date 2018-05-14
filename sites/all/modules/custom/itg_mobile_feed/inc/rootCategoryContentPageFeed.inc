@@ -38,6 +38,9 @@ function rootCategoryContentPageFeed() {
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
             $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
             $catFile = $catFile . ".xml";
+            if($cattid == 1206598 || $cattid == '1206598'){
+                $catFile = "fromthemagazine.xml";
+            }
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
@@ -135,6 +138,9 @@ function generateLeftMainCategoryPage($tid, $term_name) {
                     // auto
                     if ($tid == '1206689' || $tid == '1206688') {
                         $loop_file_name = 'story' . $nid . ".xml";
+                    } 
+                    elseif ($tid == 1206598 || $tid == '1206598') {
+                        $loop_file_name = 'fromindiatodaymagazine' . $nid . ".xml";
                     } else {
                         $loop_file_name = $term_name . $nid . ".xml";
                     }
