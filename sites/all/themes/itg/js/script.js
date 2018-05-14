@@ -1187,12 +1187,15 @@ jQuery(window).scroll(function(){
   var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
   if(cookies_id === undefined || cookies_id != 'smalltv'){
   if (jQuery(window).width() > 1024) {
-    $('#livetv-section').each(function(){
-    if(isScrolledIntoView($(this))){
-      jQuery('.livetv-fixed').removeClass('active');
+    jQuery('#livetv-section').each(function(){
+      var zt = jQuery('#livetv-section').offset().top + 350;
+      var tr = jQuery(window).scrollTop();
+      var scrval = tr > zt ? true : false;
+    if(scrval){
+      jQuery('.livetv-fixed').addClass('active');      
     }
     else{
-      jQuery('.livetv-fixed').addClass('active');
+      jQuery('.livetv-fixed').removeClass('active');
     }
   });
 }
