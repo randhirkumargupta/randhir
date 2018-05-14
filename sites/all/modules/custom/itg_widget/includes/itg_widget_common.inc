@@ -3717,11 +3717,11 @@ function get_graph_share_json_url($cat_id){
 
 function get_html_widget_data_by_nids($nids){
   if(!empty($nids)){
-    $query = db_select('field_data_body', 'db');
-    $query->condition('db.entity_id', $nids, 'IN');
-    $query->fields('db', array('body_value', 'title'));
-    $result = $query->execute()->fetchAll();
-    return $result;
+    $query = "SELECT title, body_value FROM field_data_body WHERE entity_id IN ($nids) ORDER BY FIELD (entity_id, $nids)";
+    $result = db_query($query);
+    $results = $result->execute()->fetchAll();
+    var_dump($results);die;
+    return $results;
   }
   return array();
 }
