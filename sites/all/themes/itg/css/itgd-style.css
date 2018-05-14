@@ -1223,7 +1223,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 }
 @media screen and (max-width:767px){
-#home-livetv-election iframe,#home-webcast-election iframe{ height:280px; width: 100% }
+#home-livetv-election iframe,#home-webcast-election iframe{ height:200px; width: 100% }
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 22px; line-height: 26px;}
 .election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top: 0;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li:nth-child(4),#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ display:block; }
@@ -1310,3 +1310,5 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-election-livetv-block #fhs-karnataka .leadparty-table table th:nth-child(1){ text-align: left; }
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li {list-style: none;overflow: hidden;padding: 10px 0;}
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li .dm-pic {width: auto;float: left;margin-right: 10px;}
+#livetv-section .livetv-fixed.active{z-index: 9999;}
+.page-taxonomy-term .election-page .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2{height: 640px;}
