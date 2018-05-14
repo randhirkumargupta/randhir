@@ -216,7 +216,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                           $liveTvshare = FRONT_URL . '/livetv';
                                           $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
                                           $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
-                                          $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+                                          
+                                          $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
+
                                             print '<div class="social-share">
                                                    <ul>
                                                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
