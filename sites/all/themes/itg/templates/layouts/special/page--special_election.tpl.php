@@ -15,7 +15,7 @@ $share_desc = '';
 $src = '';
 drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
 drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
-
+$itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
 ?>
 <?php
 global $theme;
@@ -203,11 +203,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       <div class="placeholder-livetv">
                                       <div class="livetv-fixed">
                                         <span class="closelive" id="closetv">X</span>
-                                      <?php
+                                        <?php if(!empty($itg_election_home_webcast_livetv) && $itg_election_home_webcast_livetv == 'webcast'){?>
+                                      <div class="data-holder" id="home-webcast-election">
+                                        <?php
+                                        print get_itg_variable('itg_election_home_webcast_html');
+                                        ?>
+                                      </div>
+                                    <?php } 
+                                     else { 
                                       $block = block_load('itg_widget', 'live_tv');
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
-                                      ?>
+                                       } ?>
                                       </div>
                                       </div>
                                      <div class="homelive-share">
@@ -216,7 +223,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                           $liveTvshare = FRONT_URL . '/livetv';
                                           $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
                                           $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
-                                          $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+                                          
+                                          $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
+
                                             print '<div class="social-share">
                                                    <ul>
                                                        <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
