@@ -195,10 +195,46 @@
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
+        drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
         $block = block_load('itg_widget', 'live_tv');
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
         ?>
+       <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+          jQuery(window).scroll(function(){
+            var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
+            if(cookies_id === undefined || cookies_id != 'smalltv'){
+            if (jQuery(window).width() > 1025) {
+              jQuery('#livetv-section').each(function(){
+              if(isScrolledIntoView(jQuery(this))){
+                jQuery('.livetv-fixed').removeClass('active');
+              }
+              else{
+                jQuery('.livetv-fixed').addClass('active');
+              }
+            });
+          }
+          }
+          });
+          jQuery('#closetv').click(function(){
+              var date = new Date();
+              var minutes = 30;
+              date.setTime(date.getTime() + (minutes * 60 * 1000));
+              jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
+              jQuery('.livetv-fixed').removeClass('active');
+          })
+          function isScrolledIntoView(elem){
+              var elem = jQuery(elem);
+              var window = jQuery(window);
+              var docViewTop = window.scrollTop();
+              var docViewBottom = docViewTop + window.height();
+              var elemTop = elem.offset().top;
+              var elemBottom = elemTop + elem.height();
+              return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+          }
+        });   
+          </script>   
       </div>
       <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
         <div class="data-holder" id="home-webcast-election">
