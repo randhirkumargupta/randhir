@@ -8,7 +8,7 @@ function itg_fia_menu() {
   $items['itg_fia.xml'] = array(
     'title' => 'Taxonomy Comments',
     'description' => 'list fia data',
-    'page callback' => 'itg_fia_data',
+    'page callback' => 'itg_mail_photos_fia_data',
     'access callback' => TRUE,
     'page arguments' => array('itg_fia_data'),
     'file' => 'include/itg_fia.inc',
@@ -48,7 +48,12 @@ function itg_fia_menu() {
  * Implements hook_html_head_alter().
  */
 function itg_fia_html_head_alter(&$head_elements) {
+  $nid = $head_elements['branchio_tag']['#attributes']['content'];
+  $primary_cid = get_primary_category_node($nid);
   $fia_pagesid = variable_get('itg_fia_config', '');
+  if($primary_cid == '1206572'){ //mail today
+      $fia_pagesid = '59022927594';
+  }
   if (!empty($fia_pagesid)) {
     $head_elements['fia_pagesid'] = array(
       '#type' => 'html_tag',
