@@ -297,7 +297,7 @@ function user_load_multiple($uids = array(), $conditions = array(), $reset = FAL
  * This extends the DrupalDefaultEntityController class, adding required
  * special handling for user objects.
  */
-/*class UserController extends DrupalDefaultEntityController {
+class UserController extends DrupalDefaultEntityController {
 
   function attachLoad(&$queried_users, $revision_id = FALSE) {
     // Build an array of user picture IDs so that these can be fetched later.
@@ -336,7 +336,7 @@ function user_load_multiple($uids = array(), $conditions = array(), $reset = FAL
     // hook_user_load().
     parent::attachLoad($queried_users, $revision_id);
   }
-}*/
+}
 
 /**
  * Loads a user object.
