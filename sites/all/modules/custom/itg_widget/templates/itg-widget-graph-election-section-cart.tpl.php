@@ -129,7 +129,11 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            <div class="elec2013">
+                    <span class="close-elec2013">x</span>
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
+             </div>
+              <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
@@ -159,7 +163,7 @@
                               print '<div class="social-share">
                                      <ul>
                                          <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 50, 50" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 200, 200" . ')"><i class="fa fa-facebook"></i></a></li>
                                          <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
                                          <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
                                      </ul>
@@ -175,10 +179,12 @@
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                     print render($render_array);
                     ?>
+                    <div id="elec2013">Result 2013</div>
                 </div>
               </div>            
           </div>
         </div>
+        <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
       </div>
     </div>
   <?php } ?>
@@ -195,28 +201,61 @@
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
-        drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
+        
         $block = block_load('itg_widget', 'live_tv');
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
-        ?>
-       <script>
+        ?>  
+      </div>
+      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
+        <div class="data-holder" id="home-webcast-election">
+          <?php
+            print get_itg_variable('itg_election_home_webcast_html');
+          ?>
+        </div>
+      <?php }?>
+      </div>
+      </div>
+      <div class="homelive-share">
+        <span class="sharethis">SHARE </span>
+            <?php
+            $liveTvshare = FRONT_URL . '/livetv';
+            $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
+            $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
+            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
+              print '<div class="social-share">
+                     <ul>
+                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                     </ul>
+                 </div>';
+            ?>
+       </div> 
+    </div>
+</div>
+<?php drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer')); ?>
+<script>
         document.addEventListener("DOMContentLoaded", function(event) { 
           jQuery(window).scroll(function(){
-            var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
-            if(cookies_id === undefined || cookies_id != 'smalltv'){
-            if (jQuery(window).width() > 1025) {
-              jQuery('#livetv-section').each(function(){
-              if(isScrolledIntoView(jQuery(this))){
-                jQuery('.livetv-fixed').removeClass('active');
-              }
-              else{
-                jQuery('.livetv-fixed').addClass('active');
-              }
-            });
-          }
-          }
-          });
+		  var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
+		  if(cookies_id === undefined || cookies_id != 'smalltv'){
+		  if (jQuery(window).width() > 1024) {
+			jQuery('#livetv-section').each(function(){
+			  var zt = jQuery('#livetv-section').offset().top + 350;
+			  var tr = jQuery(window).scrollTop();
+			  var scrval = tr > zt ? true : false;
+			if(scrval){
+			  jQuery('.livetv-fixed').addClass('active');      
+			}
+			else{
+			  jQuery('.livetv-fixed').removeClass('active');
+			}
+		  });
+		}
+		}
+		});
           jQuery('#closetv').click(function(){
               var date = new Date();
               var minutes = 30;
@@ -234,36 +273,8 @@
               return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
           }
         });   
-          </script>   
-      </div>
-      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
-        <div class="data-holder" id="home-webcast-election">
-          <?php
-            print get_itg_variable('itg_election_home_webcast_html');
-          ?>
-        </div>
-      <?php }?>
-      </div>
-      </div>
-      <div class="homelive-share">
-        <span class="sharethis">SHARE </span>
-            <?php
-            $liveTvshare = FRONT_URL . '/livetv';
-            $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
-            $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
-            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
-              print '<div class="social-share">
-                     <ul>
-                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
-                     </ul>
-                 </div>';
-            ?>
-       </div> 
-    </div>
-</div>
+          </script> 
+
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50 <?php echo $topstoryclass;?>">
@@ -290,4 +301,17 @@
     <?php }; ?>
   <?php }; ?>
 <?php endif; ?>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {    
+    jQuery('.close-elec2013,#elec2013').on('click',function(){
+      var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+      jQuery('.elec2013').toggleClass('shwimg');
+    })
+    window.addEventListener("resize", function() {
+    var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+    }, false);
+  });
+  </script>
 
