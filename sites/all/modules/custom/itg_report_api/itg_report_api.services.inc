@@ -845,17 +845,17 @@ function itg_rapid_api_insert_video() {
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
 
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
-    if (!empty($term_id)) {
+    if (!empty($cat_id)) {
         $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
         $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
     }
 
     // $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
-    $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+    //$node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
     $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 
-    $node = node_submit($node); // Prepare node for saving
-    $node->created = $publish_date_timestamp;
+    //$node = node_submit($node); // Prepare node for saving
+   // $node->created = $publish_date_timestamp;
 
     try {
         node_save((object) $node);
