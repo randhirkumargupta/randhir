@@ -204,19 +204,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       <div class="livetv-fixed">
                                         <span class="closelive" id="closetv">X</span>
                                         <?php if(!empty($itg_election_home_webcast_livetv) && $itg_election_home_webcast_livetv == 'webcast'){?>
-											<div class="data-holder" id="home-webcast-election">
-											  <?php
-												print get_itg_variable('itg_election_home_webcast_html');
-											  ?>
-											</div>
-										<?php } ?>
-										<?php else { ?>
-                                      <?php
+                                      <div class="data-holder" id="home-webcast-election">
+                                        <?php
+                                        print get_itg_variable('itg_election_home_webcast_html');
+                                        ?>
+                                      </div>
+                                    <?php } 
+                                     else { 
                                       $block = block_load('itg_widget', 'live_tv');
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
-                                      ?>
-                                      <?php } ?>
+                                       } ?>
                                       </div>
                                       </div>
                                      <div class="homelive-share">
