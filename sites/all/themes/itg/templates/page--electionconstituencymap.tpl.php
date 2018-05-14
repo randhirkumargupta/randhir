@@ -76,19 +76,41 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-sm-12 itg-325 mt-50">
                     <div class="itg-widget">
                         <div class="droppable itg-layout-605">
                             <div id="auto-new-block" class="widget-wrapper">
-                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'KNOW YOUR PARTY'); ?></h2>  
+                                <?php $condhtml_1 = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'custom_html_widgets'); ?>
+                                <?php if (!empty($condhtml_1)) { ?>
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'BELLWETHER SEATS'); ?></h2>  
+                                <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
-                                    $block = block_load('itg_widget', 'election_know_your_party');
+                                    print $condhtml_1;
+                                    ?>
+                                </div>
+                            </div>                     
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+                                       
+            <div class="row itg-most-popular">
+                <div class="col-md-12 mt-50">
+                    <div class="itg-widget">
+                        <div class="droppable">
+                            <div class="widget-wrapper">
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-7', 'Latest Karnataka News'); ?></h2>                                            
+                                <div class="data-holder" id="itg-block-7">
+                                    <?php
+                                    $block = block_load('itg_widget', 'election_most_popular');
                                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                     print render($render_array);
                                     ?>
                                 </div>
-                            </div>                     
+                            </div>             
                         </div>
                     </div>
                 </div>
@@ -110,25 +132,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>
                     </div>
                 </div>
-            </div>                           
-            <div class="row itg-most-popular">
-                <div class="col-md-12 mt-50">
-                    <div class="itg-widget">
-                        <div class="droppable">
-                            <div class="widget-wrapper">
-                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-7', 'Latest Karnataka News'); ?></h2>                                            
-                                <div class="data-holder" id="itg-block-7">
-                                    <?php
-                                    $block = block_load('itg_widget', 'election_most_popular');
-                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                    print render($render_array);
-                                    ?>
-                                </div>
-                            </div>             
-                        </div>
-                    </div>
-                </div>
-            </div>                           
+            </div>
         </div>    
         <div class="col-md-4 col-sm-12 col-sx-12 right-side itg-map">
             <div class="row">
