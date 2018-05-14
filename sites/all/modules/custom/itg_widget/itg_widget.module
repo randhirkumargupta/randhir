@@ -2100,13 +2100,3 @@ function itg_get_election_header_title($val){
       return $data_result;
     }        
 }
-
-/*
- * 
- */
-function get_election_json() {
-    $query = db_select('field_data_field_graph_category', 'fegsj');
-    $query->condition('fegsj.entity_id', '1152176', '=');
-    $query->fields('fegsj', array('field_election_graph_share_json_value'));
-    $data_result = $query->execute()->fetchAssoc();
-}
