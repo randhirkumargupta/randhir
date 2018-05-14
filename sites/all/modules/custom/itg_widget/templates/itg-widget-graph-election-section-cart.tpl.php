@@ -159,7 +159,7 @@
                               print '<div class="social-share">
                                      <ul>
                                          <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 50, 50" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 200, 200" . ')"><i class="fa fa-facebook"></i></a></li>
                                          <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
                                          <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
                                      </ul>
@@ -254,7 +254,7 @@
             $liveTvshare = FRONT_URL . '/livetv';
             $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
             $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
-            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
               print '<div class="social-share">
                      <ul>
                          <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>

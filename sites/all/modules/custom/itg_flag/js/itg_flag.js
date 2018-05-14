@@ -40,11 +40,9 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     if (overrideImage.length === 0) {
         overrideImage = Drupal.settings.itg_flag.settings.default_image;
     } else {
-        overrideImage = 'https://akm-img-a-in.tosshub.com/sites/all/themes/itg/logo.png'; //overrideImage;
+        overrideImage = overrideImage;
     }
-    console.log('overrideImage' + overrideImage);
-    width = '50';
-    height = '50';
+
     overrideTitle = decodeURIComponent((overrideTitle + '').replace(/\+/g, '%20'));;
     overrideDescription = decodeURIComponent((overrideDescription + '').replace(/\+/g, '%20'));;
     FB.ui({
@@ -56,8 +54,6 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
                 'og:title': overrideTitle,
                 'og:description': overrideDescription,
                 'og:image': overrideImage,
-                'og:image:width': width,
-                'og:image:height': height
             }
         })
     },
@@ -80,7 +76,6 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
         // Action after response
     });
 }
-
 //facebook sharing end here
 
 // script for twitter sharing
