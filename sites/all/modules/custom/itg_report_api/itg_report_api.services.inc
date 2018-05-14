@@ -856,7 +856,7 @@ function itg_rapid_api_insert_video() {
 
     //$node = node_submit($node); // Prepare node for saving
    // $node->created = $publish_date_timestamp;
-
+p($node);
     try {
         node_save((object) $node);
         $success = TRUE;
