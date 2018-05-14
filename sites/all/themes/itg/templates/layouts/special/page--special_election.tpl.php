@@ -31,7 +31,7 @@ if ($theme == 'itgadmin' || $preview == 'preview') {
   $conf['preprocess_js'] = 0;
 }
 $tax_data = menu_get_object('taxonomy_term', 2);
-if ($_GET['ele_is_live'] == 'is_live') {
+if (isset($_GET['ele_is_live']) && $_GET['ele_is_live'] == 'is_live') {
   $tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'] = 1;
 }
 if (empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])) {
