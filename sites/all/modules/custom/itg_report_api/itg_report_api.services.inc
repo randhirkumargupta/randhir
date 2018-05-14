@@ -830,105 +830,32 @@ function itg_rapid_api_insert_video() {
     $extra_small_img = $params['extra_small_img'];
     $video_file_name = $params['video_file_name'];
     //prepare node object
-    $node = array(
-        'uid' => 970,
-        'name' => 'siteadmin',
-        'type' => 'videogallery',
-        'language' => LANGUAGE_NONE,
-        'title' => $long_headline,
-        'status' => 0,
-        'promote' => 0,
-        'sticky' => 0,
-        'created' => (int) REQUEST_TIME,
-        'revision' => 0,
-        'comment' => '0',
-        'path' => array(
-            'alias' => '',
-            'pid' => null,
-            'source' => null,
-            'language' => LANGUAGE_NONE,
-            'pathauto' => 1,
-        ),
-        'nid' => null,
-        'vid' => null,
-        'changed' => '',
-        'log' => '',
-        'date' => '',
-        'submit' => 'Save',
-        'preview' => 'Preview',
-        'private' => 0,
-        'op' => 'Save',
-        'body' => array(LANGUAGE_NONE => array(
-                array(
-                    'value' => $description,
-                    'summary' => $description,
-                    'format' => 'full_html',
-                ),
-            )),
-        ///
-        'field_primary_category' => array(LANGUAGE_NONE => array(
-                array(
-                    'field_primary_category_value' => $section_id,
-                    
-                ),
-            )),
-        'field_story_category' => array(LANGUAGE_NONE => array(
-                array(
-                    'field_story_category_tid' => $cat_id,
-                ),
-            )),
-        'field_story_expert_description' => array(LANGUAGE_NONE => array(
-                array(
-                    'field_story_expert_description_value' => $video_kicker,
-                ),
-            )),
-        /* 'field_story_extra_large_image' => array(LANGUAGE_NONE => array(
-          array(
-          'fid' => $description,
-          'uid' => $description,
-          'filename' => $description,
-          'uri' => $description,
-          'filemime' => $description,
-          'filesize' => $description,
-          'status' => $description,
-          'timestamp' => $description,
-          'uuid' => $description,
-          'rdf_mapping' => array(),
-          'alt' => $description,
-          'title' => $description,
-          'width' => $description,
-          'height' => $description,
-          ),
-          )), */
-        'field_story_short_headline' => array(LANGUAGE_NONE => array(
-                array(
-                    'value' => $short_headline,
-                ),
-            )),
-        'field_story_source_type' => array(LANGUAGE_NONE => array(
-                array(
-                    'value' => 'videogallery',
-                    'safe_value' => 'videogallery',
-                ),
-            )),
-        'field_stroy_city' => array(LANGUAGE_NONE => array(
-                array(
-                    'field_stroy_city_tid' => $city,
-                ),
-            )),
-        /*'field_video_anchor' => array(LANGUAGE_NONE => array(
-                array(
-                    'field_video_anchor_target_id' => $anchor,
-                ),
-            )),*/
-        'field_video_file_name' => array(LANGUAGE_NONE => array(
-                array(
-                    'value' => $video_file_name,
-                ),
-            )),
-        ///
-        'validated' => true,
-    );
+    $node = new stdClass();
+    $node->title = trim(html_entity_decode($long_headline));
+    $node->type = "videogallery";
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+    $node->uid = 970;
+    $node->promote = 0;
+    $node->comment = 0;
+    $node->status = 0;
+    $node->body[$node->language][0]['value'] = $description;
+    $node->body[$node->language][0]['format'] = 'full_html';
+    //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));                    
+    $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
+
+    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+    if (!empty($term_id)) {
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+    }
+
+    // $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
+    $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+    $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
+
+    $node = node_submit($node); // Prepare node for saving
+    $node->created = $publish_date_timestamp;
 
     try {
         node_save((object) $node);
