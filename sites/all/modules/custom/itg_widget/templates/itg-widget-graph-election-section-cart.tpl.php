@@ -301,7 +301,7 @@
   <?php }; ?>
 <?php endif; ?>
 <script>
-jQuery(document).ready(function (e){    
+document.addEventListener("DOMContentLoaded", function(event) {    
     jQuery('.close-elec2013,#elec2013').on('click',function(){
       var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
     jQuery('.elec2013 img').css('height',stmap+'px');
