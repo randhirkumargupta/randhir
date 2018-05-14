@@ -159,6 +159,46 @@ function itg_election_configure() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('itg_election_mini_graph'),
   );
+  $form['livetv_share'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('LiveTV share'),
+    '#collapsible' => TRUE, // Added
+    '#collapsed' => FALSE,  // Added
+  );
+  $form['livetv_share']['itg_livetvshare_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Live TV Share Title'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+    '#default_value' => get_itg_variable('itg_livetvshare_title'),
+  );
+  $form['livetv_share']['itg_livetvshare_desc'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Live TV Share Description'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_livetvshare_desc'),
+  );
+  $form['graph_share'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Graph share'),
+    '#collapsible' => TRUE, // Added
+    '#collapsed' => FALSE,  // Added
+  );
+  $form['graph_share']['itg_graphshare_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election graph Share Title'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+    '#default_value' => get_itg_variable('itg_graphshare_title'),
+  );
+  $form['graph_share']['itg_graphshare_desc'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Election graph Share Description'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_graphshare_desc'),
+  );
   $form['submit_election'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

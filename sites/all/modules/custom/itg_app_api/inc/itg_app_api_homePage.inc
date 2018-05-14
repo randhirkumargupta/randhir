@@ -34,8 +34,8 @@ function homePageJson() {
     $business = array();
     //$business = homePageJsonNewslist_business();
     //change on 19-feb-18
-    $itg_rapid_home_sonam_json = array();
-    $itg_rapid_home_sonam_json = itg_rapid_home_sonam_json();
+    $karnataka_elections_json = array();
+    $karnataka_elections_json = itg_rapid_home_karnataka_elections_json();
     //change on 19-feb-18
     $itg_rapid_home_movies_json = array();
     $itg_rapid_home_movies_json = itg_rapid_home_movies_json();
@@ -60,17 +60,17 @@ function homePageJson() {
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";  
     
-    //$data['data'][0] = $homePageJsonWidget_2;     // scorecard   
-    $data['data'][0] = $data_topstories;  
-    $data['data'][1] = $itg_rapid_home_sonam_json; // sonam-anand
+    $data['data'][0] = $homePageJsonWidget_3;     // live tv   
+    $data['data'][1] = $data_topstories;      
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
     $data['data'][2] = $itg_rapid_home_movies_json;
-    $data['data'][3] = $itg_rapid_home_technology_json;
-    $data['data'][4] = $data_news_india;
-    $data['data'][5] = $itg_rapid_home_sports_json;
-    $data['data'][6] = $data_news_lifestyle;
-    $data['data'][7] = $data_news_world;
-    $data['data'][8] = $data_magazine;
+    $data['data'][3] = $karnataka_elections_json; // karnataka_elections
+    $data['data'][4] = $itg_rapid_home_technology_json;
+    $data['data'][5] = $data_news_india;
+    $data['data'][6] = $itg_rapid_home_sports_json;
+    $data['data'][7] = $data_news_lifestyle;
+    $data['data'][8] = $data_news_world;
+    $data['data'][9] = $data_magazine;
     $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
@@ -1118,7 +1118,8 @@ function homePageJsonNewslist_india() {
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             
@@ -1397,7 +1398,8 @@ function homePageJsonNewslist_world() {
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             
@@ -2050,7 +2052,8 @@ function homePageJsonNewslist_lifestyle() {
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             
@@ -2603,7 +2606,8 @@ function itg_rapid_home_movies_json() {
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             
@@ -2880,7 +2884,8 @@ function itg_rapid_home_technology_json() {
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             
@@ -3156,7 +3161,8 @@ function itg_rapid_home_sports_json() {
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             
@@ -3289,9 +3295,9 @@ function homePageJsonWidget_3() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "India Today Conclave 2018 Live"; 
-    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/conclave.html";
-    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
+    $n_widget[0]['tilte'] = "LIVE: KARNATAKA ELECTIONS"; 
+    $n_widget[0]['short_url'] = "https://feeds.intoday.in/indiatoday/livetv/apphomeembed.html";
+    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/livetv";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
@@ -3300,11 +3306,11 @@ function homePageJsonWidget_3() {
     return $data_news;
 }
 /**
- * itg_rapid_home_sonam_json
+ * itg_rapid_home_karnataka_elections_json
  * @global type $base_url
  * @return type
  */
-function itg_rapid_home_sonam_json(){
+function itg_rapid_home_karnataka_elections_json(){
     
     global $base_url;
     $data_news = array();
@@ -3313,7 +3319,7 @@ function itg_rapid_home_sonam_json(){
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = 1790676; // Sonam-Anand Wedding
+    $tid = 1790070; // karnataka_elections
     $node_count = "";
     $output = "";
     $data = array();
@@ -3546,7 +3552,8 @@ function itg_rapid_home_sonam_json(){
                 $live_tv = 1;
             }
             $short_desc = strip_tags($resvalue['field_common_short_description_value']);
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             

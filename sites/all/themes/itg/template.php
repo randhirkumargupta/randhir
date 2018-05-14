@@ -416,7 +416,52 @@ function itg_preprocess_html(&$vars) {
      }
     
   }
- } 
+ }
+if($arg[0] == 'livetv') {
+   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $fb_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+   $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'image_src',
+            'href' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  }
+  $term_data = menu_get_object('taxonomy_term', 2);
+  if (!empty($term_data->tid) && $term_data->tid == get_itg_variable('home_page_election_tid')){
+    $graph_json_url = get_graph_share_json_url($term_data->tid);
+    $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+    if (!empty($graph_json_url[0]->field_election_graph_share_json_value)) {
+      $liveTvsrc = file_get_contents($graph_json_url[0]->field_election_graph_share_json_value);
+      $liveTvsrc = json_decode($liveTvsrc);
+      if (!empty($liveTvsrc->imagePath)){
+        $liveTvsrc = $liveTvsrc->imagePath; 
+      }
+    }
+    $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'image_src',
+            'href' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  } 
 }
 
 /**
