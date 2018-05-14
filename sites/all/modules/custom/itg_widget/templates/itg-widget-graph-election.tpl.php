@@ -101,15 +101,15 @@
          ?>
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
-          <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            
-              <div class="data-holder">
-				 <div class="elec2013-inner">
+          <div class="elec2013-inner">
               <div  class="shwimg-cont-inner">
                     <span class="close-elec2013-inner">x</span>
                     <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
                   </div>
              </div>
+          <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
+            
+              <div class="data-holder">				 
                 <div class="graph-design">
                 <a href="<?php echo $graph_link; ?>" >
                 <div class="statesvg-map">
