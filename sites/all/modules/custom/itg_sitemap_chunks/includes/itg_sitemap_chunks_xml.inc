@@ -670,9 +670,12 @@ function itg_get_taxonomy_tree($vid, $parent = 0, $max_depth = NULL, $load_entit
     return $tree;
 }
 
-
+/**
+ * function itg_constituency_sitemap().
+ * @return type
+ */
 function itg_constituency_sitemap() {
-    $str = file_get_contents('http://itgd-mum-dev-static.s3.amazonaws.com/indiatoday/misc/constituency-sitemap.json');
+    $str = file_get_contents('https://akm-img-a-in.tosshub.com/indiatoday/misc/constituency-sitemap.json');
     $xml_sections_list = json_decode($str, true); // decode the JSON into an associative array
     if(count($xml_sections_list) > 0) {
         header('Content-type: application/xml');
@@ -686,8 +689,5 @@ function itg_constituency_sitemap() {
         }
         $xml .= '</urlset>';
         echo $xml;
-    } else {
-        return drupal_not_found();
-    }
-   
+    }    
 }
