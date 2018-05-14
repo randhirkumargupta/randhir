@@ -101,15 +101,15 @@
          ?>
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
-          <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            
-              <div class="data-holder">
-				 <div class="elec2013-inner">
+          <div class="elec2013-inner">
               <div  class="shwimg-cont-inner">
                     <span class="close-elec2013-inner">x</span>
-                    <img src="https://smedia2.intoday.in/indiatoday/img/karnataka_results_2013.png">
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
                   </div>
              </div>
+          <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
+            
+              <div class="data-holder">				 
                 <div class="graph-design">
                 <a href="<?php echo $graph_link; ?>" >
                 <div class="statesvg-map">
@@ -139,7 +139,7 @@
                               print '<div class="social-share">
                                      <ul>
                                          <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 200, 200" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 600, 320" . ')"><i class="fa fa-facebook"></i></a></li>
                                          <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
                                          <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
                                      </ul>
@@ -176,6 +176,7 @@
     jQuery('.close-elec2013-inner,#elec2013-inner').on('click',function(){
       if (jQuery(window).width() > 767) {  
       var stmap = jQuery('.statesvg-map').outerHeight(true);
+      stmap = stmap+20;
       jQuery('.shwimg-cont-inner,.elec2013-inner img').css('height',stmap+'px');
       jQuery('.elec2013-inner').toggleClass('shwimg-inner')
       }else{
