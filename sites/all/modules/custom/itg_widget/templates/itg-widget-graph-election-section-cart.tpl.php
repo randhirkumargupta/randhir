@@ -129,7 +129,11 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            <div class="elec2013">
+                    <span class="close-elec2013">x</span>
+                    <img src="https://smedia2.intoday.in/indiatoday/img/karnataka_results_2013.png">
+             </div>
+              <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
@@ -175,10 +179,10 @@
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                     print render($render_array);
                     ?>
+                    <div id="elec2013">Result 2013</div>
                 </div>
               </div>            
           </div>
-          <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
         </div>
       </div>
     </div>
