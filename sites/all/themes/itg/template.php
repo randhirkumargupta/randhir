@@ -460,10 +460,11 @@ function itg_preprocess_html(&$vars) {
    drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
   }
   
-  if ((!empty(FRONT_URL) && $base_url == FRONT_URL) || ($arg[0] == 'elections' && $arg[1] == 'karnataka-election-2018')) {  
+  if ((!empty(FRONT_URL) && $base_url == FRONT_URL) || ($arg[0] == 'elections' && $arg[1] == 'karnataka-election-2018') && $_GET['TEST'] == 'XYZ') {  
    $election_json = get_election_json();
-   if (!empty($liveTvsrc->imagePath)){
-    $liveTvsrc = $liveTvsrc->imagePath; 
+   p($election_json);
+   if (!empty($election_json->imagePath)){
+     $liveTvsrc = $election_json->imagePath; 
    }
    $fb_image_tag = array(
           '#type' => 'html_tag',
