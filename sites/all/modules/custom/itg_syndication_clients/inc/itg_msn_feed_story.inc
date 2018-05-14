@@ -2,7 +2,7 @@
 
 /**
  * @file
- * The ITG Syndication clients for MSN Story
+ * The ITG Syndication clients for MSN Story 
  */
 function itg_msn_feed_story_syndication() {
   $sections = getmsn_story_section_array();

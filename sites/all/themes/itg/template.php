@@ -376,19 +376,8 @@ function itg_preprocess_html(&$vars) {
   }
   if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] == 'elections' && ($arg[2] == 'constituency-map' || $arg[2] == 'constituency')) {
     
-      $section_alias = $arg[0];
-      $category_alias = $arg[1];
-      $path_dest = drupal_lookup_path('source', $section_alias.'/'.$category_alias);
-
-      if(empty($path_dest)){
-        drupal_not_found();
-      }
-      $tax_data = explode('/', $path_dest);  
-      if($tax_data[0] != 'taxonomy' || empty($tax_data[2]) || !is_numeric($tax_data[2])){
-        drupal_not_found();
-      }
-
-      $get_election_nid = itg_get_election_nid($tax_data[2]);
+      $cat_id = $_GET['section'];
+      $get_election_nid = itg_get_election_nid($cat_id);
       $entity_id = $get_election_nid['entity_id'];
       $content = node_load($entity_id);
       if ($arg[2] == 'constituency-map') {
@@ -396,11 +385,14 @@ function itg_preprocess_html(&$vars) {
         $keyword = trim($content->field_constituency_keyword[LANGUAGE_NONE][0]['value']);
         $description = trim($content->field_constituency_description[LANGUAGE_NONE][0]['value']);
       } elseif ($arg[2] == 'constituency') {
-        $constituency_str = ($arg[3]) ? $arg[3] : '';
-        $constituency_arr = explode('-', $constituency_str);  
-        $vars['head_title'] = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
-        $keyword = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
-        $description = str_replace('<Constituency Name>', ucfirst($constituency_arr[0]), trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
+        $constituency_str = ($arg[3]) ? $arg[3] : '';        
+        $constituency = explode("-", $constituency_str);
+        unset($constituency[(count($constituency) - 1)]);
+        $constituency = implode(' ', $constituency);
+        $constituency = ucwords($constituency);
+        $vars['head_title'] = str_replace('<Constituency Name>', ucfirst($constituency), trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
+        $keyword = str_replace('<Constituency Name>', ucfirst($constituency), trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
+        $description = str_replace('<Constituency Name>', ucfirst($constituency), trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
       }
  
       $html_head = array(
@@ -424,7 +416,52 @@ function itg_preprocess_html(&$vars) {
      }
     
   }
- } 
+ }
+if($arg[0] == 'livetv') {
+   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $fb_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+   $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'image_src',
+            'href' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  }
+  $term_data = menu_get_object('taxonomy_term', 2);
+  if (!empty($term_data->tid) && $term_data->tid == get_itg_variable('home_page_election_tid')){
+    $graph_json_url = get_graph_share_json_url($term_data->tid);
+    $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+    if (!empty($graph_json_url[0]->field_election_graph_share_json_value)) {
+      $liveTvsrc = file_get_contents($graph_json_url[0]->field_election_graph_share_json_value);
+      $liveTvsrc = json_decode($liveTvsrc);
+      if (!empty($liveTvsrc->imagePath)){
+        $liveTvsrc = $liveTvsrc->imagePath; 
+      }
+    }
+    $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'image_src',
+            'href' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  } 
 }
 
 /**

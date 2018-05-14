@@ -9,6 +9,7 @@ if ($jsondata->live != 1) {
   $bottom_chuck = '';  
 }
 	$isWon = FALSE;
+	$isLeading = FALSE;
 	$isSeating = FALSE;
 	$wonCondidate = NULL;
 	$seatingCondidate = NULL;
@@ -23,7 +24,10 @@ if ($jsondata->live != 1) {
 		}
     if ($value->candidate_type == 'contesting') {
       $otherCondidates[] = $value; 
-    }		
+    }
+    if ($value->win_loss == "LEADING" && $value->candidate_type == 'contesting') {
+        $isLeading = true;
+    }
 	}	
 	if ($isWon) {
 		//$otherCondidates[] = $seatingCondidate;
@@ -32,6 +36,9 @@ if ($jsondata->live != 1) {
 		$wonCondidate = $seatingCondidate;
 	}
   $condidate_lebels = $jsondata->label;
+  $temp = explode("-", $constituency);
+  $temp = implode(" ", $temp);
+  $constituency_label = ucwords($temp);
 ?>
 
 <div class="row mb-20">
@@ -57,6 +64,13 @@ if ($jsondata->live != 1) {
                } else {
                  $win_loss_status = '';
                }
+               
+               if ((!empty($candidate->win_loss)) && $candidate->win_loss == 'LEADING' && $isLeading){
+                 $win_loss_status = 'LEADING';
+               }else if ($isLeading) {
+                   $win_loss_status = 'TRAILING';
+               }
+               
                echo "<tr><td data-column='". (!empty($condidate_lebels->candidate_name) ? $condidate_lebels->candidate_name : 'CANDIDATE NAME') ."'>".$candidate->candidate."</td><td data-column='". (!empty($condidate_lebels->party) ? $condidate_lebels->party : 'PARTY') ."'>".$candidate->party."</td><td data-column='". (!empty($condidate_lebels->status) ? $condidate_lebels->status : 'STATUS') ."'>" . $win_loss_status ."</td></tr>";
              }?>
 				 </tbody>
@@ -99,7 +113,7 @@ if ($jsondata->live != 1) {
 			<div class="constituency-details">
 				<table class="table">
 					<tbody>
-			             <tr><td>AC name</td><td><?php echo $constituency;?></td></tr>
+			             <tr><td>AC name</td><td><?php echo $constituency_label;?></td></tr>
 			             <tr><td>AC No</td><td><?php echo $jsondata->id;?></td></tr>
 			             <tr><td>District</td><td><?php echo $jsondata->district;?></td></tr>
 					</tbody>
