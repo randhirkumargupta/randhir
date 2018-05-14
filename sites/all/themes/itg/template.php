@@ -459,6 +459,55 @@ function itg_preprocess_html(&$vars) {
         );
    drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
   }
+  
+  if ((!empty(FRONT_URL) && $base_url == FRONT_URL) || ($arg[0] == 'elections' && $arg[1] == 'karnataka-election-2018')) {  
+   $election_json = get_election_json();
+   if (!empty($liveTvsrc->imagePath)){
+    $liveTvsrc = $liveTvsrc->imagePath; 
+   }
+   $fb_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+   $fb_image_url = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:url',
+            'content' => $base_url . '/elections/karnataka-election-2018',
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($fb_image_url, 'fb_image_url');
+   $fb_image_width = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image:height',
+            'content' => '600',
+          ),
+          '#weight' => -11,
+        );
+   drupal_add_html_head($fb_image_width, 'fb_image_width');
+   $fb_image_height = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image:width',
+            'content' => '315',
+          ),
+          '#weight' => -12,
+        );
+   drupal_add_html_head($fb_image_height, 'fb_image_height');
+  }
+  
+  
   $term_data = menu_get_object('taxonomy_term', 2);
   if (!empty($term_data->tid) && $term_data->tid == get_itg_variable('home_page_election_tid')){
     $graph_json_url = get_graph_share_json_url($term_data->tid);
