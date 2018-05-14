@@ -107,7 +107,7 @@
 				 <div class="elec2013-inner">
               <div  class="shwimg-cont-inner">
                     <span class="close-elec2013-inner">x</span>
-                    <img src="https://smedia2.intoday.in/indiatoday/img/karnataka_results_2013.png">
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
                   </div>
              </div>
                 <div class="graph-design">
