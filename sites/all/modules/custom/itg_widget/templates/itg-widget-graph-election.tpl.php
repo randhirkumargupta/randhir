@@ -102,7 +102,7 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            
+              
               <div class="data-holder">
                 <div class="graph-design">
                 <a href="<?php echo $graph_link; ?>" >
@@ -150,7 +150,7 @@
                     print render($render_array);
                     ?>
                 </div>
-                <div style="font-size: 9px; color: #666; margin-bottom: -4px;">*Counting is being done for only 222 seats.</div>
+                <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
               </div>
             </a>
           </div>
