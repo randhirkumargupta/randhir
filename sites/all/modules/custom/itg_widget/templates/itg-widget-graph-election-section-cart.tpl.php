@@ -281,6 +281,7 @@
         </div>
     </div>
 </div>
+<div style="font-size: 9px; color: #666; margin-bottom: -4px;">*Counting is being done for only 222 seats.</div>
 </div>
   <?php 
   $bottom_label = get_itg_variable('itg_election_home_bottom_label');
