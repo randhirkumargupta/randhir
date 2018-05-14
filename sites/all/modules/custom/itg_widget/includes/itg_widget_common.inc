@@ -3715,9 +3715,9 @@ function get_graph_share_json_url($cat_id){
   return $itg_result;
 }
 
-function get_html_widget_data_by_nids($nids){
+function get_html_widget_data_by_nids($nids){  var_dump($nids);die;
   if(!empty($nids)){
-    $query = "SELECT n.title, db.body_value FROM field_data_body db LEFT JOIN node n on (db.entity_id = n.nid) WHERE n.type = 'custom_html_widgets' AND n.status = 1 AND entity_id IN ($nids) ORDER BY FIELD (db.entity_id, $nids)";
+    $query = "SELECT n.title, db.body_value FROM field_data_body db LEFT JOIN node n on (db.entity_id = n.nid) WHERE n.type = 'custom_html_widgets' AND n.status = 1 AND db.entity_id IN ($nids) ORDER BY FIELD (db.entity_id, $nids)";
     $result = db_query($query);
     $results = $result->fetchAll();
     var_dump($results);die;
