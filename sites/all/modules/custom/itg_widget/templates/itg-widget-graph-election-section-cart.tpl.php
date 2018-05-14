@@ -179,7 +179,7 @@
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                     print render($render_array);
                     ?>
-                    <div id="elec2013">2013 Result</div>
+                    <div id="elec2013">Result 2013</div>
                 </div>
               </div>            
           </div>
