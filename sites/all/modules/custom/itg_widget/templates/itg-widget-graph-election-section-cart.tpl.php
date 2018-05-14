@@ -200,12 +200,42 @@
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
-        drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
+        
         $block = block_load('itg_widget', 'live_tv');
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
-        ?>
-       <script>
+        ?>  
+      </div>
+      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
+        <div class="data-holder" id="home-webcast-election">
+          <?php
+            print get_itg_variable('itg_election_home_webcast_html');
+          ?>
+        </div>
+      <?php }?>
+      </div>
+      </div>
+      <div class="homelive-share">
+        <span class="sharethis">SHARE </span>
+            <?php
+            $liveTvshare = FRONT_URL . '/livetv';
+            $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
+            $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
+            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
+              print '<div class="social-share">
+                     <ul>
+                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                     </ul>
+                 </div>';
+            ?>
+       </div> 
+    </div>
+</div>
+<?php drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer')); ?>
+<script>
         document.addEventListener("DOMContentLoaded", function(event) { 
           jQuery(window).scroll(function(){
 		  var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
@@ -241,50 +271,9 @@
               var elemBottom = elemTop + elem.height();
               return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
           }
-          
-           jQuery(document).ready(function (e){    
-    jQuery('.close-elec2013,#elec2013').on('click',function(){
-      var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
-    jQuery('.elec2013 img').css('height',stmap+'px');
-      jQuery('.elec2013').toggleClass('shwimg');
-    })
-    window.addEventListener("resize", function() {
-    var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
-    jQuery('.elec2013 img').css('height',stmap+'px');
-    }, false);
-  });
-          
         });   
-          </script>   
-      </div>
-      <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
-        <div class="data-holder" id="home-webcast-election">
-          <?php
-            print get_itg_variable('itg_election_home_webcast_html');
-          ?>
-        </div>
-      <?php }?>
-      </div>
-      </div>
-      <div class="homelive-share">
-        <span class="sharethis">SHARE </span>
-            <?php
-            $liveTvshare = FRONT_URL . '/livetv';
-            $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
-            $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
-            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
-              print '<div class="social-share">
-                     <ul>
-                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
-                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
-                     </ul>
-                 </div>';
-            ?>
-       </div> 
-    </div>
-</div>
+          </script> 
+
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50 <?php echo $topstoryclass;?>">
@@ -311,4 +300,17 @@
     <?php }; ?>
   <?php }; ?>
 <?php endif; ?>
+<script>
+jQuery(document).ready(function (e){    
+    jQuery('.close-elec2013,#elec2013').on('click',function(){
+      var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+      jQuery('.elec2013').toggleClass('shwimg');
+    })
+    window.addEventListener("resize", function() {
+    var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+    }, false);
+  });
+  </script>
 
