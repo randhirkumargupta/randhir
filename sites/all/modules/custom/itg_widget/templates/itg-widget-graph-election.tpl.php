@@ -176,6 +176,7 @@
     jQuery('.close-elec2013-inner,#elec2013-inner').on('click',function(){
       if (jQuery(window).width() > 767) {  
       var stmap = jQuery('.statesvg-map').outerHeight(true);
+      stmap = stmap+20;
       jQuery('.shwimg-cont-inner,.elec2013-inner img').css('height',stmap+'px');
       jQuery('.elec2013-inner').toggleClass('shwimg-inner')
       }else{
