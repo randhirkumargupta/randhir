@@ -176,6 +176,7 @@
                     print render($render_array);
                     ?>
                 </div>
+                <div style="font-size: 9px; color: #666; margin-bottom: -4px;">*Counting is being done for only 222 seats.</div>
               </div>            
           </div>
         </div>
