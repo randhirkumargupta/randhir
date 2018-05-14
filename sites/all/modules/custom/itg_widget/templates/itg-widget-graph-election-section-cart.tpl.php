@@ -241,6 +241,19 @@
               var elemBottom = elemTop + elem.height();
               return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
           }
+          
+           jQuery(document).ready(function (e){    
+    jQuery('.close-elec2013,#elec2013').on('click',function(){
+      var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+      jQuery('.elec2013').toggleClass('shwimg');
+    })
+    window.addEventListener("resize", function() {
+    var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+    }, false);
+  });
+          
         });   
           </script>   
       </div>
