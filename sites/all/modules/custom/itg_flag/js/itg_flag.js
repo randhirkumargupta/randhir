@@ -42,8 +42,8 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     } else {
         overrideImage = overrideImage;
     }
-    width = 50;
-    height = 50;
+    width = '50';
+    height = '50';
     overrideTitle = decodeURIComponent((overrideTitle + '').replace(/\+/g, '%20'));;
     overrideDescription = decodeURIComponent((overrideDescription + '').replace(/\+/g, '%20'));;
     FB.ui({
