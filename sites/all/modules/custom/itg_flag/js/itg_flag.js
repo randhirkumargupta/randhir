@@ -40,10 +40,11 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     if (overrideImage.length === 0) {
         overrideImage = Drupal.settings.itg_flag.settings.default_image;
     } else {
-        overrideImage = overrideImage;
+        overrideImage = 'https://akm-img-a-in.tosshub.com/sites/all/themes/itg/logo.png'; //overrideImage;
     }
-    width = 50;
-    height = 50;
+    console.log('overrideImage' + overrideImage);
+    width = '50';
+    height = '50';
     overrideTitle = decodeURIComponent((overrideTitle + '').replace(/\+/g, '%20'));;
     overrideDescription = decodeURIComponent((overrideDescription + '').replace(/\+/g, '%20'));;
     FB.ui({
