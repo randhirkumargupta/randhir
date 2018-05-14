@@ -3714,3 +3714,14 @@ function get_graph_share_json_url($cat_id){
   $itg_result = $itg_query->execute()->fetchAll();
   return $itg_result;
 }
+
+function get_html_widget_data_by_nids($nids){
+  if(!empty($nids)){
+    $query = db_select('field_data_body', 'db');
+    $query->condition('db.entity_id', $nids, 'IN');
+    $query->fields('db', array('body_value', 'title'));
+    $result = $query->execute()->fetchAll();
+    return $result;
+  }
+  return array();
+}

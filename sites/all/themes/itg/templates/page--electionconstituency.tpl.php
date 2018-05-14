@@ -159,6 +159,27 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>               
                     </div> 
                 </div>
+                <?php $static_pages_nids = get_itg_variable('election_staticpages_nid');
+                   if (!empty($static_pages_nids)){
+                     $static_pages_data = get_html_widget_data_by_nids($static_pages_nids);
+                     foreach ($static_pages_data as $_key => $_value) { ?>
+                       <div class="itg-320 col-md-12 col-sm-6 mt-50">
+                          <div class="itg-widget">
+                              <div class="droppable">
+                                  <div class="widget-wrapper">
+                                      <h2 class="heading"><?php print $_value->title; ?></h2>                                                 
+                                      <div class="data-holder">
+                                          <?php
+                                          print $_value->body_value;
+                                          ?>
+                                      </div>
+                                  </div>             
+                              </div>               
+                          </div> 
+                      </div>
+                     <?php }
+                   }
+                ?>
 
                 <div class="col-md-12 col-sm-6 mt-50">
                     <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>

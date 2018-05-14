@@ -198,6 +198,12 @@ function itg_election_configure() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('itg_graphshare_desc'),
   );
+  $form['election_staticpages_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Static pages nids'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('election_staticpages_nid'),
+  );
   $form['submit_election'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
