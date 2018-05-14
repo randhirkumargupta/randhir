@@ -131,7 +131,7 @@
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
             <div class="elec2013">
                     <span class="close-elec2013">x</span>
-                    <img src="https://smedia2.intoday.in/indiatoday/img/karnataka_results_2013.png">
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
              </div>
               <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
