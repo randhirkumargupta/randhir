@@ -1101,16 +1101,23 @@ border-radius: 0px 5px 5px 0px;}
 .election-page .tech-block_5 .data-holder .view-content{ margin:0px; }
 /* livetv fixed section */
 .livetv-fixed span.closelive{ width:30px; height: 30px; line-height:30px; text-align:center; background:#111; color:#fff; border:1px solid #fff; border-radius:100%; font-size: 18px;display: block; position: absolute;right: -10px;top: -15px; display:none;}
-.livetv-fixed.active{ position: fixed; top:50%; left:0; }
-.livetv-fixed.active span.closelive{ display: block; }
+.livetv-fixed.active{ position: fixed; bottom:10%; left: 10px; z-index: 99999; }
+#livetv-section .livetv-fixed.active{z-index: 9999;}
+#livetv-section .livetv-fixed.active iframe{ height:160px; width:250px; }
+.livetv-fixed.active span.closelive{ display: block; cursor: pointer; }
+.placeholder-livetv{ background:#e2e1e1; height:280px }
+.electionHome-section .placeholder-livetv { height:299px; }
 @media only screen and (max-width: 1024px){
- .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;}   
+ .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto;} 
+ .electionHome-section .placeholder-livetv { height:auto; } 
 }
 @media (max-width: 991px) and (min-width: 768px){
 #block-itg-widget-election-who-said-what #Slider.flexslider{padding: 10px 5px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides span{ margin-bottom:0px;}
 #block-itg-widget-election-who-said-what #Slider.flexslider .slides p {font-size: 16px;line-height:20px; font-weight:bold;}
 .election-page .view-display-id-election_videos .osscar-video ul .dont-miss-listing .dm-pic{ width:auto; }
+.placeholder-livetv{ background:#e2e1e1; height:auto }
+.electionHome-section .placeholder-livetv { height:auto; }
 }
 
 #block-itg-widget-election-know-your-party .karnataka-partylist {border:1px solid #d4d4d4; position: relative; padding: 10px; border-radius:5px;}
@@ -1172,7 +1179,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .election-top-block .liststory-election ul li {display: inline-block;line-height: 18px;color: #a00606;padding: 0 15px; position: relative;}
 .election-top-block .liststory-election ul li + li:before{content: '|'; position: absolute; left: -4px; display: inline-block;}
 .election-top-block .liststory-election ul li:nth-child(1){ padding-left:0px; }
-.election-top-block .liststory-election ul li a {color: #111;}
+.election-top-block .liststory-election ul li a {color: #111; width: auto; height: auto; background: transparent; text-align: left; line-height:inherit;}
 .election-top-block .liststory-election ul li a:hover{color:#193984;}
 .home-top-stories-election h3{font-family:"OpenSans-bold"}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li.livetv-icon-parent a svg{ position: relative; top:3px; }
@@ -1218,7 +1225,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 }
 @media screen and (max-width:767px){
-#home-livetv-election iframe,#home-webcast-election iframe{ height:280px; width: 100% }
+#home-livetv-election iframe,#home-webcast-election iframe{ height:200px; width: 100% }
 #block-itg-widget-home-graph-election h1#display_tit{font-size: 22px; line-height: 26px;}
 .election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{top: 0;}
 #block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li:nth-child(4),#block-itg-widget-home-graph-election #block-itg-widget-election-top-stories ul li .dm-pic{ display:block; }
@@ -1305,3 +1312,4 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-election-livetv-block #fhs-karnataka .leadparty-table table th:nth-child(1){ text-align: left; }
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li {list-style: none;overflow: hidden;padding: 10px 0;}
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li .dm-pic {width: auto;float: left;margin-right: 10px;}
+.page-taxonomy-term .election-page.auto-layout-page .auto-block-1, .page-taxonomy-term .election-page.auto-layout-page .auto-block-2{height: 640px;}

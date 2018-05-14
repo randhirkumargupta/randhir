@@ -15,6 +15,20 @@ if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $share_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 }
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+
+if (!empty($node->field_multi_user_allows[LANGUAGE_NONE][0]['value']) || $_GET['debug_live_blog'] == 1) {
+      $params = array(
+        'body' => "<pre>". print_r($node, TRUE) ."</pre>",
+        'subject' => 'Debug new live blog content',
+      );
+
+      $to = 'arunmishra.coder@gmail.com, arun.kumarmishra@aajtak.com';
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE); 
+        
+      }
+        
+}
 ?>
  
 <?php
@@ -83,7 +97,7 @@ if(!empty($coverage_end)){
         $created_date = date('Y-m-d\TH:i:s', $node->created);
         $modify_date = date('Y-m-d\TH:i:s', $node->changed);
         $created_date = $created_date.'+05:30';
-		$modify_date = $modify_date.'+05:30';
+        $modify_date = $modify_date.'+05:30';
       
 ?>
                     <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">

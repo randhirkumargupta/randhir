@@ -33,7 +33,7 @@
 <script>
 <?php
 $arg = arg();
-if (($arg[2] == 'constituency' || $arg[2] == 'constituency-map') || ($arg[0] == 'refresh_election_view_block')) {
+if ($arg[2] == 'constituency' || $arg[2] == 'constituency-map' || ($arg[0] == 'refresh_election_view_block')) {
 ?>
 jQuery(document).ready(function(){
   <?php if (($arg[0] != 'refresh_election_view_block')) {?>

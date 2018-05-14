@@ -574,7 +574,8 @@ jQuery(document).ready(function () {
         }
 
     })
-    /*jQuery('#map-state').change(function () {
+    /*
+    jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
 
@@ -601,8 +602,8 @@ jQuery(document).ready(function () {
             error: function (xhr, desc, err) {
             }
         });
-    });*/
-
+    });
+    */
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {
@@ -1154,15 +1155,6 @@ jQuery(window).load(function () {
         jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
     }
 
-    if (window.location.pathname == '/elections/karnataka-election-2018') {
-        // adding onclick attribute for ga code for photo carousel for next button
-        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'electionsphotocarouselNext', 'click','1', 1, {'nonInteraction': 1});return true;");
-        jQuery('div.flexslider li.flex-nav-next a').attr("href", "#electionsphotocarouselNext");
-        // adding onclick attribute for ga code for photo carousel for prev button
-        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'electionsphotocarouselPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
-        jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#electionsphotocarouselPrev");
-    }
-
     // For Prev button in slider thumbnails    
     jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderThumbPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
     // For Next button in slider thumbnails
@@ -1180,30 +1172,4 @@ jQuery(window).load(function () {
 // Resize megareview iframe.
 function resizeIframe(obj) {
     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-}
-
- 
-
-$(window).scroll(function(){
-  if ($(window).width() > 1024) {
-    $('.livetv-fixed').each(function(){
-    if(isScrolledIntoView($(this))){
-      $(this).addClass('active');
-    }
-    else{
-      $(this).removeClass('active');
-    }
-  });
-}
-
-});
-
-function isScrolledIntoView(elem){
-    var $elem = $(elem);
-    var $window = $(window);
-    var docViewTop = $window.scrollTop();
-    var docViewBottom = docViewTop + $window.height();
-    var elemTop = $elem.offset().top;
-    var elemBottom = elemTop + $elem.height();
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }

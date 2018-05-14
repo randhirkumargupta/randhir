@@ -159,7 +159,7 @@
                               print '<div class="social-share">
                                      <ul>
                                          <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
-                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 200, 200" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 50, 50" . ')"><i class="fa fa-facebook"></i></a></li>
                                          <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
                                          <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
                                      </ul>
@@ -186,9 +186,12 @@
 <!-- End High Cart graph -->
 <!-- Live Tv and Webcast tv -->
 <?php if(!empty($itg_election_home_webcast_livetv)){?>
-<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50" id="livetv-section">
 <h3>Live Tv</h3>
     <div class="itg-widget">
+      <div class="placeholder-livetv">
+       <div class="livetv-fixed">
+         <span class="closelive" id="closetv">X</span>
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
@@ -204,6 +207,8 @@
           ?>
         </div>
       <?php }?>
+      </div>
+      </div>
       <div class="homelive-share">
         <span class="sharethis">SHARE </span>
             <?php
