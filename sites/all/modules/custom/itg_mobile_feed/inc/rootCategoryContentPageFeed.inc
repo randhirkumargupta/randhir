@@ -138,6 +138,9 @@ function generateLeftMainCategoryPage($tid, $term_name) {
                     // auto
                     if ($tid == '1206689' || $tid == '1206688') {
                         $loop_file_name = 'story' . $nid . ".xml";
+                    } 
+                    elseif ($tid == 1206598 || $tid == '1206598') {
+                        $loop_file_name = 'fromindiatodaymagazine' . $nid . ".xml";
                     } else {
                         $loop_file_name = $term_name . $nid . ".xml";
                     }
