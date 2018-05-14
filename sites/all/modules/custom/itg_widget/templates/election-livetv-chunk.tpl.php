@@ -62,7 +62,7 @@
     <div class="itg-widget">
 			<?php
 			$itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
-			if(!empty($itg_election_home_content_id)){
+			if(!empty($itg_election_home_content_id) && arg(0) != 'livetv'){
 				$story_title = get_first_story_title_by_tid($itg_election_home_content_id);
 				$story_title_display = $story_title[0]['title'];
 				$content_link = FRONT_URL . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
