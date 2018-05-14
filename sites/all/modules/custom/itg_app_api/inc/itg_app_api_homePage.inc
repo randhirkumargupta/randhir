@@ -48,19 +48,19 @@ function homePageJson() {
     $widget_detail = array();
     $cube_widget['show_widget'] = "1";
     $widget_detail[0]['type'] = "webview";
-    $widget_detail[0]['title'] = "Scorecard";
-    $widget_detail[0]['type_label'] = "scorecard";
+    $widget_detail[0]['title'] = "Karnataka Election";
+    $widget_detail[0]['type_label'] = "Karnataka Election";
     $widget_detail[0]['width'] = "130";
     $widget_detail[0]['height'] = "119";
-    $widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl98.html";
-    $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
+    $widget_detail[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/cube/cube.html";
+    $widget_detail[0]['extended_url'] = "https://electionresult.intoday.in/elections/2018/html/chunk.html";
     $cube_widget['widget_detail'] = $widget_detail;
     //code for cube widget end
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";  
     
-    $data['data'][0] = $homePageJsonWidget_3;     // live tv   
+    $data['data'][0] = $homePageJsonWidget_2;     // karnataka_elections tally   
     $data['data'][1] = $data_topstories;      
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
     $data['data'][2] = $itg_rapid_home_movies_json;
@@ -3236,13 +3236,13 @@ function homePageJsonWidget_2() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman; 
     
-    $n_widget[0]['type'] = "2";
-    $n_widget[0]['type_label'] = "scorecard";
-    $n_widget[0]['tilte'] = "Scorecard"; 
-    $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_home.html";
-    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
+    $n_widget[0]['type'] = "4";
+    $n_widget[0]['type_label'] = "electionresult";
+    $n_widget[0]['tilte'] = "Karnataka Election Result"; 
+    $n_widget[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/karnataka.html?&share=no";
+    $n_widget[0]['extended_url'] = "https://electionresult.intoday.in/elections/2018/html/chunk.html";
     $n_widget[0]['action'] = "webview"; 
-    $n_widget[0]['is_india_match'] = "1";
+    //$n_widget[0]['is_india_match'] = "1";
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
@@ -3295,9 +3295,9 @@ function homePageJsonWidget_3() {
     
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "LIVE: KARNATAKA ELECTIONS"; 
-    $n_widget[0]['short_url'] = "https://feeds.intoday.in/indiatoday/livetv/apphomeembed.html";
-    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/livetv";
+    $n_widget[0]['tilte'] = "India Today Conclave 2018 Live"; 
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/conclave.html";
+    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
     $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
