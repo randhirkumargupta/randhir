@@ -813,6 +813,7 @@ function itg_report_api_detail() {
 
 function itg_rapid_api_insert_video() {
     $HTTP_RAW_POST_DATA;
+    echo "andy here";die();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     p($params);
     $long_headline = $params['long_headline'];
