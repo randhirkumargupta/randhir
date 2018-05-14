@@ -1315,10 +1315,11 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .page-taxonomy-term .election-page.auto-layout-page .auto-block-1, .page-taxonomy-term .election-page.auto-layout-page .auto-block-2{height: 640px;}
 
 /*election 2013 popup home */
-#elec2013{ display: inline-block;float: left;background: #e2e1e1;color: #000;padding: 6px 9px;cursor: pointer}
+#elec2013{ display: inline-block;float: left;background: #e2e1e1;color: #000;padding: 6px 9px;cursor: pointer;margin-top: 5px; border-radius:3px;}
 .elec2013{position: relative; display: none}
 .elec2013 img{ position: absolute; height: 322px; z-index: 11; width: 100%;}
 .close-elec2013{position: absolute; right: 0px; color: #fff; width: 25px; height: 25px; background: #191919; z-index: 12; border-radius: 50%; font-weight: bold;    padding-left: 8px; line-height: 21px; cursor:pointer;}
 .elec2013.shwimg{ display:block !important;}
+#block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ float: right; }
 @media only screen and (max-device-width : 768px) {#block-itg-widget-election-constituency-select-box select{  width:61%;}}
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {#block-itg-widget-election-constituency-select-box select{width:50%;}}
