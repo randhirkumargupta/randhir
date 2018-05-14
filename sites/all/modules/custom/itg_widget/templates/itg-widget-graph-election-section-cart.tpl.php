@@ -234,6 +234,7 @@
        </div> 
     </div>
 </div>
+<?php drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer')); ?>
 <script>
         document.addEventListener("DOMContentLoaded", function(event) { 
           jQuery(window).scroll(function(){
