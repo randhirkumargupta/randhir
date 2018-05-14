@@ -1314,7 +1314,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-election-livetv-block #block-itg-widget-election-top-stories ul li .dm-pic {width: auto;float: left;margin-right: 10px;}
 .page-taxonomy-term .election-page.auto-layout-page .auto-block-1, .page-taxonomy-term .election-page.auto-layout-page .auto-block-2{height: 640px;}
   
-//*election 2013 popup home */
+/*election 2013 popup home */
 #elec2013{ display: inline-block;float: left;background: #e2e1e1;color: #000;padding: 6px 9px;cursor: pointer;margin-top: 5px; border-radius:3px;}
 .elec2013{position: relative; display: none}
 .elec2013 img{ position: absolute; height: 322px; z-index: 11; width: 100%;}
@@ -1324,11 +1324,11 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ float: right; }
 @media only screen and (max-device-width : 768px) {#block-itg-widget-election-constituency-select-box select{  width:100%;}#block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ width:120px;}#elec2013{ font-size:12px; }}
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
-#block-itg-widget-election-constituency-select-box select{width:100%;}  
-#block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ width:120px;}}
+    #block-itg-widget-election-constituency-select-box select{width:100%;}  
+    #block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ width:120px;}}
 @media only screen and (max-width : 767px){
-#block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ width:160px; }
-#block-itg-widget-election-constituency-select-box select{ width:100%; }
+    #block-itg-widget-home-graph-election .electionHome-section #block-itg-widget-election-constituency-select-box{ width:160px; }
+    #block-itg-widget-election-constituency-select-box select{ width:100%; }
 
 }
 
@@ -1347,7 +1347,10 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 }
 @media only screen and (max-device-width : 768px) {
 #block-itg-widget-election-constituency-select-box select{ width:100%; }
-#elec2013-inner{float: left} #elec2013-inner{ margin: 10px 0 0 45px;; }
-.elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
+ #elec2013-inner{float: left} #elec2013-inner{ margin: 10px 0 0 45px;; }
+ .elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
+#home-webcast-election iframe{ height:100%; }
+.placeholder-livetv{ height: auto; }
 }
-@media only screen and (max-width : 767px) {#elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
+
+@media only screen and (max-width : 767px) {.placeholder-livetv{ height: auto; } #elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
