@@ -306,7 +306,6 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                                 ?>
                             <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                             <li class="update-data">
-                            <?php endif; ?>
                                 <?php
                                 print t('UPDATED ');
                                 if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
