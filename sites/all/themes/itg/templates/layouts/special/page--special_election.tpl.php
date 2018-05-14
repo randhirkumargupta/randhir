@@ -31,6 +31,9 @@ if ($theme == 'itgadmin' || $preview == 'preview') {
   $conf['preprocess_js'] = 0;
 }
 $tax_data = menu_get_object('taxonomy_term', 2);
+if (isset($_GET['ele_is_live']) && $_GET['ele_is_live'] == 'is_live') {
+  $tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'] = 1;
+}
 if (empty($tax_data->field_is_election_live[LANGUAGE_NONE][0]['value'])) {
   $highlights = itg_widget_highlights_block_data();
   $device = itg_live_tv_company('web');
@@ -167,7 +170,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 												 $list_story_li .= '<li>'.$_value->title.'</li>';
 											}
 										}
-                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="liststory-election"><ul>' .$list_story_li.'</ul></div></div></div>';
+                    echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1><div class="liststory-election"><ul>' .$list_story_li.'</ul></div> </div></div>';
                   }                  
                   $graphdata = itg_widget_get_graph_data();
                 }
