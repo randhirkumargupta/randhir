@@ -155,6 +155,7 @@
           </div>
         </div>
       </div>
+      <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
     </div>
   <?php } ?>
   <?php endforeach; ?>
