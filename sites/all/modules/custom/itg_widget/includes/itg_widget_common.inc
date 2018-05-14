@@ -3718,7 +3718,6 @@ function get_graph_share_json_url($cat_id){
 function get_html_widget_data_by_nids($nids){  
   if(!empty($nids)){
     $query = "SELECT n.title, db.body_value FROM field_data_body db LEFT JOIN node n on (db.entity_id = n.nid) WHERE n.type = 'custom_html_widgets' AND n.status = 1 AND db.entity_id IN ($nids) ORDER BY FIELD (db.entity_id, $nids)";
-    var_dump($query);die;
     $result = db_query($query);
     $results = $result->fetchAll();
     var_dump($results);die;
