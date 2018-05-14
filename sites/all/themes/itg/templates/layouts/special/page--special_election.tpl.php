@@ -434,43 +434,7 @@ else { ?>
                             </div>
                         </div>
                         
-                        <div class="row">
-                            <div class="itg-325 mt-50  col-md-12 col-sm-12">
-                                <div class="widget-help-text">Special widgets ( <strong>Key Issue</strong> )</div>
-                                <div class="itg-widget">
-                                    <div class="droppable <?php print $gray_bg_layout; ?>">
-                                        <div class="widget-wrapper">
-                                            <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?>
-                                              <h2 class="heading"><?php print $widget_data['itg-block-15']['block_title']; ?></h2>
-                                                    <?php } ?>
-                                            <!-- for admin  -->
-                                                    <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
-                                              <div class="widget-settings">
-                                                  <div class="widget-title-wrapper">
-  <?php if (isset($widget_data['itg-block-15']['block_title'])) { ?>
-                                                        <h2 class="widget-title" data-id="itg-block-15"><?php print $widget_data['itg-block-15']['block_title']; ?></h2>
-  <?php } ?>
-                                                      <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-15']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
-                                                  </div>
-                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                  <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-15"><i class="fa fa-times"></i></a></span>
-                                              </div>
-                                                <?php } ?> 
-                                            <div class="data-holder" id="itg-block-15">
-                                                <?php
-                                                if (isset($widget_data['itg-block-15']['widget']) && !empty($widget_data['itg-block-15']['widget'])) {
-                                                  print $widget_data['itg-block-15']['widget'];
-                                                }
-                                                else {
-                                                  print '<div class="widget-placeholder"><span>' . t('Key Issue') . '</span></div>';
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>             
-                                    </div>               
-                                </div>
-                            </div>
-                          </div> 
+                        
                         
                         <div class="row itg-photo">
                             <div class="col-md-12 mt-50">
@@ -545,7 +509,44 @@ else { ?>
                                     </div>
                                 </div>
                             </div>
-                        </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="itg-325 mt-50  col-md-12 col-sm-12">
+                                <div class="widget-help-text">Special widgets ( <strong>Key Issue</strong> )</div>
+                                <div class="itg-widget">
+                                    <div class="droppable <?php print $gray_bg_layout; ?>">
+                                        <div class="widget-wrapper">
+                                            <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-15']['block_title'])) { ?>
+                                              <h2 class="heading"><?php print $widget_data['itg-block-15']['block_title']; ?></h2>
+                                                    <?php } ?>
+                                            <!-- for admin  -->
+                                                    <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                              <div class="widget-settings">
+                                                  <div class="widget-title-wrapper">
+  <?php if (isset($widget_data['itg-block-15']['block_title'])) { ?>
+                                                        <h2 class="widget-title" data-id="itg-block-15"><?php print $widget_data['itg-block-15']['block_title']; ?></h2>
+  <?php } ?>
+                                                      <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-15']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
+                                                  </div>
+                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                                  <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-15"><i class="fa fa-times"></i></a></span>
+                                              </div>
+                                                <?php } ?> 
+                                            <div class="data-holder" id="itg-block-15">
+                                                <?php
+                                                if (isset($widget_data['itg-block-15']['widget']) && !empty($widget_data['itg-block-15']['widget'])) {
+                                                  print $widget_data['itg-block-15']['widget'];
+                                                }
+                                                else {
+                                                  print '<div class="widget-placeholder"><span>' . t('Key Issue') . '</span></div>';
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>             
+                                    </div>               
+                                </div>
+                            </div>
+                          </div> 
                     </div>    
                     <div class="col-md-4 col-sm-12 col-sx-12 right-side itg-map">
                         <div class="row">
