@@ -76,28 +76,24 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>
                     </div>
                 </div>
-                
-                
-
-			<div class="col-md-6 col-sm-12 itg-325 mt-50">
+                <div class="col-md-6 col-sm-12 itg-325 mt-50">
                     <div class="itg-widget">
                         <div class="droppable itg-layout-605">
-                            <?php $condhtml = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'custom_html_widgets'); ?>
                             <div id="auto-new-block" class="widget-wrapper">
-                                <?php if (!empty($condhtml)) { ?>
+								<?php $condhtml_1 = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'custom_html_widgets'); ?>
+                                <?php if (!empty($condhtml_1)) { ?>
                                 <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'BELLWETHER SEATS'); ?></h2>  
                                 <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
-                                    print $condhtml;
+                                    print $condhtml_1;
                                     ?>
                                 </div>
                             </div>                     
                         </div>
                     </div>
-              </div>
-
-
+                </div>
+            </div>
                                        
             <div class="row itg-most-popular">
                 <div class="col-md-12 mt-50">
