@@ -15,7 +15,7 @@ $share_desc = '';
 $src = '';
 drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refresh_block.js', array('type' => 'file', 'scope' => 'footer'));
 drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
-
+$itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
 ?>
 <?php
 global $theme;
@@ -203,11 +203,18 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       <div class="placeholder-livetv">
                                       <div class="livetv-fixed">
                                         <span class="closelive" id="closetv">X</span>
-                                      <?php
+                                        <?php if(!empty($itg_election_home_webcast_livetv) && $itg_election_home_webcast_livetv == 'webcast'){?>
+                                      <div class="data-holder" id="home-webcast-election">
+                                        <?php
+                                        print get_itg_variable('itg_election_home_webcast_html');
+                                        ?>
+                                      </div>
+                                    <?php } 
+                                     else { 
                                       $block = block_load('itg_widget', 'live_tv');
                                       $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                       print render($render_array);
-                                      ?>
+                                       } ?>
                                       </div>
                                       </div>
                                      <div class="homelive-share">
@@ -244,22 +251,25 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               </div>
                           </div>
                             <script>
-                          document.addEventListener("DOMContentLoaded", function(event) { 
-                            jQuery(window).scroll(function(){
-                              var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
-                              if(cookies_id === undefined || cookies_id != 'smalltv'){
-                              if (jQuery(window).width() > 1025) {
-                                jQuery('#livetv-section').each(function(){
-                                if(isScrolledIntoView(jQuery(this))){
-                                  jQuery('.livetv-fixed').removeClass('active');
-                                }
-                                else{
-                                  jQuery('.livetv-fixed').addClass('active');
-                                }
-                              });
-                            }
-                            }
-                            });
+                          document.addEventListener("DOMContentLoaded", function(event) {
+							  jQuery(window).scroll(function(){
+							  var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
+							  if(cookies_id === undefined || cookies_id != 'smalltv'){
+							  if (jQuery(window).width() > 1024) {
+								jQuery('#livetv-section').each(function(){
+								  var zt = jQuery('#livetv-section').offset().top + 350;
+								  var tr = jQuery(window).scrollTop();
+								  var scrval = tr > zt ? true : false;
+								if(scrval){
+								  jQuery('.livetv-fixed').addClass('active');      
+								}
+								else{
+								  jQuery('.livetv-fixed').removeClass('active');
+								}
+							  });
+							}
+							}
+							});
                             jQuery('#closetv').click(function(){
                                 var date = new Date();
                                 var minutes = 30;
@@ -434,7 +444,7 @@ else { ?>
                             </div>
                         </div>
                         
-                        
+                         
                         
                         <div class="row itg-photo">
                             <div class="col-md-12 mt-50">
@@ -546,7 +556,7 @@ else { ?>
                                     </div>               
                                 </div>
                             </div>
-                          </div> 
+                          </div>
                     </div>    
                     <div class="col-md-4 col-sm-12 col-sx-12 right-side itg-map">
                         <div class="row">

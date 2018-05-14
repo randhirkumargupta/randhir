@@ -129,7 +129,11 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            <div class="elec2013">
+                    <span class="close-elec2013">x</span>
+                    <img src="https://smedia2.intoday.in/indiatoday/img/karnataka_results_2013.png">
+             </div>
+              <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
@@ -175,10 +179,12 @@
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                     print render($render_array);
                     ?>
+                    <div id="elec2013">Result 2013</div>
                 </div>
               </div>            
           </div>
         </div>
+        <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
       </div>
     </div>
   <?php } ?>
@@ -195,46 +201,11 @@
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
-        drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
+        
         $block = block_load('itg_widget', 'live_tv');
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
-        ?>
-       <script>
-        document.addEventListener("DOMContentLoaded", function(event) { 
-          jQuery(window).scroll(function(){
-            var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
-            if(cookies_id === undefined || cookies_id != 'smalltv'){
-            if (jQuery(window).width() > 1025) {
-              jQuery('#livetv-section').each(function(){
-              if(isScrolledIntoView(jQuery(this))){
-                jQuery('.livetv-fixed').removeClass('active');
-              }
-              else{
-                jQuery('.livetv-fixed').addClass('active');
-              }
-            });
-          }
-          }
-          });
-          jQuery('#closetv').click(function(){
-              var date = new Date();
-              var minutes = 30;
-              date.setTime(date.getTime() + (minutes * 60 * 1000));
-              jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
-              jQuery('.livetv-fixed').removeClass('active');
-          })
-          function isScrolledIntoView(elem){
-              var elem = jQuery(elem);
-              var window = jQuery(window);
-              var docViewTop = window.scrollTop();
-              var docViewBottom = docViewTop + window.height();
-              var elemTop = elem.offset().top;
-              var elemBottom = elemTop + elem.height();
-              return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-          }
-        });   
-          </script>   
+        ?>  
       </div>
       <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
         <div class="data-holder" id="home-webcast-election">
@@ -264,6 +235,46 @@
        </div> 
     </div>
 </div>
+<?php drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer')); ?>
+<script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+          jQuery(window).scroll(function(){
+		  var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
+		  if(cookies_id === undefined || cookies_id != 'smalltv'){
+		  if (jQuery(window).width() > 1024) {
+			jQuery('#livetv-section').each(function(){
+			  var zt = jQuery('#livetv-section').offset().top + 350;
+			  var tr = jQuery(window).scrollTop();
+			  var scrval = tr > zt ? true : false;
+			if(scrval){
+			  jQuery('.livetv-fixed').addClass('active');      
+			}
+			else{
+			  jQuery('.livetv-fixed').removeClass('active');
+			}
+		  });
+		}
+		}
+		});
+          jQuery('#closetv').click(function(){
+              var date = new Date();
+              var minutes = 30;
+              date.setTime(date.getTime() + (minutes * 60 * 1000));
+              jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
+              jQuery('.livetv-fixed').removeClass('active');
+          })
+          function isScrolledIntoView(elem){
+              var elem = jQuery(elem);
+              var window = jQuery(window);
+              var docViewTop = window.scrollTop();
+              var docViewBottom = docViewTop + window.height();
+              var elemTop = elem.offset().top;
+              var elemBottom = elemTop + elem.height();
+              return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+          }
+        });   
+          </script> 
+
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50 <?php echo $topstoryclass;?>">
@@ -290,4 +301,17 @@
     <?php }; ?>
   <?php }; ?>
 <?php endif; ?>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {    
+    jQuery('.close-elec2013,#elec2013').on('click',function(){
+      var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+      jQuery('.elec2013').toggleClass('shwimg');
+    })
+    window.addEventListener("resize", function() {
+    var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+    }, false);
+  });
+  </script>
 
