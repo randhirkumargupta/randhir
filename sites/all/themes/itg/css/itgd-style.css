@@ -1331,12 +1331,14 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .close-elec2013-inner{position: absolute;right: 0px;color: #fff; width: 25px; height: 25px; background: #191919; z-index: 12;border-radius: 50%; font-weight: bold;padding-left: 8px;line-height: 21px;cursor:pointer;}
 .elec2013-inner.shwimg-inner{ display:block !important;}
 .shwimg-cont-inner{width: 100%;background: #fff;position: absolute;z-index: 99;}
-@media only screen and (max-device-width : 768px) {#block-itg-widget-election-constituency-select-box select{ width:61%; }
- #elec2013-inner{float: left} #elec2013-inner{ margin:0; }
- .elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
-}
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
- #block-itg-widget-election-constituency-select-box select{  width:55%; } 
+ #block-itg-widget-election-constituency-select-box select{  width:100%; } 
  #elec2013-inner{float: left}
- #elec2013-inner {margin:10px 0px 0 45px}
+ #elec2013-inner {margin:0px 0px 0 45px}
+.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:150px}
+}
+@media only screen and (max-device-width : 768px) {
+#block-itg-widget-election-constituency-select-box select{ width:100%; }
+ #elec2013-inner{float: left} #elec2013-inner{ margin: 10px 0 0 45px;; }
+ .elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
 }
