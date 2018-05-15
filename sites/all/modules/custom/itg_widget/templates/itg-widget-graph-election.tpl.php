@@ -101,9 +101,15 @@
          ?>
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
+          <div class="elec2013-inner">
+              <div  class="shwimg-cont-inner">
+                    <span class="close-elec2013-inner">x</span>
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
+                  </div>
+             </div>
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
             
-              <div class="data-holder">
+              <div class="data-holder">				 
                 <div class="graph-design">
                 <a href="<?php echo $graph_link; ?>" >
                 <div class="statesvg-map">
@@ -149,10 +155,12 @@
                     $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                     print render($render_array);
                     ?>
+                    <div id="elec2013-inner">Result 2013</div>
                 </div>
               </div>
             </a>
           </div>
+          <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
         </div>
       </div>
     </div>
@@ -163,3 +171,26 @@
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
 
 <?php endif; ?>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {    
+    jQuery('.close-elec2013-inner,#elec2013-inner').on('click',function(){
+      if (jQuery(window).width() > 767) {  
+      var stmap = jQuery('.statesvg-map').outerHeight(true);
+      stmap = stmap+20;
+      jQuery('.shwimg-cont-inner,.elec2013-inner img').css('height',stmap+'px');
+      jQuery('.elec2013-inner').toggleClass('shwimg-inner')
+      }else{
+        var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.leadparty-table').outerHeight(true);
+        jQuery('.shwimg-cont-inner').css('height',stmap+'px');
+        jQuery('.elec2013-inner').toggleClass('shwimg-inner')
+      }
+      
+    })
+    window.addEventListener("resize", function() {
+      if (jQuery(window).width() < 767){
+        var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.leadparty-table').outerHeight(true);
+        jQuery('.shwimg-cont-inner').css('height',stmap+'px');
+      }
+    }, false);
+  });
+</script>
