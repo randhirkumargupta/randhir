@@ -459,6 +459,9 @@ function itg_preprocess_html(&$vars) {
         );
    drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
   }
+  
+ 
+  
   $term_data = menu_get_object('taxonomy_term', 2);
   if (!empty($term_data->tid) && $term_data->tid == get_itg_variable('home_page_election_tid')){
     $graph_json_url = get_graph_share_json_url($term_data->tid);
