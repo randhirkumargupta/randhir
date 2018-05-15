@@ -48,29 +48,29 @@ function homePageJson() {
     $widget_detail = array();
     $cube_widget['show_widget'] = "1";
     $widget_detail[0]['type'] = "webview";
-    $widget_detail[0]['title'] = "Karnataka Election";
-    $widget_detail[0]['type_label'] = "Karnataka Election";
+    $widget_detail[0]['title'] = "Scorecard";
+    $widget_detail[0]['type_label'] = "scorecard";
     $widget_detail[0]['width'] = "130";
     $widget_detail[0]['height'] = "119";
-    $widget_detail[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/cube/cube.html";
-    $widget_detail[0]['extended_url'] = "https://electionresult.intoday.in/elections/2018/html/chunk.html";
+    $widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl98.html";
+    $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
     $cube_widget['widget_detail'] = $widget_detail;
     //code for cube widget end
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";  
     
-    $data['data'][0] = $homePageJsonWidget_2;     // karnataka_elections tally   
-    $data['data'][1] = $data_topstories;      
+    //$data['data'][0] = $homePageJsonWidget_2;     // karnataka_elections tally   
+    $data['data'][0] = $data_topstories;      
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
-    $data['data'][2] = $itg_rapid_home_movies_json;
-    $data['data'][3] = $karnataka_elections_json; // karnataka_elections
-    $data['data'][4] = $itg_rapid_home_technology_json;
-    $data['data'][5] = $data_news_india;
-    $data['data'][6] = $itg_rapid_home_sports_json;
-    $data['data'][7] = $data_news_lifestyle;
-    $data['data'][8] = $data_news_world;
-    $data['data'][9] = $data_magazine;
+    $data['data'][1] = $itg_rapid_home_movies_json;
+    $data['data'][2] = $karnataka_elections_json; // karnataka_elections
+    $data['data'][3] = $itg_rapid_home_technology_json;
+    $data['data'][4] = $data_news_india;
+    $data['data'][5] = $itg_rapid_home_sports_json;
+    $data['data'][6] = $data_news_lifestyle;
+    $data['data'][7] = $data_news_world;
+    $data['data'][8] = $data_magazine;
     $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
