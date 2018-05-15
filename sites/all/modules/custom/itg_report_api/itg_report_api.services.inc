@@ -813,9 +813,10 @@ function itg_report_api_detail() {
 
 function itg_rapid_api_insert_video() {
     $HTTP_RAW_POST_DATA;
-    echo "andy here";die();
+    //echo "andy here";
+    //die();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    p($params);
+    //p($params);
     $long_headline = $params['long_headline'];
     $short_headline = $params['short_headline'];
     $description = $params['description'];
@@ -836,7 +837,7 @@ function itg_rapid_api_insert_video() {
     $node->type = "videogallery";
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
-    $node->uid = 970;
+    $node->uid = 1522; //itgsiteadmin
     $node->promote = 0;
     $node->comment = 0;
     $node->status = 0;
@@ -852,12 +853,12 @@ function itg_rapid_api_insert_video() {
     }
 
     // $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
-    //$node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+    $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
     $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 
-    //$node = node_submit($node); // Prepare node for saving
-   // $node->created = $publish_date_timestamp;
-p($node);
+    $node = node_submit($node); // Prepare node for saving
+    $node->created = $publish_date_timestamp;
+//p($node);
     try {
         node_save((object) $node);
         $success = TRUE;
@@ -866,7 +867,6 @@ p($node);
         p($e);
         $success = FALSE;
     }
-
     $data = array();
     $data['status_code'] = "0";
     $data['status_message'] = "custom_msg";
