@@ -1349,6 +1349,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #block-itg-widget-election-constituency-select-box select{ width:100%; }
  #elec2013-inner{float: left} #elec2013-inner{ margin: 10px 0 0 45px;; }
  .elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
+#home-webcast-election iframe{ height:auto; }
+.placeholder-livetv{ height: auto; }
 }
 
-@media only screen and (max-width : 767px) {#elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
+@media only screen and (max-width : 767px) {.placeholder-livetv{ height: auto; } #elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
