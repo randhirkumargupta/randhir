@@ -2656,6 +2656,123 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // insert_video custom resource declaration.....
+        'insert_video' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves insert_video schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_insert_video',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'long_headline',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Long headline',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'short_headline',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Short headline',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'description',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Description',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'city',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'City',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'anchor',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Anchor',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'video_kicker',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Video kicker',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'section_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Section id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'cat_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Cat id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'extra_large_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Extra Large img: 647*363',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'large_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Large img: 613*460',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'medium_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Medium img: 483*271',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'small_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Small img: 170*96',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'extra_small_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Extra small img: 88*50',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'video_file_name',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Video file name',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -7230,4 +7347,101 @@ function itg_rapid_new_blog_content_details($blog_entity_id) {
   # execute the query
   return $results = $query->execute()->fetchAll();
  
+}
+/**
+ * Call back function for video insert API
+ * @pram $_POST in JSON formate
+ *
+ * @return array - The processed information array.
+ */
+
+function itg_rapid_api_insert_video() {
+    $HTTP_RAW_POST_DATA;    
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //p($params);
+    $long_headline = $params['long_headline'];
+    $short_headline = $params['short_headline'];
+    $description = $params['description'];
+    $city = (int) $params['city'];
+    $anchor = (int) $params['anchor'];
+    $video_kicker = $params['video_kicker'];
+    $section_id = (int) $params['section_id'];
+    $cat_id = (int) $params['cat_id'];
+    $extra_large_img = $params['extra_large_img'];
+    $large_img = $params['large_img'];
+    $medium_img = $params['medium_img'];
+    $small_img = $params['small_img'];
+    $extra_small_img = $params['extra_small_img'];
+    $video_file_name = $params['video_file_name'];
+    //prepare node object
+    $node = new stdClass();
+    $node->title = trim(html_entity_decode($long_headline));
+    $node->type = "videogallery";
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+    $node->uid = 1522; //itgsiteadmin
+    $node->promote = 0;
+    $node->comment = 0;
+    $node->status = 0;
+    $node->body[$node->language][0]['value'] = $description;
+    $node->body[$node->language][0]['format'] = 'full_html';
+    //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));                    
+    $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
+
+    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+    if (!empty($cat_id)) {
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+    }
+
+    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
+    $node->field_stroy_city[LANGUAGE_NONE][0]['value'] = trim($city);
+    $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+    $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
+
+    $node = node_submit($node); // Prepare node for saving
+    $node->created = $publish_date_timestamp;
+//p($node);
+    $fid_extra_large_image = itg_rap_upload_img($extra_large_img);
+    $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+    $fid_large_img = itg_rap_upload_img($large_img);
+    $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
+    $fid_medium_img = itg_rap_upload_img($medium_img);
+    $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
+    $fid_small_img = itg_rap_upload_img($small_img);
+    $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
+    $fid_extra_small_img = itg_rap_upload_img($extra_small_img);
+    $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+    try {
+        node_save((object) $node);
+        $success = TRUE;
+    } catch (Exception $e) {
+        // Do your error handling here.
+        //p($e);
+        $success = FALSE;
+    }
+    $data = array();
+    $data['status_code'] = "0";
+    $data['status_message'] = "custom_msg";
+    if ($success) {
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+    }
+
+    return $data;
+}
+/**
+ * itg_rap_upload_img
+ * @param type $url
+ * @return type
+ */
+
+function itg_rap_upload_img($url){
+    $fid = 0;
+    if($url){
+        $extra_large_image_url = file_get_contents($url);
+        $extra_large_image = base64_encode($extra_large_image_url);
+        $fid = $fid_extra_large_image = uplodaProfileImg_Rapid($extra_large_image);
+    }
+    return $fid;
 }
