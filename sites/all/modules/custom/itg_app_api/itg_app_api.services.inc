@@ -7362,7 +7362,7 @@ function itg_rapid_api_insert_video() {
     $long_headline = $params['long_headline'];
     $short_headline = $params['short_headline'];
     $description = $params['description'];
-    $city = (int) $params['city'];
+    $city =  $params['city'];
     $anchor = (int) $params['anchor'];
     $video_kicker = $params['video_kicker'];
     $section_id = (int) $params['section_id'];
