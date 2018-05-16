@@ -109,9 +109,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $new_url = drupal_get_path_alias($source_url->redirect);
       $url_re = 'https://www.indiatoday.in/'.$new_url;
     } else {
-      if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in' || $_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in') {
-        if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story')) ) {  // lite/story
+      if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in' || $_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
+        if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story' || $arg[2] == 'story')) ) {  // lite/story
           $storyarg = $arg[4];
+          if ($arg[2] == 'story') {
+            $storyarg = $arg[5];
+          }
           $storyarg_exp = explode('.html', $storyarg);
           $old_content_id = $storyarg_exp[0];
           $table = 'migrate_map_itgstorylist';
@@ -120,8 +123,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
           $ampstoryurl = '/amp/'.$redirecturl;
           $newurl = 'https://www.indiatoday.in'.$ampstoryurl;
           drupal_goto($newurl, array(), 301);
-        } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery')) ) {  // lite/gallery
+        } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery' || $arg[2] == 'gallery')) ) {  // lite/gallery
           $storyarg = $arg[4];
+          if ($arg[2] == 'gallery') {
+            $storyarg = $arg[5];
+          }
           $storyarg_exp = explode('.html', $storyarg);
           $old_content_id = $storyarg_exp[0];
           $table = 'migrate_map_itgphotogallery';
