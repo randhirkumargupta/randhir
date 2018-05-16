@@ -5950,8 +5950,18 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    #####code for redish key delete start#######
+    $key_patt = $_GET['redis_key'];
+    $responce = redis_key_pattern_delete($key_patt);
+    if ($responce == '0' || $responce == 0) {
+        drupal_set_message('Unable to delete redis Cache', 'error');
+    } else {
+        drupal_set_message('Redis ' . $responce . ' Key Has been deleted Successfully.');
+    }
+    #####code for redish key delete end #######
     $my_mac = get_mac_unix_os();
-    echo $my_mac; die();
+    echo $my_mac;
+    die();
     //$qry = 'ALTER TABLE `itg_app_middleware_live` CHANGE `url` `url` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;';
     //db_query($qry);
     //p(node_load(1152730)); // live blog

@@ -679,7 +679,7 @@ function itg_app_api_boot() {
     #######code only for rapid server start###########
     $my_mac = get_mac_unix_os();
     
-    if($_GET['q'] == "user" && $my_mac !="5c:b9:01:b9:80:24"){
+    if($_GET['q'] == "user"){
         die("login is disable on this server.");
     }
     #######code only for rapid server end###########
