@@ -1065,6 +1065,7 @@ function topstoriesList($source, $limit = 0) {
     $widget_name = "top_stories_widget";
     $range_max = 15;
     $result_fs = featuresWidgetData();
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     if ($source == 'home') {
         $result_fs_cont_ar = $result_fs;
         $result_fs_cont = count($result_fs_cont_ar);
@@ -1128,7 +1129,7 @@ function topstoriesList($source, $limit = 0) {
 
 
     //end
-    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
+    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $result = array_merge($result_fs, $result_ts);
