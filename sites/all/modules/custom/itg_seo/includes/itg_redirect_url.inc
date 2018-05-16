@@ -102,7 +102,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-  if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
+  if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in' || $_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
     $old_url = substr($_SERVER['REQUEST_URI'], 1);	  
     $source_url = redirect_load_by_source($old_url);    
     if (!empty($source_url)) {
