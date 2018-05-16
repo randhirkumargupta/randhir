@@ -5958,6 +5958,7 @@ function itg_rapid_api_testing($token) {
     } else {
         drupal_set_message('Redis ' . $responce . ' Key Has been deleted Successfully.');
     }
+    die();
     #####code for redish key delete end #######
     $my_mac = get_mac_unix_os();
     echo $my_mac;
