@@ -718,6 +718,10 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         }
         $newurl = FRONT_URL."/archives/".$type.'/'.$arg[1];
         drupal_goto($newurl);
+      } else if ($arg[0] == 'archive.jsp' || $arg[0] == 'archives.php') {
+        $date = date('d-m-Y');
+        $newurl = FRONT_URL."/archives/".'story'.'/'.$date;
+        drupal_goto($newurl);
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
