@@ -676,6 +676,13 @@ function callAPI($method, $url, $data = FALSE) {
  */
 function itg_app_api_boot() {
     // delection function required for inbond alter,
+    #######code only for rapid server start###########
+    $my_mac = get_mac_unix_os();
+    
+    if($_GET['q'] == "user" && $my_mac !="5c:b9:01:b9:80:24"){
+        die("login is disable on this server.");
+    }
+    #######code only for rapid server end###########
 }
 
 /**
@@ -2602,3 +2609,18 @@ function testtolive_homeapi() {
     drupal_set_message(t('copy dev to live home api done.'));
     drupal_goto('itg-app-arrange-home');
 }
+/**
+ * get_mac_unix_os
+ */
+function get_mac_unix_os(){
+    ob_start();
+    system('ifconfig -a');
+    $mycom = ob_get_contents(); // Capture the output into a variable
+    ob_clean(); // Clean (erase) the output buffer
+    $findme = "Physical";
+    //Find the position of Physical text 
+    $pmac = strpos($mycom, $findme); 
+    $mac = substr($mycom, ($pmac + 37), 18);
+
+    return $mac;
+    }
