@@ -5,7 +5,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
 <div id="section-header-event-1208866" class="india-today-mind-rocks-guwahati-2017">
     <div class="header_part cont_tw_iner">
-  <div class="w1000">
+  <div class="w1000 container">
     <div class="header_top ">
       <div class="left_part_logo"> <a href="index.jsp" title="Mind Rocks 2017 "> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/logo.png" alt="Mind Rocks 2017"> </a> </div>
       <div class="logo_it_tt ipadLogo"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></div>
