@@ -5954,9 +5954,9 @@ function itg_rapid_api_testing($token) {
     $key_patt = $_GET['redis_key'];
     $responce = redis_key_pattern_delete($key_patt);
     if ($responce == '0' || $responce == 0) {
-        drupal_set_message('Unable to delete redis Cache', 'error');
+        print('Unable to delete redis Cache');
     } else {
-        drupal_set_message('Redis ' . $responce . ' Key Has been deleted Successfully.');
+        print('Redis ' . $responce . ' Key Has been deleted Successfully.');
     }
     die();
     #####code for redish key delete end #######
