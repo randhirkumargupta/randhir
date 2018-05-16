@@ -717,6 +717,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
           $type = 'story';
         }
         $newurl = FRONT_URL."archives/".$type.'/'.$arg[1];
+        drupal_goto($newurl);
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
