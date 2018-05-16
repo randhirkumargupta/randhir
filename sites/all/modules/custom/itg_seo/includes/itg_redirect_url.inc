@@ -709,7 +709,15 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         if ($newurl) {
           drupal_goto($newurl, array(), 301);
         }
-      }  else if ($arg[0] == 'node' && empty($arg[1])) {
+      } else if ($arg[0] == 'calendar' && !empty($arg[1]) && ($arg[2] == 'video' || $arg[2] == 'story' || $arg[2] == 'gallery' || $arg[2] == 'photo' || $arg[2] == 'livetv.jsp')) {
+        $type = $arg[2];
+        if($arg[2] == 'gallery') {
+          $type = 'photo';
+        } else if ($arg[2] == 'livetv.jsp') {
+          $type = 'story';
+        }
+        $newurl = FRONT_URL."archives/".$type.'/'.$arg[1];
+      } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
   // Code for url redirection:
