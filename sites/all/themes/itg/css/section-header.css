@@ -49,8 +49,7 @@
     position: relative;
 }
 .india-today-mind-rocks-guwahati-2017 .w1000 {
-    width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto; position: relative;
 }
 .india-today-mind-rocks-guwahati-2017 .left_part_logo {
     width: 250px;
@@ -182,7 +181,6 @@
     position: inherit;
     right: inherit;
     top: inherit;
-    margin-right: -80px;
     margin-top: -55px;
 }
 .india-today-mind-rocks-guwahati-2017 .social_icons_ipad.destop_social ul li {
