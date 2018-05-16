@@ -48,7 +48,7 @@ function itg_mail_today_fia_data() {
     $query->orderBy('n.created', 'DESC');
     $query->range(0, 100);
     $query = $query->execute()->fetchCol();
-    $xml = itg_fia_xml_node_feed_photos($query);
+    $xml = itg_fia_xml_node_feed_photos($query,0);
     $xml_path = 'public://fbinsight/';
     $file_name = 'indiatoday-mailtodaynews.xml';
     $file_path = $xml_path . $file_name;
@@ -78,7 +78,7 @@ function itg_mail_photos_fia_data() {
     $query->orderBy('n.created', 'DESC');
     $query->range(0, 100);
     $query = $query->execute()->fetchCol();
-    $xml = itg_fia_xml_node_feed_photos($query);
+    $xml = itg_fia_xml_node_feed_photos($query,1);
     $xml_path = 'public://fbinsight/';
     $file_name = 'indiatoday-latestnews.xml';
     $file_path = $xml_path . $file_name;
@@ -402,7 +402,7 @@ function itg_fia_xml_node_feed($query) {
 /**
  * Generates and prints a custom XML feed.
  */
-function itg_fia_xml_node_feed_photos($query) {
+function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
     global $base_url;
     $xml_base = FRONT_URL . '/' . current_path();
     $fia_ga_data = variable_get('ga_code');
@@ -695,7 +695,7 @@ function itg_fia_xml_node_feed_photos($query) {
             $desc = str_replace('<br />', '', $desc);
             $desc = str_replace("'", "&#39;", $desc);
             $node_title = str_replace("'", "&#39;", $node->title);
-            $items .= itg_fia_xml_format_rss_item_photos('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid, $galleryimg);
+            $items .= itg_fia_xml_format_rss_item_photos('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid, $galleryimg,$primary_cat_status);
         }
     }
     global $base_url;
@@ -800,7 +800,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified, $nid, $galleryimg) {
+function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified, $nid, $galleryimg,$primary_cat_status) {
     $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
     $desc = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $desc);
     $title = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $title);
@@ -846,7 +846,7 @@ function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_inst
     $output .= "<details><summary>" . $kicker . "</summary></details>";
     // <!-- The author of your article -->
     $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe><script>var _comscore = _comscore || [ ];_comscore.push({ c1: '2', c2: '8549097', options: { url_append:'comscorekw=fbia' }});(function() {var s = document.createElement('script'), el = document.getElementsByTagName('script')[0];s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';el.parentNode.insertBefore(s, el); })();</script><noscript><img src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' /></noscript></iframe></figure><!-- End comScore Tag -->";
-    $relatednode = itg_fia_related_node($nid,1);//exculde mail today primary cat i
+    $relatednode = itg_fia_related_node($nid,$primary_cat_status);
     $output .= "<address>" . $name . "</address>";
 
     $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
