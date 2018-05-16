@@ -780,7 +780,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "<details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
   $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe><script>var _comscore = _comscore || [ ];_comscore.push({ c1: '2', c2: '8549097', options: { url_append:'comscorekw=fbia' }});(function() {var s = document.createElement('script'), el = document.getElementsByTagName('script')[0];s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';el.parentNode.insertBefore(s, el); })();</script><noscript><img src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' /></noscript></iframe></figure><!-- End comScore Tag -->";
-  $relatednode = itg_fia_related_node($nid);
+  $relatednode = itg_fia_related_node($nid,0);
   $output .= "<address>" . $name . "</address>";
   $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
   $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
@@ -846,7 +846,7 @@ function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_inst
     $output .= "<details><summary>" . $kicker . "</summary></details>";
     // <!-- The author of your article -->
     $comscorecode = "<!-- Begin comScore Tag --><figure class='op-tracker'><iframe><script>var _comscore = _comscore || [ ];_comscore.push({ c1: '2', c2: '8549097', options: { url_append:'comscorekw=fbia' }});(function() {var s = document.createElement('script'), el = document.getElementsByTagName('script')[0];s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';el.parentNode.insertBefore(s, el); })();</script><noscript><img src='https://sb.scorecardresearch.com/p?c1=2&c2=8549097&cv=2.0&cj=1&comscorekw=fbia' /></noscript></iframe></figure><!-- End comScore Tag -->";
-    $relatednode = itg_fia_related_node($nid);
+    $relatednode = itg_fia_related_node($nid,1);//exculde mail today primary cat i
     $output .= "<address>" . $name . "</address>";
 
     $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
@@ -922,7 +922,7 @@ function itg_fia_config_form($form, &$form_state) {
 /*
  * ITG FIA related node  $relatednode .="";
  */
-function itg_fia_related_node($nid = 0) {
+function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
     $relatednode = "";  
     //$nid = 1145469;
     $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';        
@@ -947,7 +947,12 @@ function itg_fia_related_node($nid = 0) {
             //related node
             foreach ($nid_list as $key => $value) {                
                 $flag_fia = 0;
-                $flag_fia = checkFIANodeBynid($value);
+                if($primary_cat_status == '1'){
+                  $flag_fia = checkFIANodeBynid($value,1);  //exclude mail today
+                }else{
+                  $flag_fia = checkFIANodeBynid($value,0); //only mail today
+                }
+                
                 if($flag_fia){
                     $firebase_url = get_node_firebase_weburl($value);
                     $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
@@ -961,7 +966,11 @@ function itg_fia_related_node($nid = 0) {
             $prime_cat = getNodePrimeCatByNid($nid);
             
             $prime_section = gettopparentstid($prime_cat->tid);
-            
+            if($primary_cat_status == '1' && $prime_section == '1206572'){ //exculde mail today
+              $prime_section = '';
+            }elseif($primary_cat_status == '0'){ //need only mail today related content
+              $prime_section = '1206572';
+            }
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
             $related_content_primary_cat = "";
@@ -1040,17 +1049,24 @@ function fia_get_order_node_by_nid($nid, $prime_section){
 /*
  * ITG FIA function for get node is FIA or not by nid
  */
-function checkFIANodeBynid($nid){
+function checkFIANodeBynid($nid,$primary_cat_status){
     $nid_f = 0;
-    
+    $mail_today_tid = '1206572';
     if($nid){
         $query = db_select('node', 'n');
         $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
+        $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
         $query->fields('n', array('nid'));
         $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
+        if($primary_cat_status == 1){//exculde mail today
+          $query->condition('pc.field_primary_category_value',$mail_today_tid,'!=');
+        }
+        if($primary_cat_status == 0){//Only mail today
+          $query->condition('pc.field_primary_category_value',$mail_today_tid,'=');
+        }
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
          
         $nid_f = $result[0]['nid'];
