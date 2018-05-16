@@ -5950,7 +5950,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    
+    $my_mac = get_mac_unix_os();
+    echo $my_mac; die();
     //$qry = 'ALTER TABLE `itg_app_middleware_live` CHANGE `url` `url` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;';
     //db_query($qry);
     //p(node_load(1152730)); // live blog
