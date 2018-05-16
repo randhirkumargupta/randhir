@@ -117,13 +117,9 @@ function itg_preprocess_node(&$variables) {
   }
   
   if ($variables['type'] == 'breaking_news') {
-    if ($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) {
+    if ((isset($variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value']) && $variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value'] == 1) || (isset($variables['field_multi_user_allows'][0]['value']) && $variables['field_multi_user_allows'][0]['value'] == 1)) {
        $variables['theme_hook_suggestions'][] = 'node__breaking_news_custom';
-    }
-    
-    // module_load_include('inc', 'itg_poll', 'includes/itg_poll_current_poll'); // node--breaking-news-custom.tpl.php
-    
-    // $variables['poll_form'] = itg_poll_get_all_current_poll();
+    }    
   }
   
 }
@@ -395,7 +391,99 @@ function itg_preprocess_html(&$vars) {
 			$vars['head_title'] = $node_event->metatags[LANGUAGE_NONE]['title']['value'] . ' | ' . variable_get('site_name');
 		}		
 	}
- } 
+  
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL && $arg[0] == 'elections' && ($arg[2] == 'constituency-map' || $arg[2] == 'constituency')) {
+    
+      $cat_id = $_GET['section'];
+      $get_election_nid = itg_get_election_nid($cat_id);
+      $entity_id = $get_election_nid['entity_id'];
+      $content = node_load($entity_id);
+      if ($arg[2] == 'constituency-map') {
+        $vars['head_title'] = trim($content->field_constituency_title[LANGUAGE_NONE][0]['value']);
+        $keyword = trim($content->field_constituency_keyword[LANGUAGE_NONE][0]['value']);
+        $description = trim($content->field_constituency_description[LANGUAGE_NONE][0]['value']);
+      } elseif ($arg[2] == 'constituency') {
+        $constituency_str = ($arg[3]) ? $arg[3] : '';        
+        $constituency = explode("-", $constituency_str);
+        unset($constituency[(count($constituency) - 1)]);
+        $constituency = implode(' ', $constituency);
+        $constituency = ucwords($constituency);        
+        $vars['head_title'] = str_replace('<Constituency Name>', ucwords($constituency), trim($content->field_constituency_result_title[LANGUAGE_NONE][0]['value']));
+        $keyword = str_replace('<Constituency Name>', ucwords($constituency), trim($content->field_constituency_result_keywor[LANGUAGE_NONE][0]['value']));
+        $description = str_replace('<Constituency Name>', ucwords($constituency), trim($content->field_constituency_result_descri[LANGUAGE_NONE][0]['value']));
+      }
+ 
+      $html_head = array(
+       'description' => array(
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'description',
+           'content' => $description,
+         ),
+       ),
+       'news_keywords' => array(
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'news_keywords',
+           'content' => $keyword,
+         ),
+       ),
+     );
+     foreach ($html_head as $key => $data) {
+       drupal_add_html_head($data, $key);
+     }
+    
+  }
+  
+ }
+  if($arg[0] == 'livetv') {
+   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $fb_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image',
+            'content' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+   $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'image_src',
+            'href' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  }
+  
+ 
+  
+  $term_data = menu_get_object('taxonomy_term', 2);
+  if (!empty($term_data->tid) && $term_data->tid == get_itg_variable('home_page_election_tid')){
+    $graph_json_url = get_graph_share_json_url($term_data->tid);
+    $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+    if (!empty($graph_json_url[0]->field_election_graph_share_json_value)) {
+      $liveTvsrc = file_get_contents($graph_json_url[0]->field_election_graph_share_json_value);
+      $liveTvsrc = json_decode($liveTvsrc);
+      if (!empty($liveTvsrc->imagePath)){
+        $liveTvsrc = $liveTvsrc->imagePath; 
+      }
+    }
+    $twitter_image_tag = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'image_src',
+            'href' => $liveTvsrc,
+          ),
+          '#weight' => -10,
+        );
+   drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  }
 }
 
 /**

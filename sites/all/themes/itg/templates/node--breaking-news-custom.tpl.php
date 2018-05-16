@@ -30,8 +30,8 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
 }
 $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
 $blog_created_date = date('Y-m-d', $node->created);
-$blog_created_time = date('h:i:s', $node->created);
-$coverage_start_date = $blog_created_date.'T'.$blog_created_time;
+$blog_created_time = date('H:i:s', $node->created);
+$coverage_start_date = $blog_created_date.'T'.$blog_created_time.'+05:30';
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
 $custom_content = get_custom_content_details($node->nid);
 if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
@@ -40,11 +40,14 @@ if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
 else {
   $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
 }
+pr($coverage_end);
 $coverage_end_date = date('Y-m-d', $coverage_end);
-$coverage_end_time = date('h:i:s', $coverage_end);
-$coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time;
-$created_date = date('Y-m-d H:i:s', $node->created);
-$modify_date = date('Y-m-d H:i:s', $node->changed);
+$coverage_end_time = date('H:i:s', $coverage_end);
+$coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time.'+05:30';
+$created_date = date('Y-m-d\TH:i:s', $node->created);
+$modify_date = date('Y-m-d\TH:i:s', $node->changed);
+$created_date = $created_date.'+05:30';
+$modify_date = $modify_date.'+05:30';
  // for call custom form value
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">

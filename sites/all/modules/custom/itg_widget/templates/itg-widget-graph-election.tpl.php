@@ -101,12 +101,19 @@
          ?>
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
+          <div class="elec2013-inner">
+              <div  class="shwimg-cont-inner">
+                    <span class="close-elec2013-inner">x</span>
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
+                  </div>
+             </div>
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
-              <div class="data-holder">
+            
+              <div class="data-holder">				 
                 <div class="graph-design">
+                <a href="<?php echo $graph_link; ?>" >
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>"   class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>"   class="tallyChartImageCursor"></span></a>
                      <script type="text/javascript">
                        document.addEventListener("DOMContentLoaded", function(event) { 
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
@@ -116,15 +123,44 @@
                          hmelection(state_name, '1',svg_path,chart_path, refresh_time);
                       });      
                       </script>
-                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
-                        
+                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name)) . " RESULTS LIVE";?>" ><?php echo strtoupper(str_replace("-"," ",$state_name)). " RESULTS LIVE";?></span> <span class="sharethis">
+                            <?php
+                            $liveTvshare = $graph_link;
+                            $liveTvfb_share_title = get_itg_variable('itg_graphshare_title');
+                            $liveTvshare_desc = get_itg_variable('itg_graphshare_desc');
+                            $liveTvsrc = '';
+                            if (!empty($row->field_election_graph_share_json_value)) {
+                              $liveTvsrc = file_get_contents($row->field_election_graph_share_json_value);
+                              $liveTvsrc = json_decode($liveTvsrc);
+                              if (!empty($liveTvsrc->imagePath)){
+                                $liveTvsrc = $liveTvsrc->imagePath; 
+                              }
+                            }                          
+                              print '<div class="social-share">
+                                     <ul>
+                                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 600, 315" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                                     </ul>
+                                 </div>';
+                            ?>
+                         </span>
                       </div>
                   </div>
-                    <span id = "fhs-<?php echo $state_name;?>"></span>
+                    <span id = "fhs-<?php echo $state_name;?>"></span> 
+                     
+                    <?php
+                    $block = block_load('itg_widget', 'election_constituency_select_box');
+                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                    print render($render_array);
+                    ?>
+                    <div id="elec2013-inner">Result 2013</div>
                 </div>
               </div>
             </a>
           </div>
+          <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
         </div>
       </div>
     </div>
@@ -135,3 +171,26 @@
   <span class="no-result-found"><?php print t("Content Not Found") ?></span>
 
 <?php endif; ?>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {    
+    jQuery('.close-elec2013-inner,#elec2013-inner').on('click',function(){
+      if (jQuery(window).width() > 767) {  
+      var stmap = jQuery('.statesvg-map').outerHeight(true);
+      stmap = stmap+20;
+      jQuery('.shwimg-cont-inner,.elec2013-inner img').css('height',stmap+'px');
+      jQuery('.elec2013-inner').toggleClass('shwimg-inner')
+      }else{
+        var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.leadparty-table').outerHeight(true);
+        jQuery('.shwimg-cont-inner').css('height',stmap+'px');
+        jQuery('.elec2013-inner').toggleClass('shwimg-inner')
+      }
+      
+    })
+    window.addEventListener("resize", function() {
+      if (jQuery(window).width() < 767){
+        var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.leadparty-table').outerHeight(true);
+        jQuery('.shwimg-cont-inner').css('height',stmap+'px');
+      }
+    }, false);
+  });
+</script>

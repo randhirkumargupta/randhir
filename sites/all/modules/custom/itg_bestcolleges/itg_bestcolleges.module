@@ -743,6 +743,8 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
         ->condition('brd.published', 1)
         ->condition('brd.rank', 0, '!=')
         ->orderBy('brd.rank', 'ASC');
+    // print strtr((string) $itg_query, $itg_query->arguments());die;
+    // die;
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -2322,8 +2324,8 @@ function itg_bestcollege_readyrecnor_directory_migrate($line, $session_nid, &$co
   $cutoff = $line[12];
   $stream = $line[13];
   $year = $line[14];
-  $published = $line[15];
-  $created_date = $line[16];
+  $published = !empty($line[15]) ? $line[15] : '0';
+  $created_date = !empty($line[16]) ? $line[16] : date('Y-m-d H:i:s');
 
   $bestcollege_status = variable_get('bestcollege_status', '');
 

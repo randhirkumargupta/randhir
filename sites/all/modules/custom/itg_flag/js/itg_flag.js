@@ -42,6 +42,7 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     } else {
         overrideImage = overrideImage;
     }
+
     overrideTitle = decodeURIComponent((overrideTitle + '').replace(/\+/g, '%20'));;
     overrideDescription = decodeURIComponent((overrideDescription + '').replace(/\+/g, '%20'));;
     FB.ui({
@@ -52,7 +53,7 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
                 'og:url': overrideLink,
                 'og:title': overrideTitle,
                 'og:description': overrideDescription,
-                'og:image': overrideImage
+                'og:image': overrideImage,
             }
         })
     },
@@ -75,7 +76,6 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
         // Action after response
     });
 }
-
 //facebook sharing end here
 
 // script for twitter sharing
@@ -437,5 +437,35 @@ if (is_mobiles) {
         jQuery('.follow-topics').hide();
         jQuery('.' + letter ).show().addClass('acti');
 
+    });
+}
+
+
+function graphfbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, width, height)
+{
+    if (overrideImage.length === 0) {
+        overrideImage = Drupal.settings.itg_flag.settings.default_image;
+    } else {
+        overrideImage = overrideImage;
+    }
+    overrideTitle = decodeURIComponent((overrideTitle + '').replace(/\+/g, '%20'));;
+    overrideDescription = decodeURIComponent((overrideDescription + '').replace(/\+/g, '%20'));;
+    FB.ui({
+        method: 'share_open_graph',
+        action_type: 'og.shares',
+        action_properties: JSON.stringify({
+            object: {
+                'og:url': overrideLink,
+                'og:title': overrideTitle,
+                'og:description': overrideDescription,
+                'og:image': overrideImage,
+                'og:image:width': width,
+                'og:image:height': height
+            }
+        })
+    },
+    function (response) {
+        console.log('Graph share');
+        // Action after response
     });
 }

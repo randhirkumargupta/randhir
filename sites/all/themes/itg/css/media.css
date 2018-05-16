@@ -330,7 +330,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   /*story page css end*/
   /*Election page css start*/
   .election-page h1 {
-    margin-top: 20px; }
+    margin-top: 0px; }
   .election-page .election-graph table {
     font-size: 12px; }
   .election-page .election-top-block .social-share {

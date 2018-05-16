@@ -1034,6 +1034,12 @@ function itg_widget_block_view($delta = '') {
             slideshow:false,
             //animationLoop:false
           });', array('type' => 'inline', 'scope' => 'footer'));
+          drupal_add_js(' jQuery(".flexslider#pastResultSlider").flexslider({
+            animation: "slide",
+            controlNav:false,
+            slideshow:false,
+            //animationLoop:false
+          });', array('type' => 'inline', 'scope' => 'footer'));
           $data = get_who_said_what_from_cat($cat_id, 4, 'who-said-what');
           $block['content'] = theme("election_who_said_what", array("data" => $data));
           break;
@@ -1113,10 +1119,12 @@ function itg_widget_block_view($delta = '') {
             }
           }else if ( $arg[0] == 'refresh_election_block'  && isset($arg[4])){
             $_GET['offset']  = $arg[4];
-          }     
-          $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
-          $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
-          drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
+          }    
+          if ($arg[2] == 'constituency' || $arg[2] == 'constituency-map') {
+            $refresh_time = (!empty(get_itg_variable('election_blocks_refreshtime')) ? get_itg_variable('election_blocks_refreshtime') : '900000');
+            $refresh_url = $base_url . '/refresh_election_block/itg_widget/election_most_popular/'.$cat_id.'/'.$offset;
+            drupal_add_js('jQuery(document).ready(function(){refresh_election_blocks("'.$refresh_url.'", "itg_widget", "election_most_popular", "'.$refresh_time.'");});', array('type' => 'inline', 'scope' => 'footer'));
+          }          
           $data = get_election_most_popular($cat_id, 12);
           $block['content'] = theme("election_most_popular", array("data" => $data));
           break;          
@@ -1149,7 +1157,7 @@ function itg_widget_block_view($delta = '') {
              $json_url = $json_url . $constituency.'.json';
              $constituency_data = file_get_contents($json_url);
              $refresh_time = (!empty(get_itg_variable('election_map_refreshtime')) ? get_itg_variable('election_map_refreshtime') : '900000');
-             drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url ), 'setting');
+             drupal_add_js(array('constituency' => $constituency, 'json_url' => $json_url , 'refresh_time' => $refresh_time), 'setting');
              drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_constituency.js', array('type' => 'file', 'scope' => 'footer'));
              $block['content'] = theme("election_constituency_page", array("data" => $constituency_data, 'constituency' => $constituency, 'json_url' => $json_url, 'refresh_time' => $refresh_time));
            }else{
@@ -1163,8 +1171,9 @@ function itg_widget_block_view($delta = '') {
           $args = arg();
           if (!empty($args[3])) {
            $constituency = explode("-", $args[3]);
-           $constituency = $constituency[0];           
-           $json_url = get_constituency_json_url($_GET['section']); 
+           unset($constituency[(count($constituency) - 1)]);
+           $constituency = implode('-', $constituency);       
+           $json_url = get_constituency_json_url($_GET['section']);            
            if (!empty($json_url)){
              $json_url = end(explode('|~|', $json_url));
              $json_url = $json_url . $constituency.'.json';
@@ -1230,6 +1239,7 @@ function itg_widget_get_graph_data() {
     $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
     $itg_query->leftJoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
     $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_graph_share_json', 'fegsj', 'n.nid = fegsj.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
     
@@ -1245,7 +1255,8 @@ function itg_widget_get_graph_data() {
     $itg_query->fields('cju', array('field_election_chart_json_url_value'));
     $itg_query->fields('sju', array('field_election_svg_json_url_value'));
     $itg_query->fields('gt', array('field_graph_type_value'));
-    $itg_query->fields('dfgc', array('field_graph_category_value'))
+    $itg_query->fields('dfgc', array('field_graph_category_value'));
+    $itg_query->fields('fegsj', array('field_election_graph_share_json_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('ast.field_section_tid', $cat_id, '=')
       ->condition('status', 1);
@@ -1269,7 +1280,7 @@ function itg_widget_get_graph_data_for_home() {
     $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
-    
+    $itg_query->leftJoin('field_data_field_election_graph_share_json', 'fegsj', 'n.nid = fegsj.entity_id');
     $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
     if($is_category){
 	    $itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
@@ -1283,7 +1294,8 @@ function itg_widget_get_graph_data_for_home() {
     $itg_query->fields('cju', array('field_election_chart_json_url_value'));
     $itg_query->fields('sju', array('field_election_svg_json_url_value'));
     $itg_query->fields('gt', array('field_graph_type_value'));
-    $itg_query->fields('dfgc', array('field_graph_category_value'))
+    $itg_query->fields('dfgc', array('field_graph_category_value'));
+    $itg_query->fields('fegsj', array('field_election_graph_share_json_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('status', 1);
     // ->range(0, 5);
@@ -2029,6 +2041,14 @@ function itg_election_constituency(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  $constituency_str = ($arg[3]) ? $arg[3] : '';
+  $constituency = explode("-", $constituency_str);
+  unset($constituency[(count($constituency) - 1)]);
+  $constituency = implode(' ', $constituency);
+  //$head_title = ucwords($constituency) . ' Assembly Election 2018';
+  $head_title = ucwords($constituency);
+  drupal_set_title($head_title);
+  $data = itg_get_election_header_title($tax_data[2]);
   return theme('itg_election_constituency', array('data' => $data));
 }
 
@@ -2048,5 +2068,35 @@ function itg_election_constituency_map(){
   drupal_add_library('flexslider', 'flexslider');
   $category = $tax_data[2];
   $_GET['section'] = $category;
+  $tname = get_term_name_from_tid($tax_data[2])->name;
+  drupal_set_title($tname . ': Constituency Map');
   return theme('itg_election_constituency_map', array('data' => $data));
+}
+
+
+/**
+ * Function for itg_get_election_nid().
+ */
+function itg_get_election_nid($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'm');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('m', array('entity_id'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
+}
+
+/**
+ * Function for itg_get_election_header_title().
+ */
+function itg_get_election_header_title($val){
+    if ($val) {
+      $query = db_select('field_data_field_graph_category', 'm');
+      $query->leftJoin('field_data_field_constituency_header_text', 'h', 'm.entity_id=h.entity_id');
+      $query->condition('m.field_graph_category_value', $val, '=');
+      $query->fields('h', array('field_constituency_header_text_value'));
+      $data_result = $query->execute()->fetchAssoc();
+      return $data_result;
+    }        
 }

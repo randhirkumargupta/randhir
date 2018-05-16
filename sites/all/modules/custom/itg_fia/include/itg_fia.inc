@@ -35,19 +35,20 @@ function itg_fia_data() {
 function itg_mail_today_fia_data() {
     $start_time = strtotime("-300 day");
     $mail_today_tid = '1206572';
+    $type = array(story,photogallery);
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
     $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
     $query->fields('n', array('nid', 'created'));
     $query->condition('n.created', $start_time, '>=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', 'story', '=');
+    $query->condition('n.type', $type, IN);
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
     $query->condition('pc.field_primary_category_value',$mail_today_tid,'=');
     $query->orderBy('n.created', 'DESC');
     $query->range(0, 100);
     $query = $query->execute()->fetchCol();
-    $xml = itg_fia_xml_node_feed($query);
+    $xml = itg_fia_xml_node_feed_photos($query);
     $xml_path = 'public://fbinsight/';
     $file_name = 'indiatoday-mailtodaynews.xml';
     $file_path = $xml_path . $file_name;
@@ -77,7 +78,7 @@ function itg_mail_photos_fia_data() {
     $query = $query->execute()->fetchCol();
     $xml = itg_fia_xml_node_feed_photos($query);
     $xml_path = 'public://fbinsight/';
-    $file_name = 'indiatoday-photogallery.xml';
+    $file_name = 'indiatoday-latestnews.xml';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);

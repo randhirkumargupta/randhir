@@ -3682,3 +3682,45 @@ function get_miscellaneous_content($cat_id, $limit, $type = 'who-said-what'){
   $result = $query->execute()->fetchAll();
   return $result;  
 }
+
+function get_html_widget_name_by_layout($section_name, $template_name, $block_name = 'itg-block-11', $widget_name = NULL){
+  if(!empty($widget_name)){
+    $label_name = $widget_name;
+  }else{
+    $label_name = '';
+  }  
+  $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+  $itg_query->fields('layout_manager', array('block_title'));
+  $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+  $itg_query->condition('layout_tpl.section_name', $section_name);
+  $itg_query->condition('layout_tpl.template_name', $template_name);
+  $itg_query->condition('layout_manager.block_name', $block_name);
+  $result = $itg_query->execute()->fetchAll();
+  if(!empty($result[0]->block_title)){
+    $label_name = $result[0]->block_title;
+  }
+  return $label_name;
+}
+
+function get_graph_share_json_url($cat_id){
+ $itg_query = db_select('node', 'n');
+  $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
+  $itg_query->leftJoin('field_data_field_election_graph_share_json', 'fegsj', 'n.nid = fegsj.entity_id');
+  $itg_query->condition('dfgc.field_graph_category_value', $cat_id, '=');
+  $itg_query->fields('n', array('nid'));
+  $itg_query->fields('fegsj', array('field_election_graph_share_json_value'))
+    ->condition('n.type', 'election_graph_xml')
+    ->condition('n.status', 1);
+  $itg_result = $itg_query->execute()->fetchAll();
+  return $itg_result;
+}
+
+function get_html_widget_data_by_nids($nids){  
+  if(!empty($nids)){
+    $query = "SELECT n.title, db.body_value FROM field_data_body db LEFT JOIN node n on (db.entity_id = n.nid) WHERE n.type = 'custom_html_widgets' AND n.status = 1 AND db.entity_id IN ($nids) ORDER BY FIELD (db.entity_id, $nids)";
+    $result = db_query($query);
+    $results = $result->fetchAll();
+    return $results;
+  }
+  return array();
+}

@@ -15,6 +15,20 @@ if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
   $share_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 }
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+
+if (!empty($node->field_multi_user_allows[LANGUAGE_NONE][0]['value']) || $_GET['debug_live_blog'] == 1) {
+      $params = array(
+        'body' => "<pre>". print_r($node, TRUE) ."</pre>",
+        'subject' => 'Debug new live blog content',
+      );
+
+      $to = 'arunmishra.coder@gmail.com, arun.kumarmishra@aajtak.com';
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE); 
+        
+      }
+        
+}
 ?>
  
 <?php
@@ -29,8 +43,8 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
 }
 $embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
 $blog_created_date = date('Y-m-d', $node->created);
-$blog_created_time = date('h:i:s', $node->created);
-$coverage_start_date = $blog_created_date.'T'.$blog_created_time;
+$blog_created_time = date('H:i:s', $node->created);
+$coverage_start_date = $blog_created_date.'T'.$blog_created_time.'+05:30';
 $short_description_source = strip_tags($node->field_common_short_description[LANGUAGE_NONE][0]['value']);
 
 if(empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
@@ -48,15 +62,15 @@ $coverage_end_date = $last_cov_tm[0];
 $coverage_end_time = $last_cov_tm[1];
 $coverage_end_final_date = '';
 if(!empty($last_cov_tm[0])){
- $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time; 
+ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time.'+05:30'; 
 }
 } else {
 $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
 $coverage_end_date = date('Y-m-d', $coverage_end);
-$coverage_end_time = date('h:i:s', $coverage_end);
+$coverage_end_time = date('H:i:s', $coverage_end);
 $coverage_end_final_date = '';
 if(!empty($coverage_end)){
- $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time; 
+ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time.'+05:30'; 
 }
 }
 ?>
@@ -80,8 +94,10 @@ if(!empty($coverage_end)){
         $title = $entity[$field_collection_embed_id]->field_breaking_tile['und'][0]['value'];
         //$embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
         $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));
-        $created_date = date('Y-m-d H:i:s', $node->created);
-        $modify_date = date('Y-m-d H:i:s', $node->changed);
+        $created_date = date('Y-m-d\TH:i:s', $node->created);
+        $modify_date = date('Y-m-d\TH:i:s', $node->changed);
+        $created_date = $created_date.'+05:30';
+        $modify_date = $modify_date.'+05:30';
       
 ?>
                     <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
@@ -108,8 +124,11 @@ if(!empty($coverage_end)){
 
 <?php } } ?> 
  <?php if ($node->field_type['und']['0']['value'] == 'Cricket Live Blog'){
-        $created_date = date('Y-m-d H:i:s', $node->created);
-        $modify_date = date('Y-m-d H:i:s', $node->changed); ?>
+        $created_date = date('Y-m-d\TH:i:s', $node->created);
+        $modify_date = date('Y-m-d\TH:i:s', $node->changed); 
+        $created_date = $created_date.'+05:30';
+		$modify_date = $modify_date.'+05:30';
+        ?>
         <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
           <p itemprop="headline" content="<?php print $node->title; ?>"></p>
           <h2 itemprop="articleBody" style="display:none"></h2>

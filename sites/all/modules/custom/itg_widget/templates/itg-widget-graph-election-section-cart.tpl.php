@@ -4,10 +4,12 @@
   <?php
   global $base_url;
   $classrow = "col-md-8 col-sm-12 fullchart-table";
+  $topstoryclass = "fullchart-top-story";
   $itg_election_home_webcast_livetv = get_itg_variable('itg_election_home_webcast_livetv');
   $itg_election_home_content_id = get_itg_variable('itg_election_home_content_id');
   if (!empty($itg_election_home_webcast_livetv)) {
-    $classrow = "col-lg-4 col-md-4 col-sm-12";
+    $classrow = "col-lg-4 col-md-4 col-sm-4 col-xs-12";
+    $topstoryclass = "";
   }  
   if ($theme != 'seven') {
     if ($theme == FRONT_THEME_NAME) {
@@ -127,11 +129,15 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $graph_link; ?>" >
+            <div class="elec2013">
+                    <span class="close-elec2013">x</span>
+                    <img src="http://akm-img-a-in.tosshub.com/indiatoday/images/misc/karnataka_results_2013.png">
+             </div>
+              <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">
-                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span>
+                     <span id = "hmelect-<?php echo $state_name;?>" class="tallyChartImageCursor"></span></a>
                      <script type="text/javascript">
                        document.addEventListener("DOMContentLoaded", function(event) { 
                         var chart_path = "<?php echo $row->field_election_chart_json_url_value; ?>";
@@ -141,16 +147,44 @@
                          hmelection(state_name, '1',svg_path,chart_path, refresh_time);
                       });                   
                       </script>
-                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name));?>" ><?php echo strtoupper(str_replace("-"," ",$state_name));?></span> <span class="sharethis">
-                         
+                      <div class="statename" ><span class="stateNameText"  rel="<?php echo strtoupper(str_replace("-"," ",$state_name)).' RESULTS LIVE';?>" ><?php echo strtoupper(str_replace("-"," ",$state_name)) .' RESULTS LIVE' ;?></span> <span class="sharethis">
+                         <?php
+                            $liveTvshare = $graph_link;
+                            $liveTvfb_share_title = get_itg_variable('itg_graphshare_title');
+                            $liveTvshare_desc = get_itg_variable('itg_graphshare_desc');
+                            $liveTvsrc = '';
+                            if (!empty($row->field_election_graph_share_json_value)) {
+                              $liveTvsrc = file_get_contents($row->field_election_graph_share_json_value);
+                              $liveTvsrc = json_decode($liveTvsrc);
+                              if (!empty($liveTvsrc->imagePath)){
+                                $liveTvsrc = $liveTvsrc->imagePath; 
+                              }
+                            }                          
+                              print '<div class="social-share">
+                                     <ul>
+                                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="graphfbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "', 600, 315" . ')"><i class="fa fa-facebook"></i></a></li>
+                                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                                     </ul>
+                                 </div>';
+                            ?>
+                          </span>    
                       </div>
                   </div>
                     <span id = "fhs-<?php echo $state_name;?>"></span>
+                    
+                    <?php
+                    $block = block_load('itg_widget', 'election_constituency_select_box');
+                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                    print render($render_array);
+                    ?>
+                    <div id="elec2013">Result 2013</div>
                 </div>
-              </div>
-            </a>
+              </div>            
           </div>
         </div>
+        <div style="font-size: 10px;color: #666;margin-top: 5px;line-height: 13px;">*Counting is being done for only 222 seats.</div>
       </div>
     </div>
   <?php } ?>
@@ -158,15 +192,20 @@
 <!-- End High Cart graph -->
 <!-- Live Tv and Webcast tv -->
 <?php if(!empty($itg_election_home_webcast_livetv)){?>
-<div class="col-lg-4 col-md-4 col-sm-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50" id="livetv-section">
+<h3>Live Tv</h3>
     <div class="itg-widget">
+      <div class="placeholder-livetv">
+       <div class="livetv-fixed">
+         <span class="closelive" id="closetv">X</span>
       <?php if($itg_election_home_webcast_livetv == 'livetv') {?>
       <div class="data-holder" id="home-livetv-election">
         <?php
+        
         $block = block_load('itg_widget', 'live_tv');
         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
         print render($render_array);
-        ?>
+        ?>  
       </div>
       <?php } elseif ($itg_election_home_webcast_livetv == 'webcast') { ?>
         <div class="data-holder" id="home-webcast-election">
@@ -175,11 +214,70 @@
           ?>
         </div>
       <?php }?>
+      </div>
+      </div>
+      <div class="homelive-share">
+        <span class="sharethis">SHARE </span>
+            <?php
+            $liveTvshare = FRONT_URL . '/livetv';
+            $liveTvfb_share_title = get_itg_variable('itg_livetvshare_title');
+            $liveTvshare_desc = get_itg_variable('itg_livetvshare_desc');
+            $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/indiatoday-logo.png');
+              print '<div class="social-share">
+                     <ul>
+                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
+                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $liveTvshare . "'" . ', ' . "'" . $liveTvfb_share_title . "'" . ', ' . "'" . $liveTvshare_desc . "'" . ', ' . "'" . $liveTvsrc . "'" . ')"><i class="fa fa-facebook"></i></a></li>
+                         <li><a  title="share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(' . "'" . urlencode($liveTvfb_share_title) . "'" . ', ' . "'" . urlencode($liveTvshare) . "'" . ')"><i class="fa fa-twitter"></i></a></li>
+                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $liveTvshare . "'" . ')" class="google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li>
+                     </ul>
+                 </div>';
+            ?>
+       </div> 
     </div>
 </div>
+<?php drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer')); ?>
+<script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+          jQuery(window).scroll(function(){
+		  var cookies_id = jQuery.cookie("COOKIES_IT_liveTv");
+		  if(cookies_id === undefined || cookies_id != 'smalltv'){
+		  if (jQuery(window).width() > 1024) {
+			jQuery('#livetv-section').each(function(){
+			  var zt = jQuery('#livetv-section').offset().top + 350;
+			  var tr = jQuery(window).scrollTop();
+			  var scrval = tr > zt ? true : false;
+			if(scrval){
+			  jQuery('.livetv-fixed').addClass('active');      
+			}
+			else{
+			  jQuery('.livetv-fixed').removeClass('active');
+			}
+		  });
+		}
+		}
+		});
+          jQuery('#closetv').click(function(){
+              var date = new Date();
+              var minutes = 30;
+              date.setTime(date.getTime() + (minutes * 60 * 1000));
+              jQuery.cookie("COOKIES_IT_liveTv", 'smalltv', { expires: date });
+              jQuery('.livetv-fixed').removeClass('active');
+          })
+          function isScrolledIntoView(elem){
+              var elem = jQuery(elem);
+              var window = jQuery(window);
+              var docViewTop = window.scrollTop();
+              var docViewBottom = docViewTop + window.height();
+              var elemTop = elem.offset().top;
+              var elemBottom = elemTop + elem.height();
+              return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+          }
+        });   
+          </script> 
+
 <?php }?>
 <!-- Live Tv and Webcast tv End -->
-<div class="col-md-4 col-sm-4 col-sm-12 mt-50">
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-50 <?php echo $topstoryclass;?>">
     <div class="itg-widget">
         <div class="data-holder" id="home-top-stories-election">
           <h3><?php echo get_itg_variable('itg_election_top_stories_label');?></h3>
@@ -203,4 +301,17 @@
     <?php }; ?>
   <?php }; ?>
 <?php endif; ?>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {    
+    jQuery('.close-elec2013,#elec2013').on('click',function(){
+      var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+      jQuery('.elec2013').toggleClass('shwimg');
+    })
+    window.addEventListener("resize", function() {
+    var stmap = jQuery('.statesvg-map').outerHeight(true) + jQuery('.partyname-seats').outerHeight(true);
+    jQuery('.elec2013 img').css('height',stmap+'px');
+    }, false);
+  });
+  </script>
 

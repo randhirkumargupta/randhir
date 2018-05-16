@@ -144,6 +144,66 @@ function itg_election_configure() {
     '#required' => FALSE,
     '#maxlength' => 60,
   );
+  $form['itg_election_ttl_constituency'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Constituency result AKAMAI cache TTL'),
+    '#default_value' => get_itg_variable('itg_election_ttl_constituency'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+  );
+  $form['itg_election_mini_graph'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Mini Graph'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_election_mini_graph'),
+  );
+  $form['livetv_share'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('LiveTV share'),
+    '#collapsible' => TRUE, // Added
+    '#collapsed' => FALSE,  // Added
+  );
+  $form['livetv_share']['itg_livetvshare_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Live TV Share Title'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+    '#default_value' => get_itg_variable('itg_livetvshare_title'),
+  );
+  $form['livetv_share']['itg_livetvshare_desc'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Live TV Share Description'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_livetvshare_desc'),
+  );
+  $form['graph_share'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Graph share'),
+    '#collapsible' => TRUE, // Added
+    '#collapsed' => FALSE,  // Added
+  );
+  $form['graph_share']['itg_graphshare_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election graph Share Title'),
+    '#size' => 60,
+    '#required' => FALSE,
+    '#maxlength' => 60,
+    '#default_value' => get_itg_variable('itg_graphshare_title'),
+  );
+  $form['graph_share']['itg_graphshare_desc'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Election graph Share Description'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('itg_graphshare_desc'),
+  );
+  $form['election_staticpages_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Election Static pages nids'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('election_staticpages_nid'),
+  );
   $form['submit_election'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

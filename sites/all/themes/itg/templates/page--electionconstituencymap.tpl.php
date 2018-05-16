@@ -19,7 +19,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
     <?php endif; ?>
     <div class="row electiontop-header">
         <div class="col-md-8 col-sm-8 col-sx-8 custom-page-title"> <h1><?php print drupal_get_title();?></h1> </div>
-        <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="<?php print FRONT_URL .'/'. drupal_get_path_alias('taxonomy/term/' . $_GET['section']);?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <?php echo get_itg_variable('itg_election_top_stories_label', 'Back');?></a></span> </div>
+        <div class="col-md-4 col-sm-4 col-sx-4 election-back-button"><span class="back-button"><a href="<?php print FRONT_URL .'/'. drupal_get_path_alias('taxonomy/term/' . $_GET['section']);?>"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> <?php echo get_itg_variable('itg_election_home_bottom_label', 'Back');?></a></span> </div>
     </div>
     <div class="row itg-map">
         <div class="col-md-12 mt-50">
@@ -46,7 +46,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                             <?php $seathtml = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-14', 'custom_html_widgets'); ?>
                             <div id="auto-new-block" class="widget-wrapper">
                                 <?php if (!empty($seathtml)) { ?>
-                                  <h2 class="heading">Seats</h2>  
+                                  <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-14', 'Seats'); ?></h2>  
                                 <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
@@ -65,7 +65,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                             <?php $condhtml = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-9', 'custom_html_widgets'); ?>
                             <div id="auto-new-block" class="widget-wrapper">
                                 <?php if (!empty($condhtml)) { ?>
-                                <h2 class="heading">Key Candidate</h2>  
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-9', 'KEY CANDIDATE'); ?></h2>  
                                 <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
@@ -80,12 +80,13 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                     <div class="itg-widget">
                         <div class="droppable itg-layout-605">
                             <div id="auto-new-block" class="widget-wrapper">
-                                <h2 class="heading">Know Your party</h2>  
+								<?php $condhtml_1 = get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'custom_html_widgets'); ?>
+                                <?php if (!empty($condhtml_1)) { ?>
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-13', 'BELLWETHER SEATS'); ?></h2>  
+                                <?php } ?>
                                 <div class="data-holder" id="itg-block-1">
                                     <?php
-                                    $block = block_load('itg_widget', 'election_know_your_party');
-                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                    print render($render_array);
+                                    print $condhtml_1;
                                     ?>
                                 </div>
                             </div>                     
@@ -93,30 +94,13 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                     </div>
                 </div>
             </div>
+                                       
             <div class="row itg-most-popular">
                 <div class="col-md-12 mt-50">
                     <div class="itg-widget">
                         <div class="droppable">
                             <div class="widget-wrapper">
-                                <h2 class="heading">Key Issues</h2>                                            
-                                <div class="data-holder" id="itg-block-7">
-                                    <?php
-                                    $block = block_load('itg_widget', 'election_key_issue');
-                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                    print render($render_array);
-                                    ?>
-                                </div>
-                            </div>             
-                        </div>
-                    </div>
-                </div>
-            </div>                           
-            <div class="row itg-most-popular">
-                <div class="col-md-12 mt-50">
-                    <div class="itg-widget">
-                        <div class="droppable">
-                            <div class="widget-wrapper">
-                                <h2 class="heading">Most Popular</h2>                                            
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-7', 'Latest Karnataka News'); ?></h2>                                            
                                 <div class="data-holder" id="itg-block-7">
                                     <?php
                                     $block = block_load('itg_widget', 'election_most_popular');
@@ -128,7 +112,25 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                         </div>
                     </div>
                 </div>
-            </div>                           
+            </div>
+            <div class="row itg-most-popular">
+                <div class="col-md-12 mt-50">
+                    <div class="itg-widget">
+                        <div class="droppable">
+                            <div class="widget-wrapper">
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-15', 'KEY ISSUES'); ?></h2>                                            
+                                <div class="data-holder" id="itg-block-7">
+                                    <?php
+                                    $block = block_load('itg_widget', 'election_key_issue');
+                                    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                    print render($render_array);
+                                    ?>
+                                </div>
+                            </div>             
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>    
         <div class="col-md-4 col-sm-12 col-sx-12 right-side itg-map">
             <div class="row">
@@ -147,7 +149,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                 <div class="itg-484 col-md-12 col-sm-6 mt-50">
                     <div class="itg-widget">
                         <div class="droppable">                                        
-                            <h2 class="heading">Videos</h2>                                                 
+                            <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-12', 'Videos'); ?></h2>                                                 
                             <div class="data-holder" id="itg-block-12">
                                 <?php echo views_embed_view('tech', 'election_videos'); ?>
                             </div>
@@ -158,7 +160,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                     <div class="itg-widget">
                         <div class="droppable <?php print $gray_bg_layout; ?>">
                             <div class="widget-wrapper">
-                                <h2 class="heading">Who said What</h2>
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-10'); ?></h2>
                                 <div class="data-holder" id="itg-block-10" data-widget-style="election-so-sorry">
                                     <?php
                                     $block = block_load('itg_widget', 'election_who_said_what');
@@ -174,7 +176,7 @@ drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_refres
                     <div class="itg-widget">
                         <div class="droppable">
                             <div class="widget-wrapper">
-                                <h2 class="heading">Know your election</h2>                                                 
+                                <h2 class="heading"><?php print get_html_widget_name_by_layout($_GET['section'], 'page--special_election', 'itg-block-11', ''); ?></h2>                                                 
                                 <div class="data-holder" id="itg-block-11">
                                     <?php
                                     print get_html_widget_data_by_layout($_GET['section'], 'page--special_election', 'itg-block-11', 'custom_html_widgets');
