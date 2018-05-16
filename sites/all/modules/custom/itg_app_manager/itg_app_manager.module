@@ -11,7 +11,7 @@ module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_middleware');
  * Implements hook_init(). 
  */
 function itg_app_manager_init() {
-    //module_load_include('inc', 'itg_app_manager', 'inc/comman');
+    module_load_include('inc', 'itg_app_manager', 'inc/comman');
 }
 
 /**
