@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file 
+ * @file
  * INC file for APP API Schemes Services.
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
@@ -2589,6 +2589,46 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        //Social share in report API   
+        'social_share_save_it' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Social Share Rest API save data',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'social_share_save_it_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'website_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'First Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'content_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Last Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'content_type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User email or mobile number',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         // manual_blog custom resource declaration.....
         'manual_blog' => array(
             'operations' => array(
@@ -2611,6 +2651,123 @@ function itg_app_api_resource() {
                             'source' => array('path' => 0),
                             'optional' => TRUE,
                             'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // insert_video custom resource declaration.....
+        'insert_video' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves insert_video schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_insert_video',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'long_headline',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Long headline',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'short_headline',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Short headline',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'description',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Description',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'city',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'City',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'anchor',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Anchor',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'video_kicker',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Video kicker',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'section_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Section id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'cat_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Cat id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'extra_large_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Extra Large img: 647*363',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'large_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Large img: 613*460',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'medium_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Medium img: 483*271',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'small_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Small img: 170*96',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'extra_small_img',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Extra small img: 88*50',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'video_file_name',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Video file name',
+                            'type' => 'array',
                         ),
                     ),
                 ),
@@ -3821,7 +3978,7 @@ function itg_rapid_api_login_request($token) {
     $result = callAPI("GET", $url, $data);
     $result_obj = json_decode($result);
     if (!$result_obj->uid) {
-        $account_err['status_code'] = "0";
+        $account_err['status_code'] = "2";
         $account_err['status_message'] = "Wrong username or password.";
         return $account_err;
     }
@@ -3954,8 +4111,8 @@ function itg_rapid_api_edit_user_image($token) {
 
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+    if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
     } else {
@@ -4036,8 +4193,8 @@ function itg_rapid_api_log_out($token) {
 
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
-    //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+    if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
@@ -4149,21 +4306,7 @@ function itg_rapid_api_change_password($token) {
         $params_logout['user_id'] = $params['user_id'];
         $params_logout['auth_token'] = $params['auth_token'];
         $params_logout['device_id'] = $params['device_id'];
-        $params_logout['device_type'] = $params['device_type'];
-        /* $url_logout = PARENT_SSO . "/appapisso/log_out";
-        $result = callAPI($method, $url_logout, $params_logout);
-        $user_id = $params['user_id'];
-        $user = user_load_by_name($user_id);
-        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
-        $original_session_state = drupal_save_session();
-        drupal_save_session(TRUE);
-        // Destroy the current session.
-        module_invoke_all('user_logout', $user);
-        session_destroy();
-        // Load the anonymous user.
-        //$user = drupal_anonymous_user();
-        //drupal_save_session($original_session_state);
-        // call custom function to clean token in custom table*/
+        $params_logout['device_type'] = $params['device_type'];        
         cleanToken_Rapid($params_logout);
         ################logout sart##############
         ###############relogin start ##########
@@ -4431,7 +4574,7 @@ function itg_rapid_api_get_login_user_detail($token) {
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
     if (!drupal_valid_token($token, 'services')) {
-       // if (!$token_val_flag) {
+        //if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
     } else {
@@ -4514,7 +4657,7 @@ function itg_rapid_api_edit_profile($token) {
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
     if (!drupal_valid_token($token, 'services')) {
-       // if (!$token_val_flag) {
+        //if (!$token_val_flag) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
@@ -4557,9 +4700,7 @@ function itg_rapid_api_get_preference($token) {
         $account_err['status_message'] = "Invalid User_ID";
         return $account_err;
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
     if (!drupal_valid_token($authtoken_id, 'services')) {
-       // if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
         return $data;
@@ -4632,9 +4773,7 @@ function itg_rapid_api_update_preference($token) {
         $account_err['status_message'] = "Invalid User_ID";
         return $account_err;
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
         return $data;
@@ -4779,7 +4918,7 @@ function itg_rapid_api_authtoken_verification($token) {
         $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
         if (!drupal_valid_token($token, 'services')) {
-           // if (!$token_val_flag) {
+            //if (!$token_val_flag) {
 
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
@@ -4829,9 +4968,8 @@ function itg_rapid_api_author_list($token) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -4885,9 +5023,8 @@ function itg_rapid_api_anchor_list($token) {
             $message_array['status_message'] = "User does not exist";
             $message_array['data'] = array();
         }
-        $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
         if (!drupal_valid_token($authtoken_id, 'services')) {
-        //if (!$token_val_flag) {
             $args = '0';
             $message_array['status_code'] = "0";
             $message_array['status_message'] = "invalid token";
@@ -4943,9 +5080,8 @@ function itg_rapid_api_get_the_user_follow_status($token) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-$token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-//if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5229,9 +5365,8 @@ function bookmark_get_responce($token, $user_id, $authtoken_id) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array('news' => array());
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5282,9 +5417,8 @@ function bookmark_set_responce($token, $user_id, $node_id) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array('news' => array());
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5334,9 +5468,8 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array('bookmark_content' => array());
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5393,9 +5526,8 @@ function follow_anchor_responce($token, $user_id, $node_id) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-        //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5467,9 +5599,8 @@ function follow_author_responce($token, $user_id, $node_id) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5534,9 +5665,8 @@ function itg_rapid_api_anchor_follow_list($token) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5589,9 +5719,8 @@ function itg_rapid_api_author_follow_list($token) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5730,9 +5859,8 @@ function itg_rapid_api_follow_topic($token) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-    //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5792,9 +5920,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
         $message_array['status_message'] = "User does not exist";
         $message_array['data'] = array();
     }
-   $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
+
     if (!drupal_valid_token($authtoken_id, 'services')) {
-   //if (!$token_val_flag) {
         $args = '0';
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
@@ -5823,9 +5950,11 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    //variable_set('show_web_exclusive', 1);
     
-    p(node_load(1144093));
+    //$qry = 'ALTER TABLE `itg_app_middleware_live` CHANGE `url` `url` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;';
+    //db_query($qry);
+    p(node_load(1152730)); // live blog
+    p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
     print_r($searchpage1);
@@ -6990,6 +7119,87 @@ function generateNewsCategoryListsearch_rest($nid_str) {
     return $data;
 }
 /**
+ * Call back function for Social Share API
+ * @pram $_POST in JSON formate
+ *
+ * @return array - The processed information array.
+ */
+function social_share_save_it_detail($website_id, $content_id, $content_type, $args) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $website_id = $params['website_id'];
+    $content_id = $params['content_id'];
+    $content_type = $params['content_type'];
+    $content_title = $params['content_title'];
+    $content_url = $params['content_url'];
+    $category = $params['category'];
+    $share_status = $params['share_status'];
+    $share_comment = $params['share_comment'];
+    $message = '';
+    if ($content_type == 'video') {
+        $content_type = 'videogallery';
+    }
+    if ($content_type == 'gallery') {
+        $content_type = 'photogallery';
+    }
+
+    if ($website_id == '' || $content_id == '') {
+        echo "Please pass the website_id & content_id properly";
+        exit;
+    }
+
+    $query = db_select('jos_social_media_sharing', 'sm');
+    $query->fields('sm', array('id'));
+    $query->condition('sm.content_type', $content_type);
+    $query->condition('sm.content_id', $content_id);
+    $result_id = $query->execute()->fetchField();
+
+    $current_time = date('Y-m-d H:i:s');
+    if ($result_id == '') {
+        //Insert the value
+        $content_title = addslashes($content_title);
+        $category = addslashes($category);
+        $share_comment = addslashes($share_comment);
+        $query = db_insert('jos_social_media_sharing')
+                        ->fields(array(
+                            'content_id' => isset($content_id) ? $content_id : '',
+                            'website_id' => isset($website_id) ? $website_id : '',
+                            'content_type' => isset($content_type) ? $content_type : '',
+                            'content_title' => isset($content_title) ? $content_title : '',
+                            'content_url' => isset($content_url) ? $content_url : '',
+                            'category' => isset($category) ? $category : '',
+                            'is_promoted' => isset($share_status) ? $share_status : '',
+                            'promotion_remark' => isset($share_comment) ? $share_comment : '',
+                            'promotion_datetime' => $current_time,
+                            'created_datetime' => $current_time,
+                        ))->execute();
+
+        $message = 'Data has been Inserted successfully';
+    } else {
+        //Update the value
+        $content_title = addslashes($content_title);
+        $category = addslashes($category);
+        $share_comment = addslashes($share_comment);
+        $query = db_update('jos_social_media_sharing')
+                        ->fields(array(
+                            'content_id' => $content_id,
+                            'content_type' => $content_type,
+                            'content_title' => $content_title,
+                            'content_url' => $content_url,
+                            'category' => $category,
+                            'is_promoted' => $share_status,
+                            'promotion_remark' => $share_comment,
+                            'promotion_datetime' => date('Y-m-d H:i:s'),
+                        ))->condition('id', $result_id)->execute();
+        if ($query) {
+            $message = 'Data has been updated successfully';
+        }
+    }
+    echo $message;
+    drupal_exit();
+}
+/**
  * Call back function for itg_rapid_api_manual_blog API
  * @pram $_GET
  *
@@ -7069,7 +7279,7 @@ function itg_rapid_value_manual_blog($nid) {
     $blog_data['share_link'] = "$firebase_url";
     // blog content code
     $loopc = 0;
-    if ($new_blog == 0 || $new_blog == 1) {
+    if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
         $content_ar = array_reverse($content_ar,true);
         foreach ($content_ar as $key => $value) {   
@@ -7096,10 +7306,146 @@ function itg_rapid_value_manual_blog($nid) {
             $loopc++;
         }
     }
+    elseif ($new_blog == 1) {
+       $custom_content = itg_rapid_new_blog_content_details($nid);
+        foreach ($custom_content as $breaking_item) {             
+            $title = $breaking_item->blog_title;
+            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time); 
+            $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
+            $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
+            $posted_by = $user_name;
+            $desc_withhtml = $breaking_item->blog_description;
+            $desc_withouthtml = strip_tags($breaking_item->blog_description);
+            if($desc_withhtml){
+                $body_with_html_data = formateNodeBodyToken($desc_withhtml);
+                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
+            }
+            $content_id = $breaking_item->bid;
+            $blog_content[$loopc]['content_id'] = "$content_id";
+            $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
+            $blog_content[$loopc]['updated_datetime'] = "$breaking_item->blog_publish_time";
+            $blog_content[$loopc]['title'] = "$title";
+            $blog_content[$loopc]['posted_by'] = "$posted_by";
+            $loopc++;
+        }
+    }
 
     $blog_data['blog_content'] = $blog_content;
 
     //  data object
     $json_data['data'] = $blog_data;
     return $json_data;
+}
+
+/**
+ * content show at live blog page.
+ */
+function itg_rapid_new_blog_content_details($blog_entity_id) {
+  $query = db_select('itg_live_blog', 'p');
+  $query->condition('p.blog_entity_id', $blog_entity_id);
+  $query->condition('p.status', '1');
+  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
+       ->orderBy('bid', 'DESC');
+  # execute the query
+  return $results = $query->execute()->fetchAll();
+ 
+}
+/**
+ * Call back function for video insert API
+ * @pram $_POST in JSON formate
+ *
+ * @return array - The processed information array.
+ */
+
+function itg_rapid_api_insert_video() {
+    $HTTP_RAW_POST_DATA;    
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //p($params);
+    $long_headline = $params['long_headline'];
+    $short_headline = $params['short_headline'];
+    $description = $params['description'];
+    $city =  $params['city'];
+    $anchor = (int) $params['anchor'];
+    $video_kicker = $params['video_kicker'];
+    $section_id = (int) $params['section_id'];
+    $cat_id = (int) $params['cat_id'];
+    $extra_large_img = $params['extra_large_img'];
+    $large_img = $params['large_img'];
+    $medium_img = $params['medium_img'];
+    $small_img = $params['small_img'];
+    $extra_small_img = $params['extra_small_img'];
+    $video_file_name = $params['video_file_name'];
+    //prepare node object
+    $node = new stdClass();
+    $node->title = trim(html_entity_decode($long_headline));
+    $node->type = "videogallery";
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+    $node->uid = 1522; //itgsiteadmin
+    $node->promote = 0;
+    $node->comment = 0;
+    $node->status = 0;
+    $node->body[$node->language][0]['value'] = $description;
+    $node->body[$node->language][0]['format'] = 'full_html';
+    //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));                    
+    $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
+
+    $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
+    if (!empty($cat_id)) {
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+    }
+
+    $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
+    $node->field_stroy_city[LANGUAGE_NONE][0]['value'] = trim($city);
+    $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+    $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
+
+    $node = node_submit($node); // Prepare node for saving
+    $node->created = $publish_date_timestamp;
+//p($node);
+    $fid_extra_large_image = itg_rap_upload_img($extra_large_img);
+    $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+    $fid_large_img = itg_rap_upload_img($large_img);
+    $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
+    $fid_medium_img = itg_rap_upload_img($medium_img);
+    $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
+    $fid_small_img = itg_rap_upload_img($small_img);
+    $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
+    $fid_extra_small_img = itg_rap_upload_img($extra_small_img);
+    $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+    try {
+        node_save((object) $node);
+        $success = TRUE;
+    } catch (Exception $e) {
+        // Do your error handling here.
+        //p($e);
+        $success = FALSE;
+    }
+    $data = array();
+    $data['status_code'] = "0";
+    $data['status_message'] = "custom_msg";
+    if ($success) {
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+    }
+
+    return $data;
+}
+/**
+ * itg_rap_upload_img
+ * @param type $url
+ * @return type
+ */
+
+function itg_rap_upload_img($url){
+    $fid = 0;
+    if($url){
+        $extra_large_image_url = file_get_contents($url);
+        $extra_large_image = base64_encode($extra_large_image_url);
+        $fid = $fid_extra_large_image = uplodaProfileImg_Rapid($extra_large_image);
+    }
+    return $fid;
 }
