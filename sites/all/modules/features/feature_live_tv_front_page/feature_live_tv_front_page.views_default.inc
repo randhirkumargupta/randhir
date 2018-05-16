@@ -81,8 +81,6 @@ function feature_live_tv_front_page_views_default_views() {
 
   /* Display: Live Tv */
   $handler = $view->new_display('page', 'Live Tv', 'page');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Live TV';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '13';
