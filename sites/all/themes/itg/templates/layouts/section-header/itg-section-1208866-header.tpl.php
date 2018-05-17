@@ -5,7 +5,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
 <div id="section-header-event-1208866" class="india-today-mind-rocks-guwahati-2017">
   <div class="header_part cont_tw_iner">
-  <div class="w1000">
+  <div class="w1000 container">
     <div class="header_top ">
       <div class="left_part_logo"> <a href="https://indiatoday.intoday.in/youthsummit/guwahati/2017/" title="Mind Rocks 2017 "> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/logo.png" alt="Mind Rocks 2017"> </a> </div>
       
@@ -57,7 +57,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 	<?php
 	if ($data['is_event']) {
 	  ?>
-	  <div class="event-menu conclave-menu2017" style="background:#000">
+	  <div class="event-menu conclave-menu2017" style="background:#111">
 		<div id="block-menu-menu-event-menu" class="container event-header-menu-container">
 			  <div class="row ">
 				  <div class="col-md-12 col-sm-12" style="color:#fff">
