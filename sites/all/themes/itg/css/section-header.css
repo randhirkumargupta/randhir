@@ -58,7 +58,10 @@
 @media screen and (max-width: 1024px){
 .mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .header_part{height: 255px;} .mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .eventGuestArea{bottom: -40px;}}
 @media screen and (max-width:800px){
-.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .header_part{height: 185px;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2{ margin-top: 8px;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .date_tr{color:#000;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time{ width:72%; } }
-@media screen and (max-width:767px){
+.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .header_part{height: 185px;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2{ margin-top: 8px;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .date_tr{color:#000;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time{ width:72%;} }
+@media screen and (max-width:767px){.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .header_part{ height:153px; }
+.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .place_tr{font-size: 12px;}
+.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .date_tr{ font-size: 17px;}
+.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .header_part{ background:#efee00; }
 
 }
