@@ -1339,8 +1339,8 @@ function topstoriesList($source, $limit = 0) {
             // for emoji
             $n_emoji_left = array();
             $n_emoji_right = array();
-            $emoji_left = $resvalue['field_emoji_value'];
-            $emoji_right = $resvalue['field_emoji_2_value'];
+            $emoji_left = $value['field_emoji_value'];
+            $emoji_right = $value['field_emoji_2_value'];
             if ($emoji_left) {
                 $n_emoji_left = itg_rapid_get_emoji($emoji_left);
             }
