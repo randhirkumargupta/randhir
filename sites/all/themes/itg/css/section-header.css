@@ -50,7 +50,9 @@
 	.india-today-mind-rocks-guwahati-2017 .logo_it_tt{ margin-top: 0;}
 
 }
-@media screen and (max-width:768px){
+@media screen and (max-width:767px){
 	.india-today-mind-rocks-guwahati-2017 .header_part{ height: 125px;}.india-today-mind-rocks-guwahati-2017 .social_icons_ipad.destop_social{ display: none; }
 	.india-today-mind-rocks-guwahati-2017 .eventGuestArea{ bottom:-13px; left: 30%; width: 60%;  }.india-today-mind-rocks-guwahati-2017 .logo_it_tt{ width:50px; }
 }
+
+@media screen and (max-width:360px){}
