@@ -1347,8 +1347,8 @@ function topstoriesList($source, $limit = 0) {
             if ($emoji_right) {
                 $n_emoji_right = itg_rapid_get_emoji($emoji_right);
             }
-            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
-            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
+            $data_newslist[$home_list_count]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$home_list_count]['n_emoji_right'] = $n_emoji_right;
         $home_list_count++; 
         //}
     }
