@@ -41,8 +41,7 @@ function generateStoryDeatilList($id) {
     $nid = $id;
     $photo_list_array = array();
     $data_array = array();
-    $node = node_load($nid);
-    p($node);
+    $node = node_load($nid);    
     // variable for feed
     $title = $node->title;
     $tid = $node->field_primary_category['und'][0]['value'];
@@ -262,8 +261,8 @@ function generateStoryDeatilList($id) {
         // for emoji
             $n_emoji_left = array();
             $n_emoji_right = array();
-            $emoji_left = $node->field_emoji_value['und'][0]['field_emoji_value']; 
-            $emoji_right = $node->field_emoji_2_value['und'][0]['field_emoji_2_value'];
+            $emoji_left = $node->field_emoji['und'][0]['value']; 
+            $emoji_right = $node->field_emoji_2['und'][0]['value'];
             if ($emoji_left) {
                 $n_emoji_left = itg_rapid_get_emoji($emoji_left);
             }
