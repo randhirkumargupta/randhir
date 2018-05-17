@@ -3,11 +3,11 @@ global $base_url;
 drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
-<div id="section-header-event-1760526" class="mind-rocks-2017-bhopal">
-  <div class="header_part cont_tw_iner">
+<div id="section-header-event-1760526" class="mind-rocks-2017-bhopal india-today-mind-rocks-commanheader-2017">
+    <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="https://indiatoday.intoday.in/youthsummit/guwahati/2017/" title="Mind Rocks 2017 "> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/logo.png" alt="Mind Rocks 2017"> </a> </div>
+      <div class="left_part_logo"> <a href="/mind-rocks-2017-bhopal" title="Mind Rocks 2017 "> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/bhopal/images/logo.png" alt="Mind Rocks 2017"> </a></div>
       
       <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="http://media2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
       
@@ -33,10 +33,12 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
       </div>
       <div class="txt_rgs">
       <div class="tt_date_time">
-        <h2> <span class="date_tr">April 29, 2017</span> <span class="place_tr">Vivanta By Taj, Guwahati</span> </h2>
+        <h2> <span class="date_tr">September 8<sup>th</sup>, 2017</span> <span class="place_tr">Gyan Vigyan Bhavan<br>
+            Barkatullah University
+            Habib Ganj</span> </h2>
       </div>
       
-      <div class="eventGuestArea"><img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/header_speaker.png" alt=""></div>
+      <div class="eventGuestArea"><img src="https://smedia2.intoday.in/indiatoday/youthsummit/bhopal/2017/bhopal-header-png01.png" alt=""></div>
       <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
     </div>
       <div class="clearfix"></div>
@@ -45,9 +47,8 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="social_icons_ipad destop_social">
       <ul>
         <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2017" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2017" target="_blank"> <span class="tw" style="margin-top:5px"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2017" target="_blank"> <span class="g_plus" style="margin-top:3px"></span> <span class="text_socials"></span> </a> </li>
-        
+        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2017" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2017" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
       </ul>
     </div>
     
