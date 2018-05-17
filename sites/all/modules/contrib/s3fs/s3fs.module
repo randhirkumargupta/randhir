@@ -655,9 +655,8 @@ function _s3fs_convert_metadata($uri, $s3_metadata) {
     if (isset($s3_metadata['LastModified'])) {
       $metadata['timestamp'] = date('U', strtotime($s3_metadata['LastModified']));
     }
-    // Patch applied from https://www.drupal.org/files/issues/s3fs-fix_null_VersionId-2632082-22.patch
-    //if (isset($s3_metadata['VersionId'])) {
-    if (isset($s3_metadata['VersionId']) && $s3_metadata['VersionId'] != 'null') {
+
+    if (isset($s3_metadata['VersionId'])) {
       $metadata['version'] = $s3_metadata['VersionId'];
     }
   }
