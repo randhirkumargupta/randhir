@@ -142,7 +142,7 @@ $hide_widget = '';
                         <?php if (isset($widget_data['itg-block-2']['widget_name']) || $theme == 'itgadmin') { ?>            
                           <div class="row itg-layout-225">
                               <div class="col-md-12 mt-50">
-                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Videos'); ?></strong> )</div>
+                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Fixtures'); ?></strong> )</div>
                                   <div class="">
                                       <div class="itg-widget">
                                           <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -166,7 +166,7 @@ $hide_widget = '';
                                                         print $widget_data['itg-block-2']['widget'];
                                                       }
                                                       else {
-                                                        print '<div class="widget-placeholder"><span>' . t('Videos') . '</span></div>';
+                                                        print '<div class="widget-placeholder"><span>' . t('Fixtures') . '</span></div>';
                                                       }
                                                       ?>
                                                   </div>
@@ -180,8 +180,8 @@ $hide_widget = '';
                         <?php if (isset($widget_data['itg-block-3']['widget_name']) || isset($widget_data['itg-block-4']['widget_name']) || $theme == 'itgadmin') { ?>   
                            <!-- for top story -->
                             <div class="row itg-h321-section">
-                              <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 mt-50">
-                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Movie reviews'); ?></strong> )</div>
+                             <div class="col-md-12 mt-50">
+                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Top Stories for fifa'); ?></strong> )</div>
                                   <div class="itg-widget">
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">
@@ -209,7 +209,7 @@ $hide_widget = '';
                                                     print $widget_data['itg-block-7']['widget'];
                                                   }
                                                   else {
-                                                    print '<div class="widget-placeholder"><span>' . t('Movie reviews') . '</span></div>';
+                                                    print '<div class="widget-placeholder"><span>' . t('Top Stories for fifa') . '</span></div>';
                                                   }
                                                   ?>
                                               </div>
@@ -217,20 +217,7 @@ $hide_widget = '';
                                       </div>               
                                   </div>  
                               </div>
-                              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 mt-50">
-                                  <div class="widget-help-text"><?php print t('Non Draggable'); ?> ( <strong><?php print t('Ad Widget'); ?></strong> )</div>
-                                  <div class="itg-widget">
-                                      <div class="ad-widget">
-                                          <div class="sidebar-ad">
-                                              <?php
-                                              $block = block_load('itg_ads', ADS_RHS2);
-                                              $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                              print render($render_array);
-                                              ?>
-                                          </div>
-                                      </div>
-                                  </div>  
-                              </div>
+                             
                           </div>
                            <!-- end top story -->
                         <?php } ?>
