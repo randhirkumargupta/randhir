@@ -120,7 +120,13 @@ function itg_miscellaneous_menu() {
         'access arguments' => array('administer users'),
   );
 
-  
+  $items['remove-flood-node-from-widget-by-tid/%'] = array(
+    'title' => 'Remove Old widgets from tables',
+    'page callback' => 'remove_old_widgets_from_table_by_tid',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+
   return $items;
 }
 
