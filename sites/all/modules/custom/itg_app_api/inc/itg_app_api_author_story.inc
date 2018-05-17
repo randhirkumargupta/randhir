@@ -585,7 +585,7 @@ function news_wrap_datalist() {
                 $n_emoji_right = itg_rapid_get_emoji($emoji_right);
             }
             $news['n_emoji_left'] = $n_emoji_left;
-            $news['n_emoji_right'] = $n_emoji_right;
+            $news['n_emoji_right'] = $n_emoji_right; 
             $news2[] = $news;
             $lcont++;
         }
