@@ -579,10 +579,10 @@ function news_wrap_datalist() {
             $emoji_left = $res['n_emoji_left'];
             $emoji_right = $res['n_emoji_right'];
             if ($emoji_left) {
-                $n_emoji_left = itg_rapid_get_emoji($emoji_left); 
+                $n_emoji_left = $emoji_left; 
             }
             if ($emoji_right) {
-                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+                $n_emoji_right = $emoji_right;
             }
             $news['n_emoji_left'] = $n_emoji_left;
             $news['n_emoji_right'] = $n_emoji_right; 
