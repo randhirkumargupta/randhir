@@ -311,7 +311,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
                             <div class="panel-body">
-                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on Utube to get a sense of the format. This might be subject to change this year. 
+                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Utube (Youtube)</strong> to get a sense of the format. This might be subject to change this year. 
                             </div>
                         </div>
                     </div>
