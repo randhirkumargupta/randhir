@@ -179,7 +179,7 @@ $hide_widget = '';
                         <?php } ?>
                         <?php if (isset($widget_data['itg-block-3']['widget_name']) || isset($widget_data['itg-block-4']['widget_name']) || $theme == 'itgadmin') { ?>   
                            <!-- for top story -->
-                            <div class="row itg-h321-section">
+                            <div class="row itg-layout-161"> 
                              <div class="col-md-12 mt-50">
                                   <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Top Stories for fifa'); ?></strong> )</div>
                                   <div class="itg-widget">
