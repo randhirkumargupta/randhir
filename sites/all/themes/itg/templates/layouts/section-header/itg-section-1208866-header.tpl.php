@@ -3,7 +3,7 @@ global $base_url;
 drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
-<div id="section-header-event-1208866" class="india-today-mind-rocks-guwahati-2017">
+<div id="section-header-event-1208866" class="india-today-mind-rocks-guwahati-2017 india-today-mind-rocks-commanheader-2017">
   <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
