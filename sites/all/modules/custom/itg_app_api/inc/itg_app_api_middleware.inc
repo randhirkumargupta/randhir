@@ -446,3 +446,16 @@ function hamburger_menu_listing_sub() {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+/**
+ * itg_rapid_get_emoji
+ * @param type $post_content
+ * @return type
+ */
+function itg_rapid_get_emoji($post_content) {
+    $src = array();
+    if ($post_content) {
+        preg_match_all('@src="([^"]+)"@', $post_content, $match);
+        $src = array_pop($match);
+    }
+    return $src;
+}
