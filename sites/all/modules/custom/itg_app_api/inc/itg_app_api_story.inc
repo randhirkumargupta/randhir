@@ -259,6 +259,19 @@ function generateStoryDeatilList($id) {
             $data_array['n_offline_data'] = $arr_offline;
         }
         /* work on offline end */
+        // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $node->field_story_select_templates['und'][0]['field_emoji_value'];
+            $emoji_right = $node->field_story_select_templates['und'][0]['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_array['n_emoji_left'] = $n_emoji_left;
+            $data_array['n_emoji_right'] = $n_emoji_right;
 
     $data['data'] = $data_array;
     return $data;
