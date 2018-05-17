@@ -46,7 +46,7 @@ function itg_mail_today_fia_data() {
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
     $query->condition('pc.field_primary_category_value',$mail_today_tid,'=');
     $query->orderBy('n.created', 'DESC');
-    $query->range(0, 100);
+    $query->range(0, 10);
     $query = $query->execute()->fetchCol();
     $xml = itg_fia_xml_node_feed_photos($query,0);
     $xml_path = 'public://fbinsight/';
@@ -76,7 +76,7 @@ function itg_mail_photos_fia_data() {
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
     $query->condition('pc.field_primary_category_value',$mail_today_tid,'!=');
     $query->orderBy('n.created', 'DESC');
-    $query->range(0, 100);
+    $query->range(0, 10);
     $query = $query->execute()->fetchCol();
     $xml = itg_fia_xml_node_feed_photos($query,1);
     $xml_path = 'public://fbinsight/';
@@ -407,11 +407,12 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
     $xml_base = FRONT_URL . '/' . current_path();
     $fia_ga_data = variable_get('ga_code');
     $fia_ga = isset($fia_ga_data) ? $fia_ga_data : " ";
-    $nodes = node_load_multiple($query);
     $items = '';
     $last_build = FALSE;
     $last_build_date = '';
-    foreach ($nodes as $node) {
+    if(!empty($query)){
+    foreach ($query as $node_id) {
+        $node = node_load($node_id);
         $body_vals = array();
         $img_path = '';
         $get_place_name = '';
@@ -698,6 +699,7 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
             $items .= itg_fia_xml_format_rss_item_photos('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid, $galleryimg,$primary_cat_status);
         }
     }
+}
     global $base_url;
     $channel_defaults = array(
         'title' => variable_get('site_name', 'Drupal'),
