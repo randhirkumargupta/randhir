@@ -1397,10 +1397,12 @@ function getthirdPartyData($type) {
  * @return array $result
  */
 function itg_section_card_content_by_tid($tid, $limit) {
+  $start_time = strtotime("-7 day");
   $query = db_select('node', 'n');
   $query->join('taxonomy_index', 'ti', 'n.nid = ti.nid');
   $query->fields('n');
   $query->condition('ti.tid', $tid, '=');
+  $query->condition('n.created', $start_time, '>=');
   $query->condition('n.type', 'story');
   $query->condition('n.status', 1);
   $query->range(0, $limit);
