@@ -50,3 +50,7 @@
 }
 @media screen and (max-width:767px){.india-today-mind-rocks-commanheader-2017 .header_part{ height: 125px;}.india-today-mind-rocks-commanheader-2017 .left_part_logo{ width:90px; }.india-today-mind-rocks-commanheader-2017 .social_icons_ipad.destop_social{ display: none; }.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ bottom:-13px; left: 30%; width: 60%;  }.india-today-mind-rocks-commanheader-2017 .logo_it_tt{ width:50px; }.india-today-mind-rocks-commanheader-2017 .tt_date_time{ width:63%; } .india-today-mind-rocks-commanheader-2017 .txt_rgs{ width: auto; }.india-today-mind-rocks-commanheader-2017 .tt_date_time{ width: 56%;}}
 @media screen and (max-width:360px){.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .date_tr{font-size: 20px;}.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .place_tr{font-size: 12px;}}
+
+/* bhopal mindrocks 2017*/
+
+.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .header_part{ background: url(http://media2.intoday.in/indiatoday/youthsummit/2017/delhi/images/mindrock_top_mast_bg.jpg) center center repeat-x;}
