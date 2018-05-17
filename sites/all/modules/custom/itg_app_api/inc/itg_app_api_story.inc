@@ -42,7 +42,7 @@ function generateStoryDeatilList($id) {
     $photo_list_array = array();
     $data_array = array();
     $node = node_load($nid);
-
+    p($node);
     // variable for feed
     $title = $node->title;
     $tid = $node->field_primary_category['und'][0]['value'];
