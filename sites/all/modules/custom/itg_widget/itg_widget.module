@@ -476,8 +476,12 @@ function itg_widget_block_info() {
     
     $blocks['movie_section_manual_widget'] = array(
       'info' => t('Widget: Movie Section Manual Widget'),
-    );    
+    );
     
+    $blocks['fifa_section_manual_widget'] = array(
+      'info' => t('Widget: Fifa Section Manual Widget'),
+    );
+        
     $blocks['score_card_iframe_widget'] = array(
       'info' => t('Widget: Score Card Iframe Widget'),
     );
@@ -979,6 +983,23 @@ function itg_widget_block_view($delta = '') {
           $data = get_view_nodes_form_custom_table_review_widgets('section_manual_order_widget', $cat_id, MOVIE_SECTION_MANUAL_WIDGET_MAX_RANGE, MOVIE_SECTION_MANUAL_WIDGET_MIN_RANGE);
           $block['content'] = theme("movie_section_manual_widget_data", array("data" => $data));
           break;
+        case 'fifa_section_manual_widget':
+          global $theme;
+          if (isset($_GET['section']) && !empty($_GET['section'])) {
+            $selction_name = 'section';
+          }
+          else {
+            $selction_name = 'section_name';
+          }
+          if (isset($_GET[$selction_name])) {
+            $cat_id = $_GET[$selction_name];
+          }
+          if ($theme == FRONT_THEME_NAME) {
+            $cat_id = arg(2);
+          }
+          $data = get_view_nodes_form_custom_table_review_widgets('section_manual_order_widget', $cat_id, MOVIE_SECTION_MANUAL_WIDGET_MAX_RANGE, MOVIE_SECTION_MANUAL_WIDGET_MIN_RANGE);
+          $block['content'] = theme("fifa_section_manual_widget_data", array("data" => $data));
+          break;  
           case 'score_card_iframe_widget':
           $sid = 1;
           $query = db_select('itg_score_card', 'm');

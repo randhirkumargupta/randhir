@@ -808,6 +808,9 @@ function itg_widget_theme() {
         'movie_section_manual_widget_data' => array(
             'template' => 'templates/movie-section-manual-widget-data',
         ),
+        'fifa_section_manual_widget_data' => array(
+            'template' => 'templates/fifa-section-manual-widget-data',
+        ),
         'score_card_iframe' => array(
             'template' => 'templates/score-card-iframe',
         ),
