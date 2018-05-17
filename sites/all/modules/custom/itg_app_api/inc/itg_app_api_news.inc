@@ -126,7 +126,10 @@ function generateNewsCategoryList($tid, $pageno) {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
+        
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
@@ -150,6 +153,9 @@ function generateNewsCategoryList($tid, $pageno) {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
 
         //end
         /*
@@ -344,6 +350,19 @@ function generateNewsCategoryList($tid, $pageno) {
             }
             $n_blog = (object) $n_blog;
             $news_list_array[$listcount]['n_blog'] = $n_blog;
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $news_list_array[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $news_list_array[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
