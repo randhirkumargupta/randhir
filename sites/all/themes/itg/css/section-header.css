@@ -44,9 +44,9 @@
 
 /* 2017 youth Summit */
 .india-today-mind-rocks-guwahati-2017 .header_part {
-    background: #efee00 url(https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/bg.jpg) center center no-repeat;
+    background: #efee00 url(https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/bg.jpg) center center repeat-x;
     height: 308px;
-    position: relative;background-size: 100% 100%;
+    position: relative;
 }
 .india-today-mind-rocks-guwahati-2017 .w1000 {
     margin: 0 auto; position: relative;
@@ -113,7 +113,7 @@
     background: url(http://media2.intoday.in/indiatoday/youthsummit/2016/images/g-plus-icon.png) no-repeat;
 }
 .india-today-mind-rocks-guwahati-2017 .right_part_ad {
-    height: 110px;
+    height: 114px;
      width: 728px;
     float: left;
     margin-top:10px;
@@ -130,7 +130,7 @@
     width: 230px;
 }
 .india-today-mind-rocks-guwahati-2017 .tt_date_time h2 {
-    margin-top: 60px;
+    margin-top: 20px;  font-family: "OpenSans-Regular";
 }
 .india-today-mind-rocks-guwahati-2017 .tt_date_time h2 .date_tr {
     color: #d5262b;
@@ -176,8 +176,9 @@
     position: inherit;
     right: inherit;
     top: inherit;
-    margin-top:15px;
+    margin-top:5px;
 }
 .india-today-mind-rocks-guwahati-2017 .social_icons_ipad.destop_social ul li {
     margin-left: 5px; float: left;
 }
+.section-mind-rocks-youth-summit-2017 #block-itg-event-backend-program-tab-block .event-listing{ margin-top:0px; }
