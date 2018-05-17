@@ -57,7 +57,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 	<?php
 	if ($data['is_event']) {
 	  ?>
-	  <div class="event-menu conclave-menu2017" style="background:#111">
+	  <div class="event-menu conclave-menu2017" style="background:#b92e70">
 		<div id="block-menu-menu-event-menu" class="container event-header-menu-container">
 			  <div class="row ">
 				  <div class="col-md-12 col-sm-12" style="color:#fff">
@@ -78,13 +78,6 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 	}
 	?>
            
-    </div>
-    <div class="event-add-header">
-        <?php
-        $block = block_load('itg_ads', ADS_HEADER);
-        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-        print render($render_array);
-        ?>
     </div>   
 </div>
 
