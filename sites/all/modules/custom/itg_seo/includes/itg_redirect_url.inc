@@ -110,8 +110,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $url_re = 'https://www.indiatoday.in/'.$new_url;
     } else {
       if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in' || $_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in') {
-        if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story')) ) {  // lite/story
+        if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story' || $arg[2] == 'story')) ) {  // lite/story
           $storyarg = $arg[4];
+          if ($arg[2] == 'story') {
+            $storyarg = $arg[5];
+          }
           $storyarg_exp = explode('.html', $storyarg);
           $old_content_id = $storyarg_exp[0];
           $table = 'migrate_map_itgstorylist';
@@ -120,8 +123,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
           $ampstoryurl = '/amp/'.$redirecturl;
           $newurl = 'https://www.indiatoday.in'.$ampstoryurl;
           drupal_goto($newurl, array(), 301);
-        } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery')) ) {  // lite/gallery
+        } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery' || $arg[2] == 'gallery')) ) {  // lite/gallery
           $storyarg = $arg[4];
+          if ($arg[2] == 'gallery') {
+            $storyarg = $arg[5];
+          }
           $storyarg_exp = explode('.html', $storyarg);
           $old_content_id = $storyarg_exp[0];
           $table = 'migrate_map_itgphotogallery';
@@ -703,6 +709,19 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         if ($newurl) {
           drupal_goto($newurl, array(), 301);
         }
+      } else if ($arg[0] == 'calendar' && !empty($arg[1]) && ($arg[2] == 'videos' || $arg[2] == 'story' || $arg[2] == 'gallery' || $arg[2] == 'photo' || $arg[2] == 'livetv.jsp')) {
+        $type = $arg[2];
+        if($arg[2] == 'gallery') {
+          $type = 'photo';
+        } else if ($arg[2] == 'livetv.jsp') {
+          $type = 'story';
+        }
+        $newurl = FRONT_URL."/archives/".$type.'/'.$arg[1];
+        drupal_goto($newurl);
+      } else if ($arg[0] == 'archive.jsp' || $arg[0] == 'archives.php') {
+        $date = date('d-m-Y');
+        $newurl = FRONT_URL."/archives/".'story'.'/'.$date;
+        drupal_goto($newurl);
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }

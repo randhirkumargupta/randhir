@@ -70,7 +70,7 @@ if (!mobile) {
   <div class="normaltxt">
     <p><strong>Noida</strong></p>
     <p><strong>Contact Person :</strong><br>
-      Swati Mitra or Anand Khare for admissions<br>
+      Dolly Sengar or Anand Khare for admissions<br>
       Prashant Kothari for academics<br>
       Email : itmi.admissions@aajtak.com<br>
       Timing : 10 AM to 6 PM, Monday to Friday <br>

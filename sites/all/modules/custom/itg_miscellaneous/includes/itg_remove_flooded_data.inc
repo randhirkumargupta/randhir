@@ -58,3 +58,28 @@ function remove_old_widgets_from_table() {
     itg_widget_delete_old_data_by_limit($value);
   }
 }
+
+
+function remove_old_widgets_from_table_by_tid(){
+  $tid = arg(1);
+  if (!empty($tid)) {
+    $keep_row = (int) variable_get('section_widget_keep_row_count', 100);
+    _delete_old_data_from_section_widget('itg_widget_order', $tid, 'All');  
+    
+    $query1 = db_select('itg_widget_order_section', 'widget');
+    $query1->fields('widget', array('cat_id', 'content_type'));
+    $query1->addExpression('COUNT(widget.cat_id)', 'count');
+    $query1->condition('widget.widget', 'section_wise_widget');
+    $query1->condition('widget.cat_id', $tid);
+    $query1->groupBy('widget.content_type');
+    $result1 = $query1->execute()->fetchAll(PDO::FETCH_ASSOC);  
+    foreach($result1 as $value1){
+      if($value1['count'] <= $keep_row){
+        continue;
+      }
+      _delete_old_data_from_section_widget('itg_widget_order_section', $value1['cat_id'], $value1['content_type']);
+    }
+  }
+  print 'Done';
+  drupal_exit();
+}
