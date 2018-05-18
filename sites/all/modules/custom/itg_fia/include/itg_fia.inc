@@ -690,7 +690,7 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
             $desc = str_replace('<br />', '', $desc);
             $desc = str_replace("'", "&#39;", $desc);
             $node_title = str_replace("'", "&#39;", $node->title);
-            $items .= itg_fia_xml_format_rss_item_photos('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid, $galleryimg,$primary_cat_status);
+            $items .= itg_fia_xml_format_rss_item_photos('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node_title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified, $node->nid, $galleryimg,$primary_cat_status,$node->type);
         }
     }
 }
@@ -796,7 +796,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified, $nid, $galleryimg,$primary_cat_status) {
+function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified, $nid, $galleryimg,$primary_cat_status,$node_type) {
     $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
     $desc = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $desc);
     $title = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $title);
@@ -848,7 +848,11 @@ function itg_fia_xml_format_rss_item_photos($id, $kicker, $target_nids, $fb_inst
     $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
     $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
     $output .= "</header>";
-    $output .= "<div property='content:encoded'>" . images_fia($galleryimg) . "</div>";
+    if($node_type == 'photogallery'){
+      $output .= "<div property='content:encoded'>" . images_fia($galleryimg) . "</div>";
+    }else{
+      $output .= "<div property='content:encoded'>" . $node_body_content . "</div>";
+    }
     // imge listing --!>
     //images_fia($node);
     // Image -->
