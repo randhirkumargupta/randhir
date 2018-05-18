@@ -70,7 +70,7 @@ CKEDITOR.dialog.add( 'editorquotesDialog', function( editor ) {
                         } 
                         var first_element = '<div class="quote-style" >'+quotestext+'</div>'+author_check
 			div.setHtml(first_element);
-			// Finally, insert the element into the editor at the caret position.
+			//Finally, insert the element into the editor at the caret position.
 			editor.insertElement( div );
 
 		}
