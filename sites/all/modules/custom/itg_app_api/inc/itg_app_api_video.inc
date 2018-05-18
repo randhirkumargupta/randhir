@@ -140,8 +140,9 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
 
-        if ($tid == 0 && count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
+        if ($tid == 0) {
+            //$query->condition('ti.tid', $tid_list, 'IN');
+            $query->condition('ti.tid', 1206552, '=');
         } else {
             $query->condition('ti.tid', $tid, '=');
         }
@@ -444,8 +445,9 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->fields('ffd', array('field_story_expert_description_value'));
         //end
 
-        if ($tid == 0 && count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
+        if ($tid == 0) {
+            //$query->condition('ti.tid', $tid_list, 'IN');
+            $query->condition('ti.tid', 1206553, '=');
         } else {
             $query->condition('ti.tid', $tid, '=');
         }
