@@ -33,7 +33,7 @@ function itg_fia_data() {
  * @return array
  */
 function itg_mail_today_fia_data() {
-    $start_time = strtotime("-300 day");
+    $start_time = strtotime("-7 day");
     $mail_today_tid = '1206572';
     $type = array(story,photogallery);
     $query = db_select('node', 'n');
@@ -63,7 +63,7 @@ function itg_mail_today_fia_data() {
  * @return array
  */
 function itg_mail_photos_fia_data() {
-    $start_time = strtotime("-300 day");
+    $start_time = strtotime("-7 day");
     $mail_today_tid = '1206572';
     $type = array(story,photogallery);
     $query = db_select('node', 'n');
