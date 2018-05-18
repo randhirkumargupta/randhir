@@ -4,7 +4,7 @@ h1,
 h2,
 h3,
 h4 {
-    @include itg-font($itg-roboto, $itg-font-medium);
+    @include itg-font($itg-opensans, $itg-font-medium);
 }
 
 h1 {
@@ -176,7 +176,7 @@ img {
 
 .section-ordering {
     h3 {
-        @include itg-font($itg-robotoslab);
+        @include itg-font($itg-opensans);
         padding: 15px 0;
     }
     p {
@@ -761,7 +761,7 @@ img {
                 border-right: 1px solid #fff;
                 .detail {
                     @include calculate-width(1);
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     .flex-caption {
                         padding: 10px 10px;
                         background: #000;
@@ -923,7 +923,7 @@ img {
                     background: rgba(0, 0, 0, 0.4);
                     color: $white-color;
                     @include font(12px);
-                    font-family: $itg-roboto;
+                    font-family: $itg-opensans;
                     padding: 2px 5px;
                     i {
                         @include font(16px);
@@ -964,7 +964,7 @@ img {
                 @include pos(absolute, null, null, 0, 0);
                 background: rgba(0, 0, 0, 0.56);
                 color: #fff;
-                @include itg-font($itg-roboto);
+                @include itg-font($itg-opensans);
                 font-size: 12px;
                 padding: 5px;
                 i {
@@ -973,7 +973,7 @@ img {
             }
         }
         h3 {
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
         }
     }
     @include slider-icon-width-background;
@@ -1380,7 +1380,7 @@ img {
                     padding: 15px;
                     color: #000;
                     font-size: 18px;
-                    background-image: linear-gradient( #fdcf2e, #fabb1d);
+                    background: linear-gradient( #fdcf2e, #fabb1d);
                     font-weight: 700;
                 }
             }
@@ -1718,7 +1718,7 @@ img {
             height: 30px;
             line-height: 30px;
             text-transform: uppercase;
-            font-family: roboto-slab;
+            font-family: $itg-opensans;
             font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
@@ -1726,7 +1726,7 @@ img {
     }
     .ask-question {
         padding: 15px;
-        font-family: roboto-slab;
+        font-family: $itg-opensans;
         .form-type-textarea,
         .form-type-textfield {
             margin: 0;
@@ -1736,10 +1736,10 @@ img {
             @include clearfix;
             input[type="text"] {
                 width: 100%;
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
             }
             textarea {
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
                 height: 65px;
             }
             #question {
@@ -1774,12 +1774,12 @@ img {
                 text-transform: uppercase;
                 width: 90px;
                 cursor: pointer;
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
             }
             .form-item-captcha-response {
                 input[type="text"] {
                     width: 50%;
-                    font-family: roboto-slab;
+                    font-family:$itg-opensans;
                 }
                 .description {
                     display: none;
@@ -1977,7 +1977,7 @@ img {
                                 background-color: rgba(0, 0, 0, .5);
                                 color: #fff;
                                 font-size: 12px;
-                                font-family: Roboto;
+                                font-family: $itg-opensans;
                                 .fa {
                                     font-size: 14px;
                                     margin-right: 5px;
@@ -2203,7 +2203,7 @@ img {
                                         line-height: 24px;
                                         font-size: 20px;
                                         font-weight: 700;
-                                        font-family: $itg-roboto;
+                                        font-family:$itg-opensans;
                                         &:hover {
                                             color: #193984;
                                         }
@@ -2501,7 +2501,7 @@ img {
         }
     }
     .key-candidate {
-        font-family: $itg-roboto;
+        font-family: $itg-opensans;
         .most_popular {
             border: none;
         }
@@ -2526,7 +2526,7 @@ img {
             }
         }
         .key-candidate-detail {
-            font-family: $itg-roboto;
+            font-family: $itg-opensans;
             display: none;
             ul {
                 @include clearfix;
@@ -2662,7 +2662,7 @@ img {
         }
         table {
             font-size: 13px;
-            font-family: roboto;
+            font-family: $itg-opensans;
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
@@ -2715,7 +2715,7 @@ img {
             tspan {
                 &:nth-child(1) {
                     font-weight: 900;
-                    font-family: roboto;
+                    font-family: $itg-opensans;
                     font-size: 42px;
                     color: #515151;
                 }
@@ -2933,7 +2933,7 @@ img {
 
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"],
 .ask-question-sidebar {
-    font-family: roboto;
+    font-family: $itg-opensans;
     @include sidebar-heading;
     h3 {
         margin-bottom: 10px;
@@ -2953,10 +2953,10 @@ img {
         @include clearfix;
         input[type="text"] {
             width: 100%;
-            font-family: roboto-slab;
+            font-family: $itg-opensans;
         }
         textarea {
-            font-family: roboto-slab;
+            font-family: $itg-opensans;
             height: 65px;
             margin-bottom: 10px;
         }
@@ -3001,7 +3001,7 @@ img {
             text-transform: uppercase;
             width: 90px;
             cursor: pointer;
-            font-family: roboto-slab;
+            font-family: $itg-opensans;
         }
         .captcha {
             border: none;
@@ -3024,7 +3024,7 @@ img {
             }
             input[type="text"] {
                 width: 47%;
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
                 float: right;
                 position: relative;
                 left: auto;
@@ -3051,7 +3051,7 @@ img {
             display: inline-block;
             color: #fff;
             text-align: center;
-            font-family: roboto;
+            font-family: $itg-opensans;
             margin-right: 10px;
             position: absolute;
             top: 20px;
@@ -3156,7 +3156,7 @@ img {
     }
     .ask-question {
         padding: 15px;
-        font-family: roboto-slab;
+        font-family: $itg-opensans;
         overflow: auto;
         .form-type-textarea,
         .form-type-textfield {
@@ -3167,10 +3167,10 @@ img {
             @include clearfix;
             input[type="text"] {
                 width: 100%;
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
             }
             textarea {
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
                 height: 65px;
                 margin-bottom: 10px;
             }
@@ -3212,7 +3212,7 @@ img {
                 text-transform: uppercase;
                 width: 90px;
                 cursor: pointer;
-                font-family: roboto-slab;
+                font-family: $itg-opensans;
                 margin-top: 10px;
             }
             .captcha {
@@ -3236,7 +3236,7 @@ img {
                 }
                 input[type="text"] {
                     width: 47%;
-                    font-family: roboto-slab;
+                    font-family: $itg-opensans;
                     float: right;
                 }
                 .description {
@@ -3260,7 +3260,7 @@ img {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-opensans;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
