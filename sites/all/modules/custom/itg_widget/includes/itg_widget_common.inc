@@ -2681,7 +2681,7 @@ function itg_widget_get_issue_data($magazine_id = NULL) {
     $query->condition('n.type', array('issue'), '=');
     $query->Join('field_data_field_issue_magazine', 'mag', 'mag.entity_id=n.nid');
     $query->condition('mag.field_issue_magazine_target_id', $magazine_id, '=');
-    $query->condition('n.status', 1);
+    //$query->condition('n.status', 1);
     $result = $query->execute();
     return $result;
 }

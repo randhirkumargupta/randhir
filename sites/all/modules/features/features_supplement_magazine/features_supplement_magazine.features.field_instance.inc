@@ -144,7 +144,7 @@ function features_supplement_magazine_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'file_generic',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -153,7 +153,7 @@ function features_supplement_magazine_field_default_field_instances() {
     'bundle' => 'issue',
     'deleted' => 0,
     'description' => 'Please upload large cover image.<br/>
-Image Size (300 x 225)',
+Image Size (172 x 240)',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -199,6 +199,8 @@ Image Size (300 x 225)',
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -228,7 +230,11 @@ Image Size (300 x 225)',
   // Exported field_instance: 'node-issue-field_issue_magazine'.
   $field_instances['node-issue-field_issue_magazine'] = array(
     'bundle' => 'issue',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'target_id' => 573,
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Please select magazine.',
     'display' => array(
@@ -266,12 +272,51 @@ Image Size (300 x 225)',
     ),
   );
 
+  // Exported field_instance: 'node-issue-field_issue_publish'.
+  $field_instances['node-issue-field_issue_publish'] = array(
+    'bundle' => 'issue',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Please check to publish this content.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 8,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_issue_publish',
+    'label' => 'Publish',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-issue-field_issue_small_cover_image'.
   $field_instances['node-issue-field_issue_small_cover_image'] = array(
     'bundle' => 'issue',
     'deleted' => 0,
     'description' => 'Please upload small cover image.<br/>
-Image Size (210 x 145).',
+Image Size (100 x 140).',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -317,6 +362,8 @@ Image Size (210 x 145).',
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
             'upload' => 0,
@@ -339,7 +386,7 @@ Image Size (210 x 145).',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -414,7 +461,7 @@ Image Size (210 x 145).',
     'entity_type' => 'node',
     'exclude_cv' => 0,
     'field_name' => 'field_issue_title',
-    'label' => 'Title',
+    'label' => 'Issue Date',
     'required' => 1,
     'settings' => array(
       'default_value' => 'now',
@@ -480,7 +527,7 @@ Image Size (210 x 145).',
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 9,
+      'weight' => 7,
     ),
   );
 
@@ -981,7 +1028,7 @@ Image Size (210 x 145).',
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 3,
+      'weight' => 8,
     ),
   );
 
@@ -1020,14 +1067,18 @@ Image Size (210 x 145).',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 4,
+      'weight' => 9,
     ),
   );
 
   // Exported field_instance: 'node-supplement-field_supp_select_magazine'.
   $field_instances['node-supplement-field_supp_select_magazine'] = array(
     'bundle' => 'supplement',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'target_id' => 573,
+      ),
+    ),
     'deleted' => 0,
     'description' => 'Please select magazine to map with supplement.',
     'display' => array(
@@ -1061,7 +1112,7 @@ Image Size (210 x 145).',
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 7,
     ),
   );
 
@@ -1074,6 +1125,7 @@ Image Size (210 x 145).',
   t('Import Issue XML');
   t('Import XML');
   t('Issue');
+  t('Issue Date');
   t('Large Cover Image');
   t('Magazine');
   t('Please check to publish this content.');
@@ -1084,16 +1136,15 @@ Image Size (210 x 145).',
   t('Please select the date using date picker.
 ');
   t('Please upload large cover image.<br/>
-Image Size (300 x 225)');
+Image Size (172 x 240)');
   t('Please upload small cover image.<br/>
-Image Size (210 x 145).');
+Image Size (100 x 140).');
   t('Print Issue Date');
   t('Publish');
   t('Select Magazine');
   t('Small Cover Image');
   t('Source type');
   t('Supplement');
-  t('Title');
   t('Upload Cover Photo');
 
   return $field_instances;

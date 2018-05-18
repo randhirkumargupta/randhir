@@ -53,3 +53,23 @@ function itg_msi_autocomplete_content($title) {
         drupal_json_output($options);
     }
 }
+
+/**
+ * Setting form for Issue Web exclusive.
+ * @return type
+ */
+function itg_msi_show_web_exclusive_form() {
+  $form = array();
+  $form['show_web_exclusive'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show Web Exclusive'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('show_web_exclusive'), // for default checked and false is not checked
+  );
+  return system_settings_form($form);
+}
+
+function itg_msi_magazine_page(){
+	drupal_set_title('');
+	return theme('magazine');	
+}
