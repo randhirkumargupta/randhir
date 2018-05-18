@@ -2754,6 +2754,11 @@ body.has-cart-popup {
   font: 400 19px/28px "Merriweather-Semibold";
   position: relative; }
 
+.quotes .quote-style {
+  color: #000;
+  font: 400 19px/28px "Merriweather-Semibold";
+  position: relative; }
+
 .recom-listing a:hover,
 .data-holder a:hover {
   color: #193984; }
