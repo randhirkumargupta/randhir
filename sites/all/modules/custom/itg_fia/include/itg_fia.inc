@@ -418,14 +418,8 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
         $get_place_name = '';
         $imgs_path = '';
         if (!is_lock_story()) {
-            if ($node->workbench_moderation['current']->state == 'published') {
-                $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-                $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
-            }
-            else {
-                $op_pub = date('F j, h:i a', $node->created);
-                $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
-            }
+            $op_pub = date('F j, h:i a', $node->created);
+            $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
             if (!$last_build) {
                 $last_build_date = $pubdate;
                 $last_build = TRUE;
