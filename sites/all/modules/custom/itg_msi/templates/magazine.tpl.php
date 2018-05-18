@@ -1,22 +1,26 @@
 <div class="magazin-lhs-top">
-  <?php foreach ($rows as $index => $row): ?>
-    <div class="magazin-top">
+	<div class="magazin-top">
       <div class="magazin-top-left">
-          <?php
-          $migrated = $row['field_story_source_type'];
-          $show_web_exclusive = variable_get('show_web_exclusive');
-          $is_magazine_page = FALSE;
-          $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
-          if (empty($year_arr[2])) {
-            $year = itg_msi_issue_attribute_date();
-            $issue_attribute_date = strip_tags(date('Y-m-d', strtotime($year)));
-            $is_magazine_page = TRUE;
-          }
-          else {
-            $issue_attribute_date = strip_tags($row['field_issue_title_1']);
-          }
-          ?>
-          <?php if ($is_magazine_page && $show_web_exclusive) {
+<?php
+$latest_issue_data = get_latest_isssue_data();
+$issue_title = format_date(strtotime($latest_issue_data[0]->field_issue_title_value), 'itg');
+$issue_file = file_load($latest_issue_data[0]->field_issue_large_cover_image_fid);
+$issue_img_src = image_style_url('magazine_top_issue_172x240', $issue_file->uri);
+$arg = arg();	
+    $show_web_exclusive = variable_get('show_web_exclusive');
+    $is_magazine_page = FALSE;
+	$year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
+  if (empty($year_arr[2])) {
+	$year = itg_msi_issue_attribute_date();
+	$issue_attribute_date = strip_tags(date('Y-m-d', strtotime($year)));
+	$is_magazine_page = TRUE;
+  }
+  else {
+	$issue_attribute_date = arg(1);
+	$issue_attribute_date = date("Y-m-d", strtotime($issue_attribute_date));
+  }
+?>
+<?php if ($is_magazine_page && $show_web_exclusive) {
             $view = views_get_view_result('magazine_top_story', 'block_1', $issue_attribute_date);
             $nid_arr[] = $view[0]->nid;
             ?>
@@ -34,13 +38,12 @@
                 print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
             }
           ?>
-      </div>
-
-      <div class="magazin-subscribe magazin-desktop">
+</div>
+<div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
-        <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
+        <div class="issue-image"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></div>
         <div class="issue-title">
-          <?php print $row['field_issue_title']; ?>
+          <?php print $issue_title; ?>
         </div>
         <?php
         $current_issues = itg_msi_get_current_issue();
@@ -70,14 +73,13 @@
         }        
         ?>
     </div>
-  <?php endforeach; ?>
 </div>
 <div class="magazin-lhs-top magazin-mob">
   <div class="magazin-top">
     <div class="magazin-subscribe">
       <span class="latest-issue"><?php print t('latest issue'); ?></span>
-      <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
-        <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
+      <div class="issue-image"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></div>
+        <div class="issue-title"><?php print $issue_title; ?></div>
       <?php
       $current_issues = itg_msi_get_current_issue();
       $current_issue = explode(' 00:', $current_issues);

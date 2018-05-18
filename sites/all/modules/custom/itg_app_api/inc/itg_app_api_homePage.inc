@@ -168,10 +168,9 @@ function homePageJsonPackagelist_india() {
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         //end
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -380,10 +379,9 @@ function homePageJsonPackagelist_lifestyle() {
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -591,10 +589,9 @@ function homePageJsonPackagelist_world() {
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
         //end
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -953,7 +950,9 @@ function homePageJsonNewslist_india() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -975,12 +974,14 @@ function homePageJsonNewslist_india() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1140,7 +1141,21 @@ function homePageJsonNewslist_india() {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
-
+            
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
+            
             $listcount++;
         }
     }
@@ -1233,7 +1248,9 @@ function homePageJsonNewslist_world() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -1255,11 +1272,13 @@ function homePageJsonNewslist_world() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1420,6 +1439,19 @@ function homePageJsonNewslist_world() {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -1883,7 +1915,9 @@ function homePageJsonNewslist_lifestyle() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -1905,14 +1939,16 @@ function homePageJsonNewslist_lifestyle() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
 
 
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -2074,6 +2110,19 @@ function homePageJsonNewslist_lifestyle() {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -2442,7 +2491,9 @@ function itg_rapid_home_movies_json() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -2464,6 +2515,9 @@ function itg_rapid_home_movies_json() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -2628,6 +2682,19 @@ function itg_rapid_home_movies_json() {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -2720,7 +2787,9 @@ function itg_rapid_home_technology_json() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -2742,6 +2811,9 @@ function itg_rapid_home_technology_json() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -2906,6 +2978,19 @@ function itg_rapid_home_technology_json() {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -2997,7 +3082,9 @@ function itg_rapid_home_sports_json() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -3019,6 +3106,9 @@ function itg_rapid_home_sports_json() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -3183,6 +3273,19 @@ function itg_rapid_home_sports_json() {
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -3388,7 +3491,9 @@ function itg_rapid_home_karnataka_elections_json(){
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -3410,6 +3515,9 @@ function itg_rapid_home_karnataka_elections_json(){
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -3574,6 +3682,19 @@ function itg_rapid_home_karnataka_elections_json(){
                 $n_blog = (object) $n_blog;  
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }

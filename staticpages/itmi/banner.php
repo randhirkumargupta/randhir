@@ -2,7 +2,7 @@
 <div id="social-area">
   <div><a href="https://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
     <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
-    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
+    <div><a href="https://www.youtube.com/channel/UCE5d9sr4vIofvYuFYclY3KA" target="_blank" title="youtube"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
 
 </div>
           <div class="belt">

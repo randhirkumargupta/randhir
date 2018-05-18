@@ -160,6 +160,7 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     $node->field_story_source_id[LANGUAGE_NONE][0]['value'] = $node_info['source_nid'];
     $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
+    $node->field_story_configurations[LANGUAGE_NONE][0]['value'] = array('commentbox');
     $node->revision = 1;
     $node->log = 'State Changed to draft';
     $node->workbench_moderation_state_new = workbench_moderation_state_none();
