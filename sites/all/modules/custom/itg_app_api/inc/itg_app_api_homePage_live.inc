@@ -9,7 +9,7 @@
  *
  * @return array
  */
-function homePageJson_dev() {
+function homePageJson_live() {
     global $order;
     $data = array();
     $data_final = array();
@@ -117,7 +117,7 @@ function homePageJson_dev() {
     /* widget calling start */
     $middleware_packages_config = fetchMasterConfigData_live('widget_config_options');
     if ($middleware_packages_config) {
-        $query_w = db_select('itg_app_middleware', 'iam');
+        $query_w = db_select('itg_app_middleware_live', 'iam');
         $query_w->fields('iam');
         $query_w->condition('iam.identifier', 'itg_widget', '=');
         $query_w->condition('iam.status', 1, '=');
@@ -199,8 +199,8 @@ function homePageJson_dev() {
  * @return type
  */
 function home_page_newslist_cat_live() {
-    $query = db_select('itg_app_middleware', 'am');
-    $query->innerJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
+    $query = db_select('itg_app_middleware_live', 'am');
+    $query->innerJoin('itg_app_master_info_internal_live', 'mci', 'mci.org_id=am.ids');
     $query->fields('am', array('ids'));
     $query->condition('am.identifier', 'categories_options');
     $query->condition('am.ids', '0', '!=');
@@ -219,8 +219,8 @@ function home_page_newslist_cat_live() {
 }
 
 function home_page_packages_live() {
-    $query = db_select('itg_app_middleware', 'am');
-    $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=am.ids');
+    $query = db_select('itg_app_middleware_live', 'am');
+    $query->leftJoin('itg_app_master_info_internal_live', 'mci', 'mci.org_id=am.ids');
     $query->fields('am', array('ids'));
     $query->condition('am.identifier', 'itg_package');
     $query->condition('am.ids', '0', '!=');
@@ -240,7 +240,7 @@ function home_page_packages_live() {
 function fetchitg_app_master_config_internal_live($key) {
     $value = "";
     if ($key) {
-        $query = db_select('itg_app_master_config_internal', 'mci');
+        $query = db_select('itg_app_master_config_internal_live', 'mci');
         $query->fields('mci');
         $query->condition('mci.config_key', $key, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -252,7 +252,7 @@ function fetchitg_app_master_config_internal_live($key) {
 function fetch_widget_config_live($name) {
     $data = array();
     if ($name) {
-        $query = db_select('itg_app_middleware', 'iam');
+        $query = db_select('itg_app_middleware_live', 'iam');
         $query->fields('iam');
         $query->condition('iam.identifier', 'itg_widget', '=');
         $query->condition('iam.name', $name, '=');

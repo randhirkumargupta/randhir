@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * @file
  * INC file for APP API Schemes Services.
  * Contains the resource declarations for the service APIs
@@ -2382,8 +2382,8 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
-        /*for dev service*/
-         // horizontal_menu_dev custom resource declaration.....
+        /* for dev service */
+        // horizontal_menu_dev custom resource declaration.....
         'horizontal_menu_dev' => array(
             'operations' => array(
                 'retrieve' => array(
@@ -2449,6 +2449,33 @@ function itg_app_api_resource() {
                         'name' => 'itg_app_api.services',
                     ),
                     'callback' => 'itg_rapid_api_homePageDev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // manual_blog custom resource declaration.....
+        'manual_blog' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves manual_blog schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_manual_blog',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -3649,7 +3676,7 @@ function itg_rapid_api_login_request($token) {
         //return services_error(t('Wrong username or password.'), 401);
         $account = array();
         $s_code = 0;
-        if($user_data->uid > 0){
+        if ($user_data->uid > 0) {
             $s_code = 2;
         }
         $account['status_code'] = "$s_code";
@@ -3852,14 +3879,71 @@ function itg_rapid_api_change_password($token) {
         // Destroy the current session.
         module_invoke_all('user_logout', $user);
         session_destroy();
+        drupal_session_start();
 
         // Load the anonymous user.
-        $user = drupal_anonymous_user();
-
-        drupal_save_session($original_session_state);
+        //$user = drupal_anonymous_user();
+        //drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
+        ################logout sart##############
+        $params_logout = array();
+        $params_logout['user_id'] = $params['user_id'];
+        $params_logout['auth_token'] = $params['auth_token'];
+        $params_logout['device_id'] = $params['device_id'];
+        $params_logout['device_type'] = $params['device_type'];
+        cleanToken_Rapid($params_logout);
+        ################logout sart##############
+        ###############relogin start ##########
+        $params_login = array();
+        $params_login['user_id'] = $params['user_id'];
+        $params_login['password'] = $params['new_pass'];
+        $params_login['device_id'] = $params['device_id'];
+        $params_login['device_type'] = $params['device_type'];
+        $account = array();
+        $token = "";
+        $url = PARENT_SSO . "/appapisso/login_request";
+        $result = callAPI($method, $url, $params_login);
+        $result_obj = json_decode($result);
+        $uid = 0;
+        $uid = $result_obj->uid;
+        $auth_token = $result_obj->token;
+        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
+
+        if ($uid) {
+            $local_account = localLogin($params_login);
+            $cookie_val = getSmlCookie();
+            $session_id = $cookie_val['session_id'];
+            $session_name = $cookie_val['session_name'];
+            $uid = $local_account->user->uid;
+            $name = $local_account->user->name;
+            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
+            $auth_token = $local_account->token;
+            $is_first_login = 1;
+            if ($field_logged_in_count > 0) {
+                $is_first_login = 0;
+            }
+            if ($auth_token) {
+                $token = $auth_token;
+                // query for insert data into itg_app_device - $action $token
+                $action = 2;
+                $device_id = $params_login['device_id'];
+                $device_type = $params_login['device_type'];
+                db_insert('itg_app_device')->fields(array(
+                    'uid' => $uid,
+                    'device_id' => check_plain($device_id),
+                    'device_type' => check_plain($device_type),
+                    'action' => check_plain($action),
+                    'token' => check_plain($auth_token),
+                ))->execute();
+            }
+        }
+        ###############relogin end ##########
+        $token_arr_data['auth_token'] = "$local_account->token";
+        $token_arr_data['session_id'] = "$local_account->sessid";
+        $token_arr_data['session_name'] = "$local_account->session_name";
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
+        $data['data'] = $token_arr_data;
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
@@ -6228,6 +6312,12 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     $share_status = $params['share_status'];
     $share_comment = $params['share_comment'];
     $message = '';
+    if ($content_type == 'video') {
+        $content_type = 'videogallery';
+    }
+    if ($content_type == 'gallery') {
+        $content_type = 'photogallery';
+    }
 
     if ($website_id == '' || $content_id == '') {
         echo "Please pass the website_id & content_id properly";
@@ -6284,13 +6374,14 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     echo $message;
     drupal_exit();
 }
+
 /**
  * Call back function for aboutus API
  * @pram $_GET
  *
  * @return array - The processed information array.
  */
-function itg_rapid_api_aboutus($token){
+function itg_rapid_api_aboutus($token) {
     $jsondata = '{  
     "status_code": "1",
     "status_message": "",
@@ -6307,6 +6398,7 @@ function itg_rapid_api_aboutus($token){
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
+
 /**
  * Helper function to list_itg_rapid_api_anchor_list_default. 
  *
@@ -6324,8 +6416,8 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
-    $query->orderBy('iwo.weight', 'ASC');    
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
+    $query->orderBy('iwo.weight', 'ASC');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
         $a_id = $node_data->nid;
@@ -6401,6 +6493,7 @@ function itg_rapid_api_horizontal_menu_dev($token) {
     $return_obj = $obj;
     return $return_obj;
 }
+
 /**
  * Call back function for hamburger_menu API
  * @pram $_GET
@@ -6426,6 +6519,7 @@ function itg_rapid_api_hamburger_menu_dev($token) {
 
     return $return_obj;
 }
+
 /**
  * Call back function for homePagedev API
  * @pram $_GET
@@ -6449,4 +6543,155 @@ function itg_rapid_api_homePageDev($token) {
 
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
+}
+/**
+ * Call back function for itg_rapid_api_manual_blog API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_manual_blog($token) {
+    //valid id
+    $id = $_GET['id'];
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+    // call function for return data..
+    $suffix = $id;
+    $redis_key = "itg_rapid_api_manual_blog_" . $suffix;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value11'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = itg_rapid_value_manual_blog($id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
+}
+
+/**
+ * itg_rapid_value_manual_blog
+ * @param type $nid
+ * @return string
+ */
+function itg_rapid_value_manual_blog($nid) {
+    //1165361
+    $node_data = node_load($nid);
+    //$node_data = node_load(1165361);
+    //p($node_data);
+    $json_data = array();
+    $blog_data = array();
+    $blog_content = array();
+    $json_data['status_code'] = "1";
+    $json_data['status_message'] = "";
+    // blog data code
+    $category_id = $node_data->field_primary_category['und'][0]['value'];
+    $term = taxonomy_term_load($category_id);
+    $term_name = $term->name;
+    $blog_type = $node_data->field_type['und'][0]['value'];
+    $new_blog = 0;
+    if ($node_data->field_multi_user_allows['und'][0]['value']) {
+        $new_blog = $node_data->field_multi_user_allows['und'][0]['value'];
+    }
+    $live_tv = 0;
+    if ($node_data->field_story_expires['und'][0]['value'] == 'Yes') {
+        $live_tv = 1;
+    }
+    $short_desc = $node_data->field_common_short_description['und'][0]['value'];
+    $page_title = $node_data->title;
+    $sub_title = $node_data->field_constituancy['und'][0]['value'];
+    $firebase_url = get_node_firebase_weburl($nid);
+    $publish_date = $node_data->field_itg_content_publish_date['und'][0]['value'];
+    $large_image_fid = $node_data->field_story_large_image['und'][0]['fid'];
+    $file_large_img_url = completeFilePath($large_image_fid);
+
+    $blog_data['category_id'] = "$category_id";
+    $blog_data['category_title'] = "$term_name";
+    $blog_data['blog_type'] = "$blog_type";
+    $blog_data['id'] = "$nid";
+    $blog_data['short_desc'] = "$short_desc";
+    $blog_data['new_blog'] = "$new_blog";
+    $blog_data['live_tv'] = "$live_tv";
+    $blog_data['title'] = "$page_title";
+    $blog_data['sub_title'] = "$sub_title";
+    $blog_data['large_image'] = "$file_large_img_url";
+    $blog_data['published_datetime'] = "$publish_date";
+    $blog_data['share_link'] = "$firebase_url";
+    // blog content code
+    $loopc = 0;
+    if ($new_blog == 0) {
+        $content_ar = $node_data->field_breaking_content_details['und'];
+        $content_ar = array_reverse($content_ar, true);
+        foreach ($content_ar as $key => $value) {
+            $content_id = $value['value'];
+            $entity = entity_load('field_collection_item', $value);
+            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];
+            $desc_withouthtml = strip_tags($field_breaking_tile);
+            $desc_withhtml = $field_breaking_tile;
+            $title = "";
+            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];
+            $posted_by = "";
+            if ($desc_withhtml) {
+                $body_with_html_data = formateNodeBodyToken($desc_withhtml);
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
+                $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
+            }
+
+            $blog_content[$loopc]['content_id'] = "$content_id";
+            $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
+            $blog_content[$loopc]['updated_datetime'] = "$field_breaking_publish_time";
+            $blog_content[$loopc]['title'] = "$title";
+            $blog_content[$loopc]['posted_by'] = "$posted_by";
+            $loopc++;
+        }
+    } elseif ($new_blog == 1) {
+        $custom_content = itg_rapid_new_blog_content_details($nid);
+        foreach ($custom_content as $breaking_item) {
+            $title = $breaking_item->blog_title;
+            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time);
+            $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
+            $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
+            $posted_by = $user_name;
+            $desc_withhtml = $breaking_item->blog_description;
+            $desc_withouthtml = strip_tags($breaking_item->blog_description);
+            if ($desc_withhtml) {
+                $body_with_html_data = formateNodeBodyToken($desc_withhtml);
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
+                $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
+            }
+            $content_id = $breaking_item->bid;
+            $blog_content[$loopc]['content_id'] = "$content_id";
+            $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
+            $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
+            $blog_content[$loopc]['updated_datetime'] = "$breaking_item->blog_created_date";
+            $blog_content[$loopc]['title'] = "$title";
+            $blog_content[$loopc]['posted_by'] = "$posted_by";
+            $loopc++;
+        }
+    }
+
+    $blog_data['blog_content'] = $blog_content;
+
+    //  data object
+    $json_data['data'] = $blog_data;
+    return $json_data;
+}
+
+/**
+ * content show at live blog page.
+ */
+function itg_rapid_new_blog_content_details($blog_entity_id) {
+    $query = db_select('itg_live_blog', 'p');
+    $query->condition('p.blog_entity_id', $blog_entity_id);
+    $query->condition('p.status', '1');
+    $query->fields('p', array('bid', 'blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time', 'blog_uid', 'update_uid', 'blog_created_date'))
+            ->orderBy('bid', 'DESC');
+    # execute the query
+    return $results = $query->execute()->fetchAll();
 }

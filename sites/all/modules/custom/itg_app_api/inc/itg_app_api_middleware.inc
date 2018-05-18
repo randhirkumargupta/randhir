@@ -446,3 +446,23 @@ function hamburger_menu_listing_sub() {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+
+/**
+ * itg_rapid_get_emoji
+ * @param type $post_content
+ * @return type
+ */
+function itg_rapid_get_emoji($post_content) {
+    $src = array();
+    if ($post_content) {
+        preg_match_all('@src="([^"]+)"@', $post_content, $match);
+        $src = array_pop($match);
+    }
+    if (count($src) > 0) {
+        $base_s3 = "https://akm-img-a-in.tosshub.com/indiatoday";
+        foreach ($src as $key => $value) {
+            $src[$key] = $base_s3 . $value;
+        }
+    }
+    return $src;
+}
