@@ -41,7 +41,7 @@ function homePageJson() {
     $middleware_cat_config = fetchMasterConfigData('categories_config_options');
     if ($middleware_cat_config == 1) { //enable
         $data_cat_news = home_page_newslist_cat();
-        
+
         $total_count += count($data_cat_news);
     }
 
@@ -128,14 +128,14 @@ function homePageJson() {
             $widget = fetch_widget_config($name);
             if ($widget['status'] == 1) {
                 $widget_data = itg_rv_widget_data($widget);
-                
+
                 $widget_order = fetchitg_app_master_config_internal('homeapi_order_widget_' . $name . '');
 
                 $data['data'][$widget_order] = (array) $widget_data;
             }
         }
     }
-    
+
     $array_key = array_keys($data['data']);
 
     $active_chunk_c = count($data['data']);
@@ -143,7 +143,7 @@ function homePageJson() {
     for ($i = 0; $i < $active_chunk_c; $i++) {
         $min_key = min($array_key);
         if (count($data['data'][$min_key]) > 1 || isset($data['data'][$min_key][0]['id'])) {
-           
+
             $data_live[$i] = $data['data'][$min_key];
             unset($data['data'][$min_key]);
 
@@ -216,7 +216,6 @@ function home_page_newslist_cat() {
     }
 
     return $cat_news_list;
-    
 }
 
 /**
@@ -339,7 +338,8 @@ function homePageJsonPackagelist($tid) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -383,7 +383,7 @@ function homePageJsonPackagelist($tid) {
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-         // for breaking_news
+        // for breaking_news
         $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
         $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
@@ -541,9 +541,8 @@ function homePageJsonPackagelist($tid) {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -554,8 +553,8 @@ function homePageJsonPackagelist($tid) {
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             //p($resvalue);
-            
-            if($type == "breaking_news"){
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -563,12 +562,11 @@ function homePageJsonPackagelist($tid) {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
             // for emoji
@@ -624,7 +622,8 @@ function homePageJsonPackagelist_bk($tid) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
 
 
@@ -992,9 +991,10 @@ function homePageCatNewslist($tid) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
-        
+
 
         // code vid=14  end
 
@@ -1025,7 +1025,7 @@ function homePageCatNewslist($tid) {
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-         // for breaking_news
+        // for breaking_news
         $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
         $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
@@ -1058,7 +1058,7 @@ function homePageCatNewslist($tid) {
         // for emoji
         $query->fields('emj2', array('field_emoji_2_value'));
         $query->fields('emj', array('field_emoji_value'));
-        
+
 
         //end
 
@@ -1074,7 +1074,7 @@ function homePageCatNewslist($tid) {
 
         foreach ($result as $reskey => $resvalue) {
             // filter breaking news blog..
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = $resvalue['title'];
@@ -1131,13 +1131,12 @@ function homePageCatNewslist($tid) {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -1193,9 +1192,8 @@ function homePageCatNewslist($tid) {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -1206,8 +1204,8 @@ function homePageCatNewslist($tid) {
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             //p($resvalue);
-            
-            if($type == "breaking_news"){
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -1215,12 +1213,11 @@ function homePageCatNewslist($tid) {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
             // for emoji

@@ -107,7 +107,6 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     //select cover story..
     $story_list_array = itg_rapid_get_cover_story($issue_date, $range_min, $range_max);
     $cover_st_cont = count($story_list_array);
-    //echo $cover_st_cont; die();
     if ($cover_st_cont < 10) {
         // select node belong from current term id or child term id
         $listcount = $cover_st_cont;
@@ -179,7 +178,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         ////$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
         //$query->condition('fsc.field_story_category_tid', 1206501, '!=')->condition('fsc.field_story_category_tid', 1206509, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
         $query->condition('fsms.field_story_magazine_story_issue_value', 'magazine_issue_story')->condition('ti.tid', 1206501, '!=')->condition('ti.tid', 1206509, '!=')->condition('ti.tid', 1206499, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC); 
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
             //$title = $resvalue['title'];

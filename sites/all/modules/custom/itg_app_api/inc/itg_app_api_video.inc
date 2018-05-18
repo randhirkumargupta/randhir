@@ -71,8 +71,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $order_by = 'ASC';
     $type = "videogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // code vid=14  start
@@ -380,8 +379,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $order_by = 'ASC';
     $type = "videogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // code vid=14  start
@@ -1012,14 +1010,14 @@ function featuresWidgetData() {
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     // for breaking_news
-        $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
-        $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
-        $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
-        $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
-        $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-        // for emoji
-        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
-        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
+    $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
+    $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
+    $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
+    $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
+    $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
+    // for emoji
+    $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+    $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -1037,14 +1035,14 @@ function featuresWidgetData() {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('dbody', array('body_value'));
     // for breaking_news
-        $query->fields('fmu', array('field_multi_user_allows_value'));
-        $query->fields('fcsd', array('field_common_short_description_value'));
-        $query->fields('fdt', array('field_type_value'));
-        $query->fields('fse', array('field_story_expires_value'));
-        $query->fields('fdc', array('field_constituancy_value'));
-        // for emoji
-        $query->fields('emj2', array('field_emoji_2_value'));
-        $query->fields('emj', array('field_emoji_value'));
+    $query->fields('fmu', array('field_multi_user_allows_value'));
+    $query->fields('fcsd', array('field_common_short_description_value'));
+    $query->fields('fdt', array('field_type_value'));
+    $query->fields('fse', array('field_story_expires_value'));
+    $query->fields('fdc', array('field_constituancy_value'));
+    // for emoji
+    $query->fields('emj2', array('field_emoji_2_value'));
+    $query->fields('emj', array('field_emoji_value'));
 
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
@@ -1102,14 +1100,14 @@ function topstoriesList($source, $limit = 0) {
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
     // for breaking_news
-        $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
-        $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
-        $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
-        $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
-        $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-        // for emoji
-        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
-        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
+    $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
+    $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
+    $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
+    $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
+    $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
+    // for emoji
+    $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+    $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
@@ -1128,14 +1126,14 @@ function topstoriesList($source, $limit = 0) {
     $query->fields('ti', array('tid'));
     $query->fields('dbody', array('body_value'));
     // for breaking_news
-        $query->fields('fmu', array('field_multi_user_allows_value'));
-        $query->fields('fcsd', array('field_common_short_description_value'));
-        $query->fields('fdt', array('field_type_value'));
-        $query->fields('fse', array('field_story_expires_value'));
-        $query->fields('fdc', array('field_constituancy_value'));
-        // for emoji
-        $query->fields('emj2', array('field_emoji_2_value'));
-        $query->fields('emj', array('field_emoji_value'));
+    $query->fields('fmu', array('field_multi_user_allows_value'));
+    $query->fields('fcsd', array('field_common_short_description_value'));
+    $query->fields('fdt', array('field_type_value'));
+    $query->fields('fse', array('field_story_expires_value'));
+    $query->fields('fdc', array('field_constituancy_value'));
+    // for emoji
+    $query->fields('emj2', array('field_emoji_2_value'));
+    $query->fields('emj', array('field_emoji_value'));
 
 
     //end
@@ -1162,9 +1160,9 @@ function topstoriesList($source, $limit = 0) {
     // loop on top stories.
     foreach ($result as $key => $value) {
         // filter breaking news blog..
-            if($value['field_type_value'] == "Breaking News" || $value['field_type_value'] == "Cricket Live Blog"){
-                continue;
-            }
+        if ($value['field_type_value'] == "Breaking News" || $value['field_type_value'] == "Cricket Live Blog") {
+            continue;
+        }
         // varibale for json tag
         $title = $value['title'];
         $type = $value['type'];
@@ -1228,14 +1226,13 @@ function topstoriesList($source, $limit = 0) {
         $prime_cat = getNodePrimeCatByNid($nid);
         $data_newslist[$home_list_count]['n_id'] = "$nid";
         //$data_newslist[$home_list_count]['n_template_id'] = "";
-        if($type == "breaking_news"){
-                $data_newslist[$home_list_count]['n_type'] = "story"; 
-                $data_newslist[$home_list_count]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$home_list_count]['n_type'] = "$type"; 
-              $data_newslist[$home_list_count]['n_is_blog'] = "0"; 
-            }
+        if ($type == "breaking_news") {
+            $data_newslist[$home_list_count]['n_type'] = "story";
+            $data_newslist[$home_list_count]['n_is_blog'] = "1";
+        } else {
+            $data_newslist[$home_list_count]['n_type'] = "$type";
+            $data_newslist[$home_list_count]['n_is_blog'] = "0";
+        }
         $data_newslist[$home_list_count]['n_is_developing'] = "$is_developing";
         $data_newslist[$home_list_count]['n_is_sponsored'] = "0";
         $data_newslist[$home_list_count]['n_share_link'] = "$firebase_url";
@@ -1300,56 +1297,54 @@ function topstoriesList($source, $limit = 0) {
         }
         /* work on offline end */
         // for breaking_news
+        $n_blog = array();
+        $created = $value['created'];
+        $blog_type = $value['field_type_value'];
+        $new_blog = 0;
+        if ($value['field_multi_user_allows_value']) {
+            $new_blog = 1;
+        } elseif ($value['field_type_value'] == "Cricket Live Blog") {
+            $new_blog = 2;
+        }
+        $live_tv = 0;
+        if ($value['field_story_expires_value'] == 'Yes') {
+            $live_tv = 1;
+        }
+        $short_desc = $value['field_common_short_description_value'];
+        $sub_title = $value['field_constituancy_value'];
+        $page_title = $node_data->title;
+        $field_type_value = $value['field_type_value'];
+        //p($resvalue);
+
+        if ($type == "breaking_news") {
+            $n_blog['blog_type'] = "$blog_type";
+            $n_blog['id'] = "$nid";
+            $n_blog['sub_title'] = "$sub_title";
+            $n_blog['short_desc'] = "$short_desc";
+            $n_blog['new_blog'] = "$new_blog";
+            $n_blog['live_tv'] = "$live_tv";
+            $n_blog = (object) $n_blog;
+            $data_newslist[$home_list_count]['n_blog'] = $n_blog;
+        } else {
             $n_blog = array();
-            $created = $value['created'];
-            $blog_type = $value['field_type_value'];
-            $new_blog = 0;
-            if ($value['field_multi_user_allows_value']) {
-                $new_blog = 1;
-            }
-            elseif($value['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
-            }
-            $live_tv = 0;
-            if ($value['field_story_expires_value'] == 'Yes') {
-                $live_tv = 1;
-            }
-            $short_desc = $value['field_common_short_description_value'];
-            $sub_title = $value['field_constituancy_value'];
-            $page_title = $node_data->title;
-            $field_type_value = $value['field_type_value'];
-            //p($resvalue);
-            
-            if($type == "breaking_news"){
-                $n_blog['blog_type'] = "$blog_type";
-                $n_blog['id'] = "$nid";
-                $n_blog['sub_title'] = "$sub_title";
-                $n_blog['short_desc'] = "$short_desc";
-                $n_blog['new_blog'] = "$new_blog";
-                $n_blog['live_tv'] = "$live_tv";
-                $n_blog = (object) $n_blog;
-                $data_newslist[$home_list_count]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
-                $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
-                $data_newslist[$home_list_count]['n_blog'] = $n_blog;
-            }
-            // for emoji
-            $n_emoji_left = array();
-            $n_emoji_right = array();
-            $emoji_left = $value['field_emoji_value'];
-            $emoji_right = $value['field_emoji_2_value'];
-            if ($emoji_left) {
-                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
-            }
-            if ($emoji_right) {
-                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
-            }
-            $data_newslist[$home_list_count]['n_emoji_left'] = $n_emoji_left;
-            $data_newslist[$home_list_count]['n_emoji_right'] = $n_emoji_right;
-        $home_list_count++; 
+            $n_blog['empty'] = "";
+            $n_blog = (object) $n_blog;
+            $data_newslist[$home_list_count]['n_blog'] = $n_blog;
+        }
+        // for emoji
+        $n_emoji_left = array();
+        $n_emoji_right = array();
+        $emoji_left = $value['field_emoji_value'];
+        $emoji_right = $value['field_emoji_2_value'];
+        if ($emoji_left) {
+            $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+        }
+        if ($emoji_right) {
+            $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+        }
+        $data_newslist[$home_list_count]['n_emoji_left'] = $n_emoji_left;
+        $data_newslist[$home_list_count]['n_emoji_right'] = $n_emoji_right;
+        $home_list_count++;
         //}
     }
 

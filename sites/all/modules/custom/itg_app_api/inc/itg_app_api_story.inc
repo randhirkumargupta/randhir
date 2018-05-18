@@ -41,7 +41,7 @@ function generateStoryDeatilList($id) {
     $nid = $id;
     $photo_list_array = array();
     $data_array = array();
-    $node = node_load($nid);    
+    $node = node_load($nid);
     // variable for feed
     $title = $node->title;
     $tid = $node->field_primary_category['und'][0]['value'];
@@ -239,38 +239,36 @@ function generateStoryDeatilList($id) {
     } else {
         $data_array['rating'] = $rating;
     }
-    
-          /* work on offline start */
 
-        {
-            $byline_data = itg_get_multi_byline_details($nid, 1);
-            $aid = $byline_data[0]['nid'];
-            $a_title = $byline_data[0]['title'];
-            
-            $arr_offline = array();
-            $author = array();
-            $nObject = new stdClass();
-            $nObject->nid = $nid;
-            $author = (array) generateAuthorTagStory($nObject, 1);
-            $a_title = $author['a_title'];
-            $arr_offline['no_desc_withouthtml'] = "$body_with_html";
-            $arr_offline['no_author']['a_title'] = "$a_title";
-            $data_array['n_offline_data'] = $arr_offline;
-        }
-        /* work on offline end */
-        // for emoji
-            $n_emoji_left = array();
-            $n_emoji_right = array();
-            $emoji_left = $node->field_emoji['und'][0]['value']; 
-            $emoji_right = $node->field_emoji_2['und'][0]['value'];
-            if ($emoji_left) {
-                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
-            }
-            if ($emoji_right) {
-                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
-            }
-            $data_array['n_emoji_left'] = $n_emoji_left;
-            $data_array['n_emoji_right'] = $n_emoji_right;
+    /* work on offline start */ {
+        $byline_data = itg_get_multi_byline_details($nid, 1);
+        $aid = $byline_data[0]['nid'];
+        $a_title = $byline_data[0]['title'];
+
+        $arr_offline = array();
+        $author = array();
+        $nObject = new stdClass();
+        $nObject->nid = $nid;
+        $author = (array) generateAuthorTagStory($nObject, 1);
+        $a_title = $author['a_title'];
+        $arr_offline['no_desc_withouthtml'] = "$body_with_html";
+        $arr_offline['no_author']['a_title'] = "$a_title";
+        $data_array['n_offline_data'] = $arr_offline;
+    }
+    /* work on offline end */
+    // for emoji
+    $n_emoji_left = array();
+    $n_emoji_right = array();
+    $emoji_left = $node->field_emoji['und'][0]['value'];
+    $emoji_right = $node->field_emoji_2['und'][0]['value'];
+    if ($emoji_left) {
+        $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+    }
+    if ($emoji_right) {
+        $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+    }
+    $data_array['n_emoji_left'] = $n_emoji_left;
+    $data_array['n_emoji_right'] = $n_emoji_right;
 
     $data['data'] = $data_array;
     return $data;

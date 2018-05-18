@@ -79,12 +79,11 @@ function generateNewsCategoryList($tid, $pageno) {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -129,7 +128,7 @@ function generateNewsCategoryList($tid, $pageno) {
         // for emoji
         $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
         $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
-        
+
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
@@ -146,7 +145,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-        
+
         // for breaking_news
         $query->fields('fmu', array('field_multi_user_allows_value'));
         $query->fields('fcsd', array('field_common_short_description_value'));
@@ -181,8 +180,8 @@ function generateNewsCategoryList($tid, $pageno) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-             // filter breaking news blog..
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            // filter breaking news blog..
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             // node feed tag
@@ -196,8 +195,8 @@ function generateNewsCategoryList($tid, $pageno) {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-            if($type == 'breaking_news'){
-                $field_story_kicker_text_value = $resvalue['field_common_short_description_value'];
+            if ($type == 'breaking_news') {
+                $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
@@ -239,19 +238,18 @@ function generateNewsCategoryList($tid, $pageno) {
             }
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
-            $term_name = $term->name;           
-            
+            $term_name = $term->name;
+
 
             $news_list_array[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $news_list_array[$listcount]['n_type'] = "story"; 
-                $news_list_array[$listcount]['n_is_blog'] = "1"; 
+            if ($type == "breaking_news") {
+                $news_list_array[$listcount]['n_type'] = "story";
+                $news_list_array[$listcount]['n_is_blog'] = "1";
+            } else {
+                $news_list_array[$listcount]['n_type'] = "$type";
+                $news_list_array[$listcount]['n_is_blog'] = "0";
             }
-            else{
-              $news_list_array[$listcount]['n_type'] = "$type"; 
-              $news_list_array[$listcount]['n_is_blog'] = "0"; 
-            }
-            
+
             $news_list_array[$listcount]['n_is_sponsored'] = "0";
             $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
             $news_list_array[$listcount]['n_title'] = "$title";
@@ -318,7 +316,7 @@ function generateNewsCategoryList($tid, $pageno) {
             $news_list_array[$listcount]['n_video'] = $videolist;
             // re-insalize vediolist
             $videolist = array();
-            
+
             // for breaking_news
             $n_blog = array();
             $created = $resvalue['created'];
@@ -326,21 +324,21 @@ function generateNewsCategoryList($tid, $pageno) {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
                 $live_tv = 1;
             }
             $short_desc = $resvalue['field_common_short_description_value'];
-            $sub_title = $resvalue['field_constituancy_value'];
+            //$sub_title = $resvalue['field_constituancy_value'];
+            $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
             //p($resvalue);
-            
-            if($type == "breaking_news"){
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";

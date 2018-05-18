@@ -4075,7 +4075,7 @@ function itg_rapid_api_login_request($token) {
         //return services_error(t('Wrong username or password.'), 401);
         $account = array();
         $s_code = 0;
-        if($user_data->uid > 0){
+        if ($user_data->uid > 0) {
             $s_code = 2;
         }
         $account['status_code'] = "$s_code";
@@ -4269,7 +4269,7 @@ function itg_rapid_api_change_password($token) {
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
     if (!drupal_valid_token($token, 'services')) {
-    //if (!$token_val_flag) {
+        //if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
@@ -4298,15 +4298,14 @@ function itg_rapid_api_change_password($token) {
 
         // Load the anonymous user.
         //$user = drupal_anonymous_user();
-
         //drupal_save_session($original_session_state);
-        deviceTokenReset_Rapid($params);         
+        deviceTokenReset_Rapid($params);
         ################logout sart##############
-       $params_logout = array();
+        $params_logout = array();
         $params_logout['user_id'] = $params['user_id'];
         $params_logout['auth_token'] = $params['auth_token'];
         $params_logout['device_id'] = $params['device_id'];
-        $params_logout['device_type'] = $params['device_type'];        
+        $params_logout['device_type'] = $params['device_type'];
         cleanToken_Rapid($params_logout);
         ################logout sart##############
         ###############relogin start ##########
@@ -4360,7 +4359,6 @@ function itg_rapid_api_change_password($token) {
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
         $data['data'] = $token_arr_data;
-       
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
@@ -4829,7 +4827,7 @@ function itg_rapid_api_reset_password($token) {
     }
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    
+
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -6951,8 +6949,7 @@ function generateNewsCategoryListsearch_rest($nid_str) {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // select node belong from current term id or child term id
@@ -7131,6 +7128,7 @@ function generateNewsCategoryListsearch_rest($nid_str) {
     $data['updated_datetime'] = $pub_date;
     return $data;
 }
+
 /**
  * Call back function for Social Share API
  * @pram $_POST in JSON formate
@@ -7212,6 +7210,7 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     echo $message;
     drupal_exit();
 }
+
 /**
  * Call back function for itg_rapid_api_manual_blog API
  * @pram $_GET
@@ -7294,22 +7293,22 @@ function itg_rapid_value_manual_blog($nid) {
     $loopc = 0;
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
-        $content_ar = array_reverse($content_ar,true);
-        foreach ($content_ar as $key => $value) {   
+        $content_ar = array_reverse($content_ar, true);
+        foreach ($content_ar as $key => $value) {
             $content_id = $value['value'];
-            $entity = entity_load('field_collection_item', $value);            
-            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];            
+            $entity = entity_load('field_collection_item', $value);
+            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];
             $desc_withouthtml = strip_tags($field_breaking_tile);
             $desc_withhtml = $field_breaking_tile;
             $title = "";
-            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];   
+            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];
             $posted_by = "";
-            if($desc_withhtml){
+            if ($desc_withhtml) {
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
                 $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
-            
+
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
             $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
@@ -7318,20 +7317,19 @@ function itg_rapid_value_manual_blog($nid) {
             $blog_content[$loopc]['posted_by'] = "$posted_by";
             $loopc++;
         }
-    }
-    elseif ($new_blog == 1) {
-       $custom_content = itg_rapid_new_blog_content_details($nid);
-        foreach ($custom_content as $breaking_item) {             
+    } elseif ($new_blog == 1) {
+        $custom_content = itg_rapid_new_blog_content_details($nid);
+        foreach ($custom_content as $breaking_item) {
             $title = $breaking_item->blog_title;
-            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time); 
+            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time);
             $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
             $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
             $posted_by = $user_name;
             $desc_withhtml = $breaking_item->blog_description;
             $desc_withouthtml = strip_tags($breaking_item->blog_description);
-            if($desc_withhtml){
+            if ($desc_withhtml) {
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
                 $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
             $content_id = $breaking_item->bid;
@@ -7356,30 +7354,29 @@ function itg_rapid_value_manual_blog($nid) {
  * content show at live blog page.
  */
 function itg_rapid_new_blog_content_details($blog_entity_id) {
-  $query = db_select('itg_live_blog', 'p');
-  $query->condition('p.blog_entity_id', $blog_entity_id);
-  $query->condition('p.status', '1');
-  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
-       ->orderBy('bid', 'DESC');
-  # execute the query
-  return $results = $query->execute()->fetchAll();
- 
+    $query = db_select('itg_live_blog', 'p');
+    $query->condition('p.blog_entity_id', $blog_entity_id);
+    $query->condition('p.status', '1');
+    $query->fields('p', array('bid', 'blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time', 'blog_uid', 'update_uid', 'blog_created_date'))
+            ->orderBy('bid', 'DESC');
+    # execute the query
+    return $results = $query->execute()->fetchAll();
 }
+
 /**
  * Call back function for video insert API
  * @pram $_POST in JSON formate
  *
  * @return array - The processed information array.
  */
-
 function itg_rapid_api_insert_video() {
-    $HTTP_RAW_POST_DATA;    
+    $HTTP_RAW_POST_DATA;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //p($params);
     $long_headline = $params['long_headline'];
     $short_headline = $params['short_headline'];
     $description = $params['description'];
-    $city =  $params['city'];
+    $city = $params['city'];
     $anchor = (int) $params['anchor'];
     $video_kicker = $params['video_kicker'];
     $section_id = (int) $params['section_id'];
@@ -7447,15 +7444,15 @@ function itg_rapid_api_insert_video() {
 
     return $data;
 }
+
 /**
  * itg_rap_upload_img
  * @param type $url
  * @return type
  */
-
-function itg_rap_upload_img($url){
+function itg_rap_upload_img($url) {
     $fid = 0;
-    if($url){
+    if ($url) {
         $extra_large_image_url = file_get_contents($url);
         $extra_large_image = base64_encode($extra_large_image_url);
         $fid = $fid_extra_large_image = uplodaProfileImg_Rapid($extra_large_image);
