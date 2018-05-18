@@ -1,5 +1,4 @@
 <?php
-die("Site is currently under maintenance but should be back shortly. Thank you for your patience.");
 /**
  * @file
  * The PHP page that serves all page requests on a Drupal installation.
