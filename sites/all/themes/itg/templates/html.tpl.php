@@ -216,5 +216,6 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	  print $styles;
 	}
 ?>
+<script> if ('serviceWorker' in navigator) { window.addEventListener('load', function() {  navigator.serviceWorker.register('/service-worker.js');  });}</script>
 </body>
 </html> 
