@@ -199,6 +199,12 @@ function itg_videogallery_menu() {
      'access arguments' => array('access content'),
      'file' => 'includes/itg_dailymotion_video_dashboard.inc',
   );
+  $items['xml-file-video-insert'] = array(
+     'type' => MENU_CALLBACK,
+    'page callback' => 'itg_videogallery_xml_file_video_insert',
+     'access arguments' => array('access content'),
+    'file' => 'includes/itg_videogallery_xml_file_video_insert.inc',
+  );
 
   return $items;
 }
