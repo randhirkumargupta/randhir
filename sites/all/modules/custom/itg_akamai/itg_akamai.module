@@ -1045,7 +1045,7 @@ function itg_akamai_init() {
         $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
         // Checking if page is Taxonomy page
         $parms = explode('/', $parm);
-        
+        $flag = TRUE;
         if ($is_front_page) {   // Checking if page is front page
           $homepage_ttl = variable_get('itg_akamai_other_hpage');
           if (isset($homepage_ttl) && !empty($homepage_ttl)) {
@@ -1061,6 +1061,7 @@ function itg_akamai_init() {
         else if ($parms[0] == "taxonomy" && $parms[1] == "term" && is_numeric($parms[2]) && $parms[3] == "") {
           $max_age = get_itg_akamai_content_setting($parms[2], 'taxonomy');
           akamai_max_age($max_age);
+          $flag = FALSE;
         }
         else if (($parms[0] == "magazine" && $parms[1] != "" && $parms[3] == "") || ($parms[0] == "magazine" && $parms[1] == "" && $parms[3] == "")) {
           try {
@@ -1072,6 +1073,7 @@ function itg_akamai_init() {
               $max_age = variable_get('akamai_timeout_magazine');
             }
             akamai_max_age($max_age);
+            $flag = FALSE;
           }
           catch (Exception $e) {
             watchdog('ITG Akamai', 'Error:' . $e->getMessage());
@@ -1090,37 +1092,79 @@ function itg_akamai_init() {
             // This will return the TTL that have been set from backend
             $max_age = get_itg_akamai_content_setting($entity_id, ITG_AKAMAI_EVENT_BACKEND);
             akamai_max_age($max_age);
+            $flag = FALSE;
           }
         }
         else if (arg(0) == 'video' && arg(2) == 'embed') {
           $ttl_for_custom_url = 1800;
           akamai_max_age($ttl_for_custom_url);
+          $flag = FALSE;
         } 
         else if (arg(0) == 'rss' || arg(0) == 'rss-gallery' || arg(0) == 'rss-video' || arg(0) == 'rss-content') {
           $ttl_for_custom_url = 1800;
           akamai_max_age($ttl_for_custom_url);
+          $flag = FALSE;
         }
         else if (arg(0) == 'topic') {
           $ttl_for_custom_url = 1800;
           akamai_max_age($ttl_for_custom_url);
+          $flag = FALSE;
         } 
         else if (arg(0) == 'sitemap' && !empty(arg(1))) {
           $ttl_for_custom_url = 120;
           akamai_max_age($ttl_for_custom_url);
+          $flag = FALSE;
         }
-        else if (arg(0) == 'elections' && arg(2) == 'constituency' && !empty(arg(3))) {
+        else if (arg(0) == 'elections' && arg(2) == 'constituency' && !empty(arg(3)) && FALSE) {
           $ttl_for_custom_url = get_itg_variable('itg_election_ttl_constituency');
           akamai_max_age($ttl_for_custom_url);
-        }
-        else {          
+          $flag = FALSE;
+        } else {          
           $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);          
           if (isset($ttl_for_custom_url)) {
             akamai_max_age($ttl_for_custom_url);
+            $flag = FALSE;
+          }
+        }        
+        if ($flag && $folder_ttl_data = itg_akamai_have_folder_ttl($parm)) {
+          if (!empty($folder_ttl_data->ttl)) {
+            akamai_max_age($folder_ttl_data->ttl);
           }
         }
       } // End of theme conditon
     }
   }
+}
+
+/**
+ * function to check ttl on folder
+ * @param string $parm
+ * @return boolean
+ */
+
+function itg_akamai_have_folder_ttl($parm = NULL) {
+  if (!empty($parm)) {
+    $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_folder($parm);    
+    return $ttl_for_custom_url;
+  }
+  return FALSE;
+}
+
+function itg_akamai_get_ttl_for_custom_folder($parm = NULL){
+  if (empty($parm)) {
+    return FALSE;
+  }
+  $_ttl_for_custom_url = FALSE;
+  $query = db_select('itg_akamai_custom_url_ttl', 't');
+  $query->fields('t', array('ttl', 'url'));
+  $result = $query->execute()->fetchAll();
+  foreach ($result as $key => $value) {
+    $_temp = end(explode('/', $value->url));
+    if ($_temp == '*' && fnmatch($value->url, $parm)) {
+      $_ttl_for_custom_url = $value;
+    }
+  }
+  return $_ttl_for_custom_url;
 }
 
 /**
