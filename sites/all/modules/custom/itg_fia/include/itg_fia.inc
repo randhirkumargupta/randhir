@@ -933,7 +933,6 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
         $query->condition('frc.entity_id', $nid);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         print_r($result);
-        die('sdsd');
         $node_str = $result[0]['field_common_related_content_value'];
         
         // replace enviroment name
@@ -952,6 +951,7 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
             foreach ($nid_list as $key => $value) {                
                 $flag_fia = 0;
                 if($primary_cat_status == '1'){
+                  echo "only primary cat ";
                   $flag_fia = checkFIANodeBynid($value,1);  //exclude mail today
                 }else{
                   $flag_fia = checkFIANodeBynid($value,0); //only mail today
@@ -989,7 +989,9 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
         $relatednode = "";
     }
     
-    return $relatednode;
+    //return $relatednode;
+    echo $relatednode;
+    die('jdshfjsdhf');
 }
 
 /*
@@ -1056,12 +1058,13 @@ function fia_get_order_node_by_nid($nid, $prime_section){
 function checkFIANodeBynid($nid,$primary_cat_status){
     $nid_f = 0;
     $mail_today_tid = '1206572';
+    $node_type = array('story','photogallery');
     if($nid){
         $query = db_select('node', 'n');
         $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
         $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
         $query->fields('n', array('nid'));
-        $query->condition('n.type', 'story', '=');
+        $query->condition('n.type', $node_type, IN);
         $query->condition('n.status', '1', '=');
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
