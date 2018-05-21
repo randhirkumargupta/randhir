@@ -6,7 +6,7 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
-// include inc file
+// include inc file 
 
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
