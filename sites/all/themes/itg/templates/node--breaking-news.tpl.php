@@ -98,14 +98,15 @@ if(!empty($coverage_end)){
         $modify_date = date('Y-m-d\TH:i:s', $node->changed);
         $created_date = $created_date.'+05:30';
         $modify_date = $modify_date.'+05:30';
+        $embed_created = date("Y-m-d\TH:i:s", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));
       
 ?>
                     <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
                         <p itemprop="headline" content="<?php print $node->title; ?>"></p>
                         <h2 itemprop="articleBody" style="display:none"><strong><?php print $embed_display_time;?> IST: </strong><?php print strip_tags($title); ?></h2>
-                        <meta itemprop="datePublished" content="<?php print $created_date;?>">
+                        <meta itemprop="datePublished" content="<?php print $embed_created;?>">
                         <meta itemprop="author" content="IndiaToday.in">
-                        <meta itemprop="dateModified" content="<?php print $modify_date;?>">
+                        <meta itemprop="dateModified" content="<?php print $embed_created;?>">
                         <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                             <meta itemprop="url" content="<?php print $embed_image; ?>">
                             <meta itemprop="width" content="650">
