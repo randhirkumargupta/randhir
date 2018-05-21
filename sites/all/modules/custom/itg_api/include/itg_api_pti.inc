@@ -9,6 +9,7 @@ use Aws\Common\Credentials\Credentials;
  * Implement itg_pti_content
  */
 function itg_pti_content() {
+  drupal_page_is_cacheable(FALSE);
   if (!empty(variable_get('api_info'))) {
     global $user;
     //module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
@@ -324,6 +325,7 @@ function itg_pti_content() {
  * @global type $user
  */
 function itg_delete_pti_old_xml() {
+  drupal_page_is_cacheable(FALSE);
   if (!empty(variable_get('api_info'))) {    
     // Delete Data From DB.	
     if (!empty(get_itg_variable('delete_pti_xmlfile_days'))) {
