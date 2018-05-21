@@ -32,7 +32,7 @@
                           print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
                         }
                         ?>
-                        <h2 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
+                        <h3 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
                             <?php
                             if (function_exists('itg_common_get_smiley_title')) {
                               echo l(itg_common_get_smiley_title($row['node_obj'], 0, 68), "node/" . $row['nid'], array("html" => TRUE));
@@ -41,7 +41,7 @@
                               echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
                             }
                             ?>
-                        </h2>           
+                        </h3>           
                     </div>
                   <?php } ?>
             <?php } ?>
