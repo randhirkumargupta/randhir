@@ -3,54 +3,49 @@ global $base_url;
 drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
-<div id="section-header-event-1206834" class="india-today-mind-rocks-2015">
+<div id="section-header-event-1206834" class="india-today-mind-rocks-2015 india-today-mind-rocks-commanheader-2017">
     <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="index.jsp" title="Mind Rocks 2017 "> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/logo.png" alt="Mind Rocks 2017"> </a> </div>
-      <div class="logo_it_tt ipadLogo"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></div>
-      <div class="eventGuestArea ipadGuest"> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/masthead-delhi.png" alt=""> </div>
+      <div class="left_part_logo"> <a href="/youthsummit/delhi/2015/index.jsp" title="Mind Rocks Youth Summit 2015"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2015/images/Youth-Summit-mast-logo_2015.png" alt="Mind Rocks Youth Summit 2015 Logo"></a></div>
+      
+      <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="http://media2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+      
       <div class="social_icons_ipad">
         <ul>
-          <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2017" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
-          <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2017" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
-          <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2017" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
+          <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2016" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
+          <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2016" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
+          <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2016" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
         </ul>
       </div>
-      <div class="right_part_ad"><!-- Ad Slot 1 tag: --> 
-        <!-- begin ZEDO for channel: IT_Other_YouthSummit, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
-        <div id="zt_209516_1" style="display:show" "=""> 
-          <script id="zt_209516_1" language="javascript"> 
-
-if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
-{
-     zmt_mtag.zmt_render_placement(p209516_1);
-}
- </script>
-          <div class="clear"></div>
-        <iframe id="zd_async_frame_zt_209516_1" name="zd_async_frame_zt_209516_1" scrolling="no" frameborder="0" allowfullscreen="" src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="width: 728px; height: 90px;"></iframe></div>
-        <!-- end ZEDO for channel:  IT_Other_YouthSummit, Publisher: India Today, Ad Dimension: Super Banner-728x90 --> 
-        
+      <div class="right_part_ad ipad_top1">
+      <?php
+        $block = block_load('itg_ads', ADS_HEADER);
+        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+        print render($render_array);
+        ?>        
       </div>
       <div class="txt_rgs">
-        <div class="tt_date_time">
-          <h2> <span class="date_tr">SEPTEMBER 16, 2017</span> <span class="place_tr">Sirifort Auditorium, New Delhi</span> </h2>
-        </div>
-        <div class="eventGuestArea"><img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/masthead-delhi.png" alt=""> </div>
-        <div class="logo_it_tt"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></div>
-      </div>
+      <div class="tt_date_time">
+        <h2> <span class="date_t">October 31, 2015 </span> <span class="place_t">Siri Fort Auditorium, New Delhi</span> </h2>
+      </div>     
+      
+      <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+    </div>
       <div class="clearfix"></div>
     </div>
+    
     <div class="social_icons_ipad destop_social">
       <ul>
-        <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2017" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2017" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2017" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2016" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2016" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2016" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
       </ul>
     </div>
+    
   </div>
 </div>
-    <div class="itg-logo-container">
+    <div class="itg-logo-container clearfix">
 	<?php
 	if ($data['is_event']) {
 	  ?>
@@ -75,13 +70,6 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 	}
 	?>
            
-    </div>
-    <div class="event-add-header">
-        <?php
-        $block = block_load('itg_ads', ADS_HEADER);
-        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-        print render($render_array);
-        ?>
-    </div>   
+    </div>  
 </div>
 
