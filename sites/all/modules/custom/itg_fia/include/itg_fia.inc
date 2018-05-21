@@ -978,6 +978,8 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
             }
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
+            echo "order";
+            echo $order;
             $related_content_primary_cat = "";
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
             echo "related art";
