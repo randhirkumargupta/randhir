@@ -172,6 +172,8 @@ function amptheme_preprocess_node(&$variables) {
   }
   // New Live Blog AMP Tpl File
   if ($variables['type'] == 'breaking_news') {
+	print_r($variables['field_multi_user_allows']);
+	var_dump(($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) || ($variables['field_multi_user_allows']['und'][0]['value'] && $variables['field_multi_user_allows']['und'][0]['value'] == 1));die;
     if (($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) || ($variables['field_multi_user_allows']['und'][0]['value'] && $variables['field_multi_user_allows']['und'][0]['value'] == 1)) {
       $variables['theme_hook_suggestions'][] = 'node__amp_live_blog_custom';
     } 
