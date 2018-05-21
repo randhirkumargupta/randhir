@@ -731,18 +731,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         drupal_goto($newurl);
       } else if ($arg[0] == 'category' && is_numeric($arg[1]) && !empty($arg[2])) {
         $old_content_id = $arg[1];
+        $query_alias = 0;
+        $type = 'category';
         $table = 'migrate_map_itgcategory';
-        $newurl = getNewStoryUrl($old_content_id, $table);
-        if ($newurl) {
-          drupal_goto($newurl, array(), 301);
-        }
       } else if ($arg[0] == 'site' && $arg[1] == 'category' && is_numeric($arg[2]) && !empty($arg[3])) {
         $old_content_id = $arg[2];
+        $query_alias = 0;
+        $type = 'category';
         $table = 'migrate_map_itgcategory';
-        $newurl = getNewStoryUrl($old_content_id, $table);
-        if ($newurl) {
-          drupal_goto($newurl, array(), 301);
-        }
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
