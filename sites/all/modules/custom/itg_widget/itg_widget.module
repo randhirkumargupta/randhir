@@ -1026,16 +1026,11 @@ function itg_widget_block_view($delta = '') {
           $block['content'] = theme("fifa_top_stories_manual_widget_data", array("data" => $data));
           break;
         case 'fifa_watch_right_now_videos_widget':
-            $display = get_rhs_block_display_condtion($delta);
-            if (empty($display)) {
-                return;
-            }
             $info['widget'] = 'watch_right_now_widget';
             $info['order'] = 'ASC';
             $info['max_limit'] = WATCH_RIGHT_NOW_MAX_RANGE;
             $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
             $data = itg_widget_get_widget_data_data($info);
-            // $block['content'] = theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
             $block['content'] = theme("dont_miss_widget", array("data" => $data));
             break;
          case 'score_card_iframe_widget':
