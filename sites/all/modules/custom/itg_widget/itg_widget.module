@@ -1028,10 +1028,11 @@ function itg_widget_block_view($delta = '') {
         case 'fifa_watch_right_now_videos_widget':
             $info['widget'] = 'watch_right_now_widget';
             $info['order'] = 'ASC';
-            $info['max_limit'] = WATCH_RIGHT_NOW_MAX_RANGE;
-            $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
+            $info['max_limit'] = DONT_MISS_MAX_RANGE;
+            $info['min_limit'] = DONT_MISS_MIN_RANGE;
             $data = itg_widget_get_widget_data_data($info);
-            $block['content'] = theme("dont_miss_widget", array("data" => $data));
+            // p($data);
+            $block['content'] = theme("fifa_dont_miss_widget", array("data" => $data));
             break;
          case 'score_card_iframe_widget':
           $sid = 1;
