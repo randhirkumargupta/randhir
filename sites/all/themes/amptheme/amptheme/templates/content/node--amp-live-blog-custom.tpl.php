@@ -64,11 +64,11 @@ $fb_appid = variable_get('itg_sharing_app_id');
 			$pub_embed_publishe_time = date("H:i", strtotime($breaking_embed_item->blog_publish_time));
 ?>
       <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
-        <?php if (!empty($blog_embed_title) && isset($blog_embed_title)) :?>
-        <p itemprop="headline" content="<?php print $blog_embed_title; ?>"></p>
+        <?php if (!empty($blog_embed_title) && isset($blog_embed_title)) : ?>
+          <p itemprop="headline" content="<?php print $blog_embed_title; ?>"></p>
         <?php endif; ?>
-        <?php if (!empty($blog_embed_desc) && isset($blog_embed_desc)) :?>
-        <h2 itemprop="articleBody" style="display:none"><strong><?php print $pub_embed_publishe_time;?> IST: </strong><?php print strip_tags($blog_embed_desc); ?></h2>
+        <?php if (!empty($blog_embed_desc) && isset($blog_embed_desc)) : ?>
+          <h2 itemprop="articleBody" style="display:none"><strong><?php print $pub_embed_publishe_time;?> IST: </strong><?php print trim(strip_tags($blog_embed_desc)); ?></h2>
         <?php endif; ?>
         <meta itemprop="datePublished" content="<?php print $date_published; ?>">
         <meta itemprop="author" content="IndiaToday.in">
