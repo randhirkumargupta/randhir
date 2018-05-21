@@ -967,6 +967,8 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
             $prime_cat = getNodePrimeCatByNid($nid);
             print_r($prime_cat);
             echo $prime_section = gettopparentstid($prime_cat->tid);
+            echo "primart cat status ";
+            echo $primary_cat_status;
             if($primary_cat_status == '1' && $prime_section == '1206572'){ //exculde mail today
               echo "exclude mail today";
               $prime_section = '';
