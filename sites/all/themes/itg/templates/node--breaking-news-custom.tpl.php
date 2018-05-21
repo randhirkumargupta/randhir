@@ -40,7 +40,6 @@ if (empty($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value'])) {
 else {
   $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);  
 }
-pr($coverage_end);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('H:i:s', $coverage_end);
 $coverage_end_final_date = $coverage_end_date . 'T' . $coverage_end_time.'+05:30';
@@ -59,13 +58,22 @@ $modify_date = $modify_date.'+05:30';
     <div class="bolg-content" id="bolgcontent"> 
       <?php
         if (!empty($custom_content)) {
-          foreach ($custom_content as $breaking_embed_item) {      
+          foreach ($custom_content as $breaking_embed_item) {
+			  $date_published = '';
+			  $date_updated = '';
+			  $date_published = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_created_date));
+			  if(!empty($breaking_embed_item->blog_updated_date) && isset($breaking_embed_item->blog_updated_date)){
+			    $date_updated = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_updated_date));
+			  }
+			  else{
+				$date_updated = $date_published;
+			  }      
         ?>
             <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
               <p itemprop="headline" content="<?php print $node->title; ?>"></p>
-              <meta itemprop="datePublished" content="<?php print $created_date; ?>">
+              <meta itemprop="datePublished" content="<?php print $date_published; ?>">
               <meta itemprop="author" content="IndiaToday.in">
-              <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
+              <meta itemprop="dateModified" content="<?php print $date_updated; ?>">
               <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                 <meta itemprop="url" content="<?php print $embed_image; ?>">
                 <meta itemprop="width" content="650">

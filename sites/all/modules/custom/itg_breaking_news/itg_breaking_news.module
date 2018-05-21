@@ -906,7 +906,7 @@ function get_custom_content_details($blog_entity_id) {
   $query = db_select('itg_live_blog', 'p');
   $query->condition('p.blog_entity_id', $blog_entity_id);
   $query->condition('p.status', '1');
-  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
+  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date', 'blog_updated_date'))
        ->orderBy('bid', 'DESC');
   # execute the query
   return $results = $query->execute()->fetchAll();
