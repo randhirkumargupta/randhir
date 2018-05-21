@@ -75,7 +75,6 @@ function itg_mail_photos_fia_data() {
     $query->condition('n.type', $type, IN);
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
     $query->condition('pc.field_primary_category_value',$mail_today_tid,'!=');
-    $query->condition('n.nid','1153443');
     $query->orderBy('n.created', 'DESC');
     $query->range(0, 100);
     $query = $query->execute()->fetchCol();
@@ -962,28 +961,20 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
             }
         }
         elseif($flag_fia_cont == 0){
-            echo "else related";
+            
             // related content of primary cat
             $prime_cat = getNodePrimeCatByNid($nid);
-            print_r($prime_cat);
-            echo $prime_section = gettopparentstid($prime_cat->tid);
-            echo "primart cat status ";
-            echo $primary_cat_status;
+            
+            $prime_section = gettopparentstid($prime_cat->tid);
             if($primary_cat_status == '1' && $prime_section == '1206572'){ //exculde mail today
-              echo "exclude mail today";
               $prime_section = '';
             }elseif($primary_cat_status == '0'){ //need only mail today related content
-              echo "mail today";
               $prime_section = '1206572';
             }
             
             $order = fia_get_order_node_by_nid($nid, $prime_section);
-            echo "order";
-            echo $order;
             $related_content_primary_cat = "";
             $related_content_primary_cat = fia_related_content_primary_cat($nid, $prime_section, $order);      
-            echo "related art";
-            print_r($related_content_primary_cat);
             $relatednode .= $related_content_primary_cat;
         }
         
@@ -994,9 +985,7 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
         $relatednode = "";
     }
     
-    //return $relatednode;
-    echo $relatednode;
-    die('dhsgdb');
+    return $relatednode;
 }
 
 /*
@@ -1005,9 +994,7 @@ function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
 
 function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {    
     $relatednode = "";
-    $content_type = array('story','photogallery');
     if ($prime_section) {
-      echo "prim sec";
         $start_time = strtotime("-5 day");
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
@@ -1016,9 +1003,9 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
         $query->fields('n', array('nid','created'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
-        $query->condition('n.type', $content_type, IN);
+        $query->condition('n.type', 'story', '=');
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.weight', $order, '<');
+        //$query->condition('iwo.weight', $order, '<');
         $query->condition('iwo.widget', 'section_wise_widget');
         $query->condition('iwo.cat_id', $prime_section);        
         $query->condition('pc.field_story_category_tid', $prime_section, '=');
@@ -1028,9 +1015,6 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->orderBy('n.created', 'DESC');
         $query->groupBy('n.nid');
         $query->range(0, 3);
-        print strtr((string) $query, $query->arguments());
-
-        die('end query');
         
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
         $range = 0;
