@@ -27,7 +27,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
       </div>
       <div class="txt_rgs">
       <div class="tt_date_time">
-        <h2> <span class="date_t">October 31, 2015 </span> <span class="place_t">Siri Fort Auditorium, New Delhi</span> </h2>
+        <h2> <span class="date_tr">October 31, 2015 </span> <span class="place_tr">Siri Fort Auditorium, New Delhi</span> </h2>
       </div>     
       
       <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
