@@ -1074,12 +1074,13 @@ function fia_get_order_node_by_nid($nid, $prime_section){
 function checkFIANodeBynid($nid,$primary_cat_status){
     $nid_f = 0;
     $mail_today_tid = '1206572';
+    $node_type = array('story','photogallery');
     if($nid){
         $query = db_select('node', 'n');
         $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
         $query->leftJoin('field_data_field_primary_category','pc','pc.entity_id = n.nid');
         $query->fields('n', array('nid'));
-        $query->condition('n.type', 'story', '=');
+        $query->condition('n.type', $node_type, IN);
         $query->condition('n.status', '1', '=');
         $query->condition('n.nid', $nid, '=');
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
