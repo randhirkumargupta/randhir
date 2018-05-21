@@ -75,6 +75,7 @@ function itg_mail_photos_fia_data() {
     $query->condition('n.type', $type, IN);
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
     $query->condition('pc.field_primary_category_value',$mail_today_tid,'!=');
+    $query->condition('n.nid','1153444','=');
     $query->orderBy('n.created', 'DESC');
     $query->range(0, 100);
     $query = $query->execute()->fetchCol();
@@ -925,11 +926,14 @@ function itg_fia_config_form($form, &$form_state) {
 function itg_fia_related_node($nid = 0,$primary_cat_status = NULL) {
     $relatednode = "";  
     //$nid = 1145469;
-    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">';        
+    $relatednode .='<h1> More from Related stories </h1><ul class="op-related-articles">'; 
+        echo "Debug related";       
         $query = db_select('field_data_field_common_related_content', 'frc');
         $query->fields('frc', array('field_common_related_content_value'));
         $query->condition('frc.entity_id', $nid);
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        print_r($result);
+        die('sdsd');
         $node_str = $result[0]['field_common_related_content_value'];
         
         // replace enviroment name
