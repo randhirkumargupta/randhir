@@ -59,16 +59,16 @@ $modify_date = $modify_date.'+05:30';
       <?php
         if (!empty($custom_content)) {
           foreach ($custom_content as $breaking_embed_item) {
-			  $date_published = '';
-			  $date_updated = '';
-			  $date_published = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_created_date));
-			  if(!empty($breaking_embed_item->blog_updated_date) && isset($breaking_embed_item->blog_updated_date)){
-			    $date_updated = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_updated_date));
-			  }
-			  else{
-				$date_updated = $date_published;
-			  }      
-        ?>
+            $date_published = '';
+            $date_updated = '';
+            $date_published = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_created_date));
+            if (!empty($breaking_embed_item->blog_updated_date) && isset($breaking_embed_item->blog_updated_date)) {
+              $date_updated = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_updated_date));
+            }
+            else {
+              $date_updated = $date_published;
+            }
+    ?>
             <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
               <p itemprop="headline" content="<?php print $node->title; ?>"></p>
               <meta itemprop="datePublished" content="<?php print $date_published; ?>">
