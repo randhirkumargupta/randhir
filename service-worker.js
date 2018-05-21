@@ -1,6 +1,6 @@
 const res_version = 'indiatoday-1.1'; 
-var ROUTE_SITE_URL = 'www.indiatoday.in'; 
-const SITE_CACHE_HOST_NAME = ["www.indiatoday.in"];
+var ROUTE_SITE_URL = 'staging-it.indiatodayonline.in'; 
+const SITE_CACHE_HOST_NAME = ["staging-it.indiatodayonline.in"];
 const MEDIA_CACHE_HOST_NAME = ["akm-img-a-in.tosshub.com"];
 const STATIC_CACHE_NAME = 	{
 	cache: {
