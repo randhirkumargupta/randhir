@@ -814,6 +814,9 @@ function itg_widget_theme() {
         'fifa_top_stories_manual_widget_data' => array(
             'template' => 'templates/fifa-top-stories-manual-widget-data',
         ),
+        'fifa_dont_miss_widget' => array(
+            'template' => 'templates/fifa-dont-miss-widget',
+        ),
         'score_card_iframe' => array(
             'template' => 'templates/score-card-iframe',
         ),
