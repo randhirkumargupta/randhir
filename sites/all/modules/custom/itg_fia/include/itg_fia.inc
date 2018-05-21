@@ -1007,6 +1007,7 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
     $relatednode = "";
     $content_type = array('story','photogallery');
     if ($prime_section) {
+      echo "prim sec";
         $start_time = strtotime("-5 day");
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
@@ -1027,6 +1028,9 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->orderBy('n.created', 'DESC');
         $query->groupBy('n.nid');
         $query->range(0, 3);
+        print strtr((string) $query, $query->arguments());
+
+        die('end query');
         
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
         $range = 0;
