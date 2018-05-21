@@ -98,8 +98,8 @@ if(!empty($coverage_end)){
         $modify_date = date('Y-m-d\TH:i:s', $node->changed);
         $created_date = $created_date.'+05:30';
         $modify_date = $modify_date.'+05:30';
-        $embed_created = date("Y-m-d\TH:i:s", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));
-      
+        $embed_created = date("Y-m-d\TH:i:s", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));      
+        $embed_created = $embed_created.'+05:30';
 ?>
                     <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
                         <p itemprop="headline" content="<?php print $node->title; ?>"></p>

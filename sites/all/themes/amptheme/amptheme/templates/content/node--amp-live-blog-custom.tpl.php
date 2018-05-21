@@ -61,6 +61,8 @@ $fb_appid = variable_get('itg_sharing_app_id');
       }            
 			$blog_embed_title = $breaking_embed_item->blog_title;			
 			$blog_embed_desc = $breaking_embed_item->blog_description;
+      $date_published = $date_published.'+05:30';
+      $date_updated = $date_updated.'+05:30';
 			$pub_embed_publishe_time = date("H:i", strtotime($breaking_embed_item->blog_publish_time));
 ?>
       <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
