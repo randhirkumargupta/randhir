@@ -607,7 +607,7 @@ function programCategoryListlPageRerourceValue($token) {
     $conf_array = tidConfig();
     $program_key = "itg_programmes_order_by";
     //$Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
-    $Program_section_list = array(1207797, 1207827, 1207722, 1208900, 1208095, 1208902, 1208173, 1207755, 1206960, 1207972, 1208061, 1771901);
+    $Program_section_list = array(1207797, 1207827, 1207722, 1208900, 1208095, 1208902, 1208173, 1207755, 1206960, 1207972, 1208061);
 
 
     // list array building
@@ -1151,7 +1151,7 @@ function topstoriesList($source, $limit = 0) {
     $data_topstories['show_label'] = "0";
     if ($source == 'home') {
         $data_topstories['id'] = "0";
-        $data_topstories['order'] = "$order";
+        $data_topstories['order'] = "1";
         $data_topstories['type'] = "topstories";
         $data_topstories['title'] = "Top Stories";
         $data_topstories['label'] = "Top Stories";
@@ -1173,7 +1173,9 @@ function topstoriesList($source, $limit = 0) {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
-        $body_value = $value['body_value'];
+        if ($type == 'breaking_news') {
+            $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
+        }
 
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
@@ -1313,7 +1315,8 @@ function topstoriesList($source, $limit = 0) {
             $live_tv = 1;
         }
         $short_desc = $value['field_common_short_description_value'];
-        $sub_title = $value['field_constituancy_value'];
+        //$sub_title = $value['field_constituancy_value'];
+        $sub_title = $value['title'];
         $page_title = $node_data->title;
         $field_type_value = $value['field_type_value'];
         //p($resvalue);
