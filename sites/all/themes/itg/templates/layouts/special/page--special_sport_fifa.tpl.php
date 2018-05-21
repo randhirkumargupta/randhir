@@ -331,6 +331,60 @@ $hide_widget = '';
                               </div>
                           </div>
                         <?php } ?>
+                        <!--Don't miss and Ad section starts here-->
+                          <?php if (isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>  
+                            <div class="row itg-h321-section">
+                                <div class="col-md-8 col-sm-6 col-xs-12 mt-50" data-tb-region="HomeDoNotMiss">
+                                    <div class="widget-help-text">Template widgets ( <strong>Don't Miss</strong> )</div>
+                                    <div class="itg-widget">
+                                        <div class="droppable <?php print $gray_bg_layout; ?>">
+                                            <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name']; ?>">
+                                                <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?>
+                                                  <span class="widget-title"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
+                                                <?php } ?>
+                                                <!-- for admin  -->
+                                                <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                                  <div class="widget-settings">
+                                                      <div class="widget-title-wrapper">
+                                                          <span class="widget-title" data-id="itg-block-10"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
+                                                          <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-10']['block_title']; ?>" name="itg-block-10" class="block_title_id" placeholder="Enter Title" />
+                                                      </div>
+                                                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                      <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-10"><i class="fa fa-times"></i></a>
+                                                  </span>                                                
+                                                  </div>
+                                                <?php } ?>
+                                                <div class="data-holder" id="itg-block-10">
+                                                    <?php
+                                                    if (isset($widget_data['itg-block-10']['widget'])) {
+                                                      print $widget_data['itg-block-10']['widget'];
+                                                    }
+                                                    else {
+                                                      print "<div class='widget-placeholder'><span>Don't  Miss</span></div>";
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>             
+                                        </div>               
+                                    </div>  
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
+                                    <div class="widget-help-text">Non Draggable ( <strong>Ad Widget</strong> )</div>
+                                    <div class="itg-widget">
+                                        <div class="ad-widget">
+                                            <div class="sidebar-ad">
+                                                <?php
+                                                $block = block_load('itg_ads', ADS_RHS2);
+                                                $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                                print render($render_array);
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                          <?php } ?>
+                          <!--End of Don't miss and Ad section-->
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 right-side">
                         <div class="row">
