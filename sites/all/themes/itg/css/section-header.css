@@ -40,3 +40,11 @@
 @media screen and (max-width:360px){
 	.mind-rocks-2017-delhi.india-today-mind-rocks-commanheader-2017 .header_part{height:122px}.mind-rocks-2017-delhi.india-today-mind-rocks-commanheader-2017 .left_part_logo {width: 80px;}.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .date_tr{font-size:14px; padding-bottom: 0;}
 	.mind-rocks-2017-bhopal.india-today-mind-rocks-commanheader-2017 .tt_date_time h2 .place_tr{font-size:12px}}
+
+/**************** Delhi mindrocks 2016 Header **********/
+
+.mind-rocks-delhi-2016.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ width:642px; }
+@media screen and (max-width:1024px){.mind-rocks-delhi-2016.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ width:460px;}}
+@media screen and (max-width:800px){.mind-rocks-delhi-2016.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ width:50%; }}
+@media screen and (max-width:767px){}
+@media screen and (max-width:360px){}
