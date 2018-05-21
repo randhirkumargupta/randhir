@@ -532,6 +532,13 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $fp1 = fopen($file_path1, "w");
     fwrite($fp1, $json_data1);
     fclose($fp1);
+    
+    //duplicate json
+    $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos_dup/';
+    $file_path1 = $xml_path1 . $filename;
+    $fp1 = fopen($file_path1, "w");
+    fwrite($fp1, $json_data1);
+    fclose($fp1);
   }
 }
 function fixBadUnicodeForJson($str) {
