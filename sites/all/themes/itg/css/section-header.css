@@ -50,4 +50,7 @@
 @media screen and (max-width:360px){}
 
 /**************** Delhi mindrocks 2015 Header **********/
-.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .header_part{background:url(https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/mindrock_top_mast_bg.jpg) center top repeat-x;}
+.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .header_part{background:url(https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/mindrock_top_mast_bg.jpg) center top repeat-x; height: 273px;}
+.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .left_part_logo{width: 220px;}
+.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .social_icons_ipad.destop_social{ margin-top: -20px;}
+@media screen and (max-width:800px){.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .social_icons_ipad.destop_social{ margin-top: 0px;}}
