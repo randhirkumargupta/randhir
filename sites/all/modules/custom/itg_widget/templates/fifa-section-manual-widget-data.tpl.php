@@ -24,7 +24,7 @@
 .fifa-wcup .headingtext .round03{width: 7px; height: 7px; background-color: #a10506; display: inline-block;}
 .fifa-wcup .headingtext h2{font-size: 15px; line-height: 20px; color: #000; text-transform: uppercase;}
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-2{border:0;}
-.fifa-wcup .auto-block-2{height: auto;}
+.fifa-wcup .auto-block-2{height: auto !important;}
 
 </style>
 <div class="row">
