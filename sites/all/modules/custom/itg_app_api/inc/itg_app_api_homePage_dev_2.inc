@@ -9,7 +9,7 @@
  *
  * @return array
  */
-function homePageJson() {
+function homePageJson_bk() {
     global $order;
     $data = array();
     $data_final = array();
