@@ -6597,7 +6597,7 @@ function itg_rapid_api_hamburger_menu_dev($token) {
 function itg_rapid_api_homePageDev($token) {
     //include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_homePage_dev.inc");
     module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev');
-    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev_2');
+    //module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev_2');
     $redis_key = "itg_rapid_api_homePageDev_json";
     //$result_get = getRedis($redis_key);
     //    if ($result_get['key_value'] != "") {
