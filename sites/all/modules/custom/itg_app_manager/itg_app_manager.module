@@ -3313,11 +3313,14 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#collapsible' => FALSE,
         '#collapsed' => FALSE,
     );
-
+    $cube_widget_val = 0;
+    if(fetchMasterConfigData('cube_widget_config_options')){
+        $cube_widget_val = fetchMasterConfigData('cube_widget_config_options');
+    }
     $form['cube_widget_group']['cube_widget_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
-        '#default_value' => fetchMasterConfigData('cube_widget_config_options'),
+        '#default_value' => $cube_widget_val,
     );
     
 
