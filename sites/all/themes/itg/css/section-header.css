@@ -47,7 +47,6 @@
 @media screen and (max-width:1024px){.mind-rocks-delhi-2016.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ width:460px;}}
 @media screen and (max-width:800px){.mind-rocks-delhi-2016.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ width:50%; }}
 @media screen and (max-width:767px){.mind-rocks-delhi-2016.india-today-mind-rocks-commanheader-2017 .eventGuestArea{ width:45%; }}
-@media screen and (max-width:360px){}
 
 /**************** Delhi mindrocks 2015 Header **********/
 .india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .header_part{background:url(https://smedia2.intoday.in/indiatoday/youthsummit/2017/delhi/images/mindrock_top_mast_bg.jpg) center top repeat-x; height: 273px;}
@@ -55,3 +54,4 @@
 .india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .social_icons_ipad.destop_social{ margin-top: -20px;}
 @media screen and (max-width:1024px){.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .left_part_logo{width: 165px;}.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .social_icons_ipad.destop_social{ margin-top: 0px;}}
 @media screen and (max-width:800px){.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .header_part{ height:230px}}
+@media screen and (max-width:767px){.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .header_part { height: 125px;}.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .left_part_logo { width: 100px;}}
