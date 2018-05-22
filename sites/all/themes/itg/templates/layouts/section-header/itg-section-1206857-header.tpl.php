@@ -7,12 +7,10 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="http://indiatoday.in/youthsummit/delhi/2016/" title="Mind Rocks 2016 "> <img src="https://smedia2.intoday.in/indiatoday/youthsummit/2016/images/logo-mindrocks-new.png" alt="Mind Rocks 2016"> </a></div>
+      <div class="left_part_logo"> <a href="http://indiatoday.in/youthsummit/delhi/2016/" title="Mind Rocks 2016 "> <img src="https:/akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2016/images/logo-mindrocks-new.png" alt="Mind Rocks 2016"> </a></div>
       
-      <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="http://media2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
-      
-      <div class="eventGuestArea ipadGuest"><img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/header_speaker.png" alt=""></div>
-      
+      <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+           
       <div class="social_icons_ipad">
         <ul>
           <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2016" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
@@ -32,8 +30,8 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
         <h2> <span class="date_tr">September 17, 2016</span> <span class="place_tr">Jawaharlal Nehru Stadium, New Delhi</span> </h2>
       </div>
       
-      <div class="eventGuestArea"><img src="https://smedia2.intoday.in/indiatoday/youthsummit/2016/images/event-guest-pic.png" alt=""></div>
-      <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://smedia2.intoday.in/indiatoday/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+      <div class="eventGuestArea"><img src="https:/akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2016/images/event-guest-pic.png" alt=""></div>
+      <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
     </div>
       <div class="clearfix"></div>
     </div>
