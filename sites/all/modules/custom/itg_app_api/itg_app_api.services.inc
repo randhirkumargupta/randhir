@@ -3414,13 +3414,29 @@ function itg_rapid_api_homePage($token) {
  */
 function itg_rapid_api_homePageDev($token) {
 
-    $redis_key = "devitg_rapid_api_homePage";
+  /*  $redis_key = "devitg_rapid_api_homePage";
     //$result_get = getRedis($redis_key);
     //    if ($result_get['key_value'] != "") {
     //        $jsondata = $result_get['key_value'];
     //    } else {
     // call function from return data..
     $jsondata = homePageJson();
+    $jsondata = json_encode($jsondata);
+    $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
+
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;*/
+    //include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_homePage_dev.inc");
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev');
+    $redis_key = "itg_rapid_api_homePageDev_json";
+    //$result_get = getRedis($redis_key);
+    //    if ($result_get['key_value'] != "") {
+    //        $jsondata = $result_get['key_value'];
+    //    } else {
+    // call function from return data..
+    $jsondata = homePageJson_dev();
     $jsondata = json_encode($jsondata);
     $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
     //$result_set = setRedis($redis_key, $jsondata, $ttl);
