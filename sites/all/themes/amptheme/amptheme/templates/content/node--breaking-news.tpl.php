@@ -26,7 +26,7 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
   else {
     $embed_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
   }
-  $embed_logo = $base_url . '/sites/all/themes/itg/logo.png';
+  $embed_logo = FRONT_URL . '/sites/all/themes/itg/logo.png';
   $blog_created_date = date('Y-m-d', $node->created);
   $blog_created_time = date('H:i:s', $node->created);
   $coverage_start_date = $blog_created_date . 'T' . $blog_created_time.'+05:30';

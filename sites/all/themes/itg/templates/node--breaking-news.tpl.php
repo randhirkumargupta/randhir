@@ -27,7 +27,7 @@ if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
 } else {
   $embed_image = '';
 }
-$embed_logo = $base_url.'/sites/all/themes/itg/logo.png';
+$embed_logo = FRONT_URL.'/sites/all/themes/itg/logo.png';
 $blog_created_date = date('Y-m-d', $node->created);
 $blog_created_time = date('H:i:s', $node->created);
 $coverage_start_date = $blog_created_date.'T'.$blog_created_time.'+05:30';
