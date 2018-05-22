@@ -3313,7 +3313,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#collapsible' => FALSE,
         '#collapsed' => FALSE,
     );
-    $cube_widget_val = 0;
+    $cube_widget_val = 1;
     if(fetchMasterConfigData('cube_widget_config_options')){
         $cube_widget_val = fetchMasterConfigData('cube_widget_config_options');
     }
