@@ -24,6 +24,7 @@
 .fifa-wcup .headingtext .round03{width: 7px; height: 7px; background-color: #a10506; display: inline-block;}
 .fifa-wcup .headingtext h2{font-size: 15px; line-height: 20px; color: #000; text-transform: uppercase;}
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-2{border:0;}
+.fifa-wcup .auto-block-2{height: auto;}
 
 </style>
 <div class="row">
@@ -92,7 +93,7 @@
                         <?php
                         }
                         else {
-                          print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' />";
+                          print "<img class='sthumb' src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' />";
                         }
                         ?>
                         <h3 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
