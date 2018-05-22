@@ -33,7 +33,7 @@ $hide_widget = '';
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
-  <div id="page">
+  <div id="page" class="fifa-wcup">
       <header class="header" id="header" role="banner">
           <section class="header-top">
           
