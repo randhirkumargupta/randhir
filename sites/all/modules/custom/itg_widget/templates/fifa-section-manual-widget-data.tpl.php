@@ -4,6 +4,14 @@
 	$data_tb_region_item = 'data-tb-region-item';  
   }
 ?>
+<style type="text/css">
+#page{background: url(http://smedia2.intoday.in/indiatoday/images/fifa-background-bg.jpg) no-repeat center top;}
+#itg-block-1{background-color: #f0f0f0;}
+.sport-home-layout-page .itg-layout-615 .auto-block-1{background: none; border:0; }
+
+
+
+</style>
 <div class="row">
     <div class="col-md-8">
         <div class="auto-block-1">
@@ -52,6 +60,12 @@
     <div class="col-md-4">
         <div class="auto-block-2">
             <div class="movies-featured-news">
+              
+
+
+
+
+
                 <?php
                 foreach ($data as $index => $row) {
                   $video_class = "";
