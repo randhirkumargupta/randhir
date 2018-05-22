@@ -72,7 +72,7 @@ $fb_appid = variable_get('itg_sharing_app_id');
           <p itemprop="headline" content="<?php print $node->title; ?>"></p>
         <?php endif; ?>
         <?php if (!empty($blog_embed_desc) && isset($blog_embed_desc)) : ?>
-          <h2 itemprop="articleBody" style="display:none"><strong><?php print $pub_embed_publishe_time;?> IST: </strong><?php print trim(strip_tags($blog_embed_desc)); ?></h2>
+          <h2 itemprop="articleBody" class="schema-body"><strong><?php print $pub_embed_publishe_time;?> IST: </strong><?php print trim(strip_tags($blog_embed_desc)); ?></h2>
         <?php endif; ?>
         <meta itemprop="datePublished" content="<?php print $date_published; ?>">
         <meta itemprop="author" content="IndiaToday.in">
