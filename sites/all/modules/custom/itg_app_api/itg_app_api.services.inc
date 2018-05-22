@@ -5951,8 +5951,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
     
-    $qry = "INSERT INTO `uatfi3`.`itg_app_master_config_internal` (`id`, `config_key`, `config_val`) VALUES (NULL, 'cube_widget_config_options', '1');";
-    db_query($qry);
+    //$qry = "INSERT INTO `uatfi3`.`itg_app_master_config_internal` (`id`, `config_key`, `config_val`) VALUES (NULL, 'cube_widget_config_options', '1');";
+    //db_query($qry);
     p(node_load(1152730)); // live blog
     p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
