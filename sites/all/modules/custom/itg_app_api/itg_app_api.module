@@ -236,6 +236,14 @@ function itg_app_api_menu() {
         'access arguments' => array('itg mobile feed'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['admin/api-configuration/rest-api/cube-widget'] = array(
+        'title' => 'update adconfig tab json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('cube_widget'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     // for redish ttl
 
@@ -603,7 +611,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
     if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
         $flag = 1;
     }
-    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it");
+    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it", "insert_video");
     if (arg(0) == "appapi" && count(arg()) == 2) {
         if (!in_array(arg(1), $post_res)) {
             $result = $path . "/it";
@@ -2603,4 +2611,37 @@ function testtolive_homeapi() {
     //insert into live table end    
     drupal_set_message(t('copy dev to live home api done.'));
     drupal_goto('itg-app-arrange-home');
+}
+
+/**
+ * get_mac_unix_os
+ */
+function get_mac_unix_os() {
+    ob_start();
+    system('ifconfig -a');
+    $mycom = ob_get_contents(); // Capture the output into a variable
+    ob_clean(); // Clean (erase) the output buffer
+    $findme = "Physical";
+    //Find the position of Physical text 
+    $pmac = strpos($mycom, $findme);
+    $mac = substr($mycom, ($pmac + 37), 18);
+
+    return $mac;
+}
+/**
+ * cube_widget form decalation
+ *
+ * @return type
+ */
+function cube_widget() {
+    $form = array();
+
+    $form['cube_widget'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig tab'),
+        '#default_value' => variable_get('cube_widget'),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
 }
