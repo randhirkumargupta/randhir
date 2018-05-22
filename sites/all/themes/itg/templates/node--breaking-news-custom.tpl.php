@@ -80,6 +80,8 @@ $modify_date = $modify_date.'+05:30';
             <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
               <?php if (!empty($blog_embed_title) && isset($blog_embed_title)) : ?>
                 <p itemprop="headline" content="<?php print $blog_embed_title; ?>"></p>
+              <?php else : ?>
+				<p itemprop="headline" content="<?php print $node->title; ?>"></p>
               <?php endif; ?>
               <?php if (!empty($blog_embed_desc) && isset($blog_embed_desc)) : ?>
                 <h2 itemprop="articleBody" style="display:none"><strong><?php print $pub_embed_publishe_time;?> IST: </strong><?php print trim(strip_tags($blog_embed_desc)); ?></h2>
