@@ -83,7 +83,7 @@
                   if (strtolower($row['type']) == 'videogallery') {
                     $video_class = 'video-icon';
                   }
-                  if ($index > 0 && $index <= 2) {
+                  if ($index > 0 && $index <= 3) {
                     ?>				
                     <div class="movies-featured-post <?php echo $video_class; ?>">
                         <?php if ($row['mi_file_uri'] != "") { ?>
