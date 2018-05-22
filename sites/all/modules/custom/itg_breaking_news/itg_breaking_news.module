@@ -304,6 +304,9 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     $form['field_breaking_coverage_end_time']['#states'] = array(
       'visible' => array(
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+      ),
+      'required' => array(
+       ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
     
