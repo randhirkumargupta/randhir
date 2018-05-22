@@ -308,7 +308,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $table = 'none';
       $type = 'archives';
       $rss_url = 'archives/story';
-  } else if ((!empty($arg[0]) && ($arg[0] == 'advanced_search.jsp' || $arg[0] == 'archivesearch.jsp')) && (!empty($_GET['searchtext']) || !empty($_GET['searchword']) || !empty($_GET['searchWord']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+  } else if ((!empty($arg[0]) && ($arg[0] == 'advanced_search.jsp' || $arg[0] == 'archivesearch.jsp' || $arg[1] == 'advanced_search.jsp' || $arg[1] == 'archivesearch.jsp')) && (!empty($_GET['searchtext']) || !empty($_GET['searchword']) || !empty($_GET['searchWord']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       if ($_GET['searchtext']) {
          $old_content_id = $_GET['searchtext']; 
       } elseif($_GET['searchword']) {
@@ -722,6 +722,23 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $date = date('d-m-Y');
         $newurl = FRONT_URL."/archives/".'story'.'/'.$date;
         drupal_goto($newurl);
+      } else if ($arg[0] == 'itoday' && !empty($arg[1]) && !empty($arg[2])) {
+        $date = $arg[1];
+        $year = substr($date,0,4);
+        $month = substr($date,4,2);
+        $date = substr($date,6,2);
+        $newurl = FRONT_URL."/magazine/".$date.'-'.$month.'-'.$year;
+        drupal_goto($newurl);
+      } else if ($arg[0] == 'category' && is_numeric($arg[1]) && !empty($arg[2])) {
+        $old_content_id = $arg[1];
+        $query_alias = 0;
+        $type = 'category';
+        $table = 'migrate_map_itgcategory';
+      } else if ($arg[0] == 'site' && $arg[1] == 'category' && is_numeric($arg[2]) && !empty($arg[3])) {
+        $old_content_id = $arg[2];
+        $query_alias = 0;
+        $type = 'category';
+        $table = 'migrate_map_itgcategory';
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
