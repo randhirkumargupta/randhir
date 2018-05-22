@@ -237,7 +237,7 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
     $items['admin/api-configuration/rest-api/cube-widget'] = array(
-        'title' => 'update adconfig tab json',
+        'title' => 'update cube widget json',
         //'description' => 'otherapps_android_json',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('cube_widget'),
