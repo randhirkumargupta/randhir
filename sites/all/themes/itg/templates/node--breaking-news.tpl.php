@@ -108,11 +108,13 @@ if(!empty($coverage_end)){
                         <meta itemprop="datePublished" content="<?php print $embed_created;?>">
                         <meta itemprop="author" content="IndiaToday.in">
                         <meta itemprop="dateModified" content="<?php print $embed_created;?>">
+                        <?php if (!empty($embed_image) && isset($embed_image)) : ?>
                         <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                             <meta itemprop="url" content="<?php print $embed_image; ?>">
                             <meta itemprop="width" content="650">
                             <meta itemprop="height" content="450">
                         </span>
+                        <?php endif; ?>
                         <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
                             <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                                 <meta itemprop="url" content="<?php print $embed_logo; ?>">
@@ -137,13 +139,11 @@ if(!empty($coverage_end)){
           <meta itemprop="datePublished" content="<?php print $created_date;?>">
           <meta itemprop="author" content="IndiaToday.in">
           <meta itemprop="dateModified" content="<?php print $modify_date;?>">
-          <?php if (!empty($embed_image) && isset($embed_image)) : ?>
           <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
               <meta itemprop="url" content="<?php print $embed_image; ?>">
               <meta itemprop="width" content="650">
               <meta itemprop="height" content="450">
           </span>
-          <?php endif; ?>
           <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
               <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                   <meta itemprop="url" content="<?php print $embed_logo; ?>">
