@@ -46,13 +46,37 @@ $fb_appid = variable_get('itg_sharing_app_id');
   <div class="bolg-content" id="bolgcontent">    
   <?php
   if (!empty($custom_content)) {
-    foreach ($custom_content as $breaking_embed_item) {      
-  ?>
+    foreach ($custom_content as $breaking_embed_item) {		
+      $date_published = '';
+      $date_updated = '';
+      $blog_embed_title = '';
+      $blog_embed_desc = '';
+      $pub_embed_publishe_time = '';
+      $date_published = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_created_date));
+      if (!empty($breaking_embed_item->blog_updated_date) && isset($breaking_embed_item->blog_updated_date)) {
+        $date_updated = date('Y-m-d\TH:i:s', strtotime($breaking_embed_item->blog_updated_date));
+      }
+      else {
+        $date_updated = $date_published;
+      }            
+			$blog_embed_title = $breaking_embed_item->blog_title;			
+			$blog_embed_desc = $breaking_embed_item->blog_description;
+      $date_published = $date_published.'+05:30';
+      $date_updated = $date_updated.'+05:30';
+			$pub_embed_publishe_time = date("H:i", strtotime($breaking_embed_item->blog_publish_time));
+?>
       <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
-        <p itemprop="headline" content="<?php print $node->title; ?>"></p>
-        <meta itemprop="datePublished" content="<?php print $created_date; ?>">
+        <?php if (!empty($blog_embed_title) && isset($blog_embed_title)) : ?>
+          <p itemprop="headline" content="<?php print $blog_embed_title; ?>"></p>
+        <?php else : ?>
+          <p itemprop="headline" content="<?php print $node->title; ?>"></p>
+        <?php endif; ?>
+        <?php if (!empty($blog_embed_desc) && isset($blog_embed_desc)) : ?>
+          <h2 itemprop="articleBody" style="display:none"><strong><?php print $pub_embed_publishe_time;?> IST: </strong><?php print trim(strip_tags($blog_embed_desc)); ?></h2>
+        <?php endif; ?>
+        <meta itemprop="datePublished" content="<?php print $date_published; ?>">
         <meta itemprop="author" content="IndiaToday.in">
-        <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
+        <meta itemprop="dateModified" content="<?php print $date_updated; ?>">
         <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
           <meta itemprop="url" content="<?php print $embed_image; ?>">
           <meta itemprop="width" content="650">
