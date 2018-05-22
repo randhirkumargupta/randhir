@@ -13551,4 +13551,10 @@ div.ctools-modal-content .form-submit {
 .node-story-form .ajax-progress {
   display: block; }
 
+.node-type-alexa-audio-clips .form-type-managed-file > label + div.file-widget.form-managed-file {
+  height: auto; }
+
+.node-type-alexa-audio-clips .vertical-tabs {
+  display: none; }
+
 /*# sourceMappingURL=styles.css.map */
