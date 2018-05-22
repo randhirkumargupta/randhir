@@ -4,6 +4,7 @@
  .fifa-wcup .dont-miss{background-color: #f0f0f0; display: block;padding: 10px; width: 100%; box-sizing:border-box;}
  .fifa-wcup .dont-miss ul li img{width: 147px; height: 82px;}
  .fifa-wcup .dont-miss ul li .dm-pic{width: auto;}
+ .fifa-wcup .dm-detail h3{font-size: 14px; line-height: 18px;}
 
 </style>
   <div class="dont-miss">
