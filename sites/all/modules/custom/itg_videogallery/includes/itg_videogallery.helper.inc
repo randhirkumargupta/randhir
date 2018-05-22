@@ -297,6 +297,11 @@ function itg_videogallery_dailymotion_api() {
     );
   }
   catch (Exception $e) {
+	$errorMsg = 'Dailymotion Error on line '.$this->getLine().' in '.$this->getFile()
+    .': <b>'.$this->getMessage().'</b> user : '.$user_name.'</b> password : '.$password.'</b> api_key : '.$api_key.$password.'</b> api_secret : '.$api_secret;
+     
+     drupal_set_message($errorMsg, 'error');
+       
     if ($e->getMessage() == "Missing API key") {
       if (isset($_GET['destination'])) {
         unset($_GET['destination']);
