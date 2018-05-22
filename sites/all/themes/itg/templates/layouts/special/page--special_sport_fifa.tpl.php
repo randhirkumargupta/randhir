@@ -101,6 +101,8 @@ $hide_widget = '';
                 <?php endif; ?>
                 <div class="row">
                     <div class="col-md-8 col-sm-12 col-xs-12 left-side">
+                      <div class="fifa-left-bg">
+                        
                         <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Sport Featured'); ?></strong> )</div>
                         <?php if (isset($widget_data['itg-block-1']['widget_name']) || $theme == 'itgadmin') { ?>
                           <div class="row itg-layout-615">
@@ -300,6 +302,7 @@ $hide_widget = '';
                             </div>
                           <?php } ?>
                           <!--End of Don't miss and Ad section-->
+                     </div>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 right-side">
                         <div class="row">
