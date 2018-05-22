@@ -7,9 +7,9 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="/mind-rocks-2017-bhopal" title="Mind Rocks 2017 "> <img src="https:/akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2017/bhopal/images/logo.png" alt="Mind Rocks 2017"> </a></div>
+      <div class="left_part_logo"> <a href="/mind-rocks-2017-bhopal" title="Mind Rocks 2017 "> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2017/bhopal/images/logo.png" alt="Mind Rocks 2017"> </a></div>
       
-      <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https:/akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+      <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
             
       <div class="social_icons_ipad">
         <ul>
@@ -36,7 +36,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
             Habib Ganj</span> </h2>
       </div>
       
-      <div class="eventGuestArea"><img src="https:/akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/bhopal/2017/bhopal-header-png01.png" alt=""></div>
+      <div class="eventGuestArea"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/bhopal/2017/bhopal-header-png01.png" alt=""></div>
       <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
     </div>
       <div class="clearfix"></div>

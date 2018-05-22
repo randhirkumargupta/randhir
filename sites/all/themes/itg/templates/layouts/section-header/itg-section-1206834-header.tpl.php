@@ -7,7 +7,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="/youthsummit/delhi/2015/index.jsp" title="Mind Rocks Youth Summit 2015"><img src="https:/akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2015/images/Youth-Summit-mast-logo_2015.png" alt="Mind Rocks Youth Summit 2015 Logo"></a></div>
+      <div class="left_part_logo"> <a href="/youthsummit/delhi/2015/index.jsp" title="Mind Rocks Youth Summit 2015"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2015/images/Youth-Summit-mast-logo_2015.png" alt="Mind Rocks Youth Summit 2015 Logo"></a></div>
       
       <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
       
