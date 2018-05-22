@@ -1,3 +1,5 @@
+<div class="view-latest-issue-magzine">
+<div class="view-content">
 <div class="magazin-lhs-top">
 	<div class="magazin-top">
       <div class="magazin-top-left">
@@ -306,4 +308,6 @@ $arg = arg();
     }
     print '</div>';
     ?>
+</div>
+</div>
 </div>

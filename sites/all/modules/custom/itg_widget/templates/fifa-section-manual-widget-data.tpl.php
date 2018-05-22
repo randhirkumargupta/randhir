@@ -4,6 +4,14 @@
 	$data_tb_region_item = 'data-tb-region-item';  
   }
 ?>
+<style type="text/css">
+#page{background: url(http://smedia2.intoday.in/indiatoday/images/fifa-background-bg.jpg) no-repeat center top;}
+#itg-block-1{background-color: #f0f0f0;}
+.sport-home-layout-page .itg-layout-615 .auto-block-1{background: none; border:0; }
+
+
+
+</style>
 <div class="row">
     <div class="col-md-8">
         <div class="auto-block-1">
@@ -32,7 +40,7 @@
                           print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
                         }
                         ?>
-                        <h2 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
+                        <h3 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
                             <?php
                             if (function_exists('itg_common_get_smiley_title')) {
                               echo l(itg_common_get_smiley_title($row['node_obj'], 0, 68), "node/" . $row['nid'], array("html" => TRUE));
@@ -41,7 +49,7 @@
                               echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
                             }
                             ?>
-                        </h2>           
+                        </h3>           
                     </div>
                   <?php } ?>
             <?php } ?>
@@ -52,6 +60,12 @@
     <div class="col-md-4">
         <div class="auto-block-2">
             <div class="movies-featured-news">
+              
+
+
+
+
+
                 <?php
                 foreach ($data as $index => $row) {
                   $video_class = "";

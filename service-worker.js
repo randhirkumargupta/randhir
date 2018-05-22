@@ -1,7 +1,7 @@
 const res_version = 'indiatoday-1.1'; 
-var ROUTE_SITE_URL = 'www.indiatoday.in'; 
-const SITE_CACHE_HOST_NAME = ["www.indiatoday.in"];
-const MEDIA_CACHE_HOST_NAME = ["akm-img-a-in.tosshub.com"];
+var ROUTE_SITE_URL = 'staging-it.indiatodayonline.in'; 
+const SITE_CACHE_HOST_NAME = ["staging-it.indiatodayonline.in"];
+const MEDIA_CACHE_HOST_NAME = ["static-dev.indiatodayonline.in/indiatoday"];
 const STATIC_CACHE_NAME = 	{
 	cache: {
 		name: 'indiatoday-static-cache-'+res_version,
@@ -166,8 +166,8 @@ const CACHE_STATIC = [
   MEDIA_CACHE_PATH_NAME+'images/misc/icon-128x128.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/ms-touch-icon-144x144-preco.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/medium-icon.png',
-  MEDIA_CACHE_PATH_NAME+'images/misc/misc/icon-256x256.png',
-  MEDIA_CACHE_PATH_NAME+'images/misc/misc/icon-384x384.png',
+  MEDIA_CACHE_PATH_NAME+'images/misc/icon-256x256.png',
+  MEDIA_CACHE_PATH_NAME+'images/misc/icon-384x384.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/icon-512x512.png',
  ]
 

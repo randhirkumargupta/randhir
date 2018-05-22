@@ -3306,6 +3306,23 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['other_group']['horizontal_menu_information'] = array(
         '#markup' => "<a href='$base_url/master-config-internal' target='_blank'>$img_tag_seting</a>",
     );
+    
+    $form['cube_widget_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Cube'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+    );
+    $cube_widget_val = 1;
+    if(fetchMasterConfigData('cube_widget_config_options')){
+        $cube_widget_val = fetchMasterConfigData('cube_widget_config_options');
+    }
+    $form['cube_widget_group']['cube_widget_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => $cube_widget_val,
+    );
+    
 
     $form['dashboard_submit_button'] = array(
         '#type' => 'submit',

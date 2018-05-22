@@ -996,6 +996,7 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
     $relatednode = "";
     if ($prime_section) {
         $start_time = strtotime("-5 day");
+        $content_type = array('story','photogallery');
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');         
         $query->join('field_data_field_story_category', 'pc', 'pc.entity_id=n.nid');
@@ -1003,9 +1004,9 @@ function fia_related_content_primary_cat($nid, $prime_section, $order = 0) {
         $query->leftJoin('itg_widget_order', 'iwo', 'n.nid=iwo.nid');
         $query->fields('n', array('nid','created'));
         $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
-        $query->condition('n.type', 'story', '=');
+        $query->condition('n.type', $content_type, IN);
         $query->condition('n.status', '1', '=');
-        $query->condition('iwo.weight', $order, '<');
+        //$query->condition('iwo.weight', $order, '<');
         $query->condition('iwo.widget', 'section_wise_widget');
         $query->condition('iwo.cat_id', $prime_section);        
         $query->condition('pc.field_story_category_tid', $prime_section, '=');
