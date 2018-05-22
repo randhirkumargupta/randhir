@@ -633,7 +633,7 @@ function itg_mail_photos_fia_data() {
     $query = $query->execute()->fetchCol();
     $xml = itg_fia_xml_node_feed_photos($query,1);
     $xml_path = 'public://fbinsight/';
-    $file_name = 'indiatoday-latestnews.xml';
+    $file_name = 'indiatoday-latestnews-photos.xml';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
