@@ -1224,6 +1224,7 @@ function itg_msi_issue_category_data($issue_date, $extract_nids = array()) {
       $query->condition('story_section.field_primary_category_value', $cat_id);
       $query->condition('itg_order.widget', 'section_wise_widget', '=');
       $query->condition('n.status', 1, '=');
+      $query->groupBy('itg_order.nid');
       $query->orderBy('itg_order.weight', DESC);
       $query->orderBy('n.nid', DESC);
       $results = $query->execute();
@@ -1252,6 +1253,7 @@ function itg_msi_issue_category_data($issue_date, $extract_nids = array()) {
     $query->condition('story_section.bundle', 'story', '=');
     $query->condition('n.status', 1, '=');
     $query->condition('itg_order.widget', 'section_wise_widget', '=');
+    $query->groupBy('itg_order.nid');
     $query->orderBy('itg_order.weight', DESC);
     $query->orderBy('n.nid', DESC);
     $results = $query->execute();
@@ -1295,6 +1297,7 @@ function itg_msi_issue_suppliment_data($issue_date, $extract_nids = array()) {
       $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
       $query->condition('story_supplement.field_story_select_supplement_target_id', $value->nid);
       $query->condition('itg_order.widget', 'section_wise_widget', '=');
+      $query->groupBy('itg_order.nid');
       $query->orderBy('itg_order.weight', DESC);
       $query->orderBy('n.nid', DESC);
       $results = $query->execute();
@@ -1321,6 +1324,7 @@ function itg_msi_issue_suppliment_data($issue_date, $extract_nids = array()) {
     $query->condition(db_or()->isnotNull('story_supplement.field_story_select_supplement_target_id'));
     $query->condition('issue_date.field_story_issue_date_value', '%' . db_like($issue_date) . '%', 'LIKE');
     $query->condition('itg_order.widget', 'section_wise_widget', '=');
+    $query->groupBy('itg_order.nid');
     $query->orderBy('itg_order.weight', DESC);
     $query->orderBy('n.created', DESC);
     $results = $query->execute();
