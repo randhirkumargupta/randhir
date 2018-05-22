@@ -573,19 +573,6 @@ function news_wrap_datalist() {
             $news['highlight'] = $highlight;
             $news['n_type'] = $type;
             $news['n_share_link'] = $firebase_url;
-            // for emoji
-            $n_emoji_left = array();
-            $n_emoji_right = array();
-            $emoji_left = $res['n_emoji_left'];
-            $emoji_right = $res['n_emoji_right'];
-            if ($emoji_left) {
-                $n_emoji_left = $emoji_left;
-            }
-            if ($emoji_right) {
-                $n_emoji_right = $emoji_right;
-            }
-            $news['n_emoji_left'] = $n_emoji_left;
-            $news['n_emoji_right'] = $n_emoji_right;
             $news2[] = $news;
             $lcont++;
         }
