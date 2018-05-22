@@ -3297,6 +3297,7 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['arrange_home_group']['arrange_home_group_information'] = array(
         '#markup' => "<a href='$base_url/itg-app-arrange-home' target='_blank'>$img_arrange</a>",
     );
+    
     $form['other_group'] = array(
         '#type' => 'fieldset',
         '#title' => t('Other'),
@@ -3306,6 +3307,20 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['other_group']['horizontal_menu_information'] = array(
         '#markup' => "<a href='$base_url/master-config-internal' target='_blank'>$img_tag_seting</a>",
     );
+    
+    $form['cube_widget_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Cube'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+    );
+
+    $form['cube_widget_group']['cube_widget_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('cube_widget_config_options'),
+    );
+    
 
     $form['dashboard_submit_button'] = array(
         '#type' => 'submit',
