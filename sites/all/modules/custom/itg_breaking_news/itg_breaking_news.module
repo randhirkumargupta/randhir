@@ -307,7 +307,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
       )
     );
     
-    $form['field_breaking_coverage_end_time']['und']['0']['value']['#required'] = TRUE;
+    $form['field_breaking_coverage_end_time']['und']['0']['#required'] = TRUE;
     $form['actions']['submit']['#value'] = 'Publish';
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
