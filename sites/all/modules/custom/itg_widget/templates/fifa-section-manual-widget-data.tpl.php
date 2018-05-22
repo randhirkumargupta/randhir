@@ -12,9 +12,9 @@
 .fifa-wcup .featured-post{position: relative;}
 .fifa-wcup .featured-post h3{position: absolute; bottom: 17px; left: 17px;}
  
-.fifa-wcup .movies-featured-post {background-color: #313131;padding: 15px 5px;display: inline-block;width: 100%;}
+.fifa-wcup .movies-featured-post {background-color: #313131;padding: 15px 5px;display: inline-block;width: 100%; margin-bottom: 5px;}
 .fifa-wcup .movies-featured-post .sthumb{width: 88px;height: 50px;float: left;margin-right: 8px;}
-.fifa-wcup .movies-featured-post h3{font-size: 13px;line-height: 16px;color: #fff;display: block;}
+.fifa-wcup .movies-featured-post h3{font-size: 12px;line-height: 15px;color: #fff;display: block;}
 .fifa-wcup .movies-featured-post h3 a{color: #fff;}
 .fifa-wcup .movies-featured-post:hover{background-color: #a00606; cursor: pointer;}
 
@@ -73,7 +73,7 @@
         </div>    
     </div>
     <!-- -->
-    <div class="col-md-4">
+    <div class="col-md-4 padleft-0">
         <div class="auto-block-2">
             <div class="movies-featured-news">
 
