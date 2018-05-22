@@ -236,6 +236,14 @@ function itg_app_api_menu() {
         'access arguments' => array('itg mobile feed'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['admin/api-configuration/rest-api/cube-widget'] = array(
+        'title' => 'update cube widget json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('cube_widget'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     // for redish ttl
 
@@ -2601,4 +2609,37 @@ function testtolive_homeapi() {
     //insert into live table end    
     drupal_set_message(t('copy dev to live home api done.'));
     drupal_goto('itg-app-arrange-home');
+}
+
+/**
+ * get_mac_unix_os
+ */
+function get_mac_unix_os() {
+    ob_start();
+    system('ifconfig -a');
+    $mycom = ob_get_contents(); // Capture the output into a variable
+    ob_clean(); // Clean (erase) the output buffer
+    $findme = "Physical";
+    //Find the position of Physical text 
+    $pmac = strpos($mycom, $findme);
+    $mac = substr($mycom, ($pmac + 37), 18);
+
+    return $mac;
+}
+/**
+ * cube_widget form decalation
+ *
+ * @return type
+ */
+function cube_widget() {
+    $form = array();
+
+    $form['cube_widget'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig tab'),
+        '#default_value' => variable_get('cube_widget'),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
 }
