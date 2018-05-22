@@ -304,10 +304,13 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     $form['field_breaking_coverage_end_time']['#states'] = array(
       'visible' => array(
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+      ),
+      'required' => array(
+       ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
     
-    //$form['field_breaking_coverage_end_time']['und']['0']['#required'] = TRUE;
+    
     $form['actions']['submit']['#value'] = 'Publish';
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
@@ -395,10 +398,10 @@ function itg_breaking_news_form_custom_validate($form, &$form_state) {
     }
     $time_diff = (strtotime($coverage_end_time) - ($created_date))/3600;
     if ($time_diff <= 2) {
-      form_set_error('field_breaking_coverage_end_time', t("Coverage End Time must be 2 hours later!"));  
+      form_set_error('field_breaking_coverage_end_time', t("Live Blog End Time must be 2 hours later!"));  
     }
   }else if ($form_state['values']['field_type']['und'][0]['value'] == 'Live Blog') {
-    form_set_error('field_breaking_coverage_end_time', t("Coverage End Time Field is required!"));  
+    form_set_error('field_breaking_coverage_end_time', t("Live Blog End Time Field is required!"));  
   }
   
 }
