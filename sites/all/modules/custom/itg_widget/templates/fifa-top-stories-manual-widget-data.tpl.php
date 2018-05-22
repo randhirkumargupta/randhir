@@ -9,7 +9,9 @@
 .fifa-wcup .fifa-top-story img{width: 88px; height: 49px; float: left; margin-right: 5px;}
 .fifa-wcup .fifa-top-story h3{font-size: 14px; line-height: 20px; display: block;}
 .fifa-wcup .fifa-post{float: left; width: 50%; padding:20px 10px 0; box-sizing:border-box;}
-.fifa-wcup h2.widget-title{background: url(https://smedia2.intoday.in/indiatoday/images/hdot.jpg) no-repeat 0 6px; font-size: 20px; line-height: 24px; color: #000; padding-left: 47px;}
+.fifa-wcup h2.widget-title{background: url(https://smedia2.intoday.in/indiatoday/images/hdot.png) no-repeat 0 6px; font-size: 20px; line-height: 24px; color: #000; padding-left: 47px;}
+.fifa-wcup h1.widget-title{font-size: 15px; color: #9d0708; background: none}
+.fifa-wcup .right-side{background: #f0f0f0;}
 </style>
 <div class="row">
     <div class="col-md-12">
