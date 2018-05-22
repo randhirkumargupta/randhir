@@ -17,9 +17,6 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
           <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2017" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
           <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2017" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
           
-          <!--            <li> <a href="#" title=""> <span class="ins"></span> <span class="text_socials">Instagram</span> </a> </li>
-            <li> <a href="#" title=""> <span class="pnt"></span> <span class="text_socials">Pinterest</span> </a> </li>
- -->
         </ul>
       </div>
       <div class="right_part_ad ipad_top1">
@@ -36,7 +33,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
             Habib Ganj</span> </h2>
       </div>
       
-      <div class="eventGuestArea"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/bhopal/2017/bhopal-header-png01.png" alt=""></div>
+      <div class="eventGuestArea"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2017/bhopal/images/bhopal-header-png01.png" alt=""></div>
       <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
     </div>
       <div class="clearfix"></div>
