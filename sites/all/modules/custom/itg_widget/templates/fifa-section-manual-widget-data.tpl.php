@@ -5,14 +5,14 @@
   }
 ?>
 <style type="text/css">
-.fifa-wcup{background: url(https://smedia2.intoday.in/indiatoday/images/fifa-background-bg.jpg) no-repeat center 277px;}
+.fifa-wcup{background: url(https://smedia2.intoday.in/indiatoday/images/fifa-background-bg.jpg) no-repeat center 277px; height: auto !important}
 .fifa-wcup #itg-block-1{background-color: #f0f0f0;}
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .droppable{height: auto;}
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-1{background: none; border:0; height: auto;}
 .fifa-wcup .featured-post{position: relative;}
 .fifa-wcup .featured-post h3{position: absolute; bottom: 17px; left: 17px;}
  
-.fifa-wcup .movies-featured-post {background-color: #313131;padding: 15px 5px;}
+.fifa-wcup .movies-featured-post {background-color: #313131;padding: 15px 5px;display: inline-block;width: 100%;}
 .fifa-wcup .movies-featured-post .sthumb{width: 88px;height: 50px;float: left;margin-right: 8px;}
 .fifa-wcup .movies-featured-post h3{font-size: 13px;line-height: 16px;color: #fff;display: block;}
 .fifa-wcup .movies-featured-post h3 a{color: #fff;}
