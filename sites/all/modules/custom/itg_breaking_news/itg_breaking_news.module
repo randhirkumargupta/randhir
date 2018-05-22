@@ -392,8 +392,7 @@ function itg_breaking_news_form_custom_validate($form, &$form_state) {
     }else {
       $created_date = time();
     }
-    $time_diff = (strtotime($coverage_end_time) - ($created_date))/120;
-    var_dump($time_diff, $created_date, $coverage_end_time, strtotime($coverage_end_time));die;
+    $time_diff = (strtotime($coverage_end_time) - ($created_date))/3600;
     if ($time_diff <= 2) {
       form_set_error('field_breaking_coverage_end_time', t("Coverage End Time must be 2 hours later!"));  
     }
