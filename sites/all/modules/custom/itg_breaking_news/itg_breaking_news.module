@@ -384,10 +384,15 @@ function itg_breaking_news_form_custom_validate($form, &$form_state) {
   if ($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog' && empty($form_state['values']['field_primary_category']['und'][0]['value'])) {
     form_set_error('field_primary_category', t("Primary category Field is required!"));
   }
-  p($form_state['values']);
-  if(!empty($form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value']['date'])){
-    $coverage_end_time = $form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value']['date'] . $form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value']['time'];
-    echo '<pre>';var_dump($coverage_end_time, $form_state['values']['field_breaking_coverage_end_time']);die;
+  
+  if(!empty($form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value'])){
+    $coverage_end_time = $form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value'];
+    if (!empty($form_state['values']['nid'])) {
+      $created_date = $form_state['values']['created'];
+    }else {
+      $created_date = time();
+    }
+    echo '<pre>';var_dump($coverage_end_time, $created_date);die;
   }
   
 }
