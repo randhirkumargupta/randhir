@@ -4,8 +4,15 @@
 	$data_tb_region_item = 'data-tb-region-item';  
   }
 ?>
+<style type="text/css">
+.fifa-wcup .fifa-top-story{background-color: #f0f0f0; display: inline-block; padding-bottom: 20px; width: 100%;}
+.fifa-wcup .fifa-top-story img{width: 88px; height: 49px; float: left; margin-right: 5px;}
+.fifa-wcup .fifa-top-story h3{font-size: 14px; line-height: 20px; display: block;}
+.fifa-wcup .fifa-post{float: left; width: 50%; padding:20px 10px 0; box-sizing:border-box;}
+
+</style>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="auto-block-1">
             <div class="fifa-top-story">
                 <?php
