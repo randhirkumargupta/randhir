@@ -929,66 +929,7 @@ function homePageCatNewslist($tid) {
     return $data_news;
 }
 
-/**
- * main function for generate homePageJsonMagazine array
- *
- * @return array
- */
-function homePageJsonMagazine($direct = "") {
-    global $order;
-    $data_magazine = array();
-    $data_newslist = array();
-    $n_photo = array();
-    $n_video = array();
-    $n_polls = array();
-    $n_rating = array();
-    if ($direct == 'direct') {
-        $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
-    } else {
-        $n_magazine_data = magazineCoverstoriesPageRerourceValueList('home');
-    }
 
-    $n_magazine = $n_magazine_data['data'];
-
-    $data_magazine['id'] = "0";
-    $data_magazine['order'] = "$order";
-    $data_magazine['type'] = "magazine";
-    $data_magazine['title'] = "From The Magazine";
-    $data_magazine['label'] = "From The Magazine";
-    $data_magazine['show_label'] = "0";
-    // news list
-    $share_url = get_node_firebase_weburl($nid);
-    $is_developing = 0;
-    $conf = getStoryConfigVal($nid);
-    if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
-        $is_developing = 1;
-    }
-    $data_newslist[0]['n_id'] = "";
-    $data_newslist[0]['n_type'] = "";
-    $data_newslist[0]['n_is_developing'] = "$is_developing";
-    $data_newslist[0]['n_is_sponsored'] = "";
-    $data_newslist[0]['n_share_link'] = "";
-    $data_newslist[0]['n_title'] = "";
-    $data_newslist[0]['n_description'] = "";
-    $data_newslist[0]['n_pcategory_id'] = "";
-    $data_newslist[0]['n_pcategory_name'] = "";
-    $data_newslist[0]['n_comment_count'] = "";
-    $data_newslist[0]['n_small_image'] = "";
-    $data_newslist[0]['n_large_image'] = "";
-    $data_newslist[0]['n_image_credit'] = "";
-    $data_newslist[0]['n_updated_datetime'] = "";
-    $data_newslist[0]['n_photo'] = $n_photo;
-    $data_newslist[0]['n_video'] = $n_video;
-    $data_newslist[0]['n_polls'] = $n_polls;
-    $data_newslist[0]['n_rating'] = $n_rating;
-    $data_newslist[0]['n_magazine'] = $n_magazine;
-    $n_widget = array();
-    $data_newslist[0]['n_widget'] = $n_widget;
-
-    $data_magazine['news'] = (array) $data_newslist;
-    $order++;
-    return $data_magazine;
-}
 
 /**
  * function for generate getPolllist array
