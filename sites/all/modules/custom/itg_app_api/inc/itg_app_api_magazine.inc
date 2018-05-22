@@ -107,7 +107,6 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     //select cover story..
     $story_list_array = itg_rapid_get_cover_story($issue_date, $range_min, $range_max);
     $cover_st_cont = count($story_list_array);
-    //echo $cover_st_cont; die();
     if ($cover_st_cont < 10) {
         // select node belong from current term id or child term id
         $listcount = $cover_st_cont;
@@ -122,7 +121,6 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
 
         $query = db_select('node', 'n');
         //join  for field value
-        $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
         $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
         $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
         $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
@@ -173,13 +171,17 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         $query->fields('fsri', array('field_reporter_unique_id_value'));
         $query->fields('fci', array('field_primary_category_value'));
         $query->fields('fssh', array('field_story_short_headline_value'));
+        $interval = 175;
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
+        $d2 = date(strtotime($d1));
+        $query->condition('n.created', $d2, '>=');
 
 
         //end 
         ////$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
         //$query->condition('fsc.field_story_category_tid', 1206501, '!=')->condition('fsc.field_story_category_tid', 1206509, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-        $query->condition('fsms.field_story_magazine_story_issue_value', 'magazine_issue_story')->condition('ti.tid', 1206501, '!=')->condition('ti.tid', 1206509, '!=')->condition('ti.tid', 1206499, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC); 
+        $query->condition('fsms.field_story_magazine_story_issue_value', 'magazine_issue_story')->condition('fsc.field_story_category_tid', 1206501, '!=')->condition('fsc.field_story_category_tid', 1206509, '!=')->condition('fsc.field_story_category_tid', 1206499, '!=')->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
             //$title = $resvalue['title'];
@@ -466,6 +468,10 @@ function getCoverstoriesList($issue_date) {
         $query->fields('fsri', array('field_reporter_unique_id_value'));
         $query->fields('fci', array('field_primary_category_value'));
         $query->fields('fssh', array('field_story_short_headline_value'));
+        $interval = 175;
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
+        $d2 = date(strtotime($d1));
+        $query->condition('n.created', $d2, '>=');
 
         //end
         //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
@@ -905,7 +911,6 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
 
     $query = db_select('node', 'n');
     //join  for field value
-    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->leftJoin('field_data_field_story_category', 'fsc', 'fsc.entity_id=n.nid');
     $query->leftJoin('itg_widget_order', 'iwo', 'iwo.nid=n.nid');
     $query->leftJoin('field_data_field_story_short_headline', 'fssh', 'fssh.entity_id=n.nid');
@@ -960,7 +965,7 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
 
     //end
     //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-    $query->condition('fsms.field_story_magazine_story_issue_value', 'magazine_issue_story')->condition('ti.tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->condition('fsms.field_story_magazine_story_issue_value', 'magazine_issue_story')->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         // node feed tag

@@ -157,7 +157,6 @@ function homePageJson_live() {
 
     $data['data'] = $data_live;
 
-
     $lc = 0;
     foreach ($data['data'] as $key => $value) {
         if (count($value[0]) > 0) {
@@ -174,26 +173,23 @@ function homePageJson_live() {
             $lc ++;
         }
     }
-    
-       
-    
     if (count($data) == 2) {
         $data['data'] = array();
         $data_final['data'] = array();
     }
-     $cube_widget = array();
-$widget_detail = array();
-$cube_widget['show_widget'] = "1";
-$widget_detail[0]['type'] = "webview";
-$widget_detail[0]['title'] = "Karnataka Elections";
-$widget_detail[0]['type_label'] = "Karnataka Elections";
-$widget_detail[0]['width'] = "130";
-$widget_detail[0]['height'] = "119";
-$widget_detail[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/cube/cube.html";
-$widget_detail[0]['extended_url'] = "https://smedia2.intoday.in/mailer/app-test/chunk.html";
-$cube_widget['widget_detail'] = $widget_detail;
+    $cube_widget = array();
+    $widget_detail = array();
+    $cube_widget['show_widget'] = "1";
+    $widget_detail[0]['type'] = "webview";
+    $widget_detail[0]['title'] = "Scorecard";
+    $widget_detail[0]['type_label'] = "scorecard";
+    $widget_detail[0]['width'] = "130";
+    $widget_detail[0]['height'] = "119";
+    $widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl98.html";
+    $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
+    $cube_widget['widget_detail'] = $widget_detail;
 
-     $data_final['cube_widget'] = $cube_widget;
+    $data_final['cube_widget'] = $cube_widget;
 
     return $data_final;
 }

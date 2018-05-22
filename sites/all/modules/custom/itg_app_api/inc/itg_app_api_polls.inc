@@ -232,12 +232,7 @@ function poll_detail_data($poll_id) {
 function polls_open_datalist($cpageno, $from) {
     $range_max = 10;
     if ($from == "home") {
-        $query_c = db_select('itg_app_master_info_internal', 'mci');
-        $query_c->fields('mci');
-        $query_c->condition('mci.info_type', 'poll', '=');
-        $query_c->condition('mci.info_key', 'order', '=');
-        $result_c = $query_c->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $range_max = count($result_c);
+        $range_max = 1;
     }
     $range_min = 0;
     if (!$cpageno == 0) {
@@ -248,9 +243,6 @@ function polls_open_datalist($cpageno, $from) {
     $current_time = date('Y-m-d H:i:s', time());
 
     $query = db_select('node', 'n');
-    if ($from == "home") {
-        $query->leftJoin('itg_app_master_info_internal', 'mci', 'mci.org_id=n.nid');
-    }
     $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
     $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
     $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
@@ -267,10 +259,6 @@ function polls_open_datalist($cpageno, $from) {
     $query->condition('n.type', 'poll');
     $query->condition('st.field_poll_start_date_value', $current_time, '<');
     $query->condition('n.status', '1');
-    if ($from == "home") {
-        $query->condition('mci.info_type', 'poll', '=');
-        $query->orderBy('mci.info_value', 'ASC');
-    }
     $query->orderBy('n.nid', 'DESC');
     $query->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -510,12 +498,6 @@ function poll_detail_datalist($poll_id) {
             $options2[] = $options;
         }
 
-        $field_poll_end_date_value = $res['field_poll_end_date_value'];
-        if (!$field_poll_end_date_value) {
-            $p_type = "running";
-        } else {
-            $p_type = "closed";
-        }
         $count_total_patic = poll_participants($res['nid']);
         $poll_id = isset($res['nid']) ? $res['nid'] : "";
         $poll_publish_date_time = isset($res['field_poll_start_date_value']) ? $res['field_poll_start_date_value'] : "";
@@ -530,7 +512,6 @@ function poll_detail_datalist($poll_id) {
         $news['p_image'] = "$poll_ques_img";
         $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
         $news['total_participants'] = "$count_total_patic";
-        $news['p_type'] = "$p_type";
 
         $news['p_option'] = $options2;
         $news2[] = $news;
