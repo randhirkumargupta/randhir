@@ -3,7 +3,7 @@
 <style type="text/css">
  .fifa-wcup .dont-miss{background-color: #f0f0f0; display: block;padding: 10px; width: 100%; box-sizing:border-box;}
  .fifa-wcup .dont-miss ul li img{width: 147px; height: 82px;}
- .figa-wcup .dm-pic{width: auto;}
+ .fifa-wcup .dont-miss ul li .dm-pic{width: auto;}
 
 </style>
   <div class="dont-miss">
