@@ -57,5 +57,7 @@
 @media screen and (max-width:767px){.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .header_part { height: 125px;}.india-today-mind-rocks-2015.india-today-mind-rocks-commanheader-2017 .left_part_logo { width: 100px;}}
 
 /**************** Delhi mindrocks 2018 Header **********/
-.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{color:#dc131b; font-size:30px; text-align: center; display: block;}
-.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018{ color:#fff; font-size:18px; font-weight: bold; background:#c72226; display: block; }
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2{ text-align: center;position: relative; top: -85px; }
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{color:#dc131b; font-size:50px; text-align: center; display: block; font-family: "OpenSans-Bold"; line-height: 65px; padding-bottom: 3px;}
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018 strong{ color:#111; }
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018{ color:#fff; font-size:20px; font-weight: bold; background:#c72226;font-family: "OpenSans-semibold"; padding: 3px 10px; }
