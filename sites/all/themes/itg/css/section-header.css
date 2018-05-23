@@ -67,3 +67,9 @@
 .india-today-mind-rocks-commanheader-2017 #block-menu-menu-event-menu ul li ul li{padding: 5px 0;}
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018:before {width: 0;height: 0;border-width: 0 0 33px 40px;border-color: transparent transparent #C62125 transparent; border-style: solid; content: ''; position: absolute; left: -40px; top: 0;}
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018:after {width: 0;height: 0;border-width: 0 0 33px 40px;border-color: transparent transparent transparent #C62125; border-style: solid; content: ''; position: absolute; right: -40px; top: 0;}
+@media screen and (max-width:1024px){.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{ font-size:45px; }}
+@media screen and (max-width:800px){
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{font-size: 34px;}
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018{font-size: 16px;}
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018:before{border-width: 0 0 28px 33px;left: -33px;}
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018:after{border-width: 0 0 28px 33px;right: -33px;}}
