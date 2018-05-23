@@ -128,12 +128,12 @@
       <div class="ytube-video-section">
       <h2>ITMI VIDEOS</h2>
         <ul>
-          <li><div class="video-thumb"><iframe width="560" height="315" src="https://www.youtube.com/embed/kWC3v9ljC0U?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project - Rabindranath Tagore</span></li>
-          <li><div class="video-thumb"><iframe width="560" height="315" src="https://www.youtube.com/embed/gVJLrsmrlgA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project - Social Sensitization Internship experience</span></li>
-          <li><div class="video-thumb"><iframe width="560" height="315" src="https://www.youtube.com/embed/k4lOAlQxjcI?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project</span></li>
+          <li><div class="video-thumb"><iframe width="100%" height="198" src="https://www.youtube.com/embed/kWC3v9ljC0U?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project - Rabindranath Tagore</span></li>
+          <li><div class="video-thumb"><iframe width="100%" height="198" src="https://www.youtube.com/embed/gVJLrsmrlgA?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project - Social Sensitization Internship experience</span></li>
+          <li><div class="video-thumb"><iframe width="100%" height="198" src="https://www.youtube.com/embed/k4lOAlQxjcI?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project</span></li>
         </ul>
       </div>
-
+ <!--Youtube video section end-->
     </div>
   </div>
 </div>
