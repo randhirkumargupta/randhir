@@ -6546,16 +6546,17 @@ function list_itg_rapid_api_anchor_list_default() {
  */
 function itg_rapid_api_horizontal_menu_dev($token) {
     $redis_key = "itg_rapid_api_horizontal_menu_dev_json";
-    //$result_get = getRedis($redis_key);
-    //    if ($result_get['key_value'] != "") {
-    //        $jsondata = $result_get['key_value'];
-    //    } else {
+    $result_get = getRedis($redis_key);
+        if ($result_get['key_value'] != "") {
+            $jsondata = $result_get['key_value'];
+        } else {
     //variable_get('horizontal_menu_json');
     $jsondata = horizontal_menu_middleware_data();
     $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    ///$result_set = setRedis($redis_key, $jsondata, $ttl);
-    //}
+    //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $ttl = 10;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
 
     $obj = json_decode($jsondata, TRUE);
     $return_obj = $obj;
@@ -6572,15 +6573,16 @@ function itg_rapid_api_hamburger_menu_dev($token) {
     $redis_key = "itg_rapid_api_hamburger_menu_dev_json";
     $result_get = getRedis($redis_key);
 
-    //    if ($result_get['key_value'] != "") {
-    //        $jsondata = $result_get['key_value'];
-    //    } else {
+        if ($result_get['key_value'] != "") {
+            $jsondata = $result_get['key_value'];
+        } else {
     //variable_get('hamburger_menu_json');
     $jsondata = hamburger_menu_middleware_data();
     $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $ttl = 10;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
-    //}
+    }
 
     $obj = json_decode($jsondata, TRUE);
     $return_obj = $obj;
@@ -6599,16 +6601,17 @@ function itg_rapid_api_homePageDev($token) {
     module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev');
     module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev_2');
     $redis_key = "itg_rapid_api_homePageDev_json";
-    //$result_get = getRedis($redis_key);
-    //    if ($result_get['key_value'] != "") {
-    //        $jsondata = $result_get['key_value'];
-    //    } else {
+    $result_get = getRedis($redis_key);
+        if ($result_get['key_value'] != "") {
+            $jsondata = $result_get['key_value'];
+        } else {
     // call function from return data..
+    $ttl = 10;
     $jsondata = homePageJson_dev();
     $jsondata = json_encode($jsondata);
-    $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
-    //$result_set = setRedis($redis_key, $jsondata, $ttl);
-    //}
+    //$ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
 
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;

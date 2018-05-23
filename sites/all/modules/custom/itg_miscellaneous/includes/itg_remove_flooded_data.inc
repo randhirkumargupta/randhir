@@ -65,7 +65,6 @@ function remove_old_widgets_from_table_by_tid(){
   if (!empty($tid)) {
     $keep_row = (int) variable_get('section_widget_keep_row_count', 100);
     _delete_old_data_from_section_widget('itg_widget_order', $tid, 'All');  
-    
     $query1 = db_select('itg_widget_order_section', 'widget');
     $query1->fields('widget', array('cat_id', 'content_type'));
     $query1->addExpression('COUNT(widget.cat_id)', 'count');
