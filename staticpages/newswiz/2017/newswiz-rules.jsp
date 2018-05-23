@@ -161,7 +161,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             </div>
             <div class="topSocIcon mobIcon">
               <ul>
-              <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
+              <li class="regLink"><a href="https://www.indiatoday.in/newswiz/2018/registation.php" target="_blank">Register Now for 2018</a></li>
                 <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
                 <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
                 <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
@@ -197,7 +197,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                          
             <div class="topSocIcon">
               <ul>
-              <li class="regLink"><a href="https://goo.gl/forms/bomdkX8K6GGHf63z1" target="_blank">Registrations Closed</a></li>
+             <li class="regLink"><a href="https://www.indiatoday.in/newswiz/2018/registation.php" target="_blank">Register Now for 2018</a></li>
                 <li><a href="http://www.facebook.com/indiatoday" title="facebook" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/facebook.png" alt="facebook"></a></li>
                 <li><a href="http://www.twitter.com/indiatoday" title="twitter" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/twitter.png" alt="twitter"></a></li>
                 <li><a href="http://www.google.com/+indiatoday" title="gplus" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/gplus.png" alt="gplus"></a></li>
@@ -494,7 +494,7 @@ a.active_h{background:#353333}
 							brains. Rajdeep Sardesai who has spent his life in news will be
 							at the helm of the first-of-its-kind quiz show - News Wiz. There
 							is no one better equipped than Rajdeep to host such a show
-							considering that he has spent 26 years reporting, editing and
+							considering that he has spent 27 years reporting, editing and
 							anchoring news.</p>
 					</div>
 				</div>

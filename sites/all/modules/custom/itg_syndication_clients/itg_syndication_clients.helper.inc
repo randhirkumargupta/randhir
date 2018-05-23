@@ -590,6 +590,9 @@ function get_samsung_video_category(){
     'videolist-sports-today.json' => 1206960, 
     'videolist-auto-today.json' => 1207978, 
     'videolist-long-story.json' => 1208061, 
+    'videolist-world.json' => 1206956, 
+    'videolist-world-special.json' => 1208164, 
+    'videolist-television.json' => 1207980
   );
 }
 /**
