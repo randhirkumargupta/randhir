@@ -3021,20 +3021,14 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
 
     if (!empty($data)) {
         try {
+            $_delete_arr = array();
             $delete_query = db_delete($table);
-            $nid_array = array();
-            $id_array = array();
             foreach ($data as $tid) {
-               // $delete_query->condition("id", $tid->id);
-                //_itg_widget_delete_node_data_from_helper_table($tid->nid); old function
-               $id_array[$tid->id] = $tid->id;
-               $nid_array[$tid->nid] =  $tid->nid;
+                $_delete_arr[] = $tid->id;
+                _itg_widget_delete_node_data_from_helper_table($tid->nid);
             }
-            $delete_query->condition("id", $id_array);
+            $delete_query->condition("id", $_delete_arr, 'IN');
             $delete_query->execute();
-            if(!empty($nid_array)) {
-            __itg_widget_new_delete_node_data_from_helper_table($nid_array);
-            }
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');
         }
