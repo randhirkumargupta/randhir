@@ -7,6 +7,7 @@
  .fifa-wcup .dm-detail h3{font-size: 14px; line-height: 18px;}
  .fifa-wcup .droppable{border:0;}
  .padleft-0{padding-left:0;}
+ .padright-0{padding-right:0;}
 </style>
   <div class="dont-miss">
     <ul>
