@@ -1410,6 +1410,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
     .fifa-wcup .auto-block-1{margin-bottom: 0 !important;}
 	.fifa-wcup .movies-featured-post{padding:15px 5px; }
 	.fifa-wcup .dont-miss ul li{width: 50%;}  
+	.fifa-wcup .right-side{background:none;}
+	.fifa-wcup .droppable table{background-color:#f0f0f0;}
   }
 .fifa-wcup .sport-home-layout-page .itg-layout-225 .droppable{min-height: initial;}
 .fifa-wcup .sport-home-layout-page .itg-layout-485 .droppable{height: inherit;}
