@@ -63,9 +63,10 @@ function remove_old_widgets_from_table() {
 function remove_old_widgets_from_table_by_tid(){
   $tid = arg(1);
   if (!empty($tid)) {
+    watchdog("delete_widget_table", $tid);  
     $keep_row = (int) variable_get('section_widget_keep_row_count', 100);
     _delete_old_data_from_section_widget('itg_widget_order', $tid, 'All');  
-    
+     watchdog("delete_widget_table", $tid . 'done');  
     $query1 = db_select('itg_widget_order_section', 'widget');
     $query1->fields('widget', array('cat_id', 'content_type'));
     $query1->addExpression('COUNT(widget.cat_id)', 'count');
@@ -79,6 +80,7 @@ function remove_old_widgets_from_table_by_tid(){
       }
       _delete_old_data_from_section_widget('itg_widget_order_section', $value1['cat_id'], $value1['content_type']);
     }
+    watchdog("delete_widget_table", $tid . 'done2');  
   }
   print 'Done';
   drupal_exit();
