@@ -12,7 +12,7 @@
 .fifa-wcup .featured-post{position: relative;}
 .fifa-wcup .featured-post h3{position: absolute; bottom: 17px; left: 17px;}
  
-.fifa-wcup .movies-featured-post {background-color: #313131;padding: 15px 5px;display: inline-block;width: 100%; margin-bottom: 5px;}
+.fifa-wcup .movies-featured-post {background-color: #313131;padding: 17px 5px;display: inline-block;width: 100%; margin-bottom: 8px;}
 .fifa-wcup .movies-featured-post .sthumb{width: 88px;height: 50px;float: left;margin-right: 8px;}
 .fifa-wcup .movies-featured-post h3{font-size: 12px;line-height: 15px;color: #fff;display: block;}
 .fifa-wcup .movies-featured-post h3 a{color: #fff;}
@@ -26,9 +26,18 @@
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-2{border:0;}
 .fifa-wcup .auto-block-2{height: auto !important; padding: 10px 10px 10px 0}
 
+@media only screen and (max-width: 768px){
+.fifa-wcup .auto-block-1{margin-bottom: 0;}
+.fifa-wcup .movies-featured-post{padding:13px 5px; }
+.fifa-wcup .dont-miss ul li{width: 50%;}
+}
+@media only screen and (max-width: 767px){
+.fifa-wcup .auto-block-2{display: none;}
+.fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100%;}
+}
 </style>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-8 padright-0">
         <div class="auto-block-1">
             <div class="featured-news">
                 <?php
