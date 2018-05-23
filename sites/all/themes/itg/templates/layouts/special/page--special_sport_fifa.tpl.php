@@ -245,7 +245,7 @@ $hide_widget = '';
                                               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'] . $widget_data['itg-block-5']['widget_display_name']; ?>">                      
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
                                                     <?php if (isset($tax_name)) : ?>  
-                                                      <a href="/photo/<?php print str_replace(" ", "-", $tax_name);?>"><h2 class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></h2></a>
+                                                      <h2 class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></h2>
                                                     <?php else: ?>
                                                       <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
                                                     <?php endif; ?>
