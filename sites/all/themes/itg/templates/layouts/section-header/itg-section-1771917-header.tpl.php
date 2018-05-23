@@ -35,7 +35,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
      <div class="event-datelocation-2018">
      	<h2>
      		<span class="eventname-2018"><?php echo $data['data']['menu_manager']['event_title'];?></span>
-     		<span class="location-datetime-2018"><?php echo $data['data']['menu_manager']['event_start_date'] . ',' . $data['data']['menu_manager']['event_location'];?></span>
+     		<span class="location-datetime-2018"><?php echo $data['data']['menu_manager']['event_start_date'] . ', ' . $data['data']['menu_manager']['event_location'];?></span>
      	</h2>
      </div>
 
