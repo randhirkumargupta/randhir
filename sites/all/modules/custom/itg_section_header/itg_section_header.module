@@ -407,7 +407,7 @@ function get_event_menu($nid) {
   $node_data = itg_event_backend_section_menu_detail($nid);
   $baseurl = $base_url . '/' . drupal_get_path_alias('node/' . $nid);
   $node = $node_data[0];
-  $event_start_date = date('F d, Y', strtotime($node->field_event_start_date_value));
+  $event_start_date = date('d F Y', strtotime($node->field_event_start_date_value));
   $event_config_home = $node->field_config_home_value;
   $event_location = $node->field_story_kicker_text_value;
   $event_config_programme = $node->field_config_programme_value;
@@ -458,5 +458,6 @@ function get_event_menu($nid) {
   $menu['event_start_date'] = $event_start_date;
   $menu['event_location'] = $event_location;
   $menu['event_title'] = $node->title;
+  $menu['event_url'] = $baseurl;
   return $menu;
 }

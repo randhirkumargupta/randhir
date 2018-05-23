@@ -14,12 +14,11 @@
  */
 function itg_api_cronapi($op, $job = NULL) {
   
-  $items['itg-pti-content'] = array(
+  /*$items['itg-pti-content'] = array(
     'description' => 'Import PTI Feed.',
-    'rule' => '*/20 * * * *', // Every 15 minutes
     'callback' => 'itg_pti_content',
     'file' => 'include/itg_api_pti.inc',
-  );
+  );*/
   
   $items['itg-mail-today-content'] = array(
     'description' => 'Import Mail today Feed',
@@ -57,11 +56,11 @@ function itg_api_cronapi($op, $job = NULL) {
     'file' => 'include/itg_nifty_feed.inc',
   );
   
-  $items['itg-delete-pti-old-xml'] = array(
+  /*$items['itg-delete-pti-old-xml'] = array(
     'description' => 'Delete Old PTI XML',
     'callback' => 'itg_delete_pti_old_xml',
     'file' => 'include/itg_api_pti.inc',
-  );
+  );*/
 
   return $items;
 }
