@@ -58,19 +58,19 @@ function homePageJson() {
     //code for cube widget end
 
     $data['status_code'] = "1";
-    $data['status_message'] = "customised_message";  
-    
-    $data['data'][0] = $homePageJsonWidget_3;     // live tv   
-    $data['data'][1] = $data_topstories;      
+    $data['status_message'] = "customised_message";
+
+    //$data['data'][0] = $homePageJsonWidget_2;     // karnataka_elections tally   
+    $data['data'][0] = $data_topstories;
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
-    $data['data'][2] = $itg_rapid_home_movies_json;
-    $data['data'][3] = $karnataka_elections_json; // karnataka_elections
-    $data['data'][4] = $itg_rapid_home_technology_json;
-    $data['data'][5] = $data_news_india;
-    $data['data'][6] = $itg_rapid_home_sports_json;
-    $data['data'][7] = $data_news_lifestyle;
-    $data['data'][8] = $data_news_world;
-    $data['data'][9] = $data_magazine;
+    $data['data'][1] = $itg_rapid_home_movies_json;
+    $data['data'][2] = $karnataka_elections_json; // karnataka_elections
+    $data['data'][3] = $itg_rapid_home_technology_json;
+    $data['data'][4] = $data_news_india;
+    $data['data'][5] = $itg_rapid_home_sports_json;
+    $data['data'][6] = $data_news_lifestyle;
+    $data['data'][7] = $data_news_world;
+    $data['data'][8] = $data_magazine;
     $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
@@ -108,8 +108,7 @@ function homePageJsonPackagelist_india() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -168,10 +167,9 @@ function homePageJsonPackagelist_india() {
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         //end
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -212,12 +210,12 @@ function homePageJsonPackagelist_india() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -230,7 +228,7 @@ function homePageJsonPackagelist_india() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
-            }            
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -246,7 +244,7 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
-            $heighligth = array(); 
+            $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
@@ -321,8 +319,7 @@ function homePageJsonPackagelist_lifestyle() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -380,10 +377,9 @@ function homePageJsonPackagelist_lifestyle() {
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -422,12 +418,12 @@ function homePageJsonPackagelist_lifestyle() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -440,7 +436,7 @@ function homePageJsonPackagelist_lifestyle() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
-            }            
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -531,8 +527,7 @@ function homePageJsonPackagelist_world() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -591,10 +586,9 @@ function homePageJsonPackagelist_world() {
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
         //end
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -635,12 +629,12 @@ function homePageJsonPackagelist_world() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -653,7 +647,7 @@ function homePageJsonPackagelist_world() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
-            }            
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -820,10 +814,10 @@ function homePageJsonTopstories() {
         }
         // Get Publish time:
         $pub_date = get_content_publish_date($nid);
-        if (!empty($pub_date)) {  
-          $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+        if (!empty($pub_date)) {
+            $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
         } else {
-          $pub_date = "";
+            $pub_date = "";
         }
         //json tag writing
         if ($type == "story") {
@@ -841,7 +835,7 @@ function homePageJsonTopstories() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
-            }            
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$home_list_count]['n_id'] = "$nid";
             $data_newslist[$home_list_count]['n_type'] = "$type";
@@ -899,12 +893,11 @@ function homePageJsonNewslist_india() {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -953,7 +946,9 @@ function homePageJsonNewslist_india() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -975,12 +970,14 @@ function homePageJsonNewslist_india() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -988,7 +985,7 @@ function homePageJsonNewslist_india() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-             if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = $resvalue['title'];
@@ -997,7 +994,7 @@ function homePageJsonNewslist_india() {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -1027,12 +1024,12 @@ function homePageJsonNewslist_india() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -1048,13 +1045,12 @@ function homePageJsonNewslist_india() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -1109,9 +1105,8 @@ function homePageJsonNewslist_india() {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -1122,9 +1117,9 @@ function homePageJsonNewslist_india() {
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -1132,14 +1127,27 @@ function homePageJsonNewslist_india() {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -1177,12 +1185,11 @@ function homePageJsonNewslist_world() {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -1233,7 +1240,9 @@ function homePageJsonNewslist_world() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -1249,17 +1258,19 @@ function homePageJsonNewslist_world() {
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-         // for breaking_news
+        // for breaking_news
         $query->fields('fmu', array('field_multi_user_allows_value'));
         $query->fields('fcsd', array('field_common_short_description_value'));
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1267,7 +1278,7 @@ function homePageJsonNewslist_world() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = $resvalue['title'];
@@ -1276,7 +1287,7 @@ function homePageJsonNewslist_world() {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -1306,12 +1317,12 @@ function homePageJsonNewslist_world() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -1327,13 +1338,12 @@ function homePageJsonNewslist_world() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -1389,9 +1399,8 @@ function homePageJsonNewslist_world() {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -1402,9 +1411,9 @@ function homePageJsonNewslist_world() {
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -1412,14 +1421,26 @@ function homePageJsonNewslist_world() {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -1651,10 +1672,10 @@ function getMagazineStory($issue_date) {
         }
         // Get Publish time:
         $pub_date = get_content_publish_date($nid);
-        if (!empty($pub_date)) {  
-          $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+        if (!empty($pub_date)) {
+            $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
         } else {
-          $pub_date = "";
+            $pub_date = "";
         }
         $conf = getStoryConfigVal($nid);
         $is_lock = 0;
@@ -1828,12 +1849,11 @@ function homePageJsonNewslist_lifestyle() {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -1883,7 +1903,9 @@ function homePageJsonNewslist_lifestyle() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -1905,14 +1927,16 @@ function homePageJsonNewslist_lifestyle() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
 
 
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-175 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1920,7 +1944,7 @@ function homePageJsonNewslist_lifestyle() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
 
@@ -1930,7 +1954,7 @@ function homePageJsonNewslist_lifestyle() {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -1960,12 +1984,12 @@ function homePageJsonNewslist_lifestyle() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -1981,13 +2005,12 @@ function homePageJsonNewslist_lifestyle() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -2036,16 +2059,15 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
             $n_widget = array();
             $data_newslist[$listcount]['n_widget'] = $n_widget;
-             // for breaking_news
+            // for breaking_news
             $n_blog = array();
             $created = $resvalue['created'];
             $blog_type = $resvalue['field_type_value'];
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -2056,9 +2078,9 @@ function homePageJsonNewslist_lifestyle() {
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -2066,14 +2088,26 @@ function homePageJsonNewslist_lifestyle() {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -2083,6 +2117,7 @@ function homePageJsonNewslist_lifestyle() {
 
     return $data_news;
 }
+
 /**
  * main function for generate homePage Widget1 array
  *
@@ -2095,7 +2130,7 @@ function homePageJsonWidget_1() {
     $comman = array();
     $n_widget = array();
     $listcount = 0;
-    
+
 
     $data_news['id'] = "0";
     $data_news['order'] = "0";
@@ -2105,7 +2140,7 @@ function homePageJsonWidget_1() {
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "1";
 
-    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_id'] = "0";
     $data_newslist[$listcount]['n_template_id'] = "";
     $data_newslist[$listcount]['n_type'] = "widget";
     $data_newslist[$listcount]['n_is_developing'] = "0";
@@ -2125,20 +2160,21 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_video'] = $comman;
     $data_newslist[$listcount]['n_polls'] = $comman;
     $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman; 
-    
+    $data_newslist[$listcount]['n_magazine'] = $comman;
+
     $n_widget[0]['type'] = "1";
     $n_widget[0]['type_label'] = "cwgtally";
-    $n_widget[0]['tilte'] = "CWG 2018 MEDAL TALLY"; 
+    $n_widget[0]['tilte'] = "CWG 2018 MEDAL TALLY";
     $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_rhs.html";
     $n_widget[0]['extended_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_page.html";
-    $n_widget[0]['action'] = "webview";    
-    
+    $n_widget[0]['action'] = "webview";
+
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
     $data_news['news'] = (array) $data_newslist;
     return $data_news;
 }
+
 /**
  * main function for generate homePageJsonNewslist_india array
  *
@@ -2152,11 +2188,10 @@ function homePageJsonNewslist_business() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    if($_SERVER['SERVER_NAME'] == "appfeeds.intoday.in"){
+    if ($_SERVER['SERVER_NAME'] == "appfeeds.intoday.in") {
         $tid = 1778508;
         $label = "Union Budget 2018";
-    }
-    else{
+    } else {
         $tid = 1206574;
         $label = "Business";
     }
@@ -2177,8 +2212,7 @@ function homePageJsonNewslist_business() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -2281,12 +2315,12 @@ function homePageJsonNewslist_business() {
             } else {
                 $changed_datetime = "";
             }
-			// Get Publish time:
+            // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -2387,12 +2421,11 @@ function itg_rapid_home_movies_json() {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -2442,7 +2475,9 @@ function itg_rapid_home_movies_json() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -2464,6 +2499,9 @@ function itg_rapid_home_movies_json() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -2476,7 +2514,7 @@ function itg_rapid_home_movies_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -2485,7 +2523,7 @@ function itg_rapid_home_movies_json() {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -2517,10 +2555,10 @@ function itg_rapid_home_movies_json() {
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -2536,13 +2574,12 @@ function itg_rapid_home_movies_json() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -2597,9 +2634,8 @@ function itg_rapid_home_movies_json() {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -2610,9 +2646,9 @@ function itg_rapid_home_movies_json() {
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -2620,14 +2656,26 @@ function itg_rapid_home_movies_json() {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -2665,12 +2713,11 @@ function itg_rapid_home_technology_json() {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -2720,7 +2767,9 @@ function itg_rapid_home_technology_json() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -2742,6 +2791,9 @@ function itg_rapid_home_technology_json() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -2754,7 +2806,7 @@ function itg_rapid_home_technology_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -2763,7 +2815,7 @@ function itg_rapid_home_technology_json() {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -2795,10 +2847,10 @@ function itg_rapid_home_technology_json() {
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -2814,13 +2866,12 @@ function itg_rapid_home_technology_json() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -2875,9 +2926,8 @@ function itg_rapid_home_technology_json() {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -2888,9 +2938,9 @@ function itg_rapid_home_technology_json() {
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -2898,14 +2948,26 @@ function itg_rapid_home_technology_json() {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -2915,6 +2977,7 @@ function itg_rapid_home_technology_json() {
 
     return $data_news;
 }
+
 /**
  * main function for generate itg_rapid_home_sports array
  *
@@ -2942,12 +3005,11 @@ function itg_rapid_home_sports_json() {
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -2997,7 +3059,9 @@ function itg_rapid_home_sports_json() {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -3019,6 +3083,9 @@ function itg_rapid_home_sports_json() {
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -3031,7 +3098,7 @@ function itg_rapid_home_sports_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -3040,7 +3107,7 @@ function itg_rapid_home_sports_json() {
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -3072,10 +3139,10 @@ function itg_rapid_home_sports_json() {
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -3091,13 +3158,12 @@ function itg_rapid_home_sports_json() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -3152,9 +3218,8 @@ function itg_rapid_home_sports_json() {
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -3165,9 +3230,9 @@ function itg_rapid_home_sports_json() {
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -3175,14 +3240,26 @@ function itg_rapid_home_sports_json() {
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }
@@ -3192,6 +3269,7 @@ function itg_rapid_home_sports_json() {
 
     return $data_news;
 }
+
 /**
  * main function for generate homePage Widget2 array
  *
@@ -3204,7 +3282,7 @@ function homePageJsonWidget_2() {
     $comman = array();
     $n_widget = array();
     $listcount = 0;
-    
+
 
     $data_news['id'] = "0";
     $data_news['order'] = "0";
@@ -3214,7 +3292,7 @@ function homePageJsonWidget_2() {
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "1";
 
-    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_id'] = "0";
     $data_newslist[$listcount]['n_template_id'] = "";
     $data_newslist[$listcount]['n_type'] = "widget";
     $data_newslist[$listcount]['n_is_developing'] = "0";
@@ -3234,21 +3312,22 @@ function homePageJsonWidget_2() {
     $data_newslist[$listcount]['n_video'] = $comman;
     $data_newslist[$listcount]['n_polls'] = $comman;
     $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman; 
-    
-    $n_widget[0]['type'] = "2";
-    $n_widget[0]['type_label'] = "scorecard";
-    $n_widget[0]['tilte'] = "Scorecard"; 
-    $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_home.html";
-    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
-    $n_widget[0]['action'] = "webview"; 
-    $n_widget[0]['is_india_match'] = "1";
-    
+    $data_newslist[$listcount]['n_magazine'] = $comman;
+
+    $n_widget[0]['type'] = "4";
+    $n_widget[0]['type_label'] = "electionresult";
+    $n_widget[0]['tilte'] = "Karnataka Election Result";
+    $n_widget[0]['short_url'] = "https://electionresult.intoday.in/elections/2018/html/karnataka.html?&share=no";
+    $n_widget[0]['extended_url'] = "https://electionresult.intoday.in/elections/2018/html/chunk.html";
+    $n_widget[0]['action'] = "webview";
+    //$n_widget[0]['is_india_match'] = "1";
+
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
     $data_news['news'] = (array) $data_newslist;
     return $data_news;
 }
+
 /**
  * main function for generate homePage Widget3 array
  *
@@ -3261,7 +3340,7 @@ function homePageJsonWidget_3() {
     $comman = array();
     $n_widget = array();
     $listcount = 0;
-    
+
 
     $data_news['id'] = "0";
     $data_news['order'] = "0";
@@ -3271,7 +3350,7 @@ function homePageJsonWidget_3() {
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "1";
 
-    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_id'] = "0";
     $data_newslist[$listcount]['n_template_id'] = "";
     $data_newslist[$listcount]['n_type'] = "widget";
     $data_newslist[$listcount]['n_is_developing'] = "0";
@@ -3291,27 +3370,28 @@ function homePageJsonWidget_3() {
     $data_newslist[$listcount]['n_video'] = $comman;
     $data_newslist[$listcount]['n_polls'] = $comman;
     $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman; 
-    
+    $data_newslist[$listcount]['n_magazine'] = $comman;
+
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
-    $n_widget[0]['tilte'] = "LIVE: KARNATAKA ELECTIONS"; 
-    $n_widget[0]['short_url'] = "https://feeds.intoday.in/indiatoday/livetv/apphomeembed.html";
-    $n_widget[0]['extended_url'] = "https://www.indiatoday.in/livetv";
-    $n_widget[0]['action'] = "webview";    
-    
+    $n_widget[0]['tilte'] = "India Today Conclave 2018 Live";
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/aajtak/api/conclave.html";
+    $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/";
+    $n_widget[0]['action'] = "webview";
+
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
     $data_news['news'] = (array) $data_newslist;
     return $data_news;
 }
+
 /**
  * itg_rapid_home_karnataka_elections_json
  * @global type $base_url
  * @return type
  */
-function itg_rapid_home_karnataka_elections_json(){
-    
+function itg_rapid_home_karnataka_elections_json() {
+
     global $base_url;
     $data_news = array();
     $data_newslist = array();
@@ -3333,12 +3413,11 @@ function itg_rapid_home_karnataka_elections_json(){
     }
 
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story" , "breaking_news");
+    $type = array("videogallery", "photogallery", "story", "breaking_news");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -3388,7 +3467,9 @@ function itg_rapid_home_karnataka_elections_json(){
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
-
+        // for emoji
+        $query->leftJoin('field_data_field_emoji_2', 'emj2', 'emj2.entity_id=n.nid'); //emoji right
+        $query->leftJoin('field_data_field_emoji', 'emj', 'emj.entity_id=n.nid'); //emoji left
 
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
@@ -3410,6 +3491,9 @@ function itg_rapid_home_karnataka_elections_json(){
         $query->fields('fdt', array('field_type_value'));
         $query->fields('fse', array('field_story_expires_value'));
         $query->fields('fdc', array('field_constituancy_value'));
+        // for emoji
+        $query->fields('emj2', array('field_emoji_2_value'));
+        $query->fields('emj', array('field_emoji_value'));
         //end
 
         $query->condition('ti.tid', $tid, '=');
@@ -3422,7 +3506,7 @@ function itg_rapid_home_karnataka_elections_json(){
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            if($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog"){
+            if ($resvalue['field_type_value'] == "Breaking News" || $resvalue['field_type_value'] == "Cricket Live Blog") {
                 continue;
             }
             $title = strip_tags($resvalue['title']);
@@ -3431,7 +3515,7 @@ function itg_rapid_home_karnataka_elections_json(){
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
             $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
-            if($type == 'breaking_news'){
+            if ($type == 'breaking_news') {
                 $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
             }
             $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -3463,10 +3547,10 @@ function itg_rapid_home_karnataka_elections_json(){
             }
             // Get Publish time:
             $pub_date = get_content_publish_date($nid);
-            if (!empty($pub_date)) {  
-              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            if (!empty($pub_date)) {
+                $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
             } else {
-              $pub_date = "";
+                $pub_date = "";
             }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
@@ -3482,13 +3566,12 @@ function itg_rapid_home_karnataka_elections_json(){
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            if($type == "breaking_news"){
-                $data_newslist[$listcount]['n_type'] = "story"; 
-                $data_newslist[$listcount]['n_is_blog'] = "1"; 
-            }
-            else{
-              $data_newslist[$listcount]['n_type'] = "$type"; 
-              $data_newslist[$listcount]['n_is_blog'] = "0"; 
+            if ($type == "breaking_news") {
+                $data_newslist[$listcount]['n_type'] = "story";
+                $data_newslist[$listcount]['n_is_blog'] = "1";
+            } else {
+                $data_newslist[$listcount]['n_type'] = "$type";
+                $data_newslist[$listcount]['n_is_blog'] = "0";
             }
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -3543,9 +3626,8 @@ function itg_rapid_home_karnataka_elections_json(){
             $new_blog = 0;
             if ($resvalue['field_multi_user_allows_value']) {
                 $new_blog = 1;
-            }
-            elseif($resvalue['field_type_value'] == "Cricket Live Blog"){
-               $new_blog = 2; 
+            } elseif ($resvalue['field_type_value'] == "Cricket Live Blog") {
+                $new_blog = 2;
             }
             $live_tv = 0;
             if ($resvalue['field_story_expires_value'] == 'Yes') {
@@ -3556,9 +3638,9 @@ function itg_rapid_home_karnataka_elections_json(){
             $sub_title = $resvalue['title'];
             $page_title = $node_data->title;
             $field_type_value = $resvalue['field_type_value'];
-            
-            
-            if($type == "breaking_news"){
+
+
+            if ($type == "breaking_news") {
                 $n_blog['blog_type'] = "$blog_type";
                 $n_blog['id'] = "$nid";
                 $n_blog['sub_title'] = "$sub_title";
@@ -3566,14 +3648,26 @@ function itg_rapid_home_karnataka_elections_json(){
                 $n_blog['new_blog'] = "$new_blog";
                 $n_blog['live_tv'] = "$live_tv";
                 $n_blog = (object) $n_blog;
-                $data_newslist[$listcount]['n_blog'] =  $n_blog;
-            }
-            else{
-                $n_blog = array();    
+                $data_newslist[$listcount]['n_blog'] = $n_blog;
+            } else {
+                $n_blog = array();
                 $n_blog['empty'] = "";
-                $n_blog = (object) $n_blog;  
+                $n_blog = (object) $n_blog;
                 $data_newslist[$listcount]['n_blog'] = $n_blog;
             }
+            // for emoji
+            $n_emoji_left = array();
+            $n_emoji_right = array();
+            $emoji_left = $resvalue['field_emoji_value'];
+            $emoji_right = $resvalue['field_emoji_2_value'];
+            if ($emoji_left) {
+                $n_emoji_left = itg_rapid_get_emoji($emoji_left);
+            }
+            if ($emoji_right) {
+                $n_emoji_right = itg_rapid_get_emoji($emoji_right);
+            }
+            $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
+            $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
 
             $listcount++;
         }

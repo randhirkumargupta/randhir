@@ -2681,7 +2681,7 @@ function itg_widget_get_issue_data($magazine_id = NULL) {
     $query->condition('n.type', array('issue'), '=');
     $query->Join('field_data_field_issue_magazine', 'mag', 'mag.entity_id=n.nid');
     $query->condition('mag.field_issue_magazine_target_id', $magazine_id, '=');
-    $query->condition('n.status', 1);
+    //$query->condition('n.status', 1);
     $result = $query->execute();
     return $result;
 }
@@ -2986,11 +2986,13 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
 
     if (!empty($data)) {
         try {
+            $_delete_arr = array();
             $delete_query = db_delete($table);
             foreach ($data as $tid) {
-                $delete_query->condition("id", $tid->id);
+                $_delete_arr[] = $tid->id;
                 _itg_widget_delete_node_data_from_helper_table($tid->nid);
             }
+            $delete_query->condition("id", $_delete_arr, 'IN');
             $delete_query->execute();
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');

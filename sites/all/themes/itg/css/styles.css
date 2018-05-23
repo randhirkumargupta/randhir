@@ -84,9 +84,9 @@ $itg-robotoslab:'RobotoSlab-Regular';
 
 .progress-striped .progress-bar,
 .progress-bar-striped {
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   -webkit-background-size: 40px 40px;
   background-size: 40px 40px; }
 
@@ -97,33 +97,33 @@ $itg-robotoslab:'RobotoSlab-Regular';
   animation: progress-bar-stripes 2s linear infinite; }
 
 .progress-striped .progress-bar-success {
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
 .progress-bar-info {
   background-color: #5bc0de; }
 
 .progress-striped .progress-bar-info {
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
 .progress-bar-warning {
   background-color: #f0ad4e; }
 
 .progress-striped .progress-bar-warning {
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
 .progress-bar-danger {
   background-color: #d9534f; }
 
 .progress-striped .progress-bar-danger {
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
+  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); }
 
 .progress-bar-animated {
   animation: 1s linear 0s normal none infinite running progress-bar-stripes; }
@@ -610,7 +610,7 @@ header {
         position: relative; }
         #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before {
           content: '';
-          background: url(../images/sprite.png) no-repeat 0 -123px;
+          background: url(/sites/all/themes/itg/images/sprite.png) no-repeat 0 -123px;
           position: absolute;
           top: -11px;
           left: 20px;
@@ -1320,9 +1320,9 @@ footer {
     text-align: center;
     height: 37px;
     cursor: pointer;
-    background: #000000 url(../images/sprite.png) no-repeat 10px 10px; }
+    background: #000000 url(/sites/all/themes/itg/images/sprite.png) no-repeat 10px 10px; }
   footer .footer-top .footer-open-icon {
-    background: #000000 url(../images/sprite.png) no-repeat 10px -35px; }
+    background: #000000 url(/sites/all/themes/itg/images/sprite.png) no-repeat 10px -35px; }
   footer .footer-mid {
     background: #111111;
     padding: 4px 0 10px;
@@ -1734,7 +1734,7 @@ footer {
   display: inline-block;
   vertical-align: top; }
   .video-icon:after, .trending-videos li .pic:after {
-    background: url(../images/sprite.png) no-repeat 0 -87px;
+    background: url(/sites/all/themes/itg/images/sprite.png) no-repeat 0 -87px;
     content: "";
     width: 18px;
     height: 18px;
@@ -4025,14 +4025,14 @@ h1.category-heading {
     height: 5px;
     margin: 2px auto;
     background-color: #f7f7f7;
-    background-image: linear-gradient(#4a4a4a, #757575);
+    background: linear-gradient(#4a4a4a, #757575);
     border: 1px solid #c6c6c6;
     opacity: 1; }
   .anchor-detail-menu .mCSB_scrollTools.mCSB_scrollTools_horizontal .mCSB_draggerRail {
     height: 9px;
     margin: 0 auto;
     width: 100%;
-    background-image: linear-gradient(#cacaca, #e4e4e4);
+    background: linear-gradient(#cacaca, #e4e4e4);
     border: 1px solid #afafaf;
     opacity: 1;
     border-radius: 0; }
@@ -4262,7 +4262,7 @@ h1.category-heading {
     font-size: 15px;
     color: #323232;
     cursor: move;
-    background-image: linear-gradient(#f5f3f2, #e7e5e4); }
+    background: linear-gradient(#f5f3f2, #e7e5e4); }
 
 /*End live block css*/
 /*Start css No result found side bar*/
@@ -7055,7 +7055,7 @@ section.sidebar .block-itg-ads {
     padding: 15px;
     color: #000;
     font-size: 18px;
-    background-image: linear-gradient(#fdcf2e, #fabb1d);
+    background: linear-gradient(#fdcf2e, #fabb1d);
     font-weight: 700; }
 .oscar-layout-page .oscar-features .col-md-6 {
   overflow: hidden;
@@ -9249,7 +9249,7 @@ section.sidebar .block-itg-ads {
   height: 12px;
   margin: 3px auto;
   background-color: #f7f7f7;
-  background-image: linear-gradient(#a1a1a1, #d1d1d1);
+  background: linear-gradient(#a1a1a1, #d1d1d1);
   border: 1px solid #c6c6c6;
   opacity: 1; }
 
@@ -9257,7 +9257,7 @@ section.sidebar .block-itg-ads {
   height: 18px;
   margin: 0 auto;
   width: 98%;
-  background-image: linear-gradient(#0b0b0b, #171717);
+  background: linear-gradient(#0b0b0b, #171717);
   border: 1px solid #2c2c2c;
   opacity: 1; }
 

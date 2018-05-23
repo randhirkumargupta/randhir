@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * @file
  * INC file for APP API Schemes Services.
  * Contains the resource declarations for the service APIs
@@ -2382,6 +2382,89 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        /* for dev service */
+        // horizontal_menu_dev custom resource declaration.....
+        'horizontal_menu_dev' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves horizontal_menu schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_horizontal_menu_dev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            //'source' => array('param' => 'token'),
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // hamburger_menu_dev custom resource declaration.....
+        'hamburger_menu_dev' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves hamburger_menu schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_hamburger_menu_dev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // homePagedev custom resource declaration.....
+        'home_dev' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves storydetail schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_homePageDev',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         // manual_blog custom resource declaration.....
         'manual_blog' => array(
             'operations' => array(
@@ -3593,7 +3676,7 @@ function itg_rapid_api_login_request($token) {
         //return services_error(t('Wrong username or password.'), 401);
         $account = array();
         $s_code = 0;
-        if($user_data->uid > 0){
+        if ($user_data->uid > 0) {
             $s_code = 2;
         }
         $account['status_code'] = "$s_code";
@@ -3771,7 +3854,7 @@ function itg_rapid_api_change_password($token) {
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
     if (!drupal_valid_token($token, 'services')) {
-    //if (!$token_val_flag) {
+        //if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
@@ -3800,15 +3883,14 @@ function itg_rapid_api_change_password($token) {
 
         // Load the anonymous user.
         //$user = drupal_anonymous_user();
-
         //drupal_save_session($original_session_state);
-        deviceTokenReset_Rapid($params);         
+        deviceTokenReset_Rapid($params);
         ################logout sart##############
-       $params_logout = array();
+        $params_logout = array();
         $params_logout['user_id'] = $params['user_id'];
         $params_logout['auth_token'] = $params['auth_token'];
         $params_logout['device_id'] = $params['device_id'];
-        $params_logout['device_type'] = $params['device_type'];        
+        $params_logout['device_type'] = $params['device_type'];
         cleanToken_Rapid($params_logout);
         ################logout sart##############
         ###############relogin start ##########
@@ -3862,7 +3944,6 @@ function itg_rapid_api_change_password($token) {
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
         $data['data'] = $token_arr_data;
-       
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
@@ -5393,7 +5474,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-   ############ code write static html start #####################
+    ############ code write static html start #####################
     $html_temp_top = '<!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5437,12 +5518,12 @@ function itg_rapid_api_testing($token) {
     global $base_url;
     $data = array();
     $rand = rand();
-    $prod_url =  "https://appfeeds.intoday.in";   
+    $prod_url = "https://appfeeds.intoday.in";
     $url = $prod_url . "/appapi/topstories/" . $rand;
     $contents = file_get_contents($url);
-    $contents_ar = json_decode($contents);    
+    $contents_ar = json_decode($contents);
     $data = $contents_ar->data;
-    
+
     $l_cont = 1;
     foreach ($data as $key => $value) {
         $n_share_link = $value->n_share_link;
@@ -6361,13 +6442,14 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     echo $message;
     drupal_exit();
 }
+
 /**
  * Call back function for aboutus API
  * @pram $_GET
  *
  * @return array - The processed information array.
  */
-function itg_rapid_api_aboutus($token){
+function itg_rapid_api_aboutus($token) {
     $jsondata = '{  
     "status_code": "1",
     "status_message": "",
@@ -6384,6 +6466,7 @@ function itg_rapid_api_aboutus($token){
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
+
 /**
  * Helper function to list_itg_rapid_api_anchor_list_default. 
  *
@@ -6401,8 +6484,8 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
-    $query->orderBy('iwo.weight', 'ASC');    
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
+    $query->orderBy('iwo.weight', 'ASC');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
         $a_id = $node_data->nid;
@@ -6452,6 +6535,86 @@ function list_itg_rapid_api_anchor_list_default() {
         $output_array['data'] = $data;
     }
     return $output_array;
+}
+
+// for dev service 
+/**
+ * Call back function for horizontal_menu API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_horizontal_menu_dev($token) {
+    $redis_key = "itg_rapid_api_horizontal_menu_dev_json";
+    $result_get = getRedis($redis_key);
+        if ($result_get['key_value'] != "") {
+            $jsondata = $result_get['key_value'];
+        } else {
+    //variable_get('horizontal_menu_json');
+    $jsondata = horizontal_menu_middleware_data();
+    $jsondata = json_encode($jsondata);
+    //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $ttl = 10;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+/**
+ * Call back function for hamburger_menu API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_hamburger_menu_dev($token) {
+    $redis_key = "itg_rapid_api_hamburger_menu_dev_json";
+    $result_get = getRedis($redis_key);
+
+        if ($result_get['key_value'] != "") {
+            $jsondata = $result_get['key_value'];
+        } else {
+    //variable_get('hamburger_menu_json');
+    $jsondata = hamburger_menu_middleware_data();
+    $jsondata = json_encode($jsondata);
+    //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $ttl = 10;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+
+/**
+ * Call back function for homePagedev API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_homePageDev($token) {
+    //include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_homePage_dev.inc");
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev');
+    module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage_dev_2');
+    $redis_key = "itg_rapid_api_homePageDev_json";
+    $result_get = getRedis($redis_key);
+        if ($result_get['key_value'] != "") {
+            $jsondata = $result_get['key_value'];
+        } else {
+    // call function from return data..
+    $ttl = 10;
+    $jsondata = homePageJson_dev();
+    $jsondata = json_encode($jsondata);
+    //$ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
 }
 /**
  * Call back function for itg_rapid_api_manual_blog API
@@ -6535,22 +6698,22 @@ function itg_rapid_value_manual_blog($nid) {
     $loopc = 0;
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
-        $content_ar = array_reverse($content_ar,true);
-        foreach ($content_ar as $key => $value) {   
+        $content_ar = array_reverse($content_ar, true);
+        foreach ($content_ar as $key => $value) {
             $content_id = $value['value'];
-            $entity = entity_load('field_collection_item', $value);            
-            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];            
+            $entity = entity_load('field_collection_item', $value);
+            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];
             $desc_withouthtml = strip_tags($field_breaking_tile);
             $desc_withhtml = $field_breaking_tile;
             $title = "";
-            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];   
+            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];
             $posted_by = "";
-            if($desc_withhtml){
+            if ($desc_withhtml) {
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
                 $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
-            
+
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
             $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
@@ -6559,20 +6722,19 @@ function itg_rapid_value_manual_blog($nid) {
             $blog_content[$loopc]['posted_by'] = "$posted_by";
             $loopc++;
         }
-    }
-    elseif ($new_blog == 1) {
-       $custom_content = itg_rapid_new_blog_content_details($nid);
-        foreach ($custom_content as $breaking_item) {             
+    } elseif ($new_blog == 1) {
+        $custom_content = itg_rapid_new_blog_content_details($nid);
+        foreach ($custom_content as $breaking_item) {
             $title = $breaking_item->blog_title;
-            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time); 
+            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time);
             $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
             $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
             $posted_by = $user_name;
             $desc_withhtml = $breaking_item->blog_description;
             $desc_withouthtml = strip_tags($breaking_item->blog_description);
-            if($desc_withhtml){
+            if ($desc_withhtml) {
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
                 $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
             $content_id = $breaking_item->bid;
@@ -6592,16 +6754,16 @@ function itg_rapid_value_manual_blog($nid) {
     $json_data['data'] = $blog_data;
     return $json_data;
 }
+
 /**
  * content show at live blog page.
  */
 function itg_rapid_new_blog_content_details($blog_entity_id) {
-  $query = db_select('itg_live_blog', 'p');
-  $query->condition('p.blog_entity_id', $blog_entity_id);
-  $query->condition('p.status', '1');
-  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
-       ->orderBy('bid', 'DESC');
-  # execute the query
-  return $results = $query->execute()->fetchAll();
- 
+    $query = db_select('itg_live_blog', 'p');
+    $query->condition('p.blog_entity_id', $blog_entity_id);
+    $query->condition('p.status', '1');
+    $query->fields('p', array('bid', 'blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time', 'blog_uid', 'update_uid', 'blog_created_date'))
+            ->orderBy('bid', 'DESC');
+    # execute the query
+    return $results = $query->execute()->fetchAll();
 }

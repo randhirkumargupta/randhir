@@ -171,6 +171,10 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
         $query->fields('fsri', array('field_reporter_unique_id_value'));
         $query->fields('fci', array('field_primary_category_value'));
         $query->fields('fssh', array('field_story_short_headline_value'));
+        $interval = 175;
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
+        $d2 = date(strtotime($d1));
+        $query->condition('n.created', $d2, '>=');
 
 
         //end 
@@ -464,6 +468,10 @@ function getCoverstoriesList($issue_date) {
         $query->fields('fsri', array('field_reporter_unique_id_value'));
         $query->fields('fci', array('field_primary_category_value'));
         $query->fields('fssh', array('field_story_short_headline_value'));
+        $interval = 175;
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
+        $d2 = date(strtotime($d1));
+        $query->condition('n.created', $d2, '>=');
 
         //end
         //$query->condition('fsc.field_story_category_tid', 1206509)->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('iwo.weight', 'DESC')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);

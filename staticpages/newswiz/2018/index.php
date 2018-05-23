@@ -160,14 +160,12 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                     <h1>News Wiz Quiz 2018: Season 3</h1>
 <p>It gives us great pleasure to announce the return of the exciting and innovative news quiz, <strong> “News Wiz” for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</p>
 <br>
-<p>This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your teams may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
+<p>This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your team may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
 If you are students / know students from class 9 to 12 - form teams of two members and register to take part for the qualifying test for what definitely will be an exciting new season of News Wiz !
 </p>
                       
 
-                      <!--<div class="regBtnHome">
-  <a target="_blank" href="https://goo.gl/forms/bomdkX8K6GGHf63z1">Register Here</a>
-</div>-->
+                  <div class="regBtnHome"><a target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
 
                       <!-- <a href="#" data-toggle="modal" data-target="#intro_box">Read more</a>-->
                       <!-- Modal -->
@@ -226,51 +224,29 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                           <h2>
                             <a href="/newswiz/2017/episodes.jsp" title="Second section"><span>Second Season Highlights</span></a>
                           </h2>
-                                                  <div class="video_info">
-                                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
-                                                        <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
-                                                        </a> </div>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                    <div class="video_episode_snippets">
-                                                      <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MTYy" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_082617110451.jpg" alt="Newswiz2">
-                                                        <p>Episode 1: Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points </p>
-                                                        </a> </div>
-                                                    </div>
-                                                  </div>
-                                                  
-                                                  
-                                                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
-                                <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
-                                <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
-                                <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
-                                </a> </div>
-                            </div>
-                          </div>
-                                                  
-                                                </div>
-                                                
-
-
+                              <div class="video_info">
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA4OTQ0Ng==" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/Video_Extra_Large_Image/wiz-video_647_111817093241.jpg?Fqa_EgsCPlVt15T9o_tWKMUUjDfNvwYA" alt="Newswiz2">
+                              <p>Grand Finale: Vadodara's Navrachana School wins News Wiz 2017</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTY1NQ==" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201710/newswiz-video-647_102117100223.jpg" alt="Newswiz2">
+                              <p>Semifinal 1: Srinagar's DPS emerges winner, enters semi-finals</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA3OTc4MA==" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201711/newswiz-video_647_110417093927.jpg" alt="Newswiz2">
+                              <p>Semifinal 2: Vadodara's Navrachana School moves into final</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              </div>
                           <!--end video -->
                         </div>
                       </div>

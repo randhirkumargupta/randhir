@@ -203,3 +203,14 @@ ul.activities-images li{width:auto; float:left; height:auto; background:none; ma
 .contentCn .rightBar { padding: 30px 5.2% 30px 5%;	width: 89.8%; float:left; }
 .punch-content { font-size:40px; padding-top:7px;}		
 }
+
+.ytube-video-section{float: left; width: 100%; background-color: #e0e0e0; padding: 5px; box-sizing:border-box; margin-bottom: 25px; padding-bottom: 16px;}
+.ytube-video-section h2{font-size: 20px; line-height: 36px; color: #000; display: block; font-family: 'Roboto', sans-serif; padding-left: 9px;}
+.ytube-video-section ul{list-style: none; display: block; background-color: #fff;}
+
+.ytube-video-section ul li{float: left; width: 32%;background: #fff;padding: 9px 9px 14px;box-sizing: border-box;}
+.ytube-video-section ul li:nth-child(2){margin: 0 2%;}
+.ytube-video-section ul li:nth-child(3){padding-bottom: 33px;}
+
+.ytube-video-section ul li .video-thumb{width: 100%; display: inline-block;}
+.ytube-video-section ul li span{display: block; font-size: 14px; line-height: 20px; color: #000; text-transform: uppercase; font-family: 'Roboto', sans-serif}

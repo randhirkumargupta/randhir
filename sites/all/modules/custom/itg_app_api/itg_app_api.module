@@ -11,8 +11,8 @@
  * Implements hook_init().
  */
 function itg_app_api_init() {
-  module_load_include('inc', 'itg_app_api', 'inc/helper');
-  module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
+    module_load_include('inc', 'itg_app_api', 'inc/helper');
+    module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
 }
 
 /**
@@ -21,242 +21,249 @@ function itg_app_api_init() {
  */
 function itg_app_api_services_resources() {
 
-  $resources = array();
+    $resources = array();
 
-  //Include the necessary inc files.
-  module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
+    //Include the necessary inc files.
+    module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
 
-  //Service Apis for contents.
-  $resources += itg_app_api_resource();
+    //Service Apis for contents.
+    $resources += itg_app_api_resource();
 
-  return $resources;
+    return $resources;
 }
 
 /**
  * Implements hook_menu().
  */
 function itg_app_api_menu() {
-  $items = array();
-  $items['admin/api-configuration'] = array(
-    'title' => 'API Configuration',
-    'description' => 'API Configuration',
-    'weight' => 80,
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items = array();
+    $items['admin/api-configuration'] = array(
+        'title' => 'API Configuration',
+        'description' => 'API Configuration',
+        'weight' => 80,
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/feed-api'] = array(
-    'title' => 'Feed API',
-    'description' => 'Feed API Configuration',
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/feed-api'] = array(
+        'title' => 'Feed API',
+        'description' => 'Feed API Configuration',
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api'] = array(
-    'title' => 'REST API',
-    'description' => 'REST API Configuration',
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api'] = array(
+        'title' => 'REST API',
+        'description' => 'REST API Configuration',
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for set update webservice token
-  $items['admin/api-configuration/rest-api/mobile-service-token'] = array(
-    'title' => 'Mobile web service token',
-    'description' => 'Mobile web service token',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('mobile_service_token'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for set update webservice token
+    $items['admin/api-configuration/rest-api/mobile-service-token'] = array(
+        'title' => 'Mobile web service token',
+        'description' => 'Mobile web service token',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('mobile_service_token'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for update config_update_status json
-  $items['admin/api-configuration/rest-api/config-update-status-json'] = array(
-    'title' => 'Update config_update_status json',
-    'description' => 'Update config_update_status json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('config_update_status_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for update config_update_status json
+    $items['admin/api-configuration/rest-api/config-update-status-json'] = array(
+        'title' => 'Update config_update_status json',
+        'description' => 'Update config_update_status json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('config_update_status_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for update datanotexist_api json
-  $items['admin/api-configuration/rest-api/datanotexist-api-json'] = array(
-    'title' => 'update datanotexist_api json',
-    'description' => 'update datanotexist_api json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('datanotexist_api_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for update datanotexist_api json
+    $items['admin/api-configuration/rest-api/datanotexist-api-json'] = array(
+        'title' => 'update datanotexist_api json',
+        'description' => 'update datanotexist_api json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('datanotexist_api_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for update hamburger_menu json
-  $items['admin/api-configuration/rest-api/hamburger-menu-json'] = array(
-    'title' => 'update hamburger_menu json',
-    'description' => 'update hamburger_menu json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('hamburger_menu_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for update hamburger_menu json
+    $items['admin/api-configuration/rest-api/hamburger-menu-json'] = array(
+        'title' => 'update hamburger_menu json',
+        'description' => 'update hamburger_menu json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('hamburger_menu_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for update horizontal_menu json
-  $items['admin/api-configuration/rest-api/horizontal-menu-json'] = array(
-    'title' => 'update horizontal_menu json',
-    'description' => 'update horizontal_menu json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('horizontal_menu_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for update horizontal_menu json
+    $items['admin/api-configuration/rest-api/horizontal-menu-json'] = array(
+        'title' => 'update horizontal_menu json',
+        'description' => 'update horizontal_menu json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('horizontal_menu_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for update master_config json
-  $items['admin/api-configuration/rest-api/master-config-json'] = array(
-    'title' => 'update master_config json',
-    'description' => 'update master_config json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('master_config_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for update master_config json
+    $items['admin/api-configuration/rest-api/master-config-json'] = array(
+        'title' => 'update master_config json',
+        'description' => 'update master_config json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('master_config_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // menu for update server_error_master json
-  $items['admin/api-configuration/rest-api/server-error-master-json'] = array(
-    'title' => 'update server_error_master json',
-    'description' => 'update server_error_master json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('server_error_master_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    // menu for update server_error_master json
+    $items['admin/api-configuration/rest-api/server-error-master-json'] = array(
+        'title' => 'update server_error_master json',
+        'description' => 'update server_error_master json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('server_error_master_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  //sprint 2 seting menu,  admin/structure/services
-  $items['admin/api-configuration/rest-api/ad-config-json'] = array(
-    'title' => 'update ad config json',
-    'description' => 'ad_config_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ad_config_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    //sprint 2 seting menu,  admin/structure/services
+    $items['admin/api-configuration/rest-api/ad-config-json'] = array(
+        'title' => 'update ad config json',
+        'description' => 'ad_config_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('ad_config_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/livetv-channellist-json'] = array(
-    'title' => 'update livetv channellist json',
-    'description' => 'livetv_channellist_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_channellist_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/livetv-channellist-json'] = array(
+        'title' => 'update livetv channellist json',
+        'description' => 'livetv_channellist_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('livetv_channellist_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/livetv-aajtak'] = array(
-    'title' => 'update livetv aajtak',
-    'description' => 'livetv_aajtak',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_aajtak'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/livetv-aajtak'] = array(
+        'title' => 'update livetv aajtak',
+        'description' => 'livetv_aajtak',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('livetv_aajtak'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/livetv-indiatoday'] = array(
-    'title' => 'update livetv indiatoday',
-    'description' => 'livetv_indiatoday',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_indiatoday'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/livetv-indiatoday'] = array(
+        'title' => 'update livetv indiatoday',
+        'description' => 'livetv_indiatoday',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('livetv_indiatoday'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/livetv-delhiaajtak'] = array(
-    'title' => 'update livetv delhiaajtak',
-    'description' => 'livetv_delhiaajtak',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_delhiaajtak'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['admin/api-configuration/rest-api/livetv-tej'] = array(
-    'title' => 'update livetv tej',
-    'description' => 'livetv_tej',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_tej'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/livetv-delhiaajtak'] = array(
+        'title' => 'update livetv delhiaajtak',
+        'description' => 'livetv_delhiaajtak',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('livetv_delhiaajtak'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['admin/api-configuration/rest-api/livetv-tej'] = array(
+        'title' => 'update livetv tej',
+        'description' => 'livetv_tej',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('livetv_tej'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/otherapps-ios-json'] = array(
-    'title' => 'update otherapps ios json',
-    'description' => 'otherapps_ios_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('otherapps_ios_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/otherapps-ios-json'] = array(
+        'title' => 'update otherapps ios json',
+        'description' => 'otherapps_ios_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('otherapps_ios_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/otherapps-android-json'] = array(
-    'title' => 'update otherapps android json',
-    'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('otherapps_android_json'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/otherapps-android-json'] = array(
+        'title' => 'update otherapps android json',
+        'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('otherapps_android_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  // for static other device
+    // for static other device
 
-  $items['admin/api-configuration/rest-api/adconfig-android'] = array(
-    'title' => 'update adconfig android json',
-    //'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('adconfig_android'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/adconfig-android'] = array(
+        'title' => 'update adconfig android json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('adconfig_android'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  $items['admin/api-configuration/rest-api/adconfig-ipad'] = array(
-    'title' => 'update adconfig ipad json',
-    //'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('adconfig_ipad'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['admin/api-configuration/rest-api/adconfig-iphone'] = array(
-    'title' => 'update adconfig iphone json',
-    //'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('adconfig_iphone'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['admin/api-configuration/rest-api/adconfig-tab'] = array(
-    'title' => 'update adconfig tab json',
-    //'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('adconfig_tab'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  
-  // for redish ttl
-  
-  $items['admin/api-configuration/rest-api/redish-ttl'] = array(
-    'title' => 'update Rest API redish TTL',
-    //'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('redish_ttl'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['admin/api-configuration/rest-api/time-interval'] = array(
-    'title' => 'update Rest API redish TTL',
-    //'description' => 'otherapps_android_json',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('time_interval'),
-    'access arguments' => array('itg mobile feed'),
-    'type' => MENU_NORMAL_ITEM,
-  );
+    $items['admin/api-configuration/rest-api/adconfig-ipad'] = array(
+        'title' => 'update adconfig ipad json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('adconfig_ipad'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['admin/api-configuration/rest-api/adconfig-iphone'] = array(
+        'title' => 'update adconfig iphone json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('adconfig_iphone'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['admin/api-configuration/rest-api/adconfig-tab'] = array(
+        'title' => 'update adconfig tab json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('adconfig_tab'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
-  return $items;
+    // for redish ttl
+
+    $items['admin/api-configuration/rest-api/redish-ttl'] = array(
+        'title' => 'update Rest API redish TTL',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('redish_ttl'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['admin/api-configuration/rest-api/time-interval'] = array(
+        'title' => 'update Rest API redish TTL',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('time_interval'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['test-to-live/home-api'] = array(
+        'title' => 'Test to live: home-api',
+        'page callback' => 'testtolive_homeapi',
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+        'file' => 'inc/itg_app_api_homePage.inc',
+    );
+
+    return $items;
 }
 
 /**
@@ -265,15 +272,15 @@ function itg_app_api_menu() {
  * @return type
  */
 function mobile_service_token() {
-  $form = array();
-  $form['mobile_service_token'] = array(
-    '#type' => 'textfield',
-    '#title' => t('web service token'),
-    '#default_value' => variable_get('mobile_service_token'),
-    '#description' => t("Token for web service API."),
-    '#required' => TRUE,
-  );
-  return system_settings_form($form);
+    $form = array();
+    $form['mobile_service_token'] = array(
+        '#type' => 'textfield',
+        '#title' => t('web service token'),
+        '#default_value' => variable_get('mobile_service_token'),
+        '#description' => t("Token for web service API."),
+        '#required' => TRUE,
+    );
+    return system_settings_form($form);
 }
 
 /**
@@ -282,15 +289,15 @@ function mobile_service_token() {
  * @return type
  */
 function config_update_status_json() {
-  $form = array();
-  $form['config_update_status_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('config update status json'),
-    '#default_value' => variable_get('config_update_status_json'),
-    '#required' => TRUE,
-  );
+    $form = array();
+    $form['config_update_status_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('config update status json'),
+        '#default_value' => variable_get('config_update_status_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -299,16 +306,16 @@ function config_update_status_json() {
  * @return type
  */
 function datanotexist_api_json() {
-  $form = array();
+    $form = array();
 
-  $form['datanotexist_api_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('datanotexist api json'),
-    '#default_value' => variable_get('datanotexist_api_json'),
-    '#required' => TRUE,
-  );
+    $form['datanotexist_api_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('datanotexist api json'),
+        '#default_value' => variable_get('datanotexist_api_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -317,16 +324,16 @@ function datanotexist_api_json() {
  * @return type
  */
 function hamburger_menu_json() {
-  $form = array();
+    $form = array();
 
-  $form['hamburger_menu_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('hamburger menu json'),
-    '#default_value' => variable_get('hamburger_menu_json'),
-    '#required' => TRUE,
-  );
+    $form['hamburger_menu_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('hamburger menu json'),
+        '#default_value' => variable_get('hamburger_menu_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -335,16 +342,16 @@ function hamburger_menu_json() {
  * @return type
  */
 function horizontal_menu_json() {
-  $form = array();
+    $form = array();
 
-  $form['horizontal_menu_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('horizontal menu json'),
-    '#default_value' => variable_get('horizontal_menu_json'),
-    '#required' => TRUE,
-  );
+    $form['horizontal_menu_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('horizontal menu json'),
+        '#default_value' => variable_get('horizontal_menu_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -353,16 +360,16 @@ function horizontal_menu_json() {
  * @return type
  */
 function master_config_json() {
-  $form = array();
+    $form = array();
 
-  $form['master_config_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('master config json'),
-    '#default_value' => variable_get('master_config_json'),
-    '#required' => TRUE,
-  );
+    $form['master_config_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('master config json'),
+        '#default_value' => variable_get('master_config_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -371,16 +378,16 @@ function master_config_json() {
  * @return type
  */
 function server_error_master_json() {
-  $form = array();
+    $form = array();
 
-  $form['server_error_master_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('server error master json'),
-    '#default_value' => variable_get('server_error_master_json'),
-    '#required' => TRUE,
-  );
+    $form['server_error_master_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('server error master json'),
+        '#default_value' => variable_get('server_error_master_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -390,11 +397,11 @@ function server_error_master_json() {
  * @pram int $nc_count
  */
 function getCommentsCount($nid) {
-  $cont = 0;
-  return $cont;
-  $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
-  $nc_count = $node_anyalytics['data_count_node_comment'];
-  return $nc_count;
+    $cont = 0;
+    return $cont;
+    $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
+    $nc_count = $node_anyalytics['data_count_node_comment'];
+    return $nc_count;
 }
 
 /**
@@ -404,20 +411,19 @@ function getCommentsCount($nid) {
  * @return datetime $published_datetime
  */
 function getNodePublishedDate($nid) {
-  $query = db_select('workbench_moderation_node_history', 'nh');
-  $query->fields('nh', array('stamp'));
-  $query->condition('nh.nid', $nid);
-  $query->condition('nh.from_state', 'draft');
-  $query->condition('nh.state', 'published');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $published_statp = $result[0]['stamp'];
-  if ($published_statp) {
-    $published_datetime = date("Y-m-d H:i:s", $published_statp);
-  }
-  else {
-    $published_datetime = "";
-  }
-  return $published_datetime;
+    $query = db_select('workbench_moderation_node_history', 'nh');
+    $query->fields('nh', array('stamp'));
+    $query->condition('nh.nid', $nid);
+    $query->condition('nh.from_state', 'draft');
+    $query->condition('nh.state', 'published');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $published_statp = $result[0]['stamp'];
+    if ($published_statp) {
+        $published_datetime = date("Y-m-d H:i:s", $published_statp);
+    } else {
+        $published_datetime = "";
+    }
+    return $published_datetime;
 }
 
 // sprint2 seting function
@@ -428,14 +434,14 @@ function getNodePublishedDate($nid) {
  * @return type
  */
 function ad_config_json() {
-  $form = array();
-  $form['ad_config_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('ad config json'),
-    '#default_value' => variable_get('ad_config_json'),
-    '#required' => TRUE,
-  );
-  return system_settings_form($form);
+    $form = array();
+    $form['ad_config_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('ad config json'),
+        '#default_value' => variable_get('ad_config_json'),
+        '#required' => TRUE,
+    );
+    return system_settings_form($form);
 }
 
 /**
@@ -444,14 +450,14 @@ function ad_config_json() {
  * @return type
  */
 function livetv_channellist_json() {
-  $form = array();
-  $form['livetv_channellist_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('livetv channellist json'),
-    '#default_value' => variable_get('livetv_channellist_json'),
-    '#required' => TRUE,
-  );
-  return system_settings_form($form);
+    $form = array();
+    $form['livetv_channellist_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('livetv channellist json'),
+        '#default_value' => variable_get('livetv_channellist_json'),
+        '#required' => TRUE,
+    );
+    return system_settings_form($form);
 }
 
 /**
@@ -460,16 +466,16 @@ function livetv_channellist_json() {
  * @return type
  */
 function livetv_aajtak() {
-  $form = array();
+    $form = array();
 
-  $form['livetv_aajtak'] = array(
-    '#type' => 'textarea',
-    '#title' => t('livetv aajtak'),
-    '#default_value' => variable_get('livetv_aajtak'),
-    '#required' => TRUE,
-  );
+    $form['livetv_aajtak'] = array(
+        '#type' => 'textarea',
+        '#title' => t('livetv aajtak'),
+        '#default_value' => variable_get('livetv_aajtak'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -478,16 +484,16 @@ function livetv_aajtak() {
  * @return type
  */
 function livetv_indiatoday() {
-  $form = array();
+    $form = array();
 
-  $form['livetv_indiatoday'] = array(
-    '#type' => 'textarea',
-    '#title' => t('livetv indiatoday'),
-    '#default_value' => variable_get('livetv_indiatoday'),
-    '#required' => TRUE,
-  );
+    $form['livetv_indiatoday'] = array(
+        '#type' => 'textarea',
+        '#title' => t('livetv indiatoday'),
+        '#default_value' => variable_get('livetv_indiatoday'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -496,16 +502,16 @@ function livetv_indiatoday() {
  * @return type
  */
 function livetv_delhiaajtak() {
-  $form = array();
+    $form = array();
 
-  $form['livetv_delhiaajtak'] = array(
-    '#type' => 'textarea',
-    '#title' => t('livetv delhiaajtak'),
-    '#default_value' => variable_get('livetv_delhiaajtak'),
-    '#required' => TRUE,
-  );
+    $form['livetv_delhiaajtak'] = array(
+        '#type' => 'textarea',
+        '#title' => t('livetv delhiaajtak'),
+        '#default_value' => variable_get('livetv_delhiaajtak'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -514,16 +520,16 @@ function livetv_delhiaajtak() {
  * @return type
  */
 function livetv_tej() {
-  $form = array();
+    $form = array();
 
-  $form['livetv_tej'] = array(
-    '#type' => 'textarea',
-    '#title' => t('livetv tej'),
-    '#default_value' => variable_get('livetv_tej'),
-    '#required' => TRUE,
-  );
+    $form['livetv_tej'] = array(
+        '#type' => 'textarea',
+        '#title' => t('livetv tej'),
+        '#default_value' => variable_get('livetv_tej'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -532,16 +538,16 @@ function livetv_tej() {
  * @return type
  */
 function otherapps_ios_json() {
-  $form = array();
+    $form = array();
 
-  $form['otherapps_ios_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('otherapps ios json'),
-    '#default_value' => variable_get('otherapps_ios_json'),
-    '#required' => TRUE,
-  );
+    $form['otherapps_ios_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('otherapps ios json'),
+        '#default_value' => variable_get('otherapps_ios_json'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -550,64 +556,59 @@ function otherapps_ios_json() {
  * @return type
  */
 function otherapps_android_json() {
-  $form = array();
-  $form['otherapps_android_json'] = array(
-    '#type' => 'textarea',
-    '#title' => t('otherapps android json'),
-    '#default_value' => variable_get('otherapps_android_json'),
-    '#required' => TRUE,
-  );
-  return system_settings_form($form);
+    $form = array();
+    $form['otherapps_android_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('otherapps android json'),
+        '#default_value' => variable_get('otherapps_android_json'),
+        '#required' => TRUE,
+    );
+    return system_settings_form($form);
 }
 
 /**
  * Implements hook_url_inbound_alter().
  */
 function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
-  $u_agent = $_SERVER['HTTP_USER_AGENT'];
-  $flag = 0;
+    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+    $flag = 0;
 
-  // user agent for browser
-  if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
-    $flag = 1;
-  }
-  // this condition is for IE11
-  elseif (preg_match('/Trident/i', $u_agent)) {
-    $flag = 1;
-  }
-  elseif (preg_match('/Firefox/i', $u_agent)) {
-    $flag = 1;
-  }
-  elseif (preg_match('/Chrome/i', $u_agent)) {
-    $flag = 1;
-  }
-  elseif (preg_match('/Safari/i', $u_agent)) {
-    $flag = 1;
-  }
-  elseif (preg_match('/Opera/i', $u_agent)) {
-    $flag = 1;
-  }
-  elseif (preg_match('/Netscape/i', $u_agent)) {
-    $flag = 1;
-  }
-
-  // user agent for mobile device
-
-  $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-  $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
-  $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
-  $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
-  $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
-
-  if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
-    $flag = 1;
-  }
-  $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it");
-  if (arg(0) == "appapi" && count(arg()) == 2) {
-    if (!in_array(arg(1), $post_res)) {
-      $result = $path . "/it";
+    // user agent for browser
+    if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
+        $flag = 1;
     }
-  }
+    // this condition is for IE11
+    elseif (preg_match('/Trident/i', $u_agent)) {
+        $flag = 1;
+    } elseif (preg_match('/Firefox/i', $u_agent)) {
+        $flag = 1;
+    } elseif (preg_match('/Chrome/i', $u_agent)) {
+        $flag = 1;
+    } elseif (preg_match('/Safari/i', $u_agent)) {
+        $flag = 1;
+    } elseif (preg_match('/Opera/i', $u_agent)) {
+        $flag = 1;
+    } elseif (preg_match('/Netscape/i', $u_agent)) {
+        $flag = 1;
+    }
+
+    // user agent for mobile device
+
+    $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+    $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
+    $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
+    $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+    $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+
+    if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
+        $flag = 1;
+    }
+    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it", "insert_video");
+    if (arg(0) == "appapi" && count(arg()) == 2) {
+        if (!in_array(arg(1), $post_res)) {
+            $result = $path . "/it";
+        }
+    }
 }
 
 /*
@@ -615,17 +616,18 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
  * @param int $nid
  * @return String $type
  */
+
 function getStoryType($nid) {
-  $query = db_select('node', 'n');
-  $query->Join('field_data_field_story_type', 'st', 'st.entity_id = n.nid');
-  $query->fields('st', array('field_story_type_value'));
-  $query->condition('st.entity_id', $nid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $type = 'story';
-  if ($result[0]['field_story_type_value'] == 'photo_story') {
-    $type = 'photostory';
-  }
-  return $type;
+    $query = db_select('node', 'n');
+    $query->Join('field_data_field_story_type', 'st', 'st.entity_id = n.nid');
+    $query->fields('st', array('field_story_type_value'));
+    $query->condition('st.entity_id', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $type = 'story';
+    if ($result[0]['field_story_type_value'] == 'photo_story') {
+        $type = 'photostory';
+    }
+    return $type;
 }
 
 /*
@@ -633,38 +635,39 @@ function getStoryType($nid) {
  * @param array
  * @return array 
  */
+
 function callAPI($method, $url, $data = FALSE) {
-  $curl = curl_init();
-  switch ($method) {
-    case "POST":
-      curl_setopt($curl, CURLOPT_POST, 1);
-      if ($data) {
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-      }
-      break;
+    $curl = curl_init();
+    switch ($method) {
+        case "POST":
+            curl_setopt($curl, CURLOPT_POST, 1);
+            if ($data) {
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            }
+            break;
 
-    case "PUT":
-      curl_setopt($curl, CURLOPT_PUT, 1);
-      break;
+        case "PUT":
+            curl_setopt($curl, CURLOPT_PUT, 1);
+            break;
 
-    default:
-      if ($data) {
-        $url = sprintf("%s?%s", $url, http_build_query($data));
-      }
-  }
+        default:
+            if ($data) {
+                $url = sprintf("%s?%s", $url, http_build_query($data));
+            }
+    }
 
-  // Optional Authentication:
-  curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-  curl_setopt($curl, CURLOPT_USERPWD, "itgddev:itgd@789");
+    // Optional Authentication:
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($curl, CURLOPT_USERPWD, "itgddev:itgd@789");
 
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-  $result = curl_exec($curl);
+    $result = curl_exec($curl);
 
-  curl_close($curl);
+    curl_close($curl);
 
-  return $result;
+    return $result;
 }
 
 /**
@@ -672,7 +675,7 @@ function callAPI($method, $url, $data = FALSE) {
  * for url inbond alter.
  */
 function itg_app_api_boot() {
-  // delection function required for inbond alter,
+    // delection function required for inbond alter,
 }
 
 /**
@@ -681,15 +684,14 @@ function itg_app_api_boot() {
  * @return int
  */
 function checkReqMethod() {
-  $req_method = $_SERVER['REQUEST_METHOD'];
-  $flag = 1;
-  if ($req_method != "POST") {
-    $flag = 0;
-  }
-  else {
+    $req_method = $_SERVER['REQUEST_METHOD'];
     $flag = 1;
-  }
-  return $flag;
+    if ($req_method != "POST") {
+        $flag = 0;
+    } else {
+        $flag = 1;
+    }
+    return $flag;
 }
 
 /**
@@ -698,32 +700,33 @@ function checkReqMethod() {
  * @return type
  */
 function adconfig_android() {
-  $form = array();
+    $form = array();
 
-  $form['adconfig_android'] = array(
-    '#type' => 'textarea',
-    '#title' => t('adconfig android'),
-    '#default_value' => variable_get('adconfig_android'),
-    '#required' => TRUE,
-  );
+    $form['adconfig_android'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig android'),
+        '#default_value' => variable_get('adconfig_android'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /*
  * adconfig_ipad form decalation
  */
+
 function adconfig_ipad() {
-  $form = array();
+    $form = array();
 
-  $form['adconfig_ipad'] = array(
-    '#type' => 'textarea',
-    '#title' => t('adconfig ipad'),
-    '#default_value' => variable_get('adconfig_ipad'),
-    '#required' => TRUE,
-  );
+    $form['adconfig_ipad'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig ipad'),
+        '#default_value' => variable_get('adconfig_ipad'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -732,16 +735,16 @@ function adconfig_ipad() {
  * @return type
  */
 function adconfig_iphone() {
-  $form = array();
+    $form = array();
 
-  $form['adconfig_iphone'] = array(
-    '#type' => 'textarea',
-    '#title' => t('adconfig iphone'),
-    '#default_value' => variable_get('adconfig_iphone'),
-    '#required' => TRUE,
-  );
+    $form['adconfig_iphone'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig iphone'),
+        '#default_value' => variable_get('adconfig_iphone'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -750,16 +753,16 @@ function adconfig_iphone() {
  * @return type
  */
 function adconfig_tab() {
-  $form = array();
+    $form = array();
 
-  $form['adconfig_tab'] = array(
-    '#type' => 'textarea',
-    '#title' => t('adconfig tab'),
-    '#default_value' => variable_get('adconfig_tab'),
-    '#required' => TRUE,
-  );
+    $form['adconfig_tab'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig tab'),
+        '#default_value' => variable_get('adconfig_tab'),
+        '#required' => TRUE,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
 
 /**
@@ -770,33 +773,33 @@ function adconfig_tab() {
  * @return int
  */
 function get_personalization_front_data_service($user) {
-  global $user;
-  $weight_count_loop = FALSE;
-  // As in table itg_widget_order tid is saved in nid colom.
-  // So join field_story_category_tid join is applied on nid.
-  $query = db_select('itg_widget_order', 'iwo');
-  // Orderby weight or taxonomyterm id.
-  $query->fields('iwo', array('weight', 'nid'))->condition('iwo.widget', "personalization_widget")->condition('iwo.extra', $user->uid)->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
-  $result = $query->execute()->fetchAllAssoc('nid');
-  $new_array_of_terms = array_keys($result);
-  // case handled if perferences is not saved.
-  if (count($result) == 0) {
-    $weight_count_loop = TRUE;
+    global $user;
+    $weight_count_loop = FALSE;
+    // As in table itg_widget_order tid is saved in nid colom.
+    // So join field_story_category_tid join is applied on nid.
     $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
-    $query->fields('iwo', array('cat_id'))->condition('iwo.widget', "section_wise_widget")->condition('fc.field_set_as_featured_cate_value', 'Yes')->groupBy('iwo.cat_id')->range(0, 30);
-    $result = $query->execute()->fetchAllAssoc('cat_id');
-  }
-  if ($weight_count_loop) {
-    $new_array_of_terms = array();
-    // Get only tids.
-    $tids_array = array_keys($result);
-    foreach ($tids_array as $term_id) {
-      $new_array_of_terms[$term_id] = count_node_under_tid_service($term_id);
+    // Orderby weight or taxonomyterm id.
+    $query->fields('iwo', array('weight', 'nid'))->condition('iwo.widget', "personalization_widget")->condition('iwo.extra', $user->uid)->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
+    $result = $query->execute()->fetchAllAssoc('nid');
+    $new_array_of_terms = array_keys($result);
+    // case handled if perferences is not saved.
+    if (count($result) == 0) {
+        $weight_count_loop = TRUE;
+        $query = db_select('itg_widget_order', 'iwo');
+        $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
+        $query->fields('iwo', array('cat_id'))->condition('iwo.widget', "section_wise_widget")->condition('fc.field_set_as_featured_cate_value', 'Yes')->groupBy('iwo.cat_id')->range(0, 30);
+        $result = $query->execute()->fetchAllAssoc('cat_id');
     }
-    krsort($new_array_of_terms);
-  }
-  return ($weight_count_loop) ? array_keys($new_array_of_terms) : $new_array_of_terms;
+    if ($weight_count_loop) {
+        $new_array_of_terms = array();
+        // Get only tids.
+        $tids_array = array_keys($result);
+        foreach ($tids_array as $term_id) {
+            $new_array_of_terms[$term_id] = count_node_under_tid_service($term_id);
+        }
+        krsort($new_array_of_terms);
+    }
+    return ($weight_count_loop) ? array_keys($new_array_of_terms) : $new_array_of_terms;
 }
 
 /**
@@ -807,14 +810,14 @@ function get_personalization_front_data_service($user) {
  * @return int
  */
 function count_node_under_tid_service($tid) {
-  $query = db_select('taxonomy_index', 'ti');
-  $query->leftJoin('node', 'n', 'n.nid=ti.nid');
-  $query->addField('ti', 'nid');
-  $query->condition('ti.tid', $tid);
-  $query->condition('n.status', 1);
-  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
-  $query->orderBy('n.created', 'DESC');
-  return $query->execute()->rowCount();
+    $query = db_select('taxonomy_index', 'ti');
+    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+    $query->addField('ti', 'nid');
+    $query->condition('ti.tid', $tid);
+    $query->condition('n.status', 1);
+    $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+    $query->orderBy('n.created', 'DESC');
+    return $query->execute()->rowCount();
 }
 
 /**
@@ -823,23 +826,23 @@ function count_node_under_tid_service($tid) {
  * @param array $updates
  */
 function save_itg_widget_personalization_data_service($updates) {
-  global $user;
-  $widget_name = "personalization_widget";
+    global $user;
+    $widget_name = "personalization_widget";
 
-  $nids = array_keys($updates);
-  // Delete all the tids from table if they are not in $updates variable
-  // unsued tid should be delete
-  db_delete('itg_widget_order')->condition('widget', $widget_name)->condition('nid', $nids, "NOT IN")->condition('extra', $user->uid)->execute();
-  // Update the weight of tids if exists or insert if dont exists.
-  foreach ($updates as $term_id => $weight) {
-    db_merge('itg_widget_order')->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))->fields(array(
-        'nid' => $term_id,
-        'widget' => $widget_name,
-        'weight' => $weight,
-        'extra' => $user->uid,
-      ))->execute();
-  }
-  drupal_set_message(t("My Preferences Has Been Save."));
+    $nids = array_keys($updates);
+    // Delete all the tids from table if they are not in $updates variable
+    // unsued tid should be delete
+    db_delete('itg_widget_order')->condition('widget', $widget_name)->condition('nid', $nids, "NOT IN")->condition('extra', $user->uid)->execute();
+    // Update the weight of tids if exists or insert if dont exists.
+    foreach ($updates as $term_id => $weight) {
+        db_merge('itg_widget_order')->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))->fields(array(
+            'nid' => $term_id,
+            'widget' => $widget_name,
+            'weight' => $weight,
+            'extra' => $user->uid,
+        ))->execute();
+    }
+    drupal_set_message(t("My Preferences Has Been Save."));
 }
 
 /**
@@ -850,33 +853,33 @@ function save_itg_widget_personalization_data_service($updates) {
  * @return array
  */
 function validateServicePass($params) {
-  module_load_include('inc', 'content', 'includes/password');
-  $pass_vld_msg = array();
-  $old_pass = trim($params['old_pass']);
-  $new_pass = trim($params['new_pass']);
-  $user_id = trim($params['user_id']);
-  $account = user_load_by_name($user_id);
-  if ($new_pass == "") {
-    $pass_vld_msg['success_flag'] = 0;
-    $pass_vld_msg['msg'] = "Please enter new password.";
-    return $pass_vld_msg;
-  }
-  if ($old_pass == $new_pass) {
-    $pass_vld_msg['success_flag'] = 0;
-    $pass_vld_msg['msg'] = "New Password can't be same as Old.";
-    return $pass_vld_msg;
-  }
-  if ($old_pass != "") {
-    $flag = user_check_password($old_pass, $account);
-    if (!$flag) {
-      $pass_vld_msg['success_flag'] = 0;
-      $pass_vld_msg['msg'] = "Your new password cannot be accepted because the old password provided is not correct. Please Try again.";
-      return $pass_vld_msg;
+    module_load_include('inc', 'content', 'includes/password');
+    $pass_vld_msg = array();
+    $old_pass = trim($params['old_pass']);
+    $new_pass = trim($params['new_pass']);
+    $user_id = trim($params['user_id']);
+    $account = user_load_by_name($user_id);
+    if ($new_pass == "") {
+        $pass_vld_msg['success_flag'] = 0;
+        $pass_vld_msg['msg'] = "Please enter new password.";
+        return $pass_vld_msg;
     }
-  }
-  $pass_vld_msg['success_flag'] = 1;
-  $pass_vld_msg['msg'] = "Go Ahead.";
-  return $pass_vld_msg;
+    if ($old_pass == $new_pass) {
+        $pass_vld_msg['success_flag'] = 0;
+        $pass_vld_msg['msg'] = "New Password can't be same as Old.";
+        return $pass_vld_msg;
+    }
+    if ($old_pass != "") {
+        $flag = user_check_password($old_pass, $account);
+        if (!$flag) {
+            $pass_vld_msg['success_flag'] = 0;
+            $pass_vld_msg['msg'] = "Your new password cannot be accepted because the old password provided is not correct. Please Try again.";
+            return $pass_vld_msg;
+        }
+    }
+    $pass_vld_msg['success_flag'] = 1;
+    $pass_vld_msg['msg'] = "Go Ahead.";
+    return $pass_vld_msg;
 }
 
 /**
@@ -887,12 +890,12 @@ function validateServicePass($params) {
  * @return array
  */
 function get_personalization_saved_value_service($uid) {
-  $query = db_select('itg_widget_order', 'iwo');
-  $query->addField('iwo', 'weight');
-  $query->addField('iwo', 'nid');
-  $query->condition('iwo.widget', 'personalization_widget');
-  $query->condition('iwo.extra', $uid);
-  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->addField('iwo', 'weight');
+    $query->addField('iwo', 'nid');
+    $query->condition('iwo.widget', 'personalization_widget');
+    $query->condition('iwo.extra', $uid);
+    return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
@@ -904,123 +907,112 @@ function get_personalization_saved_value_service($uid) {
  */
 function signupValidation_rapid($params) {
 
-  $first_name = trim($params['first_name']);
-  $last_name = trim($params['last_name']);
-  $user_id = trim($params['user_id']);
-  $password = trim($params['password']);
-  $cpassword = trim($params['confirm_password']);
-  $login_type = trim($params['login_type']);
-  $email_id = trim($params['email_id']);
-  $phone_number = trim($params['phone_number']);
-  $location = trim($params['location']);
-  $profile_image = trim($params['profile_image']);
-  $gender = trim($params['gender']);
-  $date_of_birth = trim($params['date_of_birth']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
-  $error = array();
-  $userid_is_numeric = 0;
+    $first_name = trim($params['first_name']);
+    $last_name = trim($params['last_name']);
+    $user_id = trim($params['user_id']);
+    $password = trim($params['password']);
+    $cpassword = trim($params['confirm_password']);
+    $login_type = trim($params['login_type']);
+    $email_id = trim($params['email_id']);
+    $phone_number = trim($params['phone_number']);
+    $location = trim($params['location']);
+    $profile_image = trim($params['profile_image']);
+    $gender = trim($params['gender']);
+    $date_of_birth = trim($params['date_of_birth']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
+    $error = array();
+    $userid_is_numeric = 0;
 
-  $userid_is_numeric = is_numeric($user_id);
-
-  if (!$userid_is_numeric) {
-    if (function_exists('itg_sso_user_email_check')) {
-      $get_user_check_email = itg_sso_user_email_check($user_id);
-    }
-    if (function_exists('itg_sso_user_email_domain')) {
-      $get_user_check_domain = itg_sso_user_email_domain($user_id);
-    }
-  }
-  else {
-    if (function_exists('itg_sso_user_mobile_check')) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
-    }
-  }
-
-
-  // fname validation
-  if (empty($first_name)) {
-    $error['fname'] = t('Please enter first name');
-  }
-  else {
-    if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
-      $error['fname'] = t('Cannot validate Fname');
-    }
-    else {
-      if (strlen($first_name) > 25) {
-        $error['fname'] = t('Cannot validate Fname');
-      }
-    }
-  }
-  // lname validation
-  if ($last_name) {
-    if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
-      $error['lname'] = t('Cannot validate Lname');
-    }
-    else {
-      if (strlen($last_name) > 25) {
-        $error['lname'] = t('Cannot validate Lname');
-      }
-    }
-  }
-  // user_id validation
-
-  if (empty($user_id)) {
-    $error['user_id'] = t('Please Enter Email/Mobile');
-  }
-  else {
+    $userid_is_numeric = is_numeric($user_id);
 
     if (!$userid_is_numeric) {
-      if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-        $error['user_id'] = t("Invalid Email");
-      }
-      elseif (!empty($get_user_check_email)) {
-        $error['user_id'] = t("User already exists with " . $user_id . "");
-      }
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
+        if (function_exists('itg_sso_user_mobile_check')) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
+        }
     }
-    else {
-      if (!preg_match('/^\d{10}$/', $user_id)) {
-        $error['user_id'] = t("Invalid Mobile Number");
-      }
+
+
+    // fname validation
+    if (empty($first_name)) {
+        $error['fname'] = t('Please enter first name');
+    } else {
+        if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
+            $error['fname'] = t('Cannot validate Fname');
+        } else {
+            if (strlen($first_name) > 25) {
+                $error['fname'] = t('Cannot validate Fname');
+            }
+        }
     }
-  }
+    // lname validation
+    if ($last_name) {
+        if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
+            $error['lname'] = t('Cannot validate Lname');
+        } else {
+            if (strlen($last_name) > 25) {
+                $error['lname'] = t('Cannot validate Lname');
+            }
+        }
+    }
+    // user_id validation
 
-  // password validation
-  $pass = $password;
-  $cpass = $cpassword;
+    if (empty($user_id)) {
+        $error['user_id'] = t('Please Enter Email/Mobile');
+    } else {
 
-  $min_length = 6;
-  $max_length = 15;
+        if (!$userid_is_numeric) {
+            if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("Invalid Email");
+            } elseif (!empty($get_user_check_email)) {
+                $error['user_id'] = t("User already exists with " . $user_id . "");
+            }
+        } else {
+            if (!preg_match('/^\d{10}$/', $user_id)) {
+                $error['user_id'] = t("Invalid Mobile Number");
+            }
+        }
+    }
 
-  if (empty($pass)) {
-    $error['password'] = t('please enter password');
-  }
-  elseif (strlen($pass) < $min_length) {
-    $error['password'] = t('Password should be minimum 6 characters without any space ');
-  }
-  elseif (strlen($pass) > $max_length) {
-    $error['password'] = t('Password should be maximum 15 characters without any space ');
-  }
-  elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
-    $error['password'] = t("Password should be 1 special and 1 numeric character");
-  }
-  elseif ($pass != $cpass) {
-    $error['password'] = t('Password and Confirm Password do not match');
-  }
+    // password validation
+    $pass = $password;
+    $cpass = $cpassword;
 
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
+    $min_length = 6;
+    $max_length = 15;
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    if (empty($pass)) {
+        $error['password'] = t('please enter password');
+    } elseif (strlen($pass) < $min_length) {
+        $error['password'] = t('Password should be minimum 6 characters without any space ');
+    } elseif (strlen($pass) > $max_length) {
+        $error['password'] = t('Password should be maximum 15 characters without any space ');
+    } elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+        $error['password'] = t("Password should be 1 special and 1 numeric character");
+    } elseif ($pass != $cpass) {
+        $error['password'] = t('Password and Confirm Password do not match');
+    }
 
-  return $error_settings;
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
+
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
 }
 
 /**
@@ -1031,32 +1023,31 @@ function signupValidation_rapid($params) {
  * @return int FID
  */
 function uplodaProfileImg_Rapid($profile_image) {
-  $profile_img = base64_decode($profile_image);
-  $f = finfo_open();
-  $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
-  $mime_type_ar = explode("/", $mime_type);
-  $mime_type_ext = $mime_type_ar[1];
-  $now = time();
+    $profile_img = base64_decode($profile_image);
+    $f = finfo_open();
+    $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
+    $mime_type_ar = explode("/", $mime_type);
+    $mime_type_ext = $mime_type_ar[1];
+    $now = time();
 
 
 
-  $profile_img_tmp = '/tmp/profileimage_' . $now . "." . $mime_type_ext;
+    $profile_img_tmp = '/tmp/profileimage_' . $now . "." . $mime_type_ext;
 
-  $image_name = 'profileimage_' . $now . "." . $mime_type_ext;
-  // crate profile img tmp file
-  file_put_contents($profile_img_tmp, $profile_img);
-  $imagedata = file_get_contents($profile_img_tmp);
-  //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-  $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
+    $image_name = 'profileimage_' . $now . "." . $mime_type_ext;
+    // crate profile img tmp file
+    file_put_contents($profile_img_tmp, $profile_img);
+    $imagedata = file_get_contents($profile_img_tmp);
+    //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+    $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
 
 
-  // Update profile pic
-  if (!empty($file_data->fid)) {
-    return $file_data->fid;
-  }
-  else {
-    return 0;
-  }
+    // Update profile pic
+    if (!empty($file_data->fid)) {
+        return $file_data->fid;
+    } else {
+        return 0;
+    }
 }
 
 /**
@@ -1067,59 +1058,59 @@ function uplodaProfileImg_Rapid($profile_image) {
  * @return object user
  */
 function updateUsedrProfileAtSignup_rapid($data, $action = 1) {
-  global $user;
+    global $user;
 
-  $location = trim($data['location']);
-  $profile_image = trim($data['profile_image']);
-  $gender = trim($data['gender']);
-  $date_of_birth = trim($data['date_of_birth']);
-  $device_id = trim($data['device_id']);
-  $device_type = trim($data['device_type']);
-  $user_id = trim($data['user_id']);
+    $location = trim($data['location']);
+    $profile_image = trim($data['profile_image']);
+    $gender = trim($data['gender']);
+    $date_of_birth = trim($data['date_of_birth']);
+    $device_id = trim($data['device_id']);
+    $device_type = trim($data['device_type']);
+    $user_id = trim($data['user_id']);
 
-  $user = $user_detail = user_load_by_name($user_id);
-  // call function for upload profile iamge
+    $user = $user_detail = user_load_by_name($user_id);
+    // call function for upload profile iamge
 
-  $uid = $user->uid;
+    $uid = $user->uid;
 
-  // Update dob field.
-  if ($profile_image) {
-    $profile_img_fid = uplodaProfileImg_Rapid($profile_image);
-  }
+    // Update dob field.
+    if ($profile_image) {
+        $profile_img_fid = uplodaProfileImg_Rapid($profile_image);
+    }
 
-  // Update dob field.
-  if ($date_of_birth) {
-    $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($date_of_birth);
-  }
+    // Update dob field.
+    if ($date_of_birth) {
+        $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($date_of_birth);
+    }
 
-  // Update gender field.
-  if ($gender) {
-    $user_detail->field_user_gender['und'][0]['value'] = check_plain($gender);
-  }
+    // Update gender field.
+    if ($gender) {
+        $user_detail->field_user_gender['und'][0]['value'] = check_plain($gender);
+    }
 
-  // Update profile pic
-  if ($profile_img_fid) {
-    $user_detail->field_user_picture['und'][0]['fid'] = $profile_img_fid;
-  }
+    // Update profile pic
+    if ($profile_img_fid) {
+        $user_detail->field_user_picture['und'][0]['fid'] = $profile_img_fid;
+    }
 
-  // Update address field.
-  if ($location) {
-    $user_detail->field_short_description['und'][0]['value'] = check_plain($location);
-  }
+    // Update address field.
+    if ($location) {
+        $user_detail->field_short_description['und'][0]['value'] = check_plain($location);
+    }
 
-  $flag_save = user_save($user_detail);
+    $flag_save = user_save($user_detail);
 
 
-  // query for insert data into itg_app_device - $action $token
-  $token = drupal_get_token('services');
-  db_insert('itg_app_device')->fields(array(
-      'uid' => $uid,
-      'device_id' => check_plain($device_id),
-      'device_type' => check_plain($device_type),
-      'action' => check_plain($action),
-      'token' => check_plain($token),
+    // query for insert data into itg_app_device - $action $token
+    $token = drupal_get_token('services');
+    db_insert('itg_app_device')->fields(array(
+        'uid' => $uid,
+        'device_id' => check_plain($device_id),
+        'device_type' => check_plain($device_type),
+        'action' => check_plain($action),
+        'token' => check_plain($token),
     ))->execute();
-  return $flag_save;
+    return $flag_save;
 }
 
 /**
@@ -1131,86 +1122,79 @@ function updateUsedrProfileAtSignup_rapid($data, $action = 1) {
  */
 function loginValidation_rapid($params) {
 
-  $user_id = trim($params['user_id']);
-  $password = trim($params['password']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $password = trim($params['password']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  $userid_is_numeric = is_numeric($user_id);
-
-  if (!$userid_is_numeric) {
-    if (function_exists('itg_sso_user_email_check')) {
-      $get_user_check_email = itg_sso_user_email_check($user_id);
-    }
-    if (function_exists('itg_sso_user_email_domain')) {
-      $get_user_check_domain = itg_sso_user_email_domain($user_id);
-    }
-  }
-  else {
-    if (function_exists('itg_sso_user_mobile_check')) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
-    }
-  }
-
-
-  // user_id validation
-
-  if (empty($user_id)) {
-    $error['user_id'] = t('Please Enter Email/Mobile');
-  }
-  else {
+    $userid_is_numeric = is_numeric($user_id);
 
     if (!$userid_is_numeric) {
-      if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-        $error['user_id'] = t("Invalid Email");
-      }
-      elseif (empty($get_user_check_email)) {
-        //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t("");
-      }
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
+        if (function_exists('itg_sso_user_mobile_check')) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
+        }
     }
-    else {
-      if (!preg_match('/^\d{10}$/', $user_id)) {
-        $error['user_id'] = t("Invalid Mobile Number");
-      }
+
+
+    // user_id validation
+
+    if (empty($user_id)) {
+        $error['user_id'] = t('Please Enter Email/Mobile');
+    } else {
+
+        if (!$userid_is_numeric) {
+            if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("Invalid Email");
+            } elseif (empty($get_user_check_email)) {
+                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            } else {
+                //$error['user_id'] = t("");
+            }
+        } else {
+            if (!preg_match('/^\d{10}$/', $user_id)) {
+                $error['user_id'] = t("Invalid Mobile Number");
+            }
+        }
     }
-  }
 
-  // password validation
-  $pass = $password;
+    // password validation
+    $pass = $password;
 
 
-  $min_length = 6;
-  $max_length = 15;
+    $min_length = 6;
+    $max_length = 15;
 
-  if (empty($pass)) {
-    $error['password'] = t('please enter password');
-  }
-  elseif (strlen($pass) < $min_length) {
-    $error['password'] = t('Password should be minimum 6 characters without any space ');
-  }
-  elseif (strlen($pass) > $max_length) {
-    $error['password'] = t('Password should be maximum 15 characters without any space ');
-  }
+    if (empty($pass)) {
+        $error['password'] = t('please enter password');
+    } elseif (strlen($pass) < $min_length) {
+        $error['password'] = t('Password should be minimum 6 characters without any space ');
+    } elseif (strlen($pass) > $max_length) {
+        $error['password'] = t('Password should be maximum 15 characters without any space ');
+    }
 
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+    return $error_settings;
 }
 
 /**
@@ -1222,18 +1206,18 @@ function loginValidation_rapid($params) {
  */
 function cleanToken_Rapid($params) {
 
-  $user_id = $params['user_id'];
-  $auth_token = $params['auth_token'];
-  $device_id = $params['device_id'];
+    $user_id = $params['user_id'];
+    $auth_token = $params['auth_token'];
+    $device_id = $params['device_id'];
 
-  $user = user_load_by_name($user_id);
-  $uid = $user->uid;
-  if ($uid) {
-    $query = db_delete('itg_app_device');
-    $query->condition('uid', $uid);
-    $query->condition('device_id', $device_id);
-    $query->execute();
-  }
+    $user = user_load_by_name($user_id);
+    $uid = $user->uid;
+    if ($uid) {
+        $query = db_delete('itg_app_device');
+        $query->condition('uid', $uid);
+        $query->condition('device_id', $device_id);
+        $query->execute();
+    }
 }
 
 /**
@@ -1245,62 +1229,59 @@ function cleanToken_Rapid($params) {
  */
 function forgotPasswordValidation_rapid($params) {
 
-  $user_id = trim($params['user_id']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  $userid_is_numeric = is_numeric($user_id);
-
-  if (!$userid_is_numeric) {
-    if (function_exists('itg_sso_user_email_check')) {
-      $get_user_check_email = itg_sso_user_email_check($user_id);
-    }
-    if (function_exists('itg_sso_user_email_domain')) {
-      $get_user_check_domain = itg_sso_user_email_domain($user_id);
-    }
-  }
-  else {
-    if (function_exists('itg_sso_user_mobile_check')) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
-    }
-  }
-
-
-  // user_id validation
-
-  if (empty($user_id)) {
-    $error['user_id'] = t('Please Enter Email/Mobile');
-  }
-  else {
+    $userid_is_numeric = is_numeric($user_id);
 
     if (!$userid_is_numeric) {
-      if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-        $error['user_id'] = t("Invalid email/phone number");
-      }
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
+        if (function_exists('itg_sso_user_mobile_check')) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
+        }
     }
-    else {
-      if (!preg_match('/^\d{10}$/', $user_id)) {
-        $error['user_id'] = t("Invalid email/phone number");
-      }
+
+
+    // user_id validation
+
+    if (empty($user_id)) {
+        $error['user_id'] = t('Please Enter Email/Mobile');
+    } else {
+
+        if (!$userid_is_numeric) {
+            if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("Invalid email/phone number");
+            }
+        } else {
+            if (!preg_match('/^\d{10}$/', $user_id)) {
+                $error['user_id'] = t("Invalid email/phone number");
+            }
+        }
     }
-  }
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+    return $error_settings;
 }
 
 /**
@@ -1312,18 +1293,18 @@ function forgotPasswordValidation_rapid($params) {
  * @param string $created
  */
 function itg_otp_device_info_insert_rapid($params, $rand_otp, $source, $created) {
-  $user_id = trim($params['user_id']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  // Table name no longer needs {}
-  $otp = db_insert('itg_otp_device_info')->fields(array(
-      'user_id' => $user_id,
-      'device_id' => $device_id,
-      'device_type' => $device_type,
-      'source' => $source,
-      'otp' => $rand_otp,
-    ))->execute();
+    // Table name no longer needs {}
+    $otp = db_insert('itg_otp_device_info')->fields(array(
+                'user_id' => $user_id,
+                'device_id' => $device_id,
+                'device_type' => $device_type,
+                'source' => $source,
+                'otp' => $rand_otp,
+            ))->execute();
 }
 
 /**
@@ -1335,103 +1316,94 @@ function itg_otp_device_info_insert_rapid($params, $rand_otp, $source, $created)
  */
 function validateResetPass($params) {
 
-  $user_id = trim($params['user_id']);
-  $new_password = trim($params['new_password']);
-  $confirm_password = trim($params['confirm_password']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $new_password = trim($params['new_password']);
+    $confirm_password = trim($params['confirm_password']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  $userid_is_numeric = is_numeric($user_id);
-
-  if (!$userid_is_numeric) {
-    if (function_exists('itg_sso_user_email_check')) {
-      $get_user_check_email = itg_sso_user_email_check($user_id);
-    }
-    if (function_exists('itg_sso_user_email_domain')) {
-      $get_user_check_domain = itg_sso_user_email_domain($user_id);
-    }
-  }
-  else {
-    if (function_exists('itg_sso_user_mobile_check')) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
-    }
-  }
-
-
-  // user_id validation
-
-  if (empty($user_id)) {
-    $error['user_id'] = t('Please Enter Email/Mobile');
-  }
-  else {
+    $userid_is_numeric = is_numeric($user_id);
 
     if (!$userid_is_numeric) {
-      if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-        $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
+        if (function_exists('itg_sso_user_mobile_check')) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
+        }
     }
-    else {
-      if (!preg_match('/^\d{10}$/', $user_id)) {
-        $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
+
+
+    // user_id validation
+
+    if (empty($user_id)) {
+        $error['user_id'] = t('Please Enter Email/Mobile');
+    } else {
+
+        if (!$userid_is_numeric) {
+            if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            }
+        } else {
+            if (!preg_match('/^\d{10}$/', $user_id)) {
+                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            }
+        }
     }
-  }
 
-  // password validation
-  $pass = $new_password;
-  $pass2 = $confirm_password;
+    // password validation
+    $pass = $new_password;
+    $pass2 = $confirm_password;
 
 
-  $min_length = 6;
-  $max_length = 15;
-  //new pass
-  if (empty($pass)) {
-    $error['new_password'] = t('please enter new password');
-  }
-  elseif (strlen($pass) < $min_length) {
-    $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
-  }
-  elseif (strlen($pass) > $max_length) {
-    $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
-  }
-  elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
-    $error['password'] = t("New Password should be 1 special and 1 numeric character");
-  }
-  //confirm pass
-  if (empty($pass2)) {
-    $error['confirm_password'] = t('please enter confirm password');
-  }
-  elseif (strlen($pass2) < $min_length) {
-    $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
-  }
-  elseif (strlen($pass2) > $max_length) {
-    $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
-  }
-  elseif (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
-    $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
-  }
-  //match both pass
+    $min_length = 6;
+    $max_length = 15;
+    //new pass
+    if (empty($pass)) {
+        $error['new_password'] = t('please enter new password');
+    } elseif (strlen($pass) < $min_length) {
+        $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
+    } elseif (strlen($pass) > $max_length) {
+        $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
+    } elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+        $error['password'] = t("New Password should be 1 special and 1 numeric character");
+    }
+    //confirm pass
+    if (empty($pass2)) {
+        $error['confirm_password'] = t('please enter confirm password');
+    } elseif (strlen($pass2) < $min_length) {
+        $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
+    } elseif (strlen($pass2) > $max_length) {
+        $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
+    } elseif (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
+        $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
+    }
+    //match both pass
 
-  if ($pass != $pass2) {
-    $error['match_password'] = t('Passwords don’t match');
-  }
+    if ($pass != $pass2) {
+        $error['match_password'] = t('Passwords don’t match');
+    }
 
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+    return $error_settings;
 }
 
 /**
@@ -1441,19 +1413,19 @@ function validateResetPass($params) {
  * @param int $source
  */
 function itg_reset_pass_info_insert_rapid($params, $source) {
-  $user_id = trim($params['user_id']);
-  $new_password = trim($params['new_password']);
-  $confirm_password = trim($params['confirm_password']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $new_password = trim($params['new_password']);
+    $confirm_password = trim($params['confirm_password']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  // Table name no longer needs {}
-  $otp = db_insert('itg_reset_pass_info')->fields(array(
-      'user_id' => $user_id,
-      'device_id' => $device_id,
-      'device_type' => $device_type,
-      'source' => $source,
-    ))->execute();
+    // Table name no longer needs {}
+    $otp = db_insert('itg_reset_pass_info')->fields(array(
+                'user_id' => $user_id,
+                'device_id' => $device_id,
+                'device_type' => $device_type,
+                'source' => $source,
+            ))->execute();
 }
 
 /**
@@ -1464,115 +1436,104 @@ function itg_reset_pass_info_insert_rapid($params, $source) {
  * @return array
  */
 function validateChangePass($params) {
-  module_load_include('inc', 'content', 'includes/password');
-  $user_id = trim($params['user_id']);
-  $new_password = trim($params['new_password']);
-  $confirm_password = trim($params['confirm_password']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
-  $old_password = trim($params['old_password']);
-  $account = user_load_by_name($user_id);
-  $oldpass_flag = user_check_password($old_password, $account);
+    module_load_include('inc', 'content', 'includes/password');
+    $user_id = trim($params['user_id']);
+    $new_password = trim($params['new_password']);
+    $confirm_password = trim($params['confirm_password']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
+    $old_password = trim($params['old_password']);
+    $account = user_load_by_name($user_id);
+    $oldpass_flag = user_check_password($old_password, $account);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  $userid_is_numeric = is_numeric($user_id);
-
-  if (!$userid_is_numeric) {
-    if (function_exists('itg_sso_user_email_check')) {
-      $get_user_check_email = itg_sso_user_email_check($user_id);
-    }
-    if (function_exists('itg_sso_user_email_domain')) {
-      $get_user_check_domain = itg_sso_user_email_domain($user_id);
-    }
-  }
-  else {
-    if (function_exists('itg_sso_user_mobile_check')) {
-      $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
-    }
-  }
-
-
-  // user_id validation
-
-  if (empty($user_id)) {
-    $error['user_id'] = t('Please Enter Email/Mobile');
-  }
-  else {
+    $userid_is_numeric = is_numeric($user_id);
 
     if (!$userid_is_numeric) {
-      if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-        $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
+        if (function_exists('itg_sso_user_mobile_check')) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
+        }
     }
-    else {
-      if (!preg_match('/^\d{10}$/', $user_id)) {
-        $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
+
+
+    // user_id validation
+
+    if (empty($user_id)) {
+        $error['user_id'] = t('Please Enter Email/Mobile');
+    } else {
+
+        if (!$userid_is_numeric) {
+            if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            }
+        } else {
+            if (!preg_match('/^\d{10}$/', $user_id)) {
+                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            }
+        }
     }
-  }
-  //old pass validation
-  if (empty($old_password)) {
-    $error['old_password'] = t('please enter old password');
-  }
-  elseif ($old_password == $new_password) {
-    $error['old_password'] = t('New Password can\'t be same as Old');
-  }
-  elseif (!$oldpass_flag) {
-    $error['old_password'] = t('old password is not correct');
-  }
+    //old pass validation
+    if (empty($old_password)) {
+        $error['old_password'] = t('please enter old password');
+    } elseif ($old_password == $new_password) {
+        $error['old_password'] = t('New Password can\'t be same as Old');
+    } elseif (!$oldpass_flag) {
+        $error['old_password'] = t('old password is not correct');
+    }
 
-  // password validation
-  $pass = $new_password;
-  $pass2 = $confirm_password;
+    // password validation
+    $pass = $new_password;
+    $pass2 = $confirm_password;
 
 
-  $min_length = 6;
-  $max_length = 15;
-  //new pass
-  if (empty($pass)) {
-    $error['new_password'] = t('please enter new password');
-  }
-  elseif (strlen($pass) < $min_length) {
-    $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
-  }
-  elseif (strlen($pass) > $max_length) {
-    $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
-  }
-  elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
-    $error['password'] = t("New Password should be 1 special and 1 numeric character");
-  }
-  //confirm pass
-  if (empty($pass2)) {
-    $error['confirm_password'] = t('please enter confirm password');
-  }
-  elseif (strlen($pass2) < $min_length) {
-    $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
-  }
-  elseif (strlen($pass2) > $max_length) {
-    $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
-  }
-  elseif (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
-    $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
-  }
-  //match both pass
+    $min_length = 6;
+    $max_length = 15;
+    //new pass
+    if (empty($pass)) {
+        $error['new_password'] = t('please enter new password');
+    } elseif (strlen($pass) < $min_length) {
+        $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
+    } elseif (strlen($pass) > $max_length) {
+        $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
+    } elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+        $error['password'] = t("New Password should be 1 special and 1 numeric character");
+    }
+    //confirm pass
+    if (empty($pass2)) {
+        $error['confirm_password'] = t('please enter confirm password');
+    } elseif (strlen($pass2) < $min_length) {
+        $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
+    } elseif (strlen($pass2) > $max_length) {
+        $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
+    } elseif (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
+        $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
+    }
+    //match both pass
 
-  if ($pass != $pass2) {
-    $error['match_password'] = t('Passwords don’t match');
-  }
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    if ($pass != $pass2) {
+        $error['match_password'] = t('Passwords don’t match');
+    }
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+    return $error_settings;
 }
 
 /**
@@ -1584,71 +1545,69 @@ function validateChangePass($params) {
  */
 function socal_signupValidation_rapid($params, $social_domain) {
 
-  $first_name = trim($params['first_name']);
-  $last_name = trim($params['last_name']);
-  $user_id = trim($params['user_id']);
-  $password = trim($params['password']);
-  $cpassword = trim($params['confirm_password']);
-  $login_type = trim($params['login_type']);
-  $email_id = trim($params['email_id']);
-  $phone_number = trim($params['phone_number']);
-  $location = trim($params['location']);
-  $profile_image = trim($params['profile_image']);
-  $gender = trim($params['gender']);
-  $date_of_birth = trim($params['date_of_birth']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
-  $error = array();
-  $userid_is_numeric = 0;
+    $first_name = trim($params['first_name']);
+    $last_name = trim($params['last_name']);
+    $user_id = trim($params['user_id']);
+    $password = trim($params['password']);
+    $cpassword = trim($params['confirm_password']);
+    $login_type = trim($params['login_type']);
+    $email_id = trim($params['email_id']);
+    $phone_number = trim($params['phone_number']);
+    $location = trim($params['location']);
+    $profile_image = trim($params['profile_image']);
+    $gender = trim($params['gender']);
+    $date_of_birth = trim($params['date_of_birth']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
+    $error = array();
+    $userid_is_numeric = 0;
 
-  $userid_is_numeric = is_numeric($user_id);
+    $userid_is_numeric = is_numeric($user_id);
 
-  if (!$userid_is_numeric) {
-    if (function_exists('itg_sso_user_email_check')) {
-      $get_user_check_email = itg_sso_user_email_check($user_id);
-    }
-    if (function_exists('itg_sso_user_email_domain')) {
-      $get_user_check_domain = itg_sso_user_email_domain($user_id);
-    }
-  }
-  else {
-    $error['user_id'] = t("Invalid  User id");
-  }
-
-
-
-
-
-  // user_id validation
-
-  if (empty($user_id)) {
-    $error['user_id'] = t('User id cannot be an empty');
-  }
-  else {
-
-    if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-      $error['user_id'] = t("Invalid  User id");
-    }
-    else {
-      if (strpos($user_id, $social_domain) !== FALSE) {}
-      else {
+    if (!$userid_is_numeric) {
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
         $error['user_id'] = t("Invalid  User id");
-      }
     }
-  }
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+
+
+
+    // user_id validation
+
+    if (empty($user_id)) {
+        $error['user_id'] = t('User id cannot be an empty');
+    } else {
+
+        if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+            $error['user_id'] = t("Invalid  User id");
+        } else {
+            if (strpos($user_id, $social_domain) !== FALSE) {
+                
+            } else {
+                $error['user_id'] = t("Invalid  User id");
+            }
+        }
+    }
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
+
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
 }
 
 /**
@@ -1659,33 +1618,33 @@ function socal_signupValidation_rapid($params, $social_domain) {
  * @return array
  */
 function authtokenValidation_rapid($params) {
-  $user_id = trim($params['user_id']);
-  $auth_token = trim($params['auth_token']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $auth_token = trim($params['auth_token']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  if (empty($user_id)) {
-    $error['user_id'] = t('User id cannot be an empty');
-  }
-  if (empty($auth_token)) {
-    $error['auth_token'] = t('Auth token cannot be an empty');
-  }
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
+    if (empty($user_id)) {
+        $error['user_id'] = t('User id cannot be an empty');
+    }
+    if (empty($auth_token)) {
+        $error['auth_token'] = t('Auth token cannot be an empty');
+    }
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+    return $error_settings;
 }
 
 /**
@@ -1696,40 +1655,40 @@ function authtokenValidation_rapid($params) {
  * @return array
  */
 function fblogin_rapid($params) {
-  $user_id = trim($params['user_id']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  if (empty($user_id)) {
-    $error['user_id'] = t('User id cannot be an empty');
-  }
-
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
-
-  if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-    $error['user_id'] = t("Invalid  User id");
-  }
-  else {
-    if (strpos($user_id, "@facebook.com") !== FALSE) {}
-    else {
-      $error['user_id'] = t("Invalid  User id");
+    if (empty($user_id)) {
+        $error['user_id'] = t('User id cannot be an empty');
     }
-  }
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
-  return $error_settings;
+    if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+        $error['user_id'] = t("Invalid  User id");
+    } else {
+        if (strpos($user_id, "@facebook.com") !== FALSE) {
+            
+        } else {
+            $error['user_id'] = t("Invalid  User id");
+        }
+    }
+
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
 }
 
 /**
@@ -1740,40 +1699,40 @@ function fblogin_rapid($params) {
  * @return array
  */
 function twtogin_rapid($params) {
-  $user_id = trim($params['user_id']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
-  if (empty($user_id)) {
-    $error['user_id'] = t('User id cannot be an empty');
-  }
-
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
-
-  if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
-    $error['user_id'] = t("Invalid  User id");
-  }
-  else {
-    if (strpos($user_id, "@twitter.com") !== FALSE) {}
-    else {
-      $error['user_id'] = t("Invalid  User id");
+    if (empty($user_id)) {
+        $error['user_id'] = t('User id cannot be an empty');
     }
-  }
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
-  return $error_settings;
+    if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+        $error['user_id'] = t("Invalid  User id");
+    } else {
+        if (strpos($user_id, "@twitter.com") !== FALSE) {
+            
+        } else {
+            $error['user_id'] = t("Invalid  User id");
+        }
+    }
+
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
 }
 
 /**
@@ -1784,27 +1743,27 @@ function twtogin_rapid($params) {
  * @return array
  */
 function deviceTokenReset_Rapid($params) {
-  $user_id = trim($params['user_id']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $user_data = user_load_by_name($user_id);
+    $user_data = user_load_by_name($user_id);
 
-  $token_updated = db_update('itg_app_device');
-  $token_updated->fields(array(
-      'token' => "",
+    $token_updated = db_update('itg_app_device');
+    $token_updated->fields(array(
+        'token' => "",
     ));
-  $token_updated->condition('uid', $user_data->uid);
-  $token_updated->execute();
+    $token_updated->condition('uid', $user_data->uid);
+    $token_updated->execute();
 
-  // blank session id
+    // blank session id
 
-  $session_updated = db_update('sessions');
-  $session_updated->fields(array(
-      'sid' => "",
+    $session_updated = db_update('sessions');
+    $session_updated->fields(array(
+        'sid' => "",
     ));
-  $session_updated->condition('uid', $user_data->uid);
-  $session_updated->execute();
+    $session_updated->condition('uid', $user_data->uid);
+    $session_updated->execute();
 }
 
 /**
@@ -1815,28 +1774,28 @@ function deviceTokenReset_Rapid($params) {
  * @return array
  */
 function resentotpValidation_rapid($params) {
-  $user_id = trim($params['user_id']);
-  $auth_token = trim($params['auth_token']);
-  $device_id = trim($params['device_id']);
-  $device_type = trim($params['device_type']);
+    $user_id = trim($params['user_id']);
+    $auth_token = trim($params['auth_token']);
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
 
-  $error = array();
-  $userid_is_numeric = 0;
+    $error = array();
+    $userid_is_numeric = 0;
 
 
-  // deviceid/type start
-  if (empty($device_id)) {
-    $error['device_id'] = t('Device id cannot be an empty');
-  }
-  if (empty($device_type)) {
-    $error['device_type'] = t('Device type cannot be an empty');
-  }
-  // deviceid/type end
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
 
-  $error_settings = array();
-  $error_settings['custom_error'] = $error;
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
 
-  return $error_settings;
+    return $error_settings;
 }
 
 /**
@@ -1847,66 +1806,65 @@ function resentotpValidation_rapid($params) {
  * @return string $n_body
  */
 function formateNodeBodyToken($n_body) {
-  //include 'simple_html_dom.php';
-  $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', 'div[class=itg-mosimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
+    //include 'simple_html_dom.php';
+    $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', 'div[class=itg-mosimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
 
-  $data = array();
-  $poll_id = 0;
+    $data = array();
+    $poll_id = 0;
 
-  $str_html = str_get_html($n_body);
-  // loop on token array
-  foreach ($token_list as $tkey => $tvalue) {
-    if ($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>' || $tvalue == '<p>[ITG:LISTICLES]</p>' || $tvalue == '<p>[ITG:TECH-PHOTO-GALLERY]</p>') {
+    $str_html = str_get_html($n_body);
+    // loop on token array
+    foreach ($token_list as $tkey => $tvalue) {
+        if ($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>' || $tvalue == '<p>[ITG:LISTICLES]</p>' || $tvalue == '<p>[ITG:TECH-PHOTO-GALLERY]</p>') {
 
-      $tvalue = str_replace("<p>", "", $tvalue);
-      $tvalue = str_replace("</p>", "", $tvalue);
-      $tvalue_replave = "<ITG-NATIVEAPP>" . $tvalue . "<ITG-NATIVEAPP>";
-      $n_body = str_replace($tvalue, $tvalue_replave, $n_body);
-    }
-    else {
-      $node_str = "";
-      $node_ar = array();
-      foreach ($str_html->find($tvalue) as $element) {
-        $node_str .= $element . "$$$$$";
-        // get poll id
-        if ($tvalue == "div[class=poll]") {
-          $poll_id = filter_var($element, FILTER_SANITIZE_NUMBER_INT);
+            $tvalue = str_replace("<p>", "", $tvalue);
+            $tvalue = str_replace("</p>", "", $tvalue);
+            $tvalue_replave = "<ITG-NATIVEAPP>" . $tvalue . "<ITG-NATIVEAPP>";
+            $n_body = str_replace($tvalue, $tvalue_replave, $n_body);
+        } else {
+            $node_str = "";
+            $node_ar = array();
+            foreach ($str_html->find($tvalue) as $element) {
+                $node_str .= $element . "$$$$$";
+                // get poll id
+                if ($tvalue == "div[class=poll]") {
+                    $poll_id = filter_var($element, FILTER_SANITIZE_NUMBER_INT);
+                }
+            }
+            $node_str = rtrim($node_str, "$$$$$");
+            $node_ar = explode("$$$$$", $node_str);
+
+
+            foreach ($node_ar as $key => $value) {
+                $replace = "<ITG-NATIVEAPP>" . $value . "<ITG-NATIVEAPP>";
+                $n_body = str_replace($value, $replace, $n_body);
+            }
         }
-      }
-      $node_str = rtrim($node_str, "$$$$$");
-      $node_ar = explode("$$$$$", $node_str);
-
-
-      foreach ($node_ar as $key => $value) {
-        $replace = "<ITG-NATIVEAPP>" . $value . "<ITG-NATIVEAPP>";
-        $n_body = str_replace($value, $replace, $n_body);
-      }
     }
-  }
-  // add AD block after 1st <p> start
-  $start = strpos($n_body, '<p>');
-  $end = strpos($n_body, '</p>', $start);
-  $paragraph = substr($n_body, $start, $end - $start + 4);
-  $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
-  $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
-  // add AD block after 1st <p> end
-  $n_body = str_replace('<img', '<img style="width:100%;height:auto;"', $n_body);
-  $n_body = str_replace('<iframe', '<iframe width="100%" ', $n_body);
-  $n_body = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $n_body);
-  //$n_body = fbiframeupdtae($n_body);
-  //jira:78 start
-  $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
-  $n_body = str_replace('<blockquote', '<blockquote style="padding: 0.5em !important; display:block;"', $n_body);
-  $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
-  $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
-  $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram-media"', $n_body);
-  //$n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
-  $n_body = str_replace('src="//', 'src="https://', $n_body);
-  $n_body = str_replace('<div class="itg-mosimage"', '<div class="itg-mosimage body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;"', $n_body);
-  //jira:78 end 
-  $data['n_body'] = $n_body;
-  $data['poll_id'] = $poll_id;
-  return $data;
+    // add AD block after 1st <p> start
+    $start = strpos($n_body, '<p>');
+    $end = strpos($n_body, '</p>', $start);
+    $paragraph = substr($n_body, $start, $end - $start + 4);
+    $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
+    $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
+    // add AD block after 1st <p> end
+    $n_body = str_replace('<img', '<img style="width:100%;height:auto;"', $n_body);
+    $n_body = str_replace('<iframe', '<iframe width="100%" ', $n_body);
+    $n_body = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $n_body);
+    //$n_body = fbiframeupdtae($n_body);
+    //jira:78 start
+    $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
+    $n_body = str_replace('<blockquote', '<blockquote style="padding: 0.5em !important; display:block;"', $n_body);
+    $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
+    $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
+    $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram-media"', $n_body);
+    //$n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
+    $n_body = str_replace('src="//', 'src="https://', $n_body);
+    $n_body = str_replace('<div class="itg-mosimage"', '<div class="itg-mosimage body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;"', $n_body);
+    //jira:78 end 
+    $data['n_body'] = $n_body;
+    $data['poll_id'] = $poll_id;
+    return $data;
 }
 
 /**
@@ -1916,26 +1874,25 @@ function formateNodeBodyToken($n_body) {
  * @return string $n_body
  */
 function fbiframeupdtae($n_body) {
-  preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $n_body, $iframes_m);
-  foreach ($iframes_m as $iframes) {
-    foreach ($iframes as $iframes_s) {
-      preg_match('/src="([^"]+)"/', $iframes_s, $match);
-      $find = $iframes_s;
-      $find_up = str_replace('auto', '168vw', $iframes_s);
-      $find_youtube = str_replace('auto', '52vw', $iframes_s);
-      if (strpos($match[1], 'https://www.facebook.com') !== FALSE) {
-        $n_body = str_replace($find, $find_up, $n_body);
-      }
-      if (strpos($match[1], 'https://www.youtube.com') !== FALSE) {
-        $n_body = str_replace($find, $find_youtube, $n_body);
-      }
-      $loop2++;
+    preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $n_body, $iframes_m);
+    foreach ($iframes_m as $iframes) {
+        foreach ($iframes as $iframes_s) {
+            preg_match('/src="([^"]+)"/', $iframes_s, $match);
+            $find = $iframes_s;
+            $find_up = str_replace('auto', '168vw', $iframes_s);
+            $find_youtube = str_replace('auto', '52vw', $iframes_s);
+            if (strpos($match[1], 'https://www.facebook.com') !== FALSE) {
+                $n_body = str_replace($find, $find_up, $n_body);
+            }
+            if (strpos($match[1], 'https://www.youtube.com') !== FALSE) {
+                $n_body = str_replace($find, $find_youtube, $n_body);
+            }
+            $loop2++;
+        }
+        $loop++;
     }
-    $loop++;
-  }
-  return $n_body;
+    return $n_body;
 }
-
 
 /**
  * function for  getTechPros
@@ -1944,24 +1901,24 @@ function fbiframeupdtae($n_body) {
  * @return array
  */
 function getTechProsImg($content_org) {
-  //include 'simple_html_dom.php';
-  $src = "";
-  if ($content_org) {
-    $str_html = str_get_html($content_org);
-    $img_str = "";
-    foreach ($str_html->find('ul[class="pron-cons-img]') as $element) {
-      $img_str = $element;
+    //include 'simple_html_dom.php';
+    $src = "";
+    if ($content_org) {
+        $str_html = str_get_html($content_org);
+        $img_str = "";
+        foreach ($str_html->find('ul[class="pron-cons-img]') as $element) {
+            $img_str = $element;
+        }
+        if ($img_str != "") {
+            $str_html2 = str_get_html($img_str);
+            foreach ($str_html2->find('img') as $element) {
+                $img_str_img = $element;
+            }
+            $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
+            $src = $xpath->evaluate("string(//img/@src)");
+        }
     }
-    if ($img_str != "") {
-      $str_html2 = str_get_html($img_str);
-      foreach ($str_html2->find('img') as $element) {
-        $img_str_img = $element;
-      }
-      $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
-      $src = $xpath->evaluate("string(//img/@src)");
-    }
-  }
-  return $src;
+    return $src;
 }
 
 /**
@@ -1971,19 +1928,19 @@ function getTechProsImg($content_org) {
  * @return array
  */
 function getTechProsh2($content_org) {
-  //include 'simple_html_dom.php';
-  $h2 = "";
-  if ($content_org) {
-    $str_html = str_get_html($content_org);
+    //include 'simple_html_dom.php';
     $h2 = "";
-    foreach ($str_html->find('h2') as $element) {
-      $h2 = $element;
+    if ($content_org) {
+        $str_html = str_get_html($content_org);
+        $h2 = "";
+        foreach ($str_html->find('h2') as $element) {
+            $h2 = $element;
+        }
+        $h2 = ltrim($h2, "<h2>");
+        $h2 = rtrim($h2, "</h2>");
     }
-    $h2 = ltrim($h2, "<h2>");
-    $h2 = rtrim($h2, "</h2>");
-  }
 
-  return $h2;
+    return $h2;
 }
 
 /**
@@ -1995,30 +1952,27 @@ function getTechProsh2($content_org) {
  */
 function valid_anchor_author($nid, $type) {
 
-  // reporter 285750 , anchor 285903
-  $node = node_load($nid);
-  $occupation_tids = array();
+    // reporter 285750 , anchor 285903
+    $node = node_load($nid);
+    $occupation_tids = array();
 
-  foreach ($node->field_celebrity_pro_occupation['und'] as $data) {
-    $occupation_tids[] = $data['tid'];
-  }
-  if ($type == 'author') {
-    if (in_array('285750', $occupation_tids)) {
-      $status = TRUE;
+    foreach ($node->field_celebrity_pro_occupation['und'] as $data) {
+        $occupation_tids[] = $data['tid'];
     }
-    else {
-      $status = FALSE;
+    if ($type == 'author') {
+        if (in_array('285750', $occupation_tids)) {
+            $status = TRUE;
+        } else {
+            $status = FALSE;
+        }
+    } elseif ($type == 'anchor') {
+        if (in_array('285903', $occupation_tids)) {
+            $status = TRUE;
+        } else {
+            $status = FALSE;
+        }
     }
-  }
-  elseif ($type == 'anchor') {
-    if (in_array('285903', $occupation_tids)) {
-      $status = TRUE;
-    }
-    else {
-      $status = FALSE;
-    }
-  }
-  return $status;
+    return $status;
 }
 
 /**
@@ -2028,14 +1982,14 @@ function valid_anchor_author($nid, $type) {
  * @return obj term_object;
  */
 function getNodePrimeCatByNid($nid) {
-  if ($nid) {
-    $query = db_select('field_data_field_primary_category', 'fpc');
-    $query->fields('fpc', array('field_primary_category_value'));
-    $query->condition('fpc.entity_id', $nid);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $field_primary_category_value = $result[0]['field_primary_category_value'];
-    return taxonomy_term_load($field_primary_category_value);
-  }
+    if ($nid) {
+        $query = db_select('field_data_field_primary_category', 'fpc');
+        $query->fields('fpc', array('field_primary_category_value'));
+        $query->condition('fpc.entity_id', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $field_primary_category_value = $result[0]['field_primary_category_value'];
+        return taxonomy_term_load($field_primary_category_value);
+    }
 }
 
 /**
@@ -2045,11 +1999,11 @@ function getNodePrimeCatByNid($nid) {
  * @return string url
  */
 function sectionPrgramIconImg($tid) {
-  $query = db_select('field_data_field_programme_category_image', 'icimg');
-  $query->fields('icimg', array('field_programme_category_image_fid'));
-  $query->condition('icimg.entity_id', $tid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return completeFilePath($result[0]['field_programme_category_image_fid']);
+    $query = db_select('field_data_field_programme_category_image', 'icimg');
+    $query->fields('icimg', array('field_programme_category_image_fid'));
+    $query->condition('icimg.entity_id', $tid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return completeFilePath($result[0]['field_programme_category_image_fid']);
 }
 
 /**
@@ -2058,8 +2012,8 @@ function sectionPrgramIconImg($tid) {
  * @return type
  */
 function redish_ttl() {
-  drupal_add_js(
-'jQuery(document).ready(function () {
+    drupal_add_js(
+            'jQuery(document).ready(function () {
   //called when key is pressed in textbox
   jQuery("input[type=text]").keypress(function (e) {
      //if the letter is not digit then display error 
@@ -2069,336 +2023,336 @@ function redish_ttl() {
                return false;
     }
    });
-});',
- array(
-  'type' => 'inline'  
-));
-  $form = array();
-  
+});', array(
+        'type' => 'inline'
+    ));
+    $form = array();
+
     $form['default_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Default ttl'),
-    '#default_value' => variable_get('default_ttl'),
-    '#required' => TRUE,  
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
+        '#type' => 'textfield',
+        '#title' => t('Default ttl'),
+        '#default_value' => variable_get('default_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
 
-  $form['config_update_status_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('config update status ttl'),
-    '#default_value' => variable_get('config_update_status_ttl'),
-    '#required' => TRUE,   
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['master_config_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('master config ttl'),
-    '#default_value' => variable_get('master_config_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['hamburger_menu_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('hamburger menu ttl'),
-    '#default_value' => variable_get('hamburger_menu_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['horizontal_menu_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('horizontal menu ttl'),
-    '#default_value' => variable_get('horizontal_menu_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['server_error_master_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('server error master ttl'),
-    '#default_value' => variable_get('server_error_master_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['photolist_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('photolist ttl'),
-    '#default_value' => variable_get('photolist_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['photodetail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('photodetail ttl'),
-    '#default_value' => variable_get('photodetail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['programlist_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('programlist ttl'),
-    '#default_value' => variable_get('programlist_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['newslist_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('newslist ttl'),
-    '#default_value' => variable_get('newslist_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['videolist_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('videolist ttl'),
-    '#default_value' => variable_get('videolist_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['adconfig_android_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('adconfig android ttl'),
-    '#default_value' => variable_get('adconfig_android_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['adconfig_ipad_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('adconfig ipad ttl'),
-    '#default_value' => variable_get('adconfig_ipad_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['adconfig_iphone_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('adconfig iphone ttl'),
-    '#default_value' => variable_get('adconfig_iphone_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['adconfig_tab_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('adconfig tab ttl'),
-    '#default_value' => variable_get('adconfig_tab_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['videodetail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('videodetail ttl'),
-    '#default_value' => variable_get('videodetail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['programdetail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('programdetail ttl'),
-    '#default_value' => variable_get('programdetail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['topstories_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('topstories ttl'),
-    '#default_value' => variable_get('topstories_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['photostorydetail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('photostorydetail ttl'),
-    '#default_value' => variable_get('photostorydetail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['program_category_list_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('program category list ttl'),
-    '#default_value' => variable_get('program_category_list_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['ad_config_json_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('ad config json ttl'),
-    '#default_value' => variable_get('ad_config_json_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['livetv_channellist_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('livetv channellist ttl'),
-    '#default_value' => variable_get('livetv_channellist_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['otherapps_ios_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('otherapps ios ttl'),
-    '#default_value' => variable_get('otherapps_ios_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['otherapps_android_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('otherapps android ttl'),
-    '#default_value' => variable_get('otherapps_android_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['magazine_coverstories_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('magazine coverstories ttl'),
-    '#default_value' => variable_get('magazine_coverstories_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['magazine_editionlist_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('magazine editionlist ttl'),
-    '#default_value' => variable_get('magazine_editionlist_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['magazine_edition_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('magazine edition ttl'),
-    '#default_value' => variable_get('magazine_edition_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['storydetail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('storydetail ttl'),
-    '#default_value' => variable_get('storydetail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['home_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('home ttl'),
-    '#default_value' => variable_get('home_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['livetv_indiatoday_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('livetv indiatoday ttl'),
-    '#default_value' => variable_get('livetv_indiatoday_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['livetv_aajtak_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('livetv aajtak ttl'),
-    '#default_value' => variable_get('livetv_aajtak_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['livetv_delhiaajtak_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('livetv delhiaajtak ttl'),
-    '#default_value' => variable_get('livetv_delhiaajtak_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['livetv_tej_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('livetv_tej_ttl'),
-    '#default_value' => variable_get('livetv_tej_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['author_story_list_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('author story list ttl'),
-    '#default_value' => variable_get('author_story_list_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['polls_open_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('polls_open_ttl'),
-    '#default_value' => variable_get('polls_open_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['polls_close_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('polls close ttl'),
-    '#default_value' => variable_get('polls_close_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['poll_detail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('poll_detail_ttl'),
-    '#default_value' => variable_get('poll_detail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['anchor_programm_list_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('anchor programm list ttl'),
-    '#default_value' => variable_get('anchor_programm_list_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['newswrap_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('newswrap ttl'),
-    '#default_value' => variable_get('newswrap_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
-  $form['anchor_detail_ttl'] = array(
-    '#type' => 'textfield',
-    '#title' => t('anchor detail ttl'),
-    '#default_value' => variable_get('anchor_detail_ttl'),
-    '#required' => TRUE,
-    '#size' => 20, 
-    '#maxlength' => 7,
-  );
+    $form['config_update_status_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('config update status ttl'),
+        '#default_value' => variable_get('config_update_status_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['master_config_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('master config ttl'),
+        '#default_value' => variable_get('master_config_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['hamburger_menu_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('hamburger menu ttl'),
+        '#default_value' => variable_get('hamburger_menu_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['horizontal_menu_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('horizontal menu ttl'),
+        '#default_value' => variable_get('horizontal_menu_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['server_error_master_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('server error master ttl'),
+        '#default_value' => variable_get('server_error_master_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['photolist_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('photolist ttl'),
+        '#default_value' => variable_get('photolist_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['photodetail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('photodetail ttl'),
+        '#default_value' => variable_get('photodetail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['programlist_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('programlist ttl'),
+        '#default_value' => variable_get('programlist_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['newslist_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('newslist ttl'),
+        '#default_value' => variable_get('newslist_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['videolist_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('videolist ttl'),
+        '#default_value' => variable_get('videolist_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['adconfig_android_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('adconfig android ttl'),
+        '#default_value' => variable_get('adconfig_android_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['adconfig_ipad_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('adconfig ipad ttl'),
+        '#default_value' => variable_get('adconfig_ipad_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['adconfig_iphone_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('adconfig iphone ttl'),
+        '#default_value' => variable_get('adconfig_iphone_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['adconfig_tab_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('adconfig tab ttl'),
+        '#default_value' => variable_get('adconfig_tab_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['videodetail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('videodetail ttl'),
+        '#default_value' => variable_get('videodetail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['programdetail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('programdetail ttl'),
+        '#default_value' => variable_get('programdetail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['topstories_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('topstories ttl'),
+        '#default_value' => variable_get('topstories_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['photostorydetail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('photostorydetail ttl'),
+        '#default_value' => variable_get('photostorydetail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['program_category_list_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('program category list ttl'),
+        '#default_value' => variable_get('program_category_list_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['ad_config_json_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('ad config json ttl'),
+        '#default_value' => variable_get('ad_config_json_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['livetv_channellist_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('livetv channellist ttl'),
+        '#default_value' => variable_get('livetv_channellist_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['otherapps_ios_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('otherapps ios ttl'),
+        '#default_value' => variable_get('otherapps_ios_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['otherapps_android_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('otherapps android ttl'),
+        '#default_value' => variable_get('otherapps_android_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['magazine_coverstories_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('magazine coverstories ttl'),
+        '#default_value' => variable_get('magazine_coverstories_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['magazine_editionlist_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('magazine editionlist ttl'),
+        '#default_value' => variable_get('magazine_editionlist_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['magazine_edition_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('magazine edition ttl'),
+        '#default_value' => variable_get('magazine_edition_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['storydetail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('storydetail ttl'),
+        '#default_value' => variable_get('storydetail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['home_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('home ttl'),
+        '#default_value' => variable_get('home_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['livetv_indiatoday_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('livetv indiatoday ttl'),
+        '#default_value' => variable_get('livetv_indiatoday_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['livetv_aajtak_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('livetv aajtak ttl'),
+        '#default_value' => variable_get('livetv_aajtak_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['livetv_delhiaajtak_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('livetv delhiaajtak ttl'),
+        '#default_value' => variable_get('livetv_delhiaajtak_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['livetv_tej_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('livetv_tej_ttl'),
+        '#default_value' => variable_get('livetv_tej_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['author_story_list_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('author story list ttl'),
+        '#default_value' => variable_get('author_story_list_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['polls_open_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('polls_open_ttl'),
+        '#default_value' => variable_get('polls_open_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['polls_close_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('polls close ttl'),
+        '#default_value' => variable_get('polls_close_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['poll_detail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('poll_detail_ttl'),
+        '#default_value' => variable_get('poll_detail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['anchor_programm_list_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('anchor programm list ttl'),
+        '#default_value' => variable_get('anchor_programm_list_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['newswrap_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('newswrap ttl'),
+        '#default_value' => variable_get('newswrap_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
+    $form['anchor_detail_ttl'] = array(
+        '#type' => 'textfield',
+        '#title' => t('anchor detail ttl'),
+        '#default_value' => variable_get('anchor_detail_ttl'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 7,
+    );
 
-  return system_settings_form($form);
+    return system_settings_form($form);
 }
+
 /**
  * redish_ttl form decalation
  *
@@ -2576,26 +2530,91 @@ function time_interval() {
         '#description' => t('Enter interval in days.'),
     );
     return system_settings_form($form);
-    
 }
 
-    
-     /**
-     * function for get time interval
-     * @pram int $tid
-     *
-     * @return int
-     */
-    function itg_app_time_interval($tid) {
-        $interval = variable_get('itgapp_cat_0');
-        $var_key = "";
-        if ($tid > 0) {
-            $var_key = "itgapp_cat_" . $tid . "";
-            if (variable_get($var_key) > 0) {
-                $interval = variable_get($var_key);
-            }
+/**
+ * function for get time interval
+ * @pram int $tid
+ *
+ * @return int
+ */
+function itg_app_time_interval($tid) {
+    $interval = variable_get('itgapp_cat_0');
+    $var_key = "";
+    if ($tid > 0) {
+        $var_key = "itgapp_cat_" . $tid . "";
+        if (variable_get($var_key) > 0) {
+            $interval = variable_get($var_key);
         }
-
-        return $interval;
     }
-    
+
+    return $interval;
+}
+
+/**
+ * This function use for get video duration data by nid
+ * 
+ */
+function get_rv_video_duration_by_nid($nid) {
+    $query = db_select('field_data_field_video_upload', 'up_video');
+    $query->join('field_data_field_videogallery_video_upload', 'fvu', 'up_video.field_video_upload_value = fvu.entity_id');
+    $query->leftJoin('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
+    $query->Join('itg_solr_video_info', 'isvi', 'isvi.fid = fvu.field_videogallery_video_upload_fid');
+    $query->fields('isvi', array('solr_video_duration'));
+    $query->condition('up_video.entity_id', $nid);
+    $query->groupBy('isvi.solr_video_id');
+    $query->orderBy('up_video.delta', 'ASC');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['solr_video_duration'];
+}
+
+function testtolive_homeapi() {
+    die("This function is disable now.");
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_video.inc");
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_news.inc");
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_story.inc");
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_polls.inc");
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_photo.inc");
+    include(DRUPAL_ROOT . "/sites/all/modules/custom/itg_app_api/inc/itg_app_api_magazine.inc");
+    $jsondata = homePageJson();
+    $jsondata = json_encode($jsondata);
+    $redis_key = "devitg_rapid_api_homePage";
+    $ttl = 600;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    //truncate & insert into live table start
+    db_truncate('itg_app_middleware_live')->execute();
+    db_truncate('itg_app_master_config_internal_live')->execute();
+    db_truncate('itg_app_master_info_internal_live')->execute();
+    //into itg_app_middleware
+    $query = db_select('itg_app_middleware', 'iam');
+    $query->fields('iam');
+    db_insert('itg_app_middleware_live')->from($query)->execute();
+    //into itg_app_master_config_internal
+    $query = db_select('itg_app_master_config_internal', 'imi');
+    $query->fields('imi');
+    db_insert('itg_app_master_config_internal_live')->from($query)->execute();
+    //into itg_app_master_config_internal
+    $query = db_select('itg_app_master_info_internal', 'imin');
+    $query->fields('imin');
+    db_insert('itg_app_master_info_internal_live')->from($query)->execute();
+    redis_key_delete($redis_key);
+    //insert into live table end    
+    drupal_set_message(t('copy dev to live home api done.'));
+    drupal_goto('itg-app-arrange-home');
+}
+
+/**
+ * get_mac_unix_os
+ */
+function get_mac_unix_os() {
+    ob_start();
+    system('ifconfig -a');
+    $mycom = ob_get_contents(); // Capture the output into a variable
+    ob_clean(); // Clean (erase) the output buffer
+    $findme = "Physical";
+    //Find the position of Physical text 
+    $pmac = strpos($mycom, $findme);
+    $mac = substr($mycom, ($pmac + 37), 18);
+
+    return $mac;
+}

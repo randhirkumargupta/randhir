@@ -64,7 +64,7 @@ if (!mobile) {
     <div class="outer_box">
       <h2>About us</h2>
       <div class="box"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/about_img.jpg" alt="" />
-        <p>India Today Media Institute (ITMI) which is ready to bring in its 9th batch...</p>
+        <p>India Today Media Institute’s birth in 2005 was a result of our Group’s recognition of...</p>
       </div>
     </div>
     <div class="outer_box">

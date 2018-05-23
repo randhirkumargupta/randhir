@@ -297,6 +297,7 @@ function itg_videogallery_dailymotion_api() {
     );
   }
   catch (Exception $e) {
+	  
     if ($e->getMessage() == "Missing API key") {
       if (isset($_GET['destination'])) {
         unset($_GET['destination']);

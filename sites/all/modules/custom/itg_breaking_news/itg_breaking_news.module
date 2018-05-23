@@ -301,6 +301,9 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     $form['field_breaking_coverage_end_time']['#states'] = array(
       'visible' => array(
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
+      ),
+      'required' => array(
+        ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
 
@@ -379,6 +382,21 @@ function itg_breaking_news_form_custom_validate($form, &$form_state) {
   
   if ($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog' && empty($form_state['values']['field_primary_category']['und'][0]['value'])) {
     form_set_error('field_primary_category', t("Primary category Field is required!"));
+  }
+  
+  if($form_state['values']['field_type']['und'][0]['value'] == 'Live Blog' && !empty($form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value'])){
+    $coverage_end_time = $form_state['values']['field_breaking_coverage_end_time'][LANGUAGE_NONE][0]['value'];
+    if (!empty($form_state['values']['nid'])) {
+      $created_date = $form_state['values']['created'];
+    }else {
+      $created_date = time();
+    }
+    $time_diff = (strtotime($coverage_end_time) - ($created_date))/3600;
+    if ($time_diff <= 2) {
+      form_set_error('field_breaking_coverage_end_time', t("Live Blog End Time must be 2 hours later!"));  
+    }
+  }else if ($form_state['values']['field_type']['und'][0]['value'] == 'Live Blog') {
+    form_set_error('field_breaking_coverage_end_time', t("Live Blog End Time Field is required!"));  
   }
 }
 
@@ -899,7 +917,7 @@ function get_custom_content_details($blog_entity_id) {
   $query = db_select('itg_live_blog', 'p');
   $query->condition('p.blog_entity_id', $blog_entity_id);
   $query->condition('p.status', '1');
-  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date'))
+  $query->fields('p', array('bid','blog_title', 'blog_description', 'blog_breaking_band', 'blog_notification', 'blog_publish_time','blog_uid','update_uid', 'blog_created_date', 'blog_updated_date'))
        ->orderBy('bid', 'DESC');
   # execute the query
   return $results = $query->execute()->fetchAll();
