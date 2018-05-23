@@ -4,10 +4,6 @@
 	$data_tb_region_item = 'data-tb-region-item';  
   }
 ?>
-<style type="text/css">
-  .fifa-wcup .sport-home-layout-page .itg-layout-225 .droppable{min-height: initial;}
-  .fifa-wcup .sport-home-layout-page .itg-layout-485 .droppable{height: inherit;}
-</style>
 <div class="row">
     <div class="col-md-8 col-sm-8 padright-0">
         <div class="auto-block-1">
