@@ -1,13 +1,5 @@
 <?php if (!empty($data)) : global $base_url; ?>
 <?php $data_tb_region_item = 'fifa-data-tb-region-item';  ?>
-<style type="text/css">
- .fifa-wcup .dont-miss{background-color: #f0f0f0; display: block;padding: 10px; width: 100%; box-sizing:border-box;}
- .fifa-wcup .dont-miss ul li img{width: 147px; height: 82px;}
- .fifa-wcup .dont-miss ul li .dm-pic{width: auto;}
- .fifa-wcup .dm-detail h3{font-size: 14px; line-height: 18px;}
- .padleft-0{padding-left:0;}
- .padright-0{padding-right:0;}
-</style>
   <div class="dont-miss">
     <ul>
       <?php foreach ($data as $key => $node_data) { ?>
