@@ -321,7 +321,7 @@ $hide_widget = '';
                      </div>
                     </div>
                     <div class="col-md-4 col-sm-12 col-xs-12 right-side">
-                        <div class="row">
+                        <div class="row adcenter">
                             <div class="col-md-12 col-sm-6">   
                                 <div class="widget-help-text"><?php print t('Non Draggable'); ?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
                                 <div class="itg-widget-parent">

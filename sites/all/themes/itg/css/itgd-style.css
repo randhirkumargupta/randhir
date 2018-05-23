@@ -1380,11 +1380,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .auto-block-2{height: auto !important; padding: 10px 10px 10px 0}
 .fifa-wcup .droppable{border:0 !important;}
 
-@media only screen and (max-width: 768px){
-.fifa-wcup .auto-block-1{margin-bottom: 0 !important;}
-.fifa-wcup .movies-featured-post{padding:15px 5px; }
-.fifa-wcup .dont-miss ul li{width: 50%;}
-}
+
 @media only screen and (max-width: 767px){
 .fifa-wcup .auto-block-2{display: none;}
 .fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}
@@ -1410,4 +1406,9 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .right-side h2.widget-title{margin-top: 20px;}
   @media only screen and (max-width: 768px){
     .fifa-wcup .fifa-points-table {margin-top: 20px;}
+    .fifa-wcup .adcenter{text-align:center; margin:0 auto; width:300px;}
+    .fifa-wcup .auto-block-1{margin-bottom: 0 !important;}
+	.fifa-wcup .movies-featured-post{padding:15px 5px; }
+	.fifa-wcup .dont-miss ul li{width: 50%;}  
   }
+
