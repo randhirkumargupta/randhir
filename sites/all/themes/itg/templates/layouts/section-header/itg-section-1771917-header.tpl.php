@@ -7,7 +7,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
   <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="https://indiatoday.intoday.in/youthsummit/" title="Mind Rocks 2018"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2017/guwahati/images/logo.png" alt="Mind Rocks 2018"> </a> </div>
+      <div class="left_part_logo"> <a href="<?php echo $data['data']['menu_manager']['event_url'];?>" title="Mind Rocks 2018"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2017/guwahati/images/logo.png" alt="Mind Rocks 2018"> </a> </div>
       <div class="social_icons_ipad">
         <ul>
           <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2018" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
@@ -34,8 +34,8 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
       <div class="clearfix"></div>
      <div class="event-datelocation-2018">
      	<h2>
-     		<span class="eventname-2018">India Today Mindrocks <strong>2018</strong></span>
-     		<span class="location-datetime-2018">15 September 2018, Jawaharlal Nehru Stadium, New Delhi</span>
+     		<span class="eventname-2018"><?php echo $data['data']['menu_manager']['event_title'];?></span>
+     		<span class="location-datetime-2018"><?php echo $data['data']['menu_manager']['event_start_date'] . ',' . $data['data']['menu_manager']['event_location'];?></span>
      	</h2>
      </div>
 
@@ -69,9 +69,9 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 						  <?php foreach ($data['data']['menu_manager']['menu'] as $menu): ?>
 							<?php print $menu ?>
 						  <?php endforeach; ?>
-						  <?php if(!empty($data['data']['menu_manager']['flash_back'])) {
-						  	echo $data['data']['menu_manager']['flash_back'];
-						 } ?>
+                                                  <?php foreach ($data['data']['menu_manager']['flashback_menu'] as $f_menu): ?>
+							<?php print $f_menu ?>
+						  <?php endforeach; ?>
 					  </ul>	  
 				  </div>       
 			  </div>

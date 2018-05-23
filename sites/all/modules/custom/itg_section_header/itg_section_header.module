@@ -458,5 +458,6 @@ function get_event_menu($nid) {
   $menu['event_start_date'] = $event_start_date;
   $menu['event_location'] = $event_location;
   $menu['event_title'] = $node->title;
+  $menu['event_url'] = $baseurl;
   return $menu;
 }
