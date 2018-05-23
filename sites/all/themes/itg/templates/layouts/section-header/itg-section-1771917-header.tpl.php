@@ -52,7 +52,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     
   </div>
 </div>
-    <div class="itg-logo-container">
+    <div class="itg-logo-container clearfix">
 	<?php
 	if ($data['is_event']) {
 	  ?>
