@@ -1062,6 +1062,9 @@ function itg_fia_related_node_photos($nid = 0,$primary_cat_status = NULL) {
                     $firebase_url = get_node_firebase_weburl($value);
                     $relatednode .='<li><a href="'.$firebase_url.'"> </a></li>';
                     $flag_fia_cont++;
+                    if($flag_fia_cont >= 3){
+                        break;
+                    }
                 }
             }
         }
