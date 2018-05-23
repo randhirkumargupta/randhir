@@ -371,7 +371,7 @@ Due to privacy concerns and integrity of the show, we cannot list the winners on
 			<div class="tally_info">
 				<a class="twitter-timeline" data-dnt="true"
 					href="https://twitter.com/hashtag/NewsWiz2"
-					data-widget-id="900942435630567425">#NewsWiz2 Tweets</a>
+					data-widget-id="">#NewsWiz2 Tweets</a>
 				<script>
 					!function(d, s, id) {
 						var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
