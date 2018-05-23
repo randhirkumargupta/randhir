@@ -123,6 +123,17 @@
       <div class="rightBar">
         <iframe src="https://specials.intoday.in/specials/itmi/applynow_second.jsp"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
         <img src="https://smedia2.intoday.in/indiatoday/itmi/images/Contact-number.jpg" style="display:none;"> </div>
+    <!--Youtube video section start-->
+
+      <div class="ytube-video-section">
+      <h2>ITMI VIDEOS</h2>
+        <ul>
+          <li><div class="video-thumb"><iframe width="560" height="315" src="https://www.youtube.com/embed/kWC3v9ljC0U?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project - Rabindranath Tagore</span></li>
+          <li><div class="video-thumb"><iframe width="560" height="315" src="https://www.youtube.com/embed/gVJLrsmrlgA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project - Social Sensitization Internship experience</span></li>
+          <li><div class="video-thumb"><iframe width="560" height="315" src="https://www.youtube.com/embed/k4lOAlQxjcI?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div><span>Students Project</span></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>

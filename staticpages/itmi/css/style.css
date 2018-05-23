@@ -203,3 +203,10 @@ ul.activities-images li{width:auto; float:left; height:auto; background:none; ma
 .contentCn .rightBar { padding: 30px 5.2% 30px 5%;	width: 89.8%; float:left; }
 .punch-content { font-size:40px; padding-top:7px;}		
 }
+.ytube-video-section{float: left; width: 100%; background-color: #e0e0e0; padding: 5px; box-sizing:border-box;}
+.ytube-video-section h2{font-size: 16px; line-height: 22px; color: #000; display: block;}
+.ytube-video-section ul{list-style: none; display: block; background-color: #fff;}
+.ytube-video-section ul li{width: auto; float: left; width: 32%;}
+.ytube-video-section ul li:nth-child(2){margin: 0 2%;}
+.ytube-video-section ul li .video-thumb{width: 100%; display: inline-block;}
+.ytube-video-section ul li span{display: block; font-size: 14px; line-height: 20px; color: #000; text-transform: uppercase;}
