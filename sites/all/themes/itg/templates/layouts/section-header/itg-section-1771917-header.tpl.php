@@ -56,7 +56,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 	<?php
 	if ($data['is_event']) {
 	  ?>
-	  <div class="event-menu conclave-menu2017" style="background:#b92e70">
+	  <div class="event-menu conclave-menu2017" style="background:#111">
 		<div id="block-menu-menu-event-menu" class="container event-header-menu-container">
 			  <div class="row ">
 				  <div class="col-md-12 col-sm-12" style="color:#fff">
