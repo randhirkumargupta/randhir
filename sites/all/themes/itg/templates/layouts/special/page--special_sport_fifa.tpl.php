@@ -195,7 +195,7 @@ $hide_widget = '';
                                </div>
                              </div>
                             <?php } ?>
-                              
+
                         <?php if (isset($widget_data['itg-block-112']['widget_name']) || $theme == 'itgadmin') { ?>            
                           <div class="row itg-layout-225">
                               <div class="col-md-12 mt-50">
@@ -420,10 +420,7 @@ $hide_widget = '';
                                     </div> 
                                 </div>
                             </div>
-                                
-                            </div>                           
-                            <div class="row">
-								   
+                            
                                 <div class="col-md-12 col-sm-6 itg-layout-315">
                                     <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Poll'); ?></strong> )</div>
                                     <div class="itg-widget">
