@@ -2986,11 +2986,13 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
 
     if (!empty($data)) {
         try {
+            $_delete_arr = array();
             $delete_query = db_delete($table);
             foreach ($data as $tid) {
-                $delete_query->condition("id", $tid->id);
+                $_delete_arr[] = $tid->id;
                 _itg_widget_delete_node_data_from_helper_table($tid->nid);
             }
+            $delete_query->condition("id", $_delete_arr, 'IN');
             $delete_query->execute();
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');
