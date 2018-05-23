@@ -745,7 +745,7 @@ function itg_msi_get_term_from_name($term_name, $vocabulary_name) {
  * @return Int $nid
  */
 function itg_msi_get_nid_using_title_type($title, $type) {
-    $entity_arr = entity_load('node', array(), array('type' => $type, 'title' => $title));
+    $entity_arr = entity_load('node', array(), array('type' => $type, 'title' => $title, 'status' => 1));
     foreach ($entity_arr as $key => $val) {
         $nid = $entity_arr[$key]->nid;
     }
