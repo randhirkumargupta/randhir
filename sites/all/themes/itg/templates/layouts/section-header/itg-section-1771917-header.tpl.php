@@ -71,7 +71,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 						  <?php endforeach; ?>
 						  <?php if(!empty($data['data']['menu_manager']['flash_back'])) {
 						  	echo $data['data']['menu_manager']['flash_back'];
-						  <?php } ?>
+						 } ?>
 					  </ul>	  
 				  </div>       
 			  </div>
