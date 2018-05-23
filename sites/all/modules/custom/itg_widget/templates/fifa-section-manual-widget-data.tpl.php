@@ -4,12 +4,6 @@
 	$data_tb_region_item = 'data-tb-region-item';  
   }
 ?>
-<style type="text/css">
-.fifa-wcup .right-side h2.widget-title{margin-top: 20px;}
-  @media only screen and (max-width: 768px){
-    .fifa-wcup .fifa-points-table {margin-top: 20px;}
-  }
-</style>
 <div class="row">
     <div class="col-md-8 col-sm-8 padright-0">
         <div class="auto-block-1">
