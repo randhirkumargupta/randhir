@@ -11,8 +11,8 @@ files:
     destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp
 permissions:
   - object: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp/log/simplesamlphp.log
-    group: apache
-    owner: apache
-    mode: 655
+    group: root
+    owner: root
+    mode: 777
     type:
       - file
