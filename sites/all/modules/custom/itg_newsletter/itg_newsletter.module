@@ -896,7 +896,13 @@ function itg_newslatter_register_form() {
     '#title' => 'page name' ,
     '#default_value' => arg(2) ,
   );
-
+  $country_arr = get_all_country_list();
+  $form['page_country'] = array(
+    '#type' => 'select' ,
+    '#title' => t('Country'),
+    '#options' => $country_arr ,
+  );
+  
   $form['submit'] = array(
     '#type' => 'submit' ,
     '#value' => t('Register') ,
@@ -947,6 +953,7 @@ function itg_newslatter_register_form_submit(&$form , &$form_state) {
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
   $page_name = $form_state['values']['page_name'];
+  $page_country = $form_state['values']['page_country'];
 
   // Insert data in to itg_newslatter_update_details table
   $query = db_insert('itg_newslatter_update_details');
@@ -955,6 +962,7 @@ function itg_newslatter_register_form_submit(&$form , &$form_state) {
     'email' => $email ,
     'mobile' => $mobile ,
     'section' => $page_name ,
+    'country' => $page_country ,
     'created' => time()
   ));
   $query->execute();
