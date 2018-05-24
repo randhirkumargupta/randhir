@@ -40,17 +40,12 @@ if ($cat_id == "") {
   }
 }
 
-if($_GET['test'] == 'abc') {
-	print "cat_id = ".$cat_id . "<br>";
-	print "section_tid = ".$section_tid . "<br>";
-	pr(arg());
-}	
 if (isset($cat_id) && is_numeric($cat_id)) {
   $section_tids = array_reverse(taxonomy_get_parents_all($cat_id));
   $section_tid = $section_tids[0]->tid;
   if($cat_id == '1771916'){
 	  $cat_id = '1771916';
-  }	elseif($cat_id != $section_tid){
+  }	elseif($cat_id != $section_tid) {
     $cat_id = $section_tid;
   }   
 }
@@ -61,11 +56,6 @@ if (!empty($uri)) {
   $src = file_create_url($uri);
 }
 
-if($_GET['test'] == 'abc') {
-pr($src);	
-pr($uri);	
- p($section_banner_data);	
-}
 
 $field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
 ?>
