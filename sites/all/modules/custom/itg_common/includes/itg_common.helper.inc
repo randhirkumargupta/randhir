@@ -154,8 +154,8 @@ define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.asp
 define('taxonomy_terms_per_page_admin' , 20);
 define('SSO_COOKIE_DOMAIN' , variable_get('sso_cookie_domain'));
 define('BUCKET_FOLDER' , 'indiatoday');
-define('PARENT_SSO', 'https://staging-sso.indiatodayonline.in');
-define('SSO_URL', 'https://staging-sso.indiatodayonline.in');
+define('PARENT_SSO', 'http://itgd-dev-sso.indiatodayonline.in');
+define('SSO_URL', 'http://itgd-dev-sso.indiatodayonline.in');
 
 /*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
     $site_protocol = 'https://';
