@@ -1966,3 +1966,12 @@ function get_all_country_list(){
   }
   return $tids;
 }
+
+/**
+ * Function load all country lists
+ */
+
+function get_country_by_tid($tid){
+  $term_data = taxonomy_term_load($tid);
+  return $term_data;
+}
