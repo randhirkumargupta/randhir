@@ -707,7 +707,7 @@ function itg_story_after_build($form, &$form_state) {
      $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '');
      $settings['user_access'] = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '');
      $settings['user_access_status'] = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '');
-     $user_access_array = expode(',', $user_access_id);
+     $user_access_array = explode(',', $user_access_id);
      pr($settings);
      p($user_access_array);
     
