@@ -1953,3 +1953,16 @@ function itg_ipl_triangle_status(){
     $data_result = $query->execute()->fetchAssoc();
     return $data_result;
 }
+
+/**
+ * Function load all country lists
+ */
+
+function get_all_country_list(){
+  $tree = taxonomy_get_tree(36);
+  $tids = array();
+  foreach ($tree as $key => $value) {
+    $tids[$value->tid] = $value->name;
+  }
+  return $tids;
+}
