@@ -99,6 +99,7 @@ document.write(page_request.responseText)}
    .support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
    .video_area h2{background-size: 424px 55px;}
    .paragraph{margin: 0px; padding: 0px 0 10px 0; font-size: 18px; line-height: 30px;}
+    .paragraph h2 {font-size: 18px;    display: inline;}
    .paragraph h2 a{ color:#181818; text-decoration: underline}
    
    @media screen and (max-width: 800px){
@@ -167,7 +168,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="over_area">
                     <h1>News Wiz Quiz 2018: Season 3</h1>
-<div class="paragraph">It gives us great pleasure to announce the return of the exciting and innovative news quiz, <h2><a href="https://www.indiatoday.in/newswiz/2018/">“News Wiz”</a> </h2> <strong>for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</div>
+<div class="paragraph">It gives us great pleasure to announce the return of the exciting and innovative news quiz, <h2><strong><a href="https://www.indiatoday.in/newswiz/2018/">“News Wiz”</a></strong> </h2> <strong>for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</div>
 <br>
 <div class="paragraph">This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your team may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
 If you are students / know students from class 9 to 12 - form teams of two members and register to take part for the qualifying test for what definitely will be an exciting new season of News Wiz !
@@ -231,7 +232,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="video_area">
                           <h2>
-                            <a href="/newswiz/2017/episodes.jsp" title="Second section"><span>Second Season Highlights</span></a>
+                            <a href="/newswiz/2017/episodes.jsp" title="Second section"><span>News Wiz Second Season Highlights</span></a>
                           </h2>
                               <div class="video_info">
                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
