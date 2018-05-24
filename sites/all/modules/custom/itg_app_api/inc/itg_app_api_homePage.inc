@@ -182,6 +182,7 @@ function homePageJson() {
     
     $widget_detail = array();
     $cube_widget_config_options = fetchMasterConfigData_live('cube_widget_config_options');
+    echo $cube_widget_config_options;die();
     $cube_data = "";
     $cube_data = variable_get('cube_widget');
     if ($middleware_packages_config == 1 && $cube_data !="") {
