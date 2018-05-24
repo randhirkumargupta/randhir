@@ -277,3 +277,46 @@ function itg_mobile_app_configure_submit($form, &$form_state){
   }
   drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
+
+/**
+* Function For user access sef url
+* {@inheritdoc}
+*/
+function itg_user_access_sef_url(){
+  global $user;
+  $form = array();
+  $form['sef_url_access'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Full url'),
+    '#default_value' => get_itg_variable('sef_url_access'),
+  );
+
+  $form['sef_url_status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('sef_url_status'),
+  );
+  $form['submit_sefurl_setting'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+  );
+  return $form;
+}
+
+/**
+* {@inheritdoc}
+*/
+function itg_user_access_sef_url_submit($form, &$form_state){
+  $values = $form_state['values'];
+  unset($values['submit_button']);
+  unset($values['form_build_id']);
+  unset($values['form_token']);
+  unset($values['form_id']);
+  unset($values['op']);
+  unset($values['submit_sefurl_setting']);
+  foreach ($values as $key => $value) {
+    set_itg_variable($key, $value);
+  }
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}

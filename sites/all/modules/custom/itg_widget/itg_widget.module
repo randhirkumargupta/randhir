@@ -310,7 +310,14 @@ function itg_widget_menu() {
       'file path' => drupal_get_path('module', 'itg_widget'),
       'access callback' => TRUE,
     );
-
+    $items['itg-sef-url-configure'] = array(
+      'title' => t('User access sefurl configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_user_access_sef_url'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
   return $items;
 }
 
