@@ -46,7 +46,7 @@ if (isset($cat_id) && is_numeric($cat_id)) {
     $cat_id = $section_tid;
   }
   if($cat_id == '1771916'){
-	  $cat_id == '1771916';
+	  $cat_id = '1771916';
   }	   
 }
 $section_banner_data = taxonomy_term_load($cat_id);
