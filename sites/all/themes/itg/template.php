@@ -947,7 +947,7 @@ function itgd_chart_beat_code() {
         }', array('type' => 'inline', 'scope' => 'footer'));
     }
 
-    if ($node->type == 'story') {
+    /*if ($node->type == 'story') {
       drupal_add_js('!function(a,n,e,t,r){tagsync=e;var c=window[a];if(tagsync){var d=document.createElement("script");d.src="https://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/atm.js",d.async=!0;var i=document.getElementById(n);if(null==i||"undefined"==i)return;i.parentNode.appendChild(d,i),d.onload=d.onreadystatechange=function(){var a=new zTagManager(n);a.initTagManager(n,c,this.aync,t,r)}}else document.write("<script src=\'https://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/tm.js?data="+a+"\'><\/script>")}("datalayer","z61b6b10d-8ff4-41e3-b8b0-c46bf2be1e7e",true, 1 , 1);', array('type' => 'inline', 'scope' => 'footer'));
       drupal_add_js('var unruly = window.unruly || {};
 					unruly.native = unruly.native || {};
@@ -972,7 +972,7 @@ function itgd_chart_beat_code() {
         } else {
             $ImpulseID = "IMPL-ITDG-INDIATODAY-RESP-GENERIC"; EmbedScript();
         }', array('type' => 'inline', 'scope' => 'footer'));    
-    }
+    }*/
     drupal_add_js("var _sf_async_config = _sf_async_config || {};
       /** CONFIGURATION START **/
     _sf_async_config.uid = 60355;
