@@ -15,7 +15,6 @@
                         jQuery('.mobile-error').html(item);
                     }
                     if (index == 'mail') {
-                        console.log(item);
                         jQuery('.email-error').html(item);
                     }
                     if (index == 'fname') {
@@ -66,8 +65,7 @@
             
             // validation
             var selected_country = jQuery('select[name="page_country"]').val();
-            console.log(selected_country, 'asd');
-			var flag = 0;
+            var flag = 0;
 			if (Drupal.settings.countries_json[selected_country] != undefined && Drupal.settings.countries_json[selected_country] == 0)  {
 				jQuery('.social-share').show();
 				jQuery(':input[type="submit"]').prop('disabled', false);
