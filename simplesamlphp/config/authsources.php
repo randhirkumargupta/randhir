@@ -74,19 +74,11 @@ $config = array(
  // Whether to turn on debug
  'debug' => true,
 
-<<<<<<< HEAD
  // URL of the Drupal logout page
  'drupal_logout_url' => 'http://staging-sso.indiatodayonline.in/user/logout',
 
  // URL of the Drupal login page
  'drupal_login_url' => 'http://staging-sso.indiatodayonline.in/user',
-=======
- // the URL of the Drupal logout page
- 'drupal_logout_url' => 'https://staging-sso.indiatodayonline.in/user/logout',
-
- // the URL of the Drupal login page
- 'drupal_login_url' => 'https://staging-sso.indiatodayonline.in/user',
->>>>>>> 0370f91057c6f5459394c8f665e49125afff299a
 
  // Which attributes should be retrieved from the Drupal site.
 
