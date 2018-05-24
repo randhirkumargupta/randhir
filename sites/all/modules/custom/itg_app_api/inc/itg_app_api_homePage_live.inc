@@ -283,3 +283,21 @@ function fetchMasterConfigData_live($key) {
     }
     return $key_val;
 }
+function fetchitg_app_master_config_internal_key($config_val = 0) {
+    $value = "";
+    if ($config_val) {
+        $query = db_select('itg_app_master_config_internal', 'mci');
+        $query->fields('mci');
+        $query->condition('mci.config_val', $config_val, '=');
+        $db_or = db_or();
+        $db_or->condition('mci.config_key', 'homeapi_order_packages', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_topstories', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_categories', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_magazines', '=');
+        $db_or->condition('mci.config_key', 'homeapi_order_polls', '=');
+        $query->condition($db_or);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $value = $result[0]['config_key'];
+    }
+    return $value;
+}
