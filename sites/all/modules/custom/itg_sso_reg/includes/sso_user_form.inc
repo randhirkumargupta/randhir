@@ -74,8 +74,38 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#attributes' => array('placeholder' => t('')),
         
       );
-
-     
+	 $country_json = file_get_contents('http://feeds.intoday.in/common/json/county_master.json');
+	 
+	 $country_json = json_decode($country_json);
+	 $country_arr = array();
+	 $country_arrs = array();
+	 foreach ($country_json as $key => $value) {
+		$country_arr[$value->country] = $value->country;
+		$country_arrs[$value->country] = $value->gdpr;
+     }
+     drupal_add_js(array(
+	  'countries_json' => $country_arrs
+	), 'setting');
+	  
+	  $form['country-res_msg'] = array(
+        '#markup' => '<div class="country_restriction_msg" style="color:red;display:none;">This feature is not available in your region</div>',
+      );
+      $form['page_country'] = array(
+        '#type' => 'select' ,
+        '#title' => t('Country'),
+        '#options' => $country_arr ,
+        '#prefix' => '<div class="form-row email-or-mobile"><div id="umaissl" class="col-xs-6">',
+        '#suffix' => '<div class="page_country-error"></div></div>',
+      );
+      
+      $form['forget_me'] = array(
+        '#title' => 'You Agree to our Privacy and Cookie Policy While Register to our Website',
+        '#type' => 'checkboxes',
+        '#required' => TRUE,
+		'#options' => drupal_map_assoc(array(1)),
+		'#prefix' => '<div id="upass" class="col-xs-6">',
+        '#suffix' => '<span class="forget_me-error error"></span><style>.form-item-forget-me label{display:block!important;}.form-item-forget-me label.option{display:none!important;}</style></div></div>',
+      );
 
       $form['mail'] = array(
         '#title' => 'Email',
@@ -136,7 +166,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#prefix' => '<div id="unpass" class="col-xs-6">',
         '#suffix' => '</div></div>',
       );
-
+      
       break;
 
     // Step 2
@@ -375,6 +405,12 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       }
 
       
+      if(empty($form_state['values']['forget_me'][1])){
+		  $error['forget_me'] = t('Please check Privacy and Cookie Policy.');
+		  form_set_error('forget_me', t('')); 
+	  }
+      
+      
       $first_name = trim($form_state['values']['fname']);
       if(empty($first_name)) {
         $error['fname'] = t('Please enter first name.');
@@ -564,6 +600,20 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         'roles' => array(
           2 => 'authenticated',
           FRONT_USER => 'Front User',
+        ),
+        'field_custom_country' => array(
+          LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $form_state['values']['page_country']
+            )
+          )
+        ),
+        'field_forget_me' => array(
+          LANGUAGE_NONE => array(
+            0 => array(
+              'value' => $form_state['values']['forget_me']
+            )
+          )
         ),
       );
       

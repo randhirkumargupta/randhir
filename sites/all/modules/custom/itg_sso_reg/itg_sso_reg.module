@@ -237,6 +237,14 @@ function itg_sso_reg_form_alter(&$form, &$form_state, $form_id) {
     $form['#after_build'][] = 'itg_user_login_after_build';
     array_unshift($form['#validate'], 'itg_sso_user_login_form_validate');
     $form['#attributes'] = array('autocomplete' => 'off');
+    
+    $form['forget_me'] = array(
+        '#title' => 'You Agree to our Privacy and Cookie Policy While Register to our Website',
+        '#type' => 'checkboxes',
+        '#required' => TRUE,
+        '#weight' => 99,
+		'#options' => drupal_map_assoc(array(1)),
+      );
   }
   if ($form_id == 'user_login' && empty($_GET['ReturnTo'])) {
     drupal_add_js('jQuery(document).ready(function() {                  
