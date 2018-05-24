@@ -272,14 +272,4 @@ function fetch_widget_config_live($name) {
     return $data;
 }
 
-function fetchMasterConfigData_live($key) {
-    $key_val = "";
-    if ($key) {
-        $query = db_select('itg_app_master_config_internal', 'imi');
-        $query->fields('imi', array('config_val'));
-        $query->condition('imi.config_key', $key, '=');
-        $results = $query->execute()->fetchAll();
-        $key_val = $results[0]->config_val;
-    }
-    return $key_val;
-}
+
