@@ -244,5 +244,6 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
       print $styles;
     }  
 ?>
+<script type="text/javascript" src="https://akm-img-a-in.tosshub.com/sites/common/js/gdpr/gdpr_check.js" data-name="cookies-policy" data-id="gdprconsentpolicy"></script>
 </body>
 </html> 

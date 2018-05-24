@@ -267,6 +267,13 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#attributes' => array('placeholder' => 'E.g., 122016'),
     '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
   );
+  $forget_me = $user_detail->field_forget_me['und'][0]['value'];
+  $form['forget_me'] = array(
+    '#title' => '',
+    '#type' => 'checkboxes',
+    '#options' => drupal_map_assoc(array('Forget Me')),
+    '#default_value' => $forget_me,
+  );
   // create default value for newsletter subscription.
   $data = array();
   if (isset($user_detail->field_subscribe_for_newsletter['und']) && is_array($user_detail->field_subscribe_for_newsletter['und'])) {
@@ -482,6 +489,18 @@ function itg_personalization_edit_profile_form_submit($form, &$form_state) {
     unset($user_detail->field_personalization_state['und']);
   }
   
+  if (!empty($inputs['forget_me'])) {
+    $user_detail->field_forget_me['und'][0]['value'] = check_plain($inputs['forget_me']);
+  }else {
+    unset($user_detail->field_forget_me['und']);
+  }
+  
+  if (!empty($inputs['country'])  && $inputs['country'] !== '_none') {
+    $_country_data = get_country_by_tid($inputs['country']);
+    if(!empty($_country_data->field_is_gdpr[LANGUAGE_NONE][0]['value']) || !empty($inputs['forget_me'])){
+       $user_detail->status = 0;
+    }
+  }
   //update city
   if (!empty($inputs['user_city']) && $inputs['user_city'] !== '_none') {
     $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($inputs['user_city']);
