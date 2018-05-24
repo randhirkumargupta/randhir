@@ -177,7 +177,7 @@ function homePageJson() {
         $data['data'] = array();
         $data_final['data'] = array();
     }
-    /*
+    
     $cube_widget = array();
     
     $widget_detail = array();
@@ -189,7 +189,7 @@ function homePageJson() {
         $cube_widget = json_decode($cube_widget_json, TRUE);
         $data_final['cube_widget'] = $cube_widget;
     }
-*/
+
     return $data_final;
 }
 
@@ -1726,4 +1726,15 @@ function findarmin($arr) {
         }
     }
     return $min;
+}
+function fetchMasterConfigData_live($key) {
+    $key_val = "";
+    if ($key) {
+        $query = db_select('itg_app_master_config_internal', 'imi');
+        $query->fields('imi', array('config_val'));
+        $query->condition('imi.config_key', $key, '=');
+        $results = $query->execute()->fetchAll();
+        $key_val = $results[0]->config_val;
+    }
+    return $key_val;
 }
