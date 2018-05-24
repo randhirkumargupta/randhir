@@ -2,17 +2,17 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /opt/httpd/vhosts/staging.indiatodayonline.in/httpdocs/
+    destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/httpdocs/
   - source: scripts/setup/local.settings.php
-    destination: /opt/httpd/vhosts/staging.indiatodayonline.in/httpdocs/sites/default/
+    destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/httpdocs/sites/default/
   - source: scripts/setup/settings.php
-    destination: /opt/httpd/vhosts/staging.indiatodayonline.in/httpdocs/sites/default/
+    destination: //opt/httpd/vhosts/staging-sso.indiatodayonline.in/httpdocs/sites/default/
   - source : simplesamlphp
-    destination: /opt/httpd/vhosts/staging.indiatodayonline.in/simplesamlphp
+    destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp
 permissions:
-  - object: /opt/httpd/vhosts/staging.indiatodayonline.in/simplesamlphp/log/simplesamlphp.log
-    group: root
-    owner: root
-    mode: 777
+  - object: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp/log/simplesamlphp.log
+    group: apache
+    owner: apache
+    mode: 655
     type:
       - file
