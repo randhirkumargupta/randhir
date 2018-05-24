@@ -18,7 +18,7 @@
   <title><?php print $head_title; ?></title>
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <?php print $head; ?>
-  <?php if(!drupal_is_front_page()):?>
+  <?php if(drupal_is_front_page()):?>
   <?php print get_itg_variable('dns_preconnect_prefetch'); ?>
   <?php endif; ?>
   <!--<link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>-->
