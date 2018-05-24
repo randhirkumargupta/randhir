@@ -1414,3 +1414,5 @@ h1#display_tit .social-share li a.google{color:#bd1916}
   }
 .fifa-wcup .sport-home-layout-page .itg-layout-225 .droppable{min-height: initial;}
 .fifa-wcup .sport-home-layout-page .itg-layout-485 .droppable{height: inherit;}
+.education-layout-page #itg-newslatter-register-form .messages.error{display:block; margin-left:16px;}
+.education-layout-page .form-item-page-country select{margin-bottom:20px; width:100%;}
