@@ -50,10 +50,18 @@ if (isset($cat_id) && is_numeric($cat_id)) {
   }	   
 }
 $section_banner_data = taxonomy_term_load($cat_id);
+	
 $uri = !empty($section_banner_data->field_cm_category_banner['und'][0]['uri']) ? $section_banner_data->field_cm_category_banner['und'][0]['uri'] : "";
 if (!empty($uri)) {
   $src = file_create_url($uri);
 }
+
+if($_GET['test'] == 'abc') {
+pr($src);	
+pr($uri);	
+ p($section_banner_data);	
+}
+
 $field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
 ?>
 <?php if (!empty($data[0]['db_data']) || (!empty($src) && isset($uri))) {
