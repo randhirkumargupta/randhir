@@ -177,6 +177,17 @@ function homePageJson() {
         $data['data'] = array();
         $data_final['data'] = array();
     }
+    $cube_widget = array();
+    
+    $widget_detail = array();
+    $cube_widget_config_options = fetchMasterConfigData_live('cube_widget_config_options');
+    $cube_data = "";
+    $cube_data = variable_get('cube_widget');
+    if ($middleware_packages_config == 1 && $cube_data !="") {
+        $cube_widget_json = variable_get('cube_widget');
+        $cube_widget = json_decode($cube_widget_json, TRUE);
+        $data_final['cube_widget'] = $cube_widget;
+    }
 
     return $data_final;
 }
