@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>News Wiz Quiz 2018 Third Season By Rajdeep Sardesai and Siddhartha Basu on India Today</title>
+<title>News Wiz Quiz 2018 Third Season By Rajdeep Sardesai and Siddhartha Basu on India Today - News Wiz</title>
 <meta name="description"
-  content="News Quiz wiz 2018: News Wiz third season hosted by Rajdeep Sardesai and produced by Anita and Siddhartha Basu who also produced Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
+  content=":- News Quiz wiz 2018: News Wiz third season hosted by Rajdeep Sardesai and produced by Anita and Siddhartha Basu who also produced Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
 <meta name="keywords"
-  content="News Wiz, News Wiz Quiz 2018, News Wiz Quiz 2018 Third Season, News Wiz third season, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+  content="News Wiz 2018, news wiz contest, Nnews wiz quiz, ews Wiz, News Wiz Quiz 2018, News Wiz Quiz 2018 Third Season, News Wiz third season, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+  
   <link rel="canonical" href="https://indiatoday.in/newswiz/2018/" />
 <meta property="og:site_name" content="India Today" />
 <meta property="og:type" content="Website" />
@@ -40,6 +41,8 @@ function zd_get_placements(){
  zmt_mtag.zmt_load(zmt_mtag); 
 } 
 </script>
+
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"India Today","url":"https://www.indiatoday.in/","logo":"https://www.indiatoday.in/sites/all/themes/itg/logo.png","address":{"@type":"PostalAddress","streetAddress":"FC-8, Sector-16A Film City","addressLocality":"Noida","addressRegion":"India","postalCode":"201301","Telephone":"+91-0120-480-7100"},"sameAs":["https://www.facebook.com/indiatoday","https://twitter.com/indiatoday","https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw"," https://en.wikipedia.org/wiki/India_Today "]}</script>
 <script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -94,7 +97,13 @@ document.write(page_request.responseText)}
    .support-team .sup_like_all h4{margin-bottom: 2px}
    .support-team .sup_like_all .share_like ul li.fb_icon{padding-right: 9px}
    .support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
-   .video_area h2{background-size: 324px 55px;}
+   .video_area h2{background-size: 424px 55px;}
+   .paragraph{margin: 0px; padding: 0px 0 10px 0; font-size: 18px; line-height: 30px;}
+   .paragraph h2 a{ color:#181818; text-decoration: underline}
+   
+   @media screen and (max-width: 800px){
+    .video_area h2{background-size: 324px 55px;font-size: 12px;}
+   }
 </style>    
 
 </head>
@@ -158,11 +167,11 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="over_area">
                     <h1>News Wiz Quiz 2018: Season 3</h1>
-<p>It gives us great pleasure to announce the return of the exciting and innovative news quiz, <strong> “News Wiz” for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</p>
+<div class="paragraph">It gives us great pleasure to announce the return of the exciting and innovative news quiz, <h2><a href="https://www.indiatoday.in/newswiz/2018/">“News Wiz”</a> </h2> <strong>for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</div>
 <br>
-<p>This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your team may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
+<div class="paragraph">This year again, the 13 part series, to be recorded starting August 2018, is inviting young, bright and engaging students from around the country to take part in the preliminary test! An added twist this year is the possibility of being a <br><strong> Wild Card Entry!</strong> Even if you don’t make it through to the preliminary test and further rounds of selection, your team may have a second chance to make it to the televised rounds, through on ground live quizzes in select cities, which shall be announced later. 
 If you are students / know students from class 9 to 12 - form teams of two members and register to take part for the qualifying test for what definitely will be an exciting new season of News Wiz !
-</p>
+</div>
                       
 
                   <div class="regBtnHome"><a target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
@@ -239,8 +248,6 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                               </a> </div>
                               </div>
                               </div>
-
-
                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                               <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA3OTc4MA==" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201711/newswiz-video_647_110417093927.jpg" alt="Newswiz2">
@@ -248,15 +255,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                               </a> </div>
                               </div>
                               </div>
-
-
-
-
-
                               </div>
-                                                
-
-
                           <!--end video -->
                         </div>
                       </div>
