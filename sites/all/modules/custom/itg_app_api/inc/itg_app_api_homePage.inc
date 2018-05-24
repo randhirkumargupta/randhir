@@ -177,6 +177,7 @@ function homePageJson() {
         $data['data'] = array();
         $data_final['data'] = array();
     }
+    /*
     $cube_widget = array();
     
     $widget_detail = array();
@@ -188,7 +189,7 @@ function homePageJson() {
         $cube_widget = json_decode($cube_widget_json, TRUE);
         $data_final['cube_widget'] = $cube_widget;
     }
-
+*/
     return $data_final;
 }
 
