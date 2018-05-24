@@ -145,7 +145,7 @@ define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name', 'sitemapxml_other'));
-define('PARENT_SSO', variable_get('parent_sso'));
+//define('PARENT_SSO', variable_get('parent_sso'));
 define('FRONT_URL_VIDEO', variable_get('FRONT_URL_VIDEO'));
 define('FRONT_URL', variable_get('itg_front_url'));
 define('BACKEND_URL', variable_get('itg_backend_url'));
@@ -154,6 +154,8 @@ define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.asp
 define('taxonomy_terms_per_page_admin' , 20);
 define('SSO_COOKIE_DOMAIN' , variable_get('sso_cookie_domain'));
 define('BUCKET_FOLDER' , 'indiatoday');
+define('PARENT_SSO', 'https://staging-sso.indiatodayonline.in');
+define('SSO_URL', 'https://staging-sso.indiatodayonline.in');
 
 /*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
     $site_protocol = 'https://';
