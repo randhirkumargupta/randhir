@@ -39,6 +39,12 @@ if ($cat_id == "") {
     }
   }
 }
+
+if($_GET['test'] == 'abc') {
+	print "cat_id = ".$cat_id . "<br>";
+	print "section_tid = ".$section_tid . "<br>";
+	pr(arg());
+}	
 if (isset($cat_id) && is_numeric($cat_id)) {
   $section_tids = array_reverse(taxonomy_get_parents_all($cat_id));
   $section_tid = $section_tids[0]->tid;
