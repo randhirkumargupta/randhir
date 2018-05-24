@@ -23,7 +23,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
 
   drupal_add_js(array('itg_sso_reg' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_reg.js', array('scope' => 'footer'));
-  
+  $css = ".page-signup .form-item-forget-me label{padding-left:20px;}.page-signup .form-item-forget-me-1{position:relative; top:-55px;}";
+  drupal_add_css($css, 'inline');
   $step_ext_div = '';
  
   if (isset($form_state['step']) && ($form_state['step'] == '1')) {
