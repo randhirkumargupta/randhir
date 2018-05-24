@@ -1354,3 +1354,5 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 }
 
 @media only screen and (max-width : 767px) {.placeholder-livetv{ height: auto; } #elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
+.education-layout-page #itg-newslatter-register-form .messages.error{display:block; margin-left:16px;}
+.education-layout-page .form-item-page-country select{margin-bottom:20px; width:100%;}
