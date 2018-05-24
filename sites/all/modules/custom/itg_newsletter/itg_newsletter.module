@@ -924,6 +924,7 @@ function itg_newslatter_register_form() {
 function itg_newslatter_register_form_validate($form , &$form_state) {
   $email = $form_state['values']['email'];
   $mobile = $form_state['values']['mobile'];
+  $page_country = $form_state['values']['page_country'];
   
   if (isset($mobile) && strlen($mobile) > 0 && !preg_match('/^[0-9]{9,10}$/' , $mobile)) {
     form_set_error('mobile' , t('Your Mobile Numbers should contain 10 digits'));
@@ -939,7 +940,17 @@ function itg_newslatter_register_form_validate($form , &$form_state) {
     if (!empty($result) && $result > 0) {
       form_set_error('email' , 'This email address is already registered!');
     }
-  }
+  }  
+  if (!empty($page_country)){
+    $country_data = get_country_by_tid($page_country);
+    $is_gdpr = FALSE;
+    if(!empty($country_data->field_is_gdpr[LANGUAGE_NONE][0]['value'])){
+       $is_gdpr = TRUE;
+    }
+    if($is_gdpr){
+     form_set_error('country' ,t('We are not allowed this feature European country'));   
+    }
+  }  
 }
 
 /**
@@ -954,7 +965,7 @@ function itg_newslatter_register_form_submit(&$form , &$form_state) {
   $mobile = $form_state['values']['mobile'];
   $page_name = $form_state['values']['page_name'];
   $page_country = $form_state['values']['page_country'];
-
+  
   // Insert data in to itg_newslatter_update_details table
   $query = db_insert('itg_newslatter_update_details');
   $query->fields(array(
