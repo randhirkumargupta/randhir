@@ -2011,3 +2011,24 @@ function itg_get_amp_search_result() {
     drupal_goto($searchurl);
   }
 }
+
+/**
+ * Function load all country lists
+ */
+function get_all_country_list(){
+  $tree = taxonomy_get_tree(36);
+  $tids = array();
+  foreach ($tree as $key => $value) {
+    $tids[$value->tid] = $value->name;
+  }
+  return $tids;
+}
+
+/**
+ * Function load all country lists
+ */
+
+function get_country_by_tid($tid){
+  $term_data = taxonomy_term_load($tid);
+  return $term_data;
+}
