@@ -6,7 +6,7 @@ files:
   - source: scripts/setup/local.settings.php
     destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/httpdocs/sites/default/
   - source: scripts/setup/settings.php
-    destination: //opt/httpd/vhosts/staging-sso.indiatodayonline.in/httpdocs/sites/default/
+    destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/httpdocs/sites/default/
   - source : simplesamlphp
     destination: /opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp
 permissions:
