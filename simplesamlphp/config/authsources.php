@@ -70,15 +70,23 @@ $config = array(
  // The filesystem path of the Drupal directory.
  //'drupalroot' => '/var/www/simplesamlphp/www/drupal-sso',
  //'drupalroot' => '/var/www/html/',
- 'drupalroot' => '/opt/httpd/vhosts/staging.indiatodayonline.in/httpdocs/',
+ 'drupalroot' => '/opt/httpd/vhosts/indiatodayonline.in/httpdocs/',
  // Whether to turn on debug
  'debug' => true,
 
+<<<<<<< HEAD
+ // URL of the Drupal logout page
+ 'drupal_logout_url' => 'http://staging-sso.indiatodayonline.in/user/logout',
+
+ // URL of the Drupal login page
+ 'drupal_login_url' => 'http://staging-sso.indiatodayonline.in/user',
+=======
  // the URL of the Drupal logout page
  'drupal_logout_url' => 'https://staging-sso.indiatodayonline.in/user/logout',
 
  // the URL of the Drupal login page
  'drupal_login_url' => 'https://staging-sso.indiatodayonline.in/user',
+>>>>>>> 0370f91057c6f5459394c8f665e49125afff299a
 
  // Which attributes should be retrieved from the Drupal site.
 
