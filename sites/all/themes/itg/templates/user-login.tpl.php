@@ -54,4 +54,7 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
     <?php print drupal_render_children($form) ?>
     
   </div> <?php if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) { ?> </div> <?php } ?>
-<style>.form-item-forget-me-1 label{display:none!important;}</style>
+<style>
+.page-user form label{padding-left:20px;}
+.form-item-forget-me .form-checkboxes{position: relative; top: -21px;}
+.form-item-forget-me-1 label{display:none!important;}</style>
