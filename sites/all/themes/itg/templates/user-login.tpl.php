@@ -30,6 +30,7 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
   <div class="login-wrapper">
       
     <?php 
+          print drupal_render($form['forget_me']); 
           print drupal_render($form['name']); 
           print drupal_render($form['pass']);
           print drupal_render($form['remember_me']);
@@ -53,3 +54,7 @@ $referer = '/'.base64_encode($_SERVER['HTTP_REFERER']);
     <?php print drupal_render_children($form) ?>
     
   </div> <?php if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) { ?> </div> <?php } ?>
+<style>
+.page-user form label{padding-left:20px;}
+.form-item-forget-me .form-checkboxes{position: relative; top: -21px;}
+.form-item-forget-me-1 label{display:none!important;}</style>
