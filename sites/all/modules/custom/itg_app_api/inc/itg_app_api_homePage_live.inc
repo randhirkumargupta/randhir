@@ -177,8 +177,7 @@ function homePageJson_live() {
         $data['data'] = array();
         $data_final['data'] = array();
     }
-    $cube_widget = array();
-    
+    /*$cube_widget = array();
     $widget_detail = array();
     $cube_widget['show_widget'] = "1";
     $widget_detail[0]['type'] = "webview";
@@ -189,16 +188,18 @@ function homePageJson_live() {
     $widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl98.html";
     $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
     $cube_widget['widget_detail'] = $widget_detail;
-    $data_final['cube_widget'] = $cube_widget;
-    /*$cube_widget_config_options = fetchitg_app_master_config_internal_key('cube_widget_config_options');    
+    $data_final['cube_widget'] = $cube_widget;*/
+    
+    $cube_widget = array();    
+    $widget_detail = array();
+    $cube_widget_config_options = fetchitg_app_master_config_internal_live('cube_widget_config_options');    
     $cube_data = "";
     $cube_data = variable_get('cube_widget');
     if (($cube_widget_config_options == 1 || $cube_widget_config_options == '1') && $cube_data !="") {
         $cube_widget_json = variable_get('cube_widget');
         $cube_widget = json_decode($cube_widget_json, TRUE);
         $data_final['cube_widget'] = $cube_widget;
-    }*/
-    
+    }
 
     
 
@@ -283,22 +284,4 @@ function fetchMasterConfigData_live($key) {
         $key_val = $results[0]->config_val;
     }
     return $key_val;
-}
-function fetchitg_app_master_config_internal_key($config_val = 0) {
-    $value = "";
-    if ($config_val) {
-        $query = db_select('itg_app_master_config_internal', 'mci');
-        $query->fields('mci');
-        $query->condition('mci.config_val', $config_val, '=');
-        $db_or = db_or();
-        $db_or->condition('mci.config_key', 'homeapi_order_packages', '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_topstories', '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_categories', '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_magazines', '=');
-        $db_or->condition('mci.config_key', 'homeapi_order_polls', '=');
-        $query->condition($db_or);
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $value = $result[0]['config_key'];
-    }
-    return $value;
 }
