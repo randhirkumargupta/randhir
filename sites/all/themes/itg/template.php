@@ -855,8 +855,8 @@ function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  $attributes['src'] = file_create_url($variables['path']);
-  
+  $attributes['data-src'] = file_create_url($variables['path']);
+  $attributes['class'] = array('lazyload');
   $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
