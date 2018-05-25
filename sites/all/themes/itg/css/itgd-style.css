@@ -1462,3 +1462,10 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .image {
   opacity: 1;
   transition: 2s cubic-bezier(0.215, 0.61, 0.355, 1); }
+
+.fifa-wcup .vid-icon{position: absolute; top: 42%; left: 50%; background: url(/sites/all/themes/itg/images/sprite.png) no-repeat 0 -87px;content: "";width: 18px;height: 18px;position: absolute;}
+.fifa-wcup .dm-pic{position: relative;}
+@media only screen and (max-width: 1200px){
+.fifa-wcup .flex-prev{right: 40px;}
+.fifa-wcup .flex-prev{right: 40px;}
+}
