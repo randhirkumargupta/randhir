@@ -620,9 +620,9 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
       // Branch io code end
       
       if ($node->type == 'story') {
-        $full_modify_date = date('l, d F,Y H:i:sA', ($node->changed));
+        $full_modify_date = date('l, d F,Y h:i:sA', ($node->changed));
         $modify_date = date('D, d F,Y', ($node->changed));
-        $modify_time = date('H:iA', ($node->changed)) . ' IST';
+        $modify_time = date('h:iA', ($node->changed)) . ' IST';
         $review_type = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
