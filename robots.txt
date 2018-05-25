@@ -23,6 +23,7 @@ Disallow: /update.php
 Disallow: /UPGRADE.txt
 Disallow: /xmlrpc.php
 # Paths (clean URLs)
+Disallow: /india-sitemap.xml
 Disallow: /admin/
 Disallow: /comment/reply/
 Disallow: /filter/tips/
