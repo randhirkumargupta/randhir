@@ -13,18 +13,16 @@
         ?>
         <li <?php echo $data_tb_region_item;?> class="dont-miss-listing">
             <div class="dm-pic">
-              <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
+            <a href="<?php echo $base_url.'/'.drupal_get_path_alias('node/' . $node_data['nid']) ?>" >
                   <?php print $img; ?>
                   <span class="vid-icon"></span>
-              </a>
+            </a>
             </div>
           <div class="dm-detail">
             <?php if (!empty($node_data['title'])) : ?>    
-              <h3 title="<?php echo $node_data['title'] ?>" class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
-                <?php 
-                  echo l(mb_strimwidth($node_data['title'], 0, 70, ".."), "node/" . $node_data['nid'] , array("attributes" => array("title" =>$node_data['title'])));
-                
-                ?>
+              <h3 title="<?php echo $node_data['title'] ?>" class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">              
+                <?php echo l(mb_strimwidth(html_entity_decode(strip_tags($node_data['title'])), 0, 70, ".."), "node/".$row['nid']); ?>
+
               </h3>
             <?php endif; ?>
 
