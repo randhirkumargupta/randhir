@@ -1,4 +1,4 @@
-<?php if (!empty($data)) : global $base_url; ?>
+<?php if (!empty($rows)) : global $base_url; ?>
 <?php $data_tb_region_item = 'fifa-data-tb-region-item';  ?>
   <div class="dont-miss">
     <ul>
