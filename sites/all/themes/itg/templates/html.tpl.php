@@ -134,7 +134,18 @@
         qp('track', 'ViewContent');
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript>
+    <?php if($front_page) : ?>
     <script src='https://smedia2.intoday.in/indiatoday/resources/js/lazysizes.min.js' async></script>
+    <script>
+		var lazy = function lazy() {
+  document.addEventListener('lazyloaded', function (e)  {
+    e.target.parentNode.classList.add('image-loaded');
+    e.target.parentNode.classList.remove('loading');
+  });
+}
+lazy();
+	</script>
+	<?php endif; ?>
     <!-- End of Quora Pixel Code -->
 <?php if(($front_page) || ($type == 'story')){ ?>
 <style>
