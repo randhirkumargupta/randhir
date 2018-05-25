@@ -708,10 +708,13 @@ function itg_story_after_build($form, &$form_state) {
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';
   $user_access_array = explode(',', $user_access_id);
-  if(isset($user_access_status) && is_array($user_access_array) && count($user_access_array) > 0) {
-    if(in_array($user->uid, $user_access_array))  {
-      $settings['sef_url_access'] = TRUE;
-    }
+  if(!empty($form['#node']->nid) && isset($user_access_status)) {
+     $settings['sef_url_access'] = TRUE;
+    if(is_array($user_access_array) && count($user_access_array) > 0) {
+      if(in_array($user->uid, $user_access_array))  {
+        $settings['sef_url_access'] = FALSE;
+      }
+    }    
   }   
 
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
