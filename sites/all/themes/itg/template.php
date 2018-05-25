@@ -862,7 +862,7 @@ function itg_image($variables) {
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
   $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
 	//print_r($attributes);die;
-  return '<img' . drupal_attributes($attributes) . ' />';
+  return '<div class="image loading"><img' . drupal_attributes($attributes) . ' /></div>';
 }
 
 /**
