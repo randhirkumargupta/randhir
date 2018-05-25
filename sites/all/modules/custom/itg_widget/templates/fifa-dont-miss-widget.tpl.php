@@ -7,9 +7,8 @@
           <?php if (!empty($node_data['si_file_uri']) && file_exists($node_data['si_file_uri'])) { ?>
             <div class="dm-pic">
               <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
-                <?php //$file_uri = image_style_url("image170x127", $node_data['si_file_uri']);?>
-                <?php //$file_uri = file_create_url($node_data['si_file_uri']); ?>
                   <?php print theme('image', array('path' => $node_data['si_file_uri'], 'alt' => $node_data['field_story_small_image_alt'], 'title' => $node_data['field_story_small_image_title'])); ?>
+                  <span class="vid-icon"></span>
               </a>
             </div>
             <?php
