@@ -1387,7 +1387,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .fifa-top-story img{width: 88px; height: 49px; float: left; margin-right: 5px;}
 .fifa-wcup .fifa-top-story h3{font-size: 14px; line-height: 20px; display: block;}
 .fifa-wcup .fifa-post{float: left; width: 50%; padding:20px 10px 0; box-sizing:border-box;}
-.fifa-wcup h2.widget-title{background: url(/sites/all/themes/itg/images/hdot.png) no-repeat 0 6px; font-size: 20px; line-height: 24px; color: #000; padding-left: 47px; background-size:auto; background-color: transparent;}
+.fifa-wcup h2.widget-title{background: url(/sites/all/themes/itg/images/hdot.png) no-repeat 0 6px; font-size: 20px; line-height: 24px; color: #000; padding-left: 47px; background-size:auto; background-color: transparent;position: inherit!important;}
 .fifa-wcup h2.widget-title a{color: #000;}
 .fifa-wcup h1.widget-title{font-size: 15px; color: #9d0708; background: none}
 .fifa-wcup h1.widget-title a{color: #9d0708; text-decoration: none;}
