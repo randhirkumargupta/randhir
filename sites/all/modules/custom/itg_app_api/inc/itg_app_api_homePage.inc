@@ -71,7 +71,7 @@ function homePageJson() {
     $data['data'][5] = $data_news_lifestyle;
     $data['data'][6] = $data_news_world;
     $data['data'][7] = $data_magazine;
-    $data['cube_widget'] = $cube_widget; // cube widget
+    //$data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
 
