@@ -102,6 +102,7 @@ li .video_episode_snippets .video_inner p {padding-left: 5px !important;backgrou
    .paragraph{margin: 0px; padding: 0px 0 10px 0; font-size: 18px; line-height: 30px;}
     .paragraph h2 {font-size: 18px;    display: inline;}
    .paragraph h2 a{ color:#181818; text-decoration: underline}
+   .right_side h2.celebration-pics{background-size: 370px 56px;background-position: -11px 0px; font-size:16px;}
    
    @media screen and (max-width: 800px){
     .video_area h2{background-size: 324px 55px;font-size: 12px;}
