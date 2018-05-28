@@ -492,10 +492,6 @@ function itg_widget_block_info() {
     $blocks['fifa_top_stories_manual_widget'] = array(
       'info' => t('Widget: Fifa Top Stories Manual Widget'),
     );
-    
-    $blocks['fifa_special_watch_widget'] = array(
-      'info' => t('Widget: Fifa Watch right now video Widget'),
-    );
         
     $blocks['score_card_iframe_widget'] = array(
       'info' => t('Widget: Score Card Iframe Widget'),
@@ -1032,15 +1028,6 @@ function itg_widget_block_view($delta = '') {
           $data = get_view_nodes_form_custom_table_review_widgets('section_manual_order_widget', $cat_id, FIFA_TOP_STORIES_MANUAL_WIDGET_MAX_RANGE, FIFA_TOP_STORIES_MANUAL_WIDGET_MIN_RANGE);
           $block['content'] = theme("fifa_top_stories_manual_widget_data", array("data" => $data));
           break;
-        case 'fifa_special_watch_widget':
-            $info['widget'] = 'watch_right_now_widget';
-            $info['order'] = 'ASC';
-            $info['max_limit'] = DONT_MISS_MAX_RANGE;
-            $info['min_limit'] = DONT_MISS_MIN_RANGE;
-            $data = itg_widget_get_widget_data_data($info);
-            // p($data);
-            $block['content'] = theme("fifa_dont_miss_widget", array("data" => $data));
-            break;
          case 'score_card_iframe_widget':
           $sid = 1;
           $query = db_select('itg_score_card', 'm');
