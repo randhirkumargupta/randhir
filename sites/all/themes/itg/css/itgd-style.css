@@ -1410,7 +1410,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .auto-block-1{margin-bottom: 0 !important;}
 .fifa-wcup .movies-featured-post{padding:15px 5px; }
 .fifa-wcup .dont-miss ul li{width: 50%;}  
-.fifa-wcup .right-side{background:none;}
+.fifa-wcup .right-side{background:none; padding-left: 15px; padding-right: 15px;}
 .fifa-wcup .droppable table{background-color:#f0f0f0;}
 .fifa-wcup .sport-home-layout-page .left-side{padding-right: 10px;}
   }
@@ -1418,7 +1418,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .auto-block-2{display: none;}
 .fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}
 .fifa-wcup .padright-0{padding-right: 15px;}
-.fifa-wcup .sport-home-layout-page .left-side{padding-right: 10px;}
+.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-right:15px;}
 }
 
 /* Lazyload Test CSS */
