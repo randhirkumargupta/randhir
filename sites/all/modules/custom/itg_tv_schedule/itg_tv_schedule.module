@@ -181,7 +181,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
 
     $i = 1;
     $flag = 0;
-    $upload_date = date("d/m/Y");
+    $upload_date = date("Y/m/d");
     $itg_query = db_select('file_managed', 'f');
     $itg_result = $itg_query->condition('fid', $file_id, '=')
             ->fields('f', array('uri'))->execute()->fetchField();
@@ -190,13 +190,13 @@ function itg_tv_schedule_uploadmongo($file_id) {
     while (($data = fgetcsv($file)) !== FALSE) {
         if ($i == 1) {
             if (isItValidDate($data[1]) && isItValidDate($data[2]) && isItValidDate($data[3]) && isItValidDate($data[4]) && isItValidDate($data[5]) && isItValidDate($data[6]) && isItValidDate($data[7])) {
-                $mondate = $data[1];
-                $tuedate = $data[2];
-                $weddate = $data[3];
-                $thudate = $data[4];
-                $fridate = $data[5];
-                $satdate = $data[6];
-                $sundate = $data[7];
+                $mondate = changeDateFormat($data[1]);
+                $tuedate = changeDateFormat($data[2]);
+                $weddate = changeDateFormat($data[3]);
+                $thudate = changeDateFormat($data[4]);
+                $fridate = changeDateFormat($data[5]);
+                $satdate = changeDateFormat($data[6]);
+                $sundate = changeDateFormat($data[7]);
                 $flag = 1;
                 break;
             }
@@ -435,6 +435,17 @@ function isItValidDate($date) {
      return true;
     }
   }
+ }
+
+/**
+ * Custom method for change date format.
+ * @param string $date
+ * @return string
+ */
+
+ function changeDateFormat($date){
+  $date = DateTime::createFromFormat('d/m/Y', $date);
+  return $date->format('Y/m/d');
  }
 
  /**
