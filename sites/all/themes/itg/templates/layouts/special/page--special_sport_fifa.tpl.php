@@ -380,7 +380,7 @@ $hide_widget = '';
                             </div>
                         </div>
                         <div class="row">
-                              <div class="col-md-12 col-sm-6 itg-layout-260">
+                              <div class="col-md-12 col-sm-6 itg-layout-260 mhide">
                                   <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Points tally'); ?></strong> )</div>
                                   <div class="itg-widget">
                                       <?php									  
