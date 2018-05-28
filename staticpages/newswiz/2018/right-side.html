@@ -1,5 +1,5 @@
 <div class="right_side">
-    <!--<div class="right_advertis">
+    <div class="right_advertis">
                   
                   <div class="middle_quiz" style="box-shadow:none">
                     <div class="banner_sec marginbtm10"> <a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
@@ -7,8 +7,8 @@
                  <div class="banner_sec"><a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/Mohen-Jo-Daro-banner.gif" alt=""></a></div>
                     
                   </div> 
-                </div>-->
-    <!--<h2><a href="episodes.jsp" title="The Show"><span>Sneak peek</span></a></h2> -->
+                </div>
+   <h2><a href="episodes.jsp" title="The Show"><span>Sneak peek</span></a></h2>
     <div class="right_advertis">
                   
                   
@@ -176,3 +176,45 @@
         </div>
       </div>
     </div>
+    <script>
+     $(document).ready(function(e) {
+      var photolen  = $('.slider-year ul li').length;
+  //var twidth = $('.slider-year ul li').height();
+  var twidth = $('.timeline-slider ul li').outerHeight(true);
+  var fwidth = (twidth)*photolen;
+  $('.slider-year ul').css('height', fwidth);
+  var counters = 1;
+  
+  $('#nexttag').click(function(){
+                     
+    if(counters < photolen-4)   
+    {
+        $('.slider-year ul').animate({
+          top : '-='+twidth
+        });
+         counters += 1;
+        
+        $('#pretag').css('opacity', '1');
+    }
+    else{
+      $('#nexttag').css('opacity', '1');
+      
+    }
+  });
+  
+  
+  $('#pretag').click(function(){
+    if(counters == 1)
+    {
+        $('#pretag').css('opacity', '1');
+    }
+    else{
+      $('.slider-year ul').animate({
+          top : '+='+twidth
+        });   
+      counters -= 1;
+      $('#nexttag').css('opacity', '1');
+    }
+  });
+  });
+    </script>

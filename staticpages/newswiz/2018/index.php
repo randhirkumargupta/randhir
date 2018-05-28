@@ -407,45 +407,6 @@ $(".navLink ul li ul.flashLinkMenu").toggleClass("flashToggle");
 </script> 
 <script>
  $(document).ready(function(e) {
-    var photolen  = $('.slider-year ul li').length;
-  //var twidth = $('.slider-year ul li').height();
-  var twidth = $('.timeline-slider ul li').outerHeight(true);
-  var fwidth = (twidth)*photolen;
-  $('.slider-year ul').css('height', fwidth);
-  var counters = 1;
-  
-  $('#nexttag').click(function(){
-                     
-    if(counters < photolen-4)   
-    {
-        $('.slider-year ul').animate({
-          top : '-='+twidth
-        });
-         counters += 1;
-        
-        $('#pretag').css('opacity', '1');
-    }
-    else{
-      $('#nexttag').css('opacity', '1');
-      
-    }
-  });
-  
-  
-  $('#pretag').click(function(){
-    if(counters == 1)
-    {
-        $('#pretag').css('opacity', '1');
-    }
-    else{
-      $('.slider-year ul').animate({
-          top : '+='+twidth
-        });   
-      counters -= 1;
-      $('#nexttag').css('opacity', '1');
-    }
-  });
-  
   var photolensh  = $('.videoshow-section ul li').length;
   var twidthsh = $('.videoshow-section ul li').height();
   var fwidthsh = (twidthsh)*photolensh;
