@@ -1357,7 +1357,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 
 /* fifa world cup 2018 */
 .fifa-left-bg { background-color:#FFF;}
-#page.fifa-wcup{background: url(/sites/fifa-background-bg.jpg) no-repeat center 277px; height: auto}
+#page.fifa-wcup{background: url(/sites/all/themes/itg/images/fifa-background-bg.jpg) no-repeat center 277px; height: auto}
 .fifa-wcup #itg-block-1{background-color: #f0f0f0;}
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .droppable{height: auto;}
 .fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-1{background: none; border:0; height: auto;}
@@ -1386,7 +1386,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .fifa-top-story img{width: 88px; height: 49px; float: left; margin-right: 5px;}
 .fifa-wcup .fifa-top-story h3{font-size: 14px; line-height: 20px; display: block;}
 .fifa-wcup .fifa-post{float: left; width: 50%; padding:20px 10px 0; box-sizing:border-box;}
-.fifa-wcup h2.widget-title{background: url(/sites/hdot.png) no-repeat 0 6px; font-size: 20px; line-height: 24px; color: #000; padding-left: 47px;}
+.fifa-wcup h2.widget-title{background: url(/sites/all/themes/itg/images/hdot.png) no-repeat 0 6px; font-size: 20px; line-height: 24px; color: #000; padding-left: 47px;}
 .fifa-wcup h2.widget-title a{color: #000;}
 .fifa-wcup h1.widget-title{font-size: 15px; color: #9d0708; background: none}
 .fifa-wcup h1.widget-title a{color: #9d0708; text-decoration: none;}
