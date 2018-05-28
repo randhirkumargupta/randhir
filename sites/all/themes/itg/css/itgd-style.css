@@ -1412,13 +1412,15 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .fifa-wcup .dont-miss ul li{width: 50%;}  
 .fifa-wcup .right-side{background:none; padding-left: 15px; padding-right: 15px;}
 .fifa-wcup .droppable table{background-color:#f0f0f0;}
-.fifa-wcup .sport-home-layout-page .left-side{padding-right: 10px;}
+.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}
   }
   @media only screen and (max-width: 767px){
-.fifa-wcup .auto-block-2{display: none;}
+.fifa-wcup .auto-block-2{display: block;     padding: 10px;}
 .fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}
-.fifa-wcup .padright-0{padding-right: 15px;}
-.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-right:15px;}
+.fifa-wcup .padright-0, .fifa-wcup .padleft-0{padding-right: 15px;}
+.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}
+.fifa-wcup #block-itg-menu-manager-third-level-menu img{ width:90%; padding-top:20px; }
+.fifa-wcup .movies-featured-post { padding: 10px 10px;}
 }
 
 /* Lazyload Test CSS */
