@@ -198,6 +198,7 @@ function genrate_syndication_xml_cat_1206735() {
     
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'n.nid=ti.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
@@ -234,6 +235,7 @@ function genrate_syndication_xml_cat_1206735() {
     $query->fields('pc', array('field_primary_category_value'));
     //end
 
+	$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $tid, '=');    
     $query->condition('n.created', $start_date_timestamp, '>=');
     $query->condition('n.created', $end_date_timestamp, '<=');
@@ -292,6 +294,7 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   // select node belong from current term id or child term id
   $query = db_select('node', 'n');
   $query->join('taxonomy_index', 'ti', 'n.nid=ti.nid');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
   //join  for field value
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -305,6 +308,7 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   $query->fields('pc', array('field_primary_category_value'));
   //end
   $days_ago = strtotime(date('Y-m-d', strtotime('-1 month')));
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('ti.tid', $tid, '=');
   $query->condition('n.status', 1)->condition('n.type', 'story', '=')->orderBy('n.created', 'DESC')->groupBy('n.nid');
