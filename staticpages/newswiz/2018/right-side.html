@@ -179,10 +179,9 @@
     <script>
      $(document).ready(function(e) {
       var photolen  = $('.slider-year ul li').length;
-  //var twidth = $('.slider-year ul li').height();
-  var twidth = $('.timeline-slider ul li').outerHeight(true);
+  var twidth = $('.slider-year ul li').width();
   var fwidth = (twidth)*photolen;
-  $('.slider-year ul').css('height', fwidth);
+  $('.slider-year ul').css('width', fwidth);
   var counters = 1;
   
   $('#nexttag').click(function(){
