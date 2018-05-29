@@ -318,6 +318,14 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
     );
+    $items['itg-fifa-category-configure'] = array(
+      'title' => t('Fifa category id configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_fifa_category_id'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
   return $items;
 }
 
