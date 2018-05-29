@@ -412,34 +412,34 @@ a.active_h{background:#353333}
                 </div> -->
 
 		<div class="tally_area">
-			<h2>
-				<span>#Newswiz2</span>
-			</h2>
-			<div class="presen_area">
-				<h4>Presented By</h4>
-				<div class="presen_logo">
-					<!--<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
-				</div>
-			</div>
-			<div class="tally_info">
-				<a class="twitter-timeline" data-dnt="true"
-					href="https://twitter.com/hashtag/NewsWiz2"
-					data-widget-id="900942435630567425">#NewsWiz2 Tweets</a>
-				<script>
-					!function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
-								.test(d.location) ? 'http' : 'https';
-						if (!d.getElementById(id)) {
-							js = d.createElement(s);
-							js.id = id;
-							js.src = p + "://platform.twitter.com/widgets.js";
-							fjs.parentNode.insertBefore(js, fjs);
-						}
-					}(document, "script", "twitter-wjs");
-				</script>
+      <h2>
+        <span>#Newswiz2</span>
+      </h2>
+      <div class="presen_area">
+        <h4>Presented By</h4>
+        <div class="presen_logo">
+          
+        </div>
+      </div>
+      <div class="tally_info">
+        <a class="twitter-timeline" data-dnt="true"
+          href="https://twitter.com/hashtag/NewsWiz2"
+          data-widget-id="999268186603315205">#NewsWiz2 Tweets</a>
+        <script>
+          !function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
+                .test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+              js = d.createElement(s);
+              js.id = id;
+              js.src = p + "://platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }
+          }(document, "script", "twitter-wjs");
+        </script>
 
-			</div>
-		</div>
+      </div>
+    </div>
                       
 		<!--<h2>
 			<a href="episodes.jsp" title="Sneak peek"><span>Sneak peek</span></a>
