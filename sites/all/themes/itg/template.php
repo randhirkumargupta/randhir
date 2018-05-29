@@ -120,7 +120,7 @@ function itg_preprocess_node(&$variables) {
     if ((isset($variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value']) && $variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value'] == 1) || (isset($variables['field_multi_user_allows'][0]['value']) && $variables['field_multi_user_allows'][0]['value'] == 1)) {
        $variables['theme_hook_suggestions'][] = 'node__breaking_news_custom';
     }    
-  }
+  } 
   
 }
 
@@ -297,6 +297,13 @@ function itg_preprocess_html(&$vars) {
   global $base_url, $user;
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
+  }
+  if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
+    $preconnect_prefetch_code = array(
+      '#type' => 'markup',
+      '#markup' => get_itg_variable('dns_preconnect_prefetch'),
+    );
+    drupal_add_html_head($preconnect_prefetch_code, 'preconnect_prefetch');
   }
   if ($arg[2] != 'embed') {
   // Fact schema code adding in header for story module
@@ -491,14 +498,10 @@ function itg_preprocess_html(&$vars) {
       $_section_name = '';  
       if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
         $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
-        $section_tids = $node_obj->field_story_category['und'];
-        foreach ($section_tids as $_key => $_value) {
-           if ($_value['tid'] == $primary_cat){
-              $_section_name =  $_value['taxonomy_term']->name;
-           } 
-        }
+        $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+		$_section_name = $section_tids[0]->name;
       } 
-      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' + News | ' . variable_get('site_name');
+      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
   }
   
@@ -873,23 +876,19 @@ function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
-	 $attributes['data-src'] = file_create_url($variables['path']);	  
-	 $attributes['class'] = array('lazyload');
+  if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+    $attributes['data-src'] = file_create_url($variables['path']);
+    $attributes['src'] = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image370x208.jpg');
+    $attributes['class'] = array('lazyload');
   }
-  else{
-	  $attributes['src'] = file_create_url($variables['path']);
+  else {
+    $attributes['src'] = file_create_url($variables['path']);
   }
   $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
   $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
-  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
-	  return '<div class="image loading"><img' . drupal_attributes($attributes) . ' /></div>';
-  }
-  else{
-	  return '<img' . drupal_attributes($attributes) . ' />';
-  }
+  return '<img' . drupal_attributes($attributes) . ' />';
 }
 
 /**

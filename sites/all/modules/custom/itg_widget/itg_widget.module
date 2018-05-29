@@ -318,6 +318,14 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
     );
+    $items['itg-fifa-category-configure'] = array(
+      'title' => t('Fifa category id configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_fifa_category_id'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
   return $items;
 }
 
@@ -649,6 +657,16 @@ function itg_widget_block_view($delta = '') {
             break;
         // Trending videos ordering reordering widget case
         case 'trending_videos_widget':
+			drupal_add_js('jQuery(document).ready(function() {
+            if(!is_mobile){
+				jQuery(".trending-videos-flex").flexslider({
+				animation: "slide",
+				prevText: "",
+				nextText: "",
+				});
+			}
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
             $info['widget'] = 'trending_videos_widget';
             $info['order'] = 'ASC';
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
