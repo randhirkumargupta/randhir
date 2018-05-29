@@ -1679,7 +1679,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
     }
 
-    if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video')) {
+    if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video' || $view->current_display == 'fifa_video')) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
                 $section = arg(2);
