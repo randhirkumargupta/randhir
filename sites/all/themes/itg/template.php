@@ -122,9 +122,6 @@ function itg_preprocess_node(&$variables) {
     }    
   } 
   
-  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
-	 drupal_add_js(drupal_get_path('theme', 'itg') . "/js/lazysizes.min.js");
-  }
 }
 
 /**
