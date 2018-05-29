@@ -285,10 +285,49 @@ function generatePhotoDeatilList($id) {
     $galleryimg = $node->field_gallery_image['und'];
 
     // list array building
-    $photo_list_array = generatePhotoDetailList($galleryimg);
+    $photo_list_array = generatePhotoDetailList($galleryimg, $id);
     $data_array['photo'] = $photo_list_array;
     $data['data'] = $data_array;
     return $data;
+}
+/**
+ * 
+ * @param type $galleryimg
+ * @param type $id
+ * @return type
+ */
+function generatePhotoDetailList($galleryimg, $id) {
+$qry = "SELECT node.title AS node_title, field_collection_item_field_data_field_gallery_image.item_id AS field_collection_item_field_data_field_gallery_image_item_id, node.nid AS nid, node.created AS node_created, 'field_collection_item' AS field_data_field_images_field_collection_item_entity_type, 'field_collection_item' AS field_data_field_image_caption_field_collection_item_entity_, 'field_collection_item' AS field_data_field_photo_byline_field_collection_item_entity_t, 'node' AS field_data_field_photo_by_node_entity_type, 'field_collection_item' AS field_data_field_photo_small_image_field_collection_item_ent
+FROM 
+{node} node
+LEFT JOIN {field_data_field_gallery_image} field_data_field_gallery_image ON node.nid = field_data_field_gallery_image.entity_id AND (field_data_field_gallery_image.entity_type = 'node' AND field_data_field_gallery_image.deleted = '0')
+LEFT JOIN {field_collection_item} field_collection_item_field_data_field_gallery_image ON field_data_field_gallery_image.field_gallery_image_value = field_collection_item_field_data_field_gallery_image.item_id
+WHERE (( (node.nid = ".$id." ) )AND(( (node.status = '1') AND (node.type IN  ('photogallery')) )))
+ORDER BY node_created DESC";
+$result = db_query($qry)->fetchAll(PDO::FETCH_ASSOC);
+
+  $photo_list_array = array();
+  $listcont = 0;
+  if (count($result) > 0) {
+    // loop on gallery img
+    $output = "";
+    foreach ($result as $reskey => $resvalue) {
+      $load_collection = field_collection_item_load($resvalue['field_collection_item_field_data_field_gallery_image_item_id']);
+      $fid = $load_collection->field_images['und'][0]['fid'];
+      //$getInfoData = getInfoData($fid);
+      $img_path = completeFilePath($fid);
+      //$image_caption = $getInfoData['image_caption'];
+      //$image_courtesy = $getInfoData['image_courtesy'];
+      $field_image_caption = strip_tags($load_collection->field_image_caption['und'][0]['value']);
+      $field_credit = strip_tags($load_collection->field_credit['und'][0]['value']); 
+      $photo_list_array[$listcont]['p_id'] = "$fid";
+      $photo_list_array[$listcont]['p_image'] = "$img_path";
+      $photo_list_array[$listcont]['p_credit'] = "$field_credit";
+      $photo_list_array[$listcont]['p_caption'] = "$field_image_caption";
+      $listcont++;
+    }
+  }
+  return $photo_list_array;
 }
 
 /**
@@ -297,7 +336,7 @@ function generatePhotoDeatilList($id) {
  *
  * @return array
  */
-function generatePhotoDetailList($galleryimg) {
+function generatePhotoDetailList_bk($galleryimg) {
 
     $photo_list_array = array();
     $listcont = 0;
