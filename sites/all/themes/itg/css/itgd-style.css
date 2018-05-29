@@ -1352,7 +1352,58 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 #home-webcast-election iframe{ height:100%; }
 .placeholder-livetv{ height: auto; }
 }
-
 @media only screen and (max-width : 767px) {.placeholder-livetv{ height: auto; } #elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
 .education-layout-page #itg-newslatter-register-form .messages.error{display:block; margin-left:16px;}
 .education-layout-page .form-item-page-country select{margin-bottom:20px; width:100%;}
+
+/* fifa world cup 2018 */
+.fifa-left-bg { background-color:#FFF;}
+#page.fifa-wcup{background: url(/sites/all/themes/itg/images/fifa-background-bg.jpg) no-repeat center 277px; height: auto}
+.fifa-wcup #itg-block-1{background-color: #f0f0f0;}
+.fifa-wcup .sport-home-layout-page .itg-layout-615 .droppable{height: auto;}
+.fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-1{background: none; border:0; height: auto;}
+.fifa-wcup .featured-post{position: relative;}
+.fifa-wcup .featured-post h3{position: absolute; bottom: 5px; left: 0; padding: 17px 5px 10px; margin: 0 5px; background: linear-gradient(to bottom, transparent, #000) no-repeat bottom;background-size: 100% 100%;} 
+.fifa-wcup .movies-featured-post {background-color: #313131;padding: 17px 5px;display: inline-block;width: 100%; margin-bottom: 12px;}
+.fifa-wcup .movies-featured-post:last-child{margin-bottom: 0;}
+.fifa-wcup .movies-featured-post .sthumb{width: 88px;height: 50px;float: left;margin-right: 8px;}
+.fifa-wcup .movies-featured-post h3{font-size: 12px;line-height: 15px;color: #fff;display: block;}
+.fifa-wcup .movies-featured-post h3 a{color: #fff;}
+.fifa-wcup .movies-featured-post:hover{background-color: #a00606; cursor: pointer;}
+.fifa-wcup .headingtext{display: inline-block; width: 100%;}
+.fifa-wcup .headingtext .round01{width: 12px; height: 12px; background-color: #a10506; display: inline-block;}
+.fifa-wcup .headingtext .round02{width: 10px; height: 10px; background-color: #a10506; display: inline-block; margin: 0 3px;}
+.fifa-wcup .headingtext .round03{width: 7px; height: 7px; background-color: #a10506; display: inline-block;}
+.fifa-wcup .headingtext h2{font-size: 15px; line-height: 20px; color: #000; text-transform: uppercase;}
+.fifa-wcup .sport-home-layout-page .itg-layout-615 .auto-block-2{border:0;}
+.fifa-wcup .auto-block-2{height: auto !important; padding: 10px 10px 10px 0}
+.fifa-wcup .droppable{border:0 !important;}
+.fifa-wcup .dont-miss{background-color: #f0f0f0; display: block;padding: 10px; width: 100%; box-sizing:border-box;}
+.fifa-wcup .dont-miss ul li img{width: 147px; height: 82px;}
+.fifa-wcup .dont-miss ul li .dm-pic{width: auto;}
+.fifa-wcup .dm-detail h3{font-size: 14px; line-height: 18px;}
+.padleft-0{padding-left:0;}
+.padright-0{padding-right:0;}
+.fifa-wcup .fifa-top-story{background-color: #f0f0f0; display: inline-block; padding-bottom: 20px; width: 100%;}
+.fifa-wcup .fifa-top-story img{width: 88px; height: 49px; float: left; margin-right: 5px;}
+.fifa-wcup .fifa-top-story h3{font-size: 14px; line-height: 20px; display: block;}
+.fifa-wcup .fifa-post{float: left; width: 50%; padding:20px 10px 0; box-sizing:border-box;}
+.fifa-wcup h2.widget-title{ position: relative!important; background:transparent;font-size: 20px; line-height: 24px; color: #000; padding-left: 47px; }
+.fifa-wcup h2.widget-title:before{content:'';background-image: url(/sites/all/themes/itg/images/reddot.png); background-repeat: no-repeat; background-position: 0 6px;background-size:auto; background-color: transparent;position: absolute; background-attachment: scroll;z-index: 0; width:40px; height:20px; top:0; left:0;}
+.fifa-wcup h2.widget-title a{color: #000;}
+.fifa-wcup h1.widget-title{font-size: 15px; color: #9d0708; background: none}
+.fifa-wcup h1.widget-title a{color: #9d0708; text-decoration: none;}
+.fifa-wcup .right-side{background: #f0f0f0;padding-right: 10px; padding-left: 10px; padding-top: 10px; margin-top: 26px;}
+.fifa-wcup .right-side h2.widget-title{margin-top: 20px;}
+.fifa-wcup .sport-home-layout-page .itg-layout-225 .droppable{min-height: initial;}
+.fifa-wcup .sport-home-layout-page .itg-layout-485 .droppable{height: inherit;}
+.education-layout-page #itg-newslatter-register-form .messages.error{display:block; margin-left:16px;}
+.education-layout-page .form-item-page-country select{margin-bottom:20px; width:100%;}
+.fifa-wcup .vid-icon{position: absolute; top: 42%; left: 50%; background: url(/sites/all/themes/itg/images/sprite.png) no-repeat 0 -87px;content: "";width: 18px;height: 18px;position: absolute;}
+.fifa-wcup .dm-pic{position: relative;}
+.fifa-wcup .sport-home-layout-page .left-side{padding-left: 10px;background: #fff; padding-right: 25px;}
+.fifa-wcup  #block-itg-layout-manager-front-end-breadcrumb{ display:none; }
+@media only screen and (max-width: 1200px){.fifa-wcup .flex-prev{right: 40px;}.fifa-wcup .flex-prev{right: 40px;}}
+@media only screen and (max-width: 1024px){.fifa-wcup .tech-block_5 .flexslider .flex-direction-nav a.flex-next{ right: 0px;}.fifa-wcup .tech-block_5 .flexslider .flex-direction-nav a.flex-prev{right: 40px;}}
+@media only screen and (max-width: 768px){.fifa-wcup .fifa-points-table {margin-top: 20px;}.fifa-wcup .auto-block-1{margin-bottom: 0 !important;}.fifa-wcup .movies-featured-post{padding:15px 5px; }.fifa-wcup .dont-miss ul li{width: 50%;} .fifa-wcup .right-side{background:none; padding-left: 15px; padding-right: 15px;}.fifa-wcup .droppable table{background-color:#f0f0f0;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}}
+@media only screen and (max-width: 767px){.featured-news .featured-post.featured-post-first{ margin-bottom: 0;}.fifa-wcup .auto-block-2{display: block;     padding: 10px;}.fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}.fifa-wcup .padright-0{padding-right: 15px;}.fifa-wcup .padleft-0{padding-left: 15px;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}.fifa-wcup #block-itg-menu-manager-third-level-menu img{ width:90%; padding-top:20px; }.fifa-wcup .movies-featured-post { padding: 10px 10px;}}
