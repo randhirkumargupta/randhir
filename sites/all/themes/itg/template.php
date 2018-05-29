@@ -461,6 +461,22 @@ if($arg[0] == 'livetv') {
           '#weight' => -10,
         );
    drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
+  }
+  if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'story') {
+      $_section_name = '';  
+      if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
+        $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
+        $section_tids = $node_obj->field_story_category['und'];
+        foreach ($section_tids as $_key => $_value) {
+           if ($_value['tid'] == $primary_cat){
+              $_section_name =  $_value['taxonomy_term']->name;
+           } 
+        }
+      } 
+      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+    }		
   } 
 }
 
