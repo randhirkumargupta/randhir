@@ -46,7 +46,7 @@ function homePageJson() {
     //code for cube widget start
     $cube_widget = array();
     $widget_detail = array();
-    $cube_widget['show_widget'] = "1";
+    $cube_widget['show_widget'] = "0";
     $widget_detail[0]['type'] = "webview";
     $widget_detail[0]['title'] = "Scorecard";
     $widget_detail[0]['type_label'] = "scorecard";
@@ -71,7 +71,7 @@ function homePageJson() {
     $data['data'][5] = $data_news_lifestyle;
     $data['data'][6] = $data_news_world;
     $data['data'][7] = $data_magazine;
-    //$data['cube_widget'] = $cube_widget; // cube widget
+    $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
 
