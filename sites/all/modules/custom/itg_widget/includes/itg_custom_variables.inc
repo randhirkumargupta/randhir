@@ -53,6 +53,12 @@ function itg_custom_variables() {
     '#title' => t('DNS Preconnect Prefetch'),
     '#default_value' => get_itg_variable('dns_preconnect_prefetch'),    
   );
+  $form['enable_custom_lazyload'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Custom Lazy Load'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('enable_custom_lazyload'),
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
