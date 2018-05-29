@@ -47,8 +47,12 @@ function itg_custom_variables() {
     '#default_value' => get_itg_variable('delete_pti_xmlfile_days'),
     '#size' => 20,
     '#maxlength' => 20,
+  );  
+  $form['dns_preconnect_prefetch'] = array(
+    '#type' => 'textarea',
+    '#title' => t('DNS Preconnect Prefetch'),
+    '#default_value' => get_itg_variable('dns_preconnect_prefetch'),    
   );
-  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

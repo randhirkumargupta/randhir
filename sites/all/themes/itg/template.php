@@ -295,7 +295,13 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
-  
+  if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
+    $preconnect_prefetch_code = array(
+      '#type' => 'markup',
+      '#markup' => get_itg_variable('dns_preconnect_prefetch'),
+    );
+    drupal_add_html_head($preconnect_prefetch_code, 'preconnect_prefetch');
+  }
   if ($arg[2] != 'embed') {
   // Code started for adding header , body start , body close for ads module
 
@@ -468,12 +474,8 @@ if($arg[0] == 'livetv') {
       $_section_name = '';  
       if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
         $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
-        $section_tids = $node_obj->field_story_category['und'];
-        foreach ($section_tids as $_key => $_value) {
-           if ($_value['tid'] == $primary_cat){
-              $_section_name =  $_value['taxonomy_term']->name;
-           } 
-        }
+        $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+		$_section_name = $section_tids[0]->name;
       } 
       $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
