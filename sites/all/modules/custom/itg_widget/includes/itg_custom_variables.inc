@@ -335,7 +335,7 @@ function itg_fifa_category_id(){
   $form = array();
   $form['fifa_category_id'] = array(
     '#type' => 'textfield',
-    '#title' => t('Full url'),
+    '#title' => t('Fifa category id'),
     '#default_value' => get_itg_variable('fifa_category_id'),
   );
   $form['submit_fifa_setting'] = array(
