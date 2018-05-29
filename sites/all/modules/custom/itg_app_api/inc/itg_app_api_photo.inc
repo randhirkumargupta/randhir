@@ -298,6 +298,15 @@ function generatePhotoDeatilList($id) {
  * @return type
  */
 function generatePhotoDetailList($galleryimg, $id) {
+    
+  $view = views_get_view('photo_landing_slider');
+  $view->set_display('view_block_name');
+  $view->set_arguments(array($id));
+  // change the amount of items to show
+  //$view->set_items_per_page(4);
+  $view->pre_execute();
+  $res = $view->execute();    
+  p($res);
 $qry = "SELECT node.title AS node_title, field_collection_item_field_data_field_gallery_image.item_id AS field_collection_item_field_data_field_gallery_image_item_id, node.nid AS nid, node.created AS node_created, field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.field_gallery_order_value AS field_collection_item_field_data_field_gallery_image__field_, 'field_collection_item' AS field_data_field_images_field_collection_item_entity_type, 'field_collection_item' AS field_data_field_image_caption_field_collection_item_entity_, 'field_collection_item' AS field_data_field_photo_byline_field_collection_item_entity_t, 'node' AS field_data_field_photo_by_node_entity_type, 'field_collection_item' AS field_data_field_photo_small_image_field_collection_item_ent, 'field_collection_item' AS field_data_field_credit_field_collection_item_entity_type
 FROM 
 {node} node
@@ -306,7 +315,7 @@ LEFT JOIN {field_collection_item} field_collection_item_field_data_field_gallery
 LEFT JOIN {field_data_field_story_source_type} field_data_field_story_source_type ON node.nid = field_data_field_story_source_type.entity_id AND (field_data_field_story_source_type.entity_type = 'node' AND field_data_field_story_source_type.deleted = '0')
 INNER JOIN {field_data_field_photo_enable} field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable ON field_collection_item_field_data_field_gallery_image.item_id = field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.entity_id AND (field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.entity_type = 'field_collection_item' AND field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.deleted = '0')
 LEFT JOIN {field_data_field_gallery_order} field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order ON field_collection_item_field_data_field_gallery_image.item_id = field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.entity_id AND (field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.entity_type = 'field_collection_item' AND field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.deleted = '0')
-WHERE (( (node.nid = '1132254' ) )AND(( (node.type IN  ('photogallery')) AND (field_data_field_story_source_type.field_story_source_type_value LIKE 'migrated' ESCAPE '\\') )OR( (node.type IN  ('photogallery')) AND (field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.field_photo_enable_value = '1') )))
+WHERE (( (node.nid = ".$id." ) )AND(( (node.type IN  ('photogallery')) AND (field_data_field_story_source_type.field_story_source_type_value LIKE 'migrated' ESCAPE '\\') )OR( (node.type IN  ('photogallery')) AND (field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.field_photo_enable_value = '1') )))
 ORDER BY node_created DESC, field_collection_item_field_data_field_gallery_image__field_ ASC";
 $result = db_query($qry)->fetchAll(PDO::FETCH_ASSOC);
 
