@@ -46,7 +46,35 @@ function itg_tv_schedule_menu() {
  */
 function itg_tv_schedule_form($form, &$form_state) {
 
+  $form['submit_button_1'] = array(
+  '#type' => 'submit',
+  '#value' => t('India today'),
+  '#submit' => array('download_indiatoday_csv'),
+  '#prefix' => '<div class="csv-download-wrapper">',
+  '#limit_validation_errors' => array(),
+  );
+
+  $form['submit_button_2'] = array(
+    '#type' => 'submit',
+    '#value' => t('Aajtak'),
+    '#submit' => array('download_aajtak_csv'),
+    '#limit_validation_errors' => array(),
+  );
+  $form['submit_button_3'] = array(
+    '#type' => 'submit',
+    '#value' => t('Dilli aajtak'),
+    '#submit' => array('download_delliaajtak_csv'),
+    '#limit_validation_errors' => array(),
+  );
+  $form['submit_button_4'] = array(
+    '#type' => 'submit',
+    '#value' => t('Tez'),
+    '#submit' => array('download_tez_csv'),
+    '#suffix' => '</div>',
+    '#limit_validation_errors' => array(),
+  );
   $form['file'] = array(
+    '#name' => 'upload_csv',
     '#type' => 'managed_file',
     '#required' => TRUE,
     '#title' => t('Tv Schedule Upload'),
@@ -56,14 +84,13 @@ function itg_tv_schedule_form($form, &$form_state) {
       'file_validate_extensions' => array('csv'),
     ),
   );
-
-    $form['submit'] = array(
-      '#type' => 'submit',
-      '#prefix' => '<div class="form-actions">',
-      '#suffix' => '</div>',
-      '#value' => t('Submit'),
-    );
-    $form['#after_build'][] = 'itg_tv_schedule_after_build';
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#prefix' => '<div class="form-actions">',
+    '#suffix' => '</div>',
+    '#value' => t('Submit'),
+  );
+  $form['#after_build'][] = 'itg_tv_schedule_after_build';
 
   return $form;
 }
@@ -79,6 +106,42 @@ function itg_tv_schedule_after_build($form, &$form_state) {
               jQuery("#edit-file-upload-button").hide("");
             });', array('type' => 'inline', 'scope' => 'footer'));
   return $form;
+}
+
+/**
+ * Custom submit callback for downloading indiatoday, tez, aajtak, dilliaajtak csv file.
+ * {@inheritdoc}
+ */
+
+function download_indiatoday_csv(){
+  $filename = 'Indiatoday_tvschedule.csv';
+  $filepath = file_create_url(file_default_scheme() . '://\/tv_schedule/Indiatoday_tvschedule.csv');
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+
+function download_aajtak_csv(){
+  $filename = 'aajtak_tvschedule.csv';
+  $filepath = file_create_url(file_default_scheme() . '://\/tv_schedule/aajtak_tvschedule.csv');
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+
+function download_delliaajtak_csv(){
+  $filename = 'Dilliaajtak_tvschedule.csv';
+  $filepath = file_create_url(file_default_scheme() . '://\/tv_schedule/Dilliaajtak_tvschedule.csv');
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+function download_tez_csv(){
+  $filename = 'tez_tvschedule.csv';
+  $filepath = file_create_url(file_default_scheme() . '://\/tv_schedule/tez_tvschedule.csv');
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
 }
 
 /**
@@ -177,10 +240,10 @@ function itg_tv_schedule_time_form($form, &$form_state) {
  * @param integer $file_id
  * @return bool
  */
-function itg_tv_schedule_uploadmongo($file_id) {
-
+function itg_tv_schedule_uploadmongo($file_id, $filename) {
     $i = 1;
     $flag = 0;
+    $status = 1;
     $upload_date = date("Y/m/d");
     $itg_query = db_select('file_managed', 'f');
     $itg_result = $itg_query->condition('fid', $file_id, '=')
@@ -208,7 +271,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
         $db = mongodb();
         if (isset($db)) {
             $people = $db->tv_schedule;
-            $ret = $people->remove();
+            $ret = $people->remove(array('filetype' => $filename));
         }
         else {
             return FALSE;
@@ -220,43 +283,43 @@ function itg_tv_schedule_uploadmongo($file_id) {
             if ($i > 3) {
                 // monday corresponding value insertion
                 if ($data[1]) {
-                    $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date, "program date" => $mondate);
+                    $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date, "program date" => $mondate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
 
                 //tuesday corresponding value insertion
                 if ($data[2]) {
-                    $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date, "program date" => $tuedate);
+                    $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date, "program date" => $tuedate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
 
                 //wednesday corresponding value insertion
                 if ($data[3]) {
-                    $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date, "program date" => $weddate);
+                    $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date, "program date" => $weddate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
 
                 //thursday corresponding value insertion
                 if ($data[4]) {
-                    $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date, "program date" => $thudate);
+                    $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date, "program date" => $thudate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
 
                 //friday corresponding value insertion
                 if ($data[5]) {
-                    $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date, "program date" => $fridate);
+                    $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date, "program date" => $fridate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
 
                 //saturday corresponding value insertion
                 if ($data[6]) {
-                    $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date, "program date" => $satdate);
+                    $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date, "program date" => $satdate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
 
                 //sunday corresponding value insertion
                 if ($data[7]) {
-                    $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date, "program date" => $sundate);
+                    $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date, "program date" => $sundate, "filetype" => $filename, "status" => $status);
                     $people->insert($query);
                 }
             }
@@ -269,6 +332,19 @@ function itg_tv_schedule_uploadmongo($file_id) {
     }
     return FALSE;
 }
+
+/**
+ * Implements hook_file_validate().
+ */
+function itg_tv_schedule_file_validate($file) {
+  $allowed = array('Indiatoday_tvschedule.csv', 'aajtak_tvschedule.csv', 'Dilliaajtak_tvschedule.csv', 'tez_tvschedule.csv');
+  if (!in_array($file->filename, $allowed)) {
+    $errors = array();
+    $errors[] = 'Inappropriate csv file name';
+    return $errors;
+  }
+}
+
 
 /**
  * Custom submit callback for saving csv file.
@@ -287,7 +363,7 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
     }
     else {
         //$value = itg_tv_schedule_uploadmongo($file_id);
-        $value = itg_tv_schedule_uploadmongo($file->fid);
+        $value = itg_tv_schedule_uploadmongo($file->fid, $file->filename);
         if ($value == TRUE) {
             drupal_set_message(t('The file has been submitted successfully, Filename: @filename.', array('@filename' => $file->filename)));
         }

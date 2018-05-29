@@ -3,7 +3,7 @@ print $no_result;
 /**
  * @file
  * Theme implementation for poll form in tab display.
- * 
+ *
  */
 ?>
 <?php
@@ -44,29 +44,29 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
         <li><a <?php if(!empty(arg(1)) && arg(1) == 'SUN'){ print $class; }elseif($assign_day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
     <!-- Showing Search box and time zone drop down list -->
-     
+
     <div class="tv-schedule-form-wrapper">
        <div class="tv-schedule-date-text"><?php print render(drupal_get_form('itg_tv_schedule_date_form')); ?></div>
         <div class="fleft choose-time"><?php print render(drupal_get_form('itg_tv_schedule_time_form')); ?></div>
     <?php print render(drupal_get_form('itg_tv_schedule_search_form')); ?>
     </div>
-    
+
     <div class="tv-schedule-slide-wrapper">
     <!-- Shows time in slider upper part -->
     <div class="tv-schedule tv-schedule-time slider" style="margin-bottom: 30px;">
         <?php foreach ($output as $val): ?>
             <div>
-                <span><?php print $val['time']; ?></span>   
+                <span><?php print $val['time']; ?></span>
             </div>
         <?php endforeach; ?>
     </div>
     <!-- Shows program name in slider middle part -->
     <div class="tv-schedule tv-schedule-news slider">
         <?php foreach ($output as $val): ?>
-            <div class="tv-schedule-task"> 
+            <div class="tv-schedule-task">
                 <span><?php
-                    if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {                        
-                        echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';                       
+                    if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
+                        echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';
                     }
                     else {
                         print ucfirst($val['program']);
@@ -75,16 +75,16 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
                           print ucfirst($val['story_attach']);
                         }
                     } $counter++;
-                    ?></span>   
-            </div>    
+                    ?></span>
+            </div>
         <?php endforeach; ?>
     </div>
     <!-- Shows time in slider lower part -->
     <div class="tv-schedule tv-schedule-time slider" style="margin-top: 30px;">
         <?php foreach ($output as $val): ?>
             <div>
-                <span><?php print $val['time']; ?></span>    
-            </div>    
+                <span><?php print $val['time']; ?></span>
+            </div>
         <?php endforeach; ?>
     </div>
     </div>
@@ -108,8 +108,8 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
                          <td><b><?php print 'Program Date'; ?></b></td>
                        </tr>
                     <tbody>
-                        <?php foreach ($search as $val1): ?>  
-                        <?php $days_array = array('sun' => 'Sunday', 'mon' => 'Monday', 'tue' => 'Tuesday', 'wed' => 'Wednesday', 'thu' => 'Thursday', 'fri' => 'Friday', 'sat' => 'Saturday'); ?>  
+                        <?php foreach ($search as $val1): ?>
+                        <?php $days_array = array('sun' => 'Sunday', 'mon' => 'Monday', 'tue' => 'Tuesday', 'wed' => 'Wednesday', 'thu' => 'Thursday', 'fri' => 'Friday', 'sat' => 'Saturday'); ?>
                             <tr>
                                 <td><?php print $val1['time'].' (IST)'; ?></td>
                                 <td><?php print $days_array[strtolower($val1['day'])]; ?></td>
@@ -163,7 +163,7 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     #itg-tv-schedule-time-form .form-select{width: 200px;background-color: #252a32; border: 1px solid #252a32; color: #fff; border-radius: 5px;}
     #itg-tv-schedule-search-form > div{text-align: right; position: relative;}
     #itg-tv-schedule-search-form .form-submit{
-        background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/search.png') center center no-repeat #252a32; 
+        background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/search.png') center center no-repeat #252a32;
         border: medium none;
         border-radius: 0 5px 5px 0;
         box-shadow: 0 0 3px #000 inset;
@@ -191,7 +191,7 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
         top: 0;
         width: 100%;
         z-index: 99999;
-        
+
     }
     .popup-data{
         width: 800px;
@@ -295,8 +295,8 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     .tv-schedule-date-text .form-item{
         margin: 0;
     }
-    .tv-schedule-date-text .form-item label, 
-    .tv-schedule-date-text .form-item .description, 
+    .tv-schedule-date-text .form-item label,
+    .tv-schedule-date-text .form-item .description,
     .tv-schedule-date-text #edit-submit{
         display: none;
     }
@@ -321,9 +321,10 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     #ui-datepicker-div{z-index: 99999 !important;}
 </style>
 <script type="text/javascript">
-    
+
     var current_time_slot = <?php if($total > 0){print $total;} else{ print 0;} ?>;
     jQuery(document).on('ready', function() {
+        jQuery('body.page-tv-show #edit-date-datepicker-popup-1').attr('readonly', 'readonly');
         jQuery(".tv-schedule").slick({
             dots: false,
             infinite: false,
