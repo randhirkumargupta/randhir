@@ -300,7 +300,7 @@ function generatePhotoDeatilList($id) {
 function generatePhotoDetailList($galleryimg, $id) {
     
   $view = views_get_view('photo_landing_slider');
-  $view->set_display('view_block_name');
+  //$view->set_display('view_block_name');
   $view->set_arguments(array($id));
   // change the amount of items to show
   //$view->set_items_per_page(4);
