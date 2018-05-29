@@ -1,5 +1,6 @@
 Sitemap: https://www.indiatoday.in/sitemapindex.xml
 Sitemap: https://www.indiatoday.in/sitemap.xml
+Sitemap: https://www.indiatoday.in/india-sitemap.xml
  
 # Disallow directive
 User-agent: *
