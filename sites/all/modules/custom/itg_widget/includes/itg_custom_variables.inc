@@ -326,3 +326,39 @@ function itg_user_access_sef_url_submit($form, &$form_state){
   }
   drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
+
+/**
+* Manage fifa category id for banner. 
+* {@inheritdoc}
+*/
+function itg_fifa_category_id(){
+  $form = array();
+  $form['fifa_category_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Full url'),
+    '#default_value' => get_itg_variable('fifa_category_id'),
+  );
+  $form['submit_fifa_setting'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+  );
+  return $form;
+}
+
+/**
+* {@inheritdoc}
+*/
+function itg_fifa_category_id_submit($form, &$form_state){
+  $values = $form_state['values'];
+  unset($values['submit_button']);
+  unset($values['form_build_id']);
+  unset($values['form_token']);
+  unset($values['form_id']);
+  unset($values['op']);
+  unset($values['submit_fifa_setting']);
+  foreach ($values as $key => $value) {
+    set_itg_variable($key, $value);
+  }
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}
+
