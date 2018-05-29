@@ -657,6 +657,16 @@ function itg_widget_block_view($delta = '') {
             break;
         // Trending videos ordering reordering widget case
         case 'trending_videos_widget':
+			drupal_add_js('jQuery(document).ready(function() {
+            if(!is_mobile){
+				jQuery(".trending-videos-flex").flexslider({
+				animation: "slide",
+				prevText: "",
+				nextText: "",
+				});
+			}
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
             $info['widget'] = 'trending_videos_widget';
             $info['order'] = 'ASC';
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
