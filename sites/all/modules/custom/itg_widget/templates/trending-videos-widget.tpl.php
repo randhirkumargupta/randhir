@@ -7,18 +7,18 @@
 ?>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
-    <?php foreach ($data as $entity) {?>
+    <?php foreach ($data as $entity) {p($entity);?>
       <li <?php echo $data_tb_region_item;?> class="<?php print $entity['type'] ?> trending-videos-list">
-        <?php if (!empty($entity['si_file_uri']) && file_exists($entity['si_file_uri'])) { ?>            
+        <?php if (!empty($entity['mi_file_uri']) && file_exists($entity['mi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['nid']); ?>">
-            <?php print theme('image', array('path' => $entity['si_file_uri'], 'alt' => $entity['field_story_small_image_alt'], 'title' => $entity['field_story_small_image_title'])); ?>
+            <?php print theme('image', array('path' => $entity['mi_file_uri'], 'alt' => $entity['field_story_medium_image_alt'], 'title' => $entity['field_story_medium_image_title'])); ?>
           </a>
           <?php
         }
         else {
           ?>
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-            <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>" alt="" title="" />
+            <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
           </a>
         <?php } ?>
         <p title="<?php echo $entity['title']; ?>">
