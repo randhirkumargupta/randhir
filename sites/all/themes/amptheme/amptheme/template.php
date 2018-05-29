@@ -119,6 +119,7 @@ function amptheme_preprocess_html(&$variables) {
     '#theme' => 'amp_skip_link',
     '#skiptext' => t('Skip to main content')
   );
+  $arg = arg();
   if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
     $node_obj = menu_get_object();
     if (!empty($node_obj) && $node_obj->type == 'story') {
