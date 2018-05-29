@@ -298,6 +298,13 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  if(drupal_is_front_page()){	
+	$preconnect_prefetch_code = array(
+	'#type' => 'markup',
+	'#markup' => get_itg_variable('dns_preconnect_prefetch'),
+	);		  
+    drupal_add_html_head($preconnect_prefetch_code, 'fact_schema');
+  }
   if ($arg[2] != 'embed') {
   // Fact schema code adding in header for story module
   if(function_exists('get_fact_schema')){
