@@ -109,6 +109,19 @@ function amptheme_preprocess_html(&$variables) {
     '#theme' => 'amp_skip_link',
     '#skiptext' => t('Skip to main content')
   );
+  $arg = arg();
+  if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'story') {
+      $_section_name = '';  
+      if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
+        $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
+        $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+		$_section_name = $section_tids[0]->name;
+      } 
+      $variables['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+    }		
+  }
 }
 
 /**
