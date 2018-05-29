@@ -285,8 +285,8 @@ function generatePhotoDeatilList($id) {
     $galleryimg = $node->field_gallery_image['und'];
 
     // list array building
-    //$photo_list_array = generatePhotoDetailList($galleryimg, $id);
-    $photo_list_array = generatePhotoDetailList($galleryimg);
+    $photo_list_array = generatePhotoDetailList($galleryimg, $id);
+    //$photo_list_array = generatePhotoDetailList($galleryimg);
     $data_array['photo'] = $photo_list_array;
     $data['data'] = $data_array;
     return $data;
@@ -297,7 +297,7 @@ function generatePhotoDeatilList($id) {
  * @param type $id
  * @return type
  */
-function generatePhotoDetailList_bk($galleryimg, $id) {
+function generatePhotoDetailList($galleryimg, $id) {
 $qry = "SELECT node.title AS node_title, field_collection_item_field_data_field_gallery_image.item_id AS field_collection_item_field_data_field_gallery_image_item_id, node.nid AS nid, node.created AS node_created, 'field_collection_item' AS field_data_field_images_field_collection_item_entity_type, 'field_collection_item' AS field_data_field_image_caption_field_collection_item_entity_, 'field_collection_item' AS field_data_field_photo_byline_field_collection_item_entity_t, 'node' AS field_data_field_photo_by_node_entity_type, 'field_collection_item' AS field_data_field_photo_small_image_field_collection_item_ent
 FROM 
 {node} node
@@ -337,7 +337,7 @@ $result = db_query($qry)->fetchAll(PDO::FETCH_ASSOC);
  *
  * @return array
  */
-function generatePhotoDetailList($galleryimg) {
+function generatePhotoDetailList_bk($galleryimg) {
 
     $photo_list_array = array();
     $listcont = 0;
