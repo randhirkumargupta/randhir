@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>News Wiz Quiz 2018 Third Season By Rajdeep Sardesai and Siddhartha Basu on India Today</title>
+<title>News Wiz Quiz 2018 Third Season By Rajdeep Sardesai and Siddhartha Basu on India Today - News Wiz</title>
 <meta name="description"
-  content="News Quiz wiz 2018: News Wiz third season hosted by Rajdeep Sardesai and produced by Anita and Siddhartha Basu who also produced Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
+  content=":- News Quiz wiz 2018: News Wiz third season hosted by Rajdeep Sardesai and produced by Anita and Siddhartha Basu who also produced Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
 <meta name="keywords"
-  content="News Wiz, News Wiz Quiz 2018, News Wiz Quiz 2018 Third Season, News Wiz third season, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+  content="News Wiz 2018, news wiz contest, Nnews wiz quiz, ews Wiz, News Wiz Quiz 2018, News Wiz Quiz 2018 Third Season, News Wiz third season, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+  
   <link rel="canonical" href="https://indiatoday.in/newswiz/2018/" />
 <meta property="og:site_name" content="India Today" />
 <meta property="og:type" content="Website" />
@@ -40,6 +41,8 @@ function zd_get_placements(){
  zmt_mtag.zmt_load(zmt_mtag); 
 } 
 </script>
+
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"India Today","url":"https://www.indiatoday.in/","logo":"https://www.indiatoday.in/sites/all/themes/itg/logo.png","address":{"@type":"PostalAddress","streetAddress":"FC-8, Sector-16A Film City","addressLocality":"Noida","addressRegion":"India","postalCode":"201301","Telephone":"+91-0120-480-7100"},"sameAs":["https://www.facebook.com/indiatoday","https://twitter.com/indiatoday","https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw"," https://en.wikipedia.org/wiki/India_Today "]}</script>
 <script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -229,7 +232,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="video_area">
                           <h2>
-                            <a href="/newswiz/2017/episodes.jsp" title="Second section"><span>Second Season Highlights</span></a>
+                            <a href="/newswiz/2017/episodes.jsp" title="Second section"><span>News Wiz Second Season Highlights</span></a>
                           </h2>
                               <div class="video_info">
                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
