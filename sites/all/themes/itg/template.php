@@ -505,7 +505,7 @@ function itg_preprocess_html(&$vars) {
            } 
         }
       } 
-      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' + News | ' . variable_get('site_name');
+      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
   }
   
