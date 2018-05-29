@@ -888,12 +888,13 @@ function itg_image($variables) {
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
   $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
-  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
+  /*if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
 	  return '<div class="image loading"><img' . drupal_attributes($attributes) . ' /></div>';
   }
   else{
 	  return '<img' . drupal_attributes($attributes) . ' />';
-  }
+  }*/
+  return '<img' . drupal_attributes($attributes) . ' />';
 }
 
 /**
