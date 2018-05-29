@@ -154,7 +154,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         <div class="panel-heading" role="tab" id="headingOne">
                              <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 1.What is the eligibility criteria for participation?
+                                 1. What is the eligibility criteria for participation?
                                 </a>
                             </h4>
                         </div>
@@ -162,9 +162,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                             <div class="panel-body">
                                 <ul class="faqListQuestionOne">
                                     <li>Each team needs to apply as a team of two & continue in further stages of the contest as the same team.</li>
-                                    <li>Team members allowed will be Class 9-Class 12 students in the academic session 2018-2019. </li>
+                                    <li>Team members allowed will be from Class 9 - Class 12 students in the academic session 2018-2019.</li>
                                     <li>Team participation means that both members represent the same school. </li>
-                                    <li>Each school can nominate up to 3 teams to take part in the online test.</li>
+                                    <li>Each school can nominate up to 3 teams to take part in the Online Test.</li>
                                     <li>Both team members should be fluent in written as well as spoken English. This is essential as the quiz and all preliminary rounds leading to the main event are held in English. </li>
                                     <li>Both team members should be Indian citizens residing in India.</li>
                                 </ul>
@@ -196,20 +196,20 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                 
                         </div>
                         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">The last date of registration is 14th June 2018, and shall be subject to the terms and conditions therein. </div>
+                            <div class="panel-body">The last date of registration is 14th June 2018, and shall be subject to the terms and conditions therein.</div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingFour">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        4.	How will teams be selected?
+                        4. How will teams be selected?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                            <div class="panel-body">An online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.  </div>
+                            <div class="panel-body">An Online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.</div>
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -224,9 +224,9 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                             <div class="panel-body">
                                 <ul>
-                                    <li>	Team members will need to submit the Online team form along with their recent passport size photographs to our email id: <a href="mailto:newswiz@toknowledge.com" target="_top">newswiz@toknowledge.com</a></li>
-                                    <li>	A letter from the school nominating your team.  </li>
-                                    <li>	Correct email IDs & contact numbers where team members can be reached at during June. </li>
+                                    <li>Team members will need to submit the Online team form along with their recent passport size photographs to our email id: <a href="mailto:newswiz@toknowledge.com" target="_top">newswiz@toknowledge.com</a></li>
+                                    <li>A letter from the school nominating your team. </li>
+                                    <li>Correct email IDs & contact numbers where team members can be reached at during June. </li>
                                 </ul>
                             </div>
                         </div>
@@ -235,7 +235,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSix">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      6.	When will results be announced? Will I be told my team scores?
+                      6. When will results be announced? Will I be told my team scores?
                         </a>
                       </h4>
                 
@@ -295,7 +295,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
                             <div class="panel-body">
-                                13 part series in a one hour format – 9 prelims + 3 semifinals + 1final. 
+                                13 part series in a one hour format – 9 prelims + 3 semifinals + 1final.
                                 
                             </div>
                         </div>
@@ -311,7 +311,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
                             <div class="panel-body">
-                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Utube (Youtube)</strong> to get a sense of the format. This might be subject to change this year. 
+                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Utube (Youtube)</strong> to get a sense of the format. This might be subject to change this year.  
                             </div>
                         </div>
                     </div>
@@ -319,7 +319,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingEleven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                  11. Where and when will the recordings take place?  
+                  11. Where and when will the recordings take place?   
                         </a>
                       </h4>
                 
@@ -341,7 +341,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
                             <div class="panel-body">
-                                There will be one episode recorded and aired every week starting in August. If a team makes it to the semi finals, the same would be recorded over the months of October. If a team goes on to make it to the Finals of the series, the same would be recorded end October . 
+                                There will be one episode recorded and aired every week starting in August. If a team makes it to the semi finals, the same would be recorded over the months of October. If a team goes on to make it to the Finals of the series, the same would be recorded end October.  
                             </div>
                         </div>
                     </div>
@@ -356,7 +356,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseThirteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirteen">
                             <div class="panel-body">
-                                Teams need to arrive a day before their recording. They will need to keep the entire day free on the day of recording, and will leave the following day. E.g. if your recording is on Thursday, you would need to arrive in New Delhi on Wednesday, and tickets back to your city would be booked for Friday. 
+                                Teams need to arrive a day before their recording. They will need to keep the entire day free on the day of recording, and will leave the following day. E.g. if your recording is on Thursday, you would need to arrive in New Delhi on Wednesday, and tickets back to your city would be booked for Friday.
                             </div>
                         </div>
                     </div>
@@ -364,19 +364,19 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFourteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                 14. Does the participant have to bear all the expenses of traveling, boarding and lodging? 
+                 14. Does the participant have to bear all the expenses of traveling, boarding and lodging?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseFourteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourteen">
                             <div class="panel-body">
-                                 No, the channel bears all the expenses of the participant and the accompanying companion mentioned below which includes:
+                                 No, the channel bears all the expenses of the participant and the accompanying companion mentioned below, which includes:
                                 <ul>
-                                    <li>a.	To and fro Air / Train Travel</li>
-                                    <li>b.	Hotel stay which is nearest to the studio</li>
-                                    <li>c.	Food – fixed meals only</li>
-                                    <li>d.	For NCR contestants – to and fro the studio travel reimbursement (auto or non a/c taxi)</li>
+                                    <li>a. To and fro Air / Train Travel</li>
+                                    <li>b. Hotel stay which is nearest to the studio</li>
+                                    <li>c. Food – fixed meals only</li>
+                                    <li>d. For NCR contestants – to and fro the studio travel reimbursement (auto or non A/C taxi)</li>
                                 </ul>
                             </div>
                         </div>
@@ -385,7 +385,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFifteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
-               15. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities? 
+               15. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities?
                         </a>
                       </h4>
                 
@@ -407,7 +407,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseSixteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixteen">
                             <div class="panel-body">
-                                Yes, one or two companions will be allowed, depending on the composition of the team. If it is a mixed team, then 2 mixed companions are allowed, else only one companion’s travel and lodging will be borne by the channel. 
+                                Yes, one or two companions will be allowed, depending on the composition of the team. If it is a mixed team, then 2 mixed companions are allowed, else only one companion’s travel and lodging will be borne by the channel.  
                             </div>
                         </div>
                     </div>
@@ -437,7 +437,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
                             <div class="panel-body">
-                                The detailed terms and conditions governing the quiz show are available at:-  <a href="https://goo.gl/r3BcVm" target="_blank">https://goo.gl/r3BcVm</a>
+                                The detailed terms and conditions governing the quiz show are available at:- <a href="https://goo.gl/r3BcVm" target="_blank">https://goo.gl/r3BcVm</a>
                             </div>
                         </div>
                     </div>
