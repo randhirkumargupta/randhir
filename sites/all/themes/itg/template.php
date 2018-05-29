@@ -875,7 +875,7 @@ function itg_image($variables) {
   unset($attributes['typeof']);
   if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
 	 $attributes['data-src'] = file_create_url($variables['path']);	  
-	 $attributes['class'] = array('lazyload', 'test');
+	 $attributes['class'] = array('lazyload');
   }
   else{
 	  $attributes['src'] = file_create_url($variables['path']);
