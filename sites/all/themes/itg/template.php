@@ -873,20 +873,18 @@ function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  if(drupal_is_front_page()){
-	  $attributes['data-src'] = file_create_url($variables['path']);
+  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
+	 $attributes['data-src'] = file_create_url($variables['path']);	  
+	 $attributes['class'] = array('lazyload', 'test');
   }
   else{
 	  $attributes['src'] = file_create_url($variables['path']);
   }
-  //$attributes['src'] = file_create_url($variables['path']);
-  $attributes['class'] = array('lazyload', 'test');
   $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
   $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
-	//print_r($attributes);die;
-  if(drupal_is_front_page()){
+  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')){
 	  return '<div class="image loading"><img' . drupal_attributes($attributes) . ' /></div>';
   }
   else{
