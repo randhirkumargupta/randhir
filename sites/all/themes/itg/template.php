@@ -295,7 +295,13 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
-  
+  if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
+    $preconnect_prefetch_code = array(
+      '#type' => 'markup',
+      '#markup' => get_itg_variable('dns_preconnect_prefetch'),
+    );
+    drupal_add_html_head($preconnect_prefetch_code, 'preconnect_prefetch');
+  }
   if ($arg[2] != 'embed') {
   // Code started for adding header , body start , body close for ads module
 
