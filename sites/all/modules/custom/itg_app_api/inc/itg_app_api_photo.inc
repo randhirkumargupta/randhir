@@ -301,7 +301,7 @@ function generatePhotoDetailList($galleryimg, $id) {
 $qry = "SELECT node.title AS node_title, field_collection_item_field_data_field_gallery_image.item_id AS field_collection_item_field_data_field_gallery_image_item_id, node.nid AS nid, node.created AS node_created, 'field_collection_item' AS field_data_field_images_field_collection_item_entity_type, 'field_collection_item' AS field_data_field_image_caption_field_collection_item_entity_, 'field_collection_item' AS field_data_field_photo_byline_field_collection_item_entity_t, 'node' AS field_data_field_photo_by_node_entity_type, 'field_collection_item' AS field_data_field_photo_small_image_field_collection_item_ent
 FROM 
 {node} node
-LEFT JOIN {field_data_field_gallery_image} field_data_field_gallery_image ON node.nid = field_data_field_gallery_image.entity_id AND (field_data_field_gallery_image.entity_type = 'node' AND field_data_field_gallery_image.deleted = '0')
+LEFT JOIN {field_data_field_gallery_order} field_data_field_gallery_order ON field_data_field_gallery_order.entity_id = node.nid AND LEFT JOIN {field_data_field_gallery_image} field_data_field_gallery_image ON node.nid = field_data_field_gallery_image.entity_id AND (field_data_field_gallery_image.entity_type = 'node' AND field_data_field_gallery_image.deleted = '0')
 LEFT JOIN {field_collection_item} field_collection_item_field_data_field_gallery_image ON field_data_field_gallery_image.field_gallery_image_value = field_collection_item_field_data_field_gallery_image.item_id
 WHERE (( (node.nid = ".$id." ) )AND(( (node.status = '1') AND (node.type IN  ('photogallery')) )))
 ORDER BY field_data_field_gallery_order.field_gallery_order_value ASC";
