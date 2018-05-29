@@ -7,7 +7,7 @@
 ?>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
-    <?php foreach ($data as $entity) {p($entity);?>
+    <?php foreach ($data as $entity) {?>
       <li <?php echo $data_tb_region_item;?> class="<?php print $entity['type'] ?> trending-videos-list">
         <?php if (!empty($entity['mi_file_uri']) && file_exists($entity['mi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['nid']); ?>">
