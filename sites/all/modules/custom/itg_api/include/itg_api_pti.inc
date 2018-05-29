@@ -85,6 +85,8 @@ function itg_pti_content() {
                     $publish_date_timestamp = time();
                   }
                   $publish_date = date('Y-m-d', $publish_date_timestamp);
+                  $publish_date_time = date('Y-m-d H:i', $publish_date_timestamp);
+                  $schedule_date_time = gmdate('Y-m-d H:i', $publish_date_timestamp);
                   $title = itg_api_check_title($headline, $term_id, $publish_date);
                   if (!$title) {
                     /*$alchemyapi[$pti] = new AlchemyAPI('cd95bc47470dedf7e5002748636e78848cd0a9f4');
@@ -175,8 +177,8 @@ function itg_pti_content() {
                       $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $term_id;
                       $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $term_id;
                     }
-                    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
-                    $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $publish_date ? $publish_date : date('Y-m-d', time());
+                    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $schedule_date_time  ? $schedule_date_time  : date('Y-m-d H:i', time());
+                    $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $publish_date_time  ? $publish_date_time  : date('Y-m-d H:i', time());
                     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                     $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
                     $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);

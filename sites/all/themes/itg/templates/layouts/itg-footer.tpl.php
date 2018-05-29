@@ -84,7 +84,11 @@ global $base_url;
     </section>
 </section>
 <div id="widget-ajex-loader" style="display: none">
+	<?php if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) : ?>
+    <img class="lazyload widget-loader" data-src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/loading.gif'); ?>" alt="Loading..." />
+  <?php else : ?>
     <img class="widget-loader" src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/loading.gif'); ?>" alt="Loading..." />
+  <?php endif; ?>
 </div>
 <div id="iframe-display" style="display: none"></div>
 

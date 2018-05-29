@@ -251,8 +251,7 @@ function homePageJsonPackagelist($tid) {
         //end
 
         $query->condition('ti.tid', $tid, '=');
-        //$interval = itg_app_time_interval($tid);
-        $interval = 360;
+        $interval = itg_app_time_interval($tid);        
         $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
@@ -505,8 +504,7 @@ function homePageJsonPackagelist_bk($tid) {
         //end
 
         $query->condition('ti.tid', $tid, 'IN');
-        //$interval = itg_app_time_interval($tid);
-        $interval = 360;
+        $interval = itg_app_time_interval($tid);        
         $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
@@ -745,8 +743,7 @@ function homePageCatNewslist($tid) {
         //end
 
         $query->condition('ti.tid', $tid, '=');
-        //$interval = itg_app_time_interval($tid);
-        $interval = 360;
+        $interval = itg_app_time_interval($tid);        
         $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
@@ -928,20 +925,6 @@ function homePageCatNewslist($tid) {
 
     return $data_news;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function fetchitg_app_master_info_internaldata($tid, $key) {
     $value = "";

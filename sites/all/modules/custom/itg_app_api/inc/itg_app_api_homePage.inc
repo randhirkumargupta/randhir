@@ -35,7 +35,7 @@ function homePageJson() {
     //$business = homePageJsonNewslist_business();
     //change on 19-feb-18
     $karnataka_elections_json = array();
-    $karnataka_elections_json = itg_rapid_home_karnataka_elections_json();
+    //$karnataka_elections_json = itg_rapid_home_karnataka_elections_json();
     //change on 19-feb-18
     $itg_rapid_home_movies_json = array();
     $itg_rapid_home_movies_json = itg_rapid_home_movies_json();
@@ -46,7 +46,7 @@ function homePageJson() {
     //code for cube widget start
     $cube_widget = array();
     $widget_detail = array();
-    $cube_widget['show_widget'] = "1";
+    $cube_widget['show_widget'] = "0";
     $widget_detail[0]['type'] = "webview";
     $widget_detail[0]['title'] = "Scorecard";
     $widget_detail[0]['type_label'] = "scorecard";
@@ -64,13 +64,13 @@ function homePageJson() {
     $data['data'][0] = $data_topstories;
     //$data['data'][2] = $homePageJsonWidget_1; // CWG       
     $data['data'][1] = $itg_rapid_home_movies_json;
-    $data['data'][2] = $karnataka_elections_json; // karnataka_elections
-    $data['data'][3] = $itg_rapid_home_technology_json;
-    $data['data'][4] = $data_news_india;
-    $data['data'][5] = $itg_rapid_home_sports_json;
-    $data['data'][6] = $data_news_lifestyle;
-    $data['data'][7] = $data_news_world;
-    $data['data'][8] = $data_magazine;
+    //$data['data'][2] = $karnataka_elections_json; // karnataka_elections
+    $data['data'][2] = $itg_rapid_home_technology_json;
+    $data['data'][3] = $data_news_india;
+    $data['data'][4] = $itg_rapid_home_sports_json;
+    $data['data'][5] = $data_news_lifestyle;
+    $data['data'][6] = $data_news_world;
+    $data['data'][7] = $data_magazine;
     $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
