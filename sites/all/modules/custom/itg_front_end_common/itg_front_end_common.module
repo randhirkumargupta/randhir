@@ -268,7 +268,7 @@ function _crowdy_news_block_content() {
   $output = '';
   if (!empty(variable_get('third_party_crowdynews_block')) && empty(variable_get('disable_third_party_api'))) {
     //$output = '<div class="may-be-recommend"><h3><span>' . t('May we recommend') . '</span></h3>' . variable_get('third_party_crowdynews_block') . '</div>';
-    $output = '<div class="crody-news-content mhide" data-crowdynews-widget="IndiaToday_indiatoday-vertical">' . variable_get('third_party_crowdynews_block') . '</div>';
+    $output = '<div class="mhide"><div class="crody-news-content" data-crowdynews-widget="IndiaToday_indiatoday-vertical">' . variable_get('third_party_crowdynews_block') . '</div></div>';
   }
   else {
     $output = '';
