@@ -474,12 +474,8 @@ if($arg[0] == 'livetv') {
       $_section_name = '';  
       if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
         $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
-        $section_tids = $node_obj->field_story_category['und'];
-        foreach ($section_tids as $_key => $_value) {
-           if ($_value['tid'] == $primary_cat){
-              $_section_name =  $_value['taxonomy_term']->name;
-           } 
-        }
+        $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+		$_section_name = $section_tids[0]->name;
       } 
       $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
@@ -838,7 +834,14 @@ function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  $attributes['src'] = file_create_url($variables['path']);
+  if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+    $attributes['data-src'] = file_create_url($variables['path']);
+    $attributes['src'] = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image370x208.jpg');
+    $attributes['class'] = array('lazyload');
+  }
+  else {
+    $attributes['src'] = file_create_url($variables['path']);
+  }
   
   $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
