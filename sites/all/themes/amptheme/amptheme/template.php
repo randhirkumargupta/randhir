@@ -128,7 +128,7 @@ function amptheme_preprocess_html(&$variables) {
         $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
 		$_section_name = $section_tids[0]->name;
       } 
-      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+      $variables['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
   }
 }
