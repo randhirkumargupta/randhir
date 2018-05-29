@@ -120,8 +120,11 @@ function itg_preprocess_node(&$variables) {
     if ((isset($variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value']) && $variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value'] == 1) || (isset($variables['field_multi_user_allows'][0]['value']) && $variables['field_multi_user_allows'][0]['value'] == 1)) {
        $variables['theme_hook_suggestions'][] = 'node__breaking_news_custom';
     }    
-  }
+  } 
   
+  if(drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+	 drupal_add_js(drupal_get_path('theme', 'itg') . "/js/lazysizes.min.js");
+  }
 }
 
 /**
