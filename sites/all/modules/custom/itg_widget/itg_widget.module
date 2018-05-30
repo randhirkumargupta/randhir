@@ -539,6 +539,9 @@ function itg_widget_block_info() {
     $blocks['election_constituency_select_box'] = array(
       'info' => t('Widget: Election Constituency Select Box'),
     );
+    $blocks['trending_top_takes_videos'] = array(
+      'info' => t('Widget: Trending and Top takes videos widget'),
+    );
     
     return $blocks;
 }
@@ -656,17 +659,7 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("year_end_top_videos", array("data" => $data));
             break;
         // Trending videos ordering reordering widget case
-        case 'trending_videos_widget':
-			drupal_add_js('jQuery(document).ready(function() {
-            if(!is_mobile){
-				jQuery(".trending-videos-flex").flexslider({
-				animation: "slide",
-				prevText: "",
-				nextText: "",
-				});
-			}
-            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-            );
+        case 'trending_videos_widget':			
             $info['widget'] = 'trending_videos_widget';
             $info['order'] = 'ASC';
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
@@ -1273,6 +1266,29 @@ function itg_widget_block_view($delta = '') {
         case 'election_constituency_select_box':
           $block['content'] = theme("election_constituency_select_box", array());
           break;
+        case 'trending_top_takes_videos':
+          drupal_add_js('jQuery(document).ready(function() {
+              if(!is_mobile){
+                jQuery(".trending-videos-flex").flexslider({
+                animation: "slide",
+                prevText: "",
+                nextText: "",
+                });
+              }});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
+          $info['widget'] = 'trending_videos_widget';
+          $info['order'] = 'ASC';
+          $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
+          $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
+          $trending_data = itg_widget_get_widget_data_data($info);
+          
+          $info['widget'] = 'top_takes_video_widget';
+          $info['order'] = 'ASC';
+          $info['max_limit'] = TOP_TAKES_MAX_RANGE;
+          $info['min_limit'] = TOP_TAKES_MIN_RANGE;
+          $data_top_takess = itg_widget_get_widget_data_data($info);
+          $data = array_merge($trending_data, $data_top_takess);
+          $block['content'] = theme("trending_top_takes_videos_widget", array("data" => $data));  
     }       
     return $block;
 }
