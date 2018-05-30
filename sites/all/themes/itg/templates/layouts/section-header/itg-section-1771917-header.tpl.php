@@ -29,7 +29,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
       </div>
        
       <div class="eventGuestArea"><img src="https://smedia2.intoday.in/indiatoday/youthsummit/2017/guwahati/images/header_speaker.png" alt=""></div> -->
-      <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+      <div class="logo_it_tt"> <a href="http://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
     </div>
       <div class="clearfix"></div>
      <div class="event-datelocation-2018">
