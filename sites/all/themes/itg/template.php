@@ -802,6 +802,19 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
   
+    
+
+  //remove some js in footer for all front page    
+  $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';  
+  $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';  
+  $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
+  
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
@@ -822,20 +835,20 @@ function itg_js_alter(&$javascript) {
     unset($javascript['misc/ajax.js']);
     unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
     unset($javascript['misc/progress.js']);
-    unset($javascript);
-  }  
-
-  //remove some js in footer for all front page    
-  $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';  
-  $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';  
-  $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
-  $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
-
+    unset($javascript['sites/all/themes/itg/js/script.js']);
+    unset($javascript['sites/all/themes/itg/js/slick.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
+    unset($javascript['sites/all/themes/itg/js/ripple.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
+    unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
+    unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
+    unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
+    //unset($javascript);
+  }
+  //~ if (drupal_is_front_page()) {
+	//~ unset($javascript);
+  //~ }
+  //print_r($javascript);die;
 }
 
  /**
