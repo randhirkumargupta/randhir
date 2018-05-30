@@ -262,6 +262,9 @@ a.active_h{background:#353333}
 .navLink ul li a {
     padding: 9px 6px;
 }
+.over_area p a {
+    color: #181818;
+    text-decoration: underline;
 }
 </style>
 
