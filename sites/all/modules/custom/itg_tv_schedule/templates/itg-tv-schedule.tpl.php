@@ -38,13 +38,13 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'MON'){ print $class; }elseif($assign_day == 'MON'){ print $class; } elseif($day == 'MON' /* &&  $clicked_day == 'MON' */){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'TUE'){ print $class; }elseif($assign_day == 'TUE'){ print $class; } elseif($day == 'TUE'){ print $class; }?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'WED'){ print $class; }elseif($assign_day == 'WED'){ print $class; } elseif($day == 'WED'){ print $class; }?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'THU'){ print $class; }elseif($assign_day == 'THU'){ print $class; } elseif($day == 'THU'){ print $class; }?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'FRI'){ print $class; }elseif($assign_day == 'FRI'){ print $class; } elseif($day == 'FRI'){ print $class; }?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SAT'){ print $class; }elseif($assign_day == 'SAT'){ print $class; } elseif($day == 'SAT'){ print $class; }?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SUN'){ print $class; }elseif($assign_day == 'SUN'){ print $class; } elseif($day == 'SUN'){ print $class; }?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'MON'){ print $class; }elseif($assign_day == 'MON'){ print $class; } elseif($day == 'MON' && empty(arg(1)) /* &&  $clicked_day == 'MON' */){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'TUE'){ print $class; }elseif($assign_day == 'TUE'){ print $class; } elseif($day == 'TUE' && empty(arg(1))){ print $class; }?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'WED'){ print $class; }elseif($assign_day == 'WED'){ print $class; } elseif($day == 'WED' && empty(arg(1))){ print $class; }?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'THU'){ print $class; }elseif($assign_day == 'THU'){ print $class; } elseif($day == 'THU' && empty(arg(1))){ print $class; }?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'FRI'){ print $class; }elseif($assign_day == 'FRI'){ print $class; } elseif($day == 'FRI' && empty(arg(1))){ print $class; }?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SAT'){ print $class; }elseif($assign_day == 'SAT'){ print $class; } elseif($day == 'SAT' && empty(arg(1))){ print $class; }?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SUN'){ print $class; }elseif($assign_day == 'SUN'){ print $class; } elseif($day == 'SUN' && empty(arg(1))){ print $class; }?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
     <!-- Showing Search box and time zone drop down list -->
 
