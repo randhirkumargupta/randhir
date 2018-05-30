@@ -801,8 +801,26 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+  //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+  //unset($javascript['https://vuukle.com/js/vuukle.js']);
+  //unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
   
+  if (drupal_is_front_page()) {
+    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
     
+    //remove some js in footer for home page
+    $javascript['misc/jquery.once.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
+    $javascript['misc/ajax.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']['scope'] = 'footer';
+    $javascript['misc/progress.js']['scope'] = 'footer';
+    
+  }  
 
   //remove some js in footer for all front page    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
@@ -814,41 +832,7 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';  
   $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
   $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
-  
-  if (drupal_is_front_page()) {
-    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
-    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
-    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
-    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
-    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
-    
-    //remove some js in footer for home page
-    /*$javascript['misc/jquery.once.js']['scope'] = 'footer';
-    $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
-    $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
-    $javascript['misc/ajax.js']['scope'] = 'footer';
-    $javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']['scope'] = 'footer';
-    $javascript['misc/progress.js']['scope'] = 'footer';*/
-    unset($javascript['misc/jquery.once.js']);
-    unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
-    unset($javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']);
-    unset($javascript['misc/ajax.js']);
-    unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
-    unset($javascript['misc/progress.js']);
-    unset($javascript['sites/all/themes/itg/js/script.js']);
-    unset($javascript['sites/all/themes/itg/js/slick.js']);
-    unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
-    unset($javascript['sites/all/themes/itg/js/ripple.js']);
-    unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
-    unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
-    unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
-    unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
-    //unset($javascript);
-  }
-  //~ if (drupal_is_front_page()) {
-	//~ unset($javascript);
-  //~ }
-  //print_r($javascript);die;
+
 }
 
  /**
