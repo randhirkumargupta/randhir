@@ -195,10 +195,47 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                     </div>
                     <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwenty">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
+                         3. Where do I apply?
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseTwenty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwenty">
+                            <div class="panel-body">To register, click on any one of the following links:
+                            <ul class="faqListQuestionOne">
+                                    <li><a href="http://www.newswiz.in">www.newswiz.in </a></li>
+                                    <li><a href="https://goo.gl/3VApJr">https://goo.gl/3VApJr</a></li>                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFive">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                       4. What needs to be submitted for Registration? 
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>Team members will need to submit the online team form along with their recent passport size photographs to our email id: <a href="mailto:registration@newswiz.in" target="_top">registration@newswiz.in</a></li>
+                                    <li>A letter from the school nominating your team.</li>
+                                    <li>Correct email IDs & contact numbers where team members can be reached at during June.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingThree">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                         3. When does registration close?
+                         5. When does registration close?
                         </a>
                       </h4>
                 
@@ -211,7 +248,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFour">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        4. How will teams be selected?
+                        6. How will teams be selected?
                         </a>
                       </h4>
                 
@@ -220,37 +257,19 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                             <div class="panel-body">An Online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.</div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFive">
-                             <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                       5.	What needs to be submitted after I get selected?
-                        </a>
-                      </h4>
-                
-                        </div>
-                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>Team members will need to submit the Online team form along with their recent passport size photographs to our email id: <a href="mailto:newswiz@toknowledge.com" target="_top">newswiz@toknowledge.com</a></li>
-                                    <li>A letter from the school nominating your team. </li>
-                                    <li>Correct email IDs & contact numbers where team members can be reached at during June. </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingSix">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      6. When will results be announced? Will I be told my team scores?
+                      7. When will results be announced? Will I be told my team scores?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                             <div class="panel-body">
-                               Results will be announced by July 5, 2018. Team scores will not be revealed. 
+                               Results will be announced by July 2018. Team scores will not be revealed. 
                             </div>
                         </div>
                     </div>
@@ -258,7 +277,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSeven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                    7. How many teams can take part in the TV rounds per school? 
+                    8. How many teams can take part in the TV rounds per school? 
                         </a>
                       </h4>
                 
@@ -273,7 +292,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingeight">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
-                    8. What information will I need to provide if selected for the TV Rounds?
+                    9. What information will I need to provide if selected for the TV Rounds?
                         </a>
                       </h4>
                 
@@ -296,7 +315,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingNine">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                   9. What is the competition format?
+                   10. What is the competition format?
                         </a>
                       </h4>
                 
@@ -312,7 +331,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingTen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                    10. What is the quiz format? 
+                    11. What is the quiz format? 
                         </a>
                       </h4>
                 
@@ -327,7 +346,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingEleven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                  11. Where and when will the recordings take place?   
+                  12. Where and when will the recordings take place?   
                         </a>
                       </h4>
                 
@@ -342,7 +361,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingTwelve">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-                  12. How many recordings will there be per team in the competition? 
+                  13. How many recordings will there be per team in the competition? 
                         </a>
                       </h4>
                 
@@ -357,7 +376,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingThirteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
-                 13. How long does a team need to stay in New Delhi? How long will a recording take?
+                 14. How long does a team need to stay in New Delhi? How long will a recording take?
                         </a>
                       </h4>
                 
@@ -372,7 +391,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFourteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                 14. Does the participant have to bear all the expenses of traveling, boarding and lodging?
+                 15. Does the participant have to bear all the expenses of traveling, boarding and lodging?
                         </a>
                       </h4>
                 
@@ -393,7 +412,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFifteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
-               15. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities?
+               16. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities?
                         </a>
                       </h4>
                 
@@ -408,7 +427,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSixteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
-                 16. Will a contestant be allowed to bring a companion? If yes will they be paid for their travel and lodging?
+                 17. Will a contestant be allowed to bring a companion? If yes will they be paid for their travel and lodging?
                         </a>
                       </h4>
                 
@@ -423,7 +442,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSeventeen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
-                17. I have a query. Whom can I ask?
+                18. I have a query. Whom can I ask?
                         </a>
                       </h4>
                 
@@ -438,13 +457,13 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingEighteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">
-                18. Where can I read detailed terms and conditions governing News Wiz?
+                19. Where can I read detailed terms and conditions governing News Wiz?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
-                            <div class="panel-body">
+                            <div class="panel-body">                                
                                 The detailed terms and conditions governing the quiz show are available at:- <a href="https://goo.gl/r3BcVm" target="_blank">https://goo.gl/r3BcVm</a>
                             </div>
                         </div>
@@ -453,7 +472,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingNeneteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNeneteen" aria-expanded="false" aria-controls="collapseNeneteen">
-                19. Will the results be posted online?
+                20. Will the results be posted online?
                         </a>
                       </h4>
                 
