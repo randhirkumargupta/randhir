@@ -57,9 +57,9 @@ function itg_common_init() {
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js', array('scope' => 'footer'));
   }
   
-  if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+  /*if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
     drupal_add_js(drupal_get_path('theme', 'itg') . "/js/lazysizes.min.js", array('scope' => 'header'));
-  }
+  }*/
 }
 
 /**
