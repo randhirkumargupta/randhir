@@ -299,14 +299,13 @@ function generatePhotoDeatilList($id) {
  */
 function generatePhotoDetailList($galleryimg, $id) {
     
-  $view = views_get_view('photo_landing_slider');
-  //$view->set_display('view_block_name');
-  $view->set_arguments(array($id));
-  // change the amount of items to show
-  //$view->set_items_per_page(4);
-  $view->pre_execute();
-  $res = $view->execute();    
-  p($res);
+  
+$view = views_get_view('photo_landing_slider');
+//$view->set_current_page(5);
+//$view->set_items_per_page(10);
+$view->execute();
+$objects = $view->result;    
+  p($objects);
 $qry = "SELECT node.title AS node_title, field_collection_item_field_data_field_gallery_image.item_id AS field_collection_item_field_data_field_gallery_image_item_id, node.nid AS nid, node.created AS node_created, field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.field_gallery_order_value AS field_collection_item_field_data_field_gallery_image__field_, 'field_collection_item' AS field_data_field_images_field_collection_item_entity_type, 'field_collection_item' AS field_data_field_image_caption_field_collection_item_entity_, 'field_collection_item' AS field_data_field_photo_byline_field_collection_item_entity_t, 'node' AS field_data_field_photo_by_node_entity_type, 'field_collection_item' AS field_data_field_photo_small_image_field_collection_item_ent, 'field_collection_item' AS field_data_field_credit_field_collection_item_entity_type
 FROM 
 {node} node
