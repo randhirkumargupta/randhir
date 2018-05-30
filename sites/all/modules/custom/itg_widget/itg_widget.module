@@ -1268,13 +1268,30 @@ function itg_widget_block_view($delta = '') {
           break;
         case 'trending_top_takes_videos':
           drupal_add_js('jQuery(document).ready(function() {
-              if(!is_mobile){
+              
                 jQuery(".trending-videos-flex").flexslider({
                 animation: "slide",
                 prevText: "",
                 nextText: "",
+                after: function(slider){
+                    if(slider.currentSlide < 3){
+                      var t_text = jQuery("#treanding_top_takes_title").attr("data-trending-title");
+                      if(t_text !== undefined){
+                        jQuery("#treanding_top_takes_title").html(t_text);
+                      }else{
+                        jQuery("#treanding_top_takes_title").html("Treanding videos");
+                      }
+                    }else{
+                      var t_text = jQuery("#treanding_top_takes_title").attr("data-toptakes-title");
+                      if(t_text !== undefined){
+                        jQuery("#treanding_top_takes_title").html(t_text);
+                      }else{
+                        jQuery("#treanding_top_takes_title").html("Top Takes Video");
+                      }
+                    }
+                  }
                 });
-              }});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+              });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
             );
           $info['widget'] = 'trending_videos_widget';
           $info['order'] = 'ASC';
