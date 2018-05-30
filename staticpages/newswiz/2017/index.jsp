@@ -190,7 +190,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="navLink">
               <ul>
 
-                <li><a href="/newswiz/2017/index.jsp" title="home" class="active_h"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li><a href="/newswiz/2018/" title="home" class="active_h"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                <!-- <li><a href="newswiz-rules.jsp" class="" title="Rules">Rules &amp; Regulations</a></li>-->
 
                 <li><a href="/newswiz/2017/newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
@@ -200,8 +200,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
               <!--  <li><a href="/newswiz/2017/all-teams.jsp" class='' title="Teams">Teams</a></li> -->
 
                  <li><a href="/newswiz/2017/episodes.jsp" title="Show Videos" class="">Show Videos</a></li>
-                 <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
- <li><a href="/newswiz/2017/question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
+                 <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>
+ <li><a href="/newswiz/2017/question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>-->
 
 
 
@@ -618,7 +618,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <h2><a href="/newswiz/2017/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                  <h2><a href="/newswiz/2018/" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
                 </div>
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2017/newswiz-rules.jsp" title="Rules">Rules &amp; Regulations</a></h2>
