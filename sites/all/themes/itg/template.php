@@ -801,9 +801,6 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
-  //unset($javascript['https://vuukle.com/js/vuukle.js']);
-  //unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
   
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
@@ -813,13 +810,19 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
     
     //remove some js in footer for home page
-    $javascript['misc/jquery.once.js']['scope'] = 'footer';
+    /*$javascript['misc/jquery.once.js']['scope'] = 'footer';
     $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
     $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
     $javascript['misc/ajax.js']['scope'] = 'footer';
     $javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']['scope'] = 'footer';
-    $javascript['misc/progress.js']['scope'] = 'footer';
-    
+    $javascript['misc/progress.js']['scope'] = 'footer';*/
+    unset($javascript['misc/jquery.once.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']);
+    unset($javascript['misc/ajax.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
+    unset($javascript['misc/progress.js']);
+    unset($javascript);
   }  
 
   //remove some js in footer for all front page    
