@@ -1288,7 +1288,9 @@ function itg_widget_block_view($delta = '') {
           $info['min_limit'] = TOP_TAKES_MIN_RANGE;
           $data_top_takess = itg_widget_get_widget_data_data($info);
           $data = $trending_data + $data_top_takess;
-          var_dump($trending_data, $data_top_takess, $data);die;
+          if(isset($_GET['debug'])){
+           var_dump($trending_data, $data_top_takess, $data);die; 
+          }
           $block['content'] = theme("trending_top_takes_videos_widget", array("data" => $data));  
     }       
     return $block;
