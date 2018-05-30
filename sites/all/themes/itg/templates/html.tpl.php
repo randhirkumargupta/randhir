@@ -174,6 +174,9 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 
 </style>
 <?php } ?>
+<?php if($front_page) : $js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); ?>
+<script type="text/javascript" async src="<?php print $js_path; ?>"></script>
+<?php endif; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>
