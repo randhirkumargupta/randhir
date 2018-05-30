@@ -300,7 +300,7 @@ function generatePhotoDeatilList($id) {
 function generatePhotoDetailList($galleryimg, $id) {
     $view = views_get_view('photo_landing_slider');
 $args = array(1132254);
-$output = $view->execute($args);
+$output = $view->execute('block_1', $args);
 
 p($output);
   
