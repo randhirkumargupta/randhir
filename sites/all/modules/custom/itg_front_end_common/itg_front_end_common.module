@@ -376,7 +376,7 @@ if (empty(variable_get('disable_third_party_api'))) {
  * {@inheritdoc}
  */
 function itg_front_end_common_node_view($node, $view_mode, $langcode) {
-  global $base_url;
+  global $base_url, $theme;
   
   $is_fron_page = drupal_is_front_page();
   if ($is_fron_page) {
@@ -643,7 +643,9 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           '#weight' => -970,
         );
         
-        drupal_add_html_head($review_type, 'review_type');
+        if($theme == 'itg'){
+		  drupal_add_html_head($review_type, 'review_type');
+		}
         drupal_add_html_head($review_type_0, 'review_type_0');
         drupal_add_html_head($review_type_1, 'review_type_1');
         drupal_add_html_head($review_type_2, 'review_type_2');
