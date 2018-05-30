@@ -275,7 +275,19 @@ a.active_h{background:#353333}
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="over_area">
-											<p>News Wiz second season was hosted by India's best known and award winning news journalist, anchor and author, Rajdeep Sardesai, News Wiz, in its first season, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. The show saw over 350 teams take an on line test and 27 top scoring teams from the top schools of the country, participate for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of such landmark shows as Kaun Banega Crorepati. The top scoring teams will participate in the grand finale and will go on to win and become News Wiz 2017.</p>
+											<p>It gives us great pleasure to announce the return of
+                        the exciting and innovative news quiz, <a href="https://www.indiatoday.in/newswiz/2018/">"News Wiz"</a> for a
+                        second season! Hosted by India's best known and award
+                        winning news journalist, anchor and author, Rajdeep
+                        Sardesai, News Wiz, in its first season, showcased the top
+                        quizzing talent in the country, with edge of the seat
+                        excitement and nail biting finishes. The show saw over 350
+                        teams take an on line test and 27 top scoring teams from the
+                        top schools of the country, participate for the television
+                        rounds. Produced by Anita and Siddhartha Basu, the
+                        successful producers of such landmark shows as Kaun Banega
+                        Crorepati. The top scoring teams will participate in the
+                        grand finale and will go on to win and become News Wiz 2017.</p>
 
 											<!--<div class="regBtnHome">
 	<a target="_blank" href="https://goo.gl/forms/bomdkX8K6GGHf63z1">Register Here</a>
