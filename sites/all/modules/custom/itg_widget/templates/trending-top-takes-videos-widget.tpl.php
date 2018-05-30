@@ -4,7 +4,7 @@
   if(drupal_is_front_page()){
 	$data_tb_region_item = 'data-tb-region-item';  
   }
-  p($data);
+  //p($data);
 ?>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
