@@ -379,6 +379,27 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                 </a> </div>
                             </div>
                           </div>
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA4OTQ0Ng==" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/Video_Extra_Large_Image/wiz-video_647_111817093241.jpg?Fqa_EgsCPlVt15T9o_tWKMUUjDfNvwYA" alt="Newswiz2">
+                              <p>Grand Finale: Vadodara's Navrachana School wins News Wiz 2017</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTY1NQ==" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201710/newswiz-video-647_102117100223.jpg" alt="Newswiz2">
+                              <p>Semifinal 1: Srinagar's DPS emerges winner, enters semi-finals</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA3OTc4MA==" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201711/newswiz-video_647_110417093927.jpg" alt="Newswiz2">
+                              <p>Semifinal 2: Vadodara's Navrachana School moves into final</p>
+                              </a> </div>
+                              </div>
+                              </div>
 
                                                 </div>
 
