@@ -1491,6 +1491,7 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
           ->condition('year', $year)
           ->execute();
       // bestcolleges_themebasedranking
+     /*
       $num_updated = db_update('bestcolleges_themebasedranking')
           ->fields(array('CollegeNewNid' => $node->nid))
           ->condition('collegeid', $collegeid)
@@ -1503,6 +1504,8 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
           ->condition('collegeid', $collegeid)
           ->condition('year', $year)
           ->execute();
+      
+      */
     }
     drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
@@ -2201,13 +2204,13 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
   $line = $cleaned_line = array_map('base64_decode', $line);
 
   $stream = $line[1];
-  $streamid = $line[2];
+  $streamid = '0'; // $line[2];
   $collegeid = $line[3];
   $CollegeNewNid = $line[4];
   $year = $line[5];
   $rank = $line[6];
   $published = $line[7];
-  $created_date = $line[8];
+  $created_date = date('Y-m-d H:i:s'); // !empty($line[8]) ? $line[8] : date('Y-m-d H:i:s');
   $bestcollege_status = variable_get('bestcollege_status', '');
 
   try {
