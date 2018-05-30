@@ -1287,8 +1287,7 @@ function itg_widget_block_view($delta = '') {
           $info['max_limit'] = TOP_TAKES_MAX_RANGE;
           $info['min_limit'] = TOP_TAKES_MIN_RANGE;
           $data_top_takess = itg_widget_get_widget_data_data($info);
-          $trending_data = $trending_data + $data_top_takess;
-          $data = $trending_data;
+          $data = array_merge($trending_data, $data_top_takess);
           if(isset($_GET['debug'])){
            var_dump($trending_data, $data_top_takess, $data);die; 
           }
