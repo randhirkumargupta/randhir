@@ -92,7 +92,12 @@ function itg_bestcolleges_menu() {
 /**
  * Remove bestcolleges node
  */
+
 function bestcollege_remove() {
+  db_query("DELETE FROM {bestcolleges_ranking} WHERE year = '2018'");
+}
+
+function bestcollege_remove_old() {
   $query = db_select('node', 'n');
   $query->condition('n.type', 'bestcolleges', '=');
   $query->fields('n', array('nid'));
