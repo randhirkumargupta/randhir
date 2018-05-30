@@ -297,10 +297,12 @@ function generatePhotoDeatilList($id) {
  * @param type $id
  * @return type
  */
-function generatePhotoDetailList($galleryimg, $id) {
+function generatePhotoDetailList_try($galleryimg, $id) {
     $view = views_get_view('photo_landing_slider');
 $args = array(1132254);
-$output = $view->preview('block_1', $args);
+//$output = $view->preview('block_1', $args);
+$view->set_arguments($args);
+$output = $view->execute();
 
 p($output);
   
@@ -352,7 +354,7 @@ $result = db_query($qry)->fetchAll(PDO::FETCH_ASSOC);
  *
  * @return array
  */
-function generatePhotoDetailList_bk($galleryimg) {
+function generatePhotoDetailList($galleryimg) {
 
     $photo_list_array = array();
     $listcont = 0;
