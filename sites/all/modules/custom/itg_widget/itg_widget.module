@@ -1273,6 +1273,23 @@ function itg_widget_block_view($delta = '') {
                 animation: "slide",
                 prevText: "",
                 nextText: "",
+                after: function(slider){
+                    if(slider.currentSlide < 3){
+                      var t_text = jQuery("#treanding_top_takes_title").attr("data-trending-title");
+                      if(t_text !== undefined){
+                        jQuery("#treanding_top_takes_title").html(t_text);
+                      }else{
+                        jQuery("#treanding_top_takes_title").html("Treanding videos");
+                      }
+                    }else{
+                      var t_text = jQuery("#treanding_top_takes_title").attr("data-toptakes-title");
+                      if(t_text !== undefined){
+                        jQuery("#treanding_top_takes_title").html(t_text);
+                      }else{
+                        jQuery("#treanding_top_takes_title").html("Top Takes Video");
+                      }
+                    }
+                  }
                 });
               }});', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
             );
