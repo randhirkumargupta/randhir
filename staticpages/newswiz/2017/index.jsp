@@ -275,7 +275,19 @@ a.active_h{background:#353333}
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="over_area">
-											<p>News Wiz second season was hosted by India's best known and award winning news journalist, anchor and author, Rajdeep Sardesai, News Wiz, in its first season, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. The show saw over 350 teams take an on line test and 27 top scoring teams from the top schools of the country, participate for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of such landmark shows as Kaun Banega Crorepati. The top scoring teams will participate in the grand finale and will go on to win and become News Wiz 2017.</p>
+											<p>It gives us great pleasure to announce the return of
+                        the exciting and innovative news quiz, <a href="https://www.indiatoday.in/newswiz/2018/">"News Wiz"</a> for a
+                        second season! Hosted by India's best known and award
+                        winning news journalist, anchor and author, Rajdeep
+                        Sardesai, News Wiz, in its first season, showcased the top
+                        quizzing talent in the country, with edge of the seat
+                        excitement and nail biting finishes. The show saw over 350
+                        teams take an on line test and 27 top scoring teams from the
+                        top schools of the country, participate for the television
+                        rounds. Produced by Anita and Siddhartha Basu, the
+                        successful producers of such landmark shows as Kaun Banega
+                        Crorepati. The top scoring teams will participate in the
+                        grand finale and will go on to win and become News Wiz 2017.</p>
 
 											<!--<div class="regBtnHome">
 	<a target="_blank" href="https://goo.gl/forms/bomdkX8K6GGHf63z1">Register Here</a>
@@ -379,6 +391,27 @@ If you are students / know students from class 9 to 12 - form teams of two membe
                                 </a> </div>
                             </div>
                           </div>
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA4OTQ0Ng==" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/Video_Extra_Large_Image/wiz-video_647_111817093241.jpg?Fqa_EgsCPlVt15T9o_tWKMUUjDfNvwYA" alt="Newswiz2">
+                              <p>Grand Finale: Vadodara's Navrachana School wins News Wiz 2017</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTY1NQ==" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201710/newswiz-video-647_102117100223.jpg" alt="Newswiz2">
+                              <p>Semifinal 1: Srinagar's DPS emerges winner, enters semi-finals</p>
+                              </a> </div>
+                              </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                              <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA3OTc4MA==" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201711/newswiz-video_647_110417093927.jpg" alt="Newswiz2">
+                              <p>Semifinal 2: Vadodara's Navrachana School moves into final</p>
+                              </a> </div>
+                              </div>
+                              </div>
 
                                                 </div>
 
