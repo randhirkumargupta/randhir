@@ -50,7 +50,7 @@ function itg_tv_schedule_form($form, &$form_state) {
   '#type' => 'submit',
   '#value' => t('India today'),
   '#submit' => array('download_indiatoday_csv'),
-  '#prefix' => '<div class="csv-download-wrapper">',
+  '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
   '#limit_validation_errors' => array(),
   );
 
@@ -90,6 +90,16 @@ function itg_tv_schedule_form($form, &$form_state) {
     '#suffix' => '</div>',
     '#value' => t('Submit'),
   );
+
+
+  $form['submit_preview_publish'] = array(
+  '#type' => 'submit',
+  '#value' => t('Publish'),
+  '#submit' => array('itg_publish_fun'),
+  '#prefix' => '<div class="preview-publish-wrapper float-right"><a target="_blank" href="'.FRONT_URL.'/tv-schedule?action=preview"><input class="preview form-submit" type="button" id="edit-button-preview" name="preview" value="Preview"></a>',
+  '#suffix' => '</div>',
+  '#limit_validation_errors' => array(),
+  );
   $form['#after_build'][] = 'itg_tv_schedule_after_build';
 
   return $form;
@@ -103,10 +113,33 @@ function itg_tv_schedule_form($form, &$form_state) {
  */
 function itg_tv_schedule_after_build($form, &$form_state) {
   drupal_add_js('jQuery(document).ready(function() {
-              jQuery("#edit-file-upload-button").hide("");
-            });', array('type' => 'inline', 'scope' => 'footer'));
+    jQuery("#edit-file-upload-button").hide("");
+  });', array('type' => 'inline', 'scope' => 'footer'));
   return $form;
 }
+
+
+/**
+ * Custom submit callback for Publish.
+ * {@inheritdoc}
+ */
+
+function itg_publish_fun(){
+  $db = mongodb();
+  if (isset($db)) {
+    $people = $db->tv_schedule;
+    $people->update(
+    array("status" => 0),
+    array('$set' => array('status' => 1)),
+    array("multiple" => true)
+  );
+    drupal_set_message(t('Published successfully!'));
+  }
+  else {
+    drupal_set_message(t('Mongo DB connection failed!'));
+  }
+}
+
 
 /**
  * Custom submit callback for downloading indiatoday, tez, aajtak, dilliaajtak csv file.
@@ -243,7 +276,7 @@ function itg_tv_schedule_time_form($form, &$form_state) {
 function itg_tv_schedule_uploadmongo($file_id, $filename) {
     $i = 1;
     $flag = 0;
-    $status = 1;
+    $status = 0;
     $upload_date = date("Y/m/d");
     $itg_query = db_select('file_managed', 'f');
     $itg_result = $itg_query->condition('fid', $file_id, '=')

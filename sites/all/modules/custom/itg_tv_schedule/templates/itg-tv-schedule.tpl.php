@@ -1,5 +1,9 @@
 <?php
 print $no_result;
+
+// echo  "$total -- <pre>";
+// print_r($output);
+// die;
 /**
  * @file
  * Theme implementation for poll form in tab display.
@@ -10,7 +14,6 @@ print $no_result;
 $date = date("Y-m-d H:i:s");
 $time = new DateTime($date);
 $current_day = $time->format('Y/m/d');
-$counter = 0;
 $day = strtoupper(date("D"));
 global $base_url;
 $mon = $base_url . "/tv-show/MON";
@@ -35,13 +38,13 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
 <!-- Listing shows and days option -->
 <div class="tv-schedule-parent">
     <ul class="no-bullet schedule-days">
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'MON'){ print $class; }elseif($assign_day == 'MON'){ print $class; } elseif($day == 'MON' && $clicked_day == 'MON'){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'TUE'){ print $class; }elseif($assign_day == 'TUE'){ print $class; } ?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'WED'){ print $class; }elseif($assign_day == 'WED'){ print $class; } ?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'THU'){ print $class; }elseif($assign_day == 'THU'){ print $class; } ?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'FRI'){ print $class; }elseif($assign_day == 'FRI'){ print $class; } ?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SAT'){ print $class; }elseif($assign_day == 'SAT'){ print $class; } ?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
-        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SUN'){ print $class; }elseif($assign_day == 'SUN'){ print $class; } ?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'MON'){ print $class; }elseif($assign_day == 'MON'){ print $class; } elseif($day == 'MON' /* &&  $clicked_day == 'MON' */){ print $class; } ?> href="<?php print $mon; ?>"><?php print t('Monday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'TUE'){ print $class; }elseif($assign_day == 'TUE'){ print $class; } elseif($day == 'TUE'){ print $class; }?> href="<?php print $tue; ?>"><?php print t('Tuesday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'WED'){ print $class; }elseif($assign_day == 'WED'){ print $class; } elseif($day == 'WED'){ print $class; }?>href="<?php print $wed; ?>"><?php print t('Wednesday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'THU'){ print $class; }elseif($assign_day == 'THU'){ print $class; } elseif($day == 'THU'){ print $class; }?>href="<?php print $thu; ?>"><?php print t('Thursday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'FRI'){ print $class; }elseif($assign_day == 'FRI'){ print $class; } elseif($day == 'FRI'){ print $class; }?>href="<?php print $fri; ?>"><?php print t('Friday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SAT'){ print $class; }elseif($assign_day == 'SAT'){ print $class; } elseif($day == 'SAT'){ print $class; }?>href="<?php print $sat; ?>"><?php print t('Saturday'); ?></a></li>
+        <li><a <?php if(!empty(arg(1)) && arg(1) == 'SUN'){ print $class; }elseif($assign_day == 'SUN'){ print $class; } elseif($day == 'SUN'){ print $class; }?>href="<?php print $sun; ?>"><?php print t('Sunday'); ?></a></li>
     </ul>
     <!-- Showing Search box and time zone drop down list -->
 
@@ -54,34 +57,43 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     <div class="tv-schedule-slide-wrapper">
     <!-- Shows time in slider upper part -->
     <div class="tv-schedule tv-schedule-time slider" style="margin-bottom: 30px;">
-        <?php foreach ($output as $val): ?>
+        <?php foreach ($time_slider as $val): ?>
             <div>
                 <span><?php print $val['time']; ?></span>
             </div>
         <?php endforeach; ?>
     </div>
+
+
     <!-- Shows program name in slider middle part -->
-    <div class="tv-schedule tv-schedule-news slider">
-        <?php foreach ($output as $val): ?>
-            <div class="tv-schedule-task">
-                <span><?php
-                    if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
-                        echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';
-                    }
-                    else {
-                        print ucfirst($val['program']);
-                        print '<br/>';
-                        if(!empty($val['story_attach'])) {
-                          print ucfirst($val['story_attach']);
+    <?php foreach ($output as $key => $data): $counter = 0;?>
+        <div class="tv-schedule tv-schedule-news slider <?php print str_replace('.', '-', $key); ?>">
+            <?php foreach ($data as $val): ?>
+                <div class="tv-schedule-task">
+                    <span><?php
+                        if ($total == $counter && $day == $val['day'] && $current_day == $val['program date']) {
+                            echo '<a href = "livetv">' . ucfirst($val['program']) . '</a>';
                         }
-                    } $counter++;
-                    ?></span>
-            </div>
-        <?php endforeach; ?>
-    </div>
+                        else {
+                            print ucfirst($val['program']);
+                            // print '<br/>';
+                            // if(!empty($val['story_attach'])) {
+                            //   print ucfirst($val['story_attach']);
+                            // }
+                        } $counter++;
+                        ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endforeach; ?>
+
+
+
+
+
     <!-- Shows time in slider lower part -->
     <div class="tv-schedule tv-schedule-time slider" style="margin-top: 30px;">
-        <?php foreach ($output as $val): ?>
+        <?php foreach ($time_slider as $val): ?>
             <div>
                 <span><?php print $val['time']; ?></span>
             </div>
@@ -321,10 +333,12 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     #ui-datepicker-div{z-index: 99999 !important;}
 </style>
 <script type="text/javascript">
-
+    jQuery(window).load(function(){
+        jQuery("#edit-date-datepicker-popup-1").attr('disabled','disabled');
+    });
     var current_time_slot = <?php if($total > 0){print $total;} else{ print 0;} ?>;
     jQuery(document).on('ready', function() {
-        jQuery('body.page-tv-show #edit-date-datepicker-popup-1').attr('readonly', 'readonly');
+        jQuery("#edit-date-datepicker-popup-1").attr('readonly','readonly');
         jQuery(".tv-schedule").slick({
             dots: false,
             infinite: false,
