@@ -248,7 +248,7 @@ function itg_seo_node_data($node) {
     //}
     
     drupal_add_html_head($markup, 'sd_json');
-    drupal_add_html_head($story_markup, 'sd_json');
+    drupal_add_html_head($story_markup, 'sd_json1');
     
     if (is_array($node->field_story_configurations[LANGUAGE_NONE]) && !empty($node->field_story_configurations[LANGUAGE_NONE])) {
         $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];
