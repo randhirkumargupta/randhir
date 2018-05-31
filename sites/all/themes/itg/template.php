@@ -826,7 +826,26 @@ function itg_js_alter(&$javascript) {
      unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
      unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
      unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
-     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);    
+     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']); 
+     
+     unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
+     unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
+     unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
+     unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+     unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
+     unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+     unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
+     unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
+     unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
+     unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
+     
+     unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
+     unset($javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']);
+     unset($javascript['misc/progress.js']);
+     unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
+     unset($javascript['misc/ajax.js']);
+     unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
+     unset($javascript['modules/user/user.js']);   
   }
 
 }
