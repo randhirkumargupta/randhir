@@ -811,7 +811,7 @@ function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $n
         $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
         $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;        
         try {
-            node_save((object) $node);
+            node_save($node);
             $success = TRUE;
         } catch (Exception $e) {           
             $success = FALSE;
