@@ -804,15 +804,12 @@ function itg_rapid_nid_by_url($canonical_url){
  * @param type $nid
  */
 function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid) {
-    $node = new stdClass();
+    $node = node_load($nid);
     $success = "";
     if ($nid) {
         $node->field_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
         $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
-        $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
-        $node->nid = $nid;
-        node_object_prepare($node);
-        $node = node_submit($node); // Prepare node for saving
+        $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;        
         try {
             node_save((object) $node);
             $success = TRUE;
