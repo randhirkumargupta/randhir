@@ -762,13 +762,31 @@ function itg_report_api_fba_update(){
     //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $data = $params['data'];
-    foreach ($data as $key => $value) {
-        p($value);
+    foreach ($data as $key => $value) {        
         $canonical_url = $value['canonical_url'];
         $fba_id = $value['id'];
         $publish_status = $value['publish_status'];
         $published = $value['published'];
+        $nid = itg_rapid_nid_by_url($canonical_url);
     }
     
+}
+/**
+ * itg_rapid_nid_by_url
+ * @param type $canonical_url
+ * @return type $nid
+ */
+function itg_rapid_nid_by_url($canonical_url){
+    $nid = 0;
+    if($canonical_url){
+        $canonical_url_ar = explode("/",$canonical_url);
+        $last_key = count($canonical_url_ar) - 1;
+        $last_key_val = $canonical_url_ar[$last_key];
+        $last_key_ex_ar = explode("-",$last_key_val);
+        $nid_key = count($last_key_ex_ar) - 4;
+        $nid = $last_key_ex_ar[$nid_key];
+    }
+    echo $nid; die();
+    return $nid;
 }
 
