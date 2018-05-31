@@ -114,7 +114,7 @@ function itg_ugc_send_follow_story_content_mail($node) {
 
           $to = itg_get_user_email_by_id($follow_user);
           if (!empty($to)) {
-            $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+            $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
           }
         }
       }
