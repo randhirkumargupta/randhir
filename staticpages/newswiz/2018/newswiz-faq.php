@@ -338,7 +338,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                         <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
                             <div class="panel-body">
-                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Utube (Youtube)</strong> to get a sense of the format. This might be subject to change this year.  
+                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Youtube</strong> to get a sense of the format. This might be subject to change this year.  
                             </div>
                         </div>
                     </div>
@@ -391,7 +391,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFourteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                 15. Does the participant have to bear all the expenses of traveling, boarding and lodging?
+                 15. Does the participant have to bear all the expenses of travelling, boarding and lodging?
                         </a>
                       </h4>
                 
@@ -480,7 +480,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div id="collapseNeneteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNeneteen">
                             <div class="panel-body">
                                  Due to privacy concerns and integrity of the show, we cannot list the winners on any public medium. And participants who have been selected by us are also being informed separately over the phone/mail.
-                                 <p>Click on Next button to register yourselves</p>
+                                 <div class="regBtnHome"><a target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
                             </div>
                         </div>
                     </div>
