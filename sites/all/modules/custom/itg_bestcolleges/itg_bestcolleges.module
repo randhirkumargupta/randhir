@@ -1117,7 +1117,7 @@ function csvImporter_form() {
  * @param array $form_state
  */
 function csvImporter_validate_fileupload(&$form, &$form_state) {
-   $file = file_save_upload('file', array(
+   $file = file_save_upload('csvfile', array(
         'file_validate_extensions' => array('csv'), // Validate extensions.
     ));
   
