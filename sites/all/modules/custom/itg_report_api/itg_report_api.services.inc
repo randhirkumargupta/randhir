@@ -313,7 +313,34 @@ function itg_report_api_resource() {
         ),
       ),
     ),
-  );
+      
+      // fba_update custom resource declaration.....
+        'fba_update' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves fba_update schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_report_api',
+                        'name' => 'itg_report_api.services',
+                    ),
+                    'callback' => 'itg_report_api_fba_update',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'fba_id',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'fba_id',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    );
 
   return $api;
 }
@@ -723,5 +750,17 @@ function itg_report_api_detail() {
 
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
+}
+/**
+ * Call back function for fba_update API
+ * @pram $_POST
+ *
+ * @return array - The processed information array.
+ */
+function itg_report_api_fba_update(){
+    $HTTP_RAW_POST_DATA;
+    //$params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    p($params);
 }
 
