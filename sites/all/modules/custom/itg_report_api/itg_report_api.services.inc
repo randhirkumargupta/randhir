@@ -761,6 +761,14 @@ function itg_report_api_fba_update(){
     $HTTP_RAW_POST_DATA;
     //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    p($params);
+    $data = $params['data'];
+    foreach ($data as $key => $value) {
+        p($value);
+        $canonical_url = $value['canonical_url'];
+        $fba_id = $value['id'];
+        $publish_status = $value['publish_status'];
+        $published = $value['published'];
+    }
+    
 }
 
