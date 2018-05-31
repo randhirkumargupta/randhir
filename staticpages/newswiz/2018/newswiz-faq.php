@@ -161,7 +161,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         <div class="panel-heading" role="tab" id="headingOne">
                              <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 1.What is the eligibility criteria for participation?
+                                 1. What is the eligibility criteria for participation?
                                 </a>
                             </h4>
                         </div>
@@ -169,9 +169,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                             <div class="panel-body">
                                 <ul class="faqListQuestionOne">
                                     <li>Each team needs to apply as a team of two & continue in further stages of the contest as the same team.</li>
-                                    <li>Team members allowed will be Class 9-Class 12 students in the academic session 2018-2019. </li>
+                                    <li>Team members allowed will be from Class 9 - Class 12 students in the academic session 2018-2019.</li>
                                     <li>Team participation means that both members represent the same school. </li>
-                                    <li>Each school can nominate up to 3 teams to take part in the online test.</li>
+                                    <li>Each school can nominate up to 3 teams to take part in the Online Test.</li>
                                     <li>Both team members should be fluent in written as well as spoken English. This is essential as the quiz and all preliminary rounds leading to the main event are held in English. </li>
                                     <li>Both team members should be Indian citizens residing in India.</li>
                                 </ul>
@@ -188,41 +188,34 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
-                            As long as you and your team member are in the same school between  Class 9-Class 12 students in the academic session 2018-2019 you may register and try your luck again! You are free to make a new team also with a new member incase your previous team partner has graduated from school.  </div>
+                           As long as you and your team member are in the same school between Class 9-Class 12 students in the academic 
+session 2018-2019, you may register and try your luck again! You are free to make a new team also with a new member, in case your previous team partner has graduated or unavailable for the contest. 
+ </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
+                        <div class="panel-heading" role="tab" id="headingTwenty">
                              <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                         3.	Where do I apply?
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
+                         3. Where do I apply?
                         </a>
                       </h4>
                 
                         </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">Click on the attached link to fill out the Application form- Please give your link and ours here ours is 
-                            <a href="http://www.newswiz.in">www.newswiz.in</a>   - our page Register here link to be given.</div>
+                        <div id="collapseTwenty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwenty">
+                            <div class="panel-body">To register, click on any one of the following links:
+                            <ul class="faqListQuestionOne">
+                                    <li><a href="http://www.newswiz.in">www.newswiz.in </a></li>
+                                    <li><a href="https://goo.gl/3VApJr">https://goo.gl/3VApJr</a></li>                                    
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                             <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        4.	When does registration close?
-                        </a>
-                      </h4>
-                
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                            <div class="panel-body">Teams need to fill out the online entry form; last date of registration is end  <strong>June 2018,</strong> and shall be subject to the terms and conditions therein. </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
+                   <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingFive">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                       5.	What needs to be submitted?
+                       4. What needs to be submitted for Registration? 
                         </a>
                       </h4>
                 
@@ -230,27 +223,52 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                             <div class="panel-body">
                                 <ul>
-                                    <li>
-                                    •	Online team form, team members also need to email us recent passport size photographs of each member.Email id: <a href="mailto:registration@newswiz.in" target="_top"> registration@newswiz.in</a> – New email id to be created.</li>
-                                    <li>•	A letter from the school nominating your team. </li>
-                                    <li>•	The shortlisted teams post the online written test will have to face a live video call test with 3 questions to be answered, to enable selection of the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer.</li>
-                                    <li>•	Correct email ID’s & contact numbers where team members can be reached during June. </li>
+                                    <li>Team members will need to submit the online team form along with their recent passport size photographs to our email id: <a href="mailto:registration@newswiz.in" target="_top">registration@newswiz.in</a></li>
+                                    <li>A letter from the school nominating your team.</li>
+                                    <li>Correct email IDs & contact numbers where team members can be reached at during June.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                         5. When does registration close?
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">The last date of registration is 14th June 2018, and shall be subject to the terms and conditions therein.</div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        6. How will teams be selected?
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">An Online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingSix">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      6.	How will teams be selected?
+                      7. When will results be announced? Will I be told my team scores?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                             <div class="panel-body">
-                                An online test will be conducted at the end of June to shortlist the teams invited, as the first stage. Further to that, the shortlisted teams, post the online written test will have to face a live video call test with 3 questions to be answered, to enable selection of the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to arrive at the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail. 
+                               Results will be announced by July 2018. Team scores will not be revealed. 
                             </div>
                         </div>
                     </div>
@@ -258,14 +276,14 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         <div class="panel-heading" role="tab" id="headingSeven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                     7.	When will results be announced? Will I be told my team scores?
+                    8. How many teams can take part in the TV rounds per school? 
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
                             <div class="panel-body">
-                                Results will be announced by July. Team scores will not be revealed 
+                                Twenty-seven teams across the country will be selected. 1 team entry per school will be selected. However, there is a possibility of a second team from the same school making it through to the preliminary rounds with a “wild card entry”. Details of the same will be posted in due course.
                             </div>
                         </div>
                     </div>
@@ -273,31 +291,15 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         <div class="panel-heading" role="tab" id="headingeight">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
-                    8.	How many teams can take part in the TV rounds per school? 
+                    9. What information will I need to provide if selected for the TV Rounds?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseeight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingeight">
                             <div class="panel-body">
-                                Twenty Seven Teams across the country will be selected. 1 team entry per school will be selected. However there is a possibility of a second team from the same school making it to a “wild card entry” into the preliminary rounds as well. Details of the same will be posted in due course.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingNine">
-                             <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                   9.	What information will I need to provide if selected for the TV Rounds?
-                        </a>
-                      </h4>
-                
-                        </div>
-                        <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
-                            <div class="panel-body">
-                                The Principal of the school will be required to provide the
-following information:
-                                <ul>
+                                The Principal of the school will be required to provide and validate the following information:
+                               <ul>
                                     <li>School Name, Address, pin code and PAN</li>
                                     <li>Name of the Principal, contact number and email ID</li>
                                     <li>Name of the Teacher accompanying the student and contact details</li>
@@ -309,17 +311,33 @@ following information:
                         </div>
                     </div>
                     <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingNine">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                   10. What is the competition format?
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+                            <div class="panel-body">
+                                13 part series in a one hour format – 9 prelims + 3 semifinals + 1final.
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                    10.	What is the competition format? 
+                    11. What is the quiz format? 
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
                             <div class="panel-body">
-                                13 part series in a one hour format– 9 prelims+3 semifinals+1final. 
+                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Youtube</strong> to get a sense of the format. This might be subject to change this year.  
                             </div>
                         </div>
                     </div>
@@ -327,14 +345,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingEleven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                  11.	What is the quiz format? 
+                  12. Where and when will the recordings take place?   
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseEleven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEleven">
                             <div class="panel-body">
-                                Format of the quiz shall be shared in due course further to teams being selected. 
+                                Recordings will take place at the India Today TV studios in Noida from August 2018 onward.
                             </div>
                         </div>
                     </div>
@@ -342,14 +360,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingTwelve">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-                  12.	Where and when will the recordings take place? 
+                  13. How many recordings will there be per team in the competition? 
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
                             <div class="panel-body">
-                                Recordings will take place in the India Today TV studios in Noida from August 2018 onwards.
+                                There will be one episode recorded and aired every week starting in August. If a team makes it to the semi finals, the same would be recorded over the months of October. If a team goes on to make it to the Finals of the series, the same would be recorded end October.  
                             </div>
                         </div>
                     </div>
@@ -357,14 +375,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingThirteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
-                 13.	How many recordings will there be per team in the competition? 
+                 14. How long does a team need to stay in New Delhi? How long will a recording take?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseThirteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirteen">
                             <div class="panel-body">
-                                There will be one episode recorded and aired every week starting in August. In the event a team makes it to the semi finals, the same would be recorded in the months of October & November. If a team goes on to make it to the Finals of the series the same would be recorded in the month of November. 
+                                Teams need to arrive a day before their recording. They will need to keep the entire day free on the day of recording, and will leave the following day. E.g. if your recording is on Thursday, you would need to arrive in New Delhi on Wednesday, and tickets back to your city would be booked for Friday.
                             </div>
                         </div>
                     </div>
@@ -372,14 +390,20 @@ following information:
                         <div class="panel-heading" role="tab" id="headingFourteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                 14.	How long does a team need to stay in New Delhi? How long will a recording take?
+                 15. Does the participant have to bear all the expenses of travelling, boarding and lodging?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseFourteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourteen">
                             <div class="panel-body">
-                                Teams need to arrive the day before their recording. They will need to keep the entire day free on the day of the recording and will leave the following day. For e.g.: if you’re recording is on Thursday, you would need to arrive in New Delhi on Wednesday and tickets back to your city would be booked for Friday. 
+                                 No, the channel bears all the expenses of the participant and the accompanying companion mentioned below, which includes:
+                                <ul>
+                                    <li>a. To and fro Air / Train Travel</li>
+                                    <li>b. Hotel stay which is nearest to the studio</li>
+                                    <li>c. Food – fixed meals only</li>
+                                    <li>d. For NCR contestants – to and fro the studio travel reimbursement (auto or non A/C taxi)</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -387,20 +411,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingFifteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
-                15.	Does the participant have to bear all the expenses of traveling, boarding and lodging? 
+               16. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseFifteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFifteen">
                             <div class="panel-body">
-                                No, the channel bears all the expenses of the participant and the accompanying companion mentioned below which includes:
-                                <ul>
-                                    <li>a.	To and fro Air / Train Travel</li>
-                                    <li>b.	Hotel stay which is nearest to the studio</li>
-                                    <li>c.	Food – fixed meals only</li>
-                                    <li>d.	For NCR contestants – to and fro the studio travel reimbursement (auto or non a/c taxi)</li>
-                                </ul>
+                               We try our level best from our end to provide the contestant a safe and pleasant journey. Usually the contestants reach New Delhi a day prior to the scheduled shoot date to avoid delays such as fog/poor visibility. Also if the said flight is cancelled at the last minute, we try and arrange an alternative flight for the contestant to reach New Delhi. A contestant in such cases can reach New Delhi on the day of the shoot. But we can’t guarantee things which are beyond our control, such as riots or natural calamities, as shifting a contestant from one episode to another involves disrupting pre-planned schedules of other contestants. 
                             </div>
                         </div>
                     </div>
@@ -408,14 +426,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingSixteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
-                 16.	What if the contestants flight to Delhi gets delayed or cancelled due to fog / poor visibility, riots or natural calamities etc?
+                 17. Will a contestant be allowed to bring a companion? If yes will they be paid for their travel and lodging?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSixteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixteen">
                             <div class="panel-body">
-                                We try our level best from our end to provide the contestant a safe and pleasant journey. Usually the contestants reach New Delhi a day prior to the scheduled shoot date to avoid delays such as fog / poor visibility. Also if the said flight is cancelled at the last minute we try and arrange an alternative flight for the contestant to reach New Delhi. A contestant in such cases can reach New Delhi on the day of the shoot. But we can’t guarantee things which are beyond our control such as riots or natural calamities, as shifting a contestant from one episode to another involves disrupting preplanned schedules of other contestants. 
+                                Yes, one or two companions will be allowed, depending on the composition of the team. If it is a mixed team, then 2 mixed companions are allowed, else only one companion’s travel and lodging will be borne by the channel.  
                             </div>
                         </div>
                     </div>
@@ -423,14 +441,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingSeventeen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
-                17.	Will a contestant be allowed to bring a companion? If yes will they be paid for their travel and lodging?
+                18. I have a query. Whom can I ask?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSeventeen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventeen">
                             <div class="panel-body">
-                                Yes, one or two companions will be allowed depending on the composition of the team, if mixed teams then you have 2 mixed companions that are allowed, else one companion’s travel and lodging will be borne by the channel. 
+                                Please send your queries to <a href="mailto:newswiz@toknowledge.com" target="_top">newswiz@toknowledge.com</a> and we will try to revert as soon as we can. 
                             </div>
                         </div>
                     </div>
@@ -438,14 +456,14 @@ following information:
                         <div class="panel-heading" role="tab" id="headingEighteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">
-                18.	I have a query. Whom can I ask?
+                19. Where can I read detailed terms and conditions governing News Wiz?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
-                            <div class="panel-body">
-                                           Please send your queries to registration@newswiz.in and we will try to revert as              soon as we can. Alternately, you can refer to our terms and conditions on ……….  
+                            <div class="panel-body">                                
+                                The detailed terms and conditions governing the quiz show are available at:- <a href="https://goo.gl/r3BcVm" target="_blank">https://goo.gl/r3BcVm</a>
                             </div>
                         </div>
                     </div>
@@ -453,33 +471,19 @@ following information:
                         <div class="panel-heading" role="tab" id="headingNeneteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNeneteen" aria-expanded="false" aria-controls="collapseNeneteen">
-                19.	Where can I read detailed terms and conditions governing News Wiz?
+                20. Will the results be posted online?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseNeneteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNeneteen">
                             <div class="panel-body">
-                                         The detailed terms and conditions governing the quiz show will be available on………
+                                 Due to privacy concerns and integrity of the show, we cannot list the winners on any public medium. And participants who have been selected by us are also being informed separately over the phone/mail.
+                                 <div class="regBtnHome" style="margin-top: 5px;"><a style="color: #fff; text-decoration:none;" target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwenty">
-                             <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
-                20.	Will the results be posted online?
-                        </a>
-                      </h4>
-                
-                        </div>
-                        <div id="collapseTwenty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwenty">
-                            <div class="panel-body">
-                                      Due to privacy concerns and integrity of the show, we cannot list the winners on any public medium. And participants who have been selected by us are also being informed separately on the phone.
-                            </div>
-                        </div>
-                    </div>
-                    
+                   
                     
                     
                   </div>
