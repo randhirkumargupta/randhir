@@ -19,7 +19,12 @@ function itg_tv_schedule_permission() {
  */
 function itg_tv_schedule_menu() {
   $items = array();
-
+  $items['tv'] = array(
+    'title' => 'Upload Tv Schedule',
+    'page callback' => 'itg_tv_schedule_channel_listing',
+    'access arguments' => array('itg_tv_schedule_form'),
+    'type' => MENU_CALLBACK,
+  );
   $items['tv/%'] = array(
     'title' => 'Upload Tv Schedule',
     'page callback' => 'drupal_get_form',
@@ -27,7 +32,6 @@ function itg_tv_schedule_menu() {
     'access arguments' => array('itg_tv_schedule_form'),
     'type' => MENU_CALLBACK,
   );
-
   $items['tv-show'] = array(
     'title' => 'Tv Schedule',
     'page callback' => 'tv_schedule_listing',
@@ -39,6 +43,22 @@ function itg_tv_schedule_menu() {
 
   return $items;
 }
+
+/**
+ * Implementation of Tv channel listing()
+ * {@inheritdoc}
+ */
+
+function itg_tv_schedule_channel_listing(){
+  $con = '<div class="tv-channek-wrapper"><ul class="channel-listing">';
+  $con .= '<li><a href="/tv/indiatoday" class="indiatoday-channel" >Indiatoday Channel</a></li>';
+  $con .= '<li><a href="/tv/aajtak" class="aajtak-channel" >Aajtak Channel</a></li>';
+  $con .= '<li><a href="/tv/dilliaajtak" class="dilliaajtak-channel" >Dilliaajtak Channel</a></li>';
+  $con .= '<li><a href="/tv/tez" class="tez-channel" >Tez Channel</a></li>';
+  $con .= '</ul></div>';
+  return $con;
+}
+
 
 /**
  * Implementation of hook_form()
