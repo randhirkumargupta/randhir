@@ -1,8 +1,10 @@
 <?php 
   $data_tb_region_item = '';
   if(drupal_is_front_page()){
-	$data_tb_region_item = 'data-tb-region-item';  
+	 $data_tb_region_item = 'data-tb-region-item';  
   }
+  $fifa_morenews_text = !empty(get_itg_variable('fifa_morenews_text')) ? get_itg_variable('fifa_morenews_text') : '';
+  $fifa_morenews_url = !empty(get_itg_variable('fifa_morenews_url')) ? get_itg_variable('fifa_morenews_url') : '';
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -44,6 +46,13 @@
                     </div>
             <?php } ?>
             </div>
+            <?php 
+            if(!empty($fifa_morenews_text) && !empty($fifa_morenews_url)) {
+            ?>
+            <div class="fifa_more_news"><a href="<?php print $fifa_morenews_url; ?>"><?php print $fifa_morenews_text; ?></a></div>
+            <?php 
+            }
+            ?>
         </div>    
     </div>
 </div>
