@@ -49,7 +49,7 @@
             <?php 
             if(!empty($fifa_morenews_text) && !empty($fifa_morenews_url)) {
             ?>
-            <div class="fifa_more_news"><a href="<?php print $fifa_morenews_url; ?>"><?php print $fifa_morenews_text; ?></a></div>
+            <div class="fifa_more_news"><a href="<?php print $fifa_morenews_url; ?>"><?php print $fifa_morenews_text; ?>  <i class="fa fa-chevron-right" aria-hidden="true"></i></a></div>
             <?php 
             }
             ?>
