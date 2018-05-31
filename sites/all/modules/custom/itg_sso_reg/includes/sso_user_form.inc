@@ -167,7 +167,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#prefix' => '<div id="unpass" class="col-xs-6">',
         '#suffix' => '</div></div>',
       );
-      
+
       break;
 
     // Step 2

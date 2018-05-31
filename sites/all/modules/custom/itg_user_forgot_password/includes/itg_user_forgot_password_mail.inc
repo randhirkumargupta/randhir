@@ -16,7 +16,7 @@ function itg_forgot_otp_content($rand_otp, $to) {
   );
 
 
-  $mail = drupal_mail('itg_user_forgot_password', 'send_forgot_otp_mail', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_user_forgot_password', 'send_forgot_otp_mail', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   if ($mail['result']) {
     return TRUE;
   }

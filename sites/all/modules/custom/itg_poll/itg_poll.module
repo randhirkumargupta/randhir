@@ -651,7 +651,7 @@ function itg_poll_complete_time_mail() {
             'body' => $message_body ,
             'subject' => 'India Today | poll!' ,
           );
-          $mail = drupal_mail('itg_poll' , 'send_mail_to_poll_submit_user' , $poll_mail , language_default() , $params , 'no-reply@kelltontech.com' , TRUE);
+          $mail = drupal_mail('itg_poll' , 'send_mail_to_poll_submit_user' , $poll_mail , language_default() , $params , variable_get('site_mail', 'care@intoday.in') , TRUE);
           if ($mail['result']) {
             db_update('itg_polls')
                 ->fields(array(
