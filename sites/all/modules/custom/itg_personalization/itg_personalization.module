@@ -971,7 +971,7 @@ function itg_personalization_send_follow_mail() {
 
       $to = itg_get_user_email_by_id($follow_user);
       if (!empty($to)) {
-        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
       }
     }
 
@@ -995,7 +995,7 @@ function itg_personalization_send_follow_mail() {
 
       $to = itg_get_user_email_by_id($follow_user);
       if (!empty($to)) {
-        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
       }
     }
   }
@@ -1029,7 +1029,7 @@ function itg_personalization_follow_mail_for_anchor() {
       );
       $to = itg_get_user_email_by_id($follow_user);
       if (!empty($to)) {
-        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
       }
     }
 

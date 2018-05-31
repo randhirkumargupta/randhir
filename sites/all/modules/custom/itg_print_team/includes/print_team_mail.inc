@@ -52,7 +52,7 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
     'body' => $mail_contents,
     'subject' => $mail_subject,
   );
-  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   if ($mail['result']) {
     return TRUE;
   }
@@ -81,7 +81,7 @@ function itg_print_team_send_mail_for_notification($nid){
   );
 
   // Send notification mail
-  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   
   //Update mail status after sending notification 
   if ($mail['result']) {
