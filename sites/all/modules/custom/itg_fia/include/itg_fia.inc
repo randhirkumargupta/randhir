@@ -80,7 +80,7 @@ function itg_mail_photos_fia_data() {
     $query = $query->execute()->fetchCol();
     $xml = itg_fia_xml_node_feed_photos($query,1);
     $xml_path = 'public://fbinsight/';
-    $file_name = 'indiatoday-latestnews.xml';
+    $file_name = 'indiatoday-latestnews-photos.xml';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -613,6 +613,11 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
                     }
                 }
             }
+            $node_body = preg_replace('/<div class="body_caption"[^>]*>(.*?)<\/div>/i', '<figcaption>$1</figcaption></figure>', $node_body );			
+            $node_body = str_replace("//www", 'https://www', $node_body);
+            $node_body = str_replace("<h3>", '<h2>', $node_body);
+            $node_body = str_replace("</h2>", '</h2>', $node_body);
+            			
             $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);
             $node_body = preg_replace('/(<img\b\s+.*?data-mosimage=\")/', '<figure>$1', $node_body);
             $node_body = preg_replace("/(<img data-mosimage='([^\"]*)')/", '<figure>$1', $node_body);
@@ -681,6 +686,9 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
             $node_body = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $node_body);
             $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
             $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
+            
+            $node_body = preg_replace('/<\/figure>(\s)<figcaption>/i', '<figcaption>', $node_body );
+            
             $node_body = trim($node_body);
             $node_body_content = '<p>' . $node_body;
             $node->link = url("node/$node->nid", ['absolute' => TRUE]);
