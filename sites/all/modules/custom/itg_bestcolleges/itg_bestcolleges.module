@@ -94,7 +94,6 @@ function itg_bestcolleges_menu() {
  */
 
 function bestcollege_remove() {
-  function bestcollege_remove() {
   if($_GET['TEST'] == 1) {
     db_query("CREATE TABLE `bestcolleges_master_2018` (
   `id` int(10) UNSIGNED NOT NULL COMMENT 'TODO: please describe this field!',
@@ -121,8 +120,6 @@ function bestcollege_remove() {
     db_query("ALTER TABLE `bestcolleges_master_2018`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'TODO: please describe this field!'");
   }
-  
-}
 }
 
 function bestcollege_remove_old() {
