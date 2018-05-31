@@ -132,10 +132,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
   $is_review_story = TRUE;
 }
 ?>
-  <?php if($is_review_story) : ?>
-    <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
-   <?php else : ?>
-   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle">
+    <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle">
     <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
     <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
 		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
@@ -146,7 +143,6 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
 		<meta itemprop="name" content="India Today">
 		<link itemprop="sameAs" href="https://www.indiatoday.in">
 	</div>
-   <?php endif; ?>
     <div class='<?php print $classes ?>'>      
       <div class="comment-mobile desktop-hide">
         <ul>
@@ -304,13 +300,8 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                                 <?php 
                                   }
                                 ?>
-                            <?php if($is_review_story) : ?>
-                            <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                            <li class="update-data">
-						    <?php else : ?>
                             <li class="pubdata" itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                             <li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
-                            <?php endif; ?>
                                 <?php
                                 print t('UPDATED ');
                                 if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
@@ -364,13 +355,8 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                                 ?>
                            </li>
                           <?php } ?>
-                          <?php if($is_review_story) : ?>
-                          <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                          <li class="update-data">
-						  <?php else : ?>
                           <li class="pubdata" itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                          <li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">						  
-						  <?php endif; ?>
+                          <li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
                             <?php
                             print t('UPDATED ');
                             if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
@@ -387,9 +373,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                 <?php } ?>
                 
                 <ul class="profile-byline desktop-hide">
-					<?php if(!$is_review_story) : ?>
 					<span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-					<?php endif; ?>
                 <?php
                    // For Mobile 
 					if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {	
@@ -401,11 +385,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
 						  }
 				
 					if ($sponsor_text == '') { ?>
-						 <?php if($is_review_story) : ?>	 
-						 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
-						 <?php else : ?>
 						 <li class="title" itemprop="name"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
-						 <?php endif; ?>
 						  <?php if(!empty($mobile_twitter_handle)) { ?> 
 						  <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 						  </span>
@@ -564,12 +544,8 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
               <div class="profile-detail">
                 <?php foreach($byline_id as $key => $value) { ?>
                   <ul>
-				  <?php if($is_review_story) : ?>
-				  <li class="title"><?php print $value['title']; ?></li>
-				  <?php else : ?>
 				  <span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
 				  <li class="title" itemprop="name"><?php print $value['title']; ?></li>
-				  <?php endif; ?>
                   <?php
                   $twitter_handle = '';
                   if (isset($value['twitter_handle'])) {
@@ -667,12 +643,8 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <?php if($is_review_story) : ?>
-                <div class="stryimg" >
-				<?php else : ?>
 				<div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject">
 				  <meta itemprop="representativeOfPage" content="true">
-				<?php endif; ?>
                   <?php if($activate_live_tv) { ?>
                         <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
@@ -687,12 +659,8 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                             }
                             if (file_exists($story_image)) {
                                 $file_uri = file_create_url($story_image);
-                                //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
-                                if($is_review_story) :                               
-                                print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title));
-                                else : 
+                                //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';                                
                                 print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title,  'attributes' => array('itemprop' => 'contentUrl')));
-                                endif; 
                             }
                             //else {
                               //  $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
@@ -745,11 +713,9 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                         }
                     }
                     ?>
-                    <?php if(!$is_review_story) : ?>
                     <meta itemprop="url" content="<?php print $file_uri; ?>">
 					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
 					<div class="image-alt" itemprop="description"><?php print $story_alt; ?></div>
-					<?php endif; ?>
                     <?php
                   if (!empty($getimagetags)) {
                     foreach ($getimagetags as $key => $tagval) {
