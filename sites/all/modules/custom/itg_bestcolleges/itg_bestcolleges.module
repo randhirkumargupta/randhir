@@ -1117,15 +1117,13 @@ function csvImporter_form() {
  * @param array $form_state
  */
 function csvImporter_validate_fileupload(&$form, &$form_state) {
-  /*
+
   $validators = array(
     'file_validate_extensions' => array('csv'),
   );
-  */
-  $validators = array();
-  
+
   $destination = FALSE; // "public://"
-  if ($file = file_save_upload('csvfile', $validators, $destination , FILE_EXISTS_REPLACE)) {
+  if ($file = file_save_upload('csvfile', $validators, FALSE , FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
