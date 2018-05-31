@@ -8,7 +8,7 @@
 
 /**
  * This function is used to create settings.
- * 
+ *
  * {@inheritdoc}
  */
 function itg_custom_variables() {
@@ -58,6 +58,30 @@ function itg_custom_variables() {
     '#title' => t('Enable Custom Lazy Load'),
     '#required' => FALSE,
     '#default_value' => get_itg_variable('enable_custom_lazyload'),
+  );
+  $form['indiatoday_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Indiatoday channel email'),
+    '#default_value' => get_itg_variable('indiatoday_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['aajtak_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Aajtak channel email'),
+    '#default_value' => get_itg_variable('aajtak_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['dilliaajtak_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Dilliaajtak channel email'),
+    '#default_value' => get_itg_variable('dilliaajtak_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['tez_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tez channel email'),
+    '#default_value' => get_itg_variable('tez_tvschedule_email'),
+    '#required' => FALSE,
   );
   $form['submit_button'] = array(
     '#type' => 'submit',
