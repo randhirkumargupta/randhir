@@ -813,6 +813,7 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
   
   if (drupal_is_front_page()) {
+	 unset($javascript['misc/drupal.js']);
 	 unset($javascript['misc/jquery.once.js']);
 	 //unset($javascript['sites/all/themes/itg/js/slick.js']);
 	 unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
@@ -836,7 +837,7 @@ function itg_js_alter(&$javascript) {
      unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
      unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
      unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
-     unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
+     //unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
      unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
      
      unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
