@@ -73,7 +73,8 @@ function tv_schedule_listing() {
     else {
       if (isset($arg[1])) {
         $day = $arg[1];
-        $cond = array('day' => $day, 'status' => array( '$in' => $status ));
+        $date_from_day = date('Y/m/d', strtotime( "$day this week" ));
+        $cond = array('program date' => $date_from_day, 'day' => $day, 'status' => array( '$in' => $status ));
       }
       else {
         $cond = array('program date' => $current_day, 'status' => array( '$in' => $status ));
