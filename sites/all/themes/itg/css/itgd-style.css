@@ -1413,3 +1413,12 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .loading:before { content: ""; position: absolute; z-index: 1;top: 50%; left: 50%; margin-top: -16px; margin-left: -16px; width: 32px; height: 32px; border-radius: 32px; animation: scaleout 1.2s infinite ease-in-out; background-color: rgba(0, 0, 0, .9); }
 .lazyload,.lazyloading { opacity: 0; }
 .loading,.lazyload,.lazyloaded,.image {opacity: 1; transition: 2s cubic-bezier(0.215, 0.61, 0.355, 1); }*/
+
+
+/* home tranding videos chunk */
+
+.front .trending-videos .trending-videos-list{padding: 0 10px;}
+.front .trending-videos .trending-videos li+li{ border-top:0px;}
+.front .trending-videos li a.pic:after{ background:transparent; }
+.front .trending-videos li span.pic.video-icon{ position: relative; }
+.front .trending-videos li span.pic.video-icon:after{ font: normal normal normal 14px/1 FontAwesome; content:"\f01d"; font-size: 20em; color:#111; bottom:0; left:0; }
