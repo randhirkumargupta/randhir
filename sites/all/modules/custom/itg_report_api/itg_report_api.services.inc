@@ -762,14 +762,21 @@ function itg_report_api_fba_update(){
     //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $data = $params['data'];
+    $resp = array();
+    $resp['status_code'] = "1";
+    $resp['status_message'] = "";
+    $resp_data = array();
     foreach ($data as $key => $value) {        
         $canonical_url = $value['canonical_url'];
         $fba_id = $value['id'];
         $publish_status = $value['publish_status'];
         $published = $value['published'];
         $nid = itg_rapid_nid_by_url($canonical_url);
-        itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid);
+        $flag = itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid);
+        $resp_data[$nid] = "$flag";
     }
+    $resp['data' ] = $resp_data;
+    return $resp;
     
 }
 /**
@@ -803,7 +810,9 @@ function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $n
         $node->field_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
         $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
         $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
-        $$node->nid = $nid;
+        $node->nid = $nid;
+        node_object_prepare($node);
+        $node = node_submit($node); // Prepare node for saving
         try {
             node_save((object) $node);
             $success = TRUE;
