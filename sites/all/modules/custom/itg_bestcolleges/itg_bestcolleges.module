@@ -1122,8 +1122,8 @@ function csvImporter_validate_fileupload(&$form, &$form_state) {
     'file_validate_extensions' => array('csv'),
   );
 
-  $destination = FALSE; // "public://"
-  if ($file = file_save_upload('csvfile', $validators, FALSE , FILE_EXISTS_REPLACE)) {
+  $destination = "public://indiatoday/"
+  if ($file = file_save_upload('csvfile', $validators, $destination , FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
