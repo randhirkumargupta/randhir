@@ -20,7 +20,7 @@ function itg_tv_schedule_permission() {
 function itg_tv_schedule_menu() {
   $items = array();
 
-  $items['tv'] = array(
+  $items['tv/%'] = array(
     'title' => 'Upload Tv Schedule',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_tv_schedule_form'),
@@ -45,34 +45,52 @@ function itg_tv_schedule_menu() {
  * {@inheritdoc}
  */
 function itg_tv_schedule_form($form, &$form_state) {
-
-  $form['submit_button_1'] = array(
-  '#type' => 'submit',
-  '#value' => t('India today'),
-  '#submit' => array('download_indiatoday_csv'),
-  '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
-  '#limit_validation_errors' => array(),
-  );
-
-  $form['submit_button_2'] = array(
+  $check_arg = array('indiatoday', 'aajtak', 'dilliaajtak', 'tez' );
+  if(!in_array(arg(1), $check_arg)){
+    drupal_not_found();
+  }
+  if(arg(1) == 'indiatoday'){
+    $form['submit_button_1'] = array(
     '#type' => 'submit',
-    '#value' => t('Aajtak'),
-    '#submit' => array('download_aajtak_csv'),
-    '#limit_validation_errors' => array(),
-  );
-  $form['submit_button_3'] = array(
-    '#type' => 'submit',
-    '#value' => t('Dilli aajtak'),
-    '#submit' => array('download_delliaajtak_csv'),
-    '#limit_validation_errors' => array(),
-  );
-  $form['submit_button_4'] = array(
-    '#type' => 'submit',
-    '#value' => t('Tez'),
-    '#submit' => array('download_tez_csv'),
+    '#value' => t('India today'),
+    '#submit' => array('download_indiatoday_csv'),
+    '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
     '#suffix' => '</div>',
     '#limit_validation_errors' => array(),
-  );
+    );
+  }
+
+  if(arg(1) == 'aajtak'){
+    $form['submit_button_2'] = array(
+      '#type' => 'submit',
+      '#value' => t('Aajtak'),
+      '#submit' => array('download_aajtak_csv'),
+      '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
+      '#suffix' => '</div>',
+      '#limit_validation_errors' => array(),
+    );
+  }
+  if(arg(1) == 'dilliaajtak'){
+    $form['submit_button_3'] = array(
+      '#type' => 'submit',
+      '#value' => t('Dilli aajtak'),
+      '#submit' => array('download_delliaajtak_csv'),
+      '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
+      '#suffix' => '</div>',
+      '#limit_validation_errors' => array(),
+    );
+  }
+  if(arg(1) == 'tez'){
+    $form['submit_button_4'] = array(
+      '#type' => 'submit',
+      '#value' => t('Tez'),
+      '#submit' => array('download_tez_csv'),
+      '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
+      '#suffix' => '</div>',
+      '#limit_validation_errors' => array(),
+    );
+  }
+
   $form['file'] = array(
     '#name' => 'upload_csv',
     '#type' => 'managed_file',
@@ -104,6 +122,7 @@ function itg_tv_schedule_form($form, &$form_state) {
   return $form;
 }
 
+
 /**
  * After build for tv schedule form.
  * @param array $form
@@ -124,11 +143,12 @@ function itg_tv_schedule_after_build($form, &$form_state) {
  */
 
 function itg_publish_fun(){
+  $allowed = array('indiatoday'=>'Indiatoday_tvschedule.csv', 'aajtak'=>'aajtak_tvschedule.csv', 'dilliaajtak'=>'Dilliaajtak_tvschedule.csv', 'tez'=>'tez_tvschedule.csv');
   $db = mongodb();
   if (isset($db)) {
     $people = $db->tv_schedule;
     $people->update(
-    array("status" => 0),
+    array("status" => 0, 'filetype' =>$allowed[arg(1)]),
     array('$set' => array('status' => 1)),
     array("multiple" => true)
   );
@@ -369,10 +389,10 @@ function itg_tv_schedule_uploadmongo($file_id, $filename) {
  * Implements hook_file_validate().
  */
 function itg_tv_schedule_file_validate($file) {
-  $allowed = array('Indiatoday_tvschedule.csv', 'aajtak_tvschedule.csv', 'Dilliaajtak_tvschedule.csv', 'tez_tvschedule.csv');
-  if (!in_array($file->filename, $allowed)) {
+  $allowed = array('indiatoday'=>'Indiatoday_tvschedule.csv', 'aajtak'=>'aajtak_tvschedule.csv', 'dilliaajtak'=>'Dilliaajtak_tvschedule.csv', 'tez'=>'tez_tvschedule.csv');
+  if ($allowed[arg(1)] !== $file->filename) {
     $errors = array();
-    $errors[] = 'Inappropriate csv file name';
+    $errors[] = 'Inappropriate csv file name, Filename must be "'.$allowed[arg(1)].'';
     return $errors;
   }
 }
