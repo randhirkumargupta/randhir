@@ -12,7 +12,7 @@ function set_itg_variable($name, $value){
   if(!isset($name) || !isset($value)){
     return FALSE;
   }
-  
+
   db_merge('itg_custom_variable')
     ->key(array(
     'name' => $name,
@@ -31,7 +31,7 @@ function get_itg_variable($name, $default = NULL){
   if(empty($name) && isset($default)){
     return $default;
   }
-  
+
   $value = db_select('itg_custom_variable', 'cv')
   ->fields('cv', array('value'))
   ->condition('cv.name', $name)

@@ -91,7 +91,6 @@ function itg_tv_schedule_form($form, &$form_state) {
     '#value' => t('Submit'),
   );
 
-
   $form['submit_preview_publish'] = array(
   '#type' => 'submit',
   '#value' => t('Publish'),

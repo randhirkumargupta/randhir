@@ -8,7 +8,7 @@
 
 /**
  * This function is used to create settings.
- * 
+ *
  * {@inheritdoc}
  */
 function itg_custom_variables() {
@@ -48,6 +48,30 @@ function itg_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
+  $form['indiatoday_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Indiatoday channel email'),
+    '#default_value' => get_itg_variable('indiatoday_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['aajtak_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Aajtak channel email'),
+    '#default_value' => get_itg_variable('aajtak_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['dilliaajtak_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Dilliaajtak channel email'),
+    '#default_value' => get_itg_variable('dilliaajtak_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['tez_tvschedule_email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tez channel email'),
+    '#default_value' => get_itg_variable('tez_tvschedule_email'),
+    '#required' => FALSE,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
@@ -57,6 +81,9 @@ function itg_custom_variables() {
 
 function itg_custom_variables_submit($form, &$form_state){
 	$values = $form_state['values'];
+  // echo  "<pre>";
+  // print_r($values);
+  //   die;
 	unset($values['submit_button']);
 	unset($values['form_build_id']);
 	unset($values['form_token']);
