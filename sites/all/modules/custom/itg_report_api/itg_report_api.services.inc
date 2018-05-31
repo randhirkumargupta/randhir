@@ -762,13 +762,21 @@ function itg_report_api_fba_update(){
     //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $data = $params['data'];
+    $resp = array();
+    $resp['status_code'] = "1";
+    $resp['status_message'] = "";
+    $resp_data = array();
     foreach ($data as $key => $value) {        
         $canonical_url = $value['canonical_url'];
         $fba_id = $value['id'];
         $publish_status = $value['publish_status'];
         $published = $value['published'];
         $nid = itg_rapid_nid_by_url($canonical_url);
+        $flag = itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid);
+        $resp_data[$nid] = "$flag";
     }
+    $resp['data' ] = $resp_data;
+    return $resp;
     
 }
 /**
@@ -785,8 +793,40 @@ function itg_rapid_nid_by_url($canonical_url){
         $last_key_ex_ar = explode("-",$last_key_val);
         $nid_key = count($last_key_ex_ar) - 4;
         $nid = $last_key_ex_ar[$nid_key];
-    }
-    echo $nid; die();
+    }    
     return $nid;
 }
+/**
+ * itg_report_api_fba_update_data
+ * @param type $fba_id
+ * @param type $publish_status
+ * @param type $published
+ * @param type $nid
+ */
+function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid) {
+    $node = node_load($nid);
+    $success = "";
+    if ($nid) {
+        if ($node->type = "story") {
+            $node->field_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
+            $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
+            $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
+        } elseif ($node->type = "photogallery") {
+            $node->field_photo_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
+            $node->field_photo_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
+            $node->field_photo_fba_published[LANGUAGE_NONE][0]['value'] = $published;
+        } elseif ($node->type = "videogallery") {
+            $node->field_video_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
+            $node->field_video_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
+            $node->field_video_fba_published[LANGUAGE_NONE][0]['value'] = $published;
+        }
 
+        try {
+            node_save($node);
+            $success = TRUE;
+        } catch (Exception $e) {
+            $success = FALSE;
+        }
+    }
+    return $success;
+}

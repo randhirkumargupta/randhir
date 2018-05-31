@@ -1117,10 +1117,13 @@ function csvImporter_form() {
  * @param array $form_state
  */
 function csvImporter_validate_fileupload(&$form, &$form_state) {
+
   $validators = array(
     'file_validate_extensions' => array('csv'),
   );
-  if ($file = file_save_upload('csvfile', $validators, "public://", FILE_EXISTS_REPLACE)) {
+
+  $destination = "public://indiatoday/";
+  if ($file = file_save_upload('csvfile', $validators, $destination , FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
@@ -2080,7 +2083,7 @@ function itg_bestcollege_master_migrate($line, $session_nid, &$context) {
   $bestcollege_status = variable_get('bestcollege_status', '');
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
-      $result = db_insert('bestcolleges_master_2018')
+      $result = db_insert('bestcolleges_master')
               ->fields(array(
                 'collegeid' => $collegeid,
                 'collegename' => $collegename,

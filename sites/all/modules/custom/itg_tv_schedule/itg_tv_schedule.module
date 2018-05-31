@@ -40,7 +40,13 @@ function itg_tv_schedule_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'include/tv_schedule_listing.inc',
   );
-
+  $items['itg-tv-schedule-cron'] = array(
+    'title' => 'Tv Schedule Cron',
+    'page callback' => 'itg_tv_schedule_cron',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/tv_schedule_listing.inc',
+  );
   return $items;
 }
 
