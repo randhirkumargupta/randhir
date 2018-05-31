@@ -768,6 +768,7 @@ function itg_report_api_fba_update(){
         $publish_status = $value['publish_status'];
         $published = $value['published'];
         $nid = itg_rapid_nid_by_url($canonical_url);
+        itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid);
     }
     
 }
@@ -785,8 +786,30 @@ function itg_rapid_nid_by_url($canonical_url){
         $last_key_ex_ar = explode("-",$last_key_val);
         $nid_key = count($last_key_ex_ar) - 4;
         $nid = $last_key_ex_ar[$nid_key];
-    }
-    echo $nid; die();
+    }    
     return $nid;
 }
-
+/**
+ * itg_report_api_fba_update_data
+ * @param type $fba_id
+ * @param type $publish_status
+ * @param type $published
+ * @param type $nid
+ */
+function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid) {
+    $node = new stdClass();
+    $success = "";
+    if ($nid) {
+        $node->field_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
+        $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
+        $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
+        $$node->nid = $nid;
+        try {
+            node_save((object) $node);
+            $success = TRUE;
+        } catch (Exception $e) {           
+            $success = FALSE;
+        }
+    }
+    return $success;
+}
