@@ -94,12 +94,6 @@ function tv_schedule_listing() {
       $channel_results_count[$val] = $channel_cursor[$val]->count();
     }
 
-    // echo  "<pre>";
-    // print_r($channel_results_count);
-    // die;
-
-
-
     if ($results > 0 && !empty($channel_cursor)) {
       foreach($channel_cursor as $key => $cursor){
 
@@ -195,4 +189,63 @@ function tv_story_list($date, $time) {
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
+}
+
+/**
+ * Custom method for Tv Schedule at least 3 days before the last date of scheduler.
+ */
+function itg_tv_schedule_cron() {
+  $to = array();
+  $to['tez_tvschedule.csv'] = get_itg_variable('tez_tvschedule_email');
+  $to['Indiatoday_tvschedule.csv'] = get_itg_variable('indiatoday_tvschedule_email');
+  $to['aajtak_tvschedule.csv'] = get_itg_variable('aajtak_tvschedule_email');
+  $to['Dilliaajtak_tvschedule.csv'] = get_itg_variable('dilliaajtak_tvschedule_email');
+
+  if (function_exists('mongodb')) {
+  $db = mongodb();
+    if (isset($db)) {
+      $people = $db->tv_schedule;
+      $allowed = array('Indiatoday_tvschedule.csv', 'aajtak_tvschedule.csv', 'Dilliaajtak_tvschedule.csv', 'tez_tvschedule.csv');
+      foreach($allowed as $value){
+        $cond = array('filetype' => $value, 'status' => 1);
+        $data = $people->find($cond)->sort(array('program date'=> -1))->limit(1);
+        $count = $data->count();
+          if($count > 0){
+            foreach($data as $val){
+              $start  = date_create($val['program date']);
+              $end  = date_create(); // Current time and date
+              $diff   = date_diff( $start, $end );
+              if($diff->d == 2){
+                $mail_content = 'Your channel will be strip after '.$val['program date'].'. So please upload CSV file on time.';
+                itg_tv_schedule_mail_content($mail_content, $to[$value]);
+              }
+            }
+          }
+      }
+    }
+  }
+  return 'Cron ran successfully';
+}
+
+/**
+ * Get Mail Tv schedule content
+ * @param array $node
+ * @return string
+ */
+function itg_tv_schedule_mail_content($mail_content, $to) {
+  $params = array(
+    'body' => $mail_content,
+    'subject' => 'Tv Schedule',
+  );
+  $mail = drupal_mail('itg_tv_schedule', 'send_tv_schedule_mail', $to, language_default(), $params, variable_get('site_mail'), TRUE);
+  if ($mail['result']) {
+    $success_msg = 'Successfully sent email to '.$to.'!';
+   // watchdog('itg_tv_schedule', $success_msg, array(), WATCHDOG_INFO);
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email to '.$to.'!';
+    watchdog('itg_tv_schedule', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
 }
