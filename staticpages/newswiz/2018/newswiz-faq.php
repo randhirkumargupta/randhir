@@ -78,17 +78,25 @@ function writecontent(page_request){if(window.location.href.indexOf("http")==-1|
 document.write(page_request.responseText)}
 </script>
 
-
 <style>    
-.video_episode_snippets .video_inner p {font-size: 15px !important;line-height: 18px;padding: 5px;}.video_info,.item {background: none !important;}.outer-video-area {margin-bottom: 56px;background-color: #fff;}.video_episode_snippets .video_inner {height: 278px; margin-bottom:15px;}.video_episode_snippets .video_inner img {height: 232px;}.right_advertis {background: none !important;padding-top: 0 !important;padding-bottom: 0 !important}.timeline-outer .slider-year {background: none !important;height: 1635px;overflow: hidden}.timeline-slider ul li {background-color: #fff;margin-bottom: 56px;height: 282px;}li .video_episode_snippets .video_inner p {padding-left: 5px !important;background-color: #fff;}.videoshow-section {background: none !important;height: 1635px;overflow: hidden;}.videoshow-section ul {position: relative;margin: 0;padding: 0;}.videoshow-section ul li {color: #fff;width: 320px;float: left;height: 282px;background-color: #fff;margin-bottom: 56px;}.pad26 {padding-bottom: 26px;}.headtxt {font-size: 19px;margin-bottom: 5px;}.headtxt a {color: #007ed2 !important;text-decoration: underline}ul.headtxt_t{ padding-left: 20px;line-height: 28px;font-size: 20px; text-transform:uppercase;}ul.headtxt_t li{margin-bottom:6px}
-
+.video_episode_snippets .video_inner p {font-size: 15px !important;line-height: 18px;padding: 5px;}.video_info,.item {background: none !important;}.outer-video-area {margin-bottom: 56px;background-color: #fff;}.video_episode_snippets .video_inner {height: auto; margin-bottom:15px;}.video_episode_snippets .video_inner img {height: auto;}.timeline-outer .slider-year {background: none !important;overflow: hidden}.timeline-slider ul li {background-color: #fff;} 
+li .video_episode_snippets .video_inner p {padding-left: 5px !important;background-color: #fff;}.videoshow-section {background: none !important;height: 1635px;overflow: hidden;}.videoshow-section ul {position: relative;margin: 0;padding: 0;}.videoshow-section ul li {color: #fff;width: 320px;float: left;height: 282px;background-color: #fff;margin-bottom: 56px;}.pad26 {padding-bottom: 26px;}.headtxt {font-size: 19px;margin-bottom: 5px;}.headtxt a {color: #007ed2 !important;text-decoration: underline}ul.headtxt_t{ padding-left: 20px;line-height: 28px;font-size: 20px; text-transform:uppercase;}ul.headtxt_t li{margin-bottom:6px}
    .support-team .support-slider ul li span{width:100%} 
    .support-team .sup_like_all .share_like ul li{display:inline-block;line-height: 34px;width:auto;padding-bottom: 0px;float:none;}   
    .support-team .sup_like_all.sup_like_all1{height:152px;}
    .support-team .sup_like_all h4{margin-bottom: 2px}
    .support-team .sup_like_all .share_like ul li.fb_icon{padding-right: 9px}
    .support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
-</style>    
+   .video_area h2{background-size: 424px 55px;}
+   .paragraph{margin: 0px; padding: 0px 0 10px 0; font-size: 18px; line-height: 30px;}
+    .paragraph h2 {font-size: 18px;    display: inline;}
+   .paragraph h2 a{ color:#181818; text-decoration: underline}
+   .right_side h2.celebration-pics{background-size: 370px 56px;background-position: -11px 0px; font-size:16px;}
+   
+   @media screen and (max-width: 800px){
+    .video_area h2{background-size: 324px 55px;font-size: 12px;}
+   }
+</style>   
 
 </head>
 
@@ -154,7 +162,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                         <div class="panel-heading" role="tab" id="headingOne">
                              <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                 1.What is the eligibility criteria for participation?
+                                 1. What is the eligibility criteria for participation?
                                 </a>
                             </h4>
                         </div>
@@ -162,9 +170,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                             <div class="panel-body">
                                 <ul class="faqListQuestionOne">
                                     <li>Each team needs to apply as a team of two & continue in further stages of the contest as the same team.</li>
-                                    <li>Team members allowed will be Class 9-Class 12 students in the academic session 2018-2019. </li>
+                                    <li>Team members allowed will be from Class 9 - Class 12 students in the academic session 2018-2019.</li>
                                     <li>Team participation means that both members represent the same school. </li>
-                                    <li>Each school can nominate up to 3 teams to take part in the online test.</li>
+                                    <li>Each school can nominate up to 3 teams to take part in the Online Test.</li>
                                     <li>Both team members should be fluent in written as well as spoken English. This is essential as the quiz and all preliminary rounds leading to the main event are held in English. </li>
                                     <li>Both team members should be Indian citizens residing in India.</li>
                                 </ul>
@@ -187,36 +195,28 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         </div>
                     </div>
                     <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
+                        <div class="panel-heading" role="tab" id="headingTwenty">
                              <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                         3. When does registration close?
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
+                         3. Where do I apply?
                         </a>
                       </h4>
                 
                         </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">The last date of registration is 14th June 2018, and shall be subject to the terms and conditions therein. </div>
+                        <div id="collapseTwenty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwenty">
+                            <div class="panel-body">To register, click on any one of the following links:
+                            <ul class="faqListQuestionOne">
+                                    <li><a href="http://www.newswiz.in">www.newswiz.in </a></li>
+                                    <li><a href="https://goo.gl/3VApJr">https://goo.gl/3VApJr</a></li>                                    
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                             <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        4.	How will teams be selected?
-                        </a>
-                      </h4>
-                
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                            <div class="panel-body">An online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.  </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
+                   <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingFive">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                       5.	What needs to be submitted after I get selected?
+                       4. What needs to be submitted for Registration? 
                         </a>
                       </h4>
                 
@@ -224,25 +224,52 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
                             <div class="panel-body">
                                 <ul>
-                                    <li>	Team members will need to submit the Online team form along with their recent passport size photographs to our email id: <a href="mailto:newswiz@toknowledge.com" target="_top">newswiz@toknowledge.com</a></li>
-                                    <li>	A letter from the school nominating your team.  </li>
-                                    <li>	Correct email IDs & contact numbers where team members can be reached at during June. </li>
+                                    <li>Team members will need to submit the online team form along with their recent passport size photographs to our email id: <a href="mailto:registration@newswiz.in" target="_top">registration@newswiz.in</a></li>
+                                    <li>A letter from the school nominating your team.</li>
+                                    <li>Correct email IDs & contact numbers where team members can be reached at during June.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                         5. When does registration close?
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">The last date of registration is 14th June 2018, and shall be subject to the terms and conditions therein.</div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                             <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        6. How will teams be selected?
+                        </a>
+                      </h4>
+                
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">An Online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingSix">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      6.	When will results be announced? Will I be told my team scores?
+                      7. When will results be announced? Will I be told my team scores?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
                             <div class="panel-body">
-                               Results will be announced by July 5, 2018. Team scores will not be revealed. 
+                               Results will be announced by July 2018. Team scores will not be revealed. 
                             </div>
                         </div>
                     </div>
@@ -250,7 +277,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSeven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                    7. How many teams can take part in the TV rounds per school? 
+                    8. How many teams can take part in the TV rounds per school? 
                         </a>
                       </h4>
                 
@@ -265,7 +292,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingeight">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
-                    8. What information will I need to provide if selected for the TV Rounds?
+                    9. What information will I need to provide if selected for the TV Rounds?
                         </a>
                       </h4>
                 
@@ -288,14 +315,14 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingNine">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                   9. What is the competition format?
+                   10. What is the competition format?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
                             <div class="panel-body">
-                                13 part series in a one hour format – 9 prelims + 3 semifinals + 1final. 
+                                13 part series in a one hour format – 9 prelims + 3 semifinals + 1final.
                                 
                             </div>
                         </div>
@@ -304,14 +331,14 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingTen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                    10. What is the quiz format? 
+                    11. What is the quiz format? 
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
                             <div class="panel-body">
-                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Utube (Youtube)</strong> to get a sense of the format. This might be subject to change this year. 
+                                Format of the quiz shall be shared in due course, after the initial selection procedure. Should you want to, please check the News Wiz show 2016 and 2017 on <strong>Utube (Youtube)</strong> to get a sense of the format. This might be subject to change this year.  
                             </div>
                         </div>
                     </div>
@@ -319,7 +346,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingEleven">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                  11. Where and when will the recordings take place?  
+                  12. Where and when will the recordings take place?   
                         </a>
                       </h4>
                 
@@ -334,14 +361,14 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingTwelve">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-                  12. How many recordings will there be per team in the competition? 
+                  13. How many recordings will there be per team in the competition? 
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
                             <div class="panel-body">
-                                There will be one episode recorded and aired every week starting in August. If a team makes it to the semi finals, the same would be recorded over the months of October. If a team goes on to make it to the Finals of the series, the same would be recorded end October . 
+                                There will be one episode recorded and aired every week starting in August. If a team makes it to the semi finals, the same would be recorded over the months of October. If a team goes on to make it to the Finals of the series, the same would be recorded end October.  
                             </div>
                         </div>
                     </div>
@@ -349,14 +376,14 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingThirteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
-                 13. How long does a team need to stay in New Delhi? How long will a recording take?
+                 14. How long does a team need to stay in New Delhi? How long will a recording take?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseThirteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirteen">
                             <div class="panel-body">
-                                Teams need to arrive a day before their recording. They will need to keep the entire day free on the day of recording, and will leave the following day. E.g. if your recording is on Thursday, you would need to arrive in New Delhi on Wednesday, and tickets back to your city would be booked for Friday. 
+                                Teams need to arrive a day before their recording. They will need to keep the entire day free on the day of recording, and will leave the following day. E.g. if your recording is on Thursday, you would need to arrive in New Delhi on Wednesday, and tickets back to your city would be booked for Friday.
                             </div>
                         </div>
                     </div>
@@ -364,19 +391,19 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFourteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
-                 14. Does the participant have to bear all the expenses of traveling, boarding and lodging? 
+                 15. Does the participant have to bear all the expenses of traveling, boarding and lodging?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseFourteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourteen">
                             <div class="panel-body">
-                                 No, the channel bears all the expenses of the participant and the accompanying companion mentioned below which includes:
+                                 No, the channel bears all the expenses of the participant and the accompanying companion mentioned below, which includes:
                                 <ul>
-                                    <li>a.	To and fro Air / Train Travel</li>
-                                    <li>b.	Hotel stay which is nearest to the studio</li>
-                                    <li>c.	Food – fixed meals only</li>
-                                    <li>d.	For NCR contestants – to and fro the studio travel reimbursement (auto or non a/c taxi)</li>
+                                    <li>a. To and fro Air / Train Travel</li>
+                                    <li>b. Hotel stay which is nearest to the studio</li>
+                                    <li>c. Food – fixed meals only</li>
+                                    <li>d. For NCR contestants – to and fro the studio travel reimbursement (auto or non A/C taxi)</li>
                                 </ul>
                             </div>
                         </div>
@@ -385,7 +412,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingFifteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
-               15. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities? 
+               16. What if the contestants’ flight to Delhi gets delayed or cancelled due to fog/poor visibility, riots or natural calamities?
                         </a>
                       </h4>
                 
@@ -400,14 +427,14 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSixteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
-                 16. Will a contestant be allowed to bring a companion? If yes will they be paid for their travel and lodging?
+                 17. Will a contestant be allowed to bring a companion? If yes will they be paid for their travel and lodging?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseSixteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixteen">
                             <div class="panel-body">
-                                Yes, one or two companions will be allowed, depending on the composition of the team. If it is a mixed team, then 2 mixed companions are allowed, else only one companion’s travel and lodging will be borne by the channel. 
+                                Yes, one or two companions will be allowed, depending on the composition of the team. If it is a mixed team, then 2 mixed companions are allowed, else only one companion’s travel and lodging will be borne by the channel.  
                             </div>
                         </div>
                     </div>
@@ -415,7 +442,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingSeventeen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
-                17. I have a query. Whom can I ask?
+                18. I have a query. Whom can I ask?
                         </a>
                       </h4>
                 
@@ -430,14 +457,14 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingEighteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">
-                18. Where can I read detailed terms and conditions governing News Wiz?
+                19. Where can I read detailed terms and conditions governing News Wiz?
                         </a>
                       </h4>
                 
                         </div>
                         <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
-                            <div class="panel-body">
-                                The detailed terms and conditions governing the quiz show are available at:-  <a href="https://goo.gl/r3BcVm" target="_blank">https://goo.gl/r3BcVm</a>
+                            <div class="panel-body">                                
+                                The detailed terms and conditions governing the quiz show are available at:- <a href="https://goo.gl/r3BcVm" target="_blank">https://goo.gl/r3BcVm</a>
                             </div>
                         </div>
                     </div>
@@ -445,7 +472,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div class="panel-heading" role="tab" id="headingNeneteen">
                              <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNeneteen" aria-expanded="false" aria-controls="collapseNeneteen">
-                19. Will the results be posted online?
+                20. Will the results be posted online?
                         </a>
                       </h4>
                 
@@ -600,82 +627,81 @@ $(".navLink ul li ul.flashLinkMenu").toggleClass("flashToggle");
 </script> 
 <script>
  $(document).ready(function(e) {
-    var photolen  = $('.slider-year ul li').length;
-	//var twidth = $('.slider-year ul li').height();
-	var twidth = $('.timeline-slider ul li').outerHeight(true);
-	var fwidth = (twidth)*photolen;
-	$('.slider-year ul').css('height', fwidth);
-	var counters = 1;
-	
-	$('#nexttag').click(function(){
-                     
-		if(counters < photolen-4)   
-		{
-				$('.slider-year ul').animate({
-					top : '-='+twidth
-				});
-				 counters += 1;
-				
-				$('#pretag').css('opacity', '1');
-		}
-		else{
-			$('#nexttag').css('opacity', '1');
-			
-		}
-	});
-	
-	
-	$('#pretag').click(function(){
-		if(counters == 1)
-		{
-				$('#pretag').css('opacity', '1');
-		}
-		else{
-			$('.slider-year ul').animate({
-					top : '+='+twidth
-				});   
-			counters -= 1;
-			$('#nexttag').css('opacity', '1');
-		}
-	});
-	
-	var photolensh  = $('.videoshow-section ul li').length;
-	var twidthsh = $('.videoshow-section ul li').height();
-	var fwidthsh = (twidthsh)*photolensh;
-	$('.videoshow-section ul').css('height', fwidthsh);
-	var counter = 1;
-	
-	$('#nextsh').click(function(){
+      var photolen  = $('.slider-year ul li').length;
+  var twidth = $('.slider-year ul li').width();
+  var fwidth = (twidth)*photolen;
+  $('.slider-year ul').css('width', fwidth);
+  var counters = 1;
+  
+  $('#next').click(function(){
 
-		if(counter < photolensh-3)
-		{
-				$('.videoshow-section ul').animate({
-					top : '-=338'
-				});
-				 counter += 1;
-				
-				$('#presh').css('opacity', '1');
-		}
-		else{
-			$('#nextsh').css('opacity', '1');
-			
-		}
-	});
-	
-	$('#presh').click(function(){
-		if(counter == 1)
-		{
-				$('#presh').css('opacity', '1');
-		}
-		else{
-			$('.videoshow-section ul').animate({
-					top : '+=338'
-				});
-			counter -= 1;
-			$('#nextsh').css('opacity', '1');
-		}
-	});
-	
+    if(counters < photolen)
+    {
+        $('.slider-year ul').animate({
+          left : '-=320'
+        });
+         counters += 1;
+
+        $('#pre').css('opacity', '1');
+    }
+    else{
+      $('#next').css('opacity', '1');
+
+    }
+  });
+
+
+  $('#pre').click(function(){
+    if(counters == 1)
+    {
+        $('#pre').css('opacity', '1');
+    }
+    else{
+      $('.slider-year ul').animate({
+          left : '+=320'
+        });
+      counters -= 1;
+      $('#next').css('opacity', '1');
+    }
+  });
+
+  var photolensh  = $('.videoshow-section ul li').length;
+  var twidthsh = $('.videoshow-section ul li').height();
+  var fwidthsh = (twidthsh)*photolensh;
+  $('.videoshow-section ul').css('height', fwidthsh);
+  var counter = 1;
+  
+  $('#nextsh').click(function(){
+
+    if(counter < photolensh-3)
+    {
+        $('.videoshow-section ul').animate({
+          top : '-=338'
+        });
+         counter += 1;
+        
+        $('#presh').css('opacity', '1');
+    }
+    else{
+      $('#nextsh').css('opacity', '1');
+      
+    }
+  });
+  
+  $('#presh').click(function(){
+    if(counter == 1)
+    {
+        $('#presh').css('opacity', '1');
+    }
+    else{
+      $('.videoshow-section ul').animate({
+          top : '+=338'
+        });
+      counter -= 1;
+      $('#nextsh').css('opacity', '1');
+    }
+  });
+  
 });
 </script> 
 	<script>

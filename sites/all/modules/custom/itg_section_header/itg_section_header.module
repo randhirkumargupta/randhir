@@ -455,9 +455,35 @@ function get_event_menu($nid) {
     }
     $menu['flashback_menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
   }
+  $path_alias = drupal_get_path_alias('node/'.  $nid);
+  $event_tab_menu = get_event_tab_menu_data($nid);
+  $flash_back_link_top = '';
+  foreach ($event_tab_menu as $_value) {
+    $value = field_collection_item_load($_value->field_event_tabs_value, $reset = FALSE);
+    if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+      if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']))) . '</li>';
+      }
+    }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
+      $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
+       if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $external_url, array('external' => TRUE, 'attributes' => array('target' => '_blank'))) . '</li>';
+       }
+    }
+  }
+  $menu['eventtab_menu'] = $flash_back_link;
   $menu['event_start_date'] = $event_start_date;
   $menu['event_location'] = $event_location;
   $menu['event_title'] = $node->title;
   $menu['event_url'] = $baseurl;
   return $menu;
+}
+
+
+function get_event_tab_menu_data($nid){
+  $query = db_select('field_data_field_event_tabs', 'et');
+  $query->fields('et', array('field_event_tabs_value'));
+  $query->condition('et.entity_id', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }

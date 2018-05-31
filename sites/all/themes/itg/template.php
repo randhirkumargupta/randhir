@@ -120,7 +120,7 @@ function itg_preprocess_node(&$variables) {
     if ((isset($variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value']) && $variables['field_multi_user_allows'][LANGUAGE_NONE][0]['value'] == 1) || (isset($variables['field_multi_user_allows'][0]['value']) && $variables['field_multi_user_allows'][0]['value'] == 1)) {
        $variables['theme_hook_suggestions'][] = 'node__breaking_news_custom';
     }    
-  }
+  } 
   
 }
 
@@ -297,6 +297,13 @@ function itg_preprocess_html(&$vars) {
   global $base_url, $user;
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
+  }
+  if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
+    $preconnect_prefetch_code = array(
+      '#type' => 'markup',
+      '#markup' => get_itg_variable('dns_preconnect_prefetch'),
+    );
+    drupal_add_html_head($preconnect_prefetch_code, 'preconnect_prefetch');
   }
   if ($arg[2] != 'embed') {
   // Fact schema code adding in header for story module
@@ -484,6 +491,20 @@ function itg_preprocess_html(&$vars) {
         );
    drupal_add_html_head($twitter_image_tag, 'twitter_image_tag');
   }
+  
+  if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'story') {
+      $_section_name = '';  
+      if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
+        $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
+        $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+		$_section_name = $section_tids[0]->name;
+      } 
+      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+    }		
+  }
+  
 }
 
 /**
@@ -855,13 +876,18 @@ function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  $attributes['src'] = file_create_url($variables['path']);
-  
+  if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+    $attributes['data-src'] = file_create_url($variables['path']);
+    $attributes['src'] = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image370x208.jpg');
+    $attributes['class'] = array('lazyload');
+  }
+  else {
+    $attributes['src'] = file_create_url($variables['path']);
+  }
   $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
   $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
-
   return '<img' . drupal_attributes($attributes) . ' />';
 }
 
@@ -992,10 +1018,10 @@ function itgd_chart_beat_code() {
     }
     if ($node->type == 'story') {
       drupal_add_js('!function(a,n,e,t,r){tagsync=e;var c=window[a];if(tagsync){var d=document.createElement("script");d.src="https://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/atm.js",d.async=!0;var i=document.getElementById(n);if(null==i||"undefined"==i)return;i.parentNode.appendChild(d,i),d.onload=d.onreadystatechange=function(){var a=new zTagManager(n);a.initTagManager(n,c,this.aync,t,r)}}else document.write("<script src=\'https://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/tm.js?data="+a+"\'><\/script>")}("datalayer","z61b6b10d-8ff4-41e3-b8b0-c46bf2be1e7e",true, 1 , 1);', array('type' => 'inline', 'scope' => 'footer'));
-      drupal_add_js('var unruly = window.unruly || {};
+      /*drupal_add_js('var unruly = window.unruly || {};
 					unruly.native = unruly.native || {};
 					unruly.native.siteId = 321603', array('type' => 'inline', 'scope' => 'footer'));
-	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));
+	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));*/
     //Forkmedia ad code
     drupal_add_js('function EmbedScript() {
         var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";

@@ -9,7 +9,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="header_top ">
       <div class="left_part_logo"> <a href="<?php echo $data['data']['menu_manager']['event_url'];?>" title="Mind Rocks Youth Summit 2015"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2015/images/Youth-Summit-mast-logo_2015.png" alt="Mind Rocks Youth Summit 2015 Logo"></a></div>
       
-      <div class="logo_it_tt ipadLogo"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+      <div class="logo_it_tt ipadLogo"> <a href="http://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
       
       <div class="social_icons_ipad">
         <ul>
@@ -30,7 +30,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
         <h2> <span class="date_tr">October 31, 2015 </span> <span class="place_tr">Siri Fort Auditorium, New Delhi</span> </h2>
       </div>     
       
-      <div class="logo_it_tt"> <a href="https://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
+      <div class="logo_it_tt"> <a href="http://indiatodaygroup.com/" title="India Today Group" target="_blank"><span class="itgd_logo"><img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/images/ITG-logo-main.png" alt="India Today Group"></span></a> </div>
     </div>
       <div class="clearfix"></div>
     </div>

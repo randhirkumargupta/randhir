@@ -39,18 +39,25 @@ if ($cat_id == "") {
     }
   }
 }
+
 if (isset($cat_id) && is_numeric($cat_id)) {
   $section_tids = array_reverse(taxonomy_get_parents_all($cat_id));
   $section_tid = $section_tids[0]->tid;
-  if($cat_id != $section_tid){
+  $fifa_category_id = !empty(get_itg_variable('fifa_category_id')) ? get_itg_variable('fifa_category_id') : '';
+  if(isset($fifa_category_id) && $cat_id == $fifa_category_id){
+	  $cat_id = $fifa_category_id;
+  }	elseif($cat_id != $section_tid) {
     $cat_id = $section_tid;
-  } 
+  }   
 }
 $section_banner_data = taxonomy_term_load($cat_id);
+	
 $uri = !empty($section_banner_data->field_cm_category_banner['und'][0]['uri']) ? $section_banner_data->field_cm_category_banner['und'][0]['uri'] : "";
 if (!empty($uri)) {
   $src = file_create_url($uri);
 }
+
+
 $field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
 ?>
 <?php if (!empty($data[0]['db_data']) || (!empty($src) && isset($uri))) {
