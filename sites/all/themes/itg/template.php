@@ -820,7 +820,7 @@ function itg_js_alter(&$javascript) {
 	 unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
 	 unset($javascript['sites/all/themes/itg/js/ripple.js']);
 	 unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
-	 unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
+	 //unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
 	 unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
 	 unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
 	 //unset($javascript['sites/all/themes/itg/js/script.js']);	  
