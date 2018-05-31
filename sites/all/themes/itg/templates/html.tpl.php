@@ -122,7 +122,7 @@
    _sf_async_config.useCanonical = true;
      /** CONFIGURATION END **/
      var _sf_startpt = (new Date()).getTime();
-	</script><script src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
+	</script><script async src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
 	<?php else:?>
     <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
@@ -184,6 +184,9 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 
 </style>
 <?php } ?>
+<?php if($front_page) : $js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); ?>
+<script type="text/javascript" async src="<?php print $js_path; ?>"></script>
+<?php endif; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>
@@ -244,6 +247,6 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
       print $styles;
     }  
 ?>
-<script type="text/javascript" src="https://akm-img-a-in.tosshub.com/sites/common/js/gdpr/gdpr_check.js" data-name="cookies-policy" data-id="gdprconsentpolicy"></script>
+<script type="text/javascript" async src="https://akm-img-a-in.tosshub.com/sites/common/js/gdpr/gdpr_check.js" data-name="cookies-policy" data-id="gdprconsentpolicy"></script>
 </body>
 </html> 

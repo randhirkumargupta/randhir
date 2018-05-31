@@ -33,10 +33,32 @@ function homePageFeed() {
     $homePageFeaturesWidgetData = homePageFeaturesWidgetData();
     // xml feed tag for home page top stories widget ...
     $topStoriesWidgetData = topStoriesWidgetData();
+    
+    $static_story = "<article>
+        <type>story</type>
+        <title>
+            <![CDATA[Your new India Today app is available- Update Now!]]>
+        </title>
+        <thumbimage>
+            <![CDATA[https://akm-img-a-in.tosshub.com/indiatoday/appicon/rest/banner_new.jpg]]>
+        </thumbimage>
+        <kickerimage>
+            <![CDATA[https://akm-img-a-in.tosshub.com/indiatoday/appicon/rest/banner_new.jpg]]>
+        </kickerimage>
+        <url>story1229137.xml</url>
+        <create_date>May 08, 2018</create_date>
+        <create_datetime>2018-05-08T18:47:18+05:30</create_datetime>
+        <relateds>
+            <photos>NO</photos>
+            <videos>NO</videos>
+            <stories>NO</stories>
+        </relateds>
+    </article>";
 
     //home page feed writing...
     $output .= getMobileFeedXmlHeader();
     $output .= "<idsection>120</idsection><section>Home</section><totalarticle>" . $home_list_count . "</totalarticle><start_index>0</start_index><end_index>" . $home_list_count . "</end_index>";
+    $output .= $static_story;
     $output .= $bigStoryWidgetData;
     $output .= $homePageFeaturesWidgetData;
     $output .= $topStoriesWidgetData;
