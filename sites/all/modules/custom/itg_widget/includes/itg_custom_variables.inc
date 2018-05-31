@@ -365,12 +365,12 @@ function itg_fifa_category_id(){
   $form['fifa_morenews_text'] = array(
     '#type' => 'textfield',
     '#title' => t('Fifa More News Text'),
-    '#default_value' => get_itg_variable('fifa_category_id'),
+    '#default_value' => get_itg_variable('fifa_morenews_text'),
   );
   $form['fifa_morenews_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Fifa More News URL'),
-    '#default_value' => get_itg_variable('fifa_category_id'),
+    '#default_value' => get_itg_variable('fifa_morenews_url'),
   );
   $form['submit_fifa_setting'] = array(
     '#type' => 'submit',
