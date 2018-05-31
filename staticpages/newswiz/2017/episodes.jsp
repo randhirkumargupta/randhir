@@ -172,7 +172,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="navLink">
               <ul>
            
-                <li><a href="/newswiz/2017/index.jsp" title="home" class=""><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li><a href="/newswiz/2018/" title="home" class=""><i class="fa fa-home" aria-hidden="true"></i></a></li>
                <!-- <li><a href="newswiz-rules.jsp" class="" title="Rules">Rules &amp; Regulations</a></li>-->  
                     
                 <li><a href="newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
@@ -182,8 +182,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                <!-- <li><a href="all-teams.jsp" class='' title="Teams">Teams</a></li> -->
                 
                  <li><a href="episodes.jsp" title="Show Videos" class="active_h">Show Videos</a></li>
-                 <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
- <li><a href="question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
+                 <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>
+ <li><a href="question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>-->
                               
 
                    
@@ -261,6 +261,48 @@ a.active_h{background:#353333}
                         <h2><span>EPISODES</span></h2>
                         <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          <div class="video_episode_snippets">
+                          <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA4OTQ0Ng==" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/Video_Extra_Large_Image/wiz-video_647_111817093241.jpg?Fqa_EgsCPlVt15T9o_tWKMUUjDfNvwYA" alt="Newswiz2">
+                          <p>Grand Finale: Vadodara's Navrachana School wins News Wiz 2017</p>
+                          </a> </div>
+                          </div>
+                          </div>                          
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          <div class="video_episode_snippets">
+                          <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA3OTc4MA==" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201711/newswiz-video_647_110417093927.jpg" alt="Newswiz2">
+                          <p>Semifinal 2: Vadodara's Navrachana School moves into final</p>
+                          </a> </div>
+                          </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          <div class="video_episode_snippets">
+                          <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTY1NQ==" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201710/newswiz-video-647_102117100223.jpg" alt="Newswiz2">
+                          <p>Semifinal 1: Srinagar's DPS emerges winner, enters semi-finals</p>
+                          </a> </div>
+                          </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
+                                <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
+                                </a> </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
+                                <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
+                                </a> </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
+                                <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
+                                </a> </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
                                 <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
@@ -274,32 +316,6 @@ a.active_h{background:#353333}
                                 </a> </div>
                             </div>
                           </div>
-                          
-                          
-                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
-                                <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
-                                <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
-                                <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
                           
                         </div>
                       </div>
@@ -473,7 +489,7 @@ a.active_h{background:#353333}
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <h2><a href="/newswiz/2017/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                  <h2><a href="/newswiz/2018/" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
                 </div>
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2017/newswiz-rules.jsp" title="Rules">Rules &amp; Regulations</a></h2>
