@@ -238,11 +238,10 @@ function itg_seo_node_data($node) {
 					 "@id": "' . $mainEntityOfPage . '",
 					 "potentialAction": {
 					 "@type": "ViewAction",
-					 "target": "android-app://com.indiatoday/' . $mainEntityOfPage . '",
+					 "target": "android-app://com.indiatoday/' . $mainEntityOfPage . '"
 					 }
 					 "@context": "http://schema.org",
-					 "@type": "WebPage",                     
-					 
+					 "@type": "WebPage"
 					 }  </script>',
 	   );
     //}
