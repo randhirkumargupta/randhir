@@ -48,6 +48,17 @@ function itg_custom_variables() {
     '#size' => 20,
     '#maxlength' => 20,
   );
+  $form['dns_preconnect_prefetch'] = array(
+    '#type' => 'textarea',
+    '#title' => t('DNS Preconnect Prefetch'),
+    '#default_value' => get_itg_variable('dns_preconnect_prefetch'),    
+  );
+  $form['enable_custom_lazyload'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Custom Lazy Load'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('enable_custom_lazyload'),
+  );
   $form['indiatoday_tvschedule_email'] = array(
     '#type' => 'textfield',
     '#title' => t('Indiatoday channel email'),
@@ -81,9 +92,6 @@ function itg_custom_variables() {
 
 function itg_custom_variables_submit($form, &$form_state){
 	$values = $form_state['values'];
-  // echo  "<pre>";
-  // print_r($values);
-  //   die;
 	unset($values['submit_button']);
 	unset($values['form_build_id']);
 	unset($values['form_token']);
@@ -299,3 +307,82 @@ function itg_mobile_app_configure_submit($form, &$form_state){
   }
   drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
+
+/**
+* Function For user access sef url
+* {@inheritdoc}
+*/
+function itg_user_access_sef_url(){
+  global $user;
+  $form = array();
+  $form['sef_url_access'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Full url'),
+    '#default_value' => get_itg_variable('sef_url_access'),
+  );
+
+  $form['sef_url_status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('sef_url_status'),
+  );
+  $form['submit_sefurl_setting'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+  );
+  return $form;
+}
+
+/**
+* {@inheritdoc}
+*/
+function itg_user_access_sef_url_submit($form, &$form_state){
+  $values = $form_state['values'];
+  unset($values['submit_button']);
+  unset($values['form_build_id']);
+  unset($values['form_token']);
+  unset($values['form_id']);
+  unset($values['op']);
+  unset($values['submit_sefurl_setting']);
+  foreach ($values as $key => $value) {
+    set_itg_variable($key, $value);
+  }
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}
+
+/**
+* Manage fifa category id for banner. 
+* {@inheritdoc}
+*/
+function itg_fifa_category_id(){
+  $form = array();
+  $form['fifa_category_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fifa category id'),
+    '#default_value' => get_itg_variable('fifa_category_id'),
+  );
+  $form['submit_fifa_setting'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+  );
+  return $form;
+}
+
+/**
+* {@inheritdoc}
+*/
+function itg_fifa_category_id_submit($form, &$form_state){
+  $values = $form_state['values'];
+  unset($values['submit_button']);
+  unset($values['form_build_id']);
+  unset($values['form_token']);
+  unset($values['form_id']);
+  unset($values['op']);
+  unset($values['submit_fifa_setting']);
+  foreach ($values as $key => $value) {
+    set_itg_variable($key, $value);
+  }
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}
+

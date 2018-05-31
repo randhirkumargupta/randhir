@@ -124,25 +124,25 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     <div class="container">
       <div class="row">
        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 text-center left_part_2017">
-       	<div class="logo_2017">
+        <div class="logo_2017">
            <a href="http://indiatoday.intoday.in/newswiz/2017/" title="Newswiz 2"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/logo_2017.png" alt="" class="logo_new"></a>
-       	</div>
+        </div>
        </div>
-	 <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 hidden-xs text-right">
-	 <div class="right_part_2017">
-	  <div class="banner_middle_2017"></div>
-	   <div class="rajdeep_sardesai_2017"></div>
-	   <div class="clearfix"></div>
-	 </div>
+   <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 hidden-xs text-right">
+   <div class="right_part_2017">
+    <div class="banner_middle_2017"></div>
+     <div class="rajdeep_sardesai_2017"></div>
+     <div class="clearfix"></div>
+   </div>
        </div>
 
-	 <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+   <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
      <div class="img_text_bgqz text-center"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/masthead-heading-mobile.png" alt=""></div>
      <div class="img_text_date text-center">
-     	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/Mobile-date.png" alt="">
+      <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/2017/Mobile-date.png" alt="">
 
      </div>
-	 </div>
+   </div>
       </div>
     </div>
 
@@ -172,7 +172,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="navLink">
               <ul>
            
-                <li><a href="/newswiz/2017/index.jsp" title="home" class=""><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li><a href="/newswiz/2018/" title="home" class=""><i class="fa fa-home" aria-hidden="true"></i></a></li>
                <!-- <li><a href="newswiz-rules.jsp" class="" title="Rules">Rules &amp; Regulations</a></li>-->  
                     
                 <li><a href="newswiz-schedule.jsp" class='' title="Schedule">Schedule</a></li>
@@ -182,8 +182,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                <!-- <li><a href="all-teams.jsp" class='' title="Teams">Teams</a></li> -->
                 
                  <li><a href="episodes.jsp" title="Show Videos" class="active_h">Show Videos</a></li>
-                 <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>-->
- <li><a href="question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>
+                 <!--<li><a href="online-test.jsp" title="Online Test" class="">Online Test</a></li>
+ <li><a href="question-of-the-week.jsp" title="SHOW QUIZ" class="">SHOW QUIZ</a></li>-->
                               
 
                    
@@ -261,6 +261,48 @@ a.active_h{background:#353333}
                         <h2><span>EPISODES</span></h2>
                         <div class="row">
                           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          <div class="video_episode_snippets">
+                          <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA4OTQ0Ng==" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/Video_Extra_Large_Image/wiz-video_647_111817093241.jpg?Fqa_EgsCPlVt15T9o_tWKMUUjDfNvwYA" alt="Newswiz2">
+                          <p>Grand Finale: Vadodara's Navrachana School wins News Wiz 2017</p>
+                          </a> </div>
+                          </div>
+                          </div>                          
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          <div class="video_episode_snippets">
+                          <div class="video_inner"> <a href="https://www.indiatoday.in/video/NewsWiz/embed/MTA3OTc4MA==" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201711/newswiz-video_647_110417093927.jpg" alt="Newswiz2">
+                          <p>Semifinal 2: Vadodara's Navrachana School moves into final</p>
+                          </a> </div>
+                          </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                          <div class="video_episode_snippets">
+                          <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTY1NQ==" title="Chennai's Vidya Mandir Senior Secondary School seals win with 1000 points"> <span class="icon_video_newswiz"></span> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/video/201710/newswiz-video-647_102117100223.jpg" alt="Newswiz2">
+                          <p>Semifinal 1: Srinagar's DPS emerges winner, enters semi-finals</p>
+                          </a> </div>
+                          </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
+                                <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
+                                </a> </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
+                                <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
+                                </a> </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="video_episode_snippets">
+                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
+                                <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
+                                </a> </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <div class="video_episode_snippets">
                               <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4OTE1" title="Krishna Public School, Raipur seals win with 1150 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-video_647_090217103822.jpg" alt="Newswiz2">
                                 <p>Episode 2: Krishna Public School, Raipur seals win with 1150 points</p>
@@ -275,32 +317,6 @@ a.active_h{background:#353333}
                             </div>
                           </div>
                           
-                          
-                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg4Njg3" title="Bhubaneshwars Sai International School wins a nail-biting contest"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-all-sizes,-305-band_647_090917100037.jpg" alt="Newswiz2">
-                                <p>Episode 3: Bhubaneshwars Sai International School wins a nail-biting contest</p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/OTg5MjAz" title="Jamshedpur's SDSM School comes out on top with 1100 points"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-with-rajdeep-sardesai-video_647_091617114953.jpg" alt="Newswiz2">
-                                <p>Episode 4: Jamshedpur's SDSM School comes out on top with 1100 points</p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="video_episode_snippets">
-                              <div class="video_inner"> <a href="https://www.indiatoday.in/video/news-wiz-2017/embed/MTA2OTAxNQ==" title="St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara"> <span class="icon_video_newswiz"></span> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-wiz-647_092417010325.jpg" alt="Newswiz2">
-                                <p>Episode 5: St Joseph's Boys' High School win the tie-breaker against Sunbeam Lahartara </p>
-                                </a> </div>
-                            </div>
-                          </div>
-                          
-                          
                         </div>
                       </div>
                       <!--end video -->
@@ -311,8 +327,8 @@ a.active_h{background:#353333}
             </div>
             <!--end left -->
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-	<div class="right_side">
-		<!--<div class="right_advertis">
+  <div class="right_side">
+    <!--<div class="right_advertis">
                   
                   <div class="middle_quiz" style="box-shadow:none">
                     <div class="banner_sec marginbtm10"> <a href="http://indiatoday.intoday.in/newswiz/show-question.html" title=""> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/q300x250.jpg" alt=""></a></div>
@@ -321,120 +337,120 @@ a.active_h{background:#353333}
                   </div>
                 </div> -->
 
-		<div class="tally_area">
-			<h2>
-				<span>#Newswiz2</span>
-			</h2>
-			<div class="presen_area">
-				<h4>Presented By</h4>
-				<div class="presen_logo">
-					<!--<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> -->
-				</div>
-			</div>
-			<div class="tally_info">
-				<a class="twitter-timeline" data-dnt="true"
-					href="https://twitter.com/hashtag/NewsWiz2"
-					data-widget-id="999268186603315205">#NewsWiz2 Tweets</a>
-				<script>
-					!function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
-								.test(d.location) ? 'http' : 'https';
-						if (!d.getElementById(id)) {
-							js = d.createElement(s);
-							js.id = id;
-							js.src = p + "://platform.twitter.com/widgets.js";
-							fjs.parentNode.insertBefore(js, fjs);
-						}
-					}(document, "script", "twitter-wjs");
-				</script>
+    <div class="tally_area">
+      <h2>
+        <span>#Newswiz2</span>
+      </h2>
+      <div class="presen_area">
+        <h4>Presented By</h4>
+        <div class="presen_logo">
+          
+        </div>
+      </div>
+      <div class="tally_info">
+        <a class="twitter-timeline" data-dnt="true"
+          href="https://twitter.com/hashtag/NewsWiz2"
+          data-widget-id="999268186603315205">#NewsWiz2 Tweets</a>
+        <script>
+          !function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
+                .test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+              js = d.createElement(s);
+              js.id = id;
+              js.src = p + "://platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }
+          }(document, "script", "twitter-wjs");
+        </script>
 
-			</div>
-		</div>
+      </div>
+    </div>
                       
-		<!--<h2>
-			<a href="episodes.jsp" title="Sneak peek"><span>Sneak peek</span></a>
-		</h2>-->    
-		<!--<div class="right_advertis">
-			<div class="presen_area">
-				<h4>Presented By</h4>
-				<div class="presen_logo">
-					<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> 
-				</div>
-			</div>
-			
-			
-		
-			<div class="middle_quiz" style="display: none">
-				<h3>Are you ready to check your NQ?</h3>
-				<a class="btn btn-danger quiz_btn" title="Take a Quiz"
-					data-toggle="modal" data-target="#myModal">Take a Quiz</a>
-			</div>
-			<div class="modal fade" id="myModal" role="dialog" style="display: none;">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body wiz_text">
-							<iframe name="proprofs" id="proprofs" frameborder="0"
-								marginwidth="0" marginheight="0"
-								src="https://www.proprofs.com/quiz-school/story.php?title=news-quiz_42E0"></iframe>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger btn-xs quiz_btn"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>-->    
-		<!--end right advertis -->
+    <!--<h2>
+      <a href="episodes.jsp" title="Sneak peek"><span>Sneak peek</span></a>
+    </h2>-->    
+    <!--<div class="right_advertis">
+      <div class="presen_area">
+        <h4>Presented By</h4>
+        <div class="presen_logo">
+          <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newimages/presen_logo.jpg" alt=""> 
+        </div>
+      </div>
+      
+      
+    
+      <div class="middle_quiz" style="display: none">
+        <h3>Are you ready to check your NQ?</h3>
+        <a class="btn btn-danger quiz_btn" title="Take a Quiz"
+          data-toggle="modal" data-target="#myModal">Take a Quiz</a>
+      </div>
+      <div class="modal fade" id="myModal" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body wiz_text">
+              <iframe name="proprofs" id="proprofs" frameborder="0"
+                marginwidth="0" marginheight="0"
+                src="https://www.proprofs.com/quiz-school/story.php?title=news-quiz_42E0"></iframe>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger btn-xs quiz_btn"
+                data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->    
+    <!--end right advertis -->
 
 
 
 <div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="auth_newswiz">
-					<span class="img-stroke"></span>
-					<div class="circular_win">
-						<img
-							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg"
-							alt="Rajdeep">
-					</div>
-					<div class="header_win">RAJDEEP SARDESAI</div>
-					<div class="container_wiz">
-						<p>News and Quiz come together in a fantastic battle of
-							brains. Rajdeep Sardesai who has spent his life in news will be
-							at the helm of the first-of-its-kind quiz show - News Wiz. There
-							is no one better equipped than Rajdeep to host such a show
-							considering that he has spent 27 years reporting, editing and
-							anchoring news.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="auth_newswiz">
-					<span class="img-stroke"></span>
-					<div class="circular_win">
-						<img
-							src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
-							alt="Rajdeep">
-					</div>
-					<div class="header_win">SIDDHARTHA BASU</div>
-					<div class="container_wiz">
-						<p>Basu is the undisputed quiz man of India. He is the pioneer
-							who hosted and produced the iconic Quiz Time on Doordarshan and
-							also produced the marquee Kaun Banega Crorepati. He has been the
-							mind behind Mastermind India, University Challenge and India's
-							Child Genius. Now for the first time on news television in India,
-							he is bringing a news-based quiz show.</p>
-					</div>
-				</div>
-			</div>
-		</div>   
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="auth_newswiz">
+          <span class="img-stroke"></span>
+          <div class="circular_win">
+            <img
+              src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/raj_deep.jpg"
+              alt="Rajdeep">
+          </div>
+          <div class="header_win">RAJDEEP SARDESAI</div>
+          <div class="container_wiz">
+            <p>News and Quiz come together in a fantastic battle of
+              brains. Rajdeep Sardesai who has spent his life in news will be
+              at the helm of the first-of-its-kind quiz show - News Wiz. There
+              is no one better equipped than Rajdeep to host such a show
+              considering that he has spent 27 years reporting, editing and
+              anchoring news.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="auth_newswiz">
+          <span class="img-stroke"></span>
+          <div class="circular_win">
+            <img
+              src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sidharth-basu.jpg"
+              alt="Rajdeep">
+          </div>
+          <div class="header_win">SIDDHARTHA BASU</div>
+          <div class="container_wiz">
+            <p>Basu is the undisputed quiz man of India. He is the pioneer
+              who hosted and produced the iconic Quiz Time on Doordarshan and
+              also produced the marquee Kaun Banega Crorepati. He has been the
+              mind behind Mastermind India, University Challenge and India's
+              Child Genius. Now for the first time on news television in India,
+              he is bringing a news-based quiz show.</p>
+          </div>
+        </div>
+      </div>
+    </div>   
 
 
-		<!--end TEAM -->
-	</div>
+    <!--end TEAM -->
+  </div>
 </div>
             <!--end right -->
           </div>
@@ -473,7 +489,7 @@ a.active_h{background:#353333}
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <h2><a href="/newswiz/2017/index.jsp" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
+                  <h2><a href="/newswiz/2018/" title="Home"><i class="fa fa-home" aria-hidden="true"></i></a></h2>
                 </div>
                 <div class="swiper-slide">
                   <h2><a href="/newswiz/2017/newswiz-rules.jsp" title="Rules">Rules &amp; Regulations</a></h2>
@@ -688,8 +704,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 <script type="text/javascript">
 
     $(document).ready(function(){
-	
-	$('.video_episode_snippets .video_inner a').click(function(e){
+  
+  $('.video_episode_snippets .video_inner a').click(function(e){
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
@@ -698,42 +714,42 @@ $('#videoplayer').attr('src',lnk);
 })
 
 
-	$('#video_1').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc&autoplay=true');
-	});
-	
-	$('#video_2').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82mib40&autoplay=true');
-	});
-	
-	
-	$('#video_3').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minnk&autoplay=true');
-	});
-	
-	
-	$('#video_4').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minog&autoplay=true');
-	});
-	
-	
-	$('#video_5').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minpc&autoplay=true');
-	});
-	
+  $('#video_1').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc&autoplay=true');
+  });
+  
+  $('#video_2').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82mib40&autoplay=true');
+  });
+  
+  
+  $('#video_3').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minnk&autoplay=true');
+  });
+  
+  
+  $('#video_4').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minog&autoplay=true');
+  });
+  
+  
+  $('#video_5').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minpc&autoplay=true');
+  });
+  
 
-	$('#closevideo').click(function(){
-		$('.video_pic').removeClass('showvideo');
-		$('#videoplayer').attr('src','');
-	});
-	
-	
-	
+  $('#closevideo').click(function(){
+    $('.video_pic').removeClass('showvideo');
+    $('#videoplayer').attr('src','');
+  });
+  
+  
+  
         $("select").change(function(){
             $(this).find("option:selected").each(function(){
                 if($(this).attr("value")=="group-a"){
@@ -765,8 +781,8 @@ $(".navLink").slideToggle("slow")
 });
 var win_width=$(window).width();
 if(win_width<767){
-	
-	$(".navLink ul li.flashLinkBtn").click(function(){
+  
+  $(".navLink ul li.flashLinkBtn").click(function(){
 $(".navLink ul li ul.flashLinkMenu").toggleClass("flashToggle");
 });
 }
@@ -777,81 +793,81 @@ $(".navLink ul li ul.flashLinkMenu").toggleClass("flashToggle");
 <script>
  $(document).ready(function(e) {
     var photolen  = $('.slider-year ul li').length;
-	//var twidth = $('.slider-year ul li').height();
-	var twidth = $('.timeline-slider ul li').outerHeight(true);
-	var fwidth = (twidth)*photolen;
-	$('.slider-year ul').css('height', fwidth);
-	var counters = 1;
-	
-	$('#nexttag').click(function(){
+  //var twidth = $('.slider-year ul li').height();
+  var twidth = $('.timeline-slider ul li').outerHeight(true);
+  var fwidth = (twidth)*photolen;
+  $('.slider-year ul').css('height', fwidth);
+  var counters = 1;
+  
+  $('#nexttag').click(function(){
                      
-		if(counters < photolen-4)   
-		{
-				$('.slider-year ul').animate({
-					top : '-='+twidth
-				});
-				 counters += 1;
-				
-				$('#pretag').css('opacity', '1');
-		}
-		else{
-			$('#nexttag').css('opacity', '1');
-			
-		}
-	});
-	
-	
-	$('#pretag').click(function(){
-		if(counters == 1)
-		{
-				$('#pretag').css('opacity', '1');
-		}
-		else{
-			$('.slider-year ul').animate({
-					top : '+='+twidth
-				});   
-			counters -= 1;
-			$('#nexttag').css('opacity', '1');
-		}
-	});
-	
-	var photolensh  = $('.videoshow-section ul li').length;
-	var twidthsh = $('.videoshow-section ul li').height();
-	var fwidthsh = (twidthsh)*photolensh;
-	$('.videoshow-section ul').css('height', fwidthsh);
-	var counter = 1;
-	
-	$('#nextsh').click(function(){
+    if(counters < photolen-4)   
+    {
+        $('.slider-year ul').animate({
+          top : '-='+twidth
+        });
+         counters += 1;
+        
+        $('#pretag').css('opacity', '1');
+    }
+    else{
+      $('#nexttag').css('opacity', '1');
+      
+    }
+  });
+  
+  
+  $('#pretag').click(function(){
+    if(counters == 1)
+    {
+        $('#pretag').css('opacity', '1');
+    }
+    else{
+      $('.slider-year ul').animate({
+          top : '+='+twidth
+        });   
+      counters -= 1;
+      $('#nexttag').css('opacity', '1');
+    }
+  });
+  
+  var photolensh  = $('.videoshow-section ul li').length;
+  var twidthsh = $('.videoshow-section ul li').height();
+  var fwidthsh = (twidthsh)*photolensh;
+  $('.videoshow-section ul').css('height', fwidthsh);
+  var counter = 1;
+  
+  $('#nextsh').click(function(){
 
-		if(counter < photolensh-3)
-		{
-				$('.videoshow-section ul').animate({
-					top : '-=338'
-				});
-				 counter += 1;
-				
-				$('#presh').css('opacity', '1');
-		}
-		else{
-			$('#nextsh').css('opacity', '1');
-			
-		}
-	});
-	
-	$('#presh').click(function(){
-		if(counter == 1)
-		{
-				$('#presh').css('opacity', '1');
-		}
-		else{
-			$('.videoshow-section ul').animate({
-					top : '+=338'
-				});
-			counter -= 1;
-			$('#nextsh').css('opacity', '1');
-		}
-	});
-	
+    if(counter < photolensh-3)
+    {
+        $('.videoshow-section ul').animate({
+          top : '-=338'
+        });
+         counter += 1;
+        
+        $('#presh').css('opacity', '1');
+    }
+    else{
+      $('#nextsh').css('opacity', '1');
+      
+    }
+  });
+  
+  $('#presh').click(function(){
+    if(counter == 1)
+    {
+        $('#presh').css('opacity', '1');
+    }
+    else{
+      $('.videoshow-section ul').animate({
+          top : '+=338'
+        });
+      counter -= 1;
+      $('#nextsh').css('opacity', '1');
+    }
+  });
+  
 });
 </script> 
 </body>

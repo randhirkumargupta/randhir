@@ -847,6 +847,9 @@ function itg_widget_theme() {
         'election_constituency_select_box' => array(
             'template' => 'templates/election-constituency-select_box',
         ),
+        'trending_top_takes_videos_widget' => array(
+            'template' => 'templates/trending-top-takes-videos-widget',
+        ),
 
     );
     return $themes;
@@ -1683,7 +1686,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
         }
     }
 
-    if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video')) {
+    if ($view->name == 'sport_ipl' && ($view->current_display == 'ipl_video' || $view->current_display == 'fifa_video')) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME) {
                 $section = arg(2);

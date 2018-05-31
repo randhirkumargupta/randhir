@@ -7,6 +7,13 @@
     Drupal.behaviors.itg_story = {
         attach: function (context, settings) {
             var uid = settings.itg_story.settings.uid;
+            var sef_url_access = settings.itg_story.settings.sef_url_access;
+            console.log('sef_url_access = ' + sef_url_access);
+            if (typeof (sef_url_access) != undefined && sef_url_access != null) {
+                jQuery('#edit-path-pathauto').attr('disabled','disabled');
+                jQuery('#edit-path-pathauto').prop('checked', false);
+                jQuery('#edit-path-alias').attr('disabled','disabled');
+            }
             var StoryId = settings.itg_story.settings.storyid;
             if (StoryId == 0) {
                 // jquery to open question field.

@@ -17,7 +17,7 @@
   <meta charset="utf-8" />
   <title><?php print $head_title; ?></title>
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <?php print $head; ?>
+  <?php print $head; ?>  
   <!--<link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>-->
   <!--<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>-->
   <script type="text/javascript">
@@ -130,7 +130,7 @@
         qp('init', 'a50e46d4d6b444a7ab8308928a6df8f0');
         qp('track', 'ViewContent');
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://q.quora.com/_/ad/a50e46d4d6b444a7ab8308928a6df8f0/pixel?tag=ViewContent&noscript=1"/></noscript>    
     <!-- End of Quora Pixel Code -->
 <?php if(($front_page) || ($type == 'story')){ ?>
 <style>
@@ -174,6 +174,9 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 
 </style>
 <?php } ?>
+<?php if($front_page) : $js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); ?>
+<script type="text/javascript" async src="<?php print $js_path; ?>"></script>
+<?php endif; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>
@@ -216,6 +219,9 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 	  print $styles;
 	}
 ?>
+<!--
 <script type="text/javascript">"serviceWorker" in navigator && window.addEventListener("load", function() {navigator.serviceWorker.register("/service-worker.js").then(function(e) { console.log("Service worker registered."), e.onupdatefound = function() {var n = e.installing; n.onstatechange = function() { switch (n.state) {case "installed": navigator.serviceWorker.controller ? (console.log("New or updated content is available."), window.location.reload()) : console.log("Content is now available offline!"); break; case "redundant": console.error("The installing service worker became redundant.") } } } }).catch(function(e) {console.error("Error during service worker registration:", e) }) }); console.log("%cStop!","font-size:48px; font-weight: bold; color: red;");console.log("\n%cThe JavaScript console is intended for developers. If someone told you to copy-paste something here to enable special features, it is a scam and will expose your personal information.","font-size:24px;");</script><script type="text/javascript">function loadScript(e, t) {if (navigator.onLine) {var n = document.createElement("script"); n.type = "text/javascript", n.async = !0, n.readyState ? n.onreadystatechange = function() {"loaded" != n.readyState && "complete" != n.readyState || (n.onreadystatechange = null, t && "function" == typeof t && t()) } : n.onload = function() {t && "function" == typeof t && t() }, n.src = e, (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(n) } else {var a = new Request(e); caches.match(a).then(function(n) {if (n) {var a = document.createElement("script"); a.type = "text/javascript", a.async = !0, a.readyState ? a.onreadystatechange = function() {"loaded" != a.readyState && "complete" != a.readyState || (a.onreadystatechange = null, t && "function" == typeof t && t()) } : a.onload = function() {t && "function" == typeof t && t() }, a.src = e, (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(a) } }) } } </script>
+<script type="text/javascript" src="https://akm-img-a-in.tosshub.com/sites/common/js/gdpr/gdpr_check.js" data-name="cookies-policy" data-id="gdprconsentpolicy"></script>
+-->
 </body>
 </html> 

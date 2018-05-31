@@ -310,7 +310,22 @@ function itg_widget_menu() {
       'file path' => drupal_get_path('module', 'itg_widget'),
       'access callback' => TRUE,
     );
-
+    $items['itg-sef-url-configure'] = array(
+      'title' => t('User access sefurl configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_user_access_sef_url'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
+    $items['itg-fifa-category-configure'] = array(
+      'title' => t('Fifa category id configrations'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_fifa_category_id'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
   return $items;
 }
 
@@ -485,10 +500,6 @@ function itg_widget_block_info() {
     $blocks['fifa_top_stories_manual_widget'] = array(
       'info' => t('Widget: Fifa Top Stories Manual Widget'),
     );
-    
-    $blocks['fifa_special_watch_widget'] = array(
-      'info' => t('Widget: Fifa Watch right now video Widget'),
-    );
         
     $blocks['score_card_iframe_widget'] = array(
       'info' => t('Widget: Score Card Iframe Widget'),
@@ -527,6 +538,9 @@ function itg_widget_block_info() {
     );
     $blocks['election_constituency_select_box'] = array(
       'info' => t('Widget: Election Constituency Select Box'),
+    );
+    $blocks['trending_top_takes_videos'] = array(
+      'info' => t('Widget: Trending and Top takes videos widget'),
     );
     
     return $blocks;
@@ -645,7 +659,7 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("year_end_top_videos", array("data" => $data));
             break;
         // Trending videos ordering reordering widget case
-        case 'trending_videos_widget':
+        case 'trending_videos_widget':			
             $info['widget'] = 'trending_videos_widget';
             $info['order'] = 'ASC';
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
@@ -1025,15 +1039,6 @@ function itg_widget_block_view($delta = '') {
           $data = get_view_nodes_form_custom_table_review_widgets('section_manual_order_widget', $cat_id, FIFA_TOP_STORIES_MANUAL_WIDGET_MAX_RANGE, FIFA_TOP_STORIES_MANUAL_WIDGET_MIN_RANGE);
           $block['content'] = theme("fifa_top_stories_manual_widget_data", array("data" => $data));
           break;
-        case 'fifa_special_watch_widget':
-            $info['widget'] = 'watch_right_now_widget';
-            $info['order'] = 'ASC';
-            $info['max_limit'] = DONT_MISS_MAX_RANGE;
-            $info['min_limit'] = DONT_MISS_MIN_RANGE;
-            $data = itg_widget_get_widget_data_data($info);
-            // p($data);
-            $block['content'] = theme("fifa_dont_miss_widget", array("data" => $data));
-            break;
          case 'score_card_iframe_widget':
           $sid = 1;
           $query = db_select('itg_score_card', 'm');
@@ -1261,6 +1266,46 @@ function itg_widget_block_view($delta = '') {
         case 'election_constituency_select_box':
           $block['content'] = theme("election_constituency_select_box", array());
           break;
+        case 'trending_top_takes_videos':
+          drupal_add_js('jQuery(document).ready(function() {
+              
+                jQuery(".trending-videos-flex").flexslider({
+                animation: "slide",
+                prevText: "",
+                nextText: "",
+                after: function(slider){
+                    if(slider.currentSlide < 3){
+                      var t_text = jQuery("#treanding_top_takes_title").attr("data-trending-title");
+                      if(t_text !== undefined){
+                        jQuery("#treanding_top_takes_title").html(t_text);
+                      }else{
+                        jQuery("#treanding_top_takes_title").html("Treanding videos");
+                      }
+                    }else{
+                      var t_text = jQuery("#treanding_top_takes_title").attr("data-toptakes-title");
+                      if(t_text !== undefined){
+                        jQuery("#treanding_top_takes_title").html(t_text);
+                      }else{
+                        jQuery("#treanding_top_takes_title").html("Top Takes Video");
+                      }
+                    }
+                  }
+                });
+              });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
+          $info['widget'] = 'trending_videos_widget';
+          $info['order'] = 'ASC';
+          $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
+          $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
+          $trending_data = itg_widget_get_widget_data_data($info);
+          
+          $info['widget'] = 'top_takes_video_widget';
+          $info['order'] = 'ASC';
+          $info['max_limit'] = TOP_TAKES_MAX_RANGE;
+          $info['min_limit'] = TOP_TAKES_MIN_RANGE;
+          $data_top_takess = itg_widget_get_widget_data_data($info);
+          $data = array_merge($trending_data, $data_top_takess);
+          $block['content'] = theme("trending_top_takes_videos_widget", array("data" => $data));  
     }       
     return $block;
 }

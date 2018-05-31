@@ -17,7 +17,6 @@ function itg_videogallery_xml_file_video_insert() {
         $long_headline = $xml->long_headline;
         $short_headline = $xml->short_headline;
         $description = $xml->description;
-        $city = $xml->city;
         $anchor = (int) $xml->anchor;
         $video_kicker = $xml->video_kicker;
         $section_id = (int) $xml->section_id;
@@ -50,7 +49,6 @@ function itg_videogallery_xml_file_video_insert() {
         }
 
         $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
-        $node->field_stroy_city[LANGUAGE_NONE][0]['value'] = trim($city);
         $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
         $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 

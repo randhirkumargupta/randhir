@@ -56,6 +56,10 @@ function itg_common_init() {
     drupal_add_js(array('itg_funalytics' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js', array('scope' => 'footer'));
   }
+  
+  /*if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+    drupal_add_js(drupal_get_path('theme', 'itg') . "/js/lazysizes.min.js", array('scope' => 'header'));
+  }*/
 }
 
 /**
@@ -1952,4 +1956,26 @@ function itg_ipl_triangle_status(){
     $query->fields('m', array('score_triangle','score_code_cube_app'));
     $data_result = $query->execute()->fetchAssoc();
     return $data_result;
+}
+
+/**
+ * Function load all country lists
+ */
+
+function get_all_country_list(){
+  $tree = taxonomy_get_tree(36);
+  $tids = array();
+  foreach ($tree as $key => $value) {
+    $tids[$value->tid] = $value->name;
+  }
+  return $tids;
+}
+
+/**
+ * Function load all country lists
+ */
+
+function get_country_by_tid($tid){
+  $term_data = taxonomy_term_load($tid);
+  return $term_data;
 }
