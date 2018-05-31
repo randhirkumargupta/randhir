@@ -234,14 +234,14 @@ function itg_seo_node_data($node) {
     } //else {           
 	   $story_markup = array(
 		 '#type' => 'markup',
-		 '#markup' => '<script type="application/ld+json"> {
+		 '#markup' => '<script data-schema="WebPage" type="application/ld+json"> {
 					 "@id": "' . $mainEntityOfPage . '",
 					 "potentialAction": {
 					 "@type": "ViewAction",
 					 "target": "android-app://com.indiatoday/' . $mainEntityOfPage . '"
-					 }
-					 "@context": "http://schema.org",
-					 "@type": "WebPage"
+					 },
+					 "@type": "WebPage",
+					 "@context": "http://schema.org"
 					 }  </script>',
 	   );
     //}
