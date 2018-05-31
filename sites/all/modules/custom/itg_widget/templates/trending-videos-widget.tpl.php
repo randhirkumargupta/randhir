@@ -4,11 +4,9 @@
 .trending_top_takes_videos ol.flex-control-paging{display:none;}
 .trending_top_takes_videos .flex-direction-nav a{opacity:1;}
 .trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
-
 .trending_top_takes_videos .flex-nav-prev{left:10px; top:60px;}
 .trending_top_takes_videos .flex-nav-next{right:7px; top:60px;border-radius: 35px 0px 0px 35px;}
 .trending_top_takes_videos .flex-direction-nav .flex-nav-next .flex-next{padding-left:10px;}
-
 .trending_top_takes_videos .flex-direction-nav{position: absolute;top: 0;width: 100%;}
 .trending_top_takes_videos .flex-direction-nav .flex-next{right:0; position:static;line-height: 64px;}
 .trending_top_takes_videos .flex-direction-nav .flex-prev{left:0; position:static;line-height: 64px;}
@@ -16,9 +14,6 @@
 .trending_top_takes_videos .flex-direction-nav a:before{color:#fff;}
 .trending_top_takes_videos .trending-videos-flex{position:relative;}
 </style>
-
-
-
 <?php if (!empty($data)) : global $base_url; ?>
 <?php 
   $data_tb_region_item = '';
