@@ -480,7 +480,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                         <div id="collapseNeneteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNeneteen">
                             <div class="panel-body">
                                  Due to privacy concerns and integrity of the show, we cannot list the winners on any public medium. And participants who have been selected by us are also being informed separately over the phone/mail.
-                                 <div class="regBtnHome"><a target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
+                                 <div class="regBtnHome" style="margin-top: 5px;"><a style="color: #fff; text-decoration:none;" target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
                             </div>
                         </div>
                     </div>
