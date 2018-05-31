@@ -814,14 +814,14 @@ function itg_js_alter(&$javascript) {
   
   if (drupal_is_front_page()) {
 	 unset($javascript['misc/jquery.once.js']);
-	 unset($javascript['sites/all/themes/itg/js/slick.js']);
+	 //unset($javascript['sites/all/themes/itg/js/slick.js']);
 	 unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
 	 unset($javascript['sites/all/themes/itg/js/ripple.js']);
 	 unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
 	 unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
 	 unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
 	 unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
-	 unset($javascript['sites/all/themes/itg/js/script.js']);	  
+	 //unset($javascript['sites/all/themes/itg/js/script.js']);	  
      unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
      unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
      unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
