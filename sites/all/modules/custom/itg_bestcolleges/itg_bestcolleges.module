@@ -1121,7 +1121,7 @@ function csvImporter_validate_fileupload(&$form, &$form_state) {
   $validators = array(
     'file_validate_extensions' => array('csv'),
   );
-
+ 
   $destination = "public://indiatoday/";
   if ($file = file_save_upload('csvfile', $validators, $destination , FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
@@ -1129,6 +1129,16 @@ function csvImporter_validate_fileupload(&$form, &$form_state) {
   else {
     form_set_error('csvImporter', t('Unable to copy upload file to !dest', array('!dest' => $destination)));
   }
+  
+  $errors_before = drupal_get_messages('error');
+  $new_errors = array_diff(drupal_get_messages('error'), $errors_before);
+  if (!empty($new_errors)) {
+    // Render the errors into a single message.
+    foreach ($new_errors as $error) {
+      drupal_set_message($error, 'error');
+    }
+  }  
+    
 }
 
 /**
