@@ -193,9 +193,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                           <li><strong>Level 1 – Registration and online selection test</strong> </li>
                           <li><span>1</span> <strong>The quiz is open to school students studying in Class 9-12, in the academic year 2018-19, who would represent their school.</strong></li>
                           <li><span>2</span> <strong>The students should be citizens of India and residing and studying in a school within the territorial boundaries of India.</strong></li>
-                          <li><span>3</span> <strong>Teams need to fill out the online entry form uploaded on <a href="https://goo.gl/RpNiN7">https://goo.gl/RpNiN7</a> , last date of registration is 14st June 2018.</strong></li>
+                          <li><span>3</span> <strong>Teams need to fill out the online entry form uploaded on <a href="https://goo.gl/RpNiN7">https://goo.gl/RpNiN7</a> , last date of registration is 14th June 2018.</strong></li>
                           
-                          <li><span>4</span> <strong>Team members also need to email us recent passport size photographs of each member. Email id: <a href="newswiz@toknowledge.com" target="_blank">newswiz@toknowledge.com </a></strong></li>
+                          <li><span>4</span> <strong>Team members also need to email us recent passport size photographs of each member. Email id: <a href="mailto:newswiz@toknowledge.com">newswiz@toknowledge.com </a> and <a href="mailto:registration@newswiz.in">registration@newswiz.in</a></strong></li>
                           <li><span>5</span> <strong>Each team needs to apply as a team of two. If the composition of the team changes at any stage subsequent to selection, then they would be disqualified.</strong></li>
                           <li><span>6</span> <strong>Each school can nominate upto 3 teams to take part in the online test.</strong> </li>
                           <li><span>7</span> <strong>Team participation should mean both members represent the same school between Classes 9-12 in the academic year of 2018-2019.</strong></li>

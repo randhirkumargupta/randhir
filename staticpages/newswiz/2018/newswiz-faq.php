@@ -254,7 +254,7 @@ session 2018-2019, you may register and try your luck again! You are free to mak
                 
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                            <div class="panel-body">An Online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail an will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.</div>
+                            <div class="panel-body">An Online Test will be conducted mid June to shortlist the teams invited, as the first stage. This date to will be communicated via mail and will be online. Furthermore, post the Online Test, the shortlisted teams will have to face a live video call test with 5 questions to be answered. This is to determine the shortlisting for the final teams that will make it to the TV rounds. Such video calls shall be recorded by the Producer to enlist the final teams, keeping in mind various pre-decided parameters by the producers. Please go through the rules posted in detail.</div>
                         </div>
                     </div>
                     
