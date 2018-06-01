@@ -6352,7 +6352,7 @@ function itg_rapid_api_topstories($token) {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
-        $jsondata = topstoriesList("topstoriesapi");
+        $jsondata = topstoriesList();
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
