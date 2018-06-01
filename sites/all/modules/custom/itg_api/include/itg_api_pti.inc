@@ -55,7 +55,7 @@ function itg_pti_content() {
             $row_count = itg_api_get_xml_info($xml_filename);
             if ($row_count == 0) {
               if (!empty($pti_xml)) {
-				$pti_body = $pti_xml->channel->item;
+                $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
                   $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $pti_value->title))));
                   $title_length = strlen($pti_value->title);
