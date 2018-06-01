@@ -1173,6 +1173,7 @@ function topstoriesList($source, $limit = 0) {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+        $body_value = $value['body_value'];
         if ($type == 'breaking_news') {
             $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
         }
@@ -1281,7 +1282,7 @@ function topstoriesList($source, $limit = 0) {
         $data_newslist[$home_list_count]['n_widget'] = $n_widget;
         /* work on offline start */
 
-        if ($type == "story" && $source != "home") {
+        if ($type == "story" && $source != 'home' && $body_value != "") {
             $byline_data = itg_get_multi_byline_details($nid, 1);
             $aid = $byline_data[0]['nid'];
             $a_title = $byline_data[0]['title'];
