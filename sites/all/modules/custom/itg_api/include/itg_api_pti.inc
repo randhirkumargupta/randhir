@@ -13,6 +13,7 @@ function itg_pti_content() {
   if (!empty(variable_get('api_info')) && (get_itg_variable('is_pti_cron_running') == 1)) {
     global $user;
     set_itg_variable('is_pti_cron_running', 0);
+    itg_api_delete_intrupted_node();
     //module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
