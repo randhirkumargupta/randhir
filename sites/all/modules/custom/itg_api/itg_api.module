@@ -423,3 +423,11 @@ function itg_api_update_xml_info($nid, $file, $type, $source) {
   ->condition('filename', $file, '=')
   ->execute();
 }
+
+function itg_api_delete_intrupted_node() {
+  global $user;
+  $created = date('Y-m-d H:i:s');
+  db_delete('itg_api_xml_info')// Table to store file and node info
+  ->condition('nid', 0, '=')
+  ->execute();
+}
