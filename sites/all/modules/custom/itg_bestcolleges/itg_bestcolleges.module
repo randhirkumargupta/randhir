@@ -1120,9 +1120,8 @@ function csvImporter_validate_fileupload(&$form, &$form_state) {
   $validators = array(
     'file_validate_extensions' => array('csv'),
   );
-  
-  // $destination = FALSE; // "public://"
-  if ($file = file_save_upload('csvfile', $validators, "public://tv_schedule" , FILE_EXISTS_REPLACE)) {
+   
+  if ($file = file_save_upload('csvfile', $validators, "public://" , FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
