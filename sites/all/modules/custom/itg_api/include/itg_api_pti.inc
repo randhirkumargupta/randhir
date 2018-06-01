@@ -10,9 +10,9 @@ use Aws\Common\Credentials\Credentials;
  */
 function itg_pti_content() {
   drupal_page_is_cacheable(FALSE);
-  if (!empty(variable_get('api_info')) && (get_itg_variable('is_pti_cron_runnung') == 1)) {
+  if (!empty(variable_get('api_info')) && (get_itg_variable('is_pti_cron_running') == 1)) {
     global $user;
-    set_itg_variable('is_pti_cron_runnung', 0);
+    set_itg_variable('is_pti_cron_running', 0);
     //module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
@@ -317,7 +317,7 @@ function itg_pti_content() {
       echo $e->getMessage() . "\n";
     }
     echo "Success";
-    set_itg_variable('is_pti_cron_runnung', 1);
+    set_itg_variable('is_pti_cron_running', 1);
   }
   else {
 	echo "Failure";
