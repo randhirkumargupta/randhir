@@ -1281,7 +1281,7 @@ function topstoriesList($source, $limit = 0) {
         $data_newslist[$home_list_count]['n_widget'] = $n_widget;
         /* work on offline start */
 
-        if ($type == "story" && $source == 'topstoriesapi') {
+        if ($type == "story" && $source != "home") {
             $byline_data = itg_get_multi_byline_details($nid, 1);
             $aid = $byline_data[0]['nid'];
             $a_title = $byline_data[0]['title'];
