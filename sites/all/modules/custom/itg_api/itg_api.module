@@ -399,3 +399,27 @@ function itg_api_path_insert($node) {
     return $newpath;
   }
 }
+
+
+/**
+ * Implements function for update xml file info in table (itg_api_xml_info)
+ * @param int $nid
+ * @param string $file
+ * @param string $type
+ * @param string $source
+ */
+function itg_api_update_xml_info($nid, $file, $type, $source) {
+  global $user;
+  $created = date('Y-m-d H:i:s');
+  db_update('itg_api_xml_info')// Table to store file and node info
+  ->fields(array(
+    'nid' => $nid,
+    'uid' => $user->uid,
+    'filename' => $file,
+    'type' => $type,
+    'source' => $source,
+    'created' => $created
+  ))
+  ->condition('filename', $file, '=')
+  ->execute();
+}
