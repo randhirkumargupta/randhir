@@ -14154,4 +14154,24 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .navigation .menu li.has-image, #block-itg-layout-manager-header-block .navigation .menu li.has-image.ripple-effect {
   overflow: visible; }
 
+/*Ravi Jha*/
+.float-right {
+  float: right;
+  position: relative;
+  z-index: 9; }
+
+.form-item-upload-csv {
+  padding-left: 0; }
+
+.cancel {
+  float: right; }
+
+.download-sample {
+  line-height: 35px;
+  padding-right: 10px; }
+
+.form-actions {
+  display: inline-block;
+  width: 100%; }
+
 /*# sourceMappingURL=styles.css.map */
