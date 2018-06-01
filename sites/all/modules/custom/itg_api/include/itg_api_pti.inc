@@ -10,8 +10,9 @@ use Aws\Common\Credentials\Credentials;
  */
 function itg_pti_content() {
   drupal_page_is_cacheable(FALSE);
-  if (!empty(variable_get('api_info'))) {
+  if (!empty(variable_get('api_info')) && (get_itg_variable('is_pti_cron_running') == 1)) {
     global $user;
+    set_itg_variable('is_pti_cron_running', 0);
     //module_load_include('php', 'itg_api', 'alchemy_api/alchemyapi');
 
    /* $vocab_id = taxonomy_vocabulary_machine_name_load('bad_words');
@@ -55,6 +56,7 @@ function itg_pti_content() {
             $row_count = itg_api_get_xml_info($xml_filename);
             if ($row_count == 0) {
               if (!empty($pti_xml)) {
+				itg_api_insert_xml_info(0, $xml_filename, 'story', 'PTI');    
                 $pti_body = $pti_xml->channel->item;
                 foreach ($pti_body as $pti_value) {
                   $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $pti_value->title))));
@@ -279,7 +281,7 @@ function itg_pti_content() {
                       'alias' => $newpath, // Any alias that you want to set.
                     );
                     path_save($path);*/
-                    itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'PTI');
+                    itg_api_update_xml_info($node->nid, $xml_filename, 'story', 'PTI');
                     // move xml files/
                     $complete_folder_path = "s3://{$bucket}".'/agencies/pti/Complete_xml/';
                     if (copy($file_path, $complete_folder_path.$xml_filename)) {
@@ -314,6 +316,7 @@ function itg_pti_content() {
     catch (S3Exception $e) {
       echo $e->getMessage() . "\n";
     }
+    set_itg_variable('is_pti_cron_running', 1);
     echo "Success";
   }
   else {
