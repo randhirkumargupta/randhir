@@ -414,14 +414,25 @@ function itg_tv_schedule_uploadmongo($file_id, $filename) {
 }
 
 /**
- * Implements hook_file_validate().
+ * Implements validate csv file().
  */
-function itg_tv_schedule_file_validate_old($file) {
-  $allowed = array('indiatoday'=>'Indiatoday_tvschedule.csv', 'aajtak'=>'aajtak_tvschedule.csv', 'dilliaajtak'=>'Dilliaajtak_tvschedule.csv', 'tez'=>'tez_tvschedule.csv');
-  if ($allowed[arg(1)] !== $file->filename) {
-    $errors = array();
-    $errors[] = 'Inappropriate csv file name, Filename must be "'.$allowed[arg(1)].'';
-    return $errors;
+function upload_csv_validate($file, $form_id) {
+  if($form_id == 'itg_tv_schedule_form'){
+    $allowed = array('indiatoday'=>'Indiatoday_tvschedule.csv', 'aajtak'=>'aajtak_tvschedule.csv', 'dilliaajtak'=>'Dilliaajtak_tvschedule.csv', 'tez'=>'tez_tvschedule.csv');
+    if ($allowed[arg(1)] !== $file->filename) {
+      $errors = array();
+      $errors[] = 'Inappropriate csv file name, Filename must be "'.$allowed[arg(1)].'';
+      return $errors;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function itg_tv_schedule_form_alter(&$form, &$form_state, $form_id) {
+  if($form_id == 'itg_tv_schedule_form'){
+    $form['file']['#upload_validators']['upload_csv_validate'] = array($form_id);
   }
 }
 
@@ -431,7 +442,9 @@ function itg_tv_schedule_file_validate_old($file) {
  * {@inheritdoc}
  */
 function itg_tv_schedule_form_submit($form, &$form_state) {
-    global $user;
+  global $user;
+
+  if($form['form_id']['#value'] == 'itg_tv_schedule_form'){
     $file_id = $form_state['input']['file']['fid'];
     $file = file_load($form_state['values']['file']);
     $file->status = FILE_STATUS_PERMANENT;
@@ -451,6 +464,7 @@ function itg_tv_schedule_form_submit($form, &$form_state) {
             drupal_set_message(t('Inappropriate csv file'));
         }
     }
+  }
 }
 
 /**
