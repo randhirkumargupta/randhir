@@ -59,12 +59,6 @@ function itg_custom_variables() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('enable_custom_lazyload'),
   );
-  $form['is_pti_cron_running'] = array(
-    '#type' => 'textfield',
-    '#title' => t('PTI Cron Running status'),
-    '#default_value' => get_itg_variable('is_pti_cron_running', 1),
-    '#required' => FALSE,
-  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
