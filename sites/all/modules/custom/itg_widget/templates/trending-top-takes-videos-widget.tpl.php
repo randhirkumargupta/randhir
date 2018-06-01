@@ -21,7 +21,8 @@
 .trending_top_takes_videos .flex-direction-nav a{display:inline;}
 .trending_top_takes_videos .flex-direction-nav a:before{color:#fff;}
 .trending_top_takes_videos .trending-videos-flex{position:relative;}
-.trending_top_takes_videos .front .trending-videos .trending-videos-list{padding: 0 0 10px;}
+#trending-videos .front .trending-videos .trending-videos-list{padding: 0 0 10px;}
+#trending-videos ul li{padding:0 0 10px;}
 </style>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
