@@ -83,6 +83,12 @@ function itg_custom_variables() {
     '#default_value' => get_itg_variable('tez_tvschedule_email'),
     '#required' => FALSE,
   );
+  $form['is_pti_cron_running'] = array(
+    '#type' => 'textfield',
+    '#title' => t('PTI Cron Running status'),
+    '#default_value' => get_itg_variable('is_pti_cron_running', 1),
+    '#required' => FALSE,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
