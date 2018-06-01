@@ -416,7 +416,7 @@ function itg_tv_schedule_uploadmongo($file_id, $filename) {
 /**
  * Implements hook_file_validate().
  */
-function itg_tv_schedule_file_validate($file) {
+function itg_tv_schedule_file_validate_old($file) {
   $allowed = array('indiatoday'=>'Indiatoday_tvschedule.csv', 'aajtak'=>'aajtak_tvschedule.csv', 'dilliaajtak'=>'Dilliaajtak_tvschedule.csv', 'tez'=>'tez_tvschedule.csv');
   if ($allowed[arg(1)] !== $file->filename) {
     $errors = array();

@@ -13552,3 +13552,8 @@ div.ctools-modal-content .form-submit {
   display: block; }
 
 /*# sourceMappingURL=styles.css.map */
+.float-right{float:right;}
+.form-item-upload-csv{padding-left:0;}
+.cancel{float:right;}
+.download-sample{line-height:35px; padding-right:10px;}
+.form-actions{display:inline-block; width:100%;}
