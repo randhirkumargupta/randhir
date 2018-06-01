@@ -319,96 +319,98 @@ function itg_tv_schedule_time_form($form, &$form_state) {
  * @return bool
  */
 function itg_tv_schedule_uploadmongo($file_id, $filename) {
-    $i = 1;
-    $flag = 0;
-    $status = 0;
-    $upload_date = date("Y/m/d");
-    $itg_query = db_select('file_managed', 'f');
-    $itg_result = $itg_query->condition('fid', $file_id, '=')
-            ->fields('f', array('uri'))->execute()->fetchField();
-    $file_url = file_create_url($itg_result);
-    $file = fopen($file_url, "r");
-    while (($data = fgetcsv($file)) !== FALSE) {
-        if ($i == 1) {
-            if (isItValidDate($data[1]) && isItValidDate($data[2]) && isItValidDate($data[3]) && isItValidDate($data[4]) && isItValidDate($data[5]) && isItValidDate($data[6]) && isItValidDate($data[7])) {
-                $mondate = changeDateFormat($data[1]);
-                $tuedate = changeDateFormat($data[2]);
-                $weddate = changeDateFormat($data[3]);
-                $thudate = changeDateFormat($data[4]);
-                $fridate = changeDateFormat($data[5]);
-                $satdate = changeDateFormat($data[6]);
-                $sundate = changeDateFormat($data[7]);
-                $flag = 1;
-                break;
-            }
-        }
-    }
-    if ($flag == 1) {
-        // execute when appropriate file uploaded
-        // connection with database
-        $db = mongodb();
-        if (isset($db)) {
-            $people = $db->tv_schedule;
-            $ret = $people->remove(array('filetype' => $filename));
-        }
-        else {
-            return FALSE;
-        }
+  global $user;
+  $uploaded_by = $user->uid;
+  $i = 1;
+  $flag = 0;
+  $status = 0;
+  $upload_date = date("Y/m/d H:i:s");
+  $itg_query = db_select('file_managed', 'f');
+  $itg_result = $itg_query->condition('fid', $file_id, '=')
+          ->fields('f', array('uri'))->execute()->fetchField();
+  $file_url = file_create_url($itg_result);
+  $file = fopen($file_url, "r");
+  while (($data = fgetcsv($file)) !== FALSE) {
+      if ($i == 1) {
+          if (isItValidDate($data[1]) && isItValidDate($data[2]) && isItValidDate($data[3]) && isItValidDate($data[4]) && isItValidDate($data[5]) && isItValidDate($data[6]) && isItValidDate($data[7])) {
+              $mondate = changeDateFormat($data[1]);
+              $tuedate = changeDateFormat($data[2]);
+              $weddate = changeDateFormat($data[3]);
+              $thudate = changeDateFormat($data[4]);
+              $fridate = changeDateFormat($data[5]);
+              $satdate = changeDateFormat($data[6]);
+              $sundate = changeDateFormat($data[7]);
+              $flag = 1;
+              break;
+          }
+      }
+  }
+  if ($flag == 1) {
+      // execute when appropriate file uploaded
+      // connection with database
+      $db = mongodb();
+      if (isset($db)) {
+          $people = $db->tv_schedule;
+          $ret = $people->remove(array('filetype' => $filename));
+      }
+      else {
+          return FALSE;
+      }
 
 
-        while (($data = fgetcsv($file)) !== FALSE) {
+      while (($data = fgetcsv($file)) !== FALSE) {
 
-            if ($i > 3) {
-                // monday corresponding value insertion
-                if ($data[1]) {
-                    $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date, "program date" => $mondate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
+          if ($i > 3) {
+              // monday corresponding value insertion
+              if ($data[1]) {
+                  $query = array("time" => $data[0], "day" => "MON", "program" => $data[1], "upload date" => $upload_date, "program date" => $mondate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
 
-                //tuesday corresponding value insertion
-                if ($data[2]) {
-                    $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date, "program date" => $tuedate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
+              //tuesday corresponding value insertion
+              if ($data[2]) {
+                  $query = array("time" => $data[0], "day" => "TUE", "program" => $data[2], "upload date" => $upload_date, "program date" => $tuedate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
 
-                //wednesday corresponding value insertion
-                if ($data[3]) {
-                    $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date, "program date" => $weddate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
+              //wednesday corresponding value insertion
+              if ($data[3]) {
+                  $query = array("time" => $data[0], "day" => "WED", "program" => $data[3], "upload date" => $upload_date, "program date" => $weddate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
 
-                //thursday corresponding value insertion
-                if ($data[4]) {
-                    $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date, "program date" => $thudate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
+              //thursday corresponding value insertion
+              if ($data[4]) {
+                  $query = array("time" => $data[0], "day" => "THU", "program" => $data[4], "upload date" => $upload_date, "program date" => $thudate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
 
-                //friday corresponding value insertion
-                if ($data[5]) {
-                    $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date, "program date" => $fridate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
+              //friday corresponding value insertion
+              if ($data[5]) {
+                  $query = array("time" => $data[0], "day" => "FRI", "program" => $data[5], "upload date" => $upload_date, "program date" => $fridate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
 
-                //saturday corresponding value insertion
-                if ($data[6]) {
-                    $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date, "program date" => $satdate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
+              //saturday corresponding value insertion
+              if ($data[6]) {
+                  $query = array("time" => $data[0], "day" => "SAT", "program" => $data[6], "upload date" => $upload_date, "program date" => $satdate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
 
-                //sunday corresponding value insertion
-                if ($data[7]) {
-                    $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date, "program date" => $sundate, "filetype" => $filename, "status" => $status);
-                    $people->insert($query);
-                }
-            }
-            $i++;
-        }
+              //sunday corresponding value insertion
+              if ($data[7]) {
+                  $query = array("time" => $data[0], "day" => "SUN", "program" => $data[7], "upload date" => $upload_date, "program date" => $sundate, "filetype" => $filename, "status" => $status, "uploaded_by" => $uploaded_by);
+                  $people->insert($query);
+              }
+          }
+          $i++;
+      }
 
-        fclose($file);
+      fclose($file);
 
-        return TRUE;
-    }
-    return FALSE;
+      return TRUE;
+  }
+  return FALSE;
 }
 
 /**
