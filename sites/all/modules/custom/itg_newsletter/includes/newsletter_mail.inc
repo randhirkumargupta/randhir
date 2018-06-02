@@ -147,6 +147,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
   $news_content = '';
+  $counter = 1;
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
     // $title = $node->field_news_title[LANGUAGE_NONE][0]['value'];
@@ -175,6 +176,10 @@ function itg_get_newsletter_mail_content($node, $template_node) {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
     }
     if ($flag) {
+	  if ($counter == 3) {
+	    $news_content .= '<tr><td><a href="http://app11.saymails.com/intodayco/vm.php?m=5814&u=AgJaAg8MB1A=">Click here</a></td></tr>';
+	  }
+	  $counter++;	
       $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
@@ -245,6 +250,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
     $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
+    $counter = 0;      
     foreach ($story_nodes as $news_array) {
       $news_detail = node_load($news_array);
       $title = $news_detail->title;
@@ -259,6 +265,10 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
         $thumbnail = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/newlatter_default_350X350.jpg';
       }
       $link = FRONT_URL . '/node/' . $news_detail->nid;
+      if ($counter == 3) {
+	    $news_content .= '<tr><td><a href="http://app11.saymails.com/intodayco/vm.php?m=5814&u=AgJaAg8MB1A=">Click here</a></td></tr>';
+	  }
+	  $counter++;
       $content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
