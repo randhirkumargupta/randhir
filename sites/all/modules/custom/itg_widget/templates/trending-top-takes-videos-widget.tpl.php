@@ -7,7 +7,7 @@
   //p($data);
 ?>
 <style type="text/css">
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 767px){
 .trending_top_takes_videos{height: 100%; overflow: hidden; padding: 10px 21px; box-sizing: border-box; border: 1px solid #ccc;}
 .trending_top_takes_videos ul.trending-videos{border:0; padding-top:0;}
 .trending_top_takes_videos ol.flex-control-paging{display:none;}
