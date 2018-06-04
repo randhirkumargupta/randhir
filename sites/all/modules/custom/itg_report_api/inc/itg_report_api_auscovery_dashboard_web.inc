@@ -49,8 +49,8 @@ function auscovery_dashboard_web($start_date, $end_date) {
   if ($type != "na") {
     $query->condition('n.type', $type);
   }  
-  //$query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
-  $query->condition('autr.field_author_report_value', 'author_report', '=');
+  $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+  //$query->condition('autr.field_author_report_value', 'author_report', '=');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -140,7 +140,7 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     $query->condition('n.type', $type);
   }  
   //$query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
-  $query->condition('mis.field_mis_report_value', 'mis_report', '=');
+  //$query->condition('mis.field_mis_report_value', 'mis_report', '=');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');  
   //print strtr((string) $query, $query->arguments());  die();
