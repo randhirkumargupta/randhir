@@ -171,7 +171,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 							 <li class="title" itemprop="name"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
 						<?php }      	
 						   }
-					  echo '</ul></li>';
+					  echo '</ul></li></span>';
 						} 
 					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
 						?>
@@ -232,7 +232,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 							 <li class="title" itemprop="name"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
 						<?php }      	
 						   }
-					  echo '</ul></li>';
+					  echo '</ul></li></span>';
 						} 
 					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
 						?>

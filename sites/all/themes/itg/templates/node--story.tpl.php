@@ -390,7 +390,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
 						  <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 						  </span>
 						  <?php } ?>
-						  </li>
+						  </li></span>
 							
 					   <?php }      	
 					   }
@@ -554,7 +554,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                   $twitter_handle = str_replace('@', '', $twitter_handle);
                   if (!empty($twitter_handle)) {
                     ?>
-                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>
+                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li></span>
                 <?php } ?>
                  <?php
                     if (!empty($byline_id)) {
