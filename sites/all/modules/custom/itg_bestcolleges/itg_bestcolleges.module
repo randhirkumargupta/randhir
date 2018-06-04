@@ -1556,7 +1556,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $photoids = $line[8];
   $videoids = $line[9];
   $published = $line[10];
-  $created_date = $line[11];
+  $created_date = date('Y-m-s H:i:s'); //$line[11];
   $year = $line[13];
   $rank = $line[14];
   $stream = $line[15];
@@ -1621,7 +1621,21 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
       if ($stream == 'Hotel Management') {
         $stream = ($stream_dynamic['hotel_management']) ? $stream_dynamic['hotel_management'] : 'hotel_management';
       }
-
+      if ($stream == 'Dental') {
+        $stream = ($stream_dynamic['dental']) ? $stream_dynamic['dental'] : 'dental';
+      }     
+      if ($stream == 'Engineering Govt') {
+        $stream = ($stream_dynamic['engineering_govt']) ? $stream_dynamic['engineering_govt'] : 'engineering_govt';
+      }
+      if ($stream == 'Engineering Private') {
+        $stream = ($stream_dynamic['engineering_private']) ? $stream_dynamic['engineering_private'] : 'engineering_private';
+      }
+      if ($stream == 'MSW') {
+        $stream = ($stream_dynamic['msw']) ? $stream_dynamic['msw'] : 'msw';
+      }
+      if ($stream == 'Architecture') {
+        $stream = ($stream_dynamic['architecture']) ? $stream_dynamic['architecture'] : 'architecture';
+      }
       if (!empty($tid)) {
         $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
       }
@@ -1657,7 +1671,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
       if ($node = node_submit($node)) {
         node_save($node);
         drupal_set_message(t('submitted successfully'));
-        $num_updated = db_update('bestcolleges_master')
+        $num_updated = db_update('bestcolleges_master_2018')
             ->fields(array('node_id' => $node->nid))
             ->condition('collegeid', $collegeid)
             ->execute();
@@ -1668,6 +1682,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
             ->condition('year', $year)
             ->execute();
         // bestcolleges_themebasedranking
+        /*
         $num_updated = db_update('bestcolleges_themebasedranking')
             ->fields(array('CollegeNewNid' => $node->nid))
             ->condition('collegeid', $collegeid)
@@ -1679,6 +1694,8 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
             ->condition('collegeid', $collegeid)
             ->condition('year', $year)
             ->execute();
+        
+        */
       }
     }
     itg_watchdog('bestcollege_master_pass', $line);
