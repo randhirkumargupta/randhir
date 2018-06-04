@@ -298,10 +298,10 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
         box-shadow: 0 0 3px #000;
         border-radius: 5px 0 0 5px;
     }
-    .tv-schedule-news.tez_tvschedule-csv:before{background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/tezlogo.png') center center / 100% auto no-repeat;}
-    .tv-schedule-news.Dilliaajtak_tvschedule-csv:before{background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/delhiaajtaklogo.png') center center / 100% auto no-repeat;}
-    .tv-schedule-news.aajtak_tvschedule-csv:before{background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/aajtaklogo.png') center center / 100% auto no-repeat;}
-    .tv-schedule-news.Indiatoday_tvschedule-csv:before{background: url('<?php print $base_url; ?>/sites/all/themes/itg/images/indiatodaylogo.png') center center / 100% auto no-repeat;}
+    .tv-schedule-news.tez_tvschedule-csv:before{background: <?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/tezlogo.png'); ?> center center / 100% auto no-repeat;}
+    .tv-schedule-news.Dilliaajtak_tvschedule-csv:before{background: <?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/delhiaajtaklogo.png');?> center center / 100% auto no-repeat;}
+    .tv-schedule-news.aajtak_tvschedule-csv:before{background: <?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/aajtaklogo.png'); ?> center center / 100% auto no-repeat;}
+    .tv-schedule-news.Indiatoday_tvschedule-csv:before{background: <?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/indiatodaylogo.png');?> center center / 100% auto no-repeat;}
 
     .tv-schedule-date-text{
         float: left;
