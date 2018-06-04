@@ -108,12 +108,12 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       }
       if (!empty($get_develop_story_status)) {
         ?>
-      <h1  title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+      <h1 itemprop="headline" title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1 title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
+        <h1 itemprop="headline" title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
       <?php } ?>
       <?php
       //code for Associate lead
@@ -325,7 +325,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }*/
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
-                <div class="stryimg" ><?php
+                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
                 
                   if (empty($widget_data)) {
                     $story_image = '';
@@ -336,7 +336,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       $file_uri = file_create_url($story_image);
                     }
                     if (isset($file_uri)) {
-                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '" itemprop = "contentUrl"><div fallback>offline</div></amp-img>';
 				    }
                   }
                   else {
@@ -347,7 +347,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       $file_uri = file_create_url($story_image);
                     }
                     if (isset($file_uri)) {
-                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>'
+                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '" itemprop = "contentUrl"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
                     }
                     ?>        
