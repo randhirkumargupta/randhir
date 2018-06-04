@@ -213,7 +213,16 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 .story-section .byline .profile-detail ul li:last-child {border: none;}
 .story-section .byline .profile-detail ul li.mailto {text-transform: uppercase;}
 .story-section .byline a {color: #989898;}
-
+.story-section .story-right .stryimg {position: relative;text-align: center;}
+.story-section .story-right .stryimg img {width: 100%;}
+.story-section .story-right .image-alt {color: #777;font-size: 13px;font-size: .8125rem;padding: 5px 0;border-bottom: 1px solid #e5e5e5;font-family: "OpenSans-Semibold";}
+.story-section .story-right .description { padding-top: 10px;font-size: 17px;font-size: 1.0625rem;line-height: 29px; word-wrap: break-word;}
+.story-section .story-right .description p {padding: 10px 0;}
+.story-right .description>p:first-child:first-letter {font-size: 55px;font-weight: 700;padding-right: 5px;float: left;line-height: 57px;}
+.story-section .story-right .briefcase {margin-top: 20px;}
+.story-section .story-right .briefcase h4 {font-size: 18px;font-size: 1.125rem;text-transform: uppercase;margin-bottom: 10px;color: #bb0a0a;font-family: "OpenSans-Bold";}
+.story-section .story-right .briefcase ul li {position: relative;font-size: 14px;font-size: .875rem;margin-bottom: 10px;padding-left: 15px;line-height: 22px;}
+.story-section .story-right .briefcase ul li:before {position: absolute; top: 6px;left: 0; content: ''; border-radius: 100%; background: #a00606; height: 5px;    width: 5px;}
 @media only screen and (min-width: 769px){
 .story-section h1 {font-size: 34px;font-size: 2.125rem;font-weight: 700;line-height: 45px;}
 .story-section .story-left, .story-section .story-right {float: left;}
@@ -235,13 +244,19 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 .story-section .byline .profile-detail ul.profile-byline li {float: none; display: block;margin-bottom: 4px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata, .story-section .byline .profile-detail ul.profile-byline li.update-data { width: auto; display: inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data { padding: 0;}
+#block-itg-menu-manager-third-level-menu ul.third-level-menu {padding-top: 0;background: #4d4b4c;position: absolute;z-index: 9999;float: none;width: 95px;top: 45px;
+    right: 15px;display: none;}
 }
 @media only screen and (max-width: 767px){
+.mhide {display: none;}.desktop-hide {display: block;}
+.story-section .byline .profile-detail ul.profile-byline li {float: none;display: block; margin-bottom: 4px;}
 .story-section .byline .profile-detail ul.profile-byline li.title { display: inline-block; line-height: 15px;}
 .story-section .byline .profile-detail ul.profile-byline li {float: none; display: block;margin-bottom: 4px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata, .story-section .byline .profile-detail ul.profile-byline li.update-data { width: auto; display: inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data { padding: 0;}
 .share_bar { box-sizing: border-box; padding: 0 0 10px;display: block;overflow: hidden;}
+.share_bar .social-share li { display: table-cell;text-align: center;vertical-align: middle;}
+.share_bar .social-share li a {display: block;height: 30px;width: 30px;margin: 0 auto; border: 1px solid #ccc; border-radius: 100%;text-align: center;}
 .share_bar .social-share i {height: 30px; width: 30px; display: table-cell;line-height: 29px;font-size: 16px;}
 .share_bar .social-share .fa-facebook {color: #373985;}
 .share_bar .social-share .fa-twitter {color: #4099d1;}
