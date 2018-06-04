@@ -535,12 +535,11 @@ function itg_report_api_author_report() {
 
 function itg_report_api_author_report_v1() {
   module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_author_report_v1');
+  $start_date = time();
   if ($_GET['start_date'] != "na") {
     $start_date = strtotime($_GET['start_date']);
   }
-  else {
-    $start_date = time();
-  }
+  
     $type = 'story';
   if($_GET['type'] == "video"){
       $type = 'videogallery';
