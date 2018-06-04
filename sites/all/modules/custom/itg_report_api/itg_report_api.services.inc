@@ -539,7 +539,7 @@ function itg_report_api_author_report_v1() {
     $start_date = strtotime($_GET['start_date']);
   }
   else {
-    $start_date = $_GET['start_date'];
+    $start_date = time();
   }
     $type = 'story';
   if($_GET['type'] == "video"){
