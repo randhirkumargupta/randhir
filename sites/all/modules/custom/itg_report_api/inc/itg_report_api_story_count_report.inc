@@ -245,6 +245,8 @@ function countTidNode_report($start_date, $end_date, $tid, $type, $status) {
     }    
     $query->groupBy('n.nid');
     $query->condition('n.status', $status)->orderBy('n.created', 'DESC');
+    
+    //print strtr((string)$query,$query->arguments());die;
     $result = $query->execute()->fetchAll();
     $total_records_between = count($result);
     return $total_records_between;
