@@ -541,12 +541,12 @@ function itg_report_api_author_report() {
       $type = 'videogallery';
   }
 
-  $suffix = $type.'_'.$start_date;
+  $suffix = $type.'_'.$start_date.'_'.$type;
   $redis_key = "itg_report_api_author_report_" . $suffix;
 
-  //$result_get = getRedis($redis_key);
+  $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value1'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
@@ -554,7 +554,7 @@ function itg_report_api_author_report() {
     $jsondata = author_report($start_date,$type);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
@@ -562,12 +562,11 @@ function itg_report_api_author_report() {
 
 function itg_report_api_author_report_v1() {
   module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_author_report_v1');
+  $start_date = time();
   if ($_GET['start_date'] != "na") {
     $start_date = strtotime($_GET['start_date']);
   }
-  else {
-    $start_date = $_GET['start_date'];
-  }
+  
     $type = 'story';
   if($_GET['type'] == "video"){
       $type = 'videogallery';

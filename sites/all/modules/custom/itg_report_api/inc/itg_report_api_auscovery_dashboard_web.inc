@@ -49,7 +49,8 @@ function auscovery_dashboard_web($start_date, $end_date) {
   if ($type != "na") {
     $query->condition('n.type', $type);
   }  
-  $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+  //$query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+  $query->condition('autr.field_author_report_value', 'author_report', '=');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -67,7 +68,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
     //$url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);  
     $url = drupal_get_path_alias('node/' . $nid);  
     $create_date = date("Y-m-d H:i:s", $created);
-    $prime_cat = getNodePrimeCatByNid($nid);
+    //$prime_cat = getNodePrimeCatByNid($nid);
     $author_id = $resvalue['byline_id'];
     $author_email = $resvalue['field_reporter_email_id_value'];    
     $author_status = $resvalue['publish_status'];
@@ -90,13 +91,16 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list[$loop_cont]['author_status'] = "$author_status";
     $list[$loop_cont]['title'] = "$title";
     $list[$loop_cont]['content_url'] = "$url";
-    $list[$loop_cont]['primary_category'] = "$prime_cat->tid";
+    $list[$loop_cont]['primary_category'] = "$field_primary_category_value";
     $list[$loop_cont]['created'] = "$create_date";
     $list[$loop_cont]['content_status'] = "$node_satatus";
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
     $list[$loop_cont]['content_type'] = "story";
     $list[$loop_cont]['is_reporter'] = "$mis_report";
     $list[$loop_cont]['mis_report'] = "$is_reporter";
+    $list[$loop_cont]['fba_id'] = "";
+    $list[$loop_cont]['fba_publish_status'] = "";
+    $list[$loop_cont]['fba_published'] = "";
     $loop_cont++;
     $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
@@ -136,6 +140,7 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     $query->condition('n.type', $type);
   }  
   //$query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+  $query->condition('mis.field_mis_report_value', 'mis_report', '=');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');  
   //print strtr((string) $query, $query->arguments());  die();
@@ -154,7 +159,7 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     //$url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);  
     $url = drupal_get_path_alias('node/' . $nid);  
     $create_date = date("Y-m-d H:i:s", $created);
-    $prime_cat = getNodePrimeCatByNid($nid);
+    //$prime_cat = getNodePrimeCatByNid($nid);
     $author_id = $resvalue['field_story_reporter_target_id'];
     $author_email = $resvalue['field_reporter_email_id_value'];    
     $author_status = $resvalue['publish_status'];
@@ -178,13 +183,16 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     $list[$loop_cont]['author_status'] = "1";
     $list[$loop_cont]['title'] = "$title";
     $list[$loop_cont]['content_url'] = "$url";
-    $list[$loop_cont]['primary_category'] = "$prime_cat->tid";
+    $list[$loop_cont]['primary_category'] = "$field_primary_category_value";
     $list[$loop_cont]['created'] = "$create_date";
     $list[$loop_cont]['content_status'] = "$node_satatus";
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
     $list[$loop_cont]['content_type'] = "video";
     $list[$loop_cont]['is_reporter'] = "$is_reporter";
     $list[$loop_cont]['mis_report'] = "$mis_report";
+    $list[$loop_cont]['fba_id'] = "";
+    $list[$loop_cont]['fba_publish_status'] = "";
+    $list[$loop_cont]['fba_published'] = "";
     $loop_cont++;    
   }
   return $list;
