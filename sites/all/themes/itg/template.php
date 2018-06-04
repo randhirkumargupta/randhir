@@ -821,7 +821,7 @@ function itg_js_alter(&$javascript) {
 	 unset($javascript['sites/all/themes/itg/js/ripple.js']);
 	 unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
 	 //unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
-	 unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
+	 //unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
 	 unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
 	 //unset($javascript['sites/all/themes/itg/js/script.js']);	  
      unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
@@ -837,7 +837,7 @@ function itg_js_alter(&$javascript) {
      unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
      unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
      unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
-     unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
+     //unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
      //unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
      unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
      

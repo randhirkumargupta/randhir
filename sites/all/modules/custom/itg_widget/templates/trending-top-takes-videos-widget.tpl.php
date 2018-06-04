@@ -7,6 +7,7 @@
   //p($data);
 ?>
 <style type="text/css">
+@media only screen and (min-width: 767px){
 .trending_top_takes_videos{height: 100%; overflow: hidden; padding: 10px 21px; box-sizing: border-box; border: 1px solid #ccc;}
 .trending_top_takes_videos ul.trending-videos{border:0; padding-top:0;}
 .trending_top_takes_videos ol.flex-control-paging{display:none;}
@@ -23,6 +24,12 @@
 .trending_top_takes_videos .trending-videos-flex{position:relative;}
 #trending-videos .front .trending-videos .trending-videos-list{padding: 0 0 10px;}
 #trending-videos ul li{padding:0 0 10px;}
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+.trending_top_takes_videos .flex-direction-nav a{opacity:0;}
+.trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: none;}
+}
+
 </style>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
