@@ -223,6 +223,10 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 .story-section .story-right .briefcase h4 {font-size: 18px;font-size: 1.125rem;text-transform: uppercase;margin-bottom: 10px;color: #bb0a0a;font-family: "OpenSans-Bold";}
 .story-section .story-right .briefcase ul li {position: relative;font-size: 14px;font-size: .875rem;margin-bottom: 10px;padding-left: 15px;line-height: 22px;}
 .story-section .story-right .briefcase ul li:before {position: absolute; top: 6px;left: 0; content: ''; border-radius: 100%; background: #a00606; height: 5px;    width: 5px;}
+section.sidebar .block-itg-ads {display: inline-block;vertical-align: top; padding: 25px 34px 30px; border-bottom: 1px solid #ddd; width: 100%; background: #f2f2f2;}
+.may-be-recommend h3 {text-transform: uppercase;font-weight: 700; color: #bb0a0a; display: block; position: relative; font-family: "OpenSans-Bold";}
+.may-be-recommend h3:before {content: '';position: absolute; left: 0; width: 100%; bottom: 20px; height: 5px; margin-top: -2px; background: #ddd;}
+.may-be-recommend h3 span { background: #fff; z-index: 1; position: relative; padding: 20px 20px 10px 0px; display: inline-block;}
 @media only screen and (min-width: 769px){
 .story-section h1 {font-size: 34px;font-size: 2.125rem;font-weight: 700;line-height: 45px;}
 .story-section .story-left, .story-section .story-right {float: left;}
@@ -237,9 +241,12 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
 .story-section .story-left .byline .profile-detail ul li+li { border-left: none;}
 .story-section .story-left .byline ul.social-links li { float: left; padding: 10px 0;}
 .story-section .story-left .byline .profile-detail ul li:last-child { border-left: none;}
+.sidebars {margin-top: 0;}
+section.sidebar {border: 1px solid #ddd;width: 100%;max-width: 370px;}
 }
 
 @media only screen and (max-width: 768px){
+.mhide {display: none;}.desktop-hide {display: block;}.comment-mobile {display: none;}
 .story-section .story-left, .story-section .story-right {padding: 0;}
 .story-section .byline .profile-detail ul.profile-byline li {float: none; display: block;margin-bottom: 4px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata, .story-section .byline .profile-detail ul.profile-byline li.update-data { width: auto; display: inline-block;}
