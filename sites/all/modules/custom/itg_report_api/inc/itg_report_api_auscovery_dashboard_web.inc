@@ -172,7 +172,8 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     }
     $is_reporter = 0;
     if($author_id > 0){
-        $is_reporter = 1;
+        //$is_reporter = 1;
+        $is_reporter = itg_re_api_getauthor_check($author_id);
     }
     // list data
     $list[$loop_cont]['content_id'] = "$nid";
@@ -329,4 +330,20 @@ function getAuthorNameDashboard($author_id) {
         }
     }
     return $author_name;
+}
+function itg_re_api_getauthor_check($author_id){
+    $author_flag = 0;
+    if ($author_id) {
+        $query = db_select('field_data_field_author_report', 'fdfar');
+        $query->fields('fdfar', array('field_author_report_value'));
+        $query->condition('fdfar.entity_id', $author_id);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $key => $value) {
+            $field_author_report_value = $value['field_author_report_value'];
+            if($field_author_report_value == "author_report"){
+                $author_flag = 1;
+            }
+        }
+    }
+    return $author_flag;
 }
