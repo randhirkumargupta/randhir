@@ -92,8 +92,21 @@ function itg_bestcolleges_menu() {
 /**
  * Remove bestcolleges node
  */
-
 function bestcollege_remove() {
+  $data = "";  
+  $result = db_query("SELECT bm.*, br.year, br.rank, br.stream FROM bestcolleges_master_2018 AS bm LEFT JOIN bestcolleges_ranking as br ON bm.collegeid = br.collegeid  WHERE :br.year = :year", array(':year' => '2018'), array('fetch' => PDO::FETCH_ASSOC));
+  
+  foreach ($result as $key => $value) {
+    $data .= $row['id'].",".$row['collegeid'].",".$row['collegename'].",".$row['city'].",".$row['description'].",".$row['image'].",".$row['websiteurl'].",".$row['storyids'].",".$row['photoids'].",".$row['videoids'].",".$row['published'].",".$row['created_date'].",".$row['node_id'].",".$row['year'].",".$row['rank'].",".$row['stream']."\n";                                                                                                                                                                                                                                                                                                                   	
+  }
+
+    
+  header('Content-Type: application/csv');
+  header('Content-Disposition: attachment; filename="bestcollehe-filename.csv"');
+  echo $data; exit();
+}
+
+function bestcollege_remove_tes() {
   if($_GET['TEST'] == 3) {
     db_query("DELETE FROM `bestcolleges_master_2018` WHERE 1");
   }
