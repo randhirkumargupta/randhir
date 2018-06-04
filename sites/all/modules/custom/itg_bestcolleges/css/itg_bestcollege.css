@@ -254,6 +254,7 @@
      display: inline-block;
  }
  .grid-group-item .thumbnail{height: 355px;} 
+
  .caption {
      text-transform: uppercase;
      padding: 9px;
@@ -747,7 +748,8 @@ text-align: left;}
 }
 
 
-
-
+/* bestcolleges 2018 css update */
+.bestcolleges2018 .grid-group-item .thumbnail{height:370px;}
+.bestcolleges2018 .grid-group-item .cl a{ margin-bottom:0px; }
 
  
