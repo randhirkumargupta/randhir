@@ -174,10 +174,10 @@ function itg_publish_fun(){
   if (isset($db)) {
     $people = $db->tv_schedule;
     $people->update(
-    array("status" => 0, 'filetype' =>$allowed[arg(1)]),
-    array('$set' => array('status' => 1)),
-    array("multiple" => true)
-  );
+      array("status" => 0, 'filetype' =>$allowed[arg(1)]),
+      array('$set' => array('status' => 1)),
+      array("multiple" => true)
+    );
     drupal_set_message(t('Published successfully!'));
   }
   else {
@@ -351,12 +351,15 @@ function itg_tv_schedule_uploadmongo($file_id, $filename) {
       $db = mongodb();
       if (isset($db)) {
           $people = $db->tv_schedule;
-          $ret = $people->remove(array('filetype' => $filename));
+          $people->update(
+            array('filetype' => $filename),
+            array('$set' => array('flag' => 1)),
+            array("multiple" => true)
+          );
       }
       else {
           return FALSE;
       }
-
 
       while (($data = fgetcsv($file)) !== FALSE) {
 
@@ -407,7 +410,9 @@ function itg_tv_schedule_uploadmongo($file_id, $filename) {
       }
 
       fclose($file);
-
+      if($i > 3){
+        $ret = $people->remove(array('filetype' => $filename, 'flag' => 1));
+      }
       return TRUE;
   }
   return FALSE;
