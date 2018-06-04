@@ -248,13 +248,14 @@ footer,footer .footer-bottom h4,footer a{font-family:OpenSans-Regular}footer{mar
     right: 15px;display: none;}
 }
 @media only screen and (max-width: 767px){
-.mhide {display: none;}.desktop-hide {display: block;}
+.mhide {display: none;}.desktop-hide {display: block;}.comment-mobile {display: none;}
 .story-section .byline .profile-detail ul.profile-byline li {float: none;display: block; margin-bottom: 4px;}
 .story-section .byline .profile-detail ul.profile-byline li.title { display: inline-block; line-height: 15px;}
 .story-section .byline .profile-detail ul.profile-byline li {float: none; display: block;margin-bottom: 4px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata, .story-section .byline .profile-detail ul.profile-byline li.update-data { width: auto; display: inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data { padding: 0;}
 .share_bar { box-sizing: border-box; padding: 0 0 10px;display: block;overflow: hidden;}
+.share_bar .social-share {margin: 0 auto;padding: 0; text-align: center;float: left;width: 100%;display: table;}
 .share_bar .social-share li { display: table-cell;text-align: center;vertical-align: middle;}
 .share_bar .social-share li a {display: block;height: 30px;width: 30px;margin: 0 auto; border: 1px solid #ccc; border-radius: 100%;text-align: center;}
 .share_bar .social-share i {height: 30px; width: 30px; display: table-cell;line-height: 29px;font-size: 16px;}
