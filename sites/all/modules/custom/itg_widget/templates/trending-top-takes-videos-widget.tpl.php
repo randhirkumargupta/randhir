@@ -33,7 +33,7 @@
 .trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: none;}
 .trending_top_takes_videos{ border:0px; }
 .trending_top_takes_videos ul.trending-videos li{box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
-#trending-videos ul li{padding:0px; margin-right:15px!important;border-radius: 5px;}
+#trending-videos ul li{padding:0px; margin-right:15px!important;border-radius: 5px; margin-left:2px; margin-bottom:2px;}
 #trending-videos ul li p{ padding:10px;}
 .front .trending-videos li span.videoicon i:before {color: #fff; font-size:18px;}
 .front .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,0.6); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
