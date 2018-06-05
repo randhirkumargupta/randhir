@@ -1274,6 +1274,7 @@ function itg_widget_block_view($delta = '') {
                 jQuery(".trending-videos-flex").flexslider({
                 animation: "slide",
                 itemWidth: getGridSize(),
+                itemMargin:15,
                 prevText: "",
                 nextText: "",
                 after: function(slider){
