@@ -141,6 +141,7 @@
 .morediv a{color: #5794e0;font-weight: 700;position: relative;display:block;}
 .page-livetv .programe-container .block-itg-ads{ padding:10px 0; text-align:center; background:#f3f3f3; margin-bottom:15px;}
 .page-livetv .programe-container .block-itg-ads > div{margin:0 auto;}
+.page-taxonomy-term.section-sports section#content{ background:#fff; }
 
 /* event Sidebar Ad */
 .event-sidebar .sidebars .block-itg-ads{border: 1px solid #ddd;padding: 10px 0;margin-bottom: 20px;}
