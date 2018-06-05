@@ -111,8 +111,6 @@ function _drupalauth4ssp_get_simplesamlphp_config() {
 
   // Get the simplesamlphp session.
   $basedir = variable_get('drupalauth4ssp_installdir', NULL);
-  $basedir = '/var/www/html/itgcms/simplesamlphp';
-  $basedir = '/opt/httpd/vhosts/indiatodayonline.in/itgcms/simplesamlphp';
 
   // if we don't have a va
   if (!strlen($basedir)) {
