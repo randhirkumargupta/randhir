@@ -859,7 +859,7 @@ function itg_fia_xml_node_feed_photos($query,$primary_cat_status) {
             }
             
             $node_body = preg_replace('/<div class="body_caption"[^>]*>(.*?)<\/div>/i', '<figcaption>$1</figcaption></figure>', $node_body );			
-            $node_body = str_replace("//www", 'https://www', $node_body);
+            //$node_body = str_replace("//www", 'https://www', $node_body);
             $node_body = str_replace("<h3>", '<h2>', $node_body);
             $node_body = str_replace("</h3>", '</h2>', $node_body);
             
