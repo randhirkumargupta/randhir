@@ -1853,6 +1853,10 @@ function bestCollegesrank($arg) {
   $stream = "";
 
   $year = $arg[1];
+  
+  if ($year == '2018') {
+    return '';
+  }
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $college_id = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_college_id['und'][0]['value'];
 

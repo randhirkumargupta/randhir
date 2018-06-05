@@ -303,7 +303,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                             <li class="pubdata" itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                             <li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
                                 <?php
-                                print t('UPDATED ');
+                                print t('UPDATED: ');
                                 if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                                   print date('F j, Y H:i', $node->created);
                                 }
@@ -358,7 +358,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                           <li class="pubdata" itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                           <li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
                             <?php
-                            print t('UPDATED ');
+                            print t('UPDATED: ');
                             if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                               print date('F j, Y H:i', $node->created);
                             }
@@ -409,7 +409,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
 				  <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
 				  <li class="update-data">
 					<?php
-					print t('UPDATED ');
+					print t('UPDATED: ');
 					if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
 					  print date('F j, Y H:i', $node->created);
 					}
@@ -565,7 +565,7 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                 <?php } ?>  
                 <ul class="date-update">
                   <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                  <li><?php t('UPDATED '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                  <li><?php t('UPDATED: '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                         print date('F j, Y H:i', $node->created);
                     } else {
                         print date('F j, Y H:i', $node->changed);  
