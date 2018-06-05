@@ -1102,3 +1102,15 @@ function itg_newsletter_get_previous_time($nids){
   } 
   return $previoustime;
 }
+
+
+function newsletter_app_link(){
+  $kicker = "Watch the latest English news on India Today TV app. The app brings you the latest news on the go, along with latest updates, videos and photos from India and across the world.";
+  $news_content = '<tr>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/it-sqare.png" alt="" title="" /></td>
+               <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
+                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="http://lt.intoday.in/ltrack?id=e0hTBwkNDlYJUxlUUVYFUFlUAkk=CQJfAQVSVQUdRAlSX1EQXxdSVgFQCSUFAAxBBApLVVpV&client=15267" target ="_blank">DOWNLOAD INDIA TODAY APP</a></h2>
+                <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
+              </td></tr>';
+  return $news_content;
+}
