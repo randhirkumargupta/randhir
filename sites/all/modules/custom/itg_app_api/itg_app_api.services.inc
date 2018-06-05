@@ -6912,7 +6912,7 @@ function search_data_rest($token) {
 		]
 	}
 }';
-$jsondata = json_decode($jsondata, TRUE);
+$jsondata = json_decode($data_json, TRUE);
 return $jsondata;
    /* $key = $_GET['key'];
     $nid_ar = array();
