@@ -6832,12 +6832,13 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function search_data_rest($token) {
+    $key = $_GET['key'];
     $data_json = '{
 	"status_code": "1",
 	"status_message": "",
 	"data": {
 		"id": "",
-		"search_title": "Cricket",
+		"search_title": "'.$key.'",
 		"layout_id": "0",
 		"news_count": "10",
 		"news_display_count": "10",
