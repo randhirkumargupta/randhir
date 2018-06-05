@@ -300,7 +300,7 @@ function itg_preprocess_html(&$vars) {
   }
   if ($base_url == FRONT_URL) {
     $url_get = explode('/',$_SERVER['REQUEST_URI']);
-    if ($url_get == '2018') {
+    if ($url_get[2] == '2018') {
       $vars['classes_array'][] = 'bestcolleges2018';
     }    
   }
