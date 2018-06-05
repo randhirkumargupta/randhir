@@ -26,6 +26,7 @@
 #trending-videos ul li{padding:0px; margin-right:0px!important}
 .front .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
 .front .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
+.front .trending-videos.slides li p{ padding-bottom: 7px; }
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .videoicon.mobilehide{ display:none; }
 .videoicon.desktophide{ display:inline-block; }
