@@ -305,7 +305,7 @@ function itg_preprocess_html(&$vars) {
     }
     
     if ($url_get[1] == 'bestcolleges' && is_numeric($url_get[4])) {
-      $bestcollege_data = menu_get_object();
+      $bestcollege_data = taxonomy_term_load($url_get[4]);
       $vars['head_title'] = $bestcollege_data->metatags[LANGUAGE_NONE]['title']['value'];
     }      
   }
