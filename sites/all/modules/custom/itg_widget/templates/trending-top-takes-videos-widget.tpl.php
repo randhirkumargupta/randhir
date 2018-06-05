@@ -29,6 +29,9 @@
 .trending_top_takes_videos{ border:0px; }
 .trending_top_takes_videos ul.trending-videos li{box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
 #trending-videos ul li{padding:0px; margin-right:15px!important}
+#trending-videos ul li p{ padding:10px;}
+.front .trending-videos li span.pic.video-icon:after { position: relative; font: normal normal normal 14px/1 FontAwesome; content: "\f01d"; font-size: 20px; color: #fff; bottom: 0; left: 0; background: transparent; top: 0px;}
+.front .trending-videos li span.pic.video-icon{padding:3px 5px; background:rgba(0,0,0,0.6);}
 }
 
 </style>
@@ -46,6 +49,7 @@
           ?>
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
             <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
+            <span class="pic video-icon desktop-hide"><?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
           </a>
         <?php } ?>
         <p title="<?php echo $entity['title']; ?>">
@@ -53,7 +57,7 @@
           <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 120, ".."), "node/" . $entity['nid'] , array("attributes" => array("title" => _widget_title($entity['title'])))) ?>
         <?php endif; ?>
         </p>
-        <span class="pic video-icon"><?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
+        <span class="pic video-icon mhide"><?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
       </li>
     <?php } ?>
   </ul>
