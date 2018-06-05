@@ -2220,15 +2220,20 @@ function itg_widget_insert_home_feature_widget_data($node, $widget_name, $catego
   try {
     $widget_data = get_home_feature_weight_for_special($widget_name, $category_tid);
     //p($widget_data);die;
+    $counter = 1;
     foreach ($widget_data as $key => $value) {
-      $_weight = $value->weight - 1; 
-      db_update('itg_widget_order')
-                  ->fields(array('weight' => $_weight))
-                  ->condition('widget', $value->weight)
-                  ->condition('id', $value->id)
-                  ->execute();
+      if ($counter < 3){
+        $_weight = $value->weight - 1; 
+        db_update('itg_widget_order')
+                   ->fields(array('weight' => $_weight))
+                   ->condition('id', $value->id)
+                   ->execute(); 
+      }else{
+        $max_weight = $value->weight;
+      }
+      $counter++;
     }
-    $max_weight = $_weight;
+    $max_weight = (empty($max_weight) ? 0: $max_weight);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
     //itg_watchdog('node_load_data', $node_load_data);
     if (!empty($widget_name) && $widget_name != '_none') {
@@ -2240,7 +2245,7 @@ function itg_widget_insert_home_feature_widget_data($node, $widget_name, $catego
             'content_type' => $node_load_data->type,
             'extra' => $extra,
             'state' => $state,
-            'weight' => ($max_weight + 2),
+            'weight' => --$max_weight,
           ))
           ->execute();
     }
@@ -2266,7 +2271,7 @@ function get_home_feature_weight_for_special($type, $cat_id = 0, $extra = 0) {
     if ($extra != 0 && isset($extra)) {
         $max_query->condition('extra', $extra);
     }
-    $max_query->orderBy('weight', 'asc')->range(0, 2);
+    $max_query->orderBy('weight', 'asc')->range(0, 3);
     $max_result = $max_query->execute()->fetchAll();
     return $max_result;
 }
