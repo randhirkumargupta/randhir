@@ -1268,9 +1268,13 @@ function itg_widget_block_view($delta = '') {
           break;
         case 'trending_top_takes_videos':
           drupal_add_js('jQuery(document).ready(function() {
-              
+                function getGridSize() {
+                  return (window.innerWidth < 768) ? 210;
+                }
                 jQuery(".trending-videos-flex").flexslider({
                 animation: "slide",
+                itemWidth: getGridSize(),
+                itemMargin: 20,
                 prevText: "",
                 nextText: "",
                 after: function(slider){
@@ -1938,7 +1942,11 @@ function itg_widget_save_bulk_operation_widget_data($form_state, $widget_name) {
         foreach ($selected_node as $node) {
             $is_node_in_widget = itg_widget_check_node_in_widget($node, $widget_name);
             if (!$is_node_in_widget) {
+              if ($widget_name == 'home_page_feature_widget') {
+                itg_widget_insert_home_feature_widget_data($node, $widget_name, 0);
+              } else {
                 itg_widget_insert_widget_data($node, $widget_name, 0);
+              }
             }
         }
         //itg_widget_delete_old_data_by_limit($widget_name);
@@ -2199,4 +2207,65 @@ function itg_get_election_header_title($val){
       $data_result = $query->execute()->fetchAssoc();
       return $data_result;
     }        
+}
+
+/**
+ * Common function to insert widget Home page feature data .
+ * @param int $node
+ * @param string $widget_name
+ * @param string $category_tid
+ */
+function itg_widget_insert_home_feature_widget_data($node, $widget_name, $category_tid, $extra = NULL, $state = NULL) {
+  try {
+    $widget_data = get_home_feature_weight_for_special($widget_name, $category_tid);
+   // p($widget_data);die;
+    foreach ($widget_data as $key => $value) {
+      $_weight = $value->weight - 1;      
+      db_update('itg_widget_order')
+                  ->fields(array('weight' => $_weight))
+                  ->condition('widget', $value->weight)
+                  ->condition('id', $value->id)
+                  ->execute();
+    }
+    $max_weight = ($_weight + 2);
+    $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+    //itg_watchdog('node_load_data', $node_load_data);
+    if (!empty($widget_name) && $widget_name != '_none') {
+      db_insert('itg_widget_order')
+          ->fields(array(
+            'nid' => $node,
+            'widget' => $widget_name,
+            'cat_id' => itg_widget_get_category_for_db_insert($category_tid),
+            'content_type' => $node_load_data->type,
+            'extra' => $extra,
+            'state' => $state,
+            'weight' => ($max_weight + 2),
+          ))
+          ->execute();
+    }
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
+}
+
+
+/**
+ * Function returns max weight of perticular content type.
+ * @param string $type
+ * @return int
+ */
+function get_home_feature_weight_for_special($type, $cat_id = 0, $extra = 0) {
+    $max_query = db_select('itg_widget_order', 'iwo');
+    $max_query->fields('iwo', array('id', 'weight'));
+    $max_query->condition('widget', $type);
+    if (is_numeric($cat_id) && $cat_id) {
+        $max_query->condition('cat_id', $cat_id);
+    }
+    if ($extra != 0 && isset($extra)) {
+        $max_query->condition('extra', $extra);
+    }
+    $max_query->orderBy('weight', 'asc')->range(0, 2);
+    $max_result = $max_query->execute()->fetchAll();
+    return $max_result;
 }
