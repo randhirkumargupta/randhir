@@ -6832,7 +6832,89 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function search_data_rest($token) {
-    $key = $_GET['key'];
+    $data_json = '{
+	"status_code": "1",
+	"status_message": "",
+	"data": {
+		"id": "",
+		"search_title": "Cricket",
+		"layout_id": "0",
+		"news_count": "10",
+		"news_display_count": "10",
+		"news_pagination_cap": "50",
+		"updated_datetime": "",
+		"news": [{
+				"n_id": "1143608",
+				"n_type": "story",
+				"n_is_sponsored": "0",
+				"n_share_link": "http://itgddev.indiatodayonline.in/sports/cricket/story/test-story-for-home-page-1143608-2018-01-28",
+				"n_title": "Economic Survey 2017-18: 10 warning signs Indian economy must watch out for",
+				"n_short_desc": "The Economic Survey 2017-18 has predicted that India will again become the fastest growing economy in 2018-19. According to the International Monetary Fund (IMF), the global economy is experiencing a near-synchronous recovery, the most broad-based since 2010, it states.",
+				"n_small_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/Arvind_Subramanian_GOI-170x96.jpeg",
+				"n_large_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/Arvind_Subramanian_GOI-483x271.jpeg",
+				"n_updated_datetime": "2018-01-28 14:15:00"
+			},
+			{
+				"n_id": "1138997",
+				"n_type": "story",
+				"n_is_sponsored": "0",
+				"n_share_link": "http://itgddev.indiatodayonline.in/sports/cricket/story/india-vs-south-africa-centurion-test-test-cricket-2nd-test-virat-kohli-faf-du-plessis-1138997-2018-01-11",
+				"n_title": "India in South Africa: No green pitch expected in Centurion",
+				"n_short_desc": "Bryan Bloy, the head groundsman in Centurion, said that he is preparing a wicket that will hold for five days and help both the batsmen and the bowlers.",
+				"n_small_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/India_vs_South_Africa-170x127.jpeg?3H8WFG2_fcRdjAEWg4dA7qXC0PGGbo3I",
+				"n_large_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/India_vs_South_Africa-483x271.jpeg?gK_JN1WGjbwPzNWiLoZ4z5jlf2.qviaW",
+				"n_updated_datetime": "2018-01-11 23:00:00"
+			},
+			{
+				"n_id": "1136655",
+				"n_type": "videogallery",
+				"n_is_sponsored": "0",
+				"n_share_link": "http://itgddev.indiatodayonline.in/sports/cricket/video/rahul-dravid-happy-birthday-rahul-dravid-icc-u-19-world-cup-2018-1136655-2018-01-11",
+				"n_title": "Rahul Dravid turns 45: What the legend means to Indian cricket",
+				"n_short_desc": "",
+				"n_small_image": "https://static-dev.indiatodayonline.in/indiatoday/images/video/201803/main-image-gujarat-647_121817060415-170x96.jpeg",
+				"n_large_image": "https://static-dev.indiatodayonline.in/indiatoday/images/video/201803/main-image-gujarat-647_121817060415-483x271.jpeg",
+				"n_updated_datetime": "2018-01-11 20:15:00"
+			},
+			{
+				"n_id": "1136050",
+				"n_type": "story",
+				"n_is_sponsored": "0",
+				"n_share_link": "http://itgddev.indiatodayonline.in/sports/cricket/story/jos-buttler-australia-vs-england-odi-cricket-ashes-2017-1136050-2018-01-11",
+				"n_title": "Tours of India and Australia challenging and exciting: Jos Buttler",
+				"n_short_desc": "England will play five ODIs against Australia and a T20I tri-series involving New Zealand Down Under.",
+				"n_small_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/RTX38CM9_1-170x127.jpeg?e.SVMx4qK5Mc0349mwJA9VGzLCQZdaXT",
+				"n_large_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/RTX38CM9_1-483x271.jpeg?NVFKIVesD_hk9nqB55N0oqKQCm86tfa_",
+				"n_updated_datetime": "2018-01-11 19:30:00"
+			},
+			{
+				"n_id": "1134053",
+				"n_type": "story",
+				"n_is_sponsored": "0",
+				"n_share_link": "http://itgddev.indiatodayonline.in/sports/cricket/story/virat-kohli-hardik-pnadya-india-in-south-africa-test-cricket-centurion-test-2nd-test-1134053-2018-01-11",
+				"n_title": "Virat Kohli, Hardik Pandya confident but are India ready for Centurion?",
+				"n_short_desc": "The second Test at the SuperSport Park in Centurion will start on January 13.",
+				"n_small_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/29804__1_-170x127.jpeg?APntgqYAdzFZ.byWHW8xh83X5ZIINXLa",
+				"n_large_image": "https://static-dev.indiatodayonline.in/indiatoday/images/story/201801/29804__1_-483x271.jpeg?udquPJ2IM6K8.ZuotJp5O1kGPpDirwcg",
+				"n_updated_datetime": "2018-01-11 16:45:00"
+			},
+			{
+				"n_id": "1131383",
+				"n_type": "photogallery",
+				"n_is_sponsored": "0",
+				"n_share_link": "http://itgddev.indiatodayonline.in/sports/cricket/photo/south-africa-vs-india-virat-kohli-vernon-philander-ab-de-villiers-hardik-pandya-cape-town-test-1131383-2018-01-10",
+				"n_title": "India go down in Cape Town Test by 72 runs",
+				"n_short_desc": "",
+				"n_small_image": "http://itgddev.indiatodayonline.in/s3/files/styles/photo_landing_slider_thumb_88_86/public/images/photogallery/201801/Bhuvneshwar-Kumar.jpg?itok=wP9bnwwR",
+				"n_large_image": "https://static-dev.indiatodayonline.in/indiatoday/styles/photo_slider_753x543/public/images/photogallery/201801/Bhuvneshwar-Kumar.jpg?qnV1L4zVtLHd4H9sfEjI.nypt3MrCHxM&itok=pAHTF0s_",
+				"n_updated_datetime": "2018-01-10 22:45:00"
+			}
+		]
+	}
+}';
+$jsondata = json_decode($jsondata, TRUE);
+return $jsondata;
+   /* $key = $_GET['key'];
     $nid_ar = array();
     $searchpage = solr_search_custom_results_restapi($key);
     p($searchpage);
@@ -6847,7 +6929,7 @@ function search_data_rest($token) {
         $nid_ar[] = $nid;
     }
     $nid_str = implode(",", $nid_ar);
-    newscategoryPageRerourceValue_search_rest($nid_ar);
+    newscategoryPageRerourceValue_search_rest($nid_ar);*/
 }
 
 /**
