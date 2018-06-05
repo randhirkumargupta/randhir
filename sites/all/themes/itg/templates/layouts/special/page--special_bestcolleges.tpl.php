@@ -23,9 +23,15 @@ if ($theme != 'itgadmin') {
   $itg_class = 'itg-front';
 }
 ?>
+<?php $url_get = explode('/',$_SERVER['REQUEST_URI']);
+      $bestcolleg_class = '';
+      if ($url_get[2] == '2018') {
+        $bestcolleg_class = 'bestcolleges2018';
+      }
+?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
-  <div id="page">
+  <div id="page <?php print $bestcolleg_class; ?>">
     <header class="header" id="header" role="banner">
       <section class="header-top">
     
@@ -83,7 +89,6 @@ if ($theme != 'itgadmin') {
     <?php endif; ?>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-      <?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
       <!-- sponsor for static -->
         <?php 
           if($url_get[2] == '2016' || $url_get[2] == '2017') { 
