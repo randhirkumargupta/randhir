@@ -189,10 +189,10 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 					  <li itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> <span itemprop="dateModified" content="<?php print $modified_date; ?>">UPDATED</span> 
 					  <?php
 					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
-							print date('H:i', $node->created);
+							print date('F j, Y H:i', $node->created);
 						}
 						else {
-							print date('H:i', $node->changed);
+							print date('F j, Y H:i', $node->changed);
 						}
 					  ?>
 					   IST </li>
@@ -250,10 +250,10 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
 					  <?php
 					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
-							print date('H:i', $node->created);
+							print date('F j, Y H:i', $node->created);
 						}
 						else {
-							print date('H:i', $node->changed);
+							print date('F j, Y H:i', $node->changed);
 						}
 					  ?>
 					   IST </li>
