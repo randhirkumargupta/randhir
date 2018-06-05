@@ -22,10 +22,13 @@
 .trending_top_takes_videos .flex-direction-nav a:before{color:#fff;}
 .trending_top_takes_videos .trending-videos-flex{position:relative;}
 #trending-videos .front .trending-videos .trending-videos-list{padding: 0 0 10px;}
-#trending-videos ul li{padding:0 0 10px;}
+#trending-videos ul li{padding:0px; margin-right:0px!important}
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .trending_top_takes_videos .flex-direction-nav a{opacity:0;}
 .trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: none;}
+.trending_top_takes_videos{ border:0px; }
+.trending_top_takes_videos ul.trending-videos li{box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
+#trending-videos ul li{padding:0px; margin-right:15px!important}
 }
 
 </style>
