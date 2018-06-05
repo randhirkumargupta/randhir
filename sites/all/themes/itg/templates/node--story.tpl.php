@@ -277,7 +277,7 @@ if (!empty($content)):
                                   print date('H:i', $node->created);
                                 }
                                 else {
-                                  print date('H:i', $node->changed);
+                                  print date('F j, Y H:i', $node->changed);
                                 }
                                 print t(' IST');
                                 ?>
@@ -332,7 +332,7 @@ if (!empty($content)):
                               print date('H:i', $node->created);
                             }
                             else {
-                              print date('H:i', $node->changed);
+                              print date('F j, Y H:i', $node->changed);
                             }
                             print t(' IST');
                             ?>
@@ -382,7 +382,7 @@ if (!empty($content)):
 					  print date('H:i', $node->created);
 					}
 					else {
-					  print date('H:i', $node->changed);
+					  print date('F j, Y H:i', $node->changed);
 					}
 					print t(' IST');
 					?>
@@ -533,7 +533,7 @@ if (!empty($content)):
                   <li><?php t('UPDATED '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                         print date('H:i', $node->created);
                     } else {
-                        print date('H:i', $node->changed);  
+                        print date('F j, Y H:i', $node->changed);  
                     } ?> IST</li>
                 <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
                     <li><?php
