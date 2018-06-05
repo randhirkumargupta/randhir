@@ -812,7 +812,7 @@ function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $n
             $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
         } elseif ($node->type = "photogallery") {
             $node->field_photo_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
-            $node->field_photo_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
+            $node->field_photo_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
             $node->field_photo_fba_published[LANGUAGE_NONE][0]['value'] = $published;
         } elseif ($node->type = "videogallery") {
             $node->field_video_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;

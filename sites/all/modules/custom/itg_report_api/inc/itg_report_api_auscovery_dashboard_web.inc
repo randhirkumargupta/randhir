@@ -32,13 +32,22 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $query->leftJoin('field_data_field_reporter_profile_type', 'repro', 'byli.byline_id=repro.entity_id');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_author_report', 'autr', 'byli.byline_id=autr.entity_id');
-  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
+  //for fb feild
+  $query->leftJoin('field_data_field_fba_id', 'fbid', 'fbid.entity_id=n.nid');
+  $query->leftJoin('field_data_field_fba_publish_status', 'fbps', 'fbps.entity_id=n.nid');
+  $query->leftJoin('field_data_field_fba_published', 'fbp', 'fbp.entity_id=n.nid');
+  
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));  
   $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('byli', array('byline_id', 'publish_status'));
   $query->fields('repr', array('field_reporter_email_id_value'));
   $query->fields('repro', array('field_reporter_profile_type_value'));
   $query->fields('autr', array('field_author_report_value'));
+  //for fb feild
+  $query->fields('fbid', array('field_fba_id_value'));
+  $query->fields('fbps', array('field_fba_publish_status_value'));
+  $query->fields('fbp', array('field_fba_published_value'));
   //end
   if ($start_date != "na") {    
     $query->condition('n.created', $start_date, ">=");
@@ -81,6 +90,10 @@ function auscovery_dashboard_web($start_date, $end_date) {
         $mis_report = 1;
         $is_reporter = 1;
     }
+    //for fb feild
+    $field_fba_id_value = $resvalue['field_fba_id_value'];
+    $field_fba_publish_status_value = $resvalue['field_fba_publish_status_value'];
+    $field_fba_published_value = $resvalue['field_fba_published_value'];
    
     // list data
     $list[$loop_cont]['content_id'] = "$nid";
@@ -98,9 +111,9 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list[$loop_cont]['content_type'] = "story";
     $list[$loop_cont]['is_reporter'] = "$mis_report";
     $list[$loop_cont]['mis_report'] = "$is_reporter";
-    $list[$loop_cont]['fba_id'] = "";
-    $list[$loop_cont]['fba_publish_status'] = "";
-    $list[$loop_cont]['fba_published'] = "";
+    $list[$loop_cont]['fba_id'] = "$field_fba_id_value";
+    $list[$loop_cont]['fba_publish_status'] = "$field_fba_publish_status_value";
+    $list[$loop_cont]['fba_published'] = "$field_fba_published_value";
     $loop_cont++;
     $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
@@ -122,13 +135,21 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
   $query->leftJoin('field_data_field_reporter_profile_type', 'repro', 'fsr.field_story_reporter_target_id=repro.entity_id');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_mis_report', 'mis', 'n.nid=mis.entity_id');
-  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
+  //for fb feild
+  $query->leftJoin('field_data_field_video_fba_id', 'fbid', 'fbid.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_fba_publish_status', 'fbps', 'fbps.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_fba_published', 'fbp', 'fbp.entity_id=n.nid');
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));  
   $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('fsr', array('field_story_reporter_target_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
   $query->fields('repro', array('field_reporter_profile_type_value'));
   $query->fields('mis', array('field_mis_report_value'));
+  //for fb feild
+  $query->fields('fbid', array('field_video_fba_id_value'));
+  $query->fields('fbps', array('field_video_fba_publish_status_value'));
+  $query->fields('fbp', array('field_video_fba_published_value'));
   //end
   if ($start_date != "na") {    
     $query->condition('n.created', $start_date, ">=");
@@ -175,6 +196,10 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
         //$is_reporter = 1;
         $is_reporter = itg_re_api_getauthor_check($author_id);
     }
+    //for fb feild
+    $field_fba_id_value = $resvalue['field_video_fba_id_value'];
+    $field_fba_publish_status_value = $resvalue['field_video_fba_publish_status_value'];
+    $field_fba_published_value = $resvalue['field_video_fba_published_value'];
     // list data
     $list[$loop_cont]['content_id'] = "$nid";
     $list[$loop_cont]['author_id'] = "$author_id";
@@ -191,9 +216,9 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     $list[$loop_cont]['content_type'] = "video";
     $list[$loop_cont]['is_reporter'] = "$is_reporter";
     $list[$loop_cont]['mis_report'] = "$mis_report";
-    $list[$loop_cont]['fba_id'] = "";
-    $list[$loop_cont]['fba_publish_status'] = "";
-    $list[$loop_cont]['fba_published'] = "";
+    $list[$loop_cont]['fba_id'] = "$field_fba_id_value";
+    $list[$loop_cont]['fba_publish_status'] = "$field_fba_publish_status_value";
+    $list[$loop_cont]['fba_published'] = "$field_fba_published_value";
     $loop_cont++;    
   }
   return $list;
