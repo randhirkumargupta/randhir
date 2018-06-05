@@ -1269,12 +1269,11 @@ function itg_widget_block_view($delta = '') {
         case 'trending_top_takes_videos':
           drupal_add_js('jQuery(document).ready(function() {
                 function getGridSize() {
-                  return (window.innerWidth < 768) ? 210 : "";
+                  return (window.innerWidth < 768) ? 270 : "";
                 }
                 jQuery(".trending-videos-flex").flexslider({
                 animation: "slide",
                 itemWidth: getGridSize(),
-                itemMargin: 20,
                 prevText: "",
                 nextText: "",
                 after: function(slider){
