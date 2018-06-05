@@ -749,7 +749,8 @@ text-align: left;}
 
 
 /* bestcolleges 2018 css update */
-.bestcolleges2018 .grid-group-item .thumbnail{height:390px;}
+.bestcolleges2018 .grid-group-item .thumbnail{height:400px;}
 .bestcolleges2018 .grid-group-item .cl a{ margin-bottom:0px; }
+.bestcolleges2018  .grid-group-item .thumbnail .list-group-item-text a{padding-bottom: 5px;}
 
  

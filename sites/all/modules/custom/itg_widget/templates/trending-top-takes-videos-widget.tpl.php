@@ -27,8 +27,8 @@
 .front .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
 .front .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-.video-icon.mobilehide{ display:none; }
-.video-icon.desktophide{ display:inline-block; }
+.videoicon.mobilehide{ display:none; }
+.videoicon.desktophide{ display:inline-block; }
 .trending_top_takes_videos .flex-direction-nav a{opacity:0;}
 .trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: none;}
 .trending_top_takes_videos{ border:0px; }
