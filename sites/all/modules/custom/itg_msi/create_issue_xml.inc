@@ -104,6 +104,8 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $bodyTxtt = (string) $bodyTxt;
         $body .= '<p>' . ucfirst(htmlentities($bodyTxtt)) . '</p>';
     }
+    $body = str_replace('<SoftCR>', '', $body);
+    $body = str_replace('<Object>', '', $body);
     //Set values to node
     $node = new stdClass();
     $node->title = trim($headline);
