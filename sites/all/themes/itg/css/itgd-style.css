@@ -887,7 +887,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .live-webcast-coverage iframe{width:100%}
 .section_wise_order-talking-point ul.trending-videos li.trending-videos-list h4{ font-size:13px; color:#a00606}
 .section-movies .tech-movie_latest .osscar-video ul .dont-miss-listing .dm-pic{width: auto;}
-
+.page-taxonomy-term.section-sports section#content {background: #fff;}
 /* story byline css */
 .mobile-twitter{ display:none;}
 @media only screen and (max-width: 767px) {
