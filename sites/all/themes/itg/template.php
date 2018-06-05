@@ -302,7 +302,12 @@ function itg_preprocess_html(&$vars) {
     $url_get = explode('/',$_SERVER['REQUEST_URI']);
     if ($url_get[2] == '2018') {
       $vars['classes_array'][] = 'bestcolleges2018';
-    }    
+    }
+    
+    if ($url_get[1] == 'bestcolleges' && is_numeric($url_get[4])) {
+      $bestcollege_data = menu_get_object();
+      $vars['head_title'] = $bestcollege_data->metatags[LANGUAGE_NONE]['title']['value'];
+    }      
   }
   if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
     $preconnect_prefetch_code = array(
