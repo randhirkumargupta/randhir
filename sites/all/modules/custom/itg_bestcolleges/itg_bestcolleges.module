@@ -1825,7 +1825,7 @@ function bestCollegesRelatedStoryList() {
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
-  if ($year != '2016' && $year != '2017') {
+  if ($year != '2016' && $year != '2017' && $year != '2018') {
     $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'story');
     $related_story_nid_ar = explode(",", $story_data);
   }
@@ -1973,7 +1973,7 @@ function itg_bestcolleges_related_videolist() {
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
-  if ($year != '2016' && $year != '2017') {
+  if ($year != '2016' && $year != '2017' && $year != '2018') {
     $field_bestcollege_title = "Lady Shri Ram College for Women";
     $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'video');
     $related_photo_nid_ar = explode(",", $story_data);
