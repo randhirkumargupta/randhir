@@ -7,6 +7,7 @@
   //p($data);
 ?>
 <style type="text/css">
+.video-icon.desktophide{ display:none; }
 .trending_top_takes_videos{height: 100%; overflow: hidden; padding: 10px 21px; box-sizing: border-box; border: 1px solid #ccc;}
 .trending_top_takes_videos ul.trending-videos{border:0; padding-top:0;}
 .trending_top_takes_videos ol.flex-control-paging{display:none;}
@@ -23,15 +24,19 @@
 .trending_top_takes_videos .trending-videos-flex{position:relative;}
 #trending-videos .front .trending-videos .trending-videos-list{padding: 0 0 10px;}
 #trending-videos ul li{padding:0px; margin-right:0px!important}
+.front .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
+.front .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+.video-icon.mobilehide{ display:none; }
+.video-icon.desktophide{ display:inline-block; }
 .trending_top_takes_videos .flex-direction-nav a{opacity:0;}
 .trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: none;}
 .trending_top_takes_videos{ border:0px; }
 .trending_top_takes_videos ul.trending-videos li{box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
 #trending-videos ul li{padding:0px; margin-right:15px!important}
 #trending-videos ul li p{ padding:10px;}
-.front .trending-videos li span.pic.video-icon:after { position: relative; font: normal normal normal 14px/1 FontAwesome; content: "\f01d"; font-size: 20px; color: #fff; bottom: 0; left: 0; background: transparent; top: 0px;}
-.front .trending-videos li span.pic.video-icon{padding:3px 5px; background:rgba(0,0,0,0.6);}
+.front .trending-videos li span.videoicon i:before {color: #fff;}
+.front .trending-videos li span.videoicon{padding:3px 5px; background:rgba(0,0,0,0.6); color:#fff; font-size:14px; line-height:20px}
 }
 
 </style>
@@ -42,7 +47,7 @@
         <?php if (!empty($entity['mi_file_uri']) && file_exists($entity['mi_file_uri'])) { ?>            
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/".$entity['nid']); ?>">
             <?php print theme('image', array('path' => $entity['mi_file_uri'], 'alt' => $entity['field_story_medium_image_alt'], 'title' => $entity['field_story_medium_image_title'])); ?>
-            <span class="video-icon desktop-hide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
+            <span class="videoicon desktophide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
           </a>
           <?php
         }
@@ -50,7 +55,7 @@
           ?>
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
             <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
-            <span class="video-icon desktop-hide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
+            <span class="videoicon desktop-hide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
           </a>
         <?php } ?>
         <p title="<?php echo $entity['title']; ?>">
@@ -58,7 +63,7 @@
           <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 120, ".."), "node/" . $entity['nid'] , array("attributes" => array("title" => _widget_title($entity['title'])))) ?>
         <?php endif; ?>
         </p>
-        <span class="video-icon mhide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
+        <span class="video-icon mobilehide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
       </li>
     <?php } ?>
   </ul>
