@@ -81,6 +81,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $mail_content = itg_get_newsletter_mail_content($node, $template_node);
   }
 
+  echo $mail_content;die;
   // code for netcore
   if (function_exists('itg_netcore_mail_create_campaign')) {
     $mail_content = str_replace("&nbsp;", " ", $mail_content);
@@ -177,7 +178,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     }
     if ($flag) {
 	  if ($counter == 3) {
-	    $news_content .= '<tr><td><a href="http://app11.saymails.com/intodayco/vm.php?m=5814&u=AgJaAg8MB1A=">Click here</a></td></tr>';
+	    $news_content .= newsletter_app_link();
 	  }
 	  $counter++;	
       $news_content .= '<tr>
@@ -266,7 +267,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       }
       $link = FRONT_URL . '/node/' . $news_detail->nid;
       if ($counter == 3) {
-	    $news_content .= '<tr><td><a href="http://app11.saymails.com/intodayco/vm.php?m=5814&u=AgJaAg8MB1A=">Click here</a></td></tr>';
+	    $news_content .= newsletter_app_link();
 	  }
 	  $counter++;
       $content .= '<tr>
@@ -407,4 +408,16 @@ function itg_newsletter_content_subject_headline($title) {
 
       drupal_json_output($options);
   }
+}
+
+
+function newsletter_app_link(){
+  $kicker = "Watch the latest English news on India Today TV app. The app brings you the latest news on the go, along with latest updates, videos and photos from India and across the world.";
+  $news_content = '<tr>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/it-sqare.png" alt="" title="" /></td>
+               <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
+                <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="http://lt.intoday.in/ltrack?id=e0hTBwkNDlYJUxlUUVYFUFlUAkk=CQJfAQVSVQUdRAlSX1EQXxdSVgFQCSUFAAxBBApLVVpV&client=15267" target ="_blank">DOWNLOAD INDIA TODAY APP</a></h2>
+                <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
+              </td></tr>';
+  return $news_content;
 }
