@@ -132,7 +132,7 @@
     border-top: 1px solid #ddd;
     line-height: 40px;
 }
-
+.story-section .story-left .byline .profile-detail ul.date-update li.update-data{ line-height:18px; }
 #block-itg-widget-score-card-iframe-widget{overflow:hidden;}
 .latest_video .tab-buttons.tab-buttons span.hide{display:none;}
 .auto-layout-page .auto-block-3 .ad-widget,.tech-layout-page .auto-block-3 .ad-widget{ padding:37px 20px;}
