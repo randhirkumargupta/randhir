@@ -1062,6 +1062,7 @@ function itg_bestcolleges_rhs_story() {
         ->groupBy('iwo.nid')
         ->range(0, $range);
     $result = $query->execute();
+    print strtr((string)$query, $query->arguments());
     return _get_widget_display_data_as_per_db_result($result);
   }
 }
