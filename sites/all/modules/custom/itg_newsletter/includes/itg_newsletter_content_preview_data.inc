@@ -97,6 +97,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
+  $counter = 1;
   foreach ($story_nodes as $news_array) {
     $news_detail = node_load($news_array);
     if(!empty($news_detail)) {
@@ -120,7 +121,10 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
       }
 
       $link = $front_url . drupal_get_path_alias('node/' . $news_detail->nid);
-
+      if ($counter == 3) {
+        $news_content .= newsletter_app_link();
+      }
+      $counter++;	
       $content .= '<tr class="node-'.$news_detail->nid.'">
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 62px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
