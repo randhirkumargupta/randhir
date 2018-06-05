@@ -219,20 +219,20 @@ $config = array(
     */
 
 
-    
+
     'facebook' => array(
         'authfacebook:Facebook',
         // Register your Facebook application on http://www.facebook.com/developers
         // App ID or API key (requests with App ID should be faster; https://github.com/facebook/php-sdk/issues/214)
-        'api_key' => '265688930492076',
+        'api_key' => '282860935395613',
         // App Secret
-        'secret' => '6ae376197bd3fdd68a135890b79ff608',
+        'secret' => '215183b6b9eed75594423588d6132288',
         // which additional data permissions to request from user
         // see http://developers.facebook.com/docs/authentication/permissions/ for the full list
         'req_perms' => 'email,user_birthday,public_profile',
         //'req_perms' => 'public_profile',
     ),
-    
+
 
     /*
     // LinkedIn OAuth Authentication API.
@@ -245,7 +245,7 @@ $config = array(
     ),
     */
 
-    
+
     // Twitter OAuth Authentication API.
     // Register your application to get an API key here:
     //  http://twitter.com/oauth_clients
@@ -258,7 +258,7 @@ $config = array(
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate
         'force_login' => FALSE,
     ),
-    
+
 
     /*
     // MySpace OAuth Authentication API.

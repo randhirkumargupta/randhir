@@ -38,7 +38,7 @@ Drupal.behaviors.itg_budget_predictor = {
                     var ranking_column_id = jQuery(this).data("id");
                     var str = jQuery(this).attr("id");
                     var entity_id = str.split("_");
-                    
+
                      jQuery("#sortable1, #sortable2, #sortable3, #sortable4").sortable(
                         {
                             connectWith: '.connectedSortable',
@@ -75,10 +75,10 @@ Drupal.behaviors.itg_budget_predictor = {
                                 }
                             }
                         }).disableSelection();
-                    
+
                 });
 
-               
+
             }
 
         });
@@ -94,7 +94,7 @@ Drupal.behaviors.itg_budget_predictor = {
         return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=265688930492076";
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=282860935395613";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
