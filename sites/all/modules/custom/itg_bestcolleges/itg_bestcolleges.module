@@ -235,6 +235,9 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
     'bestcollege_section_ordering' => array(
       'template' => 'templates/bestcollege-section-ordering',
     ),
+    'bestcollege_story_ordering' => array(
+      'template' => 'templates/bestcollege-story-ordering',
+    ),
     'bestcollege_image_sliders' => array(
       'variable' => array('data' => NULL),
       'template' => 'bestcollege-image-slider',
@@ -338,7 +341,6 @@ function itg_bestcolleges_block_view($delta = '') {
       break;
     case 'bestcollege_rhs_story_widget':
       $data = itg_bestcolleges_rhs_story();
-      p($data);
       $block['content'] = theme("bestcollege_story_ordering", array("data" => $data));
       break;
     case 'bestcollege_sponser':

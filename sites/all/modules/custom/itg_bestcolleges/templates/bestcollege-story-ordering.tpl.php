@@ -1,4 +1,4 @@
-<?php print "arun"; p($data);  if (!empty($data)) : global $base_url; ?>
+<?php if (!empty($data)) : global $base_url; ?>
   <div class="watch-right-now-video bestcollege-rhs-video">
     <?php $is_fron_page = drupal_is_front_page();
     if (empty($is_fron_page)) {
