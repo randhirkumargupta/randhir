@@ -295,6 +295,9 @@ function itg_bestcolleges_block_info() {
   $blocks['bestcollege_rhs_videos_widget'] = array(
     'info' => t('Widget: Bestcolleges RHS Videos'),
   );
+  $blocks['bestcollege_rhs_story_widget'] = array(
+    'info' => t('Widget: Bestcolleges RHS Story'),
+  );
   $blocks['bestcollege_sponser'] = array(
     'info' => t('Widget: Bestcolleges Sponser'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -332,6 +335,10 @@ function itg_bestcolleges_block_view($delta = '') {
     case 'bestcollege_rhs_videos_widget':
       $data = itg_bestcolleges_rhs_video();
       $block['content'] = theme("bestcollege_section_ordering", array("data" => $data));
+      break;
+    case 'bestcollege_rhs_story_widget':
+      $data = itg_bestcolleges_rhs_story();
+      $block['content'] = theme("bestcollege_story_ordering", array("data" => $data));
       break;
     case 'bestcollege_sponser':
       $path_request = request_path();
@@ -1003,6 +1010,43 @@ function itg_bestcolleges_rhs_video() {
   $json = variable_get('bestcollege_get_video', '');
   $video_array = (array) json_decode($json);
   $video_result = $video_array['video']->{$year};
+  if (is_array($video_result) && count($video_result) > 0) {
+    $widget_name = 'section_wise_widget';
+    $range = 5;
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
+    $query->fields('iwo', array('nid', 'weight', 'extra'));
+    $query->fields('wh', array('node_data'));
+    $query->condition('iwo.nid', $video_result, 'IN');
+    $query->condition('iwo.widget', $widget_name);
+    $query->condition('iwo.content_type', 'All');
+    $query->condition('wh.node_status', 1)
+        ->orderBy('iwo.weight', 'DESC')
+        ->groupBy('iwo.nid')
+        ->range(0, $range);
+    $result = $query->execute();
+    return _get_widget_display_data_as_per_db_result($result);
+  }
+}
+
+/**
+ * rhs story at bestcollege page
+ * @return type
+ */
+function itg_bestcolleges_rhs_story() {
+  $arg = arg();
+  if (!empty($arg[1]) && $arg[1] == 'term') {
+    $url_get = explode('/', $_SERVER['REQUEST_URI']);
+    $year = $url_get[2];
+  }
+  else {
+    $year = $arg[1];
+  }
+
+  module_load_include('inc', 'itg_widget', 'includes/itg_widget_helper');
+  $json = variable_get('bestcollege_get_video', '');
+  $video_array = (array) json_decode($json);
+  $video_result = $video_array['story']->{$year};
   if (is_array($video_result) && count($video_result) > 0) {
     $widget_name = 'section_wise_widget';
     $range = 5;
