@@ -587,7 +587,11 @@ function itg_msi_node_validate($node, $form, &$form_state) {
 
             $fileuri = file_create_url($xml_file->uri);
             $xml = simplexml_load_file($fileuri, 'SimpleXMLElement', LIBXML_NOCDATA);
-
+			if(!empty($result['fid']) && empty($xml)){
+				$content = file_get_contents($fileuri);
+				$content = preg_replace('/[\x00-\x1F\x7F]/', '', $content);
+				$xml = simplexml_load_string($content, 'SimpleXMLElement', LIBXML_NOCDATA);
+			}
             if (!empty($xml)) {
                 //Get XML unique UID
                 foreach ($xml->attributes() as $key => $value) {
