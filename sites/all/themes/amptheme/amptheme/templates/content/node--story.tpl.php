@@ -166,7 +166,7 @@ if (!empty($content)):
                                     <?php
                                   }
                                   ?>
-                              <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+                              <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED: 
                                   <?php
                                   if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                                     print date('F j, Y H:i', $node->created);
@@ -230,7 +230,7 @@ if (!empty($content)):
                                   <?php
                                 }
                                 ?>
-                            <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+                            <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED: 
                                 <?php
                                 if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                                   print date('F j, Y H:i', $node->created);
