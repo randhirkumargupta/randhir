@@ -338,6 +338,7 @@ function itg_bestcolleges_block_view($delta = '') {
       break;
     case 'bestcollege_rhs_story_widget':
       $data = itg_bestcolleges_rhs_story();
+      p($data);
       $block['content'] = theme("bestcollege_story_ordering", array("data" => $data));
       break;
     case 'bestcollege_sponser':
