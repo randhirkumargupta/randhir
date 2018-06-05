@@ -122,7 +122,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
 
       $link = $front_url . drupal_get_path_alias('node/' . $news_detail->nid);
       if ($counter == 3) {
-        $news_content .= newsletter_app_link();
+        $content .= newsletter_app_link();
       }
       $counter++;	
       $content .= '<tr class="node-'.$news_detail->nid.'">
