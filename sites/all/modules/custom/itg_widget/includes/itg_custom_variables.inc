@@ -59,6 +59,12 @@ function itg_custom_variables() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('enable_custom_lazyload'),
   );
+  $form['is_pti_cron_running'] = array(
+    '#type' => 'textfield',
+    '#title' => t('PTI Cron Running status'),
+    '#default_value' => get_itg_variable('is_pti_cron_running', 1),
+    '#required' => FALSE,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
@@ -294,6 +300,16 @@ function itg_fifa_category_id(){
     '#type' => 'textfield',
     '#title' => t('Fifa category id'),
     '#default_value' => get_itg_variable('fifa_category_id'),
+  );
+  $form['fifa_morenews_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fifa More News Text'),
+    '#default_value' => get_itg_variable('fifa_morenews_text'),
+  );
+  $form['fifa_morenews_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Fifa More News URL'),
+    '#default_value' => get_itg_variable('fifa_morenews_url'),
   );
   $form['submit_fifa_setting'] = array(
     '#type' => 'submit',

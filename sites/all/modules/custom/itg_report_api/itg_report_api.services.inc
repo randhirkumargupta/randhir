@@ -313,7 +313,34 @@ function itg_report_api_resource() {
         ),
       ),
     ),
-  );
+      
+      // fba_update custom resource declaration.....
+        'fba_update' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves fba_update schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_report_api',
+                        'name' => 'itg_report_api.services',
+                    ),
+                    'callback' => 'itg_report_api_fba_update',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'fba_id',
+                            'optional' => TRUE,                            
+                            'source' => array('data'),
+                            'description' => 'fba_id',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    );
 
   return $api;
 }
@@ -535,12 +562,11 @@ function itg_report_api_author_report() {
 
 function itg_report_api_author_report_v1() {
   module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_author_report_v1');
+  $start_date = time();
   if ($_GET['start_date'] != "na") {
     $start_date = strtotime($_GET['start_date']);
   }
-  else {
-    $start_date = $_GET['start_date'];
-  }
+  
     $type = 'story';
   if($_GET['type'] == "video"){
       $type = 'videogallery';
@@ -724,4 +750,72 @@ function itg_report_api_detail() {
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
+/**
+ * Call back function for fba_update API
+ * @pram $_POST
+ *
+ * @return array - The processed information array.
+ */
+function itg_report_api_fba_update(){
+    $HTTP_RAW_POST_DATA;
+    //$params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $data = $params['data'];
+    $resp = array();
+    $resp['status_code'] = "1";
+    $resp['status_message'] = "";
+    $resp_data = array();
+    foreach ($data as $key => $value) {        
+        $canonical_url = $value['canonical_url'];
+        $fba_id = $value['id'];
+        $publish_status = $value['publish_status'];
+        $published = $value['published'];
+        $nid = itg_rapid_nid_by_url($canonical_url);
+        $flag = itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid);
+        $resp_data[$nid] = "$flag";
+    }
+    $resp['data' ] = $resp_data;
+    return $resp;
+    
+}
+/**
+ * itg_rapid_nid_by_url
+ * @param type $canonical_url
+ * @return type $nid
+ */
+function itg_rapid_nid_by_url($canonical_url){
+    $nid = 0;
+    if($canonical_url){
+        $canonical_url_ar = explode("/",$canonical_url);
+        $last_key = count($canonical_url_ar) - 1;
+        $last_key_val = $canonical_url_ar[$last_key];
+        $last_key_ex_ar = explode("-",$last_key_val);
+        $nid_key = count($last_key_ex_ar) - 4;
+        $nid = $last_key_ex_ar[$nid_key];
+    }    
+    return $nid;
+}
+/**
+ * itg_report_api_fba_update_data
+ * @param type $fba_id
+ * @param type $publish_status
+ * @param type $published
+ * @param type $nid
+ */
+function itg_report_api_fba_update_data($fba_id, $publish_status, $published, $nid) {
+    $node = node_load($nid);
+    $success = "";
+    if ($nid) {
+        $node->field_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
+        $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
+        $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
 
+        try {
+            node_save($node);
+            $success = TRUE;
+        } catch (Exception $e) {
+            $success = FALSE;
+        }
+    }
+    return $success;
+}

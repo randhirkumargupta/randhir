@@ -1097,8 +1097,15 @@ function itg_akamai_init() {
           $ttl_for_custom_url = 1800;
           akamai_max_age($ttl_for_custom_url);
         }
-        else if (arg(0) == 'rss' || arg(0) == 'rss-gallery' || arg(0) == 'rss-video' || arg(0) == 'rss-content') {
+        else if (arg(0) == 'rss' || arg(0) == 'rss-gallery' || arg(0) == 'rss-video' || arg(0) == 'rss-content' || arg(0) == 'archives') {
           $ttl_for_custom_url = 1800;
+          if (arg(0) == 'archives' && !empty(arg(1)) && !empty(arg(2))) {
+            $date = date('d-m-Y');
+            $arg2 = arg(2);
+            if ($date != $arg2) {
+              $ttl_for_custom_url = 86400;
+            }
+          }
           akamai_max_age($ttl_for_custom_url);
         }
         else if (arg(0) == 'topic') {

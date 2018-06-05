@@ -1173,6 +1173,7 @@ function topstoriesList($source, $limit = 0) {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+        $body_value = $value['body_value'];
         if ($type == 'breaking_news') {
             $field_story_kicker_text_value = strip_tags($resvalue['field_common_short_description_value']);
         }

@@ -9,8 +9,7 @@
  * @pram datetime $start_date
  * @return array
  */
-function author_report_v1($start_date, $type) {
-    
+function author_report_v1($start_date, $type) {    
     global $base_url;
     $data = array();
     $prev_day = time() - (24 * 60 * 60);
