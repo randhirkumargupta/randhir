@@ -26,12 +26,12 @@ if ($theme != 'itgadmin') {
 <?php $url_get = explode('/',$_SERVER['REQUEST_URI']);
       $bestcollege_class = '';
       if ($url_get[2] == '2018') {
-        $bestcollege_class = "class='bestcolleges2018'";
+        $bestcollege_class = 'bestcolleges2018';
       }
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
-  <div id="page" <?php print $bestcollege_class; ?>>
+  <div id="page" class="<?php print $bestcollege_class; ?>">
     <header class="header" id="header" role="banner">
       <section class="header-top">
     
