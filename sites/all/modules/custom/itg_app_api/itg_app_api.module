@@ -603,7 +603,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
     if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
         $flag = 1;
     }
-    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it", "insert_video");
+    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it", "insert_video", "fba_update");
     if (arg(0) == "appapi" && count(arg()) == 2) {
         if (!in_array(arg(1), $post_res)) {
             $result = $path . "/it";
