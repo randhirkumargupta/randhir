@@ -81,7 +81,6 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $mail_content = itg_get_newsletter_mail_content($node, $template_node);
   }
 
-  echo $mail_content;die;
   // code for netcore
   if (function_exists('itg_netcore_mail_create_campaign')) {
     $mail_content = str_replace("&nbsp;", " ", $mail_content);
@@ -251,7 +250,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
     $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
-    $counter = 0;      
+    $counter = 1;      
     foreach ($story_nodes as $news_array) {
       $news_detail = node_load($news_array);
       $title = $news_detail->title;
@@ -267,7 +266,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       }
       $link = FRONT_URL . '/node/' . $news_detail->nid;
       if ($counter == 3) {
-	    $news_content .= newsletter_app_link();
+	    $content .= newsletter_app_link();
 	  }
 	  $counter++;
       $content .= '<tr>
