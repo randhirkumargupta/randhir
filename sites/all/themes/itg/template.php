@@ -298,6 +298,12 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  if ($base_url == FRONT_URL) {
+    $url_get = explode('/',$_SERVER['REQUEST_URI']);
+    if ($url_get == '2018') {
+      $vars['classes_array'][] = 'bestcolleges2018';
+    }    
+  }
   if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
     $preconnect_prefetch_code = array(
       '#type' => 'markup',
