@@ -1273,6 +1273,7 @@ function itg_widget_block_view($delta = '') {
                 }
                 jQuery(".trending-videos-flex").flexslider({
                 animation: "slide",
+                animationLoop: false,
                 itemWidth: getGridSize(),
                 itemMargin:15,
                 prevText: "",
