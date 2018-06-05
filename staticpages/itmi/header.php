@@ -87,7 +87,7 @@ ul.navbar li a {padding: 8px 17px;}
         <div class="wrapper">
           <div class="logo"> <a href="/itmi/index.jsp"><img src=" https://smedia2.intoday.in/indiatoday/itmi/images/itmi-logo.png" alt="" border="0"></a> </div>
           <div class="bottomleft">
-            <div class="topdate_Addmiss"> <a href="javascript:void();" target="_blank" style="cursor:default">Admission Test date for Noida - 9th June <br/> Admission Test date for other centres  - 2nd June</a> </div>
+            <div class="topdate_Addmiss"> <a href="javascript:void();" target="_blank" style="cursor:default">Admission Test date for Noida - 9th June <br/> Admission Test date for other centres</a> </div>
           </div>
           <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0"></a> </div>
         </div>
