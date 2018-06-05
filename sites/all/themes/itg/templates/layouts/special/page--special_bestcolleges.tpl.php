@@ -197,6 +197,13 @@ if ($theme != 'itgadmin') {
                           $block1 = block_load('itg_bestcolleges', 'bestcollege_rhsstatic');
                           $render_rhsstatic = _block_get_renderable_array(_block_render_blocks(array($block1)));
                           print render($render_rhsstatic);
+
+                          // RHS Story
+                          $block_story = block_load('itg_bestcolleges','bestcollege_rhs_story_widget');
+                          $render_story = _block_get_renderable_array(_block_render_blocks(array($block_story)));
+                          print render($render_story);
+
+
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
                           $render_video = _block_get_renderable_array(_block_render_blocks(array($block_video)));
