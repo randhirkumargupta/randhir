@@ -10,11 +10,7 @@ function _remove_slash_from_string($string) {
 }
 
 function itg_common_custompath_insert_load($node) {
-  if($node->type == 'page'){
-    $edited_sef_url = $node->path['alias'];	  
-  }else{
-    $edited_sef_url = _remove_slash_from_string($node->path['alias']);	  
-  }	
+  $edited_sef_url = _remove_slash_from_string($node->path['alias']);
   if (!empty($edited_sef_url)) {
     $lencount_sef = strlen($edited_sef_url);
     if ($lencount_sef >= 160) {
