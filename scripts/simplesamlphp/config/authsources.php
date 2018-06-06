@@ -224,9 +224,9 @@ $config = array(
         'authfacebook:Facebook',
         // Register your Facebook application on http://www.facebook.com/developers
         // App ID or API key (requests with App ID should be faster; https://github.com/facebook/php-sdk/issues/214)
-        'api_key' => '282860935395613',
+        'api_key' => '406507846492490',
         // App Secret
-        'secret' => '215183b6b9eed75594423588d6132288',
+        'secret' => '47da457d57890c8f9dff5912c355826d',
         // which additional data permissions to request from user
         // see http://developers.facebook.com/docs/authentication/permissions/ for the full list
         'req_perms' => 'email,user_birthday,public_profile',
