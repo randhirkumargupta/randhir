@@ -92,23 +92,22 @@ function itg_bestcolleges_menu() {
 /**
  * Remove bestcolleges node
  */
-function bestcollege_remove() {
-  $result = db_query("ALTER TABLE `bestcolleges_ranking` CHANGE `rank` `rank` INT(11) NOT NULL DEFAULT '0' COMMENT 'TODO: please describe this field!'");  
-}
-
 function bestcollege_remove_tes() {
   if($_GET['TEST'] == 3) {
     db_query("DELETE FROM `bestcolleges_master_2018` WHERE 1");
   }
 }
 
-function bestcollege_remove_old() {
+function bestcollege_remove() {
   $query = db_select('node', 'n');
   $query->condition('n.type', 'bestcolleges', '=');
+  // $query->condition('n.nid', '1154553', '=');
+  $query->condition('n.nid', array("1154553", "1154427"), 'BETWEEN');
   $query->fields('n', array('nid'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
-    node_delete($resvalue['nid']);
+    // node_delete($resvalue['nid']);
+    pr($resvalue['nid']);
   }
 }
 
