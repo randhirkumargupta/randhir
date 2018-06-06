@@ -295,6 +295,18 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  if ($base_url == FRONT_URL) {
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    if ($url_get[1] == '2018') {
+      $vars['classes_array'][] = 'bestcolleges2018';
+    }
+    
+    if ($url_get[0] == 'bestcolleges' && is_numeric($url_get[3])) {
+      $bestcollege_data = taxonomy_term_load($url_get[3]);
+      $vars['head_title'] = $bestcollege_data->metatags[LANGUAGE_NONE]['title']['value'];
+    }      
+  }
   if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
     $preconnect_prefetch_code = array(
       '#type' => 'markup',
@@ -764,7 +776,7 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
   
-  if (drupal_is_front_page()) {
+  /*if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
@@ -779,7 +791,7 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']['scope'] = 'footer';
     $javascript['misc/progress.js']['scope'] = 'footer';
     
-  }  
+  }*/  
 
   //remove some js in footer for all front page    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
@@ -791,7 +803,44 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';  
   $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
   $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
+  // Remove un necessary js from homepage.
+  if (drupal_is_front_page()) {
+    //unset($javascript['misc/drupal.js']);
+    //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+    unset($javascript['misc/jquery.once.js']);
+    //unset($javascript['sites/all/themes/itg/js/slick.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
+    unset($javascript['sites/all/themes/itg/js/ripple.js']);
+    unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
+    //unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
+    //unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
+    unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
+    //unset($javascript['sites/all/themes/itg/js/script.js']);	  
+    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
 
+    unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
+    unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
+    unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+    unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
+    unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
+    //unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
+    //unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
+    unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
+
+    unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']);
+    unset($javascript['misc/progress.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
+    unset($javascript['misc/ajax.js']);
+    unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
+    unset($javascript['modules/user/user.js']);
+  }
 }
 
 /**
