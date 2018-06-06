@@ -16,9 +16,6 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   global $base_url;
   $path_request = request_path();
   $path_request_array = explode('/', $path_request);
-  if($_GET['test'] == 'abc') {
-    pr($path_request_array);
-  }
   $year = $path_request_array[1];
   $settings['base_url'] = $base_url;
   $settings['year'] = $year;
