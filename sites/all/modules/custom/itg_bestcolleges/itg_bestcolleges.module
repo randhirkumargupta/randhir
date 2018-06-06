@@ -2296,10 +2296,10 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
   $stream = $line[1];
   $streamid = '0'; // $line[2];
   $collegeid = $line[3];
-  $CollegeNewNid = $line[4];
+  $CollegeNewNid = '0'; // $line[4];
   $year = $line[5];
   $rank = $line[6];
-  $published = $line[7];
+  $published = '1'; //$line[7];
   $created_date = date('Y-m-d H:i:s'); // !empty($line[8]) ? $line[8] : date('Y-m-d H:i:s');
   $bestcollege_status = variable_get('bestcollege_status', '');
 
