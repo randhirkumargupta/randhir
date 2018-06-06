@@ -92,33 +92,23 @@ function itg_bestcolleges_menu() {
 /**
  * Remove bestcolleges node
  */
-function bestcollege_remove() {
-  $data = "";  
-  $result = db_query("SELECT bm.*, br.year, br.rank, br.stream FROM bestcolleges_master_2018 AS bm LEFT JOIN bestcolleges_ranking as br ON bm.collegeid = br.collegeid  WHERE br.year = :years", array(':years' => '2018'), array('fetch' => PDO::FETCH_ASSOC))->FetchAll();
-  
-  foreach ($result as $key => $value) {
-    $data .= $row['id'].",".$row['collegeid'].",".$row['collegename'].",".$row['city'].",".$row['description'].",".$row['image'].",".$row['websiteurl'].",".$row['storyids'].",".$row['photoids'].",".$row['videoids'].",".$row['published'].",".$row['created_date'].",".$row['node_id'].",".$row['year'].",".$row['rank'].",".$row['stream']."\n";                                                                                                                                                                                                                                                                                                                   	
-  }
-
-    
-  header('Content-Type: application/csv');
-  header('Content-Disposition: attachment; filename="bestcollehe-filename.csv"');
-  echo $data; exit();
-}
-
 function bestcollege_remove_tes() {
   if($_GET['TEST'] == 3) {
     db_query("DELETE FROM `bestcolleges_master_2018` WHERE 1");
   }
 }
 
-function bestcollege_remove_old() {
+function bestcollege_remove() {
   $query = db_select('node', 'n');
   $query->condition('n.type', 'bestcolleges', '=');
+  // $query->condition('n.nid', '1154553', '=');
+  $query->condition('n.nid', array("1154427", "1154553"), 'BETWEEN');
   $query->fields('n', array('nid'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  // print strtr((string) $query, $query->arguments()); die;  
   foreach ($result as $reskey => $resvalue) {
-    node_delete($resvalue['nid']);
+     node_delete($resvalue['nid']);
+     // pr($resvalue['nid']);
   }
 }
 
@@ -235,6 +225,9 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
     'bestcollege_section_ordering' => array(
       'template' => 'templates/bestcollege-section-ordering',
     ),
+    'bestcollege_story_ordering' => array(
+      'template' => 'templates/bestcollege-story-ordering',
+    ),
     'bestcollege_image_sliders' => array(
       'variable' => array('data' => NULL),
       'template' => 'bestcollege-image-slider',
@@ -295,6 +288,9 @@ function itg_bestcolleges_block_info() {
   $blocks['bestcollege_rhs_videos_widget'] = array(
     'info' => t('Widget: Bestcolleges RHS Videos'),
   );
+  $blocks['bestcollege_rhs_story_widget'] = array(
+    'info' => t('Widget: Bestcolleges RHS Story'),
+  );
   $blocks['bestcollege_sponser'] = array(
     'info' => t('Widget: Bestcolleges Sponser'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -332,6 +328,10 @@ function itg_bestcolleges_block_view($delta = '') {
     case 'bestcollege_rhs_videos_widget':
       $data = itg_bestcolleges_rhs_video();
       $block['content'] = theme("bestcollege_section_ordering", array("data" => $data));
+      break;
+    case 'bestcollege_rhs_story_widget':
+      $data = itg_bestcolleges_rhs_story();
+      $block['content'] = theme("bestcollege_story_ordering", array("data" => $data));
       break;
     case 'bestcollege_sponser':
       $path_request = request_path();
@@ -1018,6 +1018,44 @@ function itg_bestcolleges_rhs_video() {
         ->groupBy('iwo.nid')
         ->range(0, $range);
     $result = $query->execute();
+    return _get_widget_display_data_as_per_db_result($result);
+  }
+}
+
+/**
+ * rhs story at bestcollege page
+ * @return type
+ */
+function itg_bestcolleges_rhs_story() {
+  $arg = arg();
+  if (!empty($arg[1]) && $arg[1] == 'term') {
+    $url_get = explode('/', $_SERVER['REQUEST_URI']);
+    $year = $url_get[2];
+  }
+  else {
+    $year = $arg[1];
+  }
+
+  module_load_include('inc', 'itg_widget', 'includes/itg_widget_helper');
+  $json = variable_get('bestcollege_get_video', '');
+  $video_array = (array) json_decode($json);
+  $video_result = $video_array['story']->{$year};
+  if (is_array($video_result) && count($video_result) > 0) {
+    $widget_name = 'section_wise_widget';
+    $range = 5;
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
+    $query->fields('iwo', array('nid', 'weight', 'extra'));
+    $query->fields('wh', array('node_data'));
+    $query->condition('iwo.nid', $video_result, 'IN');
+    $query->condition('iwo.widget', $widget_name);
+    $query->condition('iwo.content_type', 'All');
+    $query->condition('wh.node_status', 1)
+        ->orderBy('iwo.weight', 'DESC')
+        ->groupBy('iwo.nid')
+        ->range(0, $range);
+    $result = $query->execute();
+    // print strtr((string)$query, $query->arguments());
     return _get_widget_display_data_as_per_db_result($result);
   }
 }
@@ -1777,7 +1815,7 @@ function bestCollegesRelatedStoryList() {
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
-  if ($year != '2016' && $year != '2017') {
+  if ($year != '2016' && $year != '2017' && $year != '2018') {
     $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'story');
     $related_story_nid_ar = explode(",", $story_data);
   }
@@ -1925,7 +1963,7 @@ function itg_bestcolleges_related_videolist() {
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
-  if ($year != '2016' && $year != '2017') {
+  if ($year != '2016' && $year != '2017' && $year != '2018') {
     $field_bestcollege_title = "Lady Shri Ram College for Women";
     $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'video');
     $related_photo_nid_ar = explode(",", $story_data);

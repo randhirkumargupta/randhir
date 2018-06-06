@@ -6,6 +6,8 @@
  * @global type $base_url
  */
 function itg_uc_browser_feed_latest_story() {
+  drupal_json_output(array());
+  drupal_exit();	
   global $base_url;
   $page_number = (isset($_GET['pageNumber']) ? $_GET['pageNumber'] : 0);
   $pagesize = (isset($_GET['pagesize']) ? $_GET['pagesize'] : 30);
