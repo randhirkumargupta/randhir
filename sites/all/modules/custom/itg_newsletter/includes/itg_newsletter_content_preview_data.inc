@@ -193,6 +193,7 @@ il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=6"/
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
+  $content .= newsletter_app_download_link();
   $content .= '</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p>';
   if (!$download_action) {
     $node = node_load($_GET['nid']);

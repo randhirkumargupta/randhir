@@ -1107,10 +1107,33 @@ function itg_newsletter_get_previous_time($nids){
 function newsletter_app_link(){
   $kicker = "Watch the latest English news on India Today TV app. The app brings you the latest news on the go, along with latest updates, videos and photos from India and across the world.";
   $news_content = '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/it-sqare.png" alt="" title="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/it-sqare.png" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="http://lt.intoday.in/ltrack?id=e0hTBwkNDlYJUxlUUVYFUFlUAkk=CQJfAQVSVQUdRAlSX1EQXxdSVgFQCSUFAAxBBApLVVpV&client=15267" target ="_blank">DOWNLOAD INDIA TODAY APP</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
               </td></tr>';
+  return $news_content;
+}
+
+function newsletter_app_link_preview(){
+  $kicker = "Watch the latest English news on India Today TV app. The app brings you the latest news on the go, along with latest updates, videos and photos from India and across the world.";
+  $content = '<div class="newsletter-list">
+            <div class="newsletter-thumbnail"><img src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/it-sqare.png" /></div>  
+            <div class="title-kicker">
+              <div class="newsletter-title"><a href="http://lt.intoday.in/ltrack?id=e0hTBwkNDlYJUxlUUVYFUFlUAkk=CQJfAQVSVQUdRAlSX1EQXxdSVgFQCSUFAAxBBApLVVpV&client=15267" target ="_blank">DOWNLOAD INDIA TODAY APP</a></div>
+              <div class="newsletter-kicker">' .$kicker .'</div>
+            </div>
+          </div>';
+  return $content;
+}
+
+function newsletter_app_download_link(){
+  $news_content = '<tr><td align="left" style="padding:20px 20px 20px 20px;border-top: 2px solid #d9d9d9;" valign="top">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody><tr>
+                    <td align="center" valign="top" width="50%"><a href="http://lt.intoday.in/ltrack?id=e0hTBwkNAFMGVRlUUVYFUFlUAkk=CQJfAQVSVQUdRAlSX1EQXxdSVgFQCSUFAAxBBApLVVpV&amp;client=15267" target="_blank"><img alt="app-store" src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/app-store.png" title="app-store"></a></td>
+                    <td align="center" valign="top" width="50%"><a href="http://lt.intoday.in/ltrack?id=e0hTBwkNAFMHXBlUUVYFUFlUAkk=CQJfAQVSVQUdRAlSX1EQXxdSVgFQCSUFAAxBBApLVVpV&amp;client=15267" target="_blank"><img alt="google-play" src="https://akm-img-a-in.tosshub.com/indiatoday/newsletter/google-play.png" title="goolge-play"></a></td>
+                    </tr></tbody></table>
+                  </td></tr>';
   return $news_content;
 }
