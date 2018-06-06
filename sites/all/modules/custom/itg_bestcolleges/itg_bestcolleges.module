@@ -1813,7 +1813,9 @@ function bestCollegesRelatedStoryList() {
   $count = 0;
   $data = array();
   $related_story_nid_ar = array();
-  $year = arg(1);
+  $path_request = request_path();
+  $url_get = explode('/', $path_request);
+  $year = $url_get[1];
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
