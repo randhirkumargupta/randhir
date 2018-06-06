@@ -102,12 +102,13 @@ function bestcollege_remove() {
   $query = db_select('node', 'n');
   $query->condition('n.type', 'bestcolleges', '=');
   // $query->condition('n.nid', '1154553', '=');
-  $query->condition('n.nid', array("1154553", "1154427"), 'BETWEEN');
+  $query->condition('n.nid', array("1154427", "1154553"), 'BETWEEN');
   $query->fields('n', array('nid'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  // print strtr((string) $query, $query->arguments()); die;  
   foreach ($result as $reskey => $resvalue) {
-    // node_delete($resvalue['nid']);
-    pr($resvalue['nid']);
+     node_delete($resvalue['nid']);
+     // pr($resvalue['nid']);
   }
 }
 
