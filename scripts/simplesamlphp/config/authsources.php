@@ -233,7 +233,6 @@ $config = array(
         //'req_perms' => 'public_profile',
     ),
 
-
     /*
     // LinkedIn OAuth Authentication API.
     // Register your application to get an API key here:
