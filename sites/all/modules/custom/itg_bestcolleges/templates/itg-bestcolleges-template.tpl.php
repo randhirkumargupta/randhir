@@ -206,9 +206,10 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
 
 
             <?php
-               $url_get = explode('/',$_SERVER['REQUEST_URI']);
-                if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2]))) {
-                    print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
+                $path_request = request_path();
+                $url_get = explode('/', $path_request);
+                if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[1]))) {
+                    print views_embed_view('best_college_image_slider', 'block_1', $url_get[1]);
                 }
             ?>
 

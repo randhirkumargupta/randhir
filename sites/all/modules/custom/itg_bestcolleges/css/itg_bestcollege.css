@@ -158,7 +158,7 @@
      font-weight: bold;
  }
  #content #page-title{
-    font:normal 33px/35px OpenSans-Regular;
+ 	font:normal 33px/35px OpenSans-Regular;
     color: #545454;padding:0 0 10px;
  }
  .clr_chn .item {
@@ -253,7 +253,8 @@
      clear: both;
      display: inline-block;
  }
- .grid-group-item .thumbnail{height: 355px;} 
+ .grid-group-item .thumbnail{height: 400px;} 
+
  .caption {
      text-transform: uppercase;
      padding: 9px;
@@ -530,7 +531,7 @@
      margin-right: 0;
      margin-left: 15px;
  }
- .list-group-item .thumbnail { height: 135px;
+ .list-group-item .thumbnail { height: 140px;
     position: relative;}
 .list-group-item .thumbnail img {
      max-height: 80px;
@@ -555,7 +556,7 @@
  .list-group-item .list-group-item-heading{position: absolute;
 left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); width:150px;}
  .list-group-item .caption{position: absolute;left: 340px;width: calc(100% - 340px);}
- .list-group-item .list-group-item-heading a span{word-break:break-all; display: block;}
+ .list-group-item .list-group-item-heading a span{display: block;}
  /* Sandeep Bharti Css For bestcolloge RHS Video section */
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video{ margin-top: 30px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video h3{background: #3176a0; font-size: 16px;
@@ -564,7 +565,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video h3 span{margin: 0px;padding: 0px;background: transparent;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul{background: #f2f2f2;
     padding:10px;border: solid 1px #dddddd;}
-.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li{ padding:15px 0 0;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li{ padding:15px 0 0; overflow: hidden;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li:last-child{ border-bottom:0px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:170px; float: left; margin-left: 0px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .title{ padding:0px 0 0 10px;}
@@ -658,7 +659,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .leftPresentingSponsor{ width:250px}
 .rightAssociateSponsor{ width:250px}
 .detail_box .stream .control-label label {position: static; top: 0;}
-.grid-group-item .thumbnail{height: 395px;} 
+.grid-group-item .thumbnail{height: 400px;} 
 }
 @media screen and (min-width: 481px) and (max-width:767px) {
 .grid-group-item .thumbnail{ height: auto;}
@@ -747,7 +748,40 @@ text-align: left;}
 }
 
 
+/* bestcolleges 2018 css update */
+/*.bestcolleges2018 .grid-group-item .thumbnail{height:400px;}*/
+.bestcolleges2018 .grid-group-item .cl a{ margin-bottom:0px; }
+.bestcolleges2018 .grid-group-item .thumbnail .list-group-item-text a{padding-bottom: 5px;}
 
-
+.story-right-now-list .pic {
+     float: left;
+}
+ .watch-right-now-video ul .story-right-now-list .title {
+     display: block;
+     overflow: hidden;
+     word-wrap: break-word;
+     font-size: 15px;
+     font-size: .9375rem;
+     line-height: 20px;
+     color: #111;
+     font-family: "OpenSans-Semibold";
+}
+ .story-right-now-list .title {
+     padding: 0px 9px 9px 9px;
+     font-weight: bold;
+}
+ .watch-right-now-video ul li.story-right-now-list+li {
+     border-top: 1px solid #ddd;
+}
+.bestcolleges2018 .dir2018 { display:none!important; }
+ @media only screen and (max-device-width: 1024px) and (min-device-width: 320px) {
+     .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.story-right-now-list .pic {width: 100px;}
+}
+@media screen and (max-width: 1024px) and (min-width: 768px){
+    .list-group-item.grid-group-item .thumbnail{ height:140px; }                                                                                                                                                                                                                                                                        
+}
+@media only screen and (max-device-width: 991px) and (min-device-width: 320px) {
+ .bestcolleges2018 .itg-layout-container .ad-widget{ height:auto;border:0px; }    
+}
 
  
