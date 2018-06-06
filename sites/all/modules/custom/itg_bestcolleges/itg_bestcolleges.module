@@ -93,17 +93,7 @@ function itg_bestcolleges_menu() {
  * Remove bestcolleges node
  */
 function bestcollege_remove() {
-  $data = "";  
-  $result = db_query("SELECT bm.*, br.year, br.rank, br.stream FROM bestcolleges_master_2018 AS bm LEFT JOIN bestcolleges_ranking as br ON bm.collegeid = br.collegeid  WHERE br.year = :years", array(':years' => '2018'), array('fetch' => PDO::FETCH_ASSOC))->FetchAll();
-  
-  foreach ($result as $key => $value) {
-    $data .= $row['id'].",".$row['collegeid'].",".$row['collegename'].",".$row['city'].",".$row['description'].",".$row['image'].",".$row['websiteurl'].",".$row['storyids'].",".$row['photoids'].",".$row['videoids'].",".$row['published'].",".$row['created_date'].",".$row['node_id'].",".$row['year'].",".$row['rank'].",".$row['stream']."\n";                                                                                                                                                                                                                                                                                                                   	
-  }
-
-    
-  header('Content-Type: application/csv');
-  header('Content-Disposition: attachment; filename="bestcollehe-filename.csv"');
-  echo $data; exit();
+  $result = db_query("ALTER TABLE `bestcolleges_ranking` CHANGE `rank` `rank` INT(11) NOT NULL DEFAULT '0' COMMENT 'TODO: please describe this field!'");  
 }
 
 function bestcollege_remove_tes() {
@@ -2296,10 +2286,10 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
   $stream = $line[1];
   $streamid = '0'; // $line[2];
   $collegeid = $line[3];
-  $CollegeNewNid = '0'; // $line[4];
+  $CollegeNewNid = $line[4];
   $year = $line[5];
   $rank = $line[6];
-  $published = '1'; //$line[7];
+  $published = $line[7];
   $created_date = date('Y-m-d H:i:s'); // !empty($line[8]) ? $line[8] : date('Y-m-d H:i:s');
   $bestcollege_status = variable_get('bestcollege_status', '');
 
