@@ -195,6 +195,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
+  $content .= newsletter_app_download_link();
   $content .= '</table><p>' . t('Thanks') . ',</p><p>' . t('India Today Group') . '</p></body></html>';
   return $content;
 }
@@ -285,6 +286,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       </td>
     </tr>';
 
+    $content .= newsletter_app_download_link();
     $content .= '</table><p>' . t('Thanks') . ',</p><p>' . t('India Today Group') . '</p></body></html>';
     return $content;
   }

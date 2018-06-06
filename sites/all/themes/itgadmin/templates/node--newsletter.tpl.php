@@ -138,6 +138,7 @@
       </div>
         <div class="newsletter-list-parent">
        <?php
+         $counter = 1;
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
           $content_id = $news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
           $title = $news_arr['field_news_title'][LANGUAGE_NONE][0]['value'];
@@ -157,7 +158,10 @@
               $link = $news_arr['field_news_external_url'][LANGUAGE_NONE][0]['value'];
               $content_id = $link;
           }
-          
+          if ($counter == 3) {
+			echo newsletter_app_link_preview();  
+		  }
+		  $counter++;
           if($content_id) {
           ?>
           <div class="newsletter-list">
@@ -168,6 +172,7 @@
             </div>
           </div>
         <?php } }?>
+        <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;"><?php echo newsletter_app_download_link(); ?></table>
         </div>  
          <div class="newsletter-footer"><?php echo $footer; ?></div>
       </div>
