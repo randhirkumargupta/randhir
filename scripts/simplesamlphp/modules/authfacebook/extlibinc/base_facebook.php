@@ -1152,7 +1152,7 @@ $response_params = json_decode($access_token_response, true);
       if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
         return 'https';
       }
-      return 'http';
+      return 'https';
     }
     /*apache + variants specific way of checking for https*/
     if (isset($_SERVER['HTTPS']) &&
@@ -1164,7 +1164,7 @@ $response_params = json_decode($access_token_response, true);
         ($_SERVER['SERVER_PORT'] === '443')) {
       return 'https';
     }
-    return 'http';
+    return 'https';
   }
 
   /**
