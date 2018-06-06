@@ -1221,7 +1221,7 @@ abstract class BaseFacebook
       if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
         return 'https';
       }
-      return 'http';
+      return 'https';
     }
     /*apache + variants specific way of checking for https*/
     if (isset($_SERVER['HTTPS']) &&
@@ -1233,7 +1233,7 @@ abstract class BaseFacebook
         ($_SERVER['SERVER_PORT'] === '443')) {
       return 'https';
     }
-    return 'http';
+    return 'https';
   }
 
   /**
