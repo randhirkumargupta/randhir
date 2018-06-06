@@ -90,7 +90,7 @@ $url_get = explode('/', $path_request);
       <!-- sponsor for static -->
         <?php 
           if($url_get[1] == '2016' || $url_get[1] == '2017') { 
-            print bestcollege_get_sponser_data('Best college Sponser');
+            // print bestcollege_get_sponser_data('Best college Sponser');
           }
         ?>
       <!-- end sponsor for static -->
