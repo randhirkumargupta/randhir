@@ -29,7 +29,7 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $form = array();
   $form['bestcollege_year_item'] = array(
     '#type' => 'item',
-    '#title' => t('BEST COLLEGES YEAR'),
+    '#title' => t('BEST COLLEGES YEAR WISE'),
     '#weight' => -6,
     '#prefix' => '<div class = "right_view">',
     '#suffix' => '</div>',
