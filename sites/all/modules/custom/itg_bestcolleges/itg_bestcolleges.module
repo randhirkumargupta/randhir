@@ -992,8 +992,9 @@ function itg_city_option($byear, $tid, $selected, $rstream) {
 function itg_bestcolleges_rhs_video() {
   $arg = arg();
   if (!empty($arg[1]) && $arg[1] == 'term') {
-    $url_get = explode('/', $_SERVER['REQUEST_URI']);
-    $year = $url_get[2];
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    $year = $url_get[1];
   }
   else {
     $year = $arg[1];
@@ -1029,8 +1030,9 @@ function itg_bestcolleges_rhs_video() {
 function itg_bestcolleges_rhs_story() {
   $arg = arg();
   if (!empty($arg[1]) && $arg[1] == 'term') {
-    $url_get = explode('/', $_SERVER['REQUEST_URI']);
-    $year = $url_get[2];
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    $year = $url_get[1];
   }
   else {
     $year = $arg[1];
@@ -2604,8 +2606,9 @@ function itg_bestcollege_zonecampuswiseranking_migrate($line, $session_nid, &$co
  * @return type
  */
 function itg_bestcollege_image_slider() {
-  $url_get = explode('/', $_SERVER['REQUEST_URI']);
-  $year = isset($url_get[2]) ? $url_get[2] : '';
+  $path_request = request_path();
+  $url_get = explode('/', $path_request);
+  $year = isset($url_get[1]) ? $url_get[1] : '';
   $story_data = array();
   $json = variable_get('bestcollege_get_video', '');
   $related_result = (array) json_decode($json);
