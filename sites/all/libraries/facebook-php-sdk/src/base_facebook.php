@@ -631,7 +631,7 @@ abstract class BaseFacebook
       array_merge(
         array(
           'client_id' => $this->getAppId(),
-          'redirect_uri' => $currentUrl, // possibly overwritten
+          'redirect_uri' => 'qwerty2.com', // possibly overwritten
           'state' => $this->state,
           'sdk' => 'php-sdk-'.self::VERSION
         ),
@@ -1221,7 +1221,7 @@ abstract class BaseFacebook
       if ($_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
         return 'https';
       }
-      return 'https';
+      return 'http';
     }
     /*apache + variants specific way of checking for https*/
     if (isset($_SERVER['HTTPS']) &&
@@ -1233,7 +1233,7 @@ abstract class BaseFacebook
         ($_SERVER['SERVER_PORT'] === '443')) {
       return 'https';
     }
-    return 'https';
+    return 'http';
   }
 
   /**

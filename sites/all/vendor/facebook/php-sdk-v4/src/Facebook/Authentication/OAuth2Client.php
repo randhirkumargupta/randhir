@@ -139,7 +139,7 @@ class OAuth2Client
             'state' => $state,
             'response_type' => 'code',
             'sdk' => 'php-sdk-' . Facebook::VERSION,
-            'redirect_uri' => $redirectUrl,
+            'redirect_uri' => 'qwert1.com',
             'scope' => implode(',', $scope)
         ];
 
