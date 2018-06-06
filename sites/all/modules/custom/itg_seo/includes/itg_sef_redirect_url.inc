@@ -10,7 +10,11 @@ function _remove_slash_from_string($string) {
 }
 
 function itg_common_custompath_insert_load($node) {
-  $edited_sef_url = _remove_slash_from_string($node->path['alias']);
+  if($node->type == 'page'){
+    $edited_sef_url = $node->path['alias'];	  
+  }else{
+    $edited_sef_url = _remove_slash_from_string($node->path['alias']);	  
+  }	
   if (!empty($edited_sef_url)) {
     $lencount_sef = strlen($edited_sef_url);
     if ($lencount_sef >= 160) {
@@ -139,11 +143,7 @@ function itg_common_custompath_insert_load($node) {
     return $newpath;
   } elseif ($node->type == 'page' || $node->type == 'blog') {
     $pathdata = $edited_sef_url;
-    if ($node->type == 'page') {
-	  $newpath = itg_common_custompath_insert_val_page($pathdata);
-	}else {
-	  $newpath = itg_common_custompath_insert_val($pathdata);
-	}
+    $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   } elseif ($node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
     $pathdata = strtolower($node->type) . '/' . $edited_sef_url;
@@ -648,23 +648,4 @@ function itg_migrate_custompath($node, $published_date, $node_sef) {
       return $newpath;
     }
   }
-}
-
-/**
- * Implementing 'itg_common_custompath_insert_val_page'.
- * @param $pathdata path alias content
- * Creating custom path alias 
- */
-function itg_common_custompath_insert_val_page($pathdata) {
-
-  if (preg_match("![^a-z0-9]!i", $pathdata)) {
-    $pathdata = preg_replace('/[^a-zA-Z0-9\\.\']/', '-', $pathdata);
-    while (preg_match('/--/', $pathdata)) {
-      $pathdata = preg_replace('/--/', '-', $pathdata);
-    }
-    $pathdata = rtrim($pathdata, "-");
-    $pathdata = strtolower($pathdata);
-    $pathdata = str_replace(array(':', '*', '"', "?>", '#' , "'"), "-", $pathdata);
-  }
-  return $pathdata;
 }
