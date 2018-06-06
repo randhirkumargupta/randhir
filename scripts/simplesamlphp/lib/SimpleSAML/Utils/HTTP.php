@@ -517,7 +517,7 @@ class HTTP
             ($baseURL === '')
         ) {
             // get server values
-            $protocol = 'http';
+            $protocol = 'https';
             $protocol .= (self::getServerHTTPS()) ? 's' : '';
             $protocol .= '://';
 
