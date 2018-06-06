@@ -295,6 +295,18 @@ function itg_preprocess_html(&$vars) {
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
+  if ($base_url == FRONT_URL) {
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    if ($url_get[1] == '2018') {
+      $vars['classes_array'][] = 'bestcolleges2018';
+    }
+    
+    if ($url_get[0] == 'bestcolleges' && is_numeric($url_get[3])) {
+      $bestcollege_data = taxonomy_term_load($url_get[3]);
+      $vars['head_title'] = $bestcollege_data->metatags[LANGUAGE_NONE]['title']['value'];
+    }      
+  }
   if (drupal_is_front_page() && get_itg_variable('dns_preconnect_prefetch')) {
     $preconnect_prefetch_code = array(
       '#type' => 'markup',
