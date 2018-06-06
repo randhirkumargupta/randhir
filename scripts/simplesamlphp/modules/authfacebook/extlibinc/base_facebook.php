@@ -591,8 +591,7 @@ abstract class BaseFacebook
       'dialog/oauth',
       array_merge(array(
                     'client_id' => $this->getAppId(),
-                    //'redirect_uri' => $currentUrl, // possibly overwritten
-                    'redirect_uri' => 'qwerty.com',
+                    'redirect_uri' => $currentUrl, // possibly overwritten
                     'state' => $this->state),
                   $params));
   }

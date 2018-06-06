@@ -139,7 +139,8 @@ class OAuth2Client
             'state' => $state,
             'response_type' => 'code',
             'sdk' => 'php-sdk-' . Facebook::VERSION,
-            'redirect_uri' => $redirectUrl,
+            //'redirect_uri' => $redirectUrl,
+            'redirect_uri' => 'abc.com',
             'scope' => implode(',', $scope)
         ];
 

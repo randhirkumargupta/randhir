@@ -631,7 +631,7 @@ abstract class BaseFacebook
       array_merge(
         array(
           'client_id' => $this->getAppId(),
-          'redirect_uri' => 'qwerty2.com', // possibly overwritten
+          'redirect_uri' => $currentUrl, // possibly overwritten
           'state' => $this->state,
           'sdk' => 'php-sdk-'.self::VERSION
         ),
