@@ -773,9 +773,12 @@ text-align: left;}
  .watch-right-now-video ul li.story-right-now-list+li {
      border-top: 1px solid #ddd;
 }
-.bestcolleges2018 .dir2018 { display:none !important; }
+.bestcolleges2018 .dir2018 { display:none!important; }
  @media only screen and (max-device-width: 1024px) and (min-device-width: 320px) {
      .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.story-right-now-list .pic {width: 100px;}
+}
+@media screen and (max-width: 1024px) and (min-width: 768px){
+    .list-group-item.grid-group-item .thumbnail{ height:140px; }                                                                                                                                                                                                                                                                        
 }
 @media only screen and (max-device-width: 991px) and (min-device-width: 320px) {
  .bestcolleges2018 .itg-layout-container .ad-widget{ height:auto;border:0px; }    
