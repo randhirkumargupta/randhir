@@ -253,7 +253,7 @@
      clear: both;
      display: inline-block;
  }
- .grid-group-item .thumbnail{height: 355px;} 
+ .grid-group-item .thumbnail{height: 400px;} 
 
  .caption {
      text-transform: uppercase;
@@ -565,7 +565,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video h3 span{margin: 0px;padding: 0px;background: transparent;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul{background: #f2f2f2;
     padding:10px;border: solid 1px #dddddd;}
-.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li{ padding:15px 0 0;}
+.sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li{ padding:15px 0 0; overflow: hidden;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li:last-child{ border-bottom:0px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:170px; float: left; margin-left: 0px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .title{ padding:0px 0 0 10px;}
