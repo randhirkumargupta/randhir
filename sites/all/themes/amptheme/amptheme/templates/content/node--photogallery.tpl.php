@@ -2,7 +2,6 @@
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
   <div class="amp-photo-slider">
       <?php
-      p($node);
       global $base_url;
       if (!empty($node->field_gallery_image[LANGUAGE_NONE])) {
         $html = '';
