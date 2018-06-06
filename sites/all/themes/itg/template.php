@@ -299,13 +299,14 @@ function itg_preprocess_html(&$vars) {
     $vars['classes_array'][] = 'pointer-event-none';
   }
   if ($base_url == FRONT_URL) {
-    $url_get = explode('/',$_SERVER['REQUEST_URI']);
-    if ($url_get[2] == '2018') {
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    if ($url_get[1] == '2018') {
       $vars['classes_array'][] = 'bestcolleges2018';
     }
     
-    if ($url_get[1] == 'bestcolleges' && is_numeric($url_get[4])) {
-      $bestcollege_data = taxonomy_term_load($url_get[4]);
+    if ($url_get[0] == 'bestcolleges' && is_numeric($url_get[3])) {
+      $bestcollege_data = taxonomy_term_load($url_get[3]);
       $vars['head_title'] = $bestcollege_data->metatags[LANGUAGE_NONE]['title']['value'];
     }      
   }
