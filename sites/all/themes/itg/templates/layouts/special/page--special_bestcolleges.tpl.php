@@ -23,6 +23,7 @@ if ($theme != 'itgadmin') {
   $itg_class = 'itg-front';
 }
 ?>
+
 <?php 
 $path_request = request_path();
 $url_get = explode('/', $path_request);
@@ -87,10 +88,11 @@ $url_get = explode('/', $path_request);
     <?php endif; ?>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
+      
       <!-- sponsor for static -->
         <?php 
           if($url_get[1] == '2016' || $url_get[1] == '2017') { 
-            // print bestcollege_get_sponser_data('Best college Sponser');
+            print bestcollege_get_sponser_data('Best college Sponser');
           }
         ?>
       <!-- end sponsor for static -->
@@ -200,13 +202,6 @@ $url_get = explode('/', $path_request);
                           $block1 = block_load('itg_bestcolleges', 'bestcollege_rhsstatic');
                           $render_rhsstatic = _block_get_renderable_array(_block_render_blocks(array($block1)));
                           print render($render_rhsstatic);
-
-                          // RHS Story
-                          $block_story = block_load('itg_bestcolleges','bestcollege_rhs_story_widget');
-                          $render_story = _block_get_renderable_array(_block_render_blocks(array($block_story)));
-                          print render($render_story);
-
-
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
                           $render_video = _block_get_renderable_array(_block_render_blocks(array($block_video)));
