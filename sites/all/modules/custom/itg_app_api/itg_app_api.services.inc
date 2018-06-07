@@ -7555,7 +7555,8 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
     $nid_flag = fba_update_data_search($nid);
     $success = TRUE;
     $api_type = "fba_update";
-    if ($nid_flag > 0) {
+    echo $nid_flag; echo "hi"; echo $nid;
+    if ($nid_flag == $nid) {
         // update query
         $num_updated = db_update('itg_fba_update')
                 ->fields(array('node_type' => '', 'api_type' => $api_type, 'nid' => $nid, 'fba_id' => $fba_id, 'fba_publish_status' => $publish_status, 'fba_published' => $published))
