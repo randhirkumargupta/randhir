@@ -7486,7 +7486,7 @@ function itg_rapid_api_breaking_news() {
     // call breaking news view
     $view_result = views_get_view_result('breaking_news', 'block_1');
     $nid = $view_result[0]->nid;
-    $data = aray();
+    $data = array();
     if (isset($nid) && $nid > 0) {
         // select breaking news..
         $alias = drupal_get_path_alias('node/' . $nid . '');
