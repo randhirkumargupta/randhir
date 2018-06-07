@@ -19,7 +19,21 @@ function itg_videogallery_create_video_node() {
         $video_id = $xml->video_id;
         
         $video_info_arr = get_video_info($video_file_name, $video_id);
+        if (count($video_info_arr) <= 0){
+          $xml_resp .= "<item>";
+          $xml_resp .= "<sucess_code>0</sucess_code>";
+          $xml_resp .= "<video_file_name>".$video_file_name."</video_file_name>";
+          $xml_resp .= "</item>";
+          continue;
+        }
         $video_fid = itg_associate_video_id_to_content($video_info_arr);
+        if (!$video_fid) {
+          $xml_resp .= "<item>";
+          $xml_resp .= "<sucess_code>0</sucess_code>";
+          $xml_resp .= "<video_file_name>".$video_file_name."</video_file_name>";
+          $xml_resp .= "</item>";
+          continue;
+        }
         $publish_date_timestamp = time();
         $long_headline = $xml->long_headline;
         $short_headline = $xml->short_headline;
@@ -199,9 +213,11 @@ function get_video_info($filename, $video_id){
     $query->leftJoin('field_data_field_all_xml_content', 'faxc', 'faxc.entity_id = fdfvi.entity_id');
     $query->condition('drd.title', $filename, '=');
     $query->condition('drd.video_id', $video_id, '=');
+    $query->condition('drd.dailymotion_published', 0, '=');
     $query->fields('drd');
     $query->fields('faxc', array('field_all_xml_content_value'));
     $video_data = $query->execute()->fetchAll();
     return $video_data;
   }
+  return FALSE;
 }
