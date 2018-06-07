@@ -95,20 +95,19 @@
 
     };
 
-    function privacy_policy_checkbox(url, url_type){
-        console.log(url,'--', url_type);
-        if(url_type == 'facebook' || url_type == 'twitter'){
-            if(jQuery("#edit-forget-me-1--2").prop('checked') == true){
-                window.location = url;
-            }else{
-                alert('You Agree to our Privacy and Cookie Policy While Register to our Website field is required');
-            }
-        }
-    }
-
 })(jQuery, Drupal, this, this.document);
 
 
+function privacy_policy_checkbox(url, url_type){
+    console.log(url,'--', url_type);
+    if(url_type == 'facebook' || url_type == 'twitter'){
+        if(jQuery("#edit-forget-me-1--2").prop('checked') == true){
+            window.location = url;
+        }else{
+            alert('You Agree to our Privacy and Cookie Policy While Register to our Website field is required');
+        }
+    }
+}
 
 //~ jQuery(document).ready(function(){
 	//~ var selected_country = jQuery("#edit-page-country").val();
