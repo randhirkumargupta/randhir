@@ -7594,6 +7594,7 @@ function fba_update_data_search($nid, $source = 0) {
         $query->condition('ifu.api_type', $api_type, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $nid_flag = $result[0]['nid'];
+        p($result);
     }
     if ($source == 0) {
         return $nid_flag;
