@@ -412,11 +412,11 @@
  }
  .slider_outer1 h1 {
      font-size:30px !important;
-     display: inline-block;
+     /* display: inline-block; */
      font-weight: bold;
      color: #111;
-    float: left;
-    width: calc(100% - 142px);
+    /* float: left;
+    width: calc(100% - 142px); */
     line-height: 32px;
  }
  .slider_outer1 .remove_padd_right{ padding-left: 0px;}
