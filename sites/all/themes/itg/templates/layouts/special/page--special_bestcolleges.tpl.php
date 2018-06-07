@@ -206,7 +206,7 @@ $url_get = explode('/', $path_request);
                           // RHS Story
                           $block_story = block_load('itg_bestcolleges','bestcollege_rhs_story_widget');
                           $render_story = _block_get_renderable_array(_block_render_blocks(array($block_story)));
-                          print render($render_story);
+                          // print render($render_story);
 
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
