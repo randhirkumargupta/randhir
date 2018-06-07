@@ -7555,7 +7555,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
     $nid_flag = fba_update_data_search($nid);
     $success = TRUE;
     $api_type = "fba_update";
-    if ($nid_flag == $nid) {
+    if ($nid_flag > 0) {
         // update query
         $num_updated = db_update('itg_fba_update')
                 ->fields(array('node_type' => '', 'api_type' => $api_type, 'nid' => $nid, 'fba_id' => $fba_id, 'fba_publish_status' => $publish_status, 'fba_published' => $published))
@@ -7593,8 +7593,10 @@ function fba_update_data_search($nid, $source = 0) {
         $query->condition('ifu.nid', $nid, '=');
         $query->condition('ifu.api_type', $api_type, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $nid_flag = $result[0]['nid'];
-        p($result);
+        if(count($result[0]) > 0){
+            $nid_flag = $result[0]['nid'];
+        }
+        
     }
     if ($source == 0) {
         return $nid_flag;
