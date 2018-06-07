@@ -2773,6 +2773,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // breaking_news custom resource declaration.....
+        'breaking_news' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves breaking_news schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_breaking_news',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -7541,4 +7568,79 @@ function itg_rap_upload_img($url) {
         $fid = $fid_extra_large_image = uplodaProfileImg_Rapid($extra_large_image);
     }
     return $fid;
+}
+/**
+ * Call back function for breaking_news API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_breaking_news() {
+    // call breaking news view
+    $view_result = views_get_view_result('breaking_news', 'block_1');
+    $nid = $view_result[0]->nid;
+    $data = array();
+    if (isset($nid) && $nid > 0) {
+        // select breaking news..
+        $alias = drupal_get_path_alias('node/' . $nid . '');
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+        $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+        $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+        $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+        $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+        $query->fields('mi', array('field_story_medium_image_fid'));
+        $query->fields('si', array('field_story_small_image_fid'));
+        $query->fields('dbody', array('body_value'));
+        $query->condition('n.nid', $nid);
+
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+        $title = $result[0]['title'];
+        $body = $result[0]['body_value'];
+        $create_date = date("F d, Y", $result[0]['created']);
+        $create_datetime = date(DATE_ATOM, $result[0]['created']);
+        $changed = date(DATE_ATOM, $result[0]['changed']);
+        $file_medium_img_url = completeFilePath($result[0]['field_story_medium_image_fid']);
+        $field_story_small_image_fid = completeFilePath($result[0]['field_story_small_image_fid']);
+        $web_url = FRONT_URL . "/" . $alias;
+        $created_by = $result[0]['uid'];
+        $city = getCityByNid($nid);
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+        $news = array();
+        $news['id'] = "$nid";
+        $news['title'] = "$title";
+        $news['url'] = "$web_url";
+        $news['published'] = "1";
+        $news['created'] = "$create_datetime";
+        $news['created_by'] = "$created_by";
+        $news['modified'] = "$changed";
+        $news['modified_by'] = "$created_by";
+        $detail = array();
+        $detail['id'] = "0";
+        $detail['site'] = "India Today";
+        $detail['name'] = "Breaking News";
+        $detail['type'] = "breaking_news";
+        $detail['count'] = "1";
+        $detail['display_count'] = "1";
+        $detail['pagination_cap'] = "1";
+        $detail['news'] = $news;        
+        $data['data'] = $detail;
+    } else {
+        $data['status_code'] = "0";
+        $data['status_message'] = "";
+        $news = array();        
+        $detail = array();
+        $detail['id'] = "0";
+        $detail['site'] = "India Today";
+        $detail['name'] = "Breaking News";
+        $detail['type'] = "breaking_news";
+        $detail['count'] = "0";
+        $detail['display_count'] = "1";
+        $detail['pagination_cap'] = "1";
+        $detail['news'] = $news;        
+        $data['data'] = $detail;
+    }
+    return $data;
 }
