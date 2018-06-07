@@ -109,7 +109,7 @@
 function privacy_policy_checkbox(url, url_type){
     console.log(url,'--', url_type);
     if(url_type == 'facebook' || url_type == 'twitter'){
-        if(jQuery("#upass input:checkbox").prop('checked') == true){
+        if(jQuery('form #upass input[type="checkbox"').prop('checked') == true){
             window.location = url;
         }else{
             alert('You Agree to our Privacy and Cookie Policy While Register to our Website field is required');
