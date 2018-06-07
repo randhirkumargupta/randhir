@@ -60,7 +60,8 @@
                         });
                     }
                 }else{
-                 $("#fotp #forgot_otp_success").before("<div class='forgot-otp-resend-limit message error'>You have reached max resend OTP limit.</div>").show(0).delay(2000).hide(1000);
+                    $("#fotp #forgot_otp_success").before("<div class='forgot-otp-resend-limit message error'>You have reached max resend OTP limit.</div>");
+                    $('div.forgot-otp-resend-limit').show().delay(2000).hide( 1000 );
                 }
             });
 
