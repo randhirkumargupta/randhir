@@ -7554,9 +7554,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
     $nid_flag = 0;
     $nid_flag = fba_update_data_search($nid);
     $success = TRUE;
-    $api_type = "fba_update";
-    //echo $nid_flag; echo "hi"; echo $nid;die();
-    // 0 hi 1148885
+    $api_type = "fba_update";    
     if ($nid_flag == $nid) {
         // update query
         $num_updated = db_update('itg_fba_update')
@@ -7564,8 +7562,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
                 ->condition('itg_fba_update.nid', $nid, '=')
                 ->execute();
     } else {
-        // insert query
-        echo "andy";die();
+        // insert query        
         $qry = db_insert('itg_fba_update')
                 ->fields(array(
                     'node_type' => '',
@@ -7574,8 +7571,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
                     'fba_id' => $fba_id,
                     'fba_publish_status' => $publish_status,
                     'fba_published' => $published,
-                ));
-        print strtr((string) $qry, $qry->arguments());die();
+                ));        
                 $qry->execute();
     }
 
