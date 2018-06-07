@@ -8,7 +8,7 @@
         attach: function (context, settings) {
             var base_url = settings.itg_sso_reg.settings.base_url;
             var error = settings.itg_sso_reg.settings.custom_error;
-            
+
             if (error) {
                 jQuery.each(error, function (index, item) {
                     if (index == 'mobile') {
@@ -62,7 +62,7 @@
             $('input[name=mobile]').keyup(function () {
                 this.value = this.value.replace(/[^0-9\.]/g, '');
             });
-            
+
             // validation
             var selected_country = jQuery('select[name="page_country"]').val();
             var flag = 0;
@@ -75,7 +75,7 @@
 				jQuery(':input[type="submit"]').prop('disabled', true);
 				jQuery('.country_restriction_msg').show();
 			}
-			
+
 			jQuery('select[name="page_country"]').on('change', function() {
 				var selected_country1 = this.value;
 				var flag1 = 0;
@@ -94,7 +94,21 @@
         }
 
     };
+
+    function privacy_policy_checkbox(url, url_type){
+        console.log(url,'--', url_type);
+        if(url_type == 'facebook' || url_type == 'twitter'){
+            if(jQuery("#edit-forget-me-1--2").prop('checked') == true){
+                window.location = url;
+            }else{
+                alert('You Agree to our Privacy and Cookie Policy While Register to our Website field is required');
+            }
+        }
+    }
+
 })(jQuery, Drupal, this, this.document);
+
+
 
 //~ jQuery(document).ready(function(){
 	//~ var selected_country = jQuery("#edit-page-country").val();
@@ -108,7 +122,7 @@
 		//~ jQuery(':input[type="submit"]').prop('disabled', true);
 		//~ jQuery('.country_restriction_msg').show();
 	//~ }
-	
+
 	//~ jQuery("#edit-page-country").on('change', function() {
 		//~ var selected_country1 = this.value;
 		//~ var flag1 = 0;
