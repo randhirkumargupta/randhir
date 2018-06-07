@@ -192,7 +192,7 @@ function itg_sitemap_get_sitemap($total_links) {
         $xml .= '</news:publication>';
         //Publication tag END
 
-        $xml .= '<news:publication_date>' . $total_link['news_publication_date'] . '</news:publication_date>';
+        $xml .= '<news:publication_date>' . $total_link['news_changed_date'] . '</news:publication_date>';
         $xml .= '<news:title> <![CDATA[' . stripInvalidXml($total_link['news_title']) . ' ]]> </news:title>';
         $xml .= '<news:keywords> <![CDATA[ ' . stripInvalidXml($total_link['news_keywords']) . '  ]]> </news:keywords>';
 
