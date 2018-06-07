@@ -7,8 +7,11 @@
  * @see https://drupal.org/node/1728148
  */
 $arg = arg();
-var_dump($arg);die;
+var_dump($arg);
+echo "<br>";
 $back_to_link_config = variable_get('sitename-domain');
+echo  $back_to_link_config ;
+echo "<br>";
 if(!empty($back_to_link_config)) {
   $explode_back_link = explode(',', $back_to_link_config);
   foreach ($explode_back_link as $key => $value) {
@@ -19,6 +22,7 @@ if(!empty($back_to_link_config)) {
 }
 
 if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
+  echo 'qwert1--';
   $returnto = $_GET['ReturnTo'];
   $explode_returnto_val = explode('/', $returnto);
   $get_first_arr = end($explode_returnto_val);
@@ -40,6 +44,7 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
   }
 }
 else {
+  echo 'qwert2--';
   $parse = parse_url(base64_decode($arg[1]));
   $parse_host = $parse['host'];
   // back to site configuration code in case of signup/forgot-password
@@ -55,6 +60,7 @@ else {
 
 // case for change password page
 if($arg[0] == 'sso' && $arg[1] == 'change-password') {
+   echo 'qwert3--';
   $parse = parse_url(base64_decode($arg[2]));
   $parse_host = $parse['host'];
   // back to site configuration code in case of signup/forgot-password
@@ -70,6 +76,7 @@ if($arg[0] == 'sso' && $arg[1] == 'change-password') {
 
 // case for change password page
 if($arg[0] == 'sso-user') {
+   echo 'qwert4--';
   $parse = parse_url(base64_decode($arg[3]));
   $parse_host = $parse['host'];
   // back to site configuration code in case of signup/forgot-password
@@ -82,7 +89,7 @@ if($arg[0] == 'sso-user') {
     $site_name = t('Edit Profile');
   }
 }
-
+die;
 ?>
 <div class="sso-header">
     <div class="container">
