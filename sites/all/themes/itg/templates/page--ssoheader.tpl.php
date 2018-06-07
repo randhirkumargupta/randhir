@@ -7,6 +7,7 @@
  * @see https://drupal.org/node/1728148
  */
 $arg = arg();
+var_dump($arg);die;
 $back_to_link_config = variable_get('sitename-domain');
 if(!empty($back_to_link_config)) {
   $explode_back_link = explode(',', $back_to_link_config);
@@ -87,26 +88,26 @@ if($arg[0] == 'sso-user') {
     <div class="container">
         <a class="back-to-itg" href="<?php print $shr; ?>" title="<?php print 'Back to the '.$site_name; ?>"><i class="fa fa-angle-left" aria-hidden="true"></i><?php print 'Back to the '.$site_name; ?></a>
         <div class="itg-logo">
-            <img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="India Today Group" />     
+            <img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="India Today Group" />
         </div>
     </div>
 </div>
 
 <div id="page">
 
-  
+
 
   <main id="main">
-    
+
     <section id="content" class="container sso-main-content" role="main">
       <?php print $messages; ?>
       <?php print render($page['content']); ?>
-      
+
     </section>
 
-    
+
  </main>
-    
+
 </div>
 
 <div class="sso-footer">
@@ -116,4 +117,4 @@ if($arg[0] == 'sso-user') {
   <p><?php print t('Copyright &copy;');?> <?php echo date("Y") ?> <?php print t('Living Media India Limited. For reprint rights: Syndications Today'); ?></p>
 </div>
 
-    
+
