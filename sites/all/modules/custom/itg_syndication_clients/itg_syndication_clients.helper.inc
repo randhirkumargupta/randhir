@@ -532,8 +532,11 @@ function get_content_fetch_time($section_id) {
     '1208598' => 120,
     '1208618' => 120,
     '1206734' => 30,
-    '1207678' => 15, 
-  );
+    '1207678' => 15,
+    '1206795' => 30,
+    '1206796' => 20,
+    '1207674' => 15,
+    );
   if (isset($time_array[$section_id])) {
     return $time_array[$section_id];
   }
