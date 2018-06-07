@@ -94,6 +94,10 @@ $url_get = explode('/', $path_request);
           if($url_get[1] == '2016' || $url_get[1] == '2017') { 
             print bestcollege_get_sponser_data('Best college Sponser');
           }
+
+          if($url_get[1] == '2018') { 
+            print bestcollege_get_sponser_data('bestcollege banner 2018');
+          }
         ?>
       <!-- end sponsor for static -->
       </div>
@@ -206,7 +210,7 @@ $url_get = explode('/', $path_request);
                           // RHS Story
                           $block_story = block_load('itg_bestcolleges','bestcollege_rhs_story_widget');
                           $render_story = _block_get_renderable_array(_block_render_blocks(array($block_story)));
-                          print render($render_story);
+                           print render($render_story);
 
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
