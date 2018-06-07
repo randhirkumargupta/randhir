@@ -225,6 +225,15 @@ function itg_preprocess_page(&$variables) {
   if(($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency' && !empty($arg[3])) || ($arg[0] == 'elections' && !empty($arg[1]) && $arg[2] == 'constituency-map')){
 		$variables['theme_hook_suggestions'][] = 'page__singlecolumn';
 	}
+  
+   if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'page') {
+      if (!empty($node_obj->field_page_type[LANGUAGE_NONE][0]['value']) && $node_obj->field_page_type[LANGUAGE_NONE][0]['value'] == 'one') {
+        $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
+      } 
+    }		
+  }
   // Call Live Blog condition wise TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'breaking_news' && isset($variables['node']->field_multi_user_allows['und'][0]['value']) && $variables['node']->field_multi_user_allows['und'][0]['value'] == 1) {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
