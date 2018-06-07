@@ -7,11 +7,7 @@
  * @see https://drupal.org/node/1728148
  */
 $arg = arg();
-var_dump($arg);
-echo "<br>";
 $back_to_link_config = variable_get('sitename-domain');
-echo  $back_to_link_config ;
-echo "<br>";
 if(!empty($back_to_link_config)) {
   $explode_back_link = explode(',', $back_to_link_config);
   foreach ($explode_back_link as $key => $value) {
@@ -22,7 +18,6 @@ if(!empty($back_to_link_config)) {
 }
 
 if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
-  echo 'qwert1--';
   $returnto = $_GET['ReturnTo'];
   $explode_returnto_val = explode('/', $returnto);
   $get_first_arr = end($explode_returnto_val);
@@ -44,14 +39,13 @@ if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
   }
 }
 else {
-  echo 'qwert2--';
   $parse = parse_url(base64_decode($arg[1]));
   $parse_host = $parse['host'];
   // back to site configuration code in case of signup/forgot-password
   $site_name = array_search($parse_host, $sitehash);
+  $shr = base64_decode($arg[1]);
   if (!empty($site_name)) {
     $site_name = $site_name;
-    $shr = base64_decode($arg[1]);
   }
   else {
     $site_name = t('India Today');
@@ -60,14 +54,13 @@ else {
 
 // case for change password page
 if($arg[0] == 'sso' && $arg[1] == 'change-password') {
-   echo 'qwert3--';
   $parse = parse_url(base64_decode($arg[2]));
   $parse_host = $parse['host'];
   // back to site configuration code in case of signup/forgot-password
   $site_name = array_search($parse_host, $sitehash);
+  $shr = base64_decode($arg[2]);
   if (!empty($site_name)) {
     $site_name = 'Edit Profile';
-    $shr = base64_decode($arg[2]);
   }
   else {
     $site_name = t('Edit Profile');
@@ -76,24 +69,23 @@ if($arg[0] == 'sso' && $arg[1] == 'change-password') {
 
 // case for change password page
 if($arg[0] == 'sso-user') {
-   echo 'qwert4--';
   $parse = parse_url(base64_decode($arg[3]));
   $parse_host = $parse['host'];
   // back to site configuration code in case of signup/forgot-password
   $site_name = array_search($parse_host, $sitehash);
+  $shr = base64_decode($arg[3]);
   if (!empty($site_name)) {
     $site_name = 'Edit Profile';
-    $shr = base64_decode($arg[3]);
   }
   else {
     $site_name = t('Edit Profile');
   }
 }
-echo $shr.'<br>';
+
 ?>
 <div class="sso-header">
     <div class="container">
-        <a class="back-to-itg" href="<?php print $shr; ?>" title="<?php print 'Back to the '.$site_name; ?>"><i class="fa fa-angle-left" aria-hidden="true"></i><?php print 'Back to the '.$site_name; die(1234);?></a>
+        <a class="back-to-itg" href="<?php print $shr; ?>" title="<?php print 'Back to the '.$site_name; ?>"><i class="fa fa-angle-left" aria-hidden="true"></i><?php print 'Back to the '.$site_name; ?></a>
         <div class="itg-logo">
             <img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="India Today Group" />
         </div>
