@@ -7563,7 +7563,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
                 ->execute();
     } else {
         // insert query
-        $nid = db_insert('itg_fba_update')
+        $qry = db_insert('itg_fba_update')
                 ->fields(array(
                     'node_type' => '',
                     'api_type' => $api_type,
@@ -7571,8 +7571,9 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
                     'fba_id' => $fba_id,
                     'fba_publish_status' => $publish_status,
                     'fba_published' => $published,
-                ))
-                ->execute();
+                ));
+        print strtr((string) $qry, $qry->arguments());die();
+                $qry->execute();
     }
 
     return $success;
