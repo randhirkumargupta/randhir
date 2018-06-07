@@ -62,7 +62,7 @@
                         });
                     }
                 }else{
-                 $("#uotp #otp_success").before("<div class='otp-resend-limit message error'>You have reached max resend OTP limit.</div>").fadeOut(2000);
+                 $("#uotp #otp_success").before("<div class='otp-resend-limit message error'>You have reached max resend OTP limit.</div>")show(0).delay(2000).hide(1000);
                 }
             });
 
