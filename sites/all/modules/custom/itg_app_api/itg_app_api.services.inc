@@ -7552,7 +7552,7 @@ function itg_rapid_nid_by_url_v1($canonical_url){
  */
 function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published, $nid) {
     $nid_flag = 0;
-    $nid_flag = fba_update_data_search($nid, 0);
+    $nid_flag = fba_update_data_search($nid);
     $success = TRUE;
     $api_type = "fba_update";
     if ($nid_flag == $nid) {
@@ -7594,7 +7594,6 @@ function fba_update_data_search($nid, $source = 0) {
         $query->condition('ifu.api_type', $api_type, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $nid_flag = $result[0]['nid'];
-        p($result);
     }
     if ($source == 0) {
         return $nid_flag;
