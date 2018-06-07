@@ -412,11 +412,11 @@
  }
  .slider_outer1 h1 {
      font-size:30px !important;
-     display: inline-block;
+     /* display: inline-block; */
      font-weight: bold;
      color: #111;
-    float: left;
-    width: calc(100% - 142px);
+    /* float: left;
+    width: calc(100% - 142px); */
     line-height: 32px;
  }
  .slider_outer1 .remove_padd_right{ padding-left: 0px;}
@@ -748,6 +748,7 @@ text-align: left;}
 }
 /* bestcolleges 2018 css update */
 /*.bestcolleges2018 .grid-group-item .thumbnail{height:400px;}*/
+.page-taxonomy-term.bestcolleges2018 #block-itg-layout-manager-front-end-breadcrumb{ display:none; }
 .bestcolleges2018 .grid-group-item .cl a{ margin-bottom:0px; }
 .bestcolleges2018 .grid-group-item .thumbnail .list-group-item-text a{padding-bottom: 5px;}
 .story-right-now-list .pic {float: left;}
