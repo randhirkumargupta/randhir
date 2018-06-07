@@ -8,12 +8,12 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   $arg = arg();
   $parse = parse_url(base64_decode($arg[1]));
   $activate_link = base64_encode($parse['host']);
-  
+
   if(!empty($arg[1])) {
     $appnd_to_lnk = '/'.$arg[1];
     $domain_arg = $arg[1];
   }
-  
+
 // If $form_state['step'] is not set, we set it to 1
   $form_state['step'] = isset($form_state['step']) ? $form_state['step'] : 1;
   global $user, $base_url;
@@ -26,22 +26,22 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   $css = ".page-signup .form-item-forget-me label{padding-left:20px;}.page-signup .form-item-forget-me-1{position:relative; top:-55px;}";
   drupal_add_css($css, 'inline');
   $step_ext_div = '';
- 
+
   if (isset($form_state['step']) && ($form_state['step'] == '1')) {
     $fn_link = 'saml_login/other'.$appnd_to_lnk;
     $step_ext_div = '<div class="sign-in-link"><div class="left-block"><span>#</span> Either of Email ID or Mobile is mandatory</div><div class="rgt-block">' . l('Already Register ? Sign in', $fn_link , array('attributes' => array('class' => array('sso-sign-in')))) . '</div></div>';
     $form['#prefix'] = '<div id="itg_sso_reg_multistep_form"><div class="center-heading"><h2>Create your India Today account</h2></div><div class="parent-background"><div class="social-share">
-    <a href="'.$base_url.'/saml_login/twitter'.$appnd_to_lnk.'" class="sso-twitter"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
-    <a href="'.$base_url.'/saml_login/facebook'.$appnd_to_lnk.'" class="sso-facebook"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+    <a href="'.$base_url.'/saml_login/twitter'.$appnd_to_lnk.'" class="sso-twitter" onclick="privacy_policy_checkbox(this.href, twitter);return false;" ><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
+    <a href="'.$base_url.'/saml_login/facebook'.$appnd_to_lnk.'" class="sso-facebook" onclick="privacy_policy_checkbox(this.href, facebook);return false;" ><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
     <div class="signup-txt"><span>Or signup using your Email/Mobile</span></div></div>';
     $form['#suffix'] = $step_ext_div . '</div></div>';
-    
+
   } else {
   // Add a wrapper div that will be used by the Form API to update the form using AJAX
   $form['#prefix'] = '<div id="itg_sso_reg_multistep_form">';
   $form['#suffix'] = $step_ext_div . '</div>';
   }
-  
+
   $form['#attributes'] = array('autocomplete' => 'off');
 
   // Depending on which step of the form we are on, we output different form fields
@@ -63,9 +63,9 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'hidden',
         '#value' => $domain_arg,
         '#attributes' => array('placeholder' => t('')),
-        
+
       );
-      
+
       $form['url_info'] = array(
         '#title' => '',
         '#description' => '',
@@ -73,10 +73,10 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'hidden',
         '#value' => $activate_link,
         '#attributes' => array('placeholder' => t('')),
-        
+
       );
 	 $country_json = file_get_contents('http://feeds.intoday.in/common/json/county_master.json');
-	 
+
 	 $country_json = json_decode($country_json);
 	 $country_arr = array();
 	 $country_arrs = array();
@@ -87,7 +87,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
      drupal_add_js(array(
 	  'countries_json' => $country_arrs
 	), 'setting');
-	  
+
 	  $form['country-res_msg'] = array(
         '#markup' => '<div class="country_restriction_msg" style="color:red;display:none;">This feature is not available in your region</div>',
       );
@@ -98,7 +98,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#prefix' => '<div class="form-row email-or-mobile"><div id="umaissl" class="col-xs-6">',
         '#suffix' => '<div class="page_country-error"></div></div>',
       );
-      
+
       $form['forget_me'] = array(
         '#title' => 'You Agree to our Privacy and Cookie Policy While Register to our Website',
         '#type' => 'checkboxes',
@@ -116,7 +116,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#prefix' => '<div class="form-row email-or-mobile"><div id="umail" class="col-xs-6">',
         '#suffix' => '<div class="email-error"></div></div>',
       );
-      
+
       $form['mobile'] = array(
         '#title' => 'Mobile',
         '#description' => '',
@@ -126,7 +126,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#prefix' => '<div id="umobile" class="col-xs-6">',
         '#suffix' => '<div class="mobile-error"></div></div></div>',
       );
-      
+
        $form['fname'] = array(
         '#title' => 'First Name',
         '#description' => '',
@@ -179,7 +179,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_2'])) {
         $default_value = $form_state['storage']['step_2'];
       }
-      
+
       // if mail value is blank assign dummy mail
       if (isset($form_state['values']['mail']) && !empty($form_state['values']['mail'])) {
         $mail = $form_state['values']['mail'];
@@ -195,9 +195,9 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'hidden',
         '#value' => $form_state['values']['domain_info'],
         '#attributes' => array('placeholder' => t('')),
-        
+
       );
-      
+
       $form['step2mail'] = array(
         '#title' => '',
         '#description' => '',
@@ -242,7 +242,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#suffix' => '</div>',
       );
 
-      
+
 
       break;
 
@@ -255,7 +255,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_3'])) {
         $default_value = $form_state['storage']['step_3'];
       }
-      
+
       if (!empty($form_state['values']['domain_info'])) {
         $append_lnk = '/'.$form_state['values']['domain_info'];
       }
@@ -265,7 +265,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       }
         $fn_link = 'saml_login/other' . $append_lnk;
         $ext_div = '<div class="sign-in-link">' . l('Click here to sign in', $fn_link, array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
-      
+
       $form['domain_info'] = array(
         '#title' => '',
         '#description' => '',
@@ -273,9 +273,9 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'hidden',
         '#value' => $form_state['values']['domain_info'],
         '#attributes' => array('placeholder' => t('')),
-        
+
       );
-      
+
       $form['thank-you'] = array(
         '#markup' => '<div id="email-sucess">Your account has been successfully created.Please check your email for further information!</div>',
       );
@@ -283,8 +283,8 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       $form['sgn-link'] = array(
         '#markup' => $ext_div,
       );
-      
-      
+
+
       break;
 
     // Step 4
@@ -296,7 +296,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       elseif (isset($form_state['storage']['step_4'])) {
         $default_value = $form_state['storage']['step_4'];
       }
-      
+
       if (!empty($form_state['values']['domain_info'])) {
         $append_lnk = '/'.$form_state['values']['domain_info'];
       }
@@ -306,7 +306,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       }
         $fn_link = 'saml_login/other' . $append_lnk;
         $ext_div = '<div class="sign-in-link">' . l('Click here to sign in', $fn_link, array('attributes' => array('class' => array('sso-sign-in')))) . '</div>';
-      
+
       $form['domain_info'] = array(
         '#title' => '',
         '#description' => '',
@@ -314,17 +314,17 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
         '#type' => 'hidden',
         '#value' => $form_state['values']['domain_info'],
         '#attributes' => array('placeholder' => t('')),
-        
+
       );
-      
+
       $form['thank-you'] = array(
         '#markup' => '<div id="mobile-success">You are registered sucessfully!</div>',
       );
-      
+
       $form['sgn-link'] = array(
         '#markup' => $ext_div,
       );
-      
+
       break;
   }
 
@@ -372,7 +372,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       ),
     );
   }
-  
+
   return $form;
 }
 
@@ -405,20 +405,20 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         $get_user_check_domain = itg_sso_user_email_domain($mail);
       }
 
-      
+
       if(empty($form_state['values']['forget_me'][1])){
 		  $error['forget_me'] = t('Please check Privacy and Cookie Policy.');
-		  form_set_error('forget_me', t('')); 
+		  form_set_error('forget_me', t(''));
 	  }
-      
-      
+
+
       $first_name = trim($form_state['values']['fname']);
       if(empty($first_name)) {
         $error['fname'] = t('Please enter first name.');
       } else {
         $error['fname'] = t('');
       }
-      
+
       if ($first_name) {
         if (!preg_match("/^[a-zA-Z. ]*$/", $first_name)) {
           $error['fname'] = t('First name accept only letters, dot and white space.');
@@ -427,14 +427,14 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
           $error['fname'] = t('');
         }
       }
-      
+
       $last_name = trim($form_state['values']['lname']);
       if(empty($last_name)) {
         $error['lname'] = t('Please enter last name.');
       } else {
         $error['lname'] = t('');
       }
-      
+
       if ($last_name) {
         if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
           $error['lname'] = t('Last name accept only letters, dot and white space.');
@@ -443,7 +443,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
           $error['lname'] = t('');
         }
       }
-      
+
       if (empty($mail) && empty(trim($form_state['values']['mobile']))) {
         $error['mail'] = t("Please Enter Email/Mobile.");
         form_set_error('mail', t(""));
@@ -460,11 +460,11 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
         else if (!empty($get_user_check_email)) {
           $error['mail'] = t("Email id Already Exist.");
           form_set_error('mail', t(""));
-        } 
+        }
         else if (!empty($get_user_check_domain)) {
           $error['mail'] = t("Email id Already Exist.");
           form_set_error('mail', t(""));
-        } 
+        }
         else {
           $error['mail'] = t("");
         }
@@ -491,10 +491,10 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
 
       $pass = trim($form_state['values']['password']);
       $cpass = trim($form_state['values']['password_again']);
-      
+
       $min_length = 3;
       $max_length = 10;
-      
+
       if (empty($pass)) {
         $error['password'] = t('please enter password');
         form_set_error('password', t(""));
@@ -530,7 +530,7 @@ function itg_sso_reg_multistep_form_validate($form, &$form_state) {
       }
 
       if (!empty($form_state['values']['step2mobile'])) {
-        
+
         if ($otp_match != $form_state['values']['otp']) {
           form_set_error('otp', t("Enter valid OTP!"));
         }
@@ -553,7 +553,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
   // submitted values to $form_state['storage']. This will
   // allow our submitted values to persist.
   $step = $form_state['step'];
- 
+
   $form_state['storage']['step_' . $step] = $form_state['values']['step_' . $step];
 
   // Check to see if the next/forward button was clicked
@@ -575,7 +575,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
       else {
         $mail = $form_state['values']['mail'];
       }
-      
+
       // prepare array for user
       $edit = array(
         'name' => $mobile,
@@ -617,7 +617,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
           )
         ),
       );
-      
+
       if (is_numeric($mobile)) {
         $edit['field_mobile_number'] = array(LANGUAGE_NONE => array(
             0 => array(
@@ -674,7 +674,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
       }
     }
   }
-  
+
   // Check to see if the final step has been submitted
   elseif (isset($form_state['values']['submit']) && $form_state['values']['op'] == $form_state['values']['submit']) {
     // Here we will collect the data and show the submitted values to the user in a message.
@@ -690,7 +690,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
     $form_state['step'] = 4;
     $form_state['storage'] = array();
   }
-  
+
 
   // As in ajax_form_multistep_form_back_submit(), we need to set
   // $form_state['rebuild'] to TRUE, in able to ensure that our
