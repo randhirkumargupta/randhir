@@ -4121,78 +4121,24 @@ function itg_rapid_api_login_request($token) {
  */
 function itg_rapid_api_edit_user_image($token) {
     $HTTP_RAW_POST_DATA;
-    $data = array();
+    //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $rand = rand();
-    $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    $result = callAPI("GET", $url, $params);
-    $result_obj = json_decode($result);
-
-    if (!$result_obj->uid) {
-        $account_err['status_code'] = "0";
-        $account_err['status_message'] = "Invalid User_ID";
-        //return $account_err;
+    $data = $params['data'];
+    $resp = array();
+    $resp['status_code'] = "1";
+    $resp['status_message'] = "";
+    $resp_data = array();
+    foreach ($data as $key => $value) {        
+        $canonical_url = $value['canonical_url'];
+        $fba_id = $value['id'];
+        $publish_status = $value['publish_status'];
+        $published = $value['published'];
+        $nid = itg_rapid_nid_by_url_v1($canonical_url);
+        $flag = itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published, $nid);
+        $resp_data[$nid] = "$flag";
     }
-    $authtoken_id = $token = $params['authtoken_id'];
-
-
-    $token_val_flag = 0;
-    $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-    if (!drupal_valid_token($token, 'services')) {
-        //if (!$token_val_flag) {
-        $data['status_code'] = "0";
-        $data['status_message'] = "invalid token";
-    } else {
-
-        global $user;
-        $user_id = $params['user_id'];
-        $profile_image = $params['profile_image'];
-        $user_detail = user_load_by_name($user_id);
-        $uid = $user_detail->uid;
-
-        // call sso server api
-        $method = "POST";
-        $url = PARENT_SSO . "/appapisso/edit_user_image";
-        $result = callAPI($method, $url, $params);
-
-        // check mime-type
-        $profile_img = base64_decode($profile_image);
-        $f = finfo_open();
-        $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
-        $mime_type_ar = explode("/", $mime_type);
-        $mime_type_ext = $mime_type_ar[1];
-
-
-
-        $profile_img_tmp = '/tmp/profileimage_' . $uid . "." . $mime_type_ext;
-
-        $image_name = 'profileimage_' . $uid . "." . $mime_type_ext;
-        // crate profile img tmp file
-        file_put_contents($profile_img_tmp, $profile_img);
-        $imagedata = file_get_contents($profile_img_tmp);
-        //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-        $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
-
-
-        // Update profile pic
-        if (!empty($file_data->fid)) {
-            $user_detail->field_user_picture['und'][0]['fid'] = $file_data->fid;
-        }
-
-        // Save user object.
-        $resp = user_save($user_detail);
-        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
-        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-
-        if ($resp->uid) {
-            $data['status_code'] = "1";
-            $data['status_message'] = "$success_status_message";
-        } else {
-            $data['status_code'] = "0";
-            $data['status_message'] = "Technical Error.";
-        }
-    }
-    return $data;
+    $resp['data' ] = $resp_data;
+    return $resp;
 }
 
 /**
@@ -7550,4 +7496,108 @@ function itg_rapid_api_breaking_news() {
         $data['data'] = $detail;
     }
     return $data;
+}
+
+/**
+ * Call back function for fba_update API
+ * @pram $_POST
+ *
+ * @return array - The processed information array.
+ */
+function itg_report_api_fba_update_v1(){
+    $HTTP_RAW_POST_DATA;
+    //$params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $data = $params['data'];
+    $resp = array();
+    $resp['status_code'] = "1";
+    $resp['status_message'] = "";
+    $resp_data = array();
+    foreach ($data as $key => $value) {        
+        $canonical_url = $value['canonical_url'];
+        $fba_id = $value['id'];
+        $publish_status = $value['publish_status'];
+        $published = $value['published'];
+        $nid = itg_rapid_nid_by_url_v1($canonical_url);
+        $flag = itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published, $nid);
+        $resp_data[$nid] = "$flag";
+    }
+    $resp['data' ] = $resp_data;
+    return $resp;
+    
+}
+/**
+ * itg_rapid_nid_by_url
+ * @param type $canonical_url
+ * @return type $nid
+ */
+function itg_rapid_nid_by_url_v1($canonical_url){
+    $nid = 0;
+    if($canonical_url){
+        $canonical_url_ar = explode("/",$canonical_url);
+        $last_key = count($canonical_url_ar) - 1;
+        $last_key_val = $canonical_url_ar[$last_key];
+        $last_key_ex_ar = explode("-",$last_key_val);
+        $nid_key = count($last_key_ex_ar) - 4;
+        $nid = $last_key_ex_ar[$nid_key];
+    }    
+    return $nid;
+}
+/**
+ * itg_report_api_fba_update_data
+ * @param type $fba_id
+ * @param type $publish_status
+ * @param type $published
+ * @param type $nid
+ */
+function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published, $nid) {
+    $nid_flag = 0;
+    $nid_flag = fba_update_data_search($nid);
+    $success = TRUE;
+    $api_type = "fba_update";
+    if ($nid_flag == $nid) {
+        // update query
+        $num_updated = db_update('itg_fba_update')
+                ->fields(array('node_type' => '', 'api_type' => $api_type, 'nid' => $nid, 'fba_id' => $fba_id, 'fba_publish_status' => $publish_status, 'fba_published' => $published))
+                ->condition('itg_fba_update.nid', $nid, '=')
+                ->execute();
+    } else {
+        // insert query
+        $nid = db_insert('itg_fba_update')
+                ->fields(array(
+                    'node_type' => '',
+                    'api_type' => $api_type,
+                    'nid' => $nid,
+                    'fba_id' => $fba_id,
+                    'fba_publish_status' => $publish_status,
+                    'fba_published' => $published,
+                ))
+                ->execute();
+    }
+
+    return $success;
+}
+
+/**
+ * fba_update_data_search
+ * @param type $nid
+ * @return int
+ */
+function fba_update_data_search($nid, $source = 0) {
+    $nid_flag = 0;
+    $result = "";
+    $api_type = "fba_update";
+    if ($nid) {
+        $query = $query = db_select('itg_fba_update', 'ifu');
+        $query->fields('ifu', array('nid', 'fba_id', 'fba_publish_status', 'fba_published'));
+        $query->condition('ifu.nid', $nid, '=');
+        $query->condition('ifu.api_type', $api_type, '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $nid_flag = $result[0]['nid'];
+    }
+    if ($source == 0) {
+        return $nid_flag;
+    } else {
+        return $result;
+    }
 }
