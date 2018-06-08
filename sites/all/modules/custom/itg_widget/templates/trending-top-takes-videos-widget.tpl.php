@@ -7,6 +7,13 @@
   //p($data);
 ?>
 <style type="text/css">
+.front .trending_top_takes_videos .trending-videos{overflow-x: hidden;}
+.front .trending_top_takes_videos .trending-videos .trending-videos-list{padding: 0 10px 10px;}
+.front .trending_top_takes_videos .trending-videos li+li{ border-top:0px;}
+.trending_top_takes_videos .trending-videos .trending-videos-list .pic{ float: none; margin-right:0px; }
+.front .trending_top_takes_videos .trending-videos li a.pic:after{ background:transparent; }
+.front .trending_top_takes_videos .trending-videos li span.pic.video-icon{position: relative; height: 24px;display: block;float: none;line-height: 23px; margin-top: 10px;}
+.front .trending_top_takes_videos .trending-videos li span.pic.video-icon:after{ font: normal normal normal 14px/1 FontAwesome; content:"\f01d"; font-size: 23px; color:#323232; bottom: 0;left: 0;background: transparent;top: 2px;}
 .videoicon.desktophide{ display:none; }
 .trending_top_takes_videos{height: 100%; overflow: hidden; padding: 10px 21px; box-sizing: border-box; border: 1px solid #ccc;}
 .trending_top_takes_videos ul.trending-videos{border:0; padding-top:0;}
@@ -22,11 +29,11 @@
 .trending_top_takes_videos .flex-direction-nav a{display:inline;}
 .trending_top_takes_videos .flex-direction-nav a:before{color:#fff;}
 .trending_top_takes_videos .trending-videos-flex{position:relative;}
-#trending-videos .front .trending-videos .trending-videos-list{padding: 0 0 10px;}
+.front #trending-videos .trending-videos .trending-videos-list{padding: 0 0 10px;}
 #trending-videos ul li{padding:0px; margin-right:0px!important}
-.front .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
-.front .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
-.front .trending-videos.slides li p{ padding-bottom: 7px; }
+.front #trending-videos .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
+.front #trending-videos .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
+.front #trending-videos .trending-videos.slides li p{ padding-bottom: 7px; }
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .videoicon.mobilehide{ display:none; }
 .videoicon.desktophide{ display:inline-block; }
