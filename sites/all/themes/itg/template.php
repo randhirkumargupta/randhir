@@ -912,9 +912,53 @@ function itg_css_alter(&$css) {
      'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
      'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
    );
+   
+   //
+   $exclude1 = array(
+     // Contrib CSS
+     'sites/all/themes/itg/system.menus.css' => FALSE,
+     'sites/all/themes/itg/system.messages.css' => FALSE,
+     'sites/all/themes/itg/system.theme.css' => FALSE,
+     'sites/all/themes/itg/css/layout.css' => FALSE,
+     'sites/all/themes/itg/css/font-awesome.css' => FALSE,
+     'sites/all/themes/itg/css/liMarquee.css' => FALSE,
+     'sites/all/themes/itg/css/slick.css' => FALSE,
+     'sites/all/themes/itg/css/itg-photo-slider.css' => FALSE,
+     'sites/all/themes/itg/css/ion.rangeSlider.css' => FALSE,
+     'sites/all/themes/itg/css/ion.rangeSlider.skinFlat.css' => FALSE,
+     'sites/all/themes/itg/css/jquery.mCustomScrollbar.min.css' => FALSE,
+     'sites/all/themes/itg/css/styles.css' => FALSE,
+     'sites/all/themes/itg/css/styles-new.css' => FALSE,
+     'sites/all/themes/itg/css/itgd-style.css' => FALSE,
+     'sites/all/modules/contrib/colorbox/styles/default/colorbox_style.css' => FALSE,
+     'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
+     'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
+     'modules/system/system.base.css' => FALSE,
+     'modules/system/system.menus.css' => FALSE,
+     'modules/system/system.messages.css' => FALSE,
+     'modules/system/system.theme.css' => FALSE,
+     'modules/comment/comment.css' => FALSE,
+     'sites/all/modules/contrib/date/date_api/date.css' => FALSE,
+     'sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css' => FALSE,
+     'modules/field/theme/field.css' => FALSE,
+     'sites/all/modules/contrib/logintoboggan/logintoboggan.css' => FALSE,
+     'modules/node/node.css' => FALSE,
+     'modules/search/search.css' => FALSE,
+     'modules/user/user.css' => FALSE,
+     'sites/all/modules/contrib/youtube/css/youtube.css' => FALSE,
+     'sites/all/modules/contrib/views/css/views.css' => FALSE,
+     'sites/all/libraries/flexslider/flexslider.css' => FALSE,
+     'sites/all/modules/contrib/flexslider/assets/css/flexslider_img.css' => FALSE,
+     'sites/all/modules/contrib/ckeditor/css/ckeditor.css' => FALSE,
+   );
+   
    // Exclude unnecessary CSS for anonymous users.
-   if (($user->uid == 0) && ((drupal_is_front_page()) || $type == 'story')) {
+   if (($user->uid == 0) && ($type == 'story')) {
      $css = array_diff_key($css, $exclude);
+   }
+   
+   if (($user->uid == 0) && (drupal_is_front_page())) {
+	   $css = array_diff_key($css, $exclude1);
    }
 }
 
