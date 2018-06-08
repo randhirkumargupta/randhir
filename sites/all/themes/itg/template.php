@@ -520,9 +520,17 @@ function itg_preprocess_html(&$vars) {
       if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
         $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
         $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
-		$_section_name = $section_tids[0]->name;
+        $_section_name = $section_tids[0]->name;
       } 
-      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+      $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+    }		
+  }
+  if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'page') {
+      if (!empty($node_obj->field_page_type[LANGUAGE_NONE][0]['value']) && $node_obj->field_page_type[LANGUAGE_NONE][0]['value'] == 'headless') {
+        $vars['theme_hook_suggestions'][] = 'html__headless';
+      } 
     }		
   }
   
