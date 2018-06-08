@@ -87,13 +87,13 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $field_fba_id_value = "";
     $field_fba_publish_status_value = "";
     $field_fba_published_value = "";
-    if(isset($res_fb[0]['fba_id'])){
+    if(count($res_fb[0]) > 0){
       $field_fba_id_value = $res_fb[0]['fba_id'];  
     }
-    if(isset($res_fb[0]['fba_publish_status'])){
+    if(count($res_fb[0]) > 0){
       $field_fba_publish_status_value = $res_fb[0]['fba_publish_status'];
     } 
-    if(isset($res_fb[0]['fba_published'])){
+    if(count($res_fb[0]) > 0){
       $field_fba_published_value = $res_fb[0]['fba_published'];
     }   
    
@@ -196,13 +196,13 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     $field_fba_id_value = "";
     $field_fba_publish_status_value = "";
     $field_fba_published_value = "";
-    if(isset($res_fb[0]['fba_id'])){
+    if(count($res_fb[0]) > 0){
       $field_fba_id_value = $res_fb[0]['fba_id'];  
     }
-    if(isset($res_fb[0]['fba_publish_status'])){
+    if(count($res_fb[0]) > 0){
       $field_fba_publish_status_value = $res_fb[0]['fba_publish_status'];
     } 
-    if(isset($res_fb[0]['fba_published'])){
+    if(count($res_fb[0]) > 0){
       $field_fba_published_value = $res_fb[0]['fba_published'];
     }
     // list data
