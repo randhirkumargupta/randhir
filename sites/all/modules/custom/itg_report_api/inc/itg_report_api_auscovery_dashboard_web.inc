@@ -83,7 +83,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
         $is_reporter = 1;
     }
     //for fb feild
-   // $res_fb = fba_update_data_search($nid, 1);
+    //$res_fb = fba_update_data_search($nid, 1);
     $field_fba_id_value = "";
     $field_fba_publish_status_value = "";
     $field_fba_published_value = "";
@@ -193,10 +193,10 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     //for fb feild
     //for fb feild
    //$res_fb = fba_update_data_search($nid, 1);
-    /*$field_fba_id_value = "";
+    $field_fba_id_value = "";
     $field_fba_publish_status_value = "";
     $field_fba_published_value = "";
-    if(count($res_fb[0]) > 0){
+    /*if(count($res_fb[0]) > 0){
       $field_fba_id_value = $res_fb[0]['fba_id'];  
     }
     if(count($res_fb[0]) > 0){
@@ -204,7 +204,7 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
     } 
     if(count($res_fb[0]) > 0){
       $field_fba_published_value = $res_fb[0]['fba_published'];
-    }/*
+    }*/
     // list data
     $list[$loop_cont]['content_id'] = "$nid";
     $list[$loop_cont]['author_id'] = "$author_id";
