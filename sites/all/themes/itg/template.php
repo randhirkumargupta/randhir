@@ -525,6 +525,14 @@ function itg_preprocess_html(&$vars) {
       $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
   }
+  if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'page') {
+      if (!empty($node_obj->field_page_type[LANGUAGE_NONE][0]['value']) && $node_obj->field_page_type[LANGUAGE_NONE][0]['value'] == 'headless') {
+        $vars['theme_hook_suggestions'][] = 'html__headless';
+      } 
+    }		
+  }
   
 }
 
