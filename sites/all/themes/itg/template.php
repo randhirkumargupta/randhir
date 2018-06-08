@@ -498,7 +498,7 @@ if($arg[0] == 'livetv') {
         $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
 		$_section_name = $section_tids[0]->name;
       } 
-      $vars['head_title'] = $node_obj->title . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+      $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }		
   } 
 }
