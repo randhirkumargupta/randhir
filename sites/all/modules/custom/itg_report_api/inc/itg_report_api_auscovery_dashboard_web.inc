@@ -83,7 +83,8 @@ function auscovery_dashboard_web($start_date, $end_date) {
         $is_reporter = 1;
     }
     //for fb feild
-    //$res_fb = fba_update_data_search($nid, 1);
+    $res_fb = fba_update_data_search($nid, 1);
+    p($res_fb);
     $field_fba_id_value = "";
     $field_fba_publish_status_value = "";
     $field_fba_published_value = "";
