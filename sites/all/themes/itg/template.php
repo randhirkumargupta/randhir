@@ -890,7 +890,6 @@ function itg_js_alter(&$javascript) {
 
 function itg_css_alter(&$css) {
    global $user;
-   print_r($css);die;
    $type = '';
    if (arg(0) == 'node') {
      $node = menu_get_object();
