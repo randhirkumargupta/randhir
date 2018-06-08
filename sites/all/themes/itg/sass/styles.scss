@@ -1561,7 +1561,7 @@ footer {
         }
         /*.first-cell{
             @include calculate-width(1);
-            h4{                
+            h4{
                 margin-bottom: 5px;
             }
             ul{
@@ -6889,23 +6889,23 @@ section.sidebar {
         }
         .flexslider .flex-direction-nav{
             display: block;
-        }       
+        }
         .flexslider .slides li{
             &:hover a{
                 color: #fff;
             }
             .detail .flex-caption{
-                @include font(18px,24px,$itg-font-medium);  
-                padding: 10px;   
+                @include font(18px,24px,$itg-font-medium);
+                padding: 10px;
                 min-height: 68px;
                 max-height: auto;
-                overflow: initial;            
-            }   
+                overflow: initial;
+            }
         }
         .flexslider .slides li .detail .flex-count{
             @include pos(absolute,null,null,78px,0px);
         }
-    }    
+    }
     End photo section slider*/
     .tech-block_8 {
         .widget-title {
@@ -14530,4 +14530,26 @@ ul.pron-cons-img li img {
     .budget-predictor-img {
         max-height: 130px;
     }
+}
+
+input:disabled.form-submit {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  cursor: no-drop;
+
+}
+
+.sign-in-link .rgt-block a:hover {
+  color: #193984;
+}
+
+#fotp .error {
+  clear: left;
+  text-align:left;
+}
+
+.login-wrapper input#edit-forget-me-1 {
+  position: relative;
+  top: -18px;
+
 }

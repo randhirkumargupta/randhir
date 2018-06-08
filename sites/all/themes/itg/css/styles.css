@@ -3,38 +3,3 @@
     100%{-webkit-transform:scale(0)}40%{-webkit-transform:scale(1)}}@keyframes sk-bouncedelay{0%,
     80%,
     100%{-webkit-transform:scale(0);transform:scale(0)}40%{-webkit-transform:scale(1);transform:scale(1)}}.sso-main-content>.messages.error{text-align:center}.sso-main-content>.messages.error ul{list-style-type:none}#ui-datepicker-div{z-index:9999 !important}.cheaper_dearer .budget-predictor-img{max-height:130px}
-input:disabled.form-submit {
-
-  -webkit-filter: grayscale(100%);
-
-  filter: grayscale(100%);
-
-  cursor: no-drop;
-
-}
-
-
-
-.sign-in-link .rgt-block a:hover {
-
-  color: #193984;
-
-}
-
-
-
-#fotp .error {
-
-  clear: left;
-
-}
-
-
-
-.login-wrapper input#edit-forget-me-1 {
-
-  position: relative;
-
-  top: -18px;
-
-}
