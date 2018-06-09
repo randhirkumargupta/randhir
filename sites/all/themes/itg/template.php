@@ -930,6 +930,7 @@ function itg_css_alter(&$css) {
      'sites/all/themes/itg/css/styles.css' => FALSE,
      'sites/all/themes/itg/css/styles-new.css' => FALSE,
      'sites/all/themes/itg/css/itgd-style.css' => FALSE,
+     'sites/all/themes/itg/css/media.css' => FALSE,
      'sites/all/modules/contrib/colorbox/styles/default/colorbox_style.css' => FALSE,
      'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
      'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
