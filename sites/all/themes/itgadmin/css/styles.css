@@ -13551,4 +13551,78 @@ div.ctools-modal-content .form-submit {
 .node-story-form .ajax-progress {
   display: block; }
 
+.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li {
+  list-style: none;
+  float: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-right: 0; }
+
+.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li:last-child {
+  border-right: 1px solid #ccc; }
+
+.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li a
+.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li:hover {
+  color: #c00; }
+
+.page-tv.page-tv-aajtak #main #content .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-aajtak #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-aajtak #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-type-managed-file label {
+  width: 160px; }
+
+.page-tv.page-tv-aajtak #main #content .form-actions {
+  padding: 15px 2px; }
+
+.page-tv.page-tv-dilliaajtak #main #content .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-dilliaajtak #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-dilliaajtak #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-type-managed-file label {
+  width: 160px; }
+
+.page-tv.page-tv-dilliaajtak #main #content .form-actions {
+  padding: 15px 2px; }
+
+.page-tv.page-tv-tez #main #content .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-tez #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-tez #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-type-managed-file label {
+  width: 160px; }
+
+.page-tv.page-tv-tez #main #content .form-actions {
+  padding: 15px 2px; }
+
+.page-tv.page-tv-indiatoday #main #content .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-indiatoday #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-indiatoday #main #content .csv-download-wrapper #edit-file-ajax-wrapper .form-type-managed-file label {
+  width: 160px; }
+
+.page-tv.page-tv-indiatoday #main #content .form-actions {
+  padding: 15px 2px; }
+
 /*# sourceMappingURL=styles.css.map */
