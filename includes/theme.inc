@@ -1010,7 +1010,6 @@ function drupal_find_base_themes($themes, $key, $used_keys = array()) {
  * @see template_process()
  */
 function theme($hook, $variables = array()) {
-  $time_start = microtime(true);
   // If called before all modules are loaded, we do not necessarily have a full
   // theme registry to work with, and therefore cannot process the theme
   // request properly. See also _theme_load_registry().
@@ -1209,9 +1208,7 @@ function theme($hook, $variables = array()) {
       $output = $render_function($template_file, $variables);
     }
   }
-  $time_end = microtime(true);
-  $execution_time = ($time_end - $time_start)/60;
-  p($execution_time);
+
   // restore path_to_theme()
   $theme_path = $temp;
   return $output;
