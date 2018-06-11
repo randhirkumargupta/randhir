@@ -6794,9 +6794,9 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function search_data_rest($token) {
-    $key = $_GET['key'];
+    $key_title = $_GET['key'];
     $nid_ar = array();
-    $searchpage = solr_search_custom_results_restapi($key);
+    $searchpage = solr_search_custom_results_restapi($key_title);
     //p($searchpage);
     $data_json = array();
     $data = array();
@@ -6834,7 +6834,7 @@ function search_data_rest($token) {
         $data_json['status_message'] = "";
     }
     $data['id'] = "0";
-    $data['search_title'] = "$key";
+    $data['search_title'] = "$key_title";
     $data['layout_id'] = "0";
     $data['news_count'] = "$loop_c";
     $data['news_display_count'] = "10";
