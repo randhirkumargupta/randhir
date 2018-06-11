@@ -186,7 +186,7 @@ $url_get = explode('/', $path_request);
                     <div class="data-holder" id="itg-block-4" data-widget-style="oscar-news best-news">
                                 <div class="ad-widget">
                                     <div class="sidebar-ad">
-                                      <?
+                                      <?php
                                       if($url_get[1] == '2018') {
                                         // Bestcolleges RHS Banner  
                                       print bestcollege_get_sponser_data('Bestcolleges RHS Banner');
