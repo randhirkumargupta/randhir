@@ -347,7 +347,7 @@ function itg_bestcolleges_block_view($delta = '') {
       $path_request_array = explode('/', $path_request);
       if (($path_request_array[1] == '2018') && $path_request_array[2] == 'ranks') {
         $data = bestcollege_get_sponser_data('Bestcolleges RHS Banner');
-        $block['content'] = $data;
+        $block['content'] = "<div class='ad-widget'><div class='sidebar-ad'>" . $data . "</div></div>";
       }
       break;
     case 'bestcollege_sponser':
