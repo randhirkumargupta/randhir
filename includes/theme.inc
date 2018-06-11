@@ -1163,9 +1163,11 @@ function theme($hook, $variables = array()) {
   }
   else {
     // Default render function and extension.
+    pr(date("Y-m-d: H i s"));
     $render_function = 'theme_render_template';
     $extension = '.tpl.php';
-
+    
+    p(date("Y-m-d: H i s"));
     // The theme engine may use a different extension and a different renderer.
     global $theme_engine;
     if (isset($theme_engine)) {
@@ -1211,7 +1213,6 @@ function theme($hook, $variables = array()) {
 
   // restore path_to_theme()
   $theme_path = $temp;
-  p($theme_path);
   return $output;
 }
 
