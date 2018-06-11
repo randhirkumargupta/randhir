@@ -1211,6 +1211,7 @@ function theme($hook, $variables = array()) {
 
   // restore path_to_theme()
   $theme_path = $temp;
+  p($theme_path);
   return $output;
 }
 
@@ -1543,35 +1544,6 @@ function theme_render_template($template_file, $variables) {
 
   // End buffering and return its contents
   return ob_get_clean();
-  /*static $templates;
-  static $path;
-  if (!isset($path)) {
-    $path = 'private://templates';
-    file_prepare_directory($path, FILE_CREATE_DIRECTORY);
-  }
-
-  if (!isset($templates[$template_file])) {
-    $templates[$template_file] = '_' . md5($template_file);
-    $file = $path . '/' . $templates[$template_file] . '.php';
-    if (!file_exists($file)) {
-      $data =
-      '<?php function ' . $templates[$template_file] . '(&$variables) {'
-      . 'extract($variables, EXTR_SKIP);'
-      . "\n\$_o = '"
-      . (str_replace(
-          array('?>',           '<?php',  'print '),
-          array(";\n\$_o .='",  "';\n",   '$_o .= '),
-          file_get_contents(DRUPAL_ROOT . '/' . $template_file)
-        ))
-      . "';\n"
-      . 'return $_o;'
-      . '}';
-
-      file_unmanaged_save_data($data, $file, FILE_EXISTS_REPLACE);
-    }
-    include $file;
-  }
-  return $templates[$template_file]($variables);*/
 }
 
 /**
