@@ -1401,4 +1401,50 @@ function xml_cdata_filter($value) {
     }
     return $value;
 }
+/**
+ * itg_mobile_feed_fetch_time
+ * @param type $section_id
+ * @return int
+ */
+function itg_mobile_feed_fetch_time($section_id) {
+    $time_array = array(
+        '1206578' => 7, // India
+       // '1206749' => 7, // Entertainment //
+        '1206550' => 15, // Sports
+        '1206577' => 15, // World
+        '1206567' => 20, // Lifestyle
+        '1206533' => 15, // Movies
+        '1206676' => 30, // Cricket
+        '1206719' => 15, // Elections
+        /*'1207722' => 30, // programmes/to the point
+        '1207755' => 10, // programmes/first up
+        '1207797' => 15, // programmes/news today
+        '1208900' => 15, // programmes/the peoples court
+        '1208902' => 30, // programmes/5ive live
+        '1208908' => 15, // programmes/popular show
+        '1207827' => 15, // programmes/newsroom
+        '1207972' => 30, // programmes/auto today
+        '1208095' => 15, // programmes/india first
+        '1208061' => 15, // programmes/long story
+        '1208173' => 10, // programmes/in da club */
+        '1206795' => 30, // fyi
+        '1206689' => 30, // auto
+        '1206688' => 15, // technology
+        /*'1206589' => 30, // travel //
+        '1206572' => 15, // mail today
+        '1206796' => 20, // television
+        '1206598' => 30, // From India Today magazine //
+        '1206960' => 30, // Sports Today //
+        '1207605' => 30, // GADGETS & GIZMOS //
+        '1207726' => 30, // Nothing But The Truth //
+        '1207728' => 30, // Up South //
+        '1206574' => 30, // Business //
+        '1207580' => 30, // So Sorry // */
+    );
+    if (isset($time_array[$section_id])) {
+        return $time_array[$section_id];
+    } else {
+        return 200;
+    }
+}
 

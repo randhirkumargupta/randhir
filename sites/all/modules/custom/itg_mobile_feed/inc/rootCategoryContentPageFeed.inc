@@ -118,9 +118,13 @@ function generateLeftMainCategoryPage($tid, $term_name) {
             $query->fields('kt', array('field_story_kicker_text_value'));
             $query->fields('vd', array('field_video_duration_value'));
             $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-            $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
-            $feed_date_range = date(strtotime($feed_date));
-            $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.created', $feed_date_range, '>=')->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+            //$feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+            //$feed_date_range = date(strtotime($feed_date));
+            if ($days_ago = itg_mobile_feed_fetch_time($tid)) {
+                $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+                //$query->condition('n.created', $days_ago, '>=');
+            }
+            $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.created', $days_ago, '>=')->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {
