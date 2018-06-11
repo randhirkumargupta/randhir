@@ -196,7 +196,7 @@ img{vertical-align:top;height:auto;}
 .mt-50{margin-top:20px;}
 *{padding:0;}
 #block-itg-layout-manager-header-block .top-nav ul li a{padding-left:10px;padding-right:10px;}
-.hide{display:none;}
+.hide,.comment-mobile{display:none;}
 #block-itg-layout-manager-header-block .navigation .menu li a,#block-itg-layout-manager-header-block .top-nav ul li,#page{display:inline-block;}
 #page{vertical-align:top;}
 #page{width:100%;}
