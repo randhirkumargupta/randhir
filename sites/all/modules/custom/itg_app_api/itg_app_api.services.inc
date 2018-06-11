@@ -6838,6 +6838,7 @@ function search_data_rest($token) {
     $data['updated_datetime'] = "";
     $data['news'] = $list;
     $data_json['data'] = $data;
+    return $data_json;
     
 }
 
