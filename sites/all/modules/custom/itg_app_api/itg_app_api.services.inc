@@ -6832,8 +6832,8 @@ function search_data_rest($token) {
     $data['id'] = "0";
     $data['search_title'] = "$key";
     $data['layout_id'] = "0";
-    $data['news_count'] = "";
-    $data['news_display_count'] = "";
+    $data['news_count'] = "$loop_c";
+    $data['news_display_count'] = "10";
     $data['news_pagination_cap'] = "50";
     $data['updated_datetime'] = "";
     $data['news'] = $list;
