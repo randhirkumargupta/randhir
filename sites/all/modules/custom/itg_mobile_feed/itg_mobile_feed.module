@@ -1430,15 +1430,15 @@ function itg_mobile_feed_fetch_time($section_id) {
         '1206795' => 30, // fyi
         '1206689' => 30, // auto
         '1206688' => 15, // technology
-        /*'1206589' => 30, // travel //
+        '1206574' => 60, // Business 
         '1206572' => 15, // mail today
+        /*'1206589' => 30, // travel //        
         '1206796' => 20, // television
         '1206598' => 30, // From India Today magazine //
         '1206960' => 30, // Sports Today //
         '1207605' => 30, // GADGETS & GIZMOS //
         '1207726' => 30, // Nothing But The Truth //
-        '1207728' => 30, // Up South //
-        '1206574' => 30, // Business //
+        '1207728' => 30, // Up South //        
         '1207580' => 30, // So Sorry // */
     );
     if (isset($time_array[$section_id])) {
