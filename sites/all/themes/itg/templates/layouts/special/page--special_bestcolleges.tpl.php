@@ -189,9 +189,7 @@ $url_get = explode('/', $path_request);
                                       <?
                                       if($url_get[1] == '2018') {
                                         // Bestcolleges RHS Banner  
-                                        $block = block_load('block', '10');
-                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-                                        print $output = render($render_array);
+                                      print bestcollege_get_sponser_data('Bestcolleges RHS Banner');
 
                                       } else {
                                         $block = block_load('itg_ads', ADS_RHS1);
