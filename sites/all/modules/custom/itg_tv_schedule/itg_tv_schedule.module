@@ -222,7 +222,7 @@ function itg_unpublish_fun(){
   if (isset($db)) {
     $people = $db->tv_schedule;
     $people->update(
-      array("status" => 0, 'filetype' =>$allowed[arg(1)]),
+      array("status" => 1, 'filetype' =>$allowed[arg(1)]),
       array('$set' => array('status' => 0)),
       array("multiple" => true)
     );
