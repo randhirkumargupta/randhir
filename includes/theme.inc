@@ -1533,17 +1533,17 @@ function theme_get_setting($setting_name, $theme = NULL) {
  */
 function theme_render_template($template_file, $variables) {
   // Extract the variables to a local namespace
-  //extract($variables, EXTR_SKIP);
+  extract($variables, EXTR_SKIP);
 
   // Start output buffering
-  //ob_start();
+  ob_start();
 
   // Include the template file
-  //include DRUPAL_ROOT . '/' . $template_file;
+  include DRUPAL_ROOT . '/' . $template_file;
 
   // End buffering and return its contents
-  //return ob_get_clean();
-  static $templates;
+  return ob_get_clean();
+  /*static $templates;
   static $path;
   if (!isset($path)) {
     $path = 'private://templates';
@@ -1571,7 +1571,7 @@ function theme_render_template($template_file, $variables) {
     }
     include $file;
   }
-  return $templates[$template_file]($variables);
+  return $templates[$template_file]($variables);*/
 }
 
 /**
