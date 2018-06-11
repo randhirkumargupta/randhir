@@ -4,24 +4,24 @@
  * @param string $email
  */
 function itg_sso_user_email_check($email) {
-  
+
   $sso_user_check_email = db_select('users', 'u')->fields('u', array('uid'));
   $sso_user_check_email->condition('u.mail', $email, '=');
   $result = $sso_user_check_email->execute()->fetchfield();
   return $result;
-  
+
 }
 
 /**
  * Helper function to check email for other domain
  */
 function itg_sso_user_email_domain($email) {
-  
+
   $sso_user_check_email = db_select('itg_sso_email_history', 'itso')->fields('itso', array('id'));
   $sso_user_check_email->condition('itso.email', $email, '=');
   $result = $sso_user_check_email->execute()->fetchfield();
   return $result;
-  
+
 }
 
 /**
@@ -29,12 +29,12 @@ function itg_sso_user_email_domain($email) {
  * @param int $mobile
  */
 function itg_sso_user_mobile_check($mobile) {
-  
+
   $sso_user_check_mobile = db_select('users', 'u')->fields('u', array('uid'));
   $sso_user_check_mobile->condition('u.name', $mobile, '=');
   $result = $sso_user_check_mobile->execute()->fetchfield();
   return $result;
-  
+
 }
 
 /**
@@ -42,12 +42,12 @@ function itg_sso_user_mobile_check($mobile) {
  * @param int $mobile
  */
 function itg_social_user_mobile_check($mobile) {
-  
+
   $sso_user_check_mobile = db_select('field_data_field_mobile_number', 'fm')->fields('fm', array('entity_id'));
   $sso_user_check_mobile->condition('fm.field_mobile_number_value', $mobile, '=');
   $result = $sso_user_check_mobile->execute()->fetchfield();
   return $result;
-  
+
 }
 
 /**
@@ -71,7 +71,7 @@ function itg_sso_reg_get_otp($mobile, $mail, $source) {
   }
 
   $otp_check->orderBy('id', 'DESC');//ORDER BY created
-  $otp_check ->range(0,1);  
+  $otp_check ->range(0,1);
   $result = $otp_check->execute()->fetchfield();
   return $result;
 }
@@ -95,16 +95,16 @@ function itg_sso_reg_otp_callback() {
       'otp' => $rand_otp,
       'created' => date('Y-m-d G:i:s'),
     ));
-    
+
     $otp->execute();
-    
+
     if (!empty($mobile)) {
       $mail_content = itg_sso_sms_send($rand_otp, $mobile);
     }
     if (!empty($mobile) && !empty($email)) {
       $mail_content = itg_sso_otp_mail_content($rand_otp, $email);
     }
-    
+
   }
 }
 
@@ -115,24 +115,24 @@ function itg_sso_reg_otp_callback() {
  * @param string $source
  */
 function itg_sso_otp_check($otpmobile, $email, $source) {
-  
+
   $otpmobile = trim($otpmobile);
   $get_sso_otp = db_select('itg_sso_reg_otp_info', 'otv')->fields('otv', array('id'));
   $get_sso_otp->condition('otv.source',$source ,'=');
-  
+
   if(!empty($otpmobile) && empty($email)) {
     $get_sso_otp->condition('otv.mobile', $otpmobile, '=');
   }
   if(!empty($email) && empty($otpmobile)) {
     $get_sso_otp->condition('otv.email', $email, '=');
   }
-  
+
   if(!empty($email) && !empty($otpmobile)) {
     $get_sso_otp->condition('otv.mobile', $otpmobile, '=');
     $get_sso_otp->condition('otv.email', $email, '=');
   }
   $get_sso_otp->orderBy('id', 'DESC');//ORDER BY created
-  $get_sso_otp ->range(0,1);  
+  $get_sso_otp ->range(0,1);
   $result = $get_sso_otp->execute()->fetchfield();
   return $result;
 }
@@ -189,7 +189,7 @@ function itg_sso_user_activate_callback() {
         ))
         ->condition('uid', $user_id, '=')
         ->execute();
-    
+
     print '<div class="activate-message">Your Account Activated Sucessfully!</div>';
     drupal_goto($redirect_url);
   }
@@ -231,5 +231,5 @@ function itg_sso_sms_send($otp, $mobile) {
   curl_setopt($ch, CURLOPT_URL, $runfile);
   $content = curl_exec($ch);
   curl_close($ch);
-  
+
 }

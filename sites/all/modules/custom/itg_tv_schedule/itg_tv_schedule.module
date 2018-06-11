@@ -77,21 +77,33 @@ function itg_tv_schedule_form($form, &$form_state) {
   }
   if(arg(1) == 'indiatoday'){
     $form['submit_button_1'] = array(
-    '#type' => 'submit',
-    '#value' => t('India today'),
-    '#submit' => array('download_indiatoday_csv'),
-    '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
-    '#suffix' => '</div>',
-    '#limit_validation_errors' => array(),
+      '#type' => 'submit',
+      '#value' => t('Original India today'),
+      '#submit' => array('download_indiatoday_csv'),
+      '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Download Sample:</span>',
+      '#limit_validation_errors' => array(),
+    );
+    $form['submit_button_latest_1'] = array(
+      '#type' => 'submit',
+      '#value' => t('Latest India today'),
+      '#submit' => array('download_indiatoday_latest_csv'),
+      '#suffix' => '</div>',
+      '#limit_validation_errors' => array(),
     );
   }
 
   if(arg(1) == 'aajtak'){
     $form['submit_button_2'] = array(
       '#type' => 'submit',
-      '#value' => t('Aajtak'),
+      '#value' => t('Original Aajtak'),
       '#submit' => array('download_aajtak_csv'),
       '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
+      '#limit_validation_errors' => array(),
+    );
+    $form['submit_button_latest_2'] = array(
+      '#type' => 'submit',
+      '#value' => t('Latest Aajtak'),
+      '#submit' => array('download_aajtak_latest_csv'),
       '#suffix' => '</div>',
       '#limit_validation_errors' => array(),
     );
@@ -99,9 +111,15 @@ function itg_tv_schedule_form($form, &$form_state) {
   if(arg(1) == 'dilliaajtak'){
     $form['submit_button_3'] = array(
       '#type' => 'submit',
-      '#value' => t('Dilli aajtak'),
+      '#value' => t('Original Dilli aajtak'),
       '#submit' => array('download_delliaajtak_csv'),
       '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
+      '#limit_validation_errors' => array(),
+    );
+    $form['submit_button_latest_3'] = array(
+      '#type' => 'submit',
+      '#value' => t('Latest Dilli aajtak'),
+      '#submit' => array('download_delliaajtak_latest_csv'),
       '#suffix' => '</div>',
       '#limit_validation_errors' => array(),
     );
@@ -109,9 +127,15 @@ function itg_tv_schedule_form($form, &$form_state) {
   if(arg(1) == 'tez'){
     $form['submit_button_4'] = array(
       '#type' => 'submit',
-      '#value' => t('Tez'),
+      '#value' => t('Original Tez'),
       '#submit' => array('download_tez_csv'),
       '#prefix' => '<div class="csv-download-wrapper float-right"><span class="download-sample">Dwonload Sample:</span>',
+      '#limit_validation_errors' => array(),
+    );
+    $form['submit_button_latest_4'] = array(
+      '#type' => 'submit',
+      '#value' => t('Latest Tez'),
+      '#submit' => array('download_tez_latest_csv'),
       '#suffix' => '</div>',
       '#limit_validation_errors' => array(),
     );
@@ -140,6 +164,13 @@ function itg_tv_schedule_form($form, &$form_state) {
   '#value' => t('Publish'),
   '#submit' => array('itg_publish_fun'),
   '#prefix' => '<div class="preview-publish-wrapper float-right"><a target="_blank" href="'.FRONT_URL.'/tv-schedule?action=preview"><input class="preview form-submit" type="button" id="edit-button-preview" name="preview" value="Preview"></a>',
+  '#limit_validation_errors' => array(),
+  );
+
+  $form['submit_unpublish'] = array(
+  '#type' => 'submit',
+  '#value' => t('Unpublish'),
+  '#submit' => array('itg_unpublish_fun'),
   '#suffix' => '</div>',
   '#limit_validation_errors' => array(),
   );
@@ -185,9 +216,28 @@ function itg_publish_fun(){
   }
 }
 
+function itg_unpublish_fun(){
+  $allowed = array('indiatoday'=>'Indiatoday_tvschedule.csv', 'aajtak'=>'aajtak_tvschedule.csv', 'dilliaajtak'=>'Dilliaajtak_tvschedule.csv', 'tez'=>'tez_tvschedule.csv');
+  $db = mongodb();
+  if (isset($db)) {
+    $people = $db->tv_schedule;
+    $people->update(
+      array("status" => 0, 'filetype' =>$allowed[arg(1)]),
+      array('$set' => array('status' => 0)),
+      array("multiple" => true)
+    );
+    drupal_set_message(t('Unpublished successfully!'));
+  }
+  else {
+    drupal_set_message(t('Mongo DB connection failed!'));
+  }
+}
+
+
+
 
 /**
- * Custom submit callback for downloading indiatoday, tez, aajtak, dilliaajtak csv file.
+ * Custom submit callback for downloading indiatoday, tez, aajtak, dilliaajtak original csv file.
  * {@inheritdoc}
  */
 
@@ -221,6 +271,57 @@ function download_tez_csv(){
   readfile($filepath);
   exit;
 }
+
+
+/**
+ * Custom submit callback for downloading indiatoday, tez, aajtak, dilliaajtak latest csv file.
+ * {@inheritdoc}
+ */
+
+function download_indiatoday_latest_csv(){
+  $filename = 'Indiatoday_tvschedule.csv';
+  $file_location = latestCsvDownload($filename);
+  if(!empty($file_location)){
+    $filepath = file_create_url($file_location);
+  }
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+
+function download_aajtak_latest_csv(){
+  $filename = 'aajtak_tvschedule.csv';
+  $file_location = latestCsvDownload($filename);
+  if(!empty($file_location)){
+    $filepath = file_create_url($file_location);
+  }
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+
+function download_delliaajtak_latest_csv(){
+  $filename = 'Dilliaajtak_tvschedule.csv';
+  $file_location = latestCsvDownload($filename);
+  if(!empty($file_location)){
+    $filepath = file_create_url($file_location);
+  }
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+function download_tez_latest_csv(){
+  $filename = 'tez_tvschedule.csv';
+  $file_location = latestCsvDownload($filename);
+  if(!empty($file_location)){
+    $filepath = file_create_url($file_location);
+  }
+  drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filename);
+  readfile($filepath);
+  exit;
+}
+
+
 
 /**
  * Implementation of hook_form
@@ -650,4 +751,16 @@ function isItValidDate($date) {
       return $data;
     }
   }
+}
+
+
+/**
+ * Custom method for get latest CSV format.
+ * @param string $filename
+ * @return string
+ */
+
+function latestCsvDownload($filename){
+  $result = db_query("SELECT uri from {file_managed} WHERE filename = :filename Order by fid DESC LIMIT 1", array(":filename" => $filename))->fetchField();
+  return $result;
 }
