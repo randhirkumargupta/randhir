@@ -186,7 +186,14 @@ $url_get = explode('/', $path_request);
                     <div class="data-holder" id="itg-block-4" data-widget-style="oscar-news best-news">
                                 <div class="ad-widget">
                                     <div class="sidebar-ad">
-                                      <?php
+                                      <?
+                                      if($url_get[1] == '2018') {
+                                        // Bestcolleges RHS Banner  
+                                        $block = block_load('block', '10');
+                                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                        print $output = render($render_array);
+
+                                      } else {
                                         $block = block_load('itg_ads', ADS_RHS1);
                                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                         if(is_array($render_array)) {
@@ -196,6 +203,8 @@ $url_get = explode('/', $path_request);
                                             print $itg_ad['200*200_right_bar_ad1'];
                                           }
                                         }
+                                      } 
+                                        
                                        ?></div>
                                 </div>
                     <?php
