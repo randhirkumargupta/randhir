@@ -6829,6 +6829,10 @@ function search_data_rest($token) {
     }
     $data_json['status_code'] = "1";
     $data_json['status_message'] = "";
+    if ($loop_c == 0) {
+        $data_json['status_code'] = "0";
+        $data_json['status_message'] = "";
+    }
     $data['id'] = "0";
     $data['search_title'] = "$key";
     $data['layout_id'] = "0";
