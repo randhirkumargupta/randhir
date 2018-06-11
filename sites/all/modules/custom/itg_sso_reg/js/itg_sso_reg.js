@@ -8,7 +8,7 @@
         attach: function (context, settings) {
             var base_url = settings.itg_sso_reg.settings.base_url;
             var error = settings.itg_sso_reg.settings.custom_error;
-            
+
             if (error) {
                 jQuery.each(error, function (index, item) {
                     if (index == 'mobile') {
@@ -33,29 +33,38 @@
                 });
             }
             // ajax for otp
+            var cnt_num = 0;
+
             $('#itg-sso-reg-multistep-form--2 #otpclickme', context).click(function (event) {
+                cnt_num += 1;
+                console.log(cnt_num, 'cnt_num');
+                $("div.otp-resend-limit").remove();
+                if(cnt_num < 4){
+                    var mobile = $('input[name=step2mobile]').val();
+                    var email = $('input[name=step2mail]').val();
 
-                var mobile = $('input[name=step2mobile]').val();
-                var email = $('input[name=step2mail]').val();
+                    var otp = Math.floor(100000 + Math.random() * 900000)
+                    otp = otp.toString().substring(0, 4);
+                    var post = "&mobile=" + mobile + "&email=" + email + "&otp=" + otp + "&source=register";
 
-                var otp = Math.floor(100000 + Math.random() * 900000)
-                otp = otp.toString().substring(0, 4);
-                var post = "&mobile=" + mobile + "&email=" + email + "&otp=" + otp + "&source=register";
-
-                if (mobile != '') {
-                    $("#otpclickme").text("Resend OTP");
-                    $.ajax({
-                        'url': base_url + '/otpajaxcallback',
-                        'data': post,
-                        'type': 'POST',
-                        beforeSend: function () {
-                            $('#ajax-loader').show();
-                        },
-                        'success': function (data) {
-                            $('#ajax-loader').hide();
-                            $("#otp_success").html("OTP Sent Successfully").show().delay(2000).hide(1000);
-                        }
-                    });
+                    if (mobile != '') {
+                        $("#otpclickme").text("Resend OTP");
+                        $.ajax({
+                            'url': base_url + '/otpajaxcallback',
+                            'data': post,
+                            'type': 'POST',
+                            beforeSend: function () {
+                                $('#ajax-loader').show();
+                            },
+                            'success': function (data) {
+                                $('#ajax-loader').hide();
+                                $("#otp_success").html("OTP Sent Successfully").show().delay(2000).hide(1000);
+                            }
+                        });
+                    }
+                }else{
+                 $("#uotp #otp_success").before("<div class='otp-resend-limit message error'>You have reached max resend OTP limit.</div>");
+                 $('div.otp-resend-limit').show().delay(2000).hide( 1000 );
                 }
             });
 
@@ -63,7 +72,7 @@
             $('input[name=mobile]').keyup(function () {
                 this.value = this.value.replace(/[^0-9\.]/g, '');
             });
-            
+
             // validation
             var selected_country = jQuery('select[name="page_country"]').val();
             var flag = 0;
@@ -76,7 +85,7 @@
 				jQuery(':input[type="submit"]').prop('disabled', true);
 				jQuery('.country_restriction_msg').show();
 			}
-			
+
 			jQuery('select[name="page_country"]').on('change', function() {
 				var selected_country1 = this.value;
 				var flag1 = 0;
@@ -95,4 +104,18 @@
         }
 
     };
+
 })(jQuery, Drupal, this, this.document);
+
+
+function privacy_policy_checkbox(url, url_type){
+    console.log(url,'--', url_type);
+    if(url_type == 'facebook' || url_type == 'twitter'){
+        if(jQuery('form #upass input[type="checkbox"').prop('checked') == true){
+            window.location = url;
+        }else{
+            alert('You Agree to our Privacy and Cookie Policy While Register to our Website field is required');
+        }
+    }
+}
+

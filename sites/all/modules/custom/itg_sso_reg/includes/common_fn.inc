@@ -224,7 +224,7 @@ function itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, $source) {
 
 function itg_sso_sms_send($otp, $mobile) {
 
-  $runfile = "http://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=361347&username=9811668984&password=tpwaw&senderid=INDTDY&Text=Your%20otp%20is%20".$otp."&To=".$mobile;
+  $runfile = "http://bulkpush.mytoday.com/BulkSms/SingleMsgApi?feedid=361347&username=9811668984&password=tpwaw&senderid=INDTDY&Text=Your%20OTP%20is%20".$otp.".%20Please%20verify%20it%20and%20do%20not%20share%20with%20anyone.&To=".$mobile;
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, $runfile);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
