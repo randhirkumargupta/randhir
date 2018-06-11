@@ -14807,16 +14807,17 @@ display:none;
 .node-story-form .ajax-progress .throbber {margin: 0;}
 .node-story-form .ajax-progress {display: block;}
 
-.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li
+.page-tv #page .tv-channek-wrapper ul.channel-listing li
 
 { list-style: none; float: left; padding: 10px; border: 1px solid #ccc; border-right: 0;}
-.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li:last-child
+.page-tv #page .tv-channek-wrapper ul.channel-listing li:last-child
 
 { border-right:1px solid #ccc}
-.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li a
-.page-tv.page-tv-aajtak #page .tv-channek-wrapper ul.channel-listing li:hover
+.page-tv #page .tv-channek-wrapper ul.channel-listing li a
+.page-tv #page .tv-channek-wrapper ul.channel-listing li:hover
 
 { color:#c00}
+
 .page-tv.page-tv-aajtak #main #content .csv-download-wrapper .download-sample
 
 { margin-top: 11px; display: inline-block; margin-right: 10px;}
