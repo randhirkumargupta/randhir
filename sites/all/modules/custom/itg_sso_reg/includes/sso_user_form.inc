@@ -100,7 +100,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       );
       
       $form['forget_me'] = array(
-        '#title' => 'You Agree to our <a href="https://specials.indiatoday.com/common/privacypolicy/privacy.phtml">Privacy and Cookie Policy</a> While Register to our Website',
+        '#title' => 'You Agree to our <a href="https://specials.indiatoday.com/common/privacypolicy/privacy.phtml" target="_blank">Privacy and Cookie Policy</a> While Register to our Website',
         '#type' => 'checkboxes',
         '#required' => TRUE,
 		'#options' => drupal_map_assoc(array(1)),
