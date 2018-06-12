@@ -58,6 +58,8 @@ function itg_report_api_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_NORMAL_ITEM,
     );
+    return $items;
+}
     /**
      * appapi_breaking_news
      */
