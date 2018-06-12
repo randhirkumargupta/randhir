@@ -720,7 +720,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{display:none;}
 #block-itg-ads-ads-super-banner-top-nav-728x90{text-align:center;padding-top:4px;margin-bottom:10px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{float:left;}
-#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:24px;height:24px;display:inline-block;position:relative;top:0px;left:12px;background:url(https://smedia2.intoday.in/indiatoday/livedot.gif) no-repeat 0 0;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:24px;height:24px;display:inline-block;top:2px;left:12px;background:url(https://smedia2.intoday.in/indiatoday/livedot.gif) no-repeat 0 0;}
 #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile{display:none;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{float:left;width:185px;text-align:center;height:40px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo+.menu li.menu__item.is-leaf a{padding-right:0;padding-left:35px;}
