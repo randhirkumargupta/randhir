@@ -2,7 +2,7 @@
 global $base_url, $user;
 $search_url = FRONT_URL.'/get-amp-search-keyword';
 ?>
-
+<?php if(!isset($_GET['is_head'])):?>
 <header role="banner" id="header">
 <nav id="navbar">
 <amp-accordion disable-session-states>
@@ -136,6 +136,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
 </header>
 
 </header>
+<?php endif;?>
 <?php if (($title[0]['type'] == 'photogallery') && (!empty(variable_get('amp_photo_ad')))) : ?>  
   <div class="story_ad_block custom-amp-ad">
     <?php print variable_get('amp_photo_ad'); ?> 
