@@ -289,12 +289,10 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 .big-news{position:relative;color:#fff;padding:10px;background:#000;margin-bottom:20px;font-family:"OpenSans-Regular"}.big-news .big-story-col-1,.big-news .big-story-col-2{padding:0 15px}.big-news .big-story-col-1{position:relative}.big-news .big-story-col-1 .story-tag{position:absolute;margin:0 0 0 15px}.big-news .big-story-col-1 .loading-popup{top:50%;left:50%;position:absolute;margin-left:-15px;margin-top:-15px;display:none}
 .big-news .big-story-col-1 iframe .jwplayer{position:inherit}.big-news .big-story-col-1 i{position:absolute;right:30px;bottom:10px;font-size:26px}.big-news h1{position:relative;margin-bottom:10px}.big-news h1:after{content:'';width:14px;height:14px;background:#f40000;border-radius:100%;display:none}.big-news h1 a i{color:#f40000;font-size:.4em;padding-bottom:7px;display:inline-block;vertical-align:bottom;-webkit-animation-name:blinker;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:cubic-bezier(1,0,0,1);-webkit-animation-duration:1s}.big-news a{color:#fff}.big-news p{color:#adacac;font-size:16px;font-size:1rem;line-height:20px;margin-bottom:15px}.big-news .share-new{margin-bottom:15px}.big-news .share-new ul li{display:inline-block;vertical-align:top}.big-news .share-new ul li:first-child a{padding-left:0}.big-news .share-new ul li a{padding:0 10px;border-right:1px solid #606060;font-size:16px;font-size:1rem;line-height:15px;display:inline-block;vertical-align:top;cursor:pointer}.big-news .share-new ul li:last-child a{border-right:none}.big-news .big-story-detail{max-height:106px;overflow:auto}.big-news .big-story-detail li{position:relative;padding-left:15px;margin-bottom:15px}.big-news .big-story-detail li:before{position:absolute;top:5px;left:0;content:'';border-radius:50%;background:#fff;height:6px;width:6px}.big-news .big-story-detail li a{font-size:16px;font-size:1rem;font-weight:500}.big-news .big-story-detail li a:hover{color:#adacac}.big-news .story-tag{position:relative;top:0;left:0;background:#a00606;height:26px;line-height:26px;padding:0 7px;text-transform:uppercase;color:#fff;font-family:"OpenSans-Regular";z-index:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin:10px 0 0 10px}.big-news .story-tag a{color:#fff}.big-news .smilies-title,.featured-post .smilies-title{display:inline-block !important}
 .big-news .big-story-col-1 { position: relative;}.big-news .big-story-col-1, .big-news .big-story-col-2 {padding: 0 15px;}
-
-@media only screen and (min-width: 769px){.big-news .big-story-col-1 {width: 56.4%;}.big-news .big-story-col-2 { width: 43.6%;padding-left: 0;}.big-news .big-story-col-1, .big-news .big-story-col-2 {float: left;padding: 0 15px;}
-}
-
+@media only screen and (max-width: 1024px){.big-news .big-story-col-1, .big-news .big-story-col-2 {width: 50%; float: left;}}
+@media only screen and (min-width: 769px){.big-news .big-story-col-1 {width: 56.4%;}.big-news .big-story-col-2 { width: 43.6%;padding-left: 0;}.big-news .big-story-col-1, .big-news .big-story-col-2 {float: left;padding: 0 15px;}}
+@media only screen and (max-width: 680px){.big-news .big-story-col-1, .big-news .big-story-col-2 {width: 100%;float: none;} .big-news .big-story-col-2 {padding-top: 15px;}}
 @media only screen and (max-width:768px){.home_page_poll_widget_block .poll-data form .form-radios .form-item{display:block;text-align: left;}.home_page_poll_widget_block .poll-data form .form-radios .form-item .form-radio{margin: 3px 6px 0 0;}}
-
 @media only screen and (max-width: 768px){
 #block-itg-layout-manager-header-block .top-nav{padding:0;width:100%;background:#fff;margin-top:7px;text-align:right;line-height:28px;margin-bottom:0;box-shadow:0 6px 5px -3px rgba(0,0,0,0.1);}
 #block-itg-layout-manager-header-block .top-nav .main-nav{padding-left:0;float:none;width:100%;line-height:20px;}
@@ -410,7 +408,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 }
 .flexslider .flex-direction-nav a{display:none;}
 .flexslider:hover .flex-direction-nav a{display:block;}
-@media only screen and (min-width:767px) and (max-width:768px) {.flex-direction-nav{margin-right: 37px;position: absolute;top: 50%;right: 0;}}
+@media only screen and (min-width:767px) and (max-width:768px) {#block-itg-widget-featured-photo-carousel .flex-direction-nav{margin-right: 37px;position: absolute;top: 50%;right: 0;}}
 /*! CSS Used from: https://akm-img-a-in.tosshub.com/advagg_css/css__NJyel756rLEgMrcX0avSp1tmtzPDRjgWuLuKOt4HjKU__AZpiH0s0Isf5wf_-jqvbmw7M2t5BcOc3apqK9IQlVCQ__Mh6lcz2SSWurJ9gYhmBP20dJEYie_L2KE7OY4NIu0rg.css?CHAqni8ppjXfj5Tx9GeqOydV9JoUNp34 */
 .container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
 @media (min-width:769px){
