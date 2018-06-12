@@ -639,8 +639,8 @@ function itg_report_api_auscovery_dashboard_web() {
   else {
     $end_date = $_GET['end_date'];
   }
-
-  $suffix = $start_date . "_" . $end_date;
+  $pageno = $_GET['pageno'];
+  $suffix = $start_date . "_" . $end_date."_".$pageno;
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
 
   $result_get = getRedis($redis_key);
@@ -650,7 +650,7 @@ function itg_report_api_auscovery_dashboard_web() {
   }
   else {
     // call function from return data..
-    $jsondata = auscovery_dashboard_web($start_date, $end_date);
+    $jsondata = auscovery_dashboard_web($start_date, $end_date, $pageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
