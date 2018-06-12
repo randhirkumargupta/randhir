@@ -5,7 +5,7 @@
 
         <?php
         global $base_url;
-
+        p($rows);
         foreach ($rows as $index => $row) {
 
           $desc = $row['title'];
@@ -17,7 +17,7 @@
           if (strtolower($row['type']) == 'videogallery') {
             $video_class = 'video-icon';
           }
-          if ($index == 0) {
+
             ?>
             <div class="featured-post featured-post-first <?php echo $video_class; ?>">
               <?php
@@ -40,10 +40,6 @@
               ?>
               </h2>           
             </div>
-
-
-
-            <?php } ?>
 
 <?php } ?>
       </div>
