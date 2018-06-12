@@ -639,7 +639,10 @@ function itg_report_api_auscovery_dashboard_web() {
   else {
     $end_date = $_GET['end_date'];
   }
-  $pageno = $_GET['pageno'];
+  $pageno = 0;
+  if(isset($_GET['pageno']) && $_GET['pageno'] > 0){
+    $pageno = $_GET['pageno'];
+  }
   $suffix = $start_date . "_" . $end_date."_".$pageno;
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
 
