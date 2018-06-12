@@ -6818,7 +6818,7 @@ function search_data_rest($token) {
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
-        if ($type == "breaking_news") {
+        if ($bundle == "breaking_news") {
                 $list[$loop_c]['n_type'] = "story";
                 $list[$loop_c]['n_is_blog'] = "1";
             } else {
