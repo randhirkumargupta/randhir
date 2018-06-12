@@ -13551,4 +13551,86 @@ div.ctools-modal-content .form-submit {
 .node-story-form .ajax-progress {
   display: block; }
 
+.page-tv .tv-channek-wrapper li {
+  list-style: none;
+  float: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-right: 0; }
+
+.page-tv .tv-channek-wrapper li:last-child {
+  border-right: 1px solid #ccc; }
+
+.page-tv .tv-channek-wrapper li a {
+  color: #000; }
+
+.page-tv .tv-channek-wrapper li a:hover {
+  color: #fff; }
+
+.page-tv .tv-channek-wrapper li:hover {
+  background: #c00; }
+
+.page-tv.page-tv-aajtak .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-aajtak #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-aajtak #edit-file-ajax-wrapper .form-type-managed-file label {
+  width: 160px; }
+
+.page-tv.page-tv-aajtak #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+  width: 160px; }
+
+.page-tv.page-tv-aajtak #itg-tv-schedule-form .form-actions {
+  padding: 15px 2px; }
+
+.page-tv.page-tv-dilliaajtak .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-dilliaajtak #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-dilliaajtak #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+  width: 160px; }
+
+.page-tv.page-tv-dilliaajtak #itg-tv-schedule-form .form-actions {
+  padding: 15px 2px; }
+
+.page-tv.page-tv-tez .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-tez #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-tez #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+  width: 160px; }
+
+.page-tv.page-tv-tez #itg-tv-schedule-form .form-actions {
+  padding: 15px 2px; }
+
+.page-tv.page-tv-indiatoday .csv-download-wrapper .download-sample {
+  margin-top: 11px;
+  display: inline-block;
+  margin-right: 10px; }
+
+.page-tv.page-tv-indiatoday #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+  padding: 0;
+  margin: 30px 0; }
+
+.page-tv.page-tv-indiatoday #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+  width: 160px; }
+
+.page-tv.page-tv-indiatoday #itg-tv-schedule-form .form-actions {
+  padding: 15px 2px; }
+
 /*# sourceMappingURL=styles.css.map */

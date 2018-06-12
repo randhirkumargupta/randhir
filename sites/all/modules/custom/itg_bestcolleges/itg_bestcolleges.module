@@ -294,6 +294,9 @@ function itg_bestcolleges_block_info() {
   $blocks['bestcollege_rhs_story_widget'] = array(
     'info' => t('Widget: Bestcolleges RHS Story'),
   );
+  $blocks['bestcollege_rhs_banner_widget'] = array(
+    'info' => t('Widget: Bestcolleges RHS Banner'),
+  );
   $blocks['bestcollege_header_banner'] = array(
     'info' => t('Widget: Bestcolleges Header Banner'),
   );
@@ -338,6 +341,14 @@ function itg_bestcolleges_block_view($delta = '') {
     case 'bestcollege_rhs_story_widget':
       $data = itg_bestcolleges_rhs_story();
       $block['content'] = theme("bestcollege_story_ordering", array("data" => $data));
+      break;
+    case 'bestcollege_rhs_banner_widget':
+      $path_request = request_path();
+      $path_request_array = explode('/', $path_request);
+      if (($path_request_array[1] == '2018') && $path_request_array[2] == 'ranks') {
+        $data = bestcollege_get_sponser_data('Bestcolleges RHS Banner');
+        $block['content'] = "<div class='ad-widget'><div class='sidebar-ad'>" . $data . "</div></div>";
+      }
       break;
     case 'bestcollege_sponser':
       $path_request = request_path();

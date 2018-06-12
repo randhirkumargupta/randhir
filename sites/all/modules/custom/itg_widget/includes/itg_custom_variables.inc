@@ -402,3 +402,118 @@ function itg_fifa_category_id_submit($form, &$form_state){
   drupal_set_message(t('Configuration successfully saved.'), 'success');
 }
 
+
+/**
+ * Manage fifa category id for banner. 
+ * {@inheritdoc}
+ */
+function itg_sponsor_content_configuration($form, &$form_state) {
+  $form['field_container'] = [
+    '#type' => 'container',
+    '#weight' => 80,
+    '#tree' => TRUE,
+    '#prefix' => '<div id="js-ajax-elements-wrapper">',
+    '#suffix' => '</div>',
+  ];
+
+  $form_state['field_deltas'] = isset($form_state['field_deltas']) ? $form_state['field_deltas'] : range(0, 0);
+  $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
+  if (count($home_top_story_sponsor) > 0 && empty($form_state['clicked_button']['#value']) && $form_state['clicked_button']['#value'] != 'Remove') {
+    $form_state['field_deltas'] = $home_top_story_sponsor;
+  }
+  $field_count = $form_state['field_deltas'];
+  foreach ($field_count as $delta => $value) {
+    $form['field_container'][$delta] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['container-inline'],
+      ],
+      '#tree' => TRUE,
+    ];
+
+    $form['field_container'][$delta]['content_nid'] = [
+      '#type' => 'textfield',
+      '#default_value' => (!empty($value->nid) ? $value->nid : ''),
+      '#size' => 25,
+      '#weight' => 1,
+      '#attributes' => [
+        'placeholder' => ['Content Nid'],
+      ],
+    ];
+
+    $form['field_container'][$delta]['content_position'] = [
+      '#type' => 'textfield',
+      '#default_value' => (!empty($value->position) ? $value->position : ''),
+      '#size' => 25,
+      '#weight' => 2,
+      '#attributes' => [
+        'placeholder' => ['Content Position'],
+      ],
+    ];
+
+    $form['field_container'][$delta]['remove_name'] = [
+      '#type' => 'submit',
+      '#value' => t('Remove'),
+      '#submit' => ['top_story_sponsor_add_more_remove'],
+      '#ajax' => [
+        'callback' => 'top_story_sponsor_add_more_remove_callback',
+        'wrapper' => 'js-ajax-elements-wrapper',
+      ],
+      '#weight' => 3,
+      '#attributes' => [
+        'class' => ['button-small danger'],
+      ],
+      '#name' => 'remove_name_' . $delta,
+    ];
+  }
+
+  $form['add_name'] = [
+    '#type' => 'submit',
+    '#value' => t('Add one more'),
+    '#submit' => ['top_story_sponsor_add_more_add_one'],
+    '#ajax' => [
+      'callback' => 'top_story_sponsor_add_more_add_one_callback',
+      'wrapper' => 'js-ajax-elements-wrapper',
+    ],
+    '#weight' => 100,
+  ];
+  $form['top_story_sponsor_submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Configuration'),
+    '#weight' => 101,
+  );
+  return $form;
+}
+
+function top_story_sponsor_add_more_remove($form, &$form_state) {
+  $delta_remove = $form_state['triggering_element']['#parents'][1];
+  unset($form_state['field_deltas'][$delta_remove]);
+  $form_state['rebuild'] = TRUE;
+  drupal_get_messages();
+}
+
+function top_story_sponsor_add_more_remove_callback($form, &$form_state) {
+  return $form['field_container'];
+}
+
+function top_story_sponsor_add_more_add_one($form, &$form_state) {
+  $form_state['field_deltas'][] = count($form_state['field_deltas']) > 0 ? max($form_state['field_deltas']) + 1 : 0;
+  $form_state['rebuild'] = TRUE;
+  drupal_get_messages();
+}
+
+function top_story_sponsor_add_more_add_one_callback($form, $form_state) {
+  return $form['field_container'];
+}
+
+function itg_content_configuration_submit($form, $form_state) {
+  $sponsor_ids = array();
+  foreach ($form_state['values']['field_container'] as $key => $value) {
+    $sponsor_ids[] = array(
+      'nid' => $value['content_nid'],
+      'position' => $value['content_position']
+    );
+  }
+  set_itg_variable('home_top_story_sponsor', json_encode($sponsor_ids));
+  drupal_set_message(t('Configuration successfully saved.'), 'success');
+}

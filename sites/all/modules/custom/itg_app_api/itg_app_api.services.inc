@@ -6794,22 +6794,63 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function search_data_rest($token) {
-    $key = $_GET['key'];
+    $key_title = $_GET['key'];
     $nid_ar = array();
-    $searchpage = solr_search_custom_results_restapi($key);
-    p($searchpage);
-    if ($nids === FALSE) {
-        return array();
-    }
-
-    $video_list = array();
-    $loopc = 0;
+    $searchpage = solr_search_custom_results_restapi($key_title);
+    //p($searchpage);
+    $data_json = array();
+    $data = array();
+    $list = array();
+    $loop_c = 0;
     foreach ($searchpage as $key => $result) {
         $nid = $result->entity_id;
-        $nid_ar[] = $nid;
+        $title = $result->label;
+        $image_courtesy = FRONT_URL;
+
+        $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
+        $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
+        $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
+        $body = empty($result->content) ? '' : $result->content;
+        $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
+        $bundle = empty($result->bundle) ? '' : $result->bundle;
+        $url = empty($result->url) ? '' : $result->url;
+        $teaser = empty($result->teaser) ? '' : $result->teaser;
+        $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
+        $list[$loop_c]['n_id'] = "$nid";
+        //$list[$loop_c]['n_type'] = "$bundle";
+        if ($bundle == "breaking_news") {
+                $list[$loop_c]['n_type'] = "story";
+                $list[$loop_c]['n_is_blog'] = "1";
+            } else {
+                $list[$loop_c]['n_type'] = "$bundle";
+                $list[$loop_c]['n_is_blog'] = "0";
+            }
+        $list[$loop_c]['n_is_sponsored'] = "0";
+        $list[$loop_c]['n_share_link'] = "$url";
+        $list[$loop_c]['n_title'] = "$title";
+        $list[$loop_c]['n_short_desc'] = "$teaser";
+        $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
+        $list[$loop_c]['n_large_image'] = "$extra_large_image";
+        $list[$loop_c]['n_updated_datetime'] = "$ds_changed";    
+        $loop_c++;
     }
-    $nid_str = implode(",", $nid_ar);
-    newscategoryPageRerourceValue_search_rest($nid_ar);
+    $data_json['status_code'] = "1";
+    $data_json['status_message'] = "";
+    if ($loop_c == 0) {
+        $data_json['status_code'] = "0";
+        $data_json['status_message'] = "";
+    }
+    $data['id'] = "0";
+    $data['search_title'] = "$key_title";
+    $data['layout_id'] = "0";
+    $data['news_count'] = "$loop_c";
+    $data['news_display_count'] = "10";
+    $data['news_pagination_cap'] = "50";
+    $data['updated_datetime'] = "";
+    $data['news'] = $list;
+    $data_json['data'] = $data;
+    return $data_json;
+    
 }
 
 /**

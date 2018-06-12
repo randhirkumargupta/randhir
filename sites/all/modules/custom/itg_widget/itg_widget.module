@@ -326,6 +326,14 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
     );
+    $items['itg-content-configure'] = array(
+      'title' => t('Manage Sponsor Content'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_sponsor_content_configuration'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
   return $items;
 }
 
