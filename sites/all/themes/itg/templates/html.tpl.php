@@ -268,7 +268,7 @@ header{margin-bottom:10px;position:relative;z-index:9999;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(2) a{padding-left:0;}
 /* #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:8px;height:8px;display:inline-block;position:relative;top:-5px;left:-5px;box-shadow:0 0 0 rgba(214,2,12,.8);border-radius:50%;background:#c00;animation:pulse 1.7s infinite;content:"";} */
-#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:8px;height:8px;display:inline-block;position:relative;top:-5px;left:-5px;background:url(https://smedia2.intoday.in/indiatoday/livedot.gif) ) no-repeat 0 0;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:8px;height:8px;display:inline-block;position:relative;top:-5px;left:-5px;background:url(https://smedia2.intoday.in/indiatoday/livedot.gif) no-repeat 0 0;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{float:left;width:185px;text-align:center;height:40px;}
 #block-itg-layout-manager-header-block .logo{width:auto;top:15px;position:absolute;}
 #block-itg-layout-manager-header-block .logo a{display:block;overflow:visible;}
@@ -720,6 +720,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{display:none;}
 #block-itg-ads-ads-super-banner-top-nav-728x90{text-align:center;padding-top:4px;margin-bottom:10px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{float:left;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:24px;height:24px;display:inline-block;position:relative;top:0px;left:0px;background:url(https://smedia2.intoday.in/indiatoday/livedot.gif) no-repeat 0 0;}
 #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile{display:none;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{float:left;width:185px;text-align:center;height:40px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo+.menu li.menu__item.is-leaf a{padding-right:0;padding-left:35px;}
