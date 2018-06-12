@@ -6817,7 +6817,14 @@ function search_data_rest($token) {
         $teaser = empty($result->teaser) ? '' : $result->teaser;
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
-        $list[$loop_c]['n_type'] = "$bundle";
+        //$list[$loop_c]['n_type'] = "$bundle";
+        if ($type == "breaking_news") {
+                $list[$loop_c]['n_type'] = "story";
+                $list[$loop_c]['n_is_blog'] = "1";
+            } else {
+                $list[$loop_c]['n_type'] = "$bundle";
+                $list[$loop_c]['n_is_blog'] = "0";
+            }
         $list[$loop_c]['n_is_sponsored'] = "0";
         $list[$loop_c]['n_share_link'] = "$url";
         $list[$loop_c]['n_title'] = "$title";
