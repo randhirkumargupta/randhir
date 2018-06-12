@@ -131,6 +131,6 @@ function itg_report_api_menu() {
         $data['data'] = $detail;
     }
     $jsondata = json_encode($data);
-    return $jsondata;
+    print $jsondata; die();
     }
 
