@@ -4369,7 +4369,7 @@ function drupal_get_js($scope = 'header', $javascript = NULL, $skip_alter = FALS
   // Filter out elements of the given scope.
   $items = array();
   foreach ($javascript as $key => $item) {
-    if ($item['scope'] == $scope) {
+    if (array_key_exists('scope', $item) && $item['scope'] == $scope) {
       $items[$key] = $item;
     }
   }
