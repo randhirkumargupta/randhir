@@ -327,7 +327,7 @@ function itg_widget_menu() {
       'file' => 'includes/itg_custom_variables.inc',
     );
     $items['itg-content-configure'] = array(
-      'title' => t('Manage Sponsor Content'),
+      'title' => t('Manage Sponsor Content on Home Top stories'),
       'page callback' => 'drupal_get_form',
       'page arguments' => array('itg_sponsor_content_configuration'),
       'access arguments' => array('administer itg_term settings'),
