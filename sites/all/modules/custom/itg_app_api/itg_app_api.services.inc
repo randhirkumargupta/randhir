@@ -6797,20 +6797,30 @@ function itg_rapid_nid_by_url_v1($canonical_url){
  * @param type $nid
  */
 function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published, $nid) {
-    $node = node_load($nid);
-    $success = "";
-    if ($nid) {
-        $node->field_fba_id[LANGUAGE_NONE][0]['value'] = $fba_id;
-        $node->field_fba_publish_status[LANGUAGE_NONE][0]['value'] = $publish_status;
-        $node->field_fba_published[LANGUAGE_NONE][0]['value'] = $published;
-
-        try {
-            node_save($node);
-            $success = TRUE;
-        } catch (Exception $e) {
-            $success = FALSE;
-        }
+    $nid_flag = 0;
+    $nid_flag = fba_update_data_search($nid);
+    $success = TRUE;
+    $api_type = "fba_update";    
+    if ($nid_flag == $nid) {
+        // update query
+        $num_updated = db_update('itg_fba_update')
+                ->fields(array('node_type' => '', 'api_type' => $api_type, 'nid' => $nid, 'fba_id' => $fba_id, 'fba_publish_status' => $publish_status, 'fba_published' => $published))
+                ->condition('itg_fba_update.nid', $nid, '=')
+                ->execute();
+    } else {
+        // insert query        
+        $qry = db_insert('itg_fba_update')
+                ->fields(array(
+                    'node_type' => '',
+                    'api_type' => $api_type,
+                    'nid' => $nid,
+                    'fba_id' => $fba_id,
+                    'fba_publish_status' => $publish_status,
+                    'fba_published' => $published,
+                ));        
+                $qry->execute();
     }
+
     return $success;
 }
 
