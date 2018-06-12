@@ -2800,6 +2800,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // hamburger_menu_tv custom resource declaration.....
+        'hamburger_menu_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves hamburger_menu_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_hamburger_menu_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -7643,4 +7670,29 @@ function itg_rapid_api_breaking_news() {
         $data['data'] = $detail;
     }
     return $data;
+}
+
+
+/**
+ * Call back function for hamburger_menu_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_hamburger_menu_tv($token) {
+    $redis_key = "itg_rapid_api_hamburger_menu_tv";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_hamburger_menu_tv');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
 }
