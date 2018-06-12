@@ -407,7 +407,7 @@ function itg_fifa_category_id_submit($form, &$form_state){
  * Manage fifa category id for banner. 
  * {@inheritdoc}
  */
-function itg_content_configuration($form, &$form_state) {
+function itg_sponsor_content_configuration($form, &$form_state) {
   $form['field_container'] = [
     '#type' => 'container',
     '#weight' => 80,
