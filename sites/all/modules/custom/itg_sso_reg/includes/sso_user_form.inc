@@ -94,7 +94,6 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
       $form['page_country'] = array(
         '#type' => 'select' ,
         '#title' => t('Country'),
-        '#default_value' => 'India',
         '#options' => $country_arr ,
         '#prefix' => '<div class="form-row email-or-mobile"><div id="umaissl" class="col-xs-6">',
         '#suffix' => '<div class="page_country-error"></div></div>',
