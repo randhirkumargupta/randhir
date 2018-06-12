@@ -11,7 +11,7 @@
  *
  * @return array
  */
-function auscovery_dashboard_web($start_date, $end_date) {
+function auscovery_dashboard_web($start_date, $end_date, $pageno) {
   global $base_url; 
   $data = array();
   $list = array();
@@ -54,6 +54,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   //$query->condition('autr.field_author_report_value', 'author_report', '=');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
+  $query->range($range_min, $range_max);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
@@ -120,6 +121,14 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
   $data['data'] = $list;
+  if($loop_cont == 100){
+      $s_date = $_GET['start_date'];
+      $e_date = $_GET['end_date'];
+      $pageno = ($_GET['pageno'] + 1);
+      $next_page_url = $base_url."/reportapi/auscovery_dashboard_web/it?start_date=".$s_date."&end_date=".$e_date."&pageno=".$pageno."";
+      $data['next_page_url'] = "$next_page_url";
+  }
+  
   return $data;
 }
 /**
@@ -190,7 +199,6 @@ function auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end
         //$is_reporter = 1;
         $is_reporter = itg_re_api_getauthor_check($author_id);
     }
-    //for fb feild
     //for fb feild
    $res_fb = fba_update_data_search($nid, 1);
     $field_fba_id_value = "";
