@@ -139,6 +139,12 @@
 <style>
 /*! CSS Used from: Embedded */
 *{box-sizing:border-box;}
+@font-face{font-family:'OpenSans-Regular';src:url(/sites/all/themes/itg/fonts/OpenSans-Regular.eot);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Merriweather-Bold';src:local("/"),url(/sites/all/themes/itg/fonts/merriweather-latin-700.woff) format("woff"),url(/sites/all/themes/itg/fonts/Merriweather-Bold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/merriweather-latin-700.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'OpenSans-Semibold';src:url(/sites/all/themes/itg/fonts/OpenSans-Semibold.eot);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Semibold.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Semibold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Semibold.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'OpenSans-Bold';src:url(/sites/all/themes/itg/fonts/OpenSans-Bold.eot);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Bold.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Bold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Bold.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'flexslider-icon';src:url(/sites/all/libraries/flexslider/fonts/flexslider-icon.eot);src:url(/sites/all/libraries/flexslider/fonts/flexslider-icon.eot#iefix) format('embedded-opentype'),url(/sites/all/libraries/flexslider/fonts/flexslider-icon.woff) format('woff'),url(/sites/all/libraries/flexslider/fonts/flexslider-icon.ttf) format('truetype'),url(/sites/all/libraries/flexslider/fonts/flexslider-icon.svg#flexslider-icon) format('svg');font-weight:400;font-style:normal;}
+@font-face{font-family:'FontAwesome';src:url(/sites/all/themes/itg/fonts/fontawesome-webfont.eot?v=4.5.0);src:url(/sites/all/themes/itg/fonts/fontawesome-webfont.eot#iefix&v=4.5.0) format("embedded-opentype"),url(/sites/all/themes/itg/fonts/fontawesome-webfont.woff2?v=4.5.0) format("woff2"),url(/sites/all/themes/itg/fonts/fontawesome-webfont.woff?v=4.5.0) format("woff"),url(/sites/all/themes/itg/fonts/fontawesome-webfont.ttf?v=4.5.0) format("truetype"),url(/sites/all/themes/itg/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular) format("svg");font-weight:400;font-style:normal;}
 .element-invisible {position: absolute!important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); overflow: hidden;   height: 1px;}
 .container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
 @media (min-width: 769px){
@@ -261,7 +267,8 @@ header{margin-bottom:10px;position:relative;z-index:9999;}
 #block-itg-layout-manager-header-block .top-nav ul li{display:inline-block;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(2) a{padding-left:0;}
-#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:8px;height:8px;display:inline-block;position:relative;top:-5px;left:-5px;box-shadow:0 0 0 rgba(214,2,12,.8);border-radius:50%;background:#c00;animation:pulse 1.7s infinite;content:"";}
+/* #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:8px;height:8px;display:inline-block;position:relative;top:-5px;left:-5px;box-shadow:0 0 0 rgba(214,2,12,.8);border-radius:50%;background:#c00;animation:pulse 1.7s infinite;content:"";} */
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width:8px;height:8px;display:inline-block;position:relative;top:-5px;left:-5px;background:url(https://smedia2.intoday.in/indiatoday/livedot.gif) ) no-repeat 0 0;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{float:left;width:185px;text-align:center;height:40px;}
 #block-itg-layout-manager-header-block .logo{width:auto;top:15px;position:absolute;}
 #block-itg-layout-manager-header-block .logo a{display:block;overflow:visible;}
@@ -339,7 +346,7 @@ footer .footer-top .footer-social-link .fa{font-size:24px;font-size:1.5rem;verti
 footer .footer-top ul li{display:inline-block;vertical-align:top;}
 footer .footer-top ul li:nth-child(1) a{padding-left:0;}
 footer .footer-top ul li a{color:#fff;padding:0 15px;height:37px;line-height:37px;border-right:1px solid #111;font-size:16px;display:block;text-transform:uppercase;}
-footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:url(https://akm-img-a-in.tosshub.com/indiatoday/../sites/all/themes/itg/images/sprite.png) 10px 10px no-repeat #000;}
+footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:url(/sites/all/themes/itg/images/sprite.png) 10px 10px no-repeat #000;}
 footer .footer-mid{background:#111;padding:4px 0 10px;text-align:center;}
 footer .footer-bottom{padding:20px 0;}
 footer .footer-bottom a{font-size:12px;}
@@ -540,7 +547,7 @@ header{margin-bottom:10px;position:relative;z-index:9999;}
 #block-itg-layout-manager-header-block .top-nav .main-nav{padding-left:0;line-height:28px;width:65%;margin:0 auto;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li.desktop-hide{display:none;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3){position:relative;}
-#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{content:'';background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) no-repeat 0 -123px;position:absolute;top:-11px;left:20px;width:28px;height:19px;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{content:'';background:url(/sites/all/themes/itg/images/sprite.png) no-repeat 0 -123px;position:absolute;top:-11px;left:20px;width:28px;height:19px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li a{padding:0 35px;font-size:27px;font-size:1.6875rem;text-transform:uppercase;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li a.active,#block-itg-layout-manager-header-block .top-nav .main-nav li a:hover{color:#ffc106;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(2) a{padding-left:0;}
@@ -573,7 +580,7 @@ footer .footer-top .footer-social-link .fa{font-size:24px;font-size:1.5rem;verti
 footer .footer-top ul li{display:inline-block;vertical-align:top;}
 footer .footer-top ul li:nth-child(1) a{padding-left:0;}
 footer .footer-top ul li a{color:#fff;padding:0 15px;height:37px;line-height:37px;border-right:1px solid #111;font-size:16px;display:block;text-transform:uppercase;}
-footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:#000 url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) no-repeat 10px 10px;}
+footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:#000 url(/sites/all/themes/itg/images/sprite.png) no-repeat 10px 10px;}
 footer .footer-mid{background:#111;padding:4px 0 10px;text-align:center;}
 footer .footer-bottom{padding:20px 0;}
 footer .footer-bottom a{font-size:12px;}
@@ -620,7 +627,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .section-ordering p:before{position:absolute;top:18px;left:0;content:'';border-radius:100%;background:#a00606;height:5px;width:5px;}
 .section-ordering img{width:100%;max-height:208px;}
 .video-icon,.trending-videos li .pic{display:inline-block;vertical-align:top;}
-.video-icon:after,.trending-videos li .pic:after{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) no-repeat 0 -87px;content:"";width:18px;height:18px;position:absolute;left:5px;bottom:5px;}
+.video-icon:after,.trending-videos li .pic:after{background:url(/sites/all/themes/itg/images/sprite.png) no-repeat 0 -87px;content:"";width:18px;height:18px;position:absolute;left:5px;bottom:5px;}
 .trending-videos{border:1px solid #ddd;padding-top:10px;}
 .trending-videos .trending-videos-list{overflow:hidden;padding:10px;}
 .trending-videos .trending-videos-list .pic{float:left;margin-right:10px;}
@@ -648,7 +655,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .top-takes-video-container ul .top-takes-video .pic{float:right;margin-left:10px;}
 .top-takes-video-container ul .top-takes-video .title{display:block;overflow:hidden;word-wrap:break-word;font-size:15px;font-size:.9375rem;line-height:20px;color:#111;font-family:"OpenSans-Semibold";}
 .top-takes-video-container ul li.top-takes-video{padding:10px 0;}
-.top-takes-video-container ul li.top-takes-video .pic:after{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
+.top-takes-video-container ul li.top-takes-video .pic:after{background:url(/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
 .top-takes-video-container ul li+li{border-top:1px solid #ddd;}
 .top-takes-video-container ul li:last-child{border-bottom:1px solid #ddd;}
 .watch_right_now_videos_widget .widget-title{position:relative;}
@@ -657,7 +664,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .watch-right-now-video ul .watch-right-now-list .title{display:block;overflow:hidden;word-wrap:break-word;font-size:15px;font-size:.9375rem;line-height:20px;color:#111;font-family:"OpenSans-Semibold";}
 .watch-right-now-video ul li.watch-right-now-list{padding:10px 0;}
 .watch-right-now-video ul li.watch-right-now-list .pic{width:88px;}
-.watch-right-now-video ul li.watch-right-now-list .pic:after{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
+.watch-right-now-video ul li.watch-right-now-list .pic:after{background:url(/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
 .watch-right-now-video ul li.watch-right-now-list+li{border-top:1px solid #ddd;}
 .watch-right-now-video ul li.watch-right-now-list:last-child{border-bottom:1px solid #ddd;}
 .sidebar-second .top-takes-video-container ul li,.sidebar-second .watch-right-now-video ul li{padding:10px 0;}
@@ -1017,14 +1024,6 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 @keyframes pulse{0%{-moz-box-shadow:0 0 0 0 rgba(214,2,12,0.4);box-shadow:0 0 0 0 rgba(214,2,12,0.4);}70%{-moz-box-shadow:0 0 0 6px rgba(214,2,12,0);box-shadow:0 0 0 6px rgba(214,2,12,0);}100%{-moz-box-shadow:0 0 0 0 rgba(214,2,12,0);box-shadow:0 0 0 0 rgba(214,2,12,0);}}
 @-webkit-keyframes pulse{0%{-webkit-box-shadow:0 0 0 0 rgba(214,2,12,0.8);}70%{-webkit-box-shadow:0 0 0 10px rgba(214,2,12,0);}100%{-webkit-box-shadow:0 0 0 0 rgba(214,2,12,0);}}
 @keyframes pulse{0%{-moz-box-shadow:0 0 0 0 rgba(214,2,12,0.4);box-shadow:0 0 0 0 rgba(214,2,12,0.4);}70%{-moz-box-shadow:0 0 0 6px rgba(214,2,12,0);box-shadow:0 0 0 6px rgba(214,2,12,0);}100%{-moz-box-shadow:0 0 0 0 rgba(214,2,12,0);box-shadow:0 0 0 0 rgba(214,2,12,0);}}
-/*! CSS Used fontfaces */
-@font-face{font-family:'OpenSans-Regular';src:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Regular.eot);src:local("/"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Regular.woff) format("woff"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Regular.ttf) format("truetype"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Regular.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'Merriweather-Bold';src:local("/"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/merriweather-latin-700.woff) format("woff"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/Merriweather-Bold.ttf) format("truetype"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/merriweather-latin-700.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'OpenSans-Semibold';src:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Semibold.eot);src:local("/"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Semibold.woff) format("woff"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Semibold.ttf) format("truetype"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Semibold.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'OpenSans-Bold';src:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Bold.eot);src:local("/"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Bold.woff) format("woff"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Bold.ttf) format("truetype"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/OpenSans-Bold.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'flexslider-icon';src:url(https://akm-img-a-in.tosshub.com/sites/all/libraries/flexslider/fonts/flexslider-icon.eot);src:url(https://akm-img-a-in.tosshub.com/sites/all/libraries/flexslider/fonts/flexslider-icon.eot#iefix) format('embedded-opentype'),url(https://akm-img-a-in.tosshub.com/sites/all/libraries/flexslider/fonts/flexslider-icon.woff) format('woff'),url(https://akm-img-a-in.tosshub.com/sites/all/libraries/flexslider/fonts/flexslider-icon.ttf) format('truetype'),url(https://akm-img-a-in.tosshub.com/sites/all/libraries/flexslider/fonts/flexslider-icon.svg#flexslider-icon) format('svg');font-weight:400;font-style:normal;}
-@font-face{font-family:'FontAwesome';src:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/fontawesome-webfont.eot?v=4.5.0);src:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/fontawesome-webfont.eot#iefix&v=4.5.0) format("embedded-opentype"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/fontawesome-webfont.woff2?v=4.5.0) format("woff2"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/fontawesome-webfont.woff?v=4.5.0) format("woff"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/fontawesome-webfont.ttf?v=4.5.0) format("truetype"),url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular) format("svg");font-weight:400;font-style:normal;}
-
 
 </style>
 <?php } ?>
