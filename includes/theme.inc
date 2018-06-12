@@ -1534,7 +1534,7 @@ function theme_get_setting($setting_name, $theme = NULL) {
 function theme_render_template($template_file, $variables) {
   // Extract the variables to a local namespace
   extract($variables, EXTR_SKIP);
-
+p($variables);
   // Start output buffering
   ob_start();
 
