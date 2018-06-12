@@ -409,7 +409,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 }
 .flexslider .flex-direction-nav a{display:none;}
 .flexslider:hover .flex-direction-nav a{display:block;}
-@media only screen and (min-width:767px) and (max-width:768px) {#block-itg-widget-featured-photo-carousel .flex-direction-nav{margin-right: 37px;position: absolute;top: 50%;right: 0;}}
+@media only screen and (min-width:768px) and (max-width:1024px) {#block-itg-widget-featured-photo-carousel .flex-direction-nav{margin-right: 37px;position: absolute;top: 50%;right: 0;}}
 /*! CSS Used from: https://akm-img-a-in.tosshub.com/advagg_css/css__NJyel756rLEgMrcX0avSp1tmtzPDRjgWuLuKOt4HjKU__AZpiH0s0Isf5wf_-jqvbmw7M2t5BcOc3apqK9IQlVCQ__Mh6lcz2SSWurJ9gYhmBP20dJEYie_L2KE7OY4NIu0rg.css?CHAqni8ppjXfj5Tx9GeqOydV9JoUNp34 */
 .container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
 @media (min-width:769px){
