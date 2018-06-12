@@ -110,21 +110,7 @@ function homePageJsonPackagelist_india() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-        $tid_list = array();
-        $tid_list[] = $tid;
-        // code vid=14  end
+        
         $data_news['id'] = "$tid";
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
@@ -321,19 +307,7 @@ function homePageJsonPackagelist_lifestyle() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-        // code vid=14  end
+        
         $data_news['id'] = "$tid";
         $data_news['order'] = "2";
         $data_news['type'] = "packagelist";
@@ -529,20 +503,7 @@ function homePageJsonPackagelist_world() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
         $data_news['id'] = "$tid";
         $data_news['order'] = "3";
         $data_news['type'] = "packagelist";
@@ -899,20 +860,7 @@ function homePageJsonNewslist_india() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
 
         $data_news['id'] = "1206578";
         $data_news['order'] = "2";
@@ -1191,21 +1139,7 @@ function homePageJsonNewslist_world() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
 
         $data_news['id'] = "$tid";
         $data_news['order'] = "4";
@@ -1855,20 +1789,7 @@ function homePageJsonNewslist_lifestyle() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
 
         $data_news['id'] = "$tid";
         $data_news['order'] = "3";
@@ -2214,20 +2135,7 @@ function homePageJsonNewslist_business() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
 
         $data_news['id'] = "$tid";
         $data_news['order'] = "2";
@@ -2427,20 +2335,7 @@ function itg_rapid_home_movies_json() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
         $data_news['id'] = "$tid";
@@ -2719,20 +2614,7 @@ function itg_rapid_home_technology_json() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
         $data_news['id'] = "$tid";
@@ -3011,20 +2893,7 @@ function itg_rapid_home_sports_json() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+       
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
         $data_news['id'] = "$tid";
@@ -3419,20 +3288,7 @@ function itg_rapid_home_karnataka_elections_json() {
     $videolist = array();
     $loop_count = 0; {
         $listcount = 0;
-        // code vid=14  start
-        if ($tid > 0) {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-        } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-        }
-        $term_tree_count = count($term_tree);
-        if ($term_tree_count) {
-            foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
-            }
-        }
-
-        // code vid=14  end
+        
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
         $data_news['id'] = "$tid";
