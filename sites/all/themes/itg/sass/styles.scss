@@ -14548,16 +14548,14 @@ input:disabled.form-submit {
   text-align:left;
 }
 
-.login-wrapper input#edit-forget-me-1 {
-  position: relative;
-  top: -18px;
+.form-item-forget-me{position:relative;}
+#edit-forget-me{position:absolute; top:0;}
 
-}
 .form-item-forget-me .form-checkboxes {
-    position: relative;
-    top: -2px;
     font-family: RobotoSlab-Regular;
 }
 .page-user form .form-type-checkboxes label a {
        color: #2102b1;
 }
+.sign-in-link a, .sign-in-link .left-block{font-family:'Roboto', sans-serif; color:#a6a6a6;}
+.messages--status{width: 100%;box-sizing: border-box;margin: 0;}
