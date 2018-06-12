@@ -125,7 +125,7 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
       $s_date = $_GET['start_date'];
       $e_date = $_GET['end_date'];
       $pageno = ($_GET['pageno'] + 1);
-      $next_page_url = "https://staging-it.indiatodayonline.in/reportapi/auscovery_dashboard_web/ll?start_date=".$s_date."&end_date=".$e_date."&pageno=".$pageno."";
+      $next_page_url = "https://staging-it.indiatodayonline.in/reportapi/auscovery_dashboard_web/it?start_date=".$s_date."&end_date=".$e_date."&pageno=".$pageno."";
       $data['next_page_url'] = "$next_page_url";
   }
   
