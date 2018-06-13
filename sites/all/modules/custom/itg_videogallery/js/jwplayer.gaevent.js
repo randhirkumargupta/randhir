@@ -246,9 +246,10 @@ if(referrer.length > 0 && used_on == 'embed'){
 		itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_external_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]";
 	}
 }
+console.log(" Referrer :" + referrer);
+console.log(" Ads :" + itgdAds);
 itgdAds =  encodeURI(itgdAds)
-return itgdAds;
-	
+return itgdAds;	
 }
 
 function getDomain(url) {
