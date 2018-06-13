@@ -10,37 +10,32 @@
             <div class="fifa-top-story">
                 <?php
                 global $base_url;
-                p($rows);
                 foreach ($rows as $index => $row) {
                   $desc = $row['title'];
                   if (function_exists('itg_common_remove_extra_html')) {
                     $desc = itg_common_remove_extra_html($desc);
                   }
-                  $video_class = "";
-                  if (strtolower($row['type']) == 'videogallery') {
-                    $video_class = 'video-icon';
-                  }
+                  
                     ?>
-                    <div class="fifa-post fifa-post-first <?php echo $video_class; ?>">
-                        <?php if ($row['uri'] != "") { ?>
-                          <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $row['nid']); ?>">
-                              <img src="<?php print image_style_url("magazine_top_story_483x271", $row['uri']); ?>" alt="<?php echo $row['field_story_extra_large_image_alt']; ?>" title="<?php echo $row['field_story_extra_large_image_title']; ?>" />
-                          </a>
+                    <div class="fifa-post fifa-post-first">                        
                         <?php
+                        if ($row['field_story_large_image'] != "") {
+                          print $row['field_story_medium_image'];
                         }
                         else {
-                          print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
+                          print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image483x271.jpg') ."' alt='' title='' />";
                         }
-                        ?>
-                        <h3 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
+                        ?> 
+
+                        <h3 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">                         
                             <?php
                             if (function_exists('itg_common_get_smiley_title')) {
-                              echo l(itg_common_get_smiley_title($row['node_obj'], 0, 68), "node/" . $row['nid'], array("html" => TRUE));
+                              echo l(itg_common_get_smiley_title($row['nid'], 0, 77), "node/" . $row['nid'], array("html" => TRUE));
                             }
                             else {
-                              echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), "node/" . $row['nid']);
+                              echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 70, ".."), "node/" . $row['nid']);
                             }
-                            ?>
+                          ?>
                         </h3>           
                     </div>
             <?php } ?>
