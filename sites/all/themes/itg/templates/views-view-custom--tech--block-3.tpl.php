@@ -5,7 +5,6 @@
 
         <?php
         global $base_url;
-        p($rows);
         foreach ($rows as $index => $row) {
 
           $desc = $row['title'];
