@@ -33,7 +33,7 @@ $hide_widget = '';
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
-  <div id="page" class="fifa-wcup">
+  <div id="page" class="fifa-wcup save-the-taj ">
       <header class="header" id="header" role="banner">
           <section class="header-top">
           
@@ -382,7 +382,7 @@ $hide_widget = '';
                                         </div>               
                                     </div>  
                                 </div>
-                                
+
                               <div class="col-md-12 col-sm-6 itg-layout-260 mhide">
                                   <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Points tally'); ?></strong> )</div>
                                   <div class="itg-widget">
