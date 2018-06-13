@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>News Wiz Quiz 2018 Season 3: Rules, Regulations Governing Registration and Participation</title>
 <meta name="description"
-	content="Know about News Wiz Quiz contest description, rules and regulations governing registration and participation in news wiz quiz season 3. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
+  content="Know about News Wiz Quiz contest description, rules and regulations governing registration and participation in news wiz quiz season 3. Students from class 9 to 12 can take part for the qualifying test for new season of News Wiz!" />
 <meta name="keywords"
-	content="News Wiz, News Wiz Quiz 2018, News Wiz Quiz Season 3, News Wiz third season, News Quiz Rules and Regulations, News Wiz Quiz Registration, News Quiz rules Participation, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
+  content="News Wiz, News Wiz Quiz 2018, News Wiz Quiz Season 3, News Wiz third season, News Quiz Rules and Regulations, News Wiz Quiz Registration, News Quiz rules Participation, Rajdeep Sardesai, Anita, Siddhartha Basu, India Today" />
 <link rel="canonical" href="https://indiatoday.in/newswiz/2018/rule-regulation.php" />
-<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>	
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <!-- Bootstrap -->
 <link href="/newswiz/2018/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -92,24 +92,23 @@ li .video_episode_snippets .video_inner p {padding-left: 5px !important;backgrou
     .paragraph h2 {font-size: 18px;    display: inline;}
    .paragraph h2 a{ color:#181818; text-decoration: underline}
    .right_side h2.celebration-pics{background-size: 370px 56px;background-position: -11px 0px; font-size:16px;}
-   
-   @media screen and (max-width: 800px){
+      @media screen and (max-width: 800px){
     .video_area h2{background-size: 324px 55px;font-size: 12px;}
    }
-</style>   
+</style>  
 
 </head>
 
 <body>
-	<div class="wraper">
-		<!--end new css -->
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="top_advertis">
-						<!-- Ad Slot 1 tag: -->
-						<!-- begin ZEDO for channel:- IT ROS Topnav LB, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
-						<div id="zt_89344_3" style="display:show; height:0px;"> 
+  <div class="wraper">
+    <!--end new css -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="top_advertis">
+            <!-- Ad Slot 1 tag: -->
+            <!-- begin ZEDO for channel:- IT ROS Topnav LB, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
+            <div id="zt_89344_3" style="display:show; height:0px;"> 
   <script id="zt_89344_3" language="javascript"> 
 
 if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
@@ -118,14 +117,14 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 }
  </script> 
 </div>
-						<!-- end ZEDO for channel: - IT ROS Topnav LB, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--end top advertis -->
+            <!-- end ZEDO for channel: - IT ROS Topnav LB, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end top advertis -->
 
-		<div class="container">
+    <div class="container">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="top_advertis"> 
@@ -146,24 +145,24 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   </div>
 </div>
 <?php include('header.html');?>
-		<!--end sponsor -->   
-		<section class="page_area">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad26">
-						<div class="row">
+    <!--end sponsor -->   
+    <section class="page_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pad26">
+            <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="over_area terms-condition">
                                         <h1>News Wiz Quiz 2018: Rules and Regulations</h1>
                                         <div class="terms-outer">
-                                        	<div class="term-lft">
-                                            	<p> <strong>RULES	&amp;	REGULATIONS	GOVERNING	REGISTRATION	AND   PARTICIPATION IN NEWS WIZ</strong></p>
-                          						
+                                          <div class="term-lft">
+                                              <p> <strong>RULES  &amp; REGULATIONS GOVERNING REGISTRATION  AND   PARTICIPATION IN NEWS WIZ</strong></p>
+                                      
                                               <ul>
                           <li><strong><b>I.CONTEST DESCRIPTION:</b></strong> </li>
                           <li><strong>"News Wiz” is a quiz based game show primarily in English language which is being produced by Tree of Knowledge Dot Com Private Limited (“Producer”) for initial exhibition on India Today TV (“Channel”) which channel is owned by TV Today Network Limited.</strong></li>
-                          <li><strong><b>II.	DEFINITIONS:</b></strong></li>
+                          <li><strong><b>II. DEFINITIONS:</b></strong></li>
                           <li><span>1</span> <strong>“Registered Teams”: means the teams taking part in the online test across the country.</strong></li>
                           <li><span>2</span> <strong>“Back-up Participant(s)”: The Backup Teams(s) selected to participate in the preliminary or further rounds of the Competition, only in case any selected Teams(s) do not appear for the shoot at the Studio, for any reason.</strong></li>
                           <li><span>3</span> <strong>“Company/TV Today”: TV Today Network Limited and/or its affiliates, the organizers of the Competition.</strong></li>
@@ -174,7 +173,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                           <li><span>8</span> <strong>“Producer”:  means the producer of the Program which is Tree of Knowledge Dot Com Private Limited.</strong></li>
                           <li><span>9</span> <strong>"Program": The recordings of the Competition in the Studio (including any special/s / Celebrity Special recording).</strong></li>
                           <li><span>10</span> <strong>“Registrant(s)": Any person(s) who participates in the Competition and who </strong></li>
-                          <li><strong>(i)	Is studying in Class 9-12, in the academic year 2018-19; (ii) is a citizen of India residing in India (iii) is of sound mind and health and (iv) enters the Competition in accordance with the Rules and Regulations stated below. Employees of TV Today, of the Producer, of the advertising agency which has been appointed from time to time, and also employees of the sponsors; and members of their immediate family; persons other than Indian nationals, or Indian nationals living out of India, or those who do not qualify under the definition of resident of India as per the Income Tax Act, 1961 or those not conversant in spoken English, are ineligible to enter the Competition.</strong></li>
+                          <li><strong>(i) Is studying in Class 9-12 in India, in the academic year 2018-19; (ii) is a Indian residing in India (iii) is of sound mind and health and (iv) enters the Competition in accordance with the Rules and Regulations stated below. Employees of TV Today, of the Producer, of the advertising agency which has been appointed from time to time, and also employees of the sponsors; and members of their immediate family; persons other than Indian nationals, or Indian nationals living out of India, or those who do not qualify under the definition of resident of India as per the Income Tax Act, 1961 or those not conversant in spoken English, are ineligible to enter the Competition.</strong></li>
                           <li><span>11</span> <strong>“Rules and Regulations”: These Rules and Regulations governing the Competition, stated herein in entirety, as may be amended from time to time by the Producer/Company.</strong></li>
                           <li><span>12</span> <strong>"Special/s": Any Episode/s of the Show specially recorded to celebrate a specific time of year or an event based Episode which will have a different mode of participation and shall be decided at the sole discretion of the Company.</strong></li>
                           <li><span>13</span> <strong>“Schedule”: An Episode or a set of Episodes to be recorded and/or recording dates as pre-determined by the Company.</strong></li>
@@ -191,9 +190,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                           
                           <li><strong><b>III. PROCEDURE TO PARTICIPATE IN THE COMPETITION:</b></strong> </li>
                           <li><strong>Level 1 – Registration and online selection test</strong> </li>
-                          <li><span>1</span> <strong>The quiz is open to school students studying in Class 9-12, in the academic year 2018-19, who would represent their school.</strong></li>
-                          <li><span>2</span> <strong>The students should be citizens of India and residing and studying in a school within the territorial boundaries of India.</strong></li>
-                          <li><span>3</span> <strong>Teams need to fill out the online entry form uploaded on <a href="https://goo.gl/RpNiN7">https://goo.gl/RpNiN7</a> , last date of registration is 14th June 2018.</strong></li>
+                          <li><span>1</span> <strong>The quiz is open to Indian school students studying in Class 9-12 in india, in the academic year 2018-19, who would represent their school.</strong></li>
+                          <li><span>2</span> <strong>The students should be Indians and residing and studying in a school within the territorial boundaries of India.</strong></li>
+                          <li><span>3</span> <strong>Teams need to fill out the online entry form uploaded on <a href="https://goo.gl/RpNiN7">https://goo.gl/RpNiN7</a> , last date of registration is 14st June 2018.</strong></li>
                           
                           <li><span>4</span> <strong>Team members also need to email us recent passport size photographs of each member. Email id: <a href="mailto:newswiz@toknowledge.com">newswiz@toknowledge.com </a> and <a href="mailto:registration@newswiz.in">registration@newswiz.in</a></strong></li>
                           <li><span>5</span> <strong>Each team needs to apply as a team of two. If the composition of the team changes at any stage subsequent to selection, then they would be disqualified.</strong></li>
@@ -231,7 +230,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                           
                             <li><strong><b>GENERAL TERMS AND CONDITIONS</b></strong></li>
                             <li><span>1.</span><strong>Participation in the Competition by sending entries or through any other ground events shall be considered to be acceptance of these Rules and Regulations.</strong></li>
-                            <li><span>2.</span><strong>Competition is open to citizens of India school students studying in Class 9-12, in the academic year 2018-19, who would represent their school and the citizen should be of sound health and mind. Persons must enter the Competition on their own behalf and entry(ies) by proxy will not be accepted.</strong></li>
+                            <li><span>2.</span><strong>Competition is open to Indian school students studying in Class 9-12 in India, in the academic year 2018-19, who would represent their school and the citizen should be of sound health and mind. Persons must enter the Competition on their own behalf and entry(ies) by proxy will not be accepted.</strong></li>
                             <li><span>3.</span><strong>An entry/ies is not transferable.</strong></li>
                             <li><span>4.</span><strong>Employees of the Company, Producer, advertising agency, auditors, company’s contractors which have been appointed from time to time, and also employees of the sponsors; and their respective families; persons other than Indian nationals, or Indian nationals living out of India, or those who do not qualify under the definition of resident of India as per the Income Tax Act, 1961 or those not conversant in spoken English, are ineligible to enter the Competition. Failure to provide proof or affidavit of eligibility, including the proof of name, address and correct date of birth within a reasonable time upon request by the Producer/Company may result in disqualification. The Company also reserves the right to disqualify a Contestant incase a discrepancy is found to exist in the information furnished/provided/stated by the Contestant during the conversation with the Producer/Company or any of the Company’s sub-contractors and vendors in the Competition, and/or in the information stated in the documents furnished by the Contestant.</strong></li>
                             <li><span>5.</span><strong>Each team (together referred to as “Contestant(s)”) hereby represents that he/she is not under any exclusive contracts with any other third party/ agency or is not under any kind of disqualification under law to enter into an agreement with the Company or its affiliates, as the case may be.</strong></li>
@@ -391,18 +390,18 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                                         
                                     </div>
                             </div>
-							
-							<!--end left -->
-							<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-								<?php include('right-side.html'); ?>
-							
-							<!--end right -->
-						</div>
-					</div>
-				</div>
-			</div>
+              
+              <!--end left -->
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <?php include('right-side.html'); ?>
+              
+              <!--end right -->
             </div>
-			<!-- <div class="container">
+          </div>
+        </div>
+      </div>
+            </div>
+      <!-- <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="auth_newswiz"> <span class="img-stroke"></span>
@@ -424,13 +423,13 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
         </div>
       </div>
     </div> -->
-		</section>
-		<!--end page area -->
-		<?php include('footer.html');?>
-		<!--end footer-->
-	</div>
-	<!--end wraper-->
-	<div class="video_pic"><span id="closevideo">X</span>
+    </section>
+    <!--end page area -->
+    <?php include('footer.html');?>
+    <!--end footer-->
+  </div>
+  <!--end wraper-->
+  <div class="video_pic"><span id="closevideo">X</span>
   <iframe id="videoplayer" width="700px" height="550px" frameborder="0" allowfullscreen="" src=""></iframe>
 </div>
 <!-- jQuery Bootstrap--> 
@@ -442,8 +441,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 <script type="text/javascript">
 
     $(document).ready(function(){
-	
-	$('.video_episode_snippets .video_inner a').click(function(e){
+  
+  $('.video_episode_snippets .video_inner a').click(function(e){
  e.preventDefault();
 var lnk = $(this).attr('href');
 $('.video_pic').addClass('showvideo');
@@ -451,42 +450,42 @@ $('#videoplayer').attr('src',lnk+"&autoplay=true");
 })
 
 
-	$('#video_1').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc&autoplay=true');
-	});
-	
-	$('#video_2').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82mib40&autoplay=true');
-	});
-	
-	
-	$('#video_3').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minnk&autoplay=true');
-	});
-	
-	
-	$('#video_4').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minog&autoplay=true');
-	});
-	
-	
-	$('#video_5').click(function(){
-		$('.video_pic').addClass('showvideo');
-		$('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minpc&autoplay=true');
-	});
-	
+  $('#video_1').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4ariq9xxc&autoplay=true');
+  });
+  
+  $('#video_2').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82mib40&autoplay=true');
+  });
+  
+  
+  $('#video_3').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minnk&autoplay=true');
+  });
+  
+  
+  $('#video_4').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minog&autoplay=true');
+  });
+  
+  
+  $('#video_5').click(function(){
+    $('.video_pic').addClass('showvideo');
+    $('#videoplayer').attr('src','http://indiatoday.intoday.in/embed/j4e82minpc&autoplay=true');
+  });
+  
 
-	$('#closevideo').click(function(){
-		$('.video_pic').removeClass('showvideo');
-		$('#videoplayer').attr('src','');
-	});
-	
-	
-	
+  $('#closevideo').click(function(){
+    $('.video_pic').removeClass('showvideo');
+    $('#videoplayer').attr('src','');
+  });
+  
+  
+  
         $("select").change(function(){
             $(this).find("option:selected").each(function(){
                 if($(this).attr("value")=="group-a"){
@@ -518,8 +517,8 @@ $(".navLink").slideToggle("slow")
 });
 var win_width=$(window).width();
 if(win_width<767){
-	
-	$(".navLink ul li.flashLinkBtn").click(function(){
+  
+  $(".navLink ul li.flashLinkBtn").click(function(){
 $(".navLink ul li ul.flashLinkMenu").toggleClass("flashToggle");
 });
 }
@@ -605,13 +604,13 @@ $(".navLink ul li ul.flashLinkMenu").toggleClass("flashToggle");
   });
   
 });
-</script>
-	<script>
-		$(document).ready(function() {
-			$('.carousel').carousel({
-				interval : 0
-			})
-		})
-	</script>
+</script> 
+  <script>
+    $(document).ready(function() {
+      $('.carousel').carousel({
+        interval : 0
+      })
+    })
+  </script>
 </body>
 </html>
