@@ -199,7 +199,7 @@ $hide_widget = '';
                         <?php if (isset($widget_data['itg-block-112']['widget_name']) || $theme == 'itgadmin') { ?>            
                           <div class="row itg-layout-225">
                               <div class="col-md-12 mt-50">
-                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Top Stories for fifa'); ?></strong> )</div>
+                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Top Stories for tajtak'); ?></strong> )</div>
                                   <div class="">
                                       <div class="itg-widget">
                                           <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -223,7 +223,7 @@ $hide_widget = '';
                                                         print $widget_data['itg-block-112']['widget'];
                                                       }
                                                       else {
-                                                        print '<div class="widget-placeholder"><span>' . t('Top Stories for fifa') . '</span></div>';
+                                                        print '<div class="widget-placeholder"><span>' . t('Top Stories for tajtak') . '</span></div>';
                                                       }
                                                       ?>
                                                   </div>
