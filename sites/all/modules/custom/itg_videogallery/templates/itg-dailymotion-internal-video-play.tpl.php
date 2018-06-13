@@ -24,7 +24,8 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 
 <script type="text/javascript">
   function loadplayerjw() {
-var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+//var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+var player_dfp = get_dfp_tags_script(<?php print $used_on; ?>, <?php print $external_side; ?>);
       jwplayer('videoplayer').setup({
           playlist: [{
                   title: "",

@@ -45,7 +45,8 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 <script type="text/javascript">
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
   function loadplayerjw() {
-      var player_dfp = "<?php echo urlencode($data_video['dfp_tags']); ?>";
+      //var player_dfp = "<?php echo urlencode($data_video['dfp_tags']); ?>";
+      var player_dfp = get_dfp_tags_script(<?php print $used_on; ?>, <?php print $external_side; ?>);
       jwplayer('videoplayer').setup({
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
