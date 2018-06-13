@@ -10,6 +10,7 @@
             <div class="fifa-top-story">
                 <?php
                 global $base_url;
+                p($rows);
                 foreach ($rows as $index => $row) {
                   $desc = $row['title'];
                   if (function_exists('itg_common_remove_extra_html')) {
