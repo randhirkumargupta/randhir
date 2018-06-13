@@ -14,6 +14,8 @@ $pub_date = get_content_publish_date($nid);
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
 }
+$node_url_alias = drupal_get_path_alias('node/'.$nid);
+$node_url = FRONT_URL.$node_url_alias;
 ?>
 <?php
 $width = 622;
@@ -51,7 +53,7 @@ function deferjw(method) {
   
   function loadplayerjw() {
       //var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
-      var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>");
+      var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>", "<?php print $node_url; ?>");
       jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
       jwplayer('videoplayer').setup({
           playlist: [{
