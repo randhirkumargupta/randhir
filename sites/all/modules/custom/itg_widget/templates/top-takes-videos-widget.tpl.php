@@ -6,24 +6,24 @@ if($is_fron_page){
   $data_tb_region_item = 'data-tb-region-item';  
 }
 ?>
-  <div class="top-takes-video-container <?php if (!empty($is_fron_page)) { print $home_top_takes; }  ?>">
+  <div class="top-takes-videos-flex top-takes-video-container <?php if (!empty($is_fron_page)) { print $home_top_takes; }  ?>">
     <?php    
     if (empty($is_fron_page)) {
       ?><h3><span><?php print t("Top Takes") ?></span></h3><?php } ?>
     <ul>  
         <?php foreach ($data as $video_key => $video_data) { ?>
         <li <?php echo $data_tb_region_item;?> class="top-takes-video top-takes-list top-takes-<?php echo $video_key ?>">
-            <?php if (!empty($video_data['esi_file_uri'])) { ?>
+            <?php if (!empty($video_data['mi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">         
-              <?php //$extra_large_image_url = image_style_url("widget_very_small", $video_data['esi_file_uri']); ?>
-              <?php print theme('image_style', array('path' => $video_data['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $video_data['field_story_extra_small_image_alt'], 'title' => $video_data['field_story_extra_small_image_title'])); ?>
+              <?php //$extra_large_image_url = image_style_url("widget_very_small", $video_data['mi_file_uri']); ?>
+              <?php print theme('image', array('path' => $video_data['mi_file_uri'], 'alt' => $video_data['field_story_medium_image_alt'], 'title' => $video_data['field_story_medium_image_title'])); ?>
             </a>
             <?php
           }
           else {
             ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-              <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="" title="" />
+              <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>
@@ -34,11 +34,11 @@ if($is_fron_page){
             }
             else {
               echo l(mb_strimwidth($video_data['title'], 0, 140, ".."), "node/" . $video_data['nid'] , array("attributes" => array("title" => $video_data['title']))); 
-            }
-            
+            }            
             ?>
             </p>
         <?php endif; ?>
+        <span class="videoicon mobilehide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($video_data['field_video_duration_value'])) { echo $video_data['field_video_duration_value']; } ?></span>
         </li>
   <?php } ?>
     </ul>
