@@ -249,7 +249,7 @@ $config = array(
     // Register your application to get an API key here:
     //  http://twitter.com/oauth_clients
     'twitter' => array(
-        'authtwitter:Twitter',
+        'authtwitter:ITGCMSstage',
         'key' => 'NMzlQqEyiQPptdz98fjMB2UDg',
         'secret' => 'dkNUJCwZG3y9ruWRaYnaCHk6aCGvn8vQV3MNpDHS20BcV9Nind',
 
