@@ -50,7 +50,8 @@ function deferjw(method) {
 <script type="text/javascript">
   
   function loadplayerjw() {
-      var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+      //var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+      var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>");
       jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
       jwplayer('videoplayer').setup({
           playlist: [{
