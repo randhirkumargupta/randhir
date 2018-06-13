@@ -6003,7 +6003,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
     // load our view and pass it
-    $view = views_get_view('photo_landing_slider');
+    $view = views_get_view_result('photo_landing_slider');
     $view->init();
     // you can change this to be the name of the display you want
     // to use
