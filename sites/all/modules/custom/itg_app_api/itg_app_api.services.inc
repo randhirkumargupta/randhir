@@ -6002,7 +6002,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    p(node_load(989187));
+    p(node_load(1210673));
     /*// load our view and pass it
     $view = views_get_view('photo_landing_slider');
     $view->init();
