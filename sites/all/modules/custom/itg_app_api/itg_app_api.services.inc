@@ -6007,7 +6007,7 @@ function itg_rapid_api_testing($token) {
     $view->init();
     // you can change this to be the name of the display you want
     // to use
-    //$view->set_display('block');
+    $view->set_display('block');
     $view->set_arguments(array(1144243));
     p($view);
     return $view->render();
