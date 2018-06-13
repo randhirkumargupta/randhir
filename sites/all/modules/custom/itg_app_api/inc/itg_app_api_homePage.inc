@@ -61,16 +61,16 @@ function homePageJson() {
     $data['status_message'] = "customised_message";
 
     //$data['data'][0] = $homePageJsonWidget_2;     // karnataka_elections tally   
-    $data['data'][0] = $data_topstories;
-    //$data['data'][2] = $homePageJsonWidget_1; // CWG       
-    $data['data'][1] = $itg_rapid_home_movies_json;
+    $data['data'][0] = $homePageJsonWidget_1; // fifa   
+    $data['data'][1] = $data_topstories;        
+    $data['data'][2] = $itg_rapid_home_movies_json;
     //$data['data'][2] = $karnataka_elections_json; // karnataka_elections
-    $data['data'][2] = $itg_rapid_home_technology_json;
-    $data['data'][3] = $data_news_india;
-    $data['data'][4] = $itg_rapid_home_sports_json;
-    $data['data'][5] = $data_news_lifestyle;
-    $data['data'][6] = $data_news_world;
-    $data['data'][7] = $data_magazine;
+    $data['data'][3] = $itg_rapid_home_technology_json;
+    $data['data'][4] = $data_news_india;
+    $data['data'][5] = $itg_rapid_home_sports_json;
+    $data['data'][6] = $data_news_lifestyle;
+    $data['data'][7] = $data_news_world;
+    $data['data'][8] = $data_magazine;
     $data['cube_widget'] = $cube_widget; // cube widget
     return $data;
 }
@@ -2084,11 +2084,14 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_magazine'] = $comman;
 
     $n_widget[0]['type'] = "1";
-    $n_widget[0]['type_label'] = "cwgtally";
-    $n_widget[0]['tilte'] = "CWG 2018 MEDAL TALLY";
-    $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_rhs.html";
-    $n_widget[0]['extended_url'] = "https://assets-indiatoday.sportz.io/cwg/medals_tally_page.html";
+    $n_widget[0]['type_label'] = "fifawc";
+    $n_widget[0]['tilte'] = "FIFA FIXTURES";
+    $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/multisport/horizontalWidget/fixtures-ol.html";
+    $n_widget[0]['extended_url'] = "https://smedia2.intoday.in/app/fifa-2018/teams.html";
     $n_widget[0]['action'] = "webview";
+    $n_widget[0]['isScalable'] = "0";
+    $n_widget[0]['height_ratio'] = "webview";
+    $n_widget[0]['height'] = "132";
 
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
