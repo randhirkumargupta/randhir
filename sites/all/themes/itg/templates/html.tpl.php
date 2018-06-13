@@ -817,7 +817,7 @@ header{margin-bottom:15px;}
 #block-itg-layout-manager-header-block .top-nav ul li a{text-decoration:none;text-transform:uppercase;font-size:15px;font-weight:500;padding-right:10px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav{padding-left:0;float:none;width:100%;line-height:20px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li a{font-size:15px;}
-#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{top:-1px;left:-5px;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{top: 4px;left: -4px; width: 13px; height: 13px;  background-size: 100%;}
 #block-itg-layout-manager-header-block .navigation{background:#a00606;display:none;margin-top:0;}
 #block-itg-layout-manager-header-block .navigation .container{position:relative;}
 #block-itg-layout-manager-header-block .navigation .menu{zoom:1;margin:0;padding-left:0;padding-right:0;}
