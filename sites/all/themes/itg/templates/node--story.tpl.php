@@ -1,6 +1,6 @@
 <script type="text/javascript">var __at__ = 0;</script>
 <?php
-global $base_url, $user, $theme_key;;
+global $base_url, $user, $theme_key;
 if (!empty($content)):
   // get related content associated with story
   $related_content = $content['related_content'];

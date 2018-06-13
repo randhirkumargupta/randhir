@@ -1,5 +1,5 @@
 <?php
-global $base_url, $user;
+global $base_url, $user, $theme_key;
 if (!empty($content)):
   // get related content associated with story
   $related_content = $content['related_content'];
