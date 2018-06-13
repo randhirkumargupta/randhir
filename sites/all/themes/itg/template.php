@@ -824,7 +824,8 @@ function itg_link($variables) {
  * @param array $variables
  * @return string
  */
-function itg_js_alter(&$javascript) {  
+function itg_js_alter(&$javascript) {
+  //print_r($javascript); die; 
   unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
