@@ -1024,8 +1024,8 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 </style>
 <?php } ?>
 <?php if($front_page) : 
-//$jquery_js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); 
-$js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/1.9/jquery.min.js'); 
+$js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); 
+//$jquery_js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/1.9/jquery.min.js'); 
 ?>
 <!-- <script type="text/javascript" src="<?php print $jquery_js_path; ?>"></script> -->
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
