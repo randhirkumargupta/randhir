@@ -117,6 +117,7 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
                          <td><b><?php print 'Schedule Time'; ?></b></td>
                          <td><b><?php print 'Days'; ?></b></td>
                          <td><b><?php print 'Program Name'; ?></b></td>
+                         <td><b><?php print 'Channel'; ?></b></td>
                          <td><b><?php print 'Program Date'; ?></b></td>
                        </tr>
                     <tbody>
@@ -126,6 +127,7 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
                                 <td><?php print $val1['time'].' (IST)'; ?></td>
                                 <td><?php print $days_array[strtolower($val1['day'])]; ?></td>
                                 <td><?php print ucfirst($val1['program']); ?></td>
+                                <td><?php print ucfirst($val1['channel']); ?></td>
                                 <td><?php print ucfirst($val1['program date']); ?></td>
                             </tr>
 
