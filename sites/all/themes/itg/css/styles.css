@@ -13637,4 +13637,7 @@ input:disabled.form-submit {
   box-sizing: border-box;
   margin: 0; }
 
+#upass .form-item-forget-me {
+  display: inline; }
+
 /*# sourceMappingURL=styles.css.map */
