@@ -4,7 +4,7 @@
  * Inc file contains the functions
  */
 function tv_schedule_listing() {
-
+  $Channel_name = array('Indiatoday_tvschedule.csv'=>'India Today', 'aajtak_tvschedule.csv'=>'Aajtak', 'Dilliaajtak_tvschedule.csv'=>'Dilli Aajtak', 'tez_tvschedule.csv'=>'Tez');
   //getting value from Url
   if (function_exists('mongodb')) {
     $db = mongodb();
@@ -54,6 +54,7 @@ function tv_schedule_listing() {
           $search[$key]['time'] = $document["time"];
           $search[$key]['day'] = $document["day"];
           $search[$key]['program'] = $document["program"];
+          $search[$key]['channel'] = $Channel_name[$document["filetype"]];
           $search[$key]['program date'] = $document["program date"];
           $key++;
           $search_counter++;
