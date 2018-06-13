@@ -106,7 +106,7 @@ class sspmod_authtwitter_Auth_Source_Twitter extends SimpleSAML_Auth_Source {
 			$accessToken->key . "] with the secret [" . $accessToken->secret . "]");
 			
 		$userdata = $consumer->getUserInfo('https://api.twitter.com/1.1/account/verify_credentials.json', $accessToken);
-		
+		echo '<pre>';print_r($userdata);die;
 		if (!isset($userdata['id_str']) || !isset($userdata['screen_name'])) {
 			throw new SimpleSAML_Error_AuthSource($this->authId, 'Authentication error: id_str and screen_name not set.');
 		}
