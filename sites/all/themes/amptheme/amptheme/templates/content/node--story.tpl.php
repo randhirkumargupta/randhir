@@ -1,5 +1,5 @@
 <?php
-global $base_url, $user, $theme_key;
+global $base_url, $user;
 if (!empty($content)):
   // get related content associated with story
   $related_content = $content['related_content'];
@@ -74,31 +74,8 @@ if (!empty($content)):
   $node_image_alt = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
   $node_image_title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
   $source_type_arr = array('PTI' , 'IANS', 'ANI');
-  // Rich Snippet for Story
-$mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
-if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
-} else {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
-}
-$modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
-$description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
-$story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
-$meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
-$description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
-$logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
   ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>" itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
-    <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
-    <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
-		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
-			<meta itemprop="url" content="<?php print $logo; ?>">
-			<meta itemprop="width" content="600">
-			<meta itemprop="height" content="60">
-		</div>
-		<meta itemprop="name" content="India Today">
-		<link itemprop="sameAs" href="https://www.indiatoday.in">
-	</div>
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
     <div class='<?php print $classes ?>'>      
       
       <?php
@@ -108,12 +85,12 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       }
       if (!empty($get_develop_story_status)) {
         ?>
-      <h1 itemprop="headline" title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
+      <h1  title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
           <?php
         }
         else {
           ?>
-        <h1 itemprop="headline" title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
+        <h1 title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
       <?php } ?>
       <?php
       //code for Associate lead
@@ -162,20 +139,19 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       </div>
                       <div class="profile-detail">
                           <ul class="profile-byline">
-							<span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
                               <?php
                               if (is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
                                 echo '<li><ul>';
                                 foreach ($byline_id_mobile as $mobile_key => $mobile_val) {
                                   if (!empty($mobile_val['title'])) {
                                     ?>	 
-                                    <li class="title" itemprop="name"><?php if (!empty($mobile_val['title'])) {
+                                    <li class="title"><?php if (!empty($mobile_val['title'])) {
                             print t($mobile_val['title']);
                           } ?></li>
                                       <?php
                                       }
                                     }
-                                    echo '</ul></li></span>';
+                                    echo '</ul></li>';
                                   }
                                   if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
                                     ?>
@@ -190,7 +166,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                                     <?php
                                   }
                                   ?>
-                              <li itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> <span itemprop="dateModified" content="<?php print $modified_date; ?>">UPDATED:</span> 
+                              <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED: 
                                   <?php
                                   if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                                     print date('F j, Y H:i', $node->created);
@@ -227,20 +203,19 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                     </div>
                     <div class="profile-detail">
                         <ul class="profile-byline">
-						<span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
                             <?php
                             if (is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
                               echo '<li><ul>';
                               foreach ($byline_id_mobile as $mobile_key => $mobile_val) {
                                 if (!empty($mobile_val['title'])) {
                                   ?>	 
-                                  <li class="title" itemprop="name"><?php if (!empty($mobile_val['title'])) {
+                                  <li class="title"><?php if (!empty($mobile_val['title'])) {
                           print t($mobile_val['title']);
                         } ?></li>
                                 <?php
                                 }
                               }
-                              echo '</ul></li></span>';
+                              echo '</ul></li>';
                             }
                             if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
                               ?>
@@ -333,7 +308,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }*/
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
-                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
+                <div class="stryimg" ><?php
                 
                   if (empty($widget_data)) {
                     $story_image = '';
@@ -344,7 +319,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       $file_uri = file_create_url($story_image);
                     }
                     if (isset($file_uri)) {
-                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '" itemprop = "contentUrl"><div fallback>offline</div></amp-img>';
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
 				    }
                   }
                   else {
@@ -355,7 +330,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       $file_uri = file_create_url($story_image);
                     }
                     if (isset($file_uri)) {
-                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '" itemprop = "contentUrl"><div fallback>offline</div></amp-img>'
+                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
                     }
                     ?>        
@@ -388,7 +363,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 else {
                   ?>
 
-                  <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
+                  <div class="stryimg"><?php
                      
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
@@ -398,7 +373,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                                     //<i class="fa fa-camera"></i></span>';
                     }
                     if (isset($file_uri)) {
-                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '" itemprop = "contentUrl"><div fallback>offline</div></amp-img>';
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node_image_alt.'" title="'.$node_image_title.'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
                     }
                     
                     if (!empty($getimagetags)) {
@@ -432,9 +407,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                   <?php } }?>     
 
 
-					<meta itemprop="url" content="<?php print $file_uri; ?>">
-					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
-					<div class="image-alt" itemprop="description"><?php print $node_image_alt; ?></div>
+
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
                   <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
@@ -491,7 +464,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 
                 </div>                            
               </div>
-              <div class="description" itemprop="articleBody">
+              <div class="description">
                 <?php
                 if(function_exists('itg_custom_amp_body_filter')) {
                 $story_body = itg_custom_amp_body_filter($node->body['und'][0]['value']);
