@@ -280,14 +280,14 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
     // menu for update config_update_status json
-    $items['admin/api-configuration/rest-api/popular-search-tv-json'] = array(
+   /* $items['admin/api-configuration/rest-api/popular-search-tv-json'] = array(
         'title' => 'Update popular_search_tv json',
         'description' => 'Update popular_search_tv json',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('popular_search_tv_json'),
         'access arguments' => array('itg mobile feed'),
         'type' => MENU_NORMAL_ITEM,
-    );
+    );*/
 
     return $items;
 }
@@ -3037,7 +3037,7 @@ function hamburger_menu_tv_json() {
  *
  * @return type
  */
-function popular_search_tv_json() {
+/*function popular_search_tv_json() {
     $form = array();
 
     $form['itg_rapid_api_hamburger_menu_tv'] = array(
@@ -3048,4 +3048,4 @@ function popular_search_tv_json() {
     );
 
     return system_settings_form($form);
-}
+}*/
