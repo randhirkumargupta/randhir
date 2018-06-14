@@ -32,7 +32,7 @@ $config = array(
      * SimpleSAMLphp will attempt to create this directory if it doesn't exist.
      */
     'tempdir' => '/tmp/simplesaml',
-
+	'application' => array('baseURL' => 'https://staging-sso.indiatodayonline.in'),
 
     /*
      * If you enable this option, SimpleSAMLphp will log all sent and received messages
@@ -345,7 +345,7 @@ $config = array(
      * through https. If the user can access the service through
      * both http and https, this must be set to FALSE.
      */
-    'session.cookie.secure' => true,
+    'session.cookie.secure' => false,
 
     /*
      * Enable secure POST from HTTPS to HTTP.
@@ -358,14 +358,14 @@ $config = array(
      * https://idp.example.org/ssp/, then
      * http://idp.example.org/ssp/module.php/core/postredirect.php must be accessible.
      */
-    'enable.http_post' => true,
+    'enable.http_post' => false,
 
     /*
      * Options to override the default settings for php sessions.
      */
     'session.phpsession.cookiename' => null,
     'session.phpsession.savepath' => null,
-    'session.phpsession.httponly' => false,
+    'session.phpsession.httponly' => true,
 
     /*
      * Option to override the default settings for the auth token cookie
