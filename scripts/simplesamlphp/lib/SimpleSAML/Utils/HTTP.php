@@ -72,7 +72,7 @@ class HTTP
      * @author Olav Morken, UNINETT AS <olav.morken@uninett.no>
      */
     private static function getServerHTTPS()
-    {
+    {var_dump($_SERVER);die;
         if (!array_key_exists('HTTPS', $_SERVER)) {
             // not an https-request
             return false;
