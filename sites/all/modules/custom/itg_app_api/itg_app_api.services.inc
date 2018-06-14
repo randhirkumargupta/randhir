@@ -2828,7 +2828,7 @@ function itg_app_api_resource() {
             ),
         ),
          // popular_search_tv custom resource declaration.....
-        'popular_search_tv' => array(
+      /*  'popular_search_tv' => array(
             'operations' => array(
                 'retrieve' => array(
                     'help' => 'Retrieves popular_search_tv schemes info.',
@@ -2853,7 +2853,7 @@ function itg_app_api_resource() {
                     ),
                 ),
             ),
-        ),
+        ),*/
     );
 
     return $api;
@@ -7701,6 +7701,7 @@ function itg_rapid_api_hamburger_menu_tv($token) {
  *
  * @return array - The processed information array.
  */
+/*
 function itg_rapid_api_popular_search_tv($token) {
     $redis_key = "itg_rapid_api_popular_search_tv";
     $result_get = getRedis($redis_key);
@@ -7718,4 +7719,6 @@ function itg_rapid_api_popular_search_tv($token) {
 
     return $return_obj;
 }
+ 
+ */
 
