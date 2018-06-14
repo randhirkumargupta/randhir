@@ -177,19 +177,16 @@ function homePageJson_dev() {
         $data['data'] = array();
         $data_final['data'] = array();
     }
-    $cube_widget = array();
-    $widget_detail = array();
-    $cube_widget['show_widget'] = "1";
-    $widget_detail[0]['type'] = "webview";
-    $widget_detail[0]['title'] = "Scorecard";
-    $widget_detail[0]['type_label'] = "scorecard";
-    $widget_detail[0]['width'] = "130";
-    $widget_detail[0]['height'] = "119";
-    $widget_detail[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/cube_ipl98.html";
-    $widget_detail[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scorecard_iplwidget_detail.html";
-    $cube_widget['widget_detail'] = $widget_detail;
-
-    $data_final['cube_widget'] = $cube_widget;
+    $cube_widget = array();    
+    $widget_detail = array();    
+    $cube_widget_config_options = fetchitg_app_master_config_internal_live('cube_widget_config_options');
+    $cube_data = "";
+    $cube_data = variable_get('cube_widget');
+    if ($cube_widget_config_options == 1 && $cube_data !="") {
+        $cube_widget_json = variable_get('cube_widget');
+        $cube_widget = json_decode($cube_widget_json, TRUE);
+        $data_final['cube_widget'] = $cube_widget;
+    }
 
     return $data_final;
 }
