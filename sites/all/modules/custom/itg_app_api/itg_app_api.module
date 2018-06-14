@@ -3040,7 +3040,7 @@ function hamburger_menu_tv_json() {
 function popular_search_tv_json() {
     $form = array();
 
-    $form['itg_rapid_api_hamburger_menu_tv'] = array(
+    $form['itg_rapid_api_popular_search_tv'] = array(
         '#type' => 'textarea',
         '#title' => t('popular search tv'),
         '#default_value' => variable_get('itg_rapid_api_popular_search_tv'),
