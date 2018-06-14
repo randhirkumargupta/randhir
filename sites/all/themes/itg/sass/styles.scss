@@ -14559,6 +14559,11 @@ ul.pron-cons-img li img {
     }
 }
 
+input:disabled.form-submit {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  cursor: no-drop;
+}
 
 /* css add by arun/itg */
 
@@ -14627,6 +14632,8 @@ ul.pron-cons-img li img {
     font-weight: 700;
     color: #bb0a0a;
     position: relative;
+    top: -2px;
+    font-family: RobotoSlab-Regular;
 }
 
 .other_video_category h3 span {

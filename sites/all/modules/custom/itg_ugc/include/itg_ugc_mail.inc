@@ -27,7 +27,7 @@ function itg_ugc_get_mail_content($uname, $type, $status, $to) {
       'body' => $mail_content,
       'subject' => $mail_subject,
   );
-  $mail = drupal_mail('itg_ugc_user', 'send_' . $status . '_mail_to_ugc_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_ugc_user', 'send_' . $status . '_mail_to_ugc_user', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   if ($mail['result']) {
     return TRUE;
   } else {

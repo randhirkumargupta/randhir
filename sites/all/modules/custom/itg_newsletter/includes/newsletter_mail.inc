@@ -105,7 +105,7 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     'subject' => t('India Today Newsletter').' | ' . $template_node->field_news_title[LANGUAGE_NONE][0]['value'],
     );
 
-    $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    $mail = drupal_mail('itg_newsletter', 'send_newsletter', $user_email_str, language_default(), $params, 'care@intoday.in', TRUE);
    */
 
   if ($mail_scehdule['TYPE'] == 'success') {

@@ -35,11 +35,11 @@ function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $pro
   if ($product_count == 'inventory_status') {
     $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
     $user_email_ids = implode(", ", $user_emails[0]);
-//    $user_email_ids = 'gourav.walia@kelltontech.com';
+
   } else { 
     $user_emails = itg_loyalty_reward_product_expiration_user_emails('association',$node_user);
     $user_email_ids = implode(", ", $user_emails);
-//    $user_email_ids = 'gourav.walia@kelltontech.com';
+
   }
   // Array of email subject and body 
   $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
@@ -49,7 +49,7 @@ function itg_loyalty_reward_send_mail_product_expiration($nid ,$node_user , $pro
   );
   // for code email
   // Send product expiration notification mail
-  $mail = drupal_mail('itg_loyalty_reward_product_expiration', 'itg_loyalty_reward', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $mail = drupal_mail('itg_loyalty_reward_product_expiration', 'itg_loyalty_reward', $user_email_ids, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
 // Update mail status after sending notification 
   if ($mail['result']) {
     db_update('itg_loyalty_reward_cron')

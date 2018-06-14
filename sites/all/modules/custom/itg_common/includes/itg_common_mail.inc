@@ -32,7 +32,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       watchdog('Refer_a_friend_mail', '<pre>'.print_r($to, true).'</pre>');
       
       try {
-      $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
       } catch (Exception $e) {
       watchdog('Refer Friend Error', $e->getMessage());
       }
@@ -44,7 +44,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       'subject' => $subject,
     );
     watchdog('Personalization Mail', '<pre>'.print_r($params, true).'</pre>');
-    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   }
   
   else {
@@ -61,7 +61,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       'subject' => $mail_subject,
     );
     watchdog('Expiration point mail Result', '<pre>'.print_r($params, true).'</pre>');
-    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   }
   
   if ($mail['result']) {

@@ -500,8 +500,8 @@ function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
   } else {
    $to = $user->mail;
   }
-//  $to = 'gourav.walia@kelltontech.com';
-  $mail = drupal_mail('itg_loyalty_reward_redeem_points', 'itg_redeem_points_mail', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+
+  $mail = drupal_mail('itg_loyalty_reward_redeem_points', 'itg_redeem_points_mail', $to, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
   if ($mail['result']) {
     return TRUE;
   }

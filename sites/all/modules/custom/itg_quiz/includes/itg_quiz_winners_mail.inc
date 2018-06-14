@@ -30,7 +30,7 @@ function itg_quiz_winners_mail_list() {
       'body' => $mail_contents,
       'subject' => $mail_subject,
     );
-    $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    $mail = drupal_mail('itg_quiz_winners_list', 'send_mail_to_winners', $user_email_str, language_default(), $params, variable_get('site_mail', 'care@intoday.in'), TRUE);
     if ($mail['result']) {
       drupal_set_message(t('Mail has been sent successfully.'));
       drupal_goto('quiz-user-list/'.$nid);

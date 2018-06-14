@@ -951,7 +951,7 @@ function itg_category_manager_entity_update($entity , $type) {
     $rid = array(SEO);
     $user_email = get_email_by_roll($rid);
     $to = implode(",", $user_email);
-    $mail = drupal_mail('itg_category_manager_seo_team' , 'send_mail_to_seo' , $to , language_default() , $params , 'haripal.rao@kelltontech.com' , TRUE);
+    $mail = drupal_mail('itg_category_manager_seo_team' , 'send_mail_to_seo' , $to , language_default() , $params , variable_get('site_mail', 'care@intoday.in') , TRUE);
     if ($mail['result']) {
       return TRUE;
     }
