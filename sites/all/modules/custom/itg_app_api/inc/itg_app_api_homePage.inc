@@ -2083,7 +2083,7 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman;
 
-    $n_widget[0]['type'] = "3";
+    $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "fifawc";
     $n_widget[0]['tilte'] = "FIFA FIXTURES";
     $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/multisport/horizontalWidget/fixtures-ol.html";
