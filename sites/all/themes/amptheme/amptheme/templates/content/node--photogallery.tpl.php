@@ -48,7 +48,7 @@
               <figure>
                   <div class="fixed-height-container">
                       <!-- <amp-img src="<?php //print image_style_url("photo_slider_753x543", $file->uri); ?>"-->
-                      <amp-img src="<?php print $file->uri; ?>"
+                      <amp-img src="https://akm-img-a-in.tosshub.com/indiatoday/styles/photo_slider_753x543/public/images/photogallery/201806/Collag_Thumb_1_IT_1528760545658.jpg?NDDrG7T8AGwwujEvJ4AbS3yjm.cRD.st"
                                
                                 layout="fill"><div fallback>offline</div>
                       </amp-img>   
