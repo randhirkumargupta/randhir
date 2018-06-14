@@ -32,7 +32,6 @@ $config = array(
      * SimpleSAMLphp will attempt to create this directory if it doesn't exist.
      */
     'tempdir' => '/tmp/simplesaml',
-	'application' => array('baseURL' => 'https://staging-sso.indiatodayonline.in'),
 
     /*
      * If you enable this option, SimpleSAMLphp will log all sent and received messages
