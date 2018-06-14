@@ -270,6 +270,15 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
         'file' => 'inc/itg_app_api_homePage.inc',
     );
+    // menu for update config_update_status json
+    $items['admin/api-configuration/rest-api/hamburger-menu-tv-json'] = array(
+        'title' => 'Update hamburger_menu_tv json',
+        'description' => 'Update hamburger_menu_tv json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('hamburger_menu_tv_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
@@ -2995,4 +3004,21 @@ function fba_update_data_search($nid, $source = 0) {
     } else {
         return $result;
     }
+}
+/**
+ * hamburger_menu_tv_json form decalation
+ *
+ * @return type
+ */
+function hamburger_menu_tv_json() {
+    $form = array();
+
+    $form['itg_rapid_api_hamburger_menu_tv'] = array(
+        '#type' => 'textarea',
+        '#title' => t('hamburger menu tv'),
+        '#default_value' => variable_get('itg_rapid_api_hamburger_menu_tv'),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
 }

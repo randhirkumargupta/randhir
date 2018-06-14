@@ -326,6 +326,14 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
     );
+    $items['itg-content-configure'] = array(
+      'title' => t('Manage Sponsor Content on Home Top stories'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_sponsor_content_configuration'),
+      'access arguments' => array('administer itg_term settings'),
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_custom_variables.inc',
+    );
   return $items;
 }
 
@@ -664,6 +672,14 @@ function itg_widget_block_view($delta = '') {
             $info['order'] = 'ASC';
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
             $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
+            drupal_add_js('jQuery(document).ready(function() {
+            jQuery(".trending-videos-flex").flexslider({
+            animation: "slide",
+            prevText: "",
+            nextText: "",
+            });
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
             $data = itg_widget_get_widget_data_data($info);
             $block['content'] = theme("trending_videos_widget", array("data" => $data));
             break;
@@ -690,6 +706,14 @@ function itg_widget_block_view($delta = '') {
             $info['order'] = 'ASC';
             $info['max_limit'] = TOP_TAKES_MAX_RANGE;
             $info['min_limit'] = TOP_TAKES_MIN_RANGE;
+            drupal_add_js('jQuery(document).ready(function() {
+            jQuery(".top-takes-videos-flex").flexslider({
+            animation: "slide",
+            prevText: "",
+            nextText: "",
+            });
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
             $data = itg_widget_get_widget_data_data($info);
             $block['content'] = theme("top_takes_videos_widget", array("data" => $data));
             break;

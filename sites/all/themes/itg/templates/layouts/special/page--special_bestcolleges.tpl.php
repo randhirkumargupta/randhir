@@ -187,6 +187,11 @@ $url_get = explode('/', $path_request);
                                 <div class="ad-widget">
                                     <div class="sidebar-ad">
                                       <?php
+                                      if($url_get[1] == '2018') {
+                                        // Bestcolleges RHS Banner  
+                                      print bestcollege_get_sponser_data('Bestcolleges RHS Banner');
+
+                                      } else {
                                         $block = block_load('itg_ads', ADS_RHS1);
                                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                         if(is_array($render_array)) {
@@ -196,6 +201,8 @@ $url_get = explode('/', $path_request);
                                             print $itg_ad['200*200_right_bar_ad1'];
                                           }
                                         }
+                                      } 
+                                        
                                        ?></div>
                                 </div>
                     <?php

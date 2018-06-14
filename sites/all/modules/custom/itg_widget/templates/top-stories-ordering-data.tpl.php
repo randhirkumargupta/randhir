@@ -5,6 +5,7 @@
   if(drupal_is_front_page()){
 	$data_tb_region_item = 'data-tb-region-item';  
   }
+  $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
 ?>
   <ul class="itg-listing">
       <?php
@@ -24,7 +25,22 @@
               $pipelineclass = ' pipeline-added';
             }
           }
-				if (!empty($enable_top_story_ad) && $counter == $top_story_ad_pos){
+          if(count($home_top_story_sponsor) > 0 && drupal_is_front_page()){ 
+            foreach($home_top_story_sponsor as $_sponsor_home_value){
+              if($_sponsor_home_value->position == $counter){
+                $_node_nid = $_sponsor_home_value->nid;
+                $_node_title = itg_common_get_node_title($_node_nid);
+            ?>
+              <li <?php echo $data_tb_region_item;?> title="<?php echo _widget_title($_node_title); ?>" class="story top-story-<?php print $_node_nid ?>">
+                  <span class="itg-sponsor-title"><?php print t('IMPACT FEATURE'); ?></span>
+                  <?php
+                  echo l(mb_strimwidth($_node_title, 0, 110, ".."), "node/" . $_node_nid, array('attributes' => array("title" => $_node_title)));
+                  ?>
+              </li>
+              <?php 
+              $counter++;
+              } } }
+				  if (!empty($enable_top_story_ad) && $counter == $top_story_ad_pos){
 						echo "<li class='itg-top-story-ad desktop-hide'>". $top_story_ad_html ."</li>";
 					}
 					$counter++;

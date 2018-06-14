@@ -20,8 +20,8 @@
                             $file = file_load($entity[$field_collection_id]->field_images['und'][0]['fid']);
                             $small_file = file_load($entity[$field_collection_id]->field_photo_small_image['und'][0]['fid']);
                             $caption = $entity[$field_collection_id]->field_image_caption['und'][0]['value'];
-                            $amp_image = file_create_url($file->uri);
-                            $small_amp_image = file_create_url($small_file->uri);
+                            $amp_image = 'https://akm-img-a-in.tosshub.com/indiatoday/styles/photo_slider_753x543/public/images/photogallery/201806/Collag_Thumb_1_IT_1528760545658.jpg?NDDrG7T8AGwwujEvJ4AbS3yjm.cRD.st'; //file_create_url($file->uri);
+                            $small_amp_image = 'https://akm-img-a-in.tosshub.com/indiatoday/styles/video_landing_page_170_x_127/public/images/photogallery/201806/jailed-170x96.jpeg?voajbp5jKPhTt1ezhE.DWFmb6ehoryRl'; //file_create_url($small_file->uri);
                             $data = getimagesize($amp_image);
                             $width = $data[0];
                             $height = $data[1];
@@ -47,7 +47,8 @@
                             ?>
               <figure>
                   <div class="fixed-height-container">
-                      <amp-img src="<?php print image_style_url("photo_slider_753x543", $file->uri); ?>"
+                      <!-- <amp-img src="<?php //print image_style_url("photo_slider_753x543", $file->uri); ?>"-->
+                      <amp-img src="https://akm-img-a-in.tosshub.com/indiatoday/styles/photo_slider_753x543/public/images/photogallery/201806/Collag_Thumb_1_IT_1528760545658.jpg?NDDrG7T8AGwwujEvJ4AbS3yjm.cRD.st"
                                
                                 layout="fill"><div fallback>offline</div>
                       </amp-img>   
@@ -100,11 +101,11 @@ if (function_exists('get_other_gallery_amp')) {
       $entity_id = $value['entity_id'];
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
-        $small_image = file_create_url($file->uri);
+        $small_image = 'https://akm-img-a-in.tosshub.com/indiatoday/styles/video_landing_page_170_x_127/public/images/photogallery/201806/jailed-170x96.jpeg?voajbp5jKPhTt1ezhE.DWFmb6ehoryRl'; //file_create_url($file->uri);
         //$other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       else {
-        $small_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
+        $small_image = 'https://akm-img-a-in.tosshub.com/indiatoday/styles/video_landing_page_170_x_127/public/images/photogallery/201806/jailed-170x96.jpeg?voajbp5jKPhTt1ezhE.DWFmb6ehoryRl'; //file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
         //$other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       
