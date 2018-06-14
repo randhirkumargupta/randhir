@@ -13,7 +13,55 @@
                           <?php
                           $i = 1;
                           $srcset = '';
-                          
+                          foreach ($node->field_gallery_image['und'] as $photo_item) {
+                            //$buzz_output.= '<div class="buzz-section">';
+                            $field_collection_id = $photo_item['value'];
+                            $entity = entity_load('field_collection_item', array($field_collection_id));
+                            $file = file_load($entity[$field_collection_id]->field_images['und'][0]['fid']);
+                            $small_file = file_load($entity[$field_collection_id]->field_photo_small_image['und'][0]['fid']);
+                            $caption = $entity[$field_collection_id]->field_image_caption['und'][0]['value'];
+                            $amp_image = file_create_url($file->uri);
+                            $small_amp_image = file_create_url($small_file->uri);
+                            $data = getimagesize($amp_image);
+                            $width = $data[0];
+                            $height = $data[1];
+
+                            if ($height > 363) {
+                              $height = 363;
+                              $width = 647;
+                            }
+
+                            if (!empty($small_file->uri)) {
+                              $small_data = getimagesize($small_amp_image);
+                              if ($small_data[1] > 363) {
+                                $small_width = 647;
+                              }
+                              else {
+                                $small_width = $small_data[0];
+                              }
+                              $small_src_set = ', ' . $small_amp_image . ' ' . $small_width . 'w';
+                            }
+
+                            //$srcset = $amp_image . ' ' . $width . 'w' . $small_src_set;
+                            $caption = trim(preg_replace('/mce_href=[^>]*/', '', $caption));
+                            ?>
+              <figure>
+                  <div class="fixed-height-container">
+                      <amp-img src="<?php print image_style_url("photo_slider_753x543", $file->uri); ?>"
+                               
+                                layout="fill"><div fallback>offline</div>
+                      </amp-img>   
+                  </div>
+                  
+                  <figcaption on="tap:AMP.setState({expanded: !expanded})"
+                              tabindex="0"
+                              role="button"
+                              [class]="expanded ? 'expanded' : ''"><?php print $caption; ?>
+                      <span [text]="expanded ? '&#9660;' : '&#9650;'">&#9650;</span>
+                  </figcaption>
+              </figure>
+    <?php
+  }
   ?>
 
         </amp-carousel>
