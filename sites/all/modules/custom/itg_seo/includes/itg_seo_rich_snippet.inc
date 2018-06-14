@@ -227,23 +227,42 @@ function itg_seo_node_data($node) {
               }
               </script>',
         );
-    } //else {           
-	   $story_markup = array(
-		 '#type' => 'markup',
-		 '#markup' => '<script data-schema="WebPage" type="application/ld+json"> {
-					 "@id": "' . $mainEntityOfPage . '",
-					 "potentialAction": {
-					 "@type": "ViewAction",
-					 "target": "android-app://com.indiatoday/' . $mainEntityOfPage . '"
-					 },
-					 "@type": "WebPage",
-					 "@context": "http://schema.org"
-					 }  </script>',
-	   );
-    //}
+    } else {
+        $markup = array(
+             '#type' => 'markup',
+             '#markup' => '<script type="application/ld+json"> {  
+                         "@context": "http://schema.org",
+                         "@type": "NewsArticle",
+                         "mainEntityOfPage": "' . $mainEntityOfPage . '",
+                         "headline": "' . $headline . '",
+                         "datePublished": "' . $publisheddate . '",
+                         "dateModified": "' . $modified_date . '",
+                         "description": "' . $description_text . '",
+                         "author": {
+                         "@type": "Person",
+                         "name": "' . $authors . '"
+                         },
+                         "publisher": {
+                         "@type": "Organization",
+                         "name": "India Today",
+                         "logo": {
+                         "@type": "ImageObject",
+                         "url": "' . $logo . '",
+                         "width": 600,
+                         "height": 60
+                         }
+                         },
+                         "image": {
+                         "@type": "ImageObject",
+                         "url": "' . $largimage . '",
+                         "width": 647,
+                         "height": 363
+                         }
+                         }  </script>',
+           );
+    }
      
     drupal_add_html_head($markup, 'sd_json');
-    drupal_add_html_head($story_markup, 'sd_json1');
     
     if (is_array($node->field_story_configurations[LANGUAGE_NONE]) && !empty($node->field_story_configurations[LANGUAGE_NONE])) {
         $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];

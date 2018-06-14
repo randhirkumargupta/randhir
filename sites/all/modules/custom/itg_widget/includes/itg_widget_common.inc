@@ -1558,7 +1558,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     // Start alter for tech
-    if ($view->name == 'tech' && ($view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8' || $view->current_display == 'movie_latest' || $view->current_display == 'election_videos')) {
+    if ($view->name == 'tech' && ($view->current_display == 'block_4' || $view->current_display == 'block_3' || $view->current_display == 'block_1' || $view->current_display == 'block_5' || $view->current_display == 'block_2' || $view->current_display == 'block_8' || $view->current_display == 'movie_latest' || $view->current_display == 'election_videos')) {
         if ($theme != 'seven') {
             if ($theme == FRONT_THEME_NAME && is_numeric(arg(2))) {
                 $section = arg(2);
