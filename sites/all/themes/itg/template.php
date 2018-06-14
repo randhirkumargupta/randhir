@@ -961,7 +961,7 @@ function itg_css_alter(&$css) {
    }
    
    if (($user->uid == 0) && (drupal_is_front_page())) {
-	   //$css = array_diff_key($css, $exclude1);
+	   $css = array_diff_key($css, $exclude1);
    }
 }
 
