@@ -112,7 +112,7 @@ $hide_widget = '';
                                           <div class="droppable <?php print $gray_bg_layout; ?>">
                                               <div id="auto-new-block" class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'] . $widget_data['itg-block-1']['widget_display_name']; ?>">
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-1']['block_title'])) { ?>
-                                                    <h1 class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></h1>
+                                                    <span class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                                                   <?php } ?>
                                                   <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                                     <div class="widget-settings">
