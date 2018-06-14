@@ -115,9 +115,16 @@ $hide_widget = '';
                                                     <span class="widget-title"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                                                   <?php } ?>
                                                   <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+
+                                                     <?php
+                                                    $taj_title = ''; 
+                                                    if(empty($widget_data['itg-block-1']['block_title'])) {
+                                                      $taj_title = 'taj-title';
+                                                    }
+                                                    ?>
                                                     <div class="widget-settings">
                                                         <div class="widget-title-wrapper">
-                                                            <span class="widget-title" data-id="itg-block-1"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
+                                                            <span class="widget-title <?php print $taj_title; ?>" data-id="itg-block-1"><?php print $widget_data['itg-block-1']['block_title']; ?></span>
                                                             <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
                                                         </div>
                                                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>                                                        <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
@@ -141,7 +148,7 @@ $hide_widget = '';
                               </div>
                           </div>
                         <?php } ?>
-                        
+
                         <?php if (isset($widget_data['itg-block-2']['widget_name']) || $theme == 'itgadmin') { ?>            
                           <div class="row itg-layout-225">
                               <div class="col-md-12 mt-50">
