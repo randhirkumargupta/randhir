@@ -15,7 +15,7 @@ if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
 }
 $node_url_alias = drupal_get_path_alias('node/'.$nid);
-$node_url = FRONT_URL.$node_url_alias;
+$node_url = FRONT_URL. "/" .$node_url_alias;
 ?>
 <?php
 $width = 622;

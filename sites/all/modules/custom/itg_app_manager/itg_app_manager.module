@@ -3355,6 +3355,14 @@ function itg_app_dashboard_form_submit($form, &$form_state) {
             drupal_write_record('itg_app_master_config_internal', $data);
         }
     }
+    /* cube_widget updation */
+    $update_conf_json = variable_get('cube_widget');
+    $update_conf_arr = json_decode($update_conf_json, TRUE);
+    $cube_widget_config_options = $form_state['values']['cube_widget_config_options'];
+    $update_conf_arr['show_widget'] = $cube_widget_config_options;
+    $update_conf_json = json_encode($update_conf_arr);
+    variable_set('cube_widget', $update_conf_json);
+    /* cube_widget updation updation */
     drupal_set_message(t('Data saved successfully.'), 'status');
 }
 

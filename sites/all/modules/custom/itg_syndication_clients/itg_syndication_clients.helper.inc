@@ -231,7 +231,8 @@ function getceltick_feed_story_client_array() {
     '1206567' => 'lifestyle.xml',
     '1206533' => 'movies.xml',
     '1206550' => 'sports.xml',
-    '1206676' => 'cricket.xml'
+    '1206676' => 'cricket.xml',
+    '1791926' => 'fifa-world-cup-2018-news.xml'
   );
   return $story_sectios;
 }

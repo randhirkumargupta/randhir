@@ -2827,6 +2827,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+         // popular_search_tv custom resource declaration.....
+      /*  'popular_search_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves popular_search_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_popular_search_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),*/
     );
 
     return $api;
@@ -7668,4 +7695,30 @@ function itg_rapid_api_hamburger_menu_tv($token) {
 
     return $return_obj;
 }
+/**
+ * Call back function for popular_search_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+/*
+function itg_rapid_api_popular_search_tv($token) {
+    $redis_key = "itg_rapid_api_popular_search_tv";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_popular_search_tv');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+ 
+ */
 

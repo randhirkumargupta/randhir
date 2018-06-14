@@ -1425,7 +1425,14 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
 
     if ($view->name == 'anchor_landing_page') {
-        $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
+        if (isset($view->args)) {
+          $nid = $view->args[0];
+          $node = node_load($nid);
+          $term_name = $node->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name;
+          $tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
+        }
+        $query->where[1]['conditions'][2]['value'] = $tid;
+        //$query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
     }
 
     if ($view->name == 'ediror_pick') {
@@ -1618,7 +1625,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             if (empty($section)) {
                 $section = $_GET['section_name'];
             }
-             
+
             $query->where[1]['conditions'][3]['value'] = $section;
         }
     }
@@ -1908,7 +1915,13 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
+    $check_arr = array('People'=>'people','anchor'=>'anchor', 'Celebrity Profile'=>'celebrity__profile','Politician'=>'politician','reporter'=>'reporter','Speaker'=>'speaker');
     if ($vars['type'] == 'reporter') {
+        if (arg(0) == 'node') {
+          $nid = arg(1);
+          $node = node_load($nid);
+          $term_name = $node->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name;
+        }
         // Get all terms of vocabulary occupation.
         $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
         $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
@@ -1916,7 +1929,17 @@ function itg_widget_preprocess_node(&$vars) {
             $occupation[] = $term->name;
         }
 
-        if (in_array(strtolower('Anchor'), $occupation)) {
+        if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
+            drupal_add_js("jQuery(document).ready(function(){
+              jQuery('.read-more , .full-content').click(function(){
+              jQuery('.less-content').toggle();
+              jQuery('.full-content').toggle();
+              });
+              })", 'inline'
+            );
+            $vars['theme_hook_suggestions'][] = 'node__reporter__'.$check_arr[$term_name];
+        }else{
+
             drupal_add_js("jQuery(document).ready(function(){
               jQuery('.read-more , .full-content').click(function(){
               jQuery('.less-content').toggle();
@@ -1926,6 +1949,8 @@ function itg_widget_preprocess_node(&$vars) {
             );
             $vars['theme_hook_suggestions'][] = 'node__reporter__anchor';
         }
+
+
     }
 }
 
@@ -3515,10 +3540,10 @@ function is_programme($tid, $flag_occupation, $page_argument) {
 
 
 function get_top_story_from_category($cat_id, $limit = 4, $offset = 0){
-  $query = db_select('node', 'n'); 
+  $query = db_select('node', 'n');
   $query->leftJoin('itg_widget_order', 'wo', 'wo.nid=n.nid');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');    
-  $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');    
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');
   $query->condition('wo.widget', 'section_wise_widget')
           ->condition('n.status', 1)
           ->condition('wo.cat_id', $cat_id)
@@ -3535,15 +3560,15 @@ function get_top_story_from_category($cat_id, $limit = 4, $offset = 0){
 
 function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'){
   $query = db_select('node', 'n');
-  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');  
-  $query->leftJoin('file_managed', 'fm', 'fm.fid=fsei.field_story_expert_image_fid');  
-  $query->leftJoin('field_data_field_cm_display_title', 'fcdt', 'fcdt.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_story_kicker_text', 'fskt', 'fskt.entity_id=n.nid');  
-  
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=fsei.field_story_expert_image_fid');
+  $query->leftJoin('field_data_field_cm_display_title', 'fcdt', 'fcdt.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'fskt', 'fskt.entity_id=n.nid');
+
   $query->fields('fseu', array('field_story_external_url_value'));
   $query->fields('fm', array('uri'));
   $query->fields('fcdt', array('field_cm_display_title_value'));
@@ -3555,7 +3580,7 @@ function get_who_said_what_from_cat($cat_id, $limit = 4, $type = 'who-said-what'
     $query->condition('fpc.field_primary_category_value', $cat_id);
   }
   $result = $query->execute()->fetchAll();
-  return $result;  
+  return $result;
 }
 
 
@@ -3670,15 +3695,15 @@ function get_constituency_json_url($catid){
 
 function get_miscellaneous_content($cat_id, $limit, $type = 'who-said-what'){
   $query = db_select('node', 'n');
-  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
-  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');  
-  
+  $query->join('field_data_field_is_election_live', 'fiel', 'fiel.entity_id=n.nid');
+  $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_external_url', 'fseu', 'fseu.entity_id=n.nid');
+
   $query->fields('fseu', array('field_story_external_url_value'));
   $query->fields('n', array('title'));
   if(!empty($limit)){
-   $query->range(0, $limit); 
+   $query->range(0, $limit);
   }
   $query->condition('fiel.field_is_election_live_value', 1);
   $query->condition('fmt.field_miscellaneous_type_value', $type);
@@ -3686,7 +3711,7 @@ function get_miscellaneous_content($cat_id, $limit, $type = 'who-said-what'){
     $query->condition('fpc.field_primary_category_value', $cat_id);
   }
   $result = $query->execute()->fetchAll();
-  return $result;  
+  return $result;
 }
 
 function get_html_widget_name_by_layout($section_name, $template_name, $block_name = 'itg-block-11', $widget_name = NULL){
@@ -3694,7 +3719,7 @@ function get_html_widget_name_by_layout($section_name, $template_name, $block_na
     $label_name = $widget_name;
   }else{
     $label_name = '';
-  }  
+  }
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
   $itg_query->fields('layout_manager', array('block_title'));
   $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
@@ -3721,7 +3746,7 @@ function get_graph_share_json_url($cat_id){
   return $itg_result;
 }
 
-function get_html_widget_data_by_nids($nids){  
+function get_html_widget_data_by_nids($nids){
   if(!empty($nids)){
     $query = "SELECT n.title, db.body_value FROM field_data_body db LEFT JOIN node n on (db.entity_id = n.nid) WHERE n.type = 'custom_html_widgets' AND n.status = 1 AND db.entity_id IN ($nids) ORDER BY FIELD (db.entity_id, $nids)";
     $result = db_query($query);
