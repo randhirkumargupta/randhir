@@ -141,7 +141,45 @@ $hide_widget = '';
                               </div>
                           </div>
                         <?php } ?>
-                       
+                        
+                        <?php if (isset($widget_data['itg-block-2']['widget_name']) || $theme == 'itgadmin') { ?>            
+                          <div class="row itg-layout-225">
+                              <div class="col-md-12 mt-50">
+                                  <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('FIXTURES'); ?></strong> )</div>
+                                  <div class="">
+                                      <div class="itg-widget">
+                                          <div class="droppable <?php print $gray_bg_layout; ?>">
+                                              <div class="widget-wrapper <?php print $widget_data['itg-block-2']['widget_name'] . $widget_data['itg-block-2']['widget_display_name']; ?>">
+                                                  <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-2']['block_title'])) { ?>
+                                                    <h2 class="widget-title"><?php print $widget_data['itg-block-2']['block_title']; ?></h2>
+                                                  <?php } ?>
+                                                  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                                    <div class="widget-settings">
+                                                        <div class="widget-title-wrapper">
+                                                            <span class="widget-title" data-id="itg-block-2"><?php print $widget_data['itg-block-2']['block_title']; ?></span>
+                                                            <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
+                                                        </div>
+                                                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>                                                       <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-2"><i class="fa fa-times"></i></a></span>
+                                                        </span>
+                                                    </div>  
+                                                  <?php } ?>    
+                                                  <div class="data-holder" id="itg-block-2">
+                                                      <?php
+                                                      if (isset($widget_data['itg-block-2']['widget'])) {
+                                                        print $widget_data['itg-block-2']['widget'];
+                                                      }
+                                                      else {
+                                                        print '<div class="widget-placeholder"><span>' . t('FIXTURES') . '</span></div>';
+                                                      }
+                                                      ?>
+                                                  </div>
+                                              </div>                     
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        <?php } ?>
                          <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?>
                               <div class="fifa-points-table desktop-hide">
                                 <h2 class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></h2>
