@@ -182,11 +182,11 @@ function homePageJson_dev() {
     $cube_widget_config_options = fetchitg_app_master_config_internal_live('cube_widget_config_options');
     $cube_data = "";
     $cube_data = variable_get('cube_widget');
-    if ($cube_widget_config_options == 1 && $cube_data !="") {
+    
         $cube_widget_json = variable_get('cube_widget');
         $cube_widget = json_decode($cube_widget_json, TRUE);
         $data_final['cube_widget'] = $cube_widget;
-    }
+    
 
     return $data_final;
 }
