@@ -105,7 +105,6 @@ function simplesamlphp_auth_loginpage() {
 
   // Do some sanity checking before attempting anything.
   $config = SimpleSAML_Configuration::getInstance();
-  var_dump($config);die;
   $configStoreType = $config->getValue('store.type');
 
   // Make sure phpsession is NOT being used.
@@ -129,7 +128,7 @@ function simplesamlphp_auth_loginpage() {
   $returnto  = NULL;
 
   // Support for deep linking.
-var_dump($_REQUEST['ReturnTo'], '1');
+
   // See if a URL has been explicitly provided in ReturnTo. If so, use it (as long as it points to this site).
   if ((isset($_REQUEST['ReturnTo']) && $_REQUEST['ReturnTo']) &&
       (valid_url($_REQUEST['ReturnTo']) && stristr($_REQUEST['ReturnTo'], $base_url))) {
@@ -186,14 +185,12 @@ var_dump($_REQUEST['ReturnTo'], '1');
       $previous_url = $parse['host'].'/akamai-user/'.base64_encode($remove_fb_append_parameter);  
       }*/
       $previous_url = 'https://'.$parse['host'].'/akamai-user/'.base64_encode($remove_fb_append_parameter);
-      var_dump($previous_url);die;
       drupal_goto($previous_url);
     }
     else {
       // default condition
       //drupal_goto(FRONT_URL)
       $previous_url = 'https://uat-it.indiatodayonline.in/akamai-user/'.base64_encode(FRONT_URL);
-      var_dump($previous_url);die;
       drupal_goto($previous_url);;
     }
 //    if (!empty($arg[2])) {
@@ -212,7 +209,7 @@ var_dump($_REQUEST['ReturnTo'], '1');
 //    }
 
   }
-var_dump($output);die;
+
   return $output;
 }
 
