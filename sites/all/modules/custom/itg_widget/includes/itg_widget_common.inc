@@ -1426,10 +1426,12 @@ function itg_widget_views_query_alter(&$view, &$query) {
 
     if ($view->name == 'anchor_landing_page') {
         if (isset($view->args)) {
-          $nid = $view->args[0];
-          $node = node_load($nid);
-          $term_name = $node->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name;
-          $tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
+            $nid = $view->args[0];
+            $term_data = get_term_id_and_name($nid);
+            if(!empty($term_data)){
+              $term_name = $term_data->name;
+              $tid = $term_data->tid;
+            }
         }
         $query->where[1]['conditions'][2]['value'] = $tid;
         //$query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
@@ -1918,9 +1920,12 @@ function itg_widget_preprocess_node(&$vars) {
     $check_arr = array('People'=>'people','anchor'=>'anchor', 'Celebrity Profile'=>'celebrity__profile','Politician'=>'politician','reporter'=>'reporter','Speaker'=>'speaker');
     if ($vars['type'] == 'reporter') {
         if (arg(0) == 'node') {
-          $nid = arg(1);
-          $node = node_load($nid);
-          $term_name = $node->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name;
+            $nid = arg(1);
+            $term_data = get_term_id_and_name($nid);
+            if(!empty($term_data)){
+              $term_name = $term_data->name;
+              $tid = $term_data->tid;
+          }
         }
         // Get all terms of vocabulary occupation.
         $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
@@ -3734,7 +3739,7 @@ function get_html_widget_name_by_layout($section_name, $template_name, $block_na
 }
 
 function get_graph_share_json_url($cat_id){
- $itg_query = db_select('node', 'n');
+  $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
   $itg_query->leftJoin('field_data_field_election_graph_share_json', 'fegsj', 'n.nid = fegsj.entity_id');
   $itg_query->condition('dfgc.field_graph_category_value', $cat_id, '=');
@@ -3751,6 +3756,20 @@ function get_html_widget_data_by_nids($nids){
     $query = "SELECT n.title, db.body_value FROM field_data_body db LEFT JOIN node n on (db.entity_id = n.nid) WHERE n.type = 'custom_html_widgets' AND n.status = 1 AND db.entity_id IN ($nids) ORDER BY FIELD (db.entity_id, $nids)";
     $result = db_query($query);
     $results = $result->fetchAll();
+    return $results;
+  }
+  return array();
+}
+
+function get_term_id_and_name($nid){
+  if(!empty($nid)){
+    $query = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
+        field_data_field_celebrity_pro_occupation fd inner join taxonomy_term_data t
+        on fd.field_celebrity_pro_occupation_tid = t.tid
+        WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
+        and fd.entity_id = $nid limit 1";
+    $result = db_query($query);
+    $results = $result->fetchObject();
     return $results;
   }
   return array();
