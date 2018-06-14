@@ -3037,7 +3037,7 @@ function hamburger_menu_tv_json() {
  *
  * @return type
  */
-function popular_search_tv_json_json() {
+function popular_search_tv_json() {
     $form = array();
 
     $form['itg_rapid_api_hamburger_menu_tv'] = array(
