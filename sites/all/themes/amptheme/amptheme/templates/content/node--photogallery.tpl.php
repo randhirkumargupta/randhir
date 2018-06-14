@@ -17,11 +17,11 @@
                             //$buzz_output.= '<div class="buzz-section">';
                             $field_collection_id = $photo_item['value'];
                             $entity = entity_load('field_collection_item', array($field_collection_id));
-                            $file = file_load($entity[$field_collection_id]->field_images['und'][0]['fid']);
-                            $small_file = file_load($entity[$field_collection_id]->field_photo_small_image['und'][0]['fid']);
-                            $caption = $entity[$field_collection_id]->field_image_caption['und'][0]['value'];
-                            $amp_image = file_create_url($file->uri);
-                            $small_amp_image = file_create_url($small_file->uri);
+                            $file = ''; //file_load($entity[$field_collection_id]->field_images['und'][0]['fid']);
+                            $small_file = ''; //file_load($entity[$field_collection_id]->field_photo_small_image['und'][0]['fid']);
+                            $caption = ''; //$entity[$field_collection_id]->field_image_caption['und'][0]['value'];
+                            $amp_image = ''; //file_create_url($file->uri);
+                            $small_amp_image = ''; //file_create_url($small_file->uri);
                             $data = getimagesize($amp_image);
                             $width = $data[0];
                             $height = $data[1];
