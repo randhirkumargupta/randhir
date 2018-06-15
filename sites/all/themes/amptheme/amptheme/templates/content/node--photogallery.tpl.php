@@ -47,10 +47,7 @@
                             ?>
               <figure>
                   <div class="fixed-height-container">
-                      <!-- <amp-img src="<?php //print image_style_url("photo_slider_753x543", $file->uri); ?>"-->
-                      <amp-img src="<?php print $file->uri; ?>"
-                               
-                                layout="fill"><div fallback>offline</div>
+                      <amp-img src="<?php print image_style_url("photo_slider_753x543", $file->uri); ?>" layout="fill"><div fallback>offline</div>
                       </amp-img>   
                   </div>
                   
