@@ -2342,7 +2342,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         if (in_array($arg[1], $arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
             $data['content'] = array();
         } else {
-            if ($arg[0] == 'livetv' || $arg[0] == 'international-livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid'])) && $is_programme) {
+            if ($arg[0] == 'livetv' || $arg[0] == 'international-livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (in_array('reporter', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid'])) && $is_programme) {
                 return TRUE;
             } else {
                 $data['content'] = array();
