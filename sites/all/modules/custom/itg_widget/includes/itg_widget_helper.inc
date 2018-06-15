@@ -315,6 +315,9 @@ function _get_content_type_for_widget($widget_name) {
     case 'big_story_format_widget':
       $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
       break;
+    case 'section_manual_order_widget':
+      $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
+      break;
   }
   return $content_type;
 }
