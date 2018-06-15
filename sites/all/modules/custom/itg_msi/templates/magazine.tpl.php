@@ -51,7 +51,21 @@ $arg = arg();
         $current_issues = itg_msi_get_current_issue();
         $current_issue = explode(' 00:', $current_issues);
         ?>
-        <?php if ($current_issue[0] == $issue_attribute_date): ?>
+        <?php if ($current_issue[0] == $issue_attribute_date): ?>        
+        <div class="print_digital">
+			<div class="print_lbtm_m">
+				<a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">
+					<div class="print_lbtm"></div>
+			    </a>
+			    <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">Print</a>
+			 </div>
+			 <div class="print_digital_m">
+				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">
+					 <div class="print_digital"></div>
+				 </a>
+				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">Digital</a>
+		   </div>
+	    </div>
           <div class="issue-subscribe-link"><a href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=indiatoday">SUBSCRIBE NOW</a></div>
         <?php endif; ?>
         <?php $future_isue = itg_msi_next_week_issue(); ?>
