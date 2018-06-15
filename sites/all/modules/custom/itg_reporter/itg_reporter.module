@@ -52,15 +52,18 @@ function itg_reporter_menu() {
 }
 
 function itg_reporter_apaache_solr(){
+  $str =  '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692';
   $solr = apachesolr_get_solr();
-  $query = apachesolr_drupal_query("apachesolr");
-  $query->addParam('fq', '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692'); // keyword to be searched
-  $query->addParam('hl', true); // enable highlighting
+  $query = apachesolr_drupal_query("custom");
+  //$query->addParam('fq', '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692'); // keyword to be searched
+  //$query->addParam('hl', true); // enable highlighting
+  $query->replaceParam("fq", '(' . $str . ')');
   $query->addParam('rows', '200');
+  $query->addFilter("bundle", "story");
   $response = $query->search();
-  $raw_results = apachesolr_search_process_response($response, $query);
+  //$raw_results = apachesolr_search_process_response($response, $query);
 
-  print_r($raw_results);
+  print_r($response);
   die('ABC');
   // if (isset($raw_results) && !empty($raw_results)) {
   //   foreach ($raw_results as $raw_result) {
