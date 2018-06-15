@@ -25,7 +25,7 @@
   hide($content['links']);
   unset($content);
   ?>
-<!--   <?php
+  <?php
   if(!empty($solr_story_data)):?>
     <ul class="author-story-wrapper">
       <?php foreach($solr_story_data as $key => $value): ?>
@@ -42,7 +42,7 @@
         </li>
       <?php endforeach; ?>
     </ul>
-  <?php endif; ?> -->
+  <?php endif; ?>
 
   <?php print render($content['links']); ?>
 
