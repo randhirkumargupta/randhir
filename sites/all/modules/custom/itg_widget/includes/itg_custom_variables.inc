@@ -273,6 +273,14 @@ function itg_mobile_app_configure(){
   global $user;
   $form = array();
   if (!in_array("Editor", $user->roles)) {
+  
+  $form['status_third_level_menu'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('status_third_level_menu'),
+  );
+  
   $form['cube_js_mini_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Mini url'),
