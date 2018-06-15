@@ -48,17 +48,18 @@ if($is_fron_page){
 }
 
 </style>
-  <div class="top-takes-videos-flex top-takes-video-container <?php if (!empty($is_fron_page)) { print $home_top_takes; }  ?>" id="trending-videos">
+  <div class="top-takes-videos-flex <?php if (!empty($is_fron_page)) { print $home_top_takes; }  ?>" id="trending-videos">
     <?php    
     if (empty($is_fron_page)) {
       ?><h3><span><?php print t("Top Takes") ?></span></h3><?php } ?>
     <ul class="top-takes-videos slides">  
         <?php foreach ($data as $video_key => $video_data) { ?>
-        <li <?php echo $data_tb_region_item;?> class="top-takes-video top-takes-list top-takes-<?php echo $video_key ?>">
+        <li <?php echo $data_tb_region_item;?> class="trending-videos-list top-takes-<?php echo $video_key ?>">
             <?php if (!empty($video_data['mi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">         
               <?php //$extra_large_image_url = image_style_url("widget_very_small", $video_data['mi_file_uri']); ?>
               <?php print theme('image', array('path' => $video_data['mi_file_uri'], 'alt' => $video_data['field_story_medium_image_alt'], 'title' => $video_data['field_story_medium_image_title'])); ?>
+              <span class="videoicon desktophide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
             </a>
             <?php
           }
@@ -66,10 +67,11 @@ if($is_fron_page){
             ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
               <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
+              <span class="videoicon desktophide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>
-            <p title="<?php echo $video_data['title']; ?>" class="title top-takes-<?php echo $video_data['nid'] ?>">
+            <p title="<?php echo $video_data['title']; ?>" class="top-takes-<?php echo $video_data['nid'] ?>">
             <?php 
             if(function_exists('itg_common_get_smiley_title')) {
               echo l(itg_common_get_smiley_title($video_data['node_obj'], 0, 130), "node/" . $video_data['nid'] , array('html' => TRUE , "attributes" => array("title" => _widget_title($video_data['title'])))); 
