@@ -13,13 +13,13 @@
  * {@inheritdoc}
  */
 function itg_reporter_cronapi($op, $job = NULL) {
-  
+
   $items['itg-remove-byline-content'] = array(
     'description' => 'Remove junk byline.',
     'callback' => 'itg_remove_byline_content',
     'file' => 'include/itg_remove_byline_content.inc',
   );
-  
+
   return $items;
 }
 
@@ -41,8 +41,36 @@ function itg_reporter_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['test/solr'] = array(
+    'page callback' => 'itg_reporter_apaache_solr',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+
   return $items;
 }
+
+function itg_reporter_apaache_solr(){
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("apachesolr");
+  $query->addParam('fq', '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692'); // keyword to be searched
+  $query->addParam('hl', true); // enable highlighting
+  $query->addParam('rows', '200');
+  $response = $query->search();
+  $raw_results = apachesolr_search_process_response($response, $query);
+
+  print_r($raw_results);
+  die('ABC');
+  // if (isset($raw_results) && !empty($raw_results)) {
+  //   foreach ($raw_results as $raw_result) {
+  //     // theme individual results
+  //     $result .= theme('search_result', array('result' => $raw_result, 'module' => 'apachesolr_search'));
+  //   }
+  // }
+  // return $result;
+}
+
 
 /**
  * Implements hook_block_info().
@@ -139,7 +167,7 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
             }
             $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
         }
-    }   
+    }
     $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
     if (!($form_state['reporter_popup_form'])) {
       $form['#after_build'][] = 'itg_reporter_after_build';
@@ -151,7 +179,7 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
-    
+
     $form['#validate'][] = 'itg_reporter_custom_validate';
   }
 
@@ -362,7 +390,7 @@ function itg_reporter_get_twitter_handle($twitter) {
  * {@inheritdoc}.
  */
 function itg_reporter_node_presave($node) {
-    //set custom path alias  
+    //set custom path alias
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
@@ -448,7 +476,7 @@ function itg_autocomplete_byline($id) {
   $record = $result->fetchAssoc();
   $r_title = ucfirst($record['title']);
   $r_nid = strtolower($record['nid']);
-  
+
   if (!empty($record['field_reporter_email_id_value'])) {
     $name_format = $r_title . '(' . $record['field_reporter_email_id_value'] . ')(' . $r_nid . ')';
   }
@@ -485,7 +513,7 @@ function itg_reporter_node_validate($node, $form, &$form_state) {
     if ($flag && empty($errors)) {
       form_set_error('field_reporter_movie_name', 'Movie name is required.');
     }
-    
+
     if ($reporter_flag && empty($profile_type)) {
       form_set_error('field_reporter_profile_type', 'Profile is required.');
     }
