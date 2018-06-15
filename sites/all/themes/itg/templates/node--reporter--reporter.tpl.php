@@ -24,14 +24,26 @@
   hide($content['comments']);
   hide($content['links']);
   unset($content);
-  // $block = module_invoke('itg_widget', 'block_view', 'anchor_langing_page_menu');
-  // print $block['content'];
   ?>
-<?php
-echo  "<pre>";
-print_r($solr_story_data);
-//print views_embed_view('author_s_list_of_story', 'block');
-?>
+  <?php
+  if(!empty($solr_story_data)):?>
+    <ul class="author-story-wrapper">
+      <?php foreach($solr_story_data as $key => $value): ?>
+        <li class="col-md-3 <?php print $value->bundle .'-'.$value->entity_id; ?>">
+          <div class="tile">
+            <figure>
+              <a href="<?php print $value->path_alias; ?>"><img src="<?php print $value->sm_field_custom_story_small_large_url[0]; ?>" alt="<?php print $value->label; ?>" title="<?php print $value->label; ?>" width="170" height="96"></a>
+            </figure>
+            <span class="posted-on"><?php print date('D, d M, Y', strtotime($value->dm_field_itg_content_publish_dat[0])); ?></span>
+            <p title="<?php print $value->label; ?>">
+              <a href="<?php print $value->path_alias; ?>"><?php print $value->label; ?></a>
+            </p>
+          </div>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
+
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
