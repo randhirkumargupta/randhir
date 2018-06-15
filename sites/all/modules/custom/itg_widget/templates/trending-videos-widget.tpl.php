@@ -8,7 +8,7 @@
 <style type="text/css">
 .home-trending-video .itg-widget-child.tab-data{border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;}
 .home-trending-video #trending-videos .trending-videos{border:0px;}
-.home-trending-video #trending-videos{ padding:0 10px 10px 10px;}
+.home-trending-video #trending-videos{ padding:10px; position: relative;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 .home-trending-video #trending-videos .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
 .home-trending-video #trending-videos .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
@@ -25,7 +25,7 @@
 .home-trending-video #trending-videos ul.trending-videos{border:0; padding-top:0;}
 .home-trending-video #trending-videos ol.flex-control-paging{display:none;}
 .home-trending-video #trending-videos .flex-direction-nav a{opacity:1!important;}
-.home-trending-video #trending-videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
+.home-trending-video #trending-videos .flex-nav-prev,.home-trending-video #trending-videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
 .home-trending-video #trending-videos .flex-nav-prev{left:0px; top:60px;}
 .home-trending-video #trending-videos .flex-direction-nav .flex-nav-next .flex-next{padding-left:10px;}
 .home-trending-video #trending-videos .flex-direction-nav{position: absolute;top: 0;width: 100%;}

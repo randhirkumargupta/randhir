@@ -10,7 +10,7 @@ if($is_fron_page){
     <?php    
     if (empty($is_fron_page)) {
       ?><h3><span><?php print t("Top Takes") ?></span></h3><?php } ?>
-    <ul class="top-takes-videos slides">  
+    <ul class="trending-videos slides">  
         <?php foreach ($data as $video_key => $video_data) { ?>
         <li <?php echo $data_tb_region_item;?> class="trending-videos-list top-takes-<?php echo $video_key ?>">
             <?php if (!empty($video_data['mi_file_uri'])) { ?>
