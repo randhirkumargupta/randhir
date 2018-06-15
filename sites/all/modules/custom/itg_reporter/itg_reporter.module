@@ -58,7 +58,7 @@ function itg_reporter_apaache_solr(){
   $solr = apachesolr_get_solr();
   $query = apachesolr_drupal_query("custom");
   $query->addParam("fq", '(' . $str . ')');
-  $query->addParam("fl", '(' . $field . ')');
+  $query->addParam("fl", $field)');
   //$query->replaceParam("fq", '(' . $str . ')');
   $query->addParam('rows', '100000');
   $query->addFilter("bundle", "story");
