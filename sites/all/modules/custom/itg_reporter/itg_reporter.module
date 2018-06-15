@@ -64,9 +64,9 @@ function itg_reporter_apaache_solr(){
   $query->addFilter("bundle", "story");
   $query->setSolrsort('dm_field_itg_content_publish_dat', 'asc');
   $response = $query->search();
-  //$raw_results = apachesolr_search_process_response($response, $query);
+  $raw_results = apachesolr_search_process_response($response, $query);
 
-  print_r($response);
+  print_r($raw_results);
   die('ABC');
   // if (isset($raw_results) && !empty($raw_results)) {
   //   foreach ($raw_results as $raw_result) {
