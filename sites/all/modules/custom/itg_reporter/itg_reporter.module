@@ -41,13 +41,6 @@ function itg_reporter_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['test/solr'] = array(
-    'page callback' => 'itg_reporter_apaache_solr',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-
-
   return $items;
 }
 
@@ -64,8 +57,11 @@ function itg_reporter_apaache_solr($nid=''){
   $query->addFilter("bundle", "story");
   $query->addFilter("bs_status", true);
   $response = $query->search();
-  $raw_results = apachesolr_search_process_response($response, $query);
-  return $raw_results;
+  $raw_results = $response->response->docs;;
+  if(!empty($raw_results))
+    return $raw_results;
+  else
+    return array();
 }
 
 
