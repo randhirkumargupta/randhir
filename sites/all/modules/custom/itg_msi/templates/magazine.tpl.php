@@ -43,7 +43,7 @@ $arg = arg();
 </div>
 <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
-        <div class="issue-image"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></div>
+        <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
         <div class="issue-title">
           <?php print $issue_title; ?>
         </div>
@@ -51,7 +51,21 @@ $arg = arg();
         $current_issues = itg_msi_get_current_issue();
         $current_issue = explode(' 00:', $current_issues);
         ?>
-        <?php if ($current_issue[0] == $issue_attribute_date): ?>
+        <?php if ($current_issue[0] == $issue_attribute_date): ?>        
+        <div class="print_digital">
+			<div class="print_lbtm_m">
+				<a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">
+					<div class="print_lbtm"></div>
+			    </a>
+			    <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">Print</a>
+			 </div>
+			 <div class="print_digital_m">
+				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">
+					 <div class="print_digital"></div>
+				 </a>
+				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">Digital</a>
+		   </div>
+	    </div>
           <div class="issue-subscribe-link"><a href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=indiatoday">SUBSCRIBE NOW</a></div>
         <?php endif; ?>
         <?php $future_isue = itg_msi_next_week_issue(); ?>
@@ -80,14 +94,28 @@ $arg = arg();
   <div class="magazin-top">
     <div class="magazin-subscribe">
       <span class="latest-issue"><?php print t('latest issue'); ?></span>
-      <div class="issue-image"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></div>
+      <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
         <div class="issue-title"><?php print $issue_title; ?></div>
       <?php
       $current_issues = itg_msi_get_current_issue();
       $current_issue = explode(' 00:', $current_issues);
       ?>
       <?php if ($current_issue[0] == $issue_attribute_date): ?>
-        <div class="issue-subscribe-link"><a href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=indiatoday">SUBSCRIBE NOW</a></div>
+        <div class="print_digital">
+			<div class="print_lbtm_m">
+				<a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">
+					<div class="print_lbtm"></div>
+			    </a>
+			    <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">Print</a>
+			 </div>
+			 <div class="print_digital_m">
+				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">
+					 <div class="print_digital"></div>
+				 </a>
+				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">Digital</a>
+		   </div>
+	    </div>
+        <div class="issue-subscribe-link"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">SUBSCRIBE NOW</a></div>
       <?php endif; ?>
       <?php $future_isue = itg_msi_next_week_issue(); ?>
       <?php if ($future_isue): ?>
