@@ -53,14 +53,16 @@ function itg_reporter_menu() {
 
 function itg_reporter_apaache_solr(){
   $str =  '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692';
+
+  $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url';
   $solr = apachesolr_get_solr();
   $query = apachesolr_drupal_query("custom");
-  //$query->addParam('fq', '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692'); // keyword to be searched
-  //$query->addParam('hl', true); // enable highlighting
   $query->addParam("fq", '(' . $str . ')');
+  $query->addParam("fl", '(' . $str . ')');
   //$query->replaceParam("fq", '(' . $str . ')');
   $query->addParam('rows', '100000');
   $query->addFilter("bundle", "story");
+  $query->setSolrsort('dm_field_itg_content_publish_dat', 'asc');
   $response = $query->search();
   //$raw_results = apachesolr_search_process_response($response, $query);
 
