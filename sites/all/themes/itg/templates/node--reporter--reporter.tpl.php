@@ -28,7 +28,10 @@
   // print $block['content'];
   ?>
 <?php
-print views_embed_view('author_s_list_of_story', 'block');
+echo  "<pre>";
+print_r($solr_story_data);
+die;
+//print views_embed_view('author_s_list_of_story', 'block');
 ?>
   <?php print render($content['links']); ?>
 
