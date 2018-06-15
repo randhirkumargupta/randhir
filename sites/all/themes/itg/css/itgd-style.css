@@ -1429,45 +1429,9 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 }
 
 /* magzine css */
-.print_digital{
-    text-transform: uppercase;
-    text-align: center;
-    color: #8a8a8a;    
-}
-
-.print_digital .print_lbtm_m {
-    text-align: center;
-    width: 62px;
-    float: left;
-    cursor: pointer;
-}
-
-.print_digital .print_digital_m {
-    text-align: center;
-    width: 62px;
-    float: left;
-    font-size: 16px;
-    color: #8a8a8a;
-    font-weight: 300;
-    cursor: pointer;
-}
-
-.print_digital .print_digital_m a, .print_digital .print_lbtm_m a {
-    font-size: 13px;
-    font-weight: 300;
-    color: #8a8a8a;text-decoration: none;
-}
-
-.print_digital .print_lbtm {
-    margin: 0 auto;
-    width: 50px;
-    height: 36px;
-    background: url(/sites/all/themes/itg/images/mag_pnd.png) 0 0;
-}
-
-.print_digital .print_digital {
-    margin: 0 auto;
-    width: 50px;
-    height: 36px;
-    background: url(/sites/all/themes/itg/images/mag_pnd.png) 0px 0px;
-}
+.print_digital{text-transform: uppercase; text-align: center; color: #8a8a8a; width: 60%; margin: 10px auto 0;  overflow: hidden;}
+.print_digital .print_lbtm_m {text-align: center;width:50%;float: left;cursor: pointer;}
+.print_digital .print_digital_m { text-align: center; width: 50%; float: left; font-size: 16px; color: #8a8a8a; font-weight: 300; cursor: pointer;}
+.print_digital .print_digital_m a, .print_digital .print_lbtm_m a { font-size: 13px; font-weight: 300; color: #8a8a8a;text-decoration: none;}
+.print_digital .print_lbtm { margin: 0 auto; width: 25px; height: 30px; background: url(https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/mag_pnd.png) 0 0 no-repeat;}
+.print_digital .print_digital { margin: 0 auto; width: 25px; height: 30px; background: url(https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/mag_pnd.png) 0 0 no-repeat;}
