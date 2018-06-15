@@ -7719,6 +7719,25 @@ function itg_rapid_api_popular_search_tv($token) {
 
     return $return_obj;
 }
+/**
+ * function for get redish_ttl
+ * @pram int $tid
+ *
+ * @return int
+ */
+function itg_app_redish_ttl($api = "") {
+    //$ttl = 300;  //default_ttl  
+    $ttl = variable_get('default_ttl');
+    $api_name = arg(1);
+    if ($api) {
+        $var_key = $api_name."_ttl";
+        if (variable_get($var_key) > 0) {
+            $ttl = variable_get($var_key);
+        }
+    }   
+
+    return $ttl;
+}
  
  
 
