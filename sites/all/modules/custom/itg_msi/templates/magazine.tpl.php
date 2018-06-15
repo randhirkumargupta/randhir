@@ -52,7 +52,7 @@ $arg = arg();
         $current_issue = explode(' 00:', $current_issues);
         ?>
         <?php if ($current_issue[0] == $issue_attribute_date): ?>
-          <div class="issue-subscribe-link"><?php print $row['nothing']; ?></div>
+          <div class="issue-subscribe-link"><a href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=indiatoday">SUBSCRIBE NOW</a></div>
         <?php endif; ?>
         <?php $future_isue = itg_msi_next_week_issue(); ?>
         <?php if ($future_isue): ?>
@@ -87,7 +87,7 @@ $arg = arg();
       $current_issue = explode(' 00:', $current_issues);
       ?>
       <?php if ($current_issue[0] == $issue_attribute_date): ?>
-        <div class="issue-subscribe-link"><?php print $row['nothing']; ?></div>
+        <div class="issue-subscribe-link"><a href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=indiatoday">SUBSCRIBE NOW</a></div>
       <?php endif; ?>
       <?php $future_isue = itg_msi_next_week_issue(); ?>
       <?php if ($future_isue): ?>
