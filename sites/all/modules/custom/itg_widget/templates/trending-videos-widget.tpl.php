@@ -26,8 +26,8 @@
 .home-trending-video #trending-videos .flex-direction-nav a{opacity:1!important;}
 .home-trending-video #trending-videos .flex-nav-prev,.home-trending-video #trending-videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
 .home-trending-video #trending-videos .flex-nav-prev{left:0px; top:80px;}
-.home-trending-video #trending-videos .flex-nav-next{right:0px; top:80px;border-radius: 35px 0px 0px 35px;}
-.home-trending-video #trending-videos .flex-direction-nav .flex-nav-next .flex-next{padding-left:10px;}
+.home-trending-video #trending-videos .flex-nav-next{right:20px; top:80px;border-radius: 35px 0px 0px 35px;}
+.home-trending-video #trending-videos .flex-direction-nav .flex-nav-next .flex-next{padding-left:14px;}
 .home-trending-video #trending-videos .flex-direction-nav{position: absolute;top: 0;width: 100%;}
 .home-trending-video #trending-videos .flex-direction-nav .flex-next{right:0; position:static;line-height: 64px;}
 .home-trending-video #trending-videos .flex-direction-nav .flex-prev{left:0; position:static;line-height: 64px;}
