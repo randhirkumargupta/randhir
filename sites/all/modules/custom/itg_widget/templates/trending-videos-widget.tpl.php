@@ -12,9 +12,8 @@
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 .home-trending-video #trending-videos .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
 .home-trending-video #trending-videos .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
-.home-trending-video #trending-videos .trending-videos.slides li p{ padding-bottom: 7px; }
+.home-trending-video #trending-videos .trending-videos.slides li p{ padding:5px 0 7px; }
 .home-trending-video #trending-videos .trending-videos{overflow-x: hidden;}
-.home-trending-video #trending-videos .trending-videos .trending-videos-list{padding: 0 10px 10px;}
 .home-trending-video #trending-videos .trending-videos li+li{ border-top:0px;}
 .home-trending-video #trending-videos .trending-videos .trending-videos-list .pic{ float: none; margin-right:0px; }
 .home-trending-video #trending-videos .trending-videos li a.pic:after{ background:transparent; }
@@ -35,7 +34,7 @@
 .home-trending-video #trending-videos .flex-direction-nav a{display:inline;}
 .home-trending-video #trending-videos .flex-direction-nav a:before{color:#fff;}
 .home-trending-video #trending-videos .trending-videos-flex{position:relative;}
-.home-trending-video #trending-videos .trending-videos .trending-videos-list{padding: 0 0 10px;}
+.home-trending-video #trending-videos .trending-videos .trending-videos-list{padding:0px;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 
 
