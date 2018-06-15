@@ -7,6 +7,7 @@
 ?>
 <style type="text/css">
 .home-trending-video .itg-widget-child.tab-data{border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;}
+.home-trending-video #trending-videos .trending-videos{border:0px;}
 .home-trending-video #trending-videos{ padding:0 10px 10px 10px;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 .home-trending-video #trending-videos .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
@@ -19,36 +20,24 @@
 .home-trending-video #trending-videos .trending-videos li a.pic:after{ background:transparent; }
 .home-trending-video #trending-videos .trending-videos li span.pic.video-icon{position: relative; height: 24px;display: block;float: none;line-height: 23px; margin-top: 10px;}
 .home-trending-video #trending-videos .trending-videos li span.pic.video-icon:after{ font: normal normal normal 14px/1 FontAwesome; content:"\f01d"; font-size: 23px; color:#323232; bottom: 0;left: 0;background: transparent;top: 2px;}
-
-
-
-
-
-
-
-
-
-
-
-
-
 .videoicon.desktophide{ display:none; }
-.trending_top_takes_videos{height: 100%; overflow: hidden; padding: 10px 21px; box-sizing: border-box; border: 1px solid #ccc;}
-.trending_top_takes_videos ul.trending-videos{border:0; padding-top:0;}
-.trending_top_takes_videos ol.flex-control-paging{display:none;}
-.trending_top_takes_videos .flex-direction-nav a{opacity:1!important;}
-.trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
-.trending_top_takes_videos .flex-nav-prev{left:0px; top:60px;}
-.trending_top_takes_videos .flex-nav-next{right:0px; top:60px;border-radius: 35px 0px 0px 35px;}
-.trending_top_takes_videos .flex-direction-nav .flex-nav-next .flex-next{padding-left:10px;}
-.trending_top_takes_videos .flex-direction-nav{position: absolute;top: 0;width: 100%;}
-.trending_top_takes_videos .flex-direction-nav .flex-next{right:0; position:static;line-height: 64px;}
-.trending_top_takes_videos .flex-direction-nav .flex-prev{left:0; position:static;line-height: 64px;}
-.trending_top_takes_videos .flex-direction-nav a{display:inline;}
-.trending_top_takes_videos .flex-direction-nav a:before{color:#fff;}
-.trending_top_takes_videos .trending-videos-flex{position:relative;}
-.front #trending-videos .trending-videos .trending-videos-list{padding: 0 0 10px;}
-#trending-videos ul li{padding:0px; margin-right:0px!important}
+
+.home-trending-video #trending-videos ul.trending-videos{border:0; padding-top:0;}
+.home-trending-video #trending-videos ol.flex-control-paging{display:none;}
+.home-trending-video #trending-videos .flex-direction-nav a{opacity:1!important;}
+.home-trending-video #trending-videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
+.home-trending-video #trending-videos .flex-nav-prev{left:0px; top:60px;}
+.home-trending-video #trending-videos .flex-direction-nav .flex-nav-next .flex-next{padding-left:10px;}
+.home-trending-video #trending-videos .flex-direction-nav{position: absolute;top: 0;width: 100%;}
+.home-trending-video #trending-videos .flex-direction-nav .flex-next{right:0; position:static;line-height: 64px;}
+.home-trending-video #trending-videos .flex-direction-nav .flex-prev{left:0; position:static;line-height: 64px;}
+.home-trending-video #trending-videos .flex-direction-nav a{display:inline;}
+.home-trending-video #trending-videos .flex-direction-nav a:before{color:#fff;}
+.home-trending-video #trending-videos .trending-videos-flex{position:relative;}
+.home-trending-video #trending-videos .trending-videos .trending-videos-list{padding: 0 0 10px;}
+.home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
+
+
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 .videoicon.mobilehide{ display:none; }
