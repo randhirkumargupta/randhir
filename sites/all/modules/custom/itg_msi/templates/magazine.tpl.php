@@ -43,7 +43,7 @@ $arg = arg();
 </div>
 <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
-        <div class="issue-image"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></div>
+        <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
         <div class="issue-title">
           <?php print $issue_title; ?>
         </div>
@@ -94,7 +94,7 @@ $arg = arg();
   <div class="magazin-top">
     <div class="magazin-subscribe">
       <span class="latest-issue"><?php print t('latest issue'); ?></span>
-      <div class="issue-image"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></div>
+      <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
         <div class="issue-title"><?php print $issue_title; ?></div>
       <?php
       $current_issues = itg_msi_get_current_issue();
