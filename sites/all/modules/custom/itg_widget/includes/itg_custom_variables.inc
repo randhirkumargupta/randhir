@@ -276,7 +276,7 @@ function itg_mobile_app_configure(){
   
   $form['status_third_level_menu'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable'),
+    '#title' => t('Third level menu show at details page'),
     '#required' => FALSE,
     '#default_value' => get_itg_variable('status_third_level_menu'),
   );
