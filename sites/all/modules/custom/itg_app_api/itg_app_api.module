@@ -3032,7 +3032,7 @@ function popular_search_tv_json_json() {
  *
  * @return int
  */
-function itg_app_redish_ttl($api) {
+function itg_app_redish_ttl($api = "") {
     //$ttl = 300;  //default_ttl  
     $ttl = variable_get('default_ttl');
     $api_name = arg(1);
