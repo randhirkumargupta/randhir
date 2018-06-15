@@ -6047,6 +6047,10 @@ h1.category-heading {
                 color: #444444;
                 margin-top: 10px;
                 text-align: center;
+                a{
+                color: #a00606;
+                font-family:"Merriweather-Bold";
+                }
             }
             .issue-image {
                 text-align: center;
@@ -6056,7 +6060,7 @@ h1.category-heading {
                 margin-top: 10px;
                 text-align: center;
                 span {
-                    display: block;
+                    font-size:12px;
                     color: #919191;
                     text-transform: uppercase;
                     font-weight: 500;
