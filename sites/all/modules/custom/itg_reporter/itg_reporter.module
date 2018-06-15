@@ -62,7 +62,7 @@ function itg_reporter_apaache_solr(){
   //$query->replaceParam("fq", '(' . $str . ')');
   $query->addParam('rows', '100000');
   $query->addFilter("bundle", "story");
-  $query->setSolrsort('dm_field_itg_content_publish_dat', 'desc');
+  $query->addParam('sort', 'dm_field_itg_content_publish_dat DESC');
   $response = $query->search();
   print_r($response);
   die;
