@@ -112,7 +112,7 @@ if (!empty($content)):
   }
   // source type array
   $source_type_arr = array('PTI' , 'IANS', 'ANI');
-  // Rich Snippet for Story
+// Rich Snippet for Story
 $mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
 if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
 $publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));

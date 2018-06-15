@@ -13633,4 +13633,16 @@ div.ctools-modal-content .form-submit {
 .page-tv.page-tv-indiatoday #itg-tv-schedule-form .form-actions {
   padding: 15px 2px; }
 
+#itg-tv-schedule-form .description {
+  left: 27%; }
+
+#itg-tv-schedule-form .csv-download-wrapper {
+  position: relative;
+  z-index: 999;
+  float: right; }
+
+#itg-tv-schedule-form .preview-publish-wrapper {
+  margin-top: -65px;
+  float: right; }
+
 /*# sourceMappingURL=styles.css.map */

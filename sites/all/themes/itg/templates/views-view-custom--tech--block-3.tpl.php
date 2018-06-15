@@ -1,11 +1,10 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <div class="auto-block-1">
       <div class="featured-news">
 
         <?php
         global $base_url;
-        p($rows);
         foreach ($rows as $index => $row) {
 
           $desc = $row['title'];
