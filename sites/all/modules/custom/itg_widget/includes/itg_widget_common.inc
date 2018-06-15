@@ -1933,8 +1933,11 @@ function itg_widget_preprocess_node(&$vars) {
         foreach ($itg_occupation_tree as $term) {
             $occupation[] = $term->name;
         }
-
+        if($term_name == 'reporter'){
+            $vars['solr_story_data'] = itg_reporter_apaache_solr($nid);
+        }
         if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
+
             drupal_add_js("jQuery(document).ready(function(){
               jQuery('.read-more , .full-content').click(function(){
               jQuery('.less-content').toggle();
@@ -1943,6 +1946,7 @@ function itg_widget_preprocess_node(&$vars) {
               })", 'inline'
             );
             $vars['theme_hook_suggestions'][] = 'node__reporter__'.$check_arr[$term_name];
+
         }else{
 
             drupal_add_js("jQuery(document).ready(function(){

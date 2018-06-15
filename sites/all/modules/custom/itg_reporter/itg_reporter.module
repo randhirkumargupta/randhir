@@ -51,8 +51,8 @@ function itg_reporter_menu() {
   return $items;
 }
 
-function itg_reporter_apaache_solr(){
-  $str =  '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:3692 OR sm_field_reporter_publish_id:3692,* OR sm_field_reporter_publish_id:*,3692,* OR sm_field_reporter_publish_id:*,3692';
+function itg_reporter_apaache_solr($nid=''){
+  $str =  '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:'.$nid.' OR sm_field_reporter_publish_id:'.$nid.',* OR sm_field_reporter_publish_id:*,'.$nid.',* OR sm_field_reporter_publish_id:*,'.$nid;
 
   $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url';
   $solr = apachesolr_get_solr();
@@ -64,18 +64,8 @@ function itg_reporter_apaache_solr(){
   $query->addFilter("bundle", "story");
   $query->addFilter("bs_status", true);
   $response = $query->search();
-  print_r($response);
-  //$raw_results = apachesolr_search_process_response($response, $query);
-
-  //print_r($raw_results);
-  die('ABC');
-  // if (isset($raw_results) && !empty($raw_results)) {
-  //   foreach ($raw_results as $raw_result) {
-  //     // theme individual results
-  //     $result .= theme('search_result', array('result' => $raw_result, 'module' => 'apachesolr_search'));
-  //   }
-  // }
-  // return $result;
+  $raw_results = apachesolr_search_process_response($response, $query);
+  return $raw_results;
 }
 
 
