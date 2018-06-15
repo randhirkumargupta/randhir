@@ -845,8 +845,8 @@ function itg_js_alter(&$javascript) {
   
   if (drupal_is_front_page()) {
 	 //unset($javascript['misc/drupal.js']);
-	 //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
-	 //unset($javascript['misc/jquery.once.js']);
+	 unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+	 unset($javascript['misc/jquery.once.js']);
 	 //unset($javascript['sites/all/themes/itg/js/slick.js']);
 	 unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
 	 unset($javascript['sites/all/themes/itg/js/ripple.js']);
