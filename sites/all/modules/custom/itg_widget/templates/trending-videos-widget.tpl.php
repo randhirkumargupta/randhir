@@ -38,6 +38,9 @@
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+ .home-trending-video .tab-buttons{ display: none; }
+ .home-trending-video h3{text-transform: uppercase; padding: 0 0 0 10px;}
+ .home-trending-video .itg-widget-child.tab-data{ display: block!important }
 .home-trending-video .videoicon.mobilehide{ display:none; }
 .home-trending-video .videoicon.desktophide{ display:inline-block; }
 .home-trending-video #trending-videos .flex-direction-nav a{opacity:0!important;}
