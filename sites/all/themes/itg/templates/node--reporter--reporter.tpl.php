@@ -32,11 +32,11 @@
         <li class="col-md-3 <?php print $value->bundle .'-'.$value->entity_id; ?>">
           <div class="tile">
             <figure>
-              <a href="<?php print $value->path_alias; ?>"><img src="<?php print $value->sm_field_custom_story_small_large_url[0]; ?>" alt="<?php print $value->label; ?>" title="<?php print $value->label; ?>" width="170" height="96"></a>
+              <a href="/<?php print $value->path_alias; ?>"><img src="<?php print $value->sm_field_custom_story_small_large_url[0]; ?>" alt="<?php print $value->label; ?>" title="<?php print $value->label; ?>" width="170" height="96"></a>
             </figure>
             <span class="posted-on"><?php print date('D, d M, Y', strtotime($value->dm_field_itg_content_publish_dat[0])); ?></span>
             <p title="<?php print $value->label; ?>">
-              <a href="<?php print $value->path_alias; ?>"><?php print $value->label; ?></a>
+              <a href="/<?php print $value->path_alias; ?>"><?php print $value->label; ?></a>
             </p>
           </div>
         </li>

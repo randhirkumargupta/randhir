@@ -40,18 +40,27 @@ $arg = arg();
                 print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
             }
           ?>
+<div class="magazin-bottom">
+      <?php 
+        if ($is_magazine_page && $show_web_exclusive) {          
+          $view = views_get_view_result('magazine_top_story', 'block', $issue_attribute_date);
+          foreach ($view as $key => $view_val) {
+            $nid_arr[] = $view_val->nid;
+          }
+          print views_embed_view('magazine_top_story', 'block', $issue_attribute_date);
+        }
+        else {
+          print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
+        }        
+        ?>
+    </div>          
 </div>
 <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
         <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
         <div class="issue-title">
           <?php print $issue_title; ?>
-        </div>
-        <?php
-        $current_issues = itg_msi_get_current_issue();
-        $current_issue = explode(' 00:', $current_issues);
-        ?>
-        <?php if ($current_issue[0] == $issue_attribute_date): ?>        
+        </div>     
         <div class="print_digital">
 			<div class="print_lbtm_m">
 				<a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">
@@ -66,29 +75,13 @@ $arg = arg();
 				 <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/digital-magazine-subscription.jsp?source=ITHomepage">Digital</a>
 		   </div>
 	    </div>
-          <div class="issue-subscribe-link"><a href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=indiatoday">SUBSCRIBE NOW</a></div>
-        <?php endif; ?>
+          <div class="issue-subscribe-link"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">SUBSCRIBE NOW</a></div>
         <?php $future_isue = itg_msi_next_week_issue(); ?>
         <?php if ($future_isue): ?>
           <div class="next-issue-out"><span class="text"><?php print t('Next issue out on') ?> </span><span class="issue-next-date"><?php print $future_isue; ?></span></div>
         <?php endif; ?>
       </div>
-    </div>
-
-    <div class="magazin-bottom">
-      <?php 
-        if ($is_magazine_page && $show_web_exclusive) {          
-          $view = views_get_view_result('magazine_top_story', 'block', $issue_attribute_date);
-          foreach ($view as $key => $view_val) {
-            $nid_arr[] = $view_val->nid;
-          }
-          print views_embed_view('magazine_top_story', 'block', $issue_attribute_date);
-        }
-        else {
-          print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
-        }        
-        ?>
-    </div>
+    </div>    
 </div>
 <div class="magazin-lhs-top magazin-mob">
   <div class="magazin-top">
@@ -96,11 +89,6 @@ $arg = arg();
       <span class="latest-issue"><?php print t('latest issue'); ?></span>
       <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
         <div class="issue-title"><?php print $issue_title; ?></div>
-      <?php
-      $current_issues = itg_msi_get_current_issue();
-      $current_issue = explode(' 00:', $current_issues);
-      ?>
-      <?php if ($current_issue[0] == $issue_attribute_date): ?>
         <div class="print_digital">
 			<div class="print_lbtm_m">
 				<a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">
@@ -116,7 +104,6 @@ $arg = arg();
 		   </div>
 	    </div>
         <div class="issue-subscribe-link"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage">SUBSCRIBE NOW</a></div>
-      <?php endif; ?>
       <?php $future_isue = itg_msi_next_week_issue(); ?>
       <?php if ($future_isue): ?>
         <div class="next-issue-out"><span class="text"><?php print t('Next issue out on') ?> </span><span class="issue-next-date"><?php print $future_isue; ?></span></div>

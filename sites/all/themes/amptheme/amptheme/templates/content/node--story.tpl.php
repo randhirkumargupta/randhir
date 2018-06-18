@@ -247,7 +247,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 						<?php 
 						  } 
 						?>
-					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <li itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> <span itemprop="dateModified" content="<?php print $modified_date; ?>">UPDATED</span>
 					  <?php
 					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
 							print date('F j, Y H:i', $node->created);
@@ -426,10 +426,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 				
                     <meta itemprop="url" content="<?php print $file_uri; ?>">
 					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
-					<div class="image-alt" itemprop="description"><?php print $node_image_alt; ?></div>
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
-                  <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
+                  <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
 											<?php } ?>                            
 										</div>
 							<?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
@@ -741,7 +740,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               </ul>
               </section>
               </amp-accordion>
-              </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+              </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt" itemprop="description">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
