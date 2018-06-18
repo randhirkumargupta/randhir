@@ -288,7 +288,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                $class = 'story-associate-content';
              }
           ?>
-            <div class="<?php echo $class; ?>">
+            <div class="<?php echo $class; ?>" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+              <meta itemprop="representativeOfPage" content="true">
               <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
                 <!--<div id="videogallery-iframe">
                   <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
@@ -333,7 +334,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }*/
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
-                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
+                <div class="stryimg"><?php
                 
                   if (empty($widget_data)) {
                     $story_image = '';
@@ -388,7 +389,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 else {
                   ?>
 
-                  <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
+                  <div class="stryimg"><?php
                      
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
@@ -749,7 +750,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               </ul>
               </section>
               </amp-accordion>
-              </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt" itemprop="description">' . $getImageInfo[0]->image_caption . '</div>';
+              </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div></div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
