@@ -55,7 +55,7 @@
 }
 
 </style>
-<h3 class="desktop-hide">Trending Videos</h3>
+<h3 class="desktop-hide widget-title">Trending Videos</h3>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
     <?php foreach ($data as $entity) {?>
