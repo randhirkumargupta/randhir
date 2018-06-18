@@ -1143,7 +1143,7 @@ function itg_akamai_init() {
     
   }
   //condition for aapapi
-    if (arg(0) == 'appapi' && arg(1) == 'it') {
+    if (arg(0) == 'appapi') {
                 $ttl_for_custom_url = 60;
                 akamai_max_age($ttl_for_custom_url);
               }
