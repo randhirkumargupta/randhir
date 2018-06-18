@@ -286,9 +286,12 @@ function get_third_level_menu() {
                 ->condition('fpc.entity_id', $arg[1])
                 ->execute()->fetchField();
     if (!empty($data)) {
+      if($_GET['test'] == 'menu_debug') {
+        pr($data);
+      }
       $menu_display_status = get_itg_variable('status_third_level_menu');
       $menu_display_status_arr = explode(',',$menu_display_status);
-      if (is_array($menu_display_status_arr) && !in_array($arg[1], $menu_display_status_arr)) {
+      if (is_array($menu_display_status_arr) && !in_array($data, $menu_display_status_arr)) {
         $parents = taxonomy_get_parents_all($data);
         if (count($parents) > 1) {
           $section_id = end($parents)->tid;
