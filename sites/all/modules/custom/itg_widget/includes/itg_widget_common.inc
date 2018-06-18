@@ -1917,13 +1917,13 @@ function itg_widget_preprocess_views_view(&$vars) {
  * {@inheritdoc}
  */
 function itg_widget_preprocess_node(&$vars) {
-    $check_arr = array('People'=>'people','anchor'=>'anchor', 'Celebrity Profile'=>'celebrity__profile','Politician'=>'politician','reporter'=>'reporter','Speaker'=>'speaker');
+    $check_arr = array('people'=>'people','anchor'=>'anchor', 'celebrity profile'=>'celebrity__profile','politician'=>'politician','reporter'=>'reporter','speaker'=>'speaker');
     if ($vars['type'] == 'reporter') {
         if (arg(0) == 'node') {
             $nid = arg(1);
             $term_data = get_term_id_and_name($nid);
             if(!empty($term_data)){
-              $term_name = $term_data->name;
+              $term_name = strtolower($term_data->name);
               $tid = $term_data->tid;
           }
         }
@@ -1931,13 +1931,16 @@ function itg_widget_preprocess_node(&$vars) {
         $itg_occupation = taxonomy_vocabulary_machine_name_load('itg_occupation');
         $itg_occupation_tree = taxonomy_get_tree($itg_occupation->vid);
         foreach ($itg_occupation_tree as $term) {
-            $occupation[] = $term->name;
+            $occupation[] = strtolower($term->name);
         }
         if($term_name == 'reporter'){
             $vars['solr_story_data'] = itg_reporter_apaache_solr($nid);
         }
+        else if($term_name == 'people'){
+            $node_title = get_title_of_node($nid);
+            $vars['solr_story_data'] = itg_reporter_people_story_solr($node_title);
+        }
         if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
-
             drupal_add_js("jQuery(document).ready(function(){
               jQuery('.read-more , .full-content').click(function(){
               jQuery('.less-content').toggle();
@@ -1948,7 +1951,6 @@ function itg_widget_preprocess_node(&$vars) {
             $vars['theme_hook_suggestions'][] = 'node__reporter__'.$check_arr[$term_name];
 
         }else{
-
             drupal_add_js("jQuery(document).ready(function(){
               jQuery('.read-more , .full-content').click(function(){
               jQuery('.less-content').toggle();
@@ -3777,4 +3779,12 @@ function get_term_id_and_name($nid){
     return $results;
   }
   return array();
+}
+
+function get_title_of_node($nid){
+    if(!empty($nid)){
+        return $row = db_query('SELECT title FROM {node} WHERE nid = :nid', array(':nid' => $nid))->fetchField();
+    }else{
+        return array();
+    }
 }
