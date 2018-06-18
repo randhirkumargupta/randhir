@@ -555,7 +555,7 @@ function fixBadUnicodeForJson($str) {
 function itg_generate_samsung_json_feed_newslist_technology(){
   $tid= 1206688;
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
@@ -570,12 +570,12 @@ function itg_generate_samsung_json_feed_newslist_technology(){
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('smi', array('field_story_large_image_fid'));
   $query->fields('eli', array('field_story_extra_large_image_fid'));
-  $query->fields('fpc', array('field_primary_category_value'));
-  $days_ago = strtotime(date('Y-m-d', strtotime('-200 days')));
+  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-400 days')));
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
-  $query->condition('fpc.field_primary_category_value', $tid, '=');
+  $query->condition('ti.tid', $tid, '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 20);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -584,7 +584,7 @@ function itg_generate_samsung_json_feed_newslist_technology(){
     'status_message' => 1,
     'data' => array(
       'id' => 1,
-      'title' => 'Top Stories',
+      'title' => 'Technology Stories',
     )
   );
   foreach($result as $value){
