@@ -63,7 +63,7 @@ function itg_report_api_menu() {
     /**
      * appapi_breaking_news
      */
-    
+     
     function appapi_breaking_news(){
         // call breaking news view
     $view_result = views_get_view_result('breaking_news', 'block_1');
