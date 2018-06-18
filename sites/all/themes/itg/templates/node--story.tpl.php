@@ -623,7 +623,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                    $class = 'story-associate-content';
                  }
                  ?>
-            <div class="<?php echo $class; ?>">
+            <div class="<?php echo $class; ?>" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+				  <meta itemprop="representativeOfPage" content="true">
               <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
                 <div id="videogallery-iframe">
                   <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
@@ -633,8 +634,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
-				  <meta itemprop="representativeOfPage" content="true">
+                <div class="stryimg">
                   <?php if($activate_live_tv) { ?>
                         <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
@@ -717,7 +717,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }
                 else {
                   ?>
-                  <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+                  <div class="stryimg">
 					<meta itemprop="representativeOfPage" content="true">
 					  <?php
                     $flag = TRUE;
@@ -1120,7 +1120,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
-          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt" itemprop="description">' . $getImageInfo[0]->image_caption . '</div>';
+          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
