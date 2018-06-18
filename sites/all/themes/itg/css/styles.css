@@ -6182,7 +6182,8 @@ h1.category-heading {
         text-transform: uppercase;
         font-family: "OpenSans-Regular"; }
       .magazin-lhs-top .magazin-top .magazin-top-left h2 {
-        margin-top: 10px; }
+        margin-top: 10px;
+        margin-bottom: 10px; }
     .magazin-lhs-top .magazin-top .magazin-subscribe {
       float: right;
       width: 33.33333%;
