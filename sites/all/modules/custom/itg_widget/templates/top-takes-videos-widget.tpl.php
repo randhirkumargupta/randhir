@@ -6,6 +6,7 @@ if($is_fron_page){
   $data_tb_region_item = 'data-tb-region-item';  
 }
 ?>
+<h3 class="desktop-hide">Top Takes</h3>
   <div class="top-takes-videos-flex <?php if (!empty($is_fron_page)) { print $home_top_takes; }  ?>" id="trending-videos">
     <?php    
     if (empty($is_fron_page)) {
