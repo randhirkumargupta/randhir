@@ -37,22 +37,20 @@
 .home-trending-video #trending-videos .trending-videos .trending-videos-list{padding:0px;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 
-
-
 @media only screen and (min-width: 320px) and (max-width: 767px) {
-.videoicon.mobilehide{ display:none; }
-.videoicon.desktophide{ display:inline-block; }
-.trending_top_takes_videos .flex-direction-nav a{opacity:0!important;}
-.trending_top_takes_videos .flex-nav-prev,.trending_top_takes_videos .flex-nav-next{display: none;}
-.trending_top_takes_videos{ border:0px;padding: 10px 15px; }
-.trending_top_takes_videos ul.trending-videos li{box-shadow: 0 0px 4px rgba(0,0,0,0.24), 0 0px 4px rgba(0,0,0,0.24); -webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.12), 0 0px 4px rgba(0,0,0,0.24); border:1px solid rgba(0,0,0,0.12);}
-#trending-videos ul li{padding:10px 0px 0; margin-right:15px!important;border-radius: 5px; margin-bottom:2px; margin-top:2px; }
-#trending-videos ul li p{ padding: 15px 10px; font-size: 15px; font-family: "OpenSans-regular"; line-height:20px;}
-.front .trending-videos li span.videoicon i:before {color: #fff; font-size:18px;}
-.front .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,0.6); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
+.home-trending-video .videoicon.mobilehide{ display:none; }
+.home-trending-video .videoicon.desktophide{ display:inline-block; }
+.home-trending-video #trending-videos .flex-direction-nav a{opacity:0!important;}
+.home-trending-video #trending-videos .flex-nav-prev,.home-trending-video #trending-videos .flex-nav-next{display: none;}
+.home-trending-video #trending-videos ul.trending-videos li{box-shadow: 0 0px 4px rgba(0,0,0,0.24), 0 0px 4px rgba(0,0,0,0.24); -webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.12), 0 0px 4px rgba(0,0,0,0.24); border:1px solid rgba(0,0,0,0.12);}
+.home-trending-video #trending-videos ul li{padding:10px 0px 0; margin-right:15px!important;border-radius: 5px; margin-bottom:2px; margin-top:2px; }
+.home-trending-video #trending-videos ul li p{ padding: 15px 10px; font-size: 15px; font-family: "OpenSans-regular"; line-height:20px;}
+.home-trending-video #trending-videos .trending-videos li span.videoicon i:before {color: #fff; font-size:18px;}
+.home-trending-video #trending-videos .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,0.6); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
 }
 
 </style>
+<h3 class="desktop-hide">Trending Videos</h3>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
     <?php foreach ($data as $entity) {?>
