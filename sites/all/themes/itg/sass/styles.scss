@@ -5966,13 +5966,13 @@ h1.category-heading {
 .magazin-lhs-top {
     background: #f6f5f5;
     border: 1px solid $border-color;
-    padding-bottom: 10px;
+    padding-bottom:0px;
     &a:hover {
         color: #193984;
     }
     .magazin-top {
         @include clearfix;
-        margin-bottom: 20px;
+        margin-bottom:0px;
         ul {
             @extend .list-none;
         }
@@ -5993,6 +5993,7 @@ h1.category-heading {
             }
             h2 {
                 margin-top: 10px;
+                margin-bottom: 10px;
             }
         }
         .magazin-subscribe {
@@ -6039,13 +6040,17 @@ h1.category-heading {
                 }
             }
             .issue-subscribe-link {
-                @include font(22px,
+                @include font(20px,
                 null,
                 700);
                 text-transform: uppercase;
                 color: #444444;
                 margin-top: 10px;
                 text-align: center;
+                a{
+                color: #a00606;
+                font-family:"Merriweather-Bold";
+                }
             }
             .issue-image {
                 text-align: center;
@@ -6064,6 +6069,7 @@ h1.category-heading {
         }
     }
     .magazin-bottom {
+        padding-bottom:0px;
         ul {
             @include clearfix;
             @extend .list-none;
