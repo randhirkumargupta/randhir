@@ -92,21 +92,21 @@ document.write(page_request.responseText)}
 <style>    
 .video_episode_snippets .video_inner p {font-size: 15px !important;line-height: 18px;padding: 5px;}.video_info,.item {background: none !important;}.outer-video-area {margin-bottom: 56px;background-color: #fff;}.video_episode_snippets .video_inner {height: auto; margin-bottom:15px;}.video_episode_snippets .video_inner img {height: auto;}.timeline-outer .slider-year {background: none !important;overflow: hidden}.timeline-slider ul li {background-color: #fff;} 
 li .video_episode_snippets .video_inner p {padding-left: 5px !important;background-color: #fff;}.videoshow-section {background: none !important;height: 1635px;overflow: hidden;}.videoshow-section ul {position: relative;margin: 0;padding: 0;}.videoshow-section ul li {color: #fff;width: 320px;float: left;height: 282px;background-color: #fff;margin-bottom: 56px;}.pad26 {padding-bottom: 26px;}.headtxt {font-size: 19px;margin-bottom: 5px;}.headtxt a {color: #007ed2 !important;text-decoration: underline}ul.headtxt_t{ padding-left: 20px;line-height: 28px;font-size: 20px; text-transform:uppercase;}ul.headtxt_t li{margin-bottom:6px}
-   .support-team .support-slider ul li span{width:100%} 
-   .support-team .sup_like_all .share_like ul li{display:inline-block;line-height: 34px;width:auto;padding-bottom: 0px;float:none;}   
-   .support-team .sup_like_all.sup_like_all1{height:152px;}
-   .support-team .sup_like_all h4{margin-bottom: 2px}
-   .support-team .sup_like_all .share_like ul li.fb_icon{padding-right: 9px}
-   .support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
-   .video_area h2{background-size: 424px 55px;}
-   .paragraph{margin: 0px; padding: 0px 0 10px 0; font-size: 18px; line-height: 30px;}
-    .paragraph h2 {font-size: 18px;    display: inline;}
-   .paragraph h2 a{ color:#181818; text-decoration: underline}
-   .right_side h2.celebration-pics{background-size: 370px 56px;background-position: -11px 0px; font-size:16px;}
-   
-   @media screen and (max-width: 800px){
-    .video_area h2{background-size: 324px 55px;font-size: 12px;}
-   }
+.support-team .support-slider ul li span{width:100%} 
+.support-team .sup_like_all .share_like ul li{display:inline-block;line-height: 34px;width:auto;padding-bottom: 0px;float:none;}   
+.support-team .sup_like_all.sup_like_all1{height:152px;}
+.support-team .sup_like_all h4{margin-bottom: 2px}
+.support-team .sup_like_all .share_like ul li.fb_icon{padding-right: 9px}
+.support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
+.video_area h2{background-size: 424px 55px;}
+ .paragraph{margin: 0px; padding: 0px 0 10px 0; font-size: 18px; line-height: 30px;}
+ .paragraph h2 {font-size: 18px;    display: inline;}
+.paragraph h2 a{ color:#181818; text-decoration: underline}
+.right_side h2.celebration-pics{background-size: 370px 56px;background-position: -11px 0px; font-size:16px;}
+.notetext{color:#111;  -webkit-animation: flash linear 1s infinite; animation: flash linear 1s infinite; font-size:18px;line-height:24px;}
+@-webkit-keyframes flash { 0% { opacity: 1; } 50% { opacity: .1; } 100% { opacity: 1; }}
+@keyframes flash {0% { opacity: 1; } 50% { opacity: .1; } 100% { opacity: 1; }}
+   @media screen and (max-width: 800px){.video_area h2{background-size: 324px 55px;font-size: 12px;} }
 </style>    
 
 </head>
@@ -169,6 +169,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="over_area">
+<div class="notetext">"REMINDER TO ALL THOSE WHO HAVE REGISTERED FOR NEWSWIZ 2018 - THE ONLINE TEST IS SCHEDULED FOR THURSDAY, 20TH JUNE 2018, START TIME 4 PM"</div>
                     <h1>News Wiz Quiz 2018: Season 3</h1>
 <div class="paragraph">It gives us great pleasure to announce the return of the exciting and innovative news quiz, <h2><strong><a href="https://www.indiatoday.in/newswiz/2018/">“News Wiz”</a></strong> </h2> <strong>for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</div>
 <br>
