@@ -89,6 +89,8 @@ function itg_report_api_menu() {
 
         $title = $result[0]['title'];
         $field_breaking_content_details_value = $result[0]['field_breaking_content_details_value'];
+        $entity = entity_load('field_collection_item', $field_breaking_content_details_value);            
+        $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];
         $body = $result[0]['body_value'];
         $create_date = date("F d, Y", $result[0]['created']);
         $create_datetime = date(DATE_ATOM, $result[0]['created']);
@@ -102,7 +104,7 @@ function itg_report_api_menu() {
         $data['status_message'] = "";
         $news = array();
         $news['id'] = "$nid";
-        $news['title'] = "$field_breaking_content_details_value";
+        $news['title'] = "$field_breaking_tile";
         $news['url'] = "$web_url";
         $news['published'] = "1";
         $news['created'] = "$create_datetime";
