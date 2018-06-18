@@ -718,7 +718,6 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 else {
                   ?>
                   <div class="stryimg">
-					<meta itemprop="representativeOfPage" content="true">
 					  <?php
                     $flag = TRUE;
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
