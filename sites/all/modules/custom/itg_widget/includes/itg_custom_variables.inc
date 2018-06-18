@@ -89,6 +89,13 @@ function itg_custom_variables() {
     '#default_value' => get_itg_variable('is_pti_cron_running', 1),
     '#required' => FALSE,
   );
+  
+  $form['status_third_level_menu'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Third level menu show/hide at details page'),
+    '#default_value' => get_itg_variable('status_third_level_menu'),    
+  );
+  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
@@ -273,14 +280,7 @@ function itg_mobile_app_configure(){
   global $user;
   $form = array();
   if (!in_array("Editor", $user->roles)) {
-  
-  $form['status_third_level_menu'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Third level menu show at details page'),
-    '#required' => FALSE,
-    '#default_value' => get_itg_variable('status_third_level_menu'),
-  );
-  
+    
   $form['cube_js_mini_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Mini url'),
