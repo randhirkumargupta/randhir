@@ -728,7 +728,6 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
                 else {
                   ?>
                   <div class="stryimg">
-					  <meta itemprop="representativeOfPage" content="true">
 				  <?php
                     $flag = TRUE;
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
