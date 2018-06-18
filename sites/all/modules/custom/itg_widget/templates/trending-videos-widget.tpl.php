@@ -50,6 +50,8 @@
 .home-trending-video #trending-videos ul li p{ padding: 15px 10px; font-size: 15px; font-family: "OpenSans-regular"; line-height:20px;}
 .home-trending-video #trending-videos .trending-videos li span.videoicon i:before {color: #fff; font-size:18px;}
 .home-trending-video #trending-videos .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,0.6); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
+.home-trending-video #trending-videos .trending-videos.slides li p{padding:7px 10px}
+.home-trending-video .itg-widget-child.tab-data{border:0px;}
 }
 
 </style>
