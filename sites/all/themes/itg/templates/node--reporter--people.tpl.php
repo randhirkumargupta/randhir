@@ -27,9 +27,23 @@
   $block = module_invoke('itg_widget', 'block_view', 'anchor_langing_page_menu');
   print $block['content'];
   ?>
-<?php
-print views_embed_view('video_list_of_category', 'block_2');
-?>
+  <?php if(!empty($solr_story_data)):?>
+    <h3<?php print $title_attributes; ?>>Latest News About <?php print $title; ?></h3>
+    <ul class="people-story-wrapper">
+      <?php foreach($solr_story_data as $key => $value): ?>
+        <li class="col-md-3 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
+          <div class="tile">
+            <figure>
+              <a href="/<?php print $value->path_alias; ?>"><img src="<?php print $value->sm_field_custom_story_extra_small_url[0]; ?>" alt="<?php print $value->label; ?>" title="<?php print $value->label; ?>" width="88" height="50"></a>
+            </figure>
+            <p title="<?php print $value->label; ?>">
+              <a href="/<?php print $value->path_alias; ?>"><?php print $value->label; ?></a>
+            </p>
+          </div>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  <?php endif; ?>
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
