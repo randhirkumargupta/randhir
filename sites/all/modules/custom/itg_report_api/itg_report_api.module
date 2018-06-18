@@ -88,8 +88,8 @@ function itg_report_api_menu() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         $title = $result[0]['title'];
-        $field_breaking_content_details_value = $result[0]['field_breaking_content_details_value'];
-        $entity = entity_load('field_collection_item', $field_breaking_content_details_value);            
+        $content_id = $result[0]['field_breaking_content_details_value'];
+        $entity = entity_load('field_collection_item', $content_id);            
         $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];
         $body = $result[0]['body_value'];
         $create_date = date("F d, Y", $result[0]['created']);
