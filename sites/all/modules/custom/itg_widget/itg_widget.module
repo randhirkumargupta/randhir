@@ -673,8 +673,14 @@ function itg_widget_block_view($delta = '') {
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
             $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
             drupal_add_js('jQuery(document).ready(function() {
+              function getGridSize() {
+                  return (window.innerWidth < 768) ? 270 : "";
+                }
             jQuery(".trending-videos-flex").flexslider({
             animation: "slide",
+            animationLoop: false,
+            itemWidth: getGridSize(),
+            itemMargin:15,
             prevText: "",
             nextText: "",
             });
@@ -707,8 +713,14 @@ function itg_widget_block_view($delta = '') {
             $info['max_limit'] = TOP_TAKES_MAX_RANGE;
             $info['min_limit'] = TOP_TAKES_MIN_RANGE;
             drupal_add_js('jQuery(document).ready(function() {
+              function getGridSize() {
+                  return (window.innerWidth < 768) ? 270 : "";
+                }
             jQuery(".top-takes-videos-flex").flexslider({
             animation: "slide",
+            animationLoop: false,
+            itemWidth: getGridSize(),
+            itemMargin:15,
             prevText: "",
             nextText: "",
             });
