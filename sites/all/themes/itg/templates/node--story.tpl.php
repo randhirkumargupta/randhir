@@ -554,8 +554,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 </ul>
                 <?php } ?>  
                 <ul class="date-update">
-                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                  <li><?php t('UPDATED: '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                  <li itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                  <li itemprop="dateModified" content="<?php print $modified_date; ?>"><?php t('UPDATED: '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                         print date('F j, Y H:i', $node->created);
                     } else {
                         print date('F j, Y H:i', $node->changed);  
@@ -686,7 +686,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                                 //$file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                             //}
                             if (!$flag) {
-                              print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
+                              print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '" itemprop = "contentUrl"><span class="story-photo-icon">';
                             }
                             ?>
 
@@ -705,7 +705,6 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                     ?>
                     <meta itemprop="url" content="<?php print $file_uri; ?>">
 					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
-					<div class="image-alt" itemprop="description"><?php print $story_alt; ?></div>
                     <?php
                   if (!empty($getimagetags)) {
                     foreach ($getimagetags as $key => $tagval) {
@@ -718,7 +717,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }
                 else {
                   ?>
-                  <div class="stryimg"><?php
+                  <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+					<meta itemprop="representativeOfPage" content="true">
+					  <?php
                     $flag = TRUE;
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
@@ -751,7 +752,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       //$file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     //}
                     if (!$flag) {
-                      print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
+                      print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '" itemprop = "contentUrl">        
                                     <span class="story-photo-icon">';
                     }
                     ?>
@@ -772,7 +773,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                         print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="' . $urltags . '" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
                       }
                     }
-                    ?>
+                    ?>                    
+                    <meta itemprop="url" content="<?php print $file_uri; ?>">
+					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
                   <?php } ?>
 
                   <?php
@@ -800,7 +803,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     <?php } ?>
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
-                  <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
+                  <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
     <?php } ?>                            
               </div>
               <?php
@@ -1117,7 +1120,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
               <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
-          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt" itemprop="description">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
