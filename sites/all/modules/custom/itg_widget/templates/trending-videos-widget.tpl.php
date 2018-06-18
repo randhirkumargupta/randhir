@@ -39,7 +39,7 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
  .home-trending-video .tab-buttons{ display: none; }
- .home-trending-video h3{text-transform: uppercase; padding: 0 0 0 10px;}
+ .home-trending-video h3{text-transform: uppercase; padding: 0 0 0 10px; margin:0px;}
  .home-trending-video .itg-widget-child.tab-data{ display: block!important }
 .home-trending-video .videoicon.mobilehide{ display:none; }
 .home-trending-video .videoicon.desktophide{ display:inline-block; }
@@ -52,6 +52,7 @@
 .home-trending-video #trending-videos .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,0.6); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
 .home-trending-video #trending-videos .trending-videos.slides li p{padding:7px 10px}
 .home-trending-video .itg-widget-child.tab-data{border:0px;}
+.home-trending-video #trending-videos{ padding:5px 10px; }
 }
 
 </style>
