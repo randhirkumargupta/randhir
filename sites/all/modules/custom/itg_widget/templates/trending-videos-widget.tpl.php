@@ -39,7 +39,7 @@
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
  .home-trending-video .tab-buttons{ display: none; }
- .home-trending-video h3{text-transform: uppercase; padding: 0 0 0 10px; margin:0px;}
+ .home-trending-video h3{text-transform: uppercase; padding: 0 0 0 10px; margin:0px; color: #000;font-size: 16px; padding: 0;    font-weight: 600;margin-bottom: 5px; height: auto;font-family: "OpenSans-Bold";}
  .home-trending-video .itg-widget-child.tab-data{ display: block!important }
 .home-trending-video .videoicon.mobilehide{ display:none; }
 .home-trending-video .videoicon.desktophide{ display:inline-block; }
@@ -53,10 +53,12 @@
 .home-trending-video #trending-videos .trending-videos.slides li p{padding:7px 10px}
 .home-trending-video .itg-widget-child.tab-data{border:0px;}
 .home-trending-video #trending-videos{ padding:5px 10px; }
+.home-trending-video #trending-videos .trending-videos .trending-videos-list{min-height:250px;}
+.home-trending-video #trending-videos .top_takes_videos_widget h3{ margin-top:20px;}
 }
 
 </style>
-<h3 class="desktop-hide widget-title">Trending Videos</h3>
+<h3 class="desktop-hide">Trending Videos</h3>
 <div class="trending-videos-flex" id="trending-videos">
   <ul class="trending-videos slides">
     <?php foreach ($data as $entity) {?>
