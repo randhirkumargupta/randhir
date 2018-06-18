@@ -5967,13 +5967,13 @@ h1.category-heading {
 .magazin-lhs-top {
     background: #f6f5f5;
     border: 1px solid $border-color;
-    padding-bottom: 10px;
+    padding-bottom:0px;
     &a:hover {
         color: #193984;
     }
     .magazin-top {
         @include clearfix;
-        margin-bottom: 20px;
+        margin-bottom:0px;
         ul {
             @extend .list-none;
         }
@@ -6070,6 +6070,7 @@ h1.category-heading {
         }
     }
     .magazin-bottom {
+    padding-bottom:10px;
         ul {
             @include clearfix;
             @extend .list-none;
