@@ -170,7 +170,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="over_area">
-<div class="notetext">"REMINDER TO ALL THOSE WHO HAVE REGISTERED FOR NEWSWIZ 2018 - THE ONLINE TEST IS SCHEDULED FOR THURSDAY, 20TH JUNE 2018, START TIME 4 PM"</div>
+<div class="notetext">REMINDER TO ALL THOSE WHO HAVE REGISTERED FOR NEWSWIZ 2018 - THE ONLINE TEST IS SCHEDULED FOR WEDNESDAY, 20TH JUNE 2018, START TIME 4 PM</div>
                     <h1>News Wiz Quiz 2018: Season 3</h1>
 <div class="paragraph">It gives us great pleasure to announce the return of the exciting and innovative news quiz, <h2><strong><a href="https://www.indiatoday.in/newswiz/2018/">“News Wiz”</a></strong> </h2> <strong>for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</div>
 <br>
