@@ -40,7 +40,6 @@ $arg = arg();
                 print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
             }
           ?>
-</div>
 <div class="magazin-bottom">
       <?php 
         if ($is_magazine_page && $show_web_exclusive) {          
@@ -54,7 +53,8 @@ $arg = arg();
           print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
         }        
         ?>
-    </div>
+    </div>          
+</div>
 <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
         <div class="issue-image"><a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage"><img src = "<?php print $issue_img_src; ?>" width="172" height="240"></a></div>
