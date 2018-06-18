@@ -63,7 +63,7 @@ function itg_report_api_menu() {
     /**
      * appapi_breaking_news
      */
-    
+     
     function appapi_breaking_news(){
         // call breaking news view
     $view_result = views_get_view_result('breaking_news', 'block_1');
@@ -77,15 +77,18 @@ function itg_report_api_menu() {
         $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
         $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+        $query->leftJoin('field_data_field_breaking_content_details', 'fcd', 'fcd.entity_id=n.nid');
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('dbody', array('body_value'));
+        $query->fields('fcd', array('field_breaking_content_details_value'));
         $query->condition('n.nid', $nid);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         $title = $result[0]['title'];
+        $field_breaking_content_details_value = $result[0]['field_breaking_content_details_value'];
         $body = $result[0]['body_value'];
         $create_date = date("F d, Y", $result[0]['created']);
         $create_datetime = date(DATE_ATOM, $result[0]['created']);
@@ -99,7 +102,7 @@ function itg_report_api_menu() {
         $data['status_message'] = "";
         $news = array();
         $news['id'] = "$nid";
-        $news['title'] = "$title";
+        $news['title'] = "$field_breaking_content_details_value";
         $news['url'] = "$web_url";
         $news['published'] = "1";
         $news['created'] = "$create_datetime";
@@ -134,4 +137,5 @@ function itg_report_api_menu() {
     $jsondata = json_encode($data);
     print $jsondata; die();
     }
+
 
