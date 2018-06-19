@@ -74,7 +74,8 @@ function itg_reporter_apaache_solr($nid=''){
  * @return array
  */
 function itg_reporter_people_apache_solr($term='', $type = ''){
-  $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
+ // echo $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
+  $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:""';
 
   $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,sm_field_video_duration,sm_vid_Tags,ds_created,im_field_photo_enable';
   $solr = apachesolr_get_solr();
