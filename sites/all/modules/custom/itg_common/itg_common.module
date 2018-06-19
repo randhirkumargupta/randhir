@@ -1577,11 +1577,10 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   foreach ($matches[0] as $images) {
 
     $src = $matches[1][$i];
-    //list($width, $height, $type, $attr) = getimagesize($src);
+    list($width, $height, $type, $attr) = getimagesize($src);
 
     $layout_responsive = ($width > 300) ? 'layout="responsive"' : '';
-    //$img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
-    $img = ' <amp-img  src="' . $src . '" alt="" layout="responsive"></amp-img>  ';
+    $img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
 
 
     $fullReplacesBodyText = str_replace($images, $img, $fullReplacesBodyText);
