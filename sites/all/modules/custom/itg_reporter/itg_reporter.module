@@ -44,10 +44,15 @@ function itg_reporter_menu() {
   return $items;
 }
 
+/**
+ * Implements Author releated nodes.
+ * @return array
+ */
+
 function itg_reporter_apaache_solr($nid=''){
   $str =  '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:'.$nid.' OR sm_field_reporter_publish_id:'.$nid.',* OR sm_field_reporter_publish_id:*,'.$nid.',* OR sm_field_reporter_publish_id:*,'.$nid;
 
-  $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url';
+  $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,ds_created';
   $solr = apachesolr_get_solr();
   $query = apachesolr_drupal_query("custom");
   $query->addParam("fq", '(' . $str . ')');
@@ -63,6 +68,54 @@ function itg_reporter_apaache_solr($nid=''){
   else
     return array();
 }
+
+/**
+ * Implements People releated story type nodes.
+ * @return array
+ */
+function itg_reporter_people_apache_solr($term='', $type = ''){
+  $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
+
+  $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,sm_field_video_duration,sm_vid_Tags,ds_created,im_field_photo_enable';
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("custom");
+  $query->addParam("fq", '(' . $str . ')');
+  $query->addParam("fl", $field);
+  $query->addParam('sort', "ds_created DESC");
+  $query->addParam('rows', '100000');
+  $query->addFilter("bundle",$type);
+  $query->addFilter("bs_status", true);
+  $response = $query->search();
+  $raw_results = $response->response->docs;;
+  if(!empty($raw_results))
+    return $raw_results;
+  else
+    return array();
+}
+
+/**
+ * Implements People releated video type nodes.
+ * @return array
+ */
+// function itg_reporter_people_video_solr($term=''){
+//     $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
+
+//   $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url';
+//   $solr = apachesolr_get_solr();
+//   $query = apachesolr_drupal_query("custom");
+//   $query->addParam("fq", '(' . $str . ')');
+//   $query->addParam("fl", $field);
+//   $query->addParam('sort', "ds_created DESC");
+//   $query->addParam('rows', '100000');
+//   $query->addFilter("bundle", "videogallery");
+//   $query->addFilter("bs_status", true);
+//   $response = $query->search();
+//   $raw_results = $response->response->docs;;
+//   if(!empty($raw_results))
+//     return $raw_results;
+//   else
+//     return array();
+// }
 
 
 /**
