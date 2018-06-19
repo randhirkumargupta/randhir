@@ -185,7 +185,7 @@ If you are students / know students from class 9 to 12 - form teams of two membe
 </div>
                       
 
-                  <div class="regBtnHome"><a target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div>
+                  <!-- <div class="regBtnHome"><a target="_blank" title="Register Now" href="https://www.indiatoday.in/newswiz/2018/registation.php">Register Now</a></div> -->
 
                       <!-- <a href="#" data-toggle="modal" data-target="#intro_box">Read more</a>-->
                       <!-- Modal -->

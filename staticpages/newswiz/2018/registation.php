@@ -88,6 +88,8 @@ document.write(page_request.responseText)}
    .support-team .sup_like_all h4{margin-bottom: 2px}
    .support-team .sup_like_all .share_like ul li.fb_icon{padding-right: 9px}
    .support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
+   .right_side h2.celebration-pics { background-size: 370px 56px; background-position: -11px 0px; font-size: 16px;}
+   .timeline-outer #pre, .timeline-outer #next{ display: none; }
 </style>    
 
 </head>
