@@ -1943,13 +1943,15 @@ function itg_widget_preprocess_node(&$vars) {
             $vars['solr_photo_data'] = itg_reporter_people_apache_solr($node_title, 'photogallery');
         }
         if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
-            drupal_add_js("jQuery(document).ready(function(){
-              jQuery('.read-more , .full-content').click(function(){
-              jQuery('.less-content').toggle();
-              jQuery('.full-content').toggle();
-              });
-              })", 'inline'
-            );
+            if($term_name !== 'people'){
+                drupal_add_js("jQuery(document).ready(function(){
+                  jQuery('.read-more , .full-content').click(function(){
+                  jQuery('.less-content').toggle();
+                  jQuery('.full-content').toggle();
+                  });
+                  })", 'inline'
+                );
+            }
             $vars['theme_hook_suggestions'][] = 'node__reporter__'.$check_arr[$term_name];
 
         }else{
