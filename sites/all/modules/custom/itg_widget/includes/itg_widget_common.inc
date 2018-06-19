@@ -1938,7 +1938,8 @@ function itg_widget_preprocess_node(&$vars) {
         }
         else if($term_name == 'people'){
             $node_title = get_title_of_node($nid);
-            $vars['solr_story_data'] = itg_reporter_people_story_solr($node_title);
+            $vars['solr_story_data'] = itg_reporter_people_apache_solr($node_title, 'story');
+            $vars['solr_video_data'] = itg_reporter_people_apache_solr($node_title, 'videogallery');
         }
         if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
             drupal_add_js("jQuery(document).ready(function(){

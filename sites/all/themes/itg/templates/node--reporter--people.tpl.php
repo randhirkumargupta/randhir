@@ -28,7 +28,7 @@
   print $block['content'];
   ?>
   <?php if(!empty($solr_story_data)):?>
-    <h3<?php print $title_attributes; ?>>Latest News About <?php print $title; ?></h3>
+    <h3>Latest News About <?php print $title; ?></h3>
     <ul class="people-story-wrapper">
       <?php foreach($solr_story_data as $key => $value): ?>
         <li class="col-md-3 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
@@ -48,4 +48,24 @@
 
   <?php print render($content['comments']); ?>
 
+
+<?php if(!empty($solr_video_data)):?>
+<h3>VIDEOS</h3>
+<ul class="people-video-list">
+  <?php foreach($solr_video_data as $key => $value): ?>
+    <li class="col-md-3 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
+      <div class="title">
+        <figure>
+          <a href="/<?php print $value->path_alias; ?>"><img src="<?php print $value->sm_field_custom_story_small_large_url[0]; ?>" alt="<?php print $value->label; ?>" title="<?php print $value->label; ?>" width="170" height="96"></a>
+            <figcaption><i class="fa fa-play-circle"></i><?php print $value->sm_field_video_duration[0]; ?></figcaption>
+        </figure>
+        <span class="posted-on"><?php print date('D, d M, Y', strtotime($value->ds_created)); ?></span>
+        <p title="<?php print $value->label; ?>">
+          <a href="/<?php print $value->path_alias; ?>"><?php print $value->label; ?></a>
+        </p>
+        </div>
+    </li>
+  <?php endforeach; ?>
+</ul>
+<?php endif; ?>
 </article>
