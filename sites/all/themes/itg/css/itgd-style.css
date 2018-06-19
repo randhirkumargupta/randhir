@@ -1435,11 +1435,11 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 .print_digital .print_digital_m a, .print_digital .print_lbtm_m a { font-size: 13px; font-weight: 300; color: #8a8a8a;text-decoration: none;}
 .print_digital .print_lbtm { margin: 0 auto; width: 25px; height: 30px; background: url(https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/mag_pnd.png) 0 0 no-repeat;}
 .print_digital .print_digital { margin: 0 auto; width: 25px; height: 30px; background: url(https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/mag_pnd.png) -40px 0 no-repeat;}
-.magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link{ position: relative; }
-.magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link:after {content:'';border: 0; height: 1px; width:100%; position: absolute; bottom:0; background: #dddddd; background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsla(0,0%,0%,0)), color-stop(50%,hsla(0,0%,0%,.75)), color-stop(100%,hsla(0,0%,0%,0)));
-    background: -webkit-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 50%, hsla(0,0%,0%,0) 100%);
-    background:    -moz-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 50%, hsla(0,0%,0%,0) 100%);
-    background:     -ms-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 50%, hsla(0,0%,0%,0) 100%);
-    background:      -o-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 50%, hsla(0,0%,0%,0) 100%);
-    background:         linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 50%, hsla(0,0%,0%,0) 100%);
+.magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link{ position: relative;padding-bottom: 10px; }
+.magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link:after {content:'';border: 0; left:0px; height: 1px; width:100%; position: absolute; bottom:0; background: #dddddd; background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsla(0,0%,0%,0)), color-stop(50%,hsla(0,0%,0%,.75)), color-stop(100%,hsla(0,0%,0%,0)));
+    background: -webkit-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
+    background:    -moz-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
+    background:     -ms-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
+    background:      -o-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
+    background:         linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
 }
