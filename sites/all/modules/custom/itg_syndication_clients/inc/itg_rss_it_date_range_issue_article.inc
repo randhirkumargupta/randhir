@@ -48,7 +48,8 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
     $xml_path = 'public://indiatoday/rss/';
-    $file_path = $xml_path . 'it-'.$issue_title.'-issue.xml';
+    $date_val = date("Y-m-d", strtotime($title));
+    $file_path = $xml_path . 'it-'.$date_val.'-issue.xml';
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
