@@ -73,7 +73,7 @@
 </div>
 <?php endif; ?>
 
-<?php if(!empty($solr_photo_data)):?>
+<?php print_r($solr_photo_data)); die(123);if(!empty($solr_photo_data)):?>
 <div class="main-photo-wrapper">
   <h3>PHOTO</h3>
   <ul class="people-photo-list">
