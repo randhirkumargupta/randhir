@@ -173,7 +173,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                                     <li>Team participation means that both members represent the same school. </li>
                                     <li>Each school can nominate up to 3 teams to take part in the Online Test.</li>
                                     <li>Both team members should be fluent in written as well as spoken English. This is essential as the quiz and all preliminary rounds leading to the main event are held in English. </li>
-                                    <li>Both team members should be Indian citizens residing in India.</li>
+                                    <li>Both team members should be Indians residing in India.</li>
                                 </ul>
                             </div>
                         </div>
