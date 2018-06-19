@@ -1934,13 +1934,13 @@ function itg_widget_preprocess_node(&$vars) {
             $occupation[] = strtolower($term->name);
         }
         if($term_name == 'reporter'){
-            //$vars['solr_story_data'] = itg_reporter_apaache_solr($nid);
+            $vars['solr_story_data'] = itg_reporter_apaache_solr($nid);
         }
         else if($term_name == 'people'){
             $node_title = get_title_of_node($nid);
-            // $vars['solr_story_data'] = itg_reporter_people_apache_solr($node_title, 'story');
-            // $vars['solr_video_data'] = itg_reporter_people_apache_solr($node_title, 'videogallery');
-            // $vars['solr_photo_data'] = itg_reporter_people_apache_solr($node_title, 'photogallery');
+            $vars['solr_story_data'] = itg_reporter_people_apache_solr($node_title, 'story');
+            $vars['solr_video_data'] = itg_reporter_people_apache_solr($node_title, 'videogallery');
+            $vars['solr_photo_data'] = itg_reporter_people_apache_solr($node_title, 'photogallery');
         }
         if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
             drupal_add_js("jQuery(document).ready(function(){
