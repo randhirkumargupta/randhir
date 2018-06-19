@@ -262,6 +262,14 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
         'file' => 'inc/itg_app_api_homePage.inc',
     );
+    $items['admin/api-configuration/rest-api/cube-widget'] = array(
+        'title' => 'update cube widget json',
+        //'description' => 'otherapps_android_json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('cube_widget'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
@@ -2969,4 +2977,21 @@ function fba_update_data_search($nid, $source = 0) {
     } else {
         return $result;
     }
+}
+/**
+ * cube_widget form decalation
+ *
+ * @return type
+ */
+function cube_widget() {
+    $form = array();
+
+    $form['cube_widget'] = array(
+        '#type' => 'textarea',
+        '#title' => t('adconfig tab'),
+        '#default_value' => variable_get('cube_widget'),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
 }
