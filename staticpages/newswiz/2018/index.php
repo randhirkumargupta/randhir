@@ -103,7 +103,7 @@ li .video_episode_snippets .video_inner p {padding-left: 5px !important;backgrou
  .paragraph h2 {font-size: 18px;    display: inline;}
 .paragraph h2 a{ color:#181818; text-decoration: underline}
 .right_side h2.celebration-pics{background-size: 370px 56px;background-position: -11px 0px; font-size:16px;}
-.notetext{color:#a90000; -webkit-animation: flash linear 1.5s infinite; animation: flash linear 1.5s infinite; font-size:22px;line-height:30px; font-weight:600;}
+.notetext{color:#a90000; -webkit-animation: flash linear 1.5s infinite; animation: flash linear 1.5s infinite; font-size:22px;line-height:30px; font-weight:600; text-align:center}
 @-webkit-keyframes flash { 0% { opacity: 1; } 50% { opacity: .1; } 100% { opacity: 1; }}
 @keyframes flash {0% { opacity: 1; } 50% { opacity: .1; } 100% { opacity: 1; }}
 @media screen and (max-width: 800px){.video_area h2{background-size: 324px 55px;font-size: 12px;} }
