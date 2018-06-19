@@ -107,7 +107,7 @@ li .video_episode_snippets .video_inner p {padding-left: 5px !important;backgrou
 @-webkit-keyframes flash { 0% { opacity: 1; } 50% { opacity: .1; } 100% { opacity: 1; }}
 @keyframes flash {0% { opacity: 1; } 50% { opacity: .1; } 100% { opacity: 1; }}
 @media screen and (max-width: 800px){.video_area h2{background-size: 324px 55px;font-size: 12px;} }
-
+#takethequiz{background-color: #b10102;font-size: 20px;line-height: 28px;margin: 0 auto;width: 210px;text-align: center;color: #fff;margin-top: 15px;padding: 10px 25px;font-weight: bold;}
 </style>    
 
 </head>
@@ -176,6 +176,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 FOR ALL THOSE WHO HAVE REGISTERED FOR NEWSWIZ 2018 - THE ONLINE TEST IS SCHEDULED FOR WEDNESDAY, 20TH JUNE 2018, START TIME 4 PM
   
 </div>
+
+<div id="takethequiz">TAKE THE QUIZ</div>
+
                     <h1>News Wiz Quiz 2018: Season 3</h1>
 <div class="paragraph">It gives us great pleasure to announce the return of the exciting and innovative news quiz, <h2><strong><a href="https://www.indiatoday.in/newswiz/2018/">“News Wiz”</a></strong> </h2> <strong>for a third season!</strong> Hosted by India's best known and award winning news journalist, anchor and author, <strong> Rajdeep Sardesai, News Wiz </strong>, in its last two seasons, showcased the top quizzing talent in the country, with edge of the seat excitement and nail biting finishes. Season 2 saw over 449 teams taking the online test and 27 top scoring teams from the top schools of the country, participated for the television rounds. Produced by Anita and Siddhartha Basu, the successful producers of landmark shows such as Kaun Banega Crorepati, Mastermind India, University Challenge and India’s Child Genius, News Wiz had exciting prizes on offer in the last 2 seasons for round and final winners, including  cash prizes, watches, laptops, printers, holiday packages and Tata Tiago Cars.</div>
 <br>
