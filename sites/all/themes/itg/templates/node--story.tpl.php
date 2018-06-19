@@ -554,8 +554,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 </ul>
                 <?php } ?>  
                 <ul class="date-update">
-                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                  <li><?php t('UPDATED: '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                  <li itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                  <li itemprop="dateModified" content="<?php print $modified_date; ?>"><?php t('UPDATED: '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                         print date('F j, Y H:i', $node->created);
                     } else {
                         print date('F j, Y H:i', $node->changed);  
@@ -623,7 +623,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                    $class = 'story-associate-content';
                  }
                  ?>
-            <div class="<?php echo $class; ?>">
+            <div class="<?php echo $class; ?>" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+				  <meta itemprop="representativeOfPage" content="true">
               <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
                 <div id="videogallery-iframe">
                   <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
@@ -633,8 +634,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
                 ?>
-                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
-				  <meta itemprop="representativeOfPage" content="true">
+                <div class="stryimg">
                   <?php if($activate_live_tv) { ?>
                         <div class="story_itg_live_tv iframe-video">
                                 <?php print itg_live_tv_page_video(); ?>
@@ -686,7 +686,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                                 //$file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                             //}
                             if (!$flag) {
-                              print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
+                              print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '" itemprop = "contentUrl"><span class="story-photo-icon">';
                             }
                             ?>
 
@@ -705,7 +705,6 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                     ?>
                     <meta itemprop="url" content="<?php print $file_uri; ?>">
 					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
-					<div class="image-alt" itemprop="description"><?php print $story_alt; ?></div>
                     <?php
                   if (!empty($getimagetags)) {
                     foreach ($getimagetags as $key => $tagval) {
@@ -718,7 +717,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }
                 else {
                   ?>
-                  <div class="stryimg"><?php
+                  <div class="stryimg">
+					  <?php
                     $flag = TRUE;
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
@@ -751,7 +751,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                       //$file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     //}
                     if (!$flag) {
-                      print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
+                      print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '" itemprop = "contentUrl">        
                                     <span class="story-photo-icon">';
                     }
                     ?>
@@ -772,7 +772,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                         print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="' . $urltags . '" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
                       }
                     }
-                    ?>
+                    ?>                    
+                    <meta itemprop="url" content="<?php print $file_uri; ?>">
+					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
                   <?php } ?>
 
                   <?php
@@ -800,7 +802,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     <?php } ?>
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
-                  <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
+                  <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
     <?php } ?>                            
               </div>
               <?php

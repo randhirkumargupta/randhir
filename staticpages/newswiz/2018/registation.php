@@ -88,6 +88,8 @@ document.write(page_request.responseText)}
    .support-team .sup_like_all h4{margin-bottom: 2px}
    .support-team .sup_like_all .share_like ul li.fb_icon{padding-right: 9px}
    .support-team .sup_like_all .share_like ul li.tw_icon{padding-right: 0px}
+   .right_side h2.celebration-pics { background-size: 370px 56px; background-position: -11px 0px; font-size: 16px;}
+   .timeline-outer #pre, .timeline-outer #next{ display: none; }
 </style>    
 
 </head>
@@ -147,7 +149,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                               <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                                <h1>Registration: News Wiz Quiz 2018</h1>
                                <?php $source = ($_SERVER['QUERY_STRING']) ? "?source=" . $_SERVER['QUERY_STRING'] : ''; ?>
-                               <iframe src="https://specials.intoday.in/specials/newswiz/registationform.jsp<?php print $source; ?>" width="100%" height="3200px" frameborder="0" marginheight="0" scrolling="no"></iframe>
+                               <p style="font-size:18px; line-height:28px; color:#000; border:1px solid #ccc; padding:35px 10px; box-sizing:border-box; text-align:center; margin-top:75px;">"Sorry! The registration for News Wiz 2018 is closed."</p>
+                               <!-- <iframe src="https://specials.intoday.in/specials/newswiz/registationform.jsp<?php // print $source; ?>" width="100%" height="3200px" frameborder="0" marginheight="0" scrolling="no"></iframe> -->
                             </div>
 							
 							<!--end left -->

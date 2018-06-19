@@ -88,12 +88,17 @@ table.feestable tr td{ padding:10px 5px; }
                 <td valign="top" width="150"><p align="right">10,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Alumni fund</p></td>
-                <td valign="top" width="150"><p align="right">2,000</p></td>
+                <td valign="top" width="223"><p>Career orientation and grooming</p></td>
+                <td valign="top" width="150"><p align="right"></p></td>
                 <td valign="top" width="150"><p align="right">2,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Academic Project</p></td>
+                <td valign="top" width="223"><p>Alumni fund</p></td>
+                <td valign="top" width="150"><p align="right">2,000</p></td>
+                <td valign="top" width="150"><p align="right"></p></td>
+              </tr>
+              <tr>
+                <td valign="top" width="223"><p>Educational Trip</p></td>
                 <td valign="top" width="150"><p align="right">10,000</p></td>
                 <td valign="top" width="150"><p align="right">..</p></td>
               </tr>
@@ -105,7 +110,7 @@ table.feestable tr td{ padding:10px 5px; }
               <tr>
                 <td valign="top" width="223"><p>GST @18%</p></td>
                 <td valign="top" width="150"><p align="right">43,020 </p></td>
-                <td valign="top" width="150"><p align="right">32,457.6 </p></td>
+                <td valign="top" width="150"><p align="right">32,457 </p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>

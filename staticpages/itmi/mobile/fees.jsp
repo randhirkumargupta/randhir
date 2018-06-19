@@ -33,26 +33,26 @@
 <link rel="canonical" href="/itmi/fees.jsp" />
 <script type="text/javascript">
 function canonicalUrlRedirection() {
-	//if (window.innerWidth > 985) {    
-		var canonicalUrl = ""; 
-		var links = document.getElementsByTagName("link");
-		for (var i = 0; i < links.length; i ++) {
-			if (links[i].getAttribute("rel") == "canonical") {
-				canonicalUrl = links[i].getAttribute("href");
-				break;
-			}
-		}
-		if (canonicalUrl != "") {
-			window.location.href = canonicalUrl;
-		}
-	//}
+  //if (window.innerWidth > 985) {    
+    var canonicalUrl = ""; 
+    var links = document.getElementsByTagName("link");
+    for (var i = 0; i < links.length; i ++) {
+      if (links[i].getAttribute("rel") == "canonical") {
+        canonicalUrl = links[i].getAttribute("href");
+        break;
+      }
+    }
+    if (canonicalUrl != "") {
+      window.location.href = canonicalUrl;
+    }
+  //}
 }
 var mobile = (/iphone|vnd.wap.xhtml+xml|sony|symbian|S60|SymbOS|nokia|samsung|mobile|windows ce|epoc|opera mini|nitro|j2me|midp-|cldc-|netfront|mot|up.browser|up.link|audiovox|blackberry|ericsson|panasonic|philips|sanyo|sharp|sie-|portalmmm|blazer|avantgo|danger|palm|series60|palmsource|pocketpc|smartphone|rover|ipaq|au-mic|alcatel|ericy|vodafone|wap1|wap2|teleca|playstation|lge|lg-|android|htc|dream|webos|bolt|nintendo|palm/i.test(navigator.userAgent.toLowerCase()));
 if((navigator.userAgent.toLowerCase().indexOf("ipad")>=0)){
 canonicalUrlRedirection();
 }else{
 if (!mobile) {             
-	canonicalUrlRedirection(); 
+  canonicalUrlRedirection(); 
 }}
 </script>
 </head><body>
@@ -99,12 +99,18 @@ if (!mobile) {
           <td valign="top" width="150"><p align="right">10,000</p></td>
         </tr>
         <tr>
-          <td valign="top" width="223"><p>Alumni fund</p></td>
-          <td valign="top" width="150"><p align="right">2,000</p></td>
+          <td valign="top" width="223"><p>Career orientation and grooming</p></td>
+          <td valign="top" width="150"><p align="right"></p></td>
           <td valign="top" width="150"><p align="right">2,000</p></td>
         </tr>
+        
         <tr>
-          <td valign="top" width="223"><p>Academic Project</p></td>
+          <td valign="top" width="223"><p>Alumni fund</p></td>
+          <td valign="top" width="150"><p align="right">2,000</p></td>
+          <td valign="top" width="150"><p align="right"></p></td>
+        </tr>
+        <tr>
+          <td valign="top" width="223"><p>Educational Trip</p></td>
           <td valign="top" width="150"><p align="right">10,000</p></td>
           <td valign="top" width="150"><p align="right">..</p></td>
         </tr>
@@ -116,7 +122,7 @@ if (!mobile) {
         <tr>
           <td valign="top" width="223"><p>GST @18% </p></td>
           <td valign="top" width="150"><p align="right">43,020 </p></td>
-          <td valign="top" width="150"><p align="right">32,457.6 </p></td>
+          <td valign="top" width="150"><p align="right">32,457</p></td>
         </tr>
         <tr>
           <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
