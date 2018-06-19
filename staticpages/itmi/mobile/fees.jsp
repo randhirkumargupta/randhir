@@ -137,7 +137,7 @@ if (!mobile) {
         <tr>
           <td valign="top" width="223"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
           <td valign="top" width="150"></td>
-          <td valign="top" width="150"><p align="right"></p></td>
+          <td valign="top" width="150"><p align="right">4,99,798</p></td>
         </tr>
       </tbody>
     </table>
