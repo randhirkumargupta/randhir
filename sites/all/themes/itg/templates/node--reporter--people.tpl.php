@@ -80,11 +80,9 @@
     <?php foreach($solr_photo_data as $key => $value): ?>
       <?php
         $count_image_text = '';
-        echo "<pre>";
-        print_r($value->im_field_photo_enable[0]);
-        die;
-        if(isset($value->im_field_photo_enable[0]) && !empty($value->im_field_photo_enable[0])){
-          $count_image = count(explode(',', $value->im_field_photo_enable[0]));
+
+        if(isset($value->im_field_photo_enable) && !empty($value->im_field_photo_enable)){
+          $count_image = count($value->im_field_photo_enable);
           $count_image_text = ($count_image > 1)?"$count images": "$count image";
         }
       ?>
