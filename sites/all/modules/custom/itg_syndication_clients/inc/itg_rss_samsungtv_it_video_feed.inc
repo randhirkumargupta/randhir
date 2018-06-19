@@ -24,6 +24,7 @@ function itg_rss_samsungtv_it_livenow_listing_feed() {
 function itg_indiatoday_samsung_jsonfeed_syndication(){
   itg_generate_samsung_json_feed_newslist();
   itg_generate_samsung_json_feed_video_newslist();
+  itg_generate_samsung_json_feed_newslist_technology();
 }
 
 /**
@@ -547,4 +548,72 @@ function fixBadUnicodeForJson($str) {
     $str = preg_replace("/\\\\u00([0-9a-f]{2})\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1")).chr(hexdec("$2"))', $str);
     $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
     return $str;
+}
+/**
+ * itg_generate_samsung_json_feed_newslist_technology
+ */
+function itg_generate_samsung_json_feed_newslist_technology(){
+  $tid= 1206688;
+  $query = db_select('node', 'n');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image','eli','eli.entity_id = n.nid');
+
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('synopsis', array('field_story_kicker_text_value'));
+  $query->fields('smi', array('field_story_large_image_fid'));
+  $query->fields('eli', array('field_story_extra_large_image_fid'));
+  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-15 days')));
+  $query->condition('n.created', $days_ago, '>=');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'story', '=');
+  $query->condition('ti.tid', $tid, '=');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 20);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $json = array(
+    'status_code' => 1,
+    'status_message' => 1,
+    'data' => array(
+      'id' => 1,
+      'title' => 'Technology Stories',
+    )
+  );
+  foreach($result as $value){
+    if (is_lock_story($value['nid'])) {
+      continue;
+    }
+    $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));
+    $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+    $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
+    $extra_large_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+    $alias = drupal_get_path_alias('node/' . $value['nid'] . '');
+    $weburl = FRONT_URL . "/" . $alias;
+    $json['data']['news'][] = array(
+      'n_id' => (int)$value['nid'],
+      'n_title' => $value['title'],
+      'n_short_desc' => $kicker_text,
+      'n_small_image' => $medium_img["imag_url"],
+      'n_updated_datetime' => $publish_date,
+      'n_content_url' => $weburl,
+      'v_large_image' => $extra_large_img["imag_url"],
+    );
+  }
+  $json_output = json_encode($json);
+  $json_output = utf8_encode($json_output);
+  $json_output = fixBadUnicodeForJson($json_output);
+  //$json_output=mb_convert_encoding($json_output,'utf-16');
+  $json_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
+  $file_path = $json_path . 'technology-story.json';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $json_output);
+  fclose($fp);
 }
