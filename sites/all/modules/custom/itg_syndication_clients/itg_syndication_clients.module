@@ -397,7 +397,7 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_msn_feed_story.inc',
     'type' => MENU_CALLBACK,
   );
-   $items['rss/it-date-range-issue'] = array(
+   $items['rss/it-date-range-issue/%/%'] = array(
     'page callback' => 'itg_rss_it_date_range_issue_article',
     'access arguments' => array('access content'),
     'file' => 'inc/itg_rss_it_date_range_issue_article.inc',
