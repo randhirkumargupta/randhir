@@ -83,7 +83,7 @@
 
         if(isset($value->im_field_photo_enable) && !empty($value->im_field_photo_enable)){
           $count_image = count($value->im_field_photo_enable);
-          $count_image_text = ($count_image > 1)?$count_image images": "$count_image image";
+          $count_image_text = ($count_image > 1)?"$count_image images": "$count_image image";
         }
       ?>
       <li class="col-md-3 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
