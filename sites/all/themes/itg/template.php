@@ -878,7 +878,10 @@ function itg_js_alter(&$javascript) {
      unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
      //unset($javascript['misc/ajax.js']);
      unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
-     unset($javascript['modules/user/user.js']);   
+     unset($javascript['modules/user/user.js']); 
+     foreach ($javascript as $key => $value) {
+		$javascript[$key]['defer'] = TRUE;
+	 }  
   }
 
 }
