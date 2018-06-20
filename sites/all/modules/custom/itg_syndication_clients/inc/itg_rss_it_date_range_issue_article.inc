@@ -25,7 +25,7 @@ function itg_rss_it_date_range_issue_article() {
  * Function for generate latest issue xml
  * @param array $issue_result
  */
-function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
+function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
   if (!empty($issue_result)) {
     $issue_title = date('Y-m-d H:i', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
@@ -50,7 +50,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
     $xml_path = 'public://indiatoday/rss/';
     $date_val = date("Y-m-d", strtotime($title));
     $file_path = $xml_path . 'it-'.$date_val.'-issue.xml';
-    
+    echo $file_path; die();
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
