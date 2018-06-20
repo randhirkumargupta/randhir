@@ -8,8 +8,8 @@ function itg_rss_it_date_range_issue_article() {
   echo "andy\n";
   $start_date = arg(2);
   $end_date = arg(3);
-  $sdate_fi = strtotime($start_date . " 00:00:00");
-  $tdate_fi = strtotime($end_date . " 23:59:00");
+  $sdate_fi = $start_date . " 00:00:00";
+  $tdate_fi = $end_date . " 23:59:00";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
