@@ -775,13 +775,13 @@ jQuery(document).ready(function () {
     });
 
     //story page social share for mobile
-    var getclick;
+    /*var getclick;
     jQuery('.comment-mobile .share-icon').toggle(function () {
         getclick = jQuery(this).parents('.comment-mobile').find('.social-share');
         getclick.css({ 'display': 'inline-block' });
     }, function () {
         getclick.css({ 'display': 'none' });
-    });
+    });*/
 
 
     // jQuery code to add Light off/on effect 
