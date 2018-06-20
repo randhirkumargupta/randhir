@@ -11,13 +11,13 @@ function itg_rss_it_date_range_issue_article() {
   $sdate_fi = strtotime($start_date . " 00:00:00");
   $tdate_fi = strtotime($end_date . " 23:59:00");
   $query = db_select('node', 'n');
-  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  $query->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
-  $query_issue->fields('fsit', array('field_issue_title_value'));
+  $query->fields('fsit', array('field_issue_title_value'));
   $query->condition('n.status', 1);
   $query->condition('n.type', 'issue');
   $query->orderBy('n.nid', "DESC");
-  $query_issue->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');
+  $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
 }
