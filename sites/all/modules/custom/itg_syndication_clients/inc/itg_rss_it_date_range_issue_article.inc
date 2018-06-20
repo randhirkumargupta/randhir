@@ -4,8 +4,7 @@
  * @file
  * The ITG Syndication clients for IT latest Issue Story
  */
-function itg_rss_it_date_range_issue_article() {
-  echo "andy\n";
+function itg_rss_it_date_range_issue_article() {  
   $start_date = arg(2);
   $end_date = arg(3);
   $sdate_fi = $start_date . " 00:00:00";
@@ -17,9 +16,7 @@ function itg_rss_it_date_range_issue_article() {
   $query->condition('n.status', 1);
   $query->condition('n.type', 'issue');  
   $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
-  $query->orderBy('n.nid', "DESC");
-  echo "kumar\n";
-  print strtr((string) $query, $query->arguments());die();
+  $query->orderBy('n.nid', "DESC");  
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
 }
