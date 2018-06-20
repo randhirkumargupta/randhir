@@ -18,6 +18,7 @@ function itg_rss_it_date_range_issue_article() {
   $query->condition('n.type', 'issue');
   $query->orderBy('n.nid', "DESC");
   $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
+  print strtr((string) $query, $query->arguments());die();
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
 }
