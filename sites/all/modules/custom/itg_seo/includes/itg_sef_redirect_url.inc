@@ -73,7 +73,7 @@ function itg_common_custompath_insert_load($node) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.      
+      // Create url alise for magazine type story.
     } elseif ($node->type == 'story' && is_photo_story($node)) {
       //Add path from category.
       $pathdata = get_path_from_category($getsection);
@@ -88,7 +88,7 @@ function itg_common_custompath_insert_load($node) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.      
+      // Create url alise for magazine type story.
     } elseif ($node->type == 'breaking_news') {
       if (is_breaking_only($node)) {
         // Add node title.
@@ -126,6 +126,9 @@ function itg_common_custompath_insert_load($node) {
   } elseif ($node->type == 'reporter') {
     $occupation_tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
     $occupation = _occupation_from_tid_for_sef_url($occupation_tid);
+    if($occupation == 'reporter'){
+      $occupation = 'author';
+    }
     $pathdata = $occupation . '/' . $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
@@ -358,7 +361,7 @@ function itg_common_custompath_migrated_load($node, $val = NULL) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.      
+      // Create url alise for magazine type story.
     } elseif ($node->type == 'story' && is_photo_story($node)) {
       //Add path from category.
       $pathdata = get_path_from_category($getsection);
@@ -373,7 +376,7 @@ function itg_common_custompath_migrated_load($node, $val = NULL) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.      
+      // Create url alise for magazine type story.
     } elseif ($node->type == 'breaking_news') {
       //Add path from category.
       $pathdata = get_path_from_category($getsection);
@@ -434,7 +437,7 @@ function itg_common_custompath_migrated_load($node, $val = NULL) {
 /**
  * Implementing 'itg_common_custompath_insert_val'.
  * @param $pathdata path alias content
- * Creating custom path alias 
+ * Creating custom path alias
  */
 function itg_common_custompath_insert_val($pathdata) {
 
@@ -628,7 +631,7 @@ function itg_migrate_custompath($node, $published_date, $node_sef) {
       // Prepare SEO friendly node url
       $newpath = itg_common_custompath_insert_val($pathdata);
       return $newpath;
-      // Create url alise for magazine type story.      
+      // Create url alise for magazine type story.
     } else {
       $set_hierarchy = get_path_from_category($getsection);
       $node_CT = $node->type;
