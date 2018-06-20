@@ -69,7 +69,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
  */ 
 function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_title, $issue_result) {
   $xml = '';
-  echo "fff";
+ 
   if (!empty($result)) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
@@ -101,6 +101,6 @@ function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
-  echo $xml; die();
+ 
   return $xml;
 }
