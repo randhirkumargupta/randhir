@@ -4,12 +4,11 @@
  * @file
  * The ITG Syndication clients for IT latest Issue Story
  */
-function itg_rss_it_date_range_issue_article() {
-  echo "andy\n";
+function itg_rss_it_date_range_issue_article() {  
   $start_date = arg(2);
   $end_date = arg(3);
-  $sdate_fi = strtotime($start_date . " 00:00:00");
-  $tdate_fi = strtotime($end_date . " 23:59:00");
+  $sdate_fi = $start_date . " 00:00:00";
+  $tdate_fi = $end_date . " 23:59:00";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
@@ -17,9 +16,7 @@ function itg_rss_it_date_range_issue_article() {
   $query->condition('n.status', 1);
   $query->condition('n.type', 'issue');  
   $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
-  $query->orderBy('n.nid', "DESC");
-  echo "kumar\n";
-  print strtr((string) $query, $query->arguments());die();
+  $query->orderBy('n.nid', "DESC");  
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
 }
@@ -28,7 +25,8 @@ function itg_rss_it_date_range_issue_article() {
  * Function for generate latest issue xml
  * @param array $issue_result
  */
-function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
+function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
+    
   if (!empty($issue_result)) {
     $issue_title = date('Y-m-d H:i', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
@@ -38,7 +36,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('isuue.field_story_issue_date_value', $title, '=');
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story', '=');
@@ -48,12 +46,13 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
+    //print strtr((string) $query, $query->arguments());die(); 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
     $xml_path = 'public://indiatoday/rss/';
     $date_val = date("Y-m-d", strtotime($title));
     $file_path = $xml_path . 'it-'.$date_val.'-issue.xml';
-    
+    echo $file_path; die();
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
@@ -67,9 +66,10 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
  * @param string $issue_title
  * @param array $issue_result
  * @return string
- */
+ */ 
 function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_title, $issue_result) {
   $xml = '';
+ 
   if (!empty($result)) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
@@ -101,5 +101,6 @@ function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
+ 
   return $xml;
 }
