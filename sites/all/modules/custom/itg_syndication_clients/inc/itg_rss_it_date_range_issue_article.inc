@@ -26,6 +26,7 @@ function itg_rss_it_date_range_issue_article() {
  * @param array $issue_result
  */
 function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
+    echo "hi";
   if (!empty($issue_result)) {
     $issue_title = date('Y-m-d H:i', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
@@ -45,6 +46,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
+    print strtr((string) $query, $query->arguments());die();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
     $xml_path = 'public://indiatoday/rss/';
