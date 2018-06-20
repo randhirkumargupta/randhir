@@ -64,7 +64,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
  * @param string $issue_title
  * @param array $issue_result
  * @return string
- */
+ */ 
 function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_title, $issue_result) {
   $xml = '';
   if (!empty($result)) {
