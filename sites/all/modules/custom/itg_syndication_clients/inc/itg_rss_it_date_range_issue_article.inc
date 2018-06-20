@@ -5,7 +5,7 @@
  * The ITG Syndication clients for IT latest Issue Story
  */
 function itg_rss_it_date_range_issue_article() {
-    p(arg());
+  
   $start_date = arg(2);
   $end_date = arg(3);
   $sdate_fi = strtotime($start_date . " 00:00:00");
