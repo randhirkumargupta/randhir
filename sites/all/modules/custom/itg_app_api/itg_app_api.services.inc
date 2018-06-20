@@ -6879,13 +6879,14 @@ function search_data_rest($token) {
                 $list[$loop_c]['n_type'] = "$bundle";
                 $list[$loop_c]['n_is_blog'] = "0";
             }
+            $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
         $list[$loop_c]['n_is_sponsored'] = "0";
         $list[$loop_c]['n_share_link'] = "$url";
         $list[$loop_c]['n_title'] = "$title";
         $list[$loop_c]['n_short_desc'] = "$teaser";
         $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
         $list[$loop_c]['n_large_image'] = "$extra_large_image";
-        $list[$loop_c]['n_updated_datetime'] = "$ds_changed";    
+        $list[$loop_c]['n_updated_datetime'] = "$date_val";    
         $loop_c++;
     }
     $data_json['status_code'] = "1";
