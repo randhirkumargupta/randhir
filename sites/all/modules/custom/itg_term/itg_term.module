@@ -53,7 +53,8 @@ function itg_term_autocomplete_deluxe_taxonomy_callback($field_name, $tags_typed
       $query->fields('t', array('tid', 'name'))->condition('t.vid', TAG_ID);
       $query->leftJoin('field_data_field_tags_status', 'tg', 'tg.entity_id = t.tid');
       $query->condition('tg.field_tags_status_value', 'Unpublished', '!=');
-      $query->condition('t.name', '%' . db_like($tag_last) , 'LIKE');
+      //$query->condition('t.name', '%' . db_like($tag_last) , 'LIKE');
+      $query->condition('t.name', db_like($tag_last) . '%' , 'LIKE');
       
       if (isset($limit) && $limit > 0) {
         $query->range(0, $limit);
