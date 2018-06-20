@@ -843,51 +843,49 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
   $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
   
+  // Remove unnecessary JS From Homepage
   if (drupal_is_front_page()) {
-	 //unset($javascript['misc/drupal.js']);
-	 unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
-	 unset($javascript['misc/jquery.once.js']);
-	 //unset($javascript['sites/all/themes/itg/js/slick.js']);
-	 unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
-	 unset($javascript['sites/all/themes/itg/js/ripple.js']);
-	 unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
-	 //unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
-	 //unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
-	 unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
-	 //unset($javascript['sites/all/themes/itg/js/script.js']);	  
-     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
-     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
-     unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
-     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
-     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']); 
-     
-     unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
-     unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
-     unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
-     unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
-     unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
-     unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-     unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
-     //unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
-     //unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
-     unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
-     
-     unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
-     //unset($javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']);
-     unset($javascript['misc/progress.js']);
-     unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
-     //unset($javascript['misc/ajax.js']);
-     unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
-     unset($javascript['modules/user/user.js']); 
-     $javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']['defer'] = TRUE;
-     $javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']['defer'] = TRUE;
-     $javascript['sites/all/modules/custom/itg_story/js/itg_follow_story_refresh.js']['defer'] = TRUE;
-     $javascript['sites/all/themes/itg/js/slick.js']['defer'] = TRUE;
-     $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
-     $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
-     $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
+    //unset($javascript['misc/drupal.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+    unset($javascript['misc/jquery.once.js']);
+    //unset($javascript['sites/all/themes/itg/js/slick.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
+    unset($javascript['sites/all/themes/itg/js/ripple.js']);
+    unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
+    //unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
+    //unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
+    unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
+    //unset($javascript['sites/all/themes/itg/js/script.js']);	  
+    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
+    unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
+    unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
+    unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+    unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
+    unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
+    //unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
+    //unset($javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']);
+    unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']);
+    //unset($javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']);
+    unset($javascript['misc/progress.js']);
+    unset($javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']);
+    //unset($javascript['misc/ajax.js']);
+    unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
+    unset($javascript['modules/user/user.js']);
+    $javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']['defer'] = TRUE;
+    $javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']['defer'] = TRUE;
+    $javascript['sites/all/modules/custom/itg_story/js/itg_follow_story_refresh.js']['defer'] = TRUE;
+    $javascript['sites/all/themes/itg/js/slick.js']['defer'] = TRUE;
+    $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
+    $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
+    $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
   }
-
 }
 
  /**
@@ -922,54 +920,54 @@ function itg_css_alter(&$css) {
      'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
    );
    
-   //
-   $exclude1 = array(
-     // Contrib CSS
-     'sites/all/themes/itg/system.menus.css' => FALSE,
-     'sites/all/themes/itg/system.messages.css' => FALSE,
-     'sites/all/themes/itg/system.theme.css' => FALSE,
-     'sites/all/themes/itg/css/layout.css' => FALSE,
-     'sites/all/themes/itg/css/font-awesome.css' => FALSE,
-     'sites/all/themes/itg/css/liMarquee.css' => FALSE,
-     'sites/all/themes/itg/css/slick.css' => FALSE,
-     'sites/all/themes/itg/css/itg-photo-slider.css' => FALSE,
-     'sites/all/themes/itg/css/ion.rangeSlider.css' => FALSE,
-     'sites/all/themes/itg/css/ion.rangeSlider.skinFlat.css' => FALSE,
-     'sites/all/themes/itg/css/jquery.mCustomScrollbar.min.css' => FALSE,
-     'sites/all/themes/itg/css/styles.css' => FALSE,
-     'sites/all/themes/itg/css/styles-new.css' => FALSE,
-     'sites/all/themes/itg/css/itgd-style.css' => FALSE,
-     'sites/all/themes/itg/css/media.css' => FALSE,
-     'sites/all/modules/contrib/colorbox/styles/default/colorbox_style.css' => FALSE,
-     'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
-     'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
-     'modules/system/system.base.css' => FALSE,
-     'modules/system/system.menus.css' => FALSE,
-     'modules/system/system.messages.css' => FALSE,
-     'modules/system/system.theme.css' => FALSE,
-     'modules/comment/comment.css' => FALSE,
-     'sites/all/modules/contrib/date/date_api/date.css' => FALSE,
-     'sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css' => FALSE,
-     'modules/field/theme/field.css' => FALSE,
-     'sites/all/modules/contrib/logintoboggan/logintoboggan.css' => FALSE,
-     'modules/node/node.css' => FALSE,
-     'modules/search/search.css' => FALSE,
-     'modules/user/user.css' => FALSE,
-     'sites/all/modules/contrib/youtube/css/youtube.css' => FALSE,
-     'sites/all/modules/contrib/views/css/views.css' => FALSE,
-     'sites/all/libraries/flexslider/flexslider.css' => FALSE,
-     'sites/all/modules/contrib/flexslider/assets/css/flexslider_img.css' => FALSE,
-     'sites/all/modules/contrib/ckeditor/css/ckeditor.css' => FALSE,
-   );
-   
-   // Exclude unnecessary CSS for anonymous users.
-   if (($user->uid == 0) && ($type == 'story')) {
-     $css = array_diff_key($css, $exclude);
-   }
-   
-   if (($user->uid == 0) && (drupal_is_front_page())) {
-	   $css = array_diff_key($css, $exclude1);
-   }
+  // Remove unnecessary Css From Homepage
+  $exclude1 = array(
+    // Contrib CSS
+    'sites/all/themes/itg/system.menus.css' => FALSE,
+    'sites/all/themes/itg/system.messages.css' => FALSE,
+    'sites/all/themes/itg/system.theme.css' => FALSE,
+    'sites/all/themes/itg/css/layout.css' => FALSE,
+    'sites/all/themes/itg/css/font-awesome.css' => FALSE,
+    'sites/all/themes/itg/css/liMarquee.css' => FALSE,
+    'sites/all/themes/itg/css/slick.css' => FALSE,
+    'sites/all/themes/itg/css/itg-photo-slider.css' => FALSE,
+    'sites/all/themes/itg/css/ion.rangeSlider.css' => FALSE,
+    'sites/all/themes/itg/css/ion.rangeSlider.skinFlat.css' => FALSE,
+    'sites/all/themes/itg/css/jquery.mCustomScrollbar.min.css' => FALSE,
+    'sites/all/themes/itg/css/styles.css' => FALSE,
+    'sites/all/themes/itg/css/styles-new.css' => FALSE,
+    'sites/all/themes/itg/css/itgd-style.css' => FALSE,
+    'sites/all/themes/itg/css/media.css' => FALSE,
+    'sites/all/modules/contrib/colorbox/styles/default/colorbox_style.css' => FALSE,
+    'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
+    'sites/all/modules/custom/itg_akamai_block_refresh/css/itg_akamai_block_refresh.css' => FALSE,
+    'modules/system/system.base.css' => FALSE,
+    'modules/system/system.menus.css' => FALSE,
+    'modules/system/system.messages.css' => FALSE,
+    'modules/system/system.theme.css' => FALSE,
+    'modules/comment/comment.css' => FALSE,
+    'sites/all/modules/contrib/date/date_api/date.css' => FALSE,
+    'sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css' => FALSE,
+    'modules/field/theme/field.css' => FALSE,
+    'sites/all/modules/contrib/logintoboggan/logintoboggan.css' => FALSE,
+    'modules/node/node.css' => FALSE,
+    'modules/search/search.css' => FALSE,
+    'modules/user/user.css' => FALSE,
+    'sites/all/modules/contrib/youtube/css/youtube.css' => FALSE,
+    'sites/all/modules/contrib/views/css/views.css' => FALSE,
+    'sites/all/libraries/flexslider/flexslider.css' => FALSE,
+    'sites/all/modules/contrib/flexslider/assets/css/flexslider_img.css' => FALSE,
+    'sites/all/modules/contrib/ckeditor/css/ckeditor.css' => FALSE,
+  );
+
+  // Exclude unnecessary CSS for anonymous users.
+  if (($user->uid == 0) && ($type == 'story')) {
+    $css = array_diff_key($css, $exclude);
+  }
+
+  if (($user->uid == 0) && (drupal_is_front_page())) {
+    $css = array_diff_key($css, $exclude1);
+  }
 }
 
 function itg_image($variables) {
