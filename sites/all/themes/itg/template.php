@@ -854,7 +854,7 @@ function itg_js_alter(&$javascript) {
 	 //unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
 	 //unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
 	 unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
-	 //unset($javascript['sites/all/themes/itg/js/script.js']);	  
+	 unset($javascript['sites/all/themes/itg/js/script.js']);	  
      unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
      unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
      unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
@@ -885,7 +885,7 @@ function itg_js_alter(&$javascript) {
      $javascript['sites/all/themes/itg/js/slick.js']['defer'] = TRUE;
      $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
      $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
-     $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
+     //$javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
   }
 
 }
