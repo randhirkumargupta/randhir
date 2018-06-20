@@ -5,7 +5,7 @@
  * The ITG Syndication clients for IT latest Issue Story
  */
 function itg_rss_it_date_range_issue_article() {
-  
+  echo "andy\n";
   $start_date = arg(2);
   $end_date = arg(3);
   $sdate_fi = strtotime($start_date . " 00:00:00");
@@ -15,9 +15,10 @@ function itg_rss_it_date_range_issue_article() {
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('fsit', array('field_issue_title_value'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'issue');
-  $query->orderBy('n.nid', "DESC");
+  $query->condition('n.type', 'issue');  
   $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
+  $query->orderBy('n.nid', "DESC");
+  echo "kumar\n";
   print strtr((string) $query, $query->arguments());die();
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
@@ -52,6 +53,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result = NULL) {
     $xml_path = 'public://indiatoday/rss/';
     $date_val = date("Y-m-d", strtotime($title));
     $file_path = $xml_path . 'it-'.$date_val.'-issue.xml';
+    
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
