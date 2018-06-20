@@ -308,6 +308,11 @@ $akamai_path = file_create_url(file_default_scheme() . '://../');
 </style>
 <script type="text/javascript" src="<?php print $jquery_js_path; ?>"></script>
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
+})
+</script>
 <?php endif; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
