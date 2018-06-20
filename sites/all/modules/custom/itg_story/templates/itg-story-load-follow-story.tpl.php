@@ -52,7 +52,8 @@ $node_author = $content["author"];
     ?>
     <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span><?php
           if (function_exists(itg_vukkul_comment_count)) {
-            print itg_vukkul_comment_count('story_' . $node->nid);
+            // Not getting any result in this API. Thats why commenting this code:
+            print ''; //itg_vukkul_comment_count('story_' . $node->nid);
           }
           ?></span></a></li>
   <?php } if ($config_name == 'other') { ?> 
