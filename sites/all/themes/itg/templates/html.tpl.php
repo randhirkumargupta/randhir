@@ -135,12 +135,13 @@
 <?php if(($front_page) || ($type == 'story')){ 
 	$sprite_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/sprite.png');
 	$control_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/controls.png');
+	$akamai_path = file_create_url(file_default_scheme() . '://../');
 	?>
 <style>
 /*! CSS Used from: Embedded */
 *{box-sizing:border-box;}
-@font-face{font-family:'OpenSans-Regular';src:url(/sites/all/themes/itg/fonts/OpenSans-Regular.eot);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'Merriweather-Bold';src:local("/"),url(/sites/all/themes/itg/fonts/merriweather-latin-700.woff) format("woff"),url(/sites/all/themes/itg/fonts/Merriweather-Bold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/merriweather-latin-700.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'OpenSans-Regular';src:url(<?php print $akamai_path.'/sites/all/themes/itg/fonts/OpenSans-Regular.eot';?>);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Regular.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Merriweather-Bold';src:local("/"),url(<?php print $akamai_path.'/sites/all/themes/itg/fonts/merriweather-latin-700.woff';?>) format("woff"),url(/sites/all/themes/itg/fonts/Merriweather-Bold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/merriweather-latin-700.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'OpenSans-Semibold';src:url(/sites/all/themes/itg/fonts/OpenSans-Semibold.eot);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Semibold.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Semibold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Semibold.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'OpenSans-Bold';src:url(/sites/all/themes/itg/fonts/OpenSans-Bold.eot);src:local("/"),url(/sites/all/themes/itg/fonts/OpenSans-Bold.woff) format("woff"),url(/sites/all/themes/itg/fonts/OpenSans-Bold.ttf) format("truetype"),url(/sites/all/themes/itg/fonts/OpenSans-Bold.svg) format("svg");font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'flexslider-icon';src:url(/sites/all/libraries/flexslider/fonts/flexslider-icon.eot);src:url(/sites/all/libraries/flexslider/fonts/flexslider-icon.eot#iefix) format('embedded-opentype'),url(/sites/all/libraries/flexslider/fonts/flexslider-icon.woff) format('woff'),url(/sites/all/libraries/flexslider/fonts/flexslider-icon.ttf) format('truetype'),url(/sites/all/libraries/flexslider/fonts/flexslider-icon.svg#flexslider-icon) format('svg');font-weight:400;font-style:normal;}
