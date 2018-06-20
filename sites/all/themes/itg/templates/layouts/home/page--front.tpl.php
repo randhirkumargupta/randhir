@@ -309,7 +309,7 @@ if ($theme != 'itgadmin') {
                                                 ?>
                                                 <script>
                                                 function activeflex(){
-                                                  setTimeout(function(){jQuery(".top-takes-videos-flex").resize();}, 100);                                                  
+                                                  setTimeout(function(){jQuery(".top-takes-videos-flex").resize();});                                                  
                                                 }
                                                 </script>
                                             </div>
