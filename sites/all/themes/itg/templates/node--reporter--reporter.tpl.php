@@ -49,3 +49,10 @@
   <?php print render($content['comments']); ?>
 
 </article>
+<div class="wrapper-tabola">
+<?php
+if (function_exists('taboola_view')) {
+    taboola_view();
+  }
+?>
+</div>

@@ -2348,7 +2348,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         if (in_array($arg[1], $arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
             $data['content'] = array();
         } else {
-            if ($arg[0] == 'livetv' || $arg[0] == 'international-livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (in_array('reporter', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid'])) && $is_programme) {
+            if ($arg[0] == 'livetv' || $arg[0] == 'international-livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid'])) && $is_programme) {
                 return TRUE;
             } else {
                 $data['content'] = array();
@@ -2407,7 +2407,8 @@ function itg_widget_block_view_alter(&$data, $block) {
     if ($block->delta == 'may_be_recommend_block') {
         $arg = arg();
         $ntype = menu_get_object('node');
-        if ($ntype->type == 'story' || ($ntype->type == 'reporter' && strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name) == 'people')) {
+        $occupation_name = strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+        if ($ntype->type == 'story' || ($ntype->type == 'reporter' && ($occupation_name== 'people' || $occupation_name == 'reporter'))) {
           return TRUE;
         } else {
           $data['content'] = array();
@@ -2417,7 +2418,8 @@ function itg_widget_block_view_alter(&$data, $block) {
     if ($block->delta == 'crowdy_newss_block') {
         $arg = arg();
         $ntype = menu_get_object('node');
-        if ($ntype->type == 'story' || ($ntype->type == 'reporter' && strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name) == 'people')) {
+        $occupation_name = strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+        if ($ntype->type == 'story' || ($ntype->type == 'reporter' && ($occupation_name== 'people' || $occupation_name == 'reporter'))){
           return TRUE;
         } else {
           $data['content'] = array();
@@ -2427,7 +2429,8 @@ function itg_widget_block_view_alter(&$data, $block) {
     if ($block->delta == 'recommend_news_block') {
         $arg = arg();
         $ntype = menu_get_object('node');
-        if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery' || ($ntype->type == 'reporter' && strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name) == 'people') ) {
+        $occupation_name = strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+        if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery' || ($ntype->type == 'reporter' && ($occupation_name== 'people' || $occupation_name == 'reporter'))) {
           return TRUE;
         } else {
           $data['content'] = array();
@@ -2905,8 +2908,10 @@ function get_rhs_block_display_condtion($delta = '') {
         }
     }
     $check_type_reporter = false;
-    if(isset($page_argument[0]->field_celebrity_pro_occupation) && !empty($page_argument[0]->field_celebrity_pro_occupation['und'])  && strtolower($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name) == 'people'){
-         $check_type_reporter = true;
+    if(isset($page_argument[0]->field_celebrity_pro_occupation) && !empty($page_argument[0]->field_celebrity_pro_occupation['und'])){
+        $occupation_name = strtolower($page_argument[0]->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+        if($occupation_name == 'people' || $occupation_name == 'reporter')
+            $check_type_reporter = true;
     }
 
     $story_primary_category_tid = '';
