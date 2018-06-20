@@ -26,7 +26,7 @@ function itg_rss_it_date_range_issue_article() {
  * @param array $issue_result
  */
 function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
-    echo "hi";
+    
   if (!empty($issue_result)) {
     $issue_title = date('Y-m-d H:i', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
@@ -36,7 +36,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('isuue.field_story_issue_date_value', $title, '=');
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story', '=');
@@ -46,7 +46,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
-    print strtr((string) $query, $query->arguments());die(); 
+    //print strtr((string) $query, $query->arguments());die(); 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
     $xml_path = 'public://indiatoday/rss/';
@@ -69,6 +69,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
  */ 
 function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_title, $issue_result) {
   $xml = '';
+  echo "fff";
   if (!empty($result)) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
@@ -100,5 +101,6 @@ function genrate_rss_it_date_range_issue_syndication_xml($result = NULL, $issue_
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
+  echo $xml; die();
   return $xml;
 }
