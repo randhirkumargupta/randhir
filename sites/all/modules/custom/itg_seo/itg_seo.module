@@ -2,7 +2,7 @@
 
 /**
  * Implementation of hook_menu().
- * 
+ *
  * {@inheritdoc}
  */
 module_load_include('inc', 'itg_seo', 'includes/views_handler_itg_seo');
@@ -36,7 +36,7 @@ function itg_seo_menu() {
 
 /**
  * Call template file for access denied page
- * 
+ *
  * @return array
  */
 function itg_access_denied() {
@@ -47,7 +47,7 @@ function itg_access_denied() {
 
 /**
  * Call template file for not found page
- * 
+ *
  * @return array
  */
 function itg_not_found() {
@@ -63,8 +63,8 @@ function itg_not_found() {
   return $decrypter;
 }
 
-function gmp_shiftr($x,$n) { // shift right 
-  return(gmp_div($x,gmp_pow(2,$n))); 
+function gmp_shiftr($x,$n) { // shift right
+  return(gmp_div($x,gmp_pow(2,$n)));
 }*/
 
 /**
@@ -181,7 +181,7 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
     if ($form['#node']->status == 1) {
 	    $pathauto_state = 0;
 	  }
-    else { 
+    else {
       if (isset($state)) {
         $pathauto_state = $state;
       }
@@ -194,7 +194,7 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
     //Give default sef checked while node/add form.
     $pathauto_state = 1;
   }
-  
+
   // Handel checked unchecked of sef url;
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
   $form['path']['pathauto']['#default_value'] = $pathauto_state;
@@ -242,7 +242,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
 }
 
 /**
- * Implements 
+ * Implements
  * itg_seo_latest_headlines()
  */
 function itg_seo_latest_headlines() {
@@ -260,20 +260,20 @@ function itg_seo_latest_headlines() {
                       LEFT OUTER JOIN field_data_field_photo_see_pic_link se ON n.nid = se.entity_id
                       WHERE  (n.status = '1') AND (n.type IN  ('story', 'photogallery', 'videogallery'))
                       ORDER BY n.created DESC
-                      LIMIT 4 OFFSET 0");  
+                      LIMIT 4 OFFSET 0");
   $result = $query->fetchAll();
-  
+
   foreach ($result as $key => $val) {
     if(!empty($val->field_photo_see_pic_link_value)) {
       $title = '<span class="see_pic_not_found">'.$val->field_photo_see_pic_link_value.' : </span>'.$val->title;
     } else {
       $title =  $val->title;
     }
-    
+
     $s_url = url('node/'. $val->nid);
-    
+
     $headlines .= '<a href="'.$s_url.'" target="_blank"><li>'.$title.'</li></a>';
-   
+
   }
   return $headlines;
 }
@@ -293,7 +293,7 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
 }
 
 /**
- * Returms a front end breadcrumb view 
+ * Returms a front end breadcrumb view
  * @param int $id
  * @param text $entity_type
  * @param text $type
@@ -378,7 +378,16 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_link .= l('Blog', 'blog') . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
-    $section_link .= l("Anchors", "anchors-list") . $node_title;
+    $term_name  =  strtolower($entity_object->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+    if($term_name == 'people'){
+      $section_link .= l("People") . $node_title;
+    }
+    elseif($term_name == 'reporter'){
+      $section_link .= l("Authors") . $node_title;
+    }
+    else{
+      $section_link .= l("Anchors", "anchors-list") . $node_title;
+    }
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
     $section_link .= $entity_object->field_type[LANGUAGE_NONE][0]['value'] . $node_title;
@@ -410,7 +419,7 @@ function itg_seo_get_term_name_by_tid($tid) {
 
 function itg_seo_node_view($node, $view_mode, $langcode) {
   global $base_url;
-  
+
 
   // adding meta description tag if no meta description comes along with node data
    if (!isset($node->metatags[LANGUAGE_NONE]['description'])) {
@@ -425,7 +434,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
        );
        drupal_add_html_head($metatag_description1, 'description');
    }
-   
+
   // adding meta keywords tag if no meta keywords comes along with node data
   if (!isset($node->metatags[LANGUAGE_NONE]['keywords'])) {
       $news_keyword = array(
@@ -439,7 +448,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       );
       drupal_add_html_head($news_keyword, 'news_keyword');
   }
-  
+
   $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
   if (!empty($meta_keywords)) {
     $head_elements['metatag_keywords_0'] = array(
@@ -463,7 +472,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       }
     }
     itg_seo_node_data($node);
-  } 
+  }
   else {
     // Adding Rich Snippet Script at home page for search
       $target = $base_url . '/search?q={search_term}';
@@ -477,7 +486,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
         . '</script>',
       );
       drupal_add_html_head($markup, 'sd_json');
-      
+
       // meta name description for home page
       $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
@@ -492,7 +501,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
         );
         drupal_add_html_head($metatag_description, 'description');
       }
-      
+
       $meta_keyword = $node->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (isset($meta_keyword) && !empty($meta_keyword)) {
         $meta_keyword = array(
@@ -522,7 +531,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
 			);
 			drupal_add_html_head($metatag_description, 'description');
 		}
-		
+
 		$meta_keyword = $node_object->metatags[LANGUAGE_NONE]['keywords']['value'];
 		if (isset($meta_keyword) && !empty($meta_keyword)) {
 			$meta_keyword = array(
@@ -560,7 +569,7 @@ function itg_seo_node_insert($node) {
 
     $ctype_array = content_types_for_sef_url();
 
-    
+
     if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
       $newpath = itg_common_custompath_migrated_load($node, 'update_migrated');
       $node->path['alias'] = $newpath;
@@ -588,14 +597,14 @@ function itg_seo_node_insert($node) {
  */
 function itg_seo_node_presave($node) {
 
-  //set custom path alias  
+  //set custom path alias
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
   if (is_valid_content_type_for_sef_url($node->type) && !in_array('batch', arg())&& isset($node->op)) {
     //Handel case for fresh created node.
     if (empty($node->nid)) {
-      
+
       // As if alise is not set from textfield the assign title of node to alise.
       if (empty($node->path['alias'])) {
         $node->path['alias'] = $node->title;
@@ -612,7 +621,7 @@ function itg_seo_node_presave($node) {
  * @param object $node
  */
 function itg_seo_node_update($node) {
-  //set custom path alias  
+  //set custom path alias
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
@@ -666,7 +675,7 @@ function itg_seo_node_update($node) {
      );
       path_save($path);
     }
-    
+
   }
  }
 }
@@ -755,7 +764,7 @@ function itg_seo_pathauto_alias_alter(&$alias, array &$context) {
 
 /**
  * Get the editor's pick author name
- * 
+ *
  * @param int $ids
  *  Node id of the story node
  * @param string as $author_name
@@ -773,7 +782,7 @@ function itg_seo_editors_pick_data($ids){
 
 /**
  * Call template file for not found page
- * 
+ *
  * @return array
  */
 function itg_not_found_200() {
