@@ -604,7 +604,7 @@ function itg_generate_samsung_json_feed_newslist_technology(){
       'n_small_image' => $medium_img["imag_url"],
       'n_updated_datetime' => $publish_date,
       'n_content_url' => $weburl,
-      'v_large_image' => $extra_large_img["imag_url"],
+      'n_large_image' => $extra_large_img["imag_url"],
     );
   }
   $json_output = json_encode($json);
