@@ -13910,7 +13910,7 @@ span.see-picture {
 
 .special-top-news {
     .itg-listing-wrapper {
-        height: 100%;
+        height: calc(100% - 22px);
     }
 }
 

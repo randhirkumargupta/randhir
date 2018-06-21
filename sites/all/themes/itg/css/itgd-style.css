@@ -383,6 +383,7 @@ width: 100%;
 #block-itg-layout-manager-header-block .menu-login{ right:15px;}
 
 }
+@media only screen and (max-width: 1024px) and (min-width: 768px){#block-itg-widget-featured-photo-carousel .flex-direction-nav {margin-right: 37px; position: absolute; top: 50%; right: 0;}}
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
         margin-top: 40px
