@@ -9,9 +9,9 @@ global $base_url;
         
         <div class="footer-social-link">
             <ul>
-                <li><a rel="nofollow" href="https://www.facebook.com/IndiaToday/" title=""><i class="fa fa-facebook"></i></a></li>
-                <li><a rel="nofollow" href="https://twitter.com/indiatoday" title=""><i class="fa fa-twitter"></i></a></li>
-                <li><a rel="nofollow" href="https://plus.google.com/+indiatoday" title=""><i class="fa fa-google-plus"></i></a></li>
+                <li><a rel="nofollow" target="_blank" href="https://www.facebook.com/IndiaToday/" title=""><i class="fa fa-facebook"></i></a></li>
+                <li><a rel="nofollow" target="_blank" href="https://twitter.com/indiatoday" title=""><i class="fa fa-twitter"></i></a></li>
+                <li><a rel="nofollow" target="_blank" href="https://plus.google.com/+indiatoday" title=""><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>                
                 <li class="search-icon-parent">
                   <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
@@ -63,7 +63,7 @@ global $base_url;
                <div class="cell">
                    <h4><?php print t('Printing:') ;?></h4>
                    <?php print drupal_render($data['printing_footer']); ?>
-                   <h4><?php print t('Welfare'); ?></h4>
+                   <h4><?php print t('Welfare:'); ?></h4>
                    <?php print drupal_render($data['welfare_footer']); ?>
                    <h4><?php print t('Music:'); ?></h4>
                    <?php print drupal_render($data['music_footer']); ?>
