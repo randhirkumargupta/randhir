@@ -17,7 +17,7 @@ function itg_rss_it_date_range_issue_article() {
   $query->condition('n.type', 'issue');  
   $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
   $query->orderBy('n.nid', "DESC");  
-  print strtr((string) $query, $query->arguments()); echo "  andy ";
+  print strtr((string) $query, $query->arguments()); echo "  hi ";
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
 }
@@ -47,7 +47,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('kt', array('field_story_kicker_text_value'));
-    print strtr((string) $query, $query->arguments()); echo "  kumar ";
+    print strtr((string) $query, $query->arguments()); echo "  hello ";
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
     $xml_path = 'public://indiatoday/rss/';
