@@ -308,7 +308,7 @@ $akamai_path = file_create_url(file_default_scheme() . '://../');
 #block-itg-widget-score-card-iframe-widget{overflow:hidden;width:100%}#itg-scorecard-container{background:#222834;padding:0;height:60px;overflow:hidden}#itg-scorecard-container .scorecard-stripcontent{padding:0;position:relative;height:60px}#itg-scorecard-container .scorecard-stripcontent ul{position:absolute;top:50%;transform:translateY(-50%)}#itg-scorecard-container .scorecard-stripcontent ul li{list-style:none;display:inline-block;border-left:1px solid #4f4f4f;padding:0 4px}#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1){border-left:0}#itg-scorecard-container .scorecard-stripcontent ul li a{color:#fff;font-family:OpenSans-Regular;font-weight:400;font-size:14px}#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:242px;display:inline-block;line-height:20px;position:relative;top:4px}#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(3){border-right:0}@media only screen and (max-width:767px){#itg-scorecard-container,#itg-scorecard-container iframe.embed-responsive-item{height:70px}}
 
 </style>
-<script type="text/javascript" src="<?php print $jquery_js_path; ?>"></script>
+<!-- <script type="text/javascript" src="<?php print $jquery_js_path; ?>"></script> -->
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
 
 <?php endif; ?>

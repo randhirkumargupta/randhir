@@ -846,7 +846,7 @@ function itg_js_alter(&$javascript) {
   // Remove unnecessary JS From Homepage
   if (drupal_is_front_page()) {
     //unset($javascript['misc/drupal.js']);
-    unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+    //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
     unset($javascript['misc/jquery.once.js']);
     //unset($javascript['sites/all/themes/itg/js/slick.js']);
     unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
@@ -879,12 +879,12 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
     unset($javascript['modules/user/user.js']);
     $javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']['defer'] = TRUE;
-    //$javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']['defer'] = TRUE;
+    $javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']['defer'] = TRUE;
     $javascript['sites/all/modules/custom/itg_story/js/itg_follow_story_refresh.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/slick.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
-    //$javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
+    $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
   }
 }
 
@@ -966,7 +966,7 @@ function itg_css_alter(&$css) {
   }
 
   if (($user->uid == 0) && (drupal_is_front_page())) {
-    //$css = array_diff_key($css, $exclude1);
+    $css = array_diff_key($css, $exclude1);
   }
 }
 
