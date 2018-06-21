@@ -17,7 +17,7 @@
     Drupal.behaviors.my_custom_behavior = {
         attach: function (context, settings) {
 
-            jQuery('body').on('click', '.add-more-block-front', function () {
+            jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
@@ -54,7 +54,7 @@
                 });
 
             });
-            jQuery('body').on('click', '.add-more-block-front-section', function () {
+            jQuery('.add-more-block-front-section').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
