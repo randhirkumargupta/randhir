@@ -249,8 +249,11 @@ function generateNewsCategoryList($tid, $pageno) {
                 $news_list_array[$listcount]['n_type'] = "$type";
                 $news_list_array[$listcount]['n_is_blog'] = "0";
             }
-
-            $news_list_array[$listcount]['n_is_sponsored'] = "0";
+            $n_is_sponsored_val = 0;
+            if(is_sponsored_story($nid)){
+                $n_is_sponsored_val = 1;
+            }            
+            $news_list_array[$listcount]['n_is_sponsored'] = "$n_is_sponsored_val";
             $news_list_array[$listcount]['n_share_link'] = "$firebase_url";
             $news_list_array[$listcount]['n_title'] = "$title";
             $news_list_array[$listcount]['n_short_desc'] = "$field_story_kicker_text_value";
