@@ -291,7 +291,7 @@ section.sidebar {border: 1px solid #ddd;width: 100%;max-width: 370px;}
 <?php } ?>
 <?php if($front_page) : 
 $js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); 
-$jquery_js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/1.9/jquery.min.js'); 
+//$jquery_js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/1.9/jquery.min.js'); 
 $sprite_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/sprite.png');
 $control_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/controls.png');
 $akamai_path = file_create_url(file_default_scheme() . '://../'); 
@@ -308,7 +308,7 @@ $akamai_path = file_create_url(file_default_scheme() . '://../');
 #block-itg-widget-score-card-iframe-widget{overflow:hidden;width:100%}#itg-scorecard-container{background:#222834;padding:0;height:60px;overflow:hidden}#itg-scorecard-container .scorecard-stripcontent{padding:0;position:relative;height:60px}#itg-scorecard-container .scorecard-stripcontent ul{position:absolute;top:50%;transform:translateY(-50%)}#itg-scorecard-container .scorecard-stripcontent ul li{list-style:none;display:inline-block;border-left:1px solid #4f4f4f;padding:0 4px}#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1){border-left:0}#itg-scorecard-container .scorecard-stripcontent ul li a{color:#fff;font-family:OpenSans-Regular;font-weight:400;font-size:14px}#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:242px;display:inline-block;line-height:20px;position:relative;top:4px}#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(3){border-right:0}@media only screen and (max-width:767px){#itg-scorecard-container,#itg-scorecard-container iframe.embed-responsive-item{height:70px}}
 
 </style>
-<!-- <script type="text/javascript" src="<?php print $jquery_js_path; ?>"></script> -->
+<!-- <script type="text/javascript" src="<?php //print $jquery_js_path; ?>"></script> -->
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
 
 <?php endif; ?>
@@ -358,6 +358,13 @@ $akamai_path = file_create_url(file_default_scheme() . '://../');
 <script type="text/javascript">"serviceWorker" in navigator && window.addEventListener("load", function() {navigator.serviceWorker.register("/service-worker.js").then(function(e) { console.log("Service worker registered."), e.onupdatefound = function() {var n = e.installing; n.onstatechange = function() { switch (n.state) {case "installed": navigator.serviceWorker.controller ? (console.log("New or updated content is available."), window.location.reload()) : console.log("Content is now available offline!"); break; case "redundant": console.error("The installing service worker became redundant.") } } } }).catch(function(e) {console.error("Error during service worker registration:", e) }) }); console.log("%cStop!","font-size:48px; font-weight: bold; color: red;");console.log("\n%cThe JavaScript console is intended for developers. If someone told you to copy-paste something here to enable special features, it is a scam and will expose your personal information.","font-size:24px;");</script><script type="text/javascript">function loadScript(e, t) {if (navigator.onLine) {var n = document.createElement("script"); n.type = "text/javascript", n.async = !0, n.readyState ? n.onreadystatechange = function() {"loaded" != n.readyState && "complete" != n.readyState || (n.onreadystatechange = null, t && "function" == typeof t && t()) } : n.onload = function() {t && "function" == typeof t && t() }, n.src = e, (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(n) } else {var a = new Request(e); caches.match(a).then(function(n) {if (n) {var a = document.createElement("script"); a.type = "text/javascript", a.async = !0, a.readyState ? a.onreadystatechange = function() {"loaded" != a.readyState && "complete" != a.readyState || (a.onreadystatechange = null, t && "function" == typeof t && t()) } : a.onload = function() {t && "function" == typeof t && t() }, a.src = e, (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(a) } }) } } </script>
 <script type="text/javascript" src="https://akm-img-a-in.tosshub.com/sites/common/js/gdpr/gdpr_check.js" data-name="cookies-policy" data-id="gdprconsentpolicy"></script>
 -->
-
+<?php 
+if($front_page) { ?>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
+});
+</script>
+<?php } ?>
 </body>
 </html> 
