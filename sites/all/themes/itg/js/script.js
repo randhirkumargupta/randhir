@@ -844,7 +844,6 @@ jQuery(document).ready(function () {
     jQuery(document).click(function () {
         jQuery('.show-embed-code-div').hide();
     });
-    jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
 });
 
 //emoji animation     
@@ -908,6 +907,7 @@ jQuery(window).load(function () {
         jQuery('body').find('.second-level-menu').removeClass('before-load');
         menuBuilder();
         jQuery(window).resize(menuBuilder);
+        jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
     }
 });
 
