@@ -6,6 +6,11 @@
 	$data_tb_region_item = 'data-tb-region-item';  
   }
   $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
+  $_position = array();
+  foreach ($home_top_story_sponsor as $key => $row) {
+    $_position[$key] = $row->position;
+  }
+  array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
 ?>
   <ul class="itg-listing">
       <?php
@@ -25,11 +30,15 @@
               $pipelineclass = ' pipeline-added';
             }
           }
-          if(count($home_top_story_sponsor) > 0 && drupal_is_front_page()){ 
+          if(count($home_top_story_sponsor) > 0 && drupal_is_front_page()){
             foreach($home_top_story_sponsor as $_sponsor_home_value){
               if($_sponsor_home_value->position == $counter){
                 $_node_nid = $_sponsor_home_value->nid;
-                $_node_title = itg_common_get_node_title($_node_nid);
+                $_node_d = itg_common_get_node_title($_node_nid);
+                if (count($_node_d) <= 0 || empty($_node_d[0]->status) || empty($_node_d[0]->title)) {
+                  continue;
+                }
+                $_node_title = $_node_d[0]->title;
             ?>
               <li <?php echo $data_tb_region_item;?> title="<?php echo _widget_title($_node_title); ?>" class="story top-story-<?php print $_node_nid ?>">
                   <span class="itg-sponsor-title"><?php print t('IMPACT FEATURE'); ?></span>
