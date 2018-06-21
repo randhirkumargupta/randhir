@@ -16,7 +16,7 @@ function itg_rss_it_date_range_issue_article() {
   $query->condition('n.status', 1);
   $query->condition('n.type', 'issue');  
   $query->condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');  
-  $query->orderBy('n.nid', "DESC");    
+  $query->orderBy('n.nid', "DESC");  
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   itg_genrate_rss_it_date_range_issue_syndication($result);
 }
@@ -26,35 +26,38 @@ function itg_rss_it_date_range_issue_article() {
  * @param array $issue_result
  */
 function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
-    
-  if (!empty($issue_result)) {
-    $issue_title = date('Y-m-d H:i', strtotime($issue_result[0]['title']));
-    $title = $issue_result[0]['title'];
-    $query = db_select('node', 'n');
-    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
-    $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    //$query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    $query->condition('isuue.field_story_issue_date_value', $title, '=');
-    $query->condition('n.status', 1);
-    $query->condition('n.type', 'story', '=');
-    $query->groupBy('n.nid');
-    $query->orderBy('n.created', 'DESC');
-    $query->fields('dbody', array('body_value'));
-    $query->fields('smi', array('field_story_medium_image_fid'));
-    $query->fields('n', array('nid', 'title', 'created'));
-    $query->fields('kt', array('field_story_kicker_text_value'));    
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
-    $xml_path = 'public://indiatoday/rss/';
-    $date_val = date("Y-m-d", strtotime($title));
-    $file_path = $xml_path . 'it-'.$date_val.'-issue.xml';      
-    $fp = fopen($file_path, "w");
-    fwrite($fp, $xml);
-    fclose($fp);
-  }
+    if (!empty($issue_result)) {        
+        $issue_result_loop = $issue_result;
+        foreach ($issue_result_loop as $key => $value) {
+            $issue_title = date('Y-m-d H:i', strtotime($issue_result[$key]['title']));
+            $title = $issue_result[$key]['title'];            
+            $query = db_select('node', 'n');
+            $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+            $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
+            $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+            $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
+            $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+            $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+            $query->condition('isuue.field_story_issue_date_value', $title, '=');
+            $query->condition('n.status', 1);
+            $query->condition('n.type', 'story', '=');
+            $query->groupBy('n.nid');
+            $query->orderBy('n.created', 'DESC');
+            $query->fields('dbody', array('body_value'));
+            $query->fields('smi', array('field_story_medium_image_fid'));
+            $query->fields('n', array('nid', 'title', 'created'));
+            $query->fields('kt', array('field_story_kicker_text_value'));
+            //print strtr((string) $query, $query->arguments());die(); 
+            $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+            $xml = genrate_rss_it_date_range_issue_syndication_xml($result, $issue_title, $issue_result);
+            $xml_path = 'public://indiatoday/rss/';
+            $date_val = date("Y-m-d", strtotime($title));
+            $file_path = $xml_path . 'it-' . $date_val . '-issue.xml';
+            $fp = fopen($file_path, "w");
+            fwrite($fp, $xml);
+            fclose($fp);
+        }
+    }
 }
 
 /**
