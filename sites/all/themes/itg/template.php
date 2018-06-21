@@ -862,7 +862,7 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
     unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
-    unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
+    //unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
     unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
     unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
     unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
