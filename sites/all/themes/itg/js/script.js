@@ -844,6 +844,7 @@ jQuery(document).ready(function () {
     jQuery(document).click(function () {
         jQuery('.show-embed-code-div').hide();
     });
+    jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
 });
 
 //emoji animation     
