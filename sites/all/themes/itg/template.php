@@ -884,7 +884,7 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/themes/itg/js/slick.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
-    $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
+    //$javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
   }
 }
 
