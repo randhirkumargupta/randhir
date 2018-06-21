@@ -313,6 +313,14 @@ function itg_widget_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_custom_variables.inc',
     );
+    $items['itg-content-configure'] = array(
+        'title' => t('Manage Sponsor Content on Home Top stories'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_sponsor_content_configuration'),
+        'access arguments' => array('administer itg_term settings'),
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_custom_variables.inc',
+      );
     return $items;
 }
 
@@ -2206,4 +2214,16 @@ function get_home_feature_weight_for_special($type, $cat_id = 0, $extra = 0) {
   $max_query->orderBy('weight', 'asc')->range(0, 3);
   $max_result = $max_query->execute()->fetchAll();
   return $max_result;
+}
+
+/**
+ * Get node title using nid
+ * @param int $nid
+ * @return string
+ */
+function itg_custom_var_get_node_title($nid) {
+  $query = db_select('node' , 'n')
+      ->fields('n' , array('title', 'status'))
+      ->condition('n.nid' , $nid , '=');
+  return $query->execute()->fetchAll();
 }
