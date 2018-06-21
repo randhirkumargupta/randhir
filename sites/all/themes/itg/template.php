@@ -844,7 +844,7 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
   
   // Remove unnecessary JS From Homepage
-  if (drupal_is_front_page()) {
+  /*if (drupal_is_front_page()) {
     //unset($javascript['misc/drupal.js']);
     unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
     unset($javascript['misc/jquery.once.js']);
@@ -885,7 +885,7 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
-  }
+  }*/
 }
 
  /**
@@ -966,7 +966,7 @@ function itg_css_alter(&$css) {
   }
 
   if (($user->uid == 0) && (drupal_is_front_page())) {
-    $css = array_diff_key($css, $exclude1);
+    //$css = array_diff_key($css, $exclude1);
   }
 }
 
