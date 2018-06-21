@@ -194,7 +194,6 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
   <iframe id="videoplayer" width="700px" height="550px" frameborder="0" allowfullscreen="" src=""></iframe>
 </div>
 <!-- jQuery Bootstrap--> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
 <!-- Swiper JS --> 
 <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 
