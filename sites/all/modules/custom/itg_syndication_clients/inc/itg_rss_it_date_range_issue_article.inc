@@ -29,7 +29,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     if (!empty($issue_result)) {
         echo "<pre>";print_r($issue_result);echo "<pre>";
         $issue_result_loop = $issue_result;
-        foreach ($$issue_result_loop as $key => $value) {
+        foreach ($issue_result_loop as $key => $value) {
             $issue_title = date('Y-m-d H:i', strtotime($issue_result[$key]['title']));
             $title = $issue_result[$key]['title'];
             echo $issue_title; echo "andy";echo $title; echo "hi"; echo $key;die();
