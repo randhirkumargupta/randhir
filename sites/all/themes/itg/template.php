@@ -879,7 +879,7 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/custom/itg_layout_manager/js/itg_more_section_card.js']);
     unset($javascript['modules/user/user.js']);
     $javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']['defer'] = TRUE;
-    $javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']['defer'] = TRUE;
+    //$javascript['sites/all/libraries/flexslider/jquery.flexslider-min.js']['defer'] = TRUE;
     $javascript['sites/all/modules/custom/itg_story/js/itg_follow_story_refresh.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/slick.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
