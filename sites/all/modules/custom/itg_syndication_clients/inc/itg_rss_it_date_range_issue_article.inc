@@ -29,7 +29,7 @@ function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     if (!empty($issue_result)) {
         foreach ($issue_result as $key => $value) {
             $issue_title = date('Y-m-d H:i', strtotime($issue_result[$key]['title']));
-            $title = $issue_result[0]['title'];
+            $title = $issue_result[$key]['title'];
             $query = db_select('node', 'n');
             $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
             $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
