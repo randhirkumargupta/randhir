@@ -17,7 +17,7 @@
     Drupal.behaviors.my_custom_behavior = {
         attach: function (context, settings) {
 
-            jQuery('body').on('click', '.add-more-block-front', function () {
+            jQuery('.add-more-block-front').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
@@ -54,7 +54,7 @@
                 });
 
             });
-            jQuery('body').on('click', '.add-more-block-front-section', function () {
+            jQuery('.add-more-block-front-section').live('click', function () {
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
@@ -775,13 +775,13 @@ jQuery(document).ready(function () {
     });
 
     //story page social share for mobile
-    /*var getclick;
+    var getclick;
     jQuery('.comment-mobile .share-icon').toggle(function () {
         getclick = jQuery(this).parents('.comment-mobile').find('.social-share');
         getclick.css({ 'display': 'inline-block' });
     }, function () {
         getclick.css({ 'display': 'none' });
-    });*/
+    });
 
 
     // jQuery code to add Light off/on effect 

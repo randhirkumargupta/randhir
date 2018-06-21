@@ -824,7 +824,7 @@ function itg_js_alter(&$javascript) {
   // Remove unnecessary JS From Homepage
   if (drupal_is_front_page()) {
     //unset($javascript['misc/drupal.js']);
-    unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+    //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
     unset($javascript['misc/jquery.once.js']);
     //unset($javascript['sites/all/themes/itg/js/slick.js']);
     unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
@@ -840,7 +840,7 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
     unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
-    unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
+    //unset($javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']);
     unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
     unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
     unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
@@ -863,6 +863,7 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/stickyMojo.js']['defer'] = TRUE;
     $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
+    $javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']['defer'] = TRUE;
   }
 }
 
