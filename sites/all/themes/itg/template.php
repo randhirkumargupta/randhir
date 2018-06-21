@@ -760,7 +760,7 @@ function itg_html_head_alter(&$head_elements) {
 	  '#tag' => 'meta',            
 	  '#attributes' => array(
 		'name' => 'theme-color',
-		'content' => '#EB0009'
+		'content' => '#C04A4A'
 	  ),
 	);
   
