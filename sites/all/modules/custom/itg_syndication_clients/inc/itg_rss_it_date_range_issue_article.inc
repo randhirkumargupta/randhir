@@ -28,6 +28,7 @@ function itg_rss_it_date_range_issue_article() {
 function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
     
   if (!empty($issue_result)) {
+      p($issue_result);
     $issue_title = date('Y-m-d H:i', strtotime($issue_result[0]['title']));
     $title = $issue_result[0]['title'];
     $query = db_select('node', 'n');
