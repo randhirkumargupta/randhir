@@ -150,7 +150,10 @@ function generateStoryDeatilList($id) {
     //data array building
     $title = strip_tags($title);
     $image_caption = strip_tags($image_caption);
-
+    $n_is_sponsored_val = 0;
+            if(is_sponsored_story($nid)){
+                $n_is_sponsored_val = 1;
+            }
     $data_array['category_id'] = "$tid";
     $data_array['category_title'] = "$term_name";
     $data_array['id'] = "$nid";
@@ -168,7 +171,7 @@ function generateStoryDeatilList($id) {
     $data_array['star_cast'] = "$star_cast_name";
     $data_array['share_link'] = "$firebase_url";
     $data_array['comment_count'] = "$comment_cont";
-    $data_array['is_sponsored'] = "";
+    $data_array['is_sponsored'] = "$n_is_sponsored_val";
     $data_array['sponsored_icon'] = "";
     $data_array['sponsored_url'] = "";
     $data_array['desc_withouthtml'] = "$body_without_html";
