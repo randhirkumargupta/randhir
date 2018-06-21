@@ -26,13 +26,11 @@ function itg_rss_it_date_range_issue_article() {
  * @param array $issue_result
  */
 function itg_genrate_rss_it_date_range_issue_syndication($issue_result) {
-    if (!empty($issue_result)) {
-        echo "<pre>";print_r($issue_result);echo "<pre>";
+    if (!empty($issue_result)) {        
         $issue_result_loop = $issue_result;
         foreach ($issue_result_loop as $key => $value) {
             $issue_title = date('Y-m-d H:i', strtotime($issue_result[$key]['title']));
-            $title = $issue_result[$key]['title'];
-            echo $issue_title; echo "andy";echo $title; echo "hi"; echo $key;die();
+            $title = $issue_result[$key]['title'];            
             $query = db_select('node', 'n');
             $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
             $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
