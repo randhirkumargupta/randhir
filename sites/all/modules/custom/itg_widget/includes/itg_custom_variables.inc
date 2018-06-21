@@ -514,7 +514,7 @@ function top_story_sponsor_add_more_add_one_callback($form, $form_state) {
   return $form['field_container'];
 }
 
-function itg_content_configuration_submit($form, $form_state) {
+function itg_sponsor_content_configuration_submit($form, $form_state) {
   $sponsor_ids = array();
   foreach ($form_state['values']['field_container'] as $key => $value) {
     $sponsor_ids[] = array(
