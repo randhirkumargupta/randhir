@@ -379,14 +379,6 @@ $akamai_path = file_create_url(file_default_scheme() . '://../');
       print $styles;
     }  
 ?>
-<?php 
-if($front_page) { ?>
-<script type="text/javascript">
-jQuery(document).ready(function(){
-jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
-});
-</script>
-<?php } ?>
 <script type="text/javascript" async src="https://akm-img-a-in.tosshub.com/sites/common/js/gdpr/gdpr_check.js" data-name="cookies-policy" data-id="gdprconsentpolicy"></script>
 </body>
 </html> 
