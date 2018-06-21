@@ -34,7 +34,7 @@
             foreach($home_top_story_sponsor as $_sponsor_home_value){
               if($_sponsor_home_value->position == $counter){
                 $_node_nid = $_sponsor_home_value->nid;
-                $_node_d = itg_common_get_node_title($_node_nid);
+                $_node_d = itg_custom_var_get_node_title($_node_nid);
                 if (count($_node_d) <= 0 || empty($_node_d[0]->status) || empty($_node_d[0]->title)) {
                   continue;
                 }

@@ -161,9 +161,10 @@ function get_content_type_name($type) {
  */
 function itg_common_get_node_title($nid) {
   $query = db_select('node' , 'n')
-      ->fields('n' , array('title', 'status'))
+      ->fields('n' , array('title'))
       ->condition('n.nid' , $nid , '=');
-  return $query->execute()->fetchAll();
+
+  return $query->execute()->fetchField();
 }
 
 /**
