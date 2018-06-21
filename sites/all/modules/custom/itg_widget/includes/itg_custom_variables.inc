@@ -532,7 +532,7 @@ function itg_sponsor_content_configuration_validate($form, &$form_state){
     if (empty($value['content_nid']) || empty($value['content_position'])) {
       $is_empty = TRUE;
     } else {
-      $_nodes = itg_common_get_node_title($value['content_nid']);
+      $_nodes = itg_custom_var_get_node_title($value['content_nid']);
       if (empty($_nodes[0]->status)) {
         $unpublished_ids[] = $value['content_nid'];
       }
@@ -591,3 +591,4 @@ function itg_sponsor_content_configuration_submit($form, &$form_state) {
 function array_has_dupes($array) {
   return count($array) !== count(array_unique($array));
 }
+
