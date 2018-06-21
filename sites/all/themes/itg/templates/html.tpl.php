@@ -362,7 +362,7 @@ $akamai_path = file_create_url(file_default_scheme() . '://../');
 if($front_page) { ?>
 <script type="text/javascript">
 jQuery(document).ready(function(){
-jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
+//jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
 });
 </script>
 <?php } ?>
