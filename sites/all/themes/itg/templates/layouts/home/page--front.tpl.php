@@ -301,7 +301,7 @@ if ($theme != 'itgadmin') {
                                             <div class="data-holder" id="itg-block-6">
                                                 <?php
                                                 if (isset($widget_data['itg-block-6']['widget'])) {
-                                                  print $widget_data['itg-block-6']['widget'];
+                                                  //print $widget_data['itg-block-6']['widget'];
                                                 }
                                                 else {
                                                   print '<div class="widget-placeholder"><span>Watch right now</span></div>';
