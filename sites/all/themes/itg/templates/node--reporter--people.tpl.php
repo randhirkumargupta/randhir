@@ -24,8 +24,6 @@
   hide($content['comments']);
   hide($content['links']);
   unset($content);
-  $block = module_invoke('itg_widget', 'block_view', 'anchor_langing_page_menu');
-  print $block['content'];
   ?>
   <?php if(!empty($solr_story_data)):?>
   <div class="main-story-wrapper">

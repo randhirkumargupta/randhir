@@ -41,6 +41,14 @@ function itg_reporter_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['content-people-migration'] = array(
+    'title' => 'People migration',
+    'page callback' => 'itg_people_migration',
+    //'access callback' => TRUE,
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_byline_people_content_migration.inc',
+  );
   return $items;
 }
 
