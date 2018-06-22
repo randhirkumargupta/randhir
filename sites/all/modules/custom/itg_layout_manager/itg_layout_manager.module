@@ -227,7 +227,7 @@ function itg_layout_manager_block_info() {
     'info' => t('election widget block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  
+
   $blocks['latest_headlines404_block'] = array(
     'info' => t('Latest Headlines'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -246,7 +246,7 @@ function itg_layout_manager_block_view($delta = '') {
 
   switch ($delta) {
     case 'header_block':
-      $arg = arg();      
+      $arg = arg();
       if (function_exists('get_section_header_menu_and_content')) {
         $section_header = get_section_header_menu_and_content($arg);
         if ($section_header) {
@@ -268,9 +268,9 @@ function itg_layout_manager_block_view($delta = '') {
           $data['menu_manager'][] = $temp_data;
         }
       }
-      
+
       $block['content'] = theme('header_block', array('data' => $data));
-      
+
       break;
 
     case 'footer_block':
@@ -296,7 +296,7 @@ function itg_layout_manager_block_view($delta = '') {
       global $user, $base_url;
       $change_arg = NULL;
       if (array_key_exists(FRONT_USER, $user->roles)) {
-        // condition for change password        
+        // condition for change password
         if (arg(0) == 'password-success' || arg(0) == 'complete-page') {
           $change_arg = arg(1);
         }
@@ -331,8 +331,8 @@ function itg_layout_manager_block_view($delta = '') {
       }
       drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
       drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js');
-      
-      /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {       
+
+      /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
         $js_check_user = 'jQuery(document).ready(function() {
                             try {
                                 jQuery.ajax({
@@ -391,9 +391,9 @@ function itg_layout_manager_block_view($delta = '') {
     // for admin widgets list in side bar
     case 'layout_widget_list_block':
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
-				$cat_id = $_GET['section'];  
+				$cat_id = $_GET['section'];
 				if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] > 0){
-					$cat_id = $_GET['category'];  
+					$cat_id = $_GET['category'];
 				}
         $template_id = check_template_of_section($cat_id, $_GET['template_name']);
       }
@@ -425,9 +425,9 @@ function itg_layout_manager_block_view($delta = '') {
         $widgets_type = 'section_wise_order';
       }
       if (!empty($_GET['section']) && !empty($_GET['template_name'])) {
-				$cat_id = $_GET['section'];  
+				$cat_id = $_GET['section'];
 				if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] > 0){
-					$cat_id = $_GET['category'];  
+					$cat_id = $_GET['category'];
 				}
         $data['widgets_list'] = display_section_widgets_list($cat_id, $_GET['template_name'], $widgets_type);
       }
@@ -440,10 +440,10 @@ function itg_layout_manager_block_view($delta = '') {
       $data['section_widget2_form'] = drupal_render($section_widgets_form);
 
       $widgets_type = 'section_widget2_wise_order';
-			
-			$cat_id = $_GET['section'];  
+
+			$cat_id = $_GET['section'];
 			if(isset($_GET['category']) && !empty($_GET['category']) && $_GET['category'] > 0){
-				$cat_id = $_GET['category'];  
+				$cat_id = $_GET['category'];
 			}
       $data['widgets_list'] = display_section_widgets_list($cat_id, $_GET['template_name'], $widgets_type);
 
@@ -507,6 +507,8 @@ function itg_layout_manager_block_view($delta = '') {
           'funalytics' => t('Funalytics'),
           'itg_active_polls' => t('Poll'),
           'anchors-list' => t('Anchors'),
+          'people-list' => t('People'),
+          'authors-list' => t('Authors'),
           'blog' => t('Blog'),
           'podcast' => t('Podcast'),
           'program' => t('Programmes'),
@@ -547,12 +549,12 @@ function itg_layout_manager_block_view($delta = '') {
       $widget_array['election_widgets_form'] = drupal_render($election_widgets_form);
       $block['content'] = theme('layout_election_widgets_block', array('data' => $widget_array));
       break;
-    
+
     case 'latest_headlines404_block':
       if (function_exists(itg_seo_latest_headlines)) {
         $latest_headlines = itg_seo_latest_headlines();
       }
-      
+
       $block['content'] = $latest_headlines;
       break;
   }
@@ -692,10 +694,10 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * 
- * This function use for url cleaning 
+ *
+ * This function use for url cleaning
  * $string string
- * 
+ *
  */
 function itg_layout_clean_url($string) {
   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
@@ -723,7 +725,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data['personlization'] = get_itg_widget('personlization');
     $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
-    
+
     //js for personalization_slider
     //drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('scope' => 'footer', 'weight' => 5));
     drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
@@ -805,8 +807,8 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
  */
 function get_first_story_title_by_tid($nid) {
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid'); 
-  $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');    
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'fm', 'fm.fid=eli.field_story_extra_large_image_fid');
   $query->fields('fm', array('uri'));
   $query->condition('n.nid', $nid, '=');
   $query->fields('n', array('nid', 'title'));
