@@ -755,6 +755,14 @@ function itg_html_head_alter(&$head_elements) {
 			'href' => '/manifest.json'
 		),
 	);
+	$head_elements['theme_color'] = array(
+	  '#type' => 'html_tag',
+	  '#tag' => 'meta',            
+	  '#attributes' => array(
+		'name' => 'theme-color',
+		'content' => '#C04A4A'
+	  ),
+	);
   
 }
 

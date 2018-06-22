@@ -40,7 +40,7 @@
   "start_url": "https://www.indiatoday.in",
   "display": "standalone",
   "orientation": "natural",
-  "background_color": "#a00606",
+  "background_color": "#fff",
   "theme_color": "#C04A4A",  
   "gcm_sender_id": "393239297034", 
   "gcm_user_visible_only": true 
