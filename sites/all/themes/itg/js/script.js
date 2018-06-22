@@ -907,6 +907,7 @@ jQuery(window).load(function () {
         jQuery('body').find('.second-level-menu').removeClass('before-load');
         menuBuilder();
         jQuery(window).resize(menuBuilder);
+        jQuery('#block-itg-layout-manager-header-block .navigation').css('overflow','visible');
     }
 });
 

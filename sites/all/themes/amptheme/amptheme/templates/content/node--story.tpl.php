@@ -247,7 +247,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 						<?php 
 						  } 
 						?>
-					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <li itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> <span itemprop="dateModified" content="<?php print $modified_date; ?>">UPDATED</span>
 					  <?php
 					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
 							print date('F j, Y H:i', $node->created);
@@ -280,7 +280,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                $class = 'story-associate-content';
              }
           ?>
-            <div class="<?php echo $class; ?>">
+            <div class="<?php echo $class; ?>" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+              <meta itemprop="representativeOfPage" content="true">
               <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
                 <!--<div id="videogallery-iframe">
                   <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
@@ -325,7 +326,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 }*/
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
-                <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
+                <div class="stryimg"><?php
                 
                   if (empty($widget_data)) {
                     $story_image = '';
@@ -380,7 +381,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 else {
                   ?>
 
-                  <div class="stryimg" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg"><?php
+                  <div class="stryimg"><?php
                      
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
@@ -426,10 +427,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 				
                     <meta itemprop="url" content="<?php print $file_uri; ?>">
 					<meta itemprop="width" content="647"><meta itemprop="height" content="363">
-					<div class="image-alt" itemprop="description"><?php print $node_image_alt; ?></div>
                 </div>
                 <?php if (isset($getImageInfo[0]->image_caption) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>    
-                  <div class="image-alt"><?php print $getImageInfo[0]->image_caption; ?></div>
+                  <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
 											<?php } ?>                            
 										</div>
 							<?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>

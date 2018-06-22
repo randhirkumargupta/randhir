@@ -847,8 +847,8 @@ function itg_widget_theme() {
         'election_constituency_select_box' => array(
             'template' => 'templates/election-constituency-select_box',
         ),
-        'trending_top_takes_videos_widget' => array(
-            'template' => 'templates/trending-top-takes-videos-widget',
+        'top_takes_videos_tab_widget' => array(
+            'template' => 'templates/top-takes-videos-tab-widget',
         ),
 
     );

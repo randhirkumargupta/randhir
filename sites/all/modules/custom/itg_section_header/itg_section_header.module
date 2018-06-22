@@ -448,12 +448,12 @@ function get_event_menu($nid) {
     $menu['menu'][] = '<li class="'.$sponsors_link_class.'">' . l('Sponsors', $baseurl . '/sponsors', array('attributes' => array("style" => "color:$sponsors_menu"))) . '</li>';
   }
   if ($event_config_flashback) {
-    $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color, $event_type);
+    $flash_old = itg_event_backend_custom_flashback($menu_font_color, $event_type, strtotime($node->field_event_start_date_value));
     $flash_old_event = '';
     if (!empty($flash_old)) {
       $flash_old_event = $flash_old['menu'];
     }
-    $menu['flashback_menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+    $menu['flashback_menu'][] = '<li>' . l('Flashback', $flash_old['top']->field_event_flash_back_url_value, array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
   }
   $path_alias = drupal_get_path_alias('node/'.  $nid);
   $event_tab_menu = get_event_tab_menu_data($nid);
@@ -486,4 +486,49 @@ function get_event_tab_menu_data($nid){
   $query->condition('et.entity_id', $nid, '=');
   $result = $query->execute()->fetchAll();
   return $result;
+}
+
+/**
+ * Implement function for get old event flasback
+ */
+function itg_event_backend_custom_flashback($menu_font_color, $event_type, $curr_event_year) {
+  if (empty($curr_event_year)) {
+    $curr_event_year = time();
+  }
+  $query = db_select('field_data_field_event_flash_back', 'efb');
+  $query->fields('efb', array('field_event_flash_back_value'));
+  $query->condition('efb.entity_id', $event_type, '=');
+  $result = $query->execute()->fetchAll();
+  $ids = array();
+  foreach($result as $value){
+    $ids[] = $value->field_event_flash_back_value;
+  }
+  if (count($ids) > 0) {
+    $query = db_select('field_data_field_event_flashback_title', 'eft');
+    $query->leftjoin('field_data_field_event_flash_back_url', 'fefbu', 'fefbu.entity_id = eft.entity_id');
+    $query->leftjoin('field_data_field_event_flash_back_year', 'fefby', 'fefby.entity_id = eft.entity_id');
+    $query->fields('eft', array('field_event_flashback_title_value'));
+    $query->fields('fefbu', array('field_event_flash_back_url_value'));
+    $query->fields('fefby', array('field_event_flash_back_year_value'));
+    $query->condition('eft.entity_id', $ids, 'IN');
+    $query->condition('fefby.field_event_flash_back_year_value', $curr_event_year, '<');
+    print strtr((string)$query, $query->arguments());die;
+    $result = $query->execute()->fetchAll();
+  }
+  $flash_back_link = '';
+  $count = 1;
+  foreach ($result as $value) {
+    if($count == 1) {
+    $flash_back_link_top_nid = $value;
+    }
+    $flash_back_link .= '<li>' . l($value->field_event_flashback_title_value, $value->field_event_flash_back_url_value, array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+  $count++;
+  }
+
+  $output = '';
+  if (!empty($flash_back_link)) {
+    $output['menu'] = '<ul>' . $flash_back_link . '</ul>';
+    $output['top'] = $flash_back_link_top_nid;
+  }
+  return $output;
 }

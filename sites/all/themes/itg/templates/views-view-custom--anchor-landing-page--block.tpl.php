@@ -11,7 +11,7 @@ $uri = base64_encode($actual_link);
 //get follow anchor status
 $follow_status = $content["follow_status"];
 ?>
-<div class="anchor-landing">
+<div class="anchor-landing autohorsectonpage">
   <div class="anchor">
     <div class="anchor-left">
       <?php
@@ -80,3 +80,15 @@ $follow_status = $content["follow_status"];
     </div>
   </div>
 </div>
+<style type="text/css">
+.node-type-reporter.section-author h1{display: none;}
+.node-type-reporter.section-author .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
+.node-type-reporter.section-author .social-icon ul{margin-top:10px;}
+.node-type-reporter.section-author .social-icon ul li{border:0; background:none;}
+.node-type-reporter.section-author .social-icon ul li a{text-indent:-9999;}
+.node-type-reporter.section-author ul.author-story-wrapper{list-style:none; padding:0; margin:30px 0 0 0;}
+.node-type-reporter.section-author ul.author-story-wrapper li{padding-bottom:30px;}
+.node-type-reporter.section-author ul.author-story-wrapper li:first-child{padding-left:0;}
+.node-type-reporter.section-author ul.author-story-wrapper li span{display: block;font-size: 12px; color: #b1b1b1;padding: 8px 0 5px;}
+.node-type-reporter.section-author ul.author-story-wrapper li a{color:##494949; font:400 15px/20px "OpenSans-Regular";}
+</style>

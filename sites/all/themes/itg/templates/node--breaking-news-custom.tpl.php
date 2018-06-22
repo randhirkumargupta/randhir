@@ -208,8 +208,10 @@ $modify_date = $modify_date.'+05:30';
                 <input id="slider-range" class="irs-hidden-input" readonly="">
             <?php } ?>
     <?php
-    $custom_content = get_custom_content_details($node->nid);
-    
+    $custom_content = get_custom_content_details($node->nid);    
+	$actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     
+	$whatsapp = $node->title . " ". $actual_link;
+	$whatsapp_text = urlencode($whatsapp);
     if (!empty($custom_content)) {
       $breaking_output .= '';
 
@@ -233,7 +235,7 @@ $modify_date = $modify_date.'+05:30';
           $breaking_output .= '<div class="dwrap" timevalue="' . $pub_time2 . '" tcount="' . count($custom_content) . '"><div class="dateauthor"><div class="breaking-date"><a href="#'.$breaking_item->bid.'">' . $pub_display_time . ' IST</a></div><div class="breaking-author"> Posted by ' . $user_name . '</div></div>';
           $breaking_output .= '<div class="blog-multi-title">'. $blog_title .'</div>';
           $breaking_output .= '<div class="blog-multi-desc">'. $blog_desc .'</div>';
-          $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . $fb_title . '" , "' . $share_desc . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li></ul></div>';
+          $breaking_output .= '<div class="breaking-social-share">' . $redirection_url . '</div><div class="social-share-new"><ul><li><a title="share on facebook" onclick=\'fbpop("' . $share_page_link . '" , "' . $fb_title . '" , "' . $share_desc . '" , "' . $share_image . '")\' class="facebook def-cur-pointer"><i class="fa fa-facebook"></i></a></li><li><a title="share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" onclick=\'twitter_popup("' . urlencode($fb_title) . '" , "' . urlencode($short_url) . '")\' class="user-activity twitter def-cur-pointer"><i class="fa fa-twitter"></i></a></li><li><a title="share on google+" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick=\'return googleplusbtn("' . $share_page_link . '" )\' class="user-activity google def-cur-pointer"><i class="fa fa-google-plus"></i></a></li><li class="desktop-hide"><a href="whatsapp://send?text='.$whatsapp_text.' data-text="'.$node->title.'" data-href="'.$actual_link.'"><i class="fa fa-whatsapp"></i></a></li></ul></div>';
           $breaking_output .= '</div></div>';
           if($i == 3) {
             $breaking_output .= '<div class="breaking-section">';
