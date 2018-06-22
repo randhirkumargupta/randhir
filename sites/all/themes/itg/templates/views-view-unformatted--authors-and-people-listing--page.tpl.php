@@ -1,3 +1,14 @@
+<style type="text/css">
+  .section-authors-list .author-listing{padding: 20px 0; border-bottom: 1px solid #ddd; overflow:hidden}
+.section-authors-list .author-listing .pic{float:left; margin-right:22px;}
+.section-authors-list .author-listing .detail{display:block}
+.section-authors-list .author-listing .social-icon{}
+.section-authors-list .author-listing .social-icon ul{list-style:none;}
+.section-authors-list .author-listing .social-icon ul li{width:auto; display:inline; margin-right:10px;}
+.section-authors-list .author-listing .social-icon ul li a{font-size:13px;}
+</style>
+
+
 <?php
 
 /**
