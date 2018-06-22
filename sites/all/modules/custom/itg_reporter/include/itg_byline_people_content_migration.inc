@@ -16,21 +16,18 @@ function itg_people_migration() {
     // die;
     if(!empty($result_array)){
       foreach ($result_array['row'] as $key=>$value){
-        if($key < 50){
           $node = new stdClass();
           $node->title = trim($value['headline']);
           $node->type = "reporter";
+          node_object_prepare($node);
           $node->language = LANGUAGE_NONE;
-          $node->uid = ADMINISTRATOR;
+          $node->uid = 1;
           $node->promote = 0;
           $node->comment = 0;
-          $node->revision = 1;
 
           $node->body[$node->language][0]['value'] = $value['main_text'] ? $value['main_text'] : '';
           $node->body[$node->language][0]['format'] = 'full_html';
           $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id;;
-          $node->created = $value['created'];
-          $node->changed = $value['modified'];
           $node->metatags[LANGUAGE_NONE]['title']['value'] = '';
 
           if(!empty($value['metatitle'])){
@@ -43,7 +40,8 @@ function itg_people_migration() {
             $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $value['metakey'];
           }
 
-          node_object_prepare($node);
+          $node->created = $value['created'];
+          //$node->changed = $value['modified'];
           $existing_filepath = 'http://media2.intoday.in/indiatoday/images/stories/'.$value['kicker_image'];
           try{
             $drupal_file = file_save_data(@file_get_contents($existing_filepath), 'public://'.$value['kicker_image']);
@@ -59,16 +57,17 @@ function itg_people_migration() {
 
           try{
             node_save($node); // Finally save node
+            db_update('node') // Table name no longer needs {}
+                ->fields(array(
+                  'changed' =>  $value['modified'],
+                ))
+                ->condition('nid', $node->nid, '=')
+                ->execute();
             echo $key.'. Success: Drupal-'.$node->nid. '     XML-'. $value['id']."<br><br>";
           }catch (Exception $e) {
             echo $key.'. Failed Migration id:'.$value['id'].' --- '.$e->getMessage() . "<br><br>";
           }
-         // die;
-        }else{
-          break; die;
-        }
         //die;
-
       }
     }
     else {
