@@ -36,7 +36,7 @@
 .home-trending-video #trending-videos .trending-videos-flex{position:relative;}
 .home-trending-video #trending-videos .trending-videos .trending-videos-list{padding:0px;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
-
+@media only screen and (min-width: 768px) and (max-width: 800px) {.home-trending-video h3.desktop-hide{display:none;}}
 @media only screen and (min-width: 320px) and (max-width: 767px) {
  .home-trending-video .tab-buttons{ display: none; }
  .home-trending-video h3{text-transform: uppercase; padding: 0 0 0 10px; margin:0px; color: #000;font-size: 16px;font-weight: 600;margin-bottom:0px; height: auto;font-family: "OpenSans-Bold";}
