@@ -1,5 +1,6 @@
 <style type="text/css">
-  .section-people-list .people-listing{padding: 20px 0; border-bottom: 1px solid #ddd; overflow:hidden}
+.section-people-list h1{display:none;}
+.section-people-list .people-listing{padding: 20px 0; border-bottom: 1px solid #ddd; overflow:hidden}
 .section-people-list .people-listing .pic{float:left; margin-right:22px;}
 .section-people-list .people-listing .detail{display:block}
 .section-people-list .people-listing .social-icon{}

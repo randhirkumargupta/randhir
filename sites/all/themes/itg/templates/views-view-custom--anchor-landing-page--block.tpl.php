@@ -81,7 +81,9 @@ $follow_status = $content["follow_status"];
   </div>
 </div>
 <style type="text/css">
-  .node-type-reporter.section-author .social-icon ul{margin-top:10px;}
+.node-type-reporter.section-author h1{display: none;}
+.node-type-reporter.section-author .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
+.node-type-reporter.section-author .social-icon ul{margin-top:10px;}
 .node-type-reporter.section-author .social-icon ul li{border:0; background:none;}
 .node-type-reporter.section-author .social-icon ul li a{text-indent:-9999;}
 .node-type-reporter.section-author ul.author-story-wrapper{list-style:none; padding:0; margin:30px 0 0 0;}
