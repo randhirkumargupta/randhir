@@ -51,7 +51,7 @@ function itg_custom_variables() {
   $form['dns_preconnect_prefetch'] = array(
     '#type' => 'textarea',
     '#title' => t('DNS Preconnect Prefetch'),
-    '#default_value' => get_itg_variable('dns_preconnect_prefetch'),    
+    '#default_value' => get_itg_variable('dns_preconnect_prefetch'),
   );
   $form['enable_custom_lazyload'] = array(
     '#type' => 'checkbox',
@@ -81,6 +81,12 @@ function itg_custom_variables() {
     '#type' => 'textfield',
     '#title' => t('Tez channel email'),
     '#default_value' => get_itg_variable('tez_tvschedule_email'),
+    '#required' => FALSE,
+  );
+  $form['occupation_people_termid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Occupation people ID'),
+    '#default_value' => get_itg_variable('occupation_people_termid'),
     '#required' => FALSE,
   );
   $form['is_pti_cron_running'] = array(
@@ -358,7 +364,7 @@ function itg_user_access_sef_url_submit($form, &$form_state){
 }
 
 /**
-* Manage fifa category id for banner. 
+* Manage fifa category id for banner.
 * {@inheritdoc}
 */
 function itg_fifa_category_id(){
@@ -404,7 +410,7 @@ function itg_fifa_category_id_submit($form, &$form_state){
 
 
 /**
- * Manage fifa category id for banner. 
+ * Manage fifa category id for banner.
  * {@inheritdoc}
  */
 function itg_sponsor_content_configuration($form, &$form_state) {
