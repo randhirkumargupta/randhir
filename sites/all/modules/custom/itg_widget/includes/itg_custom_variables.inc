@@ -51,7 +51,7 @@ function itg_custom_variables() {
   $form['dns_preconnect_prefetch'] = array(
     '#type' => 'textarea',
     '#title' => t('DNS Preconnect Prefetch'),
-    '#default_value' => get_itg_variable('dns_preconnect_prefetch'),    
+    '#default_value' => get_itg_variable('dns_preconnect_prefetch'),
   );
   $form['enable_custom_lazyload'] = array(
     '#type' => 'checkbox',
@@ -83,19 +83,25 @@ function itg_custom_variables() {
     '#default_value' => get_itg_variable('tez_tvschedule_email'),
     '#required' => FALSE,
   );
+  $form['occupation_people_termid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Occupation people ID'),
+    '#default_value' => get_itg_variable('occupation_people_termid'),
+    '#required' => FALSE,
+  );
   $form['is_pti_cron_running'] = array(
     '#type' => 'textfield',
     '#title' => t('PTI Cron Running status'),
     '#default_value' => get_itg_variable('is_pti_cron_running', 1),
     '#required' => FALSE,
   );
-  
+
   $form['status_third_level_menu'] = array(
     '#type' => 'textarea',
     '#title' => t('Third level menu show/hide at details page'),
-    '#default_value' => get_itg_variable('status_third_level_menu'),    
+    '#default_value' => get_itg_variable('status_third_level_menu'),
   );
-  
+
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
@@ -280,7 +286,7 @@ function itg_mobile_app_configure(){
   global $user;
   $form = array();
   if (!in_array("Editor", $user->roles)) {
-    
+
   $form['cube_js_mini_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Mini url'),
@@ -366,7 +372,7 @@ function itg_user_access_sef_url_submit($form, &$form_state){
 }
 
 /**
-* Manage fifa category id for banner. 
+* Manage fifa category id for banner.
 * {@inheritdoc}
 */
 function itg_fifa_category_id(){
@@ -412,7 +418,7 @@ function itg_fifa_category_id_submit($form, &$form_state){
 
 
 /**
- * Manage Sponsor content in home top story form. 
+ * Manage fifa category id for banner.
  * {@inheritdoc}
  */
 function itg_sponsor_content_configuration($form, &$form_state) {
@@ -525,9 +531,9 @@ function itg_sponsor_content_configuration_validate($form, &$form_state){
   }
   $is_empty = FALSE;
   $all_con_ids = array();
-  $all_pos = array();  
-  $unpublished_ids = array();  
-  $invalid_ids = array();  
+  $all_pos = array();
+  $unpublished_ids = array();
+  $invalid_ids = array();
   foreach ($form_state['values']['field_container'] as $key => $value) {
     if (empty($value['content_nid']) || empty($value['content_position'])) {
       $is_empty = TRUE;
@@ -542,7 +548,7 @@ function itg_sponsor_content_configuration_validate($form, &$form_state){
     }
     $all_con_ids[] = $value['content_nid'];
     $all_pos[] = $value['content_position'];
-    
+
   }
   if (count($invalid_ids) > 0) {
     form_set_error('', t("Please use valid content id. Invalid: ". implode(",", $invalid_ids)));
@@ -591,4 +597,5 @@ function itg_sponsor_content_configuration_submit($form, &$form_state) {
 function array_has_dupes($array) {
   return count($array) !== count(array_unique($array));
 }
+
 
