@@ -6,8 +6,7 @@
 function itg_people_migration() {
   drupal_page_is_cacheable(FALSE);
   global $user;
-  echo $term_id = get_itg_variable('occupation_people_termid');
-  die;
+  $term_id = get_itg_variable('occupation_people_termid');
   if($term_id){
     $file_path = drupal_get_path('module', 'itg_reporter') . '/include/people-data.xml';
     if(file_exists($file_path)) {
