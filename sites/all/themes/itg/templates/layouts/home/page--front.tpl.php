@@ -194,7 +194,7 @@ if ($theme != 'itgadmin') {
                         <div class="col-sm-12 col-md-12 col-lg-4 top-rhs-add">
                           <div class="row">
                             <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
-                            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-12 top-rhs-add-child">
+                            <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12 top-rhs-add-child">
                                 <div class="itg-widget">
                                     <div class="ad-widget">
                                         <div class="sidebar-ad">
@@ -209,7 +209,7 @@ if ($theme != 'itgadmin') {
                             </div>
                             <!-- replace home-trending-video if webcast enable -->
                             <?php if (!empty(get_itg_variable('itg_webcast_status', 0))):?>
-															<div class="col-xs-12 col-sm-6 col-md-7 col-lg-12 home-trending-video">
+															<div class="col-xs-12 col-sm-6 col-md-5 col-lg-12 home-trending-video">
                                 <?php if (!empty(get_itg_variable('itg_webcast_url'))) { ?>
                                 <span class="widget-title"><h3><?php print l(get_itg_variable('itg_webcast_title'), get_itg_variable('itg_webcast_url'), array('attributes' => array('target' => '_blank'))); ?></h3></span>
                                 <?php }else { ?>
