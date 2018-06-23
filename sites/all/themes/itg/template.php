@@ -534,7 +534,7 @@ function itg_preprocess_html(&$vars) {
       } 
     }		
   }
-  p($vars);
+  
 }
 
 /**
