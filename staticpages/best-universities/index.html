@@ -62,7 +62,57 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <!--FB Claim URL // 22 june 2017--> 
 <meta property="fb:pages" content="23230437118" />
 <!--End FB Claim URL --> 
+<script>
+$(document).ready(function(e) {
+    var photo_ga_width;
+ var win_width_sl  = $(window).width();   
+ if(win_width_sl<1025){
+photo_ga_width = $('.photo-slider .photobelt .photo-list').width();   
+ }
+else {
+photo_ga_width = $('.photo-slider .photobelt .photo-list').width()+3;
+}
+	var photo_ga_len = $('.photo-slider .photobelt .photo-list').length;
+	//console.log(photo_ga_len);
+	
+	var photo_ga_ulwidth = photo_ga_width * photo_ga_len;
+	$('.photo-slider .photobelt').css('width', photo_ga_ulwidth);
+	var photo_ga_counter = 0;
 
+	$('#photonext').click(function(){
+	
+		if (photo_ga_counter <= photo_ga_len-2 ){
+			$('.photo-slider .photobelt').animate({
+				left : '-='+ photo_ga_width
+			});
+			
+				photo_ga_counter+=1;
+			$('#photoprev').show();
+		}		
+		else{
+			//alert("stop");
+			$(this).hide();
+		}
+	});
+	
+	
+	$('#photoprev').click(function(){
+		if (photo_ga_counter == 0 ){
+			$(this).hide();
+		}
+		else{
+			$('.photo-slider .photobelt').animate({
+				left : '+='+ photo_ga_width
+			});
+			
+			photo_ga_counter-=1;
+			$('#photonext').show();
+		}
+	});
+	
+});
+
+</script>
 </head>
 
 <body>
@@ -541,54 +591,6 @@ $(document).ready(function(){
     threshold: 100,
     failurelimit: 1000
 });
-var photo_ga_width;
- var win_width_sl  = $(window).width();   
- if(win_width_sl<1025){
-photo_ga_width = $('.photo-slider .photobelt .photo-list').width();   
- }
-else {
-photo_ga_width = $('.photo-slider .photobelt .photo-list').width()+3;
-}
-	var photo_ga_len = $('.photo-slider .photobelt .photo-list').length;
-	//console.log(photo_ga_len);
-	
-	var photo_ga_ulwidth = photo_ga_width * photo_ga_len;
-	$('.photo-slider .photobelt').css('width', photo_ga_ulwidth);
-	var photo_ga_counter = 0;
-
-	$('#photonext').click(function(){
-	
-		if (photo_ga_counter <= photo_ga_len-2 ){
-			$('.photo-slider .photobelt').animate({
-				left : '-='+ photo_ga_width
-			});
-			
-				photo_ga_counter+=1;
-			$('#photoprev').show();
-		}		
-		else{
-			//alert("stop");
-			$(this).hide();
-		}
-	});
-	
-	
-	$('#photoprev').click(function(){
-		if (photo_ga_counter == 0 ){
-			$(this).hide();
-		}
-		else{
-			$('.photo-slider .photobelt').animate({
-				left : '+='+ photo_ga_width
-			});
-			
-			photo_ga_counter-=1;
-			$('#photonext').show();
-		}
-	});
-	
-	
-	
 })
 </script>
 
