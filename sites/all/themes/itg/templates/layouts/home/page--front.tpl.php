@@ -226,7 +226,7 @@ if ($theme != 'itgadmin') {
 															</div>
                             <!-- replace home-trending-video if webcast enable end here -->
                             <?php else: ?>
-                            <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12 home-trending-video">
+                            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-12 home-trending-video">
                                 <div class="widget-help-text">Template widgets(<strong>Trending Videos &amp; Top Takes</strong>)</div>
                                 <div class="tab-buttons">
                                     <span data-class="itg-block-5" data-id="tab-data-1" class="active">
