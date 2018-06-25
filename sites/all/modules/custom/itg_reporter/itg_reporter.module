@@ -83,7 +83,7 @@ function itg_reporter_apaache_solr($nid=''){
  */
 function itg_reporter_people_apache_solr($term='', $type = ''){
  // echo $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
-  $str =  '!sm_vid_Tags: "" AND tm_vid_1_names:"'.$term.'"';
+  echo $str =  '!sm_vid_Tags: "" AND tm_vid_1_names:"'.$term.'"';
 
   $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,sm_field_video_duration,sm_vid_Tags,ds_created,im_field_photo_enable';
   $solr = apachesolr_get_solr();
@@ -95,7 +95,10 @@ function itg_reporter_people_apache_solr($term='', $type = ''){
   $query->addFilter("bundle",$type);
   $query->addFilter("bs_status", true);
   $response = $query->search();
-  $raw_results = $response->response->docs;;
+  $raw_results = $response->response->docs;
+  echo  "<pre>";
+  print_r($raw_results);
+  die;
   if(!empty($raw_results))
     return $raw_results;
   else
