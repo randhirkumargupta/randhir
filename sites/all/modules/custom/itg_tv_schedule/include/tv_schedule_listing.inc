@@ -46,7 +46,7 @@ function tv_schedule_listing() {
       $title = $search_title;
       $regex = new MongoRegex("/$title/i");
       $cond = array('program' => $regex, 'status' => array( '$in' => $status ));
-      $cursor_popup = $people->find($cond);
+      $cursor_popup = $people->find($cond)->sort(array('program date'=> 1));
       $result = $cursor_popup->count();
       if ($result > 0) {
         $key = 0;
