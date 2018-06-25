@@ -286,12 +286,24 @@ function get_third_level_menu() {
                 ->condition('fpc.entity_id', $arg[1])
                 ->execute()->fetchField();
     if (!empty($data)) {
+      
+      $menu_display_status = get_itg_variable('status_third_level_menu');
+      if (isset($menu_display_status) && !empty($menu_display_status)) {
+        $menu_display_status_arr = explode(',', $menu_display_status);
+      }
+      else {
+        $menu_display_status_arr = array();
+      }
+      //if (is_array($menu_display_status_arr) && !in_array($data, $menu_display_status_arr)) {
       $parents = taxonomy_get_parents_all($data);
       if (count($parents) > 1) {
-        $section_id = end($parents)->tid;
+        $pri_section_id = end($parents)->tid;
       } else {
-        $section_id = $data;
+        $pri_section_id = $data;
       }
+      if (is_array($menu_display_status_arr) && !in_array($pri_section_id, $menu_display_status_arr)) {
+        $section_id = $pri_section_id;
+      }     
     }
   }
   // condition for itgadmin theme
