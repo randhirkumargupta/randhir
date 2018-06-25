@@ -40,6 +40,7 @@ body{background-position: center 0;}
 .socials_share{margin-bottom: 15px;}
 #copyright {display:none; text-align: center;padding: 5px 0;color: #949494; width: 100%; float: left; font-size:13px;border-top: 2px solid #424242;padding: 10px;background: #000;box-sizing: border-box !important;}
 #copyright a { color: #949494; font-size: 13px;text-decoration: none;}
+.photobelt{width:auto;}
 @media screen and (max-width:1024px){
 .photo-slider, .photo-slider .photo-list{width:300px;padding:0; margin:0 auto; }
 .captionWicon a{font-size: 16px; line-height: 20px;}
@@ -239,7 +240,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
               <!--        <li><a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank">Past Ranking</a></li> -->
               <li><a href="http://indiatoday.intoday.in/best-universities/index.jsp"><img width="40" height="38" border="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/best-universities/images/home-icon.png" align="left" class="navimg"></a></li>
                         <li><a href="https://www.indiatoday.in/best-universities" target="_blank">Reports</a></li>
-                        <li class="last"><a href="http://indiatoday.intoday.in/gallerylist/best-universities/1/225.html" target="_blank">Photos</a></li>
+                        <!--<li class="last"><a href="http://indiatoday.intoday.in/gallerylist/best-universities/1/225.html" target="_blank">Photos</a></li>-->
                     </ul>
                   <div class="clr"></div>
                 </nav>
@@ -339,7 +340,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                             </div>           	
                         </div>
                     </div>
-                    <div id="rankingdiv">
+                   
                     			<div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="https://www.indiatoday.in/best-universities" target="_blank"><span>2017</span> Ranking</a></div>
@@ -354,7 +355,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                             </ul>
                         </div>
 
-                    <div id="rankingdiv">
+                    
                     			<div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/higher-education-in-india-top-universities/1/704306.html" target="_blank"><span>2016</span> Ranking</a></div>
@@ -368,8 +369,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/jawaharlal-nehru-university-ranking-universities-in-india/1/704304.html" target="_blank">Jawharlal Nehru University: Bedrock of idealism</a></li>
                             </ul>
                         </div>
-                        <div class="rankingdivyear">
-                        	<div class="rankingyear"> 
+                       
 					<div class="rankingdivyear">
                         	<div class="rankingyear"> 
                             	<a href="http://indiatoday.intoday.in/story/indian-universities-india-today-nielsen-survey-education/1/448738.html" target="_blank"><span>2015</span> Ranking</a></div>
@@ -383,8 +383,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/banaras-hindu-university-pandit-madan-mohan-malaviya-india-best-universities/1/448726.html" target="_blank">Banaras Hindu University: No nervous nineties here</a></li>
                             </ul>
                         </div>
-                        <div class="rankingdivyear">
-                        	<div class="rankingyear">
+                       
     		
 <div class="rankingdivyear">
                         	<div class="rankingyear">
@@ -399,8 +398,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/indias-best-universities-bhu-varanasi-pandit-madan-mohan-malviya/1/367826.html" target="_blank">Banaras Hindu University: Ideas Unlimited</a></li>
                             </ul>
                         </div>
-                        <div class="rankingdivyear">
-                        	<div class="rankingyear">
+                       
                         <div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/india-today-best-universities-rankings-2013-delhi-university/1/272847.html" target="_blank"><span>2013</span> Ranking</a></div>
@@ -414,8 +412,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/banaras-hindu-university-india-today-best-universities-2013/1/272858.html" target="_blank">Banaras Hindu University: On the Global Route</a></li>
                             </ul>
                         </div>
-                        <div class="rankingdivyear">
-                        	<div class="rankingyear">
+                      
                         <div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/india-today-universities-ranking-2012-delhi-university-tops/1/189290.html" target="_blank"><span>2012</span> Ranking</a></div>
