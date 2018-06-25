@@ -41,6 +41,14 @@ function itg_reporter_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['content-people-migration'] = array(
+    'title' => 'People migration',
+    'page callback' => 'itg_people_migration',
+    //'access callback' => TRUE,
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_byline_people_content_migration.inc',
+  );
   return $items;
 }
 
@@ -75,7 +83,7 @@ function itg_reporter_apaache_solr($nid=''){
  */
 function itg_reporter_people_apache_solr($term='', $type = ''){
  // echo $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
-  $str =  '!sm_vid_Tags: "" AND tm_vid_1_names:"'.$term.'"';
+  $str =  '!tm_vid_1_names: "" AND tm_vid_1_names:"'.$term.'"';
 
   $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,sm_field_video_duration,sm_vid_Tags,ds_created,im_field_photo_enable';
   $solr = apachesolr_get_solr();

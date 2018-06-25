@@ -1,11 +1,15 @@
+
 <style type="text/css">
-  .section-authors-list .author-listing{padding: 20px 0; border-bottom: 1px solid #ddd; overflow:hidden}
+.section-authors-list h1{display:none;}
+.section-authors-list .author-listing{padding: 20px 0; border-bottom: 1px solid #ddd; overflow:hidden}
 .section-authors-list .author-listing .pic{float:left; margin-right:22px;}
 .section-authors-list .author-listing .detail{display:block}
 .section-authors-list .author-listing .social-icon{}
 .section-authors-list .author-listing .social-icon ul{list-style:none;}
 .section-authors-list .author-listing .social-icon ul li{width:auto; display:inline; margin-right:10px;}
 .section-authors-list .author-listing .social-icon ul li a{font-size:13px;}
+.section-authors-list .item-list ul.pager{list-style:none; margin-top:20px;}
+.section-authors-list .item-list ul.pager li{width:auto; display:inline; margin:10px 0 15px 0; border:1px solid #ccc; padding:0 8px;}
 </style>
 
 
@@ -57,10 +61,10 @@ foreach ($view->result as $id => $item): ?>
 
               ?>
               <li>
-              <a class="user-activity def-cur-pointer" rel="<?php print $item->nid; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><?php print t('Twitter'); ?></a>
+              <a class="user-activity def-cur-pointer" rel="<?php print $item->nid; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
             </li>
             <li>
-              <a class="def-cur-pointer" title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i><?php print t('Facebook'); ?></a>
+              <a class="def-cur-pointer" title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i></a>
             </li>
           </ul>
         </div>

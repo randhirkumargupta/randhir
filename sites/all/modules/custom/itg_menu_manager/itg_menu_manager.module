@@ -171,8 +171,12 @@ function itg_menu_manager_block_view($delta = '') {
                     $data[] = $temp_data;
                 }
             }
-
-            $block['content'] = theme('third_level_menu', array("data" => $data, "node_load" => $node_data));
+			if(!empty($data)){				
+			  $block['content'] = theme('third_level_menu', array("data" => $data, "node_load" => $node_data));
+			}
+			else{
+			  $block['content'] = '';
+			}
             break;
         case 'magazine_node_third_level_menu':
             $block['content'] = magazine_node_third_level_menu_content();

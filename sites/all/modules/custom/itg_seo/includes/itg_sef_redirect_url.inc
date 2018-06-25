@@ -129,6 +129,7 @@ function itg_common_custompath_insert_load($node) {
     if($occupation == 'reporter'){
       $occupation = 'author';
     }
+    $edited_sef_url = !empty($edited_sef_url)?$edited_sef_url:$node_sef;
     $pathdata = $occupation . '/' . $edited_sef_url;
     $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
