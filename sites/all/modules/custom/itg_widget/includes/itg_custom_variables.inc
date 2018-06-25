@@ -65,6 +65,12 @@ function itg_custom_variables() {
     '#default_value' => get_itg_variable('is_pti_cron_running', 1),
     '#required' => FALSE,
   );
+
+  $form['status_third_level_menu'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Third level menu show/hide at details page'),
+    '#default_value' => get_itg_variable('status_third_level_menu'),
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
