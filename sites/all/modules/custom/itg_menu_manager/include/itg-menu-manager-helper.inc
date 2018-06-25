@@ -289,13 +289,15 @@ function get_third_level_menu() {
       
       $menu_display_status = get_itg_variable('status_third_level_menu');
       $menu_display_status_arr = explode(',',$menu_display_status);
-      if (is_array($menu_display_status_arr) && !in_array($data, $menu_display_status_arr)) {
-        $parents = taxonomy_get_parents_all($data);
-        if (count($parents) > 1) {
-          $section_id = end($parents)->tid;
-        } else {
-          $section_id = $data;
-        }
+      //if (is_array($menu_display_status_arr) && !in_array($data, $menu_display_status_arr)) {
+      $parents = taxonomy_get_parents_all($data);
+      if (count($parents) > 1) {
+        $pri_section_id = end($parents)->tid;
+      } else {
+        $pri_section_id = $data;
+      }
+      if (is_array($menu_display_status_arr) && !in_array($pri_section_id, $menu_display_status_arr)) {
+        $section_id = $pri_section_id;
       }     
     }
   }
