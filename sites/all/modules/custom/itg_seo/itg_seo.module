@@ -585,6 +585,8 @@ function itg_seo_node_insert($node) {
       }
       if (($node->type == 'breaking_news') || $node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
         $newpath = itg_common_custompath_insert_load($node);
+        echo "test<br>";
+        p($newpath);
         $node->path['alias'] = $newpath;
       }
     }
