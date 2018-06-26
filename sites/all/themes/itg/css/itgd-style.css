@@ -401,6 +401,9 @@ width: 100%;
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
     #itg-scorecard-container .scorecard-stripcontent{display:none;}
     .front .mt-50 { margin-top: 20px;}
+    .magazin-lhs-top .magazin-top .magazin-subscribe .issue-title{width: 206px;left: -12px; }
+    .magazin-lhs-top .magazin-top .magazin-subscribe .issue-title:before{width: 17px;height: 17px; top:-17px;}
+    .magazin-lhs-top .magazin-top .magazin-subscribe .issue-title:after{width: 17px;height: 17px;top: -17px;}
 	  
 }
 
@@ -422,6 +425,7 @@ width: 100%;
    .itg-layout-container .itg-h321-section .droppable{height: auto;}
    .section-movies .auto-block-3 .itg-widget-parent.m-bottom40{ padding:0px; margin-bottom:0; }
    .section-movies .auto-block-3 .ad-widget{ margin-top:20px; }
+   .magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link{font-size: 18px;}
 }
 .may-be-recommend .trc_rbox_container .video-label.video-title {
     font-size: 15px;
