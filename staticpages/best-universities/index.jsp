@@ -1,157 +1,18 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/images/dot-in-fav-icon.ico' />
+<link rel="shortcut icon" href="https://www.indiatoday.in/sites/all/themes/itg/favicon.ico" type="image/vnd.microsoft.icon" />
 <meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-<title>India's best university 2017 - India's Top Universities, 2017 Universities Rankings</title>
-<meta name="description" content="Ranking of India best Universities 2017 - Find the rankings of India's top universities. Jawaharlal Nehru University Delhi, Indian Institute of Technology Kharagpur, All India Institute of Medical Sciences New Delhi, Jamia Millia Islamia New Delhi." />
-<meta name="keywords" content="best universities in india, top universities in india, university ranking in india 2017, India best Universities, Rankings, Top Universities , jawaharlal nehru university delhi, jnu, indian institute of technology kharagpur, iit kharagpur, all india institute of medical sciences new delhi, AIIMS, Jamia Millia Islamia new delhi" />
+<title>Best Universities India 2018: List of Top Universities 2018 in India</title>
+<meta name="description" content="Best Universities 2018 in India: Find the full list of best universities in India and top universities of 2018 in India. Also get universities ranking, photos and video reports at India Today." />
+<meta name="keywords" content="best universities in india, top universities in india, university ranking in india 2018, India best Universities, Top Universities, best universities india 2018, top universities 2018 in india, best universities 2018 in india" />
+<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/style-sheet.css" type="text/css">
 <link href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/best-universities/style-sheet.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/resources/css/it-common-15-New1.css" type="text/css">
 <link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/resources/css/it-inner-15.css" type="text/css">
+<link rel="stylesheet" href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/stylenew.css" type="text/css">
 <script src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js'></script>
-<style>
-html{background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/bg-repeat.jpg) /*repeat-y*/ center 0;}
-.rt-colum h2{top:1px;}
-.photo-slider {margin: 0 auto; padding: 3px; border: 1px solid #e7e7e7;}
-.photo-slider, .photo-slider .photo-list {width: 305px; position: relative; height: 350px; overflow: hidden;}
-.photo-slider .photobelt {position: relative;}
-.photo-slider .photo-list {float: left;margin-right: 3px;}
-#tabbb{margin-right:0;}
-footer{padding:0 !important;}
-body{background-position: center 0;}
-.main .right,.rt-colum{width:313px;}
-.tabhead{margin-right:5px;}
-.leadright{background: #ebebeb;}
-.blueheader {color: #fff; font-size: 17px;}
-.rt-colum {margin-bottom: 25px; position: relative; background:#fff;}
-.rt-colum h2 {font-size: 13px; line-height: 20px; padding-bottom: 6px; position: absolute; top: 4px; left: 4px; z-index: 999;}
-.rt-colum h2 a {color: #fff; font-weight: 400; text-decoration: none; text-transform: uppercase; background: #193984; font-size: 15px; padding: 0 6px; border-left: 5px solid #ffcc3f;}
-.showing,.ad-withborder,.photo-slider{border:0;}    
-.showing{ margin-bottom:25px;}
-.topstr-list li{ font: 400 14px/18px arial }
-.watch_chunk_container ul{ margin-top: 15px; }
-.photoueartitle h2 { margin:0;padding:0; margin: 5px 0 0;color: #aeadad; font: 13px arial;line-height: 13px;}
-.photoueartitle h2 a {text-decoration: none; color: #aeadad;}
-.righttopmag{padding: 3px; width: auto;}
-.photo-slider, .photo-slider .photo-list{ width:auto;}  
-.righttopmag{text-align: center;}
-.socials_share{margin-bottom: 15px;}
-#copyright {display:none; text-align: center;padding: 5px 0;color: #949494; width: 100%; float: left; font-size:13px;border-top: 2px solid #424242;padding: 10px;background: #000;box-sizing: border-box !important;}
-#copyright a { color: #949494; font-size: 13px;text-decoration: none;}
-.photobelt{width:auto;}
-@media screen and (max-width:1024px){
-.photo-slider, .photo-slider .photo-list{width:300px;padding:0; margin:0 auto; }
-.captionWicon a{font-size: 16px; line-height: 20px;}
-}
-@media screen and (max-width:800px){
-#wrapper{width:100%;}
-#global{width:100%;}
-.main .left {float: none;width: 670px; margin:0 auto;}
-.main .right { clear: left;float: none; width: 670px; margin:0 auto;}
-header {text-align: center;}
-header a{ display: inline-block; }
-header .topad { float: none;width: 728px;margin: 0 auto;}    
-nav li{ font: 20px arial; margin-top:0;}
-nav {margin: 10px auto 0;font: 16px Arial;}
-header h1 {background-size: 100% 100%;width: 200px;height: 130px;}
-
-.socials_share{clear:none;float:left;width:313px;margin:20px 0;}
-.righttopmag.sponsors{clear:left;float:left;width:306px; text-align: center; margin-bottom:30px;}
-.righttopmag.sponsors iframe{width:306px;}   
-.righttopmag.best_coll_right{clear:none;float: right;width:306px;text-align: center;}
-.righttopmag.best_coll_right iframe{height:265px;}
-.rt-colum.todaysheadline{clear:left;float:left;width:313px;}
-.rt-colum.chunk_right_photo{clear:none;float: right;width:313px;}
-.right-ad.rt-colum.zedoads1{clear:none;float:left;width:313px; text-align: center;}
-.rt-colum.ad-withborder{clear:none;float: right;width:313px;}
-.rt-colum.noborder.chunk_hot_rightnow{clear:none;float: right;width:313px;}
-.rt-colum.noborder.chunk_right_sosorry{clear:none;float:left;width:313px;}
-.rt-colum.noborder.chunk_right_sosorry .showing{margin-bottom: 0;}
-.rt-colum.ad-withborder.zedoadsmarket{float:left;width:313px;}
-.rt-colum.hotrightnow-section{clear:none;width:313px; float: right;}
-.navimg {margin-right: 8px;margin-top: -2px;width: 28px; height: 25px;}
-
-.photo-slider a#photoprev{left:-2px;}
-.photo-slider a#photonext{right:-1px;}
-
-iframe.responsive_foot{height:530px;width:100%;}
-
-.right-ad.rt-colum.zedoads1{height:250px;display:block !important;}
-.rt-colum.ad-withborder{height:100px;}
-.rt-colum.ad-withborder.zedoadsmarket{height: 250px;}
-}
-
-@media screen and (max-width:767px){
-.topad{display: none;}
-}
-
-@media screen and (max-width:670px){
-
-#global{height:inherit;}
-#global #itgd_links a{display: inline-block;}
-.topad{display: none;}
-.main .left{width:100%;}
-#lead2012{width:100%;}
-.leadleft{width:100%;}
-.leadleft>a{display: block;background: #0d1b1e;}
-.leadleft img{max-width:100%; margin:0 auto;}
-.leadright{width:100%;padding:0; height: initial;}
-.leadright>a{display: block;background: #0d1b1e;}
-.leadright img{max-width:100%; margin:0 auto;}
-.main .right{width:100%;}
-#leftmain{width:100%;}  
-.title{padding-left: 10px;}
-.left ul{padding: 0 0 0 15px;margin-top: 10px;}
-.desc{padding: 5px 5px 7px 10px;}   
-.more{display: block; position: static;}
-#photosdiv{width:300px; margin:0 auto; float: none;}
-#photosdiv .photoyear>a{display: block;}
-#photosdiv .photoyear{width:140px; float: left; margin-right: 20px;}  
-#photosdiv .photoyear:nth-child(odd){ margin-right:0;}
-#photosdiv .photoyear>a img{width: 100%; height: 100%;}
-#rankingdiv {clear: both;float: none;width: 300px;box-sizing: border-box !important;background: #EBEBEB;padding: 10px;margin: 0 auto;}
-.rankingdivyear{width:100%; margin:0;}
-.rankingdivyear a{display: block}
-.rankingdivyear a img{width:100%;height:100%;}
-.rankingdivyear .title{padding:0;font-size: 13px;line-height: 16px;}
-.rankingdivyear .left ul{padding: 0 0 0 15px;}    
-.main .right{width:300px; margin:0 auto;}
-.righttopmag.sponsors{width:100%; padding: 0;}
-.righttopmag.sponsors iframe{width:100%;}
-.socials_share{clear:none;float:none;width:100%; margin-top:20px; display: inline-block;}
-.righttopmag.best_coll_right{float:none;width:100%;clear:both;margin-bottom: 30px;}
-.rt-colum.todaysheadline{float:none;width:100%;}
-.rt-colum.chunk_right_photo{float:none;width:100%;}
-.right-ad.rt-colum.zedoads1{float:none;width:100%;}
-.rt-colum.ad-withborder{float:none;width:100%;}
-.rt-colum.noborder.chunk_hot_rightnow{float:none;width:100%;}
-.rt-colum.noborder.chunk_right_sosorry{float:none;width:100%;}
-.rt-colum.ad-withborder.zedoadsmarket{float:none;width:100%;}
-.rt-colum.hotrightnow-section{float:none;width:100%;}
-.tabhead{padding:2px; margin-right: 6px;}
-.righttopmag{padding:0;}
-.watch_chunk_container{width:100%;}
-.captionWicon a{font-size:15px; line-height: 20px;}
-footer iframe{height:380px;}
-#global #itgd_links{ font: bold 11px/15px arial;}
-.photo-slider, .photo-slider .photo-list{margin:0;padding:0;width:298px;}
-.photo-slider .photobelt{border:2px solid #fff;width:300px;}
-.photo-slider a#photonext{right:0;}
-.photo-slider a#photoprev{left:-2px;}
-.container_bestcol{background: #fff; margin:10px auto;}
-.container_bestcol iframe{height:inherit;}
-.righttopmag.sponsors iframe{width:100%;}  
-.right-ad.rt-colum.zedoads1{display: none !important} 
-.rt-colum.ad-withborder{display: none; }
-.rt-colum.ad-withborder.zedoadsmarket{display: none;}
-
-#copyright {display:block;}
-footer iframe{display:none;}   
-}
-</style>  
-
 <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -180,28 +41,103 @@ footer iframe{display:none;}
   ga('send', 'pageview');
 
 </script>
-<!-- IndiaToday Group - IndiaToday - RTA script -->
-<script type='text/javascript'>
-var crtg_nid = '5603';
-var crtg_cookiename = 'crtg_rta';
-var crtg_varname = 'crtg_content';
-function crtg_getCookie(c_name){ var i,x,y,ARRCookies=document.cookie.split(";");for(i=0;i<ARRCookies.length;i++){x=ARRCookies[i].substr(0,ARRCookies[i].indexOf("="));y=ARRCookies[i].substr(ARRCookies[i].indexOf("=")+1);x=x.replace(/^\s+|\s+$/g,"");if(x==c_name){return unescape(y);} }return'';}
-var crtg_content = crtg_getCookie(crtg_cookiename);
-var crtg_rnd=Math.floor(Math.random()*99999999999);
-(function(){
-var crtg_url=location.protocol+'//rtax.criteo.com/delivery/rta/rta.js?netId='+escape(crtg_nid);
-crtg_url +='&cookieName='+escape(crtg_cookiename);
-crtg_url +='&rnd='+crtg_rnd;
-crtg_url +='&varName=' + escape(crtg_varname);
-var crtg_script=document.createElement('script');crtg_script.type='text/javascript';crtg_script.src=crtg_url;crtg_script.async=true;
-if(document.getElementsByTagName("head").length>0)document.getElementsByTagName("head")[0].appendChild(crtg_script);
-else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
-})();
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
 </script>
+
+<script>
+  var gptAdSlots = [];
+googletag.cmd.push(function () {
+var mapping = googletag.sizeMapping().
+addSize([4000, 0], [[728, 90], [970, 90]]).
+addSize([3000, 0], [[728, 90], [970, 90]]).
+addSize([2000, 0], [[728, 90], [970, 90]]).
+addSize([1000, 0], [[728, 90], [970, 90]]).
+addSize([750, 0], [728, 90]).
+addSize([700, 0], [[300, 250],[336, 280]]).
+addSize([530, 0], [[300, 250],[336, 280]]).
+addSize([336, 0], [[300, 250],[336, 280]]).
+addSize([320, 0], [300, 250]).
+addSize([0, 0], [300, 250]).build();
+
+var mapping1 = googletag.sizeMapping().
+addSize([4000, 0], [728, 90]).
+addSize([3000, 0], [728, 90]).
+addSize([2000, 0], [728, 90]).
+addSize([1000, 0], [728, 90]).
+addSize([750, 0], [728, 90]).
+addSize([700, 0], [300, 250]).
+addSize([530, 0], [300, 250]).
+addSize([430, 0], [300, 250]).
+addSize([320, 0], [300, 250]).
+addSize([0, 0], [300, 250]).build();
+
+    gptAdSlots[0] = googletag.defineSlot('/1007232/IT_Microsite_ATF_728x90-320x50', [[728, 90], [300, 250]], 'div-gpt-ad-1514285599552-0').defineSizeMapping(mapping).addService(googletag.pubads());
+    gptAdSlots[1] = googletag.defineSlot('/1007232/IT_Microsite_BTF_728x90-300x250', [[728, 90], [300, 250]], 'div-gpt-ad-1514285599552-2').defineSizeMapping(mapping1).addService(googletag.pubads());
+    googletag.defineSlot('/1007232/IT_Microsite_300x250', [300, 250], 'div-gpt-ad-1514285599552-1').addService(googletag.pubads());
+    googletag.pubads().setTargeting('category', ['BestUniversities']);
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.enableServices();
+  });
+</script>
+
 <!--FB Claim URL // 22 june 2017--> 
 <meta property="fb:pages" content="23230437118" />
 <!--End FB Claim URL --> 
+<script>
+$(document).ready(function(e) {
+    var photo_ga_width;
+ var win_width_sl  = $(window).width();   
+ if(win_width_sl<1025){
+photo_ga_width = $('.photo-slider .photobelt .photo-list').width();   
+ }
+else {
+photo_ga_width = $('.photo-slider .photobelt .photo-list').width()+3;
+}
+	var photo_ga_len = $('.photo-slider .photobelt .photo-list').length;
+	//console.log(photo_ga_len);
+	
+	var photo_ga_ulwidth = photo_ga_width * photo_ga_len;
+	$('.photo-slider .photobelt').css('width', photo_ga_ulwidth);
+	var photo_ga_counter = 0;
 
+	$('#photonext').click(function(){
+	
+		if (photo_ga_counter <= photo_ga_len-2 ){
+			$('.photo-slider .photobelt').animate({
+				left : '-='+ photo_ga_width
+			});
+			
+				photo_ga_counter+=1;
+			$('#photoprev').show();
+		}		
+		else{
+			//alert("stop");
+			$(this).hide();
+		}
+	});
+	
+	
+	$('#photoprev').click(function(){
+		if (photo_ga_counter == 0 ){
+			$(this).hide();
+		}
+		else{
+			$('.photo-slider .photobelt').animate({
+				left : '+='+ photo_ga_width
+			});
+			
+			photo_ga_counter-=1;
+			$('#photonext').show();
+		}
+	});
+	
+});
+
+</script>
 </head>
 
 <body>
@@ -212,33 +148,25 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
     </div>
     <div id="wrapper">
     	<header>
-        	<a href="http://indiatoday.intoday.in/best-universities/index.jsp"><h1>India's Best Universities</h1></a>
+        	<a href="http://indiatoday.intoday.in/best-universities"><h1>India's Best Universities</h1></a>
             <div class="topad">
             	<aside>advertisement</aside>
                 <div class="ad">
                 
 
-	<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script><script>
-  var googletag = googletag || {};
-  googletag.cmd = googletag.cmd || [];
-</script><script>
-  googletag.cmd.push(function() {    
-	googletag.defineSlot('/1007232/Indiatoday_best-universities_DesktopMasthead_728x90', [728, 90], 'div-gpt-ad-1496915828862-0').addService(googletag.pubads());	
-    googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs();
-    googletag.enableServices();
-  });
+<!-- /1007232/IT_Microsite_ATF_728x90-320x50 -->
+<div id='div-gpt-ad-1514285599552-0'>
+<script>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1514285599552-0'); });
 </script>
-<div id='div-gpt-ad-1496915828862-0' style='height:90px; width:728px; display:block !important;'><script>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0'); });
-</script></div>
+</div>
 
 
                 </div>
                 <nav id="topNav"> 
                     <ul>
               <!--        <li><a href="http://indiatoday.intoday.in/gallery/india-top-45-universities-of-2011/1/7146.html" target="_blank">Past Ranking</a></li> -->
-              <li><a href="http://indiatoday.intoday.in/best-universities/index.jsp"><img width="40" height="38" border="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/best-universities/images/home-icon.png" align="left" class="navimg"></a></li>
+              <li><a href="http://indiatoday.intoday.in/best-universities"><img width="40" height="38" border="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/best-universities/images/home-icon.png" align="left" class="navimg"></a></li>
                         <li><a href="https://www.indiatoday.in/best-universities" target="_blank">Reports</a></li>
                         <!--<li class="last"><a href="http://indiatoday.intoday.in/gallerylist/best-universities/1/225.html" target="_blank">Photos</a></li>-->
                     </ul>
@@ -247,6 +175,23 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
             </div>
             <div class="clr"></div>
         </header>
+        
+        
+        <div class="sponsorContainer01"><span class="leftFirstLogo"><img alt="best universities Ranking in India 2018" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/top-left-img.png"></span><div class="mobileCenterSec"><div class="leftPresentingSponsor"><span class="PreSponsorTxt">Presenting<br>sponsor</span> <span class="PreSponsorImg"><a href="https://tt1.zedo.com/ads2/c?a=2891602;g=0;c=821003853;i=0;x=23040;n=821;s=2;k=http://www.amity.edu/webcampaign/default.asp?id=IndTday25052018D" target="_blank" title=""><img alt="Amity" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/top-left-img01.png"></a> 
+
+
+<!-- Begin ZEDO -->
+<script language="JavaScript">
+var zzp=new Image();
+zzp.src="https://tt1.zedo.com/ads2/p/l?a=2891602;c=821003853;x=23040;n=821;e=i;i=0;s=2;z="+Math.random();</script>
+<noscript>
+<img width=1 height=1 border=0 src="https://tt1.zedo.com/ads2/p/l?a=2891602;g=0;c=821003853;x=23040;n=821;i=0;e=i;s=2;z=[timestamp]">
+</noscript>
+<!-- End ZEDO -->
+
+ </span></div></div></div>
+        
+        
         
         <!--<div class="container_bestcol"><iframe class="iframe_bestcol" frameborder="0" width="100%" height="70" scrolling="no" src="http://media2.intoday.in/aajtak/best-college-sponsor/2017/sponsor_universities.html"></iframe></div>-->
         <section class="main">
@@ -278,10 +223,17 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                 
                 <!-- photo galleries -->
                 
-                <div id="leftmain">
+                 <div id="leftmain">
                 	<div id="photosdiv">
                     	<div class="photoshead">
                         	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/best-universities/images/photos.png" width="192" height="32" alt="" border="0">
+                        </div>
+                        <div class="photoyear">
+                        	<a href="https://www.indiatoday.in/best-universities/photo/best-universities-in-india-2018-1266338-2018-06-21" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/best-univs.jpg" width="200" height="200" alt="" border="0"></a>             
+                            <div class="photoueartitle">
+                            	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/text2017.png" width="81" height="39" alt="" border="0" align="left" class="marg">
+                                <h2><a href="https://www.indiatoday.in/best-universities/photo/best-universities-in-india-2018-1266338-2018-06-21" target="_blank">The Best Universities of 2017</a></h2>
+                            </div>           	
                         </div>
                         <div class="photoyear">
                         	<a href="http://indiatoday.intoday.in/gallery/bestindianuniversities2016/1/19639.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/best-universities/2016_200.JPG" width="200" height="200" alt="" border="0"></a>             
@@ -340,7 +292,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                             </div>           	
                         </div>
                     </div>
-                   
+                    <div id="rankingdiv">
                     			<div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="https://www.indiatoday.in/best-universities" target="_blank"><span>2017</span> Ranking</a></div>
@@ -355,7 +307,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                             </ul>
                         </div>
 
-                    
                     			<div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/higher-education-in-india-top-universities/1/704306.html" target="_blank"><span>2016</span> Ranking</a></div>
@@ -369,7 +320,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/jawaharlal-nehru-university-ranking-universities-in-india/1/704304.html" target="_blank">Jawharlal Nehru University: Bedrock of idealism</a></li>
                             </ul>
                         </div>
-                       
 					<div class="rankingdivyear">
                         	<div class="rankingyear"> 
                             	<a href="http://indiatoday.intoday.in/story/indian-universities-india-today-nielsen-survey-education/1/448738.html" target="_blank"><span>2015</span> Ranking</a></div>
@@ -383,7 +333,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/banaras-hindu-university-pandit-madan-mohan-malaviya-india-best-universities/1/448726.html" target="_blank">Banaras Hindu University: No nervous nineties here</a></li>
                             </ul>
                         </div>
-                       
     		
 <div class="rankingdivyear">
                         	<div class="rankingyear">
@@ -398,7 +347,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/indias-best-universities-bhu-varanasi-pandit-madan-mohan-malviya/1/367826.html" target="_blank">Banaras Hindu University: Ideas Unlimited</a></li>
                             </ul>
                         </div>
-                       
                         <div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/india-today-best-universities-rankings-2013-delhi-university/1/272847.html" target="_blank"><span>2013</span> Ranking</a></div>
@@ -412,7 +360,6 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                                 <li><a href="http://indiatoday.intoday.in/story/banaras-hindu-university-india-today-best-universities-2013/1/272858.html" target="_blank">Banaras Hindu University: On the Global Route</a></li>
                             </ul>
                         </div>
-                      
                         <div class="rankingdivyear">
                         	<div class="rankingyear">
                             	<a href="http://indiatoday.intoday.in/story/india-today-universities-ranking-2012-delhi-university-tops/1/189290.html" target="_blank"><span>2012</span> Ranking</a></div>
@@ -458,6 +405,8 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                     </div>
                     <div class="clr"></div>
                 </div>
+                </div>
+                </div>
             </section>
         	<section class="right">
                 <div class="socials_share">
@@ -466,9 +415,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                     <a title="Facebook" rel="nofollow" target="_blank" href="http://www.facebook.com/indiatoday"><span class="fb-icon"></span></a>
                     <a title="Twitter" rel="nofollow" target="_blank" href="http://www.twitter.com/indiatoday"><span class="tw-icon"></span></a>
                     <a title="Google Plus" rel="nofollow" target="_blank" href="https://plus.google.com/u/0/b/102138128034776070977/"><span class="plus-icon"></span></a>
-                    <a title="RSS" rel="nofollow" target="_blank" href="http://indiatoday.intoday.in/site/rssFeed.jsp"><span class="rss-icon"></span></a>
-                    <a title="Mobile" rel="nofollow" target="_blank" href="http://m.indiatoday.in/"><span class="mobile-icon"></span></a>
-                    <a title="Live TV" target="_blank" href="http://indiatoday.intoday.in/site/livetv.jsp"><span class="tv-icon"></span></a></div>
+                    <a title="RSS" rel="nofollow" target="_blank" href="https://www.indiatoday.in/rss"><span class="rss-icon"></span></a>
+                    <a title="Mobile" rel="nofollow" target="_blank" href="https://www.indiatoday.in/"><span class="mobile-icon"></span></a>
+                    <a title="Live TV" target="_blank" href="https://www.indiatoday.in/livetv"><span class="tv-icon"></span></a></div>
                     <div class="clr"></div>
                  </div>
                  <div class="righttopmag sponsors">
@@ -477,9 +426,22 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
                  <!--<script type='text/javascript'>
 GA_googleFillSlot("IT_Special_MRec");
 </script>-->
+<div class="sponsorContainer"><span class="leftFirstLogo"><a href="https://indiatoday.in/best-universities/" target="_blank" title="India Today Best universities 2018"><img alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/top-img.png"></a></span><div class="mobileCenterSec"><div class="leftPresentingSponsor"><span class="PreSponsorTxt">Presenting<br>sponsor</span> <span class="PreSponsorImg"><a href="https://tt1.zedo.com/ads2/c?a=2891602;g=0;c=821003853;i=0;x=23040;n=821;s=2;k=http://www.amity.edu/webcampaign/default.asp?id=IndTday25052018D" target="_blank" title=""><img alt="Amity" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/bestuniv/sponsor-img.png"></a> 
+<!-- Begin ZEDO -->
+<script language="JavaScript">
+var zzp=new Image();
+zzp.src="https://tt1.zedo.com/ads2/p/l?a=2891602;c=821003853;x=23040;n=821;e=i;i=0;s=2;z="+Math.random();</script>
+<noscript>
+<img width=1 height=1 border=0 src="https://tt1.zedo.com/ads2/p/l?a=2891602;g=0;c=821003853;x=23040;n=821;i=0;e=i;s=2;z=[timestamp]">
+</noscript>
+<!-- End ZEDO -->
+ </span></div></div></div>
+
+
+
                  </div>
                  <div class="righttopmag best_coll_right">
-	                 <iframe width="300" scrolling="no" height="250" frameborder="0" src="http://indiatoday.intoday.in/bestcolleges_chunk.jsp"></iframe>
+	                 <iframe width="300" scrolling="no" height="250" frameborder="0" src="/staticpages/best-universities/bestcolleges_chunk.html"></iframe>
                      
  
                      
@@ -494,30 +456,7 @@ GA_googleFillSlot("IT_Special_MRec");
   
  				</div>
                 
-                <div class="right-ad rt-colum zedoads1" id="zedoads1" data-zedoads="300x250/navigation_rightnav_2015.jsp_RightnavMR1" >
-
-				<!-- Javascript tag: --><!-- begin ZEDO for channel:  IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
-				<script >var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";</script>
-				<script  src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-				<!-- end ZEDO for channel:  IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->		
-
-		</div>
-
- 			<div class="rt-colum ad-withborder" >
-				<script type="text/javascript">
- 					var zmt_mtag;
-					function zd_get_placements() {
- 						zmt_mtag = zmt_get_tag(821,"933466");
- 						p933466_1 = zmt_mtag.zmt_get_placement("zt_933466_1", "933466", "1" , "2210" , "19" , "2" ,"300", "100");
- 						zmt_mtag.zmt_set_async();
- 						zmt_mtag.zmt_load(zmt_mtag); 
-					}
-				</script>
-				<script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>
-				<!-- Ad Slot 1 tag: --><!-- begin ZEDO for channel: IT 300x100 ROS, Publisher: India Today, Ad Dimension: 300x100 Medium Rectangle-300x100 --> 
- 				<div id="zt_933466_1" style="display:show"><script id="zt_933466_1" >if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined') {     zmt_mtag.zmt_render_placement(p933466_1);	}</script></div>
- 				<!-- end ZEDO for channel:  IT 300x100 ROS, Publisher: India Today, Ad Dimension: 300x100 Medium Rectangle-300x100 --> 
-  			</div>
+             
 
                  
                  <div class="rt-colum noborder chunk_hot_rightnow">
@@ -581,12 +520,7 @@ Not the workers but Tamil Nadu MLAs reward themselves, to get 100 per cent salar
        <div class="captionWicon"><a href="/video/so-sorry-rajinikanth-political-plunge/1/1126806.html" title="Politics joins Rajinikanth"><span class="video-icon spritbg"></span>Politics joins Rajinikanth</a></div>
        </div>       </div>  
                  </div>
-               <div class="rt-colum ad-withborder zedoadsmarket" id="zedoadsmarket" data-zedoads="300x250/navigation_rightnav_2015.jsp_MarketingMR1">
-  			<!-- Javascript tag: --><!-- begin ZEDO for channel:  IT ROS Marketng Rightnav MR1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
-			<script >var zflag_nid="821"; var zflag_cid="2425"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";</script>
-			<script  src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-			<!-- end ZEDO for channel:  IT ROS Marketng Rightnav MR1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
-  		</div>
+               
 			<div class="rt-colum hotrightnow-section">
   			<h2><a href="/videolist/top-takes/1/1005.html">Top Takes</a></h2>
   			 <div class="watch_chunk_container"><ul>	 
@@ -656,9 +590,9 @@ Mojo's co-owner Yug Tuli, who's on the run, spotted with wife at Hyderabad airpo
         </section>
     </div>
     <footer>      
-    <iframe class="responsive_foot" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/it-footer2017.html" frameborder="0" scrolling="no" width="100%" height="455"></iframe>
+    <iframe class="responsive_foot" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2017.html" frameborder="0" scrolling="no" width="100%" height="400"></iframe>
       
-      <div id="copyright">Copyright © 2017 Living Media India Limited. For reprint rights: <a href="http://www.syndicationstoday.com/" title="Syndications Today" target="_blank">Syndications Today</a>.</div>
+      <div id="copyright">Copyright © 2018 Living Media India Limited. For reprint rights: <a href="http://www.syndicationstoday.com/" title="Syndications Today" target="_blank">Syndications Today</a>.</div>
       
         </footer>
 
@@ -676,54 +610,6 @@ $(document).ready(function(){
     threshold: 100,
     failurelimit: 1000
 });
-var photo_ga_width;
- var win_width_sl  = $(window).width();   
- if(win_width_sl<1025){
-photo_ga_width = $('.photo-slider .photobelt .photo-list').width();   
- }
-else {
-photo_ga_width = $('.photo-slider .photobelt .photo-list').width()+3;
-}
-	var photo_ga_len = $('.photo-slider .photobelt .photo-list').length;
-	//console.log(photo_ga_len);
-	
-	var photo_ga_ulwidth = photo_ga_width * photo_ga_len;
-	$('.photo-slider .photobelt').css('width', photo_ga_ulwidth);
-	var photo_ga_counter = 0;
-
-	$('#photonext').click(function(){
-	
-		if (photo_ga_counter <= photo_ga_len-2 ){
-			$('.photo-slider .photobelt').animate({
-				left : '-='+ photo_ga_width
-			});
-			
-				photo_ga_counter+=1;
-			$('#photoprev').show();
-		}		
-		else{
-			//alert("stop");
-			$(this).hide();
-		}
-	});
-	
-	
-	$('#photoprev').click(function(){
-		if (photo_ga_counter == 0 ){
-			$(this).hide();
-		}
-		else{
-			$('.photo-slider .photobelt').animate({
-				left : '+='+ photo_ga_width
-			});
-			
-			photo_ga_counter-=1;
-			$('#photonext').show();
-		}
-	});
-	
-	
-	
 })
 </script>
 
