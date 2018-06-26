@@ -677,11 +677,11 @@ function itg_seo_node_update($node) {
       $newpath = itg_common_custompath_insert_load($node);
       if (!empty($newpath)) {
         $node->path['alias'] = $newpath;
-        $path = array(
+        /*$path = array(
           'source' => "node/{$node->nid}",
           'alias' => $newpath,
         );
-        path_save($path);
+        path_save($path);*/
       }
     }
 
