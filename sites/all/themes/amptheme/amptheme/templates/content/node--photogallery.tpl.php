@@ -2,7 +2,10 @@
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
   <div class="amp-photo-slider">
       <?php
-      global $base_url;
+      global $base_url;      
+      $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+      $extra_large_image = file_create_url($thumb_uri);
+      $node_url = FRONT_URL . '/' . $node->path['alias'];
       if (!empty($node->field_gallery_image[LANGUAGE_NONE])) {
         $html = '';
         ?>
@@ -122,3 +125,11 @@ if (function_exists('get_other_gallery_amp')) {
 }
 ?>  
 </div>
+
+<!-- Vuukle Comment Code -->
+<amp-ad width=300 height=250 type="doubleclick" data-slot="/213794966/vuukle-amp"><div placeholder></div><div fallback></div></amp-ad>
+<amp-iframe width=600 height=140 layout="responsive" sandbox="allow-scripts allow-same-origin allow-modals allow-popups allow-forms"
+resizable frameborder="0" src="https://cdn.vuukle.com/amp.html?url=<?php print $node_url; ?>&host=<?php print FRONT_URL; ?>&id=<?php print $node->nid; ?>&apiKey=dc34b5cc-453d-468a-96ae-075a66cd9eb7&title=<?php print $node->title; ?>&img=<?php print $extra_large_image; ?>">
+<div overflow tabindex=0 role=button aria-label=""></div>
+</amp-iframe>
+<!-- Vuukle Comment Code -->
