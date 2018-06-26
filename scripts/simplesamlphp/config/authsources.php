@@ -250,8 +250,8 @@ $config = array(
     //  http://twitter.com/oauth_clients
     'twitter' => array(
         'authtwitter:Twitter',
-        'key' => 'KGWrGyf2Exw0Ah7g5WwnveNV8',
-        'secret' => 'Leh78TMDDIKBAmwT0cPLNux9Ve3aveUj6fm9VfpaAoAVt2kQmX',
+        'key' => 'gGVAXeanVFkUVNMM9o6mpEJdS',
+        'secret' => 'cbwePTy7e5CX6ANFfJQ5cA6QM2V5IMDWRQxNbk0QvI0qu6rx08',
 
         // Forces the user to enter their credentials to ensure the correct users account is authorized.
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate

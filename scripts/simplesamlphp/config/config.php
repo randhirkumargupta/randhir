@@ -21,7 +21,7 @@ $config = array(
      * external url, no matter where you come from (direct access or via the
      * reverse proxy).
      */
-    'baseurlpath' => 'simplesaml/',
+    'baseurlpath' => 'https://staging-sso.indiatodayonline.in/simplesaml/',
     'certdir' => 'cert/',
     'loggingdir' => 'log/',
     'datadir' => 'data/',
@@ -32,7 +32,6 @@ $config = array(
      * SimpleSAMLphp will attempt to create this directory if it doesn't exist.
      */
     'tempdir' => '/tmp/simplesaml',
-
 
     /*
      * If you enable this option, SimpleSAMLphp will log all sent and received messages
