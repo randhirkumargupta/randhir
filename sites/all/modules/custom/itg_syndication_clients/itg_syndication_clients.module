@@ -403,6 +403,13 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_it_date_range_issue_article.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['latest-issue-report'] = array(
+    'page callback' => 'itg_latest_issue_article_report',
+    'access arguments' => array('access content'),
+     'page arguments' => array(1),
+    'file' => 'inc/itg_latest_issue_article_report.inc',
+    'type' => MENU_CALLBACK,
+  ); 
     
   return $items;
 }
