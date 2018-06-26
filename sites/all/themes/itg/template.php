@@ -717,6 +717,23 @@ function itg_html_head_alter(&$head_elements) {
   if ($status === '404 Not Found'){
 	unset($head_elements['metatag_canonical']);
   }
+  
+  $head_elements['manifest'] = array(
+		'#type' => 'html_tag',
+		'#tag' => 'link',
+		'#attributes' => array(
+			'rel' => 'manifest',
+			'href' => '/manifest.json'
+		),
+	);
+	$head_elements['theme_color'] = array(
+	  '#type' => 'html_tag',
+	  '#tag' => 'meta',            
+	  '#attributes' => array(
+		'name' => 'theme-color',
+		'content' => '#C04A4A'
+	  ),
+	);
 }
 
 /**
