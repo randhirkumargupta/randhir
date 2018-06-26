@@ -757,13 +757,11 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         <div class="section-left-bototm">
         </div>
          <!-- Vuukle Comment Code -->
-         <div class="vuukle">
           <amp-ad width=300 height=250 type="doubleclick" data-slot="/213794966/vuukle-amp"><div placeholder></div><div fallback></div></amp-ad>
           <amp-iframe width=600 height=140 layout="responsive" sandbox="allow-scripts allow-same-origin allow-modals allow-popups allow-forms"
 resizable frameborder="0" src="https://cdn.vuukle.com/amp.html?url=<?php print $mainEntityOfPage; ?>&host=<?php print FRONT_URL; ?>&id=<?php print $node->nid; ?>&apiKey=dc34b5cc-453d-468a-96ae-075a66cd9eb7&title=<?php print $node_title; ?>&img=<?php print $image; ?>">
 <div overflow tabindex=0 role=button aria-label=""></div>
 </amp-iframe>
-<div>
           <!-- Vuukle Comment Code -->
         <?php if(!empty(variable_get('amp_taboola_ad_script'))) { ?>
           <div class="amp-taboola">
