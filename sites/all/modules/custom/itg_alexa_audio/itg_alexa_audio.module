@@ -17,10 +17,11 @@
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
     $arg = arg();
-    pr($form);
-    $form['last_audio_url'] = date('Y-m-d');
-    if (is_array($arg) && $arg[2] == 'edit') {
-      $node = node_load($arg[1]);
+    //pr($form);
+    $form['field_event_start_date'][LANGUAGE_NONE]['0']['value'] = date('Y-m-d H:i:s');
+    // if (is_array($arg) && $arg[2] == 'edit') {
+      $exist_nid = $curent_feed[0]['nid'];  
+      $node = node_load($exist_nid);
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
       $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
       if ($fid) {
@@ -83,7 +84,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#maxlength' => 256,
         '#attributes' => array('readonly' => 'readonly'),
       );
-    } else {
+  /*  } else {
       $curent_feed = get_last_alexa_feed();
       $exist_nid = $curent_feed[0]['nid'];   
       if ($exist_nid && $arg[0] != 'file' && $arg[1] != 'ajax') {
@@ -91,7 +92,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         drupal_goto('alexa-audio-clips');
       } 
     }
-
+   */
     $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
   }
 }
@@ -218,7 +219,7 @@ function get_last_alexa_feed() {
   $query->fields('n', array('nid', 'title', 'created'));
   $query->condition('n.status', 1);
   $query->condition('n.type', "alexa_audio_clips", '=');
-  $query->orderBy('n.created', 'DESC')->range(0, 1);
+  $query->orderBy('n.nid', 'DESC')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 }
