@@ -12,7 +12,6 @@ class ComposerAutoloaderInit82e5cb08650954c9fdcf276d453692fe
             require __DIR__ . '/ClassLoader.php';
         }
     }
-
     public static function getLoader()
     {
         if (null !== self::$loader) {
