@@ -2348,7 +2348,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         if (in_array($arg[1], $arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
             $data['content'] = array();
         } else {
-            if ($arg[0] == 'livetv' || $arg[0] == 'international-livetv'  || $arg[0] == 'people-list'  || $arg[0] == 'authors-list' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid'])) && $is_programme) {
+            if ($arg[0] == 'livetv' || $arg[0] == 'international-livetv'  || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid'])) && $is_programme) {
                 return TRUE;
             } else {
                 $data['content'] = array();
@@ -2408,7 +2408,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arg = arg();
         $ntype = menu_get_object('node');
         $occupation_name = strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
-        if ($ntype->type == 'story' || ($ntype->type == 'reporter' && ($occupation_name== 'people' || $occupation_name == 'reporter'))) {
+        if ($ntype->type == 'story') {
           return TRUE;
         } else {
           $data['content'] = array();
@@ -2419,7 +2419,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arg = arg();
         $ntype = menu_get_object('node');
         $occupation_name = strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
-        if ($ntype->type == 'story' || ($ntype->type == 'reporter' && ($occupation_name== 'people' || $occupation_name == 'reporter'))){
+        if ($ntype->type == 'story'){
           return TRUE;
         } else {
           $data['content'] = array();
@@ -2430,7 +2430,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arg = arg();
         $ntype = menu_get_object('node');
         $occupation_name = strtolower($ntype->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
-        if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery' || ($ntype->type == 'reporter' && ($occupation_name== 'people' || $occupation_name == 'reporter'))) {
+        if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery') {
           return TRUE;
         } else {
           $data['content'] = array();
@@ -2924,12 +2924,12 @@ function get_rhs_block_display_condtion($delta = '') {
 
     switch ($delta) {
       case 'watch_right_now_videos_widget':
-        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'gethomecarddata' || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && (($page_argument[0]->type == 'sport_static_page' && empty(variable_get('itg_widgets_sports'))) || $page_argument[0]->type == 'blog' || $page_argument[0]->type == 'poll' || $page_argument[0]->type == 'blog')) || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && !$is_programme) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'reporter' && $check_type_reporter)) {
+        if ((!empty($arg[1]) && in_array($arg[1], $watch_right_now_node_array)) || $arg[0] == 'gethomecarddata' || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'site-map' || $arg[0] == 'blog-listing' || $arg[0] == 'podcast' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'archives' || (!empty($page_argument[0]->type) && (($page_argument[0]->type == 'sport_static_page' && empty(variable_get('itg_widgets_sports'))) || $page_argument[0]->type == 'blog' || $page_argument[0]->type == 'poll' || $page_argument[0]->type == 'blog')) || $arg[0] == 'itg-survey' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'story') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'podcast') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'mega_review_critic') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'photogallery') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'survey') || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && isset($_GET['sid'])) || ($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) || $display_block == TRUE || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && !$is_programme) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'reporter' && $check_type_reporter) || $arg[0] == 'people-list'  || $arg[0] == 'authors-list') {
             return TRUE;
         }
         break;
       case 'top_takes_videos_widget':
-        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'gethomecarddata' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog' || ($page_argument[0]->type == 'sport_static_page' && empty(variable_get('itg_widgets_sports')))) || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'quiz')) || $page_argument[0]->type == 'survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && !$is_programme) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'reporter' && $check_type_reporter)) {
+        if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'gethomecarddata' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog' || ($page_argument[0]->type == 'sport_static_page' && empty(variable_get('itg_widgets_sports')))) || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'quiz')) || $page_argument[0]->type == 'survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && !$is_programme) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'reporter' && $check_type_reporter) || $arg[0] == 'people-list'  || $arg[0] == 'authors-list') {
             return TRUE;
         }
         break;
