@@ -17,11 +17,20 @@
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
     $arg = arg();
-    //pr($form);
-    $form['field_event_start_date'][LANGUAGE_NONE]['0']['value'] = date('Y-m-d H:i:s');
+    
+    $form['field_audio'][LANGUAGE_NONE][0]['#default_value']['#upload_location'] = 'public://sites/indiatoday/' . date('Ymd') . '/';
+   // $form['field_audio']['#upload_validators'] = 'public://sites/indiatoday/' . date('Ymd') . '/';
+    
+    $minute = date('i') < 30 ? '00' : 30;
+   
+    $upload_date = date('Y-m-d ') . date('H') . ':' . $minute;
+    $form['field_event_start_date'][LANGUAGE_NONE][0]['#default_value']['value'] = $upload_date;
+   //   pr($form['field_event_start_date'][LANGUAGE_NONE][0]);
     // if (is_array($arg) && $arg[2] == 'edit') {
+      $curent_feed = get_last_alexa_feed();
       $exist_nid = $curent_feed[0]['nid'];  
       $node = node_load($exist_nid);
+      $form['title']['#default_value'] = $node->title;
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
       $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
       if ($fid) {
@@ -93,10 +102,20 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       } 
     }
    */
+      
     $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
   }
 }
 
+/**
+ * Implement hook_node_presave
+ * @param Object $node
+ */
+function itg_alexa_audio_node_presave($node) {
+  if ($node->type == 'alexa_audio_clips') {
+    p($node->field_audio);
+  }
+}
 /**
  * custom submit action for alexa_audio_clips_node_form
  * @param array $form
