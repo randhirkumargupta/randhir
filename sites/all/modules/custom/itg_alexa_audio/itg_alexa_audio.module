@@ -17,6 +17,8 @@
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
     $arg = arg();
+    pr($form);
+    $form['last_audio_url'] = date('Y-m-d');
     if (is_array($arg) && $arg[2] == 'edit') {
       $node = node_load($arg[1]);
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
