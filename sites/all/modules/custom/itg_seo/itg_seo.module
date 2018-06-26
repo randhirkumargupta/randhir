@@ -607,7 +607,7 @@ function itg_seo_node_presave($node) {
   }
   if (is_valid_content_type_for_sef_url($node->type) && !in_array('batch', arg())&& isset($node->op)) {
     //Handel case for fresh created node.
-    if (empty($node->nid)) {
+    /*if (empty($node->nid)) {
       // As if alise is not set from textfield the assign title of node to alise.
       if (empty($node->path['alias'])) {
         $node->path['alias'] = getSEFUrlFromTitle($node->title);
@@ -615,7 +615,7 @@ function itg_seo_node_presave($node) {
     }
     if ($node->path['pathauto'] == 1) {
       $node->path['alias'] = getSEFUrlFromTitle($node->title);
-    }
+    }*/
   }
 }
 
