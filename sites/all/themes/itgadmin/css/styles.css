@@ -1638,7 +1638,7 @@ ul.pager {
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-submit[value="Remove"], #SocialMedia .form-field-type-file .form-managed-file .form-submit[value="Remove"], .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file .form-submit[value="Remove"],
 .node-recipe-form .form-field-name-field-recipe-video .form-managed-file .form-submit[value="Remove"], .node-vas_service_content-form .field-name-field-service-audio .form-managed-file .form-submit[value="Remove"],
 .node-vas_service_content-form .field-name-field-service-video .form-managed-file .form-submit[value="Remove"], .node-poll-form .form-field-type-file .form-managed-file .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file .form-managed-file .form-submit[value="Remove"], .form-field-name-field-mega-review-video .form-type-managed-file .form-managed-file .form-submit[value="Remove"], #itg-tv-schedule-form .form-managed-file .form-submit[value="Remove"], .node-podcast-form .field-name-field-podcast-upload-audio-file .form-managed-file .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .field-name-field-pti-upload-video .form-type-managed-file .form-managed-file .form-submit[value="Remove"], .browse-video-form #edit-field-upload-video .form-managed-file .form-submit[value="Remove"] {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  background: transparent none repeat scroll 0 0;
   border: medium none;
   color: #ee4d4d;
   font-size: 13px;
@@ -4428,7 +4428,7 @@ fieldset#edit-basic {
     margin-bottom: 10px; }
     [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-submit[value="Remove"],
     [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-submit[value="Remove"] {
-      background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+      background: transparent none repeat scroll 0 0;
       border: medium none;
       color: #ee4d4d;
       font-size: 13px;
@@ -13644,5 +13644,14 @@ div.ctools-modal-content .form-submit {
 #itg-tv-schedule-form .preview-publish-wrapper {
   margin-top: -65px;
   float: right; }
+
+/* for Alexa */
+.node-alexa_audio_clips-form .form-type-managed-file > label + div.file-widget.form-managed-file {
+  height: auto; }
+
+.node-alexa_audio_clips-form .node-form input[type="text"], .node-alexa_audio_clips-form .taxonomy-form-term-tags input[type="text"], .node-alexa_audio_clips-form #comments .comment-form input[type="text"], #comments .node-alexa_audio_clips-form .comment-form input[type="text"], .node-alexa_audio_clips-form [id*="taxonomy-csv-import-form"] input[type="text"], .node-alexa_audio_clips-form #views-form-syndication-feed-generator-page input[type="text"], .node-alexa_audio_clips-form .operation-form input[type="text"], .node-alexa_audio_clips-form #views-form-blogs-management-page input[type="text"],
+.node-alexa_audio_clips-form #views-form-strory-menegment-page input[type="text"], .node-alexa_audio_clips-form #views-form-podcast-management-page input[type="text"],
+.node-alexa_audio_clips-form #views-form-videogallery-management-page input[type="text"], .node-alexa_audio_clips-form #itg-tv-schedule-form input[type="text"], .node-alexa_audio_clips-form [id*="loyalty-points-configuration-form"] input[type="text"], .node-alexa_audio_clips-form [id*="menu-edit-item"] input[type="text"], .node-alexa_audio_clips-form .itg_menu_manager_form input[type="text"], .node-alexa_audio_clips-form [id*="daily-motion-video-dashboard"] input[type="text"], .node-alexa_audio_clips-form [id*="itg-sitemap-chunks-setting-form"] input[type="text"] {
+  max-width: 70%; }
 
 /*# sourceMappingURL=styles.css.map */
