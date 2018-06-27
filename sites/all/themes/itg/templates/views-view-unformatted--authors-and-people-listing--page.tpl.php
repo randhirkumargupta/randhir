@@ -8,8 +8,12 @@
 .section-authors-list .author-listing .social-icon ul{list-style:none;}
 .section-authors-list .author-listing .social-icon ul li{width:auto; display:inline; margin-right:10px;}
 .section-authors-list .author-listing .social-icon ul li a{font-size:13px;}
+.section-authors-list .item-list{display:block; text-align:center}
 .section-authors-list .item-list ul.pager{list-style:none; margin-top:20px;}
-.section-authors-list .item-list ul.pager li{width:auto; display:inline; margin:10px 0 15px 0; border:1px solid #ccc; padding:0 8px;}
+.section-authors-list .item-list ul.pager li{width:auto; display:inline; margin:10px 0 15px 0; padding:0 3px;}
+.section-authors-list .item-list ul.pager li a{display: inline-block;width: 25px;height: 25px;font-size: 1rem;text-align: center;line-height: 25px;}
+.section-authors-list .item-list ul.pager li.pager-current{width:25px; height:25px; border-radius:50%;background:#337ab7; display:inline-block; font-size:1rem; line-height:25px; color:#fff;}
+.section-authors-list .item-list ul.pager li a:hover{background:#337ab7; border-radius:50%; color:#fff;}
 </style>
 
 

@@ -30,7 +30,7 @@
     <h3>Latest News About <?php print $title; ?></h3>
     <ul class="people-story-wrapper">
       <?php foreach($solr_story_data as $key => $value): ?>
-        <li class="col-md-3 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
+        <li class="col-md-6 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
           <div class="tile">
             <figure>
               <a href="/<?php print $value->path_alias; ?>"><img src="<?php print $value->sm_field_custom_story_extra_small_url[0]; ?>" alt="<?php print $value->label; ?>" title="<?php print $value->label; ?>" width="88" height="50"></a>
@@ -51,7 +51,7 @@
 
 <?php if(!empty($solr_video_data)):?>
 <div class="main-video-wrapper">
-  <h3>VIDEOS</h3>
+  <h3><span>VIDEOS</span></h3>
   <ul class="people-video-list">
     <?php foreach($solr_video_data as $key => $value): ?>
       <li class="col-md-3 people-li <?php print $value->bundle .'-'.$value->entity_id; ?>">
@@ -73,7 +73,7 @@
 
 <?php if(!empty($solr_photo_data)):?>
 <div class="main-photo-wrapper">
-  <h3>PHOTO</h3>
+  <h3><span>PHOTO</span></h3>
   <ul class="people-photo-list">
     <?php foreach($solr_photo_data as $key => $value): ?>
       <?php

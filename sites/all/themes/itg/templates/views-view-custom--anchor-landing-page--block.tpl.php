@@ -69,10 +69,10 @@ $follow_status = $content["follow_status"];
                 }
                 ?>
               <li>
-                  <a class="user-activity def-cur-pointer" rel="<?php print $anchor['nid']; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><?php print t('Twitter'); ?></a>
+                  <a class="user-activity def-cur-pointer" rel="<?php print $anchor['nid']; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i><?php print (strtolower($anchor['field_celebrity_pro_occupation']) == 'reporter')?'':t('Twitter'); ?></a>
               </li>
               <li>
-                <a class="def-cur-pointer" title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i><?php print t('Facebook'); ?></a>
+                <a class="def-cur-pointer" title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i><?php print (strtolower($anchor['field_celebrity_pro_occupation']) == 'reporter')?'':t('Facebook'); ?></a>
               </li>
           </ul>
         </div>
@@ -111,14 +111,13 @@ box-sizing: border-box;}
 .node-type-reporter.section-people .main-story-wrapper ul li .tile{border-bottom: 1px dotted #4a4a4a;display: inline-block;width: 100%;padding-bottom: 10px;margin-bottom: 10px;}
 
 .node-type-reporter.section-people .main-video-wrapper h3,.node-type-reporter.section-people .main-photo-wrapper h3{color: #bc0a0a;margin-bottom: 10px; position:relative;}
-.node-type-reporter.section-people .main-video-wrapper h3 em,.node-type-reporter.section-people .main-photo-wrapper h3 em{border-bottom: 3px solid #cdcdcd;width: 90%;display: inline-block;position: absolute;top: 11px;margin-left: 5px;}
+.node-type-reporter.section-people .main-video-wrapper h3:before,.node-type-reporter.section-people .main-photo-wrapper h3:before{content: '';position: absolute;left: 0;width: 100%;bottom:9px;height: 5px;margin-top: -2px;background: #ddd;}
+.node-type-reporter.section-people .main-video-wrapper h3 span,.node-type-reporter.section-people .main-photo-wrapper h3 span{padding: 20px 10px 2px 0px;background: #fff;position: relative;z-index: 1;}
 
-.node-type-reporter.section-people .main-video-wrapper ul li .title figure,.node-type-reporter.section-people .main-photo-wrapper ul li .title figure{position:relative}
+.node-type-reporter.section-people .main-video-wrapper ul li .title,.node-type-reporter.section-people .main-photo-wrapper ul li .title{margin-bottom:30px;}
+.node-type-reporter.section-people .main-video-wrapper ul li .title figure,.node-type-reporter.section-people .main-photo-wrapper ul li .title figure{position:relative; margin-bottom:7px;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption{position: absolute;bottom: 0;background: rgba(0,0,0,0.6);color: #fff;padding: 0 5px;font-size: 12px;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption i,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption i{margin-right: 5px;font-size: 15px;line-height: 20px;}
-
-
-.node-type-reporter.section-people{}
-
+.node-type-reporter.section-people .main-video-wrapper .posted-on,.node-type-reporter.section-people .main-photo-wrapper .posted-on{color:#b1b1b1; font-size:12px;}
 
 </style>
