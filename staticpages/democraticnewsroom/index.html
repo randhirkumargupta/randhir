@@ -121,6 +121,13 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
        
     <div class="about-anchor"><div class="border"></div><h2>LATEST <span>VIDEO</span></h2></div>
     
+    <div class="col-md-3 col-sm-6 col-xs-12 video_Sec">
+<figure class="figure video_y" data-toggle="modal" data-target="#video" data-id="10">
+  <img src="https://akm-img-a-in.tosshub.com/indiatoday/media/others/mediaintoday/microsites/newsroom/img/BJPDumpsPDP.png" class="img-responsive" alt="BJPDumpsPDP" title="BJPDumpsPDP">
+  <figcaption class="figure-caption">#BJPDumpsPDP</figcaption>
+</figure>
+</div>
+    
     
     <div class="col-md-3 col-sm-6 col-xs-12 video_Sec">
 <figure class="figure video_y" data-toggle="modal" data-target="#video" data-id="8">
@@ -209,8 +216,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
       </div>
       <div class="modal-footer">
         <a href="https://www.facebook.com/IndiaToday/" target="_blank"><i id="social-fb" class="fa fa-facebook fa-2x social"></i></a>
-	            <a href="https://twitter.com/IndiaToday" target="_blank"><i id="social-tw" class="fa fa-twitter fa-2x social"></i></a>
-	            <a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw" target="_blank"><i id="social-gp" class="fa fa-youtube-play fa-2x social"></i></a>
+              <a href="https://twitter.com/IndiaToday" target="_blank"><i id="social-tw" class="fa fa-twitter fa-2x social"></i></a>
+              <a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw" target="_blank"><i id="social-gp" class="fa fa-youtube-play fa-2x social"></i></a>
       </div>
     </div>
 
@@ -289,9 +296,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
       </div>
       <div class="modal-footer">
        <a href="https://www.facebook.com/IndiaToday/" target="_blank"><i id="social-fb" class="fa fa-facebook fa-2x social"></i></a>
-	            <a href="https://twitter.com/IndiaToday" target="_blank"><i id="social-tw" class="fa fa-twitter fa-2x social"></i></a>
-	            <a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw" target="_blank"><i id="social-gp" class="fa fa-youtube-play fa-2x social"></i></a>
-	      
+              <a href="https://twitter.com/IndiaToday" target="_blank"><i id="social-tw" class="fa fa-twitter fa-2x social"></i></a>
+              <a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw" target="_blank"><i id="social-gp" class="fa fa-youtube-play fa-2x social"></i></a>
+        
       </div>
     </div>
 
@@ -394,13 +401,19 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 .modal-content{border:0 !important;}
 .video_Sec img,.anchors img{margin: 0; padding: 0; border: 0; border-radius: 0;}
 .carousel-control.left, .carousel-control.right{margin:0 !important; position:absolute; top:50%;}
+@media only screen and (min-width: 1024px) {
+  .video_Sec figure{ height:184px;}
+  
+}
 @media only screen and (max-width: 768px) {
  .modal-dialog{top:25%;}
+ .video_Sec figure{ height:220px;}
 }
 @media only screen and (max-width: 767px) {
  .carousel-control.right{right:8%;}
  .modal-dialog{top:25% ; margin-top:50px;}
  .modal-header .close{top:-18px}
+ .video_Sec figure{ height:auto;}
 }
 </style>
 
@@ -409,7 +422,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 <script>
 $(document).ready(function(){
 /**********************************Video Slider*********************************************/
-var video_youtube = ['R3JUvMLI4nY','FPZ3MaAlb70','Rpnd3BvVuAk','zE5f_JfjgKE','pNluWb5nCLQ','9SmmJSKoab0','-f6gt4XNxtY','PVgnNPzGdzo','abfHGTQ-jNM'];
+var video_youtube = ['R3JUvMLI4nY','FPZ3MaAlb70','Rpnd3BvVuAk','zE5f_JfjgKE','pNluWb5nCLQ','9SmmJSKoab0','-f6gt4XNxtY','PVgnNPzGdzo','abfHGTQ-jNM','mXk6voPE7UY'];
 var did;
 var src1;
 var static_src='https://www.youtube.com/embed/';
