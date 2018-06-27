@@ -131,40 +131,23 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  */
 function genrate_alexa_audio_json($value) {
   $audiofid = $value['field_audio']['und'][0]['fid'];
-  //pr($value);
   if (!empty($audiofid)) {
     $filedir = 'sites/indiatoday/' . date('Ymd');
     $orignal_img = file_load($audiofid);
-    //p($orignal_img);
-    // $orignal_file_name = $orignal_img->filename;
     $new_filename = 'it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
     
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-    }
-    
-    $directory = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd') . "/";
-    file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
-    
-    //$new_destination = str_replace($orignal_img->filename, $new_filename, $orignal_img->uri);
-    
+    $directory = file_default_scheme() . '://' . $filedir . '/';
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
     $orignal_img->filename = $new_filename;
-    //$orignal_img->uri = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
     $new_destination = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
     $result = file_move($orignal_img, $new_destination, FILE_EXIST_ERROR);
-  
-    //$imagedata = $orignal_img->uri;
-    //$file = file_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name);
-    // file_save_data($xml, $directory . end($path_array), FILE_EXISTS_REPLACE);
-    //file_usage_add($file, 'itg_alexa_audio', 'file', $file->fid);
-    
   }
   
   $title = $value['title'];
   $uid = $value['uid'];
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
-  $file_obj = file_load($audiofid);
-  $stream_url = file_create_url($file_obj->uri);
+  // $file_obj = file_load($audiofid);
+  $stream_url = file_create_url($orignal_img->uri);
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
     'updateDate' => $date,
@@ -180,7 +163,17 @@ function genrate_alexa_audio_json($value) {
   fclose($fp);
   // for video
   $videofid = $value['field_alexa_video']['und'][0]['fid'];
-  $file_video_obj = file_load($videofid);
+  
+  if (!empty($videofid)) {
+    // $filedir = 'sites/indiatoday/' . date('Ymd');
+    $file_video_obj = file_load($videofid);
+    $new_video_filename = '50_'.date('Ymd').'_time_it_vt_video_'.strtotime(date('Y-m-d')).'.mp4';
+        
+    $file_video_obj->filename = $new_video_filename;
+    $new_video_destination = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
+    $result = file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
+  }
+  
   $video_url = file_create_url($file_video_obj->uri);
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
