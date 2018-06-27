@@ -26,6 +26,7 @@ function feature_for_all_widgets_image_default_styles() {
         'data' => array(
           'width' => 370,
           'height' => 208,
+          'upscale' => 1,
         ),
         'weight' => 1,
       ),
