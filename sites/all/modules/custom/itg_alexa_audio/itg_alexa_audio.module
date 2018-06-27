@@ -126,7 +126,7 @@ function genrate_alexa_audio_json($value) {
   $title = $value['title'];
   $uid = $value['uid'];
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
-  $stream_url = file_create_url($orignal_img->uri);
+  $stream_url = file_create_url($new_destination);
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
     'updateDate' => $date,
@@ -151,7 +151,7 @@ function genrate_alexa_audio_json($value) {
     file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
   }
   
-  $video_url = file_create_url($file_video_obj->uri);
+  $video_url = file_create_url($new_video_destination);
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
     'updateDate' => $date,
