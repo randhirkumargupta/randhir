@@ -16,9 +16,16 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
   $data = array();
   $list = array();
   $loop_cont = 0;
-  $item_per_page = 100;
+  $limit = 0;
+  if(isset($_GET['limit']) && $_GET['limit'] > 0){
+    $limit = $_GET['limit'];
+    if ($limit > 200) {
+	  $limit = 200;
+	}
+  }
+  $item_per_page = $limit;
   $range_max = $item_per_page;
-  $pageno = 0;
+  //$pageno = 0;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
@@ -54,7 +61,9 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
   //$query->condition('autr.field_author_report_value', 'author_report', '=');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
-  $query->range($range_min, $range_max);
+  if (!empty($limit)) {
+	$query->range($range_min, $range_max);  
+  }
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
@@ -122,11 +131,11 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
     $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
   $data['data'] = $list;
-  if($loop_cont == 100){
+  if($loop_cont == $limit){
       $s_date = $_GET['start_date'];
       $e_date = $_GET['end_date'];
       $pageno = ($_GET['pageno'] + 1);
-      $next_page_url = $base_url."/reportapi/auscovery_dashboard_web/it?start_date=".$s_date."&end_date=".$e_date."&pageno=".$pageno."";
+      $next_page_url = $base_url."/reportapi/auscovery_dashboard_web/it?start_date=".$s_date."&end_date=".$e_date."&limit=".$limit."&pageno=".$pageno."";
       $data['next_page_url'] = "$next_page_url";
   }
   
