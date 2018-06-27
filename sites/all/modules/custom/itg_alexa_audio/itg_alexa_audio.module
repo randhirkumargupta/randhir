@@ -264,7 +264,7 @@ function itg_alexa_audio_mail_cron() {
         'body' => $mail_content,
         'subject' => $mail_subject,
       );
-      $to = $account->mail;
+      $to = 'arunmishra.coder@gmail.com, arun.kumarmishra@aajtak.com';
 
       $mail = drupal_mail('itg_alexa_audio', 'send_mail_alter_to_admin', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
