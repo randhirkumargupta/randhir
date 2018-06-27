@@ -173,7 +173,7 @@ const CACHE_STATIC = [
 
 self.addEventListener('install',function(e){
     e.waitUntil(
-        Promise.all([caches.open(STATIC_CACHE_NAME.cache.name),caches.open(APP_CACHE_NAME.cache.name),self.skipWaiting()]).then(function(storage){
+        Promise.all([caches.open(STATIC_CACHE_NAME.cache.name),caches.open(APP_CACHE_NAME.cache.name),self.skipWaiting()]).then(function(storage){console.log(storage, 'storage');
 			var static_cache = storage[0];
             var app_cache = storage[1];
 			return Promise.all([static_cache.addAll(CACHE_STATIC),app_cache.addAll(CACHE_APP)]);
@@ -188,9 +188,9 @@ self.addEventListener('activate', function(e) {
             caches.keys().then(function(cacheNames) {
                 return Promise.all(
                     cacheNames.map(function(cacheName) {
-						//console.log('Above deleting',cacheName);
+						console.log('Above deleting',cacheName);
                         if (cacheName !== APP_CACHE_NAME && cacheName !== STATIC_CACHE_NAME) {
-                            //console.log('deleting',cacheName);
+                            console.log('deleting',cacheName);
                             return caches.delete(cacheName);
                         }
                     })
@@ -334,7 +334,7 @@ function networkFirst(request,  options) {
   // 0, but that's the sane thing to do anyway.
   var networkTimeoutSeconds = options.networkTimeoutSeconds ||
       globalOptions.networkTimeoutSeconds;
-  //console.log('Strategy: network first [' + request.url + ']', JSON.stringify(options));
+  console.log('Strategy: network first [' + request.url + ']', JSON.stringify(options));
 
   return openCache(options).then(function(cache) {
     var timeoutId;
@@ -350,7 +350,7 @@ function networkFirst(request,  options) {
               // cache. This ensures that we won't time out a network request
               // unless there's a cached entry to fallback on, which is arguably
               // the preferable behavior.
-			  //console.log('Resolve Response with timeout and Response From Cache[' + request.url + ']');
+			  console.log('Resolve Response with timeout and Response From Cache[' + request.url + ']');
               resolve(response);
             }
           });
@@ -370,7 +370,7 @@ function networkFirst(request,  options) {
 			return response;
         }
 
-        //console.log('Response was an HTTP error: ' + response.statusText,JSON.stringify(options));
+        console.log('Response was an HTTP error: ' + response.statusText,JSON.stringify(options));
         originalResponse = response;
         throw new Error('Bad response');
       }).catch(function(error) {
@@ -450,10 +450,10 @@ function fetchAndCache(request, options) {
           readyForCacheUpdate = cache.match(request)
             .then(function(cachedResponse) {
               if (cachedResponse && !sameResponses(cachedResponse, response)) {
-                //console.log('sameResponses was false.');
+                console.log('sameResponses was false.');
                 shouldNotify = true;
               } else {
-                //console.log('sameResponses was true.');
+                console.log('sameResponses was true.');
               }
             });
         }
@@ -508,7 +508,7 @@ function notifyClientsOfUpdate(url, cacheName) {
   });
 }
 function cacheOnly(request, options) {
-  //console.log('Strategy: cache only [' + request.url + ']', options);
+  console.log('Strategy: cache only [' + request.url + ']', options);
   return openCache(options).then(function(cache) {
     return caches.match(request).then(function(response){
 			if(response){
