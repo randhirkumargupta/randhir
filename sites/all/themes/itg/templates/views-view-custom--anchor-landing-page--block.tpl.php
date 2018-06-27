@@ -111,12 +111,13 @@ box-sizing: border-box;}
 .node-type-reporter.section-people .main-story-wrapper ul li .tile{border-bottom: 1px dotted #4a4a4a;display: inline-block;width: 100%;padding-bottom: 10px;margin-bottom: 10px;}
 
 .node-type-reporter.section-people .main-video-wrapper h3,.node-type-reporter.section-people .main-photo-wrapper h3{color: #bc0a0a;margin-bottom: 10px; position:relative;}
-.node-type-reporter.section-people .main-video-wrapper h3:before,.node-type-reporter.section-people .main-photo-wrapper h3:before{content: '';position: absolute;left: 0;width: 100%;bottom: 20px;height: 5px;margin-top: -2px;background: #ddd;}
+.node-type-reporter.section-people .main-video-wrapper h3:before,.node-type-reporter.section-people .main-photo-wrapper h3:before{content: '';position: absolute;left: 0;width: 100%;bottom:9px;height: 5px;margin-top: -2px;background: #ddd;}
 .node-type-reporter.section-people .main-video-wrapper h3 span,.node-type-reporter.section-people .main-photo-wrapper h3 span{padding: 20px 10px 2px 0px;background: #fff;position: relative;z-index: 1;}
 
 .node-type-reporter.section-people .main-video-wrapper ul li .title,.node-type-reporter.section-people .main-photo-wrapper ul li .title{margin-bottom:30px;}
-.node-type-reporter.section-people .main-video-wrapper ul li .title figure,.node-type-reporter.section-people .main-photo-wrapper ul li .title figure{position:relative}
+.node-type-reporter.section-people .main-video-wrapper ul li .title figure,.node-type-reporter.section-people .main-photo-wrapper ul li .title figure{position:relative; margin-bottom:7px;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption{position: absolute;bottom: 0;background: rgba(0,0,0,0.6);color: #fff;padding: 0 5px;font-size: 12px;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption i,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption i{margin-right: 5px;font-size: 15px;line-height: 20px;}
+.node-type-reporter.section-people .main-video-wrapper .posted-on,.node-type-reporter.section-people .main-photo-wrapper .posted-on{color:#b1b1b1; font-size:12px;}
 
 </style>
