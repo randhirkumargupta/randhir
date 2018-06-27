@@ -102,20 +102,19 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       } 
     }
    */
-      
+    $form['#validate'][] = 'itg_alexa_audio_form_custom_validator';
     $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
   }
 }
 
-/**
- * Implement hook_node_presave
- * @param Object $node
- */
-function itg_alexa_audio_node_presave($node) {
-  if ($node->type == 'alexa_audio_clips') {
-    p($node->field_audio);
-  }
+
+function itg_alexa_audio_form_custom_validator($form, &$form_state) {
+  pr($form_state['values']);
+  print "======<br>=======";
+  pr($form_state);
+  
 }
+
 /**
  * custom submit action for alexa_audio_clips_node_form
  * @param array $form
