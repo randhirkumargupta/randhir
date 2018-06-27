@@ -149,7 +149,7 @@ function genrate_alexa_audio_json($value) {
     //$new_destination = str_replace($orignal_img->filename, $new_filename, $orignal_img->uri);
     
     $orignal_img->filename = $new_filename;
-    $orignal_img->uri = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
+    //$orignal_img->uri = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
     $new_destination = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
     $result = file_move($orignal_img, $new_destination, FILE_EXIST_ERROR);
   
