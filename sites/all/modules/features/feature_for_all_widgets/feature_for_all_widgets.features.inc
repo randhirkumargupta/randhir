@@ -22,13 +22,12 @@ function feature_for_all_widgets_image_default_styles() {
     'label' => 'anchors-landing (370X208)',
     'effects' => array(
       9 => array(
-        'name' => 'image_scale',
+        'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 370,
           'height' => 208,
-          'upscale' => 1
         ),
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
   );
