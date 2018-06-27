@@ -254,11 +254,11 @@ function itg_alexa_audio_mail_cron() {
   $curent_feed = get_last_alexa_feed();
   $dateFromDatabase = $curent_feed[0]['created'];
   
-  $dateSixHoursAgo = date('Y-m-d H:i:s', strtotime('-1 hours'));
-  
+  $dateSixHoursAgo = strtotime('-1 hours');
   if ($dateSixHoursAgo >= $dateFromDatabase) {
     // more than 6 hours ago
-    $mail_content = 'Audio not uploaded from 6 hours for Alexa.';
+    $mail_content = 'Audio not uploaded from 1 hours for Alexa.';
+    
     $mail_subject = 'Mail alter for alexa';
     $params = array(
         'body' => $mail_content,
@@ -266,7 +266,7 @@ function itg_alexa_audio_mail_cron() {
       );
       $to = 'arunmishra.coder@gmail.com, arun.kumarmishra@aajtak.com';
 
-      $mail = drupal_mail('itg_alexa_audio', 'send_mail_alter_to_admin', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
+      $mail = drupal_mail('itg_alexa_audio', 'send_mail_to_admin', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
         return TRUE;
       }
@@ -275,7 +275,7 @@ function itg_alexa_audio_mail_cron() {
         watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
         return FALSE;
       }
-    
+   
   }
     
 }
