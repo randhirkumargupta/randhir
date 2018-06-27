@@ -85,8 +85,9 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-author .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
 .node-type-reporter.section-author .social-icon ul{margin-top:10px;}
 .node-type-reporter.section-author .social-icon ul li{border:0; background:none;}
-.node-type-reporter.section-author .social-icon ul li:first-child{display:none;}
+.node-type-reporter.section-author .social-icon ul li:first-child{visibility:hidden; width:1px;}
 .node-type-reporter.section-author .social-icon ul li a{letter-spacing:-9999px; margin-right:18px;}
+.node-type-reporter.section-author .social-icon ul li a::first-letter{display:none;}
 .node-type-reporter.section-author .social-icon ul li a{text-indent:-9999;}
 .node-type-reporter.section-author ul.author-story-wrapper{list-style:none; padding:0; margin:30px 0 0 0;}
 .node-type-reporter.section-author ul.author-story-wrapper li{padding-bottom:30px;}
@@ -96,5 +97,28 @@ $follow_status = $content["follow_status"];
 
 .node-type-reporter.section-people h1{display: none;}
 .node-type-reporter.section-people .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
+.node-type-reporter.section-people .anchor{box-shadow:none !important; margin-bottom:40px;}
+.node-type-reporter.section-people .anchor-left{position:relative;}
+.node-type-reporter.section-people .people-img-title{position: absolute;bottom: 0;background: #000;width: 100%;color: #fff;font-size: 15px;line-height: 20px;padding: 3px 8px;
+box-sizing: border-box;}
+.node-type-reporter.section-people .people-img-title a{color: #fff;font-size: 17px;font-weight: bold;}
+.node-type-reporter.section-people .people-story-wrapper{}
+.node-type-reporter.section-people .main-story-wrapper,.node-type-reporter.section-people .main-video-wrapper,.node-type-reporter.section-people .main-photo-wrapper{float:left; width:100%; margin-bottom:30px;}
+.node-type-reporter.section-people .main-story-wrapper ul,.node-type-reporter.section-people .main-video-wrapper ul,.node-type-reporter.section-people .main-photo-wrapper ul{list-style:none; padding:0; margin:0}
+.node-type-reporter.section-people .main-story-wrapper h3{color: #9c9c9c;margin-bottom: 10px;}
+.node-type-reporter.section-people .main-story-wrapper ul{background-color: #f7f7f7;display: inline-block;width: 100%; padding:10px 0;}
+.node-type-reporter.section-people .main-story-wrapper ul li figure{float:left; margin-right:10px;}
+.node-type-reporter.section-people .main-story-wrapper ul li .tile{border-bottom: 1px dotted #4a4a4a;display: inline-block;width: 100%;padding-bottom: 10px;margin-bottom: 10px;}
+
+.node-type-reporter.section-people .main-video-wrapper h3,.node-type-reporter.section-people .main-photo-wrapper h3{color: #bc0a0a;margin-bottom: 10px; position:relative;}
+.node-type-reporter.section-people .main-video-wrapper h3 em,.node-type-reporter.section-people .main-photo-wrapper h3 em{border-bottom: 3px solid #cdcdcd;width: 90%;display: inline-block;position: absolute;top: 11px;margin-left: 5px;}
+
+.node-type-reporter.section-people .main-video-wrapper ul li .title figure,.node-type-reporter.section-people .main-photo-wrapper ul li .title figure{position:relative}
+.node-type-reporter.section-people .main-video-wrapper ul li .title figcaption,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption{position: absolute;bottom: 0;background: rgba(0,0,0,0.6);color: #fff;padding: 0 5px;font-size: 12px;}
+.node-type-reporter.section-people .main-video-wrapper ul li .title figcaption i,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption i{margin-right: 5px;font-size: 15px;line-height: 20px;}
+
+
+.node-type-reporter.section-people{}
+
 
 </style>
