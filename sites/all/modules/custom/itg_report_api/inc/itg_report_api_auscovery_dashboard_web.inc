@@ -131,7 +131,7 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
     $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
   $data['data'] = $list;
-  if($loop_cont == 100){
+  if($loop_cont == $limit){
       $s_date = $_GET['start_date'];
       $e_date = $_GET['end_date'];
       $pageno = ($_GET['pageno'] + 1);
