@@ -102,18 +102,19 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       } 
     }
    */
-    $form['#validate'][] = 'itg_alexa_audio_form_custom_validator';
+    // $form['#validate'][] = 'itg_alexa_audio_form_custom_validator';
     $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
   }
 }
 
-
+/*
 function itg_alexa_audio_form_custom_validator($form, &$form_state) {
   pr($form_state['values']);
   print "======<br>=======";
-  pr($form_state);
+  p($form_state);
   
 }
+*/
 
 /**
  * custom submit action for alexa_audio_clips_node_form
@@ -130,6 +131,35 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  */
 function genrate_alexa_audio_json($value) {
   $audiofid = $value['field_audio']['und'][0]['fid'];
+  //pr($value);
+  if (!empty($audiofid)) {
+    $filedir = 'sites/indiatoday/' . date('Ymd');
+    $orignal_img = file_load($audiofid);
+    //p($orignal_img);
+    // $orignal_file_name = $orignal_img->filename;
+    $new_filename = 'it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
+    
+    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    }
+    
+    $directory = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd') . "/";
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
+    
+    //$new_destination = str_replace($orignal_img->filename, $new_filename, $orignal_img->uri);
+    
+    $orignal_img->filename = $new_filename;
+    $orignal_img->uri = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
+    $new_destination = file_default_scheme() . '://' . $filedir . '/it_50_'.date('Ymd').'_time_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
+    $result = file_move($orignal_img, $new_destination, FILE_EXIST_ERROR);
+  
+    //$imagedata = $orignal_img->uri;
+    //$file = file_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name);
+    // file_save_data($xml, $directory . end($path_array), FILE_EXISTS_REPLACE);
+    //file_usage_add($file, 'itg_alexa_audio', 'file', $file->fid);
+    
+  }
+  
   $title = $value['title'];
   $uid = $value['uid'];
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
