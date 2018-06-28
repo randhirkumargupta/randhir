@@ -149,7 +149,11 @@ box-sizing: border-box;}
 @media screen and (max-width:767px){
 	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
 }
-
-
+@media screen and (max-width:680px){
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
+}
+@media screen and (max-width:480px){
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+}
 
 </style>
