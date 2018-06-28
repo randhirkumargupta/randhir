@@ -462,7 +462,11 @@ function get_event_menu($nid) {
     $value = field_collection_item_load($_value->field_event_tabs_value, $reset = FALSE);
     if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
       if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
-        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']))) . '</li>';
+		$active_class = '';
+		if (isset($_GET['tab']) && $_GET['tab'] == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
+		  $active_class = 'active';	
+		}
+        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value'], 'attributes' => array('class' => $active_class)))) . '</li>';
       }
     }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
       $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
