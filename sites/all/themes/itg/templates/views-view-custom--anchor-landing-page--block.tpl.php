@@ -99,7 +99,7 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-people .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
 .node-type-reporter.section-people .anchor{box-shadow:none !important; margin-bottom:40px;}
 .node-type-reporter.section-people .anchor-left{position:relative;}
-.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:370px;}
+.node-type-reporter .anchor-left .reporter-image-responsive-css{width:370px;}
 .node-type-reporter.section-people .people-img-title{position: absolute;bottom: 0;background: #000;width: 100%;color: #fff;font-size: 15px;line-height: 20px;padding: 3px 8px;
 box-sizing: border-box;}
 .node-type-reporter.section-people .people-img-title a{color: #fff;font-size: 17px;font-weight: bold;}
@@ -130,7 +130,7 @@ box-sizing: border-box;}
 }
 @media screen and (max-width:767px){
 	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
-	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:auto;}
+	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
 }
 @media screen and (max-width:680px){
 	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
