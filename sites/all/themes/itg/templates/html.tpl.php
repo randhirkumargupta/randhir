@@ -313,8 +313,8 @@ body {font: 400 15px/20px "OpenSans-Regular"; color: #111;}.comment-mobile.deskt
 .home-trending-video #trending-videos .trending-videos{border:0px;}
 .home-trending-video #trending-videos{ padding:10px; position: relative;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
-.home-trending-video #trending-videos .trending-videos li span.videoicon i:before{ color:#323232;font-size:20px; }
-.home-trending-video #trending-videos .trending-videos li span.videoicon{color:#323232; font-size:14px; line-height:20px}
+.home-trending-video #trending-videos .trending-videos li span.videoicon i:before {color: #fff; font-size:18px;}
+.home-trending-video #trending-videos .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,1); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
 .home-trending-video #trending-videos .trending-videos.slides li p{ padding:5px 0 7px; }
 .home-trending-video #trending-videos .trending-videos{overflow-x: hidden;}
 .home-trending-video #trending-videos .trending-videos li+li{ border-top:0px;}
@@ -349,8 +349,6 @@ body {font: 400 15px/20px "OpenSans-Regular"; color: #111;}.comment-mobile.deskt
 .home-trending-video #trending-videos ul.trending-videos li{box-shadow: 0 0px 4px rgba(0,0,0,0.24), 0 0px 4px rgba(0,0,0,0.24); -webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.12), 0 0px 4px rgba(0,0,0,0.24); border:1px solid rgba(0,0,0,0.12);}
 .home-trending-video #trending-videos ul li{padding:10px 0px 0; margin-right:15px!important;border-radius: 5px; margin-bottom:2px; margin-top:2px; }
 .home-trending-video #trending-videos ul li p{ padding: 15px 10px; font-size: 15px; font-family: "OpenSans-regular"; line-height:20px;}
-.home-trending-video #trending-videos .trending-videos li span.videoicon i:before {color: #fff; font-size:18px;}
-.home-trending-video #trending-videos .trending-videos li span.videoicon{padding:3px 5px 1px; background:rgba(0,0,0,1); color:#fff; font-size:14px; line-height:20px; position: absolute; bottom:0;}
 .home-trending-video #trending-videos .trending-videos.slides li p{padding:7px 10px}
 .home-trending-video .itg-widget-child.tab-data{border:0px;}
 .home-trending-video #trending-videos{ padding:5px 10px; margin-bottom:15px; }
