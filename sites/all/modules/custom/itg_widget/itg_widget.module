@@ -658,6 +658,20 @@ function itg_widget_block_view($delta = '') {
             $info['order'] = 'ASC';
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
             $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
+            drupal_add_js('jQuery(document).ready(function() {
+              function getGridSize() {
+                  return (window.innerWidth < 768) ? 270 : "";
+                }
+            jQuery(".trending-videos-flex").flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: getGridSize(),
+            itemMargin:15,
+            prevText: "",
+            nextText: "",
+            });
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
             $data = itg_widget_get_widget_data_data($info);
             $block['content'] = theme("trending_videos_widget", array("data" => $data));
             break;
