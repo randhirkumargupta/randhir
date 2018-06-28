@@ -21,7 +21,7 @@
 .home-trending-video #trending-videos .trending-videos li span.pic.video-icon:after{ font: normal normal normal 14px/1 FontAwesome; content:"\f01d"; font-size: 23px; color:#323232; bottom: 0;left: 0;background: transparent;top: 2px;}
 .videoicon.desktophide{ display:none; }
 
-.home-trending-video #trending-videos ul.trending-videos{border:0; padding-top:0;}
+.home-trending-video #trending-videos ul.trending-videos{border:0; padding-top:0; width:650%;}
 .home-trending-video #trending-videos ol.flex-control-paging{display:none;}
 .home-trending-video #trending-videos .flex-direction-nav a{opacity:1!important;}
 .home-trending-video #trending-videos .flex-nav-prev,.home-trending-video #trending-videos .flex-nav-next{display: inline-block; background-color:rgba(0,0,0,0.5); width: 40px; height: 64px; border-radius: 0px 35px 35px 0; position:absolute;}
@@ -34,7 +34,6 @@
 .home-trending-video #trending-videos .flex-direction-nav a{display:inline;}
 .home-trending-video #trending-videos .flex-direction-nav a:before{color:#fff;}
 .home-trending-video #trending-videos .trending-videos-flex{position:relative;}
-.home-trending-video #trending-videos .trending-videos .trending-videos-list{padding:0px;}
 .home-trending-video #trending-videos ul li{padding:0px; margin-right:0px!important}
 @media only screen and (min-width: 768px) and (max-width: 800px) {.home-trending-video h3.desktop-hide{display:none;}}
 @media only screen and (min-width: 320px) and (max-width: 767px) {
