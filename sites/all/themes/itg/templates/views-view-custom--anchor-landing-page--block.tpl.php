@@ -120,4 +120,12 @@ box-sizing: border-box;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption i,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption i{margin-right: 5px;font-size: 15px;line-height: 20px;}
 .node-type-reporter.section-people .main-video-wrapper .posted-on,.node-type-reporter.section-people .main-photo-wrapper .posted-on{color:#b1b1b1; font-size:12px;}
 
+@media screen and (max-width:768px){
+	.node-type-reporter.section-author .tile{float:left; width:100%; margin-bottom:20px;}
+	.node-type-reporter.section-author .tile figure{float:left; margin-right:20px;}
+	.node-type-reporter.section-author ul.author-story-wrapper li:first-child{padding-left:15px}
+	
+}
+
+
 </style>
