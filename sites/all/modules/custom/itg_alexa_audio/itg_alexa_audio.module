@@ -268,12 +268,10 @@ function itg_alexa_audio_mail_cron() {
 
       $mail = drupal_mail('itg_alexa_audio', 'send_mail_to_admin', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
-        return TRUE;
+        print 'send email to user.';
       }
       else {
-        $error_msg = 'Failed to send the email!';
-        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-        return FALSE;
+        print 'Failed to send the email!';
       }
    
   }
