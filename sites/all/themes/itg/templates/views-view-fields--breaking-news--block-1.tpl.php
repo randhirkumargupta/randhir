@@ -24,10 +24,17 @@
  */
 ?>
 <?php global $base_url; ?>
-<?php  
-  $actual_link = $base_url . '/node/' . $row->nid;
+<?php
+  $path = 'node/' . (int) $row->nid;  
+  $actual_link = $base_url . '/' . drupal_get_path_alias($path);
   $short_url = $actual_link;
   $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
+   
+  if($_GET['test'] == '1234') {
+    p($row->field_breaking_redirection_url);
+    $redirection_url = $row->field_breaking_redirection_url;  
+  }
+   
   $image = '';
   $share_desc = '';
   if (!empty($row->field_field_story_extra_large_image[0]['raw']['uri'])) {
