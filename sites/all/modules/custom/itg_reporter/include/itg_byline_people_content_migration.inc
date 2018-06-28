@@ -46,7 +46,7 @@ function itg_people_migration() {
 
             $node->created = $value['created'];
             //$node->changed = $value['modified'];
-            if(!empty($value['kicker_image'])){
+            if(!empty($value['kicker_image']) && $value['kicker_image'] != '-'){
               $existing_filepath = 'http://media2.intoday.in/indiatoday/images/stories/'.$value['kicker_image'];
               try{
                 $drupal_file = file_save_data(@file_get_contents($existing_filepath), 'public://'.str_replace('+', '_', $value['kicker_image']));
