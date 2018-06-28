@@ -107,6 +107,8 @@ function itg_videogallery_xml_file_video_insert() {
         }
     }
     $xml_resp .= "</Root> ";
+    print $xml_resp;
+    drupal_exit();
 }
 /**
  * itg_videogallery_rap_upload_img
@@ -130,8 +132,81 @@ function itg_anchor_associate_video_cron(){
   $query->fields('fvfn', array('field_video_file_name_value'));
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  p($result);die;
   foreach ($result as $value) {
     
   }
+}
+
+function associate_video_to_node($filename){
+  if (!empty($filename)) {
+    $video_info_arr = get_video_info($filename);
+    if ($video_info_arr) {
+      $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
+    }
+  }
+  return FALSE;
+}
+
+function itg_associate_video_id_to_pcontent($video_info_arr){
+  if(empty($video_info) || count($video_info) == 0){
+    return FALSE;
+  }  
+  $video_info = $video_info[0];  
+  $videourl = 'public://' . LOCAL_VIDEO_DIR . '/' . date('Ym') . '/' . rand(111,9999) . '/' . time() . '/' . $video_info->video_id . '.mp4';
+
+  $fid = db_insert('file_managed')
+      ->fields(array(
+        'uid' => 1522, //itgsiteadmin,
+        'filename' => $video_info->name,
+        'uri' => $videourl,
+        'filemime' => 'video/mp4',
+        'filesize' => $video_info->video_size,
+        'status' => 1,
+        'timestamp' => REQUEST_TIME,
+      ))
+      ->execute();
+  $file = file_load($fid);
+//  var_dump($file);die;
+  if (empty($file->fid)){
+    return FALSE;
+  }
+  file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
+  $is_used = 0;
+
+  if (FALSE && isset($video_info->video_type) && !empty($video_info->video_type)) {
+    $is_used = 1;
+  }
+  if($video_info->video_type == "") {
+    $video_info->video_type = 'DM';
+  }
+  $fid = db_insert('itg_solr_video_info')
+      ->fields(array(
+        'fid' => $file->fid,
+        'solr_video_id' => $video_info->video_id,
+        'solr_video_duration' => $video_info->video_duration,
+        'solr_video_size' => $video_info->video_size,
+        'property' => 'PROD',
+        'content_type' => 'video_gallery',
+        'video_repo_type' => $video_info->video_type,
+        'video_xml_data' => $video_info->field_all_xml_content_value,
+        'is_alredy_used' => $is_used,
+        'solr_video_thumb' => '',
+      ))
+      ->execute();
+  return $file->fid;
+}
+
+function itg_get_video_info($filename){
+  if (!empty($filename)) {
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->leftJoin('field_data_field_video_id', 'fdfvi', 'fdfvi.field_video_id_value = drd.video_id');
+    $query->leftJoin('field_data_field_all_xml_content', 'faxc', 'faxc.entity_id = fdfvi.entity_id');
+    $query->condition('drd.title', $filename, '=');
+    $query->condition('drd.dailymotion_published', 0, '=');
+    $query->fields('drd');
+    $query->fields('faxc', array('field_all_xml_content_value'));
+    $video_data = $query->execute()->fetchAll();
+    return $video_data;
+  }
+  return FALSE;
 }
