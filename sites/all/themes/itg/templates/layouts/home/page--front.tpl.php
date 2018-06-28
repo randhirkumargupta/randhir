@@ -242,7 +242,7 @@ if ($theme != 'itgadmin') {
                                         }
                                         ?>
                                     </span>
-                                    <span data-class="itg-block-6" data-id="tab-data-2">
+                                    <span data-class="itg-block-6" data-id="tab-data-2" onclick="activeflex();">
                                         <?php
                                         if (!$widget_data['itg-block-6']['block_title']) {
                                           print 'Tab 1';
@@ -304,6 +304,11 @@ if ($theme != 'itgadmin') {
                                                   print '<div class="widget-placeholder"><span>Watch right now</span></div>';
                                                 }
                                                 ?>
+                                                <script>
+                                                function activeflex(){
+                                                  setTimeout(function(){jQuery(".top-takes-videos-flex").resize();});                                                  
+                                                }
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
