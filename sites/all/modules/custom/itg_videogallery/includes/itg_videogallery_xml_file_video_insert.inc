@@ -56,7 +56,7 @@ function itg_videogallery_xml_file_video_insert($data) {
           $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
         }
         if (!empty($anchor)) {
-          $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor); 
+          $node->field_video_anchor[LANGUAGE_NONE][0]['target_id'] = trim($anchor); 
         }
         $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = empty($video_kicker) ? '' : $video_kicker;
         $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
