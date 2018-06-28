@@ -16,7 +16,7 @@ $follow_status = $content["follow_status"];
     <div class="anchor-left">
       <?php
       if(isset($anchor['field_story_extra_large_image'])) {
-        echo '<div class="reporter-image-responsive-css">'.$anchor['field_story_extra_large_image'].'</div>div>';
+        echo '<div class="reporter-image-responsive-css">'.$anchor['field_story_extra_large_image'].'</div>';
          if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people'){
           echo '<div class="people-img-title">'.$anchor['title'].'</div>';
         }
