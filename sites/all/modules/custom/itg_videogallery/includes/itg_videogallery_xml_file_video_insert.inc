@@ -127,7 +127,6 @@ function itg_videogallery_rap_upload_img($url){
 function itg_anchor_associate_video_cron(){
   $query = db_select('field_data_field_transcode_flag', 'ftf');
   $query->join('field_data_field_video_file_name', 'fvfn', 'fvfn.entity_id=ftf.entity_id');
-  $query->join('dailymotion_response_details', 'drd', 'drd.title=fvfn.field_video_file_name_value');
   $query->fields('fvfn', array('field_video_file_name_value'));
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
