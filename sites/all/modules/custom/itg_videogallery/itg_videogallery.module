@@ -211,6 +211,12 @@ function itg_videogallery_menu() {
      'access arguments' => array('access content'),
     'file' => 'includes/itg_videogallery_create_video_node.inc',
   );
+  $items['anchor-associate-video-cron'] = array(
+     'type' => MENU_CALLBACK,
+    'page callback' => 'itg_anchor_associate_video_cron',
+     'access arguments' => array('access content'),
+    'file' => 'includes/itg_videogallery_xml_file_video_insert.inc',
+  );
 
   return $items;
 }
