@@ -296,6 +296,8 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  
+  p($result);
   foreach ($result as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
     $title = $resvalue['title'];
