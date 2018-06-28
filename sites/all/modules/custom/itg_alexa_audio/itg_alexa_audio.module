@@ -26,6 +26,13 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $node->title;
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
       $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      
+      if (empty($vide_fid)) {
+        $last_video = get_last_video_for_alexa();
+        $vide_fid = $last_video[0]['nid']; 
+      }
+      
+      
       if ($fid) {
         $file_obj = file_load($fid);
         $stream_url = file_create_url($file_obj->uri);
@@ -54,6 +61,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       );
       
       if ($vide_fid) {
+        
         $file_video_obj = file_load($vide_fid);
         $video_url = file_create_url($file_video_obj->uri); 
         $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");
@@ -233,6 +241,20 @@ function get_last_alexa_feed() {
   $query->condition('n.status', 1);
   $query->condition('n.type', "alexa_audio_clips", '=');
   $query->orderBy('n.nid', 'DESC')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function is for to get last video alexa clip.
+ * @return array $result
+ */
+function get_last_video_for_alexa() {
+  $query = db_select('field_data_field_alexa_video', 'v');
+  $query->fields('v', array('field_alexa_video_fid'));
+  $query->condition('v.field_alexa_video_display', 1);
+  $query->condition('v.bundle', "alexa_audio_clips", '=');
+  $query->orderBy('v.field_alexa_video_display', 'DESC')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
 }
