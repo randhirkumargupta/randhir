@@ -25,13 +25,14 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       $node = node_load($exist_nid);
       $form['title']['#default_value'] = $node->title;
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
-      $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      print $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
       
       if (empty($vide_fid)) {
         $last_video = get_last_video_for_alexa();
         $vide_fid = $last_video[0]['nid']; 
       }
       
+      pr($last_video);
       
       if ($fid) {
         $file_obj = file_load($fid);
