@@ -15,7 +15,7 @@ if($is_fron_page){
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">         
               <?php //$extra_large_image_url = image_style_url("widget_very_small", $video_data['mi_file_uri']); ?>
               <?php print theme('image', array('path' => $video_data['mi_file_uri'], 'alt' => $video_data['field_story_medium_image_alt'], 'title' => $video_data['field_story_medium_image_title'])); ?>
-              <span class="videoicon desktophide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
+              <span class="videoicon"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
             </a>
             <?php
           }
@@ -23,7 +23,7 @@ if($is_fron_page){
             ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
               <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
-              <span class="videoicon desktophide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
+              <span class="videoicon"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($entity['field_video_duration_value'])) { echo $entity['field_video_duration_value']; } ?></span>
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>
@@ -37,8 +37,7 @@ if($is_fron_page){
             }            
             ?>
             </p>
-        <?php endif; ?>
-        <span class="videoicon mobilehide"><i class="fa fa-play-circle-o" aria-hidden="true"></i> <?php if (!empty($video_data['field_video_duration_value'])) { echo $video_data['field_video_duration_value']; } ?></span>
+        <?php endif; ?>        
         </li>
   <?php } ?>
     </ul>
