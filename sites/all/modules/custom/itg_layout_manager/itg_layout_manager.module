@@ -329,15 +329,8 @@ function itg_layout_manager_block_view($delta = '') {
       } else {
         $settings['logoutsec'] = 20000;
       }
-      
-      if ($_GET['TEST'] == '1234') {
-        pr(arg());
-        
-        if(arg(0) == 'video') {
-          pr(arg());
-        }
-      }
-      if (!empty(arg(0)) && (arg(0) == 'video') && (arg(2) != 'embed')) {
+     
+      if (arg(0) == 'video' && arg(2) != 'embed') {
         drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
         drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js');    
       }
