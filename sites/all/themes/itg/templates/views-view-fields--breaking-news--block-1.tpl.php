@@ -31,7 +31,7 @@
   $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
    
   if($_GET['test'] == '1234') {
-    p($row->field_breaking_redirection_url);
+    p($row);
     $redirection_url = $row->field_breaking_redirection_url;  
   }
    
