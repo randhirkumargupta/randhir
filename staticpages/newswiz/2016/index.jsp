@@ -153,6 +153,7 @@ li .video_episode_snippets .video_inner p{padding:5px 0; text-align:left; line-h
 .top_dated_area { margin:0px auto; width:100%; text-align:center; margin-top:10px; margin-bottom:15px;}
 .top_dated_area img.pic_mob { display:block}
 .top_dated_area img.pic_destop { display:none}
+.video_pic.showvideo iframe#videoplayer { height: 257px !important;}
 }
 @media screen and (max-width: 640px){
 .video_pic.showvideo{ top:50px;}
