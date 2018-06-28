@@ -128,8 +128,8 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
     $list[$loop_cont]['fba_publish_status'] = "$field_fba_publish_status_value";
     $list[$loop_cont]['fba_published'] = "$field_fba_published_value";
     $loop_cont++;
-    $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   }
+  $list = auscovery_dashboard_web_video_list($list, $loop_cont, $start_date, $end_date);
   $data['data'] = $list;
   if($loop_cont == $limit){
       $s_date = $_GET['start_date'];
