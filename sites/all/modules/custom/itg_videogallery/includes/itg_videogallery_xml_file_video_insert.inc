@@ -37,34 +37,52 @@ function itg_videogallery_xml_file_video_insert() {
         $node->promote = 0;
         $node->comment = 0;
         $node->status = 0;
-        $node->body[$node->language][0]['value'] = $description;
-        $node->body[$node->language][0]['format'] = 'full_html';
+        if (!empty($description)){
+          $node->body[$node->language][0]['value'] = $description; 
+          $node->body[$node->language][0]['format'] = 'full_html';
+        }
+       
         //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));                    
-        $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
+        if (!empty($short_headline)) {
+          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline)); 
+        }
 
         $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
         if (!empty($cat_id)) {
             $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
-            $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
         }
-
-        $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
-        $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+        if (!empty($section_id)) {
+          $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+        }
+        if (!empty($anchor)) {
+          $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor); 
+        }
+        $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = empty($video_kicker) ? '' : $video_kicker;
         $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 
         $node = node_submit($node); // Prepare node for saving
         $node->created = $publish_date_timestamp;
-//p($node);
-        $fid_extra_large_image = itg_videogallery_rap_upload_img($extra_large_img);
-        $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
-        $fid_large_img = itg_videogallery_rap_upload_img($large_img);
-        $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
-        $fid_medium_img = itg_videogallery_rap_upload_img($medium_img);
-        $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
-        $fid_small_img = itg_videogallery_rap_upload_img($small_img);
-        $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
-        $fid_extra_small_img = itg_videogallery_rap_upload_img($extra_small_img);
-        $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+        if (!empty($extra_large_img)) {
+          $fid_extra_large_image = itg_videogallery_rap_upload_img($extra_large_img);
+          $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
+        }
+        if (!empty($large_img)) {
+          $fid_large_img = itg_videogallery_rap_upload_img($large_img);
+          $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
+        }
+        if (!empty($medium_img)) {
+          $fid_medium_img = itg_videogallery_rap_upload_img($medium_img);
+          $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
+        }
+        if (!empty($small_img)) {
+          $fid_small_img = itg_videogallery_rap_upload_img($small_img);
+          $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
+        }
+        if (!empty($extra_small_img)) {
+          $fid_extra_small_img = itg_videogallery_rap_upload_img($extra_small_img);
+          $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+        }
+        $node->field_transcode_flag[LANGUAGE_NONE][0]['value'] = 1;
         try {
             node_save((object) $node);
             $success = TRUE;
