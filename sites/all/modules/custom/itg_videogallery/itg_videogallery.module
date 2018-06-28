@@ -217,6 +217,11 @@ function itg_videogallery_menu() {
      'access arguments' => array('access content'),
     'file' => 'includes/itg_videogallery_xml_file_video_insert.inc',
   );
+  $items['api-integration/internal'] = array(
+     'type' => MENU_CALLBACK,
+    'page callback' => 'itg_api_integration_internal',
+     'access arguments' => array('access content')
+  );
 
   return $items;
 }
@@ -2080,4 +2085,18 @@ function get_content_publish_date ($nid) {
   $query->fields('cbd', array('field_itg_content_publish_date_value'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
+}
+
+function itg_api_integration_internal(){
+  $data = file_get_contents('php://input');
+  $xml_data = simplexml_load_string($data);
+  switch ($xml_data->post_type) {
+    case 'anchor_type':
+      module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_xml_file_video_insert');
+      itg_videogallery_xml_file_video_insert($xml_data);
+      break;
+    default:
+      drupal_access_denied();
+      break;
+  }
 }
