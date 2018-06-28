@@ -9,9 +9,10 @@
  *
  * @return array - The processed information array.
  */
-function itg_videogallery_xml_file_video_insert() {
-    $data = file_get_contents('php://input');
-    $xml_data = simplexml_load_string($data);
+function itg_videogallery_xml_file_video_insert($data) {
+    //$data = file_get_contents('php://input');
+//    $xml_data = simplexml_load_string($data);
+    $xml_data = $data;
     $xml_resp = "<?xml version='1.0' encoding='utf-8'?><Root> ";
     foreach ($xml_data->article as $xml) {
         $long_headline = $xml->long_headline;
