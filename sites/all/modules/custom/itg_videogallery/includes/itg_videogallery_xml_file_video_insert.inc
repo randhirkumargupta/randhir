@@ -129,19 +129,42 @@ function itg_videogallery_rap_upload_img($url){
 function itg_anchor_associate_video_cron(){
   $query = db_select('field_data_field_transcode_flag', 'ftf');
   $query->join('field_data_field_video_file_name', 'fvfn', 'fvfn.entity_id=ftf.entity_id');
-  $query->fields('fvfn', array('field_video_file_name_value'));
+  $query->fields('fvfn', array('field_video_file_name_value', 'entity_id'));
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $value) {
-    
+    associate_video_to_node($value->field_video_file_name_value, $value->entity_id);
   }
 }
 
-function associate_video_to_node($filename){
+function associate_video_to_node($filename, $nid){
   if (!empty($filename)) {
     $video_info_arr = get_video_info($filename);
     if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
+      if (!empty($video_fid)) {
+        $node = node_load($nid);
+        $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
+        $field_collection_item->setHostEntity('node', $node);
+        $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
+        $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
+        $field_collection_item->save();
+        db_update('node') // Table name no longer needs {}
+          ->fields(array(
+            'status' => 1
+          ))
+          ->condition('nid', $node->nid, '=')
+          ->execute();
+        db_update('workbench_moderation_node_history') // Table name no longer needs {}
+          ->fields(array(
+            'state' => workbench_moderation_state_published(),
+            'published' => 1,
+            'uid' => ADMINISTRATOR,
+          ))
+          ->condition('nid', $node->nid, '=')
+          ->condition('is_current', 1, '=')
+          ->execute(); 
+      }
     }
   }
   return FALSE;
