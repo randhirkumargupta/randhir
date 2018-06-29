@@ -16,7 +16,7 @@ $follow_status = $content["follow_status"];
     $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
     $dev_arg = '';
     
-    if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
+    if (in_array($_SERVER['HTTP_HOST'], $domain_arr) && $_GET['test'] != '1234') {
           $dev_arg = '99999';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
