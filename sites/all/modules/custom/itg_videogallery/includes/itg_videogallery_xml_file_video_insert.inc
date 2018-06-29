@@ -169,7 +169,7 @@ function associate_video_to_node($filename, $nid){
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
         //$field_collection_item->save();
        // var_dump($nid, $node);die;
-        
+        die('fff');
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
         $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
             ->fields(array(
