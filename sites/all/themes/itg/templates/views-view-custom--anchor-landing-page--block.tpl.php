@@ -15,12 +15,9 @@ $follow_status = $content["follow_status"];
   <?php
     $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
     $dev_arg = '';
-    if ($_GET['test'] == '123') {
-        pr($_SERVER['HTTP_HOST']);
-    }
-
+    
     if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
-          print $dev_arg = '99999';
+          $dev_arg = '99999';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper clearfix mb-20">
