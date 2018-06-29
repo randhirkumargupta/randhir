@@ -153,9 +153,10 @@ function associate_video_to_node($filename, $nid){
     $video_info_arr = itg_get_video_info($filename);
     if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
-      var_dump($video_fid);die;
+      
       if (!empty($video_fid)) {
         $node = node_load($nid);
+        var_dump($nid, $node);die;
         $node->promote = 0;
         $node->comment = 0;
         $node->revision = 1;
