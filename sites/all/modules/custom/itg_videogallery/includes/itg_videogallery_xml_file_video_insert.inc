@@ -132,12 +132,13 @@ function itg_videogallery_rap_upload_img($url){
     return $fid;
 }
 
-function itg_anchor_associate_video_cron(){die('In');
+function itg_anchor_associate_video_cron(){
   $query = db_select('field_data_field_transcode_flag', 'ftf');
   $query->join('field_data_field_video_file_name', 'fvfn', 'fvfn.entity_id=ftf.entity_id');
   $query->fields('fvfn', array('field_video_file_name_value', 'entity_id'));
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  p($result);
   $nids = array();
   foreach ($result as $value) {
     if ($_nid = associate_video_to_node($value['field_video_file_name_value'], $value['entity_id'])){
