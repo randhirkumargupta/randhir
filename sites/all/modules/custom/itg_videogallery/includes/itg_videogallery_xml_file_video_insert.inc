@@ -55,7 +55,7 @@ function itg_videogallery_xml_file_video_insert($data) {
         }
         if (!empty($section_id)) {
           $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
-        }else (!empty($cat_id)) {
+        }else if (!empty($cat_id)) {
 		  $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;	
 		}
         if (!empty($anchor)) {
