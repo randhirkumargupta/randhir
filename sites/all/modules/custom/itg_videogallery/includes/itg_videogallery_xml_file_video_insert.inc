@@ -153,6 +153,7 @@ function associate_video_to_node($filename, $nid){
     $video_info_arr = itg_get_video_info($filename);
     if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
+      var_dump($video_fid);die;
       if (!empty($video_fid)) {
         $node = node_load($nid);
         $node->promote = 0;
@@ -164,7 +165,7 @@ function associate_video_to_node($filename, $nid){
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
         $field_collection_item->save();
-        p($node);
+        
         node_save($node);
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
         $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
