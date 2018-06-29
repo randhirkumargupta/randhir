@@ -12,6 +12,26 @@ $uri = base64_encode($actual_link);
 $follow_status = $content["follow_status"];
 ?>
 <div class="anchor-landing">
+    <?php if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
+
+      <div class="anchor-video-wrapper">
+        <div id="anc-placeholder" style="display:none"></div>
+        <div id="stream-title" style="display:none"></div>
+        <script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>
+        <script>
+        window.lib = lib || {};
+        lib.setup({
+                'site':'IT',
+                'playerPlacement':'jwplayerRef',
+                'commentPlacement':'commentRef',
+                'anchorId':<?php print $nid; ?>
+        });
+        </script>
+        <div id="jwplayerRef"></div>
+        <div id="commentRef"></div>
+      </div>
+
+  <?php  endif; ?>
   <div class="anchor">
     <div class="anchor-left">
       <?php
@@ -39,8 +59,8 @@ $follow_status = $content["follow_status"];
         }
         ?>
           <!-------  followers count -->
-        <?php 
-          echo mb_strimwidth(html_entity_decode(strip_tags($anchor['body'])), 0, 245, ".."); 
+        <?php
+          echo mb_strimwidth(html_entity_decode(strip_tags($anchor['body'])), 0, 245, "..");
           $share_desc = '';
         ?>
         <?php if (strlen($anchor['body']) > 245) { ?>
@@ -50,7 +70,7 @@ $follow_status = $content["follow_status"];
           <?php echo $anchor['body']; ?>
           <a href="#" class="anchor-action read-less"> Less[-]</a>
         <?php } ?>
-      </div>  
+      </div>
       <div class="social-icon">
         <ul>
               <?php if (function_exists('itg_follow_unfollow_print')) {
