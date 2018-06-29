@@ -156,7 +156,7 @@ function associate_video_to_node($filename, $nid){
       
       if (!empty($video_fid)) {
         $node = node_load($nid);
-        
+        p($node);
         $node->promote = 0;
         $node->comment = 0;
         $node->revision = 1;
