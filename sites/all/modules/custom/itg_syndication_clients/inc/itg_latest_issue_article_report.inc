@@ -20,7 +20,10 @@ function itg_latest_issue_article_report() {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $issue_story_res = array();
     foreach ($result as $issue_story) {
-      $issue_story_res[] = FRONT_URL . "/" . drupal_get_path_alias('node/' . $issue_story['nid']);
+      $issue_story_res[] = array(
+        'url' => FRONT_URL . "/" . drupal_get_path_alias('node/' . $issue_story['nid']),
+        'nid' => $issue_story['nid']
+      );
     }
     echo json_encode($issue_story_res);
     drupal_exit();
