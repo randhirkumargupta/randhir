@@ -19,6 +19,9 @@ function itg_people_migration() {
         foreach ($result_array['row'] as $key=>$value){
             $node = new stdClass();
             $node->title = trim($value['headline']);
+            //if($node->title == 'Roger Federer'){
+
+
             $node->type = "reporter";
             node_object_prepare($node);
             $node->language = LANGUAGE_NONE;
@@ -43,17 +46,19 @@ function itg_people_migration() {
 
             $node->created = $value['created'];
             //$node->changed = $value['modified'];
-            $existing_filepath = 'http://media2.intoday.in/indiatoday/images/stories/'.$value['kicker_image'];
-            try{
-              $drupal_file = file_save_data(@file_get_contents($existing_filepath), 'public://'.$value['kicker_image']);
-              if(!empty($value['kicker_image_alt_text'])){
-                $drupal_file->alt = $value['kicker_image_alt_text'];
-                $drupal_file->title = $value['kicker_image_alt_text'];
+            if(!empty($value['kicker_image']) && $value['kicker_image'] != '-'){
+              $existing_filepath = 'http://media2.intoday.in/indiatoday/images/stories/'.$value['kicker_image'];
+              try{
+                $drupal_file = file_save_data(@file_get_contents($existing_filepath), 'public://'.str_replace('+', '_', $value['kicker_image']));
+                if(!empty($value['kicker_image_alt_text'])){
+                  $drupal_file->alt = $value['kicker_image_alt_text'];
+                  $drupal_file->title = $value['kicker_image_alt_text'];
+                }
+                // Assign the file object to the node, as an array
+                $node->field_story_extra_large_image[$node->language][0] = get_object_vars($drupal_file);
+              }catch(Exception $e){
+                echo $key.'. Failed image migration:'.$value['id'].' --- '.$e->getMessage() . "<br><br>";
               }
-              // Assign the file object to the node, as an array
-              $node->field_story_extra_large_image[$node->language][0] = get_object_vars($drupal_file);
-            }catch(Exception $e){
-              echo $key.'. Failed image migration:'.$value['id'].' --- '.$e->getMessage() . "<br><br>";
             }
 
             try{
@@ -68,7 +73,9 @@ function itg_people_migration() {
             }catch (Exception $e) {
               echo $key.'. Failed Migration id:'.$value['id'].' --- '.$e->getMessage() . "<br><br>";
             }
-          //die;
+         // break;
+         // die;
+          //}
         }
       }
       else {

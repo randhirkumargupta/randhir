@@ -26,6 +26,12 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       $form['title']['#default_value'] = $node->title;
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
       $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      
+      if (empty($vide_fid)) {
+        $last_video = get_last_video_for_alexa();
+        $vide_fid = $last_video[0]['field_alexa_video_fid']; 
+      }
+      
       if ($fid) {
         $file_obj = file_load($fid);
         $stream_url = file_create_url($file_obj->uri);
@@ -54,6 +60,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       );
       
       if ($vide_fid) {
+        
         $file_video_obj = file_load($vide_fid);
         $video_url = file_create_url($file_video_obj->uri); 
         $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");
@@ -110,7 +117,7 @@ function genrate_alexa_audio_json($value) {
   $time = date('hA');
   if (!empty($audiofid)) {
     $orignal_img = file_load($audiofid);
-    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d')).'.mp3';
+    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
     $orignal_img->filename = $new_filename;
@@ -138,9 +145,14 @@ function genrate_alexa_audio_json($value) {
   // for video
   $videofid = $value['field_alexa_video']['und'][0]['fid'];
   
+  if (empty($videofid)) {
+      $last_video = get_last_video_for_alexa();
+      $videofid = $last_video[0]['field_alexa_video_fid']; 
+  }
+  
   if (!empty($videofid)) {
     $file_video_obj = file_load($videofid);
-    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.strtotime(date('Y-m-d')).'.mp4';      
+    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.strtotime(date('Y-m-d H:i:s')).'.mp4';      
     $file_video_obj->filename = $new_video_filename;
     $new_video_destination = file_default_scheme() . '://' . $filedir . '/' . $new_video_filename;
     file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
@@ -238,6 +250,20 @@ function get_last_alexa_feed() {
 }
 
 /**
+ * Function is for to get last video alexa clip.
+ * @return array $result
+ */
+function get_last_video_for_alexa() {
+  $query = db_select('field_data_field_alexa_video', 'v');
+  $query->fields('v', array('field_alexa_video_fid'));
+  $query->condition('v.field_alexa_video_display', 1);
+  $query->condition('v.bundle', "alexa_audio_clips", '=');
+  $query->orderBy('v.field_alexa_video_display', 'DESC')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
  * Implements hook_cronapi().
  * {@inheritdoc}
  */
@@ -250,6 +276,9 @@ function itg_alexa_audio_cronapi($op, $job = NULL) {
   return $items;
 }
 
+/**
+ * mail alert for Alexa.
+ */
 function itg_alexa_audio_mail_cron() {
   $curent_feed = get_last_alexa_feed();
   $dateFromDatabase = $curent_feed[0]['created'];
@@ -272,10 +301,8 @@ function itg_alexa_audio_mail_cron() {
       }
       else {
         print 'Failed to send the email!';
-      }
-   
-  }
-    
+      }   
+  }    
 }
 
 

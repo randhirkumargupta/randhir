@@ -1,4 +1,4 @@
-<span class="widget-title"><?php print t('MAGAZINE ISSUES'); ?></span>
+<span class="widget-title"><?php print t('MAGAZINE ISSUES1'); ?></span>
 <?php
 
 /**

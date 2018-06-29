@@ -38,9 +38,9 @@ $argum = base64_encode(arg(1));
                 <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a></li>
                 <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick='twitter_popup("<?php print urlencode($share_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
                 <?php 
-				  $whatsapp = $photo_node->title . " ". $actual_link;
-				  $whatsapp_text = urlencode($whatsapp); 
-				?> 
+                  $whatsapp = $photo_node->title . " ". $actual_link;
+                  $whatsapp_text = urlencode($whatsapp); 
+                ?> 
                 <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $photo_node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
                 <?php

@@ -285,7 +285,7 @@ function itg_report_api_resource() {
         ),
       ),
     ),
-      
+
    // author_report custom resource declaration.....
     'author_report_v1' => array(
       'operations' => array(
@@ -313,7 +313,7 @@ function itg_report_api_resource() {
         ),
       ),
     ),
-      
+
       // fba_update custom resource declaration.....
         'fba_update' => array(
             'operations' => array(
@@ -331,7 +331,7 @@ function itg_report_api_resource() {
                     'args' => array(
                         array(
                             'name' => 'fba_id',
-                            'optional' => TRUE,                            
+                            'optional' => TRUE,
                             'source' => array('data'),
                             'description' => 'fba_id',
                             'type' => 'array',
@@ -566,7 +566,7 @@ function itg_report_api_author_report_v1() {
   if ($_GET['start_date'] != "na") {
     $start_date = strtotime($_GET['start_date']);
   }
-  
+
     $type = 'story';
   if($_GET['type'] == "video"){
       $type = 'videogallery';
@@ -646,10 +646,11 @@ function itg_report_api_auscovery_dashboard_web() {
   $suffix = $start_date . "_" . $end_date."_".$pageno;
   if (!empty($_GET['limit'])) {
 	$suffix = $suffix . '_'. $_GET['limit'];
-  } 
+  }
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
 
   $result_get = getRedis($redis_key);
+  //$result_get = array();
 
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
@@ -771,7 +772,7 @@ function itg_report_api_fba_update(){
     $resp['status_code'] = "1";
     $resp['status_message'] = "";
     $resp_data = array();
-    foreach ($data as $key => $value) {        
+    foreach ($data as $key => $value) {
         $canonical_url = $value['canonical_url'];
         $fba_id = $value['id'];
         $publish_status = $value['publish_status'];
@@ -782,7 +783,7 @@ function itg_report_api_fba_update(){
     }
     $resp['data' ] = $resp_data;
     return $resp;
-    
+
 }
 /**
  * itg_rapid_nid_by_url
@@ -798,7 +799,7 @@ function itg_rapid_nid_by_url($canonical_url){
         $last_key_ex_ar = explode("-",$last_key_val);
         $nid_key = count($last_key_ex_ar) - 4;
         $nid = $last_key_ex_ar[$nid_key];
-    }    
+    }
     return $nid;
 }
 /**

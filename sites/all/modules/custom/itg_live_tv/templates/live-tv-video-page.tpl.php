@@ -34,9 +34,9 @@ if (function_exists('itg_live_tv_company')) {
               <li><a class="def-cur-pointer" title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image; ?>")'><i class="fa fa-facebook"></i> <span>Share</span></a></li>
               <li><a class="def-cur-pointer" title="share on twitter" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i> <span>Tweet</span></a></li>
               <?php 
-				$whatsapp = "Live TV ". $actual_link;
-				$whatsapp_text = urlencode($whatsapp); 
-			  ?> 
+                $whatsapp = "Live TV ". $actual_link;
+                $whatsapp_text = urlencode($whatsapp); 
+              ?> 
               <li class="desktop-hide"><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="Live TV" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
               <?php if (empty(variable_get('disable_livetv_embed'))) { ?>
               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span>Embed</span></a>
