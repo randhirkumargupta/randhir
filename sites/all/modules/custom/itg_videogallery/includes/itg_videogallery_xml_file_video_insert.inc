@@ -28,6 +28,7 @@ function itg_videogallery_xml_file_video_insert($data) {
         $small_img = $xml->small_img;
         $extra_small_img = $xml->extra_small_img;
         $video_file_name = $xml->video_file_name;
+        $publish_date_timestamp = time();
         //prepare node object
         $node = new stdClass();
         $node->title = trim(html_entity_decode($long_headline));
@@ -61,8 +62,12 @@ function itg_videogallery_xml_file_video_insert($data) {
         $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = empty($video_kicker) ? '' : $video_kicker;
         $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 
-        $node = node_submit($node); // Prepare node for saving
+       
+        $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
+        $exp_date = strtotime('+10 years', time());
+        $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
         $node->created = $publish_date_timestamp;
+        $node = node_submit($node); // Prepare node for saving
         if (!empty($extra_large_img)) {
           $fid_extra_large_image = itg_videogallery_rap_upload_img($extra_large_img);
           $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
@@ -135,9 +140,11 @@ function itg_anchor_associate_video_cron(){
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $nids = array();
   foreach ($result as $value) {
-    $nids[] = associate_video_to_node($value['field_video_file_name_value'], $value['entity_id']);
+    if ($_nid = associate_video_to_node($value['field_video_file_name_value'], $value['entity_id'])){
+      $nids[] = $_nid;
+    }
   }
-  print json_decode($nids);
+  print json_encode($nids);
   drupal_exit();
 }
 
@@ -148,11 +155,25 @@ function associate_video_to_node($filename, $nid){
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
       if (!empty($video_fid)) {
         $node = node_load($nid);
+        $node->promote = 0;
+        $node->comment = 0;
+        $node->revision = 1;
+        $node->status = 1;
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
         $field_collection_item->save();
+        node_save($node);
+        $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
+        $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
+            ->fields(array(
+              'dailymotion_published' => 1,
+              'is_replace' => 0,
+              'node_is_save_draft' => 1,
+            ))
+            ->condition('video_id', $file_video[0]->solr_video_id, '=')
+            ->execute();
         db_update('node') // Table name no longer needs {}
           ->fields(array(
             'status' => 1
@@ -229,7 +250,7 @@ function itg_get_video_info($filename){
     $query = db_select('dailymotion_response_details', 'drd');
     $query->leftJoin('field_data_field_video_id', 'fdfvi', 'fdfvi.field_video_id_value = drd.video_id');
     $query->leftJoin('field_data_field_all_xml_content', 'faxc', 'faxc.entity_id = fdfvi.entity_id');
-    $query->condition('drd.title', $filename, '=');
+    $query->condition('drd.title', '%' . db_like($filename), 'LIKE');
     $query->condition('drd.dailymotion_published', 0, '=');
     $query->fields('drd');
     $query->fields('faxc', array('field_all_xml_content_value'));
