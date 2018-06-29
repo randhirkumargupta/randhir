@@ -1421,8 +1421,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 @media only screen and (max-width: 1200px){.fifa-wcup .flex-prev{right: 40px;}.fifa-wcup .flex-prev{right: 40px;}}
 @media only screen and (max-width: 1024px){.fifa-wcup .tech-block_5 .flexslider .flex-direction-nav a.flex-next{ right: 0px;}.fifa-wcup .tech-block_5 .flexslider .flex-direction-nav a.flex-prev{right: 40px;}.magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link{font-size:18px;}}
 @media only screen and (max-width: 768px){.fifa-wcup .fifa-points-table {margin-top: 20px;}.fifa-wcup .auto-block-1{margin-bottom: 0 !important;}.fifa-wcup .movies-featured-post{padding:12px 5px; }.fifa-wcup .dont-miss ul li{width: 50%;} .fifa-wcup .right-side{background:none; padding-left: 15px; padding-right: 15px;}.fifa-wcup .droppable table{background-color:#f0f0f0;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}.fifa-wcup .itg-h321-section .dont-miss ul li:nth-child(4) {display: block;}}
-@media only screen and (max-width: 767px){.featured-news .featured-post.featured-post-first{ margin-bottom: 0;}.fifa-wcup .auto-block-2{display: block;     padding: 10px;}.fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}.fifa-wcup .padright-0{padding-right: 15px;}.fifa-wcup .padleft-0{padding-left: 15px;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}.fifa-wcup #block-itg-menu-manager-third-level-menu img{ width:90%; padding-top:20px; }.fifa-wcup .movies-featured-post { padding: 10px 10px;}.fifa-wcup .fifa-post{min-height:80px}}
-
+@media only screen and (max-width: 767px){.featured-news .featured-post.featured-post-first{ margin-bottom: 0;}.fifa-wcup .auto-block-2{display: block;     padding: 10px;}.fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}.fifa-wcup .padright-0{padding-right: 15px;}.fifa-wcup .padleft-0{padding-left: 15px;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}.fifa-wcup #block-itg-menu-manager-third-level-menu img{ width:90%; padding-top:20px; }.fifa-wcup .movies-featured-post { padding: 10px 10px;}.fifa-wcup .fifa-post{min-height:80px}.live-block .breaking-section .social-share ul li.desktop-hide,.live-block>.social-share ul li.desktop-hide{display:inline-block!important;}}
 .fifa_more_news a{color: #5794e0; position: relative; display: block; font-size: 11px; text-transform: uppercase; text-align: right; font-weight: 700;}
 /* magzine css */
 .print_digital{text-transform: uppercase; text-align: center; color: #8a8a8a; width: 60%; margin: 10px auto 0;  overflow: hidden;}
@@ -1438,5 +1437,8 @@ h1#display_tit .social-share li a.google{color:#bd1916}
     background:     -ms-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
     background:      -o-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
     background:         linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);}
-.live-block .breaking-section .social-share ul li a.whatsapp-icon{ background:#0dbe50}
-.live-block .breaking-section .social-share ul li a.whatsapp-icon i.fa-whatsapp:before{ position: relative;top:-2px}
+.live-block .breaking-section .social-share ul li,.live-block>.social-share ul li{ display:inline-block!important; }
+.live-block .breaking-section .social-share ul li.desktop-hide,.live-block>.social-share ul li.desktop-hide{display:none!important;}
+.live-block .breaking-section .social-share ul li:nth-child(1),.live-block>.social-share ul li:nth-child(1){ display:none;}
+.live-block .breaking-section .social-share ul li a.whatsapp-icon,.live-block>.social-share ul li a.whatsapp-icon{ background:#0dbe50}
+.live-block .breaking-section .social-share ul li a.whatsapp-icon i.fa-whatsapp:before,.live-block>.social-share ul li a.whatsapp-icon i.fa-whatsapp:before{ position: relative;top:-2px}
