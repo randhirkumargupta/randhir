@@ -161,13 +161,13 @@ function associate_video_to_node($filename, $nid){
         $node->comment = 0;
         $node->revision = 1;
         $node->status = 1;
-        //node_save($node);
+        node_save($node);
         
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
-       // $field_collection_item->save();
+        $field_collection_item->save();
        // var_dump($nid, $node);die;
         die('fff');
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
