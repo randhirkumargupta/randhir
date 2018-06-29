@@ -218,7 +218,7 @@ if(!empty($coverage_end)){
         <!--<h1><?php if ($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
         <?php print ($title) ?>
         <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
-        <?php ($type == 'Live Blog'){			
+        <?php if ($type == 'Live Blog') {			
 		  $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     
 	      $whatsapp = $node->title . " ". $actual_link;
 		  $whatsapp_text = urlencode($whatsapp);
