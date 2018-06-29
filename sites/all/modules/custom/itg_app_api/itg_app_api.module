@@ -270,6 +270,15 @@ function itg_app_api_menu() {
         'access arguments' => array('itg mobile feed'),
         'type' => MENU_NORMAL_ITEM,
     );
+    // menu for update config_update_status json
+    $items['admin/api-configuration/rest-api/popular-search-tv-json'] = array(
+        'title' => 'Update popular_search_tv json',
+        'description' => 'Update popular_search_tv json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('popular_search_tv_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
@@ -2995,3 +3004,22 @@ function cube_widget() {
 
     return system_settings_form($form);
 }
+
+/**
+ * popular_search_tv_json_json form decalation
+ *
+ * @return type
+ */
+function popular_search_tv_json() {
+    $form = array();
+
+    $form['itg_rapid_api_popular_search_tv'] = array(
+        '#type' => 'textarea',
+        '#title' => t('popular search tv'),
+        '#default_value' => variable_get('itg_rapid_api_popular_search_tv'),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
+}
+
