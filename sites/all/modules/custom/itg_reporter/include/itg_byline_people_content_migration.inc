@@ -31,7 +31,9 @@ function itg_people_migration() {
 
             $node->body[$node->language][0]['value'] = $value['main_text'] ? $value['main_text'] : '';
             $node->body[$node->language][0]['format'] = 'full_html';
-            $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id;;
+            $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id;
+            $node->field_select_url_type[LANGUAGE_NONE][0]['tid'] = $term_id;
+
             $node->metatags[LANGUAGE_NONE]['title']['value'] = '';
 
             if(!empty($value['metatitle'])){
