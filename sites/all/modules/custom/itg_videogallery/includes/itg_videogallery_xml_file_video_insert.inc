@@ -162,6 +162,7 @@ function associate_video_to_node($filename, $nid){
         $node->revision = 1;
         $node->status = 1;
         node_save($node);
+        $node = node_load($nid);
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
