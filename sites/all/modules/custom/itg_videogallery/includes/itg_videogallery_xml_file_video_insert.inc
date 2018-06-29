@@ -151,7 +151,7 @@ function itg_anchor_associate_video_cron(){
 function associate_video_to_node($filename, $nid){
   if (!empty($filename)) {    
     $video_info_arr = itg_get_video_info($filename);
-    if ($video_info_arr) {p($video_info_arr);
+    if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
       if (!empty($video_fid)) {
         $node = node_load($nid);
@@ -190,6 +190,7 @@ function associate_video_to_node($filename, $nid){
           ->condition('is_current', 1, '=')
           ->execute(); 
       }
+      p($node);
       return $node->nid;
     }
   }
