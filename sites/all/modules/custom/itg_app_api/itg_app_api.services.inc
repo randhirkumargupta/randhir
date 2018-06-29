@@ -6856,6 +6856,7 @@ function search_data_rest($token) {
     $data = array();
     $list = array();
     $loop_c = 0;
+    p($searchpage); 
     foreach ($searchpage as $key => $result) {
         $nid = $result->entity_id;
         $title = $result->label;
