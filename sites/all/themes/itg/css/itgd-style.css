@@ -1060,6 +1060,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .liveBlog-indiatoday .liveblog-Rhs a{ color:#393aa4; }
 .liveBlog-indiatoday .liveblog-Rhs .timeline .breaking-section .block-itg-ads{background: #f2f2f2; padding: 3px 10px 10px; width: 320px; margin: 0 auto; border: 1px solid #e0e0e0;}
 .liveBlog-indiatoday .liveblog-Rhs .social-share-new ul li.desktop-hide{ display:none; }
+.live-block .breaking-section .social-share ul li.desktop-hide,.live-block>.social-share ul li.desktop-hide{display:none!important;}
 @media screen and (max-width:767px){
 .liveBlog-indiatoday.livetv-active .liveblog-Lhs.mhide{ display:block; width:100%; margin-right: 0;}
 .liveBlog-indiatoday.livetv-active .liveblog-Rhs .stryimg { display: none; }
@@ -1438,7 +1439,6 @@ h1#display_tit .social-share li a.google{color:#bd1916}
     background:      -o-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);
     background:         linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.22) 50%, hsla(0,0%,0%,0) 100%);}
 .live-block .breaking-section .social-share ul li,.live-block>.social-share ul li{ display:inline-block!important; }
-.live-block .breaking-section .social-share ul li.desktop-hide,.live-block>.social-share ul li.desktop-hide{display:none!important;}
-.live-block .breaking-section .social-share ul li:nth-child(1),.live-block>.social-share ul li:nth-child(1){ display:none;}
+.live-block .breaking-section .social-share ul li:nth-child(1),.live-block>.social-share ul li:nth-child(1){ display:none !important;}
 .live-block .breaking-section .social-share ul li a.whatsapp-icon,.live-block>.social-share ul li a.whatsapp-icon{ background:#0dbe50}
 .live-block .breaking-section .social-share ul li a.whatsapp-icon i.fa-whatsapp:before,.live-block>.social-share ul li a.whatsapp-icon i.fa-whatsapp:before{ position: relative;top:-2px}
