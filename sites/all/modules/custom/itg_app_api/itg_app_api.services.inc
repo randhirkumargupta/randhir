@@ -6856,7 +6856,6 @@ function search_data_rest($token) {
     $data = array();
     $list = array();
     $loop_c = 0;
-    p($searchpage); 
     foreach ($searchpage as $key => $result) {
         $nid = $result->entity_id;
         $title = $result->label;
@@ -6900,7 +6899,7 @@ function search_data_rest($token) {
     $data['search_title'] = "$key_title";
     $data['layout_id'] = "0";
     $data['news_count'] = "$loop_c";
-    $data['news_display_count'] = "10";
+    $data['news_display_count'] = "100";
     $data['news_pagination_cap'] = "50";
     $data['updated_datetime'] = "";
     $data['news'] = $list;
@@ -6925,6 +6924,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $query->setSolrsort('ds_changed', 'desc');
         $query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('rows', '100');
         //$query->addParam('fq', "bundle_name:Video");
         $query->addParam('sort', "ds_changed DESC");
         $resp = $query->search();
