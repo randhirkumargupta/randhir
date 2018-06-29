@@ -647,8 +647,8 @@ function itg_videogallery_get_play_video_in_video_info($video_data) {
  */
 function itg_videogallery_make_bitrate_url($video_url, $bitrates,$hls) {
   $withoutExt = substr($video_url, 0 , (strrpos($video_url, ".")));
-  $find = array("/processing/");
-  $replace = array("/video/");
+  $find = array("/processing/", "/indiatoday_stg/", "/indiatoday_anchor/");
+  $replace = array("/video/", "/indiatoday/", "/indiatoday/");
   $withoutExt = (str_replace($find,$replace,$withoutExt));
   $with_hls_url = $hls.'/i'.'/'.$withoutExt.'_';
   $returnstring = $with_hls_url . ',' . implode(',', $bitrates) . ',.mp4.csmil/master.m3u8';
