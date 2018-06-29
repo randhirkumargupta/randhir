@@ -381,7 +381,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
     // $section_link .= l("Anchors", "anchors-list") . $node_title;
     $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-    $section_link .= l('<span itemprop="title">Authors</span>', 'authors-list', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+    $section_link .= l('<span itemprop="title">Anchors</span>', 'anchors-list', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
     $section_link .= $node_title;
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
