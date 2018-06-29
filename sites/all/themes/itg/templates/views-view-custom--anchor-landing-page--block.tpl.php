@@ -11,12 +11,17 @@ $uri = base64_encode($actual_link);
 //get follow anchor status
 $follow_status = $content["follow_status"];
 ?>
-<div class="anchor-landing">
-    <?php if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
-
-      <div class="anchor-video-wrapper">
+<div class="anchor-landing autohorsectonpage">
+    <?php
+    $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
+    $dev_arg = '';    
+    if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
+          $dev_arg = '99999';
+    }
+     if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
+      <div class="anchor-video-wrapper clearfix">
         <div id="anc-placeholder" style="display:none"></div>
-        <div id="stream-title" style="display:none"></div>
+   
         <script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>
         <script>
         window.lib = lib || {};
@@ -24,11 +29,16 @@ $follow_status = $content["follow_status"];
                 'site':'IT',
                 'playerPlacement':'jwplayerRef',
                 'commentPlacement':'commentRef',
-                'anchorId':<?php print $nid; ?>
+                'anchorId':<?php print $dev_arg . $nid; ?>
         });
         </script>
-        <div id="jwplayerRef"></div>
-        <div id="commentRef"></div>
+        <div class="anchors-col">
+          <div id="anchors_container" class="anchors-container">
+            <div id="anchor_title"></div>
+            <div id="jwplayerRef"></div>
+          </div>
+        </div>
+        <div id="commentRef" class="comment-col"></div>
       </div>
 
   <?php  endif; ?>
