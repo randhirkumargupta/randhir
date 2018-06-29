@@ -155,18 +155,23 @@ function associate_video_to_node($filename, $nid){
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
       
       if (!empty($video_fid)) {
-        
+        $node = node_load($nid);
+        //p($node);
         $node->promote = 0;
         $node->comment = 0;
         $node->revision = 1;
         $node->status = 1;
+        try{
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
         $field_collection_item->save();
-        $node = node_load($nid);
-        var_dump($nid, $node);die;
+        }
+        catch(Exception $e){
+          p($e);
+        }
+        var_dump('asd',$nid, $node);die;
         node_save($node);
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
         $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
