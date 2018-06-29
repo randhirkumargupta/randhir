@@ -69,7 +69,7 @@
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
 
-        <?php if(!empty($redirection_url)) { ?>          
+        <?php if(empty($redirection_url)) { ?>          
           <div class="social-share">
               <ul>
                   <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
