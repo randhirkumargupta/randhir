@@ -652,6 +652,7 @@ function itg_videogallery_make_bitrate_url($video_url, $bitrates,$hls) {
   $withoutExt = (str_replace($find,$replace,$withoutExt));
   $withoutExt = (str_replace("/indiatoday_stg/","/indiatoday/",$withoutExt));
   $withoutExt = (str_replace("/indiatoday_anchor/","/indiatoday/",$withoutExt));
+  p($withoutExt);
   $with_hls_url = $hls.'/i'.'/'.$withoutExt.'_';
   $returnstring = $with_hls_url . ',' . implode(',', $bitrates) . ',.mp4.csmil/master.m3u8';
   return $returnstring;
