@@ -15,7 +15,8 @@ $follow_status = $content["follow_status"];
   <?php
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper">
-        
+        <div id="anc-placeholder" style="display:none"></div>
+   
         <script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>
         <script>
         window.lib = lib || {};
@@ -32,7 +33,7 @@ $follow_status = $content["follow_status"];
             <div id="jwplayerRef"></div>
           </div>
         </div>
-        <div id="commentRef"></div>
+        <div id="commentRef" class="comment-col"></div>
       </div>
 
   <?php  endif; ?>
