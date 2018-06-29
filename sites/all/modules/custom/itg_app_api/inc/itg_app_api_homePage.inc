@@ -2083,10 +2083,10 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman;
 
-    $n_widget[0]['type'] = "4";
+    $n_widget[0]['type'] = "1";
     $n_widget[0]['type_label'] = "fifawc";
-    $n_widget[0]['tilte'] = "FIFA FIXTURES";
-    $n_widget[0]['short_url'] = "https://assets-indiatoday.sportz.io/multisport/horizontalWidget/fixtures-ol.html";
+    $n_widget[0]['tilte'] = "FIFA WC FIXTURE";
+    $n_widget[0]['short_url'] = "http://assets-indiatoday.sportz.io/multisport/horizontalWidget/fixtures-ol.html?app=true&match=l-u-r";
     $n_widget[0]['extended_url'] = "https://smedia2.intoday.in/app/fifa-2018/teams.html";
     $n_widget[0]['action'] = "webview";
     $n_widget[0]['isScalable'] = "0";
