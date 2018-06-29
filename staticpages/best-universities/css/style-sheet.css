@@ -22,7 +22,7 @@ nav {display:block; margin:20px auto 0; position:relative; font:16px Arial;}
 .navimg {margin-right:20px; margin-top: -2px;}
 nav ul {padding:0; margin:0; position:relative; list-style:none;}
 nav li {
-	border-left: 2px solid #516065;
+    border-left: 2px solid #516065;
     color: #D6D6D6;
     float: left;
     font: 24px arial;
@@ -35,11 +35,11 @@ nav li {
 
 nav li:hover{}
 nav li a {
-	color: #D6D6D6;
+    color: #D6D6D6;
     display: block;
     padding: 0 20px;
     text-decoration: none;
-	}
+    }
 nav li.home {margin-top:-10px; border:none;}
 
 
@@ -48,8 +48,8 @@ nav li.home {margin-top:-10px; border:none;}
 .main .left{float:left; width:670px;}
 .main .right{float:right; width:300px;}
 /**********************************************/
-#lead2012{background:url(../images/lead-bg.png) no-repeat; height:338px; width:670px; position:relative;}
-.leadleft{float:left; width:420px;}
+.leadleft{float:left; width:420px; padding:5px;}
+.The{padding-top:10px;}
 .leadright {
     float: right;
     height: 318px;
@@ -70,11 +70,11 @@ nav li.home {margin-top:-10px; border:none;}
 .title a:hover, .desc a:hover{text-decoration:underline;}
 
 .left ul {
-	font:12px/15px arial;
-	list-style:url(../images/arrow-bullet.gif);
-	margin:0;
-	padding:0 0 0 15px;
-	}
+    font:12px/15px arial;
+    list-style:url(../images/arrow-bullet.gif);
+    margin:0;
+    padding:0 0 0 15px;
+    }
 .left ul li{border-bottom:1px dotted #000000; margin-bottom:5px; padding-bottom:5px; color:#363636;}
 .left ul li a{ text-decoration:none; color:#363636;}
 .left ul li a:hover{text-decoration:underline}
@@ -204,5 +204,6 @@ ul#footer_menu li a:hover{text-decoration:underline;}
     width: 100%;
 }
 .imgrepeat{background-position:top center;background-repeat:no-repeat;width:88px;height:66px;float:left;margin-bottom:0px;}
+
 /********************************/
 
