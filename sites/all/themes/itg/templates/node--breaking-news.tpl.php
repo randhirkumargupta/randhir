@@ -218,13 +218,18 @@ if(!empty($coverage_end)){
         <!--<h1><?php if ($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
         <?php print ($title) ?>
         <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+        <?php ($type == 'Live Blog'){			
+		  $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     
+	      $whatsapp = $node->title . " ". $actual_link;
+		  $whatsapp_text = urlencode($whatsapp);
+		} ?>		
         <div class="social-share">
             <ul>
                 <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
                 <li><a title="share on facebook" class="facebook def-cur-pointer" onclick='fbpop("<?php print $share_page_link; ?>", "<?php print urlencode($share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $share_image; ?>", "<?php print $base_url; ?>", "<?php print $nid; ?>")'><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on twitter" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" class="user-activity twitter def-cur-pointer" onclick='twitter_popup("<?php print urlencode($share_title); ?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a></li>
                 <li><a title="share on google+" class="user-activity google def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $share_page_link; ?>")'></a></li>
-				
+				<?php if ($type == 'Live Blog'){ ?> <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li> <?php } ?>
             </ul>
             <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
              <span class="refresh-icon">Check Latest Updates <i onclick="location.reload();" style="cursor: pointer;" class="fa fa-refresh" aria-hidden="true"></i></span>
@@ -323,9 +328,6 @@ if(!empty($coverage_end)){
 			$settings['last'] = $slider_last_time;
 			$settings['first'] = $slider_first_time;
 			drupal_add_js(array('itg_front_end_common' => array('settings' => $settings)), array('type' => 'setting'));
-			$actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     
-		  $whatsapp = $node->title . " ". $actual_link;
-		  $whatsapp_text = urlencode($whatsapp);
 			foreach ($field_collection_ids as $breaking_item) {
         $breaking_output .= '<div class="breaking-section">';
         $field_collection_id = $breaking_item;
