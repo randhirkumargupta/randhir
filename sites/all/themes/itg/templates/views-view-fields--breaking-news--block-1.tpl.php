@@ -26,7 +26,7 @@
 <?php global $base_url; ?>
 <?php
   $path = 'node/' . $row->nid;  
-  print $actual_link = $base_url . '/' . drupal_get_path_alias($path);
+  $actual_link = $base_url . '/' . drupal_get_path_alias($path);
   $short_url = $actual_link;
   $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
   $redirection_url = $row->field_field_breaking_redirection_url[0]['raw']['value'];
