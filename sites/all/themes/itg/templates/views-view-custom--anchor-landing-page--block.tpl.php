@@ -19,7 +19,7 @@ $follow_status = $content["follow_status"];
           $dev_arg = '99999';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
-      <div class="anchor-video-wrapper clearfix mb-20">
+      <div class="anchor-video-wrapper clearfix">
         <div id="anc-placeholder" style="display:none"></div>
    
         <script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>
