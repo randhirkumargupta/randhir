@@ -133,16 +133,18 @@ function itg_anchor_associate_video_cron(){
   $query->fields('fvfn', array('field_video_file_name_value', 'entity_id'));
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $nids = array();
   foreach ($result as $value) {
-    associate_video_to_node($value->field_video_file_name_value, $value->entity_id);
+    $nids[] = associate_video_to_node($value['field_video_file_name_value'], $value['entity_id']);
   }
+  print json_decode($nids);
+  drupal_exit();
 }
 
 function associate_video_to_node($filename, $nid){
-  if (!empty($filename)) {
+  if (!empty($filename)) {    
     $video_info_arr = itg_get_video_info($filename);
-    p($video_info_arr);
-    if ($video_info_arr) {var_dump($filename, $nid);die;
+    if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
       if (!empty($video_fid)) {
         $node = node_load($nid);
@@ -167,12 +169,13 @@ function associate_video_to_node($filename, $nid){
           ->condition('is_current', 1, '=')
           ->execute(); 
       }
+      return $node->nid;
     }
   }
   return FALSE;
 }
 
-function itg_associate_video_id_to_pcontent($video_info_arr){
+function itg_associate_video_id_to_pcontent($video_info){
   if(empty($video_info) || count($video_info) == 0){
     return FALSE;
   }  
