@@ -166,7 +166,7 @@ function search_data_rest_callback($token) {
         $bundle = empty($result->bundle) ? '' : $result->bundle;
         $url = empty($result->url) ? '' : $result->url;
         $teaser = empty($result->teaser) ? '' : $result->teaser;
-        $teaser = addslashes($teaser);
+        $teaser = addslashes($teaser); 
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
@@ -203,7 +203,7 @@ function search_data_rest_callback($token) {
     $data['news'] = $list;
     $data_json['data'] = $data;
     //return $data_json;
-    $jsondata = json_encode($data_json);
+    $jsondata = json_encode($data_json, JSON_HEX_QUOT);
     print $jsondata;
     die();
 }
