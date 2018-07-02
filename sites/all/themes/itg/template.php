@@ -919,6 +919,7 @@ function itg_js_alter(&$javascript) {
     unset($javascript['modules/user/user.js']);
     unset($javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']);
     unset($javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']);
+    unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
   }
 }
 
