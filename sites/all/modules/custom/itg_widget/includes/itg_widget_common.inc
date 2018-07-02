@@ -3792,9 +3792,7 @@ function get_term_id_and_name($nid){
         on fd.field_select_url_type_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = $nid limit 1";
-    if($_GET['test'] == 'abc') {
-       print strtr((string) $query, $query->arguments());
-    }
+    
     $result = db_query($query);  
     $results = $result->fetchObject();
 
@@ -3804,9 +3802,6 @@ function get_term_id_and_name($nid){
         on fd.field_celebrity_pro_occupation_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = $nid limit 1";        
-        if($_GET['test'] == 'abc') {
-            print strtr((string) $querys, $querys->arguments());
-        }
         $result_pro = db_query($querys);
         return $results_pro = $result_pro->fetchObject();
     }
