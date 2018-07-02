@@ -53,6 +53,11 @@ function itg_custom_variables() {
     '#title' => t('DNS Preconnect Prefetch'),
     '#default_value' => get_itg_variable('dns_preconnect_prefetch'),
   );
+  $form['ros_dns_preconnect_prefetch'] = array(
+    '#type' => 'textarea',
+    '#title' => t('ROS DNS Preconnect Prefetch'),
+    '#default_value' => get_itg_variable('ros_dns_preconnect_prefetch'),
+  );
   $form['enable_custom_lazyload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Custom Lazy Load'),
