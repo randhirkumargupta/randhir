@@ -101,6 +101,12 @@ function itg_custom_variables() {
     '#title' => t('Third level menu show/hide at details page'),
     '#default_value' => get_itg_variable('status_third_level_menu'),
   );
+    
+  $form['ros_dns_preconnect_prefetch'] = array(
+    '#type' => 'textarea',
+    '#title' => t('ROS DNS Preconnect Prefetch'),
+    '#default_value' => get_itg_variable('ros_dns_preconnect_prefetch'),
+  );
 
   $form['submit_button'] = array(
     '#type' => 'submit',
