@@ -321,7 +321,7 @@ body {font: 400 15px/20px "OpenSans-Regular"; color: #111;}.comment-mobile.deskt
 .home-trending-video #trending-videos .trending-videos{overflow-x: hidden;}
 .home-trending-video #trending-videos .trending-videos li+li{ border-top:0px;}
 .home-trending-video #trending-videos .trending-videos .trending-videos-list .pic{ float: none; margin-right:0px; }
-.home-trending-video #trending-videos .trending-videos li a.pic:after{ background:transparent; }
+.home-trending-video #trending-videos .trending-videos li a.pic:after{background-color:rgba(0,0,0,1);width: 20px; height: 20px; padding: 2px;background: url(<?php print $sprite_path ?>) 3px -84px no-repeat;}
 .home-trending-video #trending-videos .trending-videos li span.pic.video-icon{position: relative; height: 24px;display: block;float: none;line-height: 23px; margin-top: 10px;}
 .home-trending-video #trending-videos .trending-videos li span.pic.video-icon:after{ font: normal normal normal 14px/1 FontAwesome; content:"\f01d"; font-size: 23px; color:#323232; bottom: 0;left: 0;background: transparent;top: 2px;}
 .videoicon.desktophide{ display:none; }

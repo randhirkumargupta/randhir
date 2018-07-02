@@ -31,7 +31,9 @@ function itg_people_migration() {
 
             $node->body[$node->language][0]['value'] = $value['main_text'] ? $value['main_text'] : '';
             $node->body[$node->language][0]['format'] = 'full_html';
-            $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id;;
+            $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id;
+            $node->field_select_url_type[LANGUAGE_NONE][0]['tid'] = $term_id;
+
             $node->metatags[LANGUAGE_NONE]['title']['value'] = '';
 
             if(!empty($value['metatitle'])){
@@ -48,16 +50,18 @@ function itg_people_migration() {
             //$node->changed = $value['modified'];
             if(!empty($value['kicker_image']) && $value['kicker_image'] != '-'){
               $existing_filepath = 'http://media2.intoday.in/indiatoday/images/stories/'.$value['kicker_image'];
-              try{
-                $drupal_file = file_save_data(@file_get_contents($existing_filepath), 'public://'.str_replace('+', '_', $value['kicker_image']));
-                if(!empty($value['kicker_image_alt_text'])){
-                  $drupal_file->alt = $value['kicker_image_alt_text'];
-                  $drupal_file->title = $value['kicker_image_alt_text'];
+              if (file_exists($existing_filepath)) {
+                try{
+                  $drupal_file = file_save_data(@file_get_contents($existing_filepath), 'public://'.str_replace('+', '_', $value['kicker_image']));
+                  if(!empty($value['kicker_image_alt_text'])){
+                    $drupal_file->alt = $value['kicker_image_alt_text'];
+                    $drupal_file->title = $value['kicker_image_alt_text'];
+                  }
+                  // Assign the file object to the node, as an array
+                  $node->field_story_extra_large_image[$node->language][0] = get_object_vars($drupal_file);
+                }catch(Exception $e){
+                  echo $key.'. Failed image migration:'.$value['id'].' --- '.$e->getMessage() . "<br><br>";
                 }
-                // Assign the file object to the node, as an array
-                $node->field_story_extra_large_image[$node->language][0] = get_object_vars($drupal_file);
-              }catch(Exception $e){
-                echo $key.'. Failed image migration:'.$value['id'].' --- '.$e->getMessage() . "<br><br>";
               }
             }
 

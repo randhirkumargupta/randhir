@@ -378,7 +378,11 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_link .= l('Blog', 'blog') . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
-    $term_name  =  strtolower($entity_object->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+     if(isset($node->field_select_url_type['und']) && !empty($node->field_select_url_type['und'][0]['tid'])){
+        $term_name  =  strtolower($entity_object->field_select_url_type['und'][0]['taxonomy_term']->name);
+      }else{
+        $term_name  =  strtolower($entity_object->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+      }
     if($term_name == 'people'){
       $section_link .= l("People", "people-list") . $node_title;
     }
