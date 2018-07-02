@@ -101,7 +101,20 @@ function itg_custom_variables() {
     '#title' => t('Third level menu show/hide at details page'),
     '#default_value' => get_itg_variable('status_third_level_menu'),
   );
+  
+  $form['sef_url_access'] = array(
+    '#type' => 'textfield',
+    '#title' => t('sefurl access by userid'),
+    '#default_value' => get_itg_variable('sef_url_access'),
+  );
 
+  $form['sef_url_status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('sefurl status'),
+    '#required' => FALSE,
+    '#default_value' => get_itg_variable('sef_url_status'),
+  );
+  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
