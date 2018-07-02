@@ -166,7 +166,7 @@ function search_data_rest_callback($token) {
         $bundle = empty($result->bundle) ? '' : $result->bundle;
         $url = empty($result->url) ? '' : $result->url;
         $teaser = empty($result->teaser) ? '' : $result->teaser;
-        $teaser = addcslashes($teaser, '"'); 
+        $teaser = strip_tags($teaser); 
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
