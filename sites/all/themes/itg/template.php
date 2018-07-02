@@ -895,6 +895,11 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
     $javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']['defer'] = TRUE;
   }
+  if ($arg[0] == 'video' && $arg[2] == 'embed') {
+	  foreach($javascript as $key=>$item) {		
+			unset($javascript[$key]);
+		}
+  }
 }
 
  /**
@@ -907,6 +912,7 @@ function itg_js_alter(&$javascript) {
 function itg_css_alter(&$css) {
    global $user;
    $type = '';
+   $arg = arg();
    if (arg(0) == 'node') {
      $node = menu_get_object();
      $type = $node->type;
@@ -977,6 +983,12 @@ function itg_css_alter(&$css) {
   if (($user->uid == 0) && (drupal_is_front_page())) {
     $css = array_diff_key($css, $exclude1);
   }
+  if ($arg[0] == 'video' && $arg[2] == 'embed') {
+	  foreach($css as $key=>$item) {		
+			unset($css[$key]);
+		}
+  }
+  
 }
 
 function itg_image($variables) {
