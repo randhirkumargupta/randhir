@@ -669,6 +669,7 @@ function itg_taxonomy_form_custom_callback($form, &$form_state) {
  * @return array $form
  */
 function itg_common_meta_token_remove($form, &$form_state) {
+  global $user;
   // for sef_url_access 
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
