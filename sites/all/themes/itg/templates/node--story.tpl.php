@@ -236,8 +236,8 @@ if(($primary_category == '1207047') || ($primary_category == '1207760')){
               $byline_detail = $byline_id[0];
               $extra_large_file = file_load($byline_detail['extra_large_image']);
                 $bylineextra_large_image = $extra_large_file->uri;                
-                $file_alt = isset($extra_large_file['und'][0]['alt']) ? $extra_large_file['und'][0]['alt'] : "";
-                $file_title = isset($extra_large_file['und'][0]['title']) ? $extra_large_file['und'][0]['title'] : "";
+                $file_alt = isset($extra_large_file->LANGUAGE_NONE[0]['alt']) ? $extra_large_file->LANGUAGE_NONE[0]['alt'] : "";
+                $file_title = isset($extra_large_file->LANGUAGE_NONE[0]['title']) ? $extra_large_file->LANGUAGE_NONE[0]['title'] : "";
                 if ($sponsor_text == ''):?>
                 <div class="profile-pic">
                   <?php
