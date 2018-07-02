@@ -61,8 +61,9 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<?xml version="1.0" encoding="ISO-8859-1"?><artical><magazine>India Today</magazine><frequency>Weekly</frequency>';
-    
+    $xml = '<?xml version="1.0" encoding="ISO-8859-1"?><artical>';
+    $xml .= '<magazine>India Today</magazine>';
+    $xml .= '<frequency>Weekly</frequency>';
     foreach ($result as $key => $value) {
       $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $byline = get_byline_name_by_nid($value['nid']);
@@ -73,8 +74,14 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
-      $xml .= '<section>' . $primary_cat . '</section><edition>' . $publish_date . '</edition><byline>' . $byline . '</byline><headline>' . $value['title'] . '</headline><introtext>' . $kicker_text . '</introtext><bodytext>'. $body.'<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright></bodytext>';
-      
+      $xml .= '<section>' . $primary_cat . '</section>';
+      $xml .= '<edition>' . $publish_date . '</edition>';
+      $xml .= '<byline>' . $byline . '</byline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
+      $xml .= '<introtext>' . $kicker_text . '</introtext>';
+      $xml .= '<bodytext>' . $body;
+      $xml .= '<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright>';
+      $xml .= '</bodytext>';
     }
     $xml .= '</artical>';
   }
