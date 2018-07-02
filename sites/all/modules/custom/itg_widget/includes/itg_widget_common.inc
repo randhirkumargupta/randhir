@@ -3795,8 +3795,10 @@ function get_term_id_and_name($nid){
     
     $result = db_query($query);  
     $results = $result->fetchObject();
-
-    if(is_object($results) && (count($results) < 1 || count($results) == 0)){
+    if($_GET['test'] == 'abc') {
+               pr($results);
+             }  
+    if(is_object($results) && count($results) < 1){
         $querys = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
         field_data_field_celebrity_pro_occupation fd inner join taxonomy_term_data t
         on fd.field_celebrity_pro_occupation_tid = t.tid
