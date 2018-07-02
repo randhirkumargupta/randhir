@@ -897,9 +897,28 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']['defer'] = TRUE;
   }
   if ($arg[0] == 'video' && $arg[2] == 'embed') {
-	  foreach($javascript as $key=>$item) {		
-			unset($javascript[$key]);
-		}
+    //unset($javascript['misc/drupal.js']);
+    //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+    unset($javascript['misc/jquery.once.js']);
+    unset($javascript['sites/all/themes/itg/js/slick.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
+    unset($javascript['sites/all/themes/itg/js/ripple.js']);
+    unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
+    unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
+    unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
+    unset($javascript['sites/all/themes/itg/js/script.js']);
+    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
+    unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
+    unset($javascript['modules/user/user.js']);
+    unset($javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']);
+    unset($javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']);
   }
 }
 
