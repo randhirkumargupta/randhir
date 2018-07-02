@@ -707,7 +707,7 @@ function itg_story_after_build($form, &$form_state) {
   // $settings['sef_url_access'] = false;
   if($_GET['test'] == 'abc') {
     pr($form['pathauto']);
-    $form['pathauto']['#type'] = 'hidden';
+    $form['path']['#access'] = FALSE;
   }
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';
