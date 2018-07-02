@@ -386,21 +386,6 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
   
-  $form['path']['#access'] = FALSE;  
-  // for sef_url_access 
-  $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
-  $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
-  $user_access_array = explode(',', $user_access_id);
-  
-  if(!empty($form['#node']->nid) && !empty($user_access_status)) {
-    $form['path']['#access'] = FALSE;    
-    if(is_array($user_access_array) && count($user_access_array) > 0) {
-      if(in_array($user->uid, $user_access_array))  {
-        $form['path']['#access'] = TRUE;        
-      }
-    }    
-  }   
-
   //$form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
 }
 
