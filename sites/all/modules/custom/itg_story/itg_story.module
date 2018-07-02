@@ -385,6 +385,20 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       }
       break;
   }
+  
+  // for sef_url_access 
+  $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
+  $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
+  $user_access_array = explode(',', $user_access_id);
+  
+  if(!empty($form['#node']->nid) && !empty($user_access_status)) {
+    $form['path']['#access'] = FALSE;    
+    if(is_array($user_access_array) && count($user_access_array) > 0) {
+      if(in_array($user->uid, $user_access_array))  {
+        $form['path']['#access'] = TRUE;        
+      }
+    }    
+  }   
 
   //$form['field_story_category']['und']['#config']['module'] = 'itg_category_manager';
 }
@@ -703,20 +717,6 @@ function itg_story_after_build($form, &$form_state) {
   $settings['uid'] = $user->uid;
   $settings['storyid'] = isset($form['#node']->nid) ? $form['#node']->nid : 0;
   
-  // for sef_url_access 
-  $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
-  $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
-  $user_access_array = explode(',', $user_access_id);
-  
-  if(!empty($form['#node']->nid) && !empty($user_access_status)) {
-    $form['path']['#access'] = FALSE;    
-    if(is_array($user_access_array) && count($user_access_array) > 0) {
-      if(in_array($user->uid, $user_access_array))  {
-        $form['path']['#access'] = TRUE;        
-      }
-    }    
-  }   
-
   drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story.js', array('weight' => 1, 'scope' => 'footer'));
 
