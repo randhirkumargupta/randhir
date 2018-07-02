@@ -59,7 +59,9 @@ function auscovery_dashboard_web($start_date, $end_date, $pageno) {
   }
   $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
   //$query->condition('autr.field_author_report_value', 'author_report', '=');
- // $query->groupBy('n.nid');
+  if (!empty($_GET['multiple'])) {
+   $query->groupBy('n.nid'); 
+  }
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   if (!empty($limit)) {
 	$query->range($range_min, $range_max);
