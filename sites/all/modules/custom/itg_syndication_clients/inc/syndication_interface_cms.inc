@@ -78,8 +78,8 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<byline>' . $byline . '</byline>';
       $xml .= '<headline>' . $value['title'] . '</headline>';
-      $xml .= '<introtext>' . $kicker_text . '</introtext>';
-      $xml .= '<bodytext>' . $body;
+      $xml .= '<introtext>' . trim($kicker_text) . '</introtext>';
+      $xml .= '<bodytext>' . trim($body);
       $xml .= '<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright>';
       $xml .= '</bodytext>';
     }
