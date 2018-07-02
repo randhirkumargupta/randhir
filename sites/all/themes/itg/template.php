@@ -1020,7 +1020,7 @@ function itg_image($variables) {
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  if ((drupal_is_front_page() && $type == 'story') && (get_itg_variable('enable_custom_lazyload'))) {
+  if ((drupal_is_front_page() || $type == 'story') && (get_itg_variable('enable_custom_lazyload'))) {
     $attributes['data-src'] = file_create_url($variables['path']);
     $attributes['src'] = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image370x208.jpg');
     $attributes['class'] = array('lazyload');
