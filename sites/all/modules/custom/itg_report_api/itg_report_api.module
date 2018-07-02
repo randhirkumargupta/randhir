@@ -46,3 +46,199 @@ function itg_report_api_url_inbound_alter(&$result, $path, $path_language) {
   }
 }
 
+/**
+ * Implements hook_menu().
+ */
+function itg_report_api_menu() {
+    $items = array();
+    $items['appapi-breaking-news'] = array(
+        'title' => 'appapi breaking news',
+        'description' => 'appapi breaking news',
+        'page callback' => 'appapi_breaking_news',        
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['appapi-search'] = array(
+        'title' => 'appapi breaking news',
+        'description' => 'appapi search',
+        'page callback' => 'search_data_rest_callback',        
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+/**
+ * appapi_breaking_news
+ */
+function appapi_breaking_news() {
+    // call breaking news view
+    $view_result = views_get_view_result('breaking_news', 'block_1');
+    $nid = $view_result[0]->nid;
+    $data = array();
+    if (isset($nid) && $nid > 0) {
+        // select breaking news..
+        $alias = drupal_get_path_alias('node/' . $nid . '');
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+        $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+        $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+        $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+        $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+        $query->fields('mi', array('field_story_medium_image_fid'));
+        $query->fields('si', array('field_story_small_image_fid'));
+        $query->fields('dbody', array('body_value'));
+        $query->condition('n.nid', $nid);
+
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+        $title = $result[0]['title'];
+        $body = $result[0]['body_value'];
+        $create_date = date("F d, Y", $result[0]['created']);
+        $create_datetime = date(DATE_ATOM, $result[0]['created']);
+        $changed = date(DATE_ATOM, $result[0]['changed']);
+        $file_medium_img_url = completeFilePath($result[0]['field_story_medium_image_fid']);
+        $field_story_small_image_fid = completeFilePath($result[0]['field_story_small_image_fid']);
+        $web_url = FRONT_URL . "/" . $alias;
+        $created_by = $result[0]['uid'];
+        $city = getCityByNid($nid);
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+        $news = array();
+        $news['id'] = "$nid";
+        $news['title'] = "$title";
+        $news['url'] = "$web_url";
+        $news['published'] = "1";
+        $news['created'] = "$create_datetime";
+        $news['created_by'] = "$created_by";
+        $news['modified'] = "$changed";
+        $news['modified_by'] = "$created_by";
+        $detail = array();
+        $detail['id'] = "0";
+        $detail['site'] = "India Today";
+        $detail['name'] = "Breaking News";
+        $detail['type'] = "breaking_news";
+        $detail['count'] = "1";
+        $detail['display_count'] = "1";
+        $detail['pagination_cap'] = "1";
+        $detail['news'] = $news;
+        $data['data'] = $detail;
+    } else {
+        $data['status_code'] = "0";
+        $data['status_message'] = "";
+        $news = array();
+        $detail = array();
+        $detail['id'] = "0";
+        $detail['site'] = "India Today";
+        $detail['name'] = "Breaking News";
+        $detail['type'] = "breaking_news";
+        $detail['count'] = "0";
+        $detail['display_count'] = "1";
+        $detail['pagination_cap'] = "1";
+        $detail['news'] = $news;
+        $data['data'] = $detail;
+    }
+    $jsondata = json_encode($data);
+    print $jsondata;
+    die();
+}
+
+/**
+ * search_data_rest_callback
+ */
+function search_data_rest_callback($token) {
+    $key_title = $_GET['key'];
+    $nid_ar = array();
+    $searchpage = solr_search_custom_results_restapi_callback($key_title);
+    //p($searchpage);
+    $data_json = array();
+    $data = array();
+    $list = array();
+    $loop_c = 0;
+    foreach ($searchpage as $key => $result) {
+        $nid = $result->entity_id;
+        $title = $result->label;
+        $image_courtesy = FRONT_URL;
+
+        $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
+        $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
+        $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
+        $body = empty($result->content) ? '' : $result->content;
+        $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
+        $bundle = empty($result->bundle) ? '' : $result->bundle;
+        $url = empty($result->url) ? '' : $result->url;
+        $teaser = empty($result->teaser) ? '' : $result->teaser;
+        $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
+        $list[$loop_c]['n_id'] = "$nid";
+        //$list[$loop_c]['n_type'] = "$bundle";
+        if ($bundle == "breaking_news") {
+            $list[$loop_c]['n_type'] = "story";
+            $list[$loop_c]['n_is_blog'] = "1";
+        } else {
+            $list[$loop_c]['n_type'] = "$bundle";
+            $list[$loop_c]['n_is_blog'] = "0";
+        }
+        $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
+        $list[$loop_c]['n_is_sponsored'] = "0";
+        $list[$loop_c]['n_share_link'] = "$url";
+        $list[$loop_c]['n_title'] = "$title";
+        $list[$loop_c]['n_short_desc'] = "$teaser";
+        $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
+        $list[$loop_c]['n_large_image'] = "$extra_large_image";
+        $list[$loop_c]['n_updated_datetime'] = "$date_val";
+        $loop_c++;
+    }
+    $data_json['status_code'] = "1";
+    $data_json['status_message'] = "";
+    if ($loop_c == 0) {
+        $data_json['status_code'] = "0";
+        $data_json['status_message'] = "";
+    }
+    $data['id'] = "0";
+    $data['search_title'] = "$key_title";
+    $data['layout_id'] = "0";
+    $data['news_count'] = "$loop_c";
+    $data['news_display_count'] = "10";
+    $data['news_pagination_cap'] = "50";
+    $data['updated_datetime'] = "";
+    $data['news'] = $list;
+    $data_json['data'] = $data;
+    //return $data_json;
+    $jsondata = json_encode($data_json);
+    print $jsondata;
+    die();
+}
+
+/**
+ * Callback for solr service.
+ */
+function solr_search_custom_results_restapi_callback($key, $fields, $facets = FALSE, $page = 0) {
+    $link_ar = array();
+    $nid_ar = array();
+    $stdkeys = explode(',', str_replace(' ', '', $fields));
+    $results = array();
+
+    try {
+        $key = preg_replace('/\s+/', ' OR ', $key);
+        $solr = apachesolr_get_solr();
+        $query = apachesolr_drupal_query("custom", array('q' => $key));
+        $query->setSolrsort('ds_changed', 'desc');
+        $query->removeFilter('bundle_name');
+        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        //$query->addParam('fq', "bundle_name:Video");
+        $query->addParam('sort', "ds_changed DESC");
+        $resp = $query->search();
+        if (!empty($resp->data)) {
+            $data = json_decode($resp->data);
+        }
+        $results = $data->response->docs;
+    } catch (Exception $e) {
+        watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
+        apachesolr_failure(t('Solr search'), $key);
+    }
+
+    if ($results and is_array($results) and count($results)) {
+        return $results;
+    }
+    return FALSE;
+}
+
