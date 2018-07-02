@@ -3792,24 +3792,23 @@ function get_term_id_and_name($nid){
         on fd.field_select_url_type_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = $nid limit 1";
-    $result = db_query($query);
     if($_GET['test'] == 'abc') {
-       print "field_select_url_type_tid = " . strtr((string) $query, $query->arguments());
+       print strtr((string) $query, $query->arguments());
     }
-   
+    $result = db_query($query);  
     $results = $result->fetchObject();
 
     if(count($results) < 1){
-        $query = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
+        $querys = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
         field_data_field_celebrity_pro_occupation fd inner join taxonomy_term_data t
         on fd.field_celebrity_pro_occupation_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
-        and fd.entity_id = $nid limit 1";
-        $result = db_query($query);
+        and fd.entity_id = $nid limit 1";        
         if($_GET['test'] == 'abc') {
-       print "field_celebrity_pro_occupation_tid = " . strtr((string) $query, $query->arguments());
-         }
-        $results = $result->fetchObject();
+            print strtr((string) $querys, $querys->arguments());
+        }
+        $result_pro = db_query($querys);
+        return $results_pro = $result_pro->fetchObject();
     }
     return $results;
   }
