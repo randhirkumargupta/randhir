@@ -166,7 +166,7 @@ function search_data_rest_callback($token) {
         $bundle = empty($result->bundle) ? '' : $result->bundle;
         $url = empty($result->url) ? '' : $result->url;
         $teaser = empty($result->teaser) ? '' : $result->teaser;
-        $teaser = html_entity_decode($teaser); 
+        $teaser_fi = strip_tags($teaser); 
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
@@ -181,7 +181,7 @@ function search_data_rest_callback($token) {
         $list[$loop_c]['n_is_sponsored'] = "0";
         $list[$loop_c]['n_share_link'] = "$url";
         $list[$loop_c]['n_title'] = "$title";
-        $list[$loop_c]['n_short_desc'] = "$teaser";
+        $list[$loop_c]['n_short_desc'] = "$teaser_fi";
         $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
         $list[$loop_c]['n_large_image'] = "$extra_large_image";
         $list[$loop_c]['n_updated_datetime'] = "$date_val";
