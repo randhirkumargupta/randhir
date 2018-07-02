@@ -674,11 +674,12 @@ function itg_common_meta_token_remove($form, &$form_state) {
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
   $user_access_array = explode(',', $user_access_id);
   
-  if(!empty($form['#node']->nid) && !empty($user_access_status)) {
-    $form['path']['#access'] = FALSE;    
+  if(!empty($form['#node']->nid) && !empty($user_access_status)) {       
     if(is_array($user_access_array) && count($user_access_array) > 0) {
       if(in_array($user->uid, $user_access_array))  {
         $form['path']['#access'] = TRUE;        
+      } else {
+        $form['path']['#access'] = FALSE; 
       }
     }    
   }   
