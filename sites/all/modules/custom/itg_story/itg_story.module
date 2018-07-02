@@ -386,6 +386,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       break;
   }
   
+  $form['path']['#access'] = FALSE;  
   // for sef_url_access 
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
