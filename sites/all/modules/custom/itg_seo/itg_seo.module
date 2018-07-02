@@ -378,15 +378,24 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_link .= l('Blog', 'blog') . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
-    $term_name  =  strtolower($entity_object->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+     if(isset($node->field_select_url_type['und']) && !empty($node->field_select_url_type['und'][0]['tid'])){
+        $term_name  =  strtolower($entity_object->field_select_url_type['und'][0]['taxonomy_term']->name);
+      }else{
+        $term_name  =  strtolower($entity_object->field_celebrity_pro_occupation['und'][0]['taxonomy_term']->name);
+      }
     if($term_name == 'people'){
       $section_link .= l("People", "people-list") . $node_title;
     }
     elseif($term_name == 'reporter'){
-      $section_link .= l("Authors", "authors-list") . $node_title;
+      // $section_link .= l("Authors", "authors-list") . $node_title;
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
+      $section_link .= l('<span itemprop="title">Authors</span>', 'authors-list', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+      $section_link .= $node_title;
     }
     else{
-      $section_link .= l("Anchors", "anchors-list") . $node_title;
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
+      $section_link .= l('<span itemprop="title">Authors</span>', 'authors-list', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+      $section_link .= $node_title;
     }
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {

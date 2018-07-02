@@ -834,7 +834,13 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-  //print_r($javascript); die; 
+  //print_r($javascript); die;  
+   $type = '';
+   $arg = arg();
+   if (arg(0) == 'node') {
+     $node = menu_get_object();
+     $type = $node->type;
+   } 
   unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
@@ -895,6 +901,38 @@ function itg_js_alter(&$javascript) {
     $javascript['sites/all/themes/itg/js/script.js']['defer'] = TRUE;
     $javascript['sites/all/modules/custom/itg_flag/js/itg_flag.js']['defer'] = TRUE;
   }
+  if ($arg[0] == 'video' && $arg[2] == 'embed') {
+    //unset($javascript['misc/drupal.js']);
+    //unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
+    unset($javascript['misc/jquery.once.js']);
+    unset($javascript['sites/all/themes/itg/js/slick.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.liMarquee.js']);
+    unset($javascript['sites/all/themes/itg/js/ripple.js']);
+    unset($javascript['sites/all/themes/itg/js/bootstrap.min.js']);
+    unset($javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']);
+    unset($javascript['sites/all/themes/itg/js/stickyMojo.js']);
+    unset($javascript['sites/all/themes/itg/js/ion.rangeSlider.js']);
+    unset($javascript['sites/all/themes/itg/js/script.js']);
+    unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+    unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
+    unset($javascript['sites/all/modules/custom/itg_akamai_block_refresh/js/itg_akamai_block_refresh.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget.js']);
+    unset($javascript['sites/all/modules/custom/itg_widget/js/itg_widget_ipl.js']);
+    unset($javascript['modules/user/user.js']);
+    unset($javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']);
+    unset($javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']);
+    unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
+  }
+  if($type == 'story'){
+	foreach ($javascript as $key => $value) {
+	  if($key != 'misc/drupal.js' && $key != 'sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js'){
+		  $javascript[$key]['defer'] = TRUE;
+	  }      
+	}
+  }
 }
 
  /**
@@ -907,6 +945,7 @@ function itg_js_alter(&$javascript) {
 function itg_css_alter(&$css) {
    global $user;
    $type = '';
+   $arg = arg();
    if (arg(0) == 'node') {
      $node = menu_get_object();
      $type = $node->type;
@@ -977,13 +1016,23 @@ function itg_css_alter(&$css) {
   if (($user->uid == 0) && (drupal_is_front_page())) {
     $css = array_diff_key($css, $exclude1);
   }
+  if ($arg[0] == 'video' && $arg[2] == 'embed') {
+	  foreach($css as $key=>$item) {		
+			unset($css[$key]);
+		}
+  }
+  
 }
 
 function itg_image($variables) {
+  if (arg(0) == 'node') {
+     $node = menu_get_object();
+     $type = $node->type;
+   }
   $attributes = $variables['attributes'];
   // unset done for seo validation.
   unset($attributes['typeof']);
-  if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+  if ((drupal_is_front_page() || $type == 'story') && (get_itg_variable('enable_custom_lazyload'))) {
     $attributes['data-src'] = file_create_url($variables['path']);
     $attributes['src'] = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image370x208.jpg');
     $attributes['class'] = array('lazyload');

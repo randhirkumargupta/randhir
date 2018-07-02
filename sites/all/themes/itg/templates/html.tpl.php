@@ -134,6 +134,7 @@
 <?php if(($type == 'story')){ 
 $sprite_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/sprite.png');
 $control_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/controls.png');
+$js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); 
 ?>
 <style>
 * {box-sizing: border-box; }
@@ -288,6 +289,7 @@ section.sidebar {border: 1px solid #ddd;width: 100%;max-width: 370px;}
 .share_bar .social-share .fa-comment {color: #a2a2a2;}
 }
 </style>
+<script type="text/javascript" async src="<?php print $js_path; ?>"></script>
 <?php } ?>
 <?php if($front_page) : 
 $js_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/js/lazysizes.min.js'); 

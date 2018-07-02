@@ -9,7 +9,8 @@
             var uid = settings.itg_story.settings.uid;
             var sef_url_access = settings.itg_story.settings.sef_url_access;
             console.log('sef_url_access = ' + sef_url_access);
-            if (typeof (sef_url_access) != undefined && sef_url_access != null) {
+            if (typeof (sef_url_access) != undefined && sef_url_access != null && (sef_url_access === true)) {
+                console.log('sef_url_access  test = ' + sef_url_access);
                 jQuery('#edit-path-pathauto').attr('disabled','disabled');
                 jQuery('#edit-path-pathauto').prop('checked', false);
                 jQuery('#edit-path-alias').attr('disabled','disabled');

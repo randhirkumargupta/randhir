@@ -1,3 +1,6 @@
+<style type="text/css">
+.node-type-reporter.section-anchor h1.page__title{display:none;}
+</style>
 <?php
 /**
  * @file

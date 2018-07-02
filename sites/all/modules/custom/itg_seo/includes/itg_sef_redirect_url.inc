@@ -124,7 +124,11 @@ function itg_common_custompath_insert_load($node) {
       return $newpath;
     }
   } elseif ($node->type == 'reporter') {
-    $occupation_tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
+      if(isset($node->field_select_url_type['und']) && !empty($node->field_select_url_type['und'][0]['tid'])){
+        $occupation_tid = $node->field_select_url_type['und'][0]['tid'];
+      }else{
+        $occupation_tid = $node->field_celebrity_pro_occupation['und'][0]['tid'];
+      }
     $occupation = _occupation_from_tid_for_sef_url($occupation_tid);
     if($occupation == 'reporter'){
       $occupation = 'author';

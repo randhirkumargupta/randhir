@@ -704,15 +704,16 @@ function itg_story_after_build($form, &$form_state) {
   $settings['storyid'] = isset($form['#node']->nid) ? $form['#node']->nid : 0;
   
   // for sef_url_access
-  $settings['sef_url_access'] = FALSE;
+  $settings['sef_url_access'] = false;
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';
+  
   $user_access_array = explode(',', $user_access_id);
-  if(!empty($form['#node']->nid) && isset($user_access_status)) {
-     $settings['sef_url_access'] = TRUE;
+  if(!empty($form['#node']->nid) && !empty($user_access_status)) {
+     $settings['sef_url_access'] = true;
     if(is_array($user_access_array) && count($user_access_array) > 0) {
       if(in_array($user->uid, $user_access_array))  {
-        $settings['sef_url_access'] = FALSE;
+        $settings['sef_url_access'] = false;
       }
     }    
   }   
@@ -1226,6 +1227,9 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $body_text = $node->body[LANGUAGE_NONE][0]['value'];
       $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
       $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
+    }
+    if (isset($node->field_story_associate_lead[LANGUAGE_NONE][0]['value']) && $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+      drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
     }
   }
 }

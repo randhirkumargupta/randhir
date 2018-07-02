@@ -12,11 +12,44 @@ $uri = base64_encode($actual_link);
 $follow_status = $content["follow_status"];
 ?>
 <div class="anchor-landing autohorsectonpage">
+  <?php
+    $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
+    $dev_arg = '';
+    $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>';
+    
+    if (in_array($_SERVER['HTTP_HOST'], $domain_arr) && $_GET['test'] != '1234') {
+          $dev_arg = '99999';
+          $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/it_staging_custom.js"></script>';
+    }
+     if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
+      <div class="anchor-video-wrapper clearfix">
+        <div id="anc-placeholder" style="display:none"></div>
+   
+        <?php print $jspath; ?>
+        <script>
+        window.lib = lib || {};
+        lib.setup({
+                'site':'IT',
+                'playerPlacement':'jwplayerRef',
+                'commentPlacement':'commentRef',
+                'anchorId':<?php print $dev_arg . $nid; ?>
+        });
+        </script>
+        <div class="anchors-col">
+          <div id="anchors_container" class="anchors-container">
+            <div id="anchor_title"></div>
+            <div id="jwplayerRef"></div>
+          </div>
+        </div>
+        <div id="commentRef" class="comment-col"></div>
+      </div>
+
+  <?php  endif; ?>
   <div class="anchor">
     <div class="anchor-left">
       <?php
       if(isset($anchor['field_story_extra_large_image'])) {
-        echo $anchor['field_story_extra_large_image'];
+        echo '<div class="reporter-image-responsive-css">'.$anchor['field_story_extra_large_image'].'</div>';
          if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people'){
           echo '<div class="people-img-title">'.$anchor['title'].'</div>';
         }
@@ -90,7 +123,7 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-author .social-icon ul li a::first-letter{display:none;}
 .node-type-reporter.section-author .social-icon ul li a{text-indent:-9999;}
 .node-type-reporter.section-author ul.author-story-wrapper{list-style:none; padding:0; margin:30px 0 0 0;}
-.node-type-reporter.section-author ul.author-story-wrapper li{padding-bottom:30px;}
+.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom:30px;}
 .node-type-reporter.section-author ul.author-story-wrapper li:first-child{padding-left:0;}
 .node-type-reporter.section-author ul.author-story-wrapper li span{display: block;font-size: 12px; color: #b1b1b1;padding: 8px 0 5px;}
 .node-type-reporter.section-author ul.author-story-wrapper li a{color:##494949; font:400 15px/20px "OpenSans-Regular";}
@@ -99,6 +132,7 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-people .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
 .node-type-reporter.section-people .anchor{box-shadow:none !important; margin-bottom:40px;}
 .node-type-reporter.section-people .anchor-left{position:relative;}
+.node-type-reporter .anchor-left .reporter-image-responsive-css{width:370px;}
 .node-type-reporter.section-people .people-img-title{position: absolute;bottom: 0;background: #000;width: 100%;color: #fff;font-size: 15px;line-height: 20px;padding: 3px 8px;
 box-sizing: border-box;}
 .node-type-reporter.section-people .people-img-title a{color: #fff;font-size: 17px;font-weight: bold;}
@@ -119,5 +153,23 @@ box-sizing: border-box;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption{position: absolute;bottom: 0;background: rgba(0,0,0,0.6);color: #fff;padding: 0 5px;font-size: 12px;}
 .node-type-reporter.section-people .main-video-wrapper ul li .title figcaption i,.node-type-reporter.section-people .main-photo-wrapper ul li .title figcaption i{margin-right: 5px;font-size: 15px;line-height: 20px;}
 .node-type-reporter.section-people .main-video-wrapper .posted-on,.node-type-reporter.section-people .main-photo-wrapper .posted-on{color:#b1b1b1; font-size:12px;}
+
+@media screen and (max-width:900px){
+	.node-type-reporter.section-author .tile{float:left; width:100%; margin-bottom:20px;}
+	.node-type-reporter.section-author .tile figure{float:left; margin-right:20px;}
+	.node-type-reporter.section-author ul.author-story-wrapper li:first-child{padding-left:15px}
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 25%;float: left;height: auto; overflow-y:inherit;}	
+	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:350px;}
+}
+@media screen and (max-width:767px){
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
+}
+@media screen and (max-width:680px){
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
+}
+@media screen and (max-width:480px){
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+}
 
 </style>

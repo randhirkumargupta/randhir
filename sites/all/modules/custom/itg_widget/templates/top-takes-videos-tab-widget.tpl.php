@@ -14,6 +14,7 @@ if($is_fron_page){
             <?php if (!empty($video_data['mi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">         
               <?php //$extra_large_image_url = image_style_url("widget_very_small", $video_data['mi_file_uri']); ?>
+
               <?php print theme('image', array('path' => $video_data['mi_file_uri'], 'alt' => $video_data['field_story_medium_image_alt'], 'title' => $video_data['field_story_medium_image_title'])); ?>              
             </a>
             <?php
