@@ -3804,7 +3804,8 @@ function get_term_id_and_name($nid){
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = '".$nid."' limit 1";        
         $result_pro = db_query($querys);
-        return $results_pro = $result_pro->fetchObject();
+        pr($result_pro);
+        return $data = $result_pro->fetchObject();
     }
     return $results;
   }
