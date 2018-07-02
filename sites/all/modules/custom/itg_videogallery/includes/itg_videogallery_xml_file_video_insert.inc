@@ -192,7 +192,7 @@ function associate_video_to_node($filename, $nid){
           ->fields(array(
             'state' => workbench_moderation_state_published(),
             'published' => 1,
-            'uid' => ADMINISTRATOR,
+            'uid' => 1522,
           ))
           ->condition('nid', $node->nid, '=')
           ->condition('is_current', 1, '=')
