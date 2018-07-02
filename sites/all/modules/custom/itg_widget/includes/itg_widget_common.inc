@@ -3794,7 +3794,7 @@ function get_term_id_and_name($nid){
         and fd.entity_id = $nid limit 1";
     $result = db_query($query);
     if($_GET['test'] == 'abc') {
-       print "field_select_url_type_tid = " . strtr((string) $query, $query->arguments()); die; 
+       print "field_select_url_type_tid = " . strtr((string) $query, $query->arguments());
     }
    
     $results = $result->fetchObject();
@@ -3807,7 +3807,7 @@ function get_term_id_and_name($nid){
         and fd.entity_id = $nid limit 1";
         $result = db_query($query);
         if($_GET['test'] == 'abc') {
-       print "field_celebrity_pro_occupation_tid = " . strtr((string) $query, $query->arguments()); die; 
+       print "field_celebrity_pro_occupation_tid = " . strtr((string) $query, $query->arguments());
          }
         $results = $result->fetchObject();
     }
