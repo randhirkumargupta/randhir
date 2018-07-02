@@ -30,6 +30,7 @@
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php
     $arg = arg();
+    //print_r($arg);die;
     $front_page = drupal_is_front_page();
     global $base_url;
     $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
