@@ -75,8 +75,10 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $kicker_text = trim($kicker_text);
       $kicker_text = rtrim($kicker_text, "<p> </p>");
+      $kicker_text = str_replace("<p> </p>", "", $kicker_text);
       $body = trim($body);
       $body = rtrim($body, "<p> </p>");
+      $body = str_replace("<p> </p>", "", $body);
       $body = addslashes($body);
       $kicker_text = addslashes($kicker_text);
       $xml .= '<section>' . $primary_cat . '</section>';
