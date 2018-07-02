@@ -1923,9 +1923,7 @@ function itg_widget_preprocess_node(&$vars) {
             $nid = arg(1);
 
             $term_data = get_term_id_and_name($nid);
-             if($_GET['test'] == 'abc') {
-               pr($term_data);
-             }
+             
             if(!empty($term_data)){
               $term_name = strtolower($term_data->name);
               $tid = $term_data->tid;
@@ -3797,14 +3795,12 @@ function get_term_id_and_name($nid){
     $results = $result->fetchObject();
     
     if(empty($results)){
-      print "test";
         $querys = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
         field_data_field_celebrity_pro_occupation fd inner join taxonomy_term_data t
         on fd.field_celebrity_pro_occupation_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = '".$nid."' limit 1";        
         $result_pro = db_query($querys);
-        pr($result_pro);
         return $data = $result_pro->fetchObject();
     }
     return $results;
