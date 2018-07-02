@@ -67,8 +67,8 @@ function itg_report_api_menu() {
     );
     $items['appapi-popular-search'] = array(
         'title' => 'appapi breaking news',
-        'description' => 'appapi search',
-        'page callback' => 'search_data_rest_callback',        
+        'description' => 'appapi popular search',
+        'page callback' => 'itg_rapid_api_popular_search_tv_callback',        
         'access arguments' => array('access content'),
         'type' => MENU_NORMAL_ITEM,
     );
