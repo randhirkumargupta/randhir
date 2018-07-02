@@ -707,12 +707,9 @@ function itg_story_after_build($form, &$form_state) {
   $settings['sef_url_access'] = false;
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
   $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';
-  if($_GET['test'] == 'xyz') {
-    pr($user_access_id);
-    print "user_access_status = ". $user_access_status;
-  }
+  
   $user_access_array = explode(',', $user_access_id);
-  if(!empty($form['#node']->nid) && isset($user_access_status)) {
+  if(!empty($form['#node']->nid) && !empty($user_access_status)) {
      $settings['sef_url_access'] = true;
     if(is_array($user_access_array) && count($user_access_array) > 0) {
       if(in_array($user->uid, $user_access_array))  {
