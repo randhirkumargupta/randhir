@@ -202,7 +202,7 @@ function search_data_rest_callback($token) {
     $data['news'] = $list;
     $data_json['data'] = $data;
     //return $data_json;
-    $jsondata = json_encode($data_json, JSON_FORCE_OBJECT);
+    $jsondata = json_encode($data_json, JSON_HEX_QUOT);
     print $jsondata;
     die();
 }
@@ -225,6 +225,7 @@ function solr_search_custom_results_restapi_callback($key, $fields, $facets = FA
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         //$query->addParam('fq', "bundle_name:Video");
         $query->addParam('sort', "ds_changed DESC");
+        $query->addParam('rows', "100");
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
