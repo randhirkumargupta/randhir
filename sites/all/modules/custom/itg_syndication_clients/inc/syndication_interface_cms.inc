@@ -73,13 +73,18 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
-
+      $kicker_text = trim($kicker_text);
+      $kicker_text = trim($kicker_text, "<p> </p>");
+      $body = trim($body);
+      $body = trim($body, "<p> </p>");
+      $body = addslashes($body);
+      $kicker_text = addslashes($kicker_text);
       $xml .= '<section>' . $primary_cat . '</section>';
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<byline>' . $byline . '</byline>';
       $xml .= '<headline>' . $value['title'] . '</headline>';
-      $xml .= '<introtext>' . trim($kicker_text) . '</introtext>';
-      $xml .= '<bodytext>' . trim($body);
+      $xml .= '<introtext>' . $kicker_text . '</introtext>';
+      $xml .= '<bodytext>' . $body;
       $xml .= '<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright>';
       $xml .= '</bodytext>';
     }
