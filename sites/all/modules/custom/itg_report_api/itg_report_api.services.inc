@@ -645,7 +645,10 @@ function itg_report_api_auscovery_dashboard_web() {
   }
   $suffix = $start_date . "_" . $end_date."_".$pageno;
   if (!empty($_GET['limit'])) {
-	$suffix = $suffix . '_'. $_GET['limit'];
+	  $suffix = $suffix . '_'. $_GET['limit'];
+  }
+  if (!empty($_GET['multiple'])) {
+	  $suffix = $suffix . '_'. $_GET['multiple'];
   }
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
 
