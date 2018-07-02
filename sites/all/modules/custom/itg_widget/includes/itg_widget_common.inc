@@ -3803,11 +3803,11 @@ function get_term_id_and_name($nid){
         field_data_field_celebrity_pro_occupation fd inner join taxonomy_term_data t
         on fd.field_celebrity_pro_occupation_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
-        and fd.entity_id = $nid limit 1";
-        $result_pro = db_query($querys);
+        and fd.entity_id = $nid limit 1";        
         if($_GET['test'] == 'abc') {
             print strtr((string) $querys, $querys->arguments());
         }
+        $result_pro = db_query($querys);
         return $results_pro = $result_pro->fetchObject();
     }
     return $results;
