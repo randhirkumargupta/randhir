@@ -834,8 +834,13 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-  //print_r($javascript); die;
-  $arg = arg(); 
+  //print_r($javascript); die;  
+   $type = '';
+   $arg = arg();
+   if (arg(0) == 'node') {
+     $node = menu_get_object();
+     $type = $node->type;
+   } 
   unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
@@ -920,6 +925,11 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']);
     unset($javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']);
     unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
+  }
+  if($type == 'story'){
+	foreach ($javascript as $key => $value) {
+      $javascript[$key]['defer'] = TRUE;
+	}
   }
 }
 
