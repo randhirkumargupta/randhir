@@ -1923,6 +1923,9 @@ function itg_widget_preprocess_node(&$vars) {
             $nid = arg(1);
 
             $term_data = get_term_id_and_name($nid);
+             if($_GET['test'] == 'abc') {
+               pr($term_data);
+             }
             if(!empty($term_data)){
               $term_name = strtolower($term_data->name);
               $tid = $term_data->tid;
@@ -3790,6 +3793,10 @@ function get_term_id_and_name($nid){
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = $nid limit 1";
     $result = db_query($query);
+    if($_GET['test'] == 'abc') {
+       print "field_select_url_type_tid = " . strtr((string) $query, $query->arguments()); die; 
+    }
+   
     $results = $result->fetchObject();
 
     if(count($results) < 1){
@@ -3799,6 +3806,9 @@ function get_term_id_and_name($nid){
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
         and fd.entity_id = $nid limit 1";
         $result = db_query($query);
+        if($_GET['test'] == 'abc') {
+       print "field_celebrity_pro_occupation_tid = " . strtr((string) $query, $query->arguments()); die; 
+         }
         $results = $result->fetchObject();
     }
     return $results;
