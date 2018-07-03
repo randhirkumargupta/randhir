@@ -58,6 +58,32 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        'test3' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves test2 schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_test3',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         'config_update_status' => array(
             'operations' => array(
                 'retrieve' => array(
@@ -7768,6 +7794,9 @@ function itg_app_redish_ttl($api = "") {
 }
 function itg_rapid_api_test2(){
     echo "andy here";die();
+}
+function itg_rapid_api_test3(){
+    echo "andy here11";die();
 }
  
  
