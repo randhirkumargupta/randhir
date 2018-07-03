@@ -1945,7 +1945,7 @@ function itg_widget_preprocess_node(&$vars) {
         if (($term_name == 'people' ||  $term_name == 'reporter' ) && in_array($term_name, $occupation)) {
             if($term_name !== 'people'){
                 drupal_add_js("jQuery(document).ready(function(){
-                  jQuery('.read-more , .full-content').click(function(){
+                  jQuery('.read-more , .anchor-action.read-less').click(function(){
                   jQuery('.less-content').toggle();
                   jQuery('.full-content').toggle();
                   });
@@ -1956,7 +1956,7 @@ function itg_widget_preprocess_node(&$vars) {
 
         }else{
             drupal_add_js("jQuery(document).ready(function(){
-              jQuery('.read-more , .full-content').click(function(){
+              jQuery('.read-more , .anchor-action.read-less').click(function(){
               jQuery('.less-content').toggle();
               jQuery('.full-content').toggle();
               });
@@ -3783,13 +3783,24 @@ function get_html_widget_data_by_nids($nids){
 
 function get_term_id_and_name($nid){
   if(!empty($nid)){
-    $query = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
+    $query = "SELECT fd.field_select_url_type_tid as tid, t.name FROM
+        field_data_field_select_url_type fd inner join taxonomy_term_data t
+        on fd.field_select_url_type_tid = t.tid
+        WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
+        and fd.entity_id = '".$nid."' limit 1";
+
+    $result = db_query($query);
+    $results = $result->fetchObject();
+
+    if(empty($results)){
+        $querys = "SELECT fd.field_celebrity_pro_occupation_tid as tid, t.name FROM
         field_data_field_celebrity_pro_occupation fd inner join taxonomy_term_data t
         on fd.field_celebrity_pro_occupation_tid = t.tid
         WHERE fd.entity_type LIKE 'node' and fd.bundle like 'reporter'
-        and fd.entity_id = $nid limit 1";
-    $result = db_query($query);
-    $results = $result->fetchObject();
+        and fd.entity_id = '".$nid."' limit 1";
+        $result_pro = db_query($querys);
+        return $data = $result_pro->fetchObject();
+    }
     return $results;
   }
   return array();

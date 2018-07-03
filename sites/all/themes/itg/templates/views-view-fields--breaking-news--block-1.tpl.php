@@ -24,10 +24,13 @@
  */
 ?>
 <?php global $base_url; ?>
-<?php  
-  $actual_link = $base_url . '/node/' . $row->nid;
+<?php
+  $path = 'node/' . $row->nid;  
+  $actual_link = $base_url . '/' . drupal_get_path_alias($path);
   $short_url = $actual_link;
   $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
+  $redirection_url = $row->field_field_breaking_redirection_url[0]['raw']['value'];
+
   $image = '';
   $share_desc = '';
   if (!empty($row->field_field_story_extra_large_image[0]['raw']['uri'])) {
@@ -65,6 +68,8 @@
               <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>              
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
+
+        <?php if(empty($redirection_url)) { ?>          
           <div class="social-share">
               <ul>
                   <li><a href="javascript:;" class="share"><i class="fa fa-share-alt"></i></a></li>
@@ -73,6 +78,9 @@
                   <li><a href="javascript:;" title="share on google+" class="user-activity google def-cur-pointer" rel="1" data-tag="homepage-breaking-news" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a></li>                  
               </ul>
           </div> 
+          <?php } ?>
+
+
         </div>
       </div>
   </div>  
