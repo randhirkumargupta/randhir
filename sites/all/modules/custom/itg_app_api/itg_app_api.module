@@ -271,6 +271,7 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
     // menu for update config_update_status json
+<<<<<<< HEAD
     $items['admin/api-configuration/rest-api/hamburger-menu-tv-json'] = array(
         'title' => 'Update hamburger_menu_tv json',
         'description' => 'Update hamburger_menu_tv json',
@@ -280,6 +281,8 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
     // menu for update config_update_status json
+=======
+>>>>>>> dcc6cde0fd0b4d389657d270fa90fb13c4460407
     $items['admin/api-configuration/rest-api/popular-search-tv-json'] = array(
         'title' => 'Update popular_search_tv json',
         'description' => 'Update popular_search_tv json',
@@ -3013,6 +3016,7 @@ function cube_widget() {
 
     return system_settings_form($form);
 }
+<<<<<<< HEAD
 /**
  * hamburger_menu_tv_json form decalation
  *
@@ -3030,6 +3034,8 @@ function hamburger_menu_tv_json() {
 
     return system_settings_form($form);
 }
+=======
+>>>>>>> dcc6cde0fd0b4d389657d270fa90fb13c4460407
 
 /**
  * popular_search_tv_json_json form decalation
@@ -3048,3 +3054,7 @@ function popular_search_tv_json() {
 
     return system_settings_form($form);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dcc6cde0fd0b4d389657d270fa90fb13c4460407

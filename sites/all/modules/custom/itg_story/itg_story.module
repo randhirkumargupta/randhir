@@ -1213,6 +1213,9 @@ function itg_story_node_view($node, $view_mode, $langcode) {
         $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
       }
     }
+    if (isset($node->field_story_associate_lead[LANGUAGE_NONE][0]['value']) && $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+      drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+    }
   }
 }
 

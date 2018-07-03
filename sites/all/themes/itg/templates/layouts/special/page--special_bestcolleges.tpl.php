@@ -23,6 +23,11 @@ if ($theme != 'itgadmin') {
   $itg_class = 'itg-front';
 }
 ?>
+
+<?php 
+$path_request = request_path();
+$url_get = explode('/', $path_request);
+?>
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') {?>
   <div id="page">
@@ -83,11 +88,15 @@ if ($theme != 'itgadmin') {
     <?php endif; ?>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-      <?php $url_get = explode('/',$_SERVER['REQUEST_URI']);?>
+      
       <!-- sponsor for static -->
         <?php 
-          if($url_get[2] == '2016' || $url_get[2] == '2017') { 
+          if($url_get[1] == '2016' || $url_get[1] == '2017') { 
             print bestcollege_get_sponser_data('Best college Sponser');
+          }
+
+          if($url_get[1] == '2018') { 
+            print bestcollege_get_sponser_data('bestcollege banner 2018');
           }
         ?>
       <!-- end sponsor for static -->
@@ -111,19 +120,19 @@ if ($theme != 'itgadmin') {
                     </div>
                 </div>
               <?php } else {
-                      if ($url_get[2] >= '2015') {
+                      if ($url_get[1] >= '2015') {
                         $block = block_load('itg_bestcolleges', 'bestcollege_image_slider');
                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                         print $output = render($render_array);
                         
-                      } elseif($url_get[2] == '2014' || $url_get[2] == '2013') {
+                      } elseif($url_get[1] == '2014' || $url_get[1] == '2013') {
                           print bestcollege_get_sponser_data('Best college graph');
                       }
                } ?>
         <div>
   <div class="clearfix"></div>      <!--- list / grid -->
 <div class="col-sm-12 col-xs-12 view1">
-<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[2]; ?></div>
+<div class="title col-md-6 col-sm-6 col-xs-12"><?php print t("Best of The Best ") . $url_get[1]; ?></div>
         <div class="right_Section pull-right  col-md-6  col-sm-6 col-xs-12 text-right hidden-xs">
         <strong>view as</strong>
         <div class="btn-group">
@@ -143,9 +152,9 @@ if ($theme != 'itgadmin') {
           <div class="droppable <?php print $gray_bg_layout; ?>">
           <?php
           if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) {
-              if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2])))
+              if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[1])))
               {
-                print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
+                print views_embed_view('best_college_image_slider', 'block_1', $url_get[1]);
               }
           }
           ?>
@@ -154,9 +163,9 @@ if ($theme != 'itgadmin') {
             </div>
           </div>
           <?php } else {
-            if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[2])))
+            if (array_filter(views_get_view_result('best_college_image_slider', 'block_1', $url_get[1])))
             {
-                print views_embed_view('best_college_image_slider', 'block_1', $url_get[2]);
+                print views_embed_view('best_college_image_slider', 'block_1', $url_get[1]);
             }
           }
         ?>
@@ -178,6 +187,11 @@ if ($theme != 'itgadmin') {
                                 <div class="ad-widget">
                                     <div class="sidebar-ad">
                                       <?php
+                                      if($url_get[1] == '2018') {
+                                        // Bestcolleges RHS Banner  
+                                      print bestcollege_get_sponser_data('Bestcolleges RHS Banner');
+
+                                      } else {
                                         $block = block_load('itg_ads', ADS_RHS1);
                                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                         if(is_array($render_array)) {
@@ -187,6 +201,9 @@ if ($theme != 'itgadmin') {
                                             print $itg_ad['200*200_right_bar_ad1'];
                                           }
                                         }
+
+                                      }  
+                                       
                                        ?></div>
                                 </div>
                     <?php
@@ -197,6 +214,12 @@ if ($theme != 'itgadmin') {
                           $block1 = block_load('itg_bestcolleges', 'bestcollege_rhsstatic');
                           $render_rhsstatic = _block_get_renderable_array(_block_render_blocks(array($block1)));
                           print render($render_rhsstatic);
+                          
+                          // RHS Story
+                          $block_story = block_load('itg_bestcolleges','bestcollege_rhs_story_widget');
+                          $render_story = _block_get_renderable_array(_block_render_blocks(array($block_story)));
+                           print render($render_story);
+
                           // RHS Video
                           $block_video = block_load('itg_bestcolleges','bestcollege_rhs_videos_widget');
                           $render_video = _block_get_renderable_array(_block_render_blocks(array($block_video)));

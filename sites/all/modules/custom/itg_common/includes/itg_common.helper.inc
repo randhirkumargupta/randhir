@@ -338,6 +338,7 @@ function _occupation_from_tid_for_sef_url($tid) {
  */
 function get_other_gallery_amp($primary_category, $nid, $bundle, $limit) {
    if (!empty($primary_category)) {
+    $start_time = strtotime("-30 day");
     $query = db_select('field_data_field_primary_category', 'fg');
     $query->leftjoin('node', 'n', 'n.nid = fg.entity_id');
     $query->leftjoin('field_data_field_story_small_image', 'sm', 'sm.entity_id = fg.entity_id');
@@ -347,7 +348,8 @@ function get_other_gallery_amp($primary_category, $nid, $bundle, $limit) {
           ->condition('fg.entity_id', array($nid), 'NOT IN')
           ->condition('fg.field_primary_category_value', $primary_category)
           ->condition('n.status', 1)
-          ->condition('fg.bundle', $bundle);
+          ->condition('fg.bundle', $bundle)
+          ->condition('n.created', $start_time, '>=');
     $query->orderBy('n.created', 'DESC'); 
     $query->range(0, $limit);
     $result = $query->execute();

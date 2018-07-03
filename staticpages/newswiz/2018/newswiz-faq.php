@@ -173,7 +173,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
                                     <li>Team participation means that both members represent the same school. </li>
                                     <li>Each school can nominate up to 3 teams to take part in the Online Test.</li>
                                     <li>Both team members should be fluent in written as well as spoken English. This is essential as the quiz and all preliminary rounds leading to the main event are held in English. </li>
-                                    <li>Both team members should be Indian citizens residing in India.</li>
+                                    <li>Both team members should be Indians residing in India.</li>
                                 </ul>
                             </div>
                         </div>
@@ -531,7 +531,6 @@ session 2018-2019, you may register and try your luck again! You are free to mak
   <iframe id="videoplayer" width="700px" height="550px" frameborder="0" allowfullscreen="" src=""></iframe>
 </div>
 <!-- jQuery Bootstrap--> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
 <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/bootstrap.min.js"></script> 
 <!-- Swiper JS --> 
 <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/newswiz/newjs/swiper.min.js"></script> 

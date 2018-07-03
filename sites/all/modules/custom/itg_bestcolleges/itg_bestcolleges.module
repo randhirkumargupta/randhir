@@ -93,12 +93,25 @@ function itg_bestcolleges_menu() {
  * Remove bestcolleges node
  */
 function bestcollege_remove() {
+  if($_GET['TEST'] == 3) {
+    db_query("ALTER TABLE `bestcolleges_ranking` CHANGE `rank` `rank` INT(11) NOT NULL DEFAULT '0' COMMENT 'TODO: please describe this field!'");
+  }
+  if($_GET['TEST'] == 1) {
+    db_query("TRUNCATE bestcolleges_master");
+  }
+}
+
+function bestcollege_remove_tes() {
   $query = db_select('node', 'n');
   $query->condition('n.type', 'bestcolleges', '=');
+  // $query->condition('n.nid', '1154553', '=');
+  $query->condition('n.nid', array("1154427", "1154553"), 'BETWEEN');
   $query->fields('n', array('nid'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  // print strtr((string) $query, $query->arguments()); die;  
   foreach ($result as $reskey => $resvalue) {
-    node_delete($resvalue['nid']);
+     node_delete($resvalue['nid']);
+     // pr($resvalue['nid']);
   }
 }
 
@@ -215,6 +228,9 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
     'bestcollege_section_ordering' => array(
       'template' => 'templates/bestcollege-section-ordering',
     ),
+    'bestcollege_story_ordering' => array(
+      'template' => 'templates/bestcollege-story-ordering',
+    ),
     'bestcollege_image_sliders' => array(
       'variable' => array('data' => NULL),
       'template' => 'bestcollege-image-slider',
@@ -275,6 +291,15 @@ function itg_bestcolleges_block_info() {
   $blocks['bestcollege_rhs_videos_widget'] = array(
     'info' => t('Widget: Bestcolleges RHS Videos'),
   );
+  $blocks['bestcollege_rhs_story_widget'] = array(
+    'info' => t('Widget: Bestcolleges RHS Story'),
+  );
+  $blocks['bestcollege_rhs_banner_widget'] = array(
+    'info' => t('Widget: Bestcolleges RHS Banner'),
+  );
+  $blocks['bestcollege_header_banner'] = array(
+    'info' => t('Widget: Bestcolleges Header Banner'),
+  );
   $blocks['bestcollege_sponser'] = array(
     'info' => t('Widget: Bestcolleges Sponser'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -313,11 +338,31 @@ function itg_bestcolleges_block_view($delta = '') {
       $data = itg_bestcolleges_rhs_video();
       $block['content'] = theme("bestcollege_section_ordering", array("data" => $data));
       break;
+    case 'bestcollege_rhs_story_widget':
+      $data = itg_bestcolleges_rhs_story();
+      $block['content'] = theme("bestcollege_story_ordering", array("data" => $data));
+      break;
+    case 'bestcollege_rhs_banner_widget':
+      $path_request = request_path();
+      $path_request_array = explode('/', $path_request);
+      if (($path_request_array[1] == '2018') && $path_request_array[2] == 'ranks') {
+        $data = bestcollege_get_sponser_data('Bestcolleges RHS Banner');
+        $block['content'] = "<div class='ad-widget bestcollege-rhsinner'><div class='sidebar-ad'>" . $data . "</div></div>";
+      }
+      break;
     case 'bestcollege_sponser':
       $path_request = request_path();
       $path_request_array = explode('/', $path_request);
       if (($path_request_array[1] == '2016' || $path_request_array[1] == '2017') && $path_request_array[2] == 'ranks') {
         $data = bestcollege_get_sponser_data('Best college Sponser');
+        $block['content'] = $data;
+      }
+      break;
+    case 'bestcollege_header_banner':
+      $path_request = request_path();
+      $path_request_array = explode('/', $path_request);
+      if (($path_request_array[1] == '2018') && $path_request_array[2] == 'ranks') {
+        $data = bestcollege_get_sponser_data('bestcollege banner 2018');
         $block['content'] = $data;
       }
       break;
@@ -743,6 +788,8 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
         ->condition('brd.published', 1)
         ->condition('brd.rank', 0, '!=')
         ->orderBy('brd.rank', 'ASC');
+    // print strtr((string) $itg_query, $itg_query->arguments());die;
+    // die;
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -970,8 +1017,9 @@ function itg_city_option($byear, $tid, $selected, $rstream) {
 function itg_bestcolleges_rhs_video() {
   $arg = arg();
   if (!empty($arg[1]) && $arg[1] == 'term') {
-    $url_get = explode('/', $_SERVER['REQUEST_URI']);
-    $year = $url_get[2];
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    $year = $url_get[1];
   }
   else {
     $year = $arg[1];
@@ -996,6 +1044,45 @@ function itg_bestcolleges_rhs_video() {
         ->groupBy('iwo.nid')
         ->range(0, $range);
     $result = $query->execute();
+    return _get_widget_display_data_as_per_db_result($result);
+  }
+}
+
+/**
+ * rhs story at bestcollege page
+ * @return type
+ */
+function itg_bestcolleges_rhs_story() {
+  $arg = arg();
+  if (!empty($arg[1]) && $arg[1] == 'term') {
+    $path_request = request_path();
+    $url_get = explode('/', $path_request);
+    $year = $url_get[1];
+  }
+  else {
+    $year = $arg[1];
+  }
+
+  module_load_include('inc', 'itg_widget', 'includes/itg_widget_helper');
+  $json = variable_get('bestcollege_get_video', '');
+  $video_array = (array) json_decode($json);
+  $video_result = $video_array['story']->{$year};
+  if (is_array($video_result) && count($video_result) > 0) {
+    $widget_name = 'section_wise_widget';
+    $range = 5;
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
+    $query->fields('iwo', array('nid', 'weight', 'extra'));
+    $query->fields('wh', array('node_data'));
+    $query->condition('iwo.nid', $video_result, 'IN');
+    $query->condition('iwo.widget', $widget_name);
+    $query->condition('iwo.content_type', 'All');
+    $query->condition('wh.node_status', 1)
+        ->orderBy('iwo.weight', 'DESC')
+        ->groupBy('iwo.nid')
+        ->range(0, $range);
+    $result = $query->execute();
+    // print strtr((string)$query, $query->arguments());
     return _get_widget_display_data_as_per_db_result($result);
   }
 }
@@ -1088,7 +1175,8 @@ function csvImporter_validate_fileupload(&$form, &$form_state) {
   $validators = array(
     'file_validate_extensions' => array('csv'),
   );
-  if ($file = file_save_upload('csvfile', $validators, "public://", FILE_EXISTS_REPLACE)) {
+   
+  if ($file = file_save_upload('csvfile', $validators, "public://" , FILE_EXISTS_REPLACE)) {
     $form_state['values']['csvupload'] = $file->destination;
   }
   else {
@@ -1489,6 +1577,7 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
           ->condition('year', $year)
           ->execute();
       // bestcolleges_themebasedranking
+     /*
       $num_updated = db_update('bestcolleges_themebasedranking')
           ->fields(array('CollegeNewNid' => $node->nid))
           ->condition('collegeid', $collegeid)
@@ -1501,6 +1590,8 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
           ->condition('collegeid', $collegeid)
           ->condition('year', $year)
           ->execute();
+      
+      */
     }
     drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
@@ -1530,7 +1621,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
   $photoids = $line[8];
   $videoids = $line[9];
   $published = $line[10];
-  $created_date = $line[11];
+  $created_date = date('Y-m-s H:i:s'); //$line[11];
   $year = $line[13];
   $rank = $line[14];
   $stream = $line[15];
@@ -1595,7 +1686,21 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
       if ($stream == 'Hotel Management') {
         $stream = ($stream_dynamic['hotel_management']) ? $stream_dynamic['hotel_management'] : 'hotel_management';
       }
-
+      if ($stream == 'Dental') {
+        $stream = ($stream_dynamic['dental']) ? $stream_dynamic['dental'] : 'dental';
+      }     
+      if ($stream == 'Engineering Govt') {
+        $stream = ($stream_dynamic['engineering_govt']) ? $stream_dynamic['engineering_govt'] : 'engineering_govt';
+      }
+      if ($stream == 'Engineering Private') {
+        $stream = ($stream_dynamic['engineering_private']) ? $stream_dynamic['engineering_private'] : 'engineering_private';
+      }
+      if ($stream == 'MSW') {
+        $stream = ($stream_dynamic['msw']) ? $stream_dynamic['msw'] : 'msw';
+      }
+      if ($stream == 'Architecture') {
+        $stream = ($stream_dynamic['architecture']) ? $stream_dynamic['architecture'] : 'architecture';
+      }
       if (!empty($tid)) {
         $final_tid = itg_bestcollege_get_term_tid($tid, $stream);
       }
@@ -1642,6 +1747,7 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
             ->condition('year', $year)
             ->execute();
         // bestcolleges_themebasedranking
+        /*
         $num_updated = db_update('bestcolleges_themebasedranking')
             ->fields(array('CollegeNewNid' => $node->nid))
             ->condition('collegeid', $collegeid)
@@ -1653,6 +1759,8 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
             ->condition('collegeid', $collegeid)
             ->condition('year', $year)
             ->execute();
+        
+        */
       }
     }
     itg_watchdog('bestcollege_master_pass', $line);
@@ -1730,11 +1838,13 @@ function bestCollegesRelatedStoryList() {
   $count = 0;
   $data = array();
   $related_story_nid_ar = array();
-  $year = arg(1);
+  $path_request = request_path();
+  $url_get = explode('/', $path_request);
+  $year = $url_get[1];
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
-  if ($year != '2016' && $year != '2017') {
+  if ($year != '2016' && $year != '2017' && $year != '2018') {
     $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'story');
     $related_story_nid_ar = explode(",", $story_data);
   }
@@ -1810,6 +1920,10 @@ function bestCollegesrank($arg) {
   $stream = "";
 
   $year = $arg[1];
+  
+  if ($year == '2018') {
+    return '';
+  }
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $college_id = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_college_id['und'][0]['value'];
 
@@ -1878,7 +1992,7 @@ function itg_bestcolleges_related_videolist() {
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
   $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
-  if ($year != '2016' && $year != '2017') {
+  if ($year != '2016' && $year != '2017' && $year != '2018') {
     $field_bestcollege_title = "Lady Shri Ram College for Women";
     $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'video');
     $related_photo_nid_ar = explode(",", $story_data);
@@ -2038,9 +2152,9 @@ function itg_bestcollege_master_migrate($line, $session_nid, &$context) {
   $storyids = $line[7];
   $photoids = $line[8];
   $videoids = $line[9];
-  $published = $line[10];
-  $created_date = $line[11];
-  $node_id = $line[12];
+  $published = ($line[10]) ? (int)$line[10] : 1;
+  $created_date = date('Y-m-d H:i:s'); // $line[11];
+  $node_id = ($line[12]) ? $line[12] : 0;
 
   $bestcollege_status = variable_get('bestcollege_status', '');
   try {
@@ -2199,13 +2313,13 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
   $line = $cleaned_line = array_map('base64_decode', $line);
 
   $stream = $line[1];
-  $streamid = $line[2];
+  $streamid = '0'; // $line[2];
   $collegeid = $line[3];
   $CollegeNewNid = $line[4];
   $year = $line[5];
   $rank = $line[6];
   $published = $line[7];
-  $created_date = $line[8];
+  $created_date = date('Y-m-d H:i:s'); // !empty($line[8]) ? $line[8] : date('Y-m-d H:i:s');
   $bestcollege_status = variable_get('bestcollege_status', '');
 
   try {
@@ -2322,8 +2436,8 @@ function itg_bestcollege_readyrecnor_directory_migrate($line, $session_nid, &$co
   $cutoff = $line[12];
   $stream = $line[13];
   $year = $line[14];
-  $published = $line[15];
-  $created_date = $line[16];
+  $published = !empty($line[15]) ? $line[15] : '0';
+  $created_date = !empty($line[16]) ? $line[16] : date('Y-m-d H:i:s');
 
   $bestcollege_status = variable_get('bestcollege_status', '');
 
@@ -2519,8 +2633,9 @@ function itg_bestcollege_zonecampuswiseranking_migrate($line, $session_nid, &$co
  * @return type
  */
 function itg_bestcollege_image_slider() {
-  $url_get = explode('/', $_SERVER['REQUEST_URI']);
-  $year = isset($url_get[2]) ? $url_get[2] : '';
+  $path_request = request_path();
+  $url_get = explode('/', $path_request);
+  $year = isset($url_get[1]) ? $url_get[1] : '';
   $story_data = array();
   $json = variable_get('bestcollege_get_video', '');
   $related_result = (array) json_decode($json);

@@ -516,35 +516,37 @@ function get_header_tab_related_video_block_content() {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
       $display_title = get_related_display_title($arg[1], $current_entity_id);
-      if (!empty($display_title)) {
-        $display_title = $display_title;
-      }
-      else {
-        $display_title = $related_data->label;
-      }
-      // $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
-      $related_title = html_entity_decode($display_title);
-      if (empty($related_data->sm_field_custom_story_small_large_url[0])) {
-        $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-      }
-      else {
-        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
-      }
-        
-      $related_video_duration = $related_data->sm_field_video_duration[0];
-        
-      $img_alt = str_replace('"', '', $related_title);
-      $rel_title = str_replace('"', '', $related_title);
-      $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
-      $options = array(
-        'html' => TRUE
-      );
-      $output = l(htmlspecialchars_decode($rel_title, ENT_COMPAT), $url, $options);
-           
-      $related_image = '<img class="related-default" alt="' . $img_alt . '" title="'. $img_alt .'" src="' . $related_image_url . '">';
-      if (!empty($related_title)) {
-        $related_video .= '<li class="related_content_tabs"><figure><a href="'.$url.'" class="pic">'. $related_image .'<figcaption><i class="fa fa-play-circle"></i>'. $related_video_duration .'</figcaption>';
-        $related_video .= '</figure></a><p class="title">' . $output . '</p></li>';
+      if(!empty($related_data)){
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        // $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
+        $related_title = html_entity_decode($display_title);
+        if (empty($related_data->sm_field_custom_story_small_large_url[0])) {
+          $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+        }
+        else {
+          $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+        }
+
+        $related_video_duration = $related_data->sm_field_video_duration[0];
+
+        $img_alt = str_replace('"', '', $related_title);
+        $rel_title = str_replace('"', '', $related_title);
+        $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
+        $options = array(
+          'html' => TRUE
+        );
+        $output = l(htmlspecialchars_decode($rel_title, ENT_COMPAT), $url, $options);
+
+        $related_image = '<img class="related-default" alt="' . $img_alt . '" title="'. $img_alt .'" src="' . $related_image_url . '">';
+        if (!empty($related_title)) {
+          $related_video .= '<li class="related_content_tabs"><figure><a href="'.$url.'" class="pic">'. $related_image .'<figcaption><i class="fa fa-play-circle"></i>'. $related_video_duration .'</figcaption>';
+          $related_video .= '</figure></a><p class="title">' . $output . '</p></li>';
+        }
       }
     }
     $related_video .= "</ul></div>";
@@ -651,6 +653,8 @@ function itg_videogallery_make_bitrate_url($video_url, $bitrates,$hls) {
   $find = array("/processing/");
   $replace = array("/video/");
   $withoutExt = (str_replace($find,$replace,$withoutExt));
+  $withoutExt = (str_replace("indiatoday_stg/","indiatoday/",$withoutExt));
+  $withoutExt = (str_replace("indiatoday_anchor/","indiatoday/",$withoutExt));
   $with_hls_url = $hls.'/i'.'/'.$withoutExt.'_';
   $returnstring = $with_hls_url . ',' . implode(',', $bitrates) . ',.mp4.csmil/master.m3u8';
   return $returnstring;
