@@ -61,7 +61,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<artical>';
+    $xml = '<?xml version="1.0" encoding="ISO-8859-1"?><artical>';
     $xml .= '<magazine>India Today</magazine>';
     $xml .= '<frequency>Weekly</frequency>';
     foreach ($result as $key => $value) {
@@ -72,6 +72,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $body = remove_extra_tag_in_body($value["body_value"]);
       $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
       $xml .= '<section>' . $primary_cat . '</section>';
