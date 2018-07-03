@@ -145,7 +145,7 @@ function kindle_feed_generate_form_validate($form, &$form_state) {
  * {@inheritdocs}
  */
 function kindle_feed_generate_form_submit($form, &$form_state) {
-    
+    p($form_state);
     if($form_state['values']['op'] == 'Submit') {
         $issue = $form_state['values']['issues'];
         $magazine = $form_state['values']['magazine'];
