@@ -105,6 +105,10 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  */
 function itg_alexa_audio_form_custom_submit($form, &$form_state) {
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  pr($form);
+  
+  p($form_state);
   genrate_alexa_audio_json($form_state['values']);
 }
 
@@ -113,13 +117,13 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * @param array $value   
  */
 function genrate_alexa_audio_json($value) {
-  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  
   
   $audiofid = $value['field_audio']['und'][0]['fid'];
   $filedir = 'sites/indiatoday/' . date('Ymd');
   $time = date('hA');
   if (!empty($audiofid)) {
-    p($_FILES);
+    
     $orignal_img = file_load($audiofid);
     $audio_filesize = $orignal_img->filesize;
     
