@@ -154,7 +154,6 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
         $directory_name = uniqid() . "-" . time();
         $dir = KINDLE_WRAPPER . "/" . $directory_name;
         $dir_zip = KINDLE_WRAPPER . "/zip";
-        echo $dir; echo "andy"; echo $dir_zip; die();
         file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
         file_prepare_directory($dir_zip, FILE_CREATE_DIRECTORY);
         $issue = $_GET['issue'];
@@ -229,6 +228,7 @@ function _create_tmp_zip($prefix) {
         }
         $zip->close();
         header('Content-Type: application/zip');
+        header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="download.zip"');
         readfile($file);
@@ -372,7 +372,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         $node_body = $node_data->body['und'][0]['value'];
         $node_body = preg_replace('#<div class="body_caption">(.*?)</div>#', ' ', $node_body);
         $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);       
-		  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $node_body, $matches);
+		  //preg_match_all('/<img.*src=\"(.*)\".*>/isU', $node_body, $matches);
 		  $i = 0;
 		  foreach ($matches[0] as $images) {
 			$src = $matches[1][$i];
