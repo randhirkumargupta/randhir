@@ -157,6 +157,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
         $dir_zip = KINDLE_WRAPPER . "/zip";
         file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
         file_prepare_directory($dir_zip, FILE_CREATE_DIRECTORY);
+        drupal_set_message(t('$directory_name: '.$directory_name.'$dir: '.$dir.'$dir_zip: '.$dir_zip.''), 'status');
         $issue = $_GET['issue'];
         $magazine = $_GET['magazine'];
         if(!empty($issue) && !empty($magazine)) {
