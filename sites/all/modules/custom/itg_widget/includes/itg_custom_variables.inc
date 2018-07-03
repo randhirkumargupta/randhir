@@ -71,6 +71,12 @@ function itg_custom_variables() {
     '#title' => t('Third level menu show/hide at details page'),
     '#default_value' => get_itg_variable('status_third_level_menu'),
   );
+  $form['anchor_page_js_version'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor Page Js Version'),
+    '#default_value' => get_itg_variable('anchor_page_js_version'),
+    '#required' => FALSE,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

@@ -15,17 +15,20 @@ $follow_status = $content["follow_status"];
     <?php
     $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
     $dev_arg = ''; 
-    $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/custom.js"></script>';   
+    $anchor_page_js_version = get_itg_variable('anchor_page_js_version');
+    $js_version = 'at_2.21.06.21';
+    if (isset($anchor_page_js_version) && !empty($anchor_page_js_version)) {
+	  $js_version = $anchor_page_js_version;
+	}
+    $jspath = '<script src="https://smedia2.intoday.in/aajtak/'.$js_version.'/resources/chat/custom.js"></script>';   
     if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
           $dev_arg = '99999';
-          $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/it_staging_custom.js"></script>';
+          $jspath = '<script src="https://smedia2.intoday.in/aajtak/'.$js_version.'/resources/chat/it_staging_custom.js"></script>';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper clearfix">
         <div id="anc-placeholder" style="display:none"></div>
-        
-        <?php print $jspath; ?>
-        
+		<?php print $jspath; ?>
         <script>
         window.lib = lib || {};
         lib.setup({
