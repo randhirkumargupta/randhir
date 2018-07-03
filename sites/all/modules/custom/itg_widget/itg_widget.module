@@ -659,16 +659,18 @@ function itg_widget_block_view($delta = '') {
             $info['max_limit'] = TREANDING_VIDEO_MAX_RANGE;
             $info['min_limit'] = TREANDING_VIDEO_MIN_RANGE;
             drupal_add_js('jQuery(document).ready(function() {
+              var is_mobile = mobilecheck() ? true : false;
               function getGridSize() {
                   return (window.innerWidth < 768) ? 270 : "";
                 }
             jQuery(".trending-videos-flex").flexslider({
             animation: "slide",
-            animationLoop: false,
+            animationLoop: true,
             itemWidth: getGridSize(),
             itemMargin:15,
             prevText: "",
             nextText: "",
+            slideshow: (!is_mobile?true:false),
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
             );
@@ -1276,19 +1278,21 @@ function itg_widget_block_view($delta = '') {
         case 'top_takes_videos_tab_widget':
           $info['widget'] = 'top_takes_video_widget';
           $info['order'] = 'ASC';
-          $info['max_limit'] = TOP_TAKES_MAX_RANGE;
+          $info['max_limit'] = TOP_TAKES_HOME_MAX_RANGE;
           $info['min_limit'] = TOP_TAKES_MIN_RANGE;
           drupal_add_js('jQuery(document).ready(function() {
+            var is_mobile = mobilecheck() ? true : false;
             function getGridSize() {
               return (window.innerWidth < 768) ? 270 : "";
             }
           jQuery(".top-takes-videos-flex").flexslider({
           animation: "slide",
-          animationLoop: false,
+          animationLoop: true,
           itemWidth: getGridSize(),
           itemMargin:15,
           prevText: "",
           nextText: "",
+          slideshow: (!is_mobile?true:false),
           });
           });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
           );
