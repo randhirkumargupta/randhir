@@ -119,7 +119,12 @@ function itg_custom_variables() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('sef_url_status'),
   );
-  
+  $form['anchor_page_js_version'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor Page Js Version'),
+    '#default_value' => get_itg_variable('anchor_page_js_version'),
+    '#required' => FALSE,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),
