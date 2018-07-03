@@ -104,10 +104,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form
  * @param array $form_state
  */
-function itg_alexa_audio_form_custom_submit($form, &$form_state) {
-  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
-  print "file_directory = ".file_directory_temp();
-  pr($_FILES);
+function itg_alexa_audio_form_custom_submit($form, &$form_state) { 
   genrate_alexa_audio_json($form_state['values']);
 }
 
@@ -116,8 +113,10 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * @param array $value   
  */
 function genrate_alexa_audio_json($value) {
-  
-  
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  pr($_FILES);
+  $audio_tmp = $_FILES['files']['tmp_name']['field_audio_und_0'];
+  $video_tmp = $_FILES['files']['tmp_name']['field_alexa_video_und_0'];
   $audiofid = $value['field_audio']['und'][0]['fid'];
   $filedir = 'sites/indiatoday/' . date('Ymd');
   $time = date('hA');
@@ -127,17 +126,9 @@ function genrate_alexa_audio_json($value) {
     $audio_filesize = $orignal_img->filesize;
     
     $getID3 = new getID3;
-    $bucket = variable_get('aws_bucket');
-    $aws_access_key = variable_get('aws_access_key');
-    $aws_secret_key = variable_get('aws_secret_key');
-    $aws_region = variable_get('aws_region');
-    $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
-    $s3->registerStreamWrapper();
-    print "s3_url = ". $s3_url = "s3://{$bucket}/s3fs-public/$orignal_img->filename";
-    // Read CSV with fopen
-    $s3_file = fopen($s3_url, 'r');
+    
 
-    $audio_duration = $getID3->analyze($s3_file);
+    $audio_duration = $getID3->analyze($audio_tmp);
     echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
     p($orignal_img);
   
