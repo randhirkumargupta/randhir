@@ -16,6 +16,7 @@
  */
 function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'alexa_audio_clips_node_form') {
+    
     $arg = arg();
     $minute = date('i') < 30 ? '00' : 30;
     $upload_date = date('Y-m-d ') . date('H') . ':' . $minute;
@@ -112,11 +113,18 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * @param array $value   
  */
 function genrate_alexa_audio_json($value) {
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  
   $audiofid = $value['field_audio']['und'][0]['fid'];
   $filedir = 'sites/indiatoday/' . date('Ymd');
   $time = date('hA');
   if (!empty($audiofid)) {
     $orignal_img = file_load($audiofid);
+    print "audio_filesize = ".$audio_filesize = $orignal_img->filesize;
+    print "uri = ".drupal_realpath($orignal_img->uri);
+    $getID3 = new getID3;
+    $audio_duration = $getID3->analyze(drupal_realpath($orignal_img->uri));
+    echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
     p($orignal_img);
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/';

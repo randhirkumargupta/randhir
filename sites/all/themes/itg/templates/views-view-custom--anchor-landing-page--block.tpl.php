@@ -19,7 +19,7 @@ $follow_status = $content["follow_status"];
 
     if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
           $dev_arg = '99999';
-          $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/it_staging_custom.js"></script>';
+          $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.20/resources/chat/it_staging_custom.js"></script>';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper clearfix">
@@ -175,11 +175,4 @@ box-sizing: border-box;}
 	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
 	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
 }
-@media screen and (max-width:680px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}
-}
-@media screen and (max-width:480px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
-}
-
 </style>
