@@ -35,7 +35,7 @@ function itg_videogallery_xml_file_video_insert($data) {
         $node->type = "videogallery";
         node_object_prepare($node);
         $node->language = LANGUAGE_NONE;
-        $node->uid = 1522; //itgsiteadmin
+        $node->uid = 41068; 
         $node->promote = 0;
         $node->comment = 0;
         $node->status = 0;
@@ -150,7 +150,7 @@ function itg_anchor_associate_video_cron(){
   drupal_exit();
 }
 
-function associate_video_to_node($filename, $nid){die('In');
+function associate_video_to_node($filename, $nid){
   if (!empty($filename)) {    
     $video_info_arr = itg_get_video_info($filename);
     if ($video_info_arr) {
@@ -163,15 +163,12 @@ function associate_video_to_node($filename, $nid){die('In');
         $node->comment = 0;
         $node->revision = 1;
         $node->status = 1;
-        //node_save($node);
-        
+        node_save($node);
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
-       // $field_collection_item->save();
-       // var_dump($nid, $node);die;
-        die('fff');
+        $field_collection_item->save();
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
         $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
             ->fields(array(
@@ -191,7 +188,7 @@ function associate_video_to_node($filename, $nid){die('In');
           ->fields(array(
             'state' => workbench_moderation_state_published(),
             'published' => 1,
-            'uid' => ADMINISTRATOR,
+            'uid' => 41068,
           ))
           ->condition('nid', $node->nid, '=')
           ->condition('is_current', 1, '=')
@@ -213,7 +210,7 @@ function itg_associate_video_id_to_pcontent($video_info){
 
   $fid = db_insert('file_managed')
       ->fields(array(
-        'uid' => 1522, //itgsiteadmin,
+        'uid' => 41068, 
         'filename' => $video_info->name,
         'uri' => $videourl,
         'filemime' => 'video/mp4',
