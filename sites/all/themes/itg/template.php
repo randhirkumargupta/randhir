@@ -466,7 +466,7 @@ function itg_preprocess_html(&$vars) {
   
  }
   if($arg[0] == 'livetv') {
-   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo_300x200.jpg?fgg');
+   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo_300x200.jpg');
    $fb_image_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
