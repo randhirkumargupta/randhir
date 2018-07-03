@@ -121,9 +121,9 @@ function genrate_alexa_audio_json($value) {
   if (!empty($audiofid)) {
     $orignal_img = file_load($audiofid);
     print "audio_filesize = ".$audio_filesize = $orignal_img->filesize;
-    print "uri = ".drupal_realpath($orignal_img->uri);
+    print "uri = ".$orignal_img->uri;
     $getID3 = new getID3;
-    $audio_duration = $getID3->analyze(drupal_realpath($orignal_img->uri));
+    $audio_duration = $getID3->analyze($orignal_img->uri);
     echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
     p($orignal_img);
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
