@@ -65,6 +65,13 @@ function itg_report_api_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['appapi-popular-search'] = array(
+        'title' => 'appapi breaking news',
+        'description' => 'appapi popular search',
+        'page callback' => 'itg_rapid_api_popular_search_tv_callback',        
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+    );
     return $items;
 }
     /**
@@ -167,7 +174,7 @@ function search_data_rest_callback($token) {
         $url = empty($result->url) ? '' : $result->url;
         $teaser = empty($result->teaser) ? '' : $result->teaser;
         //$teaser_fi = strip_tags($teaser); 
-        $teaser_fi = str_replace('"', "'", $teaser);
+        //$teaser_fi = str_replace('"', "\"", $teaser);
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
@@ -204,7 +211,8 @@ function search_data_rest_callback($token) {
     $data['news'] = $list;
     $data_json['data'] = $data;
     //return $data_json;
-    $jsondata = json_encode($data_json);
+    //$jsondata = json_encode($data_json);
+    $jsondata = drupal_json_encode($data_json);
     print $jsondata;
     die();
 }
@@ -242,5 +250,24 @@ function solr_search_custom_results_restapi_callback($key, $fields, $facets = FA
         return $results;
     }
     return FALSE;
+}
+/**
+ * itg_rapid_api_popular_search_tv_callback
+ */
+function itg_rapid_api_popular_search_tv_callback($token) {
+    $redis_key = "itg_rapid_api_popular_search_tv";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_popular_search_tv');
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    
+
+    print $jsondata; die();
 }
 

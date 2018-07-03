@@ -53,6 +53,11 @@ function itg_custom_variables() {
     '#title' => t('DNS Preconnect Prefetch'),
     '#default_value' => get_itg_variable('dns_preconnect_prefetch'),
   );
+  $form['ros_dns_preconnect_prefetch'] = array(
+    '#type' => 'textarea',
+    '#title' => t('ROS DNS Preconnect Prefetch'),
+    '#default_value' => get_itg_variable('ros_dns_preconnect_prefetch'),
+  );
   $form['enable_custom_lazyload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Custom Lazy Load'),
@@ -114,7 +119,12 @@ function itg_custom_variables() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('sef_url_status'),
   );
-  
+  $form['anchor_page_js_version'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor Page Js Version'),
+    '#default_value' => get_itg_variable('anchor_page_js_version'),
+    '#required' => FALSE,
+  );
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

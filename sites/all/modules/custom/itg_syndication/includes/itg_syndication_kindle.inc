@@ -327,7 +327,7 @@ function is_expried_story($node) {
     $flag = FALSE;
     $expiry_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
     $checked = $node->field_story_expires['und'][0]['value'];
-    if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes')) || $node->status == 0) {
+    if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes'))) {
         $flag = TRUE;
     }
     return $flag;

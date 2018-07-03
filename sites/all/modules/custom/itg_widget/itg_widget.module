@@ -310,7 +310,7 @@ function itg_widget_menu() {
       'file path' => drupal_get_path('module', 'itg_widget'),
       'access callback' => TRUE,
     );
-   
+
     $items['itg-fifa-category-configure'] = array(
       'title' => t('Fifa category id configrations'),
       'page callback' => 'drupal_get_form',
@@ -671,7 +671,7 @@ function itg_widget_block_view($delta = '') {
                 }
             jQuery(".trending-videos-flex").flexslider({
             animation: "slide",
-            animationLoop: false,
+            animationLoop: true,
             itemWidth: getGridSize(),
             itemMargin:15,
             prevText: "",
@@ -1285,7 +1285,7 @@ function itg_widget_block_view($delta = '') {
         case 'top_takes_videos_tab_widget':
           $info['widget'] = 'top_takes_video_widget';
           $info['order'] = 'ASC';
-          $info['max_limit'] = TOP_TAKES_MAX_RANGE;
+          $info['max_limit'] = TOP_TAKES_HOME_MAX_RANGE;
           $info['min_limit'] = TOP_TAKES_MIN_RANGE;
           drupal_add_js('jQuery(document).ready(function() {
             var is_mobile = mobilecheck() ? true : false;
@@ -1294,7 +1294,7 @@ function itg_widget_block_view($delta = '') {
             }
           jQuery(".top-takes-videos-flex").flexslider({
           animation: "slide",
-          animationLoop: false,
+          animationLoop: true,
           itemWidth: getGridSize(),
           itemMargin:15,
           prevText: "",

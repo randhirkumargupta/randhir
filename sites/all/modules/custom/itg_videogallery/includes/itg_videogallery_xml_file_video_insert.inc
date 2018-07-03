@@ -141,6 +141,7 @@ function itg_anchor_associate_video_cron(){
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $nids = array();
+  //p($result);
   foreach ($result as $value) {
     if ($_nid = associate_video_to_node($value['field_video_file_name_value'], $value['entity_id'])){
       $nids[] = $_nid;
@@ -164,14 +165,14 @@ function associate_video_to_node($filename, $nid){
         $node->revision = 1;
         $node->status = 1;
         node_save($node);
-        p($node);
+        //p($node);
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
         $field_collection_item->save();
        // var_dump($nid, $node);die;
-        die('fff');
+        //die('fff');
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
         $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
             ->fields(array(
@@ -191,7 +192,7 @@ function associate_video_to_node($filename, $nid){
           ->fields(array(
             'state' => workbench_moderation_state_published(),
             'published' => 1,
-            'uid' => ADMINISTRATOR,
+            'uid' => 1522,
           ))
           ->condition('nid', $node->nid, '=')
           ->condition('is_current', 1, '=')

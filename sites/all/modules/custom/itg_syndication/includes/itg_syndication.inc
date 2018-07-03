@@ -74,7 +74,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
   $params = array(
     'key' => 'itg_syndication',
     'to' => $delivery_mode,
-    'from' => 'desk-itgd@intoday.com',
+    'from' => 'care@intoday.in',
     'subject' => 'Syndication feed',
     'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
@@ -82,7 +82,7 @@ function itg_syndication_mail_syndication($data, $file_path, $delivery_mode) {
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $delivery_mode . "\r\n",
-      'From: India Today <desk-itgd@intoday.com>' . "\r\n",
+      'From: India Today <care@intoday.in>' . "\r\n",
     ),
   );
   $language = language_default();
@@ -228,7 +228,7 @@ function get_syndication_content_details() {
     if (!empty($itg_val->cron_details)) {
       $data = unserialize($itg_val->cron_details);
       $data['fid'] = $itg_val->fid;
-      watchdog("Syndication", "Rule id : $itg_val->id");
+      //watchdog("Syndication", "Rule id : $itg_val->id");
       //pr($itg_val->last_cron_time);
       $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
       //code for update cron time

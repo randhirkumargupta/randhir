@@ -467,12 +467,13 @@ function itg_preprocess_html(&$vars) {
  }
   if($arg[0] == 'livetv') {
    $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $livetv_og_src = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/logo_300x300.jpg');
    $fb_image_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
           '#attributes' => array(
             'property' => 'og:image',
-            'content' => $liveTvsrc,
+            'content' => $livetv_og_src,
           ),
           '#weight' => -10,
         );
@@ -524,7 +525,12 @@ function itg_preprocess_html(&$vars) {
         $_section_name = $section_tids[0]->name;
       } 
       $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
-    }		
+    }
+    $ros_preconnect_prefetch_code = array(
+      '#type' => 'markup',
+      '#markup' => get_itg_variable('ros_dns_preconnect_prefetch'),
+    );
+    drupal_add_html_head($ros_preconnect_prefetch_code, 'ros_dns_preconnect_prefetch');		
   }
   if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
     $node_obj = menu_get_object();
