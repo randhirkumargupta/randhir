@@ -81,7 +81,7 @@ function itg_videogallery_node_publish_to_unpublish($nid) {
   foreach ($node->field_video_upload[LANGUAGE_NONE] as $key => $value) {
     // Build array of field collection values.
     $field_collection_item_values[] = $value['value'];
-    // Unset them.  
+    // Unset them.
     unset($node->field_video_upload[LANGUAGE_NONE][$key]);
   }
   entity_delete_multiple('field_collection_item', $field_collection_item_values);
@@ -325,8 +325,8 @@ function itg_videogallery_get_node_status($nid) {
 }
 
 /* * solr action on node updaet and insert
- * 
- * 
+ *
+ *
  */
 
 function itg_videogallery_update_video_info_solr($videoid) {
@@ -343,7 +343,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
       $video_status_used = 0;
       $video_is_draft = 1;
      }
-    
+
       $node = new stdClass();
       $node->title = $val->title;
       $node->type = "itg_solr_video";
@@ -371,7 +371,7 @@ function itg_videogallery_update_video_info_solr($videoid) {
       }
       // need to chane with solr
       node_save($node);
-    
+
   }
 }
 
@@ -515,35 +515,37 @@ function get_header_tab_related_video_block_content() {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
       $display_title = get_related_display_title($arg[1], $current_entity_id);
-      if (!empty($display_title)) {
-        $display_title = $display_title;
-      }
-      else {
-        $display_title = $related_data->label;
-      }
-      // $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
-      $related_title = html_entity_decode($display_title);
-      if (empty($related_data->sm_field_custom_story_small_large_url[0])) {
-        $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-      }
-      else {
-        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
-      }
-        
-      $related_video_duration = $related_data->sm_field_video_duration[0];
-        
-      $img_alt = str_replace('"', '', $related_title);
-      $rel_title = str_replace('"', '', $related_title);
-      $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
-      $options = array(
-        'html' => TRUE
-      );
-      $output = l(htmlspecialchars_decode($rel_title, ENT_COMPAT), $url, $options);
-           
-      $related_image = '<img class="related-default" alt="' . $img_alt . '" title="'. $img_alt .'" src="' . $related_image_url . '">';
-      if (!empty($related_title)) {
-        $related_video .= '<li class="related_content_tabs"><figure><a href="'.$url.'" class="pic">'. $related_image .'<figcaption><i class="fa fa-play-circle"></i>'. $related_video_duration .'</figcaption>';
-        $related_video .= '</figure></a><p class="title">' . $output . '</p></li>';
+      if(!empty($related_data)){
+        if (!empty($display_title)) {
+          $display_title = $display_title;
+        }
+        else {
+          $display_title = $related_data->label;
+        }
+        // $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
+        $related_title = html_entity_decode($display_title);
+        if (empty($related_data->sm_field_custom_story_small_large_url[0])) {
+          $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+        }
+        else {
+          $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+        }
+
+        $related_video_duration = $related_data->sm_field_video_duration[0];
+
+        $img_alt = str_replace('"', '', $related_title);
+        $rel_title = str_replace('"', '', $related_title);
+        $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
+        $options = array(
+          'html' => TRUE
+        );
+        $output = l(htmlspecialchars_decode($rel_title, ENT_COMPAT), $url, $options);
+
+        $related_image = '<img class="related-default" alt="' . $img_alt . '" title="'. $img_alt .'" src="' . $related_image_url . '">';
+        if (!empty($related_title)) {
+          $related_video .= '<li class="related_content_tabs"><figure><a href="'.$url.'" class="pic">'. $related_image .'<figcaption><i class="fa fa-play-circle"></i>'. $related_video_duration .'</figcaption>';
+          $related_video .= '</figure></a><p class="title">' . $output . '</p></li>';
+        }
       }
     }
     $related_video .= "</ul></div>";
@@ -567,7 +569,7 @@ function itg_videogallery_get_video_setting_by_bucket_name($bucket_name) {
    $query->condition('title', $bucket_name, ' = ');
    $query->condition('type', 'video_setting_by_bucket_name', ' = ');
    $video_data = $query->execute()->fetchAll();
- 
+
   return $video_data;
 }
 
@@ -605,7 +607,7 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data, $used_on, $externa
       $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags;
     }
   }
-  
+
 
   if (!empty($dfp_data)) {
     if ($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
@@ -658,7 +660,7 @@ function itg_videogallery_make_bitrate_url($video_url, $bitrates,$hls) {
 }
 
 /**
- * 
+ *
  */
 function itg_videogallery_get_dfp_tags($website , $client) {
   $query = db_select('itg_dfp_tags_setting', 'idts');
@@ -670,7 +672,7 @@ function itg_videogallery_get_dfp_tags($website , $client) {
 }
 
 /**
- * Function use for get all draft video 
+ * Function use for get all draft video
  */
 function itg_videogallery_get_all_draft_video_of_video_content() {
   $video_data = "";
@@ -687,7 +689,7 @@ function itg_videogallery_get_all_draft_video_of_video_content() {
 }
 
 /**
- * Function use for get all used video 
+ * Function use for get all used video
  */
 function itg_videogallery_get_all_publish_video_of_video_content() {
   $video_data = "";
