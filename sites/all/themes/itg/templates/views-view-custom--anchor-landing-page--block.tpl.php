@@ -15,11 +15,11 @@ $follow_status = $content["follow_status"];
   <?php
     $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
     $dev_arg = '';
-    $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>';
+    $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/custom.js"></script>';
     
     if (in_array($_SERVER['HTTP_HOST'], $domain_arr) && $_GET['test'] != '1234') {
           $dev_arg = '99999';
-          $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/it_staging_custom.js"></script>';
+          $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/it_staging_custom.js"></script>';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper clearfix">
