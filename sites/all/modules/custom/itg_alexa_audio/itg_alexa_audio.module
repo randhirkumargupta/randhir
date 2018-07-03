@@ -119,6 +119,7 @@ function genrate_alexa_audio_json($value) {
   $filedir = 'sites/indiatoday/' . date('Ymd');
   $time = date('hA');
   if (!empty($audiofid)) {
+    p($_FILES);
     $orignal_img = file_load($audiofid);
     $audio_filesize = $orignal_img->filesize;
     
@@ -129,7 +130,7 @@ function genrate_alexa_audio_json($value) {
     $aws_region = variable_get('aws_region');
     $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
     $s3->registerStreamWrapper();
-    $s3_url = "s3://{$bucket}/s3fs-public/$orignal_img->filename";
+    print "s3_url = ". $s3_url = "s3://{$bucket}/s3fs-public/$orignal_img->filename";
     // Read CSV with fopen
     $s3_file = fopen($s3_url, 'r');
 
