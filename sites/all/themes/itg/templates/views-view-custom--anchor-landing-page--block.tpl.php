@@ -129,14 +129,14 @@ box-sizing: border-box;}
 	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:350px;}
 }
 @media screen and (max-width:767px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
 	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
 }
 @media screen and (max-width:680px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
 }
 @media screen and (max-width:480px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
 }
 
 </style>
