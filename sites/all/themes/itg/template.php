@@ -466,13 +466,14 @@ function itg_preprocess_html(&$vars) {
   
  }
   if($arg[0] == 'livetv') {
-   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo_300x200.jpg');
+   $liveTvsrc = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+   $livetv_og_src = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/logo_300x300.jpg');
    $fb_image_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
           '#attributes' => array(
             'property' => 'og:image',
-            'content' => $liveTvsrc,
+            'content' => $livetv_og_src,
           ),
           '#weight' => -10,
         );
