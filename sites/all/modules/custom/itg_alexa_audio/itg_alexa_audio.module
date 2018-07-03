@@ -120,7 +120,24 @@ function genrate_alexa_audio_json($value) {
   $time = date('hA');
   if (!empty($audiofid)) {
     $orignal_img = file_load($audiofid);
-    $audio_filesize = $orignal_img->filesize;    
+    $audio_filesize = $orignal_img->filesize;
+    
+    $getID3 = new getID3;
+    $bucket = variable_get('aws_bucket');
+    $aws_access_key = variable_get('aws_access_key');
+    $aws_secret_key = variable_get('aws_secret_key');
+    $aws_region = variable_get('aws_region');
+    $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
+    $s3->registerStreamWrapper();
+    $s3_url = "s3://{$bucket}/s3fs-public/$orignal_img->filename";
+    // Read CSV with fopen
+    $s3_file = fopen($s3_url, 'r');
+
+    $audio_duration = $getID3->analyze($s3_file);
+    echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
+    p($orignal_img);
+  
+    
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
@@ -134,10 +151,7 @@ function genrate_alexa_audio_json($value) {
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
   $stream_url = file_create_url($new_destination);
   
-  $getID3 = new getID3;
-  $audio_duration = $getID3->analyze($stream_url);
-  echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
-  p($orignal_img);
+  
     
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
