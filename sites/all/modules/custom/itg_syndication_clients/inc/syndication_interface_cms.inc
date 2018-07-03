@@ -68,19 +68,13 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $byline = get_byline_name_by_nid($value['nid']);
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
-      $publish_date = date("F d, Y", strtotime($issue_title));
+      $publish_date = date("F d, Y", strtotime($issue_title));     
+      //
       $body = remove_extra_tag_in_body($value["body_value"]);
       $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
-      $kicker_text = trim($kicker_text);
-      $kicker_text = rtrim($kicker_text, "<p> </p>");
-      $kicker_text = str_replace("<p> </p>", "", $kicker_text);
-      $body = trim($body);
-      $body = rtrim($body, "<p> </p>");
-      $body = str_replace("<p> </p>", "", $body);
-      $body = addslashes($body);
-      $kicker_text = addslashes($kicker_text);
       $xml .= '<section>' . $primary_cat . '</section>';
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<byline>' . $byline . '</byline>';
