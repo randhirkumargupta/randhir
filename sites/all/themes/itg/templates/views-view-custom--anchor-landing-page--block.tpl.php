@@ -13,18 +13,18 @@ $follow_status = $content["follow_status"];
 ?>
 <div class="anchor-landing autohorsectonpage">
   <?php
-    $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');    
+    $domain_arr = array('staging-it.indiatodayonline.in', 'uat-it.indiatodayonline.in');
     $dev_arg = '';
     $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/custom.js"></script>';
-    
-    if (in_array($_SERVER['HTTP_HOST'], $domain_arr) && $_GET['test'] != '1234') {
+
+    if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
           $dev_arg = '99999';
           $jspath = '<script src="https://smedia2.intoday.in/aajtak/at_2.21.06.19/resources/chat/it_staging_custom.js"></script>';
     }
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper clearfix">
         <div id="anc-placeholder" style="display:none"></div>
-   
+
         <?php print $jspath; ?>
         <script>
         window.lib = lib || {};
@@ -60,8 +60,10 @@ $follow_status = $content["follow_status"];
       else {
         ?>
       <img width="370" height="208" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title=""/>
-         <?php if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people'){echo $anchor['title'];}?>
-      <?php } ?>
+         <?php if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people'){
+           echo '<div class="people-img-title">'.$anchor['title'].'</div>';
+          }
+      } ?>
     </div>
     <div class="anchor-right" >
 
@@ -158,18 +160,18 @@ box-sizing: border-box;}
 	.node-type-reporter.section-author .tile{float:left; width:100%; margin-bottom:20px;}
 	.node-type-reporter.section-author .tile figure{float:left; margin-right:20px;}
 	.node-type-reporter.section-author ul.author-story-wrapper li:first-child{padding-left:15px}
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 25%;float: left;height: auto; overflow-y:inherit;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 25%;float: left;height: auto; overflow-y:inherit;}
 	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:350px;}
 }
 @media screen and (max-width:767px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
 	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
 }
 @media screen and (max-width:680px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}
 }
 @media screen and (max-width:480px){
-	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
 }
 
 </style>
