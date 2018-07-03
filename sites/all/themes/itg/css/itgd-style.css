@@ -426,6 +426,7 @@ width: 100%;
    .section-movies .auto-block-3 .itg-widget-parent.m-bottom40{ padding:0px; margin-bottom:0; }
    .section-movies .auto-block-3 .ad-widget{ margin-top:20px; }
    .magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link{font-size: 18px;}
+   #block-itg-live-tv-live-tv-video-page .program-livetv .social-icon ul li.desktop-hide{ display:none; }
 }
 .may-be-recommend .trc_rbox_container .video-label.video-title {
     font-size: 15px;
