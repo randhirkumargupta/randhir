@@ -145,6 +145,7 @@ function kindle_feed_generate_form_validate($form, &$form_state) {
  * {@inheritdocs}
  */
 function kindle_feed_generate_form_submit($form, &$form_state) {
+    
     if($form_state['values']['op'] == 'Submit') {
         $issue = $form_state['values']['issues'];
         $magazine = $form_state['values']['magazine'];
@@ -226,7 +227,7 @@ function _create_tmp_zip($prefix) {
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
         }
-        $zip->close();
+        //$zip->close();
         header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
