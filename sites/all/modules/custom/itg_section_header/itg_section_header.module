@@ -453,7 +453,7 @@ function get_event_menu($nid) {
     if (!empty($flash_old)) {
       $flash_old_event = $flash_old['menu'];
     }
-    $menu['flashback_menu'][] = '<li>' . l('Flashback', $flash_old['top']->field_event_flash_back_url_value, array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+    $menu['flashback_menu'][] = '<li>' . l('Flashback', trim($flash_old['top']->field_event_flash_back_url_value), array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
   }
   $path_alias = drupal_get_path_alias('node/'.  $nid);
   $event_tab_menu = get_event_tab_menu_data($nid);
@@ -525,7 +525,7 @@ function itg_event_backend_custom_flashback($menu_font_color, $event_type, $curr
     if($count == 1) {
     $flash_back_link_top_nid = $value;
     }
-    $flash_back_link .= '<li>' . l($value->field_event_flashback_title_value, $value->field_event_flash_back_url_value, array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+    $flash_back_link .= '<li>' . l($value->field_event_flashback_title_value, trim($value->field_event_flash_back_url_value), array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
   $count++;
   }
 
