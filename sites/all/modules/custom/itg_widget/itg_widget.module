@@ -665,7 +665,7 @@ function itg_widget_block_view($delta = '') {
                 }
             jQuery(".trending-videos-flex").flexslider({
             animation: "slide",
-            animationLoop: true,
+            animationLoop: (!is_mobile?true:false),
             itemWidth: getGridSize(),
             itemMargin:15,
             prevText: "",
@@ -1287,7 +1287,7 @@ function itg_widget_block_view($delta = '') {
             }
           jQuery(".top-takes-videos-flex").flexslider({
           animation: "slide",
-          animationLoop: true,
+          animationLoop: (!is_mobile?true:false),
           itemWidth: getGridSize(),
           itemMargin:15,
           prevText: "",
