@@ -34,7 +34,7 @@ foreach ($view->result as $id => $item): ?>
    <?php if (empty($item->_field_data['nid']['entity']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <?php
               $img = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title=''/>";
-              print l($img, 'node/' . $item->nid, array('html' => TRUE));
+              //print l($img, 'node/' . $item->nid, array('html' => TRUE));
 
            }
            else {

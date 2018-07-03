@@ -59,9 +59,9 @@ $follow_status = $content["follow_status"];
       }
       else {
         ?>
-      <img width="370" height="208" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title=""/>
+      <!-- <img width="370" height="208" src="<?php //print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title=""/> -->
          <?php if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people'){
-           echo '<div class="people-img-title">'.$anchor['title'].'</div>';
+           echo '<div class="people-img-title no-people-img">'.$anchor['title'].'</div>';
           }
       } ?>
     </div>
@@ -164,14 +164,15 @@ box-sizing: border-box;}
 	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:350px;}
 }
 @media screen and (max-width:767px){
-	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li,.node-type-reporter.section-people ul.people-photo-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
 	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
 }
 @media screen and (max-width:680px){
-	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li,.node-type-reporter.section-people ul.people-photo-list li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 33%;float: left;height: 193px;overflow-y: hidden;}
 }
 @media screen and (max-width:480px){
-	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li,.node-type-reporter.section-people ul.people-photo-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}	
+	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
+	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
 	.node-type-reporter .anchor-left .reporter-image-responsive-css{width:auto;}
 }
 </style>
