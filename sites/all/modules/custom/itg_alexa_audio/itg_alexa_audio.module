@@ -107,6 +107,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
 function itg_alexa_audio_form_custom_submit($form, &$form_state) {
   module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
   print "file_directory = ".file_directory_temp();
+  pr($_FILES);
   genrate_alexa_audio_json($form_state['values']);
 }
 
