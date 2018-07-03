@@ -154,6 +154,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
         $directory_name = uniqid() . "-" . time();
         $dir = KINDLE_WRAPPER . "/" . $directory_name;
         $dir_zip = KINDLE_WRAPPER . "/zip";
+        echo $dir; echo "andy"; echo $dir_zip; die();
         file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
         file_prepare_directory($dir_zip, FILE_CREATE_DIRECTORY);
         $issue = $_GET['issue'];
