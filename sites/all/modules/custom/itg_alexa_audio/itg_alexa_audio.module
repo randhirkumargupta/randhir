@@ -120,12 +120,7 @@ function genrate_alexa_audio_json($value) {
   $time = date('hA');
   if (!empty($audiofid)) {
     $orignal_img = file_load($audiofid);
-    print "audio_filesize = ".$audio_filesize = $orignal_img->filesize;
-    print "uri = ".$orignal_img->uri;
-    $getID3 = new getID3;
-    $audio_duration = $getID3->analyze($orignal_img->uri);
-    echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
-    p($orignal_img);
+    $audio_filesize = $orignal_img->filesize;    
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
@@ -138,6 +133,12 @@ function genrate_alexa_audio_json($value) {
   $uid = $value['uid'];
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
   $stream_url = file_create_url($new_destination);
+  
+  $getID3 = new getID3;
+  $audio_duration = $getID3->analyze($stream_url);
+  echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
+  p($orignal_img);
+    
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
     'updateDate' => $date,
