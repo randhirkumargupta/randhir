@@ -16,7 +16,7 @@ $tid = $photo_node->field_primary_category[LANGUAGE_NONE][0]['value'];
 $term = taxonomy_term_load($tid);
 $primary_category_name = itg_common_custompath_insert_val($term->name);
 $f_collection = entity_load('field_collection_item', array($photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']));
-$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = $actual_link;
 $share_title = addslashes($photo_node->title);
 $share_desc = '';
@@ -37,6 +37,11 @@ $argum = base64_encode(arg(1));
                 <li><a title="share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $photo_node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                 <li><a title="share on google+" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
                 <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                <?php 
+                  $whatsapp = $photo_node->title . " ". $actual_link;
+                  $whatsapp_text = urlencode($whatsapp); 
+                ?> 
+                <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $photo_node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
                 <li><a href="mailto:?body=<?php print urlencode($actual_link); ?>" title="Email"><i class="fa fa-envelope"></i></a></li>
                 <?php
                 if (function_exists('global_comment_last_record')) {

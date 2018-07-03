@@ -66,6 +66,10 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 						  <?php foreach ($data['data']['menu_manager']['menu'] as $menu): ?>
 							<?php print $menu ?>
 						  <?php endforeach; ?>
+						  <?php print $data['data']['menu_manager']['eventtab_menu'] ?>
+                          <?php foreach ($data['data']['menu_manager']['flashback_menu'] as $f_menu): ?>
+							<?php print $f_menu ?>
+						  <?php endforeach; ?>
 					  </ul>	  
 				  </div>       
 			  </div>

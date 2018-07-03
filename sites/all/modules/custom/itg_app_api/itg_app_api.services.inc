@@ -2315,6 +2315,41 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        //search
+        'search' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'search api.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'search_data_rest',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                        array(
+                            'name' => 'key',
+                            'optional' => FALSE,
+                            'source' => 'data',
+                            //'source' => array('data' => 'first_name'),
+                            'description' => 'Key',
+                            'type' => 'string',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         //Social share in report API   
         'social_share_save_it' => array(
             'operations' => array(
@@ -2503,6 +2538,33 @@ function itg_app_api_resource() {
                         'name' => 'itg_app_api.services',
                     ),
                     'callback' => 'itg_rapid_api_breaking_news',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+         // popular_search_tv custom resource declaration.....
+        'popular_search_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves popular_search_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_popular_search_tv',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -6339,6 +6401,106 @@ function itg_rapid_api_topstories($token) {
 }
 
 /**
+ * Call back function for search API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function search_data_rest($token) {
+    $key_title = $_GET['key'];
+    $nid_ar = array();
+    $searchpage = solr_search_custom_results_restapi($key_title);
+    //p($searchpage);
+    $data_json = array();
+    $data = array();
+    $list = array();
+    $loop_c = 0;
+    foreach ($searchpage as $key => $result) {
+      $nid = $result->entity_id;
+      $title = $result->label;
+      $image_courtesy = FRONT_URL;
+      $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
+      $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
+      $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
+      $body = empty($result->content) ? '' : $result->content;
+      $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
+      $bundle = empty($result->bundle) ? '' : $result->bundle;
+      $url = empty($result->url) ? '' : $result->url;
+      $teaser = empty($result->teaser) ? '' : $result->teaser;
+      $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
+      $list[$loop_c]['n_id'] = "$nid";
+      //$list[$loop_c]['n_type'] = "$bundle";
+      if ($bundle == "breaking_news") {
+        $list[$loop_c]['n_type'] = "story";
+        $list[$loop_c]['n_is_blog'] = "1";
+      } else {
+        $list[$loop_c]['n_type'] = "$bundle";
+        $list[$loop_c]['n_is_blog'] = "0";
+      }
+      $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
+      $list[$loop_c]['n_is_sponsored'] = "0";
+      $list[$loop_c]['n_share_link'] = "$url";
+      $list[$loop_c]['n_title'] = "$title";
+      $list[$loop_c]['n_short_desc'] = "$teaser";
+      $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
+      $list[$loop_c]['n_large_image'] = "$extra_large_image";
+      $list[$loop_c]['n_updated_datetime'] = "$date_val";    
+      $loop_c++;
+    }
+    $data_json['status_code'] = "1";
+    $data_json['status_message'] = "";
+    if ($loop_c == 0) {
+      $data_json['status_code'] = "0";
+      $data_json['status_message'] = "";
+    }
+    $data['id'] = "0";
+    $data['search_title'] = "$key_title";
+    $data['layout_id'] = "0";
+    $data['news_count'] = "$loop_c";
+    $data['news_display_count'] = "100";
+    $data['news_pagination_cap'] = "50";
+    $data['updated_datetime'] = "";
+    $data['news'] = $list;
+    $data_json['data'] = $data;
+    return $data_json; 
+}
+
+/**
+ * Callback for solr service.
+ */
+function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
+    $link_ar = array();
+    $nid_ar = array();
+    $stdkeys = explode(',', str_replace(' ', '', $fields));
+    $results = array();
+
+    try {
+        $key = preg_replace('/\s+/', ' OR ', $key);
+        $solr = apachesolr_get_solr();
+        $query = apachesolr_drupal_query("custom", array('q' => $key));
+        $query->setSolrsort('ds_changed', 'desc');
+        $query->removeFilter('bundle_name');
+        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('rows', '100');
+        //$query->addParam('fq', "bundle_name:Video");
+        $query->addParam('sort', "ds_changed DESC");
+        $resp = $query->search();
+        if (!empty($resp->data)) {
+            $data = json_decode($resp->data);
+        }
+        $results = $data->response->docs;
+    } catch (Exception $e) {
+        watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
+        apachesolr_failure(t('Solr search'), $key);
+    }
+
+    if ($results and is_array($results) and count($results)) {
+        return $results;
+    }
+    return FALSE;
+}
+
+/**
  * Call back function for Social Share API
  * @pram $_POST in JSON formate
  *
@@ -6899,6 +7061,32 @@ function itg_rapid_api_breaking_news() {
     }
     return $data;
 }
+
+/**
+ * Call back function for popular_search_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+
+function itg_rapid_api_popular_search_tv($token) {
+    $redis_key = "itg_rapid_api_popular_search_tv";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_popular_search_tv');
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+
 /**
  * function for get redish_ttl
  * @pram int $tid
@@ -6918,3 +7106,5 @@ function itg_app_redish_ttl($api = "") {
 
     return $ttl;
 }
+
+
