@@ -21,8 +21,13 @@ $follow_status = $content["follow_status"];
      if(isset($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'anchor'):?>
       <div class="anchor-video-wrapper clearfix">
         <div id="anc-placeholder" style="display:none"></div>
-   
+		<?php 
+		$anchor_page_js_version = get_itg_variable('anchor_page_js_version');
+		if (isset($anchor_page_js_version) && !empty($anchor_page_js_version)) {?>
+			<script src="https://smedia2.intoday.in/aajtak/<?php echo $anchor_page_js_version;?>/resources/chat/custom.js"></script>
+		<?php } else {?>	
         <script src="https://smedia2.intoday.in/aajtak/at_2.21.06.18/resources/chat/custom.js"></script>
+        <?php } ?>
         <script>
         window.lib = lib || {};
         lib.setup({
