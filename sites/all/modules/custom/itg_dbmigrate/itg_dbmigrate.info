@@ -33,3 +33,4 @@ files[] = includes/itg_migrate.breaking_news.inc
 files[] = includes/files.inc
 files[] = includes/itg_migrate.supplements.inc
 files[] = includes/itg_migrate.cricketliveblog.inc
+files[] = includes/itg_migrate.bylinepeople.inc

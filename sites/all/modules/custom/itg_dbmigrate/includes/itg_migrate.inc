@@ -130,11 +130,14 @@ function itg_dbmigrate_migrate_api() {
       'itg_cricketliveblog' => array(
         'title' => t('Itg Cricket Live Blog Migration'),
       ),
+      'itg_byline_people' => array(
+        'title' => t('Itg byline people Migration'),
+      ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
-      
-      
+
+
       'itg_foodnews' => array(
         'title' => t('Itg Food News Imports'),
       ),
@@ -156,7 +159,7 @@ function itg_dbmigrate_migrate_api() {
 
       'itg_best_college' => array(
         'title' => t('Itg Best College Migration'),
-      ),  
+      ),
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -249,7 +252,7 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgMagazineMigration',
         'group_name' => 'itg_magazine',
       ),
-     
+
       'ItgFoodNews' => array(
         'class_name' => 'ItgFoodNewsMigration',
         'group_name' => 'itg_foodnews',
@@ -258,7 +261,7 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgSponsorMigration',
         'group_name' => 'itg_sponsor',
       ),
-      
+
       'ItgCookingTips' => array(
         'class_name' => 'ItgCookingTipsMigration',
         'group_name' => 'itg_cooking_tips',
@@ -278,6 +281,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgCricketliveblog' => array(
         'class_name' => 'ItgCricketliveblog',
         'group_name' => 'itg_cricketliveblog',
+      ),
+      'ItgBylinePeople' => array(
+        'class_name' => 'ItgBylinePeopleMigration',
+        'group_name' => 'itg_byline_people',
       ),
     ),
 
