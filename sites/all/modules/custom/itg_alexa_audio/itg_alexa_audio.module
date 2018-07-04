@@ -302,7 +302,7 @@ function itg_alexa_audio_mail_cron() {
     // more than 6 hours ago
     $mail_content = 'Audio not uploaded from 1 hours for Alexa.';
     
-    $mail_subject = 'Mail alter for alexa';
+    $mail_subject = strip_tags('IndiaToday Audio 50 Alexa Alert');
     $params = array(
         'body' => $mail_content,
         'subject' => $mail_subject,
