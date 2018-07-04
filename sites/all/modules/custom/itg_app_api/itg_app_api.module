@@ -288,6 +288,15 @@ function itg_app_api_menu() {
         'access arguments' => array('itg mobile feed'),
         'type' => MENU_NORMAL_ITEM,
     );
+    // menu for update splash-screen json
+    $items['admin/api-configuration/rest-api/splash-screen-json'] = array(
+        'title' => 'Update splash-screen json',
+        'description' => 'Update splash-screen json',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('splash_screen_json'),
+        'access arguments' => array('itg mobile feed'),
+        'type' => MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
@@ -3044,6 +3053,23 @@ function popular_search_tv_json() {
         '#type' => 'textarea',
         '#title' => t('popular search tv'),
         '#default_value' => variable_get('itg_rapid_api_popular_search_tv'),
+        '#required' => TRUE,
+    );
+
+    return system_settings_form($form);
+}
+/**
+ * splash_screen_json form decalation
+ *
+ * @return type
+ */
+function splash_screen_json() {
+    $form = array();
+
+    $form['itg_rapid_api_splash_screen_json'] = array(
+        '#type' => 'textarea',
+        '#title' => t('popular search tv'),
+        '#default_value' => variable_get('itg_rapid_api_splash_screen_json'),
         '#required' => TRUE,
     );
 
