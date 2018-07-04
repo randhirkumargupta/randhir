@@ -7524,10 +7524,11 @@ function itg_rapid_value_manual_blog($nid) {
 
     $blog_data['blog_content'] = $blog_content;
     $livetv_content = array();
+    $live_tv_url = "";
     if($live_tv){
         $live_tv_url = itg_rapid_get_live_tv_url();
         $livetv_content['is_live_tv'] = "$live_tv";
-        $livetv_content['livetv_url'] = "$livetv_url";
+        $livetv_content['livetv_url'] = "$live_tv_url";
     }
     else{
         $livetv_content['is_live_tv'] = "$live_tv";
@@ -7796,11 +7797,11 @@ function itg_rapid_get_live_tv_url(){
         $query->condition('lv_tv_url.entity_id', $active_node_id, '=');
         //print strtr((string) $query, $query->arguments());die();
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        print_r($result);
+        
         $iframe_code = $result[0]['field_ads_ad_code_value'];
         preg_match('/src="([^"]+)"/', $iframe_code, $match);
         $iframe_url = $match[1];
-        echo $iframe_url; die(); 
+        
     }
     return $iframe_url;
 }
