@@ -33,7 +33,7 @@ foreach ($data as $key => $commentary) {
         $_bowler = explode('|', $commentary->BowlDetails);
         $bowlDetails = $_bowler[1] . '-' . $_bowler[2] . '-' . $_bowler[3] . '-' . $_bowler[4];
         ?>
-        <div class="para-live-blog" id="<?php print $key; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">  
+        <div class="para-live-blog" id="<?php print 'over_'.$over; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">  
             <div class="batBollDetails">
 
                 <span class="sectiontime">Score  <?php echo $commentary->Score; ?> </span>
@@ -50,13 +50,13 @@ foreach ($data as $key => $commentary) {
             </div>
         </div>
     <?php endif; ?>
-    <div class="para-live-blog" id="<?php print $key; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">
+    <div class="para-live-blog" id="<?php print $commentary->Id; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">
         <div>
             <p itemprop="articleBody"> <?php if (!empty($time)): ?><span><?php echo $time; ?>: </span><?php endif; ?><?php echo $commentary->Commentary; ?></p>
         </div>
     </div>
     <?php
-    $last_ball = $over;
+    $last_ball = $over;    
 }
 ?>
 
