@@ -18,7 +18,6 @@ foreach ($data as $key => $commentary) {
     if (isset($data[$key])) {
         $over = $data[$key]->Over;
     }
-    $over = $commentary->Over;
     if (isset($commentary->TimeOfDay)) {
         $time = date('H:i T', strtotime($commentary->TimeOfDay));
     }
