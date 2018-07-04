@@ -26,7 +26,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       $node = node_load($exist_nid);
       $form['title']['#default_value'] = $node->title;
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
-      // $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
       
       if (empty($vide_fid)) {
         $last_video = get_last_video_for_alexa();
@@ -60,8 +60,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#attributes' => array('readonly' => 'readonly'),
       );
       
-      if ($vide_fid) {
-        
+      if ($vide_fid) {        
         $file_video_obj = file_load($vide_fid);
         $video_url = file_create_url($file_video_obj->uri); 
         $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");
@@ -112,15 +111,16 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * Function to generate JSON file for alexa
  * @param array $value   
  */
-function genrate_alexa_audio_json($value) {
+function genrate_alexa_audio_json($value) {  
   module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  $audiofid = $value['field_audio']['und'][0]['fid'];
   $filedir = 'sites/indiatoday/' . date('Ymd');
   $time = date('hA');
   if (!empty($audiofid)) {    
     $orignal_img = file_load($audiofid);
     $audio_filesize = $orignal_img->filesize;    
-    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
-    $directory = file_default_scheme() . '://' . $filedir . '/';
+    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.time() . (mt_rand(3,100)).'.mp3';
+    $directory = file_default_scheme() . '://' . $filedir . '/audio/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
     $orignal_img->filename = $new_filename;
     $new_destination = file_default_scheme() . '://' . $filedir . '/' . $new_filename;
@@ -129,24 +129,21 @@ function genrate_alexa_audio_json($value) {
   
   $title = $value['title'];
   $uid = $value['uid'];
-  $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
-  print $stream_url = file_create_url($new_destination);
-  
+  $date = str_replace('+00:00', '.0Z', gmdate('c', strtotime($value['field_event_start_date']['und'][0]['value'])));
+  $stream_url = file_create_url($new_destination);
   // For audio file duration
   if($stream_url){
       $audio_filename = tempnam('/tmp','getid3');
       if (file_put_contents($audio_filename, file_get_contents($stream_url, false, null, 0, 300000))) {
-         //if (require_once('/var/www/html/getid3/getid3.php')) {
             $getID3 = new getID3;
             $audio_file_info = $getID3->analyze($audio_filename);
-         // }
-         unlink($audio_filename);
-         p($audio_file_info);
+            unlink($audio_filename);
+            $playtime_string = $audio_file_info['playtime_string'];
       }
   }
     
   $json = array(
-    'uid' => 'itaudiofeed' . $uid,
+    'uid' => 'itaudiofeed' . time(),
     'updateDate' => $date,
     'titleText' => $title,
     'mainText' => "",
@@ -168,15 +165,15 @@ function genrate_alexa_audio_json($value) {
   
   if (!empty($videofid)) {
     $file_video_obj = file_load($videofid);
-    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.strtotime(date('Y-m-d H:i:s')).'.mp4';      
+    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.time() . (mt_rand(3,100)).'.mp4';      
     $file_video_obj->filename = $new_video_filename;
-    $new_video_destination = file_default_scheme() . '://' . $filedir . '/' . $new_video_filename;
+    $new_video_destination = file_default_scheme() . '://' . $filedir . '/video/' . $new_video_filename;
     file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
   }
   
   $video_url = file_create_url($new_video_destination);
   $json_video = array(
-    'uid' => 'itaudiofeed' . $uid,
+    'uid' => 'itaudiofeed' . time(),
     'updateDate' => $date,
     'titleText' => $title,
     'mainText' => "",
@@ -188,7 +185,8 @@ function genrate_alexa_audio_json($value) {
   $fpv_video = fopen($video_file_path, "w");
   fwrite($fpv_video, json_encode($json_video));
   fclose($fpv_video);
-  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . $uid);
+  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . time(), $playtime_string, $audio_filesize);
+  drupal_goto('node/add/alexa-audio-clips');
 }
 
 /**
@@ -197,7 +195,7 @@ function genrate_alexa_audio_json($value) {
  * @param string $date
  * @param string $filename
  */
-function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename) {
+function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename, $playtime_string, $audio_filesize) {
   $date = date("D, d M Y H:s:i", strtotime($date));
   $c_date = date("Y");
   $xml = <<<XML
@@ -237,9 +235,9 @@ https://smedia2.intoday.in/conclave/2017-next/images/rightLogo.png
 India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
 </description>
 <guid isPermaLink="false">$filename</guid>
-<enclosure length="2863763" type="audio/mpeg" url="$stream_url"></enclosure>
+<enclosure length="$audio_filesize" type="audio/mpeg" url="$stream_url"></enclosure>
 <pubDate>$date GMT</pubDate>
-<itunes:duration>1:29</itunes:duration>
+<itunes:duration>$playtime_string</itunes:duration>
 </item>
 </channel>
 </rss>
@@ -304,7 +302,7 @@ function itg_alexa_audio_mail_cron() {
     // more than 6 hours ago
     $mail_content = 'Audio not uploaded from 1 hours for Alexa.';
     
-    $mail_subject = 'Mail alter for alexa';
+    $mail_subject = strip_tags('IndiaToday Audio 50 Alexa Alert');
     $params = array(
         'body' => $mail_content,
         'subject' => $mail_subject,
