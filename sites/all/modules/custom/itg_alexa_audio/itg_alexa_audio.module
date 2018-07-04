@@ -134,7 +134,7 @@ function genrate_alexa_audio_json($value) {
   
   // For audio file duration
   if($stream_url){
-      $filename = tempnam('/tmp','getid3');
+      $audio_filename = tempnam('/tmp','getid3');
       if (file_put_contents($audio_filename, file_get_contents($stream_url, false, null, 0, 300000))) {
          //if (require_once('/var/www/html/getid3/getid3.php')) {
             $getID3 = new getID3;
