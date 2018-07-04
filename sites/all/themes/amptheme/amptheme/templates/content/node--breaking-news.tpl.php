@@ -270,6 +270,14 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
               print $breaking_output;
             }
           }
+          else if($type == 'Cricket Live Blog'){ ?>
+			  <amp-live-list layout="container" data-poll-interval="15000" data-max-items-per-page="20" id="amp-live-list-insert-blog">
+				<button update on="tap:amp-live-list-insert-blog.update" class="ampstart-btn ml1 caps">You have updates</button>
+				<div items>
+					<?php print get_cricket_live_blog_data('zmpk07042018186621', 0, 'amp'); ?>
+				</div>
+			  </amp-live-list>
+		 <?php }
         endif;
         ?>
     </div>
