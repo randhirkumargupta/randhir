@@ -6064,6 +6064,10 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    print_r(node_load(1090834)); // Livestream
+    print_r(node_load(122)); // Bitgravity
+    print_r(node_load(50)); // youtube
+    die();
     //p(arg());
     //p(node_load(1210673));
     /*// load our view and pass it
@@ -7519,6 +7523,17 @@ function itg_rapid_value_manual_blog($nid) {
     }
 
     $blog_data['blog_content'] = $blog_content;
+    $livetv_content = array();
+    if($live_tv){
+        $live_tv_url = itg_rapid_get_live_tv_url();
+        $livetv_content['is_live_tv'] = "$live_tv";
+        $livetv_content['livetv_url'] = "$livetv_url";
+    }
+    else{
+        $livetv_content['is_live_tv'] = "$live_tv";
+        $livetv_content['livetv_url'] = "$livetv_url";
+    }
+    $blog_data['livetv_content'] = $livetv_content;
 
     //  data object
     $json_data['data'] = $blog_data;
@@ -7759,4 +7774,10 @@ function itg_rapid_api_popular_search_tv($token) {
     $return_obj = $obj;
 
     return $return_obj;
+}
+/**
+ * itg_rapid_get_live_tv_url
+ */
+function itg_rapid_get_live_tv_url(){
+    
 }
