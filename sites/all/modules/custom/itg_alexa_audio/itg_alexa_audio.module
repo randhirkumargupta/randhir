@@ -26,7 +26,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       $node = node_load($exist_nid);
       $form['title']['#default_value'] = $node->title;
       $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
-      $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      // $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
       
       if (empty($vide_fid)) {
         $last_video = get_last_video_for_alexa();
@@ -114,25 +114,11 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  */
 function genrate_alexa_audio_json($value) {
   module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
-  pr($_FILES);
-  $audio_tmp = $_FILES['files']['tmp_name']['field_audio_und_0'];
-  $video_tmp = $_FILES['files']['tmp_name']['field_alexa_video_und_0'];
-  $audiofid = $value['field_audio']['und'][0]['fid'];
   $filedir = 'sites/indiatoday/' . date('Ymd');
   $time = date('hA');
-  if (!empty($audiofid)) {
-    
+  if (!empty($audiofid)) {    
     $orignal_img = file_load($audiofid);
-    $audio_filesize = $orignal_img->filesize;
-    
-    $getID3 = new getID3;
-    
-
-    $audio_duration = $getID3->analyze($audio_tmp);
-    echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
-    p($orignal_img);
-  
-    
+    $audio_filesize = $orignal_img->filesize;    
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
@@ -144,9 +130,20 @@ function genrate_alexa_audio_json($value) {
   $title = $value['title'];
   $uid = $value['uid'];
   $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
-  $stream_url = file_create_url($new_destination);
+  print $stream_url = file_create_url($new_destination);
   
-  
+  // For audio file duration
+  if($stream_url){
+      $filename = tempnam('/tmp','getid3');
+      if (file_put_contents($audio_filename, file_get_contents($stream_url, false, null, 0, 300000))) {
+         //if (require_once('/var/www/html/getid3/getid3.php')) {
+            $getID3 = new getID3;
+            $audio_file_info = $getID3->analyze($audio_filename);
+         // }
+         unlink($audio_filename);
+         p($audio_file_info);
+      }
+  }
     
   $json = array(
     'uid' => 'itaudiofeed' . $uid,
