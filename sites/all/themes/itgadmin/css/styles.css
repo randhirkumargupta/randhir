@@ -13654,4 +13654,10 @@ div.ctools-modal-content .form-submit {
 .node-alexa_audio_clips-form#views-form-videogallery-management-page input[type="text"], .node-alexa_audio_clips-form#itg-tv-schedule-form input[type="text"], .node-alexa_audio_clips-form[id*="loyalty-points-configuration-form"] input[type="text"], .node-alexa_audio_clips-form[id*="menu-edit-item"] input[type="text"], .node-alexa_audio_clips-form.itg_menu_manager_form input[type="text"], .node-alexa_audio_clips-form[id*="daily-motion-video-dashboard"] input[type="text"], .node-alexa_audio_clips-form[id*="itg-sitemap-chunks-setting-form"] input[type="text"] {
   max-width: 70%; }
 
+.page-node-add-alexa-audio-clips input[name="field_alexa_video_und_0_upload_button"] {
+  display: none; }
+
+.page-node-add-alexa-audio-clips input[name="field_audio_und_0_upload_button"] {
+  display: none; }
+
 /*# sourceMappingURL=styles.css.map */
