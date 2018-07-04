@@ -158,14 +158,7 @@ function genrate_alexa_audio_json($value) {
   fclose($fp);
   // for video
   $videofid = $value['field_alexa_video']['und'][0]['fid'];
-  
-  /*
-  if (empty($videofid)) {
-      $last_video = get_last_video_for_alexa();
-      $videofid = $last_video[0]['field_alexa_video_fid']; 
-  }
-  */
-  
+    
   if (!empty($videofid)) {
     $file_video_obj = file_load($videofid);
     $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.time() . (mt_rand(3,100)).'.mp4';
@@ -197,7 +190,6 @@ function genrate_alexa_audio_json($value) {
   fwrite($fpv_video, json_encode($json_video));
   fclose($fpv_video);
   itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . time(), $playtime_string, $audio_filesize);
-  drupal_goto('node/add/alexa-audio-clips');
 }
 
 /**
