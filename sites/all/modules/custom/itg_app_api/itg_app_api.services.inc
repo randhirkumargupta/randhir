@@ -7800,7 +7800,7 @@ function itg_rapid_get_live_tv_url(){
         $iframe_code = $result[0]['field_ads_ad_code_value'];
         preg_match('/src="([^"]+)"/', $iframe_code, $match);
         $iframe_url = $match[1];
-        echo $iframe_url; die();
+        echo $iframe_url; die(); 
     }
     return $iframe_url;
 }
