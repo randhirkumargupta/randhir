@@ -6064,10 +6064,10 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    print_r(node_load(1090834)); // Livestream
+    /*print_r(node_load(1090834)); // Livestream
     print_r(node_load(122)); // Bitgravity
     print_r(node_load(50)); // youtube
-    die();
+    die();*/
     //p(arg());
     //p(node_load(1210673));
     /*// load our view and pass it
@@ -7779,5 +7779,24 @@ function itg_rapid_api_popular_search_tv($token) {
  * itg_rapid_get_live_tv_url
  */
 function itg_rapid_get_live_tv_url(){
+    // check web active for which node.
+    $active_node_id = 0;
+    $iframe_url = "";
+    $query_web = db_select('field_data_field_live_tv_device', 'lv_active');
+    $query_web->fields('lv_active', array('entity_id'));
+    $query_web->condition('lv_active.field_live_tv_device_value', 'Web', '=');
+    $result_web = $query_web->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $active_node_id = $result_web[0]['entity_id'];
     
+    //query to get live tv url
+    if ($active_node_id) {
+        $query = db_select('field_data_field_ads_ad_code', 'lv_tv_url');
+        $query->fields('lv_tv_url', array('field_ads_ad_code_value'));
+        $query->condition('lv_tv_url.entity_id', $active_node_id, '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $iframe_code = $result[0]['field_ads_ad_code_value'];
+        preg_match('/src="([^"]+)"/', $iframe_code, $match);
+        $iframe_url = $match[1];
+    }
+    return $iframe_url;
 }
