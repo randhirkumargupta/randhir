@@ -115,6 +115,12 @@ function itg_custom_variables() {
     '#default_value' => get_itg_variable('sef_url_status'),
   );
   
+  $form['alexa_email_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email Adress for Alexa'),
+    '#default_value' => get_itg_variable('alexa_email_id'),
+  );
+  
   $form['submit_button'] = array(
     '#type' => 'submit',
     '#value' => t('Save Configuration'),

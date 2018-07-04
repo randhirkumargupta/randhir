@@ -300,17 +300,20 @@ function itg_alexa_audio_mail_cron() {
   $curent_feed = get_last_alexa_feed();
   $dateFromDatabase = $curent_feed[0]['created'];
   
-  $dateSixHoursAgo = strtotime('-1 hours');
+  $dateSixHoursAgo = strtotime('-6 hours');
   if ($dateSixHoursAgo >= $dateFromDatabase) {
     // more than 6 hours ago
-    $mail_content = 'Audio not uploaded from 1 hours for Alexa.';
+    $mail_content = 'Audio not uploaded from 6 hours for Alexa.';
     
     $mail_subject = strip_tags('IndiaToday Audio 50 Alexa Alert');
     $params = array(
         'body' => $mail_content,
         'subject' => $mail_subject,
       );
-      $to = 'arunmishra.coder@gmail.com, arun.kumarmishra@aajtak.com';
+    
+      $alexa_email_id = !empty(get_itg_variable('alexa_email_id')) ? get_itg_variable('alexa_email_id') : '';  
+  
+      $to = $alexa_email_id;
 
       $mail = drupal_mail('itg_alexa_audio', 'send_mail_to_admin', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
