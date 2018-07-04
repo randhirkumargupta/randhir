@@ -312,15 +312,18 @@ function itg_alexa_audio_mail_cron() {
       );
     
       $alexa_email_id = !empty(get_itg_variable('alexa_email_id')) ? get_itg_variable('alexa_email_id') : '';  
-      $to = $alexa_email_id;
-
-      $mail = drupal_mail('itg_alexa_audio', 'send_mail_to_admin', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
-      if ($mail['result']) {
-        print 'send email to user.';
+      $site_mail = !empty(get_itg_variable('site_mail')) ? get_itg_variable('site_mail') : '';  
+      if (!empty($alexa_email_id)) {
+        $to = $alexa_email_id;
+        $mail = drupal_mail('itg_alexa_audio', 'send_mail_to_admin', $to, language_default(), $params, $site_mail, TRUE);
+        if ($mail['result']) {
+          print 'send email to user.';
+        }
+        else {
+          print 'Failed to send the email!';
+        }
       }
-      else {
-        print 'Failed to send the email!';
-      }   
+         
   }    
 }
 
