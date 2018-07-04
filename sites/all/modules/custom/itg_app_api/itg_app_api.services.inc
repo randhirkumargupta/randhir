@@ -2880,6 +2880,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // switch_between_app custom resource declaration.....
+        'switch_between_app' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves switch_between_app schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_switch_between_app',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -7847,6 +7874,31 @@ function itg_rapid_api_splash_screen($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('itg_rapid_api_splash_screen_json');
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+
+/**
+ * Call back function for itg_rapid_api_switch_between_app API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_switch_between_app($token) {
+    $redis_key = "itg_rapid_api_switch_between_app_json";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_switch_between_app_json');
         //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $ttl = itg_app_redish_ttl();
         $result_set = setRedis($redis_key, $jsondata, $ttl);
