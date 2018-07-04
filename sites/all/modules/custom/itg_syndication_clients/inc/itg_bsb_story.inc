@@ -5,8 +5,6 @@
  * The ITG Syndication clients for BSB Story
  */
 function itg_bsb_story_syndication() {
-  cache_clear_all('services:appapi:resources', 'cache');
-	die("Done");	
   $sections = getbsb_client_array();
   foreach ($sections as $section_id => $file_name) {
     itg_genrate_bsb_story_syndication($section_id, $file_name);
