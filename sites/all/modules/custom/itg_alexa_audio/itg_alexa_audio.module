@@ -118,7 +118,7 @@ function genrate_alexa_audio_json($value) {
   $time = date('hA');
   if (!empty($audiofid)) {    
     $orignal_img = file_load($audiofid);
-    print $audio_filesize = $orignal_img->filesize;    
+    $audio_filesize = $orignal_img->filesize;    
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.time() . (mt_rand(3,100)).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/audio/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
@@ -139,7 +139,6 @@ function genrate_alexa_audio_json($value) {
             $audio_file_info = $getID3->analyze($audio_filename);
             unlink($audio_filename);
             $playtime_string = $audio_file_info['playtime_string'];
-            $audio_filesize = $audio_file_info['filesize'];
       }
   }
     
@@ -187,7 +186,7 @@ function genrate_alexa_audio_json($value) {
   fwrite($fpv_video, json_encode($json_video));
   fclose($fpv_video);
   itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . time(), $playtime_string, $audio_filesize);
-  drupal_goto('node/add/alexa-audio-clips');
+  // drupal_goto('node/add/alexa-audio-clips');
 }
 
 /**
