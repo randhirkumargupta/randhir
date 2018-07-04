@@ -7785,7 +7785,7 @@ function itg_rapid_get_live_tv_url(){
     $query_web = db_select('field_data_field_live_tv_device', 'lv_active');
     $query_web->fields('lv_active', array('entity_id'));
     $query_web->condition('lv_active.field_live_tv_device_value', 'Web', '=');
-    print strtr((string) $query_web, $query_web->arguments());
+    //print strtr((string) $query_web, $query_web->arguments());
     $result_web = $query_web->execute()->fetchAll(PDO::FETCH_ASSOC);
     $active_node_id = $result_web[0]['entity_id'];
     
@@ -7794,7 +7794,7 @@ function itg_rapid_get_live_tv_url(){
         $query = db_select('field_data_field_ads_ad_code', 'lv_tv_url');
         $query->fields('lv_tv_url', array('field_ads_ad_code_value'));
         $query->condition('lv_tv_url.entity_id', $active_node_id, '=');
-        print strtr((string) $query, $query->arguments());die();
+        //print strtr((string) $query, $query->arguments());die();
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         $iframe_code = $result[0]['field_ads_ad_code_value'];
         preg_match('/src="([^"]+)"/', $iframe_code, $match);
