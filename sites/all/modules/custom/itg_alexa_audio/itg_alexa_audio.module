@@ -187,6 +187,7 @@ function genrate_alexa_audio_json($value) {
   fwrite($fpv_video, json_encode($json_video));
   fclose($fpv_video);
   itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . time(), $playtime_string, $audio_filesize);
+  drupal_goto('node/add/alexa-audio-clips');
 }
 
 /**
