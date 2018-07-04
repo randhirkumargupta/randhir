@@ -119,8 +119,7 @@ function itg_custom_variables() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('sef_url_status'),
   );
-  
-<<<<<<< HEAD
+ 
   $form['anchor_page_js_version'] = array(
     '#type' => 'textfield',
     '#title' => t('Anchor Page Js Version'),
@@ -128,8 +127,6 @@ function itg_custom_variables() {
     '#required' => FALSE,
   );
   
-=======
->>>>>>> 6397cd5fe91922e7f3e4bc6bcdaa4507caf5ec4f
   $form['alexa_email_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Email Adress for Alexa'),
