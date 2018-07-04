@@ -60,8 +60,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
         '#attributes' => array('readonly' => 'readonly'),
       );
       
-      if ($vide_fid) {
-        
+      if ($vide_fid) {        
         $file_video_obj = file_load($vide_fid);
         $video_url = file_create_url($file_video_obj->uri); 
         $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");
@@ -104,11 +103,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form
  * @param array $form_state
  */
-function itg_alexa_audio_form_custom_submit($form, &$form_state) {
-  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
-  pr($form);
-  
-  p($form_state);
+function itg_alexa_audio_form_custom_submit($form, &$form_state) { 
   genrate_alexa_audio_json($form_state['values']);
 }
 
@@ -116,34 +111,16 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * Function to generate JSON file for alexa
  * @param array $value   
  */
-function genrate_alexa_audio_json($value) {
-  
-  
+function genrate_alexa_audio_json($value) {  
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
   $audiofid = $value['field_audio']['und'][0]['fid'];
-  $filedir = 'sites/indiatoday/' . date('Ymd');
+  $filedir = 'sites/indiatoday/' . date('Ymd') . '/audio';
+  $video_filedir = 'sites/indiatoday/' . date('Ymd') . '/video';
   $time = date('hA');
-  if (!empty($audiofid)) {
-    
+  if (!empty($audiofid)) {    
     $orignal_img = file_load($audiofid);
-    $audio_filesize = $orignal_img->filesize;
-    
-    $getID3 = new getID3;
-    $bucket = variable_get('aws_bucket');
-    $aws_access_key = variable_get('aws_access_key');
-    $aws_secret_key = variable_get('aws_secret_key');
-    $aws_region = variable_get('aws_region');
-    $s3 = S3Client::factory(array('key' => $aws_access_key, 'secret' => $aws_secret_key, 'signature' => 'v4', 'region' => $aws_region));
-    $s3->registerStreamWrapper();
-    print "s3_url = ". $s3_url = "s3://{$bucket}/s3fs-public/$orignal_img->filename";
-    // Read CSV with fopen
-    $s3_file = fopen($s3_url, 'r');
-
-    $audio_duration = $getID3->analyze($s3_file);
-    echo '<pre>'.htmlentities(print_r($audio_duration, true)).'</pre>';   
-    p($orignal_img);
-  
-    
-    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.strtotime(date('Y-m-d H:i:s')).'.mp3';
+    $audio_filesize = $orignal_img->filesize;    
+    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.time() . (mt_rand(3,100)).'.mp3';
     $directory = file_default_scheme() . '://' . $filedir . '/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
     $orignal_img->filename = $new_filename;
@@ -153,13 +130,21 @@ function genrate_alexa_audio_json($value) {
   
   $title = $value['title'];
   $uid = $value['uid'];
-  $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
+  $date = str_replace('+00:00', '.0Z', gmdate('c', strtotime($value['field_event_start_date']['und'][0]['value'])));
   $stream_url = file_create_url($new_destination);
-  
-  
+  // For audio file duration
+  if($stream_url){
+      $audio_filename = tempnam('/tmp','getid3');
+      if (file_put_contents($audio_filename, file_get_contents($stream_url, false, null, 0, 300000))) {
+            $getID3 = new getID3;
+            $audio_file_info = $getID3->analyze($audio_filename);
+            unlink($audio_filename);
+            $playtime_string = $audio_file_info['playtime_string'];
+      }
+  }
     
   $json = array(
-    'uid' => 'itaudiofeed' . $uid,
+    'uid' => 'itaudiofeed' . time(),
     'updateDate' => $date,
     'titleText' => $title,
     'mainText' => "",
@@ -173,23 +158,26 @@ function genrate_alexa_audio_json($value) {
   fclose($fp);
   // for video
   $videofid = $value['field_alexa_video']['und'][0]['fid'];
-  
-  if (empty($videofid)) {
-      $last_video = get_last_video_for_alexa();
-      $videofid = $last_video[0]['field_alexa_video_fid']; 
-  }
-  
+    
   if (!empty($videofid)) {
     $file_video_obj = file_load($videofid);
-    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.strtotime(date('Y-m-d H:i:s')).'.mp4';      
+    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.time() . (mt_rand(3,100)).'.mp4';
+    $video_directory = file_default_scheme() . '://' . $video_filedir . '/';
+    file_prepare_directory($video_directory, FILE_CREATE_DIRECTORY); 
     $file_video_obj->filename = $new_video_filename;
-    $new_video_destination = file_default_scheme() . '://' . $filedir . '/' . $new_video_filename;
+    $new_video_destination = file_default_scheme() . '://' . $video_filedir . '/' . $new_video_filename;
     file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
+    $video_url = file_create_url($new_video_destination);
+  } else {
+    $last_video = get_last_video_for_alexa();
+    $videofid = $last_video[0]['field_alexa_video_fid'];
+    $file_video_obj = file_load($videofid);
+    $video_url = file_create_url($file_video_obj->uri);
   }
   
-  $video_url = file_create_url($new_video_destination);
+  
   $json_video = array(
-    'uid' => 'itaudiofeed' . $uid,
+    'uid' => 'itaudiofeed' . time(),
     'updateDate' => $date,
     'titleText' => $title,
     'mainText' => "",
@@ -201,7 +189,7 @@ function genrate_alexa_audio_json($value) {
   $fpv_video = fopen($video_file_path, "w");
   fwrite($fpv_video, json_encode($json_video));
   fclose($fpv_video);
-  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . $uid);
+  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . time(), $playtime_string, $audio_filesize);
 }
 
 /**
@@ -210,7 +198,7 @@ function genrate_alexa_audio_json($value) {
  * @param string $date
  * @param string $filename
  */
-function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename) {
+function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename, $playtime_string, $audio_filesize) {
   $date = date("D, d M Y H:s:i", strtotime($date));
   $c_date = date("Y");
   $xml = <<<XML
@@ -250,9 +238,9 @@ https://smedia2.intoday.in/conclave/2017-next/images/rightLogo.png
 India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
 </description>
 <guid isPermaLink="false">$filename</guid>
-<enclosure length="2863763" type="audio/mpeg" url="$stream_url"></enclosure>
+<enclosure length="$audio_filesize" type="audio/mpeg" url="$stream_url"></enclosure>
 <pubDate>$date GMT</pubDate>
-<itunes:duration>1:29</itunes:duration>
+<itunes:duration>$playtime_string</itunes:duration>
 </item>
 </channel>
 </rss>
@@ -317,7 +305,7 @@ function itg_alexa_audio_mail_cron() {
     // more than 6 hours ago
     $mail_content = 'Audio not uploaded from 1 hours for Alexa.';
     
-    $mail_subject = 'Mail alter for alexa';
+    $mail_subject = strip_tags('IndiaToday Audio 50 Alexa Alert');
     $params = array(
         'body' => $mail_content,
         'subject' => $mail_subject,
