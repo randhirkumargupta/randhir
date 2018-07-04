@@ -114,13 +114,14 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
 function genrate_alexa_audio_json($value) {  
   module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
   $audiofid = $value['field_audio']['und'][0]['fid'];
-  $filedir = 'sites/indiatoday/' . date('Ymd');
+  $filedir = 'sites/indiatoday/' . date('Ymd') . '/audio';
+  $video_filedir = 'sites/indiatoday/' . date('Ymd') . '/video';
   $time = date('hA');
   if (!empty($audiofid)) {    
     $orignal_img = file_load($audiofid);
     $audio_filesize = $orignal_img->filesize;    
     $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.time() . (mt_rand(3,100)).'.mp3';
-    $directory = file_default_scheme() . '://' . $filedir . '/audio/';
+    $directory = file_default_scheme() . '://' . $filedir . '/';
     file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
     $orignal_img->filename = $new_filename;
     $new_destination = file_default_scheme() . '://' . $filedir . '/' . $new_filename;
@@ -158,20 +159,30 @@ function genrate_alexa_audio_json($value) {
   // for video
   $videofid = $value['field_alexa_video']['und'][0]['fid'];
   
+  /*
   if (empty($videofid)) {
       $last_video = get_last_video_for_alexa();
       $videofid = $last_video[0]['field_alexa_video_fid']; 
   }
+  */
   
   if (!empty($videofid)) {
     $file_video_obj = file_load($videofid);
-    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.time() . (mt_rand(3,100)).'.mp4';      
+    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.time() . (mt_rand(3,100)).'.mp4';
+    $video_directory = file_default_scheme() . '://' . $video_filedir . '/';
+    file_prepare_directory($video_directory, FILE_CREATE_DIRECTORY); 
     $file_video_obj->filename = $new_video_filename;
-    $new_video_destination = file_default_scheme() . '://' . $filedir . '/video/' . $new_video_filename;
+    $new_video_destination = file_default_scheme() . '://' . $video_filedir . '/' . $new_video_filename;
     file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
+    $video_url = file_create_url($new_video_destination);
+  } else {
+    $last_video = get_last_video_for_alexa();
+    $videofid = $last_video[0]['field_alexa_video_fid'];
+    $file_video_obj = file_load($videofid);
+    $video_url = file_create_url($file_video_obj->uri);
   }
   
-  $video_url = file_create_url($new_video_destination);
+  
   $json_video = array(
     'uid' => 'itaudiofeed' . time(),
     'updateDate' => $date,
