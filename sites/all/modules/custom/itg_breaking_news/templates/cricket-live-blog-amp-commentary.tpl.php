@@ -25,15 +25,17 @@ foreach ($data as $key => $commentary) {
         $time = '';
     }
     
-    ?>
+    ?>    
     <?php if ($finalBall == 6 && (int)$last_ball != (int)$over): ?>
         <?php
         $_batsman = explode('|', $commentary->BatDetails);
         $batDetails = $_batsman[1] . '(' . $_batsman[2] . 'b ' . $_batsman[3] . '*4 ' . $_batsman[4] . '*6)';
         $_bowler = explode('|', $commentary->BowlDetails);
         $bowlDetails = $_bowler[1] . '-' . $_bowler[2] . '-' . $_bowler[3] . '-' . $_bowler[4];
+        $sort_timestamp = strtotime($commentary->TimeOfDay);
+        $over_sort_time = $sort_timestamp+1;
         ?>
-        <div class="para-live-blog" id="<?php print 'over_'.$over; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">  
+        <div class="para-live-blog" id="<?php print 'over_'.$over.'_'.$commentary->Id; ?>" data-sort-time="<?php print $over_sort_time; ?>">  
             <div class="batBollDetails">
 
                 <span class="sectiontime">Score  <?php echo $commentary->Score; ?> </span>
@@ -49,12 +51,12 @@ foreach ($data as $key => $commentary) {
 
             </div>
         </div>
-    <?php endif; ?>
+    <?php endif; ?>  
     <div class="para-live-blog" id="<?php print $commentary->Id; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">
         <div>
             <p itemprop="articleBody"> <?php if (!empty($time)): ?><span><?php echo $time; ?>: </span><?php endif; ?><?php echo $commentary->Commentary; ?></p>
         </div>
-    </div>
+    </div>  
     <?php
     $last_ball = $over;    
 }
