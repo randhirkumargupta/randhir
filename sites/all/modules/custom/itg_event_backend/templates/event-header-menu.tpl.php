@@ -28,12 +28,12 @@ if (!empty($node) && ($node->type == 'event_backend')) {
 
   $menu_font_color = $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] ? $node->field_e_menu_font_color[LANGUAGE_NONE][0]['rgb'] : '#f7ee23';
   $menu_highlights_color = $node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] ? $node->field_e_highlighted_font_color[LANGUAGE_NONE][0]['rgb'] : '#f7ee24';
-  $home_menu = (arg(0) == 'node' && is_numeric(arg(1)) && empty($_GET['tab'])) ? $menu_highlights_color : $menu_font_color;
+  $home_menu = (arg(0) == 'node' && is_numeric(arg(1)) && is_event_tab()) ? $menu_highlights_color : $menu_font_color;
   $program_menu = (arg(0) == 'event' && (arg(3) == 'programme')) ? $menu_highlights_color : $menu_font_color;
   $speakers_menu = (arg(0) == 'event' && ((arg(3) == 'speakers') || arg(3) == 'speaker-details')) ? $menu_highlights_color : $menu_font_color;
   $registration_menu = (arg(0) == 'event' && (arg(3) == 'registration')) ? $menu_highlights_color : $menu_font_color;
   $sponsors_menu = (arg(0) == 'event' && ((arg(3) == 'sponsors') || arg(3) == 'sponsor-details')) ? $menu_highlights_color : $menu_font_color;
-  $tab_menu_font = (!empty($_GET['tab'])) ? $menu_highlights_color : $menu_font_color;
+  $tab_menu_font = (!empty(is_event_tab())) ? $menu_highlights_color : $menu_font_color;
   ?>
 
   <div id="block-menu-menu-event-menu" class="container event-header-menu-container">
