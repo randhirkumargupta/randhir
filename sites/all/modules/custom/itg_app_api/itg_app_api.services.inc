@@ -2960,6 +2960,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+         // breaking_news custom resource declaration.....
+        'breaking_news_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves breaking_news_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_breaking_news_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -6083,10 +6110,10 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
+    //variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
     //$qry = "INSERT INTO `itg_app_master_config_internal` (`id`, `config_key`, `config_val`) VALUES (NULL, 'cube_widget_config_options', '1');";
     //db_query($qry);
-    p(node_load(1152730)); // live blog
+    p(node_load(1156727)); // live blog
     p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
     $searchpage2 = views_get_view_result('front_end_global_search', 'page_1', 'india');
@@ -7651,6 +7678,8 @@ function itg_rapid_api_breaking_news() {
         $query->condition('n.nid', $nid);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $field_breaking_data = $view_result[0]->field_field_breaking_tile;
+    $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
 
         $title = $result[0]['title'];
         $body = $result[0]['body_value'];
@@ -7666,7 +7695,7 @@ function itg_rapid_api_breaking_news() {
         $data['status_message'] = "";
         $news = array();
         $news['id'] = "$nid";
-        $news['title'] = "$title";
+        $news['title'] = "$field_breaking_tile";
         $news['url'] = "$web_url";
         $news['published'] = "1";
         $news['created'] = "$create_datetime";
@@ -7850,7 +7879,8 @@ function itg_rapid_api_test2(){
     echo "andy here";die();
 }
 function itg_rapid_api_test3(){
-    echo "andy here11";die();
+    //echo "andy here11";die();
+    p(node_load(1156727));
 }
 
 /**
@@ -7900,6 +7930,37 @@ function itg_rapid_api_switch_between_app($token) {
     $return_obj = $obj;
 
     return $return_obj;
+}
+/**
+ * Call back function for breaking_news_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_breaking_news_tv() {
+    // call breaking news view
+    $view_result = views_get_view_result('breaking_news', 'block_1');    
+    $nid = $view_result[0]->nid;    
+    $field_breaking_data = $view_result[0]->field_field_breaking_tile;
+    $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
+    $data = array();
+    if (isset($nid) && $nid > 0) {        
+        
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+        $news = array();
+        $news['breaking_news_status'] = "1";
+        $news['breaking_news_title'] = "$field_breaking_tile";             
+        $data['data'] = $news;
+    } else {
+        $data['status_code'] = "0";
+        $data['status_message'] = "";
+        $news = array();
+        $news['breaking_news_status'] = "0";
+        $news['breaking_news_title'] = "";             
+        $data['data'] = $news;
+    }
+    return $data;
 }
  
  

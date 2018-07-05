@@ -131,6 +131,12 @@ function itg_miscellaneous_menu() {
     'page callback' => 'hello_world',
     'access callback' => TRUE,
   );
+  $items['custom-cache-flush'] = array(
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_custom_cache_flush'),
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -416,4 +422,35 @@ function get_data_url_redirection($source){
         $result = $query->execute()->fetchCol();
         return $data = $result[0];
     }
+}
+
+
+function itg_custom_cache_flush(){
+  $form = array();
+  $form['itg_cache_cid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cache Cid'),
+    '#size' => 60,
+    '#required' => TRUE,
+    '#maxlength' => 255,
+  );
+  $form['itg_cache_bin'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cache Table / Bin'),
+    '#size' => 60,
+    '#required' => TRUE,
+    '#maxlength' => 255,
+  );
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear Cache'),
+  );
+  return $form;
+}
+
+function itg_custom_cache_flush_submit($form, &$form_state){
+  if (isset($form_state['values']['itg_cache_cid']) && !empty($form_state['values']['itg_cache_cid']) && isset($form_state['values']['itg_cache_bin']) && !empty($form_state['values']['itg_cache_bin'])) {
+    cache_clear_all($form_state['values']['itg_cache_cid'], $form_state['values']['itg_cache_bin']);
+    drupal_set_message(t('Cache Cleared. CID: ' . $form_state['values']['itg_cache_cid'] . ' from : '. $form_state['values']['itg_cache_bin']), 'status');
+  }
 }

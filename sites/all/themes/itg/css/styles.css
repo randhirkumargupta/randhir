@@ -221,13 +221,13 @@ h1 {
   font-family: Merriweather-Bold;
   font-size: 40px;
   line-height: 46px;
-  font-weight: 700; }
+  font-weight: 500; }
 
 h2 {
   font-family: "Merriweather-Bold";
   font-size: 29px;
   line-height: 34px;
-  font-weight: 700; }
+  font-weight: 500; }
 
 h3 {
   font-family: "OpenSans-Semibold";
@@ -240,7 +240,7 @@ h4 {
 
 h4.heading {
   color: #09619f;
-  font-weight: 700;
+  font-weight: 500;
   font-family: "OpenSans-Regular";
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -2181,7 +2181,7 @@ footer {
 .story-section h1 {
   font-size: 24px;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 30px; }
   .story-section h1 i {
     font-size: 13px;
@@ -2300,7 +2300,7 @@ footer {
           color: #6b6b6b;
           font-size: 12px;
           font-size: 0.75rem;
-          font-weight: 700;
+          font-weight: 500;
           line-height: 20px; }
         .story-section .byline .profile-detail ul li.mailto {
           text-transform: uppercase; }
@@ -2695,13 +2695,13 @@ footer {
       .story-section .social-list li span.share-count {
         font-size: 26px;
         font-size: 1.625rem;
-        font-weight: 700;
+        font-weight: 500;
         color: #bebebe; }
     .story-section .social-list li:nth-child(1) {
       border-left: none; }
       .story-section .social-list li:nth-child(1) span {
         text-transform: uppercase;
-        font-weight: 700; }
+        font-weight: 500; }
     .story-section .social-list li:nth-child(7) {
       text-align: left;
       border-left: none; }
@@ -2715,7 +2715,7 @@ footer {
         color: #1a3c8d;
         font-size: 14px;
         font-size: 0.875rem;
-        font-weight: 700;
+        font-weight: 500;
         line-height: 35px; }
     .story-section .social-list li i.fa-facebook,
     .story-section .social-list li i.fa-twitter,
@@ -3215,7 +3215,7 @@ footer {
     font-size: 18px;
     color: #bb0a0a;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 5px;
     font-family: "OpenSans-Bold"; }
   .related-story-page li {
@@ -3229,7 +3229,7 @@ footer {
   margin-bottom: 30px; }
   .related-story.related-story-bottom h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -3303,7 +3303,7 @@ footer {
   border-bottom: 1px solid #dddddd; }
 .may-be-suggest-container h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -3331,7 +3331,7 @@ footer {
   padding: 10px 24px 10px 30px; }
   .may-be-recommend h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -3393,7 +3393,7 @@ footer {
   border-bottom: 1px solid #dddddd; }
 .top-takes-video-container h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -3425,7 +3425,7 @@ footer {
 
 .watch-right-now-video h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -3695,7 +3695,7 @@ footer {
 h1.category-heading {
   font-size: 25px;
   font-size: 1.5625rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 40px;
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd; }
@@ -3988,7 +3988,7 @@ h1.category-heading {
       margin-bottom: 5px;
       font-size: 18px;
       font-size: 1.125rem;
-      font-weight: 700; }
+      font-weight: 500; }
     .view-widget-anchors-listing .anchor-listing .detail p {
       font-size: 14px;
       font-size: 0.875rem;
@@ -4211,7 +4211,7 @@ h1.category-heading {
   text-transform: uppercase;
   font-size: 16px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 500;
   margin-top: 30px;
   margin-bottom: 7px; }
 .live-block .live-hightlight ul li {
@@ -4233,7 +4233,7 @@ h1.category-heading {
     text-transform: uppercase;
     font-size: 16px;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 500;
     margin-top: 30px;
     padding-bottom: 35px; }
   .live-block .timeline .irs .irs-line {
@@ -4446,7 +4446,7 @@ h1.category-heading {
 /*Start Poll Landing page*/
 .poll-wrapper h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -4732,7 +4732,7 @@ h1.category-heading {
 
 .past-poll-label h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -4787,7 +4787,7 @@ h1.category-heading {
       .poll-banner .detail .detail-content h4 {
         font-size: 18px;
         font-size: 1.125rem;
-        font-weight: 700;
+        font-weight: 500;
         line-height: 24px;
         margin-bottom: 10px;
         color: #111; }
@@ -5226,7 +5226,7 @@ h1.category-heading {
   margin-top: 0; }
   #block-itg-videogallery-videogallery-menu-video-block h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -5410,7 +5410,7 @@ h1.category-heading {
 .view-photo-list-of-category h3,
 .view-podcasts-listing.podcast-detail-page h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -5968,7 +5968,7 @@ h1.category-heading {
 /*CSS start program RHS*/
 .program-rhs h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -6114,7 +6114,7 @@ h1.category-heading {
     color: #000;
     font-size: 16px;
     padding: 0;
-    font-weight: 600; }
+    font-weight: 500; }
   #block-views-latest-issue-magzine-block-1 ul {
     zoom: 1;
     padding: 20px;
@@ -7062,7 +7062,7 @@ section.sidebar .block-itg-ads {
     color: #000;
     font-size: 18px;
     background: linear-gradient(#fdcf2e, #fabb1d);
-    font-weight: 700; }
+    font-weight: 500; }
 .oscar-layout-page .oscar-features .col-md-6 {
   overflow: hidden;
   margin-top: 0px; }
@@ -7080,7 +7080,7 @@ section.sidebar .block-itg-ads {
 .oscar-layout-page .oscar-news a {
   display: block; }
 .oscar-layout-page .oscar-news h3 {
-  font-weight: 700;
+  font-weight: 500;
   margin: 10px 0 25px 0px; }
 .oscar-layout-page .oscar-news p {
   padding-top: 10px; }
@@ -7440,13 +7440,13 @@ section.sidebar .block-itg-ads {
   font-family: "Merriweather-Bold";
   margin-bottom: 30px;
   padding-bottom: 10px;
-  font-weight: 700; }
+  font-weight: 500; }
 
 #block-itg-event-backend-event-registration h2 span {
   float: right;
   font-size: 12px;
   text-transform: capitalize;
-  font-weight: 600; }
+  font-weight: 500; }
 
 #block-views-program-schedule-block-3 .col-md-3 {
   margin-bottom: 30px; }
@@ -7954,7 +7954,7 @@ section.sidebar .block-itg-ads {
     right: 0;
     margin: auto; }
 #block-views-event-subsite-speaker-block-3 h3 {
-  font-weight: 700; }
+  font-weight: 500; }
 
 #content [id*='event-registration-node-form'] {
   /*.form-submit[value="Add another item"], .form-submit[value="Remove"]{
@@ -9713,7 +9713,7 @@ div#playerContainer {
 
 .view-live-tv-programs h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -10153,7 +10153,7 @@ h1.about-us-heading {
 /*CSS start ask an expert detail*/
 #block-views-ask-an-expert-block-1 h2 {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 10px; }
 #block-views-ask-an-expert-block-1 .views-row {
   font-size: 21px;
@@ -10356,7 +10356,7 @@ h1.about-us-heading {
 #block-itg-front-end-common-related-photo-block h3,
 #block-itg-front-end-common-related-video-block h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -10634,7 +10634,7 @@ h1.about-us-heading {
   [id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3,
   .ask-question-sidebar h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -11550,7 +11550,7 @@ h1.about-us-heading {
 /*css start related-podcast-block*/
 #block-itg-front-end-common-related-podcast-block h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -11608,7 +11608,7 @@ span.smilies-title {
 /* css for story-photo-list starts here */
 .story-photo-list-wrapper h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -12791,7 +12791,7 @@ span.close_btt {
   color: #000; }
   .payment-messages-wrapper h1 {
     font-size: 48px;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 50px;
     margin: 40px 0; }
   .payment-messages-wrapper .payment-message {
@@ -13102,7 +13102,7 @@ span.see-picture a {
   padding: 5px 7px 1px 7px; }
 
 .special-top-news .itg-listing-wrapper {
-  height: 100%; }
+  height: calc(100% - 30px); }
 
 .data-holder .poll-wrapper .poll-data {
   width: 100%; }
@@ -13755,7 +13755,7 @@ ul.pron-cons-img li img {
 /* css add by arun/itg */
 .other_photogallery_category h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   position: relative; }
 
@@ -13808,7 +13808,7 @@ ul.pron-cons-img li img {
 
 .other_video_category h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   position: relative; }
 

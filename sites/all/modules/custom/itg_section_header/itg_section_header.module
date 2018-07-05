@@ -424,7 +424,7 @@ function get_event_menu($nid) {
   $registration_menu = $menu_highlights_color;
   $sponsors_menu = $menu_highlights_color;
 	$page_node = menu_get_object();
-	$home_link_class = (!empty($page_node->nid && empty($_GET['tab'])) ? 'active' : '');
+	$home_link_class = (!empty($page_node->nid && empty(is_event_tab())) ? 'active' : '');
 	$programe_link_class = (arg(3) == 'programme' ? 'active' : '');
 	$speakers_link_class = (arg(3) == 'speakers' ? 'active' : '');
 	$registration_link_class = (arg(3) == 'registration' ? 'active' : '');
@@ -463,10 +463,10 @@ function get_event_menu($nid) {
     if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
       if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
 		$active_class = '';
-		if (isset($_GET['tab']) && $_GET['tab'] == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
+    if (is_event_tab() && is_event_tab() == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
 		  $active_class = 'active';	
 		}
-        $flash_back_link .= '<li class="'.$active_class.'">' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']))) . '</li>';
+        $flash_back_link .= '<li class="'.$active_class.'">' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/eventpage/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value'])) . '</li>';
       }
     }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
       $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
@@ -535,4 +535,14 @@ function itg_event_backend_custom_flashback($menu_font_color, $event_type, $curr
     $output['top'] = $flash_back_link_top_nid;
   }
   return $output;
+}
+
+
+function is_event_tab(){
+  $arg = arg();
+  if ($arg['0'] == 'event' && $arg['3'] == 'eventpage' && !empty($arg['3'])) {
+    return $arg['4'];
+  }else {
+    return FALSE;
+  }
 }

@@ -2458,7 +2458,7 @@ footer {
     h1 {
         @include font(24px,
         30px,
-        700);
+        500);
         i {
             font-size: 13px;
             color: #f40000;
@@ -3498,7 +3498,7 @@ footer {
         font-size: 18px;
         color: #bb0a0a;
         text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 500;
         margin-bottom: 5px;
         font-family:$itg-opensansbold;
     }
@@ -3879,7 +3879,7 @@ footer {
 h1.category-heading {
     @include font(25px,
     40px,
-    700);
+    500);
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
 }
@@ -4211,7 +4211,7 @@ h1.category-heading {
             text-transform: uppercase;
             @include font(16px,
             null,
-            700);
+            500);
             margin-top: 30px;
             margin-bottom: 7px;
         }
@@ -4234,7 +4234,7 @@ h1.category-heading {
             text-transform: uppercase;
             @include font(16px,
             null,
-            700);
+            500);
             margin-top: 30px;
             padding-bottom: 35px;
         }
@@ -5921,7 +5921,7 @@ h1.category-heading {
         color: #000;
         font-size: 16px;
         padding: 0;
-        font-weight: 600;
+        font-weight: 500;
     }
     ul {
         @include clearfix;
@@ -7069,7 +7069,7 @@ section.sidebar {
                     color: #000;
                     font-size: 18px;
                     background: linear-gradient( #fdcf2e, #fabb1d);
-                    font-weight: 700;
+                    font-weight: 500;
                 }
             }
         }
@@ -7099,7 +7099,7 @@ section.sidebar {
             display: block;
         }
         h3 {
-            font-weight: 700;
+            font-weight: 500;
             margin: 10px 0 25px 0px;
         }
         p {
@@ -7549,7 +7549,7 @@ section.sidebar {
         font-family:$itg-merriweatherbold;
         margin-bottom: 30px;
         padding-bottom: 10px;
-        font-weight: 700;
+        font-weight: 500;
     }
 }
 
@@ -7559,7 +7559,7 @@ section.sidebar {
             float: right;
             font-size: 12px;
             text-transform: capitalize;
-            font-weight: 600;
+            font-weight: 500;
         }
     }
 }
@@ -8156,7 +8156,7 @@ section.sidebar {
         }
     }
     h3 {
-        font-weight: 700;
+        font-weight: 500;
     }
 }
 
@@ -10944,7 +10944,7 @@ h1.about-us-heading {
 #block-views-ask-an-expert-block-1 {
     h2 {
         font-size: 24px;
-        font-weight: 700;
+        font-weight: 500;
         margin-bottom: 10px;
     }
     .views-row {
@@ -13505,7 +13505,7 @@ span.close_btt {
     color: #000;
     h1 {
         font-size: 48px;
-        font-weight: 700;
+        font-weight: 500;
         line-height: 50px;
         margin: 40px 0;
     }
@@ -13911,7 +13911,7 @@ span.see-picture {
 
 .special-top-news {
     .itg-listing-wrapper {
-        height: 100%;
+        height: calc(100% - 30px);
     }
 }
 
@@ -14098,10 +14098,9 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .itg-sponsor-title {
-    position: absolute;
     font-size: 9px;
-    padding: 4px 5px 5px 18px;
     color: #447b9a;
+    left: 0; padding: 0; position: relative; display: block; font-weight: 700; letter-spacing: 1px;
 }
 
 .itg-sponsor-section-title {
@@ -14702,7 +14701,7 @@ ul.pron-cons-img li img {
 
 .other_photogallery_category h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     position: relative;
 }
@@ -14762,7 +14761,7 @@ ul.pron-cons-img li img {
 
 .other_video_category h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     position: relative;
 }

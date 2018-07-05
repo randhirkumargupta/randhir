@@ -48,12 +48,12 @@ $itg-robotoslab:'RobotoSlab-Regular';
   h1 {
     font-size: 26px;
     line-height: 32px;
-    font-weight: 700; }
+    font-weight: 500; }
 
   h2 {
     font-size: 22px;
     line-height: 26px;
-    font-weight: 700; }
+    font-weight: 500; }
 
   h3 {
     font-size: 16px;
@@ -2608,7 +2608,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .story-section h1 {
     font-size: 34px;
     font-size: 2.125rem;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 45px; }
   .story-section .story-left,
   .story-section .story-right {
@@ -2887,7 +2887,7 @@ $itg-robotoslab:'RobotoSlab-Regular';
   .page-podcasts-listing .view-podcasts-listing .catagory-listing .detail h3 {
     font-size: 20px;
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 24px; }
   .view-category-wise-content-list .catagory-listing .detail p,
   .view-blog-listing .catagory-listing .detail p,

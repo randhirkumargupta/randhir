@@ -1466,6 +1466,11 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
+  $items['event/%/%/eventpage'] = array(
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
+  );
   return $items;
 }
 
@@ -2316,7 +2321,12 @@ function event_url_save($node) {
   else {
     $event_title = $node->path['alias'];
   }
-
+  foreach ($node->field_event_tabs[LANGUAGE_NONE] as $tab_menu) {
+    $tab_value = field_collection_item_load($tab_menu['value']);
+    if($tab_value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+      $steps[] = 'eventpage/'.trim($tab_value->field_tab_sef[LANGUAGE_NONE][0]['value']);
+    }    
+  }
   foreach ($steps as $step) {
     if ($step == 'home') {
       $check_alias = $event_title;
