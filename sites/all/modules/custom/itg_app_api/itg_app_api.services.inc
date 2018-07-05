@@ -7939,7 +7939,7 @@ function itg_rapid_api_breaking_news_tv() {
     // call breaking news view
     $view_result = views_get_view_result('breaking_news', 'block_1');    
     $nid = $view_result[0]->nid;
-    $field_breaking_tile = $view_result[0]['_field_data']['field_collection_item_field_data_field_breaking_content_deta']['entity']->field_breaking_tile[0]['und']['value'];
+    $field_breaking_tile = $view_result[0]->field_field_breaking_tile[0]['raw']['value'];
     $data = array();
     if (isset($nid) && $nid > 0) {        
         
