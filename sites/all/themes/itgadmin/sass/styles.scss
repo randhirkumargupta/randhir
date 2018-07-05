@@ -14806,3 +14806,8 @@ right: 140px;
 .node-story-form .ajax-progress {display: block;}
 .node-type-alexa-audio-clips .form-type-managed-file > label + div.file-widget.form-managed-file {height: auto; }
 .node-type-alexa-audio-clips .vertical-tabs{ display:none; }
+/* for Alexa */
+.node-alexa_audio_clips-form .form-type-managed-file>label+div.file-widget.form-managed-file {height: auto;}
+.node-alexa_audio_clips-form.node-form input[type="text"]{max-width:70%;}
+.page-node-add-alexa-audio-clips input[name="field_alexa_video_und_0_upload_button"] { display : none; }
+.page-node-add-alexa-audio-clips input[name="field_audio_und_0_upload_button"] { display : none; }

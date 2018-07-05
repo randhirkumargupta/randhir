@@ -14097,10 +14097,14 @@ span.story-sponsor-powered-text::last-word {
 }
 
 .itg-sponsor-title {
-    position: absolute;
     font-size: 9px;
-    padding: 4px 5px 5px 18px;
     color: #447b9a;
+    left: 0;
+    padding: 0;
+    position: relative;
+    display: block;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .itg-sponsor-section-title {
