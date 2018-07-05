@@ -34,7 +34,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   }
   
   // Tab title
-  if(empty($_GET['tab'])) {
+  if(empty(is_event_tab())) {
 
   if ($current_date < $event_close_date) {
     if (!empty($data)) {
@@ -131,7 +131,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       }
    
 }else {
-  $tab_url_value = $_GET['tab'];
+  $tab_url_value = is_event_tab();
   $tab_value = itg_event_backend_tab_title($host_node, $tab_url_value);
   
   print '<h2 style="color:'.$font_color.'">'.$tab_value[$tab_url_value]['tab_title'].'</h2>';
