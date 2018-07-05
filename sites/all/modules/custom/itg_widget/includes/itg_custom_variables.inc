@@ -119,6 +119,19 @@ function itg_custom_variables() {
     '#required' => FALSE,
     '#default_value' => get_itg_variable('sef_url_status'),
   );
+ 
+  $form['anchor_page_js_version'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Anchor Page Js Version'),
+    '#default_value' => get_itg_variable('anchor_page_js_version'),
+    '#required' => FALSE,
+  );
+  
+  $form['alexa_email_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email Adress for Alexa'),
+    '#default_value' => get_itg_variable('alexa_email_id'),
+  );
   
   $form['submit_button'] = array(
     '#type' => 'submit',

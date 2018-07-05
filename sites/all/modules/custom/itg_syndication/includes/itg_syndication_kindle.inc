@@ -145,6 +145,7 @@ function kindle_feed_generate_form_validate($form, &$form_state) {
  * {@inheritdocs}
  */
 function kindle_feed_generate_form_submit($form, &$form_state) {
+    p($form_state);
     if($form_state['values']['op'] == 'Submit') {
         $issue = $form_state['values']['issues'];
         $magazine = $form_state['values']['magazine'];
@@ -156,6 +157,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
         $dir_zip = KINDLE_WRAPPER . "/zip";
         file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
         file_prepare_directory($dir_zip, FILE_CREATE_DIRECTORY);
+        drupal_set_message(t('$directory_name: '.$directory_name.'$dir: '.$dir.'$dir_zip: '.$dir_zip.''), 'status');
         $issue = $_GET['issue'];
         $magazine = $_GET['magazine'];
         if(!empty($issue) && !empty($magazine)) {
@@ -226,8 +228,9 @@ function _create_tmp_zip($prefix) {
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
         }
-        $zip->close();
+        //$zip->close();
         header('Content-Type: application/zip');
+        header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="download.zip"');
         readfile($file);
@@ -327,7 +330,7 @@ function is_expried_story($node) {
     $flag = FALSE;
     $expiry_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
     $checked = $node->field_story_expires['und'][0]['value'];
-    if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes')) || $node->status == 0) {
+    if(($expiry_time < time() && (!empty($checked) && strtolower($checked) == 'yes'))) {
         $flag = TRUE;
     }
     return $flag;
@@ -371,7 +374,7 @@ function _create_node_file($file_name = NULL, $node_id = NULL, $section = NULL) 
         $node_body = $node_data->body['und'][0]['value'];
         $node_body = preg_replace('#<div class="body_caption">(.*?)</div>#', ' ', $node_body);
         $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);       
-		  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $node_body, $matches);
+		  //preg_match_all('/<img.*src=\"(.*)\".*>/isU', $node_body, $matches);
 		  $i = 0;
 		  foreach ($matches[0] as $images) {
 			$src = $matches[1][$i];

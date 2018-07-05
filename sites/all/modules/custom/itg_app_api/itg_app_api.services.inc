@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file
+ * @file 
  * INC file for APP API Schemes Services.
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
@@ -32,6 +32,58 @@ function itg_app_api_resource() {
          * custom resource for sprint1
          */
         // config_update_status custom resource declaration.....
+        'test2' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves test2 schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_test2',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        'test3' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves test2 schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_test3',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         'config_update_status' => array(
             'operations' => array(
                 'retrieve' => array(
@@ -2838,6 +2890,60 @@ function itg_app_api_resource() {
                         'name' => 'itg_app_api.services',
                     ),
                     'callback' => 'itg_rapid_api_popular_search_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // splash_screen custom resource declaration.....
+        'splash_screen' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves splash_screen schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_splash_screen',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // switch_between_app custom resource declaration.....
+        'switch_between_app' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves switch_between_app schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_switch_between_app',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -7739,6 +7845,61 @@ function itg_app_redish_ttl($api = "") {
     }   
 
     return $ttl;
+}
+function itg_rapid_api_test2(){
+    echo "andy here";die();
+}
+function itg_rapid_api_test3(){
+    echo "andy here11";die();
+}
+
+/**
+ * Call back function for splash_screen API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_splash_screen($token) {
+    $redis_key = "itg_rapid_api_splash_screen";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_splash_screen_json');
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+/**
+ * Call back function for itg_rapid_api_switch_between_app API
+ * @pram $_GET 
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_switch_between_app($token) {
+    $redis_key = "itg_rapid_api_switch_between_app_json";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_switch_between_app_json');
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
 }
  
  
