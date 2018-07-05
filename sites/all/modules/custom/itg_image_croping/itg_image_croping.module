@@ -914,6 +914,9 @@ function mageimagedimesion() {
   $image_dim['story']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
   $image_dim['story']['field_story_big_image']['width'] = EXTRA_BIG_IMAGE_WIDTH;
   $image_dim['story']['field_story_big_image']['height'] = EXTRA_BIG_IMAGE_HEIGHT;
+  $image_dim['story']['field_story_e_extra_large_image']['width'] = E_EXTRA_IMAGE_WIDTH;
+  $image_dim['story']['field_story_e_extra_large_image']['height'] = E_EXTRA_IMAGE_HEIGHT;
+  
 
   // Dimension for story
   $image_dim['mega_review_critic']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
@@ -1041,6 +1044,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
 
   if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image' ) || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image')) {
     $extrabigimagesize = '(' . $imgdim[$content_name]['field_story_big_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_big_image'] ['height'] . ')';
+    $extralargsize = '(' . $imgdim[$content_name]['field_story_extra_large_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_extra_large_image'] ['height'] . ')';
     $largsize = '(' . $imgdim[$content_name]['field_story_large_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_large_image'] ['height'] . ')';
     $mediumsize = '(' . $imgdim[$content_name]['field_story_medium_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_medium_image'] ['height'] . ')';
     $extrasmallsize = '(' . $imgdim[$content_name]['field_story_extra_small_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_extra_small_image'] ['height'] . ')';
@@ -1095,6 +1099,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
 
       $checkoption = array(
         //'field_story_big_image' => t("Facebook Instant Article Image $extrabigimagesize"),
+        'field_story_extra_large_image' => t(" Extra large image  $extralargsize"),
         'field_story_large_image' => t(" Large Image  $largsize"),
         'field_story_medium_image' => t(" Medium Image $mediumsize"),
         'field_story_small_image' => t(" Small Image  $smallsize"),
