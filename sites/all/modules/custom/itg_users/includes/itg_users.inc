@@ -60,7 +60,7 @@ function itg_users_cms_user_dashboard() {
       'menu-manager/second' => 'Menu manager',
       'live-tv-integration' => 'Live TV Integration',
       'ugc-inqueue-content' => 'Manage UGC',
-      'tv' => 'Upload TV Schedule',
+      'admin-tv-schedule-configuration' => 'Upload TV Schedule',
       'admin/loyalty/lrp-manage-items' => 'Loyalty & Rewards',
       'mydraft-blogs' => 'Blogs',
       'report/filed-content' => 'CMS Report');
