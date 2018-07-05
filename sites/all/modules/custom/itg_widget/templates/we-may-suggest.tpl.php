@@ -12,8 +12,8 @@
         <li <?php echo $data_tb_region_item;?> class="may-we-suggest">
             <?php if (!empty($entity_info['esi_file_uri'])) { ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity_info['nid']); ?>" class="pic">
-      <?php $file_uri = file_create_url($entity_info['esi_file_uri']); ?>
-              <img src="<?php print $file_uri; ?>" title="<?php echo $entity_info['field_story_extra_small_image_title'] ?>" alt="<?php echo $entity_info['field_story_extra_small_image_alt'] ?>" />
+      <?php //$file_uri = file_create_url($entity_info['esi_file_uri']); ?>
+              <?php print theme('image', array('path' => $entity_info['esi_file_uri'], 'alt' => $entity_info['field_story_extra_small_image_alt'], 'title' => $entity_info['field_story_extra_small_image_title'])); ?>
             </a>
             <?php
           }
