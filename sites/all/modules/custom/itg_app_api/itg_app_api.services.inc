@@ -7678,6 +7678,8 @@ function itg_rapid_api_breaking_news() {
         $query->condition('n.nid', $nid);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $field_breaking_data = $view_result[0]->field_field_breaking_tile;
+    $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
 
         $title = $result[0]['title'];
         $body = $result[0]['body_value'];
@@ -7693,7 +7695,7 @@ function itg_rapid_api_breaking_news() {
         $data['status_message'] = "";
         $news = array();
         $news['id'] = "$nid";
-        $news['title'] = "$title";
+        $news['title'] = "$field_breaking_tile";
         $news['url'] = "$web_url";
         $news['published'] = "1";
         $news['created'] = "$create_datetime";
@@ -7938,9 +7940,9 @@ function itg_rapid_api_switch_between_app($token) {
 function itg_rapid_api_breaking_news_tv() {
     // call breaking news view
     $view_result = views_get_view_result('breaking_news', 'block_1');    
-    $nid = $view_result[0]->nid;
-    p($view_result[0]->field_field_breaking_tile);
-    $field_breaking_tile = $view_result[0]->field_field_breaking_tile[0]['raw']['value'];
+    $nid = $view_result[0]->nid;    
+    $field_breaking_data = $view_result[0]->field_field_breaking_tile;
+    $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
     $data = array();
     if (isset($nid) && $nid > 0) {        
         
