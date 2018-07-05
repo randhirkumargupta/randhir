@@ -3229,7 +3229,7 @@ footer {
   margin-bottom: 30px; }
   .related-story.related-story-bottom h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -3303,7 +3303,7 @@ footer {
   border-bottom: 1px solid #dddddd; }
 .may-be-suggest-container h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -3331,7 +3331,7 @@ footer {
   padding: 10px 24px 10px 30px; }
   .may-be-recommend h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -3393,7 +3393,7 @@ footer {
   border-bottom: 1px solid #dddddd; }
 .top-takes-video-container h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -3425,7 +3425,7 @@ footer {
 
 .watch-right-now-video h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -4446,7 +4446,7 @@ h1.category-heading {
 /*Start Poll Landing page*/
 .poll-wrapper h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -4732,7 +4732,7 @@ h1.category-heading {
 
 .past-poll-label h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -5226,7 +5226,7 @@ h1.category-heading {
   margin-top: 0; }
   #block-itg-videogallery-videogallery-menu-video-block h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -5410,7 +5410,7 @@ h1.category-heading {
 .view-photo-list-of-category h3,
 .view-podcasts-listing.podcast-detail-page h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -5968,7 +5968,7 @@ h1.category-heading {
 /*CSS start program RHS*/
 .program-rhs h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -9713,7 +9713,7 @@ div#playerContainer {
 
 .view-live-tv-programs h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -10356,7 +10356,7 @@ h1.about-us-heading {
 #block-itg-front-end-common-related-photo-block h3,
 #block-itg-front-end-common-related-video-block h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -10634,7 +10634,7 @@ h1.about-us-heading {
   [id*="block-itg-ask-expert-custom-ask-expert-form-block"] h3,
   .ask-question-sidebar h3 {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     display: none;
     position: relative;
@@ -11550,7 +11550,7 @@ h1.about-us-heading {
 /*css start related-podcast-block*/
 #block-itg-front-end-common-related-podcast-block h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;
@@ -11608,7 +11608,7 @@ span.smilies-title {
 /* css for story-photo-list starts here */
 .story-photo-list-wrapper h3 {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   color: #bb0a0a;
   display: none;
   position: relative;

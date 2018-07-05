@@ -321,7 +321,7 @@ $root-font-size: 16px;
 @mixin sidebar-heading {
     h3 {
         text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 500;
         color: #bb0a0a;
         display: none;
         @include pos(relative);
