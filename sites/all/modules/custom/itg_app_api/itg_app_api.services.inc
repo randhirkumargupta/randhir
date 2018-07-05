@@ -2960,6 +2960,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+         // breaking_news custom resource declaration.....
+        'breaking_news_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves breaking_news_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_breaking_news_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -7900,6 +7927,43 @@ function itg_rapid_api_switch_between_app($token) {
     $return_obj = $obj;
 
     return $return_obj;
+}
+/**
+ * Call back function for breaking_news_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_breaking_news_tv() {
+    // call breaking news view
+    $view_result = views_get_view_result('breaking_news', 'block_1');
+    $nid = $view_result[0]->nid;
+    $data = array();
+    if (isset($nid) && $nid > 0) {
+        // select breaking news..
+        
+        $query = db_select('node', 'n');        
+        $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));       
+        $query->condition('n.nid', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $title = $result[0]['title'];
+        $body = $result[0]['body_value'];
+        
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+        $news = array();
+        $news['breaking_news_status'] = "1";
+        $news['breaking_news_title'] = "$title";             
+        $data['data'] = $news;
+    } else {
+        $data['status_code'] = "0";
+        $data['status_message'] = "";
+        $news = array();
+        $news['breaking_news_status'] = "0";
+        $news['breaking_news_title'] = "";             
+        $data['data'] = $news;
+    }
+    return $data;
 }
  
  
