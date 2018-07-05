@@ -270,13 +270,28 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
               print $breaking_output;
             }
           }
-          else if($type == 'Cricket Live Blog'){ ?>
-			  <amp-live-list layout="container" data-poll-interval="15000" data-max-items-per-page="20" id="amp-live-list-insert-blog">
+          else if($type == 'Cricket Live Blog'){ 
+			    $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+				if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+					$title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
+				}
+				else {
+					$title = '<h1>' . $node->title . '</h1>';
+				}
+				print $title;
+			  ?>
+			  <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+			  <div class="stryimg" id="cricketblog" >
+			  <amp-img width="647" height="363" layout="responsive" alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>"></amp-img>
+			  <div class="bolg-content" id="bolgcontent">
+			  <amp-live-list layout="container" data-poll-interval="15000" data-max-items-per-page="1000" id="amp-live-list-insert-blog">
 				<button update on="tap:amp-live-list-insert-blog.update" class="ampstart-btn ml1 caps">You have updates</button>
 				<div items>
-					<?php print get_cricket_live_blog_data('zmpk07042018186621', 0, 'amp'); ?>
+					<?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 0, 'amp'); ?>
 				</div>
 			  </amp-live-list>
+			  </div>
+			  </div>
 		 <?php }
         endif;
         ?>
