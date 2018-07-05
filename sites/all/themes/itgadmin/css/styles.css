@@ -1638,7 +1638,7 @@ ul.pager {
 [id*="field-astro-numerology-values-values"] > tbody > tr > td .form-managed-file .form-submit[value="Remove"], #SocialMedia .form-field-type-file .form-managed-file .form-submit[value="Remove"], .node-recipe-form .form-field-name-field-recipe-audio .form-managed-file .form-submit[value="Remove"],
 .node-recipe-form .form-field-name-field-recipe-video .form-managed-file .form-submit[value="Remove"], .node-vas_service_content-form .field-name-field-service-audio .form-managed-file .form-submit[value="Remove"],
 .node-vas_service_content-form .field-name-field-service-video .form-managed-file .form-submit[value="Remove"], .node-poll-form .form-field-type-file .form-managed-file .form-submit[value="Remove"], [id*="field-videogallery-video-upload-values"] tbody tr td .field-name-field-upload-video .form-type-managed-file .form-managed-file .form-submit[value="Remove"], .form-field-name-field-mega-review-video .form-type-managed-file .form-managed-file .form-submit[value="Remove"], #itg-tv-schedule-form .form-managed-file .form-submit[value="Remove"], .node-podcast-form .field-name-field-podcast-upload-audio-file .form-managed-file .form-submit[value="Remove"], [id*="field-pti-print-media-values"] tbody tr td .field-name-field-pti-upload-video .form-type-managed-file .form-managed-file .form-submit[value="Remove"], .browse-video-form #edit-field-upload-video .form-managed-file .form-submit[value="Remove"] {
-  background: transparent none repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
   border: medium none;
   color: #ee4d4d;
   font-size: 13px;
@@ -4428,7 +4428,7 @@ fieldset#edit-basic {
     margin-bottom: 10px; }
     [id*="edit-field-supp-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-submit[value="Remove"],
     [id*="edit-field-field-issue-import-xml"] fieldset.form-wrapper > div.fieldset-wrapper table tbody tr td .form-submit[value="Remove"] {
-      background: transparent none repeat scroll 0 0;
+      background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
       border: medium none;
       color: #ee4d4d;
       font-size: 13px;
@@ -13551,86 +13551,86 @@ div.ctools-modal-content .form-submit {
 .node-story-form .ajax-progress {
   display: block; }
 
-.page-tv .tv-channek-wrapper li {
+.page-admin-tv-schedule-configuration .tv-channek-wrapper li {
   list-style: none;
   float: left;
   padding: 10px;
   border: 1px solid #ccc;
   border-right: 0; }
 
-.page-tv .tv-channek-wrapper li:last-child {
+.page-admin-tv-schedule-configuration .tv-channek-wrapper li:last-child {
   border-right: 1px solid #ccc; }
 
-.page-tv .tv-channek-wrapper li a {
+.page-admin-tv-schedule-configuration .tv-channek-wrapper li a {
   color: #000; }
 
-.page-tv .tv-channek-wrapper li a:hover {
+.page-admin-tv-schedule-configuration .tv-channek-wrapper li a:hover {
   color: #fff; }
 
-.page-tv .tv-channek-wrapper li:hover {
+.page-admin-tv-schedule-configuration .tv-channek-wrapper li:hover {
   background: #c00; }
 
-.page-tv.page-tv-aajtak .csv-download-wrapper .download-sample {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-aajtak .csv-download-wrapper .download-sample {
   margin-top: 11px;
   display: inline-block;
   margin-right: 10px; }
 
-.page-tv.page-tv-aajtak #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-aajtak #edit-file-ajax-wrapper .form-item.form-type-managed-file {
   padding: 0;
   margin: 30px 0; }
 
-.page-tv.page-tv-aajtak #edit-file-ajax-wrapper .form-type-managed-file label {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-aajtak #edit-file-ajax-wrapper .form-type-managed-file label {
   width: 160px; }
 
-.page-tv.page-tv-aajtak #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-aajtak #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
   width: 160px; }
 
-.page-tv.page-tv-aajtak #itg-tv-schedule-form .form-actions {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-aajtak #itg-tv-schedule-form .form-actions {
   padding: 15px 2px; }
 
-.page-tv.page-tv-dilliaajtak .csv-download-wrapper .download-sample {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-dilliaajtak .csv-download-wrapper .download-sample {
   margin-top: 11px;
   display: inline-block;
   margin-right: 10px; }
 
-.page-tv.page-tv-dilliaajtak #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-dilliaajtak #edit-file-ajax-wrapper .form-item.form-type-managed-file {
   padding: 0;
   margin: 30px 0; }
 
-.page-tv.page-tv-dilliaajtak #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-dilliaajtak #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
   width: 160px; }
 
-.page-tv.page-tv-dilliaajtak #itg-tv-schedule-form .form-actions {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-dilliaajtak #itg-tv-schedule-form .form-actions {
   padding: 15px 2px; }
 
-.page-tv.page-tv-tez .csv-download-wrapper .download-sample {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-tez .csv-download-wrapper .download-sample {
   margin-top: 11px;
   display: inline-block;
   margin-right: 10px; }
 
-.page-tv.page-tv-tez #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-tez #edit-file-ajax-wrapper .form-item.form-type-managed-file {
   padding: 0;
   margin: 30px 0; }
 
-.page-tv.page-tv-tez #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-tez #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
   width: 160px; }
 
-.page-tv.page-tv-tez #itg-tv-schedule-form .form-actions {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-tez #itg-tv-schedule-form .form-actions {
   padding: 15px 2px; }
 
-.page-tv.page-tv-indiatoday .csv-download-wrapper .download-sample {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-indiatoday .csv-download-wrapper .download-sample {
   margin-top: 11px;
   display: inline-block;
   margin-right: 10px; }
 
-.page-tv.page-tv-indiatoday #edit-file-ajax-wrapper .form-item.form-type-managed-file {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-indiatoday #edit-file-ajax-wrapper .form-item.form-type-managed-file {
   padding: 0;
   margin: 30px 0; }
 
-.page-tv.page-tv-indiatoday #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-indiatoday #edit-file-ajax-wrapper .form-type-managed-file .form-type-managed-file > label + div {
   width: 160px; }
 
-.page-tv.page-tv-indiatoday #itg-tv-schedule-form .form-actions {
+.page-admin-tv-schedule-configuration.page-admin-tv-schedule-configuration-indiatoday #itg-tv-schedule-form .form-actions {
   padding: 15px 2px; }
 
 #itg-tv-schedule-form .description {
