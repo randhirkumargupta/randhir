@@ -6110,7 +6110,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
+    //variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
     //$qry = "INSERT INTO `itg_app_master_config_internal` (`id`, `config_key`, `config_val`) VALUES (NULL, 'cube_widget_config_options', '1');";
     //db_query($qry);
     p(node_load(1156727)); // live blog
@@ -7877,7 +7877,8 @@ function itg_rapid_api_test2(){
     echo "andy here";die();
 }
 function itg_rapid_api_test3(){
-    echo "andy here11";die();
+    //echo "andy here11";die();
+    p(node_load(1156727));
 }
 
 /**
