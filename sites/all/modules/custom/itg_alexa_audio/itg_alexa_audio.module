@@ -63,7 +63,7 @@ function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
       if ($vide_fid) {        
         $file_video_obj = file_load($vide_fid);
         $video_url = file_create_url($file_video_obj->uri); 
-        $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time_video.json");
+        $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_videoclip50_time.json");
         $form['last_video_url'] = array(
         '#type' => 'textfield',
         '#title' => t("Last Uploaded Video Url"),
@@ -195,7 +195,7 @@ function genrate_alexa_audio_json($value) {
     'videoUrl' => $video_url,
     'redirectionUrl' => FRONT_URL
   );
-  $video_file_path = $xml_path . 'it_audioclip50_time_video.json';
+  $video_file_path = $xml_path . 'it_videoclip50_time.json';
   $fpv_video = fopen($video_file_path, "w");
   fwrite($fpv_video, json_encode($json_video));
   fclose($fpv_video);
