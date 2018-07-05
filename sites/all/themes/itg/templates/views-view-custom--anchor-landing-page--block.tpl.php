@@ -165,7 +165,7 @@ box-sizing: border-box;}
 	.node-type-reporter.section-author .tile figure{float:left; margin-right:20px;}
 	.node-type-reporter.section-author ul.author-story-wrapper li:first-child{padding-left:15px}
 	.node-type-reporter.section-author ul.author-story-wrapper li{margin-bottom: 30px;width: 25%;float: left;height: auto; overflow-y:inherit;}
-	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:350px;}
+	.node-type-reporter.section-people .anchor-left .reporter-image-responsive-css{width:auto;}
 }
 @media screen and (max-width:767px){
 	.node-type-reporter.section-author ul.author-story-wrapper li,.node-type-reporter.section-people ul.people-video-list li{margin-bottom: 30px;width: 50%;float: left;height: 193px;overflow-y: hidden;}
