@@ -1042,7 +1042,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
       '#suffix' => $suffix,);
   }
 
-  if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_extra_large_image' ) || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image')) {
+  if (($content_name == 'photogallery' || $content_name == 'videogallery' || $content_name == 'food_news' || $content_name == 'cooking_tips' || $content_name == 'recipe' || $content_name == 'podcast' || $content_name == 'mega_review_critic' || $content_name == 'breaking_news' || $content_name == 'story') && ($field_name == 'field_story_e_extra_large_image' ) || ($field_name == 'field_issue_large_cover_image' || $field_name == 'field_issue_supp_large_image')) {
     $extrabigimagesize = '(' . $imgdim[$content_name]['field_story_big_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_big_image'] ['height'] . ')';
     $extralargsize = '(' . $imgdim[$content_name]['field_story_extra_large_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_extra_large_image'] ['height'] . ')';
     $largsize = '(' . $imgdim[$content_name]['field_story_large_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_large_image'] ['height'] . ')';
