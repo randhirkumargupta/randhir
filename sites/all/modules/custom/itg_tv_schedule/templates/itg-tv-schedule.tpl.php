@@ -338,10 +338,11 @@ if (!empty($_GET['date_zone']) && empty(arg(1))) {
     }
     .messages__list{padding-left: 13px;}
     #ui-datepicker-div{z-index: 99999 !important;}
+    body.page-tv-show .container-inline-date input.hasDatepicker{pointer-events: none;}
 </style>
 <script type="text/javascript">
     jQuery(window).load(function(){
-        jQuery("#edit-date-datepicker-popup-1").attr('disabled','disabled');
+       jQuery("body.page-tv-show .container-inline-date input.hasDatepicker").attr('disabled','disabled');
     });
     var current_time_slot = <?php if($total > 0){print $total;} else{ print 0;} ?>;
     jQuery(document).on('ready', function() {
