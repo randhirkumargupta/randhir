@@ -451,6 +451,6 @@ function itg_custom_cache_flush(){
 function itg_custom_cache_flush_submit($form, &$form_state){
   if (isset($form_state['values']['itg_cache_cid']) && !empty($form_state['values']['itg_cache_cid']) && isset($form_state['values']['itg_cache_bin']) && !empty($form_state['values']['itg_cache_bin'])) {
     cache_clear_all($form_state['values']['itg_cache_cid'], $form_state['values']['itg_cache_bin']);
-    drupal_set_message(t('Cache Cleared. CID: ' . $form_state['values']['itg_cache_cid'] . ' from table / bin: '. $form_state['values']['itg_cache_bin']), 'status');
+    drupal_set_message(t('Cache Cleared. CID: ' . $form_state['values']['itg_cache_cid'] . ' from : '. $form_state['values']['itg_cache_bin']), 'status');
   }
 }
