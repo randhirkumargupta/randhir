@@ -57,19 +57,21 @@ foreach ($view->result as $id => $item): ?>
           <div class="social-icon">
             <ul>
               <?php
-              $fb_title = itg_common_only_text_string($item->node_title);
-              $actual_link = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-              $short_url = $actual_link;
-              $share_desc = '';
-              $src = '';
+                if (!empty($item->_field_data['nid']['entity']->field_story_expert_name['und'][0]['value'])) { ?>
 
-              ?>
-              <li>
-              <a class="user-activity def-cur-pointer" rel="<?php print $item->nid; ?>" data-tag="anchor-listing" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($fb_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a class="def-cur-pointer" title="share on facebook" onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'><i class="fa fa-facebook"></i></a>
-            </li>
+                <li>
+                  <a class="def-cur-pointer" href="<?php  print  $item->_field_data['nid']['entity']->field_story_expert_name['und'][0]['value'];?>" target="_blank"><i class="fa fa-facebook"></i></a></a>
+                </li>
+              <?php } ?>
+
+
+               <?php
+                if (!empty($item->_field_data['nid']['entity']->field_reporter_twitter_handle['und'][0]['value'])) { ?>
+
+                <li>
+                  <a class="def-cur-pointer" href="<?php  print 'https://twitter.com/'.ltrim($item->_field_data['nid']['entity']->field_reporter_twitter_handle['und'][0]['value'], '@'); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+              <?php } ?>
           </ul>
         </div>
 
@@ -77,4 +79,5 @@ foreach ($view->result as $id => $item): ?>
   </div>
 </div>
 </div>
+
 <?php endforeach; ?>
