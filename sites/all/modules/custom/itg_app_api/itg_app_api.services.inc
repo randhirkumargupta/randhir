@@ -7947,22 +7947,17 @@ function itg_rapid_api_breaking_news_tv() {
     // call breaking news view
     $view_result = views_get_view_result('breaking_news', 'block_1');
     $nid = $view_result[0]->nid;
+    $field_breaking_data = $view_result[0]->field_field_breaking_tile;
+    $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
     $data = array();
     if (isset($nid) && $nid > 0) {
-        // select breaking news..
         
-        $query = db_select('node', 'n');        
-        $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));       
-        $query->condition('n.nid', $nid);
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        $title = $result[0]['title'];
-        $body = $result[0]['body_value'];
         
         $data['status_code'] = "1";
         $data['status_message'] = "";
         $news = array();
         $news['breaking_news_status'] = "1";
-        $news['breaking_news_title'] = "$title";             
+        $news['breaking_news_title'] = "$field_breaking_tile";             
         $data['data'] = $news;
     } else {
         $data['status_code'] = "0";
