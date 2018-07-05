@@ -20,7 +20,7 @@ $follow_status = $content["follow_status"];
     if (isset($anchor_page_js_version) && !empty($anchor_page_js_version)) {
 	  $js_version = $anchor_page_js_version;
 	}
-    $jspath = '<script src="https://smedia2.intoday.in/aajtak/'.$js_version.'/resources/chat/custom.js"></script>'; 
+    $jspath = '<script src="https://smedia2.intoday.in/aajtak/'.$js_version.'/resources/chat/custom.js"></script>';
     if (in_array($_SERVER['HTTP_HOST'], $domain_arr)) {
           $dev_arg = '99999';
           $jspath = '<script src="https://smedia2.intoday.in/aajtak/'.$js_version.'/resources/chat/it_staging_custom.js"></script>';
@@ -71,12 +71,49 @@ $follow_status = $content["follow_status"];
     </div>
     <div class="anchor-right" >
 
-      <?php  if (isset($anchor['field_celebrity_pro_occupation']) && !empty($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people') : ?>
+      <?php if ((isset($anchor['field_select_url_type']) && !empty($anchor['field_select_url_type']) && strtolower($anchor['field_select_url_type']) == 'people') || (isset($anchor['field_celebrity_pro_occupation']) && !empty($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people')){ ?>
 
           <div class="full-content">
             <?php echo $anchor['body']; ?>
           </div>
-      <?php else: ?>
+          <?php }
+          else if((isset($anchor['field_select_url_type']) && !empty($anchor['field_select_url_type']) && strtolower($anchor['field_select_url_type']) == 'reporter') || (isset($anchor['field_celebrity_pro_occupation']) && !empty($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'reporter')){ ?>
+
+          <?php echo $anchor['title']; ?>
+          <div class="less-content">
+          <?php
+            echo mb_strimwidth(html_entity_decode(strip_tags($anchor['body'])), 0, 245, "..");
+            $share_desc = '';
+          ?>
+          <?php if (strlen($anchor['body']) > 245) { ?>
+            <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
+          </div>
+          <div class="full-content" style="display: none">
+            <?php echo $anchor['body']; ?>
+            <a href="#" class="anchor-action read-less"> Less[-]</a>
+          <?php } ?>
+          </div>
+          <div class="social-icon">
+            <ul>
+                <?php
+                if (!empty($anchor['field_story_expert_name'])) { ?>
+
+                <li>
+                  <a class="def-cur-pointer" href="<?php  print  $anchor['field_story_expert_name']; ?>" target="_blank"><i class="fa fa-facebook"></i></a></a>
+                </li>
+              <?php } ?>
+
+
+               <?php
+               if (!empty($anchor['field_reporter_twitter_handle'])) { ?>
+                <li>
+                  <a class="def-cur-pointer" href="<?php  print 'https://twitter.com/'.ltrim($anchor['field_reporter_twitter_handle'], '@'); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+                </li>
+              <?php } ?>
+            </ul>
+          </div>
+
+      <?php } else{ ?>
       <?php echo $anchor['title']; ?>
       <div class="less-content">
         <!-------  followers count -->
@@ -115,7 +152,7 @@ $follow_status = $content["follow_status"];
               </li>
           </ul>
         </div>
-      <?php endif;?>
+      <?php }?>
     </div>
   </div>
 </div>
