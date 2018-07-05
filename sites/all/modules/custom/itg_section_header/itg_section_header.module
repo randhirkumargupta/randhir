@@ -466,7 +466,7 @@ function get_event_menu($nid) {
     if (is_event_tab() && is_event_tab() == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
 		  $active_class = 'active';	
 		}
-        $flash_back_link .= '<li class="'.$active_class.'">' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/staticpage/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value'])) . '</li>';
+        $flash_back_link .= '<li class="'.$active_class.'">' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/eventpage/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value'])) . '</li>';
       }
     }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
       $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
@@ -540,7 +540,7 @@ function itg_event_backend_custom_flashback($menu_font_color, $event_type, $curr
 
 function is_event_tab(){
   $arg = arg();
-  if ($arg['0'] == 'event' && $arg['3'] == 'staticpage' && !empty($arg['3'])) {
+  if ($arg['0'] == 'event' && $arg['3'] == 'eventpage' && !empty($arg['3'])) {
     return $arg['4'];
   }else {
     return FALSE;
