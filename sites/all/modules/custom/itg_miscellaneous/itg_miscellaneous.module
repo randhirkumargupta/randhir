@@ -430,23 +430,27 @@ function itg_custom_cache_flush(){
   $form['itg_cache_cid'] = array(
     '#type' => 'textfield',
     '#title' => t('Cache Cid'),
-    '#size' => 20,
+    '#size' => 60,
     '#required' => TRUE,
-    '#maxlength' => 20,
+    '#maxlength' => 255,
   );
   $form['itg_cache_bin'] = array(
     '#type' => 'textfield',
     '#title' => t('Cache Table / Bin'),
-    '#size' => 20,
+    '#size' => 60,
     '#required' => TRUE,
-    '#maxlength' => 20,
+    '#maxlength' => 255,
+  );
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear Cache'),
   );
   return $form;
 }
 
 function itg_custom_cache_flush_submit($form, &$form_state){
   if (isset($form_state['values']['itg_cache_cid']) && !empty($form_state['values']['itg_cache_cid']) && isset($form_state['values']['itg_cache_bin']) && !empty($form_state['values']['itg_cache_bin'])) {
-    cache_clear_all($form_state['values']['itg_cache_cid'], $form_state['values']['itg_cache_cid']);
-    drupal_set_message(t('Cache Cleared.'), 'status');
+    cache_clear_all($form_state['values']['itg_cache_cid'], $form_state['values']['itg_cache_bin']);
+    drupal_set_message(t('Cache Cleared. CID: ' . $form_state['values']['itg_cache_cid'] . ' from : '. $form_state['values']['itg_cache_bin']), 'status');
   }
 }
