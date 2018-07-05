@@ -134,13 +134,23 @@ function genrate_alexa_audio_json($value) {
   $stream_url = file_create_url($new_destination);
   // For audio file duration
   if($stream_url){
-      $audio_filename = tempnam('/tmp','getid3');
-      if (file_put_contents($audio_filename, file_get_contents($stream_url, false, null, 0, 300000))) {
+      if ($fp_remote = fopen($stream_url, 'rb')) {
+            $localtempfilename = tempnam('/tmp', 'getID3');
+            if ($fp_local = fopen($localtempfilename, 'wb')) {
+                while ($buffer = fread($fp_remote, 8192)) {
+                    fwrite($fp_local, $buffer);
+                }
+                fclose($fp_local);
+
+            // Initialize getID3 engine
             $getID3 = new getID3;
-            $audio_file_info = $getID3->analyze($audio_filename);
-            unlink($audio_filename);
+            $audio_file_info = $getID3->analyze($localtempfilename);
+                // Delete temporary file
+                unlink($localtempfilename);
+            }
+            fclose($fp_remote);
             $playtime_string = $audio_file_info['playtime_string'];
-      }
+      }        
   }
     
   $json = array(
