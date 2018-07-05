@@ -441,6 +441,10 @@ function itg_custom_cache_flush(){
     '#required' => TRUE,
     '#maxlength' => 20,
   );
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear Cache'),
+  );
   return $form;
 }
 
