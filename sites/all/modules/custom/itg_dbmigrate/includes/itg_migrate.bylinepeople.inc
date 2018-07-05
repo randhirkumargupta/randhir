@@ -102,7 +102,7 @@ class ItgBylinePeopleMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
-    //$row->xml->sef_url =  itg_common_custompath_insert_val((string) $row->xml->headline);
+    $row->xml->sef_url =  itg_common_custompath_insert_val((string) $row->xml->headline);
     $existing_filepath = 'http://media2.intoday.in/indiatoday/images/stories/';
     $row->xml->kicker_image = $existing_filepath.$row->xml->kicker_image;
     return true;
@@ -114,7 +114,7 @@ class ItgBylinePeopleMigration extends XMLMigration {
     $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id; // fix for people
     $node->field_select_url_type[LANGUAGE_NONE][0]['tid'] = $term_id;
     $node->uid = 1;
-    $node->path['alias']=itg_common_custompath_insert_val((string) $row->xml->headline);
+    //$node->path['alias']=itg_common_custompath_insert_val((string) $row->xml->headline);
     // print_r($node);
     // die;
   }

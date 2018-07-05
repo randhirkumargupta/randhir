@@ -1,5 +1,59 @@
 <?php
-//module_load_include('php', 'itg_videogallery', 'vendor/autoload');
+function itg_report_migration_people_table() {
+ $table = array(
+    'description' => 'People migration of byline',
+    'fields' => array(
+      'xml_id' => array(
+        'description' => 'XML ID.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+       ),
+      'nid' => array(
+        'description' => 'The primary identifier of the node.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+       ),
+      'uid' => array(
+        'description' => 'User id',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => '1 for migrated, 0 for not migrated',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => t('Created date'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'updated' => array(
+        'description' => t('updated date'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('xml_id'),
+  );
+  if(!db_table_exists('Itg_migration_people_byline')){
+    db_create_table('Itg_migration_people_byline', $table);
+    echo 'Table created';
+  }else{
+    echo 'Table alreday exist';
+  }
+}
 /**
  * Implement itg_people_migration
  */
@@ -94,4 +148,30 @@ function itg_people_migration() {
   else{
     echo "Failure: People Term id is empty!";
   }
+}
+
+
+function people_migrated_node_insert($xml_id, $nid = 0, $uid =1, $status = 0){
+  db_insert('Itg_migration_people_byline') // Table name no longer needs {}
+    ->fields(array(
+      'xml_id' => $xml_id,
+      'nid' => $nid,
+      'status' => $status,
+      'uid' => $uid ,
+      'created' => REQUEST_TIME,
+      'updated' => REQUEST_TIME,
+    ))
+    ->execute();
+}
+
+function people_migrated_node_update($xml_id, $nid = 0, $uid =1 ){
+  db_insert('Itg_migration_people_byline') // Table name no longer needs {}
+    ->fields(array(
+      'xml_id' => $xml_id,
+      'nid' => $nid,
+      'status' => 1,
+      'uid' => $uid ,
+      'updated' => REQUEST_TIME,
+    ))
+    ->execute();
 }
