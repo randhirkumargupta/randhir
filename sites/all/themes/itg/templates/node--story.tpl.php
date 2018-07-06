@@ -223,7 +223,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       endif;
     ?>
 <div class="story-left-section">
-  <div class="story-left">
+  <div class="story-new-left">
     <div class="byline">
 	  <?php
 		  $byline_detail = $byline_id[0];
@@ -335,7 +335,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 
         <!-- Check the story type whether it is a photo story or not-->
         <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
-          <div class="story-right <?php
+          <div class="story-new-right <?php
                if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                  echo 'listicle-page';
                }
@@ -358,8 +358,21 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 </div>
               <?php } ?>                      
               <?php
-              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
+              $story_image = '';
+                $story_alt = '';
+                $story_title = '';
+                if(!empty($node->field_story_e_extra_large_image[LANGUAGE_NONE])){
+                  $story_image = $node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                  $story_alt = isset($node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['alt']) ? $node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['alt'] : "";
+                  $story_title = isset($node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['title']) ? $node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['title'] : "";
+
+                }
+                else{
+                  $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                  $story_alt = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] : "";
+                  $story_title = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] : "";
+                }
+              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {                
                 ?>
                 <div class="stryimg">
                   <?php if($activate_live_tv) { ?>
@@ -368,25 +381,13 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                         </div>
                 <?php } else {
                         if (empty($widget_data)) {
-                            $story_image = '';
-                            $story_alt = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] : "";
-                            $story_title = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] : "";
-                            if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                                $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                            }
                             if (file_exists($story_image)) {
-                                $file_uri = file_create_url($story_image);
-                                //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';                                
+                                $file_uri = file_create_url($story_image);                               
                                 print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title,  'attributes' => array('itemprop' => 'contentUrl')));
                             }
-                            //else {
-                              //  $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                            //}
-                            //print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
                         else {
                             $flag = TRUE;
-                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             if (file_exists($story_image)) {
                               $file_uri = file_create_url($story_image);
@@ -409,11 +410,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                                 }
                               }
                             }
-                            //if($flag) {
-                                //$file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                            //}
                             if (!$flag) {
-                              print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '" itemprop = "contentUrl"><span class="story-photo-icon">';
+                              print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="'.$story_alt.'" title="' . $story_title . '" src="' . $file_uri . '" itemprop = "contentUrl"><span class="story-photo-icon">';
                             }
                             ?>
 
@@ -447,13 +445,10 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                   <div class="stryimg">
 					  <?php
                     $flag = TRUE;
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                       $flag = FALSE;
-                     //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
-                                    //<i class="fa fa-camera"></i></span>';
                     }
                     else {
                       // For Video image
@@ -473,12 +468,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                         }
                       }
                     }
-
-                    //if($flag) {
-                      //$file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                    //}
                     if (!$flag) {
-                      print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '" itemprop = "contentUrl">        
+                      print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $story_alt . '" title="' . $story_title . '" src="' . $file_uri . '" itemprop = "contentUrl">        
                                     <span class="story-photo-icon">';
                     }
                     ?>
