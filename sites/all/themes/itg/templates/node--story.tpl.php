@@ -209,8 +209,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         $associate_type = 'video';
         $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
       }
-      $clidk_class_slider = "";
-      $widget_data = '';
+      $clidk_class_sliasdder = "";
+      $widget_dataaasd = '';
       if ($associate_type != "" && $associate_id != "") {
         $clidk_class_slider = 'associate-content-block';
         $widget_data = $associate_type . '-' . $associate_id;
@@ -223,11 +223,11 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       endif;
     ?>
 <div class="story-left-section">
-  <div class="story-left">
+  <div class="story-new-left">
     <div class="byline">
 	  <?php
-		  $byline_detail = $byline_id[0];
-		  $extra_large_file = file_load($byline_detail['extra_large_image']);
+		  $byline_dasdetail = $byline_id[0];
+		  $extraasd_large_file = file_load($byline_detail['extra_large_image']);
 		  $bylineextra_large_image = $extra_large_file->uri;
 		  if ($sponsor_text == ''):?>
 		  <div class="profile-pic">
@@ -241,7 +241,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         print '<img alt="" title="" src="' . $file . '">';
       }
       ?>
-      </div>
+      <asd/div>
       <?php elseif ($show_field_val == 'story_powered_text'):
         print ''; ?>              
       <?php else:
@@ -264,7 +264,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 				     <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></span>				   
 				   <?php } ?>
 				   </li></span>
-				 <?php }      	
+		asd		 <?php }      	
 			    }
 			  }				
 			 if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
@@ -282,7 +282,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 			<li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
 			<?php
 			print t('UPDATED: ');
-			if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+	asd		if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
 			  print date('F j, Y H:i', $node->created);
 			}
 			else {
@@ -302,7 +302,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 			<!-- <li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="fa fa-youtube-play"></i></a></li> -->
 			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
 			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
-
+asd
 			<li>
 			 <?php
 			  if ($user->uid > 0) {
@@ -319,7 +319,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 			  }
 			  else {
 				echo $itg_sso_url_mobile;
-			  }
+			  }asd
 			 ?>   
 			</li>
 			<?php if ($config_name == 'vukkul') { ?>
@@ -335,7 +335,14 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
                 
         <!-- Check the story type whether it is a photo story or not-->
         <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
-          <div class="story-right <?php
+          <div class="story-new-cdaksj;dk 
+               '
+               d
+               
+               sdf
+               sdf
+               sdf
+               right <?php
                if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                  echo 'listicle-page';
                }
