@@ -61,7 +61,8 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<?xml version="1.18.1" encoding="ISO-8859-1"?><artical>';
+    $xml = '<?xml version="1.0" encoding="UTF-16" standalone="yes"?><artical>';
+    
     $xml .= '<magazine>India Today</magazine>';
     $xml .= '<frequency>Weekly</frequency>';
     foreach ($result as $key => $value) {
