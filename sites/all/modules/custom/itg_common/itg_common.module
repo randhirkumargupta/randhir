@@ -680,13 +680,16 @@ function itg_common_meta_token_remove($form, &$form_state) {
       if(!in_array($user->uid, $user_access_array))  {
         if(in_array($form['#node']->type, array('story', 'breaking_news', 'photogallery', 'videogallery'))) {
           if($_GET['test'] == 'abc') {
-            pr($form['path']);
-            print "==<br>==";
-            pr($form['metatags']);
+            pr($form['path']['pathauto']);
+           $node->path['pathauto'] = FALSE;
           } else {
-            $form['path']['#access'] = FALSE;
-            $form['metatags']['#access'] = TRUE;
-            $form['metatags']['#type'] = TRUE;
+            // $form['path']['#access'] = FALSE;
+            // $form['metatags']['#access'] = TRUE;
+            // $form['metatags']['#type'] = TRUE;
+             if (isset($form['path']['pathauto']) && $form['path']['pid']['#value']) {
+                $form['path']['pathauto']['#checked'] = FALSE;
+              } 
+
           }
         }
         
