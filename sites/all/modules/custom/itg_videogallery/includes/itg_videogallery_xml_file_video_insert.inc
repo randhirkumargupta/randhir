@@ -135,6 +135,7 @@ function itg_videogallery_rap_upload_img($url){
 }
 
 function itg_anchor_associate_video_cron(){
+  drupal_page_is_cacheable(FALSE);
   $query = db_select('field_data_field_transcode_flag', 'ftf');
   $query->join('field_data_field_video_file_name', 'fvfn', 'fvfn.entity_id=ftf.entity_id');
   $query->fields('fvfn', array('field_video_file_name_value', 'entity_id'));
@@ -155,7 +156,11 @@ function associate_video_to_node($filename, $nid){
     $video_info_arr = itg_get_video_info($filename);
     if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
-      
+      $img_api_url = 'https://feeds.intoday.in/anchor_chat/get_video_image.php?video='. $filename;
+      $remote_img = file_get_contents($img_api_url);
+      if (isset($remote_img)) {
+        $remote_img = json_decode($remote_img);
+      }
       if (!empty($video_fid)) {
         $node = node_load($nid);
         
@@ -163,12 +168,26 @@ function associate_video_to_node($filename, $nid){
         $node->comment = 0;
         $node->revision = 1;
         $node->status = 1;
+        
+        if (isset($remote_img->image) && !empty($remote_img->image)) {
+          $img_url = $remote_img->image;
+          $fid_extra_large_image = itg_videogallery_rap_upload_img($img_url);
+          $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
+          $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+          $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+          $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+          $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+        }
+        
         node_save($node);
+        //p($node);
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
         $field_collection_item->setHostEntity('node', $node);
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
         $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
         $field_collection_item->save();
+       // var_dump($nid, $node);die;
+        //die('fff');
         $file_video = itg_videogallery_get_video_info_by_fid($video_fid);
         $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
             ->fields(array(
@@ -188,7 +207,7 @@ function associate_video_to_node($filename, $nid){
           ->fields(array(
             'state' => workbench_moderation_state_published(),
             'published' => 1,
-            'uid' => 41068,
+            'uid' => 1522,
           ))
           ->condition('nid', $node->nid, '=')
           ->condition('is_current', 1, '=')
@@ -210,7 +229,7 @@ function itg_associate_video_id_to_pcontent($video_info){
 
   $fid = db_insert('file_managed')
       ->fields(array(
-        'uid' => 41068, 
+        'uid' => 1522, //itgsiteadmin,
         'filename' => $video_info->name,
         'uri' => $videourl,
         'filemime' => 'video/mp4',
