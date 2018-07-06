@@ -70,6 +70,8 @@ function itg_videogallery_xml_file_video_insert($data) {
         $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
         $node->created = $publish_date_timestamp;
         $node = node_submit($node); // Prepare node for saving
+        
+        /** Images are associate in node update (on Cron)
         if (!empty($extra_large_img)) {
           $fid_extra_large_image = itg_videogallery_rap_upload_img($extra_large_img);
           $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
@@ -90,6 +92,7 @@ function itg_videogallery_xml_file_video_insert($data) {
           $fid_extra_small_img = itg_videogallery_rap_upload_img($extra_small_img);
           $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
         }
+         **/
         $node->field_transcode_flag[LANGUAGE_NONE][0]['value'] = 1;
         try {
             node_save((object) $node);
@@ -141,7 +144,7 @@ function itg_anchor_associate_video_cron(){
   $query->condition('ftf.field_transcode_flag_value', 1, '=');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $nids = array();
-  //p($result);
+//  p($result);
   foreach ($result as $value) {
     if ($_nid = associate_video_to_node($value['field_video_file_name_value'], $value['entity_id'])){
       $nids[] = $_nid;
@@ -156,7 +159,11 @@ function associate_video_to_node($filename, $nid){
     $video_info_arr = itg_get_video_info($filename);
     if ($video_info_arr) {
       $video_fid = itg_associate_video_id_to_pcontent($video_info_arr);
-      
+      $img_api_url = 'https://feeds.intoday.in/anchor_chat/get_video_image.php?video='. $filename;
+      $remote_img = file_get_contents($img_api_url);
+      if (isset($remote_img)) {
+        $remote_img = json_decode($remote_img);
+      }
       if (!empty($video_fid)) {
         $node = node_load($nid);
         
@@ -164,6 +171,17 @@ function associate_video_to_node($filename, $nid){
         $node->comment = 0;
         $node->revision = 1;
         $node->status = 1;
+        
+        if (isset($remote_img->image) && !empty($remote_img->image)) {
+          $img_url = $remote_img->image;
+          $fid_extra_large_image = itg_videogallery_rap_upload_img($img_url);
+          $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
+          $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+          $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+          $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+          $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+        }
+        
         node_save($node);
         //p($node);
         $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
