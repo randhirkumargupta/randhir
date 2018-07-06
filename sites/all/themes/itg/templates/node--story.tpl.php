@@ -457,7 +457,6 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       <?php } ?>                            
     </div>
     <?php
-    if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
       if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
         ?>
         <div class="briefcase">
@@ -471,8 +470,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
           </ul>
         </div>
         <?php
-      }
-    }
+      }    
     ?>
               <div class="story-movie">
     <?php if (!empty($node->field_story_rating)): ?>
