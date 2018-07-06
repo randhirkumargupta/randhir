@@ -678,7 +678,11 @@ function itg_common_meta_token_remove($form, &$form_state) {
   if(!empty($form['#node']->nid) && !empty($user_access_status)) {       
     if(is_array($user_access_array) && count($user_access_array) > 0) {
       if(!in_array($user->uid, $user_access_array))  {
-        $form['path']['#access'] = FALSE;        
+        $form['path']['#access'] = FALSE;
+        if($_GET['test'] == 'abc') {
+          pr($form['path']);
+          p($form);
+        }
       }
     }    
   }   
