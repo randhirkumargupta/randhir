@@ -70,6 +70,7 @@ function itg_videogallery_xml_file_video_insert($data) {
         $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
         $node->created = $publish_date_timestamp;
         $node = node_submit($node); // Prepare node for saving
+        /** Images are associate in node update (on Cron)
         if (!empty($extra_large_img)) {
           $fid_extra_large_image = itg_videogallery_rap_upload_img($extra_large_img);
           $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
@@ -90,6 +91,7 @@ function itg_videogallery_xml_file_video_insert($data) {
           $fid_extra_small_img = itg_videogallery_rap_upload_img($extra_small_img);
           $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
         }
+        **/
         $node->field_transcode_flag[LANGUAGE_NONE][0]['value'] = 1;
         try {
             node_save((object) $node);
