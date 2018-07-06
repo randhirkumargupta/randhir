@@ -61,7 +61,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<?xml version="1.0" encoding="UTF-16" standalone="yes"?><artical>';
+    $xml = '<?xml version="1.0" encoding="ISO-8859-1"?<artical>';
     
     $xml .= '<magazine>India Today</magazine>';
     $xml .= '<frequency>Weekly</frequency>';
@@ -93,6 +93,9 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $body = str_replace(array("\n", "\r"), ' ', $body);
       $body = preg_replace("/\r\n|\r|\n/", ' ', $body);
       $body = preg_replace("/[\\n\\r]+/", "", $body);
+      $body = stripInvalidXml($body);
+      $body = remove_iframe_img_tags($body);
+      $body = badUnicodeparse_clients($body);
 
 
       //$body = addslashes($body); 
