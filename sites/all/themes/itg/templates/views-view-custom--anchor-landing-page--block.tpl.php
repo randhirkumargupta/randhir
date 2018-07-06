@@ -1,6 +1,23 @@
 <?php
 global $base_url;
 $anchor = $rows[0];
+
+//Redirect to listing page if bylibe profile is inactive
+if(!empty($anchor['field_inactive_profile']) && $anchor['field_inactive_profile']){
+  $path_alias = trim($_SERVER[REQUEST_URI], '/');
+  $match_arr = explode('/', $path_alias);
+  if($match_arr[0] == 'people'){
+    drupal_set_message(t('People is not exist.'), 'error');
+    drupal_goto('/people-list');
+  }else if($match_arr[0] == 'author'){
+    drupal_set_message(t('Author is not exist.'), 'error');
+    drupal_goto('/authors-list');
+  }else if($match_arr[0] == 'anchor'){
+    drupal_set_message(t('Anchor is not exist.'), 'error');
+    drupal_goto('/anchors-list');
+  }
+}
+
 $nid = $anchor['nid'];
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = $actual_link;
@@ -71,7 +88,8 @@ $follow_status = $content["follow_status"];
     </div>
     <div class="anchor-right" >
 
-      <?php if ((isset($anchor['field_select_url_type']) && !empty($anchor['field_select_url_type']) && strtolower($anchor['field_select_url_type']) == 'people') || (isset($anchor['field_celebrity_pro_occupation']) && !empty($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people')){ ?>
+      <?php if ((isset($anchor['field_select_url_type']) && !empty($anchor['field_select_url_type']) && strtolower($anchor['field_select_url_type']) == 'people') || (isset($anchor['field_celebrity_pro_occupation']) && !empty($anchor['field_celebrity_pro_occupation']) && strtolower($anchor['field_celebrity_pro_occupation']) == 'people')){
+        ?>
 
           <div class="full-content">
             <?php echo $anchor['body']; ?>
@@ -170,12 +188,14 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-author ul.author-story-wrapper li span{display: block;font-size: 12px; color: #b1b1b1;padding: 8px 0 5px;}
 .node-type-reporter.section-author ul.author-story-wrapper li a{color:##494949; font:400 15px/20px "OpenSans-Regular";}
 
-.node-type-reporter.section-people h1{display: none;}
+.node-type-reporter.section-people h1,.node-type-reporter.section-reporter h1{display: none;}
 .node-type-reporter.section-people .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
 .node-type-reporter.section-people .anchor{box-shadow:none !important; margin-bottom:40px;}
 .node-type-reporter.section-people .anchor-left{position:relative;}
 .node-type-reporter .anchor-left{width:370px;}
-.node-type-reporter .anchor-left a img{width: 370px; height: 182px;}
+.node-type-reporter.section-author .anchor-left a img{width: 120px; height: 130px;}
+.node-type-reporter.section-people .anchor-left a img{width: 370px;}
+.node-type-reporter.section-anchor .anchor-left a img{width: 370px; height: 182px;}
 .node-type-reporter.section-people .people-img-title{position: absolute;bottom: 0;background: #000;width: 100%;color: #fff;font-size: 15px;line-height: 20px;padding: 3px 8px;
 box-sizing: border-box;}
 .node-type-reporter.section-people .people-img-title a{color: #fff;font-size: 17px;font-weight: bold;}
