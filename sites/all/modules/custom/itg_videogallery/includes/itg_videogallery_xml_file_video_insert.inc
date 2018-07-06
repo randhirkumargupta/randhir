@@ -35,7 +35,7 @@ function itg_videogallery_xml_file_video_insert($data) {
         $node->type = "videogallery";
         node_object_prepare($node);
         $node->language = LANGUAGE_NONE;
-        $node->uid = 41068; 
+        $node->uid = 1522; 
         $node->promote = 0;
         $node->comment = 0;
         $node->status = 0;
