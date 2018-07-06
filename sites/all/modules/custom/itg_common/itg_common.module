@@ -686,9 +686,9 @@ function itg_common_meta_token_remove($form, &$form_state) {
             // $form['path']['#access'] = FALSE;
             // $form['metatags']['#access'] = TRUE;
             // $form['metatags']['#type'] = TRUE;
-             if (isset($form['path']['pathauto']) && $form['path']['pid']['#value']) {
+            // if (isset($form['path']['pathauto']) && $form['path']['pid']['#value']) {
                 $form['path']['pathauto']['#checked'] = FALSE;
-              } 
+            //  } 
 
           }
         }
