@@ -681,7 +681,8 @@ function itg_common_meta_token_remove($form, &$form_state) {
         if(in_array($form['#node']->type, array('story', 'breaking_news', 'photogallery', 'videogallery'))) {
           if($_GET['test'] == 'abc') {
             pr($form['path']);
-            p($form);
+            print "==<br>==";
+            pr($form['metatags']);
           } else {
             $form['path']['#access'] = FALSE;
             $form['metatags']['#access'] = TRUE;
