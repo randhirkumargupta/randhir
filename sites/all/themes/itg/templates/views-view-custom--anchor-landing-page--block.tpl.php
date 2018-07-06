@@ -161,7 +161,6 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-author .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
 .node-type-reporter.section-author .social-icon ul{margin-top:10px;}
 .node-type-reporter.section-author .social-icon ul li{border:0; background:none;}
-.node-type-reporter.section-author .social-icon ul li:first-child{visibility:hidden; width:1px;}
 .node-type-reporter.section-author .social-icon ul li a{letter-spacing:-9999px; margin-right:18px;}
 .node-type-reporter.section-author .social-icon ul li a::first-letter{display:none;}
 .node-type-reporter.section-author .social-icon ul li a{text-indent:-9999;}
@@ -175,7 +174,8 @@ $follow_status = $content["follow_status"];
 .node-type-reporter.section-people .container>a:after{content: '/';padding: 0 3px;text-decoration: none;}
 .node-type-reporter.section-people .anchor{box-shadow:none !important; margin-bottom:40px;}
 .node-type-reporter.section-people .anchor-left{position:relative;}
-.node-type-reporter .anchor-left .reporter-image-responsive-css{width:370px;}
+.node-type-reporter .anchor-left{width:370px;}
+.node-type-reporter .anchor-left a img{width: 370px; height: 182px;}
 .node-type-reporter.section-people .people-img-title{position: absolute;bottom: 0;background: #000;width: 100%;color: #fff;font-size: 15px;line-height: 20px;padding: 3px 8px;
 box-sizing: border-box;}
 .node-type-reporter.section-people .people-img-title a{color: #fff;font-size: 17px;font-weight: bold;}
