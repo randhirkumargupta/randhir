@@ -1485,7 +1485,7 @@ function itg_event_backend_default_node_theme() {
  * Return value for all tabs
  * @return string
  */
-function itg_event_backend_page() {die('In');
+function itg_event_backend_page() {
   return '';
 }
 
