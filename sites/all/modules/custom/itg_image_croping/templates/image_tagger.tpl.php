@@ -47,10 +47,10 @@ list($width, $height) = getimagesize($url);
         $imagehight = $image_dim[$content_name][$explodedata[1]]['height'];
 
         if ($imagewidth == "") {
-          $imagewidth = EXTRA_LARGE_IMAGE_WIDTH;
+          $imagewidth = E_EXTRA_IMAGE_WIDTH;
         }
         if ($imagehight == "") {
-          $imagehight = EXTRA_LARGE_IMAGE_HEIGHT;
+          $imagehight = E_EXTRA_IMAGE_HEIGHT;
         }
         print' <div class="image_info">' . $counter . ' ' . ucwords($label) . ' (' . $imagewidth . 'x' . $imagehight . ')</div>';
       }
