@@ -209,7 +209,7 @@ function associate_video_to_node($filename, $nid){
           ->fields(array(
             'state' => workbench_moderation_state_published(),
             'published' => 1,
-            'uid' => 1522,
+            'uid' => 41068,
           ))
           ->condition('nid', $node->nid, '=')
           ->condition('is_current', 1, '=')
@@ -231,7 +231,7 @@ function itg_associate_video_id_to_pcontent($video_info){
 
   $fid = db_insert('file_managed')
       ->fields(array(
-        'uid' => 1522, //itgsiteadmin,
+        'uid' => 41068, //itgsiteadmin,
         'filename' => $video_info->name,
         'uri' => $videourl,
         'filemime' => 'video/mp4',
