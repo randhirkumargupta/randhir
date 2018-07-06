@@ -9,10 +9,10 @@
  *
  * @return array - The processed information array.
  */
-function itg_videogallery_create_video_node() {
-    $data = file_get_contents('php://input');
-    $xml_data = simplexml_load_string($data);
-    //p($xml_data);
+function itg_videogallery_create_video_node($data) {
+    //$data = file_get_contents('php://input');
+    //$xml_data = simplexml_load_string($data);
+    $xml_data = $data;
     $xml_resp = "<?xml version='1.0' encoding='utf-8'?><Root> ";
     foreach ($xml_data->article as $xml) {
         $video_file_name = $xml->video_file_name;
@@ -59,38 +59,64 @@ function itg_videogallery_create_video_node() {
         $node->comment = 0;
         $node->revision = 1;
         $node->status = 1;
-        $node->body[$node->language][0]['value'] = $description;
-        $node->body[$node->language][0]['format'] = 'full_html';
-        //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));                    
-        $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
+        if (!empty($description)){
+          $node->body[$node->language][0]['value'] = $description; 
+          $node->body[$node->language][0]['format'] = 'full_html';
+        }
+        if (!empty($short_headline)) {
+          $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline)); 
+        }
 
         $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
         if (!empty($cat_id)) {
             $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
-            $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
         }
-
-        $node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = 283571;
-        $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
-        $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = $video_kicker;
+        if (!empty($section_id)) {
+          $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+        }else if(!empty($cat_id)) {
+          $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
+        }
+        
+        if (!empty($anchor)) {
+          $node->field_video_anchor[LANGUAGE_NONE][0]['target_id'] = trim($anchor); 
+        }
+        
+        //$node->field_stroy_city[LANGUAGE_NONE][0]['tid'] = 283571;
+        
+        $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = empty($video_kicker) ? '' : $video_kicker;
         $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
+        
         $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
         $exp_date = strtotime('+10 years', time());
         $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
 
-        //$node = node_submit($node); // Prepare node for saving
+        $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
+        $exp_date = strtotime('+10 years', time());
+        $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
         $node->created = $publish_date_timestamp;
+        $node = node_submit($node); // Prepare node for saving
 
-        $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
-        $node->field_story_extra_large_image[LANGUAGE_NONE][0] = $fid_extra_large_image;
-        $fid_large_img = itg_videogallery_save_image($large_img);
-        $node->field_story_large_image[LANGUAGE_NONE][0] = $fid_large_img;
-        $fid_medium_img = itg_videogallery_save_image($medium_img);
-        $node->field_story_medium_image[LANGUAGE_NONE][0] = $fid_medium_img;
-        $fid_small_img = itg_videogallery_save_image($small_img);
-        $node->field_story_small_image[LANGUAGE_NONE][0] = $fid_small_img;
-        $fid_extra_small_img = itg_videogallery_save_image($extra_small_img);
-        $node->field_story_extra_small_image[LANGUAGE_NONE][0] = $fid_extra_small_img;
+        if (!empty($extra_large_img)) {
+          $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
+          $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image; 
+        }
+        if (!empty($large_img)) {
+          $fid_large_img = itg_videogallery_save_image($large_img);
+          $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
+        }
+        if (!empty($medium_img)) {
+          $fid_medium_img = itg_videogallery_save_image($medium_img);
+          $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
+        }
+        if (!empty($small_img)) {
+          $fid_small_img = itg_videogallery_save_image($small_img);
+          $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
+        }
+        if (!empty($extra_small_img)) {
+          $fid_extra_small_img = itg_videogallery_save_image($extra_small_img);
+          $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+        }
+        
         try {
             
             $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
