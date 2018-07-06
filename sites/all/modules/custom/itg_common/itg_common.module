@@ -680,7 +680,7 @@ function itg_common_meta_token_remove($form, &$form_state) {
       if(!in_array($user->uid, $user_access_array))  {
         if(in_array($form['#node']->type, array('story', 'breaking_news', 'photogallery', 'videogallery'))) {
           if($_GET['test'] == 'abc') {
-            pr($form['path']['pathauto']);
+            pr($form['path']);
            $node->path['pathauto'] = FALSE;
           } else {
             // $form['path']['#access'] = FALSE;
@@ -688,6 +688,7 @@ function itg_common_meta_token_remove($form, &$form_state) {
             // $form['metatags']['#type'] = TRUE;
             // if (isset($form['path']['pathauto']) && $form['path']['pid']['#value']) {
                 unset($form['path']['pathauto']);
+                unset($form['path']['alias']);
             //  } 
 
           }
