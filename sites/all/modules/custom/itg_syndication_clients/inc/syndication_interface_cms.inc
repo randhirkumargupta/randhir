@@ -97,6 +97,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $pattern = "/<p[^>]*><\\/p[^>]*>/"; 
       //$pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/";
       $body = preg_replace($pattern, '', $body); 
+      $body = preg_replace('~\\s?<p>(\\s|&nbsp;)+</p>\\s?~', '', $body);
    
 
 
