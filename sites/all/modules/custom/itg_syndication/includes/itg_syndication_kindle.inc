@@ -248,7 +248,7 @@ function _create_tmp_zip($prefix) {
         header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
         readfile($file_url); // do the double-download-dance (dirty but worky)
         //drupal_add_css("#widget-ajex-loader {display:none}" , "inline");
-        exit;
+        exit; 
     } catch(S3Exception $e) {
         echo $e->getMessage() . "\n";
     }
