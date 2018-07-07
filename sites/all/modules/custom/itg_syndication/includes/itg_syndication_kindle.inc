@@ -231,14 +231,22 @@ function _create_tmp_zip($prefix) {
         }
         
         $zip->close();
-        header('Content-Type: application/zip');
+        /*header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="download.zip"');
         header("Pragma: no-cache"); 
         header("Expires: 0"); 
         readfile($file);
-        unlink($file);
+        unlink($file);*/
+        $prefix_cl = $prefix;
+        $prefix_cl_fi = str_replace("public://","https://static-dev.indiatodayonline.in/",$prefix_cl);
+        
+        $file_url = $prefix_cl_fi;
+        header('Content-Type: application/octet-stream');
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");
+        readfile($file_url); // do the double-download-dance (dirty but worky)
         //drupal_add_css("#widget-ajex-loader {display:none}" , "inline");
         exit;
     } catch(S3Exception $e) {
