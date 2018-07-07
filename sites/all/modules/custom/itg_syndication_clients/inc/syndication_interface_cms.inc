@@ -93,9 +93,10 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $body = str_replace(array("\n", "\r"), ' ', $body);
       $body = preg_replace("/\r\n|\r|\n/", ' ', $body);
       $body = preg_replace("/[\\n\\r]+/", "", $body);
-      $body = stripInvalidXml($body);
-      $body = remove_iframe_img_tags($body);
-      $body = badUnicodeparse_clients($body);
+      $body = stripInvalidXml($body);      
+      $body = preg_replace('/\s/u', '', $body); 
+      
+      $body = str_replace("\n", "", $body);
 
 
       //$body = addslashes($body); 
