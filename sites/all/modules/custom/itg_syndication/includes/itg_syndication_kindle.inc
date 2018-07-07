@@ -228,7 +228,7 @@ function _create_tmp_zip($prefix) {
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
         }
-        $result = createZip($zip, $file);
+        
         $zip->close();
         header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
