@@ -227,13 +227,16 @@ function _create_tmp_zip($prefix) {
             $xml_dot_gz_files = $s3->getObjectUrl($bucket, $object['Key']);
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
+            break;
         }
-        $result = createZip($zip, $file);
+        
         $zip->close();
         header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="download.zip"');
+        header("Pragma: no-cache"); 
+        header("Expires: 0"); 
         readfile($file);
         unlink($file);
         //drupal_add_css("#widget-ajex-loader {display:none}" , "inline");
