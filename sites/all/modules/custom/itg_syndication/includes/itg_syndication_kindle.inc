@@ -227,7 +227,7 @@ function _create_tmp_zip($prefix) {
             $xml_dot_gz_files = $s3->getObjectUrl($bucket, $object['Key']);
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
-            break;
+            //break;
         }
         
         $zip->close();
