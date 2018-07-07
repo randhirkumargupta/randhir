@@ -600,3 +600,30 @@ function badUnicodeparse_clients($str) {
     $str = preg_replace("/\\\\u00([0-9a-f]{2})/e", 'chr(hexdec("$1"))', $str);
     return $str;
 }
+
+function client_sy_remove_empty_ptag($body){
+    $body = str_replace('\n', '', $body);
+      $body = str_replace('\r', '', $body);
+      $body = str_replace('\r\n', '', $body);
+      $body = str_replace('<p> </p>', '', $body);
+      $body = str_replace('<p></p>', '', $body);
+      $body = str_replace('<br>', '', $body);
+      $body = str_replace('<br />', '', $body);
+      $body = str_replace('&lt;br /&gt;', '', $body);
+      $body = str_replace('&lt;br&gt;', '', $body);
+      $body = trim(preg_replace('/\s\s+/', ' ', $body));
+      $body = trim(preg_replace('/\s+/', ' ', $body));
+      $body = preg_replace('/\s+/', ' ', trim($body));
+      $body = preg_replace('~[\r\n]+~', '', $body);
+      $body = str_replace(array("\n", "\r"), '', $body);
+      $body = preg_replace("~[\r\n]~", "",$body);
+      $body = str_replace(array("\n", "\r"), ' ', $body);
+      $body = preg_replace("/\r\n|\r|\n/", ' ', $body);
+      $body = preg_replace("/[\\n\\r]+/", "", $body);
+      $body = stripInvalidXml($body);      
+      $pattern = "/<p[^>]*><\\/p[^>]*>/"; 
+      //$pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/";
+      $body = preg_replace($pattern, '', $body); 
+      $body = preg_replace('~\\s?<p>(\\s|&nbsp;)+</p>\\s?~', '', $body);
+      return $body;
+}
