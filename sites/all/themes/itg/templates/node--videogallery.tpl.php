@@ -8,6 +8,8 @@ if (!empty($_GET['preview_log'])) {
 <?php } ?>
 
 <?php print $node->view_output; ?>
+<!-- Taboola hide for testing as per request of tarun sir -->
+<!--
 <div class="taboola mhides">
 <?php
 //~ if (function_exists('taboola_view')) {
@@ -47,6 +49,7 @@ if (!empty($_GET['preview_log'])) {
 		</div>
 		</div>
 </div>
+-->
 <?php
 // get config value 
 if (!empty($node->field_video_configurations['und'])) {
