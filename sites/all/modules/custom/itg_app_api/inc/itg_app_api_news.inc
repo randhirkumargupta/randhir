@@ -364,6 +364,24 @@ function generateNewsCategoryList($tid, $pageno) {
             }
             $news_list_array[$listcount]['n_emoji_left'] = $n_emoji_left;
             $news_list_array[$listcount]['n_emoji_right'] = $n_emoji_right;
+            /* work on offline start */
+
+        if ($pageno == 0) {
+            $byline_data = itg_get_multi_byline_details($nid, 1);
+            $aid = $byline_data[0]['nid'];
+            $a_title = $byline_data[0]['title'];
+            $n_body_val = strip_tags($field_story_kicker_text_value);
+            $arr_offline = array();
+            $author = array();
+            $nObject = new stdClass();
+            $nObject->nid = $nid;
+            $author = (array) generateAuthorTagStory($nObject, 1);
+            $a_title = $author['a_title'];
+            $arr_offline['no_desc_withouthtml'] = "$n_body_val";
+            $arr_offline['no_author']['a_title'] = "$a_title";
+            $news_list_array[$listcount]['n_offline_data'] = $arr_offline;
+        }
+        /* work on offline end */
 
             $listcount++;
         }
