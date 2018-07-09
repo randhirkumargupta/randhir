@@ -682,7 +682,8 @@ function itg_common_meta_token_remove($form, &$form_state) {
             // $form['path']['alias']['#attributes']  = array('class' => array('disable-custom-path-alias'));
             drupal_add_js('
                 jQuery(document).ready(function () {
-                    jQuery("#edit-path-alias, #edit-path-pathauto").attr("disabled", "disabled"); //Disable
+                    jQuery("#edit-path-pathauto").attr("disabled", "disabled"); //Disable
+                    jQuery("#edit-path-alias").attr("disabled", "disabled"); //Disable
                   });', 'inline');
                 
         }
