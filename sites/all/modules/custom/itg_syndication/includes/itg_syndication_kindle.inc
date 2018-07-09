@@ -13,7 +13,7 @@ use Aws\Common\Credentials\Credentials;
 define('KINDLE_WRAPPER', "public://kindle");
 
 /**
- * {@inheritdocs}
+ * {@inheritdocs} 
  */
 function kindle_feed_generate_form($form, &$form_state) {
     $options_first = magazine_options();
