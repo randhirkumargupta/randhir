@@ -239,7 +239,7 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         $loop_cc = 0;
         $create_section_file_ar = array();
         foreach ($create_section_file as $key => $value) {
-            $create_section_file_ar = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
+            $create_section_file_ar[] = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
         }
         $zip->close();
         /*header('Content-Type: application/zip');
