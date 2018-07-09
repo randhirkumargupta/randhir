@@ -218,8 +218,8 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
            
            drupal_add_js('
                 jQuery(document).ready(function () {
-                    jQuery("#edit-path-pathauto").attr("readonly", "readonly"); //Disable
-                    jQuery("#edit-path-alias").attr("readonly", "readonly"); //Disable
+                    jQuery("#edit-path-pathauto").attr("disabled", "disabled"); //Disable
+                    jQuery("#edit-path-alias").attr("readonly", "readonly"); //readonly
                   });', 'inline');
            
         }
