@@ -236,6 +236,11 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         $manifest_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$manifest_file);
         $kindle_save_unmanaged_file_name3 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name3);
         $create_section_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$create_section_file);
+        $loop_cc = 0;
+        $create_section_file_ar = array();
+        foreach ($create_section_file as $key => $value) {
+            $create_section_file_ar = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
+        }
         $zip->close();
         /*header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
@@ -254,7 +259,7 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         $files[] = $kindle_save_unmanaged_file_name2;
         $files[] = $manifest_file;
         $files[] = $kindle_save_unmanaged_file_name3;
-        $files[] = $create_section_file;
+        $files[] = $create_section_file_ar;
 
 # create new zip object
         $zip = new ZipArchive();
@@ -309,12 +314,15 @@ function _kindle_save_unmanaged_file($data_array = array(), $directory_name) {
  * @param array $section_with_nids
  */
 function _create_section_file($section_with_nids = array(), $directory_name) {
+    $section_file_name_ar = array();
+    $node_file = array();
     if(!empty($section_with_nids)) {
         $fresh_sections_with_nids = _get_sections_with_corrected_nids($section_with_nids);
         // itg_watchdog("sections_with_nids", array('old_sectinos' => $section_with_nids, "fresh" => $fresh_sections_with_nids));
         foreach($fresh_sections_with_nids as $section_name => $node_array) {
             // Section file started
             $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
+            $section_file_name_ar[] = $section_file_name;
             //itg_watchdog("section_node_count", array($section_file_name, $node_array));
             $xml = "<?xml version='1.0' encoding='utf-8'?>";
             $xml .= "<rss version='2.0'>";
@@ -336,7 +344,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             file_unmanaged_save_data(_formet_xml($xml), $destination, FILE_EXISTS_REPLACE);
             //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($destination))));
             // Section file ended
-            return $destination;
+            return $section_file_name_ar;
         }
     }
 }
