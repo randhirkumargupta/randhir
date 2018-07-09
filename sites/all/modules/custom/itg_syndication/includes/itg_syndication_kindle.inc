@@ -220,9 +220,9 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         ));
         //drupal_add_css("#widget-ajex-loader {display:block !important}" , "inline");
         // Prepare File
-        $file = tempnam("download_" . time(), "zip");
+        $file = tempnam('.', '');
         $zip = new ZipArchive();
-        $zip->open($file, ZipArchive::OVERWRITE);
+        $zip->open($file, ZipArchive::CREATE);
         foreach($objects as $object) {
             $xml_dot_gz_files = $s3->getObjectUrl($bucket, $object['Key']);
             $contents = file_get_contents($xml_dot_gz_files);
@@ -237,16 +237,16 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         $kindle_save_unmanaged_file_name3 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name3);
         $create_section_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$create_section_file);
         $zip->close();
-        /*header('Content-Type: application/zip');
+        header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="download.zip"');
         header("Pragma: no-cache"); 
         header("Expires: 0"); 
         readfile($file);
-        unlink($file);*/
+        unlink($file);
         
-        # define file array
+      /*  # define file array
         $files = array();
         $files[] = $cover_file;
         $files[] = $kindle_save_unmanaged_file_name1;
@@ -279,7 +279,7 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         header('Content-disposition: attachment; filename="download.zip"');
         header('Content-type: application/zip');
         readfile($tmp_file);
-        unlink($tmp_file);
+        unlink($tmp_file);*/
         exit; 
     } catch(S3Exception $e) {
         echo $e->getMessage() . "\n";
