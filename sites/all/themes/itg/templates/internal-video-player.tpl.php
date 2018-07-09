@@ -61,6 +61,7 @@ if(empty($image)){
 <div id="videoplayer"> </div>
 
 <script type='text/javascript' >
+var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>", "<?php print $node_url; ?>");
 var jwConfig = {
   config_url : 'https://akm-img-a-in.tosshub.com/sites/player/jwplayer_config/India_Today/it_player.js',
   content_id : "<?php echo $nid; ?>",//vdieo content id mandatory
@@ -74,7 +75,7 @@ var jwConfig = {
 
   /* share  sharing_link, sharing_code are mandatory*/
   sharing_link: "<?php echo  FRONT_URL. "/". drupal_get_path_alias('node/'.$nid); ?>",
-  sharing_code:encodeURI("<iframe src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" allowfullscreen  width='648' height='396' frameborder='0' scrolling='no' />"),
+  sharing_code:encodeURI("<iframe src=\"<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>\" allowfullscreen  width='648' height='396' frameborder='0' scrolling='no' />"),
 
   hlslabels:{"156":"lowest","410":"low","512":"medium","864":"high","996":"Highest"},
   /*  */
