@@ -69,7 +69,7 @@ var jwConfig = {
   /* playlist values .these parameter are mandatory*/
   file1: "<?php echo $player_content['bitrate_url']; ?>",
   file2: "<?php echo $player_content['file_url']; ?>",
-  title: "<?php echo $title; ?>",
+  title: "<?php echo stripslashes($title); ?>",
   media_id:"vod_<?php echo $nid; ?>",
   image: "<?php echo $image; ?>",
 
