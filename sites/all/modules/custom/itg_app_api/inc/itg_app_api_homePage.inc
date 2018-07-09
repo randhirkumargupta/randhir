@@ -593,6 +593,24 @@ function homePageJsonPackagelist($tid) {
             }
             $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
             $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
+            /* work on offline start */
+
+        
+            $byline_data = itg_get_multi_byline_details($nid, 1);
+            $aid = $byline_data[0]['nid'];
+            $a_title = $byline_data[0]['title'];
+            $n_body_val = strip_tags($field_story_kicker_text_value);
+            $arr_offline = array();
+            $author = array();
+            $nObject = new stdClass();
+            $nObject->nid = $nid;
+            $author = (array) generateAuthorTagStory($nObject, 1);
+            $a_title = $author['a_title'];
+            $arr_offline['no_desc_withouthtml'] = "$n_body_val";
+            $arr_offline['no_author']['a_title'] = "$a_title";
+            $data_newslist[$listcount]['n_offline_data'] = $arr_offline;
+        
+        /* work on offline end */
 
 
             $listcount++;
@@ -949,6 +967,24 @@ function homePageJsonTopstories($top_story_limit) {
             $data_newslist[$home_list_count]['n_polls'] = $n_polls;
             $data_newslist[$home_list_count]['n_rating'] = $n_rating;
             $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
+                /* work on offline start */
+
+        
+            $byline_data = itg_get_multi_byline_details($nid, 1);
+            $aid = $byline_data[0]['nid'];
+            $a_title = $byline_data[0]['title'];
+            $n_body_val = strip_tags($field_story_kicker_text_value);
+            $arr_offline = array();
+            $author = array();
+            $nObject = new stdClass();
+            $nObject->nid = $nid;
+            $author = (array) generateAuthorTagStory($nObject, 1);
+            $a_title = $author['a_title'];
+            $arr_offline['no_desc_withouthtml'] = "$n_body_val";
+            $arr_offline['no_author']['a_title'] = "$a_title";
+            $data_newslist[$home_list_count]['n_offline_data'] = $arr_offline;
+        
+        /* work on offline end */
             $home_list_count++;
         }
     }
@@ -1244,6 +1280,24 @@ function homePageCatNewslist($tid) {
             }
             $data_newslist[$listcount]['n_emoji_left'] = $n_emoji_left;
             $data_newslist[$listcount]['n_emoji_right'] = $n_emoji_right;
+            /* work on offline start */
+
+        
+            $byline_data = itg_get_multi_byline_details($nid, 1);
+            $aid = $byline_data[0]['nid'];
+            $a_title = $byline_data[0]['title'];
+            $n_body_val = strip_tags($field_story_kicker_text_value);
+            $arr_offline = array();
+            $author = array();
+            $nObject = new stdClass();
+            $nObject->nid = $nid;
+            $author = (array) generateAuthorTagStory($nObject, 1);
+            $a_title = $author['a_title'];
+            $arr_offline['no_desc_withouthtml'] = "$n_body_val";
+            $arr_offline['no_author']['a_title'] = "$a_title";
+            $data_newslist[$listcount]['n_offline_data'] = $arr_offline;
+        
+        /* work on offline end */
 
             $listcount++;
         }
