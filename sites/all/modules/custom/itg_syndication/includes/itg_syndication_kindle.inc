@@ -246,7 +246,7 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         readfile($file);
         unlink($file);
         
-      /*  # define file array
+      /*  # define file array 
         $files = array();
         $files[] = $cover_file;
         $files[] = $kindle_save_unmanaged_file_name1;
