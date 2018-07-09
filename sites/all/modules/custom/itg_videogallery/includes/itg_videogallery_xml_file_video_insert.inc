@@ -51,14 +51,14 @@ function itg_videogallery_xml_file_video_insert($data) {
 
         $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
         $counter = 0;
-        if (!empty($cat_id)) {
+        if (!empty($section_id)) {
             $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $section_id;
             $counter++;
         }
-        if (!empty($section_id)) {
+        if (!empty($cat_id)) {
           $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
           $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $cat_id;
-        }else if(!empty($cat_id)) {
+        }else if(!empty($section_id)) {
           $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
         }
         if (!empty($anchor)) {
