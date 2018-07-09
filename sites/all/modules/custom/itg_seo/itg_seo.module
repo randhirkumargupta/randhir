@@ -216,6 +216,12 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
            $form['path']['pathauto']['#attributes']  = array('class' => array('disable-custom-path-pathauto'));
            $form['path']['alias']['#attributes']  = array('class' => array('disable-custom-path-alias'));
            
+           drupal_add_js('
+                jQuery(document).ready(function () {
+                    jQuery("#edit-path-pathauto").attr("readonly", "readonly"); //Disable
+                    jQuery("#edit-path-alias").attr("readonly", "readonly"); //Disable
+                  });', 'inline');
+           
         }
         
       }
