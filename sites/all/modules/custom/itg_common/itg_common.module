@@ -679,14 +679,12 @@ function itg_common_meta_token_remove($form, &$form_state) {
     if(is_array($user_access_array) && count($user_access_array) > 0) {
       if(!in_array($user->uid, $user_access_array))  {
         if(in_array($form['#node']->type, array('story', 'breaking_news', 'photogallery', 'videogallery'))) {
-          /*  
-          unset($form['path']['pathauto']);
             $form['path']['alias']['#attributes']  = array('class' => array('disable-custom-path-alias'));
             drupal_add_js('
-jQuery(document).ready(function () {
-    jQuery(".disable-custom-path-alias").attr("disabled", "disabled"); //Disable
-  });', 'inline');
-             */   
+                jQuery(document).ready(function () {
+                    jQuery(".disable-custom-path-alias, #edit-path-pathauto").attr("disabled", "disabled"); //Disable
+                  });', 'inline');
+                
         }
         
       }
