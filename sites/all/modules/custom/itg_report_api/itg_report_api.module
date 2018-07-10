@@ -295,7 +295,7 @@ function api_anchorlist_callback(){
     $query->leftJoin('field_data_field_is_election_live', 'fel', 'fel.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');
     
-    $query->fields('n', array('nid,title'));    
+    $query->fields('n', array('nid','title'));    
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('dbody', array('body_value'));    
     $query->fields('fcmd', array('field_cm_display_title_value'));
