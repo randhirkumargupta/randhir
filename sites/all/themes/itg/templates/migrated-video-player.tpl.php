@@ -59,8 +59,8 @@ var jwConfig = {
   content_id : "<?php echo $nid; ?>",//vdieo content id mandatory
   videoContainer :'videoplayer',  //  video contener element id
   /* playlist values .these parameter are mandatory*/
-  file1: "<?php echo $player_content['bitrate_url']; ?>",
-  file2: "<?php echo $player_content['file_url']; ?>",
+  file1: "<?php echo $data_video['bitrate_url']; ?>",
+  file2: "<?php echo $data_video['file_url']; ?>",
   title: "<?php echo stripslashes($title); ?>",
   media_id:"vod_<?php echo $nid; ?>",
   image: "<?php echo $image; ?>",
