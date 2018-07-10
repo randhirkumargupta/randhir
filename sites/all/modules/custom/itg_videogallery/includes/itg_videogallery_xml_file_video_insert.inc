@@ -50,13 +50,16 @@ function itg_videogallery_xml_file_video_insert($data) {
         }
 
         $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
-        if (!empty($cat_id)) {
-            $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
-        }
+        $counter = 0;
         if (!empty($section_id)) {
-          $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
-        }else if(!empty($cat_id)) {
+            $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $section_id;
+            $counter++;
+        }
+        if (!empty($cat_id)) {
           $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
+          $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $cat_id;
+        }else if(!empty($section_id)) {
+          $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
         }
         if (!empty($anchor)) {
           $node->field_video_anchor[LANGUAGE_NONE][0]['target_id'] = trim($anchor); 
@@ -137,7 +140,8 @@ function itg_videogallery_rap_upload_img($url){
     return $fid;
 }
 
-function itg_anchor_associate_video_cron(){
+function itg_anchor_associate_video_cron(){p(node_load(1235334));
+  drupal_page_is_cacheable(FALSE);
   $query = db_select('field_data_field_transcode_flag', 'ftf');
   $query->join('field_data_field_video_file_name', 'fvfn', 'fvfn.entity_id=ftf.entity_id');
   $query->fields('fvfn', array('field_video_file_name_value', 'entity_id'));

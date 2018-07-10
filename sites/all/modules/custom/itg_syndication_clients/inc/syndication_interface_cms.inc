@@ -62,6 +62,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
   if (!empty($result)) {
     global $base_url;
     $xml = '<?xml version="1.0" encoding="ISO-8859-1"?><artical>';
+    
     $xml .= '<magazine>India Today</magazine>';
     $xml .= '<frequency>Weekly</frequency>';
     foreach ($result as $key => $value) {
@@ -74,27 +75,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $body = itg_remove_extra_custom_tags($body);
-      $body = str_replace('\n', '', $body);
-      $body = str_replace('\r', '', $body);
-      $body = str_replace('\r\n', '', $body);
-      $body = str_replace('<p> </p>', '', $body);
-      $body = str_replace('<p></p>', '', $body);
-      $body = str_replace('<br>', '', $body);
-      $body = str_replace('<br />', '', $body);
-      $body = str_replace('&lt;br /&gt;', '', $body);
-      $body = str_replace('&lt;br&gt;', '', $body);
-      $body = trim(preg_replace('/\s\s+/', ' ', $body));
-      $body = trim(preg_replace('/\s+/', ' ', $body));
-      $body = preg_replace('/\s+/', ' ', trim($body));
-      $body = preg_replace('~[\r\n]+~', '', $body);
-      $body = str_replace(array("\n", "\r"), '', $body);
-      $body = preg_replace("~[\r\n]~", "",$body);
-      $body = str_replace(array("\n", "\r"), ' ', $body);
-      $body = preg_replace("/\r\n|\r|\n/", ' ', $body);
-      $body = preg_replace("/[\\n\\r]+/", "", $body);
-
-
-      //$body = addslashes($body); 
+      $body = client_sy_remove_empty_ptag($body);  
       
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<section>' . $primary_cat . '</section>';
@@ -369,3 +350,5 @@ function genrate_indiatoday_lifestyle_monthly_1206567_xml() {
   fwrite($fp, $xml);
   fclose($fp);
 }
+
+

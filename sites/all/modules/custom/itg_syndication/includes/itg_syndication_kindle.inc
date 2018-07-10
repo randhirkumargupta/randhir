@@ -13,7 +13,7 @@ use Aws\Common\Credentials\Credentials;
 define('KINDLE_WRAPPER', "public://kindle");
 
 /**
- * {@inheritdocs}
+ * {@inheritdocs} 
  */
 function kindle_feed_generate_form($form, &$form_state) {
     $options_first = magazine_options();
@@ -145,7 +145,7 @@ function kindle_feed_generate_form_validate($form, &$form_state) {
  * {@inheritdocs}
  */
 function kindle_feed_generate_form_submit($form, &$form_state) {
-    p($form_state);
+    //p($form_state);
     if($form_state['values']['op'] == 'Submit') {
         $issue = $form_state['values']['issues'];
         $magazine = $form_state['values']['magazine'];
@@ -184,19 +184,19 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
             //Create cover file
             $cover_file = _create_cover_xml();
             //save civer file
-            _kindle_save_unmanaged_file($cover_file, $directory_name);
+            $kindle_save_unmanaged_file_name1 = _kindle_save_unmanaged_file($cover_file, $directory_name);
             // Create cover page file.
             $cover_page_file = _create_cover_page_xml();
             // save cover page file.
-            _kindle_save_unmanaged_file($cover_page_file, $directory_name);
+            $kindle_save_unmanaged_file_name2 = _kindle_save_unmanaged_file($cover_page_file, $directory_name);
             //Create manifiest file.
             $manifest_file = _create_manifest_file($sections_name_array, $section_with_nids_array);
             // save manifest file.
-            _kindle_save_unmanaged_file($manifest_file, $directory_name);
+            $kindle_save_unmanaged_file_name3 =_kindle_save_unmanaged_file($manifest_file, $directory_name);
             //create section file which are active.
-            _create_section_file($section_with_nids_array, $directory_name);
+            $create_section_file = _create_section_file($section_with_nids_array, $directory_name);
             // Create zip in temp location.
-            _create_tmp_zip("public://indiatoday/kindle/$directory_name");
+            _create_tmp_zip("public://indiatoday/kindle/$directory_name", $cover_file, $kindle_save_unmanaged_file_name1, $cover_page_file, $kindle_save_unmanaged_file_name2, $manifest_file, $kindle_save_unmanaged_file_name3, $create_section_file);
         }
     }
 }
@@ -206,7 +206,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
  * 
  * @param string $prefix
  */
-function _create_tmp_zip($prefix) {
+function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1, $cover_page_file, $kindle_save_unmanaged_file_name2, $manifest_file, $kindle_save_unmanaged_file_name3, $create_section_file) {
     $bucket = variable_get('aws_bucket');
     $aws_access_key = variable_get('aws_access_key');
     $aws_secret_key = variable_get('aws_secret_key');
@@ -227,16 +227,68 @@ function _create_tmp_zip($prefix) {
             $xml_dot_gz_files = $s3->getObjectUrl($bucket, $object['Key']);
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
+            //break;
         }
-        //$zip->close();
-        header('Content-Type: application/zip');
+        $cover_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$cover_file);
+        $kindle_save_unmanaged_file_name1 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name1);
+        $cover_page_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$cover_page_file);
+        $kindle_save_unmanaged_file_name2 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name2);
+        $manifest_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$manifest_file);
+        $kindle_save_unmanaged_file_name3 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name3);
+        //$create_section_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$create_section_file);
+//        $loop_cc = 0;
+//        $create_section_file_ar = array();
+//        foreach ($create_section_file as $key => $value) {
+//            $create_section_file_ar[] = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
+//        }
+        $zip->close();
+        /*header('Content-Type: application/zip');
         header("Content-Transfer-Encoding: Binary");
         header('Content-Length: ' . filesize($file));
         header('Content-Disposition: attachment; filename="download.zip"');
+        header("Pragma: no-cache"); 
+        header("Expires: 0"); 
         readfile($file);
-        unlink($file);
-        //drupal_add_css("#widget-ajex-loader {display:none}" , "inline");
-        exit;
+        unlink($file);*/
+        
+        # define file array
+        $files = array();
+        $files[] = $cover_file;
+        $files[] = $kindle_save_unmanaged_file_name1;
+        $files[] = $cover_page_file;
+        $files[] = $kindle_save_unmanaged_file_name2;
+        $files[] = $manifest_file;
+        $files[] = $kindle_save_unmanaged_file_name3;
+        //$files[] = $create_section_file_ar;
+        foreach ($create_section_file as $key => $value) {
+            $files[] = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
+        }
+
+# create new zip object
+        $zip = new ZipArchive();
+
+# create a temp file & open it
+        $tmp_file = tempnam('.', '');
+        $zip->open($tmp_file, ZipArchive::CREATE);
+
+# loop through each file
+        foreach ($files as $file) {
+            # download file
+            $download_file = file_get_contents($file);
+
+            #add it to the zip
+            $zip->addFromString(basename($file), $download_file);
+        }
+
+# close zip
+        $zip->close();
+
+# send the file to the browser as a download
+        header('Content-disposition: attachment; filename="download.zip"');
+        header('Content-type: application/zip');
+        readfile($tmp_file);
+        unlink($tmp_file);
+        exit; 
     } catch(S3Exception $e) {
         echo $e->getMessage() . "\n";
     }
@@ -255,6 +307,7 @@ function _kindle_save_unmanaged_file($data_array = array(), $directory_name) {
         $data_file_xml = $data_array['xml'];
         file_unmanaged_save_data($data_file_xml, $data_file_destination, FILE_EXISTS_REPLACE);
         //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($data_file_destination))));
+        return $data_file_destination;
     }
 }
 
@@ -264,12 +317,15 @@ function _kindle_save_unmanaged_file($data_array = array(), $directory_name) {
  * @param array $section_with_nids
  */
 function _create_section_file($section_with_nids = array(), $directory_name) {
+    $section_file_name_ar = array();
+    $node_file = array();
     if(!empty($section_with_nids)) {
         $fresh_sections_with_nids = _get_sections_with_corrected_nids($section_with_nids);
         // itg_watchdog("sections_with_nids", array('old_sectinos' => $section_with_nids, "fresh" => $fresh_sections_with_nids));
         foreach($fresh_sections_with_nids as $section_name => $node_array) {
             // Section file started
             $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
+            $section_file_name_ar[] = $section_file_name;
             //itg_watchdog("section_node_count", array($section_file_name, $node_array));
             $xml = "<?xml version='1.0' encoding='utf-8'?>";
             $xml .= "<rss version='2.0'>";
@@ -282,7 +338,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
                     $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
                     $xml .="<item><link>" . $artical_file_name . "</link></item>";
                     $node_file = _create_node_file($artical_file_name, $nid, $section_name);
-                    _kindle_save_unmanaged_file($node_file, $directory_name);
+                    $node_file_name_val = _kindle_save_unmanaged_file($node_file, $directory_name);
                 }
             }
             $xml .= "</channel></rss>";
@@ -291,8 +347,12 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             file_unmanaged_save_data(_formet_xml($xml), $destination, FILE_EXISTS_REPLACE);
             //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($destination))));
             // Section file ended
+            //return $section_file_name_ar;
+            $section_file_name_ar[] = $destination;
+            $section_file_name_ar[] = $node_file_name_val;
         }
     }
+    return $section_file_name_ar;
 }
 
 /**

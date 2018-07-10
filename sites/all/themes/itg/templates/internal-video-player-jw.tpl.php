@@ -4,13 +4,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
-drupal_add_js('https://sb.scorecardresearch.com/c2/plugins/streamingtag_plugin_jwplayer.js', array('type' => 'external', 'scope' => 'header'));
+// drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+// drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+// drupal_add_js('https://sb.scorecardresearch.com/c2/plugins/streamingtag_plugin_jwplayer.js', array('type' => 'external', 'scope' => 'header'));
+drupal_add_js('https://akm-img-a-in.tosshub.com/sites/player/jwplayer_config/jwplayer-lib-widget-1.0.js', array('type' => 'external', 'scope' => 'footer'));
 global $base_url;
 $node_url_data = url(current_path(), array('absolute' => false));
 $explode_url = explode('/', $node_url_data);
 $pub_date = get_content_publish_date($nid);
+
+$video_node = node_load($nid);
+$tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+$term = taxonomy_term_load($tid);
+$primary_category_name = itg_common_custompath_insert_val($term->name);
+$argum = base64_encode($nid);
+
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
 }
@@ -40,66 +48,77 @@ if(empty($image)){
 }
 ?>
 <div id="videoplayer"> </div>
-<script type="text/javascript">
-function deferjw(method) {
-  if (window.jwplayer) {
-    method();
-  } else {
-    setTimeout(function() { deferjw(method) }, 50);
-  }
+
+
+<script type='text/javascript' >
+var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>", "<?php print $node_url; ?>");
+var jwConfig = {
+  config_url : 'https://akm-img-a-in.tosshub.com/sites/player/jwplayer_config/India_Today/it_player.js',
+  content_id : "<?php echo $nid; ?>",//vdieo content id mandatory
+  videoContainer :'videoplayer',  //  video contener element id
+  /* playlist values .these parameter are mandatory*/
+  file1: "<?php echo $player_content['bitrate_url']; ?>",
+  file2: "<?php echo $player_content['file_url']; ?>",
+  title: "<?php echo $title; ?>",
+  media_id:"vod_<?php echo $nid; ?>",
+  image: "<?php echo $image; ?>",
+
+  /* share  sharing_link, sharing_code are mandatory*/
+  sharing_link: "<?php echo  $node_url; ?>",
+  sharing_code:encodeURI("<iframe src=\"<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>\" allowfullscreen  width='648' height='396' frameborder='0' scrolling='no' />"),
+
+  hlslabels:{"156":"lowest","410":"low","512":"medium","864":"high","996":"Highest"},
+  /*  */
+  source:'jwplayer',//jwplayer/dailyomotion
+  labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"<?php echo stripslashes($section_name); ?>\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"1\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo ($title); ?>\", ns_st_ep=\"<?php echo ($title); ?>\", ns_st_pr=\"<?php echo ($title); ?>\"",
+
+  publisherId: "8549097" ,
+  /* show_ads : false,  */
+  // overwrite ads code
+  advertising: {
+    client: "googima",
+    skipoffset:5,
+    schedule: {
+      "myAds":{
+        "offset":"pre", "tag":decodeURIComponent(player_dfp)
+      }
+    }
+  },
+};
+
+/*
+ * Function for dfp tags for video and embed video page.
+ */
+function get_dfp_tags_script(used_on, external, node_url) {
+    var itgdGroupAds = "";
+    var referrer = document.referrer;
+    itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480|400x300&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
+    if (used_on == 'embed') {
+        itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_external_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
+        if (referrer.length > 0) {
+            itgdGroup = false;
+            ItgdDomain = getDomain(referrer);
+            if (ItgdDomain == 'aajtak.in' || ItgdDomain == 'indiatoday.in' || ItgdDomain == 'intoday.in' || ItgdDomain == 'indiatodayonline.in' || ItgdDomain == 'dailyo.in' || ItgdDomain == 'ichowk.in' || ItgdDomain == 'mobiletak.in' || ItgdDomain == 'thelallantop.com') {
+                itgdGroup = true;
+                itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_internal_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
+            }
+        }
+    }
+    console.log(" Referrer :" + referrer);
+    console.log(" Ads :" + itgdAds);
+    itgdAds = encodeURI(itgdAds)
+    return itgdAds;
+}
+
+/*
+ * Function for getting domain from url.
+ */
+function getDomain(url) {
+    if (url) {
+        var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
+                .exec(url);
+        return match ? match[1] : null;
+    } else
+        return null;
 }
 </script>
-<script type="text/javascript">
-  
-  function loadplayerjw() {
-      //var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
-      var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>", "<?php print $node_url; ?>");
-      jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
-      jwplayer('videoplayer').setup({
-          playlist: [{
-                  title: "<?php echo stripslashes($title); ?>",
-                  mediaid:"vod_<?php echo $nid; ?>",
-                  'image': "<?php echo $image; ?>",
-                  sources: [
-                      {
-                          file: "<?php echo $player_content['bitrate_url']; ?>"
-                      }, {
-                          file: "<?php echo $player_content['file_url']; ?>"
-
-                      }]
-              }],
-          primary: "html5",
-          autostart: "<?php echo $autostart; ?>",
-          width: "100%",
-          height: "100%",
-          aspectratio: "4:3",
-          "stretching": "uniform",
-          androidhls: "true",
-          //fallback: "false",
-          hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
-          //autostart: true,
-                  advertising: {
-                      client: "googima", skipoffset: 5,
-                      schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
-          ga: {
-              idstring: "<?php echo stripslashes($title); ?>",
-              label: ""
-          }
-      });
-      
-  }
-  
-  deferjw(loadplayerjw);
-<?php
-  $arg = arg();
-  if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
-   ga('create', 'UA-20047041-23', 'auto');
-   ga('send', 'pageview');
-<?php } ?>
-
-</script>
-
-<?php
-//drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
-//drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
-?>

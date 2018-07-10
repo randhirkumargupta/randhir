@@ -10,7 +10,7 @@
  */
 jQuery(document).ready(function () {
     var str_pattern = /^[a-zA-Z\s]+$/;
-    var address_pattern = /^[-\/a-zA-Z\s]+$/;
+    var address_pattern = /^[-\/a-zA-Z0-9\s]+$/;
     jQuery('.itg_be_lucky_today .next').click(function (event) {
         if (jQuery('.itg_be_lucky_today [name="yourname"]').val().trim().length < 2) {
             alert(Drupal.t('Please enter your name'));
@@ -57,10 +57,10 @@ jQuery(document).ready(function () {
             alert(Drupal.t('Please enter your address'));
             return false;
         }
-        if (!address_pattern.test(jQuery('.itg_be_lucky_today [name="address"]').val())) {
-            alert(Drupal.t('Please enter valid address'));
-            return false;
-        }
+//        if (!address_pattern.test(jQuery('.itg_be_lucky_today [name="address"]').val())) {
+//            alert(Drupal.t('Please enter valid address'));
+//            return false;
+//        }
         if (jQuery('.itg_be_lucky_today [name="zip_code"]').val().trim().length < 1) {
             alert(Drupal.t('Please enter your zipcode'));
             return false;

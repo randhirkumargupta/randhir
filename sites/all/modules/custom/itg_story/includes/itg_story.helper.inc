@@ -476,7 +476,7 @@ function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
 
     $html = '';
     if (!empty($technology_entity)) {
-      $html .= '<div class="story-photo-list-wrapper"><h3 class="story-photo-list-heading"><span>SAMPLE PHOTOS</span></h3><div class="story-photo-list">';
+      $html .= '<div class="story-photo-list-wrapper"><h3 class="story-photo-list-heading"><span>WATCH RIGHT NOW</span></h3><div class="story-photo-list">';
 
       foreach ($technology_entity as $key => $val) {
         $entity = entity_load('field_collection_item', array($val['value']));
@@ -495,8 +495,8 @@ function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
         else {
           $html .= '<a rel="prettyPhoto[gallery2]" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt="" title=""/></a>';
         }
-        $html .= '<span class="smp-date">' . $dty . '</span>';
-        $html .= '<p>' . $sample_title . '</p>';
+        //$html .= '<span class="smp-date">' . $dty . '</span>';
+        //$html .= '<p>' . $sample_title . '</p>';
         $html .= '</div>';
       }
       $html .= '</div></div>';

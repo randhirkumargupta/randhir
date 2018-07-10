@@ -115,18 +115,19 @@ if (!empty($content)):
 // Rich Snippet for Story
 $mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
 if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+$publisheddate = date('Y-m-d\TH:i:s+05:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
 } else {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$publisheddate = date('Y-m-d\TH:i:s+05:30', $node->changed);
 }
-$modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$modified_date = date('Y-m-d\TH:i:s+05:30', $node->changed);
 $description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
 $story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
 $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
 $description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
 $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
+    <article itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
     <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
     <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
 		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
@@ -137,47 +138,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 		<meta itemprop="name" content="India Today">
 		<link itemprop="sameAs" href="https://www.indiatoday.in">
 	</div>
-    <div class='<?php print $classes ?>'>      
-      <div class="comment-mobile desktop-hide">
-        <ul>
-         <li class="later buzz-akamai-refresh-read-later">
-            <?php
-            if ($user->uid > 0) {
-              if (empty($opt['status']) || $opt['status'] == 0) {
-                ?> 
-                <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                <?php
-              }
-              else {
-                ?>
-                <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                <?php
-              }
-            }
-            else {
-              echo $itg_sso_url;
-            }
-            ?>
-          </li>
-          <li class="mail-to-author"><a title ="Mail to author" href="mailto:<?php echo ITG_SUPPORT_EMAIL; ?>"><i class="fa fa-envelope"></i><?php //print t('Mail to author');      ?></a></li>
-          <?php 
-            $whatsapp = $node->title . " ". $actual_link;
-            $whatsapp_text = urlencode($whatsapp); 
-          ?>          
-          <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
-          <?php if ($config_name == 'vukkul') { ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
-          <?php } if ($config_name == 'other') { ?> 
-            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-          <?php } ?>
-          <li><a href="javascript:void(0)" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
-        </ul>
-        <ul class="social-share">
-          <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-          <li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-          <li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-        </ul> 
-      </div>
+    <div class='<?php print $classes ?>'> 
       <?php
       $pipelinetext = "";
       if (!empty($node->field_story_new_title) && !empty($node->field_story_redirection_url_titl)) {
@@ -222,8 +183,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         print $sponsor_text;
       endif;
     ?>
-<div class="story-left-section">
-  <div class="story-new-left">
+<div class="story-left-section story-update">
+  <div class="story-kicker"><?php print $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']; ?></div>
+  <div class="story-left">
     <div class="byline">
 	  <?php
 		  $byline_detail = $byline_id[0];
@@ -333,7 +295,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
   </div>                
         <!-- Check the story type whether it is a photo story or not-->
   <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
-    <div class="story-new-right <?php if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { echo 'listicle-page'; } ?>">
+    <div class="story-right <?php if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { echo 'listicle-page'; } ?>">
     <?php
     //associate_lead
     $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
@@ -455,6 +417,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
         <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
       <?php } ?>                            
+    </div>
     </div>
     <?php
       if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
@@ -731,6 +694,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
             ?>
           </div>
   <?php } ?>
+        </div>
+        </article>
         <div class="clearfix"></div>
         <!-- condition for buzz  -->
         <?php
