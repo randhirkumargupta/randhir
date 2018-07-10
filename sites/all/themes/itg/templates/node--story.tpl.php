@@ -115,11 +115,11 @@ if (!empty($content)):
 // Rich Snippet for Story
 $mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
 if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+$publisheddate = date('Y-m-d\TH:i:s+05:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
 } else {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$publisheddate = date('Y-m-d\TH:i:s+05:30', $node->changed);
 }
-$modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$modified_date = date('Y-m-d\TH:i:s+05:30', $node->changed);
 $description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
 $story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
 $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
