@@ -306,7 +306,9 @@ function api_anchorlist_callback(){
     $query->condition('n.type', 'miscellaneous');
     $query->condition('fmt.field_miscellaneous_type_value', 'anchor-notification');
     $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
     $loop_c = 0;
     foreach ($result as $reskey => $resvalue) {
         $title = $resvalue['title'];
