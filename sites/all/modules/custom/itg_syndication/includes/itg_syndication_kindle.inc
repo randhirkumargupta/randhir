@@ -338,7 +338,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
                     $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
                     $xml .="<item><link>" . $artical_file_name . "</link></item>";
                     $node_file = _create_node_file($artical_file_name, $nid, $section_name);
-                    _kindle_save_unmanaged_file($node_file, $directory_name);
+                    $node_file_name_val = _kindle_save_unmanaged_file($node_file, $directory_name);
                 }
             }
             $xml .= "</channel></rss>";
@@ -349,7 +349,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             // Section file ended
             //return $section_file_name_ar;
             $section_file_name_ar[] = $destination;
-            $section_file_name_ar[] = $node_file;
+            $section_file_name_ar[] = $node_file_name_val;
         }
     }
     return $section_file_name_ar;
