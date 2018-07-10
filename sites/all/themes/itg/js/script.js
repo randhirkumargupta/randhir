@@ -473,7 +473,7 @@ jQuery(document).ready(function () {
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
 
-    jQuery('.factoids-slider ul').slick({
+    /*jQuery('.factoids-slider ul').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         infinite: false,
@@ -522,15 +522,15 @@ jQuery(document).ready(function () {
                 }
             }
         ]
-    });
+    });*/
 
     var arrayOne = [];
-    jQuery('.factoids-slider li').each(function () {
+    /*jQuery('.factoids-slider li').each(function () {
         var getHEight = jQuery(this).outerHeight(true);
         arrayOne.push(getHEight);
-    });
+    });*/
     var largest = Math.max.apply(Math, arrayOne);
-    jQuery(".factoids-slider li").css('height', largest + "px");
+    //jQuery(".factoids-slider li").css('height', largest + "px");
     //PrettyPhoto
     if (jQuery.isFunction(jQuery("a[rel^='prettyPhoto']").prettyPhoto)) {
         jQuery("a[rel^='prettyPhoto']").prettyPhoto({
