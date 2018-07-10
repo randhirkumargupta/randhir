@@ -13662,11 +13662,11 @@ div.ctools-modal-content .form-submit {
 
 /* new extra upload image */
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent {
-  heigth: 127px; }
+  height: 127px; }
 
 .node-videogallery-form .browse-media-file .form-field-type-image, .node-photogallery-form .browse-media-file .form-field-type-image, .node-story-form .browse-media-file .form-field-type-image {
   width: 127px;
-  padding: 15px 0 9px; }
+  padding: 15px 0 0 6px; }
 
 .node-story-form #browse-image .form-type-managed-file > label, .node-story-form #browse-image .form-type-managed-file > label, .node-photogallery-form #browse-image .form-type-managed-file > label {
   font-size: 11px; }
