@@ -65,6 +65,7 @@
         <div id="Imageupload" class="itg-form-section-wrapper browse-media-file">
             <h2 class="story-title"><?php print t('Image'); ?></h2>
             <div class="itg-form-section hide">
+                <?php print drupal_render($form['field_story_e_extra_large_image']); ?> 
                 <?php print drupal_render($form['field_story_extra_large_image']); ?> 
                 <?php print drupal_render($form['field_story_player_image']); ?> 
                 <?php print drupal_render($form['field_story_large_image']); ?>

@@ -24,6 +24,7 @@
     <div id="BrowseMedia" class="itg-form-section-wrapper browse-media-file">
       <h2 class="story-title"><?php print t('Gallery Cover Image'); ?></h2>
       <div class="itg-form-section hide">
+        <?php print drupal_render($form['field_story_e_extra_large_image']); ?>
         <?php print drupal_render($form['field_story_extra_large_image']); ?>
         <p class="pre-desc">This image will be resized by the system into pre-defined dimensions</p>
         <?php print drupal_render($form['field_story_resize_extra_large']); ?>
