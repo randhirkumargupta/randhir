@@ -2042,25 +2042,30 @@ function itg_widget_anchor_landing_menu($nid) {
  */
 function itg_widget_node_view($node, $view_mode, $langcode) {
     if ($node->type == 'reporter' && drupal_is_front_page() == FALSE) {
-        $cat_array = itg_widget_anchor_landing_menu(arg(1));
-        $first_key = key($cat_array);
+        //~ $cat_array = itg_widget_anchor_landing_menu(arg(1));
+        //~ $first_key = key($cat_array);
         // Category view on landing page
-        drupal_add_js("jQuery('.anchor-detail-menu .tab-buttons span').click(function(){
+        drupal_add_js("jQuery('.anchor-detail-menu .tab-buttons span').click(function(){var anchor_node_id = '" . arg(1). "';
       var section_id = jQuery(this).attr('value');
       jQuery('.anchor-detail-menu .tab-buttons span a').removeClass('active');
       jQuery('#edit-field-story-category-tid').val(section_id);
-      jQuery('#edit-field-story-category-tid').trigger('change');
+      jQuery('#widget-ajex-loader').show();
+      jQuery.get(Drupal.settings.baseUrl.baseUrl+'/anchor-ajax/' + anchor_node_id + '/' + section_id, function(tab_data){jQuery('#anchor-get-ajax-wrapper').html(tab_data);jQuery('#widget-ajex-loader').hide();});
+      
       jQuery(this).find('a').addClass('active');
       });", array('type' => 'inline', 'scope' => 'footer'));
         drupal_add_js("jQuery(document).ready(function(){
-      jQuery('#edit-field-story-category-tid').val(" . $first_key . ");
-      jQuery('#edit-field-story-category-tid').trigger('change');
-      jQuery('.anchor-detail-menu .tab-buttons span').each(function() {
-      if(jQuery(this).attr('value') == " . $first_key . "){
-      jQuery(this).addClass('active');
-      }
-      });
+      jQuery('.anchor-detail-menu .tab-buttons span').first().addClass('active');
       });", array('type' => 'inline', 'scope' => 'footer'));
+        //~ drupal_add_js("jQuery(document).ready(function(){
+      //~ jQuery('#edit-field-story-category-tid').val(" . $first_key . ");
+      //~ jQuery('#edit-field-story-category-tid').trigger('change');
+      //~ jQuery('.anchor-detail-menu .tab-buttons span').each(function() {
+      //~ if(jQuery(this).attr('value') == " . $first_key . "){
+      //~ jQuery(this).addClass('active');
+      //~ }
+      //~ });
+      //~ });", array('type' => 'inline', 'scope' => 'footer'));
     }
 }
 
