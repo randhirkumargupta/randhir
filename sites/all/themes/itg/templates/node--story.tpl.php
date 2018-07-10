@@ -126,7 +126,8 @@ $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
 $description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
 $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
+    <article itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
     <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
     <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
 		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
@@ -692,6 +693,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
             ?>
           </div>
   <?php } ?>
+        </div>
+        </article>
         <div class="clearfix"></div>
         <!-- condition for buzz  -->
         <?php
