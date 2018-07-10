@@ -137,47 +137,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 		<meta itemprop="name" content="India Today">
 		<link itemprop="sameAs" href="https://www.indiatoday.in">
 	</div>
-    <div class='<?php print $classes ?>'>      
-      <div class="comment-mobile">
-        <ul>
-         <li class="later buzz-akamai-refresh-read-later">
-            <?php
-            if ($user->uid > 0) {
-              if (empty($opt['status']) || $opt['status'] == 0) {
-                ?> 
-                <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                <?php
-              }
-              else {
-                ?>
-                <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                <?php
-              }
-            }
-            else {
-              echo $itg_sso_url;
-            }
-            ?>
-          </li>
-          <li class="mail-to-author"><a title ="Mail to author" href="mailto:<?php echo ITG_SUPPORT_EMAIL; ?>"><i class="fa fa-envelope"></i><?php //print t('Mail to author');      ?></a></li>
-          <?php 
-            $whatsapp = $node->title . " ". $actual_link;
-            $whatsapp_text = urlencode($whatsapp); 
-          ?>          
-          <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
-          <?php if ($config_name == 'vukkul') { ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
-          <?php } if ($config_name == 'other') { ?> 
-            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-          <?php } ?>
-          <li><a href="javascript:void(0)" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
-        </ul>
-        <ul class="social-share">
-          <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-          <li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-          <li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-        </ul> 
-      </div>
+    <div class='<?php print $classes ?>'> 
       <?php
       $pipelinetext = "";
       if (!empty($node->field_story_new_title) && !empty($node->field_story_redirection_url_titl)) {
