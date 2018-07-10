@@ -138,7 +138,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 		<link itemprop="sameAs" href="https://www.indiatoday.in">
 	</div>
     <div class='<?php print $classes ?>'>      
-      <div class="comment-mobile desktop-hide">
+      <div class="comment-mobile">
         <ul>
          <li class="later buzz-akamai-refresh-read-later">
             <?php
@@ -222,9 +222,9 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         print $sponsor_text;
       endif;
     ?>
-<div class="story-left-section">
+<div class="story-left-section story-update">
   <div class="story-kicker"><?php print $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']; ?></div>
-  <div class="story-new-left">
+  <div class="story-left">
     <div class="byline">
 	  <?php
 		  $byline_detail = $byline_id[0];
@@ -334,7 +334,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
   </div>                
         <!-- Check the story type whether it is a photo story or not-->
   <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
-    <div class="story-new-right <?php if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { echo 'listicle-page'; } ?>">
+    <div class="story-right <?php if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { echo 'listicle-page'; } ?>">
     <?php
     //associate_lead
     $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
