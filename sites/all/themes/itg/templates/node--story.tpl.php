@@ -223,6 +223,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       endif;
     ?>
 <div class="story-left-section">
+  <div class="story-kicker"><?php print $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']; ?></div>
   <div class="story-new-left">
     <div class="byline">
 	  <?php
