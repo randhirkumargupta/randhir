@@ -59,7 +59,7 @@ var jwConfig = {
   /* playlist values .these parameter are mandatory*/
   file1: "<?php echo $player_content['bitrate_url']; ?>",
   file2: "<?php echo $player_content['file_url']; ?>",
-  title: "<?php echo stripslashes($title); ?>",
+  title: "<?php echo $title; ?>",
   media_id:"vod_<?php echo $nid; ?>",
   image: "<?php echo $image; ?>",
 
@@ -70,7 +70,7 @@ var jwConfig = {
   hlslabels:{"156":"lowest","410":"low","512":"medium","864":"high","996":"Highest"},
   /*  */
   source:'jwplayer',//jwplayer/dailyomotion
-  labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"<?php echo stripslashes($section_name); ?>\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"1\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\", ns_st_ep=\"<?php echo stripslashes($title); ?>\", ns_st_pr=\"<?php echo stripslashes($title); ?>\"",
+  labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"<?php echo stripslashes($section_name); ?>\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"1\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo ($title); ?>\", ns_st_ep=\"<?php echo ($title); ?>\", ns_st_pr=\"<?php echo ($title); ?>\"",
 
   publisherId: "8549097" ,
   /* show_ads : false,  */
