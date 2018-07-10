@@ -72,6 +72,13 @@ function itg_report_api_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['api-anchorlist'] = array(
+        'title' => 'api anchorlist',
+        'description' => 'api anchorlist',
+        'page callback' => 'api_anchorlist_callback',        
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+    );
     return $items;
 }
     /**
@@ -270,4 +277,33 @@ function itg_rapid_api_popular_search_tv_callback($token) {
 
     print $jsondata; die();
 }
-
+/**
+ * api_anchorlist_callback
+ */
+function api_anchorlist_callback(){
+    $data = array();
+    $anchor_data = array();
+    $anchor = array();
+    $loop_c = 0;
+    $anchor[$loop_c]['Title'] = "Title1";
+    $anchor[$loop_c]['Description'] = "Description1";
+    $anchor[$loop_c]['Image'] = "Image1";
+    $anchor[$loop_c]['date'] = "date1";
+    $anchor[$loop_c]['time'] = "time1";
+    $anchor[$loop_c]['Link'] = "Link1";
+    $anchor[$loop_c]['active'] = "active1";
+    $loop_c = 1;
+    $anchor[$loop_c]['Title'] = "Title2";
+    $anchor[$loop_c]['Description'] = "Description2";
+    $anchor[$loop_c]['Image'] = "Image2";
+    $anchor[$loop_c]['date'] = "date2";
+    $anchor[$loop_c]['time'] = "time2";
+    $anchor[$loop_c]['Link'] = "Link2";
+    $anchor[$loop_c]['active'] = "active2";
+    
+    $anchor_data['anchor'] = $anchor;
+    $data['anchorlist'] = $anchor_data;
+    $jsondata = drupal_json_encode($data);
+    print $jsondata;
+    die();
+}
