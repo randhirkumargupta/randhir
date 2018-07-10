@@ -876,6 +876,8 @@ function mageimagedimesion() {
   $image_dim['photogallery']['field_photo_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
   $image_dim['photogallery']['field_photo_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
   // Dimension for videogallery
+  $image_dim['videogallery']['field_story_e_extra_large_image']['width'] = E_EXTRA_IMAGE_WIDTH;
+  $image_dim['videogallery']['field_story_e_extra_large_image']['height'] = E_EXTRA_IMAGE_HEIGHT;
   $image_dim['videogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
   $image_dim['videogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
   $image_dim['videogallery']['field_story_player_image']['width'] = 613;
@@ -890,6 +892,8 @@ function mageimagedimesion() {
   $image_dim['videogallery']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
 
   // Dimension for photogallery
+  $image_dim['photogallery']['field_story_e_extra_large_image']['width'] = E_EXTRA_IMAGE_WIDTH;
+  $image_dim['photogallery']['field_story_e_extra_large_image']['height'] = E_EXTRA_IMAGE_HEIGHT;
   $image_dim['photogallery']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
   $image_dim['photogallery']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
   $image_dim['photogallery']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
@@ -940,6 +944,8 @@ function mageimagedimesion() {
   $image_dim['recipe']['field_story_extra_small_image']['width'] = EXTRA_SMALL_IMAGE_WIDTH;
   $image_dim['recipe']['field_story_extra_small_image']['height'] = EXTRA_SMALL_IMAGE_HEIGHT;
   // Dimension for recipe
+  $image_dim['breaking_news']['field_story_e_extra_large_image']['width'] = E_EXTRA_IMAGE_WIDTH;
+  $image_dim['breaking_news']['field_story_e_extra_large_image']['height'] = E_EXTRA_IMAGE_HEIGHT;
   $image_dim['breaking_news']['field_story_extra_large_image']['width'] = EXTRA_LARGE_IMAGE_WIDTH;
   $image_dim['breaking_news']['field_story_extra_large_image']['height'] = EXTRA_LARGE_IMAGE_HEIGHT;
   $image_dim['breaking_news']['field_story_large_image']['width'] = LARGE_IMAGE_WIDTH;
@@ -1055,6 +1061,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     if ($content_name == 'photogallery') {
 
       $checkoption = array(
+        'field_story_extra_large_image' => t(" Extra large image  $extralargsize"),
         'field_story_large_image' => t(" Large Image  $largsize"),
         'field_story_medium_image' => t(" Medium Image $mediumsize"),
         'field_story_small_image' => t(" Small Image  $smallsize"),
@@ -1080,6 +1087,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
       $extralargsize2 = '(' . $imgdim[$content_name]['field_story_player_image'] ['width'] . 'X' . $imgdim[$content_name]['field_story_player_image'] ['height'] . ')';
       $checkoption = array(
         // 'field_story_player_image' => t("Extra large Image 2  $extralargsize2"),
+        'field_story_extra_large_image' => t(" Extra large image  $extralargsize"),
         'field_story_large_image' => t(" Large Image  $largsize"),
         'field_story_medium_image' => t(" Medium Image $mediumsize"),
         'field_story_small_image' => t(" Small Image  $smallsize"),
