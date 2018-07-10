@@ -6483,7 +6483,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         $query->addParam('rows', '100');
         //$query->addParam('fq', "bundle_name:Video");
-        $query->addParam('sort', "ds_changed DESC");
+        //$query->addParam('sort', "ds_changed DESC");
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);

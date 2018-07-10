@@ -233,7 +233,7 @@ function solr_search_custom_results_restapi_callback($key, $fields, $facets = FA
         $query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         //$query->addParam('fq', "bundle_name:Video");
-        $query->addParam('sort', "ds_changed DESC");
+        //$query->addParam('sort', "ds_changed DESC");
         $query->addParam('rows', "100");
         $resp = $query->search();
         if (!empty($resp->data)) {
