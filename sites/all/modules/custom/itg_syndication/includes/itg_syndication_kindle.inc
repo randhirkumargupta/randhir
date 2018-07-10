@@ -347,9 +347,12 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             file_unmanaged_save_data(_formet_xml($xml), $destination, FILE_EXISTS_REPLACE);
             //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($destination))));
             // Section file ended
-            return $section_file_name_ar;
+            //return $section_file_name_ar;
+            $section_file_name_ar[] = $destination;
+            $section_file_name_ar[] = $node_file;
         }
     }
+    return $section_file_name_ar;
 }
 
 /**
