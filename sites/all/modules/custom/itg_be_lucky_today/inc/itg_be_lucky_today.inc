@@ -448,7 +448,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     if (isset($_GET['source'])) {
         $data['source'] = $_GET['source'];
     }
-    print theme('after_subcribe_theme', array('data' => $data));
+    print theme('after_subcribe_theme', array('data' => (object)$data));
     drupal_exit();
     $_SESSION['be_lucky_today'] = json_encode($data);
     $form_state['redirect'] = array(
