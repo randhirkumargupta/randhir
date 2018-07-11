@@ -9,17 +9,19 @@
 // drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 // drupal_add_js('https://sb.scorecardresearch.com/c2/plugins/streamingtag_plugin_jwplayer.js', array('type' => 'external', 'scope' => 'header'));
 drupal_add_js('https://akm-img-a-in.tosshub.com/sites/player/jwplayer_config/jwplayer-lib-widget-1.0.js', array('type' => 'external', 'scope' => 'footer'));
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_dfp_tag.js', array('scope' => 'header'));
 global $base_url;
 $node_url_data = url(current_path(), array('absolute' => false));
 $explode_url = explode('/', $node_url_data);
 $pub_date = get_content_publish_date($nid);
 
-$video_node = node_load($nid);
-$tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
-$term = taxonomy_term_load($tid);
-$primary_category_name = itg_common_custompath_insert_val($term->name);
-$argum = base64_encode($nid);
+// $video_node = node_load($nid);
+// $tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+// $term = get_term_name_from_tid($tid);
+// $primary_category_name = itg_common_custompath_insert_val($term->name);
 
+$argum = base64_encode($nid);
+$primary_category_name = '';
 $section_name = '';
 $section_id = '';
 $section_arr = itg_common_get_type_category($nid);
@@ -28,6 +30,7 @@ if(!empty($section_arr)){
 }
 if(isset($section_id) && is_numeric($section_id)){
   $section_name = get_term_name_from_tid($section_id)->name;
+  $primary_category_name = itg_common_custompath_insert_val($section_name);
 }
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
@@ -94,40 +97,4 @@ var jwConfig = {
     }
   },
 };
-
-/*
- * Function for dfp tags for video and embed video page.
- */
-function get_dfp_tags_script(used_on, external, node_url) {
-    var itgdGroupAds = "";
-    var referrer = document.referrer;
-    itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480|400x300&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
-    if (used_on == 'embed') {
-        itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_external_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
-        if (referrer.length > 0) {
-            itgdGroup = false;
-            ItgdDomain = getDomain(referrer);
-            if (ItgdDomain == 'aajtak.in' || ItgdDomain == 'indiatoday.in' || ItgdDomain == 'intoday.in' || ItgdDomain == 'indiatodayonline.in' || ItgdDomain == 'dailyo.in' || ItgdDomain == 'ichowk.in' || ItgdDomain == 'mobiletak.in' || ItgdDomain == 'thelallantop.com') {
-                itgdGroup = true;
-                itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_internal_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
-            }
-        }
-    }
-    console.log(" Referrer :" + referrer);
-    console.log(" Ads :" + itgdAds);
-    itgdAds = encodeURI(itgdAds)
-    return itgdAds;
-}
-
-/*
- * Function for getting domain from url.
- */
-function getDomain(url) {
-    if (url) {
-        var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
-                .exec(url);
-        return match ? match[1] : null;
-    } else
-        return null;
-}
 </script>

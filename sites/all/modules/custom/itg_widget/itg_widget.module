@@ -1560,6 +1560,7 @@ function itg_get_video_display_for_big_story($nid) {
  */
 function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery') {
     $node_load = node_load($nid);
+    $tid = $node_load->field_primary_category[LANGUAGE_NONE][0]['value'];
     $videoids = "";
     print '<div class="videogallery-slider slider-for-nid-' . $nid . '">';
 
@@ -1601,7 +1602,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                     <div class=" video-iframe-wrapper" id="video_0">
                         <?php
                         if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                         print theme('internal_video_player_jw', array("nid" => $nid, "data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title, 'image' => $image_url));
+                         print theme('internal_video_player_jw', array("nid" => $nid, 'tid' => $tid,  "data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title, 'image' => $image_url));
                         }
                         ?>
                     </div>
