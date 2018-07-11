@@ -237,7 +237,12 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
             if (in_array("lock_story", $conf)) {
                 $is_lock = 1;
             }
-
+            $author = array();
+            $nObject = new stdClass();
+            $nObject->nid = $nid;
+            $author = (array) generateAuthorTagStory($nObject, 1);
+            $a_title = $author['a_title'];
+            $a_id = $author['a_id'];
             $story_list_array[$listcount]['s_id'] = "$nid";
             $story_list_array[$listcount]['s_title'] = "$title";
             $story_list_array[$listcount]['s_share_link'] = "$firebase_url";
@@ -247,8 +252,8 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
             $story_list_array[$listcount]['s_large_image'] = "$file_large_img_url";
             $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
             $story_list_array[$listcount]['s_is_locked'] = "$is_lock";
-            $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
-            $story_list_array[$listcount]['s_author_title'] = "$field_itg_common_by_line_name_value";
+            $story_list_array[$listcount]['s_author_id'] = "$a_id";
+            $story_list_array[$listcount]['s_author_title'] = "$a_title";
             $story_list_array[$listcount]['s_pcategory_id'] = "$field_primary_category_value";
             $story_list_array[$listcount]['s_pcategory_title'] = "$term_name";
 
@@ -1348,7 +1353,12 @@ function magazineEditionPageRerourceValueList_all($issueid, $pageno) {
         if (in_array("lock_story", $conf)) {
             $is_lock = 1;
         }
-
+        $author = array();
+        $nObject = new stdClass();
+        $nObject->nid = $nid;
+        $author = (array) generateAuthorTagStory($nObject, 1);
+        $a_title = $author['a_title'];
+        $a_id = $author['a_id'];
         $story_list_array[$listcount]['s_id'] = "$nid";
         $story_list_array[$listcount]['s_title'] = "$title";
         $story_list_array[$listcount]['s_share_link'] = "$firebase_url";
@@ -1358,8 +1368,8 @@ function magazineEditionPageRerourceValueList_all($issueid, $pageno) {
         $story_list_array[$listcount]['s_large_image'] = "$file_large_img_url";
         $story_list_array[$listcount]['s_updated_datetime'] = "$changed_datetime";
         $story_list_array[$listcount]['s_is_locked'] = "$is_lock";
-        $story_list_array[$listcount]['s_author_id'] = "$field_reporter_unique_id_value";
-        $story_list_array[$listcount]['s_author_title'] = "$field_itg_common_by_line_name_value";
+        $story_list_array[$listcount]['s_author_id'] = "$a_id";
+        $story_list_array[$listcount]['s_author_title'] = "$a_title";
         $story_list_array[$listcount]['s_pcategory_id'] = "$field_primary_category_value";
         $story_list_array[$listcount]['s_pcategory_title'] = "$term_name";
 
