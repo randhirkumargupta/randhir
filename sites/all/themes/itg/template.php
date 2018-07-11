@@ -1016,10 +1016,10 @@ function itg_css_alter(&$css) {
 
   // Exclude unnecessary CSS for anonymous users.
   if (($user->uid == 0) && ($type == 'story')) {
-    //$css = array_diff_key($css, $exclude);
-    foreach($css as $key=>$item) {		
-	  unset($css[$key]);
-	}
+    $css = array_diff_key($css, $exclude);
+    //~ foreach($css as $key=>$item) {		
+	  //~ unset($css[$key]);
+	//~ }
   }
 
   if (($user->uid == 0) && (drupal_is_front_page())) {
