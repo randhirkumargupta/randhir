@@ -71,6 +71,13 @@ function itg_report_api_menu() {
         'access arguments' => array('access content'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['api-anchorlist'] = array(
+        'title' => 'api anchorlist',
+        'description' => 'api anchorlist',
+        'page callback' => 'api_anchorlist_callback',        
+        'access arguments' => array('access content'),
+        'type' => MENU_NORMAL_ITEM,
+    );
     return $items;
 }
     /**
@@ -270,4 +277,70 @@ function itg_rapid_api_popular_search_tv_callback($token) {
 
     print $jsondata;
     die();
+}
+
+/**
+ * api_anchorlist_callback
+ */
+function api_anchorlist_callback(){
+    $data = array();
+    $anchor_data = array();
+    $anchor = array();
+    
+    $query = db_select('node', 'n');
+    $query->Join('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');
+    $query->leftJoin('field_data_field_miscellaneous_type', 'fmt', 'fmt.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_cm_display_title', 'fcmd', 'fcmd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_external_url', 'furl', 'furl.entity_id=n.nid');
+    $query->leftJoin('field_data_field_is_election_live', 'fel', 'fel.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_expert_image', 'fsei', 'fsei.entity_id=n.nid');
+    
+    $query->fields('n', array('nid','title'));    
+    $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('dbody', array('body_value'));    
+    $query->fields('fcmd', array('field_cm_display_title_value'));
+    $query->fields('furl', array('field_story_external_url_value'));
+    $query->fields('fel', array('field_is_election_live_value'));
+    $query->fields('fsei', array('field_story_expert_image_fid'));   
+    
+    $query->condition('n.type', 'miscellaneous');
+    $query->condition('fmt.field_miscellaneous_type_value', 'anchor-notification');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
+    $loop_c = 0;
+    foreach ($result as $reskey => $resvalue) {
+        $title = $resvalue['title'];
+        $nid = $resvalue['nid'];
+        $body_value = $resvalue['body_value'];
+        $image_fid = $resvalue['field_story_expert_image_fid'];
+        $date = $resvalue['field_story_kicker_text_value'];
+        $time = $resvalue['field_cm_display_title_value'];
+        $link = $resvalue['field_story_external_url_value'];
+        $active = $resvalue['field_is_election_live_value'];
+        $file_img_url = completeFilePath($image_fid);
+        $body_value = badUnicodeparse_report_module($body_value);
+        
+        $anchor[$loop_c]['Title'] = "$title";
+        $anchor[$loop_c]['Description'] = "$body_value";
+        $anchor[$loop_c]['Image'] = "$file_img_url";
+        $anchor[$loop_c]['date'] = "$date";
+        $anchor[$loop_c]['time'] = "$time";
+        $anchor[$loop_c]['Link'] = "$link";
+        $anchor[$loop_c]['active'] = "$active";
+        $loop_c++;
+    }
+    $anchor_data['anchor'] = $anchor;
+    $data['anchorlist'] = $anchor_data;
+    $jsondata = drupal_json_encode($data);
+    print $jsondata;
+    die();
+}
+
+function badUnicodeparse_report_module($str) {    
+    $res = strip_tags($str);
+    return $res;
 }
