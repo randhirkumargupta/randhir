@@ -2084,6 +2084,10 @@ function itg_api_integration_internal(){
       module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_xml_file_video_insert');
       itg_videogallery_xml_file_video_insert($xml_data);
       break;
+    case 'ruply_type':
+      module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_create_video_node');
+      itg_videogallery_create_video_node($xml_data);
+      break;
     default:
       drupal_access_denied();
       break;
