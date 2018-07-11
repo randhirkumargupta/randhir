@@ -52,7 +52,7 @@
 .section-news .news-photo-section h3,
 .section-news h2.news-head {
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a;
     text-align: left;
     position: relative;
@@ -85,7 +85,7 @@
     z-index: 1;
     position: relative;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 500;
     color: #bb0a0a
 }
 .section-news h2.news-head span {
@@ -127,7 +127,7 @@
 }
 
 .section-livetv h1#page-title {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 30px;
     border-top: 1px solid #ddd;
     line-height: 40px;
@@ -654,7 +654,7 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
 .story-section .description h3{ text-transform: uppercase; font-family:OpenSans-Bold;margin: 10px 0; line-height:28px;}
-.story-section .description h2,.story-section .description h4{font-size: 25px;font-family: "Merriweather-Bold"; line-height: 34px; font-weight: 700; }
+.story-section .description h2,.story-section .description h4{font-size: 25px;font-family: "Merriweather-Bold"; line-height: 34px; font-weight: 500; }
 .front .watch-right-now-video ul li{padding:13px 0px 13px 0px;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after, #block-itg-layout-manager-front-end-breadcrumb span.breadcrumb-no-link:after {content: '/'; padding: 0 3px;text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration:none;}
@@ -1363,10 +1363,11 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 }
 @media only screen and (max-device-width : 768px) {
 #block-itg-widget-election-constituency-select-box select{ width:100%; }
- #elec2013-inner{float: left} #elec2013-inner{ margin: 10px 0 0 45px;; }
- .elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
+#elec2013-inner{float: left} #elec2013-inner{ margin: 10px 0 0 45px;; }
+.elec2013-inner img{z-index: 11; margin: 0 auto; display: block; position: relative;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
 #home-webcast-election iframe{ height:100%; }
 .placeholder-livetv{ height: auto; }
+#block-itg-menu-manager-third-level-menu ul.third-level-menu li {float: none;}
 }
 @media only screen and (max-width : 767px) {.placeholder-livetv{ height: auto; } #elec2013-inner{margin: 0;}.election-page .election-graph .graph-design #block-itg-widget-election-constituency-select-box{width:160px; } #block-itg-widget-election-constituency-select-box select{ width:100% }}
 .education-layout-page #itg-newslatter-register-form .messages.error{display:block; margin-left:16px;}
@@ -1424,7 +1425,7 @@ h1#display_tit .social-share li a.google{color:#bd1916}
 @media only screen and (max-width: 1024px){.fifa-wcup .tech-block_5 .flexslider .flex-direction-nav a.flex-next{ right: 0px;}.fifa-wcup .tech-block_5 .flexslider .flex-direction-nav a.flex-prev{right: 40px;}.magazin-lhs-top .magazin-top .magazin-subscribe .issue-subscribe-link{font-size:18px;}}
 @media only screen and (max-width: 768px){.fifa-wcup .fifa-points-table {margin-top: 20px;}.fifa-wcup .auto-block-1{margin-bottom: 0 !important;}.fifa-wcup .movies-featured-post{padding:12px 5px; }.fifa-wcup .dont-miss ul li{width: 50%;} .fifa-wcup .right-side{background:none; padding-left: 15px; padding-right: 15px;}.fifa-wcup .droppable table{background-color:#f0f0f0;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}.fifa-wcup .itg-h321-section .dont-miss ul li:nth-child(4) {display: block;}}
 @media only screen and (max-width: 767px){.featured-news .featured-post.featured-post-first{ margin-bottom: 0;}.fifa-wcup .auto-block-2{display: block;     padding: 10px;}.fifa-wcup .fifa-post,.fifa-wcup .dont-miss ul li{width: 100% !important;}.fifa-wcup .padright-0{padding-right: 15px;}.fifa-wcup .padleft-0{padding-left: 15px;}.fifa-wcup .sport-home-layout-page .left-side{padding-right: 15px; padding-left:15px;}.fifa-wcup #block-itg-menu-manager-third-level-menu img{ width:90%; padding-top:20px; }.fifa-wcup .movies-featured-post { padding: 10px 10px;}.fifa-wcup .fifa-post{min-height:80px}.live-block .breaking-section .social-share ul li.desktop-hide,.live-block>.social-share ul li.desktop-hide{display:inline-block!important;}}
-.fifa_more_news a{color: #5794e0; position: relative; display: block; font-size: 11px; text-transform: uppercase; text-align: right; font-weight: 700;}
+.fifa_more_news a{color: #5794e0; position: relative; display: block; font-size: 11px; text-transform: uppercase; text-align: right; font-weight: 500;}
 /* magzine css */
 .print_digital{text-transform: uppercase; text-align: center; color: #8a8a8a; width: 60%; margin: 10px auto 0;  overflow: hidden;}
 .print_digital .print_lbtm_m {text-align: center;width:50%;float: left;cursor: pointer;}
