@@ -357,6 +357,7 @@ function api_anchorlist_callback(){
 }
 
 function badUnicodeparse_report_module($str) {
-    $res = preg_replace("/[^a-zA-Z0-9\s]/", "", $str);
+    //$res = preg_replace("/[^a-zA-Z0-9\s]/", "", $str);
+    $res = strip_tags($str);
     return $res;
 }
