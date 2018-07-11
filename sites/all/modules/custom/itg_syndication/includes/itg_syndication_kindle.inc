@@ -229,17 +229,19 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
             //break;
         }
-        $cover_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$cover_file);
-        $kindle_save_unmanaged_file_name1 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name1);
-        $cover_page_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$cover_page_file);
-        $kindle_save_unmanaged_file_name2 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name2);
-        $manifest_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$manifest_file);
-        $kindle_save_unmanaged_file_name3 = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$kindle_save_unmanaged_file_name3);
-        //$create_section_file = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$create_section_file);
+        $s3fs_domain = variable_get('s3fs_domain');
+        $s3fs_domain_val = "https://".$s3fs_domain_val."/indiatoday/";
+        $cover_file = str_replace("public://",$s3fs_domain_val,$cover_file);
+        $kindle_save_unmanaged_file_name1 = str_replace("public://",$s3fs_domain_val,$kindle_save_unmanaged_file_name1);
+        $cover_page_file = str_replace("public://",$s3fs_domain_val,$cover_page_file);
+        $kindle_save_unmanaged_file_name2 = str_replace("public://",$s3fs_domain_val,$kindle_save_unmanaged_file_name2);
+        $manifest_file = str_replace("public://",$s3fs_domain_val,$manifest_file);
+        $kindle_save_unmanaged_file_name3 = str_replace("public://",$s3fs_domain_val,$kindle_save_unmanaged_file_name3);
+        //$create_section_file = str_replace("public://",$s3fs_domain_val,$create_section_file);
 //        $loop_cc = 0;
 //        $create_section_file_ar = array();
 //        foreach ($create_section_file as $key => $value) {
-//            $create_section_file_ar[] = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
+//            $create_section_file_ar[] = str_replace("public://",$s3fs_domain_val,$value);
 //        }
         $zip->close();
         /*header('Content-Type: application/zip');
@@ -261,7 +263,7 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
         $files[] = $kindle_save_unmanaged_file_name3;
         //$files[] = $create_section_file_ar;
         foreach ($create_section_file as $key => $value) {
-            $files[] = str_replace("public://","https://static-dev.indiatodayonline.in/indiatoday/",$value);
+            $files[] = str_replace("public://",$s3fs_domain_val,$value);
         }
 
 # create new zip object

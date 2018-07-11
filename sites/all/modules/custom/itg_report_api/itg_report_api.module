@@ -331,24 +331,6 @@ function api_anchorlist_callback(){
         $anchor[$loop_c]['active'] = "$active";
         $loop_c++;
     }
-    
-    /*$loop_c = 0;
-    $anchor[$loop_c]['Title'] = "Title1";
-    $anchor[$loop_c]['Description'] = "Description1";
-    $anchor[$loop_c]['Image'] = "Image1";
-    $anchor[$loop_c]['date'] = "date1";
-    $anchor[$loop_c]['time'] = "time1";
-    $anchor[$loop_c]['Link'] = "Link1";
-    $anchor[$loop_c]['active'] = "active1";
-    $loop_c = 1;
-    $anchor[$loop_c]['Title'] = "Title2";
-    $anchor[$loop_c]['Description'] = "Description2";
-    $anchor[$loop_c]['Image'] = "Image2";
-    $anchor[$loop_c]['date'] = "date2";
-    $anchor[$loop_c]['time'] = "time2";
-    $anchor[$loop_c]['Link'] = "Link2";
-    $anchor[$loop_c]['active'] = "active2";*/
-    
     $anchor_data['anchor'] = $anchor;
     $data['anchorlist'] = $anchor_data;
     $jsondata = drupal_json_encode($data);
@@ -356,7 +338,7 @@ function api_anchorlist_callback(){
     die();
 }
 
-function badUnicodeparse_report_module($str) {
-    $res = preg_replace("/[^a-zA-Z0-9\s]/", "", $str);
+function badUnicodeparse_report_module($str) {    
+    $res = strip_tags($str);
     return $res;
 }

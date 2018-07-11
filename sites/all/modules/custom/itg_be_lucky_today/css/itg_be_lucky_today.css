@@ -162,10 +162,10 @@ and open the template in the editor.
 .form-item.form-type-textfield label{    display:block; font: 300 14px/20px 'Roboto',sans-serif;    color: #fff;   margin: 24px 0 5px 0;}
 .form-item.form-type-textfield input[type="text"] { width: 307px;  height: 33px;background-color: #fff; border: 0; padding: 0 0 0 20px;
                                                     font: 400 15px/20px 'Roboto',Arial, Helvetica, sans-serif;}
-.form-item.form-type-select{ width: 100px;display: inline-block;}
+.form-item.form-type-select{ width: 100px;display: inline-block; float: left;}
 .form-item.form-type-select label{ display: inline-block; font: 300 14px/20px 'Roboto',sans-serif; color: #fff; margin: 24px 0 5px 0;}
-#city_wrapper{ width: 100px; margin-right: 15px; display: inline-block; margin-left: 20px;}
-.form-item.form-type-textfield.form-item-zip-code{ width:100px; display: inline-block; margin-right:20px;}
+#city_wrapper{ width: 100px; margin-right: 15px; display: inline-block; margin-left: 20px; float: left;}
+.form-item.form-type-textfield.form-item-zip-code{ width:100px; display: inline-block; margin-right:20px; float: left}
 .form-item.form-type-textfield.form-item-zip-code input[type="text"]{ width:100px}
 select, input[type="password"]{ width:100px;}  
 /*Thanku*/
@@ -302,3 +302,4 @@ select, input[type="password"]{ width:100px;}
     left: -161px;
 }
 .itg_be_lucky_today.registration1, .itg_be_lucky_today.registration2{min-height: 537px;}
+div.ctools-modal-content a.close img{top: 4px; margin:0 0 0 10px; }
