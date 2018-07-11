@@ -3595,7 +3595,7 @@ function itg_rapid_api_magazine_edition($token) {
         $id = 0;
     }
     if (!is_numeric($cpageno)) {
-        $cpageno = 0;
+        $cpageno = 'all';
     }
 
 
