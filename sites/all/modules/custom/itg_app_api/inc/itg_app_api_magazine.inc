@@ -22,9 +22,11 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno) {
     }
     // list array building
     if($pageno == 'all'){
+        echo "all";die();
         $data = magazineEditionPageRerourceValueList_all($issueid, $pageno);
     }
     else{
+        echo "page";die();
         $data = magazineEditionPageRerourceValueList($issueid, $pageno);
     }
 
