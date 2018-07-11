@@ -1,60 +1,35 @@
 /*
- * @file itg_story.js
- * Contains all functionality related to videogallery
+ * Function for dfp tags for video and embed video page.
  */
-
-(function($) {
-
-    Drupal.behaviors.itg_videogallery_upload = {
-        context: null,
-        attach: function(context) {
-            var that = this,
-            uploader = $('.plupload-element', context).pluploadQueue();
-
-            this.context = context;
-
-            if (!uploader) {
-                return false;
+function get_dfp_tags_script(used_on, external, node_url) {
+    var itgdGroupAds = "";
+    var referrer = document.referrer;
+    itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480|400x300&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
+    if (used_on == 'embed') {
+        itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_external_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
+        if (referrer.length > 0) {
+            itgdGroup = false;
+            ItgdDomain = getDomain(referrer);
+            if (ItgdDomain == 'aajtak.in' || ItgdDomain == 'indiatoday.in' || ItgdDomain == 'intoday.in' || ItgdDomain == 'indiatodayonline.in' || ItgdDomain == 'dailyo.in' || ItgdDomain == 'ichowk.in' || ItgdDomain == 'mobiletak.in' || ItgdDomain == 'thelallantop.com') {
+                itgdGroup = true;
+                itgdAds = "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/IT_embed_internal_web_VOD&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=" + node_url + "&correlator=[timestamp]";
             }
-
-            uploader.bind('FilesAdded', function() {
-                // start upload automatically once files have been added to queue
-                that.start();
-            });
-
-            uploader.bind('UploadComplete', function() {
-                var filenumber = uploader.files.length;
-                $('#edit-field-videogallery-video-upload-add-more-number').val(filenumber);
-                // trigger click on submit button to submit form once upload completed
-                that.complete();
-
-            });
-
-            return this;
-        },
-        start: function() {
-            $('.file-upload-submit', this.context)
-                    .attr('disabled', 'disabled');
-        },
-        complete: function() {
-            $('input[name=field_videogallery_video_upload_add_more]').mousedown();
-
-            $('.file-upload-submit', this.context)
-                    .removeAttr('disabled')
-                    .click();
-            setTimeout(function() {
-                var uploader = jQuery(".plupload-element").pluploadQueue();
-                
-                uploader.splice();
-                
-                uploader.refresh();
-
-                $('#edit-field-videogallery-video-upload-add-more-number').val(1);
-
-            }, 500);
-            $('.plupload_filelist_footer .plupload_buttons').show();
-            $('.plupload_file_name span.plupload_upload_status').hide();
         }
-    };
+    }
+    console.log(" Referrer :" + referrer);
+    console.log(" Ads :" + itgdAds);
+    itgdAds = encodeURI(itgdAds)
+    return itgdAds;
+}
 
-})(jQuery);
+/*
+ * Function for getting domain from url.
+ */
+function getDomain(url) {
+    if (url) {
+        var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
+                .exec(url);
+        return match ? match[1] : null;
+    } else
+        return null;
+}
