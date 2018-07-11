@@ -57,10 +57,10 @@ jQuery(document).ready(function () {
             alert(Drupal.t('Please enter your address'));
             return false;
         }
-        if (!address_pattern.test(jQuery('.itg_be_lucky_today [name="address"]').val())) {
-            alert(Drupal.t('Please enter valid address'));
-            return false;
-        }
+        //if (!address_pattern.test(jQuery('.itg_be_lucky_today [name="address"]').val())) {
+        //    alert(Drupal.t('Please enter valid address'));
+        //    return false;
+        //}
         if (jQuery('.itg_be_lucky_today [name="zip_code"]').val().trim().length < 1) {
             alert(Drupal.t('Please enter your zipcode'));
             return false;
