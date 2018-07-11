@@ -43,7 +43,9 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
   }
   
   $form['#attributes'] = array('autocomplete' => 'off');
-
+  drupal_add_js(array(
+	  'form_step' => 'form_step_' .$form_state['step']
+	), 'setting');
   // Depending on which step of the form we are on, we output different form fields
   switch ($form_state['step']) {
     // Step 1
@@ -87,6 +89,7 @@ function itg_sso_reg_multistep_form($form, &$form_state) {
      drupal_add_js(array(
 	  'countries_json' => $country_arrs
 	), 'setting');
+     
 	  
 	  $form['country-res_msg'] = array(
         '#markup' => '<div class="country_restriction_msg" style="color:red;display:none;">This feature is not available in your region</div>',

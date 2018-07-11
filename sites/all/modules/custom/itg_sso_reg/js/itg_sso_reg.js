@@ -65,22 +65,10 @@
             });
             
             // validation
-            var selected_country = jQuery('select[name="page_country"]').val();
-            var flag = 0;
-			if (Drupal.settings.countries_json[selected_country] != undefined && Drupal.settings.countries_json[selected_country] == 0)  {
-				jQuery('.social-share').show();
-				jQuery(':input[type="submit"]').prop('disabled', false);
-				jQuery('.country_restriction_msg').hide();
-			}else{
-				jQuery('.social-share').hide();
-				jQuery(':input[type="submit"]').prop('disabled', true);
-				jQuery('.country_restriction_msg').show();
-			}
-			
-			jQuery('select[name="page_country"]').on('change', function() {
-				var selected_country1 = this.value;
-				var flag1 = 0;
-				if (Drupal.settings.countries_json[selected_country1] != undefined && Drupal.settings.countries_json[selected_country1] == 0)  {
+            if (Drupal.settings.form_step == 'form_step_1') { 
+				var selected_country = jQuery('select[name="page_country"]').val();
+				var flag = 0;
+				if (Drupal.settings.countries_json[selected_country] != undefined && Drupal.settings.countries_json[selected_country] == 0)  {
 					jQuery('.social-share').show();
 					jQuery(':input[type="submit"]').prop('disabled', false);
 					jQuery('.country_restriction_msg').hide();
@@ -89,7 +77,21 @@
 					jQuery(':input[type="submit"]').prop('disabled', true);
 					jQuery('.country_restriction_msg').show();
 				}
-			})
+				
+				jQuery('select[name="page_country"]').on('change', function() {
+					var selected_country1 = this.value;
+					var flag1 = 0;
+					if (Drupal.settings.countries_json[selected_country1] != undefined && Drupal.settings.countries_json[selected_country1] == 0)  {
+						jQuery('.social-share').show();
+						jQuery(':input[type="submit"]').prop('disabled', false);
+						jQuery('.country_restriction_msg').hide();
+					}else{
+						jQuery('.social-share').hide();
+						jQuery(':input[type="submit"]').prop('disabled', true);
+						jQuery('.country_restriction_msg').show();
+					}
+				})
+			}
             // validation
 
         }
