@@ -53,6 +53,12 @@ if(empty($image)){
 
 
 <script type='text/javascript' >
+<?php
+  $arg = arg();
+  if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
+   ga('create', 'UA-20047041-23', 'auto');
+   ga('send', 'pageview');
+<?php } ?>
 var player_dfp = get_dfp_tags_script("<?php print $used_on; ?>", "<?php print $external_side; ?>", "<?php print $node_url; ?>");
 var jwConfig = {
   config_url : 'https://akm-img-a-in.tosshub.com/sites/player/jwplayer_config/India_Today/it_player.js',
