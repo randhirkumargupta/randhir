@@ -934,7 +934,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
           </div>
   <?php }
   ?>
-      </div>            
+                 
     </div>
 <?php endif; ?>
 <?php print $story_zedo_ad;?>
