@@ -14867,3 +14867,11 @@ display:none;
 .node-alexa_audio_clips-form.node-form input[type="text"]{max-width:70%;}
 .page-node-add-alexa-audio-clips input[name="field_alexa_video_und_0_upload_button"] { display : none; }
 .page-node-add-alexa-audio-clips input[name="field_audio_und_0_upload_button"] { display : none; }
+
+/* new extra upload image */
+
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent{height:127px}
+.node-videogallery-form .browse-media-file .form-field-type-image, .node-photogallery-form .browse-media-file .form-field-type-image, .node-story-form .browse-media-file .form-field-type-image{width:127px; padding:15px 0 0 6px}
+.node-story-form #browse-image .form-type-managed-file > label,.node-story-form #browse-image .form-type-managed-file > label,.node-photogallery-form #browse-image .form-type-managed-file > label{font-size:11px;}
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file{padding:3px;}
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"]{left:97px!important}

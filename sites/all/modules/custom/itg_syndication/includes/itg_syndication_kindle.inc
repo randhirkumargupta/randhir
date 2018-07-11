@@ -338,7 +338,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
                     $artical_file_name = "Article_" . _get_correct_file_name($section_name) . $nid . ".xml";
                     $xml .="<item><link>" . $artical_file_name . "</link></item>";
                     $node_file = _create_node_file($artical_file_name, $nid, $section_name);
-                    _kindle_save_unmanaged_file($node_file, $directory_name);
+                    $node_file_name_val = _kindle_save_unmanaged_file($node_file, $directory_name);
                 }
             }
             $xml .= "</channel></rss>";
@@ -347,9 +347,12 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
             file_unmanaged_save_data(_formet_xml($xml), $destination, FILE_EXISTS_REPLACE);
             //drupal_set_message(t("File Location @loc", array("@loc" => file_create_url($destination))));
             // Section file ended
-            return $section_file_name_ar;
+            //return $section_file_name_ar;
+            $section_file_name_ar[] = $destination;
+            $section_file_name_ar[] = $node_file_name_val;
         }
     }
+    return $section_file_name_ar;
 }
 
 /**

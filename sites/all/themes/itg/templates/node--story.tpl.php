@@ -115,18 +115,19 @@ if (!empty($content)):
 // Rich Snippet for Story
 $mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
 if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+$publisheddate = date('Y-m-d\TH:i:s+05:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
 } else {
-$publisheddate = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$publisheddate = date('Y-m-d\TH:i:s+05:30', $node->changed);
 }
-$modified_date = date('Y-m-d\TH:i:s+5:30', $node->changed);
+$modified_date = date('Y-m-d\TH:i:s+05:30', $node->changed);
 $description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
 $story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
 $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
 $description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
 $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>" itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
+    <article itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
     <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
     <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
 		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
@@ -417,6 +418,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
       <?php } ?>                            
     </div>
+    </div>
     <?php
       if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
         ?>
@@ -692,6 +694,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
             ?>
           </div>
   <?php } ?>
+        </div>
+        </article>
         <div class="clearfix"></div>
         <!-- condition for buzz  -->
         <?php
