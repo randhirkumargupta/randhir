@@ -318,7 +318,7 @@ jQuery(document).ready(function () {
         getLength += jQuery(this).outerWidth(true);
     });
     if (getLength > defaultWidth) {
-        jQuery(".anchor-detail-menu .tab-buttons").css("width", getLength + "px");
+        jQuery(".anchor-detail-menu .tab-buttons").css("width", (getLength+5) + "px");
         jQuery(".anchor-detail-menu").mCustomScrollbar({
             axis: "x",
         });
