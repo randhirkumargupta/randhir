@@ -303,9 +303,10 @@ select, input[type="password"]{ width:100px;}
 }
 .itg_be_lucky_today.registration1, .itg_be_lucky_today.registration2{min-height: 537px;}
 div.ctools-modal-content a.close img{top: 4px; margin:0 0 0 10px; }
-#modalContent{z-index: 9999999}
+#modalContent{z-index: 9999999 !important;}
 @media screen and (max-width: 768px){
 .registration1 form:after, .registration2 form:after, .subscribe form:after{position: static; top: 0; left: 0; content: inherit; display: none;}
 .registration1 form:before, .registration2 form:before, .subscribe form:before{position: static; top: 0; left: 0; content: inherit; display: none;}
 .magazine.form-submit{margin-top: 20px;}
+.form-item.form-type-textfield{width:70%;}
 }
