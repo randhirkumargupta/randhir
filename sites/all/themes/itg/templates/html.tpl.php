@@ -408,12 +408,12 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .story-left .briefcase{margin-top:50px;}
 .story-section .story-left .briefcase ul li{background:#f9f9f9;color:#575757;padding:12px 8px 20px;line-height:18px;}
 .story-section .story-left,.story-section .story-right{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
-.story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
+.story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
 }
@@ -975,8 +975,8 @@ footer .footer-top .footer-social-link{display:none;opacity:0;}
 }
 .crody-news-content.cnwidget.cnvw{margin:0 auto;}
 @media only screen and (max-width: 768px){
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
-.story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;border-right:0px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
+.story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;border-right:0px;}
 .story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
