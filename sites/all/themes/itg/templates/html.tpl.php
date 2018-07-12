@@ -335,7 +335,6 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .comment-mobile ul li a i{font-size:16px;}
 .story-section h1{font-size:24px;font-size:1.5rem;font-weight:700;line-height:30px;}
 .story-section .story-left-section{zoom:1;margin-top:20px;}
-.story-section .story-left,.story-section .story-right{padding:0 15px;}
 .story-section .byline{color:#989898;font-family:"OpenSans-Regular";font-size:12px;font-size:.75rem;zoom:1;}
 .story-section .byline:before,.story-section .byline:after{content:"";display:block;height:0;overflow:hidden;}
 .story-section .byline:after{clear:both;}
@@ -391,14 +390,11 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .share_bar .social-share .fa-comment{color:#a2a2a2;}
 @media only screen and (min-width: 769px){
 .story-section h1{font-size:34px;font-size:2.125rem;font-weight:700;line-height:45px;}
-.story-section .story-left,.story-section .story-right{float:left;}
-.story-section .story-left{width:21%;}
-.story-section .story-right{width:79%;}
+.story-section .story-left,.story-section .story-right{float:none;}
 .story-section .story-left .byline{text-align:center;}
 .story-section .story-left .byline .profile-pic,.story-section .story-left .byline .profile-detail{float:none;}
 .story-section .story-left .byline .profile-pic img{width:60px;height:60px;}
 .story-section .story-left .byline .profile-detail{width:auto;margin:0;}
-.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;}
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0;}
 .story-section .story-left .byline .profile-detail ul li+li{border-left:none;}
 .story-section .story-left .byline ul.social-links li{float:left;padding:10px 0;}
@@ -582,7 +578,6 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .story-left-section{zoom:1;margin-top:20px;}
 .story-section .story-left-section:before,.story-section .story-left-section:after{content:"";display:block;height:0;overflow:hidden;}
 .story-section .story-left-section:after{clear:both;}
-.story-section .story-left,.story-section .story-right{padding:0 15px;}
 .story-section .byline{color:#989898;font-family:"OpenSans-Regular";font-size:12px;font-size:0.75rem;zoom:1;}
 .story-section .byline:before,.story-section .byline:after{content:"";display:block;height:0;overflow:hidden;}
 .story-section .byline:after{clear:both;}
@@ -867,13 +862,13 @@ footer .footer-top .footer-social-link{display:none;}
 }
 @media only screen and (min-width: 769px){
 .story-section h1{font-size:34px;font-size:2.125rem;font-weight:700;line-height:45px;}
-.story-section .story-left,.story-section .story-right{float:left;}
+.story-section .story-left,.story-section .story-right{float:none;}
 .story-section .story-left{width:21%;}
 .story-section .story-left .byline{text-align:center;}
 .story-section .story-left .byline .profile-pic,.story-section .story-left .byline .profile-detail{float:none;}
 .story-section .story-left .byline .profile-pic img{width:60px;height:60px;}
 .story-section .story-left .byline .profile-detail{width:auto;margin:0; margin-left:15px;}
-.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;}
+.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 5px 5px 0;}
 .story-section .story-left .byline .profile-detail ul li + li{border-left:none;}
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0px;}
 .story-section .story-left .byline ul.social-links li{float:left;padding:10px 0;}
@@ -1151,6 +1146,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
 @media only screen and (min-width: 769px){
 .story-left-section.story-update .story-left, .story-left-section.story-update .story-right{ float: none; width:100%; }
+.story-left-section.story-update .story-left{ margin-bottom: 15px; }
 .story-left-section.story-update .story-left .byline{ width:65%; float: left; text-align: left; }
 .story-left-section.story-update .story-left .share_bar{ width:35%; float: right; }
 .story-left-section.story-update .story-left .byline .profile-pic, .story-left-section.story-update .story-left .byline .profile-detail{float: left;}
