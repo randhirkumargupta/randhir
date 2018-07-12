@@ -13844,4 +13844,39 @@ input:disabled.form-submit {
   margin-right: 20px;
   margin-top: 6px; }
 
+/* css start by Ravi - ITG SSO */
+.sign-in-link .rgt-block a:hover {
+  color: #193984; }
+
+#fotp .error {
+  clear: left;
+  text-align: left; }
+
+.form-item-forget-me {
+  position: relative; }
+
+#edit-forget-me {
+  position: absolute;
+  top: 0; }
+
+.form-item-forget-me .form-checkboxes {
+  font-family: RobotoSlab-Regular; }
+
+.page-user form .form-type-checkboxes label a {
+  color: #2102b1; }
+
+.sign-in-link a, .sign-in-link .left-block {
+  font-family: 'Roboto', sans-serif;
+  color: #a6a6a6; }
+
+.messages--status {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0; }
+
+#upass .form-item-forget-me {
+  display: inline; }
+
+/* css end by Ravi - ITG SSO */
+
 /*# sourceMappingURL=styles.css.map */
