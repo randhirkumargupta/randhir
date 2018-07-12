@@ -351,6 +351,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .byline .profile-detail ul li.mailto{text-transform:uppercase;}
 .story-section .byline a{color:#989898;}
 .story-section .story-right .stryimg{position:relative;text-align:center;}
+.story-section .story-right .image-alt {color: #777;font-size: 13px;font-size: .8125rem;padding: 5px 0;border-bottom: 1px solid #e5e5e5;font-family: "OpenSans-Semibold";}
 .story-section .story-right .stryimg img{width:100%;}
 .story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
 .story-section .story-right .description p{padding:10px 0;}
@@ -831,7 +832,7 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .factoids-page .fun-facts{display:block;}
 .factoids-page .fun-facts h2{display:inline;padding-left:0;}
 .factoids-slider ul{background:#a00606;padding:0px;padding-left:0!important;}
-.factoids-slider ul li{padding:25px 0;font-size:15px;line-height:24px;color:#fff;}
+.factoids-slider ul li{padding:20px 0;font-size:15px;line-height:24px;color:#fff;}
 .factoids-slider ul li span{margin:0 25px;display:block;}
 .factoids-slider ul li:nth-child(odd){background:#a00606;}
 .factoids-slider ul li:nth-child(even){background:#000;}
@@ -1170,7 +1171,48 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 .buzz-feedback .buzz-section .image-alt{color:#929292;font-size:13px;font-size:.8125rem;padding:10px 0;border-bottom:1px solid #e5e5e5;padding-top:0;}
 .buzz-feedback .buzz-section .photoby{background:#000;color:#aeaeae;font-family:"OpenSans-Regular";padding:5px;margin-top:-15px;}
 @media only screen and (min-width:769px){.buzz-feedback .buzz-section h1{font-size:34px;font-size:2.125rem;}.buzz-feedback .buzz-section h1 span{width:32px;height:32px;font-size:24px;font-size:1.5rem;line-height:28px;}}
+/* movie review Css */
+.story-section .story-movie .movie-rating{margin-top:20px;float:left;width:111px;height:60px;padding:20px 0;position:relative;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/rating-grey.png) 0 20px no-repeat;}
+.story-section .story-movie .movie-rating:after{content:'';position:absolute;left:0;top:0;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/rating-red.png) 0 20px no-repeat;height:60px;width:0;}
+.story-section .story-movie div[data-star-value="30%"]:after{width:30%;}
+.story-section .story-movie .movie-rating{float:none;padding-bottom:0;margin-top:0;}
+.story-section .story-movie .movie-detail div{font-family:"OpenSans-Regular";color:#000;zoom:1;}
+.story-section .story-movie .movie-detail div:before,.story-section .story-movie .movie-detail div:after{content:"";display:block;height:0;overflow:hidden;}
+.story-section .story-movie .movie-detail div:after{clear:both;}
+.story-section .story-movie .movie-detail div+div{margin-top:15px;}
+.story-section .story-movie .movie-detail div .title{float:left;padding-right:7px;width:auto;margin-right:5px;font-weight:600;font-size:13px;}
+.story-section .story-movie .movie-detail div .detail{display:block;overflow:hidden;}
+/* technology story Css */
+.story-section .story-right .stryimg .photoby .story-img-rating {background: #b00808;display: inline-block;vertical-align: top;
+    padding: 5px 20px;font-size: 28px;font-weight: 700;color: #fff;line-height: 28px;}
+.quotes blockquote{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
+.quotes{float:none;margin:15px 0 15px 10%;border-left:5px solid #bb0a0a;padding:0 0 0 20px;}
+@media all and (max-width:767px){.quotes{margin-left:0;float:none;width:100%;}}
+.itgimage{position:relative;}
+.tech-pros-cons-main h2{font-size:28px;line-height:35px;color:#fff;font-weight:700;padding:0 0 0 10px;float:left;width:100%;margin-bottom:10px;background:#000;border-bottom:2px solid #cccc;}
+.tech-pros-cons-main h2 strong{font-size:30px;line-height:35px;color:#fff;background-color:#b00808;float:right;padding:0 10px;}
+ul.pron-cons-img{width:42%;float:left;}
+ul.tech-pros{list-style:disc;width:25%;float:left;margin-left:4%;}
+ul.tech-cons{list-style:disc;width:25%;float:left;margin-left:4%;}
+ul.tech-cons li,ul.tech-pros li{font-size:14px;line-height:26px;color:#939393;float:left;width:100%;}
+ul.tech-cons li span,ul.tech-pros li span{color:#b00808;font-size:17px;font-weight:700;line-height:24px;list-style:outside none none;margin-left:-17px;text-transform:uppercase;}
+ul.tech-cons li:first-child,ul.tech-pros li:first-child{list-style:none;}
+ul.pron-cons-img li img{margin-right:10%;margin-top:-53px;width:92%;}
+.tech-pros-cons-main{width:100%;float:left;padding:10px;background-color:#edebec;}
+@media (max-width:767px){
+.tech-pros-cons-main h2{margin-left:0;overflow:hidden;width:100%;}
+ul.pron-cons-img{width:100%;margin-bottom:10px;}
+ul.pron-cons-img li img{margin-right:0;margin-top:0;width:100%;}
+ul.tech-pros{margin-left:6%;}
+ul.tech-pros,ul.tech-cons{width:46%;}
 }
+ul.pron-cons-img{list-style:none!important;}
+ul.pron-cons-img li img{margin-top:0;}
+@media screen and (max-width:767px){
+ul.pron-cons-img li img{margin-top:-12px!important;}
+}
+}
+
 /* new story design Css */
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
 
