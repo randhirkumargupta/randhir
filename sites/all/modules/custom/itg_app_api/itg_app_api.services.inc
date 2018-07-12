@@ -7045,7 +7045,9 @@ function search_data_rest($token) {
  * Callback for solr service.
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
-   $view_args = array();
+
+    /*
+    $view_args = array();
    $view_args = array (
   'q' => 
   array (
@@ -7058,7 +7060,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     
     //$view_args[] = $key;
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
-     p($ao_results);
+     p($ao_results);*/
 
     $link_ar = array();
     $nid_ar = array();
