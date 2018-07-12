@@ -466,7 +466,7 @@ function get_event_menu($nid) {
     if (is_event_tab() && is_event_tab() == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
 		  $active_class = 'active';	
 		}
-        $flash_back_link .= '<li class="'.$active_class.'">' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/eventpage/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value'])) . '</li>';
+        $flash_back_link .= '<li class="'.$active_class.'">' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value'])) . '</li>';
       }
     }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
       $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
