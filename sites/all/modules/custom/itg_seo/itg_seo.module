@@ -201,32 +201,32 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
   $form['path']['pathauto']['#default_value'] = $pathauto_state;
   $form['path']['pathauto']['#value'] = $pathauto_state;
   $form['path']['pathauto']['#checked'] = $pathauto_state;
-  
-  // for sef_url_access 
+
+  // for sef_url_access
   $user_access_id = !empty(get_itg_variable('sef_url_access')) ? get_itg_variable('sef_url_access') : '';
-  $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';  
+  $user_access_status = !empty(get_itg_variable('sef_url_status')) ? get_itg_variable('sef_url_status') : '';
   $user_access_array = explode(',', $user_access_id);
-  
+
   if(!empty($form['#node']->nid) && !empty($user_access_status)) {
-    
+
     if(is_array($user_access_array) && count($user_access_array) > 0) {
       if(!in_array($user->uid, $user_access_array))  {
         if(in_array($form['#node']->type, array('story', 'breaking_news', 'photogallery', 'videogallery'))) {
-            // Remove disable code for sef url        
+            // Remove disable code for sef url
            $form['path']['pathauto']['#attributes']  = array('class' => array('disable-custom-path-pathauto'));
            $form['path']['alias']['#attributes']  = array('class' => array('disable-custom-path-alias'));
-           
+
            drupal_add_js('
                 jQuery(document).ready(function () {
                     jQuery("#edit-path-pathauto").attr("disabled", "disabled"); //Disable
                     jQuery("#edit-path-alias").attr("readonly", "readonly"); //readonly
                   });', 'inline');
-           
+
         }
-        
+
       }
-    }    
-  }   
+    }
+  }
   return $form;
 }
 
@@ -421,7 +421,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     }
     else{
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">';
-      $section_link .= l('<span itemprop="title">Authors</span>', 'authors-list', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+      $section_link .= l('<span itemprop="title">Anchors</span>', 'anchors-list', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       $section_link .= $node_title;
     }
   }
