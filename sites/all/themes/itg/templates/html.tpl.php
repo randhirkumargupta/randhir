@@ -1238,12 +1238,28 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .carousel-control.right{border-radius:90px 0px 0px 90px;right:0;}
 .carousel-control.right:before{content:'\f054';font:normal normal normal 14px/1 FontAwesome;font-size:30px;right:10px;position:absolute;top:38px;}
 .carousel-control:hover,.carousel-control:focus{background-color:rgba(0,0,0,0.8);}
+.modal-backdrop.in {opacity: 0.5;}
+.modal-backdrop {position: fixed;top: 0px;right: 0px;bottom: 0px;left: 0px;z-index: 1040;background-color: rgb(0, 0, 0);}
 @media (min-width:768px){
 .modal-dialog{width:960px;margin:30px auto;}
 .modal-content{-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);}
 }
+/*story youtube video iframe*/
+.story-section .story-right .description iframe.story_video{width:100%;height:435px;}
+@media screen and (max-width:1024px){.story-section .story-right .description iframe.story_video{height:350px;}}
+@media screen and (max-width:768px){.story-section .story-right .description iframe.story_video{height:560px;}}
+@media screen and (max-width:767px){.story-section .story-right .description iframe.story_video{height:490px;}}
+@media screen and (max-width:460px){.story-section .story-right .description iframe.story_video{height:290px;}}
+@media screen and (max-width:375px){.story-section .story-right .description iframe.story_video{height:260px;}}
+@media only screen and (max-width:320px){.story-section .story-right .description iframe.story_video{height:220px;}}
 
-
+/* Listicle story */
+.story-section .listicle-page .listicle-detail>span{width:34px;height:34px;background:#a00606;border-radius:100%;font-size:24px;display:inline-block;vertical-align:top;text-align:center;line-height:34px;color:#fff;font-weight:700;margin-top:20px;}
+.story-section .listicle-page .listicle-detail .listicle-description{font-size:16px;color:#282828;display:inline-block;vertical-align:top;width:95%;padding:18px 20px;}
+@media only screen and (max-width:768px){
+.story-section .listicle-page .listicle-detail>span{width:24px;height:24px;margin-top:14px;line-height:24px;font-size:16px;}
+.story-section .listicle-page .listicle-detail .listicle-description{width:91%;padding:10px;}
+}
 /* new story design Css */
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
 </style>
