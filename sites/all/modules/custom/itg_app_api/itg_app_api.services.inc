@@ -7056,7 +7056,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
 );*/
     $view_args = array();
     $view_args['q'] = $key;
-     $ao_results = views_get_view_result('rest_api_search', 'default', $view_args);
+     $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);
 
     $link_ar = array();
