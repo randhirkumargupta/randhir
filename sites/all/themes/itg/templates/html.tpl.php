@@ -1244,6 +1244,21 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .modal-dialog{width:960px;margin:30px auto;}
 .modal-content{-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);}
 }
+.story-section .story-right .description a{color:#026bc5;}
+.story-section .story-right .description a:hover{text-decoration:underline;}
+.tech-photos .tech-photos-head-section{display:block;}
+.tech-photos .tech-photos-head-section .tech-photos-count{color:#b5b5b5;font-size:13px;margin-bottom:10px;display:block;}
+.tech-photos .tech-photo-item{width:30%;display:inline-block;margin-right:3%;position:relative;}
+.tech-photos .tech-photo-item .tech-photo-overlay{position:absolute;top:0;left:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);width:100%;height:100%;}
+.tech-photos .tech-photo-item .tech-photo-overlay a .tech-photo-seemore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:22px;}
+.tech-photos .tech-photo-item .tech-photo-overlay a,.tech-photos .tech-photo-item .tech-photo-overlay a span:hover{color:#fff;text-decoration:underline;}
+.story-section .description h3{text-transform:uppercase;font-family:OpenSans-Bold;margin:10px 0;line-height:28px;}
+.story-photo-list-wrapper h3 span{background:#fff;z-index:1;position:relative;padding:20px 20px 10px 10px;display:inline-block;}
+.story-photo-list-wrapper h3:before{content:'';position:absolute;left:0;width:100%;bottom:20px;height:5px;margin-top:-2px;background:#ddd;}
+.story-photo-list-wrapper .story-photo-list-heading{display:block;}
+.story-photo-list-wrapper .story-photo-list-heading:before{top:0;bottom:0;margin:auto;}
+.story-photo-list-wrapper .story-photo-list-heading span{padding:20px 20px 20px 0;}
+
 /*story youtube video iframe*/
 .story-section .story-right .description iframe.story_video{width:100%;height:435px;}
 @media screen and (max-width:1024px){.story-section .story-right .description iframe.story_video{height:350px;}}
@@ -1260,6 +1275,8 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .listicle-page .listicle-detail>span{width:24px;height:24px;margin-top:14px;line-height:24px;font-size:16px;}
 .story-section .listicle-page .listicle-detail .listicle-description{width:91%;padding:10px;}
 }
+
+
 /* new story design Css */
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
 </style>
