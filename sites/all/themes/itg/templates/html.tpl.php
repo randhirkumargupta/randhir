@@ -398,7 +398,7 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .story-section .story-left .byline .profile-pic,.story-section .story-left .byline .profile-detail{float:none;}
 .story-section .story-left .byline .profile-pic img{width:60px;height:60px;}
 .story-section .story-left .byline .profile-detail{width:auto;margin:0;}
-.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;border-bottom:1px solid #eaeaea;}
+.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;}
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0;}
 .story-section .story-left .byline .profile-detail ul li+li{border-left:none;}
 .story-section .story-left .byline ul.social-links li{float:left;padding:10px 0;}
@@ -408,25 +408,25 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .story-left .briefcase h4{font-weight:700;text-transform:uppercase;margin-bottom:8px;}
 .story-section .story-left .briefcase{margin-top:50px;}
 .story-section .story-left .briefcase ul li{background:#f9f9f9;color:#575757;padding:12px 8px 20px;line-height:18px;}
-}
-@media only screen and (max-width: 768px){
-.mhide{display:none;}
-.desktop-hide{display:block;}
-.comment-mobile{display:none;}
 .story-section .story-left,.story-section .story-right{padding:0;}
 .story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
-}
-@media only screen and (max-width: 767px){
-.mhide{display:none;}
-.desktop-hide{display:block;}
-.comment-mobile{display:none;}
 .story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
 .story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;}
 .story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
+}
+@media only screen and (max-width: 768px){
+.mhide{display:none;}
+.desktop-hide{display:block;}
+.comment-mobile{display:none;}
+}
+@media only screen and (max-width: 767px){
+.mhide{display:none;}
+.desktop-hide{display:block;}
+.comment-mobile{display:none;}
 }
 
 /*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/layout.css?pbp9gg */
@@ -873,8 +873,8 @@ footer .footer-top .footer-social-link{display:none;}
 .story-section .story-left .byline{text-align:center;}
 .story-section .story-left .byline .profile-pic,.story-section .story-left .byline .profile-detail{float:none;}
 .story-section .story-left .byline .profile-pic img{width:60px;height:60px;}
-.story-section .story-left .byline .profile-detail{width:auto;margin:0;}
-.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;border-bottom:1px solid #eaeaea;}
+.story-section .story-left .byline .profile-detail{width:auto;margin:0; margin-left:15px;}
+.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;}
 .story-section .story-left .byline .profile-detail ul li + li{border-left:none;}
 .story-section .story-left .byline .profile-detail ul li:last-child{border-left:none;}
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0px;}
@@ -1153,7 +1153,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
 @media only screen and (min-width: 769px){
 .story-left-section.story-update .story-left, .story-left-section.story-update .story-right{ float: none; width:100%; }
-.story-left-section.story-update .story-left .byline{ width:65%; float: left; }
+.story-left-section.story-update .story-left .byline{ width:65%; float: left; text-align: left; }
 .story-left-section.story-update .story-left .share_bar{ width:35%; float: right; }
 .story-left-section.story-update .story-left .byline .profile-pic, .story-left-section.story-update .story-left .byline .profile-detail{float: left;}
 }
