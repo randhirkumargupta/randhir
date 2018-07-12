@@ -7045,15 +7045,7 @@ function search_data_rest($token) {
  * Callback for solr service.
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
-   /* $i_arg = array();
-    $i_arg['keyword'] = $key;
-    $view_args = array();
-    $view_args[] = $key;
-     $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
-     p($ao_results);*/
-    $content1 = file_get_contents('https://staging-it-backend.indiatodayonline.in/rest_api_search/nirav%20modi?keyword=nirav+modi&tm_vid_14_names=&sm_field_itg_common_by_line_name=&bundle_name=&hash=All');
-    $content2 = file_get_contents('https://staging-it.indiatodayonline.in/topic/nirav%20modi/Story?page=1');
-    print_r($content1); echo "###end of content1 ";p($content1);
+
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
@@ -7065,7 +7057,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $query = apachesolr_drupal_query("custom", array('q' => $key));
         $query->setSolrsort('ds_changed', 'desc');
         //$query->removeFilter('bundle_name');
-        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        //$query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         $query->addParam('rows', '100');
         //$query->addParam('fq', "bundle_name:Video");
         //$query->addParam('sort', "ds_changed DESC");
