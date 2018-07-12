@@ -7045,7 +7045,7 @@ function search_data_rest($token) {
  * Callback for solr service.
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
-   /* $view_args = array (
+    /*$view_args = array (
   'q' => 
   array (
     0 => 'nirav modi'
@@ -7053,9 +7053,11 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
   'rows' => 100,
   'start' => 0,
   'fl' => array('id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php')
-);
-     $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
-     p($ao_results);*/
+);*/
+    $view_args = array();
+    $view_args['q'] = $key;
+     $ao_results = views_get_view_result('rest_api_search', 'default', $view_args);
+     p($ao_results);
 
     $link_ar = array();
     $nid_ar = array();
