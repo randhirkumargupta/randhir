@@ -7047,7 +7047,7 @@ function search_data_rest($token) {
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
     $i_arg = array();
     $i_arg['keyword'] = $key;
-     $ao_results = views_get_view_result('rest_api_search', 'page_0', $i_arg);
+     $ao_results = views_get_view_result('rest_api_search', 'page_1', $_GET['key']);
      p($ao_results);
     $link_ar = array();
     $nid_ar = array();
@@ -7964,7 +7964,7 @@ function itg_rapid_api_breaking_news_tv() {
         $news['breaking_news_title'] = "";             
         $data['data'] = $news;
     }
-    return $data;
+    return $data; 
 }
  
  
