@@ -7051,9 +7051,11 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $view_args[] = $key;
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
-    $content1 = file_get_contents('https://staging-it-backend.indiatodayonline.in/rest_api_search/nirav%20modi?keyword=nirav+modi&tm_vid_14_names=&sm_field_itg_common_by_line_name=&bundle_name=&hash=All');
-    $content2 = file_get_contents('https://staging-it.indiatodayonline.in/topic/nirav%20modi/Story?page=1');
-    print_r($content1); echo "###end of content1 ";p($content1);
+    // register a new user
+$form_state = array();
+$form_state['values']['keyword'] = $key;
+$result = drupal_form_submit('views-exposed-form-rest-api-search-page', $form_state);
+echo "andy h";p($result);
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
