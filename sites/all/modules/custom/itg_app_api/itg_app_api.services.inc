@@ -7964,7 +7964,7 @@ function itg_rapid_api_breaking_news_tv() {
         $news['breaking_news_title'] = "";             
         $data['data'] = $news;
     }
-    return $data;
+    return $data; 
 }
  
  
