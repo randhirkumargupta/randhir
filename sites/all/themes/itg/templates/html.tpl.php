@@ -408,7 +408,7 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .story-left .briefcase{margin-top:50px;}
 .story-section .story-left .briefcase ul li{background:#f9f9f9;color:#575757;padding:12px 8px 20px;line-height:18px;}
 .story-section .story-left,.story-section .story-right{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
 .story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
