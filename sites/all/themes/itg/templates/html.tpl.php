@@ -1149,10 +1149,15 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .listicle-page .listicle-detail>span{width:24px;height:24px;margin-top:14px;line-height:24px;font-size:16px;}
 .story-section .listicle-page .listicle-detail .listicle-description{width:91%;padding:10px;}
 }
-
-
 /* new story design Css */
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
+@media only screen and (min-width: 769px){
+.story-left-section.story-update .story-left, .story-left-section.story-update .story-right{ float: none; width:100%; }
+.story-left-section.story-update .story-left .byline{ width:65%; float: left; }
+.story-left-section.story-update .story-left .share_bar{ width:35%; float: right; }
+.story-left-section.story-update .story-left .byline .profile-pic, .story-left-section.story-update .story-left .byline .profile-detail{float: left;}
+}
+
 </style>
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
 <?php } ?>
