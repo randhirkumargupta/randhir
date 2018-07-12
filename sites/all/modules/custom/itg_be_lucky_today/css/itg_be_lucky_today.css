@@ -45,7 +45,7 @@ and open the template in the editor.
 .itg_be_lucky_today fieldset.form-wrapper{ border:0px; margin-bottom:40px; }
 .itg_be_lucky_today .ball{ margin-bottom:40px; }
 
-.page-be-lucky-today a.seebtn,.page-be-lucky-today input[type="submit"]{border:0; cursor:pointer; background-color:#bc020a;  padding:15px 20px; font:400 22px 'Roboto',Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; display:table; border-radius:10px; text-align:center; margin:10px auto 40px;}
+.page-be-lucky-today a.seebtn,.page-be-lucky-today input[type="submit"]{border:0; cursor:pointer; background-color:#bc020a;  padding:15px 20px; font:400 22px 'Roboto',Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; display:table; border-radius:10px; text-align:center; margin:20px auto 40px;}
 .page-be-lucky-today input[type="submit"]{min-height:40px; padding:0 37px; line-height:42px; border-radius:5px;}
 
 
