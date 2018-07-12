@@ -7048,11 +7048,11 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $view_args = array (
   'q' => 
   array (
-    0 => 'nirav modi',
+    0 => 'nirav modi'
   ),
-  'rows' => '100',
+  'rows' => 100,
   'start' => 0,
-  'fl' => 'id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php'
+  'fl' => array('id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php')
 );
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);
