@@ -5,6 +5,7 @@
  * 
  */
 $last_ball = -1;
+$current_date_time = date("Y-m-dTH:i:s");   
 foreach ($data as $key => $commentary) {
     if($commentary->Commentary == null || empty($commentary->Commentary)){
         continue;
@@ -52,7 +53,7 @@ foreach ($data as $key => $commentary) {
             </div>
         </div>
     <?php endif; ?>  
-    <div class="para-live-blog" id="<?php print $commentary->Id; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>">
+    <div class="para-live-blog" id="<?php print $commentary->Id; ?>" data-sort-time="<?php print strtotime($commentary->TimeOfDay); ?>" data-update-time="<?php print $current_date_time; ?>">
         <div>
             <p itemprop="articleBody"> <?php if (!empty($time)): ?><span><?php echo $time; ?>: </span><?php endif; ?><?php echo $commentary->Commentary; ?></p>
         </div>
