@@ -80,7 +80,7 @@ var jwConfig = {
   title: "<?php echo $title; ?>",
   media_id:"vod_<?php echo $nid; ?>",
   image: "<?php echo $image; ?>",
-
+  autostart:"<?php echo $autostart; ?>",
   /* share  sharing_link, sharing_code are mandatory*/
   sharing_link: "<?php echo  $node_url; ?>",
   sharing_code:encodeURI("<iframe src=\"<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>\" allowfullscreen  width='648' height='396' frameborder='0' scrolling='no' />"),
