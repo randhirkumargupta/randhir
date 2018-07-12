@@ -315,7 +315,7 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog' || $node->field_type['
 			  <amp-img width="647" height="363" layout="responsive" alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>"></amp-img>
 			  <div class="bolg-content" id="bolgcontent">
 			  <amp-live-list layout="container" data-poll-interval="15000" data-max-items-per-page="1000" id="amp-live-list-insert-blog">
-				<button update on="tap:amp-live-list-insert-blog.update" class="ampstart-btn ml1 caps">You have updates</button>
+				<button update on="tap:amp-live-list-insert-blog.update" class="ampstart-btn ml1 caps"><i class="fa fa-repeat" aria-hidden="true"></i> New Updates</button>
 				<div items>
 					<?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 0, 'amp'); ?>
 				</div>

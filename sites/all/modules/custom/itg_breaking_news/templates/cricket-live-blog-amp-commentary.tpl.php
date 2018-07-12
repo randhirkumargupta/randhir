@@ -5,6 +5,7 @@
  * 
  */
 $last_ball = -1;
+//$current_date_time = date("Y-m-dTH:i:s");   
 foreach ($data as $key => $commentary) {
     if($commentary->Commentary == null || empty($commentary->Commentary)){
         continue;
