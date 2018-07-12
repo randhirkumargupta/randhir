@@ -3627,7 +3627,7 @@ function itg_rapid_api_magazine_edition($token) {
         $id = 0;
     }
     if (!is_numeric($cpageno)) {
-        $cpageno = 0;
+        $cpageno = 'all';
     }
 
 
@@ -7055,7 +7055,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $solr = apachesolr_get_solr();
         $query = apachesolr_drupal_query("custom", array('q' => $key));
         $query->setSolrsort('ds_changed', 'desc');
-        $query->removeFilter('bundle_name');
+        //$query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         $query->addParam('rows', '100');
         //$query->addParam('fq', "bundle_name:Video");

@@ -227,31 +227,19 @@ function _create_tmp_zip($prefix, $cover_file, $kindle_save_unmanaged_file_name1
             $xml_dot_gz_files = $s3->getObjectUrl($bucket, $object['Key']);
             $contents = file_get_contents($xml_dot_gz_files);
             $zip->addFromString(basename($xml_dot_gz_files), $contents);
-            //break;
+           
         }
         $s3fs_domain = variable_get('s3fs_domain');
-        $s3fs_domain_val = "https://".$s3fs_domain_val."/indiatoday/";
+        $s3fs_domain_val = "https://".$s3fs_domain."/indiatoday/";
         $cover_file = str_replace("public://",$s3fs_domain_val,$cover_file);
         $kindle_save_unmanaged_file_name1 = str_replace("public://",$s3fs_domain_val,$kindle_save_unmanaged_file_name1);
         $cover_page_file = str_replace("public://",$s3fs_domain_val,$cover_page_file);
         $kindle_save_unmanaged_file_name2 = str_replace("public://",$s3fs_domain_val,$kindle_save_unmanaged_file_name2);
         $manifest_file = str_replace("public://",$s3fs_domain_val,$manifest_file);
         $kindle_save_unmanaged_file_name3 = str_replace("public://",$s3fs_domain_val,$kindle_save_unmanaged_file_name3);
-        //$create_section_file = str_replace("public://",$s3fs_domain_val,$create_section_file);
-//        $loop_cc = 0;
-//        $create_section_file_ar = array();
-//        foreach ($create_section_file as $key => $value) {
-//            $create_section_file_ar[] = str_replace("public://",$s3fs_domain_val,$value);
-//        }
+       
         $zip->close();
-        /*header('Content-Type: application/zip');
-        header("Content-Transfer-Encoding: Binary");
-        header('Content-Length: ' . filesize($file));
-        header('Content-Disposition: attachment; filename="download.zip"');
-        header("Pragma: no-cache"); 
-        header("Expires: 0"); 
-        readfile($file);
-        unlink($file);*/
+        
         
         # define file array
         $files = array();
