@@ -263,6 +263,8 @@ header{margin-bottom:10px;position:relative;z-index:9999;}
 #block-itg-layout-manager-header-block .menu-login .social-nav ul li a{padding:0 10px;line-height:32px;color:#fff;}
 #block-itg-layout-manager-header-block .social-nav .social-dropdown{display:none;position:absolute;top:-5px;right:40px;-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;-ms-transition:all .5s ease-in-out;-o-transition:all .5s ease-in-out;transition:all .5s ease-in-out;width:0;background:#f0f0f0;height:37px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo+.menu li.menu__item.is-leaf a{padding-right:0;padding-left:35px;}
+#block-itg-layout-manager-header-block .social-nav .globle-search.active {width: 225px;}
+#block-itg-layout-manager-header-block .social-nav .social-dropdown.active { display: block;width: 260px;}
 @media only screen and (max-width: 768px){
 #block-itg-layout-manager-header-block .top-nav{padding:0;width:100%;background:#fff;margin-top:7px;text-align:right;line-height:28px;margin-bottom:0;box-shadow:0 6px 5px -3px rgba(0,0,0,0.1);}
 #block-itg-layout-manager-header-block .top-nav .main-nav{padding-left:0;float:none;width:100%;line-height:20px;}
@@ -308,7 +310,10 @@ footer .footer-top .footer-social-link .fa{font-size:24px;font-size:1.5rem;verti
 footer .footer-top ul li{display:inline-block;vertical-align:top;}
 footer .footer-top ul li:nth-child(1) a{padding-left:0;}
 footer .footer-top ul li a{color:#fff;padding:0 15px;height:37px;line-height:37px;border-right:1px solid #111;font-size:16px;display:block;text-transform:uppercase;}
-footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:url(https://static-dev.indiatodayonline.in/indiatoday/../sites/all/themes/itg/images/sprite.png) 10px 10px no-repeat #000;}
+footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) 10px 10px no-repeat #000;}
+footer .footer-top .footer-open-icon {
+    background: #000 url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) no-repeat 10px -35px;
+}
 footer .footer-mid{background:#111;padding:4px 0 10px;text-align:center;}
 footer .footer-bottom{padding:20px 0;}
 footer .footer-bottom a{font-size:12px;}
@@ -367,7 +372,7 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .story-section .story-left .briefcase h4{text-transform:uppercase;margin-bottom:8px;font-size:18px;font-size:1.125rem;font-weight:700;color:#bb0a0a;font-family:"OpenSans-Bold";}
 .story-section .story-left .briefcase{margin:20px 0;}
 .story-section .story-left .briefcase ul li{position:relative;color:#575757;padding:5px 0 5px 12px;font-size:13px;font-size:.8125rem;line-height:18px;word-wrap:break-word;}
-.byline a[title='follow']{background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 2px 2px;padding-left:38px;padding-top:10px;padding-bottom:7px;display:block;text-transform:uppercase;display:inline-block;}
+.byline a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunB.gif) no-repeat 2px 2px;padding-left:38px;padding-top:10px;padding-bottom:7px;display:block;text-transform:uppercase;display:inline-block;}
 .fa-envelope-o:before{content:"\f003";}
 .fa-facebook:before{content:"\f09a";}
 .fa-google-plus:before{content:"\f0d5";}
@@ -424,7 +429,7 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
 }
 
-/*! @import https://uat-it.indiatodayonline.in/sites/all/themes/itg/css/layout.css?pbp9gg */
+/*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/layout.css?pbp9gg */
 .container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
 @media (min-width: 769px){
 .container{max-width:750px;}
@@ -451,7 +456,7 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .col-md-4{width:33.33333333%;}
 }
 /*! end @import */
-/*! @import https://uat-it.indiatodayonline.in/sites/all/themes/itg/css/font-awesome.css?pbp9gg */
+/*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/font-awesome.css?pbp9gg */
 .fa{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 .fa-search:before{content:"\f002";}
 .fa-envelope-o:before{content:"\f003";}
@@ -482,7 +487,7 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .slick-slide{display:none;float:left;height:100%;min-height:1px;}
 .slick-initialized .slick-slide{display:block;}
 /*! end @import */
-/*! @import https://uat-it.indiatodayonline.in/sites/all/themes/itg/css/styles.css?pbp9gg */
+/*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/styles.css?pbp9gg */
 .clearfix{clear:both;}
 #block-itg-layout-manager-header-block ul,footer ul,.story-section ul,.may-be-suggest-container ul,.top-takes-video-container ul,.watch-right-now-video ul{list-style-type:none;}
 a{color:#111;text-decoration:none;}
@@ -523,7 +528,7 @@ header{margin-bottom:10px;position:relative;z-index:9999;}
 #block-itg-layout-manager-header-block .top-nav .main-nav{padding-left:0px;line-height:28px;width:65%;margin:0 auto;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li.desktop-hide{display:none;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3){position:relative;}
-#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{content:'';background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/sprite.png) no-repeat 0 -123px;position:absolute;top:-11px;left:20px;width:28px;height:19px;}
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{content:'';background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) no-repeat 0 -123px;position:absolute;top:-11px;left:20px;width:28px;height:19px;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li a{padding:0 35px;font-size:27px;font-size:1.6875rem;text-transform:uppercase;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li a:hover{color:#ffc106;}
 #block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(2) a{padding-left:0;}
@@ -557,7 +562,7 @@ footer .footer-top .footer-social-link .fa{font-size:24px;font-size:1.5rem;verti
 footer .footer-top ul li{display:inline-block;vertical-align:top;}
 footer .footer-top ul li:nth-child(1) a{padding-left:0;}
 footer .footer-top ul li a{color:#fff;padding:0 15px;height:37px;line-height:37px;border-right:1px solid #111111;font-size:16px;display:block;text-transform:uppercase;}
-footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:#000000 url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/sprite.png) no-repeat 10px 10px;}
+footer .footer-top .footer-expand-icon{position:absolute;top:0;right:15px;width:50px;text-align:center;height:37px;cursor:pointer;background:#000000 url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/sprite.png) no-repeat 10px 10px;}
 footer .footer-mid{background:#111111;padding:4px 0 10px;text-align:center;}
 footer .footer-bottom{padding:20px 0;}
 footer .footer-bottom a{font-size:12px;}
@@ -645,8 +650,8 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .story-expert-opinion .left-side p{color:#747474;line-height:18px;font-size:12px;padding:0;}
 .story-section .story-expert-opinion .right-side{text-align:right;}
 .story-section .story-expert-opinion h2{font-family:"Merriweather-Bold";color:#000;font-size:26px;}
-.story-section .story-expert-opinion h2:before,.story-section .story-expert-opinion h2:after{width:30px;height:25px;content:'';background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/up-quotes.png) no-repeat center 0;display:inline-block;vertical-align:top;}
-.story-section .story-expert-opinion h2:after{background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/down-quote.png) no-repeat 6px 3px;}
+.story-section .story-expert-opinion h2:before,.story-section .story-expert-opinion h2:after{width:30px;height:25px;content:'';background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/up-quotes.png) no-repeat center 0;display:inline-block;vertical-align:top;}
+.story-section .story-expert-opinion h2:after{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/down-quote.png) no-repeat 6px 3px;}
 .story-section .agbutton.story-like-dislike{margin-top:40px;border-top:1px solid #ddd;text-align:center;padding:15px 0;color:#929292;font-family:"OpenSans-Regular";font-size:16px;font-weight:700;}
 .story-section .agbutton.story-like-dislike #name-dv #lky,.story-section .agbutton.story-like-dislike #name-dv #dlky{padding:0 10px;position:relative;display:inline-block;padding:0 10px;vertical-align:middle;}
 .story-section .agbutton.story-like-dislike #name-dv #lky button,.story-section .agbutton.story-like-dislike #name-dv #dlky button{background:transparent;border:none;font-size:22px;cursor:pointer;color:#929292;}
@@ -654,7 +659,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .agbutton.story-like-dislike #name-dv #dlky button#dislike_count span{color:#ef0401;}
 .story-section .agbutton.story-like-dislike #name-dv #lky > span,.story-section .agbutton.story-like-dislike #name-dv #dlky > span{padding:0 15px;display:inline-block;vertical-align:middle;}
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv,.story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv{background:#fff;width:200px;position:absolute;box-shadow:0px 0px 5px #ccc;right:0;top:40px;font-weight:normal;color:#000;padding:15px;border-radius:5px;line-height:24px;text-align:left;border:1px solid #d2d2d2;z-index:1;overflow:visible!important;}
-.story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv:before,.story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before{content:'';height:21px;background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/story-up-arrow-icon.png) no-repeat;position:absolute;right:12px;top:-21px;width:25px;}
+.story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv:before,.story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before{content:'';height:21px;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/story-up-arrow-icon.png) no-repeat;position:absolute;right:12px;top:-21px;width:25px;}
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv a,.story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a{padding:3px;display:inline-block;vertical-align:top;cursor:pointer;}
 .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a{padding:0;color:#2877c4;text-decoration:underline;}
 .story-section .agbutton.story-like-dislike .error-msg{color:red;font-weight:400;font-size:12px;}
@@ -679,7 +684,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .top-takes-video-container ul .top-takes-video .pic{float:right;margin-left:10px;}
 .top-takes-video-container ul .top-takes-video .title{display:block;overflow:hidden;word-wrap:break-word;font-size:15px;font-size:0.9375rem;line-height:20px;color:#111;font-family:"OpenSans-Semibold";}
 .top-takes-video-container ul li.top-takes-video{padding:10px 0;}
-.top-takes-video-container ul li.top-takes-video .pic:after{background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
+.top-takes-video-container ul li.top-takes-video .pic:after{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
 .top-takes-video-container ul li + li{border-top:1px solid #dddddd;}
 .top-takes-video-container ul li:last-child{border-bottom:1px solid #dddddd;}
 .top-takes-video-container h3{text-transform:uppercase;font-weight:700;color:#bb0a0a;display:none;position:relative;font-family:"OpenSans-Bold";}
@@ -694,7 +699,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .watch-right-now-video ul .watch-right-now-list .title{display:block;overflow:hidden;word-wrap:break-word;font-size:15px;font-size:0.9375rem;line-height:20px;color:#111;font-family:"OpenSans-Semibold";}
 .watch-right-now-video ul li.watch-right-now-list{padding:10px 0;}
 .watch-right-now-video ul li.watch-right-now-list .pic{width:88px;}
-.watch-right-now-video ul li.watch-right-now-list .pic:after{background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
+.watch-right-now-video ul li.watch-right-now-list .pic:after{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/video-icon-small.png) no-repeat;content:"";width:18px;height:18px;position:absolute;right:5px;bottom:5px;}
 .watch-right-now-video ul li.watch-right-now-list + li{border-top:1px solid #dddddd;}
 .watch-right-now-video ul li.watch-right-now-list:last-child{border-bottom:1px solid #dddddd;}
 .sidebars{margin-top:40px;}
@@ -733,8 +738,8 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .sidebar-second .may-be-suggest-container h3{text-align:left;}
 .may-be-suggest-container h3{text-align:left;}
 .watch-right-now-video h3{text-align:left;}
-.byline a[title='follow']{background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/followunB.gif) no-repeat 2px 2px;padding-left:38px;padding-top:10px;padding-bottom:7px;display:block;text-transform:uppercase;display:inline-block;}
-.tags ul li a[title='follow']{background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px;width:19px;height:19px;display:inline-block;text-indent:-99999px;}
+.byline a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunB.gif) no-repeat 2px 2px;padding-left:38px;padding-top:10px;padding-bottom:7px;display:block;text-transform:uppercase;display:inline-block;}
+.tags ul li a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px;width:19px;height:19px;display:inline-block;text-indent:-99999px;}
 .itgimage{position:relative;}
 .itgimage .body_caption{font-size:0.8125rem;padding:10px 0;border-bottom:1px solid #e5e5e5;color:#777;line-height:18px;font-family:"OpenSans-Semibold";}
 .adtext{font-size:11px;color:#5f5f5f;line-height:16px;text-align:center;text-transform:uppercase;}
@@ -757,7 +762,7 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 #block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li:hover .fa,#block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li .fa{color:#333;}
 .watch-right-now-video ul li{font-family:"OpenSans-Semibold";}
 /*! end @import */
-/*! @import https://uat-it.indiatodayonline.in/sites/all/themes/itg/css/styles-new.css?pbp9gg */
+/*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/styles-new.css?pbp9gg */
 body,#page{height:100%;}
 input[type="text"]{transition:all 300ms;}
 input[type="text"]:focus{border-color:#026bc5;}
@@ -778,7 +783,7 @@ body{position:relative;}
 #widget-ajex-loader img{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;}
 .block-itg-ads iframe{max-width:100%;overflow:hidden;}
 /*! end @import */
-/*! @import https://uat-it.indiatodayonline.in/sites/all/themes/itg/css/media.css?pbp9gg */
+/*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/media.css?pbp9gg */
 @media only screen and (max-width: 1200px){
 body{-webkit-text-size-adjust:none;-moz-text-size-adjust:none;text-size-adjust:none;}
 }
@@ -933,14 +938,14 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 #block-itg-layout-manager-header-block .navigation{display:block!important;}
 }
 /*! end @import */
-/*! @import https://uat-it.indiatodayonline.in/sites/all/themes/itg/css/itgd-style.css?pbp9gg */
+/*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/itgd-style.css?pbp9gg */
 .story-section .story-left .byline .profile-detail ul.date-update li.update-data{line-height:18px;}
 .story-section .description .story-expert-opinion h2{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
 @media only screen and (max-width: 1024px){
 #block-itg-layout-manager-header-block .menu-login{right:15px;}
 }
 .may-be-recommend .trc_rbox_container .video-label.video-title{font-size:15px;line-height:20px;color:#111;font-family:OpenSans-Regular;font-weight:400;}
-.agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before,.agbutton.story-like-dislike #name-dv #lky #sty-dv:before{content:'';height:21px;background:url(https://uat-it.indiatodayonline.in/sites/all/themes/itg/images/story-up-arrow-icon.png) no-repeat;position:absolute;left:12px;top:-21px;width:25px;}
+.agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before,.agbutton.story-like-dislike #name-dv #lky #sty-dv:before{content:'';height:21px;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/story-up-arrow-icon.png) no-repeat;position:absolute;left:12px;top:-21px;width:25px;}
 .story-section .story-right .stryimg img{width:100%;}
 .story-right .description > p:first-child:first-letter{font-size:55px;font-weight:bold;padding-right:5px;float:left;line-height:57px;}
 .story-section .story-right .description iframe.multy-video-iframe{width:100%;height:435px;}
