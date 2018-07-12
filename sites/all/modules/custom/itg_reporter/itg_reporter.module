@@ -57,6 +57,18 @@ function itg_reporter_menu() {
   //   'type' => MENU_CALLBACK,
   //   'file' => 'include/itg_byline_people_content_migration.inc',
   // );
+
+
+  // Reporter content type category people delete
+
+  $items['people-migration-data-delete'] = array(
+    'title' => 'People migration table',
+    'page callback' => 'itg_report_migration_people_data_delete',
+    //'access callback' => TRUE,
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_byline_people_content_migration_delete.inc',
+  );
   return $items;
 }
 
