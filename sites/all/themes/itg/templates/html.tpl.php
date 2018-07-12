@@ -402,14 +402,13 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0;}
 .story-section .story-left .byline .profile-detail ul li+li{border-left:none;}
 .story-section .story-left .byline ul.social-links li{float:left;padding:10px 0;}
-.story-section .story-left .byline .profile-detail ul li:last-child{border-left:none;}
 .sidebars{margin-top:0;}
 section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .story-left .briefcase h4{font-weight:700;text-transform:uppercase;margin-bottom:8px;}
 .story-section .story-left .briefcase{margin-top:50px;}
 .story-section .story-left .briefcase ul li{background:#f9f9f9;color:#575757;padding:12px 8px 20px;line-height:18px;}
 .story-section .story-left,.story-section .story-right{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
 .story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
@@ -876,7 +875,6 @@ footer .footer-top .footer-social-link{display:none;}
 .story-section .story-left .byline .profile-detail{width:auto;margin:0; margin-left:15px;}
 .story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 0;}
 .story-section .story-left .byline .profile-detail ul li + li{border-left:none;}
-.story-section .story-left .byline .profile-detail ul li:last-child{border-left:none;}
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0px;}
 .story-section .story-left .byline ul.social-links li{float:left;padding:10px 0;}
 .story-section .story-left .briefcase{margin-top:50px;}
@@ -998,8 +996,8 @@ section.sidebar .block-itg-ads > div{margin:auto;}
 .story-section .byline .profile-detail ul.date-update li + li{border-left:0px;}
 .story-section .byline .profile-detail ul.date-update li{width:100%;margin-bottom:4px;}
 .story-section .byline .profile-detail ul.date-update li.pubdata,.story-section .byline .profile-detail ul.date-update li.update-data{width:auto;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:4px;}
-.story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;margin-bottom:0px; padding-right:3px;}
+.story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;}
 .story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
