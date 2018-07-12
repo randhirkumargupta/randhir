@@ -2321,12 +2321,7 @@ function event_url_save($node) {
   else {
     $event_title = $node->path['alias'];
   }
-  foreach ($node->field_event_tabs[LANGUAGE_NONE] as $tab_menu) {
-    $tab_value = field_collection_item_load($tab_menu['value']);
-    if($tab_value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
-      $steps[] = trim($tab_value->field_tab_sef[LANGUAGE_NONE][0]['value']);
-    }    
-  }
+  
   foreach ($steps as $step) {
     if ($step == 'home') {
       $check_alias = $event_title;
@@ -2344,6 +2339,17 @@ function event_url_save($node) {
         itg_event_backend_save_alias($source, $alias_s);
       }
     }
+  }
+  foreach ($node->field_event_tabs[LANGUAGE_NONE] as $tab_menu) {
+    $tab_value = field_collection_item_load($tab_menu['value']);
+    if($tab_value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+ 	  $tab_alias = trim($tab_value->field_tab_sef[LANGUAGE_NONE][0]['value']);	
+	  $_check_alias = $event_title . '/' . $tab_alias;
+      if (itg_event_backend_alias_check($_check_alias)) {
+		$source = 'event/' . $event_title . '/eventpage/' . $tab_alias;
+        itg_event_backend_save_alias($source, $_check_alias);  
+	  }
+    }    
   }
 }
 
