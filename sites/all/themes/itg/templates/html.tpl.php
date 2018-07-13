@@ -938,13 +938,13 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before,.agbutton.story-like-dislike #name-dv #lky #sty-dv:before{content:'';height:21px;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/story-up-arrow-icon.png) no-repeat;position:absolute;left:12px;top:-21px;width:25px;}
 .story-section .story-right .stryimg img{width:100%;}
 .story-right .description > p:first-child:first-letter{font-size:55px;font-weight:bold;padding-right:5px;float:left;line-height:57px;}
-.story-section .story-right .description iframe.multy-video-iframe{width:100%;height:435px;}
+.story-section .story-right .description iframe.multy-video-iframe{width:100%;height:560px;}
 .story-section .description h3{text-transform:uppercase;font-family:OpenSans-Bold;margin:10px 0;line-height:28px;}
 .story-section .description h2,.story-section .description h4{font-size:25px;font-family:"Merriweather-Bold";line-height:34px;font-weight:700;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after{content:'/';padding:0 3px;text-decoration:none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration:none;}
 @media screen and (max-width:1024px){
-.story-section .story-right .description iframe.multy-video-iframe{height:350px;}
+.story-section .story-right .description iframe.multy-video-iframe{height:445px;}
 }
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.multy-video-iframe{height:560px;}
