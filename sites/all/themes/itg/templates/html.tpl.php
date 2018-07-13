@@ -729,6 +729,7 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .byline a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunB.gif) no-repeat 2px 2px;padding-left:38px;padding-top:10px;padding-bottom:7px;display:block;text-transform:uppercase;display:inline-block;}
 .tags ul li a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px;width:19px;height:19px;display:inline-block;text-indent:-99999px;}
 .itgimage{position:relative;}
+.itgimage img{width: 100%;}
 .itgimage .body_caption{font-size:0.8125rem;padding:10px 0;border-bottom:1px solid #e5e5e5;color:#777;line-height:18px;font-family:"OpenSans-Semibold";}
 .adtext{font-size:11px;color:#5f5f5f;line-height:16px;text-align:center;text-transform:uppercase;}
 #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{display:none;}
