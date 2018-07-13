@@ -124,7 +124,6 @@ function generate_rss_feed_search_xml($result = NULL) {
       $xml .= '<pubDate><![CDATA[' . $publish_date . ' GMT ]]></pubDate>';
       $xml .= '</item>';
     }
-    $xml .= '</channel></rss>';
   }
   return $xml;
 }
