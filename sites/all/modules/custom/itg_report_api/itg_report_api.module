@@ -334,6 +334,11 @@ function api_anchorlist_callback(){
     $anchor_data['anchor'] = $anchor;
     $data['anchorlist'] = $anchor_data;
     $jsondata = drupal_json_encode($data);
+    if ($jsondata) {
+    $feed_file_path = "public://indiatoday/anchor-chat";
+    $feed_file_name = "api-anchorlist.xml";
+    $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
+  }
     print $jsondata;
     die();
 }
