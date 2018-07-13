@@ -1134,6 +1134,31 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .description .story-photo-list-wrapper{clear:both;}
 .story-photo-list-wrapper h3{text-transform:uppercase;font-weight:700;color:#bb0a0a;display:none;position:relative;font-family:"OpenSans-Bold";}
 .story-photo-list-item {padding: 0 1%; width: 25%;float: left;margin-bottom: 2%;}
+/* story with photo gallery */
+.story-section .story-right .stryimg a .story-photo-icon { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 30px;
+    cursor: pointer;}.fa-camera:before { content: "\f030";}
+.story-section .story-associate-content #videogallery-iframe{position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999999;background:rgba(0,0,0,0.76);display:none;}
+.story-section .story-associate-content #videogallery-iframe .big-story-popup{position:absolute;top:50%;left:50%;width:600px;height:455px;margin-left:-300px;margin-top:-227px;}
+.story-section .story-associate-content #videogallery-iframe #close-big-story{position:fixed;right:20px;top:20px;color:#000;z-index:99;display:inline-block;width:30px;height:30px;background:#fff;text-align:center;border-radius:100%;line-height:30px;font-weight:900;cursor:pointer;box-shadow:2px 2px 3px #484242;}
+.story-section .story-associate-content #videogallery-iframe #close-big-story a{color:#000;font-family:roboto;}
+.story-section .story-associate-content .videogallery-slider .slick-slide{width:100%;}
+.story-section .story-associate-content .video-slider-images .slick-slider{background:#171717;padding:10px 0;height:inherit;position:relative;padding:5px 20px;}
+.story-section .story-associate-content .video-slider-images .slick-prev,.story-section .story-associate-content .video-slider-images .slick-next{font:normal normal normal 14px/1 FontAwesome;cursor:pointer;width:24px;left:0;font-size:0;position:absolute;top:50%;z-index:9;border:none;margin-top:-6px;background:transparent;color:#fff;}
+.story-section .story-associate-content .video-slider-images .slick-prev:before,.story-section .story-associate-content .video-slider-images .slick-next:before{content:'\f053';font-size:20px;}
+.story-section .story-associate-content .video-slider-images .slick-next{right:0;left:auto;}
+.story-section .story-associate-content .video-slider-images .slick-next:before{content:'\f054';}
+.story-section .story-associate-content .video-slider-images li{padding-left:5px;cursor:pointer;}
+.story-section .story-associate-content .video-slider-images li:focus{outline:none;border:none;}
+.story-section .story-associate-content .video-slider-images li img{border:1px solid transparent;height:66px;width:88px;}
+.story-section .story-associate-content .video-slider-images li.slick-current img{border:1px solid #fff;}
+.story-section .story-associate-content #videogallery-iframe{position:relative;height:340px;top:auto;left:auto;width:100%;z-index:inherit;background:#000;display:none;overflow:visible!important;}
+.story-section .story-associate-content #videogallery-iframe .big-story-popup{position:relative;top:auto;left:auto;width:100%;height:inherit;margin-left:0;margin-top:0;}
+.story-section .story-associate-content #videogallery-iframe #close-big-story{position:absolute;right:0;top:0;width:25px;height:22px;line-height:22px;border-radius:0;box-shadow:none;background:#bb0a0a;}
+.story-section .story-associate-content #videogallery-iframe #close-big-story a{color:#fff;}
+.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left,.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-right{background:rgba(0,0,0,0.6);border:none;width:45px;height:66px;border-radius:0 7px 7px 0;color:#fff;position:absolute;top:50%;z-index:1;font-size:28px;text-align:center;line-height:70px;cursor:pointer;margin-top:-33px;}
+.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-left{left:0;}
+.story-associate-content .view-photo-landing-slider .videogallery-slider .fa-chevron-right{right:0;border-radius:7px 0px 0px 7px;}
+
 /*story youtube video iframe*/
 .story-section .story-right .description iframe.story_video{width:100%;height:435px;}
 @media screen and (max-width:1024px){.story-section .story-right .description iframe.story_video{height:350px;}}
