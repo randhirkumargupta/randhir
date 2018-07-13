@@ -7058,14 +7058,14 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
   //'fl' => array('id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php')
 );*/
     
-    $view_args[] = array();
+  /*  $view_args[] = array();
     $view_args['keyword'] = $key;
     $view_args['hash'] = "";
     $view_args['bundle_name'] = "";
     $view_args['sm_field_itg_common_by_line_name'] = "";
     $view_args['tm_vid_14_names'] = "";
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
-     p($ao_results);
+     p($ao_results);*/
 
     $link_ar = array();
     $nid_ar = array();
@@ -7073,15 +7073,15 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $results = array();
 
     try {
-        $key = preg_replace('/\s+/', ' OR ', $key);
-        $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("custom", array('q' => $key));
-        $query->setSolrsort('ds_changed', 'desc');
-        $query->removeFilter('bundle_name');
-        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
-        $query->addParam('rows', '100');
-        //$query->addParam('fq', "bundle_name:Video");
-        //$query->addParam('sort', "ds_changed DESC");
+        $subquery_test = apachesolr_drupal_query($key);
+        $subquery_test->addParam('fl', 'tm_vid_14_names');
+        $subquery_test->addParam('fl', 'sm_field_itg_common_by_line_name');
+        $subquery_test->addParam('fl', 'bundle_name');
+        $subquery_test->addParam('fl', 'hash');
+        $subquery_test->addParam('fl', 'label');        
+        $subquery_test->addFilter("label", $key);
+        $subquery_test->addParam('sort', "ds_changed DESC");        
+        $query->addFilterSubQuery($subquery_test, 'OR', 'AND');
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
