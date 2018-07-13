@@ -64,8 +64,7 @@ function itg_search_data_rest_fun() {
     $output .= get_rss_feed_header();
     $output .= '<title><![CDATA[ India Today | Searh Rss Page ]]></title><description><![CDATA[ India Today ]]></description><link>
       <![CDATA[ '.FRONT_URL.'/?utm_source=rss ]]>
-      </link><lastBuildDate><![CDATA[ '.$todat_date.' ]]>
-      </lastBuildDate><generator><![CDATA[ FeedCreator 1.7.2 ]]>
+      </link><lastBuildDate><![CDATA[ '.$todat_date.' ]]></lastBuildDate><generator><![CDATA[ FeedCreator 1.7.2 ]]>
       </generator><image><url><![CDATA[
       '.FRONT_URL.'/sites/all/themes/itg/logo.png
       ]]></url><title><![CDATA[ India Today | Searh Rss Page ]]>
