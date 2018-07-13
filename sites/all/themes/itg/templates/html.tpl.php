@@ -1181,7 +1181,6 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .slick-track:before,.slick-track:after{display:table;content:'';}
 .slick-track:after{clear:both;}
 .slick-slide img{display:block;}
-.story-section .story-right{padding:0 15px;}
 .story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
 .story-section .story-right .description p{padding:10px 0;}
 .story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{background:rgba(0,0,0,0.6);border:none;width:45px;height:66px;border-radius:0 7px 7px 0;color:#fff;position:absolute;top:138px;z-index:1;font-size:28px;text-align:center;line-height:70px;cursor:pointer;visibility:visible!important;}
