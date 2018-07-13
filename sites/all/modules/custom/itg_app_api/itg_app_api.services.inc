@@ -7073,7 +7073,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $results = array();
 
     try {
-        $subquery_test = apachesolr_drupal_query($key);
+        /*$subquery_test = apachesolr_drupal_query($key);
         $subquery_test->addParam('fl', 'tm_vid_14_names');
         $subquery_test->addParam('fl', 'sm_field_itg_common_by_line_name');
         $subquery_test->addParam('fl', 'bundle_name');
@@ -7082,7 +7082,19 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $subquery_test->addFilter("label", $key);
         $subquery_test->addParam('sort', "ds_changed DESC");   
         $subquery_test->addParam('rows', '100');
-        $query->addFilterSubQuery($subquery_test, 'OR', 'AND');        
+        $query->addFilterSubQuery($subquery_test, 'OR', 'AND'); */   
+        $device = strtolower($_GET['device']);
+        $key = preg_replace('/\s+/', ' OR ', $key);
+        $solr = apachesolr_get_solr();
+        $query = apachesolr_drupal_query("custom", array('q' => $key));
+        $query->setSolrsort('ds_changed', 'desc');
+        $query->removeFilter('bundle_name');
+        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('rows', '100');
+        if($device == "tv"){
+            $query->addParam('fq', "bundle_name:Video");            
+        }
+        //$query->addParam('sort', "ds_changed DESC");
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
