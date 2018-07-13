@@ -6993,6 +6993,7 @@ function search_data_rest($token) {
         $nid = $result->entity_id;
         $title = $result->label;
         $image_courtesy = FRONT_URL;
+        p($result);
 
         $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
         $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
@@ -7005,6 +7006,7 @@ function search_data_rest($token) {
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
+        
         if ($bundle == "breaking_news") {
                 $list[$loop_c]['n_type'] = "story";
                 $list[$loop_c]['n_is_blog'] = "1";
@@ -7094,6 +7096,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         if($device == "tv"){
             $query->addParam('fq', "bundle_name:Video");            
         }
+        $query->addParam('fq', "label:".$key."");
         //$query->addParam('sort', "ds_changed DESC");
         $resp = $query->search();
         if (!empty($resp->data)) {
@@ -7997,6 +8000,8 @@ function itg_rapid_api_breaking_news_tv() {
     }
     return $data; 
 }
+
+
  
  
 
