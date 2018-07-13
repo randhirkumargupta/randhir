@@ -1048,8 +1048,9 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 /* technology story Css */
 .story-section .story-right .stryimg .photoby .story-img-rating {background: #b00808;display: inline-block;vertical-align: top;
     padding: 5px 20px;font-size: 28px;font-weight: 700;color: #fff;line-height: 28px;}
-.quotes blockquote{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
 .quotes{float:none;margin:15px 0 15px 10%;border-left:5px solid #bb0a0a;padding:0 0 0 20px;}
+.quotes .quote-style{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
+.quotes .author {font-size: 12px;color: #828282; text-align: right;}
 @media all and (max-width:767px){.quotes{margin-left:0;float:none;width:100%;}}
 .itgimage{position:relative;}
 .tech-pros-cons-main h2{font-size:28px;line-height:35px;color:#fff;font-weight:700;padding:0 0 0 10px;float:left;width:100%;margin-bottom:10px;background:#000;border-bottom:2px solid #cccc;}
@@ -1199,7 +1200,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-left-section.story-update .story-left, .story-left-section.story-update .story-right{ float: none; width:100%;overflow: hidden; }
 .story-left-section.story-update .story-left{ margin-bottom: 15px; }
 .story-left-section.story-update .story-left .byline{ width:65%; float: left; text-align: left; }
-.story-left-section.story-update .story-left .share_bar{ width:35%; float: right; }
+.story-left-section.story-update .story-left .share_bar{ width:35%; float: right; padding:15px 0 10px }
 .story-left-section.story-update .story-left .byline .profile-pic, .story-left-section.story-update .story-left .byline .profile-detail{float: left;}
 }
 
