@@ -401,12 +401,9 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .story-left .briefcase{margin-top:50px;}
 .story-section .story-left .briefcase ul li{background:#f9f9f9;color:#575757;padding:12px 8px 20px;line-height:18px;}
 .story-section .story-left,.story-section .story-right{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
 }
@@ -732,6 +729,7 @@ section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:2
 .byline a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunB.gif) no-repeat 2px 2px;padding-left:38px;padding-top:10px;padding-bottom:7px;display:block;text-transform:uppercase;display:inline-block;}
 .tags ul li a[title='follow']{background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/followunS.gif) no-repeat 0 0px;width:19px;height:19px;display:inline-block;text-indent:-99999px;}
 .itgimage{position:relative;}
+.itgimage img{width: 100%;}
 .itgimage .body_caption{font-size:0.8125rem;padding:10px 0;border-bottom:1px solid #e5e5e5;color:#777;line-height:18px;font-family:"OpenSans-Semibold";}
 .adtext{font-size:11px;color:#5f5f5f;line-height:16px;text-align:center;text-transform:uppercase;}
 #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{display:none;}
@@ -865,7 +863,7 @@ footer .footer-top .footer-social-link{display:none;}
 .story-section .story-left .byline .profile-pic,.story-section .story-left .byline .profile-detail{float:none;}
 .story-section .story-left .byline .profile-pic img{width:60px;height:60px;}
 .story-section .story-left .byline .profile-detail{width:auto;margin:0; margin-left:15px;}
-.story-section .story-left .byline .profile-detail ul li{float:none;padding:5px 5px 5px 0;}
+.story-section .story-left .byline .profile-detail ul li{float:none;padding:3px 5px 3px 0;}
 .story-section .story-left .byline .profile-detail ul li + li{border-left:none;}
 .story-section .story-left .byline .profile-detail ul.date-update li{margin-bottom:0px;}
 .story-section .story-left .byline ul.social-links li{float:left;padding:10px 0;}
@@ -910,6 +908,7 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 }
 @media only screen and (max-width: 767px){
 #block-itg-layout-manager-header-block .navigation{width:85%;border-right:1px solid #ccc;background:#f9f9f9;box-shadow:0 3px 3px #ccc;height:calc(100vh - 60px);}
+.story-section .story-left .byline .profile-detail ul li{float:none;padding:3px 5px 3px 0;}
 }
 @media only screen and (max-width: 420px){
 #block-itg-layout-manager-header-block{padding-top:10px;background:#fff;}
@@ -926,6 +925,7 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 }
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
 #block-itg-layout-manager-header-block .navigation{display:block!important;}
+.story-section .story-left .byline .profile-detail ul li{float:none;padding:3px 5px 3px 0;}
 }
 /*! end @import */
 /*! @import https://akm-img-a-in.tosshub.com/sites/all/themes/itg/css/itgd-style.css?pbp9gg */
@@ -967,7 +967,6 @@ footer .footer-top .footer-social-link{display:none;opacity:0;}
 }
 .crody-news-content.cnwidget.cnvw{margin:0 auto;}
 @media only screen and (max-width: 768px){
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;border-right:0px;}
 .story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
@@ -988,7 +987,7 @@ section.sidebar .block-itg-ads > div{margin:auto;}
 .story-section .byline .profile-detail ul.date-update li + li{border-left:0px;}
 .story-section .byline .profile-detail ul.date-update li{width:100%;margin-bottom:4px;}
 .story-section .byline .profile-detail ul.date-update li.pubdata,.story-section .byline .profile-detail ul.date-update li.update-data{width:auto;}
-.story-section .byline .profile-detail ul.profile-byline li{float:none;display:inline-block;margin-bottom:0px; padding-right:3px;}
+.story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:0px; padding-right:3px;}
 .story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;}
 .story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
@@ -1059,7 +1058,7 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 .story-section .story-right .stryimg .photoby .story-img-rating {background: #b00808;display: inline-block;vertical-align: top;
     padding: 5px 20px;font-size: 28px;font-weight: 700;color: #fff;line-height: 28px;}
 .quotes{float:none;margin:15px 0 15px 10%;border-left:5px solid #bb0a0a;padding:0 0 0 20px;}
-.quotes .quote-style,.quotes .blockquote{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
+.quotes .quote-style,.quotes blockquote{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
 .quotes .author {font-size: 12px;color: #828282; text-align: right;}
 @media all and (max-width:767px){.quotes{margin-left:0;float:none;width:100%;}}
 .itgimage{position:relative;}
@@ -1183,7 +1182,6 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .slick-track:before,.slick-track:after{display:table;content:'';}
 .slick-track:after{clear:both;}
 .slick-slide img{display:block;}
-.story-section .story-right{padding:0 15px;}
 .story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
 .story-section .story-right .description p{padding:10px 0;}
 .story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{background:rgba(0,0,0,0.6);border:none;width:45px;height:66px;border-radius:0 7px 7px 0;color:#fff;position:absolute;top:138px;z-index:1;font-size:28px;text-align:center;line-height:70px;cursor:pointer;visibility:visible!important;}
