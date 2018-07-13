@@ -7094,7 +7094,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $key = preg_replace('/\s+/', ' OR ', $key);
         $solr = apachesolr_get_solr();
         $query = apachesolr_drupal_query("custom", array('q' => $key));
-        $query->setSolrsort('ds_changed', 'desc');
+        //$query->setSolrsort('ds_changed', 'desc');
         //$query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         $query->addParam('rows', '100'); 
@@ -7102,7 +7102,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
             $query->addParam('fq', "bundle_name:Video");            
         }
         //$query->addParam('fq', "label:".$key."");
-        //$query->addParam('sort', "ds_changed DESC");
+        $query->addParam('sort', "ds_changed:DESC");
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
