@@ -7017,7 +7017,7 @@ function search_data_rest($token) {
             $list[$loop_c]['n_is_program'] = "0";
             $program_section = 1206553;
         if (in_array($program_section, $tid_array)) {
-            $list[$loop_c]['n_is_program'] = "1";
+            $list[$loop_c]['n_is_program'] = "1"; 
         }
         $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
         $list[$loop_c]['n_is_sponsored'] = "0";
