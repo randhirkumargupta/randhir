@@ -12,7 +12,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
             <div class="conclave-event-details">
                 <div class="center-content">
                     <h3>THE ELECTION SHOWDOWN</h3>                    
-                    <h6>March 31, 2018 <span>Hotal Lalit Ashok, Bangaluru</span></h6>
+                    <h6>March 31, 2018 <span>Hotel Lalit Ashok, Bengaluru</span></h6>
                 </div>
             </div>            
         </div>
