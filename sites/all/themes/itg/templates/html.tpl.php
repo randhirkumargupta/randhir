@@ -938,13 +938,13 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before,.agbutton.story-like-dislike #name-dv #lky #sty-dv:before{content:'';height:21px;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/story-up-arrow-icon.png) no-repeat;position:absolute;left:12px;top:-21px;width:25px;}
 .story-section .story-right .stryimg img{width:100%;}
 .story-right .description > p:first-child:first-letter{font-size:55px;font-weight:bold;padding-right:5px;float:left;line-height:57px;}
-.story-section .story-right .description iframe.multy-video-iframe{width:100%;height:435px;}
+.story-section .story-right .description iframe.multy-video-iframe{width:100%;height:560px;}
 .story-section .description h3{text-transform:uppercase;font-family:OpenSans-Bold;margin:10px 0;line-height:28px;}
 .story-section .description h2,.story-section .description h4{font-size:25px;font-family:"Merriweather-Bold";line-height:34px;font-weight:700;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:after{content:'/';padding:0 3px;text-decoration:none;}
 #block-itg-layout-manager-front-end-breadcrumb .pathone a:hover{text-decoration:none;}
 @media screen and (max-width:1024px){
-.story-section .story-right .description iframe.multy-video-iframe{height:350px;}
+.story-section .story-right .description iframe.multy-video-iframe{height:445px;}
 }
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.multy-video-iframe{height:560px;}
@@ -1059,7 +1059,7 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 .story-section .story-right .stryimg .photoby .story-img-rating {background: #b00808;display: inline-block;vertical-align: top;
     padding: 5px 20px;font-size: 28px;font-weight: 700;color: #fff;line-height: 28px;}
 .quotes{float:none;margin:15px 0 15px 10%;border-left:5px solid #bb0a0a;padding:0 0 0 20px;}
-.quotes .quote-style{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
+.quotes .quote-style,.quotes .blockquote{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
 .quotes .author {font-size: 12px;color: #828282; text-align: right;}
 @media all and (max-width:767px){.quotes{margin-left:0;float:none;width:100%;}}
 .itgimage{position:relative;}
@@ -1132,6 +1132,24 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-photo-list-wrapper .story-photo-list-heading{display:block;}
 .story-photo-list-wrapper .story-photo-list-heading:before{top:0;bottom:0;margin:auto;}
 .story-photo-list-wrapper .story-photo-list-heading span{padding:20px 20px 20px 0;}
+
+.story-section .story-right .description .story-photo-list-wrapper{clear:both;}
+.story-photo-list-wrapper h3{text-transform:uppercase;font-weight:700;color:#bb0a0a;display:none;position:relative;font-family:"OpenSans-Bold";}
+.story-photo-list-wrapper h3 span{background:#fff;z-index:1;position:relative;padding:20px 20px 10px 10px;display:inline-block;}
+.story-photo-list-wrapper h3:before{content:'';position:absolute;left:0;width:100%;bottom:20px;height:5px;margin-top:-2px;background:#ddd;}
+.story-photo-list-wrapper .story-photo-list-heading{display:block;}
+.story-photo-list-wrapper .story-photo-list-heading:before{top:0;bottom:0;margin:auto;}
+.story-photo-list-wrapper .story-photo-list-heading span{padding:20px 20px 20px 0;}
+.story-photo-list-wrapper .story-photo-list-item p{line-height:18px;padding:5px 0;}
+.story-photo-list-wrapper .story-photo-list-item.slick-slide{padding:0 11px;width:192px;}
+.story-photo-list-wrapper .slick-arrow{position:absolute;z-index:999;border:none;background:none;top:45px;cursor:pointer;opacity:1;}
+.story-photo-list-wrapper .slick-arrow.slick-disabled{opacity:.3;}
+.story-photo-list-wrapper .slick-arrow .fa{font-size:42px;color:#000;}
+.story-photo-list-wrapper .slick-prev{left:-10px;}
+.story-photo-list-wrapper .slick-next{right:-10px;}
+.smp-date{font-size:12px;color:#b1b1b1;}
+.fa-angle-left:before{content:"\f104";}
+.fa-angle-right:before{content:"\f105";}
 
 /*story youtube video iframe*/
 .story-section .story-right .description iframe.story_video{width:100%;height:435px;}
