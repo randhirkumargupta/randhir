@@ -7101,8 +7101,9 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         if($device == "tv"){
             $query->addParam('fq', "bundle_name:Video");            
         }
+        $query->setSolrsort('ds_changed', 'DESC');
         //$query->addParam('fq', "label:".$key."");
-        $query->addParam('sort', "ds_changed:DESC");
+        //$query->addParam('sort', "ds_changed:DESC");
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
