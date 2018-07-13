@@ -267,7 +267,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $query->replaceParam("q", $search_string);
     if (!empty($arg[2])) {
       if ($arg[2] == 'All') {
-        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
+        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Category Management');
         $val_str1 = implode(' OR ', $bundle_name);
       } else if($arg[2] == 'Magazine') {
         $source_name = 'issue_based';
