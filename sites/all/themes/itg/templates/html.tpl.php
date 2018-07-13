@@ -1038,7 +1038,16 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 /* movie review Css */
 .story-section .story-movie .movie-rating{margin-top:20px;float:left;width:111px;height:60px;padding:20px 0;position:relative;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/rating-grey.png) 0 20px no-repeat;}
 .story-section .story-movie .movie-rating:after{content:'';position:absolute;left:0;top:0;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/rating-red.png) 0 20px no-repeat;height:60px;width:0;}
-.story-section .story-movie div[data-star-value="30%"]:after{width:30%;}
+.story-movie div[data-star-value="10%"]:after{width:10%}
+.story-section .story-movie div[data-star-value="20%"]:after{width:20%}
+.story-section .story-movie div[data-star-value="30%"]:after{width:30%}
+.story-section .story-movie div[data-star-value="40%"]:after{width:40%}
+.story-section .story-movie div[data-star-value="50%"]:after{width:50%}
+.story-section .story-movie div[data-star-value="60%"]:after{width:60%}
+.story-section .story-movie div[data-star-value="70%"]:after{width:70%}
+.story-section .story-movie div[data-star-value="80%"]:after{width:80%}
+.story-section .story-movie div[data-star-value="90%"]:after{width:90%}
+.story-section .story-movie div[data-star-value="100%"]:after{width:100%}
 .story-section .story-movie .movie-rating{float:none;padding-bottom:0;margin-top:0;}
 .story-section .story-movie .movie-detail div{font-family:"OpenSans-Regular";color:#000;zoom:1;}
 .story-section .story-movie .movie-detail div:before,.story-section .story-movie .movie-detail div:after{content:"";display:block;height:0;overflow:hidden;}
