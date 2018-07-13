@@ -64,13 +64,11 @@ function itg_search_data_rest_fun() {
     $data['updated_datetime'] = "";
     $data['news'] = $list;
     $data_json['data'] = $data;
-    print_r($data_json);
-    die('qwerty');
+    // print_r($data_json);
+    // die('qwerty');
 
-    echo $xml = generate_rss_feed_search_xml($result);
+    echo $xml = generate_rss_feed_search_xml($data_json['data']['news']);
     die;
-
-
 }
 /**
  * Callback for solr service.
@@ -110,32 +108,56 @@ function solr_search_custom_results_restapi_fun($key) {
  * @return string
  */
 function generate_rss_feed_search_xml($result = NULL) {
-  $xml = '';
+  $xml = '<title>
+<![CDATA[ India Today | The Big Story ]]>
+</title>
+<description>
+<![CDATA[ India Today ]]>
+</description>
+<link>
+<![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]>
+</link>
+<lastBuildDate>
+<![CDATA[ '.date("D, j M Y H:i:s").' GMT ]]>
+</lastBuildDate>
+<generator>
+<![CDATA[ FeedCreator 1.7.2 ]]>
+</generator>
+<image>
+<url>
+<![CDATA[
+https://www.indiatoday.in/sites/all/themes/itg/logo.png
+]]>
+</url>
+<title>
+<![CDATA[ India Today | The Big Story ]]>
+</title>
+<link>
+<![CDATA[
+https://www.indiatoday.in/the-big-story?utm_source=rss
+]]>
+</link>
+<description>
+<![CDATA[ India Today ]]>
+</description>
+</image>';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<Data>';
-    // foreach ($result as $key => $value) {
-    //   if (is_lock_story($value['nid'])) {
-    //     continue;
-    //   }
-    //   $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
-    //   $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
-    //   $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
-    //   $body = remove_extra_tag_in_body($value["body_value"]);
-    //   $body = itg_replace_token_with_data($body, $value['nid']);
-    //   $body = itg_remove_extra_custom_tags($body);
-    //   $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
-    //   $xml .= '<item>';
-    //   $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-    //   $xml .= '<link><![CDATA[' . $url . ']]></link>';
-    //   $xml .= '<pubdate><![CDATA[' . $publish_date . ' +0000 ]]></pubdate>';
-    //   $xml .= '<image>' . $medium_img['imag_url'] . '</image>';
-    //   $xml .= '<youtubeEmbedURL></youtubeEmbedURL>';
-    //   $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
-    //   $xml .= '<content><![CDATA[' . $body . ']]></content>';
-    //   $xml .= '</item>';
-    // }
-    $xml .= '</Data>';
+    $xml = '<channel>';
+    foreach ($result as $key => $value) {
+      $publish_date = date("D, j M Y H:i:s", strtotime($value['n_updated_datetime']));
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['n_id']);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $xml .= '<item>';
+      $xml .= '<title><![CDATA[' . $value['n_title'] . ']]></title>';
+      $xml .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
+      $xml .= '<description><![CDATA[<a href="'.$url.'"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="'.$value['n_small_image'].'"></a>'.$value['n_short_desc'].']]></description>';
+      $xml .= '<pubDate><![CDATA[' . $publish_date . ']]></pubDate>';
+      $xml .= '</item>';
+    }
+    $xml .= '</channel>';
   }
   return $xml;
 }
+
+
