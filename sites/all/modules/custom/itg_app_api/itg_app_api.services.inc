@@ -7084,6 +7084,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $subquery_test->addParam('rows', '100');
         $query->addFilterSubQuery($subquery_test, 'OR', 'AND'); */   
         $device = strtolower($_GET['device']);
+        echo $device; p($_GET);
         $key = preg_replace('/\s+/', ' OR ', $key);
         $solr = apachesolr_get_solr();
         $query = apachesolr_drupal_query("custom", array('q' => $key));
