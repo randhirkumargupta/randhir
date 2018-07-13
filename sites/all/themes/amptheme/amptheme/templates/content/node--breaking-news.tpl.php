@@ -17,7 +17,7 @@ $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 
 <?php
 // code for schema header script
-if ($node->field_type['und']['0']['value'] == 'Live Blog') {
+if ($node->field_type['und']['0']['value'] == 'Live Blog' || $node->field_type['und']['0']['value'] == 'Cricket Live Blog') {
   $embed_path = $base_url . '/' . drupal_get_path_alias('node/' . $node->nid);
   $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
   if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
@@ -57,9 +57,11 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
       <meta itemprop="coverageEndTime" content="<?php print $coverage_end_final_date; ?>">
       <meta itemprop="url" content="<?php print $embed_path; ?>">
       <meta itemprop="description" content="<?php print $short_description_source; ?>">
-      <div class="bolg-content" id="bolgcontent">    
+      <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
+      <div class="bolg-content" id="bolgcontent">
+	  <?php endif;?>    
           <?php
-          if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
+          if ($node->field_type['und']['0']['value'] == 'Live Blog' && !empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
 			$collection_ids = array();
             foreach ($node->field_breaking_content_details['und'] as $blog_item) {
               $collection_ids[] = $blog_item['value'];
@@ -98,9 +100,37 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
 
 
 
-    <?php }
-  } ?> 
-      </div> </div>
+<?php } } ?> 
+<?php if ($node->field_type['und']['0']['value'] == 'Cricket Live Blog'){
+        $created_date = date('Y-m-d\TH:i:s', $node->created);
+        $modify_date = date('Y-m-d\TH:i:s', $node->changed); 
+        $created_date = $created_date.'+05:30';
+		$modify_date = $modify_date.'+05:30';
+        ?>
+        <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
+          <p itemprop="headline" content="<?php print $node->title; ?>"></p>
+          <h2 itemprop="articleBody" style="display:none"></h2>
+          <meta itemprop="datePublished" content="<?php print $created_date;?>">
+          <meta itemprop="author" content="IndiaToday.in">
+          <meta itemprop="dateModified" content="<?php print $modify_date;?>">
+          <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+              <meta itemprop="url" content="<?php print $embed_image; ?>">
+              <meta itemprop="width" content="650">
+              <meta itemprop="height" content="450">
+          </span>
+          <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
+              <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                  <meta itemprop="url" content="<?php print $embed_logo; ?>">
+              </span>
+              <meta itemprop="name" content="India Today">
+          </span>
+          <meta itemprop="mainEntityOfPage" content="<?php print $embed_path; ?>">
+      </div>
+ <?php } ?>
+</div> 
+<?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
+</div>
+<?php endif;?>
 <?php } ?>
 
 <div class="live-block">
@@ -270,6 +300,29 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
               print $breaking_output;
             }
           }
+          else if($type == 'Cricket Live Blog'){ 
+			    $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+				if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+					$title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
+				}
+				else {
+					$title = '<h1>' . $node->title . '</h1>';
+				}
+				print $title;
+			  ?>
+			  <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+			  <div class="stryimg" id="cricketblog" >
+			  <amp-img width="647" height="363" layout="responsive" alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>"></amp-img>
+			  <div class="bolg-content" id="bolgcontent">
+			  <amp-live-list layout="container" data-poll-interval="15000" data-max-items-per-page="1000" id="amp-live-list-insert-blog">
+				<button update on="tap:amp-live-list-insert-blog.update" class="ampstart-btn ml1 caps"><i class="fa fa-repeat" aria-hidden="true"></i> New Updates</button>
+				<div items>
+					<?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 0, 'amp'); ?>
+				</div>
+			  </amp-live-list>
+			  </div>
+			  </div>
+		 <?php }
         endif;
         ?>
     </div>
