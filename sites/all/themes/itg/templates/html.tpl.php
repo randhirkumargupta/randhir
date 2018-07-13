@@ -403,7 +403,8 @@ section.sidebar{border:1px solid #ddd;width:100%;max-width:370px;}
 .story-section .story-left,.story-section .story-right{padding:0;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
-.story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;}
+.story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;}
+.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd; padding-left:3px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0;}
 }
@@ -967,8 +968,8 @@ footer .footer-top .footer-social-link{display:none;opacity:0;}
 .crody-news-content.cnwidget.cnvw{margin:0 auto;}
 @media only screen and (max-width: 768px){
 .story-section .byline .profile-detail ul.profile-byline li {float: none;display: block;padding:3px 5px 3px;} 
-.story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;border-right:0px;}
-.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;}
+.story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;border-right:0px;}
+.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;padding-left:3px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 }
@@ -988,8 +989,8 @@ section.sidebar .block-itg-ads > div{margin:auto;}
 .story-section .byline .profile-detail ul.date-update li{width:100%;margin-bottom:4px;}
 .story-section .byline .profile-detail ul.date-update li.pubdata,.story-section .byline .profile-detail ul.date-update li.update-data{width:auto;}
 .story-section .byline .profile-detail ul.profile-byline li{float:none;display:block;margin-bottom:0px; padding-right:3px;}
-.story-section .byline .profile-detail ul.profile-byline li.title{display:block;line-height:15px;}
-.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;}
+.story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;}
+.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;padding-left:3px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 }
