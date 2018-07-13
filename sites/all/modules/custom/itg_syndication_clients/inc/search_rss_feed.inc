@@ -61,19 +61,20 @@ function itg_search_data_rest_fun() {
     date_default_timezone_set("GMT");
     $todat_date = date("D, d M Y H:i:s e");
     $output = '';
-    $output .= get_rss_feed_header();
-    $output .= '<title><![CDATA[ India Today | Searh Rss Page ]]></title><description><![CDATA[ India Today ]]></description><link>
-      <![CDATA[ '.FRONT_URL.'/?utm_source=rss ]]>
-      </link><lastBuildDate><![CDATA[ '.$todat_date.' ]]>
-      </lastBuildDate><generator><![CDATA[ FeedCreator 1.7.2 ]]>
-      </generator><image><url><![CDATA[
-      '.FRONT_URL.'/sites/all/themes/itg/logo.png
-      ]]></url><title><![CDATA[ India Today | Searh Rss Page ]]>
-      </title><link><![CDATA[
-      '.FRONT_URL.'/search-rss-feed?utm_source=rss
-      ]]></link><description><![CDATA[ India Today ]]></description></image>';
-    $output .= generate_rss_feed_search_xml($data_json['data']['news']);
-    $output .= get_rss_feed_footer();
+    if(!empty($data_json['data']['news'])){
+      $output .= get_rss_feed_header();
+      $output .= '<title><![CDATA[ India Today | Searh Rss Page ]]></title><description><![CDATA[ India Today ]]></description><link>
+        <![CDATA[ '.FRONT_URL.'/?utm_source=rss ]]>
+        </link><lastBuildDate><![CDATA[ '.$todat_date.' ]]></lastBuildDate><generator><![CDATA[ FeedCreator 1.7.2 ]]>
+        </generator><image><url><![CDATA[
+        '.FRONT_URL.'/sites/all/themes/itg/logo.png
+        ]]></url><title><![CDATA[ India Today | Searh Rss Page ]]>
+        </title><link><![CDATA[
+        '.FRONT_URL.'/search-rss-feed?utm_source=rss
+        ]]></link><description><![CDATA[ India Today ]]></description></image>';
+      $output .= generate_rss_feed_search_xml($data_json['data']['news']);
+      $output .= get_rss_feed_footer();
+    }
     header('Content-Type: application/xml; charset=utf-8');
     print $output;
     drupal_exit();
