@@ -7090,6 +7090,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $subquery_test->addParam('sort', "ds_changed DESC");   
         $subquery_test->addParam('rows', '100');
         $query->addFilterSubQuery($subquery_test, 'OR', 'AND'); */   
+        $solr = apachesolr_get_solr();
         $device = strtolower($_GET['device']);        
         $key = preg_replace('/\s+/', ' OR ', $key);
         $solr = apachesolr_get_solr();
@@ -7101,7 +7102,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         if($device == "tv"){
             $query->addParam('fq', "bundle_name:Video");            
         }
-        $query->addParam('sort', "ds_created DESC");   
+        $query->addParam('sort', "ds_changed DESC");    
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
