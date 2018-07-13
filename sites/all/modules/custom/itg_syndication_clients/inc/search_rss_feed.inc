@@ -61,7 +61,7 @@ function itg_search_data_rest_fun() {
     date_default_timezone_set("GMT");
     $todat_date = date("D, d M Y H:i:s e");
     $output = '';
-    //if(!empty($data_json['data']['news'])){
+    if(!empty($data_json['data']['news'])){
       $output .= get_rss_feed_header();
       $output .= '<title><![CDATA[ India Today | Searh Rss Page ]]></title><description><![CDATA[ India Today ]]></description><link>
         <![CDATA[ '.FRONT_URL.'/?utm_source=rss ]]>
@@ -74,7 +74,7 @@ function itg_search_data_rest_fun() {
         ]]></link><description><![CDATA[ India Today ]]></description></image>';
       $output .= generate_rss_feed_search_xml($data_json['data']['news']);
       $output .= get_rss_feed_footer();
-    //}
+    }
     header('Content-Type: application/xml; charset=utf-8');
     print $output;
     drupal_exit();
