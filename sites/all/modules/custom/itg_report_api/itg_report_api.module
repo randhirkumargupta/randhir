@@ -336,11 +336,12 @@ function api_anchorlist_callback(){
     $jsondata = drupal_json_encode($data);
     //file write code
     $file_name = "api-anchorlist.json";
-    $json_path = 'public://indiatoday/anchor-chat/';
-    $file_path = $json_path . $file_name;
-    $fp = fopen($file_path, "w");
-    fwrite($fp, $jsondata);
-    fclose($fp);
+    $json_path = 'public://indiatoday/anchor-chat';
+    //$file_path = $json_path . $file_name;
+    //$fp = fopen($file_path, "w");
+    //fwrite($fp, $jsondata);
+    //fclose($fp);
+    writeFeedFile($json_path, $file_name, $jsondata)
     print $jsondata;
     die();
 }
