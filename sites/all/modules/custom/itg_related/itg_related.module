@@ -283,7 +283,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       }
       $query->replaceParam("fq", '(' . $str . ')');
     } else {
-      $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Category Management');
+      $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
       $def_bun = implode(' OR ', $bundle_name);
       $str = 'bundle_name:(' . $def_bun . ')';
       $query->replaceParam("fq", '(' . $str . ')');
