@@ -108,7 +108,10 @@ function solr_search_custom_results_restapi_fun($key) {
  * @return string
  */
 function generate_rss_feed_search_xml($result = NULL) {
-  $xml = '<title>
+  $xml = '';
+  if (!empty($result)) {
+    global $base_url;
+    $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>
 <![CDATA[ India Today | The Big Story ]]>
 </title>
 <description>
@@ -141,9 +144,6 @@ https://www.indiatoday.in/the-big-story?utm_source=rss
 <![CDATA[ India Today ]]>
 </description>
 </image>';
-  if (!empty($result)) {
-    global $base_url;
-    $xml = '<channel>';
     foreach ($result as $key => $value) {
       $publish_date = date("D, j M Y H:i:s", strtotime($value['n_updated_datetime']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['n_id']);
@@ -155,7 +155,7 @@ https://www.indiatoday.in/the-big-story?utm_source=rss
       $xml .= '<pubDate><![CDATA[' . $publish_date . ']]></pubDate>';
       $xml .= '</item>';
     }
-    $xml .= '</channel>';
+    $xml .= '</channel></rss>';
   }
   return $xml;
 }
