@@ -6993,7 +6993,7 @@ function search_data_rest($token) {
         $nid = $result->entity_id;
         $title = $result->label;
         $image_courtesy = FRONT_URL;
-        p($result);
+        $tid_array = $result->tid;
 
         $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
         $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
@@ -7014,7 +7014,12 @@ function search_data_rest($token) {
                 $list[$loop_c]['n_type'] = "$bundle";
                 $list[$loop_c]['n_is_blog'] = "0";
             }
-            $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
+            $list[$loop_c]['n_is_program'] = "0";
+            $program_section = 1206553;
+        if (in_array($program_section, $tid_array)) {
+            $list[$loop_c]['n_is_program'] = "1";
+        }
+        $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
         $list[$loop_c]['n_is_sponsored'] = "0";
         $list[$loop_c]['n_share_link'] = "$url";
         $list[$loop_c]['n_title'] = "$title";
