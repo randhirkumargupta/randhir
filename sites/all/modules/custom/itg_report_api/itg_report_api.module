@@ -323,7 +323,7 @@ function api_anchorlist_callback(){
         $active = $resvalue['field_is_election_live_value'];
         $file_img_url = completeFilePath($image_fid);
         $body_value = badUnicodeparse_report_module($body_value);
-        
+        $anchor[$loop_c]['id'] = "$nid";
         $anchor[$loop_c]['Title'] = "$title";
         $anchor[$loop_c]['Description'] = "$body_value";
         $anchor[$loop_c]['Image'] = "$file_img_url";
@@ -336,6 +336,11 @@ function api_anchorlist_callback(){
     $anchor_data['anchor'] = $anchor;
     $data['anchorlist'] = $anchor_data;
     $jsondata = drupal_json_encode($data);
+    $str_data = (string) $jsondata; 
+    //file write code
+    $file_name = "api-anchorchat.json";
+    $json_path = 'public://indiatoday/anchor-chat';    
+    writeFeedFile($json_path, $file_name, $str_data);
     print $jsondata;
     die();
 }
