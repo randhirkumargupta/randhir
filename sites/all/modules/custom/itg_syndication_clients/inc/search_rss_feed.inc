@@ -63,15 +63,7 @@ function itg_search_data_rest_fun() {
     $output = '';
     if(!empty($data_json['data']['news'])){
       $output .= get_rss_feed_header();
-      $output .= '<title><![CDATA[ India Today | Searh Rss Page ]]></title><description><![CDATA[ India Today ]]></description><link>
-        <![CDATA[ '.FRONT_URL.'/?utm_source=rss ]]>
-        </link><lastBuildDate><![CDATA[ '.$todat_date.' ]]></lastBuildDate><generator><![CDATA[ FeedCreator 1.7.2 ]]>
-        </generator><image><url><![CDATA[
-        '.FRONT_URL.'/sites/all/themes/itg/logo.png
-        ]]></url><title><![CDATA[ India Today | Searh Rss Page ]]>
-        </title><link><![CDATA[
-        '.FRONT_URL.'/search-rss-feed?utm_source=rss
-        ]]></link><description><![CDATA[ India Today ]]></description></image>';
+      $output .= "<title><![CDATA[India Today | RSS Search Page]]></title><description>India Today</description><link><![CDATA[" . FRONT_URL . "]]></link><lastBuildDate>" . $todat_date . "</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>" . FRONT_URL . "/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | RSS Search Page]]></title><link><![CDATA[" . FRONT_URL . "/search-rss-feed]]></link><description>India Today</description></image>";
       $output .= generate_rss_feed_search_xml($data_json['data']['news']);
       $output .= get_rss_feed_footer();
     }
