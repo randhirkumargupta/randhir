@@ -7081,7 +7081,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $subquery_test->addParam('fl', 'label');        
         $subquery_test->addFilter("label", $key);
         $subquery_test->addParam('sort', "ds_changed DESC");   
-        $query->addParam('rows', '100');
+        $subquery_test->addParam('rows', '100');
         $query->addFilterSubQuery($subquery_test, 'OR', 'AND');        
         $resp = $query->search();
         if (!empty($resp->data)) {
