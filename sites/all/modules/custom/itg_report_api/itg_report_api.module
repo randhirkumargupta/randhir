@@ -336,7 +336,7 @@ function api_anchorlist_callback(){
     $jsondata = drupal_json_encode($data);
     if ($jsondata) {
     $feed_file_path = "public://indiatoday/anchor-chat";
-    $feed_file_name = "api-anchorlist.xml";
+    $feed_file_name = "api-anchorlist.json";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
     print $jsondata;
