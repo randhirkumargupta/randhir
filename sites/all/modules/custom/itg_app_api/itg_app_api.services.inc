@@ -7056,11 +7056,16 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
   'rows' => 100,
   'start' => 0,
   //'fl' => array('id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php')
-);
+);*/
     
-    //$view_args[] = $key;
+    $view_args[] = array();
+    $view_args['keyword'] = $key;
+    $view_args['hash'] = "";
+    $view_args['bundle_name'] = "";
+    $view_args['sm_field_itg_common_by_line_name'] = "";
+    $view_args['tm_vid_14_names'] = "";
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
-     p($ao_results);*/
+     p($ao_results);
 
     $link_ar = array();
     $nid_ar = array();
@@ -7072,8 +7077,8 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         $solr = apachesolr_get_solr();
         $query = apachesolr_drupal_query("custom", array('q' => $key));
         $query->setSolrsort('ds_changed', 'desc');
-        //$query->removeFilter('bundle_name');
-        //$query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->removeFilter('bundle_name');
+        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
         $query->addParam('rows', '100');
         //$query->addParam('fq', "bundle_name:Video");
         //$query->addParam('sort', "ds_changed DESC");
