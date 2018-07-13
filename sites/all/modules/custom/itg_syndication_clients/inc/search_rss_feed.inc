@@ -58,7 +58,7 @@ function itg_search_data_rest_fun() {
     $data['search_title'] = "$key_title";
     $data['news'] = $list;
     $data_json['data'] = $data;
-    print $xml = generate_rss_feed_search_xml($data_json['data']['news']);
+    return $xml = generate_rss_feed_search_xml($data_json['data']['news']);
 }
 
 /**
