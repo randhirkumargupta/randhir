@@ -1142,10 +1142,67 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .listicle-page .listicle-detail>span{width:24px;height:24px;margin-top:14px;line-height:24px;font-size:16px;}
 .story-section .listicle-page .listicle-detail .listicle-description{width:91%;padding:10px;}
 }
+/* story photo slider */
+
+@media only screen and (min-width: 769px){
+.story-section.photo-story-section .story-right{width:77%;}
+}
+
+.fa-chevron-left:before{content:"\f053";}
+.fa-chevron-right:before{content:"\f054";}
+.slick-slider{position:relative;display:block;box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-khtml-user-select:none;-ms-touch-action:pan-y;touch-action:pan-y;-webkit-tap-highlight-color:transparent;}
+.slick-list{position:relative;display:block;overflow:hidden;margin:0;padding:0;}
+.slick-list:focus{outline:none;}
+.slick-slider .slick-track,.slick-slider .slick-list{-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0);}
+.slick-track{position:relative;top:0;left:0;display:block;}
+.slick-track:before,.slick-track:after{display:table;content:'';}
+.slick-track:after{clear:both;}
+.slick-slide{display:none;float:left;height:100%;min-height:1px;}
+.slick-slide img{display:block;}
+.slick-initialized .slick-slide{display:block;}
+.story-section .story-right{padding:0 15px;}
+.story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
+.story-section .story-right .description p{padding:10px 0;}
+.story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{background:rgba(0,0,0,0.6);border:none;width:45px;height:66px;border-radius:0 7px 7px 0;color:#fff;position:absolute;top:138px;z-index:1;font-size:28px;text-align:center;line-height:70px;cursor:pointer;visibility:visible!important;}
+.story-section .story-right.photo-story .fa-chevron-left{left:0;}
+.story-section .story-right.photo-story .fa-chevron-right{right:0;border-radius:7px 0px 0px 7px;}
+.story-section .story-right.photo-story .multiple-photo{padding:0 70px;}
+.story-section .story-right.photo-story .multiple-photo .photo-slider{padding:0 5px;cursor:pointer;height:auto;}
+.story-section .story-right.photo-story .multiple-photo .slick-prev,.story-section .story-right.photo-story .multiple-photo .slick-next{background:transparent;border:none;position:absolute;top:50%;z-index:1;left:0;margin-top:-7px;font-family:"OpenSans-Regular";font-size:12px;color:#959595;text-transform:uppercase;cursor:pointer;}
+.story-section .story-right.photo-story .multiple-photo .slick-next{left:auto;right:0;}
+.story-section .story-right.photo-story .multiple-photo .img-wrapper{display:inline-block;vertical-align:top;position:relative;border:1px solid transparent;}
+.story-section .story-right.photo-story .multiple-photo .img-wrapper .photo-count{font-style:normal;position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.5);color:#fff;text-align:center;line-height:64px;}
+.story-section .story-right.photo-story .multiple-photo .slick-current .photo-count{background-color:rgba(0,0,0,0.2);}
+.story-section .story-right.photo-story .multiple-photo .slick-current .img-wrapper{border:1px solid #ffc106;}
+.story-section .story-right.photo-story .photo-slider .image-caption{position:relative;}
+.story-section .story-right.photo-story .photo-slider .image-caption .photo-caption{position:absolute;bottom:0;left:0;width:100%;padding:5px 10px;background-color:#222;color:#a1a1a1;font-size:13px;font-family:"OpenSans-Regular";}
+.story-section .story-right.photo-story .photo-slider .photo-description{padding:10px 0;border-bottom:1px solid #ddd;font-family:"OpenSans-Regular";font-size:13px;color:#8d8d8d;font-weight:300;}
+.story-section .story-right.photo-story .photo-slider .photo-description+.description{margin-top:0;padding-top:0;}
+.story-section.photo-story-section .story-right{box-shadow:0px 0 10px #ddd;margin:5px;margin-top:0;padding:10px;}
+.story-section .story-right .description iframe{max-width:100%;}
+.photo-story .slick-slider{webkit-user-select:auto;-moz-user-select:auto;-ms-user-select:auto;user-select:auto!important;}
+.multiple-photo-disc .prev-story-link{display:none;}
+.multiple-photo-disc .fa-chevron-left.slick-disabled{display:none!important;}
+.multiple-photo-disc .fa-chevron-left.slick-disabled+div .prev-story-link{display:block;}
+.multiple-photo-disc .fa-chevron-left.slick-disabled+div .prev-story-link{display:block;}
+
+@media only screen and (max-width:768px){
+.story-section .story-right{padding:0;}
+}
+@media only screen and (max-width:480px){
+.story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{width:25px;height:35px;top:55px;font-size:18px;line-height:37px;}
+.story-section .story-right.photo-story .multiple-photo{padding:0;}
+.story-section .story-right.photo-story .multiple-photo .slick-next,.story-section .story-right.photo-story .multiple-photo .slick-prev{display:none;}
+}
+@media only screen and (max-width:340px){
+.story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{width:25px;height:35px;top:40px;font-size:18px;line-height:37px;}
+}
+
+
 /* new story design Css */
 .story-section .story-left-section .story-kicker{font-size:16px; line-height:22px; margin-bottom:20px;}
 @media only screen and (min-width: 769px){
-.story-left-section.story-update .story-left, .story-left-section.story-update .story-right{ float: none; width:100%; }
+.story-left-section.story-update .story-left, .story-left-section.story-update .story-right{ float: none; width:100%;overflow: hidden; }
 .story-left-section.story-update .story-left{ margin-bottom: 15px; }
 .story-left-section.story-update .story-left .byline{ width:65%; float: left; text-align: left; }
 .story-left-section.story-update .story-left .share_bar{ width:35%; float: right; }
