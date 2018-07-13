@@ -50,26 +50,17 @@ function itg_search_data_rest_fun() {
       }
     }
     $data_json['status_code'] = "1";
-    $data_json['status_message'] = "";
+    $data_json['status_message'] = "Data exist!";
     if ($loop_c == 0) {
         $data_json['status_code'] = "0";
-        $data_json['status_message'] = "";
+        $data_json['status_message'] = "Empty Data!";
     }
-    $data['id'] = "0";
     $data['search_title'] = "$key_title";
-    $data['layout_id'] = "0";
-    $data['news_count'] = "$loop_c";
-    $data['news_display_count'] = "100";
-    $data['news_pagination_cap'] = "50";
-    $data['updated_datetime'] = "";
     $data['news'] = $list;
     $data_json['data'] = $data;
-    // print_r($data_json);
-    // die('qwerty');
-
-    echo $xml = generate_rss_feed_search_xml($data_json['data']['news']);
-    die;
+    print $xml = generate_rss_feed_search_xml($data_json['data']['news']);
 }
+
 /**
  * Callback for solr service.
  */
@@ -112,38 +103,38 @@ function generate_rss_feed_search_xml($result = NULL) {
   if (!empty($result)) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>
-<![CDATA[ India Today | The Big Story ]]>
-</title>
-<description>
-<![CDATA[ India Today ]]>
-</description>
-<link>
-<![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]>
-</link>
-<lastBuildDate>
-<![CDATA[ '.date("D, j M Y H:i:s").' GMT ]]>
-</lastBuildDate>
-<generator>
-<![CDATA[ FeedCreator 1.7.2 ]]>
-</generator>
-<image>
-<url>
-<![CDATA[
-https://www.indiatoday.in/sites/all/themes/itg/logo.png
-]]>
-</url>
-<title>
-<![CDATA[ India Today | The Big Story ]]>
-</title>
-<link>
-<![CDATA[
-https://www.indiatoday.in/the-big-story?utm_source=rss
-]]>
-</link>
-<description>
-<![CDATA[ India Today ]]>
-</description>
-</image>';
+      <![CDATA[ India Today | The Big Story ]]>
+      </title>
+      <description>
+      <![CDATA[ India Today ]]>
+      </description>
+      <link>
+      <![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]>
+      </link>
+      <lastBuildDate>
+      <![CDATA[ '.date("D, j M Y H:i:s").' GMT ]]>
+      </lastBuildDate>
+      <generator>
+      <![CDATA[ FeedCreator 1.7.2 ]]>
+      </generator>
+      <image>
+      <url>
+      <![CDATA[
+      https://www.indiatoday.in/sites/all/themes/itg/logo.png
+      ]]>
+      </url>
+      <title>
+      <![CDATA[ India Today | The Big Story ]]>
+      </title>
+      <link>
+      <![CDATA[
+      https://www.indiatoday.in/the-big-story?utm_source=rss
+      ]]>
+      </link>
+      <description>
+      <![CDATA[ India Today ]]>
+      </description>
+      </image>';
     foreach ($result as $key => $value) {
       $publish_date = date("D, j M Y H:i:s", strtotime($value['n_updated_datetime']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['n_id']);
@@ -152,7 +143,7 @@ https://www.indiatoday.in/the-big-story?utm_source=rss
       $xml .= '<title><![CDATA[' . $value['n_title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
       $xml .= '<description><![CDATA[<a href="'.$url.'"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="'.$value['n_small_image'].'"></a>'.$value['n_short_desc'].']]></description>';
-      $xml .= '<pubDate><![CDATA[' . $publish_date . ']]></pubDate>';
+      $xml .= '<pubDate><![CDATA[' . $publish_date . ' GMT ]]></pubDate>';
       $xml .= '</item>';
     }
     $xml .= '</channel></rss>';
