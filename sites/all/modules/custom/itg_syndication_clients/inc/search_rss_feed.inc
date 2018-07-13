@@ -58,7 +58,16 @@ function itg_search_data_rest_fun() {
     $data['search_title'] = "$key_title";
     $data['news'] = $list;
     $data_json['data'] = $data;
-    return $xml = generate_rss_feed_search_xml($data_json['data']['news']);
+    $output = '';
+    if(!empty($data_json['data']['news'])){
+      $output .= get_rss_feed_header();
+      $output .= get_rss_feed_sub_header_anchors();
+      $output .= generate_rss_feed_search_xml($data_json['data']['news']);
+      $output .= get_rss_feed_footer();
+    }
+    header('Content-Type: application/xml; charset=utf-8');
+    print $output;
+    drupal_exit();
 }
 
 /**
@@ -102,16 +111,6 @@ function generate_rss_feed_search_xml($result = NULL) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[ India Today | The Big Story ]]></title><description><![CDATA[ India Today ]]></description><link>
-      <![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]>
-      </link><lastBuildDate><![CDATA[ '.date("D, j M Y H:i:s").' GMT ]]>
-      </lastBuildDate><generator><![CDATA[ FeedCreator 1.7.2 ]]>
-      </generator><image><url><![CDATA[
-      https://www.indiatoday.in/sites/all/themes/itg/logo.png
-      ]]></url><title><![CDATA[ India Today | The Big Story ]]>
-      </title><link><![CDATA[
-      https://www.indiatoday.in/the-big-story?utm_source=rss
-      ]]></link><description><![CDATA[ India Today ]]></description></image>';
     foreach ($result as $key => $value) {
       $publish_date = date("D, j M Y H:i:s", strtotime($value['n_updated_datetime']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['n_id']);
@@ -123,7 +122,6 @@ function generate_rss_feed_search_xml($result = NULL) {
       $xml .= '<pubDate><![CDATA[' . $publish_date . ' GMT ]]></pubDate>';
       $xml .= '</item>';
     }
-    $xml .= '</channel></rss>';
   }
   return $xml;
 }
