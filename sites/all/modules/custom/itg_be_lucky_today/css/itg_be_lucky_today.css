@@ -45,7 +45,7 @@ and open the template in the editor.
 .itg_be_lucky_today fieldset.form-wrapper{ border:0px; margin-bottom:40px; }
 .itg_be_lucky_today .ball{ margin-bottom:40px; }
 
-.page-be-lucky-today a.seebtn,.page-be-lucky-today input[type="submit"]{border:0; cursor:pointer; background-color:#bc020a;  padding:15px 20px; font:400 22px 'Roboto',Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; display:table; border-radius:10px; text-align:center; margin:10px auto 40px;}
+.page-be-lucky-today a.seebtn,.page-be-lucky-today input[type="submit"]{border:0; cursor:pointer; background-color:#bc020a;  padding:15px 20px; font:400 22px 'Roboto',Arial, Helvetica, sans-serif; color:#fff; text-decoration:none; display:table; border-radius:10px; text-align:center; margin:20px auto 40px;}
 .page-be-lucky-today input[type="submit"]{min-height:40px; padding:0 37px; line-height:42px; border-radius:5px;}
 
 
@@ -303,9 +303,10 @@ select, input[type="password"]{ width:100px;}
 }
 .itg_be_lucky_today.registration1, .itg_be_lucky_today.registration2{min-height: 537px;}
 div.ctools-modal-content a.close img{top: 4px; margin:0 0 0 10px; }
-#modalContent{z-index: 9999999}
+#modalContent{z-index: 9999999 !important;}
 @media screen and (max-width: 768px){
 .registration1 form:after, .registration2 form:after, .subscribe form:after{position: static; top: 0; left: 0; content: inherit; display: none;}
 .registration1 form:before, .registration2 form:before, .subscribe form:before{position: static; top: 0; left: 0; content: inherit; display: none;}
 .magazine.form-submit{margin-top: 20px;}
+.form-item.form-type-textfield{width:70%;}
 }
