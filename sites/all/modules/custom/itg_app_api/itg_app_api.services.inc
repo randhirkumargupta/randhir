@@ -6981,8 +6981,7 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function search_data_rest($token) {
-    echo $key_title = $_GET['key'];
-    die;
+    $key_title = $_GET['key'];
     $nid_ar = array();
     $searchpage = solr_search_custom_results_restapi($key_title);
     //p($searchpage);
@@ -7054,9 +7053,6 @@ function search_data_rest($token) {
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
 
-    return 'qwerty';
-    die;
-
     /*
     $view_args = array();
    $view_args = array (
@@ -7085,7 +7081,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
 
     try {
         $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("custom", array('q' => $key));
+        $query = apachesolr_drupal_query("custom");
         $limit = 100;
         $query->addParam('rows', $limit);
         $device = strtolower($_GET['device']);
@@ -7094,7 +7090,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         }
         //$query->setSolrsort('ds_changed', 'desc');
         $query->addParam('sort', "ds_changed DESC");
-        $resp = $query->search();
+        $resp = $query->search($key);
         //$resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
