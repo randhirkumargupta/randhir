@@ -7081,7 +7081,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
 
     try {
         $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("apachesolr");
+        $query = apachesolr_drupal_query("custom");
         $limit = 100;
         $query->addParam('rows', $limit);
         $device = strtolower($_GET['device']);
