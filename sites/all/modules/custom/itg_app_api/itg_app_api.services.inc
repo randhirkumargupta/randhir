@@ -6981,7 +6981,8 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function search_data_rest($token) {
-    $key_title = $_GET['key'];
+    echo $key_title = $_GET['key'];
+    die;
     $nid_ar = array();
     $searchpage = solr_search_custom_results_restapi($key_title);
     //p($searchpage);
