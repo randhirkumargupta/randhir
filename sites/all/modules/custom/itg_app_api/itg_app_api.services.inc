@@ -7053,6 +7053,9 @@ function search_data_rest($token) {
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
 
+    return 'qwerty';
+    die;
+
     /*
     $view_args = array();
    $view_args = array (
