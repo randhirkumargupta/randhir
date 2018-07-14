@@ -116,7 +116,7 @@ function generate_rss_feed_search_xml($result = NULL) {
     foreach ($result as $key => $value) {
       $publish_date = date("D, j M Y H:i:s", strtotime($value['n_updated_datetime']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['n_id']);
-      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      //$kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['n_title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
