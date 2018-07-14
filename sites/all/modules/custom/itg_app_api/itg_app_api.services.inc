@@ -7080,8 +7080,10 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $results = array();
 
     try {
+        return  'qwerty';
+        die;
         $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("custom");
+        $query = apachesolr_drupal_query("custom", array('q' => $key));
         $limit = 100;
         $query->addParam('rows', $limit);
         $device = strtolower($_GET['device']);
@@ -7090,7 +7092,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         }
         //$query->setSolrsort('ds_changed', 'desc');
         $query->addParam('sort', "ds_changed DESC");
-        $resp = $query->search($key);
+        $resp = $query->search();
         //$resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
