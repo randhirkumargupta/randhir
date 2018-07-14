@@ -7052,6 +7052,9 @@ function search_data_rest($token) {
  * Callback for solr service.
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
+    echo '123';
+    return  'qwerty';
+    die;
 
     /*
     $view_args = array();
@@ -7074,39 +7077,37 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
 
-    $link_ar = array();
-    $nid_ar = array();
-    $stdkeys = explode(',', str_replace(' ', '', $fields));
-    $results = array();
+    // $link_ar = array();
+    // $nid_ar = array();
+    // $stdkeys = explode(',', str_replace(' ', '', $fields));
+    // $results = array();
 
-    try {
-        return  'qwerty';
-        die;
-        $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("custom", array('q' => $key));
-        $limit = 100;
-        $query->addParam('rows', $limit);
-        $device = strtolower($_GET['device']);
-        if ($device == "tv") {
-            $query->addParam('fq', "bundle_name:Video");
-        }
-        //$query->setSolrsort('ds_changed', 'desc');
-        $query->addParam('sort', "ds_changed DESC");
-        $resp = $query->search();
-        //$resp = $query->search();
-        if (!empty($resp->data)) {
-            $data = json_decode($resp->data);
-        }
-        $results = $data->response->docs;
-    }catch (Exception $e) {
-        watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
-        apachesolr_failure(t('Solr search'), $key);
-    }
+    // try {
+    //     $solr = apachesolr_get_solr();
+    //     $query = apachesolr_drupal_query("custom", array('q' => $key));
+    //     $limit = 100;
+    //     $query->addParam('rows', $limit);
+    //     $device = strtolower($_GET['device']);
+    //     if ($device == "tv") {
+    //         $query->addParam('fq', "bundle_name:Video");
+    //     }
+    //     //$query->setSolrsort('ds_changed', 'desc');
+    //     $query->addParam('sort', "ds_changed DESC");
+    //     $resp = $query->search();
+    //     //$resp = $query->search();
+    //     if (!empty($resp->data)) {
+    //         $data = json_decode($resp->data);
+    //     }
+    //     $results = $data->response->docs;
+    // }catch (Exception $e) {
+    //     watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
+    //     apachesolr_failure(t('Solr search'), $key);
+    // }
 
-    if ($results and is_array($results) and count($results)) {
-        return $results;
-    }
-    return FALSE;
+    // if ($results and is_array($results) and count($results)) {
+    //     return $results;
+    // }
+    // return FALSE;
 }
 
 /**
