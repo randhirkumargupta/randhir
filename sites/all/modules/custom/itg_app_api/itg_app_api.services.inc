@@ -7088,7 +7088,8 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         if ($device == "tv") {
             $query->addParam('fq', "bundle_name:Video");
         }
-        $query->setSolrsort('ds_changed', 'desc');
+        //$query->setSolrsort('ds_changed', 'desc');
+        $query->addParam('sort', "ds_changed DESC");
         $resp = $query->search($key);
         //$resp = $query->search();
         if (!empty($resp->data)) {
