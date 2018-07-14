@@ -2321,12 +2321,7 @@ function event_url_save($node) {
   else {
     $event_title = $node->path['alias'];
   }
-  foreach ($node->field_event_tabs[LANGUAGE_NONE] as $tab_menu) {
-    $tab_value = field_collection_item_load($tab_menu['value']);
-    if($tab_value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
-      $steps[] = 'eventpage/'.trim($tab_value->field_tab_sef[LANGUAGE_NONE][0]['value']);
-    }    
-  }
+  
   foreach ($steps as $step) {
     if ($step == 'home') {
       $check_alias = $event_title;
@@ -2344,6 +2339,17 @@ function event_url_save($node) {
         itg_event_backend_save_alias($source, $alias_s);
       }
     }
+  }
+  foreach ($node->field_event_tabs[LANGUAGE_NONE] as $tab_menu) {
+    $tab_value = field_collection_item_load($tab_menu['value']);
+    if($tab_value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+ 	  $tab_alias = trim($tab_value->field_tab_sef[LANGUAGE_NONE][0]['value']);	
+	  $_check_alias = $event_title . '/' . $tab_alias;
+      if (itg_event_backend_alias_check($_check_alias)) {
+		$source = 'event/' . $event_title . '/eventpage/' . $tab_alias;
+        itg_event_backend_save_alias($source, $_check_alias);  
+	  }
+    }    
   }
 }
 
@@ -2438,11 +2444,11 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
     if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
       if($key == 0) {
         if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
-          $flash_back_link_top = l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $path_alias . '/eventpage/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value']), array('html' => TRUE, 'attributes' => array("style" => "color:$tab_menu_font")));
+          $flash_back_link_top = l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $path_alias . '/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value']), array('html' => TRUE, 'attributes' => array("style" => "color:$tab_menu_font")));
         }
       }
       if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
-        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/eventpage/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value']), array('attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value']), array('attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
       }
     }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
       $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];

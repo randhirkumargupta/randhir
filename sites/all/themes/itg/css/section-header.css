@@ -73,3 +73,5 @@
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018{width: 100%;}
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018:before{border-width: 0 0 20px 15px; left: -15px;}.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018:after{border-width: 0 0 20px 15px;right: -15px;}}
 @media screen and (max-width:320px){.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{ font-size:11px;}.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.location-datetime-2018{font-size: 9px;}}
+
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 #block-menu-menu-event-menu ul.menu > li:nth-child(1){ display: none; }

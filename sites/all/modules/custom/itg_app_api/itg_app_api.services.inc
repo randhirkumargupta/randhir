@@ -6993,6 +6993,7 @@ function search_data_rest($token) {
         $nid = $result->entity_id;
         $title = $result->label;
         $image_courtesy = FRONT_URL;
+        $tid_array = $result->tid;
 
         $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
         $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
@@ -7005,6 +7006,7 @@ function search_data_rest($token) {
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
+
         if ($bundle == "breaking_news") {
                 $list[$loop_c]['n_type'] = "story";
                 $list[$loop_c]['n_is_blog'] = "1";
@@ -7012,7 +7014,12 @@ function search_data_rest($token) {
                 $list[$loop_c]['n_type'] = "$bundle";
                 $list[$loop_c]['n_is_blog'] = "0";
             }
-            $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
+            $list[$loop_c]['n_is_program'] = "0";
+            $program_section = 1206553;
+        if (in_array($program_section, $tid_array)) {
+            $list[$loop_c]['n_is_program'] = "1";
+        }
+        $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
         $list[$loop_c]['n_is_sponsored'] = "0";
         $list[$loop_c]['n_share_link'] = "$url";
         $list[$loop_c]['n_title'] = "$title";
@@ -7045,27 +7052,50 @@ function search_data_rest($token) {
  * Callback for solr service.
  */
 function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $page = 0) {
+
+    /*
+    $view_args = array();
+   $view_args = array (
+  'q' =>
+  array (
+    0 => 'nirav modi'
+  ),
+  'rows' => 100,
+  'start' => 0,
+  //'fl' => array('id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php')
+);*/
+
+  /*  $view_args[] = array();
+    $view_args['keyword'] = $key;
+    $view_args['hash'] = "";
+    $view_args['bundle_name'] = "";
+    $view_args['sm_field_itg_common_by_line_name'] = "";
+    $view_args['tm_vid_14_names'] = "";
+     $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
+     p($ao_results);*/
+
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
     $results = array();
 
     try {
-        $key = preg_replace('/\s+/', ' OR ', $key);
         $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("custom", array('q' => $key));
-        //$query->setSolrsort('ds_changed', 'desc');
-        //$query->removeFilter('bundle_name');
-        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
-        $query->addParam('rows', '100');
-        //$query->addParam('fq', "bundle_name:Video");
-        $query->addParam('sort', "entity_id DESC");
-        $resp = $query->search();
+        $query = apachesolr_drupal_query("apachesolr");
+        $limit = 100;
+        $query->addParam('rows', $limit);
+        $device = strtolower($_GET['device']);
+        if ($device == "tv") {
+            $query->addParam('fq', "bundle_name:Video");
+        }
+        $query->setSolrsort('ds_changed', 'desc');
+        $resp = $query->search($key);
+        //$resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
         }
         $results = $data->response->docs;
-    } catch (Exception $e) {
+    }catch (Exception $e) {
         watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
         apachesolr_failure(t('Solr search'), $key);
     }
@@ -7964,4 +7994,9 @@ function itg_rapid_api_breaking_news_tv() {
 }
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f61e0af6b718a4416408e1538027304e9243e549
 
