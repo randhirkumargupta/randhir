@@ -267,7 +267,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     $query->replaceParam("q", $search_string);
     if (!empty($arg[2])) {
       if ($arg[2] == 'All') {
-        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', 'Category Management');
+        $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', '"Category Management"');
         $val_str1 = implode(' OR ', $bundle_name);
       } else if($arg[2] == 'Magazine') {
         $source_name = 'issue_based';
@@ -283,12 +283,12 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       }
       $query->replaceParam("fq", '(' . $str . ')');
     } else {
-      $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
+      $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast', '"Category Management"');
       $def_bun = implode(' OR ', $bundle_name);
       $str = 'bundle_name:(' . $def_bun . ')';
       $query->replaceParam("fq", '(' . $str . ')');
     }
-    //pr($query->getSolrParams());
+    pr($query->getSolrParams());
   }
   else if ($arg[0] == 'archives') {
     $source_name = 'non_issue_based';
@@ -614,6 +614,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
    // pr($query->getSolrParams());
   }
+  //p($query->getSolrParams());
 }
 
 /**
