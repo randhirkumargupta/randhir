@@ -169,7 +169,7 @@ const CACHE_STATIC = [
   MEDIA_CACHE_PATH_NAME+'images/misc/medium-icon.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/icon-256x256.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/icon-384x384.png',
-  MEDIA_CACHE_PATH_NAME+'images/misc/icon-512x512.png',
+  MEDIA_CACHE_PATH_NAME+'images/misc/icon-512x512.png'
  ]
 
 self.addEventListener('install',function(e){
