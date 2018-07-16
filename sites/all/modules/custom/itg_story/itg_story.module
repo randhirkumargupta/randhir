@@ -494,7 +494,13 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
   }
   
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
-    $form['language']['#options'] = array('und' => '- All -', 'en' => 'English', 'hi' => 'Hindi');
+    if($_GET['test'] == 'abc') {
+      print $form['#id'];
+      pr(arg());
+      pr($form['language']);
+      p($form);
+      $form['language']['#options'] = array('und' => '- All -', 'en' => 'English', 'hi' => 'Hindi');
+    }   
   }
 
   if (in_array($form['#id'], $soruce_type_filter_display_views)) {
