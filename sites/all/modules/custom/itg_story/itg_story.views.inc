@@ -88,7 +88,6 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
 
       $c_link = $web_link . ' / ' . $mob_link;
     }
-  
     $tnid = "node/" . $values->nid;
     $translation_node = translation_path_get_translations($tnid);
 
@@ -98,6 +97,8 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
        $translate_link = l('Translate Add' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));
     } 
     
+    $c_link .= ' / ' . $translate_link;
+
     return $c_link;
   }
 
