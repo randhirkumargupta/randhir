@@ -88,8 +88,10 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
 
       $c_link = $web_link . ' / ' . $mob_link;
     }
+
     $tnid = "node/" . $values->nid;
     $translation_node = translation_path_get_translations($tnid);
+
     if($_GET['TEST'] == 'abc') {
       global $language;
       print $language->language;
@@ -97,7 +99,12 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
     if(is_array($translation_node) && count($translation_node) > 0) {
         $translate_link = l('Translate' , $translation_node['hi'] , array('attributes' => array('target' => '_blank')));
     } else {      
-       $translate_link = l('Translate Add' , 'node/' . $values->nid . '/translate', array('attributes' => array('target' => '_blank')));
+       module_load_include('inc', 'i18n_node', 'i18n_node.pages');
+
+      $text = t('add translation');
+      $path = 'node/add/story';
+      $query = array('query' => array('translation' => $values->nid, 'target' => 'hi'));
+      $translate_link = i18n_node_translation_link($text, $path, $langcode, $query);
     } 
     
     $c_link .= ' / ' . $translate_link;
