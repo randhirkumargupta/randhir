@@ -90,7 +90,10 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
     }
     $tnid = "node/" . $values->nid;
     $translation_node = translation_path_get_translations($tnid);
-
+    if($_GET['TEST'] == 'abc') {
+      global $language;
+      print $language->language;
+    }
     if(is_array($translation_node) && count($translation_node) > 0) {
         $translate_link = l('Translate' , $translation_node['hi'] , array('attributes' => array('target' => '_blank')));
     } else {      
