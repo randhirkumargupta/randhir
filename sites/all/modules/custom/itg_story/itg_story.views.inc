@@ -82,12 +82,22 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
       
     if (!empty(arg(0)) && arg(0) == 'published-story') {
       $clone_link = '<a class="clone" href="node/add/story?destination=published-story?field_story_syndication_value_op=all&internal_clone_id='.$values->nid.'">Clone</a>'; 
-      $c_link = $web_link . ' / ' . $mob_link. '/'. $clone_link;
+      $c_link = $web_link . ' / ' . $mob_link. ' / '. $clone_link;
     }
     else {
 
       $c_link = $web_link . ' / ' . $mob_link;
     }
+  
+    $tnid = "node/" . $values->nid;
+    $translation_node = translation_path_get_translations($tnid);
+
+    if(is_array($translation_node) && count($translation_node) > 0) {
+        $translate_link = l('Translate' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));
+    } else {      
+       $translate_link = l('Translate Add' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));
+    } 
+    
     return $c_link;
   }
 
