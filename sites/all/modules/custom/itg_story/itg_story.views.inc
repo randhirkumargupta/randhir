@@ -92,9 +92,9 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
     $translation_node = translation_path_get_translations($tnid);
 
     if(is_array($translation_node) && count($translation_node) > 0) {
-        $translate_link = l('Translate' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));
+        $translate_link = l('Translate' , $translation_node['hi'] , array('attributes' => array('target' => '_blank')));
     } else {      
-       $translate_link = l('Translate Add' , 'node/' . $values->nid , array('attributes' => array('target' => '_blank')));
+       $translate_link = l('Translate Add' , 'node/' . $values->nid . '/translate', array('attributes' => array('target' => '_blank')));
     } 
     
     $c_link .= ' / ' . $translate_link;
