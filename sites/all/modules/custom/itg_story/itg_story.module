@@ -490,19 +490,13 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
     $form['nid']['#attributes'] = array('placeholder' => t('Story ID'));
   }
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1' || $form['#id'] == 'views-exposed-form-strory-menegment-page-12') {
-    if($_GET['test'] == 'abc') {
-      pr($form['field_story_configurations_value']);
-    }
     $form['field_story_configurations_value']['#options'] = array('All' => '- All -', 'lock_story' => 'Locked Story');
   }
   
   if ($form['#id'] == 'views-exposed-form-strory-menegment-page-1') {
     $arg = arg();
-    if($_GET['test'] == 'abc') {
-      pr($form['field_story_configurations_value']);
-    }
     if($arg[0] == 'published-story') {      
-      $form['language']['#options'] = array('All' => '- Any -', 'und' => '- All -', 'en' => 'English', 'hi' => 'Hindi');
+      $form['language']['#options'] = array('All' => '- Any -', 'en' => 'English', 'hi' => 'Hindi');
     }   
   }
 
