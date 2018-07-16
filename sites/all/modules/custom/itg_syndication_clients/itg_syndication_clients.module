@@ -403,6 +403,12 @@ $items['rss/it-date-range-issue'] = array(
     'file' => 'inc/itg_latest_issue_article_report.inc',
     'type' => MENU_CALLBACK,
   ); 
+  $items['search-rss-feed'] = array(
+    'page callback' => 'itg_search_data_rest_fun',
+    'access arguments' => array('access content'),
+    'file' => 'inc/search_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
