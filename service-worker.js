@@ -161,16 +161,15 @@ const CACHE_APP = [
   '/offline'
 ]
 const OFFLINE_URL = '/offline';
-const CACHE_STATIC = [
- ]
+const CACHE_STATIC = []
 
 self.addEventListener('install',function(e){
-    e.waitUntil(Promise.all([caches.open(STATIC_CACHE_NAME.cache.name),caches.open(APP_CACHE_NAME.cache.name),self.skipWaiting()]).then(function(cache){
-		console.log(cache, 'storage');
-			var static_cache = cache[0];
-            var app_cache = cache[1];
-			return Promise.all([static_cache.addAll(CACHE_STATIC),app_cache.addAll(CACHE_APP)]);
-        })
+    e.waitUntil(caches.open(APP_CACHE_NAME.cache.name).then(function(cache) {
+	  console.log(cache);
+	  console.log(CACHE_APP);
+	  return cache.addAll(CACHE_APP);
+
+	})
     );
 });
 
