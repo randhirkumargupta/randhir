@@ -97,10 +97,10 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
       print $language->language;
     }
     if(is_array($translation_node) && count($translation_node) > 0) {
-        $translate_link = l('Translate' , $translation_node['hi'] , array('attributes' => array('target' => '_blank')));
+        $translation_url = drupal_get_path_alias($translation_node['hi']);
+        $translate_link = l('Translate' , $translation_url , array('attributes' => array('target' => '_blank')));
     } else {      
        module_load_include('inc', 'i18n_node', 'i18n_node.pages');
-
       $text = t('add translation');
       $path = 'node/add/story';
       $query = array('query' => array('translation' => $values->nid, 'target' => 'hi'));
