@@ -1495,7 +1495,7 @@ function get_translate_node($tnid) {
   global $language;
   
   if($_GET['TEST'] == 'abc') {
-    p($language);
+    pr($language);
   }
   
   $query = db_select('node', 'n')->fields('n', array('nid', 'language'));
