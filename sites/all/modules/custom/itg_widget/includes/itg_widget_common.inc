@@ -850,7 +850,9 @@ function itg_widget_theme() {
         'top_takes_videos_tab_widget' => array(
             'template' => 'templates/top-takes-videos-tab-widget',
         ),
-
+        'itg_widget_watch_right_now_with_anchor' => array(
+            'template' => 'templates/watch-right-now-with-anchor',
+        ),
     );
     return $themes;
 }
