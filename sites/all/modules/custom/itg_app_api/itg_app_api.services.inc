@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file 
+ * @file
  * INC file for APP API Schemes Services.
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
@@ -2641,7 +2641,7 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
-        //Social share in report API   
+        //Social share in report API
         'social_share_save_it' => array(
             'operations' => array(
                 'create' => array(
@@ -4315,7 +4315,7 @@ function itg_rapid_api_edit_user_image($token) {
     $resp['status_code'] = "1";
     $resp['status_message'] = "";
     $resp_data = array();
-    foreach ($data as $key => $value) {        
+    foreach ($data as $key => $value) {
         $canonical_url = $value['canonical_url'];
         $fba_id = $value['id'];
         $publish_status = $value['publish_status'];
@@ -4460,13 +4460,13 @@ function itg_rapid_api_change_password($token) {
         //$user = drupal_anonymous_user();
 
         //drupal_save_session($original_session_state);
-        deviceTokenReset_Rapid($params);         
+        deviceTokenReset_Rapid($params);
         ################logout sart##############
        $params_logout = array();
         $params_logout['user_id'] = $params['user_id'];
         $params_logout['auth_token'] = $params['auth_token'];
         $params_logout['device_id'] = $params['device_id'];
-        $params_logout['device_type'] = $params['device_type'];        
+        $params_logout['device_type'] = $params['device_type'];
         cleanToken_Rapid($params_logout);
         ################logout sart##############
         ###############relogin start ##########
@@ -4520,7 +4520,7 @@ function itg_rapid_api_change_password($token) {
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
         $data['data'] = $token_arr_data;
-       
+
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
@@ -4989,7 +4989,7 @@ function itg_rapid_api_reset_password($token) {
     }
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    
+
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -5700,7 +5700,7 @@ function follow_anchor_responce($token, $user_id, $node_id) {
         $message_array['data'] = array();
     }
     if ($type == 'follow_story' || $type == 'Unfollow') {
-        
+
     } else {
         $args = '0';
         $message_array['status_code'] = "0";
@@ -5773,7 +5773,7 @@ function follow_author_responce($token, $user_id, $node_id) {
         $message_array['data'] = array();
     }
     if ($type == 'follow_story' || $type == 'Unfollow') {
-        
+
     } else {
         $args = '0';
         $message_array['status_code'] = "0";
@@ -6028,7 +6028,7 @@ function itg_rapid_api_follow_topic($token) {
     }
 
     if ($type == 'follow_story' || $type == 'Unfollow') {
-        
+
     } else {
         $args = '0';
         $message_array['status_code'] = "0";
@@ -6993,6 +6993,7 @@ function search_data_rest($token) {
         $nid = $result->entity_id;
         $title = $result->label;
         $image_courtesy = FRONT_URL;
+        $tid_array = $result->tid;
 
         $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
         $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
@@ -7005,6 +7006,7 @@ function search_data_rest($token) {
         $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
         $list[$loop_c]['n_id'] = "$nid";
         //$list[$loop_c]['n_type'] = "$bundle";
+
         if ($bundle == "breaking_news") {
                 $list[$loop_c]['n_type'] = "story";
                 $list[$loop_c]['n_is_blog'] = "1";
@@ -7012,14 +7014,19 @@ function search_data_rest($token) {
                 $list[$loop_c]['n_type'] = "$bundle";
                 $list[$loop_c]['n_is_blog'] = "0";
             }
-            $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
+            $list[$loop_c]['n_is_program'] = "0";
+            $program_section = 1206553;
+        if (in_array($program_section, $tid_array)) {
+            $list[$loop_c]['n_is_program'] = "1";
+        }
+        $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
         $list[$loop_c]['n_is_sponsored'] = "0";
         $list[$loop_c]['n_share_link'] = "$url";
         $list[$loop_c]['n_title'] = "$title";
         $list[$loop_c]['n_short_desc'] = "$teaser";
         $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
         $list[$loop_c]['n_large_image'] = "$extra_large_image";
-        $list[$loop_c]['n_updated_datetime'] = "$date_val";    
+        $list[$loop_c]['n_updated_datetime'] = "$date_val";
         $loop_c++;
     }
     $data_json['status_code'] = "1";
@@ -7038,7 +7045,7 @@ function search_data_rest($token) {
     $data['news'] = $list;
     $data_json['data'] = $data;
     return $data_json;
-    
+
 }
 
 /**
@@ -7049,34 +7056,55 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     /*
     $view_args = array();
    $view_args = array (
-  'q' => 
+  'q' =>
   array (
     0 => 'nirav modi'
   ),
   'rows' => 100,
   'start' => 0,
   //'fl' => array('id','entity_id','url','label_1','sm_field_custom_story_small_large_url','label','sm_common_kicker_text','ds_changed','hash','path_alias','nothing','php')
-);
-    
-    //$view_args[] = $key;
+);*/
+
+  /*  $view_args[] = array();
+    $view_args['keyword'] = $key;
+    $view_args['hash'] = "";
+    $view_args['bundle_name'] = "";
+    $view_args['sm_field_itg_common_by_line_name'] = "";
+    $view_args['tm_vid_14_names'] = "";
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
 
+    //p($_GET);
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
     $results = array();
 
     try {
+        /*$subquery_test = apachesolr_drupal_query($key);
+        $subquery_test->addParam('fl', 'tm_vid_14_names');
+        $subquery_test->addParam('fl', 'sm_field_itg_common_by_line_name');
+        $subquery_test->addParam('fl', 'bundle_name');
+        $subquery_test->addParam('fl', 'hash');
+        $subquery_test->addParam('fl', 'label');
+        $subquery_test->addFilter("label", $key);
+        $subquery_test->addParam('sort', "ds_changed DESC");
+        $subquery_test->addParam('rows', '100');
+        $query->addFilterSubQuery($subquery_test, 'OR', 'AND'); */
+        $device = strtolower($_GET['device']);
         $key = preg_replace('/\s+/', ' OR ', $key);
         $solr = apachesolr_get_solr();
         $query = apachesolr_drupal_query("custom", array('q' => $key));
-        $query->setSolrsort('ds_changed', 'desc');
+        //$query->setSolrsort('ds_changed', 'desc');
         //$query->removeFilter('bundle_name');
-        //$query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('start', '0');
         $query->addParam('rows', '100');
-        //$query->addParam('fq', "bundle_name:Video");
-        //$query->addParam('sort', "ds_changed DESC");
+        if($device == "tv"){
+            $query->addParam('fq', "bundle_name:Video");
+        }
+        //$query->setSolrsort('entity_id', 'desc');        
+        $query->addParam('sort', "ds_changed DESC");   
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
@@ -7092,6 +7120,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     }
     return FALSE;
 }
+
 
 /**
  * main function for generate videoCategoryPage array
@@ -7502,21 +7531,21 @@ function itg_rapid_value_manual_blog($nid) {
     if ($new_blog == 0) {
         $content_ar = $node_data->field_breaking_content_details['und'];
         $content_ar = array_reverse($content_ar,true);
-        foreach ($content_ar as $key => $value) {   
+        foreach ($content_ar as $key => $value) {
             $content_id = $value['value'];
-            $entity = entity_load('field_collection_item', $value);            
-            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];            
+            $entity = entity_load('field_collection_item', $value);
+            $field_breaking_tile = $entity[$content_id]->field_breaking_tile['und'][0]['value'];
             $desc_withouthtml = strip_tags($field_breaking_tile);
             $desc_withhtml = $field_breaking_tile;
             $title = "";
-            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];   
+            $field_breaking_publish_time = $entity[$content_id]->field_breaking_publish_time['und'][0]['value'];
             $posted_by = "";
             if($desc_withhtml){
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
                 $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
-            
+
             $blog_content[$loopc]['content_id'] = "$content_id";
             $blog_content[$loopc]['desc_withouthtml'] = "$desc_withouthtml";
             $blog_content[$loopc]['desc_withhtml'] = "$desc_withhtml_formated";
@@ -7528,9 +7557,9 @@ function itg_rapid_value_manual_blog($nid) {
     }
     elseif ($new_blog == 1) {
        $custom_content = itg_rapid_new_blog_content_details($nid);
-        foreach ($custom_content as $breaking_item) {             
+        foreach ($custom_content as $breaking_item) {
             $title = $breaking_item->blog_title;
-            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time); 
+            $field_breaking_publish_time = date("Y-m-d H:i:s", $breaking_item->blog_publish_time);
             $user = !empty($breaking_item->blog_uid) ? user_load($breaking_item->blog_uid) : '';
             $user_name = ($user->field_last_name[LANGUAGE_NONE][0]['value']) ? $user->field_first_name[LANGUAGE_NONE][0]['value'] . " " . $user->field_last_name[LANGUAGE_NONE][0]['value'] : $user->field_first_name[LANGUAGE_NONE][0]['value'];
             $posted_by = $user_name;
@@ -7538,7 +7567,7 @@ function itg_rapid_value_manual_blog($nid) {
             $desc_withouthtml = strip_tags($breaking_item->blog_description);
             if($desc_withhtml){
                 $body_with_html_data = formateNodeBodyToken($desc_withhtml);
-                $desc_withhtml_formated = $body_with_html_data['n_body']; 
+                $desc_withhtml_formated = $body_with_html_data['n_body'];
                 $desc_withhtml_formated = str_replace("<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>", "", $desc_withhtml_formated);
             }
             $content_id = $breaking_item->bid;
@@ -7570,7 +7599,7 @@ function itg_rapid_new_blog_content_details($blog_entity_id) {
        ->orderBy('bid', 'DESC');
   # execute the query
   return $results = $query->execute()->fetchAll();
- 
+
 }
 /**
  * Call back function for video insert API
@@ -7580,7 +7609,7 @@ function itg_rapid_new_blog_content_details($blog_entity_id) {
  */
 
 function itg_rapid_api_insert_video() {
-    $HTTP_RAW_POST_DATA;    
+    $HTTP_RAW_POST_DATA;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //p($params);
     $long_headline = $params['long_headline'];
@@ -7609,7 +7638,7 @@ function itg_rapid_api_insert_video() {
     $node->status = 0;
     $node->body[$node->language][0]['value'] = $description;
     $node->body[$node->language][0]['format'] = 'full_html';
-    //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));                    
+    //$node->field_story_long_head_line[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($long_headline));
     $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
 
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
@@ -7727,12 +7756,12 @@ function itg_rapid_api_breaking_news() {
         $detail['count'] = "1";
         $detail['display_count'] = "1";
         $detail['pagination_cap'] = "1";
-        $detail['news'] = $news;        
+        $detail['news'] = $news;
         $data['data'] = $detail;
     } else {
         $data['status_code'] = "0";
         $data['status_message'] = "";
-        $news = array();        
+        $news = array();
         $detail = array();
         $detail['id'] = "0";
         $detail['site'] = "India Today";
@@ -7741,7 +7770,7 @@ function itg_rapid_api_breaking_news() {
         $detail['count'] = "0";
         $detail['display_count'] = "1";
         $detail['pagination_cap'] = "1";
-        $detail['news'] = $news;        
+        $detail['news'] = $news;
         $data['data'] = $detail;
     }
     return $data;
@@ -7762,7 +7791,7 @@ function itg_report_api_fba_update_v1(){
     $resp['status_code'] = "1";
     $resp['status_message'] = "";
     $resp_data = array();
-    foreach ($data as $key => $value) {        
+    foreach ($data as $key => $value) {
         $canonical_url = $value['canonical_url'];
         $fba_id = $value['id'];
         $publish_status = $value['publish_status'];
@@ -7773,7 +7802,7 @@ function itg_report_api_fba_update_v1(){
     }
     $resp['data' ] = $resp_data;
     return $resp;
-    
+
 }
 /**
  * itg_rapid_nid_by_url
@@ -7789,7 +7818,7 @@ function itg_rapid_nid_by_url_v1($canonical_url){
         $last_key_ex_ar = explode("-",$last_key_val);
         $nid_key = count($last_key_ex_ar) - 4;
         $nid = $last_key_ex_ar[$nid_key];
-    }    
+    }
     return $nid;
 }
 /**
@@ -7803,7 +7832,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
     $nid_flag = 0;
     $nid_flag = fba_update_data_search($nid);
     $success = TRUE;
-    $api_type = "fba_update";    
+    $api_type = "fba_update";
     if ($nid_flag == $nid) {
         // update query
         $num_updated = db_update('itg_fba_update')
@@ -7811,7 +7840,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
                 ->condition('itg_fba_update.nid', $nid, '=')
                 ->execute();
     } else {
-        // insert query        
+        // insert query
         $qry = db_insert('itg_fba_update')
                 ->fields(array(
                     'node_type' => '',
@@ -7820,7 +7849,7 @@ function itg_report_api_fba_update_data_v1($fba_id, $publish_status, $published,
                     'fba_id' => $fba_id,
                     'fba_publish_status' => $publish_status,
                     'fba_published' => $published,
-                ));        
+                ));
                 $qry->execute();
     }
 
@@ -7880,7 +7909,7 @@ function itg_rapid_api_popular_search_tv($token) {
  * @return int
  */
 function itg_app_redish_ttl($api = "") {
-    //$ttl = 300;  //default_ttl  
+    //$ttl = 300;  //default_ttl
     $ttl = variable_get('default_ttl');
     $api_name = arg(1);
     if ($api) {
@@ -7888,7 +7917,7 @@ function itg_app_redish_ttl($api = "") {
         if (variable_get($var_key) > 0) {
             $ttl = variable_get($var_key);
         }
-    }   
+    }
 
     return $ttl;
 }
@@ -7926,7 +7955,7 @@ function itg_rapid_api_splash_screen($token) {
 }
 /**
  * Call back function for itg_rapid_api_switch_between_app API
- * @pram $_GET 
+ * @pram $_GET
  *
  * @return array - The processed information array.
  */
@@ -7956,29 +7985,28 @@ function itg_rapid_api_switch_between_app($token) {
  */
 function itg_rapid_api_breaking_news_tv() {
     // call breaking news view
-    $view_result = views_get_view_result('breaking_news', 'block_1');    
-    $nid = $view_result[0]->nid;    
+    $view_result = views_get_view_result('breaking_news', 'block_1');
+    $nid = $view_result[0]->nid;
     $field_breaking_data = $view_result[0]->field_field_breaking_tile;
     $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
     $data = array();
-    if (isset($nid) && $nid > 0) {        
-        
+    if (isset($nid) && $nid > 0) {
+
         $data['status_code'] = "1";
         $data['status_message'] = "";
         $news = array();
         $news['breaking_news_status'] = "1";
-        $news['breaking_news_title'] = "$field_breaking_tile";             
+        $news['breaking_news_title'] = "$field_breaking_tile";
         $data['data'] = $news;
     } else {
         $data['status_code'] = "0";
         $data['status_message'] = "";
         $news = array();
         $news['breaking_news_status'] = "0";
-        $news['breaking_news_title'] = "";             
+        $news['breaking_news_title'] = "";
         $data['data'] = $news;
     }
-    return $data; 
+    return $data;
 }
- 
- 
+
 

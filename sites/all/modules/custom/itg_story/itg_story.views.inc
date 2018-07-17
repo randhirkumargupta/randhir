@@ -82,12 +82,28 @@ class itg_story_views_handler_field_story_custom_view_link extends views_handler
       
     if (!empty(arg(0)) && arg(0) == 'published-story') {
       $clone_link = '<a class="clone" href="node/add/story?destination=published-story?field_story_syndication_value_op=all&internal_clone_id='.$values->nid.'">Clone</a>'; 
-      $c_link = $web_link . ' / ' . $mob_link. '/'. $clone_link;
+      $c_link = $web_link . ' / ' . $mob_link. ' / '. $clone_link;
     }
     else {
 
       $c_link = $web_link . ' / ' . $mob_link;
     }
+
+    $tnid = "node/" . $values->nid;
+    $translation_node = translation_path_get_translations($tnid);
+
+    if(is_array($translation_node) && count($translation_node) > 0) {
+        $translation_url = drupal_get_path_alias($translation_node['hi']);
+        $translate_link = l('Translate' , $translation_url , array('attributes' => array('target' => '_blank')));
+    } else {      
+      module_load_include('inc', 'i18n_node', 'i18n_node.pages');
+      $text = t('add translation');
+      $path = 'node/add/story';
+      $query = array('query' => array('translation' => $values->nid, 'target' => 'hi'));
+      $translate_link = i18n_node_translation_link($text, $path, $langcode, $query);
+    } 
+    
+    $c_link .= ' / ' . $translate_link;
     return $c_link;
   }
 

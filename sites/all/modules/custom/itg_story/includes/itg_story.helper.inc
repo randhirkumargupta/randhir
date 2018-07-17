@@ -202,14 +202,14 @@ function itg_story_save_original_sample_image($fid) {
 function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, $view_mode = null) {
   $count = 0;
   if ($view_mode == 'amp') {
-    $count = -1;
+    //$count = -1;
   }
   $output = '';
   $output .= '<div class="tech-photos">';
   $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
   $output .= '<span class="tech-photos-count">' . count($tech_gallery_images) . ' Photos</span></div>';
   foreach ($tech_gallery_images as $num => $val) {
-    if ($count == 3) {
+    if ($count == 4) {
       break;
     }
     $photo_img_alt = '';
@@ -237,7 +237,7 @@ function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_
       $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
     }
     $output .= '</a>';
-    if ($count == 2) {
+    if ($count == 3) {
       $output .= '<div class="tech-photo-overlay">';
       $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank" title="More"><span class="tech-photo-seemore"> +SEE MORE</span> </a>';
       $output .= '</div>';

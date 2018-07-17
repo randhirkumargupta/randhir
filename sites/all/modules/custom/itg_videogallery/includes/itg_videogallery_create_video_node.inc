@@ -235,12 +235,13 @@ function itg_associate_video_id_to_content($video_info) {
 }
 
 function get_video_info($filename, $video_id) {
-  if (!empty($filename) && !empty($video_id)) {
+  //if (!empty($filename) && !empty($video_id)) {
+  if (!empty($filename)) {
     $query = db_select('dailymotion_response_details', 'drd');
     $query->leftJoin('field_data_field_video_id', 'fdfvi', 'fdfvi.field_video_id_value = drd.video_id');
     $query->leftJoin('field_data_field_all_xml_content', 'faxc', 'faxc.entity_id = fdfvi.entity_id');
     $query->condition('drd.title', $filename, '=');
-    $query->condition('drd.video_id', $video_id, '=');
+    //$query->condition('drd.video_id', $video_id, '=');
     $query->condition('drd.dailymotion_published', 0, '=');
     $query->fields('drd');
     $query->fields('faxc', array('field_all_xml_content_value'));

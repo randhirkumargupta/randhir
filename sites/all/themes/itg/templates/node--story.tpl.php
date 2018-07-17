@@ -225,11 +225,12 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
 				   <?php if(!empty($mobile_twitter_handle)) { ?> 
 				     <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></span>				   
 				   <?php } ?>
-				   </li></span>
+				   </li>
 				 <?php }      	
 			    }
-			  }				
-			 if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+			  }	?>	
+			  </span>		
+			 <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
 			 <li>
 			 <?php
 				$city = array();

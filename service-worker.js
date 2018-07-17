@@ -1,7 +1,7 @@
-const res_version = 'indiatoday-1.1'; 
+const res_version = 'indiatoday-1.2'; 
 var ROUTE_SITE_URL = 'staging-it.indiatodayonline.in'; 
 const SITE_CACHE_HOST_NAME = ["staging-it.indiatodayonline.in"];
-const MEDIA_CACHE_HOST_NAME = ["static-dev.indiatodayonline.in/indiatoday"];
+const MEDIA_CACHE_HOST_NAME = ["static-dev.indiatodayonline.in"];
 const STATIC_CACHE_NAME = 	{
 	cache: {
 		name: 'indiatoday-static-cache-'+res_version,
@@ -48,7 +48,8 @@ const APP_CACHE_NAME =  {
 	// cached.
 	successResponses: /^0|([123]\d\d)|(40[14567])|410$/
 };
-const MEDIA_CACHE_PATH_NAME = 'https://akm-img-a-in.tosshub.com/indiatoday/'; 
+//const MEDIA_CACHE_PATH_NAME = 'https://akm-img-a-in.tosshub.com/indiatoday/'; 
+const MEDIA_CACHE_PATH_NAME = 'https://static-dev.indiatodayonline.in/indiatoday/';
 
 var DEBUG_MODE = false;
 var hwid = "hwid";
@@ -168,14 +169,14 @@ const CACHE_STATIC = [
   MEDIA_CACHE_PATH_NAME+'images/misc/medium-icon.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/icon-256x256.png',
   MEDIA_CACHE_PATH_NAME+'images/misc/icon-384x384.png',
-  MEDIA_CACHE_PATH_NAME+'images/misc/icon-512x512.png',
+  MEDIA_CACHE_PATH_NAME+'images/misc/icon-512x512.png'
  ]
 
 self.addEventListener('install',function(e){
-    e.waitUntil(
-        Promise.all([caches.open(STATIC_CACHE_NAME.cache.name),caches.open(APP_CACHE_NAME.cache.name),self.skipWaiting()]).then(function(storage){console.log(storage, 'storage');
-			var static_cache = storage[0];
-            var app_cache = storage[1];
+    e.waitUntil(Promise.all([caches.open(STATIC_CACHE_NAME.cache.name),caches.open(APP_CACHE_NAME.cache.name),self.skipWaiting()]).then(function(cache){
+		console.log(cache, 'storage');
+			var static_cache = cache[0];
+            var app_cache = cache[1];
 			return Promise.all([static_cache.addAll(CACHE_STATIC),app_cache.addAll(CACHE_APP)]);
         })
     );

@@ -406,7 +406,7 @@ function itg_preprocess_html(&$vars) {
     $search_str = preg_replace('/\s+/', ' ', $search_str);
     $vars['head_title'] = "$search_str News, Videos, Photos and Magazine Stories | " . variable_get('site_name');
   }
-  if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))){
+  if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win', 'eventpage'))){
 		$event_nid = itg_event_backend_get_event_node();
 		$event_tags = get_node_metatags_by_nid($event_nid);
 		$event_tags = unserialize($event_tags['data']);
@@ -584,7 +584,7 @@ function itg_html_head_alter(&$head_elements) {
 			);
 		}		
   }
-  if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win'))){
+  if ($arg[0] == 'event' && !empty($arg[3]) && in_array($arg[3], array('programme', 'speakers', 'sponsors', 'flashback', 'speaker-details', 'sponsor-details', 'sing-and-win', 'eventpage'))){
 		$event_nid = itg_event_backend_get_event_node();
 		$event_tags = get_node_metatags_by_nid($event_nid);
 		$event_tags = unserialize($event_tags['data']);
@@ -748,6 +748,7 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
   $head_elements['canonical_0']['#weight'] = -1001;
+  $head_elements['metatag_canonical']['#weight'] = -999;
   $status = drupal_get_http_header("status");
   if ($status === '404 Not Found'){
 	unset($head_elements['metatag_canonical']);
@@ -1165,7 +1166,7 @@ function itgd_chart_beat_code() {
 				drupal_add_js('function EmbedScript() {
         var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";
         _Impulser.async = true;
-        _Impulser.src = ("https:" == window.parent.document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+        _Impulser.src = window.parent.document.location.protocol + "//impulse.forkcdn.com/pub/ITG/IndiaToday/generic.js";
         var _scripter = window.parent.document.getElementsByTagName("script")[0]; _scripter.parentNode.insertBefore(_Impulser, _scripter);
         };
         function inIframe() {
@@ -1191,7 +1192,7 @@ function itgd_chart_beat_code() {
     drupal_add_js('function EmbedScript() {
         var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";
         _Impulser.async = true;
-        _Impulser.src = ("https:" == window.parent.document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+        _Impulser.src = window.parent.document.location.protocol + "//impulse.forkcdn.com/pub/ITG/IndiaToday/generic.js";
         var _scripter = window.parent.document.getElementsByTagName("script")[0]; _scripter.parentNode.insertBefore(_Impulser, _scripter);
         };
         function inIframe() {
