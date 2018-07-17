@@ -1484,3 +1484,37 @@ function itg_story_ad_code_in_content($content) {
   $content = $before_content . ' ' . $after_content;
   return $content;
 }
+
+/**
+ * 
+ * @param type $tid
+ * @param type $vid
+ * @return type
+ */
+function get_translate_node($tnid) {
+  global $language;
+  
+  if($_GET['TEST'] == 'abc') {
+    p($language);
+  }
+  
+  $query = db_select('node', 'n')->fields('n', array('nid', 'language'));
+  $query->condition('n.tnid', '1149192');
+  
+  if ($language->language == 'hi') {
+    $query->condition('n.language', 'en');
+  } elseif ($language->language == 'en') {
+    $query->condition('n.language', 'hi');
+  }
+  $result = $query->execute()->fetchObject();
+  
+  if (isset($result) && !empty($result)) {
+      $translation_url = drupal_get_path_alias("node/" . $result->nid);
+      if ($result->language == 'en') {
+        $lantext = 'Hindi';
+      } else {
+        $lantext = 'English';
+      }
+    return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));   
+  }
+}

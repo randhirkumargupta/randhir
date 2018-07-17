@@ -238,7 +238,11 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
             </ul>   
 
             <div class="menu-login mhide">
-
+              <?php 
+              if(arg(0) == 'node') {
+                  print get_translate_node(arg(1));
+              }
+              ?>
                 <div class="social-nav mhide">
                     <ul class="social-nav mhide">
                         <li class="livetv-icon-parent"><a href="/livetv"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
