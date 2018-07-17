@@ -13674,7 +13674,7 @@ div.ctools-modal-content .form-submit {
 .node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file, .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file .form-managed-file {
   padding: 3px; }
 
-.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
+.node-videogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-photogallery-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"], .node-story-form .browse-media-file .form-field-type-image#edit-field-story-extra-large-image .form-type-managed-file.has-image-parent .form-managed-file > .image-widget-data .form-submit[value="Remove"] {
   left: 97px !important; }
 
 /*# sourceMappingURL=styles.css.map */
