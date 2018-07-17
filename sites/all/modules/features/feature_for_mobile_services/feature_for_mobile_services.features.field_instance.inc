@@ -71,8 +71,8 @@ function feature_for_mobile_services_field_default_field_instances() {
       'description_field' => 1,
       'exclude_cv' => FALSE,
       'file_directory' => 'mobile_audio',
-      'file_extensions' => 'mp3 mp4 ogg',
-      'max_filesize' => '',
+      'file_extensions' => 'mp3',
+      'max_filesize' => '10MB',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -83,11 +83,13 @@ function feature_for_mobile_services_field_default_field_instances() {
           'filefield_sources' => array(
             'attach' => 0,
             'clipboard' => 0,
-            'imce' => 'imce',
+            'imce' => 0,
             'itg_image_repository' => 0,
+            'itg_image_video' => 0,
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 0,
+            'upload' => 'upload',
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -95,7 +97,7 @@ function feature_for_mobile_services_field_default_field_instances() {
             'path' => 'file_attach',
           ),
           'source_imce' => array(
-            'imce_mode' => 1,
+            'imce_mode' => 0,
           ),
           'source_reference' => array(
             'autocomplete' => 0,
@@ -238,9 +240,11 @@ function feature_for_mobile_services_field_default_field_instances() {
             'clipboard' => 0,
             'imce' => 0,
             'itg_image_repository' => 0,
+            'itg_image_video' => 'itg_image_video',
+            'plupload' => 0,
             'reference' => 0,
             'remote' => 0,
-            'upload' => 'upload',
+            'upload' => 0,
           ),
           'source_attach' => array(
             'absolute' => 0,
@@ -520,7 +524,7 @@ function feature_for_mobile_services_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_header',
     'label' => 'Header',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'text_processing' => 0,

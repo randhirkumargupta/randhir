@@ -1,0 +1,9 @@
+name = ITG RSS  Feed
+description = "ITG Custom module for RSS feed."
+core = 7.x
+package = ITG
+
+
+
+
+

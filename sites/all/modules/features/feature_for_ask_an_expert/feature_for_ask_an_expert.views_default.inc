@@ -169,6 +169,7 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
     21 => '21',
+    10 => '10',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -346,7 +347,7 @@ if($user->uid != \'1\') {
 }
 else
 {
-  return \'No Record Found\';
+  return 0;
 }';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['format'] = 'default_summary';
@@ -438,7 +439,7 @@ else
     15 => 0,
     18 => 0,
   );
-  $handler->display->display_options['path'] = 'ask-an-expert';
+  $handler->display->display_options['path'] = 'ask-an-expert-inqueue-content';
 
   /* Display: Ask an expert question answer */
   $handler = $view->new_display('page', 'Ask an expert question answer', 'page_1');
@@ -535,7 +536,7 @@ else
   $handler->display->display_options['filters']['field_user_message_value']['table'] = 'field_data_field_user_message';
   $handler->display->display_options['filters']['field_user_message_value']['field'] = 'field_user_message_value';
   $handler->display->display_options['filters']['field_user_message_value']['operator'] = 'not empty';
-  $handler->display->display_options['path'] = 'ask-an-expert-question-answer';
+  $handler->display->display_options['path'] = 'ask-an-expert';
 
   /* Display: Ask an expert history */
   $handler = $view->new_display('page', 'Ask an expert history', 'page_2');
@@ -630,7 +631,7 @@ if($user->uid != \'1\') {
 }
 else
 {
-  return \'No Record Found\';
+  return 0;
 }';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['format'] = 'default_summary';
@@ -1086,7 +1087,7 @@ else
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_user'] = FALSE;
-  /* Field: Field: First name */
+  /* Field: User: First name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1241,6 +1242,13 @@ else
     0 => 0,
   );
   $handler->display->display_options['filters']['uid_1']['group'] = 1;
+  /* Filter criterion: User: Roles */
+  $handler->display->display_options['filters']['rid_1']['id'] = 'rid_1';
+  $handler->display->display_options['filters']['rid_1']['table'] = 'users_roles';
+  $handler->display->display_options['filters']['rid_1']['field'] = 'rid';
+  $handler->display->display_options['filters']['rid_1']['value'] = array(
+    21 => '21',
+  );
   $handler->display->display_options['path'] = 'user-selection';
   $export['user_selection'] = $view;
 

@@ -4,8 +4,21 @@
  * Inc file contains the functions
  */
 function tv_schedule_listing() {
+  $Channel_name = array('Indiatoday_tvschedule.csv'=>'India Today', 'aajtak_tvschedule.csv'=>'Aajtak', 'Dilliaajtak_tvschedule.csv'=>'Dilli Aajtak', 'tez_tvschedule.csv'=>'Tez');
+  //getting value from Url
+  if (function_exists('mongodb')) {
+    $db = mongodb();
+  }
 
-    //getting value from Url
+  if (isset($db)) {
+
+    if(isset($_GET['action']) && $_GET['action'] == 'preview'){
+      $status = array(0,1);
+
+    }else{
+      $status = array(1);
+    }
+
     $flag = 0;
     $arg = arg();
     $search_title = $_GET['title'];
@@ -14,115 +27,130 @@ function tv_schedule_listing() {
     $sel_date = tv_schedule_list($search_date);
 
     if ($_GET['time_zone'] == 'PST') {
-        date_default_timezone_set('America/Los_Angeles');
+      date_default_timezone_set('America/Los_Angeles');
     }
     elseif ($_GET['time_zone'] == 'GMT') {
-        date_default_timezone_set('Africa/Lome');
+      date_default_timezone_set('Africa/Lome');
     }
     else {
-        date_default_timezone_set('Asia/Kolkata');
+      date_default_timezone_set('Asia/Kolkata');
     }
     $date = date("Y-m-d H:i:s");
     $time = new DateTime($date);
     $curent_time = $time->format('H:i');
     $current_day = $time->format('Y/m/d');
-
-    $db = mongodb();
     $people = $db->tv_schedule;
     // Search result
     if (isset($search_title)) {
-        $search_counter = 0;
-        $title = $search_title;
-        $regex = new MongoRegex("/$title/i");
-        $cond = array('program' => $regex);
-        $cursor_popup = $people->find($cond);
-        $result = $cursor_popup->count();
-        if ($result > 0) {
-            $key = 0;
-            foreach ($cursor_popup as $document) {
-                $search[$key]['time'] = $document["time"];
-                $search[$key]['day'] = $document["day"];
-                $search[$key]['program'] = $document["program"];
-                $search[$key]['program date'] = $document["program date"];
-                $key++;
-                $search_counter++;
-            }
-            $search_count = $search_counter;
+      $search_counter = 0;
+      $title = $search_title;
+      $regex = new MongoRegex("/$title/i");
+      $cond = array('program' => $regex, 'status' => array( '$in' => $status ));
+      $cursor_popup = $people->find($cond)->sort(array('program date'=> 1));
+      $result = $cursor_popup->count();
+      if ($result > 0) {
+        $key = 0;
+        foreach ($cursor_popup as $document) {
+          $search[$key]['time'] = $document["time"];
+          $search[$key]['day'] = $document["day"];
+          $search[$key]['program'] = $document["program"];
+          $search[$key]['channel'] = $Channel_name[$document["filetype"]];
+          $search[$key]['program date'] = $document["program date"];
+          $key++;
+          $search_counter++;
         }
-        else {
-            $search_count = 0;
-        }
+        $search_count = $search_counter;
+      }
+      else {
+        $search_count = 0;
+      }
     }
 
     if ($sel_date > 0) {
-        $date = $search_date;
-        $cond = array('program date' => $date);
-        $flag = 1;
+      $date = $search_date;
+      $cond = array('program date' => $date, 'status' => array( '$in' => $status ));
+      $flag = 1;
     }
     else {
-        if (isset($arg[1])) {
-            $day = $arg[1];
-            $cond = array('day' => $day);
-        }
-        else {
-//            $day = strtoupper(date("D"));
-//            $cond = array('day' => $day);
-              $cond = array('program date' => $current_day);  
-        }
+      if (isset($arg[1])) {
+        $day = $arg[1];
+        $date_from_day = date('Y/m/d', strtotime( "$day this week" ));
+        $cond = array('program date' => $date_from_day, 'day' => $day, 'status' => array( '$in' => $status ));
+      }
+      else {
+        $cond = array('program date' => $current_day, 'status' => array( '$in' => $status ));
+      }
     }
 
-    $cursor = $people->find($cond);
-    $results = $cursor->count();
+    $all_cursor = $people->find($cond);
+    $results = $all_cursor->count();
 
-    $counter = 0;
-    $keys = 0;
-    if ($results > 0) {
-        // iterate cursor to get value of documents
-        foreach ($cursor as $document) {
-          
+    $channel_cursor = array();
+    $channel_results_count = array();
+
+    $allowed = array('Indiatoday_tvschedule.csv', 'aajtak_tvschedule.csv', 'Dilliaajtak_tvschedule.csv', 'tez_tvschedule.csv');
+    foreach( $allowed as $val){
+      $cond['filetype'] = $val;
+      $channel_cursor[$val] = $people->find($cond);
+      $channel_results_count[$val] = $channel_cursor[$val]->count();
+    }
+
+    if ($results > 0 && !empty($channel_cursor)) {
+      foreach($channel_cursor as $key => $cursor){
+
+
+        if($channel_results_count[$key] > 0){
+          $counter = 0;
+          $keys = 0;
+          $time_slider = array();
+      // iterate cursor to get value of documents
+          foreach ($cursor as $document) {
+
             $s_time = time_zone_conversion($document['time'], $_GET['time_zone']);
             if ($s_time == $curent_time) {
-                $out[$keys]['time'] = '';
+              $time_slider[$keys]['time'] = '';
             }
             else {
-                $out[$keys]['time'] = $s_time;
+              $time_slider[$keys]['time'] = $s_time;
             }
-            //$out[$keys]['time'] = $document["time"];
-            $out[$keys]['day'] = $document["day"];
-            $out[$keys]['program'] = $document["program"];
-            $out[$keys]['program date'] = $document["program date"];
-            
-            if(!empty($search_date)) {
+
+            $out[$key][$keys]['day'] = $document["day"];
+            $out[$key][$keys]['program'] = $document["program"];
+            $out[$key][$keys]['program date'] = $document["program date"];
+            $out[$key][$keys]['status'] = $document["status"];
+            $out[$key][$keys]['type'] = $document["filetype"];
+
+            if (!empty($search_date)) {
               $ass_search_date = $search_date;
             }
-            else
-            {
+            else {
               $ass_search_date = date('Y/m/d');
             }
-            $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
-            if(!empty($node_detail->nid)) {
-            $out[$keys]['story_attach'] = l('', 'node/'.$node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes'=> array('target'=>'_blank', 'class' => array('fa', 'fa-file-text'), 'title' => $node_detail->title)));
-            }
+            // $node_detail = node_load(tv_story_list($ass_search_date, $document['time']));
+            // if (!empty($node_detail->nid)) {
+            //   $out[$keys]['story_attach'] = l('', 'node/' . $node_detail->nid, array('options' => array('absolute' => TRUE), 'attributes' => array('target' => '_blank', 'class' => array('fa', 'fa-file-text'), 'title' => $node_detail->title)));
+            // }
             $keys++;
 
             //counter required for current time slot display.
             if (($curent_time >= $s_time) && ($current_day == $document["program date"])) {
-                $counter++;
+              $counter++;
             }
+          }
         }
+      }
     }
 
-    if ($sel_date == 0 && $search_date != '') {
-        $no_result = 'No program details found on this date ' . $search_date;
-    }
-
-
+    // if ($sel_date == 0 && $search_date != '') {
+    //   $no_result = '<div class="no-tv-program">No program details found on this date ' . $search_date . '</div>';
+    // }
 
     if ($counter > 0) {
-        $count = $counter - 1;
+      $count = $counter - 1;
     }
 
-    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count, 'search_count' => $search_count, 'title' => $title, 'no_result' => $no_result));
+    return theme('itg_tv_schedule', array('output' => $out, 'search' => $search, 'total' => $count, 'search_count' => $search_count, 'title' => $title, 'no_result' => $no_result, 'time_slider' => $time_slider));
+  }
 }
 
 /**
@@ -132,13 +160,15 @@ function tv_schedule_listing() {
  * @return int
  */
 function tv_schedule_list($search_date) {
-    $db = mongodb();
+  $db = mongodb();
+  if (isset($db)) {
     $people = $db->tv_schedule;
     $date = $search_date;
-    $cond = array('program date' => $date);
+    $cond = array('program date' => $date, 'status' => 1);
     $cursor = $people->find($cond);
     $results = $cursor->count();
     return $results;
+  }
 }
 
 /**
@@ -160,4 +190,63 @@ function tv_story_list($date, $time) {
   $itg_result = $itg_query->execute()->fetchField();
 
   return $itg_result;
+}
+
+/**
+ * Custom method for Tv Schedule at least 3 days before the last date of scheduler.
+ */
+function itg_tv_schedule_cron() {
+  $to = array();
+  $to['tez_tvschedule.csv'] = get_itg_variable('tez_tvschedule_email');
+  $to['Indiatoday_tvschedule.csv'] = get_itg_variable('indiatoday_tvschedule_email');
+  $to['aajtak_tvschedule.csv'] = get_itg_variable('aajtak_tvschedule_email');
+  $to['Dilliaajtak_tvschedule.csv'] = get_itg_variable('dilliaajtak_tvschedule_email');
+
+  if (function_exists('mongodb')) {
+  $db = mongodb();
+    if (isset($db)) {
+      $people = $db->tv_schedule;
+      $allowed = array('Indiatoday_tvschedule.csv', 'aajtak_tvschedule.csv', 'Dilliaajtak_tvschedule.csv', 'tez_tvschedule.csv');
+      foreach($allowed as $value){
+        $cond = array('filetype' => $value, 'status' => 1);
+        $data = $people->find($cond)->sort(array('program date'=> -1))->limit(1);
+        $count = $data->count();
+          if($count > 0){
+            foreach($data as $val){
+              $start  = date_create($val['program date']);
+              $end  = date_create(); // Current time and date
+              $diff   = date_diff( $start, $end );
+              if($diff->d == 2){
+                $mail_content = 'Your channel will be strip after '.$val['program date'].'. So please upload CSV file on time.';
+                itg_tv_schedule_mail_content($mail_content, $to[$value]);
+              }
+            }
+          }
+      }
+    }
+  }
+  return 'Cron ran successfully';
+}
+
+/**
+ * Get Mail Tv schedule content
+ * @param array $node
+ * @return string
+ */
+function itg_tv_schedule_mail_content($mail_content, $to) {
+  $params = array(
+    'body' => $mail_content,
+    'subject' => 'Tv Schedule',
+  );
+  $mail = drupal_mail('itg_tv_schedule', 'send_tv_schedule_mail', $to, language_default(), $params, variable_get('site_mail'), TRUE);
+  if ($mail['result']) {
+    $success_msg = 'Successfully sent email to '.$to.'!';
+   // watchdog('itg_tv_schedule', $success_msg, array(), WATCHDOG_INFO);
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email to '.$to.'!';
+    watchdog('itg_tv_schedule', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
 }

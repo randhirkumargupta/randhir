@@ -1,6 +1,5 @@
 <?php if (!empty($content)): ?>
   <div class='<?php print $classes ?>'>
-      <?php //print render($content) ?>
       <?php if ($view_mode == 'full'): ?>
         <a href="javascript:;" class="close-preview">&nbsp;</a>
         <?php

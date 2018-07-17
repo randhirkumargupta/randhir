@@ -6,7 +6,6 @@
   <?php endif; ?>
 
   <?php if (!empty($submitted)): ?>
-    <!-- <div class='<?php print $hook ?>-submitted clearfix'><?php // print $submitted ?></div>-->
   <?php endif; ?>
 
   <?php if (!empty($links)): ?>
@@ -36,7 +35,6 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
-      <?php //print render($content) ?>
           <?php if ($view_mode == 'full'):  ?>
                 <div class="content-node-view">
                  <?php
@@ -92,8 +90,7 @@
                   <div class="ugc-action">
                 <?php 
                 // create path for approve and reject
-               $arg_id = arg(1);
-               //$node_status = $node->node_status;
+                $arg_id = arg(1);
                 if($node->status == '1') {
                   print '<strong>Action :</strong> ';
                   print l(  t('Approve'),  'node/add/'.$content_type.'/'.$arg_id,  array('attributes' =>array('class'=>'approve-ugc', 'id'=>'approve-ugc'), 'query'=>array('destination'=>'manage-ugc') ));
@@ -104,7 +101,7 @@
                 }
                 else
                 {
-                  print '<strong>Action :</strong> ';
+                  print '<strong>'.t('Action').' :</strong> ';
                   print l(  t('Cancel'),  'reject-ugc-content-list',  array('attributes' =>array('class'=>'reject-ugc-content-list', 'id'=>'reject-ugc-content-list')));
                 }
                 ?>

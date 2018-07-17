@@ -743,6 +743,7 @@ function feature_for_home_page_feature_widget_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
@@ -750,7 +751,7 @@ function feature_for_home_page_feature_widget_views_default_views() {
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
-  $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Content Types';
   $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
   $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
@@ -776,6 +777,12 @@ function feature_for_home_page_feature_widget_views_default_views() {
     18 => 0,
     23 => 0,
     22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
   /* Filter criterion: Content: Has taxonomy terms (with depth; <em class="placeholder">Simple hierarchical select</em>) */
@@ -826,10 +833,12 @@ function feature_for_home_page_feature_widget_views_default_views() {
   $handler->display->display_options['filters']['type_1']['table'] = 'node';
   $handler->display->display_options['filters']['type_1']['field'] = 'type';
   $handler->display->display_options['filters']['type_1']['value'] = array(
+    'breaking_news' => 'breaking_news',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
   );
+  $handler->display->display_options['filters']['type_1']['group'] = 1;
   $handler->display->display_options['path'] = 'home-page-feature-widget-listing';
 
   /* Display: Home page feature widget */

@@ -23,18 +23,17 @@ function mega_review_critic_features_field_group_info() {
     'label' => 'Basic Details',
     'weight' => '0',
     'children' => array(
-      0 => 'field_mega_review_director',
-      1 => 'field_mega_review_movie_plot',
-      2 => 'field_mega_review_twitter',
-      3 => 'field_mega_review_youtube_url',
+      0 => 'field_mega_review_career_graph',
+      1 => 'field_mega_review_cast',
+      2 => 'field_mega_review_director',
+      3 => 'field_mega_review_movie_plot',
       4 => 'field_mega_review_type',
-      5 => 'field_mega_review_cast',
-      6 => 'field_associate_photo_gallery',
-      7 => 'field_story_associate_video',
-      8 => 'field_story_movie_description',
-      9 => 'field_mega_review_career_graph',
-      10 => 'domain',
-      11 => 'title',
+      5 => 'field_mega_review_youtube_url',
+      6 => 'field_story_associate_video',
+      7 => 'field_story_movie_description',
+      8 => 'field_associate_photo_gallery',
+      9 => 'field_mega_review_twitter',
+      10 => 'title',
     ),
     'format_type' => 'div',
     'format_settings' => array(
@@ -65,7 +64,7 @@ function mega_review_critic_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Browse Media',
-    'weight' => '1',
+    'weight' => '3',
     'children' => array(
       0 => 'field_story_extra_large_image',
       1 => 'field_story_extra_small_image',
@@ -102,7 +101,7 @@ function mega_review_critic_features_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Movie Review',
-    'weight' => '2',
+    'weight' => '4',
     'children' => array(
       0 => 'field_mega_review_review',
     ),
@@ -124,11 +123,45 @@ function mega_review_critic_features_field_group_info() {
   );
   $field_groups['group_review_movie_review|node|mega_review_critic|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_review_section|node|mega_review_critic|form';
+  $field_group->group_name = 'group_review_section';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'mega_review_critic';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Section',
+    'weight' => '1',
+    'children' => array(
+      0 => 'field_story_category',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Section',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => 'SectionCategory',
+        'classes' => 'group-review-section field-group-div',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_review_section|node|mega_review_critic|form'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Basic Details');
   t('Browse Media');
   t('Movie Review');
+  t('Section');
 
   return $field_groups;
 }

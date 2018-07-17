@@ -14,7 +14,6 @@
                 $('.vertical-tabs-list').hide();
                 $('#edit-metatags').show();
                 $('#edit-metatags-und-advanced').hide();
-
             }
         }
     }

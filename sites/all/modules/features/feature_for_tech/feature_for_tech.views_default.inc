@@ -39,11 +39,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Section wise ordering content: weight */
-  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
-  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
-  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -106,19 +101,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['type']['label'] = '';
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
-  /* Field: Content: Description */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: iOS */
-  $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
-  $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -153,6 +135,29 @@ function feature_for_tech_views_default_views() {
     'image_style' => 'magazine_top_three_story_237x133',
     'image_link' => '',
   );
+  /* Field: Content: Addon Story Title URL */
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['id'] = 'field_story_redirection_url_titl';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['table'] = 'field_data_field_story_redirection_url_titl';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['field'] = 'field_story_redirection_url_titl';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['label'] = '';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['element_label_colon'] = FALSE;
+  /* Field: Content: Designation */
+  $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
+  $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -197,7 +202,19 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -224,6 +241,17 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['delta']['label'] = '';
   $handler->display->display_options['fields']['delta']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['delta']['separator'] = '';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -233,24 +261,23 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
+  /* Filter criterion: Section widget relationship: Content type */
   $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
   $handler->display->display_options['filters']['content_type']['value'] = 'photogallery';
   $handler->display->display_options['filters']['content_type']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Widget */
+  /* Filter criterion: Section widget relationship: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
   $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Category */
+  /* Filter criterion: Section widget relationship: Category */
   $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['filters']['cat_id']['value'] = '430';
-  $handler->display->display_options['filters']['cat_id']['group'] = 1;
 
   /* Display: Watch */
   $handler = $view->new_display('block', 'Watch', 'block_8');
@@ -271,18 +298,12 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -311,6 +332,17 @@ function feature_for_tech_views_default_views() {
     'image_style' => 'video_landing_page_170_x_127',
     'image_link' => 'content',
   );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -320,24 +352,24 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
-  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['value'] = 'Videogallery';
-  $handler->display->display_options['filters']['content_type']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Widget */
-  $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['widget']['field'] = 'widget';
-  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
-  $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Category */
-  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '434';
-  $handler->display->display_options['filters']['cat_id']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type_1']['id'] = 'content_type_1';
+  $handler->display->display_options['filters']['content_type_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type_1']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type_1']['value'] = 'Videogallery';
+  $handler->display->display_options['filters']['content_type_1']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget_1']['id'] = 'widget_1';
+  $handler->display->display_options['filters']['widget_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget_1']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget_1']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget_1']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Category */
+  $handler->display->display_options['filters']['cat_id_1']['id'] = 'cat_id_1';
+  $handler->display->display_options['filters']['cat_id_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['cat_id_1']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id_1']['value'] = '428';
+  $handler->display->display_options['filters']['cat_id_1']['group'] = 1;
 
   /* Display: byline */
   $handler = $view->new_display('block', 'byline', 'block_9');
@@ -388,18 +420,12 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -430,6 +456,17 @@ function feature_for_tech_views_default_views() {
     'image_style' => 'video_landing_page_170_x_127',
     'image_link' => 'content',
   );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -439,24 +476,24 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
-  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['value'] = 'Videogallery';
-  $handler->display->display_options['filters']['content_type']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Widget */
-  $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['widget']['field'] = 'widget';
-  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
-  $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Category */
-  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '443';
-  $handler->display->display_options['filters']['cat_id']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type_1']['id'] = 'content_type_1';
+  $handler->display->display_options['filters']['content_type_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type_1']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type_1']['value'] = 'Videogallery';
+  $handler->display->display_options['filters']['content_type_1']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget_1']['id'] = 'widget_1';
+  $handler->display->display_options['filters']['widget_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget_1']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget_1']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget_1']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Category */
+  $handler->display->display_options['filters']['cat_id_1']['id'] = 'cat_id_1';
+  $handler->display->display_options['filters']['cat_id_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['cat_id_1']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id_1']['value'] = '443';
+  $handler->display->display_options['filters']['cat_id_1']['group'] = 1;
 
   /* Display: Movie Latest */
   $handler = $view->new_display('block', 'Movie Latest', 'movie_latest');
@@ -470,7 +507,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
-  $handler->display->display_options['pager']['options']['offset'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
   $handler->display->display_options['style_options']['custom-class-columncount'] = '0';
@@ -520,17 +557,17 @@ function feature_for_tech_views_default_views() {
     'image_style' => 'widget_very_small',
     'image_link' => '',
   );
-  /* Field: Field: Small image */
-  $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
-  $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
-  $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
-  $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
-    'image_style' => 'widget_very_small',
-    'image_link' => '',
-  );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

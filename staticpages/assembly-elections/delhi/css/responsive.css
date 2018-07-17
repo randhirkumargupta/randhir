@@ -1,0 +1,271 @@
+@media screen and (max-width:800px){.res-view1{width:337px;float:left;margin-right:30px;margin-bottom:3%;}
+.res-view2{width:337px;float:left;margin-right:0px;margin-bottom:3%;}
+.outertop{width:100%;margin:0 auto;height:20px;position:relative;}
+.top_itgd{width:250px;float:left;text-align:left;position:absolute;left:0px;top:-4px;z-index:9999;}
+.itgd_links{background-color:#d8d8d8!Important;width:100%;}
+.itgd_links ul li{float:none;padding:0px 10px;}
+.down_arrow{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/down_arrow.gif) right center no-repeat;padding-right:18px;}
+.redborder{border:none;}
+.itgd_links{border-bottom:1px solid #c7c7c7;}
+.itgd_links{background-color:#d8d8d8!Important;width:99.5%;}
+.itgd_links ul{width:100%}
+#search-saction{display:block!Important;width:97.4%!Important}
+.leftad, .rightad{display:none;}
+.itgd_links ul li ul{float:left;}
+.itgd_links ul li ul li{float:none;border-bottom:1px solid #ccc;}
+.itgd_links ul li ul li a{color:#787878}
+#drr, #dr{background:none repeat scroll 0 0 rgb(216, 216, 216);display:none;height:160px;padding:10px;width:125px;border:1px solid #c7c7c7;border-top:none;margin-top:-3px;}
+.itgd_links ul li.last{line-height:30px}
+nav, nav ul{width:100%;}
+.section{line-height:36px;text-align:left;text-transform:uppercase;width:76px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/section_arr.gif) right center no-repeat;padding-right:18px;float:left;}
+.section a{color:#fff;}
+.nav_padding{padding:8px 7px;}
+nav ul li a{padding:8px 4px;font-size:12px;}
+header{width:100%;padding:1% 0px;}
+header h1{margin-left:10px;}
+.app{padding:8px 5px;font:bold 16px arial;color:#fff;}
+.app a{color:#fff;text-decoration:none;}
+.app a:hover{color:#fff;text-decoration:none;}
+.search-reas{display:block;background:#fff;overflow:hidden;background:#fff url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/search-icon.jpg) 5px center no-repeat;padding-left:30px;width:333px;margin:4px;float:right;height:28px;}
+.search-reas .inputbox{width:390px;height:25px;padding:3px;line-height:25px;margin:2px;float:left;border:none;-webkit-border-radius:0px;-webkit-appearance:none;}
+.search-reas .btn{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -235px -54px rgba(0, 0, 0, 0);display:block;float:right;height:28px;text-indent:-9999px;width:84px;cursor:pointer;border:0;-webkit-border-radius:0px;-webkit-appearance:none;margin-right:-3px;}
+.centerdiv{width:100%;padding:0px; height:130px;}
+.topbox_lft{display:none;}
+#ad{float:none!Important;padding:21px 0;width:100%;}
+#strwapper{width:95%;}
+.strleft{float:none;width:92%;padding:1% 4% 1% 4%}
+.strright{float:left;width:92%;padding:4%}
+.mosimg{text-align:center}
+.mosimg img{width:100%;}
+.btm-left{width:100%;float:left;}
+.btm-l{margin-right:0%;}
+#top-web{display:none;}
+#top-web1{display:block;}
+.top-res{display:none;}
+#top-res{display:none;}
+#search-saction{display:block!Important}
+.footerdrop{padding:10px;width:700px;margin-left:-186px;}
+.footerdrop ul{padding:0px;margin:0px;}
+.footerdrop ul li{list-style:none;float:left}
+.footerdrop ul li a{padding:0px 6px 4px;text-transform:uppercase;color:#fff;font-size:18px;text-decoration:none;line-height:28px;}
+.footerdrop ul li a:hover{color:#ccc;text-decoration:none;}
+#footer{display:none;padding-bottom:40px;}
+.btm-itlogo{display:none}
+.footertag, footer{width:100%}
+.footertag{background: #333;}
+.nav ul li{padding:13px 0 !important;}
+.nav ul li a{padding:0 3px !important;         }
+.home a{height:42px}
+.searc-icon1{float:none;width:100%;margin-top:-37px}
+.searc-icon1 img{float:right;}
+.section-btm{line-height:42px;text-align:left;text-transform:uppercase;width:76px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-arr.jpg) right 15px no-repeat;padding-right:26px;float:left;margin-left:10px;font-weight:bold;font-size:20px;font-family:Roboto;}
+#navigation{display:none;position:absolute;left:0px;top:35px;width:200px;z-index:999;background:#000;width:400px;}
+#navigation ul{float:left;width:175px;padding:12px;}
+#navigation ul li{padding:5px;background:none;border-bottom:1px solid #303030;width:100px;line-height:normal}
+#navigation ul li a{background:none;padding:0px;font-size:14px;}
+#navigation ul li a:hover{color:#ccc;}
+.section-btm a{color:#fff;}
+.section-btm{display:block;}
+.searc-icon1 img{display:block;}
+.clears{clear:both;}
+.clear-respons{clear:none;display:none}
+.listing, .leftnav{width:100%;}
+.phvidmargin{width:100%}
+.col{margin-left:2%}
+.rightnav{width:100%;margin-right:0px;}
+.topnewsbox{width:87%;}
+.morevidphtxt{width:100%;margin:10px 0 0;}
+.headline{margin-left:2%;}
+#searc-icon1{display:none;}
+#top_ad{padding:2%; position:relative; float:none; top:0px; width:728px; margin:0 auto;}
+.centerdiv{ height:auto;}
+.beaking_news{width:96%;}
+#wapper{width:92%;padding:0% 4% 4% 4%; }
+#wapper1{width:92%;padding:4%}
+.pathway{float:none;margin-left:-7px;padding-bottom:60px;}
+.phcont{width:100%;}
+.phleftcont{float:none;width:100%;margin:0 auto;}
+.phrightcont{margin:0 auto;width:93%;float:none;}
+.fb{margin:3% 0;}
+.sharebox{margin:0px;}
+.story-right{width:100%;float:none}
+.video-boxcont{background-color:rgb(255, 255, 255);float:none;margin:0 auto 2%;min-height:336px;overflow:hidden;padding:2%;width:93%;}
+.phcont{margin-left:16px;padding:1%;width:93%;}
+.colspc{padding:10px 16px 10px 0;}
+.mr-right{}
+.width94per{float:left;width:94% !important;}
+.footertag nav, footer nav{width:100%;}
+.homeleft{float:left;width:100%;}
+.homeright{float:left;width:100%;}
+.divclear{clear:none;}
+.phvid-listing .phvidmargin .divclear{clear:both;}
+.boxcont_thisweek{float:left;margin:0 4% 7% 0;width:100%;}
+.last{margin:0;}
+.ad{float:left;width:47% !important}
+.funanalitic-slider{float:left !important;margin-bottom:20px !important;margin-top:3% !important;width:47% !important;}
+.margright{}
+.margrightsec{margin-left:4%;margin-right:0 !important}
+.ipadclear{display:block;clear:both}
+.ipdwidth{}
+.big_img{margin:0 auto;}
+.iframe_area{padding-left:4%;}
+.debate_title{padding-left:18px;}
+.hotrightnow_lft{width:94%;}
+.pathone{background:#000;padding:5px 7px;color:#fff;float:left}
+.pathone a{color:#fff}
+.pathtwo{background:#333333;padding:5px 7px;color:#fff;float:left}
+.pathtwo a{color:#fff}
+.paththree{background:#444444;padding:5px 7px;color:#fff;float:left}
+.paththree a{color:#fff}
+.pathfour{background:#545454;padding:5px 7px;color:#fff;float:left}
+.pathfour a{color:#fff}
+.currentpath{background:#666666;padding:5px 7px;color:#fff;float:left}
+.pathway{float:left;margin-left:-6px;padding-bottom:22px;width:100%;}
+.pathway1{margin-left:0px;}
+.phcont h1{width:none;}
+.category_outer{margin:4%;width:92%;}
+#slider1{margin-left:31px;}
+#slider1 .viewport{width:502px;}
+.phcont img{width:100%}
+.photosynd img{width:auto;}
+.pathway2{margin-left:10px; width:100%;}
+.pathway1{width:100%;}
+#surferdiv{width:100%;}
+.ticker-outer{width:100%}
+.ticker-inner{width:75%;}
+.newsSection{width:100%}
+.bottomsearchbox{margin-bottom:40px;}
+#searchbox, .search-head{width:100%;}
+.search-tab{width:24%;}
+.search-table{width:100%;}
+#itlivetvbox{width:100%}
+.live-table{width:100%;}
+#calleftcontbox{width:100%;margin:0;}
+#calrightcont{width:100%;}
+.divalign{width:100%;}
+#calrightbor{border-left:none;}
+.caldivlftbox{width:19%; margin-left:0px;}
+.caldivrhtbox{width:18%;}
+.articalmarginal{width:100%}
+.photocap{padding:10px 5px 5px 0;}
+.sharecont{float:left;}
+#errorcontbox{width:100%;float:none;margin:0px;}
+.devid{display:none}
+.leftdiv{width:100%;overflow:hidden}
+.leftdiv img{margin-left:25%;}
+.errorspc{float:none;margin:0px;width:100%;}
+.pgnot{100%}
+.header-tag{width:100%}
+.pathone img, .pathtwo img, .paththree img, .pathfour img{width:auto}
+.edu{padding:8px 4px}
+.colum{margin:0px 3.5%;}
+.rightad, .leftad{display:none;}
+.itgd_links ul{width:100%;}
+.submenu p {margin: 13px auto 0;padding-left: 0; width: 100%;}
+.submenu p a {  padding: 3px;}
+.home-icon, .home-icon:hover {  padding: 5px 7px 11px;}
+#right-section .rt-colum.right-ad{ margin-bottom:25px;}
+
+.fre-rightcont {
+    clear: both;
+    float: left !important;
+    width: 95% !important;
+    margin-left: 18px!important;
+}
+.big-story-outer { width:96%; padding:10px 2% 10px 2%;}
+.articletext a img { text-align:center!Important; padding:3%;}
+#modi-banner a img { width:100%;}  
+
+.big-story-outer {
+    margin: 0 auto 0px!Important;
+}
+.mainheadline a { font-size:52px; padding-bottom:5px; text-align:center }
+.fifa_bg {width: 94%;}
+.ybg {margin-left:12px}
+#budget-banner {width:96%; margin:0px auto 10px;}
+
+.submenu, .menues, .redborder, .itgd_links {
+    margin: 0 auto !important;
+    width: 99.5% !important;
+}
+.skinnin-ad-container {width: 100% !important;}
+#left-home, #right-home { display:none!Important;}
+.corumright { float:right!Important}
+.btm-arrow { display:none}
+#wapper-section {margin: 0 auto 72px;}
+
+
+
+.sponserd_outer {
+    clear: both;
+    margin-top:-20px;
+    width: 100% !important;
+}
+.sp_strip {
+    height: 150px;
+    width: 719px;
+}
+#right-section .rt-colum.right-ad { margin-bottom:0px}
+
+
+/*=== Right Navigation ===*/
+.rt-colum:nth-child(n+1){ float:left;}
+.rt-colum:nth-child(2n){ float:right;}
+.rt-colum:nth-child(7){ float:right;}
+.rt-colum.right-ad{ margin-bottom:25px;}
+
+
+.phvid-leftnav { float:none; margin:0 auto;}
+
+}
+@media screen and (max-width:600px){.big_img{width:570px;}
+.header-tag{width:100%}
+.iframe_area{padding-left:0;}
+.debate_title{padding-left:0;}
+.comment-frame{width:570px;}
+#comment_box #right textarea{width:545px!Important;}
+.rightnav{float:none;width:100%;}
+.btm-left{width:44%;margin-left:0;float:left}
+.leftspac{float:left;margin-bottom:8%;width:40%;}
+.btm-l{float:right;margin-left:10px;margin-right:0;}
+.topnewsbox{width:123%;}
+.strright{padding:0;}
+#wapper, #wapper1{width:auto;}
+.phcont h1{width:auto;}
+.phcont img{width:100%}
+.photosynd img{width:auto;}
+#slider1 .viewport{width:450px;margin-right:5px;}
+#slider1{margin-left:0}
+.col{margin-left:9%;}
+.pathway1{width:100%;}
+.ticker-outer{width:100%}
+.ticker-inner{width:70%;}
+.newsSection{width:100%}
+.newsSectionLeft{margin-right:3%;width:270px;}
+.newsborder{width:270px;}
+.newsSectionRight{width:270px;}
+.leftdiv img{margin-left:16%;}
+#simplydiv{width:100%;}
+.ipdwidth{width:47%}
+.colspc{padding:10px 17px 10px 0;}
+.width47per{}
+.width94per{float:left;width:94% !important;}
+#left-home, #right-home { display:none!Important;}
+#right-section .rt-colum.right-ad { margin-bottom:0px}
+}
+
+@media screen and (max-width:320px){
+.htl-logo, #search-saction, .searc-icon, .topbox_lft, #top_ad, .fifa_bg { display:none!Important;}	
+.app {padding: 2px 5px;}
+.beaking_news { padding-top: 10px;}
+.left-column {width: 94% !important;}
+.right-column { float:left; width:100%!Important;}
+.leftbar, .middlebar, .ipdwidth {width:100%;}
+.ad { display:none;}
+.colum { margin:0;}
+.bxslider li { width:100%!Important}
+.btm-arrow { display:none}
+.homeright, #sosorry { width:100%;}
+#footer {  margin: 44px auto 0;}
+#left-home, #right-home { display:none!Important;}
+}

@@ -1,0 +1,215 @@
+/***Css Starts Here***/
+
+*{padding:0; margin:0;}
+body, html{font-size:100%;height:100%;margin:0;padding:0;}
+body{background-color:#fff !important; margin:0; padding:0; color:rgb(119, 119, 119); font-family:"Roboto",Arial, Helvetica, sans-serif;}
+.rtl{float:right !important;}
+
+h1{font-size:35px; line-height:38px; font-weight:500; color:#171717; display:block; margin-bottom:15px;}
+.common_box h2, .common_right_box h2{background-color:#be0000; font-size:15px; line-height:24px; padding:0 30px 0 7px; text-transform:uppercase; display:inline-block; color:#fff;}
+
+.wrapper{width:1000px; margin:0 auto;}
+
+/*.head_banner{float:left; width:100%;}*/
+
+.head_banner{ background:url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/mast.gif') no-repeat; width:1000px; height:150px; margin:15px auto 15px; text-align:center;}
+
+.head_banner h1 {
+font-size: 56px;
+font-weight: bolder;
+margin-top: 70px;
+font-family: roboto;
+float: right;
+color: #FFF;
+margin-right: 248px;
+}
+
+.head_banner span {
+font-size: 35px;
+display: block;
+font-weight: normal;
+font-family: roboto;
+}
+
+.top-headline{font-size:35px; line-height:38px; font-weight:500; color:#171717; display:block;}
+
+
+.body_contaienr{width:100%; float:left; margin:26px 0 0;}
+.body_contaienr a:hover{text-decoration:underline;}
+
+.boxshad{box-shadow:0px 0px 3px #cccccc; border:1px solid #d5d5d5; border-radius:1px; padding:1.5%; width:auto !important;}
+.boxshad a{color:#171717;}
+.boxshad span{font-size:12px; line-height:26px; color:#595959; display:block;}
+.boxshad img{margin-bottom:10px;}
+.boxshad p{font-size:16px; font-weight:400; line-height:22px; color:#6c6c6c; display:block;}
+
+a.more{float:right; color:#000; text-transform:uppercase; font-size:13px; font-weight:400;}
+
+.common_box{float:left; width:323px; margin:24px 0 0;}
+.box_main{width:321px; border:1px solid #d5d5d5; border-radius:1px; float:left; background-color:#fff; box-shadow:0px 0px 3px #cccccc; min-height:438px; margin:6px 0 0; overflow:hidden;}
+.box_main .content{float:left; width:auto; padding:0 9px 0 6px;}
+.box_main h3{font-size:21px; line-height:24px; color:#171717; display:block; padding:10px 0;}
+.box_main h3 a{color:#171717;}
+.box_main ul{list-style:none; float:left; width:100%;}
+.box_main ul li{width:100%; float:left; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/list_dot.gif) repeat-x 0 bottom; padding-bottom:6px; margin-bottom:7px;}
+.box_main ul li:last-child{background:none;}
+.box_main ul li strong{display:inline-block; vertical-align:top; width:5%; line-height:15px;}
+.box_main ul li a{font-size:15px; line-height:19px; color:#5b5b5b; width:95%; display:inline-block;}
+.box_main ul li a:hover{color:#002768; text-decoration:none;}
+.box_main .stories-container{width:321px !important; float:left; height:408px; overflow:hidden;}
+
+.common_box .box_main .pad{padding:5px 9px 6px !important; position:relative; min-height:445px;}
+
+ul.thumb{padding-bottom:11px;}
+ul.thumb li{background:none; padding:0; margin-bottom:13px !important; height:auto !important;}
+ul.thumb li img{float:left; margin:0 13px 0 0; width:125px; height:94px;}
+ul.thumb li em{display:block; font-size:16px; line-height:19px; color:#171717; font-style:normal;}
+
+.wid{width:100% !important;}
+.bot_box{float:left; box-shadow:0px 0px 3px #cccccc; border: 12px solid #fff; border-radius:1px; height:448px; overflow:hidden; width:96.3% !important; position:relative; margin:6px 0 0;}
+.bot_box .strip{position:absolute; bottom:0px; left:9%; font:15px; line-height:20px; color:#515151; width:522px; min-height:44px; background-color:#fff; padding:5px 11px;}
+
+.common_right_box{ width:312px; margin:24px 0 0;}
+.common_right_box .boxwid{width:300px !important; padding:5px; min-height:193px; position:relative;}
+.common_right_box .strip{position:absolute; bottom:5px; left:5px; background-color:#000; opacity:0.5; font-size:15px; line-height:19px; color:#fff; min-height:35px; padding:5px; width:290px;}
+
+.videosec{min-height:446px !important; margin-bottom:25px;}
+.videosec li{position:relative;}
+.videosec li a.videobtn{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/video_icon.png) no-repeat 0 0; width:27px; height:28px; position:absolute; bottom:4px; right:61%;}
+
+.tweet_head{float:left; width:298px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/tweet_bg.gif) repeat-x 0 0; min-height:38px; padding:0px 9px 0 5px;}
+.tweet_head h3{display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/tweet_icon.gif) no-repeat right 6px; font:15px; color:#fff; text-transform:uppercase; font-size:24px; font-weight:600;}
+
+
+.outer_bottom{float:left; width:100%; padding:30px 0 0 0;}
+.outer_bottom h3{font-size:32px; color:#032666; line-height:34px; display:inline-block; font-weight:300;}
+.outer_bottom h3 strong{font-weight:bold;}
+.outer_bottom a.shareicon{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/Share_icon.png) no-repeat 0 0; width:22px; height:23px; display:inline-block; margin:0 0 0 10px;}
+
+.inner_bottom{float:left; width:100%; background:#f6f6f6 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/scale_bg.gif) repeat-x 0 top; min-height:217px; border-bottom:2px solid #fff;}
+.inner_bottom .wrapper{position:relative; min-height:217px;}
+.leader{position:absolute; bottom:-7px; left:0;}
+.leader ul{list-style:none; float:left; width:100%;}
+.leader ul li{width:auto; float:left; padding-left:10px; position:relative;}
+.leader ul li:first-child{padding-left:0;}
+.leader ul li span{font-size:20px; line-height:26px; color:#575757; font-weight:normal; text-align:center; font-weight:200; position:absolute; top:-37px; display:block; width:100%; text-transform:uppercase; display:none;}
+.leader ul li:hover{cursor:pointer;}
+.leader ul li:hover span{display:block;}
+
+.leader ul li img {
+filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+filter: gray; /* IE6-9 */
+-webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */}
+
+.leader ul li img:hover {filter: none; -webkit-filter: grayscale(0);}
+
+#topstories{ position:relative; overflow:hidden; height:407px; }
+.right-droplist .story-listall{ list-style:none; position:relative;}
+.stories-container{ height:350px; }
+
+a#topprev{color:#000; text-transform:uppercase; font-size:13px; font-weight:400; background:#fff url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/more_icon.gif) no-repeat 104px 21px; width:170px; display:block; position:absolute; z-index:99999999; padding:18px 0 8px 132px; bottom:0;}
+a#topprev:hover{text-decoration:none;}
+
+a#topnext{color:#000; text-transform:uppercase; font-size:13px; font-weight:400; background:#fff url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/obama_visit/more_icon_top.gif) no-repeat 104px 21px; width:170px; display:block; position:absolute; z-index:99999999; padding:18px 0 8px 132px; bottom:0;}
+a#topnext:hover{text-decoration:none;}
+.nav_padding, nav ul li a{ padding: 8px 5.5px;}
+.itgd_links, .redborder, .itgd_links { width:99.3%!Important;}
+.itgd_links {  font: 11px/13px roboto; background:#000!Important}
+.btm-arrow { display:none}
+.itgd_links ul li { height:16px!Important;}
+.itgd_links a { color:#fff!Important}
+.itgd_links ul li:first-child { background:none!Important}
+.skinnin-ad-container { background:none!Important}
+.ad { margin-bottom:25px;}
+
+
+@media screen and (max-width:800px){
+.wrapper{width:92%; padding:0 4%;}
+.head_banner img{width:100%;}
+.homeleft{width:100%;}
+.boxshad img{width:100%;}
+.homeright{width:100%;}
+.advertisement_sec{width:auto; float:left; margin-top:25px;}
+.tweeter{float:left;}
+.leader ul li{width:18%;}
+.cbamaspeak { margin-bottom:25px;}
+.ad { margin-bottom:0px;}
+.story-right { margin-top:35px; float:left}
+
+
+}
+@media screen and (max-width:600px){
+.wrapper{width:92%; padding:0 4%;}
+.bot_box{width:100%;}
+.bot_box img{width:100%;}
+.bot_box .strip{width:75%;}
+.leader{position:relative;}
+.leader ul li{width:100%; text-align:center; margin-top:35px;}
+}
+
+@media screen and (max-width:320px){
+.bot_box{width:100%;}
+.bot_box img{width:100%;}
+}
+
+.crk_slide {
+    position: relative;
+    width: 300px;
+    z-index: 2;
+}
+.crk_slide .next {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/cricket/Right.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    cursor: pointer;
+
+    height: 42px;
+    width: 27px;
+                position:absolute;
+                z-index:9;
+                top:130px;
+                right:10px;
+}
+.crk_slide .prev {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/cricket/Left.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 42px;
+    width: 27px;
+                position:absolute;
+                z-index:9;
+                top:130px;
+}
+
+.crk_slide .belts {
+    overflow: hidden;
+    width: 300px;
+}
+
+.crk_slide ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.crk_slide ul li {
+    color: #fff;
+    float: left;
+    font-family: roboto;
+    font-size: 45px;
+    font-weight: bold;
+    list-style: outside none none;
+    position: relative;
+    width: 300px;
+}
+
+.crk_slide ul li span {
+    background: none repeat scroll 0 0 #333;
+    bottom: 0;
+    font-size: 14px;
+    left: 0;
+    position: absolute;
+
+    width: 96.7%;
+    z-index: 999;
+                color:#fff;
+				font-weight:normal;
+				padding:5px;
+}

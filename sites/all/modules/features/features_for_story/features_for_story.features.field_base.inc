@@ -320,6 +320,8 @@ function features_for_story_field_default_field_bases() {
         'ugc' => 'ugc',
         'breaking_news' => 'Breaking News',
         'manage-budget-predictor' => 'Budget-Predictor',
+        'mega_review_critic' => 'Mega review Critic',
+        'bestcolleges' => 'Bestcolleges',
       ),
       'allowed_values_function' => '',
     ),
@@ -369,7 +371,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 600,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -716,9 +718,9 @@ function features_for_story_field_default_field_bases() {
         'second' => 0,
         'year' => 'year',
       ),
-      'timezone_db' => 'UTC',
+      'timezone_db' => '',
       'todate' => '',
-      'tz_handling' => 'site',
+      'tz_handling' => 'none',
     ),
     'translatable' => 0,
     'type' => 'datetime',
@@ -732,7 +734,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_listicle_color',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(
@@ -746,6 +748,24 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_listicle_color_new'.
+  $field_bases['field_listicle_color_new'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_listicle_color_new',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'jquery_colorpicker',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'jquery_colorpicker',
   );
 
   // Exported field_base: 'field_map_embed_code'.
@@ -1052,6 +1072,36 @@ function features_for_story_field_default_field_bases() {
     'type' => 'list_text',
   );
 
+  // Exported field_base: 'field_story_assign_to_widget'.
+  $field_bases['field_story_assign_to_widget'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_assign_to_widget',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'top_stories_widget' => 'Top Stories',
+        'home_page_feature_widget' => 'Featured Story',
+        'big_story_format_widget' => 'Big Story',
+        'dont_miss_content_widget' => 'Dont Miss',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
   // Exported field_base: 'field_story_associate_lead'.
   $field_bases['field_story_associate_lead'] = array(
     'active' => 1,
@@ -1213,6 +1263,9 @@ function features_for_story_field_default_field_bases() {
         'nofollow' => 'No follow',
         'lock_story' => 'Lock Story',
         'developing_story' => 'Developing Story',
+        'activate_live_tv' => 'Activate Live TV',
+        'sponsor' => 'Sponsor Story',
+        'webcast' => 'Webcast',
       ),
       'allowed_values_function' => '',
     ),
@@ -1239,6 +1292,28 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_story_embed_webcast'.
+  $field_bases['field_story_embed_webcast'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_embed_webcast',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_expert_description'.
@@ -1396,6 +1471,28 @@ function features_for_story_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_story_external_url'.
+  $field_bases['field_story_external_url'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_external_url',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
+  );
+
   // Exported field_base: 'field_story_extra_large_image'.
   $field_bases['field_story_extra_large_image'] = array(
     'active' => 1,
@@ -1539,7 +1636,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1592,7 +1689,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 1000,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1838,7 +1935,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_magazine_headline',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'format' => array(
@@ -2021,7 +2118,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2214,6 +2311,11 @@ function features_for_story_field_default_field_bases() {
     'settings' => array(
       'handler' => 'base',
       'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
         'sort' => array(
           'type' => 'none',
         ),
@@ -2275,7 +2377,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2303,6 +2405,35 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_story_show_fields'.
+  $field_bases['field_story_show_fields'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_show_fields',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'story_impact_text' => 'Impact Text',
+        'story_powered_text' => 'Powered Text',
+        'story_category_icon' => 'Category Icon',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
   );
 
   // Exported field_base: 'field_story_small_image'.
@@ -2561,7 +2692,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_tech_pros_cons_ratin',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'value' => array(
@@ -2726,7 +2857,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_technology_rating',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'value' => array(
@@ -2797,7 +2928,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2821,7 +2952,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2845,7 +2976,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 1000,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -3028,7 +3159,7 @@ function features_for_story_field_default_field_bases() {
   // Exported field_base: 'field_stroy_city'.
   $field_bases['field_stroy_city'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_stroy_city',
@@ -3076,6 +3207,43 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_technology_photogallery'.
+  $field_bases['field_technology_photogallery'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_technology_photogallery',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'views',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => 'entityreference_1',
+          'view_name' => 'associate_gallery',
+        ),
+      ),
+      'target_type' => 'node',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_technology_sample_photo'.

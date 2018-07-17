@@ -167,7 +167,7 @@
           "yes3.gif"
         ];
         // below is the path of the image.
-        CKEDITOR.config.smiley_path = path + '/sites/all/themes/itg/smiley/';
+        CKEDITOR.config.smiley_path = '/sites/all/themes/itg/smiley/';
       }
     }
   }

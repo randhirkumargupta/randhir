@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function user_management_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "elysia_cron" && $api == "default_elysia_cron_rules") {
+    return array("version" => "1");
+  }
   if ($module == "field_group" && $api == "field_group") {
     return array("version" => "1");
   }

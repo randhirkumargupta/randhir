@@ -322,7 +322,7 @@ function features_for_print_team_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_pti_issue',
     'label' => 'Issue',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -339,11 +339,7 @@ function features_for_print_team_field_default_field_instances() {
   // Exported field_instance: 'node-print_team_integration-field_pti_magazine'.
   $field_instances['node-print_team_integration-field_pti_magazine'] = array(
     'bundle' => 'print_team_integration',
-    'default_value' => array(
-      0 => array(
-        'target_id' => 210,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -367,7 +363,7 @@ function features_for_print_team_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_pti_magazine',
     'label' => 'Magazine',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

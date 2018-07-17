@@ -79,6 +79,9 @@ function feature_for_election_graph_strongarm() {
         'redirect' => array(
           'weight' => '4',
         ),
+        'metatags' => array(
+          'weight' => '40',
+        ),
       ),
       'display' => array(),
     ),
@@ -124,6 +127,13 @@ function feature_for_election_graph_strongarm() {
   $strongarm->name = 'node_submitted_election_graph_xml';
   $strongarm->value = 0;
   $export['node_submitted_election_graph_xml'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_election_graph_xml_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_election_graph_xml_pattern'] = $strongarm;
 
   return $export;
 }

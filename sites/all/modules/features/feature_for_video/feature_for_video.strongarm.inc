@@ -165,19 +165,19 @@ function feature_for_video_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '23',
+          'weight' => '24',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '22',
+          'weight' => '23',
         ),
         'domain' => array(
           'weight' => '2',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '31',
         ),
       ),
       'display' => array(
@@ -277,6 +277,13 @@ function feature_for_video_strongarm() {
   $strongarm->name = 'node_submitted_videogallery';
   $strongarm->value = 0;
   $export['node_submitted_videogallery'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_itg_delete_solr_video_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_itg_delete_solr_video_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -304,6 +304,87 @@ function features_for_newsletter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-newsletter-field_cm_select_type'.
+  $field_instances['node-newsletter-field_cm_select_type'] = array(
+    'bundle' => 'newsletter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Select Content Type',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 16,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_cm_select_type',
+    'label' => 'Content Type',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-newsletter-field_news_title'.
+  $field_instances['node-newsletter-field_news_title'] = array(
+    'bundle' => 'newsletter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 17,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_news_title',
+    'label' => 'Subject Line',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'node-newsletter-field_newsl_add_news'.
   $field_instances['node-newsletter-field_newsl_add_news'] = array(
     'bundle' => 'newsletter',
@@ -736,6 +817,48 @@ function features_for_newsletter_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-newsletter-field_op_flag'.
+  $field_instances['node-newsletter-field_op_flag'] = array(
+    'bundle' => 'newsletter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 18,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_op_flag',
+    'label' => 'State Flag',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 16,
+    ),
+  );
+
   // Exported field_instance: 'node-newsletter-field_story_category'.
   $field_instances['node-newsletter-field_story_category'] = array(
     'bundle' => 'newsletter',
@@ -772,6 +895,53 @@ function features_for_newsletter_field_default_field_instances() {
       'settings' => array(),
       'type' => 'taxonomy_hs',
       'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-newsletter-field_story_node_identity'.
+  $field_instances['node-newsletter-field_story_node_identity'] = array(
+    'bundle' => 'newsletter',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 18,
     ),
   );
 
@@ -1041,82 +1211,6 @@ function features_for_newsletter_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-newsletter_templates-field_newst_logo'.
-  $field_instances['node-newsletter_templates-field_newst_logo'] = array(
-    'bundle' => 'newsletter_templates',
-    'deleted' => 0,
-    'description' => 'Please add logo.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'image',
-        'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
-        ),
-        'type' => 'image',
-        'weight' => 3,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_newst_logo',
-    'label' => 'Logo',
-    'required' => 0,
-    'settings' => array(
-      'alt_field' => 1,
-      'default_image' => 0,
-      'exclude_cv' => FALSE,
-      'file_directory' => '',
-      'file_extensions' => 'png gif jpg jpeg',
-      'max_filesize' => '',
-      'max_resolution' => '',
-      'min_resolution' => '',
-      'title_field' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'image',
-      'settings' => array(
-        'filefield_sources' => array(
-          'filefield_sources' => array(
-            'attach' => 0,
-            'clipboard' => 0,
-            'imce' => 0,
-            'itg_image_repository' => 'itg_image_repository',
-            'reference' => 0,
-            'remote' => 0,
-            'upload' => 0,
-          ),
-          'source_attach' => array(
-            'absolute' => 0,
-            'attach_mode' => 'move',
-            'path' => 'file_attach',
-          ),
-          'source_imce' => array(
-            'imce_mode' => 1,
-          ),
-          'source_reference' => array(
-            'autocomplete' => 0,
-            'search_all_fields' => 0,
-          ),
-        ),
-        'imce_filefield_on' => 0,
-        'preview_image_style' => 'thumbnail',
-        'progress_indicator' => 'throbber',
-      ),
-      'type' => 'image_image',
-      'weight' => 4,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-newsletter_templates-field_newst_main_headline'.
   $field_instances['node-newsletter_templates-field_newst_main_headline'] = array(
@@ -1174,13 +1268,12 @@ function features_for_newsletter_field_default_field_instances() {
   t('Frequency');
   t('Header Headline');
   t('Kicker');
-  t('Logo');
   t('Main Headline');
   t('News Content');
   t('Newsletter Content');
   t('Newsletter Type');
+  t('Node Identity');
   t('Please add banner.');
-  t('Please add logo.');
   t('Please add main headline.');
   t('Please choose button to schedule newsletter.');
   t('Please choose newsletter frequency.');
@@ -1199,7 +1292,9 @@ function features_for_newsletter_field_default_field_instances() {
   t('Property (Website Name)');
   t('Schedule');
   t('Section');
+  t('Select Content Type');
   t('Select Template');
+  t('State Flag');
   t('Subject Line');
   t('Thumbnail');
   t('Time');

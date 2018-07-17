@@ -3,13 +3,30 @@
  * Contains functionality related Poll form
  */
 
-(function($) {
+(function ($) {
 
     Drupal.behaviors.itg_poll_form = {
-        attach: function(context, settings) {
+        attach: function (context, settings) {
+            var action_page = settings.itg_poll.settings.action_page;
+            if (action_page == 'edit') {
+                jQuery('#edit-field-poll-answer-option').remove();
+                jQuery('#edit-field-poll-question').remove();
+            }
             $('#edit-field-poll-itg-state').hide();
             jQuery('input[name="field_poll_start_date[und][0][value][date]"]').keydown(false);
             jQuery('input[name="field_poll_end_date[und][0][value][date]"]').keydown(false);
+            jQuery('input[name="field_poll_start_date[und][0][value][date]"]').datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(),
+            });
+            jQuery('input[name="field_poll_end_date[und][0][value][date]"]').datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(),
+            });
             var getOptionAnswerValnew = $("#edit-field-poll-answer-option-und option:selected").val();
             if (getOptionAnswerValnew == 1) {
                 $('.field-name-field-poll-answer-image').hide();
@@ -23,7 +40,7 @@
 
 
             var getOptionAnswerVal;
-            $('#edit-field-poll-answer-option-und').on('change', function() {
+            $('#edit-field-poll-answer-option-und').on('change', function () {
                 $('.field-name-field-ans-caption input').val(''); // caption value reset
                 getOptionAnswerVal = $("#edit-field-poll-answer-option-und").val();
                 if (getOptionAnswerVal == 1) {
@@ -60,7 +77,7 @@
             //Reset form element
             //Reset end date field
             $("#edit-field-display-result-und-2").prop("disabled", true);
-            $('#edit-field-show-end-date-und-1').click(function() {
+            $('#edit-field-show-end-date-und-1').click(function () {
                 if ($("#edit-field-show-end-date-und-1").is(":not(:checked)")) {
                     $("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").val('');
                     $("#edit-field-poll-end-date-und-0-value-timeEntry-popup-1").val('');
@@ -83,7 +100,7 @@
                     }
                 }
             });
-            $('document').ready(function() {
+            $('document').ready(function () {
                 if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                     $("#edit-field-display-result-und-2").prop("disabled", false);
                 } else {
@@ -93,7 +110,7 @@
                 jQuery("#edit-field-poll-end-date-und-0-value-datepicker-popup-2").datepicker({
                     minDate: 0,
                     dateFormat: 'dd/mm/yy',
-                    onClose: function() {
+                    onClose: function () {
                         if ($('#edit-field-poll-end-date-und-0-value-datepicker-popup-2').val()) {
                             $("#edit-field-display-result-und-2").prop("disabled", false);
                         } else {
@@ -104,7 +121,7 @@
                 });
             });
 
-            $('#edit-field-poll-question-und').change(function() {
+            $('#edit-field-poll-question-und').change(function () {
                 var queVal = $('#edit-field-poll-question-und').val();
                 if (queVal == 2) { // Image question
                     $('#edit-field-poll-question-text-und-0-value').val('');
@@ -121,3 +138,4 @@
         }
     }
 })(jQuery);
+

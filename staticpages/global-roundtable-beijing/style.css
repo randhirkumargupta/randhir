@@ -1,0 +1,82 @@
+body{margin:0; padding:0; font-family:roboto; font-size:12px; background:#e5e5e5}
+a {color:black; text-decoration:none;}
+ul{margin:0; padding:0;}
+ul li{ list-style:none;}
+.wrapper{width:1003px; margin:auto; background:#fff; overflow:hidden}
+.inner-wrapper{width:959px; padding:22px;}
+.con{width:100%; margin:auto; }
+.bg-white{ background:white; padding:10px 0;}
+.mt{ margin-top:20px;}
+.bottom-shadow{-webkit-box-shadow: 0px 5px 5px -2px rgba(122,121,122,0.5);
+-moz-box-shadow: 0px 5px 5px -2px rgba(122,121,122,0.5);
+box-shadow: 0px 5px 5px -2px rgba(122,121,122,0.5); position:relative}
+.cf:after, .cf:before{ display:table; content:'';}
+.cf:after{ clear:both;}
+.logo{width:497px; height:280px; float:left;}
+.nav-area{width:497px; float:right;}
+.itgd-logo{width:86px; height:76px; float:right;}
+.menu{width:100%; margin-top:43px;}
+.menu li{ float:left}
+.menu li a{ background:#333333; color:white;  margin-right: 14px;
+    padding: 5px 10px; border-radius:5px; }
+.menu li a:hover{background:#ee1a28;}
+.menu li a.current{background:#ee1a28;}
+.the-theme{width:440px;  font-size:40px; font-family:roboto; font-weight:800; text-align:center; margin-top:19px; line-height:33px; }
+.theme-red{color:#de1e2b;}
+.left-area{width:623px; float:left;}
+.right-area{width:300px; float:right;min-height:500px;}
+
+@font-face {font-family: 'Arial-Black';src: url('ab.eot'); src: url('ab.eot?#iefix') format('embedded-opentype'),url('ab.woff') format('woff'), url('ab.ttf') format('truetype'),  url('ab.svg#"Arial-Black"') format('svg');font-weight: bold;  font-style: normal;}
+.programme_bg {background: url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/programme-top.jpg") no-repeat scroll center top transparent;}
+.nav ul li a.active,.nav ul li a:hover {background:#b70d0d} .nav ul li:hover { background-color:#b70d0d}
+.nav ul li a {padding:5px 9px;}
+.jcarousel-skin-tango .jcarousel-item-horizontal {margin-right:6px !important;}.help_sec .fr {width:430px !important}
+.nav>ul>li.drop1{margin:0;position:relative}.nav>ul>li>ul.ddchild1{background-color:#5E5E5E;display:none;list-style-type:none;margin:0;padding:0;position:absolute;top:30px;width:175px;z-index:999}ul.ddchild1>li{border-bottom:1px solid #FFF;width:100%}ul.ddchild1>li a{color:#FFF;font:700 14px/30px Arial;padding:0 0 0 10px;text-decoration:none;width:165px}.right{float:right}.yellow-bg{background-color:#F7EE23;float:left;margin:5px 0;padding:5px}.main_content{width:1000px;margin-bottom:100px;float:left}#main_content_left{float:left;width:623px}.homebanner{margin-bottom:20px}.live_title{border-bottom:1px solid #ccc;line-height:30px;margin-bottom:10px}.leftlivetitle{color:#b70d0d;float:left;font:400 20px Arial-Black;width:450px;text-transform:uppercase}.liveupdatedate{float:right;font:12px/30px Arial;text-align:right}.datemh{float:left;padding:0;color:#666;font-size:12px;font-family:Tahoma;margin:2px 0 0 10px;display:inline;border:0 solid red;text-align:right;width:214px}.clear{clear:both}.livepage{float:left;width:470px}.red{color:#B70D0D}.red a{color:#B70D0D;text-decoration:none}.red a:hover{text-decoration:underline}.highlight{float:right;width:200px}.highlight_head{border-bottom:1px dotted #000}.highlighttitle{color:#b70d0d;float:left;font:700 18px/18px Arial;width:150px}.highlight_more{float:right;width:50px;font-family:Arial;font-size:14px;line-height:20px}.highlight_more a{color:#000;text-decoration:none}.contabactive{display:block;float:left}.contabbox{float:left;width:623px}.mindr-contimeln{color:#606060;float:left;font:bold 12px/22px roboto;width:85px}.conritepart{background-image:url(http://conclave.intoday.in/conclave/images/line1.gif);background-position:left top;background-repeat:repeat-y;float:left;width:538px;padding-bottom:15px}.consubrtpart{padding-left:10px}.mindr-sessiontitle{background-color:#EEE;color:#000;font:bold 14px roboto;padding:0px 8px;text-transform:uppercase;word-spacing:1px}.mindr-headline{color:#000;font:700 14px/18px arial}.mindr-headline ul{margin:20px 0 0;padding:0}.mindr-headline ul li{background:url(http://media2.intoday.in/microsites/youthsummit2012/story-arrow.gif) no-repeat scroll left 5px transparent;color:#000;font:700 14px/18px arial;list-style:none;margin:3px 0 5px;padding:1px 0 1px 15px}.consubleftbox{color:#C90A12;float:left;font:700 15px/20px arial;margin:10px 0;width:264px}.consubleftbox img{margin-right:6px}.consubleftbox.links a{font-size:12px}.mindr-consubrtbox{background:url(http://media2.intoday.in/microsites/youthsummit2012/arrow-line.gif) repeat-y scroll left top transparent;float:left;margin:10px 0 10px 10px;padding-left:15px;width:238px}.prj_name,.prj_name a{color:#B70D0D;font:700 13px/20px Arial;text-decoration:none}.imgs{margin-right:10px}.mindr-consubhead{color:#000;font:700 13px/20px arial}.mindr-consubrtbox{color:#343434;font:12px/18px arial}.prjtomebg_2{background:url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/lunch-bg1.jpg) no-repeat scroll 0 0 transparent;color:#FFF;height:34px;line-height:34px;padding:0 10px;width:543px;font:15px/30px Arial-Black;text-transform:uppercase}.mindr-headline ul li a{color:#21509E;text-decoration:none}.consubleftbox a{color:#C90A12;font:700 12px arial;text-decoration:none}.bott-marg{margin-bottom:15px}.main-pro-head{width:623px;float:left}.main-pro-head h3{font:400 24px/33px roboto;color:#00000;margin:0;float:left}.mindr-text{font:400 14px/18px arial;color:#6c6c6c}#contabbing,.marg-top{margin-top:10px}#sidebar{float:right;width:300px}.side_chunk{clear:both;margin-bottom:30px; background:url(http://media2.intoday.in/microsites/globalevent-beiging/twitter_bg.jpg) left top no-repeat; width:300px; height:50px;}
+.side_chunk span{color:#fff; font-size:20px; padding:5px; line-height:40px; font-style:italic; font-family:Arial, Helvetica, sans-serif}
+ .side_chunk_title{font:normal 24px/20px roboto;height:30px; padding-bottom:10px;}.side_chunk_title-red{color:#d6171e; font-weight:bold}#main_content{margin-top:20px}.jcarousel-skin-tango .jcarousel-item{height:170px;text-align:center;width:117px}.jcarousel-skin-tango .jcarousel-prev-horizontal{left:0!important}.jcarousel-skin-tango .jcarousel-next-horizontal{right:0!important}.jcarousel-skin-tango li{font:400 13px/20px arial;color:#000;text-align:center}.jcarousel-skin-tango .kicker{font:400 12px/15px arial;color:#6c6c6c}.jcarousel-skin-tango .red{font:700 12px/20px arial;color:#b70d0d}.jcarousel-skin-tango .jcarousel-clip-horizontal{height:210px;width:615px}.jcarousel-skin-tango .jcarousel-item-horizontal{margin-right:6px!important}.help_sec .fr{width:430px!important}.nav ul li li a{padding:1px 9px!important}
+
+h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
+.chairman {font:normal 16px/20px roboto; color:#00000; background:url(http://media2.intoday.in/microsites/globalevent/arun-puri.png) right bottom no-repeat  transparent; padding-bottom:70px; }
+.chairmantitle { background:#cfcfcf url(http://media2.intoday.in/microsites/globalevent/chairman-speech-logo.png) 10px center no-repeat; font:normal 16px/20px roboto; color:#00000; padding:10px 10px 10px 60px; margin-top: -16px;}
+.chairmantitle span { color:red; font-weight:bold; }
+.footers { background:#d81921; padding:10px 10px 0px 0px; }
+.footers span {font:bold 22px/20px roboto; color:#fff; text-transform:uppercase; float:left; padding:18px }
+.copyright { background:#333333; color:#fff; text-align:center; padding:10px 0; width:100%; position:relative; z-index:999; margin-top:-22px;}
+.session_speakers{width:100%; margin-bottom:10px; background:white;}
+.session_speakers ul{ margin-top:10px;}
+.session_speakers ul li{ float:left; }
+.session_speakers ul li:last{margin-right:0;}
+.speakers-thumnb{width:155px;  text-align:center; color:#333333; font-size:12px;}
+.speakers-thumnb strong{font-weight:Bold; font-size:14px; color:#d71921; }
+.firstul{ border-bottom:1px dotted black; padding-bottom:20px; padding-top:20px;}
+.secondul{  padding-bottom:20px; padding-top:10px;}
+.read-more{ font-size:18px; float:right;}
+.presenting-sponsors{width:285px; height:69px; float:left; margin-left:60px;}
+.marquee{width:376px; height:67px; float:left; background:white; text-align:center; font-size:10px; padding-top:2px;}
+.var-narrow .timeline-header{background: #333333 !important; color:#c6c6c6 !important}
+
+
+.sponsor_img{text-align:center}
+.sponsor_text{margin-top:20px;}
+.sponsor_text p{ font-size:14px; line-height:20px;}
+
+.sponsor_section{ float:left;}
+.sponsor_section table{ width:623px;}
+
+.session_speakers p{font-size:14px; line-height:20px;}
+
+.timetext img{ display:none;}
+
+.last a{background: #fff !important;color: #000 !important;border: 1px solid #000;}
+.last a img{margin-left:5px; width:10px;}
+.drop-down { background:#ee1a28; position:absolute; right:187px; top:21px;  display:none;}
+.drop-down ul { padding:0px; margin:0px;}
+.drop-down ul li { border-bottom:1px solid #FFFFFF;width:155px ; display:block; float:none}
+.drop-down ul li a {color: #fff;font-size: 14px;font-family: Arial, Helvetica, sans-serif;border-right: none;text-decoration: none;line-height: 25px; padding-left:7px;}
+.drop-down ul li a:hover {color: #fff;font-size: 14px;font-family: Arial, Helvetica, sans-serif;border-right: none;text-decoration: none;
+line-height: 25px;}
+.left-area h1 { padding:0px; margin-top:0px;}
+
+.speakers-thumnb img { border-radius:50%;}
+.speakers-thumnb strong { display:block; margin-bottom:-17px;}
+.session_speakers ul { overflow:hidden; border-bottom:1px dotted #000; padding-bottom:20px; margin-bottom:20px; float:left}

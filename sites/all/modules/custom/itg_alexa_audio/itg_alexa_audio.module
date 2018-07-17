@@ -1,0 +1,348 @@
+<?php
+
+/**
+ * @file
+ * ITG Alexa audio module.
+ *
+ * Module for Generate alexa audio file and feed.
+ *
+ */
+
+/**
+ * Implement hook_form_alter()
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'alexa_audio_clips_node_form') {
+    
+    $arg = arg();
+    $minute = date('i') < 30 ? '00' : 30;
+    $upload_date = date('Y-m-d ') . date('H') . ':' . $minute;
+    $form['field_event_start_date'][LANGUAGE_NONE][0]['#default_value']['value'] = $upload_date;
+      $curent_feed = get_last_alexa_feed();
+      $exist_nid = $curent_feed[0]['nid'];  
+      $node = node_load($exist_nid);
+      $form['title']['#default_value'] = $node->title;
+      $fid = $node->field_audio[LANGUAGE_NONE][0]['fid'];
+      $vide_fid = $node->field_alexa_video[LANGUAGE_NONE][0]['fid'];
+      
+      if (empty($vide_fid)) {
+        $last_video = get_last_video_for_alexa();
+        $vide_fid = $last_video[0]['field_alexa_video_fid']; 
+      }
+      
+      if ($fid) {
+        $file_obj = file_load($fid);
+        $stream_url = file_create_url($file_obj->uri);
+        $alexa_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time.json");
+        $google_syndication_xml = file_create_url("public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml");      
+      }
+      
+      
+      $form['last_audio_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Last Uploaded Audio Url"),
+        '#default_value' => $stream_url,
+        '#weight' => 10,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      $form['alexa_json_path'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Alexa Json Path"),
+        '#default_value' => $alexa_path,
+        '#weight' => 11,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      
+      if ($vide_fid) {        
+        $file_video_obj = file_load($vide_fid);
+        $video_url = file_create_url($file_video_obj->uri); 
+        $alexa_vido_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_videoclip50_time.json");
+        $form['last_video_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Last Uploaded Video Url"),
+        '#default_value' => $video_url,
+        '#weight' => 10,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      $form['alexa_json_video_path'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Alexa Json Video Path"),
+        '#default_value' => $alexa_vido_path,
+        '#weight' => 11,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      }
+      
+      $form['google_syndication_xml'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Google Syndicate XML Path"),
+        '#default_value' => $google_syndication_xml,
+        '#weight' => 12,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+  
+    $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
+  }
+}
+
+/**
+ * custom submit action for alexa_audio_clips_node_form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_alexa_audio_form_custom_submit($form, &$form_state) { 
+  genrate_alexa_audio_json($form_state['values']);
+}
+
+/**
+ * Function to generate JSON file for alexa
+ * @param array $value   
+ */
+function genrate_alexa_audio_json($value) {  
+  module_load_include('php', 'itg_podcast', 'includes/getid3/getid3');
+  $audiofid = $value['field_audio']['und'][0]['fid'];
+  $filedir = 'sites/indiatoday/' . date('Ymd') . '/audio';
+  $video_filedir = 'sites/indiatoday/' . date('Ymd') . '/video';
+  $time = date('hA');
+  if (!empty($audiofid)) {    
+    $orignal_img = file_load($audiofid);
+    $audio_filesize = $orignal_img->filesize;    
+    $new_filename = 'it_50_'.date('Ymd').'_'.$time.'_it_vt_audio_'.time() . (mt_rand(3,100)).'.mp3';
+    $directory = file_default_scheme() . '://' . $filedir . '/';
+    file_prepare_directory($directory, FILE_CREATE_DIRECTORY);    
+    $orignal_img->filename = $new_filename;
+    $new_destination = file_default_scheme() . '://' . $filedir . '/' . $new_filename;
+    file_move($orignal_img, $new_destination, FILE_EXIST_ERROR);
+  }
+  
+  $title = $value['title'];
+  $uid = $value['uid'];
+  $date = str_replace('+00:00', '.0Z', gmdate('c', strtotime($value['field_event_start_date']['und'][0]['value'])));
+  $stream_url = file_create_url($new_destination);
+  // For audio file duration
+  if($stream_url){
+      if ($fp_remote = fopen($stream_url, 'rb')) {
+            $localtempfilename = tempnam('/tmp', 'getID3');
+            if ($fp_local = fopen($localtempfilename, 'wb')) {
+                while ($buffer = fread($fp_remote, 8192)) {
+                    fwrite($fp_local, $buffer);
+                }
+                fclose($fp_local);
+
+            // Initialize getID3 engine
+            $getID3 = new getID3;
+            $audio_file_info = $getID3->analyze($localtempfilename);
+                // Delete temporary file
+                unlink($localtempfilename);
+            }
+            fclose($fp_remote);
+            $playtime_string = $audio_file_info['playtime_string'];
+      }        
+  }
+    
+  $json = array(
+    'uid' => 'itaudiofeed' . time(),
+    'updateDate' => $date,
+    'titleText' => $title,
+    'mainText' => "",
+    'streamUrl' => $stream_url,
+    'redirectionUrl' => FRONT_URL
+  );
+  $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
+  $file_path = $xml_path . 'it_audioclip50_time.json';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, json_encode($json));
+  fclose($fp);
+  // for video
+  $videofid = $value['field_alexa_video']['und'][0]['fid'];
+    
+  if (!empty($videofid)) {
+    $file_video_obj = file_load($videofid);
+    $new_video_filename = '50_'.date('Ymd').'_'.$time.'_it_vt_video_'.time() . (mt_rand(3,100)).'.mp4';
+    $video_directory = file_default_scheme() . '://' . $video_filedir . '/';
+    file_prepare_directory($video_directory, FILE_CREATE_DIRECTORY); 
+    $file_video_obj->filename = $new_video_filename;
+    $new_video_destination = file_default_scheme() . '://' . $video_filedir . '/' . $new_video_filename;
+    file_move($file_video_obj, $new_video_destination, FILE_EXIST_ERROR);
+    $video_url = file_create_url($new_video_destination);
+  } else {
+    $last_video = get_last_video_for_alexa();
+    $videofid = $last_video[0]['field_alexa_video_fid'];
+    $file_video_obj = file_load($videofid);
+    $video_url = file_create_url($file_video_obj->uri);
+  }
+  
+  
+  $json_video = array(
+    'uid' => 'itaudiofeed' . time(),
+    'updateDate' => $date,
+    'titleText' => $title,
+    'mainText' => "",
+    'streamUrl' => $stream_url,
+    'videoUrl' => $video_url,
+    'redirectionUrl' => FRONT_URL
+  );
+  $video_file_path = $xml_path . 'it_videoclip50_time.json';
+  $fpv_video = fopen($video_file_path, "w");
+  fwrite($fpv_video, json_encode($json_video));
+  fclose($fpv_video);
+  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . time(), $playtime_string, $audio_filesize);
+}
+
+/**
+ * Function is used to get static xml
+ * @param string $stream_url
+ * @param string $date
+ * @param string $filename
+ */
+function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename, $playtime_string, $audio_filesize) {
+  $date = date("D, d M Y H:s:i", strtotime($date));
+  $c_date = date("Y");
+  $xml = <<<XML
+      <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<channel>
+<title>India Today News Headlines</title>
+<link>https://www.indiatoday.in</link>
+<language>en-US</language>
+<copyright>$c_date ITG</copyright>
+<description>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</description>
+<itunes:subtitle>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</itunes:subtitle>
+<itunes:author>India Today Group</itunes:author>
+<itunes:category text="News and Politics"></itunes:category>
+<itunes:summary>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</itunes:summary>
+<itunes:explicit>clean</itunes:explicit>
+<atom:link href="https://feeds.intoday.in/rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml" rel="self" type="application/rss+xml"/>
+<itunes:owner>
+<itunes:name>India Today Group</itunes:name>
+<itunes:email>syndicationsteam@intoday.com</itunes:email>
+</itunes:owner>
+<image>
+<title>India Today News Headlines</title>
+<link>https://www.indiatoday.in</link>
+<url>
+https://smedia2.intoday.in/conclave/2017-next/images/rightLogo.png
+</url>
+</image>
+<item>
+<title>India Today News Headlines</title>
+<description>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</description>
+<guid isPermaLink="false">$filename</guid>
+<enclosure length="$audio_filesize" type="audio/mpeg" url="$stream_url"></enclosure>
+<pubDate>$date GMT</pubDate>
+<itunes:duration>$playtime_string</itunes:duration>
+</item>
+</channel>
+</rss>
+XML;
+  $xml_path = 'public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/';
+  $file_path = $xml_path . 'it_audioclip_latest_news.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
+
+/**
+ * Function is for to get latest insert alexa clip
+ * @return array $result
+ */
+function get_last_alexa_feed() {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'title', 'created'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', "alexa_audio_clips", '=');
+  $query->orderBy('n.nid', 'DESC')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function is for to get last video alexa clip.
+ * @return array $result
+ */
+function get_last_video_for_alexa() {
+  $query = db_select('field_data_field_alexa_video', 'v');
+  $query->fields('v', array('field_alexa_video_fid'));
+  $query->condition('v.field_alexa_video_display', 1);
+  $query->condition('v.bundle', "alexa_audio_clips", '=');
+  $query->orderBy('v.field_alexa_video_display', 'DESC')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_alexa_audio_cronapi($op, $job = NULL) {
+  $items['itg_alexa_audio_mail_alter'] = array(
+    'description' => 'send mail alter for alexa.',
+    'weight' => 5,
+    'callback' => 'itg_alexa_audio_mail_cron',
+  );
+  return $items;
+}
+
+/**
+ * mail alert for Alexa.
+ */
+function itg_alexa_audio_mail_cron() {
+  $curent_feed = get_last_alexa_feed();
+  $dateFromDatabase = $curent_feed[0]['created'];
+  
+  $dateSixHoursAgo = strtotime('-6 hours');
+  if ($dateSixHoursAgo >= $dateFromDatabase) {
+    // more than 6 hours ago
+    $mail_content = 'Audio not uploaded from 6 hours for Alexa.';
+    
+    $mail_subject = strip_tags('IndiaToday Audio 50 Alexa Alert');
+    $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+    
+      $alexa_email_id = !empty(get_itg_variable('alexa_email_id')) ? get_itg_variable('alexa_email_id') : '';  
+      $site_mail = !empty(get_itg_variable('site_mail')) ? get_itg_variable('site_mail') : '';  
+      if (!empty($alexa_email_id)) {
+        $to = $alexa_email_id;
+        $mail = drupal_mail('itg_alexa_audio', 'send_mail_to_admin', $to, language_default(), $params, $site_mail, TRUE);
+        if ($mail['result']) {
+          print 'send email to user.';
+        }
+        else {
+          print 'Failed to send the email!';
+        }
+      }
+         
+  }    
+}
+
+
+function itg_alexa_audio_menu() {
+  $items['itg-alexa-audio-mail-cron'] = array(
+      'page callback' => 'itg_alexa_audio_mail_cron',
+      'access arguments' => array('access content'),
+      'type' => MENU_CALLBACK,
+  );
+  return $items;
+}

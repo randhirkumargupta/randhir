@@ -15,22 +15,22 @@
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear ITG Team,</td>
+        <td style="padding: 10px 20px;"><?php print t('Dear ITG Team'); ?>,</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">The product <strong><?php echo $node->title; ?></strong> is going to expire in next 24 hours.</td>
+        <td style="padding: 10px 20px;"><?php print t('The product'); ?> <strong><?php echo $node->title; ?></strong> <?php print t('is going to expire in next 24 hours.'); ?></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Product Expiry Date: <strong><?php echo date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])); ?></strong></td>
+        <td style="padding: 10px 20px;"><?php print t('Product Expiry Date'); ?>: <strong><?php echo date('d/m/Y', strtotime($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])); ?></strong></td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;">&nbsp;</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Thanks,</td>
+        <td style="padding: 10px 20px;"><?php print t('Thanks,');?></td>
       </tr>
       <tr>
-        <td style="padding: 0px 20px;">India Today Group</td>
+        <td style="padding: 0px 20px;"><?php print t('India Today Group'); ?></td>
       </tr>
     </table>
   </body>

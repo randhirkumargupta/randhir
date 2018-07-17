@@ -1,0 +1,38 @@
+/************************************************************************************
+smaller than 800
+*************************************************************************************/
+@media screen and (max-width: 800px) {
+.itgd_links ul { width:760px;}	
+.itgd_links ul li { padding: 5px 9px;}
+.top-ad { float:none; margin:0 auto; }
+.logoit { float:none; margin:13px auto;}
+header, .header-tag { width:100%;}
+nav { width:100%}
+.searc-icon { display:none;}
+nav ul li a { padding: 8px 4px; font: bold 15px/15px roboto;}
+#search-saction { display:block}
+#wrapper {padding: 4% 5%; width: 90%;}
+.main, .left { margin:0px; padding-left:0px;}
+.main .left { width:100%}
+.main .right { float:none; width:100%}
+.res-view1 {float: left;margin-bottom: 3%;margin-right: 25px; width: 323px;}
+.res-view2 {float: left;margin-bottom: 3%;margin-right: 0;width: 323px;}
+footer { width:100%} 
+#copyrights, #footer, #itgd_group_links { width:100%;}
+ul#footer_menu { width:94%}
+.bottom-add { margin-left:-20px;}
+
+/*story page*/
+.main1 {   margin-left: -10px;
+    margin-right: 0;
+    padding: 0 10px;
+    width: 100%;}
+	
+.main1 .right { width:100%}
+.seceader { margin-left:-25px;}
+
+#timeline{ width:670px !important}
+
+#content3{width:460px !important}
+
+}

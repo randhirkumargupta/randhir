@@ -10,7 +10,6 @@
                 if ($(this).is(":checked")) {
                     var magazine = $(this).parent().siblings().text();                    
                     if (magazine.length > 0) {
-                        console.log(magazine);
                         $('select[name="pti_magazine"] option:contains("- Select Magazine -")').attr('selected', 'selected');
                         $('select[name="pti_magazine"] option:contains("' + magazine + '")').attr('selected', 'selected');
                         $('select[name="pti_magazine"]').trigger("change");

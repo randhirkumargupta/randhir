@@ -7,6 +7,8 @@
                 <?php print drupal_render($form['field_story_short_headline']); ?>
                 <?php print drupal_render($form['field_story_category']); ?>
                 <?php print drupal_render($form['field_primary_cat_data']); ?>
+                <?php print drupal_render($form['field_story_expert_description']); ?>
+
                 <?php print drupal_render($form['field_story_reporter']); ?>
                 <div id="reporter-details"></div>
                 <?php print drupal_render($form['field_stroy_city']); ?>
@@ -53,18 +55,17 @@
                 </div>
                 <?php print drupal_render($form['field_video_duration']); ?>
                 <div class="browse-video-form"><?php print drupal_render($form['field_video_upload']); ?>
-        <!--          <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>-->
                     <span class="error vid-error"></span>
                 </div>
-                <?php //print drupal_render($form['field_story_expert_name']); ?>
                 <?php print drupal_render($form['field_video_kicker']); ?>
-                <?php print drupal_render($form['field_story_expert_description']); ?>
+                <?php print drupal_render($form['field_mis_report']); ?>
             </div>
         </div>
 
         <div id="Imageupload" class="itg-form-section-wrapper browse-media-file">
             <h2 class="story-title"><?php print t('Image'); ?></h2>
             <div class="itg-form-section hide">
+                <?php print drupal_render($form['field_story_e_extra_large_image']); ?> 
                 <?php print drupal_render($form['field_story_extra_large_image']); ?> 
                 <?php print drupal_render($form['field_story_player_image']); ?> 
                 <?php print drupal_render($form['field_story_large_image']); ?>
@@ -85,45 +86,66 @@
                     <?php print drupal_render($form['category_holder']); ?>
                 </div>
             </div>
-          
+
             <div id="Configuration" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php print t('Configuration'); ?></h2>
                 <div class="itg-form-section hide">
-                <?php print drupal_render($form['field_video_configurations']); ?>
-                <?php print drupal_render($form['field_story_comment_question']); ?>
-                <?php print drupal_render($form['field_story_syndication']); ?>
-                <?php print drupal_render($form['field_dailymotion_playlist']); ?>
-                <?php print drupal_render($form['field_story_schedule_date_time']); ?>
-                <?php print drupal_render($form['field_story_expires']); ?> 
-                <?php print drupal_render($form['field_story_expiry_date']); ?> 
-                <?php print drupal_render($form['field_common_related_content']); ?>
+                    <?php print drupal_render($form['field_video_configurations']); ?>
+                    <?php print drupal_render($form['field_video_assign_to_widget']); ?>
+                    <?php print drupal_render($form['field_story_comment_question']); ?>
+                    <?php print drupal_render($form['field_story_syndication']); ?>
+                    <?php print drupal_render($form['field_dailymotion_playlist']); ?>
+                    <?php print drupal_render($form['field_story_schedule_date_time']); ?>
+                    <?php print drupal_render($form['field_story_expires']); ?> 
+                    <?php print drupal_render($form['field_story_expiry_date']); ?> 
+                    <?php print drupal_render($form['field_common_related_content']); ?>
+                    <?php print drupal_render($form['field_video_assign_to_widget']); ?>
                 </div>
             </div>
             <div id="SocialMedia" class="itg-sidebar-form-section image-repo-browse">
                 <h2 class="story-title"><?php print t('Social Media'); ?></h2>
                 <div class="itg-form-section hide">
-                <?php print drupal_render($form['field_story_social_media_integ']); ?>
-                <!-- Facebook fields -->     
-                <?php print drupal_render($form['field_story_facebook_narrative']); ?>
-                <?php print drupal_render($form['field_story_facebook_image']); ?>
-                <?php print drupal_render($form['field_story_facebook_video']); ?>
-                <!-- Twitter fields -->
-                <?php print drupal_render($form['field_story_tweet']); ?>
-                <?php print drupal_render($form['field_story_tweet_image']); ?>
-                <?php print drupal_render($form['field_story_twitter_video']); ?>                                
+                    <?php print drupal_render($form['field_story_social_media_integ']); ?>
+                    <!-- Facebook fields -->     
+                    <?php print drupal_render($form['field_story_facebook_narrative']); ?>
+                    <?php print drupal_render($form['field_story_facebook_image']); ?>
+                    <?php print drupal_render($form['field_story_facebook_video']); ?>
+                    <!-- Twitter fields -->
+                    <?php print drupal_render($form['field_story_tweet']); ?>
+                    <?php print drupal_render($form['field_story_tweet_image']); ?>
+                    <?php print drupal_render($form['field_story_twitter_video']); ?>                                
                 </div>
             </div>
+
+            <?php if (isset($form['akamai_timeout']) && !empty($form['akamai_timeout'])) { ?>
+              <div id="AkamaiSettings" class="itg-sidebar-form-section">
+                  <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+                  <div class="itg-form-section hide">
+                      <?php print drupal_render($form['akamai_timeout']); ?>
+                  </div>
+              </div>
+            <?php } ?>      
+
             <div class="metatags-and-remarks">
                 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
                 <?php print drupal_render_children($form); ?>
             </div>
+
+            <div id="associate_video_settings" class="itg-sidebar-form-section">
+                <h2 class="story-title"><?php print t('Associate Video'); ?></h2>
+                <div class="itg-form-section hide">
+                    <iframe id="video_iframe" src="<?php echo base_path() . 'solr-unpublish-video'; ?>" width="400" height="650"></iframe>
+                    <a href="javascript:void(0)" class = "button btn-submit asso-filed-video"><?php print t('Save'); ?></a>
+                   <?php print  l(t('Advance Search'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => TRUE, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'btn-submit', 'browse-ftp-click','button'))));?>
+                    
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 </div>
-
-
-
 
 
 

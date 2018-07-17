@@ -2,6 +2,10 @@
     Drupal.behaviors.itg_syndication = {
         attach: function (context, settings) {
             var base_url = settings.itg_syndication.settings.base_url;
+            var content_type = settings.itg_syndication.settings.type;
+            if (content_type == 'hide') {
+                jQuery("#edit-actions").hide();
+            }
             //code for magazine callback
 
             $('#edit-magazine-name', context).change(function (event) {
@@ -78,3 +82,10 @@
 
 
 })(jQuery, Drupal, this, this.document);
+
+jQuery(document).ready(function () {
+    jQuery("#edit-field-story-issue-date-value-wrapper").hide();
+    jQuery("#edit-issue").change(function () {
+        jQuery("#edit-field-story-issue-date-value-value-date").val(jQuery("#edit-issue").val());
+    });
+});

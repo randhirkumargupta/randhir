@@ -1,0 +1,205 @@
+
+body { font-family: roboto;}
+#top-web {
+    display: block;
+}
+
+.itgd_links {
+    background-color: rgb(216, 216, 216) !important;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    color: rgb(122, 122, 122);
+    font: bold 12px/15px roboto;
+    margin: 0;
+    padding: 0.3%;
+    text-align: center;
+}
+.itgd_links ul {
+    margin: 0 auto;
+    padding: 0;
+	width:1003px;
+}
+.itgd_links ul li {float:left; padding:0 9px; list-style:none;}
+.itgd_links a:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.itgd_links ul li.last {
+    border-right: medium none;
+}
+
+.itgd_links a {
+    color: rgb(122, 122, 122);
+    text-decoration: none;
+}
+.clr, .clear {clear:both;}
+.redborder {
+    border-top: 1px solid rgb(199, 199, 199);
+}
+header, .header-tag {
+    margin: 0 auto;
+    text-align: left;
+    width: 1000px;
+}
+
+.top-ad { width:728px; height:90px; float:right; margin:5px;}
+
+.logoit {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/IT-edu-logo.png") left top no-repeat;
+    height: 85px;
+    text-indent: -9999px;
+    width: 221px;
+	float:left;
+	margin-top:13px
+}
+.menues {
+    background: none repeat scroll 0 0 rgb(0, 0, 0);
+    height: 41px;
+    position: relative;
+    top: 0;
+}
+nav {
+    background-color: #000000;
+    color: #FFFFFF;
+    font: bold 15px arial;
+    margin:0 auto;
+    text-align: center;
+	display:block;
+	height:41px;
+}
+
+nav ul { padding:0px;}
+nav ul li { list-style:none; float:left;background-color:#000; padding:10px 3px;  z-index: 2147483647; float: left;
+    list-style: none outside none;
+    }
+nav ul li a { color:#fff; text-decoration:none;  font: bold 15px/15px roboto;}
+nav ul li a:hover { text-decoration:none; color:#555}
+nav ul li:hover,nav ul li.active { background-color:#fff; color:#d71920; cursor:pointer;}
+nav h1 { padding:0px; margin:0px; font: bold 15px arial;}
+.index-footer { margin-bottom:-900px;}
+.home_b {border-top:2px solid #E70009;}
+.news_b {border-top:2px solid #009BFF;}
+.india_b {border-top:2px solid #F25109;}
+.world_b {border-top:2px solid #0038F0;}
+.video_b {border-top:2px solid #ED1C24;}
+.photo_b {border-top:2px solid #760108;}
+.cricket_b {border-top:2px solid #98D702;}
+.movies_b {border-top:2px solid #800B80;}
+.auto_b {border-top:2px solid #FFCC01;}
+.sports_b {border-top:2px solid #00A53C;}
+.lifestyle_b {border-top:2px solid #F70164;}
+.searc-icon {
+float: right;
+cursor: pointer;
+background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -174px -42px transparent;
+width: 45px;
+height: 41px;
+text-indent: -9999px;
+background-color: #db1620;
+}
+
+.sp_bg {
+background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 transparent;
+}
+
+.home-icon, .home-icon:hover {
+    background-color: rgb(0, 0, 0) !important;
+    background-position: -338px -98px;
+    height: 23px;
+    padding: 5px 14px 11px;
+    width: 23px;
+}
+
+
+nav ul li a {
+    padding: 8px 6px;
+}
+nav {
+margin: 0 auto;
+width: 1000px;
+}
+
+.app {
+color: #FFFFFF;
+float: right;
+font: bold 16px arial;
+display: none;
+background-position: -73px -96px !important;
+width: 176px;
+height: 37px;
+float: left;
+}
+
+#search-saction {
+    background: none repeat scroll 0 0 rgb(187, 187, 187);
+    display: none;
+    padding: 10px;
+    position: relative;
+    width: 98.5%;
+    z-index: 99;
+	 display: block;
+}
+
+
+.search-inner {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -132px -47px rgb(255, 255, 255);
+    height: 34px;
+    margin: 0 auto;
+    width: 530px;
+}
+.search-inner .input-box {
+    border: medium none;
+    float: left;
+    height: 32px;
+    line-height: 33px;
+    margin-left: 40px;
+    width: 395px;
+}
+
+.search-inner .submit-btn {
+    background: none repeat scroll 0 0 rgb(216, 0, 23);
+    border: medium none;
+    color: rgb(255, 255, 255);
+    float: right;
+    font: bold 16px/15px roboto;
+    height: 34px;
+    padding: 0 10px;
+    text-transform: uppercase;
+}
+
+.news-t { margin-left:10px; background:#ee1c25}
+.share-story {
+    float: left;
+    height: 34px;
+    padding-top: 7px;
+}
+.share-icon {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -135px -10px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: left;
+    height: 34px;
+    margin-left: -5px;
+    width: 42px;
+}
+.share-story ul {
+    border-bottom: 1px solid rgb(218, 218, 218);
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.share-story li {
+    border: medium none !important;
+    color: rgb(178, 166, 170);
+    float: left;
+    list-style: none outside none;
+    margin: 0 !important;
+    padding: 0;
+}
+#search-saction { display:none}
+.bottom-add { margin-bottom:10px; text-align:center;}
+.notification-t { background:#0038f0}
+.exam-t {background:#ed1c24}
+.govtjobs-t {background:#98d702}
+.play-t {background:#800b80}
+.online-t {background:#ffcc01}
+.scholarship-t {background:#760108}

@@ -8,10 +8,6 @@
       <?php if (!empty($submitted)): ?>
         <div class='<?php print $hook ?>-submitted clearfix'><?php print $submitted ?></div>
       <?php endif; ?>
-      <?php
-      //p($node);
-      // echo $node->moderation_history_block;
-      ?>
       <!-- add && !$teaser for hide comment link -->
       <?php if (!empty($links) && !$teaser): ?>
         <div class='<?php print $hook ?>-links clearfix'>
@@ -31,10 +27,6 @@
       <?php if (!empty($title_prefix)) print render($title_prefix); ?>
 
       <?php if (!empty($title) && !$page): ?>
-<!--        <h2 <?php if (!empty($title_attributes)) print $title_attributes ?>>
-          <?php if (!empty($new)): ?><span class='new'><?php print $new ?></span><?php endif; ?>
-          <a href="<?php print $node_url ?>"><?php print $title ?></a>
-        </h2>-->
       <?php endif; ?>
 
       <?php if (!empty($title_suffix)) print render($title_suffix); ?>
@@ -114,12 +106,12 @@
                           if (!empty($imgfid)) {
                             $imguri = _itg_photogallery_fid($imgfid);
                             $style = 'thumbnail';
-                            $output .='<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><img src="' . image_style_url($style, $imguri) . '"/></div></div>';
+                            $output .='<div class="field"><div class="field-label">'.t('Answer').' ' . $ansnumber . ':</div><div class="field-items"><img src="' . image_style_url($style, $imguri) . '"/></div></div>';
                           }
                         }
                       }
                       if (isset($ans_text[LANGUAGE_NONE]) && !empty($ans_text[LANGUAGE_NONE][0]['value'])) {
-                        $output .= '<div class="field"><div class="field-label">Answer ' . $ansnumber . ':</div><div class="field-items"><div class="ans-text"><span>' . $ans_text[LANGUAGE_NONE][0]['value'] . '</span></div></div></div>';
+                        $output .= '<div class="field"><div class="field-label">'.t('Answer').' ' . $ansnumber . ':</div><div class="field-items"><div class="ans-text"><span>' . $ans_text[LANGUAGE_NONE][0]['value'] . '</span></div></div></div>';
                       }
 
                       $output .= '</div>';
@@ -128,9 +120,7 @@
                     if (isset($output) && !empty($output)) {
                       echo '<div>' . $output . '</div>';
                     }
-//                    $field_poll_answer = render($content['field_poll_answer']);
-//                    if (!empty($field_poll_answer)): print render($content['field_poll_answer']);
-//                    endif;
+
                   }
                   ?>
                   <?php

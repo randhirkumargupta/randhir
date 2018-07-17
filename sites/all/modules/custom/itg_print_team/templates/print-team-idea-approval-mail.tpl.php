@@ -19,13 +19,13 @@ $idea_link = $base_url.'/node/'.$node->nid.'/edit';
   <body>
     <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; font-family: Arial">
       <tr>
-        <td style="padding: 10px 20px;">Dear Team,</td>
+        <td style="padding: 10px 20px;"><?php print t('Dear Team');?>,</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">An idea has been submitted, please review.</td>
+        <td style="padding: 10px 20px;"><?php print t('An idea has been submitted, please review.'); ?></td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Title: <strong><?php echo $node->title; ?></strong></td>
+        <td style="padding: 10px 20px;"><?php print t('Title'); ?>: <strong><?php echo $node->title; ?></strong></td>
       </tr>
       <tr>
         <td style="padding: 10px 20px;"><?php echo l('Click here to see details', $idea_link, array('attributes' => array('target' => '_blank'))); ?></td>
@@ -34,10 +34,10 @@ $idea_link = $base_url.'/node/'.$node->nid.'/edit';
         <td style="padding: 10px 20px;">&nbsp;</td>
       </tr>
       <tr>
-        <td style="padding: 10px 20px;">Thanks,</td>
+        <td style="padding: 10px 20px;">t<?php print t('Thanks'); ?>,</td>
       </tr>
       <tr>
-        <td style="padding: 0px 20px;">India Today Group</td>
+        <td style="padding: 0px 20px;"><?php print t('India Today Group');?></td>
       </tr>
     </table>
   </body>

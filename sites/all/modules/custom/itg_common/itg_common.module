@@ -11,42 +11,55 @@ module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_mongo.helper');
 module_load_include('inc', 'itg_common', 'includes/itg_common_mail');
 module_load_include('inc', 'itg_common', 'includes/itg_common');
-
+module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issue_story');
 
 /**
  * Implements hook_init.
  * {@inheritdoc}
  */
 function itg_common_init() {
-  
+  /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
+    echo $_COOKIE['itg_forced_login'];
+  }*/
   global $user, $base_url, $theme;
+  $arg = arg();
   
+  // condition for archive story redirect
+  $ctype_tab = array('Story', 'photogallery', 'Videogallery');
+  if ($arg[0] == 'archives' && !empty($arg[1]) && in_array($arg[1], $ctype_tab) && empty($arg[2])) {
+    $path = $base_url . '/archives/' . $arg[1] . '/' . date('d-m-Y');
+    drupal_goto($path);
+  }
   //code for multidomain
-  if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {    
+  if (arg(0) != 'user' && $base_url == BACKEND_URL && ($user->uid == 0 || array_key_exists(FRONT_USER, $user->roles))) {
     drupal_goto('user');
   }
-  
+
   // helper condition for user when directly hit base url
   if ($theme == 'itgadmin' && $base_url == BACKEND_URL && $user->uid > 0 && !array_key_exists(FRONT_USER, $user->roles) && drupal_is_front_page()) {
     drupal_goto('cms-user-dashboard');
   }
-  
+
   if ($theme == 'itgadmin') {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['uid'] = $user->uid;
     $settings['solr'] = variable_get('solr_url_config');
     drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js');
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_related_content.admin.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common.admin.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_related_content.admin.js', array('scope' => 'footer'));
   }
-  
+
   if (arg(0) == 'funalytics') {
     $settings = array();
     $settings['base_url'] = $base_url;
     drupal_add_js(array('itg_funalytics' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js');
+    drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_funalytics.js', array('scope' => 'footer'));
   }
+  
+  /*if (drupal_is_front_page() && get_itg_variable('enable_custom_lazyload')) {
+    drupal_add_js(drupal_get_path('theme', 'itg') . "/js/lazysizes.min.js", array('scope' => 'header'));
+  }*/
 }
 
 /**
@@ -58,27 +71,43 @@ function itg_common_menu() {
     'page callback' => 'itg_custom_lock_delete',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
-      //'file' => 'includes/itg_story.inc',
+    'file' => 'includes/itg_common.main.inc',
   );
-  
+  $items['itg-dev-node-dpm'] = array(
+    'page callback' => 'itg_custom_dev_node_dpm',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
+  );
+
   $items['photogallery-embed'] = array(
     'page callback' => 'itg_photogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
-  
-  $items['embed/videogallery-embed'] = array(
+
+  $items['video/%/embed/%'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
   
+  $items['photo/%/embed/%'] = array(
+    'page callback' => 'itg_photo_embed',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
+  );  
+
   $items['funalytics-popup'] = array(
     'page callback' => 'itg_funalytics_popup',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
-  
+
   $items['third-party-widget-config'] = array(
     'title' => 'Third party configuration form',
     'description' => 'Third party configuration form',
@@ -88,9 +117,106 @@ function itg_common_menu() {
     'file' => 'includes/itg_thirdparty_widget_form.inc',
     'type' => MENU_NORMAL_ITEM,
   );
+
+  $items['get-mongo-detail/%/%'] = array(
+    'page callback' => 'itg_get_mongo_detail',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_mongo.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['scorecard/matchcenter'] = array(
+    'page callback' => 'itg_common_get_scorecard',
+    'access callback' => TRUE,
+    'page arguments' => array(2),
+    'file' => 'includes/itg_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['scorecard/live-cricket-score'] = array(
+    'page callback' => 'itg_scorecard_live',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['get-magazine-issue'] = array(
+    'page callback' => 'itg_get_magazine_issue_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,    
+  );
+
+  $items['get-supplement-issue'] = array(
+    'page callback' => 'itg_get_supplement_issue_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,    
+  );
   
+  $items['itg-load-my-account'] = array(
+    'title' => 'Load My Account',
+    'description' => 'Load My Account',
+    'page callback' => 'itg_akamai_load_my_account',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_akamai.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['get-amp-search-keyword'] = array(
+    'page callback' => 'itg_get_amp_search_result',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
+  );
+  $items['insert_private_ip'] = array(
+    'page callback' => 'itg_common_insert_private_ips',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
+  );
+  
+  $items['admin/config/development/varnish/aws/config'] = array(
+    'title' => 'Varnish Server Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_common_varnish_aws_setting_form'),
+    'access arguments'   => array('administer search'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/itg_common.inc',
+  );
+  
+  $items['create-node-image-style/%'] = array(
+    'page callback' => 'create_node_image_style',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.inc',
+  );  
+    
+  $items['admin/settings/global-custom-variables'] = array(
+     'title' => 'Global Custom variables',
+     'description' => 'Global Custom variables settings page',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('itg_global_custom_variables'),
+     'file' => 'includes/itg_common.inc',
+     'access arguments' => array('access itg story'),
+     'type' => MENU_NORMAL_ITEM,
+   );
+  
+  $items['hello'] = array(
+    'page callback' => 'itg_get_test_result',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['itg-update-path'] = array(
+    'title' => 'Image path update',
+    'description' => 'Image path update page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_image_path_update'),
+    'file' => 'includes/itg_image_path.inc',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+    
   return $items;
 }
+
 
 /**
  * Implements hook_permission().
@@ -101,6 +227,14 @@ function itg_common_permission() {
       'title' => t('Access third party config form'),
       'description' => t('Access third party config form'),
     ),
+    'access itg siteadmin' => array(
+      'title' => t('itg siteadmin permission'),
+      'description' => t('itg siteadmin permission.'),
+    ),
+    'access itg high level' => array(
+      'title' => t('itg high level permission'),
+      'description' => t('itg high level permission.'),
+    ),
   );
 }
 
@@ -109,42 +243,163 @@ function itg_common_permission() {
  * {@inheritdoc}
  */
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
-  global $user, $base_url;
+  global $user, $base_url, $theme;
   $arg = arg();
+	
+	if($form_id == 'election_graph_xml_node_form'){
+		$form['#after_build'][] = 'itg_common_cancel_button';
+		
+	}
+
+   $solr_video_video_id = array('views-exposed-form-searchimage-page-1' , 
+      'views-exposed-form-searchimage-search-unpublish-video' ,
+    'views-exposed-form-searchimage-search-publish-video-radio',
+    'views-exposed-form-searchimage-search-publish-video', 
+    );
+  if( in_array($form['#id'], $solr_video_video_id)) { 
+      global $conf;
+      $conf['preprocess_js'] = 0;
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.snippet.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.easyPaginate.js', array('scope' => 'footer'));
+    drupal_add_js("jQuery('#edit-video-browse-select').easyPaginate({
+		   paginateElement: '.ftp_video_radio',
+		   elementsPerPage: 20,
+		   effect: 'climb'
+	     }); jQuery('body').on('click','.play-video',function () {
+          var getvideo_id = $(this).attr('data-video-id');
+          var getvideo_repo = $(this).attr('data-type-repo');
+          jQuery.ajax({
+          url: Drupal.settings.basePath + 'dailymotion-video-play',
+          type: 'post',
+          beforeSend: function (xhr) {
+              jQuery('#widget-ajex-loader').show();
+          },
+          data: {'videoid': getvideo_id, 'getvideo_repo':getvideo_repo,'width':400,'height':260},
+          success: function (data) {
+              jQuery('#video_play_div').html(data);
+              jQuery('#widget-ajex-loader').hide();
+
+          },
+          error: function (xhr, desc, err) {
+             
+          }
+      });
+  });
+  
+", array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  // add code for internal video repo
+  
+  $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
+      'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
+  if( in_array($form['#id'], $solr_video_view_internal)) { 
+    global $conf;
+     $conf['preprocess_js'] = 0;
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.snippet.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.easyPaginate.js', array('scope' => 'footer'));
+    drupal_add_js("jQuery('#edit-video-browse-select').easyPaginate({
+		   paginateElement: '.ftp_video_radio',
+		   elementsPerPage: 20,
+		   effect: 'climb'
+	     }); jQuery('.play-video').click(function () {
+      var getvideo_id = $(this).attr('data-video-id');
+      var getvideo_repo = $(this).attr('data-type-repo');
+      jQuery.ajax({
+          url: Drupal.settings.basePath + 'internal-video-play',
+          type: 'post',
+          beforeSend: function (xhr) {
+              jQuery('#widget-ajex-loader').show();
+          },
+          data: {'videodata': getvideo_id, 'getvideo_repo':getvideo_repo, 'width': 400, 'height': 260},
+          success: function (data) {
+              jQuery('#video_play_div').html(data);
+              jQuery('#widget-ajex-loader').hide();
+          },
+          error: function (xhr, desc, err) {
+          }
+      });
+  });", array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  
+  if ($theme == 'itgadmin') {
+    $form['actions']['delete']['#access'] = FALSE;
+  }
   // get category machine name
   if ($form_id == 'taxonomy_form_term' && $form['#vocabulary']->machine_name != 'category_management') {
     if (!in_array('administrator', $user->roles)) {
       $form['actions']['delete']['#access'] = FALSE;
       $form['description']['#access'] = FALSE;
+      $form['redirect']['#access'] = FALSE;
     }
-
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery("#edit-relations .fieldset-title").hide();
-                        });', array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".form-item-weight").hide();
-                        });', array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".form-item-parent").hide();
-                        });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  if (isset($form['#vocabulary']->machine_name) && $form['#vocabulary']->machine_name == 'category_management') {
+    $form['redirect']['#access'] = FALSE;
+  }
+  
+  $buttonvocab_array = array('bloggers');
+  $messagevocab_array = array('bloggers', 'movies');
+  // code to add cancel button taxonomy page
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $buttonvocab_array) && !empty($form['#vocabulary']->machine_name)) {
+    $form['actions']['cancel'] = array(
+      '#markup' => l(t('Cancel'), $base_url . '/' . $_GET['destination'], array('attributes' => array('class' => 'button'))),
+      '#weight' => 22,
+    );
+  
   }
 
-  $settings = array();
+  // code to add custom message taxonomy page
+  if (isset($form['#vocabulary']->machine_name) && in_array($form['#vocabulary']->machine_name, $messagevocab_array) && !empty($form['#vocabulary']->machine_name)) {
+    $form['#submit'][] = 'itg_taxonomy_form_custom_callback';
+  }
   
+  $settings = array();
+  $vocabulary = '';
+  if (isset($form['#vocabulary']->machine_name)) {
+     $vocabulary = $form['#vocabulary']->machine_name;
+  }
+  
+  if ($vocabulary != 'category_management') {
+    $settings['formstatus'] = 1;
+  }
+  else {
+    $settings['formstatus'] = 0;
+  }
+  
+  // validation for movie master
+  if($vocabulary == 'movies') {
+    $form['#validate'][] = 'itg_movie_taxonomy_validate';
+  }
+  
+  if (arg(1) == 'add') {
+    drupal_add_js('jQuery(document).ready(function() {
+                jQuery("#edit-metatags-und-title-value").val("");              
+              });', array('type' => 'inline', 'scope' => 'footer'));
+  }
+
   $settings['formid'] = $form_id;
   $settings['arg_url'] = $arg[0];
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js');
-  
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_admin_form.js', array('scope' => 'footer'));
 
   //code for preview_changes button remove
   if (!empty($form['actions']['preview_changes'])) {
     unset($form['actions']['preview_changes']);
   }
-  
-    $form['#after_build'][] = 'itg_common_meta_token_remove';
-  if ($user->uid != '1') {
 
+  $form['#after_build'][] = 'itg_common_meta_token_remove';
+
+  if ($user->uid != '1') {
     if ($form_id == 'menu_edit_item') {
       if ($form['original_item']['#value']['menu_name'] == 'menu-itg-main-menu-header') {
         $form['description']['#type'] = 'checkbox';
@@ -158,13 +413,18 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // hide source relation and type field from other users 
-    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'survey_node_form') {
+    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'survey_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'quiz_node_form') {
+      if($user->uid != 1) {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_ugc_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
       $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
       $form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
+      $form['field_story_magazine_kicker_text']['#attributes']['class'][] = 'element-hidden';
+      $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
+      //$form['field_itg_content_publish_date']['#attributes']['class'][] = 'element-hidden';
+      }
 
       // add common hidden type field
       $type = $form['type']['#value'];
@@ -176,7 +436,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
         '#value' => $type,
       );
     }
-  } 
+  }
 
   // Set title on Preview
   if (arg(1) == 'add' && isset($form['#node']->op) && $form['#node']->op == 'Preview') {
@@ -206,7 +466,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     drupal_set_title($edit_title);
   }
 
-
+  
+  
   if ($form_id != 'ask_an_expert_node_form' && $form_id != 'event_registration_node_form') {
     if (isset($form['title']['#title'])) {
       $form['title']['#description'] = $form['title']['#title'];
@@ -215,12 +476,11 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   // Button name change some content
   if ($form_id == 'mega_review_critic_node_form' && (empty($form['#node']->nid) || (!empty($form['#node']->nid) && $form['#node']->status == 0))) {
-
     $form['actions']['submit']['#value'] = t('Publish');
   }
 
   // Extra meta tags element hide from form
-  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form') {
+  if ($form_id == 'mega_review_critic_node_form' || $form_id == 'custom_html_widgets_node_form' || $form_id == 'story_node_form' || $form_id == 'itg_celebrity_profile_node_form' || $form_id == 'blog_node_form' || $form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'itg_funalytics_node_form' || $form_id == 'mail_templates_node_form') {
     $form['#after_build'][] = 'itg_common_cancel_button';
   }
   if (!empty($form['#term']) && is_array($form['#term'])) {
@@ -264,35 +524,151 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
     $form['#after_build'][] = 'itg_common_image_generate';
   }
+
   if ($form_id == "itg_celebrity_profile_node_form") {
     $form['#validate'][] = 'itg_common_managesite_validate';
     $form['actions']['submit']['#submit'][] = 'itg_site_setting_form_custom_callback';
   }
+
   if ($form_id == 'heighlights_node_form') {
     $emoji1_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Good.png";
     $emoji2_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/Bad.png";
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
-    foreach($form['field_highlights']['und'] as $key => $value){
-      if(is_numeric($key)){
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' />";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' >";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' >";
+    foreach ($form['field_highlights']['und'] as $key => $value) {
+      if (is_numeric($key)) {
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' title='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' title='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' title='' />";
       }
     }
   }
+
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
+  
+  if ($form_id == 'photogallery_node_form' || $form_id == 'podcast_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'mega_review_critic_node_form') {
+    $form['#after_build'][] = 'itg_common_add_preview_button';
+  }
+  
   if (!empty($form_state['node']->type)) {
     $form['actions']['submit']['#submit'][] = 'itg_draft_form_custom_callback';
   }
+  if ($form_id == 'page_node_form') {
+    if ($user->uid != 1) {
+      $form['actions']['preview']['#access'] = FALSE;
+      $form['actions']['submit']['#submit'][] = 'itg_home_page_redirect';
+    }
+  }
+  
+  // code for magazine issue supplement listing
+  if (isset($form_state['view']->name) && $form_state['view']->name == 'magazine_stories' && $user->uid != 1) {
+      $settings = array();
+      $settings['base_url'] = $base_url;
+      drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_magazine_supplement_listing.js', array('weight' => 1, 'scope' => 'footer'));
+      $magazine_list = itg_get_magazine_story_name();
+      $form['list-magazine'] = array(
+        '#type' => 'select',
+        '#title' => t('Select magazine'),
+        '#options' => $magazine_list,
+        '#default_value' => '_none',
+        '#weight' => 3,
+      );
+
+      if (!empty($form_state['input']['list-magazine'])) {
+        $issue_option = itg_get_magazine_issue_callback($form_state['input']['list-magazine']);
+      }
+
+      $form['list-issue'] = array(
+        '#type' => 'select',
+        '#title' => t('Select Issue'),
+        '#options' => $issue_option,
+        '#weight' => 4,
+      );
+
+      if (!empty($form_state['input']['list-issue'])) {
+        $sup_option = itg_get_supplement_issue_callback($form_state['input']['list-issue']);
+      }
+
+      $form['list-supplement'] = array(
+        '#type' => 'select',
+        '#title' => t('Select supplement'),
+        '#options' => $sup_option,
+        '#weight' => 5,
+      );
+      $form['#info']['filter-list-magazine']['value'] = 'list-magazine';
+      $form['#info']['filter-list-issue']['value'] = 'list-issue';
+      $form['#info']['filter-list-supplement']['value'] = 'list-supplement';
+      $form['#validate'][] = 'itg_magazine_issue_supplement_listing_validate';
+    }
 }
 
+/**
+ * Implements itg_magazine_issue_supplement_listing_validate().
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_magazine_issue_supplement_listing_validate($form, &$form_state) {
+  $magazine_id = $form_state['values']['list-magazine'];
+  $issue_id = $form_state['values']['list-issue'];
+  $supplement_id = $form_state['values']['list-supplement'];
+  if ($magazine_id != '_none') {
+    if (!empty($magazine_id)) {
+      $form_state['values']['field_story_select_magazine_target_id'] = $magazine_id;
+    }
+    if (!empty($issue_id)) {
+      $form_state['values']['field_story_issue_date_value']['value'] = $issue_id;
+    }
 
-function itg_common_meta_token_remove($form, &$form_state) {
-  drupal_add_js('jQuery(document).ready(function() {                  
-                // jQuery("#edit-metatags-und-description-value").val("");
-              jQuery("#edit-metatags-und-title-value").val("");
-          });', array('type' => 'inline', 'scope' => 'footer'));
+    if (!empty($supplement_id)) {
+      $form_state['values']['field_story_select_supplement_target_id'] = $supplement_id;
+    }
+  }
+}
+
+/**
+ * Custom submit callback for home page node redirection.
+ * {@inheritdoc}
+ */
+function itg_home_page_redirect() {
+  drupal_get_messages('status');
+  drupal_goto('cms-user-dashboard');
+}
+
+/**
+ * Custom submit callback for redirecting taxonomy form.
+ * {@inheritdoc}
+ */
+function itg_taxonomy_form_custom_callback($form, &$form_state) {
+  global $base_url;
+  $arg = arg();
+  $type = $form_state['values']['vocabulary_machine_name'];
   
+  // change name for movies vocab
+  if($type == 'movies') {
+    $type = 'Movie name';
+  }
+  
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+  if ($arg[4] == 'add' && !empty($arg[4])) {
+    $op = 'created';
+  }
+  else {
+    $op = 'updated';
+  }
+  $taxonomy_title = $form_state['input']['name'];
+  drupal_set_message(t($type . ' <b>' . $taxonomy_title . '</b> has been ' . $op . '.'));
+  $_GET['destination'] = $_REQUEST['destination'];
+}
+
+/**
+ * after build
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
+ */
+function itg_common_meta_token_remove($form, &$form_state) {
   return $form;
 }
 
@@ -349,7 +725,7 @@ function itg_common_image_generate($form, &$form_state) {
     $settings['large_uri'] = '';
   }
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_image.js', array('weight' => 3, 'scope' => 'footer'));
 
   return $form;
 }
@@ -378,6 +754,7 @@ function itg_common_form_field_ui_field_edit_form_alter(&$form, &$form_state, $f
 function itg_common_cancel_button($form, &$form_state) {
 
   $query_array = array();
+  $query_str = '';
   if (!isset($_REQUEST['destination'])) {
     $destination = '';
   }
@@ -391,14 +768,14 @@ function itg_common_cancel_button($form, &$form_state) {
   }
   if (!empty($form['nid']['#value'])) {
     $form['actions']['cancel'] = array(
-      '#markup' => '<a data-dest="'.$destination.'?'.$query_str.'" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
-      '#weight' => 20,
+      '#markup' => '<a data-dest="' . $destination . '?' . $query_str . '" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Close</a>',
+      '#weight' => 22,
     );
   }
   else {
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' => arg(1)))),
-      '#weight' => 20,
+      '#markup' => l(t('Close'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' => arg(1)))),
+      '#weight' => 22,
     );
   }
 
@@ -406,16 +783,51 @@ function itg_common_cancel_button($form, &$form_state) {
 }
 
 /**
+ * Add preview button
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_common_add_preview_button($form, &$form_state) {
+  unset($form['actions']['preview']);
+  if (isset($form_state['node']->nid)) {
+    global $base_url;
+    
+    if (isset($form_state['node']->status) && $form_state['node']->status == 0 ) {
+        $node_url = $base_url . '/node/' . $form_state['node']->nid;        
+    } else {          
+        $node_url = FRONT_URL . '/node/' . $form_state['node']->nid;         
+    }
+    
+    $web_link = '<a  class="btn-submit" href="' . $node_url . '?preview_log='.$form_state['node']->nid.'" target="_blank">Web preview</a>';
+    $mob_link = '<a class="colorbox-load btn-submit preview-btn" href="'.$node_url.'?width=300&preview_log='.$form_state['node']->nid.'&amp;height=600&amp;iframe=true">M preview</a>';
+          
+    $form['actions']['webpreview'] = array(
+      '#markup' => $web_link,//l("Web preview" , "node/".$form_state['node']->nid , array("query" =>array("preview_log" => $form_state['node']->nid) ,  "attributes" =>array("class" => array("btn-submit" ,"preview-btn") , "target" => array("_blank")))),
+      '#weight' => 20,
+    );
+    
+    $form['actions']['mpreview'] = array(
+      '#markup' => $mob_link,
+      '#weight' => 21,
+    );
+  } 
+
+  return $form;
+}
+
+
+/**
  * Implements hook_form_FORMID_alter().
  * {@inheritdoc}
  */
 function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
+
   $settings = array();
 
   $settings['formid'] = $form['#id'];
   drupal_add_js(array('itg_common' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_form.js');
+  drupal_add_js(drupal_get_path('module', 'itg_common') . '/js/itg_common_form.js', array('scope' => 'footer'));
 
   if (isset($form['title'])) {
     $form['title']['#maxlength'] = 255;
@@ -424,14 +836,13 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
   if ($form['#id'] == 'views-exposed-form-custom-html-widgets-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/custom_html_widgets/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Widget name'));
-  } else if ($form['#id'] == 'views-exposed-form-funalytics-list-page-1' 
-          || $form['#id'] == 'views-exposed-form-funalytics-list-page') {
+  }
+  else if ($form['#id'] == 'views-exposed-form-funalytics-list-page-1' || $form['#id'] == 'views-exposed-form-funalytics-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/itg_funalytics/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/itg_funalytics/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Funalytic ID'));
-  }   
-  
+  }
 }
 
 /**
@@ -439,7 +850,7 @@ function itg_common_form_views_exposed_form_alter(&$form, &$form_state, $form_id
  * {@inheritdoc}
  */
 function itg_common_date_popup_process_alter(&$element, &$form_state, &$context) {
-  if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form') {
+   if ($form_state['build_info']['form_id'] != 'views_exposed_form' && $form_state['build_info']['form_id'] != 'itg_personalization_edit_profile_form' && $form_state['build_info']['form_id'] != 'astro_node_form' && $form_state['build_info']['form_id'] != 'reporter_node_form' && $form_state['build_info']['form_id'] != 'views_form_manage_print_team_page' && $form_state['build_info']['form_id'] != 'story_node_form' && $form_state['build_info']['form_id'] != 'itg_mobile_services_search_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_form' && $form_state['build_info']['form_id'] != 'itg_octopus_api_rfa_form' && $form_state['build_info']['form_id'] != 'event_backend_node_form' && ($form_state['build_info']['form_id'] != 'taxonomy_form_term' && $form_state['values']['vocabulary_machine_name'] == 'event_type')) {
     $element['#datepicker_options'] = array(
       'minDate' => "+0D",
     );
@@ -447,23 +858,16 @@ function itg_common_date_popup_process_alter(&$element, &$form_state, &$context)
   }
 }
 
-
-
-
-
-
-
-
 /**
  * Implementation of hook_node_presave().
  * @param object $node
  */
-
-
-
 function itg_common_node_presave($node) {
-  //global $ctype_array;
-  $ctype_array = array('photogallery','story','videogallery','podcast','food_news','cooking_tips','recipe');
+  //set custom path alias  
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
+  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
   switch ($node->type) {
     case 'astro':
     case 'recipe':
@@ -477,47 +881,10 @@ function itg_common_node_presave($node) {
         if ($node->op == 'Publish') {
           $node->status = 1;
         }
-        elseif ($node->op == 'Save as Draft' || $node->status == 0) {
+        if ($node->op == 'Save as Draft') {
           $node->status = 0;
         }
       }
-      
-        
-  }
-   if (!empty($node->nid)) {
-    if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated'){
-       itg_common_custompath_insert_load($node);
-    }
-  }
-
-}
-
-
-/**
- * Implementation of hook_node_insert().
- * @param object $node
- */
-function itg_common_node_insert($node) {
-  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
-  // custom alias cnditions
-  if (in_array($node->type, $ctype_array) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    itg_common_custompath_insert_load($node);
-  }
-  elseif ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-
-    itg_common_custompath_migrated_load($node);
-  }
-}
-
-/**
- * Implementation of hook_node_insert().
- * @param object $node
- */
-function itg_common_node_update($node) {
-  $ctype_array = array('photogallery', 'story', 'videogallery', 'podcast', 'food_news', 'cooking_tips', 'recipe');
-  // custom alias cnditions
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-    itg_common_custompath_migrated_load($node, 'update_migrated');
   }
 }
 
@@ -550,7 +917,7 @@ function itg_custom_message($type, $workbench_current_state, $case, $title, $des
     if ($workbench_current_state == 'published') {
       $op = 'published';
       drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully.'));
-    } 
+    }
     else {
       $op = 'created';
       drupal_set_message(t($type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
@@ -571,29 +938,34 @@ function itg_custom_message($type, $workbench_current_state, $case, $title, $des
 function itg_common_node_view($node, $view_mode, $langcode) {
   $arg = arg();
   $expiry_condition = FALSE;
-  if ($node->type == 'ask_an_expert') {
-    $node_title = "Question : " . $node->title;
-    drupal_set_title(t($node_title));
-  }
+  if ($view_mode != 'search_index') {
+    if ($node->type == 'ask_an_expert') {
+      $node_title = "Question : " . $node->title;
+      drupal_set_title(t($node_title));
+    }
 
-  if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-    if (function_exists('totalcomments')) {
-      $node->content['comment_count'] = totalcomments($arg[1]);
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
+      $last_record = global_comment_last_record(); 
+      if (function_exists('totalcomments') && (trim($last_record[0]->config_name) == 'other')) {
+        $node->content['comment_count'] = totalcomments($arg[1]);
+      } else {
+        $node->content['comment_count'] = 0;
+      }
+    }
+   
+    // Handle case of story expiry.
+    if (!empty($node->field_story_expires['und'][0]['value']) && $node->field_story_expires['und'][0]['value'] == 'Yes') {
+      $expiry_condition = TRUE;
+    }
+
+    if ($expiry_condition && isset($node->field_story_expiry_date['und'][0]['value']) && !empty($node->field_story_expiry_date['und'][0]['value'])) {
+      $expiry_date_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
+      $current_date_time = time();
+      if ($current_date_time >= $expiry_date_time) {
+        //return drupal_access_denied();
+      }
     }
   }
-  
-  // Handle case of story expiry.
- if(!empty($node->field_story_expires['und'][0]['value']) && $node->field_story_expires['und'][0]['value'] == 'Yes') {
-    $expiry_condition = TRUE;
- }
-
- if($expiry_condition && isset($node->field_story_expiry_date['und'][0]['value']) && !empty($node->field_story_expiry_date['und'][0]['value'])) {
-   $expiry_date_time = strtotime($node->field_story_expiry_date['und'][0]['value']);
-   $current_date_time = time();
-   if($current_date_time >= $expiry_date_time) {
-    //return drupal_access_denied();
-   }
- }
 }
 
 /**
@@ -614,7 +986,6 @@ function itg_common_managesite_validate($form, &$form_state) {
  * @param Object $view
  */
 function itg_common_views_pre_render(&$view) {
-
   if ($view->name == "custom_html_widgets_list") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $header_content .= '<span class="create_cooking_tips">' . l(t('Create custom html widgets'), 'node/add/custom-html-widgets', array('query' => array('destination' => 'custom-html-widgets-list'))) . '&nbsp;</span>';
@@ -627,7 +998,11 @@ function itg_common_views_pre_render(&$view) {
   }
   if ($view->name == "common_master") {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-    $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/'.arg(1).'/add') . '&nbsp;</span>';
+    $header_content .= '<span class="create_cooking_tips">' . l(t('Create'), 'admin/structure/taxonomy/' . arg(1) . '/add', array('query' => array('destination' => 'common-master/'.arg(1)))) . '&nbsp;</span>';
+    $view->attachment_before = $header_content;
+  }
+  if ($view->name == "magazine_stories") {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $view->attachment_before = $header_content;
   }
 }
@@ -641,15 +1016,18 @@ function itg_common_mail($key, &$message, $params) {
   switch ($key) {
     case 'personalization_mail':
     case 'lrp_point':
-    case 'refer_a_friend':
-      $message['headers'] = array(
+    case 'refer_friend':
+      $headers = array(
         'MIME-Version' => '1.0',
         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
         'Content-Transfer-Encoding' => '8Bit',
         'X-Mailer' => 'Drupal'
       );
       $message['subject'] = $params['subject'];
-      $message['body'] = $params['body'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
       break;
   }
 }
@@ -686,6 +1064,11 @@ function itg_common_theme() {
       'path' => drupal_get_path('module', 'itg_common') . '/templates',
       'variables' => array('data' => NULL),
     ),
+     'itg_photo_embed' => array(
+      'template' => 'itg-photo-embed',
+      'path' => drupal_get_path('module', 'itg_common') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
   );
 
   return $themes;
@@ -701,19 +1084,13 @@ function itg_common_cronapi($op, $job = NULL) {
     'callback' => 'itg_content_inactive',
   );
 
+   $items['insert-private-ip'] = array(
+    'description' => 'Insert varnish ip .',
+    'callback' => 'insert_private_ip',
+ );
   return $items;
 }
 
-/**
- * This function use for remove html special chars
- */
-function itg_common_remove_extra_html($string) {
-  $return_data = "";
-  if (!empty($string)) {
-    $return_data = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $string);
-  }
-  return $return_data;
-}
 
 /**
  * Implement cron callback for content inactive
@@ -722,111 +1099,27 @@ function itg_content_inactive() {
 
   $current_time = date("Y-m-d H:i:s");
   //set content type
-  $content_type = array('story', 'videogallery');
-
+  //$content_type = array('story', 'videogallery'); 
+  $content_type = array("story" , "photogallery");
+  
   $itg_query = db_select('node', 'n');
+  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
   $itg_query->fields('n', array('nid'));
-  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
   $itg_query->condition('n.type', $content_type, 'IN');
   $itg_query->condition('n.status', 1);
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
-  //$itg_query->condition(db_or()->isNull('expiry.field_story_expiry_date_value')->condition('expiry.field_story_expiry_date_value', $current_time, '>='));
-
+  $itg_query->isNotNull('expiry.field_story_expiry_date_value');
   $itg_result = $itg_query->execute()->fetchAll();
-
+  //itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
-    $node = node_load($itg_val->nid);
+    $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
-    $node->status = 0;
-    node_save($node);
+    $node_data->status = 0;
+    node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
-  watchdog("cron content expiry", '<pre>' . print_r($nodeid, TRUE) . '</pre>');
-}
-
-/**
- * Function is used to prepare node title with emoji.
- * @param int $nid
- *   Node id
- * @param int $min_limit
- *   Min limit to truncate node title
- * @param int $max_limit
- *   Max limit to truncate node title
- * @return string
- *   Returns node title.
- */
-function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255) {
-  $titlte = "";
-  $positions_array = array();
-  $left_smiles = "";
-  $right_smiles = "";
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
-  $query->fields('n', array('title'));
-  $query->fields('emoji', array('field_emoji_value'));
-  $query->fields('emoji_2', array('field_emoji_2_value'));
-  $query->fields('emoji_pos', array('field_emoji_position_value'));
-  $query->condition('n.nid', $nid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  foreach($result as $positions) {
-    if(!empty($positions['field_emoji_position_value'])) {
-      $positions_array[] = $positions['field_emoji_position_value']; 
-    }
-  }
-  if(in_array('left', $positions_array)) {
-    if(!empty($result[0]['field_emoji_2_value'])) {
-      // Get all the smiley images.
-      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images);
-      $left_smiles = '<span class="smilies-title">';
-      // Implode all images in case of muliple smiley.
-      $left_smiles .= implode("", $images[0]);
-      
-      $left_smiles .='</span>';
-    }
-  }
-  if (in_array('right', $positions_array)) {
-    if(!empty($result[0]['field_emoji_value'])) {
-      // Get all the smiley images.
-      preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images_2);
-      // Implode all images in case of muliple smiley.
-      
-      $right_smiles = '<span class="smilies-title">';
-      // Implode all images in case of muliple smiley.
-      $right_smiles .= implode("", $images_2[0]);
-      
-      $right_smiles .='</span>';
-    }
-  }  
-  if (count($result)) {
-    if(!empty($left_smiles) || !empty($right_smiles)) {
-      $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
-    }
-    else {
-      $max_limit +=10; 
-      $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));    
-    }
-    // Add smiley to right;
-    $titlte =  $left_smiles . $titlte . $right_smiles ;
-    
-    return $titlte;
-  }
-}
-
-/**
- * Implement for lock delete on cancle button
- */
-function itg_custom_lock_delete() {
-  if (!empty($_GET['nid'])) {
-    if (function_exists('content_lock_release')) {
-      content_lock_release($_GET['nid'], $user->uid);
-    }
-    
-    //content_lock_release_own_item($_GET['nid'], FALSE, TRUE);
-  }
-  exit;
+  itg_watchdog("nodes_expiry" , $nodeid);
 }
 
 
@@ -834,12 +1127,12 @@ function itg_custom_lock_delete() {
  */
 function itg_apache_solr_get_site_hash() {
   $var_hash = explode(',', variable_get('apache_solr_sites_prefix_values'));
-  foreach($var_hash as $key => $value) {
-   $ex_hash = explode('|', $value);
-   $key = trim($ex_hash[0]);
-   $sitehash[$key] = trim($ex_hash[1]);
+  foreach ($var_hash as $key => $value) {
+    $ex_hash = explode('|', $value);
+    $key = trim($ex_hash[0]);
+    $sitehash[$key] = trim($ex_hash[1]);
   }
-  
+
   return $sitehash;
 }
 
@@ -848,13 +1141,24 @@ function itg_apache_solr_get_site_hash() {
  * {@inheritdoc}
  */
 function itg_common_mail_alter(&$message) {
-  
-  global $user, $base_url;  
- 
+
+  global $user, $base_url;
+  //$message['send'] = FALSE;
+  $to_mail = $message['to'];
+  $to_mails = explode(',', $to_mail);
+
+  $sendto = array();
+  foreach ($to_mails as $mail_to) {
+    //if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
+      $sendto[] = $mail_to;
+    //}
+  }
+  $sendmails = implode(',', $sendto);
+
+  $message['to'] = $sendmails;
   if (FRONT_URL == $base_url || BACKEND_URL == $base_url) {
     //$message['send'] = FALSE;
   }
-  
 }
 
 /**
@@ -863,47 +1167,13 @@ function itg_common_mail_alter(&$message) {
  * @param array $form_state
  */
 function itg_draft_form_custom_callback($form, &$form_state) {
-  
-  if ($form_state['node']->workbench_moderation_state_new == 'draft') {    
-    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];    
-    drupal_set_message(t($form_state['values']['type'] . ' <b>' . $form_state['values']['title'] . '</b> has been save successfully.'));
-    $_GET['destination'] = $redirect_path;    
-  }
-  
-}
-
-/**
- * Helper function to get photogallery.
- */
-function itg_photogallery_embed() {
-  if (!empty($_GET['gid']))
-  {
-    $data = node_load($_GET['gid']);
-    return theme('itg_photogallery_embed', array('data' => $data));
+  if ($form_state['node']->workbench_moderation_state_new == 'draft') {
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
+    $_GET['destination'] = $redirect_path;
+    drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
   }
 }
 
-/**
- * Helper function to get videogallery.
- */
-function itg_videogallery_embed() {
-  if (!empty($_GET['gid'])) {
-    $gid = base64_decode($_GET['gid']);
-    if (function_exists('get_video_in_fieldcollection_by_nid')) {
-      $videoids = get_video_in_fieldcollection_by_nid($gid);
-    }
-    return theme('itg_videogallery_embed', array('data' => $videoids));
-  }
-}
-
-/**
- * callback for funalytics-popup.
- */
-function itg_funalytics_popup() {
-  
-  echo views_embed_view('front_funalytics_list', 'block_1');
-  //exit;
-}
 
 /**
  * 
@@ -913,37 +1183,799 @@ function itg_funalytics_popup() {
  */
 function get_term_name_from_tid($tid, $vid = CATEGORY_MANAGMENT) {
   $data = array();
-  $query = db_select('taxonomy_term_data' ,'ttd')
-      ->fields('ttd' ,array('name'))
-      ->condition('ttd.tid' ,$tid)
-      ->condition('ttd.vid' ,$vid);
+  $query = db_select('taxonomy_term_data', 'ttd')
+      ->fields('ttd', array('name'))
+      ->condition('ttd.tid', $tid)
+      ->condition('ttd.vid', $vid);
   return $query->execute()->fetchObject();
 }
 
+
 /**
- * Helper function to get user details
- * @param int $uid 
+ * Implements hook_token_info_alter.
+ * {@inheritdoc}
  */
-function itg_custom_get_user_details($uid) {
-  if(!empty($uid)) {
-  $query = db_select('users', 'u');
-  $query->join('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
-  $query->join('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
-  $query->fields('u', array('uid'))
-          ->fields('u', array('mail'))
-          ->fields('u', array('name'))
-          ->fields('f', array('field_first_name_value'))
-          ->fields('g', array('field_last_name_value'))
-          ->condition('u.uid', $uid);
-  $result = $query->execute();
+function itg_common_token_info_alter(&$info) {
+
+  if (!isset($info['tokens']['node']['title'])) {
+    $title_token = array('name' => 'Title', 'description' => 'The title of the node.');
+    $info['tokens']['node']['title'] = $title_token;
+  }
+
+  if (!isset($info['tokens']['node']['log'])) {
+    $log_token = array('name' => 'Revision log message', 'description' => 'The explanation of the most recent changes made to the node.');
+    $info['tokens']['node']['log'] = $log_token;
+  }
+
+  if (!isset($info['tokens']['node']['nid'])) {
+    $nid_token = array('name' => 'Content ID', 'description' => 'The unique ID of the content item, or "node".');
+    $info['tokens']['node']['nid'] = $nid_token;
+  }
+
+  if (!isset($info['tokens']['node']['vid'])) {
+    $vid_token = array('name' => 'Revision ID', 'description' => 'The unique ID of the node\'s latest revision.');
+    $info['tokens']['node']['vid'] = $vid_token;
+  }
+
+  if (!isset($info['tokens']['node']['body'])) {
+    $body_token = array('name' => 'Body', 'description' => 'The main body text of the node. The following properties may be appended to the token: value (Text), summary (Summary), format (Text format)', 'dynamic' => 1);
+    $info['tokens']['node']['body'] = $body_token;
+  }
+
+  if (!isset($info['tokens']['node']['summary'])) {
+    $summary_token = array('name' => 'Summary', 'description' => 'The summary of the node\'s main body text.');
+    $info['tokens']['node']['summary'] = $summary_token;
+  }
+
+  if (!isset($info['tokens']['node']['language'])) {
+    $ln_token = array('name' => 'Language', 'description' => 'The language the node is written in.');
+    $info['tokens']['node']['language'] = $ln_token;
+  }
+
+  if (!isset($info['tokens']['node']['url'])) {
+    $url_token = array('name' => 'URL', 'description' => 'The URL of the node.', 'type' => 'url');
+    $info['tokens']['node']['url'] = $url_token;
+  }
+
+  if (!isset($info['tokens']['node']['created'])) {
+    $created_token = array('name' => 'Date created', 'description' => 'The date the node was posted.', 'type' => 'date');
+    $info['tokens']['node']['created'] = $created_token;
+  }
+
+  if (!isset($info['tokens']['node']['author'])) {
+    $author_token = array('name' => 'Author', 'description' => 'The author of the node.', 'type' => 'user');
+    $info['tokens']['node']['author'] = $author_token;
+  }
+
+  if (!isset($info['tokens']['node']['metatag'])) {
+    $meta_token = array('name' => 'Meta tags', 'description' => 'Meta tags for this node.', 'type' => 'metatag');
+    $info['tokens']['node']['metatag'] = $meta_token;
+  }
+
+  if (!isset($info['tokens']['term']['name'])) {
+    $username_token = array('name' => 'Name', 'description' => 'The name of the taxonomy term.');
+    $info['tokens']['term']['name'] = $title_token;
+  }
+
+  if (!isset($info['tokens']['term']['vocabulary'])) {
+    $username_token = array('name' => 'Vocabulary', 'description' => 'The vocabulary the taxonomy term belongs to.', 'type' => 'vocabulary');
+    $info['tokens']['term']['vocabulary'] = $title_token;
+  }
+
+  if (!isset($info['tokens']['user']['name'])) {
+    $username_token = array('name' => 'Name', 'description' => 'The login name of the user account.');
+    $info['tokens']['user']['name'] = $title_token;
+  }
+
+  if (!isset($info['tokens']['user']['uid'])) {
+    $username_token = array('name' => 'User ID', 'description' => 'The unique ID of the user account.');
+    $info['tokens']['user']['uid'] = $title_token;
+  }
+}
+
+
+/*
+ * get_image_count_entity_id
+ * @param int $entity_id
+ * @param string $bundle
+ * @param string $field_collection_name
+ * @param string $field_name
+ */
+function get_image_count_entity_id($entity_id, $bundle, $field_collection_name) {
+   if (!empty($entity_id)) {
+    $result = db_select('field_data_'.$field_collection_name, 'fe')
+            ->fields('fe')
+            ->condition('entity_id', $entity_id)
+            ->condition('bundle', $bundle)
+            ->execute();
+    $num_of_results = $result->rowCount();
+    return $num_of_results;
+  }
+}
+
+/*
+ * get_amp_video_time
+ * @param int $entity_id
+ */
+function get_amp_video_time($entity_id, $bundle, $field_name) {
+   if (!empty($entity_id)) {
+    $result = db_select('field_data_'.$field_name, 'fe')
+            ->fields(fe, array($field_name.'_value'))
+            ->condition('entity_id', $entity_id)
+            ->condition('bundle', $bundle)
+            ->execute();
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
+
+/*
+ * Implements itg_movie_taxonomy_validate().
+ */
+function itg_movie_taxonomy_validate($form, &$form_state) {
+ if($form_state['values']['field_movie_earning'][LANGUAGE_NONE][0]['value'] == 0) {
+   form_set_error('field_movie_earning', 'Please enter valid Earning value');
+ } 
+}
+
+
+/**
+ * Implementing 'itg_common_custompath_insert_val'.
+ * @param $pathdata path alias content
+ * Creating custom path alias 
+ */
+function itg_common_url_friendly_path($pathdata) {
+
+  if (preg_match("![^a-z0-9]!i", $pathdata)) {
+    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/', '-', $pathdata);
+    while (preg_match('/--/', $pathdata)) {
+      $pathdata = preg_replace('/--/', '-', $pathdata);
+    }
+    $pathdata = rtrim($pathdata, "-");
+    $pathdata = strtolower($pathdata);
+    $pathdata = str_replace(array(':', '*', '"', "'", '#'), "-", $pathdata);
+  }
+  return $pathdata;
+}
+
+/**
+ * Check whether sponsor story or not.
+ * @param int $nid
+ * @return boolean
+ */
+function _is_sponsor_story_article($nid) {
+  $is_sponsor = FALSE;
+  if (isset($nid)) {
+    $query = db_select('field_data_field_story_configurations', 'fc');
+    $query->fields('fc', array('field_story_configurations_value'));
+    $query->condition('fc.entity_id', $nid, '=');
+    $query->condition('fc.bundle', 'story', '=');
+    $query->condition('fc.entity_type', 'node', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result)) {
+      foreach ($query_result as $config_val) {
+        if ($config_val->field_story_configurations_value == 'sponsor') {
+          $is_sponsor = TRUE;
+          break;
+        }
+      }
+    }
+  }
+  return $is_sponsor;
+}
+
+/**
+ * Returns internal path from external URL.
+ * @global string $base_path
+ * @param string $url
+ * @return string
+ */
+function _get_int_path_from_url($url) {
+  global $base_path;
+  $int_path = '';
+  // Get hostname
+  preg_match("/^(https?:\/\/)?([^\/]+)/i", $url, $domain);
+  // Format localhost + base_path (http://hostname/drupalbase)
+  $base = (isset($domain[0]) ? $domain[0] : '') . $base_path;
+  // If $url contains $base, remove the $base part
+  if (strpos($url, $base) === 0) {
+    $path = str_replace($base, '', $url);
+  }
+  // $url is presumed to be without $base part (internal path?)
+  else {
+    $path = $url;
+  }
+  // Parse the path (without $base)
+  $result = drupal_parse_url($path);
+  $int_path = drupal_get_normal_path($result['path']);
+  return $int_path;
+}
+
+/**
+ * Check if taxonomy is sponsored or not.
+ * @param int $tid
+ * @return boolean
+ */
+function _is_sponsored_category($tid) {
+  $return = FALSE;
+  if (db_table_exists('field_data_field_is_sponsor')) {
+    $query = db_select('field_data_field_is_sponsor', 'fs');
+    $query->fields('fs', array('field_is_sponsor_value'));
+    $query->condition('fs.entity_id', $tid, '=');
+    $query->condition('fs.bundle', 'category_management', '=');
+    $query->condition('fs.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchField();
+    if ($query_result == 1) {
+      $return = TRUE;
+    }
+  }
+  return $return;
+}
+
+function _remove_embded_tags_from_story_body($body_content) {
+  if(!empty($body_content)) {
+    return preg_replace('#\s*\[ITG:.+\]\s*#U', ' ', $body_content);
+  }
+  return "";
+}
+
+
+/**
+ * Function for prevent sent email during widget add bulk operation.
+ * @param array $request
+ * @return boolean
+ */
+function itg_workflow_stop_node_update_batch_for_widgets() {
+	if (!isset($_REQUEST['id'])) {
+		return FALSE;
+	}
+  $id = $_REQUEST['id'];
+  $query = db_select('batch', 'b')
+      ->fields('b', array('batch'))
+      ->condition('b.bid', $id);
+  $result = $query->execute()->fetchField();
+  $batch_data_array = unserialize($result);
+  $redirect_path = $batch_data_array['form_state']['redirect']['path'];
+  $widgets_urls = _widget_batch_urls();
+  if (in_array($redirect_path, $widgets_urls)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * All widgets URL.
+ * @return array
+ */
+function _widget_batch_urls() {
+  return array(
+    'trending-video-widget-list',
+    'big-story-format-conent',
+    'dont-miss-widget-contents',
+    'most-popular-story',
+    'special-auto-review-widget-contents',
+    'yearend-left-widget-contents',
+    'most-read-widget-contents',
+    'custom-html-widgets-list',
+    'special-how-made-it-widget-contents',
+    'election-xml-list',
+    'state-manager',
+    'special-key-candidate-widget-contents',
+    'saction-staticpage-list',
+    'budget-predictor-image',
+    'we-may-suggest-draggable-content-order',
+    'story-list-widget',
+    'trending-video-widget-list',
+    'top-takes-videos-list',
+    'watch-right-now-videos-list',
+    'poll-format-conent',
+    'manage-highlights',
+    'home-page-feature-widget-listing',
+    'photo-list-widget',
+    'video-list-widget',
+    'anchor-list',
+    'so-sorry-video-widget-list',
+    'issue-magazin-primary-cat-widget',
+    'issue-base-magazin-widget',
+    'issue-magazin-primary-cat-widget',
+    'supplement-base-magazin-widget'
+  );
+}
+
+
+
+/*
+ * Implements itg_common_global_alt_title().
+ * @param string $field_machine_name
+ * @param int $fid
+ */
+function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
+  if (!empty($field_machine_name)) {
+    $result = db_select('field_data_'.$field_machine_name, 'fe')
+            ->fields(fe, array($field_machine_name.'_alt',$field_machine_name.'_title'))
+            ->condition($field_machine_name.'_fid', $fid)
+            ->execute();
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
+
+/**
+ * Implements itg_common_get_addontitle().
+ * @param int $nid;
+ */
+function itg_common_get_addontitle($node_obj) {
+  if (!empty($node_obj)) {
+     $addon_list = array();
+    //while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $node_obj['ad_title'];
+      $addon_list['ad_url'] = $node_obj['ad_url'];
+    //}
+
+    return $addon_list;
+  }
+}
+
+/**
+ * Function to get details of addtitle for given nodeid.
+ * @param int $nid;
+ */
+function itg_common_get_addontitle_for_view($nid) {
+  if (!empty($nid)) {
+    $addon_list = array();
+    $query = db_select('field_data_field_story_new_title', 'addon');
+    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
+    $query->fields('addon', array('field_story_new_title_value'))
+          ->fields('addurl', array('field_story_redirection_url_titl_value'));
+    $query->condition('addon.entity_id', $nid);
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $record['field_story_new_title_value'];
+      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
+    }
+
+    return $addon_list;
+  }
+}
+
+function itg_common_taxonomy_get_parents($tid) {
+    $parents = &drupal_static(__FUNCTION__, array());
+
+    if ($tid && !isset($parents[$tid])) {
+        $query = db_select('taxonomy_term_data', 't');
+        $query->join('taxonomy_term_hierarchy', 'h', 'h.parent = t.tid');
+        $query->addField('t', 'tid');
+        $query->condition('h.tid', $tid);
+        $query->addTag('taxonomy_term_access');
+        $query->orderBy('t.weight');
+        $query->orderBy('t.name');
+        $tids = $query->execute()->fetchCol();
+        $parents[$tid] = $tids;
+    }
+
+    return isset($parents[$tid]) ? $parents[$tid] : array();
+}
+
+
+/**
+ * Implements itg_custom_amp_body_filter();
+ */
+function itg_custom_amp_body_filter($fullReplacesBodyText) {
   
-  while ($record = $result->fetchAssoc()) {
-    $user_list['mail'] = $record['mail'];
-    $user_list['name'] = $record['name'];
-    $user_list['fname'] = $record['field_first_name_value'];
-    $user_list['lname'] = $record['field_last_name_value'];
+  $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
+
+  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
+  $fullReplacesBodyText = trim(preg_replace('/mce_src="[^"]*/', '', $fullReplacesBodyText));
+  $fullReplacesBodyText = trim(preg_replace("/mce_src='[^']*/", "", $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/style=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/<style(.*)\/style>/', '', $fullReplacesBodyText));
+  $fullReplacesBodyText = preg_replace('#<div class="clicktoenlarge"[^>]*>(.*?)</div>#', '', $fullReplacesBodyText);
+  $fullReplacesBodyText = str_replace('xml:lang="en"', '', $fullReplacesBodyText);
+  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $fullReplacesBodyText, $matches);
+
+  $i = 0;
+  foreach ($matches[0] as $images) {
+
+    $src = $matches[1][$i];
+    list($width, $height, $type, $attr) = getimagesize($src);
+
+    $layout_responsive = ($width > 300) ? 'layout="responsive"' : '';
+    $img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
+
+
+    $fullReplacesBodyText = str_replace($images, $img, $fullReplacesBodyText);
+
+    $i++;
+  }
+
+  preg_match_all('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', $fullReplacesBodyText, $iframes);
+
+  foreach ($iframes[0] as $iframes) {
+    preg_match('/src="([^"]+)"/', $iframes, $match);
+    $frame_url = parse_url($match[1]);
+    if ($frame_url['scheme'] != 'https') {
+      $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
+    }
+    else if ((strpos($frame_url['path'], 'mega-review/embed') !== false)) {
+      $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
+    }
+    else {
+    $frame = '<amp-iframe width="200" height="150"
+    sandbox="allow-scripts allow-same-origin"
+    layout="responsive"
+    frameborder="0"
+    src="' . $match[1] . '">
+    </amp-iframe>';
+      $fullReplacesBodyText = str_replace($iframes, $frame, $fullReplacesBodyText);
+    }
   }
   
-  return $user_list;
+  preg_match_all('/<style.*><\/style>/isU', $fullReplacesBodyText, $styles);
+    
+  foreach ($styles[0] as $style) {
+    $fullReplacesBodyText = str_replace($style, "", $fullReplacesBodyText);
   }
+
+  $value_mambots = '"mambots/';
+  $string_value_mambots_replace = '"http://indiatoday.intoday.in/mambots/';
+  $fullReplacesBodyText = str_replace($value_mambots, $string_value_mambots_replace, $fullReplacesBodyText);
+  $fullReplacesBodyText = str_replace(array("<br/>", "<br>"), "", $fullReplacesBodyText);
+
+
+  $result = array();
+  $fullReplacesBodyText = $bodystr = stripcslashes($fullReplacesBodyText);
+  
+    // code to replace embed twitter
+  preg_match_all("'<blockquote class=\"twitter-tweet\"(.*)>(.*)</blockquote>'siU", $bodystr, $result);
+
+  if (!empty($result)) {
+    foreach ($result[0] as $value1) {
+      $Twitterdataid = itg_get_twitter_embeded_id($value1);
+      if ($Twitterdataid != 0) {
+       $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
+        $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
+        /*$value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+		
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        // With Https        
+        $value2 = '<script src="https://platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" " charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/
+        
+      }
+    }
+  }
+  
+  // code to replace embed twitter video
+  preg_match_all("'<blockquote class=\"twitter-video\"(.*)>(.*)</blockquote>'siU", $bodystr, $result);
+  if (!empty($result)) {
+    foreach ($result[0] as $value1) {
+      $Twitterdataid = itg_get_twitter_embeded_video_id($value1);
+      $Twitterdataid = preg_replace('/\?.*/', '', $Twitterdataid);
+      if ($Twitterdataid != 0) {
+        //$ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
+        // echo $Twitterdataid; die();
+        $amp_twitter = '<p><amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter></p>'; //data-cards="hidden"
+        //echo $amp_twitter; die();
+        $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
+        
+        /*$value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/
+      }
+    }
+  }
+  
+  // code to replace instagram
+  preg_match_all("'<blockquote class=\"instagram-media\"(.*)>(.*)</blockquote>'siU", $fullReplacesBodyText, $result);
+  if (!empty($result)) {
+    foreach ($result as $key => $value) {
+      foreach ($value as $key1 => $value1) {
+        $instagramcode = itg_get_instagram_shortcode($value1);
+        if ($instagramcode) {
+          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" data-captioned data-default-framing width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
+          
+          $fullReplacesBodyText = str_replace($value1, $amp_instagram, $fullReplacesBodyText);
+          /*$value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+          $value2 = '<script async="" defer="" src="//platform.instagram.com/en_US/embeds.js" ></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js" "></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//www.instagram.com/embed.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);*/          
+        }
+      }
+    }
+  }
+  
+  return $fullReplacesBodyText;
+}
+
+/**
+ * Implements itg_get_instagram_shortcode();
+ */
+function itg_get_instagram_shortcode($bodystr) {
+  $shortcode = false;
+  preg_match("'<blockquote class=\"instagram-media\"(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+    $hrefs = array();
+    $dom = new DOMDocument();
+    $dom->loadHTML($match[1]);
+    $tags = $dom->getElementsByTagName('a');
+    foreach ($tags as $tag) {
+      if (strpos($tag->getAttribute('href'),'instagram') !== false) {
+      $hrefs[] = $tag->getAttribute('href');
+      }
+    }
+    //~ $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+    //~ $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
+    //~ $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+    //~ $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
+    //~ return $twitter_url_emb_id;
+    foreach ($hrefs as $key => $href) {
+      if (preg_match('&(*UTF8)instagram.com/p/([^/]+)/?&i', $href, $matches)) {
+        if (!empty($matches[1])) {
+          $shortcode = $matches[1];
+          $url = $href;
+          break;
+        }
+      }
+    }
+  }
+  //return false;
+  return $shortcode;
+}
+
+/**
+ * Implements itg_get_twitter_embeded_id().
+ */
+function itg_get_twitter_embeded_id($bodystr) {
+  preg_match("'<blockquote class=\"twitter-tweet\"(.*)>(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+
+    $hrefs = array();
+    try {
+      $dom = new DOMDocument();
+      $dom->loadHTML($match[1]);
+
+      $tags = $dom->getElementsByTagName('a');
+      foreach ($tags as $tag) {
+        if (strpos($tag->getAttribute('href'),'twitter') !== false) {
+        $hrefs[] = $tag->getAttribute('href');
+        }
+      }
+      $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+      $twitterurl_embedded_url_refined_url = str_replace("https://twitter.com/", "", $twitterurl_embedded_url);
+      $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+      $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 1];
+    }
+    catch (Exception $e) {
+      $twitter_url_emb_id = 0;
+    }
+    return $twitter_url_emb_id;
+  }
+  return 0;
+}
+
+/*
+ * Implements itg_get_twitter_embeded_video_id().
+ */
+function itg_get_twitter_embeded_video_id($bodystr) {
+  preg_match("'<blockquote class=\"twitter-video\"(.*)>(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+    $hrefs = array();
+    try {
+      $dom = new DOMDocument();
+      $dom->loadHTML($match[1]);
+
+      $tags = $dom->getElementsByTagName('a');
+      foreach ($tags as $tag) {
+        $hrefs[] = $tag->getAttribute('href');
+      }
+
+      $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+      $twitterurl_embedded_url_refined_url = str_replace("https://twitter.com/", "", $twitterurl_embedded_url);
+      $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+      $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 1];
+    }
+    catch (Exception $e) {
+      $twitter_url_emb_id = 0;
+    }
+    return $twitter_url_emb_id;
+  }
+  return 0;
+}
+
+/**
+ * Implements itg_get_test_result().
+ */
+function itg_get_test_result() {
+  print 'hello';
+}
+
+/**
+ * Implements itg_common_cache_clear().
+ */
+function itg_common_cache_clear($cache_array = array()) {
+  if(!empty($cache_array)) {
+    foreach($cache_array as $cache) {
+      cache_clear_all($cache, 'cache', TRUE);
+    }
+  }
+}
+
+/**
+ * {@inheritdoc}
+ */
+//function display_widget_on_sport_page() {
+//  
+//  $url_list = array('ipl-venue', 'ipl-schedule', 'ipl-teams', 'ipl-stadiums');
+//  
+//  
+//}
+
+/**
+ * Get calnder week start and end date
+ * @param array $week
+ * @param array $year
+ * @return array
+ */
+function _get_calender_week_start_end_date($week, $year) {
+  $dto = new DateTime();
+  $ret['week_start'] = $dto->setISODate($year, $week)->format('Y-m-d');
+  $ret['week_end'] = $dto->modify('+6 days')->format('Y-m-d');
+  return $ret;
+}
+
+/**
+ * Function is used to convert String space
+ * */
+function itg_get_dive_region_name($str, $type = '') {
+  if (empty($str)) {
+    return '';
+  }
+  $pattern = "/<a ?.*>(.*)<\/a>/";
+  preg_match($pattern, $str, $matches);
+  if (count($matches) > 0) {
+    $str = $matches[1];
+  }
+  $text = preg_replace('~&~', 'and', $str);
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+  $text = preg_replace('~[^-\w]+~', '', $text);
+  $text = trim($text, '-');
+  $text = preg_replace('~-+~', '-', $text);
+  $text = strtolower($text);
+  $textarray = explode('-', $text);
+  $return = $type;
+  foreach ($textarray as $value) {
+    $return .= ucfirst($value);
+  }
+  return $return;
+}
+
+/**
+ * Do not allow to change modearation state from published to draft.
+ * Implements hook_node_update
+ * @param type $node
+ */ 
+function itg_common_node_update($node) {
+  if ((isset($node->workbench_moderation_state_current)) && ($node->workbench_moderation_state_current == 'published') && (isset($node->workbench_moderation_state_new)) && ($node->workbench_moderation_state_new == 'draft')) {
+    $node->workbench_moderation_state_new = 'published';
+  }
+}
+
+/**
+ * Get fact schema for story.
+ * @return type string
+ */
+function get_fact_schema() {return;
+  $arg = arg();
+  $entity_id = isset($arg['1']) ? $arg['1'] : '';
+  if(db_table_exists('field_data_field_story_schema')){
+  if(!empty($entity_id)) {
+    $query = db_select('field_data_field_story_schema', 's');
+    $query->fields('s', array('field_story_schema_value'));
+    $result = $query->condition('s.entity_id', $entity_id)->execute()->fetchAssoc();
+    return $result['field_story_schema_value'];
+  }}
+}
+
+/**
+ * Get the category custom html/js code
+ * @arg type int , term id
+ * @return string custom html js code
+ */
+function get_category_custom_code($term_id){
+    if($term_id != ''){
+        $query = db_select('field_data_field_section_custom_code','cat');
+        $query->fields('cat',array('field_section_custom_code_value'));
+        $query->condition('cat.entity_id',$term_id);
+        $data_result = $query->execute()->fetchCol();
+        return $data_result[0];
+    }
+}
+
+/**
+ * Function for itg_ipl_triangle_status().
+ */
+function itg_ipl_triangle_status(){
+    $sid = 1;
+    $query = db_select('itg_score_card', 'm');
+    $query->condition('m.id', $sid, '=');
+    $query->fields('m', array('score_triangle','score_code_cube_app'));
+    $data_result = $query->execute()->fetchAssoc();
+    return $data_result;
+}
+
+/**
+ * Function load all country lists
+ */
+
+function get_all_country_list(){
+  $tree = taxonomy_get_tree(36);
+  $tids = array();
+  foreach ($tree as $key => $value) {
+    $tids[$value->tid] = $value->name;
+  }
+  return $tids;
+}
+
+/**
+ * Function load all country lists
+ */
+
+function get_country_by_tid($tid){
+  $term_data = taxonomy_term_load($tid);
+  return $term_data;
 }

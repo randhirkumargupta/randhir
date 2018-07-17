@@ -15,7 +15,7 @@ function features_for_survey_field_default_field_instances() {
   $field_instances['field_collection_item-field_survey_add_questions-field_question_image'] = array(
     'bundle' => 'field_survey_add_questions',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Question Image',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -34,7 +34,7 @@ function features_for_survey_field_default_field_instances() {
     'label' => 'Question Image',
     'required' => 0,
     'settings' => array(
-      'alt_field' => 0,
+      'alt_field' => 1,
       'default_image' => 0,
       'exclude_cv' => FALSE,
       'file_directory' => '',
@@ -42,7 +42,7 @@ function features_for_survey_field_default_field_instances() {
       'max_filesize' => '',
       'max_resolution' => '',
       'min_resolution' => '',
-      'title_field' => 0,
+      'title_field' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -89,7 +89,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'field_survey_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Question Media',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -122,7 +122,7 @@ function features_for_survey_field_default_field_instances() {
   $field_instances['field_collection_item-field_survey_add_questions-field_question_video'] = array(
     'bundle' => 'field_survey_add_questions',
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Question Video',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -188,7 +188,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'field_survey_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer choices',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -262,7 +262,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'field_survey_add_questions',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Answer Type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -337,7 +337,7 @@ function features_for_survey_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Skip',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -370,7 +370,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Survey Instructions/Description',
     'display' => array(
       'default' => array(
         'label' => 'hidden',
@@ -417,7 +417,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Related Content Detail',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -459,7 +459,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Related Content',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -501,7 +501,7 @@ function features_for_survey_field_default_field_instances() {
     'bundle' => 'survey',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Add Token',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -538,12 +538,59 @@ function features_for_survey_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-survey-field_story_node_identity'.
+  $field_instances['node-survey-field_story_node_identity'] = array(
+    'bundle' => 'survey',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 14,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-survey-field_story_reporter'.
   $field_instances['node-survey-field_story_reporter'] = array(
     'bundle' => 'survey',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Byline',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -586,13 +633,9 @@ function features_for_survey_field_default_field_instances() {
   // Exported field_instance: 'node-survey-field_supp_publish'.
   $field_instances['node-survey-field_supp_publish'] = array(
     'bundle' => 'survey',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
+    'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Publish',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -663,15 +706,9 @@ function features_for_survey_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'field_collection',
-      'settings' => array(
-        'collapsed' => 0,
-        'field_as_label' => '',
-        'last_item_collapsed' => 0,
-        'new_item_open' => 0,
-        'replace_label' => 0,
-      ),
+      'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 2,
     ),
@@ -702,7 +739,7 @@ function features_for_survey_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_survey_category',
     'label' => 'Section',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -822,7 +859,7 @@ function features_for_survey_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Survey Question Display',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -865,7 +902,7 @@ function features_for_survey_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Survey Questions Format',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -965,6 +1002,7 @@ function features_for_survey_field_default_field_instances() {
   t('Answer Type');
   t('Answer choices');
   t('Byline');
+  t('Node Identity');
   t('Please add survey question.');
   t('Please check to set expiry date of survey.');
   t('Please select end date.');

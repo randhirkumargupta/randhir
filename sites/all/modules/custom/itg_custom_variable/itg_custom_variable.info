@@ -1,0 +1,4 @@
+name = ITG Custom variable
+description = "ITG Custom variable Module"
+core = 7.x
+package = ITG

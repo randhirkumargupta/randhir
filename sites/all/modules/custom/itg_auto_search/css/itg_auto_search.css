@@ -1,0 +1,75 @@
+/* auto search widget css */
+.flt{float:left}
+.ltext, .rtext {text-align: center; width: 45%;width: 260px;padding-top: 1px;}
+.flr {float: right;}
+.txtcenter{ text-align: center; }
+.itg_auto_search_form span.widget-title{display:none}
+.page-auto #page-title{text-align: center}
+.itg_auto_search_form {background:#dedcdd;width:100%;overflow:hidden;margin-bottom:20px}
+.itg_auto_search_form .master-logo{float:left;margin-right:50px}
+.itg_auto_search_form .left-master-section,.itg_auto_search_form .right-master-section{padding-top:5px}
+.itg_auto_search_form .break-point{float:left;padding:0 40px;height:100px}
+.itg_auto_search_form .m-break-point{display:none}
+.itg_auto_search_form .compare-title{margin:30px 0 0 50px;line-height:35px}
+.itg_auto_search_form select{background:transparent;border:1px solid #b3b1b2;height:24px;font-size:13px;line-height:24px;padding:1px;width:150px}
+.itg_auto_search_form .left-master-section label,.itg_auto_search_form .right-master-section label{width:120px;float:left;padding:3px;font-size:14px}
+.itg_auto_search_form .left-master-section > div,.itg_auto_search_form .right-master-section > div{margin-bottom:5px}
+.itg_auto_search_form .compare-title input[type='submit']{border:0;text-transform:uppercase;font-size:18px;padding-right:50px;background:url(../images/compare-forward.jpg) right top;background-repeat:no-repeat;padding-top:8px;padding-bottom:8px}
+.region-vertical-menu{ display:none; }
+
+/* Compare table Css */
+.grybg_background {border-top:15px solid #595758;padding-bottom:0px; padding-right:0px!important; padding-left:0px!important; height: auto;margin-top: 18px;
+ float: left; width:100%; float:left;background: #dedcdd;}
+.left-table, .right-table {background: #dedcdd;width: 46%;padding-left: 4%}
+.right-table {float: right}
+.break-point {height: 100px;}
+.break-point img {height: 100px;}
+.left-master-section, .right-master-section {padding-top: 5px;}
+.left-master-section div {overflow: hidden;margin: 0 0 5px;}
+.right-master-section div {overflow: hidden;margin: 0 0 5px;}
+.auto-master-section label {font-size: 14px;}
+.left-table tr td span, .right-table tr td span { color: #ed5a27;}
+.tableCompareHead table th{ text-align: left; font-size:13px; padding:5px 0;}
+.tableComparedata table td{text-align: center; padding:5px 0;}
+.tableComparedata table{ width:100%; }
+.vssection{ float: left; width: 55px; }
+.vssection img{ width:100%; }
+.borderbott{ border-bottom:2px solid #dedede; padding-bottom: 20px;}
+.vssection .arrow_bottom{ margin-top: -3px; }
+@media screen and (min-width: 1000px) and (max-width: 1200px){ 
+	.itg_auto_search_form .master-logo{ margin-right:30px; }
+	.itg_auto_search_form .break-point{ padding: 0px 20px 0 20px; }
+	.itg_auto_search_form .compare-title{ margin:30px 0 0 20px; }
+	.itg_auto_search_form .left-master-section label, .itg_auto_search_form .right-master-section label{ width:100px; }
+}
+
+@media screen and (min-width: 768px) and (max-width: 999px){
+	.itg_auto_search_form .master-logo{ width:130px; margin-top: 15px;margin-right: 5px; }
+	.itg_auto_search_form .left-master-section label, .itg_auto_search_form .right-master-section label{width: 87px;}
+	.itg_auto_search_form select{width: 130px;}
+	.itg_auto_search_form .break-point{padding: 0 10px;}
+	.itg_auto_search_form .compare-title{margin: 30px 0 0 10px;}
+	.itg_auto_search_form{ padding:0 15px 15px; }
+ }
+ @media screen and (min-width: 320px) and (max-width: 787px){
+ 	.widget-wrapper .data-holder{ padding:10px 15px 15px;}
+ 	.itg_auto_search_form .master-logo{ width:100%; text-align: center; float: none; margin-right: 0px; margin-bottom: 10px; }
+    .itg_auto_search_form .left-master-section, .itg_auto_search_form .right-master-section{ width:100%; float: none; }
+    .itg_auto_search_form .break-point img{ display: none;}
+    .itg_auto_search_form .break-point{ width:100%; height:1px; background:#fff; font-size:0px;float: none; margin: 15px 0;}
+    .itg_auto_search_form .left-master-section label, .itg_auto_search_form .right-master-section label{width:50%;}
+    .itg_auto_search_form select{width:50%;}
+    .itg_auto_search_form .compare-title{ width:100%; float: none; margin:15px 0 0 0; text-align: center; }
+    .itg_auto_search_form{ padding:0 15px 15px; }
+
+   .compare-left,.compare-right{ float: left;width:43%; }
+   .compare-left.vssection{width: 38px;}
+   .ltext, .rtext{ width:100%; }
+  .left-table.tableCompareHead{ width:50%; }
+   .left-table, .right-table{ width:25%; float: left; }
+   .tableCompareHead table th,.tableComparedata table td{ height:65px; }
+   .sidebars{ float: left; }
+   section.sidebar .block-itg-ads{ padding:0px!important; }
+
+
+ }

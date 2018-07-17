@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the India Today Editors Pick feature.
+ */
+
+include_once 'india_today_editors_pick.features.inc';

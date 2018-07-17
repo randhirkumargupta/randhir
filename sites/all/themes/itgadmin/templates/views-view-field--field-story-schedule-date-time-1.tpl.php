@@ -23,8 +23,7 @@
  */
 ?>
 <?php
-// < published
-  // >= approved
+
 $time = time();
 $sch_time = strtotime($row->field_field_story_schedule_date_time_1[0]['raw']['value']);
 if ($sch_time < $time) {
@@ -32,6 +31,5 @@ if ($sch_time < $time) {
 } else if ($sch_time >= $time) {
   print t('To Be Live');  
 }
-//print $output; 
 
 ?>

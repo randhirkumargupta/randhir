@@ -145,6 +145,9 @@ function content_theme_custom_theme() {
         if (in_array('Social Media', $user->roles)) {
             return 'itgadmin';
         }
+        else if (isset($_GET['amp'])) {
+            return 'amptheme';
+        }
         else {
             return $custom_theme;
         }

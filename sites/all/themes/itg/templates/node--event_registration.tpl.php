@@ -75,76 +75,76 @@
   <?php if (!empty($content)): ?>
         <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
             <div class="field">
-              <div class="field-items"><strong>Gender Title: </strong><?php echo ucwords($node->field_erf_gender[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Gender Title:');?> </strong><?php echo ucwords($node->field_erf_gender[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
           
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>First Name: </strong><?php echo ucwords($title); ?></div>
+              <div class="field-items"><strong><?php print t('First Name:');?> </strong><?php echo ucwords($title); ?></div>
             </div>
             
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Last Name: </strong><?php echo ucwords($node->field_last_name[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Last Name:'); ?> </strong><?php echo ucwords($node->field_last_name[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Email: </strong><?php echo $node->field_email_address[LANGUAGE_NONE][0]['value']; ?></div>
+              <div class="field-items"><strong><?php print t('Email:');?> </strong><?php echo $node->field_email_address[LANGUAGE_NONE][0]['value']; ?></div>
             </div>
             
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Mobile: </strong><?php echo ucwords($node->field_erf_mobile[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Mobile:'); ?> </strong><?php echo ucwords($node->field_erf_mobile[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
           
            <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>ID Type: </strong><?php echo ucwords(itg_event_registration_get_id_type($node->field_erf_select_id_type[LANGUAGE_NONE][0]['value'])); ?></div>
+              <div class="field-items"><strong><?php print t('ID Type:'); ?> </strong><?php echo ucwords(itg_event_registration_get_id_type($node->field_erf_select_id_type[LANGUAGE_NONE][0]['value'])); ?></div>
             </div>
             
            <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>ID Number: </strong><?php echo ucwords($node->field_erf_id_number[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('ID Number:'); ?> </strong><?php echo ucwords($node->field_erf_id_number[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
            
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Company/Organization Name: </strong><?php echo ucwords($node->field_erf_company_name[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Company/Organization Name:'); ?> </strong><?php echo ucwords($node->field_erf_company_name[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Designation: </strong><?php echo ucwords($node->field_erf_designation[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Designation:'); ?> </strong><?php echo ucwords($node->field_erf_designation[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Mailing Address: </strong><?php echo ucwords($node->field_erf_mailing_address[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Mailing Address:');?> </strong><?php echo ucwords($node->field_erf_mailing_address[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             
             <div>&nbsp;</div>
             <div class="field">
-              <div class="field-items"><strong>Postal Code: </strong><?php echo ucwords($node->field_erf_postal_code[LANGUAGE_NONE][0]['value']); ?></div>
+              <div class="field-items"><strong><?php print t('Postal Code:'); ?> </strong><?php echo ucwords($node->field_erf_postal_code[LANGUAGE_NONE][0]['value']); ?></div>
             </div>
             
             <div>&nbsp;</div>
              <?php if (!empty($node->field_erf_country[LANGUAGE_NONE][0]['taxonomy_term']->name)): ?>
               <div class="field">
-                <div class="field-items"><strong>Country: </strong><?php echo $node->field_erf_country[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
+                <div class="field-items"><strong><?php print t('Country:');?> </strong><?php echo $node->field_erf_country[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
               </div>
             <div>&nbsp;</div>
            <?php endif; ?>
           
             <?php if (!empty($node->field_erf_state[LANGUAGE_NONE][0]['taxonomy_term']->name)): ?>
               <div class="field">
-                <div class="field-items"><strong>State: </strong><?php echo $node->field_erf_state[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
+                <div class="field-items"><strong><?php print t('State:');?> </strong><?php echo $node->field_erf_state[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
               </div>
             <div>&nbsp;</div>
             <?php endif; ?>
 
             <?php if (!empty($node->field_erf_city[LANGUAGE_NONE][0]['taxonomy_term']->name)): ?>
                <div class="field">
-                <div class="field-items"><strong>City: </strong><?php echo $node->field_erf_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
+                <div class="field-items"><strong><?php print t('City:');?> </strong><?php echo $node->field_erf_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
               </div>
             <?php endif; ?>
           

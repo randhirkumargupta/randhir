@@ -9,26 +9,19 @@ function itg_sso_reg_password_form($form, &$form_state) {
 
   if (user_is_anonymous()) {
     return drupal_access_denied();
-  }
-  
+  }  
   
   $form['#account'] = $GLOBALS['user'];
-  $form['#prefix'] = '<div id="sso_password_form">';
+  $form['#prefix'] = '<div id="sso_password_form"><h3>'.drupal_set_title('Change Password').'</h3>';
   $form['#suffix'] = '</div>';
-  $form['#attributes'] = array('autocomplete' => 'off');
-  
-  
-  $form['heading'] = array(
-    '#markup' => '<h3>'.drupal_set_title('Change Password').'</h3>',
-  );
+  $form['#attributes'] = array('autocomplete' => 'off');  
   
   
   $form['domain_info_url'] = array(
     '#type' => 'hidden',
     '#title' => t(''),
-    '#value' => base64_decode(arg(2)),
+    '#value' => arg(2),
   );
-
 
   $form['current_pass'] = array(
     '#type' => 'password',
@@ -49,10 +42,6 @@ function itg_sso_reg_password_form($form, &$form_state) {
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Submit',
-//    '#ajax' => array(
-//      'wrapper' => 'sso_password_form',
-//      'callback' => 'itg_sso_reg_password_form_ajax_handler',
-//    ),
   );
 
   return $form;
@@ -69,6 +58,11 @@ function itg_sso_reg_password_form_validate(&$form, &$form_state) {
   if (!user_check_password($form_state['values']['current_pass'], $form['#account'])) {
     form_set_error('current_pass', t('The current password you provided is incorrect.'));
   }
+  if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,15}$/', trim($form_state['values']['pass']))) {
+    form_set_error('current_pass', t('Password must be minimum 6 and maximum 15 digit alphanumeric and It must contain minimum 1 special character.'));
+  } else if(!preg_match("/\W/", trim($form_state['values']['pass']))) {
+    form_set_error('current_pass', t(' must be minimum 6 and maximum 15 digit alphanumeric and It must contain minimum 1 special character.'));
+  }
 }
 
 
@@ -78,20 +72,13 @@ function itg_sso_reg_password_form_validate(&$form, &$form_state) {
  * @param array $form_state
  */
 function itg_sso_reg_password_form_submit($form, &$form_state) {
+  global $user;
   $edit = array('pass' => $form_state['values']['pass']);
   $domain_info_url = $form_state['values']['domain_info_url'];
   user_save($form['#account'], $edit);
+  
   if (function_exists('itg_sso_get_mail_content')) {
-    $mail_content = itg_sso_get_mail_content('Password Changed');
+    $mail_content = itg_sso_get_mail_content('Password Changed', $user->mail);
   }
   drupal_goto('password-success/'.$domain_info_url);
 }
-
-/**
- * Implement comment_form_ajax_handler
- * @param array $form
- * @param array $form_state
- */
-//function itg_sso_reg_password_form_ajax_handler(&$form, &$form_state) {
-//  return $form;
-//}

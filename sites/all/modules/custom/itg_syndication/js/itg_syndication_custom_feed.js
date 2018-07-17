@@ -3,8 +3,8 @@
  * This is used for settting value in body textarea and formatting in proper humanreadble format
  */
 
-(function($) {
-    $.fn.feed_pattern = function(data) {
+(function ($) {
+    $.fn.feed_pattern = function (data) {
         /* add pattern into textarea*/
         content = $("textarea.xml-field-codemirror").val(data);
         $("textarea.xml-field-codemirror").val(data);
@@ -21,15 +21,26 @@
     };
 })(jQuery);
 
-(function($) {
+(function ($) {
     Drupal.behaviors.itg_syndication_feed_pattern = {
-        attach: function(context, settings) {
-            $('#syndication-feed-from-pattern-node-form select').ajaxStart(function() {
+        attach: function (context, settings) {
+            $('#syndication-feed-from-pattern-node-form select').ajaxStart(function () {
                 $("#widget-ajex-loader").css("display", "block");
             });
-            $('#syndication-feed-from-pattern-node-form select').ajaxSuccess(function() {
+            $('#syndication-feed-from-pattern-node-form select').ajaxSuccess(function () {
                 $("#widget-ajex-loader").css("display", "none");
             });
         }
     };
 })(jQuery);
+
+
+jQuery(document).ready(function () {
+    jQuery("select#edit-field-syndication-feed-content-und").on('change', function () {
+        var selected = jQuery(this).val();
+        jQuery(".variables-tabs div").css("display", "none");
+        jQuery(".variables-tabs div#tab-" + selected).css("display", "block");
+    });
+    
+    jQuery("#edit-body-und-0-value").css({"min-width": "900px", "height": "400px"});
+});

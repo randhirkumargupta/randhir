@@ -7,6 +7,15 @@
     Drupal.behaviors.itg_user_forgot_password = {
         attach: function(context,settings) {
             var base_url = settings.itg_user_forgot_password.settings.base_url;
+            var error = settings.itg_user_forgot_password.settings.forgot_error;
+            if (error) {
+                jQuery.each(error, function (index, item) {
+                    if (index == 'ufname') {
+                        jQuery('.forgot-error').html(item);
+                    }
+                    
+                });
+            }
             // ajax for otp
             $('#itg-user-forgot-password-multistep-form--2 #forgototpclickme', context).click(function (event) {
                 
@@ -17,15 +26,13 @@
                 if($.isNumeric(get_param))
                 {
                   var mobile = get_param;  
-                  var post = "&mobile=" + mobile+ "&otp=" + otp+ "&source=reset";
-                  
+                  var post = "&mobile=" + mobile+ "&otp=" + otp+ "&source=reset";                  
                 }
                 else
                 {
                     var email = get_param;
                     var post = "&email=" + email+ "&otp=" + otp+ "&source=reset";
                 }
-               console.log(otp);
                if (get_param != '') {
                     $("#forgototpclickme").text("Resend OTP");
                     

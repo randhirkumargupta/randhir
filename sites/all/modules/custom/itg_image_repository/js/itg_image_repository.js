@@ -854,6 +854,17 @@ updateUI: function() {
   
   jQuery('.div-search-img').live('click',function()
   {
+    var have_iframe = jQuery("#search-preview").html();
+    if (have_iframe.search('iframe') < 0 ) {
+      showloader();
+      if(Drupal.serach_preview_url !== undefined){
+	      var iframe_url = Drupal.serach_preview_url;
+      }else{
+	      var iframe_url = '/searchimage?keyword=';
+      }
+      var iframe_vr = '<iframe scrolling="no" onload="hideloader();" src="'+ iframe_url +'" width="900" height="650"></iframe>'
+      jQuery("#search-preview").html(iframe_vr);
+    }
     jQuery('.div-upload-img').removeClass('active');
     jQuery('.div-search-img').addClass('active');
     jQuery('#forms-wrapper').show();

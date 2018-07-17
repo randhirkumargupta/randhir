@@ -1,10 +1,20 @@
-<?php foreach ($rows as $row): ?>
+<?php
+global $base_url;
+foreach ($rows as $row): ?>
 
-    <div class="image-wrap">  
-    <?php print $row['field_sponser_logo']; ?>
+  <div class="image-wrap">  
+      <?php
+      if (!empty($row['field_sponser_logo'])) {
+        print $row['field_sponser_logo'];
+      }
+      else {
+        //print "<img src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image237x133.jpg')) . "' alt='' title='' />";
+        print "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image237x133.jpg') . "' alt='' title='' />";
+      }
+      ?>
   </div>
-  
-    <h3><?php print $row['title']; ?></h3>
-    <div class="body-content"><?php print $row['body']; ?></div>
- 
+
+  <h3 title="<?php echo html_entity_decode(strip_tags($row['title'])); ?>"><?php print html_entity_decode(strip_tags($row['title'])); ?></h3>
+  <div class="body-content"><?php print $row['body']; ?></div>
+
 <?php endforeach; ?>

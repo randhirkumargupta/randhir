@@ -1,0 +1,498 @@
+<script>
+var cX = 0; var cY = 0; var rX = 0; var rY = 0;
+function UpdateCursorPosition(e){ cX = e.pageX; cY = e.pageY;}
+function UpdateCursorPositionDocAll(e){ cX = event.clientX; cY = event.clientY;}
+if(document.all) { document.onmousemove = UpdateCursorPositionDocAll; }
+else { document.onmousemove = UpdateCursorPosition; }
+function AssignPosition(d) {
+if(self.pageYOffset) {
+	rX = self.pageXOffset;
+	rY = self.pageYOffset;
+	}
+else if(document.documentElement && document.documentElement.scrollTop) {
+	rX = document.documentElement.scrollLeft;
+	rY = document.documentElement.scrollTop;
+	}
+else if(document.body) {
+	rX = document.body.scrollLeft;
+	rY = document.body.scrollTop;
+	}
+if(document.all) {
+	cX += rX; 
+	cY += rY;
+	}
+if(navigator.appName!="Microsoft Internet Explorer")
+	{
+	//alert(navigator.appName);			
+	d.style.left = (cX-200) + "px";
+	d.style.top = (cY-300) + "px";
+	}
+	else
+	{
+	//d.style.top = (cY-900) + "px";
+	d.style.left = (cX-550) + "px";
+	}
+}
+function HideContent(d) {
+if(d.length < 1) { return; }
+document.getElementById(d).style.display = "none";
+}
+function ShowContent(d) {
+if(d.length < 1) { return; }
+var dd = document.getElementById(d);
+AssignPosition(dd);
+dd.style.display = "block";
+}
+</script>
+
+<table width="670" border="0" cellspacing="0" cellpadding="0">
+        <tr><td> <div class="awdhederbor670"><div class="awdheder">Election Schedule</div></div></td></tr>
+         <tr><td style="$padding-top:5px;">
+         <table cellpadding="0" cellspacing="0" width="670" >
+           <tr>
+          <td><div style="display:none;" id="tabit_content1_new"> 
+          <table width="670" border="0" cellspacing="0" cellpadding="0" align="right">
+  <tr>
+    <td width="92" align="left" valign="top" class="tellyborbox" >        </td>
+    <td width="564" align="left" valign="top">       </td>
+  </tr>
+  <tr>
+    <td class="tallyelecredtxt" height="40"><a href="javascript:tabitchange(1);" id="tab1_new" class="active" onclick="javascript:tabitchange(1);">Phase 1</a></td>
+    <td rowspan="20" valign="top"> 
+        
+<table width="582" class="tallycont" border="0" cellspacing="0" cellpadding="0" >
+  <tr>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="130" height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of issue of notification </div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="70" align="left" valign="middle"><div class="elecblacktxt14"> 27.09.10</div></td>
+    <td width="40" rowspan="11" align="left" valign="top">&nbsp;</td>
+   <td width="282" rowspan="11" align="center" valign="middle"><a onclick="ShowContent('uniquename3'); return true;" href="javascript:ShowContent('uniquename3')"><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-1-Bihar-map_english_small.gif" border="0" /></a>
+    <div    id="uniquename3" style="display:none; position:absolute;border-style: solid;background-color: white;padding: 5px;"><div style="float:left;"><a href="javascript:HideContent('uniquename3'); return true;" onclick="HideContent('uniquename3'); return true;" style="color:#CC0000; text-decoration:none;">Close</a> </div><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-1-Bihar-map_english_large.gif" border="0" /></div>
+    </td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for making nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 04.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date for scrutiny of nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 05.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for withdrawal of candidatures </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 07.10.10 </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date of poll</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 21.10.10
+ </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date before which the election shall be completed </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 26.11.10 
+ </div></td>
+  </tr>
+</table></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a id="tab2_new" class="inactive" href="javascript:tabitchange(2);" onclick="javascript:tabitchange(2);">Phase 2 </a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(3);" id="tab3_new" class="inactive" onclick="javascript:tabitchange(3);">Phase 3</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(4);" id="tab4_new" class="inactive" onclick="javascript:tabitchange(4);">Phase 4</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(5);" id="tab5_new" class="inactive" onclick="javascript:tabitchange(5);">Phase 5</a></td>
+  </tr>
+   
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(6);" id="tab6_new" class="inactive" onclick="javascript:tabitchange(6);">Phase 6</a></td>
+  </tr>
+   
+  
+  
+</table>
+            </div>
+		 <div style="display:none;" id="tabit_content2_new">
+<table width="670" border="0" cellspacing="0" cellpadding="0" align="right">
+  <tr>
+    <td width="92" align="left" valign="top" class="tellyborbox" >        </td>
+    <td width="564" align="left" valign="top">       </td>
+  </tr>
+  <tr>
+    <td  height="40" class="tallyelewidbd"><a href="javascript:tabitchange(1);" id="tab1_new" class="active" onclick="javascript:tabitchange(1);">Phase 1</a></td>
+    <td rowspan="20" valign="top"> <table width="582" class="tallycont" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="130" height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of issue of notification</div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="70" align="left" valign="middle"><div class="elecblacktxt14"> 29.09.10</div></td>
+    <td width="40" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="282" rowspan="11" align="left"  valign="middle"><a onclick="ShowContent('uniquename4'); return true;" href="javascript:ShowContent('uniquename4')"><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-2-Bihar-map_english_small.gif" border="0" /></a>
+    <div    id="uniquename4"    style="display:none;       position:absolute;       border-style: solid;       background-color: white;       padding: 5px;">
+    <div style="float:left;"><a href="javascript:HideContent('uniquename4'); return true;" onclick="HideContent('uniquename4'); return true;" style="color:#CC0000; text-decoration:none;">Close</a> </div>
+    <img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-2-Bihar-map_english_large.gif" border="0" /></div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for making nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 06.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date for scrutiny of nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 07.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for withdrawal of candidatures</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 09.10.10 </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of poll</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 24.10.10
+ </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date before which the election shall be completed</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 26.11.10 
+ </div></td>
+  </tr>
+</table></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecredtxt" ><a id="tab2_new" class="inactive" href="javascript:tabitchange(2);" onclick="javascript:tabitchange(2);">Phase 2</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(3);" id="tab3_new" class="inactive" onclick="javascript:tabitchange(3);">Phase 3</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(4);" id="tab4_new" class="inactive" onclick="javascript:tabitchange(4);">Phase 4</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(5);" id="tab5_new" class="inactive" onclick="javascript:tabitchange(5);">Phase 4</a></td>
+  </tr>
+   
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(6);" id="tab6_new" class="inactive" onclick="javascript:tabitchange(6);">Phase 6</a></td>
+  </tr>
+   
+  
+  
+</table>
+        </div>
+        
+         <div style="display:none;" id="tabit_content3_new">
+<table width="670" border="0" cellspacing="0" cellpadding="0" align="right">
+  <tr>
+    <td width="92" align="left" valign="top" class="tellyborbox" >        </td>
+    <td width="564" align="left" valign="top">       </td>
+  </tr>
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(1);" id="tab1_new" class="inactive" onclick="javascript:tabitchange(1);">Phase 1</a></td>
+    <td rowspan="20"> <table width="582" class="tallycont" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="130" height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date of issue of notification </div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="70" align="left" valign="middle"><div class="elecblacktxt14"> 04.10.10</div></td>
+    <td width="40" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="282" rowspan="11" align="left" valign="middle"><a onclick="ShowContent('uniquename5'); return true;" href="javascript:ShowContent('uniquename5')"><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-3-Bihar-map_english_small.gif" border="0" /></a>
+    <div    id="uniquename5"    style="display:none;       position:absolute;       border-style: solid;       background-color: white;       padding: 5px;"> <div style="float:left;"><a href="javascript:HideContent('uniquename5'); return true;" onclick="HideContent('uniquename5'); return true;" style="color:#CC0000; text-decoration:none;">Close</a> </div><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-3-Bihar-map_english_large.gif" border="0" /></div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for making nominations</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 11.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date for scrutiny of nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 12.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Last date for withdrawal of candidatures </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 14.10.10 </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date of poll, if necessary</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 28.10.10
+ </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date before which the election shall be completed </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 26.11.10 
+ </div></td>
+  </tr>
+</table></td>
+  </tr>
+  
+  <tr>
+    <td  class="tallyelecwitout" height="40" ><a href="javascript:tabitchange(2);" id="tab2_new" class="inactive" onclick="javascript:tabitchange(2);">Phase 2 </a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecredtxt" ><a href="javascript:tabitchange(3);" id="tab3_new" class="active" onclick="javascript:tabitchange(3);">Phase 3</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(4);" id="tab4_new" class="inactive" onclick="javascript:tabitchange(4);">Phase 4</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(5);" id="tab5_new" class="inactive" onclick="javascript:tabitchange(5);">Phase 5</a></td>
+  </tr>
+   
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(6);" id="tab6_new" class="inactive" onclick="javascript:tabitchange(6);">Phase 6</a></td>
+  </tr>
+   
+  
+</table>
+        </div>
+        
+         <div style="display:none;" id="tabit_content4_new">
+<table width="670" border="0" cellspacing="0" cellpadding="0" align="right">
+  <tr>
+    <td width="92" align="left" valign="top" class="tellyborbox" >        </td>
+    <td width="564" align="left" valign="top">       </td>
+  </tr>
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(1);" id="tab1_new" class="inactive" onclick="javascript:tabitchange(1);">Phase 1</a></td>
+    <td rowspan="20"> <table width="582" class="tallycont" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="130" height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of issue of notification </div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="70" align="left" valign="middle"><div class="elecblacktxt14"> 07.10.10</div></td>
+    <td width="40" rowspan="11" align="left" valign="top">&nbsp;</td>
+   <td width="282" rowspan="11" align="left" valign="middle"><a onclick="ShowContent('uniquename6'); return true;" href="javascript:ShowContent('uniquename6')"><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-4-Bihar-map_english_small.gif" border="0" /></a>
+    <div    id="uniquename6"    style="display:none;       position:absolute;       border-style: solid;       background-color: white;       padding: 5px;"> <div style="float:left;"><a href="javascript:HideContent('uniquename6'); return true;" onclick="HideContent('uniquename6'); return true;" style="color:#CC0000; text-decoration:none;">Close</a> </div><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-4-Bihar-map_english_large.gif" border="0" /></div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for making nominations</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 14.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date for scrutiny of nominations</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 15.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for withdrawal of candidatures</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 18.10.10 </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date of poll, if necessary</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 01.11.10
+ </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date before which the election shall be completed </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 26.11.10 
+ </div></td>
+  </tr>
+</table></td>
+  </tr>
+  
+  <tr>
+    <td  class="tallyelewidbd" height="40" ><a href="javascript:tabitchange(2);" id="tab2_new" class="inactive" onclick="javascript:tabitchange(2);">Phase 2 </a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecwitout"><a href="javascript:tabitchange(3);" id="tab3_new" class="inactive" onclick="javascript:tabitchange(3);">Phase 3</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecredtxt" ><a href="javascript:tabitchange(4);" id="tab4_new" class="active" onclick="javascript:tabitchange(4);">Phase 4</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(5);" id="tab5_new" class="inactive" onclick="javascript:tabitchange(5);">Phase 5</a></td>
+  </tr>
+   
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(6);" id="tab6_new" class="inactive" onclick="javascript:tabitchange(6);">Phase 6</a></td>
+  </tr>
+   
+  
+</table>
+        </div>
+        
+         <div style="display:none;" id="tabit_content5_new">
+<table width="670" border="0" cellspacing="0" cellpadding="0" align="right">
+  <tr>
+    <td width="92" align="left" valign="top" class="tellyborbox" >        </td>
+    <td width="564" align="left" valign="top">       </td>
+  </tr>
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(1);" id="tab1_new" class="inactive" onclick="javascript:tabitchange(1);">Phase 1</a></td>
+    <td rowspan="20"> <table width="582" class="tallycont" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="130" height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of issue of notification </div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="70" align="left" valign="middle"><div class="elecblacktxt14"> 15.10.10</div></td>
+    <td width="40" rowspan="11" align="left" valign="top">&nbsp;</td>
+  <td width="282" rowspan="11" align="left" valign="middle"><a onclick="ShowContent('uniquename7'); return true;" href="javascript:ShowContent('uniquename7')"><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-5-Bihar-map_english_small.gif" border="0" /></a>
+    <div    id="uniquename7"    style="display:none;       position:absolute;       border-style: solid;       background-color: white;       padding: 5px;"><div style="float:left;"><a href="javascript:HideContent('uniquename7'); return true;" onclick="HideContent('uniquename7'); return true;" style="color:#CC0000; text-decoration:none;">Close</a> </div><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-5-Bihar-map_english_large.gif" border="0" /></div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Last date for making nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 22.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date for scrutiny of nominations</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 23.10.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for withdrawal of candidatures </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 25.10.10 </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of poll, if necessary</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 09.11.10
+ </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date before which the election shall be completed</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 26.11.10 
+ </div></td>
+  </tr>
+</table></td>
+  </tr>
+  
+  <tr>
+    <td  class="tallyelewidbd" height="35" ><a href="javascript:tabitchange(2);" id="tab2_new" class="inactive" onclick="javascript:tabitchange(2);">Phase 2 </a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(3);" id="tab3_new" class="inactive" onclick="javascript:tabitchange(3);">Phase 3</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecwitout"><a href="javascript:tabitchange(4);" id="tab4_new" class="inactive" onclick="javascript:tabitchange(4);">Phase 4</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecredtxt" ><a href="javascript:tabitchange(5);" id="tab5_new" class="inactive" onclick="javascript:tabitchange(5);">Phase 5</a></td>
+  </tr>
+   
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(6);" id="tab6_new" class="active" onclick="javascript:tabitchange(6);">Phase 6</a></td>
+  </tr>
+   
+  
+</table>
+        </div>
+        
+         <div style="display:block;" id="tabit_content6_new">
+<table width="670" border="0" cellspacing="0" cellpadding="0" align="right">
+  <tr>
+    <td width="92" align="left" valign="top" class="tellyborbox" >        </td>
+    <td width="564" align="left" valign="top">       </td>
+  </tr>
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(1);" id="tab1_new" class="inactive" onclick="javascript:tabitchange(1);">Phase 1</a></td>
+    <td rowspan="20"> <table width="582" class="tallycont" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="130" height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of issue of notification</div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+    <td width="70" align="left" valign="middle"><div class="elecblacktxt14"> 27.10.10</div></td>
+    <td width="40" rowspan="11" align="left" valign="top">&nbsp;</td>
+  <td width="282" rowspan="11" align="left" valign="middle"><a onclick="ShowContent('uniquename8'); return true;" href="javascript:ShowContent('uniquename8')"><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-6-Bihar-map_english_small.gif" border="0" /></a>
+    <div    id="uniquename8"    style="display:none;       position:absolute;       border-style: solid;       background-color: white;       padding: 5px;"><div style="float:left;"><a href="javascript:HideContent('uniquename8'); return true;" onclick="HideContent('uniquename8'); return true;" style="color:#CC0000; text-decoration:none;">Close</a> </div><img src="http://indiatoday.intoday.in/specials/biharelections2010/images/Phase-6-Bihar-map_english_large.gif" border="0" /></div></td>
+    <td width="20" rowspan="11" align="left" valign="top">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Last date for making nominations </div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 03.11.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date for scrutiny of nominations</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 04.11.10 </div></td>
+  </tr>
+ 
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Last date for withdrawal of candidatures</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 06.11.10 </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14">Date of poll, if necessary</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 20.11.10
+ </div></td>
+  </tr>
+  
+  <tr>
+    <td height="40" align="left" valign="middle"><div class="elecblacktxt14"> Date before which the election shall be completed</div></td>
+    <td align="left" valign="middle"><div class="elecblacktxt14"> 26.11.10 
+ </div></td>
+  </tr>
+</table></td>
+  </tr>
+  
+  <tr>
+    <td  class="elecredtxt14" height="40"  style="border-bottom:1px dotted #000;text-align:center;border-right:1px solid #660000;"><a href="javascript:tabitchange(2);" id="tab2_new" class="inactive" onclick="javascript:tabitchange(2);">Phase 2 </a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(3);" id="tab3_new" class="inactive" onclick="javascript:tabitchange(3);">Phase 3</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelewidbd"><a href="javascript:tabitchange(4);" id="tab4_new" class="inactive" onclick="javascript:tabitchange(4);">Phase 4</a></td>
+  </tr>
+  
+  <tr>
+    <td height="40" class="tallyelecwitout"><a href="javascript:tabitchange(5);" id="tab5_new" class="inactive" onclick="javascript:tabitchange(5);">Phase 5</a></td>
+  </tr>
+   
+  <tr>
+    <td height="40" class="tallyelecredtxt" ><a href="javascript:tabitchange(6);" id="tab6_new" class="active" onclick="javascript:tabitchange(6);">Phase 6</a></td>
+  </tr>
+   
+  
+</table>
+        </div></td></tr>
+          </table></td></tr>
+        </table>
+

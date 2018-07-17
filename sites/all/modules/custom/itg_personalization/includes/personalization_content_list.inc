@@ -84,22 +84,18 @@ function itg_personalization_all_content_display() {
     array('data' => t('Submit Date')),
     array('data' => t('')),
   );
-  if (function_exists('mongodb'))
-  {
+  if (function_exists('mongodb')) {
     $con = mongodb();
-    if ($con)
-    {
+    if ($con) {
       $people = $con->ugc_details;
       $query = array();
       $limit = 0;
       
-      if (!empty($_GET['items_per_page']))
-      {
+      if (!empty($_GET['items_per_page'])) {
         $limit = $_GET['items_per_page'];
       }
 
-      if (!empty($_GET['status']) && $_GET['status'] != '_none')
-      {
+      if (!empty($_GET['status']) && $_GET['status'] != '_none') {
         if($_GET['status'] == 'review') {
         $query['publish_status'] = array('$ne' => 1);
         $query['status'] = 1;
@@ -114,13 +110,10 @@ function itg_personalization_all_content_display() {
           $query['uid'] = $user->uid;
         }
       }
-      if (is_array($query) && empty($query))
-      {
-
+      if (is_array($query) && empty($query)) {
         $userData = $people->find(array("publish_status" => array('$ne' => 1), "status" => 1, "uid" => $user->uid))->limit($limit)->sort(array('_id' => -1));
       }
-      else
-      {
+      else {
         $userData = $people->find($query)->limit($limit)->sort(array('_id' => -1));
       }
 
@@ -136,13 +129,12 @@ function itg_personalization_all_content_display() {
         
         $user_message_raw_value = strip_tags($row['description']);
         $user_message_lenth = strlen($user_message_raw_value);
-        if ($user_message_lenth > 100)
-        {
+        
+        if ($user_message_lenth > 100) {
           $user_message_raw_value = substr($user_message_raw_value, 0, 99) . "...";
           $user_message_raw_value = itg_ugc_bad_words($user_message_raw_value);
         }
-        else
-        {
+        else {
           $user_message_raw_value = itg_ugc_bad_words($user_message_raw_value);
           $user_message_raw_value = $user_message_raw_value;
         }

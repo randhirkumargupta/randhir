@@ -1,7 +1,7 @@
 <div class="videogallery-slider"> 
     
     <?php foreach ($rows as $index => $row): ?>
-        <figure class="" img-fid=" <?php print $row['fid']; ?>">
+        <figure class="" data-img-fid=" <?php print $row['fid']; ?>">
             <?php print $row['field_images']; ?>                    
         </figure>
     <?php endforeach; ?>       
@@ -13,7 +13,14 @@
             <ul class="slick-thumbs-slider">
                 <?php foreach ($rows as $index => $row): ?>
                     <li >
-                        <?php print $row['field_images_1']; ?>
+                        <?php
+                      if (!empty($row['field_photo_small_image'])) {
+                        print $row['field_photo_small_image'];
+                      }
+                      else {
+                        print '<img  src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg').'" alt="" title="" />';
+                      }
+                      ?>
                     </li>
                 <?php endforeach; ?>
             </ul>            

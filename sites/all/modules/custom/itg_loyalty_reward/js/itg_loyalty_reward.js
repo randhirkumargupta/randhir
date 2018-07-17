@@ -8,7 +8,6 @@
 
       var uid = settings.itg_loyalty_reward.settings.uid;
       var nid = settings.itg_loyalty_reward.settings.nid;
-
      
       // If user is not drupal admin
       if (uid !== 1) {

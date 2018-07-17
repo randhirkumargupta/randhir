@@ -1,123 +1,159 @@
 <script type="text/javascript">var __at__ = 0;</script>
 <?php
-global $base_url, $user;
+global $base_url, $user, $theme_key;
 if (!empty($content)):
-  
   // get related content associated with story
   $related_content = $content['related_content'];
   // condition for buzz
+  $class_buzz = '';
   if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
     $class_buzz = 'buzz-feedback';
   }
+  $class_related = '';
   if (!empty($related_content)) {
     $class_related = ' buzz-related';
   }
+  $class_listicle = '';
   if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-    $class_listicle = ' buzz-feedback listicle-feedback';
+    $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
-  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $scheme = SITE_PROTOCOL;
+  $actual_link = $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $uri = base64_encode($actual_link);
+  $short_url = $actual_link;
   $fb_title = addslashes($node->title);
   $share_desc = '';
-  $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-
+  $image = '';
+  if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+    $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  }
   // get total share count
   $tot_count = $content['total_share_count'];
-
-  // get global comment config    
-
+  // get global comment config
   $config_name = trim($global_comment_last_record[0]->config_name);
-
   // get comment count
-
   $get_comment_count = $content['comment_count'];
-
   // get developing story status
-
   $get_develop_story_status = $content['develop_story_status'];
-
   //get follow story status
-
   $follow_status = $content["follow_status"];
-
   $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
-
-  $byline_id = $content["byline_id"];
-
-  //get byline detail
-  if (!empty($byline_id)) {
-    $reporter_node = node_load($byline_id);
-  }
-  
+  $byline_id_mobile = $byline_id = $content["byline_id"];
+    // for activate_live_tv
+    $activate_live_tv = FALSE;
+    $is_sponsor_story = FALSE;
+    $config = array();
+    if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+        foreach ($node->field_story_configurations[LANGUAGE_NONE] as $value) {
+            $config[] = $value['value'];
+            if($value['value'] == 'activate_live_tv') {
+                $activate_live_tv = TRUE;
+            }
+            if($value['value'] == 'sponsor') {
+                $is_sponsor_story = TRUE;
+            }
+        }
+    }
   // get posted by info
   $node_author = $content["author"];
-  /*if (function_exists('itg_get_front_activity_info')) {
+  /* if (function_exists('itg_get_front_activity_info')) {
     $opt = $content["front_activity_info"];
-  }*/
+    } */
   $opt = $content["front_activity_info"];
-  
+  $photo_story_section_class = '';
   if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
     $photo_story_section_class = ' photo-story-section';
   }
-  
   if (function_exists(itg_sso_url)) {
-    $itg_sso_url = itg_sso_url('<i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span>', t('READ LATER'));
+    $itg_sso_url_mobile = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i></a>';
+    $itg_sso_url = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
-  ?>
-  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
-    <div class='<?php print $classes ?>'>      
-      <div class="comment-mobile desktop-hide">
-        <ul>
-          <li class="later">
-            <?php
-            if ($user->uid > 0) {
-              if (empty($opt['status']) || $opt['status'] == 0) {
-                ?> 
-                <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                <?php
-              }
-              else {
-                ?>
-                <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                <?php
-              }
-            }
-            else {
-              echo $itg_sso_url;
-            }
-            ?>
-          </li>
-          <li class="mail-to-author"><a title ="Mail to author" href="mailto:<?php echo ITG_SUPPORT_EMAIL;?>"><i class="fa fa-envelope"></i><?php //print t('Mail to author');     ?></a></li>
-          <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
-          <?php if ($config_name == 'vukkul') { ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-          <?php } if ($config_name == 'other') { ?> 
-            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-          <?php } ?>
-          <li><a href="javascript:void(0)" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
-        </ul>
-        <ul class="social-share">
-          <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-          <li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-          <li><a title="share on google+" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-
-        </ul> 
-      </div>
+  // Check if it is sponsor story.
+  //$is_sponsor_story = FALSE;
+  $sponsor_text = '';
+  $flag = FALSE;
+//  if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+//    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $config_val) {
+//      if ($config_val['value'] == 'sponsor') {
+//        $is_sponsor_story = TRUE;
+//        break;
+//      }
+//    }
+//  }
+  // If sponsored story then check sponsored category.
+  if ($is_sponsor_story && !empty($node->field_story_category[LANGUAGE_NONE])) {
+    foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $cat_val) {
+      if (_is_sponsored_category($cat_val['tid']) && !empty($node->field_story_show_fields[LANGUAGE_NONE]) && !empty(taxonomy_get_parents($cat_val['tid']))) {
+        $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
+        if ($show_field_val == 'story_category_icon'):
+          $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-powerby'>Powered by</span><span class='story-sponsor-logo'>" . theme('image_style', array('path' => $cat_val['taxonomy_term']->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+        elseif ($show_field_val == 'story_powered_text'):
+          $sponsor_text = "<div class='story-sponsor-powered-text-header'><span class='story-sponsor-powered-text'>" . $cat_val['taxonomy_term']->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        else:
+          $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-impact'>" . $cat_val['taxonomy_term']->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+        endif;
+        $flag = TRUE;
+      }
+    }
+    if ($is_sponsor_story && !$flag) {
+      $spon_cat = variable_get('sponsor_cat_tid', 1208902);
+      $spon_term = taxonomy_term_load($spon_cat);
+      $show_field_val = $node->field_story_show_fields[LANGUAGE_NONE][0]['value'];
+      if ($show_field_val == 'story_category_icon'):
+        $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-powerby'>Powered by</span><span class='story-sponsor-logo'>" . theme('image_style', array('path' => $spon_term->field_sponser_logo[LANGUAGE_NONE][0]['uri'], 'style_name' => 'widget_very_small')) . "</span></div>";
+      elseif ($show_field_val == 'story_powered_text'):
+        $sponsor_text = "<div class='story-sponsor-powered-text-header'><span class='story-sponsor-powered-text'>" . $spon_term->field_powered_by_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+      else:
+        $sponsor_text = "<div class='story-sponsor-header'><span class='story-sponsor-impact'>" . $spon_term->field_impact_text[LANGUAGE_NONE][0]['value'] . "</span></div>";
+      endif;
+    }
+  }
+  // source type array
+  $source_type_arr = array('PTI' , 'IANS', 'ANI');
+// Rich Snippet for Story
+$mainEntityOfPage = FRONT_URL . '/' . $node->path['alias'];
+if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
+$publisheddate = date('Y-m-d\TH:i:s+05:30', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+} else {
+$publisheddate = date('Y-m-d\TH:i:s+05:30', $node->changed);
+}
+$modified_date = date('Y-m-d\TH:i:s+05:30', $node->changed);
+$description = strip_tags(substr(str_replace("&#13;", "", $node->body[LANGUAGE_NONE][0]['value']),0,120));
+$story_kicker = strip_tags(str_replace(array('&#13;','"'), "", $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']));
+$meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
+$description_text = !empty($story_kicker) ? $story_kicker : $meta_description;
+$logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
+?>
+  <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
+    <article itemscope="" itemtype="http://schema.org/NewsArticle" id="story">
+    <link itemprop="mainEntityOfPage" href="<?php print $mainEntityOfPage; ?>"/>
+    <div itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization">
+		<div itemprop="logo" content="<?php print $logo; ?>" itemscope="" itemtype="https://schema.org/ImageObject">
+			<meta itemprop="url" content="<?php print $logo; ?>">
+			<meta itemprop="width" content="600">
+			<meta itemprop="height" content="60">
+		</div>
+		<meta itemprop="name" content="India Today">
+		<link itemprop="sameAs" href="https://www.indiatoday.in">
+	</div>
+    <div class='<?php print $classes ?>'> 
       <?php
       $pipelinetext = "";
       if (!empty($node->field_story_new_title) && !empty($node->field_story_redirection_url_titl)) {
-        $pipelinetext = ' <span class="story-pipline">||</span> <a target="_blank" href="' . $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] . '">' . ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']) . '</a>';
+        $pipelinetext = ' <span class="story-pipline">|</span> <a target="_blank" href="' . $node->field_story_redirection_url_titl[LANGUAGE_NONE][0]['value'] . '">' . ucfirst($node->field_story_new_title[LANGUAGE_NONE][0]['value']) . '</a>';
       }
       if (!empty($get_develop_story_status)) {
         ?>
-        <h1><?php print $content['story_title'] . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>
-          <?php
-        }
-        else {
-          ?>
-        <h1><?php print $content['story_title'] . $pipelinetext; ?></h1>
+        <!--<h1  title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>-->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?> <i class="fa fa-circle" aria-hidden="true" title="Development story"></i></h1>       
+        <?php
+      }
+      else {
+        ?>
+        <!--<h1 title="<?php //echo html_entity_decode(strip_tags($content['story_title'])); ?>"><?php //print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>-->
+        <h1 itemprop="headline"><?php print html_entity_decode($content['story_title']) . $pipelinetext; ?></h1>
         <?php if (in_array('Social Media', $user->roles)) { ?>
           <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span><?php t('promote'); ?></span></a>   
         <?php } ?>
@@ -126,361 +162,294 @@ if (!empty($content)):
       //code for Associate lead
       $associate_type = '';
       $associate_id = '';
-
-      if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+      if (isset($node->field_story_associate_lead[LANGUAGE_NONE][0]['value']) && $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
         $associate_type = 'gallery';
         $associate_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
       }
-      else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
+      else if (isset($node->field_story_associate_lead[LANGUAGE_NONE][0]['value']) && $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') {
         $associate_type = 'video';
         $associate_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
       }
-
       $clidk_class_slider = "";
       $widget_data = '';
-
       if ($associate_type != "" && $associate_id != "") {
         $clidk_class_slider = 'associate-content-block';
         $widget_data = $associate_type . '-' . $associate_id;
       }
-
       //code end for Associate lead
       ?>
+      <?php
+      if ($show_field_val == 'story_powered_text'):
+        print $sponsor_text;
+      endif;
+    ?>
+<div class="story-left-section story-update">
+  <div class="story-kicker"><?php print $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']; ?></div>
+  <div class="story-left">
+    <div class="byline">
+	  <?php
+		  $byline_detail = $byline_id[0];
+		  $extra_large_file = file_load($byline_detail['extra_large_image']);
+		  $bylineextra_large_image = $extra_large_file->uri;
+		  if ($sponsor_text == ''):?>
+		  <div class="profile-pic">
+		  <?php
+      if(!empty($bylineextra_large_image)) {
+        $file = $bylineextra_large_image;
+        print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+      }
+      else {
+        $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+        print '<img alt="" title="" src="' . $file . '">';
+      }
+      ?>
+      </div>
+      <?php elseif ($show_field_val == 'story_powered_text'):
+        print ''; ?>              
+      <?php else:
+        print $sponsor_text; ?>
+      <?php endif; ?>
+    <div class="profile-detail">
+		<ul class="profile-byline">
+			<span itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+			<?php 
+			  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {	
+				 foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+				   $mobile_twitter_handle = '';
+				   if(!empty($mobile_val['twitter_handle'])) {
+				     $mobile_twitter_handle = $mobile_val['twitter_handle'];
+				     $mobile_twitter_handle = str_replace('@', '', $mobile_twitter_handle);
+				   }
+				  if ($sponsor_text == '') { ?>	 
+				   <li class="title" itemprop="name"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
+				   <?php if(!empty($mobile_twitter_handle)) { ?> 
+				     <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></span>				   
+				   <?php } ?>
+				   </li>
+				 <?php }      	
+			    }
+			  }	?>	
+			  </span>		
+			 <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+			 <li>
+			 <?php
+				$city = array();
+				foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+			      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+				}
+				print implode(' | ', $city);
+			 ?>
+			 </li>
+			<?php } ?>			
+			<li class="pubdata" itemprop="datePublished" content="<?php print $publisheddate; ?>"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+			<li class="update-data" itemprop="dateModified" content="<?php print $modified_date; ?>">
+			<?php
+			print t('UPDATED: ');
+			if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+			  print date('F j, Y H:i', $node->created);
+			}
+			else {
+			  print date('F j, Y H:i', $node->changed);
+			}
+			print t(' IST');
+			?>
+			</li>
+		</ul>
+	  </div> 
+    </div>
+    <!-- social icon list for mobile only  -->  
+			<div class="share_bar">
+			<ul class="list-inline social-share">
+			<li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+			<li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+			<!-- <li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="fa fa-youtube-play"></i></a></li> -->
+			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
 
-      <div class="story-left-section">
-        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
-          <div class="story-left">
-            <div class="byline">              
-              <div class="profile-pic">
-                <?php
-                  $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                  if (!empty($file)) {
-                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                  }
-                  else {
-                    $file = 'default_images/user-default.png';
-                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                  }
-                ?>
-              </div>
-              <div class="profile-detail">                  
-                <ul>
-                  <li class="title"><?php print t($reporter_node->title); ?></li>
-                  <?php
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-                    $twitter_handle = str_replace('@', '', $twitter_handle);
-                    if (!empty($twitter_handle)) {
-                    ?>
-                    <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
-                  <?php } ?>
-                </ul>
-                <ul class="date-update">
-                  <li class="mailto mhide">
-                    <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                    $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
-                    print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
-                    ?>
-                  </li>
-                  <li class="mhide">
-                    <span class="share-count">
-                      <?php
-                        if (!empty($tot_count)) {
-                          print $tot_count;
-                        }
-                        else {
-                          print 0;
-                        }
-                      ?>
-                    </span>
-                    <?php print t('SHARES'); ?>
-                  </li>
-                  <li><?php print date('F j, Y', $node->created); ?>   </li>
-                  <li>
-                    <?php print t('UPDATED'); 
-                      print date('H:i', $node->changed);
-                      print t(' IST');
-                    ?>
-                  </li>
-                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-                  <?php } ?>
-                </ul>
-                <ul class="social-links mhide">
-                  <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a title = "share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                  <?php
-                  if ($config_name == 'vukkul') {
-                    ?>
-                    <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                  <?php } if ($config_name == 'other') { ?> 
-                            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                          <?php
-                          }
-                  if ($user->uid > 0) {
-                    if (empty($opt['status']) || $opt['status'] == 0) {
-                      ?> 
-                      <li class="left-later"><span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
-                      <?php
-                    }
-                    else {
-                      ?>
-                      <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
-                      <?php
-                    }
-                  }
-                  else {
-                    print '<li>' . $itg_sso_url . '</li>';
-                  }
-                  ?>
-                </ul>
-              </div>
-            </div>
-            <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
-              <div class="briefcase mhide">
-                <h4><?php print t('Highlights'); ?></h4>
-                <ul>
-                  <?php
-                  foreach ($node->field_story_highlights['und'] as $high) {
-                    print '<li>' . $high['value'] . '</li>';
-                  }
-                  ?>
-                </ul>
-              </div>
-            <?php } if (!empty($related_content)) { ?>
-              <!--related content-->
-              <div class="related-story-page">
-                <?php
-                $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_left_block');
-                print render($block['content']);
-                ?>
-              </div>
-
-
-            <?php } ?>
-          </div>
-        <?php } ?>
-        <!-- For buzzfeed section start -->
-        <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
-          <div class="buzzfeed-byline">
-            <div class="byline">
-              <div class="profile-pic">
-                <?php
-                $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                if (!empty($file)) {
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                }
-                else {
-                  $file = 'default_images/user-default.png';
-                  print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
-                }
-                ?>
-              </div>
-              <div class="profile-detail">
-                <ul>
-                  <li class="title"><?php print $reporter_node->title; ?></li>
-                  <?php
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
-                    $twitter_handle = str_replace('@', '', $twitter_handle);
-                    if (!empty($twitter_handle)) {
-                    ?>
-                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                           ?></li>                
-                  <?php } ?>
-                </ul>
-                <ul class="date-update">
-                  <li><?php print date('F j, Y', $node->created); ?>   </li>
-                  <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
-                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {?>
-                    <li><?php print $node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></li>
-                  <?php } ?> 
-                </ul>
-
-              </div>
-              <div class="social-share-story">
-                <ul class="">
-                  <li><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-                  <li><a title = "share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-                  <li><a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-                  <?php if ($config_name == 'vukkul'): ?>
-                    <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                  <?php endif; ?>
-                  <?php if ($config_name == 'other'): ?> 
-                    <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-                  <?php endif; ?>
-
-                  <li class="later">
-                    <?php
-                    if ($user->uid > 0) {
-                      if (empty($opt['status']) || $opt['status'] == 0) {
-                        ?> 
-                        <a title = "Read Later" href="javascript:void(0)" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                        <?php
-                      }
-                      else {
-                        ?>
-                        <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action active"><i class="fa fa-bookmark"></i><span><?php print t('READ LATER'); ?></span></a>
-                        <?php
-                      }
-                    }
-                    else {
-                      print $itg_sso_url;
-                    }
-                    ?>
-                  </li>
-
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        <?php } ?>
+			<li>
+			 <?php
+			  if ($user->uid > 0) {
+				if (empty($opt['status']) || $opt['status'] == 0) {
+				  ?> 
+				  <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a>
+				  <?php
+				}
+				else {
+				  ?>
+				  <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a>
+				  <?php
+				}
+			  }
+			  else {
+				echo $itg_sso_url_mobile;
+			  }
+			 ?>   
+			</li>
+			<?php if ($config_name == 'vukkul') { ?>
+			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i></a></li>
+			<?php } if ($config_name == 'other') { ?> 
+			  <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+			<?php } ?>
+			</ul>
+			</div>
+            <!-- social icon list for mobile only End -->
+  </div>                
         <!-- Check the story type whether it is a photo story or not-->
-        <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
-          <div class="story-right <?php
-          if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-            echo 'listicle-page';
+  <?php if ((!empty($node->field_story_type) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story') || (empty($node->field_story_type))) { ?>
+    <div class="story-right <?php if (!empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { echo 'listicle-page'; } ?>">
+    <?php
+    //associate_lead
+    $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
+    $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+    $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+    $class = '';
+    if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {
+      $class = 'story-associate-content';
+    }
+    ?>
+    <div class="<?php echo $class; ?>" itemprop="associatedMedia image" itemscope="" itemtype="https://schema.org/ImageObject" id="stryimg">
+    <meta itemprop="representativeOfPage" content="true">
+    <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
+    <div id="videogallery-iframe">
+      <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
+    </div>
+    <?php } ?>                      
+    <?php
+      $story_image = '';
+      $story_alt = '';
+      $story_title = '';
+      if(!empty($node->field_story_e_extra_large_image[LANGUAGE_NONE])){
+        $story_image = $node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['uri'];
+        $story_alt = isset($node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['alt']) ? $node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['alt'] : "";
+        $story_title = isset($node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['title']) ? $node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['title'] : "";
+
+      }
+      else{
+        $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+        $story_alt = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] : "";
+        $story_title = isset($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']) ? $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] : "";
+      }               
+    ?>
+    <div class="stryimg">
+    <?php if($activate_live_tv) { ?>
+      <div class="story_itg_live_tv iframe-video">
+        <?php print itg_live_tv_page_video(); ?>
+      </div>
+    <?php } else {
+      if (empty($widget_data)) {
+        if (file_exists($story_image)) {
+          $file_uri = file_create_url($story_image);                               
+          print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title,  'attributes' => array('itemprop' => 'contentUrl')));
+        }
+      }
+      else {
+        $flag = TRUE;
+        $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+        if (file_exists($story_image)) {
+          $file_uri = file_create_url($story_image);
+          $flag = FALSE;
+        }
+        else{
+          // For Video image
+          $video_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+          $video_image = itg_get_story_extra_large_image($video_id);
+          if (file_exists($video_image)) {
+            $file_uri = file_create_url($video_image);
+            $flag = FALSE;
           }
-          ?>">
+          else {
+            // For Photogallery image
+            $photog_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+            $photog_image = itg_get_story_extra_large_image($photog_id);
+            if (file_exists($photog_image)) {
+              $file_uri = file_create_url($photog_image);
+              $flag = FALSE;
+            }
+          }
+        }
+        if (!$flag) {
+          print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="'.$story_alt.'" title="' . $story_title . '" src="' . $file_uri . '" itemprop = "contentUrl"><span class="story-photo-icon">';
+        }
+        ?>
+        <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+          <i class="fa fa-play-circle"></i>
           <?php
-             //associate_lead
-             $associate_lead = $node->field_story_associate_lead[LANGUAGE_NONE][0]['value'];
-             $associate_photo = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-             $associate_video = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
-
-             if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) {
-               $class = 'story-associate-content';
-             }
+        }
+        else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
           ?>
-            <div class="<?php echo $class; ?>">
-              <?php if (!empty($associate_lead) && (isset($associate_photo) || isset($associate_video))) { ?>
-                <div id="videogallery-iframe">
-                  <img class="loading-popup" src="<?php print $base_url; ?>/sites/all/themes/itg/images/reload.gif" alt="loading" />
-                </div>
-              <?php } ?>                      
+          <i class="fa fa-camera"></i>
+          <?php
+        }
+        print '</span></a>';
+      }
+    }
+    ?>
+    <meta itemprop="url" content="<?php print $file_uri; ?>">
+    <meta itemprop="width" content="647"><meta itemprop="height" content="363">
+    <?php
+      if (!empty($getimagetags)) {
+        foreach ($getimagetags as $key => $tagval) {
+          $urltags = addhttp($tagval->tag_url);
+          print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="' . $urltags . '" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
+        }
+      }
+      if (function_exists('itg_story_get_image_info')) {
+        $getImageInfo = itg_story_get_image_info($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+      }
+      if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) {
+        ?>
+        <div class="photoby">
+            <?php if (!empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'])) { ?>
+            <div class="story-img-rating">
               <?php
-              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                // imgtags" img-fid="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];" use for image tagging
-                ?>
-                <div class="stryimg" ><?php
-                  if (empty($widget_data)) {
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    if (file_exists($story_image)) {
-                      $file_uri = file_create_url($story_image);
-                    }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<img  alt="" title="" src="' . $file_uri . '">';
-                  }
-                  else {
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    if (file_exists($story_image)) {
-                      $file_uri = file_create_url($story_image);
-                    }
-                    else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
-                    }
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
-                    ?>        
-
-                    <?php if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
-                      <i class="fa fa-play-circle"></i>
-                      <?php
-                    }
-                    else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
-                      ?>                    
-                      <i class="fa fa-camera"></i>
-                      <?php
-                    }
-                    print '</span></a>';
-                  }
-                  ?>
-
-                  <?php
-                  if (!empty($getimagetags)) {
-                    foreach ($getimagetags as $key => $tagval) {
-                      $urltags = addhttp($tagval->tag_url);
-                      print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="' . $urltags . '" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
-                    }
-                  }
-                  // print theme('image_style', array('style_name' => 'story_image', 'path' => $story_image));
-                  ?>
-                  <?php
-                }
-                else {
-                  ?>
-
-                  <div class="stryimg"><?php
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    //print theme('image_style', array('style_name' => 'buzz_image', 'path' => $story_image));
-                    $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-                    $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
-                    $file_uri = file_create_url($story_image);
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">        
-                                    <i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span></a>';
-                    if (!empty($getimagetags)) {
-                      foreach ($getimagetags as $key => $tagval) {
-                        $urltags = addhttp($tagval->tag_url);
-                        print '<div class="tagview" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;" ><div class="square"></div><div  class="person" style="left:' . $tagval->x_coordinate . 'px;top:' . $tagval->y_coordinate . 'px;"><a href="' . $urltags . '" target="_blank">' . ucfirst($tagval->tag_title) . '</a></div></div>';
-                      }
-                    }
-                    ?>
-                  <?php } ?>
-
-                  <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
-                    <div class="photoby">
-                      <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
-                        <div class="story-img-rating">
-                          <?php
-                          // added technology rating field value for story technology
-                          $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                          echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
-                          ?>
-                        </div>
-                      <?php } ?>
-                      <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'])) { ?>
-                        <div class="photoby-text"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?></div>
-                      <?php } ?>
-                    </div>
-                  <?php } ?>     
-
-
-
-                </div>
-                <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'])) { ?>    
-                  <div class="image-alt"><?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?></div>
-                <?php } ?>                            
-              </div>
-
-              <?php
-              if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
-                if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
-                  ?>
-                  <div class="briefcase desktop-hide">
-                    <h4><?php print t('Briefcase'); ?></h4>
-                    <ul>
-                      <?php
-                      foreach ($node->field_story_highlights['und'] as $high) {
-                        print '<li>' . $high['value'] . '</li>';
-                      }
-                      ?>
-                    </ul>
-                  </div>
-                  <?php
-                }
-              }
+              // added technology rating field value for story technology
+              $tech_rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+              echo $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] . '/10';
               ?>
-
+            </div>
+          <?php } ?>
+          <?php
+          if (isset($getImageInfo[0]->image_photo_grapher) && !empty($getImageInfo[0]->image_photo_grapher)) {
+            print '<div class="photoby-text"> ' . $getImageInfo[0]->image_photo_grapher . '</div>';
+          }
+          ?>
+        </div>
+<?php } ?>
+      <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
+        <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
+      <?php } ?>                            
+    </div>
+    </div>
+    <?php
+      if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
+        ?>
+        <div class="briefcase">
+          <h4><?php print t('HIGHLIGHTS'); ?></h4>
+          <ul>
+            <?php
+            foreach ($node->field_story_highlights['und'] as $high) {
+              print '<li>' . $high['value'] . '</li>';
+            }
+            ?>
+          </ul>
+        </div>
+        <?php
+      }    
+    ?>
               <div class="story-movie">
-                <?php if (!empty($node->field_story_rating)): ?>
-                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">
-
-                  </div>                            
-                <?php endif; ?>
+    <?php if (!empty($node->field_story_rating)): ?>
+                  <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>"></div>                            
+                  <?php endif; ?>
                 <div class="movie-detail">
-                  <?php if (!empty($node->field_mega_review_cast)): ?>
+
+                <?php if (!empty($node->field_mega_review_movie_plot)): ?>
+                    <div class="plot">
+                      <span class="title"> <?php print t('Movie Name:'); ?></span>                                    
+                      <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
+                    </div>
+                <?php endif; ?>
+      
+    <?php if (!empty($node->field_mega_review_cast)): ?>
                     <div class="cast">
                       <span class="title"> <?php print t('Cast:'); ?></span>
                       <span class="detail"> <?php
@@ -497,28 +466,35 @@ if (!empty($content)):
                         ?></span>
                     </div>
                   <?php endif; ?>
-                  <?php if (!empty($node->field_mega_review_director)): ?>
+    <?php if (!empty($node->field_mega_review_director)): ?>
                     <div class="director">
                       <span class="title"> <?php print t('Director:'); ?></span>                                 
                       <span class="detail"> <?php print $node->field_mega_review_director[LANGUAGE_NONE]['0']['value']; ?></span>
                     </div>
                   <?php endif; ?>
-                  <?php if (!empty($node->field_mega_review_movie_plot)): ?>
-                    <div class="plot">
-                      <span class="title"> <?php print t('Plot:'); ?></span>                                    
-                      <span class="detail"> <?php print $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value']; ?></span>
-                    </div>
-                  <?php endif; ?>
+    
                 </div>                            
               </div>
-              <div class="ad-blocker"></div>
-              <div class="description">
+              <?php
+              if (!empty(variable_get('ads_blocker_content_limit'))) {
+                $limit = variable_get('ads_blocker_content_limit');
+              }
+              else {
+                $limit = 300;
+              }
+              if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->field_story_template_guru[und][0]['value'])) {/*
+                ?>
+                <div class="ad-blocker-content" style="display: none;"><?php print html_entity_decode(strip_tags(mb_strimwidth($node->body['und'][0]['value'], 0, $limit, ""))); ?></div>
+                <?php */} ?>
+              <?php /* <div class="ad-blocker" style="display: none;"></div> */ ?>
+              <div class="description" itemprop="articleBody">
                 <?php
                 $story_body = $node->body['und'][0]['value'];
+                $story_body = str_replace("&#13;", "", $story_body);
                 // check video is delete form video content   
-                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
-                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
-                }
+//                if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
+//                  itg_videogallery_remove_delete_video_form_body_html_body($story_body);
+//                }
                 if (strpos($story_body, '[ITG:SURVEY:')) {
                   if (preg_match('/ITG:SURVEY:([0-9]+)/', $story_body, $matches_survey)) {
                     $survey_nid = $matches_survey[1];
@@ -545,12 +521,15 @@ if (!empty($content)):
                     $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
                     $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
-                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div><div class="social-share"><ul>     
+                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+                                 /* 
+                                 <div class="social-share"><ul>     
                                  <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                                  <li><a title = "share on facebook" class="facebook" href="javascript:void(0)" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $factoidsSocial_share_title . "'" . ', ' . "'" . $factoidsSocialShare['share_desc'] . "'" . ', ' . "'" . $image . "'" . ')"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a title = "share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" class="user-activity twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
-                                 <li><a class="user-activity google" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
+                                 <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" class="user-activity twitter" href="javascript:" onclick="twitter_popup(\'' . urlencode($factoidsSocialShare['share_desc']) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></li>
+                                 <li><a class="user-activity google" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')"></a></li>
                                  </ul></div></div>';
+                                 */
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
@@ -570,15 +549,15 @@ if (!empty($content)):
                     }
                     $expertDetails .= '</div>';
                   }
-                  if (!empty($node->field_story_expert_image)) {
-                    if (!empty($node->field_story_expert_image[LANGUAGE_NONE][0]['uri'])) {
-                      $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
-                    }
-                    else {
-                      $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
-                    }
+                  //if (!empty($node->field_story_expert_image)) {
+                  if (!empty($node->field_story_expert_image[LANGUAGE_NONE][0]['uri'])) {
+                    $expertDetailsImage = file_create_url($node->field_story_expert_image[LANGUAGE_NONE][0]['uri']);
                   }
-                  $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
+                  else {
+                    $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
+                  }
+                  //}
+                  $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" title="" /></div></div>';
                   if (!empty($node->field_story_expert_description)) {
                     $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                   }
@@ -591,7 +570,7 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
                   }
                 }
-                $movie_html = itg_story_movie_image_plugin_data($node->nid);
+                $movie_html = $content['movie_plugin'];
                 if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                   if (!empty($node->field_story_technology['und'])) {
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
@@ -600,11 +579,26 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if ($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
+                  if ((!empty($node->field_technology_photogallery['und'])) && ($node->field_technology_photogallery['und'][0]['entity']->status == 1)) {
+                    $gallery_nid = $node->field_technology_photogallery['und'][0]['entity']->nid;
+                    $tech_gallery_images = itg_commom_get_gallery_image_array_by_gid($gallery_nid);
+                    $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_nid);
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias);
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
                 }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                //Code for the listicle token
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                   $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -614,7 +608,8 @@ if (!empty($content)):
                     $entity = entity_load('field_collection_item', array($field_collection_id));
                     $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
                     $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
-                    $color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+                    //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+                    $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
                     $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
                     $color = ($color) ? $color : '#000000';
                     if ($li_type == 'bullet_points') {
@@ -624,18 +619,20 @@ if (!empty($content)):
                       $listicle_output.= '<span>' . $num . '</span>';
                     }
                     if (isset($type)) {
-                      $listicletype = '<span class="listicle-type" style="color: ' . $color . '">' . $type . ': </span>';
+                      $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
                     }
                     $listicle_output.= '<div class="listicle-description">' . $listicletype . $description . '</div>';
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
-                }
-                else {
-                  // Print story body
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                  
+                 }
+                }else{
                   print $story_body;
                 }
+                //End of the code                
                 // If survey is associated with story, render survey form
                 if (strpos($node->body['und'][0]['value'], '[ITG:SURVEY:')) {
                   $story_body_survey = str_replace($story_body, itg_survey_pqs_associate_with_story('[ITG:SURVEY:' . $survey_nid . ']'), $story_body);
@@ -658,44 +655,52 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                  <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
-                    <span class="tech-rating">
-                      <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
-                    </span>
-                  <?php } ?>
-                  <?php print render($content['field_story_tech_review_chunk']); ?>
+                    <?php //if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                    <!--<span class="tech-rating">-->
+                    <?php //echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
+                    <!--</span>-->
+                <?php //} ?>
+                <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
-              <?php } ?>
-            </div>
+          <?php } ?>
+           <?php if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && $node->field_primary_category[LANGUAGE_NONE][0]['value'] == variable_get('pti_section_id', 1206640)) : ?>
+              <div class="pti-news-claim"><?php print t('This is unedited, unformatted feed from the Press Trust of India wire.'); ?> </div>
+            <?php endif; ?>
+            </div>           
           </div>
           <?php
         }
         else {
           ?>
           <div class="story-right <?php
-      if (!empty($node->field_story_type[LANGUAGE_NONE])) {
-        echo 'photo-story';
-      }
+          if (!empty($node->field_story_type[LANGUAGE_NONE])) {
+            echo 'photo-story';
+          }
           ?>">
-               <?php
-                 if (!empty($node->field_photo_story)) {
-                   $output = itg_story_photo_story_html($node->nid);
-                   print $output;
-                 }
-                 ?>
+          <?php
+          if (!empty($node->field_photo_story)) {
+            if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
+              $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+            }
+            $output = $content['photo_story_html'];
+            print $output;
+          }
+          ?>
             <!-- for photo story bottom slider, loop has been repeated again -->
             <?php
             if (!empty($node->field_photo_story)) {
-              $html_output = itg_story_photo_story_bottom_html($node->nid);
+              $html_output = $content['photo_story_bottom_html'];
               print $html_output;
             }
             ?>
           </div>
-        <?php } ?>
+  <?php } ?>
+        </div>
+        </article>
         <div class="clearfix"></div>
         <!-- condition for buzz  -->
-
         <?php
+        $buzz_output = '';
         if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
           $buzz_output.= '';
           $buzz = 1;
@@ -703,24 +708,33 @@ if (!empty($content)):
             $buzz_output.= '<div class="buzz-section">';
             $field_collection_id = $buzz_item['value'];
             $entity = entity_load('field_collection_item', array($field_collection_id));
-            $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
-            $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
-            $share_uri = $file->uri;
+            $buzz_imguri = '';
+            if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+              $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+            }
+            $share_uri = '';
+            if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+              $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+              $share_uri = $file->uri;
+            }
             $share_image = file_create_url($share_uri);
-            $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="" />';
+            $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
               $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
                 $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
                 $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+                if (function_exists('itg_story_get_image_info')) {
+                  $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+                }
                 $buzz_output.= '<div class="buzz-img"><div class="social-share">
               <ul>
               <li><a title = "share" href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
               <li><a title = "share on facebook" class= "facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $buzz_title_share . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $share_image . "'" . ', ' . "'" . $base_url . "'" . ', ' . "'" . $nid . "'" . ')" class="facebook"><i class="fa fa-facebook"></i></a></li>
-              <li><a title = "share on twitter" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a title="share on google+" href="javascript:" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
+              <li><a title = "share on twitter" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup(' . "'" . urlencode($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']) . "'" . ', ' . "'" . urlencode($short_url) . "'" . ')" class="user-activity twitter"><i class="fa fa-twitter"></i></a></li>
+              <li><a title="share on google+" href="javascript:" data-rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" data-status="1" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="user-activity google"><i class="fa fa-google-plus"></i></a></li>
               </ul>
-          </div>' . $img . '</div><div class="photoby">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '</div><div class="image-alt">' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '</div>';
+          </div>' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
               }
               if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
                 $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
@@ -732,144 +746,152 @@ if (!empty($content)):
           print $buzz_output;
         }
         ?>
-
         <!-- code for like dislike -->
-
         <?php
         $get_val = '0' . arg(1);
         if (function_exists('itg_flag_get_count')) {
-          $like = itg_flag_get_count($get_val, 'like_count');
-          $dislike = itg_flag_get_count($get_val, 'dislike_count');
+          $popup_like = itg_flag_get_count($get_val);
+          //$dislike = itg_flag_get_count($get_val, 'dislike_count');
         }
-
-        $like_count_like = $like['like_count'] + $migrated_count[0]['like_count'];
-        $dislike_count_like = $dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
-
+        $like_count_like = $popup_like['like_count'] + $migrated_count[0]['like_count'];
+        $dislike_count_like = $popup_like['dislike_count'] + $migrated_count[0]['dislike_count'];
         $pid = "voted_" . $get_val;
         $like = "no-of-likes_" . $get_val;
         $dislike = "no-of-dislikes_" . $get_val;
         ?>
         <div class="agbutton story-like-dislike">
-          <div id="name-dv"><?php print t('Do You Like This Story'); ?>
-            <span id="lky"><button title="Like" id="like_count" rel="<?php print $get_val; ?>" data-tag="sty"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count_like; ?></span> </button>
-              <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
-                <a title="share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
-                <a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
+          <div id="name-dv"><?php print t('Do You Like This Story?'); ?>
+            <span id="lky"><button title="Like" id="like_count" data-rel="<?php print $get_val; ?>" data-tag="sty" data-type="story"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count_like; ?></span> </button>
+              <span id="sty-dv" style="display:none">Awesome! <br/> Now share the story <br/> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
+                <a title="share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
+                <a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
                 <?php
                 if ($config_name == 'vukkul') {
                   ?>
-                  <a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
+                  <a onclick ="scrollToAnchor('vuukle-comments');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
                 <?php } if ($config_name == 'other') { ?> 
                   <a onclick ="scrollToAnchor('other-comment');" title="comment" class="def-cur-pointer"><i class="fa fa-comment"></i></a>
-                <?php } ?>
+              <?php } ?>
               </span></span>
-            <span id="dlky"> <button title="Dislike" id="dislike_count" rel="<?php print $get_val; ?>" data-tag="dsty"><i class="fa fa-thumbs-o-down"></i> <span id="<?php print $dislike; ?>"><?php print $dislike_count_like; ?></span></button>
+            <span id="dlky"> <button title="Dislike" id="dislike_count" data-rel="<?php print $get_val; ?>" data-tag="dsty" data-type="story"><i class="fa fa-thumbs-o-down"></i> <span id="<?php print $dislike; ?>"><?php print $dislike_count_like; ?></span></button>
               <?php
               if ($config_name == 'vukkul') {
                 ?>
-                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments'); ?></a></span> 
-
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><?php print t('comments'); ?></a></span>
               <?php } if ($config_name == 'other') { ?> 
-                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments'); ?></a></span> 
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments'); ?></a></span> 
               <?php } ?>
-
             </span>                                       
           </div>                          
           <p class="error-msg" id="<?php print $pid; ?>"></p>
         </div>
-
         <!-- End here -->
-
-
         <div class="section-left-bototm">
+          <!-- Comment by vishal <a title = "Submit Your Story" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a>-->
           <div class="social-list">
             <ul>
-              <?php if ($user->uid > 0): ?>
-                <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
+              <!--Comment by vishal<?php if ($user->uid > 0): ?>-->
+                <!--<li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>-->
+                <!--<li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer story-login-follow" href="javascript:"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
               <?php else: ?>
                 <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
-              <?php endif; ?>
+              <?php endif; ?>-->
               <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-              <li class="mhide"><a title = "share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-              <li class="mhide"><a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+              <li class="mhide"><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+              <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
               <?php
               if ($config_name == 'vukkul') {
                 ?>
-                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
-            if (function_exists(itg_vukkul_comment_count)) {
-              print itg_vukkul_comment_count('story_' . arg(1));
-            }
-                ?></span></a></li>
-                    <?php } if ($config_name == 'other') { ?> 
-                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $get_comment_count; ?></span></a></li>
-              <?php } ?>
+                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment"></i> <span><?php
+                      // Hide vukul comment by Shashnak due to long time take:
+                      //if (function_exists(itg_vukkul_comment_count)) {
+                        //print itg_vukkul_comment_count('story_' . arg(1));
+                      //}
+                      ?></span></a></li>
+              <?php } if ($config_name == 'other') { 
+                 $comment_count_class = !empty($get_comment_count) ? "itg-comment-count" : "";
+                ?> 
+                <li class="<?php print $comment_count_class; ?>mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> 
+                        <?php 
+                          if (!empty($get_comment_count)) {
+                              print "<span>" . $get_comment_count . "</span>";
+                            }
+                            ?>
+                        </a></li>
+                  <?php } ?>
+              <?php /*          
               <li class="mhide"><span class="share-count"><?php
-              if (!empty($tot_count)) {
-                print $tot_count;
-              }
-              else {
-                print 0;
-              }
-              ?></span> SHARES</li>
-              <?php if(!empty($node_author['fname'])) { ?>
-              <li class="mhide"><span class="posted-by"><?php print t('Posted by'); ?></span><span class="posted-name"><?php print $node_author['fname'].' '.$node_author['lname']; ?></span></li>
+                  if (!empty($tot_count)) {
+                    print $tot_count;
+                  }
+                  else {
+                    print 0;
+                  }
+                  ?></span><?php print t('SHARES'); ?></li>
+                                
+               */
+                ?>  
+              <?php if (!empty($node_author['fname'])) { ?>
+                <li class="mhide"><span class="posted-by"><?php print t('Posted by'); ?></span><span class="posted-name"><?php print $node_author['fname'] . ' ' . $node_author['lname']; ?></span></li>
               <?php } ?>   
-                <?php if ($user->uid > 0): if (!empty($follow_status['nid']) && $follow_status['status'] == '1'): ?>  
-                  <li class="mhide follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a></li>
+              <?php if ($user->uid > 0): if (!empty($follow_status['nid']) && $follow_status['status'] == '1'): ?>  
+                  <li class="mhide follow-story"><a title = "Unfollow Story" href="javascript:" id="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a></li>
                 <?php else: ?>
-                  <li class="mhide follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a></li>
+                  <li class="mhide follow-story"><a title = "Follow the Story" href="javascript:" id="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a></li>
                 <?php
                 endif;
               else:
                 ?>
-                <li class="mhide"><?php
-                if (function_exists(itg_sso_url)) {
-                  print itg_sso_url('follow story');
-                }
-                ?></li>
-                <?php endif; ?>
-
+              <?php /*    
+                <li class="mhide">
+                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow the story'); ?></a>
+                </li> 
+               */
+              ?>  
+            <?php endif; ?>
             </ul>
           </div>
-
-          <?php if (!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
+            <?php if (!empty($node->field_story_snap_post[LANGUAGE_NONE][0]['value'])) { ?>    
             <div class="snap-post">
               <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
               <?php
-              $like = itg_flag_get_count(arg(1), 'like_count');
-              $dislike = itg_flag_get_count(arg(1), 'dislike_count');
-              if (!empty($like['like_count'])) {
-                $like_count = '(' . $like['like_count'] . ')';
+              $tot_like = itg_flag_get_count(arg(1));
+              //$dislike = itg_flag_get_count(arg(1), 'dislike_count');
+              if (!empty($tot_like['like_count'])) {
+                $like_count = '(' . $tot_like['like_count'] . ')';
               }
-              if (!empty($dislike['dislike_count'])) {
-                $dislike_count = '(' . $dislike['dislike_count'] . ')';
+              if (!empty($tot_like['dislike_count'])) {
+                $dislike_count = '(' . $tot_like['dislike_count'] . ')';
               }
               $pid = "voted_" . arg(1);
               $like = "no-of-likes_" . arg(1);
               $dislike = "no-of-dislikes_" . arg(1);
               ?>
-              <div class="agbutton"><button title ="Like" id="like_count" rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snap-post"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
+              <div class="agbutton"><button title ="Like" id="like_count" data-rel="<?php print arg(1); ?>">Like <span id="<?php print $like; ?>"><?php print $like_count; ?></span> </button> <button title ="Dislike" id="dislike_count" data-rel="<?php print arg(1); ?>">Dislike <span id="<?php print $dislike; ?>"><?php print $dislike_count; ?></span></button>  <a href="<?php echo $base_url; ?>/snap-post"> More from Snap post</a><p class="error-msg" id="<?php print $pid; ?>"></p></div>
             </div>
           <?php } ?>
+          <?php if(!empty($node->field_story_itg_tags['und'])) { ?>
           <div class="tags">
             <ul>
               <li><i class="fa fa-tags"></i> <?php print t('Tags :'); ?></li>        
               <?php
-              foreach ($node->field_story_itg_tags['und'] as $tags) {
-                $published_tag = $tags['taxonomy_term']->field_tags_status[LANGUAGE_NONE][0]['value'];
-                if ($published_tag == 'Published') {
-                  $term = taxonomy_term_load($tags['tid']);
-                  $t_name = $term->name;
-                  $comma_sep_tag[] = $t_name;
-                  print '<li><a target="_blank" href="' . $base_url . '/site-search?keyword=' . $t_name . '">#' . $t_name . '</a></li>';
+              if (isset($node->field_story_itg_tags['und'])) {
+                foreach ($node->field_story_itg_tags['und'] as $tags) {
+                  $published_tag = $tags['taxonomy_term']->field_tags_status[LANGUAGE_NONE][0]['value'];
+                  if ($published_tag == 'Published' || $published_tag == '')  {
+                    $term = taxonomy_term_load($tags['tid']);
+                    $t_name = $term->name;
+                    $comma_sep_tag[] = $t_name;
+                    print itg_story_follow_unfollow_print($tags['tid'], 'tag', 'follow_tags', $t_name);
+                  }
                 }
               }
               ?>
             </ul>
           </div>
-          <!-- For buzzfeed section stary --> 
-
-          <?php if (!empty($related_content) && !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
+            <?php } ?>
+          <!-- For buzzfeed section stary -->
+            <?php if (!empty($related_content) && !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
             <div class="related-story related-story-bottom">
               <?php
               $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_bottom_block');
@@ -877,55 +899,43 @@ if (!empty($content)):
               ?>
             </div>
             <!-- For buzzfeed section end --> 
-            <?php
-          }
-
-          if (!empty($node->field_story_configurations['und'])) {
-            foreach ($node->field_story_configurations['und'] as $value) {
-              $config[] = $value['value'];
-            }
-          }
-          ?>
-
+            <?php } ?>
         </div>
-
-        <?php
-        if (function_exists('taboola_view')) {
-          taboola_view();
-        }
-        ?>
-
-        <?php
-        if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
-          if (!empty($node->field_story_comment_question['und'][0]['value'])) {
-            $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
-          }
-          ?>
-          <div class="c_ques"><?php print $question; ?></div>
           <div class="vukkul-comment">
+            
+            <?php
+              if (function_exists('taboola_view')) {
+                taboola_view();
+              }
+              if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
+                if (!empty($node->field_story_comment_question['und'][0]['value'])) {
+                  $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
+              }
+            ?>
+            <div class="c_ques"><?php print $question; ?></div>
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>
-
+            <div id="vuukle-comments"></div>
+            <div class="vuukle-powerbar"></div>                       
             <?php
             if (function_exists('vukkul_view')) {
-              vukkul_view();
-            }
+                  vukkul_view();
+                }
             ?>
-
-          </div>
-          <?php
-        }
-        if ($config_name == 'other' && in_array('commentbox', $config)) {
+              </div>
+              <?php
+            }
+        if (is_array($config) && $config_name == 'other' && in_array('commentbox', $config)) {
           ?>
           <div id="other-comment">
             <?php
+            // block for comment
             $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
             print render($block['content']);
             ?>
           </div>
-        <?php }
-        ?>
-      </div>            
-    </div>               
-
-  <?php endif; ?>
+  <?php }
+  ?>
+                 
+    </div>
+<?php endif; ?>
+<?php print $story_zedo_ad;?>

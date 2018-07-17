@@ -14,9 +14,7 @@ function feature_category_management_user_default_permissions() {
   $permissions['delete terms in category_management'] = array(
     'name' => 'delete terms in category_management',
     'roles' => array(
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'taxonomy',

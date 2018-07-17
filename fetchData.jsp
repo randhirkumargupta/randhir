@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><response><keyword>BUDGET</keyword><total>18</total><option-1><subkeyword>yes</subkeyword><count>7</count></option-1><option-2><subkeyword>no</subkeyword><count>5</count></option-2><option-3><subkeyword>other</subkeyword><count>6</count></option-3></response>

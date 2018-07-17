@@ -16,32 +16,24 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'story_node_form':        // Story
     case 'photogallery_node_form': // Photo gallery
-    case 'videogallery_node_form': // Video Gallery
-    //case 'breaking_news_node_form': // Breaking News
+    case 'videogallery_node_form': // Video Gallery    
     case 'blog_node_form': // Blog
     case 'podcast_node_form': // Podcast
-
+    case 'reporter_node_form': // reporter OR Byline
+    case 'breaking_news_node_form': // Breaking News
+    case 'mega_review_critic_node_form': // Mega Review
+    case 'miscellaneous_node_form': // Mega Review
       $content_type = '';
+      $itg_category_multiple_prev_data = '';
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
         $content_type = $form['#node']->type;
       }
-
-      //pr($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']);
-//      $itg_category_multiple_prev_data = NULL; //p($form_state['build_info']['args'][0]);
-//      if (isset($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']) &&
-//          !empty($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value'])
-//      ) {
-//        $itg_category_multiple_prev_data = json_decode(base64_decode($form_state['build_info']['args'][0]->field_story_extra_data[LANGUAGE_NONE][0]['value']));
-//      } else
-
       if (isset($form_state['build_info']['args'][0]->field_story_category[LANGUAGE_NONE]) && !empty($form_state['build_info']['args'][0]->field_story_category[LANGUAGE_NONE])) {
         $all_selected_tids = $form_state['build_info']['args'][0]->field_story_category[LANGUAGE_NONE];
-
         if (isset($all_selected_tids) && !empty($all_selected_tids)) {
           $itg_category_multiple_prev_data = new stdClass();
           foreach ($all_selected_tids as $chunk_tid) {
             $level = itg_category_multiple_get_term_level($chunk_tid['tid']);
-
             switch ($level) {
               case 1:
                 $itg_category_multiple_prev_data->section[] = $chunk_tid['tid'];
@@ -62,17 +54,54 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           }
         }
       }
+      // Code started for Clone story Settings
+      if (isset($_GET['internal_clone_id']) && !empty($_GET['internal_clone_id']) && $_GET['q'] == 'node/add/story') {
+        $clone_nid = (int) $_GET['internal_clone_id'];
+        $cloned_node_object = node_load($clone_nid);
+        if ($cloned_node_object->type = 'story') {
+          if (isset($cloned_node_object->field_story_category[LANGUAGE_NONE]) && !empty($cloned_node_object->field_story_category[LANGUAGE_NONE])) {
+            $all_selected_tids = $cloned_node_object->field_story_category[LANGUAGE_NONE];
+            $default_value_of_primary_cat = $cloned_node_object->field_primary_category[LANGUAGE_NONE][0]['value'];
+            // Setting primary category
+            $form['field_primary_category'][LANGUAGE_NONE][0]['value']['#default_value'] = $default_value_of_primary_cat;
+            foreach ($all_selected_tids as $chunk_tid) {
+              $all_selected_tids_fin[] = $chunk_tid['tid'];
+            }
+            $form['field_story_category'][LANGUAGE_NONE]['#default_value'] = $all_selected_tids_fin;
 
-
+            if (isset($all_selected_tids) && !empty($all_selected_tids)) {
+              $itg_category_multiple_prev_data = new stdClass();
+              foreach ($all_selected_tids as $chunk_tid) {
+                $level = itg_category_multiple_get_term_level($chunk_tid['tid']);
+                switch ($level) {
+                  case 1:
+                    $itg_category_multiple_prev_data->section[] = $chunk_tid['tid'];
+                    break;
+                  case 2:
+                    $itg_category_multiple_prev_data->category[] = $chunk_tid['tid'];
+                    break;
+                  case 3:
+                    $itg_category_multiple_prev_data->sub_category[] = $chunk_tid['tid'];
+                    break;
+                  case 4:
+                    $itg_category_multiple_prev_data->sub_sub_category[] = $chunk_tid['tid'];
+                    break;
+                  case 5:
+                    $itg_category_multiple_prev_data->sub_sub_sub_category[] = $chunk_tid['tid'];
+                    break;
+                }
+              }
+            }
+          }
+        }
+      }
+      // Code ends for Clone story settings
       // Code stared for the SECTION so that we can get the default sections options
-
       $section_default_options = array(-1 => '- Select Section -');
       if (isset($itg_category_multiple_prev_data->section) && !empty($itg_category_multiple_prev_data->section)) {
         $section_default_options = $itg_category_multiple_prev_data->section;
       }
-
       // Code started for CATEGORY so that we can get category options and its defualt options
-
       $category_default_options = array(-1 => '- Select Category -');
       $category_selected_options = array(-1 => '- Select Category -'); // This value array will be dynamically generated by the use of default selected options  
       if (isset($itg_category_multiple_prev_data->category) && !empty($itg_category_multiple_prev_data->category)) {
@@ -81,8 +110,6 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           $category_selected_options = itg_category_get_texo_desired($itg_category_multiple_prev_data->section);
         }
       }
-
-
       // Code started for  sub category so that we can get sub category options and its default values 
       $sub_category_default_options = array(-1 => '- Select Sub Category -');
       $sub_category_selected_options = array(-1 => '- Select Sub Category -'); // This value array will be dynamically generated by the use of default selected options  
@@ -92,7 +119,6 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           $sub_category_selected_options = itg_category_get_texo_desired($itg_category_multiple_prev_data->category);
         }
       }
-
 
       // Code started for  sub sub category so that we can get sub sub category options and its default values 
       $sub_sub_category_default_options = array(-1 => '- Select Sub Sub Category -');
@@ -113,36 +139,28 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
           $sub_sub_sub_category_selected_options = itg_category_get_texo_desired($itg_category_multiple_prev_data->sub_sub_category);
         }
       }
-
-
-
       // Code started for generating options for the primary category 
-
       $complete_structure = array_merge(
-          (array) $itg_category_multiple_prev_data->section, (array) $itg_category_multiple_prev_data->category, (array) $itg_category_multiple_prev_data->sub_category, (array) $itg_category_multiple_prev_data->sub_sub_category, (array) $itg_category_multiple_prev_data->sub_sub_sub_category
+          isset($itg_category_multiple_prev_data->section) ? (array) $itg_category_multiple_prev_data->section : array(), isset($itg_category_multiple_prev_data->category) ? (array) $itg_category_multiple_prev_data->category : array(), isset($itg_category_multiple_prev_data->sub_category) ? (array) $itg_category_multiple_prev_data->sub_category : array(), isset($itg_category_multiple_prev_data->sub_sub_category) ? (array) $itg_category_multiple_prev_data->sub_sub_category : array(), isset($itg_category_multiple_prev_data->sub_sub_sub_category) ? (array) $itg_category_multiple_prev_data->sub_sub_sub_category : array()
       );
-
       $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
-
       // This is for primary category default value
-
-      $default_value_of_primary_cat = array('- Select Primary Category -');
+      if (!isset($default_value_of_primary_cat)) {
+        $default_value_of_primary_cat = '';
+      }
       if (isset($form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value'])) {
         $default_value_of_primary_cat = $form_state['build_info']['args'][0]->field_primary_category[LANGUAGE_NONE][0]['value'];
       }
-
       $itg_category_vocabs = get_itg_category_vocabs($form_state);
       $sections = itg_category_multiple_get_section($itg_category_vocabs, $content_type);
       $options_category = array('_none' => '--Select-');
-
-
-      $form['category_holder'] = array(
-      );
-
+      natcasesort($sections);
+      $form['category_holder'] = array();
       $form['category_holder']['itg_section'] = array(
         '#type' => 'select',
         '#multiple' => TRUE,
         '#title' => t('Section'),
+        '#description' => t('Section'),
         '#validated' => TRUE,
         '#options' => $sections,
         '#size' => 10,
@@ -152,6 +170,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'select',
         '#multiple' => TRUE,
         '#title' => t('Category'),
+        '#description' => t('Category'),
         '#validated' => TRUE,
         '#options' => $category_selected_options,
         '#size' => 10,
@@ -162,49 +181,64 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
         '#type' => 'select',
         '#multiple' => TRUE,
         '#title' => t('Sub Category'),
+        '#description' => t('Sub Category'),
         '#validated' => TRUE,
         '#options' => $sub_category_selected_options,
         '#size' => 10,
         '#default_value' => $sub_category_default_options,
       );
-
-
       $form['category_holder']['itg_sub_sub_category'] = array(
         '#type' => 'select',
         '#multiple' => TRUE,
         '#title' => t('Sub Sub Category'),
+        '#description' => t('Sub Sub Category'),
         '#validated' => TRUE,
         '#options' => $sub_sub_category_selected_options,
         '#size' => 10,
         '#default_value' => $sub_sub_category_default_options,
       );
-
       $form['category_holder']['itg_sub_sub_sub_category'] = array(
         '#type' => 'select',
         '#multiple' => TRUE,
         '#title' => t('Sub Sub Sub Category'),
+        '#description' => t('Sub Sub Sub Category'),
         '#validated' => TRUE,
         '#options' => $sub_sub_sub_category_selected_options,
         '#size' => 10,
         '#default_value' => $sub_sub_sub_category_default_options,
       );
-
+      $primary_category_type = NULL;
+      $primary_category_req_flag = NULL;
+      if ($form_id == 'reporter_node_form') {
+        $primary_category_req_flag = FALSE;
+        $primary_category_type = 'hidden';
+      }
+      else {
+        $primary_category_req_flag = TRUE;
+        $primary_category_type = 'select';
+      }
       $form['category_holder']['itg_primary_category'] = array(
-        '#type' => 'select',
+        '#type' => $primary_category_type,
         '#size' => '10',
-        '#required' => TRUE,
+        '#required' => $primary_category_req_flag,
         '#title' => t('Primary Category'),
+        '#description' => t('Primary Category'),
         '#validated' => TRUE,
         '#options' => $itg_primary_category,
         '#default_value' => $default_value_of_primary_cat,
-      );
-
+      );      
+      if (($form_id == 'photogallery_node_form') || ($form_id == 'videogallery_node_form') && (!empty($itg_primary_category))) {
+        foreach ($itg_primary_category as $option_id => $option_val) {
+          if (strpos($option_val, 'Photo') !== false || strpos($option_val, 'Videos') !== false) {
+            $form['category_holder']['itg_primary_category']['#option_attributes'] [$option_id] = array('disabled' => 'true');
+          }
+        }
+      }
       // Hiding story extra field 
       if (isset($form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'])) {
         $form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'] = 'hidden';
       }
-      //    p($form['actions']);
-      //    $form['actions']['submit']['#submit'][] = 'itg_category_multiple_custom_callback';
+
       $form['#after_build'][] = 'itg_category_multiple_after_build';
       break;
   }
@@ -224,13 +258,13 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
       $query = array();
       if (is_array($query) && empty($query)) {
         $category_data = $people->find(
-            array(
-              "parent" => 0,
-              "status" => 1,
-              "machine_name" => array('$in' => $itg_category_vocabs),
-              "content_type" => array('$regex' => $content_type)
-            )
-        );
+                array(
+                  "parent" => 0,
+                  "status" => 1,
+                  "machine_name" => array('$in' => $itg_category_vocabs),
+                  "content_type" => array('$regex' => $content_type)
+                )
+            )->sort(array("name" => 1));
         foreach ($category_data as $chunk_data) {
           $data[$chunk_data['tid']] = $chunk_data['name'];
         }
@@ -247,11 +281,7 @@ function itg_category_multiple_get_section($itg_category_vocabs, $content_type) 
  * @return array
  */
 function itg_category_multiple_after_build($form, &$form_state) {
-  //pr( $form['field_primary_category']['und']);
-//p($form_state['input']['itg_primary_category']);
-  //if (isset($form_state['input']['itg_primary_category']) && !empty($form_state['input']['itg_primary_category'])) {
-  // $form['field_primary_category']['und'][0]['value'] = $form_state['input']['itg_primary_category'];
-  //}
+
   //Getting category on the basis of section
 
   if (isset($form_state['input']['itg_section']) && !empty($form_state['input']['itg_section'])) {
@@ -259,14 +289,12 @@ function itg_category_multiple_after_build($form, &$form_state) {
     $form['category_holder']['itg_category']['#options'] = $itg_section;
   }
 
-
   //Getting sub category on the basis of category
 
   if (isset($form_state['input']['itg_category']) && !empty($form_state['input']['itg_category'])) {
     $itg_category = itg_category_get_texo_desired($form_state['input']['itg_category']);
     $form['category_holder']['itg_sub_category']['#options'] = $itg_category;
   }
-
 
   // Getting sub category on the basis of sub category
   if (isset($form_state['input']['itg_sub_category']) && !empty($form_state['input']['itg_sub_category'])) {
@@ -290,15 +318,17 @@ function itg_category_multiple_after_build($form, &$form_state) {
     $complete_structure = array_merge(
         $fsection, $fcategory, $fsub_category, $fsub_sub_category, $fsub_sub_sub_category
     );
-
     $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
     $form['category_holder']['itg_primary_category']['#options'] = $itg_primary_category;
   }
-
-  //   itg_sub_sub_category  itg_sub_sub_sub_category itg_primary_category
-
-  drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js');
-
+  if (($form['#id'] == 'photogallery-node-form') || ($form['#id'] == 'videogallery-node-form') && (!empty($itg_primary_category))) {
+    foreach ($itg_primary_category as $option_id => $option_val) {
+      if (strpos($option_val, 'Photo') !== false || strpos($option_val, 'Videos') !== false) {
+        $form['category_holder']['itg_primary_category']['#option_attributes'] [$option_id] = array('disabled' => 'true');
+      }
+    }
+  }
+  drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js', array('scope' => 'footer'));
   return $form;
 }
 
@@ -311,12 +341,14 @@ function itg_category_multiple_menu() {
     'page callback' => 'itg_category_multiple_find',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_category_multiple_helper.inc',
   );
 
   $items['itg-category-primary-category'] = array(
     'page callback' => 'itg_category_primary_category',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_category_multiple_helper.inc',
   );
 
   $items['create-section-category-in-mongo-mig'] = array(
@@ -324,90 +356,10 @@ function itg_category_multiple_menu() {
     'page arguments' => array('create_section_category_in_mongo_mig'),
     'access arguments' => array('access administrator'),
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_category_multiple_helper.inc',
   );
 
   return $items;
-}
-
-/**
- * Implements itg_category_multiple_find()
- */
-function itg_category_multiple_find() {
-  $category = $_POST['type']; //p($_POST);
-  switch ($category) {
-    case 'itg_section[]':
-      if (isset($_POST['section']) && count($_POST['section']) >= 1 && !empty($_POST['section'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['section']));
-        $primary_category = get_parent_structure_by_tid(json_decode($_POST['section']));
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
-        print json_encode($render_data);
-        drupal_exit();
-      }
-      break;
-    case 'itg_category[]':
-
-      if (isset($_POST['category']) && count($_POST['category']) >= 1 && !empty($_POST['category'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['category']));
-        $section = json_decode($_POST['section']);
-        $category = json_decode($_POST['category']);
-
-        $final_array_for_final_category = array_merge($section, $category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
-        print json_encode($render_data);
-        drupal_exit();
-      }
-      break;
-
-    case 'itg_sub_category[]':
-      if (isset($_POST['sub_category']) && count($_POST['sub_category']) >= 1 && !empty($_POST['sub_category'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['sub_category']));
-        $section = json_decode($_POST['section']);
-        $category = json_decode($_POST['category']);
-        $sub_category = json_decode($_POST['sub_category']);
-        $final_array_for_final_category = array_merge($section, $category, $sub_category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
-        print json_encode($render_data);
-        drupal_exit();
-      }
-      break;
-
-    case 'itg_sub_sub_category[]':
-      if (isset($_POST['sub_sub_category']) && count($_POST['sub_sub_category']) >= 1 && !empty($_POST['sub_sub_category'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['sub_sub_category']));
-        $section = json_decode($_POST['section']);
-        $category = json_decode($_POST['category']);
-        $sub_category = json_decode($_POST['sub_category']);
-        $sub_sub_category = json_decode($_POST['sub_sub_category']);
-
-        $final_array_for_final_category = array_merge($section, $category, $sub_category, $sub_sub_category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
-        print json_encode($render_data);
-        drupal_exit();
-      }
-      break;
-
-    case 'itg_sub_sub_sub_category[]':
-      if (isset($_POST['sub_sub_sub_category']) && count($_POST['sub_sub_sub_category']) >= 1 && !empty($_POST['sub_sub_sub_category'])) {
-        $section = json_decode($_POST['section']);
-        $category = json_decode($_POST['category']);
-        $sub_category = json_decode($_POST['sub_category']);
-        $sub_sub_category = json_decode($_POST['sub_sub_category']);
-        $sub_sub_sub_category = json_decode($_POST['sub_sub_sub_category']);
-        $final_array_for_final_category = array_merge($section, $category, $sub_category, $sub_sub_category, $sub_sub_sub_category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['primary'] = $primary_category;
-        print json_encode($render_data);
-        drupal_exit();
-      }
-      break;
-  }
 }
 
 /**
@@ -419,6 +371,7 @@ function get_categoryies_by_tid($tids) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $html = '';
+    $render_tids = array();
     $return_data_chunk = array();
     if ($con) {
       $people = $con->taxonomy_term_data_mongo;
@@ -428,8 +381,11 @@ function get_categoryies_by_tid($tids) {
         $category_data = $people->find(array('status' => 1, "parent" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
           $html.='<option value="' . $chunk_data['tid'] . '">' . $chunk_data['name'] . '</option>';
+          $render_tids[] = $chunk_data['tid'];
         }
-        return $html;
+        $return_data_chunk['tids'] = $render_tids;
+        $return_data_chunk['html'] = $html;
+        return $return_data_chunk;
       }
     }
   }
@@ -441,6 +397,7 @@ function get_categoryies_by_tid($tids) {
  * @return string
  */
 function get_parent_structure_by_tid($tids) {
+  global $all_tid_arr;
   if (function_exists('mongodb')) {
     $con = mongodb();
     $primaryhtml = '';
@@ -452,6 +409,8 @@ function get_parent_structure_by_tid($tids) {
         $new_tids = get_categoryies_send_for_convert_to_int($tids);
         $category_data = $people->find(array("tid" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
+          $parent_tid = end($chunk_data['parent_data']);
+          $all_tid_arr[$chunk_data['tid']] = $parent_tid['tid'];
           $return_data_chunk[$chunk_data['tid']] = get_parent_complete_structure($chunk_data['parent_data']);
         }
         $primaryhtml = get_parent_structure_in_ordered($new_tids, $return_data_chunk);
@@ -477,27 +436,12 @@ function itg_category_multiple_hierarchy($category_id) {
         foreach ($category_data as $chunk_data) {
           $data = $chunk_data;
         }
-
         return $data;
       }
     }
   }
 }
 
-/**
- * Implements itg_category_primary_category()
- * @param array $category_id
- */
-function itg_category_primary_category($category_id) {
-  $main_data = $_POST['data'];
-  $actual_render = array();
-  $html = '';
-  foreach ($main_data as $values) {
-    $option_label = itg_category_complete_hierarchy($values);
-    $html.='<option value="' . $values . '">' . $option_label . '</option>';
-  }
-  print $html;
-}
 
 /**
  * Implements get_itg_category_vocabs()
@@ -550,9 +494,17 @@ function get_categoryies_send_for_convert_to_int($tids) {
  * @return string $html
  */
 function get_parent_structure_in_ordered($tids, $return_data_chunk) {
+  global $all_tid_arr;
   $html = '';
+  $photo_sectionid = variable_get('tid_photogallery', 1208521);
+  $video_sectionid = variable_get('tid_videos', 1206552);
+  $node_form_id = $_POST['node_form_id'];
   foreach ($tids as $key => $chunk_val) {
-    $html.='<option value="' . $chunk_val . '">' . $return_data_chunk[$chunk_val] . '</option>';
+    $is_disable = '';
+    if ((($node_form_id == 'photogallery-node-form') || ($node_form_id == 'videogallery-node-form')) && (($all_tid_arr[$chunk_val] === $photo_sectionid) || ($all_tid_arr[$chunk_val] === $video_sectionid))) {
+      $is_disable = 'disabled = disabled';
+    }
+    $html.='<option ' . $is_disable . ' value="' . $chunk_val . '">' . $return_data_chunk[$chunk_val] . '</option>';
   }
   return $html;
 }
@@ -629,7 +581,6 @@ function get_parent_structure_in_complete($tids, $return_data_chunk) {
 function itg_category_multiple_taxonomy_term_insert($term) {
 
   if ($term->vid == CATEGORY_MANAGMENT) {
-    //p($term);
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
@@ -661,16 +612,16 @@ function itg_category_multiple_taxonomy_term_update($term) {
     $id = $term->tid;
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
+      if($con) {
       $people = $con->taxonomy_term_data_mongo;
       $people->remove(array("tid" => (int) $id));
+      }
     }
     // Inserting data into taxonomy 
-
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
       $status_data = isset($term->term_state) && $term->term_state == 1 ? 1 : 0;
-
       // check connection
       if ($con) {
         $qry = array(
@@ -710,8 +661,10 @@ function itg_category_multiple_taxonomy_term_delete($term) {
     $id = $term->tid;
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
+      if ($con) {
       $people = $con->taxonomy_term_data_mongo;
       $people->remove(array("tid" => (int) $id));
+      }
     }
   }
 }
@@ -722,13 +675,11 @@ function itg_category_multiple_taxonomy_term_delete($term) {
  */
 function itg_category_multiple_get_term_level($tid) {
   static $depths = array();
-
   if (!isset($depths[$tid])) {
     $parent = db_select('taxonomy_term_hierarchy', 'th')
             ->fields('th', array('parent'))
             ->condition('tid', $tid)
             ->execute()->fetchField();
-
     if ($parent == 0) {
       $depths[$tid] = 1;
     }
@@ -736,58 +687,7 @@ function itg_category_multiple_get_term_level($tid) {
       $depths[$tid] = 1 + itg_category_multiple_get_term_level($parent);
     }
   }
-
   return $depths[$tid];
-}
-
-/**
- * Creating create_section_category_in_mongo_mig form
- */
-function create_section_category_in_mongo_mig() {
-
-  $form['submit_button'] = array(
-    '#type' => 'submit',
-    '#value' => t('Please submit for bulk insert section and its category'),
-  );
-
-  return $form;
-}
-
-/**
- * Implements create_section_category_in_mongo_mig_submit().
- */
-function create_section_category_in_mongo_mig_submit($form, &$form_state) {
-    
-  $query = db_select('taxonomy_term_data', 'td');
-  $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = td.tid');
-  $query->leftJoin('itg_category_manager', 'icm', 'icm.tid = td.tid');
-  $query->leftJoin('taxonomy_vocabulary', 'tv', 'tv.vid=td.vid');
-  $result = $query
-      ->condition('td.vid', CATEGORY_MANAGMENT)
-      ->fields('td', array('tid', 'name', 'vid'))
-      ->fields('th', array('parent'))
-      ->fields('tv', array('machine_name'))
-      ->fields('icm', array('status'))
-      ->execute();
-
-
-  foreach ($result as $chunk_data) {
-    if (!empty($chunk_data) && isset($chunk_data)) {
-      $operations[] = array('create_section_cat_op_mig', array($chunk_data));
-    }
-  }
-
-  $batch = array(
-    'title' => t('Migrating data finally....please wait....!'),
-    'operations' => $operations,
-    'finished' => 'create_section_cat_op_batch_finished_mig',
-    'init_message' => t('Migration started...please wait....!'),
-    'progress_message' => t('Processed @current out of @total.'),
-    'error_message' => t('Migration checking process has encountered an error.'),
-  );
-
-  batch_set($batch);
-  batch_process('create-section-category-in-mongo-mig');
 }
 
 /**
@@ -798,7 +698,6 @@ function create_section_cat_op_mig($data, &$context) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->taxonomy_term_data_mongo;
-
     // check connection
     if ($con) {
       $qry = array(
@@ -820,7 +719,8 @@ function create_section_cat_op_mig($data, &$context) {
 /**
  * Implements create_section_cat_op_batch_finished().
  */
-function create_section_cat_op_batch_finished_mig($success, $results, $operations) {
+function create_section_cat_op_batch_finished_mig($success, $results,
+    $operations) {
   if ($success) {
     drupal_set_message(t('migration processed successfully.'));
   }
@@ -862,12 +762,10 @@ function itg_category_sink_active_inactive_category($tid, $status) {
       $people->remove(array("tid" => (int) $id));
     }
     // Inserting data into taxonomy 
-
     if (function_exists('mongodb')) {
       $con = mongodb();
       $people = $con->taxonomy_term_data_mongo;
       $status_data = $status;
-
       // check connection
       if ($con) {
         $qry = array(
@@ -884,4 +782,29 @@ function itg_category_sink_active_inactive_category($tid, $status) {
       }
     }
   }
+}
+
+/**
+ * itg_category_multiple_mapped_fields Mapping
+ * @param type $param
+ */
+function itg_category_multiple_mapped_fields() {
+  return array(
+    'itg_section[]',
+    'itg_category[]',
+    'itg_sub_category[]',
+    'itg_sub_sub_category[]',
+    'itg_sub_sub_sub_category[]',
+    'itg_primary_category'
+  );
+}
+
+/**
+ * Function for array intersect
+ * @param array $arr1
+ * @param array $arr2
+ */
+function itg_category_multiple_array_intersect($arr1, $arr2) {
+  $result = array_intersect($arr1, $arr2);
+  return $result;
 }

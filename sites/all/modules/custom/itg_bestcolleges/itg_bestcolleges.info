@@ -1,0 +1,7 @@
+name = ITG Best Colleges
+description = "ITG BestCollege module is used to implement features to show Best Colleges on behalf of their ranking."
+core = 7.x
+package = ITG
+
+
+

@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements HOOK_view_data.
+ * Implements HOOK_view_data().
  * {@inheritdoc}
  */
 function itg_analytics_views_data() {

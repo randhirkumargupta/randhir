@@ -17,7 +17,7 @@ function itg_category_autocomplete_list($string) {
   } else {
     $itg_query = db_select('taxonomy_term_data', 'itg');
     $itg_query->condition('vid', CATEGORY_MANAGMENT, '=');
-    $itg_query->condition('name', '%' . $string . '%', 'LIKE')
+    $itg_query->condition('name', $string . '%', 'LIKE')
               ->fields('itg', array('tid', 'name'));
 
     $result = $itg_query->execute()->fetchAll();
@@ -51,7 +51,7 @@ function section_widgets_ajax() {
       $category_array = explode('(', $_GET['category_name']);
       $cid = substr($category_array[1], 0,-1);
       // category exit or not for this section
-      $check_cid = get_section_widgets_id($cid, $_GET['section_name'], $_GET['widgets_type']);
+      $check_cid = get_section_widgets_id($cid, $_GET['section_name'], $_GET['widgets_type'],$_GET['template_name']);
       
       if (empty($check_cid)) {
         $query_layout_tpl = db_insert('itg_section_widgets_list');
@@ -152,7 +152,7 @@ function custom_taxonomy_get_tree($string, $vid, $parent = 0, $max_depth = NULL,
       ->fields('t')
       ->fields('h', array('parent'))
       ->condition('t.vid', $vid)
-      ->condition('t.name', '%' . $string . '%', 'LIKE')
+      ->condition('t.name', $string . '%', 'LIKE')
       ->orderBy('t.weight')
       ->orderBy('t.name')
       ->execute();
@@ -266,11 +266,9 @@ function custom_content_widgets() {
         $query->fields('icw', array('widget'));
         $query->condition('widget', $_GET['content_title']);
   $itg_result = $query->execute()->fetchAll();
-  $val = $itg_result[0];
-  //foreach ($itg_result as $key => $val) {
-    $content .= '<li id="'.$val->widget.'" data-widget="custom_content_widgets#'.$val->widget.'" data-widget-info="">
-    <span>'.$val->widget.'</span></li>';
-  //}
+  $val = $itg_result[0]; 
+  $content .= '<li id="'.$val->widget.'" data-widget="custom_content_widgets#'.$val->widget.'" data-widget-info="">
+    <span>'.$val->widget.'</span></li>';  
   
   echo $content;
   exit;

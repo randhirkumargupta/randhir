@@ -16067,9 +16067,9 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
                     var d = a.dataProcessor;
                     (d = d && d.dataFilter) && d.addRules({
                         elements: {
-                            iframe: function(b) {
-                                return a.createFakeParserElement(b, "cke_iframe", "iframe", !0)
-                            }
+//                            iframe: function(b) {
+//                                return a.createFakeParserElement(b, "cke_iframe", "iframe", !0)
+//                            }
                         }
                     })
                 }

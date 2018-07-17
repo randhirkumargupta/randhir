@@ -142,7 +142,7 @@ function features_for_newsletter_strongarm() {
           'weight' => '4',
         ),
         'title' => array(
-          'weight' => '2',
+          'weight' => '3',
         ),
         'path' => array(
           'weight' => '3',
@@ -151,7 +151,7 @@ function features_for_newsletter_strongarm() {
           'weight' => '1',
         ),
         'redirect' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
@@ -269,6 +269,27 @@ function features_for_newsletter_strongarm() {
   $strongarm->name = 'node_submitted_newsletter_templates';
   $strongarm->value = 0;
   $export['node_submitted_newsletter_templates'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_newsletter_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_newsletter_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_newsletter_templates_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_newsletter_templates_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_website_name_pattern';
+  $strongarm->value = '';
+  $export['pathauto_taxonomy_term_website_name_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

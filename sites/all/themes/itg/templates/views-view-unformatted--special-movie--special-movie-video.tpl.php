@@ -13,7 +13,7 @@
     }
   ?>
 <div class="<?php echo $video_class;?>"><?php print $row['field_story_extra_large_image'];?><span><i class="fa fa-play-circle"></i> <?php echo $row['field_video_duration'];?></span></div>
-<div><?php echo l(mb_strimwidth(strip_tags($desc), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>
+<div title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></div>
 
   
 

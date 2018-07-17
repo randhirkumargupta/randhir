@@ -1,4 +1,5 @@
 <?php
+
 define('BILLDESK_ORDER_PAYMENT_PENDING_STATUS' , 0);
 define('BILLDESK_TRANSACTION_PENDING_STATUS' , 0);
 define('BILLDESK_TRANSACTION_HISTORY' , "");
@@ -15,58 +16,59 @@ define('BILLDESK_LABELS' , 'MerchantID|CustomerID|TxnReferenceNo|BankReferenceNo
     'SecurityID|SecurityPassword|TxnDate|AuthStatus|SettlementType|' .
     'ErrorStatus|ErrorDescription|CheckSum');
 
-
+/**
+ * function for payment success.
+ */
 function itg_billdesk_payment_success_page() {
-  
+
   if (empty($_POST)) {
     return t("'There was a problem with your payment'");
   }
-   //watchdog("BillDesk post", '<pre>' . print_r($_POST, TRUE) . '</pre>');
+  //watchdog("BillDesk post", '<pre>' . print_r($_POST, TRUE) . '</pre>');
   if (isset($_POST['msg']) && $_POST['msg'] != '') {
-    
+
     $values = explode('|' , $_POST['msg']);
-    
+
     $data['order_id'] = $values[1];
     $data['transaction_id'] = $values[1];
     $data['transaction_status'] = 1;
-    
-    watchdog("BillDesk update", '<pre>' . print_r($values, TRUE) . '</pre>');    
-    
+
+    $goto_url = "itg-payment-cancel";
+
     //if (end($values) == $_SESSION['billdesk_checksum']) {
-      // Payment Failed transactions for BillDesk.
-      if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
-        if ($values[14] == '0399') {
-          $data['order_status'] = 0;
-          $cancelled = 'Invalid Authentication at Bank';
-        }
-        if ($values[14] == 'NA') {
-          $data['order_status'] = 0;
-          $cancelled = 'Invalid Input in the Request Message ';
-        }
-        if ($values[14] == '0002') {
-          $data['order_status'] = 0;
-          $cancelled = 'BillDesk is waiting for Response from Bank';
-        }
-        if ($values[14] == '0001') {
-          $data['order_status'] = 0;
-          $cancelled = 'Error at BillDesk ';
-        }
-        drupal_set_message(t('Transaction denied due to @error' , array('@error' => $cancelled)) , 'error');
-        drupal_goto('<front>');
+    // Payment Failed transactions for BillDesk.
+    if (($values['24'] == 'Canceled By User') || ($values[14] == '0399') || ($values[14] == 'NA') || ($values[14] == '0002') || ($values[14] == '0001')) {
+      if ($values[14] == '0399') {
+        $data['order_status'] = 0;
+        $cancelled = 'Invalid Authentication at Bank';
       }
-      // Payment Success transactions for BillDesk.
-      elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
-        $data['order_status'] = 1;
-        
-        // Update order after response.
-        update_event_registration_after_success($values[1]);
-        
+      if ($values[14] == 'NA') {
+        $data['order_status'] = 0;
+        $cancelled = 'Invalid Input in the Request Message ';
       }
-      $data['transaction_history'] = serialize($values);
+      if ($values[14] == '0002') {
+        $data['order_status'] = 0;
+        $cancelled = 'BillDesk is waiting for Response from Bank';
+      }
+      if ($values[14] == '0001') {
+        $data['order_status'] = 0;
+        $cancelled = 'Error at BillDesk ';
+      }
+      //drupal_set_message(t('Transaction denied due to @error' , array('@error' => $cancelled)) , 'error');
+    }
+    // Payment Success transactions for BillDesk.
+    elseif (($values['24'] == 'Completed successfully.') || ($values['24'] == 'PGS10001-Success') || ($values[14] == '0300')) {
+      $data['order_status'] = 1;
+      $goto_url = "itg-payment-success";
+
+      // Update order after response.
+      update_event_registration_after_success($values[1]);
+    }
+    $data['transaction_history'] = serialize($values);
     //}
-    
+
     itg_payment_response_info_update($data);
-    return drupal_set_message("Your payment is complete");
+    drupal_goto($goto_url);
   }
 }
 
@@ -76,7 +78,7 @@ function itg_billdesk_payment_success_page() {
 function itg_payment_billdesk_order_form($form , &$form_state , $args) {
   global $base_url;
   global $user;
-  $amount = number_format($args['redeemed_payment'] , 2 , '.' , '');//final payment value
+  $amount = number_format($args['redeemed_payment'] , 2 , '.' , ''); //final payment value
   $event_id = $args['event_id'];
   $reg_id = $args['reg_id'];
   // Build the data array that will be translated into hidden form values.
@@ -85,7 +87,7 @@ function itg_payment_billdesk_order_form($form , &$form_state , $args) {
   $security_id = ITG_BILLDESK_SECURITY_KEY;
   $bdposturl = ITG_BILLDESK_POST_URL;
   $order_id = "ODR-" . time() . rand(0 , 1000);
-  $value = $merchant_id . '|' . $order_id . '|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|' . $reg_id . '|' . $event_id . '|NA|NA|NA|' . $base_url. '/'. ITG_BILLDESK_SUCCESS_URL;
+  $value = $merchant_id . '|' . $order_id . '|NA|' . $amount . '|NA|NA|NA|INR|NA|R|indiatoday|NA|NA|F|NA|NA|' . $reg_id . '|' . $event_id . '|NA|NA|NA|' . $base_url . '/' . ITG_BILLDESK_SUCCESS_URL;
   // Generate Checksum.
   $common_string = $security_id;
 

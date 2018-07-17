@@ -1,38 +1,40 @@
 <?php
 
-
 /**
  * ItgCityMigration extends XMLMigration 
  */
 class ItgCountryMigration extends XMLMigration {
+
+  public $country_consvalue;
+
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of terms (city)');
-
+    $this->country_consvalue = $this->read_folder_xml_country();
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
-      'country' => t('country'),     
+      'country' => t('country'),
     );
 
-    
+
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
-    
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
-    
-    $items_url = $xml_folder . 'country_master.xml';
-    
+
+    //$xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->country_consvalue . '/';
+    $items_url = $xml_folder . 'country-master.xml';
+
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
     $item_xpath = '/data/row';
-    
+
     // This is the xpath relative to the individual items - thus the full xpath
     // of an ID will be /categories/category/id.
     $item_ID_xpath = 'id';
 
     $items_class = new MigrateItemsXML($items_url, $item_xpath, $item_ID_xpath);
     $this->source = new MigrateSourceMultiItems($items_class, $fields);
-    
+
     $destination_options = array(
       'allow_duplicate_terms' => TRUE,
     );
@@ -40,17 +42,15 @@ class ItgCountryMigration extends XMLMigration {
 
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
-    $this->map = new MigrateSQLMap($this->machineName,
-      array(
-        'id' => array(
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
-        )
-      ),
-      MigrateDestinationTerm::getKeySchema()
+    $this->map = new MigrateSQLMap($this->machineName, array(
+      'id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      )
+        ), MigrateDestinationTerm::getKeySchema()
     );
-    
+
     // TIP: Note that for XML sources, in addition to the source field passed to
     // addFieldMapping (the name under which it will be saved in the data row
     // passed through the migration process) we specify the Xpath used to
@@ -59,8 +59,35 @@ class ItgCountryMigration extends XMLMigration {
     // item xpath since each item xml chunk is processed individually.
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name).
-    
-    $this->addFieldMapping('name', 'name')->xpath('country');
 
+    $this->addFieldMapping('name', 'name')->xpath('country');
   }
+
+  public function read_folder_xml_country() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
+
+    return $result[0];
+  }
+
+   public function postImport() {
+    parent::postImport();
+    // mail send if Country failed.
+    $content = failed_record_xml_id('migrate_map_itgcountry');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Country',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  }
+
 }

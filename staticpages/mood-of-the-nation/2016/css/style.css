@@ -1,0 +1,184 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{margin:0; padding:0; border:0;}
+body{ background:#0074D7;}
+body.bodybg{background:#bb241e !important;}
+
+.container{}
+.bg{width: 100%;height: 193px;background-image: url('http://media2.intoday.in/indiatoday/resources/raman-raghav/headerbg.gif');background-size: cover;}
+.bg01{width: 100%;height: 193px;background-image: url('http://media2.intoday.in/indiatoday/resources/bar-bar-dekho/headerbg.gif');background-size: cover;}
+.padding-zero{padding:0;}
+.top-left-section{ float:left;}
+.top-right-section{ float:right}
+.top-add{margin-top:40px; width:729px; height:92px; overflow:hidden;}
+.social-icon{ float:right; margin-top:20px;}
+.social-icon ul{ list-style:none;}
+.social-icon ul li{  float:left; margin-right:10px;}
+.navigation-bg{ background:#000000; height:35px; line-height:35px; width:100%}
+#swiper-section{ display:none;}
+.swiper-container{width:100%;}
+.swiper-slide{text-align:center;font-size:18px;/*background:#fff;*/display:-webkit-box;display:-ms-flexbox;display:-webkit-flex;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;-webkit-align-items:center;align-items:center;}
+#top_menu .swiper-slide a{ color:#f8faf7;  text-decoration: none; text-transform:uppercase; font-family: 'Roboto', sans-serif; font-weight:300; font-size:16px; }
+#top_menu .swiper-slide{ width:auto;}
+#top_menu .activesub{ padding-bottom:6px; border-bottom:3px solid #c00;}
+#touchScrollernav{ width:auto; display:block; padding:0 4px;}
+.nav-ui {clear: both;margin: 0 auto;}
+.nav-ui li {list-style: none;float: left;margin-right: 44px;line-height: 34px;}
+.nav-ui li:last-child{margin-right:0;}
+.nav-ui li a{color:#f8faf7; font-size:16px; text-decoration: none; text-transform:uppercase; font-family: 'Roboto', sans-serif; font-weight:400;}
+#wrap{position:fixed;z-index:-1;top:0;left:0;background-color:#0074D7}
+.wrapbg{position:fixed;z-index:-1;top:0;left:0;background-color:#bb241e !important}
+#wrap img.bgfade{position:absolute;top:0;display:none;width:100%;height:100%;z-index:-1;}
+.box-container{margin-top:30px;}
+.box{ position:relative; width:273px; height:327px; float:left; margin-right:10px;}
+.box img{ position:relative;}
+.box h3 {font-family: 'Roboto', sans-serif;font-size: 16px;color: #000000;background: #f0d209;position: absolute;z-index: 9;padding: 3px 5px;margin: 4px;text-transform: uppercase;}
+.box h4 {background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/images/nirja/caption.png") repeat scroll 0 0;bottom:0;left: 0;padding: 5px;position: absolute;}
+.box h4 span{font-family: 'Roboto', sans-serif;font-size: 16px;color: #FFFFFF; line-height:20px; font-weight: 400;}
+.box h4 span a{font-family: 'Roboto', sans-serif;font-size: 16px;color: #FFFFFF;line-height:20px; font-weight: 400; text-decoration:none;}
+.b-section{ margin-top:30px; float:left;}
+.left-section{ float:left;}
+.video-container{ float:left; position:relative; margin-right:5px; background:#000;}
+.video-container span.video-icon{ position:absolute; left:5px; bottom:5px;}
+.video-container h3{font-family: 'Roboto', sans-serif;font-size: 16px;color: #000000;background: #f0d209;position: absolute;z-index: 9;padding: 3px 5px;margin: 4px;text-transform: uppercase;}
+.video-thumb{ float:right;}
+.video-thumb ul{ list-style:none;}
+.video-thumb ul li{ margin-bottom:7px;}
+.video-thumb ul li img{ border-bottom:3px solid #000;}
+.mar-30{margin-top:30px; margin-bottom:40px}
+.right-section{}
+#right-add{ background:#0161D1; text-align:center; padding:38px 33px;}
+.r-add{ width:300px; height:250px; overflow:hidden; margin:0 auto;}
+.footer{height:26px; line-height:26px; font-size:11px; background:#000; width:100%; margin-top:50px; clear:both; text-align:center; color:#999;}
+
+.carousel-indicators {right: 10px;top: 8px; width:auto;  left: 100%; margin-left: -30%;}
+.carousel-caption {background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/images/nirja/caption.png") repeat scroll 0 0;bottom: 0;left: 0;padding: 5px;right: 0;width: 100%;}
+.carousel-caption p{margin-bottom:0; text-align:left;font-family: 'Roboto', sans-serif;font-size: 16px;color: #FFFFFF;line-height: 20px;font-weight: 400;}
+.carousel-caption p a{ text-decoration:none;font-family: 'Roboto', sans-serif;font-size: 16px;color: #FFFFFF;}
+.carousel-indicators li{ background:url(http://media2.intoday.in/indiatoday/images/nirja/sllider-pointer.png) no-repeat; border:none; width:15px; height:15px; margin:0; padding:0;}
+.carousel-indicators .active{ background:url(http://media2.intoday.in/indiatoday/images/nirja/slider-pointer-active.png) no-repeat; border:none; width:15px; height:15px;margin:0; padding:0;}
+.tab-content{float:left;}
+
+.nav-pills>li{ float:none;}
+.nav>li>a{ padding:0; border-radius:0; background:none;}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{ background:none;}
+
+img.mapp, map area{outline: none;}
+
+
+
+@media screen and (max-width :1024px){
+.top-left-section img{ width:200px;}
+.nav-ui li{ margin-right:24px;}
+.box {float: left;height: 100%;margin-right: 10px;position: relative;width: 100%;}
+.box img{width:100%; height:100%;}
+.box h4{margin-bottom:0;}
+.tab-content{float:left; width:100%; margin-bottom:6px;}
+#right-add{padding:0;}
+.video-container{ width:100%}
+.video-container img{ width:100%;}
+.video-thumb{ float:left; width:100%;}
+.nav-pills > li {float: left;margin-right: 6px;margin-left:0; width:32%;}
+.nav > li > a > img{ width:100%}
+.video-container iframe{width:100%}
+}
+
+
+
+
+@media screen and (max-width :800px){
+#swiper-section{ display:block; position:absolute; width:96%}
+.box-container{margin-top:10px;}
+.nav-ui { display:none;}
+.container{ width:100%;}
+.bg{ width: 100%;height: 153px;background-image: url('http://media2.intoday.in/indiatoday/resources/raman-raghav/headerbg.gif');background-size: cover;}
+.top-left-section{ float:none; width:200px; margin:0 auto;}
+.top-right-section{ float:none}
+.top-add{ width:728px; margin:10px auto;}
+.social-icon{ position:absolute; top:10px; right:0; top:137px;}
+.b-section {margin-top: 30px;position: relative;top: 30px; float:none;}
+.left-section{ float:none;}
+.video-container{ float:none;}
+.video-container img{ width:100%}
+.video-container iframe{width:100%}
+.video-thumb{ float:none;}
+.video-thumb ul li{ float:left; margin-right:34px; width:30%;}
+.video-thumb ul li:last-child{margin-right:0}
+.video-thumb ul li img{ width:100%} 
+#right-add {margin: 30px auto;padding:40px; width:380px;}
+.left-section{ float:none; width:100%}
+.box{width:100% ; height:auto; margin-bottom:20px;}
+.box h4{margin-bottom:0;}
+.box img{width:100%; height:100%;}
+.tab-content{float:left; width:100%; margin-bottom:6px;}
+.footer{ height:auto;}
+.navigation-bg{margin-top:100px;}
+.social-icon{margin-top:-20px;}
+iframe#it-videoembed{ height:552px;}
+}
+
+
+
+@media screen and (max-width :768px){
+
+}
+
+@media screen and (max-width :640px){
+.top-add{ display:none;}
+.social-icon{ display:none}
+.box-container{ padding:0; margin-top:10px;}	
+.video-container{ float:none;}
+.video-container img{ width:100%}
+#swiper-section{ display:block; position:static; top:0;} 
+.box{width:100%}
+.box img{width:100%}
+.video-thumb ul li{ width:33%; margin-right:0px;}
+.video-thumb ul li img{ width:95%} 
+.box {height: 100%;margin-bottom: 15px;width: 100%;}
+#right-add {clear: both;margin: 30px auto;padding: 20px 0;width: 340px;}
+.left-section{ margin-bottom:30px; float:none;}
+.box h4{ bottom:0; width:100%}
+.video-container{margin-right:0;}
+.video-container span.video-icon img{ width:70%}
+.navigation-bg{margin-top:0px;}
+.bg{ height:153px;}
+.top-left-section {float: none;margin: 0 auto;width: 200px;}
+iframe#it-videoembed{ height:265px;}
+
+}
+
+@media screen and (max-width :480px){
+.video-container img{ width:100%}
+.video-thumb ul li{ width:33%;}
+.video-thumb ul li img{ width:95%} 
+.box {height: 100%;margin-bottom: 15px;width: 100%;}
+#right-add{  padding:20px 0 20px 0; margin:30px auto; clear:both;}
+.left-section{ margin-bottom:30px; float:left;}
+.box h4{ bottom:0;}
+.footer{ line-height:18px; padding:8px;}
+iframe#it-videoembed{ height:235px;}
+}
+
+
+@media screen and (max-width :360px){
+.video-container img{ width:100%}
+.video-thumb ul li{ float:left; width:32%; margin-right:0px;}
+.video-thumb ul li img{ width:95%} 
+}
+
+@media screen and (max-width :320px){
+.video-container img{ width:100%}
+.video-thumb ul{margin:8px 0; padding:0;}
+.video-thumb ul li{ width:32%;}
+.video-thumb ul li img{ width:95%} 
+.video-container span.video-icon img{ width:50%}
+.left-section{ margin-bottom:30px;}
+#right-add{  padding:0px; margin:30px auto; clear:both; width:300px}
+#right-add img{ width:100%}
+.box {height: 100%;margin-bottom: 15px;width: 100%;}
+.box h4{ bottom:0;}
+iframe#it-videoembed{ height:200px;}
+}
+
+

@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file : itg_external_feeds.install
+ */
+/**
+ * Implements hook_schema()
+ * Defining table structure to store External Feed data
+ * @return array
+ */
+function itg_external_feeds_schema() {
+  $schema['itg_external_feed_data'] = array(
+    'description' => 'Table to store third party feed data',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The Primary Id',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'content_id' => array(
+        'description' => 'Id of the third party content',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'content_title' => array(
+        'description' => 'Title of the third party content',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'content_url' => array(
+        'description' => 'URL of the third party content',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'content_thumb_image' => array(
+        'description' => 'Image url of the third party content',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'content_site' => array(
+        'description' => 'Name of Site of content.',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'id' => array('id'),
+      'content_id' => array('content_id'),
+    ),
+    'primary key' => array('id'),
+  );
+  return $schema;
+}
+

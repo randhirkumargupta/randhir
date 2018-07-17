@@ -4,11 +4,11 @@
  * ItgUserMigration extends XMLMigration 
  */
 class ItgUserMigration extends XMLMigration {
-
+  public $user_consvalue;
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (User)');
-
+    $this->user_consvalue = $this->read_folder_xml_user(); // get current folder name
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'first_name' => t('First name'),
@@ -25,9 +25,9 @@ class ItgUserMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
 
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->user_consvalue . '/';
 
-    $items_url = $xml_folder . 'users-master.xml';
+    $items_url = $xml_folder . 'user-master.xml';
 
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -88,5 +88,31 @@ class ItgUserMigration extends XMLMigration {
       $row->xml->lastvisitDate = 0;
     }
   }
+  
+   public function read_folder_xml_user() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
 
+    return $result[0];
+  }
+  
+  public function postImport() {
+    parent::postImport();
+    // mail send if city failed.
+    $content = failed_record_xml_id('migrate_map_itguser');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in User',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  }
 }

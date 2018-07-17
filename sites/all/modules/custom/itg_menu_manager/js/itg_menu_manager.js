@@ -11,13 +11,12 @@ jQuery(".itg_menu_manager_form").ajaxSuccess(function (event, xhr, settings) {
     var url_type = jQuery("input[name=url_type]").val();
     if (menu_level_val == 'third' && section_value == 0) {
         jQuery("input[type=text]").val("");
-        //jQuery("input[name=title]").attr("disabled", "disabled");
+        
         jQuery("input[name=url]").attr("disabled", "disabled");
         jQuery("div#decided-section").css("display", "inline-block !important");
     }
 
-    if (menu_level_val == 'second') {
-        //jQuery("input[name=title]").removeAttr("disabled");
+    if (menu_level_val == 'second') {        
         jQuery("input[name=url]").removeAttr("disabled");
     }
 
@@ -35,12 +34,6 @@ jQuery(document).ready(function () {
         jQuery("#widget-ajex-loader").show();
     });
 
-//    jQuery("input[name=title]").on('keydown', function (event) {
-//        var key_code = event.keyCode;
-//        if (key_code == 8) {
-//            jQuery(this).attr("value", "");
-//        }
-//    });
 });
 
 function isValidKey(e) {

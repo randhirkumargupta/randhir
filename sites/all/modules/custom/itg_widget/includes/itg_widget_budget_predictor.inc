@@ -27,9 +27,7 @@ function itg_budget_predictor_cheaper_dearer_data() {
     $variables = array(
       'path' => $uri ,
       'alt' => $budget_title ,
-      'title' => $budget_title ,
-      'width' => '100%' ,
-      'height' => '100%' ,
+      'title' => $budget_title ,      
       'attributes' => array('class' => 'budget-predictor-img' , 'id' => 'budget-predictor-img') ,
     );
     return $html = l(theme('image' , $variables) , $links , array('query' => array('type' => 'budget-predictor') , 'html' => TRUE , 'attributes' => array('target' => '_blank')));

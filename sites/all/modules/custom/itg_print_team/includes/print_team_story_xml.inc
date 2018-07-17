@@ -40,6 +40,7 @@ function itg_story_xml_submit($form, &$form_state) {
       mkdir($feed_dir, 0777, TRUE);
     }
     $xml = "<root>";
+    
     foreach ($views_bulk_operations as $nid) {
       if (!empty($nid) && $nid>0) {
         $xml .= get_custom_feeds_files($nid, $feed_pattern ,'xml');
@@ -47,12 +48,14 @@ function itg_story_xml_submit($form, &$form_state) {
     }
     $xml .= "</root>";
     $filename = 'story_' . $timestamp . '.xml';
-    file_save_data($xml, "$feed_dir/" . $filename);
-    $realpath = $base_url . "/sites/default/files/story/" . $filename;
+   $file= file_save_data($xml, "$feed_dir" . $filename);
+   $file_uri = file_create_url($file->uri);
+    
   }
   
   $options_download['attributes']['download'] = '';
-  $link_val = t('XML have been generated for selected stories. ') . l(t('Click here to download'), $realpath, $options_download);
+   $options_download['attributes']['target'] = '_blank';
+  $link_val = t('XML have been generated for selected stories. ') . l(t('Click here to download'), $file_uri, $options_download);
   drupal_set_message($link_val, 'status');
 }
 
@@ -62,10 +65,12 @@ function itg_story_xml_submit($form, &$form_state) {
  * @return int
  */
 function itg_print_team_check_association_print_to_story($source_id) {
+  
   if ($source_id) {
     $record = db_select('field_data_field_story_source_id', 's')
             ->fields('s', array('entity_id'))
             ->condition('s.field_story_source_id_value', $source_id, '=')
+            ->condition('s.bundle', 'story', '=')
             ->range(0, 1)->execute()->fetchAssoc();
   }
   return isset($record['entity_id']) ? $record['entity_id'] : FALSE;
@@ -88,13 +93,34 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     
     // Update print team node with selected issue and magazine
     $node = node_load($node_info);
-    $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
-    $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
-    if ($supplement != '_none') {
-      $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    
+    if (strlen($issue_nid) >= 1 && is_integer($issue_nid)) {
+      $node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue_nid;
+    } else {
+      $node->field_pti_issue = array();
     }
     
+    if (strlen($magazine) >= 1 && is_integer($magazine)) {
+      $node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+    } else {
+      $node->field_pti_magazine = array();
+    }
+    
+    if (strlen($supplement) >= 1 && is_integer($supplement)) {
+      if ($supplement != '_none') {
+        $node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+      } else {
+        $node->field_pti_supplement = array();
+      }
+    } else {
+      $node->field_pti_supplement = array();
+    }
+    
+    try{
     field_attach_update('node', $node);
+    } catch(Exception $e) {
+      watchdog('print_error', $e->getMessage());
+    }
     
     // Update story node with selected issue and magazine
     $story_node = new stdClass();
@@ -105,7 +131,11 @@ function itg_print_team_association_update($node_info, $issue_nid, $magazine, $a
     if ($supplement != '_none') {
       $story_node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
     }    
+    try{
     field_attach_update('node', $story_node);
+    } catch(Exception $e) {
+      watchdog('print_error', $e->getMessage());
+    }
   }
   else {
     

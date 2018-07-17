@@ -32,34 +32,26 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
   if ($node->type == 'survey') {
     
     // Add JS for front
-    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js');
+    drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_front.js', array('scope' => 'footer'));
     
     // Survey End date
     $survey_expiry_date = strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'] . ' + 23 hours');
     
     // If survey is not published
-    if(!$node->status) {
+    
+    if(($node->status == 0) && ($base_url == FRONT_URL)) {      
       $form['survey_status'] = array(
         '#type' => 'markup',
         '#markup' => '<div style="margin-top:10px"><h2>This survey is not published!</h2></div>',
      );
       return $form;
-    }
-    
-   // If survey has been expired. 
-//   if(time() > $survey_expiry_date) {
-//      $form['survey_expiry_status'] = array(
-//        '#type' => 'markup',
-//        '#markup' => '<div style="margin-top:10px"><h2>This survey has been expired!</h2></div>',
-//     );
-//      return $form;
-//    }
+    } 
     
     $survey_question_format = $node->field_survey_questions_format[LANGUAGE_NONE][0]['value'];
     
     // Add JS for one question at a time
     if($survey_question_format == 'One question at a time') {
-      drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_questions.js');
+      drupal_add_js(drupal_get_path('module', 'itg_survey') . '/js/itg_survey_questions.js', array('scope' => 'footer'));
     }
     
     $num = 0;
@@ -95,13 +87,13 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     }
  
     $total_num_of_ques = count($ques_arr);
- 
+    $rating_num = 0;
     foreach ($ques_arr as $question_arr) {
       //Question Info
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
       $question = $question_detail[$question_arr['value']]->field_survey_question[LANGUAGE_NONE][0]['value'];
       $skip_question[$num] = $question_detail[$question_arr['value']]->field_survey_skip[LANGUAGE_NONE][0]['value'];
-      
+      $question_media = '';
       //If any question is required, show required sign(*) for that question
       if ($skip_question[$num] == 'yes') {
         $required = '';
@@ -112,29 +104,24 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
       //Answer Info
       $answer_type = $question_detail[$question_arr['value']]->field_survey_answer_type[LANGUAGE_NONE][0]['value'];
       $answer_op1 = $question_detail[$question_arr['value']]->field_survey_answer_option_1[LANGUAGE_NONE][0]['value'];
-      
-      
-      //Media info
-//      $media = $question_detail[$question_arr['value']]->field_survey_add_media[LANGUAGE_NONE][0]['uri'];
-//      $media_type = strtolower(substr(strrchr($media, '.'), 1));
-//      $media_path = $base_url.str_replace('public://', '/sites/default/files/', $media);
+
        if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
 
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
 
-         if (function_exists('itg_videogallery_get_videoid_new')) {
-          $video_ids = itg_videogallery_get_videoid_new($videid);
-           $question_media = '<iframe width="740" height="447" frameborder="0" scrolling="no"
+         if (function_exists('itg_videogallery_get_videoid_new_private')) {
+          $video_ids = itg_videogallery_get_videoid_new_private($videid);
+           $question_media = '<div class="survey-video"><iframe width="740" height="447" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
-                                                allowfullscreen></iframe>';
+                                                allowfullscreen></iframe></div>';
         }
       }
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
          $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
-                   $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
+         $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
 
-        $question_media = '<img src="' . $extra_large_image_url . '" width="750" alt="" />';
-        }
+        $question_media = '<div class="survey-image"><img src="' . $extra_large_image_url . '" width="750" alt="" title="" /></div>';
+      }
 
       //Submit button text
       if(($total_num_of_ques-1) === $num){
@@ -215,11 +202,18 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
 
       if ($answer_type == 'textfield') { // Answer options for textfield
         $txt_num = 0;
+        $form['media' . $num] = array(
+           '#type' => 'markup',
+           '#prefix' => '<div class="survey-media-wrapper">',
+           '#markup' => $question_media,
+           '#suffix' => '</div>',
+       );
         foreach ($all_ans_options[$num] as $val_txt_option) {
           $form['answer_option' . $num . '_' . $txt_num] = array(
               '#title' => $val_txt_option,
               '#type' => $answer_type,
               '#size' => 30,
+              '#attributes' => array('placeholder' => t('Enter text')),
           );
           
           $form['answer_option_name' . $num . '_' . $txt_num] = array(
@@ -231,7 +225,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
-        $rating_num = 0;
         foreach ($all_ans_options[$num] as $rating_option) {
           $arr = array(1 => '', 2 => '', 3 => '', 4 => '', 5 => '');
           $form['answer_option' . $num . '_' . $rating_num] = array(
@@ -250,20 +243,21 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
         
       } else {  //Answer option for radios and checkboxes
+    
+      $form['media' . $num] = array(
+           '#type' => 'markup',
+           '#prefix' => '<div class="survey-media-wrapper">',
+           '#markup' => $question_media,
+           '#suffix' => '</div>',
+       );
+
         $form['answer_option' . $num] = array(
             '#title' => t(''),
             '#type' => $answer_type,
             '#options' => $all_ans_options[$num],
         );
-      }
-      
-    
-         $form['media' . $num] = array(
-              '#type' => 'markup',
-              '#prefix' => '<div>',
-              '#markup' => $question_media,
-              '#suffix' => '</div>',
-          );
+      }      
+
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       

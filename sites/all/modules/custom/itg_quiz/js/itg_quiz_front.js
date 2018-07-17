@@ -4,8 +4,8 @@
 
 (function($) {
   Drupal.behaviors.itg_quiz_front = {
-    attach: function() {
-
+    attach: function(context, settings) {
+      var immediate_result_val = settings.itg_quiz.settings.immediate_result;
       // Hide title form take quiz page
       var quizStr = $(location).attr('href');
       if (quizStr.indexOf("itg-quiz") > 0) {
@@ -23,7 +23,9 @@
         });
       }
       
- //  js for quiz(lallan top)     
+     // js for quiz(lallan top)
+     
+     if (immediate_result_val == 'qwr') {
         $('.question-container .form-radio').on('click', function() {
         ansid = $(this).attr('id'); 
         
@@ -33,12 +35,14 @@
         var correct_ans = $("input[name='correct_answer"+ans_no[1]+"']").val();
         
         anslastid = res[2].substr(res[2].length - 1);
-        $('input[name='+$(this).attr('name')+']').attr('readonly', 'true');
+        $('input[name='+$(this).attr('name')+']').attr('readonly', 'true').next().css('pointer-events', 'none');
         $(this).parent().parent().parent().parent().find('.answer-container-actual').html('');
 
          var qnid = $("input[name='nid']").val();
             if ($(this).is(':checked')) {
-                var ans_val= $(this).val();
+                var ans_val = $(this).val();
+                var ans_val_id = $(this).attr('name');
+                
                 jQuery.ajax({      
                     method:"post",
                     data: {nid:qnid, ans_val:ans_val, correct_ans:correct_ans},
@@ -57,12 +61,13 @@
                });        
             }    
       
-  });
+    });
+  }
  
- //multi answer
+   //multi answer
    $('body').on('click', '#show_answer', function() {
       buttonClass = $(this).attr('class');
-      $(this).closest('.answer-container').find('.form-checkbox').attr('readonly', true);
+      $(this).closest('.answer-container').find('.form-checkbox').attr('readonly', true).next().css('pointer-events', 'none');
       var qnid = $("input[name='nid']").val();
       var ans_class = $(this).attr('class');      
       var correct_ans = $("input[name='correct_"+ans_class+"']").val();
@@ -78,7 +83,8 @@
                     data: {nid:qnid, correct_ans:correct_ans, ans_val:JSON.stringify(selected)},
                     url: Drupal.settings.basePath+"quiz-response-checkbox",
                     success: function(data) {
-                        ansvalue = data.split('-'); 
+                        ansvalue = data.split('-');
+                       // alert(ansvalue);
                         var cls = "";
                         if(ansvalue[1] == "correct"){
                           cls = "correct-ans";
@@ -92,7 +98,7 @@
       return false;
     });
     
-//    chnage position of show answer button
+   // chnage position of show answer button
       var prthis;
       jQuery('.question-container').each(function () {
         prthis = jQuery(this).find('.answer-container');        

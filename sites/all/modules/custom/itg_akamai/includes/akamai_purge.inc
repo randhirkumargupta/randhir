@@ -1,8 +1,5 @@
 <?php
 
-//ini_set('display_errors', 1);
-//error_reporting(E_ALL);
-
 if (!defined('DS')) {
   define('DS', DIRECTORY_SEPARATOR);
 }
@@ -32,17 +29,22 @@ class ItgAkamaiUtility {
     if (isset($data) && !empty($data)) {
 
       try {
-        $akamai_activity = db_insert('itg_akamai_log')
-            ->fields($data)
-            ->execute();
+        foreach ($data as $fields) {
+          if(is_array($fields)) {
+            $akamai_activity = db_insert('itg_akamai_log')
+                ->fields($fields)
+                ->execute();
+          }
+        }
       }
       catch (Exception $e) {
-        die($e->getMessage());
+        watchdog('ITG Akamai Error', 'Error:' . $e->getMessage());
       }
     }
   }
 
-  static function itgAkamaiSetDataForLog($request, $response, $uid, $status, $purge_id) {
+  static function itgAkamaiSetDataForLog($request, $response, $uid, $status,
+      $purge_id) {
     $data = array();
     $data['timestamp'] = time();
     if ($status == 201) {
@@ -55,6 +57,24 @@ class ItgAkamaiUtility {
     $data['uid'] = $uid;
     $data['akamai_request'] = $request;
     $data['akamai_response'] = $response;
+    return $data;
+  }
+
+  static function itgAkamaiGetDataForLog($urls, $request, $response, $uid,
+      $status, $purge_id) {
+    $data = array();
+    foreach ($urls as $url) {
+      $data[] = array(
+        'timestamp' => REQUEST_TIME,
+        'status' => $status,
+        'purge_id' => $purge_id,
+        'uid' => $uid,
+        'url' => $url,
+        'akamai_request' => $request,
+        'akamai_response' => $response,
+      );
+    }
+
     return $data;
   }
 

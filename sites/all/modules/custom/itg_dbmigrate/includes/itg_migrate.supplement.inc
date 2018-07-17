@@ -19,14 +19,17 @@ class ItgSupplementMigration extends XMLMigration {
       'pagetitle' => t('Page title'),
       'description' => t('Description'),
       'keywords' => t('Keywords'),
+      'supplement_largecoverimage' => t('Supplement large cover image'),
+      'supplement_smallcoverimage' => t('Supplement small cover image'),
     );
     
     // This can also be an URL instead of a local file path.
-    $file_path = drupal_realpath('public://');
+    $file_path = 'sites/default/files';
     
     $xml_folder = $file_path . '/' . 'migrate/xml_file/';
     
-    $items_url = $xml_folder . 'supplement.xml';
+    $items_url = $xml_folder . 'indiatoday_suppliment_2007.xml';
+    //$items_url = $xml_folder . 'indiatoday_suppliment_15052017.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -44,11 +47,12 @@ class ItgSupplementMigration extends XMLMigration {
     // The source ID here is the one retrieved from each data item in the XML
     // file, and used to identify specific items
     $this->map = new MigrateSQLMap($this->machineName,
+        
       array(
         'id' => array(
-          'type' => 'int',
-          'unsigned' => TRUE,
-          'not null' => TRUE,
+          'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
         )
       ),
       MigrateDestinationNode::getKeySchema()
@@ -65,22 +69,61 @@ class ItgSupplementMigration extends XMLMigration {
     
     $this->addFieldMapping('title', 'title')->xpath('title');
     $this->addFieldMapping('field_supp_select_magazine', 'selectmagazine')->xpath('selectmagazine');
-    $this->addFieldMapping('field_supp_issue', 'issue')->xpath('issue');
     $this->addFieldMapping('field_supp_publish', 'publish')->xpath('publish');
+    $this->addFieldMapping('status', 'publish')->xpath('publish');
     
-    $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
+    $this->addFieldMapping('field_issue_supp_large_image', 'supplement_largecoverimage')->xpath('supplement_largecoverimage');
+    $this->addFieldMapping('field_issue_supp_large_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_issue_supp_large_image:preserve_files')
+         ->defaultValue(TRUE);
+    $this->addFieldMapping('field_issue_supp_large_image:alt', 'supplement_largecoverimage_alt')->xpath('supplement_largecoverimage_alt');
+    $this->addFieldMapping('field_issue_supp_large_image:title', 'supplement_largecoverimage_title')->xpath('supplement_largecoverimage_title');
+    
+    
+    $this->addFieldMapping('field_issue_supp_small_image', 'supplement_smallcoverimage')->xpath('supplement_smallcoverimage');
+    $this->addFieldMapping('field_issue_supp_small_image:file_replace')
+         ->defaultValue(FILE_EXISTS_REPLACE);
+    $this->addFieldMapping('field_issue_supp_small_image:preserve_files')
+         ->defaultValue(TRUE);
+    $this->addFieldMapping('field_issue_supp_small_image:alt', 'supplement_smallcoverimage_alt')->xpath('supplement_smallcoverimage_alt');
+    $this->addFieldMapping('field_issue_supp_small_image:title', 'supplement_smallcoverimage_title')->xpath('supplement_smallcoverimage_title');
+    
+     // source migrated
+    $this->addFieldMapping('field_story_source_type')
+        ->defaultValue('migrated');
+    
+    $this->addFieldMapping('pathauto')->defaultValue(0);
+    $this->addFieldMapping('path', 'sefurl')->xpath('metatags/sefurl');
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
-    $this->addFieldMapping('metatag_description', 'description')->xpath('metatags/description');
+    $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/description');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
 
   }
   
-  public function prepare($node, stdClass $row) {
-   if (isset($row->xml->magazine) && !empty($row->xml->magazine)) { 
-    $old_magazine = (string) $row->xml->magazine;
-    $new_magazine = get_itg_destination_id('migrate_map_itgmagazine', $old_magazine);
-    $node->field_supp_select_magazine[LANGUAGE_NONE][]['target_id'] = $new_magazine;
+  public function prepareRow($row) {
+     if (isset($row->xml->selectmagazine) && !empty($row->xml->selectmagazine)) {
+      $row->xml->selectmagazine = 573; // magazine indiatoday by mail
    }
-    $node->uid = 1;
+   if(isset($row->xml->issue) && !empty($row->xml->issue)) {
+     $table_name = 'migrate_map_itgissue';
+     $source_cid = (int) $row->xml->issue;
+     $issue_nid = get_itg_destination_id($table_name, $source_cid);
+     $query = db_select('node', 'n');
+     $query->fields('n', array('title'));
+     $query->condition('n.nid', $issue_nid, '=');
+     $result = $query->execute()->fetchField();
+     //$issue_time = strtotime($result);
+     $row->xml->issue = $result;
+   }
+  }
+  
+  public function prepare($node, stdClass $row) {
+    print (string) $row->xml->id.', ';
+    // Issue based
+    if(isset($row->xml->issue) && !empty($row->xml->issue)) {
+        $node->field_supp_issue[LANGUAGE_NONE][0]['value'] = $row->xml->issue;
+    }
+    $node->uid = 970; //siteadmin;
   }
 }

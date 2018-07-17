@@ -1,0 +1,198 @@
+<?php
+
+/**
+ * @file
+ * Module file for APP API Schemes Services.
+ * Contains the resource declarations for the service APIs
+ * and other commons functions/hooks. if necessary
+ */
+
+/**
+ * Implements hook_init().
+ */
+function itg_app_api_sso_init() {
+  module_load_include('inc', 'itg_app_api_sso', 'inc/helper');
+}
+
+/**
+ * Implements hook_services_resources().
+ * Create service resource for APIs to return the necessary json data.
+ */
+function itg_app_api_sso_services_resources() {
+
+  $resources = array();
+
+  //Include the necessary inc files.
+  module_load_include('inc', 'itg_app_api_sso', 'itg_app_api_sso.services');
+
+  //Service Apis for contents.
+  $resources += itg_app_api_sso_resource();
+
+  return $resources;
+}
+
+/**
+ * Implements hook_url_inbound_alter().
+ */
+function itg_app_api_sso_url_inbound_alter(&$result, $path, $path_language) {
+  $u_agent = $_SERVER['HTTP_USER_AGENT'];
+  $flag = 0;
+
+  // user agent for browser
+  if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Trident/i', $u_agent)) {
+    // this condition is for IE11
+    $flag = 1;
+  }
+  elseif (preg_match('/Firefox/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Chrome/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Safari/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Opera/i', $u_agent)) {
+    $flag = 1;
+  }
+  elseif (preg_match('/Netscape/i', $u_agent)) {
+    $flag = 1;
+  }
+
+  // user agent for mobile device
+
+  $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+  $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
+  $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
+  $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+  $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+
+  if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
+    $flag = 1;
+  }
+
+  $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "fblogin", "twtlogin", "reset_password");
+  if (arg(0) == "appapi" && count(arg()) == 2) {
+    if (!in_array(arg(1), $post_res)) {
+      $result = $path . "/it";
+    }
+  }
+}
+
+/*
+ * Function to get Story type on behalf of Node nid i.e. photostory or normal story
+ * @param int $nid
+ * @return String 
+ */
+
+function getStoryType_sso($nid) {
+  $query = db_select('node', 'n');
+  $query->Join('field_data_field_story_type', 'st', 'st.entity_id = n.nid');
+  $query->fields('st', array('field_story_type_value'));
+  $query->condition('st.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $type = 'story';
+  if ($result[0]['field_story_type_value'] == 'photo_story') {
+    $type = 'photostory';
+  }
+  return $type;
+}
+
+/**
+ * function for upload user profile image from binary file  .
+ *
+ * @param binay img file
+ *
+ * @return int FID
+ */
+function uplodaProfileImg_Rapid_sso($profile_image) {
+  $profile_img = base64_decode($profile_image);
+  $f = finfo_open();
+  $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
+  $mime_type_ar = explode("/", $mime_type);
+  $mime_type_ext = $mime_type_ar[1];
+  $now = time();
+
+
+
+  $profile_img_tmp = '/tmp/profileimage_' . $now . "." . $mime_type_ext;
+
+  $image_name = 'profileimage_' . $now . "." . $mime_type_ext;
+  // crate profile img tmp file
+  file_put_contents($profile_img_tmp, $profile_img);
+  $imagedata = file_get_contents($profile_img_tmp);
+  //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+  $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
+
+
+  // Update profile pic
+  if (!empty($file_data->fid)) {
+    return $file_data->fid;
+  }
+  else {
+    return 0;
+  }
+}
+
+/**
+ * function for update user profile at signup  .
+ *
+ * @param array $data
+ *
+ * @return object user
+ */
+function updateUsedrProfileAtSignup_rapid_sso($data, $action = 1) {
+  global $user;
+
+  $location = trim($data['location']);
+  $profile_image = trim($data['profile_image']);
+  $gender = trim($data['gender']);
+  $date_of_birth = trim($data['date_of_birth']);
+  $device_id = trim($data['device_id']);
+  $device_type = trim($data['device_type']);
+  $user_id = trim($data['user_id']);
+
+  $user = $user_detail = user_load_by_name($user_id);
+  // call function for upload profile iamge
+
+  $uid = $user->uid;
+
+  // Update dob field.
+  if ($profile_image) {
+    $profile_img_fid = uplodaProfileImg_Rapid_sso($profile_image);
+  }
+
+  // Update dob field.
+  if ($date_of_birth) {
+    $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($date_of_birth);
+  }
+
+  // Update gender field.
+  if ($gender) {
+    $user_detail->field_user_gender['und'][0]['value'] = check_plain($gender);
+  }
+
+  // Update profile pic
+  if ($profile_img_fid) {
+    $user_detail->field_user_picture['und'][0]['fid'] = $profile_img_fid;
+  }
+
+  // Update address field.
+  if ($location) {
+    $user_detail->field_short_description['und'][0]['value'] = check_plain($location);
+  }
+
+  $flag_save = user_save($user_detail);
+
+  //return $flag_save;
+}
+
+/**
+ * Implements hook_boot().
+ */
+function itg_app_api_sso_boot() {
+  // required for hook_url_inbound_alter().
+}

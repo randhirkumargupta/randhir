@@ -94,6 +94,16 @@ function amptheme_js_alter(&$javascript) {
 * Implements hook_preprocess_html() for HTML document templates.
 */
 function amptheme_preprocess_html(&$variables) {
+   // Fact schema code adding in header for story module
+  if(function_exists('get_fact_schema')){
+      $fact_schema =  get_fact_schema();
+      if (!empty($fact_schema)) {
+        $fact_schema_code = array(
+         '#type' => 'markup',
+         '#markup' => $fact_schema,
+        );
+      drupal_add_html_head($fact_schema_code, 'fact_schema');
+  }}
 
   $viewport = array(
     '#tag' => 'meta',
@@ -109,6 +119,19 @@ function amptheme_preprocess_html(&$variables) {
     '#theme' => 'amp_skip_link',
     '#skiptext' => t('Skip to main content')
   );
+  $arg = arg();
+  if (!drupal_is_front_page() && $arg[0] == 'node' && is_numeric($arg[1])) {
+    $node_obj = menu_get_object();
+    if (!empty($node_obj) && $node_obj->type == 'story') {
+      $_section_name = '';  
+      if (!empty($node_obj->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node_obj->field_story_category['und'])) {
+        $primary_cat = $node_obj->field_primary_category[LANGUAGE_NONE][0]['value'];
+        $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+		$_section_name = $section_tids[0]->name;
+      } 
+      $variables['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
+    }		
+  }
 }
 
 /**
@@ -159,6 +182,12 @@ function amptheme_preprocess_node(&$variables) {
   }
   if (isset($variables['rdf_template_variable_attributes_array'])) {
     unset($variables['rdf_template_variable_attributes_array']);
+  }
+  // New Live Blog AMP Tpl File
+  if ($variables['type'] == 'breaking_news') {
+    if (($variables['field_multi_user_allows'][0]['value'] && $variables['field_multi_user_allows'][0]['value'] == 1) || ($variables['field_multi_user_allows']['und'][0]['value'] && $variables['field_multi_user_allows']['und'][0]['value'] == 1)) {
+      $variables['theme_hook_suggestions'][] = 'node__amp_live_blog_custom';
+    } 
   }
 }
 

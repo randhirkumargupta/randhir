@@ -97,7 +97,7 @@ class ItgSubSubCategoryMigration extends XMLMigration {
       $row->xml->sub_category = $orignal_category;
        //sef url
       $sef_path = itg_db_migrate_term_sef('taxonomy/term/'.$orignal_category);
-      $row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
+      //$row->xml->sef_url = $sef_path.'/'.$row->xml->sef_url;
     }
     else {
       $row->xml->sub_category = '';

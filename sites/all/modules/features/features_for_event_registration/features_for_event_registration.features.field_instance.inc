@@ -57,12 +57,10 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 22,
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 26,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -75,14 +73,13 @@ function features_for_event_registration_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
+      'active' => 0,
+      'module' => 'taxonomy',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'taxonomy_autocomplete',
       'weight' => 8,
     ),
   );
@@ -409,12 +406,10 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 23,
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 27,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -427,49 +422,14 @@ function features_for_event_registration_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
+      'active' => 0,
+      'module' => 'taxonomy',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'taxonomy_autocomplete',
       'weight' => 9,
-    ),
-  );
-
-  // Exported field_instance:
-  // 'field_collection_item-field_erf_registration_fee-field_erf_ticket_type'.
-  $field_instances['field_collection_item-field_erf_registration_fee-field_erf_ticket_type'] = array(
-    'bundle' => 'field_erf_registration_fee',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'list',
-        'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 25,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_erf_ticket_type',
-    'label' => 'Ticket Type',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 0,
     ),
   );
 
@@ -483,12 +443,10 @@ function features_for_event_registration_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 24,
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 28,
       ),
     ),
     'entity_type' => 'field_collection_item',
@@ -501,14 +459,13 @@ function features_for_event_registration_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
+      'active' => 0,
+      'module' => 'taxonomy',
       'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
+        'autocomplete_path' => 'taxonomy/autocomplete',
         'size' => 60,
       ),
-      'type' => 'entityreference_autocomplete',
+      'type' => 'taxonomy_autocomplete',
       'weight' => 10,
     ),
   );
@@ -553,7 +510,7 @@ function features_for_event_registration_field_default_field_instances() {
     'bundle' => 'event_registration',
     'default_value' => array(
       0 => array(
-        'value' => 'icici',
+        'value' => 'free',
       ),
     ),
     'deleted' => 0,
@@ -587,7 +544,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -639,6 +596,45 @@ function features_for_event_registration_field_default_field_instances() {
         'replace_label' => FALSE,
       ),
       'type' => 'field_collection_embed',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_registration-field_erf_ticket_type'.
+  $field_instances['node-event_registration-field_erf_ticket_type'] = array(
+    'bundle' => 'event_registration',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Ticket Type',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 15,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_erf_ticket_type',
+    'label' => 'Ticket Type',
+    'required' => 1,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
       'weight' => 1,
     ),
   );
@@ -685,7 +681,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -727,7 +723,7 @@ function features_for_event_registration_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 10,
+      'weight' => 9,
     ),
   );
 
@@ -775,7 +771,7 @@ function features_for_event_registration_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 

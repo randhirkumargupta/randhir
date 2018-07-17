@@ -30,21 +30,26 @@ function event_backend_msnf_step_info() {
       6 => 'field_config_speakers',
       7 => 'field_config_sponsors',
       8 => 'field_config_video',
-      9 => 'field_e_associate_highlights',
-      10 => 'field_e_content_font_color',
-      11 => 'field_e_event_banner',
-      12 => 'field_e_heading_bck_color',
-      13 => 'field_e_highlighted_font_color',
-      14 => 'field_e_menu_bck_color',
-      15 => 'field_e_menu_font_color',
-      16 => 'field_e_program_title_color',
-      17 => 'field_e_tab_color',
-      18 => 'field_event_twitter',
-      19 => 'field_force_registration_open',
-      20 => 'field_story_expert_description',
-      21 => 'metatags',
-      22 => 'path',
-      23 => 'additional_settings',
+      9 => 'field_e_content_font_color',
+      10 => 'field_e_event_banner',
+      11 => 'field_e_heading_bck_color',
+      12 => 'field_e_highlighted_font_color',
+      13 => 'field_e_menu_bck_color',
+      14 => 'field_e_menu_font_color',
+      15 => 'field_e_program_title_color',
+      16 => 'field_e_tab_color',
+      17 => 'field_event_twitter',
+      18 => 'field_force_registration_open',
+      19 => 'field_story_expert_description',
+      20 => 'field_event_tabs',
+      21 => 'field_e_from_chairman_image',
+      22 => 'field_e_from_chairman_title',
+      23 => 'field_e_from_the_chairman',
+      24 => 'field_event_section',
+      25 => 'field_enable_livetv_highlights',
+      26 => 'metatags',
+      27 => 'path',
+      28 => 'additional_settings',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -85,7 +90,8 @@ function event_backend_msnf_step_info() {
       5 => 'field_registration_close_date',
       6 => 'field_story_expiry_date',
       7 => 'field_story_kicker_text',
-      8 => 'title',
+      8 => 'field_registration_date_checkbox',
+      9 => 'title',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -118,7 +124,8 @@ function event_backend_msnf_step_info() {
     'label' => 'Step5-Highlights',
     'weight' => '4',
     'children' => array(
-      0 => 'field_event_highlights',
+      0 => 'field_e_associate_highlights',
+      1 => 'field_event_highlights',
     ),
     'format_type' => 'default',
     'format_settings' => array(
@@ -191,14 +198,14 @@ function event_backend_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Step6-Media',
+    'label' => 'Step6-Coverage',
     'weight' => '6',
     'children' => array(
       0 => 'field_event_media',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Step6-Media',
+      'label' => 'Step6-Coverage',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -224,14 +231,14 @@ function event_backend_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Step3-Program Schedule',
+    'label' => 'Step3-Programme Schedule',
     'weight' => '2',
     'children' => array(
       0 => 'field_program_schedule',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Step3-Program Schedule',
+      'label' => 'Step3-Programme Schedule',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,
@@ -263,6 +270,7 @@ function event_backend_msnf_step_info() {
       0 => 'field_event_type',
       1 => 'field_no_of_tickets',
       2 => 'field_ticket_group_type',
+      3 => 'field_early_bird',
     ),
     'format_type' => 'default',
     'format_settings' => array(

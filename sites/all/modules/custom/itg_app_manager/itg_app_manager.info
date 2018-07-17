@@ -1,0 +1,9 @@
+name = ITG App Manager
+description = "ITG App Management."
+core = 7.x
+package = ITG
+
+
+
+
+

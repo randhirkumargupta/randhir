@@ -1,0 +1,381 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+a {outline:none; color:#002F5E; text-decoration:none; }
+a:hover{text-decoration:underline}
+
+H1, H2, H3, H4, H5, H6{float:none; font-size:inherit; padding:0; margin:0; font-size-adjust:none;}
+
+.topheadtitle {font:normal 40px Haettenschweiler; margin-top:60px; color:#ffffff; margin-left:10px;}
+.topheadtitle a{color:#ffffff; text-decoration:none;font:normal 40px Haettenschweiler;}
+.topheadtitle a:hover{color:#ffffff; text-decoration:none;font:normal 40px Haettenschweiler;}
+.toplogobg {background-image:url("http://indiatoday.intoday.in/specials/2Gscam/images/2gscrammast.gif"); background-repeat:no-repeat; background-position:left top;}
+#asspoll_menu
+{ float:left; width:1003px; background:#f8f9fb; font:bold 15px georgia; color:#545c5e;}
+#asspoll_menu ul 
+{ list-style-type:none; margin:0; padding:0; display:inline;}
+#asspoll_menu ul li
+{ list-style-type:none; margin:0 10px; padding:0; display:inline;}
+#asspoll_menu ul li a
+{ font:bold 13px tahoma; color:#545c5e; text-decoration:none;}
+#asspoll_menu ul li a:hover
+{text-decoration:none;color:#D71A20;}
+
+.bredcrum{font:normal 11px georgia ; color:#969696; text-align:left; padding:0; margin:0}
+.bredcrum a{font:normal 11px georgia ; color:#969696; text-align:left; padding:0; margin:0; text-decoration:none;}
+.bredcrum a:hover{font:normal 11px georgia ; color:#969696; text-align:left; padding:0; margin:0;text-decoration:none;}
+
+.assembly_link{font-size:11px;color:#204FA4;font-family:arial,verdana;font-weight:bold;text-align:center;}
+.assembly_link a{color:#204FA4; text-decoration:none;}
+.assembly_link a:hover {color:#D71920; text-decoration:none;}
+
+.bt-t-link{font-size:11px;color:#204FA4;font-family:arial,verdana;font-weight:bold;text-align:center;}
+.bt-t-link a{color:#204FA4; text-decoration:none;}
+.bt-t-link a:hover {color:#D71920; text-decoration:none;}
+
+.storytext { font:normal 20px georgia; color:#000000;}
+
+.adtext{ font:normal 10px arial; color:#999999; text-align:center; text-transform:uppercase;}
+.headerLink { font:bold 12px georgia; color:#002F5E;}
+.headerLink a{ font:bold 12px georgia; color:#002F5E; text-decoration:none;}
+.headerLink a:hover{ font:bold 12px georgia; color:#002F5E; text-decoration: underline;}
+
+
+.statindexheaderLink { font:bold 12px arial; color:#002F5E;}
+.statindexheaderLink a{ font:bold 12px arial; color:#002F5E; text-decoration:none;}
+.statindexheaderLink a:hover{ font:bold 12px arial; color:#002F5E; text-decoration: underline;}
+
+.indexheaderLink {font:bold 11px arial; color:#002F5E;}
+.indexheaderLink a{ font:bold 11px arial; color:#002F5E; text-decoration:none;}
+.indexheaderLink a:hover{ font:bold 11px arial; color:#002F5E; text-decoration: underline;}
+
+.rightGreytxt{ font:normal 9px arial; color:#999999;}
+
+.HomeblackHeadelinetext{font:bold 16px georgia; color:#000000; line-height:18px;}
+.HomeblackHeadelinetext a{font:bold 16px georgia; color:#002F5E; line-height:18px; text-decoration:none;}
+.HomeblackHeadelinetext a:hover{font:bold 16px georgia; color:#002F5E; line-height:18px; text-decoration: none;}
+
+.boldtext{font:bold 14px georgia; text-align:left; color:#000000 ; margin:0 15px 0 0;}
+
+.rightbluetxt{ font:bold 11px arial; color:#000000; padding:0 5px 0 0;}
+.rightbluetxt a{ font:bold 11px arial; color:#022F5E; text-decoration:none;}
+.rightbluetxt a:hover{ font:bold 11px arial; color:#022F5E; text-decoration: underline;}
+
+
+
+.HomeblueHeader{ font:normal 20px georgia; color:#022F59;line-height:21px; }
+.HomeblueHeader a{ font:normal 20px georgia; color:#022F59;line-height:25px; text-decoration:none;}
+.HomeblueHeader a:hover{ font:normal 20px georgia; color:#022F59;line-height:25px; text-decoration:underline; }
+
+
+.stateHomeblueHeader{ font:bold 24px georgia; color:#545c5e;line-height:26px;  }
+.stateHomeblueHeader a{ font:bold 24px georgia; color:#545c5e;line-height:26px; text-decoration:none;}
+.stateHomeblueHeader a:hover{ font:bold 24px georgia; color:#545c5e;line-height:26px; text-decoration:underline; }
+
+
+.stateHomebluekickerheadline{ font:bold 15px Tahoma; color:#D71A20;line-height:20px;  }
+.stateHomebluekickerheadline a{  font:bold 15px Tahoma; color:#D71A20;line-height:20px; text-decoration:none;}
+.stateHomebluekickerheadline a:hover{
+	 font:bold 15px Tahoma;
+	color:#D71A20;
+	line-height:20px;
+	text-decoration:underline;
+}
+
+.obamaheadline{ font:bold 18px georgia; color:#545c5e;line-height:22px; margin-bottom:2px;  }
+.obamaheadline a{  font:bold 18px georgia; color:#545c5e;line-height:22px; text-decoration:none;}
+.obamaheadline a:hover{
+	font:bold 18px georgia;
+	color:#545c5e;
+	line-height:22px;
+	text-decoration:underline;
+}
+
+
+
+.Homeblacknormaltxt{ font:normal 12px georgia; color:#8f8d8d;line-height:18px; }
+.Homeblacknormaltxt a{ font:normal 12px georgia; color:#8f8d8d; line-height:18px; text-decoration:none;}
+.Homeblacknormaltxt a:hover{ font:normal 12px georgia; color:#8f8d8d; text-decoration: underline;line-height:18px;}
+
+.Homeblackkikerphoto{ font:12px georgia; color:#000000;line-height:18px; text-align:left;}
+.Homeblackkikerphoto b{ font:14px georgia; color:#000000;}
+.Homeblackkikerphoto a{ font:bold 14px georgia; color:#022F5E;  text-decoration:none;}
+.Homeblackkikerphoto a:hover{ font:bold 14px georgia; color:#022F5E; text-decoration: underline;}
+
+.obamaphoto{ font:bold 12px tahoma; color:#000000;line-height:18px; text-align:left; padding-left:11px;}
+.obamaphoto a{color:#000000; text-decoration:none;}
+.obamaphoto a:hover{ color:#000000; text-decoration:underline;}
+
+.Homenormaltext{font:normal 12px georgia; color:#022F59; line-height:18px;}
+.Homenormaltext a{font:normal 12px georgia; color:#022F59; line-height:18px; text-decoration:none;}
+.Homenormaltext a:hover{font:normal 12px georgia; color:#022F59; line-height:18px; text-decoration: underline;}
+
+.Homenormal14text{font:bold 12px georgia; color:#545c5e; line-height:18px;}
+.Homenormal14text a{
+	font:bold 12px georgia;
+	color:#545c5e;
+	line-height:18px;
+	text-decoration:none;
+}
+.Homenormal14text a:hover{font:bold 12px georgia; color:#545c5e; line-height:18px; text-decoration: underline;}
+
+.HomenormalBluetext{font:bold 16px georgia; color:#022F59; line-height:18px;}
+.HomenormalBluetext a{font:bold 16px georgia; color:#022F59; line-height:18px; text-decoration:none;}
+.HomenormalBluetext a:hover{font:bold 16px georgia; color:#022F59; line-height:18px; text-decoration: underline;}
+
+#footerdiv{ border-top-color:#000000; border-top-style:solid; border-top-width:1px; float: left; margin: 20px 0 5px 0; width: 1003px! important; _margin: 20px 0 5px 0;}
+#footerdiv #google_ad_footer{ margin: 20px auto; text-align: center }
+
+#footerdiv #footer_menu{ padding:0; border-top: #bdd9e5 1px solid; font: normal 11px Tahoma; margin: 0 auto; width: 70%; color: #4c4c4c; border-bottom: #bdd9e5 1px solid; line-height: 18px; text-align:center }
+#footerdiv #footer_menu a:link{ color: #4c4c4c; text-decoration: none; font-weight:bold }
+#footerdiv #footer_menu a:visited{ color: #4c4c4c; text-decoration: none; font-weight:bold  }
+#footerdiv #footer_menu a:hover{ text-decoration: underline }
+#footerdiv #footer_menu span{ margin: 0 15px;}
+#footerdiv #copyrights{ padding:10px 0 10px 0; float: left; font: normal 11px Arial; width: 100%; color: #4b4b4b; text-align: center }
+#footerdiv #copyrights a{ color: #204fa4; text-decoration: none }
+#footerdiv #copyrights a:hover{text-decoration: underline }
+#footerdiv #itgd_group_links{ margin:0 auto 15px; font:normal 11px arial; width: 95%; color: #6277a4; text-align: center;  line-height:15px;}
+#footerdiv #itgd_group_links b{ margin:0; font: bold 11px arial; width: auto; color: #e31d36;  }
+#footerdiv #itgd_group_links strong{ margin: 0 0 5px 5px; color: #494949;  }
+#footerdiv #itgd_group_links a{ margin:0 5px 5px 0; color: #6277a4; text-decoration: none;  }
+#footerdiv #itgd_group_links a:hover{ text-decoration: underline; }
+
+#section{margin:0px; padding:0px;}
+#section ul{margin:0px; padding:0px; font:normal 12px georgia; color:#022F59; list-style-type:none;}
+#section ul li{margin:0px; padding:0px; font:normal 12px georgia; color:#022F59;}
+#section ul li a{margin:0px; padding:0px; text-decoration:none;}
+#section ul li a:hover{margin:0px; padding:0px; text-decoration:none;}
+#section .subheadline{font:bold 16px arial; color:#ffffff; padding:0px 0 0px 15px; text-align: left ; background-image:url(../images/chunk-band.gif); background-repeat:no-repeat;}
+.byline{font:normal 11px arial; color:#454545; padding:0px; margin:0px;}
+.byline a{ font:bold 12px arial; text-decoration:none;  color:#454545;}
+.byline a:hover{ font:bold 12px arial; color:#454545;text-decoration: none;}
+
+
+.redtext{font:bold 16px tahoma; color:#D71A20;}
+.redtext a{font:bold 16px tahoma; color:#D71A20; text-decoration:none;}
+.redtext a:hover{font:bold 16px tahoma; color:#D71A20; text-decoration:underline;}
+
+.reddtext{font:bold 16px georgia; color:#B0530D; padding-bottom:5px}
+.reddtext a{font:bold 16px georgia; color:#B0530D; padding-bottom:5px; text-decoration:none;}
+.reddtext a:hover{font:bold 16px georgia; color:#B0530D; padding-bottom:5px; text-decoration:underline;}
+.pollboldtext{font:bold 14px georgia; text-align:left; color:#00000 ; margin:0 15px 0 0;}
+
+.rightbluetxt2{ font:bold 11px arial; color:#022F5E; padding:0 5px 0 0;}
+.rightbluetxt2 a{ font:bold 11px arial; color:#022F5E; text-decoration:none;}
+.rightbluetxt2 a:hover{ font:bold 11px arial; color:#022F5E; text-decoration: underline;}
+
+
+.Homeblackkiker{ font:normal 11px georgia; color:#000000;line-height:15px;}
+.Homeblackkiker a{ font:normal 11px georgia; color:#000000; line-height:15px; text-decoration:none;}
+.Homeblackkiker a:hover{ font:normal 11px georgia; color:#204fa4; text-decoration: underline;line-height:15px;}
+
+.Homeblackkiker11{ font:normal 11px arial; color:#000000;line-height:15px;}
+.Homeblackkiker11 a{ font:normal 11px arial; color:#000000; line-height:15px; text-decoration:none;}
+.Homeblackkiker11 a:hover{ font:normal 11px arial; color:#204fa4; text-decoration: underline;line-height:15px;}
+
+
+.assembly_link{font-size:11px;color:#204FA4;font-family:arial,verdana;font-weight:bold;text-align:center;}
+.assembly_link a{color:#204FA4; text-decoration:none;}
+.assembly_link a:hover {color:#D71920; text-decoration:none;}
+.topnavlink { font:bold 12px arial; color:#ffffff; }
+.topnavlink a{ font:bold 12px arial; color:#ffffff;  text-decoration:none;}
+.topnavlink a:hover{ font:bold 12px arial; color:#9B480A;  text-decoration:none;}
+
+.topnavlink1 { font:bold 12px arial; color:#ffffff; line-height:18px }
+.topnavlink1 a{ font:bold 12px arial; color:#ffffff;  text-decoration:none;}
+.topnavlink1 a:hover{ font:bold 12px arial; color:#9B480A;  text-decoration:none;}
+
+
+.imageText { font:normal 14px gerorgia; color:#000000; line-height:18px;}
+.imageText a{ font:normal 14px gerorgia; color:#000000; line-height:18px; text-decoration:none;}
+.imageText a:hover{ font:normal 14px gerorgia; color:#000000; line-height:18px; text-decoration:underline;}
+
+.greyline { font:normal 11px arial; color:#808284;}
+
+.electionheaderText { font:bold 16px tahoma; color:#D71A20; line-height:18px; padding-left:10px; text-transform:uppercase;}
+.electionheaderText a{ font:bold 16px tahoma; color:#D71A20; line-height:18px; text-decoration:none;}
+.electionheaderText a:hover{ font:bold 16px tahoma; color:#D71A20; line-height:18px; text-decoration:underline;}
+
+/*  Deepak on 3/2/2009 */
+
+.newHead{ color:#ffffff; font:bold 14px georgia;  margin:1px 1px 1px 1px; padding-left:10px; background-color:#d81920; line-height:22px;}
+.newTitle{ font:bold 12px georgia; color:#000000; line-height:22px;padding:3px 0 0 10px; }
+.newTitle a{ color:#022f59; text-decoration:none;}
+.newTitle a:hover{ color:#022f59; text-decoration:underline;}
+.newKicker { color:#000000; font:normal 12px georgia; line-height:18px;padding:3px 0 0 10px; }
+.newRelated{ color:#0000000; font:normal 12px georgia;padding:3px 0 0 10px;}
+.newRelated ul{ list-style:none; padding:0; margin:0;}
+.newRelated ul li{ padding:0 0 2px 0; margin:0 0 0 0px;background:url(../images/arrow_square_new.gif) no-repeat left 5px; padding:0 0 3px 10px; float:left;  color:#000; display:block; width:300px;}
+.newRelated ul li a{ color:#002f59; text-decoration:none;}
+.newRelated ul li a:hover{ color:#002f59; text-decoration:underline;}
+.newMore{ color:#d81920; float:right; padding:3px 5px 0 0; font:bold 12px georgia; }
+.newMore a{color:#d81920; text-decoration:none;}
+.newMore a:hover{color:#d81920; text-decoration:underline;}
+
+/* -------------------------- Ends -------------------------*/
+
+/*---------------------DropDown--------------------------------*/
+#section_menu { float:left; width:100%; background:url(images/section-links-bg.jpg) repeat-x left top; color:#fff; font-size:11px; font:bold 12px Georgia; padding:6px 0; border:0px solid #000;}
+#section_menu ul { padding:0; margin:0 0 0 12px; list-style:none;}
+#section_menu ul li { float:left; line-height:10px; }
+#section_menu ul li#seperator { float:left; line-height:10px; margin:0 9px;}
+#section_menu ul li a:link {color:#fff; text-decoration:none;}
+#section_menu ul li a:visited {color:#fff; text-decoration:none;}
+#section_menu ul li a:hover {color:#D42625; text-decoration:none;}
+
+.ddcolortabs{
+padding: 0;
+width: 100%;
+background: transparent;
+voice-family: "\"}\"";
+voice-family: inherit;
+}
+
+.ddcolortabs ul{
+font: normal 12px Georgia;
+margin:0;
+padding:0;
+list-style:none;
+}
+
+.ddcolortabs li{
+display:inline;
+padding:0 18px;
+font:bold 12px Georgia; border-right:1px solid #fff;
+}
+
+
+.ddcolortabs a{
+float:left;
+color: white;
+margin:0 2px 0 0;
+padding:0 0 1px 3px;
+text-decoration:none;
+letter-spacing: 1px; 
+}
+
+.ddcolortabs a span{
+float:left;
+display:block;
+padding: 4px 8px 2px 7px;
+}
+
+.ddcolortabs a span{
+float:none;
+}
+
+.ddcolortabs a:hover
+{
+
+}
+
+.ddcolortabs a:hover span{
+background-color: #591f20;
+}
+
+.ddcolortabs .selected a, #ddcolortabs .selected a span{ 
+}
+
+.ddcolortabsline{
+clear: both;
+padding: 0;
+width: 100%;
+height: 8px;
+line-height: 8px;
+background: black;
+border-top: 1px solid #fff; 
+}
+
+
+.dropmenudiv_a{
+position:absolute;
+top: 0;
+border-top:1px solid #ffffff;
+border-bottom-width: 0;
+font:bold 12px Georgia;
+line-height:18px;
+z-index:100;
+background-color: #000000;
+width:150px;
+visibility: hidden; 
+margin:6px 0 2px 0; 
+}
+
+
+.dropmenudiv_a a{
+width: auto;
+display: block;
+text-indent: 5px;
+border-top: 0 solid #678b3f;
+border: 1px solid #ffffff; border-width:0px 1px 1px 1px;
+padding: 3px 20px 0 0px;
+text-decoration: none;
+color: white; font:bold 12px Georgia;
+background-color:#000000;
+}
+.dropmenudiv_a a:hover
+{color:#d42625 }
+
+/*------------------------------End DropDown---------------------------------*/
+
+
+/*-----------------------Poll Day ------------------------*/
+.headlinetxt{font:bold 26px arial; color:#000000; line-height:36px;}
+.headlinetxt span{font:bold 26px arial; color:#F70708; line-height:36px;}
+.tiletext{ font:bold 12px arial; color:#ffffff; padding:2px 5px;}
+.tiletext a { text-decoration:none; color:#ffffff;}
+.tiletext a:hover{ text-decoration:none; color:#ffffff;}
+.tiletext_a{ font:bold 12px arial; color:#ffffff; padding-left:5px; line-height:18px;}
+.tiletext_b{ font:bold 12px arial; color:#000000; text-align:center; line-height:18px;}
+.tiletext_c{ font:bold 12px arial; color:#000000; line-height:18px; padding-right:5px;}
+.tiletext_ck{ font:normal 12px arial; color:#000000; text-align:left; line-height:18px;}
+.bottomtxt {font:bold 12px arial; color:#DA171D; line-height:18px;}
+.bottomtxt a{font:bold 12px arial; color:#DA171D; line-height:18px; text-decoration:none;}
+.bottomtxt a:hover{font:bold 12px arial; color:#DA171D; line-height:18px; text-decoration:underline;}
+.bottomtxt span { color:#000000;}
+.woncolor{ font:bold 12px arial; color:#10B21F;}
+.lostcolor{ font:bold 12px arial; color:#FF0D12;}
+.style1 {
+	font-family: Arial;
+	font-size: 11px;
+	font-weight: bold;
+	color: #022F5E;
+}
+
+.otherstate{font:normal 15px arial ; color:#969696; text-align:left; padding:0; margin:0}
+.otherstate a{font:normal 15px arial ; color:#969696; text-align:left; padding:0; margin:0; text-decoration:none;}
+.otherstate a:hover{font:normal 15px arial ; color:#969696; text-align:left; padding:0; margin:0;text-decoration:none;}
+
+.redheadingtext{font:bold 13px arial; color:#d71920;} 
+.redheadingtext a{font:bold 13px arial; color:#d71920; text-decoration:none;} 
+.redheadingtext a:hover{font:bold 13px arial; color:#d71920; text-decoration:underline;}
+
+.top_headline{font:bold 12px arial; color:#0081c3; line-height:15px;}
+.top_headline a{color:#0081c3; text-decoration:none;}
+.top_headline a:hover{color:#07a730; text-decoration:underline;} 
+
+.result_image_class{ width:106px; height:16px;background-image:url(../images/btn.gif); background-position:top left; background-repeat:no-repeat;padding-bottom:3px;}
+
+.moretext{font:bold 11px arial; color:#000000; text-align:center; line-height:15px;}
+.moretext a{color:#000000; text-decoration:none;}
+.moretext a:hover{color:#D71A20; text-decoration:none;}
+
+.normaltext {font:normal 12px georgia; text-align:left; margin:0 0px 0 0; line-height:18px;}
+
+.style2 {
+	font-family: Arial;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.eleclisting ul{ list-style:none; margin:0; padding:2px 0 0 0px}
+.eleclisting ul li{ list-style:none; background:url(../images/black_bullet.jpg) no-repeat left 10px; color:#861033; font:normal 11px Georgia; line-height:19px; margin:0px 0 0px 0px;padding:0 2px 0 15px;}
+.eleclisting ul li a{ color:#545c5e; text-decoration:none;}
+.eleclisting ul li a:hover{ color:#545c5e; text-decoration:underline;}
+.eleclisting ul li.story{ list-style:none; background:url(http://indiatoday.intoday.in/site/static/common/hindi-related-story-icon.jpg) no-repeat left 6px; color:#545c5e; font:normal 11px arial; line-height:19px; margin:0px 0 0px 0px;padding:0 2px 0 20px; float: left; width:320px;}
+.eleclisting ul li.video{ list-style:none; background:url(http://indiatoday.intoday.in/site/static/common/video_icon.gif) no-repeat left 6px; color:#545c5e; font:normal 11px arial; line-height:19px; margin:0px 0 0px 0px;padding:0 2px 0 20px; float: left; width:320px;}
+.eleclisting ul li.photo{ list-style:none; background:url(http://indiatoday.intoday.in/site/static/common/hindi-news-photo-icon.gif) no-repeat left 6px; color:#545c5e; font:normal 11px arial; line-height:19px; margin:0px 0 0px 0px;padding:0 2px 0 20px; float: left; width:320px;}
+

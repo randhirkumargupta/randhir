@@ -460,8 +460,15 @@ function autologout_autologout_prevent() {
  * Implements hook_autologout_refresh_only().
  */
 function autologout_autologout_refresh_only() {
+  global $user;
   // Check to see if an open admin page will keep login alive.
   if (!variable_get('autologout_enforce_admin', FALSE) && path_is_admin(current_path())) {
+    return TRUE;
+  }
+  
+  // Check to see if user is front user login alive.
+  if ($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+    watchdog('autologout_call_for_front_user', '<pre>' . print_r($user->roles, true) . '</pre>');
     return TRUE;
   }
 }

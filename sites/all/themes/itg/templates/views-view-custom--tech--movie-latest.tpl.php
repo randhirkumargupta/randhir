@@ -16,21 +16,20 @@
                                     print $row['field_story_extra_small_image'];
                                 }
                                 else {
-                                    print "<img width='88' height='66' src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' />";
+                                    print "<img width='88' height='66' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') . "' alt='' title='' />";
                                 }
                                 ?>   
                   
                     
                     </a></div>
 
-                <div class="dm-detail">
-                  <?php //echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")); ?>
+                <div class="dm-detail" title="<?php echo strip_tags($desc);?>">
                 <?php
                   if (function_exists('itg_common_get_smiley_title')) {
                     echo l(itg_common_get_smiley_title($row['nid'], 0, 140), "node/" . $row['nid'], array("html" => TRUE));
                   }
                   else {
-                    echo l(mb_strimwidth(strip_tags($desc), 0, 150, ".."), "node/" . $row['nid']);
+                    echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 150, ".."), "node/" . $row['nid']);
                   }
                   ?>
                 </div>       

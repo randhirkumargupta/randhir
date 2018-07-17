@@ -1,0 +1,298 @@
+@charset "utf-8";
+
+@media screen and (max-width:1024px){
+
+/*** HOME PAGE ***/
+body { background:#f8f8f8}
+.wraper { background:none}
+.logo h1 img { width:68%}
+.container { padding-left:15px; padding-right:15px;}
+.search_area input[type="text"] { width:77%}
+.right_advertis { margin:0px; padding:0px;}
+.top_latest .latest_title h2 { font-size:22px; line-height:28px;}
+.small_latest .latest_title h3 { font-size:14px; line-height:19px;}
+.small_latest { width:49.8%}
+.ipl_tweet .ipl_info img { width:100%}
+.head_title h2 { font-size:20px;}
+.point_tally .group_list select { width:100%}
+.point_tally .group_list { width:46%; margin-top:-2px;}
+.photos_slide .carousel-indicators { left:0px; right:0%; padding-right:16px; width:100%; margin:0px 0px 0 0; text-align:right; }
+.columns_info ul li h3 { font-size:13px;}
+.podcasts_box ul { height:175px;}
+.video_info ul li { width:23%; margin:0 12px 0 0}
+.video_info ul li .video_pic { width:100%; background-size:100% 100%; height:auto; padding:11px;}
+.video_info ul li .video_pic img { width:100%; height: 93px; padding-top:0px; padding-bottom:5px;}
+.performers_box .perfor_info h3 { font-size:14px;}
+.performers_run { font-size:30px;}
+.poll_area .poll_info { height:300px;}
+.top_st_area ul li { line-height:16px; font-size:13px;}
+.top_st_area ul li { margin-bottom:5px; padding-bottom:7px;}
+.photos_slide .item img { height:auto}
+.video_icon { left:12px;}
+.team_detail img { height:auto; width: 100%;}
+
+.keyplayer_box .carousel-control.right, .keyplayer_box .carousel-control.left { top:43%}
+.keyplayer_box .carousel-control.left { right:15.8%}
+.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:43%; left:10px;}
+.keyplayer_box .play_inter_icon { top:53%}
+
+.mejs-poster { display:none !important}
+.mejs-controls { width:100%; left:0px;}
+.mejs-container .mejs-controls { width:300px;  left:0px !important; }
+#playing-audio-titile { width:100% !important;  left:15px !important;}
+.logo h1 .ipl_logo { font-size:30px; padding-top: 34px;}
+
+.top_social { display:none}
+
+.logo { width:197px; padding-bottom:35px;}
+.logo img { width:100%; top:23px;}
+.logo h1.ipl_logo { font-size:31px; padding-top: 0px;}
+.ipl_team .team_detail .phvidTitle { height:50px;}
+
+	.listing_worldcup ul li .listing_info h3 { font-size:27px;}
+	
+	.venue_area .venue_info .phvidTitle { height:80px;}
+	#main_photolisting_page .photo_box_main .photo_mn { height:auto}
+	#main_photolisting_page .photo_box_main .txt_mn_area { font-size:15px;}
+	#main_photolisting_page .photo_box_main { height:260px;}
+	#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top:75px;}
+	
+		#main_videolanding_page .videosocial .txt_social{ font-size:12px;}
+	#main_videolanding_page .videosocial a{padding:19px 15px 20px 19px}
+#main_videolisting_page .video_box_main .video_mn { height:105px}
+#main_videolisting_page .video_box_main .txt_mn_area { font-size:14px; line-height:22px;}
+
+.like_dislike_area { width:307px !important}
+
+.year-content { top:75px !important; font-size:12px !important;}
+.blast-from-the-past-years ul li.yearcor { padding-bottom:0px !important}
+iframe.pointstally-iframe { margin-left:-1px;}
+
+
+}
+
+@media screen and (max-width:900px){
+/*** HOME PAGE ***/
+.logo { width:42%; float:left; padding-top:20px;  padding-bottom: 21px;}	
+.logo h1 img { width:100%}
+.logo img { top:12px; width:auto}
+.logo h1.ipl_logo {    font-size: 50px;    padding-top: 0px;}
+
+.top_social { display:block; margin:63px 0 0 0; padding:0px; float:right}
+.top_social ul { margin:0px; padding:0px; list-style:none}
+.top_social ul li{ margin:0px; padding:0px 0px 0 20px; font-size:25px; color:#898989; display:inline-block}
+.top_social ul li a { color:#898989; transition:all 0.2s ease-in-out}
+.top_social ul li a:hover { color:#353535}
+.top_social ul li span { padding-top:4px;}
+.top_advertis { padding-top:7px; margin-bottom:10px;}
+.search_area input[type="text"] { width:68%}
+.top_st_area ul li { margin-bottom:6px; padding-bottom:6px; font-size:14px; line-height:19px;}
+.podcasts_box ul { height:156px;}
+.right_advertis { border:1px solid #e1e1e1; padding-top:20px; padding-bottom:20px; margin-bottom:35px;}
+.scorecard_area .outer_wht { border:1px solid #e1e1e1; height:251px;}
+.scorecard_area { margin-bottom:35px;}
+.scorecard_iframe { border-bottom:0px; margin-top:0px;}
+.point_table { margin-bottom:35px; height:340px; border:1px solid #e1e1e1; }
+.performers_area { margin-bottom:35px; border:1px solid #e1e1e1; }
+.poll_area { margin-bottom:35px; border:1px solid #e1e1e1;}
+.ipl_tweet { margin-bottom:35px;}
+.ipl_tweet .ipl_info { border:1px solid #e1e1e1; padding:5px; padding-bottom:15px;}
+.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right { top:50%}
+.keyplayer_box { padding-bottom:10px;}
+.point_table { height:inherit}
+.listing_worldcup ul li .listing_info h3 { font-size:29px;}
+
+#main_photolisting_page .photo_box_main .txt_mn_area { font-size:15px}
+#main_photolisting_page .photo_box_main { height:265px}
+#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top:95px;}
+
+.sponserd_outer_all_1 iframe { height:275px !important;}
+
+.like_dislike_area {  width: 350px !important;}
+iframe.pointstally-iframe { margin-bottom:35px; height:290px !important; margin-left:0px; width:100%}
+
+
+
+
+}
+
+@media screen and (max-width:767px){
+/*** HOME PAGE ***/
+.logo h1 .ipl_logo {font-size:49px; padding-top: 50px; padding-bottom:0px;}
+.logo h1 img {    width:auto;}
+.video_info ul li { width:100%; margin-bottom:15px;}
+.video_info ul li .video_pic { width:46%; float:left; margin-right:10px;}
+.video_info ul li .video_title { overflow:hidden; margin-top:25px;}
+.video_info ul li .video_pic { padding:25px;}
+.video_info ul li .video_pic img { height:auto; padding-bottom:12px;}
+.small_latest { width:100%; margin-bottom:30px}
+.top_latest { margin-bottom:0px;}
+.top_lat_area { margin-bottom:25px;}
+.small_latest .latest_title h3 { font-size:16px; line-height:22px;}
+.small_latest .latest_title { height:inherit; padding-bottom:20px;}
+.video_icon { left:8%; bottom:21%}
+.photos_slide .photo_info { height:inherit}
+.columns_info { height:inherit}
+.podcasts_box { height:inherit; margin-bottom:35px; padding-bottom:20px;}
+.scorecard_area .outer_wht { height:inherit}
+.ipl_tweet .ipl_info img { width:auto}
+.point_table { height:inherit}
+.poll_area .poll_info { height:inherit; padding-bottom:25px;}
+.performers_box .perfor_info h3 { font-size:20px;}
+.photos_slide .photo_info { background:#fff;}
+.photos_slide .item a { color:#000}
+.photos_slide .photo_info h3 { font-size:18px; line-height:23px;}
+.photos_slide { margin:0px; padding:0px; box-shadow:none; border:1px solid #e1e1e1; border-top:0px;}
+.photos_slide .item a span { color:#fff}
+.photos_area .head_title { margin-bottom:0px;}
+.photos_slide .item a:hover {text-shadow:2px 2px 2px #9c9c9c; -moz-text-shadow:2px 2px 2px #9c9c9c; -ms-text-shadow:2px 2px 2px #9c9c9c; -o-text-shadow:2px 2px 2px #9c9c9c; -webkit-text-shadow:2px 2px 2px #9c9c9c; -khtml-text-shadow:2px 2px 2px #9c9c9c; }
+.top_latest .latest_title { height:inherit; background:#fff; border:1px solid #e1e1e1; border-top:0px;}
+.top_latest .latest_title h2 { color:#000; font-size:17px; line-height:22px;}
+.top_latest .latest_title h2 a{ color:#000}
+.top_latest .latest_title h2 a:hover { color:#000; text-shadow:2px 2px 2px #9c9c9c; -moz-text-shadow:2px 2px 2px #9c9c9c; -ms-text-shadow:2px 2px 2px #9c9c9c; -o-text-shadow:2px 2px 2px #9c9c9c; -webkit-text-shadow:2px 2px 2px #9c9c9c; -khtml-text-shadow:2px 2px 2px #9c9c9c;}
+.small_latest .latest_title h3 a { color:#000}
+.small_latest .latest_title h3 a:hover { color:#000; text-shadow:2px 2px 2px #9c9c9c; -moz-text-shadow:2px 2px 2px #9c9c9c; -ms-text-shadow:2px 2px 2px #9c9c9c; -o-text-shadow:2px 2px 2px #9c9c9c; -webkit-text-shadow:2px 2px 2px #9c9c9c; -khtml-text-shadow:2px 2px 2px #9c9c9c;}
+.video_area { margin-bottom:20px;}
+.logo { width:60%}
+.photos_slide .carousel-control.left { margin:0px; padding:0px; background:url(../images/left-arrow.png) no-repeat 0px 0px; opacity:1; width:35px; height:34px; top:inherit; left:inherit; right:9%;  bottom:16%;}
+.photos_slide .carousel-control.right{ margin:0px; padding:0px; background:url(../images/right-arrow.png) no-repeat 0px 0px; opacity:1; width:35px; height:34px; top:inherit; bottom:16%; right:3%}
+.photos_slide .carousel-control .glyphicon-chevron-left, .photos_slide .carousel-control .icon-prev, .photos_slide .carousel-control .glyphicon-chevron-right, .photos_slide .carousel-control .icon-next { display:none}
+.ipl_tweet { background:#fff; border:1px solid #e1e1e1; height:370px;}
+.head_title.hide_top iframe { width:100% !important}
+.ipl_team .team_detail .phvidTitle { font-size:15px;}
+.venue_area .venue_info .phvidTitle { font-size:15px;}
+.pointtally-box-section{ overflow-x: auto;}
+
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_hdn {font-size: 18px;}
+#main_timeline_page .container_timeline .hdn_cont_t h3 { font-size:30px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .txt_cnt_ph {font-size: 23px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .fa { font-size:20px;}
+	
+.ipl_schedule {    overflow-x: auto; width:100%; border:2px solid #c9c9c8; margin-bottom:45px; }
+.ipl_schedule table { width:750px; margin-bottom:15px;}
+
+
+.keyplayer_area .keyplayer_box img, .interviews_area .carousel-inner .item img { height:inherit}
+	.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right { top:71%}
+	.keyplayer_box .carousel-control.left { right: 8.8%;}
+	.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:62%; left:10px;}
+	.keyplayer_box .play_inter_icon { top:62%}
+	
+	.listing_worldcup ul li .listing_info h3 { font-size:18px; line-height:25px;}
+	.venue_area .venue_info img { height:auto}
+	.venue_area .venue_info .phvidTitle { height:50px;}
+	
+#main_photolisting_page .photo_box_main { height:auto}
+#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top:80%}
+#main_photolisting_page h1.hdn_h { font-size:25px;}
+
+	#main_photolisting_page .iteam_box { line-height:17px; font-size:12px;}
+	#main_photolisting_page h1.hdn_h { font-size:20px;}
+	
+	#main_videolisting_page .video_box_main .txt_mn_area { height:auto}
+	#main_videolisting_page .video_box_main .video_mn { height:auto}
+
+#main_photolisting_page .crousel_outer { margin-bottom:0px !important; padding-bottom:0px;}
+.blast-from-the-past {    margin-bottom: 200px !important;}
+.year-content {
+    top: 49px !important;
+}
+
+iframe.pointstally-iframe { margin-left:0px; width:100%}
+}
+
+@media screen and (max-width:680px){
+	/*** HOME TRAKER ***/
+	
+	.like_dislike_area { width:300px !important}
+	
+
+}
+
+@media screen and (min-width:360px) and (max-width:640px) {
+	.year-content {
+    top: 78px !important;
+}
+	}
+
+
+@media screen and (max-width:639px){
+	.st_social { float:none; text-align:center}
+	.like_dislike_area {    float: none;    text-align: center;    width: auto !important;}
+	.likedisdiv { padding-bottom:30px !important}
+	}
+
+@media screen and (max-width:481px){
+	.like_dislike_area .lkedislake-text { float:none !important}
+	.likedislike-action {    float: none !important;    margin: 27px auto 0;    overflow: hidden;    text-align: center;    width: 150px !important;}
+	}
+
+
+@media screen and (min-width:481px) and (max-width:639px){
+.video_info ul li .video_pic { padding:17px;}
+.photos_slide .carousel-control.left {right:12%;  bottom:23%;}
+.photos_slide .carousel-control.right {bottom:23%; right:3%}
+.video_info ul li .video_pic img {  padding-bottom: 6px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ height:68px;}
+
+	.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right {top: 64%;}
+	.keyplayer_box .carousel-control.left { right:53px}
+
+.venue_area .venue_info .phvidTitle {
+    font-size: 14px;
+}
+
+	#main_photolisting_page .iteam_box { left: 4%;}
+	#main_photolisting_page .left01, #main_photolisting_page .right01 { top:25%; background-size:100% auto; width:8%}
+	.blast-from-the-past {    margin-bottom: 230px !important;}
+
+
+}
+@media screen and (max-width:480px){
+	
+/*** HOME PAGE ***/
+.logo { width:70%}
+.performers_box .perfor_info h3 { font-size:14px;}
+.ipl_tweet .ipl_info img { width:100%}	
+.right_advertis img { width:100%}
+.video_info ul li .video_pic { padding: 3%;}
+.video_info ul li .video_title { margin-top:5px;}
+.ipl_bottom .result_btn { margin-right:0px;}
+.time_head { font-size:16px; padding-top:7px;}
+.photos_slide .carousel-control.left {right:16%;  bottom:30%;}
+.photos_slide .carousel-control.right {bottom:30%; right:3%}
+.video_info ul li .video_pic img {  padding-bottom: 6px;}
+.team_detail img { width:90%}
+.venue_info img { width:90%}
+.venue_area .venue_info .phvidTitle { font-size:12px;}
+.point_table th { font-size:14px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .cont_pht { margin-top:10px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .txt_cnt_ph { font-size:13px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ height:60px;}
+
+.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right { top:52%}
+.keyplayer_box .carousel-control.left { right:50px;}
+.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:45%; left:10px;}
+.keyplayer_box .play_inter_icon { top:50%}
+.performers_tab { width:184px;}
+
+	.listing_worldcup ul li .listing_info h3 { font-size:13px; line-height:18px; padding-left:5px;}
+	ol.breadcrumb { font-size:12px;}
+	
+		#main_photolisting_page .iteam_box { left: 4%;}
+	#main_photolisting_page .left01, #main_photolisting_page .right01 { top:25%; background-size:100% auto; width:10%}
+
+
+}
+
+@media screen and (max-width:340px){
+.venue_area .venue_info .phvidTitle {    height: 70px;}
+.year-content {    top: 72px !important;}
+.blast-from-the-past {    margin-bottom: 313px !important;}
+
+iframe.pointstally-iframe { height: 305px !important;
+    overflow-y: hidden;
+    width: 102%; margin-left:-2px;}
+	}
+
+

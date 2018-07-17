@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>India Today </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+.ticker {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; color: FFCC99; font-weight: bold}
+.head1 {font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-weight: bold}
+.head2 { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: bold }
+.text {font-family: Arial, Helvetica, sans-serif; font-size: 10px}
+.issuedate { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-weight: bold; color: #FFFFFF}
+.coverhead { font-family: Arial, Helvetica, sans-serif; font-size: 20pt; font-weight: normal; color: #4170A0}
+.bodytext { font-family: Arial, Helvetica, sans-serif; font-size: 10pt}
+.coverhead1 { font-family: Arial, Helvetica, sans-serif; font-size: 16pt; font-weight: normal; color: #4170A0 }
+.coverhead2 { font-family: Arial, Helvetica, sans-serif; font-size: 13pt; font-weight: bold; color: #4170A0 }
+.text1 { font-family: Arial, Helvetica, sans-serif; font-size: 11px; line-height: 12pt}
+.head4 { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; font-weight: bold }
+-->
+</style>
+</head>
+<body bgcolor="#999999" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="780" border="0" cellspacing="0" cellpadding="0" align="center">
+<tr bgcolor="#666666"><td height="60">&nbsp;</td></tr>
+<tr bgcolor="#CC0000"><td height="8"><img src="/itoday/20030915/itgrfx/reddot.gif" width="4" height="4"></td></tr>
+<tr bgcolor="#FFFFFF"><td height="1"><img src="/itoday/20030915/itgrfx/trans.gif" width="1" height="1"></td></tr>
+</table>
+<table width="780" border="0" cellspacing="0" cellpadding="1" align="center">
+  <tr bgcolor="#000000"> 
+    <td> 
+      <table width="778" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+        <tr> 
+          <td colspan="3"> <img src="/itoday/20030915/itgrfx/masthead.gif" width="204" height="99"><img src="/itoday/20030915/itgrfx/masthead1.gif" width="272" height="99"><img src="/itoday/20030915/itgrfx/masthead2.gif" width="302" height="99"></td>
+        </tr>
+        <tr> 
+          <td width="263" height="21"> <img src="/itoday/20030915/itgrfx/subscribe.gif" width="83" height="21"><img src="/itoday/20030915/itgrfx/instruction.gif" width="104" height="21"><img src="/itoday/20030915/itgrfx/privacy.gif" width="76" height="21"></td>
+          <td width="152" bgcolor="cc000000">&nbsp;</td>
+          <td width="363" bgcolor="cc000000" class="head1" align="right"> | &nbsp;<a href="/" class=head1><font color="#FFFFFF">HOME</font></a><font color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></td>
+        </tr>
+        <tr> 
+          <td colspan="3" height="5"><img src="/itoday/20030915/itgrfx/shadow.gif" width="778" height="5"></td>
+        </tr>
+        <tr> 
+          <td colspan="3" height="21"> 
+            <table width="778" border="0" cellspacing="0" cellpadding="0">
+              <tr> 
+                <td width="200" background="/itoday/20030915/itgrfx/grey.gif" align="center" height="20"> 
+                  <p><img src="/itoday/20030915/itgrfx/trans.gif" width="1" height="1"></p>
+                </td>
+                <td width="20"><img src="/itoday/20030915/itgrfx/trans.gif" width="1" height="1"></td>
+                <td width="558"><img src="/itoday/20030915/itgrfx/trans.gif" width="1" height="1"></td>
+              </tr>
+              <tr> 
+                <td width="200" background="/itoday/20030915/itgrfx/grey.gif" align="center" valign="top"> 
+                  <!--#include virtual="new_inside_left.html" --> </td>
+                <td width="20">&nbsp;</td>
+                <td width="558" valign="top" class="issuedate"> <!--#include virtual="cover.html" --> </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table width="780" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr bgcolor="#FFFFFF"> 
+    <td height="1"><img src="/itoday/20030915/itgrfx/trans.gif" width="1" height="1"></td>
+  </tr>
+</table>
+ <span class="coverhead"></span> 
+</body>
+</html>

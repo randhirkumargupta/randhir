@@ -14,12 +14,12 @@
         $('.field-edit-link').hide();
         $('#edit-body-und-0-format').hide();
         $('.vertical-tabs-list').hide();
-        $('#edit-metatags').show();
-        
+        $('#edit-metatags').show();        
       }
 
-      if(nid == '' || nid == null){
-        if($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
+      if (nid == '' || nid == null) { 
+        jQuery("#edit-field-story-reporter-und-0-remove-button").hide(); 
+        if ($('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == '' || $('input[name="field_survey_add_questions[und][0][field_survey_question][und][0][value]"]').val() == 'undefined') {
           $('input[name="field_survey_add_questions_und_0_remove_button"]').hide();
         }
       }
@@ -30,6 +30,25 @@
       } else {
         $('#edit-field-survey-end-date').hide();
       }
+      // publish field hide
+      $('#edit-field-supp-publish-und').hide();
+      
+      /*jQuery(".form-submit").click(function() {    
+        if(jQuery(this).attr("data-id") == 'edit-itg-custom-button') {       
+           jQuery('#edit-field-supp-publish-und option').removeAttr('selected');
+        } else if(jQuery(this).attr("data-id") == 'edit-submit') {       
+           jQuery('#edit-field-supp-publish-und option').val(1);
+        }
+      });*/ 
+      
+//      $(this).attr('edit-itg-custom-button').click(function () {
+//          alter('@@@');
+////        if($(this).prop("checked") == true){
+////          $('#edit-field-survey-end-date').show();
+////        } else {
+////          $('#edit-field-survey-end-date').hide();
+////        }
+//      });
       
       $('input[name="field_survey_expity_date[und][1]"]').click(function (){
         if($(this).prop("checked") == true){
@@ -158,22 +177,41 @@
       var select_value =  $('.form-field-name-field-survey-add-questions tr .form-select').val();
       var hideOption = $('.form-field-name-field-survey-add-questions tr').find('.field-name-field-survey-answer-option-2');
       if(select_value == "rating"){
-          hideOption.hide();
+          hideOption.hide(function() {
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").addClass('no-after');
+          });
         }
         else{
-          hideOption.show();
+          hideOption.show(function(){
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").removeClass('no-after');
+          });
         }
       
-      $('.form-field-name-field-survey-add-questions').on('change', '.form-select', function(){
+      // Hiding add more options from answer choices if Answer Type is Rating
+      $('.form-field-name-field-survey-add-questions .field-name-field-survey-answer-type').on('change', '.form-select', function(){
         var selvalue = $(this).val();
         var hide_option = $(this).closest('tr').find('.field-name-field-survey-answer-option-2');
         if(selvalue == "rating"){
-          hide_option.hide();
+          hide_option.hide(function() {
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").addClass('no-after');
+          });
         }
-        else{
-          hide_option.show();
+        else {
+          hide_option.show(function(){
+              $(this).closest('tr').find(".field-name-field-survey-answer-option-1 label").removeClass('no-after');
+          });
         }
       });
+
+      // Hiding add more options from answer choices if Answer Type is Rating
+//      $("body").on('change', '#edit-field-survey-add-questions-und-0-field-survey-answer-type-und', function() {
+//          var selvalue = $( "#edit-field-survey-add-questions-und-0-field-survey-answer-type-und option:selected" ).text();
+//          if(selvalue == "Rating") {
+//            $('#edit-field-survey-add-questions-und-0-field-survey-answer-option-2').hide();
+//          } else {
+//            $('#edit-field-survey-add-questions-und-0-field-survey-answer-option-2').show();
+//          }
+//      });
       
     }
   };

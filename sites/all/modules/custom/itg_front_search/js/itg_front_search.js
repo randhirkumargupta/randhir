@@ -6,24 +6,30 @@
 (function ($) {
     Drupal.behaviors.itg_front_search = {
         attach: function (context, settings) {
-
+            var base_url = Drupal.settings.itg_front_search.settings.base_url;
             var custom_field_val = getParameterByName('custom_drp');
             $("#edit-submit-front-end-global-search").hide();
             $("#edit-reset").hide();
 
             $('#edit-custom-drp').change(function () {
-                 $(".searh-all-filters .views-widget").hide();
+                $(".searh-all-filters .views-widget").hide();
                 var datetypevalue = $('#edit-custom-drp').val();
 
                 if (datetypevalue == 'calender') { // Image question
                     $(".caln").show();
-                    $(".caln").show();                   
-                } else
-                {
+                    $(".caln").show();
+                } else {
                     $(".caln").hide();
                     $(".caln").hide();
                     $('#edit-ds-changed-datepicker-popup-0').val("");
                     $('#edit-ds-changed-max-datepicker-popup-0').val("");
+                }
+            });
+
+            jQuery("#edit-custom-drp").mouseup(function () {
+                var val = jQuery(this).val();
+                if (val == 'calender') {
+                    jQuery(".searh-all-filters .caln").show();
                 }
             });
 
@@ -43,17 +49,11 @@
             $('#reset_button').click(function () {
                 $('#edit-reset').trigger('click');
             });
-            
-            //ON CLICK SHOW FILTER TYPES
-            $("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
-            $("body, html").on("click", ".searh-all-filters label", function(){
-            $(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
-                $(this).next('div').show();    
-            });
+
 
             $(function () {
                 $("#edit-ds-changed-datepicker-popup-0").datepicker({
-                    dateFormat: 'yy-mm-dd',
+                    dateFormat: 'dd-mm-yy',
                     changeMonth: true,
                     changeYear: true,
                     onSelect: function (selected) {
@@ -63,7 +63,7 @@
                     }
                 });
                 $("#edit-ds-changed-max-datepicker-popup-0").datepicker({
-                    dateFormat: 'yy-mm-dd',
+                    dateFormat: 'dd-mm-yy',
                     changeMonth: true,
                     changeYear: true,
                     onSelect: function (selected) {
@@ -87,37 +87,37 @@
                         speed: 300,
                         slidesToShow: 7,
                         slidesToScroll: 1,
-                         responsive: [  
-                                       {
-                                          breakpoint: 600,
-                                          settings: {
-                                            slidesToShow: 5                                            
-                                          }
-                                        }
-                                      ]
+                        responsive: [
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 5
+                                }
+                            }
+                        ]
                     });
                 }
-                
 
                 jQuery('#edit-ds-changed-datepicker-popup-0').datepicker({
-                    dateFormat: 'yy-mm-dd',
+                    dateFormat: 'dd-mm-yy',
                     changeMonth: true,
                     changeYear: true,
                     maxDate: -1,
                     onSelect: function (dateText, inst) {
-                        jQuery('#edit-submit-archive-story').trigger('click');
+                        urlpath = window.location.href;
+                        url = urlpath.split("/");
+                        var ctype = ["story", "gallery", "video"];
+                        if (jQuery.inArray(url[4], ctype) != -1) {
+                            var pathname = base_url + '/' + 'archives/' + url[4] + '/' + dateText;
+                        } else {
+                            var pathname = base_url + '/' + 'archives/story/' + dateText;
+                        }
+                        //jQuery('#edit-submit-archive-story').trigger('click');
+                        window.location.href = pathname;
                     }
                 });
 
             }
-
-            jQuery('.atleta a').click(function (e) {
-                e.preventDefault();
-                var h = jQuery(this).attr('href');
-                jQuery('#edit-ds-changed-datepicker-popup-0').val(h);
-                jQuery('#edit-submit-archive-story').trigger('click');
-            });
-
         }
 
     };
@@ -129,7 +129,7 @@ function getParameterByName(name, url) {
         url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
+        results = regex.exec(url);
     if (!results)
         return null;
     if (!results[2])
@@ -137,7 +137,14 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-jQuery(document).ready(function(){
-     //ON CLICK SHOW FILTER TYPES
+jQuery(document).ready(function () {
+    //ON load hide calendar
+    jQuery(".searh-all-filters .caln").hide();
+    //ON CLICK SHOW FILTER TYPES
     jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
+    jQuery("body, html").on("click", ".searh-all-filters label", function () {
+        jQuery('#edit-custom-drp').val('any');
+        jQuery(".searh-all-filters .views-widget, .searh-all-filters .caln").hide();
+        jQuery(this).next('div').show();
+    });
 });

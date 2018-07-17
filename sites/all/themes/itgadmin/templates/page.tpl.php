@@ -56,19 +56,7 @@ if (!in_array('administrator', $user->roles)) {
                     <?php
                       $menu = menu_navigation_links('user-menu');                    
                       print theme('links__user_menu', array('links' => $menu));
-                    
-                       /* print theme('links__system_secondary_menu', array(
-                          'links' => $secondary_menu,
-                          'attributes' => array(
-                              'class' => array('links', 'inline', 'clearfix'),
-                          ),
-                          'heading' => array(
-                              'text' => $secondary_menu_heading,
-                              'level' => 'h2',
-                              'class' => array('element-invisible'),
-                          ),
-                        ));*/
-                     
+                                                      
                     ?>
                 </nav>
 <?php //endif; ?>
@@ -77,28 +65,36 @@ if (!in_array('administrator', $user->roles)) {
 <div class="user-role">
   <a id="belly" href="javascript:void(0);" class="notifi">
     <i class="fa fa-bell-o"></i>
-    <dfn>
+    <dfn class="itg-final-bell-count">
       <?php 
-        if (function_exists('get_task_count_of_user')) {
-          print get_task_count_of_user();
-        } 
+        $octopus_html_slug_notification = '';
+        if(function_exists('itg_octopus_get_slug_notification')){
+          $itg_octopus_get_slug_notification = '';
+          $itg_octopus_get_slug_notification = itg_octopus_get_slug_notification();
+          print $itg_octopus_get_slug_notification['count'];
+          if (isset($itg_octopus_get_slug_notification['html'])) {
+            $octopus_html_slug_notification = $itg_octopus_get_slug_notification['html'];
+          }
+        }
       ?>
     </dfn>
-  </a> 
+  </a>
 <span>                     
   <?php
     // get role array
     $role_display = $user->roles;
+    $myaccount = l(t('My account'), 'users/'.$user->uid, array('attributes' => array('class' => 'user-profile', 'title' => t('My account'))));
     // skip key for authenticated user
     
     unset($role_display[2]);
     // get value in comma seprated
     $role_display = implode(',', $role_display);
-    
-    print 'User role - '.$role_display;
+    print '<i class="fa fa-user" aria-hidden="true"></i>';
+    print '  Username - '. $user->name.' | Role - '.$role_display.' | '.$myaccount;
    ?>
 </span>                                                  
-<div class="bell-notice"></div>
+<div class="bell-notice itg-final-bell-notice"><?php print $octopus_html_slug_notification; ?></div>
+
 </div>
 <?php } ?>
 

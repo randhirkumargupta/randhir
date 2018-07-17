@@ -193,7 +193,8 @@ function redirect_get_current_redirect() {
   // attempt to find a redirect matching the current path, query string, and
   // language code.
   if (!isset($redirect)) {
-    $redirect = redirect_load_by_source(current_path(), $GLOBALS['language']->language, drupal_get_query_parameters());
+    // patch by ved
+    $redirect = redirect_load_by_source(str_replace(' ', '+', current_path()), $GLOBALS['language']->language, drupal_get_query_parameters());
   }
 
   // @todo Add an alter hook here?

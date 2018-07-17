@@ -1,0 +1,402 @@
+@charset "utf-8";@import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic);ol, ul{margin-left:20px;}
+body{margin:0px;padding:0px;font-family:'Roboto', sans-serif;font-weight:400;font-size:15px;color:#181818;background:#f8f8f8 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/euro-bg.png) no-repeat center 390px;}
+
+/*body{margin:0px;padding:0px;font-family:'Roboto', sans-serif;font-weight:400;font-size:15px;color:#181818;background:#f8f8f8 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/bd-lf-bg.png) no-repeat 0 390px;}
+*/
+
+img{margin:0px;padding:0px;border:none}
+a{margin:0px;padding:0px;text-decoration:none;color:#1c1c1c}
+a:hover{text-decoration:none;color:#6b6b6b}
+.fLeft{float:left}
+.fRight{float:right;}
+.clear{clear:both}
+.mrgL_0{margin-left:0px;}
+.mrgR_0{margin-right:0px;}
+.mrgB_0{margin-bottom:0px;}
+.mrgT_0{margin-top:0px;}
+.paddL_0{padding-left:0px;}
+.paddR_0{padding-right:0px;}
+.paddB_0{padding-bottom:0px;}
+.paddT_0{padding-top:0px;}
+*{box-sizing:border-box}
+.wraper{margin:0px;padding:0px;/*background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/bd-rg-bg.png) no-repeat 93% 340px*/;}
+.container{padding-left:0px;padding-right:0px;}
+.more_btn{margin:0px;padding:7px 15px 0 0;text-align:right}
+.more_btn a{color:#9c9c9c;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.more_btn a:hover{color:#000;padding-right:5px;}
+.head_title h2{margin:0px;padding:12px 15px 12px 13px;background:#00679c;font-size:23px;font-family:'Roboto', sans-serif;text-transform:uppercase;font-weight:400;color:#fff;line-height:18px;}
+.more_text{margin:0;padding:0 12px 0 0;text-align:right;float:right;font-size:14px;color:#fff;text-transform:lowercase;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/more-arrow.png) no-repeat right 65%}
+.more_text a{color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;}
+.more_text a:hover{padding-right:6px;}
+.resi_scroll{height:350px;overflow-x:hidden;overflow-y:visible;}
+.top_area{margin:0px;padding:0px 0 5px 0;}
+.logo{margin:0px 0 0 0px;padding:20px 0 20px 0;position:relative}
+.logo div{margin:0px;padding:0px;position:relative;}
+.logo div.ipl_logo{display:block;font-weight:600;font-size:50px;top:40px;margin-bottom:30px;}
+div.ipl_logo img{margin:0px;padding:0px;position:relative;left:0px;top:0px;width:auto}
+.logo img{width:auto;position:absolute;top:20px;left:0px;}
+.top_advertis{margin:0px;padding:25px 0 0 0;float:right;text-align:right}
+.top_advertis img{width:100%}
+.logo a, .logo a:active{text-decoration:none;}
+.logo a div.ipl_logo{color:#e3140c}
+.logo a{color:#e3140c}
+.logo a span{color:#000}
+.logo a div.ipl_logo span{color:#000000;padding-left:6px;}
+.nav_area{margin:0px 0 30px 0;padding:0px;background:#00679c;font-family:'Roboto', sans-serif;}
+.nav_area .swiper-slide{font-size:17px;color:#fff;font-weight:500;text-transform:uppercase;float:left;width:auto;margin:0px;padding:9px 30px 9px 0;padding-right:26px\9;height:auto}
+.nav_area .swiper-slide h2{margin:0px;padding:0px;font-size:inherit;font-weight:inherit;line-height:inherit}
+.nav_area .swiper-slide a{color:#fff;}
+.nav_area .swiper-slide a:hover{color:#b0b0b0}
+.search_area{margin:5px 0 0 0;padding:0px;float:right;height:32px;border-radius:25px;background:#fff;overflow:hidden;box-shadow:inset 1px 1px 5px #464646;width:90%}
+.search_area input[type="text"]{margin:8px 0 0px 10px;padding:0px 0 0 10px;float:left;width:80%;background:#fff;height:17px;line-height:20px;float:left;border:none;border-radius:10px;color:#a7a7a7;}
+.search_area input[type="text"]:focus{outline:none}
+.search_area input[type="button"]{margin:5px 10px 0 0;padding:0px;background:#000;width:22px;height:22px;float:right;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/search-icon.png) no-repeat 0 0;border:0px;cursor:pointer}
+.swiper-slide{height:auto !important}
+.timeline_area{margin-bottom:30px;background:#004f66;font-family:'Roboto', sans-serif;}
+.time_head{padding-top:2px;font-size:21px;color:#ffa415;font-weight:600;text-transform:uppercase;display:block;}
+.timeline_area .swiper-wrapper{margin-left:2%}
+.timeline_area .swiper-slide{font-size:15px;color:#fff;font-weight:300;text-transform:uppercase;float:left;width:auto;}
+.timeline_area .swiper-slide h2{margin:0px;padding:0px;font-size:inherit;font-weight:600;line-height:inherit;font-size:17px;}
+.timeline_area .swiper-slide h2 a{margin:0px 38px 0 0;padding:5px 15px 5px 15px;display:block;color:#fff;}
+.timeline_area .swiper-slide h2 a:hover{color:#000000;background:#ffa415;box-shadow:2px 3px 5px #000, -1px -1px 5px #000}
+.timeline_area .swiper-slide a:hover{color:#ffd200}
+.fresh_news{margin-bottom:20px;overflow:hidden;}
+.fresh_news_area{background:#fff;box-shadow:2px 2px 3px #cdcdcd;margin-bottom:15px;margin-left:4px;margin-right:4px;padding:4px 6px 4px 6px;overflow:hidden}
+.fresh_news_area h3{margin:0px;padding:0px;font-size:17px;color:#1c1c1c;font-weight:300}
+.fresh_news_area .news_head{margin:0px;padding:0px;float:left;font-weight:600;font-size:19px;color:#e3140c;text-transform:uppercase;}
+.fresh_news_area h2{margin:0px;padding:0px 0 0 15px;float:left;font-size:17px;color:#000;font-weight:400;line-height:25px;}
+.top_latest{margin:0px 0 40px 0;padding:0px;overflow:hidden}
+.top_lat_area{margin:0px 0 1px 0;padding:0px;}
+.top_latest img{width:101%;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.top_latest .latest_title{margin:0px;padding:8px 7px 12px 7px;background:#222222;height:85px;}
+.top_latest .latest_title h2{margin:0px;padding:0px;font-size:24px;line-height:32px;color:#fff}
+.top_latest .latest_title a{color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.3s ease-in-out;-o-transition:all 0.3s ease-in-out;-ms-transition:all 0.3s ease-in-out;-webkit-transition:all 0.3s ease-in-out;}
+.top_latest .latest_title a:hover{color:#fff;text-shadow:2px 2px 2px #000;-moz-text-shadow:2px 2px 2px #000;-ms-text-shadow:2px 2px 2px #000;-o-text-shadow:2px 2px 2px #000;-webkit-text-shadow:2px 2px 2px #000;-khtml-text-shadow:2px 2px 2px #000;}
+.top_lat_area:hover img{transform:scale(1.04)}
+.latest_pic{overflow:hidden}
+.small_latest{width:49.9%;float:left;margin-right:1px}
+.small_latest:last-child{margin-right:0px;}
+.small_latest .latest_title{margin:0px;padding:8px 7px 12px 7px;background:#222222;height:80px;}
+.small_latest .latest_title h3{margin:0px;padding:0px;font-size:16px;line-height:21px;color:#fff}
+.small_latest .latest_title a{color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.3s ease-in-out;-o-transition:all 0.3s ease-in-out;-ms-transition:all 0.3s ease-in-out;-webkit-transition:all 0.3s ease-in-out;}
+.small_latest .latest_title a:hover{color:#fff;text-shadow:2px 2px 2px #000;-moz-text-shadow:2px 2px 2px #000;-ms-text-shadow:2px 2px 2px #000;-o-text-shadow:2px 2px 2px #000;-webkit-text-shadow:2px 2px 2px #000;-khtml-text-shadow:2px 2px 2px #000;}
+.small_latest:hover img{transform:scale(1.04);-moz-transform:scale(1.04);-ms-transform:scale(1.04);-o-transform:scale(1.04);-webkit-transform:scale(1.04)}
+.latest_pic{overflow:hidden}
+.top_story{margin:0px 0 40px 0;padding:0px;}
+.top_story ul{margin:0px;padding:0px;list-style:none}
+.top_st_area{margin:0px;padding:15px 0 8px 0;background:#fff;border:1px solid #e4e4e4;border-top:0px;box-shadow:0px 1px 4px #d9d9d9}
+.top_st_area ul li{margin:0px 0 12px 0;padding:0px 12px 10px 7px;font-size:14px;line-height:19px;color:#323232;font-family:'Roboto', sans-serif;border-bottom:1px solid #eae9e9}
+.top_st_area ul li a{color:#323232;display:block transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.top_st_area ul li a span{color:#d52c26}
+.top_st_area ul li a:hover{color:#000;}
+.top_st_area ul li:last-child{border-bottom:0px;}
+.video_area{margin:0px 0 45px 0;padding:0px;overflow:hidden}
+.video_info{margin:0px;padding:0px;}
+.video_info ul{margin:0px;padding:0px;list-style:none}
+.video_info ul li{float:left;width:185px;margin:0px 10px 0 0;}
+.video_info ul li:last-child{margin-right:0px;}
+.video_area .head_title{margin-bottom:15px}
+.video_info ul li .video_pic{margin:0px 0 5px 0;padding:0px;width:185px;height:155px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/video-bg.png) no-repeat center center;position:relative;}
+.video_info ul li .video_pic img{margin:0px auto;display:block;padding-top:14px;overflow:hidden;width:159px;height:134px;}
+.video_info ul li .video_title{margin:0px;padding:0px;}
+.video_info ul li .video_title h3{margin:0px 0 0 5px;padding:0px;font-size:14px;color:#323232;font-weight:400;line-height:18px;height:55px;}
+.video_info ul li .video_title h3 a{color:#323232;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.video_info ul li .video_title h3 a:hover{color:#000}
+.video_icon{margin:0px;padding:3px 3px 1px 3px;position:absolute;bottom:22px;left:13px;background:rgba(0,0,0,0.7);display:inline-block;color:#fff;}
+.video_icon i{font-size:20px;}
+.video_icon .time{font-size:12px;line-height:20px;}
+.photos_area{margin:0px 0 40px 0;padding:0px;}
+.photos_area .head_title{margin-bottom:15px}
+.photos_slide{padding:5px;background:#fff;border:1px solid #e4e4e4;box-shadow:1px 1px 4px #d9d9d9;-moz-box-shadow:1px 1px 4px #d9d9d9;-o-box-shadow:0px 1px 4px #d9d9d9;-ms-box-shadow:0px 1px 4px #d9d9d9;-o-box-shadow:0px 1px 4px #d9d9d9;-webkit-box-shadow:0px 1px 4px #d9d9d9;-khtml-box-shadow:0px 1px 4px #d9d9d9;overflow:hidden}
+.photos_slide .photos_slide_home{margin:0px;padding:0px;}
+.photos_slide .item{margin:0px;padding:0px;width:100%;float:left}
+.photos_slide .item img{width:100%;height:405px;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.photos_slide .ph_pic{margin:0px;padding:0px;position:relative;overflow:hidden}
+.photos_slide .photo_info{margin:0px;padding:5px 15px 7px 10px;background:#222222;height:77px;}
+.photos_slide .photo_info h3{margin:0px;padding:0px;line-height:32px;font-size:26px;font-weight:600}
+.photos_slide .item a{color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.photos_slide .item a:hover{text-shadow:2px 2px 2px #000;-moz-text-shadow:2px 2px 2px #000;-ms-text-shadow:2px 2px 2px #000;-o-text-shadow:2px 2px 2px #000;-webkit-text-shadow:2px 2px 2px #000;-khtml-text-shadow:2px 2px 2px #000;}
+.photos_slide .item:hover img{transform:scale(1.04);-moz-transform:scale(1.04);-ms-transform:scale(1.04);-o-transform:scale(1.04);-webkit-transform:scale(1.04)}
+.photos_slide .photo_icn{margin:0px;padding:0px;position:absolute;bottom:10px;left:10px;font-size:35px;}
+.photos_slide .carousel-indicators{left:90%;bottom:92px;}
+.photos_slide .carousel-indicators li{width:16px;height:16px;background:#00b3e6;border:0px;margin:0px 0 0 7px;padding:0px;box-shadow:inset -1px 2px 4px #004052;-ms-box-shadow:inset -1px 2px 4px #004052;-moz-box-shadow:inset -1px 2px 4px #004052;-webkit-box-shadow:inset -1px 2px 4px #004052;-o-box-shadow:inset -1px 2px 4px #004052;}
+.photos_slide .carousel-indicators .active{width:16px;height:16px;background:#fff;border:0px;box-shadow:inset -1px 2px 4px #303030;-ms-box-shadow:inset -1px 2px 4px #303030;-moz-box-shadow:inset -1px 2px 4px #303030;-webkit-box-shadow:inset -1px 2px 4px #303030;-o-box-shadow:inset -1px 2px 4px #303030;}
+.photos_slide .carousel-control .glyphicon-chevron-left, .photos_slide .carousel-control .icon-prev, .photos_slide .carousel-control .glyphicon-chevron-right, .photos_slide .carousel-control .icon-next{display:none;}
+.photos_slide .carousel-control.left, .photos_slide .carousel-control.right{background-image:none;}
+.columns_area{margin:0px 0 35px 0;padding:0px;}
+.columns_info{margin:0px;padding:20px 13px 0 13px;background:#fff;border:1px solid #e1e1e1;height:280px}
+.columns_info ul{margin:0px;padding:0px;list-style:none}
+.columns_info ul li{margin:0px 0 20px 0;padding:0px;overflow:hidden}
+.columns_info ul li .colums_pic{margin:0px 12px 0 0;padding:0px;float:left;overflow:hidden}
+.columns_info ul li h3{margin:0px;padding:0px;overflow:hidden;font-size:14px;line-height:19px;font-weight:400;color:#323232}
+.columns_info ul li a{display:block;color:#323232;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.columns_info ul li:hover img{transform:scale(1.02);-moz-transform:scale(1.02);-ms-transform:scale(1.02);-o-transform:scale(1.02);-webkit-transform:scale(1.02)}
+.columns_info ul li img{overflow:hidden;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.columns_info ul li:hover h3{color:#000}
+.podcasts_area{margin:0px;padding:0px;}
+.podcasts_area .head_title{margin-left:1px;margin-right:1px;}
+.podcasts_track{margin-bottom:4px;}
+.podcasts_track img{width:100%}
+.podcasts_box{background:#fff;border:1px solid #e1e1e1;border-top:0px;margin:0px;padding:0px;height:280px}
+.podcasts_box ul{margin:0px 0 10px 0;padding:3px;list-style:none;height:156px;overflow-y:auto;}
+.podcasts_box ul li{margin:0px;padding:8px 0 8px 4px;border-bottom:1px solid #ededed;overflow:hidden}
+.podcasts_box ul li:last-child{border-bottom:none;}
+.podcasts_box ul li h3{margin:0px;padding:0px;font-size:12px;color:#676767;font-weight:400;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.podcasts_box ul li h3 span{font-size:10px;color:#000}
+.podcasts_box ul li a{color:#676767;}
+.podcasts_box ul li:hover h3{color:#000;}
+.podcasts_box .social_area{margin-left:13px;margin-top:0px;float:left}
+.podcasts_box .social_area i{font-size:20px;padding-right:10px}
+.podcasts_box .social_area a{color:#4a4a4a;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.podcasts_box .social_area a:hover{color:#7f7f7f}
+.podcasts_box .btn_more{float:right}
+.points-tally h2 strong{color:#ffffff;}
+.pointtally-box-section{border:5px solid #c9c9c8;float:left;margin-top:10px;width:100%;margin-bottom:35px;}
+.pointtally-box-section table{border-collapse:collapse;border-spacing:0;background-color:#fff;}
+.pointtally-box table tr:nth-child(2n+1){background:#eeeeec;}
+.pointtally-box table tr td{color:#959595;font-family:roboto;font-size:13px;padding:15px;}
+.pointtally-box-section b, strong{font-weight:bold;}
+.points-tally{background:#055276;height:54px;line-height:54px;width:100%;}
+.points-tally h2{color:#fffc00;float:left;margin-left:15px;margin-right:10px;font-size:24px;line-height:54px;margin-top:0px;margin-bottom:0px;}
+.point-tally-icon{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/icon-trophy.png) no-repeat;display:block;float:left;height:51px;width:56px;}
+.ipl_team{margin:0px;padding:0px;}
+.ipl_team h2{margin:0px;padding:0px 0 20px 0;font-size:24px;text-transform:uppercase;font-weight:500}
+.ipl_team .team_detail{margin:0px 0 35px 0;padding:10px;background:#fff;text-align:center;border:1px solid #d8d8d8;box-shadow:5px 0 10px -2px #cccccc}
+.ipl_team .team_detail img{margin-bottom:10px;}
+.ipl_team .team_detail .phvidTitle{margin-bottom:3px;font-size:16px;}
+.ipl_team .team_detail:hover .team_detail{background:#000}
+.ipl_team .team_detail a{display:block}
+.venue_area{margin:0px;padding:0px;}
+.venue_area h2{margin:0px;padding:0px 0 20px 0;font-size:24px;text-transform:uppercase;font-weight:500}
+.venue_area .venue_info{margin:0px 0 35px 0;padding:7px;background:#fff;text-align:center;border:1px solid #d8d8d8;box-shadow:5px 0 10px -2px #cccccc}
+.venue_area .venue_info img{margin-bottom:10px;width:100%;height:134px}
+.venue_area .venue_info .phvidTitle{margin-bottom:3px;font-size:15px;height:60px;}
+.venue_area .venue_info:hover .team_detail{background:#000}
+.venue_area .venue_info a{display:block}
+.right_advertis{margin:0px;padding:35px;background:#ffffff;text-align:center}
+.scorecard_area{margin:0px;padding:0px;overflow:hidden}
+.scorecard_area .outer_wht{background:#fff;display:block;padding-bottom:40px;}
+.scorecard_iframe{margin:0 auto;margin-top:5px;padding:0 0 4px 0;border-bottom:1px solid #ededed;overflow:hidden}
+.scorecard_iframe iframe{width:280px !important;margin:0px;padding:0px;}
+.scorecard_area .iframe_m_box{width:280px;margin:0px auto}
+.point_tally{margin:0px;padding:0px;}
+.point_tally h2{padding-right:10px;}
+.point_tally .group_list{margin:-5px 0 0 0;padding:0px;display:inline-block;float:right;}
+.point_tally .group_list select{margin:0xp;padding:0px;text-transform:uppercase;background:#fff;height:24px;line-height:24px;width:80px;border:none;font-size:12px;color:#c5c5c5;border:1px solid #01a2d0}
+.point_table{margin:0px;padding:12px 3px 37px 3px;background:#fff;}
+.point_table th{margin:0px;padding:5px 10px 5px 10px;text-transform:uppercase;color:#d71920;text-align:center;font-size:15px;background:#fff}
+.point_table td{margin:0px;padding:5px 10px 5px 10px;text-align:center;font-size:14px;}
+.point_table tr:nth-child(odd){background:#fff}
+.point_table tr:nth-child(even){background:#f8f8f8}
+.point_table td:first-child{text-align:left}
+.point_table th:first-child{text-align:left;}
+.group_active{display:none}
+.group-box{display:none}
+.match_sedu{margin:0px;padding:0px;}
+.match_sedu h2{padding-right:10px;}
+.match_sedu .match_group{margin:-5px 0 0 0;padding:0px;display:inline-block;float:right;}
+.match_sedu .match_group select{margin:0px;padding:0px;text-transform:uppercase;background:#fff;height:24px;line-height:24px;width:80px;border:none;font-size:12px;color:#c5c5c5;border:1px solid #01a2d0}
+.match_table{margin:0px;padding:0px;background:#FFF}
+.match_info{margin:0px;padding:10px 10px 5px 10px;}
+.match_info ul{margin:0px;padding:0px;list-style:none}
+.match_info ul li{margin:0px 0 10px 0;padding:0px 0 10px 0;border-bottom:1px solid #e5e5e5;text-align:center}
+.match_info ul li:last-child{margin-bottom:0px;border-bottom:none}
+.match_info .team_info{margin:0px 0 5px 0;padding:0px;overflow:hidden;text-align:center}
+.match_info .team_info .team_name{margin:0 15px 0 15px;padding:0px;display:inline-block;font-weight:500;color:#000;font-size:16px;}
+.match_info .team_info .team_name .flag{margin-right:10px}
+.match_info .match_place{font-size:14px;margin-bottom:2px;}
+.match_info .match_time{font-size:14px;color:#00679c}
+.right_advertis.bottom_add{padding-left:10px;padding-right:10px;padding-top:0px;}
+.right_advertis.bottom_add .ad_cont_h{border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;padding-top:35px;padding-bottom:35px;}
+.performers_area{margin:0px;padding:0px 0 0px 0;}
+.performers_box{border:0px;background:#fff;padding-bottom:5px;overflow:hidden}
+.performers_tab{margin:0px auto;padding:0px;width:178px;}
+.performers_tab ul{margin:0px;padding:0px;list-style:none;text-align:center;border:1px solid #e1e1e1;border-top:0px;}
+.performers_tab ul li{margin:0px;padding:0px;float:left;border-top:none;}
+.performers_tab ul li a{margin:0px;padding:13px 18px 13px 18px;display:block;font-size:15px;color:#000;background:#fff;border-radius:0px;font-weight:600;border:none;}
+.performers_tab ul li a:hover{background:#000;color:#fff;border-color:none;}
+.performers_tab ul li.active a{margin:0px;padding:13px 18px 13px 18px;display:block;font-size:15px;color:#fff;background:#000;border-radius:0px;font-weight:600;border:none;border-color:none;}
+.performers_tab .nav-tabs > li.active > a,.performers_tab .nav-tabs > li.active > a:focus, .performers_tab .nav-tabs > li.active > a:hover{border:none;outline:none;color:#fff;background:#000}
+.performers_box .tab-content{padding:5px;padding-top:15px;}
+.performers_box .performers_pic{margin-bottom:10px;width:100px;border-radius:100%;margin-left:auto;margin-right:auto;box-shadow:3px 3px 10px #b9b9b9;padding:5px;}
+.performers_box .performers_pic img{width:100%;border-radius:50%;}
+.performers_box .perfor_info{margin:0px;padding:0px;width:50%;float:left;text-align:center;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/performer-line.png) no-repeat right center}
+.performers_box .perfor_info h3{margin:0px;padding:0px 0 20px 0;font-size:14px;color:#000;font-weight:600;text-transform:uppercase}
+.performers_run{margin:0px;padding:0px 0 11px 0;color:#067289;font-size:35px;font-weight:600;line-height:25px;}
+.performers_run span{margin:0px;padding:0px;font-size:16px;font-weight:400;display:block;color:#969696;}
+.performers_box .bg_none{background:none}
+.year-content{font-size:12px !important}
+.poll_area{margin:0px;padding:0px;}
+.poll_area .poll_info{margin:0px;padding:10px 15px 0 15px;background:#fff;height:292px;}
+.poll_area .poll_info h3{margin:0px;padding:0px 0 20px 0;font-size:17px;line-height:22px;color:#181818;font-weight:500}
+.poll_area .poll_info ul{margin:0px;padding:0px 0 15px 0;list-style:none}
+.poll_area .poll_info ul li{margin:0px 0 5px 0;padding:0px;font-size:14px;color:#727272;font-weight:300}
+.poll_area .poll_info ul li label{font-weight:300;font-size:14px;text-transform:uppercase}
+.ipl_bottom{margin:0px;padding:0px;overflow:hidden;position:relative;z-index:55555;}
+.ipl_bottom .vote_btn{margin:0px;padding:0px;float:left;width:120px;height:43px;line-height:40px;text-align:center;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/vote_btn_bg.png) no-repeat 0px 0px;font-size:18px;text-transform:uppercase;font-weight:500;}
+.ipl_bottom .vote_btn a{color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.ipl_bottom .vote_btn a:hover{color:#fff}
+.ipl_bottom .result_btn{margin:15px 25px 0 0;padding:0px 15px 0 0;float:right;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/arrow-blck.png) no-repeat center right;font-size:14px;text-transform:uppercase;font-weight:500;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.ipl_bottom .result_btn:hover{padding-right:20px;}
+.poll_area .poll_info ul li .selectBox input[type="radio"]{display:none;}
+.poll_area .poll_info ul li .selectBox input[type="radio"] + label span{display:inline-block;width:19px;height:19px;margin:1px 10px 0 0;vertical-align:middle;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/images/auto/customradio.png) 0 top no-repeat;cursor:pointer;float:left;}
+.poll_area .poll_info ul li .selectBox input[type="radio"]:checked + label span{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/images/auto/customradio.png) 0px -19px no-repeat;}
+.ipl_tweet{margin:0px;padding:0px;}
+.ipl_tweet .ipl_info{margin:0px;padding:0px;background:#fff}
+.ipl_tweet h2{padding-right:0px;}
+.ipl_tweet .tweet_icon{margin:-10px 0 0 0;padding:0 0px 0 0;text-align:right;float:right;font-size:40px;color:#fff;text-transform:lowercase;}
+.ipl_tweet .tweet_icon a{color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;}
+.ipl_tweet .tweet_icon a:hover{padding-right:6px;}
+.ipl_tweet .ipl_info{text-align:center;}
+.ipl_tweet .ipl_info img{display:block;margin-left:auto;margin-right:auto}
+.head_title.ipl_title{position:relative;z-index:2;}
+.head_title.hide_top{position:relative;top:-44px;z-index:1;}
+.ipl_tweet iframe{height:450px !important}
+.footer_wraper{margin:0px;padding:0px;}
+.outer_footer{float:left;width:100%;background:#000000;padding-bottom:15px;}
+.outer_footer .ftop{margin:0px;padding:0px;}
+.ftop .swiper-slide{font-size:15px;color:#fff;text-transform:uppercase;float:left;width:auto;margin:0px;padding:0px;border-right:1px solid #1c1c1c}
+.ftop .swiper-slide:first-child a{padding-left:0px;}
+.ftop .swiper-slide:last-child{border-right:none}
+.ftop .swiper-slide h2{margin:0px;font-size:inherit;font-weight:600;line-height:inherit;}
+.ftop .swiper-slide a{color:#fff;display:block;padding:10px 22px 10px 22px;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.ftop .swiper-slide i{font-size:22px;}
+.ftop .swiper-slide span{font-size:19px;line-height:39px;padding:0px 15px 2px 15px}
+.ftop .swiper-slide a:hover{color:#00679c}
+.foot_midd{background:#111111;padding:15px 0 15px 0;overflow:hidden}
+.outer_footer .fbot{margin:0px;padding:0px;font-family:'Roboto', sans-serif;}
+.outer_footer .fbot ul{margin:0px;padding:0px;list-style:none}
+.outer_footer .fbot ul li{margin:0px;padding:0px 0 7px 0;font-size:12px;color:#a6a6a6;font-weight:400}
+.outer_footer .fbot ul li a{color:#a6a6a6;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.outer_footer .fbot ul li a:hover{color:#00679c}
+.outer_footer h3{font-size:14px;color:#ffffff;font-size:14px;font-weight:500}
+.copy_write_area{margin:0px;padding:8px 0 0px 0;font-size:12px;color:#a6a6a6;background:#000000;border-top:1px solid #1e1e1e;clear:both;float:none;text-align:center;}
+.foot_addvertis{text-align:center;}
+#main_timeline_page{width:100%;float:left;}
+#main_timeline_page .container_timeline{margin-bottom:54px;width:100%}
+#main_timeline_page .container_timeline .hdn_cont_t{display:inline-block;border:1px solid #e5e5e5;border-bottom:none;font-size:30px;font-weight:bold;margin-left:-1px}
+#main_timeline_page .container_timeline .hdn_cont_t h3{margin:0;background:#fff;padding:5px 10px;color:#C3160F;font-size:43px;}
+#main_timeline_page .container_timeline .cont_tmln{display:block;box-shadow:0 0 2px #ccc;padding:10px;padding-bottom:1px;background:#fff;}
+#main_timeline_page .container_timeline .cont_tmln ul{padding-left:15px;margin:0;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li{margin-bottom:7px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_hdn{font-weight:bold;font-size:23px;padding-bottom:7px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt{padding-right:10px;padding-bottom:5px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .cont_li_pd_lr{padding:0 5px}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .cont_pht{margin-top:20px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .fa{font-size:30px;color:#848484;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .txt_cnt_ph{font-size:35px;color:#848484;font-weight:bold;text-transform:uppercase;display:block}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp{display:block;padding:0}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{width:100%;height:160px;}
+.more_red{color:#c4160f;}
+.more_red a{color:#c4160f;}
+.more_red a:hover{color:#000;}
+.ipl_schedule{margin:0px;padding:0px;}
+.ipl_schedule table{margin:0px;padding:0px;box-shadow:-1px 1px 3px #b4b4b4, 1px -1px 3px #b4b4b4;margin-bottom:50px}
+.ipl_schedule table td{margin:0px;padding:8px 5px 8px 5px;font-size:12px;}
+.ipl_schedule table th{margin:0px;padding:10px 5px 10px 5px;font-size:14px;color:#fff;background:#004f66;text-transform:uppercase}
+ol.breadcrumb{background:#efefef !important;padding-left:10px;}
+.keyplayer_area{margin:0px 0 40px 0;padding:0px 0 0 0;}
+.keyplayer_area h2{margin:0px;padding:5px;background:#fff;font-size:25px;color:#181818;display:inline-block;font-weight:300;line-height:19px;text-transform:uppercase}
+.keyplayer_box{border:1px solid #ededed;background:#fff;padding:3px;padding-bottom:30px;}
+.keyplayer_box h3{margin:0px;padding:10px 15px 21px 7px;font-size:14px;color:#313131;line-height:20px;font-weight:400;height:66px;}
+.keyplayer_box h3 a{color:#313131}
+.keyplayer_box h3 a:hover{color:#6b6b6b}
+.keyplayer_area img{height:226px;}
+.keyplayer_box{position:relative;}
+.keyplayer_area .btn_more{margin-bottom:7px;}
+.keyplayer_box .carousel-control.right, .keyplayer_box .carousel-control.left{background:none;}
+.keyplayer_box .carousel-control.right{width:35px;height:34px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/right-arrow.png) no-repeat 0px 0px;opacity:1;top:55%;right:3%;}
+.keyplayer_box .carousel-control.left{width:35px;height:34px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/left-arrow.png) no-repeat 0px 0px;opacity:1;top:55%;left:inherit;right:13.8%}
+.keyplayer_box .glyphicon.glyphicon-chevron-right, .keyplayer_box .glyphicon.glyphicon-chevron-left{display:none}
+.play_inter_icon{margin:0px;padding:0px;position:absolute;font-size:30px;color:#fff;top:55%;left:10px;}
+.play_inter_icon i{text-shadow:2px 2px 4px #2b2b2b, -1px -1px 4px #2b2b2b;}
+#keyplyer_intro_home .keyplayer_area .carousel-inner > .item h2{display:none}
+#keyplyer_intro_home .keyplayer_area{margin-bottom:20px;}
+.keyplayer_box .play_inter_icon{top:60%}
+.keyplayer_box .item img{width:100%;}
+.keyplayer_box .btn_more{margin:0px 5px 0 0;padding:0px 0px 0 0;font-size:15px;color:#077f99;text-transform:uppercase;font-weight:300;text-align:right;background:none}
+.keyplayer_box .btn_more a{color:#077f99;transition:all 0.2s ease-in-out}
+.btn_more a:hover{color:#000;font-weight:500;padding-right:5px;}
+#main_videolisting_page{width:100%;float:left}
+#main_videolisting_page h1.hdn_h{margin:0;display:block;margin-bottom:30px;font-size:35px;font-weight:bold}
+#main_videolisting_page .video_box_main{box-shadow:0 0 3px #ccc;background:#fff;padding:5px;margin-bottom:28px;}
+#main_videolisting_page .video_box_main .video_mn{display:block;position:relative;margin-bottom:10px;overflow:hidden;height:135px;}
+#main_videolisting_page .video_box_main .video_mn:hover img{transform:scale(1.2,1.2);-moz-transform:scale(1.2,1.2);-o-transform:scale(1.2,1.2);-ms-transform:scale(1.2,1.2);-webkit-transform:scale(1.2,1.2);}
+#main_videolisting_page .video_box_main .video_mn:hover .video_icn{text-shadow:2px 2px 4px #000, -2px -2px 4px #000}
+#main_videolisting_page .video_box_main .video_mn .video_icn{position:absolute;z-index:11;bottom:10px;right:10px;color:#fff;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;}
+#main_videolisting_page .video_box_main .video_mn img{width:100%;transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;}
+#main_videolisting_page .video_box_main .txt_mn_area{display:block;font-size:16px;line-height:25px;padding:5px 5px 25px;height:105px;overflow:hidden}
+#main_videolanding_page .video_player_cont{width:100%}
+.sponserd_outer_all_1{margin-bottom:20px;margin-top:15px;}
+.sponserd_outer_all_1 iframe{width:100% !important;height:80px;}
+iframe.pointstally-iframe{width:101%;overflow-y:hidden;height:306px !important;margin-left:-1px;margin-bottom:35px;}
+.ipl-league-tracker{position:relative;}
+.ipl-league-tracker > h1{background:#000 none repeat scroll 0 0;color:#fff;font-size:24px;left:7px;position:absolute;top:-16px;width:100%;height:45px;line-height:45px;padding-left:10px;}
+.ipl-league-tracker > iframe{width:100%;}
+.story_body_h strong p{font-weight:normal;}
+iframe#siTopBatsmenWdt, iframe#siTopBowlersWdt{width:100% !important;}
+.blast-from-the-past{margin-bottom:250px !important;}
+.featur_area{margin:0px 0 40px 0;padding:0px;}
+.featur_area .featur_all{margin:3px 0 0;padding:12px 10px 12px 10px;background:#fff;border:1px solid #ededed;overflow:hidden}
+.featur_area .featur_all ul{margin:0px;padding:0px;list-style:none}
+.featur_area .featur_all ul li{margin:0 3% 8px 0;padding:0 5px 7px 0;border-bottom:1px solid #ededed;float:left;width:47%}
+.featur_area .featur_all ul li a{display:block}
+.featur_area .featur_all ul li:hover .featur_pic img{transform:scale(1.05);-o-transform:scale(1.05);-moz-transform:scale(1.05);-ms-transform:scale(1.05);-webkit-transform:scale(1.05);}
+.featur_area .featur_all ul li:nth-child(odd){}
+.featur_area .featur_all ul li:nth-child(even){margin-right:0px;padding-right:0px;width:50%}
+.featur_area .featur_all ul li .featur_pic{float:left;margin:0px 10px 0 0;padding:0px;overflow:hidden}
+.featur_area .featur_all ul li .featur_pic img{transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;-webkit-transition:all 0.2s ease-in-out;}
+.featur_area .featur_all ul li .featur_info{margin:0px;padding:0px;}
+.featur_area .featur_all ul li .featur_info h3{margin:0px;padding:0px;font-size:14px;font-weight:400;line-height:20px;}
+.featur_area .featur_all ul li.last{border-bottom:0px;margin-bottom:0px;padding-bottom:0px;}
+.all_team_flag{margin:0px;padding:0px;background:#f8f8f8}
+.all_team_flag .partic_team{margin:0 4% 30px 0;padding:0px;border:1px solid #e3e3e3;background:#fff;overflow:hidden;width:46%;display:inline-block}
+.all_team_flag .partic_team .team_flag{float:left;margin-right:17px;}
+.all_team_flag .team_name{float:left;font-size:30px;font-weight:300;color:#00679d}
+.all_team_flag .partic_team a{display:block;padding:30px 20px 30px 20px;color:#00679d;overflow:hidden;transition:all 0.2s ease-in-out}
+.all_team_flag .partic_team a:hover{background:#f2f2f2}
+.tm_lg_box{margin:0px;padding:0px;width:100%;height:100%;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/bg-light.png) repeat;left:0px;top:0px;position:fixed;z-index:555;display:none}
+.tm_lg_box.active{display:block;}
+.tm_inner_box{margin:0px auto;padding:0px 0 20px 0;width:950px;background:#fff;border-radius:5px;margin-top:1%;overflow:hidden}
+.tm_inner_box h2{margin:0px 0 15px 0;padding:22px 0 15px 15px;font-weight:600;font-size:30px;text-transform:uppercase;color:#00679d;border-bottom:1px solid #dadada;overflow:hidden}
+.tm_inner_box h2 img{float:left;display:block;margin-left:15px;margin-right:15px;}
+.tm_inner_box h2 span{display:block;float:left;margin-top:8px}
+.tm_inner_box .team_pic{margin:0px;padding:0px 0px 0 15px;text-align:center}
+.tm_inner_box .team_pic img{width:100%}
+.tm_inner_box p{margin:0px;padding:0px 0 25px 0;font-size:14px;color:#292929;line-height:21px;padding-right:15px;}
+.tm_inner_box .player_list{margin:0px;padding:15px 0 0 0;font-size:14px;}
+.tm_inner_box .player_list ul{margin:0px 0 0 35px;padding:0px;width:auto;}
+.tm_inner_box .player_list ul li{margin:0px;padding:0px 0 5px 0;color:#036ea5}
+.tm_inner_box .team_head{margin:0px;padding:0px;display:inline-block}
+.tm_inner_box .team_head ul{margin:15px 0 0 0;padding:0px;list-style:none}
+.tm_inner_box .team_head ul li{margin:0px 0 3px 0;padding:0px 0 5px 0;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/line-fade.jpg) no-repeat center bottom;color:#005baa;font-size:14px;}
+.tm_inner_box .team_head ul li span{color:#000;display:inline-block;width:98px;}
+.tm_inner_box .team_close{width:25px;height:25px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/team-close.jpg) no-repeat center bottom;position:absolute;top:15px;right:30px;position:absolute;cursor:pointer}
+#main_story_page{background:#f8f8f8;box-shadow:none}
+#main_story_page .story_mdl{background:#00679d;border-top:0px;padding-bottom:0px;box-shadow:2px 3px 5px #aaa;}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl{color:#fff;text-align:center;margin:0px auto;font-size:12px;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/euro2016/images/share-line.png) no-repeat center bottom;border-bottom:0px;padding:5px 0 5px 0;font-weight:400}
+#main_story_page .story_mdl .main_shre_pnl{padding-left:25px;}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.social_icons{background:none}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.user_info .user_pic img{width:59px;height:61px;border-radius:50%;border:2px solid #e1edf3}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.social_icons{padding-top:7px;padding-bottom:0px;}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.share_text{font-size:12px;color:#fff;text-align:center;padding-top:8px;padding-bottom:8px;}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.share_text span{font-size:44px;font-weight:600;text-transform:uppercase;display:block;line-height:33px;padding-bottom:8px;}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.user_info{padding-top:8px;}
+#main_story_page .social_icons a{color:#fff}
+#main_story_page .social_icons a .fa-2x{font-size:1.3em;margin-top:10px;}
+#main_story_page .story_mdl strong{color:#fff}
+#main_story_page .story_mdl a{color:#fff;}
+#main_story_page .story_mdl .main_shre_pnl .mail_print a{color:#fff}
+#main_story_page .story_mdl .story_img img{width:99.9%;}
+.story_body_text .highlights-chunk{margin:0px 30px 0 -8px;padding:0px;width:140px;float:left;border:0px;box-shadow:0px !important;}
+.story_body_text .highlights-chunk h2{margin:0px;padding:0px 0 10px 0;font-size:16px;font-weight:600px;text-transform:uppercase;color:#323232}
+.story_body_text .highlights-chunk ul{margin:0px;padding:0px;background:#fff;box-shadow:2px 2px 5px #d1d1d1, -2px -2px 5px #d1d1d1;list-style:none;overflow:hidden}
+.story_body_text .highlights-chunk ul li{margin:0px;padding:10px 5px 10px 5px;border-bottom:1px solid #eaeaea;font-size:14px;line-height:19px;color:#575757;font-weight:500;}
+.story_body_text .highlights-chunk ul li .lft_hl{float:left;overflow:hidden;}
+.story_body_text .highlights-chunk ul li .rgt_hl{float:right;width:111px}
+.story_body_text .highlights-chunk ul li a{color:#575757}
+.story_body_text .highlights-chunk ul li strong{font-weight:400;}
+.story_body_text{float:none;width:100%}
+.st_brief_case + .story_body_text{width:600px;float:right}
+.highlights-chunk, .related-chunk{box-shadow:none !important}
+#main_story_page .story_body_h p.more-news:first-of-type::first-letter{color:inherit !important;float:inherit !important;font-size:inherit !important;font-weight:normal !important;line-height:inherit !important;padding:0px !important;}

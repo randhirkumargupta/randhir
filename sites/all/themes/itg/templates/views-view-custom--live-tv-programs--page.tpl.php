@@ -1,4 +1,16 @@
-<h3><span>Show videos</span></h3>
+<?php 
+if(!empty(get_itg_variable('itg_election_home_chunk'))){ ?>
+<div class="row desktop-hide">
+    <div class="col-md-12 col-sm-12 col-sm-12">
+			<?php			
+			$block = block_load('itg_widget', 'election_livetv_block');
+      $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+      print render($render_array);
+      ?>
+    </div>
+</div>
+<?php } ?>
+<h3><span><?php print t('Show videos'); ?></span></h3>
 <?php
 $episodes_text = '';
 global $base_url;
@@ -6,6 +18,7 @@ $current_time_program_tid = itg_live_tv_page_video_category();
 ?>
 <div class="programe-container">
   <?php
+  $counter = 0;
   foreach ($rows as $row) :
     if (function_exists('itg_category_manager_term_state')) {
       $status = itg_category_manager_term_state($row['tid']);
@@ -25,7 +38,7 @@ $current_time_program_tid = itg_live_tv_page_video_category();
           <div class="program-right">
             <?php if (isset($row['field_cm_display_title'])) : ?>
               <div class="programe-title">
-                <?php print l($row['field_cm_display_title'], 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                <?php print l(html_entity_decode($row['field_cm_display_title']), 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
               </div>
             <?php endif; ?>
           </div>
@@ -37,51 +50,14 @@ $current_time_program_tid = itg_live_tv_page_video_category();
 
         </div>
         <div class="program_data"><?php print views_embed_view('programme_content_live_tv', 'block', $row['tid']); ?></div>
+			<?php
+				if($counter == 0){
+					$block = block_load('itg_ads', 'ads_medium_rectangl_mtf_300x200');
+					$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+					print render($render_array);
+					$counter++;
+				}
+			?>
       <?php }
     } endforeach; ?>
 </div>
-
-<?php
-drupal_add_css(drupal_get_path('theme', 'itg') . '/css/jquery.mCustomScrollbar.min.css', array('scope' => 'footer'));
-drupal_add_js(drupal_get_path('theme', 'itg') . '/js/jquery.mCustomScrollbar.concat.min.js', array('scope' => 'footer'));
-
-drupal_add_js('jQuery(document).ready(function(){
-        var programData = ".view-live-tv-programs .program_data";
-        var iconMinus = ".toggle-icon .minus";
-        var iconPluse = ".toggle-icon .plus";
-        if(jQuery(programData).is(":visible")){
-            jQuery(iconMinus).show();
-        }else{
-            jQuery(iconPluse).show();
-        }        
-        jQuery(".toggle-icon").click(function(){   
-            var programRow = jQuery(this).parents(".program-row").next();            
-            if(programRow.is(":visible")){                
-               programRow.slideUp();
-               jQuery(this).find(".minus").hide();
-               jQuery(this).find(".plus").show();
-            }else{
-               programRow.slideDown();
-               jQuery(this).find(".minus").show();
-               jQuery(this).find(".plus").hide();
-            }            
-        });
-  
-        var winWidth = window.innerWidth;
-        if(winWidth > 680){
-          var getLength = jQuery(".view-programme-content-live-tv .defalt-bar .photo-list li").length;    
-          jQuery(".view-programme-content-live-tv .defalt-bar .photo-list").css("width", getLength*190 +"px");                
-              jQuery(".view-programme-content-live-tv .defalt-bar").mCustomScrollbar({
-              axis:"x",                    
-          });                       
-        }else{
-            jQuery(".view-programme-content-live-tv .defalt-bar .photo-list").slick({
-                vertical: true,
-                slidesToShow: 2,
-                dots: false,
-                nextArrow:"<i class=\'fa fa-chevron-down\'></i>",
-                prevArrow:"<i class=\'fa fa-chevron-up\'></i>"                    
-            });
-        }
-    });', array('type' => 'inline', 'scope' => 'footer'));
-?>

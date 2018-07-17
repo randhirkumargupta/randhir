@@ -35,7 +35,7 @@ function itg_registered_vs_anonymous_user_form() {
     '#markup' => print_registered_vs_anonymous_chart() ,
   );
 
-  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file'));
+  drupal_add_js(drupal_get_path('module' , 'itg_reports') . '/js/itg_reports.js' , array('type' => 'file', 'scope' => 'footer'));
   return $form;
 }
 
@@ -143,22 +143,18 @@ function get_registered_vs_anonymous_user_node_visit_count($start_date = 0 , $en
           '$gte' => $start_date ,
           '$lte' => $end_date ,
         ) ,
-        'user_id' => array(
-          '$eq' => 0
-        ) ,
+        'role' => "Front User",
       );
       $term_view_count_reg = $collection_term->find($condition_term)->count();
       // Calculate for registred users.
-      $condition_term = array(
+      $condition_term_ann = array(
         'viewtime' => array(
           '$gte' => $start_date ,
           '$lte' => $end_date ,
         ) ,
-        'user_id' => array(
-          '$ne' => 0
-        ) ,
+        'role' => 'Anonymous User',
       );
-      $term_view_count_ann = $collection_term->find($condition_term)->count();
+      $term_view_count_ann = $collection_term->find($condition_term_ann)->count();
       $only_registred_count = $registered_user_count + $term_view_count_reg;
       $only_ann_count = $anonymous_user_count + $term_view_count_ann;
       $final_data_array_count = array(

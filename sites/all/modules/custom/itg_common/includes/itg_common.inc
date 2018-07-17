@@ -19,6 +19,8 @@ function itg_common_dropdown_supplement($id = '') {
   $query->fields('n' , array('title'));
   $query->condition('n.status' , 1 , '=');
   $query->condition('m.field_supp_select_magazine_target_id' , $id , '=');
+  $query->groupBy('n.title');
+  $query->orderBy('n.nid', 'DESC');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
@@ -26,6 +28,52 @@ function itg_common_dropdown_supplement($id = '') {
   }
   return $data;
 }
+
+/**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
+function itg_common_varnish_aws_setting_form($form) {
+  $form['varnish_aws_access_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Access Key'),
+    '#default_value' => variable_get('varnish_aws_access_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_secret_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Secret Key'),
+    '#default_value' => variable_get('varnish_aws_secret_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_region'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Region'),
+    '#default_value' => variable_get('varnish_aws_region', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_DNSName'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish DNS'),
+    '#default_value' => variable_get('varnish_DNSName', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_target_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Target ARN'),
+    '#default_value' => variable_get('varnish_aws_target_id', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Varnish AWS Type'),
+    '#default_value' => variable_get('varnish_aws_type', ''),
+     '#options' => array('target'=>t('Target Groups'),'LB'=> t('Load Balancer')),
+    '#required' => TRUE,
+  );
+  return system_settings_form($form);
+}
+
 
 /**
  * Helper function to populate the second dropdown.
@@ -133,13 +181,40 @@ function itg_common_get_node_type($nid) {
 }
 
 /**
+ * Get node status using nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_node_status($nid) {
+  $query = db_select('node' , 'n')
+      ->fields('n' , array('status'))
+      ->condition('n.nid' , $nid , '=');
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get node type and primary category from nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_type_category($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_primary_category', 'fc', 'n.nid = fc.entity_id');
+  $query->fields('n', array('type'));
+  $query->fields('fc', array('field_primary_category_value'));
+  $query->condition('n.nid', $nid, '=');
+
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
  * Get node count.
  * @param string $content_type
  * @param int $uid
  * @return int
  */
 function itg_get_all_node($content_type , $uid) {
-
   $query = "SELECT COUNT(*) amount FROM {node} n " .
       "WHERE n.type = :type AND n.uid = :uid";
   $result = db_query($query , array(':type' => $content_type , ':uid' => $uid))->fetch();
@@ -354,25 +429,40 @@ function itg_common_round_rating($average_rating) {
  * Implements itg_total_share_count
  * @param string $actual_link
  *   Send url for facebook share
- * 
+ * @param string $type
  * @return int
  *   total share count
  */
-function itg_total_share_count($actual_link) {
-  $fb_google_count = $fb_count = $google_count = 0;
+function itg_total_share_count($actual_link, $type = NULL) {
+  //Need to remove share count from story page.
+  return 0;
+  if (!empty($actual_link)) {
+    $fb_google_count = $fb_count = $google_count = $twitter_count = 0;
 
-  if (function_exists('itg_facebook_share_count')) {
-    $fb_count = itg_facebook_share_count($actual_link);
+    if (function_exists('itg_facebook_share_count')) {
+      //$fb_count = itg_facebook_share_count($actual_link);
+      $query = db_select('itg_node_share_count', 'insc')
+          ->fields('insc', array('share_count'))
+          ->condition('insc.nid', $actual_link, '=');
+      $result = $query->execute()->fetchField();
+      if (!empty($result)) {
+        $fb_count = (int) $fb_count + (int) $result;
+      }
+    }
+
+    // get google share count
+    if (function_exists('itg_google_share_count')) {
+      $google_count = itg_google_share_count($actual_link);
+    }
+    
+    if(function_exists('itg_common_mongo_share_count') && $type == 'story') {
+      $twitter_count = itg_common_mongo_share_count($actual_link, 'twitter_share', 'front_user_activity');
+    }
+
+    $fb_google_count = $fb_count + $google_count + $twitter_count;
+
+    return $fb_google_count;
   }
-
-  // get google share count
-  if (function_exists('itg_google_share_count')) {
-    $google_count = itg_google_share_count($actual_link);
-  }
-
-  $fb_google_count = $fb_count + $google_count;
-
-  return $fb_google_count;
 }
 
 /**
@@ -400,12 +490,16 @@ function itg_common_get_story_status($nid) {
  * @param int $entity_id
  */
 function itg_get_related_story_content($entity_id) {
-  if (function_exists('apachesolr_get_solr')) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if (function_exists('apachesolr_get_solr') && $ping) {
     $solr = apachesolr_get_solr();
-    $query = apachesolr_drupal_query("custom" , array('q' => "entity_id:$entity_id"));
-    $query->addParam('rows' , '4'); // How many rows of result to display default it is 10.
-    $query->addParam('qf' , 'entity_id'); // Only search in id
-    $query->addParam('bs_status' , 'true'); // Only search in title
+    //pr($solr);
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+    $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in id
+    $query->addParam('bs_status', 'true'); // Only search in title
     $resp_search = $query->search();
     return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
   }
@@ -416,7 +510,7 @@ function itg_get_related_story_content($entity_id) {
  * @param string $entity_id
  */
 function itg_get_related_story_id($related_content) {
-  $related_content = explode(',' , $related_content);
+  $related_content = explode('|~|' , $related_content);
   foreach ($related_content as $fn_result) {
     $related_content = explode('_' , $fn_result);
     $final_related [] = $related_content[1];
@@ -439,7 +533,7 @@ function itg_sso_url($link_name , $link_title = NULL) {
   $site = 'indiatoday';
   if ($_SERVER['HTTP_HOST'] == PARENT_SSO) {
     if ($user->uid == 0) {
-      $url = 'http://' . PARENT_SSO . '/saml_login/other/domain_info';
+      $url =  PARENT_SSO . '/saml_login/other/domain_info';
       if ($link_title !== NULL) {
         return '<a title ="' . $link_title . '" href="javascript:void(0)" onclick="CenterWindow (550, 500, 50, ' . "'" . $url . "'" . ', ' . "'" . $site . "'" . ')">' . $link_name . '</a>';
       }
@@ -477,6 +571,7 @@ function itg_common_only_text_string($str) {
   $data = preg_replace("/'/" , "\\'" , $data);
   $data = htmlentities($data , ENT_QUOTES);
   $data = trim(str_replace('&nbsp;' , ' ' , $data));
+  $data = str_replace(array("\r","\n"),"",$data);
 
   return $data;
 }
@@ -487,212 +582,16 @@ function itg_common_only_text_string($str) {
  * @param string $status
  */
 function itg_common_get_latest_byline($nid , $status) {
-  $query = db_select('itg_multi_byline_info' , 's');
-  $query->fields('s' , array('byline_id'))
-      ->condition('s.nid' , $nid , '=')
-      ->condition('s.publish_status' , $status , '=');
-  $query->orderBy("byline_weight" , "ASC");
-  $query->range(0 , 1);
-  $result = $query->execute();
-  $byline_id = $result->fetchField();
-  if ($byline_id) {
-    return $byline_id;
+  if (!empty($nid)) {
+    $query = db_select('itg_multi_byline_info', 's');
+    $query->fields('s', array('byline_id'))
+        ->condition('s.nid', $nid, '=')
+        ->condition('s.publish_status', $status, '=');
+    $query->orderBy("byline_weight", "ASC");
+    $query->range(0, 10);
+    $result = $query->execute();
+    return $result->fetchAll(PDO::FETCH_ASSOC);
   }
-  else {
-    return FALSE;
-  }
-}
-
-/**
- * Implementing 'itg_common_custompath_insert_load'.
- * @param $node object
- * Creating Custom path alias for story, photogallery and videogallery
- */
-function itg_common_custompath_insert_load($node) {
-  global $edited_sef_url;
-  if (!empty($edited_sef_url)) {
-    $lencount_sef = strlen($edited_sef_url);
-    if ($lencount_sef >= 160) {
-      $node_sef = substr($edited_sef_url , 0 , 160);
-    }
-    else {
-      $node_sef = $edited_sef_url;
-    }
-  }
-  else {
-    $title_lenght = strlen($node->title);
-    if ($title_lenght >= 160) {
-      $node_sef = substr($node->title , 0 , 160);
-    }
-    else {
-      $node_sef = $node->title;
-    }
-  }
-  if (!empty($node->workbench_moderation_state_new)) {
-    if ($node->workbench_moderation_state_new == 'draft' || $node->workbench_moderation_state_new == 'published') {
-      $published_date = date('Y-m-d' , $node->created);
-    }
-  }
-  else {
-    $published_date = date('Y-m-d' , $node->changed);
-  }
-  $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection)) {
-    $parents = taxonomy_get_parents_all($getsection);
-    if (isset($parents) && !empty($parents)) {
-      foreach ($parents as $key => $val) {
-        $section_hierarchy[] = $val->name;
-      }
-    }
-    if (is_issue_baised_magazine($node)) {
-      $pathdata = 'magazine';
-      $pathdata .= '/'. get_path_from_category($getsection);
-      //Get node type.
-      $pathdata .= '/' . $node->type;
-      // Get issue date.
-      $issue_date = $node->field_story_issue_date['und'][0]['value'];
-      $issue_date_sef_format = date('Ymd' , strtotime($issue_date));
-      // preapreurl with issue date.
-      $pathdata .= '/' . $issue_date_sef_format;
-      // Add node title.
-      $pathdata .= '-' . trim($node_sef);
-      // Add node id.
-      $pathdata .= '-' . $node->nid;
-      // Add workbanch date.
-      $pathdata .= '-' . $published_date;
-      // Prepare SEO friendly node url
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      // Create url alise for magazine type story.
-      $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-    }
-    elseif (is_photo_story($node)) {
-      //Add path from category.
-      $pathdata = get_path_from_category($getsection);
-      // Add static value for photo story.
-      $pathdata .= '/photo-story';
-      // Add node title.
-      $pathdata .= '/' . trim($node_sef);
-      // Add node id.
-      $pathdata .= '/' . $node->nid;
-      // Add workbanch date.
-      $pathdata .= '/' . $published_date;
-      // Prepare SEO friendly node url
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      // Create url alise for magazine type story.
-      $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-    }
-    else {
-      $set_hierarchy = array_reverse($section_hierarchy);
-      $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      $newpath = itg_common_custompath_insert_val($pathdata);
-      $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-    }
-  }
-}
-
-function is_photo_story($node) {
-  $flag = FALSE;
-  if (!empty($node->field_story_type['und'][0]['value']) && $node->field_story_type['und'][0]['value'] == 'photo_story' && empty($node->field_story_magazine_story_issue['und'][0]['value'])) {
-    $flag = TRUE;
-  }
-  return $flag;
-}
-
-function is_issue_baised_magazine($node) {
-  $flag = FALSE;
-  if (!is_photo_story($node) && !empty($node->field_story_magazine_story_issue['und'][0]['value']) && $node->field_story_magazine_story_issue['und'][0]['value'] == 'magazine_issue_story') {
-    $flag = TRUE;
-  }
-  return $flag;
-}
-
-function get_path_from_category($getsection) {
-  $pathdata = '';
-  // Get parent of primary category.
-  $all_terms = taxonomy_get_parents_all($getsection);
-  $terms_bunch = array_reverse($all_terms);
-  $section_name = $terms_bunch[0]->name;
-  // Get parent of primary category.
-  $primary_cat_array = taxonomy_term_load($getsection);
-  $primary_cat_name = $primary_cat_array->name;
-  // Handle case if section and parimary category are same.
-  if ($section_name == $primary_cat_name) {
-    //prepare ur with parimary cat only.
-    $pathdata .= strtolower($primary_cat_name);
-  }
-  else {
-    //prepare ur with parimary cat and section both.
-    $pathdata .= strtolower($section_name) . '/' . strtolower($primary_cat_name);
-  }
-  return $pathdata;
-}
-
-/**
- * Implementing 'itg_common_custompath_migrated_load'.
- * @param $node object
- * Creating Custom path alias for story, photogallery and videogallery
- */
-function itg_common_custompath_migrated_load($node , $type = NULL) {
-  if (!empty($node->path['alias'])) {
-
-    $node_sef = $node->path['alias'];
-  }
-  else {
-    $title_lenght = strlen($node->title);
-    if ($title_lenght >= 160) {
-      $node_sef = substr($node->title , 0 , 160);
-    }
-    else {
-      $node_sef = $node->title;
-    }
-  }
-
-
-  if ($node->type == 'photogallery') {
-    $published_date = date('Y-m-d' , $node->created);
-  }
-  else {
-    $published_dat = explode(' ' , $node->field_itg_content_publish_date['und'][0]['value']);
-    $published_date = $published_dat[0];
-  }
-  $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
-  if (!empty($getsection)) {
-    $parents = taxonomy_get_parents_all($getsection);
-    if (isset($parents) && !empty($parents)) {
-      foreach ($parents as $key => $val) {
-        $section_hierarchy[] = $val->name;
-      }
-    }
-    $set_hierarchy = array_reverse($section_hierarchy);
-    if ($type != 'update_migrated') {
-      $pathdata = strtolower(implode("/" , $set_hierarchy)) . '/' . $node->type . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
-      // $newpath = itg_common_custompath_insert_val($pathdata);
-      $newpath = $pathdata;
-    }
-    else {
-      $newpath = $node_sef;
-    }
-    $node->path = array('alias' => $newpath , 'pathauto' => FALSE);
-  }
-}
-
-/**
- * Implementing 'itg_common_custompath_insert_val'.
- * @param $pathdata path alias content
- * Creating custom path alias 
- */
-function itg_common_custompath_insert_val($pathdata) {
-
-  if (preg_match("![^a-z0-9]!i" , $pathdata)) {
-    $pathdata = preg_replace('/[^a-zA-Z0-9\/\\.\']/' , '-' , $pathdata);
-    while (preg_match('/--/' , $pathdata)) {
-      $pathdata = preg_replace('/--/' , '-' , $pathdata);
-    }
-    $pathdata = rtrim($pathdata , "-");
-    $pathdata = strtolower($pathdata);
-    $pathdata = str_replace(array(':' , '*' , '"' , "'" , '#') , "-" , $pathdata);
-  }
-  return $pathdata;
 }
 
 /**
@@ -706,4 +605,192 @@ function itg_get_fb_share($id , $type) {
       ->condition('n.node_id' , $id)
       ->execute();
   return $result->rowCount();
+}
+
+/**
+ * itg_get_multi_byline_details
+ */
+function itg_get_multi_byline_details($nid , $status = NULL) {
+  $options = '';
+  if (!empty($nid) && !empty($status)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_extra_large_image', 're', 'n.nid = re.entity_id');
+    $query->leftJoin('field_data_field_reporter_twitter_handle', 'frq', 'n.nid = frq.entity_id');
+    $query->leftJoin('itg_multi_byline_info', 's', 'n.nid = s.byline_id');
+    $query->fields('n');
+    $query->fields('frq', array('field_reporter_twitter_handle_value'));
+    $query->fields('re', array('field_story_extra_large_image_fid'));
+    $query->condition('s.nid', $nid, '=');
+    $query->condition('s.publish_status', $status, '=');
+    $query->condition('n.type', 'reporter', '=');
+    $query->orderBy("s.byline_weight", "ASC");
+    $result = $query->execute();
+    $key = 0;
+    while ($record = $result->fetchAssoc()) {
+      $options[$key]['nid'] = $record['nid'];
+      $options[$key]['title'] = $record['title'];
+      $options[$key]['extra_large_image'] = $record['field_story_extra_large_image_fid'];
+      $options[$key]['twitter_handle'] = $record['field_reporter_twitter_handle_value'];
+      ++$key;
+    }
+  }
+  return $options;
+}
+
+/**
+ * get domian name
+ */
+
+function itg_common_get_domain($url) {
+  $pieces = parse_url($url);
+  $domain = isset($pieces['host']) ? $pieces['host'] : $pieces['path'];
+  if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+    return $regs['domain'];
+  }
+  return $pieces['host'];
+}
+
+/**
+ * Function is used to prepare node title with emoji.
+ * @param int $nid
+ *   Node id
+ * @param int $min_limit
+ *   Min limit to truncate node title
+ * @param int $max_limit
+ *   Max limit to truncate node title
+ * @return string
+ *   Returns node title.
+ */
+function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
+  $max_limit = 10000;
+  $arg = arg();
+  $titlte = "";
+  $positions_array = array();
+  $left_smiles = "";
+  $right_smiles = "";
+  $result = [];
+  if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
+   $result[] = get_field_value_for_smily($node_obj);
+   
+  } else {
+      $result[] = array(
+        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
+        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
+        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
+        'field_emoji_value' => $node_obj['field_emoji_value'],
+        'title' => $node_obj['title'],
+      );
+  }
+  if (!empty($result[0]['field_story_short_headline_value'])) {
+    foreach ($result[0]['field_emoji_position_value'] as $positions) {
+        $positions_array[] = $positions;
+    }
+    if (in_array('left', $positions_array) && !empty($result[0]['field_emoji_2_value'])) {      
+        // Get all the smiley images.
+        preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images);
+        $left_smiles = '<span class="smilies-title">';
+        // Implode all images in case of muliple smiley.
+        $left_smiles .= implode("", $images[0]);
+
+        $left_smiles .= '</span>';      
+    }
+    if (in_array('right', $positions_array) && !empty($result[0]['field_emoji_value'])) {
+     
+        // Get all the smiley images.
+        preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images_2);
+        // Implode all images in case of muliple smiley.
+
+        $right_smiles = '<span class="smilies-title">';
+        // Implode all images in case of muliple smiley.
+        $right_smiles .= implode("", $images_2[0]);
+
+        $right_smiles .= '</span>';
+      
+    }
+    if (count($result) && !$is_long_headline) {
+      if (!empty($left_smiles) || !empty($right_smiles)) {
+        $titlte = mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, "..");
+      }
+      else {
+        $max_limit += 10;
+        $titlte = mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, "..");
+      }
+      // Add smiley to right;
+      $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
+      return $titlte;
+    }
+    else {
+      if (!empty($left_smiles) || !empty($right_smiles)) {
+        $titlte = mb_strimwidth($result[0]['title'], $min_limit, $max_limit, "..");
+      }
+      else {
+        $max_limit += 10;
+        $titlte = mb_strimwidth($result[0]['title'], $min_limit, $max_limit, "..");
+      }
+      $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
+      return $titlte;
+    }
+  }
+  else {
+    return mb_strimwidth(_widget_title($result[0]['title'] , FALSE), $min_limit, $max_limit, "..");
+  }
+}
+
+/**
+ * Helper function to get user details
+ * @param int $uid 
+ */
+function itg_custom_get_user_details($uid) {
+  if (!empty($uid)) {
+    $query = db_select('users', 'u');
+    $query->leftjoin('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
+    $query->leftjoin('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
+    $query->fields('u', array('uid'))
+        ->fields('u', array('mail'))
+        ->fields('u', array('name'))
+        ->fields('f', array('field_first_name_value'))
+        ->fields('g', array('field_last_name_value'))
+        ->condition('u.status', 1)
+        ->condition('u.uid', $uid);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $user_list['mail'] = $record['mail'];
+      $user_list['name'] = $record['name'];
+      $user_list['fname'] = $record['field_first_name_value'];
+      $user_list['lname'] = $record['field_last_name_value'];
+    }
+
+    return $user_list;
+  }
+}
+
+/**
+ * Helper function to create image style
+ * @param int $nid
+ */
+function create_node_image_style() {
+  $arg = arg();
+  
+  if (is_numeric($arg[1])) {
+    //add function by pavnish
+  }
+  
+}
+
+/**
+ * This function is used to create settings.
+ * 
+ * {@inheritdoc}
+ */
+function itg_global_custom_variables() {
+	$form = array();
+  
+  $form['itg_widgets_sports'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable Sports widgets on Sports page '),      
+      '#default_value' => variable_get('itg_widgets_sports'),
+  );
+  
+  return system_settings_form($form);
 }

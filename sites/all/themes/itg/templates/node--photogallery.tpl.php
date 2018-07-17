@@ -1,8 +1,14 @@
 <script type="text/javascript">var __at__ = 0;</script>
-<div style="display:none">
+<?php 
+if (!empty($_GET['preview_log'])) {
+     $display_style = 'block'; 
+	} else {
+    $display_style = 'none';
+  }
+?>
+<div style="display:<?php print $display_style; ?>">
 <?php print render($content); ?>
 </div>
-<div class="ad-blocker"></div>
 <?php print $node->view_output; ?>
 <?php
 // get config value
@@ -11,9 +17,12 @@ if (!empty($node->field_photogallery_configuration['und'])) {
     $config[] = $value['value'];
   }
 }
-//print views_embed_view('photo_list_of_category', 'block_1');
+
 if (function_exists('taboola_view')) {
-  taboola_view();
+  $tab_org = "_taboola.push({article:";
+  $tab_rep = "_taboola.push({photo:";
+  $tabula_view = taboola_view();
+  str_replace($tab_org, $tab_rep, $tabula_view);
 }
      
 if (function_exists(global_comment_last_record)) {
@@ -24,8 +33,9 @@ if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
   ?>
   <div class="vukkul-comment">
       <div id="vuukle-emote"></div>
-      <div id="vuukle_div"></div>
-
+      <!-- <div id="vuukle_div"></div> -->
+      <div id="vuukle-comments"></div>
+      <div class='vuukle-powerbar'></div>
       <?php
       if (function_exists('vukkul_view')) {
         vukkul_view();

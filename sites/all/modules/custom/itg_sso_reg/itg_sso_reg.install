@@ -105,6 +105,47 @@ function itg_sso_reg_schema() {
     ),
     'primary key' => array('aid'),
   );
+  
+  $schema['itg_sso_email_history'] = array(
+    'description' => 'Table for store information related to itg_sso email history.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a table.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'uid',
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'email' => array(
+        'description' => 'Email.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'domain' => array(
+        'description' => 'Domain name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => t('Created user date'),
+        'type' => 'varchar',
+        'mysql_type' => 'datetime',
+        'not null' => FALSE,
+      ),
+      
+    ),
+    'primary key' => array('id'),
+  );
 
   return $schema;
 }

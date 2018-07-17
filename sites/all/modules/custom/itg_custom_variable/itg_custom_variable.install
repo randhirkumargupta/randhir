@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Create table itg_autotoday table on back end.
+ * 
+ * Implements hook_schema().
+ * {@inheritdoc}.
+ */
+function itg_custom_variable_schema() {
+  $schema['itg_custom_variable'] = array(
+    'description' => 'Named variable/value pairs created by ITG or any other module or theme.',
+    'fields' => array(
+      'name' => array(
+        'description' => 'The name of the variable.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'value' => array(
+        'description' => 'The value of the variable.',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+        'translatable' => TRUE,
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_custom_variable_uninstall() {
+  drupal_uninstall_schema('itg_custom_variable');
+}

@@ -31,9 +31,7 @@ function astro_feature_user_default_permissions() {
     'name' => 'delete any astro content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -44,9 +42,7 @@ function astro_feature_user_default_permissions() {
     'name' => 'delete own astro content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

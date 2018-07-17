@@ -10,19 +10,27 @@
  * @return type
  */
 function itg_widget_site_map() {
-  drupal_add_css(".nested-taxonomy-tree a:hover {color: #a00606 !important}", array("type" => "inline", "scope" => "footer"));
-  $tree = extranet_get_nested_tree((int) CATEGORY_MANAGMENT);
-  $keys = array_keys($tree);
-  foreach ($keys as $index => $data) {
-    $term_array = array($keys[$index] => $tree[$keys[$index]]);
-    if ($index % 2 == 0) {
-      $left_tree .= extranet_output_nested_tree($term_array);
+  $print_tree = &drupal_static(__FUNCTION__);
+  if (!isset($print_tree)) {
+    if ($cache = cache_get('site_map_data')) {
+      $print_tree = $cache->data;
     }
     else {
-      $right_tree .= extranet_output_nested_tree($term_array);
+      $tree = extranet_get_nested_tree((int) CATEGORY_MANAGMENT);
+      $keys = array_keys($tree);
+      foreach ($keys as $index => $data) {
+        $term_array = array($keys[$index] => $tree[$keys[$index]]);
+        if ($index % 2 == 0) {
+          $left_tree .= extranet_output_nested_tree($term_array);
+        }
+        else {
+          $right_tree .= extranet_output_nested_tree($term_array);
+        }
+      }
+      $print_tree = '<div class="row site-map"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
+      cache_set('site_map_data' , $print_tree , 'cache');
     }
   }
-  $print_tree = '<div class="row site-map"><div class="col-md-6">' . $left_tree . '</div> <div class="col-md-6">' . $right_tree . '</div></div>';
   return $print_tree;
 }
 
@@ -38,7 +46,7 @@ function extranet_output_nested_tree($tree) {
       if (function_exists('itg_category_manager_term_state')) {
         if (itg_category_manager_term_state($term->tid)) {
           $output .= '<li class="taxonomy-term">';
-          $output .= l($term->name, "taxonomy/term/$term->tid");
+          $output .= l($term->name , "taxonomy/term/$term->tid");
           if ($term->children) {
             $output .= extranet_output_nested_tree($term->children);
           }
@@ -47,7 +55,7 @@ function extranet_output_nested_tree($tree) {
       }
       else {
         $output .= '<li class="taxonomy-term">';
-        $output .= l($term->name, "taxonomy/term/$term->tid");
+        $output .= l($term->name , "taxonomy/term/$term->tid");
         if ($term->children) {
           $output .= extranet_output_nested_tree($term->children);
         }
@@ -68,7 +76,7 @@ function extranet_output_nested_tree($tree) {
  * @param int $depth
  * @return array
  */
-function extranet_get_nested_tree($terms = array(), $max_depth = NULL, $parent = 0, $parents_index = array(), $depth = 0) {
+function extranet_get_nested_tree($terms = array() , $max_depth = NULL , $parent = 0 , $parents_index = array() , $depth = 0) {
   if (is_int($terms)) {
     $terms = taxonomy_get_tree($terms);
   }
@@ -96,7 +104,7 @@ function extranet_get_nested_tree($terms = array(), $max_depth = NULL, $parent =
 
   foreach ($return as &$term) {
     if (isset($parents_index[$term->tid]) && (is_null($max_depth) || $depth < $max_depth)) {
-      $term->children = extranet_get_nested_tree($parents_index[$term->tid], $max_depth, $term->tid, $parents_index, $depth + 1);
+      $term->children = extranet_get_nested_tree($parents_index[$term->tid] , $max_depth , $term->tid , $parents_index , $depth + 1);
     }
   }
   return $return;

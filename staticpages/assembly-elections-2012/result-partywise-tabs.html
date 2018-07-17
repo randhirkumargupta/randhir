@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type='text/javascript' src='js/tab.js' ></script>
+<style>
+body {
+	margin:0px;
+	padding:0;
+}
+*{outline:none;}
+ul {
+	padding:0;
+	margin:0;
+}
+ul li {
+	list-style-type:none;
+	margin:0 0 5px 0;
+}
+.partywise-container-top {
+	width:375px;
+}
+.tallytitle {
+	color: #6A6A6A;
+	font: 700 14px/18px arial;
+}
+.tiletext {
+	color: #FFFFFF;
+	font: bold 11px arial;
+	padding: 2px 7px;
+}
+.tiletext_a {
+	color: #FFFFFF;
+	font: bold 12px/18px arial;
+	padding-left: 5px;
+}
+.tiletext_b {
+	color: #000000;
+	font: bold 12px/18px arial;
+	text-align: center;
+}
+a {
+	color:#333;
+}
+.deactive {
+    color: #FFFFFF;
+    float: left;
+    font: bold 12px/18px arial;
+    height: 19px;
+    margin: 0 5px 0 0;
+    text-align: center;
+	min-width:26px;
+}
+.last-state {
+	margin:0;
+}
+.deactive a {
+    color: #333333;
+    outline: medium none;
+}
+.st-name {
+	padding:0 5px;
+}
+.deactive a.current {
+	color:#C30;
+}
+a img {
+	border:medium none;
+}
+a {
+	text-decoration:none;
+}
+a:hover {
+	color:#a41100 ;
+}
+.result-tabnav {
+	width:300px;
+}
+.results-top {
+	background:url(images/Top_Image.gif) no-repeat scroll 0 0;
+	width:298px;
+	height:23px;
+	text-indent:-9999px;
+	text-transform:capitalize;
+}
+.results-top a {
+	width:298px;
+	height:23px;
+	text-indent:-9999px;
+	text-transform:capitalize;
+	display:block;
+}
+.state-tabs {
+	background: none repeat scroll 0 0 #DADADA;
+	border-bottom: 2px solid #a41100 ;
+	border-top: 2px solid #FFFFFF;
+	overflow: hidden;
+	padding: 5px 5px 0 10px;
+}
+.inner-resulttabs {
+	border-right:1px solid #333;
+	border-left:1px solid #333;
+	width:296px;
+}
+.bottom-result {
+	background:url(images/Bottom_corner.gif) no-repeat scroll 0 0;
+	width:298;
+	height:9px;
+	margin:-5px 0 0 0;
+}
+.full-list {
+	overflow:hidden;
+}
+.full-list a {
+	float:right;
+	font:700 12px Arial, Helvetica, sans-serif;
+	margin:3px 5px 5px 0;
+}
+.current-state .st-name {
+    background: url("images/Tab_BG.gif") repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    float: left;
+    height: 19px;
+    line-height: 18px;
+}
+.current-state .left-rd {
+	background: url("images/Tab_Left.gif") no-repeat scroll 0 0 transparent;
+	float: left;
+	height: 19px;
+	width: 5px;
+}
+.current-state .right-rd {
+	background: url("images/Tab_Right.gif") no-repeat scroll 0 0 transparent;
+	float: left;
+	height: 19px;
+	width: 5px;
+}
+.result-tabs {
+	width:300px;
+}
+.tiletext {
+	color: #333;
+	font: bold 11px arial;
+	padding: 2px 7px;
+}
+.tiletext_a {
+	color: #fff;
+	font: bold 12px/18px arial;
+	padding-left: 5px;
+}
+.tiletext_b {
+	background: url("images/Party_Tab_Bg-18.gif") repeat-x scroll 0 0 transparent;
+	color: #107476;
+	font: bold 12px/18px arial;
+	height: 18px;
+	text-align: right;
+}
+.t1 {
+	color: #641475;
+	padding: 0 20px 0 0;
+}
+.tiletext-year12 {
+	color: #107476;
+	font: 700 12px Arial, Helvetica, sans-serif;
+	text-align: right;
+}
+.tiletext-year07 {
+	color: #641475;
+	font: 700 12px Arial, Helvetica, sans-serif;
+	padding: 0 20px 0 0;
+	text-align: right;
+}
+.last-list-row{margin:0;}
+</style>
+</head>
+
+<body>
+ <div class="results-top"><a href="/assembly-elections-2012/live-results.jsp" target="_blank">Assembly Elections 2012</a></div>
+<div class="result-tabs" id="example-one">
+  <div class="tabnav">
+   
+    <div class="inner-resulttabs">
+      <div class="state-tabs">
+        <div class="deactive"><a href="#UP" class="current-state state-tab"><span class="left-rd"></span><span class="st-name">UP</span><span class="right-rd"></span></a></div>
+        <div class="deactive"><a href="#PJB" class="state-tab"><span class="left-rd"></span><span class="st-name">Punjab</span><span class="right-rd"></span></a></div>
+        <div class="deactive"><a href="#UTK" class="state-tab"><span class="left-rd"></span><span class="st-name">Uttarakhand</span><span class="right-rd"></span></a></div>
+        <div class="deactive"><a href="#GOA" class="state-tab"><span class="left-rd"></span><span class="st-name">Goa</span><span class="right-rd"></span></a></div>
+        <div class="deactive last-state"><a href="#MNP" class="state-tab"><span class="left-rd"></span><span class="st-name">Manipur</span><span class="right-rd"></span></a></div>
+      </div>
+      <div class="clear"></div>
+      <table width="296" cellspacing="0" cellpadding="0" border="0" class="state-row" style="margin:3px 0 0 0;">
+        <tbody>
+          <tr>
+            <td width="40%" align="center"   class="tiletext_a">&nbsp;</td>
+            <td align="right" width="30%" valign="top"  class="tiletext-year12">2012</td>
+            <td align="right" width="30%" valign="top"  class="tiletext-year07">2007</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="list-wrap" style="clear: both;">
+        <div id="UP" style="display: block;">
+          <table width="100%" cellspacing="0" cellpadding="0" border="0" class="party-tally">
+            <tbody>
+              <tr>
+                <td><ul class="result-tally">
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#0a1bed" class="tiletext_a">BSP</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">80</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">206</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#C12267" class="tiletext_a">SP</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">224</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">97</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#fe9400" class="tiletext_a">BJP</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">47</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">51</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#018fff" class="tiletext_a">CONG</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">28</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">22</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#4c7013" class="tiletext_a">OTH</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">24</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">27</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li class="last-list-row">
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="296" align="right" height="18" bgcolor="#ffffff"><div class="full-list"><a target="_blank" href="/assembly-elections-2012/live-poll-result.jsp?state=uttarpradesh">Full List</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                  </ul></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="position: relative; top: 0px; left: 0px; display: none;" id="PJB" class="hide">
+          <table width="100%" cellspacing="0" cellpadding="0" border="0" class="party-tally">
+            <tbody>
+              <tr>
+                <td><ul  class="result-tally">
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#ffce81" class="tiletext_a">SAD</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">56</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">49</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#018fff" class="tiletext_a">CONG</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">46</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">44</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#fe9400" class="tiletext_a">BJP</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">12</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">19</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li>
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="40%" align="center" height="18" bgcolor="#4c7013" class="tiletext_a">OTH</td>
+                            <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">03</td>
+                            <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">05</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                    <li class="last-list-row">
+                      <table width="296" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                          <tr>
+                            <td width="296" align="right" height="18" bgcolor="#ffffff"><div class="full-list"><a target="_blank" href="/assembly-elections-2012/live-poll-result.jsp?state=punjab">Full List</a></div></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </li>
+                  </ul></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="position: relative; top: 0px; left: 0px; display: none;" id="UTK" class="hide"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="party-tally">
+    <tbody>
+     
+     
+      <tr>
+        <td><ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+            
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                     <td width="40%" align="center" height="18" bgcolor="#018fff" class="tiletext_a">CONG</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">32</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">21</td>
+            
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                   <td width="40%" align="center" height="18" bgcolor="#fe9400" class="tiletext_a">BJP</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">31</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">35</td>
+     
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#0a1bed" class="tiletext_a">BSP</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">03</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">08</td>
+                   
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#4c7013" class="tiletext_a">OTH</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">04</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">06</td>
+                
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+             <li class="last-list-row"> <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="296" align="right" height="18" bgcolor="#ffffff"><div class="full-list"><a target="_blank" href="/assembly-elections-2012/live-poll-result.jsp?state=uttarakhand">Full List</a></div></td>
+                   
+                
+                  </tr>
+                </tbody>
+              </table></li>
+          </ul></td>
+      </tr>
+    </tbody>
+  </table></div>
+        <div style="position: relative; top: 0px; left: 0px; display: none;" id="GOA" class="hide"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="party-tally">
+    <tbody>
+     
+     
+      <tr>
+        <td><ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+        <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                   <td width="40%" align="center" height="18" bgcolor="#fe9400" class="tiletext_a">BJP</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">21</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">14</td>
+     
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+              <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                     <td width="40%" align="center" height="18" bgcolor="#018fff" class="tiletext_a">CONG</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">09</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">16</td>
+   
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#9933ff" class="tiletext_a">MGP</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">03</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">02</td>
+                   
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#E41B17" class="tiletext_a">NCP</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">00</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">03</td>
+            
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            
+          
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#4c7013" class="tiletext_a">OTH</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">07</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">05</td>
+                
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+             <li class="last-list-row"> <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="296" align="right" height="18" bgcolor="#ffffff"><div class="full-list"><a target="_blank" href="/assembly-elections-2012/live-poll-result.jsp?state=goa">Full List</a></div></td>
+                   
+                
+                  </tr>
+                </tbody>
+              </table></li>
+          </ul></td>
+      </tr>
+    </tbody>
+  </table></div>
+        <div style="position: relative; top: 0px; left: 0px; display: none;" id="MNP" class="hide"><table width="100%" cellspacing="0" cellpadding="0" border="0" class="party-tally">
+    <tbody>
+     
+     
+      <tr>
+        <td><ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+         <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                     <td width="40%" align="center" height="18" bgcolor="#018fff" class="tiletext_a">CONG</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">42</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">30</td>
+   
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#E41B17" class="tiletext_a">NCP</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">01</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">05</td>
+            
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#C12267" class="tiletext_a">TMC</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">07</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">NA</td>
+            
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            
+           
+            <li>
+              <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="40%" align="center" height="18" bgcolor="#4c7013" class="tiletext_a">OTH</td>
+                    <td align="right" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b">10</td>
+                    <td align="center" width="30%" height="18" bgcolor="#CCCCCC" class="tiletext_b t1">17</td>
+                
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+             <li class="last-list-row"> <table width="296" cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="296" align="right" height="18" bgcolor="#ffffff"><div class="full-list"><a target="_blank" href="/assembly-elections-2012/live-poll-result.jsp?state=manipur">Full List</a></div></td>
+                   
+                
+                  </tr>
+                </tbody>
+              </table></li>
+          </ul></td>
+      </tr>
+    </tbody>
+  </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bottom-result"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+@charset "utf-8";
+/* CSS Document */
+body {margin:0; padding:0; background:#171640 url(../images/bg.jpg) no-repeat center top; font-family: Tahoma;}
+#maindiv {width:1000px; margin:0 auto; background:#FFFFFF;}
+#itgd_links{ background:#171640; text-align:center; width:1000px; font:bold 11px arial; color:#000; line-height:20px; margin:0; padding:0px 0 0 0;}
+#itgd_links a{ font:bold 11px arial; color:#FFF; text-decoration:none; margin:0 10px;}
+#itgd_links a:hover{color:#D81921;}
+
+.clear{clear:both;}
+.content{padding:10px;}
+.contentleft {width:665px; float:left;}
+.contentright {width:300px; float:right;}
+
+.topchunk{margin-bottom:20px;}
+.gallerydiv{background:#FDF6EC; border:1px solid #BFBFBF; padding:6px;}
+#gallery{position:relative; height:415px}
+#gallery a {float:left; position:absolute;}
+#gallery a img {border:none;}
+#gallery a.show {z-index:500}
+#gallery .caption {z-index:600;background-color:#000; color:#ffffff; height:80px; overflow:hidden; position:absolute; bottom:0; padding:0 10px;}
+#gallery .caption{padding:5px color:#FFFFFF; font-size:12px; font-weight:bold;}
+#gallery .caption h3 {margin:0; padding:0; color:#FFFFFF; font-size:16px; font-weight:bold;}
+
+.left{width:350px; float:left;}
+.sidebar_left {margin-bottom:10px;}
+.shortstory {padding-bottom:10px; *padding-bottom:2px; background:url(../images/Orange_Line.gif) bottom center no-repeat;}
+.shortstory.last{background:none;}
+.sortstorydiv .storyimg {float:left; width:144px; border:2px solid #444444;}
+.sortstorydiv .storycontent{float:right; width:195px;}
+.shortstory-title {color:#444444; font-family:Tahoma; font-size: 12px; font-weight:bold; line-height:15px;padding:0;}
+.shortstory-title a {color: #444444; text-decoration: none;}
+.shortstory-title a:hover {text-decoration: underline;}
+.shortstory-text {color: #444444;  font-size: 12px;   line-height: 17px;   padding: 2px 0 4px;}
+
+.right{width:300px; float:right;}
+.rightmid{margin-bottom:20px;}
+
+.comment{border:1px solid #BFBFBF; padding:6px;}
+.commenttop{background:url(../images/Aapne_likha_hai_top.gif) no-repeat top; padding-top:9px;}
+.commentbottom{background:url(../images/Aapne_likha_hai_bottom.gif) no-repeat bottom; padding-bottom:9px;}
+.commentmid{background:url(../images/Aapne_likha_hai_mid.gif) repeat-y center; padding:0 10px; font-size:14px; line-height:20px; color:#686868;}
+.commentby{font:bold 12px Tahoma; color:#000000; text-align:right; margin-right:20px; margin-bottom:5px;}
+.raay_read{float:left; width:70px; background:#7C7C7C; text-align:center;}
+.raay_den_text{float:right; width:70px; background:#7C7C7C; text-align:center;}
+.commentlinks a{color:#FFFFFF; text-decoration:none;}
+.commentlinks a:hover{text-decoration:underline;}
+
+
+
+.sidebar {margin-bottom:20px;}
+.video{background:#DBDBDB; border:1px solid #BFBFBF; border-top:none;}
+.videoimg {text-align:center; padding:10px;}
+.videolist{padding:0 10px;}
+.videolist ul {
+    color: #444444;
+    font-size: 12px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.videolist ul li {
+    background: url(../images/video-icon.gif) no-repeat scroll left 10px transparent;
+	border-bottom:1px dotted #444444;
+    font: 12px/28px Tahoma;
+    margin: 0;
+    padding: 0 0 0 20px;
+    text-align: left;
+}
+.videolist ul li a { color: #444444;   text-decoration: none;}
+.videolist ul li a:hover {text-decoration:underline;}
+.more-v {color: #444444; font-family: Tahoma; font-size: 14px; text-align:right;}
+.more-v a { color: #444444;  text-decoration: none;}
+.more-v a:hover {text-decoration:underline;}
+
+.head-link {
+    color: #FFFFFF;
+	background:url(../images/title_band.gif) no-repeat left;
+	font-family: Myriad Pro;
+    font-size: 16px;
+    padding: 0 0 0 28px;
+    text-transform: uppercase;
+	margin-bottom:1px;
+	line-height:29px;
+}
+ul.key-link {
+    margin:0 0 20px 0; padding:0 0 0 20px;
+	border:1px solid #073F4E;
+}
+ul.key-link li{
+	color: #000000;
+    font-family: Tahoma;
+    font-size: 12px;
+    line-height: 19px;
+    padding: 2px 4px 2px 0px;}
+.congrats{border:1px solid #073F4E; padding:5px;}
+.key-text11 {
+    color: #6C6C6C;
+    font-family: arial;
+    font-size: 14px;
+    line-height: 19px;
+    padding: 4px 6px 0;
+}
+.more-link { color: #032F67;  font-family: Tahoma;  font-size: 12px;  padding: 4px 0 4px 6px;}
+.more-link a{ color: #A21E00;    text-decoration: none;}
+.more-link a:hover{text-decoration:underline;}
+
+#footerspecials {margin:0 auto; padding-top: 20px; text-align: center; width: 1000px; background:#FFFFFF;}

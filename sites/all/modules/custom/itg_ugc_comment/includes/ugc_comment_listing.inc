@@ -14,9 +14,9 @@ function ugc_comment_listing() {
   $reply_comment = $db->itgcms_comment;
   $reply_comment_data = $reply_comment->find();
   
-    $output = '';
-    $output = "<table class='views-table'><thead>
-    <tr><th>" . t('S. No') . "</th><th>" . t('Name') . "</th><th>" . t('Email') . "</th><th>" . t('Comment') . "</th><th>" . t('Post date') . "</th><th>" . t('Status') . "</th><th>" . t('Action') . "</th></tr></thead><tbody>";
+  $output = '';
+  $output = "<table class='views-table'><thead>
+  <tr><th>" . t('S. No') . "</th><th>" . t('Name') . "</th><th>" . t('Email') . "</th><th>" . t('Comment') . "</th><th>" . t('Post date') . "</th><th>" . t('Status') . "</th><th>" . t('Action') . "</th></tr></thead><tbody>";
 
   $comment_counter = 1;
   foreach ($reply_comment_data as $final_comment_data) {
@@ -35,9 +35,9 @@ function ugc_comment_listing() {
 
     $comment_counter = $comment_counter + 1;
   }
-    $output .= "</tbody></table>";
+  $output .= "</tbody></table>";
 
-    return $output;
+  return $output;
 }
 
 /**
@@ -50,11 +50,10 @@ function ugc_comment_view($id) {
   $comment_view = $db->itgcms_comment;
   
   $pid = new MongoId($id); 
-  $comment_view_data = $comment_view->find(array("_id" => $pid));
-  
+  $comment_view_data = $comment_view->find(array("_id" => $pid));  
     
-    $output = '';
-    $output.= '<div class="comment-view">';
+  $output = '';
+  $output.= '<div class="comment-view">';
     
   foreach($comment_view_data as $final_view) {
     $user_message = itg_ugc_bad_words($final_view['comment']);
@@ -66,9 +65,9 @@ function ugc_comment_view($id) {
   
   $output.='Action : '. l(  t('Cancel'),  'ugc-comment-listing',  array('attributes' => array('class'=> array('ugc-comment-listing'), 'id'=> array('ugc-comment-listing'))));
   
-    $output.= '</div>';
-  
-    return $output;
+  $output.= '</div>';
+
+  return $output;
 }
 
 
@@ -100,31 +99,42 @@ function ugc_comment_user_listing() {
   if (function_exists('mongodb'))
   {
     $con = mongodb();
-    if ($con)
+    if (isset($con))
     {
+      /* connection for fetching user detail */
       $people = $con->itgcms_comment_user;
       $query = array();
-      $limit = 0;
+      
       if (!empty($_GET['items_per_page']))
       {
         $limit = $_GET['items_per_page'];
+      } else {
+        $limit = 20;
       }
+      
 
       if (!empty($_GET['email']))
       {
         $query['email'] = trim($_GET['email']);
       }
-
+      if (isset($_GET['status']) && $_GET['status'] != '_none')
+      {
+        $query['status'] = (int)$_GET['status'];
+      }
+      
       if (is_array($query) && empty($query))
       {
-
-        $userData = $people->find(array("email" => array('$ne' => null)))->limit($limit);
+        /* get total count for pagination */
+      $people_count = $con->itgcms_comment_user;
+      $count_data = $people_count->count($cond);
+      /* end here */
+        $userData = $people->find(array("email" => array('$ne' => null)))->limit($count_data);
       }
       else
       {
-        $userData = $people->find($query)->limit($limit);
+        $userData = $people->find($query)->limit($count_data);
       }
-
+     
       $rows = array();
       $sl_no = 1;
       
@@ -147,14 +157,19 @@ function ugc_comment_user_listing() {
         );
         $sl_no = $sl_no + 1;
       } // end foreach
+     
+      $current_page = pager_default_initialize(count($rows), $limit);
+      $chunks = array_chunk($rows, $limit, TRUE);
+      $current_page_items = $chunks[$current_page];
+
     }
   }
   //get the header in table
   $output = render(drupal_get_form('itg_user_block_api_form'));
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => t('No results found')));
+  $output .= theme('table', array('header' => $header, 'rows' => $current_page_items, 'attributes' => array('class' => array('views-table')), 'empty' => t('No results found')));
 
   # add the pager
-  $output .= theme('pager');
+  $output .= theme('pager', array('quantity', count($rows)));
   return $output;
 }
 
@@ -164,26 +179,27 @@ function ugc_comment_user_listing() {
 function ugc_comment_user_block() {
   $email = $_POST['email'];
   $event = $_POST['event'];
-  if (function_exists('mongodb') && !empty($email))
-  {
+  if (function_exists('mongodb') && !empty($email)) {
     $con = mongodb();
-    $final_email = explode(',', $email);
-    foreach ($final_email as $value) {
-      $people = $con->itgcms_comment_user;
-      if($event == 'comment-user-block') {
-      $newdata = array('$set' => array('status' => 0));
+    if (isset($con)) {
+      $final_email = explode(',', $email);
+      foreach ($final_email as $value) {
+        $people = $con->itgcms_comment_user;
+        if ($event == 'comment-user-block') {
+          $newdata = array('$set' => array('status' => 0));
+        }
+        if ($event == 'comment-user-unblock') {
+          $newdata = array('$set' => array('status' => 1));
+        }
+        $people->update(array("email" => trim($value)), $newdata);
       }
-      if($event == 'comment-user-unblock') {
-      $newdata = array('$set' => array('status' => 1));
+      if ($event == 'comment-user-unblock') {
+        $response = array('success' => 'unblock', 'ok' => 'true');
       }
-      $people->update(array("email" => trim($value)), $newdata);
+      if ($event == 'comment-user-block') {
+        $response = array('success' => 'block', 'ok' => 'true');
+      }
+      print json_encode($response);
     }
-    if($event == 'comment-user-unblock') {
-    $response = array('success' => 'unblock', 'ok' => 'true');
-    }
-    if($event == 'comment-user-block') {
-    $response = array('success' => 'block', 'ok' => 'true');
-    }
-    print json_encode($response);
   }
 }

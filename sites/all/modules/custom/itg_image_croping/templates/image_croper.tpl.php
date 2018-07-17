@@ -1,3 +1,4 @@
+
 <script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.min.js'; ?>"></script>
 
 <script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js'; ?>"></script>
@@ -98,9 +99,8 @@
 </style>
 
 <?php
-
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
 $imagedata = base64_encode(file_get_contents($data->uri));
 $url = file_create_url($data->uri);
 $image_exten = end(explode('.', $data->uri));
@@ -118,13 +118,11 @@ $image_exten = end(explode('.', $data->uri));
 </div>
 <div class="croper-action">
     <button class=" add-more <?php echo ($extra_crop == 1) ? 'crop-all' : 'crop-image'; ?>">Crop</button>
+ <?php if ($content_type == 'bodyeditor' || $content_type == 'reporter'
+ || $content_type == 'poll') { ?>
     <button class="original-image add-more">Use Original</button>
-    <button class="cancel-image add-more">Cancel</button>
-    <?php
-//    if ($genrate == 1) {
-//        print' <button class="generate-Image add-more">Generate Image</button>';
-//    }
-    ?>
+ <?php } ?> 
+    <button class="cancel-image add-more">Cancel</button>    
 </div>
 
 <!--   -->

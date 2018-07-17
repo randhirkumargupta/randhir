@@ -1,0 +1,295 @@
+body{ background:#549dc0 url('http://media2.intoday.in/indiatoday/election2014/BG.jpg')no-repeat center top !important;}
+#wapper{ background:#FFFFFF !important;}
+.home-icon, .home-icon:hover{width:22px;}
+
+.homeleft{margin-left:1%;}
+.topstr-list-one {
+	background-color: #f3f1f2;
+	margin-top:-13px;
+	position: relative;
+	right:-5px;
+	}
+	
+.topstr-list li:last-child{padding-bottom:8px; margin-bottom:0px; border-bottom:none;}
+.right-column{padding-bottom:0px;}
+.morehead {z-index: 999;top:18px;}	
+	
+body { }
+.right{float:right;}
+.lft {float:left;}
+a { outline: medium none; text-decoration: none;}
+
+
+#top-web { height:15px;}
+#amlesh{background:#016fa4; height:220px; margin-bottom:10px;}
+.itgd_links {background-color: #ffffff !important; color: #7a7a7a; font: bold 12px/15px roboto;margin: 0; padding: 0.3%; text-align: center;display: flex; border-bottom:1px solid #fff;}
+.redborder { border-top:1px solid #C7C7C7;}
+.itgd_links a {color: #a29ca6;text-decoration: none;  font: bold 12px/15px Roboto, sans-serif; }
+.itgd_links a:hover {color: #000;text-decoration: none;}	
+.itgd_links ul {margin: 0 auto;padding: 0;width:1003px;}
+.itgd_links ul li {float:left; padding:0 10px; list-style:none;}
+.clr {clear:both}
+.itgd_links ul li.last {border-right:none;}
+header{height:147px;  width:1000px; margin:0 auto; }
+.logo{width:180px; height:132px; float:left; }
+.ad{width:730px; float:right; margin-top:20px;}	
+.homeright{padding-top:1%;}	
+.homeleft{padding-top:1%;}
+.box p{ font:18px Roboto, sans-serif;}
+
+
+
+.subnav { width:100%; background:#fff; padding:5px 0px; overflow:hidden; display:block; float:left; margin-bottom:10px;   border-bottom: 2px solid #0A76A7}
+.subnav ul { width:1000px; margin:0 auto;}
+.subnav ul li { list-style:none; float:left; }
+.subnav ul li a { font-family:roboto; text-transform:uppercase; font-size:14px; color:#000; padding:4px 10px 7px; }
+.subnav ul li a:hover {color:#fff; text-decoration:none; background:#0476aa } 
+.subnav ul li a.active {color:#fff; text-decoration:none; background:#0476aa } 
+
+
+
+/*NEw css for states pages*/
+
+*{margin:0; padding:0;}
+.left-pannel{ width:660px; padding:20px;}
+
+.top-strip img {
+float: left;
+margin-left: -3px;
+margin-top:-1px;
+}
+
+.top-strip span {
+/*background: url(http://media2.intoday.in/indiatoday/election2014/live-poll/repeat-top.jpg) repeat-x;*/
+height: 36px;
+width: 660px;
+margin-left:-2px;
+float: left;
+border-right: 2px solid #e2e2e2;
+border-top: 1px solid #e2e2e2;
+}
+
+.top-strip span h2 {background-color: #000;padding: 5px 25px 4px 15px;float: left;color: #fff;font-family:Roboto,sans-serif; font-size:20px; text-transform:uppercase;}
+.box-poll-shadow{-moz-box-shadow: 0px 2px 0px 2px #e2e2e2;
+-webkit-box-shadow: 0px 2px 0px 2px #e2e2e2;
+box-shadow: 0px 2px 0px 2px #e2e2e2;
+filter: progid:DXImageTransform.Microsoft.Shadow(strength = 2, direction = 180, color = '#e2e2e2');
+-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength = 3, Direction = 180, Color = '#e2e2e2')";
+}
+
+.box-poll-shadow{ width:98.3%; padding-bottom:15px;}
+.clr{ clear:both;}
+.con-chunk{margin-bottom:20px;}
+
+
+/*dynamic table style*/
+
+#consTable table{width:100%; border:0;}
+
+
+
+
+
+
+/*PHOTOS CHUNK*/
+.photos-chunk{width:670px; margin-bottom:25px;}
+.photos-chunk p{margin:0; padding:0 0 0 10px; font-size:14px; line-height:17px}
+.photos-chunk a{color: #fff;text-decoration: none}
+.photos-chunk-heading{width:670px;}
+.photos-chunk-heading span {float: right;font-weight: bold;font-size: 15px;}
+.photos-chunk-border {width: 670px;	height: 5px;background: url(http://media2.intoday.in/indiatoday/images/ipl-images/photos-border.jpg)}
+
+.photos-slider{width:670px; height:214px;position:relative}
+.caption {color: white;font-size: 20px;height: 20px;padding: 5px 7px 5px 7px;position: absolute;background: #549dc0; z-index:99; left:0;}
+.caption a{text-decoration:none; color:#FFF;font-family:Roboto,sans-serif; }
+.caption a:hover { color:#fff; text-decoration:none;}
+.belts { width:628px; height:205px; overflow:hidden; position:relative; left:14px; top:10px}
+.belts ul { position:relative; margin:0; padding:0;}
+.belts ul li { float:left; width:200px; list-style:none; margin-right:10px;  position:relative; background:#f2f2f2}
+.back {background:url(http://media2.intoday.in/indiatoday/election2014/pre.jpg) 10px 10px no-repeat;width:15px;height:31px;float: left;position: absolute;top: 92px;left:-9px;z-index: 999;cursor: pointer;	padding: 10px;	}
+.next-ipl {	background:url(http://media2.intoday.in/indiatoday/election2014/next.jpg) 10px 10px  no-repeat;	width:15px;height:31px;	float: right;	cursor: pointer;	position: absolute;	top: 92px;	right: 4px;	z-index: 999;	padding: 10px;}
+.back:hover, .next:hover {}
+.belts ul li a img{margin-bottom:7px;}
+
+
+
+/*Constituency Page */
+
+#popup-container {
+background-image: url(transparent.png);
+width: 408px;
+height: 151px;
+position: absolute;
+top: 52%;
+left: 17%;
+}
+
+#popup-container h1{
+color: #FFF;
+font-family: Roboto,sans-serif;
+font-weight: normal;
+text-transform: uppercase;
+padding-left: 10px;
+padding-top: 5px;
+font-size: 30px;
+}
+
+.state-list{
+margin: 0;
+margin-left: -3px;
+padding: 0;
+margin-top: 10px;
+float: left;
+}
+
+.state-list li{ list-style:none; margin-bottom:12px; }
+.state-list li a{ padding:5px 7px 5px 7px; background-color:#539dc0;text-decoration:none; color:#FFF; text-transform:uppercase;font-family: Roboto,sans-serif; font-weight:bold;
+}
+
+.left-chart{ float:left;}
+.left-chart table {padding-top:23px; margin-left:5px;}
+.left-chart table tr td{padding:8px; font-family: Roboto,sans-serif; font-weight:bold; width:154px;}
+.left-chart table tr td span{text-align:right; margin-left:40px; width:}
+
+.right-chart{ float:right;}
+
+
+/*coilation page*/
+*{margin:0; padding:0; outline:0;}
+
+.flt{ float:left}
+.flr{ float:right}
+.clr{ clear:both}
+
+#wrapper{ width:673px; margin:0 auto;}
+
+.schedule{margin-top:75px;}
+.schedule tbody tr th{ text-align:left;text-transform:uppercase; color:#000; font-family:roboto; background:#FFF; margin-bottom:20px;padding:10px 10px 10px 5px;}
+.schedule tbody tr td{ text-align:left; font-size:14px; padding:10px 10px 10px 15px;font-family:roboto;}
+
+.meter-list{ margin-top:30px;}
+.meter-list li{ list-style:none; float:left;margin:0px 6px 0px 6px}
+.meter-list li h3{text-align:center;font-family:roboto;}
+.meter-list li img{margin-top:7px;}
+
+/*Tool tip start*/
+#text {margin:50px auto; width:500px}
+.hotspot {color:#900; padding-bottom:1px; border-bottom:1px dotted #900; cursor:pointer}
+.cand_head_18 {font-family: tahoma, sans-serif;font-size: 18px;line-height: 22px;font-weight: 400;color: #ca6c18;text-transform: uppercase;border-bottom: solid 2px #ca6c18;}
+#tt {position:absolute; display:block; background:url(http://media2.intoday.in/indiatoday/election2014/tt_left.gif) top left no-repeat;}
+#tttop {display:block; height:5px; margin-left:5px; background:url(http://media2.intoday.in/indiatoday/election2014/tt_top.gif) top right no-repeat; overflow:hidden;}
+#ttcont {display:block; padding:2px 12px 3px 7px; margin-left:5px; background:#666; color:#FFF;}
+#ttbot {display:block; height:5px; margin-left:5px; background:url(http://media2.intoday.in/indiatoday/election2014/tt_bottom.gif) top right no-repeat; overflow:hidden;}
+/*Tool Tip End*/
+
+
+
+.top-strip span h3 {
+background-color: #6e6f73;
+padding: 5px 25px 4px 15px;
+float: left;
+margin-top: 0px;
+color: #fff;
+font-family: Roboto,sans-serif;
+font-size: 20px;
+text-transform: uppercase;
+margin-left: 5px;
+}
+
+#hmelect {
+display: block;
+float: left;
+overflow: hidden;
+padding: 13px 0 0 10px;
+width: 660px;
+}
+
+#fhs {
+display: block;
+float: right;
+width: 309px;
+}
+
+.flt{ float:left}
+.flr{ float:right}
+.clr{ clear:both}
+
+
+.bjp {width:20px; height:20px; background:#e35a09; border-radius:100%; float:left; margin-right:5px;}
+.oth {width:20px; height:20px; background:#850001; border-radius:100%; float:left; margin-right:5px;}
+.cong {width:20px; height:20px; background:#0182e8; border-radius:100%; float:left; margin-right:5px;}
+.minus {
+    background: url("http://media2.intoday.in/indiatoday/election2014/e-minus.jpg") no-repeat scroll right top rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    height: 34px;
+    margin-top: 0px;
+    width: 35px;
+}
+.plus {
+	 background: url("http://media2.intoday.in/indiatoday/election2014/e-plus.jpg") no-repeat scroll right top rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    cursor: pointer;
+    float: right;
+    height: 34px;
+    margin-top: 0px;
+    width: 35px;
+}
+
+.b-border { border-bottom:1px solid #e2e2e2;}
+#consTable {
+	width: 45% !important;
+	float: right !important;
+	background-color: #595959;
+	margin-right: -161px;
+	position: absolute;
+	top: 172px;
+	left: 172px;
+	opacity:0.9;
+}
+
+/*#consTable table tr td:nth-child{ font-size:24px;}
+
+
+#consTable table tr td{ font-size:18px;}
+
+
+#consTable table tr:first-child{
+	 background:#595959 !important;
+	 color:#FFF;
+	}
+
+#consTable table tr:nth-child(even){ 
+ background:#549dc0;
+ color:#FFF;
+}
+
+
+#consTable table tr:nth-child(odd){ 
+ background:#317a9b;
+ color:#FFF;
+}*/
+
+.p_head { font-family:roboto; font-size:25px; color:#fff; font-weight:normal; text-transform:uppercase; padding-left:10px}
+.p_cname {   background:#549DC0; color: #FFFFFF;font-size: 20px;padding: 1px 10px;    text-transform: uppercase; float:left; padding-right:30px; font-weight:bold; font-family:roboto;}
+.p_pname {  background:#317a9d; !important; color: #FFFFFF;font-size: 20px;padding: 1px 10px;    text-transform: uppercase; float:left; padding-right:30px; font-weight:bold; width: 86.3%;font-family:roboto;}
+.p_status {background:#549DC0; color: #FFFFFF;font-size: 20px;padding: 1px 10px;    text-transform: uppercase; float:left; padding-right:30px; font-weight:bold; width: 66.3%;font-family:roboto;}
+
+.right-chart{margin-top: -32px;}
+#dynamic_select { font-family:roboto; font-size:16px; font-weight:bold}
+.e-page { margin-left:-2px; width:99.9%!Important;}
+
+#allianceTable tbody tr td { padding-left:20px!Important;}
+.top-result { padding:10px; }
+.e-top {  border-left: 2px solid #E2E2E2;
+    margin-left: -2px; width:958px!Important}
+.e-shadow {width:99.9%!Important}
+
+.newtable { width:320px;}
+.newtable table tr { background:#f1f1f1;}
+.newtable table tr td { border-bottom:1px solid #e4e4e4; width:70px; text-align:center; color:#626262; font-size:14px; padding:5PX; font-family:roboto;}
+
+
+
+.leftad, .rightad { display:none;}

@@ -19,16 +19,16 @@
         <?php
         if (!empty($uri)) {
           $url = image_style_url("politoons", $uri);
-          $image = "<img src='" . $url . "' alt='' />";
+          $image = "<img src='" . $url . "' alt='' title='' />";
         } else {
-          $url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
-          $image = "<img src='" . $url . "' width='88' height='88' alt='' />";
+          $url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+          $image = "<img src='" . $url . "' width='88' height='88' alt='' title='' />";
         }
         ?>
 
-        <?php print l($image, "taxonomy/term/$tid", array("html" => TRUE)); ?>
+        <?php print l($image, "taxonomy/term/$tid", array("html" => TRUE , 'attributes' => array("title" => $title))); ?>
 
-        <span class="title"><?php print l($title, "taxonomy/term/$tid"); ?></span>
+        <span class="title"><?php print l($title, "taxonomy/term/$tid" , array("attributes" => array("title" => $title))); ?></span>
 
       </div>
 

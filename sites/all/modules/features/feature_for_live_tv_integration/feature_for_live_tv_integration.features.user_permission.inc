@@ -27,9 +27,7 @@ function feature_for_live_tv_integration_user_default_permissions() {
     'name' => 'delete any live_tv_integration content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );
@@ -39,9 +37,7 @@ function feature_for_live_tv_integration_user_default_permissions() {
     'name' => 'delete own live_tv_integration content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );

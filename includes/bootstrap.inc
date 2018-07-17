@@ -932,7 +932,7 @@ function variable_initialize($conf = array()) {
     }
     else {
       // Proceed with variable rebuild.
-      $variables = array_map('unserialize', db_query('SELECT name, value FROM {variable}')->fetchAllKeyed());
+      $variables = array_map('unserialize', db_query('SELECT name, value FROM {variable}')->fetchAllKeyed());      
       cache_set('variables', $variables, 'cache_bootstrap');
       lock_release($name);
     }
@@ -987,7 +987,6 @@ function variable_get($name, $default = NULL) {
  */
 function variable_set($name, $value) {
   global $conf;
-
   db_merge('variable')->key(array('name' => $name))->fields(array('value' => serialize($value)))->execute();
 
   cache_clear_all('variables', 'cache_bootstrap');
@@ -1010,7 +1009,7 @@ function variable_set($name, $value) {
  */
 function variable_del($name) {
   global $conf;
-
+  
   db_delete('variable')
     ->condition('name', $name)
     ->execute();
@@ -2360,6 +2359,10 @@ function _drupal_bootstrap_configuration() {
   timer_start('page');
   // Initialize the configuration, including variables from settings.php.
   drupal_settings_initialize();
+
+  // Sanitize unsafe keys from the request.
+  require_once DRUPAL_ROOT . '/includes/request-sanitizer.inc';
+  DrupalRequestSanitizer::sanitize();
 }
 
 /**

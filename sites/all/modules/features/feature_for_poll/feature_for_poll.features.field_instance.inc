@@ -336,7 +336,7 @@ function feature_for_poll_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Display Result',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -416,7 +416,7 @@ function feature_for_poll_field_default_field_instances() {
     'bundle' => 'poll',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Poll Option',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -714,7 +714,7 @@ function feature_for_poll_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Poll Type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -961,7 +961,7 @@ function feature_for_poll_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Result format',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1000,7 +1000,7 @@ function feature_for_poll_field_default_field_instances() {
     'bundle' => 'poll',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Show End Date',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1034,12 +1034,59 @@ function feature_for_poll_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-poll-field_story_node_identity'.
+  $field_instances['node-poll-field_story_node_identity'] = array(
+    'bundle' => 'poll',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 19,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_node_identity',
+    'label' => 'Node Identity',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance: 'node-poll-field_story_url'.
   $field_instances['node-poll-field_story_url'] = array(
     'bundle' => 'poll',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story url',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1062,6 +1109,11 @@ function feature_for_poll_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -1083,6 +1135,7 @@ function feature_for_poll_field_default_field_instances() {
   t('Display Result');
   t('End Date');
   t('ITG State');
+  t('Node Identity');
   t('Please Search by title.');
   t('Poll Answer');
   t('Poll Answer Image');

@@ -27,5 +27,4 @@ $color_box_class = array("class" => array("colorbox-load"));
 echo l("<span class='edit-link'>" . t("Edit") . "</span>", "itg-custom-widget-content-order/$row->itg_custom_widgets_data_widget", array('html' => TRUE, 'query' => $color_box_query, 'attributes' => $color_box_class));
 echo "&nbsp; | &nbsp;";
 echo l("<span class='add-link'>" . t("Add Content") . "</span>", "itg-custom-widget-content", array('html' => TRUE, 'query' => $color_box_query, 'attributes' => $color_box_class));
-//echo  l("<span class='delete-link'>Delete</span>" , 'remove_from_custom_widget/'.arg(1).'/'.$row->nid , array("html" => TRUE , "attributes" => array("class"=> array("delete-link-anchor"))));
 ?>

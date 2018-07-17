@@ -22,7 +22,6 @@ foreach ($resultdata as $key => $mainids) {
 ?>
     </div> 
         <?php
-        // p($rows);
         foreach ($resultdata as $key => $mainids) {
             $first_show = "";
             if ($key == 0) {
@@ -44,7 +43,7 @@ foreach ($resultdata as $key => $mainids) {
                         <?php
                         }
                         else {
-                            print "<li><img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' /></li>";
+                            print "<li><img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg')."' alt='' /></li>";
                         }
                         ?>
 
@@ -57,13 +56,13 @@ foreach ($resultdata as $key => $mainids) {
 
                             <?php
                             if ($row['extra'] == "Win") {
-                                print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i><span>WON</span></p>';
+                                print ' <p class="status green"><i class="fa fa-thumbs-o-up"></i><span>'.t('WON').'</span></p>';
                             }
                             else if ($row['extra'] == "Lost") {
-                                print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>LOST</span></p>';
+                                print ' <p class="status red"><i class="fa fa-thumbs-o-down"></i><span>'.t('LOST').'</span></p>';
                             }
                             else if ($row['extra'] == "Lead") {
-                                print ' <p class="status orange"> <i class="fa fa-hand-o-up" aria-hidden="true"></i><span>LEADING</span></p>';
+                                print ' <p class="status orange"> <i class="fa fa-hand-o-up" aria-hidden="true"></i><span>'.t('LEADING').'</span></p>';
                             }
                             ?>
                         </li>         

@@ -69,19 +69,10 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
               ':input[name="field_coupon_type[und]"]' => array('value' => 'upload_third_party_coupon')
       ));
 
-
-      // Email / Mobile / Login specific Promo Code
-//      $form['field_coupon_email']['und'][0]['value']['#states'] = array(
-//          'visible' => array(
-//              ':input[name="field_coupon_choose_email_mobile[und]"]' => array('value' => 'email_mobile_login_specific_promocode')
-//      ));
-
-
       $form['field_coupon_choose_email_mobile']['und']['#states'] = array(
           'visible' => array(
               ':input[name="field_coupon_type[und]"]' => array('value' => 'email_mobile_login_specific_promocode')
       ));
-
 
       // Code start for discout type
       $form['field_coupon_email']['und'][0]['value']['#states'] = array(
@@ -94,7 +85,6 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
               ),
           ),
       );
-
 
       // Bank Specific Coupons
 
@@ -110,8 +100,6 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
               ':input[name="field_coupon_type[und]"]' => array('value' => 'payment_mode_specific_coupan')
       ));
 
-
-
       // Code start for discout type
       $form['field_coupon_discount_type']['und']['#states'] = array(
           'visible' => array(
@@ -126,7 +114,6 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
               ),
           ),
       );
-
 
       // Code end for discount type 
       // 
@@ -147,8 +134,7 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
       );
 
       // Code end for discounted value
-      // Code started for Allow minimum cart amount 
-
+      // Code started for Allow minimum cart amount
 
       $form['field_coupon_allow_min_cart_amt']['und']['#states'] = array(
           'visible' => array(
@@ -199,10 +185,8 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
           ),
       );
 
-
-
       // Code end for Minimum cart amount
-// Code started for Coupon uses limit
+      // Code started for Coupon uses limit
       $form['field_coupon_uses_limit']['und'][0]['value']['#states'] = array(
           'visible' => array(
               array(
@@ -234,14 +218,10 @@ function itg_coupon_form_alter(&$form, &$form_state, $form_id) {
           ),
       );
 
-
-
-
       $form['field_coupon_minimum_cart_amount']['und'][0]['value']['#states'] = array(
           'visible' => array(
               ':input[name="field_coupon_allow_min_cart_amt[und]"]' => array('checked' => true)
       ));
-
 
       // Code end for Coupon current uses
       // Start code for hiding some field 
@@ -310,10 +290,10 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
       $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
       $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
         form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
       }
-
 
       break;
 
@@ -323,6 +303,7 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
     case "payment_mode_specific_coupan":
       $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($discount_type)) {
         form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
       }
@@ -339,20 +320,22 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
       $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
       $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
         form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
       }
 
       $gateway_type = isset($form_state['values']['field_coupon_gateway_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_gateway_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($gateway_type)) {
         form_set_error('field_coupon_gateway_type', t('Gateway Type field is required'));
       }
-
 
       break;
 
     case "bank_specific_coupon":
       $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($discount_type)) {
         form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
       }
@@ -369,11 +352,13 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
       $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
       $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
         form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
       }
 
       $gateway_type = isset($form_state['values']['field_coupon_bank_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_bank_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($gateway_type)) {
         form_set_error('field_coupon_bank_type', t('Bank Type field is required'));
       }
@@ -383,6 +368,7 @@ function itg_coupon_custom_validate($form, &$form_state) {
     case "email_mobile_login_specific_promocode":
 
       $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($discount_type)) {
         form_set_error('field_coupon_discount_type', t('Coupon Discount Type  field is required'));
       }
@@ -399,6 +385,7 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
       $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
       $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
         form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
       }
@@ -408,14 +395,11 @@ function itg_coupon_custom_validate($form, &$form_state) {
         form_set_error('field_coupon_choose_email_mobile', t('Choose Email or mobile field is required'));
       }
 
-
       $email = $form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value'];
 
       if (!empty($form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value']) && empty($email)) {
         form_set_error('field_coupon_email', t('E-mail Or Mobile field is required'));
       }
-
-
 
       if ($form_state['values']['field_coupon_choose_email_mobile'][LANGUAGE_NONE][0]['value'] == 'email' && !empty($form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value']) && !valid_email_address($form_state['values']['field_coupon_email'][LANGUAGE_NONE][0]['value'])) {
         form_set_error('field_coupon_email', t('The email address appears to be invalid.'));
@@ -432,6 +416,7 @@ function itg_coupon_custom_validate($form, &$form_state) {
     case "upload_third_party_coupon":
 
       $discount_type = isset($form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_discount_type'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($discount_type)) {
         form_set_error('field_coupon_discount_type', t('Coupon Discount Type field is required'));
       }
@@ -448,15 +433,16 @@ function itg_coupon_custom_validate($form, &$form_state) {
 
       $allow_min_cart_amt = isset($form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_allow_min_cart_amt'][LANGUAGE_NONE][0]['value'] : NULL;
       $minimum_cart_amount = isset($form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_minimum_cart_amount'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (!empty($allow_min_cart_amt) && empty($minimum_cart_amount)) {
         form_set_error('field_coupon_minimum_cart_amount', t('Minimum Cart amount field is required'));
       }
 
       $email = isset($form_state['values']['field_coupon_third_party_coupon'][LANGUAGE_NONE][0]['value']) ? $form_state['values']['field_coupon_third_party_coupon'][LANGUAGE_NONE][0]['value'] : NULL;
+      
       if (empty($email)) {
         form_set_error('field_coupon_third_party_coupon', t('Third party Coupon Type field is required'));
       }
-
 
       break;
   }
@@ -464,6 +450,7 @@ function itg_coupon_custom_validate($form, &$form_state) {
   // Checking whether coupons is alrady exist or not in active status only
 
   $itg_coupon_check_coupon = itg_coupon_check_coupon($form_state['values']['title']);
+  
   if (isset($itg_coupon_check_coupon) && !empty($itg_coupon_check_coupon)) {
     if ($itg_coupon_check_coupon != $form_state['values']['nid']) {
       form_set_error('title', t('OOPS! Coupons is already exist, please try with another name or click ' . l('here', 'node/' . $itg_coupon_check_coupon . '/edit') . ' to edit existing'));

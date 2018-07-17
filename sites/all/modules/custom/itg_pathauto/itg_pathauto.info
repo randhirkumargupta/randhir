@@ -1,0 +1,3 @@
+name = ITG Pathauto
+description = ITG Pathauto keeps info of automatic path generated state.
+core = 7.x

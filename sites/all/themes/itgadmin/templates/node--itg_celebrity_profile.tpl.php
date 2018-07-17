@@ -11,7 +11,6 @@
       <?php print render($content['field_reporter_twitter_handle']); ?>
       <?php print render($content['field_celebrity_facebook_page']); ?>
       <?php print render($content['field_celebrity_pro_occupation']); ?>
-      <?php //print render($content['field_user_picture']); ?>
       <div class="field celebrity-about">
         <div class="field-label"><?php print t('About:'); ?></div>
         <div class="field-items"><?php print render($content['body']); ?></div>        

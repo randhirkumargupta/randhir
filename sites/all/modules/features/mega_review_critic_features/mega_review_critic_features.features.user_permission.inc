@@ -48,10 +48,7 @@ function mega_review_critic_features_user_default_permissions() {
   // Exported permission: 'delete any itg_celebrity_profile content'.
   $permissions['delete any itg_celebrity_profile content'] = array(
     'name' => 'delete any itg_celebrity_profile content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -60,9 +57,7 @@ function mega_review_critic_features_user_default_permissions() {
     'name' => 'delete any mega_review_critic content',
     'roles' => array(
       'Copy Editor' => 'Copy Editor',
-      'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
-      'Site Admin' => 'Site Admin',
     ),
     'module' => 'node',
   );

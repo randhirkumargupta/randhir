@@ -8,8 +8,7 @@
 <div id="GalleryIndividualImages">
   <h2 class="story-title"><?php echo t('Basic Details'); ?></h2>
   <?php print drupal_render($form['field_poll_question']); ?>
-  <?php print drupal_render($form['title']); ?>
-  <?php //print drupal_render($form['field_poll_question_text']); ?>  
+  <?php print drupal_render($form['title']); ?>   
   <?php print drupal_render($form['field_poll_question_image']); ?>
   <?php print drupal_render($form['field_poll_question_video']); ?>
   <?php print drupal_render($form['field_poll_answer_option']); ?>
@@ -28,6 +27,6 @@
   <?php print drupal_render($form['field_display_result']); ?>
   <?php print drupal_render($form['field_associate_poll']); ?>
 </div>
-<!--<h2 id="title-metatags" class="story-title"><?php //echo t('SEO Meta Tags'); ?></h2>-->
+
 <?php print drupal_render_children($form); ?>
 <?php print drupal_render($form['actions']); ?>

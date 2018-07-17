@@ -22,13 +22,13 @@
                                     print $row['field_story_medium_image'];
                                 }
                                 else {
-                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/ditg_image370x208.jpg' />";
+                                    print "<img alt='' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') ."' title='' />";
                                 }
                                 ?>    
 
 
                             </a>
-                            <h3><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>           
+                            <h3 title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></h3>           
                         </div>
 
                     <?php
@@ -41,11 +41,11 @@
                                     print $row['field_story_small_image'];
                                 }
                                 else {
-                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' />";
+                                    print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' />";
                                 }
                                 ?>   
        </a>
-                            <p><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
+                            <p title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 70, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></p>
                         </div>
 
                     <?php } ?>
@@ -58,7 +58,7 @@
         <h4 class="heading desktop-hide">OTHER NEWS</h4>
         <div class="auto-block-2">
             <div class="special-top-news special-top-bg">
-
+              <div class="itg-listing-wrapper">
                 <ul class="itg-listing">   
                     <?php
                     foreach ($rows as $index => $row) {
@@ -67,7 +67,7 @@
 
                         if ($index > 2) {
                             ?>
-                            <li><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
+                            <li title="<?php echo strip_tags($desc);?>"><?php echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?></li>
 
 
                         <?php } ?>
@@ -75,7 +75,7 @@
 <?php } ?>
 
                 </ul>
-
+              </div>
             </div>
         </div>
     </div>

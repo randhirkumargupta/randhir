@@ -23,9 +23,7 @@ function custom_html_widgets_user_default_permissions() {
   // Exported permission: 'delete any custom_html_widgets content'.
   $permissions['delete any custom_html_widgets content'] = array(
     'name' => 'delete any custom_html_widgets content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -33,8 +31,6 @@ function custom_html_widgets_user_default_permissions() {
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -43,9 +39,7 @@ function custom_html_widgets_user_default_permissions() {
   // Exported permission: 'delete own custom_html_widgets content'.
   $permissions['delete own custom_html_widgets content'] = array(
     'name' => 'delete own custom_html_widgets content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
@@ -53,8 +47,6 @@ function custom_html_widgets_user_default_permissions() {
   $permissions['delete own page content'] = array(
     'name' => 'delete own page content',
     'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

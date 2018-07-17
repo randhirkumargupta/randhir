@@ -153,5 +153,12 @@ function features_for_loyalty_and_rewards_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_loyalty_and_rewards'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_loyalty_and_rewards_pattern';
+  $strongarm->value = '';
+  $export['pathauto_node_loyalty_and_rewards_pattern'] = $strongarm;
+
   return $export;
 }

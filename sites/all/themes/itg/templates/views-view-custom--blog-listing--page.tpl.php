@@ -6,7 +6,7 @@ foreach ($rows as $index => $row): ?>
     <div class="pic blog-image-<?php print $key ?>">      
         <?php if ($row['field_story_extra_large_image'] == 'notFound') : ?>
           <?php
-          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt=''/>";
+          $img = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title=''/>";
           print l($img, 'node/' . $row['nid'], array('html' => TRUE));
           ?>
         <?php else : ?>
@@ -21,9 +21,9 @@ foreach ($rows as $index => $row): ?>
         <?php endif; ?>
       </span>
       
-      <h3 class="blog-title blog-title-<?php print $key ?>">
+        <h3 title=" <?php print strip_tags($row['title']); ?>" class="blog-title blog-title-<?php print $key ?>">
         <?php if (!empty($row['title'])) : ?>
-          <?php print $row['title']; ?>
+          <?php print l(html_entity_decode(strip_tags($row['title'])) , "node/".$row['nid']); ?>
         <?php endif; ?>
       </h3>
       

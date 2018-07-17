@@ -13,13 +13,13 @@
  * {@inheritdoc}
  */
 function itg_reporter_cronapi($op, $job = NULL) {
-  
+
   $items['itg-remove-byline-content'] = array(
     'description' => 'Remove junk byline.',
     'callback' => 'itg_remove_byline_content',
     'file' => 'include/itg_remove_byline_content.inc',
   );
-  
+
   return $items;
 }
 
@@ -41,8 +41,111 @@ function itg_reporter_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  // $items['content-people-migration'] = array(
+  //   'title' => 'People migration',
+  //   'page callback' => 'itg_people_migration',
+  //   //'access callback' => TRUE,
+  //   'access arguments' => array('access administration pages'),
+  //   'type' => MENU_CALLBACK,
+  //   'file' => 'include/itg_byline_people_content_migration.inc',
+  // );
+  // $items['people-migration-table'] = array(
+  //   'title' => 'People migration table',
+  //   'page callback' => 'itg_report_migration_people_table',
+  //   //'access callback' => TRUE,
+  //   'access arguments' => array('access administration pages'),
+  //   'type' => MENU_CALLBACK,
+  //   'file' => 'include/itg_byline_people_content_migration.inc',
+  // );
+
+
+  // Reporter content type category people delete
+
+  // $items['people-migration-data-delete'] = array(
+  //   'title' => 'People migration table',
+  //   'page callback' => 'itg_report_migration_people_data_delete',
+  //   //'access callback' => TRUE,
+  //   'access arguments' => array('access administration pages'),
+  //   'type' => MENU_CALLBACK,
+  //   'file' => 'include/itg_byline_people_content_migration_delete.inc',
+  // );
   return $items;
 }
+
+/**
+ * Implements Author releated nodes.
+ * @return array
+ */
+
+function itg_reporter_apaache_solr($nid=''){
+  $str =  '!sm_field_reporter_publish_id: "" AND sm_field_reporter_publish_id:'.$nid.' OR sm_field_reporter_publish_id:'.$nid.',* OR sm_field_reporter_publish_id:*,'.$nid.',* OR sm_field_reporter_publish_id:*,'.$nid;
+
+  $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,ds_created';
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("custom");
+  $query->addParam("fq", '(' . $str . ')');
+  $query->addParam("fl", $field);
+  $query->addParam('sort', "ds_created DESC");
+  $query->addParam('rows', '100000');
+  $query->addFilter("bundle", "story");
+  $query->addFilter("bs_status", true);
+  $response = $query->search();
+  $raw_results = $response->response->docs;;
+  if(!empty($raw_results))
+    return $raw_results;
+  else
+    return array();
+}
+
+/**
+ * Implements People releated story type nodes.
+ * @return array
+ */
+function itg_reporter_people_apache_solr($term='', $type = ''){
+ // echo $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
+  $str =  '!tm_vid_1_names: "" AND tm_vid_1_names:"'.$term.'"';
+
+  $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url,sm_field_video_duration,sm_vid_Tags,ds_created,im_field_photo_enable';
+  $solr = apachesolr_get_solr();
+  $query = apachesolr_drupal_query("custom");
+  $query->addParam("fq", '(' . $str . ')');
+  $query->addParam("fl", $field);
+  $query->addParam('sort', "ds_created DESC");
+  $query->addParam('rows', '100000');
+  $query->addFilter("bundle",$type);
+  $query->addFilter("bs_status", true);
+  $response = $query->search();
+  $raw_results = $response->response->docs;;
+  if(!empty($raw_results))
+    return $raw_results;
+  else
+    return array();
+}
+
+/**
+ * Implements People releated video type nodes.
+ * @return array
+ */
+// function itg_reporter_people_video_solr($term=''){
+//     $str =  '!sm_vid_Tags: "" AND sm_vid_Tags:"'.$term.'" OR sm_vid_Tags:"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'",* OR sm_vid_Tags:*,"'.$term.'"';
+
+//   $field = '_version_,entity_id,bundle,label,sm_field_reporter_publish_id,path,url,path_alias,dm_field_itg_content_publish_dat,sm_field_custom_story_extra_large_url,sm_original_image_url,sm_field_custom_story_large_url,sm_field_custom_story_medium_large_url,sm_field_custom_story_small_large_url,sm_field_custom_story_extra_small_url';
+//   $solr = apachesolr_get_solr();
+//   $query = apachesolr_drupal_query("custom");
+//   $query->addParam("fq", '(' . $str . ')');
+//   $query->addParam("fl", $field);
+//   $query->addParam('sort', "ds_created DESC");
+//   $query->addParam('rows', '100000');
+//   $query->addFilter("bundle", "videogallery");
+//   $query->addFilter("bs_status", true);
+//   $response = $query->search();
+//   $raw_results = $response->response->docs;;
+//   if(!empty($raw_results))
+//     return $raw_results;
+//   else
+//     return array();
+// }
+
 
 /**
  * Implements hook_block_info().
@@ -118,8 +221,32 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       $add_title = t('Create ') . $node_type;
       drupal_set_title($add_title);
     }
-
-    $form['#after_build'][] = 'itg_reporter_after_build';
+    $form['field_byline_company'][LANGUAGE_NONE]['#ajax'] = array(
+          'callback' => 'change_byline_department_ajax_callback',
+          'wrapper' => 'dropdown-byline_departent',
+        );
+    $form['field_byline_department']['#prefix'] = '<div id="dropdown-byline_departent">';
+    $form['field_byline_department']['#suffix'] = '</div>';
+    if (isset($form_state['node']) && isset($form_state['node']->field_byline_company) && !empty($form_state['node']->field_byline_company[LANGUAGE_NONE][0]['tid'])) {
+        $company_tid = $form_state['node']->field_byline_company[LANGUAGE_NONE][0]['tid'];
+    }
+    if (isset($form_state['values']) && !empty($form_state['values']['field_byline_company'][LANGUAGE_NONE][0]['tid'])) {
+        $company_tid = $form_state['values']['field_byline_company'][LANGUAGE_NONE][0]['tid'];
+    }
+    $byline_dept_arr_opt = array();
+    if (!empty($company_tid)) {
+        $byline_dept_arr = get_byline_department_by_company($company_tid);
+        if (!empty($byline_dept_arr)) {
+            foreach ($byline_dept_arr as $key => $value) {
+                $byline_dept_arr_opt[trim($value->entity_id)] = trim($value->name);
+            }
+            $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
+        }
+    }
+    $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
+    if (!($form_state['reporter_popup_form'])) {
+      $form['#after_build'][] = 'itg_reporter_after_build';
+    }
 
     $destination = 'byline-list';
     $form['actions']['cancel'] = array(
@@ -127,6 +254,8 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 21,
       '#value' => t('Cancel'),
     );
+
+    $form['#validate'][] = 'itg_reporter_custom_validate';
   }
 
   $frm_array = array('cooking_tips_node_form', 'story_node_form', 'videogallery_node_form', 'food_news_node_form', 'recipe_node_form', 'survey_node_form', 'quiz_node_form', 'photogallery_node_form');
@@ -191,6 +320,40 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
+ * Implements custom validate for client title
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_reporter_custom_validate(&$form, &$form_state) {
+  if (!empty($form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][0]['name'])) {
+    foreach ($form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE] as $key => $value) {
+      $movie_name = $form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][$key]['name'];
+      $movie_vid = $form_state['values']['field_reporter_movie_name'][LANGUAGE_NONE][$key]['vid'];
+      $exist = itg_reporter_movie_term_status($movie_name, $movie_vid);
+      if (empty($exist)) {
+        form_set_error('field_reporter_movie_name', 'Please enter valid movie name');
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_reporter_movie_term_status().
+ */
+function itg_reporter_movie_term_status($movie_name, $movie_vid) {
+  $itg_query = db_select('taxonomy_term_data', 'tr');
+  $itg_query->condition('vid', $movie_vid, '=')
+            ->condition('name', $movie_name, '=')
+            ->fields('tr', array('tid'));
+
+  $itg_result = $itg_query->execute()->fetchField();
+  if ($itg_result != '') {
+    return $itg_result;
+  }
+
+  return '';
+}
+/**
  * Implement hook_after_build
  * @param array $form
  * @param array $form_state
@@ -214,9 +377,9 @@ function itg_reporter_after_build($form, &$form_state) {
   $settings['reporter'] = $tid_repo;
   $settings['ntype'] = $form['type']['#value'];
   drupal_add_js(array('itg_reporter' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js');
+  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js', array('scope' => 'footer'));
   $form['#attached']['js'] = array(
-    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js');
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   return $form;
 }
 
@@ -236,7 +399,6 @@ function itg_reporter_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-
   if ($form['#id'] == 'views-exposed-form-byline-list-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/reporter/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Name'));
@@ -252,7 +414,6 @@ function itg_reporter_form_views_exposed_form_alter(&$form, &$form_state, $form_
  * @param $email
  */
 function itg_reporter_get_content_email($email) {
-
   if (strlen(trim($email)) > 0) {
     $content_type = arg(1);
     $options = '';
@@ -278,7 +439,6 @@ function itg_reporter_get_content_email($email) {
  * @param $twitter
  */
 function itg_reporter_get_twitter_handle($twitter) {
-
   if (strlen(trim($twitter)) > 0) {
     $content_type = arg(1);
     $options = '';
@@ -305,6 +465,10 @@ function itg_reporter_get_twitter_handle($twitter) {
  * {@inheritdoc}.
  */
 function itg_reporter_node_presave($node) {
+    //set custom path alias
+  if (itg_workflow_stop_node_update_batch_for_widgets()) {
+    return;
+  }
   if ($node->type == 'reporter' && !empty($node->nid)) {
     $previous_value = node_load($node->nid);
     $previous_title = $previous_value->title;
@@ -387,6 +551,7 @@ function itg_autocomplete_byline($id) {
   $record = $result->fetchAssoc();
   $r_title = ucfirst($record['title']);
   $r_nid = strtolower($record['nid']);
+
   if (!empty($record['field_reporter_email_id_value'])) {
     $name_format = $r_title . '(' . $record['field_reporter_email_id_value'] . ')(' . $r_nid . ')';
   }
@@ -412,12 +577,77 @@ function itg_reporter_node_validate($node, $form, &$form_state) {
         if ($occ_name->name == 'Celebrity') {
           $flag = TRUE;
         }
+        if (strtolower($occ_name->name) == 'reporter') {
+          $reporter_flag = TRUE;
+        }
       }
     }
     // make moview field mandotory.
     $errors = array_filter($node->field_reporter_movie_name['und']);
+    $profile_type = $node->field_reporter_profile_type[LANGUAGE_NONE][0]['value'];
     if ($flag && empty($errors)) {
       form_set_error('field_reporter_movie_name', 'Movie name is required.');
     }
+
+    if ($reporter_flag && empty($profile_type)) {
+      form_set_error('field_reporter_profile_type', 'Profile is required.');
+    }
+  }
+}
+
+/**
+ * Function for ajax callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function change_byline_department_ajax_callback($form, &$form_state) {
+   return $form['field_byline_department'];
+}
+
+
+/**
+ * Function is used to get byline company from byline department
+ * @param int $tid
+ * @return boolean or array
+ */
+function get_byline_department_by_company($tid = null) {
+    if (empty($tid)) {
+        return FALSE;
+    }
+    $query = db_select('field_data_field_byline_company', 'bc');
+    $query->fields('bc', array('entity_id'));
+    $query->fields('ttd', array('name'));
+    $query->join('taxonomy_term_data', 'ttd', 'bc.entity_id = ttd.tid');
+    $query->condition('bc.field_byline_company_tid', $tid, '=');
+    $query->condition('bc.bundle', 'byline_department', '=');
+    $query->condition('bc.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchAll();
+    return $query_result;
+}
+
+/**
+ * Function is used to get the list of authors
+ * @return boolean or array
+ */
+function itg_get_author_byline($auth_cat_id) {
+  if (empty($auth_cat_id)) {
+        return array();
+  }
+  $reporter_name = db_select('node', 'n');
+  $reporter_name->join('field_data_field_celebrity_pro_occupation', 're', 'n.nid = re.entity_id');
+  $reporter_name->fields('n', array('title', 'nid'));
+  $reporter_name->condition('n.type', 'reporter', '=');
+  $reporter_name->condition('n.status', '1', '=');
+  $reporter_name->condition('re.bundle', 'reporter', '=');
+  $reporter_name->condition('re.field_celebrity_pro_occupation_tid', $auth_cat_id, '=');
+  $reporter_name->orderBy('n.title', 'ASC');
+  $result = $reporter_name->execute();
+  $record = $result->fetchAll();
+  if (!empty($record) && count($record) > 0 ) {
+    return  $record;
+  }
+  else {
+    return array();
   }
 }

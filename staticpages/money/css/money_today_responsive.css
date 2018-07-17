@@ -1,0 +1,289 @@
+@media (max-width: 800px){
+
+.container{width:100%;}
+.header .logo{margin-top:13px; margin-left:18px;}
+.searchicon{display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/moneytoday/moneytoday_new/search_icon.jpg) no-repeat 0 0; width:34px; height:35px; float:right; margin:16px 27px 0 0;}
+.ipadnav{display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/moneytoday/moneytoday_new/ipadnav.png) no-repeat 0 0; width:27px; height:23px; float:right; margin:22px 37px 0 0;}
+.menu_container{position:absolute; top:102px; left:0; display:none; z-index:9999;}
+.menu_container .menu_cont ul li{width:98%; border-bottom:1px solid #464646; padding-left:2%;}
+.menu_container .menu_cont ul li a{width:100%; display:block;}
+
+.menu_container .menu_cont ul li a.soci_h { width:30px;}
+.menu_container .menu_cont ul li:last-child{display:none}
+.sub_menu_container{display:none;}
+
+.outer_ipadhead{float:left; width:100%; box-shadow:0 5px 8px #cfcfcf; margin-bottom:15px; padding-bottom:15px; position:relative;}
+
+.header .ad_banner{margin:35px 21px 22px 0; height:inherit}
+
+.youtube_container{width:100%;}
+.youtube_container .y_tube_left{width:582px;}
+.youtube_container .y_tube_right{width:185px; height:420px; overflow:hidden;}
+.body_container{width:94%; padding:0 3%; margin-top:4%;}
+.left_container{width:100%;}
+.top_story_section ul.content_tab{width:38%;}
+.latest_article ul li{margin-right:54px;}
+
+.money_today .money_box .content_box{width:69%;}
+.right_container{width:100%;}
+.sensex{float:right; width:312px;}
+.interviews{width:312px; float:left;}
+.tabbing_section{float:right; width:312px;}
+.interactive{width:312px; margin-top:20px; float:left;}
+.other_video .other_box ul li{padding-left:29px;padding-right:29px;}
+.bk_shdw{display:none;}
+
+.interview{float:right; width:312px; margin-top:0px;}
+.tabbing_section{float:left;}
+
+.strwapper{ width:100%}
+
+.iframe_ytb{width:629px; height:364px}
+
+.phvid-leftnav {float: left;width: 720px;}
+.col {margin-left: 0 !important;}
+.headline {margin-left: 0 !important;}
+.phvid-listing {float: left !important; margin-left: 4px !important;width: 686px !important;}
+.colspc {padding: 10px 48px 10px 0 !important;}
+.tax_calc {margin-right: 0;}
+.sensex{ margin-right:0;}
+.tabbing_section .morelink{padding: 0 16px 0 0;}
+
+.write_to{ margin-right:16px !important;}
+
+.write_to .placeholder{ /*bottom:80px;*/}
+#rightpanel h3{  color: #ca3e31 !important;font-size: 18px !important;font-weight: 600 !important;margin-bottom: 0 !important;margin-top: 6px;text-align: center;}
+
+#rightpanel .interview .main h3 {color: #383838!important; display: block; font: 500 14px/20px Roboto!important; text-align:left;}
+.pathway {float: left;margin-left: 6px !important;padding-bottom: 0 !important;width: 90%; }
+.tax_calc{ margin-top:0;}
+.secheadtext{ margin-top:-15px;}
+#videoplayer_wrapper { width:100%!Important; margin-left:0!Important}
+.video-container { width:572px;!Important}
+.write_to{float:left;}
+.tabbing_section{float:left;}
+
+
+.category_outer{width:100% !important; padding:0 !important; margin:0 !important;}
+#wapper{width:94% !important; padding:0 !important; margin:0 3% !important;}
+#videoplayer_wrapper{height:356px !important;}
+.strleft { padding-left:0;}
+.mCSB_scrollTools { display:block!Important}
+.mCSB_inside > .mCSB_container { margin-right:15px;}
+
+.topinnerbox1{width:100%;}
+.write_to { margin-top:70px; margin-right:0px!important;}
+.com_row { padding-left:50px;}
+.searchtextbot { width:97%; padding:10px;}
+.bottomsearchbox { float:left; margin-top:20px; margin-bottom:25px; width:100%;}
+.path {float: none!Important;  margin: 0 auto;  width: 91%;}
+#rightpanel { top:0!Important; position:static!Important}
+
+.right_supplementad{ float:right!Important; margin-bottom:20px;}
+.mobile-add{ display:none;}
+
+}
+
+@media (max-width: 640px){
+.mobile-add{ display:block; text-align:center;}
+.path { width:98%;}
+.menu_container{ top:51px;}
+.more-news { float:left!Important;}
+#impulseadcontainer { width:auto;}
+.strleft h1 { padding:10px 0;}
+.socials_f { margin-top:-8px;}
+.container{width:100%; background-color:#f0f0f0;}
+.ad_banner{display:none;}
+.outer_ipadhead { padding-bottom:0;}
+.youtube_container{width:100%; min-height:}
+.youtube_container .y_tube_left{width:100%; min-height:204px;}
+.youtube_container .y_tube_left img{width:100%;}
+.youtube_container .y_tube_right,.youtube_container .y_tube_right ul li,.yt_sm_video_cont{width:100%; height:auto; min-height:10px;}
+.youtube_container .y_tube_right ul li,.yt_sm_video_cont{height:auto; border:0;}
+.right-videolist h4{padding-left:0;}
+.yt_sm_video_cont{width:95%;border-bottom:1px solid #f0f0f0}
+.youtube_container .y_tube_right ul li{min-height:30px; float:left; width:100%; padding:0;
+ background-image: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/moneytoday/moneytoday_new/bullet.png');background-repeat: no-repeat;background-position: 12px 16px;
+padding-left: 25px;}
+.yt_sm_video_cont .btm_txt{background-color:#fff; color:#1e1e1e; float:left; position:relative;}
+.logo{display:none;}
+.ipadnav{float:left; margin-top:0; background-color:#ca252b; padding:14px; background-position:13px center; background: #ca252b url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/moneytoday/moneytoday_new/ipadnav.png") no-repeat scroll  12px 12px; display:block}
+.moblogo{display:inline-block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/moneytoday/moneytoday_new/mobile_logo.jpg) no-repeat; width:155px; height:24px; margin-top:12px; position:absolute; top:3px; left:80px;}
+.searchicon{margin-top:7px;}
+.youtube_container .y_tube_right ul li img,.yt_sm_video_cont .video_icon{display:none;}
+
+.youtube_container{background-color:#fff;}
+.video-container {
+    margin: 0 auto;
+    width: 310px!Important;
+}
+<!--#videoplayer_wrapper { width:100%!Important; margin-left:0!Important}-->
+.body_container{width:98%; padding:0 1%;}
+.top_story_section .big_img_box{width:96%; box-sizing:border-box;}
+.top_story_section .big_img_box img{width:100%; height:230px;}
+.top_story_section ul.content_tab{width:100%;}
+.latest_article ul li{width:100%;}
+.money_today .money_box .img_box,.latest_article ul li .img_box{width:40%;}
+.money_today .money_box .content_box,.latest_article ul li .content_box{width:58%; padding-left:2%; padding-right:0;}
+.latest_article ul li{min-height:15px;}
+.money_today .money_box .content_box span,.money_today .money_box .content_box h3{display:none;}
+.latest_article ul li .img_box img,.money_today .money_box .img_box img{width:98%; /*height:100%;*/}
+#videoplayer_wrapper { width:100%!Important; margin-left:0!Important; }
+.other_video .other_box ul li{width:45%; padding:0 5px; padding-bottom:10px;}
+.other_video .other_box ul li:nth-child(3){padding-left:0; padding-right:10px;}
+.other_video .other_box ul li img{width:100%; /*height:100%;*/}
+.right_addsec{display:none;}
+.sensex{width:100%; text-align:center; background-color:#000;}
+.sensex img { width:99%;}
+.interviews{width:100%; text-align:center;}
+.interviews h2{text-align:left;}
+.tabbing_section{width:100%;}
+.interactive{width:100%; text-align:center;}
+.interactive h2{text-align:left;}
+
+.search_section .search_area{float:left; margin-bottom:20px;}
+.com_row ul li{margin-left:35px !important; margin-right:0 !important;}
+.strwapper{ width:100%}
+.top_strip ul li{font-size:15px; padding:0 15px;}
+
+.big_img_box3 img{ width:100%; height:100%;}
+.youtube_container {  /* height: 538px !important;*/}
+.iframe_ytb{width:100%; height:300px}
+.interview{float:left; width:100%;}
+.write_to{width:80%; float: left;}
+.tax_calc { width: 100%;}
+.tax_calc_main{ width:100%;}
+.tax_calc_main img{ width:100%;}
+
+.main_container{ top:0 !important;}
+#strwapper{ width:96% !important; padding:0 2%!important;}
+.strleft{ width:98% !important; padding:0 1% !important; margin:0 !important;}
+.socials_f{ margin-top:0;}
+.mediumcontent .right-story-container{ width:100% !important;}
+.mediumcontent .right-story-container p{ padding:5px 10px;}
+.socials_f{ margin-top: 5px;}
+
+
+.strleft h1{font-size:19px !important; line-height:24px !important;}
+.header{box-shadow:0 0 5px #ccc;}
+.commenttxt,.commenttxt last,.size_inc_dec{display:none;}
+.strstrap{width:100% !important;}
+.st_share_area > div{font-size:23px;}
+#search_paenl-1,.st_social{display:none;}
+.like_dislike_area{margin-right:12%;}
+.interview .main ul li h3{font-size:14px !important;}
+.trending{display:none;}
+#rightpanel{top:0 !important; padding:0 !important; width:100% !important; float:left;}
+.write_to{width:75%;}
+.left_tab_top_chunk h3, #rightpanel h3, .left_tab_top_chunk h3 a, #rightpanel h3 a{font-size:18px !important; margin-bottom:0 !important; text-align:left !important;}
+#taboola-below-main-column,#taboola-text-2-columns{display:none;}
+.divclear{display:none;}
+
+#wapper,#wrapper,.category_outer{width:99% !important; padding:0 !important; margin:0 !important;}
+
+.phvidpathway{margin-top:3%;}
+.pathtwo{padding-bottom:7px;}
+
+.pathway{margin:0 !important;}
+.phvid-leftnav,.phvid-listing{width:100% !important;}
+.col{margin-left:0 !important; width:98% !important; padding:0 0 10px 0 !important; margin:0 !important; min-height:155px !important;}
+.image_icon{float:left; margin-right:10px; }
+.inner{min-height:130px !important;}
+.video-boxcont{padding:0 !important; margin:0 !important; width:100% !important;}
+.video-boxcont h2{font-size:16px !important; line-height:24px !important;}
+.videocont{float:left; width:100%; min-height:224px !important}
+.videocont > div{width:100% !important; margin:0 !important;}
+.videocont > div > div{width:100% !important;}
+.videocont > div > div > div{width:100% !important; height:288px !important;}
+.videocont > div:nth-child(div){width:100% !important;}
+.videocont > div:nth-child(div+1){width:100% !important;}
+
+#videoplayer_jwplayer_display_image{width:100% !important; top:0!important; height:auto!important; left:0!important;} .video-container{ position:relative;}
+#videoplayer{width:100% !important; height:250PX!IMPORTANT;}
+.headline { font: 20px/46px Roboto; background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/head_bg.jpg") repeat-x scroll 0 19px;}
+
+.videobox{width:100%; float:left;}
+
+ .sensex{ margin-right:0}
+ .tax_calc{ margin-right:0;}
+
+ .article-thumb{ width:25%;}
+.article-thumb img{ width:100%; float:left; height:80px;}
+.secheadtext{ width:70%; float:left;}
+.searchicon{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/moneytoday/moneytoday_new/mob_search_icon.jpg) no-repeat 0 0 !important; width:26px; height:27px; margin-top:10px;}
+.search_section h3{font-size:12px; display:block; text-align:center;}
+.search_section .search_area{width:265px; margin:0 auto; float:none !important;}
+.mobimgbox{width:38%; box-shadow:0 0 5px #ccc; padding:2px; background-color:#fff; float:left; margin-right:8px;}
+.mobimgbox img{float:left; width:100%;}
+.com_row ul li{margin-left:0 !important; width:100%; height:auto; padding-bottom:0; box-shadow:0 0 0 #fff; border:0;}
+.com_row{margin-top:0px;}
+
+.vid_icon {background-position: -253px -154px;}
+.other_video .other_box{background-color:#fff; border:1px solid #d3d3d3; box-shadow:0 0 5px #d3d3d3; border-radius:2px; padding:5px!important;}
+
+.other_video .other_box ul li{border:1px solid #f0f0f0 !important; padding:0 !important;}
+.other_video .other_box ul li a span{color:#585858 !important;}
+.other_video .other_box ul li a.active span{color:#585858 !important;}
+.other_video .other_box ul li:nth-child(odd){margin-right:20px; margin-bottom:20px;}
+.other_video .other_box ul li:nth-child(even){margin-right:0px; margin-bottom:20px;}
+
+
+.left_container h2.heading{padding-bottom:0px;}
+h2.heading{background-color:#c52724; font-size:15px; font-weight:300; color:#fff; padding:0px 7px; border-radius:3px 0 0;}
+.prev-storynav,.next-storynav{display:none;}
+.video-container { width:320px; height:250px;}
+div#videoplayer_wrapper {  height:auto!Important}
+.interview .main ul li .content_box { width:55%;}
+#footer-cont { overflow:hidden}
+.money_box .img_box { height:80px; width:120px; }
+.money_box .content_box { width:51%;}
+.ipadnav { margin-right:112px;}
+.tabbing_section .tab ul li a{padding:7px 16px;}
+#rightpanel{right:0 !important;}
+.pathway{width:100% !important;}
+#user-text,#comment_box #right,#comment_box,#comment_box #right textarea{width:93% !important;}
+
+.tagstxt > div{width:100% !important;}
+
+.mCustomScrollBox{height:190px;}
+.youtube_container{position:relative; left:2px;}
+.topzone1 a{line-height:32px;}
+.com_row ul li a img { float:left; margin-right:10px;}
+.com_row { padding-left:0;}
+.top_menu { display:none;}
+.searchbot input {
+    font: 200 24px/40px "Roboto";
+    margin: 50px 0 0;
+    width: 100%;
+}
+.searchbot {
+  margin: 0 auto 50px;
+   width: 100%;
+}
+#tpvideosec{margin-top:15px;}
+#tpvideosec ul li .btm_txt{color:#777;}
+#tpvideosec ul li:first-child .btm_txt{color:#000; font-size:15px;}
+.right-videolist{ background:none; position:relative; padding:0;} .right-videolist h4{ font-size:14px; color:#656565; font-weight:300;} .right-videolist .list-videodt{ display:none;}
+.right-videolist{margin-top: 10px;}
+.interview .main ul li{width:98%; float:left; border:1px solid #efefef; padding:2%; box-sizing:border-box; margin-bottom:10px;}
+.menu_container .menu_cont{ width:100%;}
+
+#tpvideosec .right-videolist .rhsvidoetext{ position:relative;} #tpvideosec ul li:hover .right-videolist{opacity:1;}
+#tpvideosec .right-videolist{ height:auto; background:none; padding:2% 0 0 1%}
+#tpvideosec ul li.lastv .right-videolist h4{ font-size:15px; width:auto; display:inline; padding-right:0px;} #tpvideosec ul li.lastv .right-videolist .showtext{ line-height:18px; width:auto; display:inline; color:#656565; padding:0px; font-size:14px; font-weight:400;} #tpvideosec ul li.lastv .right-videolist .showtext span{ color:#c52724;}
+.right_supplementad{ margin-bottom:20px; margin-left:-9px;}
+
+}
+
+
+@media (max-width: 360px){
+.iframe_ytb{width:100%; height:250px}
+}
+
+@media (max-width: 320px){
+.iframe_ytb{width:100%; height:200px}
+.ipadnav { margin-right:35px;}
+div#videoplayer_wrapper {  height:auto!Important; width:320px!Important;} #videoplayer{width:320px!Important;}
+}
+@media (min-width:320px) and (max-width: 580px) {.videocont .pmedia-image-icon, .videocont .pmedia-play-icon{ bottom:32%!Important; right:44%!Important; width:46px!Important;}
+}

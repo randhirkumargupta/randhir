@@ -138,7 +138,7 @@
               <?php if($node->field_ntf_android_vibration[LANGUAGE_NONE][0]['value']) { ?>
               <div class="field">
                 <div class="field-label"><?php print t('Android Force Vibration:'); ?></div>
-                <div class="field-items"><?php print $node->field_ntf_android_vibration[LANGUAGE_NONE][0]['value'] ? 'Yes' : 'No'; ?></div>
+                <div class="field-items"><?php print $node->field_ntf_android_vibration[LANGUAGE_NONE][0]['value'] ? t('Yes') : t('No'); ?></div>
               </div>
               <?php } ?>
               

@@ -266,14 +266,6 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
   $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
-  /* Field: Content: Delete link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = '';
-  $handler->display->display_options['fields']['delete_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['delete_node']['alter']['text'] = '<span class="delete-link">[delete_node]</span>';
-  $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -531,11 +523,6 @@ function features_for_loyalty_and_rewards_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Content: Product Count (field_lrp_product_count) */
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['id'] = 'field_lrp_product_count_value';
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['table'] = 'field_data_field_lrp_product_count';
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['field'] = 'field_lrp_product_count_value';
-  $handler->display->display_options['filters']['field_lrp_product_count_value']['value']['value'] = '0';
   /* Filter criterion: Date: Date (node) */
   $handler->display->display_options['filters']['date_filter']['id'] = 'date_filter';
   $handler->display->display_options['filters']['date_filter']['table'] = 'node';
@@ -545,6 +532,13 @@ function features_for_loyalty_and_rewards_views_default_views() {
   $handler->display->display_options['filters']['date_filter']['default_date'] = 'now';
   $handler->display->display_options['filters']['date_filter']['date_fields'] = array(
     'field_data_field_story_expiry_date.field_story_expiry_date_value' => 'field_data_field_story_expiry_date.field_story_expiry_date_value',
+  );
+  /* Filter criterion: Content: Completed(Sold out) (field_lrp_completed) */
+  $handler->display->display_options['filters']['field_lrp_completed_value']['id'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['table'] = 'field_data_field_lrp_completed';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['field'] = 'field_lrp_completed_value';
+  $handler->display->display_options['filters']['field_lrp_completed_value']['value'] = array(
+    'Sold out' => 'Sold out',
   );
   $handler->display->display_options['path'] = 'admin/loyalty/lrp-sold-items';
   $export['lrp_manage_items'] = $view;
@@ -613,6 +607,8 @@ function features_for_loyalty_and_rewards_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Product listing page';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';

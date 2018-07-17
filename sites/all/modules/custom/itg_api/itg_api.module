@@ -14,11 +14,11 @@
  */
 function itg_api_cronapi($op, $job = NULL) {
   
-  $items['itg-pti-content'] = array(
+  /*$items['itg-pti-content'] = array(
     'description' => 'Import PTI Feed.',
     'callback' => 'itg_pti_content',
     'file' => 'include/itg_api_pti.inc',
-  );
+  );*/
   
   $items['itg-mail-today-content'] = array(
     'description' => 'Import Mail today Feed',
@@ -53,8 +53,73 @@ function itg_api_cronapi($op, $job = NULL) {
   $items['itg-nifty-feed'] = array(
     'description' => 'Import Nifty Feed',
     'callback' => 'itg_nifty_feed',
+    'file' => 'include/itg_nifty_feed.inc',
   );
+  
+  /*$items['itg-delete-pti-old-xml'] = array(
+    'description' => 'Delete Old PTI XML',
+    'callback' => 'itg_delete_pti_old_xml',
+    'file' => 'include/itg_api_pti.inc',
+  );*/
 
+  return $items;
+}
+
+/**
+ * Implements hook_menu().
+ *  only for debugging purpose
+ * @return array
+ */
+function itg_api_menu() {
+  
+  $items['migrate-press-trust'] = array(
+    'page callback' => 'itg_pti_content',
+    'access callback' => TRUE,
+    'file' => 'include/itg_api_pti.inc',
+  );
+  
+  $items['ty-ani'] = array(
+    'page callback' => 'itg_ani_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_ani.inc',
+  );
+  
+  $items['ty-ians'] = array(
+    'page callback' => 'itg_ians_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_ians.inc',
+  );
+  
+  $items['ty-mail-today'] = array(
+    'page callback' => 'itg_api_mail_today_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_mail_today.inc',
+  );
+  
+  $items['ty-reuters'] = array(
+    'page callback' => 'itg_reuters_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_reuters.inc',
+  );
+  
+  $items['ty-ap'] = array(
+    'page callback' => 'itg_ap_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_ap.inc',
+  );
+  
+  $items['ty-pti-delete-old-xml'] = array(
+    'page callback' => 'itg_delete_pti_old_xml',    
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_pti.inc',
+  );
+  
   return $items;
 }
 
@@ -82,52 +147,33 @@ function workbench_moderation_state_review() {
 }
 
 /**
- * Implement itg_nifty_feed
- */
-function itg_nifty_feed() {
-  $direc = getcwd() . '/sites/all/modules/custom/itg_api/feeds/nifty/';
-  $new_file_name = $direc . 'SensexNiftyFeed.txt';
-  $response_xml_data = get_content_from_xml_loc('http://businesstoday.accordhostings.com/SensexNiftyFeed.aspx');
-
-  if ($response_xml_data) {
-    $nifty_xml = simplexml_load_string($response_xml_data);
-    $final_output = '';
-    foreach ($nifty_xml as $nifty_value) {
-      $final_output .= $nifty_name = $nifty_value->name . ',';
-      $final_output .= 'Current Value : ' . $current_value = $nifty_value->current_value . ',';
-      $final_output .= 'Value Change : ' . $value_change = $nifty_value->value_change . ',';
-      $final_output .= 'Percentage Change : ' . $percentage_change = $nifty_value->percentage_change . '@';
-    }
-    unlink($new_file_name);
-    if (!file_exists($new_file_name)) {
-      $file = fopen($new_file_name, "w+");
-      fwrite($file, $final_output);
-      fclose($file);
-      chmod($file, 777);
-    }
-  }
-  print 'Saved Successfully';
-}
-
-/**
  * Implements function for node exit or not
  * @param string $title
  * @return bool
  */
 
-function itg_api_check_title($title) {
+function itg_api_check_title($title, $tid, $xml_date) {
+  $return = FALSE;
+  $start_date = $xml_date.' 00:00:01';
+  $end_date = $xml_date.' 23:59:59';
+  $start_time = strtotime($start_date);
+  $end_time = strtotime($end_date);  
   $title = html_entity_decode($title);
-  $result = db_select('node', 'node')
-    ->fields('node', array('title'))
-    ->condition('title', $title, '=')
-    ->condition('type', 'story', '=')
-    ->execute()->fetchAssoc();
-
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_story_category', 'fs', 'fs.entity_id = n.nid');
+  $query->fields('n', array('title'));
+  $query->condition('n.title', $title, '=');
+  $query->condition('n.type', 'story', '=');
+  $query->condition('n.created', $start_time, '>=');
+  $query->condition('n.created', $end_time, '<=');
+  $query->condition('fs.field_story_category_tid', $tid, '=');
+  $query->condition('fs.bundle', 'story', '=');
+  $result = $query->execute()->fetchAssoc();
   if (!empty($result['title'])) {
-    return TRUE;
+    $return = TRUE;
   }
 
-  return FALSE;
+  return $return;
 }
 
 /**
@@ -182,9 +228,10 @@ function itg_api_insert_xml_info($nid, $file, $type, $source) {
   * @param string $filename
  */
 function itg_api_get_xml_info($filename) {
+  $count = 0;
   $result = db_query("SELECT t.id FROM {itg_api_xml_info} t WHERE t.filename = :name", array(":name" => $filename));
-  $id = $result->fetchField();
-  return $id;
+  $count = $result->rowCount();  
+  return $count;
 }
 
 /**
@@ -285,8 +332,7 @@ function get_content_from_xml_loc($url) {
  * @param int $bylineid
  */
 function itg_custom_byline_create($uniqueid = NULL, $bylineid) {
-  if (!empty($bylineid))
-  {
+  if (!empty($bylineid)) {
     $qry = db_insert('itg_multi_byline_info')
         ->fields(array(
           'byline_id' => $bylineid,
@@ -297,4 +343,91 @@ function itg_custom_byline_create($uniqueid = NULL, $bylineid) {
         ))
         ->execute();
   }
+}
+
+/**
+ * Implements hook_node_delete()
+ * {@inheritdoc}
+ */
+function itg_api_node_delete($node) {
+  if ($node->type == 'story' && !empty($node->nid)) {
+    // delete node from custom xml table
+    db_delete('itg_api_xml_info')
+        ->condition('nid', $node->nid)
+        ->execute();
+    // delete byline from custom tabe incase of node delete
+    db_delete('itg_multi_byline_info')
+        ->condition('nid', $node->nid)
+        ->execute();
+  }
+}
+
+/**
+ * Implements itt_api_path_insert().
+ */
+function itg_api_path_insert($node) {
+  if ($node->type == 'story') {
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (function_exists('_remove_slash_from_string')) {
+      $edited_sef_url = _remove_slash_from_string($node->path['alias']);
+    }
+    if (!empty($edited_sef_url)) {
+      $lencount_sef = strlen($edited_sef_url);
+      if ($lencount_sef >= 160) {
+        $node_sef = substr($edited_sef_url, 0, 160);
+      }
+      else {
+        $node_sef = $edited_sef_url;
+      }
+    }
+    else {
+      $title_lenght = strlen($node->title);
+      if ($title_lenght >= 160) {
+        $node_sef = substr($node->title, 0, 160);
+      }
+      else {
+        $node_sef = _remove_slash_from_string($node->title);
+      }
+    }
+    $pathdata = get_path_from_category($getsection);
+    // Add static value for photo story.
+    $pathdata .= '/story';
+    // Add node title.
+    $pathdata .= '/' . trim($node_sef);
+    // Prepare SEO friendly node url
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
+}
+
+
+/**
+ * Implements function for update xml file info in table (itg_api_xml_info)
+ * @param int $nid
+ * @param string $file
+ * @param string $type
+ * @param string $source
+ */
+function itg_api_update_xml_info($nid, $file, $type, $source) {
+  global $user;
+  $created = date('Y-m-d H:i:s');
+  db_update('itg_api_xml_info')// Table to store file and node info
+  ->fields(array(
+    'nid' => $nid,
+    'uid' => $user->uid,
+    'filename' => $file,
+    'type' => $type,
+    'source' => $source,
+    'created' => $created
+  ))
+  ->condition('filename', $file, '=')
+  ->execute();
+}
+
+function itg_api_delete_intrupted_node() {
+  global $user;
+  $created = date('Y-m-d H:i:s');
+  db_delete('itg_api_xml_info')// Table to store file and node info
+  ->condition('nid', 0, '=')
+  ->execute();
 }

@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the node module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function itg_report_api_schema() {
+    
+    $schema['jos_social_media_sharing'] = array(
+  'description' => 'TODO: please describe this table!',
+  'fields' => array(
+    'id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'serial',
+      'size' => 'big',
+      'not null' => TRUE,
+    ),
+    'website_id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'content_id' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'content_type' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '55',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'content_title' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => FALSE,
+    ),
+    'content_url' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => FALSE,
+    ),
+    'category' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+    ),
+    'is_promoted' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'size' => 'tiny',
+      'not null' => TRUE,
+      'default' => 0,
+    ),
+    'promotion_remark' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'text',
+      'not null' => FALSE,
+    ),
+    'promotion_datetime' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'datetime',
+      'mysql_type' => 'DATETIME',
+      'not null' => TRUE,
+    ),
+    'created_datetime' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'datetime',
+      'mysql_type' => 'DATETIME',
+      'not null' => TRUE,
+      ),
+  ),
+  'primary key' => array('id'),
+);
+
+ return $schema;
+}

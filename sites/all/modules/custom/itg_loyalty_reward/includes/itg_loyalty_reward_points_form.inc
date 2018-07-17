@@ -56,11 +56,23 @@ function loyality_reward_points_configuration_form() {
         '#maxlength' => 6,
         '#default_value' => variable_get('lrp_online_registration_for_any_events'),
     );
-    $form['lrp_participation_in_poll_campaign_survey'] = array(
+    $form['lrp_participation_in_poll'] = array(
         '#type' => 'textfield',
-        '#title' => t('Participation in Poll/Campaign/Survey'),
+        '#title' => t('Participation in Poll'),
         '#maxlength' => 6,
-        '#default_value' => variable_get('lrp_participation_in_poll_campaign_survey'),
+        '#default_value' => variable_get('lrp_participation_in_poll'),
+    );
+    $form['lrp_participation_in_campaign'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Participation in Campaign'),
+        '#maxlength' => 6,
+        '#default_value' => variable_get('lrp_participation_in_campaign'),
+    );
+    $form['lrp_participation_in_survey'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Participation in Survey'),
+        '#maxlength' => 6,
+        '#default_value' => variable_get('lrp_participation_in_survey'),
     );
     $form['lrp_refer_a_friend'] = array(
         '#type' => 'textfield',
@@ -141,6 +153,7 @@ function loyality_reward_points_configuration_form() {
         '#maxlength' => 6,
         '#default_value' => variable_get('lrp_gold_star_three'),
     );
+    
     $form['lrp_gold_star_three_icon_fieldset'] = array(
         '#type' => 'fieldset',
         '#collapsible' => TRUE, // Added
@@ -151,6 +164,7 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'markup',
         '#markup' => '<div class="poll-form div_lrp_gold_star_three_icon"><a href="javascript:void(0)" onclick="' . $link_three_image . '">Browse Image</a></div>',
     );
+    
     $form['lrp_gold_star_three_icon_fieldset']['lrp_gold_star_three_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
@@ -179,6 +193,7 @@ function loyality_reward_points_configuration_form() {
         '#type' => 'markup',
         '#markup' => '<div class="poll-form div_lrp_gold_star_four_icon"><a href="javascript:void(0)" onclick="' . $link_four_image . '">Browse Image</a></div>',
     );
+    
     $form['lrp_gold_star_four_icon_fieldset']['lrp_gold_star_four_icon'] = array(
         '#type' => 'managed_file',
         '#title' => t('Badge Icon'),
@@ -232,6 +247,12 @@ function loyality_reward_points_configuration_form() {
         '#markup' => l(t('Cancel'), 'cms-user-dashboard', array('attributes' => array('class' => array('button')))),
         '#weight' => 20,
     );
+   
+    $form['property_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Property name'),
+        '#default_value' => variable_get('property_name'),
+    );
     $form['#submit'][] = 'itg_loyalty_reward_badge_icon_submit';
 
     return system_settings_form($form);
@@ -271,15 +292,15 @@ function itg_loyalty_reward_badge_icon_submit($form, &$form_state) {
  * @param int $fid
  */
 function _save_file_managed_image($fid) {
-    global $user;
-    // Load the file via file.fid.
-    $file = file_load($fid);
-    // Change status to permanent.
-    $file->status = FILE_STATUS_PERMANENT;
-    // Save.
-    file_save($file);
-    // Record that the module (in this example, user module) is using the file. 
-    file_usage_add($file, 'user', 'user', $user->uid);
+  global $user;
+  // Load the file via file.fid.
+  $file = file_load($fid);
+  // Change status to permanent.
+  $file->status = FILE_STATUS_PERMANENT;
+  // Save.
+  file_save($file);
+  // Record that the module (in this example, user module) is using the file. 
+  file_usage_add($file, 'user', 'user', $user->uid);
 }
 
 /**
@@ -298,7 +319,9 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
     $newsletter_sub = $form_values['lrp_newsletter_subscription'];
     $ugc_contribution = $form_values['lrp_ugc_contribution'];
     $online_reg = $form_values['lrp_online_registration_for_any_events'];
-    $participate = $form_values['lrp_participation_in_poll_campaign_survey'];
+    $participate = $form_values['lrp_participation_in_poll'];
+    $campaign = $form_values['lrp_participation_in_campaign'];
+    $survey = $form_values['lrp_participation_in_survey'];
     $refer_friend = $form_values['lrp_refer_a_friend'];
     $loyality_points_expiry = $form_values['lrp_loyality_points_expiry'];
 
@@ -308,6 +331,7 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
     $gold_start_three = $form_values['lrp_gold_star_three'];
     $gold_start_four = $form_values['lrp_gold_star_four'];
     $gold_start_five = $form_values['lrp_gold_star_five'];
+    $property_name = $form_values['property_name'];
 
     // Validation of loyalty points for form fileds
     if ($content_share !== '' && (!is_numeric($content_share) || $content_share < 1)) {
@@ -339,7 +363,15 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
     }
 
     if ($participate !== '' && (!is_numeric($participate) || $participate < 1)) {
-        form_set_error('lrp_participation_in_poll_campaign_survey', t('Participation in poll/campaign/survey field value must be numeric and greater than zero.'));
+        form_set_error('lrp_participation_in_poll', t('Participation in poll field value must be numeric and greater than zero.'));
+    }
+    
+    if ($campaign !== '' && (!is_numeric($campaign) || $campaign < 1)) {
+        form_set_error('lrp_participation_in_campaign', t('Participation in campaign field value must be numeric and greater than zero.'));
+    }
+    
+    if ($survey !== '' && (!is_numeric($survey) || $survey < 1)) {
+        form_set_error('lrp_participation_in_survey', t('Participation in poll survey value must be numeric and greater than zero.'));
     }
 
     if ($refer_friend !== '' && (!is_numeric($refer_friend) || $refer_friend < 1)) {
@@ -386,5 +418,9 @@ function loyality_reward_points_configuration_form_validate($form, &$form_state)
 
     if (!empty($gold_start_five) && (($gold_start_five <= $gold_start_one) || ($gold_start_five <= $gold_start_two) || ($gold_start_five <= $gold_start_three) || ($gold_start_five <= $gold_start_four))) {
         form_set_error('lrp_gold_star_two', t('Gold star five value must be greater than gold star one, two, three and four.'));
+    }
+    
+    if (empty($property_name)) {
+        form_set_error('property_name', t('Please enter property name.'));
     }
 }

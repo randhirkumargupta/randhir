@@ -26,8 +26,6 @@ if (isset($view->result[0]->nid)) {
   $display_format = $view->result[0]->_field_data['nid']['entity']->field_display_result[LANGUAGE_NONE][0]['value'];
   ?>
   <?php
-// 1 = instant result show.
-// 2 = After Poll Completion.
   if (($display_format == 1) || ($display_format == 2 && $endtime < time())) {
     ?>
     <?php print $wrapper_prefix; ?>

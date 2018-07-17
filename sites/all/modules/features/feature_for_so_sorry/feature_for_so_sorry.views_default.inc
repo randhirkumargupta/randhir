@@ -1045,19 +1045,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['label'] = 'field_upload_video';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: File: File ID */
-  $handler->display->display_options['fields']['fid']['id'] = 'fid';
-  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
-  $handler->display->display_options['fields']['fid']['field'] = 'fid';
-  $handler->display->display_options['fields']['fid']['relationship'] = 'field_upload_video_fid';
-  $handler->display->display_options['fields']['fid']['label'] = '';
-  $handler->display->display_options['fields']['fid']['element_label_colon'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1069,7 +1057,23 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section wise ordering content: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
+  /* Sort criterion: Content: Nid */
+  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['table'] = 'node';
+  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
+  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -1080,17 +1084,20 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Section wise ordering content: Widget */
   $handler->display->display_options['filters']['widget']['id'] = 'widget';
   $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['widget']['field'] = 'widget';
   $handler->display->display_options['filters']['widget']['value'] = 'so_sorry_widget';
+  $handler->display->display_options['filters']['widget']['group'] = 1;
   /* Filter criterion: Section wise ordering content: extra */
   $handler->display->display_options['filters']['extra']['id'] = 'extra';
   $handler->display->display_options['filters']['extra']['table'] = 'itg_widget_order';
   $handler->display->display_options['filters']['extra']['field'] = 'extra';
   $handler->display->display_options['filters']['extra']['value'] = 'feature';
+  $handler->display->display_options['filters']['extra']['group'] = 1;
   /* Filter criterion: Content: Has taxonomy term */
   $handler->display->display_options['filters']['tid']['id'] = 'tid';
   $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
@@ -1098,12 +1105,22 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['tid']['value'] = array(
     0 => '486',
   );
+  $handler->display->display_options['filters']['tid']['group'] = 1;
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'videogallery' => 'videogallery',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'sosorry';
 
   /* Display: The Remix */
@@ -1130,11 +1147,6 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
-  /* Relationship: Broken/missing handler */
-  $handler->display->display_options['relationships']['field_upload_video_fid']['id'] = 'field_upload_video_fid';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['table'] = 'field_data_field_upload_video';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['field'] = 'field_upload_video_fid';
-  $handler->display->display_options['relationships']['field_upload_video_fid']['label'] = 'field_upload_video';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -1143,13 +1155,6 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: File: File ID */
-  $handler->display->display_options['fields']['fid']['id'] = 'fid';
-  $handler->display->display_options['fields']['fid']['table'] = 'file_managed';
-  $handler->display->display_options['fields']['fid']['field'] = 'fid';
-  $handler->display->display_options['fields']['fid']['relationship'] = 'field_upload_video_fid';
-  $handler->display->display_options['fields']['fid']['label'] = '';
-  $handler->display->display_options['fields']['fid']['element_label_colon'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -1204,6 +1209,7 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['defaults']['query'] = FALSE;
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
@@ -1217,9 +1223,9 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Section wise ordering content: itg_widget_order nid Title */
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
@@ -1265,40 +1271,33 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Nid */
-  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['table'] = 'node';
-  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Section wise ordering content: extra */
-  $handler->display->display_options['filters']['extra_1']['id'] = 'extra_1';
-  $handler->display->display_options['filters']['extra_1']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['extra_1']['field'] = 'extra';
-  $handler->display->display_options['filters']['extra_1']['operator'] = '!=';
-  $handler->display->display_options['filters']['extra_1']['value'] = 'remix';
-  $handler->display->display_options['filters']['extra_1']['group'] = 1;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: extra */
-  $handler->display->display_options['filters']['extra']['id'] = 'extra';
-  $handler->display->display_options['filters']['extra']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['extra']['field'] = 'extra';
-  $handler->display->display_options['filters']['extra']['operator'] = '!=';
-  $handler->display->display_options['filters']['extra']['value'] = 'feature';
-  /* Filter criterion: Content: Section (field_story_category) */
-  $handler->display->display_options['filters']['field_story_category_tid']['id'] = 'field_story_category_tid';
-  $handler->display->display_options['filters']['field_story_category_tid']['table'] = 'field_data_field_story_category';
-  $handler->display->display_options['filters']['field_story_category_tid']['field'] = 'field_story_category_tid';
-  $handler->display->display_options['filters']['field_story_category_tid']['value'] = array(
-    0 => '486',
-  );
-  $handler->display->display_options['filters']['field_story_category_tid']['vocabulary'] = 'category_management';
+  /* Filter criterion: Section widget relationship: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
 
   /* Display: You will love these */
   $handler = $view->new_display('block', 'You will love these', 'you_will_love_these');
@@ -1326,9 +1325,9 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Section wise ordering content: itg_widget_order nid Title */
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
@@ -1372,11 +1371,11 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Nid */
-  $handler->display->display_options['sorts']['nid']['id'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['table'] = 'node';
-  $handler->display->display_options['sorts']['nid']['field'] = 'nid';
-  $handler->display->display_options['sorts']['nid']['order'] = 'DESC';
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -1386,28 +1385,20 @@ print \'<a href="move-dont-miss-widget-node/so_sorry_widget/\'.$_GET[\'type\'].\
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['value'] = array(
-    0 => '486',
-  );
-  $handler->display->display_options['filters']['tid']['group'] = 1;
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'category_management';
-  /* Filter criterion: Section wise ordering content: extra */
-  $handler->display->display_options['filters']['extra']['id'] = 'extra';
-  $handler->display->display_options['filters']['extra']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['extra']['field'] = 'extra';
-  $handler->display->display_options['filters']['extra']['operator'] = '!=';
-  $handler->display->display_options['filters']['extra']['value'] = 'remix';
-  $handler->display->display_options['filters']['extra']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: extra */
-  $handler->display->display_options['filters']['extra_1']['id'] = 'extra_1';
-  $handler->display->display_options['filters']['extra_1']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['extra_1']['field'] = 'extra';
-  $handler->display->display_options['filters']['extra_1']['operator'] = '!=';
-  $handler->display->display_options['filters']['extra_1']['value'] = 'feature';
+  /* Filter criterion: Section widget relationship: Category */
+  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget']['id'] = 'widget';
+  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
   $export['so_sorry'] = $view;
 
   return $export;

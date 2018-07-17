@@ -1,0 +1,12 @@
+name = ITG Akamai Block Refresh
+description = Allows blocks to automatically refresh their content.
+dependencies[] = block
+package = User interface
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2015-12-20
+version = "7.x-2.5"
+core = "7.x"
+project = "itg_akamai_block_refresh"
+datestamp = "1450571359"
+

@@ -17,201 +17,19 @@
 function itg_octopus_api_schema() {
   $schema = array();
   // Schema for rundown xml slug
-  $schema['itg_octopus_slug'] = array(
-    'description' => 'TODO: please describe this table!',
-    'fields' => array(
-      'id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'serial',
-        'not null' => TRUE,
-      ),
-      'storyid' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'rundown_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'slug_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'story_title' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'story_status' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'story_duration' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'story_created' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'story_created_by' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'story_modified' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-      'story_modified_by' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-        'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('id'),
-    'indexes' => array(
-      'id' => array('id'),
-    ),
-  );
-  $schema['itg_octopus_slug_storycustom'] = array(
-    'description' => 'TODO: please describe this table!',
-    'fields' => array(
-      'id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'serial',
-        'not null' => TRUE,
-      ),
-      'slug_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'rundown_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'story_custom_data' => array(
-        'description' => 'A blob field that contains list story custom.',
-        'type' => 'blob',
-        'not null' => FALSE,
-      ),
-    ),
-    'primary key' => array('id'),
-    'indexes' => array(
-      'id' => array('id'),
-    ),
-  );
-
-  //schema for rundown xml clip
-
-  $schema['itg_element_clip'] = array(
-    'description' => 'TODO: please describe this table!',
-    'fields' => array(
-      'id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'serial',
-        'not null' => TRUE,
-      ),
-      'element_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'slug_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'rundown_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
-      'element_type' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '255',
-      ),
-      'element_dur' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipname' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipmosid' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipobj_id' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipjobid' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipfilepath' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipin' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'clipout' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '250',
-      ),
-      'text' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'text',
-        'size' => 'big',
-      ),
-    ),
-    'primary key' => array('id'),
-    'indexes' => array(
-      'id' => array('id'),
-    ),
-  );
-
   //schema for rundown xml rundown
 
   $schema['itg_rundown'] = array(
-    'description' => 'The base table for syndication.',
+    'description' => 'The base table for itg_rundown.',
     'fields' => array(
       'id' => array(
-        'description' => 'The primary identifier for a node.',
+        'description' => 'The primary identifier for a rundown.',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
       'exported' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'exported',
         'type' => 'varchar',
         'length' => '128',
         'not null' => TRUE,
@@ -222,19 +40,140 @@ function itg_octopus_api_schema() {
         'length' => '255',
         'not null' => TRUE,
       ),
+      'rundown_type' => array(
+        'description' => 'rundownType',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
       'rundown_id' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'rundown Id',
         'type' => 'int',
         'not null' => TRUE,
       ),
       'rundown_title' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'rundown title',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
       ),
       'rundown_start' => array(
-        'description' => 'TODO: please describe this field!',
+        'description' => 'rundownStart',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'rundown_start_timestamp' => array(
+        'description' => 'Rundown created timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'type' => array(
+        'description' => 'Rundown Type , It can be Current , Next1, Next2',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+
+  $schema['itg_octopus_slug'] = array(
+    'description' => 'Table for itg_octopus_slug',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Auto incremented ID field',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
+        'description' => 'Rundown Id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'action' => array(
+        'description' => 'action',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'storyid' => array(
+        'description' => 'Story id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'story_title' => array(
+        'description' => 'Story title',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_skip' => array(
+        'description' => 'story Skip',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_duration' => array(
+        'description' => 'Story duration',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_created' => array(
+        'description' => 'storyCreated',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_created_by' => array(
+        'description' => 'storyCreatedBy',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_modified' => array(
+        'description' => 'story modified',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_modified_timestamp' => array(
+        'description' => 'Story Modified Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'timestamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'story_modified_by' => array(
+        'description' => 'story modified by',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'story_custom' => array(
+        'description' => 'storyCustom',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'category' => array(
+        'description' => 'Category',
+        'type' => 'varchar',
+        'length' => '250',
+        'not null' => TRUE,
+      ),
+      'location' => array(
+        'description' => 'Location',
         'type' => 'varchar',
         'length' => '250',
         'not null' => TRUE,
@@ -244,6 +183,539 @@ function itg_octopus_api_schema() {
     'indexes' => array(
       'id' => array('id'),
     ),
+  );
+//  $schema['itg_octopus_slug_storycustom'] = array(
+//    'description' => 'TODO: please describe this table!',
+//    'fields' => array(
+//      'id' => array(
+//        'description' => 'TODO: please describe this field!',
+//        'type' => 'serial',
+//        'not null' => TRUE,
+//      ),
+//      'rundown_id' => array(
+//        'description' => 'TODO: please describe this field!',
+//        'type' => 'int',
+//        'not null' => TRUE,
+//      ),
+//      'storyid' => array(
+//        'description' => 'TODO: please describe this field!',
+//        'type' => 'int',
+//        'not null' => TRUE,
+//      ),
+//      'story_custom_data' => array(
+//        'description' => 'A blob field that contains list story custom.',
+//        'type' => 'blob',
+//        'not null' => FALSE,
+//      ),
+//    ),
+//    'primary key' => array('id'),
+//    'indexes' => array(
+//      'id' => array('id'),
+//    ),
+//  );
+  //schema for rundown xml clip
+
+  $schema['itg_element_clip'] = array(
+    'description' => 'Table for itg_element_clip',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Auto incremented ID field',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
+        'description' => 'Rundown ID',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'storyid' => array(
+        'description' => 'Story Id',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'element_id' => array(
+        'description' => 'Element ID',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'element_type' => array(
+        'description' => 'element_type',
+        'type' => 'varchar',
+        'length' => '255',
+      ),
+      'element_dur' => array(
+        'description' => 'element_dur',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipname' => array(
+        'description' => 'clipname',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipmosid' => array(
+        'description' => 'clipmosid',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipobj_id' => array(
+        'description' => 'clipobj_id',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipjobid' => array(
+        'description' => 'clipjobid',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipfilepath' => array(
+        'description' => 'clipfilepath',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipin' => array(
+        'description' => 'clipin',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'clipout' => array(
+        'description' => 'clipout',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+      'text' => array(
+        'description' => 'text',
+        'type' => 'text',
+        'size' => 'big',
+      ),
+      'commands' => array(
+        'description' => 'Commands',
+        'type' => 'varchar',
+        'length' => '250',
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+
+  $schema['itg_octopus_dm_response'] = array(
+    'description' => 'Save the dailymotion response for Octopus',
+    'fields' => array(
+      'eid' => array(
+        'description' => 'Video entry id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'description' => 'Video title',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'channel' => array(
+        'description' => 'Video category on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'Video type on dailymotion',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'fid' => array(
+        'description' => 'file id from file manage table',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'video_nid',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'slug_id',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'tags' => array(
+        'description' => 'Tags of video',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'upload_time' => array(
+        'description' => 'Video upload time',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'video_id' => array(
+        'description' => 'Video id which return by dailymotion',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'video_duration' => array(
+        'description' => 'Video duration',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'video_size' => array(
+        'description' => 'Video Size',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'dailymotion_thumb_url' => array(
+        'description' => 'Thumb Url',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'dailymotion_published' => array(
+        'description' => 'Publish status',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'encoding_progress' => array(
+        'description' => 'Encoding progress',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'publishing_progress' => array(
+        'description' => 'publishing progress',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'Video name',
+        'type' => 'varchar',
+        'length' => '250',
+        'null' => TRUE,
+      ),
+      'need_delete' => array(
+        'description' => 'Video delete',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'is_draft' => array(
+        'description' => 'node is draft',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'is_notify' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('eid'),
+  );
+
+  $schema['itg_octopus_notification'] = array(
+    'description' => 'This is for Octopus Notification',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Octopus Notificaton id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'Notificaton Type',
+        'type' => 'varchar',
+        'length' => '50',
+        'null' => TRUE,
+      ),
+      'msg' => array(
+        'description' => 'Notificaton message',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'hyperlink' => array(
+        'description' => 'Notificaton message hyperlink',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'query_string' => array(
+        'description' => 'Notificaton message query_string',
+        'type' => 'varchar',
+        'length' => '255',
+        'null' => TRUE,
+      ),
+      'time' => array(
+        'description' => 'timestamp',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Status Either 0 or 1',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'read_by' => array(
+        'description' => 'Read by UID',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['itg_octopus_notification_by_uid'] = array(
+    'description' => 'This is for Octopus Notification by UID',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'notification_id' => array(
+        'description' => 'Notification Id',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Read Status Either 0 or 1',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'Read by UID',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'timestamp',
+        'type' => 'int',
+        'null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+
+  $schema['itg_rfa'] = array(
+    'description' => 'The base table for itg_rfa.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a RFA rundown.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'rundown_id' => array(
+        'description' => 'Rundown Id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'source' => array(
+        'description' => 'source',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'text' => array(
+        'description' => 'Text',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+      ),
+      'created_date' => array(
+        'description' => 'Created Date',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created_by' => array(
+        'description' => 'Created By',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'RFA Rundown created timestamp.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'action' => array(
+        'description' => 'Action will be Insert, Update, Delete',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'id' => array('id'),
+    ),
+  );
+
+  // Octopus itg_octopus_cron_log
+  $schema['itg_octopus_cron_log'] = array(
+    'description' => 'The base table for itg_octopus_cron_log.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a itg_octopus_cron_log.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cron_id' => array(
+        'description' => 'Cron id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'slug_id' => array(
+        'description' => 'Slug id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'message' => array(
+        'description' => 'Message',
+        'type' => 'varchar',
+        'length' => '100',
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'Type',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  // Octopus itg_octopus_cron
+  $schema['itg_octopus_cron'] = array(
+    'description' => 'The base table for itg_octopus_cron.',
+    'fields' => array(
+      'cron_id' => array(
+        'description' => 'The primary identifier for a itg_octopus_cron.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'slug_id' => array(
+        'description' => 'Slug id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'video_request_id' => array(
+        'description' => 'Video request id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'request_tv_to_s3' => array(
+        'description' => 'Request tv to s3',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'file_copied_dump_machine' => array(
+        'description' => 'File copied dump machine',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'file_copied_to_s3' => array(
+        'description' => 'File copied to s3',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'request_s3_to_dm' => array(
+        'description' => 'Request s3 to dm',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'cron_init_time' => array(
+        'description' => 'Cron init time',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'last_cron_run_time' => array(
+        'description' => 'Last Cron Run Time',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'final_success' => array(
+        'description' => 'Final Success',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cron_id'),
+  );
+
+
+  // Octopus itg_octopus_s3_path_for_cron
+  $schema['itg_octopus_s3_path_for_cron'] = array(
+    'description' => 'The base table for itg_octopus_s3_path_for_cron.',
+    'fields' => array(
+      'cs3_id' => array(
+        'description' => 'The primary identifier for a itg_octopus_s3_path_for_cron.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'cron_id' => array(
+        'description' => 'Cron id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'video_request_id' => array(
+        'description' => 'Video request id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      's3_path' => array(
+        'description' => 'S3 path',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'file_size' => array(
+        'description' => 'File size',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'timestamp' => array(
+        'description' => 'Timestamp',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cs3_id'),
   );
 
   return $schema;

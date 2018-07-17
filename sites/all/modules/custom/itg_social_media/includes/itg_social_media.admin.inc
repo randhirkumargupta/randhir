@@ -153,7 +153,7 @@ function itg_social_media_fb_paglist() {
   if(!empty($response)) {
   $pages = $response->getGraphPage();
   $accounts = $pages->asArray();
-  watchdog('FB Accounts', '<pre>' . print_r($accounts, TRUE) . '</pre>');
+  //watchdog('FB Accounts', '<pre>' . print_r($accounts, TRUE) . '</pre>');
   $options = array();
   foreach ($accounts['accounts'] as $account) {
     $options[$account['id']] = $account['name'];

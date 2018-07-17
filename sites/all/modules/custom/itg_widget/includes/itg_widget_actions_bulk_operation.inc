@@ -68,39 +68,61 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   }
   $cat_id = $get_category_id;
   $content_type = isset($_GET['type']) ? $_GET['type'] : NULL;
+  //Insert complete node data for widgets.
+  if(function_exists('__itg_widget_helper_data_insert')) {
+    foreach ($selected_node_data as $nid) {
+        __itg_widget_helper_data_insert($nid);
+    }
+  }
+  
   if ( $current_display == 'big_story_format' ) {
     // All Code for big sotry.
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_big_story');
     $big_story_data = $form_state;
     save_big_story_widget_data($big_story_data);
+    cache_clear_all('itg_widget:big_story_format', 'cache_block', TRUE);
   }
   ######################## WIDGET CHANGES ###################
+  elseif ($widget_name == "sectopn_top_stories_widget" && $current_display == "page") {
+    itg_save_section_top_story_widget_data($form_state, $widget_name);
+  }
   elseif ( $widget_name == "top_stories_widget" && $current_display == "page_1" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:top_stories_ordering', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "trending_videos_widget" && $current_display == "trending_videos" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:trending_videos_widget', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "most_popular_widget" && $current_display == "most_popular" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:most_popular', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "top_takes_video_widget" && $current_display == "top_takes_video" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:top_takes_videos_widget', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "watch_right_now_widget" && $current_display == "watch_right_now" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:watch_right_now_videos_widget', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "home_page_feature_widget" && $current_display == "page_1" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:home_page_feature', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "photo_carousel_list_widget" && $current_display == "photo_carousel_list" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:featured_photo_carousel', 'cache_block', TRUE);
+    cache_clear_all('itg_widget:featured_photo_carousel_r', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "video_carousel_list_widget" && $current_display == "video_carousel_list" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:featured_video_carousel', 'cache_block', TRUE);
+    cache_clear_all('itg_widget:featured_video_carousel_r', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "we_may_suggest_widget" && $current_display == "we_may_suggest_widget" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
+    cache_clear_all('itg_widget:we_may_suggest', 'cache_block', TRUE);
   }
   elseif ( $widget_name == "anchors_listing_widget" && $current_display == "anchors_listing_page" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
@@ -110,6 +132,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_dont_miss');
     $dont_miss_content = $form_state;
     save_dont_miss_widget_data($dont_miss_content);
+    cache_clear_all('itg_widget:dont_miss', 'cache_block', TRUE);
   }
   elseif ( $current_display == 'special_auto_review_widget_contents' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_special_auto_review');
@@ -118,7 +141,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   elseif ( $current_display == 'special_how_made_it_widget_contents' ) {
 
     if ( empty($_GET['category_tid']) && $_GET['category_tid'] != 'All' ) {
-      drupal_set_message(t('Please select Section') , 'error');
+      drupal_set_message(t('Please select Section and filter First') , 'error');
       drupal_goto('special-how-made-it-widget-contents');
     }
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_special_how_i_made_it');
@@ -128,11 +151,11 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_yearender_left');
     save_yearender_left_widget_data($form_state);
   }
-//  elseif ($current_display == 'we_may_suggest_widget') {
-//    module_load_include('inc', 'itg_widget', 'includes/we-may-suggest');
-//    $we_may_suggest_content = $form_state;
-//    save_we_may_suggest_widget_data($we_may_suggest_content);
-//  }
+  elseif ($current_display == 'election_graph_widget_contents') {
+    module_load_include('inc', 'itg_widget', 'includes/itg_home_election_graph');
+    $home_election_content = $form_state;
+    save_home_election_widget_data($home_election_content);
+  }
   elseif ( $current_display == 'so_sorry_videos' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_so_sorry');
     save_so_sorry_widget_data($form_state);
@@ -140,6 +163,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   elseif ( $current_display == 'poll_widget_format' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_poll');
     save_poll_widget_data($form_state);
+    cache_clear_all('itg_widget:home_page_poll_widget_block', 'cache_block', TRUE);
   }
   elseif ( $current_display == 'highlights_widget_conent' ) {
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_highlights');
@@ -150,6 +174,10 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     save_issue_magazin_widget_data($form_state);
   }
   elseif ( $current_display == 'most_read_widget_contents' ) {
+    if ( empty($_GET['category_tid']) && $_GET['category_tid'] != 'All' ) {
+      drupal_set_message(t('Please select Section and filter First') , 'error');
+      drupal_goto('special-how-made-it-widget-contents');
+    }
     module_load_include('inc' , 'itg_widget' , 'includes/itg_widget_most_read');
     save_most_read_widget_data($form_state);
   }
@@ -214,4 +242,21 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   return array(
     'form_values' => $form_state['values'] ,
   );
+}
+
+/**
+ * Manual section validate function
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_widget_categories_wise_node_group_validate($form, &$form_state) {
+  $view_name = $form_state['build_info']['args'][0]->name;
+  $widget = _get_widget_name("views_form_" . $view_name . "_page", $current_display);
+  if ($widget == 'section_manual_order_widget') {
+    $category_id = $_GET['category_tid'];
+    if (empty($category_id) || $category_id == 0) {
+      drupal_set_message(t('Please select Category!'), 'error');
+      drupal_goto('section-wise-top-story-widget-order-reorder');
+    }
+  }
 }

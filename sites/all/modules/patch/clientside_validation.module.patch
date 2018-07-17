@@ -1,0 +1,17 @@
+diff --git a/sites/all/modules/contrib/clientside_validation/clientside_validation.module b/sites/all/modules/contrib/clientside_validation/clientside_validation.module
+index f029b19..5f1d0be 100644
+--- a/sites/all/modules/contrib/clientside_validation/clientside_validation.module
++++ b/sites/all/modules/contrib/clientside_validation/clientside_validation.module
+@@ -329,6 +329,12 @@ function clientside_validation_add_js_settings($settings) {
+ }
+ 
+ function _clientside_validation_add_special_rules(&$js_rules, &$settings, $form) {
++  // Start Code added for removing some fields from client side validation for category shift
++  if (function_exists('itg_category_multiple_mapped_fields')) {
++    $mapping = itg_category_multiple_mapped_fields();
++    $js_rules = array_diff_key($js_rules, array_flip($mapping));
++  }
++  //  Code added for removing some fields from client side validation for category shift
+   $form_id = $form['#id'];
+   if (isset($js_rules['_groups'])) {
+     $settings['clientsideValidation']['groups'][$form_id] = (object)$js_rules['_groups'];

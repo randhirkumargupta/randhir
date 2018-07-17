@@ -32,7 +32,7 @@
 
     <?php } ?>
     <div class="special-top-news">
-
+<div class="itg-listing-wrapper">
         <ul class="itg-listing" style="padding-top: 0px;">   
 <?php
 
@@ -59,6 +59,6 @@ foreach ($rows as $index => $row) {
             <?php } ?>
 
         </ul>
-
+</div>
     </div>
 </div>

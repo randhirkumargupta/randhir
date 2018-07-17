@@ -1,0 +1,231 @@
+<html>
+<head>
+<base href="/staticpages/sex-survey-2013/" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+body{margin:0;}
+.arrowimg {background:url(images/Sex-Survey-Sprites.png) no-repeat scroll 0 0 transparent;}
+.arrowimg {
+    background-position: -10px -144px;
+    float: left;
+    height: 50px;
+    position: absolute;
+    top: -8px;
+    width: 40px;z-index: 9;
+}
+.posrel {position:relative}
+.headline {margin-left:40px; color:#ee1619; font:normal 16px/20px arial black;}
+.headline a {color:#ee1619; text-decoration:none;}
+.headline a:hover {text-decoration:underline;}
+.headbg {background:#EDEBEC; padding:2px 4px;}
+.topmarg {
+    margin-top: 8px;
+    overflow: hidden;
+    width: 553px;
+}
+
+#divUpControl {
+    height: 12px;
+    left: 518px;
+    position: absolute;
+    text-align: right;
+    top: 15px;
+    width: 25px;
+    z-index: 1;
+}
+#divDownControl {position:absolute; left:518px;  top:260px; width:25px;height:12px; z-index:1;text-align: right;}
+
+#divContainer1 {float:left; border:0px solid #000; LEFT: 0px; VISIBILITY: hidden; OVERFLOW: hidden; WIDTH:530px; POSITION: relative; TOP:0px; HEIGHT:230px; margin:10px 0 7px 0; }
+
+#divContent1 {float:left; LEFT: 0px; POSITION: relative; TOP: 0px; border:0px solid #000;}
+
+
+.scrollredboldtext2 {
+    background-color: #F7E3D1;
+    color: #975633;
+    font: bold 16px arial;
+    padding: 2px;
+}
+.scrollblueboldtext{font:bold 14px arial; color:#975633; padding:15px 0 5px 0;}
+.scrollblueboldtext a{font:bold 14px arial; color:#975633; padding:15px 0 5px 0; text-decoration:none;}
+.scrollblueboldtext a:hover{font:bold 14px arial; color:#975633; padding:15px 0 5px 0; text-decoration:underline;}
+
+.scrollnormaltext{font:normal 12px arial; line-height:18px; padding:0 7px 0 0px;}
+
+#scrollapDiv1 {
+    height: 232px;
+    left: 534px;
+    position: absolute;
+    top: 27px;
+    width: 5px;
+    z-index: 2;
+}
+</style>
+<script language="JavaScript">
+/* Extension written by David G. Miles (http://www.z3roadster.net/dreamweaver/)
+based in part on code written by Thomas Brattli (http://www.bratta.com)*/
+// Courtesy of SimplytheBest.net - http://simplythebest.net/scripts/
+<!--
+function verifyCompatibleBrowser(){
+    this.ver=navigator.appVersion
+    this.dom=document.getElementById?1:0
+    this.ie5=(this.ver.indexOf("MSIE 5")>-1 && this.dom)?1:0;
+    this.ie4=(document.all && !this.dom)?1:0;
+    this.ns5=(this.dom && parseInt(this.ver) >= 5) ?1:0;
+    this.ns4=(document.layers && !this.dom)?1:0;
+    this.bw=(this.ie5 || this.ie4 || this.ns4 || this.ns5)
+    return this
+}
+bw=new verifyCompatibleBrowser()
+var speed=50
+var loop, timer
+function ConstructObject(obj,nest){
+    nest=(!nest) ? '':'document.'+nest+'.'
+    this.el=bw.dom?document.getElementById(obj):bw.ie4?document.all[obj]:bw.ns4?eval(nest+'document.'+obj):0;
+    this.css=bw.dom?document.getElementById(obj).style:bw.ie4?document.all[obj].style:bw.ns4?eval(nest+'document.'+obj):0;
+    this.scrollHeight=bw.ns4?this.css.document.height:this.el.offsetHeight
+    this.clipHeight=bw.ns4?this.css.clip.height:this.el.offsetHeight
+    this.up=MoveAreaUp;this.down=MoveAreaDown;
+    this.MoveArea=MoveArea; this.x; this.y;
+    this.obj = obj + "Object"
+    eval(this.obj + "=this")
+    return this
+}
+function MoveArea(x,y){
+    this.x=x;this.y=y
+    this.css.left=this.x
+    this.css.top=this.y
+}
+function MoveAreaDown(move){
+	if(this.y>-this.scrollHeight+objContainer.clipHeight){
+    this.MoveArea(0,this.y-move)
+    if(loop) setTimeout(this.obj+".down("+move+")",speed)
+	}
+}
+function MoveAreaUp(move){
+	if(this.y<0){
+    this.MoveArea(0,this.y-move)
+    if(loop) setTimeout(this.obj+".up("+move+")",speed)
+	}
+}
+function PerformScroll(speed){
+	if(initialised){
+		loop=true;
+		if(speed>0) objScroller.down(speed)
+		else objScroller.up(speed)
+	}
+}
+function CeaseScroll(){
+    loop=false
+    if(timer) clearTimeout(timer)
+}
+var initialised;
+function InitialiseScrollableArea12(i){
+objContainer=new ConstructObject('divContainer'+i)
+objScroller=new ConstructObject('divContent'+i,'divContainer'+i)
+objScroller.MoveArea(0,0)
+objContainer.css.visibility='visible'
+initialised=true;
+}
+function InitialiseScrollableArea(){
+objContainer=new ConstructObject('divContainer1')
+objScroller=new ConstructObject('divContent1','divContainer1')
+objScroller.MoveArea(0,0)
+objContainer.css.visibility='visible'
+initialised=true;
+}
+
+function displayStatusMsg(msgStr) {
+  status=msgStr;
+  document.returnValue = true;
+}
+
+function preloadImages() {
+  var d=document; if(d.images){ if(!d.p) d.p=new Array();
+    var i,j=d.p.length,a=preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.p[j]=new Image; d.p[j++].src=a[i];}}
+}
+
+function swapImgRestore() {
+  var i,x,a=document.sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function findObj(n, d) {
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=findObj(n,d.layers[i].document); return x;
+}
+
+function swapImage() {
+  var i,j=0,x,a=swapImage.arguments; document.sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=findObj(a[i]))!=null){document.sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<script language="JavaScript">
+<!--
+
+function reloadPage(init) {  //reloads the window if Nav4 resized
+
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.pgW=innerWidth; document.pgH=innerHeight; onresize=reloadPage; } }
+  else if (innerWidth!=document.pgW || innerHeight!=document.pgH) location.reload();
+
+}
+reloadPage(true);
+// -->
+
+</script>
+</head>
+<body onLoad="InitialiseScrollableArea();preloadImages('/special/sexsurvey2010/images/scroll_up.gif','/special/sexsurvey2010/images/scroll_down.gif')" style="margin:0;">
+
+<div id="scrollapDiv1" style="background:url(images/Dots.gif);background-position:center; background-repeat:repeat-y;"></div>
+<div class="bottom">
+	<div class="middle">
+		<div id="divUpControl">
+        	<a href="javascript:;" onMouseOver="PerformScroll(-7);displayStatusMsg('Scroll Up');return document.returnValue" onMouseOut="CeaseScroll();"><img src="/staticpages/special/sexsurvey2010/images/scroll_up.gif" alt="Up" name="scroller_up_button" border="0"></a>
+        </div>
+	 	<div id="divContainer1" style="visibility: visible">
+        	<div id="divContent1" style="left: 0pt; top: -532px">
+
+
+			<div class="scrollblueboldtext"><span class="scrollredboldtext2">2012:</span> <a href="/sex-survey-2012" target="_blank">2012: Sex still a prisoner</a></div>
+                <div class="scrollnormaltext">The tenth edition of India Today Sex Survey finds that although women are more and more expressive now of their latent desires, yet they still have a long way to go in shedding inhibitions.</div>
+
+			            <div class="scrollblueboldtext"><span class="scrollredboldtext2">2011:</span> <a href="/special/sexsurvey2011/index.shtml" target="_blank">Bold & Bored</a></div>
+                <div class="scrollnormaltext">The ninth edition of the India Today Sex Survey charts the trajectory of India's sex life. The survey, conducted on male and female respondents in the age group 18-60 years across 11 cities, focuses on sex in the family. </div>
+            	<div class="scrollblueboldtext"><span class="scrollredboldtext2">2010:</span> <a href="/special/sexsurvey2010/index.shtml" target="_blank">Women want more</a></div>
+                <div class="scrollnormaltext">The India Today survey finds Indian women meditating intently on the prayer beads of fulfilling and wholesome sex. At the root of this pleasure quest could be the post-modern woman's desire to take charge of her own destiny.</div>
+
+                <div class="scrollblueboldtext"><span class="scrollredboldtext2">2009:</span> <a href="/special/sexsurvey2009/index.shtml" target="_blank">The Fantasy Report</a></div>
+                <div class="scrollnormaltext">The technology of fantasy has expanded dramatically, allowing urban
+Indians access to a supermarket of choices, but all it has done is
+expand information, not intimacy. Relationships are less conversation,
+more convenience; less playgrounds, more prisons.</div>
+
+				<div class="scrollblueboldtext"><span class="scrollredboldtext2">2008:</span> <a href="http://specials.digitaltoday.in/sexysecrets/index.shtml" target="_blank">The naked truth</a></div>
+           		<div class="scrollnormaltext">India Today's survey talks about under-age sex, sex with prostitutes and eunuchs, kinky sex, adultery, incest, homosexuality, fantasies, preferences, favourite positions, attitudes towards role-playing and other sexual activities.</div>
+
+                <div class="scrollblueboldtext"><span class="scrollredboldtext2">2007:</span> <a href="/" target="_blank">Sex and marriage</a></div>
+                <div class="scrollnormaltext">The void between the dream of honeymoon and the reality of marriage has to be filled by reclaiming friendship, the birthright of every couple. This India Today survey measures the length and depth of marital issues. </div>
+
+                <div class="scrollblueboldtext"><span class="scrollredboldtext2">2006:</span> <a href="/itoday/20061113/cover.html" target="_blank">Men in a muddle</a></div>
+                <div class="scrollnormaltext">Often hypocritical, obsessed with his looks, sexually smug and quietly homoerotic, the single young urban male is surprisingly standard, across big cities and small. An avid consumer of pornography, he has a rich fantasy life, even though his peer group is dominated by males and his dependence on parents substantial.</div>
+
+                <div class="scrollblueboldtext"><span class="scrollredboldtext2">2005:</span><a href="http://www.indiatoday.com/itoday/20050926/cs-main.html" target="_blank">Sex and the single woman</a>
+                </div>
+                <div class="scrollnormaltext">An exclusive India Today-AC Nielsen-ORG-MARG survey reveals that urban young singleton s are shaking off years of conservatism and asserting their sexuality with growing confidence.</div>
+
+                <div class="scrollblueboldtext"><span class="scrollredboldtext2">2004:</span> <a href="http://www.indiatoday.com/itoday/20040920/cover.html" target="_blank">What men want</a></div>
+                <div class="scrollnormaltext">The nationwide survey reveals some startling findings. As Indian men continue to place purity above passion, a majority of them are sensitive to their partners' fulfilment and do not treat sex as power play.</div>
+
+                <div class="scrollblueboldtext"><span class="scrollredboldtext2">2003:</span> <a href="http://www.indiatoday.com/itoday/20030915/cover.shtml" target="_blank">Sex and the Indian woman</a></div>
+                <div class="scrollnormaltext">India's first ever, comprehensive, all-female survey that looks at a woman's basic instincts involved interviews with unmarried, married and separated women between 19 and 50 years of age from 10 cities.</div>            </div>
+     	</div>
+
+        <div id="divDownControl"> <a href="javascript:;" onMouseOver="PerformScroll(7);displayStatusMsg('Scroll Down');return document.returnValue" onMouseOut="CeaseScroll();"><img src="/staticpages/special/sexsurvey2010/images/scroll_down.gif" alt="Down" name="scroller_down_button" border="0"></a></div>
+	</div>
+</div>
+</body>
+</html>

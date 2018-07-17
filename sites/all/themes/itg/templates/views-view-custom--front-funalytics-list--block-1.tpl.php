@@ -1,7 +1,8 @@
 <?php
+global $base_url;
 // configuration for sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/funalytics';
-$short_url = shorten_url($row->url, 'goo.gl');
+$short_url = $row->url; //shorten_url($row->url, 'goo.gl');
 ?>
 <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
         <div class="funalytics-slider-wrapper">
@@ -18,17 +19,24 @@ $short_url = shorten_url($row->url, 'goo.gl');
               $src = $split[1]; // X between quotes
               ?>
                     <div>
-                      <div class="title"><?php print $row['title']; ?></div>
+                      <div class="title" title="<?php echo html_entity_decode(strip_tags($row['title']));?>"><?php print html_entity_decode(strip_tags($row['title'])); ?></div>
                       <div class="pic">
-                        <?php print $row['field_itg_funalytics_image']; ?>
+                        <?php 
+													if($row['field_itg_funalytics_image']){
+														print $row['field_itg_funalytics_image'];
+													}else{
+                            ?>	<img  src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="">
+													<?php
+													}	
+												?>
                         <div class="funalytics-socials">
                           <a class="download-nf" href="javascript:;" title=""></a>
                           <a class="google-play" href="javascript:;" title=""></a>
                           <a class="app-store" href="javascript:;" title=""></a>
                           <span class="funalytics-social-links">
-                            <a class="fn-facebook facebook" title = "share on facebook " href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_share_title; ?>', '<?php print $share_desc; ?>', '<?php print $src; ?>')"></a>
-                            <a class="fn-twitter twitter user-activity" title = "share on twitter" class="" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($twitter_title); ?>', '<?php print urlencode($short_url); ?>')"></a>
-                            <a title="share on google+" class="fn-gplus google user-activity" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a>
+                            <a class="fn-facebook facebook" title = "share on facebook " href="javascript:void(0)"  onclick='fbpop("<?php print $actual_link; ?>", "<?php print urlencode($fb_share_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $src; ?>")'></a>
+                            <a class="fn-twitter twitter user-activity" title = "share on twitter" class="" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick='twitter_popup("<?php print urlencode($twitter_title); ?>", "<?php print urlencode($short_url); ?>")'></a>
+                            <a title="share on google+" class="fn-gplus google user-activity" rel="<?php print $row['nid']; ?>" data-tag="itg_funalytics" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick='return googleplusbtn("<?php print $actual_link; ?>")'></a>
                           </span>
                         </div>
                       </div>

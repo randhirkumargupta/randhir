@@ -14,8 +14,7 @@
       $('#add-pqs').on('click', function() {
         var appendText = "";
         $('.form-checkbox').each(function() {
-          if ($(this).is(':checked'))
-          {
+          if ($(this).is(':checked')) {
             appendText = appendText + $(this).val() + ',';
           }
 

@@ -1,0 +1,286 @@
+<?php
+
+/**
+ * @file
+ * Create table itg_autotoday table on back end.
+ * 
+ * Implements hook_schema().
+ * {@inheritdoc}.
+ */
+function itg_auto_search_schema() {
+    $schema['itg_autotoday'] = array(
+      'description' => 'Auto search table',
+      'fields' => array(
+        'id' => array(
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'price_range' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'brand' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'vehicle' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'delhi_price' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'mumbai_price' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'kolkata_price' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'bangalore_price' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Chennai_price' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'bodytype' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'EngineDisplacement' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'cylinders' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'power' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'torque' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'gears' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'geartype' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'fueltype' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'runningkm' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'topspeed' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'ARAI_Claimed' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Tested' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'AC' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Climate_Control' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Adjustable_Steering_rake' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Adjustable_Steering_Reach' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Steering_mounted_controls' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Cruise_Control' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Centrallock' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Remotelock' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Keyless' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Power_windows' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Driver_seat_adjust' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Parking_sensor' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Parking_camera' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Split_foalding' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Multi_function' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Door_mirror' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'MP3_CD_Player' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'USB' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'AUXIn' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'MDI' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Bluetooth' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Foglamps' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Rear_AC_vents' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Rear_defogger' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Wash_wipe' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'Airbags' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'ESP' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'ABS' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'image' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+        'description' => array(
+          'type' => 'text',
+          'length' => '765',
+          'not null' => FALSE,
+        ),
+      ),
+      'primary key' => array('id'),
+    );
+    return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_auto_search_uninstall() {
+    drupal_uninstall_schema('itg_autotoday');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_auto_search_update_7001() {
+    cache_clear_all(NULL, 'cache_menu');
+}

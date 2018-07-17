@@ -61,7 +61,7 @@ $sponser_logo = $node->field_sponser_logo[LANGUAGE_NONE][0]['uri'];
     <div class='column-main'><div class='column-wrapper'>
   <?php endif; ?>
   <div class="sponsor-detail-container">
-    <h2>Sponsors</h2>
+    <h2><?php print t('Sponsors'); ?></h2>
     <div class="sponsor-detail">
       <div class="pic"><?php print theme('image_style', array('style_name' => 'thumbnail', 'path' => $sponser_logo)); ?></div>
       <div class="detail">

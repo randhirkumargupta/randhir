@@ -6,17 +6,14 @@ jQuery(document).ready(function () {
     jQuery('.node-story-form .vertical-tabs h2, .node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
     jQuery('.node-story-form .vertical-tabs .path-form, .node-story-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
     jQuery('.node-story-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-
     jQuery('.node-photogallery-form #title-metatags, .node-photogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
     jQuery('.node-photogallery-form .vertical-tabs h2, .node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
     jQuery('.node-photogallery-form .vertical-tabs .path-form, .node-photogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
     jQuery('.node-photogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-
     jQuery('.node-videogallery-form #title-metatags, .node-videogallery-form .node-form-revision-information').wrapAll('<div id="remarks" class="itg-sidebar-form-section"></div>');
     jQuery('.node-videogallery-form .vertical-tabs h2, .node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div id="meta-tags" class="itg-sidebar-form-section"></div>');
     jQuery('.node-videogallery-form .vertical-tabs .path-form, .node-videogallery-form .vertical-tabs .metatags-form').wrapAll('<div class="itg-form-section hide"></div>');
     jQuery('.node-videogallery-form .metatags-and-remarks #remarks .node-form-revision-information').wrapAll('<div class="itg-form-section hide"></div>');
-
     var category_mgr_meta_title = jQuery('.node-category-form .path-form').prev();
     category_mgr_meta_title.css('margin-top', '20px').nextAll().hide();
     category_mgr_meta_title.click(function () {
@@ -30,7 +27,74 @@ jQuery(document).ready(function () {
     jQuery('.form-field-name-field-emoji , #cke_edit-field-emoji-und-0-value iframe').bind('contextmenu', function (e) {
         return false;
     });
+    jQuery("#views-exposed-form-manage-issues-page #edit-title").attr('readonly', 'readonly');
+    jQuery("#views-exposed-form-manage-issues-page #edit-title").datepicker({
+        maxDate: new Date(),
+        yearRange: '1970:' + new Date().getFullYear(),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+    })
+//    // Alias Handling.
+//    var alise_value_selector = jQuery('input[name="path[alias]"]').val();
+//    var title_value_selector = jQuery("input[name=title]").val();
+//    if (typeof (alise_value_selector) == 'undefined') {
+//        var alise_value = '';
+//    } else {
+//        var alise_value = alise_value_selector.replace(/[^a-z]/gi, '').toLowerCase()
+//    }
+//    if (typeof (title_value_selector) == 'undefined') {
+//        var title_value = '';
+//    } else {
+//        var title_value = title_value_selector.replace(/[^a-z]/gi, '').toLowerCase();
+//    }
+//
+//    if (alise_value == title_value && (alise_value !='' || title_value != '')) {
+//        jQuery('input[name="path[alias]"]').prop('checked', true);
+//        jQuery('input[name="path[pathauto]"]').prop('checked', true);
+//        jQuery('#edit-path-alias').attr("readonly", "readonly");
+//        jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
+//    }
+//    jQuery('input[name="path[pathauto]"]').click(function () {
+//        if (!jQuery('input[name="path[pathauto]"]').prop('checked')) {
+//            jQuery('input[name="path[alias]"]').css('color', '#000000');
+//            jQuery('#edit-path-alias').attr("readonly", false);
+//            jQuery('input[name="path[alias]"]').css('background', '#FFFFFF');
+//        } else {
+//            jQuery('input[name="path[alias]"]').css('color', 'rgb(235, 235, 228)');
+//            jQuery('input[name="path[alias]"]').css('background', 'rgb(235, 235, 228)');
+//            jQuery('#edit-path-alias').attr("readonly", "readonly");
+//        }
+//    });
+
+    jQuery("select#fake-soruce-type").on("change", function () {
+        var soruce_type = jQuery(this).val();
+        jQuery("#edit-field-story-source-type-value-1").val(soruce_type);
+    });
+
 });
+
+// code for add loader in solr ajex view.
+(function ($) {
+    Drupal.behaviors.events = {
+        attach: function (context, settings) {
+            jQuery('#edit-label').keyup(function () {
+                $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxStart(function () {
+                    // if (jQuery('#edit-label').val() != "") {
+                    jQuery('#widget-ajex-loader').show();
+                    jQuery('#edit-label').attr("disabled", true);
+                    // }
+                });
+            });
+            $('#views-exposed-form-searchimage-solr-unpublish-video', context).ajaxComplete(function () {
+                jQuery('#widget-ajex-loader').hide();
+                jQuery('#edit-label').attr("disabled", false);
+            });
+
+
+        }
+    };
+})(jQuery);
 
 (function ($) {
     Drupal.behaviors.rubik = {};
@@ -49,7 +113,6 @@ jQuery(document).ready(function () {
             });
             form.addClass('rubik-processed');
         });
-
         $('a.toggler:not(.rubik-processed)', context).each(function () {
             var id = $(this).attr('href').split('#')[1];
             // Target exists, add click handler.
@@ -71,7 +134,6 @@ jQuery(document).ready(function () {
             // Mark as processed.
             $(this).addClass('rubik-processed');
         });
-
         // If there's no active secondary tab, make the first one show.
         var activeli = $('.primary-tabs li.active .secondary-tabs li.active');
         if (activeli.length === 0) {
@@ -81,7 +143,6 @@ jQuery(document).ready(function () {
         $('.secondary-tabs li a, .secondary-tabs', context).bind('focus blur', function () {
             $(this).parents('.secondary-tabs').toggleClass('focused');
         });
-
         // Sticky sidebar functionality.
         var disableSticky = (settings.rubik !== undefined) ? settings.rubik.disable_sticky : false;
         if ($('#content .column-side .column-wrapper').length !== 0) {
@@ -90,7 +151,6 @@ jQuery(document).ready(function () {
             $('.rubik_sidebar_field', context).once('rubik', function () {
                 $('.column-side .column-wrapper').append($(this));
             });
-
             // Check if the sidebar should be made sticky.
             if (!disableSticky) {
                 var rubikColumn = $('#content .column-side .column-wrapper', context);
@@ -158,13 +218,20 @@ jQuery(document).ready(function () {
         }
 
         // scroll-to-top animate
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 90) {
-                $('.action-with-title').addClass('fixed');
-            } else {
-                $('.action-with-title').removeClass('fixed');
-            }
-        });
+        if ($('div').hasClass('action-with-title')) {
+            var at_offset = $('.action-with-title').offset();
+            var at_height = $('.action-with-title').outerHeight(true);
+            var at_top = at_offset.top;
+            
+            $('.action-with-title').closest('#content').css('padding-top', at_height);
+            $(window).scroll(function () {
+                if ($(this).scrollTop() >= 202) {
+                    $('.action-with-title').addClass('fixed');
+                } else {
+                    $('.action-with-title').removeClass('fixed');
+                }
+            });
+        }
         $('body').on('click', '.target-link', function (e) {
             var offSet = 194;
             if ($('.region-form-tab .block').hasClass('fixed') || $('.action-with-title').hasClass('fixed')) {
@@ -186,12 +253,10 @@ jQuery(document).ready(function () {
         });
         //Incorrect navigation when user click on home page from view blog page
         $("a[href='/itgcms/blog']").attr('href', '/itgcms/mydraft-blogs');
-
         // Jquery code to close preview popup
         $(document).on('click', '.close-preview', function () {
             $(this).parents('.preview-wrapper').remove();
         });
-
         // jQuery code to change text URL alias to Sef URL
         var urlTxt = $('.form-item-path-alias label').text();
         if (urlTxt == 'URL alias ') {
@@ -207,8 +272,6 @@ jQuery(document).ready(function () {
             $('.path-form #edit-path-alias').removeAttr('disabled');
         }
         $('.page-admin-structure-taxonomy-category-management .form-type-hierarchical-select').append('<div class="discription">Root is the section.</div>');
-
-
         // jQuery Code for category manager page
         $('.item-list ul li:not(:has(".item-list"))').find('.term-wrapper .cmd-heading .fa').remove();
         $('.cmd-heading').click(function () {
@@ -222,7 +285,6 @@ jQuery(document).ready(function () {
                 $(this).parent().next().removeClass('hide');
             }
         });
-
         // jQuery code to filter category manager
 
         $('.itg-section').click(function (e) {
@@ -257,7 +319,6 @@ jQuery(document).ready(function () {
         setTimeout(function () {
             $('.page-category-manager-listing').find('.itg-section').trigger('click');
         }, 10);
-
         // jQuery code for flexslider
         $('.photogallery-list').flexslider({
             animation: "slide",
@@ -274,12 +335,10 @@ jQuery(document).ready(function () {
             prevText: "<i class='fa fa-angle-left' aria-hidden='true'></i>",
             nextText: "<i class='fa fa-angle-right' aria-hidden='true'></i>"
         });
-
         // jQuery code to hide select option whenever user hover on ITGCMS navbar
         $('#block-menu-menu-admin-left-menu').mouseover(function () {
-           // $('select').blur();
+            // $('select').blur();
         });
-
         $('#edit-field-gallery-image .field-name-field-images').find('.image-widget-data .file-size').each(function () {
             var txt = $(this).text();
             $(this).prev().attr('title', txt);
@@ -288,7 +347,6 @@ jQuery(document).ready(function () {
             var txt = $(this).text();
             $(this).prev().attr('title', txt);
         });
-
         $('a.filefield-sources-imce-browse').hover(function (e) {
             e.stopPropagation();
             $(this).parents('.form-type-managed-file').addClass('no-image-selected');
@@ -300,12 +358,51 @@ jQuery(document).ready(function () {
         $('.node-type-issue #page-title:contains("00:00:00")').each(function () {
             $(this).html($(this).html().split("00:00:00").join(""));
         });
-
         $('input.rating').hover(function () {
             $(this).parent().addClass('rating-hover').prevAll().addClass('rating-hover');
             $(this).parent().nextAll().removeClass('rating-hover');
         }, function () {
             $('.form-checkboxes.rating .form-type-checkbox').removeClass('rating-hover');
+        });
+        $('.video-in-form').click(function () {
+            var getvideo_id = $(this).attr('data-video-id');
+             var getvideo_repo = $(this).attr('data-type-repo');
+            jQuery.ajax({
+                url: Drupal.settings.basePath + 'dailymotion-video-play',
+                type: 'post',
+                beforeSend: function (xhr) {
+                    window.parent.jQuery('#widget-ajex-loader').show();
+                },
+                data: {'videoid': getvideo_id,'getvideo_repo':getvideo_repo,},
+                success: function (data) {
+
+                    var appenddata = '<div id="smi-popup" class="itg-popup itg-photo-popup">';
+                    appenddata += '<div class="popup-content">';
+                    appenddata += '<div class="popup-head">';
+                    appenddata += '<div class="popup-title">&nbsp;</div>';
+                    appenddata += '<a class="itg-close-popup_new" href="javascript:;"> <i class="fa fa-times" aria-hidden="true"></i> </a>';
+                    appenddata += '</div>';
+                    appenddata += '<div class="popup-body">';
+                    appenddata += data;
+                    appenddata += '</div></div> </div>';
+                    window.parent.jQuery('#page').append(appenddata);
+                    setTimeout(function () {
+                        window.parent.jQuery('#widget-ajex-loader').hide();
+                        window.parent.jQuery('#smi-popup').show();
+                    }, 2000);
+                },
+                error: function (xhr, desc, err) {
+                }
+            });
+        });
+
+        $('#views-exposed-form-searchimage-solr-unpublish-video').ajaxStart(function (event, request, settings) {
+            //window.parent.jQuery('#widget-ajex-loader').show();
+
+        });
+        $('#views-exposed-form-searchimage-solr-unpublish-video').ajaxComplete(function (event, request, settings) {
+            //window.parent.jQuery('#widget-ajex-loader').hide();
+
         });
 
         $('input.rating').click(function () {
@@ -313,15 +410,9 @@ jQuery(document).ready(function () {
             $(this).parent().nextAll().removeClass('rated-div current-rating').find('input[type="checkbox"]').attr('checked', false);
             $('.rated-div').find('input[type="checkbox"]').attr('checked', true);
         });
-
         $('.field-name-field-poll-answer-text .form-text').attr('placeholder', 'Poll Answer');
         $('.field-name-field-poll-manipulate-value .form-text').attr('placeholder', 'Manipulate Poll');
-
-
-
-
         $('.page-user, .page-admin-people-create').find('.password-suggestions').removeClass('description');
-
         /* jQuery code ITGCMS QUIZ */
         $('.field-name-field-quiz-option').on('change', 'select', function () {
             var selvalue = $(this).val();
@@ -362,7 +453,6 @@ jQuery(document).ready(function () {
                 $(this).parent().parent().parent().find('.field-name-field-quiz-answer-video').hide();
             }
         });
-
         $('.field-name-field-question-media').on('change', 'select', function () {
             var selvalue = $(this).val();
             if (selvalue == '_none') {
@@ -393,12 +483,9 @@ jQuery(document).ready(function () {
                 $(this).parent().parent().parent().find('.field-name-field-question-video').hide();
             }
         });
-
-
         $('.field-name-field-quiz-options-answer .form-item').find('.field-add-more-submit').val('+');
         $('input[name="field_quiz_add_questions_add_more"], input[name="field_survey_add_questions_add_more"]').val('Add another question');
         $('input[name="field_newsl_add_news_add_more"]').val('Add More News');
-
         $('.field-name-field-quiz-answer-type').on('change', '.form-radio[value="single_correct"]', function () {
             var correctVal = $(this).is(":checked");
             if (correctVal == true) {
@@ -417,9 +504,6 @@ jQuery(document).ready(function () {
                 $(this).closest('tr').siblings().find('.field-name-field-quiz-correct-answer .form-checkbox').attr('checked', false);
             }
         });
-
-
-
         /* Java script code for itgadmin */
         if (!$('.img-crt').parent().hasClass('.generate-image')) {
             $('.img-crt, .pre-desc').wrapAll('<div class="generate-image"></div>');
@@ -439,14 +523,11 @@ jQuery(document).ready(function () {
             }
             $(this).find('.image-widget-data .file, .image-widget-data .file-size').remove();
         });
-
-
         $('.image-widget-data').find('.form-text').each(function () {
             var plaholderText = $(this).prev().text();
             $(this).attr('placeholder', plaholderText);
             $(this).prev('label').hide();
         });
-
         /* jQuery code for photo Gallery and Video Gallery */
 
 //    $('.form-field-name-field-videogallery-video-upload .file-widget').each(function () {
@@ -468,12 +549,10 @@ jQuery(document).ready(function () {
         $('.form-field-name-field-gallery-image .field-widget-image-image .form-managed-file, .form-field-name-field-podcast-audio-upload .field-widget-image-image .form-managed-file, .form-field-name-field-videogallery-video-upload .field-widget-image-image .form-managed-file').each(function () {
             if ($(this).children().hasClass('image-preview')) {
                 $(this).addClass('has-preview');
-
             } else {
                 $(this).removeClass('has-preview');
             }
         });
-
         $('.form-field-name-field-gallery-image .has-preview').each(function (i) {
             var altName = "field_gallery_image[und][" + i + "][field_images][und][0][alt]";
             var titleName = "field_gallery_image[und][" + i + "][field_images][und][0][title]";
@@ -482,7 +561,6 @@ jQuery(document).ready(function () {
                 $(this).parent().next().find('.form-text').val(altVal);
             });
         });
-
         $('.form-field-name-field-videogallery-video-upload .has-preview').each(function (i) {
             var altName = "field_videogallery_video_upload[und][" + i + "][field_video_thumbnail][und][0][alt]";
             var titleName = "field_videogallery_video_upload[und][" + i + "][field_video_thumbnail][und][0][title]";
@@ -491,7 +569,6 @@ jQuery(document).ready(function () {
                 $(this).parent().next().find('.form-text').val(altVal);
             });
         });
-
         $('.form-field-name-field-podcast-audio-upload .has-preview').each(function (i) {
             var altName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][alt]";
             var titleName = "field_podcast_audio_upload[und][" + i + "][field_podcast_audio_image_upload][und][0][title]";
@@ -508,7 +585,6 @@ jQuery(document).ready(function () {
                 $(this).removeClass('has-file');
             }
         });
-
         $('.form-field-name-field-gallery-image .messages--error, .field-name-field-podcast-audio-image-upload .messages--error, .field-name-field-podcast-upload-audio-file .messages--error, .field-name-field-upload-video .messages--status, .field-name-field-upload-video .messages.error, .field-name-field-video-thumbnail .messages--error').each(function () {
             if (!$(this).children().hasClass('hide-message')) {
                 $(this).append('<a class="hide-message" href="javascript:;">Close</a>');
@@ -517,9 +593,7 @@ jQuery(document).ready(function () {
         $('.form-field-name-field-gallery-image, .field-name-field-upload-video, .field-name-field-video-thumbnail, .field-name-field-podcast-upload-audio-file, .field-name-field-podcast-audio-image-upload').on('click', '.hide-message', function () {
             $(this).parent().remove();
         });
-
         $('.header__secondary-menu ul li.last a').html('<i class="fa fa-power-off" aria-hidden="true"></i>');
-
         /* jQuery code for Event Backend */
 
         $('.form-field-name-field-event-media table tbody tr').each(function () {
@@ -537,7 +611,6 @@ jQuery(document).ready(function () {
                 ebPhoto.parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
             }
         });
-
         $('.form-field-name-field-event-media').on('change', '.form-radio', function () {
             var isChecked = $(this).is(':checked');
             var isVal = $(this).val();
@@ -552,7 +625,6 @@ jQuery(document).ready(function () {
                 $(this).parents('.field-type-list-text').nextAll('div').hide().siblings('.field-name-field-quiz-answer-image').show();
             }
         });
-
         $('body').on('click', '.data-popup-link', function () {
             var ID = $(this).attr('data-id');
             $('body').find('#' + ID).show();
@@ -563,7 +635,6 @@ jQuery(document).ready(function () {
         $('body').on('click', '.itg-close-popup_new', function () {
             $(this).closest('.itg-popup').remove();
         });
-
         $('body').find('.image-preview').parent().addClass('has-image-preview');
         $('body').find('.image-preview').parent().parent().addClass('has-image-parent');
         // Reset form Data
@@ -590,7 +661,6 @@ jQuery(document).ready(function () {
                 jQuery('.form-field-name-field-story-facebook-image .ajax-processed').mousedown();
             }
         });
-
         // Clear twitter data fields
         $('input[name="field_story_social_media_integ[und][twitter]"]').click(function () {
             if (!$(this).is(':checked')) {
@@ -598,7 +668,6 @@ jQuery(document).ready(function () {
                 jQuery('.form-field-name-field-story-tweet-image .ajax-processed').mousedown();
             }
         });
-
         // jQuery code for syndication rule details
         var srd_freq_el = $('.field-name-field-syndication-frequency').find('.form-radio');
         function srdFreq(freq_el) {
@@ -617,39 +686,55 @@ jQuery(document).ready(function () {
             }
         }
         srdFreq(srd_freq_el);
-
         $('.field-name-field-syndication-frequency').on('change', '.form-radio', function () {
             var radioCheck = $(this).is(':checked');
             var radioVal = $(this).val();
             if (radioCheck == true && radioVal == 'Daily') {
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').hide();
+                $(this).parents('td').find('.field-name-field-minute').hide();
+                $(this).parents('td').find('.field-name-field-minute select').hide();
+                $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Weekly') {
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day').show();
+                $(this).parents('td').find('.field-name-field-minute').hide();
+                $(this).parents('td').find('.field-name-field-minute select').hide();
+                $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Monthly') {
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
+                $(this).parents('td').find('.field-name-field-minute').hide();
+                $(this).parents('td').find('.field-name-field-minute select').hide();
+                $(this).parents('td').find('.field-name-field-syndication-time').show();
+            }
+            if (radioCheck == true && radioVal == 'Minute') {
+                $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
+                $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
+                $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
+                $(this).parents('td').find('.field-name-field-minute').show();
+                $(this).parents('td').find('.field-name-field-minute select').show();
+                var time_val = $(this).parents('td').find('.field-name-field-syndication-time input').val();
+                if(time_val == "" || time_val.length <=0) {
+                    $(this).parents('td').find('.field-name-field-syndication-time').hide();
+                    $(this).parents('td').find('.field-name-field-syndication-time input').val("00:00");
+                }
             }
         });
-
         $('.form-field-name-field-newsl-add-news .field-name-field-news-type').each(function () {
             var radioVal = $(this).find('.form-radio:checked').val();
-
             if (radioVal == 'internal') {
                 $(this).find('.form-radio').parents('td').find('.field-name-field-news-external-url').hide();
-
             }
             if (radioVal == 'external') {
                 $(this).find('.form-radio').parents('td').find('.field-name-field-news-cid').hide();
                 $(this).find('.form-radio').parents('td').find('.newsletter-get-content').parent().hide();
             }
         });
-
         $('.field-name-field-news-type').on('change', '.form-radio', function () {
             var radioCheck = $(this).is(':checked');
             var radioVal = $(this).val();
@@ -673,8 +758,6 @@ jQuery(document).ready(function () {
                 $(this).parents('td').find('.newsletter-get-content').parent().hide();
             }
         });
-
-
         // jQuery code for syndication client
         $('.form-field-name-field-syndication-delivery-mode').on('change', '.form-checkbox', function () {
             var check = $(this).is(':checked');
@@ -687,7 +770,6 @@ jQuery(document).ready(function () {
             }
 
         });
-
         // jQuery code for Top Actions
         var labelID;
         $('.top-actions').on('click', 'span', function (e) {
@@ -695,21 +777,16 @@ jQuery(document).ready(function () {
             labelID = $(this).attr('data-id');
             $('#' + labelID).trigger('click');
         });
-
         // Code for open link in new tab
         $(".views-field-name").find('a').attr('target', '_blank');
-
-
         // jQuery Code for tabbing
         $('.tab-buttons').on('click', 'span', function () {
             var dataID = '.' + $(this).attr('data-id');
             $(this).addClass('active').siblings().removeClass('active');
             $(this).parent().parent().find(dataID).show().siblings('.tab-data').hide();
         });
-
         //ITG Listing top spacing          
         $('.tab-data').find('ul.itg-listing').css('padding-top', '0');
-
         // jQuery code for widget-trigger
         $('body').on('click', '.widget-trigger', function () {
             $(this).prev().toggleClass('active');
@@ -780,7 +857,6 @@ jQuery(document).ready(function () {
             }
         }
         ;
-
         // jQuery code to show hide Associate lead gallery/video
         showHidePhotoStory();
         $('.form-field-name-field-story-type').on('change', '.form-select', function () {
@@ -794,12 +870,20 @@ jQuery(document).ready(function () {
                 $('.node-story-form #StoryPhoto').hide();
             }
         }
-        ;
 
+        // code to uncheck required field when user click on event registration Fields
+        jQuery('#edit-display').on('change', '.form-checkbox', function () {
+            var isCheck = jQuery(this).is(':checked');
+            var getIndex = jQuery(this).parent().index();
+            //var getId = jQuery(this).attr('id');
+            //var splitId = getId.substr(23);
+            if (!isCheck) {
+                //jQuery(this).parent().parent().next().find('#edit-requied-field-field-erf-' + splitId + splitId).attr('checked', false);
+                jQuery(this).parent().parent().next().find('.form-item').eq(getIndex).find('.form-checkbox').attr('checked', false);
+            }
+        });
     };
 })(jQuery);
-
-
 jQuery(document).ready(function () {
 
     // jQuery code for related content on edit page
@@ -877,26 +961,22 @@ jQuery(document).ready(function () {
         jQuery('#edit-field-reporter-publish-id-und-0-value').val(item);
         jQuery('.success-byline').html('Changes made successfully').show(0).delay(2000).hide(1000);
     });
-
     // jQuery code for Loader
     jQuery(document).ajaxStart(function () {
         jQuery(".ajax-loader").show();
     }).ajaxStop(function () {
         jQuery(".ajax-loader").hide();
     });
-
     // jquery code for sliding sidebar
     jQuery('body').on('click', '.sidebar-trigger', function () {
         jQuery(this).parent().toggleClass('active');
     });
-
     // jQuery code to toggle ITG-STORY Form
     jQuery('.itg-form-section-wrapper, .itg-sidebar-form-section').on('click', 'h2', function () {
         jQuery(this).toggleClass('active');
         jQuery(this).next().slideToggle();
         jQuery(this).parent().toggleClass('active');
     });
-
     // jQuery code to toggle Cotegory manager form
     jQuery('.category-manager-basic-details h2').addClass('active');
     jQuery('.category-manager-basic-details, .category-manager-selection-details, .cotegory-manager-settings, .category-manager-meta').on('click', 'h2', function () {
@@ -926,7 +1006,6 @@ jQuery(document).ready(function () {
             return false;
         }
     });
-
     //social share animation effects   
     jQuery('.social-share ul').each(function () {
         jQuery(this).children().not(":first").hide();
@@ -934,10 +1013,7 @@ jQuery(document).ready(function () {
     jQuery('.social-share li').click(function () {
         jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
-
 });
-
-
 jQuery(document).ready(function () {
     var t = jQuery(".itg-region ul li").length,
             e = jQuery(".itg-region ul li").outerWidth(true),
@@ -968,7 +1044,6 @@ jQuery(document).ready(function () {
         jQuery('.block-itg-layout-manager h2.block-title i.fa-minus-circle').hide();
         jQuery('.block-itg-layout-manager h2.block-title i.fa-plus-circle').show();
         jQuery('.block-itg-layout-manager h2.block-title').next().slideUp();
-
         if (jQuery(this).next().is(":visible")) {
             jQuery(this).next().stop().slideUp();
             jQuery(this).find('i.fa-plus-circle').show();
@@ -979,34 +1054,28 @@ jQuery(document).ready(function () {
             jQuery(this).find('i.fa-minus-circle').show();
         }
     });
-
     //tech and auto new block title tig admin
     jQuery('#auto-new-block .widget-settings, #tech-new-block .widget-settings, #education-new-block .widget-settings, #movie-new-block .widget-settings, #defalt-section-top-block .widget-settings').prependTo('.auto-block-2 .special-top-news');
-    
-    
     // jQuery code for report-chart-tabs
-    jQuery('.report-chart-tabs').on('click', 'a', function(){
-      var getId = jQuery(this).attr('data-toggle');
-      jQuery(this).parent().addClass('active').parent().parent().next().find('#'+getId).show().siblings().hide();
+    jQuery('.report-chart-tabs').on('click', 'a', function () {
+        var getId = jQuery(this).attr('data-toggle');
+        jQuery(this).parent().addClass('active').parent().parent().next().find('#' + getId).css('opacity', 1).siblings().css('opacity', 0);
+        jQuery(this).parent().siblings().removeClass('active');
     });
-    
     // jQuery code to show-hide mail templates token popup
-    jQuery('.get-tokens').on('click', 'a', function(){
-      var getId = jQuery(this).attr('data-id');
-      jQuery('body').find('#' + getId).show();
+    jQuery('.get-tokens').on('click', 'a', function () {
+        var getId = jQuery(this).attr('data-id');
+        jQuery('body').find('#' + getId).show();
     });
-    jQuery('.itgadmin-popup').on('click', '.close-itgadmin-popup', function(){
-      jQuery(this).parent().parent().hide();
+    jQuery('.itgadmin-popup').on('click', '.close-itgadmin-popup', function () {
+        jQuery(this).parent().parent().hide();
     });
-    
-
 });
 jQuery(document).ready(function () {
 
     jQuery('#map-state').change(function () {
         jQuery('.map-result-detail').hide();
         var getstate_id = jQuery(this).val();
-
         jQuery.ajax({
             url: Drupal.settings.basePath + 'get_map_data',
             type: 'post',
@@ -1020,7 +1089,6 @@ jQuery(document).ready(function () {
                 if (obj.mapjson == '')
                 {
                     jQuery("#conssvg").html('Content Not Found');
-
                 } else {
                     getconssvg(obj, '0');
                 }
@@ -1029,12 +1097,9 @@ jQuery(document).ready(function () {
             complete: function () {
             },
             error: function (xhr, desc, err) {
-//                console.log(xhr);
-//                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });
-
     jQuery('a.colorbox-load').each(function () {
         var href = jQuery(this).attr('href');
         jQuery(this).attr('jshref', href);
@@ -1049,7 +1114,6 @@ jQuery(document).ready(function () {
     jQuery("a.colorbox-load").bind("contextmenu", function () {
         return false;
     });
-
     // jQuery code for story form templates-tab   
     var get_temp = jQuery('.form-field-name-field-story-select-templates .form-radio:checked').val(),
             set_temp = '.' + get_temp + "-tab-form";
@@ -1065,6 +1129,119 @@ jQuery(document).ready(function () {
 //    }
         jQuery(this).closest('.templates-tab-wrapper').find(set_class).show().siblings('.tab-form').hide();
     });
-
 });
+jQuery(document).ready(function () {
+    jQuery("input[name='field_poll_start_date[und][0][value][time]']").keyup(function(){
+      jQuery("input[name='field_poll_start_date[und][0][value][time]']").val(jQuery(this).val() || "00:00");
+    });
+    jQuery("input[name='field_poll_end_date[und][0][value][time]']").keyup(function(){
+      jQuery("input[name='field_poll_end_date[und][0][value][time]']").val(jQuery(this).val() || "00:00");
+    });
+    jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function () {
+        var CT = jQuery("#edit-field-cm-select-type-und").val();
+        if (typeof CT === "undefined" || CT == null || CT == '_none') {
+            jQuery("#edit-field-story-category").css("display", "none");
+        } else {
+            jQuery("#edit-field-story-category").css("display", "block");
+        }
+    });
 
+    jQuery(".asso-filed-video").live('click', function (e) {
+        var base_url = Drupal.settings.baseUrl.baseUrl;
+        window.parent.jQuery("#videoupload").trigger('mousedown');
+        jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+        var video_fids = [];
+        var selected_check_boxes_values = new Array();
+        var selected_data_video_type = new Array();
+        var selected_check_boxes_index = 0;
+        jQuery("#video_iframe").contents().find('.video-checkbox-form:checked').each(function () {
+            selected_check_boxes_values[selected_check_boxes_index++] = jQuery(this).val();
+            var video_type_atr = jQuery(this).attr('data-video-type');
+            selected_data_video_type.push(video_type_atr);
+
+        });
+
+        var unique = selected_data_video_type.filter(function (itm, i, selected_data_video_type) {
+            return i == selected_data_video_type.indexOf(itm);
+        });
+
+        if (selected_check_boxes_index == 0) {
+            alert("Please select video file.");
+        } else {
+            if (unique.length > 1) {
+                alert("Please select same plateform video.");
+                return false;
+            }
+            var getvideo_tyepe = window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+            if (getvideo_tyepe != "") {
+                if (unique[0] == 'DM' && getvideo_tyepe == 'INTERNAL') {
+                    alert("Please remove Internal plateform Video ");
+                    return false;
+
+                }
+                if (unique[0] == 'INTERNAL' && getvideo_tyepe == 'DM') {
+                    alert("Please remove Dailymotion plateform Video ");
+                    return false;
+                }
+            }
+
+            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+            var getbtnmane = jQuery(this).attr('btn_name');
+            jQuery.ajax({
+                url: base_url + '/solr-video-make-fid',
+                type: 'post',
+                beforeSend: function (xhr) {
+                    window.parent.jQuery('#widget-ajex-loader').show();
+                    jQuery('.asso-filed-video').prop('disabled', true);
+                },
+                data: {'checkvalue': selected_check_boxes_values},
+                success: function (data) {
+                    jQuery(".asso-filed-video").unbind('click');
+                    jQuery('.asso-filed-video').prop('disabled', false);
+					var flag = false;
+                    jQuery("#video_iframe").contents().find('.video-checkbox-form').prop("checked", false);
+                    var as = JSON.parse(data);
+                    var parsed = JSON.parse(data);
+                    for (var x in parsed) {
+                        video_fids.push(parsed[x]);
+                    }
+                    window.parent.jQuery("#videoupload").trigger('mousedown');
+                    window.parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
+                    window.parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
+                    window.parent.jQuery("[name='field_video_upload_add_more']").mousedown();
+                    window.parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
+                        try {
+                            if (unique[0] == 'DM') {
+                                window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
+                            }
+                            if (unique[0] == 'INTERNAL') {
+                                window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
+                            }
+                                                        
+                            if(flag){
+							    window.parent.jQuery('#widget-ajex-loader').hide();
+							    flag = false;
+							}
+							flag = true;
+                        } catch (err) {
+
+                        }
+
+                    });
+                }
+
+            });
+        }
+    });
+});
+//common function for mobile
+function mobilecheck() {
+    var check = false;
+    (function (a) {
+        if (/(android|ipad|playbook|silk|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4)))
+            check = true
+    })(navigator.userAgent || navigator.vendor || window.opera);
+    return check;
+}
+var is_mobile = mobilecheck() ? true : false;
+//common function for mobile end

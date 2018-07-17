@@ -19,6 +19,6 @@ function save_poll_widget_data($poll_data) {
         foreach ($selected_node as $node) {
             itg_widget_insert_widget_data($node , $widget_name , 0);
         }
-        drupal_set_message(t("Nodes has been saved"));
+       // drupal_set_message(t("Nodes has been saved"));
     }
 }

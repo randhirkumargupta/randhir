@@ -52,17 +52,17 @@ else {
                                 <h2><?php echo t('Basic Details'); ?></h2>
                                 <div class="content-details">
                                     <div class="field">
-                                        <div class="field-label">Idea Headline:</div>
+                                        <div class="field-label"><?php echo t('Idea Headline:'); ?></div>
                                         <div class="field-items"><?php echo ucwords($node->title); ?></div>
                                     </div>
 
                                     <div class="field">
-                                        <div class="field-label">Idea Brief:</div>
+                                        <div class="field-label"><?php echo t('Idea Brief:'); ?></div>
                                         <div class="field-items"><?php echo ucfirst($node->body[LANGUAGE_NONE][0]['value']); ?></div>
                                     </div>
                                     <?php if ($node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']) { ?>
                                         <div class="field">
-                                            <div class="field-label">Magazine Kicker:</div>
+                                            <div class="field-label"><?php echo t('Magazine Kicker:'); ?></div>
                                             <div class="field-items"><?php echo ucfirst($node->field_pti_magazine_kicker[LANGUAGE_NONE][0]['value']); ?></div>
                                         </div>
                                     <?php } ?>
@@ -82,10 +82,10 @@ else {
                                     <h2><?php echo t('Categorization'); ?></h2>
                                     <div class="content-details">
                                         <div class="field">
-                                            <div class="field-label">Section:</div>
+                                            <div class="field-label"><?php echo t('Section:'); ?></div>
                                             <div class="field-items"><?php echo $node->field_story_category[LANGUAGE_NONE][0]['taxonomy_term']->name; ?></div>
                                         </div>
-                                        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label">Primary Category:&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
+                                        <div class="field field-name-field-story-categoryprim field-type-taxonomy-term-reference field-label-above"><div class="field-label"><?php echo t('Primary Category:'); ?>&nbsp;</div><div class="field-items"><div class="field-item even"><?php echo $termdata; ?></div></div></div>
 
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@ else {
                                                 $video = $media_detail[$media_arr['value']]->field_pti_upload_video[LANGUAGE_NONE][0]['uri'];
                                                 ?>
                                                 <div class="field">
-                                                    <div class="field-label">Image:</div>
+                                                    <div class="field-label"><?php print t('Image:') ?></div>
                                                     <div class="field-items"><img src="<?php echo $image; ?>" /></div>
                                                 </div>
                                             <?php } ?>
@@ -122,19 +122,19 @@ else {
                                     <div class="content-details">
                                         <?php if ($node->field_pti_idea_status[LANGUAGE_NONE][0]['value']) { ?>
                                             <div class="field">
-                                                <div class="field-label">Status:</div>
+                                                <div class="field-label"><?php echo t('Status:'); ?></div>
                                                 <div class="field-items"><?php echo str_replace('-', ' ', $node->field_pti_idea_status[LANGUAGE_NONE][0]['value']); ?></div>
                                             </div>
                                         <?php } if ($node->field_pti_words_limit[LANGUAGE_NONE][0]['value']) { ?>
                                             <div class="field">
-                                                <div class="field-label">Words Limit:</div>
-                                                <div class="field-items"><?php echo $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . ' words'; ?></div>
+                                                <div class="field-label"><?php echo t('Words Limit:'); ?></div>
+                                                <div class="field-items"><?php echo $node->field_pti_words_limit[LANGUAGE_NONE][0]['value'] . ' '.t('words'); ?></div>
                                             </div>
                                         <?php } ?>
 
                                         <?php if ($node->field_survey_end_date[LANGUAGE_NONE][0]['value']) { ?>
                                             <div class="field">
-                                                <div class="field-label">Timeline:</div>
+                                                <div class="field-label"><?php echo t('Timeline:'); ?></div>
                                                 <div class="field-items"><?php echo date('d/m/Y', strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value'])); ?></div>
                                             </div>
                                         <?php
@@ -143,7 +143,7 @@ else {
                                         if ($node->field_story_rating[LANGUAGE_NONE][0]['value']) {
                                             ?>
                                             <div class="field">
-                                                <div class="field-label">Rating:</div>
+                                                <div class="field-label"><?php echo t('Rating:'); ?></div>
                                                 <div class="field-items"><?php echo $node->field_story_rating[LANGUAGE_NONE][0]['value']; ?></div>
                                             </div>
                                         <?php
@@ -151,7 +151,7 @@ else {
                                         if ($node->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value']) {
                                             ?>
                                             <div class="field">
-                                                <div class="field-label">Mark as Complete:</div>
+                                                <div class="field-label"><?php echo t('Mark as Complete:'); ?></div>
                                                 <div class="field-items"><?php echo $node->field_pti_mark_as_complete[LANGUAGE_NONE][0]['value']; ?></div>
                                             </div>
             <?php }
@@ -161,26 +161,7 @@ else {
                             </div>
                         </div> 
         <?php if ($idea_review_flag_user) { ?>
-                            <!--    <div class="content-node-view">            
-                                        <div class="basic-details content-box">
-                                          <h2><?php echo t('Associated Issue And Magazine'); ?></h2>
-                                          <div class="content-details">
-            <?php if ($node->field_pti_issue[LANGUAGE_NONE][0]['entity']->title) { ?>
-                                                      <div class="field">
-                                                        <div class="field-label">Issue:</div>
-                                                        <div class="field-items"><?php echo date('d/m/Y', strtotime($node->field_pti_issue[LANGUAGE_NONE][0]['entity']->title)); ?></div>
-                                                      </div>
-            <?php } ?>
                             
-            <?php if ($node->field_pti_magazine[LANGUAGE_NONE][0]['entity']->title) { ?>
-                                                      <div class="field">
-                                                        <div class="field-label">Magazine:</div>
-                                                        <div class="field-items"><?php echo $node->field_pti_magazine[LANGUAGE_NONE][0]['entity']->title; ?></div>
-                                                      </div>
-                            <?php } ?>
-                                          </div>
-                                        </div>
-                                      </div> -->
                     <?php } ?>
                     </div>   
         <?php endif; ?>

@@ -10,6 +10,12 @@
 function user_management_user_default_roles() {
   $roles = array();
 
+  // Exported role: Ads Manager.
+  $roles['Ads Manager'] = array(
+    'name' => 'Ads Manager',
+    'weight' => 24,
+  );
+
   // Exported role: Author/Guest.
   $roles['Author/Guest'] = array(
     'name' => 'Author/Guest',
@@ -70,6 +76,12 @@ function user_management_user_default_roles() {
     'weight' => 4,
   );
 
+  // Exported role: Mobile VAS.
+  $roles['Mobile VAS'] = array(
+    'name' => 'Mobile VAS',
+    'weight' => 26,
+  );
+
   // Exported role: Photo Coordinator.
   $roles['Photo Coordinator'] = array(
     'name' => 'Photo Coordinator',
@@ -104,6 +116,12 @@ function user_management_user_default_roles() {
   $roles['Subeditor/Sr.Sub'] = array(
     'name' => 'Subeditor/Sr.Sub',
     'weight' => 5,
+  );
+
+  // Exported role: Syndication.
+  $roles['Syndication'] = array(
+    'name' => 'Syndication',
+    'weight' => 25,
   );
 
   // Exported role: UGC Moderator.

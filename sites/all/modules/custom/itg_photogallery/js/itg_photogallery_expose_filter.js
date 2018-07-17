@@ -1,3 +1,7 @@
+/*
+ * @file itg_photogallery.js
+ * Contains all functionality related to itg_photogallery_expose_filter
+ */
 (function($) {
 
     Drupal.behaviors.itg_photogallery_form = {
@@ -11,7 +15,6 @@
               if(operator == 'or' || operator == 'empty') {
                 jQuery('#edit-field-featured-value option[value=All]').attr('selected','selected');
               }
-              console.log(jQuery(this).val());
             });
         }
     }

@@ -1,0 +1,72 @@
+<link href="css/ipl6.css" type="text/css" rel="stylesheet">
+<style>
+body { background:none;}
+</style>
+<script>
+function onSubmitPoll2()
+{
+	var form = document.poll2;			
+	var radio		= form.answer2;
+	var radioLength = radio.length;
+	var check 		= 0;
+	var answer = 0;
+	var radioIndex = 0;
+	for(var i = 0; i < radioLength; i++)
+	{
+		if(radio[i].checked)
+		{
+				answer=radio[i].value;
+				check = 1;	
+				radioIndex = i;
+		}
+	}		
+	if (check == 0)
+	{
+		alert('No selection has been made. Please try again..');
+		return false;
+	}
+	else
+	{
+		var strURL = "http://specials.indiatoday.com/specials/bt_event/pollSubmit_latest_21may.jsp?sid="+document.poll2.sid.value+"&answer="+answer+"&pid="+document.poll2.pid.value+"";
+		var popupHeight = 300;
+		var popupWidth = 435;
+		var popupTop =  (window.screen.availHeight - popupHeight)/2;
+		var popupLeft = (window.screen.availWidth - popupWidth)/2;
+		var window1 = window.open(strURL ,'messageWindow','top=' + popupTop + ',left=' + popupLeft + ',height=' + popupHeight + ',width=' + popupWidth + ',toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=yes', '_blank');
+		return true;
+	}
+}
+</script>
+<div class="right-cont graybgs">
+<form method="POST" onsubmit="return onSubmitPoll2();" name="poll2">
+<input value="253" name="sid" type="HIDDEN">
+<input value="1128" name="pid" type="HIDDEN">
+<div class="chunkcont">
+<div class="ipl-head score-wid ">Poll</div>
+<div class="chunkcont">
+
+                        <div class="poll_question">Who will be the leading wicket-taker in IPL 6?</div>
+
+                        
+                        <div class="poll_option">
+      <span><input type="radio" name="answer2" class="radio_new" value="2068"></span>
+      <span style="margin-right:5px;" class="introtext_poll">Vinay Kumar</span>
+      <span><input type="radio" name="answer2" class="radio_new" value="2069"></span>
+      <span style="margin-right:5px;" class="introtext_poll">RP Singh</span>
+      <span><input type="radio" name="answer2" class="radio_new" value="2070"></span>
+      <span style="margin-right:5px;" class="introtext_poll">Kevon Cooper</span>
+       <span><input type="radio" name="answer2" class="radio_new" value="2071"></span>
+      <span style="margin-right:0px;" class="introtext_poll">Sunil Narine</span>
+     </div>
+                        <div class="clear"></div>
+                        <div class="button" align="right">
+                        	<!--<input id="button3"  value="submit" src="images/seeresult.png" name="submit" type="image" align="absmiddle" border="0" style="float:left">--><input id="button3"  value="submit" src="images/submit.png" name="submit" type="image" align="absmiddle" border="0">
+                        	
+                            <div class="clear"></div>
+
+                        </div>
+                       
+</div>
+</div> 
+</form>
+</div>

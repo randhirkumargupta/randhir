@@ -6,7 +6,7 @@
  */
 ?>
 
-ITG CMS Report
+<?php print t('ITG CMS Report'); ?>
 
 <?php print $header ?>
 <?php print $body ?>

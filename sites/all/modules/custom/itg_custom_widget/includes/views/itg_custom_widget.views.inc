@@ -103,6 +103,5 @@ function itg_custom_widget_views_data() {
     ),
   );
 
-
   return $data;
 }

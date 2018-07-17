@@ -22,7 +22,6 @@ function itg_event_check_coupon_auth($param) {
       'success_message' => 0,
   );
 
-
   if (isset($_POST['coupon_code']) && !empty($_POST['coupon_code'])) {
     $coupon_id = get_coupondetail_by_coupon_code($_POST['coupon_code']);
     if (isset($coupon_id) && !empty($coupon_id)) {
@@ -54,14 +53,12 @@ function itg_event_check_coupon_auth($param) {
           }
         }
 
-
         // CASE 3 - Handling discount on the basis of Coupon type
         $coupon_type = $coupons_data->field_coupon_type[$coupons_data->language][0]['value'];
         $coupon_discount_type = $coupons_data->field_coupon_discount_type[$coupons_data->language][0]['value'];
         $coupon_discounted_value = $coupons_data->field_coupon_discounted_value[$coupons_data->language][0]['value'];
         $total_fee = $_POST['total_fee'];
         switch ($coupon_type) {
-
 
           // CASE 4 -  Handling Free Product  
           case 'free_product':
@@ -94,7 +91,6 @@ function itg_event_check_coupon_auth($param) {
                   }
                   // End code for handling if discounted value is greater then the actual amount
 
-
                   $return = array(
                       'expired' => 0,
                       'discounted_value' => $discounted_value['final_discounted_total_fee'],
@@ -116,7 +112,6 @@ function itg_event_check_coupon_auth($param) {
                 $mapped_mobile = $coupons_data->field_coupon_email[$coupons_data->language][0]['value'];
                 if ($mapped_mobile == $c_mobile) {
                   $discounted_value = get_discunted_value_for_coupon($coupon_discount_type, $coupon_discounted_value, $total_fee);
-
 
                   // Start code for handling if discounted value is greater then the actual amount
                   if ($discounted_value['final_discounted_total_fee'] <= 0) {   // If discounted value is a negetive number then discounted value will be total fee
@@ -178,10 +173,7 @@ function itg_event_check_coupon_auth($param) {
               drupal_exit();
             }
 
-
             break;
-
-
 
           case 'coupan_dc':
           case 'upload_third_party_coupon':

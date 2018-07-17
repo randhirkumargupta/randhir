@@ -52,7 +52,7 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -118,7 +118,7 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -181,6 +181,9 @@ function feature_for_landing_page_views_default_views() {
 
   /* Display: Programmes videos */
   $handler = $view->new_display('block', 'Programmes videos', 'block');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -191,6 +194,11 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid_1']['id'] = 'nid_1';
+  $handler->display->display_options['relationships']['nid_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid_1']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -232,22 +240,27 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '65';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Section wise ordering content: Category */
+  /* Field: Section widget relationship: weight */
+  $handler->display->display_options['fields']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['fields']['weight_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['fields']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['fields']['weight_1']['separator'] = '';
+  /* Field: Section widget relationship: Category */
   $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
-  /* Field: Section wise ordering content: weight */
-  $handler->display->display_options['fields']['weight']['id'] = 'weight';
-  $handler->display->display_options['fields']['weight']['table'] = 'itg_widget_order';
-  $handler->display->display_options['fields']['weight']['field'] = 'weight';
-  $handler->display->display_options['fields']['weight']['separator'] = '';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Section widget relationship: weight */
+  $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+  $handler->display->display_options['sorts']['weight_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+  $handler->display->display_options['sorts']['weight_1']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Section wise ordering content: Category */
+  /* Contextual filter: Section widget relationship: Category */
   $handler->display->display_options['arguments']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['arguments']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['arguments']['cat_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['cat_id']['default_argument_type'] = 'taxonomy_tid';
@@ -255,6 +268,18 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['arguments']['cat_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['cat_id']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['cat_id']['limit'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type_1']['id'] = 'content_type_1';
+  $handler->display->display_options['filters']['content_type_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type_1']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type_1']['value'] = 'videogallery';
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget_1']['id'] = 'widget_1';
+  $handler->display->display_options['filters']['widget_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget_1']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget_1']['value'] = 'section_wise_widget';
   $export['programme_content'] = $view;
 
   $view = new view();
@@ -326,6 +351,12 @@ function feature_for_landing_page_views_default_views() {
 
   /* Display: Programmes */
   $handler = $view->new_display('page', 'Programmes', 'page');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '13';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Taxonomy term: Parent term */
   $handler->display->display_options['relationships']['parent']['id'] = 'parent';
@@ -372,11 +403,8 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['description']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['description']['field'] = 'description';
   $handler->display->display_options['fields']['description']['label'] = '';
-  $handler->display->display_options['fields']['description']['alter']['trim_whitespace'] = TRUE;
   $handler->display->display_options['fields']['description']['alter']['max_length'] = '85';
   $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['description']['alter']['strip_tags'] = TRUE;
-  $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
@@ -390,6 +418,29 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
   $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
+  /* Field: Taxonomy term: Programme Category Image */
+  $handler->display->display_options['fields']['field_programme_category_image']['id'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['table'] = 'field_data_field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['field'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['label'] = '';
+  $handler->display->display_options['fields']['field_programme_category_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_programme_category_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_programme_category_image']['settings'] = array(
+    'image_style' => 'programme_category_image',
+    'image_link' => '',
+  );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061';
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -400,7 +451,7 @@ function feature_for_landing_page_views_default_views() {
     'category_management' => 'category_management',
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
-  $handler->display->display_options['path'] = 'programmes';
+  $handler->display->display_options['path'] = 'program';
 
   /* Display: RHS Program Block */
   $handler = $view->new_display('block', 'RHS Program Block', 'rhs_programmes');
@@ -408,7 +459,7 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['title'] = '<none>';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '9';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '13';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Taxonomy term: Parent term */
@@ -442,7 +493,6 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['description']['label'] = '';
   $handler->display->display_options['fields']['description']['alter']['max_length'] = '100';
   $handler->display->display_options['fields']['description']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['description']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['description']['element_label_colon'] = FALSE;
   /* Field: Field: Category Icon */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
@@ -464,6 +514,27 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
   $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
+  /* Field: Taxonomy term: Programme Category Image */
+  $handler->display->display_options['fields']['field_programme_category_image']['id'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['table'] = 'field_data_field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['field'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_programme_category_image']['settings'] = array(
+    'image_style' => 'programme_category_image',
+    'image_link' => '',
+  );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061';
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
   $export['programmes'] = $view;
 
   return $export;

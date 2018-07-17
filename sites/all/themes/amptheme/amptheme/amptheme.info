@@ -6,6 +6,7 @@ core = 7.x
 regions[header]  = Header
 regions[content] = Main
 regions[footer]  = Footer
+regions[front_end_breadcrumb] = Front end breadcrumb
 
 ; Information added by Drupal.org packaging script on 2016-07-01
 version = "7.x-1.0"

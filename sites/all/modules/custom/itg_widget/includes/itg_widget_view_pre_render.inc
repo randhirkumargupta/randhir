@@ -12,6 +12,7 @@ function itg_widget_views_pre_render(&$view) {
   $color_box_class = array("class" => array("colorbox-load"));
   if ($view->name == "static_pages" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t('Create static page'), 'node/add/page', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos') {
@@ -33,6 +34,21 @@ function itg_widget_views_pre_render(&$view) {
       $header_content .= l(t('Top Story Widget'), 'story-list-widget-listing', array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
+  }
+  elseif ($view->name == "section_wise_top_story_widget_order_reorder" && $view->current_display == 'page') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
+        $section_wise_query = $color_box_query;
+        $section_wise_query['category_tid'] = $_GET['category_tid'];
+        $header_content .= l(t('Section manual order widget'), 'section-manual-order-widget-listing', array('query' => $section_wise_query, 'attributes' => $color_box_class));
+      }
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "report_filed_content" && $view->current_display == 'page') {
+    $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $view->attachment_before = $header_content;
   }
   elseif ($view->name == "story_widget" && $view->current_display == 'trending_videos') {
     if (!isset($_POST['views_bulk_operations'])) {
@@ -103,6 +119,7 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "section_wise_content_ordering_list" && $view->current_display == 'page') {
+    drupal_add_css("#views-form-section-wise-content-ordering-list-page {display:none}" ,"inline");
     //$header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     //$header_content .= l(t('Search Content'), 'section-wise-draggable-content-order', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
@@ -204,6 +221,14 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "special_auto_review_widget" && $view->current_display == 'special_auto_review_widget_contents') {
+    if(isset($_POST['views_bulk_operations']) && (empty($_GET['category_tid']))) {
+      drupal_set_message(t("Please select Section first.") , 'error');
+      drupal_goto('special-auto-review-widget-contents');
+    }
+    if($_GET['category_tid']=='All') {
+       drupal_set_message(t("Please select Section first.") , 'error');
+      drupal_goto('special-auto-review-widget-contents');
+    }
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Special Review Widget'), 'special-auto-review-widget-lsit', array('query' => $color_box_query, 'attributes' => $color_box_class));
@@ -218,6 +243,15 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "yearender_top_news_and_top_videos" && $view->current_display == 'yearend_left_widget_contents') {
+  if(isset($_POST['views_bulk_operations']) && empty($_GET['shs_term_node_tid_depth']) ) {
+      drupal_set_message(t("Please select Section and filter first.") , 'error');
+      drupal_goto('yearend-left-widget-contents');
+    }
+    if($_GET['shs_term_node_tid_depth']=='All') {
+       drupal_set_message(t("Please select Section and filter first.") , 'error');
+      drupal_goto('yearend-left-widget-contents');
+    }
+    
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Year End Top News & Video'), 'yearend-left-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
@@ -228,6 +262,13 @@ function itg_widget_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
       $header_content .= l(t('Most Read Widget'), 'most-read-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "home_election_widget" && $view->current_display == 'election_graph_widget_contents') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      $header_content .= l(t('Election Graph Widget'), 'election-graph-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
       $view->attachment_before = $header_content;
     }
   }
@@ -247,9 +288,21 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "key_candidate" && $view->current_display == 'special_key_candidate_widget_contents') {
     if (!isset($_POST['views_bulk_operations'])) {
-      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
-      $header_content .= l(t('Key Candidate Content Widget'), 'special-key-candidate-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
-      $view->attachment_before = $header_content;
+        if(isset($_GET['cat_id'])) {
+            $header_content .= '<span class="count">Count (' . $view->total_rows . ') </span>';
+            $header_content .= l(t('Key Candidate Content Widget'), 'special-key-candidate-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
+        } else {
+            $header_content .= l(t('Key Candidate Content Widget'), 'special-key-candidate-widget-list', array('query' => $color_box_query, 'attributes' => $color_box_class));
+            unset($view->result);
+        }
+        $view->attachment_before = $header_content;
+    }
+  }
+  elseif ($view->name == "key_candidate" && $view->current_display == 'special_key_candidate_widget_list') {
+    if(!isset($_GET['cat_id'])) {
+        drupal_set_message(t("Category filter is required"), 'error');
+        unset($view->result);
+        unset($view->query->pager);
     }
   }
   elseif ($view->name == "category_of_stroy_base_magazin_widget" && $view->current_display == 'issue_category_magazin_widget') {
@@ -267,13 +320,21 @@ function itg_widget_views_pre_render(&$view) {
     }
   }
   elseif ($view->name == "user_selection" && $view->current_display == 'user_selection_for_section') {
-    if (isset($_POST['views_bulk_operations']) && !isset($_GET['field_user_section_tid'])) {
-      drupal_set_message(t("Please select section first."), 'error');
-      drupal_goto('user-selection');
+    if(!isset($_GET['field_user_section_tid']) || $_GET['field_user_section_tid'] == 'All') {
+      drupal_add_css("#views-form-user-selection-user-selection-for-section fieldset.container-inline , td.views-field-views-bulk-operations , th.views-field-views-bulk-operations {display:none}" , 'inline');
     }
-    if(isset($_POST['views_bulk_operations']) && isset($_GET['field_user_section_tid']) && !is_integer(isset($_GET['field_user_section_tid']))) {
-      drupal_set_message(t("Please select section first."), 'error');
-      drupal_goto('user-selection');
-    }
+//    if (isset($_POST['views_bulk_operations']) && !isset($_GET['field_user_section_tid'])) {
+//      drupal_set_message(t("Please select section first."), 'error');
+//      drupal_goto('user-selection');
+//    }
+//    if(isset($_POST['views_bulk_operations']) && isset($_GET['field_user_section_tid']) && !is_integer(isset($_GET['field_user_section_tid']))) {
+//      drupal_set_message(t("Please select section first."), 'error');
+//      drupal_goto('user-selection');
+//    }
+  }
+  elseif ($view->name == "alexa_audio_clips" && $view->current_display == 'page') {
+    $alexa_query['destination'] = 'alexa-audio-clips';
+    $header_content .= l(t('Add new Alexa audio clip'), 'node/add/alexa-audio-clips', array('query' => $alexa_query));
+    $view->attachment_before = $header_content;
   }
 }

@@ -1,0 +1,671 @@
+@charset "utf-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,400italic,500,500italic,700,700italic); /*** font-family: 'Roboto', sans-serif; ***/
+/*** GENRAL CSS ***/
+body { margin:0px; padding:0px; font-family: 'Roboto', sans-serif; font-weight:400; font-size:15px; color:#181818; background:#f4f4f4 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/bg.png) no-repeat right top;}
+/*img { margin:0px; padding:0px; border:none }
+*/
+a { margin:0px; padding:0px; text-decoration:none; transition: all 0.2s ease-in-out; color:#1c1c1c}
+a:hover { text-decoration:none; color:#6b6b6b}
+.fLeft { float:left}
+.fRight { float:right;}
+.clear { clear:both}
+.mrgL_0 { margin-left:0px;}
+.mrgR_0 { margin-right:0px;}
+.mrgB_0 { margin-bottom:0px;}
+.mrgT_0 { margin-top:0px;}    
+.paddL_0 { padding-left:0px;}
+.paddR_0 { padding-right:0px;}
+.paddB_0 { padding-bottom:0px;}
+.paddT_0 { padding-top:0px;}
+*{ outline:none; box-sizing:border-box; /*transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;*/ }
+
+
+/*** WRAPER ***/
+.wraper { margin:0px; padding:0px;}
+.container { padding-left:0px; padding-right:0px;}
+.btn_more { margin:0px 5px 0 0; padding:0px 13px 0 0; font-size:15px; color:#077f99; text-transform:uppercase; font-weight:300; text-align:right; 
+background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/more-arrow.jpg) no-repeat right center;}
+.btn_more a {color:#077f99;}
+.btn_more a:hover {color:#000; padding-right:5px; font-weight:500}
+.more_red { color:#c4160f}
+.more_red a{ color:#c4160f}
+.more_red a:hover{ color:#000}
+
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);/*** font-family: 'Oswald', sans-serif; ***/
+.logo_area{ float:left;}
+.logo_area h1 { font-family: 'Oswald', sans-serif; font-size:29px; line-height:27px; color:#c4160f; text-align:left; font-weight:bold}
+.logo_area h1 img { display:block}   
+.logo_area h1 span { color:#000;}
+.logo_area h1 a { color:#c4160f; text-decoration:none; letter-spacing:-1px;}  
+.logo_area h1 a span { color:#000}     
+
+/*** HEADER ***/
+.top_area { margin:0px; padding:0px 0 19px 0;} 
+.logo { margin:0px 0 0 -5px; padding:8px 0 0 0;}
+.logo h1 { margin:0px; padding:0px;}
+.logo h1 img { width:auto}
+.top_advertis { margin:0px; padding:20px 0 0 0; float:right; text-align:right}
+.top_advertis img { width:100%}
+
+/*** NAVIGATION ***/
+.nav_area { margin:0px; padding:0px; background:#000000; font-family: 'Roboto', sans-serif;}
+.nav_area .swiper-slide { font-size:15px; color:#fff; font-weight:500; text-transform:uppercase; float:left; width:auto; margin:0px; padding:9px 28px 9px 0; padding-right:26px\9;}  
+
+.nav_area .swiper-slide h2 { margin:0px; padding:0px; font-size:inherit; font-weight:inherit; line-height:inherit}
+.nav_area .swiper-slide a { color:#fff}
+.nav_area .swiper-slide a:hover { color:#ffd200}
+.nav_area .search_area { float:right; cursor:pointer}
+.nav_area .search_area .glyphicon.glyphicon-search { font-size:20px; color:#fff; line-height:39px; } 
+.nav_area .search_area .glyphicon.glyphicon-search:hover {color:#ffd200}
+
+/*** TIMELINE ***/
+.timeline_area { margin-bottom:30px;  background:#353535; font-family: 'Roboto', sans-serif;}
+.time_head { padding-top:2px; font-size:25px; color:#ffa415; font-weight:500; text-transform:uppercase; display:block;}
+.timeline_area .swiper-wrapper { margin-left:8.2%}
+.timeline_area .swiper-slide { font-size:15px; color:#fff; font-weight:300; text-transform:uppercase; float:left; width:auto;}
+.timeline_area .swiper-slide h2 { margin:0px; padding:0px; font-size:inherit; font-weight:300; line-height:inherit; font-size:21px;}
+.timeline_area .swiper-slide h2 a { margin:3px 50px 0 0; padding:2px 15px 5px 15px; display:block; color:#fff;}
+.timeline_area .swiper-slide h2 a:hover { color:#000000;  background:#ffa415; box-shadow:2px 3px 5px #000, -1px -1px 5px #000}
+.timeline_area .swiper-slide a:hover { color:#ffd200}
+
+/*** FRESH NEWS***/
+.fresh_news {/* margin-bottom:20px;*/ overflow:hidden; padding-bottom:10px;}  
+.fresh_news_area { background:#fff url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/fresh-red.png) no-repeat 20px center; box-shadow:2px 2px 3px #c8c8c8; margin-bottom:8px;}
+.fresh_news_area h3 { margin:0px; padding:6px 20px 6px 35px; font-size:17px; color:#1c1c1c; font-weight:300}
+
+/*** INTRO AREA ***/
+.intro_area { padding-bottom:30px; overflow:hidden}
+
+/*** HIGHTLIGHT SLIDE ***/
+.highlights_slide { position:relative}
+.highlights_slide_area { position:relative}
+.highlights_pic { margin:0px; padding:0px;}
+.highlights_pic img { width:100%; height:356px;}
+.highlights_info { margin:0px; padding:9px 10px 30px; background:#181818; height:124px;}
+.highlights_info h2 { margin:0px; padding:0px; font-size:28px; color:#fff; font-weight:500; line-height:37px; }
+.highlights_info h2 a{ color:#fff}
+.highlights_slide_area h2 a:hover { color:#ffd200}
+.highlights_slide ol.carousel-indicators { bottom:inherit; left:inherit; right:-13%; top:66%;}
+.highlights_slide .carousel-indicators li { text-indent:inherit; margin:0px 0 0 2px; padding:0px; font-size:24px; font-weight:600; color:#000; background:#ffa415; border-radius:4px; height:28px; width:29px; display:inline-block; border:none; line-height:27px; text-align:center;}
+.highlights_slide .carousel-indicators li.active { color:#fff}
+.highlights_slide .carousel-indicators li:hover { color:#fff}
+
+/*** INTRO MIDDLE ***/
+.intro_middle { margin:0px; padding:0px;}
+.intro_middle ul { margin:0px; padding:0px; list-style:none}
+.intro_middle ul li { margin:0px 0 30px 0; padding:0px 0 23px 0; border:1px solid #e1e1e1; background:#fff; height:226px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.intro_middle ul li .intro_pic { margin:0px 0 9px 0; padding:0px; position:relative; overflow:hidden}
+.intro_middle ul li .intro_pic img { width:100%; padding:3px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.intro_middle ul li .intro_pic img:hover { transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+.intro_middle ul li h3 { margin:0px; padding:0px 7px 0px 5px; font-size:14px; line-height:20px; color:#181818}
+.intro_middle ul li h3 a { color:#181818}
+.intro_middle ul li h3 a:hover { color:#6b6b6b}
+.intro_middle ul li .intro_pic .fa.fa-play-circle {color:#fff; font-size:30px; position:absolute; right:10px; top:65%;}
+.intro_middle ul li .intro_pic:hover .fa.fa-play-circle { text-shadow: 2px 2px 4px #000, -1px -1px 4px #000;}
+
+/*** NEWS AREA ***/
+.news_area { margin:0px; padding:0px; height:385px;}
+.news_area.centric_area, .news_area.cheer_area{ height:420px; margin-bottom:35px;}
+.news_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.news_box { border:1px solid #ededed; background:#fff; padding-bottom:5px; height: 364px;}
+.news_area ul { margin:0px; padding:3px; list-style:none;}
+.news_area ul li { margin:0px 0px 7px 0; padding:0px 10px 7px 0; border-bottom:1px solid #ededed; overflow:hidden;}
+.news_area ul li:last-child { border-bottom:none}
+
+
+
+.news_area ul li .news_pic { float:left; margin:0px 9px 0 0; overflow:hidden}
+
+.news_area ul li .news_pic img {  overflow:hidden; width:100%; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.news_area ul li .news_info { margin:0px; padding:0px;}
+.news_area ul li .news_info h3 { margin:0px; padding:0px; font-size:15px; color:#181818; line-height:20px; font-weight:400; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.news_area ul li a { color:#181818; display:block}
+.news_area ul li:hover .news_info h3 { color:#6b6b6b;}
+.news_area ul li:hover img { transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+.news_area ul li.centric_first { border-bottom:none; padding-bottom:20px}
+.news_area ul li.centric_first .news_pic { float:left; margin:0px 9px 0 0; width:52%}
+.news_area ul li.centric_first .news_info h3{ margin:0px; padding:15px 0 0 0; line-height:21px; font-size:16px; font-weight:600}
+.news_area ul li.centric_first a .news_info h3  { color:#183562}
+.news_area ul li.centric_first a:hover .news_info h3  { color:#6b6b6b}
+.news_area.centric_area .btn_more { margin-top:0px;}
+
+.news_area.cheer_area  ul li { margin-bottom:12px; padding-bottom:12px;}
+.news_area.cheer_area .news_box { height:398px;}
+.news_area.centric_area .news_box { height:398px;}
+.news_area.centric_area ul li { margin-bottom:17px; padding-bottom:17px;}
+.news_area.centric_area .btn_more { margin-bottom:7px; margin-top:-7px;}
+
+
+/*** INTERVIEW AREA ***/
+.interviews_area { margin:0px; padding:0px;}
+.interviews_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.interviews_box { border:1px solid #ededed; background:#fff; padding:3px;}
+.interviews_box h3 { margin:0px; padding:15px 15px 12px 7px; font-size:20px; color:#313131; line-height:25px; font-weight:400; height:100px;}
+.interviews_box h3 a { color:#313131}
+.interviews_box h3 a:hover { color:#6b6b6b}
+.interviews_box .carousel-control.right, .interviews_box .carousel-control.left { background:none; }
+.interviews_box .carousel-control.right { width:35px; height:34px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/right-arrow.png) no-repeat 0px 0px; opacity:1; top:55%; right:3%; }
+.interviews_box .carousel-control.left { width:35px; height:34px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/left-arrow.png) no-repeat 0px 0px; opacity:1; top:55%; left:inherit; right:13.8% }
+.interviews_area .carousel-inner .item img { height:226px;}
+.interviews_box .btn_more { margin-bottom:8px;}
+
+.interviews_box .glyphicon.glyphicon-chevron-right, .interviews_box .glyphicon.glyphicon-chevron-left { display:none}
+
+/*** KEY PLAYER ***/
+.keyplayer_area { margin:0px 0 40px 0; padding:0px;}
+/*.intro_area .keyplayer_area { margin-bottom:40px;}*/
+
+.keyplayer_area h2 { margin:0px; padding:5px; background:#fff; font-size:25px; color:#181818; display:inline-block; font-weight:300; line-height:19px; text-transform:uppercase}
+.keyplayer_box { border:1px solid #ededed; background:#fff; padding:3px;}
+.keyplayer_box h3 { margin:0px; padding:10px 15px 21px 7px; font-size:14px; color:#313131; line-height:20px; font-weight:400; height:66px;}
+.keyplayer_box h3 a { color:#313131}
+.keyplayer_box h3 a:hover { color:#6b6b6b}
+.keyplayer_area img { height:226px;}
+.keyplayer_box { position:relative;}
+.keyplayer_area .btn_more { margin-bottom:7px;}
+
+
+/*** 16 ***/
+.keyplayer_box .carousel-control.right, .keyplayer_box .carousel-control.left { background:none; }
+.keyplayer_box .carousel-control.right { width:35px; height:34px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/right-arrow.png) no-repeat 0px 0px; opacity:1; top:55%; right:3%; }
+.keyplayer_box .carousel-control.left { width:35px; height:34px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/left-arrow.png) no-repeat 0px 0px; opacity:1; top:55%; left:inherit; right:13.8% }
+.keyplayer_box .glyphicon.glyphicon-chevron-right, .keyplayer_box .glyphicon.glyphicon-chevron-left { display:none}
+.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:55%; left:10px;}
+.play_inter_icon i {text-shadow: 2px 2px 4px #2b2b2b, -1px -1px 4px #2b2b2b;}
+#keyplyer_intro_home .keyplayer_area  .carousel-inner > .item h2 { display:none }
+#keyplyer_intro_home .keyplayer_area { margin-bottom:20px;}
+.keyplayer_box .play_inter_icon { top:60%}
+/*** END 16 ***/
+
+
+/*.keyplayer_box .carousel-indicators { bottom:inherit; left:inherit; right:7px; top:3px; margin-left:0px; width:100%; text-align:right;}
+.keyplayer_box .carousel-indicators li { margin:0px; padding:0px; width:12px; height:12px; background:#fff; border:none; box-shadow: inset -1px 1px 2px #000}
+.keyplayer_box .carousel-indicators li:hover, .keyplayer_box .carousel-indicators li.active { background:#ffec4e}
+.keyplayer_box h2 { margin:0px; padding:0px 6px 0px 6px; position:absolute; top:52%; display:inline-block; background:#007bd5; line-height:inherit; font-size:22px; font-weight:600; color:#fff; box-shadow:-2px 3px 7px #000 }
+*/
+
+/*** PHOTO AREA ***/
+.photo_area { margin:0px 0 30px 0; padding:0px;}
+.photo_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.photo_area .photo_box {border:1px solid #ededed; background:#fff; padding:3px; overflow:hidden; padding-bottom:8px}
+.latest_first_photo { margin:0px 0 8px 0; padding:0px; width:558px; float:left; position:relative}
+.latest_first_photo .latest_pic > img { width:560px; height:350px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.latest_photo { margin:0px 0 8px 0; padding:0px; width:302px; float:left; position:relative; border-left:2px solid #fff}
+.photo_area .latest_pic { margin:0px; padding:0px; position:relative; overflow:hidden; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.photo_area .latest_pic img{transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.photo_info { margin:0px; padding:10px 0 0 10px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/latest-bg.png) no-repeat bottom; min-height:93px; position:absolute; z-index:5; left:0px; bottom:0px; width:100%; }
+.latest_first_photo .photo_info h3 {font-size:22px; line-height:22px; font-weight:500; color:#fff;transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.latest_photo .photo_info h3 {font-size:18px; line-height:23px; font-weight:500; color:#fff; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.photo_info h3 a { color:#fff}
+.tag_title { margin:0px; padding:0px; position:absolute; top:10px; left:15px; width:42px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.tag_title h2 { margin:0px 0 0 5px; padding:0px; width:34px; height:34px; background:#007bd5; border-radius:50px; line-height:34px; font-weight:600; font-size:22px; color:#fff; text-align:center} 
+.tag_title span { color:#fff; font-size:13px;}
+.latest_first_photo:hover h3 { color:#ffd200; margin-top:-2px; }
+.latest_first_photo:hover .tag_title{top:5px; }
+.latest_first_photo:hover h2 {box-shadow:2px 3px 10px #000;}
+.latest_first_photo:hover .latest_pic img { transform:scale(1.1,1.1); -moz-transform:scale(1.1,1.1); -ms-transform:scale(1.1,1.1); -o-transform:scale(1.1,1.1); -webkit-transform:scale(1.1,1.1);}
+.latest_photo:hover h3 { color:#ffd200; margin-top:-2px; text-shadow:2px 3px 5px #000}
+.latest_photo:hover .tag_title{top:5px; }
+.latest_photo:hover h2 {box-shadow:2px 3px 10px #000;}
+.latest_photo:hover .latest_pic img { transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+.photo_area .swiper-slide { float:left; width:auto;}
+.middle_home { margin:0px 0 0px 0; padding:0px;}
+
+/*** ICC EVENT ***/
+.icc_events { margin:0px; padding:30px 0 30px 0;}
+.icc_events h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.icc_events_box {border:1px solid #ededed;  background:#fff; padding:0px; overflow:hidden; padding-bottom:8px;}
+.icc_events_box ul { margin:0px; padding:0px; list-style:none; overflow:hidden}
+.icc_events_box ul li { margin:0px 0 0 0 ; padding:16px 4px 16px 16px; float:left; width:50%; border-bottom:1px solid #e6e4e4;  border-right:1px solid #e6e4e4;}
+.icc_events_box ul li:nth-child(2n) { border-right:none}
+.icc_events_box ul li .event_pic { margin:0px 5px 0 0; padding:0px; width:50%; float:left}
+.icc_events_box ul li .event_info { margin:-4px 0 0 0; padding:0px; width:48%; float:right}
+.icc_events_box ul li .event_info h3 { margin:0px; padding:0px; font-size:18px; line-height:23px; font-weight:400}
+.icc_events_box ul li.border_none { border-bottom:none; padding-bottom:0px;}
+.icc_events_box ul li:hover img { transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+.icc_events_box ul li .event_pic { overflow:hidden}
+.icc_events_box ul li .event_pic img { width:100%; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+
+.icc_events_box ul li:last-child { margin-bottom:0px; border-bottom:0px;}
+
+
+/*** COLUMNS AREA ***/
+.columns_area { margin:0px; padding:0px;}
+.columns_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.columns_box { border:1px solid #ededed; background:#fff; padding-bottom:5px; height:370px}
+.columns_area ul { margin:0px; padding:3px; list-style:none;}
+.columns_area ul li { margin:0px 0px 0px 0; padding:20px 10px 20px 12px; border-bottom:1px solid #ededed; overflow:hidden}
+.columns_area ul li:last-child { border-bottom:none}
+.columns_area ul li .columns_pic { float:left; margin:0px 9px 0 0; overflow:hidden; border-radius:100%}
+.columns_area ul li .columns_pic img {  overflow:hidden; /*border-radius:100%; */width:70px; height:70px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.columns_area ul li .columns_info { margin:0px; padding:3px 0 0 0;}
+.columns_area ul li .columns_info h3 { margin:0px; padding:0px; font-size:15px; color:#181818; line-height:20px; font-weight:400; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.columns_area ul li a { color:#181818; display:block}
+.columns_area ul li:hover .columns_info h3 { color:#6b6b6b;}
+.columns_area ul li:hover img { transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+
+/*** PODCASTS ***/
+.podcasts_area { margin:0px; padding:0px;}
+.podcasts_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.podcasts_track { margin-bottom:10px;}
+.podcasts_track img { width:100%}
+.podcasts_box { border:1px solid #ededed; background:#fff; padding-bottom:5px;}
+.podcasts_box ul { margin:0px 0 28px 0; padding:3px; list-style:none;}
+.podcasts_box ul li { margin:0px; padding:6px 0 6px 4px; border-bottom:1px solid #ededed; overflow:hidden}
+.podcasts_box ul li:last-child { border-bottom:none;}
+.podcasts_box ul li h3 { margin:0px; padding:0px; font-size:12px; color:#676767; font-weight:400;}
+.podcasts_box ul li a {color:#676767;}
+.podcasts_box ul li:hover h3 {color:#000;}
+.podcasts_box .social_area { margin-left:13px; margin-top:3px; float:left}
+.podcasts_box .social_area i{ font-size:20px; padding-right:10px}
+.podcasts_box .social_area a { color:#4a4a4a}
+.podcasts_box .social_area a:hover { color:#000}
+.podcasts_box .btn_more { float:right}
+
+/*** RIGHT SIDE ***/
+.right_advertis { margin:0px 0 34px 0; padding:20px 0 20px 0; background:#e2e1e1; text-align:center}
+.scorecard_area { margin:0px 0 30px 0; padding:0px; overflow:hidden}
+.scorecard_area h2 {
+    background: #000 none repeat scroll 0 0;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 19px;
+    margin: 0;
+    padding: 4px 0 4px 8px;
+    text-transform: capitalize;
+}
+
+	
+.scorecard_area iframe { margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;} 
+	.scorecard_iframe { margin:0px auto; padding:0px; width:300px;}
+	.outer_wht{ background:#fff; display:block; }
+	
+.scorecard_area img { width:100%}
+.scorecard_area img { width:100%}
+.twitter_right_box {    margin-bottom: 30px;height: 372px;overflow: hidden;}
+.video_area.intro_video { margin-bottom:25px;}
+
+/*** VIDEO ***/
+.video_area { margin:0px; padding:0px 0 30px 0;}
+.video_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.video_box { border:1px solid #ededed; background:#fff; padding-bottom:5px;}
+.video_area ul { margin:0px; padding:3px; list-style:none;}
+.video_area ul li { margin:0px 0px 7px 0; padding:0px 10px 7px 0; border-bottom:1px solid #ededed; overflow:hidden; }
+.video_area ul li:last-child { border-bottom:none}
+.video_area ul li .video_pic { float:left; margin:0px 9px 0 0; position:relative; width:45%; overflow:hidden}
+.video_area ul li .video_pic img {  overflow:hidden; width:100%; height:107px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.video_area ul li .video_info { margin:0px; padding:0px;}
+.video_area ul li .video_info h3 { margin:0px; padding:0px; font-size:15px; color:#181818; line-height:20px; font-weight:400; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.video_area ul li a { color:#181818; display:block}
+.video_area ul li:hover .video_info h3 { color:#6b6b6b;}
+.video_area ul li:hover img {  transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+.video_area ul li:hover .fa.fa-play-circle { text-shadow:2px 2px 4px #000,-2px -2px 4px #000}
+.video_area .fa.fa-play-circle { color:#fff; font-size:32px; position:absolute; right:10px; bottom:7px; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+
+/*** EDITIONS ***/
+.editions_area { margin:0px; padding:0px 0 30px 0;}
+.editions_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.editions_box { border:1px solid #ededed; background:#fff; padding-bottom:5px;}
+.editions_area ul { margin:0px; padding:3px; list-style:none;}
+.editions_area ul li { margin:0px 0px 14px 0; padding:0px 10px 14px 0; border-bottom:1px solid #ededed; overflow:hidden}
+.editions_area ul li:last-child { border-bottom:none; padding-bottom:0px; margin-bottom:0px;}
+.editions_area ul li .editions_pic { float:left; margin:0px 9px 0 0; overflow:hidden}
+.editions_area ul li .editions_pic img {  overflow:hidden; width:100%}
+.editions_area ul li .editions_info { margin:0px; padding:0px;}
+.editions_area ul li .editions_info h3 { margin:0px; padding:0px; font-size:15px; color:#181818; line-height:20px; font-weight:400}
+.editions_area ul li a { color:#181818; display:block}
+.editions_area ul li:hover .news_info h3 { color:#6b6b6b;}
+.editions_area ul li:hover img { transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+
+.editions_area ul li.editions_first { border-bottom:none; padding-bottom:20px; }
+.editions_area ul li.editions_first .editions_pic { float:left; margin:0px 9px 0 0; width:52%}
+.editions_area ul li.editions_first .editions_info h3{ margin:0px; padding:15px 0 0 0; line-height:21px; font-size:16px; font-weight:600}
+.editions_area ul li.editions_first a .editions_info h3  { color:#183562}
+.editions_area ul li.editions_first a:hover .editions_info h3  { color:#6b6b6b}
+.editions_area .btn_more { margin-top:25px;}
+
+/*** PERFORMERS ***/
+.performers_area { margin:0px; padding:0px 0 30px 0; }
+.performers_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.performers_box { border:1px solid #ededed; background:#fff; padding-bottom:5px; overflow:hidden; height:370px}
+.performers_tab { margin:0px auto; padding:0px; width:180px;}
+.performers_tab ul { margin:0px; padding:0px; list-style:none; text-align:center; border:1px solid #e1e1e1; border-top:0px; }
+.performers_tab ul li{ margin:0px; padding:0px;  float:left;border-top:none;  }
+.performers_tab ul li a { margin:0px; padding:13px 18px 13px 18px; display:block; font-size:15px; color:#fff; background:#000; border-radius:0px; font-weight:600; border:none;}
+.performers_tab ul li a:hover{background:#000; color:#fff; border-color:none;}
+.performers_tab ul li.active a { margin:0px; padding:13px 18px 13px 18px; display:block; font-size:15px; color:#000; background:#fff; border-radius:0px; font-weight:600; border:none;  border-color:none;}
+.performers_tab .nav-tabs > li.active > a,.performers_tab  .nav-tabs > li.active > a:focus, .performers_tab .nav-tabs > li.active > a:hover { border:none; outline:none; color:#000}
+.performers_box .tab-content { padding:15px 5px 8px;}
+.performers_box .performers_pic { margin-bottom:10px; width:100px; border-radius:100%; margin-left:auto; margin-right:auto; box-shadow: 3px 3px 10px #b9b9b9; padding:5px;}
+.performers_box .performers_pic img { width:100%; border-radius:50%; }
+.performers_box .perfor_info { margin:0px; padding:0px; width:50%;  float:left; text-align:center; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/performer-line.png) no-repeat right center}
+.performers_box .perfor_info h3 { margin:0px; padding:0px 0 20px 0; font-size:17px; color:#000; font-weight:600; text-transform:uppercase}
+.performers_run { margin:0px; padding:0px 0 11px 0; color:#067289; font-size:35px; font-weight:600; line-height:25px;}
+.performers_run span{ margin:0px; padding:0px; font-size:16px; font-weight:400; display:block; color:#969696; }
+.performers_box .bg_none { background:none}
+
+.trending_area { margin:0px 0 30px 0; padding:0px;}
+.trending_area h2 { margin:0px; padding:0px 0 7px 0; font-size:25px; color:#181818; font-weight:300; line-height:19px; text-transform:uppercase}
+.trending_box { margin:0px; padding:15px 0 15px 0; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; background:#fff}
+.trending_box img { /*width:100%*/}
+
+
+/*** FOOTER ***/
+.footer_wraper { margin:0px; padding:0px;}
+.outer_footer{float:left; width:100%; background:#000000; padding-bottom:15px; }
+.outer_footer .ftop { margin:0px; padding:0px;}
+.ftop .swiper-slide { font-size:15px; color:#fff;  text-transform:uppercase; float:left; width:auto; margin:0px; padding:0px;  border-right:1px solid #1c1c1c}
+.ftop .swiper-slide:first-child a{ padding-left:0px;}
+.ftop .swiper-slide:last-child { border-right:none}
+.ftop .swiper-slide h2 { margin:0px;  font-size:inherit; font-weight:500; line-height:inherit;}
+.ftop .swiper-slide a { color:#fff; display:block; padding:10px 16px 10px 16px}
+.ftop .swiper-slide i { font-size:22px;}
+.ftop .swiper-slide span { font-size:19px; line-height:39px;  padding:0px 14px 2px 14px}
+.ftop .swiper-slide a:hover { color:#ffd200}
+.foot_midd { background:#111111; padding:15px 0 15px 0; overflow:hidden}
+.outer_footer .fbot { margin:0px; padding:0px; font-family: 'Roboto', sans-serif;}
+.outer_footer .fbot ul { margin:0px; padding:0px; list-style:none}
+.outer_footer .fbot ul li { margin:0px; padding:0px 0 7px 0; font-size:12px; color:#a6a6a6; font-weight:400}
+.outer_footer .fbot ul li a { color:#a6a6a6}
+.outer_footer .fbot ul li a:hover { color:#ffd200}
+.outer_footer h3 { font-size:14px; color:#ffffff; font-size:14px; font-weight:500}
+
+
+/*** LISTING WORLDCUP ***/
+.listing_worldcup { margin:0px 0 30px 0; padding:0px;}
+.listing_worldcup ul { margin:0px; padding:0px; list-style:none}
+.listing_worldcup ul li { margin:0px 0 30px 0; padding:10px; background:#fff; border:1px solid #e1e1e1; overflow:hidden}
+.listing_worldcup ul li:last-child { margin-bottom:0px;}
+.listing_worldcup ul li .listing_pic { width:42%; float:left; overflow:hidden}
+.listing_worldcup ul li .listing_pic img { width:100%; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.listing_worldcup ul li .listing_info { width:56%; float:right}
+.listing_worldcup ul li .listing_info h3 { margin:0px; padding:0px 0 9px 0; line-height:36px; font-size:29px; font-weight:600; color:#000; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+.listing_worldcup ul li:hover .listing_info h3 { color:#6b6b6b}
+.listing_worldcup ul li .listing_info p { font-size:17px; line-height:24px;}
+.listing_worldcup ul li:hover .listing_pic img {transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+
+.copy_write_area { margin:0px; padding:8px 0 0px 0 ;  font-size:12px; color:#a6a6a6; background:#000000; border-top:1px solid #1e1e1e; clear:both; float:none; text-align:center; }
+
+
+
+
+/******************************Addition CSS Prince Sharma********************************************/
+
+/*********************Story Page**********************************/
+.maginbtm5{ margin-bottom:5px;}
+#main_story_page{ display:block; padding:8px 8px 8px 0; box-shadow:0 0 3px #ccc; background:#fff;}
+#main_story_page .story_hd{ width:100%;}
+#main_story_page .story_hd h1{margin:0; font-size:40px; margin-bottom:10px; margin-left:8px;}
+#main_story_page .story_hd h1 a{ color:#000; text-decoration:none;}
+#main_story_page .story_hd p{ padding:0; font-size:16px; color:#666;margin-left:8px;}
+#main_story_page .story_mdl{ display:block; border-top:5px solid #000;margin-bottom:30px;}
+#main_story_page .story_mdl .main_shre_pnl{ display:block; padding-left:8px; }
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl{ color:#848484; text-transform:uppercase; font-size:13px; padding:8px 0 8px 0; border-bottom:1px solid #f1f1f1;}  
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.countsh strong{color:#0783ec; font-size:30px;}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl.twitsh span{ text-transform:none; color:#0783ec;}  
+#main_story_page .story_mdl .main_shre_pnl .mail_print{}
+#main_story_page .story_mdl .main_shre_pnl .mail_print a{color:#848484; }
+#main_story_page .story_mdl .story_img{ width:100%;}
+#main_story_page .story_mdl .story_img img{ width:100%;}
+#main_story_page .social_icons{}
+#main_story_page .social_icons a{ color:#848484}
+#main_story_page .story_txt{ color:#848484; margin-top:8px;}
+#main_story_page .story_body_h{ padding-left:8px; font-size:16px; line-height:26px;}
+#main_story_page .story_body_h p{ font-size:16px; line-height:26px;}
+#main_story_page .story_body_h p strong { font-weight:400 !important;}
+#main_story_page .story_body_h p:first-of-type:first-letter{float: left; color: #111;font-weight:bold; font-size: 60px; line-height: 56px; padding-right: 8px; padding-left: 0; }   
+.plugins_cont_main{ width:100%; float:left} 
+.plugins_cont_main .taboola_h{width:100%; float:left; margin-bottom:10px;}
+.plugins_cont_main .vukule_h{width:100%; float:left; margin-bottom:10px;}
+@media (max-width: 640px)
+{
+#main_story_page{ box-shadow:none; padding:0px}
+#main_story_page .story_mdl{border-top: 0;}
+.like_dislike_area .lkedislake-text{ line-height: 19px;font-size: 17px;margin-right: 10px;}
+}
+
+/*********************Story Page**********************************/     
+    
+/*****************Pagination******************************/
+ul.pagination li { font-size: 26px; line-height: 30px; color: #c0c0c0; }   
+ul.pagination li a, ul.pagination li:first-child a, ul.pagination li:last-child a { color: #c0c0c0; border:1px solid #f4f4f4;border-radius: 100px; padding: 4px 16px;margin-right:5px}
+ul.pagination li a:hover { border: 1px solid #5b5b5b; color: #5b5b5b; background: none;}
+.pagination>li>a, .pagination>li>span{ background:none;}
+/*****************Pagination******************************/
+
+/*********************Timeline Page**********************************/
+#main_timeline_page{ width:100%; float:left;}
+#main_timeline_page .container_timeline{ margin-bottom:54px; width:100%}
+#main_timeline_page .container_timeline .hdn_cont_t{   display:inline-block; border:1px solid #e5e5e5; border-bottom:none;  font-size:30px; font-weight:bold; margin-left:-1px }
+#main_timeline_page .container_timeline .hdn_cont_t h3{ margin:0;background:#fff;padding:5px 10px;color:#C3160F; font-size:43px;}
+#main_timeline_page .container_timeline .cont_tmln{ display:block; box-shadow:0 0 2px #ccc;  padding:10px; padding-bottom:1px; background:#fff; }
+#main_timeline_page .container_timeline .cont_tmln ul{ padding-left:15px; margin:0;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li{ margin-bottom:7px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_hdn{ font-weight:bold; font-size:23px; padding-bottom:7px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt{ padding-right:10px; padding-bottom:5px;}  
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .cont_li_pd_lr{ padding:0 5px}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .cont_pht{ margin-top:20px;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .fa{font-size:30px;color:#848484;}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .txt_cnt_ph{  font-size:35px;color:#848484; font-weight:bold; text-transform:uppercase; display:block}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp{ display:block;  padding:0}
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ width:100%;}
+/*********************Timeline Page**********************************/
+
+/*********************Photo Listing Page**********************************/
+#main_photolisting_page{ width:100%; float:left}
+#main_photolisting_page h1.hdn_h{ margin:0;display:block; margin-bottom:30px; font-size:35px; font-weight:bold}
+#main_photolisting_page .photo_box_main{  box-shadow:0 0 3px #ccc; background:#fff;padding:5px; margin-bottom:28px; height: 300px; }
+#main_photolisting_page .photo_box_main .photo_mn{ display:block; position:relative; margin-bottom:10px; overflow:hidden; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; height:155px;}
+
+#main_photolisting_page .photo_box_main .photo_mn:hover img{ transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2); }
+#main_photolisting_page .photo_box_main .photo_mn:hover .fa-camera.photo_icn{text-shadow: 2px 2px 4px #000, -2px -2px 4px #000;}
+
+#main_photolisting_page .photo_box_main .photo_mn .photo_icn{ position:absolute; z-index:11;top: 108px; right:10px; color:#fff; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; }
+#main_photolisting_page .photo_box_main .photo_mn img{ width:100%;transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+#main_photolisting_page .photo_box_main .txt_mn_area{ display:block; padding:5px; font-size:19px; line-height:25px; padding-bottom:25px; }
+#main_photolisting_page .crousel_outer {background-color: #f5f5f5;border: 1px solid #ececec;padding-bottom: 15px;}
+#main_photolisting_page .crousel_outer{background-color:#f5f5f5; border:1px solid #ececec; padding-bottom:15px;}
+#main_photolisting_page .carousel {margin-top: -20px;}
+.item .thumb {width: 12%; cursor: pointer; float: left; margin-left:15px;}
+.item .thumb img {width: 100%; margin: 2px;}
+.item img {width: 100%;}
+.carousel-control.right,.carousel-control.left{background:none;}
+#thumbcarousel{position:relative; left:5px;}  
+.carousel-control{left:-3px; width:5%;}
+#thumbcarousel .carousel-inner .item { left:10px;}
+#thumbcarousel .couter{width:100%; overflow:hidden;}
+#thumbcarousel .left{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/prev_arrow.jpg) no-repeat 0 0;}
+#thumbcarousel .right{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/next_arrow.jpg) no-repeat 0 0;}
+.carousel-control.right{right:13px;}
+.thumb{border:2px solid #f5f5f5;}
+.activethumb{border:2px solid #ff1d13;}
+.item .thumb img{margin:0;}
+.crousel_outer{ margin-bottom:30px}   
+.photolanding h1{font-size:32px; line-height:34px; color:#000; display:block; font-weight:900;}
+.left01{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/prev_arrow01.png) no-repeat 0 0; position:absolute; left:0; z-index:99999; top:42%; width:54px; height:74px;}
+.right01{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/next_arrow01.png) no-repeat 0 0; position:absolute; right:0; z-index:99999; top:42%; width:54px; height:74px;}
+.iteam_box{width:92%; background-color:#fff; box-shadow:2px 3px 5px #cecece; font-size:17px; line-height:22px; color:#464646;  left:29px; min-height:74px; padding:14px; position: relative;bottom: 39px;}
+/*********************Photo Listing Page**********************************/  
+
+/*********************Video Listing Page**********************************/
+#main_videolisting_page{ width:100%; float:left}
+#main_videolisting_page h1.hdn_h{ margin:0;display:block; margin-bottom:30px; font-size:35px; font-weight:bold}
+#main_videolisting_page .video_box_main{  box-shadow:0 0 3px #ccc; background:#fff;padding:5px; margin-bottom:28px; }
+#main_videolisting_page .video_box_main .video_mn{ display:block; position:relative; margin-bottom:10px;  overflow:hidden}
+
+#main_videolisting_page .video_box_main .video_mn:hover img {transform:scale(1.2,1.2); -moz-transform:scale(1.2,1.2); -o-transform:scale(1.2,1.2); -ms-transform:scale(1.2,1.2); -webkit-transform:scale(1.2,1.2);}
+#main_videolisting_page .video_box_main .video_mn:hover .video_icn { text-shadow:2px 2px 4px #000, -2px -2px 4px #000}
+
+#main_videolisting_page .video_box_main .video_mn .video_icn{ position:absolute; z-index:11; bottom:10px; right:10px; color:#fff; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out;}
+#main_videolisting_page .video_box_main .video_mn img{ width:100%; transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; -ms-transition: all 0.2s ease-in-out; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; }
+#main_videolisting_page .video_box_main .txt_mn_area{ display:block; font-size:19px; line-height:25px; padding:5px 5px 25px; height:105px; overflow:hidden }
+/*********************Video Listing Page**********************************/
+
+/*********************Video Landing Page**********************************/
+#main_videolanding_page{ background:#f4f4f4}
+#main_videolanding_page .video_player_wc{ padding-right:0;}
+#main_videolanding_page .video_player_wc img{ width:100%; float:left;}
+#main_videolanding_page .videosocial{ padding:0;}
+#main_videolanding_page .videosocial a {background-color: #f2f2f2;border-right: 1px solid #f2f2f2;border-bottom: 1px solid #e5e5e5;font-size: 13px;line-height: 22px;color: #979797;display: block;padding:25px 15px 25px 18px; }
+#main_videolanding_page .videosocial a:hover {background:#fff;text-decoration: none;border-right: 1px solid #f2f2f2;}
+#main_videolanding_page .videosocial .fa{ font-size:18px; width:20px;}
+#main_videolanding_page .videosocial .txt_social{ position:relative; top:-3px;}
+#main_videolanding_page .video_player_cont{ float:left;width:101%; margin-bottom:10px;}
+#main_videolanding_page .text_vdo{float:left;width:100%}
+#main_videolanding_page .text_vdo p{ margin:0; padding:0; font-size:15px; color:#848484;}
+#main_videolanding_page .mdl_txt{}
+#main_videolanding_page .mdl_txt h2{ font-size:30px; margin:0; margin-bottom:10px;}
+#main_videolanding_page .mdl_txt h2 span{ color:#c00;}
+#main_videolanding_page .mdl_txt p{margin:0; margin-bottom:10px;}
+#main_videolanding_page .upper-part{ margin-bottom:20px;}
+.ad_cont_right_bottom{ background:#fff; box-shadow:0 0 1px #ccc; padding:20px}
+.ad_cont_right_bottom img { width:100%}
+
+#right_restpages .performers_area{ margin-bottom:30px;}
+#right_restpages .keyplayer_area{ margin-bottom:30px;}
+#right_restpages .keyplayer_area{ margin-bottom:30px;}
+h3.title_upper { text-transform:uppercase; margin-bottom:15px;}
+#right_restpages .performers_area{ margin-bottom:0px;}
+.vuukal_comment { margin:0px 0 30px 0; padding:0px;}
+.vuukal_comment img{ margin:0px; padding:0px; width:100%}
+#right_restpages .right_advertis img { width:100%}
+
+#right_restpages .right_advertis .right_top_advertis { margin:0px auto; width:300px;}
+
+
+/*********************Video Landing Page**********************************/
+
+/***BOTTOM CUSTOM SCROLL ***/
+#content-8{ height:220px;width:100%; overflow: hidden }
+ul.horizentalScroll{ /*width:1950px;*/ margin:0px; padding:0px;}
+ul.horizentalScroll li{ float: left; width:386px; list-style: none}
+
+
+
+.leftTrendImg{ float: left; width:49%; text-align: center; color:#183562}
+.leftTrendImg span{ display: block; text-transform: uppercase; margin-top:6px; font-size:15px;}
+.rightTrendImg{ float: right; width:49%; text-align: center}
+.rightTrendImg span{ display: block; text-transform: uppercase; margin-top:6px; color:#183562;  font-size:15px; }
+
+
+.socialMoreSec{ width:100%; margin-top:28px}
+.customListScroll{ height:220px; overflow: auto; position: relative;}
+.podcasts_box ul{ overflow: hidden; width:100%; }
+#container2 .mCSB_container { margin-right: 15px !important;}
+
+#container2 .mCS-dark-3.mCSB_scrollTools .mCSB_draggerRail{ background: none}
+#container2 .mCS-dark-3.mCSB_scrollTools .mCSB_draggerRail, .mCS-light-3.mCSB_scrollTools .mCSB_draggerRail{ background: none; width:10px}
+#container2 .mCSB_scrollTools .mCSB_draggerRail{ background: none; border:1px solid #ccc}
+#container2 .mCS-dark-3.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background:#b9b9b9}
+#container2 .mCSB_scrollTools .mCSB_buttonUp{ display: block; position: absolute; height: 20px; width: 100%; overflow: hidden;  margin: 0 auto; cursor: pointer;  background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/scrollBtn.png) no-repeat 3px 7px}
+#container2 .mCSB_scrollTools .mCSB_buttonDown { display: block; position: absolute; height: 20px; width: 100%; overflow: hidden;  margin: 0 auto; cursor: pointer;  background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/scrollBtn.png) no-repeat 3px -12px}
+
+#content-8 .mCS-3d-dark.mCSB_scrollTools .mCSB_draggerRail,#content-8 .mCS-3d.mCSB_scrollTools .mCSB_draggerRail {background-color: #545454 !important;box-shadow: 2px 3px 5px #000 inset !important;}
+#content-8 .mCSB_dragger_bar { background: #f6f6f6; height: 6px; margin: 5px auto; width: 300px;}
+
+#content-8 .mCSB_draggerContainer { display:none !important}
+
+
+
+
+/*.likedisdiv {border-bottom: 1px dotted #ccc;border-top: 1px dotted #ccc;color: #9a9a9a;font: 100 18px/32px Roboto,sans-serif;margin-bottom: 10px;overflow: hidden;padding: 10px 0 0;text-align: center;text-transform: uppercase;}
+.st_social {float: left;overflow: hidden;width: auto;}
+.st_social ul {margin: 0;padding: 0;}
+.st_social ul li {min-height: 50px !important;}
+.st_social ul li {background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/social_devider.gif") no-repeat scroll right center;color: #afafaf;float: left;font-size: 10px;font-weight: 500;line-height: 18px;list-style: outside none none;margin-right: 20px;min-height: 68px;padding-right: 20px;
+width: auto;}
+.st_social ul li a {display: block;height: 40px;width: 40px;}
+.strleft a {color: #a8a8a8;font-size: 14px;font-weight: 400;text-decoration: none;}
+.st_social ul li .icon_f {background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png") no-repeat scroll -23px -778px;display: block;height: 37px;width: 46px;
+}*/
+
+
+/*** STORY LIKE ***/
+.likedisdiv { border-bottom: 1px dotted #ccc; border-top: 1px dotted #ccc; color: #9a9a9a; font: 100 18px/32px Roboto,sans-serif; margin-bottom: 10px; overflow: hidden; padding: 10px 0 0; text-align: center; text-transform: uppercase;}
+.st_social { float: left; overflow: hidden; width: auto;}
+.st_social ul { margin: 0; padding: 0; list-style:none;}
+.st_social ul li { background: rgba(0, 0, 0, 0) none repeat scroll 0 0; margin-right: 10px; padding: 0; float:left}
+.st_social ul li a { display: block; height: 40px; width: 40px;}
+.st_social ul li .icon_c { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png") no-repeat scroll -188px -778px; display: block; height: 37px; width: 46px;}
+.st_social ul li .icon_f { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png") no-repeat scroll -23px -778px; display: block; height: 37px; width: 46px;}
+.likecount { color: #208302; font: 700 22px/22px roboto,serif; margin: 0 5px;}
+.dislcount { color: #ed0302; font: 700 22px/22px roboto,serif; margin: 0 5px;}
+.st_social ul li .icon_t { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png") no-repeat scroll -79px -778px; display: block; height: 37px; width: 46px;}
+.st_social ul li .icon_gp { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home-New.png") no-repeat scroll -134px -778px; display: block; height: 37px; width: 46px;}
+.st_social ul li { min-height: 50px !important;}
+.total_shares span { color: #000 !important; display: block; font-size: 20px; font-weight: bold; line-height: 20px; text-align: center;}
+.like_dislike_area { position: relative; top: 15px; width: 400px !important; float:right;}
+.like_dislike_area .lkedislake-text { float: left; font-weight: 300; line-height: 40px; width: auto;}
+.likedislike-action { float: right; width: auto;}
+.likedislike-action a, .likedislike-action span { float: left;}
+.likeimg { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -329px -337px; cursor: pointer; display: inline-block; height: 35px; margin-bottom: -3px; width: 33px;}
+.likedislike-action span { font-weight: 500; line-height: 41px; margin-right: 10px;}
+.likedislike-action a, .likedislike-action span { float: left;}
+.strleft a { color: #a8a8a8; font-size: 14px; font-weight: 400; text-decoration: none;}
+.dislikeimg { background: rgba(0, 0, 0, 0) url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png") repeat scroll -283px -337px; cursor: pointer; display: inline-block; height: 35px; margin-bottom: -4px; width: 33px;}
+p.more-news { background: #fbf9fa none repeat scroll 0 0; border: 1px solid #efefef; color: #737373;font-size: 14px !important; line-height:16px !important; padding:8px 15px 8px 15px; margin-top:20px !important; margin-bottom:40px !important;}
+p.more-news a { color: #193984; font-weight: 500; text-decoration: none !important;}
+img.pf_img { border-radius:100%; -ms-border-radius:100%; -o-border-radius:100%; -moz-border-radius:100%; display:none; position:absolute; top:-25px; left:50%; }
+.story_body_h p a { position:relative}
+.story_body_h a:hover .pf_img { display: block;}
+
+/***BREADCRUMBS ***/
+.breadcrumb { background:none; margin-left:0px; padding-left:0px;}
+.breadcrumb a { color:#000}
+
+
+.schedule_head { margin:0px; padding:0px;}
+.schedule_section { margin:0px; padding:0px;}
+.schedule_section table { margin:0px; padding:0px; background:#fff;}
+.schedule_section table td { border-bottom:1px solid #f4f4f4; padding:5px; margin:0px; font-size:12px;}
+
+/*** SCHEDULE CSS **/
+h2.head { color: #9a9a9a;  display: block; font-size: 24px; font-weight: 500; line-height: 24px; margin: 15px 0;text-transform: uppercase;}
+.schedule_head table thead tr td { color: #fff ; font-size: 18px;font-weight: 600;line-height: 32px;}
+.schedule_head { background-color: #b0b0b0; float: left; width:100%;}
+.schedule_section table, .schedule_head table { text-align: center;}
+.schedule_head table thead tr td {color: #fff; font-size: 18px; font-weight: 600; line-height: 32px;}
+
+#schedulesec {height: 1880px;}
+#schedulesec .mCSB_scrollTools .mCSB_dragger{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/scroll_pane.gif) no-repeat;
+cursor: pointer; height: 18px !important; left: 5px; width: 100%; z-index: 1;}
+.schedule_section { -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none;
+    -moz-border-top-colors: none; background-color: #fff; border-color: -moz-use-text-color #dadada #dadada; border-image: none;
+    border-style: none solid solid; border-width: 0 11px 11px; float: left; width: 100%; margin-bottom:20px}
+.schedule_section table tr td {color: #4c4c4c;font-size: 13px; line-height: 18px; padding: 8px 0 24px;}
+
+.points-tally {background: #055276;height: 54px; line-height: 54px; width: 100%;}
+.points-tally h2 { color: #fffc00; float: left;margin-left: 15px; margin-right: 10px; font-size:24px; line-height:54px; margin-top:0px; margin-bottom:0px;}
+.points-tally h2 strong { color: #ffffff;}
+.point-tally-icon {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/icon-trophy.png) no-repeat;display: block; float: left;
+    height: 51px; width: 56px;}
+.pointtally-box-section { border: 5px solid #c9c9c8; float: left; margin-top: 10px; width: 100%; margin-bottom:20px}
+.pointtally-box table tr:nth-child(2n+1) { background: #ffffff;}
+.pointtally-box table tr:nth-child(2n) { background: #eeeeec}
+.pointtally-box table tr td {color: #959595; font-family: roboto; font-size: 13px;padding: 15px;}
+
+/*a { position:relative}*/
+.breadcrumb { font-size:15px;}
+.ad_cont_h{ width:300px; margin:0 auto }
+
+.search_cont{ padding:10px 0; background:#353535; display:none; position:absolute;z-index:111; width:100%;}
+.search_cont .form-control{ border-left:0; height:auto;}
+.search_cont .input-group-lg > .form-control, .search_cont .input-group-lg > .input-group-addon, .search_cont .input-group-lg > .input-group-btn > .btn { height: auto;}
+#sizing-addon1 { background: #fff;}
+.border-radius0{ border-radius:0 !important;}  
+#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img {width: 100%;height: 160px;}
+#main_story_page .story_body_h p:first-of-type:first-letter {float: left;color: #111;font-weight: bold;font-size: 60px !important;line-height: 56px !important;padding-right: 8px;padding-left: 0;}</style>
+#main_story_page .story_body_h b{display: block;color: #c00;} 
+.jw-slider-time{     margin-top: -10px !important;}
+
+#videoplayer{ width:100%; height:400px;}
+.copyright_bottom_mob { color: #a6a6a6;
+    font-size: 12px;
+    text-align: center; padding-top:8px; padding-bottom:8px; margin-bottom:0px;}
+	
+/*** Latest 15-3-15 css ***/
+.sponserd_outer_all_1 { /*margin:0px auto; width:1170px;*/}
+.sponserd_outer_all_1 iframe { margin:0px !important; padding:0px; width:100% !important; height:90px !important;}

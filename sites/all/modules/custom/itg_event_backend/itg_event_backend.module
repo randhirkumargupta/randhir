@@ -15,15 +15,18 @@
 function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
   // Form alter for event backend node
   if ($form_id == "event_backend_node_form") {
-    
+
+    $form['field_story_expiry_date'][LANGUAGE_NONE][0]['#title'] = $form['field_story_expiry_date'][LANGUAGE_NONE][0]['#title'] . ' <span class="form-required">*</span>';
+    $form['field_registration_close_date'][LANGUAGE_NONE][0]['#title'] = $form['field_registration_close_date'][LANGUAGE_NONE][0]['#title'] . ' <span class="form-required">*</span>';
+
     if ($form['field_step_completion']['und'][0]['value']['#default_value'] == '0') {
-         $form['actions']['itg_custom_button'] = array(
-          '#type' => 'submit',
-          '#value' => t('Save as Draft'),
-          '#submit' => array('node_form_submit', 'itg_event_backend_save_as_draft_submit_callback'),
-          '#weight' => -8,
-         );
-      }
+      $form['actions']['itg_custom_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save as Draft'),
+        '#submit' => array('node_form_submit', 'itg_event_backend_save_as_draft_submit_callback'),
+        '#weight' => -8,
+      );
+    }
     $form['actions']['submit']['#submit'][] = 'itg_event_save_initial_speaker_weight';
     if (isset($_GET['button_action']) || $form_state['clicked_button']['#name'] == 'previous') {
       //Hijack our errors so they don't display normally.
@@ -42,10 +45,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         unset($errors[$field]);
       }
     }
-//
-//    $form['field_associate_event_photo']['#suffix'] = '<div class="event-photo-des description">' . $form['field_associate_event_photo'][LANGUAGE_NONE]['#description'] . '</div>';
-//    $form['field_associate_event_video']['#suffix'] = '<div class="event-video-des description">' . $form['field_associate_event_video'][LANGUAGE_NONE]['#description'] . '</div>';
-//    $form['field_e_associate_highlights']['#suffix'] = '<div class="event-video-des description">' . $form['field_e_associate_highlights'][LANGUAGE_NONE]['#description'] . '</div>';
+
     $form['#after_build'][] = 'itg_event_backend_after_build';
     array_unshift($form['#validate'], "itg_event_backend_node_form_validate");
     $form['actions']['cancel'] = array(
@@ -95,8 +95,8 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     if ((arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == "edit") && $form['#node']->status == 1) {
       $form['field_event_start_date']['#attributes']['class'][] = 'date-disabled';
       $form['field_event_close_date']['#attributes']['class'][] = 'date-disabled';
-      $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
-      $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
+      // $form['field_story_expiry_date']['#attributes']['class'][] = 'date-disabled';
+      // $form['field_registration_close_date']['#attributes']['class'][] = 'date-disabled';
     }
 
     if (!empty($form['nid']['#value']) && arg(2) == 'edit') {
@@ -122,17 +122,19 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
     }
     // Add block of speekar order reorder.
     if (isset($_GET['step']) && $_GET['step'] == 'step_configuration' && is_numeric(arg(1))) {
-      $color_box_query = array("width" => "900", "height" => "600", "iframe" => "true");
+      $color_box_query = array("width" => "900", "height" => "600", "iframe" => "true", "current_event" => arg(1) , "scrolling" => "no");
       $color_box_class = array("class" => array("colorbox-load anchor-order-reorder"));
       $link_text = l(t('Click here'), "speaker-order-reorder/" . arg(1), array('query' => $color_box_query, 'attributes' => $color_box_class));
+      $link_text .= l(t('Past Speaker'), "itg-event-past-spekars", array('query' => $color_box_query, 'attributes' => $color_box_class));
+
       $link = '<div class="form-item form-type-textfield form-item-field-e-associate-highlights-und">
         <label for="widget-order-reorder">' . t("Speaker Order/Reorder") . ' </label>
         ' . $link_text . '
      </div>';
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
-      $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
+       $form['field_e_event_banner']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
-    
+
     $form['field_config_photo']['#access'] = FALSE;
     $form['field_config_video']['#access'] = FALSE;
     $color_box_query_config = array("width" => "900", "height" => "600", "iframe" => "true");
@@ -149,7 +151,14 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       $form['#steps']['step_second']->children[] = 'registration_config';
       $form['#step_children']['registration_config'] = 'step_second';
     }
-    
+    // url alias checkbox uncheck after node publish
+    if(arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+      $node_status = itg_event_backend_node_status(arg(1));
+      if($node_status == 1){
+        $form['#node']->path['pathauto'] = 0;
+        drupal_add_js('jQuery("#edit-path-pathauto").attr("checked", false);', array('type' => 'inline', 'scope' => 'footer'));
+      }
+    }
   }
 
   // Form alter for sponsor node
@@ -175,7 +184,6 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => 20,
     );
   }
-  
 }
 
 /**
@@ -184,10 +192,10 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
  * @param array $form_state
  */
 function itg_event_backend_save_as_draft_submit_callback($form, &$form_state) {
-  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination='.$_GET['destination'];
+  $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
   $_GET['destination'] = $redirect_path;
-  //$form_state['redirect'] = 'manage-event-backend-draft';
 }
+
 /**
  * Implements alter message function().
  * @param array $form
@@ -261,59 +269,109 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       }
     }
   }
-  if(!isset($form['field_event_highlights']['#tabwise'])){
-  foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
-    if (is_numeric($key)) {
-      $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
-      if (count(array_unique($event_high_value)) < count($event_high_value)) {
-        form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', 'You have already selected this story');
+  /*if (!isset($form['field_event_highlights']['#tabwise'])) {
+    foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
+      if (is_numeric($key)) {
+        if (!empty($form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'])) {
+          $event_high_value[$key] = $form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'];
+        }
+        if (!empty($event_high_value) && isset($event_high_value)) {
+          if (count(array_unique($event_high_value)) < count($event_high_value)) {
+            form_set_error('field_event_highlights][' . LANGUAGE_NONE . '][' . $key . '][field_associate_story_event_high', t('You have already selected this story'));
+          }
+        }
+      }
+    }
+  }*/
+
+  if(!empty($form_state['values']['field_event_tabs'])){
+    foreach ($form_state['values']['field_event_tabs'][LANGUAGE_NONE] as $key => $event_tabs) {
+      if (is_numeric($key)) {
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value'])){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter Tab URL.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_sef'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_sef', t('Please enter Tab SEF.'));
+        }
+        
+        if ($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url') {
+          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL) && !empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'])) {
+              form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter valid Tab External URL.'));  
+            }
+        }
       }
     }
   }
-  }
 
-
+  
+  
   $start_date = strtotime($form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value']);
   $end_date = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_start = strtotime($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']);
+  $current_date = time();
+  if (empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time'])) || empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time'])) {
+    drupal_get_messages();
+    if (empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value']['time']))) {
+      form_set_error('field_story_expiry_date', t('Please enter time in Start date'));
+    }
+    if (empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']) && (isset($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']['time']))) {
+      form_set_error('field_registration_close_date', t('Please enter time in Close date'));
+    }
+  }
 
+  if ($form_state['values']['field_registration_date_checkbox'][LANGUAGE_NONE][0]['value'] == 1) {
+    if (empty($form_state['values']['field_story_expiry_date'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_story_expiry_date', t('Registration start date is required.'));
+    }
+
+    if (empty($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value'])) {
+      form_set_error('field_registration_close_date', t('Registration close date is required.'));
+    }
+  }
   // node insert validation
   if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'event-backend') {
+    if ($current_date >= $start_date) {
+      // for data seeding //form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
+    }
+    if ($current_date >= $end_date) {
+      // for data seeding //form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
+    }
+    if ($current_date >= $registration_start && !empty($registration_start)) {
+     // for data seeding // form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
+    }
+    if ($current_date >= $registration_close && !empty($registration_close)) {
+      // for data seeding //form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
+    }
+  }
+  /*elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
+    $status = itg_event_backend_node_status(arg(1));
+    //if ($status != 1) {
     if ($current_date >= $start_date) {
       form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
     }
     if ($current_date >= $end_date) {
       form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
     }
-    if ($current_date >= $registration_start) {
+    if ($current_date >= $registration_start && !empty($registration_start)) {
       form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
     }
-    if ($current_date >= $registration_close) {
+    if ($current_date >= $registration_close && !empty($registration_close)) {
       form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
     }
-  }
-  elseif (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit') {
-    $status = itg_event_backend_node_status(arg(1));
-    if ($status != 1) {
-      if ($current_date >= $start_date) {
-        form_set_error('field_event_start_date', t('Event start date must be greater than current date & time.'));
-      }
-      if ($current_date >= $end_date) {
-        form_set_error('field_event_close_date', t('Event close date must be greater than current date & time.'));
-      }
-      if ($current_date >= $registration_start) {
-        form_set_error('field_story_expiry_date', t('Registration start date must be greater than current date & time.'));
-      }
-      if ($current_date >= $registration_close) {
-        form_set_error('field_registration_close_date', t('Registration close date must be greater than current date & time.'));
-      }
-    }
-  }
+    //}
+  }*/
 
-  if ($registration_close <= $registration_start) {
+  if ($registration_close <= $registration_start && (!empty($registration_close) || !empty($registration_start))) {
     form_set_error('field_story_expiry_date', t('Registration start date must be less than registration close date.'));
   }
+
   if ($end_date <= $start_date) {
     form_set_error('field_event_close_date', t('Event close date must be greater than event start date & time.'));
   }
@@ -322,41 +380,101 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   }
 
   $event_type = $form_state['values']['field_event_type'][LANGUAGE_NONE][0]['value'];
-  if($event_type == 'paid'){
-    foreach($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
-        if (is_numeric($key)) {
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee is required.'));
+  $early_bird_check = $form_state['values']['field_early_bird'][LANGUAGE_NONE][0]['value']; //early_bird_offer
+
+  if ($event_type == 'paid') {
+    foreach ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+      if (is_numeric($key)) {
+          if($early_bird_check != 'early_bird_offer') {
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Ticket Type is required for group '.($key + 1)));
+            }
+            
+            // check duplicate ticket type
+            if (!empty($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'])) {
+              $ticket_type_value[$key] = $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'];
+            }
+            if (!empty($ticket_type_value) && isset($ticket_type_value)) {
+              if (count(array_unique($ticket_type_value)) < count($ticket_type_value)) {
+                form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('You have selected duplicate ticket type.'));
+              }
+            }
+            
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee is required group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required group '.($key + 1)));
+            }
+            
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member) group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member) group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required group '.($key + 1)));
+            }
           }
-          
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] == '') {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) is required.'));
-          }
-          
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
-          }
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Participate type is required.'));
-          }
-          
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_individual_registration_fe'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value']) {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_individual_registration_fe', t('Individual Registration Fee should be less then Group Registration Fee (for 5 member)'));
-          }
-          
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_5'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value']) {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_5', t('Group Registration Fee (for 5 member) should be less then Group Registration Fee (upto 10 member).'));
-          }
-          
-          if($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_group_registration_fee_10'][LANGUAGE_NONE][0]['value'] == '') {
-            form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_group_registration_fee_10', t('Group Registration Fee (upto 10 member) is required.'));
-          }
-          
-          
-        }
+      }
     }
-  } 
-  
+  }
+  /*   * **Early Bird Offer Fields****** */
+  if ($event_type == 'paid') {
+    foreach ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE] as $key => $field_collection_reg) {
+      if (is_numeric($key)) {
+        if($early_bird_check == 'early_bird_offer') {
+    
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('Ticket Type is required group '.($key + 1)));
+            }
+            // check duplicate ticket type
+            if (!empty($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'])) {
+              $ticket_type_value[$key] = $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_participate_type'][LANGUAGE_NONE][0]['tid'];
+            }
+            if (!empty($ticket_type_value) && isset($ticket_type_value)) {
+              if (count(array_unique($ticket_type_value)) < count($ticket_type_value)) {
+                form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_participate_type', t('You have selected duplicate ticket type.'));
+              }
+            }
+            
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_individual_regi', t('Early Bird Individual Registration Fee is required group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) is required group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required group '.($key + 1)));
+            }
+            
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_individual_regi'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][	field_early_bird_individual_regi', t('Early Bird Individual Registration Fee should be less then Early Bird Group Registration Fee (for 5 member) group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_registrat'][LANGUAGE_NONE][0]['value'] > $form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value']) {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_registrat', t('Early Bird Group Registration Fee (for 5 member) should be less then Early Bird Group Registration Fee (upto 10 member) group '.($key + 1)));
+            }
+
+            if ($form_state['values']['field_ticket_group_type'][LANGUAGE_NONE][$key]['field_early_bird_group_10_reg'][LANGUAGE_NONE][0]['value'] == '') {
+              form_set_error('field_ticket_group_type][' . LANGUAGE_NONE . '][' . $key . '][field_early_bird_group_10_reg', t('Early Bird Group Registration Fee (upto 10 member) is required group '.($key + 1)));
+            }
+        }
+      }
+    }
+  }
+
   if (($event_type == 'paid' || $event_type == 'free') && $form_state['values']['field_no_of_tickets'][LANGUAGE_NONE][0]['value'] == '' && (isset($form_state['storage']['step']) && $form_state['storage']['step'] == "step_second") && (!isset($form['field_no_of_tickets']['#tabwise']))) {
     form_set_error('field_no_of_tickets', t('Please enter No. of Tickets'));
   }
@@ -365,9 +483,14 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   foreach ($form_state['values']['field_program_schedule'][LANGUAGE_NONE] as $key => $value) {
     $start_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value'];
     $end_time = $form_state['values']['field_program_schedule'][LANGUAGE_NONE][$key]['field_start_time'][LANGUAGE_NONE][0]['value2'];
+    if(is_object($end_time)) {
+      drupal_get_messages();
+      form_set_error('field_program_schedule][' . LANGUAGE_NONE . '][' . $key . '][field_start_time', t('Start time must be less than end time.'));
+    }else {
     if ($start_time > $end_time) {
       drupal_get_messages();
-      form_set_error('field_start_time', t('Start time must be less than end time.'));
+      form_set_error('field_program_schedule][' . LANGUAGE_NONE . '][' . $key . '][field_start_time', t('Start time must be less than end time.'));
+     }
     }
   }
   // media validation
@@ -389,7 +512,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
  * @return array
  */
 function itg_event_backend_sponsor($form, &$form_state) {
-  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_sponsor.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_sponsor.js', array('weight' => 3, 'scope' => 'footer'));
   global $user, $base_url;
   unset($form['metatags']['intro_text']['#markup']);
   $form['path']['pathauto']['#title'] = t('Generate automatic Sef URL');
@@ -435,7 +558,7 @@ function itg_event_backend_after_build($form, &$form_state) {
       '#weight' => -9,
     );
   }
-  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3));
+  drupal_add_js(drupal_get_path('module', 'itg_event_backend') . '/js/itg_event_backend.js', array('weight' => 3, 'scope' => 'footer'));
   if (isset($form_state['values']['nid'])) {
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -469,9 +592,20 @@ function itg_event_backend_after_build($form, &$form_state) {
       $highlight_options[$program_daywise . '--' . $program_title . '--' . $start_time . '--' . $end_time] = t($day_value[0] . ' - ' . $program_title . ' - ' . $start_time . ' to ' . $end_time);
       //$media_options[$program_daywise] = t($program_daywise);
       $media_options = $highlight_options;
-      if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//      if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      }
+      
+      
+       if (!empty($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_program_schedule']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_program_schedule']['und'][$key]['field_daywise_event']['und'] != $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
         $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_program_schedule']['und'][$key]['field_daywise_event']['und'];
+        
+       }
       }
       unset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated']);
       $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
@@ -480,14 +614,34 @@ function itg_event_backend_after_build($form, &$form_state) {
 
   foreach ($form['field_event_highlights'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      }
+      
+       if (!empty($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_event_highlights']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_event_highlights']['und'][$key]['field_daywise_event']['und'] != $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_event_highlights']['und'][$key]['field_daywise_event']['und'];
+        
+       }
       }
-      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+      
+       if (!empty($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_event_highlights']['und'][$key]['field_programe_title']['und'])) && $form_state['input']['field_event_highlights']['und'][$key]['field_programe_title']['und'] != $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value']) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_event_highlights']['und'][$key]['field_programe_title']['und'];
+        
+       }
       }
+//      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+//      }
 
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#options'] = $highlight_options;
@@ -498,38 +652,56 @@ function itg_event_backend_after_build($form, &$form_state) {
   // event media
   foreach ($form['field_event_media'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
-      if (isset($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
-        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      }
-
+      $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"> *</span>';
+      
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options;
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
-    }
-  }
-  
-  // event sponsors Daywise
-  
-  foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
-    if (is_numeric($key)) {
-      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"></span>';
-      if (isset($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      if (isset($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      }
+//      
+      
+      if (!empty($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_event_media']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_event_media']['und'][$key]['field_daywise_event']['und'] != $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_event_media']['und'][$key]['field_daywise_event']['und'];
+        
+       }
       }
 
-      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options;
-      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
-    }
+      }
   }
- 
+
+  // event sponsors Daywise
+  $sponsor_options_event_wise = array('event_wise_sponsor' => 'Event Wise Sponsor');
+  $media_options_sponsor = $media_options + $sponsor_options_event_wise;
+  foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
+    if (is_numeric($key)) {
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'];// . '<span title="This field is required." class="form-required"></span>';
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options_sponsor;
+      $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
+    if (!empty($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+      if((empty($form_state['input']['field_associate_sponsors']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_associate_sponsors']['und'][$key]['field_daywise_event']['und'] != $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }else{
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_associate_sponsors']['und'][$key]['field_daywise_event']['und'];
+        //$form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
+      }
+      }
+  }
+
   // Next and Save button access according steps step_configuration
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_configuration')) {
     $form['actions']['submit2']['#access'] = FALSE;
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
     $form['metatags']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
+    $form['field_e_from_the_chairman']['#prefix'] = '<h2 id="title-from_the_chairman" class="story-title">From the chairman Details</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
@@ -541,36 +713,17 @@ function itg_event_backend_after_build($form, &$form_state) {
   }
 
   $form['title']['#title'] = 'Event Title';
-//  $form['field_group_registration_fee_5']['#states'] = array(
-//    'visible' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//    'required' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//  );
-//  $form['field_group_registration_fee_10']['#states'] = array(
-//    'visible' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//    'required' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//  );
-//  $form['field_individual_registration_fe']['#states'] = array(
-//    'visible' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//    'required' => array(
-//      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
-//    ),
-//  );
+
   $form['field_ticket_group_type']['#states'] = array(
     'visible' => array(
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
   );
-  
+  $form['field_early_bird']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
+    ),
+  );
   $form['field_no_of_tickets']['#states'] = array(
     'visible' => array(
       array(':input[name="field_event_type[und]"]' => array('value' => 'paid')),
@@ -584,12 +737,25 @@ function itg_event_backend_after_build($form, &$form_state) {
     ),
   );
 
-      $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
-      //Hide add more button, if ticket are not available
-        if (isset($max_delta_config) && $max_delta_config >= 4) {
-          unset($form['field_ticket_group_type']['und']['add_more']);
-        }
-    
+  $form['field_registration_close_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_registration_date_checkbox[und][1]"]' => array('checked' => TRUE),
+    ),
+  );
+
+  $form['field_story_expiry_date']['#states'] = array(
+    'visible' => array(
+      ':input[name="field_registration_date_checkbox[und][1]"]' => array('checked' => TRUE),
+    ),
+  );
+
+  $max_delta_config = $form['field_ticket_group_type'][LANGUAGE_NONE]['#max_delta'] + 1;
+
+  //Hide add more button, if ticket are not available
+  if (isset($max_delta_config) && $max_delta_config >= 4) {
+    unset($form['field_ticket_group_type']['und']['add_more']);
+  }
+
   return $form;
 }
 
@@ -812,7 +978,7 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_backend_tab_form_display_block', array('data' => ''));
       break;
     case 'event_header_menu':
-      $block['content'] = theme('event_header_menu', array('data' => ''));
+      $block['content'] = theme('event_header_menu', array('data' => itg_event_backend_get_event_node('node')));
       break;
     case 'event_header_adds':
       $block['content'] = theme('event_header_adds', array('data' => ''));
@@ -821,15 +987,14 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_sponsor_tab_form_display_block', array('data' => ''));
       break;
     case 'program_tab_block':
-      $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
+      $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab(), 'host_node' => itg_event_backend_get_event_node('node')));
       break;
     case 'post_event_block':
-      $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab()));
+      $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab(), 'host_node' => itg_event_backend_get_event_node('node')));
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
       $data = '';
-      //$data['itg_ad'] = get_ad_script($page_name);
       $block['content'] = theme('ad_right_sidebar_block1', array('data' => $data));
       break;
     case 'tweet_right_sidebar_event':
@@ -901,7 +1066,15 @@ function itg_event_backend_views_pre_render(&$view) {
 function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   // Get the Form Id
   if ($form["#id"] == 'views-exposed-form-Event-backend-page' || $form['#id'] == 'views-exposed-form-Event-backend-page-1') {
-    $form['title']['#autocomplete_path'] = 'content-title-list/event_backend/autocomplete';
+    $form['title']['#autocomplete_path'] = 'content-title-event/active/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') { // for event close
+    $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
+    $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
   if ($form["#id"] == 'views-exposed-form-Sponsor-page') {
@@ -922,7 +1095,7 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
       '#prefix' => '<div id="custom-event-type">',
       '#suffix' => '</div>'
     );
-    drupal_add_js("jQuery(document).ready(function() { jQuery('#custom-event-type').width('125'); });", 'inline');
+    drupal_add_js("jQuery(document).ready(function() { jQuery('#custom-event-type').width('125'); });", array('type' => 'inline', 'scope' => 'footer'));
   }
   if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') {
     $form['event_types'] = array(
@@ -971,7 +1144,7 @@ function itg_event_backend_node_access($node, $op, $account) {
 
   if (isset($node->type) && ($node->type == 'event_backend') && $node_edit) {
 
-      if ($op == 'update' && !(SITE_ADMIN)) {
+    if ($op == 'update' && !(SITE_ADMIN)) {
       return NODE_ACCESS_DENY;
     }
   }
@@ -983,7 +1156,7 @@ function itg_event_backend_node_access($node, $op, $account) {
  * {@inheritdoc}
  */
 function itg_event_backend_node_insert($node) {
-  if ($node->type == 'event_backend') {    
+  if ($node->type == 'event_backend') {
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'insert');
   }
@@ -995,9 +1168,9 @@ function itg_event_backend_node_insert($node) {
  */
 function itg_event_backend_node_update($node) {
   if ($node->type == 'event_backend') {
-      event_url_save($node);    
+    event_url_save($node);
     if ($node->domains != '1' && $_GET['step'] == 'step_configuration') {
-      //itg_event_backend_insert_into_redirect($node); me
+      //itg_event_backend_insert_into_redirect($node);
     }
     $event_start_date_time = strtotime($node->field_event_start_date[LANGUAGE_NONE][0]['value']);
     itg_event_backend_insert_event_publish_details($node->nid, $event_start_date_time, 'update');
@@ -1085,9 +1258,28 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid = pic.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
   $query->condition('n.nid', $spk_id, '=');
-  // $query->condition('designation.bundle', 'reporter', '=');
+  $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();
   return $result;
+}
+
+/**
+ * Implements function for get occupation on event home page
+ */
+function itg_event_backend_occupation_home($spk_id) {
+  $occupation_query = db_select('field_data_field_celebrity_pro_occupation', 'occupation');
+  $occupation_query->fields('ttm', array('name'));
+  $occupation_query->leftjoin('taxonomy_term_data', 'ttm', 'ttm.tid = occupation.field_celebrity_pro_occupation_tid');
+  $occupation_query->condition('occupation.entity_id', $spk_id, '=');
+  $occu_result = $occupation_query->execute();
+  $occu_name = '';
+  if (!empty($occu_result)) {
+    foreach ($occu_result as $o_res) {
+      $occupation_name[] = $o_res->name;
+    }
+    $occu_name = implode(' / ', $occupation_name);
+  }
+  return $occu_name;
 }
 
 /**
@@ -1095,14 +1287,8 @@ function itg_event_backend_get_speaker_details($spk_id) {
  * @param str $daywise
  * @return array
  */
-function itg_event_backend_get_session_photo_video($daywise) {
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
-  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
-  $query->fields('daywise', array('field_daywise_event_value'));
-  $query->fields('media', array('field_event_media_value'));
-  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
-  $result = $query->execute();
+function itg_event_backend_get_session_photo_video($daywise, $nid = NULL) { 
+  $result = itg_event_backend_event_field_collection_media($daywise, $nid);
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
     if (!empty($daywise_detail[$value->field_event_media_value]->field_event_photo)) {
@@ -1123,21 +1309,22 @@ function itg_event_backend_get_session_photo_video($daywise) {
  * @param str $daywise
  * @return array
  */
-function itg_event_backend_get_session_sponsor($daywise) {
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
+function itg_event_backend_get_session_sponsor($daywise, $nid = NULL) {
+  //$query = db_select('node', 'n');
+  $query = db_select('field_data_field_associate_sponsors', 'media');
+  //$query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
   $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_associate_sponsors_value');
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_associate_sponsors_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $query->condition('daywise.bundle', 'field_associate_sponsors', '=');
+  $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
   foreach ($result as $value) {
-
     $daywise_detail = entity_load('field_collection_item', array($value->field_associate_sponsors_value));
     if (!empty($daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor)) {
       $session['sponsor'] = $daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor[LANGUAGE_NONE][0]['target_id'];
     }
-   
   }
   return $session;
 }
@@ -1146,26 +1333,35 @@ function itg_event_backend_get_session_sponsor($daywise) {
  * Implement function to get associated story
  * @return array
  */
-function itg_event_backend_get_session_story_title($daywise, $font_color) {
-
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_highlights', 'eh', 'n.nid = eh.entity_id');
-  $query->join('field_data_field_programe_title', 'pt', 'pt.entity_id = eh.field_event_highlights_value');
-  $query->fields('pt', array('field_programe_title_value'));
-  $query->fields('n', array('nid'));
-  $query->fields('eh', array('field_event_highlights_value'));
-  $query->condition('pt.field_programe_title_value', $daywise, '=');
-  $result = $query->execute();
-
+function itg_event_backend_get_session_story_title_move_field($daywise, $font_color, $nid = NULL) { 
+  $result = itg_event_backend_event_field_collection_media($daywise, $nid);
+  $key = 0;
+  $story_title = '';
   foreach ($result as $value) {
-    $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
-    $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
-    $story_title = itg_common_get_node_title($story_nid);
+    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
+    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
     $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
+    $story_title = $story_detail['title'];
+    $session[$key]['story_title'] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session[$key]['story_details'] = $story_detail;
+    $key++;
   }
   return $session;
+}
+
+/**
+ * Implement function return fieldcollection
+ */
+function itg_event_backend_event_field_collection_media($daywise, $nid = NULL) {
+  $query = db_select('field_data_field_event_media', 'media');
+  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
+  $query->fields('daywise', array('field_daywise_event_value'));
+  $query->fields('media', array('field_event_media_value'));
+  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $query->condition('daywise.bundle', 'field_event_media', '=');
+  $query->condition('media.entity_id', $nid, '=');
+  $result = $query->execute();
+  return $result;
 }
 
 /**
@@ -1188,6 +1384,7 @@ function itg_event_get_story_details($nid) {
     $resu['uri'] = $rel->uri;
     $resu['kicker'] = $rel->field_story_kicker_text_value;
     $resu['nid'] = $rel->nid;
+    $resu['title'] = $rel->title;
   }
   return $resu;
 }
@@ -1199,12 +1396,6 @@ function itg_event_backend_menu() {
   $items['itg-event-test'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
-  );
-
-  $items['programme'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
-    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
@@ -1275,13 +1466,18 @@ function itg_event_backend_menu() {
     'access callback' => TRUE,
     'theme callback' => 'itg_event_backend_default_node_theme',
   );
+  $items['event/%/%/eventpage'] = array(
+    'page callback' => 'itg_event_backend_page',
+    'access callback' => TRUE,
+    'theme callback' => 'itg_event_backend_default_node_theme',
+  );
   return $items;
 }
 
 /**
  * Implement callback for theme
  */
- function itg_event_backend_default_node_theme(){
+function itg_event_backend_default_node_theme() {
   return 'itg';
 }
 
@@ -1299,6 +1495,12 @@ function itg_event_backend_page() {
  * @param object reference $query
  */
 function itg_event_backend_views_query_alter(&$view, &$query) {
+  if ($view->name === 'past_speaker_event' && $view->current_display == 'block_1') {
+    if ($query->where[1]['conditions'][2]['field'] == 'itg_widget_order.cat_id') {
+      $query->where[1]['conditions'][2]['value'] = arg(1);
+    }
+  }
+
   if (isset($view->name) && $view->name === 'Event_backend') {
     if (isset($_GET['event_types']) && $_GET['event_types'] == 'closed') {
       $joins = new views_join;
@@ -1319,8 +1521,7 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
       );
 
       array_push($query->where[1]['conditions'], $event_end_where_condition);
-    }
-    else {
+    }elseif(empty($_GET['event_types'])) {
       $joins = new views_join;
       $joins->construct('field_data_field_event_close_date', 'node', // left table
           'nid', // left field
@@ -1404,17 +1605,11 @@ function itg_event_backend_views_query_alter(&$view, &$query) {
 function itg_event_backend_get_event_node($whole_node = NULL) {
   global $base_url;
   $arg = arg();
-  $node = ''; //shravan
+  $node = '';
   if (module_exists('redirect')) {
-    /* $query = db_select('redirect', 'red'); me
-      $query->fields('red', array('source'));
-      $query->condition('redirect', $base_url, '=');
-      $result = $query->execute()->fetchField();
-      $event_id = explode('node/', $result); */
 
     if (!empty($whole_node)) {
       if ($arg[0] == 'event') {
-        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
         $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
         $node = node_load($event_nid[1]);
@@ -1422,29 +1617,18 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         $node = node_load($arg[1]);
       }
-      /* else { me
-        if (!empty($event_id[1])) {//shravan
-        $node = node_load($event_id[1]);
-        }
-        } */
+
       return $node;
     }
     else {
       if ($arg[0] == 'event') {
-        //$path = drupal_lookup_path("source", $arg[0] . '/' . $arg[1]);
         $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
-        $node = node_load($event_nid[1]);
-        return $node->nid;
+        return $event_nid[1];
       }
-      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {//shravan
+      elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         return $arg[1];
       }
-      /* else { me
-        if (!empty($event_id[1])) {//shravan
-        return $event_id[1];
-        }
-        } */
     }
   }
 }
@@ -1457,21 +1641,12 @@ function itg_event_get_host_name() {
   global $base_url;
   $arg = arg();
   if ($arg[0] == 'event') {
-    //$host = $base_url . '/' . $arg[0] . '/' . $arg[1];
     $host = $base_url . '/' . $arg[1] . '/' . $arg[2];
   }
   elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
     $host = $base_url . '/' . drupal_get_path_alias('node/' . $arg[1]);
   }
-  /* else { me
-    if (module_exists('domain')) {
-    $query = db_select('domain', 'd');
-    $query->fields('d', array('subdomain', 'scheme'));
-    $query->condition('domain_id', 1, '=');
-    $result = $query->execute()->fetchAssoc();
-    $host = $result['scheme'] . '://' . $result['subdomain'];
-    }
-    } */
+
   return $host;
 }
 
@@ -1495,32 +1670,13 @@ function itg_event_get_host_name_for_all_events($nid = NULL) {
 }
 
 /**
- * Get domain using domain id
- * @return boolean
- */
-//function itg_event_backend_get_domain($domain_id) {
-//  if (module_exists('domain') && !empty($domain_id)) {
-//    $query = db_select('domain', 'd');
-//    $query->fields('d', array('subdomain'));
-//    $query->condition('d.domain_id', $domain_id, '=');
-//    $result = $query->execute()->fetchField();
-//    if ($result) {
-//      return $result;
-//    }
-//    else {
-//      return FALSE;
-//    }
-//  }
-//}
-
-/**
  * Get redirect table value
  * @param string $c_name
  * @param string $c_val
  * @return array
  */
 function itg_event_backend_get_redirect_record($c_name, $c_val) {
-  $records = ''; //shravan
+  $records = '';
   $query = db_select('redirect', 'r')
       ->fields('r');
   $query->condition('r.' . $c_name, $c_val, '=');
@@ -1564,7 +1720,7 @@ function itg_event_backend_vukkul_content($nid) {
   $n_title = "Event: " . $node->title;
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($event_author_name);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', external);
+  /*drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
@@ -1585,7 +1741,19 @@ function itg_event_backend_vukkul_content($nid) {
 
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
 
-               </script>';
+               </script>';*/
+  $output = '<script type="text/javascript">
+              var VUUKLE_CONFIG = {
+                    apiKey: "dc34b5cc-453d-468a-96ae-075a66cd9eb7",
+                    articleId: "' . $unique_id . '",
+                    title: "' . $n_title . '",
+                    authors: "' . $author . '",
+                    tags: "Event"                     
+                  };
+                  (function () 
+                    { var d = document, s = d.createElement("script"); s.src = "https://cdn.vuukle.com/platform.js"; (d.head || d.body).appendChild(s);}
+                  )();
+              </script>';             
   return $output;
 }
 
@@ -1595,39 +1763,7 @@ function itg_event_backend_vukkul_content($nid) {
  * @param object $node
  */
 function itg_event_backend_insert_into_redirect($node) {
-
-//  global $user;
-//  $domain = itg_event_backend_get_domain($node->domains);
-//
-//  if ($domain) {
-//    $path = 'http://' . $domain;
-//
-//    // Prepare for redirect table
-//    $redirect = new stdClass();
-//    redirect_object_prepare($redirect);
-//    $redirect->source = 'node/' . $node->nid;
-//    $redirect->redirect = $path;
-//    $redirect->language = 'und';
-//    $hash = redirect_hash($redirect);
-//    $redirect->hash = $hash;
-//    $redirect->uid = $user->uid;
-//    $redirect->type = 'redirect';
-//    $redirect->access = time();
-//    $redirect->count = 1;
-//    $redirect->status = 1;
-//
-//    // Prepare for domain source table
-//    $domain_source = new stdClass();
-//    redirect_object_prepare($domain_source);
-//    $domain_source->nid = $node->nid;
-//    $domain_source->domain_id = '-' . $node->domains;
-//
-//    $existing = itg_event_backend_check_old_rec($node->nid);
-//    if (!$existing) {
-//      drupal_write_record('redirect', $redirect);
-//      //drupal_write_record('domain_source', $domain_source);
-//    }
-//  }
+  
 }
 
 /**
@@ -1664,11 +1800,6 @@ function itg_event_backend_header_add_block() {
  */
 function itg_event_backend_convert_number_to_words($number) {
 
-  $hyphen = '-';
-  $conjunction = ' and ';
-  $separator = ', ';
-  $negative = 'negative ';
-  $decimal = ' point ';
   $dictionary = array(
     0 => 'zero',
     1 => 'one',
@@ -1691,86 +1822,18 @@ function itg_event_backend_convert_number_to_words($number) {
     18 => 'eighteen',
     19 => 'nineteen',
     20 => 'twenty',
+    21 => 'twenty one',
+    22 => 'twenty two',
+    23 => 'twenty three',
+    24 => 'twenty four',
+    25 => 'twenty five',
+    26 => 'twenty six',
+    27 => 'twenty seven',
+    28 => 'twenty eight',
+    29 => 'twenty nine',
     30 => 'thirty',
-    40 => 'fourty',
-    50 => 'fifty',
-    60 => 'sixty',
-    70 => 'seventy',
-    80 => 'eighty',
-    90 => 'ninety',
-    100 => 'hundred',
-    1000 => 'thousand',
-    1000000 => 'million',
-    1000000000 => 'billion',
-    1000000000000 => 'trillion',
-    1000000000000000 => 'quadrillion',
-    1000000000000000000 => 'quintillion'
   );
-
-  if (!is_numeric($number)) {
-    return false;
-  }
-
-  if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
-    // overflow
-    trigger_error(
-        'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX, E_USER_WARNING
-    );
-    return false;
-  }
-
-  if ($number < 0) {
-    return $negative . convert_number_to_words(abs($number));
-  }
-
-  $string = $fraction = null;
-
-  if (strpos($number, '.') !== false) {
-    list($number, $fraction) = explode('.', $number);
-  }
-
-  switch (true) {
-    case $number < 21:
-      $string = $dictionary[$number];
-      break;
-    case $number < 100:
-      $tens = ((int) ($number / 10)) * 10;
-      $units = $number % 10;
-      $string = $dictionary[$tens];
-      if ($units) {
-        $string .= $hyphen . $dictionary[$units];
-      }
-      break;
-    case $number < 1000:
-      $hundreds = $number / 100;
-      $remainder = $number % 100;
-      $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
-      if ($remainder) {
-        $string .= $conjunction . convert_number_to_words($remainder);
-      }
-      break;
-    default:
-      $baseUnit = pow(1000, floor(log($number, 1000)));
-      $numBaseUnits = (int) ($number / $baseUnit);
-      $remainder = $number % $baseUnit;
-      $string = convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
-      if ($remainder) {
-        $string .= $remainder < 100 ? $conjunction : $separator;
-        $string .= convert_number_to_words($remainder);
-      }
-      break;
-  }
-
-  if (null !== $fraction && is_numeric($fraction)) {
-    $string .= $decimal;
-    $words = array();
-    foreach (str_split((string) $fraction) as $number) {
-      $words[] = $dictionary[$number];
-    }
-    $string .= implode(' ', $words);
-  }
-
-  return $string;
+return $dictionary[$number];
 }
 
 /**
@@ -1781,31 +1844,31 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color, $event_ty
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->join('field_data_field_event_close_date', 'event_close_date', 'event_close_date.entity_id = n.nid');
+  $query->join('field_data_field_event_start_date', 'event_start_date', 'event_start_date.entity_id = n.nid');
   $query->join('field_data_field_event_types', 'event_types', 'event_types.entity_id = n.nid');
   $query->fields('event_close_date', array('field_event_close_date_value'));
+  $query->fields('event_start_date', array('field_event_start_date_value'));
   $query->condition('n.type', 'event_backend', '=');
   $query->condition('n.nid', $curr_event_id, '!=');
   $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
   $query->condition('event_types.field_event_types_tid', $event_type, '=');
   $query->condition('n.status', 1, '=');
-  $query->orderBy('n.created', 'DESC');
+  $query->orderBy('event_start_date.field_event_start_date_value', 'DESC');
   $result = $query->execute();
   $flash_back_link = '';
+  $count = 1;
   foreach ($result as $value) {
+    if($count == 1) {
+    $flash_back_link_top_nid = $value->nid;
+    }
     $flash_back_link .= '<li>' . l(t($value->title), 'node/' . $value->nid, array('attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
-//    $val[] = 'node/' . $value->nid;
-//    $detail['node/' . $value->nid] = array(
-//      'key' => 'node/' . $value->nid,
-//      'title' => $value->title
-//    );
+  $count++;
   }
-//  $redirect_event = itg_event_backend_redirect_flashback($val, $detail);
-//  foreach ($redirect_event as $final_event) {
-//    $flash_back_link .= '<li>' . l(t($final_event['title']), $final_event['redirect'], array('attributes' => array("style" => "color:$menu_font_color", 'target' => '_blank'))) . '</li>';
-//  }
+
   $output = '';
   if (!empty($flash_back_link)) {
-    $output = '<ul>' . $flash_back_link . '</ul>';
+    $output['menu'] = '<ul>' . $flash_back_link . '</ul>';
+    $output['top'] = $flash_back_link_top_nid;
   }
   return $output;
 }
@@ -1865,9 +1928,8 @@ function itg_event_backend_highlights_block_content() {
     $query->condition('fh.entity_id', $nid, '=');
     $highlights_nid = $query->execute()->fetchField();
     $highlights_node = node_load($highlights_nid);
-
     $output = '';
-    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
+    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">'.t('Highlights').'</h2><div class="wrap-listing">';
     $text = '';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
@@ -1878,8 +1940,11 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-
-    $output .= $text . '</div></div>';
+    if(!empty($text)) {
+      $output .= $text . '</div></div>';
+    }else{
+      $output = '';
+    }
     return $output;
   }
 }
@@ -1889,28 +1954,39 @@ function itg_event_backend_highlights_block_content() {
  * @param int $unique_id
  * @return string
  */
-function itg_event_backend_highlights_like_dislike($unique_id) {
-  
+function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL, $nid = NULL) {
+  $arg = arg();
   if (function_exists('itg_flag_get_count')) {
-    $like = itg_flag_get_count($unique_id, 'like_count');
-    $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+    $mongo_like_dislike = itg_flag_get_count($unique_id, 0);
+    //$dislike = itg_flag_get_count($unique_id, 'dislike_count');
   }
-  // get migrated count 
-  if(function_exists('itg_get_migrated_like_count')) {
-      $migrated_count = itg_get_migrated_like_count($unique_id);
+  // get migrated count
+  //node type check for migrated content
+  $type = itg_event_backend_get_node_type($arg[1]);
+  if (function_exists('itg_get_migrated_like_count')) {
+    if($type == 'photogallery') {
+    $migrated_count = itg_get_migrated_like_count($nid);
+    } else {
+    $migrated_count = itg_get_migrated_like_count($unique_id); 
+    }
   }
-  
-  $sum_of_likes = $like['like_count']+ $migrated_count[0]['like_count'];  
-  $sum_of_dislikes = $dislike['dislike_count']+ $migrated_count[0]['dislike_count'];  
+  $mongo_like_dislike['like_count'] = empty($mongo_like_dislike['like_count']) ? 0 : $mongo_like_dislike['like_count'];
+  $mongo_like_dislike['dislike_count'] = empty($mongo_like_dislike['dislike_count']) ? 0 : $mongo_like_dislike['dislike_count'];
+
+  $migrated_count[0]['like_count'] = empty($migrated_count[0]['like_count']) ? 0 : $migrated_count[0]['like_count'];
+  $migrated_count[0]['dislike_count'] = empty($migrated_count[0]['like_count']) ? 0 : $migrated_count[0]['dislike_count'];
+	
+	$sum_of_likes = $mongo_like_dislike['like_count'] + $migrated_count[0]['like_count'];
+  $sum_of_dislikes = $mongo_like_dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
   $like_count_common = '(' . $sum_of_likes . ')';
   $dislike_count_common = '(' . $sum_of_dislikes . ')';
-  
+
   $pid = "voted_" . $unique_id;
   $like = "no-of-likes_" . $unique_id;
   $dislike = "no-of-dislikes_" . $unique_id;
 
-  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
-  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" rel="' . $unique_id . '"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
+  $like_btn = '<div class="agbutton"><button class="btn-highlights-like" id="like_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-thumbs-o-up"></i> <span id="' . $like . '">' . $like_count_common . '</span></button>';
+  $dislike_btn = '<button class="btn-highlights-dislike" id="dislike_count" data-rel="' . $unique_id . '" data-type="'.$datatype.'"><i class="fa fa-thumbs-o-down"></i> <span id="' . $dislike . '">' . $dislike_count_common . '</span></button>';
   $error_msg = '<p class="error-msg" id="' . $pid . '"></p></div>';
   return $like_btn . $dislike_btn . $error_msg;
 }
@@ -1922,12 +1998,23 @@ function itg_event_backend_highlights_like_dislike($unique_id) {
 function itg_event_backend_live_content() {
   $nid = itg_event_backend_get_event_node();
   $title = itg_common_get_node_title($nid);
-  if (module_exists('itg_live_tv')) {
+  /*if (module_exists('itg_live_tv')) {
     $banner_video = itg_live_tv_page_video();
-  }
-  $video = '<div class="row top-block-highlight"><div class="highlights-video col-md-7"><h2 style="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
-  $highlights_content = '<div class="highlights-container col-md-5">' . itg_event_backend_highlights_block_content() . '</div></div>';
-  return $video . $highlights_content;
+  }*/
+  $banner_video = get_itg_variable('itg_webcast_iframe');
+  $live_tvClass = 'col-md-7';
+  $highlight_content = itg_event_backend_highlights_block_content();
+  if(empty($highlight_content)){
+		$live_tvClass = 'col-md-12';
+	}
+  $video = '<div class="row top-block-highlight"><div class="highlights-video '.$live_tvClass.'"><h2 class="live-event-title">' . $title . '</h2><div class="live-event-video">' . $banner_video . '</div></div>';
+  $highlights_content = '<div class="highlights-container col-md-5">' . $highlight_content . '</div></div>';
+  if(empty($highlight_content)){
+		return $video;
+	}else{
+		return $video . $highlights_content;
+	}
+  
 }
 
 /**
@@ -2048,6 +2135,7 @@ function itg_event_save_initial_speaker_weight(&$form, $form_state) {
       // Delete unused speakers
       db_delete('itg_widget_order')
           ->condition('nid', array($target_id), 'NOT IN')
+          ->condition('widget', $widget_name)
           ->condition('cat_id', $cat_id)
           ->execute();
     }
@@ -2162,7 +2250,7 @@ function update_itg_widget_order_table_data_for_speaker($form, &$form_state) {
   foreach ($draggable_view_data as $key => $value) {
     $weightcount = $weightcount + $value['weight'];
   }
-  //p($cat_id);
+
   // If made change is order then save otherwise skip to save.
   if ($weightcount) {
     db_delete('itg_widget_order')
@@ -2220,26 +2308,6 @@ function itg_event_backend_node_status($nid) {
   return $result;
 }
 
-
-/**
- * {@inheritdoc}
- * Implement for url structure in event
- */
-//function itg_event_backend_node_presave($node) {
-//  if ($node->type == 'event_backend') {
-//    //code by shravan alias
-//    
-//    if ($_GET['step'] == 'step_configuration') {
-//      $alias_title_new = explode('event/', $node->path['alias']);    
-//      if (empty($alias_title_new[1])) {
-//        $node->path['alias'] = 'event/'.$node->path['alias'];
-//      }
-//    }
-//    
-//    
-//  }
-//}
-
 /**
  * Implements function for alias save in event according custom menu (working on node update).
  * @param type object
@@ -2253,7 +2321,7 @@ function event_url_save($node) {
   else {
     $event_title = $node->path['alias'];
   }
-
+  
   foreach ($steps as $step) {
     if ($step == 'home') {
       $check_alias = $event_title;
@@ -2272,6 +2340,17 @@ function event_url_save($node) {
       }
     }
   }
+  foreach ($node->field_event_tabs[LANGUAGE_NONE] as $tab_menu) {
+    $tab_value = field_collection_item_load($tab_menu['value']);
+    if($tab_value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+ 	  $tab_alias = trim($tab_value->field_tab_sef[LANGUAGE_NONE][0]['value']);	
+	  $_check_alias = $event_title . '/' . $tab_alias;
+      if (itg_event_backend_alias_check($_check_alias)) {
+		$source = 'event/' . $event_title . '/eventpage/' . $tab_alias;
+        itg_event_backend_save_alias($source, $_check_alias);  
+	  }
+    }    
+  }
 }
 
 /**
@@ -2285,7 +2364,7 @@ function itg_event_backend_alias_check($alias) {
   //$query->condition('alias', $alias, '=');
   $query->condition('alias', '%' . db_like($alias), 'LIKE');
   $result = $query->execute()->fetchField();
-  if(empty($result)){
+  if (empty($result)) {
     return TRUE;
   }
 }
@@ -2296,6 +2375,174 @@ function itg_event_backend_alias_check($alias) {
  * @param type str
  */
 function itg_event_backend_save_alias($source, $alias) {
-    $path = array('source' => $source, 'alias' => $alias);
-    path_save($path);
+  $path = array('source' => $source, 'alias' => $alias);
+  path_save($path);
+}
+
+/**
+ * {@inheritdocs}.
+ */
+function itg_event_backend_token_info() {
+  $info['tokens']['node']['event_title'] = array(
+    'name' => t('Event Content type'),
+    'description' => t('Node title for event'), // this is so you see it in the big list
+  );
+  return $info;
+}
+
+/**
+ * {@inheritdocs}
+ */
+function itg_event_backend_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+    $sanitize = !empty($options['sanitize']);
+    if ($type == 'node' && !empty($data['node'])) {
+        $node = $data['node'];
+  
+        foreach ($tokens as $name => $original) {
+            switch ($name) {
+                    case 'event_title':
+                    $toreplace = $node->title;
+                    $replacements[$original] = $toreplace;
+                    break;
+            }
+        }
+    }
+    return $replacements;
+}
+
+/**
+ * Implement function for Tab Title
+ */
+function itg_event_backend_tab_title($node, $tab_sef) {
+
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    //$value = entity_load('field_collection_item', array($imagecollection['value']));
+    if($tab_sef == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_name'] = $value->field_tab_name[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_title'] = $value->field_tab_title[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef_url_radio'] = $value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef'] = $value->field_tab_sef[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_url'] = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_description'] = $value->field_tabs_description[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  return $tab_value;
+}
+
+/**
+ * Implement function for Tab menu
+ */
+function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font) {
+    $path_alias = drupal_get_path_alias('node/'.  $node->nid);
+    $flash_back_link = '<ul>';
+    $flash_back_link_top = '';
+    $key = 0;
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+      if($key == 0) {
+        if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link_top = l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $path_alias . '/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value']), array('html' => TRUE, 'attributes' => array("style" => "color:$tab_menu_font")));
+        }
+      }
+      if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias . '/'.trim($value->field_tab_sef[LANGUAGE_NONE][0]['value']), array('attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+      }
+    }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
+      $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
+       if($key == 0) {
+         if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link_top =  l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $external_url, array('html' => TRUE, 'external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+         }
+       }
+       if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $external_url, array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+       }
+    }
+    $key++;
+  }
+  $flash_back_link .= '</ul>';
+  $all_link = array('tab_top_menu' => $flash_back_link_top, 'tab_menu' => $flash_back_link);
+  return $all_link;
+}
+
+/**
+ * Implement function for return node color
+ */
+function itg_event_backend_page_domain($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('color', array('field_e_menu_bck_color_rgb'));
+  $query->leftjoin('field_data_field_e_event_banner', 'banner', 'banner.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_bck_color', 'color', 'color.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = banner.field_e_event_banner_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement funciton for sponsor details
+ */
+function itg_event_backend_sponsor_details($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('n', array('nid', 'title'));
+  $query->leftjoin('field_data_field_sponser_logo', 'logo', 'logo.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = logo.field_sponser_logo_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement funciton for Event Section detail
+ */
+function itg_event_backend_section_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fes', array('field_event_section_target_id'));
+  $query->leftjoin('field_data_field_event_section', 'fes', 'fes.entity_id = n.nid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    return $result[0]->field_event_section_target_id;
+  }
+  return FALSE;
+}
+
+/**
+ * Implement funciton for Event Section menu detail
+ */
+function itg_event_backend_section_menu_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title', 'nid'));
+  $query->fields('fesd', array('field_event_start_date_value'));
+  $query->fields('skt', array('field_story_kicker_text_value'));
+  $query->fields('fch', array('field_config_home_value'));
+  $query->fields('fcp', array('field_config_programme_value'));
+  $query->fields('fcs', array('field_config_speakers_value'));
+  $query->fields('dfcs', array('field_config_sponsors_value'));
+  $query->fields('dfcf', array('field_config_flashback_value'));
+  $query->fields('dfet', array('field_event_types_tid'));
+  $query->fields('femfc', array('field_e_menu_font_color_rgb'));
+  $query->fields('fehfc', array('field_e_highlighted_font_color_rgb'));
+  $query->fields('ffro', array('field_force_registration_open_value'));
+
+  $query->leftjoin('field_data_field_event_start_date', 'fesd', 'fesd.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_home', 'fch', 'fch.entity_id = n.nid');
+  $query->leftjoin('field_data_field_story_kicker_text', 'skt', 'skt.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_programme', 'fcp', 'fcp.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_speakers', 'fcs', 'fcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_sponsors', 'dfcs', 'dfcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_flashback', 'dfcf', 'dfcf.entity_id = n.nid');
+  $query->leftjoin('field_data_field_event_types', 'dfet', 'dfet.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_font_color', 'femfc', 'femfc.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_highlighted_font_color', 'fehfc', 'fehfc.entity_id = n.nid');
+  $query->leftjoin('field_data_field_force_registration_open', 'ffro', 'ffro.entity_id = n.nid');
+
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }

@@ -13,7 +13,7 @@
   global $base_url; 
   $nid = check_plain(arg(1));   
   $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $short_url = $actual_link;
   $fb_title = addslashes($node->title);
   $share_desc = '';
   $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
@@ -26,7 +26,7 @@
     
   // get facebook share count 
   if (function_exists('itg_total_share_count')) {
-    $tot_count = itg_total_share_count($actual_link);
+    $tot_count = itg_total_share_count($nid);
   }
   if(function_exists('itg_report_get_node_share')) {
       $tot_count = itg_report_get_node_share($nid, $tot_count);
@@ -59,30 +59,8 @@
     <?php
     // We hide the comments and links now so that we can render them later.
     hide($content['comments']);
-    hide($content['links']);
-    //print render($content);    
+    hide($content['links']);  
     ?>
-<!--    mobile socila share-->
-<div class="comment-mobile desktop-hide">
-    <ul>
-        <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> <?php print t('Mail to author'); ?></a></li>
-        <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
-        <?php
-        if ($config_name == 'vukkul') {
-            ?>
-            <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-        <?php } if ($config_name == 'other') { ?> 
-            <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
-        <?php } ?>
-        <li><a href="#" title ="share" class="share-icon"><i class="fa fa-share-alt"></i></a>
-    </ul>
-    <ul class="social-share">
-        <li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
-        <li><a title = "share on twitter" class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
-        <li><a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
-
-    </ul> 
-</div>
     
     <!-- Title -->
     <h1><?php print $node->title; ?></h1>
@@ -101,83 +79,99 @@
                 SHARES
             </span> 
             <span>
-                <a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>                
+                <a title="share on google+" class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick='return googleplusbtn("<?php print $actual_link; ?>")'><i class="fa fa-google-plus"></i></a>                
             </span>
             <span>
-                <a class="def-cur-pointer" title ="share on facebook" onclick="fbpop('<?php print $actual_link;?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image;?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a>
+                <a class="def-cur-pointer" title ="share on facebook" onclick='fbpop("<?php print $actual_link;?>", "<?php print urlencode($fb_title); ?>", "<?php print urlencode($share_desc); ?>", "<?php print $image;?>", "<?php print $base_url; ?>", "<?php print $node->nid; ?>")'><i class="fa fa-facebook"></i></a>
             </span>
             <span>
-                <a class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup('<?php print urlencode($node->title);?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>                
+                <a class="user-activity def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" title="share on twitter" onclick='twitter_popup("<?php print urlencode($node->title);?>", "<?php print urlencode($short_url); ?>")'><i class="fa fa-twitter"></i></a>                
             </span>            
             <span>
                 <?php
                 if ($config_name == 'vukkul') {
                   ?>
-                  <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                  <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-comments');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
                 <?php } if ($config_name == 'other') { ?> 
                   <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>
                 <?php } ?>
-                
-                <!--<dfn>1522</dfn>-->
+              
             </span>
         </div>
     </div>
     <div class="movie-review-wrapper">
-        <!--<div class="col-md-7">-->
+        
         <div class="movie-trailer">        
             <?php print render($content['field_mega_review_youtube_url']); ?>
         </div>    
-        <!--</div>-->
-        <!--<div class="col-md-5">-->
+        
         <div class="movie-review-text">
-            <?php $cast_name = render($content['field_mega_review_cast']); ?>
+            <?php
+            foreach($node->field_mega_review_cast['und'] as $key => $value) {
+              $cast[] = ucfirst($node->field_mega_review_cast['und'][$key]['entity']->title);
+            }
+            //$cast_name = $node->field_mega_review_cast['und'][0]['entity']->title;
+            $cast_name = implode(', ', $cast);
+            ?>
             <?php if (!empty($cast_name)): ?>
             <div class="review-row">
-                <dfn class="review-label">Cast :</dfn>
+                <dfn class="review-label"><?php print t('Cast :'); ?></dfn>
                 <span class="review-txt"><?php print $cast_name; ?></span>
             </div>
             <?php endif; ?>
-            <?php $director = render($content['field_mega_review_director']); ?>
+            <?php $director = $node->field_mega_review_director['und'][0]['value']; ?>
             <?php if (!empty($director)): ?>
             <div class="review-row">
-                <dfn class="review-label">Director :</dfn>
+                <dfn class="review-label"><?php print t('Director :'); ?></dfn>
                 <span class="review-txt"><?php print $director; ?></span>
             </div>
             <?php endif; ?>
-            <?php $plot = render($content['field_mega_review_movie_plot']); ?>
+            <?php $plot = $node->field_mega_review_movie_plot['und'][0]['value']; ?>
             <?php if (!empty($plot)): ?>
             <div class="review-row">
-                <dfn class="review-label">Plot :</dfn>
+                <dfn class="review-label"><?php print t('Plot :'); ?></dfn>
                 <span class="review-txt"><?php print $plot; ?></span>
             </div>
             <?php endif; ?>
             <div class="movie-reviewer our-review"></div>
             <div class="movie-reviewer movie-reviewer-other"></div>
         </div>
-        <!--</div>-->
        
     </div>
      <div class="bottom-movie-desc"><?php print $bottom_desc; ?></div>
     <div class="other-reviews">
         <!-- Print reviews -->
-        <?php $average_ratings = 0; ?>
-        <?php $num_of_ratings = 0; ?>
-      <!------------------------------------------------------------------------------------------------------->
+     
+        <?php
+          $average_ratings = 0;
+          $num_of_ratings = 0;
+          $our_counter = 0;
+        ?>
+      
         <?php $external_review = $internal_review = FALSE; ?>
         <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection):$reviews = entity_load('field_collection_item', array($field_collection['value']));    
 
          if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] != 'external') { ?>
           <div class="other-reviews-row">
-              <!-- Review Headline -->
-              
-              
+           
+              <?php if($our_counter == 0) { print '<h2>' . t('Our Reviewers') . '</h2>'; }
+                ++$our_counter;
+              ?>
               <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->
-                  <?php $reviewers = array(); ?>                  
+                  <?php $reviewers = array(); $reviewers_company = $company = '' ;?>                  
                   <?php foreach ($reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE] as $reviewer_name): ?>                  
-                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                    <?php 
+                    if(function_exists('itg_get_megareview_company')) {
+                    $company = itg_get_megareview_company($reviewer_name['entity']->nid);
+                    if(!empty($company)) {
+                    $reviewers_company = ', '.$company;
+                    }
+                    }
+                    $reviewers[] = $reviewer_name['entity']->title.$reviewers_company;
+                    ?>
                   <?php endforeach; ?>
                   
                   <!-- Print External review. -->
@@ -190,25 +184,18 @@
                       <span class="other-reviews-rating" data-star-value="'.$external_rating.'%"></span>';                        
                     ?>
 
-                    <!--<p><?php //print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>                      
-                          <span class="other-reviews-rating" data-star-value="<?php //print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>-->
-                   <!--</div>-->
-                   <?php //$external_review == TRUE; ?>
-                  <?php endif; ?>
+                    <?php endif; ?>
 
                   <!-- Print internal review. -->
                   <?php if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'internal'): ?>
-                    <!--<div id="internal-review" style="display:none;">-->
+                    
                     <?php
                       $internal = $reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE][0]['entity']->title;
                       $internal_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
                       $internal_review .='<p>'.$internal.'</p>                      
                       <span class="other-reviews-rating" data-star-value="'.$internal_rating.'%"></span>';                        
                     ?>                      
-                    <!--<p><?php //print implode(', ', $reviewers); ?></p>
-                          <span class="other-reviews-rating" data-star-value="<?php //print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>-->
-                    <!--</div>-->
-                    <?php //$internal_review == TRUE; ?>
+                   
                   <?php endif; ?>
 
                   <span class="other-reviews-by"><?php print t('By') . ' ' . implode(', ', $reviewers); ?></span>
@@ -224,7 +211,7 @@
               <div class="other-reviews-desc">
                   <div class="less-content">
                       <?php
-                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      echo mb_strimwidth(html_entity_decode(strip_tags($full_desc)), 0, 245, "..");
                       ?>
                       <?php if (strlen($full_desc) > 245) { ?>
                         <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
@@ -240,24 +227,36 @@
          <?php  } endforeach; ?> 
       
       
-       <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection): 
-                    $reviews = entity_load('field_collection_item', array($field_collection['value']));    
+       <?php 
+       $counter = 0;
+       foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $key => $field_collection): 
+         $reviews = entity_load('field_collection_item', array($field_collection['value']));    
 
          if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external') { ?>
          
          <div class="other-reviews-row">
               <!-- Review Headline -->
             
-                <?php print '<h2>' . t('Other Reviewers') . '</h2>'; ?>
+                <?php if($counter == 0) { print '<h2>' . t('Other Reviewers') . '</h2>'; }
+                ++$counter;
+                ?>
              
               
               <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
                   <!-- Get Multiple reviewers name -->
-                  <?php $reviewers = array(); ?>                  
+                  <?php $reviewers = array(); $reviewers_company_other = $company_other = '';?>                  
                   <?php foreach ($reviews[$field_collection['value']]->field_story_reporter[LANGUAGE_NONE] as $reviewer_name): ?>                  
-                    <?php $reviewers[] = $reviewer_name['entity']->title ?>
+                    <?php 
+                    if(function_exists('itg_get_megareview_company')) {
+                    $company_other = itg_get_megareview_company($reviewer_name['entity']->nid);
+                    if(!empty($company_other)) {
+                    $reviewers_company_other = ', '.$company_other;
+                    }
+                    }
+                    $reviewers[] = $reviewer_name['entity']->title.$reviewers_company_other;
+                    ?>
                   <?php endforeach; ?>
                   
                   <!-- Print External review. -->
@@ -270,10 +269,7 @@
                       <span class="other-reviews-rating" data-star-value="'.$external_rating.'%"></span>';                        
                     ?>
 
-                    <!--<p><?php //print $reviews[$field_collection['value']]->field_story_reporter['und'][0]['entity']->title; ?></p>                      
-                          <span class="other-reviews-rating" data-star-value="<?php //print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>-->
-                   <!--</div>-->
-                   <?php //$external_review == TRUE; ?>
+                   
                   <?php endif; ?>
 
                   <!-- Print internal review. -->
@@ -285,10 +281,7 @@
                       $internal_review .='<p>'.$internal.'</p>                      
                       <span class="other-reviews-rating" data-star-value="'.$internal_rating.'%"></span>';                        
                     ?>                      
-                    <!--<p><?php //print implode(', ', $reviewers); ?></p>
-                          <span class="other-reviews-rating" data-star-value="<?php //print $reviews[$field_collection['value']]->field_story_rating['und'][0]['value'] * 20; ?>%"></span>-->
-                    <!--</div>-->
-                    <?php //$internal_review == TRUE; ?>
+                   
                   <?php endif; ?>
 
                   <span class="other-reviews-by"><?php print t('By') . ' ' . implode(', ', $reviewers); ?></span>
@@ -304,7 +297,7 @@
               <div class="other-reviews-desc">
                   <div class="less-content">
                       <?php
-                      echo mb_strimwidth(strip_tags($full_desc), 0, 245, "..");
+                      echo mb_strimwidth(html_entity_decode(strip_tags($full_desc)), 0, 245, "..");
                       ?>
                       <?php if (strlen($full_desc) > 245) { ?>
                         <a href="javascript:void(0)" class="anchor-action read-more"> More[+]</a>
@@ -329,8 +322,7 @@
     <div class="photos-videos-wrapper">
         <!-- Print video -->
         <?php $asso_photo_gallery = $asso_vid_id = 0; ?>        
-        <?php $asso_photo_gallery = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
-        ; ?>
+        <?php $asso_photo_gallery = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id']; ?>
         <?php $asso_vid_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id']; ?>
         <!-- Video or photo thumbnail full page logic. -->
         <?php
@@ -354,14 +346,12 @@
                       <h3><span>MOVIE VIDEOS</span></h3>
                       <?php
                       $video_node = node_load($asso_vid_id);
-                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
-//                      $large_image = theme(
-//                                      'image_style', array(
-//                                      //'style_name' => empty($asso_vid_class) ? 'mrass_video' : 'anchors_landing',
-//                                      'path' => $final_image,
-//                                      )
-//                                    );
-                      $large_image = '<img src="' . $final_image . '" alt="image">';
+                      if(!empty($video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
+                      $final_image = image_style_url("anchors_landing",$video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
+                      } else {
+                      $final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                      }
+                      $large_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
               <?php $video_date = format_date($video_node->created, 'custom', 'D, d M, Y'); ?>
@@ -382,17 +372,15 @@
         <?php if ($asso_photo_gallery): ?>
               <div class="movie-photos <?php print $ass_photo_class; ?>">
                   <div class="movie-data">
-                      <h3><span>PHOTOS</span></h3>
+                      <h3><span><?php print t('PHOTOS'); ?></span></h3>
                       <?php
                       $photo_node = node_load($asso_photo_gallery);
-                      $final_image = str_replace('styles/mrass_video/http/','',file_create_url($photo_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']));
-//                      $small_image = theme(
-//                                        'image_style', array(
-//                                        'style_name' => empty($ass_photo_class) ? 'mrass_video' : 'anchors_landing',
-//                                        'path' => $final_image,
-//                                        )
-//                                    );
-                      $small_image = '<img src="' . $final_image . '" alt="image">';
+                      if(!empty($photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
+                      $final_image = image_style_url("anchors_landing",$photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
+                      } else {
+                       $final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg'); 
+                      }
+                      $small_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);
                       print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
@@ -416,7 +404,9 @@
      <?php if ($config_name == 'vukkul') { ?>
        <div class="vukkul-comment">
            <div id="vuukle-emote"></div>
-           <div id="vuukle_div"></div>
+           <!--<div id="vuukle_div"></div>-->
+           <div id="vuukle-comments"></div>
+           <div class='vuukle-powerbar'></div>
            <?php if (function_exists('vukkul_view')) {
                    vukkul_view();
                  }
@@ -434,6 +424,5 @@
     </div>
 <?php } ?>
 
-<?php print render($content['links']); ?>    
-<?php //print render($content['comments']); ?>  
+<?php print render($content['links']); ?>
 </article>

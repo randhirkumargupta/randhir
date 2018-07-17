@@ -19,6 +19,6 @@ function save_feature_content_section_widget_data($feature_content) {
       itg_widget_delete_data_from_widget($widget_name , $node);
       itg_widget_insert_widget_data($node , $widget_name , $_GET['category_tid']);
     }
-    drupal_set_message(t("Nodes has been saved"));
+    //drupal_set_message(t("Nodes has been saved"));
   }
 }

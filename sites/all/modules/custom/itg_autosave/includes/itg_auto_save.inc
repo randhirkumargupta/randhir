@@ -26,8 +26,7 @@ class itg_auto_save {
     if ($this->is_duplicate) {
       $this->itg_save_form_id_update($pre_save);
       drupal_set_message('Form id has been updated.', 'status');
-    }
-    else {
+    } else {
       $this->itg_save_form_id_insert($pre_save);
       drupal_set_message('Form id has been inserted.', 'status');
     }
@@ -50,8 +49,7 @@ class itg_auto_save {
     // Compare new value from existing value.
     if ($pre_save['form_name'] == $this->dup_result) {
       return TRUE;
-    }
-    else {
+    } else {
       return FALSE;
     }
   }
@@ -64,8 +62,8 @@ class itg_auto_save {
    */
   private function itg_save_form_id_insert($pre_save) {
     $this->itg_query = db_insert('itg_autosave_forms')
-        ->fields($pre_save)
-        ->execute();
+            ->fields($pre_save)
+            ->execute();
   }
 
   /**
@@ -76,9 +74,9 @@ class itg_auto_save {
    */
   private function itg_save_form_id_update($pre_save) {
     $this->itg_query = db_update('itg_autosave_forms')
-        ->fields($pre_save)
-        ->condition('form_name', $pre_save['form_name'])
-        ->execute();
+            ->fields($pre_save)
+            ->condition('form_name', $pre_save['form_name'])
+            ->execute();
   }
 
   /**
@@ -98,20 +96,20 @@ class itg_auto_save {
     // Prepare array list form settings.
     foreach ($this->fid_result as $row) {
       $this->data[$row->form_name] = array(
-        $row->form_name,
-        $row->autosave_time,
+          $row->form_name,
+          $row->autosave_time,
       );
-    }    
+    }
     // Pass data to js file.
     drupal_add_js(array(
-      'itg_autosave' => array(
-        'auto_settings' => $this->data,
-        'base_url' => $base_url,
-        'nid' => $nid,
-        'c_type' => $c_type,
-      ),
-        ), array(
-      'type' => 'setting',
+        'itg_autosave' => array(
+            'auto_settings' => $this->data,
+            'base_url' => $base_url,
+            'nid' => $nid,
+            'c_type' => $c_type,
+        ),
+            ), array(
+        'type' => 'setting',
     ));
   }
 
@@ -128,13 +126,12 @@ class itg_auto_save {
     $this->field_type_result = array();
     foreach ($inputs as $key => $value) {
       // Get field information.
-      $this->field_type_query = field_info_field($key);      
+      $this->field_type_query = field_info_field($key);
       $this->field_type_result[] = array(
-        'fieldName' => $this->field_type_query['field_name'],
-        'fieldType' => $this->field_type_query['type'],
+          'fieldName' => $this->field_type_query['field_name'],
+          'fieldType' => $this->field_type_query['type'],
       );
     }
-
     return $this->field_type_result;
   }
 
@@ -189,38 +186,44 @@ class itg_auto_save {
    * @param array $fc_ids
    *   Serialized array contaning field collections ids.
    */
-  public function itg_save_field_field_collection($value, &$node, $field_name, $fc_ids) {    
+  public function itg_save_field_field_collection($value, &$node, $field_name, $fc_ids) {
+
     $this->field_collection = array();
     $this->field_collection_data = array();
     // Unserialize fields collections ids for deletion of field collection.
-    $fc_ids = unserialize($fc_ids);    
+    $fc_ids = unserialize($fc_ids);
     if (isset($node->nid)) {
       // Unset field collection field .
       unset($node->{$field_name}[LANGUAGE_NONE]);
       // Delete field collection items.      
-      entity_delete_multiple('field_collection_item', $fc_ids[$field_name]);          
+      entity_delete_multiple('field_collection_item', $fc_ids[$field_name]);
     }
+
     // Create new field collection for node field.
-    foreach ($value['und'] as $key => $fc_value) {      
+    foreach ($value['und'] as $key => $fc_value) {
+
       // Get field type for field collection values.
       $this->field_collection_data = $this->itg_save_extract_fieldtype($fc_value);
+
       // Filter empty array from list.
       $this->field_collection_data = array_filter($this->field_collection_data, 'itg_autosave_remove_empty');
+
       // Validate empty field collection
-      $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);      
+      $this->validation = $this->itg_save_validate_field_collection($this->field_collection_data, $fc_value);
       // Create entity of type field collection
       if ($this->validation) {
-        watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key);        
-        $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));        
-        $this->fc_item->setHostEntity('node', $node);        
+
+        //watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key);
+
+        $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));
+        $this->fc_item->setHostEntity('node', $node);
         $this->itg_save_field_collection($this->field_collection_data, $fc_value, $this->fc_item);
         $this->fc_item->save(TRUE);
         $node->{$field_name}[$node->language][$key]['value'] = $this->fc_item->item_id;
       }
-      
     }
   }
-  
+
   /**
    * Update field collection values.
    *
@@ -264,8 +267,10 @@ class itg_auto_save {
    */
   public function itg_save_field_datestamp($value) {
     $this->datestamp_arr = array();
-    $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
-    $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
+    if (!empty($value['und'][0]['value']['date'])) {
+      $this->datestamp_arr['value'] = strtotime($value['und'][0]['value']['date']);
+      $this->datestamp_arr['value2'] = strtotime($value['und'][0]['value2']['date']);
+    }
 
     return $this->datestamp_arr;
   }
@@ -279,14 +284,26 @@ class itg_auto_save {
    * @return string
    *   Extracted value.
    */
-  public function itg_save_field_datetime($value) {
+  public function itg_save_field_datetime($value, $c_type = NULL) {
+    if (empty($value['und'][0]['value']['date'])) {
+      unset($value);
+    }
     $this->datetime_result = '';
-    if ($value['und'][0]['value']['date'] != '') {
-      $this->datetime_value = $value['und'][0]['value']['date'];
+    if (!empty($value['und'][0]['value']['date'])) {
+      if (!empty($value['und'][0]['value']['time'])) {
+        $date_time = $value['und'][0]['value']['date'] . ' ' . $value['und'][0]['value']['time'];
+        if ($c_type == 'event_backend') {
+          $timestamp = strtotime(str_replace('/', '-', $date_time));
+        } else {
+          $timestamp = strtotime($date_time);
+        }
+      } else {
+        $timestamp = strtotime(str_replace('/', '-', $value['und'][0]['value']['date']));
+      }
       $this->datetime_result = array(
-        'value' => date("Y-m-d H:i:s", strtotime($this->datetime_value)),
-        'timezone' => date_default_timezone(),
-        'timezone_db' => date_default_timezone(),
+          'value' => date("Y-m-d H:i:s", $timestamp),
+          'timezone' => date_default_timezone(),
+          'timezone_db' => date_default_timezone(),
       );
     }
 
@@ -302,13 +319,12 @@ class itg_auto_save {
    * @return string
    *   Extracted value.
    */
-  public function itg_save_field_text_long($value) {    
-    if ($value['und'][0]['value'] != '' && isset($value['und'][0]['format'])) {      
+  public function itg_save_field_text_long($value) {
+    if ($value['und'][0]['value'] != '' && isset($value['und'][0]['format'])) {
       $this->text_long['value'] = $value['und'][0]['value'];
-      $this->text_long['format'] = $value['und'][0]['format'];      
-    }
-    else {      
-      $this->text_long['value'] = $value['und'][0]['value'];      
+      $this->text_long['format'] = $value['und'][0]['format'];
+    } else {
+      $this->text_long['value'] = $value['und'][0]['value'];
     }
 
     return $this->text_long;
@@ -359,7 +375,7 @@ class itg_auto_save {
    * @param string $c_type
    *   name of the content type.
    */
-  public function itg_save_form_data($pre_save, $nid, $c_type) {    
+  public function itg_save_form_data($pre_save, $nid, $c_type) {
     global $user;
     $this->data = 0;
     // Check if unique id is already in database
@@ -367,21 +383,20 @@ class itg_auto_save {
     $this->dup_query->condition('itg_identity', $pre_save['unique_id']);
     $this->dup_query->fields('itg', array('itg_identity'));
     $this->dup_result = $this->dup_query->execute()->fetchField();
-
     // If unique id is not exist then insert. 
     if ($this->dup_result !== $pre_save['unique_id']) {
       $this->pre_save_form = array(
-        'nid' => $nid,
-        'username' => $user->name,
-        'node_type' => $c_type,
-        'created' => REQUEST_TIME,
-        'itg_identity' => $pre_save['unique_id'],
-        'field_collection' => isset($pre_save['field_collection']) ? $pre_save['field_collection'] : '',
+          'nid' => $nid,
+          'username' => $user->name,
+          'node_type' => $c_type,
+          'created' => REQUEST_TIME,
+          'itg_identity' => $pre_save['unique_id'],
+          'field_collection' => isset($pre_save['field_collection']) ? $pre_save['field_collection'] : '',
+          'lock_status' => 0,
       );
       $this->data = drupal_write_record('itg_autosave_node_data', $this->pre_save_form);
-    }
-    else {
-      $this->pre_save_form['field_collection'] = isset($pre_save['field_collection']) ? count($pre_save['field_collection']) > 0 ? serialize($pre_save['field_collection']) : array('empty') : array('empty');      
+    } else {
+      $this->pre_save_form['field_collection'] = isset($pre_save['field_collection']) ? count($pre_save['field_collection']) > 0 ? serialize($pre_save['field_collection']) : array('empty')  : array('empty');
       $this->data = db_update('itg_autosave_node_data');
       $this->data->fields($this->pre_save_form);
       $this->data->condition('itg_identity', $pre_save['unique_id']);
@@ -403,10 +418,10 @@ class itg_auto_save {
    * @return bool
    *   Return true if filed is not empty else return false.
    */
-  public function itg_save_validate_field_collection($data, $field_values) {        
-    foreach ($data as $value) {             
+  public function itg_save_validate_field_collection($data, $field_values) {
+    foreach ($data as $value) {
       switch ($value['fieldType']) {
-        case 'taxonomy_term_reference':          
+        case 'taxonomy_term_reference':
           if (is_int($field_values[$value['fieldName']]['und'])) {
             return TRUE;
           }
@@ -417,13 +432,18 @@ class itg_auto_save {
             return TRUE;
           }
           break;
-          
-        case 'list_text':          
-          if(is_array($field_values[$value['fieldName']]['und'])) {
+        case 'text_with_summary':
+          if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
           }
           break;
-          
+
+        case 'list_text':
+          if (is_array($field_values[$value['fieldName']]['und'])) {
+            return TRUE;
+          }
+          break;
+
         case 'text':
           if ($field_values[$value['fieldName']]['und'][0]['value'] != '') {
             return TRUE;
@@ -432,10 +452,32 @@ class itg_auto_save {
         case 'file':
           if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
             return TRUE;
-          } 
+          }
+          break;
+        case 'images':
+          if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+            return TRUE;
+          }
+          break;
+        case 'image':
+          if ($field_values[$value['fieldName']]['und'][0]['fid'] > 0) {
+            return TRUE;
+          }
+          break;
+        case 'list_integer':
+          if ($field_values[$value['fieldName']]['und'] > 0) {
+            return TRUE;
+          }
+          break;
+
+        case 'list_float':
+          if ($field_values[$value['fieldName']]['und'] > 0) {
+            return TRUE;
+          }
+          break;
       }
     }
-    
+
     return FALSE;
   }
 
@@ -453,14 +495,14 @@ class itg_auto_save {
    */
   public function itg_autosave_prepare_presave($data, $inputs, &$node) {
     $this->temp = array();
-    foreach ($data as $field) {      
+    foreach ($data as $field) {
       switch ($field['fieldType']) {
         case 'datestamp':
           $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datestamp($inputs[$field['fieldName']]);
           break;
 
         case 'datetime':
-          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']]);
+          $node->{$field['fieldName']}['und'][0] = $this->itg_save_field_datetime($inputs[$field['fieldName']], $node->type);
           break;
 
         case 'text':
@@ -468,103 +510,180 @@ class itg_auto_save {
             foreach ($inputs[$field['fieldName']]['und'] as $key => $value) {
               if ($value['value'] != '') {
                 $node->{$field['fieldName']}['und'][$key]['value'] = $value['value'];
-              }              
+              }
             }
-          }
-          else {
+          } else {
             $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_text($inputs[$field['fieldName']]);
-          }          
+          }
           break;
 
-        case 'taxonomy_term_reference':          
-          if ($node->type == 'story') {
-            continue;
-          }
+        case 'taxonomy_term_reference':
           $this->value = $inputs[$field['fieldName']]['und'];
-          $this->var_type = gettype($this->value);
-          if ($this->var_type == 'string') {            
-            $this->value = (int) $this->value;            
-          }                   
-          if (!empty($this->value) && is_array($this->value)) {            
-            foreach ($this->value as $key => $tid) {
-              if ($key == 'hierarchical_select' || $key == 'hsid') {
-                break;
-              }              
-              $key = (int) $key;              
-              $tid = (int) $tid;
-              if ($tid > 0) {
-                $node->{$field['fieldName']}[$node->language][$key]['tid'] = $tid;
-              }              
+          /* $this->var_type = gettype($this->value);
+            if ($this->var_type == 'string') {
+            $this->value = (int) $this->value;
+            } */
+
+          // For Mega Review Type autosave
+          if (!empty($this->value) && $field['fieldName'] == 'field_mega_review_type') {
+            $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;
+          }
+
+          // For City autosave
+          if (!empty($this->value) && $field['fieldName'] == 'field_stroy_city') {
+            $getcity = $this->itg_autosave_get_citytids($this->value);
+            if (isset($getcity) && !empty($getcity)) {
+              foreach ($getcity as $city_key => $city_val) {
+                $node->{$field['fieldName']}[$node->language][$city_key]['tid'] = $city_val->tid;
+              }
             }
-          }          
-          elseif (!empty($this->value) && $this->value > 0) {            
-            $node->{$field['fieldName']}[$node->language][0]['tid'] = $this->value;            
-          }          
-          
+          }
+
+          // For Bloggers autosave
+          if (!empty($this->value) && $field['fieldName'] == 'field_blog_bloggers') {
+            $getblogger = $this->itg_autosave_get_bloggertids($this->value);
+            if (isset($getblogger) && !empty($getblogger)) {
+              foreach ($getblogger as $blogger_key => $blogger_val) {
+                $node->{$field['fieldName']}[$node->language][$blogger_key]['tid'] = $blogger_val->tid;
+              }
+            }
+          }
+
+          // For Tags Autosave
+          if (!empty($this->value) && is_array($this->value) && $field['fieldName'] == 'field_story_itg_tags') {
+            $get_tids = $this->itg_autosave_get_tids($this->value['value_field']);
+            if (!empty($get_tids) && is_array($get_tids)) {
+              foreach ($get_tids as $tid_key => $tid_val) {
+                if (isset($tid_val->tid) && !empty($tid_val->tid)) {
+                  $node->{$field['fieldName']}[$node->language][$tid_key]['tid'] = $tid_val->tid;
+                }
+              }
+            }
+          }
+
+          // For section and primary category
+          if (!empty($this->value) && is_array($this->value) && $field['fieldName'] == 'field_story_category') {
+            foreach ($this->value as $sc_key => $sc_val) {
+              $node->{$field['fieldName']}[$node->language][$sc_key]['tid'] = $sc_val;
+            }
+          }
           break;
-          
+
         case 'field_collection':
           // Save field name of field collection to array.
           $this->temp[] = $field['fieldName'];
           break;
 
-        case 'text_long':          
+        case 'text_long':
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
           if (count($this->value) > 0) {
-            $node->{$field['fieldName']}[$node->language][0] = $this->value;          
-          }          
+            $node->{$field['fieldName']}[$node->language][0] = $this->value;
+          }
           break;
 
-        case 'text_with_summary':          
+        case 'text_with_summary':
           $node->{$field['fieldName']}[$node->language][0] = $this->itg_save_field_text_with_summary($inputs[$field['fieldName']]);
           break;
 
-        case 'list_text': 
+        case 'list_text':
           $this->flag = 0;
           if (count($inputs[$field['fieldName']]['und']) >= 2) {
-            foreach ($inputs[$field['fieldName']]['und'] as $list_value) {              
+            foreach ($inputs[$field['fieldName']]['und'] as $list_value) {
               $node->{$field['fieldName']}['und'][$this->flag]['value'] = $list_value;
               ++$this->flag;
             }
-          }
-          else {            
+          } else {
             $node->{$field['fieldName']}['und'][0]['value'] = $this->itg_save_field_list_text($inputs[$field['fieldName']]);
-          }           
+          }
           break;
-        
+
         case 'list_float':
           if ($inputs[$field['fieldName']]['und'] != '_none') {
             $node->{$field['fieldName']}['und'][0]['value'] = $inputs[$field['fieldName']]['und'];
           }
-          
+
           break;
+
         case 'number_integer':
-          //$node->{$field['fieldName']}['und'][0]['value'] = 
+          $tickets = $inputs[$field['fieldName']]['und'][0]['value'];
+          if (isset($tickets) && !empty($tickets)) {
+            $node->{$field['fieldName']}['und'][0]['value'] = $tickets;
+          }
           break;
+
         case 'entityreference':
-          $this->value = $inputs[$field['fieldName']]['und'];          
-          if (is_array($this->value) && $this->value[0]['target_id'] != '') {
-            $this->target_id = (int) $this->value[0]['target_id'];
-            $node->{$field['fieldName']}['und'][0]['target_id'] = $this->target_id;
+          if ($field['fieldName'] == 'field_video_anchor') {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (!empty($this->value) && is_array($this->value)) {
+              foreach ($this->value as $anchor_key => $anchor_val) {
+                preg_match_all('!\d+!', $anchor_val['target_id'], $matches);
+                $targetids = reset($matches);
+                if (isset($targetids[0]) && !empty($targetids[0])) {
+                  $node->{$field['fieldName']}['und'][$anchor_key]['target_id'] = $targetids[0];
+                }
+              }
+            }
+          } elseif ($inputs['form_id'] == 'story_node_form' ||
+                  $inputs['form_id'] == 'videogallery_node_form' ||
+                  $inputs['form_id'] == 'survey_node_form' ||
+                  $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (isset($this->value[0]['target_id']) && !empty($this->value[0]['target_id'])) {
+              preg_match_all('!\d+!', $this->value[0]['target_id'], $matches);
+              $targetid = reset($matches);
+              if (isset($targetid[0]) && !empty($targetid[0])) {  
+                $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
+              }
+            } 
+          } else {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            preg_match_all('!\d+!', $this->value, $matches);
+            $targetid = reset($matches);
+            if (isset($targetid[0]) && !empty($targetid[0])) {
+              $i = 0;
+              foreach ($targetid as $target_val) {
+                $node->{$field['fieldName']}['und'][$i]['target_id'] = $target_val;
+                $i++;
+              }
+            } 
           }
-          elseif (!is_array($this->value) && $this->value != '') {
-            $this->target_id = (int) $inputs[$field['fieldName']]['und'];
-            $node->{$field['fieldName']}['und'][0]['target_id'] = $this->target_id;
-          }
-          
           break;
+
         case 'image':
           $this->itg_save_field_image($field['fieldName'], $inputs[$field['fieldName']], $node);
-          
+
           break;
+
         case 'file':
           $this->itg_save_field_file($field['fieldName'], $inputs[$field['fieldName']], $node);
+          break;
+
+        case 'list_integer':
+          if ($field['fieldName'] == 'field_survey_expity_date') {
+            $node->{$field['fieldName']}['und'][0]['value'] = $inputs[$field['fieldName']]['und'][1];
+          } else {
+            $this->value = $inputs[$field['fieldName']]['und'];
+            if (isset($this->value) && !empty($this->value)) {
+              preg_match_all('!\d+!', $this->value, $matches);
+              $get_techrating = reset($matches);
+              $node->{$field['fieldName']}['und'][0]['value'] = $get_techrating[0];
+            }
+          }
+
+          break;
+
+        case 'youtube':
+          $this->value = $inputs[$field['fieldName']]['und'];
+          if (isset($this->value) && !empty($this->value)) {
+            $node->{$field['fieldName']}['und'][0]['input'] = $this->value[0]['input'];
+          }
+          break;
       }
     }
 
     return $this->temp;
   }
-  
+
   /**
    * Prepare node object for image field.
    *
@@ -591,7 +710,7 @@ class itg_auto_save {
     // Assign display mode.
     if ($inputs[$node->language][0]['display'] != '') {
       $node->{$field_name}[$node->language][0]['display'] = $inputs[$node->language][0]['display'];
-    }    
+    }
   }
 
   /**
@@ -604,54 +723,101 @@ class itg_auto_save {
    * @param type $fc_item
    *   Field collection entity object.
    */
-  public function itg_save_field_collection($data, $inputs, &$fc_item) {   
-    foreach ($data as $field) {      
+  public function itg_save_field_collection($data, $inputs, &$fc_item) {
+
+    foreach ($data as $field) {
       switch ($field['fieldType']) {
         case 'datestamp':
-          
+
           break;
 
         case 'datetime':
-          
+
           break;
 
-        case 'text':          
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+        case 'text':
+          if ($field['fieldName'] == 'field_survey_answer_option_2') {
+            $opt2 = $inputs[$field['fieldName']]['und'];
+            foreach ($opt2 as $opt2_key => $opt2_val) {
+              $fc_item->{$field['fieldName']}[LANGUAGE_NONE][$opt2_key]['value'] = $opt2_val['value'];
+            }
+          } else {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          }
           break;
 
         case 'taxonomy_term_reference':
-          $this->value = $inputs[$field['fieldName']]['und'];          
-          $this->value = (int) $this->value;          
+          $this->value = $inputs[$field['fieldName']]['und'];
+          $this->value = (int) $this->value;
           if ($this->value > 0) {
             $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['tid'] = $this->value;
           }
-          
-          break;       
+
+          break;
 
         case 'text_long':
           $this->value = $this->itg_save_field_text_long($inputs[$field['fieldName']]);
-          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;                    
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0] = $this->value;
+          break;
+
+        case 'number_integer':
+          if (!empty($inputs[$field['fieldName']]['und']) && is_array($inputs[$field['fieldName']]['und'])) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'][0]['value'];
+          }
           break;
 
         case 'text_with_summary':
-          
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']][LANGUAGE_NONE][0]['value'];
           break;
 
-        case 'list_text':          
+        case 'list_text':
           $this->value = $inputs[$field['fieldName']]['und'];
-          foreach ($this->value as $f_value) {
-            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $f_value;
-          }          
-          
+          if (is_array($this->value)) {
+            foreach ($this->value as $f_value) {
+              $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $f_value;
+            }
+          } else {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $this->value;
+          }
           break;
-          
+
+        case 'jquery_colorpicker':
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['jquery_colorpicker'] = $inputs[$field['fieldName']]['und'][0]['jquery_colorpicker'];
+          break;
+
         case 'file':
           $this->value = $inputs[$field['fieldName']]['und'][0];
           $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
+          break;
+
+        case 'image':
+          $this->value = $inputs[$field['fieldName']]['und'][0];
+          $this->itg_save_file_field_collection($fc_item, $this->value, $field['fieldName']);
+          break;
+
+        case 'list_integer':
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
+          break;
+
+        case 'list_float':
+          $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['value'] = $inputs[$field['fieldName']]['und'];
+          break;
+
+        case 'entityreference':
+          $this->value = $inputs[$field['fieldName']]['und'][0]['target_id'];
+          $this->value = explode(')', end(explode("(", $this->value)));
+          if (count($this->value) > 0) {
+            $this->value = (int) $this->value[0];
+          } else {
+            $this->value = 0;
+          }
+          if ($this->value > 0) {
+            $fc_item->{$field['fieldName']}[LANGUAGE_NONE][0]['target_id'] = $this->value;
+          }
       }
-    }    
+    }
   }
- 
+
   /**
    * Prepare file field for field collection.
    * 
@@ -662,7 +828,7 @@ class itg_auto_save {
    * @param string $field_name
    *   Machine name of the current field.
    */
-  public function itg_save_file_field_collection(&$fc_item, $field_value, $field_name) {    
+  public function itg_save_file_field_collection(&$fc_item, $field_value, $field_name) {
     if ($field_value['fid'] > 0) {
       $fc_item->{$field_name}[LANGUAGE_NONE][0]['fid'] = $field_value['fid'];
     }
@@ -688,21 +854,18 @@ class itg_auto_save {
         if ($inputs['field_astro_type']['und'] == 224) {
           unset($inputs['field_astro_numerology_values']);
           unset($inputs['field_astro_zodiac']);
-        }
-        elseif ($inputs['field_astro_type']['und'] == 225) {
+        } elseif ($inputs['field_astro_type']['und'] == 225) {
           unset($inputs['field_astro_zodiac']);
-        }
-        elseif ($inputs['field_astro_type']['und'] == 227) {
+        } elseif ($inputs['field_astro_type']['und'] == 227) {
           unset($inputs['field_astro_numerology_values']);
-        }
-        else {
+        } else {
           unset($inputs['field_astro_numerology_values']);
           unset($inputs['field_astro_zodiac']);
         }
         break;
     }
   }
-  
+
   /**
    * Get saved form ids from database.
    *
@@ -714,12 +877,111 @@ class itg_auto_save {
     $this->itg_query = db_select('itg_autosave_forms', 'itg');
     $this->itg_query->fields('itg', array('form_name'));
     $this->itg_result = $this->itg_query->execute()->fetchAll();
-    
+
     // Make array of form ids from result object
     foreach ($this->itg_result as $ids) {
-      $this->data[] = $ids->form_name; 
+      $this->data[] = $ids->form_name;
     }
-    
+
     return $this->data;
   }
+
+  /**
+   * Get Node Lock status for autosave.
+   *
+   * @param type $nid
+   *   node id.
+   *
+   * @return int
+   *   Node id of the node.
+   */
+  public function itg_autosave_get_lock_status_node_id($nid) {
+    $itg_query = db_select('itg_autosave_node_data', 'itg');
+    $itg_query->fields('itg', array('nid', 'lock_status'))
+            ->condition('nid', $nid);
+    $itg_result = $itg_query->execute()->fetchObject();
+    return $itg_result;
+  }
+
+  /**
+   * Get tid's from database.
+   *
+   * @return array
+   *   Array of term ids for tags autosave.
+   */
+  public function itg_autosave_get_tids($arr_name) {
+    $get_name = explode("\"\"", $arr_name);
+    $trimmed_array = array_map('trim',$get_name);
+    $term_names = array_filter($trimmed_array);
+    if (!empty($term_names) && is_array($term_names)) {
+      // List All the similer term_name
+      $term_name_cr = db_select('taxonomy_term_data', 'ttd');
+      $term_name_cr->fields('ttd', array('name'));
+      $term_name_cr->condition('vid', 1, '=');
+      $term_name_cr->condition('name', $term_names, 'IN');
+      $result_cr = $term_name_cr->execute()->fetchAll();
+      foreach ($result_cr as $tn) {
+        $names_cr[] = $tn->name;
+      }
+      if (!empty($names_cr)) {
+        // Get the diff from inserted and existing
+        $new_tname = array_diff($term_names, $names_cr);
+      } else {
+        $new_tname = $term_names;
+      }
+      if (!empty($new_tname) && is_array($new_tname)) {
+        // Creating new term_name from diff
+        foreach ($new_tname as $new_tname_data) {
+          $term = new stdClass();
+          $term->name = $new_tname_data;
+          $term->vid = 1;
+          try {
+            taxonomy_term_save($term);
+          } catch (Exception $e) {
+            pr($e->getMessage());
+          }
+        }
+      }
+      // Get the tids from all the term_name
+      $term_name = db_select('taxonomy_term_data', 'ttd');
+      $term_name->fields('ttd', array('tid'));
+      $term_name->condition('name', $term_names, 'IN');
+      $term_name->condition('vid', 1, '=');
+      $result = $term_name->execute()->fetchAll();
+      return $result;
+    }
+  }
+
+  /**
+   * Get tid's for city from database.
+   *
+   * @return array
+   *   Array of term ids for city autosave.
+   */
+  public function itg_autosave_get_citytids($city_name) {
+    $cityname = explode(", ", $city_name);
+    $term_name = db_select('taxonomy_term_data', 'ttd');
+    $term_name->fields('ttd', array('tid'));
+    $term_name->condition('name', $cityname, 'IN');
+    $term_name->condition('vid', 9, '=');
+    $result = $term_name->execute()->fetchAll();
+    return $result;
+  }
+
+  /**
+   * Get tid's for blogger from database.
+   *
+   * @return array
+   *   Array of term ids for blogger name for autosave.
+   */
+  public function itg_autosave_get_bloggertids($blogger_name) {
+    $bloggername = explode(", ", $blogger_name);
+    $term_name = db_select('taxonomy_term_data', 'ttd');
+    $term_name->fields('ttd', array('tid'));
+    $term_name->condition('name', $bloggername, 'IN');
+    $term_name->condition('vid', 19, '=');
+    $result = $term_name->execute()->fetchAll();
+    return $result;
+  }
+
 }

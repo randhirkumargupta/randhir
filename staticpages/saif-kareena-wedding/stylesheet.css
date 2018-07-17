@@ -1,0 +1,309 @@
+@charset "utf-8";
+/* CSS Document */
+body { margin:0; padding:0; background-image: none;}
+#maindiv {margin: 0 auto; padding:0;width: 990px;}
+#wrapper, #wholecontent {background-color: #FFFFFF;}
+header {
+    margin: 0 5px !important;
+    width: 1000px;
+}
+.seclist {
+    border-bottom: 1px solid #AFAFAF;
+    border-top: 1px solid #AFAFAF;
+    float: left;
+    margin: 0 !important;
+    padding: 10px 0 10px;
+    width: 100% !important;
+	background-color:#fff;
+}
+.pathway {
+    border-bottom: 1px solid #AFAFAF;
+    color: #666666;
+    float: left;
+    font: bold 12px arial;
+    margin-bottom: 10px;
+    margin-left: 0 !important;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 99% !important;
+	background-color:#fff;
+}
+
+#top_nav{ margin:0; padding:0 0 8px 0; text-align:left;font:bold 11px/11px arial;width:988px;float:left; background-color: #FFFFFF;}
+#top_nav ul{margin:0 10px; padding:0;}
+#top_nav ul li { float:left; list-style:none; color:#002F5E;font:bold 11px/11px arial;border-right:1px solid #000; margin:0 0 0 11px; padding-right:11px;}
+#top_nav ul li a{ color:#000; text-decoration:none;}
+#top_nav ul li a:hover{ color:#D81921; text-decoration:none;}
+#top_nav ul li.last {border-right:none; margin-right:0;}
+.footband { background-color: #1B0C55; border-right: 1px solid #FFFFFF; color: #FFFFFF; font: bold 12px arial; padding: 5px 15px; margin: 0 auto;}
+.footband ul { margin: 0;padding: 0;list-style: none;}
+.footband ul li {border-right: 1px solid #CCCCCC;color: #FFFFFF;float: left; font: bold 12px arial; padding: 0 12px 0 11px;}
+.footband ul li a {color: #FFFFFF;text-decoration: none;}
+.footband ul li a:hover {text-decoration: underline; }
+.footband ul li.last { border-right: none;}
+.clear { clear:both}
+.left { float:left}
+.right { float:right;}
+#header h1{margin:0; padding:0; float:left;}
+#header .hbg{background:url(images/mast-BG_Oscars_2012.gif) repeat-x top left; width:728px; height:124px;float:left;}
+
+.add{margin-top:3px;}
+.adtitle{color:#fff;font:12px arial; text-align:center;}
+
+#navigation {
+    height:36px;
+	margin:4px 0 0 0;
+	padding:0;
+	float:none;
+}
+
+#navigation li {
+    display: inline;
+    margin: 0 15px;
+	color: #fff2e1;
+	font-size: 16px;
+	font-family:Tahoma;
+    line-height: 30px;
+	padding:5px 0px;
+}
+#navigation li.active a{color:#9b3a00;}
+#navigation li.dividernav{height:30px; width:20px; background-position:-247px -10px;}
+#navigation li a {color: #fff2e1;   text-decoration: none;}
+#navigation li a:hover{ color: #9b3a00;   text-decoration: underline;}
+
+#sectionleft { width:670px; margin:10px 15px 0px 0; float:left;}
+#sectionright { width:300px;  float:left; margin-top:10px;}
+
+#featured{ 
+	width:410px; 
+	padding-right:250px; 
+	position:relative; 
+	border:5px solid #701E9E; 
+	height:250px; 
+	background:#701E9E;
+}
+#featured ul.ui-tabs-nav{ 
+	position:absolute; 
+	top:0; left:410px; 
+	list-style:none; 
+	padding:0; margin:0; 
+	width:250px; 
+}
+#featured ul.ui-tabs-nav li{ 
+	padding:1px 0; padding-left:10px;  
+	font-size:12px; 
+	color:#fff; 
+}
+#featured ul.ui-tabs-nav li img{ 
+	float:left; margin:2px 5px; 
+	background:#000; 
+	padding:2px; 
+	border:1px solid #eee;
+}
+#featured ul.ui-tabs-nav li span{ 
+	font-size:11px; font-family:Verdana; 
+	line-height:16px; 
+}
+#featured li.ui-tabs-nav-item a{ 
+	display:block; 
+	height:80px; 
+	color:#fff;  background:#000; 
+	line-height:16px;
+	text-decoration:none;
+	padding:0 3px 0 0;
+}
+#featured li.ui-tabs-nav-item a:hover{ 
+	background:#2b2b2b; 
+	text-decoration:underline;
+}
+#featured li.ui-tabs-selected {
+    background: url("images/Tab_BG.gif") no-repeat scroll left center transparent;
+    border-right: 1px solid #FFFFFF;
+}
+#featured ul.ui-tabs-nav li.ui-tabs-selected a{ 
+	background:#000;
+}
+#featured .ui-tabs-panel{ 
+	width:400px; height:250px; 
+	background:#000; position:relative;
+}
+#featured .ui-tabs-panel .info{ 
+	position:absolute; 
+	top:200px; left:0; 
+	height:50px; 
+	background: url('images/transparent-bg.png'); 
+	width:400px;
+}
+#featured .info h2{ 
+	font-size:18px; font-family:Georgia, serif; 
+	color:#fff; padding:5px; margin:0;
+	overflow:hidden; 
+}
+#featured .info p{ 
+	margin:0 5px; 
+	font-family:Verdana; font-size:11px; 
+	line-height:15px; color:#f0f0f0;
+}
+#featured .info a{ 
+	text-decoration:none; 
+	color:#fff; 
+}
+#featured .info a:hover{ 
+	text-decoration:underline; 
+}
+#featured .ui-tabs-hide{ 
+	display:none; 
+}
+
+#breaking {
+    background-color: #4F0506;
+    float: left;
+    margin-top: 10px;
+    width: 990px;
+}
+.breaktxtcont{float:left;}
+.breakhead {
+    background: url("images/Breaking_News.gif") no-repeat scroll left top transparent;
+    color: #FDB465;
+    float: left;
+    font-family: arial black;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 4px 5px;
+    text-align: left;
+    text-transform: uppercase;
+    width: 161px;
+}
+.breaktop {
+    float: left;
+    padding-top: 0;
+    width: 800px;
+}
+.breakbott {
+    background-color: #4F0506;
+    color: #FFFFFF;
+    float: left;
+    font-family: georgia;
+    font-size: 15px;
+    padding: 5px 0;
+    width: 800px;
+}
+.breakbott a{color:#FFFFFF;font-size:15px;text-decoration:none;}
+.breakbott a:hover{text-decoration:underline;}
+.breakbott span{font:11px arial;}
+.breakclose {
+    float: right;
+    margin: 0;
+    right: 0;
+}
+
+.scrollist{ height:280px; overflow:auto;padding-bottom:3px;}
+.scrollist ul{ margin:0; padding:0;}
+.scrollist li{ background:url(images/dot.gif) repeat-x bottom left; padding-bottom:5px; list-style:none; margin:5px;}
+.scrollist li a{ padding:13px 0px 13px 10px; text-decoration:none; display:block; color:#000; font-weight:bold;}
+
+.margin15 {margin-bottom:15px;}
+.headband {background-color:#000; color:#fdb563; font:bold 16px Arial; text-transform:uppercase; padding:5px;}
+.headband a {color:#fdb563; text-decoration:none;}
+.headband a:hover {text-decoration:underline;}
+.featcont {background-color:#701E9E; padding:10px 3px; background:url(images/line.gif) repeat-y center center;  border-bottom:1px solid #7f4b02;}
+.featinncont {padding:10px; float:left; width:310px; font:12px arial; color:#ffad47; line-height:15px;}
+.featinncont .img {border:1px solid #fff; margin-right:10px;}
+.featinncont h2 {color:#fff; margin-bottom:5px; font:bold 12px arial; line-height:15px;margin-top:0;}
+.featinncont a {color:#fff; text-decoration:none;}
+.featinncont a:hover {text-decoration:underline;}
+.containeright {width:250px; font:12px arial; color:#ffad47; line-height:15px; margin:8px 0;}
+.containeright .img {border:2px solid #000; margin-right:10px;}
+.containeright h2 {color:#fff;margin:0; padding:0;  font:bold 12px arial; line-height:15px;}
+.containeright h2 a{color:#fff;margin-bottom:3px;padding:0;  text-decoration:none;}
+.containeright h2 a:hover{text-decoration:underline;}
+
+#footer{margin:10px auto 0 auto;clear:both;width:982px; background-color:#fff; border-top:3px solid #000; padding:10px;}
+#itgd_group_links{color:#656565;font:11px/18px arial;margin:0 auto 15px;text-align:center;width:980px;}
+#itgd_group_links strong{color:#656565;font-family:arial black;margin:0 0 0 1px;}
+#itgd_group_links span{color:#656565;font-family:arial;margin:0 0 0 5px;font-weight:bold;}
+#itgd_group_links a{color:#656565;margin:0 5px;text-decoration:none;}
+#itgd_group_links a:hover{text-decoration:underline;}
+ul#footer_menu{margin:0;text-align:center;border:1px solid #656565;border-left:none;border-right:none;line-height:16px;padding-bottom:2px;*padding-top:2px;width:940px;$width:980px;}
+ul#footer_menu li{display:inline;color:#656565;font:11px arial;text-transform:uppercase;border-right:1px solid #656565;padding:0 10px;}
+ul#footer_menu li a{color:#656565;text-decoration:none;}
+ul#footer_menu li a:hover{text-decoration:underline;}
+#copyrights{color:#656565;font:11px arial;padding:10px 0;text-align:center;width:980px;}
+#copyrights a{color:#656565;text-decoration:none;}
+#copyrights a:hover{text-decoration:underline;}
+
+.rightredbg {background-color:#701E9E; padding:10px;}
+#videocont {float:left; widows:268px; padding:5px 5px 2px; background-color:#000;}
+.mediabox{border-bottom:0px solid #242424;padding:1px 0;}
+.mediaimg .mediaimgpng{position:absolute;left:0;top:0;}
+.mediatxt{margin-left:2px; font:normal 12px arial;text-align:left;width:80px;overflow:hidden;padding:5px;background-color:#242424;color:#ffffff;height:123px;}
+.mediatxt a{color:#ffffff; text-decoration:none;}
+.mediatxt a:hover{text-decoration:underline;}
+.mediatxt .otherhead{font-size:11px;line-height:15px;margin-top:5px;}
+.mediatxt .otherhead a{color:#ffffff;line-height:15px;text-decoration:none;}
+.mediatxt .otherhead a:hover{color:#ffffff;line-height:15px;text-decoration:underline;}
+.mediaSbox{width:88px;float:left;color:#ffffff;background-color:#242424;height:135px;overflow:hidden; position:relative;}
+.mediaSbox .mediaSmarg{padding:3px; font:normal 12px Arial;}
+.mediaSbox .mediaSmarg a{color:#ffffff;text-decoration:none;}
+.mediaSbox .mediaSmarg a:hover{text-decoration:underline;}
+
+.pcontslider {
+    background-color:#701E9E;
+    float: left;
+    padding: 10px 15px;
+    width: 640px;
+}
+.phcaption { font:normal 12px arial; color:#fff; background-color:#000; padding:5px;height:30px; width:169px;float:left; text-align:center}
+.phcaption a {color:#fff; text-decoration:none;}
+.phcaption a:hover {text-decoration:underline;}
+.demo-wrap ul, .demo-wrap li {
+  margin:0px;
+  padding:0px;
+  border:0px;
+  outline:0px;
+  background:transparent;
+  list-style:none;
+
+  }
+
+.demo-wrap .multiple li {
+	width: 180px;
+	padding:5px;
+
+}
+
+.demo-wrap .bx-wrapper {
+	margin: 0 auto;
+}
+
+.demo-wrap .bx-prev {
+	position: absolute;
+	top: 70px;
+	left: -35px;
+	width: 31px;
+	height: 31px;
+	text-indent: -999999px;
+	background: url(images/Photo_Aerow_Left.gif) no-repeat 0 0px;
+}
+
+.demo-wrap .bx-next {
+	position: absolute;
+	top: 70px;
+	right: -35px;
+	width: 31px;
+	height: 31px;
+	text-indent: -999999px;
+	background: url(images/Photo_Aerow_Right.gif) no-repeat 0 0px;
+}
+
+.demo-wrap .bx-next:hover,
+.demo-wrap .bx-prev:hover {
+	background-position: 0 0;
+}
+
+.featured{width:332px; float:left;}
+.twitter-widget{float:right;}
+.featured .featcont{background:#701E9E; padding:8px 3px;}
+.featured .featinncont .img{border: medium none;}
+.twitter-widget .twtr-hd h3{font:700 16px Arial, Helvetica, sans-serif !important;}

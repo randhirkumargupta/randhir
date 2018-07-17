@@ -1,0 +1,9 @@
+name = ITG Editors Pick
+description = ITG Editors Pick
+core = 7.x
+package = Features
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[views_view][] = indiatoday_editors_pic
+features_exclude[dependencies][views] = views
+features_exclude[dependencies][views_data_export] = views_data_export

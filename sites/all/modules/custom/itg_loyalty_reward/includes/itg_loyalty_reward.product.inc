@@ -33,6 +33,8 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
     // Check if product is already in cart.
     $itg_result = _check_product_into_cart($user->uid, $node_id);
     $node = node_load($node_id);
+    $product_image = file_load($node->field_lrp_image['und'][0]['fid']);
+    $product_image_path = file_create_url($product_image->uri);
     $node_info_array = array(
       'nid' => $node->nid,
       'title' => $node->title,
@@ -40,17 +42,37 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
       'price' => $node->field_lrp_actual_price['und'][0]['value'],
       'discounted_price' => $node->field_lrp_discounted_price['und'][0]['value'],
       'image' => $node->field_lrp_image['und'][0],
+      'product_image' => $product_image_path,
       'points' => $node->field_lrp_loyalty_points['und'][0]['value'],
     );
     // Check if user has valid points to redeem product.
-    $remaining_point = itg_loyalty_reward_remaining_point($user->uid);
+    //$remaining_point = itg_loyalty_reward_remaining_point($user->uid);
+    if (function_exists('itg_global_loyality_get_sso_id')) {
+      $sso_id = itg_global_loyality_get_sso_id($user->uid);
+    }
+    if (!empty(variable_get('property_name'))) {
+      $property = variable_get('property_name');
+    }
+    $remaining_previous_point = itg_get_global_remaining_point($user->uid, $property, $sso_id);
+    $cart_point = '';
+    if(function_exists('itg_get_total_cart_point')) {
+      $cart_point = itg_get_total_cart_point($user->uid);
+    }
+   
+    if(!empty($cart_point)) {
+      //watchdog('cart_total_point', $cart_point);
+      $remaining_point = $remaining_previous_point - $cart_point;
+    } else {
+      $remaining_point = $remaining_previous_point;
+    }
+    
     if ($remaining_point < $node_info_array['points'] && $action == 'buy-now') {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto('product');
     }
-    elseif ($remaining_point < $node_info_array['points'] && $new_quantity > 0) {
-      return drupal_json_encode(array('code' => -2));
-    }
+    //elseif ($remaining_point < $node_info_array['points'] && $new_quantity > 0) {
+      //return drupal_json_encode(array('code' => -2));
+    //}
     elseif ($remaining_point < $node_info_array['points'] && $new_quantity == NULL && $action == NULL) {
       drupal_set_message(t('Insufficient points to redeem this product.'), 'error');
       drupal_goto($redirect);
@@ -147,12 +169,12 @@ function _update_cart_item($nid, $uid, $quantity, $node_info_array, $redirect, $
   // Update points
 
   if ($redirect != 'quantity' && $op == NULL) {
-    itg_loyalty_reward_update_point($uid, $node_info_array['points']);
+    //itg_loyalty_reward_update_point($uid, $node_info_array['points']);
     $_SESSION['cart_after_popup'] = $node_info_array;
     drupal_goto($redirect);
   }
   elseif ($redirect == 'quantity' && $op != NULL) {
-    itg_loyalty_reward_update_point($uid, ($node_info_array['points'] * $quantity), $op);
+    //itg_loyalty_reward_update_point($uid, ($node_info_array['points'] * $quantity), $op);
   }
 }
 
@@ -207,7 +229,7 @@ function _insert_product_into_cart($node_info_array) {
         ->fields($presave)
         ->execute();
     // Update points.
-    itg_loyalty_reward_update_point($user->uid, $node_info_array['points']);
+    //itg_loyalty_reward_update_point($user->uid, $node_info_array['points']);
     $response = 1;
   }
   catch (Exception $ex) {
@@ -233,12 +255,22 @@ function _insert_product_into_cart($node_info_array) {
 function itg_loyalty_reward_cart() {
   global $user, $base_url;
   // Add js file.
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
   drupal_add_js(array('itg_loyalty_reward' => array('base_url' => $base_url)), array('type' => 'setting'));
   $data = _get_cart_full_details($user->uid);
-  $remain_point = itg_loyalty_reward_remaining_point($user->uid);
-
-  return theme('itg_loyalty_reward_cart', array('data' => $data, 'remain_point' => $remain_point));
+  //$remain_point = itg_loyalty_reward_remaining_point($user->uid);
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (!empty(variable_get('property_name'))) {
+    $property = variable_get('property_name');
+  }
+  $remain_point = itg_get_global_remaining_point($user->uid, $property, $sso_id);
+  if (function_exists('itg_get_total_cart_point')) {
+    $cart_point = itg_get_total_cart_point($user->uid);
+  }
+  $final_point = $remain_point - $cart_point;
+  return theme('itg_loyalty_reward_cart', array('data' => $data, 'remain_point' => $final_point));
 }
 
 /**
@@ -310,9 +342,11 @@ function itg_loyalty_reward_removecart($nid, $name, $point) {
 function itg_loyalty_reward_order() {
   global $user;
   $header = array(
-    t('Product Description'),
+    t('Product Name'),
+    t('Property Name'),
     t('Points'),
     t('Order No'),
+    t('Date'),
   );
   // Get order detail.
   $rows = _get_order_item();
@@ -335,34 +369,51 @@ function itg_loyalty_reward_order() {
  *   Array of user order details.
  */
 function _get_order_item() {
-  global $user;
-  $itg_result = array();
+  global $user, $base_url;
+  /*$itg_result = array();
   $itg_query = db_select('itg_loyalty_reward_order', 'itg')
       ->fields('itg', array('order_id', 'product_information', 'created'))
       ->condition('uid', $user->uid)
       ->orderBy('order_id', 'desc');
-  $itg_result = $itg_query->execute()->fetchAll();
+  $itg_result = $itg_query->execute()->fetchAll();*/
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  
+  if(!empty($sso_id)) {
+    $sso_final_id = $sso_id;
+  } else {
+    $sso_final_id = $user->uid;
+  }
+  if(function_exists('itg_global_get_order_info')) {
+  $itg_result = itg_global_get_order_info($sso_final_id);
+  }
+
   $data = array();
   foreach ($itg_result as $value) {
-    $products = unserialize($value->product_information);
+    $products = unserialize($value['product_information']);
     foreach ($products['cart-items'] as $product) {
-      $product_pic = theme(
+      /*$product_pic = theme(
           'image_style', array(
         'style_name' => 'cart_172x240',
         'path' => $product['product']['image']['uri'],
           )
-      );
+      );*/
+      $product_pic = '<img src="'.$product['product']['product_image'].'" alt="product_image" title="product_image" />';
       $output = '<div class="checkout-details">';
       $output = '<div class="checkout-inner">';
-      $output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['nid'] . '</strong></div>';
-      $output .= '<div><span>Quantity: </span><strong>' . $product['quantity'] . '</strong></div>';
-      $output .= '<div><span>Date of Purchase: </span><strong>' . format_date($value->created, 'custom_date_d_m_y_') . '</strong></div></div>';
+      //$output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['title'] . '</strong></div>';
+      $output .= '<div class="checkout-inner-details"><div><strong>' . $product['product']['title'] . '</strong></div>';
+      //$output .= '<div><span>Quantity: </span><strong>' . $product['quantity'] . '</strong></div>';
+      //$output .= '<div><span>Date of Purchase: </span><strong>' . format_date($value['created'], 'custom_date_d_m_y_') . '</strong></div></div>';
       $output .= '</div>';
       $output .= '</div>';
       $data[] = array(
         $output,
+        $value['property'],
         $product['product']['points'] * $product['quantity'],
-        $value->order_id,
+        $value['site_order_id'],
+        format_date($value['created'], 'custom_date_d_m_y_'),
       );
     }
   }
@@ -379,7 +430,7 @@ function _get_order_item() {
 function itg_loyalty_reward_order_summary() {  
   global $user;
   // Add js file.
-  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js');
+  drupal_add_js(drupal_get_path('module', 'itg_loyalty_reward') . '/js/itg_loyalty_reward_cart.js', array('scope' => 'footer'));
   $user_detail = user_load($user->uid);
   $data['product_detail'] = _get_cart_full_details($user->uid);
   $fname = $user_detail->field_first_name['und'][0]['value'];
@@ -388,9 +439,20 @@ function itg_loyalty_reward_order_summary() {
   $data['user_detail']['mail'] = $user_detail->mail;
   $data['user_detail']['address'] = $user_detail->field_short_description['und'][0]['value'];
   $data['user_detail']['pincode'] = $user_detail->field_user_pincode['und'][0]['value'];
-  $remain_point = itg_loyalty_reward_remaining_point($user->uid);
-  
-  return theme('cart_order_summary', array('data' => $data, 'remain_point' => $remain_point));
+  //$remain_point = itg_loyalty_reward_remaining_point($user->uid);
+  if (function_exists('itg_global_loyality_get_sso_id')) {
+    $sso_id = itg_global_loyality_get_sso_id($user->uid);
+  }
+  if (!empty(variable_get('property_name'))) {
+    $property = variable_get('property_name');
+  }
+  $remain_point = itg_get_global_remaining_point($user->uid, $property, $sso_id);
+  if (function_exists('itg_get_total_cart_point')) {
+    $cart_point = itg_get_total_cart_point($user->uid);
+  }
+  $final_point = $remain_point - $cart_point;
+  module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
+  return theme('cart_order_summary', array('data' => $data, 'remain_point' => $final_point));
 }
 
 /**
@@ -403,7 +465,73 @@ function itg_loyalty_reward_order_confirmation() {
   if (!isset($_SESSION['placed-item'])) {
     drupal_goto($base_url . '/product');
   }
+  itg_loyalty_reward_redeem_points_send_mail('Redeem Points', $_SESSION['placed-item']);
   $data = array();
-  
   return theme('cart_order_confirmation', array('data' => $data));
+}
+
+/*
+ * Helper function for itg_loyalty_reward_redeem_points_send_mail
+ */
+function itg_loyalty_reward_redeem_points_send_mail($key, $value) {
+  
+  global $user;
+  if (function_exists('itg_mail_templates_get_mailcontent')) {
+    $get_mail_content = itg_mail_templates_get_mailcontent($key, $task_event = NULL, $ugc_status = NULL);
+    $mail_subject = $get_mail_content->field_mail_subject_loyalty[LANGUAGE_NONE][0]['value'];
+    foreach ($value as $prd_key => $prd_val) {
+      $prd_name[] = $prd_val['product']['title'];
+    }
+    
+    if (is_array($prd_name)) {
+      $productname = implode(', ', $prd_name);
+    }
+    
+    $body1 = str_replace('[itg_mail_token:itg_loyalty_user]', $user->name, $get_mail_content->field_mail_body_loyalty[LANGUAGE_NONE][0]['value']);
+    $mail_content = str_replace('[itg_mail_token:itg_product_name]', $productname, $body1);
+  }
+  $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
+  $params = array(
+    'body' => $mail_contents,
+    'subject' => $mail_subject,
+  );
+  if ((strpos($value->mail, '@twitter.com') !== false || strpos($value->mail, '@facebook.com') !== false)) {
+   $to = itg_get_global_alt_email($user->uid); 
+  } else {
+   $to = $user->mail;
+  }
+//  $to = 'gourav.walia@kelltontech.com';
+  $mail = drupal_mail('itg_loyalty_reward_redeem_points', 'itg_redeem_points_mail', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  if ($mail['result']) {
+    return TRUE;
+  }
+  else {
+    $error_msg = 'Failed to send the email!';
+    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+    return FALSE;
+  }
+}
+
+/**
+ * Implements hook_mail
+ * @param string $key
+ * @param string $message
+ * @param array $params
+ */
+function itg_loyalty_reward_redeem_points_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'itg_redeem_points_mail':
+      $headers = array(
+        'MIME-Version' => '1.0',
+        'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+        'Content-Transfer-Encoding' => '8Bit',
+        'X-Mailer' => 'Drupal'
+      );
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      foreach ($headers as $key => $value) {
+        $message['headers'][$key] = $value;
+      }
+      break;
+  }
 }

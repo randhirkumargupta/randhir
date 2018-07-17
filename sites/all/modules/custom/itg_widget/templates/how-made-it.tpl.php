@@ -1,15 +1,21 @@
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
   <div class="how-made-it">
     <ul>
       <?php foreach ($data as $key => $entity) {
          
         ?>
-        <li class="" id="dont-miss-<?php print $key ?>">
+        <li <?php echo $data_tb_region_item;?>>
           <?php if (!empty($entity['esi_file_uri'])) { ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
                 <?php $file_uri = file_create_url($entity['esi_file_uri']); ?>
-                <img src="<?php print $file_uri; ?>" alt="" />
+                <img src="<?php print $file_uri; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt'];?>" title="<?php echo $entity['field_story_extra_small_image_title'];?>" />
               </a>
             </span>
             <?php
@@ -18,7 +24,7 @@
             ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
-                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
+                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" title="" />
               </a>
             </span>
           <?php } ?>
@@ -31,11 +37,11 @@
 
             <?php if (!empty($entity['title'])) : ?> 
 
-              <p>
+              <p title="<?php echo $desc;?>">
                 <?php
                 $desc = $entity['title'];
                 if (function_exists('itg_common_get_smiley_title')) {
-                  echo l(itg_common_get_smiley_title($entity['nid'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
+                  echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
                 }
                 else {
                   echo l(mb_strimwidth($desc, 0, 70, ".."), "node/" . $entity['nid']);

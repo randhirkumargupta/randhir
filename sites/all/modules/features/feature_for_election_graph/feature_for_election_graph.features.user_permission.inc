@@ -23,20 +23,14 @@ function feature_for_election_graph_user_default_permissions() {
   // Exported permission: 'delete any election_graph_xml content'.
   $permissions['delete any election_graph_xml content'] = array(
     'name' => 'delete any election_graph_xml content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own election_graph_xml content'.
   $permissions['delete own election_graph_xml content'] = array(
     'name' => 'delete own election_graph_xml content',
-    'roles' => array(
-      'Editor' => 'Editor',
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

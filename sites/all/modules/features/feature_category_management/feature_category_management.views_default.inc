@@ -365,7 +365,7 @@ function feature_category_management_views_default_views() {
   $handler->display->display_options['filters']['vid']['value'] = array(
     4 => '4',
   );
-  /* Filter criterion: Taxonomy term: Content Type (field_cm_select_type) */
+  /* Filter criterion: Field: Content Type (field_cm_select_type) */
   $handler->display->display_options['filters']['field_cm_select_type_value']['id'] = 'field_cm_select_type_value';
   $handler->display->display_options['filters']['field_cm_select_type_value']['table'] = 'field_data_field_cm_select_type';
   $handler->display->display_options['filters']['field_cm_select_type_value']['field'] = 'field_cm_select_type_value';
@@ -559,7 +559,7 @@ function feature_category_management_views_default_views() {
     4 => '4',
   );
   $handler->display->display_options['filters']['vid']['group'] = 1;
-  /* Filter criterion: Taxonomy term: Content Type (field_cm_select_type) */
+  /* Filter criterion: Field: Content Type (field_cm_select_type) */
   $handler->display->display_options['filters']['field_cm_select_type_value']['id'] = 'field_cm_select_type_value';
   $handler->display->display_options['filters']['field_cm_select_type_value']['table'] = 'field_data_field_cm_select_type';
   $handler->display->display_options['filters']['field_cm_select_type_value']['field'] = 'field_cm_select_type_value';

@@ -1,0 +1,4 @@
+name = ITG Section Header
+description = "itg_section_header Module for change header and right sidebar according to section"
+core = 7.x
+package = ITG

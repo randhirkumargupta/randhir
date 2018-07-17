@@ -1,0 +1,138 @@
+<?php
+
+/**
+ * @file
+ * Create table survey table on back end.
+ * 
+ * Implements hook_schema().
+ * {@inheritdoc}.
+ */
+function itg_be_lucky_today_schema() {
+    $schema['survey'] = array(
+      'description' => 'Store Be Lucky Today User data',
+      'fields' => array(
+        'id' => array(
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'survey_id' => array(
+          'type' => 'int',
+          'not null' => FALSE,
+        ),
+        'name' => array(
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => FALSE,
+        ),
+        'address' => array(
+          'type' => 'varchar',
+          'length' => '50',
+          'not null' => FALSE,
+        ),
+        'city' => array(
+          'type' => 'varchar',
+          'length' => '50',
+          'not null' => FALSE,
+        ),
+        'state' => array(
+          'type' => 'varchar',
+          'length' => '50',
+          'not null' => FALSE,
+        ),
+        'email' => array(
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => FALSE,
+        ),
+        'gender' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'phone' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'mobile' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'age' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'income' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'household_income' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'designation' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'occupation' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'studled' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'record_date' => array(
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => TRUE,
+        ),
+        'facebookid' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'ipaddress' => array(
+          'type' => 'varchar',
+          'length' => '10',
+          'not null' => FALSE,
+        ),
+        'comment' => array(
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'fb_username' => array(
+          'type' => 'varchar',
+          'length' => '100',
+          'not null' => FALSE,
+        ),
+      ),
+      'primary key' => array('id'),
+      'indexes' => array(
+        'NewIndex1' => array('survey_id'),
+      ),
+    );
+
+    return $schema;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function itg_be_lucky_today_uninstall() {
+    drupal_uninstall_schema('survey');
+}
+
+/**
+ * Clear menu cache to match new configuration place
+ */
+function itg_be_lucky_today_update_7001() {
+    cache_clear_all(NULL, 'cache_menu');
+}

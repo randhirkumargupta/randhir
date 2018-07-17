@@ -29,18 +29,14 @@ function feature_for_podcast_user_default_permissions() {
   // Exported permission: 'delete any podcast content'.
   $permissions['delete any podcast content'] = array(
     'name' => 'delete any podcast content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own podcast content'.
   $permissions['delete own podcast content'] = array(
     'name' => 'delete own podcast content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

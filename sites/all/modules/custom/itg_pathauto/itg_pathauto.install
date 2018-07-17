@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function itg_pathauto_schema() {
+  $schema['itg_pathauto_state'] = array(
+    'description' => '',
+    'fields' => array(
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'description' => 'An entity type.',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'An entity ID.',
+      ),
+      'pathauto' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The automatic alias status of the entity.',
+      ),
+    ),
+    'primary key' => array('entity_type', 'entity_id'),
+  );
+
+  return $schema;
+}

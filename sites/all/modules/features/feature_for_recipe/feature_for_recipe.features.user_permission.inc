@@ -62,54 +62,42 @@ function feature_for_recipe_user_default_permissions() {
   // Exported permission: 'delete any cooking_tips content'.
   $permissions['delete any cooking_tips content'] = array(
     'name' => 'delete any cooking_tips content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any food_news content'.
   $permissions['delete any food_news content'] = array(
     'name' => 'delete any food_news content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete any recipe content'.
   $permissions['delete any recipe content'] = array(
     'name' => 'delete any recipe content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own cooking_tips content'.
   $permissions['delete own cooking_tips content'] = array(
     'name' => 'delete own cooking_tips content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own food_news content'.
   $permissions['delete own food_news content'] = array(
     'name' => 'delete own food_news content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 
   // Exported permission: 'delete own recipe content'.
   $permissions['delete own recipe content'] = array(
     'name' => 'delete own recipe content',
-    'roles' => array(
-      'Site Admin' => 'Site Admin',
-    ),
+    'roles' => array(),
     'module' => 'node',
   );
 

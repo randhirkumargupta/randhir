@@ -9,16 +9,16 @@
 
 <div id="SectionCategory">
  <h2 class="story-title"><?php print t('Section'); ?></h2>
-            <div class="itg-form-section">
-                    <?php print drupal_render($form['category_holder']); ?>
-                </div>
+ <div class="itg-form-section">
+  <?php print drupal_render($form['category_holder']); ?>
+ </div>
 </div>
-<div id="audioupload" class="browse-media-file">
+<div id="audioupload">
   <h2 class="story-title"><?php print t('Audio Upload'); ?></h2>
   <?php print drupal_render($form['upload']); ?>
   <?php print drupal_render($form['field_podcast_audio_upload']); ?>
 </div>
-<div id="Imageupload">
+<div id="Imageupload" class="browse-media-file">
   <h2 class="story-title"><?php print t('Image upload'); ?></h2>
     <?php print drupal_render($form['field_story_extra_large_image']); ?> 
     <?php print drupal_render($form['field_story_large_image']); ?>
@@ -30,12 +30,21 @@
 <div id="Configuration">
     <h2 class="story-title"><?php print t('Configuration'); ?></h2>
     <?php print drupal_render($form['field_story_itg_tags']); ?>
-    <?php print drupal_render($form['field_dailymotion_playlist']); ?>
     <?php print drupal_render($form['field_story_category']); ?>
-    <?php print drupal_render($form['field_primary_cat_data']); ?>
-
+    <?php print drupal_render($form['field_podcast_configuration']); ?>
+    <?php print drupal_render($form['field_story_comment_question']); ?>
+    
 </div>
- 
+
+<?php if(isset($form['akamai_timeout']) && !empty($form['akamai_timeout'])) { ?>
+ <div id="AkamaiSettings" class="itg-sidebar-form-section">
+    <h2 class="story-title"><?php print t('Akamai Setting'); ?></h2>
+                <div class="itg-form-class-akamai">
+        <?php print drupal_render($form['akamai_timeout']); ?>
+    </div>
+</div>
+<?php } ?>
+
 <h2 id="title-metatags" class="story-title"><?php print t('Remarks'); ?></h2>
 <?php print drupal_render_children($form); ?>
 <div><?php print drupal_render($form['actions']); ?></div>

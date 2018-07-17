@@ -5,6 +5,37 @@
 Drupal.behaviors.itg_widgets = {
     attach: function (context, settings) {
         var base_url = settings.itg_widget.settings.base_url;
+        
+        //code for section-card-refresh
+        
+        var setttl = settings.itg_widget.settings.setttl;
+        var actual_ttl = settings.itg_widget.settings.actual_ttl;
+        /*if (setttl != 0) {
+            setInterval(function () {
+                try {
+                var card_val = jQuery(".section-ordering").attr('id');
+                var block_id = card_val.split('_');
+                var widget_style = jQuery(this).attr('data-id');
+                jQuery.ajax({
+                    url: base_url + "/section-card-refresh",
+                    method: 'get',
+                    data: {card_val: card_val, widget_style: widget_style},
+                    beforeSend: function() {
+                        //jQuery('.itg-ajax-loader').show();
+                    },
+                    success: function(data) {
+                        jQuery('#'+block_id[2]).html(data);
+                    }
+                });
+            } catch(e){
+               
+            }
+                
+                
+            }, setttl * 1000);
+       }*/
+        
+        
         jQuery("div.big-news-content-videogallery a.has-ajax-big-story").click(function () {
             jQuery('.big-story-col-1 .loading-popup').show();
             var nid = jQuery(this).attr("data-nid");
@@ -43,7 +74,7 @@ Drupal.behaviors.itg_widgets = {
             jQuery('.big-story-col-1 .loading-popup').hide();
             jQuery('.videogallery-slider').slick({
                 slidesToShow: 1,
-                slidesToScroll: 1, 
+                slidesToScroll: 1,
                 prevArrow: '<i class="fa fa-chevron-left slick-prev" aria-hidden="true"></i>',
                 nextArrow: '<i class="fa fa-chevron-right slick-next" aria-hidden="true"></i>',
                 fade: false,
@@ -88,6 +119,52 @@ Drupal.behaviors.itg_widgets = {
         }
         var videoIframe = jQuery(".story-associate-content #videogallery-iframe");
         var strImg = jQuery('.story-associate-content .stryimg');
+
+        strImg.click(function () {
+            var strImgHeight = strImg.height();
+            videoIframe.show(1000, function () {
+                var widgets_type = jQuery('.associate-content-block').attr('data-widget');
+                var widgets_type_array = widgets_type.split("-");
+                var widgets_type = widgets_type_array[0];
+                var widgets_id = widgets_type_array[1];
+                var imgurl = base_url + "/sites/all/themes/itg/images/reload.gif";
+                videoIframe.append('<img class="loading-popup" src="' + imgurl + '" alt="loading image" />');
+                jQuery.ajax({
+                    url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
+                    method: 'post',
+                    //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
+                    beforeSend: function () {
+                        // $('.itg-ajax-loader').show();
+                    },
+                    success: function (data) {
+                        videoIframe.html(data);
+                        videoGallery();
+                        videoIframe.css('height', strImgHeight);
+                    }
+                });
+            });
+            strImg.hide(1000);
+        });
+
+        videoIframe.on('click', '#close-big-story', function () {
+            videoIframe.hide(1000, function () {
+                videoIframe.empty();
+            });
+            strImg.show(1000);
+        });
+
+        //        var events = jQuery('#edit-actionitg-widget-categories-wise-node-group').data('events'); // Get the jQuery events.
+        //jQuery('#edit-actionitg-widget-categories-wise-node-group').unbind('mousedown'); // Remove the click events.
+        //        jQuery('#edit-actionitg-widget-categories-wise-node-group').mousedown(function() {
+        //            if (confirm('Are you sure you want to delete that?')) {
+        //                //jQuery("#views-form-section-wise-draggable-content-order-we-may-suggest-widget").submit();
+        //                return true;
+        //            }
+        //            // Prevent default action.
+        //            return false;
+        //        });
+        var videoIframe = jQuery(".story-associate-content #videogallery-iframe");
+        var strImg = jQuery('.story-associate-content .stryimg');
         strImg.click(function () {
             videoIframe.show(1000, function () {
                 var widgets_type = jQuery('.associate-content-block').attr('data-widget');
@@ -121,68 +198,22 @@ Drupal.behaviors.itg_widgets = {
             strImg.show(1000);
         });
 
-    //        var events = jQuery('#edit-actionitg-widget-categories-wise-node-group').data('events'); // Get the jQuery events.
-    //        console.log(events);
-    //jQuery('#edit-actionitg-widget-categories-wise-node-group').unbind('mousedown'); // Remove the click events.
-    //        jQuery('#edit-actionitg-widget-categories-wise-node-group').mousedown(function() {
-    //            if (confirm('Are you sure you want to delete that?')) {
-    //                //jQuery("#views-form-section-wise-draggable-content-order-we-may-suggest-widget").submit();
-    //                return true;
-    //            }
-    //            // Prevent default action.
-    //            return false;
-    //        });
-    var videoIframe = jQuery (".story-associate-content #videogallery-iframe");
-    var strImg = jQuery('.story-associate-content .stryimg');
-        strImg.click(function(){
-            videoIframe.show(1000, function(){             
-            var widgets_type = jQuery('.associate-content-block').attr ('data-widget');              
-            var widgets_type_array = widgets_type.split ("-");
-            var widgets_type = widgets_type_array[0];
-            var widgets_id = widgets_type_array[1];  
-            var imgurl = base_url+"/sites/all/themes/itg/images/reload.gif";            
-            videoIframe.append('<img class="loading-popup" src="'+imgurl+'" alt="loading image" />');      
-                jQuery.ajax ({
-                  url: Drupal.settings.basePath + "associate-photo-video-content/" + widgets_type + "/" + widgets_id,
-                  method: 'post',
-                  //data: {status_val: 1, section_name: section_name, template_name: template_name, layout_type:layout_type},
-                  beforeSend: function () {
-                    // $('.itg-ajax-loader').show();
-                  },
-                  success: function (data) {
-                   videoIframe.html (data);
-                   videoGallery ();
-                    videoIframe.css('height', 'auto');
-                  }
-                });               
-            });     
-        strImg.hide(1000);                   
-    });    
-    
-    videoIframe.on ('click', '#close-big-story', function () {                      
-        videoIframe.hide(1000, function(){
-            videoIframe.empty();
-            videoIframe.css('height', '340px');
-        });   
-       strImg.show(1000);                                             
-    });
-
-    jQuery ('#edit-state1').change (function () {
-      var getval = jQuery (this).val ();
-      if (getval == 0)
-      {
-        getval = "";
-      }
-      jQuery ('#edit-state').val (getval);
-    })
-    jQuery ('#edit-cat1_id').change (function () {
-      var getval = jQuery (this).val ();
-      if (getval == 0)
-      {
-        getval = "";
-      }
-      jQuery ('#edit-cat_id').val (getval);
-    })
+        jQuery('#edit-state1').change(function () {
+            var getval = jQuery(this).val();
+            if (getval == 0)
+            {
+                getval = "";
+            }
+            jQuery('#edit-state').val(getval);
+        })
+        jQuery('#edit-cat1_id').change(function () {
+            var getval = jQuery(this).val();
+            if (getval == 0)
+            {
+                getval = "";
+            }
+            jQuery('#edit-cat_id').val(getval);
+        })
 // This code use for mark candidate status
         jQuery('.key-radio').live('click', function () {
             var getname = jQuery(this).attr('name');
@@ -200,11 +231,9 @@ Drupal.behaviors.itg_widgets = {
                 },
                 success: function (data) {
 
- jQuery('#widget-ajex-loader').hide();
+                    jQuery('#widget-ajex-loader').hide();
                 },
                 error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
         })
@@ -225,7 +254,6 @@ Drupal.behaviors.itg_widgets = {
                         }
                     });
                 }
-                console.log("section and type found");
             } else {
                 if (confirm('Are you sure you want to move this content ?')) {
                     jQuery("#widget-ajex-loader").css("display", "block");
@@ -324,6 +352,10 @@ jQuery(document).ready(function () {
             }
         });
     });
+
+    jQuery(".number-field").on("change", function () {
+        jQuery("#edit-submit").removeAttr("disabled");
+    });
 });
 
 jQuery(".delete-link-anchor").click(function () {
@@ -340,12 +372,10 @@ jQuery("#edit-widget-name").on("keyup", function () {
         jQuery.ajax({
             url: "custom_widget_name_list/" + jQuery(this).val(),
             success: function (data) {
-                console.log(data);
-                if(data != null) {
+                if (data != null) {
                     jQuery(".error-message-widget").remove();
-                    jQuery(".form-item-widget-name").append("<div class='messages error error-message-widget'><ul><li>Widget <b>"+widget_name+"</b> already exists in database. Please change it or new content will add in <b>"+widget_name+"</b> widget..</li></ul></div>");
-                }
-                else {
+                    jQuery(".form-item-widget-name").append("<div class='messages error error-message-widget'><ul><li>Widget <b>" + widget_name + "</b> already exists in database. Please change it or new content will add in <b>" + widget_name + "</b> widget..</li></ul></div>");
+                } else {
                     jQuery(".error-message-widget").remove();
                 }
             }
@@ -372,4 +402,35 @@ jQuery(document).ajaxSuccess(function () {
         jQuery('#' + forms[i] + ' #edit-shs-term-node-tid-depth-select-1 > option[value=0]').html("- Any -");
         jQuery('#' + forms[i] + ' #edit-category-tid-select-1 > option[value=0]').html("- Any -");
     }
+});
+
+/*jQuery(window).load(function() {
+    try {
+		if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+			jQuery(".flexslider").flexslider({
+			 animation: "slide",
+			 prevText: "",
+			 nextText: "",
+				 animation: "slide",
+				 prevText: "",
+				 nextText: "",
+			  });
+		}		     
+     }
+     catch(err) {
+         console.log(err.message);
+     }
+});*/
+
+jQuery(window).load(function() {
+    try {
+         if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+			 jQuery(".flexslider-video").flexslider({
+				animation: "slide"
+			 });
+		 }	         
+     }
+     catch(err) {
+         console.log(err.message);
+     }
 });

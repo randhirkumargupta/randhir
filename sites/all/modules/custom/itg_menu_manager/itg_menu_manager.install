@@ -79,6 +79,13 @@ function itg_menu_manager_schema() {
               'length' => '100',
               'not null' => FALSE,
           ),
+          'bk_color' => array(
+              'description' => 'background color',
+              'type' => 'varchar',
+              'length' => '255',
+              'not null' => TRUE,
+              'default' => '#cccccc',
+          ),
           'created' => array(
               'description' => 'created time',
               'type' => 'int',

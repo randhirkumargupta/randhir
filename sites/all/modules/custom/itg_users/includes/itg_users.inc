@@ -5,7 +5,7 @@
  */
 
 /**
- * callback for cms user dashboard  
+ * callback for cms user dashboard
  */
 function itg_users_cms_user_dashboard() {
   global $user;
@@ -26,11 +26,22 @@ function itg_users_cms_user_dashboard() {
   }
   // Loyalty & Rewards not found
   $menu_link = array_diff($menu_link, $remove_menu_link);
-  
-   $listed_menu_link_site_admin = array(
-      'mydraft-story' => 'Story',
-      'mydraft-photogallery' => 'Photogallery',
-      'mydraft-video' => 'Videos',
+
+    if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
+      $story_link = 'my-published-story';
+      $photo_link = 'my-published-photogallery';
+      $video_link = 'my-published-video';
+    }
+    else {
+      $story_link = 'published-story?field_story_syndication_value_op=all';
+      $video_link = 'published-video?field_story_syndication_value_op=all';
+      $photo_link = 'published-photogallery?field_story_syndication_value_op=all';
+    }
+
+  $listed_menu_link_site_admin = array(
+      $story_link => 'Story',
+      $photo_link => 'Photogallery',
+      $video_link => 'Videos',
       'breaking-news' => 'Breaking News',
       'category-manager-listing' => 'Category Management',
       'manage-users' => 'User Management',
@@ -42,33 +53,38 @@ function itg_users_cms_user_dashboard() {
       'manage-ads' => 'Ads',
       'manage-poll' => 'Poll',
       'manage-survey' => 'Survey',
+      'ask-an-expert-inqueue-content' => 'Ask an expert',
       'manage-quiz' => 'Quiz',
       'manage-newsletter' => 'Newsletter',
       'manage-event-backend' => 'Events',
       'menu-manager/second' => 'Menu manager',
       'live-tv-integration' => 'Live TV Integration',
       'ugc-inqueue-content' => 'Manage UGC',
-      'tv' => 'Upload TV Schedule',
+      'admin-tv-schedule-configuration' => 'Upload TV Schedule',
       'admin/loyalty/lrp-manage-items' => 'Loyalty & Rewards',
       'mydraft-blogs' => 'Blogs',
       'report/filed-content' => 'CMS Report');
 
-  
+   if(!in_array("Expert", $user->roles)) {
+     unset($listed_menu_link_site_admin['ask-an-expert-inqueue-content']);
+   }
+
    if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
       unset($listed_menu_link_site_admin['category-manager-listing'],
             $listed_menu_link_site_admin['manage-users'],
             $listed_menu_link_site_admin['manage-newsletter-templates'],
             $listed_menu_link_site_admin['manage-ads'],
             $listed_menu_link_site_admin['manage-poll'],
-            $listed_menu_link_site_admin['menu-manager/second'], 
+            $listed_menu_link_site_admin['menu-manager/second'],
             $listed_menu_link_site_admin['live-tv-integration'],
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
             $listed_menu_link_site_admin['manage-newsletter']);
-     
-     $data['user_link'] = $listed_menu_link_site_admin;
-     
+
+      $data['user_link'] = $listed_menu_link_site_admin;
+
    } else if(in_array("Copy Editor", $user->roles)) {
 
       unset($listed_menu_link_site_admin['category-manager-listing'],
@@ -77,21 +93,56 @@ function itg_users_cms_user_dashboard() {
             $listed_menu_link_site_admin['live-tv-integration'],
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items']);
 
      $data['user_link'] = $listed_menu_link_site_admin;
-     
+
+   } else if(in_array("UGC Moderator", $user->roles)) {
+      unset($listed_menu_link_site_admin['breaking-news'],
+            $listed_menu_link_site_admin['category-manager-listing'],
+            $listed_menu_link_site_admin['ask-an-expert'],
+            $listed_menu_link_site_admin['manage-newsletter-templates'],
+            $listed_menu_link_site_admin['manage-users'],
+            $listed_menu_link_site_admin['manage-magazines'],
+            $listed_menu_link_site_admin['manage-supplements'],
+            $listed_menu_link_site_admin['manage-issues'],
+            $listed_menu_link_site_admin['movie-review-draft-list'],
+            $listed_menu_link_site_admin['manage-ads'],
+            $listed_menu_link_site_admin['manage-poll'],
+            $listed_menu_link_site_admin['manage-survey'],
+            $listed_menu_link_site_admin['manage-quiz'],
+            $listed_menu_link_site_admin['manage-newsletter'],
+            $listed_menu_link_site_admin['manage-event-backend'],
+            $listed_menu_link_site_admin['menu-manager/second'],
+            $listed_menu_link_site_admin['live-tv-integration'],
+            $listed_menu_link_site_admin['tv'],
+            $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items'],
+            $listed_menu_link_site_admin['mydraft-blogs'],
+            $listed_menu_link_site_admin['report/filed-content'],
+            $listed_menu_link_site_admin['my-published-story'],
+            $listed_menu_link_site_admin['my-published-photogallery'],
+            $listed_menu_link_site_admin['my-published-video'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
+            $listed_menu_link_site_admin['published-story?field_story_syndication_value_op=all'],
+            $listed_menu_link_site_admin['published-video?field_story_syndication_value_op=all'],
+            $listed_menu_link_site_admin['published-photogallery?field_story_syndication_value_op=all']
+          );
+
+     $data['user_link'] = $listed_menu_link_site_admin;
+
    } else if (in_array("Section Editor/Anchor", $user->roles)) {
-     
+
       unset($listed_menu_link_site_admin['manage-newsletter-templates'],
             $listed_menu_link_site_admin['menu-manager/second'],
             $listed_menu_link_site_admin['live-tv-integration'],
             $listed_menu_link_site_admin['ugc-inqueue-content'],
             $listed_menu_link_site_admin['tv'],
+            $listed_menu_link_site_admin['itg-mobile-app-configure'],
             $listed_menu_link_site_admin['admin/loyalty/lrp-manage-items']);
-     
+
      $data['user_link'] = $listed_menu_link_site_admin;
-     
+
    } else if (in_array("Editor", $user->roles) || in_array("Site Admin", $user->roles)) {
      $data['user_link'] = $listed_menu_link_site_admin;
    } else if (in_array("Correspondent", $user->roles)) {
@@ -100,8 +151,29 @@ function itg_users_cms_user_dashboard() {
    } else {
      $data['user_link'] = $menu_link;
    }
-   
+
   return theme('cms_user_dashboard', array('data' => $data));
+}
+
+/**
+ * Page callback for the access denied page. Does a redirect to login page (Taken from r4032login.module)
+ */
+function itg_users_access_denied() {
+  global $user;
+  if ($user->uid) {
+    return MENU_ACCESS_DENIED;
+  }
+
+  // The code in drupal_get_destination() doesn't preserve any query string
+  // on 403 pages, so reproduce the part we want here.
+  $path = $_GET['destination'];
+  $query = drupal_http_build_query(drupal_get_query_parameters(NULL, array('q', 'destination')));
+  if ($query != '') {
+    $path .= '?' . $query;
+  }
+  $destination = array('destination' => $path);
+  header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
+  drupal_exit();
 }
 
 /**
@@ -118,7 +190,9 @@ function itg_users_block_user() {
 
   foreach ($itg_result as $itg_val) {
     $user = user_load($itg_val->entity_id);
+    if (!array_key_exists(FRONT_USER, $user->roles)) {
     $user->status = 0;
     user_save($user);
+    }
   }
 }

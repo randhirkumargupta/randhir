@@ -6,6 +6,13 @@
 (function($) {
     Drupal.behaviors.itg_blog = {
        attach: function(context, settings) {
+         
+         var nodeId = settings.itg_blog.settings.nodeId;
+         // hide remove button of first field on add form
+         if (nodeId == '') {
+            jQuery("#edit-field-blog-configuration-und-commentbox").trigger("click");
+         }
+         
          $('.tabledrag-toggle-weight-wrapper a.tabledrag-toggle-weight').hide();
          // Code for client Title field value set Null
             $('#edit-field-blog-configuration-und-commentbox').click(function() {

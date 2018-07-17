@@ -1,0 +1,53 @@
+@media screen and (max-width:800px){
+.itgd_links{ width:100%;}
+.itgd_links a{ font-size:12px; font-weight:normal;}
+.itgd_links a:hover{ color:#fff;}
+.itgd_links ul { width:100%;}
+.itgd_links ul li{ padding:0 5px;}
+.header{ width:100%; height:150px;}
+.nav-top ul { width:100%;}
+.header .logo{ margin:0 auto;}
+.nav-top ul li a{ padding:10px 10px; font-size:12px;}
+#wrapper{ width:100%;}
+.timeline-slider{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/timeline-band.jpg) no-repeat scroll right 0 #262000;}
+.slider-year{ margin:11px auto 0 45px;}
+.timeline-outer #pre{ left:12px;} .timeline-outer #next{ right:-9px;}
+#left-panel{ margin:0 auto; float:none;}
+#header{height:150px;}
+#right-panel{ width:638px; margin:30px auto 0; float:none;}
+#right-panel .right-box.left-box{ float:left;}
+.right-box{min-height:345px;}
+#right-panel .right-box-socilad.left-box { float:left;}
+#right-panel .right-box.rright-box,#right-panel .twitter-box.rright-box { float:right;}
+.footerpopup-section .popup-inner{ width:95%; margin-left:30px;}
+.footerpopup-section .popup-inner li{margin-right:28px;}
+.footer-inner{ width:100%;}
+.footer-inner .footer-left{ width:100%; float:none;}
+.footer-ad{ width:728px; margin:0 auto;}
+.footer-nav{ width:683px; margin:0 auto;}
+.footer-right{ margin:0 auto; float:none; padding-top:15px; padding-bottom:15px;}
+.wlft .gallery { margin-bottom:25px;}
+.social-icon{ float:left !important;}
+.bt-timeline-outer #bt-pre { left:0!Important;}
+.bt-timeline-outer #bt-next {right:0!Important;}
+.sponsered_sec .right_img_sec, .sponsered_sec .left_img_sec { float:none!Important;}
+.sponserd_outer { width:100%!Important; clear:both; margin-top:50px;}
+.sponsered_sec .left_img_sec { margin-left:195px;}
+.sponsered_sec .right_img_sec {margin-left:64px; margin-top: -6px; }
+.right_img_sec { width:89%!Important;}
+.logo .logotext h1 { margin-left:0; width:133px; }
+
+.bt-timeline-outer { width:53%; float:none}
+.footerpopup-section .popup-inner { width:85%; margin-left:60px;}
+.sp_strip { width:700px; height:150px;}
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation:portrait){
+.sponsered_sec .right_img_sec {
+float: left;
+width: 410px;
+margin-top: 13px;
+background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/Grey-base.png) no-repeat 0 0;
+}
+
+}

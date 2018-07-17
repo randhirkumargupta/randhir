@@ -8,7 +8,7 @@
 <!DOCTYPE html> 
 <html xmlns:v="urn:schemas-microsoft-com:vml">
     <head>
-        <title>India Today Account Activation Mail</title>
+        <title>India Today | Refer a friend</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>

@@ -17,6 +17,12 @@
 //  //p(node_load(2540));
 //}
 
+module_load_include('inc', 'itg_miscellaneous', 'includes/itg_custom_db_script');
+
+//file include for tags migrate 
+module_load_include('inc', 'itg_miscellaneous', 'includes/itg_tags_script_save');
+
+
 /**
  * Implements hook_menu().
  * @return array $items
@@ -30,12 +36,12 @@ function itg_miscellaneous_menu() {
       'file' => 'includes/itg_miscellaneous.inc',
   );
 
-  $items['itg-delete-layout/%'] = array(
+  /*$items['itg-delete-layout/%'] = array(
       'page callback' => 'itg_layout_delete',
       'access arguments' => array('access administrator'),
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_miscellaneous.inc',
-  );
+  );*/
 
   $items['section-widgets-list-delete'] = array(
       'page callback' => 'itg_section_widgets_list_delete',
@@ -70,12 +76,7 @@ function itg_miscellaneous_menu() {
       'type' => MENU_CALLBACK,
       'file' => 'includes/itg_story_clean.inc',
   );
-  $items['get-mongo-detail/%/%'] = array(
-      'page callback' => 'itg_get_mongo_detail',
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
-      'file' => 'includes/itg_miscellaneous.inc',
-  );
+ 
   $items['create-video-xml-clean'] = array(
       'page callback' => 'create_video_xml_clean',
       'access arguments' => array('access administrator'),
@@ -83,6 +84,373 @@ function itg_miscellaneous_menu() {
       'file' => 'includes/itg_video_clean.inc',
   );
   
+  $items['itg-related-content-migrate'] = array(
+    'title' => 'api callback menu',
+    'page callback' => 'itg_db_migrate_related_content',
+    'access callback' => TRUE,
+  );
+  
+  $items['alter-sso-nid'] = array(
+    'title' => 'sso nid callback menu',
+    'page callback' => 'itg_sso_nid_callback',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_miscellaneous.inc',
+  );
+  
+  $items['remove-flooded-node-from-widget'] = array(
+    'title' => 'Remove Flooded node from Widget',
+    'page callback' => 'itg_remove_flooded_nodes',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  
+  $items['remove-old-widgets-from-table'] = array(
+    'title' => 'Remove Old widgets from tables',
+    'page callback' => 'remove_old_widgets_from_table',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
 
+  $items['admin/import-url-redirection'] = array(
+        'title' => 'Import Redirection Url',
+        'description' => 'Import Redirection Url',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('import_redirection_url_form'),
+        'access callback' => 'user_access',
+        'access arguments' => array('administer users'),
+  );
+
+  $items['remove-flood-node-from-widget-by-tid/%'] = array(
+    'title' => 'Remove Old widgets from tables',
+    'page callback' => 'remove_old_widgets_from_table_by_tid',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  $items['hello-world'] = array(
+    'title' => 'Hello world',
+    'page callback' => 'hello_world',
+    'access callback' => TRUE,
+  );
+  $items['custom-cache-flush'] = array(
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('itg_custom_cache_flush'),
+      'access arguments' => array('access administrator'),
+      'type' => MENU_CALLBACK,
+  );
   return $items;
+}
+
+function hello_world() {
+  return "Hello";
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_miscellaneous_cronapi($op, $job = NULL) {
+  $items['remove-flooded-node-from-widget-cron'] = array(
+    'description' => 'Remove Flooded nodes from widget tables cron.',
+    'callback' => 'itg_remove_flooded_nodes',
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  $items['remove-old-widgets-from-table-cron'] = array(
+    'description' => 'Remove Old widgets from tables cron.',
+    'callback' => 'remove_old_widgets_from_table',
+    'file' => 'includes/itg_remove_flooded_data.inc',
+  );
+  return $items;
+}
+
+/**  
+ *  implements hook_advagg_get_root_files_dir_alter()
+ */
+function itg_miscellaneous_advagg_get_root_files_dir_alter(&$css_paths, &$js_paths) {  
+  if ($css_paths[0] == 'public://advagg_css' || $js_paths[0] == 'public://advagg_js') {    
+    $css_paths[0] = 's3://css';    $js_paths[0] = 's3://js';  
+    
+  }
+  
+} 
+
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function itg_miscellaneous_preprocess_page(&$vars) {
+  // Set meta data for required pages.
+  if ('magazine' == arg(0)) {
+    $description = "Select a date from the calendar to get the day's news headlines from India. All archive news, photos and videos available here.";
+    $og_description = 'Archive India Today, India, World, Sports, politics, Cricket, movies reviews, videos';
+  
+  // Prepare meta data.
+  if (isset($description) && isset($og_description)) {
+    $html_head = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keywords',
+          'content' => $og_description,
+          ),
+         '#weight' => -99
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description,
+          ),
+         '#weight' => -99
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+  }
+  
+  // Set meta data for required pages.
+  if ('livetv' == arg(0) || 'international-livetv' == arg(0)) {
+    $description_live = "India Today Live TV Streaming: Watch live tv news from worldwide and get live tv streaming by 24*7 online.";
+    $og_description_live = 'india today, tv online, live streaming, live tv online, live tv streaming, watch live tv';
+  
+  // Prepare meta data.
+    $html_head_live = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keywords',
+          'content' => $og_description_live,
+          ),
+         '#weight' => -99
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description_live,
+          ),
+         '#weight' => -99
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head_live as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+  
+    // Set meta data for required pages.
+  if (arg(0) == 'topic' && !empty(arg(1))) {
+    $search_str = urldecode(arg(1));
+    $search_str = ucwords(str_replace("-", " ", $search_str));
+    $search_str = preg_replace('/\s+/', ' ', $search_str);
+    $description_topic = "$search_str: Find $search_str news, videos, photos and magazine stories on India Today. Also get breaking news from all over India and worldwide.";
+    $og_description_topic = "$search_str, $search_str News, $search_str Videos, $search_str Photos, $search_str Images, $search_str Magazine Stories";
+
+    // Prepare meta data.
+    $html_head_live = array(
+      'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keywords',
+          'content' => $og_description_topic,
+        ),
+        '#weight' => -99
+      ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description_topic,
+        ),
+        '#weight' => -99
+      ),
+    );
+    // Push data to HTML head.
+    foreach ($html_head_live as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+}
+
+/**
+ * This function is used to import csv for url Redirection
+ * {@inheritdoc}
+ */
+function import_redirection_url_form($form, &$form_state){
+    $form['#attributes'] = array(
+    'enctype' => 'multipart/form-data'
+    );
+    $form['csvfile'] = array(
+        '#title' => t('CSV File'),
+        '#type' => 'file',
+        '#description' => 'Import CSV file',
+    );
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Import'),
+    );
+    $form['#validate'] = array(
+        'import_url_redirection_csv_validate'
+    );
+    return $form;
+}
+
+/**
+ * This function validate uploaded CSV file
+ * @param $form
+ * @param $form_state
+ *
+ */
+function import_url_redirection_csv_validate($form, &$form_state) {
+    $validators = array(
+        'file_validate_extensions' => array('csv'),
+    );
+
+    if ($file = file_save_upload('csvfile', $validators, FALSE, FILE_EXISTS_REPLACE)) {
+        $form_state['values']['csvupload'] = $file->destination;
+    }
+    else {
+        form_set_error('csvImporter', t('Unable to copy upload file to !dest'));
+    }
+}
+
+/**
+ * This function import CSV data to database
+ * @param $form
+ * @param $form_state
+ *
+ */
+function import_redirection_url_form_submit($form, &$form_state) {
+    global $user;
+    $handle = fopen(drupal_realpath($form_state['values']['csvupload']), 'r');
+    $values = array();
+    $already_exist = array();
+    while ($line = fgetcsv($handle)) {
+        if ($line[0] == 'Source' && $line[1] == 'Destination') {
+            continue;
+        }
+        if($line[0] == '' || $line[1] == ''){
+            continue;
+        }
+        if($line[0] == '' && $line[1] == ''){
+            continue;
+        }
+        $url_data_validate = get_data_url_redirection($line[0]);
+        if ($url_data_validate != '') {
+            $already_exist[] = array(
+                'Source' => $line[0],
+                'status' => 'duplicate'
+           );
+            continue;
+        }
+        if ($line[0] != '' && $line[1] != '' && url($line[0]) == url($line[1])) {
+            $already_exist[] = array(
+                'Source' => $line[0],
+                'status' => 'same_url'
+            );
+            continue;
+        }
+        if(strlen($line[0]) > 250){
+            $already_exist[] = array(
+                'Source' => $line[0],
+                'status' => 'source_exceeds'
+            );
+            continue;
+        }
+        if(strlen($line[1]) > 250){
+            $already_exist[] = array(
+                'destination' => $line[1],
+                'status' => 'destination_exceeds'
+            );
+            continue;
+        }
+        $source_parse = redirect_parse_url($line[0]);
+        $destination_parse = redirect_parse_url($line[1]);
+        $values = array(
+            "rid" => '',
+            "type" => 'redirect',
+            "hash" => '',
+            "uid" => $user->uid,
+            "source" => $source_parse['path'],
+            "source_options" => isset($source_parse['query']) ? $source_parse['query'] : array(),
+            "redirect" => $destination_parse['path'],
+            "redirect_options" => isset($destination_parse['query']) ? $destination_parse['query'] : array(),
+            "language" => LANGUAGE_NONE,
+            "status" => 1,
+            "status_code" => 0,
+            "override" => ''
+        );
+        //save redirection
+        $custom_redirect = (object) $values;
+        $total_values[] = $values;
+        redirect_save($custom_redirect);
+    }
+
+    if ((count($values)) > 0) {
+        drupal_set_message(t('Successfully import :' . count($total_values)) . ' item(s)', 'status');
+    }
+    if (count($already_exist) > 0) {
+        foreach ($already_exist as $url_data) {
+            if($url_data['status'] == 'duplicate'){
+                drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " already exists"), 'warning');
+            }elseif ($url_data['status'] == 'same_url'){
+                drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " is attempting to redirect the page to itself"), 'warning');
+            }elseif ($url_data['status'] == 'source_exceeds') {
+              drupal_set_message(t("Source: " . check_plain($url_data['Source']) . " value is more than 250 chars"), 'warning');
+            }elseif ($url_data['status'] == 'destination_exceeds') {
+              drupal_set_message(t("Destination: " . check_plain($url_data['destination']) . " value is more than 250 chars"), 'warning');
+            }
+        }
+    }
+
+}
+
+/** function for checking the url redirection
+ * @param string source
+ * @return array of matched value
+ *
+ */
+function get_data_url_redirection($source){
+    if($source != '' && db_table_exists('redirect')){
+        $query = db_select('redirect','rd');
+        $query->fields('rd',array('rid'));
+        $query->condition('rd.source',$source);
+        $result = $query->execute()->fetchCol();
+        return $data = $result[0];
+    }
+}
+
+
+function itg_custom_cache_flush(){
+  $form = array();
+  $form['itg_cache_cid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cache Cid'),
+    '#size' => 60,
+    '#required' => TRUE,
+    '#maxlength' => 255,
+  );
+  $form['itg_cache_bin'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Cache Table / Bin'),
+    '#size' => 60,
+    '#required' => TRUE,
+    '#maxlength' => 255,
+  );
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear Cache'),
+  );
+  return $form;
+}
+
+function itg_custom_cache_flush_submit($form, &$form_state){
+  if (isset($form_state['values']['itg_cache_cid']) && !empty($form_state['values']['itg_cache_cid']) && isset($form_state['values']['itg_cache_bin']) && !empty($form_state['values']['itg_cache_bin'])) {
+    cache_clear_all($form_state['values']['itg_cache_cid'], $form_state['values']['itg_cache_bin']);
+    drupal_set_message(t('Cache Cleared. CID: ' . $form_state['values']['itg_cache_cid'] . ' from : '. $form_state['values']['itg_cache_bin']), 'status');
+  }
 }

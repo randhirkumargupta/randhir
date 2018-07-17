@@ -147,12 +147,15 @@ function itg_quiz_theme() {
 function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'quiz_node_form') {
-      
+      unset($form['actions']['preview']);
+      unset($form['field_survey_category']);//hide section
       // Set Destination
       $destination = 'manage-quiz';
-     
+    drupal_add_js("jQuery(document).ready(function(){ 
+                    jQuery('#tab-quiz-publish-unpublish').hide();
+                 });", 'inline');
       // Form fields treatment
-      $form['title']['#title'] = 'Quiz Title';
+      $form['title']['#title'] = t('Quiz Title');
       $form['title']['#description'] = '<p>' . t('Please enter quiz title.') . '</p>';
       $form['actions']['submit']['#value'] = t('Publish');
       $form['actions']['cancel'] = array(
@@ -160,19 +163,11 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
         '#weight' => 21,
         '#value' => t('Cancel'),
       );
-      /*$form['actions']['itg_custom_button'] = array(
-        '#type' => 'submit',
-        '#value' => t('Save as Draft'),
-        '#submit' => array(
-            'node_form_submit',
-            'itg_quiz_form_save_as_draft_submit_callback'
-        ),
-      );*/
+      
       $form['field_quiz_add_questions'][LANGUAGE_NONE]['#title'] = '';
       $form['field_quiz_answer_type']['#access'] = FALSE;
       $form['field_quiz_options']['#access'] = FALSE;
-      unset($form['field_quiz_winners'][LANGUAGE_NONE]['#options']['_none']);
-      
+      unset($form['field_quiz_winners'][LANGUAGE_NONE]['#options']['_none']);      
       
       // After build and custom summit callback
       $form['#after_build'][] = 'itg_quiz_form_after_build';
@@ -186,7 +181,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
     // Add two answer option default
     if ((arg(0) == 'node' && arg(1) == "add" && arg(2) == 'quiz') && (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0]->preview != 'Preview')) {
         drupal_add_js("jQuery(document).ready(function(){ jQuery('.field-name-field-quiz-options-answer .field-add-more-submit').mousedown();
-      });", 'inline');
+      });", array('type' => 'inline', 'scope' => 'footer'));
    }
 }
 
@@ -223,7 +218,7 @@ function itg_quiz_form_alter(&$form, &$form_state, $form_id) {
       drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been Published.'));
     }
     else {
-      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been submitted for further review and approval.'));
+      drupal_set_message(t('Quiz <strong>' . $title . '</strong> has been updated.'));
     }
   }
 }
@@ -275,8 +270,7 @@ function itg_quiz_form_after_build($form, &$form_state) {
     
     // Unset weightage "-None-" item from drop down list
     unset($form['field_quiz_add_questions'][LANGUAGE_NONE][$news]['field_quiz_weightage'][LANGUAGE_NONE]['#options']['_none']);
-  }
-  
+  }  
 
   // Array used in itg_quiz.js.
   $settings = array();
@@ -288,7 +282,7 @@ function itg_quiz_form_after_build($form, &$form_state) {
   drupal_add_js(array('itg_quiz' => array('settings' => $settings)), array('type' => 'setting'));
   
   // Add JS for quiz.
-   drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz.js', array('weight' => 1));
+   drupal_add_js(drupal_get_path('module', 'itg_quiz') . '/js/itg_quiz.js', array('weight' => 1, 'scope' => 'footer'));
     
   // Unset metatag description.
   unset($form['metatags']['intro_text']['#markup']);
@@ -304,8 +298,7 @@ function itg_quiz_form_after_build($form, &$form_state) {
  * Implement hook_views_pre_render
  * {@inheritdoc}
  */
-function itg_quiz_views_pre_render(&$view) {
-  
+function itg_quiz_views_pre_render(&$view) {  
   // Add "Create Quiz" button on listing page of quiz.
   if ($view->name == "manage_quiz") {
     $header_content_quiz = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -319,15 +312,21 @@ function itg_quiz_views_pre_render(&$view) {
  * {@inheritdoc}
  */
 function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
-  
-   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1') {
-     
+   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1' || $form['#id'] == 'views-exposed-form-manage-quiz-page-2') {     
      // Call function autocomplete to show matching titles.
-     $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
+     //$form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));
      $form['nid']['#autocomplete_path'] = 'content-nid-list/quiz/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Quiz id'));
    }
+   
+    if ($form['#id'] == 'views-exposed-form-manage-quiz-page') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/published/autocomplete';
+    } else if ($form['#id'] == 'views-exposed-form-manage-quiz-page-1') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/draft/autocomplete';
+    } else if ($form['#id'] == 'views-exposed-form-manage-quiz-page-2') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/unpublished/autocomplete';
+    }
 }
 
 /*******************************Node Related hooks*****************************/
@@ -429,8 +428,6 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
           }
         }
         
-       
-        
         // Validation for correct answer
         $correct_ans_available = FALSE;
         foreach ($question_arr['field_quiz_options_answer'][LANGUAGE_NONE] as $correct_ans_arr) {
@@ -440,9 +437,7 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
         }
 
         // Show error message for text
-        if ($count_ans_text < 2) {
-          form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-        }
+        
 
         // Show error message for photos
         if ($answer_option_type == 'Photo') {
@@ -455,19 +450,18 @@ function itg_quiz_node_validate($node, $form, &$form_state) {
           if ($photo_is_missing_itself) {
             form_set_error('field_quiz_options_answer', t('Please provide answer photo for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
           }
-        }
-        
-        // Show error message for videos
-        if ($answer_option_type == 'Video') {
-          if ($count_ans_video < 2) {
-            form_set_error('field_quiz_options_answer', t('Please provide atleast two answer videos for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-          }
-          if ($text_missing_video) {
-            form_set_error('field_quiz_options_answer', t('Please provide answer text for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-          }
-          if ($video_is_missing_itself) {
-            form_set_error('field_quiz_options_answer', t('Please provide answer video for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
-          }
+        } else if ($answer_option_type == 'Video') {
+            if ($count_ans_video < 2) {
+              form_set_error('field_quiz_options_answer', t('Please provide atleast two answer videos for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+            }
+            if ($text_missing_video) {
+              form_set_error('field_quiz_options_answer', t('Please provide answer text for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+            }
+            if ($video_is_missing_itself) {
+              form_set_error('field_quiz_options_answer', t('Please provide answer video for all options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
+            }
+        } else if ($count_ans_text < 2) {
+            form_set_error('field_quiz_options_answer', t('Please provide atleast two answer options for question <strong>"@question"</strong>.', array('@question' => $question_txt)));
         }
 
         // Show error message for correct answer
@@ -780,8 +774,16 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
   if ($user->uid) {
     $user_type = 'authenticated';
     $user_name = $user->name;
-    $user_mail = $user->mail;
-  } else {
+    $user_alt_mail = itg_get_user_alt_email($user->uid);
+    //watchdog('quiz_user_alt_email', $user_alt_mail);
+    if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false) && !empty($user_alt_mail)) {
+      $user_mail = $user_alt_mail;
+    }
+    else {
+      $user_mail = $user->mail;
+    }
+  }
+  else {
     $user_type = 'anonymous';
     $user_name = 'Anonymous User';
     $user_mail = 'anonymous.user@indiatoday.com';
@@ -887,20 +889,24 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
 
   // At the end, after finishing quiz
   if ($form_state['clicked_button']['#value'] == 'Submit') {
-    $output = '';
-    //if ($quiz_result_type == 'ate') {
+    $output = '';    
     if ($quiz_type == 'immediate') { 
         $total_ques_attempt = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], NULL);
         $correct_answer = itg_quiz_contest_result($form_state['values']['nid'], $_SESSION['quiz_unique_key'], 'yes');
         $incorrect_answer = $total_ques_attempt - $correct_answer;
+        if ($total_ques_attempt > 0 || $correct_answer > 0 || $incorrect_answer > 0) {
+          $output = '<div class = "quiz-contest-result-container"> <div class="quiz-question-thankyou-msg">Thank you for attempting our quiz. Result is given below:</div>
+          <div class = "quiz-contest-result"><strong>Total Question  Attempted: </strong> ' . $total_ques_attempt . '</div>
+          <div class = "quiz-contest-result"><strong>Correct Answer: </strong> ' . $correct_answer . '</div>
+          <div class = "quiz-contest-result"><strong>Incorrect Answer: </strong> ' . $incorrect_answer . '</div>
+          <div class = "quiz-contest-result"><strong>Total Score: </strong> ' . $total_score . '</div>';
+          $output .= '</div>';
+          drupal_set_message($output, 'message');
+        } else {
+          $output = '<div class = "quiz-contest-result-container"> <div class="quiz-question-thankyou-msg">You have to attempt at least one quiz question before submitting it.</div></div>';
+          drupal_set_message($output, 'message');
+        }
         
-        $output = '<div class = "quiz-contest-result-container"> <div class="quiz-question-thankyou-msg">Thank you for attempting our quiz. Result is given below:</div>
-        <div class = "quiz-contest-result"><strong>Total Question  Attempted: </strong> ' . $total_ques_attempt . '</div>
-        <div class = "quiz-contest-result"><strong>Correct Answer: </strong> ' . $correct_answer . '</div>
-        <div class = "quiz-contest-result"><strong>Incorrect Answer: </strong> ' . $incorrect_answer . '</div>
-        <div class = "quiz-contest-result"><strong>Total Score: </strong> ' . $total_score . '</div>';
-        $output .= '</div>';
-        drupal_set_message($output, 'message');
     }
     else {
      drupal_set_message(t('Thank you for attempting our quiz. Once our quiz will be finished, you would get an email with winner\'s name.'));
@@ -948,11 +954,13 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
       }
       
       // Call loyalty & rewards function to save points for a user
-      if(function_exists('itg_loyalty_reward_earnpoint')) {
-        if($user->uid) {
-          //itg_loyalty_reward_earnpoint($form_state['values']['nid'], 'participate', $user->uid);
-        }
+      if($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles) && function_exists('itg_global_loyality_send_data')) {
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_id = itg_global_loyality_get_sso_id($user->uid);
       }
+      itg_global_loyality_send_data($user->uid, 'campaign', $form_state['values']['nid'], '', $sso_id);
+      }
+     
   }
 }
 
@@ -1008,10 +1016,11 @@ function itg_quiz_response(){
     }
     
     $ans_result=array_diff($correct_ans_array,$c_ans_array);
-    if(!empty($ans_result)) {
-      $choice  = 'Incorrect';    
-    }else {
-      $choice  = 'correct';
+    
+    if (empty($ans_result) && (count($correct_ans_array) == count($c_ans_array))) {
+      $choice  = 'correct';    
+    } else {
+      $choice  = 'Incorrect';
     }
     echo get_answer_response_msg($choice);
 }
@@ -1035,6 +1044,17 @@ function get_answer_response_msg($choice) {
   return $result[0]->name.'-'.$choice;
 }
     
-    
-    
-    
+/**
+ * Helper function to get user alternate email
+ * @param int $uid 
+ */
+function itg_get_user_alt_email($uid) {
+  if (!empty($uid)) {
+    $query = db_select('field_data_field_user_alternate_email', 'alt');
+    $query->fields('alt', array('field_user_alternate_email_value'))
+          ->condition('bundle', 'user')
+          ->condition('alt.entity_id', $uid);
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+}

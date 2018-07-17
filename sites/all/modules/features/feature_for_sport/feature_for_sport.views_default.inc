@@ -289,7 +289,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Body */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -342,7 +342,7 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Body */
+  /* Field: Content: Description */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -555,6 +555,11 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -614,24 +619,23 @@ function feature_for_sport_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Section wise ordering content: Content type */
-  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
-  $handler->display->display_options['filters']['content_type']['value'] = 'Videogallery';
-  $handler->display->display_options['filters']['content_type']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Widget */
-  $handler->display->display_options['filters']['widget']['id'] = 'widget';
-  $handler->display->display_options['filters']['widget']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['widget']['field'] = 'widget';
-  $handler->display->display_options['filters']['widget']['value'] = 'section_wise_widget';
-  $handler->display->display_options['filters']['widget']['group'] = 1;
-  /* Filter criterion: Section wise ordering content: Category */
-  $handler->display->display_options['filters']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['filters']['cat_id']['field'] = 'cat_id';
-  $handler->display->display_options['filters']['cat_id']['value'] = '844599';
-  $handler->display->display_options['filters']['cat_id']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type_1']['id'] = 'content_type_1';
+  $handler->display->display_options['filters']['content_type_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type_1']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type_1']['value'] = 'Videogallery';
+  $handler->display->display_options['filters']['content_type_1']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Widget */
+  $handler->display->display_options['filters']['widget_1']['id'] = 'widget_1';
+  $handler->display->display_options['filters']['widget_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['widget_1']['field'] = 'widget';
+  $handler->display->display_options['filters']['widget_1']['value'] = 'section_wise_widget';
+  $handler->display->display_options['filters']['widget_1']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Category */
+  $handler->display->display_options['filters']['cat_id_1']['id'] = 'cat_id_1';
+  $handler->display->display_options['filters']['cat_id_1']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['cat_id_1']['field'] = 'cat_id';
+  $handler->display->display_options['filters']['cat_id_1']['group'] = 1;
   $export['sport_ipl'] = $view;
 
   return $export;

@@ -20,20 +20,15 @@
       var nid = settings.itg_msi.settings.nid;
 
       //Restrict print issue date to select previous date in magazine form 
-      if(type === 'Magazine'){
+      if (type === 'Magazine') {
         $('#edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-0, #edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-1, #edit-field-print-magazine-issue-date-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
-      if(type === 'Supplement'){
+      if (type === 'Supplement') {
         $('#edit-field-supp-issue-und-0-value-datepicker-popup-0, #edit-field-supp-issue-und-0-value-datepicker-popup-1, #edit-field-supp-issue-und-0-value-datepicker-popup-3').prop("readonly", true);
       }
       
-      if(type === 'Issue'){
-//        $('#edit-field-issue-title-und-0-value-datepicker-popup-0, #edit-field-issue-title-und-0-value-datepicker-popup-1').datepicker({
-//          changeYear: true,
-//          minDate: '0',
-//          readonly: true
-//        });
+      if (type === 'Issue') {
         $('#edit-field-issue-title-und-0-value-datepicker-popup-0, #edit-field-issue-title-und-0-value-datepicker-popup-1, #edit-field-issue-title-und-0-value-datepicker-popup-3').prop("readonly", true);
       } 
       
@@ -52,16 +47,31 @@
           success: function(data) {
             if (data.Code === 1) {
               $(".form-item-title").append($('<span class="error">'+type+' title '+trimmed_title+' already exist.</span>'));
-              //$('#magazine-node-form').submit(function () { return false; }); 
-              //$("#edit-submit").prop('disabled', true);
+              
             }
             else {
-              $(".form-item-title .error").html('');
-              //$("#edit-submit").prop('disabled', false);
+              $(".form-item-title .error").html('');              
             }
           }
         });
       });
+      // Disable Submit Button
+      jQuery('.top-actions input[type="submit"]').click(function (){
+	   if(jQuery('.node-issue-form').valid()){
+		jQuery(this).css("background-color", "#d9d9d9"); 
+		jQuery(this).css("border-color", "#d9d9d9");
+		jQuery(this).parent().children().css( 'pointer-events', 'none' );
+		jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+	   }               
+	  });
+	  jQuery('.form-actions input[type="submit"]').click(function (){
+	   if(jQuery('.node-issue-form').valid()){
+		jQuery(this).css("background-color", "#d9d9d9"); 
+		jQuery(this).css("border-color", "#d9d9d9");
+		jQuery(this).parent().children().css( 'pointer-events', 'none' );
+		jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+	   }               
+	  });
     }
  };
 })(jQuery, Drupal, this, this.document);

@@ -9,15 +9,17 @@
         }
         else {
           global $base_url;
-          $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+          $img = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
         }
         ?>
         <li class="col-md-3 col-sm-3">
           <span class="tile">
             <figure>
               <?php print $img; ?> <figcaption><i class="fa fa-play-circle"></i><?php echo $row['field_video_duration']; ?></figcaption>
-            </figure>            
-            <?php echo l(mb_strimwidth(strip_tags($desc), 0, 60, ".."), $base_url . '/' . drupal_get_path_alias("node/{$row['nid']}")) ?>   </span>
+            </figure>  
+            <p  title="<?php print strip_tags($row['title']) ; ?>">
+            <?php echo l(mb_strimwidth(html_entity_decode(strip_tags($desc)), 0, 999, ".."), "node/".$row['nid']) ?>   </span>
+          </p>
         </li>
       <?php }; ?>
     </ul>

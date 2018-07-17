@@ -61,7 +61,4 @@
     ?>
 </div>
 </div>
-<style>
-  .api-grid > div{display: inline-block; vertical-align: top;}
-</style>
 

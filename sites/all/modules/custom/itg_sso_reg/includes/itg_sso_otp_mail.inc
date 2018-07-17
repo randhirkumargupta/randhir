@@ -8,14 +8,14 @@
 
 function itg_sso_otp_mail_content($rand_otp, $to) {
 
-  $mail_content = itg_sso_notification_otp_content($rand_otp);
-
+  $mail_contents = itg_sso_notification_otp_content($rand_otp);
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
   $params = array(
     'body' => $mail_content,
-    'subject' => 'India Today | OTP',
+    'subject' => $mail_subject,
   );
 
-
+//  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_sso_reg_user', 'send_mail_to_sso_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;

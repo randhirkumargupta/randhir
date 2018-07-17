@@ -27,7 +27,6 @@ global $user;
 $isCookies = itg_poll_isCookies($this_nid);
 $poll_uid = itg_poll_getcurrent_userpoll($this_nid, $user->uid);
 if (($isCookies != 'yes' && user_is_anonymous()) || (user_is_logged_in() && $poll_uid != $user->uid)) {
-//if ($isCookies != 'yes') {
   ?>
   <div class="poll-main">
     <?php

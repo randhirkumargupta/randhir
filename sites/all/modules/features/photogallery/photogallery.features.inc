@@ -26,6 +26,12 @@ function photogallery_views_api($module = NULL, $api = NULL) {
 function photogallery_image_default_styles() {
   $styles = array();
 
+  // Exported image style: image88x66scale.
+  $styles['image88x66scale'] = array(
+    'label' => 'image88x66scale',
+    'effects' => array(),
+  );
+
   // Exported image style: photgallery_edit_page.
   $styles['photgallery_edit_page'] = array(
     'label' => 'photgallery_edit_page',

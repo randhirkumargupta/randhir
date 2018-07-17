@@ -43,6 +43,12 @@ function itg_payment_schema() {
         'type' => 'float',
         'not null' => TRUE,
       ),
+    'number_of_person' => array(
+      'description' => 'TODO: please describe this field!',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 1,
+    ),
       'coupon_id' => array(
         'description' => 'Coupon Id',
         'type' => 'varchar',

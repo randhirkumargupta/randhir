@@ -1,0 +1,468 @@
+#spc-topnav { width:100%!Important}
+#main_container { border:1px solid #ff; }
+.phvid-leftnav { padding-left:10px; padding-top:10px}
+header { width:100%!Important;}
+.pathway { margin-left:10px; padding-bottom:5px; margin-top:15px;}
+
+#wapper { background:#fff; clear:both}
+.strleft { padding-top:10px;}
+
+/*latest*/
+#latest {width: 300px; float:right; background: url('http://media2.intoday.in/indiatoday/discovery/images/latest-bg.jpg') no-repeat;height: 436px;margin-bottom: 12%;}
+.l-heading h2 {	background: none repeat scroll 0 0 #FFFFFF;border-radius: 0 0 8px 8px;margin: 0 auto;padding: 5px 0;text-align: center;text-transform: uppercase;width: 147px;font-size: 18px;}
+.latest-wap {width: 218px;margin: 0 auto;margin-top: 19px;margin-bottom: 20px}
+.subscribe {}
+.subscribe a {color: #000; text-decoration:none;}
+.subscribe h2 {background: none repeat scroll 0 0 #FFFFFF;border-radius: 8px;margin: 0 auto;padding: 5px 0;	text-align: center;	text-transform: uppercase;	width: 200px;font-size: 18px;}
+.getsub {width: 125px;margin: 0 auto;margin-top: 10px;}
+.getsub li {list-style: none;float: left;margin-right: 5px}
+.getsub li a {color: #FFF;font-weight: bold; font-size:14px; text-decoration:none;text-transform: uppercase;}
+
+
+
+/*advertise with us*/
+.form-box{width:620px; float:left; margin-bottom:10px;}
+.form-box p{font:15px 'Roboto', sans-serif; float:left; margin:5px 0px;}
+.form-box-left{width:162px; float:left;}
+.form-box-left span{color:red;font:15px 'Roboto', sans-serif; margin:20px 5px; }
+.form-box-right{width:451px; float:right;}
+input[type="text"]{border:1px solid #cccccc; width:270px; height:24px;}
+textarea{width:270px; height:82px; border:1px solid #cccccc;}
+select{width:270px; height:26px; border:1px solid #cccccc;}
+input[type="submit"]{border:none; background:black; color:white; padding:5px;font:12px 'Roboto', sans-serif;}
+
+/*contact us*/
+.address-border{ border-right:2px solid #d0cecf}
+.address-box:first-child{width:205px; float:left; padding-bottom:60px; padding-left:0px;}
+.address-box{width:205px; float:left; padding-bottom:60px; padding-left:10px; }
+.address-box-head{width:200px; height:144px; float:left; background:#333333; color:white;}
+.address-box-head h3{ padding-left:10px; color:#cacaca;}
+.address-desc{border-bottom:2px dotted #939393; padding-top:10px; float:left;}
+.address-desc-left{width:97px;float:left; padding:5px 0; font:12px 'Roboto',sans-serif;}
+.address-desc-right{width:104px; float:right; padding:5px 0; font:bold 12px 'Roboto',sans-serif;}
+.addres-box2{width:100%; float:left;}
+.addres-box2 p{background:#ebebeb; padding:7px;}
+.address-box2-head{ float:left; background:#333333; color:white; width:100%; height:34px;}
+.address-box2-head h3{ margin:10px 0; padding-left:5px; color:#cacaca;}
+.addres-box2-desc-border{ border-right:2px dotted #cccccc;}
+.addres-box2-desc:first-child{text-align:left;}
+.addres-box2-desc{width:140px; float:left; text-align:center}
+.addres-box2-desc h3{ margin:5px 0;}
+.address-box3{width:100%; float:left; margin-bottom:50px;}
+.address-box3-head{background:#333333; width:307px; height:30px; margin-bottom:22px;}
+.address-box3-head h3{color:#e4e4e4; margin:0; padding-top:7px; padding-left:5px; }
+.address-box3-left{ width:320px; float:left; border-right:2px solid #d1cfd0;}
+.address-box3-right{ width:310px; float:right; margin-left:12px;}
+
+/*customer service*/
+h3.heading{ background:#333333; color:#e1e1e1; padding:10px; width:235px;}
+p.lead{font:bold 12px/16px 'Roboto',sans-serif;}
+.customer-form-box{width:100%;}
+.customer-form-box p{margin:5px 0;}
+.customer-form-box table{border-collapse:collapse}
+.customer-form-box table tr td{border:1px solid #ebebeb; padding:5px;}
+.customer-form-box input[type="text"]{width:106px; height:16px; margin-left:10px;}
+.customer-form-box select{width:106px; height:20px; margin-left:10px;}
+
+
+/*RESET*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary { display: block;}
+body {margin: 0; font-family:Roboto; background:#F1EFF0 url("http://media2.intoday.in/microsites/greatoverland_adventure/Site-BG.jpg") no-repeat center 0px;}
+h1,h2,h3,h4,h5,h6{margin:0; padding:0;}
+ul{margin:0; padding:0; list-style:none;}
+a{border:0; outline:0;}
+img{border:0; outline:0}
+.clear{clear:both;}
+.container {width: 1000px; margin:0 auto;}
+.cf:after, .cf:before, .container:after, .container:before{display:table; content:" "}
+.cf:after ,.container:after{clear:both}
+.main_header{width:100%; margin:auto; background:#4d2724; height:156px; position:relative; z-index:999;top:-5px;}
+.main_carousel{width:100%; margin:auto; background:#3e3c3d url(http://media2.intoday.in/microsites/greatoverland_adventure/Slider-BG.jpg); height:112px; margin-top:-5px; border-bottom:4px solid #fff; border-top:4px solid #fff;}
+.logo{width:100%; float:left; height:173px; position:relative;}
+.header-group-section{width:408px; float:right;}
+.itg-logo{width:150px; float:right;  position:absolute; right:0; top:108px; height:71px; }
+.itg-logo a { margin-right:10px}
+.res-wrapper{width:100%; margin:auto; background:#e5e5e5;}
+.res-wrapper2{width:64%; margin:auto; position:absolute; top:112px; right:160px;}
+
+/*COMMON */
+.heading-title{width:95%; height:32px; background-color:#333333; margin-bottom:10px;}
+.heading-title h2{color:white; padding-left:10px; font:20px/31px roboto;}
+
+.mini-heading-title{}
+.mini-heading-title{width:37%; height:32px; background-color:#333333; margin-bottom:10px;}
+.mini-heading-title p{color:white; padding-left:10px; font:14px/31px roboto;}
+
+/* TOP NAV */
+.top-nav{float:right; margin-top:28px;}
+.top-nav ul li{float:left; margin-left:5px;}
+.top-nav ul li a{ font:bold 14px Roboto,sans-serif; color:#3f3f3f; text-transform:uppercase; text-decoration:none;}
+
+/* MAIN NAVIGATION */
+.nav-ex{height:33px; }
+.nav-ex ul li:first-child{margin-left:0px;}
+.nav-ex ul li{float:left; margin-left:1px;}
+.nav-ex ul li.sep{margin-top:4px;}
+.nav-ex ul li a{font:normal 16px/33px Roboto,sans-serif; color:#d9bcba; text-transform:uppercase; text-decoration:none; padding:7px 12px}
+.nav-ex ul li a.active{ color:#00aeef}
+.nav-ex ul li a:hover{color:#00aeef}
+.nav-ex-color{ background:#6e6e6e;}
+
+/*SEARCH*/
+#search-icon{width:40px; height:33px; float:right;}
+#search-icon-off{width:40px; height:33px; float:right;}
+.search-box{width:100%;  padding:10px 0; background:#bbbbbb; display:none}
+.search-inner {width: 530px;margin: 0 auto;height: 34px;background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -132px -47px #FFFFFF;}
+.search-inner .input-box {border: medium none;float: left;padding: 3px;height: 28px;line-height: 32px;margin-left: 40px;width: 390px;-webkit-border-radius: 0px;-webkit-appearance: none;}
+.search-inner .submit-btn {float: right;margin-right: -3px;background: #d80017;color: #fff;line-height: 34px;padding: 0px 10px;border: none;text-transform: uppercase;height: 34px;font: bold 16px/15px roboto;-webkit-border-radius: 0px;-webkit-appearance: none;}
+
+/*DAY CAROUSEL */
+.carousel{width:100%; margin:auto;}
+.res-wrapper-carousel{width:100%; height:124px; margin:auto; background:#3e3c3d;}
+
+/*AD SECTION*/
+.add-left{float:left; width:729px; }
+.add-right{float:right; width:217px; margin-top:28px;}
+
+/*SLIDER*/	
+.home_slider {position: relative;top:-8px;margin-bottom:10px; margin-left:10px width:958px;}
+
+.slider-desc{width:624px; height:110px;  position:absolute; top:365px; left:20px; color:white; background:#333; z-index:999}
+.slider-desc h2{ text-transform:uppercase; margin-left:15px; margin-bottom:5px; margin-top:10px; font:bold 24px roboto;}
+.cover-story-tag{width:138px; height:31px; background:#d2232a; position:absolute; top:0; left:50px; font:bold 18px roboto}
+.cover-story-tag h3{color:white; margin:0; padding:3px 10px; font:bold 18px 'Roboto', sans-serif;}
+.slider-desc p{font:bold 16px Roboto,sans-serif; margin-left:15px; margin-top:5px;}
+.home_slider h5 {overflow: hidden;width:960px; height:405px;float: left; margin:0;}
+.home_slider h5 img{width:100%}
+.home_slider h5 span {position: absolute;width: 640px;height: 40px;line-height: 60px;padding: 5px;background: url("http://media2.intoday.in/indiatoday/discovery/images/subtitle_bg.png") repeat;	color: #fff;z-index: 99999;bottom: 0px;font: bold 20px Mangal;}		
+.home_slider h5 span a{ text-decoration:none; color:#FFFFFF;}
+.home_slider h5 span a:hover{ text-decoration:underline; color:#FFFFFF;}
+.belt_outer {height:400px;overflow: hidden;width: 100%;}
+.belt {margin-top: -18px;overflow: hidden;position: relative;height: 400px;width:960px;	}
+.belt h5 a{ text-decoration:none; color:#000;}
+/*.prev{background: url("http://media2.intoday.in/indiatoday/discovery/images/left.png") no-repeat scroll left top rgba(0, 0, 0, 0);display: block;float: left; height: 61px;    margin-right: 10px;    margin-top: 20px;    position: absolute;    text-indent: -9999px;    top: 130px;    width: 39px; cursor:pointer}
+.next {background: url("http://media2.intoday.in/indiatoday/discovery/images/right.png") no-repeat scroll left top rgba(0, 0, 0, 0);display: block;float: right; height: 61px; text-indent: -9999px; width: 39px;position:absolute;	top:150px;	right:0px; cursor:pointer	}*/
+
+/*SLIDER TICKER */
+.belt_outer2 {height:400px;overflow: hidden;width: 100%;}
+.belt2 {margin-top: -18px;overflow: hidden;position: relative;height: 400px;width:960px;	}
+
+/*LEFT AREA*/
+.space{width:100%; height:20px;}
+.left-area{width:655px; float:left; margin-left:20px;}
+.left-area h1{font:800 24px/26px roboto;}
+.section-warning{color:#f80003; margin-top:5px;}
+/*.home-box{width:305px; height:305px; float:left;margin-bottom:25px; margin-right:22px; position:relative; background:white;}*/
+.top_heading{ width:327px; float:left;}
+.home-box {
+	width: 305px;
+	height: 325px;
+	float: left;
+	margin-bottom: 25px;
+	margin-right: 22px;
+	position: relative;
+	background: white;
+	box-shadow: 2px 2px 5px 2px #ccc;
+	-moz-box-shadow: 2px 2px 5px 2px #ccc;
+	-webkit-box-shadow: 2px 2px 5px 2px #ccc;
+}
+
+
+
+.home-box li{ list-style:none;}
+.home-box-img{width:305px;}
+.home-box-img img{width:305px;}
+.home-box-title{width:305px;}
+.home-box-title h3 a{ text-decoration:none; color:black;}
+.home-box-title h3{margin:5px 10px; color:#323232; font:bold 20px/22px roboto}
+.follow-title {color: #000; }
+.follow-title h3 {
+margin-left: 10px;
+padding: 28px 0 32px 0;
+font-size: 30px;
+font-weight: bold;
+color: #000;
+font-family: roboto;
+float:left;
+}
+
+.follow-title span { float:right; padding:7px;}
+
+.story-title{position:absolute; top:0; left:10px; height:27px;}
+.story-title h3{color:white; margin:0 10px;}
+.story-title h3 a {color:#fff; text-decoration:none }
+.share{width:68px; height:24px; position:absolute; bottom:5px; right:5px;}
+.story1{}
+.story2{background-color:#e3492f;}
+.story3{background-color:#33b9c2;}
+.story4{background-color:#e3008d;}
+.story5{background-color:#4a4c4b;}
+
+/* RIGHT AREA */
+.right-area{width:300px; float:right; margin-right:10px;}
+.right-add_top{ width:300px;  background:url('http://media2.intoday.in/microsites/greatoverland_adventure/Twitter-top-band.png') no-repeat; height:64px;}
+.right-add_top span {
+color: #00adef;
+float: right;
+font-size: 20px;
+font-weight: bold;
+text-transform: uppercase;
+font-family: roboto;
+margin-top: 28px;
+margin-right: 7px;
+}
+
+.right-add_bottom{ width:300px;  background:url('http://media2.intoday.in/microsites/greatoverland_adventure/Twitter-bottom-band.png') no-repeat; height:35px;margin-bottom:20px;}
+.rightaddbg{background:#4D2724;}
+.right-add1{width:270px; margin:0 auto -3px;}
+
+.right-add_bottom a{ width:auto; float:right; font-size:16px; color:#00adef; text-decoration:none; line-height:32px; margin-right:15px;}
+.right-add2{ margin-left:-5px;}
+.add-text{color:#8b8b8b; text-align:center; font-size:11px; padding:5px 0;}
+.fb{width:300px;}
+.latest-add-section{width:300px; height:435px; background:#333333; position:relative; margin-bottom:33px;}
+.inner-div{width:244px; border:1px solid #828282; margin: 20px auto 0 auto; height:354px; background:url(images/latest_bg.jpg) no-repeat center}
+.latest-title{width:148px; height:40px; background:white; position:absolute; top:0; left:25%; border-bottom-left-radius:10px; border-bottom-right-radius:10px; text-align:center; }
+.latest-title h3{padding-top:5px;}
+.subscribe-now{width:183px; height:32px; background:white; position:absolute; bottom:43px; left:20%; border-radius:5px; text-align:center; }
+.subscribe-now h3{padding-top:5px;}
+.latest-add-section ul{margin-top:20px; font:bold 20px roboto; color:white; margin-left:auto; margin-right:auto; width:56%;}
+.latest-add-section ul li{float:left; margin-left:10px;}
+.latest-add-section a{color:white; text-decoration:none; font:bold 20px roboto;}
+
+/*MAGAZINE SECTION*/
+.magazine{width:960px; height:25px; margin: 30px 0 13px 0}
+.magazine-title{width:105px; height:25px; background:#333333; color:white; float:left;}
+.press-release-title{width:125px; height:25px; background:#333333; color:white; float:left;}
+.press-release-title p{font:bold 15px 'Roboto', sans-serif; color:white; margin:5px 0 0 5px;}
+.customer-service-title{width:155px; height:25px; background:#333333; color:white; float:left;}
+.customer-service-title p{font:bold 15px 'Roboto', sans-serif; color:white; margin:5px 0 0 5px;}
+.advertise-with-us{width:145px; height:25px; background:#333333; color:white; float:left;}
+.advertise-with-us p{font:bold 15px 'Roboto', sans-serif; color:white; margin:5px 0 0 5px;}
+.magazine-title p{font:bold 15px 'Roboto', sans-serif; color:white; margin:2px 0 0 7px;}
+.find-issue{width:640px; height:38px; margin-bottom:15px; background:#333333;}
+.find-issue-icon{float:left; width:114px; height:38px; background	:url('http://media2.intoday.in/indiatoday/discovery/images/find-issue.jpg') no-repeat}
+.find-issue-right{float:right; width:510px;}
+.find-issue-right p{float:left; color:#e3e3e3;font:bold 15px 'Roboto', sans-serif; margin:10px 0 0 10px;}
+.find-issue-right select{width:120px; margin:8px 0 0 10px; float:left; border:none; padding:3px 10px 3px 5px; text-align:right;}
+.find-issue-icon h3{margin:0; padding:10px 0 0 10px; color:white; font:bold 15px 'Roboto', sans-serif;}
+.cover-story{width:640px; height:270px; margin-bottom:78px; position:relative;}
+.cover-story-title{width:174px; height:35px; color:#fff; background-color:#d2232a; position:absolute; top:0; left:10px;}
+.cover-story-title p{font:bold 16px 'Roboto', sans-serif; padding:6px 0 0 30px; margin:0;}
+.cover-story-desc{width:436px; height:94px; background:#333333; color:#fff; position:absolute; top:237px; left:15px;}
+.cover-story-desc h2{font:bold 20px 'Roboto', sans-serif; padding:12px 0 0 10px; margin:0;}
+.cover-story-desc p{font:bold 12px 'Roboto', sans-serif; padding:5px 2px 0 10px; margin:0;}
+.more{width:100%; height:30px; background:#333333;}
+.more h3{margin:0 0 0 0; padding:7px 0 0 5px; color:white;}
+.thumb-section{float:left; width:100%}
+.thumb-section ul li{ list-style:none;}
+.thumb{width:145px; height:154px; float:left; margin:10px 0 0 0;}
+.thumb_img{width:88px; margin:auto;}
+.thumb_desc{width:100px; margin:auto;}
+.thumb a{display:block; color:#636267; font-size:12px;}
+
+/*SECTION PAGE*/
+.section-cover{width:640px; position:relative}
+
+/*PHOTO SECTION*/
+.photo-home-box{width:196px; height:193px; float:left; -webkit-box-shadow: 4px 4px 1px 0px rgba(223, 222, 220, 0.96);-moz-box-shadow: 4px 4px 1px 0px rgba(223, 222, 220, 0.96);box-shadow:4px 4px 1px 0px rgba(223, 222, 220, 0.96);margin-bottom:40px; margin-right:22px; position:relative;}
+.photo-box-img{width:100%;}
+.photo-box-img img{width:100%;}
+.photo-box-title{width:100%;}
+.photo-box-title h3{margin:5px 8px; color:#323232; font:bold 15px roboto}
+.section-photo-icon{width:30px; height:30px;position:absolute; bottom:10px; right:10px; background:url(images/photo_icon.png) no-repeat}
+.photo-icon{width:30px; height:30px;position:absolute; bottom:70px; right:10px; background:url(images/photo_icon.png) no-repeat}
+
+.discover-magazine{width:177px; height:27px; background:#333333; color:white; float:left; margin:10px 10px 10px 0px}
+.discover-magazine p{font:bold 15px 'Roboto', sans-serif; color:white; margin:5px 0 0 5px; float:left;}
+.discover-magazine span{font:bold 15px 'Roboto', sans-serif; background:#fc0301; float:left; padding: 4px 0 3px;}
+
+
+/*PHOTO STORY*/
+.photo-comment-box{width:300px;}
+.photo-comment-box textarea{width:100%}
+
+
+
+
+/*FOOTER */
+.footer-ex{width:100%; margin:auto; position:relative; background:#eeeced url("http://media2.intoday.in/indiatoday/discovery/images/footer.jpg") repeat-x; height:178px; padding-top:10px}
+
+/* FOOTER NAVIGATION */
+.footnav{height:57px; width:860px; margin:0px auto 0;}
+.footnav ul{ padding-top:5px;}
+.footnav ul li:first-child{margin-left:0px;}
+.footnav ul li{float:left; margin-left:0px;font:bold 18px/33px Roboto,sans-serif; color:#fff;}
+.footnav ul li a{font:bold 14px/33px Roboto,sans-serif; color:#fff; text-transform:uppercase; text-decoration:none; padding:4px 13px 5px}
+.footnav ul li a.active{background-color:#333333}
+.footnav ul li a:hover{background-color:#333333}
+.footer_add{width:100%; background:#fff; height:100px; margin:auto; padding:15px 0 5px 0;}
+.copyright{width:960px;margin:auto; text-align:center}
+.copyright p{color:#7c7c7c; margin-top:10px;}
+
+
+.copyright_footer{width:100%; color:#808080; font-size:12px; text-align:center; background:black; height:60px;}
+.copyright_footer a {color:#808080; text-decoration:underline;}
+.copyright_footer a:hover {color:#808080; text-decoration:none;}
+.footer-text{margin-top:24px;}
+
+
+/*FOLLOW ME*/
+.follow-me {
+width: 637px;
+height: 489px;
+margin-bottom: 30px;
+position: relative;
+background: #fff;
+}
+
+
+
+.home_slider {width:958px;position: relative;top:-8px;margin-bottom:10px; margin-left:10px}
+.home_slider h5 {overflow: hidden;width:118px;float: left; margin:0; margin-right:10px;  margin-top:22px; padding:0;}
+.belt_outer {height:99px;overflow: hidden;width: 895px; margin-left:35px; float:left}
+.belt {	margin-top: -18px;overflow: hidden;	position: relative;	height: 400px;	width:958px;}
+.shprevarrow{   background: url(http://media2.intoday.in/microsites/greatoverland_adventure/left-arrow.png) no-repeat scroll left top rgba(0, 0, 0, 0);  display: block;   float: left;  height: 65px;    margin-right: 10px;        position: absolute;    text-indent: -9999px;    top: 30px;    width: 31px; cursor:pointer}
+.shnextarrow {    background: url(http://media2.intoday.in/microsites/greatoverland_adventure/Right-arrow.png) no-repeat scroll left top rgba(0, 0, 0, 0);    display: block;    float: right;    height: 65px;    text-indent: -9999px;    width: 31px;	position:absolute;	top:30px;	right:0px;	 cursor:pointer}
+.day{width:118px; height:90px; background: url(http://media2.intoday.in/microsites/greatoverland_adventure/Slider-box.png) no-repeat scroll left; }
+.day-text{ font:bold 24px roboto; color: black; margin:auto; width:46px; color:#089fd7}
+.day-num{ font:bold 36px roboto; color: white !important; margin:auto; width:46px;}
+.share{ display:none;}
+
+.autocop{position: absolute;right: 0px;bottom: 0px;}
+
+
+
+.menues {
+	background: none repeat scroll 0 0 #000;
+	height: 41px;
+	margin: 0 auto !important;
+	}
+	
+.sp_bg {
+background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 transparent;
+}
+
+nav {
+    background-color: #000000;
+    color: #ffffff;
+    display: block;
+    font: bold 15px arial;
+    height: 41px;
+    text-align: center;
+	margin: 0 auto;
+    width: 1000px;
+}
+nav ul {
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 1000px;
+}
+.home-icon, .home-icon:hover {
+    background-color: #000 !important;
+    background-position: -338px -98px;
+    height: 23px;
+    padding: 5px 14px 11px;
+    width: 23px;
+}
+
+nav ul li {
+ font-size: 13px;
+    float: left;
+    list-style: outside none none;
+    text-transform: uppercase;
+	   z-index: 2147483647;
+	   padding: 12px 0 11px;
+}
+nav ul li h2 {
+    font-family: roboto !important;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+}
+.business_b{border-top:2px solid rgb(45, 45, 141);}
+.home_b{border-top:2px solid #E70009;}
+.news_b{border-top:2px solid #009BFF;}
+.india_b{border-top:2px solid #F25109;}
+.world_b{border-top:2px solid #0038F0;}
+.video_b{border-top:2px solid #ED1C24;}
+.photo_b{border-top:2px solid #760108;}
+.cricket_b{border-top:2px solid #98D702;}
+.movies_b{border-top:2px solid #800B80;}
+.auto_b{border-top:2px solid #FFCC01;}
+.sports_b{border-top:2px solid #00A53C;}
+.lifestyle_b{border-top:2px solid #F70164;}
+.edu_b{border-top:2px solid #f88000;}
+
+nav ul li a {
+    color: #fff;
+	text-decoration: none;
+}
+.nav_padding {
+    padding: 8px 8.5px;
+}
+
+.searc-icon {
+    background: url("http://media2.intoday.in/indiatoday/images/sprite-image.png") no-repeat scroll -174px -42px #db1620;
+    cursor: pointer;
+    float: right;
+    height: 41px;
+    margin-right: 3px;
+    text-indent: -9999px;
+    width: 45px;
+}
+
+
+/*social icon*/
+.blueheader {
+color: rgb(0, 0, 0);
+font-size: 18px;
+font-weight: normal;
+line-height: 18px;
+margin-bottom: 5px;
+margin-top: 0;
+text-align: left;
+}
+.item{clear:both;margin-bottom:20px;position:relative;}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon, .tv-iconph{display:block;float:left;height:40px;margin-left:7px;width:36px;}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon, .tv-iconph{background:url("http://indiatoday.intoday.in/images/India-Today-Sprites1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);}
+.fb-icon{background-position:-5px -35px;margin:0;}
+.tw-icon{background-position:-48px -35px;}
+.plus-icon{background-position:-92px -35px;}
+.rediff-icon{background-position:-137px -35px;}
+.rss-icon{background-position:-180px -35px;}
+.mobile-icon{background-position:-223px -35px;}
+.tv-icon{background:url("http://indiatoday.intoday.in/images/ht-live-tv_on-white.gif") no-repeat scroll 3px 5px rgba(0, 0, 0, 0);}
+
+.top_heading h2 a{ float:left; font-size:20px; font-weight:bold; text-transform:uppercase; font-family:roboto; margin-bottom:8px; text-decoration:none; color:#000;}
+h2.outerhead {font-size:20px; font-weight:bold; text-transform:uppercase; font-family:roboto; margin-bottom:14px;}
+.outerhead a{ text-decoration:none; color:#000;}
+.top_heading h2 span, h2 span{ float:left; margin-right:8px;}
+
+.team{ background:url('http://media2.intoday.in/microsites/greatoverland_adventure/Team-top-band.png') no-repeat; width:300px; height:58px;}
+.team span {
+font-size: 20px;
+font-weight: bold;
+text-transform: uppercase;
+font-family: roboto;
+color: #00adef;
+float: left;
+margin-top: 24px;
+margin-left: 90px;
+}
+
+.team_heading{margin-bottom:20px;}
+
+/*New Footer */
+footer.footerwhite{ background:#F1EFF0;}
+.bottomad{ text-align:center; padding-top:20px;}
+.home {float: left; margin: 0 !important; padding: 0 !important;}
+.footertag{ background:#fff;}
+.footertag nav, footer nav { color: #ffffff;float: left;font: bold 16px arial;height: 43px;width: 77.5%;}
+.footertag nav.nav ul li{ padding:12px 0!important;}
+.footertag nav.nav ul li a{ padding: 8px 5px!important;}
+
+.footertag nav ul li.edu_b, .footertag nav ul li.business_b{border-top:none;}
