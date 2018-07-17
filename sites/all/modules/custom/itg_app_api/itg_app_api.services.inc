@@ -7074,7 +7074,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
 
-    p($_GET);
+    //p($_GET);
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
@@ -7098,11 +7098,13 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         //$query->setSolrsort('ds_changed', 'desc');
         //$query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('start', '0');
         $query->addParam('rows', '100');
         if($device == "tv"){
             $query->addParam('fq', "bundle_name:Video");
         }
-        $query->addParam('sort', "ds_created DESC");
+        //$query->setSolrsort('entity_id', 'desc');        
+        $query->addParam('sort', "ds_changed DESC");   
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
