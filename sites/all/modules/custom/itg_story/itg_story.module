@@ -1486,14 +1486,10 @@ function itg_story_ad_code_in_content($content) {
 }
 
 /**
- * 
- * @param type $tid
- * @param type $vid
- * @return type
+ * function for get_translate_node().
  */
 function get_translate_node($tnid) {
-  global $language;
-  
+  global $language;  
   $translations = translation_path_get_translations("node/".$tnid);
   if(is_array($translations) && count($translations) > 0) {
     if ($language->language == 'hi') {
