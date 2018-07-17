@@ -1494,18 +1494,20 @@ function itg_story_ad_code_in_content($content) {
 function get_translate_node($tnid) {
   global $language;
   
-  $translations = translation_node_get_translations($tnid);
-  
-  if($_GET['TEST'] == 'abc') {
-    pr($language);
-    
-    if ($translations[$language->language]) {
-    $tnode = node_load($translations[$language->language]->nid);
-    echo $tnode->nid;
+  $translations = translation_path_get_translations("node/".$tnid);
+  if(is_array($translation_node) && count($translation_node) > 0) {
+    if ($language->language == 'hi') {
+      $translation_url = drupal_get_path_alias($translation_node['en']);
+      $lantext = 'English';
+    } elseif ($language->language == 'en') {
+      $translation_url = drupal_get_path_alias($translation_node['hi']);
+      $lantext = 'Hindi';
     }
-    p($translations);
   }
   
+  return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));  
+  
+  /*
   $query = db_select('node', 'n')->fields('n', array('nid', 'language', 'status'));
   $query->condition('n.tnid', $tnid);
   
@@ -1533,4 +1535,6 @@ function get_translate_node($tnid) {
       }
     return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));   
   }
+   * 
+   */
 }
