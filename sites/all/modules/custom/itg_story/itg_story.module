@@ -1494,11 +1494,19 @@ function itg_story_ad_code_in_content($content) {
 function get_translate_node($tnid) {
   global $language;
   
+  $translations = translation_node_get_translations($tnid);
+  
   if($_GET['TEST'] == 'abc') {
     pr($language);
+    
+    if ($translations[$language->language]) {
+    $tnode = node_load($translations[$language->language]->nid);
+    echo $tnode->nid;
+    }
+    p($translations);
   }
   
-  $query = db_select('node', 'n')->fields('n', array('nid', 'language'));
+  $query = db_select('node', 'n')->fields('n', array('nid', 'language', 'status'));
   $query->condition('n.tnid', $tnid);
   
   if ($language->language == 'hi') {
