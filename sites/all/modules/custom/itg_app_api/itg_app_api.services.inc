@@ -7098,6 +7098,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
         //$query->setSolrsort('ds_changed', 'desc');
         //$query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('start', '0');
         $query->addParam('rows', '100');
         if($device == "tv"){
             $query->addParam('fq', "bundle_name:Video");
