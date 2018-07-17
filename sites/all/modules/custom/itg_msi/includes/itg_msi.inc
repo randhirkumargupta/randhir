@@ -77,39 +77,39 @@ function itg_msi_magazine_page(){
 /**
  * Menu Callback for Fixing Issue Magazine Page.
  */ 
-function fix_magazine_order_by_issue($issue_date){
-	$issue_title = date("Y-m-d", strtotime($issue_date));
-	$weight = 1106005;
-	$query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_issue_date', 'ft', 'ft.entity_id = n.nid');
-    $query->fields('n', array('nid'));
-    $query->condition('ft.field_story_issue_date_value', '%' . db_like($issue_title) . '%', 'LIKE');
-    $query->condition('n.type', 'story', '=');
-    $query->condition('ft.bundle', 'story', '=');
-    $results = $query->execute()->fetchAll();
-    foreach($results as $nid_obj){
-	  $nid = $nid_obj->nid;
-	  $category_arr = get_story_categories_by_nid($nid);
-	  foreach($category_arr as $cat_id){
-		  $row_count = 0;
-		  $w_query = db_select('itg_widget_order', 'w');
-		  $w_query->fields('w', array('weight'));
-		  $w_query->condition('w.nid', $nid, '=');
-		  $w_query->condition('w.cat_id', $cat_id, '=');
-		  $w_query->condition('w.widget', 'section_wise_widget', '=');
-		  $w_query->condition('w.content_type', 'all', '=');		  
-		  $row_count = $w_query->execute()->rowCount();
-		  if($row_count < 1){
-			  $nid = db_insert('itg_widget_order') // Table name no longer needs {}
-				->fields(array(
-				  'nid' => $nid,
-				  'cat_id' => $cat_id,
-				  'content_type' => 'all',
-				  'widget' => 'section_wise_widget',
-				  'weight' => $weight,
-				))
-				->execute();
-		  }
-	  }
-	}
+function fix_magazine_order_by_issue($issue_date) {
+  $issue_title = date("Y-m-d", strtotime($issue_date));
+  $weight = 1106005;
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_issue_date', 'ft', 'ft.entity_id = n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('ft.field_story_issue_date_value', '%' . db_like($issue_title) . '%', 'LIKE');
+  $query->condition('n.type', 'story', '=');
+  $query->condition('ft.bundle', 'story', '=');
+  $results = $query->execute()->fetchAll();
+  foreach ($results as $nid_obj) {
+    $nid = $nid_obj->nid;
+    $category_arr = get_story_categories_by_nid($nid);
+    foreach ($category_arr as $cat_id) {
+      $row_count = 0;
+      $w_query = db_select('itg_widget_order', 'w');
+      $w_query->fields('w', array('weight'));
+      $w_query->condition('w.nid', $nid, '=');
+      $w_query->condition('w.cat_id', $cat_id, '=');
+      $w_query->condition('w.widget', 'section_wise_widget', '=');
+      $w_query->condition('w.content_type', 'all', '=');
+      $row_count = $w_query->execute()->rowCount();
+      if ($row_count < 1) {
+        $nid = db_insert('itg_widget_order') // Table name no longer needs {}
+            ->fields(array(
+              'nid' => $nid,
+              'cat_id' => $cat_id,
+              'content_type' => 'all',
+              'widget' => 'section_wise_widget',
+              'weight' => $weight,
+            ))
+            ->execute();
+      }
+    }
+  }
 }
