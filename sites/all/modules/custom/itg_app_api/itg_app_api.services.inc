@@ -7073,30 +7073,41 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $view_args['tm_vid_14_names'] = "";
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
-
+p($_GET);
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
     $results = array();
 
     try {
-        $solr = apachesolr_get_solr();
-        $query = apachesolr_drupal_query("custom");
-        $limit = 100;
-        $query->addParam('rows', $limit);
+        /*$subquery_test = apachesolr_drupal_query($key);
+        $subquery_test->addParam('fl', 'tm_vid_14_names');
+        $subquery_test->addParam('fl', 'sm_field_itg_common_by_line_name');
+        $subquery_test->addParam('fl', 'bundle_name');
+        $subquery_test->addParam('fl', 'hash');
+        $subquery_test->addParam('fl', 'label');
+        $subquery_test->addFilter("label", $key);
+        $subquery_test->addParam('sort', "ds_changed DESC");
+        $subquery_test->addParam('rows', '100');
+        $query->addFilterSubQuery($subquery_test, 'OR', 'AND'); */
         $device = strtolower($_GET['device']);
-        if ($device == "tv") {
+        $key = preg_replace('/\s+/', ' OR ', $key);
+        $solr = apachesolr_get_solr();
+        $query = apachesolr_drupal_query("custom", array('q' => $key));
+        //$query->setSolrsort('ds_changed', 'desc');
+        //$query->removeFilter('bundle_name');
+        $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('rows', '100');
+        if($device == "tv"){
             $query->addParam('fq', "bundle_name:Video");
         }
-        //$query->setSolrsort('ds_changed', 'desc');
-        $query->addParam('sort', "ds_changed DESC");
-        $resp = $query->search($key);
-        //$resp = $query->search();
+        $query->addParam('sort', "ds_created DESC");
+        $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
         }
         $results = $data->response->docs;
-    }catch (Exception $e) {
+    } catch (Exception $e) {
         watchdog('solr_service', $e->getMessage(), NULL, WATCHDOG_ERROR);
         apachesolr_failure(t('Solr search'), $key);
     }
@@ -7106,6 +7117,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     }
     return FALSE;
 }
+
 
 /**
  * main function for generate videoCategoryPage array
