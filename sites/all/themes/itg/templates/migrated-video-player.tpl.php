@@ -21,7 +21,7 @@ if(!empty($section_arr)){
 }
 if(isset($section_id) && is_numeric($section_id)){
   $section_name = get_term_name_from_tid($section_id)->name;
-  $primary_category_name = itg_common_custompath_insert_val($term->name);
+  $primary_category_name = itg_common_custompath_insert_val($section_name);
 }
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
