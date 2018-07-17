@@ -1499,16 +1499,24 @@ function get_translate_node($tnid) {
   }
   
   $query = db_select('node', 'n')->fields('n', array('nid', 'language'));
-  $query->condition('n.tnid', '1149192');
+  $query->condition('n.tnid', $tnid);
   
   if ($language->language == 'hi') {
     $query->condition('n.language', 'en');
   } elseif ($language->language == 'en') {
     $query->condition('n.language', 'hi');
   }
+  
+  if($_GET['TEST'] == 'abc') {
+    print strtr((string)$query, $query->arguments());
+  }
   $result = $query->execute()->fetchObject();
   
-  if (isset($result) && !empty($result)) {
+  if($_GET['TEST'] == 'abc') {
+    p($result);
+  }
+  
+  if (!empty($result)) {
       $translation_url = drupal_get_path_alias("node/" . $result->nid);
       if ($result->language == 'en') {
         $lantext = 'Hindi';
