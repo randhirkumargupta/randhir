@@ -100,7 +100,7 @@ function fix_magazine_order_by_issue($issue_date) {
       $w_query->condition('w.content_type', 'all', '=');
       $row_count = $w_query->execute()->rowCount();
       if ($row_count < 1) {
-        $nid = db_insert('itg_widget_order') // Table name no longer needs {}
+        db_insert('itg_widget_order') // Table name no longer needs {}
             ->fields(array(
               'nid' => $nid,
               'cat_id' => $cat_id,
@@ -109,7 +109,10 @@ function fix_magazine_order_by_issue($issue_date) {
               'weight' => $weight,
             ))
             ->execute();
+        
       }
-    }
+    }    
   }
+  $node_count = count($results);
+  drupal_set_message(t("Done Successfully for ".$node_count." Nodes."), 'success');
 }
