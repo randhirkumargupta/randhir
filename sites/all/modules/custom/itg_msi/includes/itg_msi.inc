@@ -114,5 +114,5 @@ function fix_magazine_order_by_issue($issue_date) {
     }    
   }
   $node_count = count($results);
-  print "Done Successfully for ".$node_count." Nodes".
+  print "Done Successfully for ".$node_count." Nodes.";
 }
