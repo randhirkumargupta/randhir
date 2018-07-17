@@ -7073,7 +7073,8 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $view_args['tm_vid_14_names'] = "";
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
-p($_GET);
+
+    p($_GET);
     $link_ar = array();
     $nid_ar = array();
     $stdkeys = explode(',', str_replace(' ', '', $fields));
@@ -8006,10 +8007,4 @@ function itg_rapid_api_breaking_news_tv() {
     return $data;
 }
 
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f61e0af6b718a4416408e1538027304e9243e549
 
