@@ -850,7 +850,9 @@ function itg_widget_theme() {
         'top_takes_videos_tab_widget' => array(
             'template' => 'templates/top-takes-videos-tab-widget',
         ),
-
+        'itg_widget_watch_right_now_with_anchor' => array(
+            'template' => 'templates/watch-right-now-with-anchor',
+        ),
     );
     return $themes;
 }
@@ -3786,7 +3788,7 @@ function get_html_widget_data_by_nids($nids){
   return array();
 }
 
-function get_term_id_and_name($nid){
+function get_term_id_and_name($nid){return array();
   if(!empty($nid)){
     $query = "SELECT fd.field_select_url_type_tid as tid, t.name FROM
         field_data_field_select_url_type fd inner join taxonomy_term_data t
