@@ -7073,6 +7073,11 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $view_args['tm_vid_14_names'] = "";
      $ao_results = views_get_view_result('rest_api_search', 'page_1', $view_args);
      p($ao_results);*/
+    
+    p($_GET);
+    
+    
+    
 
     $link_ar = array();
     $nid_ar = array();
