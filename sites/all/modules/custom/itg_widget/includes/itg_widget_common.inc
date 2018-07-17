@@ -3788,7 +3788,7 @@ function get_html_widget_data_by_nids($nids){
   return array();
 }
 
-function get_term_id_and_name($nid){return array();
+function get_term_id_and_name($nid){
   if(!empty($nid)){
     $query = "SELECT fd.field_select_url_type_tid as tid, t.name FROM
         field_data_field_select_url_type fd inner join taxonomy_term_data t
