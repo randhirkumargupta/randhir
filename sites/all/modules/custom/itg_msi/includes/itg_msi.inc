@@ -114,5 +114,5 @@ function fix_magazine_order_by_issue($issue_date) {
     }    
   }
   $node_count = count($results);
-  drupal_set_message(t("Done Successfully for ".$node_count." Nodes."), 'success');
+  print "Done Successfully for ".$node_count." Nodes".
 }
