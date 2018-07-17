@@ -7103,7 +7103,7 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
             $query->addParam('fq', "bundle_name:Video");
         }
         //$query->setSolrsort('entity_id', 'desc');        
-        $query->addParam('sort', "entity_id DESC");   
+        $query->addParam('sort', "ds_changed DESC");   
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
