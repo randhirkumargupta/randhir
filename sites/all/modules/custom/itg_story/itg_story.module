@@ -1500,41 +1500,9 @@ function get_translate_node($tnid) {
       $translation_url = drupal_get_path_alias($translations['en']);
       $lantext = 'English';
     } elseif ($language->language == 'en') {
-      $translation_url = drupal_get_path_alias($translations['hi']);
+      $translation_url = "hi/". drupal_get_path_alias($translations['hi']);
       $lantext = 'Hindi';
     }
   }
-  
-  return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));  
-  
-  /*
-  $query = db_select('node', 'n')->fields('n', array('nid', 'language', 'status'));
-  $query->condition('n.tnid', $tnid);
-  
-  if ($language->language == 'hi') {
-    $query->condition('n.language', 'en');
-  } elseif ($language->language == 'en') {
-    $query->condition('n.language', 'hi');
-  }
-  
-  if($_GET['TEST'] == 'abc') {
-    print strtr((string)$query, $query->arguments());
-  }
-  $result = $query->execute()->fetchObject();
-  
-  if($_GET['TEST'] == 'abc') {
-    p($result);
-  }
-  
-  if (!empty($result)) {
-      $translation_url = drupal_get_path_alias("node/" . $result->nid);
-      if ($result->language == 'en') {
-        $lantext = 'Hindi';
-      } else {
-        $lantext = 'English';
-      }
-    return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));   
-  }
-   * 
-   */
+  return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));    
 }
