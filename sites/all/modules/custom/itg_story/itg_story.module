@@ -668,7 +668,9 @@ function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
     if($_GET['test'] == 'abc') {
-      print "roles = ".$user->roles . "<br>";
+      $nid = $form['#node']->nid;
+      cache_clear_all("field:node:$nid", 'cache_field');
+      pr($user->roles);
       print "SITE_ADMIN = ". SITE_ADMIN . "<br>";
       pr($form);
       
@@ -686,10 +688,6 @@ function itg_story_after_build($form, &$form_state) {
     }
   }
   
-  if($_GET['test'] == 'abc') {     
-      p( $form['actions']);
-      
-    }
 
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
