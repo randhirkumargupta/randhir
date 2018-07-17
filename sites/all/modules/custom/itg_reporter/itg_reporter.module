@@ -693,7 +693,7 @@ function itg_authors_get_workbench_title($title) {
         $query->range(0, 20);
         $result = $query->execute();
         while ($record = $result->fetchAssoc()) {
-            $options[$record['title'].'#'.$record['nid']] = $record['title'];
+            $options[$record['title']] = $record['title'];
         }
 
         drupal_json_output($options);
