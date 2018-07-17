@@ -242,7 +242,6 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
               if(arg(0) == 'node') {
                   print get_translate_node(arg(1));
               }
-              exit;
               ?>
                 <div class="social-nav mhide">
                     <ul class="social-nav mhide">
