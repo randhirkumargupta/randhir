@@ -676,16 +676,24 @@ function itg_authors_get_workbench_title($title) {
         $title = strtolower(trim($title));
         $query = db_select('node', 'n');
         $query->Join('field_data_field_celebrity_pro_occupation', 'fo', 'fo.entity_id = n.nid');
-          $query->condition('n.status', 1, '=');
-        $query->fields('n', array('title'));
+        $query->Join('field_data_field_reporter_profile_type', 'pro', 'pro.entity_id = n.nid');
+        $query->leftJoin('field_data_field_inactive_profile', 'ip', 'ip.entity_id = n.nid');
+        $query->condition('n.status', 1, '=');
+        $query->fields('n', array('title', 'nid'));
         $query->condition('n.title', '%' . $title . '%', 'LIKE');
         $query->condition('n.type', $content_type, '=');
         $query->condition('fo.field_celebrity_pro_occupation_tid', '285750', '=');
         $query->condition('fo.bundle', 'reporter', '=');
+        $query->condition('pro.bundle', 'reporter', '=');
+        $query->condition('pro.field_reporter_profile_type_value', 'internal', '=');
+        $or = db_or();
+        $or->condition('ip.field_inactive_profile_value', '0', '=');
+        $or->condition('ip.field_inactive_profile_value', NULL);
+        $query->condition($or);
         $query->range(0, 20);
         $result = $query->execute();
         while ($record = $result->fetchAssoc()) {
-            $options[$record['title']] = $record['title'];
+            $options[$record['title'].'#'.$record['nid']] = $record['title'];
         }
 
         drupal_json_output($options);
