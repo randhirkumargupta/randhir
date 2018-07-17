@@ -1166,7 +1166,7 @@ function itgd_chart_beat_code() {
 				drupal_add_js('function EmbedScript() {
         var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";
         _Impulser.async = true;
-        _Impulser.src = ("https:" == window.parent.document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+        _Impulser.src = window.parent.document.location.protocol + "//impulse.forkcdn.com/pub/ITG/IndiaToday/generic.js";
         var _scripter = window.parent.document.getElementsByTagName("script")[0]; _scripter.parentNode.insertBefore(_Impulser, _scripter);
         };
         function inIframe() {
@@ -1192,7 +1192,7 @@ function itgd_chart_beat_code() {
     drupal_add_js('function EmbedScript() {
         var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";
         _Impulser.async = true;
-        _Impulser.src = ("https:" == window.parent.document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+        _Impulser.src = window.parent.document.location.protocol + "//impulse.forkcdn.com/pub/ITG/IndiaToday/generic.js";
         var _scripter = window.parent.document.getElementsByTagName("script")[0]; _scripter.parentNode.insertBefore(_Impulser, _scripter);
         };
         function inIframe() {
