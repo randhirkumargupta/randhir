@@ -2054,7 +2054,7 @@ function get_primary_section_data($nid, $prime_section){
 					$hash_url = itg_apache_solr_get_site_url();
 				}
 				$path = $related_data->path_alias;
-				$amp_url = SITE_PROTOCOL.'/amp/'.$path;
+				$amp_url = SITE_PROTOCOL.FRONT_URL.'/amp/'.$path;
 				$image_link_url = $amp_url;
 				if (empty($related_image_url)) {
 				$img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
