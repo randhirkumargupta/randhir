@@ -2005,7 +2005,8 @@ function clear_akamai_external_file_cache($url = NULL){
 }
 
 function get_primary_section_data($nid, $prime_section){
-  $related_story = '<h2>RELATED</h2>';
+  $related_story = '<div class="related-story related-story-bottom">';
+  $related_story .= '<h2>RELATED</h2>';
   $related_story.= '<ul>';
   $i = 0;
   if ($prime_section) {
@@ -2029,7 +2030,7 @@ function get_primary_section_data($nid, $prime_section){
     $range = 0;
     foreach ($result as $reskey => $resvalue) {
       $related_data = itg_get_related_story_content($resvalue['nid']);
-      if ($i == 3)
+      if ($i == 4)
         break;
       if (!empty($related_data)) {
         $display_title = get_related_display_title($arg[1], $current_entity_id);
@@ -2070,5 +2071,7 @@ function get_primary_section_data($nid, $prime_section){
       $i++;
     }
   }
+  $related_story.= '</ul>';
+  $related_story.= '</div>';
   return $related_story;
 }
