@@ -305,10 +305,11 @@ function api_anchorlist_callback(){
     
     $query->condition('n.type', 'miscellaneous');
     $query->condition('fmt.field_miscellaneous_type_value', 'anchor-notification');
+    $days_ago = strtotime(date('Y-m-d', strtotime('-5 days')));
+    $query->condition('n.created', $days_ago, '>=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
     $loop_c = 0;
     foreach ($result as $reskey => $resvalue) {
         $title = $resvalue['title'];
@@ -337,10 +338,11 @@ function api_anchorlist_callback(){
     $str_data = (string) $jsondata; 
     //file write code
     $file_name = "api-anchorchat.json";
-    $json_path = 'public://indiatoday/anchor-chat';    
+    $json_path = 'public://anchor-chat';    
     writeFeedFile($json_path, $file_name, $str_data);
-    print $jsondata;
-    die();
+    $full_file_path = file_create_url($json_path . '/'. $file_name);
+    clear_akamai_external_file_cache($full_file_path);
+    return;
 }
 
 function badUnicodeparse_report_module($str) {    

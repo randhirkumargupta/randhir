@@ -1994,3 +1994,12 @@ function get_story_categories_by_nid($nid) {
   }
   return $cat_arr;
 }
+
+function clear_akamai_external_file_cache($url = NULL){
+  if (!empty($url)) {
+    $akamai_flush_url = 'http://specials.indiatoday.com/purge-api/new/api.php?site=indiatoday&userid=1522&user=itgsiteadmin&urls='.$url;
+    $ch = curl_init($akamai_flush_url);
+    $data = curl_exec($ch);
+    curl_close($ch);
+  }
+}

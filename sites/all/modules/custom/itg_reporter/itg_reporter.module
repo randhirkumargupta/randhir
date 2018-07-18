@@ -41,6 +41,12 @@ function itg_reporter_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['content-workbench-authors-title-list/autocomplete'] = array(
+    'page callback' => 'itg_authors_get_workbench_title',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
   // $items['content-people-migration'] = array(
   //   'title' => 'People migration',
   //   'page callback' => 'itg_people_migration',
@@ -204,7 +210,9 @@ function itg_reporter_theme($existing, $type, $theme, $path) {
  */
 function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
+  if ($form['#id'] == 'views-exposed-form-authors-and-people-listing-page'){
+    $form['title']['#autocomplete_path'] = 'content-workbench-authors-title-list/autocomplete';
+  }
   if ($form_id == 'reporter_node_form') {
     $node_type = $form['#node']->type;
     // code to change page title on node edit
@@ -650,4 +658,44 @@ function itg_get_author_byline($auth_cat_id) {
   else {
     return array();
   }
+}
+
+
+/**
+ * callback for all the workbench authors of title
+ * @param $title
+ */
+function itg_authors_get_workbench_title($title) {
+  global $user;
+    if (strlen(trim($title)) > 0) {
+        // echo 'qwerty';
+        // die;
+
+        $content_type = 'reporter';
+        $options = '';
+        $title = strtolower(trim($title));
+        $query = db_select('node', 'n');
+        $query->Join('field_data_field_celebrity_pro_occupation', 'fo', 'fo.entity_id = n.nid');
+        $query->Join('field_data_field_reporter_profile_type', 'pro', 'pro.entity_id = n.nid');
+        $query->leftJoin('field_data_field_inactive_profile', 'ip', 'ip.entity_id = n.nid');
+        $query->condition('n.status', 1, '=');
+        $query->fields('n', array('title', 'nid'));
+        $query->condition('n.title', '%' . $title . '%', 'LIKE');
+        $query->condition('n.type', $content_type, '=');
+        $query->condition('fo.field_celebrity_pro_occupation_tid', '285750', '=');
+        $query->condition('fo.bundle', 'reporter', '=');
+        $query->condition('pro.bundle', 'reporter', '=');
+        $query->condition('pro.field_reporter_profile_type_value', 'internal', '=');
+        $or = db_or();
+        $or->condition('ip.field_inactive_profile_value', '0', '=');
+        $or->condition('ip.field_inactive_profile_value', NULL);
+        $query->condition($or);
+        $query->range(0, 20);
+        $result = $query->execute();
+        while ($record = $result->fetchAssoc()) {
+            $options[$record['title']] = $record['title'];
+        }
+
+        drupal_json_output($options);
+    }
 }

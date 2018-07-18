@@ -667,7 +667,12 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
-
+    $nid = $form['#node']->nid;
+    
+    if(!empty($nid)) {
+      cache_clear_all("field:node:$nid", 'cache_field');
+    }
+   
   // apply button for editor and siteadmin role
   if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
@@ -680,6 +685,7 @@ function itg_story_after_build($form, &$form_state) {
       );
     }
   }
+  
 
   if (empty($form_state['input']['op'])) {
     unset($_SESSION['unique']);
@@ -892,11 +898,14 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
       ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
     )
   );
+  /*
   $form['field_story_big_image']['#states'] = array(
     'visible' => array(
       ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
     )
   );
+   * 
+   */
   $form['field_animated_image_position']['#states'] = array(
     'visible' => array(
       ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
@@ -1477,4 +1486,22 @@ function itg_story_ad_code_in_content($content) {
   $after_content = implode('</p>', $after_content_arr);
   $content = $before_content . ' ' . $after_content;
   return $content;
+}
+
+/**
+ * function for get_translate_node().
+ */
+function get_translate_node($tnid) {
+  global $language, $base_url; 
+  $translations = translation_path_get_translations("node/".$tnid);
+  if(is_array($translations) && count($translations) > 0) {
+    if ($language->language == 'hi') {
+      $translation_url = $base_url . "/" .drupal_get_path_alias($translations['en']);
+      $lantext = 'English';
+    } elseif ($language->language == 'en') {
+      $translation_url = $base_url . "/hi/". drupal_get_path_alias($translations['hi']);
+      $lantext = 'Hindi';
+    }
+  }
+  return $translate_link = l($lantext , $translation_url , array('attributes' => array('target' => '_blank')));    
 }
