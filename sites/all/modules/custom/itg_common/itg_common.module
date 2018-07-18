@@ -2004,7 +2004,13 @@ function clear_akamai_external_file_cache($url = NULL){
   }
 }
 
-function get_primary_section_data($nid, $prime_section){
+/**
+ * Function for getting Node primary Section Related Data.
+ * @param type $nid
+ * @param type $prime_section
+ * @return string
+ */
+function get_primary_section_related_data($nid, $prime_section){
   $related_story = '<div class="related-story related-story-bottom">';
   $related_story .= '<h2>RELATED</h2>';
   $related_story.= '<ul>';
