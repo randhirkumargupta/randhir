@@ -2029,6 +2029,8 @@ function get_primary_section_data($nid, $prime_section){
         $range = 0;
         foreach ($result as $reskey => $resvalue) {
             $related_data = itg_get_related_story_content($resvalue['nid']);
+            if ($i == 3)
+			break;
 			if (!empty($related_data)) {
 			  $display_title = get_related_display_title($arg[1], $current_entity_id);
 			  if(!empty($display_title)) {
@@ -2051,11 +2053,8 @@ function get_primary_section_data($nid, $prime_section){
 				if (function_exists('itg_apache_solr_get_site_url')) {
 					$hash_url = itg_apache_solr_get_site_url();
 				}
-				$front_url = $hash_url[$related_data->hash].'/'.url($related_data->path_alias);
-				$request = parse_url($front_url);
-				$host = $request['host'];
-				$path = $request['path'];
-				$amp_url = SITE_PROTOCOL.$host.'/amp'.$path;
+				$path = $related_data->path_alias;
+				$amp_url = SITE_PROTOCOL.'/amp/'.$path;
 				$image_link_url = $amp_url;
 				if (empty($related_image_url)) {
 				$img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
@@ -2067,9 +2066,7 @@ function get_primary_section_data($nid, $prime_section){
 				$related_story.= '<span class="tile"><a href="'.$amp_url.'">'.$related_title.'</a></span><a href="'.$image_link_url.'">' . $related_image .'</a></li>';
 			  }
 			}
-		$i++;
-		if ($i == 4)
-		break;
+		$i++;		
         }
     }
     return $related_story;
