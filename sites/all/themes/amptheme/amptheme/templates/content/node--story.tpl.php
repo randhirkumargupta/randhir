@@ -777,6 +777,16 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
             <!-- For buzzlfeed section end --> 
             <?php
           }
+          else{
+			 // Get Primary category Section Data.
+			 if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
+              $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+            }
+            if(!empty($primary_cat)){
+				$data = get_primary_section_data($node->nid, $primary_cat);
+				print $data;
+			}
+		  }
           ?>
          
          <!-- Vuukle Comment Code -->
