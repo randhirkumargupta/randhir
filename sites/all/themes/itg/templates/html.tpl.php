@@ -615,7 +615,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .tags{padding:15px 0px; border-bottom:1px solid #ddd;}
 .story-section .tags ul li{display:inline-block;vertical-align:top;padding:2px 6px;color:#c0c0c0;font-size:12px;font-size:0.75rem;}
 .story-section .tags ul li a{color:#c0c0c0;font-size:12px;font-size:0.75rem;}
-.story-section .tags ul li + li {border: 1px solid #eee;box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 0px 1px rgba(0,0,0,0.24); margin-left:15px;border-radius: 2px;}
+.story-section .tags ul li + li {border: 1px solid #eee;box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 0px 1px rgba(0,0,0,0.24); margin-left:15px;border-radius: 2px; margin-bottom:10px;}
 .story-section .tags ul li + li a{color:#323232;}
 .story-section .tags ul li:nth-child(1){padding-left:0;}
 .story-section .tags ul li:nth-child(1) i{color:#999}
