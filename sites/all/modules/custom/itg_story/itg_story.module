@@ -1489,14 +1489,14 @@ function itg_story_ad_code_in_content($content) {
  * function for get_translate_node().
  */
 function get_translate_node($tnid) {
-  global $language;  
+  global $language, $base_url; 
   $translations = translation_path_get_translations("node/".$tnid);
   if(is_array($translations) && count($translations) > 0) {
     if ($language->language == 'hi') {
-      $translation_url = drupal_get_path_alias($translations['en']);
+      $translation_url = $base_url . "/" .drupal_get_path_alias($translations['en']);
       $lantext = 'English';
     } elseif ($language->language == 'en') {
-      $translation_url = "hi/". drupal_get_path_alias($translations['hi']);
+      $translation_url = $base_url . "/hi/". drupal_get_path_alias($translations['hi']);
       $lantext = 'Hindi';
     }
   }
