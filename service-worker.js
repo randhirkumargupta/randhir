@@ -155,9 +155,9 @@ function saveAnalyticsRequest(requestUrl) {
         timestamp: Date.now()
     });
 }
-const CACHE_APP = [
-    '/',
-    '/offline'
+const CACHE_APP = [    
+    '/offline',
+    '/'
 ]
 const PAGENOT_FOUND_URL = '/pagenotfound';
 const OFFLINE_URL = '/offline';
