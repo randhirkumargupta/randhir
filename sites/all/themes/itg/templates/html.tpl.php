@@ -613,9 +613,13 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .story-right .briefcase ul li{position:relative;font-size:14px;font-size:0.875rem;margin-bottom:10px;padding-left:15px;line-height:22px;}
 .story-section .story-right .briefcase ul li:before{position:absolute;top:6px;left:0px;content:'';border-radius:100%;background:#a00606;height:5px;width:5px;}
 .story-section .tags{padding:10px 0px;}
-.story-section .tags ul li{display:inline-block;vertical-align:top;padding:0px 6px;color:#c0c0c0;font-size:12px;font-size:0.75rem;}
+.story-section .tags ul li{display:inline-block;vertical-align:top;padding:2px 6px;color:#c0c0c0;font-size:12px;font-size:0.75rem;}
 .story-section .tags ul li a{color:#c0c0c0;font-size:12px;font-size:0.75rem;}
+.story-section .tags ul li + li {border: 1px solid #eee;box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 0px 1px rgba(0,0,0,0.24); margin-left:15px;}
+.story-section .tags ul li + li a{color:#323232;}
 .story-section .tags ul li:nth-child(1){padding-left:0;}
+.story-section .tags ul li:nth-child(1) i{color:#c0c0c0}
+.story-section .tags ul li:nth-child(1){color:#ef0401;}
 .story-section .social-list{font-family:"OpenSans-Regular";color:#939292;font-size:12px;font-size:0.75rem;border-top:1px solid #dddddd;border-bottom:1px solid #dddddd;zoom:1;}
 .story-section .social-list:before,.story-section .social-list:after{content:"";display:block;height:0;overflow:hidden;}
 .story-section .social-list:after{clear:both;}
