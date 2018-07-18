@@ -357,7 +357,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
 .story-section .story-right .description p{padding:10px 0;}
 .story-right .description>p:first-child:first-letter{font-size:55px;font-weight:700;padding-right:5px;float:left;line-height:57px;}
-.story-section .story-right .briefcase{margin-top:20px;}
+.story-section .story-right .briefcase{margin-top:20px;border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;}
 .story-section .story-right .briefcase h4{font-size:18px;font-size:1.125rem;text-transform:uppercase;margin-bottom:10px;color:#bb0a0a;font-family:"OpenSans-Bold";}
 .story-section .story-right .briefcase ul li{position:relative;font-size:14px;font-size:.875rem;margin-bottom:10px;padding-left:15px;line-height:22px;}
 .story-section .story-right .briefcase ul li:before{position:absolute;top:6px;left:0;content:'';border-radius:100%;background:#a00606;height:5px;width:5px;}
@@ -1231,6 +1231,27 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 @media only screen and (max-width:340px){
 .story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{width:25px;height:35px;top:40px;font-size:18px;line-height:37px;}
 }
+/* SnapPost Story */
+.story-section .snap-post{padding:20px 20px 20px 70px;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;background:url(https://akm-img-a-in.tosshub.com/sites/all/themes/itg/images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;background-size:40px;}
+.story-section .snap-post .discription{font-size:14px;font-size:.875rem;font-weight:700;line-height:22px;}
+.story-section .snap-post .agbutton{margin-top:20px;}
+.story-section .snap-post .agbutton a{color:#026bc5;font-size:12px;font-size:.75rem;display:block;margin-top:10px;}
+.story-section .snap-post .agbutton button{background:#363636;border:none;color:#fff;width:75px;height:30px;border-radius:5px;box-shadow:2px 2px 0px #aeaeae;text-transform:uppercase;font-size:12px;font-size:.75rem;font-family:"OpenSans-Regular";margin-right:10px;cursor:pointer;}
+.story-section .snap-post .agbutton button span{font-size:14px;font-size:.875rem;}
+.story-section .snap-post .agbutton p.error-msg{color:#13d21a;margin-top:10px;text-align:left;}
+.agbutton .error-msg{color:red;}
+
+@media only screen and (min-width:769px){
+.story-section .snap-post{padding:20px 20px 20px 100px;background-size:inherit;}
+.story-section .snap-post .discription{font-size:22px;font-size:1.375rem;font-weight:700;line-height:30px;text-align:center;}
+.story-section .snap-post .agbutton{margin:20px 0;text-align:center;}
+.story-section .snap-post .agbutton a{display:inline-block;margin-top:0;}
+.story-section .snap-post .agbutton button{margin:0 15px;width:113px;font-size:17px;font-size:1.0625rem;font-weight:500;}
+.story-section .snap-post .agbutton p.error-msg{padding-left:140px;}
+}
+@media only screen and (min-width:768px) and (max-width:1200px){
+.story-section .snap-post .agbutton,.story-section .snap-post .discription{text-align:center;}
+}
 
 
 /* new story design Css */
@@ -1242,6 +1263,8 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-left-section.story-update .story-left .share_bar{ width:35%; float: right; padding:15px 0 10px }
 .story-left-section.story-update .story-left .byline .profile-pic, .story-left-section.story-update .story-left .byline .profile-detail{float: left;}
 }
+
+
 
 </style>
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
