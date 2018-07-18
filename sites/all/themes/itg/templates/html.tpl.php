@@ -1148,7 +1148,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-associate-content #videogallery-iframe .big-story-popup{position:absolute;top:50%;left:50%;width:600px;height:455px;margin-left:-300px;margin-top:-227px;}
 .story-section .story-associate-content #videogallery-iframe #close-big-story{position:fixed;right:20px;top:20px;color:#000;z-index:99;display:inline-block;width:30px;height:30px;background:#fff;text-align:center;border-radius:100%;line-height:30px;font-weight:900;cursor:pointer;box-shadow:2px 2px 3px #484242;}
 .story-section .story-associate-content #videogallery-iframe #close-big-story a{color:#000;font-family:roboto;}
-.story-section .story-associate-content .videogallery-slider .slick-slide{width:100%;}
+.story-section .story-associate-content .videogallery-slider .slick-slide{width:100%; text-align: center;}
 .story-section .story-associate-content .video-slider-images .slick-slider{background:#171717;padding:10px 0;height:inherit;position:relative;padding:5px 20px;}
 .story-section .story-associate-content .video-slider-images .slick-prev,.story-section .story-associate-content .video-slider-images .slick-next{font:normal normal normal 14px/1 FontAwesome;cursor:pointer;width:24px;left:0;font-size:0;position:absolute;top:50%;z-index:9;border:none;margin-top:-6px;background:transparent;color:#fff;}
 .story-section .story-associate-content .video-slider-images .slick-prev:before,.story-section .story-associate-content .video-slider-images .slick-next:before{content:'\f053';font-size:20px;}
@@ -1197,7 +1197,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .slick-track{position:relative;top:0;left:0;display:block;}
 .slick-track:before,.slick-track:after{display:table;content:'';}
 .slick-track:after{clear:both;}
-.slick-slide img{display:block;}
+/* .slick-slide img{display:block;} */
 .story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
 .story-section .story-right .description p{padding:10px 0;}
 .story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{background:rgba(0,0,0,0.6);border:none;width:45px;height:66px;border-radius:0 7px 7px 0;color:#fff;position:absolute;top:138px;z-index:1;font-size:28px;text-align:center;line-height:70px;cursor:pointer;visibility:visible!important;}
