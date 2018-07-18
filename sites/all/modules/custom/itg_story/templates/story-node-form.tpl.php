@@ -61,6 +61,14 @@
                 <?php print drupal_render($form['field_story_extra_small_image']); ?>
             </div>
         </div>
+        <div id="browse-image" class="itg-form-section-wrapper browse-media-file">
+            <h2 class="story-title"><?php print t('Facebook Instant Article'); ?></h2>
+            <div class="itg-form-section">
+                <!-- Facebook Instant Article -->
+                <?php print drupal_render($form['field_story_big_image']); ?>
+                <!-- Facebook Instant Article -->
+            </div>
+        </div>
         <div id="StoryContent" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('More Details'); ?></h2>
             <div class="itg-form-section hide">
@@ -173,11 +181,10 @@
                     <!-- Facebook fields -->
                     <?php print drupal_render($form['field_story_facebook_narrative']); ?>
                     <?php print drupal_render($form['field_story_facebook_image']); ?>
-                    <?php print drupal_render($form['field_story_facebook_video']); ?>                    <!-- Facebook Instant Article -->
+                    <?php print drupal_render($form['field_story_facebook_video']); ?>              <!-- Facebook Instant Article -->
                     <?php print drupal_render($form['field_facebook_audio_position']); ?>
                     <?php print drupal_render($form['field_facebook_instant_audio_url']); ?>
-                    <?php print drupal_render($form['field_story_big_image']); ?>
-
+                    
                     <?php print drupal_render($form['field_animated_image_position']); ?>
                     <?php print drupal_render($form['field_facebook_animated_image']); ?>
                     <?php print drupal_render($form['field_facebook_map_position']); ?>
