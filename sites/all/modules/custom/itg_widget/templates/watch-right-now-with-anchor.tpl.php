@@ -19,7 +19,9 @@
     </ul>
   <?php endif;?>
 </div>
+<div class="space-15"></div>
 <div class="watch-right-now-video">
+<span class="widget-title">Watch right now</span>
 <?php if (!empty($data['wrn_video'])) : global $base_url; ?>
     <?php $is_fron_page = drupal_is_front_page();
     $data_tb_region_item = '';
