@@ -454,3 +454,23 @@ function itg_custom_cache_flush_submit($form, &$form_state){
     drupal_set_message(t('Cache Cleared. CID: ' . $form_state['values']['itg_cache_cid'] . ' from : '. $form_state['values']['itg_cache_bin']), 'status');
   }
 }
+
+/**
+ * @param array $node
+ */
+function itg_miscellaneous_node_update($node){
+  if ($node->type == 'miscellaneous' && $node->field_miscellaneous_type[LANGUAGE_NONE][0]['value'] == 'anchor-notification') {
+    api_anchorlist_callback();
+  }
+}
+
+/**
+ * 
+ * @param array $node
+ */
+
+function itg_miscellaneous_node_insert($node){
+  if ($node->type == 'miscellaneous' && $node->field_miscellaneous_type[LANGUAGE_NONE][0]['value'] == 'anchor-notification') {
+    api_anchorlist_callback();
+  }
+}
