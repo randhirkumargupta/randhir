@@ -1333,6 +1333,7 @@ function _related_story_amp_block_content() {
   foreach ($related_result_amp as $site_hash_key) {
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
+    var_dump($related_data);die;
     if (!empty($related_data)) {
       $display_title = get_related_display_title($arg[1], $current_entity_id);
       if(!empty($display_title)) {
