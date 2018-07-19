@@ -2,7 +2,7 @@
 print views_embed_view('authors_and_people_listing', 'block_1');
 
 // Pagination
-$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
+$page = (int) (!isset($_GET["cpage"]) ? 1 : $_GET["cpage"]);
 $limit = 15;
 $startpoint = ($page * $limit) - $limit;
 
@@ -25,7 +25,7 @@ function pagination($per_page = 10,$page = 1, $url = '?'){
                 if ($counter == $page)
                 $pagination.= "<li><a class='current'>$counter</a></li>";
                 else
-                $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=$counter'>$counter</a></li>";
             }
         }
         elseif($lastpage > 5 + ($adjacents * 2)){
@@ -34,41 +34,41 @@ function pagination($per_page = 10,$page = 1, $url = '?'){
                     if ($counter == $page)
                         $pagination.= "<li><a class='current'>$counter</a></li>";
                     else
-                        $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
+                        $pagination.= "<li><a href='{$url}cpage=$counter'>$counter</a></li>";
                 }
                 $pagination.= "<li class='dot'>...</li>";
-                $pagination.= "<li><a href='{$url}page=$lpm1'>$lpm1</a></li>";
-                $pagination.= "<li><a href='{$url}page=$lastpage'>$lastpage</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=$lpm1'>$lpm1</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=$lastpage'>$lastpage</a></li>";
             }
             elseif($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)){
-                $pagination.= "<li><a href='{$url}page=1'>1</a></li>";
-                $pagination.= "<li><a href='{$url}page=2'>2</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=1'>1</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=2'>2</a></li>";
                 $pagination.= "<li class='dot'>...</li>";
                 for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++){
                     if ($counter == $page)
                         $pagination.= "<li><a class='current'>$counter</a></li>";
                     else
-                        $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
+                        $pagination.= "<li><a href='{$url}cpage=$counter'>$counter</a></li>";
                 }
                 $pagination.= "<li class='dot'>..</li>";
-                $pagination.= "<li><a href='{$url}page=$lpm1'>$lpm1</a></li>";
-                $pagination.= "<li><a href='{$url}page=$lastpage'>$lastpage</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=$lpm1'>$lpm1</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=$lastpage'>$lastpage</a></li>";
             }
             else{
-                $pagination.= "<li><a href='{$url}page=1'>1</a></li>";
-                $pagination.= "<li><a href='{$url}page=2'>2</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=1'>1</a></li>";
+                $pagination.= "<li><a href='{$url}cpage=2'>2</a></li>";
                 $pagination.= "<li class='dot'>..</li>";
                 for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++){
                     if ($counter == $page)
                         $pagination.= "<li><a class='current'>$counter</a></li>";
                     else
-                        $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
+                        $pagination.= "<li><a href='{$url}cpage=$counter'>$counter</a></li>";
                 }
             }
         }
         if ($page < $counter - 1){
-            $pagination.= "<li><a href='{$url}page=$next'>Next</a></li>";
-            $pagination.= "<li><a href='{$url}page=$lastpage'>Last</a></li>";
+            $pagination.= "<li><a href='{$url}cpage=$next'>Next</a></li>";
+            $pagination.= "<li><a href='{$url}cpage=$lastpage'>Last</a></li>";
         }
         else{
             $pagination.= "<li><a class='current'>Next</a></li>";
