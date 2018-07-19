@@ -30,7 +30,7 @@ class ItgBylinePeopleMigration extends XMLMigration {
       'metadesc' => t('metadesc'),
       'redirectionurl' => t('redirectionurl'),
       //'created_by' => t('created_by'),
-      //'id' => t('id'),
+      'id' => t('id'),
     );
 
     // This can also be an URL instead of a local file path.
@@ -86,19 +86,15 @@ class ItgBylinePeopleMigration extends XMLMigration {
 
     $this->addFieldMapping('field_story_extra_large_image:alt', 'kicker_image_alt_text')->xpath('kicker_image_alt_text');
     $this->addFieldMapping('field_story_extra_large_image:title','kicker_image_alt_text')->xpath('kicker_image_alt_text');
-
     $this->addFieldMapping('pathauto')->defaultValue(0);
     $this->addFieldMapping('path', 'sef_url')->xpath('sef_url');
-
     $this->addFieldMapping('created', 'created')->xpath('created');
     $this->addFieldMapping('changed', 'modified')->xpath('modified');
     $this->addFieldMapping('metatag_title', 'metatitle')->xpath('metatitle');
     $this->addFieldMapping('metatag_description', 'metadesc')->xpath('metadesc');
     $this->addFieldMapping('metatag_keywords', 'metakey')->xpath('metakey');
     $this->addFieldMapping('migrate_redirects', 'redirectionurl')->xpath('redirectionurl');
-
-
-
+    $this->addFieldMapping('field_weight', 'id')->xpath('id');
   }
 
   public function prepareRow($row) {
