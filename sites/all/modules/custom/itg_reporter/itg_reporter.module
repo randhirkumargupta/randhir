@@ -221,7 +221,7 @@ function itg_reporter_theme($existing, $type, $theme, $path) {
  */
 function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  if ($form['#id'] == 'views-exposed-form-authors-and-people-listing-page'){
+  if ($form['#id'] == 'views-exposed-form-authors-and-people-listing-page' || $form['#id'] == 'views-exposed-form-authors-and-people-listing-block-1'){
     $form['title']['#autocomplete_path'] = 'content-workbench-authors-title-list/autocomplete';
   }
   if ($form_id == 'reporter_node_form') {

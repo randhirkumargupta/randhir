@@ -1,7 +1,7 @@
 <?php
-print views_embed_view('authors_and_people_listing', 'page');
 
-if(!isset($_GET['title'])){
+print views_embed_view('authors_and_people_listing', 'block_1');
+
   $content_type = 'reporter';
   $query = db_select('node', 'n');
   $query->Join('field_data_field_celebrity_pro_occupation', 'fo', 'fo.entity_id = n.nid');
@@ -84,6 +84,23 @@ if(!isset($_GET['title'])){
   </div>
   <?php } ?>
 </div>
-<?php }
-}
-?>
+<?php } ?>
+
+
+<script type="text/javascript">
+(function ($, Drupal, window, document, undefined) {
+    Drupal.behaviors.itg_reporter = {
+        attach: function (context, settings) {
+            jQuery("#edit-submit-authors-and-people-listing").click(function () {
+                var title = jQuery("#edit-title").val();
+                if(title != '' && title != null){
+                    jQuery(".custom-author-listing-wrapper").hide();
+                }else{
+                    jQuery(".custom-author-listing-wrapper").show();
+                }
+
+            })
+        }
+    };
+})(jQuery, Drupal, this, this.document);
+</script>
