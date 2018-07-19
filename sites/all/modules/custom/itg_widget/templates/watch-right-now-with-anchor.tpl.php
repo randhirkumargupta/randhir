@@ -2,20 +2,20 @@
 <div class="watch-right-now-anchor-flex">
   <?php if (!empty($data['wrn_anchors'])) :?>
     <ul class="anchor-list-slide slides">
-      <?php foreach ($data['wrn_anchors'] as $anchor_key => $anchor_video) { ?>
+      <?php 
+      $_anchor_count = count( $data['wrn_anchors'] );
+      foreach ($data['wrn_anchors'] as $anchor_key => $anchor_video) { 
+        $_anchor_url = FRONT_URL . '/' . drupal_get_path_alias("node/" . $anchor_video->nid);
+        $_more_link = FRONT_URL . '/anchors-list';
+        $_anchor_link = ( $anchor_key !== ($_anchor_count -1) ) ? $_anchor_url : $_more_link;
+        ?>
         <li>
-          <a  href="<?php print FRONT_URL . '/' . drupal_get_path_alias("node/" . $anchor_video->nid); ?>" class="pic">         
+          <a  href="<?php print $_anchor_link; ?>" class="pic">         
               <img src="<?php print image_style_url("image170x127", $anchor_video->uri); ?>" alt="<?php echo $anchor_video->title ?>" title="<?php echo $anchor_video->title ?>" />    
               <p><?php print $anchor_video->title;?></p>
           </a>
         </li>
       <?php }?>  
-        <li>
-          <a  href="<?php print FRONT_URL . '/anchors-list' ?>" class="pic">    
-              <?php $more_img = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/image001.gif');?>
-              <img src="<?php print $more_img;?>" />  
-          </a>
-        </li>
     </ul>
   <?php endif;?>
 </div>
