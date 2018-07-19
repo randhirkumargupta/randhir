@@ -6121,10 +6121,14 @@ function itg_rapid_api_testing($token) {
      //print_r($ao_results2);
      //print_r($ao_results3);
      //print_r($testtt);
+     $test_ar = array();
+     $test_ar[] = $ao_results1->field_field_images[0]['rendered']['#item']['uri'];
+     p($test_ar);
      p($ao_results1);
     //variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
     //$qry = "INSERT INTO `itg_app_master_config_internal` (`id`, `config_key`, `config_val`) VALUES (NULL, 'cube_widget_config_options', '1');";
     //db_query($qry);
+     
     p(node_load(1156727)); // live blog
     p(node_load(988282));
     $searchpage1 = views_get_view_result('Front end global search', 'page_1', 'india');
