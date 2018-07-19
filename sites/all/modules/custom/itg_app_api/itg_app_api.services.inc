@@ -7922,6 +7922,10 @@ function itg_app_redish_ttl($api = "") {
     return $ttl;
 }
 function itg_rapid_api_test2(){
+     $view_args[] = array();
+     $view_args['entity_id'] = 1132254;    
+     $ao_results = views_get_view_result('photo_landing_slider', 'block_1', $view_args);
+     p($ao_results);
     echo "andy here";die();
 }
 function itg_rapid_api_test3(){
