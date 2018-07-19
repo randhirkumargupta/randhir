@@ -6122,15 +6122,31 @@ function itg_rapid_api_testing($token) {
      //print_r($ao_results3);
      //print_r($testtt);
      $test_ar = array();
+     $caption =array();
+     $credit = array();
+     $lc=0;
      foreach ($ao_results1[0] as $key => $value) {
          if($key == "field_field_images"){
              //p($value); 
-             $test_ar[]['uri'] = $value['raw']['uri'];
-             $test_ar[]['fid'] = $value['raw']['fid'];
+             $test_ar[$lc]['uri'] = $value[0]['raw']['uri'];
+             $test_ar[$lc]['fid'] = $value[0]['raw']['fid'];
+             //$lc++;
          }
-         
+         if($key == "field_field_image_caption"){
+             //p($value); 
+             $test_ar[$lc]['caption'] = $value[0]['raw']['value'];             
+             //$lc++;
+         }
+         if($key == "field_field_photo_byline"){
+             //p($value); 
+             $test_ar[$lc]['credit'] = $value[0]['raw']['entity']->title;             
+             //$lc++;
+         }
+        $lc++; 
      }
+     
      //$test_ar[] = $ao_results1[0]->field_field_images[0]['rendered']['#item']['uri'];
+     
      p($test_ar);
      p($ao_results1);
     //variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
