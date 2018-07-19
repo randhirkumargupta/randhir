@@ -1297,6 +1297,24 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 #block-itg-menu-manager-third-level-menu ul.third-level-menu li{float:none;}
 }
 
+/* story Poll Css */
+.story-section .story-right .description form{clear:both;}
+.poll-wrapper .poll-data{border:1px solid #ddd;padding:18px;position:relative;display:inline-block;vertical-align:top;width:calc(100% - 5px);}
+.poll-wrapper .poll-data:after{content:'';position:absolute;width:4px;height:100%;left:100%;top:-1px;background:#f3f3f3;border:1px solid #f3f3f3;z-index:-1;}
+.poll-wrapper .poll-data .poll-replace-id{width:100%;display:inline-block;vertical-align:top;margin-top:20px;}
+.poll-wrapper .updated-msg{font-size:12px;font-size:.75rem;color:#8a8a8a;font-family:"OpenSans-Regular";}
+.poll-wrapper .active-poll-title{overflow:hidden;}
+.poll-wrapper .active-poll-title h2{font-size:20px;font-size:1.25rem;line-height:26px;margin-bottom:5px;}
+.poll-wrapper .poll-banner-image{float:left;margin-right:20px;max-width:170px;}
+.poll-wrapper .poll-replace-id .form-item-pole-answer{padding:0 0 5px;}
+.poll-wrapper .poll-replace-id .form-submit{background:#1a3c8d;border:1px solid #1a3c8d;color:#fff;text-transform:uppercase;cursor:pointer;padding:0 6px;font-size:14px;margin-top:10px;height:22px;font-family:"OpenSans-Regular";font-weight:600;}
+.poll-wrapper .poll-replace-id label{color:#33363b;font-family:"OpenSans-Regular";font-size:14px;text-transform:capitalize;}
+@media only screen and (max-width:768px){
+.poll-wrapper .poll-data{padding:5px;}
+.poll-wrapper .poll-data .poll-banner-image{max-width:145px;margin-right:8px;}
+.poll-wrapper .poll-replace-id .form-submit{margin:10px auto 0;display:block;}
+.poll-wrapper .active-poll-title h2{font-size:17px;font-size:1.0625rem;line-height:20px;}
+}
 
 
 
