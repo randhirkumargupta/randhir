@@ -395,6 +395,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       }
       if (function_exists('itg_story_get_image_info')) {
         $getImageInfo = itg_story_get_image_info($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+        print_r($getImageInfo);die;
       }
       if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) {
         ?>
