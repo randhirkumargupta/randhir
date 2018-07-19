@@ -6122,7 +6122,7 @@ function itg_rapid_api_testing($token) {
      //print_r($ao_results3);
      //print_r($testtt);
      $test_ar = array();
-     $test_ar[] = $ao_results1->field_field_images[0]['rendered']['#item']['uri'];
+     $test_ar[] = $ao_results1[0]->field_field_images[0]['rendered']['#item']['uri'];
      p($test_ar);
      p($ao_results1);
     //variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
