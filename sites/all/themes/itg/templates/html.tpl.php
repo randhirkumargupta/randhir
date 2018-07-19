@@ -655,7 +655,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .agbutton.story-like-dislike #name-dv #lky #sty-dv a,.story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a{padding:3px;display:inline-block;vertical-align:top;cursor:pointer;}
 .story-section .agbutton.story-like-dislike #name-dv #dlky #dsty-dv a{padding:0;color:#2877c4;text-decoration:underline;}
 .story-section .agbutton.story-like-dislike .error-msg{color:red;font-weight:400;font-size:12px;}
-.listicle-feedback .listical_title{text-transform:uppercase;font-weight:700;}
+.listicle-feedback .listical_title{text-transform:uppercase;font-weight:700; color:#a10500;}
 .may-be-suggest-container ul .may-we-suggest{overflow:hidden;padding:10px;}
 .may-be-suggest-container ul .may-we-suggest .pic{float:right;margin-left:10px;}
 .may-be-suggest-container ul .may-we-suggest .title{display:block;overflow:hidden;word-wrap:break-word;font-size:15px;font-size:0.9375rem;line-height:20px;color:#111;font-family:"OpenSans-Semibold";}
@@ -971,7 +971,7 @@ footer .footer-top .footer-social-link{display:none;opacity:0;}
 @media only screen and (max-width: 768px){
 .story-section .byline .profile-detail ul.profile-byline li {float: none;display: block;padding:3px 5px 3px;} 
 .story-section .byline .profile-detail ul.profile-byline li.title{display:inline-block;line-height:15px;border-right:0px;}
-.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left:1px solid #ddd;padding-left:3px;}
+.story-section .byline .profile-detail ul.profile-byline li + li.title{border-left:1px solid #ddd;padding-left:3px;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{width:auto;display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 }
@@ -1061,7 +1061,7 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 .story-section .story-right .stryimg .photoby .story-img-rating {background: #b00808;display: inline-block;vertical-align: top;
     padding: 5px 20px;font-size: 28px;font-weight: 700;color: #fff;line-height: 28px;}
 .quotes{float:none;margin:15px 0 15px 10%;border-left:5px solid #bb0a0a;padding:0 0 0 20px;}
-.quotes .quote-style,.quotes blockquote{color:#000;font:400 19px/28px "Merriweather-Semibold";position:relative;}
+.quotes .quote-style,.quotes blockquote{color:#000;font:400 19px/28px "Merriweather-Bold";position:relative;}
 .quotes .author {font-size: 12px;color: #828282; text-align: right;}
 @media all and (max-width:767px){.quotes{margin-left:0;float:none;width:100%;}}
 .itgimage{position:relative;}
