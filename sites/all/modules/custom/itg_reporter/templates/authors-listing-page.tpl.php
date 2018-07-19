@@ -3,7 +3,7 @@ print views_embed_view('authors_and_people_listing', 'block_1');
 
 // Pagination
 $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
-$limit = 20;
+$limit = 15;
 $startpoint = ($page * $limit) - $limit;
 
 function pagination($per_page = 10,$page = 1, $url = '?'){
