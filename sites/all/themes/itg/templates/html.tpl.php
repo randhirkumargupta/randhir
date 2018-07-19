@@ -1298,11 +1298,14 @@ body {font: 400 15px/20px "OpenSans-Regular";color: #111;}.comment-mobile.deskto
     /* watch right now home */
     .space-15{background: #fff;height: 15px; margin: 0 -10px;}
     .watch-right-now-with-anchor ul.anchor-list-slide li p{padding-bottom: 8px;font-size: 15px;padding-top: 2px;font-family: OpenSans-Semibold;text-align: center;}
-    .watch-right-now-with-anchor .watch-right-now-anchor-flex .flex-control-nav,.watch-right-now-with-anchor .watch-right-now-anchor-flex .flex-direction-nav{ display:none; }
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex{ position: relative; }
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex .flex-direction-nav{ display:none; }
     .watch-right-now-video{padding-top: 10px;}
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex .flex-control-nav{ top:5px; right:0px; }
     .watch-right-now-video ul li.watch-right-now-list:last-child{ border-bottom:0px; }
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex ul li:nth-child(4){ position: relative; }
     .watch-right-now-with-anchor .watch-right-now-anchor-flex ul li:nth-child(4) p{ display: none; }
-    .watch-right-now-with-anchor .watch-right-now-anchor-flex ul li:nth-child(4){background: rgba(0,0,0,0.7);
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex ul li:nth-child(4) a.pic:before{background: rgba(0,0,0,0.7);
     width: 100%;
     height: 100%;
     position: absolute;
