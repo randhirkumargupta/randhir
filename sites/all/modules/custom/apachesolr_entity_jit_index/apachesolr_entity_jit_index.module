@@ -273,8 +273,16 @@ function apachesolr_entity_jit_index_solr_taxonomy_ancestors($term) {
       'value' => implode(' ', $names),
     );
   }
-
   return $fields;
-
 }
 
+
+/**
+ * Implements apachesolr_entity_jit_index_apachesolr_index_document_build().
+ * {@inheritdoc}
+ */
+function apachesolr_entity_jit_index_apachesolr_index_document_build(ApacheSolrDocument $document, $entity, $entity_type, $env_id) {
+  if ($entity_type == 'taxonomy_term' && $entity->vocabulary_machine_name == 'category_management') {
+	$document->addField('ds_changed', apachesolr_date_iso(time()));
+  }
+}
