@@ -1268,6 +1268,11 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 
 
 
+
+
+
+
+
 </style>
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
 <?php } ?>
@@ -1296,6 +1301,19 @@ body {font: 400 15px/20px "OpenSans-Regular";color: #111;}.comment-mobile.deskto
     .watch-right-now-with-anchor .watch-right-now-anchor-flex .flex-control-nav,.watch-right-now-with-anchor .watch-right-now-anchor-flex .flex-direction-nav{ display:none; }
     .watch-right-now-video{padding-top: 10px;}
     .watch-right-now-video ul li.watch-right-now-list:last-child{ border-bottom:0px; }
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex ul li:nth-child(4) p{ display: none; }
+    .watch-right-now-with-anchor .watch-right-now-anchor-flex ul li:nth-child(4){background: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1111;
+    content: "MORE &rsaquo;";
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    line-height: 96px;}
 </style>
 <!-- <script type="text/javascript" src="<?php //print $jquery_js_path; ?>"></script> -->
 <script type="text/javascript" async src="<?php print $js_path; ?>"></script>
