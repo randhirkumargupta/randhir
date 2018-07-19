@@ -46,6 +46,13 @@ function itg_reporter_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['authors-list'] = array(
+    'title' => 'Authors' ,
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'itg_authors_listing',
+    'access arguments' => array('access content'),
+    'file' => 'include/itg_author_listing.inc' ,
+  );
 
   // $items['content-people-migration'] = array(
   //   'title' => 'People migration',
@@ -199,6 +206,10 @@ function itg_reporter_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
       'render element' => 'form',
     ),
+    'custom_authors_listing_page' => array(
+      'template' => 'authors-listing-page',
+      'path' => drupal_get_path('module', 'itg_reporter') . '/templates',
+    ),
   );
 
   return $themes;
@@ -210,7 +221,7 @@ function itg_reporter_theme($existing, $type, $theme, $path) {
  */
 function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  if ($form['#id'] == 'views-exposed-form-authors-and-people-listing-page'){
+  if ($form['#id'] == 'views-exposed-form-authors-and-people-listing-page' || $form['#id'] == 'views-exposed-form-authors-and-people-listing-block-1'){
     $form['title']['#autocomplete_path'] = 'content-workbench-authors-title-list/autocomplete';
   }
   if ($form_id == 'reporter_node_form') {
