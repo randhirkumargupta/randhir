@@ -6112,8 +6112,14 @@ function itg_rapid_api_user_follow_topic_list($token) {
 function itg_rapid_api_testing($token) {
     $view_args[] = array();
      $view_args['entity_id'] = 1132254;    
-     $ao_results = views_get_view_result('photo_landing_slider', 'block_1', $view_args);
-     p($ao_results);
+     $ao_results1 = views_get_view_result('photo_landing_slider', 'block_1', $view_args);
+     $ao_results2 = views_get_view_result('photo_landing_slider', 'block_0', $view_args);
+     $ao_results3 = views_get_view_result('photo_landing_slider', 'page_1', $view_args);
+     $ao_results4 = views_get_view_result('photo_landing_slider', 'page_0', $view_args);
+     print_r($ao_results1);
+     print_r($ao_results2);
+     print_r($ao_results3);
+     p($ao_results4);
     //variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/staging-sso.indiatodayonline.in/simplesamlphp');
     //$qry = "INSERT INTO `itg_app_master_config_internal` (`id`, `config_key`, `config_val`) VALUES (NULL, 'cube_widget_config_options', '1');";
     //db_query($qry);
