@@ -1324,12 +1324,12 @@ function itg_widget_block_view($delta = '') {
             nextText: "",
             itemWidth: 170,
             minItems:2,
-            initDelay:1500,
+            initDelay:500,
             slideshow: (!is_mobile?true:false),
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
             );
-            $data['wrn_anchors'] = itg_get_anchor_list_wot(3);
+            $data['wrn_anchors'] = itg_get_anchor_list_wot(4);
             $info['widget'] = 'watch_right_now_widget';
             $info['order'] = 'ASC';
             $info['max_limit'] = 3;
@@ -2321,7 +2321,7 @@ function itg_custom_var_get_node_title($nid) {
  * function is used to get anchors list ordered by widget order
  * 
  */
-function itg_get_anchor_list_wot($limit = 3) {
+function itg_get_anchor_list_wot($limit = 4) {
   $query = db_select('node', 'n');
     $query->leftJoin('itg_widget_order', 'iwo', 'n.nid = iwo.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'fseli', 'n.nid = fseli.entity_id');
