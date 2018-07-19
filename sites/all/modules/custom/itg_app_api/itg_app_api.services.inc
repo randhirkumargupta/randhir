@@ -6124,7 +6124,7 @@ function itg_rapid_api_testing($token) {
      $test_ar = array();
      foreach ($ao_results1[0] as $key => $value) {
          if($key == "field_field_images"){
-             p($value);
+             p($value); 
              $test_ar[] = $value[0]['rendered']['#item']['uri'];
          }
          
