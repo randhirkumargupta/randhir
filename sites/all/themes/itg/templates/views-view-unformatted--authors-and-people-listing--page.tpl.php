@@ -29,6 +29,7 @@
 global $base_url;
 ?>
 <?php
+
 foreach ($view->result as $id => $item): ?>
 <div<?php if ($classes_array[$id]) { print ' class="' . $classes_array[$id] .'"';  } ?>>
 <div class="author-listing">
