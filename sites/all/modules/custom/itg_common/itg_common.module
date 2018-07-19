@@ -1957,6 +1957,21 @@ function get_country_by_tid($tid){
 }
 
 /**
+ * Funcion for getting All associated category with Node.
+ */ 
+function get_story_categories_by_nid($nid) {
+  $cat_arr = array();
+  $db_query = db_select('field_data_field_story_category', 'sc');
+  $db_query->fields('sc', array("field_story_category_tid"));
+  $db_query->condition("sc.entity_id", $nid);
+  $result = $db_query->execute();
+  foreach ($result as $record) {
+    $cat_arr[] = $record->field_story_category_tid;
+  }
+  return $cat_arr;
+}
+
+/**
  * function is used to clear External URL Akamai cache
  * @param string $url
  */
