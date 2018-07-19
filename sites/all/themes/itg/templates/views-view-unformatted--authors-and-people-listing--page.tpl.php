@@ -26,47 +26,6 @@
  * @ingroup views_templates
  */
 global $base_url;
-$view = array();
-if(!isset($_GET['title'])){
-  $content_type = 'reporter';
-
-  $query = db_select('node', 'n');
-  $query->Join('field_data_field_celebrity_pro_occupation', 'fo', 'fo.entity_id = n.nid');
-  $query->Join('field_data_field_reporter_profile_type', 'pro', 'pro.entity_id = n.nid');
-  $query->Join('itg_multi_byline_info', 'bi', 'bi.byline_id = n.nid');
-  $query->leftJoin('field_data_body', 'bv', 'bv.entity_id = n.nid');
-  $query->leftJoin('field_data_field_inactive_profile', 'ip', 'ip.entity_id = n.nid');
-  $query->leftJoin('field_data_field_story_expert_name', 'fb', 'fb.entity_id = n.nid');
-  $query->leftJoin('field_data_field_reporter_twitter_handle', 'tw', 'tw.entity_id = n.nid');
-  $query->leftJoin('field_data_field_story_extra_large_image', 'img', 'img.entity_id = n.nid');
-  $query->condition('bi.publish_status', 1, '=');
-  $query->condition('n.status', 1, '=');
-  $query->fields('n', array('title', 'nid'));
-  $query->fields('bv', array('body_value'));
-  $query->fields('fb', array('field_story_expert_name_value'));
-  $query->fields('tw', array('field_reporter_twitter_handle_value'));
-  $query->fields('img', array('field_story_extra_large_image_fid'));
-  $query->condition('n.type', $content_type, '=');
-  $query->condition('fo.field_celebrity_pro_occupation_tid', '285750', '=');
-  //$query->condition('bv.bundle', 'reporter', '=');
-  // $query->condition('fb.bundle', 'reporter', '=');
-  // $query->condition('img.bundle', 'reporter', '=');
-  // $query->condition('tw.bundle', 'reporter', '=');
-  $query->condition('fo.bundle', 'reporter', '=');
-  $query->condition('pro.bundle', 'reporter', '=');
-  $query->condition('pro.field_reporter_profile_type_value', 'internal', '=');
-  $or = db_or();
-  $or->condition('ip.field_inactive_profile_value', '0', '=');
-  $or->condition('ip.field_inactive_profile_value', NULL);
-  $query->condition($or);
-  $query->orderBy('bi.nid', 'DESC');
-  $query->groupBy('bi.byline_id');
-  $query->range(0, 500);
-  $result = $query->execute()->fetchAll();
-  print_r($result);
-  die;
-}else{
-
 ?>
 <?php
 
@@ -122,4 +81,4 @@ foreach ($view->result as $id => $item): ?>
 </div>
 </div>
 
-<?php endforeach; }?>
+<?php endforeach; ?>
