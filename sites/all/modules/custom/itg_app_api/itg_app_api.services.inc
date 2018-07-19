@@ -6125,7 +6125,8 @@ function itg_rapid_api_testing($token) {
      $caption =array();
      $credit = array();
      $lc=0;
-     foreach ($ao_results1[0] as $key => $value) {
+     foreach ($ao_results1 as $key_top => $value_top) {
+     foreach ($value_top as $key => $value) {
          if($key == "field_field_images"){
              //p($value); 
              $test_ar[$lc]['uri'] = $value[0]['raw']['uri'];
@@ -6144,7 +6145,7 @@ function itg_rapid_api_testing($token) {
          }
         //$lc++; 
      }
-     
+     }
      //$test_ar[] = $ao_results1[0]->field_field_images[0]['rendered']['#item']['uri'];
      
      p($test_ar);
