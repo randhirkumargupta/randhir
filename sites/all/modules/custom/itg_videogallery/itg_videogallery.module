@@ -210,6 +210,11 @@ function itg_videogallery_menu() {
     'page callback' => 'itg_api_integration_internal',
      'access arguments' => array('access content')
   );
+  $items['anchor-ajax/%/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'itg_anchor_programe_content_ajax',
+    'access arguments' => array('access content')
+  );
 
   return $items;
 }
@@ -2089,4 +2094,23 @@ function itg_api_integration_internal(){
       drupal_access_denied();
       break;
   }
+}
+
+/**
+ * Function is used to render view clicked on Anchor detail page tab
+ * @return string
+ */
+function itg_anchor_programe_content_ajax() {
+  $arg = arg();
+  if ($arg[0] == 'anchor-ajax' && !empty($arg[1]) && !empty($arg[2]) && is_numeric($arg[2])) {
+    $view = views_get_view('video_list_of_category');
+    $view->set_display('block_2');
+    $filter_1 = $view->get_item('block_2', 'filter', 'field_story_category_tid');
+    $filter_1['value'] = $arg[2];
+    $view->set_item('block_2', 'filter', 'field_story_category_tid', $filter_1);
+    $view->set_arguments(array($arg[1]));
+    print $view->render();
+    drupal_exit();
+  }
+  return '';
 }
