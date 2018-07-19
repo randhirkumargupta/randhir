@@ -56,7 +56,7 @@ function itg_videogallery_create_video_node($data) {
     $node->type = "videogallery";
     //node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
-    $node->uid = 1522; //itgsiteadmin
+    $node->uid = 970; //itgsiteadmin
     $node->promote = 0;
     $node->comment = 0;
     $node->revision = 1;
@@ -196,7 +196,7 @@ function itg_associate_video_id_to_content($video_info) {
 
   $fid = db_insert('file_managed')
     ->fields(array(
-      'uid' => 1522, //itgsiteadmin,
+      'uid' => 970, //itgsiteadmin,
       'filename' => $video_info->name,
       'uri' => $videourl,
       'filemime' => 'video/mp4',
