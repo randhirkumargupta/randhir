@@ -889,17 +889,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               ?>
             </ul>
           </div>
-            <?php } ?>
-          <!-- For buzzfeed section stary -->
-            <?php if (!empty($related_content) && !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
-            <div class="related-story related-story-bottom">
-              <?php
-              $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_bottom_block');
-              print render($block['content']);
-              ?>
-            </div>
-            <!-- For buzzfeed section end --> 
-            <?php } ?>
+            <?php } ?>          
         </div>
           <div class="vukkul-comment">
             
