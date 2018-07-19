@@ -28,8 +28,18 @@
   print $block['content'];
   ?>
 <?php 
-print views_embed_view('video_list_of_category', 'block_2');
+$cat_array = itg_widget_anchor_landing_menu(arg(1));
+$first_key = key($cat_array);
+$view = views_get_view('video_list_of_category');
+$view->set_display('block_2');
+$filter_1 = $view->get_item('block_2', 'filter', 'field_story_category_tid');
+$filter_1['value'] = $first_key;
+$view->set_item('block_2', 'filter', 'field_story_category_tid', $filter_1);
+//print views_embed_view('video_list_of_category', 'block_2');
 ?>
+  <div id="anchor-get-ajax-wrapper">
+    <?php print $view->render();?>
+  </div>
   <?php print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
