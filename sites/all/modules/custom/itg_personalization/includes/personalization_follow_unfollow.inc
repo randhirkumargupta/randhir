@@ -154,7 +154,7 @@ function itg_story_follow_unfollow_print($nid, $ntype, $activity, $t_name) {
   global $user, $base_url;
   $replace_tag_name = str_replace(" ","-","$t_name");
   if($t_name) {
-      $tag_label = '<span class="tag-follow"><a target=\"_blank\" href="' . FRONT_URL . '/topic/' . $replace_tag_name . '"> ' . $t_name . '</a></span>';
+      $tag_label = '<span class="tag-follow"><a target=\"_blank\" href="' . FRONT_URL . '/topic/' . $replace_tag_name . '"> #' . $t_name . '</a></span>';
     } else {
       $tag_label = '';
     }
