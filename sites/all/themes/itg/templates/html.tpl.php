@@ -359,8 +359,6 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-right .description>p:first-child:first-letter{font-size:55px;font-weight:700;padding-right:5px;float:left;line-height:57px;}
 .story-section .story-right .briefcase{margin-top:20px;border-bottom: 1px solid #e5e5e5; padding-bottom: 10px;}
 .story-section .story-right .briefcase h4{font-size:18px;font-size:1.125rem;text-transform:uppercase;margin-bottom:10px;color:#bb0a0a;font-family:"OpenSans-Bold";}
-.story-section .story-right .briefcase ul li{position:relative;font-size:14px;font-size:.875rem;margin-bottom:10px;padding-left:15px;line-height:22px;}
-.story-section .story-right .briefcase ul li:before{position:absolute;top:6px;left:0;content:'';border-radius:100%;background:#a00606;height:5px;width:5px;}
 section.sidebar .block-itg-ads{display:inline-block;vertical-align:top;padding:25px 34px 30px;border-bottom:1px solid #ddd;width:100%;background:#f2f2f2;}
 .may-be-recommend h3{text-transform:uppercase;font-weight:700;color:#bb0a0a;display:block;position:relative;font-family:"OpenSans-Bold";}
 .may-be-recommend h3:before{content:'';position:absolute;left:0;width:100%;bottom:20px;height:5px;margin-top:-2px;background:#ddd;}
@@ -610,7 +608,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .story-right .description a:hover{text-decoration:underline;}
 .story-section .story-right .briefcase{margin-top:20px;}
 .story-section .story-right .briefcase h4{font-size:18px;font-size:1.125rem;text-transform:uppercase;margin-bottom:10px;color:#bb0a0a;font-family:"OpenSans-Bold";}
-.story-section .story-right .briefcase ul li{position:relative;font-size:14px;font-size:0.875rem;margin-bottom:10px;padding-left:15px;line-height:22px;}
+.story-section .story-right .briefcase ul li{position:relative;font-size:14px;font-size:0.875rem;margin-bottom:10px;padding-left:15px;line-height:22px;word-break: break-word;}
 .story-section .story-right .briefcase ul li:before{position:absolute;top:6px;left:0px;content:'';border-radius:100%;background:#a00606;height:5px;width:5px;}
 .story-section .tags{padding:15px 0px; border-bottom:1px solid #ddd;}
 .story-section .tags ul li{display:inline-block;vertical-align:top;padding:2px 6px;color:#c0c0c0;font-size:12px;font-size:0.75rem;}
