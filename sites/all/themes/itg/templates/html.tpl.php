@@ -1143,6 +1143,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .stryimg a .story-photo-icon { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 30px;
     cursor: pointer;}.fa-camera:before { content: "\f030";} .fa-play-circle:before { content: "\f144";}
 .story-section .story-associate-content #videogallery-iframe{position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999999;background:rgba(0,0,0,0.76);display:none;}
+.story-section .story-associate-content #videogallery-iframe .loading-popup { display: inline; margin: 0 auto;width: 30px;display: block; transform-style: inherit; position: absolute; top: 50%; left: 50%; margin-left: -15px; margin-top: -15px;}
 .story-section .story-associate-content #videogallery-iframe .big-story-popup{position:absolute;top:50%;left:50%;width:600px;height:455px;margin-left:-300px;margin-top:-227px;}
 .story-section .story-associate-content #videogallery-iframe #close-big-story{position:fixed;right:20px;top:20px;color:#000;z-index:99;display:inline-block;width:30px;height:30px;background:#fff;text-align:center;border-radius:100%;line-height:30px;font-weight:900;cursor:pointer;box-shadow:2px 2px 3px #484242;}
 .story-section .story-associate-content #videogallery-iframe #close-big-story a{color:#000;font-family:roboto;}
@@ -1254,6 +1255,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 @media only screen and (min-width:768px) and (max-width:1200px){
 .story-section .snap-post .agbutton,.story-section .snap-post .discription{text-align:center;}
 }
+
 
 
 /* new story design Css */
