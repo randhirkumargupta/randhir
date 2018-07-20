@@ -292,63 +292,6 @@ function generatePhotoDeatilList($id) {
     return $data;
 }
 /**
- * 
- * @param type $galleryimg
- * @param type $id
- * @return type
- */
-function generatePhotoDetailList_try($galleryimg, $id) {
-    $view = views_get_view('photo_landing_slider');
-$args = array(1132254);
-//$output = $view->preview('block_1', $args);
-$view->set_arguments($args);
-$output = $view->execute();
-
-p($output);
-  
-$view = views_get_view('photo_landing_slider');
-//$view->set_current_page(5);
-//$view->set_items_per_page(10);
-$view->execute();
-$objects = $view->result;    
-  p($objects);
-$qry = "SELECT node.title AS node_title, field_collection_item_field_data_field_gallery_image.item_id AS field_collection_item_field_data_field_gallery_image_item_id, node.nid AS nid, node.created AS node_created, field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.field_gallery_order_value AS field_collection_item_field_data_field_gallery_image__field_, 'field_collection_item' AS field_data_field_images_field_collection_item_entity_type, 'field_collection_item' AS field_data_field_image_caption_field_collection_item_entity_, 'field_collection_item' AS field_data_field_photo_byline_field_collection_item_entity_t, 'node' AS field_data_field_photo_by_node_entity_type, 'field_collection_item' AS field_data_field_photo_small_image_field_collection_item_ent, 'field_collection_item' AS field_data_field_credit_field_collection_item_entity_type
-FROM 
-{node} node
-LEFT JOIN {field_data_field_gallery_image} field_data_field_gallery_image ON node.nid = field_data_field_gallery_image.entity_id AND (field_data_field_gallery_image.entity_type = 'node' AND field_data_field_gallery_image.deleted = '0')
-LEFT JOIN {field_collection_item} field_collection_item_field_data_field_gallery_image ON field_data_field_gallery_image.field_gallery_image_value = field_collection_item_field_data_field_gallery_image.item_id
-LEFT JOIN {field_data_field_story_source_type} field_data_field_story_source_type ON node.nid = field_data_field_story_source_type.entity_id AND (field_data_field_story_source_type.entity_type = 'node' AND field_data_field_story_source_type.deleted = '0')
-INNER JOIN {field_data_field_photo_enable} field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable ON field_collection_item_field_data_field_gallery_image.item_id = field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.entity_id AND (field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.entity_type = 'field_collection_item' AND field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.deleted = '0')
-LEFT JOIN {field_data_field_gallery_order} field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order ON field_collection_item_field_data_field_gallery_image.item_id = field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.entity_id AND (field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.entity_type = 'field_collection_item' AND field_collection_item_field_data_field_gallery_image__field_data_field_gallery_order.deleted = '0')
-WHERE (( (node.nid = ".$id." ) )AND(( (node.type IN  ('photogallery')) AND (field_data_field_story_source_type.field_story_source_type_value LIKE 'migrated' ESCAPE '\\') )OR( (node.type IN  ('photogallery')) AND (field_collection_item_field_data_field_gallery_image__field_data_field_photo_enable.field_photo_enable_value = '1') )))
-ORDER BY node_created DESC, field_collection_item_field_data_field_gallery_image__field_ ASC";
-$result = db_query($qry)->fetchAll(PDO::FETCH_ASSOC);
-
-  $photo_list_array = array();
-  $listcont = 0;
-  if (count($result) > 0) {
-    // loop on gallery img
-    $output = "";
-    foreach ($result as $reskey => $resvalue) {
-      $load_collection = field_collection_item_load($resvalue['field_collection_item_field_data_field_gallery_image_item_id']);
-      $fid = $load_collection->field_images['und'][0]['fid'];
-      //$getInfoData = getInfoData($fid);
-      $img_path = completeFilePath($fid);
-      //$image_caption = $getInfoData['image_caption'];
-      //$image_courtesy = $getInfoData['image_courtesy'];
-      $field_image_caption = strip_tags($load_collection->field_image_caption['und'][0]['value']);
-      $field_credit = strip_tags($load_collection->field_credit['und'][0]['value']); 
-      $photo_list_array[$listcont]['p_id'] = "$fid";
-      $photo_list_array[$listcont]['p_image'] = "$img_path";
-      $photo_list_array[$listcont]['p_credit'] = "$field_credit";
-      $photo_list_array[$listcont]['p_caption'] = "$field_image_caption";
-      $listcont++;
-    }
-  }
-  return $photo_list_array;
-}
-
-/**
  * function for generate photo list array
  * @pram array $galleryimg
  *
@@ -362,7 +305,7 @@ function generatePhotoDetailList($galleryimg) {
         // loop on gallery img
         $output = "";
         foreach ($galleryimg as $key => $value) {
-            $fc = field_collection_field_get_entity($value);
+            $fc = field_collection_field_get_entity($value);            
             $fid = $fc->field_image_id['und'][0]['value'];
             if (!$fid > 0) {
                 $fid = $fc->field_images['und'][0]['fid'];
@@ -375,17 +318,47 @@ function generatePhotoDetailList($galleryimg) {
             $caption = $fc->field_image_caption['und'][0]['value'];
 
             $byline = $fc->field_credit['und'][0]['value'];
+            $order = $fc->field_gallery_order['und'][0]['value'];
             $photo_story_img = $file_uri; //image_style_url('photo_slider_753x543', $uri);
             $photo_list_array[$listcont]['p_id'] = "$fid";
             $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
             $photo_list_array[$listcont]['p_credit'] = "$byline";
             $photo_list_array[$listcont]['p_caption'] = "$caption";
+            $photo_list_array[$listcont]['p_order'] = "$order";
             $listcont++;
         }
     }
-    return $photo_list_array;
+    $myArray = $photo_list_array;
+    $myArray2 = asort2d($myArray, "p_order");
+    foreach ($myArray2 as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+            if ($key2 == "p_order") {
+                unset($myArray2[$key]['p_order']);
+            }
+        }
+    }
+    return $myArray2;
 }
-
+/**
+ * function for sort 2-d array
+ * @param type $records
+ * @param type $field
+ * @param type $reverse
+ * @return type
+ */
+function asort2d($records, $field, $reverse=false) {
+// Sort an array of arrays with text keys, like a 2d array from a table query:
+  $hash = array();
+  foreach($records as $key => $record) {
+    $hash[$record[$field].$key] = $record;
+  }
+  ($reverse)? krsort($hash) : ksort($hash);
+  $records = array();
+  foreach($hash as $record) {
+    $records []= $record;
+  }
+  return $records;
+} // end function asort2d
 /**
  * sprint2 function start
  * main function for generate photoStoryDetailPage array
