@@ -329,12 +329,7 @@ function generatePhotoDetailList($galleryimg) {
             $listcont++;
         }
     }
-    $vc_array = $photo_list_array;
-    foreach ($vc_array as $key => $row)
-{
-    $vc_array_name[$key] = $row['p_order'];
-}
-$photo_list_array = array_multisort($vc_array_name, SORT_ASC, $vc_array);
+   
     return $photo_list_array;
 }
 
