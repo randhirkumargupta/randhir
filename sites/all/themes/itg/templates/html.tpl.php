@@ -1134,7 +1134,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .description .story-photo-list-wrapper{clear:both;}
 .story-photo-list-wrapper h3{text-transform:uppercase;font-weight:700;color:#bb0a0a;display:none;position:relative;font-family:"OpenSans-Bold";}
 .story-section .story-right .description .story-photo-list-wrapper .story-photo-list{overflow:hidden;}
-.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item {padding: 0 1%; width: 25%;float: left;margin-bottom: 2%;}
+.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item {padding:1%; width: 25%;float: left; border: 1px solid #ddd; text-align: center; margin: 0 0.5% 1%; box-shadow: -2px 2px 4px 0px #ddd;}
 /* story with photo gallery */
 .story-section .story-right .stryimg a .story-photo-icon { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 30px;
     cursor: pointer;}.fa-camera:before { content: "\f030";} .fa-play-circle:before { content: "\f144";}
@@ -1303,6 +1303,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .poll-wrapper .poll-replace-id .form-item-pole-answer{padding:0 0 5px;}
 .poll-wrapper .poll-replace-id .form-submit{background:#1a3c8d;border:1px solid #1a3c8d;color:#fff;text-transform:uppercase;cursor:pointer;padding:0 6px;font-size:14px;margin-top:10px;height:22px;font-family:"OpenSans-Regular";font-weight:600;}
 .poll-wrapper .poll-replace-id label{color:#33363b;font-family:"OpenSans-Regular";font-size:14px;text-transform:capitalize;}
+.poll-wrapper .poll-replace-id .error { display: block;}
 @media only screen and (max-width:768px){
 .poll-wrapper .poll-data{padding:5px;}
 .poll-wrapper .poll-data .poll-banner-image{max-width:145px;margin-right:8px;}
