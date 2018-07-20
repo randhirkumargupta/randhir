@@ -329,8 +329,11 @@ function generatePhotoDetailList($galleryimg) {
             $listcont++;
         }
     }
-   
-    return $photo_list_array;
+    $myArray = $photo_list_array;
+   $photo_list_array2 = usort($myArray, function($a, $b) {
+    return $a['order'] - $b['order'];
+});
+    return $photo_list_array2;
 }
 
 /**
