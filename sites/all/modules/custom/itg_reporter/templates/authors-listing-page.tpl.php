@@ -7,12 +7,11 @@
 .sidebar-second.page-authors-list.section-authors-list .author-listing .social-icon ul,.sidebar-second.page-authors-list.section-authors-list .anchor-listing .social-icon ul{list-style:none;}
 .sidebar-second.page-authors-list.section-authors-list .author-listing .social-icon ul li,.sidebar-second.page-authors-list.section-authors-list .anchor-listing .social-icon ul li{width:auto; display:inline; margin-right:10px;}
 .sidebar-second.page-authors-list.section-authors-list .author-listing .social-icon ul li a,.sidebar-second.page-authors-list.section-authors-list .anchor-listing .social-icon ul li a{font-size:13px;}
-.sidebar-second.page-authors-list.section-authors-list .item-list{display:block; text-align:center}
-.sidebar-second.page-authors-list.section-authors-list .item-list ul.pager{list-style:none; margin-top:20px;}
-.sidebar-second.page-authors-list.section-authors-list .item-list ul.pager li{width:auto; display:inline; margin:10px 0 15px 0; padding:0 3px;}
-.sidebar-second.page-authors-list.section-authors-list .item-list ul.pager li a{display: inline-block;width: 25px;height: 25px;font-size: 1rem;text-align: center;line-height: 25px;}
-.sidebar-second.page-authors-list.section-authors-list .item-list ul.pager li.pager-current{width:25px; height:25px; border-radius:50%;background:#337ab7; display:inline-block; font-size:1rem; line-height:25px; color:#fff;}
-.sidebar-second.page-authors-list.section-authors-list .item-list ul.pager li a:hover{background:#337ab7; border-radius:50%; color:#fff;}
+.sidebar-second.page-authors-list.section-authors-list ul.pagination{display:block; text-align:center;list-style:none; margin-top:20px;}
+.sidebar-second.page-authors-list.section-authors-list ul.pagination li{width:auto; display:inline; margin:10px 0 15px 0; padding:0 3px;}
+.sidebar-second.page-authors-list.section-authors-list ul.pagination li a{display: inline-block;width: 25px;height: 25px;font-size: 1rem;text-align: center;line-height: 25px;}
+.sidebar-second.page-authors-list.section-authors-list ul.pagination li.pager-current{width:25px; height:25px; border-radius:50%;background:#337ab7; display:inline-block; font-size:1rem; line-height:25px; color:#fff;}
+.sidebar-second.page-authors-list.section-authors-list ul.pagination li a:hover{background:#337ab7; border-radius:50%; color:#fff;}
 .sidebar-second.page-authors-list.section-authors-list .view-authors-and-people-listing input#edit-submit-authors-and-people-listing{border:0;background-color:#2c333c;padding:7px 10px;font-size:14px;color: #fff; margin-top:0}
 </style>
 <?php
