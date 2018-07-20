@@ -241,7 +241,7 @@ function itg_pti_content() {
                     else if (strtoupper($headline) == $headline) {						
                       $node->log = 'State Changed to Review';
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
-					}
+                    }
                     else {
                       if (($title_length < 30) || ($headline_flag)) {
                         $node->log = 'State Changed to Review';
