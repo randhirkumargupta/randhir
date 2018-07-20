@@ -43,6 +43,7 @@ $config = array(
      * the 'logging.level' option to LOG_DEBUG.
      */
     'debug' => true,
+
     /*
      * When showerrors is enabled, all error messages and stack traces will be output
      * to the browser.
