@@ -56,7 +56,7 @@ class ComposerAutoloaderInit82e5cb08650954c9fdcf276d453692fe
         foreach ($includeFiles as $fileIdentifier => $file) {
             composerRequire82e5cb08650954c9fdcf276d453692fe($fileIdentifier, $file);
         }
-
+die('In');
         return $loader;
     }
 }
