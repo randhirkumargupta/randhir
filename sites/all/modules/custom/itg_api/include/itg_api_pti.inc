@@ -184,6 +184,9 @@ function itg_pti_content() {
                     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                     $node->field_story_type[LANGUAGE_NONE][0]['value'] = 'other_story';
                     $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
+                    $node->field_story_configurations[LANGUAGE_NONE][0]['value'] = array('commentbox');
+                    $node->field_story_configurations[LANGUAGE_NONE][1]['value'] = array('noindex_nofollow');
+                    $node->field_story_configurations[LANGUAGE_NONE][2]['value'] = array('nofollow');
                     // Attach random image to PTI Story
                     $file_name_arr = array('latest-news.jpg', 'news-flash.jpg', 'news-update.jpg');
                     $k = array_rand($file_name_arr);
@@ -233,9 +236,13 @@ function itg_pti_content() {
                     else if ($headline == '' || empty($headline) || $headline == '.') {
                       $node->log = 'State Changed to Review';
                       $node->workbench_moderation_state_new = workbench_moderation_state_review();
+                    }                    
+                    else if (strtoupper($headline) == $headline) {						
+                      $node->log = 'State Changed to Review';
+                      $node->workbench_moderation_state_new = workbench_moderation_state_review();
                     }
                     else {
-                      if (($title_length < 15) || ($headline_flag)) {
+                      if (($title_length < 30) || ($headline_flag)) {
                         $node->log = 'State Changed to Review';
                         $node->workbench_moderation_state_new = workbench_moderation_state_review();
                       }
