@@ -331,7 +331,7 @@ function generatePhotoDetailList($galleryimg) {
     }
     $myArray = $photo_list_array;
    $photo_list_array2 = usort($myArray, function($a, $b) {
-    return $a['order'] - $b['order'];
+    return $a['p_order'] - $b['p_order'];
 });
     return $photo_list_array2;
 }
