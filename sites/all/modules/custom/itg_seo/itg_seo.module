@@ -426,7 +426,12 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     }
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
-    $section_link .= $entity_object->field_type[LANGUAGE_NONE][0]['value'] . $node_title;
+    if ($entity_object->field_type[LANGUAGE_NONE][0]['value'] == 'Live Blog') {
+      $section_link .= $node_title;
+    } else {
+      $section_link .= $entity_object->field_type[LANGUAGE_NONE][0]['value'] . $node_title;
+    }
+    
   }
   elseif (!empty($entity_object->type)) {
     $section_link .=  $node_title;
