@@ -74,7 +74,7 @@ class ItgBylinePeopleMigration extends XMLMigration {
     // retrieve the value from the XML.
     // TIP: Note that all xpaths for fields begin at the last element of the
     // item xpath since each item xml chunk is processed individually.
-    // (ex. xpath=name is equivalent to a full xpath of
+    // (ex. xpath=name is equival ent to a full xpath of
     // /categories/category/name)
 
     $this->addFieldMapping('title', 'headline')->xpath('headline');
@@ -108,7 +108,7 @@ class ItgBylinePeopleMigration extends XMLMigration {
     $term_id  = get_itg_variable('occupation_people_termid');
     $node->field_celebrity_pro_occupation[LANGUAGE_NONE][0]['tid'] = $term_id; // fix for people
     $node->field_select_url_type[LANGUAGE_NONE][0]['tid'] = $term_id;
-    //$node->path['alias'] = 'people/' . $row->xml->sef_url;
+    $node->path['alias'] = 'people/' . $row->xml->sef_url;
     $node->uid = 1;
     //$node->path['alias']= $row->xml->sef_url;
     // print_r($node);
