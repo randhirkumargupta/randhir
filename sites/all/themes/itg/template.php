@@ -526,6 +526,15 @@ function itg_preprocess_html(&$vars) {
       } 
       $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }
+    
+    // For live blog
+    if (!empty($node_obj) && $node_obj->type == 'breaking_news') {         
+      if (!empty($node_obj->field_type['und']) && $node_obj->field_type['und'][0]['value'] == 'Live Blog') {
+        $fix_liveblog_title = ' - Live Updates, Live News, Live Coverage, India Today Live Reporting';
+         $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title . $fix_liveblog_title : $node_obj->metatags[LANGUAGE_NONE]['title']['value'] . $fix_liveblog_title);
+      }      
+    }
+    
     $ros_preconnect_prefetch_code = array(
       '#type' => 'markup',
       '#markup' => get_itg_variable('ros_dns_preconnect_prefetch'),
