@@ -305,7 +305,7 @@ function generatePhotoDetailList($galleryimg) {
         // loop on gallery img
         $output = "";
         foreach ($galleryimg as $key => $value) {
-            $fc = field_collection_field_get_entity($value);
+            $fc = field_collection_field_get_entity($value);            
             $fid = $fc->field_image_id['und'][0]['value'];
             if (!$fid > 0) {
                 $fid = $fc->field_images['und'][0]['fid'];
@@ -318,16 +318,47 @@ function generatePhotoDetailList($galleryimg) {
             $caption = $fc->field_image_caption['und'][0]['value'];
 
             $byline = $fc->field_credit['und'][0]['value'];
+            $order = $fc->field_gallery_order['und'][0]['value'];
             $photo_story_img = $file_uri; //image_style_url('photo_slider_753x543', $uri);
             $photo_list_array[$listcont]['p_id'] = "$fid";
             $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
             $photo_list_array[$listcont]['p_credit'] = "$byline";
             $photo_list_array[$listcont]['p_caption'] = "$caption";
+            $photo_list_array[$listcont]['p_order'] = "$order";
             $listcont++;
         }
     }
-    return $photo_list_array;
+    $myArray = $photo_list_array;
+    $myArray2 = asort2d($myArray, "p_order");
+    foreach ($myArray2 as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+            if ($key2 == "p_order") {
+                unset($myArray2[$key]['p_order']);
+            }
+        }
+    }
+    return $myArray2;
 }
+/**
+ * function for sort 2-d array
+ * @param type $records
+ * @param type $field
+ * @param type $reverse
+ * @return type
+ */
+function asort2d($records, $field, $reverse=false) {
+// Sort an array of arrays with text keys, like a 2d array from a table query:
+  $hash = array();
+  foreach($records as $key => $record) {
+    $hash[$record[$field].$key] = $record;
+  }
+  ($reverse)? krsort($hash) : ksort($hash);
+  $records = array();
+  foreach($hash as $record) {
+    $records []= $record;
+  }
+  return $records;
+} // end function asort2d
 
 /**
  * sprint2 function start
