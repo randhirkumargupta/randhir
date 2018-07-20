@@ -330,15 +330,23 @@ function generatePhotoDetailList($galleryimg) {
         }
     }
     $myArray = $photo_list_array;
-   $myArray2 = asort2d($myArray,"p_order");
-   foreach ($myArray2 as $key => $value) {
-       if($key == "p_order"){
-           unset($myArray2['p_order']);
-       }
-       
-   }
+    $myArray2 = asort2d($myArray, "p_order");
+    foreach ($myArray2 as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+            if ($key2 == "p_order") {
+                unset($myArray2[$key]['p_order']);
+            }
+        }
+    }
     return $myArray2;
 }
+/**
+ * function for sort 2-d array
+ * @param type $records
+ * @param type $field
+ * @param type $reverse
+ * @return type
+ */
 function asort2d($records, $field, $reverse=false) {
 // Sort an array of arrays with text keys, like a 2d array from a table query:
   $hash = array();
