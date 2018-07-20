@@ -331,6 +331,12 @@ function generatePhotoDetailList($galleryimg) {
     }
     $myArray = $photo_list_array;
    $myArray2 = asort2d($myArray,"p_order");
+   foreach ($myArray2 as $key => $value) {
+       if($key == "p_order"){
+           unset($myArray2['p_order']);
+       }
+       
+   }
     return $myArray2;
 }
 function asort2d($records, $field, $reverse=false) {
