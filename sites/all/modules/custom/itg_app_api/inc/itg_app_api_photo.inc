@@ -330,10 +330,21 @@ function generatePhotoDetailList($galleryimg) {
         }
     }
     $myArray = $photo_list_array;
-   $photo_list_array2 = usort($myArray, function($a, $b) {
-    return $a['p_order'] - $b['p_order'];
-});
-    return $photo_list_array2;
+   aasort($myArray,"p_order");
+    return $myArray;
+}
+function aasort (&$array, $key) {
+    $sorter=array();
+    $ret=array();
+    reset($array);
+    foreach ($array as $ii => $va) {
+        $sorter[$ii]=$va[$key];
+    }
+    asort($sorter);
+    foreach ($sorter as $ii => $va) {
+        $ret[$ii]=$array[$ii];
+    }
+    $array=$ret;
 }
 
 /**
