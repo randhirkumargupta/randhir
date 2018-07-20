@@ -12,7 +12,8 @@
 .sidebar-second.page-authors-list.section-authors-list ul.pagination li a{display: inline-block;width: 25px;height: 25px;font-size: 1rem;text-align: center;line-height: 25px;}
 .sidebar-second.page-authors-list.section-authors-list ul.pagination li.pager-current{width:25px; height:25px; border-radius:50%;background:#337ab7; display:inline-block; font-size:1rem; line-height:25px; color:#fff;}
 .sidebar-second.page-authors-list.section-authors-list ul.pagination li a:hover{background:#337ab7; border-radius:50%; color:#fff;}
-.sidebar-second.page-authors-list.section-authors-list .view-authors-and-people-listing input#edit-submit-authors-and-people-listing{border:0;background-color:#2c333c;padding:7px 10px;font-size:14px;color: #fff; margin-top:0}</style>
+.sidebar-second.page-authors-list.section-authors-list .view-authors-and-people-listing input#edit-submit-authors-and-people-listing{border:0;background-color:#2c333c;padding:7px 10px;font-size:14px;color: #fff; margin-top:0}
+</style>
 <?php
 
 print views_embed_view('authors_and_people_listing', 'block_1');
