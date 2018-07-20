@@ -1196,8 +1196,6 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .slick-track:before,.slick-track:after{display:table;content:'';}
 .slick-track:after{clear:both;}
 /* .slick-slide img{display:block;} */
-.story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
-.story-section .story-right .description p{padding:10px 0;}
 .story-section .story-right.photo-story .fa-chevron-left,.story-section .story-right.photo-story .fa-chevron-right{background:rgba(0,0,0,0.6);border:none;width:45px;height:66px;border-radius:0 7px 7px 0;color:#fff;position:absolute;top:138px;z-index:1;font-size:28px;text-align:center;line-height:70px;cursor:pointer;visibility:visible!important;}
 .story-section .story-right.photo-story .fa-chevron-left{left:0;}
 .story-section .story-right.photo-story .fa-chevron-right{right:0;border-radius:7px 0px 0px 7px;}
@@ -1352,6 +1350,10 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 @media all and (max-width:767px){
 .survey-form-main-container h1{font-size:24px;font-size:1.5rem;font-weight:700;line-height:30px;}
 }
+.success-message, .messages--status {color: #009c00; font-size: 13px;}
+.form-required, .error {color: red;}
+.pdb-10, .success-message, .messages--status, #block-formblock-ask-an-expert h2, #comments .comment { padding-bottom: 10px;}
+.mr-0, *, #block-formblock-ask-an-expert .form-item .form-item { margin: 0;}
 
 /* quiz survey css */
 
