@@ -306,8 +306,7 @@ function generatePhotoDetailList($galleryimg) {
         // loop on gallery img
         $output = "";
         foreach ($galleryimg as $key => $value) {
-            $fc = field_collection_field_get_entity($value);
-            p($fc);
+            $fc = field_collection_field_get_entity($value);            
             $fid = $fc->field_image_id['und'][0]['value'];
             if (!$fid > 0) {
                 $fid = $fc->field_images['und'][0]['fid'];
@@ -320,11 +319,13 @@ function generatePhotoDetailList($galleryimg) {
             $caption = $fc->field_image_caption['und'][0]['value'];
 
             $byline = $fc->field_credit['und'][0]['value'];
+            $order = $fc->field_gallery_order['und'][0]['value'];
             $photo_story_img = $file_uri; //image_style_url('photo_slider_753x543', $uri);
             $photo_list_array[$listcont]['p_id'] = "$fid";
             $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
             $photo_list_array[$listcont]['p_credit'] = "$byline";
             $photo_list_array[$listcont]['p_caption'] = "$caption";
+            $photo_list_array[$listcont]['p_order'] = "$order";
             $listcont++;
         }
     }
