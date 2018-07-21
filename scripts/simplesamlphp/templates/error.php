@@ -1,25 +1,4 @@
 <?php
-/* Custom check for redirecting user back to site from error page */
-// For Twitter
-$returnto = $_GET['ReturnTo'];
-$explode_returnto_val = explode('/', $returnto);
-$return_uri = base64_decode(end($explode_returnto_val));
-if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED') &&  $this->data['error']['referer'] != 'https://www.facebook.com/') {
-  header('location:'.$return_uri);
-  exit();
-}
-// For facebook
-if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED') &&  $this->data['error']['referer'] == 'https://www.facebook.com/') {
-$return_type = urldecode($_GET['AuthState']);
-$parse_data = parse_url($return_type);
-$parse_url_explode = explode('ReturnTo=', $parse_data['query']);
-$parse_url_arr = explode('/', end($parse_url_explode));
-$redirect_uri = base64_decode($parse_url_arr[5]);
-header('location:'.$redirect_uri);
-exit();
-}
-/* End here */
-
 $this->data['header'] = $this->t($this->data['dictTitle']);
 
 $this->data['head'] = <<<EOF
