@@ -420,10 +420,11 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
           ?>
         </div>
 <?php } ?>
+    </div>
       <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
         <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
       <?php } ?>                            
-    </div>
+    
     </div>
     <?php
       if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
