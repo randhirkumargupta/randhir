@@ -1064,7 +1064,7 @@ footer .footer-top .footer-top-link{font-size:19px;line-height:44px;}
 .tech-pros-cons-main h2{font-size:28px;line-height:35px;color:#111;font-weight:500;padding:0 0 0 10px;float:left;width:100%;margin-bottom:15px;background:#eee; font-family: OpenSans-Semibold;}
 .tech-pros-cons-main h2 strong{font-size:30px;line-height:35px;color:#fff;background-color:#b00808;float:right;padding:0 10px;}
 ul.pron-cons-img{width:32%;float:left; margin-left:15px;}
-ul.tech-pros{width:25%;float:left;margin-left:5%;}
+ul.tech-pros{width:25%;float:left;margin-left:5%; border-right:1px solid #ddd;}
 ul.tech-cons{width:25%;float:left;margin-left:5%;}
 ul.tech-cons li,ul.tech-pros li{font-size:14px;line-height:26px;color:#939393;float:left;width:100%;}
 ul.tech-cons li span,ul.tech-pros li span{color:#b00808;font-size:17px;font-weight:700;line-height:24px;list-style:none;text-transform:uppercase;}
@@ -1075,14 +1075,15 @@ ul.pron-cons-img li img{margin-right:10%;margin-top:-53px;width:92%;}
 @media (max-width:767px){
 .tech-pros-cons-main h2{margin-left:0;overflow:hidden;width:100%; font-size:20px;}
 .tech-pros-cons-main h2 strong{font-size:20px;}
-ul.pron-cons-img{width:100%;margin-bottom:10px;}
+ul.pron-cons-img{width:90%;margin:0 auto 10px; float: none; overflow:hidden;}
 ul.pron-cons-img li img{margin-right:0;margin-top:0;width:100%;}
 ul.tech-pros{margin-left:5%; margin-bottom:15px;}
-ul.tech-pros,ul.tech-cons{width:46%;}
+ul.tech-pros,ul.tech-cons{width:45%;}
+ul.tech-cons li span, ul.tech-pros li span{font-size:15px;}
 }
 ul.pron-cons-img{list-style:none!important;}
 ul.pron-cons-img li img{margin-top:0; height:auto!important}
-@media screen and (max-width:767px){ul.pron-cons-img li img{margin-top:-12px!important;}}
+@media screen and (max-width:767px){ul.pron-cons-img li img{margin-top:0!important;}}
 .modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0;}
 .modal-dialog{position:relative;width:auto;margin:10px;}
 .modal-content{position:relative;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid #999;border:1px solid rgba(0,0,0,0.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,0.5);box-shadow:0 3px 9px rgba(0,0,0,0.5);}
