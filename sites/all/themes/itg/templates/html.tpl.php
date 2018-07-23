@@ -601,7 +601,7 @@ footer .footer-copyright{color:#a6a6a6;padding:10px 0;text-align:center;font-siz
 .story-section .story-left .briefcase ul li{position:relative;color:#575757;padding:5px 0px 5px 12px;font-size:13px;font-size:0.8125rem;line-height:18px;word-wrap:break-word;}
 .story-section .story-left .briefcase ul li:before{position:absolute;top:13px;left:0px;content:'';border-radius:50%;background:#a00606;height:5px;width:5px;}
 .story-section .story-right .stryimg{position:relative;text-align:center;}
-.story-section .story-right .stryimg .photoby{text-align:left;position:relative;bottom:0;left:0;width:100%;}
+.story-section .story-right .stryimg .photoby{text-align:left;position:absolute;bottom:0;left:0;width:100%;}
 .story-section .story-right .stryimg .photoby .photoby-text{background: #111;padding: 3px 5px; color: #949494;}
 .story-section .story-right .description{padding-top:10px;font-size:17px;font-size:1.0625rem;line-height:29px;word-wrap:break-word;}
 .story-section .story-right .description p{padding:10px 0;}
