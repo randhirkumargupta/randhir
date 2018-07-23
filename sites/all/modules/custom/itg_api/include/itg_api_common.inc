@@ -180,7 +180,7 @@ function itg_import_common_agency_feeds($agency_name) {
             // Small Image
             // Extra Small Image
             $extra_small_image = $agency_item['default_image'][0]['small'];
-            $extra_small_image_name = basename($extra_small_image_name);
+            $extra_small_image_name = basename($extra_small_image);
             $extra_small_image_uri = 'public://' . $extra_small_image_name;
             $extra_small_image_files = file_load_multiple(array(), array('uri' => $extra_small_image_uri));
             $extra_small_image_file = reset($extra_small_image_files);
