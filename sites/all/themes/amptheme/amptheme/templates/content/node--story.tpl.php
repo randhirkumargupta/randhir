@@ -786,8 +786,23 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
             <!-- For buzzlfeed section end --> 
             <?php
           }
-          ?>
-             
+          else {
+            // Get Primary category Section Data.
+            if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
+              $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+            }
+            if (!empty($primary_cat)) {
+              $all_terms = taxonomy_get_parents_all($primary_cat);
+              $number_parent = count($all_terms);
+              $section_key = $number_parent - 1;
+              $section_id = $all_terms[$section_key]->tid;
+              if (isset($section_id)) {
+                $data = get_primary_section_related_data($node->nid, $section_id);
+                print $data;
+              }
+            }
+          }
+    ?>             
       </div>            
     </div>               
 
