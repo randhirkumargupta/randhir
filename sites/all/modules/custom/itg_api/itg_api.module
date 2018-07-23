@@ -61,6 +61,7 @@ function itg_api_cronapi($op, $job = NULL) {
     'callback' => 'itg_delete_pti_old_xml',
     'file' => 'include/itg_api_pti.inc',
   );*/
+  
 
   return $items;
 }
@@ -118,6 +119,14 @@ function itg_api_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
     'file' => 'include/itg_api_pti.inc',
+  );
+  
+  $items['itg-common-agency-feed/%'] = array(
+    'description' => 'Import Agecny Feed',
+    'page callback' => 'itg_import_common_agency_feeds', 
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+    'file' => 'include/itg_api_common.inc',
   );
   
   return $items;
