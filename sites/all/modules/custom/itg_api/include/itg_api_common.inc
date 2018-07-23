@@ -18,6 +18,7 @@ function itg_import_common_agency_feeds($agency_name) {
 		  itg_api_insert_xml_info(0, $ref_id, 'story', $agency_name); 
           $publish_flag = FALSE;
           $caps_agency_name = strtoupper($agency_name);
+          $term_name = $caps_agency_name.' Feed';
           $headline = htmlentities(strip_tags(trim(preg_replace('/\s+/', ' ', $agency_item['title']))));
           $title_length = strlen($agency_item['title']);
           // get pubdate
@@ -31,7 +32,7 @@ function itg_import_common_agency_feeds($agency_name) {
           $publish_date = date('Y-m-d', $publish_date_timestamp);
           $publish_date_time = date('Y-m-d H:i', $publish_date_timestamp);
           $schedule_date_time = gmdate('Y-m-d H:i', $publish_date_timestamp);         
-		  $term_id = itg_api_get_term_id($caps_agency_name, CATEGORY_MANAGMENT);		  
+		  $term_id = itg_api_get_term_id($term_name, CATEGORY_MANAGMENT);		  
           $title = itg_api_check_title($headline, $term_id, $publish_date);
           if (!$title) {
             $description = $agency_item['description'];
