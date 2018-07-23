@@ -63,7 +63,7 @@
         </div>
         <div id="browse-image" class="itg-form-section-wrapper browse-media-file">
             <h2 class="story-title"><?php print t('Facebook Instant Article'); ?></h2>
-            <div class="itg-form-section">
+            <div class="itg-form-section hide">
                 <!-- Facebook Instant Article -->
                 <?php print drupal_render($form['field_story_social_media_integ']['und']['facebook_instant_article']); ?>
                 <?php print drupal_render($form['field_story_big_image']); ?>
