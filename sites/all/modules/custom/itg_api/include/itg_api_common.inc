@@ -14,7 +14,7 @@ function itg_import_common_agency_feeds($agency_name) {
       foreach ($agency_json['data']['lists'] as $agency_item) {
 		$ref_id = $agency_item['ref_id'];
 		$row_count = itg_api_get_xml_info($ref_id);
-        if ($agency_item['feed_source'] == $agency_name && $agency_item['exported'] == 0 && $row_count == 0) {
+        if ($agency_item['feed_source'] == $agency_name && $agency_item['exported'] == 0) {
 		  itg_api_insert_xml_info(0, $ref_id, 'story', $agency_name); 
           $publish_flag = FALSE;
           $caps_agency_name = strtoupper($agency_name);
@@ -117,15 +117,85 @@ function itg_import_common_agency_feeds($agency_name) {
             $node->field_reporter_unique_id[LANGUAGE_NONE][0]['value'] = trim($uniqueid);
             $node->field_story_configurations[LANGUAGE_NONE][0]['value'] = array('commentbox');
             $node->field_story_configurations[LANGUAGE_NONE][1]['value'] = array('noindex_nofollow');
-            $node->field_story_configurations[LANGUAGE_NONE][2]['value'] = array('nofollow');
-            // Attach random image to PTI Story
-            $file_name_arr = array('latest-news.jpg', 'news-flash.jpg', 'news-update.jpg');
-            $k = array_rand($file_name_arr);
-            $filename = $file_name_arr[$k];
-            $image = file_get_contents(file_create_url('public://' . $filename));
-            $file = file_save_data($image, 'public://' . $filename, FILE_EXISTS_REPLACE);
-            $node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array) $file));
-            // Attach random image to PTI Story
+            $node->field_story_configurations[LANGUAGE_NONE][2]['value'] = array('nofollow');            
+            // E Extra large image Image
+            $e_extra_large_image = $agency_item['default_image'][0]['extra_large'];
+            $e_extra_large_image_name =  basename($e_extra_large_image);            
+            $e_extra_large_image_uri = 'public://' . $e_extra_large_image_name;
+            $e_extra_large_image_files = file_load_multiple(array(), array('uri' => $e_extra_large_image_uri));
+			$e_extra_large_image_file = reset($e_extra_large_image_files);
+			if(empty($e_extra_large_image_file)){
+			  $e_extra_large_image_content = file_get_contents($e_extra_large_image);
+			  $e_extra_large_image_file = file_save_data($e_extra_large_image_content, 'public://' . $e_extra_large_image_name, FILE_EXISTS_RENAME);
+			}
+            $node->field_story_e_extra_large_image = array(LANGUAGE_NONE => array('0' => (array) $e_extra_large_image_file));
+            // E Extra large image Image   
+                     
+            // Extra Large Image
+            $extra_large_image = $agency_item['default_image'][0]['large'];
+            $extra_large_image_name =  basename($extra_large_image);            
+            $extra_large_image_uri = 'public://' . $extra_large_image_name;
+            $extra_large_image_files = file_load_multiple(array(), array('uri' => $extra_large_image_uri));
+			$extra_large_image_file = reset($extra_large_image_files);
+			if(empty($extra_large_image_file)){
+			  $extra_large_image_content = file_get_contents($extra_large_image);
+			  $extra_large_image_file = file_save_data($extra_large_image_content, 'public://' . $extra_large_image_name, FILE_EXISTS_RENAME);
+			}
+            $node->field_story_extra_large_image = array(LANGUAGE_NONE => array('0' => (array) $extra_large_image_file));
+            // Extra Large Image
+                       
+            //Large Image
+            $large_image = $agency_item['default_image'][0]['medium'];
+            $large_image_name =  basename($large_image);            
+            $large_image_uri = 'public://' . $large_image_name;
+            $large_image_files = file_load_multiple(array(), array('uri' => $large_image_uri));
+			$large_image_file = reset($large_image_files);
+			if(empty($large_image_file)){
+			  $large_image_content = file_get_contents($large_image);
+			  $large_image_file = file_save_data($large_image_content, 'public://' . $large_image_name, FILE_EXISTS_RENAME);
+			}
+            $node->field_story_large_image = array(LANGUAGE_NONE => array('0' => (array) $large_image_file));
+            //Large Image
+                       
+            // Medium Image
+            $medium_image = $agency_item['default_image'][0]['regular'];
+            $medium_image_name =  basename($medium_image);            
+            $medium_image_uri = 'public://' . $medium_image_name;
+            $medium_image_files = file_load_multiple(array(), array('uri' => $medium_image_uri));
+			$medium_image_file = reset($medium_image_files);
+			if(empty($medium_image_file)){
+			  $medium_image_content = file_get_contents($medium_image);
+			  $medium_image_file = file_save_data($medium_image_content, 'public://' . $medium_image_name, FILE_EXISTS_RENAME);
+			}
+            $node->field_story_medium_image = array(LANGUAGE_NONE => array('0' => (array) $medium_image_file));
+            // Medium Image
+            
+            // Small Image
+            $small_image = $agency_item['default_image'][0]['thumbnail'];
+            $small_image_name =  basename($small_image);            
+            $small_image_uri = 'public://' . $small_image_name;
+            $small_image_files = file_load_multiple(array(), array('uri' => $small_image_uri));
+			$small_image_file = reset($small_image_files);
+			if(empty($small_image_file)){
+			  $small_image_content = file_get_contents($small_image);
+			  $small_image_file = file_save_data($small_image_content, 'public://' . $small_image_name, FILE_EXISTS_RENAME);
+			}
+            $node->field_story_small_image = array(LANGUAGE_NONE => array('0' => (array) $small_image_file));
+            // Small Image
+            
+            // Extra Small Image
+            $extra_small_image = $agency_item['default_image'][0]['small'];
+            $extra_small_image_name =  basename($extra_small_image_name);            
+            $extra_small_image_uri = 'public://' . $extra_small_image_name;
+            $extra_small_image_files = file_load_multiple(array(), array('uri' => $extra_small_image_uri));
+			$extra_small_image_file = reset($extra_small_image_files);
+			if(empty($extra_small_image_file)){
+			  $extra_small_image_content = file_get_contents($extra_small_image);
+			  $extra_small_image_file = file_save_data($extra_small_image_content, 'public://' . $extra_small_image_name, FILE_EXISTS_RENAME);
+			}
+            $node->field_story_extra_small_image = array(LANGUAGE_NONE => array('0' => (array) $extra_small_image_file));
+            // Extra Small Image
+            
             $exp_description = strtolower($description);
             $exp_headline = strtolower($headline);
             $exp_xml_filename = strtolower($xml_filename);
