@@ -342,11 +342,6 @@ function api_anchorlist_callback(){
     writeFeedFile($json_path, $file_name, $str_data);
     $full_file_path = file_create_url($json_path . '/'. $file_name);
     clear_akamai_external_file_cache($full_file_path);
-    
-    $file_name_js = "chat.js";
-    $json_path_js = 'public://anchor-chat';
-    $full_file_path_js = file_create_url($json_path_js . '/'. $file_name_js);
-    clear_akamai_external_file_cache($full_file_path_js);
     return;
 }
 
