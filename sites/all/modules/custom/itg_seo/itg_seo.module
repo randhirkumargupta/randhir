@@ -576,11 +576,15 @@ function itg_seo_node_insert($node) {
     } else {
       if (in_array($node->type, $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
         $newpath = itg_common_custompath_insert_load($node);
-        $node->path['alias'] = $newpath;
+        if (!empty($newpath)) {
+          $node->path['alias'] = $newpath;
+        }
       }
       if (($node->type == 'breaking_news') || $node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
         $newpath = itg_common_custompath_insert_load($node);
-        $node->path['alias'] = $newpath;
+        if (!empty($newpath)) {
+          $node->path['alias'] = $newpath;
+        }
       }
     }
     //watchdog("seo_insert1", "<pre> ".print_r($node, true)."</pre>");
@@ -602,11 +606,11 @@ function itg_seo_node_presave($node) {
       
       // As if alise is not set from textfield the assign title of node to alise.
       if (empty($node->path['alias'])) {
-        $node->path['alias'] = $node->title;
+        $node->path['alias'] = getSEFUrlFromTitle($node->title);
       }
     }
     if ($node->path['pathauto'] == 1) {
-      $node->path['alias'] = $node->title;
+      $node->path['alias'] = getSEFUrlFromTitle($node->title);
     }
   }
 }
@@ -635,12 +639,14 @@ function itg_seo_node_update($node) {
   if (isset($node->op) && is_valid_content_type_for_sef_url($node->type)) {
     if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
       $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
-      $path = array(
-        'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
-      path_save($path);
+      if (!empty($newpath)) {
+        $node->path['alias'] = $newpath;
+        $path = array(
+          'source' => "node/{$node->nid}",
+          'alias' => $newpath, // Any alias that you want to set.
+        );
+        path_save($path);
+      }
     }
     elseif ($node->type == 'reporter' || $node->type == 'podcast' || $node->type == 'survey' || $node->type == 'quiz' || $node->type == 'poll') {
       $newpath = itg_common_custompath_insert_load($node);
@@ -653,22 +659,26 @@ function itg_seo_node_update($node) {
             $newpath = implode("/", $path_array);
         }
       }
-      $node->path['alias'] = $newpath;
-      $path = array(
-        'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
-      path_save($path);
+      if (!empty($newpath)) {
+        $node->path['alias'] = $newpath;
+        $path = array(
+          'source' => "node/{$node->nid}",
+          'alias' => $newpath, // Any alias that you want to set.
+        );
+        path_save($path);
+      }
     }
 
     elseif ($node->type == 'itg_funalytics' || $node->type == 'mega_review_critic' || $node->type == 'page' || $node->type == 'blog' || ($node->type == 'breaking_news')) {
       $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
-      $path = array(
-        'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
-      path_save($path);
+      if (!empty($newpath)) {
+        $node->path['alias'] = $newpath;
+        $path = array(
+          'source' => "node/{$node->nid}",
+          'alias' => $newpath,
+        );
+        path_save($path);
+      }
     }
   }
  }
@@ -783,4 +793,23 @@ function itg_not_found_200() {
   $block = block_load('itg_layout_manager', 'latest_headlines404_block');
   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
   return theme('itg_not_found_200', array('data' => $render_array));
+}
+
+/*
+ * Generate SEF url from node title
+ * @param $title
+ * return String
+ */
+function getSEFUrlFromTitle($title) {
+  $node_sef = '';
+  $edited_sef_url = _remove_slash_from_string($title);
+  if (!empty($edited_sef_url)) {
+    $lencount_sef = strlen($edited_sef_url);
+    if ($lencount_sef >= 160) {
+      $node_sef = substr($edited_sef_url, 0, 160);
+    } else {
+      $node_sef = $edited_sef_url;
+    }
+  }
+  return $node_sef;
 }
