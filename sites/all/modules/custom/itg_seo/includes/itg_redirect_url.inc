@@ -739,7 +739,24 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $query_alias = 0;
         $type = 'category';
         $table = 'migrate_map_itgcategory';
-      } else if ($arg[0] == 'node' && empty($arg[1])) {
+      } else if ($arg[0] == "programme" && $arg[1] == "the-people's-court" && $arg[2] == "video" && !empty ($arg[3])) {
+        $prgid = explode("-", $arg[3]);
+        $argcn = count($prgid);
+        $video_arg = $argcn-4;
+        $video_id = $prgid[$video_arg];
+        if ($video_id < 1137861) { // Video id is hardcoded because of only need to redirect of migrated videos. 
+          $alias = drupal_get_path_alias('node/'.$video_id);
+          drupal_goto($alias, array(), 301);
+        }
+      } else if ($arg[0] == "videos" && $arg[1] == "india" && $arg[2] == "video" && !empty ($arg[3])) {
+        $prgid = explode("-", $arg[3]);
+        $argcn = count($prgid);
+        $video_arg = $argcn-4;
+        $video_id = $prgid[$video_arg];
+        $alias = drupal_get_path_alias('node/'.$video_id);
+        drupal_goto($alias, array(), 301);
+      }
+      else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
   // Code for url redirection:
