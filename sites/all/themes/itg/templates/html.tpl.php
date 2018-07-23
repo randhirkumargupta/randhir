@@ -1123,7 +1123,8 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .description a:hover{text-decoration:underline;}
 .tech-photos .tech-photos-head-section{display:block;}
 .tech-photos .tech-photos-head-section .tech-photos-count{color:#b5b5b5;font-size:13px;margin-bottom:10px;display:block;}
-.tech-photos .tech-photo-item{width:22%;display:inline-block;margin-right:2.7%;position:relative;}
+.tech-photos .tech-photo-item{width:23%;display:inline-block;margin-right:2%;position:relative;box-shadow: -2px 2px 4px 0px #ddd;
+    border: 1px solid #ddd; padding: 0.5%;}
 .tech-photos .tech-photo-item .tech-photo-overlay{position:absolute;top:0;left:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);width:100%;height:100%;}
 .tech-photos .tech-photo-item .tech-photo-overlay a .tech-photo-seemore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:22px;}
 .tech-photos .tech-photo-item .tech-photo-overlay a,.tech-photos .tech-photo-item .tech-photo-overlay a span:hover{color:#fff;text-decoration:underline;}
@@ -1167,7 +1168,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .description iframe.story_video{width:100%;height:435px;}
 @media screen and (max-width:1024px){.story-section .story-right .description iframe.story_video{height:350px;}}
 @media screen and (max-width:768px){.story-section .story-right .description iframe.story_video{height:560px;}}
-@media screen and (max-width:767px){.story-section .story-right .description iframe.story_video{height:490px;}.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item{ width:48%; }}
+@media screen and (max-width:767px){.story-section .story-right .description iframe.story_video{height:490px;}.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item{ width:48%; } .tech-photos .tech-photo-item .tech-photo-overlay a .tech-photo-seemore{ line-height: 18px; font-size: 15px;} .tech-photos .tech-photo-item{width:48%;    margin-bottom:2%; margin-right:2% }}
 @media screen and (max-width:460px){.story-section .story-right .description iframe.story_video{height:290px;}}
 @media screen and (max-width:375px){.story-section .story-right .description iframe.story_video{height:260px;}}
 @media only screen and (max-width:320px){.story-section .story-right .description iframe.story_video{height:220px;}}
