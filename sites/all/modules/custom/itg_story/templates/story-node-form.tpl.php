@@ -181,19 +181,19 @@
                     <?php print drupal_render($form['field_story_social_media_integ']['und']['facebook']); ?>
                     <?php print drupal_render($form['field_story_social_media_integ']['und']['twitter']); ?>
                     <!-- Facebook fields -->
-                    <?php  print drupal_render($form['field_story_facebook_narrative']); ?>
-                    <?php  print drupal_render($form['field_story_facebook_image']); ?>
-                    <?php  print drupal_render($form['field_story_facebook_video']); ?>              <!-- Facebook Instant Article -->
-                    <?php  print drupal_render($form['field_facebook_audio_position']); ?>
-                    <?php  print drupal_render($form['field_facebook_instant_audio_url']); ?>
+                    <?php  // print drupal_render($form['field_story_facebook_narrative']); ?>
+                    <?php  // print drupal_render($form['field_story_facebook_image']); ?>
+                    <?php  // print drupal_render($form['field_story_facebook_video']); ?>              <!-- Facebook Instant Article -->
+                    <?php  // print drupal_render($form['field_facebook_audio_position']); ?>
+                    <?php  // print drupal_render($form['field_facebook_instant_audio_url']); ?>
                     
-                    <?php  print drupal_render($form['field_animated_image_position']); ?>
-                    <?php  print drupal_render($form['field_facebook_animated_image']); ?>
-                    <?php  print drupal_render($form['field_facebook_map_position']); ?>
-                    <?php  print drupal_render($form['field_map_embed_code']); ?>
-                    <?php  print drupal_render($form['field_facebook_gallery_associate']); ?>
-                    <?php  print drupal_render($form['field_social_embed_code_position']); ?>
-                    <?php  print drupal_render($form['field_social_embed_code']); ?>
+                    <?php  // print drupal_render($form['field_animated_image_position']); ?>
+                    <?php  // print drupal_render($form['field_facebook_animated_image']); ?>
+                    <?php  // print drupal_render($form['field_facebook_map_position']); ?>
+                    <?php  // print drupal_render($form['field_map_embed_code']); ?>
+                    <?php  // print drupal_render($form['field_facebook_gallery_associate']); ?>
+                    <?php  // print drupal_render($form['field_social_embed_code_position']); ?>
+                    <?php  // print drupal_render($form['field_social_embed_code']); ?>
 
                     <!-- Twitter fields -->
                     <?php print drupal_render($form['field_story_tweet']); ?>
