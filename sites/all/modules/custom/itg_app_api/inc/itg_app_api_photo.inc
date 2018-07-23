@@ -330,11 +330,36 @@ function generatePhotoDetailList($galleryimg) {
         }
     }
     $myArray = $photo_list_array;
-   $photo_list_array2 = usort($myArray, function($a, $b) {
-    return $a['p_order'] - $b['p_order'];
-});
-    return $photo_list_array2;
+    $myArray2 = asort2d($myArray, "p_order");
+    foreach ($myArray2 as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+            if ($key2 == "p_order") {
+                unset($myArray2[$key]['p_order']);
+            }
+        }
+    }
+    return $myArray2;
 }
+/**
+ * function for sort 2-d array
+ * @param type $records
+ * @param type $field
+ * @param type $reverse
+ * @return type
+ */
+function asort2d($records, $field, $reverse=false) {
+// Sort an array of arrays with text keys, like a 2d array from a table query:
+  $hash = array();
+  foreach($records as $key => $record) {
+    $hash[$record[$field].$key] = $record;
+  }
+  ($reverse)? krsort($hash) : ksort($hash);
+  $records = array();
+  foreach($hash as $record) {
+    $records []= $record;
+  }
+  return $records;
+} // end function asort2d
 
 /**
  * sprint2 function start

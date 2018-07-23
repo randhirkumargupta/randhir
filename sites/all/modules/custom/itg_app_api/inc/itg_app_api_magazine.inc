@@ -234,7 +234,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
             }
             $conf = getStoryConfigVal($nid);
             $is_lock = 0;
-            if (in_array("lock_story", $conf)) {
+            if (is_lock_story($nid)) {
                 $is_lock = 1;
             }
 
@@ -524,7 +524,7 @@ function getCoverstoriesList($issue_date) {
             }
             $conf = getStoryConfigVal($nid);
             $is_lock = 0;
-            if (in_array("lock_story", $conf)) {
+            if (is_lock_story($nid)) {
                 $is_lock = 1;
             }
 
@@ -818,9 +818,9 @@ function itg_rapid_get_web_exclisive_story($issue_date) {
         }
         $conf = getStoryConfigVal($nid);
         $is_lock = 0;
-        if (in_array("lock_story", $conf)) {
-            $is_lock = 1;
-        }
+        if (is_lock_story($nid)) {
+                $is_lock = 1;
+            }
 
         $story_list_array[$listcount]['s_id'] = "$nid";
         $story_list_array[$listcount]['s_title'] = "$title";
@@ -1016,9 +1016,9 @@ function itg_rapid_get_cover_story($issue_date, $range_min, $range_max) {
         }
         $conf = getStoryConfigVal($nid);
         $is_lock = 0;
-        if (in_array("lock_story", $conf)) {
-            $is_lock = 1;
-        }
+        if (is_lock_story($nid)) {
+                $is_lock = 1;
+            }
 
         $story_list_array[$listcount]['s_id'] = "$nid";
         $story_list_array[$listcount]['s_title'] = "$title";
@@ -1185,7 +1185,7 @@ function itg_rapid_get_supp_story($supp_ar, $range_min, $range_max, $listcount, 
             }
             $conf = getStoryConfigVal($nid);
             $is_lock = 0;
-            if (in_array("lock_story", $conf)) {
+            if (is_lock_story($nid)) {
                 $is_lock = 1;
             }
 
@@ -1344,9 +1344,9 @@ function magazineEditionPageRerourceValueList_all($issueid, $pageno) {
         }
         $conf = getStoryConfigVal($nid);
         $is_lock = 0;
-        if (in_array("lock_story", $conf)) {
-            $is_lock = 1;
-        }
+        if (is_lock_story($nid)) {
+                $is_lock = 1;
+            }
         $author = array();
         $nObject = new stdClass();
         $nObject->nid = $nid;

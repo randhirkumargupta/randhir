@@ -131,7 +131,7 @@ $modify_date = $modify_date.'+05:30';
         <?php $blog_city = ($node->field_blog_city[LANGUAGE_NONE][0]['value']) ? $node->field_blog_city[LANGUAGE_NONE][0]['value'] . " | " : ''; ?>
         <div class="locationdate"><?php print $blog_city .  date("F d, Y", strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></div>
 
-        <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+        <h2 class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></h2>
         <span class="refresh-icon"><span class="latest-update-data"></span> Check Latest Updates<i onclick="location.reload();" style="cursor: pointer;" class="fa fa-refresh" aria-hidden="true"></i></span>
   </div>
 

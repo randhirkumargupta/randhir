@@ -74,7 +74,7 @@ class ItgBylinePeopleMigration extends XMLMigration {
     // retrieve the value from the XML.
     // TIP: Note that all xpaths for fields begin at the last element of the
     // item xpath since each item xml chunk is processed individually.
-    // (ex. xpath=name is equivalent to a full xpath of
+    // (ex. xpath=name is equival ent to a full xpath of
     // /categories/category/name)
 
     $this->addFieldMapping('title', 'headline')->xpath('headline');
