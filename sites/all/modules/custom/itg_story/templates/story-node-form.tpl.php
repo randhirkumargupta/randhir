@@ -65,7 +65,7 @@
             <h2 class="story-title"><?php print t('Facebook Instant Article'); ?></h2>
             <div class="itg-form-section">
                 <!-- Facebook Instant Article -->
-                <?php print drupal_render($form['field_story_social_media_integ']); ?>
+                <?php print drupal_render($form['field_story_social_media_integ']['und']['facebook_instant_article']); ?>
                 <?php print drupal_render($form['field_story_big_image']); ?>
                 <!-- Facebook Instant Article -->
             </div>
@@ -178,7 +178,8 @@
             <div id="SocialMedia" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php print t('Social Media'); ?></h2>
                 <div class="itg-form-section hide">
-                   
+                    <?php print drupal_render($form['field_story_social_media_integ']['und']['facebook']); ?>
+                    <?php print drupal_render($form['field_story_social_media_integ']['und']['twitter']); ?>
                     <!-- Facebook fields -->
                     <?php // print drupal_render($form['field_story_facebook_narrative']); ?>
                     <?php // print drupal_render($form['field_story_facebook_image']); ?>
