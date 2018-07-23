@@ -61,7 +61,7 @@
                 <?php print drupal_render($form['field_story_extra_small_image']); ?>
             </div>
         </div>
-         <div class="col-md-8 itg-form-main">
+         <div class="itg-form-main">
          	<div id="BasicDetails" class="itg-form-section-wrapper">
             <h2 class="story-title active"><?php print t('Facebook Instant Article'); ?></h2>
             <div class="itg-form-section">
