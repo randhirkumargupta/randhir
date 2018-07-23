@@ -894,6 +894,18 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
       ':input[name="field_story_social_media_integ[und][facebook_instant_article]"]' => array('checked' => TRUE),
     )
   );
+  
+  // Hide some fields
+  $form['field_story_social_media_integ']['und']['field_facebook_instant_audio_url']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_facebook_audio_position']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_animated_image_position']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_facebook_animated_image']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_facebook_map_position']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_map_embed_code']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_social_embed_code']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_social_embed_code_position']['#attributes']['style'][] = 'display:none;';
+  $form['field_story_social_media_integ']['und']['field_facebook_gallery_associate']['#attributes']['style'][] = 'display:none;';
+ 
   /* 
   $form['field_facebook_instant_audio_url']['#states'] = array(
     'visible' => array(
