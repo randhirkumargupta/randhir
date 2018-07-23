@@ -85,7 +85,9 @@ function amptheme_html_head_alter(&$head_elements) {
    
   $head_elements['metatag_description_0']['#weight'] = -999;
   $head_elements['metatag_keywords_0']['#weight'] = -998;
-  $head_elements['metatag_canonical']['#weight'] = -997; 
+  $head_elements['metatag_canonical']['#weight'] = -998; 
+  $head_elements['metatag_live_blog_time']['#weight'] = -997; 
+  $head_elements['metatag_live_blog_time_modify']['#weight'] = -996; 
 }
 
 /**
