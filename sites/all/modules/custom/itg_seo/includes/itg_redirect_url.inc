@@ -182,7 +182,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $rss_url = '';
   $query_alias = '';
   $paging = array();
-  if (($arg[0] == 'story.jsp' || $arg[0] == 'story' || $arg[0] == 'Story' || $arg[1] == 'story.jsp' || $arg[1] == 'story' || $arg[1] == 'Story') && (!empty($_GET['sId']) || !empty($_GET['sid']) || !empty($_GET['id']))) { //code for this URL (story.jsp?sId=877)
+  if (($arg[0] == 'story.jsp' || $arg[0] == 'story' || $arg[0] == 'Story' || $arg[1] == 'story.jsp' || $arg[1] == 'story' || $arg[1] == 'Story' || ($arg[0] == 'commentbox' && $arg[1] == 'comment_box.jsp')) && (!empty($_GET['sId']) || !empty($_GET['sid']) || !empty($_GET['id']))) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
     if (isset($_GET['sid'])) {
       $old_content_id = $_GET['sid'];
@@ -739,6 +739,22 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $query_alias = 0;
         $type = 'category';
         $table = 'migrate_map_itgcategory';
+      } else if ($arg[0] == "programme" && $arg[1] == "the-people's-court" && $arg[2] == "video" && !empty ($arg[3])) {
+        $prgid = explode("-", $arg[3]);
+        $argcn = count($prgid);
+        $video_arg = $argcn-4;
+        $video_id = $prgid[$video_arg];
+        if ($video_id < 1137861) { // Video id is hardcoded because of only need to redirect of migrated videos. 
+          $alias = drupal_get_path_alias('node/'.$video_id);
+          drupal_goto($alias, array(), 301);
+        }
+      } else if ($arg[0] == "videos" && $arg[1] == "india" && $arg[2] == "video" && !empty ($arg[3])) {
+        $prgid = explode("-", $arg[3]);
+        $argcn = count($prgid);
+        $video_arg = $argcn-4;
+        $video_id = $prgid[$video_arg];
+        $alias = drupal_get_path_alias('node/'.$video_id);
+        drupal_goto($alias, array(), 301);
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
