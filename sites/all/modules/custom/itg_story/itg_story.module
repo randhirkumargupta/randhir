@@ -896,16 +896,16 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   );
   
   // Hide some fields
-  $form['field_story_social_media_integ']['field_facebook_instant_audio_url']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_facebook_audio_position']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_animated_image_position']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_facebook_animated_image']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_facebook_map_position']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_map_embed_code']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_social_embed_code']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_social_embed_code_position']['#access'] = FALSE;
-  $form['field_story_social_media_integ']['field_facebook_gallery_associate']['#access'] = FALSE;
- 
+  $form['field_facebook_instant_audio_url']['#access'] = FALSE;
+  $form['field_facebook_audio_position']['#access'] = FALSE;
+  $form['field_animated_image_position']['#access'] = FALSE;
+  $form['field_facebook_animated_image']['#access'] = FALSE;
+  $form['field_facebook_map_position']['#access'] = FALSE;
+  $form['field_map_embed_code']['#access'] = FALSE;
+  $form['field_social_embed_code']['#access'] = FALSE;
+  $form['field_social_embed_code_position']['#access'] = FALSE;
+  $form['field_facebook_gallery_associate']['#access'] = FALSE;
+
   /* 
   $form['field_facebook_instant_audio_url']['#states'] = array(
     'visible' => array(
