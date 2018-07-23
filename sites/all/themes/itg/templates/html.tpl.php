@@ -1073,14 +1073,15 @@ ul.pron-cons-img li img{margin-right:10%;margin-top:-53px;width:92%;}
 .tech-pros-cons-main{width:99%;float:left;box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     margin: 5px;padding-bottom:10px;}
 @media (max-width:767px){
-.tech-pros-cons-main h2{margin-left:0;overflow:hidden;width:100%;}
+.tech-pros-cons-main h2{margin-left:0;overflow:hidden;width:100%; font-size:20px;}
+.tech-pros-cons-main h2 strong{font-size:20px;}
 ul.pron-cons-img{width:100%;margin-bottom:10px;}
 ul.pron-cons-img li img{margin-right:0;margin-top:0;width:100%;}
-ul.tech-pros{margin-left:6%;}
+ul.tech-pros{margin-left:5%; margin-bottom:15px;}
 ul.tech-pros,ul.tech-cons{width:46%;}
 }
 ul.pron-cons-img{list-style:none!important;}
-ul.pron-cons-img li img{margin-top:0;}
+ul.pron-cons-img li img{margin-top:0; height:auto!important}
 @media screen and (max-width:767px){ul.pron-cons-img li img{margin-top:-12px!important;}}
 .modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0;}
 .modal-dialog{position:relative;width:auto;margin:10px;}
