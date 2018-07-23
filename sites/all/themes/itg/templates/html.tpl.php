@@ -1134,7 +1134,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .description .story-photo-list-wrapper{clear:both;}
 .story-photo-list-wrapper h3{text-transform:uppercase;font-weight:700;color:#bb0a0a;display:none;position:relative;font-family:"OpenSans-Bold";}
 .story-section .story-right .description .story-photo-list-wrapper .story-photo-list{overflow:hidden;}
-.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item {padding:1%; width: 25%;float: left; border: 1px solid #ddd; text-align: center; margin: 0 0.5% 1%; box-shadow: -2px 2px 4px 0px #ddd;}
+.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item {padding:0.5%; width: 23%;float: left; border: 1px solid #ddd; text-align: center; margin: 0 1% 1%; box-shadow: -2px 2px 4px 0px #ddd;}
 /* story with photo gallery */
 .story-section .story-right .stryimg a .story-photo-icon { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 30px;
     cursor: pointer;}.fa-camera:before { content: "\f030";} .fa-play-circle:before { content: "\f144";}
@@ -1165,7 +1165,7 @@ span.close_btt{position:absolute;right:-15px;top:-15px;width:30px;height:30px;co
 .story-section .story-right .description iframe.story_video{width:100%;height:435px;}
 @media screen and (max-width:1024px){.story-section .story-right .description iframe.story_video{height:350px;}}
 @media screen and (max-width:768px){.story-section .story-right .description iframe.story_video{height:560px;}}
-@media screen and (max-width:767px){.story-section .story-right .description iframe.story_video{height:490px;}}
+@media screen and (max-width:767px){.story-section .story-right .description iframe.story_video{height:490px;}.story-section .story-right .description .story-photo-list-wrapper .story-photo-list-item{ width:48%; }}
 @media screen and (max-width:460px){.story-section .story-right .description iframe.story_video{height:290px;}}
 @media screen and (max-width:375px){.story-section .story-right .description iframe.story_video{height:260px;}}
 @media only screen and (max-width:320px){.story-section .story-right .description iframe.story_video{height:220px;}}
