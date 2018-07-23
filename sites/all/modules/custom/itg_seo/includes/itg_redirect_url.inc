@@ -753,8 +753,10 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $argcn = count($prgid);
         $video_arg = $argcn-4;
         $video_id = $prgid[$video_arg];
-        $alias = drupal_get_path_alias('node/'.$video_id);
-        drupal_goto($alias, array(), 301);
+        if (!empty($video_id)) {
+		  $alias = drupal_get_path_alias('node/'.$video_id);
+		  drupal_goto($alias, array(), 301);
+		}
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }
