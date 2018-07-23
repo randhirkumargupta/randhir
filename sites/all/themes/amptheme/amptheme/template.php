@@ -147,7 +147,7 @@ function amptheme_preprocess_html(&$variables) {
     if (!empty($node_obj) && $node_obj->type == 'breaking_news') {         
       if (!empty($node_obj->field_type['und']) && $node_obj->field_type['und'][0]['value'] == 'Live Blog') {
         $fix_liveblog_title = ' - Live Updates, Live News, Live Coverage, India Today Live Reporting';
-         $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title . $fix_liveblog_title : $node_obj->metatags[LANGUAGE_NONE]['title']['value'] . $fix_liveblog_title);
+         $variables['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title . $fix_liveblog_title : $node_obj->metatags[LANGUAGE_NONE]['title']['value'] . $fix_liveblog_title);
       }      
     }
     
