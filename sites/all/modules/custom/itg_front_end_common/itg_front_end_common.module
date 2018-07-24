@@ -649,7 +649,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
               '#tag' => 'meta',
               '#attributes' => array(
                 'property' => 'article:modified_time',
-                'content' => $blog_modify_date,
+                'content' => $custom_live_date,
               ),
               '#weight' => -997,
             );
