@@ -204,7 +204,7 @@ $coverage_end_final_date = '';
         ?>
         <!--<h1><?php if ($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
         <?php print ($title) ?>
-        <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+       
         <?php if ($type == 'Live Blog') { ?>
 		<h2 class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></h2>	
 		<?php				
