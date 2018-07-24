@@ -730,7 +730,7 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
   $head_elements['canonical_0']['#weight'] = -1011;
-  $head_elements['metatag_canonical']['#weight'] = -997;
+  $head_elements['metatag_canonical']['#weight'] = -998;
   $status = drupal_get_http_header("status");
   if ($status === '404 Not Found'){
 	unset($head_elements['metatag_canonical']);
