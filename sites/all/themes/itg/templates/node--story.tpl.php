@@ -394,7 +394,12 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         }
       }
       if (function_exists('itg_story_get_image_info')) {
-        $getImageInfo = itg_story_get_image_info($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+		if(!empty($node->field_story_e_extra_large_image[LANGUAGE_NONE])){
+		  $getImageInfo = itg_story_get_image_info($node->field_story_e_extra_large_image[LANGUAGE_NONE][0]['fid']);
+		}
+		else{
+		  $getImageInfo = itg_story_get_image_info($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
+		}        
       }
       if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) {
         ?>
@@ -415,10 +420,11 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
           ?>
         </div>
 <?php } ?>
+    </div>
       <?php if (isset($getImageInfo[0]->image_caption) && !empty($getImageInfo[0]->image_caption)) { ?>    
         <div class="image-alt" itemprop="description"><?php print $getImageInfo[0]->image_caption; ?></div>
       <?php } ?>                            
-    </div>
+    
     </div>
     <?php
       if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) {
@@ -889,17 +895,7 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
               ?>
             </ul>
           </div>
-            <?php } ?>
-          <!-- For buzzfeed section stary -->
-            <?php if (!empty($related_content) && !empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?>
-            <div class="related-story related-story-bottom">
-              <?php
-              $block = module_invoke('itg_front_end_common', 'block_view', 'related_story_bottom_block');
-              print render($block['content']);
-              ?>
-            </div>
-            <!-- For buzzfeed section end --> 
-            <?php } ?>
+            <?php } ?>          
         </div>
           <div class="vukkul-comment">
             

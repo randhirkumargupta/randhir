@@ -77,6 +77,17 @@ function amptheme_html_head_alter(&$head_elements) {
   if (isset($head_elements['system_meta_content_type'])) {
     unset($head_elements['system_meta_content_type']);
   }
+  // Updating meta name keywords to news_keyword sitewide
+  $meta_name_keyword = array_keys($head_elements);
+  if (in_array('metatag_keywords_0', $meta_name_keyword)) {
+    $head_elements['metatag_keywords_0']['#name'] = 'news_keywords';
+  }
+   
+  $head_elements['metatag_description_0']['#weight'] = -999;
+  $head_elements['metatag_keywords_0']['#weight'] = -998;
+  $head_elements['metatag_canonical']['#weight'] = -998; 
+  $head_elements['metatag_live_blog_time']['#weight'] = -997; 
+  $head_elements['metatag_live_blog_time_modify']['#weight'] = -996; 
 }
 
 /**
@@ -130,7 +141,16 @@ function amptheme_preprocess_html(&$variables) {
 		$_section_name = $section_tids[0]->name;
       } 
       $variables['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
-    }		
+    }
+    
+    // For live blog
+    if (!empty($node_obj) && $node_obj->type == 'breaking_news') {         
+      if (!empty($node_obj->field_type['und']) && $node_obj->field_type['und'][0]['value'] == 'Live Blog') {
+        $fix_liveblog_title = ' - Live Updates, Live News, Live Coverage, India Today Live Reporting';
+         $variables['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title . $fix_liveblog_title : $node_obj->metatags[LANGUAGE_NONE]['title']['value'] . $fix_liveblog_title);
+      }      
+    }
+    
   }
 }
 

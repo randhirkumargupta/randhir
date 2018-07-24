@@ -945,6 +945,21 @@ function get_custom_content_details($blog_entity_id) {
 }
 
 /**
+ * content show at live blog page.
+ */
+function last_live_blog_content($blog_entity_id) {
+  if ($blog_entity_id) {
+    $query = db_select('itg_live_blog', 'p');
+    $query->condition('p.blog_entity_id', $blog_entity_id);
+    $query->condition('p.status', '1');
+    $query->fields('p', array('blog_created_date'))
+         ->range(0, 1)->orderBy('bid', 'DESC');
+    # execute the query
+    return $results = $query->execute()->fetchField();
+  }
+}
+
+/**
  * Left blog for live blog.
  */
 function get_custom_left_side_data($blog_entity_id) {

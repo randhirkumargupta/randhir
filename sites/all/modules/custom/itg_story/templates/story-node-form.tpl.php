@@ -61,14 +61,17 @@
                 <?php print drupal_render($form['field_story_extra_small_image']); ?>
             </div>
         </div>
-        <div id="browse-image" class="itg-form-section-wrapper browse-media-file">
-            <h2 class="story-title"><?php print t('Facebook Instant Article'); ?></h2>
+         <div class="itg-form-main">
+         	<div id="BasicDetails" class="itg-form-section-wrapper">
+            <h2 class="story-title active"><?php print t('Facebook Instant Article'); ?></h2>
             <div class="itg-form-section">
                 <!-- Facebook Instant Article -->
+                <?php print drupal_render($form['field_story_social_media_integ']['und']['facebook_instant_article']); ?>
                 <?php print drupal_render($form['field_story_big_image']); ?>
                 <!-- Facebook Instant Article -->
             </div>
         </div>
+    	</div>
         <div id="StoryContent" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('More Details'); ?></h2>
             <div class="itg-form-section hide">
@@ -177,21 +180,22 @@
             <div id="SocialMedia" class="itg-sidebar-form-section">
                 <h2 class="story-title"><?php print t('Social Media'); ?></h2>
                 <div class="itg-form-section hide">
-                    <?php print drupal_render($form['field_story_social_media_integ']); ?>
+                    <?php print drupal_render($form['field_story_social_media_integ']['und']['facebook']); ?>
+                    <?php print drupal_render($form['field_story_social_media_integ']['und']['twitter']); ?>
                     <!-- Facebook fields -->
-                    <?php print drupal_render($form['field_story_facebook_narrative']); ?>
-                    <?php print drupal_render($form['field_story_facebook_image']); ?>
-                    <?php print drupal_render($form['field_story_facebook_video']); ?>              <!-- Facebook Instant Article -->
-                    <?php print drupal_render($form['field_facebook_audio_position']); ?>
-                    <?php print drupal_render($form['field_facebook_instant_audio_url']); ?>
+                    <?php  print drupal_render($form['field_story_facebook_narrative']); ?>
+                    <?php  print drupal_render($form['field_story_facebook_image']); ?>
+                    <?php  print drupal_render($form['field_story_facebook_video']); ?>              <!-- Facebook Instant Article -->
+                    <?php  print drupal_render($form['field_facebook_audio_position']); ?>
+                    <?php  print drupal_render($form['field_facebook_instant_audio_url']); ?>
                     
-                    <?php print drupal_render($form['field_animated_image_position']); ?>
-                    <?php print drupal_render($form['field_facebook_animated_image']); ?>
-                    <?php print drupal_render($form['field_facebook_map_position']); ?>
-                    <?php print drupal_render($form['field_map_embed_code']); ?>
-                    <?php print drupal_render($form['field_facebook_gallery_associate']); ?>
-                    <?php print drupal_render($form['field_social_embed_code_position']); ?>
-                    <?php print drupal_render($form['field_social_embed_code']); ?>
+                    <?php  print drupal_render($form['field_animated_image_position']); ?>
+                    <?php  print drupal_render($form['field_facebook_animated_image']); ?>
+                    <?php  print drupal_render($form['field_facebook_map_position']); ?>
+                    <?php  print drupal_render($form['field_map_embed_code']); ?>
+                    <?php  print drupal_render($form['field_facebook_gallery_associate']); ?>
+                    <?php  print drupal_render($form['field_social_embed_code_position']); ?>
+                    <?php  print drupal_render($form['field_social_embed_code']); ?>
 
                     <!-- Twitter fields -->
                     <?php print drupal_render($form['field_story_tweet']); ?>
