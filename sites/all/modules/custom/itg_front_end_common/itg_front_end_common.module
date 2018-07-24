@@ -597,8 +597,48 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         drupal_add_html_head($branchio_tag, 'branchio_tag');
         drupal_add_html_head($branchio_type, 'branchio_type');
       }
-      // Branch io code end
-	  
+      
+      // For live blog.
+      if ($node->type == 'breaking_news') {
+        if (!empty($node->field_type['und']) && $node->field_type['und'][0]['value'] == 'Live Blog') {
+          $blog_created_date = date('Y-m-d\TH:i:s\+05:30', ($node->created));
+          $blog_modify_date = date('Y-m-d\TH:i:s\+05:30', ($node->changed));
+        
+          $live_blog_time = array(
+            '#type' => 'html_tag',
+            '#tag' => 'meta',
+            '#attributes' => array(
+              'property' => 'article:published_time',
+              'content' => $blog_created_date,
+            ),
+            '#weight' => -997,
+          );
+          
+          $date_custom_published = last_live_blog_content($node->nid);
+          
+          if (!empty($date_custom_published)) {
+              $custom_live_date = date('Y-m-d\TH:i:s\+05:30', strtotime($date_custom_published));
+          } else {
+              $custom_live_date = !empty($node->changed) ? $blog_modify_date : '';
+          }
+          
+          if (!empty($custom_live_date)) {
+            $live_blog_time_modify = array(
+              '#type' => 'html_tag',
+              '#tag' => 'meta',
+              '#attributes' => array(
+                'property' => 'article:modified_time',
+                'content' => $custom_live_date,
+              ),
+              '#weight' => -997,
+            );
+            drupal_add_html_head($live_blog_time_modify, 'live_blog_time_modify');
+          }
+          drupal_add_html_head($live_blog_time, 'live_blog_time');
+        }        
+      }
+      
+      // Branch io code end	  
 	   if ($node->type == 'story') {
         $full_modify_date = date('l, d F,Y h:i:sA', ($node->changed));
         $modify_date = date('D, d F,Y', ($node->changed));
