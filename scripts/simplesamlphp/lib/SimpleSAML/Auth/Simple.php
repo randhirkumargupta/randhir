@@ -102,7 +102,7 @@ class SimpleSAML_Auth_Simple {
 	 * @param array $params  Various options to the authentication request.
 	 */
 	public function login(array $params = array()) {
-
+		echo '<pre>';var_dump($params);die;
 		if (array_key_exists('KeepPost', $params)) {
 			$keepPost = (bool)$params['KeepPost'];
 		} else {
