@@ -249,7 +249,7 @@ India Today provides the latest news on politics, entertainment, bollywood, busi
 </description>
 <guid isPermaLink="false">$filename</guid>
 <enclosure length="$audio_filesize" type="audio/mpeg" url="$stream_url"></enclosure>
-<pubDate>$date GMT</pubDate>
+<pubDate>$date IST</pubDate>
 <itunes:duration>$playtime_string</itunes:duration>
 </item>
 </channel>
