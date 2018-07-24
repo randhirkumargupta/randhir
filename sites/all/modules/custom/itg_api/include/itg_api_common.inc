@@ -4,7 +4,7 @@
  * Implement itg_pti_content
  */
 function itg_import_common_agency_feeds($agency_name) {
-  //drupal_page_is_cacheable(FALSE);
+  drupal_page_is_cacheable(FALSE);
   if (!empty(variable_get('api_info'))) {
     global $user;
     try {
