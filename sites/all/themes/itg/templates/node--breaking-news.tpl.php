@@ -205,11 +205,15 @@ $coverage_end_final_date = '';
         <!--<h1><?php if ($type == 'Breaking News') { ?><span><?php print ($type) ?></span>: <?php } print ($title) ?></h1>-->
         <?php print ($title) ?>
         <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
-        <?php if ($type == 'Live Blog') {			
+        <?php if ($type == 'Live Blog') { ?>
+		<h2 class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></h2>	
+		<?php				
 		  $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     
 	      $whatsapp = $node->title . " ". $actual_link;
 		  $whatsapp_text = urlencode($whatsapp);
-		} ?>
+		} else { ?>
+			<p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+		<?php } ?> 	
         <div class="social-share">
             <ul>
                 <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>

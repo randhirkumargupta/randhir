@@ -150,12 +150,12 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog' || $node->field_type['
         $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
         ?>
         <?php print ($title) ?>
-        <p class="short-discription">
+        <h2 class="short-discription">
             <?php
             $pattern = "#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#";
             print preg_replace($pattern, '', $node->field_common_short_description[LANGUAGE_NONE][0]['value']);
             ?>
-        </p>
+        </h2>
         <div id="live-blog-amp-share"><div class="social-share">
           <amp-accordion disable-session-states>
           <section>
