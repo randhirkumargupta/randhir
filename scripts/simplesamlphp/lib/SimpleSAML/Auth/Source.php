@@ -215,7 +215,7 @@ abstract class SimpleSAML_Auth_Source
         assert('array_key_exists("SimpleSAML_Auth_Source.id", $state)');
         assert('array_key_exists("Attributes", $state)');
         assert('!array_key_exists("LogoutState", $state) || is_array($state["LogoutState"])');
-		var_dump($state);die;
+
         $return = $state['SimpleSAML_Auth_Source.Return'];
 
         // save session state
