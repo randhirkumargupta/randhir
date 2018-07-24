@@ -110,12 +110,12 @@ $fb_appid = variable_get('itg_sharing_app_id');
 ?>
 <?php print ($title) ?>
 <div class="locationdate"><?php print $blog_city .  date("F d, Y", strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?></div>
-<p class="short-discription">
+<h2 class="short-discription">
   <?php
     $pattern = "#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#";
     print preg_replace($pattern, '', $node->field_common_short_description[LANGUAGE_NONE][0]['value']);
   ?>
-</p>
+</h2>
 <!-- Image Or Live TV -->
 <?php 
   $useragent = $_SERVER['HTTP_USER_AGENT'];  

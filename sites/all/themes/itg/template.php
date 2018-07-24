@@ -501,6 +501,15 @@ if($arg[0] == 'livetv') {
       } 
       $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title : $node_obj->metatags[LANGUAGE_NONE]['title']['value']) . (!empty($_section_name) ? ' - ' . $_section_name : '') . ' News';
     }
+    
+    // For live blog
+    if (!empty($node_obj) && $node_obj->type == 'breaking_news') {         
+      if (!empty($node_obj->field_type['und']) && $node_obj->field_type['und'][0]['value'] == 'Live Blog') {
+        $fix_liveblog_title = ' - Live Updates, Live News, Live Coverage, India Today Live Reporting';
+         $vars['head_title'] = (empty($node_obj->metatags[LANGUAGE_NONE]['title']['value']) ? $node_obj->title . $fix_liveblog_title : $node_obj->metatags[LANGUAGE_NONE]['title']['value'] . $fix_liveblog_title);
+      }      
+    }
+    
     if (get_itg_variable('ros_dns_preconnect_prefetch')) {
       $ros_preconnect_prefetch_code = array(
         '#type' => 'markup',
@@ -720,7 +729,8 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_height']['#weight'] = -978;
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
-  $head_elements['canonical_0']['#weight'] = -1001;
+  $head_elements['canonical_0']['#weight'] = -1011;
+  $head_elements['metatag_canonical']['#weight'] = -997;
   $status = drupal_get_http_header("status");
   if ($status === '404 Not Found'){
 	unset($head_elements['metatag_canonical']);
