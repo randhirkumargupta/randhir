@@ -102,7 +102,7 @@ class SimpleSAML_Auth_Simple {
 	 * @param array $params  Various options to the authentication request.
 	 */
 	public function login(array $params = array()) {
-		
+
 		if (array_key_exists('KeepPost', $params)) {
 			$keepPost = (bool)$params['KeepPost'];
 		} else {
@@ -116,7 +116,7 @@ class SimpleSAML_Auth_Simple {
 		} else {
 			$returnTo = \SimpleSAML\Utils\HTTP::getSelfURL();
 		}
-var_dump($returnTo);
+
 		if (is_string($returnTo) && $keepPost && $_SERVER['REQUEST_METHOD'] === 'POST') {
 			$returnTo = \SimpleSAML\Utils\HTTP::getPOSTRedirectURL($returnTo, $_POST);
 		}
@@ -127,7 +127,7 @@ var_dump($returnTo);
 			$errorURL = NULL;
 		}
 
-echo '<pre>';var_dump($returnTo);die;
+
 		if (!isset($params[SimpleSAML_Auth_State::RESTART]) && is_string($returnTo)) {
 			/*
 			 * A URL to restart the authentication, in case the user bookmarks
@@ -138,6 +138,7 @@ echo '<pre>';var_dump($returnTo);die;
 		}
 
 		$as = $this->getAuthSource();
+		var_dump(get_class($as));die;
 		$as->initLogin($returnTo, $errorURL, $params);
 		assert('FALSE');
 	}
