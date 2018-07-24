@@ -11,6 +11,7 @@ function itg_import_common_agency_feeds($agency_name) {
       $agency_feed_url = 'http://agencyfeeds.intoday.in/fs/R/indiatoday?agency=' . $agency_name . '&language=en';
       $agency_str = file_get_contents($agency_feed_url);
       $agency_json = json_decode($agency_str, true);
+      $data_arr = array();
       foreach ($agency_json['data']['lists'] as $agency_item) {
         $ref_id = $agency_item['ref_id'];
         $row_count = itg_api_get_xml_info($ref_id);
@@ -299,7 +300,6 @@ function itg_import_common_agency_feeds($agency_name) {
       $node_count = count($data_arr);
       $s_msg = $agency_name . ' ' . $node_count . ' Node Imported Successfully.';
       watchdog('Agency Feed', $s_msg);
-      watchdog('Agency Feed', $result);
       echo $s_msg;
     }
     catch (S3Exception $e) {
