@@ -174,7 +174,7 @@ function simplesamlphp_auth_loginpage() {
       $gotourl = $returnto;
     }
     $arg = arg();
-    
+    var_dump($_COOKIE['simplesamlphp_auth_returnto'], $arg, $gotourl, $returnto);die;
     if (!empty($arg[2])) {
       $redirect = base64_decode($arg[2]);
       $remove_fb_append_parameter = str_replace('#_=_', '', $redirect);
