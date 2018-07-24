@@ -2581,6 +2581,114 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // splash_screen custom resource declaration.....
+        'splash_screen' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves splash_screen schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_splash_screen',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // switch_between_app custom resource declaration.....
+        'switch_between_app' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves switch_between_app schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_switch_between_app',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // hamburger_menu_tv custom resource declaration.....
+        'hamburger_menu_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves hamburger_menu_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_hamburger_menu_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+         // breaking_news custom resource declaration.....
+        'breaking_news_tv' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves breaking_news_tv schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_breaking_news_tv',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -6416,42 +6524,50 @@ function search_data_rest($token) {
     $list = array();
     $loop_c = 0;
     foreach ($searchpage as $key => $result) {
-      $nid = $result->entity_id;
-      $title = $result->label;
-      $image_courtesy = FRONT_URL;
-      $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
-      $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
-      $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
-      $body = empty($result->content) ? '' : $result->content;
-      $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
-      $bundle = empty($result->bundle) ? '' : $result->bundle;
-      $url = empty($result->url) ? '' : $result->url;
-      $teaser = empty($result->teaser) ? '' : $result->teaser;
-      $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
-      $list[$loop_c]['n_id'] = "$nid";
-      //$list[$loop_c]['n_type'] = "$bundle";
-      if ($bundle == "breaking_news") {
-        $list[$loop_c]['n_type'] = "story";
-        $list[$loop_c]['n_is_blog'] = "1";
-      } else {
-        $list[$loop_c]['n_type'] = "$bundle";
-        $list[$loop_c]['n_is_blog'] = "0";
-      }
-      $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
-      $list[$loop_c]['n_is_sponsored'] = "0";
-      $list[$loop_c]['n_share_link'] = "$url";
-      $list[$loop_c]['n_title'] = "$title";
-      $list[$loop_c]['n_short_desc'] = "$teaser";
-      $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
-      $list[$loop_c]['n_large_image'] = "$extra_large_image";
-      $list[$loop_c]['n_updated_datetime'] = "$date_val";    
-      $loop_c++;
+        $nid = $result->entity_id;
+        $title = $result->label;
+        $image_courtesy = FRONT_URL;
+        $tid_array = $result->tid;
+
+        $extra_large_image = empty($result->sm_field_custom_story_extra_large_url[0]) ? '' : $result->sm_field_custom_story_extra_large_url[0];
+        $field_story_medium_image = empty($result->sm_field_custom_story_medium_large_url[0]) ? '' : $result->sm_field_custom_story_medium_large_url[0];
+        $byline = empty($result->sm_field_itg_common_by_line_name[0]) ? '' : $result->sm_field_itg_common_by_line_name[0];
+        $body = empty($result->content) ? '' : $result->content;
+        $changed = date("Y-m-d H:i:s", strtotime($result->ds_changed));
+        $bundle = empty($result->bundle) ? '' : $result->bundle;
+        $url = empty($result->url) ? '' : $result->url;
+        $teaser = empty($result->teaser) ? '' : $result->teaser;
+        $ds_changed = empty($result->ds_changed) ? '' : $result->ds_changed;
+        $list[$loop_c]['n_id'] = "$nid";
+        //$list[$loop_c]['n_type'] = "$bundle";
+
+        if ($bundle == "breaking_news") {
+                $list[$loop_c]['n_type'] = "story";
+                $list[$loop_c]['n_is_blog'] = "1";
+            } else {
+                $list[$loop_c]['n_type'] = "$bundle";
+                $list[$loop_c]['n_is_blog'] = "0";
+            }
+            $list[$loop_c]['n_is_program'] = "0";
+            $program_section = 1206553;
+        if (in_array($program_section, $tid_array)) {
+            $list[$loop_c]['n_is_program'] = "1";
+        }
+        $date_val = date("Y-m-d H:i:s", strtotime($ds_changed));
+        $list[$loop_c]['n_is_sponsored'] = "0";
+        $list[$loop_c]['n_share_link'] = "$url";
+        $list[$loop_c]['n_title'] = "$title";
+        $list[$loop_c]['n_short_desc'] = "$teaser";
+        $list[$loop_c]['n_small_image'] = "$field_story_medium_image";
+        $list[$loop_c]['n_large_image'] = "$extra_large_image";
+        $list[$loop_c]['n_updated_datetime'] = "$date_val";
+        $loop_c++;
     }
     $data_json['status_code'] = "1";
     $data_json['status_message'] = "";
     if ($loop_c == 0) {
-      $data_json['status_code'] = "0";
-      $data_json['status_message'] = "";
+        $data_json['status_code'] = "0";
+        $data_json['status_message'] = "";
     }
     $data['id'] = "0";
     $data['search_title'] = "$key_title";
@@ -6462,7 +6578,8 @@ function search_data_rest($token) {
     $data['updated_datetime'] = "";
     $data['news'] = $list;
     $data_json['data'] = $data;
-    return $data_json; 
+    return $data_json;
+
 }
 
 /**
@@ -6474,16 +6591,21 @@ function solr_search_custom_results_restapi($key, $fields, $facets = FALSE, $pag
     $stdkeys = explode(',', str_replace(' ', '', $fields));
     $results = array();
 
-    try {
+    try {        
+        $device = strtolower($_GET['device']);
         $key = preg_replace('/\s+/', ' OR ', $key);
         $solr = apachesolr_get_solr();
         $query = apachesolr_drupal_query("custom", array('q' => $key));
-        $query->setSolrsort('ds_changed', 'desc');
-        $query->removeFilter('bundle_name');
+        //$query->setSolrsort('ds_changed', 'desc');
+        //$query->removeFilter('bundle_name');
         $query->addParam('fq', "hash:(" . apachesolr_site_hash() . ")");
+        $query->addParam('start', '0');
         $query->addParam('rows', '100');
-        //$query->addParam('fq', "bundle_name:Video");
-        //$query->addParam('sort', "ds_changed DESC");
+        if($device == "tv"){
+            $query->addParam('fq', "bundle_name:Video");
+        }
+        //$query->setSolrsort('entity_id', 'desc');        
+        $query->addParam('sort', "ds_changed DESC");   
         $resp = $query->search();
         if (!empty($resp->data)) {
             $data = json_decode($resp->data);
@@ -7105,6 +7227,108 @@ function itg_app_redish_ttl($api = "") {
     }   
 
     return $ttl;
+}
+/**
+ * Call back function for splash_screen API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_splash_screen($token) {
+    $redis_key = "itg_rapid_api_splash_screen";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_splash_screen_json');
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+/**
+ * Call back function for itg_rapid_api_switch_between_app API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_switch_between_app($token) {
+    $redis_key = "itg_rapid_api_switch_between_app_json";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_switch_between_app_json');
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+/**
+ * Call back function for hamburger_menu_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_hamburger_menu_tv($token) {
+    $redis_key = "itg_rapid_api_hamburger_menu_tv";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('itg_rapid_api_hamburger_menu_tv');
+        $ttl = itg_app_redish_ttl();
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, TRUE);
+    $return_obj = $obj;
+
+    return $return_obj;
+}
+/**
+ * Call back function for breaking_news_tv API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_breaking_news_tv() {
+    // call breaking news view
+    $view_result = views_get_view_result('breaking_news', 'block_1');
+    $nid = $view_result[0]->nid;
+    $field_breaking_data = $view_result[0]->field_field_breaking_tile;
+    $field_breaking_tile = $field_breaking_data[0]['raw']['value'];
+    $data = array();
+    if (isset($nid) && $nid > 0) {
+
+        $data['status_code'] = "1";
+        $data['status_message'] = "";
+        $news = array();
+        $news['breaking_news_status'] = "1";
+        $news['breaking_news_title'] = "$field_breaking_tile";
+        $data['data'] = $news;
+    } else {
+        $data['status_code'] = "0";
+        $data['status_message'] = "";
+        $news = array();
+        $news['breaking_news_status'] = "0";
+        $news['breaking_news_title'] = "";
+        $data['data'] = $news;
+    }
+    return $data;
 }
 
 
