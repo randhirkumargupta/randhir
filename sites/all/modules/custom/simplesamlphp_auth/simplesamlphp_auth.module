@@ -142,7 +142,7 @@ function simplesamlphp_auth_loginpage() {
 
         $returnto = $_SERVER['HTTP_REFERER'];
   }
-
+var_dump($user->uid, $_SERVER['HTTP_REFERER'], valid_url($_SERVER['HTTP_REFERER']), stristr($_SERVER['HTTP_REFERER'], $base_url), $_REQUEST['ReturnTo']);die;
   // If the user is anonymous, set the cookie (if we can) and require authentication.
   if ($user->uid == 0) {
 
