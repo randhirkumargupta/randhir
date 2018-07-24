@@ -288,7 +288,7 @@ function itg_import_common_agency_feeds($agency_name) {
         }
       }
       // Send Data To Feed 
-      $ch = curl_init('http://agencyfeeds.intoday.in/feed_log');
+      /*$ch = curl_init('http://agencyfeeds.intoday.in/feed_log');
       # Setup request to send json via POST.						
       $payload = json_encode(array("data" => $data_arr));
       curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -296,12 +296,12 @@ function itg_import_common_agency_feeds($agency_name) {
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       $result = curl_exec($ch);
       curl_close($ch);
-      # Print response.
+      # Print response.*/
       $node_count = count($data_arr);
       $s_msg = $agency_name . ' ' . $node_count . ' Node Imported Successfully.';
       watchdog($agency_name . ' Feed', $s_msg);
       watchdog($agency_name . ' Feed', $result);
-      print $s_msg;
+      echo $s_msg;
     }
     catch (S3Exception $e) {
       echo $e->getMessage() . "\n";
