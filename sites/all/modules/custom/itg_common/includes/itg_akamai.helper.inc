@@ -8,9 +8,10 @@ function itg_akamai_load_my_account() {
   global $base_url;
   global $user;
   if (isset($user->uid) && $user->uid > 0) {
-    $user_object = user_load($user->uid);
-    if (!empty($user_object->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
-      $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $user_object->field_user_picture[LANGUAGE_NONE][0]['uri']));
+    $userImage = itg_get_user_image($user->uid);
+	if (!empty($userImage)) {
+	  $userImage = file_load($userImage);	
+      $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $userImage->uri));
     }
     else {
       $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
