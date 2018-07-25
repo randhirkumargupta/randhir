@@ -75,7 +75,7 @@
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .social_icons_ipad ul li .g_plus{background:url(https://smedia2.intoday.in/microsites/mindrocks/images/googleplus-icon.png) no-repeat 0 0;}
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .eventnametop-2018{color:#231f20}
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018{left:10%;}
-.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{color:#231f20}
+.delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .event-datelocation-2018 h2 span.eventname-2018{color:#231f20; text-transform:uppercase; font-weight:bold;}
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .social_icons_ipad.destop_social{bottom:121px;}
 @media screen and (max-width:768px){
 .delhi-mind-rocks-2018.india-today-mind-rocks-commanheader-2017 .header_part .left_part_logo a img{width:45%;}
