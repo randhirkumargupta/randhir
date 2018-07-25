@@ -211,13 +211,13 @@ $config = array(
      * Ensure that you have the required PDO database driver installed
      * for your connection string.
      */
-    'database.dsn' => 'mysql:host=localhost;dbname=itgcmssso',
+    'database.dsn' => 'mysql:host=itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com;dbname=IndiaToday_sso',
 
     /*
      * SQL database credentials
      */
-    'database.username' => 'root',
-    'database.password' => 'root',
+    'database.username' => 'itgd_it_write',
+    'database.password' => '!tgd@!t@wr!te@101',
 
     /*
      * (Optional) Table prefix
@@ -760,7 +760,7 @@ $config = array(
     'memcache_store.servers' => array(
         array(
            // array('hostname' => 'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com'),//prod
-            array('hostname' => '127.0.0.1'),//uat
+            array('hostname' => 'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com'),//uat
         ),
     ),
 
