@@ -44,8 +44,8 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="social_icons_ipad destop_social">
       <ul>
         <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2018" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2018" target="_blank"> <span class="tw" style="margin-top:5px"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2018" target="_blank"> <span class="g_plus" style="margin-top:3px"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2018" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2018" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
         
       </ul>
     </div>
