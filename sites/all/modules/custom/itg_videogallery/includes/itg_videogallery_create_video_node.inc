@@ -105,7 +105,7 @@ function itg_videogallery_create_video_node($data) {
     $exp_date = strtotime('+10 years', time());
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
-    $node->op = 'insert';
+    
     $node = node_submit($node); // Prepare node for saving
 
     if (!empty($extra_large_img)) {
@@ -130,7 +130,8 @@ function itg_videogallery_create_video_node($data) {
     }
 
     try {
-
+	  $node->op = 'insert';	
+	  node_save((object) $node);
       $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
