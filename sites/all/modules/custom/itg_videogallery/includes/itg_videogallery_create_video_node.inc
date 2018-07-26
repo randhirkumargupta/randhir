@@ -97,16 +97,12 @@ function itg_videogallery_create_video_node($data) {
     $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = empty($video_kicker) ? '' : $video_kicker;
     $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
-    $exp_date = strtotime('+10 years', time());
-    $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
-
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
+    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = gmdate('Y-m-d H:i', time());
     $exp_date = strtotime('+10 years', time());
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
     $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
-    //$node = node_submit($node); // Prepare node for saving
+    $node = node_submit($node); // Prepare node for saving
 
     if (!empty($extra_large_img)) {
       $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
