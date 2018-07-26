@@ -1131,6 +1131,7 @@ function topstoriesList($source, $limit = 0) {
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    p($result_ts);
 
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);
