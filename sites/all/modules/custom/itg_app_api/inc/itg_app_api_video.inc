@@ -1134,10 +1134,10 @@ function topstoriesList($source, $limit = 0) {
     $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
   $_position = array();
   foreach ($home_top_story_sponsor as $key => $row) {
-    $_position[$key] = $row->position;
+    $_position[$row->nid] = $row->position;
   }
   array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
-  print_r($home_top_story_sponsor);
+  print_r($_position);
     p($result_ts); 
 
     $result = array_merge($result_fs, $result_ts);
