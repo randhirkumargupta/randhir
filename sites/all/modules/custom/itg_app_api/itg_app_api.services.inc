@@ -6110,6 +6110,13 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    $qry = "CREATE TABLE IF NOT EXISTS `itg_rapid_top_stories_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nid` int(11) NOT NULL,
+  `position` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+    db_query($qry);die();
     $view_args[] = array();
      $view_args['entity_id'] = 1132254;    
      $ao_results1 = views_get_view_result('photo_landing_slider', 'block_1', $view_args['entity_id']);
@@ -6131,13 +6138,10 @@ function itg_rapid_api_testing($token) {
              //p($value); 
              $test_ar[$lc]['uri'] = $value[0]['raw']['uri'];
              $test_ar[$lc]['fid'] = $value[0]['raw']['fid'];
-             $info = getInfoData($value[0]['raw']['fid']);
-             $test_ar[$lc]['image_courtesy'] = $info['image_courtesy'];
-             $test_ar[$lc]['image_caption'] = $info['image_caption'];
-             $test_ar[$lc]['image_date'] = $info['image_date'];
+            
              $lc++;
          }
-         /*if($key == "field_field_image_caption"){
+         if($key == "field_field_image_caption"){
              //p($value); 
              $test_ar[$lc]['caption'] = $value[0]['raw']['value'];             
              //$lc++;
@@ -6147,7 +6151,7 @@ function itg_rapid_api_testing($token) {
              $test_ar[$lc]['credit'] = $value[0]['raw']['entity']->title;             
              //$lc++;
          }
-        //$lc++; */
+        //$lc++; 
      }
      }
      //$test_ar[] = $ao_results1[0]->field_field_images[0]['rendered']['#item']['uri'];
