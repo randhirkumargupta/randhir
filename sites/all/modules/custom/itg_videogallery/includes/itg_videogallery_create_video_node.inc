@@ -105,7 +105,7 @@ function itg_videogallery_create_video_node($data) {
     $exp_date = strtotime('+10 years', time());
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
-    
+    $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
     $node = node_submit($node); // Prepare node for saving
 
     if (!empty($extra_large_img)) {
