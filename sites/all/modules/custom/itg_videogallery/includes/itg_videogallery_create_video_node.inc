@@ -106,7 +106,7 @@ function itg_videogallery_create_video_node($data) {
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
     $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
-    $node = node_submit($node); // Prepare node for saving
+    //$node = node_submit($node); // Prepare node for saving
 
     if (!empty($extra_large_img)) {
       $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
@@ -130,9 +130,7 @@ function itg_videogallery_create_video_node($data) {
     }
 
     try {
-	  //~ $node->op = 'insert';	
-	  
-      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
+	  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
