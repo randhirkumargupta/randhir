@@ -102,8 +102,6 @@ function itg_videogallery_create_video_node($data) {
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
     $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
-    $node = node_submit($node); // Prepare node for saving
-
     if (!empty($extra_large_img)) {
       $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
       $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
@@ -124,6 +122,7 @@ function itg_videogallery_create_video_node($data) {
       $fid_extra_small_img = itg_videogallery_save_image($extra_small_img);
       $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
     }
+    $node = node_submit($node); // Prepare node for saving
 
     try {
 	  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
@@ -131,7 +130,7 @@ function itg_videogallery_create_video_node($data) {
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
       $field_collection_item->save();
-      node_save((object) $node);
+      //node_save((object) $node);
       db_update('node') // Table name no longer needs {}
         ->fields(array(
           'status' => 1
