@@ -1137,8 +1137,8 @@ function topstoriesList($source, $limit = 0) {
     $_position[$key] = $row->position;
   }
   array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
-  print_r($_position);
-    p($result_ts);
+  print_r($home_top_story_sponsor);
+    p($result_ts); 
 
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);
