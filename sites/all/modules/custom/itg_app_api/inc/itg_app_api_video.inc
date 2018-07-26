@@ -1136,7 +1136,7 @@ function topstoriesList($source, $limit = 0) {
   foreach ($home_top_story_sponsor as $key => $row) {
     $_position[$row->nid] = $row->position;
   }
-  array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
+  //array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
   print_r($_position);
     p($result_ts); 
 
