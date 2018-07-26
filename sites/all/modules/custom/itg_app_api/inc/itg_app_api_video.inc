@@ -1156,9 +1156,11 @@ function topstoriesList($source, $limit = 0) {
                 ))
                 ->execute();
     }*/
+  if($GET['ss'] == "andy"){
   print_r($_position_ts);
   print_r($_position);
     p($result_ts); 
+  }
 
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);
