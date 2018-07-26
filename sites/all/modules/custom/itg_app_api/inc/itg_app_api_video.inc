@@ -1131,6 +1131,13 @@ function topstoriesList($source, $limit = 0) {
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
+  $_position = array();
+  foreach ($home_top_story_sponsor as $key => $row) {
+    $_position[$key] = $row->position;
+  }
+  array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
+  print_r($home_top_story_sponsor);
     p($result_ts);
 
     $result = array_merge($result_fs, $result_ts);
