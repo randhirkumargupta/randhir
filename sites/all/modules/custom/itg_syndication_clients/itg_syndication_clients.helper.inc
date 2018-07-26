@@ -302,17 +302,20 @@ function get_hltapps_sections($type) {
       );
       break;
     case 'video':
-      return array(
-        'topten.xml' => array('section' => '-1', 'limit' => 10),
-        'news.xml' => array('section' => '-1', 'limit' => 25),
-        'india.xml' => array('section' => '1206955', 'limit' => 25),
-        'world.xml' => array('section' => '1206956', 'limit' => 25),
-        'sports.xml' => array('section' => '1206550', 'limit' => 25),
-        'so-sorry.xml' => array('section' => '1207580', 'limit' => 25),
-        'entertainment.xml' => array('section' => '1206952', 'limit' => 25),
-        'business.xml' => array('section' => '1206959', 'limit' => 25),
-        'election.xml' => array('section' => '1207655', 'limit' => 25)
-      );
+            return array(
+                'topten.xml' => array('section' => '-1', 'limit' => 10),
+                'news.xml' => array('section' => '-1', 'limit' => 25),
+                'india.xml' => array('section' => '1206955', 'limit' => 25),
+                'world.xml' => array('section' => '1206956', 'limit' => 25),
+                'sports.xml' => array('section' => '1206550', 'limit' => 25),
+                'so-sorry.xml' => array('section' => '1207580', 'limit' => 25),
+                'entertainment.xml' => array('section' => '1206952', 'limit' => 25),
+                'business.xml' => array('section' => '1206959', 'limit' => 25),
+                'election.xml' => array('section' => '1207655', 'limit' => 25),
+                'movies.xml' => array('section' => '1207303', 'limit' => 25),
+                'television.xml' => array('section' => '1207980', 'limit' => 25),
+                'sports.xml' => array('section' => '1206957', 'limit' => 25)
+            );
     case 'photo':
       return array(
         'india.xml' => array('section' => '1208560', 'limit' => 25),
@@ -388,7 +391,10 @@ function get_hltapps_sections($type) {
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
         'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
         'movies.xml' => array('section' => '1207303', 'limit' => 15),
-        'karnataka-election-2018.xml' => array('section' => '1771908', 'limit' => 15)
+        'karnataka-election-2018.xml' => array('section' => '1771908', 'limit' => 15),
+          'movies.xml' => array('section' => '1207303', 'limit' => 25),
+                'television.xml' => array('section' => '1207980', 'limit' => 25),
+                'sports.xml' => array('section' => '1206957', 'limit' => 25)
       );
       break;
     case 'programmes':
