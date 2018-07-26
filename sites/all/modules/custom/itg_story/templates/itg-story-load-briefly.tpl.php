@@ -27,15 +27,16 @@
 			<button type="button" class="btn btn-default" data-dialogmodal-but="cancel">Cancel</button>
 		</div>
 	</div>
+
+<style> 
+  #dialog_content<?php print $key; ?> { display: none; }
+</style>
+
 <?php } ?>
 
 
 
-<style> 
-  #dialog_content0 { display: none; }
-  #dialog_content1 { display: none; }
-  #dialog_content2 { display: none; }
-</style>
+
 
 
 <script>
