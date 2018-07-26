@@ -1146,6 +1146,7 @@ function topstoriesList($source, $limit = 0) {
           $_position_ts[$key_ts_f1] = $nid_ts;
       }
   }
+  db_truncate('itg_rapid_top_stories_order')->execute();
   foreach ($_position as $key_pos => $value_pos) {
       $nid = db_insert('itg_rapid_top_stories_order') // Table name no longer needs {}
                 ->fields(array(
