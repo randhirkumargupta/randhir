@@ -131,12 +131,13 @@ function itg_videogallery_create_video_node($data) {
 
     try {
 	  //~ $node->op = 'insert';	
-	  //node_save((object) $node);
+	  
       $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
       $field_collection_item->save();
+      node_save((object) $node);
       db_update('node') // Table name no longer needs {}
         ->fields(array(
           'status' => 1
@@ -147,7 +148,7 @@ function itg_videogallery_create_video_node($data) {
         ->fields(array(
           'state' => workbench_moderation_state_published(),
           'published' => 1,
-          'uid' => ADMINISTRATOR,
+          'uid' => 970,
         ))
         ->condition('nid', $node->nid, '=')
         ->condition('is_current', 1, '=')
