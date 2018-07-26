@@ -464,10 +464,15 @@ function getPhotolist($nid, $source = 0) {
         $caption = strip_tags($fc->field_image_caption['und'][0]['value']);
         $byline = strip_tags($fc->field_credit['und'][0]['value']);
         $photo_story_img = image_style_url('photo_slider_753x543', $uri);
+        $data = getimagesize($photo_story_img);
+        $width = $data[0];
+        $height = $data[1];
         $photolist_loop[$lcont]['np_id'] = "$fid";
         $photolist_loop[$lcont]['np_image'] = "$photo_story_img";
         $photolist_loop[$lcont]['np_credit'] = "$byline";
         $photolist_loop[$lcont]['np_caption'] = "$caption";
+        $photolist_loop[$lcont]['np_height'] = "$height";
+        $photolist_loop[$lcont]['np_width'] = "$width";
         $lcont++;
     }
     if ($source == 1) {
