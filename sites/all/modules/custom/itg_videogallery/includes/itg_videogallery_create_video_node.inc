@@ -131,7 +131,7 @@ function itg_videogallery_create_video_node($data) {
 
     try {
 	  //~ $node->op = 'insert';	
-	  node_save((object) $node);
+	  //node_save((object) $node);
       $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
