@@ -15,7 +15,7 @@ h2.bg4{background-color:#444341;}
 .mob_nav{background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/mob_nav.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
 
 .banner_section{float:left; width:100%; position:relative;}
-.banner_section .caption{position:absolute; bottom:0; left:0; background-color:rgba(0,0,0,0.7); font:20px/35px "Roboto"; color:#fff; text-transform:uppercase; min-height:36px; padding:0 10px; box-sizing:border-box;}
+.banner_section .caption{position:absolute; bottom:0; left:0; background-color:rgba(0,0,0,0.7); font:19px/35px "Roboto"; color:#fff; text-transform:uppercase; min-height:36px; padding:0 10px; box-sizing:border-box;}
 .logo{position:absolute; top:5px; left:15px; background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/logo.jpg) no-repeat 0 0; width:55px; height:80px;}
 
 
@@ -282,3 +282,4 @@ ul.activities-images{list-style:none;  width:100%; padding:0; margin:0 0 90px; t
 ul.activities-images li{border:10px solid #e6e6e6; padding:0; margin:0 auto; height:auto; border-bottom:0; display:inline-block; }
 ul.activities-images li img{float:left;}
 ul.activities-images li:nth-child(21){border-bottom:10px solid #e6e6e6;}
+.admissionOpenText {font-size: 20px;text-align: right;text-transform: uppercase;color: #fff;float: right;margin: 10px 10px 0 0;font-weight: bold;}

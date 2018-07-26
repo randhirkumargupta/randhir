@@ -145,6 +145,14 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
+  
+  $items['itg-breifly'] = array(
+    'page callback' => 'itg_briefly_list',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.briefly.inc',
+  );
 
   return $items;
 }
