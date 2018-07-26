@@ -6116,7 +6116,7 @@ function itg_rapid_api_testing($token) {
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
-    db_query($qry);die();
+    //db_query($qry);die();
     $view_args[] = array();
      $view_args['entity_id'] = 1132254;    
      $ao_results1 = views_get_view_result('photo_landing_slider', 'block_1', $view_args['entity_id']);
