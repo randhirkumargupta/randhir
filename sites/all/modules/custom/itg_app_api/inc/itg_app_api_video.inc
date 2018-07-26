@@ -1102,6 +1102,7 @@ function topstoriesList($source, $limit = 0) {
         $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
         $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
         $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
+        $query->leftJoin('itg_rapid_top_stories_order', 'rpor', 'rpor.nid=n.nid'); // sub_title
 
 
     $query->fields('eli_file', array('uri'));
@@ -1129,8 +1130,37 @@ function topstoriesList($source, $limit = 0) {
 
 
     //end
-    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
+    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('rpor.nid', $order_by)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
+  $_position = array();
+  foreach ($home_top_story_sponsor as $key => $row) {
+    //$_position[$row->nid] = $row->position;
+      $_position[$row->position] = $row->nid;
+  }
+  $_position_ts = array();
+  //array_multisort($_position, SORT_ASC, $home_top_story_sponsor);
+  foreach ($result_ts as $key_ts => $value_ts) {
+      $nid_ts = $value_ts['nid'];
+      if (in_array($nid_ts, $_position)){
+          $key_ts_f1 = $key_ts + 1;
+          $_position_ts[$key_ts_f1] = $nid_ts;
+      }
+  }
+  /*db_truncate('itg_rapid_top_stories_order')->execute();
+  foreach ($_position as $key_pos => $value_pos) {
+      $nid = db_insert('itg_rapid_top_stories_order') // Table name no longer needs {}
+                ->fields(array(
+                    'nid' => $key_pos,
+                    'position' => $value_pos,
+                ))
+                ->execute();
+    }*/
+  if($GET['ss'] == "andy"){
+  print_r($_position_ts);
+  print_r($_position);
+    p($result_ts); 
+  }
 
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);

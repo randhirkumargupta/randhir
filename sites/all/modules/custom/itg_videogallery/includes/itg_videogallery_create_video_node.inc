@@ -56,7 +56,7 @@ function itg_videogallery_create_video_node($data) {
     $node->type = "videogallery";
     //node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
-    $node->uid = 1522; //itgsiteadmin
+    $node->uid = 970; //itgsiteadmin
     $node->promote = 0;
     $node->comment = 0;
     $node->revision = 1;
@@ -70,15 +70,23 @@ function itg_videogallery_create_video_node($data) {
     }
 
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
-    if (!empty($cat_id)) {
-      $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $cat_id;
-    }
-    if (!empty($section_id)) {
-      $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
-    }
-    else if (!empty($cat_id)) {
-      $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
-    }
+    
+    $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1206552';
+    $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1762732';
+    $node->field_story_category[LANGUAGE_NONE][2]['tid'] = '1208164';
+    $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1762732';
+    
+    //~ $counter = 0;
+	//~ if (!empty($section_id)) {
+		//~ $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $section_id;
+		//~ $counter++;
+	//~ }
+	//~ if (!empty($cat_id)) {
+	  //~ $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
+	  //~ $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $cat_id;
+	//~ }else if(!empty($section_id)) {
+	  //~ $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+	//~ }
 
     if (!empty($anchor)) {
       $node->field_video_anchor[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
@@ -97,7 +105,8 @@ function itg_videogallery_create_video_node($data) {
     $exp_date = strtotime('+10 years', time());
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
-    $node = node_submit($node); // Prepare node for saving
+    $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
+    //$node = node_submit($node); // Prepare node for saving
 
     if (!empty($extra_large_img)) {
       $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
@@ -121,12 +130,12 @@ function itg_videogallery_create_video_node($data) {
     }
 
     try {
-
-      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
+	  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
       $field_collection_item->save();
+      node_save((object) $node);
       db_update('node') // Table name no longer needs {}
         ->fields(array(
           'status' => 1
@@ -137,7 +146,7 @@ function itg_videogallery_create_video_node($data) {
         ->fields(array(
           'state' => workbench_moderation_state_published(),
           'published' => 1,
-          'uid' => ADMINISTRATOR,
+          'uid' => 970,
         ))
         ->condition('nid', $node->nid, '=')
         ->condition('is_current', 1, '=')
@@ -194,7 +203,7 @@ function itg_associate_video_id_to_content($video_info) {
 
   $fid = db_insert('file_managed')
     ->fields(array(
-      'uid' => 1522, //itgsiteadmin,
+      'uid' => 970, //itgsiteadmin,
       'filename' => $video_info->name,
       'uri' => $videourl,
       'filemime' => 'video/mp4',
@@ -235,13 +244,12 @@ function itg_associate_video_id_to_content($video_info) {
 }
 
 function get_video_info($filename, $video_id) {
-  //if (!empty($filename) && !empty($video_id)) {
-  if (!empty($filename)) {
+  if (!empty($filename) && !empty($video_id)) {
     $query = db_select('dailymotion_response_details', 'drd');
     $query->leftJoin('field_data_field_video_id', 'fdfvi', 'fdfvi.field_video_id_value = drd.video_id');
     $query->leftJoin('field_data_field_all_xml_content', 'faxc', 'faxc.entity_id = fdfvi.entity_id');
     $query->condition('drd.title', $filename, '=');
-    //$query->condition('drd.video_id', $video_id, '=');
+    $query->condition('drd.video_id', $video_id, '=');
     $query->condition('drd.dailymotion_published', 0, '=');
     $query->fields('drd');
     $query->fields('faxc', array('field_all_xml_content_value'));

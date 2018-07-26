@@ -339,7 +339,8 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
       if (empty($widget_data)) {
         if (file_exists($story_image)) {
           $file_uri = file_create_url($story_image);                               
-          print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title,  'attributes' => array('itemprop' => 'contentUrl')));
+          //print theme('image', array('path' => $story_image, 'alt' => $story_alt, 'title' => $story_title,  'attributes' => array('itemprop' => 'contentUrl')));
+          print '<img  alt="'.$story_alt.'" title="' . $story_title . '" src="' . $file_uri . '" itemprop = "contentUrl">';
         }
       }
       else {

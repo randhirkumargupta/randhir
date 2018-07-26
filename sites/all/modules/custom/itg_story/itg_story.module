@@ -146,9 +146,17 @@ function itg_story_menu() {
     'file' => 'includes/itg_story.inc',
   );
   
-  $items['itg-breifly'] = array(
-    'page callback' => 'itg_briefly_list',
-    'page arguments' => array(2),
+  
+  $items['itg-breifly-ajax/12'] = array(
+    'page callback' => 'itg_briefly_modal_page', // Render HTML.
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_story.briefly.inc',
+  );
+  
+  $items['itg-breifly-data'] = array(
+    'page callback' => 'itg_briefly_data',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.briefly.inc',
@@ -221,6 +229,11 @@ function itg_story_theme($existing, $type, $theme, $path) {
     ),
     'itg_story_load_follow_story' => array(
       'template' => 'itg-story-load-follow-story',
+      'path' => drupal_get_path('module', 'itg_story') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'itg_story_load_briefly' => array(
+      'template' => 'itg-story-load-briefly',
       'path' => drupal_get_path('module', 'itg_story') . '/templates',
       'variables' => array('data' => NULL),
     ),
