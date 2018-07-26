@@ -15,7 +15,7 @@ h2.bg4{background-color:#444341;}
 .mob_nav{background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/mob_nav.jpg) no-repeat 0 0; width:26px; height:21px; float:left; margin:10px 0 0 10px;}
 
 .banner_section{float:left; width:100%; position:relative;}
-.banner_section .caption{position:absolute; bottom:0; left:0; background-color:rgba(0,0,0,0.7); font:20px/35px "Roboto"; color:#fff; text-transform:uppercase; min-height:36px; padding:0 10px; box-sizing:border-box;}
+.banner_section .caption{position:absolute; bottom:0; left:0; background-color:rgba(0,0,0,0.7); font:19px/35px "Roboto"; color:#fff; text-transform:uppercase; min-height:36px; padding:0 10px; box-sizing:border-box;}
 .logo{position:absolute; top:5px; left:15px; background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/logo.jpg) no-repeat 0 0; width:55px; height:80px;}
 
 
