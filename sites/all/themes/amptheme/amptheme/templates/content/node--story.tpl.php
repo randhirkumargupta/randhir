@@ -114,7 +114,12 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
         else {
           ?>
         <h1 itemprop="headline" title="<?php echo strip_tags($node_title);?>"><?php print $content['amp_title'] . $pipelinetext; ?></h1>
-      <?php } ?>
+      <?php } ?>      
+	  <div class="story-kicker"><?php print $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']; ?></div>
+	  <?php
+	  $block = module_invoke('itg_front_end_common', 'block_view', 'amp_story_ad_block');
+	  print $block['content'];
+	  ?>
       <?php
       //code for Associate lead
       $associate_type = '';

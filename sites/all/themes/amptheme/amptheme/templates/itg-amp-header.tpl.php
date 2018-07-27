@@ -146,10 +146,4 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
     <?php print variable_get('amp_video_ad'); ?>     
   </div>
 <?php else : ?>
-<div class="story_ad_block custom-amp-ad">
-  <?php
-    $block = module_invoke('itg_front_end_common', 'block_view', 'amp_story_ad_block');
-    print render($block['content']);
-  ?>
-</div>
 <?php endif; ?>
