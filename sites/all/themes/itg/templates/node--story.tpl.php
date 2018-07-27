@@ -185,6 +185,10 @@ $logo = FRONT_URL . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     ?>
 <div class="story-left-section story-update">
   <div class="story-kicker"><?php print $node->field_story_kicker_text[LANGUAGE_NONE][0]['value']; ?></div>
+  <?php
+  $block = module_invoke('itg_ads', 'block_view', 'ads_super_banner_top_nav_728x90');
+  print $block['content'];
+  ?>
   <div class="story-left">
     <div class="byline">
 	  <?php

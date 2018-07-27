@@ -2455,6 +2455,12 @@ jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-
 
         }
     }
+    if ($block->delta == 'ads_super_banner_top_nav_728x90' && $block->region == 'header') {		
+	  $ntype = menu_get_object('node');
+	  if($ntype->type == 'story'){
+	    $data['content'] = array();
+	  }
+	}
 }
 
 /**
