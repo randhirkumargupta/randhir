@@ -190,7 +190,10 @@ function itg_story_block_info() {
     'info' => t('Story Form Tab Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-
+  $blocks['itg_briefly_block'] = array(
+    'info' => t('Briefly Tab Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   return $blocks;
 }
 
@@ -204,6 +207,11 @@ function itg_story_block_view($delta = '') {
   switch ($delta) {
     case 'story_tab_form_block':
       $block['content'] = theme('story_tab_form_display_block', array('data' => ''));
+      break;
+    case 'itg_briefly_block':
+      module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
+      $data = news_wrap_list();
+      $block['content'] = theme('itg_story_load_briefly', array('data' => $data));
       break;
   }
 

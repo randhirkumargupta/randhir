@@ -13,7 +13,7 @@ module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
  */
 function itg_briefly_data() {
   $data = news_wrap_list();
-  return theme('itg_story_load_briefly', array('data' => $data));
+  print theme('itg_story_load_briefly', array('data' => $data));
   
 }
 
