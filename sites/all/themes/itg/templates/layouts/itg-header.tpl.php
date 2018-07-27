@@ -241,6 +241,14 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
               <?php 
               if(arg(0) == 'node') {
                   print get_translate_node(arg(1));
+                  
+                  // For briefly
+					$block = block_load('itg_story', 'itg_briefly_block');
+					$render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+					if(is_array($render_array)) {
+					  print render($render_array);
+					} 
+                       
               }
               ?>
                 <div class="social-nav mhide">
