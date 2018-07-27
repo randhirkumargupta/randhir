@@ -18,8 +18,7 @@ function itg_mail_photos_fia_data_video() {
     $query->condition('n.type', $type, IN);
     $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
     $query->condition('pc.field_primary_category_value', $mail_today_tid, '!=');
-    $query->orderBy('n.created', 'DESC');
-    $query->orderBy('n.type', 'DESC');
+    $query->orderBy('n.created', 'DESC');    
     $query->range(0, 100); 
     $query = $query->execute()->fetchCol();
     $xml = itg_fia_xml_node_feed_photos_video($query, 1);
