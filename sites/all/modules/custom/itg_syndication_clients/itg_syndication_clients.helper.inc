@@ -392,7 +392,7 @@ function get_hltapps_sections($type) {
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
         'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
         'movies.xml' => array('section' => '1207303', 'limit' => 15),
-        'karnataka-election-2018.xml' => array('section' => '1771908', 'limit' => 15),
+        'karnataka-election-2018.xml' => array('section' => '1790562', 'limit' => 15),
         'movies.xml' => array('section' => '1207303', 'limit' => 25),
         'television.xml' => array('section' => '1207980', 'limit' => 25),
         'sports.xml' => array('section' => '1206957', 'limit' => 25)
