@@ -65,7 +65,7 @@ function itg_videogallery_create_video_node($data) {
     if (!empty($description)) {
       $node->body[$node->language][0]['value'] = $description;
       $node->body[$node->language][0]['format'] = 'full_html';
-      $metatags[LANGUAGE_NONE]['description']['value'] = $description;
+      //$metatags[LANGUAGE_NONE]['description']['value'] = $description;
     }
     if (!empty($short_headline)) {
       $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
@@ -124,7 +124,9 @@ function itg_videogallery_create_video_node($data) {
       $fid_extra_small_img = itg_videogallery_save_image($extra_small_img);
       $node->field_story_extra_small_image[LANGUAGE_NONE][0] = $fid_extra_small_img;
     }
-    
+    $node->metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
+    $node->metatags[LANGUAGE_NONE]['description']['value'] = $description;
+    $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
     $node = node_submit($node); // Prepare node for saving
 
     try {
@@ -135,9 +137,9 @@ function itg_videogallery_create_video_node($data) {
       $field_collection_item->save();
       
       // Set the new meta tags. Most meta tags have a 'value' attribute.
-	  $metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
-	  $metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
-	  metatag_metatags_save('node', $node->nid, $node->vid, $metatags);
+	  //~ $metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
+	  //~ $metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
+	  //~ metatag_metatags_save('node', $node->nid, $node->vid, $metatags);
       
       //node_save((object) $node);
       db_update('node') // Table name no longer needs {}
