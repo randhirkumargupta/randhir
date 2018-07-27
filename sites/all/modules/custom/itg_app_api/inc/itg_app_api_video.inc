@@ -1131,6 +1131,17 @@ function topstoriesList($source, $limit = 0) {
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if ($GET['ss'] == "andy") {
+        $dat = array();
+        $dat = itg_rapid_impact_data_topstory();
+        $_position = array();
+        foreach ($home_top_story_sponsor as $key => $row) {
+            $_position[] = $row->position;
+        }
+        print_r($dat);
+        print_r($_position);
+        p($result_ts);
+    }
 
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);
@@ -1338,4 +1349,73 @@ function topstoriesList($source, $limit = 0) {
         $data_topstories['data'] = (array) $data_newslist;
     }
     return $data_topstories;
+}
+/**
+ * itg_rapid_impact_data_topstory
+ * @return array
+ */
+function itg_rapid_impact_data_topstory() {
+    $data_impact = array();
+    $home_list_count = 0;
+    $home_top_story_sponsor = json_decode(get_itg_variable('home_top_story_sponsor'));
+    $_position = array();
+    foreach ($home_top_story_sponsor as $key => $row) {
+        $_position[] = $row->nid;
+    }
+    $query = db_select('node', 'n');
+    $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
+    //join  for field value
+    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
+    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+    // for breaking_news
+    $query->leftJoin('field_data_field_multi_user_allows', 'fmu', 'fmu.entity_id=n.nid'); // new or old blog
+    $query->leftJoin('field_data_field_common_short_description', 'fcsd', 'fcsd.entity_id=n.nid'); // blog short desc
+    $query->leftJoin('field_data_field_type', 'fdt', 'fdt.entity_id=n.nid'); // live blog type
+    $query->leftJoin('field_data_field_story_expires', 'fse', 'fse.entity_id=n.nid'); // live tv checkbox
+    $query->leftJoin('field_data_field_constituancy', 'fdc', 'fdc.entity_id=n.nid'); // sub_title
+    $query->leftJoin('itg_rapid_top_stories_order', 'rpor', 'rpor.nid=n.nid');
+
+
+    $query->fields('eli_file', array('uri'));
+    $query->fields('li_file', array('uri'));
+    $query->fields('mi_file', array('uri'));
+    $query->fields('si_file', array('uri'));
+    $query->fields('esi_file', array('uri'));
+
+    $query->fields('mi', array('field_story_medium_image_fid'));
+    $query->fields('si', array('field_story_small_image_fid'));
+    $query->fields('rc', array('field_common_related_content_value'));
+    $query->fields('li', array('field_story_large_image_fid'));
+
+    $query->fields('kt', array('field_story_kicker_text_value'));
+    $query->fields('vd', array('field_video_duration_value'));
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+    $query->fields('ti', array('tid'));
+    $query->fields('dbody', array('body_value'));
+    // for breaking_news
+    $query->fields('fmu', array('field_multi_user_allows_value'));
+    $query->fields('fcsd', array('field_common_short_description_value'));
+    $query->fields('fdt', array('field_type_value'));
+    $query->fields('fse', array('field_story_expires_value'));
+    $query->fields('fdc', array('field_constituancy_value'));
+
+
+    //end
+    $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->groupBy('n.nid')->orderBy('rpor.position', 'ASC');
+    $result_im = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    return $result_im;
 }
