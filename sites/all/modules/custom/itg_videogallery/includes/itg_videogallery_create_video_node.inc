@@ -49,6 +49,7 @@ function itg_videogallery_create_video_node($data) {
     $medium_img = $xml->medium_img;
     $small_img = $xml->small_img;
     $extra_small_img = $xml->extra_small_img;
+    $metakeyword = $xml->keywords;
 
     //prepare node object
     $node = new stdClass();
@@ -64,6 +65,7 @@ function itg_videogallery_create_video_node($data) {
     if (!empty($description)) {
       $node->body[$node->language][0]['value'] = $description;
       $node->body[$node->language][0]['format'] = 'full_html';
+      $metatags[LANGUAGE_NONE]['description']['value'] = $description;
     }
     if (!empty($short_headline)) {
       $node->field_story_short_headline[LANGUAGE_NONE][0]['value'] = trim(html_entity_decode($short_headline));
@@ -131,6 +133,13 @@ function itg_videogallery_create_video_node($data) {
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
       $field_collection_item->save();
+      
+      $metatags = metatag_metatags_load($entity_type, $entity_id, $revision_id);
+	  // Set the new meta tags. Most meta tags have a 'value' attribute.
+	  $metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
+	  $metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
+	  metatag_metatags_save('node', $node->nid, NULL, $metatags);
+      
       //node_save((object) $node);
       db_update('node') // Table name no longer needs {}
         ->fields(array(
