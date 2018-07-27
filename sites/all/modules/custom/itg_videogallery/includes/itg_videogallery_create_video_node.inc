@@ -126,7 +126,7 @@ function itg_videogallery_create_video_node($data) {
     }
     $node->metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
     $node->metatags[LANGUAGE_NONE]['description']['value'] = $description;
-    $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
+    //$node->metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
     $node = node_submit($node); // Prepare node for saving
 
     try {
