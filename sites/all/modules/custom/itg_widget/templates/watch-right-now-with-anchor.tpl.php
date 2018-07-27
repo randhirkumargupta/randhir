@@ -10,9 +10,9 @@
         $_anchor_link = ( $anchor_key !== ($_anchor_count -1) ) ? $_anchor_url : $_more_link;
         ?>
         <li>
-          <a  href="<?php print $_anchor_link; ?>" class="pic">         
-              <img src="<?php print image_style_url("image170x127", $anchor_video->uri); ?>" alt="<?php echo $anchor_video->title ?>" title="<?php echo $anchor_video->title ?>" />    
-              <p><?php print $anchor_video->title;?></p>
+          <a  href="<?php print $_anchor_link; ?>" class="pic">     
+			<?php print theme('image_style', array('path' => $anchor_video->uri, 'style_name' => 'image170x127', 'alt' => $anchor_video->title, 'title' => $anchor_video->title)); ?>    
+            <p><?php print $anchor_video->title;?></p>
           </a>
         </li>
       <?php }?>  
