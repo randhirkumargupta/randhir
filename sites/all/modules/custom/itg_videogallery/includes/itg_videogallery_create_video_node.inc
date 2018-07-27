@@ -184,7 +184,8 @@ function itg_videogallery_create_video_node($data) {
 function itg_videogallery_save_image($url) {
   $fid = array('fid' => 0);
   if ($url) {
-    $file = file_save_data(file_get_contents($url), file_default_scheme() . '://');
+	$filename = basename($url);  
+    $file = file_save_data(file_get_contents($url), 'public://' . $filename);
     $file->status = 1;
   }
   return (array) $file;
