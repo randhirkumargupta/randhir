@@ -4,6 +4,7 @@
 <style type="text/css">
 	#block-itg-layout-manager-header-block .menu-login .social-nav ul li.briefly-icon-prant svg{ position: relative; top:7px; margin: 0 10px; cursor: pointer;}
 	#block-itg-layout-manager-header-block .menu-login .social-nav ul li.briefly-icon-prant:hover svg .hoversvg{fill:#ffc106}
+	.modalDialog{ position: fixed; top:0; right: 0; background:#f5f5f5; z-index:200; height:50vh; overflow:hidden;}
 </style>
 <?php
   if($_GET['test'] == 'abc') {
@@ -17,15 +18,8 @@
 foreach ($data['data']['news'] as $key => $result) { ?>
 
     <div id="openModal<?php print $key; ?>" class="modalDialog">
-        <div>
-            <?php if($key > 0) { ?>
-            <a href="#openModal<?php print $key; ?>">Previous</a>
-            <?php } ?>
-            
-            <?php  if((count($data['data']['news']) -1) > $key) { ?>
-            <a href="#openModal<?php print $key + 1; ?>">Next</a>
-            <?php  } ?>
-            <div><image src="<?php print $result['n_large_image']; ?>"></div>
+        <div class="briefly-content">            
+            <div class="briefly-image"><image src="<?php print $result['n_large_image']; ?>"></div>
             <ul>
               <li><?php print $result['n_title']; ?></li>
               <?php foreach ($result['highlight'] as $highlight) { ?>  
@@ -33,6 +27,12 @@ foreach ($data['data']['news'] as $key => $result) { ?>
               <?php } ?>
             </ul>
         </div>
+           <?php if($key > 0) { ?>
+            <a href="#openModal<?php print $key; ?>">Previous</a>
+            <?php } ?>            
+            <?php  if((count($data['data']['news']) -1) > $key) { ?>
+            <a href="#openModal<?php print $key + 1; ?>">Next</a>
+            <?php  } ?>
     </div>
 
 <?php } ?>
