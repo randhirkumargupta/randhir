@@ -159,7 +159,7 @@ function itg_videogallery_create_video_node($data) {
         ->execute();
       $success = TRUE;
     }
-    catch (Exception $e) {
+    catch (Exception $e) {p($e->getMessage());
       $success = FALSE;
     }
 
