@@ -443,21 +443,21 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016' || $arg[0] == 'modi-oneyear') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
       $storyarg = $arg[4];
       $table = 'migrate_map_itgstorylist';
       $newurl = getNewStoryUrl($storyarg, $table);
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-    } else if(($arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'gallery') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+    } else if(($arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016' || $arg[0] == 'modi-oneyear') && ($arg[1] == 'gallery') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
       $storyarg = $arg[4];
       $table = 'migrate_map_itgphotogallery';
       $newurl = getNewStoryUrl($storyarg, $table);
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
-    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016') && ($arg[1] == 'video') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+    } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto' || $arg[0] == 'money' || $arg[0] == 'ipl2016' || $arg[0] == 'ipl2017' || $arg[0] == 'euro2016' || $arg[0] == 'olympics2016' || $arg[0] == 't20-world-cup-2016' || $arg[0] == 'modi-oneyear') && ($arg[1] == 'video') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
       $storyarg = $arg[4];
       $table = 'migrate_map_itgvideogallery';
       $newurl = getNewStoryUrl($storyarg, $table);
@@ -739,6 +739,31 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $query_alias = 0;
         $type = 'category';
         $table = 'migrate_map_itgcategory';
+      } else if ($arg[0] == "programme" && $arg[1] == "the-people's-court" && $arg[2] == "video" && !empty ($arg[3])) {
+        $prgid = explode("-", $arg[3]);
+        $argcn = count($prgid);
+        $video_arg = $argcn-4;
+        $video_id = $prgid[$video_arg];
+        if ($video_id < 1137861) { // Video id is hardcoded because of only need to redirect of migrated videos. 
+          $alias = drupal_get_path_alias('node/'.$video_id);
+          drupal_goto($alias, array(), 301);
+        }
+      } else if ($arg[0] == "videos" && $arg[1] == "india" && $arg[2] == "video" && !empty ($arg[3])) {
+        $prgid = explode("-", $arg[3]);
+        $argcn = count($prgid);
+        $video_arg = $argcn-4;
+        $video_id = $prgid[$video_arg];
+        if (!empty($video_id)) {
+		  $alias = drupal_get_path_alias('node/'.$video_id);
+		  drupal_goto($alias, array(), 301);
+		}
+      } else if ($arg[0] == "video1.jsp" && !empty($_GET['id'])) {
+        $storyarg = $_GET['id'];
+        $table = 'migrate_map_itgvideogallery';
+        $newurl = getNewStoryUrl($storyarg, $table);
+        if ($newurl) {
+          drupal_goto($newurl, array(), 301);
+        }
       } else if ($arg[0] == 'node' && empty($arg[1])) {
         drupal_goto(FRONT_URL);
       }

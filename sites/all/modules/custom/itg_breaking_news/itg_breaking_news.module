@@ -385,7 +385,7 @@ function itg_breaking_news_form_custom_validate($form, &$form_state) {
      }    
   }
   
-  if ($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog' && empty($form_state['values']['field_primary_category']['und'][0]['value'])) {
+  if (($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog' || $form_state['values']['field_type']['und'][0]['value'] == 'Live Blog') && empty($form_state['values']['field_primary_category']['und'][0]['value'])) {
     form_set_error('field_primary_category', t("Primary category Field is required!"));
   }
   
@@ -932,6 +932,21 @@ function get_custom_content_details($blog_entity_id) {
   # execute the query
   return $results = $query->execute()->fetchAll();
  
+}
+
+/**
+ * content show at live blog page.
+ */
+function last_live_blog_content($blog_entity_id) {
+  if ($blog_entity_id) {
+    $query = db_select('itg_live_blog', 'p');
+    $query->condition('p.blog_entity_id', $blog_entity_id);
+    $query->condition('p.status', '1');
+    $query->fields('p', array('blog_created_date'))
+         ->range(0, 1)->orderBy('bid', 'DESC');
+    # execute the query
+    return $results = $query->execute()->fetchField();
+  }
 }
 
 /**

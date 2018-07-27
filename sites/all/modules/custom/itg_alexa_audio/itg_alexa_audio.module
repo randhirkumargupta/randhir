@@ -210,6 +210,7 @@ function genrate_alexa_audio_json($value) {
  */
 function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename, $playtime_string, $audio_filesize) {
   $date = date("D, d M Y H:s:i", strtotime($date));
+  $xml_date = $date.'-05:30';
   $c_date = date("Y");
   $xml = <<<XML
       <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
@@ -249,7 +250,7 @@ India Today provides the latest news on politics, entertainment, bollywood, busi
 </description>
 <guid isPermaLink="false">$filename</guid>
 <enclosure length="$audio_filesize" type="audio/mpeg" url="$stream_url"></enclosure>
-<pubDate>$date GMT</pubDate>
+<pubDate>$xml_date GMT</pubDate>
 <itunes:duration>$playtime_string</itunes:duration>
 </item>
 </channel>
