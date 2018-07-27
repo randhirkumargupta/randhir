@@ -137,9 +137,9 @@ function itg_videogallery_create_video_node($data) {
       $field_collection_item->save();
       
       // Set the new meta tags. Most meta tags have a 'value' attribute.
-	  $metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
-	  $metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
-	  metatag_metatags_save('node', $node->nid, $node->vid, $metatags);
+	  //~ $metatags[LANGUAGE_NONE]['title']['value'] = $long_headline;
+	  //~ $metatags[LANGUAGE_NONE]['keywords']['value'] = $metakeyword;
+	  //~ metatag_metatags_save('node', $node->nid, $node->vid, $metatags);
       
       //node_save((object) $node);
       db_update('node') // Table name no longer needs {}
