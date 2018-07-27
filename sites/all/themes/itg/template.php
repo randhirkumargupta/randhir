@@ -943,7 +943,6 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/custom/itg_sso_reg/js/itg_sso_login.js']);
   }
   if($type == 'story'){
-	print_r($javascript);die;
 	foreach ($javascript as $key => $value) {
 	  if($key != 'misc/drupal.js' && $key != 'sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js'){
 		  //$javascript[$key]['defer'] = TRUE;
