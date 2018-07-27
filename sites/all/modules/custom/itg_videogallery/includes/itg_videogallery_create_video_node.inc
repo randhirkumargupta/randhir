@@ -70,17 +70,23 @@ function itg_videogallery_create_video_node($data) {
     }
 
     $node->field_story_source_type[LANGUAGE_NONE][0]['value'] = 'videogallery';
-    $counter = 0;
-	if (!empty($section_id)) {
-		$node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $section_id;
-		$counter++;
-	}
-	if (!empty($cat_id)) {
-	  $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
-	  $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $cat_id;
-	}else if(!empty($section_id)) {
-	  $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
-	}
+    
+    $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1206552';
+    $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1762732';
+    $node->field_story_category[LANGUAGE_NONE][2]['tid'] = '1208164';
+    $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1762732';
+    
+    //~ $counter = 0;
+	//~ if (!empty($section_id)) {
+		//~ $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $section_id;
+		//~ $counter++;
+	//~ }
+	//~ if (!empty($cat_id)) {
+	  //~ $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $cat_id;
+	  //~ $node->field_story_category[LANGUAGE_NONE][$counter]['tid'] = $cat_id;
+	//~ }else if(!empty($section_id)) {
+	  //~ $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $section_id;
+	//~ }
 
     if (!empty($anchor)) {
       $node->field_video_anchor[LANGUAGE_NONE][0]['target_id'] = trim($anchor);
@@ -91,44 +97,41 @@ function itg_videogallery_create_video_node($data) {
     $node->field_story_expert_description[LANGUAGE_NONE][0]['value'] = empty($video_kicker) ? '' : $video_kicker;
     $node->field_video_file_name[LANGUAGE_NONE][0]['value'] = $video_file_name;
 
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
-    $exp_date = strtotime('+10 years', time());
-    $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
-
-    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', time());
+    $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = gmdate('Y-m-d H:i', time());
     $exp_date = strtotime('+10 years', time());
     $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i', $exp_date);
     $node->created = $publish_date_timestamp;
-    $node = node_submit($node); // Prepare node for saving
-
+    $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
     if (!empty($extra_large_img)) {
       $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
-      $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+      $node->field_story_extra_large_image[LANGUAGE_NONE][0] = $fid_extra_large_image;
     }
     if (!empty($large_img)) {
       $fid_large_img = itg_videogallery_save_image($large_img);
-      $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
+      $node->field_story_large_image[LANGUAGE_NONE][0] = $fid_large_img;
     }
     if (!empty($medium_img)) {
       $fid_medium_img = itg_videogallery_save_image($medium_img);
-      $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
+      $node->field_story_medium_image[LANGUAGE_NONE][0] = $fid_medium_img;
     }
     if (!empty($small_img)) {
       $fid_small_img = itg_videogallery_save_image($small_img);
-      $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
+      $node->field_story_small_image[LANGUAGE_NONE][0] = $fid_small_img;
     }
     if (!empty($extra_small_img)) {
       $fid_extra_small_img = itg_videogallery_save_image($extra_small_img);
-      $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+      $node->field_story_extra_small_image[LANGUAGE_NONE][0] = $fid_extra_small_img;
     }
+    
+    $node = node_submit($node); // Prepare node for saving
 
     try {
-
-      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
+	  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_video_upload'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'] = $video_fid;
       $field_collection_item->field_videogallery_video_upload[LANGUAGE_NONE][0]['display'] = 1;
       $field_collection_item->save();
+      //node_save((object) $node);
       db_update('node') // Table name no longer needs {}
         ->fields(array(
           'status' => 1
@@ -139,7 +142,7 @@ function itg_videogallery_create_video_node($data) {
         ->fields(array(
           'state' => workbench_moderation_state_published(),
           'published' => 1,
-          'uid' => ADMINISTRATOR,
+          'uid' => 970,
         ))
         ->condition('nid', $node->nid, '=')
         ->condition('is_current', 1, '=')
@@ -181,7 +184,8 @@ function itg_videogallery_create_video_node($data) {
 function itg_videogallery_save_image($url) {
   $fid = array('fid' => 0);
   if ($url) {
-    $file = file_save_data(file_get_contents($url), file_default_scheme() . '://');
+	$filename = basename($url);  
+    $file = file_save_data(file_get_contents($url), 'public://' . $filename);
     $file->status = 1;
   }
   return (array) $file;
