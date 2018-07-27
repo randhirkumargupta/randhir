@@ -7,7 +7,7 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
   <div class="header_part cont_tw_iner">
   <div class="w1000 container">
     <div class="header_top ">
-      <div class="left_part_logo"> <a href="<?php echo $data['data']['menu_manager']['event_url'];?>" title="Mind Rocks 2018"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2018/delhi/images/mindrocks_logo_2018.png" alt="Mind Rocks 2018"> </a> </div>
+      <div class="left_part_logo"> <a href="<?php echo $data['data']['menu_manager']['event_url'];?>" title="Mind Rocks 2018"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/youthsummit/2018/delhi/images/mindrocksupdated_logo_2018-new.png" alt="Mind Rocks 2018"> </a> </div>
       <div class="social_icons_ipad">
         <ul>
           <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2018" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
@@ -44,8 +44,8 @@ drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     <div class="social_icons_ipad destop_social">
       <ul>
         <li> <a href="https://www.facebook.com/MindRocks" title="Mind Rocks 2018" target="_blank"> <span class="fb"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2018" target="_blank"> <span class="tw" style="margin-top:5px"></span> <span class="text_socials"></span> </a> </li>
-        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2018" target="_blank"> <span class="g_plus" style="margin-top:3px"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://twitter.com/mindrocks/" title="Mind Rocks 2018" target="_blank"> <span class="tw"></span> <span class="text_socials"></span> </a> </li>
+        <li> <a href="https://plus.google.com/103095347742615965425/about" title="Mind Rocks 2018" target="_blank"> <span class="g_plus"></span> <span class="text_socials"></span> </a> </li>
         
       </ul>
     </div>
