@@ -104,23 +104,23 @@ function itg_videogallery_create_video_node($data) {
     $node->field_automation_type[LANGUAGE_NONE][0]['value'] = 'ruply';
     if (!empty($extra_large_img)) {
       $fid_extra_large_image = itg_videogallery_save_image($extra_large_img);
-      $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_large_image;
+      $node->field_story_extra_large_image[LANGUAGE_NONE][0] = $fid_extra_large_image;
     }
     if (!empty($large_img)) {
       $fid_large_img = itg_videogallery_save_image($large_img);
-      $node->field_story_large_image[LANGUAGE_NONE][0]['fid'] = $fid_large_img;
+      $node->field_story_large_image[LANGUAGE_NONE][0] = $fid_large_img;
     }
     if (!empty($medium_img)) {
       $fid_medium_img = itg_videogallery_save_image($medium_img);
-      $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'] = $fid_medium_img;
+      $node->field_story_medium_image[LANGUAGE_NONE][0] = $fid_medium_img;
     }
     if (!empty($small_img)) {
       $fid_small_img = itg_videogallery_save_image($small_img);
-      $node->field_story_small_image[LANGUAGE_NONE][0]['fid'] = $fid_small_img;
+      $node->field_story_small_image[LANGUAGE_NONE][0] = $fid_small_img;
     }
     if (!empty($extra_small_img)) {
       $fid_extra_small_img = itg_videogallery_save_image($extra_small_img);
-      $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'] = $fid_extra_small_img;
+      $node->field_story_extra_small_image[LANGUAGE_NONE][0] = $fid_extra_small_img;
     }
     p($node);
     $node = node_submit($node); // Prepare node for saving
