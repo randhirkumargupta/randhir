@@ -1346,7 +1346,7 @@ function itg_widget_block_view($delta = '') {
               function getGridSize() {
                 return (window.innerWidth < 768) ? 270 : "";
               }
-            jQuery(".watch-right-now-anchor-flex").flexslider({
+            jQuery(".programmes-with-it-flex").flexslider({
             animation: "slide",
             animationLoop: (!is_mobile?true:false),
             itemWidth: getGridSize(),
