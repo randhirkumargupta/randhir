@@ -1375,7 +1375,7 @@ function itg_widget_block_view($delta = '') {
             // $info['max_limit'] = 3;
             // $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
             // $data['wrn_video'] = itg_widget_get_widget_data_data($info);
-            $data['wrn_programmes'] = variable_get('itg_programmes_order_by');
+            $data['wrn_programmes'] =explode(',',variable_get('itg_programmes_order_by'));
             $data['wrn_video'] = itg_widget_section_wise_ordering_from_custom_table($info);
             $block['content'] = theme("itg_widget_programmes_with_it_slider", array("data" => $data));
             break;
