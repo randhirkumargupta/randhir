@@ -1361,34 +1361,10 @@ function itg_widget_block_view($delta = '') {
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
             );
             
-          
-          
-        drupal_add_js('jQuery(document).ready(function() {
-          
-            jQuery(".trending-videos-flex").flexslider({
-            animation: "slide",
-            animationLoop: (!is_mobile?true:false),
-            itemWidth: getGridSize(),
-            itemMargin:15,
-            prevText: "",
-            nextText: "",
-            slideshow: (!is_mobile?true:false),
-            });
-            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-            );
             module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
             $info['section'] = '1206553'; // tid of section
             $info['content_type'] = ''; // content type machine name
-            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-            //$block['subject'] = t('Section wise ordering from custom table');
-            // $data = itg_widget_section_wise_ordering_from_custom_table($info);
-            // $block['content'] = theme("section_wise_ordering", array("data" => $data));
-            
-            // $info['widget'] = 'watch_right_now_widget';
-            // $info['order'] = 'ASC';
-            // $info['max_limit'] = 3;
-            // $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
-            // $data['wrn_video'] = itg_widget_get_widget_data_data($info);
+            $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';           
             $data['wrn_programmes'] =explode(',',variable_get('itg_programmes_order_by'));
             $data['wrn_video'] = itg_widget_section_wise_ordering_from_custom_table($info);
             $block['content'] = theme("itg_widget_programmes_with_it_slider", array("data" => $data));
