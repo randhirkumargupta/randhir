@@ -16,7 +16,8 @@
         
         $_anchor_url = FRONT_URL . '/' . drupal_get_path_alias("taxonomy/term/" . $term->tid);
         $_more_link = FRONT_URL . '/programmes';
-        $_program_link = ($program_key !== ($_program_count -1) ) ? $_anchor_url : $_more_link;
+       // $_program_link = ($program_key !== ($_program_count -1) ) ? $_anchor_url : $_more_link;
+        $_program_link = $_anchor_url;
         ?>
         <li>
           <a  href="<?php print $_program_link; ?>" class="pic">     
@@ -47,7 +48,6 @@
               <li <?php echo $data_tb_region_item;?> class="trending-videos-list">                  
                 <?php  if (!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri'])) { ?>
                   <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>" class="pic">
-                      <?php //$file_uri = file_create_url($video_data['esi_file_uri']); ?>
                     <?php print theme('image', array('path' => $entity['esi_file_uri'], 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
                   </a>
                   <?php
@@ -55,7 +55,7 @@
                 else {
                   ?>
                   <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>" class="pic">
-                    <img alt="" title="" width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' />
+                    <img alt="" title="" width='88' height='96'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' />
                   </a>
                 <?php } ?>
                
