@@ -30,8 +30,8 @@
   <?php endif;?>
 </div>
 <div class="space-15"></div>
-
 <div class="tech-trip home-shows">
+    <span class="feature-programe-title">FEATURED PROGRAMMES</span>
       <ul class="trending-videos">
 
           <?php
@@ -44,26 +44,22 @@
               $desc = $entity['title'];
               $nid = $entity['nid'];
               ?>
-              <li <?php echo $data_tb_region_item;?> class="trending-videos-list">
+              <li <?php echo $data_tb_region_item;?> class="trending-videos-list">                  
+                <?php  if (!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri'])) { ?>
+                  <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>" class="pic">
+                      <?php //$file_uri = file_create_url($video_data['esi_file_uri']); ?>
+                    <?php print theme('image', array('path' => $entity['esi_file_uri'], 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
+                  </a>
                   <?php
-                  if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
-                  }
-                  else {
-                    $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
-                  }
+                }
+                else {
                   ?>
-
-                  <?php if (!empty($extra_large_image_url)) { ?>
-
-                    <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                      <?php print theme('image_style', array('path' => $entity['esi_file_uri'], 'style_name' => 'widget_very_small', 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
-                    </a></span>
-
-                  <?php }
-                  ?>
-
-                  <span title="<?php echo $desc; ?>">
+                  <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>" class="pic">
+                    <img alt="" title="" width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' />
+                  </a>
+                <?php } ?>
+               
+                  <p class="title" title="<?php echo $desc; ?>">    
                       <?php
                       if (!empty($entity['field_photo_see_pic_link_value'])) {
                         echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
