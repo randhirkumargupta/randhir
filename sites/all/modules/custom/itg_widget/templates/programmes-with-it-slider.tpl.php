@@ -1,10 +1,5 @@
 <div class="watch-right-now-with-anchor">
 <div class="watch-right-now-anchor-flex">
-<?php 
-
-pr($data['wrn_programmes']);
-
-?>
   <?php if (!empty($data['wrn_programmes'])) :?>
     <ul class="anchor-list-slide slides">
       <?php 
@@ -12,7 +7,6 @@ pr($data['wrn_programmes']);
       foreach ($data['wrn_programmes'] as $program_key => $program_data) {
         $program_data = (int) $program_data;
         $term = taxonomy_term_load($program_data);
-        p($term);
         $term_name = $term->name;
         $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
         $p_timing = $term->field_user_city['und'][0]['value'];
