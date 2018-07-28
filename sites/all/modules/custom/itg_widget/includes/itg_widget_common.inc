@@ -853,6 +853,9 @@ function itg_widget_theme() {
         'itg_widget_watch_right_now_with_anchor' => array(
             'template' => 'templates/watch-right-now-with-anchor',
         ),
+        'itg_widget_programmes_with_it_slider' => array(
+            'template' => 'templates/programmes-with-it-slider',
+        ),
     );
     return $themes;
 }
