@@ -31,7 +31,7 @@
   <?php endif;?>
 </div>
 <div class="space-15"></div>
-<div class="tech-trip home-shows">
+<div class="watch-right-now-video">
     <span class="feature-programe-title">FEATURED PROGRAMMES</span>
       <ul class="trending-videos">
 
@@ -45,7 +45,7 @@
               $desc = $entity['title'];
               $nid = $entity['nid'];
               ?>
-              <li <?php echo $data_tb_region_item;?> class="trending-videos-list">                  
+              <li <?php echo $data_tb_region_item;?> class="watch-right-now-list">                  
                 <?php  if (!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri'])) { ?>
                   <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>" class="pic">
                     <?php print theme('image', array('path' => $entity['esi_file_uri'], 'alt' => $entity['field_story_extra_small_image_alt'], 'title' => $entity['field_story_extra_small_image_title'])); ?>
