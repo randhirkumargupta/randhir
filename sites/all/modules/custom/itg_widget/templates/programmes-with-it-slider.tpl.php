@@ -3,20 +3,20 @@
   <?php if (!empty($data['wrn_programmes'])) :?>
     <ul class="anchor-list-slide slides">
       <?php 
-      $_program_count = count( $data['wrn_programmes'] );
+      $_program_count = count($data['wrn_programmes']);
       foreach ($data['wrn_programmes'] as $program_key => $program_data) {
         $program_data = (int) $program_data;
         $term = taxonomy_term_load($program_data);
         $term_name = $term->name;
         $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
         $p_timing = $term->field_user_city['und'][0]['value'];
-        $p_time_period = $term->field_program_timing_in_days['und'][0]['value'];
+        $p_time_period = $term->field_time_period['und'][0]['value'];
         $p_category_image_fid = $term->field_programme_category_image['und'][0]['fid'];
         $p_file = file_load($p_category_image_fid);
         
         $_anchor_url = FRONT_URL . '/' . drupal_get_path_alias("taxonomy/term/" . $term->tid);
         $_more_link = FRONT_URL . '/programmes';
-        $_program_link = ( $program_key !== ($_program_count -1) ) ? $_anchor_url : $_more_link;
+        $_program_link = ($program_key !== ($_program_count -1) ) ? $_anchor_url : $_more_link;
         ?>
         <li>
           <a  href="<?php print $_program_link; ?>" class="pic">     
