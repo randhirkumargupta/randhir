@@ -1346,7 +1346,26 @@ function itg_widget_block_view($delta = '') {
               function getGridSize() {
                 return (window.innerWidth < 768) ? 270 : "";
               }
-            jQuery(".programes-it-videos-flex").flexslider({
+            jQuery(".watch-right-now-anchor-flex").flexslider({
+            animation: "slide",
+            animationLoop: (!is_mobile?true:false),
+            itemWidth: getGridSize(),
+            itemMargin:15,
+            prevText: "",
+            nextText: "",
+            itemWidth: 170,
+            minItems:2,
+            initDelay:500,
+            slideshow: (!is_mobile?true:false),
+            });
+            });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+            );
+            
+          
+          
+        drupal_add_js('jQuery(document).ready(function() {
+          
+            jQuery(".trending-videos-flex").flexslider({
             animation: "slide",
             animationLoop: (!is_mobile?true:false),
             itemWidth: getGridSize(),
@@ -1357,7 +1376,6 @@ function itg_widget_block_view($delta = '') {
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
             );
-            
             module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
             $info['section'] = '1206553'; // tid of section
             $info['content_type'] = ''; // content type machine name

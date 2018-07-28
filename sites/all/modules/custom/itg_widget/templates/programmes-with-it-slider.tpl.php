@@ -1,5 +1,5 @@
 <div class="watch-right-now-with-anchor">
-<div class="programes-it-videos-flex">
+<div class="watch-right-now-anchor-flex">
   <?php if (!empty($data['wrn_programmes'])) :?>
     <ul class="anchor-list-slide slides">
       <?php 
