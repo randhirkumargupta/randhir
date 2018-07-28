@@ -22,14 +22,14 @@
         <li>      
           <?php  if (!empty($p_file->uri) && file_exists($p_file->uri)) { ?>
             <a  href="<?php print $_program_link; ?>" class="pic">
-              <?php print theme('image', array('path' => $p_file->uri, 'alt' => $term_name, 'title' => $term_name)); ?>
+              <?php print theme('image_style', array('path' => $p_file->uri, 'style_name' => 'image170x127', 'alt' => $term_name, 'title' => $term_name)); ?>
             </a>
             <?php
           }
           else {
             ?>
             <a href="<?php print $_program_link; ?>" class="pic">
-              <img alt="" title="" width='88' height='96'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' />
+              <img alt="" title="" width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' />
             </a>
           <?php } ?>
                   
